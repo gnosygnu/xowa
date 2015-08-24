@@ -101,7 +101,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	// private static final byte[] Proto_relative = Bry_.new_a7("relative");
 	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_a7().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
 	private byte[] Parse_ns(Xowe_wiki wiki, Object ns_obj) {
-		if (ClassAdp_.Eq_typeSafe(ns_obj, String.class))
+		if (Type_adp_.Eq_typeSafe(ns_obj, String.class))
 			return Bry_.new_u8(String_.cast_(ns_obj));
 		else {
 			int ns_id = Int_.cast_(ns_obj);

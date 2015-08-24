@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.core.json.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
+import gplx.core.json.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
@@ -53,7 +54,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		doc_cache.Clear();
 	}
 	public void Qids_add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
-		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
+		Xow_abrv_wm_.To_abrv(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
 		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).Xto_bry();
 		qids_cache.Add(qids_key, qid);
 	}
@@ -172,7 +173,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 	}
 	private void Hwtr_msgs_make() {
-		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_.Domain_bry_wikidata)) return;
+		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return;
 		Xol_lang new_lang = app.Usere().Lang();
 		Xowe_wiki cur_wiki = this.Wdata_wiki();			
 		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
@@ -219,11 +220,11 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static final byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
-			case Xow_domain_type_.Tid_wikidata:
+			case Xow_domain_type_.Int__wikidata:
 				if (ns_id == Xow_ns_.Id_main || ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
-			case Xow_domain_type_.Tid_home:
+			case Xow_domain_type_.Int__home:
 				if (ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;

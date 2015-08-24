@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -85,10 +85,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		byte[] ttl_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(ttl_bry)) return rslt.Init_ary_empty();
 		Wdata_doc wdoc = Get_wdoc(ttl_bry); if (wdoc == null) return rslt.Init_ary_empty();			
-		Xow_domain domain_itm = core.Wiki().Domain_itm();
-		if (domain_itm.Abrv_wm() == null) {
-			domain_itm.Abrv_wm_(Xow_wiki_alias.Build_alias(domain_itm));
-		}
+		Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
 		return rslt.Init_obj(wdoc.Slink_list__get_or_fallback(domain_itm.Abrv_wm()));
 	}
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(KeyVal_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)

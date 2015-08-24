@@ -20,18 +20,18 @@ import org.junit.*;
 public class Xow_domain_uid__tst {
 	@Before public void init() {fxt.Clear();} private final Xow_domain_uid__fxt fxt = new Xow_domain_uid__fxt();
 	@Test  public void Basic() {
-		fxt.Test(Xow_domain_uid_.Tid_commons	, "commons.wikimedia.org"	, "", Xow_domain_type_.Tid_commons);
-		fxt.Test(100							, "en.wikipedia.org"		, "en", Xow_domain_type_.Tid_wikipedia);
+		fxt.Test(Xow_domain_uid_.Tid_commons	, "commons.wikimedia.org"	, "", Xow_domain_type_.Int__commons);
+		fxt.Test(100							, "en.wikipedia.org"		, "en", Xow_domain_type_.Int__wikipedia);
 	}
 }
 class Xow_domain_uid__fxt {
 	public void Clear() {}
 	public void Test(int tid, String domain_str, String expd_lang, int expd_tid) {
 		byte[] domain_bry = Bry_.new_a7(domain_str);
-		Xow_domain actl_domain = Xow_domain_uid_.To_domain(tid);
+		Xow_domain_itm actl_domain = Xow_domain_uid_.To_domain(tid);
 		Tfds.Eq_bry(domain_bry					, actl_domain.Domain_bry());
-		Tfds.Eq_bry(Bry_.new_a7(expd_lang)	, actl_domain.Lang_key());
-		Tfds.Eq(expd_tid						, actl_domain.Domain_tid());
+		Tfds.Eq_bry(Bry_.new_a7(expd_lang)		, actl_domain.Lang_actl_key());
+		Tfds.Eq(expd_tid						, actl_domain.Domain_type_id());
 		Tfds.Eq(tid, Xow_domain_uid_.To_int(actl_domain));
 	}
 }

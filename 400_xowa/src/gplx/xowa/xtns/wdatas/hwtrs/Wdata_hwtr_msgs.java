@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.langs.msgs.*; import gplx.xowa.wikis.*;
+import gplx.xowa.langs.msgs.*;
+import gplx.xowa.wikis.domains.*;
 public class Wdata_hwtr_msgs {
 	public Wdata_hwtr_msgs(byte[][] brys) {							 int offset = 0; // String[] strs = String_.Ary(brys); // TEST
 		this.ary = brys;
@@ -85,14 +86,14 @@ public class Wdata_hwtr_msgs {
 		geo_meters								= brys[offset +  7];
 		Bry_fmtr fmtr = Bry_fmtr.new_( slink_tbl_hdr_fmt, "wiki_type");
 		Bry_bfr bfr = Bry_bfr.new_(64);
-		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikipedia));
-		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wiktionary));
-		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikisource));
-		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikivoyage));
-		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikiquote));
-		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikibooks));
-		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikiversity));
-		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Key_bry_wikinews));
+		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikipedia));
+		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wiktionary));
+		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikisource));
+		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikivoyage));
+		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikiquote));
+		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikibooks));
+		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikiversity));
+		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_type_.Bry__wikinews));
 		slink_tbl_hdr_x = fmtr.Bld_bry_many(bfr, slink_tbl_hdr_fmt_other);
 	}
 	public byte[][] Ary() {return ary;} private final byte[][] ary;

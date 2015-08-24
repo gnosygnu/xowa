@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
 import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.wikis.data.*;
-import gplx.fsdb.*; import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.fsdb.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		Db_conn_bldr.I.Reg_default_mem();
@@ -67,7 +68,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_exists("A.png", 220, 200));
 	}
 	@Test   public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
-		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons).Init_assert();
+		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create(commons_wiki, "File:A.png", "text_is_blank");

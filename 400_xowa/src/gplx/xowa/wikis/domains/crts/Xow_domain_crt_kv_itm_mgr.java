@@ -38,7 +38,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 			list.Add(ary[i]);
 		return true;
 	}
-	public Xow_domain_crt_itm Find_itm(Xow_domain cur, Xow_domain comp) {
+	public Xow_domain_crt_itm Find_itm(Xow_domain_itm cur, Xow_domain_itm comp) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.Get_at(i);
@@ -46,7 +46,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 		}
 		return Xow_domain_crt_itm__none.I;
 	}
-	public Xow_domain_crt_itm[] Find_ary(Xow_domain cur, Xow_domain comp) {
+	public Xow_domain_crt_itm[] Find_ary(Xow_domain_itm cur, Xow_domain_itm comp) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Xow_domain_crt_kv_ary kv = (Xow_domain_crt_kv_ary)list.Get_at(i);

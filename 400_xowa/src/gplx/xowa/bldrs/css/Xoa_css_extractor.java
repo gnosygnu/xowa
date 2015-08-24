@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*; import gplx.xowa.html.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
 import gplx.core.net.*;
 public class Xoa_css_extractor {	
@@ -49,7 +49,7 @@ public class Xoa_css_extractor {
 			Io_url css_comm_fil = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
 			wiki.Html__page_wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
-			if (wiki.Domain_tid() == Xow_domain_type_.Tid_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
+			if (wiki.Domain_tid() == Xow_domain_type_.Int__home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
 			if (Io_mgr.I.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
 			if (wiki.Html__css_installing()) return;
 			wiki.Html__css_installing_(true);
@@ -200,7 +200,7 @@ public class Xoa_css_extractor {
 	}
 	private byte[] Mainpage_download_html() {
 		String main_page_url_temp = mainpage_url;
-		if (Bry_.Eq(wiki_domain, Xow_domain_.Domain_bry_wikidata))	// if wikidata, download css for a Q* page; Main_Page has less css; DATE:2014-09-30
+		if (Bry_.Eq(wiki_domain, Xow_domain_itm_.Bry__wikidata))	// if wikidata, download css for a Q* page; Main_Page has less css; DATE:2014-09-30
 			main_page_url_temp = main_page_url_temp + "/wiki/Q2";
 		String log_msg = usr_dlg.Prog_many("", "main_page.download", "downloading main page for '~{0}'", main_page_url_temp);
 		byte[] main_page_html = download_xrg.Prog_fmt_hdr_(log_msg).Exec_as_bry(main_page_url_temp);

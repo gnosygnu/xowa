@@ -74,7 +74,7 @@ public class Xog_resizer {
 	private static RectAdp Prv_elem_rect_initial = RectAdp_.Zero, Prv_elem_rect_win_7 = RectAdp_.new_(0, -1, 0, 0);
 	private static void Exec_win_resize_elem(Xog_layout_box box, GfuiElem cur_elem, Rect_ref cur_elem_rect, GfuiElem prv_elem, byte layout) {Exec_win_resize_elem(box, cur_elem, cur_elem_rect, prv_elem.Rect(), layout);}
 	private static void Exec_win_resize_elem(Xog_layout_box box, GfuiElem cur_elem, Rect_ref cur_elem_rect, RectAdp prv_elem_rect, byte layout) {
-		if (ClassAdp_.Eq_typeSafe(cur_elem, GfuiTextBox.class)) {
+		if (Type_adp_.Eq_typeSafe(cur_elem, GfuiTextBox.class)) {
 			try {
 				GfuiTextBox cur_box = (GfuiTextBox)cur_elem;
 				cur_box.Margins_set(0, txt_margin_v, 0, txt_margin_v);
@@ -88,7 +88,7 @@ public class Xog_resizer {
 			box.Adj_pos(cur_elem_rect);
 		}
 		cur_elem.Rect_set(cur_elem_rect.XtoRectAdp());
-		if (ClassAdp_.Eq_typeSafe(cur_elem, GfuiBtn.class)) {
+		if (Type_adp_.Eq_typeSafe(cur_elem, GfuiBtn.class)) {
 			GfuiBtn cur_btn = (GfuiBtn)cur_elem;
 			cur_btn.Btn_img_(cur_btn.Btn_img());
 		}

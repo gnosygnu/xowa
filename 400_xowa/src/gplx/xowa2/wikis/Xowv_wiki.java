@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.wikis; import gplx.*; import gplx.xowa2.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.dbs.*;
 import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.css.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
 import gplx.xowa.urls.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.gui.*;
@@ -30,9 +31,9 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
 		this.app = app;
 		this.domain_bry = domain_bry; this.domain_str = String_.new_u8(domain_bry); 
-		this.domain_itm = Xow_domain_.parse(domain_bry);
-		this.domain_tid = domain_itm.Domain_tid();
-		this.domain_abrv = Xow_wiki_alias.Build_alias(Xow_domain_.parse(domain_bry));
+		this.domain_itm = Xow_domain_itm_.parse(domain_bry);
+		this.domain_tid = domain_itm.Domain_type_id();
+		this.domain_abrv = Xow_abrv_wm_.To_abrv(Xow_domain_itm_.parse(domain_bry));
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.html__hzip_mgr = new Xow_hzip_mgr(app.Usr_dlg(), this);
 		this.html__hdump_rdr = new Xohd_hdump_rdr(app, this);
@@ -46,7 +47,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public boolean							Type_is_edit() {return Bool_.N;}
 	public byte[]						Domain_bry() {return domain_bry;} private final byte[] domain_bry;
 	public String						Domain_str() {return domain_str;} private final String domain_str;
-	public Xow_domain					Domain_itm() {return domain_itm;} private final Xow_domain domain_itm;
+	public Xow_domain_itm					Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
 	public int							Domain_tid() {return domain_tid;} private final int domain_tid;
 	public byte[]						Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
 	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
@@ -81,7 +82,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
 		if (db_core_mgr != null)	// will be null for xowa db
 			fsdb_mgr.Mnt_mgr().Ctor_by_load(db_core_mgr);
-		file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Xow_domain_.Domain_bry_commons, Xow_domain_.Domain_bry_commons);
+		file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Xow_domain_itm_.Bry__commons, Xow_domain_itm_.Bry__commons);
 		file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), domain_bry, domain_bry);
 		orig_mgr.Init_by_wiki(this, file_mgr__fsdb_mode, db_core_mgr.File__orig_tbl_ary(), Xof_url_bldr.new_v2());
 		fsdb_mgr.Init_by_wiki(this);

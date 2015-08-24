@@ -42,8 +42,8 @@ public class Xoa_url_parser__url_bar_tst {
 		Xowe_wiki zh_wiki = tstr.Prep_create_wiki("zh.wikipedia.org");
 		zh_wiki.Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
 		tstr.Run_parse_from_url_bar("zh.w:Main_Page")	.Chk_page_is_main_n().Chk_to_str("zh.wikipedia.org/wiki/Main_Page");
-		tstr.Run_parse_from_url_bar("zh.w:")			.Chk_page_is_main_y().Chk_to_str("zh.wikipedia.org/wiki/");
-		tstr.Run_parse_from_url_bar("en.w:")			.Chk_page_is_main_y().Chk_to_str("en.wikipedia.org/wiki/");		// old bug: still stuck at zh main page due to reused objects
+		tstr.Run_parse_from_url_bar("zh.w:")			.Chk_page_is_main_y().Chk_to_str("zh.wikipedia.org/wiki/Zh_Main_Page");
+		tstr.Run_parse_from_url_bar("en.w:")			.Chk_page_is_main_y().Chk_to_str("en.wikipedia.org/wiki/Main_Page");		// old bug: still stuck at zh main page due to reused objects
 	}
 	@Test  public void Mobile() {	// PURPOSE: handle mobile links; DATE:2014-05-03
 		tstr.Run_parse_from_url_bar("en.m.wikipedia.org/wiki/A"	).Chk_to_str("en.wikipedia.org/wiki/A");		// basic

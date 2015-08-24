@@ -21,10 +21,12 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
 	public static void Eq_bool	(boolean expd	, boolean   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 	public static void Eq_byte	(byte expd	, byte   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
+	public static void Eq_int	(int  expd	, int    actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
 	public static void Eq_int	(int  expd	, int    actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 	public static void Eq_str	(byte[] expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), String_.new_u8(actl), fmt, args);}
 	public static void Eq_str	(byte[] expd, String actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), actl, fmt, args);}
 	public static void Eq_str	(String expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(expd, String_.new_u8(actl), fmt, args);}
+	public static void Eq_str	(String expd, String actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
 	public static void Eq_str	(String expd, String actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}
@@ -138,8 +140,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		list.Add(itm);
 	}
 	public static void Err_classMatch(Exception exc, Class<?> type) {
-		boolean match = ClassAdp_.Eq_typeSafe(exc, type);
-		if (!match) throw Err_.new_("Tfds", "error types do not match", "expdType", ClassAdp_.FullNameOf_type(type), "actlType", ClassAdp_.NameOf_obj(exc), "actlMsg", Err_.Message_lang(exc));
+		boolean match = Type_adp_.Eq_typeSafe(exc, type);
+		if (!match) throw Err_.new_("Tfds", "error types do not match", "expdType", Type_adp_.FullNameOf_type(type), "actlType", Type_adp_.NameOf_obj(exc), "actlMsg", Err_.Message_lang(exc));
 	}
 	public static void Eq_err(Err expd, Exception actlExc) {
 		Tfds.Eq(Err_.Message_gplx_full(expd), Err_.Message_gplx_full(actlExc));

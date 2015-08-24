@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xows_html_wkr_tst {
 	@Before public void init() {fxt.Clear();} private Xows_html_wkr_fxt fxt = new Xows_html_wkr_fxt();
 	@Test   public void Paging() {
@@ -54,7 +56,7 @@ class Xows_html_wkr_fxt {
 		return this;
 	}
 	public void Test_paging(boolean fwd, int paging_idx, String expd) {
-		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_a7("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain[] {Xow_domain_.parse(wiki.Domain_bry())});
+		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_a7("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain_itm[] {Xow_domain_itm_.parse(wiki.Domain_bry())});
 		qry.Page_max_(2);
 		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Paging_link(fwd);

@@ -57,21 +57,21 @@ public class Db_qry_sql implements Db_qry {
 	private static void Gen_sql_arg(Bry_bfr bfr, Object val) {
 		if (val == null) {bfr.Add(Bry_null); return;}
 		Class<?> val_type = val.getClass();
-		if		(ClassAdp_.Eq(val_type, Int_.Cls_ref_type))
+		if		(Type_adp_.Eq(val_type, Int_.Cls_ref_type))
 			bfr.Add_int_variable(Int_.cast_(val));
-		else if	(ClassAdp_.Eq(val_type, Bool_.Cls_ref_type))
+		else if	(Type_adp_.Eq(val_type, Bool_.Cls_ref_type))
 			bfr.Add_int_fixed(1, Bool_.Xto_int(Bool_.cast_(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
-		else if (ClassAdp_.Eq(val_type, Double_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, Double_.Cls_ref_type))
 			bfr.Add_double(Double_.cast_(val));
-		else if (ClassAdp_.Eq(val_type, Long_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, Long_.Cls_ref_type))
 			bfr.Add_long_variable(Long_.cast_(val));
-		else if (ClassAdp_.Eq(val_type, Float_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, Float_.Cls_ref_type))
 			bfr.Add_float(Float_.cast_(val));
-		else if (ClassAdp_.Eq(val_type, Byte_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, Byte_.Cls_ref_type))
 			bfr.Add_byte(Byte_.cast_(val));
-		else if (ClassAdp_.Eq(val_type, DateAdp_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, DateAdp_.Cls_ref_type))
 			bfr.Add_byte_apos().Add_str(DateAdp_.cast_(val).XtoStr_gplx_long()).Add_byte_apos();
-		else if (ClassAdp_.Eq(val_type, Decimal_adp_.Cls_ref_type))
+		else if (Type_adp_.Eq(val_type, Decimal_adp_.Cls_ref_type))
 			bfr.Add_str(Decimal_adp_.cast_(val).To_str());
 		else {
 			byte[] val_bry = Bry_.new_u8(Object_.Xto_str_strict_or_null(val));

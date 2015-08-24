@@ -24,20 +24,22 @@ public class Gfo_protocol_itm {
 		int text_len = text_bry.length;
 		for (int i = 0; i < text_len; i++) {
 			if (text_bry[i] == Byte_ascii.Colon) {
-				key_wo_colon_bry = Bry_.Mid(text_bry, 0, i);
-				key_w_colon_bry_len = i;
-				key_wo_colon_str = String_.new_u8(key_wo_colon_bry);
-				key_w_colon_bry = Bry_.Mid(text_bry, 0, i + 1);
-				text_ends_w_colon = i == text_len - 1;
+				this.key_wo_colon_bry = Bry_.Mid(text_bry, 0, i);
+				this.key_w_colon_bry_len = i;
+				this.key_wo_colon_str = String_.new_u8(key_wo_colon_bry);
+				this.key_w_colon_bry = Bry_.Mid(text_bry, 0, i + 1);
+				this.key_w_colon_str = String_.new_u8(key_w_colon_bry);
+				this.text_ends_w_colon = i == text_len - 1;
 				break;
 			}
 		}
 	}
 	public byte Tid() {return tid;} private byte tid;
-	public byte[] Key_wo_colon_bry() {return key_wo_colon_bry;} private byte[] key_wo_colon_bry;			// http
-	public String Key_wo_colon_str() {return key_wo_colon_str;} private String key_wo_colon_str;
-	public byte[] Key_w_colon_bry() {return key_w_colon_bry;} private byte[] key_w_colon_bry;				// http:
-	public int Key_w_colon_bry_len() {return key_w_colon_bry_len;} private int key_w_colon_bry_len;
+	public byte[] Key_wo_colon_bry()	{return key_wo_colon_bry;}	private byte[] key_wo_colon_bry;		// http
+	public String Key_wo_colon_str()	{return key_wo_colon_str;}	private String key_wo_colon_str;
+	public byte[] Key_w_colon_bry()		{return key_w_colon_bry;}	private byte[] key_w_colon_bry;			// http:
+	public String Key_w_colon_str()		{return key_w_colon_str;}	private String key_w_colon_str;
+	public int Key_w_colon_bry_len() {return key_w_colon_bry_len;}	private int key_w_colon_bry_len;
 	public byte[] Text_bry() {return text_bry;} private byte[] text_bry;									// http://
 	public String Text_str() {return text_str;} private String text_str;
 	public boolean Text_ends_w_colon() {return text_ends_w_colon;} private boolean text_ends_w_colon;

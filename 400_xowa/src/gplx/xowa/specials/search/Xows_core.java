@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 class Xows_core {
 	private final Xoae_wiki_mgr wiki_mgr;
 	private final Hash_adp_bry cache_hash = Hash_adp_bry.cs(); private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
@@ -33,9 +34,9 @@ class Xows_core {
 	}
 	public void Search(Xow_wiki search_wiki, Xoae_page page, Xows_ui_qry qry) {
 		// generate 1 cmd per wiki
-		Xow_domain[] domain_ary = qry.Wiki_domains(); int domain_ary_len = domain_ary.length;
+		Xow_domain_itm[] domain_ary = qry.Wiki_domains(); int domain_ary_len = domain_ary.length;
 		for (int i = 0; i < domain_ary_len; ++i) {
-			Xow_domain domain = domain_ary[i];
+			Xow_domain_itm domain = domain_ary[i];
 			try {
 				Xowe_wiki wiki = wiki_mgr.Get_by_key_or_make(domain.Domain_bry()); wiki.Init_assert();
 				Assert_page_count(wiki);

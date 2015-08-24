@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.aria2; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.apps.fsys.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.wmfs.dumps.*;
 public class Aria2_lib_mgr implements GfoInvkAble {
 	public ProcessAdp Lib() {return lib;} private ProcessAdp lib = new ProcessAdp();
 	public void Init_by_app(Xoae_app app) {
@@ -27,7 +27,7 @@ public class Aria2_lib_mgr implements GfoInvkAble {
 		, "wiki_abrv", "wiki_date", "wiki_type");
 	}
 	// private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public void Exec(Xob_dump_file dump_file) {			
+	public void Exec(Xowm_dump_file dump_file) {			
 		// byte[] args_bry = lib.Args_fmtr().Bld_bry_many(tmp_bfr, dump_file.Wiki_alias(), dump_file.Dump_date(), dump_file.Dump_file_type());
 		// ProcessAdp process = new ProcessAdp().Exe_url_(lib.Exe_url()).Args_str_(String_.new_u8(args_bry));
 		// process.Run_wait();			

@@ -85,7 +85,7 @@ class Luaj_value_ {
 	}
 	public static LuaValue X_obj_to_val(Luaj_server server, Object o) {
 		if (o == null) return LuaValue.NIL;
-		Class<?> c = ClassAdp_.ClassOf_obj(o);
+		Class<?> c = Type_adp_.ClassOf_obj(o);
 		if		(Object_.Eq(c, Bool_.Cls_ref_type))			return LuaValue.valueOf((Boolean)o);
 		else if	(Object_.Eq(c, Int_.Cls_ref_type))			return LuaValue.valueOf((Integer)o);
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);

@@ -127,7 +127,7 @@ public class Gfui_bnd_parser {
 		switch (sym_tkn.Tid()) {
 			case Gfui_bnd_tkn.Tid_sym_plus:		// EX: Ctrl + A
 				if (mod_adj != Mod_val_null) {	// if mod, just update mod_val and exit
-					mod_val = Enm_.FlipInt(true, mod_val, mod_adj);
+					mod_val = Enm_.Flip_int(true, mod_val, mod_adj);
 					return;
 				}
 				break;

@@ -49,7 +49,7 @@ public class Xoh_lnki_wtr {
 		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
 		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
 			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_domain_tid()				// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
-			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_uid())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
+			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_key())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {
 			Wdata_sitelink_itm slink = new Wdata_sitelink_itm(null, null, null).Page_ttl_(lnki_ttl);

@@ -47,7 +47,7 @@ public class KeyVal_ {
 			KeyVal itm = ary[i];
 			sb.Add(itm.Key()).Add("=");
 			Object itm_val = itm.Val();
-			if (ClassAdp_.Eq_typeSafe(itm_val, KeyVal[].class))
+			if (Type_adp_.Eq_typeSafe(itm_val, KeyVal[].class))
 				sb.Add(Ary_x_to_str((KeyVal[])itm_val));
 			else
 				sb.Add(Object_.Xto_str_strict_or_null_mark(itm_val));
@@ -79,13 +79,13 @@ public class KeyVal_ {
 			if (val == null)
 				bfr.Add_str(String_.Null_mark);
 			else {
-				Class<?> val_type = ClassAdp_.ClassOf_obj(val);
-				if		(ClassAdp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
+				Class<?> val_type = Type_adp_.ClassOf_obj(val);
+				if		(Type_adp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
 					bfr.Add_byte_nl();												// add nl		: "\n"
 					Ary_xto_str_nested(bfr, indent + 1, (KeyVal[])val);
 					continue;														// don't add \n below
 				}
-				else if (ClassAdp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
+				else if (Type_adp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
 					boolean val_as_bool = Bool_.cast_(val);
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}

@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.*; import gplx.xowa.bldrs.infos.*;	
+import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;	
 public class Xowd_db_mgr {
 	private Xowd_db_file[] dbs__ary = new Xowd_db_file[0]; private int dbs__ary_len = 0; private final Xowd_db_file_hash db_file_hash = new Xowd_db_file_hash();
-	private final Xow_wiki wiki; private final Io_url wiki_root_dir; private final Xow_domain domain_itm;
-	public Xowd_db_mgr(Xow_wiki wiki, Io_url wiki_root_dir, Xow_domain domain_itm) {this.wiki = wiki; this.wiki_root_dir = wiki_root_dir; this.domain_itm = domain_itm;}
+	private final Xow_wiki wiki; private final Io_url wiki_root_dir; private final Xow_domain_itm domain_itm;
+	public Xowd_db_mgr(Xow_wiki wiki, Io_url wiki_root_dir, Xow_domain_itm domain_itm) {this.wiki = wiki; this.wiki_root_dir = wiki_root_dir; this.domain_itm = domain_itm;}
 	public Xowd_core_db_props		Props()			{return props;} private Xowd_core_db_props props = Xowd_core_db_props.Test;
 	public Db_cfg_tbl				Tbl__cfg()		{return db__core.Tbl__cfg();}
 	public Xowd_page_tbl			Tbl__page()		{return db__core.Tbl__page();}

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
-import gplx.core.btries.*; import gplx.xowa.wikis.*;
+import gplx.core.btries.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
 import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*;
 public class Xow_popup_parser {
@@ -68,7 +69,7 @@ public class Xow_popup_parser {
 		wtxt_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
 	}
 	public byte[] Parse(Xowe_wiki cur_wiki, Xoae_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
-		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_domain_.Domain_bry_wikidata)) {
+		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_domain_itm_.Bry__wikidata)) {
 			data.Wrdx_bfr().Add(app.Wiki_mgr().Wdata_mgr().Popup_text(page));
 		}
 		else {

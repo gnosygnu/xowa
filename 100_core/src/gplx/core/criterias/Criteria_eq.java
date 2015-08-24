@@ -24,8 +24,8 @@ public class Criteria_eq implements Criteria {
 	public void			Val_as_obj_(Object v) {this.val = v;}
 	public void			Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public boolean Matches(Object comp) {
-		Class<?> val_type = ClassAdp_.ClassOf_obj(val);
-		if (!ClassAdp_.Eq_typeSafe(comp, val_type)) throw Err_.new_type_mismatch(val_type, comp);
+		Class<?> val_type = Type_adp_.ClassOf_obj(val);
+		if (!Type_adp_.Eq_typeSafe(comp, val_type)) throw Err_.new_type_mismatch(val_type, comp);
 		boolean rv = Object_.Eq(val, comp);
 		return negated ? !rv : rv;
 	}

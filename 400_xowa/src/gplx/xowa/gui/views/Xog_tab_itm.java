@@ -38,7 +38,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		html_box.Html_js_enabled_(gui_mgr.Html_mgr().Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
-		if (app.App_type().Uid_is_gui()) {	// NOTE: only run for gui; will cause firefox addon to fail; DATE:2014-05-03
+		if (app.App_type().Uid_is_gui()) {	// NOTE: only run for gui; will cause firefox_addon to fail; DATE:2014-05-03
 			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
 			IptBnd_.cmd_to_(IptCfg_.Null, html_box, win, Xog_win_itm.Invk_exit, IptKey_.add_(IptKey_.Alt, IptKey_.F4));	// WORKAROUND:SWT: xulrunner_v24 no longer sends Alt+F4 to SwtShell; must manually subscribe it to quit; DATE:2015-07-31

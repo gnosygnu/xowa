@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
 import gplx.xowa.langs.*;
+import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm implements gplx.CompareAble {
 	public Xow_xwiki_itm(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] domain_name) {
 		this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry); 
@@ -35,10 +36,10 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public byte[]	Domain_name() {return domain_name;} private final byte[] domain_name;	// EX: Wikimedia Commons
 	public boolean		Offline() {return offline;} public Xow_xwiki_itm Offline_(boolean v) {offline = v; return this;} private boolean offline;
 	public int compareTo(Object obj) {Xow_xwiki_itm comp = (Xow_xwiki_itm)obj; return Bry_.Compare(key_bry, comp.key_bry);}
-	public boolean Type_is_xwiki_lang(int cur_lang_id) {
+	public boolean Type_is_xwiki_lang(byte[] cur_lang_key) {
 		return	lang_id != Xol_lang_itm_.Id__unknown		// valid lang code
-			&&	domain_tid != Xow_domain_type_.Tid_commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
-			&&	lang_id != cur_lang_id 						// lang is different than current; EX: [[en:A]] in en.wikipedia.org shouldn't link back to self
+			&&	domain_tid != Xow_domain_type_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+			&&	!Bry_.Eq(key_bry, cur_lang_key) 			// lang is different than current; EX: [[en:A]] in en.wikipedia.org shouldn't link back to self
 			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
 			;
 	}
@@ -50,9 +51,9 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 		byte[] gfs_url = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(bfr, mw_url);				// EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
 		url_parser.Parse(url, gfs_url, 0, gfs_url.length);
 		byte[] domain_bry = url.Segs__get_at_1st();											// extract "commons.wikimedia.org"
-		Xow_domain domain = Xow_domain_.parse(domain_bry);
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_key());
+		Xow_domain_itm domain = Xow_domain_itm_.parse(domain_bry);
+		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_actl_key());
 		int lang_id = lang_itm == null ? Xol_lang_itm_.Id__unknown : lang_itm.Id();
-		return new Xow_xwiki_itm(key, gfs_url, lang_id, domain.Domain_tid(), domain_bry, domain_name);
+		return new Xow_xwiki_itm(key, gfs_url, lang_id, domain.Domain_type_id(), domain_bry, domain_name);
 	}
 }

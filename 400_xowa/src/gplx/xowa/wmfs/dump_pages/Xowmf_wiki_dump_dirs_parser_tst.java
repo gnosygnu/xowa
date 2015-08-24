@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.dump_pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
-import org.junit.*; import gplx.xowa.wikis.*;
+import org.junit.*;
+import gplx.xowa.wikis.domains.*;
 public class Xowmf_wiki_dump_dirs_parser_tst {
 	@Before public void init() {fxt.Clear();} private final Xowmf_wiki_dump_dirs_parser_fxt fxt = new Xowmf_wiki_dump_dirs_parser_fxt();
 	@Test  public void Basic() {
@@ -61,7 +62,7 @@ public class Xowmf_wiki_dump_dirs_parser_tst {
 class Xowmf_wiki_dump_dirs_parser_fxt {
 	public void Clear() {}
 	public void Test_parse(String src, String... expd_dates) {
-		String[] actl_dates = Xowmf_wiki_dump_dirs_parser.Parse(Xow_domain_.Domain_bry_enwiki, Bry_.new_u8(src));
+		String[] actl_dates = Xowmf_wiki_dump_dirs_parser.Parse(Xow_domain_itm_.Bry__enwiki, Bry_.new_u8(src));
 		Tfds.Eq_ary_str(expd_dates, actl_dates);
 	}
 }

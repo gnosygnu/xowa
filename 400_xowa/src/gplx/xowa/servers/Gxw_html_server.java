@@ -48,7 +48,8 @@ public class Gxw_html_server implements Gxw_html {
 	}
 	private String Exec_as_str(String s) {
 		if (wtr == null) return "";	// HACK: handles http_server
-		s = "(function () {" + s + "})();"; // NOTE: dependent on firefox addon which does 'var result = Function("with(arguments[0]){return "+cmd_text+"}")(session.window);'; DATE:2014-01-28
+		s = "(function () {" + s + "})();"; // NOTE: dependent on firefox_addon which does 'var result = Function("with(arguments[0]){return "+cmd_text+"}")(session.window);'; DATE:2014-01-28
+		gplx.core.threads.Thread_adp_.Sleep(50);	// NOTE: need to sleep, else images won't actually show up on screen; PAGE:nethackwiki.com:Weapons; DATE:2015-08-23
 		Xosrv_msg msg = Xosrv_msg.new_(Xosrv_cmd_types.Browser_exec, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.new_u8(s));
 		usr_dlg.Note_many("", "", "sending browser.js: msg=~{0}", s);
 		wtr.Write(msg);

@@ -187,7 +187,7 @@ public class Bry_bfr {
 		bfr_len += utf8_len;
 		return this;
 	}
-	public Bry_bfr Add_bool(boolean v) {return Add(v ? Const_bool_true : Const_bool_false);} public static final byte[] Const_bool_true = Bry_.new_a7("true"), Const_bool_false = Bry_.new_a7("false");
+	public Bry_bfr Add_bool(boolean v) {return Add(v ? Bool_.True_bry : Bool_.False_bry);}
 	public Bry_bfr Add_int_bool(boolean v) {return Add_int_fixed(v ? 1 : 0, 1);}
 	public Bry_bfr Add_int_variable(int val) {
 		int log10 = Int_.Log10(val);

@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.core.net.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.core.net.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.langs.*;
 public class Xow_xwiki_itm_tst {
 	@Before public void init() {fxt.Clear();} 		private Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
-	@Test   public void Commons()			{fxt.Test_new_by_mw("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_type_.Tid_commons		, Xol_lang_itm_.Id__unknown);}
-	@Test   public void Wiktionary()		{fxt.Test_new_by_mw("fr.wiktionary.org/wiki/$1"		, "fr.wiktionary.org"		, "fr.wiktionary.org/wiki/~{0}"			, Xow_domain_type_.Tid_wiktionary	, Xol_lang_itm_.Id_fr);}
-	@Test   public void Lang()				{fxt.Test_new_by_mw("fr.wikipedia.org/wiki/$1"		, "fr.wikipedia.org"		, "fr.wikipedia.org/wiki/~{0}"			, Xow_domain_type_.Tid_wikipedia	, Xol_lang_itm_.Id_fr);}
+	@Test   public void Commons()			{fxt.Test_new_by_mw("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_type_.Int__commons		, Xol_lang_itm_.Id__unknown);}
+	@Test   public void Wiktionary()		{fxt.Test_new_by_mw("fr.wiktionary.org/wiki/$1"		, "fr.wiktionary.org"		, "fr.wiktionary.org/wiki/~{0}"			, Xow_domain_type_.Int__wiktionary	, Xol_lang_itm_.Id_fr);}
+	@Test   public void Lang()				{fxt.Test_new_by_mw("fr.wikipedia.org/wiki/$1"		, "fr.wikipedia.org"		, "fr.wikipedia.org/wiki/~{0}"			, Xow_domain_type_.Int__wikipedia	, Xol_lang_itm_.Id_fr);}
 }
 class Xow_xwiki_itm_fxt {
 	private Bry_bfr tmp_bfr;

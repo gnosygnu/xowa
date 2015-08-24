@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Enm_ {
-	public static int XtoInt(Object enm) {return Ordinal_lang(enm);}
-	public static boolean HasInt(int val, int find)	{return find == (val & find);}
-	public static int AddInt(int lhs, int rhs)		{return lhs | rhs;}
-	public static int FlipInt(boolean enable, int val, int find) {
+	public static int		To_int(Object enm) {return Ordinal_lang(enm);}
+	public static boolean		Has_int(int val, int find)	{return find == (val & find);}
+	public static int		Add_int(int lhs, int rhs)		{return lhs | rhs;}
+	public static int		Flip_int(boolean enable, int val, int find) {
 		boolean has = find == (val & find);
 		return (has ^ enable) ? val ^ find : val;
 	}
-	public static boolean Has_byte(byte val, byte find)	{return find == (val & find);}
-	public static byte Add_byte(byte flag, byte itm)	{return (byte)(flag | itm);}
-	static int Ordinal_lang(Object v) {return ((Enum)v).ordinal();}	
+	public static boolean		Has_byte(byte val, byte find)	{return find == (val & find);}
+	public static byte		Add_byte(byte flag, byte itm)	{return (byte)(flag | itm);}
+	private static int		Ordinal_lang(Object v) {return ((Enum)v).ordinal();}	
 }

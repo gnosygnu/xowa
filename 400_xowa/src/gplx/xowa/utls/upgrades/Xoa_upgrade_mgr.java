@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.utls.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.utls.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoa_upgrade_mgr {
 	public static void Check(Xoae_app app) {
 		Upgrade_history(app);
 	}
 	public static void Check(Xowe_wiki wiki) {
-		if (wiki.Domain_tid() == Xow_domain_type_.Tid_home) return;	// home wiki never needs to be migrated
+		if (wiki.Domain_tid() == Xow_domain_type_.Int__home) return;	// home wiki never needs to be migrated
 		try {
 			if (Bry_.Eq(wiki.Props().Bldr_version(), Bry_.Empty)) {	// version is ""; wiki must be created prior to v0.2.1; create wiki_core.gfs
 				Upgrader_v00_02_01 mgr = new Upgrader_v00_02_01();

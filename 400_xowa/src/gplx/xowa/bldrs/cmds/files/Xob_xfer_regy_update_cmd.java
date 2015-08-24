@@ -26,6 +26,7 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	private void Exec_main() {
+		wiki.Init_assert();	// NOTE: must init wiki to set up db_core; DATE:2015-08-17
 		Db_conn make_db_provider = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		this.Copy_atrs_to_make_db(make_db_provider);
 		this.Update_status(make_db_provider);

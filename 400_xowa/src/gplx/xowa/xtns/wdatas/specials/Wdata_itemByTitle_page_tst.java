@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import org.junit.*; import gplx.xowa.wikis.*;
+import org.junit.*; import gplx.xowa.wikis.domains.*;
 public class Wdata_itemByTitle_page_tst {
 	@Before public void init() {fxt.Clear();} private Wdata_itemByTitle_page_fxt fxt = new Wdata_itemByTitle_page_fxt();
 	@Test   public void Url() {
@@ -57,7 +57,7 @@ class Wdata_itemByTitle_page_fxt {
 		parser_fxt.Init_page_create(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), qid_ttl, text);
 	}
 	public void Init_wdata_label(String wmf_key_str, String wdata_label, String qid) {
-		wdata_fxt.Init_qids_add("en", Xow_domain_type_.Tid_wikipedia, wdata_label, qid);		
+		wdata_fxt.Init_qids_add("en", Xow_domain_type_.Int__wikipedia, wdata_label, qid);		
 	}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = wiki.Ctx().Cur_page();

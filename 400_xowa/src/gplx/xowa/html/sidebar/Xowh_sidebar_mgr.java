@@ -28,7 +28,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
 			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
 				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
-					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_domain_type_.Tid_home
+					&&	wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_type_.Int__home
 				)) {
 				html_bry = Bry_.Empty;
 				bfr.Mkr_rls();

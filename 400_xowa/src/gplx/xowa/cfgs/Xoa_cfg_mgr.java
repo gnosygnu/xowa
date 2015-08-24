@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoa_cfg_mgr implements GfoInvkAble {
 	public Xoa_cfg_mgr(Xoae_app app) {this.app = app;} private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Xoae_app App() {return app;} private Xoae_app app;

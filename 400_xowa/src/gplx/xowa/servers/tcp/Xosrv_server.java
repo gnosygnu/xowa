@@ -65,7 +65,7 @@ public class Xosrv_server implements GfoInvkAble {
 	}
 	private String Exec_cmd(String msg_text) {
 		Object rv_obj = app.Gfs_mgr().Run_str(msg_text);
-		String rv = ClassAdp_.Eq_typeSafe(rv_obj, String_.Cls_ref_type) ? (String)rv_obj : Object_.Xto_str_strict_or_null(rv_obj);
+		String rv = Type_adp_.Eq_typeSafe(rv_obj, String_.Cls_ref_type) ? (String)rv_obj : Object_.Xto_str_strict_or_null(rv_obj);
 		return rv;
 	}
 	public String Exec_js(byte[] sender, byte[] msg_text) {

@@ -22,7 +22,7 @@ class GfsRegy implements GfoInvkAble {
 	public boolean Has(String k) {return hash.Has(k);}
 	public GfsRegyItm Get_at(int i) {return (GfsRegyItm)hash.Get_at(i);}
 	public GfsRegyItm Get_by(String key) {return (GfsRegyItm)hash.Get_by(key);}
-	public GfsRegyItm FetchByType(GfoInvkAble invk) {return (GfsRegyItm)typeHash.Get_by(ClassAdp_.FullNameOf_obj(invk));}
+	public GfsRegyItm FetchByType(GfoInvkAble invk) {return (GfsRegyItm)typeHash.Get_by(Type_adp_.FullNameOf_obj(invk));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		Object rv = (GfsRegyItm)hash.Get_by(k); if (rv == null) throw Err_.new_missing_key(k);
 		return rv;
@@ -31,7 +31,7 @@ class GfsRegy implements GfoInvkAble {
 	public void AddCmd(GfoInvkAble invk, String key) {Add(key, invk, true);}
 	public void Add(String key, GfoInvkAble invk, boolean typeCmd) {
 		if (hash.Has(key)) return;
-		GfsRegyItm regyItm = new GfsRegyItm().Key_(key).InvkAble_(invk).IsCmd_(typeCmd).TypeKey_(ClassAdp_.FullNameOf_obj(invk));
+		GfsRegyItm regyItm = new GfsRegyItm().Key_(key).InvkAble_(invk).IsCmd_(typeCmd).TypeKey_(Type_adp_.FullNameOf_obj(invk));
 		hash.Add(key, regyItm);
 		typeHash.Add_if_dupe_use_1st(regyItm.TypeKey(), regyItm);	// NOTE: changed to allow same Object to be added under different aliases (app, xowa) DATE:2014-06-09;
 	}

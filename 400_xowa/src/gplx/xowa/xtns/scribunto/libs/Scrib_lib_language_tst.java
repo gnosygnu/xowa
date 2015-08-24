@@ -135,7 +135,7 @@ public class Scrib_lib_language_tst {
 		, "  seconds=3"
 		));
 	}
-	private static KeyVal[] Kv_ary_(String... ary) {
+	public static KeyVal[] Kv_ary_(String... ary) {
 		int ary_len = ary.length;
 		KeyVal[] rv = new KeyVal[ary_len];
 		for (int i = 0; i < ary_len; i++) {

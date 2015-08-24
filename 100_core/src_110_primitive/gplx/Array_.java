@@ -19,6 +19,7 @@ package gplx;
 import java.lang.reflect.Array;
 import gplx.core.strings.*;
 public class Array_ {
+	public static Object cast(Object o) {return (Object)o;}
 	public static void Sort(Object[] obj) {List_adp_sorter.new_().Sort(obj, obj.length);}
 	public static void Sort(Object[] obj, gplx.lists.ComparerAble comparer) {List_adp_sorter.new_().Sort(obj, obj.length, true, comparer);}
 	public static List_adp XtoList(Object ary) {	

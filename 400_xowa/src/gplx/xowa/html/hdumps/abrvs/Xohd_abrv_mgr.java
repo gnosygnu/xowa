@@ -19,7 +19,7 @@ package gplx.xowa.html.hdumps.abrvs; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.wikis.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.fsys.*;
 import gplx.xowa2.gui.*;
 public class Xohd_abrv_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
@@ -37,7 +37,7 @@ public class Xohd_abrv_mgr {
 		this.wiki_domain = wiki_domain;
 	}
 	private void Init() {
-		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_domain_.Domain_bry_commons).Add_byte_slash().Xto_bry_and_clear();
+		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_domain_itm_.Bry__commons).Add_byte_slash().Xto_bry_and_clear();
 		file_dir_wiki = tmp_bfr.Add(file_dir).Add(wiki_domain).Add_byte_slash().Xto_bry_and_clear();
 	}
 	public byte[] Parse(Bry_bfr rv, Xog_page hpg) {

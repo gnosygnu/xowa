@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.wikis.domains.*; 
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
@@ -24,7 +25,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xowh_sidebar_mgr(wiki);
-		this.missing_ns_cls = Bry_.Eq(wiki.Domain_bry(), Xow_domain_type_.Key_bry_home) ? Missing_ns_cls_hide : null;	// if home wiki, set missing_ns to application default; if any other wiki, set to null; will be overriden during init
+		this.missing_ns_cls = Bry_.Eq(wiki.Domain_bry(), Xow_domain_type_.Bry__home) ? Missing_ns_cls_hide : null;	// if home wiki, set missing_ns to application default; if any other wiki, set to null; will be overriden during init
 	}
 	public void Init_by_lang(Xol_lang lang) {
 		lang_is_rtl = !lang.Dir_ltr();

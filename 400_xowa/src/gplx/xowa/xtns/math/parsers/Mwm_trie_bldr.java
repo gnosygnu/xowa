@@ -15,16 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*;
-public class Xow_wiki_abrv {
-	public Xol_lang_itm Lang_itm() {return lang_itm;} private Xol_lang_itm lang_itm;
-	public byte Domain_tid() {return domain_tid;} private byte domain_tid;
-	public void Ctor_by_parse(Xol_lang_itm lang_itm, byte domain_tid) {
-		this.lang_itm = lang_itm; this.domain_tid = domain_tid;
-	}
-	public void Clear() {
-		lang_itm = null;
-		domain_tid = Xow_wiki_abrv_.Tid_null;
+package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
+import gplx.core.btries.*;
+class Mwm_trie_bldr {
+	public static Btrie_fast_mgr new_() {
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
+		rv.Add(" "		, new Mwm_lxr__ws());
+		rv.Add("\\"		, new Mwm_lxr__backslash());
+		rv.Add("{"		, new Mwm_lxr__curly_bgn());
+		return rv;
 	}
 }

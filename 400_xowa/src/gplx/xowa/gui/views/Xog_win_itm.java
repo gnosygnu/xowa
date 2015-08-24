@@ -249,36 +249,24 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public byte[] App__retrieve_by_url(String url_str, String output_str) {
 		synchronized (App__retrieve__lock) {
 			boolean output_html = String_.Eq(output_str, "html");
-			byte[] url_bry = Bry_.new_u8(url_str);
 			Xowe_wiki home_wiki = app.Usere().Wiki();
-			Xoa_ttl ttl = Xoa_ttl.parse_(home_wiki, Xoa_page_.Main_page_bry);	// NOTE: must be Main_Page, not "" else Firefox Addon will fail; DATE:2014-03-13
-			Xoae_page new_page = Xoae_page.new_(home_wiki, ttl);
+			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar(url_str);
+			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
+			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
+			Xoae_page new_page = wiki.Load_page_by_ttl(url, ttl);
+			if (new_page.Missing()) {return Bry_.Empty;}
 			gplx.xowa.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
-			this.Active_page_(new_page);
-			Xoa_url url = Xoa_url.blank();
-			url = home_wiki.Utl__url_parser().Parse(url_bry);
-			new_page.Url_(url);
-			return App__retrieve_by_href(url, output_html);
+			Xog_tab_itm tab = tab_mgr.Active_tab();
+			tab.Page_(new_page);
+			tab.History_mgr().Add(new_page);			
+			byte[] rv = output_html
+				? wiki.Html_mgr().Page_wtr_mgr().Gen(new_page, tab.View_mode())
+				: new_page.Data_raw();
+			if (app.Shell().Fetch_page_exec_async())
+				app.Gui_mgr().Browser_win().Page__async__bgn(tab);
+			return rv;
 		}
 	}	private Object App__retrieve__lock = new Object();
-	public byte[] App__retrieve_by_href(String href, boolean output_html) {return App__retrieve_by_href(Xog_url_wkr.Exec_url(this, href), output_html);}	// NOTE: used by drd
-	private byte[] App__retrieve_by_href(Xoa_url url, boolean output_html) {
-		if (url == null) return Bry_.new_a7("missing");
-		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
-		Xoae_page new_page = wiki.Load_page_by_ttl(url, ttl);
-		if (new_page.Missing()) {return Bry_.Empty;}
-		Xog_tab_itm tab = tab_mgr.Active_tab();
-		tab.Page_(new_page);
-		tab.History_mgr().Add(new_page);			
-		byte[] rv = output_html
-			? wiki.Html_mgr().Page_wtr_mgr().Gen(new_page, tab.View_mode())
-			: new_page.Data_raw()
-			;
-		if (app.Shell().Fetch_page_exec_async())
-			app.Gui_mgr().Browser_win().Page__async__bgn(tab);
-		return rv;
-	}
 	public void Init_by_kit(Gfui_kit kit) {
 		this.kit = kit;
 		win_box = kit.New_win_app("win");

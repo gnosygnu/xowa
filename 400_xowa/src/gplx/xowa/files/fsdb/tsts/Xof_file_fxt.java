@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.data.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
@@ -84,10 +84,10 @@ class Xof_repo_fxt {
 		byte[] src_en_wiki = Bry_.new_a7("src_en_wiki");
 		byte[] trg_commons = Bry_.new_a7("trg_commons");
 		byte[] trg_en_wiki = Bry_.new_a7("trg_en_wiki");
-		Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_.Domain_str_commons, false);
-		Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_.Domain_str_enwiki, false);
-		Ini_repo_add(file_mgr, trg_commons, "mem/root/common/", Xow_domain_.Domain_str_commons, true).Primary_(true);
-		Ini_repo_add(file_mgr, trg_en_wiki, "mem/root/enwiki/", Xow_domain_.Domain_str_enwiki, true).Primary_(true);
+		Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_itm_.Str__commons, false);
+		Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_itm_.Str__enwiki, false);
+		Ini_repo_add(file_mgr, trg_commons, "mem/root/common/", Xow_domain_itm_.Str__commons, true).Primary_(true);
+		Ini_repo_add(file_mgr, trg_en_wiki, "mem/root/enwiki/", Xow_domain_itm_.Str__enwiki, true).Primary_(true);
 		Xowe_repo_mgr wiki_repo_mgr = wiki.File_mgr().Repo_mgr();
 		Xof_repo_pair pair = null;
 		pair = wiki_repo_mgr.Add_repo(src_commons, trg_commons);
@@ -136,14 +136,14 @@ class Xof_fsdb_arg {
 	public byte[] Bin() {return bin;} private final byte[] bin;
 	public DateAdp Modified() {return modified;} private final DateAdp modified = Fsd_thm_tbl.Modified_null;
 	public String Hash() {return hash;} private final String hash = Fsd_thm_tbl.Hash_null;
-	public static Xof_fsdb_arg new_comm_file(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_comm_thumb(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, W_default, H_default, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h, int s)	{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, w, h, s);}
-	public static Xof_fsdb_arg new_comm_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_comm(boolean thumb, String ttl, int w, int h)	{return new_(Xow_domain_.Domain_bry_commons, thumb, ttl, w, h, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_wiki_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
-	public static Xof_fsdb_arg new_wiki_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_file(String ttl)						{return new_(Xow_domain_itm_.Bry__commons, Bool_.N, ttl, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_thumb(String ttl)						{return new_(Xow_domain_itm_.Bry__commons, Bool_.Y, ttl, W_default, H_default, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h)			{return new_(Xow_domain_itm_.Bry__commons, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h, int s)	{return new_(Xow_domain_itm_.Bry__commons, Bool_.Y, ttl, w, h, s);}
+	public static Xof_fsdb_arg new_comm_orig(String ttl, int w, int h)			{return new_(Xow_domain_itm_.Bry__commons, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm(boolean thumb, String ttl, int w, int h)	{return new_(Xow_domain_itm_.Bry__commons, thumb, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_wiki_thumb(String ttl, int w, int h)			{return new_(Xow_domain_itm_.Bry__enwiki, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_wiki_orig(String ttl, int w, int h)			{return new_(Xow_domain_itm_.Bry__enwiki, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_(byte[] wiki, boolean is_thumb, String ttl_str, int w, int h, int time) {
 		byte[] ttl = Bry_.new_u8(ttl_str);
 		int ext = Xof_ext_.new_by_ttl_(ttl).Id();

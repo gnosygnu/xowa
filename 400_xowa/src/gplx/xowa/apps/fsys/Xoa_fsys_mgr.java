@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoa_fsys_mgr implements GfoInvkAble {
 	public Xoa_fsys_mgr(String plat_name, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url css_dir) {
 		this.root_dir				= root_dir;
@@ -31,7 +31,7 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		this.cfg_lang_core_dir		= bin_xowa_dir.GenSubDir_nest("cfg", "lang", "core");
 		this.cfg_wiki_core_dir		= bin_xowa_dir.GenSubDir_nest("cfg", "wiki", "core");
 		this.cfg_site_meta_fil		= bin_xowa_dir.GenSubDir_nest("cfg", "wiki", "site_meta.sqlite3");
-		this.home_wiki_dir			= bin_xowa_dir.GenSubDir_nest("wiki", Xow_domain_.Domain_str_home);
+		this.home_wiki_dir			= bin_xowa_dir.GenSubDir_nest("wiki", Xow_domain_itm_.Str__home);
 	}
 	public Io_url Root_dir()					{return root_dir;} private final Io_url root_dir;
 	public Io_url Wiki_dir()					{return wiki_dir;} private final Io_url wiki_dir;

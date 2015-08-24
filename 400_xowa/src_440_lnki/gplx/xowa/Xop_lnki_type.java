@@ -19,44 +19,44 @@ package gplx.xowa; import gplx.*;
 public class Xop_lnki_type {
 	public static final byte Id_null = 0, Id_none = 1, Id_frameless = 2, Id_frame = 4, Id_thumb = 8;
 	public static boolean Id_is_thumbable(byte id) {
-		return	(	Enm_.HasInt(id, Id_thumb)	// for purposes of displaying images on page, thumb and frame both create a thumb box
-				||	Enm_.HasInt(id, Id_frame)
+		return	(	Enm_.Has_int(id, Id_thumb)	// for purposes of displaying images on page, thumb and frame both create a thumb box
+				||	Enm_.Has_int(id, Id_frame)
 				);
 	}
 	public static boolean Id_defaults_to_thumb(byte id) {	// assuming original of 400,200
-		if		(	Enm_.HasInt(id, Id_thumb)		// [[File:A.png|thumb]]     -> 220,-1
-				||	Enm_.HasInt(id, Id_frameless)	// [[File:A.png|frameless]] -> 220,-1
+		if		(	Enm_.Has_int(id, Id_thumb)		// [[File:A.png|thumb]]     -> 220,-1
+				||	Enm_.Has_int(id, Id_frameless)	// [[File:A.png|frameless]] -> 220,-1
 				)
 			return true;
-		else if (	Enm_.HasInt(id, Id_frame)		// [[File:A.png|frame]]     -> 400,200 (frame is always default size)
+		else if (	Enm_.Has_int(id, Id_frame)		// [[File:A.png|frame]]     -> 400,200 (frame is always default size)
 				||	id == Id_null					// [[File:A.png]]           -> 400,200 (default to original size)
-				||	Enm_.HasInt(id, Id_none)		// TODO: deprecate; NOTE: still used by one test; DATE:2015-08-03
+				||	Enm_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: still used by one test; DATE:2015-08-03
 				)
 			return false;
 		else										// should not happen
 			throw Err_.new_unhandled(id);
 	}
 	public static boolean Id_limits_large_size(byte id) {// Linker.php|makeThumbLink2|Do not present an image bigger than the source, for bitmap-style images; assuming original of 400,200
-		if		(	Enm_.HasInt(id, Id_thumb)		// [[File:A.png|600px|thumb]]      -> 400,200
-				||	Enm_.HasInt(id, Id_frameless)	// [[File:A.png|600px|frameless]]  -> 400,200
-				||	Enm_.HasInt(id, Id_frame)		// [[File:A.png|600px|frame]]      -> 400,200 (frame is always default size)
+		if		(	Enm_.Has_int(id, Id_thumb)		// [[File:A.png|600px|thumb]]      -> 400,200
+				||	Enm_.Has_int(id, Id_frameless)	// [[File:A.png|600px|frameless]]  -> 400,200
+				||	Enm_.Has_int(id, Id_frame)		// [[File:A.png|600px|frame]]      -> 400,200 (frame is always default size)
 				)
 			return true;
 		else if (	id == Id_null					// [[File:A.png|600px]]            -> 600,400; uses orig file of 400,200, but <img> tag src_width / src_height set to 600,400
-				||	Enm_.HasInt(id, Id_none)		// TODO: deprecate; NOTE: leaving in b/c of above failed-deprecate; DATE:2015-08-03
+				||	Enm_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: leaving in b/c of above failed-deprecate; DATE:2015-08-03
 				)
 			return false;
 		else										// should not happen;
 			throw Err_.new_unhandled(id);
 	}
 	public static boolean Id_supports_upright(byte id) {// REF:Linker.php|makeImageLink;if ( isset( $fp['thumbnail'] ) || isset( $fp['manualthumb'] ) || isset( $fp['framed'] ) || isset( $fp['frameless'] ) || !$hp['width'] )  DATE:2014-05-22
-		if		(	Enm_.HasInt(id, Id_thumb)
-				||	Enm_.HasInt(id, Id_frameless)
-				||	Enm_.HasInt(id, Id_frame)
+		if		(	Enm_.Has_int(id, Id_thumb)
+				||	Enm_.Has_int(id, Id_frameless)
+				||	Enm_.Has_int(id, Id_frame)
 				)
 			return true;
 		else if (	id == Id_null
-				||	Enm_.HasInt(id, Id_none)
+				||	Enm_.Has_int(id, Id_none)
 				)
 				return false;
 		else										// should not happen;

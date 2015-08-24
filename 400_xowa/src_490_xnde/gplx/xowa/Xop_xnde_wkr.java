@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.apps.progs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.xowa.apps.progs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -310,7 +311,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag.Restricted()) {
 			Xoae_page page = ctx.Cur_page();
 			if (	page.Html_data().Html_restricted() 
-				&&	page.Wiki().Domain_tid() != Xow_domain_type_.Tid_home) {
+				&&	page.Wiki().Domain_tid() != Xow_domain_type_.Int__home) {
 				int end_pos = gtPos + 1;
 				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;

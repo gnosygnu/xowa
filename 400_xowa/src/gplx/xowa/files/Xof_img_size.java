@@ -29,9 +29,12 @@ public class Xof_img_size {
 	public void Html_size_calc(int exec_tid, int lnki_w, int lnki_h, byte lnki_type, int upright_patch, double lnki_upright, int orig_ext, int orig_w, int orig_h, int thm_dflt_w) {
 		synchronized (this) {
 			this.Clear();											// always clear before calc; caller should be responsible, but just to be safe.
-			if (Xof_ext_.Id_supports_time(orig_ext) && lnki_w == Xof_img_size.Null)	// use orig_w if no size specified for video; EX:[[File:A.ogv]] -> [[File:A.ogv|550px]] where 550px is orig_w; DATE:2015-08-07
-				lnki_w = orig_w;
-			if (Enm_.HasInt(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
+			if (	Xof_ext_.Id_supports_time(orig_ext)				// ext is video
+				&&	lnki_w == Xof_img_size.Null						// no size specified
+				&&	!Xop_lnki_type.Id_is_thumbable(lnki_type)		// not thumb which is implicitly 220; PAGE:en.w:Edward_Snowden; DATE:2015-08-17
+				)
+				lnki_w = orig_w;									// use original size; EX:[[File:A.ogv]] -> [[File:A.ogv|550px]] where 550px is orig_w; DATE:2015-08-07
+			if (Enm_.Has_int(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
 				&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
 				html_w = file_w = orig_w;
 				html_h = file_h = orig_h;

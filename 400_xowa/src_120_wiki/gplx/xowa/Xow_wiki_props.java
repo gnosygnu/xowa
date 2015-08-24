@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.html.hrefs.*;
 public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse_() which will not work with ""; DATE:2014-02-16

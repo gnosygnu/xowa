@@ -16,16 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.*;
+import org.junit.*; import gplx.xowa.langs.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoud_opt_scope_tst {
 	private Xoud_opt_scope_fxt fxt = new Xoud_opt_scope_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
-		fxt.Test_parse("en.w"		, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Tid_wikipedia));
+		fxt.Test_parse("en.w"		, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Int__wikipedia));
 		fxt.Test_parse("en.*"		, fxt.Make(Xol_lang_itm_.Id_en, Xoud_opt_scope.Type_id_wildcard));
-		fxt.Test_parse("*.w"		, fxt.Make(Xoud_opt_scope.Lang_id_wildcard, Xow_domain_type_.Tid_wikipedia));
+		fxt.Test_parse("*.w"		, fxt.Make(Xoud_opt_scope.Lang_id_wildcard, Xow_domain_type_.Int__wikipedia));
 		fxt.Test_parse("<any>"		, Xoud_opt_scope.App);
-		fxt.Test_parse("en.w,fr.d"	, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Tid_wikipedia), fxt.Make(Xol_lang_itm_.Id_fr, Xow_domain_type_.Tid_wiktionary));
+		fxt.Test_parse("en.w,fr.d"	, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Int__wikipedia), fxt.Make(Xol_lang_itm_.Id_fr, Xow_domain_type_.Int__wiktionary));
 	}
 }
 class Xoud_opt_scope_fxt {

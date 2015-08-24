@@ -16,20 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.core.strings.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.core.strings.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xow_xwiki_mgr_fxt fxt = new Xow_xwiki_mgr_fxt();
-	@Test   public void Add_bulk_wiki_en() 			{fxt.Test_add_bulk("w|en.wikipedia.org"				, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Tid_wikipedia	, "w"			, "https://en.wikipedia.org/wiki/~{0}", "en.wikipedia.org");}
-	@Test   public void Add_bulk_wiki_fr() 			{fxt.Test_add_bulk("fr|fr.wikipedia.org"			, Xol_lang_itm_.Id_fr			, Xow_domain_type_.Tid_wikipedia	, "fr"			, "https://fr.wikipedia.org/wiki/~{0}", "fr.wikipedia.org");}
-	@Test   public void Add_bulk_wikt_en() 			{fxt.Test_add_bulk("wikt|en.wiktionary.org"			, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Tid_wiktionary	, "wikt"		, "https://en.wiktionary.org/wiki/~{0}", "en.wiktionary.org");}
-	@Test   public void Add_bulk_commons() 			{fxt.Test_add_bulk("commons|commons.wikimedia.org"	, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Tid_commons		, "commons"		, "https://commons.wikimedia.org/wiki/~{0}", "commons.wikimedia.org");}
-	@Test   public void Add_bulk_commons_cap() 		{fxt.Test_add_bulk("Commons|commons.wikimedia.org"	, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Tid_commons		, "Commons"		, "https://commons.wikimedia.org/wiki/~{0}", "commons.wikimedia.org");}
+	@Test   public void Add_bulk_wiki_en() 			{fxt.Test_add_bulk("w|en.wikipedia.org"				, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Int__wikipedia	, "w"			, "https://en.wikipedia.org/wiki/~{0}", "en.wikipedia.org");}
+	@Test   public void Add_bulk_wiki_fr() 			{fxt.Test_add_bulk("fr|fr.wikipedia.org"			, Xol_lang_itm_.Id_fr			, Xow_domain_type_.Int__wikipedia	, "fr"			, "https://fr.wikipedia.org/wiki/~{0}", "fr.wikipedia.org");}
+	@Test   public void Add_bulk_wikt_en() 			{fxt.Test_add_bulk("wikt|en.wiktionary.org"			, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Int__wiktionary	, "wikt"		, "https://en.wiktionary.org/wiki/~{0}", "en.wiktionary.org");}
+	@Test   public void Add_bulk_commons() 			{fxt.Test_add_bulk("commons|commons.wikimedia.org"	, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Int__commons		, "commons"		, "https://commons.wikimedia.org/wiki/~{0}", "commons.wikimedia.org");}
+	@Test   public void Add_bulk_commons_cap() 		{fxt.Test_add_bulk("Commons|commons.wikimedia.org"	, Xol_lang_itm_.Id__unknown		, Xow_domain_type_.Int__commons		, "Commons"		, "https://commons.wikimedia.org/wiki/~{0}", "commons.wikimedia.org");}
 	@Test   public void Add_bulk_langs_wiki() 		{fxt.Init_langs().Test_add_bulk_langs("wiki", fxt.xwiki_("en", "en.wikipedia.org", "http://en.wikipedia.org/wiki/~{0}"), fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"), fxt.xwiki_("ja", "ja.wikipedia.org", "http://ja.wikipedia.org/wiki/~{0}"));}
 	@Test   public void Add_bulk_langs_grps() 		{fxt.Init_langs().Test_add_bulk_langs("europe_west~asia_east", fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"), fxt.xwiki_("ja", "ja.wikipedia.org", "http://ja.wikipedia.org/wiki/~{0}"));}
 	@Test   public void Add_bulk_langs_grp_itm() 	{fxt.Init_langs().Test_add_bulk_langs("europe_west~ja", fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"), fxt.xwiki_("ja", "ja.wikipedia.org", "http://ja.wikipedia.org/wiki/~{0}"));}
 	@Test   public void Add_bulk_langs_grp_commons() {
 		fxt.Init_langs();
-		fxt.Wiki().Xwiki_mgr().Add_bulk_langs(Bry_.new_a7("europe_west"), Xow_domain_type_.Tid_wikipedia);
+		fxt.Wiki().Xwiki_mgr().Add_bulk_langs(Bry_.new_a7("europe_west"), Xow_domain_type_.Int__wikipedia);
 		fxt.Tst_itms(fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"));
 	}
 	@Test   public void Add_bulk_peers() 			{fxt.Init_peers().Test_add_bulk_peers("peer", fxt.xwiki_null_("commons"), fxt.xwiki_null_("m"), fxt.xwiki_("wikt", "en.wiktionary.org", "http://en.wiktionary.org/wiki/~{0}"), fxt.xwiki_("wiktionary", "en.wiktionary.org", "http://en.wiktionary.org/wiki/~{0}"), fxt.xwiki_("s", "en.wikisource.org", "http://en.wikisource.org/wiki/~{0}"));}
@@ -55,10 +56,10 @@ class Xow_xwiki_mgr_fxt {
 		lang_mgr.Clear();
 	}
 	public Xowe_wiki Wiki() {return wiki;}
-	public Xow_xwiki_itm xwiki_null_(String key) {return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.Empty, Xol_lang_itm_.Id__unknown, Xow_domain_type_.Tid_other, Bry_.Empty);}
+	public Xow_xwiki_itm xwiki_null_(String key) {return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.Empty, Xol_lang_itm_.Id__unknown, Xow_domain_type_.Int__other, Bry_.Empty);}
 	public Xow_xwiki_itm xwiki_(String key, String domain_str, String url_fmt) {
-		Xow_domain domain = Xow_domain_.parse(Bry_.new_u8(domain_str));
-		return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.new_u8(url_fmt), domain.Lang_itm().Id(), domain.Domain_tid(), domain.Domain_bry());
+		Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_u8(domain_str));
+		return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.new_u8(url_fmt), domain.Lang_actl_itm().Id(), domain.Domain_type_id(), domain.Domain_bry());
 	}
 	public Xow_xwiki_mgr_fxt Test_add_bulk(String raw, int lang_tid, int wiki_tid, String alias, String fmt, String domain) {
 		Xow_xwiki_itm itm = xwiki_mgr.Add_bulk_row(Xol_lang_itm_.Regy(), Bry_.new_a7(raw));

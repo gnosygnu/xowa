@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.core.net.*;
-import gplx.xowa.wikis.*; import gplx.xowa.specials.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.specials.*;
 import gplx.xowa.urls.*;
 public class Wdata_itemByTitle_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
@@ -57,8 +57,8 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoae_app app, Wdata_wiki_mgr wdata_mgr, Xoae_page page, byte[] site_bry, byte[] page_bry) {
 		page_bry = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(page_bry);		// NOTE: space is converted to + on postback to url; decode
-		byte[] wiki_domain = Xow_wiki_alias.Parse_wmf_key(site_bry); 			if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);		if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
+		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 	if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);	if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse_(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
 		Wdata_doc doc = wdata_mgr.Pages_get(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();

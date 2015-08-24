@@ -96,10 +96,10 @@ class GfsCore_ {
 		if		(rv == GfoInvkAble_.Rv_cancel)		return rv;
 		else if (rv == GfoInvkAble_.Rv_unhandled)	{
 			if (ctx.Fail_if_unhandled())
-				throw Err_.new_wo_type("Object does not support key", "key", owner_msg.Key(), "ownerType", ClassAdp_.FullNameOf_obj(owner_invk));
+				throw Err_.new_wo_type("Object does not support key", "key", owner_msg.Key(), "ownerType", Type_adp_.FullNameOf_obj(owner_invk));
 			else {
 				Gfo_usr_dlg usr_dlg = ctx.Usr_dlg();
-				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), ClassAdp_.FullNameOf_obj(owner_invk));
+				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), Type_adp_.FullNameOf_obj(owner_invk));
 				return GfoInvkAble_.Null;
 			}
 		}
@@ -118,8 +118,8 @@ class GfsCore_ {
 				Class<?> type = rv.getClass();
 				if		(type == String.class)					invk = String_.Gfs;
 				else if (Int_.TypeMatch(type))						invk = Int_.Gfs;
-				else if (ClassAdp_.Eq(type, Bool_.Cls_ref_type))	invk = Bool_.Gfs;
-				else throw Err_.new_wo_type("unknown primitive", "type", ClassAdp_.NameOf_type(type), "obj", Object_.Xto_str_strict_or_null_mark(rv));
+				else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))	invk = Bool_.Gfs;
+				else throw Err_.new_wo_type("unknown primitive", "type", Type_adp_.NameOf_type(type), "obj", Object_.Xto_str_strict_or_null_mark(rv));
 				primitive = rv;
 			}
 			Object exec_rv = null;

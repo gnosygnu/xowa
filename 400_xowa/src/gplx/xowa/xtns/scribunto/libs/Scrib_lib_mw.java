@@ -295,7 +295,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		}
 		return (KeyVal[])rv.To_ary(KeyVal.class);
 	}
-	private static boolean Is_kv_ary(KeyVal kv) {return ClassAdp_.Eq_typeSafe(kv.Val(), KeyVal[].class);}
+	private static boolean Is_kv_ary(KeyVal kv) {return Type_adp_.Eq_typeSafe(kv.Val(), KeyVal[].class);}
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
@@ -348,7 +348,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		Object ttl_obj = args.Cast_obj_or_null(1);	// NOTE: callers must pass named title else title will be false; EX: frame:newChild{'current', 'title0'} -> false; frame:newChild{'current', title='title0'} -> 'title0'; DATE:2014-05-20
 		Xoa_ttl ttl = null;
-		if (ClassAdp_.ClassOf_obj(ttl_obj) != String.class) {	 // title = false
+		if (Type_adp_.ClassOf_obj(ttl_obj) != String.class) {	 // title = false
 			byte[] ttl_bry = frame.Frame_ttl();
 			ttl = Xoa_ttl.parse_(core.Wiki(), ttl_bry);
 		}

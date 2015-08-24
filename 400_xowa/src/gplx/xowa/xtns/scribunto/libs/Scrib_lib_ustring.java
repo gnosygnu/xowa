@@ -209,7 +209,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
 		}
-		else throw Err_.new_unhandled(ClassAdp_.NameOf_type(repl_type));
+		else throw Err_.new_unhandled(Type_adp_.NameOf_type(repl_type));
 	}
 	private String Exec_repl(byte repl_tid, byte[] repl_bry, String text, String regx, int limit) {
 		Regx_adp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);

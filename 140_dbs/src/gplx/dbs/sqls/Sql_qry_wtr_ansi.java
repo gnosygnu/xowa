@@ -276,9 +276,9 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 				Object val = itm[j];
 				boolean quote = false;
 				switch (fld.Type_tid()) {
-					case ClassAdp_.Tid_str:
-					case ClassAdp_.Tid_char:
-					case ClassAdp_.Tid_date:
+					case Type_adp_.Tid__str:
+					case Type_adp_.Tid__char:
+					case Type_adp_.Tid__date:
 						quote = true;
 						break;
 				}

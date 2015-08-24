@@ -25,11 +25,15 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {	// read ima
 	public void Init_by_wiki(Xow_wiki wiki) {this.wiki = (Xowe_wiki)wiki;}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		int itms_len = itms.Count();
+//			Xou_cache_mgr cache_mgr = wiki.App().User().User_db_mgr().Cache_mgr(); // repo_id is 127; DATE:2015-08-23
 		for (int i = 0; i < itms_len; i++) {
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.Get_at(i);
-			if (fsdb_wkr.Find_file(itm))
+			if (fsdb_wkr.Find_file(itm)) {
 				Js_img_mgr.Update_img(page, js_wkr, itm);
+//					cache_mgr.Update(itm);
+			}
 		}
+//			cache_mgr.Db_save();
 	}
 	private Io_url Xto_url(byte[] v) {
 		if (Op_sys.Cur().Tid_is_wnt())

@@ -166,7 +166,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 				str = "NULL";
 			else {
 				str = Object_.Xto_str_strict_or_null(obj);
-				if (ClassAdp_.Eq(obj.getClass(), String_.Cls_ref_type))
+				if (Type_adp_.Eq(obj.getClass(), String_.Cls_ref_type))
 					str = "'" + String_.Replace(str, "'", "''") + "'";					
 			}
 			ary[i] = str;

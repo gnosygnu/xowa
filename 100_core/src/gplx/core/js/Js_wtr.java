@@ -44,9 +44,9 @@ public class Js_wtr {
 			Object itm = ary[i];
 			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
 			boolean val_needs_quotes = true;
-			if 		(	ClassAdp_.Eq_typeSafe(itm, Bool_.Cls_ref_type)
-					||	ClassAdp_.Eq_typeSafe(itm, Int_.Cls_ref_type)
-					||	ClassAdp_.Eq_typeSafe(itm, Long_.Cls_ref_type)
+			if 		(	Type_adp_.Eq_typeSafe(itm, Bool_.Cls_ref_type)
+					||	Type_adp_.Eq_typeSafe(itm, Int_.Cls_ref_type)
+					||	Type_adp_.Eq_typeSafe(itm, Long_.Cls_ref_type)
 				) {
 				val_needs_quotes = false;
 			}

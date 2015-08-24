@@ -65,7 +65,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v2(Xowe_wiki wiki, Xoae_page page) {
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
-		Xog_js_wkr js_wkr = wiki.App().App_type().Uid_is_gui() ? page.Tab_data().Tab().Html_itm() : Xog_js_wkr_.Noop;
+		Xog_js_wkr js_wkr = wiki.App().App_type().Uid_supports_js() ? page.Tab_data().Tab().Html_itm() : Xog_js_wkr_.Noop;
 		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(Xfer_itms_to_fsdb_itms(wiki, page, xfer_list, wiki.File_mgr().Patch_upright()), wiki, page, js_wkr);
 	}
 	private List_adp Xfer_itms_to_fsdb_itms(Xowe_wiki cur_wiki, Xoae_page page, List_adp xfer_list, int upright_patch) {

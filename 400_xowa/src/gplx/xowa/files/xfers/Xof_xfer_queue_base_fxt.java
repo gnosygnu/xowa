@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.ios.*; import gplx.xowa.wikis.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.repos.*;
+import gplx.ios.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
 public class Xof_xfer_queue_base_fxt {
 	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok._;
@@ -26,8 +27,8 @@ public class Xof_xfer_queue_base_fxt {
 		Io_mgr.I.InitEngine_mem();
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
-			en_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_.Domain_str_enwiki);
-			commons = Xoa_app_fxt.wiki_(app, Xow_domain_.Domain_str_commons);
+			en_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__enwiki);
+			commons = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__commons);
 			app.Wiki_mgr().Add(commons);
 			app.Wiki_mgr().Add(en_wiki);
 			
@@ -40,10 +41,10 @@ public class Xof_xfer_queue_base_fxt {
 			byte[] src_en_wiki = Bry_.new_a7("src_en_wiki");
 			byte[] trg_commons = Bry_.new_a7("trg_commons");
 			byte[] trg_en_wiki = Bry_.new_a7("trg_en_wiki");
-			src_commons_repo = Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_.Domain_str_commons, false);
-			src_en_wiki_repo = Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_.Domain_str_enwiki, false);
-			Ini_repo_add(file_mgr, trg_commons, "mem/trg/commons.wikimedia.org/", Xow_domain_.Domain_str_commons, true).Primary_(true);
-			Ini_repo_add(file_mgr, trg_en_wiki, "mem/trg/en.wikipedia.org/"		, Xow_domain_.Domain_str_enwiki, true).Primary_(true);
+			src_commons_repo = Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_itm_.Str__commons, false);
+			src_en_wiki_repo = Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_itm_.Str__enwiki, false);
+			Ini_repo_add(file_mgr, trg_commons, "mem/trg/commons.wikimedia.org/", Xow_domain_itm_.Str__commons, true).Primary_(true);
+			Ini_repo_add(file_mgr, trg_en_wiki, "mem/trg/en.wikipedia.org/"		, Xow_domain_itm_.Str__enwiki, true).Primary_(true);
 			Xowe_repo_mgr wiki_repo_mgr = en_wiki.File_mgr().Repo_mgr();
 			Xof_repo_pair pair = null;
 			pair = wiki_repo_mgr.Add_repo(src_commons, trg_commons);

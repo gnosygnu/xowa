@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.lnkis.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.urls.*;
 public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {
 	public Xows_page_allpages(Xowe_wiki wiki) {
@@ -73,7 +73,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		wiki.Ctx().Cur_page().Html_data().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
 		url.Page_bry_(Bry_.Add(Bry_.new_a7("Special:"), ttl.Page_txt_wo_qargs()));	// HACK: need to re-set Page b/c href_wtr does not eliminate qargs; DATE:2013-02-08
-		if (wiki.Domain_tid() == Xow_domain_type_.Tid_home) {wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
+		if (wiki.Domain_tid() == Xow_domain_type_.Int__home) {wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
 		if (rslt_list_ttls == null) this.Itms_per_page_(itms_per_page);
 		boolean found = Build_data(url, ttl); if (!found) return;
 		Build_html(page);

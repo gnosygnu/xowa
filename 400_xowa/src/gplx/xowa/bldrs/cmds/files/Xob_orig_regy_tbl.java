@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
+import gplx.dbs.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.dbs.engines.sqlite.*;
 class Xob_orig_regy_tbl {
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
@@ -30,7 +31,7 @@ class Xob_orig_regy_tbl {
 		boolean local_is_remote = Bry_.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
 		Xowe_wiki local_wiki = repo_0_wiki;
 		if (	repo_0_is_remote														// .gfs manually marked specifes repo_0 as remote
-			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_domain_.Domain_bry_commons)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
+			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_domain_itm_.Bry__commons)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
 				&&	local_is_remote														// repo_0 = repo_1
 				)
 			) {

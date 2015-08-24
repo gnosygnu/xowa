@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*;
 import gplx.fsdb.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.css.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
@@ -28,10 +28,10 @@ import gplx.xowa.bldrs.xmls.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.tdbs.*;
 import gplx.xowa.urls.*;
 public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
-	public Xowe_wiki(Xoae_app app, Xol_lang lang, Xow_ns_mgr ns_mgr, Xow_domain domain_itm, Io_url wiki_dir) {
+	public Xowe_wiki(Xoae_app app, Xol_lang lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
 		this.ev_mgr = GfoEvMgr.new_(this);
 		this.app = app; this.lang = lang; this.ns_mgr = ns_mgr;
-		this.domain_itm = domain_itm; this.domain_str = domain_itm.Domain_str(); this.domain_bry = domain_itm.Domain_bry(); this.domain_tid = domain_itm.Domain_tid(); this.domain_abrv = Xow_wiki_alias.Build_alias(domain_itm);
+		this.domain_itm = domain_itm; this.domain_str = domain_itm.Domain_str(); this.domain_bry = domain_itm.Domain_bry(); this.domain_tid = domain_itm.Domain_type_id(); this.domain_abrv = Xow_abrv_wm_.To_abrv(domain_itm);
 		fsys_mgr = new Xow_fsys_mgr(wiki_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.url__parser = new Xoa_url_parser(this);
 		xwiki_mgr = new Xow_xwiki_mgr(this, url__parser.Url_parser());
@@ -63,8 +63,8 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		eval_mgr = new Bfmtr_eval_wiki(this);
 		fragment_mgr = new Xow_fragment_mgr(this);
 		xtn_mgr = new Xow_xtn_mgr().Ctor_by_wiki(this);
-		if (domain_tid == Xow_domain_type_.Tid_home) {
-			wdata_wiki_tid	= Xow_domain_type_.Tid_wikipedia;
+		if (domain_tid == Xow_domain_type_.Int__home) {
+			wdata_wiki_tid	= Xow_domain_type_.Int__wikipedia;
 			wdata_wiki_lang = Xol_lang_.Key_en;
 		}
 		else {
@@ -87,7 +87,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public String					Domain_str() {return domain_str;} private final String domain_str;
 	public int						Domain_tid() {return domain_tid;} private final int domain_tid;
 	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
-	public Xow_domain				Domain_itm() {return domain_itm;} private final Xow_domain domain_itm;
+	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
 	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
 	public Xowd_db_mgr				Data__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
@@ -120,7 +120,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xow_cache_mgr			Cache_mgr() {return cache_mgr;} private Xow_cache_mgr cache_mgr;
 	public Xow_page_mgr				Page_mgr() {return page_mgr;} private Xow_page_mgr page_mgr = new Xow_page_mgr();
 
-	public byte[]					Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_.Domain_bry_commons;
+	public byte[]					Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_itm_.Bry__commons;
 	public Xob_hive_mgr				Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
 	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private Xow_msg_mgr msg_mgr;
 	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
@@ -131,7 +131,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public byte[]					Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private int wdata_wiki_tid;
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b128();
-		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Int_obj_ref.new_(wdata_wiki_tid));
+		Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.new_(wdata_wiki_tid));
 		wdata_wiki_abrv = bfr.To_bry_and_rls();
 	}
 	private Xow_html_util util;
@@ -241,7 +241,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
 		// init ns_mgr
 		if (lang.Init_by_load()) {
-			if (domain_tid == Xow_domain_type_.Tid_wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
+			if (domain_tid == Xow_domain_type_.Int__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
 				ns_mgr.Aliases_add(Xow_ns_.Id_project, Xow_ns_.Ns_name_wikipedia);
 		}
 		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// NOTE: must be run after lang.Init_by_load b/c lang will reload ns_mgr; DATE:2015-04-17run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
@@ -330,12 +330,12 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public static final String Invk_lang_ = "lang_";
 	private static int Xwiki_tid(int tid) {
 		switch (tid) {
-			case Xow_domain_type_.Tid_commons:
-			case Xow_domain_type_.Tid_species:
-			case Xow_domain_type_.Tid_incubator:
-			case Xow_domain_type_.Tid_mediawiki:
-			case Xow_domain_type_.Tid_wmfblog:
-			case Xow_domain_type_.Tid_home:						return Xow_domain_type_.Tid_wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
+			case Xow_domain_type_.Int__commons:
+			case Xow_domain_type_.Int__species:
+			case Xow_domain_type_.Int__incubator:
+			case Xow_domain_type_.Int__mediawiki:
+			case Xow_domain_type_.Int__wmfblog:
+			case Xow_domain_type_.Int__home:						return Xow_domain_type_.Int__wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
 			default:											return tid;
 		}
 	}

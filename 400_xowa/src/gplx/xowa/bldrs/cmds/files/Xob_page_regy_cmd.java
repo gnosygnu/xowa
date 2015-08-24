@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.xowa.wikis.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.files.repos.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.domains.*;
 public class Xob_page_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_page_regy_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	private boolean build_commons = false;
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_page_regy;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons).Init_assert();
+		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Db_conn page_regy_provider = Xob_db_file.new__page_regy(commons_wiki.Fsys_mgr().Root_dir()).Conn();
 		commons_wiki.Init_assert();
 		if (build_commons) {

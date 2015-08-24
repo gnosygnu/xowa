@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.xmls.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_dumper {
 	private final Gfo_xml_wtr wtr = new Gfo_xml_wtr();
 	public String Bld_str() {return wtr.Bld_str();}
-	public void Write_root_bgn(Xow_ns_mgr ns_mgr, Xow_domain domain, String wiki_abrv, String main_page, String ns_case, String app_version) {
+	public void Write_root_bgn(Xow_ns_mgr ns_mgr, Xow_domain_itm domain, String wiki_abrv, String main_page, String ns_case, String app_version) {
 		wtr.Nde_lhs_bgn_grp("mediawiki");
 		wtr.Atr_kv_str_a7("xmlns"					, "http://www.mediawiki.org/xml/export-0.10/");
 		wtr.Atr_kv_str_a7("xmlns:xsi"				, "http://www.w3.org/2001/XMLSchema-instance");
@@ -35,9 +35,9 @@ public class Xob_xml_dumper {
 	public void Write_root_end() {
 		wtr.Nde_rhs();
 	}
-	private void Write_siteinfo(Xow_domain domain, String wiki_abrv, String main_page, String ns_case, String app_version) {
+	private void Write_siteinfo(Xow_domain_itm domain, String wiki_abrv, String main_page, String ns_case, String app_version) {
 		wtr.Nde_lhs("siteinfo");
-		wtr.Nde_txt_bry("sitename"				, Xow_domain_type_.Get_type_as_bry(domain.Domain_tid()));
+		wtr.Nde_txt_bry("sitename"				, Xow_domain_type_.Get_type_as_bry(domain.Domain_type_id()));
 		wtr.Nde_txt_str("dbname"				, wiki_abrv);
 		wtr.Nde_txt_str("base"				, main_page);
 		wtr.Nde_txt_str("generator"				, app_version);

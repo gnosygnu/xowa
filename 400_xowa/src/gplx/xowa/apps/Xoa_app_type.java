@@ -20,9 +20,16 @@ import gplx.core.primitives.*;
 public class Xoa_app_type {
 	Xoa_app_type(int uid) {this.uid = uid;}
 	public int Uid() {return uid;} private final int uid;
-	public boolean Uid_is_gui()	{return uid == Uid_gui;}
-	public boolean Uid_is_tcp()	{return uid == Uid_tcp;}
-	public boolean Uid_is_http()	{return uid == Uid_http;}
+	public boolean Uid_is_gui()		{return uid == Uid_gui;}
+	public boolean Uid_is_tcp()		{return uid == Uid_tcp;}
+	public boolean Uid_is_http()		{return uid == Uid_http;}
+	public boolean Uid_supports_js() {
+		switch (uid) {
+			case Uid_gui:
+			case Uid_tcp:		return true;
+			default:			return false;
+		}
+	}
 	public byte[] Name() {
 		switch (uid) {
 			case Uid_cmd:		return Key_cmd;

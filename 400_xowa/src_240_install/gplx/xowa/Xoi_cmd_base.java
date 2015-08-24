@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.bldrs.*;
+import gplx.core.threads.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wmfs.dumps.*;
 abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Ctor(Xoi_setup_mgr install_mgr, String wiki_key) {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;
@@ -68,11 +70,11 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 		return this;
 	}	private static final String Invk_process_async = "run_async", Invk_owner = "owner";
 }
-class Xoi_cmd_category2_page_props extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_page_props(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xow_wiki_alias.Key_page_props);}
+class Xoi_cmd_category2_page_props extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_page_props(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xowm_dump_type_.Str__page_props);}
 	@Override public String Download_file_ext() {return ".sql.gz2";}
 	public static final String KEY_category2 = "wiki.category2.download.page_props";
 }
-class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_categorylinks(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xow_wiki_alias.Key_categorylinks);}
+class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi_cmd_category2_categorylinks(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date) {this.Ctor_download_(install_mgr, wiki_key, dump_date, Xowm_dump_type_.Str__categorylinks);}
 	@Override public String Download_file_ext() {return ".sql.gz2";}
 	public static final String KEY_category2 = "wiki.category2.download.categorylinks";
 }

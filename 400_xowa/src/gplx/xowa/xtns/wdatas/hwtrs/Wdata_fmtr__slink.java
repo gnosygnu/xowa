@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.html.*;
-import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.wikis.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 	private final Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
 	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
@@ -109,9 +110,9 @@ class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
-			Xow_domain domain_info = itm.Domain_info();
+			Xow_domain_itm domain_info = itm.Domain_info();
 			byte[] wmf_key			= domain_info.Abrv_wm();
-			Xol_lang_itm lang_itm	= domain_info.Lang_itm();
+			Xol_lang_itm lang_itm	= domain_info.Lang_actl_itm();
 			byte[] lang_key			= lang_itm.Key();
 			byte[] lang_name		= lang_itm.Localized_name();
 			byte[] domain_bry		= domain_info.Domain_bry();

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.ios.*; import gplx.xowa.wikis.*; import gplx.xowa.files.*;
+import gplx.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	private final Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
@@ -41,7 +41,7 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	public Xof_xfer_queue_html_fxt Html_orig_src_(String v) {html_orig_src = v; return this;} private String html_orig_src;
 	public Xof_xfer_queue_html_fxt ini_page_api(String wiki_str, String ttl_str, String redirect_str, int orig_w, int orig_h) {return ini_page_api(wiki_str, ttl_str, redirect_str, orig_w, orig_h, true);}
 	public Xof_xfer_queue_html_fxt ini_page_api(String wiki_str, String ttl_str, String redirect_str, int orig_w, int orig_h, boolean pass) {
-		String wiki_key = String_.Eq(wiki_str, "commons") ? Xow_domain_.Domain_str_commons : Xow_domain_.Domain_str_enwiki;
+		String wiki_key = String_.Eq(wiki_str, "commons") ? Xow_domain_itm_.Str__commons : Xow_domain_itm_.Str__enwiki;
 		this.Api_size().Ini(wiki_key, ttl_str, redirect_str, orig_w, orig_h, pass);
 		return this;
 	}

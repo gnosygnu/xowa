@@ -54,7 +54,7 @@ public class Tst_mgr {
 			String path = ownerPath + Int_.Xto_str(i);
 			Tst_chkr expd_obj = i < expd_ary_len ? expd_ary[i] : Tst_mgr.Null_chkr;
 			Object actl_obj = i < actl_ary_len ? actl_ary[i] : "<NULL OBJ>";
-			String actl_type = i < actl_ary_len ? ClassAdp_.NameOf_obj(actl_obj) : "<NULL TYPE>";
+			String actl_type = i < actl_ary_len ? Type_adp_.NameOf_obj(actl_obj) : "<NULL TYPE>";
 			err += Tst_inner(expd_obj, actl_obj, actl_type, path, err);
 		}
 		if (throwError && err > 0) {
@@ -63,15 +63,15 @@ public class Tst_mgr {
 		}
 	}
 	public int Tst_sub_obj(Tst_chkr expd, Object actl, String path, int err) {
-		return Tst_inner(expd, actl, actl == null ? "<NULL>" : ClassAdp_.NameOf_obj(actl), path, err);
+		return Tst_inner(expd, actl, actl == null ? "<NULL>" : Type_adp_.NameOf_obj(actl), path, err);
 	}
 	public int Tst_sub_ary(Tst_chkr[] expd_subs, Object[] actl_subs, String path, int err) {
 		Tst_ary_inner(path + ".", expd_subs, actl_subs);
 		return err;
 	}
 	int Tst_inner(Tst_chkr expd_obj, Object actl_obj, String actl_type, String path, int err) {
-		if (actl_obj == null || !ClassAdp_.IsAssignableFrom(expd_obj.TypeOf(), actl_obj.getClass())) {
-			results.Add(Tst_itm.fail_("!=", path, "<cast type>", ClassAdp_.NameOf_type(expd_obj.TypeOf()), actl_type));
+		if (actl_obj == null || !Type_adp_.IsAssignableFrom(expd_obj.TypeOf(), actl_obj.getClass())) {
+			results.Add(Tst_itm.fail_("!=", path, "<cast type>", Type_adp_.NameOf_type(expd_obj.TypeOf()), actl_type));
 			return 1;
 //				results.Add(Tst_itm.fail_("!=", path, "<cast value>", Object_.Xto_str_strict_or_null(expd_obj.ValueOf()), Object_.Xto_str_strict_or_null(actl_obj)));
 		}

@@ -52,7 +52,7 @@ public class Scrib_lua_mod {
 			String prc_key = prc_kv.Key();
 			Object prc_val = prc_kv.Val();
 			Scrib_lua_proc fnc = null;
-			if (ClassAdp_.ClassOf_obj(prc_val) == Scrib_lua_proc.class)
+			if (Type_adp_.ClassOf_obj(prc_val) == Scrib_lua_proc.class)
 				fnc = (Scrib_lua_proc)prc_val;
 			else
 				fnc = new Scrib_lua_proc(prc_key, -1);

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.domains.*;
 public class Xof_repo_itm implements GfoInvkAble {
 	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr; private final Bry_bfr tmp_bfr = Bry_bfr.reset_(300);
 	public Xof_repo_itm(byte[] key, Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr, byte[] wiki_domain) {
@@ -41,13 +41,13 @@ public class Xof_repo_itm implements GfoInvkAble {
 	public boolean		Primary() {return primary;} public Xof_repo_itm Primary_(boolean v) {primary = v; return this;} private boolean primary;
 	public void		Wiki_domain_(byte[] v) {
 		this.wiki_domain = v;
-		Xow_domain domain_itm = Xow_domain_.parse(v);
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(v);
 		if (domain_itm == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "repo:invalid domain; raw=~{0}", v);
 			this.wiki_abrv_xo = Bry_.Empty;
 		}
 		else
-			this.wiki_abrv_xo = Xow_domain_abrv_xo_.To_bry(v, domain_itm.Lang_itm(), domain_itm.Domain_type());
+			this.wiki_abrv_xo = Xow_abrv_xo_.To_bry(v, domain_itm.Lang_actl_key(), domain_itm.Domain_type());
 	}
 	public Xof_repo_itm Root_str_(String root_str) {
 		this.wmf_fsys = String_.Has_at_bgn(root_str, "http") || String_.Has_at_bgn(root_str, "ftp");

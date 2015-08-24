@@ -19,7 +19,7 @@ package gplx.xowa.urls; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xoa_url_parser {
 	private final Url_encoder encoder;
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
@@ -47,14 +47,19 @@ public class Xoa_url_parser {
 		//	rv.Page_bry_(rv.Wiki_bry());
 		//	rv.Wiki_bry_(wiki.Domain_bry());
 		// }
-		return this.Parse(bry);
+		Xoa_url rv = Xoa_url.blank(); 
+		this.Parse(rv, bry, 0, bry.length);
+		if (rv.Page_is_main()) {	// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
+			Xow_wiki actl_wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(rv.Wiki_bry()); // NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
+			rv.Page_bry_(actl_wiki.Props().Main_page());
+		}
+		return rv;
 	}
 	public Gfo_url_parser Url_parser() {return url_parser;}
 	public Xoa_url Parse(byte[] src) {Xoa_url rv = Xoa_url.blank(); Parse(rv, src); return rv;}
-	public Xoa_url Parse(byte[] src, int bgn, int end) {Xoa_url rv = Xoa_url.blank(); Parse(rv, src, bgn, end, false); return rv;}
-	public boolean Parse(Xoa_url rv, byte[] src) {return Parse(rv, src, 0, src.length, false);}
-	public boolean Parse(Xoa_url rv, byte[] src, int bgn, int end) {return Parse(rv, src, bgn, end, false);}
-	private boolean Parse(Xoa_url rv, byte[] src, int bgn, int end, boolean get_main_page) {
+	public Xoa_url Parse(byte[] src, int bgn, int end) {Xoa_url rv = Xoa_url.blank(); Parse(rv, src, bgn, end); return rv;}
+	public boolean Parse(Xoa_url rv, byte[] src) {return Parse(rv, src, 0, src.length);}
+	public boolean Parse(Xoa_url rv, byte[] src, int bgn, int end) {
 		if (end - bgn == 0) {Init_tmp_vars(Gfo_url.Empty); Make(rv); return false;}
 		src = encoder.Decode(src, bgn, end);					// NOTE: must decode any url-encoded parameters
 		int src_len = src.length;
@@ -93,15 +98,8 @@ public class Xoa_url_parser {
 					break;
 			} 
 		}
-		if (tmp_page_is_main) {	// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
-			if (get_main_page) {
-				Xow_wiki actl_wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(tmp_wiki); // NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
-				tmp_page = actl_wiki.Props().Main_page();
-			}
-			else
-				tmp_page = Xoa_page_.Main_page_bry_empty;
-		}
 		Bld_qargs();
+		if (tmp_page_is_main) tmp_page = Xoa_page_.Main_page_bry_empty;
 		if (tmp_anch != null) {
 			byte[] anchor_bry = Xoa_app_.Utl__encoder_mgr().Id().Encode(tmp_anch);	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			tmp_anch = anchor_bry;
@@ -153,8 +151,8 @@ public class Xoa_url_parser {
 		//	thum: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/A.jpg/220px-A.jpg
 		byte[] domain_type = tmp_segs[1];						// seg[0] = type; EX: "/wikipedia/"
 		byte[] lang = tmp_segs[2];								// seg[1] = lang; EX: "en", "fr"; "commons"
-		if (Bry_.Eq(lang, Xow_domain_type_.Key_bry_commons))	// commons links will have fmt of "/wikipedia/commons"; must change to wikimedia
-			domain_type = Xow_domain_type_.Key_bry_wikimedia;
+		if (Bry_.Eq(lang, Xow_domain_type_.Bry__commons))	// commons links will have fmt of "/wikipedia/commons"; must change to wikimedia
+			domain_type = Xow_domain_type_.Bry__wikimedia;
 		tmp_wiki = tmp_bfr.Clear()
 			.Add(lang).Add_byte(Byte_ascii.Dot)					// add lang/type + .;	EX: "en."; "fr."; "commons."
 			.Add(domain_type).Add(Bry_dot_org)					// add type + .org;		EX: "wikipedia.org"; "wikimedia.org";
@@ -204,7 +202,7 @@ public class Xoa_url_parser {
 		int rv = -1;
 		switch (tmp_segs_len - bgn_seg) {
 			case 1:	 // "en.wikipedia.org"
-				if (Bry_.Eq(tmp_segs[0 + bgn_seg], Xow_domain_.Domain_bry_home)) {	// ignore "home" which should always go to "home" of current wiki, not "home" wiki
+				if (Bry_.Eq(tmp_segs[0 + bgn_seg], Xow_domain_itm_.Bry__home)) {	// ignore "home" which should always go to "home" of current wiki, not "home" wiki
 					tmp_wiki = domain_bry;
 					return 0;
 				}

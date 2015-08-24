@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public Xodb_save_mgr_txt(Xowe_wiki wiki, Xodb_load_mgr_txt load_mgr) {
 		this.wiki = wiki;
@@ -59,7 +59,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text)		{Data_update_under(page, text, null);}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl)	{
-		if (wiki.Domain_tid() != Xow_domain_type_.Tid_home) {
+		if (wiki.Domain_tid() != Xow_domain_type_.Int__home) {
 			wiki.Appe().Usr_dlg().Warn_many("", "", "Only pages in the home wiki can be renamed");
 			return;
 		}

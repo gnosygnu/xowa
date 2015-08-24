@@ -29,8 +29,8 @@ public class Json_doc_srl {
 		return this;
 	}
 	public void Write_obj(boolean comma, byte[] key, Object val) {
-		Class<?> t = ClassAdp_.ClassOf_obj(val);
-		if	(ClassAdp_.Is_array(t))
+		Class<?> t = Type_adp_.ClassOf_obj(val);
+		if	(Type_adp_.Is_array(t))
 			Write_kv_ary(comma, key, (Object[])val);
 		else
 			Write_kv_str(comma, key, Object_.Xto_str_strict_or_empty(val));

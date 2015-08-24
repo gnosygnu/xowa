@@ -24,13 +24,13 @@ public class Criteria_in implements Criteria {
 	private void		Val_as_obj_ary_(Object[] v) {
 		this.ary = v;
 		ary_len = Array_.Len(ary);
-		ary_type = ary_len == 0 ? Object.class : ClassAdp_.ClassOf_obj(ary[0]);
+		ary_type = ary_len == 0 ? Object.class : Type_adp_.ClassOf_obj(ary[0]);
 	}
 	public void			Val_as_obj_(Object v) {Val_as_obj_ary_((Object[])v);}
 	public void			Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public boolean Matches(Object comp) {
 		if (ary_len == 0) return false;	// empty array never matches
-		if (!ClassAdp_.Eq_typeSafe(comp, ary_type)) throw Err_.new_type_mismatch(ary_type, comp);
+		if (!Type_adp_.Eq_typeSafe(comp, ary_type)) throw Err_.new_type_mismatch(ary_type, comp);
 		boolean rv = false;
 		for (int i = 0; i < ary_len; i++) {
 			Object val = ary[i];

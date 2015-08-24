@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
 import gplx.xowa.html.hrefs.*;
 class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.new_();
@@ -56,7 +56,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		Xoa_app_.Utl__encoder_mgr().Href().Encode(tmp_bfr, ttl_page_db);
 		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
-		if (xwiki_itm.Domain_tid() != Xow_domain_type_.Tid_other)
+		if (xwiki_itm.Domain_tid() != Xow_domain_type_.Int__other)
 			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}

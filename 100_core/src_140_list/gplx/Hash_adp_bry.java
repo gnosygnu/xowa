@@ -27,8 +27,9 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	@Override protected Object Fetch_base(Object key)				{return super.Fetch_base(key_ref.Init((byte[])key));}
 	@Override protected void Del_base(Object key)					{super.Del_base(key_ref.Init((byte[])key));}
 	@Override protected boolean Has_base(Object key)					{return super.Has_base(key_ref.Init((byte[])key));}
-	public int Get_as_int(byte[] key) {
-		Object o = Get_by_bry(key); if (key == null) throw Err_.new_("core", "unknown key", "key", key);
+	public int Get_as_int(byte[] key) {return Get_as_int(key, 0, key.length);}
+	public int Get_as_int(byte[] key, int bgn, int end) {
+		Object o = Get_by_mid(key, bgn, end); if (o == null) throw Err_.new_("core", "unknown key", "key", key);
 		return ((Int_obj_val)o).Val();
 	}
 	public Object Get_by_bry(byte[] src)							{return super.Fetch_base(key_ref.Init(src));}

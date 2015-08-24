@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.dbs.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoa_app_fxt {
 	public static Xoae_app app_() {
 		Io_mgr.I.InitEngine_mem();
@@ -44,7 +44,7 @@ public class Xoa_app_fxt {
 	public static Xowe_wiki wiki_(Xoae_app app, String key) {return wiki_(app, key, app.Lang_mgr().Lang_en());}
 	public static Xowe_wiki wiki_(Xoae_app app, String key, Xol_lang lang) {
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(key);
-		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_.parse(Bry_.new_u8(key)), wiki_dir);
+		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(Bry_.new_u8(key)), wiki_dir);
 		rv.File_mgr().Meta_mgr().Depth_(2);					// TEST: written for 2 depth
 		rv.Props().Main_page_(Xoa_page_.Main_page_bry);		// TEST: default to Main Page (nothing tests loading Main Page from wiki.gfs)			
 		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);

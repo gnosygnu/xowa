@@ -28,11 +28,12 @@ public class Err_ {
 		return rv;
 	}
 	public static Err new_unhandled(Object val)										{return new Err(Bool_.Y, Trace_null, Type__gplx, "val is not in switch/if", "val", val);}
+	public static Err new_unsupported()												{return new Err(Bool_.Y, Trace_null, Type__gplx, "method not supported");}
 	public static Err new_unimplemented()											{return new Err(Bool_.Y, Trace_null, Type__gplx, "method not implemented");}
 	public static Err new_unimplemented_w_msg(String msg, Object... args)		{return new Err(Bool_.Y, Trace_null, Type__gplx, msg, args);}
 	public static Err new_deprecated(String s)										{return new Err(Bool_.Y, Trace_null, Type__gplx, "deprecated", "method", s);}
-	public static Err new_parse_type(Class<?> c, String raw)						{return new_parse(ClassAdp_.FullNameOf_type(c), raw);}
-	public static Err new_parse_exc(Exception e, Class<?> c, String raw)	{return new_parse(ClassAdp_.FullNameOf_type(c), raw).Args_add("e", Err_.Message_lang(e));}
+	public static Err new_parse_type(Class<?> c, String raw)						{return new_parse(Type_adp_.FullNameOf_type(c), raw);}
+	public static Err new_parse_exc(Exception e, Class<?> c, String raw)	{return new_parse(Type_adp_.FullNameOf_type(c), raw).Args_add("e", Err_.Message_lang(e));}
 	public static Err new_parse(String type, String raw)							{return new Err(Bool_.Y, Trace_null, Type__gplx, "parse failed", "type", type, "raw", raw);}
 	public static Err new_null()													{return new Err(Bool_.Y, Trace_null, Type__gplx, "null obj");}
 	public static Err new_missing_idx(int idx, int len)								{return new Err(Bool_.Y, Trace_null, Type__gplx, "index is out of bounds", "idx", idx, "len", len);}
@@ -41,12 +42,12 @@ public class Err_ {
 	public static Err new_invalid_arg(String msg, Object... args)				{return new Err(Bool_.Y, Trace_null, Type__gplx, msg, args);}
 	public static Err new_op_canceled()												{return new Err(Bool_.Y, Trace_null, Type__op_canceled, "canceled by usr");}
 	public static Err new_type_mismatch_w_exc(Exception ignore, Class<?> t, Object o) {return new_type_mismatch(t, o);}
-	public static Err new_type_mismatch(Class<?> t, Object o)								{return new Err(Bool_.Y, Trace_null, Type__gplx, "type mismatch", "expdType", ClassAdp_.FullNameOf_type(t), "actlType", ClassAdp_.NameOf_obj(o), "actlObj", Object_.Xto_str_strict_or_null_mark(o));}
+	public static Err new_type_mismatch(Class<?> t, Object o)								{return new Err(Bool_.Y, Trace_null, Type__gplx, "type mismatch", "expdType", Type_adp_.FullNameOf_type(t), "actlType", Type_adp_.NameOf_obj(o), "actlObj", Object_.Xto_str_strict_or_null_mark(o));}
 	public static Err new_cast(Exception ignore, Class<?> t, Object o) {
 		String o_str = "";
 		try							{o_str = Object_.Xto_str_strict_or_null_mark(o);}
 		catch (Exception e)	{o_str = "<ERROR>"; Err_.Noop(e);}
-		return new Err(Bool_.Y, Trace_null, Type__gplx, "cast failed", "type", ClassAdp_.NameOf_type(t), "obj", o_str);
+		return new Err(Bool_.Y, Trace_null, Type__gplx, "cast failed", "type", Type_adp_.NameOf_type(t), "obj", o_str);
 	}
 
 	public static String Message_lang(Exception e)		{return e.getMessage();} 
@@ -67,6 +68,6 @@ public class Err_ {
 	}
 	public static String Message_gplx_full(Exception e)	{return cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return cast_or_make(e).To_str__log();}
-	public static Err cast_or_make(Exception e) {return ClassAdp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), ClassAdp_.NameOf_obj(e), Err_.Message_lang(e));}
+	public static Err cast_or_make(Exception e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
 	public static final String Type__op_canceled = "gplx.op_canceled";
 }

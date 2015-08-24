@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Char_ {
+	public static final Class<?> Cls_ref_type = Character.class;
 	public static final char Null = '\0', NewLine = '\n';
 	public static final int CharLen = 1;
 	public static final int AsciiZero = 48;

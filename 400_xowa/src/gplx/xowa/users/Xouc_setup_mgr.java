@@ -38,7 +38,7 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 			if (String_.Eq(plats_ary[i], op_sys_name)) return;
 		}
 		Io_url setup_url = app.Fsys_mgr().Root_dir().GenSubFil_nest("bin", op_sys_name, "xowa", "script", "setup_lua.sh");
-		Run("sh", String_.Format("\"{0}\"", setup_url.Raw()));
+		Run("sh", String_.Format("\"{0}\" \"{1}\"", setup_url.Raw(), app.Fsys_mgr().Root_dir()));
 		setup_completed += op_sys_name + ";";
 		app.Cfg_mgr().Set_by_all("app.user.cfg.setup.setup_completed", setup_completed);
 		app.Cfg_mgr().Db_save_txt();

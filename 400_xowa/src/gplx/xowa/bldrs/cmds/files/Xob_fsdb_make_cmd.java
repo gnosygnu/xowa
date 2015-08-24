@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*;	
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
@@ -181,7 +181,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			tier_id_val = fsdb.Lnki_tier_id();
 			page_id_val = fsdb.Lnki_page_id();
 			lnki_id_val = fsdb.Lnki_id();
-			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_itm_.Repo_local ? wiki.Domain_bry() : Xow_domain_.Domain_bry_commons);
+			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_itm_.Repo_local ? wiki.Domain_bry() : Xow_domain_itm_.Bry__commons);
 			Download_exec(fsdb);
 			++exec_count;
 			if (exec_count % progress_interval	== 0) Print_progress(fsdb);
@@ -226,13 +226,10 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		finally {src_rdr.Rls();}
 	}
 	private void Make_trg_bin_file(boolean try_nth, Xodb_tbl_oimg_xfer_itm fsdb, long src_rdr_len) {
-		boolean make = true, txn_bgn = true;
-		if (trg_bin_fil != null) {				// pre-existing bin_file; 
-			if (trg_mnt_itm.Db_mgr().File__solo_file())
-				txn_bgn = false;				// solo file; do nothing
-			else
-				trg_bin_fil.Conn().Txn_end();	// close txn before making new db
-		}
+		boolean is_solo = trg_mnt_itm.Db_mgr().File__solo_file();
+		boolean make = true, use_txn = !is_solo;	// solo file; should never open txn
+		if (trg_bin_fil != null	&& use_txn)		// pre-existing bin_file; 
+			trg_bin_fil.Conn().Txn_end();		// close txn before making new db
 		int tier_id = fsdb.Lnki_tier_id();
 		Xob_bin_db_itm nth_bin_db = bin_db_mgr.Get_nth_by_tier(tier_id);
 		if (try_nth) {							// try_nth is true; occurs for new runs or changed tier
@@ -256,7 +253,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			this.trg_bin_fil = trg_mnt_itm.Bin_mgr().Dbs__get_at(nth_bin_db.Id());
 			trg_bin_fil.Bin_len_(nth_bin_db.Db_len());
 		}
-		if (txn_bgn)
+		if (use_txn)
 			trg_bin_fil.Conn().Txn_bgn("bldr__fsdb_make__trg_bin_fil");
 	}
 	private void Txn_sav() {

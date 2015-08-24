@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.langs.*; import gplx.xowa.wikis.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.wikis.domains.*;
 class Xoud_opt_scope {
 	public Xoud_opt_scope(int lang_id, int type_id) {this.lang_id = lang_id; this.type_id = type_id;}
 	public int Lang_id() {return lang_id;} private final int lang_id;
@@ -63,22 +64,22 @@ class Xoud_opt_scope_parser {
 		return Xoud_opt_scope.App;
 	}
 	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()
-	.Add_str_int("w"			, Xow_domain_type_.Tid_wikipedia)
-	.Add_str_int("d"			, Xow_domain_type_.Tid_wiktionary)
-	.Add_str_int("s"			, Xow_domain_type_.Tid_wikisource)
-	.Add_str_int("v"			, Xow_domain_type_.Tid_wikivoyage)
-	.Add_str_int("q"			, Xow_domain_type_.Tid_wikiquote)
-	.Add_str_int("b"			, Xow_domain_type_.Tid_wikibooks)
-	.Add_str_int("u"			, Xow_domain_type_.Tid_wikiversity)
-	.Add_str_int("n"			, Xow_domain_type_.Tid_wikinews)
+	.Add_str_int("w"			, Xow_domain_type_.Int__wikipedia)
+	.Add_str_int("d"			, Xow_domain_type_.Int__wiktionary)
+	.Add_str_int("s"			, Xow_domain_type_.Int__wikisource)
+	.Add_str_int("v"			, Xow_domain_type_.Int__wikivoyage)
+	.Add_str_int("q"			, Xow_domain_type_.Int__wikiquote)
+	.Add_str_int("b"			, Xow_domain_type_.Int__wikibooks)
+	.Add_str_int("u"			, Xow_domain_type_.Int__wikiversity)
+	.Add_str_int("n"			, Xow_domain_type_.Int__wikinews)
 	.Add_str_int("*"			, Xoud_opt_scope.Type_id_wildcard)
-	.Add_str_int("xowa"			, Xow_domain_type_.Tid_home)
-	.Add_str_int("wd"			, Xow_domain_type_.Tid_wikidata)
-	.Add_str_int("c"			, Xow_domain_type_.Tid_commons)
-	.Add_str_int("species"		, Xow_domain_type_.Tid_species)
-	.Add_str_int("meta"			, Xow_domain_type_.Tid_meta)
-	.Add_str_int("mw"			, Xow_domain_type_.Tid_mediawiki)
-	.Add_str_int("wmf"			, Xow_domain_type_.Tid_wmfblog)
+	.Add_str_int("xowa"			, Xow_domain_type_.Int__home)
+	.Add_str_int("wd"			, Xow_domain_type_.Int__wikidata)
+	.Add_str_int("c"			, Xow_domain_type_.Int__commons)
+	.Add_str_int("species"		, Xow_domain_type_.Int__species)
+	.Add_str_int("meta"			, Xow_domain_type_.Int__meta)
+	.Add_str_int("mw"			, Xow_domain_type_.Int__mediawiki)
+	.Add_str_int("wmf"			, Xow_domain_type_.Int__wmfblog)
 	;
 	private static final Xoud_opt_scope[] Ary_app = new Xoud_opt_scope[] {Xoud_opt_scope.App};
 }

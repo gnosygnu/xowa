@@ -16,17 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
-import gplx.xowa.wikis.domains.crts.*;
+import gplx.core.primitives.*; import gplx.xowa.langs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
-	private final Xow_domain cur_domain;
+	private final Xow_domain_itm cur_domain;
 	private final Xow_domain_crt_itm[] ary; private final int ary_len;
-	public Xow_domain_sorter__manual(Xow_domain cur_domain, Xow_domain_crt_itm[] ary) {
+	public Xow_domain_sorter__manual(Xow_domain_itm cur_domain, Xow_domain_crt_itm[] ary) {
 		this.cur_domain = cur_domain; this.ary = ary; this.ary_len = ary.length;
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
-		Xow_domain lhs = (Xow_domain)lhsObj;
-		Xow_domain rhs = (Xow_domain)rhsObj;
+		Xow_domain_itm lhs = (Xow_domain_itm)lhsObj;
+		Xow_domain_itm rhs = (Xow_domain_itm)rhsObj;
 		int lhs_sort = Get_sort_idx_or_neg1(lhs);
 		int rhs_sort = Get_sort_idx_or_neg1(rhs);
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
@@ -34,7 +34,7 @@ class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
 		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
 		else										return Bry_.Compare(lhs.Domain_bry(), rhs.Domain_bry());
 	}
-	private int Get_sort_idx_or_neg1(Xow_domain domain) {
+	private int Get_sort_idx_or_neg1(Xow_domain_itm domain) {
 		int sort_idx = domain.Sort_idx(); if (sort_idx != -1) return sort_idx;
 		sort_idx = Int_.MaxValue;
 		for (int i = 0; i < ary_len; ++i) {
@@ -44,7 +44,7 @@ class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
 		domain.Sort_idx_(sort_idx);
 		return sort_idx;
 	}
-	public static void Sort(Xow_domain_sorter__manual sorter, Xow_domain[] ary) {
+	public static void Sort(Xow_domain_sorter__manual sorter, Xow_domain_itm[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
 			ary[i].Sort_idx_(-1);
@@ -61,14 +61,14 @@ class Xow_domain_sorter__manual_tid implements gplx.lists.ComparerAble {
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
-		Xow_domain lhs = (Xow_domain)lhsObj;
-		Xow_domain rhs = (Xow_domain)rhsObj;
-		int lhs_sort = Get_sort_idx_or_neg1(lhs.Domain_tid());
-		int rhs_sort = Get_sort_idx_or_neg1(rhs.Domain_tid());
+		Xow_domain_itm lhs = (Xow_domain_itm)lhsObj;
+		Xow_domain_itm rhs = (Xow_domain_itm)rhsObj;
+		int lhs_sort = Get_sort_idx_or_neg1(lhs.Domain_type_id());
+		int rhs_sort = Get_sort_idx_or_neg1(rhs.Domain_type_id());
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
 		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(Xow_domain_type_.Get_type_as_bry(lhs.Domain_tid()), Xow_domain_type_.Get_type_as_bry(rhs.Domain_tid()));
+		else										return Bry_.Compare(Xow_domain_type_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_type_.Get_type_as_bry(rhs.Domain_type_id()));
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
 		Object o = sort_hash.Get_by(sort_key.Val_(tid));
@@ -95,14 +95,14 @@ class Xow_domain_sorter__manual_lang implements gplx.lists.ComparerAble {
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
-		Xow_domain lhs = (Xow_domain)lhsObj;
-		Xow_domain rhs = (Xow_domain)rhsObj;
-		int lhs_sort = Get_sort_idx_or_neg1(lhs.Lang_uid());
-		int rhs_sort = Get_sort_idx_or_neg1(rhs.Lang_uid());
+		Xow_domain_itm lhs = (Xow_domain_itm)lhsObj;
+		Xow_domain_itm rhs = (Xow_domain_itm)rhsObj;
+		int lhs_sort = Get_sort_idx_or_neg1(lhs.Lang_actl_uid());
+		int rhs_sort = Get_sort_idx_or_neg1(rhs.Lang_actl_uid());
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
 		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(lhs.Lang_key(), rhs.Lang_key());
+		else										return Bry_.Compare(lhs.Lang_actl_key(), rhs.Lang_actl_key());
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
 		Object o = sort_hash.Get_by(sort_key.Val_(tid));

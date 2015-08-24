@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.repos.*;
 public class Xof_fsdb_itm_fxt {
 	private byte[] wiki_abrv;
@@ -53,7 +53,7 @@ public class Xof_fsdb_itm_fxt {
 		return this;
 	}
 	public Xof_fsdb_itm_fxt Orig__commons__lnki() {
-		this.orig_repo_name = Xow_domain_.Domain_bry_commons;
+		this.orig_repo_name = Xow_domain_itm_.Bry__commons;
 		this.orig_repo_id = Xof_repo_itm_.Repo_remote;
 		this.orig_ttl = lnki_ttl;
 		this.orig_ext = Xof_ext_.new_by_ttl_(orig_ttl);
@@ -62,7 +62,7 @@ public class Xof_fsdb_itm_fxt {
 		return this;
 	}
 	public Xof_fsdb_itm_fxt Orig__enwiki__lnki() {
-		this.orig_repo_name = Xow_domain_.Domain_bry_enwiki;
+		this.orig_repo_name = Xow_domain_itm_.Bry__enwiki;
 		this.orig_repo_id = Xof_repo_itm_.Repo_local;
 		this.orig_ttl = lnki_ttl;
 		this.orig_ext = Xof_ext_.new_by_ttl_(orig_ttl);

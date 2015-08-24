@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
-import gplx.xowa.wmfs.*;
+import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.dumps.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
 //			Bld_import_list(Xow_wmf_api_mgr.Wikis);
@@ -29,17 +30,16 @@ public class Xoi_cmd_wiki_tst {
 		int ary_len = ary.length;
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		Wmf_latest_parser parser = new Wmf_latest_parser();
-		Xob_dump_file dump_file = new Xob_dump_file();
 		Bry_fmtr_arg_time time_fmtr = new Bry_fmtr_arg_time();
 		for (int i = 0; i < ary_len; i++)
-			Bld_import_list_itm2(bfr, parser, dump_file, time_fmtr, ary, i);
+			Bld_import_list_itm2(bfr, parser, time_fmtr, ary, i);
 		Io_mgr.I.SaveFilStr("C:\\temp.txt", bfr.Xto_str());
 	}
-	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Xob_dump_file dump_file, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
+	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
 		String domain_str = ary[i];
 		byte[] domain_bry = Bry_.new_a7(domain_str);
-		Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
-		byte[] wmf_key_bry = Bry_.Replace(Xow_wiki_alias.Build_alias(domain_itm), Byte_ascii.Dash, Byte_ascii.Underline);
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
+		byte[] wmf_key_bry = Bry_.Replace(Xow_abrv_wm_.To_abrv(domain_itm), Byte_ascii.Dash, Byte_ascii.Underline);
 		String wmf_key = String_.new_u8(wmf_key_bry);
 		String url = "https://dumps.wikimedia.org/" + wmf_key + "/latest";
 		byte[] latest_html = null;
@@ -51,13 +51,13 @@ public class Xoi_cmd_wiki_tst {
 		}
 		Tfds.Write("pass|" + url);
 		parser.Parse(latest_html);
-		dump_file.Ctor(domain_str, "latest", Xow_wiki_alias.Key_pages_articles);
-		dump_file.Server_url_(Xob_dump_file_.Server_wmf_https);
+		Xowm_dump_file dump_file = new Xowm_dump_file(domain_str, "latest", Xowm_dump_type_.Str__pages_articles);
+		dump_file.Server_url_(Xowm_dump_file_.Server_wmf_https);
 		byte[] pages_articles_key = Bry_.new_a7(wmf_key + "-latest-pages-articles.xml.bz2");
 		Wmf_latest_itm latest_itm = parser.Get_by(pages_articles_key);
 		bfr.Add(domain_bry).Add_byte_pipe();
 		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-		bfr.Add(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_tid())).Add_byte_pipe();
+		bfr.Add(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_type_id())).Add_byte_pipe();
 		long src_size = latest_itm.Size();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
 		bfr.Add_str(gplx.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
@@ -69,12 +69,12 @@ public class Xoi_cmd_wiki_tst {
 		bfr.Add_byte_nl();
 	}
 	/*
-	private void Bld_import_list_itm(Bry_bfr bfr, Xob_dump_file dump_file, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
+	private void Bld_import_list_itm(Bry_bfr bfr, Xowm_dump_file dump_file, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
 		String itm = ary[i];
-		dump_file.Ctor(itm, "latest", Xow_wiki_alias.Key_pages_articles);
+		dump_file.Ctor(itm, "latest", Xowm_dump_type_.Str__pages_articles);
 		int count = 0;
 		while (count++ < 1) {
-			dump_file.Server_url_(Xob_dump_file_.Server_wmf);
+			dump_file.Server_url_(Xowm_dump_file_.Server_wmf);
 			if (dump_file.Connect()) break;
 			Tfds.WriteText(String_.Format("retrying: {0} {1}\n", count, dump_file.File_modified()));
 			Thread_adp_.Sleep(15000);	// wait for connection to reset

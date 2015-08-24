@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.xowa.wikis.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.domains.*;
 public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private boolean repo_0_is_remote = false;
 	public Xob_orig_regy_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
@@ -25,7 +26,7 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_bgn(Xob_bldr bldr) {
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_orig_regy_tbl.Create_table(conn);
-		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons).Init_assert();
+		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Xowe_wiki repo_0 = wiki, repo_1 = commons_wiki;
 		if (repo_0_is_remote) {	// NOTE: default is false; local_wiki will be preferred over commons_wiki
 			repo_0 = commons_wiki;

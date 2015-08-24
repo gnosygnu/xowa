@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*;
-public class Xow_domain_abrv_xo__tst {
-	@Before public void init() {fxt.Clear();} private final Xow_domain_abrv_xo__fxt fxt = new Xow_domain_abrv_xo__fxt();
+public class Xow_abrv_xo__tst {
+	@Before public void init() {fxt.Clear();} private final Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
 	@Test  public void Basic() {
 		fxt.Test("en.wikipedia.org"			, "en.w");			// multi.enwiki
 		fxt.Test("fr.wiktionary.org"		, "fr.d");			// multi.frwiktionary
@@ -30,13 +30,13 @@ public class Xow_domain_abrv_xo__tst {
 		fxt.Test("a.b.c"					, "a.b.c");			// unkonwn
 	}
 }
-class Xow_domain_abrv_xo__fxt {
+class Xow_abrv_xo__fxt {
 	public void Clear() {}
 	public void Test(String domain_str, String expd_abrv) {
-		Xow_domain domain = Xow_domain_.parse(Bry_.new_u8(domain_str));
-		byte[] actl_abrv = Xow_domain_abrv_xo_.To_bry(domain.Domain_bry(), domain.Lang_itm(), domain.Domain_type());
+		Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_u8(domain_str));
+		byte[] actl_abrv = Xow_abrv_xo_.To_bry(domain.Domain_bry(), domain.Lang_actl_key(), domain.Domain_type());
 		Tfds.Eq(expd_abrv, String_.new_u8(actl_abrv), "To_bry");
-		domain = Xow_domain_abrv_xo_.To_itm(actl_abrv);
+		domain = Xow_abrv_xo_.To_itm(actl_abrv);
 		Tfds.Eq(domain_str, domain.Domain_str(), "To_itm");
 	}
 }

@@ -63,7 +63,7 @@ public class Site_meta_itm {
 					break;
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);
-			byte[] site_abrv = Xow_domain_abrv_xo_.To_bry(domain_bry);
+			byte[] site_abrv = Xow_abrv_xo_.To_bry(domain_bry);
 			json_db.Tbl__core().Insert(site_abrv, domain_bry, Bool_.N, json_date, json_text);
 		}
 
@@ -71,7 +71,7 @@ public class Site_meta_itm {
 		reqd_len = reqd_ary.length;
 		for (int i = 0; i < reqd_len; ++i) {
 			String domain_str = reqd_ary[i];
-			byte[] site_abrv = Xow_domain_abrv_xo_.To_bry(Bry_.new_u8(domain_str));
+			byte[] site_abrv = Xow_abrv_xo_.To_bry(Bry_.new_u8(domain_str));
 			Site_core_itm core_itm = json_db.Tbl__core().Select_itm(site_abrv);
 			if (core_itm.Json_completed()) continue;
 			Site_meta_itm meta_itm = new Site_meta_itm();

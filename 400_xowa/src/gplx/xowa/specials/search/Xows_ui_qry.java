@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 class Xows_ui_qry {
 	private final List_adp cmd_list = List_adp_.new_();
-	public Xows_ui_qry(byte[] search_raw, int page_idx, int page_len, byte sort_tid, Xows_ns_mgr ns_mgr, boolean async_db, Xow_domain[] wiki_domains) {
+	public Xows_ui_qry(byte[] search_raw, int page_idx, int page_len, byte sort_tid, Xows_ns_mgr ns_mgr, boolean async_db, Xow_domain_itm[] wiki_domains) {
 		this.search_raw = search_raw; this.page_idx = page_idx; this.page_len = page_len; this.sort_tid = sort_tid; this.ns_mgr = ns_mgr; this.async_db = async_db; this.wiki_domains = wiki_domains;
 		this.itms_bgn = page_idx * page_len;
 		this.page_max = page_idx;	// default page_max to page_idx; adjust later when all results are known
@@ -36,7 +36,7 @@ class Xows_ui_qry {
 	public int Itms_end() {return itms_bgn + page_len;}
 	public byte Sort_tid() {return sort_tid;} private final byte sort_tid;
 	public Xows_ns_mgr Ns_mgr() {return ns_mgr;} private final Xows_ns_mgr ns_mgr;
-	public Xow_domain[] Wiki_domains() {return wiki_domains;} private final Xow_domain[] wiki_domains;
+	public Xow_domain_itm[] Wiki_domains() {return wiki_domains;} private final Xow_domain_itm[] wiki_domains;
 	public void Page_max_(int v) {this.page_max = v;}
 	public int Cmds__len() {return cmd_list.Count();}
 	public Xows_ui_cmd Cmds__get_at(int i) {return (Xows_ui_cmd)cmd_list.Get_at(i);}

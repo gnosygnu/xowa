@@ -16,20 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wmfs.dumps.*;
 public class Xob_core_batch_utl implements GfoInvkAble {
-	public Xob_core_batch_utl(Xob_bldr bldr, byte[] raw) {this.bldr = bldr; fmtr.Fmt_(raw);} private Xob_bldr bldr;
-	Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
+	private final Xob_bldr bldr;
+	private final Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
+	public Xob_core_batch_utl(Xob_bldr bldr, byte[] raw) {this.bldr = bldr; fmtr.Fmt_(raw);}
 	private void Run() {
 		Io_url[] bz2_fils = Io_mgr.I.QueryDir_fils(bldr.App().Fsys_mgr().Wiki_dir().GenSubDir_nest(Dir_dump, "todo"));
 		Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 		int bz2_fils_len = bz2_fils.length;
-		Xow_wiki_alias bz2_fil = new Xow_wiki_alias();
 		for (int i = 0; i < bz2_fils_len; i++) {
 			Io_url bz2_fil_url = bz2_fils[i];
-			bz2_fil.Fil_(bz2_fil_url).Parse(bz2_fil_url.NameOnly());
-			fmtr.Bld_bfr_many(bfr, bz2_fil_url.Raw(), bz2_fil.Domain());
-			bldr.Usr_dlg().Note_many("", "", "starting script for ~{0}", String_.new_u8(bz2_fil.Domain()));
+			Xowm_dump_file dump_file = Xowm_dump_file_.parse(Bry_.new_u8(bz2_fil_url.NameOnly()));
+			String domain_str = dump_file.Domain_itm().Domain_str();
+			fmtr.Bld_bfr_many(bfr, bz2_fil_url.Raw(), domain_str);
+			bldr.Usr_dlg().Note_many("", "", "starting script for ~{0}", domain_str);
 			bldr.App().Gfs_mgr().Run_str(bfr.Xto_str_and_clear());
 		}
 	}

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.wikis.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.xowa.wikis.domains.*;
 class Wdata_slink_grp {
 	public Wdata_slink_grp(int tid, byte[] wiki_name, Xoapi_toggle_itm toggle_itm, Wdata_toc_data toc_data) {
 		this.tid = tid; this.wiki_name = wiki_name; this.toggle_itm = toggle_itm; this.toc_data = toc_data;
@@ -32,20 +33,20 @@ class Wdata_slink_grp {
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);				
-			int idx = Idx_by_tid(itm.Domain_info().Domain_tid());
+			int idx = Idx_by_tid(itm.Domain_info().Domain_type_id());
 			rv[idx].Rows().Add(itm.Site(), itm);
 		}
 	}
 	public static int Idx_by_tid(int tid) {
 		switch (tid) {
-			case Xow_domain_type_.Tid_wikipedia:			return Idx_w;
-			case Xow_domain_type_.Tid_wiktionary:		return Idx_d;
-			case Xow_domain_type_.Tid_wikisource:		return Idx_s;
-			case Xow_domain_type_.Tid_wikivoyage:		return Idx_v;
-			case Xow_domain_type_.Tid_wikiquote:			return Idx_q;
-			case Xow_domain_type_.Tid_wikibooks:			return Idx_b;
-			case Xow_domain_type_.Tid_wikiversity:		return Idx_u;
-			case Xow_domain_type_.Tid_wikinews:			return Idx_n;
+			case Xow_domain_type_.Int__wikipedia:			return Idx_w;
+			case Xow_domain_type_.Int__wiktionary:		return Idx_d;
+			case Xow_domain_type_.Int__wikisource:		return Idx_s;
+			case Xow_domain_type_.Int__wikivoyage:		return Idx_v;
+			case Xow_domain_type_.Int__wikiquote:			return Idx_q;
+			case Xow_domain_type_.Int__wikibooks:			return Idx_b;
+			case Xow_domain_type_.Int__wikiversity:		return Idx_u;
+			case Xow_domain_type_.Int__wikinews:			return Idx_n;
 			default:									return Idx_x;
 		}
 	}
@@ -65,14 +66,14 @@ class Wdata_slink_grp {
 	}
 	public static byte[] Name_by_tid(int idx) {
 		switch (idx) {
-			case Idx_w: return Xow_domain_type_.Key_bry_wikipedia;
-			case Idx_d: return Xow_domain_type_.Key_bry_wiktionary;
-			case Idx_s: return Xow_domain_type_.Key_bry_wikisource;
-			case Idx_v: return Xow_domain_type_.Key_bry_wikivoyage;
-			case Idx_q: return Xow_domain_type_.Key_bry_wikiquote;
-			case Idx_b: return Xow_domain_type_.Key_bry_wikibooks;
-			case Idx_u: return Xow_domain_type_.Key_bry_wikiversity;
-			case Idx_n: return Xow_domain_type_.Key_bry_wikinews;
+			case Idx_w: return Xow_domain_type_.Bry__wikipedia;
+			case Idx_d: return Xow_domain_type_.Bry__wiktionary;
+			case Idx_s: return Xow_domain_type_.Bry__wikisource;
+			case Idx_v: return Xow_domain_type_.Bry__wikivoyage;
+			case Idx_q: return Xow_domain_type_.Bry__wikiquote;
+			case Idx_b: return Xow_domain_type_.Bry__wikibooks;
+			case Idx_u: return Xow_domain_type_.Bry__wikiversity;
+			case Idx_n: return Xow_domain_type_.Bry__wikinews;
 			case Idx_x: return Name_special;
 			default:	throw Err_.new_unhandled(idx);
 		}

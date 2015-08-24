@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoh_imgs_mgr implements GfoInvkAble {
-	public Xoh_imgs_mgr(Xow_html_mgr html_mgr) {wiki_is_default = html_mgr.Wiki().Domain_tid() == Xow_domain_type_.Tid_home;} private boolean wiki_is_default;
+	public Xoh_imgs_mgr(Xow_html_mgr html_mgr) {wiki_is_default = html_mgr.Wiki().Domain_tid() == Xow_domain_type_.Int__home;} private boolean wiki_is_default;
 	public Bool_obj_ref Alt_in_caption() {return alt_in_caption;} Bool_obj_ref alt_in_caption = Bool_obj_ref.y_();
 	public Bool_obj_ref Alt_defaults_to_caption() {return alt_defaults_to_caption;} Bool_obj_ref alt_defaults_to_caption = Bool_obj_ref.y_();
 	public void Copy_cfg(Xoh_imgs_mgr copy) {this.alt_in_caption = copy.alt_in_caption;}

@@ -108,7 +108,7 @@ public class Site_core_db {
 	public Xow_ns_mgr Load_ns(byte[] domain_bry) {
 		Xow_ns_mgr rv = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
 		Ordered_hash namespace_hash = Ordered_hash_.new_();
-		tbl__namespace.Select(gplx.xowa.wikis.domains.Xow_domain_abrv_xo_.To_bry(domain_bry), namespace_hash);
+		tbl__namespace.Select(gplx.xowa.wikis.domains.Xow_abrv_xo_.To_bry(domain_bry), namespace_hash);
 		Ns_mgr__load(rv, namespace_hash);
 		return rv;
 	}

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.wikis.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
+import gplx.xowa.wikis.domains.*;
 public class Xow_repo_mgr_ {
 	public static void Assert_repos(Xoae_app app, Xowe_wiki wiki) {
 		Xoa_repo_mgr repo_mgr = app.File_mgr().Repo_mgr(); 
@@ -32,7 +33,7 @@ public class Xow_repo_mgr_ {
 		if (pair_mgr.Repos_len() == 0) {	// no pairs defined; add at least 1
 			Xof_repo_itm repo_src = repo_mgr.Get_by(File_repo_xowa_null);
 			if (repo_src == null) {
-				repo_itm = new Xof_repo_itm(File_repo_xowa_null, app_fsys_mgr, ext_rule_mgr, Xow_domain_type_.Key_bry_home);
+				repo_itm = new Xof_repo_itm(File_repo_xowa_null, app_fsys_mgr, ext_rule_mgr, Xow_domain_type_.Bry__home);
 				repo_mgr.Add(repo_itm);
 			}
 			pair_mgr.Add_repo(File_repo_xowa_null, domain_bry);

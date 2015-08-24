@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.xowa.wikis.*; import gplx.xowa.apis.xowa.specials.*;
-import gplx.xowa.wikis.domains.crts.*;
+import gplx.core.primitives.*; import gplx.xowa.apis.xowa.specials.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
-	private final Xoae_app app; private final Xow_domain wiki_domain; private final Xoapi_search search_api;		
+	private final Xoae_app app; private final Xow_domain_itm wiki_domain; private final Xoapi_search search_api;		
 	private final Xows_core search_mgr; private final Xows_arg_mgr args_mgr = new Xows_arg_mgr();
-	private Xow_domain[] search_domain_ary;
+	private Xow_domain_itm[] search_domain_ary;
 	public Xows_page__search(Xowe_wiki wiki) {
 		this.app = wiki.Appe();
 		this.wiki_domain = wiki.Domain_itm();
@@ -35,7 +35,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	private void Multi_wikis_changed() {
 		Xow_domain_crt_itm crt = search_api.Multi_wikis_crt(wiki_domain);
 		this.search_domain_ary = app.Usere().Wiki().Xwiki_mgr().Get_by_crt(wiki_domain, crt);
-		if (search_domain_ary.length == 0) search_domain_ary = new Xow_domain[] {wiki_domain};	// default to current if bad input
+		if (search_domain_ary.length == 0) search_domain_ary = new Xow_domain_itm[] {wiki_domain};	// default to current if bad input
 		Multi_sorts_changed();
 	}
 	private void Multi_sorts_changed() {
@@ -45,7 +45,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		Xow_domain_sorter__manual.Sort(sorter, search_domain_ary);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		if (wiki.Domain_tid() == Xow_domain_type_.Tid_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
+		if (wiki.Domain_tid() == Xow_domain_type_.Int__home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
 		if (search_domain_ary == null) Multi_wikis_changed();
 		// get args
 		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();

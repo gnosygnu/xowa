@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*;
+import gplx.core.btries.*; import gplx.html.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
@@ -428,7 +429,7 @@ public class Xoh_html_wtr {
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
 					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
-						||	page.Wiki().Domain_tid() == Xow_domain_type_.Tid_home) {		// page is in home wiki
+						||	page.Wiki().Domain_tid() == Xow_domain_type_.Int__home) {		// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;
 					}

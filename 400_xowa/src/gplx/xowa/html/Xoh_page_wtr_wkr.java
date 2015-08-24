@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*; import gplx.xowa.pages.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.langs.vnts.*;
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 	private Xop_ctx ctx; private Xoae_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	private byte[] root_dir_bry;
@@ -108,7 +108,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Page_db(), data_raw); break;
 			}
 		}
-		if (	wiki.Domain_tid() != Xow_domain_type_.Tid_home	// allow home wiki to use javascript
+		if (	wiki.Domain_tid() != Xow_domain_type_.Int__home	// allow home wiki to use javascript
 			&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
 			app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 		}

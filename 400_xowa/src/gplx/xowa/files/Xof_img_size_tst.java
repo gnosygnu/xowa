@@ -81,6 +81,9 @@ public class Xof_img_size_tst {
 	@Test  	public void Video__use_orig_w(){ // PURPOSE: video should use orig_w; DATE:2015-08-07
 		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(500, 250).Test_html(500, 250, Bool_.N);
 	}
+	@Test  	public void Video__use_thumb(){ // PURPOSE: video should use thumb_w, not orig_w; PAGE:en.w:Edward_Snowden DATE:2015-08-17
+		fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(440, 220).Test_html(220, 110, Bool_.N);
+	}
 }
 class Xof_img_size_fxt {
 	private Xof_img_size img_size = new Xof_img_size();

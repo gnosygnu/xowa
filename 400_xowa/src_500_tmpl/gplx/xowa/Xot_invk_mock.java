@@ -67,9 +67,9 @@ public class Xot_invk_mock implements Xot_invk {
 			String kv_key_str = kv.Key();
 			Object kv_key_obj = kv.Key_as_obj();
 			Arg_nde_tkn_mock nde_tkn = null;
-			if		(ClassAdp_.Eq_typeSafe(kv_key_obj, Int_.Cls_ref_type))					// key is int; EX: 1 => val
+			if		(Type_adp_.Eq_typeSafe(kv_key_obj, Int_.Cls_ref_type))					// key is int; EX: 1 => val
 				nde_tkn = new Arg_nde_tkn_mock(null, kv.Val_to_str_or_empty());			// add w/o key
-			else if	(ClassAdp_.Eq_typeSafe(kv.Val(), Bool_.Cls_ref_type)) {					// val is boolean; EX: key => true || key => false
+			else if	(Type_adp_.Eq_typeSafe(kv.Val(), Bool_.Cls_ref_type)) {					// val is boolean; EX: key => true || key => false
 				boolean kv_val_bool = Bool_.cast_(kv.Val());
 				if (kv_val_bool)
 					nde_tkn = new Arg_nde_tkn_mock(kv_key_str, "1");					// true => 1 (PHP behavior)

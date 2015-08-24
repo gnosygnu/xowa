@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.gfui.*;
 import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.wmfs.dumps.*;
 class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_thread_cmd {	private Xoi_setup_mgr install_mgr; private String wiki_key, dump_date, dump_type;
 	public Xoi_cmd_wiki_download Ctor_download_(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {
 		this.install_mgr = install_mgr;
@@ -31,8 +32,8 @@ class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_threa
 	@Override public String Async_key() {return Key_wiki_download;}  public static final String Key_wiki_download = "wiki.download";
 	@Override public byte Async_init() {
 		Xoae_app app = install_mgr.App();
-		Xob_dump_file dump_file = Xob_dump_file.new_(wiki_key, dump_date, dump_type);
-		boolean connected = Xob_dump_file_.Connect_first(dump_file, install_mgr.Dump_mgr().Server_urls());
+		Xowm_dump_file dump_file = new Xowm_dump_file(wiki_key, dump_date, dump_type);
+		boolean connected = Xowm_dump_file_.Connect_first(dump_file, install_mgr.Dump_mgr().Server_urls());
 		if (connected)
 			app.Usr_dlg().Note_many("", "", "url: ~{0}", dump_file.File_url());
 		else {
@@ -41,7 +42,7 @@ class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_threa
 				Dump_servers_offline_msg_shown = true;
 			}
 		}
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(dump_file.Wiki_type().Domain_bry());
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(dump_file.Domain_itm().Domain_bry());
 		Io_url root_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url[] trg_fil_ary = Io_mgr.I.QueryDir_args(root_dir).FilPath_("*." + dump_type + Download_file_ext() + "*").ExecAsUrlAry();
 		Io_url trg = trg_fil_ary.length == 0 ? root_dir.GenSubFil(dump_file.File_name()) : trg_fil_ary[0];

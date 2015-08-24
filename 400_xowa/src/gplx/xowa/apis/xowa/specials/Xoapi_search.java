@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.crts.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 	private final Xow_domain_crt_kv_itm_mgr multi_wikis_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_wikis_bry = Dflt_multi_wikis_bry;
 	private final Xow_domain_crt_kv_itm_mgr multi_sorts_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_sorts_bry = Dflt_multi_sorts_bry;
@@ -33,7 +33,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 		this.multi_wikis_bry = v;
 		GfoEvMgr_.PubVal(this, Evt_multi_wikis_changed, v);
 	}
-	public Xow_domain_crt_itm Multi_wikis_crt(Xow_domain cur_domain) {
+	public Xow_domain_crt_itm Multi_wikis_crt(Xow_domain_itm cur_domain) {
 		return multi_wikis_mgr.Find_itm(cur_domain, cur_domain);
 	}
 	public void Multi_sorts_bry_(byte[] v) {
@@ -41,7 +41,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 		this.multi_sorts_bry = v;
 		GfoEvMgr_.PubVal(this, Evt_multi_sorts_changed, v);
 	}
-	public Xow_domain_crt_itm[] Multi_sorts_crt(Xow_domain cur_domain) {
+	public Xow_domain_crt_itm[] Multi_sorts_crt(Xow_domain_itm cur_domain) {
 		return multi_sorts_mgr.Find_ary(cur_domain, cur_domain);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

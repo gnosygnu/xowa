@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.langs.*;
 class Http_server_wkr_ {
 	public static String Assert_main_page(Xoae_app app, String req) {
 		int mode = -1;
@@ -27,8 +27,8 @@ class Http_server_wkr_ {
 		if (mode == -1) return req;	// not a link to a Main Page; EX:localhost:8080/en.wikipedia.org/wiki/Earth
 		if (req_array.length < 3) return req; // shouldn't happen; EX: "localhost:8080wiki"
 		byte[] wiki_domain = Bry_.new_u8(req_array[1]);
-		Xow_domain domain_itm = Xow_domain_.parse(wiki_domain);
-		if (domain_itm.Domain_tid() == Xow_domain_type_.Tid_other && domain_itm.Lang_itm().Id() == Xol_lang_itm_.Id__intl) return req;
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(wiki_domain);
+		if (domain_itm.Domain_type_id() == Xow_domain_type_.Int__other && domain_itm.Lang_actl_itm().Id() == Xol_lang_itm_.Id__intl) return req;
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);
 		wiki.Init_assert();
 		String main_page = String_.new_u8(wiki.Props().Main_page());

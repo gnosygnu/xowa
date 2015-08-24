@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
+import gplx.xowa.xtns.wdatas.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
 import gplx.xowa.bldrs.css.*;
+import gplx.xowa.wikis.domains.*;
 public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	private Xob_bldr bldr; private Xowe_wiki wiki; private Gfo_usr_dlg usr_dlg;
 	private byte wbase_enabled = Bool_.__byte;
@@ -27,7 +28,7 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
 	public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
 		bldr.Import_marker().Bgn(wiki);
-		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_type_.Tid_wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
+		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_type_.Int__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
 		if (wbase_enabled == Bool_.Y_byte)		// if wbase_enabled, auto-add wdata_wkrs bldr
 			this.Cmd_ini_wdata(bldr, wiki);
 	}

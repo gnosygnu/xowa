@@ -211,11 +211,11 @@ public class Xoh_file_wtr__basic {
 		return scratch_bfr.Xto_bry_and_clear();				
 	}
 	private static byte[] Arg_anchor_title(Bry_bfr tmp_bfr, byte[] src, Xop_lnki_tkn lnki, byte[] lnki_ttl, Xoh_lnki_title_fmtr anchor_title_wkr) {
-		if		(	Enm_.HasInt(lnki.Lnki_type(), Xop_lnki_type.Id_thumb)
-				||	Enm_.HasInt(lnki.Lnki_type(), Xop_lnki_type.Id_frame)			// If the image is a thumb, do not add a title / alt, even if a caption is available
+		if		(	Enm_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_thumb)
+				||	Enm_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_frame)			// If the image is a thumb, do not add a title / alt, even if a caption is available
 				)
 					return Bry_.Empty;
-		else if	(	Enm_.HasInt(lnki.Lnki_type(), Xop_lnki_type.Id_frameless)) {	// If the image is frameless, add the caption as a title / alt. If no caption is available, do not add a title / alt
+		else if	(	Enm_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_frameless)) {	// If the image is frameless, add the caption as a title / alt. If no caption is available, do not add a title / alt
 		}
 		Xop_tkn_itm anchor_title_tkn = lnki.Caption_tkn();
 		if (anchor_title_tkn == Xop_tkn_null.Null_tkn) return Bry_.Empty; // no caption; return empty; (do not use lnki); DATE:2013-12-31

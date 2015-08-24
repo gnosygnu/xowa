@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wmfs.data.*;
 class Xob_wbase_ns_parser {
 	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs();
@@ -32,7 +32,7 @@ class Xob_wbase_ns_parser {
 		int colon_pos = Bry_finder.Find_fwd(ttl, Byte_ascii.Colon, 0, ttl_len); if (colon_pos == Bry_finder.Not_found) return;
 		if (ns_mgr == null) {			// ns_mgr not found; load from db
 			wiki_abrv = Bry_.Replace(wiki_abrv, Byte_ascii.Underline, Byte_ascii.Dash);
-			byte[] wiki_domain = Xow_wiki_alias.Parse__domain_name(wiki_abrv, 0, wiki_abrv.length);
+			byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(wiki_abrv);
 			ns_mgr = core_db.Load_ns(wiki_domain);
 			if (ns_mgr.Count() == 0) {Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.ns_parser:no ns found; abrv=~{0}", wiki_abrv); return;}
 			ns_mgr_hash.Add_bry_obj(wiki_abrv, ns_mgr);

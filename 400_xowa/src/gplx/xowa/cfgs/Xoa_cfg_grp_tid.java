@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Xoa_cfg_grp_tid {
 	public byte Tid() {return tid;} private byte tid;
 	public byte[] Key() {return key;} private byte[] key;
@@ -31,12 +31,12 @@ public class Xoa_cfg_grp_tid {
 			if		(Bry_.Eq(key, Key_all_bry)) rv.tid = Tid_all;
 			else if	(Bry_.Eq(key, Key_app_bry)) rv.tid = Tid_app;
 			else {
-				Xow_domain wiki_type = Xow_domain_.parse(key);
-				if (wiki_type.Domain_tid() == Xow_domain_type_.Tid_other)
+				Xow_domain_itm wiki_type = Xow_domain_itm_.parse(key);
+				if (wiki_type.Domain_type_id() == Xow_domain_type_.Int__other)
 					rv.tid = Tid_wiki;
 				else {
 					rv.tid = Tid_type;
-					rv.wiki_tid = wiki_type.Domain_tid();
+					rv.wiki_tid = wiki_type.Domain_type_id();
 				}				
 			}
 			rv.key = key;

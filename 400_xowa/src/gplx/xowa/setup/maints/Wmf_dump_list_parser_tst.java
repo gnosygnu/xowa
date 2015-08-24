@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 import org.junit.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 public class Wmf_dump_list_parser_tst {
 	@Before public void init() {fxt.Clear();} private Wmf_dump_list_parser_fxt fxt = new Wmf_dump_list_parser_fxt();
 	@Test  public void Parse() {
@@ -41,7 +41,7 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// MAINT:QUARTERLY:2015-03-01; must run C:\xowa\ and update dump status
+//		@Test  public void Update() {	// MAINT:QUARTERLY:2015-08-23; must run C:\xowa\ and update dump status
 //			Hash_adp_bry excluded_domains = Hash_adp_bry.cs().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
@@ -49,7 +49,7 @@ public class Wmf_dump_list_parser_tst {
 //			, "usability.wikipedia.org", "vote.wikipedia.org"
 //			, "bd.wikimedia.org", "dk.wikimedia.org", "mx.wikimedia.org", "nyc.wikimedia.org", "nz.wikimedia.org", "pa-us.wikimedia.org", "rs.wikimedia.org", "ua.wikimedia.org"
 //			);
-//			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr.I.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
+//			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr.I.LoadFilBry("C:\\xowa\\bin\\any\\xowa\\xtns\\xowa\\maintenance\\backup-index.html"));
 //			Array_.Sort(itms);
 //			Bry_bfr sql_bfr = Bry_bfr.new_();
 //			Bry_bfr bld_bfr = Bry_bfr.new_();
@@ -59,12 +59,12 @@ public class Wmf_dump_list_parser_tst {
 //				Wmf_dump_itm itm = itms[i];
 //				byte[] abrv = itm.Wiki_abrv();
 //				if (Bry_.Eq(abrv, Bry_.new_a7("testwikidatawiki"))) continue;
-//				byte[] domain_bry = Xow_wiki_alias.Parse__domain_name(abrv, 0, abrv.length);
+//				byte[] domain_bry = Xow_abrv_wm_.Parse_to_domain_bry(abrv);
 //				if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
 //				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_a7("wikimania")) != Bry_.NotFound) continue;
 //				if (excluded_domains.Has(domain_bry)) continue;
-//				Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_tid()));
+//				Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
+//				byte[] tid_name = Xto_display_name(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_type_id()));
 //				sql_bfr
 //					.Add_byte(Byte_ascii.Paren_bgn)
 //					.Add_int_variable(counter++)
@@ -97,9 +97,9 @@ public class Wmf_dump_list_parser_tst {
 ////			Io_mgr.I.AppendFilBfr(temp, bld_bfr);
 //		}
 //		private static byte[] Xto_display_name(byte[] v) {
-//			if		(Bry_.Eq(v, Xow_domain_type_.Key_bry_wmforg))	return Bry_.new_a7("Wikimedia Foundation");
-//			else if	(Bry_.Eq(v, Xow_domain_type_.Key_bry_species))				return Bry_.new_a7("Wikispecies");
-//			else if	(Bry_.Eq(v, Xow_domain_type_.Key_bry_mediawiki))				return Bry_.new_a7("MediaWiki");
+//			if		(Bry_.Eq(v, Xow_domain_type_.Bry__wmforg))				return Bry_.new_a7("Wikimedia Foundation");
+//			else if	(Bry_.Eq(v, Xow_domain_type_.Bry__species))				return Bry_.new_a7("Wikispecies");
+//			else if	(Bry_.Eq(v, Xow_domain_type_.Bry__mediawiki))			return Bry_.new_a7("MediaWiki");
 //			else															return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
 //		}
 }

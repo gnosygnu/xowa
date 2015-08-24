@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.core.json.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoae_page page) {this.page = page; return this;} private Xoae_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {
@@ -29,8 +31,8 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public static byte[] Write_wdata_links(List_adp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
 		try {
 			switch (wiki.Domain_tid()) {
-				case Xow_domain_type_.Tid_home:		// home will never be in wikidata
-				case Xow_domain_type_.Tid_wikidata:	// wikidata will never be in wikidata
+				case Xow_domain_type_.Int__home:		// home will never be in wikidata
+				case Xow_domain_type_.Int__wikidata:	// wikidata will never be in wikidata
 					return Qid_null;
 			}
 			Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
@@ -38,18 +40,17 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			Ordered_hash links = doc.Slink_list();
 			Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_k004();
-			Xow_wiki_abrv wiki_abrv = new Xow_wiki_abrv();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {
 				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)links.Get_at(i);
 				byte[] xwiki_key = slink.Site();
-				Xow_wiki_abrv_.parse_(wiki_abrv, xwiki_key, 0, xwiki_key.length);
-				if (wiki_abrv.Domain_tid() == Xow_wiki_abrv_.Tid_null) {
+				Xow_abrv_wm abrv_itm = Xow_abrv_wm_.Parse_to_abrv_or_null(xwiki_key);
+				if (abrv_itm == null) {
 					wiki.Appe().Usr_dlg().Warn_many("", "", "unknown wiki in wikidata: ttl=~{0} wiki=~{1}", ttl.Page_db_as_str(), String_.new_u8(xwiki_key));
 					continue;
 				}
-				if (wiki_abrv.Domain_tid() != wiki.Domain_tid()) continue;	// ignore wikis in a different domain; EX: looking at enwiki:Earth, and wikidata has dewikiquote; ignore dewikiquote; DATE:2014-06-21
-				byte[] lang_key = wiki_abrv.Lang_itm().Key();
+				if (abrv_itm.Domain_type() != wiki.Domain_tid()) continue;	// ignore wikis in a different domain; EX: looking at enwiki:Earth, and wikidata has dewikiquote; ignore dewikiquote; DATE:2014-06-21
+				byte[] lang_key = abrv_itm.Lang_actl().Key();
 				if (external_links_mgr_enabled && external_links_mgr.Langs_hide(lang_key, 0, lang_key.length)) continue;
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);

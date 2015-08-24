@@ -19,6 +19,7 @@ package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.net.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.html.hrefs.*;
+import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private Xow_xwiki_mgr_srl srl;
 	private final Ordered_hash list = Ordered_hash_.new_bry_();
@@ -39,10 +40,10 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public Xow_xwiki_itm Add_full(byte[] alias, byte[] domain_bry, byte[] url_fmt) {
 		int domain_tid = Byte_.Zero;
 		int lang_id = -1;
-		Xow_domain wiki_type = Xow_domain_.parse(domain_bry);
-		domain_tid = wiki_type.Domain_tid();
-		if (Bry_.Len_gt_0(wiki_type.Lang_key())) {	// domain_bry has lang (EX: "en.")
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
+		Xow_domain_itm wiki_type = Xow_domain_itm_.parse(domain_bry);
+		domain_tid = wiki_type.Domain_type_id();
+		if (Bry_.Len_gt_0(wiki_type.Lang_actl_key())) {	// domain_bry has lang (EX: "en.")
+			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_actl_key());
 			if (lang_itm == null) return null;	// unknown lang: do not add to wiki collection; EX: en1.wikipedia.org
 			lang_id = lang_itm.Id();
 		}
@@ -53,16 +54,16 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public void Sort_by_key() {
 		list.Sort();
 	}
-	public Xow_domain[] Get_by_crt(Xow_domain cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
+	public Xow_domain_itm[] Get_by_crt(Xow_domain_itm cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
 		List_adp rv = List_adp_.new_();
 		int len = this.Len();
 		for (int i = 0; i < len; ++i) {
 			Xow_xwiki_itm wiki = this.Get_at(i);
 			if (!wiki.Offline()) continue;
-			Xow_domain domain_itm = Xow_domain_.parse(wiki.Domain_bry());
+			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(wiki.Domain_bry());
 			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
 		}
-		return (Xow_domain[])rv.To_ary_and_clear(Xow_domain.class);
+		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
 	}
 	public void Add_bulk(byte[] raw) {
 		byte[][] rows = Bry_.Split(raw, Byte_ascii.Nl);
@@ -86,16 +87,16 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				default:	throw Err_.new_unhandled(j);
 			}
 		}
-		Xow_domain domain = Xow_domain_.parse(domain_bry);
+		Xow_domain_itm domain = Xow_domain_itm_.parse(domain_bry);
 		int lang_id = Xol_lang_itm_.Id__unknown;
-		if (Bry_.Len_gt_0(domain.Lang_key())) {
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_key());
+		if (Bry_.Len_gt_0(domain.Lang_actl_key())) {
+			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_actl_key());
 			if (lang_itm != null						// lang exists
 				&& Bry_.Eq(alias, lang_itm.Key()))	// alias == lang.key; only assign langs to aliases that have lang key; EX: w|en.wikipedia.org; "w" alias should not be registered for "en"; DATE:2013-07-25
 				lang_id = lang_itm.Id();
 		}
 		byte[] url_fmt = Bry_.Add(Xoh_href_.Bry__https, domain_bry, Xoh_href_.Bry__wiki, Arg_0);
-		return Xow_xwiki_itm.new_(alias, url_fmt, lang_id, domain.Domain_tid(), domain_bry);
+		return Xow_xwiki_itm.new_(alias, url_fmt, lang_id, domain.Domain_type_id(), domain_bry);
 	}	static final byte[] Arg_0 = Bry_.new_a7("~{0}");
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");
@@ -105,7 +106,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		for (int i = 0; i < wikis_len; i++) {
 			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.Get_at(i);
 			byte[] key = itm.Key_bry();
-			if (Bry_.Eq(key, Xow_domain_type_.Key_bry_home)) continue;	// skip home
+			if (Bry_.Eq(key, Xow_domain_type_.Bry__home)) continue;	// skip home
 			byte[] domain = itm.Domain_bry();
 			if (seen.Has(domain)) continue;
 			seen.Add_as_key_and_val(domain);
@@ -139,13 +140,13 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			String domain_str = null;
 			int domain_tid = Xow_domain_type_.Get_type_as_tid(wiki_name_bry);
 			switch (domain_tid) {
-				case Xow_domain_type_.Tid_commons:
-				case Xow_domain_type_.Tid_species:
-				case Xow_domain_type_.Tid_meta:
-				case Xow_domain_type_.Tid_incubator:			domain_str = String_.Format("{0}.wikimedia.org", wiki_name); break;			// EX: commons.wikimedia.org
-				case Xow_domain_type_.Tid_wikidata:				domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
-				case Xow_domain_type_.Tid_mediawiki:			domain_str = String_.Format("www.mediawiki.org", wiki_name); break;
-				case Xow_domain_type_.Tid_wmfblog:	domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
+				case Xow_domain_type_.Int__commons:
+				case Xow_domain_type_.Int__species:
+				case Xow_domain_type_.Int__meta:
+				case Xow_domain_type_.Int__incubator:			domain_str = String_.Format("{0}.wikimedia.org", wiki_name); break;			// EX: commons.wikimedia.org
+				case Xow_domain_type_.Int__wikidata:				domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
+				case Xow_domain_type_.Int__mediawiki:			domain_str = String_.Format("www.mediawiki.org", wiki_name); break;
+				case Xow_domain_type_.Int__wmfblog:	domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
 				default:										domain_str = String_.Format("{0}.{1}.org", lang_key_str, wiki_name); break;	// EX: en.wiktionary.org
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);

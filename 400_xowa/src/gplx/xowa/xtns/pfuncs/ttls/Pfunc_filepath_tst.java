@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.dbs.*;
 import gplx.xowa.tdbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.domains.*;
 public class Pfunc_filepath_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	private final Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
@@ -31,7 +31,7 @@ public class Pfunc_filepath_tst {
 		Xoae_app app = fxt.App();
 		en_wiki = fxt.Wiki();
 		// Init_orig_mgr(en_wiki);
-		commons_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_.Domain_str_commons);
+		commons_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__commons);
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
 		en_wiki.File_mgr().Repo_mgr().Page_finder_(mock_wkr);
 		commons_wiki.Db_mgr().Load_mgr().Clear();

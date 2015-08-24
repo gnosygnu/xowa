@@ -258,11 +258,11 @@ interface XtoStrWkr {
 class XtoStrWkr_gplx implements XtoStrWkr {
 	public String To_str(Object o) {
 		if (o == null) return "<<NULL>>";
-		Class<?> type = ClassAdp_.ClassOf_obj(o);
+		Class<?> type = Type_adp_.ClassOf_obj(o);
 		String rv = null;
 		if		(type == String.class)	rv = String_.cast_(o);
 		else if (Int_.TypeMatch(type))		return Int_.Xto_str(Int_.cast_(o));
-		else if (ClassAdp_.Eq(type, Bool_.Cls_ref_type))		return Yn.Xto_str(Bool_.cast_(o));
+		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		return Yn.Xto_str(Bool_.cast_(o));
 		else if (type == DateAdp.class)	return DateAdp_.cast_(o).XtoStr_gplx();
 		else								rv = Object_.Xto_str_strict_or_empty(o);
 		return String_.Replace(rv, "'", "''");

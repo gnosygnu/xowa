@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.wikis.domains.crts.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	private Xoae_app app;
 	private List_adp list = List_adp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
@@ -51,7 +52,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		return rv;
 	}
 	public Xowe_wiki Wiki_commons() {
-		Xowe_wiki rv = this.Get_by_key_or_null(Xow_domain_.Domain_bry_commons);
+		Xowe_wiki rv = this.Get_by_key_or_null(Xow_domain_itm_.Bry__commons);
 		if (rv != null) rv.Init_assert();
 		return rv;
 	}
@@ -93,13 +94,14 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	}	private static final String Invk_get = "get", Invk_groups = "groups", Invk_scripts = "scripts", Invk_wdata = "wdata";
 	private static final String Invk_len = "len", Invk_get_at = "get_at";
 	private Xowe_wiki New_wiki(byte[] key) {
-		Xow_domain domain_itm = Xow_domain_.parse(key);
-		byte[] lang_key = domain_itm.Lang_key();
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(key);
+		byte[] lang_key = domain_itm.Lang_actl_key();
 		if (lang_key == Xol_lang_itm_.Key__unknown) lang_key = Xol_lang_.Key_en;	// unknown langs default to english; note that this makes nonwmf english by default
-		Xol_lang lang = 
-			domain_itm.Domain_tid() == Xow_domain_type_.Tid_other
-			?  new Xol_lang(app.Lang_mgr(), Xol_lang_.Key_en).Kwd_mgr__strx_(true)
-			: app.Lang_mgr().Get_by_key_or_new(lang_key);			
+		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(lang_key);			
+		if (domain_itm.Domain_type_id() == Xow_domain_type_.Int__other) {
+			lang = new Xol_lang(app.Lang_mgr(), Xol_lang_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
+			Xol_lang_.Lang_init(lang);
+		}
 		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(domain_itm.Domain_str());
 		Xowe_wiki rv = new Xowe_wiki(app, lang, ns_mgr, domain_itm, wiki_dir);

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.files.xfers.*;
 public class Xoa_available_wikis_mgr implements GfoInvkAble {
 	private Bry_fmtr itms_as_html_fmtr = Bry_fmtr.new_("\n        <li><a href=\"/site/~{domain}/\"~{itm_cls}>~{domain}</a></li>", "domain", "itm_cls");
 	public Xoa_available_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
@@ -29,7 +30,7 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 			int len = xwiki_mgr.Len();
 			for (int i = 0; i < len; i++) {
 				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
-				if (itm.Domain_tid() == Xow_domain_type_.Tid_home) continue;// don't show home wiki
+				if (itm.Domain_tid() == Xow_domain_type_.Int__home) continue;// don't show home wiki
 				if (!itm.Offline()) continue;	// only show items marked Offline (added by Available_from_fsys); DATE:2014-09-21
 				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain_bry(), itm_cls);
 			}

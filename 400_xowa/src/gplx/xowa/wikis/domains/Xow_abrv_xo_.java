@@ -17,21 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.*;
-public class Xow_domain_abrv_xo_ {
+public class Xow_abrv_xo_ {
 	public static byte[] To_bry(byte[] domain_bry) {
-		Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
-		return Xow_domain_abrv_xo_.To_bry(domain_itm.Domain_bry(), domain_itm.Lang_orig_itm(), domain_itm.Domain_type());
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
+		return Xow_abrv_xo_.To_bry(domain_itm.Domain_bry(), domain_itm.Lang_orig_key(), domain_itm.Domain_type());
 	}
-	public static byte[] To_bry(byte[] domain_bry, Xol_lang_itm lang, Xow_domain_type type) {	// en.wikipedia.org -> en.w			
+	public static byte[] To_bry(byte[] domain_bry, byte[] lang_key, Xow_domain_type type) {	// en.wikipedia.org -> en.w			
 		byte[] type_abrv = type.Abrv();
 		if		(type.Multi_lang())			// wikipedia,wiktionary,etc..
-			return Bry_.Add(lang.Key(), Byte_ascii.Dot_bry, type_abrv);
+			return Bry_.Add(lang_key, Byte_ascii.Dot_bry, type_abrv);
 		else if (type_abrv.length > 0)		// commons,wbase,species,etc..
 			return type_abrv;
 		else								// home;wikia;others
 			return domain_bry;
 	}
-	public static Xow_domain To_itm(byte[] src) {
+	public static Xow_domain_itm To_itm(byte[] src) {
 		int src_len = src.length;
 		byte[] domain_bry = src;	// default to src; handles unknown abrv like "a.wikia.com";"xowa";others
 		Xow_domain_type type = null;
@@ -50,6 +50,6 @@ public class Xow_domain_abrv_xo_ {
 				domain_bry = type.Domain_bry();
 			}
 		}
-		return Xow_domain_.parse(domain_bry);	// for consolidation's sake, parse abrv to domain_bry and pass to Xow_domain_.parse_()
+		return Xow_domain_itm_.parse(domain_bry);	// for consolidation's sake, parse abrv to domain_bry and pass to Xow_domain_itm_.parse_()
 	}
 }
