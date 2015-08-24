@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_windows_64_v2.8.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_windows_64_v2.8.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_windows_v2.8.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_windows_v2.8.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_linux_64_v2.8.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_linux_64_v2.8.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_linux_v2.8.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_linux_v2.8.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_macosx_64_v2.8.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_macosx_64_v2.8.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.3.1/xowa_app_macosx_v2.8.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.4.1/xowa_app_macosx_v2.8.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.8.3.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.8.4.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -55,14 +55,35 @@
     </h2>
 
     <h2>
-      <span class='mw-headline' id='v2.8.3.1_.282015-08-17.29'>v2.8.3.1 (2015-08-17)</span>
+      <span class='mw-headline' id='v2.8.4.1_.282015-08-24.29'>v2.8.4.1 (2015-08-24)</span>
     </h2>
     <p>
-      <b>package</b>
+      <b>fix</b>
     </p>
     <ul>
       <li>
-        Package: Release images for 2015-08 English Wikipedia. See: <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-08-05_file_v2b.7z" class="external text" rel="nofollow">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-08-05_file_v2b.7z</a>
+        Import: Fix broken urls for wikimedia wikis (affects 7 wikimedia dumps not importing) {detected by cd19s}. See: [[Help:Import/List]] <a href="https://ar.wikimedia.org/wiki/">https://ar.wikimedia.org</a> <a href="https://ca.wikimedia.org/wiki/">https://ca.wikimedia.org</a> <a href="https://be.wikimedia.org/wiki/">https://be.wikimedia.org</a> <a href="https://uk.wikimedia.org" class="external text" rel="nofollow">https://uk.wikimedia.org</a> <a href="https://br.wikimedia.org/wiki/">https://br.wikimedia.org</a> <a href="https://co.wikimedia.org/wiki/">https://co.wikimedia.org</a> <a href="https://se.wikimedia.org/wiki/">https://se.wikimedia.org</a>
+      </li>
+      <li>
+        File: Use thumb size when specified for videos, not original size (affects several video thumbnails showing with large size); EX:[[File:A.ogv|thumb]] -&gt; 220px x&gt; original_px. See: <a href="https://en.wikipedia.org/wiki/Edward_Snowden">https://en.wikipedia.org/wiki/Edward_Snowden</a> <a href="https://en.wikipedia.org/wiki/Xinjiang">https://en.wikipedia.org/wiki/Xinjiang</a> <a href="https://en.wikipedia.org/wiki/Alice_Brady">https://en.wikipedia.org/wiki/Alice_Brady</a> [broken since:v2.8.2]
+      </li>
+      <li>
+        Setup: Fix XOWA root directory for setup_lua.sh (affects error message on console when application first starts; also official lua won't work (LuaJ does)). See: /xowa/bin/os_name/xowa/script/setup_lua.sh
+      </li>
+      <li>
+        Lang: Fix non-working link trail for non-WikiMedia wikis {detected by pirate}. See: <a href="https://nethackwiki.com/wiki/">http://nethackwiki.com</a> [broken since:v2.7.2]
+      </li>
+      <li>
+        FirefoxAddon: Fix XOWA toolbar button and sidebar links; EX:xowa:home //en.wikipedia.org/ {detected by pirate}.
+      </li>
+      <li>
+        FirefoxAddon: Fix images not loading on first view {detected by pirate}.
+      </li>
+      <li>
+        Setup: Enable bundled JRE for Windows .exe. See: /xowa/xowa.exe
+      </li>
+      <li>
+        Make.Images: Fix images not downloading for small wikis.
       </li>
     </ul>
     <p>
@@ -70,36 +91,21 @@
     </p>
     <ul>
       <li>
-        Gui: Add splash.gif when XOWA starts. See: /xowa/bin/any/xowa/file/gui/splash/xowa.gif
+        Javascript.Find: Allow search by backslash; EX:"C:\XOWA". See: [[Help:Upgrading]]
       </li>
       <li>
-        Gui: Show "options saved" notification after saving options.
-      </li>
-      <li>
-        Setup: Show better error message if fatal error during launch.
-      </li>
-      <li>
-        Setup: Build xowa.exe with launch4j.
-      </li>
-      <li>
-        Wiki: Convert home wiki to sqlite wiki and move to /xowa/bin/any/xowa/wiki/home*.
-      </li>
-      <li>
-        Setup: Enable bundled JRE for Windows .exe. See: /xowa/bin/windows/java/jre
-      </li>
-      <li>
-        Setup: Add site_meta.sqlite3. See: /xowa/bin/any/xowa/cfg/wiki/site_meta.sqlite3
+        API.Wikimedia: Add bldr command for downloading wiki meta data. See: [[Help:Import/Command-line/Site meta]]
       </li>
     </ul>
     <p>
-      <b>significant</b>
+      <b>package</b>
     </p>
     <ul>
       <li>
-        File: Fix wrong images due to incorrect conversion from v1 (affects 4744 incorrect images on en.w) {detected by anonymous4}. See: <a href="https://en.wikipedia.org/wiki/Game_of_Thrones_(Season_5)">https://en.wikipedia.org/wiki/Game_of_Thrones_(Season_5)</a>
+        Package: Release image update for Persian wikis (2015-08). See: <a href="https://archive.org/download/Xowa_fawiki_latest" class="external text" rel="nofollow">https://archive.org/download/Xowa_fawiki_latest</a>
       </li>
       <li>
-        File: Try to download from commons if file doesn't exist in local wiki (affects a few hundred missing images on en.w) {detected by gnosygnu.build.process}. See: <a href="https://en.wikipedia.org/wiki/Apollo_13">https://en.wikipedia.org/wiki/Apollo_13</a>
+        Package: Release image update for Bengali Wikis (2015-08). See: <a href="https://archive.org/download/Xowa_bnwiki_latest" class="external text" rel="nofollow">https://archive.org/download/Xowa_bnwiki_latest</a>
       </li>
     </ul>
     <p>
@@ -107,10 +113,7 @@
     </p>
     <ul>
       <li>
-        Scribunto: Use "nil" as default value for utf8_explode__previous_string, not "" (affects a few en.w pages with script error). See: <a href="https://en.wikipedia.org/wiki/Rescue_Me_(UK_TV_series)">https://en.wikipedia.org/wiki/Rescue_Me_(UK_TV_series)</a> <a href="https://en.wikipedia.org/wiki/List_of_The_Tonight_Show_with_Jay_Leno_episodes_(1992–99)">https://en.wikipedia.org/wiki/List_of_The_Tonight_Show_with_Jay_Leno_episodes_(1992–99)</a> <a href="https://en.wikipedia.org/wiki/Third_and_Lexington_Avenues_Line">https://en.wikipedia.org/wiki/Third_and_Lexington_Avenues_Line</a> <a href="https://sv.wikipedia.org/wiki/Riseberga">https://sv.wikipedia.org/wiki/Riseberga</a> /xowa/bin/any/xowa/xtns/Scribunto/engines/LuaCommon/lualib/ustring/ustring.lua
-      </li>
-      <li>
-        Search: Do not throw error if empty string is entered for Search {detected by anonymous}. See: <a href="https://github.com/gnosygnu/xowa/issues/19" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/19</a> <a href="https://en.wikipedia.org/wiki/Special:Search?search=&amp;fulltext=y">https://en.wikipedia.org/wiki/Special:Search?search=&amp;fulltext=y</a>
+        FirefoxAddon: Include latest version of XOWA Addon (v0.2.1) {detected by pirate}. See: /xowa/bin/any/firefox/xowa_viewer/default/
       </li>
     </ul>
     <p>
@@ -118,33 +121,15 @@
     </p>
     <ul>
       <li>
-        Setup: Move "xowa_build" scripts from /xowa to /xowa/bin/os_name/xowa/script.
-      </li>
-      <li>
-        Setup: Move "setup" scripts from /xowa to /xowa/bin/os_name/xowa/script.
-      </li>
-      <li>
-        Setup: Move xowa.gfs to /xowa/bin/any/xowa/cfg/app/xowa.gfs. See: /xowa/bin/any/xowa/cfg/app/xowa.gfs
-      </li>
-      <li>
-        Setup: Move license.txt to /xowa/bin/any/xowa/license.txt. See: /xowa/bin/any/xowa/license.txt
-      </li>
-      <li>
-        Setup: Move failover css to /xowa/bin/any/xowa/html/css/failover. See: /xowa/bin/any/xowa/html/css/failover
-      </li>
-      <li>
-        Setup: Move maintenance html to /xowa/bin/any/xowa/xtns/xowa/maintenance. See: /xowa/bin/any/xowa/xtns/xowa/maintenance
-      </li>
-      <li>
-        Setup: Remove /xowa/bin/any/sql.
+        Diagnostics: Fix test to expect "home" instead of "Home". See: [[Help:Diagnostics/Scribunto/SiteLibrary]]
       </li>
     </ul>
     <p>
-      <b>doc</b>
+      <b>dev</b>
     </p>
     <ul>
       <li>
-        Doc: Reformat readme.txt to use MediaWiki syntax.
+        Source: Clean up Xow_domain_itm and Xow_abrv_wm.
       </li>
     </ul>
 <!-- page_end -->

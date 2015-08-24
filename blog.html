@@ -18,6 +18,39 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.8.4.1_.282015-08-23_21:40_Sun.29'>Release: v2.8.4.1 (2015-08-23 21:40 Sun)</span>
+    </h2>
+    <p>
+      v2.8.4 is a light release. It supports 7 new Wikimedia wikis and has some Firefox addons.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Image_update_for_Persian_and_Bengali_wikis'>Image update for Persian and Bengali wikis</span>
+    </h3>
+    <p>
+      Persian wikis are at <a href="https://archive.org/details/Xowa_fawiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_fawiki_latest</a> and Bengali wikis are now at <a href="https://archive.org/details/Xowa_bnwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_bnwiki_latest</a> . Persian is still uploading but should be ready by the morning.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Import_Wikimedia_wikis_with_non-consistent_language_.28ar.wikimedia.org.3B_br.wikimedia.org.29'>Import Wikimedia wikis with non-consistent language (ar.wikimedia.org; br.wikimedia.org)</span>
+    </h3>
+    <p>
+      This was reported in <a href="https://github.com/gnosygnu/xowa/issues/21" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/21</a> . Basically, there were 7 new Wikimedia wikis with inconsistent language codes. For example, ar.wikimedia.org was not for Arabic Wikimedia, but for Argentinian Wikimedia. Unfortunately, this required some rewrite of the url code as XOWA assumed that the language codes were consistent: for example, "ar." always meant Arabic.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Minor_fixes_for_Firefox_Addon'>Minor fixes for Firefox Addon</span>
+    </h3>
+    <p>
+      There were a few issues with images not loading and sidebar links not working. See <a href="https://github.com/piotrex/XOWA-Addon/issues/2" class="external text" rel="nofollow">https://github.com/piotrex/XOWA-Addon/issues/2</a> and <a href="https://github.com/piotrex/XOWA-Addon/issues/3" class="external text" rel="nofollow">https://github.com/piotrex/XOWA-Addon/issues/3</a>
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.8.4'>Next release: v2.8.4</span>
+    </h3>
+    <p>
+      For this week, I'm going to continue image updates with Ukrainian, German and Finnish.
+    </p>
+    <p>
+      I spent some time on Math parsing this week, and may continue on this for next week. I'll try to work in some Android dev, as the alpha hasn't been updated for 2 months now.
+    </p>
+    <h2>
       <span class='mw-headline' id='Release:_v2.8.3.1_.282015-08-16_21:15_Sun.29'>Release: v2.8.3.1 (2015-08-16 21:15 Sun)</span>
     </h2>
     <p>
