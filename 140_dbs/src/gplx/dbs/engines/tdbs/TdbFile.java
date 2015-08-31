@@ -27,5 +27,5 @@ public class TdbFile {
 	}
 	public static final int MainFileId = 1;
 	public static TdbFile as_(Object obj) {return obj instanceof TdbFile ? (TdbFile)obj : null;}
-	public static TdbFile cast_(Object obj) {try {return (TdbFile)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbFile.class, obj);}}
+	public static TdbFile cast(Object obj) {try {return (TdbFile)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbFile.class, obj);}}
 }

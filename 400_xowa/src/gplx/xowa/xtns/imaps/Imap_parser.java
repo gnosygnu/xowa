@@ -91,7 +91,7 @@ class Imap_parser {
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
-		byte tid_desc = Imap_desc_tid.parse_(trie, src, Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_finder.Trim_bwd_space_tab(src, itm_bgn, itm_end));
+		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_finder.Trim_bwd_space_tab(src, itm_bgn, itm_end));
 		switch (tid_desc) {
 			case Imap_desc_tid.Tid_null: return Add_err(Bool_.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;

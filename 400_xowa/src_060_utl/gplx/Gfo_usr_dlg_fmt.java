@@ -30,5 +30,5 @@ public class Gfo_usr_dlg_fmt {
 		rv.fmt = fmt; rv.end = end; rv.endLen = Int_.DigitCount(end); rv.prog_interval = (int)((float)end * (float)(pct / (float)100));;
 		return rv;
 	}	String grp_key, msg_key;
-	int prog_interval; int prog_prv = Int_.MinValue;
+	int prog_interval; int prog_prv = Int_.Min_value;
 }

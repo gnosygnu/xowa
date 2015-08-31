@@ -26,7 +26,7 @@ public class Xoc_layout_mgr implements GfoInvkAble {
 	public RectAdp Html_box_adj_rect() {return html_box_adj_rect;} private RectAdp html_box_adj_rect = RectAdp_.Zero;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_box_adj_type))			return html_box_adj_type_enm.Get_str(html_box_adj_type);
-		else if	(ctx.Match(k, Invk_html_box_adj_type_))			{html_box_adj_type = Byte_.parse_(m.ReadStr("v")); this.Refresh_window();}
+		else if	(ctx.Match(k, Invk_html_box_adj_type_))			{html_box_adj_type = Byte_.parse(m.ReadStr("v")); this.Refresh_window();}
 		else if	(ctx.Match(k, Invk_html_box_adj_type_list))		return html_box_adj_type_enm.Get_kv_ary();
 		else if	(ctx.Match(k, Invk_html_box_adj_rect))			return html_box_adj_rect.Xto_str();
 		else if	(ctx.Match(k, Invk_html_box_adj_rect_))			{html_box_adj_rect = gplx.gfui.RectAdp_.parse_ws_(m.ReadStr("v")); this.Refresh_window();}

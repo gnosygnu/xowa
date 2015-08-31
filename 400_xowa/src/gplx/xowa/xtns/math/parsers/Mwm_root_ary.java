@@ -40,4 +40,7 @@ class Mwm_root_ary {
 		}
 		ary[idx] = tkn;
 	}
+	public void Update_end(int uid, int end) {
+		Get_at(uid).Src_end_(end);
+	}
 }

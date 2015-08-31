@@ -19,9 +19,9 @@ package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.bookmarks.*; import gplx.xowa.specials.xowa.diags.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.diags.*;
 import gplx.xowa.xtns.wdatas.specials.*;
-import gplx.xowa.users.data.*;
+import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 public class Xows_mgr {
 	private final Hash_adp_bry hash;
 	public Xows_mgr(Xowe_wiki wiki, Xol_lang lang) {

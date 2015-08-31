@@ -23,12 +23,12 @@ import java.awt.Toolkit;
 public class ScreenAdp_ {
 	public static final ScreenAdp Primary = screen_(0);
 	public static ScreenAdp as_(Object obj) {return obj instanceof ScreenAdp ? (ScreenAdp)obj : null;}
-	public static ScreenAdp cast_(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
-	public static ScreenAdp parse_(String raw) {	// ex: {screen{1}
+	public static ScreenAdp cast(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
+	public static ScreenAdp parse(String raw) {	// ex: {screen{1}
 		try {
 			raw = String_.Replace(raw, "{screen{", "");
 			raw = String_.Replace(raw, "}", "");
-			return ScreenAdp_.screen_(Int_.parse_(raw));
+			return ScreenAdp_.screen_(Int_.parse(raw));
 		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, ScreenAdp.class, raw);}
 	}
 	public static ScreenAdp from_point_(PointAdp pos) {// NOTE: not using FromPoint b/c of plat_wce

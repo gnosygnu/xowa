@@ -117,7 +117,7 @@ public class Site_core_db {
 		int len = hash.Count();
 		for (int i = 0; i < len; ++i) {
 			Site_namespace_itm itm = (Site_namespace_itm)hash.Get_at(i);
-			byte case_match = Xow_ns_case_.parse_(String_.new_u8(itm.Case_tid()));
+			byte case_match = Xow_ns_case_.parse(String_.new_u8(itm.Case_tid()));
 			rv.Add_new(itm.Id(), itm.Localized(), case_match, Bool_.N);
 		}
 	}

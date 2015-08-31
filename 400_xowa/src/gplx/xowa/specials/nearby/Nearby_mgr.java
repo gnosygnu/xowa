@@ -68,8 +68,8 @@ public class Nearby_mgr implements Xows_page {
 	Ordered_hash src_pool = Ordered_hash_.new_bry_();
 	public List_adp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
 		this.wiki = wiki; this.excluded = excluded;
-		Xoa_ttl src_ttl = Xoa_ttl.parse_(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
-		trg_ttl = Xoa_ttl.parse_(wiki, trg_bry); if (trg_ttl == null) return List_adp_.Noop;
+		Xoa_ttl src_ttl = Xoa_ttl.parse(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
+		trg_ttl = Xoa_ttl.parse(wiki, trg_bry); if (trg_ttl == null) return List_adp_.Noop;
 		trg = trg_ttl.Page_db();
 		trail.Clear();
 		results.Clear();

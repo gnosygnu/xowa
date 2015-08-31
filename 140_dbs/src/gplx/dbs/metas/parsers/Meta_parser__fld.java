@@ -25,13 +25,13 @@ public class Meta_parser__fld {
 		Meta_parser__fld_itm type_itm = (Meta_parser__fld_itm)type_obj;
 		rdr.Pos_add(type_itm.Word().length);
 		int paren_itms_count = type_itm.Paren_itms_count();
-		int len_1 = Int_.MinValue, len_2 = Int_.MinValue;
+		int len_1 = Int_.Min_value, len_2 = Int_.Min_value;
 		if (paren_itms_count > 0) {
 			rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Paren_bgn);
-			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.MinValue) throw Err_.new_wo_type("invalid fld len_1", "snip", rdr.Mid_by_len_safe(40));
+			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.Min_value) throw Err_.new_wo_type("invalid fld len_1", "snip", rdr.Mid_by_len_safe(40));
 			if (paren_itms_count == 2) {
 				rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Comma);
-				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.MinValue) throw Err_.new_wo_type("invalid fld len_2", "snip", rdr.Mid_by_len_safe(40));
+				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.Min_value) throw Err_.new_wo_type("invalid fld len_2", "snip", rdr.Mid_by_len_safe(40));
 			}
 			rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Paren_end);
 		}

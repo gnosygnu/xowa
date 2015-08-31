@@ -28,7 +28,7 @@ public class Xow_hzip_int_ {
 	public static void Save_bin_int_abrv(Bry_bfr bfr, int val_int) {	// save int in binary little endian form; range from -2,080,766,977 to 2,147,483,648; 255^4 or 4,228,250,625
 		if (val_int == 0) {bfr.Add_byte(Byte_ascii.Null); return;}
 		long val = val_int;
-		if (val < 0) val = Int_.MaxValue + -val;
+		if (val < 0) val = Int_.Max_value + -val;
 		int count = 0;
 		while (val > 0) {
 			byte mod = (byte)(val % Base_255_int);
@@ -54,8 +54,8 @@ public class Xow_hzip_int_ {
 				mult *= Base_255_int;
 			}
 		}
-		if (rv > Int_.MaxValue) {
-			rv -= Int_.MaxValue;
+		if (rv > Int_.Max_value) {
+			rv -= Int_.Max_value;
 			rv *= -1;
 		}
 		count_ref.Val_(count);

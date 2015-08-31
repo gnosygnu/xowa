@@ -55,7 +55,7 @@ public class IptCfg_tst {
 		box.tst_SendKey(IptKey_.A, 0);
 	}
 	@Test  public void Chained() {
-		cfg.run_GetOrDflt(box, key, IptKeyChain.parse_("key.ctrl+key.a,key.b"));
+		cfg.run_GetOrDflt(box, key, IptKeyChain.parse("key.ctrl+key.a,key.b"));
 		cfg.run_Set(key, IptKey_.A);
 		box.tst_SendKey(IptKey_.A, 1);
 	}

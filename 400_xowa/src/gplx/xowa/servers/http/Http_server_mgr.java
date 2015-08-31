@@ -92,7 +92,7 @@ public class Http_server_mgr implements GfoInvkAble {
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(wiki_domain);		// get the wiki; assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
 			if (Bry_.Len_eq_0(page_ttl)) page_ttl = wiki.Props().Main_page();
 			Xoa_url page_url = wiki.Utl__url_parser().Parse(page_ttl);								// get the url (needed for query args)
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, page_ttl);											// get the ttl
 			Xoae_page page = wiki.Load_page_by_ttl(page_url, ttl);									// get page and parse it
 			Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab
 			app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)

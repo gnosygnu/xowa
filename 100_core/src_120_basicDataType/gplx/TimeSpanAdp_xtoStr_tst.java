@@ -52,7 +52,7 @@ public class TimeSpanAdp_xtoStr_tst {
 		Tfds.Eq(expd, actl);
 	}
 	void tst_ZeroPadding(String val, String expd) {
-		TimeSpanAdp timeSpan = TimeSpanAdp_.parse_(val);
+		TimeSpanAdp timeSpan = TimeSpanAdp_.parse(val);
 		String actl = timeSpan.To_str(TimeSpanAdp_.Fmt_PadZeros);
 		Tfds.Eq(expd, actl);
 	}

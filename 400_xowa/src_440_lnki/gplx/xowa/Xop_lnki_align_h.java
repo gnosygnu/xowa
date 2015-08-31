@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 public class Xop_lnki_align_h {
 	public static final byte Null = 0, None = 1, Left = 2, Center = 3, Right = 4;
 	public static final byte[][] Html_names = new byte[][]
-	{ Bry_.new_a7("null")
+	{ Object_.Bry__null
 	, Bry_.new_a7("none")
 	, Bry_.new_a7("left")
 	, Bry_.new_a7("center")

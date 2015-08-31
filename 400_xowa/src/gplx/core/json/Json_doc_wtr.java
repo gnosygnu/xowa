@@ -30,11 +30,11 @@ public class Json_doc_wtr {
 	public Json_doc_wtr New_line() {bfr.Add_byte_nl(); return this;}
 	public Json_doc_wtr Str(byte[] v) {
 		if (v == null)
-			bfr.Add(Bry_null);
+			bfr.Add(Object_.Bry__null);
 		else
 			bfr.Add_byte(Byte_ascii.Quote).Add(v).Add_byte(Byte_ascii.Quote);
 		return this;
-	}	private static final byte[] Bry_null = Bry_.new_a7("null");
+	}
 	public Json_doc_wtr Int(int v) {bfr.Add_int_variable(v); return this;}
 	public Json_doc_wtr Double(double v) {bfr.Add_double(v); return this;}
 	public Json_doc_wtr Comma() {Indent(); bfr.Add_byte(Byte_ascii.Comma).Add_byte_nl(); return this;}

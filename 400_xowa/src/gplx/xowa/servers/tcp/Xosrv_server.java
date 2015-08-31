@@ -25,7 +25,7 @@ public class Xosrv_server implements GfoInvkAble {
 	public int Wtr_port() {return wtr_port;} public Xosrv_server Wtr_port_(int v) {wtr_port = v; return this;} private int wtr_port = 55001;
 	public int Shutdown_interval() {return shutdown_interval;} public Xosrv_server Shutdown_interval_(int v) {shutdown_interval = v; return this;} private int shutdown_interval = -1;
 	public String Wtr_host() {return wtr_host;} private String wtr_host = "localhost";
-	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = Bool_.Xto_str_lower(running); return this;} private boolean running = false;
+	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = Bool_.To_str_lower(running); return this;} private boolean running = false;
 	public String Running_str() {return running_str;} String running_str = "false";
 	public void App_ctor(Xoae_app app) {this.app = app;}
 	public Xoae_app App() {return app;} private Xoae_app app;
@@ -100,7 +100,7 @@ class Xosrv_xowa_exec_parser {
 	private Json_parser json_parser = new Json_parser();
 	public Object[] Parse_xowa_exec(byte[] msg_text) {	// parses JSON with format '{"args":["arg0","arg1","arg2"]}'
 		Json_doc doc = json_parser.Parse(msg_text);
-		Json_kv args_kv = (Json_kv)doc.Root().Get_at(0);	// get "args" kv
+		Json_kv args_kv = (Json_kv)doc.Root_nde().Get_at(0);	// get "args" kv
 		Json_ary args_ary = (Json_ary)args_kv.Val();			// get []
 		int len = args_ary.Len();			
 		Object[] rv = new Object[len];
@@ -112,9 +112,9 @@ class Xosrv_xowa_exec_parser {
 	}
 	private Object Parse_ary_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid_string:
+			case Json_itm_.Tid__str:
 				return String_.new_u8(itm.Data_bry());
-			case Json_itm_.Tid_array: 
+			case Json_itm_.Tid__ary: 
 				Json_ary ary = (Json_ary)itm;
 				int len = ary.Len();
 				String[] rv = new String[len];

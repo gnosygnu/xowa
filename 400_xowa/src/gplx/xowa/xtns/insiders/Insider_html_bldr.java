@@ -46,7 +46,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 		Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href();
 		for (int i = 0; i < list_len; ++i) {
 			byte[] itm = (byte[])list.Get_at(i);
-			Xoa_ttl user_ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_user, itm);
+			Xoa_ttl user_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_user, itm);
 			if (user_ttl == null) continue;
 			byte[] user_ttl_bry = user_ttl.Full_db();
 			if (hash.Has(user_ttl_bry)) continue;

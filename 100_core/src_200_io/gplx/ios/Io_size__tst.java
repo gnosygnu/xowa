@@ -58,12 +58,12 @@ public class Io_size__tst {
 	}
 }
 class Io_size__fxt {
-	public void Test_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or_(raw, Long_.MinValue));}
+	public void Test_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or(raw, Long_.Min_value));}
 	public void Test_XtoLongFail(String raw) {
-		long val = Io_size_.parse_or_(raw, Long_.MinValue);
-		if (val != Long_.MinValue) Tfds.Fail("expd parse failure; raw=" + raw);
+		long val = Io_size_.parse_or(raw, Long_.Min_value);
+		if (val != Long_.Min_value) Tfds.Fail("expd parse failure; raw=" + raw);
 	}
-	public void Test_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or_(lhs, Long_.MinValue), Io_size_.parse_or_(rhs, Long_.MinValue));}
+	public void Test_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or(lhs, Long_.Min_value), Io_size_.parse_or(rhs, Long_.Min_value));}
 	public void Test_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.To_str(val));}
 	public void Test_Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1, String expd) {Tfds.Eq(expd, Io_size_.To_str(val, exp_1024, val_fmt, unit_pad, round_0_to_1));}
 }

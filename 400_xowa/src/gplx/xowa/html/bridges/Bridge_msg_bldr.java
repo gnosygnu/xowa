@@ -83,8 +83,8 @@ public class Bridge_msg_bldr {
 				Gfo_tree_data sub_kv = (Gfo_tree_data)itm;
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
-					case Type_adp_.Tid__bool:	wtr.Kv_bool(key, Bool_.cast_(val)); break;
-					case Type_adp_.Tid__int:		wtr.Kv_int(key, Int_.cast_(val)); break;
+					case Type_adp_.Tid__bool:	wtr.Kv_bool(key, Bool_.cast(val)); break;
+					case Type_adp_.Tid__int:		wtr.Kv_int(key, Int_.cast(val)); break;
 					case Type_adp_.Tid__bry:		wtr.Kv_bry(key, (byte[])val); break;
 					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;
 				}

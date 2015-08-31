@@ -44,7 +44,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		Scrib_lua_mod mod = core.Mods_get(mod_name);
 		if (mod == null) {
 			Xow_ns module_ns = wiki.Ns_mgr().Ids_get_or_null(Scrib_xtn_mgr.Ns_id_module);
-			Xoa_ttl mod_ttl = Xoa_ttl.parse_(wiki, Bry_.Add(module_ns.Name_db_w_colon(), mod_name));
+			Xoa_ttl mod_ttl = Xoa_ttl.parse(wiki, Bry_.Add(module_ns.Name_db_w_colon(), mod_name));
 			mod_raw = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(mod_ttl);
 			if (mod_raw == null) {Error(bfr, wiki.Msg_mgr(), Err_mod_missing); return;} // EX: "{{#invoke:missing_mod}}"
 		}

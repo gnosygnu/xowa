@@ -73,8 +73,8 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.lists.ComparerAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	public static final int Sort_null = Int_.MinValue;
-	private static final int Sort_none = Int_.MaxValue;
+	public static final int Sort_null = Int_.Min_value;
+	private static final int Sort_none = Int_.Max_value;
 }
 class Wdata_lang_sorter_itm {
 	public Wdata_lang_sorter_itm(int sort, byte[] lang) {this.sort = sort; this.lang = lang;}

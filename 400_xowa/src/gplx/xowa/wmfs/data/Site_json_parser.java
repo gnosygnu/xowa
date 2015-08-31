@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wmfs.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
 import gplx.core.primitives.*; import gplx.core.json.*;
 class Site_json_parser {
+	private final Json_parser json_parser;
 	private final Json_parser__list_nde__base parser__basic = new Json_parser__list_nde__base();
 	private final Site_meta_parser__general parser__general = new Site_meta_parser__general();
 	private final Site_meta_parser__namespace parser__namespace = new Site_meta_parser__namespace();
@@ -31,9 +32,10 @@ class Site_json_parser {
 	private final Site_meta_parser__magicword parser__magicword = new Site_meta_parser__magicword();
 	private final Site_meta_parser__showhook parser__showhook = new Site_meta_parser__showhook();
 	private final Site_meta_parser__language parser__language = new Site_meta_parser__language();
+	public Site_json_parser(Json_parser json_parser) {this.json_parser = json_parser;}
 	public void Parse_root(Site_meta_itm rv, String context, byte[] src) {
-		Json_doc jdoc = Json_doc.new_(src);
-		Parse_root(rv, context, jdoc.Root().Get_at_as_kv(1).Val_as_nde());
+		Json_doc jdoc = json_parser.Parse(src);
+		Parse_root(rv, context, jdoc.Root_nde().Get_at_as_kv(1).Val_as_nde());
 	}
 	public void Parse_root(Site_meta_itm rv, String context, Json_nde root) {
 		int len = root.Len();			

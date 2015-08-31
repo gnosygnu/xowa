@@ -35,7 +35,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Init_external_links_mgr_clear();
 		fxt.Test_parse_langs("{{noexternallanglinks:de}}", String_.Concat_lines_nl
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 1)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
@@ -50,7 +50,7 @@ public class Wdata_xwiki_link_wtr_tst {
 	@Test   public void Links_w_name_fmt() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_type_.Int__wikipedia, "Q1_en", "Q1");
-		Json_doc jdoc = Json_doc.new_(String_.Concat_lines_nl
+		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(String_.Concat_lines_nl
 		( "{ \"entity\":\"q1\""
 		, ", \"links\":"
 		, "  { \"dewiki\":\"q1_de\""
@@ -65,7 +65,7 @@ public class Wdata_xwiki_link_wtr_tst {
 	@Test   public void Same_lang_but_different_domains() {	// PURPOSE: if two entries for same lang, but one is in different domain, use the one for the current wiki  DATE:2014-06-21
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_type_.Int__wikipedia, "Q1_en", "Q1");
-		Json_doc jdoc = Json_doc.new_(String_.Concat_lines_nl
+		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(String_.Concat_lines_nl
 		( "{ \"entity\":\"q1\""
 		, ", \"links\":"
 		, "  { \"dewiki\":\"q1_de\""
@@ -90,7 +90,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		.Xto_wdoc());
 		fxt.Test_parse_langs("", String_.Concat_lines_nl
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 3)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 3)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"

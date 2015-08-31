@@ -38,17 +38,17 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			return;
 		}
 		int itms_bgn = 0;
-		if (itm.Offset() != Int_.MinValue) {
+		if (itm.Offset() != Int_.Min_value) {
 			itms_bgn = itm.Offset();
 		}
-		if (itm.Count() != Int_.MinValue && itms_bgn + itm.Count() < itms_len) {
+		if (itm.Count() != Int_.Min_value && itms_bgn + itm.Count() < itms_len) {
 			itms_len = itms_bgn + itm.Count();
 		}
 		boolean showns = itm.Show_ns();
 		bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
 		for (int i = itms_bgn; i < itms_len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db());
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db());
 			byte[] ttl_page_txt = showns ? ttl.Full_txt() : ttl.Page_txt();
 			if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
 			switch (html_mode.Tid()) {

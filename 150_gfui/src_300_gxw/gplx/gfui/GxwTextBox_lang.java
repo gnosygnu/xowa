@@ -147,7 +147,7 @@ class GxwTextFld_cls_lang extends JTextField implements GxwTextFld {
 		this.SelBgn_set(0); this.SelLen_set(0);	// otherwise will set cursor to end; want to see text start
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if (ctx.Match(k, GxwElem_lang.AlignH_cmd))  AlignH_(GfuiAlign_.cast_(m.CastObj("v")));
+		if (ctx.Match(k, GxwElem_lang.AlignH_cmd))  AlignH_(GfuiAlign_.cast(m.CastObj("v")));
 		return this;
 	}
 	public void SendKeyDown(IptKey key)								{}

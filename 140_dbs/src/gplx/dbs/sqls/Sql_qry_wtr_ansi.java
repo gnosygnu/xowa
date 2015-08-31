@@ -155,7 +155,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		}
 		Class<?> val_type = val.getClass();
 		if (val_type == Bool_.Cls_ref_type)
-			sb.Add_obj(Bool_.Xto_int(Bool_.cast_(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
+			sb.Add_obj(Bool_.To_int(Bool_.cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
 		else if 
 			(	val_type == Byte_.Cls_ref_type	|| val_type == Short_.Cls_ref_type
 			||	val_type == Int_.Cls_ref_type	|| val_type == Long_.Cls_ref_type

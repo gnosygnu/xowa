@@ -116,7 +116,7 @@ public abstract class Gallery_mgr_base {
 				;
 			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_.NotFound
 				? ttl
-				: Xoa_ttl.parse_(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()))
+				: Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()))
 				;
 			if (href_ttl == null) href_ttl = ttl;	// occurs when link is invalid; EX: A.png|link=<invalid>
 			this.Adjust_image_parameters(xfer_itm);	// trad=noop; packed=reduce by 1.5

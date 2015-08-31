@@ -33,7 +33,7 @@ class Xow_wiki_fxt {
 		Xowe_wiki wiki = fxt.Wiki();
 		byte[] ttl_bry = Bry_.new_a7(ttl_str);
 		Xoa_url url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		Xoae_page actl = fxt.Wiki().Load_page_by_ttl(url, ttl);
 		if (expd == null) Tfds.Eq_true(actl.Missing());
 		else Tfds.Eq(expd, String_.new_u8(actl.Ttl().Raw()));

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*;
+import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*; import gplx.core.json.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.apps.metas.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.bldrs.css.*;
@@ -62,6 +62,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
+		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 	}
 	public Xoa_app_type			App_type()				{return app_type;} private final Xoa_app_type app_type;
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
@@ -72,10 +73,11 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoh_href_wtr			Html__href_wtr()		{return html__href_wtr;} private final Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoh_lnki_bldr		Html__lnki_bldr()		{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor	Html__css_installer()	{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
-	public Xoh_bridge_mgr		Html__bridge_mgr()		{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr = new Xoh_bridge_mgr();
+	public Xoh_bridge_mgr		Html__bridge_mgr()		{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
+	public Json_parser			Utl__json_parser()		{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public Xoa_meta_mgr			Meta_mgr()				{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public boolean					Bldr__running() {return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	

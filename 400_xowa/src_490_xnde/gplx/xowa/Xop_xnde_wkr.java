@@ -438,7 +438,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		switch (end_nde_mode) {
 			case Xop_xnde_tag_.EndNdeMode_inline:	// PATCH.WP: allows </br>, </br/> and many other variants
-				Xnde_bgn(ctx, tkn_mkr, root, end_tag, Xop_xnde_tkn.CloseMode_inline, src, bgn_pos, cur_pos, Int_.MinValue, Int_.MinValue, null);	// NOTE: atrs is null b/c </br> will never have atrs
+				Xnde_bgn(ctx, tkn_mkr, root, end_tag, Xop_xnde_tkn.CloseMode_inline, src, bgn_pos, cur_pos, Int_.Min_value, Int_.Min_value, null);	// NOTE: atrs is null b/c </br> will never have atrs
 				return cur_pos;
 			case Xop_xnde_tag_.EndNdeMode_escape:	// handle </hr>
 				ctx.Lxr_make_(false);

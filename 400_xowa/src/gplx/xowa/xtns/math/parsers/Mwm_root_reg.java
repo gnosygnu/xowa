@@ -39,13 +39,11 @@ class Mwm_root_reg {
 	public Mwm_tkn Get_at(Mwm_tkn_mkr tkn_mkr, int uid) {
 		int idx = uid * Idx__slots;
 		int tid = ary[idx];
-		switch (tid) {
-			case Mwm_tkn_.Tid__text:
-			case Mwm_tkn_.Tid__ws:
-				return tkn_mkr.Make_leaf(root, tid, uid, ary[idx + Idx__bgn], ary[idx + Idx__end]);
-			default:
-				return null;
-		}
+		return Mwm_tkn_.Tid_is_node(tid) ? null: tkn_mkr.Make_leaf(root, tid, uid, ary[idx + Idx__bgn], ary[idx + Idx__end]);
+	}
+	public int Get_owner_id(int uid) {
+		int idx = uid * Idx__slots;
+		return ary[idx + Idx__oid];
 	}
 	public int Add(int tid, int oid, int bgn, int end) {
 		int new_ary_len = ary_len + Idx__slots;
@@ -67,8 +65,19 @@ class Mwm_root_reg {
 		++itms_len;
 		return uid;
 	}
-	public void Update_end(int uid, int end) {
-		ary[(uid * Idx__slots) + Idx__end] = end;
+	public boolean Update_end(int uid, int end) {
+		int idx = uid * Idx__slots;
+		ary[idx + Idx__end] = end;
+		return Mwm_tkn_.Tid_is_node(ary[idx]);
+	}
+	public int Update_owner_id(int cur_uid, int new_owner_uid) {	// return old owner_id
+		int cur_idx = cur_uid * Idx__slots;
+		int cur_owner_uid_idx = cur_idx + Idx__oid;
+		int old_owner_uid = ary[cur_owner_uid_idx];
+		ary[cur_owner_uid_idx] = new_owner_uid;
+		return old_owner_uid;
+	}
+	public void Change_owner(Mwm_tkn cur_owner, Mwm_tkn new_owner) {
 	}
 	private static final int
 		Idx__oid	= 1

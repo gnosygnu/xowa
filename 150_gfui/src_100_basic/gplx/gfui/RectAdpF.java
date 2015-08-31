@@ -24,7 +24,7 @@ public class RectAdpF {	//_20101206 // supports Graphics.MeasureString
 		return comp.x == x && comp.y == y && comp.width == width && comp.height == height;
 	}
 
-	public static final RectAdpF Null = new_(Int_.MinValue, Int_.MinValue, Int_.MinValue, Int_.MinValue);
+	public static final RectAdpF Null = new_(Int_.Min_value, Int_.Min_value, Int_.Min_value, Int_.Min_value);
 	public static RectAdpF new_(float x, float y, float width, float height) {
 		RectAdpF rv = new RectAdpF();
 		rv.x = x; rv.y = y; rv.width = width; rv.height = height;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.json.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_wiki_mgr_fxt {
@@ -40,6 +40,7 @@ public class Wdata_wiki_mgr_fxt {
 		wiki.Lang().Fallback_bry_(Bry_.new_a7(String_.Concat_with_str(",", fallbacks)));
 	}
 	public Wdata_doc_bldr Wdoc_bldr(String qid) {return wdoc_bldr.Qid_(qid);}
+	public Json_doc Make_json(String src) {return app.Utl__json_parser().Parse_by_apos(src);}
 	public Wdata_claim_itm_core Make_claim_novalue(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
 	public Wdata_claim_itm_core Make_claim_somevalue(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
 	public Wdata_claim_itm_core Make_claim_str(int pid, String val) {return Make_claim_str(pid, Bry_.new_u8(val));}
@@ -112,7 +113,7 @@ public class Wdata_wiki_mgr_fxt {
 	public void Test_get_low_qid(String qid, String expd) {
 		Tfds.Eq(expd, String_.new_a7(Wdata_wiki_mgr.Get_low_qid(Bry_.new_a7(qid))));
 	}
-	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, Bry_.new_u8(ttl_str)), expd);}
+	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse(wiki, Xow_ns_.Id_main, Bry_.new_u8(ttl_str)), expd);}
 	public void Test_link(Xoa_ttl ttl, String expd) {
 		byte[] qid_ttl = wdata_mgr.Qids_get(wiki, ttl);
 		Tfds.Eq(expd, String_.new_u8(qid_ttl));
@@ -165,7 +166,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
-		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl)), wiki.Ctx().Cur_page().Wdata_external_lang_links());
+		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Ctx().Cur_page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
 	}	List_adp tmp_langs = List_adp_.new_();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {

@@ -94,7 +94,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String mod_code = fsys_mgr.Get_or_null(mod_name);	// check if mod_name a file in /lualib/ directoryScribunto .lua file (in /lualib/)
 		if (mod_code != null)
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
-		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
+		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
 		if (ttl == null) return rslt.Init_ary_empty();
 		Xoae_page page = cur_wiki.Data_mgr().Get_page(ttl, false);
 		if (page.Missing()) return rslt.Init_ary_empty();
@@ -109,9 +109,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame.Frame_tid());
 		String idx_str = args.Pull_str(1);
-		int idx_int = Int_.parse_or_(idx_str, Int_.MinValue);	// NOTE: should not receive int value < -1; idx >= 0
+		int idx_int = Int_.parse_or(idx_str, Int_.Min_value);	// NOTE: should not receive int value < -1; idx >= 0
 		Bry_bfr tmp_bfr = Bry_bfr.new_();	// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
-		if (idx_int != Int_.MinValue) {	// idx is integer
+		if (idx_int != Int_.Min_value) {	// idx is integer
 			Arg_nde_tkn nde = Get_arg(frame, idx_int, frame_arg_adj);
 			//frame.Args_eval_by_idx(core.Ctx().Src(), idx_int); // NOTE: arg[0] is always MW function name; EX: {{#invoke:Mod_0|Func_0|Arg_1}}; arg_x = "Mod_0"; args[0] = "Func_0"; args[1] = "Arg_1"
 			if (nde == null) return rslt.Init_ary_empty();
@@ -183,13 +183,13 @@ public class Scrib_lib_mw implements Scrib_lib {
 			nde.Key_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);
 			int key_len = tmp_bfr.Len();
 			boolean key_missing = key_len == 0;
-			String key_as_str = null; int key_as_int = Int_.MinValue;
+			String key_as_str = null; int key_as_int = Int_.Min_value;
 			boolean key_is_str = false;
 			if (key_missing)	// key missing; EX: {{a|val}}
 				key_as_int = ++arg_idx;// NOTE: MW requires a key; if none, then default to int index; NOTE: must be int, not String; NOTE: must be indexed to keyless args; EX: in "key1=val1,val2", "val2" must be "1" (1st keyless arg) not "2" (2nd arg); DATE:2013-11-09
 			else {				// key exists; EX:{{a|key=val}}
-				key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
-				if (key_as_int == Int_.MinValue) {		// key is not int; create str
+				key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.Min_value);
+				if (key_as_int == Int_.Min_value) {		// key is not int; create str
 					key_as_str = tmp_bfr.Xto_str_and_clear();
 					key_is_str = true;
 				}
@@ -299,10 +299,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
+		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
 		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
-			ttl = Xoa_ttl.parse_(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
+			ttl = Xoa_ttl.parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
 		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
 		byte[] sub_src = null;
@@ -350,10 +350,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xoa_ttl ttl = null;
 		if (Type_adp_.ClassOf_obj(ttl_obj) != String.class) {	 // title = false
 			byte[] ttl_bry = frame.Frame_ttl();
-			ttl = Xoa_ttl.parse_(core.Wiki(), ttl_bry);
+			ttl = Xoa_ttl.parse(core.Wiki(), ttl_bry);
 		}
 		else {
-			ttl = Xoa_ttl.parse_(cur_wiki, Bry_.new_u8((String)ttl_obj));
+			ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8((String)ttl_obj));
 			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
@@ -385,9 +385,9 @@ class Scrib_lib_mw_callParserFunction_sorter implements gplx.lists.ComparerAble 
 		if (lhs_is_int != rhs_is_int)									// different types (int vs String or String vs int)
 			return lhs_is_int ? CompareAble_.Less : CompareAble_.More;	// sort ints before strings
 		if (lhs_is_int)													// both are ints
-			return Int_.Compare(Int_.cast_(lhs_key), Int_.cast_(rhs_key));
+			return Int_.Compare(Int_.cast(lhs_key), Int_.cast(rhs_key));
 		else															// both are strings
-			return String_.Compare(String_.cast_(lhs_key), String_.cast_(rhs_key));
+			return String_.Compare(String_.cast(lhs_key), String_.cast(rhs_key));
 	}
 	public static final Scrib_lib_mw_callParserFunction_sorter _ = new Scrib_lib_mw_callParserFunction_sorter(); Scrib_lib_mw_callParserFunction_sorter() {}
 }

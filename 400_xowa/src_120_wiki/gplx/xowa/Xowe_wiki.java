@@ -78,8 +78,8 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	}
 	public GfoEvMgr					EvMgr() {return ev_mgr;} private final GfoEvMgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
-	public Xoa_ttl					Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse_(this, ttl);}
-	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse_(this, ns_id, ttl);}
+	public Xoa_ttl					Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse(this, ttl);}
+	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse(this, ns_id, ttl);}
 	public boolean						Type_is_edit() {return Bool_.Y;}
 	public Xoa_app					App() {return app;}
 	public Xol_lang					Lang() {return lang;} private final Xol_lang lang;

@@ -39,7 +39,7 @@ public class Sql_qry_wtr_iosql_tst {
 	@Test  public void Url() {
 		fld = IoItm_base_.Prop_Path;
 		tst_Write("url='C:\\fil.txt'", ioCrt_(fld, Criteria_.eq_("C:\\fil.txt")));
-		tst_Write("url IOMATCH '*.txt'", ioCrt_(fld, Criteria_ioMatch.parse_(true, "*.txt", false)));
+		tst_Write("url IOMATCH '*.txt'", ioCrt_(fld, Criteria_ioMatch.parse(true, "*.txt", false)));
 	}
 	@Test  public void Binary() {
 		// parentheses around lhs and rhs

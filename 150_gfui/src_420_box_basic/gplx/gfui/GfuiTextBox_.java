@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiTextBox_ {
 	public static GfuiTextBox as_(Object obj) {return obj instanceof GfuiTextBox ? (GfuiTextBox)obj : null;}
-	public static GfuiTextBox cast_(Object obj) {try {return (GfuiTextBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiTextBox.class, obj);}}
+	public static GfuiTextBox cast(Object obj) {try {return (GfuiTextBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiTextBox.class, obj);}}
 	public static final String NewLine = "\n";	
 	public static final String Ctor_Memo = "TextBox_Memo";
 

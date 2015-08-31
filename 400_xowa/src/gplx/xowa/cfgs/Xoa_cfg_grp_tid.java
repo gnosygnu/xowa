@@ -24,7 +24,7 @@ public class Xoa_cfg_grp_tid {
 	public static final byte Tid_null = 0, Tid_all = 1, Tid_type = 2, Tid_wiki = 3, Tid_app = 4;
 	public static final String Key_app_str = "app";
 	public static final byte[] Key_all_bry = Bry_.new_a7("*"), Key_app_bry = Bry_.new_a7(Key_app_str);
-	public static Xoa_cfg_grp_tid parse_(byte[] key) {
+	public static Xoa_cfg_grp_tid parse(byte[] key) {
 		Xoa_cfg_grp_tid rv = (Xoa_cfg_grp_tid)factory.Get_by_bry(key);
 		if (rv == null) {
 			rv = new Xoa_cfg_grp_tid();

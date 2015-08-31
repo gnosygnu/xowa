@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.texts; import gplx.*;
 import gplx.core.strings.*; import gplx.core.regxs.*;
 public class RegxPatn_cls_like_ {
-	public static RegxPatn_cls_like parse_(String regxRaw, char escape) {
+	public static RegxPatn_cls_like parse(String regxRaw, char escape) {
 		String regx = Compile(regxRaw, escape);
 		return new RegxPatn_cls_like(regxRaw, regx, escape);
 	}		

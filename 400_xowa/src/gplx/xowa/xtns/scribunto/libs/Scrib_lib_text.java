@@ -52,27 +52,25 @@ public class Scrib_lib_text implements Scrib_lib {
 		return rslt.Init_obj(Html_entity_);
 	}	private static KeyVal[] Html_entity_;
 	public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-//			KeyVal[] kv_ary = args.Pull_kv_ary(0);
-//			int flags = args.Cast_int_or(1, 0);
-//			if (!Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
-//				kv_ary = json_util.Reindex_arrays(kv_ary, true);
-//			byte[] rv = json_util.Encode(kv_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
-//			if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
-//			return rslt.Init_obj(rv);
-		return false;
+		KeyVal[] kv_ary = args.Pull_kv_ary(0);
+		int flags = args.Cast_int_or(1, 0);
+		if (!Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
+			kv_ary = json_util.Reindex_arrays(kv_ary, true);
+		byte[] rv = json_util.Encode(kv_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
+		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
+		return rslt.Init_obj(rv);
 	}
 	public boolean JsonDecode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-//			byte[] json = args.Pull_bry(0);
-//			int flags = args.Cast_int_or(1, 0);
-//			int opts = Scrib_lib_text__json_util.Opt__force_assoc;
-//			if (Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
-//				opts = Enm_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
-//			KeyVal[] rv = json_util.Decode(json, opts);
-//			if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
-//			if (!(Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)))
-//				rv = json_util.Reindex_arrays(rv, false);
-//			return rslt.Init_obj(rv);
-		return false;
+		byte[] json = args.Pull_bry(0);
+		int flags = args.Cast_int_or(1, 0);
+		int opts = Scrib_lib_text__json_util.Opt__force_assoc;
+		if (Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
+			opts = Enm_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
+		KeyVal[] rv = json_util.Decode(core.App().Utl__json_parser(), json, opts);
+		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
+		if (!(Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)))
+			rv = json_util.Reindex_arrays(rv, false);
+		return rslt.Init_obj(rv);
 	}
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), KeyVal_.Ary_empty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {

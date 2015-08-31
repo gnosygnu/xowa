@@ -157,7 +157,7 @@ public class Scrib_invoke_func_fxt {
 	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str_ary(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
 		KeyVal[] actl_ary = Test_scrib_proc_rv(lib, proc_name, args);
-		String actl = KeyVal_.Ary_xto_str_nested(actl_ary);
+		String actl = KeyVal_.Ary_to_str_nested(actl_ary);
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	public KeyVal[] Test_scrib_proc_rv_as_kv_ary(Scrib_lib lib, String proc_name, Object[] args) {
@@ -186,10 +186,10 @@ class Scrib_lua_rsp_bldr {
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();
-		if		(Object_.Eq(v_type, Int_.Cls_ref_type))				Bld_int(bfr, Int_.cast_(v));
-		else if	(Object_.Eq(v_type, String_.Cls_ref_type))			Bld_str(bfr, String_.cast_(v));
-		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))				Bld_bool(bfr, Bool_.cast_(v));
-		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))			Bld_double(bfr, Double_.cast_(v));
+		if		(Object_.Eq(v_type, Int_.Cls_ref_type))				Bld_int(bfr, Int_.cast(v));
+		else if	(Object_.Eq(v_type, String_.Cls_ref_type))			Bld_str(bfr, String_.cast(v));
+		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))				Bld_bool(bfr, Bool_.cast(v));
+		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))			Bld_double(bfr, Double_.cast(v));
 		else if	(Object_.Eq(v_type, KeyVal[].class))			Bld_kv_ary(bfr, (KeyVal[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
 		else													throw Err_.new_unhandled(Type_adp_.NameOf_obj(v));

@@ -21,7 +21,7 @@ public class Mysql_conn_info extends Db_conn_info__base {
 	public String Uid() {return uid;} private String uid;
 	public String Pwd() {return pwd;} private String pwd;
 	public static Db_conn_info new_(String server, String database, String uid, String pwd) {
-		return Db_conn_info_.parse_(Bld_raw
+		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key", Tid_const
 		, "server", server
 		, "database", database

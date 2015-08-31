@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
-public class Json_itm_tmp implements Json_itm {
+public class Json_itm_tmp implements Json_itm {	// TEST:
 	public Json_itm_tmp(byte tid, String data) {this.tid = tid; this.data = data;}
 	public byte Tid() {return tid;} private byte tid;
 	public byte[] Data_bry() {return Bry_.new_u8(Object_.Xto_str_strict_or_empty(data));}
@@ -26,6 +26,6 @@ public class Json_itm_tmp implements Json_itm {
 	public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add_str(data);}
 	public boolean Data_eq(byte[] comp) {return false;}
 	public void Clear() {}
-	public static Json_itm new_str_(String v)	{return new Json_itm_tmp(Json_itm_.Tid_string, "\"" + v + "\"");}
-	public static Json_itm new_int_(int v)		{return new Json_itm_tmp(Json_itm_.Tid_int, Int_.Xto_str(v));}
+	public static Json_itm new_str_(String v)	{return new Json_itm_tmp(Json_itm_.Tid__str, "\"" + v + "\"");}
+	public static Json_itm new_int_(int v)		{return new Json_itm_tmp(Json_itm_.Tid__int, Int_.Xto_str(v));}
 }

@@ -19,26 +19,26 @@ package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.gfui.*;
 public class Xog_layout_box implements GfoInvkAble {
 	public GfoInvkAble Owner() {return owner;} public Xog_layout_box Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
-	public int X_abs() {return x_abs;} public Xog_layout_box X_abs_(int v) {x_abs = v; return this;} private int x_abs = Int_.MinValue;
-	public int Y_abs() {return y_abs;} public Xog_layout_box Y_abs_(int v) {y_abs = v; return this;} private int y_abs = Int_.MinValue;
-	public int W_abs() {return w_abs;} public Xog_layout_box W_abs_(int v) {w_abs = v; return this;} private int w_abs = Int_.MinValue;
-	public int H_abs() {return h_abs;} public Xog_layout_box H_abs_(int v) {h_abs = v; return this;} private int h_abs = Int_.MinValue;
-	public int X_rel() {return x_rel;} public Xog_layout_box X_rel_(int v) {x_rel = v; return this;} private int x_rel = Int_.MinValue;
-	public int Y_rel() {return y_rel;} public Xog_layout_box Y_rel_(int v) {y_rel = v; return this;} private int y_rel = Int_.MinValue;
-	public int W_rel() {return w_rel;} public Xog_layout_box W_rel_(int v) {w_rel = v; return this;} private int w_rel = Int_.MinValue;
-	public int H_rel() {return h_rel;} public Xog_layout_box H_rel_(int v) {h_rel = v; return this;} private int h_rel = Int_.MinValue;
+	public int X_abs() {return x_abs;} public Xog_layout_box X_abs_(int v) {x_abs = v; return this;} private int x_abs = Int_.Min_value;
+	public int Y_abs() {return y_abs;} public Xog_layout_box Y_abs_(int v) {y_abs = v; return this;} private int y_abs = Int_.Min_value;
+	public int W_abs() {return w_abs;} public Xog_layout_box W_abs_(int v) {w_abs = v; return this;} private int w_abs = Int_.Min_value;
+	public int H_abs() {return h_abs;} public Xog_layout_box H_abs_(int v) {h_abs = v; return this;} private int h_abs = Int_.Min_value;
+	public int X_rel() {return x_rel;} public Xog_layout_box X_rel_(int v) {x_rel = v; return this;} private int x_rel = Int_.Min_value;
+	public int Y_rel() {return y_rel;} public Xog_layout_box Y_rel_(int v) {y_rel = v; return this;} private int y_rel = Int_.Min_value;
+	public int W_rel() {return w_rel;} public Xog_layout_box W_rel_(int v) {w_rel = v; return this;} private int w_rel = Int_.Min_value;
+	public int H_rel() {return h_rel;} public Xog_layout_box H_rel_(int v) {h_rel = v; return this;} private int h_rel = Int_.Min_value;
 	public String Text() {return text;} public Xog_layout_box Text_(String v) {text = v; return this;} private String text;
 	public String Font_name() {return font_name;} public Xog_layout_box Font_name_(String v) {font_name = v; return this;} private String font_name;
 	public float Font_size() {return font_size;} public Xog_layout_box Font_size_(float v) {font_size = v; return this;} float font_size = Float_.NaN;
 	public FontStyleAdp Font_style() {return font_style;} public Xog_layout_box Font_style_(FontStyleAdp v) {font_style = v; return this;} FontStyleAdp font_style;
 	public byte Mode() {return mode;} public Xog_layout_box Mode_(byte v) {mode = v; return this;} private byte mode = Mode_rel;
 	public void Adj_size(Rect_ref rect) {
-		if (w_abs > -1) rect.W_(w_abs);	if (w_rel != Int_.MinValue) rect.W_(w_rel + rect.W());
-		if (h_abs > -1) rect.H_(h_abs);	if (h_rel != Int_.MinValue) rect.H_(h_rel + rect.H());
+		if (w_abs > -1) rect.W_(w_abs);	if (w_rel != Int_.Min_value) rect.W_(w_rel + rect.W());
+		if (h_abs > -1) rect.H_(h_abs);	if (h_rel != Int_.Min_value) rect.H_(h_rel + rect.H());
 	}
 	public void Adj_pos(Rect_ref rect) {
-		if (x_abs > -1) rect.X_(x_abs);	if (x_rel != Int_.MinValue) rect.X_(x_rel + rect.X());
-		if (y_abs > -1) rect.Y_(y_abs);	if (y_rel != Int_.MinValue) rect.Y_(y_rel + rect.Y());
+		if (x_abs > -1) rect.X_(x_abs);	if (x_rel != Int_.Min_value) rect.X_(x_rel + rect.X());
+		if (y_abs > -1) rect.Y_(y_abs);	if (y_rel != Int_.Min_value) rect.Y_(y_rel + rect.Y());
 	}
 	public void Adj_text(GfuiElem elem) {
 		if (text != null) elem.Text_(text);
@@ -63,7 +63,7 @@ public class Xog_layout_box implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_text_))					text = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_font_name_))				font_name = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_font_size_))				font_size = m.ReadFloat("v");
-		else if	(ctx.Match(k, Invk_font_style_))			font_style = FontStyleAdp_.parse_(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_font_style_))			font_style = FontStyleAdp_.parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_mode_))					mode = String_.Eq(m.ReadStr("v"), "abs") ? Mode_abs : Mode_rel;
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else	return GfoInvkAble_.Rv_unhandled;

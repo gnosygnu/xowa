@@ -76,7 +76,7 @@ public class Xoud_bmk_itm_tbl implements RlsAble {
 			int rv = 0;
 			if (rdr.Move_next()) {
 				Object rv_obj = rdr.Read_obj(fld_sort);
-				rv = rv_obj == null ? 0 : Int_.cast_(rv_obj) + 1;
+				rv = rv_obj == null ? 0 : Int_.cast(rv_obj) + 1;
 			}
 			return rv;
 		}

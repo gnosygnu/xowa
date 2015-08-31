@@ -24,8 +24,8 @@ public class Bool_obj_val {
 	, False = new Bool_obj_val(0)
 	, True	= new Bool_obj_val(1)
 	;
-	public static Bool_obj_val read_(Object o) {String s = String_.as_(o); return s == null ? (Bool_obj_val)o : parse_(s);}
-	public static Bool_obj_val parse_(String raw) {
+	public static Bool_obj_val read_(Object o) {String s = String_.as_(o); return s == null ? (Bool_obj_val)o : parse(s);}
+	public static Bool_obj_val parse(String raw) {
 		if		(String_.Eq(raw, "y"))	return Bool_obj_val.True;
 		else if	(String_.Eq(raw, "n"))	return Bool_obj_val.False;
 		else if	(String_.Eq(raw, ""))	return Bool_obj_val.Null;

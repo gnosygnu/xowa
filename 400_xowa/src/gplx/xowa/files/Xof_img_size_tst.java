@@ -67,7 +67,7 @@ public class Xof_img_size_tst {
 		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(-1, 40).Orig_(1, 1).Test_html(40, 40, Bool_.N);	// NOTE: used to be 1,1
 	}
 	@Test  	public void Svg_max_width() {	// PURPOSE: large width causes int overflow; vi.w:Danh_sách_quốc_kỳ DATE:2014-04-26
-		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(Int_.MaxValue, 90).Orig_(900, 600).Test_html(135, 90, Bool_.N);	// NOTE: used to be Int_.MaxValue,90
+		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(Int_.Max_value, 90).Orig_(900, 600).Test_html(135, 90, Bool_.N);	// NOTE: used to be Int_.Max_value,90
 	}
 	@Test  	public void Pdf_none_defaults_to_thumb() {	// PURPOSE: if no width is specified, pdf uses thumb width default, not orig width); DATE: 2013-11-27
 		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_pdf).Lnki_(-1, -1).Orig_(440, 220).Test_html(220, 110, Bool_.N);	// NOTE: used to be 1,1

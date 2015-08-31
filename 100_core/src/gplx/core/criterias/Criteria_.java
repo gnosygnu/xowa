@@ -47,7 +47,7 @@ public class Criteria_ {
 	public static Criteria mte_(Comparable val) {return new Criteria_comp(CompareAble_.MoreOrSame, val);}
 	public static Criteria between_(Comparable lhs, Comparable rhs) {return new Criteria_between(false, lhs, rhs);}
 	public static Criteria between_(boolean negated, Comparable lhs, Comparable rhs) {return new Criteria_between(negated, lhs, rhs);}
-	public static Criteria like_(String pattern) {return new Criteria_like(false, RegxPatn_cls_like_.parse_(pattern, RegxPatn_cls_like.EscapeDefault));}
-	public static Criteria liken_(String pattern) {return new Criteria_like(true, RegxPatn_cls_like_.parse_(pattern, RegxPatn_cls_like.EscapeDefault));}
+	public static Criteria like_(String pattern) {return new Criteria_like(false, RegxPatn_cls_like_.parse(pattern, RegxPatn_cls_like.EscapeDefault));}
+	public static Criteria liken_(String pattern) {return new Criteria_like(true, RegxPatn_cls_like_.parse(pattern, RegxPatn_cls_like.EscapeDefault));}
 	public static final byte Tid_custom = 0, Tid_const = 1, Tid_not = 2, Tid_and = 3, Tid_or = 4, Tid_eq = 5, Tid_between = 6, Tid_in = 7, Tid_like = 8, Tid_comp = 9, Tid_wrapper = 10, Tid_iomatch = 11, Tid_db_obj_ary = 12;
 }

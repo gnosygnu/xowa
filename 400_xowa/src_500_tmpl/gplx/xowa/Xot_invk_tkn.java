@@ -171,7 +171,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null) {
 					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; PAGE:en.w:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
-						Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+						Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 						if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 							byte[] missing_ttl 
 								= subst_found || template_prefix_found // if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
@@ -196,7 +196,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
 			if (page != Xowd_page_itm.Null) {
 				name_ary = page.Ttl_page_db();
-				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+				Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 				if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary).Add(Xop_curly_end_lxr.Hook);
 					return false;
@@ -333,7 +333,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		}
 	}
 	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
+		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
 		if (page_ttl.Ns().Id_tmpl()) {					// ttl is template; check tmpl_regy first before going to data_mgr
 			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
@@ -387,7 +387,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon).Add(template_ns_name).Add_byte(Byte_ascii.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 	}
 	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
+		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {
 			case Xow_ns_.Id_template:	// ttl is template not in cache, or some other ns; do load

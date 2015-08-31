@@ -18,10 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.json; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Json_doc_tst {
-	Json_qry_mgr_fxt fxt = new Json_qry_mgr_fxt();
-	@Before public void init() {}
+	private final Json_qry_mgr_fxt fxt = new Json_qry_mgr_fxt();
 	@Test  public void Select() {
-		Json_doc doc = Json_doc.new_apos_(String_.Concat_lines_nl
+		Json_doc doc = fxt.Make_json
 		(	"{'0':"
 		,	"  {'0_0':"
 		,	"    {'0_0_0':'000'"
@@ -31,13 +30,15 @@ public class Json_doc_tst {
 		,	"    }"
 		,	"  }"
 		,	"}"
-		));
+		);
 		fxt.Test_get_val_as_str(doc, "0/0_0/0_0_0", "000");
 		fxt.Test_get_val_as_str(doc, "0/0_1/0_1_0", "010");
 		fxt.Test_get_val_as_str(doc, "x", null);
 	}
 }
 class Json_qry_mgr_fxt {
+	private final Json_parser json_parser = new Json_parser();
+	public Json_doc Make_json(String... ary) {return json_parser.Parse_by_apos_ary(ary);}
 	public void Test_get_val_as_str(Json_doc doc, String qry, String expd){
 		byte[][] qry_bry = Bry_.Split(Bry_.new_u8(qry), Byte_ascii.Slash);
 		Tfds.Eq(expd, doc.Get_val_as_str_or(qry_bry, null));

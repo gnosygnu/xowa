@@ -98,8 +98,8 @@ class Pxd_parser {
 		Pxd_itm itm = null;
 		switch (tkn_type) {
 			case Pxd_itm_.Tid_int:
-				int int_val = Bry_.To_int_or(src, tkn_bgn_pos, cur_pos, Int_.MinValue);
-				if (int_val == Int_.MinValue) {} // FUTURE: warn
+				int int_val = Bry_.To_int_or(src, tkn_bgn_pos, cur_pos, Int_.Min_value);
+				if (int_val == Int_.Min_value) {} // FUTURE: warn
 				int digits = cur_pos - tkn_bgn_pos;
 				switch (digits) {
 					case 14:	// yyyyMMddhhmmss

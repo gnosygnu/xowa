@@ -65,7 +65,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public boolean GetEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		byte[] rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qids_get(wiki, ttl); if (rv == null) rv = Bry_.Empty;
 		return rslt.Init_obj(rv);
 	}

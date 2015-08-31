@@ -55,10 +55,11 @@ public class Xoa_url_parser_fxt {
 		return this;
 	}
 	public Xoa_url_parser_fxt Run_parse_from_url_bar(String raw) {
-		this.actl_url = parser.Parse_by_urlbar(raw);
+		this.actl_url = parser.Parse_by_urlbar_or_null(raw);
 		return this;
 	}
 	public Xoa_url_parser_fxt	Chk_tid(int v) 					{Tfds.Eq_int(v, actl_url.Tid()		, "tid"); return this;}
+	public Xoa_url_parser_fxt	Chk_is_null() 					{Tfds.Eq_bool(true, actl_url == null); return this;}
 	public Xoa_url_parser_fxt	Chk_vnt(String v) 				{Tfds.Eq_str(v, actl_url.Vnt_bry()	, "vnt"); return this;}
 	public Xoa_url_parser_fxt	Chk_wiki(String v) 				{Tfds.Eq_str(v, actl_url.Wiki_bry()	, "wiki"); return this;}
 	public Xoa_url_parser_fxt	Chk_wiki_is_missing(boolean v)		{Tfds.Eq_bool(v, actl_url.Wiki_is_missing(), "wiki_is_missing"); return this;}

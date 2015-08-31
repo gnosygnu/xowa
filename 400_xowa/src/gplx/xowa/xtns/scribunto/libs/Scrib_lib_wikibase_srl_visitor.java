@@ -82,8 +82,8 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Globecoordinate_value(Wdata_claim_itm_globecoordinate itm) {
 		KeyVal[] rv = new KeyVal[5];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse_(String_.new_a7(itm.Lat())));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse_(String_.new_a7(itm.Lng())));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse(String_.new_a7(itm.Lat())));
+		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse(String_.new_a7(itm.Lng())));
 		rv[2] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_altitude			, null);
 		rv[3] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_globe				, Wdata_dict_value_globecoordinate.Val_globe_dflt_str);
 		rv[4] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_precision			, .00001d);

@@ -40,7 +40,7 @@ public class GfuiBorderMgr {
 			this.None_();
 		else {
 			Object[] ary = (Object[])o;
-			this.Edge_set(GfuiBorderEdge.All, PenAdp_.new_((ColorAdp)ary[1], Float_.cast_(ary[0])));
+			this.Edge_set(GfuiBorderEdge.All, PenAdp_.new_((ColorAdp)ary[1], Float_.cast(ary[0])));
 		}
 	}
 	public void Edge_set(GfuiBorderEdge edge, PenAdp pen) {

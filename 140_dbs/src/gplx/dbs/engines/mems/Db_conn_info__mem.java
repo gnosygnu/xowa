@@ -24,7 +24,7 @@ public class Db_conn_info__mem extends Db_conn_info__base {
 		return rv;
 	}
 	public static Db_conn_info new_(String database) {
-		return Db_conn_info_.parse_(Bld_raw
+		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key", Tid_const
 		, "database", database
 		));

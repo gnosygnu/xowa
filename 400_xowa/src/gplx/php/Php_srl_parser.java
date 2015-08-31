@@ -42,7 +42,7 @@ public class Php_srl_parser {
 				val = Xto_kv_ary(ary);
 				break;
 			case Php_srl_itm_.Tid_function:
-				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(Object_.Xto_str_strict_or_null_mark(key), Int_.cast_(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
+				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(Object_.Xto_str_strict_or_null_mark(key), Int_.cast(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
 				break;
 			default:
 				val = itm_val.Val();
@@ -111,7 +111,7 @@ public class Php_srl_parser {
 				double double_val = 0;
 				if		(String_.Eq(double_str, "INF")) double_val = Double_.Inf_pos;
 				else if (String_.Eq(double_str, "NAN")) double_val = Double_.NaN;
-				else 									double_val = Double_.parse_(double_str);
+				else 									double_val = Double_.parse(double_str);
 				rv = factory.Double(pos, double_end, double_val);
 				pos = Chk(raw, double_end, Byte_ascii.Semic);
 				break;
@@ -147,7 +147,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.MinValue);
+		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
 		pos = int_end;
 		return int_val;		
 	}
@@ -155,7 +155,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.MinValue);
+		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
 		Php_srl_itm_int rv = factory.Int(pos, int_end, int_val);
 		pos = int_end;
 		return rv;

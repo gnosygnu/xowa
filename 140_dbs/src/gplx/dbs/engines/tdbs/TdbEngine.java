@@ -77,7 +77,7 @@ public class TdbEngine implements Db_engine {
 		wkrs.Add(Db_qry_.Tid_flush, TdbFlushWkr.new_());
 	}
 	public static TdbEngine as_(Object obj) {return obj instanceof TdbEngine ? (TdbEngine)obj : null;}
-	public static TdbEngine cast_(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbEngine.class, obj);}}
+	public static TdbEngine cast(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbEngine.class, obj);}}
 }
 interface Db_qryWkr {
 	Object Exec(Db_engine engine, Db_qry cmd);

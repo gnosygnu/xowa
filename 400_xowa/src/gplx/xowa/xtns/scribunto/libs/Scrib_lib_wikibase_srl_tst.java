@@ -72,7 +72,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Sitelinks_both_formats() {	// PURPOSE: check that both formats are serializable; DATE:2014-02-06
-		Json_doc jdoc = Json_doc.new_apos_concat_nl
+		Json_doc jdoc = fxt.Wdata_fxt().App().Utl__json_parser().Parse_by_apos_ary
 		(	"{ 'entity':['item',2]"
 		,	", 'links':"
 		,	"  {"

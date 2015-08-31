@@ -27,8 +27,8 @@ public class Xol_lang_srl {
 			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
-					cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.MinValue);
-					if (cur_id == Int_.MinValue) throw Err_.new_wo_type("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
+					cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.Min_value);
+					if (cur_id == Int_.Min_value) throw Err_.new_wo_type("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
 					fld_bgn = pos + 1;
 					break;
 				case Byte_ascii.Nl:

@@ -50,8 +50,8 @@ public class Xows_ns_mgr {
 			if (key_len == 3 && key[2] == Byte_ascii.Star)		// translate ns* as ns_all
 				ns_all = true;
 			else {
-				int ns_id = Bry_.To_int_or(key, 2, key_len, Int_.MinValue);
-				if (ns_id != Int_.MinValue) {						// ignore invalid ints; EX: &nsabc=1;
+				int ns_id = Bry_.To_int_or(key, 2, key_len, Int_.Min_value);
+				if (ns_id != Int_.Min_value) {						// ignore invalid ints; EX: &nsabc=1;
 					Add_by_id(ns_id);
 					ns_main = ns_all = false;
 				}

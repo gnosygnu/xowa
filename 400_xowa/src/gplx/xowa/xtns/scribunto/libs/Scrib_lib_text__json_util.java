@@ -34,8 +34,8 @@ class Scrib_lib_text__json_util {
 			if (kv_val != null && Type_adp_.Eq(kv_val.getClass(), KeyVal[].class))
 				kv_val = Reindex_arrays((KeyVal[])kv_val, is_encoding);
 			if (is_sequence) {
-				if (kv.Key_tid() == KeyVal_.Key_tid_int) {
-					int kv_key_as_int = Int_.cast_(kv.Key_as_obj());
+				if (kv.Key_tid() == Type_adp_.Tid__int) {
+					int kv_key_as_int = Int_.cast(kv.Key_as_obj());
 					is_sequence = next++ == kv_key_as_int;
 				// } elseif ( $isEncoding && ctype_digit( $k ) ) {
 				//	// json_decode currently doesn't return integer keys for {}
@@ -54,8 +54,44 @@ class Scrib_lib_text__json_util {
 		}
 		return kv_ary;
 	}
-	public KeyVal[] Decode(byte[] src, int flag) {
-		return null;
+	public KeyVal[] Decode(Json_parser parser, byte[] src, int flag) {
+		Json_doc jdoc = parser.Parse(src);
+		Json_nde root = jdoc.Root_nde();
+		int len = root.Len();
+		KeyVal[] rv = new KeyVal[len];
+		for (int i = 0; i < len; ++i) {
+			Json_kv json_kv = root.Get_at_as_kv(i);
+			String kv_str = json_kv.Key_as_str();
+			Object kv_val = Decode_obj(json_kv.Val());
+			rv[i] = KeyVal_.new_(kv_str, kv_val);
+		}
+		return rv;
+	}
+	private Object Decode_obj(Json_itm itm) {
+		int itm_tid = itm.Tid();
+		switch (itm_tid) {
+			case Json_itm_.Tid__ary:	return Decode_ary(Json_ary.cast(itm));
+			case Json_itm_.Tid__nde:		return Decode_nde(Json_nde.cast(itm));
+			default:					return itm.Data();
+		}
+	}
+	private Object Decode_ary(Json_ary ary) {
+		int len = ary.Len();
+		Object rv = Array_.Create(int.class, len);	
+		for (int i = 0; i < len; ++i) {
+			Json_itm itm = ary.Get_at(i);
+			Array_.Set(rv, i, Decode_obj(itm));
+		}
+		return rv;
+	}
+	private KeyVal[] Decode_nde(Json_nde nde) {
+		int len = nde.Len();
+		KeyVal[] rv = new KeyVal[len];
+		for (int i = 0; i < len; ++i) {
+			Json_kv itm = nde.Get_at_as_kv(i);
+			rv[i] = KeyVal_.new_(itm.Key_as_str(), Decode_obj(itm.Val()));
+		}
+		return rv;
 	}
 	public byte[] Encode(KeyVal[] kv_ary, int flag, int skip) {
 		synchronized (wtr ) {
@@ -87,11 +123,11 @@ class Scrib_lib_text__json_util {
 				wtr.Ary_itm_obj(Array_.Get_at(ary, j));
 			wtr.Ary_end();
 		}
-		else if (Type_adp_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.cast_(kv_val));
-		else if (Type_adp_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast_(kv_val));
-		else if (Type_adp_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast_(kv_val));
-		else if (Type_adp_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast_(kv_val));
-		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		wtr.Kv_bool(kv.Key(), Bool_.cast_(kv_val));
+		else if (Type_adp_.Eq(type, Int_.Cls_ref_type))			wtr.Kv_int(kv.Key(), Int_.cast(kv_val));
+		else if (Type_adp_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast(kv_val));
+		else if (Type_adp_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast(kv_val));
+		else if (Type_adp_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast(kv_val));
+		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		wtr.Kv_bool(kv.Key(), Bool_.cast(kv_val));
 		else													wtr.Kv_str(kv.Key(), Object_.Xto_str_strict_or_null(kv_val));
 	}		
 	public static final int

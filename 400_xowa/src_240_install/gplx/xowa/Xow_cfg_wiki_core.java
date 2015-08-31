@@ -50,7 +50,7 @@ public class Xow_cfg_wiki_core {
 	}
 	public static void Load_ns_(Xow_ns_mgr ns_mgr, byte[] src) {// 10|1|Template
 		int len = src.length; int pos = 0, fld_bgn = 0, fld_idx = 0, row_bgn = 0;
-		int cur_id = Int_.MinValue; byte cur_case_match = Byte_.Max_value_127; byte[] cur_name = Bry_.Empty;
+		int cur_id = Int_.Min_value; byte cur_case_match = Byte_.Max_value_127; byte[] cur_name = Bry_.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == len;
@@ -58,7 +58,7 @@ public class Xow_cfg_wiki_core {
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
-						case 0:		cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.MinValue);					if (cur_id == Int_.MinValue)		throw Err_.new_wo_type("failed to load id", "id", String_.new_u8(src, fld_bgn, pos)); break;
+						case 0:		cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.Min_value);					if (cur_id == Int_.Min_value)		throw Err_.new_wo_type("failed to load id", "id", String_.new_u8(src, fld_bgn, pos)); break;
 						case 1:		cur_case_match = Bry_.To_int_as_byte(src, fld_bgn, pos, Byte_.Max_value_127);	if (cur_id == Byte_.Max_value_127)	throw Err_.new_wo_type("failed to load match", "id", String_.new_u8(src, fld_bgn, pos)); break;
 						default:	throw Err_.new_unhandled(fld_idx);
 					}
@@ -70,7 +70,7 @@ public class Xow_cfg_wiki_core {
 						cur_name = csv_parser.Load(src, fld_bgn, pos);
 						ns_mgr.Add_new(cur_id, cur_name, cur_case_match, false);
 					}
-					cur_id = Int_.MinValue; cur_case_match = Byte_.Max_value_127;
+					cur_id = Int_.Min_value; cur_case_match = Byte_.Max_value_127;
 					fld_bgn = pos + 1;
 					fld_idx = 0;
 					row_bgn = fld_bgn;

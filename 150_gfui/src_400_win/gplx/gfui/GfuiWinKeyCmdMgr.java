@@ -43,7 +43,7 @@ class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		ctx.Match(k, k);
 		CheckForHotKey(IptEventData.ctx_(ctx, m));
-		//boolean handled = CheckForHotKey(IptEventData.cast_(msg.Val())); msg.Fwd_set(!handled); // TOMBSTONE: somehow cause alt-F4 to continue processing and dispose form
+		//boolean handled = CheckForHotKey(IptEventData.cast(msg.Val())); msg.Fwd_set(!handled); // TOMBSTONE: somehow cause alt-F4 to continue processing and dispose form
 		return this;
 	}	@gplx.Internal protected static final String CheckForHotKey_cmd = "CheckForHotKey_cmd";
 
@@ -56,6 +56,6 @@ class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 	}
 	public static IptKey ExtractKeyFromText(String raw) {
 		int pos = ExtractPosFromText(raw); if (pos == String_.Find_none) return IptKey_.None;
-		return IptKey_.parse_("key." + String_.Lower(Char_.To_str(String_.CharAt(raw, pos + 1))));	// pos=& pos; + 1 to get next letter
+		return IptKey_.parse("key." + String_.Lower(Char_.To_str(String_.CharAt(raw, pos + 1))));	// pos=& pos; + 1 to get next letter
 	}
 }

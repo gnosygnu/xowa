@@ -125,8 +125,8 @@ public class Wdata_doc_wtr {
 						wtr.Val(Bool_.Y, Wdata_dict_val_tid.Bry_globecoordinate);
 						wtr.Comma();
 						wtr.Nde_bgn();
-						wtr.Kv_double	(Bool_.N, Wdata_dict_value_globecoordinate.Bry_latitude		, Double_.parse_(String_.new_a7(claim_globecoordinate.Lat())));
-						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_longitude	, Double_.parse_(String_.new_a7(claim_globecoordinate.Lng())));
+						wtr.Kv_double	(Bool_.N, Wdata_dict_value_globecoordinate.Bry_latitude		, Double_.parse(String_.new_a7(claim_globecoordinate.Lat())));
+						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_longitude	, Double_.parse(String_.new_a7(claim_globecoordinate.Lng())));
 						wtr.Kv			(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_altitude		, null);
 						wtr.Kv			(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_globe		, Wdata_dict_value_globecoordinate.Val_globe_dflt_bry);
 						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_precision	, .00001d);

@@ -66,7 +66,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		layout.Init(browser_win);
 		cmd_mgr.Init_by_kit(app);
 		app.Api_root().Init_by_kit(app);
-		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
+		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
 		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);

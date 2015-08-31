@@ -34,7 +34,7 @@ public class Xob_deploy_zip_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		for (Io_url ns_dir : ns_dirs) {
 			Log("zipping dir: ~{0}", ns_dir.Raw());
 			String ns_num = ns_dir.NameOnly();
-			Xow_ns ns_itm = wiki.Ns_mgr().Ids_get_or_null(Int_.parse_(ns_num));
+			Xow_ns ns_itm = wiki.Ns_mgr().Ids_get_or_null(Int_.parse(ns_num));
 			Zip_ns(bldr, ns_dir, type_name, ns_itm.Name_str());
 		}
 	}

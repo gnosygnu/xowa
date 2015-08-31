@@ -28,7 +28,7 @@ public class Db_qry_flush implements Db_qry {
 	
 
 	public static Db_qry_flush as_(Object obj) {return obj instanceof Db_qry_flush ? (Db_qry_flush)obj : null;}
-	public static Db_qry_flush cast_(Object obj) {try {return (Db_qry_flush)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Db_qry_flush.class, obj);}}
+	public static Db_qry_flush cast(Object obj) {try {return (Db_qry_flush)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Db_qry_flush.class, obj);}}
 	public static Db_qry_flush new_(String... ary) {
 		Db_qry_flush rv = new Db_qry_flush();
 		rv.tableNames = ary;

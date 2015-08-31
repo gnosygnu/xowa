@@ -25,9 +25,9 @@ public class FontStyleAdp_ implements ParseAble {
 		, BoldItalic	= new FontStyleAdp(3)
 		;
 	public static final FontStyleAdp_ Parser = new FontStyleAdp_();
-	public Object ParseAsObj(String raw) {return FontStyleAdp_.parse_(raw);}
+	public Object ParseAsObj(String raw) {return FontStyleAdp_.parse(raw);}
 
-	public static FontStyleAdp cast_(Object obj) {try {return (FontStyleAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontStyleAdp.class, obj);}}
+	public static FontStyleAdp cast(Object obj) {try {return (FontStyleAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontStyleAdp.class, obj);}}
 	public static FontStyleAdp parseOr_(String raw, FontStyleAdp or) {
 		FontStyleAdp rv = parse_internal_(raw); if (rv == null) return or;
 		return rv;
@@ -37,11 +37,11 @@ public class FontStyleAdp_ implements ParseAble {
 		v += italic == Bool_obj_val.True ? 2 : 0;
 		return lang_(v);
 	}
-	public static FontStyleAdp parse_(String raw) {
+	public static FontStyleAdp parse(String raw) {
 		FontStyleAdp rv = parse_internal_(raw); if (rv == null) throw Err_.new_unhandled(raw);
 		return rv;
 	}
-	public static FontStyleAdp read_(Object o) {String s = String_.as_(o); return s != null ? FontStyleAdp_.parse_(s) : FontStyleAdp_.cast_(o);}
+	public static FontStyleAdp read_(Object o) {String s = String_.as_(o); return s != null ? FontStyleAdp_.parse(s) : FontStyleAdp_.cast(o);}
 	static FontStyleAdp parse_internal_(String raw) {
 		if		(String_.Eq(raw, "plain"))		return FontStyleAdp_.Plain;
 		else if (String_.Eq(raw, "bold"))		return FontStyleAdp_.Bold;

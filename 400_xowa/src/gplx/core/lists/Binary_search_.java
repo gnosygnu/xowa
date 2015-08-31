@@ -47,6 +47,6 @@ public class Binary_search_ {
 			else if (pos > pos_last)	pos = pos_last;
 			pos_prv = pos;
 		}
-		return Int_.MinValue;	// should only occur if (a) ary's 0th slot is not ""; or (b) some unknown error
+		return Int_.Min_value;	// should only occur if (a) ary's 0th slot is not ""; or (b) some unknown error
 	}
 }

@@ -44,7 +44,7 @@ class Xows_core {
 				qry.Cmds__add(cmd);
 			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "search:wiki failed; wiki=~{0} err=~{1}", domain.Domain_str(), Err_.Message_lang(e));}	// handle bad wikis, like "en.wikipedia.org-old"; DATE:2015-04-24
 		}
-		qry.Page_max_(Int_.MaxValue);
+		qry.Page_max_(Int_.Max_value);
 		// do search and generate html
 		html_wkr.Init_by_wiki(search_wiki, search_wiki.Lang().Num_mgr(), qry);
 		int cmds_len = qry.Cmds__len();

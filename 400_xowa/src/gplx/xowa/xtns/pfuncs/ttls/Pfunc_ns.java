@@ -26,8 +26,8 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
 
 		int val_dat_ary_len = val_dat_ary.length;
-		int ns_id = Bry_.To_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.MinValue);
-		if (ns_id == Int_.MinValue) {
+		int ns_id = Bry_.To_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.Min_value);
+		if (ns_id == Int_.Min_value) {
 			Object o = ctx.Wiki().Ns_mgr().Names_get_or_null(val_dat_ary, 0, val_dat_ary_len);
 			if (o == null
 				&& !Bry_.Eq(ctx.Lang().Key_bry(), Xol_lang_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex

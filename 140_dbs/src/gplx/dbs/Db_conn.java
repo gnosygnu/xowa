@@ -73,8 +73,8 @@ public class Db_conn {
 		Gfo_usr_dlg_.I.Plog_many("", "", "done:" + msg);
 		return rv;
 	}
-	public int				Exec_qry(Db_qry qry)		{return Int_.cast_(engine.Exec_as_obj(qry));}
-	public DataRdr			Exec_qry_as_rdr(Db_qry qry)	{return DataRdr_.cast_(engine.Exec_as_obj(qry));}
+	public int				Exec_qry(Db_qry qry)		{return Int_.cast(engine.Exec_as_obj(qry));}
+	public DataRdr			Exec_qry_as_rdr(Db_qry qry)	{return DataRdr_.cast(engine.Exec_as_obj(qry));}
 	public int				Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(String_.Format(sql, args)));}
 	public DataRdr			Exec_sql_as_rdr(String sql)						{return this.Exec_qry_as_rdr(Db_qry_sql.rdr_(sql));}
 }

@@ -21,8 +21,8 @@ import gplx.html.*; import gplx.xowa.html.*;
 class Dpl_itm {
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
-	public int Count() {return count;} private int count = Int_.MinValue;
-	public int Offset() {return offset;} private int offset = Int_.MinValue;
+	public int Count() {return count;} private int count = Int_.Min_value;
+	public int Offset() {return offset;} private int offset = Int_.Min_value;
 	public boolean No_follow() {return no_follow;} private boolean no_follow;
 	public boolean Suppress_errors() {return suppress_errors;} private boolean suppress_errors;
 	public boolean Show_ns() {return show_ns;} private boolean show_ns;
@@ -108,11 +108,11 @@ class Dpl_itm {
 			case Dpl_itm_keys.Key_stablepages:			stable_pages = Dpl_stable_tid.Parse(val); break;
 			case Dpl_itm_keys.Key_qualitypages:			quality_pages = Dpl_redirect.Parse(val); break;
 			case Dpl_itm_keys.Key_addfirstcategorydate:	Parse_ctg_date(val); break;
-			case Dpl_itm_keys.Key_count:				count = Bry_.To_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_offset:				offset = Bry_.To_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = Bry_.To_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = Bry_.To_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = Bry_.To_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_count:				count = Bry_.To_int_or(val, Int_.Min_value); break;
+			case Dpl_itm_keys.Key_offset:				offset = Bry_.To_int_or(val, Int_.Min_value); break;
+			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = Bry_.To_int_or(val, Int_.Min_value); break;
+			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = Bry_.To_int_or(val, Int_.Min_value); break;
+			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = Bry_.To_int_or(val, Int_.Min_value); break;
 			case Dpl_itm_keys.Key_gallerycaption:		gallery_caption = val; break;	// FUTURE: parse for {{int:}}?
 			case Dpl_itm_keys.Key_galleryshowfilesize:	gallery_filesize = Dpl_itm_keys.Parse_as_bool(val, true); break;
 			case Dpl_itm_keys.Key_galleryshowfilename:	gallery_filename = Dpl_itm_keys.Parse_as_bool(val, true); break;
@@ -164,7 +164,7 @@ class Dpl_itm {
 	.Add_str_obj("limit"						, Bool_obj_val.True)
 	.Add_str_obj("namespacename"				, Bool_obj_val.True)
 	;
-	public static final int Ns_filter_null = Int_.MinValue;
+	public static final int Ns_filter_null = Int_.Min_value;
 	// boolean ctg_date = false, ctg_date_strip = false;
 	// byte[] ns_include = null;
 	// byte[] ctg_date_fmt;

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 class GfuiFocusXferBnd implements InjectAble, GfoInvkAble {
 	public void Inject(Object owner) {
-		GfuiElem elem = GfuiElem_.cast_(owner);		
+		GfuiElem elem = GfuiElem_.cast(owner);		
 		IptBnd_.cmd_to_(IptCfg_.Null, elem, this, Invk_FocusNext, IptKey_.Down);
 		IptBnd_.cmd_to_(IptCfg_.Null, elem, this, Invk_FocusPrev, IptKey_.Up);
 	}
@@ -28,7 +28,7 @@ class GfuiFocusXferBnd implements InjectAble, GfoInvkAble {
 		GfuiElem target = cur;
 		while (true) {	// find next visible elem
 			int cycle = TabBox_.Cycle(fwd, curIdx, allElemsInOwnerWin.Count());
-			target = GfuiElem_.cast_(allElemsInOwnerWin.Get_at(cycle));
+			target = GfuiElem_.cast(allElemsInOwnerWin.Get_at(cycle));
 			if (target.Visible()) break;
 			if (cycle == curIdx) break;	// either (a) one elem in allElemsInOwnerWin or (b) n elems, and cycled back to start; break, else infinite loop
 			curIdx = cycle;
@@ -43,8 +43,8 @@ class GfuiFocusXferBnd implements InjectAble, GfoInvkAble {
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_FocusNext))			Focus(GfuiElem_.cast_(ctx.MsgSrc()), true);
-		else if	(ctx.Match(k, Invk_FocusPrev))			Focus(GfuiElem_.cast_(ctx.MsgSrc()), false);
+		if		(ctx.Match(k, Invk_FocusNext))			Focus(GfuiElem_.cast(ctx.MsgSrc()), true);
+		else if	(ctx.Match(k, Invk_FocusPrev))			Focus(GfuiElem_.cast(ctx.MsgSrc()), false);
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_FocusNext = "FocusNext", Invk_FocusPrev = "FocusPrev";

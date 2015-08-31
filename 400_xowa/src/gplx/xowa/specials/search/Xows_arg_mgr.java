@@ -45,7 +45,7 @@ class Xows_arg_mgr {
 				switch (((Byte_obj_val)tid).Val()) {
 					case Arg_search: 		this.search_bry 	= Bry_.Replace(arg.Val_bry(), Byte_ascii.Plus, Byte_ascii.Space); break;
 					case Arg_page_idx: 		this.paging_idx 	= Bry_.To_int_or(arg.Val_bry(), 0); break;
-					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse_(String_.new_a7(arg.Val_bry())); break;			
+					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse(String_.new_a7(arg.Val_bry())); break;			
 					case Arg_cancel: 		this.cancel			= arg.Val_bry(); break;
 					case Arg_paging: 		this.paging_itms	= paging_parser.Parse(arg.Val_bry()); break;
 					default:				break;

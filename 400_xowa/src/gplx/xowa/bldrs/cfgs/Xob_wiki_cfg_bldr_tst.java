@@ -129,14 +129,14 @@ public class Xob_wiki_cfg_bldr_tst {
 			String api = protocol + wiki + "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases";
 			String xml = String_.new_u8(Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
 			if (xml == null) continue;	// not found
-			gplx.xmls.XmlDoc xdoc = gplx.xmls.XmlDoc_.parse_(xml);
+			gplx.xmls.XmlDoc xdoc = gplx.xmls.XmlDoc_.parse(xml);
 			gplx.xmls.XmlNde xnde = gplx.xmls.Xpath_.SelectFirst(xdoc.Root(), "query/namespacealiases");
 			sb.Add("app.bldr.wiki_cfg_bldr.get('").Add(wiki).Add("').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\"\n");
 			int xndes_len = xnde.SubNdes().Count();
 			for (int j = 0; j < xndes_len; j++) {
 				gplx.xmls.XmlNde ns_nde = xnde.SubNdes().Get_at(j);
 				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
-				int id = Int_.parse_(ns_nde.Atrs().FetchValOr("id", "-1"));
+				int id = Int_.parse(ns_nde.Atrs().FetchValOr("id", "-1"));
 				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
 				sb.Add(Int_.Xto_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
 			}

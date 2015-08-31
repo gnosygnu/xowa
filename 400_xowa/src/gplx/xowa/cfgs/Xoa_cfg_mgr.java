@@ -28,7 +28,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 		Xoa_cfg_grp grp = null;
 		Object grp_obj = hash.Get_by(grp_key);
 		if (grp_obj == null) {
-			Xoa_cfg_grp_tid tid = Xoa_cfg_grp_tid.parse_(itm_key);
+			Xoa_cfg_grp_tid tid = Xoa_cfg_grp_tid.parse(itm_key);
 			grp = new Xoa_cfg_grp(this, tid, grp_key);
 			hash.Add(grp_key, grp);
 		}

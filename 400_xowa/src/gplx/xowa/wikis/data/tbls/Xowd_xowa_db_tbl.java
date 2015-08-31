@@ -48,7 +48,7 @@ public class Xowd_xowa_db_tbl {
 				if (!schema_is_1) {
 					ns_ids = rdr.Read_str(fld_ns_ids);
 					part_id = rdr.Read_int(fld_part_id);
-					guid = Guid_adp_.parse_(rdr.Read_str(fld_guid));
+					guid = Guid_adp_.parse(rdr.Read_str(fld_guid));
 				}
 				list.Add(Xowd_db_file.load_(props, rdr.Read_int(fld_id), rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid));
 			}

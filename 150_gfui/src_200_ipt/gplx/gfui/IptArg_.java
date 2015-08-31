@@ -20,7 +20,7 @@ public class IptArg_ {
 	public static final IptArg[] Ary_empty = new IptArg[0];
 	public static final IptArg Null = null;
 	public static final String Wildcard_key = "wildcard";
-	public static IptArg Wildcard = new IptKey(Int_.MaxValue, Wildcard_key);
+	public static IptArg Wildcard = new IptKey(Int_.Max_value, Wildcard_key);
 	public static boolean Is_null_or_none(IptArg arg) {return arg == Null || arg == IptKey_.None;}
 	public static IptArg[] Ary(IptArg... v) {return v;}
 	public static IptArg[] parse_ary_or_empty(String v) {
@@ -35,28 +35,28 @@ public class IptArg_ {
 		int args_len = args.length; if (args_len == 0) return Ary_empty;
 		IptArg[] rv = new IptArg[args_len];
 		for (int i = 0; i < args_len; i++)
-			rv[i] = parse_(String_.Trim(args[i]));
+			rv[i] = parse(String_.Trim(args[i]));
 		return rv;
 	}
-	public static IptArg parse_chain_(String raw) {return IptKeyChain.parse_(raw);}
+	public static IptArg parse_chain_(String raw) {return IptKeyChain.parse(raw);}
 	public static IptArg parse_or_none_(String raw) {
 		try {
 			return String_.Eq(raw, String_.Empty)
 				? IptKey_.None
-				: parse_(raw);
+				: parse(raw);
 		}
 		catch (Exception exc) {	// as an "or" proc, handle errors; note that it may accept raw values from cfg files, so invalid input is possible; DATE:2014-06-04
 			Err_.Noop(exc);
 			return IptKey_.None;
 		}
 	}
-	public static IptArg parse_(String raw) {
-		if		(String_.Has(raw, ","))				return IptKeyChain.parse_(raw);
+	public static IptArg parse(String raw) {
+		if		(String_.Has(raw, ","))				return IptKeyChain.parse(raw);
 		String bgn = String_.GetStrBefore(raw, ".");
-		if		(String_.Eq(bgn, "wheel"))			return IptMouseWheel_.parse_(raw);
-		else if (String_.Eq(bgn, "mouse"))			return IptMouseBtn_.parse_(raw);
-		else if (String_.Eq(bgn, "key"))			return IptKey_.parse_(raw);
-		else										return IptMacro._.parse_(raw);
+		if		(String_.Eq(bgn, "wheel"))			return IptMouseWheel_.parse(raw);
+		else if (String_.Eq(bgn, "mouse"))			return IptMouseBtn_.parse(raw);
+		else if (String_.Eq(bgn, "key"))			return IptKey_.parse(raw);
+		else										return IptMacro._.parse(raw);
 	}
 	// NOTE: the following two methods should theoretically be interface methods, but since they are only used by two procs, they will be handled with if/else
 	@gplx.Internal protected static IptEventType EventType_default(IptArg arg) {
@@ -98,7 +98,7 @@ class IptMacro {
 		Reg("mod", "as", IptKey_.add_(IptKey_.Alt, IptKey_.Shift));
 		Reg("mod", "cas", IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.Shift));
 	}
-	public IptArg parse_(String raw) {
+	public IptArg parse(String raw) {
 		if (regy == null) Init();
 		String[] plusAry = String_.Split(raw, "+");
 		String[] dotAry	= String_.Split(plusAry[0], ".");
@@ -108,7 +108,7 @@ class IptMacro {
 		IptKey rv = (IptKey)list.Get_by(end);
 		if (rv == null) throw parse_err(raw, "arg not found").Args_add("arg", end);
 		for (int i = 1; i < plusAry.length; i++) {
-			rv = rv.Add((IptKey)IptKey_.parse_(plusAry[i]));
+			rv = rv.Add((IptKey)IptKey_.parse(plusAry[i]));
 		}
 		return rv;
 	}

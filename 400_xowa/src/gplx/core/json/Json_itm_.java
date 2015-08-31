@@ -18,9 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.json; import gplx.*; import gplx.core.*;
 public class Json_itm_ {
 	public static final Json_itm[] Ary_empty = new Json_itm[0];
-	public static final byte Tid_unknown = 0, Tid_null = 1, Tid_bool = 2, Tid_int = 3, Tid_decimal = 4, Tid_string = 5, Tid_kv = 6, Tid_array = 7, Tid_nde = 8;
-	public static final byte[][] Names = Bry_.Ary("unknown", "null", "boolean", "int", "decimal", "string", "keyval", "array", "nde");
-	public static final byte[] Const_true = Bry_.new_a7("true"), Const_false = Bry_.new_a7("false"), Const_null = Bry_.new_a7("null");
+	public static final byte Tid__unknown = 0, Tid__null = 1, Tid__bool = 2, Tid__int = 3, Tid__decimal = 4, Tid__str = 5, Tid__kv = 6, Tid__ary = 7, Tid__nde = 8;
+	public static final byte[] Bry__true = Bool_.True_bry, Bry__false = Bool_.False_bry, Bry__null = Object_.Bry__null;
 	public static byte[] To_bry(Bry_bfr bfr, Json_itm itm) {
 		if (itm == null) return Bry_.Empty;
 		itm.Print_as_json(bfr, 0);

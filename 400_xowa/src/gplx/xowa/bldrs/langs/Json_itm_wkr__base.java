@@ -27,12 +27,12 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
 		Json_doc jdoc = json_parser.Parse(src);
 		this.Exec_bgn();
-		Json_nde root = jdoc.Root();
+		Json_nde root = jdoc.Root_nde();
 		int subs_len = root.Len();
 		for (int i = 0; i < subs_len; ++i) {
 			Json_itm itm = root.Get_at(i);
 			switch (itm.Tid()) {
-				case Json_itm_.Tid_kv:
+				case Json_itm_.Tid__kv:
 					Json_kv kv = (Json_kv)itm;
 					if (kv.Key().Data_eq(Name_metadata)) continue;		// ignore @metadata node
 					byte[] kv_key = kv.Key().Data_bry();

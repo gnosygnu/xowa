@@ -79,14 +79,14 @@ public class Xog_tab_itm_edit_mgr {
 		byte[] new_text = Bry_.new_u8(tab.Html_itm().Get_elem_value(Xog_html_itm.Elem_id__xowa_edit_rename_box));
 		if (Bry_.Len_eq_0(new_text)) return;		// no ttl given; exit
 		new_text = Xoa_ttl.Replace_spaces(new_text);	// ttls cannot have spaces; only underscores
-		Xoa_ttl new_ttl = Xoa_ttl.parse_(wiki, new_text);
+		Xoa_ttl new_ttl = Xoa_ttl.parse(wiki, new_text);
 		int new_ns_id = new_ttl.Ns().Id();
 		if (new_ns_id != Xow_ns_.Id_main) {
 			win_itm.Usr_dlg().Warn_many("", "", "The new page name must remain in the same namespace");
 			return;
 		}
 		wiki.Db_mgr().Save_mgr().Data_rename(page, new_ns_id, new_text);
-		page.Ttl_(Xoa_ttl.parse_(wiki, Bry_.Add(page.Ttl().Ns().Name_db_w_colon(), new_text)));
+		page.Ttl_(Xoa_ttl.parse(wiki, Bry_.Add(page.Ttl().Ns().Name_db_w_colon(), new_text)));
 		win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 		win_itm.Usr_dlg().Prog_one("", "", "renamed page to {0}", String_.new_u8(page.Ttl().Full_txt_raw()));
 	}

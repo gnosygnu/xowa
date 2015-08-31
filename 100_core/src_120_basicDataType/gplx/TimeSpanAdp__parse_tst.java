@@ -48,7 +48,7 @@ public class TimeSpanAdp__parse_tst {
 		tst_Parse(" 01 : 02 : 03 . 987", 3723987);	// whitespace
 	}
 	void tst_Parse(String text, long expd) {
-		TimeSpanAdp val = TimeSpanAdp_.parse_(text);
+		TimeSpanAdp val = TimeSpanAdp_.parse(text);
 		Tfds.Eq(expd, val.Fracs());
 	}
 }

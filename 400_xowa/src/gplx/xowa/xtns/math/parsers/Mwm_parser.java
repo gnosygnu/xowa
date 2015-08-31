@@ -20,10 +20,10 @@ import gplx.core.btries.*;
 class Mwm_parser {
 	public void Parse(Mwm_tkn__root root, byte[] src) {
 		int src_len = src.length;
-		Parse(root, new Mwm_ctx(this, Mwm_trie_bldr.new_()), src, src_len, 0, src_len);
+		Btrie_fast_mgr trie = Mwm_trie_bldr.new_();
+		Parse(trie, root, new Mwm_ctx(), src, src_len, 0, src_len);
 	}
-	private int Parse(Mwm_tkn__root root, Mwm_ctx ctx, byte[] src, int src_len, int bgn_pos, int end_pos) {
-		Btrie_fast_mgr trie = ctx.Trie();
+	private int Parse(Btrie_fast_mgr trie, Mwm_tkn__root root, Mwm_ctx ctx, byte[] src, int src_len, int bgn_pos, int end_pos) {
 		int pos = bgn_pos;
 		int txt_bgn = pos, txt_uid = -1;
 		byte b = src[pos];
@@ -50,13 +50,4 @@ class Mwm_parser {
 			root.Regy__update_end(txt_uid, bgn_pos);
 		return txt_uid;
 	}
-}
-class Mwm_ctx {		
-	public Mwm_ctx(Mwm_parser parser, Btrie_fast_mgr trie) {
-		this.parser = parser;
-		this.trie = trie;
-	}
-	public Mwm_tkn_stack Stack() {return stack;} private Mwm_tkn_stack stack = new Mwm_tkn_stack();
-	public Btrie_fast_mgr Trie() {return trie;} private final Btrie_fast_mgr trie;
-	public Mwm_parser Parser() {return parser;} private final Mwm_parser parser;
 }

@@ -200,5 +200,5 @@ class Xows_page_allpages_fxt {
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);
 	}
-	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse_(wiki, Bry_.new_u8(Xows_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
+	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse(wiki, Bry_.new_u8(Xows_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
 }

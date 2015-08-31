@@ -52,7 +52,7 @@ public class Xoi_wiki_props_api {
 		bfr.Add_byte_nl();
 	}
 	public void Parse(Xoi_wiki_props_wiki wiki, String xml) {
-		XmlDoc xdoc = XmlDoc_.parse_(xml);
+		XmlDoc xdoc = XmlDoc_.parse(xml);
 		XmlNde query_xnde = Xpath_.SelectFirst(xdoc.Root(), "query");
 		XmlNde aliases_xnde = Xpath_.SelectFirst(query_xnde, "namespace"+"aliases");
 		wiki.Alias_ary_(Parse_alias_ary(aliases_xnde));

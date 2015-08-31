@@ -56,7 +56,7 @@ class Xob_diff_regy_sql_runner {
 		this.url = url;
 		String[] parts = String_.Split(url.NameOnly(), "-");
 		wiki_domain = parts[0];
-		fsdb_db_id = Int_.parse_(parts[1]);
+		fsdb_db_id = Int_.parse(parts[1]);
 		fsdb_db_tid = Fsdb_db_tid_.Xto_tid(parts[2]);
 	}
 	public void Run_sql(Xoae_app app) {

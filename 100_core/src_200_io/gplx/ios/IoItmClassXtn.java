@@ -27,6 +27,6 @@ public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
 		else if (String_.Eq(rawLower, "fil")) return IoItmFil.Type_Fil;
 		else	throw Err_.new_unhandled(raw);
 	}
-	@Override public Object XtoDb(Object obj)					{return Int_.cast_(obj);}
+	@Override public Object XtoDb(Object obj)					{return Int_.cast(obj);}
 	public static final IoItmClassXtn _ = new IoItmClassXtn(); IoItmClassXtn() {}
 }

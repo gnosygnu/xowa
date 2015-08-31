@@ -20,7 +20,7 @@ import gplx.lists.*; /*StackAdp*/
 public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {
 		if (!String_.Eq(key, GfmlDataWtrOpts.Key_const)) return;
-		GfmlDataWtrOpts layout = GfmlDataWtrOpts.cast_(val);
+		GfmlDataWtrOpts layout = GfmlDataWtrOpts.cast(val);
 		keyedSpr = layout.KeyedSpr();
 		indentNodes = layout.IndentNodes();
 		ignoreNullNames = layout.IgnoreNullNames();

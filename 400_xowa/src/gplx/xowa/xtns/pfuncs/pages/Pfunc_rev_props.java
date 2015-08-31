@@ -27,7 +27,7 @@ public class Pfunc_rev_props extends Pf_func_base {
 			case Xol_kwd_grp_.Id_rev_user:	bfr.Add(rev_data.User()); break;
 			case Xol_kwd_grp_.Id_rev_pagesize:
 				if (argx.length > 0) {
-					Xoa_ttl argx_ttl = Xoa_ttl.parse_(ctx.Wiki(), argx);
+					Xoa_ttl argx_ttl = Xoa_ttl.parse(ctx.Wiki(), argx);
 					if (argx_ttl == null) {	// invalid ttl; EX: {{PAGESIZE:{{{bad}}}}}
 						bfr.Add_byte(Byte_ascii.Num_0);
 						return;

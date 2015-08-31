@@ -76,7 +76,7 @@ class Scrib_lib_message_data {
 					break; 
 				case Key_tid_rawMessage:	raw_msg_key = kv.Val_to_bry(); break;
 				case Key_tid_lang:			lang_key = kv.Val_to_bry(); break;
-				case Key_tid_useDB:			use_db = Bool_.cast_(kv.Val()); break;
+				case Key_tid_useDB:			use_db = Bool_.cast(kv.Val()); break;
 				case Key_tid_title:			title_bry = kv.Val_to_bry(); break;
 				case Key_tid_params:
 					KeyVal[] args_ary = (KeyVal[])kv.Val();
@@ -96,7 +96,7 @@ class Scrib_lib_message_data {
 			if (data_ttl == null)
 				ttl = ctx.Cur_page().Ttl();
 			else
-				ttl = Xoa_ttl.parse_(wiki, data_ttl);
+				ttl = Xoa_ttl.parse(wiki, data_ttl);
 		}
 		if (raw_msg_key != null) {
 			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);

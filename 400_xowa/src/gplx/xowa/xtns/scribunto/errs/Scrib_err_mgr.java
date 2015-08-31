@@ -60,7 +60,7 @@ class Scrib_err_data {
 class Scrib_err_cmd implements GfoInvkAble {
 	public Scrib_err_cmd(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private byte[] key;
-	public int Fail_after() {return fail_after;} private int fail_after = Int_.MaxValue;
+	public int Fail_after() {return fail_after;} private int fail_after = Int_.Max_value;
 	public int Warn_every() {return warn_every;} private int warn_every = 10000;	// worse case of 400 warnings for 4 million pages
 	public int Summary_ttls_len() {return summary_ttls_len;} private int summary_ttls_len = 8;
 	public String Warn_disabled_if() {return warn_disabled_if;} private String warn_disabled_if;

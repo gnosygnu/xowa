@@ -24,7 +24,7 @@ public class GfuiWin_ {
 		, InitKey_winType_tool		= "tool"
 		;
 	public static GfuiWin as_(Object obj) {return obj instanceof GfuiWin ? (GfuiWin)obj : null;}
-	public static GfuiWin cast_(Object obj) {try {return (GfuiWin)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiWin.class, obj);}}
+	public static GfuiWin cast(Object obj) {try {return (GfuiWin)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiWin.class, obj);}}
 	public static GfuiWin app_(String key)							{return bld_(key, InitKey_winType_app, KeyValHash.new_());}
 	public static GfuiWin tool_(String key)							{return bld_(key, InitKey_winType_tool, KeyValHash.new_()).TaskbarVisible_(false);}
 	public static GfuiWin sub_(String key, GfuiWin ownerWin)		{

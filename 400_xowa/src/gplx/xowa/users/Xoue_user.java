@@ -75,7 +75,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
 		byte[] new_entry = tmp_bfr.To_bry_and_rls();
-		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse_(wiki, Bry_data_bookmarks);
+		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse(wiki, Bry_data_bookmarks);
 		Xoae_page bookmarks_page = wiki.Data_mgr().Get_page(bookmarks_ttl, false);
 		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);
 		wiki.Db_mgr().Save_mgr().Data_update(bookmarks_page, new_data);

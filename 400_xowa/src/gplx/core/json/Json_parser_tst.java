@@ -58,7 +58,7 @@ class Json_parser_fxt {
 	public Json_kv itm_kv_(String k, String v)			{return factory.Kv(itm_str_(k), itm_str_(v));}
 	public Json_kv itm_kv_(String k, int v)				{return factory.Kv(itm_str_(k), itm_int_(v));}
 	public Json_kv itm_kv_(String k, boolean v)			{return factory.Kv(itm_str_(k), v ? factory.Bool_y() : factory.Bool_n());}
-	public Json_kv itm_kv_dec_(String k, String v)		{return factory.Kv(itm_str_(k), new Json_itm_tmp(Json_itm_.Tid_decimal, v));}
+	public Json_kv itm_kv_dec_(String k, String v)		{return factory.Kv(itm_str_(k), new Json_itm_tmp(Json_itm_.Tid__decimal, v));}
 	public Json_kv itm_kv_(String k, Json_nde v)	{return factory.Kv(itm_str_(k), v);}
 	public Json_kv itm_kv_ary_int_(String k, int... v) {
 		Json_ary ary = factory.Ary(-1, -1);
@@ -77,7 +77,7 @@ class Json_parser_fxt {
 	public void Test_parse(String raw_str, Json_itm... expd_ary) {
 		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
-		doc.Root().Print_as_json(tmp_bfr, 0);
+		doc.Root_nde().Print_as_json(tmp_bfr, 0);
 		String actl = tmp_bfr.Xto_str_and_clear();
 		String expd = Xto_str(raw, doc, expd_ary, 0, expd_ary.length);
 		Tfds.Eq_str_lines(expd, actl, actl);
@@ -85,7 +85,7 @@ class Json_parser_fxt {
 	public void Test_parse_val0(String raw_str, Object expd) {
 		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
-		Json_kv kv = Json_kv.cast_(doc.Root().Get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
+		Json_kv kv = Json_kv.cast(doc.Root_nde().Get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
 		Object actl = kv.Val().Data();	 // NOTE: Data_bry is escaped val; EX: a\"b has DataBry of a"b
 		Tfds.Eq(expd, actl);
 	}

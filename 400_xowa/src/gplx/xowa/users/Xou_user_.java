@@ -35,7 +35,7 @@ class Xou_user_ {
 	}
 	public static void Bookmarks_make(Xoae_app app, Xowe_wiki home_wiki) {
 		app.Usr_dlg().Log_many(GRP_KEY, "bookmarks.create", "creating bookmarks page");
-		home_wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.parse_(home_wiki, Bry_.new_a7("Data:Bookmarks")), Bry_.new_a7(Bookmarks_text));
+		home_wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.parse(home_wiki, Bry_.new_a7("Data:Bookmarks")), Bry_.new_a7(Bookmarks_text));
 	}
 	public static final String User_system_cfg_text = String_.Concat_lines_nl
 	( "app.scripts.txns.get('user.prefs.general').version_('" + Xoa_app_.Version + "').bgn();"

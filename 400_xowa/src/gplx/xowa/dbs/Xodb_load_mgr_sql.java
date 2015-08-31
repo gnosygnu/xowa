@@ -97,14 +97,14 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		Xoctg_view_grp view_grp = null;
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm db_page = (Xowd_page_itm)list.Get_at(i);
-			if (db_page.Ns_id() == Int_.MinValue) continue;	// HACK: page not found; ignore
+			if (db_page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
 			Xoctg_page_xtn db_ctg = (Xoctg_page_xtn)db_page.Xtn();
 			byte cur_tid = db_ctg.Tid();
 			if (prv_tid != cur_tid) {
 				view_grp = rv.Grp_by_tid(cur_tid);
 				prv_tid = cur_tid; 
 			}
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
 			Xoctg_view_itm view_itm = new Xoctg_view_itm().Sortkey_(db_ctg.Sortkey()).Ttl_(ttl);
 			view_itm.Load_by_ttl_data(cur_tid, db_page.Id(), Xowd_page_itm.Modified_on_null_int, db_page.Text_len());
 			view_grp.Itms_add(view_itm);
@@ -184,12 +184,12 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		boolean rv = false;
 		for (int i = 0; i < link_list.Count(); i++) {
 			Xowd_page_itm page = (Xowd_page_itm)link_list.Get_at(i);
-			if (page.Ns_id() == Int_.MinValue) continue;	// HACK: page not found; ignore
+			if (page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
 			byte ctg_tid = Xodb_load_mgr_txt.Load_ctg_v1_tid(page.Ns_id());
 			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
 			Xoctg_view_itm ctg_itm = new Xoctg_view_itm();
 			ctg_itm.Load_by_ttl_data(ctg_tid, page.Id(), 0, page.Text_len());
-			ctg_itm.Ttl_(Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db()));
+			ctg_itm.Ttl_(Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db()));
 			ctg_itm.Sortkey_(page.Ttl_page_db());
 			ctg_grp.Itms_add(ctg_itm);
 			rv = true;

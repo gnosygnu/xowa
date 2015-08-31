@@ -21,7 +21,7 @@ public class EnmMgr {
 	public String BitRngSpr() {return bitRngSpr;} public EnmMgr BitRngSpr_(String val) {bitRngSpr = val; return this;} private String bitRngSpr = "+";
 	public String Prefix() {return prefix;} public EnmMgr Prefix_(String val) {prefix = val; return this;} private String prefix;
 	public int BitRngBgn() {return bitRngBgn;} public EnmMgr BitRngBgn_(int val) {bitRngBgn = val; return this;} int bitRngBgn = 1;
-	public int BitRngEnd() {return bitRngEnd;} public EnmMgr BitRngEnd_(int val) {bitRngEnd = val; return this;} int bitRngEnd = Int_.MaxValue;
+	public int BitRngEnd() {return bitRngEnd;} public EnmMgr BitRngEnd_(int val) {bitRngEnd = val; return this;} int bitRngEnd = Int_.Max_value;
 	public void RegObj(int val, String raw, Object o) {
 		rawRegy.Add(raw, val);
 		valRegy.Add(val, raw);
@@ -36,9 +36,9 @@ public class EnmMgr {
 			if (prefix != null) term = String_.Replace(term, prefix, "");
 			int cur = -1;
 			if (String_.Has_at_bgn(term, "#"))
-				cur = Int_.parse_(String_.Mid(term, 1));
+				cur = Int_.parse(String_.Mid(term, 1));
 			else
-				cur = Int_.cast_(rawRegy.Get_by(term));			
+				cur = Int_.cast(rawRegy.Get_by(term));			
 			rv |= cur;
 		}
 		return rv;

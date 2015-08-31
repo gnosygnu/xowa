@@ -17,21 +17,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
 public class Json_parser {
-	public Json_factory Factory() {return factory;} private Json_factory factory = new Json_factory();
-	private byte[] src; private int src_len, pos; private Number_parser num_parser = new Number_parser();
-	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
+	private byte[] src; private int src_len, pos; private final Number_parser num_parser = new Number_parser();
+	public Json_factory Factory() {return factory;} private final Json_factory factory = new Json_factory();
+	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(String_.Concat_lines_nl(ary));}
+	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), Byte_ascii.Apos, Byte_ascii.Quote));}
+	public Json_doc Parse(String src) {return Parse(Bry_.new_u8(src));}
 	public Json_doc Parse(byte[] src) {
-		Json_doc doc = new Json_doc();
-		this.src = src; this.src_len = src.length; pos = 0;
-		Skip_ws();
-		if (src.length == 0) return null;
-		if (src[pos] != Byte_ascii.Curly_bgn) return null;
-		Skip_ws();
-//			if (src[pos + 1] != Byte_ascii.Quote) return null;
-//				throw Err_.new_wo_type("doc must start with {");
-		Json_nde root = Make_nde(doc);
-		doc.Ctor(src, root);
-		return doc;
+		synchronized (factory) {
+			this.src = src;				if (src == null) return null;
+			this.src_len = src.length;	if (src_len == 0) return null;
+			this.pos = 0;
+			Skip_ws();
+			boolean root_is_nde = true;
+			switch (src[pos]) {
+				case Byte_ascii.Curly_bgn:	root_is_nde = Bool_.Y; break;
+				case Byte_ascii.Brack_bgn:	root_is_nde = Bool_.N; break;
+				default:					return null;
+			}
+			Skip_ws();
+			Json_doc doc = new Json_doc();
+			Json_nde root = Make_nde(doc);
+			if (root_is_nde) {}
+			doc.Ctor(src, root);
+			return doc;
+		}
 	}
 	private Json_nde Make_nde(Json_doc doc) {
 		++pos;	// brack_bgn
@@ -49,7 +58,7 @@ public class Json_parser {
 		}
 		throw Err_.new_wo_type("eos inside nde");
 	}
-	Json_itm Make_kv(Json_doc doc) {
+	private Json_itm Make_kv(Json_doc doc) {
 		Json_itm key = Make_string(doc);
 		Skip_ws();
 		Chk(Byte_ascii.Colon);
@@ -57,7 +66,7 @@ public class Json_parser {
 		Json_itm val = Make_val(doc);
 		return new Json_kv(key, val);
 	}
-	Json_itm Make_val(Json_doc doc) {
+	private Json_itm Make_val(Json_doc doc) {
 		while (pos < src_len) {
 			byte b = src[pos];
 			switch (b) {
@@ -75,16 +84,16 @@ public class Json_parser {
 		}
 		throw Err_.new_wo_type("eos reached in val");
 	}
-	Json_itm Make_literal(byte[] remainder, int remainder_len, Json_itm singleton) {
+	private Json_itm Make_literal(byte[] remainder, int remainder_len, Json_itm singleton) {
 		++pos;	// 1st char
 		int literal_end = pos + remainder_len;
 		if (Bry_.Eq(remainder, src, pos, literal_end)) {
 			pos = literal_end;
 			return singleton;
 		}
-		throw Err_.new_wo_type("invalid literal");
+		throw Err_.new_("json.parser", "invalid literal", "excerpt", Bry_.Mid_by_len_safe(src, pos - 1, 16));
 	}
-	Json_itm Make_string(Json_doc doc) {
+	private Json_itm Make_string(Json_doc doc) {
 		int bgn = pos++;	// ++: quote_bgn
 		boolean exact = true; 
 		while (pos < src_len) {
@@ -106,7 +115,7 @@ public class Json_parser {
 		}
 		throw Err_.new_wo_type("eos reached inside quote");
 	}
-	Json_itm Make_num(Json_doc doc) {
+	private Json_itm Make_num(Json_doc doc) {
 		int num_bgn = pos;
 		boolean loop = true;
 		while (loop) {
@@ -131,7 +140,7 @@ public class Json_parser {
 			? factory.Decimal(doc, num_bgn, pos)
 			: factory.Int(doc, num_bgn, pos);
 	}
-	Json_ary Make_ary(Json_doc doc) {
+	private Json_ary Make_ary(Json_doc doc) {
 		Json_ary rv = factory.Ary(pos++, pos);	// brack_bgn
 		while (pos < src_len) {
 			Skip_ws();
@@ -159,9 +168,10 @@ public class Json_parser {
 		else
 			throw err_(src, pos, "expected '{0}' but got '{1}'", Char_.To_str(expd), Char_.To_str(src[pos]));
 	}
-	Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
-	Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
+	private Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
+	private Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
 		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_u8_by_len(src, bgn, 20);
 		return Err_.new_wo_type(msg);
 	}
+	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 public class Xoh_cfg_file {
 	public Xoh_cfg_file(Url_encoder url_encoder, Io_url xowa_dir) {
-		Io_url mw_file_dir = xowa_dir.GenSubDir_nest("file", "mw.file");
+		Io_url mw_file_dir = xowa_dir.GenSubDir_nest("file", "mediawiki.file");
 		img_media_play_btn = url_encoder.Encode_http(mw_file_dir.GenSubFil("play.png"));
 		img_media_info_btn = url_encoder.Encode_http(mw_file_dir.GenSubFil("info.png"));
 		img_thumb_magnify = url_encoder.Encode_http(mw_file_dir.GenSubFil("magnify-clip.png"));

@@ -41,7 +41,7 @@ public class Xow_popup_parser_data {
 		words_needed_val = words_needed_max = popup_itm.Words_needed();			
 		switch (popup_itm.Mode()) {
 			case Xow_popup_itm.Mode_tid_all:
-				tmpl_max = Int_.MaxValue;
+				tmpl_max = Int_.Max_value;
 				break;
 			case Xow_popup_itm.Mode_tid_init:
 			case Xow_popup_itm.Mode_tid_more:

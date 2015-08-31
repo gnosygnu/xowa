@@ -61,5 +61,5 @@ public class TdbTable {
 	}
 	DsvStoreLayout layout;
 	public static TdbTable as_(Object obj) {return obj instanceof TdbTable ? (TdbTable)obj : null;}
-	public static TdbTable cast_(Object obj) {try {return (TdbTable)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbTable.class, obj);}}
+	public static TdbTable cast(Object obj) {try {return (TdbTable)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbTable.class, obj);}}
 }

@@ -172,7 +172,7 @@ public class Swt_kit implements Gfui_kit {
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
-		boolean border_on = Bool_.cast_(ctor_args.FetchValOr(GfuiTextBox.CFG_border_on_, true));
+		boolean border_on = Bool_.cast(ctor_args.FetchValOr(GfuiTextBox.CFG_border_on_, true));
 		GxwTextFld under = new Swt_text_w_border(Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
@@ -261,7 +261,7 @@ class Swt_shell_close_lnr implements Listener, GfoInvkAble {
 	@Override public void handleEvent(Event event) {
 		if (kit.Kit_mode__term()) return;							// NOTE: will be term if called again from wait_for_sync_cmd
 		kit.Kit_mode_(Swt_kit_mode.Tid_term);						// NOTE: must mark kit as shutting down, else writing to status_bar will create stack overflow; DATE:2014-05-05
-		boolean rslt = Bool_.cast_(kit.Kit_term_cbk().Invk());		// call bgn term
+		boolean rslt = Bool_.cast(kit.Kit_term_cbk().Invk());		// call bgn term
 		if (!rslt) {
 			event.doit = false;										// cbk canceled term; stop close
 			kit.Kit_mode_(Swt_kit_mode.Tid_ready);					// reset kit back to "running" mode;

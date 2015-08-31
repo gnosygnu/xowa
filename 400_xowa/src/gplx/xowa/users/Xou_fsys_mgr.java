@@ -33,7 +33,6 @@ public class Xou_fsys_mgr implements GfoInvkAble {
 	public Io_url App_data_history_fil()		{return app_data_history_fil;} private Io_url app_data_history_fil;
 	public Io_url App_temp_dir()				{return app_temp_dir;} private Io_url app_temp_dir;
 	public Io_url App_temp_html_dir()			{return app_temp_html_dir;} private Io_url app_temp_html_dir;
-	public Io_url App_img_dir()					{return app_root_dir.GenSubDir_nest("img");}
 	public Io_url App_data_dir()				{return app_root_dir.GenSubDir_nest("data");}
 	public Io_url App_data_cfg_dir()			{return app_root_dir.GenSubDir_nest("data", "cfg");}
 	public Io_url App_data_cfg_user_fil()		{return app_root_dir.GenSubFil_nest("data", "cfg", Xoa_gfs_mgr.Cfg_user_file);}

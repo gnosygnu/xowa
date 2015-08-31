@@ -30,6 +30,7 @@ class Mwm_tkn__leaf implements Mwm_tkn {
 	public int Uid() {return uid;} private int uid;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
+	public void Src_end_(int v) {this.src_end = v;}
 	public int Subs__len() {return 0;}
 	public Mwm_tkn Subs__get_at(int i)								{throw Err_.new_unsupported();}
 	public void To_bry(Bry_bfr bfr, int indent) {

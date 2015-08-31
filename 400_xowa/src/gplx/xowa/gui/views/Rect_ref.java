@@ -29,10 +29,10 @@ public class Rect_ref {
 	@Override public String toString() {return String_.Format("{0},{1},{2},{3}", x, y, w, h);}
 	public static final Rect_ref Zero = new Rect_ref(0, 0, 0, 0);
 	public static Rect_ref rectAdp_(gplx.gfui.RectAdp v) {return new Rect_ref(v.X(), v.Y(), v.Width(), v.Height());}
-	public static Rect_ref parse_(String raw) {
+	public static Rect_ref parse(String raw) {
 		try {
 			String[] ary = String_.Split(raw, ",");
-			return new Rect_ref(Int_.parse_(ary[0]), Int_.parse_(ary[1]), Int_.parse_(ary[2]), Int_.parse_(ary[3]));
+			return new Rect_ref(Int_.parse(ary[0]), Int_.parse(ary[1]), Int_.parse(ary[2]), Int_.parse(ary[3]));
 		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, Rect_ref.class, raw);}
 	}
 }

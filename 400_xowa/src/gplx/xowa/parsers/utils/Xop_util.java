@@ -28,7 +28,7 @@ public class Xop_util {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		RandomAdp random_gen = RandomAdp_.new_();
 		for (int i = 0; i < len; i += 7) {
-			int rand = random_int_ary == null ? random_gen.Next(Int_.MaxValue) : random_int_ary[i / 7];
+			int rand = random_int_ary == null ? random_gen.Next(Int_.Max_value) : random_int_ary[i / 7];
 			String rand_str = Int_.Xto_str_hex(Bool_.N, Bool_.Y, rand & 0xfffffff);	// limits value to 268435455
 			tmp_bfr.Add_str_a7(rand_str);
 		}

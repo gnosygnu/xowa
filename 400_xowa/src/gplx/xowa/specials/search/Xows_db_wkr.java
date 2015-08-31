@@ -52,7 +52,7 @@ class Xows_db_wkr {
 					if (word.Rslts_done()) continue;		// last db_search for word returned 0 results; don't search again;
 					int offset = word.Rslts_offset();
 					Xoa_app_.Usr_dlg().Prog_many("", "", "searching; wiki=~{0} total=~{1} offset=~{2} index=~{3} word=~{4}", wiki.Domain_str(), word_ary_len, offset, i, word.Text());
-					String sql = String_.Format(Search_sql, link_tbl.Tbl_name(), link_tbl.Fld_page_id(), link_tbl.Fld_word_id(), word.Id(), "page_len", "DESC", Int_.MaxValue, offset); // need to return enough results to fill qry.Page_len() as many results may be discarded below; DATE:2015-04-24
+					String sql = String_.Format(Search_sql, link_tbl.Tbl_name(), link_tbl.Fld_page_id(), link_tbl.Fld_word_id(), word.Id(), "page_len", "DESC", Int_.Max_value, offset); // need to return enough results to fill qry.Page_len() as many results may be discarded below; DATE:2015-04-24
 					int rslts_found = Search_pages(cmd, qry, rslt, cache, wiki, page_tbl, attach_rdr, sql, word, matcher, rslts_wanted);
 					total_found += rslts_found;
 					if		(rslts_found == -1)		return;				// canceled

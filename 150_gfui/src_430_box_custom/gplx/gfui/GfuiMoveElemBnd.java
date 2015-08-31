@@ -55,7 +55,7 @@ public class GfuiMoveElemBnd implements IptBnd, GfoInvkAble, InjectAble {
 	}
 	void ExecKeyDown(IptEventData msg) {
 		PointAdp current = targetElem.Pos();
-		PointAdp offset = PointAdp_.cast_(hash.Get_by(msg.EventArg()));
+		PointAdp offset = PointAdp_.cast(hash.Get_by(msg.EventArg()));
 		targetElem.Pos_(current.Op_add(offset));
 	}
 	@gplx.Internal protected void Key_set(String key) {this.key = key;} private String key;

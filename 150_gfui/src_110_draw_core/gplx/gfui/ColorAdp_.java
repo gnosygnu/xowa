@@ -19,15 +19,15 @@ package gplx.gfui; import gplx.*;
 import gplx.texts.*;
 public class ColorAdp_ implements ParseAble {
 	public static ColorAdp as_(Object obj) {return obj instanceof ColorAdp ? (ColorAdp)obj : null;}
-	public static ColorAdp cast_(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
+	public static ColorAdp cast(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
 	public static ColorAdp new_(int a, int r, int g, int b) {return ColorAdp.new_((int)a, (int)r, (int)g, (int)b);}
 	public static final ColorAdp_ Parser = new ColorAdp_();
-	public Object ParseAsObj(String raw) {return ColorAdp_.parse_(raw);}
+	public Object ParseAsObj(String raw) {return ColorAdp_.parse(raw);}
 	public static ColorAdp parseOr_(String raw, ColorAdp or) {
 		ColorAdp rv = parse_internal_(raw); if (rv == null) return or;
 		return rv;
 	}
-	public static ColorAdp parse_(String raw) {
+	public static ColorAdp parse(String raw) {
 		ColorAdp rv = parse_internal_(raw); if (rv == null) throw Err_.new_parse_type(ColorAdp.class, raw);
 		return rv;
 	}
@@ -63,7 +63,7 @@ public class ColorAdp_ implements ParseAble {
 			int rawLen = String_.Len(raw);
 			for (int i = 1; i < rawLen; i += 2) {		// fill ARGB ary by parsing raw 2 at a time; EX: #FFFFFFFF -> 255,255,255,255; NOTE: start at 1 to ignore leading #
 				String hexStr = String_.MidByLen(raw, i, 2);
-				ary[idx++] = HexDecUtl.parse_(hexStr);
+				ary[idx++] = HexDecUtl.parse(hexStr);
 			}
 			return ColorAdp.new_(ary[0], ary[1], ary[2], ary[3]);
 		}	catch (Exception exc) {throw Err_.new_parse_exc(exc, ColorAdp.class, raw);}
@@ -71,7 +71,7 @@ public class ColorAdp_ implements ParseAble {
 	@gplx.Internal protected static ColorAdp parse_int_(String v) {
 		String[] ary = String_.Split(v, ",");
 		switch (ary.length) {
-			case 1: return new_int_(Int_.parse_(ary[0]));
+			case 1: return new_int_(Int_.parse(ary[0]));
 			case 3:
 			case 4: return parse_int_ary_(ary);
 			default: throw Err_.new_wo_type("invalid array", "len", ary.length);
@@ -81,10 +81,10 @@ public class ColorAdp_ implements ParseAble {
 		int a;
 		int idx = 0;
 		if (ary.length == 3)	{idx = 0; a = 255;}
-		else					{idx = 1; a = Int_.parse_(ary[0]);}
-		int r = Int_.parse_(ary[idx++]);
-		int g = Int_.parse_(ary[idx++]);
-		int b = Int_.parse_(ary[idx++]);
+		else					{idx = 1; a = Int_.parse(ary[0]);}
+		int r = Int_.parse(ary[idx++]);
+		int g = Int_.parse(ary[idx++]);
+		int b = Int_.parse(ary[idx++]);
 		return ColorAdp_.new_(a, r, g, b);
 	}
 	public static ColorAdp new_int_(int val) {
@@ -94,7 +94,7 @@ public class ColorAdp_ implements ParseAble {
 		int b = ((val) & 255);
 		return ColorAdp.new_(a, r, g, b);
 	}
-	public static ColorAdp read_(Object o) {String s = String_.as_(o); return s != null ? ColorAdp_.parse_(s) : ColorAdp_.cast_(o);}
+	public static ColorAdp read_(Object o) {String s = String_.as_(o); return s != null ? ColorAdp_.parse(s) : ColorAdp_.cast(o);}
 	public static final ColorAdp 
 		  Null			= new_(  0,   0,   0,   0)
 		, Black			= new_(255,   0,   0,   0)

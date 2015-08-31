@@ -35,7 +35,7 @@ public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
 		}
 	}
 	public static final byte Tid_none = 0, Tid_len_dsc = 1, Tid_ttl_asc = 2, Tid_id = 3;
-	public static byte parse_(String v) {
+	public static byte parse(String v) {
 		if		(String_.Eq(v, "none"))			return Tid_none;
 		else if	(String_.Eq(v, "len_desc"))		return Tid_len_dsc;
 		else if	(String_.Eq(v, "title_asc"))	return Tid_ttl_asc;

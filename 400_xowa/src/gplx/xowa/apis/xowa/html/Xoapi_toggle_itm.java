@@ -51,7 +51,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	public byte[] Html_toggle_hdr() {return html_toggle_hdr;} private byte[] html_toggle_hdr;
 	private void Assert_img_src() {
 		if (Img_src_y == null) {
-			Io_url img_dir = app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+			Io_url img_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.general");
 			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
 			Img_src_n = img_dir.GenSubFil("twisty_right.png").To_http_file_bry();
 		}

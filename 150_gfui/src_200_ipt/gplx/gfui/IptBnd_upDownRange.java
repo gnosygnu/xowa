@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} GfoEvMgr evMgr;
 	public void Inject(Object owner) {
-		txtBox = GfuiTextBox_.cast_(owner);
+		txtBox = GfuiTextBox_.cast(owner);
 		txtBox.TextAlignH_center_();
 		if (bndCfg == null) bndCfg = IptCfg_.new_("gplx.gfui.IptBnd_upDownRange");
 		IptBnd_.cmd_to_(bndCfg, txtBox, this, Invk_TxtBox_dec, IptKey_.Down, IptMouseWheel_.Down);
@@ -32,7 +32,7 @@ public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_TxtBox_inc))		ExecCmd(cmd, curVal + 1);
 		else if	(ctx.Match(k, Invk_TxtBox_exec))	{
 			Object valObj = IntClassXtn._.ParseOrNull(txtBox.Text()); if (valObj == null) throw Err_.new_wo_type("invalid int", "text", txtBox.Text());
-			ExecCmd(doIt, Int_.cast_(valObj));
+			ExecCmd(doIt, Int_.cast(valObj));
 		}
 		else if	(ctx.Match(k, evt))			WhenEvt(ctx, m);
 		else	return GfoInvkAble_.Rv_unhandled;
@@ -51,7 +51,7 @@ public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 	public static IptBnd_upDownRange new_(GfoEvObj fwd, String cmd, String evt, String arg) {return exec_(fwd, cmd, evt, cmd, arg);}
 	public static IptBnd_upDownRange exec_(GfoEvObj fwd, String cmd, String evt, String doIt, String arg) {
 		IptBnd_upDownRange rv = new IptBnd_upDownRange();
-		rv.fwd = fwd; rv.src = GfoInvkAble_.cast_(fwd);
+		rv.fwd = fwd; rv.src = GfoInvkAble_.cast(fwd);
 		rv.cmd = cmd; rv.evt = evt; rv.doIt = doIt; rv.arg = arg;
 		return rv;
 	}

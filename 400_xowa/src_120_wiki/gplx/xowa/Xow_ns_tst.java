@@ -46,7 +46,7 @@ public class Xow_ns_tst {
 }
 class Xow_ns_fxt {
 	public void Clear() {
-		expd_id_subjId = expd_id_talkId = Int_.MaxValue;
+		expd_id_subjId = expd_id_talkId = Int_.Max_value;
 		expd_id_subj = expd_id_talk = false;
 	}
 	public Xow_ns_fxt Expd_id_subjId_(int v) {expd_id_subjId = v; return this;} private int expd_id_subjId;

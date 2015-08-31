@@ -250,12 +250,12 @@ class Php_tkn_num_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_num_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public Class<?> TypeOf() {return Php_tkn_num.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_num;}
-	public Php_tkn_num_chkr Num_val_int_(int v) {this.num_val_int = v; return this;} private int num_val_int = Int_.MinValue;
+	public Php_tkn_num_chkr Num_val_int_(int v) {this.num_val_int = v; return this;} private int num_val_int = Int_.Min_value;
 	@Override public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {
 		Php_tkn_num actl = (Php_tkn_num)actl_obj;
 		int rv = 0;
 		byte[] raw_bry = (byte[])mgr.Vars_get_by_key("raw_bry"); 
-		rv += mgr.Tst_val(num_val_int == Int_.MinValue, path, "num_val_int", num_val_int, actl.Num_val_int(raw_bry)); 
+		rv += mgr.Tst_val(num_val_int == Int_.Min_value, path, "num_val_int", num_val_int, actl.Num_val_int(raw_bry)); 
 		return rv;
 	}
 }

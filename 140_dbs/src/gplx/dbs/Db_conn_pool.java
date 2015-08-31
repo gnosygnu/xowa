@@ -24,7 +24,7 @@ public class Db_conn_pool {
 	public void Del(Db_conn_info url) {conn_hash.Del(url.Xto_api());}
 	public Db_conn Get_or_new__mem(String db)		{return Get_or_new(Db_conn_info__mem.new_(db));}
 	public Db_conn Get_or_new__sqlite(Io_url url)	{return Get_or_new(Db_conn_info_.sqlite_(url));}
-	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_conn_info_.parse_(s));}
+	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_conn_info_.parse(s));}
 	public Db_conn Get_or_new(Db_conn_info url) {
 		Db_conn rv = (Db_conn)conn_hash.Get_by(url.Xto_api());
 		if (rv == null) {

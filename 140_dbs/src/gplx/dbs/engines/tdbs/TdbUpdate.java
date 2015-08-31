@@ -20,7 +20,7 @@ import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/
 import gplx.dbs.qrys.*;
 class TdbUpdateWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
-		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_update cmd = (Db_qry_update)cmdObj;
+		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_update cmd = (Db_qry_update)cmdObj;
 
 		int rv = 0;
 		TdbTable tbl = engine.FetchTbl(cmd.Base_table());

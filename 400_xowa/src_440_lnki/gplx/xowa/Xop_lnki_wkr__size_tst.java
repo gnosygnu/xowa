@@ -40,8 +40,8 @@ public class Xop_lnki_wkr__size_tst {
 	@Test  public void Large_number() {	// PURPOSE: perf code identified large sizes as caption; DATE:2014-02-15
 		fxt.Test_parse_page_wiki("[[Image:a|1234567890x1234567890px]]"	, fxt.tkn_lnki_().Width_(1234567890).Height_(1234567890));
 	}
-	@Test  public void Large_number__discard_if_gt_int() {	// PURPOSE: size larger than int should be discarded, not be Int_.MaxValue: PAGE:id.w:Baho; DATE:2014-06-10
-		fxt.Test_html_wiki_frag("[[File:A.png|9999999999x30px]]", " width=\"0\" height=\"30\"");	// width should not be Int_.MaxValue
+	@Test  public void Large_number__discard_if_gt_int() {	// PURPOSE: size larger than int should be discarded, not be Int_.Max_value: PAGE:id.w:Baho; DATE:2014-06-10
+		fxt.Test_html_wiki_frag("[[File:A.png|9999999999x30px]]", " width=\"0\" height=\"30\"");	// width should not be Int_.Max_value
 	}
 	@Test  public void Dangling_xnde() {	// PURPOSE: dangling xnde should not eat rest of lnki; PAGE:sr.w:Сићевачка_клисура DATE:2014-07-03
 		fxt.Init_log_(Xop_xnde_log.Dangling_xnde).Test_parse_page_wiki("[[Image:a.png|<b>c|40px]]"	, fxt.tkn_lnki_().Width_(40).Height_(-1));

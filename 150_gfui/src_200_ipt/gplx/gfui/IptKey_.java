@@ -23,7 +23,7 @@ public class IptKey_ {
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
 	public static final IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
-	public static IptKey cast_(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
+	public static IptKey cast(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
 	public static IptKey add_(IptKey... ary) {
 		if (ary.length == 0) return IptKey_.None;
 		int newVal = ary[0].Val();
@@ -35,10 +35,10 @@ public class IptKey_ {
 		IptKey rv = (IptKey)enm_mgr.Get(val);
 		return (rv == null) ? new_(val, "key_" + Int_.Xto_str(val)) : rv;
 	}
-	public static IptKey parse_(String raw) {return get_or_new_(enm_mgr.GetVal(raw));}
+	public static IptKey parse(String raw) {return get_or_new_(enm_mgr.GetVal(raw));}
 	public static IptKey rdr_or_(DataRdr rdr, String key, IptKey or) {
 		String val = rdr.ReadStrOr(key, ""); // NOTE: "" cannot be null, b/c nullRdr returns String.empty
-		return (String_.Eq(val, "")) ? or : parse_(val);
+		return (String_.Eq(val, "")) ? or : parse(val);
 	}
 	public static List_adp printableKeys2_(IptKey[] add, IptKey[] del) {
 		List_adp list = List_adp_.new_();

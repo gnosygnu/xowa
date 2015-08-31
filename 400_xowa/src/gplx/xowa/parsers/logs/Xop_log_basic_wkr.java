@@ -68,5 +68,6 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 	, Tid_timeline		= 3
 	, Tid_score			= 4
 	, Tid_hiero			= 5
+	, Tid_math			= 6
 	;
 }

@@ -26,6 +26,7 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		this.bin_plat_dir			= root_dir.GenSubDir("bin").GenSubDir(plat_name);
 		this.bin_any_dir			= root_dir.GenSubDir("bin").GenSubDir("any");
 		this.bin_xowa_dir			= bin_any_dir.GenSubDir("xowa");
+		this.bin_xowa_file_dir		= bin_xowa_dir.GenSubDir_nest("file");
 		this.bin_xtns_dir			= bin_xowa_dir.GenSubDir_nest("xtns");
 		this.cfg_app_fil			= bin_xowa_dir.GenSubFil_nest("cfg", "app", "xowa.gfs");
 		this.cfg_lang_core_dir		= bin_xowa_dir.GenSubDir_nest("cfg", "lang", "core");
@@ -40,6 +41,7 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 	public Io_url Bin_plat_dir()				{return bin_plat_dir;} private final Io_url bin_plat_dir;
 	public Io_url Bin_any_dir()					{return bin_any_dir;} private final Io_url bin_any_dir;
 	public Io_url Bin_xowa_dir()				{return bin_xowa_dir;} private final Io_url bin_xowa_dir;
+	public Io_url Bin_xowa_file_dir()			{return bin_xowa_file_dir;} private final Io_url bin_xowa_file_dir;
 	public Io_url Bin_xtns_dir()				{return bin_xtns_dir;} private final Io_url bin_xtns_dir;
 	public Io_url Cfg_lang_core_dir()			{return cfg_lang_core_dir;} private final Io_url cfg_lang_core_dir;
 	public Io_url Cfg_wiki_core_dir()			{return cfg_wiki_core_dir;} private final Io_url cfg_wiki_core_dir;

@@ -73,7 +73,7 @@ public class Scrib_core_fxt {
 	public Scrib_core_fxt Test_CallFunction(int prc_id, Object[] args, KeyVal... expd) {
 		KeyVal[] actl = core.Interpreter().CallFunction(prc_id, Scrib_kv_utl_.base1_many_(args));
 		Test_server_logs();
-		Tfds.Eq_str_lines(KeyVal_.Ary_x_to_str(expd), KeyVal_.Ary_x_to_str(actl));
+		Tfds.Eq_str_lines(KeyVal_.Ary_to_str(expd), KeyVal_.Ary_to_str(actl));
 		return this;
 	}
 	public Scrib_core_fxt Test_RegisterLibrary(String[] proc_names, String[] expd_keys) {
@@ -95,7 +95,7 @@ public class Scrib_core_fxt {
 			Scrib_lua_proc itm = actl_lib.Fncs_get_at(i);
 			actl[i] = KeyVal_.new_(itm.Key(), itm.Id());
 		}
-		Tfds.Eq_str_lines(KeyVal_.Ary_x_to_str(expd), KeyVal_.Ary_x_to_str(actl));
+		Tfds.Eq_str_lines(KeyVal_.Ary_to_str(expd), KeyVal_.Ary_to_str(actl));
 		return this;
 	}
 	public Scrib_core_fxt Test_Module_GetInitChunk(String name, String text, int expd_id) {
@@ -109,7 +109,7 @@ public class Scrib_core_fxt {
 		KeyVal[] values = core.Interpreter().ExecuteModule(mod_id);
 		KeyVal[] actl = (KeyVal[])values[0].Val();
 		Test_server_logs();
-		Tfds.Eq_str_lines(KeyVal_.Ary_x_to_str(expd), KeyVal_.Ary_x_to_str(actl));
+		Tfds.Eq_str_lines(KeyVal_.Ary_to_str(expd), KeyVal_.Ary_to_str(actl));
 		return this;
 	}
 	public Scrib_core_fxt Test_GetExpandedArgument(KeyVal[] args, String arg, String expd) {// NOTE: test is rigidly defined; (a) always same 3 arguments in frame; (b) expd={"val_1", "val_2", "val_3", ""}

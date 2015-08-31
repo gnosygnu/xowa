@@ -37,7 +37,7 @@ public class Xohd_abrv_mgr_tst {
 			( ""
 			, "      <div>"
 			, "        <a href=\"/wiki/File:A.png\" class=\"image\" title=\"About this file\">"
-			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mw.file/info.png\" width=\"22\" height=\"22\" />"
+			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/info.png\" width=\"22\" height=\"22\" />"
 			, "        </a>"
 			, "      </div>"
 			));
@@ -48,7 +48,7 @@ public class Xohd_abrv_mgr_tst {
 			( ""
 			, "      <div class=\"magnify\">"
 			, "        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"A.png\">"
-			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mw.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
 			, "        </a>"
 			, "      </div>"
 			));
@@ -59,7 +59,7 @@ public class Xohd_abrv_mgr_tst {
 			( ""
 			, "      <div>"
 			, "        <a id=\"xowa_file_play_0\" href=\"/wiki/File:A.png\" xowa_title=\"A.png\" class=\"xowa_anchor_button\" style=\"width:220px;max-width:1024px;\">"
-			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mw.file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
+			, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
 			, "        </a>"
 			, "      </div>"
 			));

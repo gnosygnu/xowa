@@ -20,10 +20,10 @@ import gplx.xowa.files.*;
 public class Xop_lnki_tkn_chkr extends Xop_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Xop_lnki_tkn.class;}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_lnki;}
-	public int Ns_id() {return nsId;} public Xop_lnki_tkn_chkr Ns_id_(int v) {nsId = v; return this;} private int nsId = Int_.MinValue;
+	public int Ns_id() {return nsId;} public Xop_lnki_tkn_chkr Ns_id_(int v) {nsId = v; return this;} private int nsId = Int_.Min_value;
 	public byte ImgType() {return imgType;} public Xop_lnki_tkn_chkr ImgType_(byte v) {imgType = v; return this;} private byte imgType = Byte_.Max_value_127;
-	public int Width() {return width;} public Xop_lnki_tkn_chkr Width_(int v) {width = v; return this;} private int width = Int_.MinValue;
-	public int Height() {return height;} public Xop_lnki_tkn_chkr Height_(int v) {height = v; return this;} private int height = Int_.MinValue;
+	public int Width() {return width;} public Xop_lnki_tkn_chkr Width_(int v) {width = v; return this;} private int width = Int_.Min_value;
+	public int Height() {return height;} public Xop_lnki_tkn_chkr Height_(int v) {height = v; return this;} private int height = Int_.Min_value;
 	public byte HAlign() {return hAlign;} public Xop_lnki_tkn_chkr HAlign_(byte v) {hAlign = v; return this;} private byte hAlign = Byte_.Max_value_127;
 	public byte VAlign() {return vAlign;} public Xop_lnki_tkn_chkr VAlign_(byte v) {vAlign = v; return this;} private byte vAlign = Byte_.Max_value_127;
 	public byte Border() {return border;} public Xop_lnki_tkn_chkr Border_(byte v) {border = v; return this;} private byte border = Bool_.__byte;
@@ -38,10 +38,10 @@ public class Xop_lnki_tkn_chkr extends Xop_tkn_chkr_base {
 	public Xop_tkn_chkr_base Link_tkn() {return link_tkn;} public Xop_lnki_tkn_chkr Link_tkn_(Xop_tkn_chkr_base v) {link_tkn = v; return this;} private Xop_tkn_chkr_base link_tkn;
 	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
 		Xop_lnki_tkn actl = (Xop_lnki_tkn)actl_obj;
-		err += mgr.Tst_val(nsId == Int_.MinValue, path, "nsId", nsId, actl.Ns_id());
+		err += mgr.Tst_val(nsId == Int_.Min_value, path, "nsId", nsId, actl.Ns_id());
 		err += mgr.Tst_val(imgType == Byte_.Max_value_127, path, "imgType", imgType, actl.Lnki_type());
-		err += mgr.Tst_val(width == Int_.MinValue, path, "width", width, actl.W());
-		err += mgr.Tst_val(height == Int_.MinValue, path, "height", height, actl.H());
+		err += mgr.Tst_val(width == Int_.Min_value, path, "width", width, actl.W());
+		err += mgr.Tst_val(height == Int_.Min_value, path, "height", height, actl.H());
 		err += mgr.Tst_val(hAlign == Byte_.Max_value_127, path, "halign", hAlign, actl.Align_h());
 		err += mgr.Tst_val(vAlign == Byte_.Max_value_127, path, "valign", vAlign, actl.Align_v());
 		err += mgr.Tst_val(border == Bool_.__byte, path, "border", border, actl.Border());

@@ -36,7 +36,7 @@ public class Xoapi_root implements GfoInvkAble {
 		xtns_api.Init_by_kit(app);
 	}
 	public void Init_by_app(Xoae_app app) {
-		Io_url img_dir = app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+		Io_url img_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.general");
 		html_api.Page().Toggle_mgr().Img_dir_(img_dir);
 		usr_api.Init_by_app(app);
 	}

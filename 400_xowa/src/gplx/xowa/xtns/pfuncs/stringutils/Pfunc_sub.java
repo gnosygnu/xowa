@@ -23,18 +23,18 @@ public class Pfunc_sub extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] s = Eval_argx(ctx, src, caller, self);
 		int self_args_len = self.Args_len();
-		int bgn = 0, len = Int_.MinValue;
+		int bgn = 0, len = Int_.Min_value;
 		if (self_args_len > 0) {
 			byte[] bgn_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 0, null);
 			if (bgn_bry != null) bgn = Bry_.To_int_or(bgn_bry, 0);
 			if (self_args_len > 1) {
 				byte[] len_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, null);
-				if (len_bry != null) len = Bry_.To_int_or(len_bry, Int_.MinValue);
+				if (len_bry != null) len = Bry_.To_int_or(len_bry, Int_.Min_value);
 			}
 		}
 		int s_len = s.length;
 		if (bgn < 0) bgn = s_len + bgn;
-		if (len == Int_.MinValue) len = s_len - bgn;
+		if (len == Int_.Min_value) len = s_len - bgn;
 		if (len < 0) len = s_len - bgn + len;	// neg len should remove letters from end; EX: {{#sub:abcde|2|-1}} -> "cd"
 		if (bgn < 0 || len < 0) return;			// if still negative, return blank; EX: {{#sub:abcde|2|-5}} -> ""
 		byte[] mid = Bry_.Mid(s, bgn, bgn + len);

@@ -47,10 +47,10 @@ public class App_cmd_arg {
 	}
 	public Object Val() {return val;} public App_cmd_arg Val_(Object v) {this.val = v; return this;} Object val;
 	public Object Dflt() {return dflt;} public App_cmd_arg Dflt_(Object v) {dflt = v; return this;} Object dflt;
-	public boolean Val_as_bool() {return Bool_.cast_(val);}
+	public boolean Val_as_bool() {return Bool_.cast(val);}
 	public String Val_as_str_or(String or) {return val == null ? or : (String)val;}
 	public String Val_as_str() {return (String)val;}
-	public int Val_as_int_or(int or) {return val == null ? or : Int_.parse_or_((String)val, or);}
+	public int Val_as_int_or(int or) {return val == null ? or : Int_.parse_or((String)val, or);}
 	public Io_url Val_as_url_rel_dir_or(Io_url owner_dir, Io_url or) {return Val_as_url_rel_url_or(owner_dir, or, true);}
 	public Io_url Val_as_url_rel_fil_or(Io_url owner_dir, Io_url or) {return Val_as_url_rel_url_or(owner_dir, or, false);}
 	public Io_url Val_as_url_rel_url_or(Io_url owner_dir, Io_url or, boolean dir) {return Val_as_url_rel_url_or(Val_as_str(), owner_dir, or, dir);}

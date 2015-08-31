@@ -75,7 +75,7 @@ public class Utf8_ {
 			}
 			int cur_char = Utf16_.Decode_to_int(bry, cur_char_pos0);
 			nxt_char = Increment_char(cur_char);
-			if (nxt_char != Int_.MinValue) {
+			if (nxt_char != Int_.Min_value) {
 				byte[] nxt_char_as_bry = Utf16_.Encode_int_to_bry(nxt_char);
 				bry = Bry_.Add(Bry_.Mid(bry, 0, cur_char_pos0), nxt_char_as_bry);
 				return bry;
@@ -104,7 +104,7 @@ public class Utf8_ {
 			if (!Codepoint_valid(cur)) continue;
 			return cur;
 		}
-		return Int_.MinValue;
+		return Int_.Min_value;
 	}
 	private static boolean Codepoint_valid(int v) {
 				return Character.isDefined(v);

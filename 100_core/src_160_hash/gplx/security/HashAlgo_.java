@@ -27,7 +27,7 @@ public class HashAlgo_ {
 	public static final HashAlgo Md5 = HashAlgo_md5.new_();
 	public static final HashAlgo Tth192 = HashAlgo_tth192.new_();
 	public static HashAlgo as_(Object obj) {return obj instanceof HashAlgo ? (HashAlgo)obj : null;}
-	public static HashAlgo cast_(Object obj) {if (obj == null) return null; HashAlgo rv = as_(obj); if (rv == null) throw Err_.new_type_mismatch(HashAlgo.class, obj); return rv;}
+	public static HashAlgo cast(Object obj) {if (obj == null) return null; HashAlgo rv = as_(obj); if (rv == null) throw Err_.new_type_mismatch(HashAlgo.class, obj); return rv;}
 	public static HashAlgo fetch_(String key) {
 		if		(key == HashAlgo_md5.KEY)		return Md5;
 		else if (key == HashAlgo_sha1.KEY)		return Sha1;

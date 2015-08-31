@@ -33,7 +33,7 @@ public class Xow_popup_parser {
 	public Xop_keeplist_wiki Tmpl_keeplist() {return tmpl_keeplist;} private Xop_keeplist_wiki tmpl_keeplist; // private byte[] tmpl_keeplist_bry = Bry_.Empty;
 	public Xop_ctx Wtxt_ctx() {return wtxt_ctx;} private Xop_ctx wtxt_ctx;
 	public void Tmpl_tkn_max_(int v) {
-		if (v < 0) v = Int_.MaxValue;	// allow -1 as shortcut to deactivate
+		if (v < 0) v = Int_.Max_value;	// allow -1 as shortcut to deactivate
 		tmpl_ctx.Tmpl_tkn_max_(v);
 		wtxt_ctx.Tmpl_tkn_max_(v);
 	}

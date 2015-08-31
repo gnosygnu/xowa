@@ -41,7 +41,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		lnr_location = new Swt_html_lnr_location(this);
 		lnr_status = new Swt_html_lnr_status(this);
 		Object browser_tid_obj = ctorArgs.FetchValOr(Swt_kit.Cfg_Html_BrowserType, null);
-		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.cast_(browser_tid_obj);
+		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.cast(browser_tid_obj);
 		browser = new Browser(owner_control.Under_composite(), browser_tid);
 		core = new Swt_core_cmds_html(this, browser);
 		browser.addKeyListener(new Swt_lnr_key(this));
@@ -75,7 +75,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public void 		Html_js_enabled_(boolean v) 									{browser.setJavascriptEnabled(v);}
 	public void 		Html_js_cbks_add(String func_name, GfoInvkAble invk) 			{new Swt_html_func(browser, func_name, invk);}
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
-	public boolean 	Html_js_eval_proc_as_bool(String proc, Object... args) {return Bool_.cast_(Html_js_eval_proc_as_obj(proc, args));}
+	public boolean 	Html_js_eval_proc_as_bool(String proc, Object... args) {return Bool_.cast(Html_js_eval_proc_as_obj(proc, args));}
 	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
 	private Object Html_js_eval_proc_as_obj(String proc, Object... args) {
 		Bry_bfr bfr = Bry_bfr.new_();

@@ -20,7 +20,7 @@ public class Xow_ns_case_ {
 	public static final byte Id_all = 0, Id_1st = 1;
 	public static final String Key_all = "case-sensitive", Key_1st = "first-letter";
 	public static final byte[] Bry__all = Bry_.new_a7(Key_all), Bry__1st = Bry_.new_a7(Key_1st);
-	public static byte parse_(String s) {
+	public static byte parse(String s) {
 		if		(String_.Eq(s, Key_1st))		return Id_1st;
 		else if	(String_.Eq(s, Key_all))		return Id_all;
 		else									throw Err_.new_unhandled(s);

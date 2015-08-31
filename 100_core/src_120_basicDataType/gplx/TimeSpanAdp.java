@@ -41,13 +41,13 @@ public class TimeSpanAdp implements CompareAble, EqAble {
 	}
 	public TimeSpanAdp Subtract(TimeSpanAdp val)	{return new TimeSpanAdp(fracs - val.fracs);}
 
-	public int compareTo(Object obj)				{TimeSpanAdp comp = TimeSpanAdp_.cast_(obj); return CompareAble_.Compare_obj(fracs, comp.fracs);}
+	public int compareTo(Object obj)				{TimeSpanAdp comp = TimeSpanAdp_.cast(obj); return CompareAble_.Compare_obj(fracs, comp.fracs);}
 	public boolean Eq(Object o) {
-		TimeSpanAdp comp = TimeSpanAdp_.cast_(o); if (comp == null) return false;
+		TimeSpanAdp comp = TimeSpanAdp_.cast(o); if (comp == null) return false;
 		return fracs == comp.fracs;
 	}
 	@Override public String toString()				{return To_str(TimeSpanAdp_.Fmt_Default);}
-	@Override public boolean equals(Object obj)			{TimeSpanAdp comp = TimeSpanAdp_.cast_(obj); return Object_.Eq(fracs, comp.fracs);}
+	@Override public boolean equals(Object obj)			{TimeSpanAdp comp = TimeSpanAdp_.cast(obj); return Object_.Eq(fracs, comp.fracs);}
 	@Override public int hashCode() {return super.hashCode();}
 
 	public String To_str()	{return TimeSpanAdp_.To_str(fracs, TimeSpanAdp_.Fmt_Default);}

@@ -68,14 +68,14 @@ public class TimeSpanAdp_basic_tst {
 		tst_XtoStrUiAbbrv("00:00:03.000", "3s 0f");
 		tst_XtoStrUiAbbrv("11:22:33.444", "11h 22m 33s 444f");
 		tst_XtoStrUiAbbrv("00:00:00.000", "0f");
-	}	void tst_XtoStrUiAbbrv(String raw, String expd) {Tfds.Eq(expd, TimeSpanAdp_.parse_(raw).XtoStrUiAbbrv());}
+	}	void tst_XtoStrUiAbbrv(String raw, String expd) {Tfds.Eq(expd, TimeSpanAdp_.parse(raw).XtoStrUiAbbrv());}
 	void tst_AddUnit(String valRaw, int unitIdx, int delta, String expdRaw) {
-		TimeSpanAdp val = TimeSpanAdp_.parse_(valRaw);
+		TimeSpanAdp val = TimeSpanAdp_.parse(valRaw);
 		TimeSpanAdp actl = val.Add_unit(unitIdx, delta);
-		Tfds.Eq(TimeSpanAdp_.parse_(expdRaw), actl);
+		Tfds.Eq(TimeSpanAdp_.parse(expdRaw), actl);
 	}
 	void tst_Units(String text, int... expd) {
-		TimeSpanAdp val = TimeSpanAdp_.parse_(text);
+		TimeSpanAdp val = TimeSpanAdp_.parse(text);
 		int hour = 0, min = 0, sec = 0, frac = 0;
 		int[] ary = val.Units();
 		hour = ary[TimeSpanAdp_.Idx_Hour]; min = ary[TimeSpanAdp_.Idx_Min]; sec = ary[TimeSpanAdp_.Idx_Sec]; frac = ary[TimeSpanAdp_.Idx_Frac];

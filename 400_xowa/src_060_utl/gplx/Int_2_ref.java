@@ -33,11 +33,11 @@ public class Int_2_ref {
 		Int_2_ref comp = (Int_2_ref)obj;
 		return val_0 == comp.val_0 && val_1 == comp.val_1;
 	}
-	public static Int_2_ref parse_(String raw) {
+	public static Int_2_ref parse(String raw) {
 		try {
 			String[] itms = String_.Split(raw, ",");
-			int v0 = Int_.parse_(itms[0]);
-			int v1 = Int_.parse_(itms[1]);
+			int v0 = Int_.parse(itms[0]);
+			int v1 = Int_.parse(itms[1]);
 			return new Int_2_ref(v0, v1);
 		} catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("Int_2_ref", raw);}
 	}
@@ -48,8 +48,8 @@ public class Int_2_ref {
 			Int_2_ref[] rv = new Int_2_ref[itms_len];
 			for (int i = 0; i < itms_len; i++) {
 				String[] vals = String_.Split(itms[i], ",");
-				int v0 = Int_.parse_(vals[0]);
-				int v1 = Int_.parse_(vals[1]);
+				int v0 = Int_.parse(vals[0]);
+				int v1 = Int_.parse(vals[1]);
 				rv[i] = new Int_2_ref(v0, v1);
 			}
 			return rv;

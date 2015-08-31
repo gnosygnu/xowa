@@ -27,7 +27,7 @@ public class Pfunc_replace extends Pf_func_base {
 		if (Bry_.Len_eq_0(find)) find = Byte_ascii.Space_bry;	// NOTE: MW defaults empty finds to space (" "); note that leaving it as "" would cause Replace to loop infinitely
 		byte[] repl = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, Bry_.Empty);
 		byte[] limit_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 2, null);
-		int limit = limit_bry == null ? Int_.MaxValue : Bry_.To_int_or_neg1(limit_bry);
+		int limit = limit_bry == null ? Int_.Max_value : Bry_.To_int_or_neg1(limit_bry);
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		byte[] rv = Bry_.Replace(tmp_bfr, str, find, repl, 0, str.length, limit);
 		tmp_bfr.Mkr_rls();

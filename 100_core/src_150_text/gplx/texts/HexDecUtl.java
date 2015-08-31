@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
 public class HexDecUtl {
-	public static int parse_or_(String raw, int or) {
+	public static int parse_or(String raw, int or) {
 		int rv = 0; int digit; int factor = 1, rawLen = String_.Len(raw);
 		for (int i = rawLen - 1; i >= 0; i--) {
 			digit = XtoInt(String_.CharAt(raw, i));
@@ -27,8 +27,8 @@ public class HexDecUtl {
 		}
 		return rv;
 	}
-	public static int parse_or_(byte[] raw, int or) {return parse_or_(raw, 0, raw.length, or);}
-	public static int parse_or_(byte[] raw, int bgn, int end, int or) {
+	public static int parse_or(byte[] raw, int or) {return parse_or(raw, 0, raw.length, or);}
+	public static int parse_or(byte[] raw, int bgn, int end, int or) {
 		int rv = 0; int factor = 1;
 		byte b = Byte_.Max_value_127;
 		for (int i = end - 1; i >= bgn; i--) {
@@ -45,8 +45,8 @@ public class HexDecUtl {
 		}
 		return rv;
 	}
-	public static int parse_(String raw) {
-		int rv = parse_or_(raw, -1); if (rv == -1) throw Err_.new_parse("HexDec", "raw");
+	public static int parse(String raw) {
+		int rv = parse_or(raw, -1); if (rv == -1) throw Err_.new_parse("HexDec", "raw");
 		return rv;
 	}
 	public static String To_str(int val, int pad) {

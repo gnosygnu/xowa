@@ -49,4 +49,8 @@ class Mwm_root_sub {
 		}
 		subs_ary.Add(sub_uid);
 	}
+	public boolean Del_by_key_from_end(int owner_uid, int sub_uid) {
+		Int_ary subs_ary = Get_at(owner_uid);
+		return subs_ary.Del_by_key_from_end(sub_uid);
+	}
 }

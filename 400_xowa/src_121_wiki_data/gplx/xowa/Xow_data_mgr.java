@@ -80,7 +80,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		return rv;
 	}
 	public Xoae_page Redirect(Xoae_page page, byte[] page_bry) {
-		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, page_bry);
+		Xoa_ttl trg_ttl = Xoa_ttl.parse(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.new_(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url).Redirected_(true);
 		return wiki.Data_mgr().Get_page(page, trg_ttl.Ns(), trg_ttl, false, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes));

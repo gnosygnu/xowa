@@ -74,7 +74,7 @@ public class Xop_link_parser {
 		return raw;
 	}
 	private static boolean Parse__ttl(Bry_bfr tmp_bfr, Xowe_wiki wiki, byte[] wiki_bry, byte[] page_bry) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, page_bry);
+		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, page_bry);
 		boolean page_ttl_is_valid = page_ttl != null;
 		if (page_ttl_is_valid) {
 			Xow_xwiki_itm xwiki_itm = page_ttl.Wik_itm();

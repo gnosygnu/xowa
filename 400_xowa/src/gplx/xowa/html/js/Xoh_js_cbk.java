@@ -48,7 +48,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		Xop_ctx ctx = wiki.Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
 		byte[] raw = Bry_.new_u8(m.Args_getAt(0).Val_to_str_or_empty());
-		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.parse_(m.Args_getAt(1).Val_to_str_or_empty());
+		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.parse(m.Args_getAt(1).Val_to_str_or_empty());
 		try {
 			wiki.Ctx().Para().Enabled_(para_enabled);
 			wiki.Parser().Parse_text_to_wdom(root, wiki.Ctx(), wiki.Ctx().Tkn_mkr(), raw, 0);
@@ -63,7 +63,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	private String Get_page(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, m.Args_getAt(0).Val_to_bry());
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, m.Args_getAt(0).Val_to_bry());
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			return String_.new_u8(page.Data_raw());
 		} catch (Exception e) {Err_.Noop(e); return null;}
@@ -77,7 +77,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	}
 	private String Popups_get_html(GfoMsg m) {
 		try {
-			int	   popups_id	= Int_.Xby_double_(Double_.cast_(m.Args_getAt(0).Val()));
+			int	   popups_id	= Int_.Xby_double_(Double_.cast(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
 			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
 			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
@@ -86,10 +86,10 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	private String[] Get_title_meta(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (tmp_page) {
 			tmp_page.Clear();
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
-		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.Xto_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
+		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.To_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
 	}	private static final Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();

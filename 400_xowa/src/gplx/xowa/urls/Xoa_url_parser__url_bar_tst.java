@@ -54,4 +54,12 @@ public class Xoa_url_parser__url_bar_tst {
 		tstr.Run_parse_from_url_bar("A.b.m."					).Chk_to_str("en.wikipedia.org/wiki/A.b.m.");	// false-match
 		tstr.Run_parse_from_url_bar("en.x.wikipedia.org/wiki/A"	).Chk_to_str("en.wikipedia.org/wiki/en.x.wikipedia.org/wiki/A");	// fail
 	}
+	@Test  public void Missing_page() {
+		tstr.Run_parse_from_url_bar("http://a.org").Chk_is_null();	// unknown wiki; return null;
+		tstr.Run_parse_from_url_bar("http://en.wikipedia.org").Chk_to_str("en.wikipedia.org/wiki/Main_Page");	// known wiki; return Main_Page
+	}
+	@Test  public void Invalid_names() {
+		tstr.Run_parse_from_url_bar("http://a/b/c").Chk_is_null();					// unknown url
+		tstr.Run_parse_from_url_bar("war").Chk_to_str("en.wikipedia.org/wiki/war");	// word looks like lang, but is actually page; default to current
+	}
 }

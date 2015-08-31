@@ -28,7 +28,7 @@ public class Xoh_file_wtr_media_tst {
 		,	"    <div class=\"thumbcaption\">"
 		,	"      <div class=\"magnify\">"
 		,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-		,	"          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+		,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
 		,	"        </a>"
 		,	"      </div>"
 		,	"      b <a href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\">"

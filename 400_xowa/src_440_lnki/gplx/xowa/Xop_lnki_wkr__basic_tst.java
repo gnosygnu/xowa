@@ -212,7 +212,7 @@ public class Xop_lnki_wkr__basic_tst {
 		, "    <div class=\"thumbcaption\">"
 		, "      <div class=\"magnify\">"
 		, "        <a href=\"/wiki/File:A.png\" class=\"inte" +"rnal\" title=\"Enlarge\">"
-		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+		, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
 		, "        </a>"
 		, "      </div>"
 		, "      b <sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
@@ -301,7 +301,7 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test  public void Visited() { // PURPOSE: show redirected titles as visited; EX:fr.w:Alpes_Pennines; DATE:2014-02-28
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7("Src"));		// simulate requrest for "Src" page
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_a7("Src"));		// simulate requrest for "Src" page
 		Xoae_page previous_page = Xoae_page.test_(wiki, ttl);
 		previous_page.Redirected_ttls().Add(Bry_.new_a7("Src"));		// simulate redirect from "Src"
 		fxt.App().Usere().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call

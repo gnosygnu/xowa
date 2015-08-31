@@ -29,7 +29,7 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 		return this;
 	}	KeyVal[] list = null;
 	public void Inject(Object owner) {
-		txtBox = GfuiTextBox_.cast_(owner);
+		txtBox = GfuiTextBox_.cast(owner);
 		txtBox.TextAlignH_center_();
 		IptBnd_.cmd_to_(IptCfg_.Null, txtBox, this, Invk_dec, IptKey_.Down, IptMouseWheel_.Down);
 		IptBnd_.cmd_to_(IptCfg_.Null, txtBox, this, Invk_inc, IptKey_.Up, IptMouseWheel_.Up);
@@ -52,14 +52,14 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 		WhenEvtCmd(list[newVal].Key_as_obj());
 	}
 	Object UpdateCmd() {
-		int idx = Int_.MinValue;
+		int idx = Int_.Min_value;
 		String find = txtBox.Text();
 		for (int i = 0; i < list.length; i++) {	// try to find .Text in list.Vals
 			if (String_.Eq(find, (String)list[i].Val())) idx = i;
 		}
-		if (idx == Int_.MinValue) {				// try to find .Text in list.Keys
-			int key = Int_.parse_or_(txtBox.Text(), Int_.MinValue); if (key == Int_.MinValue) return GfoInvkAble_.Rv_unhandled;
-			idx = GetByKey(key); if (idx == Int_.MinValue) return GfoInvkAble_.Rv_unhandled;
+		if (idx == Int_.Min_value) {				// try to find .Text in list.Keys
+			int key = Int_.parse_or(txtBox.Text(), Int_.Min_value); if (key == Int_.Min_value) return GfoInvkAble_.Rv_unhandled;
+			idx = GetByKey(key); if (idx == Int_.Min_value) return GfoInvkAble_.Rv_unhandled;
 		}
 		ExecCmd(setCmd, idx);
 		return GfoInvkAble_.Rv_handled;
@@ -71,7 +71,7 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 		WhenEvtCmd(curId);
 	}
 	void WhenEvtCmd(Object id) {
-		int idx = GetByKey(id); if (idx == Int_.MinValue) return;
+		int idx = GetByKey(id); if (idx == Int_.Min_value) return;
 		previewIdx = idx;
 		txtBox.Text_(list[idx].Val_to_str_or_empty());
 	}
@@ -84,7 +84,7 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 		for (int i = 0; i < list.length; i++) {
 			if (Object_.Eq(find, list[i].Key_as_obj())) return i;
 		}
-		return Int_.MinValue;
+		return Int_.Min_value;
 	}
 	public static IptBnd_txt_range new_(GfoEvObj propSrc) {
 		IptBnd_txt_range rv = new IptBnd_txt_range();

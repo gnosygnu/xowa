@@ -51,8 +51,8 @@ public class Json_wtr {
 	}
 	public Json_wtr Ary_itm_str(String itm) {return Ary_itm_by_type_tid(Type_adp_.Tid__str, itm);}
 	public Json_wtr Ary_itm_bry(byte[] itm) {return Ary_itm_by_type_tid(Type_adp_.Tid__bry, itm);}
-	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_adp_.To_tid(itm), itm);}
-	private Json_wtr Ary_itm_by_type_tid(int itm_type_tid, Object itm) {
+	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_adp_.To_tid_obj(itm), itm);}
+	public Json_wtr Ary_itm_by_type_tid(int itm_type_tid, Object itm) {
 		Add_indent_itm(ary_itm_is_first);
 		Add_itm_by_tid(itm_type_tid, itm);
 		Add_nl();
@@ -81,6 +81,14 @@ public class Json_wtr {
 		Add_indent_itm(nde_itm_is_first);
 		Add_key(key);
 		Add_itm_bry(val);
+		Add_nl();
+		nde_itm_is_first = false;
+		return this;
+	}
+	public Json_wtr Kv_obj(byte[] key, Object val, int val_tid) {
+		Add_indent_itm(nde_itm_is_first);
+		Add_key(key);
+		Add_itm_by_tid(val_tid, val);
 		Add_nl();
 		nde_itm_is_first = false;
 		return this;
@@ -115,14 +123,14 @@ public class Json_wtr {
 		bfr.Add_byte_colon();
 		return this;
 	}
-	public void Add_itm_by_tid(int type_tid, Object obj) {
+	private void Add_itm_by_tid(int type_tid, Object obj) {
 		switch (type_tid) {
-			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.cast_(obj)); break;
-			case Type_adp_.Tid__byte:				bfr.Add_byte(Byte_.cast_(obj)); break;
-			case Type_adp_.Tid__int:				bfr.Add_int_variable(Int_.cast_(obj)); break;
-			case Type_adp_.Tid__long:				bfr.Add_long_variable(Long_.cast_(obj)); break;
-			case Type_adp_.Tid__float:				bfr.Add_float(Float_.cast_(obj)); break;
-			case Type_adp_.Tid__double:				bfr.Add_double(Double_.cast_(obj)); break;
+			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.cast(obj)); break;
+			case Type_adp_.Tid__byte:				bfr.Add_byte(Byte_.cast(obj)); break;
+			case Type_adp_.Tid__int:				bfr.Add_int_variable(Int_.cast(obj)); break;
+			case Type_adp_.Tid__long:				bfr.Add_long_variable(Long_.cast(obj)); break;
+			case Type_adp_.Tid__float:				bfr.Add_float(Float_.cast(obj)); break;
+			case Type_adp_.Tid__double:				bfr.Add_double(Double_.cast(obj)); break;
 			case Type_adp_.Tid__str:				Add_itm_bry(Bry_.new_u8((String)obj)); break;
 			case Type_adp_.Tid__bry:				Add_itm_bry((byte[])obj); break;
 			case Type_adp_.Tid__char:				

@@ -65,7 +65,7 @@ class Xou_history_mgr_fxt {
 	}
 	public Xou_history_mgr_fxt Add_one(String ttl_str, String arg_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		page.Revision_data().Modified_on_(DateAdp_.Now());
 		byte[] url_bry = ttl_bry;

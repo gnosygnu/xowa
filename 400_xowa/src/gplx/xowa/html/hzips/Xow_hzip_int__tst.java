@@ -33,7 +33,7 @@ public class Xow_hzip_int__tst {
 		fxt.Test_srl(     16646655, 255, 255, 255,   0);
 		fxt.Test_srl(     16646656,   1,   1,   1,   1);
 		fxt.Test_srl(     16646657,   2,   1,   1,   1);
-		fxt.Test_srl(Int_.MaxValue, 127, 129, 130, 129);
+		fxt.Test_srl(Int_.Max_value, 127, 129, 130, 129);
 		fxt.Test_srl(           -1, 128, 129, 130, 129);
 		fxt.Test_srl(           -2, 129, 129, 130, 129);
 	}

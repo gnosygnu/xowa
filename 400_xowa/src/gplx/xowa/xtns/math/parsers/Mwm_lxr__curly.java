@@ -19,17 +19,17 @@ package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import g
 class Mwm_lxr__curly_bgn implements Mwm_lxr {
 	public int		Tid() {return Mwm_lxr_.Tid__curly_bgn;}
 	public int		Make_tkn(Mwm_ctx ctx, Mwm_tkn__root root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		int uid = root.Regy__add(Mwm_tkn_.Tid__arg, bgn_pos, cur_pos, new Mwm_tkn__node());
-		Mwm_tkn tkn = root.Subs__get_at(uid);
-		ctx.Stack().Add(tkn);
+		int uid = root.Regy__add(Mwm_tkn_.Tid__curly, bgn_pos, cur_pos, new Mwm_tkn__node());
+		ctx.Stack().Add(uid);
 		return cur_pos;
 	}
 }
 class Mwm_lxr__curly_end implements Mwm_lxr {
 	public int		Tid() {return Mwm_lxr_.Tid__curly_end;}
 	public int		Make_tkn(Mwm_ctx ctx, Mwm_tkn__root root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		Mwm_tkn bgn_tkn = ctx.Stack().Pop();
-		root.Regy__move(bgn_tkn, null);
+		int bgn_uid = ctx.Stack().Pop_or(-1);
+		root.Regy__move_to_end(bgn_uid, bgn_uid);
+		root.Regy__update_end(bgn_uid, cur_pos);
 		return cur_pos;
 	}
 }

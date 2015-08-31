@@ -19,12 +19,12 @@ package gplx.xowa.bldrs.syncs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.ios.*;
 class Xob_sync_grp {
 	private final Ordered_hash itms = Ordered_hash_.new_();
-	public Xob_sync_grp Ctor_itm(DateAdp upload_time, DateAdp related_time) {
-		this.upload_time = upload_time; this.related_time = related_time;
+	public Xob_sync_grp Ctor_itm(DateAdp dump_time, DateAdp upload_time) {
+		this.dump_time = dump_time; this.upload_time = upload_time;
 		return this;
 	}
+	public DateAdp Dump_time() {return dump_time;} private DateAdp dump_time;
 	public DateAdp Upload_time() {return upload_time;} private DateAdp upload_time;
-	public DateAdp Related_time() {return related_time;} private DateAdp related_time;
 	public int Itms__len() {return itms.Count();}
 	public void Itms__add(Xob_sync_pkg file) {itms.Add(file.Path(), file);}
 	public Xob_sync_pkg Itms__get_at(int i) {return (Xob_sync_pkg)itms.Get_at(i);}

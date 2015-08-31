@@ -51,7 +51,7 @@ class Imap_desc_tid {
 			ary[i] = Bry_.Trim(ary[i]);							// note that items will have trailing ws; EX: "top-right, bottom-right, bottom-left, top-left, none"
 		return ary;
 	}
-	public static byte parse_(Btrie_slim_mgr trie, byte[] src, int bgn, int end) {
+	public static byte parse(Btrie_slim_mgr trie, byte[] src, int bgn, int end) {
 		Object rv = trie.Match_bgn(src, bgn, end);
 		return rv == null ? Tid_null : ((Byte_obj_val)rv).Val();
 	}

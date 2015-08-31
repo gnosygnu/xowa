@@ -22,7 +22,7 @@ class Xoud_user_mgr {
 	public void Conn_(Db_conn conn, boolean created) {tbl.Conn_(conn, created);}
 	public int Get_id_or_new(String name) {
 		int rv = tbl.Select_id_by_name(name);
-		if (rv == Int_.MinValue) {
+		if (rv == Int_.Min_value) {
 			rv = tbl.Select_id_next();
 			tbl.Insert(rv, name);
 		}
@@ -52,7 +52,7 @@ class Xoud_user_tbl {
 	public int Select_id_by_name(String name) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_name).Crt_str(fld_name, name).Exec_select__rls_auto();
 		try {
-			return rdr.Move_next() ? rdr.Read_int(fld_id) : Int_.MinValue;
+			return rdr.Move_next() ? rdr.Read_int(fld_id) : Int_.Min_value;
 		}
 		finally {rdr.Rls();}
 	}

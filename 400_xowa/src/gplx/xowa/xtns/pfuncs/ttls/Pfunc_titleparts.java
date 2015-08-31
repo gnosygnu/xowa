@@ -29,8 +29,8 @@ public class Pfunc_titleparts extends Pf_func_base {
 
 		// get parts_len
 		byte[] parts_len_ary = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
-		int parts_len = parts_len_ary == Bry_.Empty ? Int_.MinValue : Bry_.To_int_or(parts_len_ary, Int_.MaxValue);
-		if (parts_len == Int_.MaxValue) {// len is not an int; EX: "a";
+		int parts_len = parts_len_ary == Bry_.Empty ? Int_.Min_value : Bry_.To_int_or(parts_len_ary, Int_.Max_value);
+		if (parts_len == Int_.Max_value) {// len is not an int; EX: "a";
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Len_is_invalid, src, caller.Src_bgn(), caller.Src_end());
 			bb.Add(argx);
 			return;
@@ -38,8 +38,8 @@ public class Pfunc_titleparts extends Pf_func_base {
 
 		// get parts_bgn
 		byte[] parts_bgn_arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1);
-		int parts_bgn = parts_bgn_arg == Bry_.Empty ? 0 : Bry_.To_int_or(parts_bgn_arg, Int_.MinValue);
-		if (parts_bgn == Int_.MinValue) {// parts_bgn is not an int; EX: "a"
+		int parts_bgn = parts_bgn_arg == Bry_.Empty ? 0 : Bry_.To_int_or(parts_bgn_arg, Int_.Min_value);
+		if (parts_bgn == Int_.Min_value) {// parts_bgn is not an int; EX: "a"
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Bgn_is_invalid, src, caller.Src_bgn(), caller.Src_end());
 			parts_bgn = 0;	// NOTE: do not return
 		}
@@ -60,7 +60,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 			||	bgn_idx > dlms_ary_len) return Bry_.Empty;							// if bgn > len, return ""; EX: {{#titleparts:a/b|1|3}} should return ""
 
 		// adjust parts_len for negative/null
-		if		(parts_len == Int_.MinValue) parts_len = dlms_ary_len;					// no parts_len; default to dlms_ary_len
+		if		(parts_len == Int_.Min_value) parts_len = dlms_ary_len;					// no parts_len; default to dlms_ary_len
 		else if (parts_len < 0)	{														// neg parts_len; shorten parts now and default to rest of String; EX: a/b/c|-1 -> makes String a/b/c and get 2 parts
 			dlms_ary_len += parts_len;
 			parts_len = dlms_ary_len;

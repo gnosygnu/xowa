@@ -31,7 +31,7 @@ public class Xob_siteinfo_parser {
 		finally {rdr.Rls();}
 	}
 	public static void Siteinfo_parse(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg, String siteinfo_str) {
-		XmlDoc xdoc = XmlDoc_.parse_(siteinfo_str);
+		XmlDoc xdoc = XmlDoc_.parse(siteinfo_str);
 		XmlNde root = xdoc.Root();
 		int root_subs_len = root.SubNdes().Count();
 		Bry_bfr siteinfo_misc_bfr = Bry_bfr.reset_(512);
@@ -74,8 +74,8 @@ public class Xob_siteinfo_parser {
 			XmlNde sub_nde = ns_nde.SubNdes().Get_at(i);
 			if (sub_nde.Atrs().Count() == 0) continue; // NOTE: JAVA again has unexpected nodes
 			try {
-				int ns_id = Int_.parse_(sub_nde.Atrs().FetchValOr("key", ""));
-				byte case_match = Xow_ns_case_.parse_(sub_nde.Atrs().FetchValOr("case", ""));
+				int ns_id = Int_.parse(sub_nde.Atrs().FetchValOr("key", ""));
+				byte case_match = Xow_ns_case_.parse(sub_nde.Atrs().FetchValOr("case", ""));
 				String name = sub_nde.Text_inner();
 				ns_mgr.Add_new(ns_id, Bry_.new_u8(name), case_match, false);
 			}

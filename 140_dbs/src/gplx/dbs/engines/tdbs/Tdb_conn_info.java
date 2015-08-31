@@ -20,7 +20,7 @@ public class Tdb_conn_info extends Db_conn_info__base {
 	public Io_url Url() {return url;} Io_url url;
 	@Override public String Tid() {return Tid_const;} public static final String Tid_const = "tdb";
         public static Db_conn_info new_(Io_url url) {
-		return Db_conn_info_.parse_(Bld_raw
+		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key", Tid_const
 		, "url", url.Raw()
 		));

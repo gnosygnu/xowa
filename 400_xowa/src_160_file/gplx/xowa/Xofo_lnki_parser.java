@@ -51,8 +51,8 @@ class Xofo_lnki_parser extends Obj_ary_parser_base {
 	private void Exec_val(Xofo_lnki lnki, int fld_idx, int eq_pos, byte[] bry, int fld_bgn, int i) {
 		int fld_val = -1;
 		if (fld_idx < 3) {
-			fld_val = Bry_.To_int_or(bry, fld_bgn, i, Int_.MinValue);
-			if (fld_val == Int_.MinValue) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, fld_bgn, i));
+			fld_val = Bry_.To_int_or(bry, fld_bgn, i, Int_.Min_value);
+			if (fld_val == Int_.Min_value) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, fld_bgn, i));
 			switch (fld_idx) {
 				case 0:	lnki.Lnki_type_((byte)fld_val); break;
 				case 1:	lnki.Lnki_w_(fld_val); break;
@@ -66,8 +66,8 @@ class Xofo_lnki_parser extends Obj_ary_parser_base {
 				lnki.Lnki_upright_(upright);
 			}
 			else if (Bry_.Match(bry, fld_bgn, eq_pos, Xop_lnki_arg_parser.Bry_thumbtime))	{
-				fld_val = Bry_.To_int_or(bry, eq_pos + 1, i, Int_.MinValue);	// +1 to position after eq
-				if (fld_val == Int_.MinValue) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, eq_pos + 1, i));
+				fld_val = Bry_.To_int_or(bry, eq_pos + 1, i, Int_.Min_value);	// +1 to position after eq
+				if (fld_val == Int_.Min_value) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, eq_pos + 1, i));
 				lnki.Lnki_thumbtime_(Xof_lnki_time.X_int(fld_val));
 			}
 		}

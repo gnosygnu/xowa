@@ -39,7 +39,7 @@ class GfuiBorderEdge_ {
 		else if (val == GfuiBorderEdge.All.Val())		return All_raw;
 		else throw Err_.new_unhandled(edge);
 	}
-	public static GfuiBorderEdge parse_(String raw) {
+	public static GfuiBorderEdge parse(String raw) {
 		if		(String_.Eq(raw, Left_raw))		return GfuiBorderEdge.Left;
 		else if (String_.Eq(raw, Right_raw))	return GfuiBorderEdge.Right;
 		else if (String_.Eq(raw, Top_raw))		return GfuiBorderEdge.Top;

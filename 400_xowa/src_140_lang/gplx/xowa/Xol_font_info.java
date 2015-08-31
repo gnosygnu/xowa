@@ -31,7 +31,7 @@ public class Xol_font_info implements GfoInvkAble, GfoEvMgrOwner {
 		else if (ctx.Match(k, Invk_name_))			Name_(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_size))			return size;
 		else if	(ctx.Match(k, Invk_size_))			Size_(m.ReadFloat("v"));
-		else if	(ctx.Match(k, Invk_style_))			Style_(FontStyleAdp_.parse_(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_style_))			Style_(FontStyleAdp_.parse(m.ReadStr("v")));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

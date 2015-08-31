@@ -42,9 +42,12 @@ public class Type_adp_ {
 	public static String FullNameOf_type(Class<?> type) {return type.getCanonicalName();}	
 	public static String NameOf_type(Class<?> type) {return type.getName();}	
 	public static String NameOf_obj(Object obj) {return obj == null ? String_.Null_mark : obj.getClass().getName();}	
-	public static int To_tid(Object o) {
+	public static int To_tid_obj(Object o) {
 		if (o == null) return Tid__null;
 		Class<?> type = o.getClass();
+		return To_tid_type(type);
+	}
+	public static int To_tid_type(Class<?> type) {
 		if		(Type_adp_.Eq(type, Int_.Cls_ref_type))				return Tid__int;
 		else if (Type_adp_.Eq(type, String_.Cls_ref_type))			return Tid__str;
 		else if (Type_adp_.Eq(type, byte[].class))				return Tid__bry;
@@ -55,6 +58,7 @@ public class Type_adp_ {
 		else if (Type_adp_.Eq(type, Decimal_adp_.Cls_ref_type))		return Tid__decimal;
 		else if (Type_adp_.Eq(type, DateAdp_.Cls_ref_type))			return Tid__date;
 		else if (Type_adp_.Eq(type, Float_.Cls_ref_type))			return Tid__float;
+		else if (Type_adp_.Eq(type, Short_.Cls_ref_type))			return Tid__short;
 		else if (Type_adp_.Eq(type, Char_.Cls_ref_type))			return Tid__char;
 		else														return Tid__obj;
 	}
@@ -63,14 +67,15 @@ public class Type_adp_ {
 	,	Tid__null		=  1
 	,	Tid__bool		=  2
 	,	Tid__byte		=  3
-	,	Tid__int		=  4
-	,	Tid__long		=  5
-	,	Tid__float		=  6
-	,	Tid__double		=  7
-	,	Tid__char		=  8
-	,	Tid__str		=  9
-	,	Tid__date		= 10
-	,	Tid__decimal	= 11
-	,	Tid__bry		= 12
+	,	Tid__short		=  4
+	,	Tid__int		=  5
+	,	Tid__long		=  6
+	,	Tid__float		=  7
+	,	Tid__double		=  8
+	,	Tid__char		=  9
+	,	Tid__str		= 10
+	,	Tid__bry		= 11
+	,	Tid__date		= 12
+	,	Tid__decimal	= 13
 	;
 }

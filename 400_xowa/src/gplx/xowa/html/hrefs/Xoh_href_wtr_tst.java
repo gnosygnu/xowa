@@ -52,7 +52,7 @@ class Xoh_href_wtr_fxt {
 	}
 	public Xoh_href_wtr_fxt Prep_xwiki_by_many(String raw) {wiki.Xwiki_mgr().Add_many(Bry_.new_u8(raw)); return this;} // need to add to wiki's xwiki_mgr for ttl_parse
 	public void Test_build(String raw, String expd) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(raw));
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(raw));
 		href_wtr.Build_to_bfr(tmp_bfr, app, wiki.Domain_bry(), ttl);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}

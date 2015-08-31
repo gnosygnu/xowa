@@ -42,7 +42,7 @@ public class Wdata_claim_itm_quantity extends Wdata_claim_itm_core { 	public Wda
 		if (v == null) throw Err_.new_("wbase", "value is null", "type", type);
 		int len = v.length; if (len == 0) throw Err_.new_("wbase", "value is empty", "type", type);
 		if (v[0] == Byte_ascii.Plus) v = Bry_.Mid(v, 1);
-		return Decimal_adp_.parse_(String_.new_a7(v));
+		return Decimal_adp_.parse(String_.new_a7(v));
 	}
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_quantity(this);}
 	@Override public String toString() {// TEST:

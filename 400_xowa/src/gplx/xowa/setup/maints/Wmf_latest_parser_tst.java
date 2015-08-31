@@ -34,7 +34,7 @@ public class Wmf_latest_parser_tst {
 class Wmf_latest_parser_fxt {
 	public void Clear() {}
 	private Wmf_latest_parser parser = new Wmf_latest_parser();
-	public Wmf_latest_itm itm(String name, String date, String size) {return new Wmf_latest_itm(Bry_.new_a7(name), DateAdp_.parse_iso8561(date), Io_size_.parse_or_(size, 0));}
+	public Wmf_latest_itm itm(String name, String date, String size) {return new Wmf_latest_itm(Bry_.new_a7(name), DateAdp_.parse_iso8561(date), Io_size_.parse_or(size, 0));}
 	public void Test_parse(String raw, Wmf_latest_itm... expd) {
 		parser.Parse(Bry_.new_a7(raw));
 		Wmf_latest_itm[] actl = parser.To_ary();

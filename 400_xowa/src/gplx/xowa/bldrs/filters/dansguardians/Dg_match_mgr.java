@@ -116,7 +116,7 @@ public class Dg_match_mgr {
 				int rule_score = rule_tally.Rule().Score();
 				int rule_score_total = rule_score * min_results;
 				if (log_enabled) log_mgr.Insert_page_rule(log_tid, page_id, rule_tally.Rule().Id(), rule_score_total);
-				if (rule_score == Dg_rule.Score_banned) {score_cur = Int_.MaxValue; break;}
+				if (rule_score == Dg_rule.Score_banned) {score_cur = Int_.Max_value; break;}
 				score_cur += rule_score_total;
 				++rule_match_count;
 			}
@@ -154,7 +154,7 @@ class Dg_rule_tally {
 		results[idx_val] = results[idx_val] + 1;
 	}
 	public int Results_pass_count() {
-		int rv = Int_.MaxValue;
+		int rv = Int_.Max_value;
 		for (int i = 0; i < results_len; ++i) {
 			int result = results[i];
 			if (rv > result) rv = result;

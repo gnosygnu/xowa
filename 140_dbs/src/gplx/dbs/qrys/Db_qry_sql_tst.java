@@ -22,7 +22,7 @@ public class Db_qry_sql_tst {
 	@Test  public void Insert() {
 		fxt.Test_qry
 		( Db_qry_insert.new_("tbl", "k1", "k2", "k3", "k4", "k5", "k6", "k7", "k8", "k9")
-		, Object_.Ary(123, Bool_.Y, 1.23d, 123L, 123f, Byte_ascii.Num_1, "123", DateAdp_.parse_iso8561("1981-04-05T14:30:30"), Decimal_adp_.parse_("1.23"))
+		, Object_.Ary(123, Bool_.Y, 1.23d, 123L, 123f, Byte_ascii.Num_1, "123", DateAdp_.parse_iso8561("1981-04-05T14:30:30"), Decimal_adp_.parse("1.23"))
 		, "INSERT INTO tbl (k1, k2, k3, k4, k5, k6, k7, k8, k9) VALUES (123, 1, 1.23, 123, 123, 1, '123', '1981-04-05 14:30:30.000', 1.23)"
 		);
 	}

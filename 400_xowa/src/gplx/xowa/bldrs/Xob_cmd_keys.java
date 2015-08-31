@@ -32,6 +32,7 @@ public class Xob_cmd_keys {
 	, Key_wiki_image				= "wiki.image"				// "wiki.image"
 	, Key_wiki_page_dump_make		= "wiki.page_dump.make"		// "file.page_dump"
 	, Key_wiki_page_dump_drop		= "wiki.page_dump.drop"
+	, Key_wiki_pagelink				= "wiki.pagelink"
 	, Key_file_lnki_temp			= "file.lnki_temp"
 	, Key_file_lnki_regy			= "file.lnki_regy"
 	, Key_file_page_regy			= "file.page_regy"

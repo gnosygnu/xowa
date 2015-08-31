@@ -24,7 +24,7 @@ public class Math__tst {
 		tst_Abs(0, 0);
 	}	void tst_Abs(int val, int expd) {Tfds.Eq(expd, Math_.Abs(val));}
 	@Test  public void Log10() {
-		tst_Log10(0, Int_.MinValue);
+		tst_Log10(0, Int_.Min_value);
 		tst_Log10(9, 0);
 		tst_Log10(10, 1);
 		tst_Log10(99, 1);

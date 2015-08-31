@@ -70,7 +70,7 @@ class Xodb_load_mgr_sql_fxt {
 			Xowd_page_itm page = ary[i];
 			tbl_page.Insert_cmd_by_batch(page.Id(), page.Ns_id(), page.Ttl_page_db(), false, modified, 10, page.Id(), 0, 0);
 			Xowd_category_itm ctg_itm = (Xowd_category_itm)page.Xtn(); 
-			cat_core_tbl.Insert_cmd_by_batch(ctg_itm.Id(), ctg_itm.Count_pages(), ctg_itm.Count_subcs(), ctg_itm.Count_files(), Bool_.Xto_byte(ctg_itm.Hidden()), 0);
+			cat_core_tbl.Insert_cmd_by_batch(ctg_itm.Id(), ctg_itm.Count_pages(), ctg_itm.Count_subcs(), ctg_itm.Count_files(), Bool_.To_byte(ctg_itm.Hidden()), 0);
 		}
 		cat_core_tbl.Insert_end();
 		tbl_page.Insert_end();
@@ -92,7 +92,7 @@ class Xodb_load_mgr_sql_fxt {
 			Xowd_category_itm ctg_itm = (Xowd_category_itm)page.Xtn();
 			bfr.Add_int_variable(page.Id()).Add_byte_pipe();
 			bfr.Add(page.Ttl_page_db()).Add_byte_pipe();
-			bfr.Add_byte(Bool_.Xto_byte(ctg_itm.Hidden())).Add_byte_nl();
+			bfr.Add_byte(Bool_.To_byte(ctg_itm.Hidden())).Add_byte_nl();
 		}
 		return bfr.Xto_str_and_clear();
 	}

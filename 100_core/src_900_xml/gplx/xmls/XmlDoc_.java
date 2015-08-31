@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 public class XmlDoc_ {
-	public static XmlDoc parse_(String raw) {return new XmlDoc(doc_(raw));}
+	public static XmlDoc parse(String raw) {return new XmlDoc(doc_(raw));}
 	static Document doc_(String raw) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bldr = null;

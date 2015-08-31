@@ -25,14 +25,16 @@ class Mwm_tkn_ {
 	,	Tid__text			= 1
 	,	Tid__ws				= 2
 	,	Tid__func			= 3
-	,	Tid__arg			= 4
+	,	Tid__curly			= 4
+	,	Tid__brack			= 5
 	;
 	public static byte[]
 		Bry__root			= Bry_.new_a7("root")
 	,	Bry__text			= Bry_.new_a7("text")
 	,	Bry__ws				= Bry_.new_a7("ws")
 	,	Bry__func			= Bry_.new_a7("func")
-	,	Bry__arg			= Bry_.new_a7("arg")
+	,	Bry__curly			= Bry_.new_a7("curly")
+	,	Bry__brack			= Bry_.new_a7("brack")
 	;
 	public static byte[] Tid_to_bry(int tid) {
 		switch (tid) {
@@ -40,8 +42,18 @@ class Mwm_tkn_ {
 			case Tid__text:			return Bry__text;
 			case Tid__ws:			return Bry__ws;
 			case Tid__func:			return Bry__func;
-			case Tid__arg:			return Bry__arg;
+			case Tid__curly:		return Bry__curly;
+			case Tid__brack:		return Bry__brack;
 			default:				throw Err_.new_unhandled(tid);
+		}
+	}
+	public static boolean Tid_is_node(int tid) {
+		switch (tid) {
+			case Mwm_tkn_.Tid__text:
+			case Mwm_tkn_.Tid__ws:
+				return false;
+			default:
+				return true;
 		}
 	}
 	public static void Tkn_to_bry__bgn(Bry_bfr bfr, int indent, Mwm_tkn tkn) {

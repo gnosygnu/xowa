@@ -121,7 +121,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return Bry_.Empty;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
 				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
 				popup_wiki.Init_assert();
-				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, tmp_url.To_bry_page_w_anch());
+				Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 				switch (popup_ttl.Ns().Id()) {
 					case Xow_ns_.Id_media:
 					case Xow_ns_.Id_file:
@@ -276,7 +276,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
 			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
 			popup_wiki.Init_assert();
-			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, tmp_url.To_bry_page_w_anch());
+			Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 			switch (popup_ttl.Ns().Id()) {
 				case Xow_ns_.Id_media:
 				case Xow_ns_.Id_file:

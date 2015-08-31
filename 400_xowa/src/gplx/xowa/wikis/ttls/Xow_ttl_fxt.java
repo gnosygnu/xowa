@@ -19,9 +19,10 @@ package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xow
 class Xow_ttl_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
 	public Xow_ttl_fxt Init_ttl(String raw) {test_raw = raw; return this;} private String test_raw = "";
-	public Xow_ttl_fxt Expd_ns_id(int v) {expd_ns_id = v; return this;} private int expd_ns_id = Int_.MinValue;
+	public Xow_ttl_fxt Expd_ns_id(int v) {expd_ns_id = v; return this;} private int expd_ns_id = Int_.Min_value;
 	public Xow_ttl_fxt Expd_page_txt(String v) {expd_page_txt = v; return this;} private String expd_page_txt;
 	public Xow_ttl_fxt Expd_page_url(String v) {expd_page_url = v; return this;} private String expd_page_url;
+	public Xow_ttl_fxt Expd_page_db (String v) {expd_page_db  = v; return this;} private String expd_page_db;
 	public Xow_ttl_fxt Expd_full_txt(String v) {expd_full_txt = v; return this;} private String expd_full_txt;
 	public Xow_ttl_fxt Expd_full_url(String v) {expd_full_url = v; return this;} private String expd_full_url;
 	public Xow_ttl_fxt Expd_leaf_txt(String v) {expd_leaf_txt = v; return this;} private String expd_leaf_txt;
@@ -46,7 +47,7 @@ class Xow_ttl_fxt {
 		fxt.Reset();
 		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("fr"), Bry_.new_a7("fr.wikipedia.org"));
 		test_raw = "Test page";
-		expd_ns_id = Int_.MinValue;
+		expd_ns_id = Int_.Min_value;
 		expd_xwik_txt = expd_full_txt = expd_full_url = expd_page_txt = expd_page_url = expd_leaf_txt = expd_leaf_url = expd_base_txt = expd_base_url
 			= expd_root_txt = expd_rest_txt = expd_talk_txt = expd_talk_url = expd_subj_txt = expd_subj_url = expd_anch_txt 
 			= expd_base_txt_wo_qarg = expd_leaf_txt_wo_qarg = expd_qarg_txt = null;
@@ -55,12 +56,13 @@ class Xow_ttl_fxt {
 		fxt.Log_clear();
 	}
 	public void Test() {
-		Xoa_ttl actl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_u8(test_raw));
+		Xoa_ttl actl = Xoa_ttl.parse(fxt.Wiki(), Bry_.new_u8(test_raw));
 		if (expd_err == null) {
-			if (expd_ns_id != Int_.MinValue) Tfds.Eq(expd_ns_id, actl.Ns().Id(), "ns");
+			if (expd_ns_id != Int_.Min_value) Tfds.Eq(expd_ns_id, actl.Ns().Id(), "ns");
 			if (expd_xwik_txt != null) Tfds.Eq(expd_xwik_txt, String_.new_u8(actl.Wik_txt()), "Wiki");
 			if (expd_page_txt != null) Tfds.Eq(expd_page_txt, String_.new_u8(actl.Page_txt()), "Page_txt");
 			if (expd_page_url != null) Tfds.Eq(expd_page_url, String_.new_u8(actl.Page_url()), "Page_url");
+			if (expd_page_db  != null) Tfds.Eq(expd_page_db , String_.new_u8(actl.Page_db()) , "Page_db");
 			if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt()), "Full_txt");
 			if (expd_full_url != null) Tfds.Eq(expd_full_url, String_.new_u8(actl.Full_url()), "Full_url");
 			if (expd_leaf_txt != null) Tfds.Eq(expd_leaf_txt, String_.new_u8(actl.Leaf_txt()), "Leaf_txt");

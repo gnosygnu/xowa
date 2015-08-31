@@ -27,8 +27,8 @@ class Db_rdr__empty implements Db_rdr {
 	public byte			Read_byte(String k)				{return Byte_.Max_value_127;}
 	public String 		Read_str(String k)				{return String_.Empty;}
 	public DateAdp		Read_date_by_str(String k)		{return DateAdp_.MinValue;}
-	public int 			Read_int(String k)				{return Int_.MinValue;}
-	public long 		Read_long(String k)				{return Long_.MinValue;}
+	public int 			Read_int(String k)				{return Int_.Min_value;}
+	public long 		Read_long(String k)				{return Long_.Min_value;}
 	public float		Read_float(String k)			{return Float_.NaN;}
 	public double		Read_double(String k)			{return Double_.NaN;}
 	public boolean			Read_bool_by_byte(String k)		{return false;}

@@ -33,12 +33,12 @@ public class Db_rdr__mem implements Db_rdr {
 	public byte[] Read_bry_by_str(String k)		{return Bry_.new_u8_safe((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
 	@gplx.Virtual public void Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Err_.new_unimplemented();}
 	public DateAdp Read_date_by_str(String k)	{return DateAdp_.parse_iso8561((String)row.Get_by(k));}
-	public byte Read_byte(String k)				{return Byte_.cast_(row.Get_by(k));}
-	public int Read_int(String k)				{return Int_.cast_(row.Get_by(k));}
-	public long Read_long(String k)				{return Long_.cast_(row.Get_by(k));}
-	public float Read_float(String k)			{return Float_.cast_(row.Get_by(k));}
-	public double Read_double(String k)			{return Double_.cast_(row.Get_by(k));}
-	public boolean Read_bool_by_byte(String k)		{return Byte_.cast_(row.Get_by(k)) == 1;}
+	public byte Read_byte(String k)				{return Byte_.cast(row.Get_by(k));}
+	public int Read_int(String k)				{return Int_.cast(row.Get_by(k));}
+	public long Read_long(String k)				{return Long_.cast(row.Get_by(k));}
+	public float Read_float(String k)			{return Float_.cast(row.Get_by(k));}
+	public double Read_double(String k)			{return Double_.cast(row.Get_by(k));}
+	public boolean Read_bool_by_byte(String k)		{return Byte_.cast(row.Get_by(k)) == 1;}
 	public Object Read_obj(String k)			{return row.Get_by(k);}
 	public void Rls()							{}
 }

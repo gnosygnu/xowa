@@ -60,7 +60,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 			rv[i] = match_(bgnAry[i]);
 		return rv;
 	}
-	Regx_match match_(int bgn) {return match_(bgn, Int_.MinValue);}
+	Regx_match match_(int bgn) {return match_(bgn, Int_.Min_value);}
 	Regx_match match_(int bgn, int len) {return new Regx_match(true, bgn, bgn + len, Regx_group.Ary_empty);}
 	void tst_Matches(String find, String input, Regx_match... expd) {
 		List_adp expdList = Array_.XtoList(expd);			
@@ -87,7 +87,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 	public String To_str(Object curObj, Object expdObj) {
 		Regx_match cur = (Regx_match)curObj, expd = (Regx_match)expdObj;
 		String rv = "bgn=" + cur.Find_bgn();
-		if (expd != null && expd.Find_len() != Int_.MinValue) rv += " len=" + cur.Find_len();
+		if (expd != null && expd.Find_len() != Int_.Min_value) rv += " len=" + cur.Find_len();
 		return rv;
 	}
 }

@@ -37,7 +37,7 @@ public class Xpath__tst {
 		tst_SelectAll(xml, "b/c", 3);
 	}
 	void tst_SelectAll(String raw, String xpath, int expdCount) {
-		XmlDoc xdoc = XmlDoc_.parse_(raw);
+		XmlDoc xdoc = XmlDoc_.parse(raw);
 		XmlNdeList xndeList = Xpath_.SelectAll(xdoc.Root(), xpath);
 		Tfds.Eq(expdCount, xndeList.Count());
 	}

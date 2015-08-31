@@ -79,7 +79,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Criteria_ioMatch[] rv = new Criteria_ioMatch[match_ary_len];
 		for (int i = 0; i < rv.length; i++) {
 			String match = match_ary[i];
-			rv[i] = Criteria_ioMatch.parse_(true, match, false);
+			rv[i] = Criteria_ioMatch.parse(true, match, false);
 		}
 		return rv;
 	}

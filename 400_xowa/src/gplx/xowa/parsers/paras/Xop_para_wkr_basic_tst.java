@@ -1062,7 +1062,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"    <div class=\"thumbcaption\">"
 			,	"      <div class=\"magnify\">"
 			,	"        <a href=\"/wiki/" + ns + ":" + ttl + "\" class=\"internal\" title=\"Enlarge\">"
-			,	"          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+			,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
 			,	"        </a>"
 			,	"      </div>"
 			,	"      " + caption + ""

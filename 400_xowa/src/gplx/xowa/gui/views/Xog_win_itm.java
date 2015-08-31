@@ -170,7 +170,8 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public void Page__navigate_by_search() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().Bld_str_many(search_box.Text()));}
 	public void Page__navigate_by_url_bar(String href) {
 		Xog_tab_itm tab = tab_mgr.Active_tab_assert();
-		tab.Show_url_bgn(tab.Wiki().Utl__url_parser().Parse_by_urlbar(href));
+		Xoa_url url = tab.Wiki().Utl__url_parser().Parse_by_urlbar_or_null(href); if (url == null) return;
+		tab.Show_url_bgn(url);
 	}
 	private void Page__navigate_by_href(Xog_tab_itm tab, String href) {	// NOTE: different from Navigate_by_url_bar in that it handles "file:///" and other @gplx.Internal protected formats; EX: "/site/", "about:blank"; etc..
 		Xoa_url url = Xog_url_wkr.Exec_url(this, href);
@@ -250,9 +251,9 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		synchronized (App__retrieve__lock) {
 			boolean output_html = String_.Eq(output_str, "html");
 			Xowe_wiki home_wiki = app.Usere().Wiki();
-			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar(url_str);
+			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
+			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
 			Xoae_page new_page = wiki.Load_page_by_ttl(url, ttl);
 			if (new_page.Missing()) {return Bry_.Empty;}
 			gplx.xowa.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
@@ -271,7 +272,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		this.kit = kit;
 		win_box = kit.New_win_app("win");
 		sync_cmd			= win_box.Kit().New_cmd_sync(this);
-		Io_url img_dir		= app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "chrome");
+		Io_url img_dir		= app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.window");
 		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().XtoFontAdp();
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_fwd_btn", "go_fwd.png"				);

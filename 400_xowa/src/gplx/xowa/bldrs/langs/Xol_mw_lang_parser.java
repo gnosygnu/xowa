@@ -254,8 +254,8 @@ public class Xol_mw_lang_parser {
 			int kv_ary_len = kv_ary.Subs_len();
 			boolean case_match = false;								// if 1 arg, default to false
 			int kv_ary_bgn = 0; int words_len = kv_ary_len;			// if 1 arg, default to entire kv_ary; words_len
-			int case_match_int = Php_itm_.Parse_int_or(kv_ary.Subs_get(0), Int_.MinValue);
-			if (case_match_int != Int_.MinValue) {
+			int case_match_int = Php_itm_.Parse_int_or(kv_ary.Subs_get(0), Int_.Min_value);
+			if (case_match_int != Int_.Min_value) {
 				case_match = Parse_int_as_bool(kv_ary.Subs_get(0));	// arg[0] is case_match
 				kv_ary_bgn = 1;										// arg[1] is 1st word
 				words_len = kv_ary_len - 1;							// words.len = kv_len - 1 (skip case_match
@@ -291,8 +291,8 @@ public class Xol_mw_lang_parser {
 		}
 	}
 	private boolean Parse_int_as_bool(Php_itm itm) {
-		int rv = Php_itm_.Parse_int_or(itm, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Err_.new_wo_type("value must be 0 or 1", "val", String_.new_u8(itm.Val_obj_bry()));
+		int rv = Php_itm_.Parse_int_or(itm, Int_.Min_value);
+		if (rv == Int_.Min_value) throw Err_.new_wo_type("value must be 0 or 1", "val", String_.new_u8(itm.Val_obj_bry()));
 		return rv == 1;
 	}
 	private void Parse_separatorTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {

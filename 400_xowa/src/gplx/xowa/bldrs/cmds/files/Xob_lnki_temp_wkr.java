@@ -63,6 +63,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		gplx.xowa.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
+		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr();
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File__fsdb_mode().Tid_v2_bld_y_();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
@@ -84,7 +85,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		log_mgr.Txn_bgn();
 	}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm db_page, byte[] page_src) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ns.Gen_ttl(db_page.Ttl_page_db()));
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ns.Gen_ttl(db_page.Ttl_page_db()));
 		byte[] ttl_bry = ttl.Page_db();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
@@ -142,7 +143,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		int lnki_page = lnki.Page();
 		byte[] ttl_commons = Xto_commons(ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
-			&&	Xof_lnki_time.Null_n(lnki_time))			// thumbtime set
+			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Id_media)
 			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
@@ -176,7 +177,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	}
 	public static byte[] Xto_commons(boolean ns_file_is_case_match_all, Xowe_wiki commons_wiki, byte[] ttl_bry) {
 		if (!ns_file_is_case_match_all) return null;	// return "" if wiki matches common
-		Xoa_ttl ttl = Xoa_ttl.parse_(commons_wiki, Xow_ns_.Id_file, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(commons_wiki, Xow_ns_.Id_file, ttl_bry);
 		byte[] rv = ttl.Page_db();
 		return Bry_.Eq(rv, ttl_bry) ? null : rv;
 	}

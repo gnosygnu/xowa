@@ -51,7 +51,7 @@ public class Wmf_latest_parser {
 			int size_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "size_bgn not found"); break;}
 			size_end = Bry_finder.Find_fwd(src, Byte_ascii.Cr, size_bgn, src_len);
 			byte[] size_bry = Bry_.Mid(src, size_bgn, size_end);
-			long size = Long_.parse_or_(String_.new_u8(size_bry), -1);
+			long size = Long_.parse_or(String_.new_u8(size_bry), -1);
 			Wmf_latest_itm itm = new Wmf_latest_itm(name, date, size);
 			hash.Add(name, itm);
 		}

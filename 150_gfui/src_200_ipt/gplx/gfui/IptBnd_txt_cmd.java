@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 public class IptBnd_txt_cmd implements InjectAble, GfoInvkAble, GfoEvObj {
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} GfoEvMgr evMgr;
 	public void Inject(Object owner) {
-		txtBox = GfuiTextBox_.cast_(owner);
+		txtBox = GfuiTextBox_.cast(owner);
 		txtBox.TextAlignH_center_();
 		IptBnd_.cmd_to_(IptCfg_.Null, txtBox, this, TxtBox_exec, IptKey_.Enter);
 		GfoEvMgr_.SubSame(fwd, setEvt, this);
@@ -36,7 +36,7 @@ public class IptBnd_txt_cmd implements InjectAble, GfoInvkAble, GfoEvObj {
 	GfuiTextBox txtBox; GfoInvkAble src; GfoEvObj fwd; String setCmd, setEvt; ClassXtn cls;		
 	public static IptBnd_txt_cmd new_(GfoEvObj fwd, String setCmd, String setEvt, ClassXtn cls) {
 		IptBnd_txt_cmd rv = new IptBnd_txt_cmd();
-		rv.fwd = fwd; rv.src = GfoInvkAble_.cast_(fwd);
+		rv.fwd = fwd; rv.src = GfoInvkAble_.cast(fwd);
 		rv.setCmd = setCmd; rv.setEvt = setEvt; rv.cls = cls;
 		return rv;
 	}

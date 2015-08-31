@@ -29,9 +29,9 @@ class Mwm_tkn_mkr {
 		rv.Init(root, Mwm_tkn_.Tid__func, uid, bgn, end);
 		return rv;
 	}
-	public Mwm_tkn Make_arg(Mwm_tkn__root root, int uid, int bgn, int end) {
+	public Mwm_tkn Make_curly(Mwm_tkn__root root, int uid, int bgn, int end) {
 		Mwm_tkn__node rv = new Mwm_tkn__node();
-		rv.Init(root, Mwm_tkn_.Tid__arg, uid, bgn, end);
+		rv.Init(root, Mwm_tkn_.Tid__curly, uid, bgn, end);
 		return rv;
 	}
 }

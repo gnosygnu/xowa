@@ -93,7 +93,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean IsValidCode(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// REF.MW: Language.php!isValidCode
 		byte[] lang_code = args.Pull_bry(0);
-		boolean valid = Xoa_ttl.parse_(core.Wiki(), lang_code) != null;	// NOTE: MW calls Title::getTitleInvalidRegex()
+		boolean valid = Xoa_ttl.parse(core.Wiki(), lang_code) != null;	// NOTE: MW calls Title::getTitleInvalidRegex()
 		if (valid) {
 			int len = lang_code.length;
 			for (int i = 0; i < len; i++) {
@@ -170,7 +170,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			if (kv_ary != null) {
 				Object skip_commafy_obj = KeyVal_.Ary_get_by_key_or_null(kv_ary, "noCommafy");
 				if (skip_commafy_obj != null)
-					skip_commafy = Bool_.cast_(skip_commafy_obj);
+					skip_commafy = Bool_.cast(skip_commafy_obj);
 			}
 		}
 		byte[] rv = lang.Num_mgr().Format_num(num, skip_commafy);

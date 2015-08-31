@@ -154,7 +154,7 @@ public class Xog_url_wkr {
 //				wiki = app.Wiki_mgr().Get_by_key_or_make(href.Wiki()).Init_assert();	// get xwiki and set to wiki
 //				if (use_main_page)
 //					page_bry = wiki.Props().Main_page();								// get Main_page for new wiki; DATE:2014-02-23
-//				Xoa_ttl tmp_ttl = Xoa_ttl.parse_(wiki, page_bry);						// reparse ttl according to xwiki's case_match rules; NOTE: do not use rv.Page_bry() or else will lose sub_pages (A/B/C); DATE:2014-02-21
+//				Xoa_ttl tmp_ttl = Xoa_ttl.parse(wiki, page_bry);						// reparse ttl according to xwiki's case_match rules; NOTE: do not use rv.Page_bry() or else will lose sub_pages (A/B/C); DATE:2014-02-21
 //				if (tmp_ttl != null)
 //					page_bry = tmp_ttl.Full_db();
 //			}

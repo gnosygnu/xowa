@@ -27,7 +27,7 @@ public class Bry_rdr {
 	public void Pos_add(int v) {pos += v;}
 	public boolean Pos_is_eos() {return pos == src_len;}
 	public void Pos_add_one() {++pos;}
-	public int Or_int() {return or_int;} public void Or_int_(int v) {or_int = v;} private int or_int = Int_.MinValue;
+	public int Or_int() {return or_int;} public void Or_int_(int v) {or_int = v;} private int or_int = Int_.Min_value;
 	public byte[] Or_bry() {return or_bry;} public void Or_bry_(byte[] v) {or_bry = v;} private byte[] or_bry;
 	public int Find_fwd(byte find) {return Bry_finder.Find_fwd(src, find, pos);}
 	public int Find_fwd_ws() {return Bry_finder.Find_fwd_until_ws(src, pos, src_len);}
@@ -99,7 +99,7 @@ public class Bry_rdr {
 	public double Read_double_to_pipe() {return Read_double_to(Byte_ascii.Pipe);}
 	public double Read_double_to(byte to_char) {
 		byte[] double_bry = Read_bry_to(to_char);
-		return Double_.parse_(String_.new_a7(double_bry));	// double will never have utf8
+		return Double_.parse(String_.new_a7(double_bry));	// double will never have utf8
 	}
 	@gplx.Virtual public Bry_rdr Skip_ws() {
 		while (pos < src_len) {

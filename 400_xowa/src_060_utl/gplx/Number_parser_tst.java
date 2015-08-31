@@ -29,19 +29,19 @@ public class Number_parser_tst {
 		fxt.Test_int("00001", 1);
 	}
 	@Test  public void Decimal() {
-		fxt.Test_dec("1.23", Decimal_adp_.parse_("1.23"));
-		fxt.Test_dec("1.023", Decimal_adp_.parse_("1.023"));
-		fxt.Test_dec("-1.23", Decimal_adp_.parse_("-1.23"));
+		fxt.Test_dec("1.23", Decimal_adp_.parse("1.23"));
+		fxt.Test_dec("1.023", Decimal_adp_.parse("1.023"));
+		fxt.Test_dec("-1.23", Decimal_adp_.parse("-1.23"));
 	}
 	@Test  public void Double_long() {
-		fxt.Test_dec(".42190046219457", Decimal_adp_.parse_(".42190046219457"));
+		fxt.Test_dec(".42190046219457", Decimal_adp_.parse(".42190046219457"));
 	}
 	@Test  public void Exponent() {
 		fxt.Test_int("1E2", 100);
-		fxt.Test_dec("1.234E2", Decimal_adp_.parse_("123.4"));
-		fxt.Test_dec("1.234E-2", Decimal_adp_.parse_(".01234"));
-		fxt.Test_dec("123.4E-2", Decimal_adp_.parse_("1.234"));
-		fxt.Test_dec("+6.0E-3", Decimal_adp_.parse_(".006"));
+		fxt.Test_dec("1.234E2", Decimal_adp_.parse("123.4"));
+		fxt.Test_dec("1.234E-2", Decimal_adp_.parse(".01234"));
+		fxt.Test_dec("123.4E-2", Decimal_adp_.parse("1.234"));
+		fxt.Test_dec("+6.0E-3", Decimal_adp_.parse(".006"));
 	}
 	@Test  public void Err() {
 		fxt.Test_err("+", true);

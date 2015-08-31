@@ -41,7 +41,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
-		Json_kv itm_0 = Json_kv.cast_(jdoc.Root().Get_at(0));										// get 1st node
+		Json_kv itm_0 = Json_kv.cast(jdoc.Root_nde().Get_at(0));										// get 1st node
 		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) 
 			|| Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_id) 
 			? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
@@ -88,7 +88,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public Wdata_doc Pages_get(Xowe_wiki wiki, Xoa_ttl ttl, Wdata_pf_property_data data) {
 		if		(data.Q()	!= null)	return Pages_get(data.Q());
 		else if (data.Of()	!= null) {
-			Xoa_ttl of_ttl = Xoa_ttl.parse_(wiki, data.Of()); if (of_ttl == null) return null;
+			Xoa_ttl of_ttl = Xoa_ttl.parse(wiki, data.Of()); if (of_ttl == null) return null;
 			byte[] qid = Qids_get(wiki, of_ttl); if (qid == null) return null;	// NOTE: for now, use wiki.Lang_key(), not page.Lang()
 			return Pages_get(qid);
 		}
@@ -116,12 +116,12 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		if (pipe_pos == Bry_.NotFound) return bry;
 		byte[][] qids = Bry_.Split(bry, Byte_ascii.Pipe);
 		int qids_len = qids.length;
-		int qid_min = Int_.MaxValue;
+		int qid_min = Int_.Max_value;
 		int qid_idx = 0;
 		for (int i = 0; i < qids_len; i++) {
 			byte[] qid = qids[i];
 			int qid_len = qid.length;
-			int qid_val = Bry_.To_int_or(qid, 1, qid_len, Int_.MaxValue);
+			int qid_val = Bry_.To_int_or(qid, 1, qid_len, Int_.Max_value);
 			if (qid_val < qid_min) {
 				qid_min = qid_val;
 				qid_idx = i;
@@ -183,12 +183,12 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static void Write_json_as_html(Json_parser jdoc_parser, Bry_bfr bfr, byte[] data_raw) {
 		bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Id_atr).Add(Html_json_id).Add(Xoh_consts.__end_quote);	// <span id="xowa-wikidata-json">
 		Json_doc json = jdoc_parser.Parse(data_raw);
-		json.Root().Print_as_json(bfr, 0);
+		json.Root_nde().Print_as_json(bfr, 0);
 		bfr.Add(Xoh_consts.Span_end);
 	}
 	private Json_doc Get_json(byte[] qid_bry) {
 		if (!enabled) return null;
-		Xoa_ttl qid_ttl = Xoa_ttl.parse_(this.Wdata_wiki(), qid_bry); if (qid_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", String_.new_u8(qid_bry)); return null;}
+		Xoa_ttl qid_ttl = Xoa_ttl.parse(this.Wdata_wiki(), qid_bry); if (qid_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", String_.new_u8(qid_bry)); return null;}
 		Xoae_page qid_page = this.Wdata_wiki().Data_mgr().Get_page(qid_ttl, false); if (qid_page.Missing()) return null;
 		byte[] src = qid_page.Data_raw();
 		return jdoc_parser.Parse(src);

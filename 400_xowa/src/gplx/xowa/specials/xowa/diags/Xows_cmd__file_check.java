@@ -61,7 +61,7 @@ class Xows_cmd__file_check {
 		int rows_len = rows.length;
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = rows[i];
-			int file_id = Int_.cast_(row[0]);
+			int file_id = Int_.cast(row[0]);
 			String sql = sql_mkr.Thm_by_id(file_id);
 			Write_sect(bfr, "fsdb.thm.select", sql);
 			Object[][] thm_rows = Db_rdr_utl.Load(atr_main.Conn(), sql);
@@ -77,9 +77,9 @@ class Xows_cmd__file_check {
 		int rows_len = rows.length;
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = rows[i];
-			int bin_db_id = Int_.cast_(row[bin_db_id_ordinal]); if (bin_db_id == -1) continue;
+			int bin_db_id = Int_.cast(row[bin_db_id_ordinal]); if (bin_db_id == -1) continue;
 			Fsm_bin_fil bin_db = mnt_itm.Bin_mgr().Dbs__get_at(bin_db_id);
-			int owner_id = Int_.cast_(row[owner_id_ordinal]);
+			int owner_id = Int_.cast(row[owner_id_ordinal]);
 			String sql = sql_mkr.Bin_by_id(owner_id);
 			Write_sect(bfr, "fsdb.bin.select", sql);
 			Object[][] bin_rows = Db_rdr_utl.Load(bin_db.Conn(), sql);
@@ -92,7 +92,7 @@ class Xows_cmd__file_check {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = rows[i];
-			int owner_id = Int_.cast_(row[owner_id_ordinal]);
+			int owner_id = Int_.cast(row[owner_id_ordinal]);
 			byte[] bin_data = (byte[])row[bin_data_ordinal];
 			file_bry = gplx.xowa.files.repos.Xof_repo_itm_.Ttl_invalid_fsys_chars(tmp_bfr, file_bry);
 			Io_url bin_url = tmp_dir.GenSubFil(String_.new_u8(file_bry));

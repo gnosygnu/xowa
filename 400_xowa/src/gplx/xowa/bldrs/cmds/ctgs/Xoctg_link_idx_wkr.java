@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.ctgs.*; import gplx.xowa.tdbs.*;
 public class Xoctg_link_idx_wkr extends Xob_idx_base {	// NOTE: similar functionality to Xob_make_cmd_site, but more complicated due to p,f,s; not inheriting
-	Io_url src_link_dir; int make_fil_max = Int_.MinValue;
+	Io_url src_link_dir; int make_fil_max = Int_.Min_value;
 	public Xoctg_link_idx_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_tdb_ctg_link_idx;}
 	@Override public void Cmd_bgn_hook() {
 		this.fld_rdr = this.Fld_rdr();
 		if (src_link_dir == null) src_link_dir = wiki.Fsys_mgr().Tmp_dir().GenSubDir_nest(Xob_cmd_keys.Key_tdb_text_cat_link, "make");
-		if (make_fil_max == Int_.MinValue) make_fil_max = Io_mgr.Len_mb;
+		if (make_fil_max == Int_.Min_value) make_fil_max = Io_mgr.Len_mb;
 		make_link_mgr = new Xoctg_make_link_mgr(usr_dlg, make_fil_max, wiki.Tdb_fsys_mgr()); 
 		make_main_mgr = new Xoctg_make_main_mgr(usr_dlg, make_fil_max, wiki.Tdb_fsys_mgr());
 		Io_mgr.I.DeleteDirDeep_ary(make_link_mgr.Make_dir(), make_main_mgr.Make_dir());

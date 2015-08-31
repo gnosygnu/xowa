@@ -22,6 +22,7 @@ interface Mwm_tkn {
 	int Uid();
 	int Src_bgn();
 	int Src_end();
+	void Src_end_(int v);
 	Mwm_tkn Init(Mwm_tkn__root root, int tid, int uid, int src_bgn, int src_end);
 	int Subs__len();
 	Mwm_tkn Subs__get_at(int i);

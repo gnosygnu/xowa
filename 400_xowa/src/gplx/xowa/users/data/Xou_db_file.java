@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.metas.*;
 import gplx.xowa.files.caches.*;
-import gplx.xowa.users.bmks.*;
+import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_file {
 	private final Db_conn conn;
 	public Xou_db_file(Db_conn conn) {

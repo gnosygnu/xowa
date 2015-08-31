@@ -42,7 +42,7 @@ class Sql_select_fld_count extends Sql_select_fld_func_base {
 	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn._);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
 		if (groupByVal == null) return 1;
-		return Int_.cast_(groupByVal) + 1;
+		return Int_.cast(groupByVal) + 1;
 	}
 }
 class Sql_select_fld_sum extends Sql_select_fld_func_base {
@@ -50,8 +50,8 @@ class Sql_select_fld_sum extends Sql_select_fld_func_base {
 	@Override public String XtoSql_functionName() {return "SUM";}
 	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn._);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
-		if (groupByVal == null) return Int_.cast_(curVal);
-		return Int_.cast_(groupByVal) + Int_.cast_(curVal);
+		if (groupByVal == null) return Int_.cast(curVal);
+		return Int_.cast(groupByVal) + Int_.cast(curVal);
 	}
 }
 class Sql_select_fld_minMax extends Sql_select_fld_func_base {

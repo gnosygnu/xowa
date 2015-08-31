@@ -24,11 +24,12 @@ public class Xoa_url_ {
 			default: return false;
 		}
 	}
+	public static void Invalid_warn(String url) {Xoa_app_.Usr_dlg().Plog_many("", "", "invalid url; url=~{0}", url);}
 	public static String Main_page__home_str = gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home + gplx.xowa.html.hrefs.Xoh_href_.Str__wiki + gplx.xowa.Xoa_page_.Main_page_str;	// EX:home/wiki/Main_Page
 	public static final byte[]
-	  Qarg__redirect		= Bry_.new_a7("redirect")
-	, Qarg__redirect__yes	= Bry_.new_a7("yes")
-	, Qarg__action			= Bry_.new_a7("action")
-	, Qarg__action__edit	= Bry_.new_a7("edit")
+		Qarg__redirect			= Bry_.new_a7("redirect")
+	,	Qarg__redirect__yes		= Bry_.new_a7("yes")
+	,	Qarg__action			= Bry_.new_a7("action")
+	,	Qarg__action__edit		= Bry_.new_a7("edit")
 	;
 }

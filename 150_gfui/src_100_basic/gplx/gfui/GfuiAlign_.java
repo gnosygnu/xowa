@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiAlign_ implements ParseAble {
 	public static GfuiAlign as_(Object obj) {return obj instanceof GfuiAlign ? (GfuiAlign)obj : null;}
-	public static GfuiAlign cast_(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
+	public static GfuiAlign cast(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
 	public static final GfuiAlign 
 		  Null	= new_(0, "nil")
 		, Lo	= new_(1, "lo")
@@ -31,14 +31,14 @@ public class GfuiAlign_ implements ParseAble {
 		, Right	= Hi;
 	static GfuiAlign new_(int v, String s) {return new GfuiAlign(v, s);}
 	public static final GfuiAlign_ Parser = new GfuiAlign_();
-	public Object ParseAsObj(String raw) {return parse_(raw);}
+	public Object ParseAsObj(String raw) {return parse(raw);}
 	public static GfuiAlign val_(int v) {
 		if		(v == Lo.Val())		return Lo;
 		else if	(v == Mid.Val())	return Mid;
 		else if	(v == Hi.Val())		return Hi;
 		else						return Null;
 	}
-	public static GfuiAlign parse_(String raw) {
+	public static GfuiAlign parse(String raw) {
 		if		(String_.Eq(raw, "bot")) return Bot;
 		else if	(String_.Eq(raw, "mid")) return Mid;
 		else if	(String_.Eq(raw, "top")) return Top;
@@ -51,7 +51,7 @@ public class GfuiAlign_ implements ParseAble {
 	}
 	public static int CalcInsideOfAxis(int posEnm, int innerSize, int outerSize) {
 		int rv = 0;
-		if		(posEnm == GfuiAlign_.Null.Val())	rv = Int_.MinValue;
+		if		(posEnm == GfuiAlign_.Null.Val())	rv = Int_.Min_value;
 		else if (posEnm == GfuiAlign_.Lo.Val())		rv = 0;
 		else if (posEnm == GfuiAlign_.Mid.Val())	rv = (outerSize - innerSize) / 2;
 		else if (posEnm == GfuiAlign_.Hi.Val())		rv = outerSize - innerSize;

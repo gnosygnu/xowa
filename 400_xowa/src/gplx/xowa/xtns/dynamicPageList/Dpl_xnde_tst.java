@@ -214,7 +214,7 @@ class Dpl_xnde_fxt {
 			Dpl_page_mok page = pages[i];
 			int id = page.Id();
 			String ttl = page.Ttl();
-			Xoa_ttl page_ttl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_u8(ttl));
+			Xoa_ttl page_ttl = Xoa_ttl.parse(fxt.Wiki(), Bry_.new_u8(ttl));
 			Xoae_page page_obj = fxt.Wiki().Data_mgr().Get_page(page_ttl, false);
 			if (page_obj.Missing()) {
 				fxt.Init_page_create(ttl);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.apps; import gplx.*; import gplx.xowa2.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.core.json.*;
 import gplx.ios.*;
 import gplx.dbs.*; import gplx.xowa.apis.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.intl.*; import gplx.xowa.users.data.*;
 import gplx.xowa.*; import gplx.xowa.apps.*;
@@ -37,6 +37,7 @@ public class Xoav_app implements Xoa_app {
 		this.wiki_mgr = new Xoav_wiki_mgr(this, utl_case_mgr);
 		this.utl_msg_log = Gfo_msg_log.Test();
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
+		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.user = new Xouv_user("anonymous");
 		this.api_root = null;
 	}
@@ -53,7 +54,7 @@ public class Xoav_app implements Xoa_app {
 	public Xoh_href_wtr				Html__href_wtr()			{return html__href_wtr;} private final Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
-	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr = new Xoh_bridge_mgr();
+	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
 	public Xoa_meta_mgr				Meta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 
 	public boolean						Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_domain(domain) == null;}
@@ -61,6 +62,7 @@ public class Xoav_app implements Xoa_app {
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr			Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
+	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = Xop_amp_mgr.I;

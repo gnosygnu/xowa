@@ -102,7 +102,7 @@ public class XmlFileSplitter {
 	int FindMatchPos(byte[] src, byte[][] wordAry, boolean fwd) {
 		int[] findAry = new int[wordAry.length];
 		for (int i = 0; i < findAry.length; i++)
-			findAry[i] = fwd ? -1 : Int_.MaxValue;
+			findAry[i] = fwd ? -1 : Int_.Max_value;
 		for (int i = 0; i < wordAry.length; i++) {							// look at each word in wordAry
 			int srcLen = src.length, srcPos, srcEnd, srcDif;
 			if (fwd)	{srcPos = 0; srcEnd = srcLen; srcDif = 1;}
@@ -123,13 +123,13 @@ public class XmlFileSplitter {
 				srcPos += srcDif;
 			}
 		}
-		int best = fwd ? -1 : Int_.MaxValue;
+		int best = fwd ? -1 : Int_.Max_value;
 		for (int find : findAry) {
 			if		((fwd && find > best)
 				||	(!fwd && find < best)) 
 				best = find;
 		}
-		if (best == Int_.MaxValue) best = -1;
+		if (best == Int_.Max_value) best = -1;
 		return best;
 	}
 	byte[][] XtoByteAry(String[] names) {

@@ -407,7 +407,7 @@ public class IoEngine_system extends IoEngine_base {
 			src_conn = (HttpURLConnection)src_url.openConnection();
 //			src_conn.setReadTimeout(5000);	// do not set; if file does not exist, will wait 5 seconds before timing out; want to fail immediately
 			String user_agent = xrg.User_agent(); if (user_agent != null) src_conn.setRequestProperty("User-Agent", user_agent);
-			long content_length = Long_.parse_or_(src_conn.getHeaderField("Content-Length"), IoItmFil.Size_invalid_int);
+			long content_length = Long_.parse_or(src_conn.getHeaderField("Content-Length"), IoItmFil.Size_invalid_int);
 			xrg.Src_content_length_(content_length);
 			if (xrg.Src_last_modified_query())	// NOTE: only files will have last modified (api calls will not); if no last_modified, then src_conn will throw get nullRef; avoid nullRef 
 				xrg.Src_last_modified_(DateAdp_.unixtime_lcl_ms_(src_conn.getLastModified()));
@@ -558,7 +558,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 			String user_agent = xrg.User_agent();
 			if (user_agent != null) src_conn.setRequestProperty("User-Agent", user_agent);	// NOTE: must be set right after openConnection
 //			src_conn.setReadTimeout(5000);	// do not set; if file does not exist, will wait 5 seconds before timing out; want to fail immediately
-			long content_length = Long_.parse_or_(src_conn.getHeaderField("Content-Length"), IoItmFil.Size_invalid_int);
+			long content_length = Long_.parse_or(src_conn.getHeaderField("Content-Length"), IoItmFil.Size_invalid_int);
 			xrg.Src_content_length_(content_length);
 			this.len = content_length;
 			if (xrg.Src_last_modified_query())	// NOTE: only files will have last modified (api calls will not); if no last_modified, then src_conn will throw get nullRef; avoid nullRef

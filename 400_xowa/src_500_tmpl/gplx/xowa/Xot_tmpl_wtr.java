@@ -63,7 +63,7 @@ public class Xot_tmpl_wtr {
 					case Xop_xnde_tag_.Tid_includeonly:	// noop; DATE:2014-02-12
 						break;
 					case Xop_xnde_tag_.Tid_nowiki: {
-						if (xnde.Tag_close_bgn() == Int_.MinValue)
+						if (xnde.Tag_close_bgn() == Int_.Min_value)
 							rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end());	// write src from bgn/end
 						else {												// NOTE: if nowiki then "deactivate" all xndes by swapping out < for &lt; nowiki_xnde_frag; DATE:2013-01-27
 							Bry_bfr tmp_bfr = ctx.Wiki().Appe().Utl__bfr_mkr().Get_k004();

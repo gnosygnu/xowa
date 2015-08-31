@@ -28,10 +28,10 @@ public class ColorAdp__tst {
 		tst_parse_int_(255, 0, 0, 0, 255);
 		tst_parse_int_(65535, 0, 0, 255, 255);
 		tst_parse_int_(16777215, 0, 255, 255, 255);
-		tst_parse_int_(Int_.MaxValue, 127, 255, 255, 255);
+		tst_parse_int_(Int_.Max_value, 127, 255, 255, 255);
 		tst_parse_int_(-1, 255, 255, 255, 255);
 	}
-	@Test  public void parse_() {
+	@Test  public void parse() {
 		tst_parse_("0,0,0,0", 0, 0, 0, 0);	// parse all ints
 		tst_parse_("0,0,0", 255, 0, 0, 0);	// a=255, parse rest
 		tst_parse_("255", 0, 0, 0, 255);	// parse as single int
@@ -46,7 +46,7 @@ public class ColorAdp__tst {
 		tst_ColorAdp(color, a, r, g, b);
 		Tfds.Eq(color.Value(), val);
 	}
-	void tst_parse_(String s, int alpha, int red, int green, int blue) {tst_ColorAdp(ColorAdp_.parse_(s), alpha, red, green, blue);}
+	void tst_parse_(String s, int alpha, int red, int green, int blue) {tst_ColorAdp(ColorAdp_.parse(s), alpha, red, green, blue);}
 	void tst_ColorAdp(ColorAdp color, int alpha, int red, int green, int blue) {
 		TfdsTstr_fxt tstr = TfdsTstr_fxt.new_();
 		tstr.Eq_str(color.Alpha(), alpha, "alpha");

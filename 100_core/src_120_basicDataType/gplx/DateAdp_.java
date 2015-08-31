@@ -46,7 +46,7 @@ public class DateAdp_ implements GfoInvkAble {
 		int f = ary_len > 6 ? ary[6] : 0;
 		return new DateAdp(y, M, d, h, m, s, f);
 	}
-	public static DateAdp cast_(Object arg) {try {return (DateAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DateAdp.class, arg);}}
+	public static DateAdp cast(Object arg) {try {return (DateAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DateAdp.class, arg);}}
 	public static DateAdp parse_iso8561_or(String raw, DateAdp or) {
 		try {return parse_iso8561(raw);}
 		catch (Exception e) {Err_.Noop(e); return or;}

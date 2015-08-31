@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.ios.*;
+import gplx.core.json.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apis.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
@@ -46,4 +47,5 @@ public interface Xoa_app {
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Url_encoder_mgr			Utl__encoder_mgr();
+	Json_parser				Utl__json_parser();
 }	

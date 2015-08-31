@@ -33,7 +33,7 @@ public class IptMouseBtn_ {
 	, X1		= new IptMouseBtn(Tid_x1		, "mouse.x1")
 	, X2		= new IptMouseBtn(Tid_x2		, "mouse.x2")
 	;
-	public static IptMouseBtn parse_(String raw) {
+	public static IptMouseBtn parse(String raw) {
 		if		(String_.Eq(raw, None.Key())) return None;
 		else if	(String_.Eq(raw, Left.Key())) return Left;
 		else if	(String_.Eq(raw, Right.Key())) return Right;

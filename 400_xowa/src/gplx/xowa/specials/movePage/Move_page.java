@@ -26,7 +26,7 @@ public class Move_page implements Xows_page {
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		args.Parse(url);
 		byte[] src_ttl_bry = args.Src_ttl();
-		src_ttl = Xoa_ttl.parse_(wiki, src_ttl_bry);
+		src_ttl = Xoa_ttl.parse(wiki, src_ttl_bry);
 		if (args.Submitted()) {
 			Exec_rename(wiki, page);
 			return;
@@ -40,7 +40,7 @@ public class Move_page implements Xows_page {
 		int trg_ns_id = args.Trg_ns();
 		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_wo_type("unknown ns", "ns", trg_ns_id);
 		byte[] trg_ttl_bry = args.Trg_ttl();
-		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, trg_ns_id, trg_ttl_bry);
+		Xoa_ttl trg_ttl = Xoa_ttl.parse(wiki, trg_ns_id, trg_ttl_bry);
 		Xowd_page_itm src_page = new Xowd_page_itm();
 		wiki.Db_mgr().Load_mgr().Load_by_ttl(src_page, src_ttl.Ns(), src_ttl.Page_db());
 		page.Revision_data().Id_(src_page.Id());
@@ -167,7 +167,7 @@ class Move_url_args {
 	private void Clear() {
 		submitted = false;
 		src_ttl = trg_ttl = null;
-		trg_ns = Int_.MinValue;
+		trg_ns = Int_.Min_value;
 		create_redirect = false;
 	}
 	private static final byte Key_submitted = 1, Key_src_ttl = 2, Key_trg_ns = 3, Key_trg_ttl = 4, Key_create_redirect = 5;

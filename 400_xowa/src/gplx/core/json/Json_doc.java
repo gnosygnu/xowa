@@ -17,27 +17,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
 public class Json_doc {
+	private final byte[][] tmp_qry_bry = new byte[1][];
 	public void Ctor(byte[] src, Json_nde root) {this.src = src; this.root = root;}
-	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
-	public Number_parser Utl_num_parser() {return utl_num_parser;} Number_parser utl_num_parser = new Number_parser();
-	public byte[] Str_u8_bry() {return str_u8_bry;} private byte[] str_u8_bry = new byte[6];
 	public byte[] Src() {return src;} private byte[] src;
-	public Json_nde Root() {return root;} Json_nde root;
+	public Json_nde Root_nde() {return root;} private Json_nde root;
+	public Bry_bfr Bfr() {return bfr;} private final Bry_bfr bfr = Bry_bfr.new_();
+	public Number_parser Utl_num_parser() {return utl_num_parser;} private final Number_parser utl_num_parser = new Number_parser();
+	public byte[] Tmp_u8_bry() {return tmp_u8_bry;} private final byte[] tmp_u8_bry = new byte[6];	// tmp bry[] for decoding sequences like \u0008
 	public byte[] Get_val_as_bry_or(byte[]   qry_bry, byte[] or) {tmp_qry_bry[0] = qry_bry; return Get_val_as_bry_or(tmp_qry_bry, or);}
 	public byte[] Get_val_as_bry_or(byte[][] qry_bry, byte[] or) {
 		Json_itm nde = Find_nde(root, qry_bry, qry_bry.length - 1, 0);
-		return nde == null || nde.Tid() != Json_itm_.Tid_string ? or : nde.Data_bry();
+		return nde == null || nde.Tid() != Json_itm_.Tid__str ? or : nde.Data_bry();
 	}
 	public String Get_val_as_str_or(byte[]   qry_bry, String or) {tmp_qry_bry[0] = qry_bry; return Get_val_as_str_or(tmp_qry_bry, or);}
 	public String Get_val_as_str_or(byte[][] qry_bry, String or) {
 		Json_itm nde = Find_nde(root, qry_bry, qry_bry.length - 1, 0);
-		return nde == null || nde.Tid() != Json_itm_.Tid_string ? or : (String)nde.Data();
+		return nde == null || nde.Tid() != Json_itm_.Tid__str ? or : (String)nde.Data();
 	}
 	public Json_grp Get_grp(byte[] qry_bry) {
 		tmp_qry_bry[0] = qry_bry;
 		Json_itm rv = Find_nde(root, tmp_qry_bry, 0, 0); if (rv == null) return null;
 		return (Json_grp)rv;
-	}	private byte[][] tmp_qry_bry = new byte[1][];
+	}
 	public Json_grp Get_grp(byte[][] qry_bry) {
 		Json_itm rv = Find_nde(root, qry_bry, qry_bry.length - 1, 0); if (rv == null) return null;
 		return (Json_grp)rv;
@@ -50,18 +51,12 @@ public class Json_doc {
 		byte[] path = paths[paths_idx];
 		int subs_len = owner.Len();
 		for (int i = 0; i < subs_len; i++) {
-			Json_kv itm = Json_kv.cast_(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
+			Json_kv itm = Json_kv.cast(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
 			if (!itm.Key_eq(path)) continue;
 			if (paths_idx == paths_last) return itm.Val();
-			Json_nde sub_nde = Json_nde.cast_(itm.Val()); if (sub_nde == null) return null;	// match, but has not a nde; exit
+			Json_nde sub_nde = Json_nde.cast(itm.Val()); if (sub_nde == null) return null;	// match, but has not a nde; exit
 			return Find_nde(sub_nde, paths, paths_last, paths_idx + 1);
 		}
 		return null;
 	}
-	public static Json_doc new_apos_concat_nl(String... ary) {return new_apos_(String_.Concat_lines_nl(ary));}
-	public static Json_doc new_apos_(String v) {return new_(Bry_.Replace(Bry_.new_u8(v), Byte_ascii.Apos, Byte_ascii.Quote));}
-	public static Json_doc new_(String v) {return new_(Bry_.new_u8(v));}
-	public static Json_doc new_(byte[] v) {
-		synchronized (parser) {return parser.Parse(v);}
-	}	private static final Json_parser parser = new Json_parser();
 }

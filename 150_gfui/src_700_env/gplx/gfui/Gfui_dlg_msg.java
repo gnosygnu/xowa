@@ -28,6 +28,6 @@ class Gfui_dlg_msg_null implements Gfui_dlg_msg {
 	public Gfui_dlg_msg Init_ico_(int v) {return this;}
 	public Gfui_dlg_msg Init_btns_(int... ary) {return this;}
 	public boolean Ask(int expd) {return false;}
-	public int Ask() {return Int_.MinValue;}
+	public int Ask() {return Int_.Min_value;}
 	public static final Gfui_dlg_msg_null _ = new Gfui_dlg_msg_null(); Gfui_dlg_msg_null() {}
 }

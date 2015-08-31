@@ -87,18 +87,18 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		int ques_pos = Bry_finder.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_.NotFound ? full_txt_len : ques_pos);
 	}
-	public static Xoa_ttl parse_(Xowe_wiki wiki, int ns_id, byte[] ttl) {
+	public static Xoa_ttl parse(Xowe_wiki wiki, int ns_id, byte[] ttl) {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
 		return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);
 	}
-	public static Xoa_ttl parse_(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
+	public static Xoa_ttl parse(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
 	private static final Object thread_lock = new Object();
 	// $dbkey = preg_replace( '/\xE2\x80[\x8E\x8F\xAA-\xAE]/S', '', $dbkey );
 	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
 	private static final int Char__bidi = 1, Char__ws = 2;
 	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
-	.Add_many_int(Char__bidi	, "\u00E2\u0080\u008E", "\u00E2\u0080\u008F", "\u00E2\u0080\u00AA", "\u00E2\u0080\u00AB", "\u00E2\u0080\u00AC", "\u00E2\u0080\u00AD", "\u00E2\u0080\u00AE")
+	.Add_many_int(Char__bidi	, Bry_.ints_(0xE2, 0x80, 0x8E), Bry_.ints_(0xE2, 0x80, 0x8F), Bry_.ints_(0xE2, 0x80, 0xAA), Bry_.ints_(0xE2, 0x80, 0xAB), Bry_.ints_(0xE2, 0x80, 0xAC), Bry_.ints_(0xE2, 0x80, 0xAD), Bry_.ints_(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
 	;
 	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {

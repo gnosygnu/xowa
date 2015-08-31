@@ -31,14 +31,14 @@ public class Xop_languages_xnde implements Xox_xnde {
 		int slash_pos = Bry_finder.Find_bwd(page_bry, Xoa_ttl.Subpage_spr);
 		if (slash_pos == Bry_.NotFound) return ttl;
 		byte[] root_bry = Bry_.Mid(page_bry, 0, slash_pos);
-		return Xoa_ttl.parse_(wiki, ttl.Ns().Id(), root_bry);
+		return Xoa_ttl.parse(wiki, ttl.Ns().Id(), root_bry);
 	}
 	private List_adp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
 		this.root_ttl = Root_ttl_of(wiki, ctx.Cur_page().Ttl());
 		List_adp rslts = List_adp_.new_(); 
 		Int_obj_ref rslt_count = Int_obj_ref.new_(0);
 		Xow_ns page_ns = root_ttl.Ns();
-		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslts, null, null, rslt_count, page_ns, root_ttl.Page_db(), Int_.MaxValue, 0, Int_.MaxValue, true, false);
+		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslts, null, null, rslt_count, page_ns, root_ttl.Page_db(), Int_.Max_value, 0, Int_.Max_value, true, false);
 		int len = rslt_count.Val();
 		if (len == 0) return List_adp_.Noop;				// no lang pages; return;
 		List_adp rv = List_adp_.new_();
@@ -116,7 +116,7 @@ class Xop_languages_fmtr implements Bry_fmtr_arg {
 			byte[] lang_key = lang.Key();
 			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_.Key_en);
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
-			Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, ns_id, lang_ttl_bry);
+			Xoa_ttl lang_ttl = Xoa_ttl.parse(wiki, ns_id, lang_ttl_bry);
 			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
 			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt());
 			Bry_fmtr fmtr = null;

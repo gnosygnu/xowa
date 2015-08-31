@@ -32,7 +32,7 @@ public class IoEngine_xrg_queryDir {
 
 	public Console_adp UsrDlg() {return usrDlg;} public IoEngine_xrg_queryDir UsrDlg_(Console_adp val) {usrDlg = val; return this;} Console_adp usrDlg = Console_adp_.Noop;
 	public IoEngine_xrg_queryDir FilPath_(String val) {
-		Criteria_ioMatch crt = Criteria_ioMatch.parse_(true, val, url.Info().CaseSensitive());
+		Criteria_ioMatch crt = Criteria_ioMatch.parse(true, val, url.Info().CaseSensitive());
 		filCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, crt);
 		return this;
 	}

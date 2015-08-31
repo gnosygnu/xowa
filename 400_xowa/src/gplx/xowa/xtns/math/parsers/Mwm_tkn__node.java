@@ -22,6 +22,7 @@ class Mwm_tkn__node implements Mwm_tkn {
 	public int Uid() {return uid;} private int uid;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
+	public void Src_end_(int v) {this.src_end = v;}
 	public Mwm_tkn Init(Mwm_tkn__root root, int tid, int uid, int src_bgn, int src_end) {
 		this.root = root;
 		this.tid = tid;
@@ -35,5 +36,10 @@ class Mwm_tkn__node implements Mwm_tkn {
 	public void To_bry(Bry_bfr bfr, int indent) {
 		Mwm_tkn_.Tkn_to_bry__bgn(bfr, indent, this);
 		Mwm_tkn_.Tkn_to_bry__end_head(bfr);
+		int subs_len = this.Subs__len();
+		for (int i = 0; i < subs_len; ++i) {
+			Mwm_tkn sub_tkn = Subs__get_at(i);
+			sub_tkn.To_bry(bfr, indent + 1);
+		}
 	}
 }

@@ -219,7 +219,7 @@ public class Xowd_page_tbl implements RlsAble {
 	public void Select_for_special_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		Xowd_page_itm nxt_itm = null;
 		int rslt_idx = 0;
-		boolean max_val_check = max_results == Int_.MaxValue;
+		boolean max_val_check = max_results == Int_.Max_value;
 		Db_rdr rdr = Load_ttls_starting_with_rdr(ns.Id(), key, include_redirects, max_results, min_page_len, browse_len, true, true);
 		try {
 			while (rdr.Move_next()) {

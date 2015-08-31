@@ -95,7 +95,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 			rslt_list_ttls[i] = null;
 		rslt_list_len = 0;
 		rslt_nxt = rslt_prv = null;
-		Xoa_ttl from_ttl = Xoa_ttl.parse_(wiki, from_val); if (from_ttl == null) return false;
+		Xoa_ttl from_ttl = Xoa_ttl.parse(wiki, from_val); if (from_ttl == null) return false;
 		if (!from_ttl.Ns().Id_main()) {	// ns specified in title
 			init_ns = from_ttl.Ns();
 			arg_hash.Set_val_by_int(Bry_arg_ns, init_ns.Id());
@@ -139,7 +139,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xowd_page_itm itm) {
 		byte[] ttl_bry = itm.Ttl_page_db();
 		if (!ns.Id_main()) ttl_bry = Bry_.Add(ns.Name_db_w_colon(), ttl_bry);
-		return Xoa_ttl.parse_(wiki, ttl_bry);
+		return Xoa_ttl.parse(wiki, ttl_bry);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = rslt_list_ttls.length;

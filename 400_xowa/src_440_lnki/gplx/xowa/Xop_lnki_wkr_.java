@@ -53,7 +53,7 @@ public class Xop_lnki_wkr_ {
 			tmp_bfr.Mkr_rls();
 		}
 		Xowe_wiki wiki = ctx.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);		
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);		
 		if (ttl == null) return false;
 		if	(	wiki.Cfg_parser_lnki_xwiki_repos_enabled()			// wiki has lnki.xwiki_repos
 			&&	ttl.Wik_bgn() != Xoa_ttl.Null_wik_bgn				// xwiki available; EX: [[en:]]
@@ -70,7 +70,7 @@ public class Xop_lnki_wkr_ {
 		if (xwiki_bry_len + 1 >= ttl_bry_len) return ttl;	// invalid ttl; EX: [[en:]]
 		byte[] ttl_in_xwiki_bry = Bry_.Mid(ttl_bry, xwiki_bry_len + 1, ttl_bry_len); // +1 to position after xwiki :; EX: [[en:File:A.png]]; +1 to put after ":" at "F"
 		if (!wiki.Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Has(xwiki_bry)) return ttl;	// alias not in xwikis; EX: [[en_bad:File:A.png]]
-		Xoa_ttl ttl_in_xwiki = Xoa_ttl.parse_(wiki, ttl_in_xwiki_bry);
+		Xoa_ttl ttl_in_xwiki = Xoa_ttl.parse(wiki, ttl_in_xwiki_bry);
 		if (ttl_in_xwiki == null) return ttl; // occurs if ttl is bad in xwiki; EX: [[en:<bad>]]
 		return ttl_in_xwiki.Ns().Id_file() ? ttl_in_xwiki : ttl;
 	}

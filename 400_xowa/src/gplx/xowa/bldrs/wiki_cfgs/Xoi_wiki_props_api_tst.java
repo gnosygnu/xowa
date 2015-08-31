@@ -135,7 +135,7 @@ class Xob_subpage_tst_fxt {
 		int ns_len = wiki.Ns_list().Count();
 		for (int i = 0; i < ns_len; i++) {
 			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().Get_at(i);
-			sb.Add(ns.Id()).Add("=").Add(Bool_.Xto_str_lower(ns.Enabled())).Add_char_nl();
+			sb.Add(ns.Id()).Add("=").Add(Bool_.To_str_lower(ns.Enabled())).Add_char_nl();
 		}
 		sb.Add_char_nl();
 	}

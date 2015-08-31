@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*; import gplx.xowa.xtns.wdatas.*;
+import org.junit.*; import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoh_js_cbk_wdata_labels_tst {
-	@Before public void init() {fxt.Init();} Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
 		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());
@@ -45,9 +45,9 @@ public class Xoh_js_cbk_wdata_labels_tst {
 		Tst_wikidata_label_get(String_.Ary("en", "q1"), String_.Ary("\ta"));
 	}
 	private Wdata_doc doc_(String qid, String src) {
-		gplx.core.json.Json_doc doc = gplx.core.json.Json_doc.new_apos_(src);
+		Json_doc jdoc = fxt.Make_json(src);
 		Xoae_app app = Xoa_app_fxt.app_();
-		Wdata_doc rv = new Wdata_doc(Bry_.new_a7(qid), app.Wiki_mgr().Wdata_mgr(), doc);
+		Wdata_doc rv = new Wdata_doc(Bry_.new_a7(qid), app.Wiki_mgr().Wdata_mgr(), jdoc);
 		return rv;
 	}
 	private void Tst_wikidata_label_get(String[] args, String[] expd) {

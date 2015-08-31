@@ -23,9 +23,9 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private Xowd_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
 	private int[] ns_ary; private Xowd_db_file[] db_ary;
 	private int ns_bgn = -1, db_bgn = -1, pg_bgn = -1;
-	private int ns_end = -1, db_end = -1, pg_end = Int_.MaxValue;
+	private int ns_end = -1, db_end = -1, pg_end = Int_.Max_value;
 	private int commit_interval = 1000, progress_interval = 250, cleanup_interval = 2500, select_size = 10 * Io_mgr.Len_mb;
-	private int exec_count, exec_count_max = Int_.MaxValue;
+	private int exec_count, exec_count_max = Int_.Max_value;
 	private boolean reset_db = false, exit_after_commit = false, exit_now = false;
 	private boolean load_tmpls;
 	private Xob_dump_bmk_mgr bmk_mgr = new Xob_dump_bmk_mgr();
@@ -67,7 +67,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private long time_bgn;
 	public void Cmd_run() {Exec_ns_ary();}
 	private void Exec_ns_ary() {
-		if (pg_bgn == Int_.MaxValue) return;
+		if (pg_bgn == Int_.Max_value) return;
 		if (load_tmpls) Xob_dump_mgr_base_.Load_all_tmpls(usr_dlg, wiki, page_src);
 		time_bgn = Env_.TickCount();
 		Xob_dump_bmk dump_bmk = new Xob_dump_bmk();
@@ -169,7 +169,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	public void Cmd_term() {}		
 	public void Cmd_end() {
 		if (!exit_now)
-			pg_bgn = Int_.MaxValue;
+			pg_bgn = Int_.Max_value;
 		Exec_commit(-1, -1, -1, Bry_.Empty);
 		Exec_end_hook();
 		Free();

@@ -30,7 +30,7 @@ public class Xocfg_bnd_itm_srl implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_))			Src_(app, this, m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_box_))			box = Xog_bnd_box_.Xto_sys_int(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_ipt_))			ipt = IptArg_.parse_(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_ipt_))			ipt = IptArg_.parse(m.ReadStr("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

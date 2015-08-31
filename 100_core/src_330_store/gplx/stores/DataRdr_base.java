@@ -63,62 +63,62 @@ public abstract class DataRdr_base implements SrlMgr {
 
 	public int ReadInt(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Int_.parse_(String_.as_(val)) : Int_.cast_(val);} 
+		try {return (parse) ? Int_.parse(String_.as_(val)) : Int_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(int.class, key, val, exc);}
 	}
 	public int ReadIntOr(String key, int or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Int_.parse_(String_.as_(val)) : Int_.cast_(val);} 
+		try {return (parse) ? Int_.parse(String_.as_(val)) : Int_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, int.class, key, val, or); return or;}
 	}
 	public long ReadLongOr(String key, long or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Long_.parse_(String_.as_(val)) : Long_.cast_(val);} 
+		try {return (parse) ? Long_.parse(String_.as_(val)) : Long_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, long.class, key, val, or); return or;}
 	}
 	@gplx.Virtual public boolean ReadBool(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Bool_.cast_(BoolClassXtn._.ParseOrNull(String_.as_(val))) : Bool_.cast_(val);} 
+		try {return (parse) ? Bool_.cast(BoolClassXtn._.ParseOrNull(String_.as_(val))) : Bool_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(boolean.class, key, val, exc);}
 	}
 	@gplx.Virtual public boolean ReadBoolOr(String key, boolean or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Bool_.parse_(String_.as_(val)) : Bool_.cast_(val);} 
+		try {return (parse) ? Bool_.parse(String_.as_(val)) : Bool_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, boolean.class, key, val, or); return or;}
 	}
 	public long ReadLong(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Long_.parse_(String_.as_(val)) : Long_.cast_(val);} 
+		try {return (parse) ? Long_.parse(String_.as_(val)) : Long_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(long.class, key, val, exc);}
 	}
 	public float ReadFloat(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Float_.parse_(String_.as_(val)) : Float_.cast_(val);} 
+		try {return (parse) ? Float_.parse(String_.as_(val)) : Float_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(float.class, key, val, exc);}
 	}
 	public float ReadFloatOr(String key, float or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Float_.parse_(String_.as_(val)) : Float_.cast_(val);} 
+		try {return (parse) ? Float_.parse(String_.as_(val)) : Float_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, float.class, key, val, or); return or;}
 	}
 	public double ReadDouble(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Double_.parse_(String_.as_(val)) : Double_.cast_(val);} 
+		try {return (parse) ? Double_.parse(String_.as_(val)) : Double_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(double.class, key, val, exc);}
 	}
 	public double ReadDoubleOr(String key, double or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Double_.parse_(String_.as_(val)) : Double_.cast_(val);} 
+		try {return (parse) ? Double_.parse(String_.as_(val)) : Double_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, double.class, key, val, or); return or;}
 	}
 	@gplx.Virtual public byte ReadByte(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Byte_.parse_(String_.as_(val)) : Byte_.cast_(val);} 
+		try {return (parse) ? Byte_.parse(String_.as_(val)) : Byte_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(byte.class, key, val, exc);}
 	}
 	@gplx.Virtual public byte ReadByteOr(String key, byte or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Byte_.parse_(String_.as_(val)) : Byte_.cast_(val);} 
+		try {return (parse) ? Byte_.parse(String_.as_(val)) : Byte_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte.class, key, val, or); return or;}
 	}
 	@gplx.Virtual public DateAdp ReadDate(String key) {
@@ -134,7 +134,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	@gplx.Virtual public Decimal_adp ReadDecimal(String key) {
 		Object val = Read(key);
 		try {
-			if (parse) return Decimal_adp_.parse_(String_.as_(val));
+			if (parse) return Decimal_adp_.parse(String_.as_(val));
 			Decimal_adp rv = Decimal_adp_.as_(val);
 			return (rv == null) 
 				? Decimal_adp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about Decimal_adp, it will always return decimalType
@@ -145,7 +145,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	@gplx.Virtual public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
 		Object val = Read(key); if (val == null) return or;
 		try {
-			if (parse) return Decimal_adp_.parse_(String_.as_(val));
+			if (parse) return Decimal_adp_.parse(String_.as_(val));
 			Decimal_adp rv = Decimal_adp_.as_(val);
 			return (rv == null) 
 				? Decimal_adp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about Decimal_adp, it will always return decimalType
@@ -156,16 +156,16 @@ public abstract class DataRdr_base implements SrlMgr {
 	public char ReadChar(String key) {
 		Object val = Read(key);
 		try {
-			if (parse) return Char_.parse_(String_.as_(val));
-			return Char_.cast_(val);
+			if (parse) return Char_.parse(String_.as_(val));
+			return Char_.cast(val);
 		}
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(char.class, key, val, exc);}
 	}
 	public char ReadCharOr(String key, char or) {
 		Object val = Read(key); if (val == null) return or;
 		try {
-			if (parse) return Char_.parse_(String_.as_(val));
-			return Char_.cast_(val);
+			if (parse) return Char_.parse(String_.as_(val));
+			return Char_.cast(val);
 		}
 		catch (Exception exc) {Err_.Noop(exc); return or;}
 	}

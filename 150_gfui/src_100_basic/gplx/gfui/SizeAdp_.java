@@ -17,16 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class SizeAdp_ {
-	public static final SizeAdp Null = new SizeAdp(Int_.MinValue, Int_.MinValue);
+	public static final SizeAdp Null = new SizeAdp(Int_.Min_value, Int_.Min_value);
 	public static final SizeAdp Zero = new SizeAdp(0, 0);
 	public static final SizeAdp[] Ary_empty = new SizeAdp[0];
-	public static SizeAdp cast_(Object obj) {try {return (SizeAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SizeAdp.class, obj);}}
+	public static SizeAdp cast(Object obj) {try {return (SizeAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SizeAdp.class, obj);}}
 	public static SizeAdp new_(int width, int height) {return new SizeAdp(width, height);}
-	public static SizeAdp parse_(String raw) {return parse_or_(raw, SizeAdp_.Null);}
-	public static SizeAdp parse_or_(String raw, SizeAdp or) {
+	public static SizeAdp parse(String raw) {return parse_or(raw, SizeAdp_.Null);}
+	public static SizeAdp parse_or(String raw, SizeAdp or) {
 		String[] ary = String_.Split(raw, ","); if (ary.length != 2) return or;
-		int w = Int_.parse_or_(ary[0], Int_.MinValue); if (w == Int_.MinValue) return or;
-		int h = Int_.parse_or_(ary[1], Int_.MinValue); if (h == Int_.MinValue) return or;
+		int w = Int_.parse_or(ary[0], Int_.Min_value); if (w == Int_.Min_value) return or;
+		int h = Int_.parse_or(ary[1], Int_.Min_value); if (h == Int_.Min_value) return or;
 		return new SizeAdp(w, h);
 	}
 	public static SizeAdp corners_(PointAdp topLeft, PointAdp bottomRight) {

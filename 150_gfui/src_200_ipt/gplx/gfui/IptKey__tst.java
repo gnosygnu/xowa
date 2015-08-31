@@ -25,7 +25,7 @@ public class IptKey__tst {
 	@Test  public void To_str__numeric() {
 		fxt.Test_to_str(16777296, "key.#16777296");
 	}
-	@Test   public void parse_() {
+	@Test   public void parse() {
 		fxt.Test_parse("key.#10", 10);
 	}
 }
@@ -34,6 +34,6 @@ class IptKey__fxt {
 		Tfds.Eq(expd, IptKey_.To_str(keycode));
 	}
 	public void Test_parse(String raw, int keycode) {
-		Tfds.Eq(keycode, IptKey_.parse_(raw).Val());
+		Tfds.Eq(keycode, IptKey_.parse(raw).Val());
 	}
 }

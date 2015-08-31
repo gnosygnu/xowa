@@ -95,6 +95,11 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_save(brys, "<a xtid='a_lnke_brk_n' class=\"external autonumber\"  rel=\"nofollow\" href=\"http://a.org\">[123]</a>");
 		fxt.Test_load(brys, "<a rel=\"nofollow\" class=\"external autonumber\" href=\"http://a.org\">[123]</a>");
 	}
+	@Test   public void Srl_lnke_brk_n__tidy() {	// PURPOSE:handle reparenting of html elements by HTML tidy EX:<font color="red">[http://a.org]</font>; DATE:2015-08-25
+		String raw_bgn = "<a xtid='a_lnke_brk_n' class=\"external autonumber\"  rel=\"nofollow\" href=\"http://a.org\"><font color=\"red\">[123]</font>";
+		byte[][] brys = Bry_.Ary(Bry_.new_u8(raw_bgn), Xow_hzip_dict.Bry_a_rhs);
+		fxt.Test_save(brys, raw_bgn + "</a>");
+	}
 	@Test   public void Html_lnki_ttl() {
 		fxt.Test_html("[[A]]", "<a xtid='a_lnki_text_n' href=\"/wiki/A\" xowa_redlink='1'>A</a>");
 	}

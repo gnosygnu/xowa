@@ -51,7 +51,7 @@ public class RegxPatn_cls_ioMatch_tst {
 		tst_Matches("file.cs", "File.cS", true);							// pass: diff case
 	}
 	void tst_Matches(String regx, String raw, boolean expd) {
-		RegxPatn_cls_ioMatch pattern = RegxPatn_cls_ioMatch_.parse_(regx, false);
+		RegxPatn_cls_ioMatch pattern = RegxPatn_cls_ioMatch_.parse(regx, false);
 		boolean actl = pattern.Matches(raw);
 		Tfds.Eq(expd, actl);			
 	}

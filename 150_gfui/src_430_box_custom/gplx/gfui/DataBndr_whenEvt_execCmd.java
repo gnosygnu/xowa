@@ -30,7 +30,7 @@ public class DataBndr_whenEvt_execCmd implements InjectAble, GfoInvkAble, GfoEvO
 		return this;
 	}	GfoInvkAble getInvk; String getCmd;
 	public void Inject(Object owner) {
-		setInvk = GfoInvkAble_.cast_(owner);
+		setInvk = GfoInvkAble_.cast(owner);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, whenEvt)) {

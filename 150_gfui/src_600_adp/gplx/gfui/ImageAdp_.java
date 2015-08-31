@@ -31,7 +31,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 public class ImageAdp_ {
 	public static ImageAdp as_(Object obj) {return obj instanceof ImageAdp ? (ImageAdp)obj : null;}
-	public static ImageAdp cast_(Object obj) {try {return (ImageAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ImageAdp.class, obj);}}
+	public static ImageAdp cast(Object obj) {try {return (ImageAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ImageAdp.class, obj);}}
 	public static final ImageAdp Null = new_(10, 10);
 	public static ImageAdp new_(int width, int height) {
 		//		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);	// JAVA: must be TYPE_INT_RGB or else ImageIO.write("bmp") will fail
@@ -44,7 +44,7 @@ public class ImageAdp_ {
 		SizeAdp size = null;
 		if		(String_.Eq(raw, ""))			size = SizeAdp_.Zero;
 		else if	(String_.Eq(url.Ext(), ".svg")) size = SizeOf_svg(url);
-		else									size = SizeAdp_.parse_(raw);
+		else									size = SizeAdp_.parse(raw);
 		return new ImageAdp_txt(url, size);
 	}
 	public static SizeAdp SizeOf_svg(Io_url url) {return Gfui_svg_util.QuerySize(url);}
@@ -121,6 +121,6 @@ class Gfui_svg_util {
 		if (px != -1) end = px;
 		String str = String_.Mid(xml, bgn, end);
 		pos_ref.Val_(end);
-		return Double_.parse_(str);
+		return Double_.parse(str);
 	}
 }

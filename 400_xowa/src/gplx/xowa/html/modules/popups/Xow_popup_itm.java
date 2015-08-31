@@ -35,7 +35,7 @@ public class Xow_popup_itm implements Cancelable {
 	public boolean Mode_all() {return mode == Mode_tid_all;}
 	public Xow_popup_itm Mode_all_() {
 		mode = Mode_tid_all;
-		words_needed = Int_.MaxValue;
+		words_needed = Int_.Max_value;
 		return this;
 	}
 	public String Popup_id() {return popup_id;} private String popup_id;

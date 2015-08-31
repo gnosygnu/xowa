@@ -119,6 +119,7 @@ public class Xow_hzip_itm__anchor {
 		int href_bgn = Bry_finder.Find_fwd(src, Find_href_bry, pos, src_len);				if (href_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.href_missing", bgn, pos);
 		href_bgn += Find_href_len;
 		int href_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, href_bgn, src_len);		if (href_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.href_missing", bgn, href_bgn);
+		int bfr_bgn = bfr.Len();
 		bfr.Add_byte(Xow_hzip_dict.Escape).Add_byte(xtid);
 		bfr.Add_mid(src, href_bgn, href_end);
 		bfr.Add_byte(Xow_hzip_dict.Escape);
@@ -129,7 +130,11 @@ public class Xow_hzip_itm__anchor {
 				return a_rhs_bgn + Find_a_rhs_bgn_len;
 			}
 			case Xow_hzip_dict.Tid_lnke_brk_text_n: {
-				int a_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, href_end, src_len);			if (a_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_lhs_end_missing", bgn, href_end);
+				int a_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, href_end, src_len);			if (a_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_lhs_end_missing", bgn, href_end);					
+				if (src[a_lhs_end + 1] != Byte_ascii.Brack_bgn) {	// check if next char is [; DATE:2015-08-25
+					bfr.Delete_rng_to_end(bfr_bgn);					// delete from start and exit;
+					return Xow_hzip_mgr.Unhandled;
+				}
 				int num_bgn = a_lhs_end + 2; // skip >[
 				int num_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_end, num_bgn, src_len);		if (num_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.num_end_missing", bgn, href_end);
 				int num = Bry_.To_int_or(src, num_bgn, num_end, -1);								if (num == -1) return hzip_mgr.Warn_by_pos_add_dflt("a.num_invalid", num_bgn, num_end);

@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class DataRdr_ {
 	public static final DataRdr Null = new DataRdr_null();
 	public static DataRdr as_(Object obj) {return obj instanceof DataRdr ? (DataRdr)obj : null;}
-	public static DataRdr cast_(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
+	public static DataRdr cast(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
 }
 class DataRdr_null implements DataRdr {
 	public String NameOfNode() {return To_str();} public String To_str() {return "<< NULL READER >>";}
@@ -37,9 +37,9 @@ class DataRdr_null implements DataRdr {
 	public byte[] ReadBryByStr(String key) {return Bry_.Empty;}		public byte[] ReadBryByStrOr(String key, byte[] or) {return or;}
 	public byte[] ReadBry(String key) {return Bry_.Empty;}			public byte[] ReadBryOr(String key, byte[] or) {return or;}
 	public char ReadChar(String key) {return Char_.Null;}				public char ReadCharOr(String key, char or) {return or;}
-	public int ReadInt(String key) {return Int_.MinValue;}				public int ReadIntOr(String key, int or) {return or;}
+	public int ReadInt(String key) {return Int_.Min_value;}				public int ReadIntOr(String key, int or) {return or;}
 	public boolean ReadBool(String key) {return false;}					public boolean ReadBoolOr(String key, boolean or) {return or;}			
-	public long ReadLong(String key) {return Long_.MinValue;}			public long ReadLongOr(String key, long or) {return or;}
+	public long ReadLong(String key) {return Long_.Min_value;}			public long ReadLongOr(String key, long or) {return or;}
 	public double ReadDouble(String key) {return Double_.NaN;}			public double ReadDoubleOr(String key, double or) {return or;}
 	public float ReadFloat(String key) {return Float_.NaN;}				public float ReadFloatOr(String key, float or) {return or;}
 	public byte ReadByte(String key) {return Byte_.Min_value;}			public byte ReadByteOr(String key, byte or) {return or;}

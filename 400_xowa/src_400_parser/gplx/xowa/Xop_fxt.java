@@ -72,7 +72,7 @@ public class Xop_fxt {
 		return this;
 	}
 	public Xoa_ttl Page_ttl_(String txt) {
-		Xoa_ttl rv = Xoa_ttl.parse_(wiki, Bry_.new_u8(txt));
+		Xoa_ttl rv = Xoa_ttl.parse(wiki, Bry_.new_u8(txt));
 		ctx.Cur_page().Ttl_(rv);
 		return rv;
 	}
@@ -172,7 +172,7 @@ public class Xop_fxt {
 	public Xop_fxt	Init_page_create(String ttl, String txt) {return Init_page_create(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_create(Xowe_wiki wiki, String ttl, String txt) {Init_page_create_static(wiki, ttl, txt);return this;}
 	public static void Init_page_create_static(Xowe_wiki wiki, String ttl_str, String text_str) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));
 		byte[] text = Bry_.new_u8(text_str);
 		wiki.Db_mgr().Save_mgr().Data_create(ttl, text);
 	}
@@ -181,7 +181,7 @@ public class Xop_fxt {
 	}
 	public Xop_fxt	Init_page_update(String ttl, String txt) {return Init_page_update(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_update(Xowe_wiki wiki, String ttl, String txt) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl));
+		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl));
 		byte[] page_raw = Bry_.new_u8(txt);
 		Xoae_page page = wiki.Data_mgr().Get_page(page_ttl, false);
 		wiki.Db_mgr().Save_mgr().Data_update(page, page_raw);
@@ -340,7 +340,7 @@ public class Xop_fxt {
 	public static byte[] Load_page(Xowe_wiki wiki, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_url page_url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		return wiki.Load_page_by_ttl(page_url, ttl).Data_raw();
 	}
 	public static void Reg_xwiki_alias(Xowe_wiki wiki, String alias, String domain) {

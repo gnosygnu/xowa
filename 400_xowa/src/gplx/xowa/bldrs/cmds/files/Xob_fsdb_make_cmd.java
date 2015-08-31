@@ -28,8 +28,8 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_.Ary(0);
 	private Xobu_poll_mgr poll_mgr; private int poll_interval; private long time_bgn;
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
-	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = Int_.MaxValue, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images		
-	private int tier_id_bmk = -1, tier_id_val = -1; private int page_id_bmk = -1, page_id_val = -1, page_id_end = Int_.MaxValue; private int lnki_id_bmk = -1, lnki_id_val = -1;
+	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = Int_.Max_value, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images		
+	private int tier_id_bmk = -1, tier_id_val = -1; private int page_id_bmk = -1, page_id_val = -1, page_id_end = Int_.Max_value; private int lnki_id_bmk = -1, lnki_id_val = -1;
 	private boolean exit_after_commit, exit_now;
 	public Xob_fsdb_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.Cmd_ctor(bldr, wiki);
@@ -140,7 +140,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		else {
 			if (tier_id_bmk == -1) {
-				tier_id_bmk = Int_.parse_(tier_id_str);
+				tier_id_bmk = Int_.parse(tier_id_str);
 				usr_dlg.Note_many("", "", "restoring from bmk: tier_id=~{0}", tier_id_bmk);
 			}
 			if (page_id_bmk == -1) {

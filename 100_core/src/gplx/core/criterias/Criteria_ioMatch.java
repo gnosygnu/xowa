@@ -33,5 +33,5 @@ public class Criteria_ioMatch implements Criteria { // EX: url IOMATCH '*.xml|*.
 
 	public static final String TokenName = "IOMATCH";
 	public static Criteria_ioMatch as_(Object obj) {return obj instanceof Criteria_ioMatch ? (Criteria_ioMatch)obj : null;}
-	public static Criteria_ioMatch parse_(boolean match, String raw, boolean caseSensitive) {return new Criteria_ioMatch(match, RegxPatn_cls_ioMatch_.parse_(raw, caseSensitive));}
+	public static Criteria_ioMatch parse(boolean match, String raw, boolean caseSensitive) {return new Criteria_ioMatch(match, RegxPatn_cls_ioMatch_.parse(raw, caseSensitive));}
 }

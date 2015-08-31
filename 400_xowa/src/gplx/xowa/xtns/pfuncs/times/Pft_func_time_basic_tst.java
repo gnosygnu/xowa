@@ -77,7 +77,7 @@ public class Pft_func_time_basic_tst {
 	@Test   public void Timezone_offset()		{
 		DateAdp.Timezone_offset_test = -18000;
 		fxt.Test_parse_tmpl_str("{{#time:Z|}}"											, "-18000");
-		DateAdp.Timezone_offset_test = Int_.MinValue;
+		DateAdp.Timezone_offset_test = Int_.Min_value;
 	}			// Z=timezone offset in seconds; http://php.net/manual/en/function.date.php;
 	@Test   public void Timezone_plus()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d H:i:s|2012-01-02 03:04:05+06:30}}"	, "2012-01-02 09:34:05");}	// PURPOSE: handle timezone plus ; EX: +01:30; DATE:2014-08-26
 	@Test   public void Timezone_minus()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d H:i:s|2012-01-02 09:34:05-06:30}}"	, "2012-01-02 03:04:05");}	// PURPOSE: handle timezone minus; EX: -01:30; DATE:2014-08-26 

@@ -58,7 +58,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		Add(url, ttl, page_ttl);
 	}
 	public void Add(Xoa_url url, Xoa_ttl ttl, byte[] page_ttl) {
-		if (gplx.xowa.users.data.Xoud_history_mgr.Skip_history(ttl)) return;
+		if (gplx.xowa.users.history.Xoud_history_mgr.Skip_history(ttl)) return;
 		if (!load_chk) Load();
 		byte[] key = Xou_history_itm.key_(url.Wiki_bry(), page_ttl);
 		Xou_history_itm itm = (Xou_history_itm)itms.Get_by(key);

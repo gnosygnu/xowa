@@ -47,7 +47,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	public Xow_ns		Ns_project()			{return ns_project;}	private Xow_ns ns_project;
 	public Xow_ns		Ns_module()				{return ns_module;}		private Xow_ns ns_module;
 	public Xow_ns		Ns_mediawiki()			{return ns_mediawiki;}	private Xow_ns ns_mediawiki;
-	public int			Ns_page_id()			{return ns_page_id;}	public void Ns_page_id_(int v) {ns_page_id = v;} private int ns_page_id = Int_.MinValue;
+	public int			Ns_page_id()			{return ns_page_id;}	public void Ns_page_id_(int v) {ns_page_id = v;} private int ns_page_id = Int_.Min_value;
 	public int			Count() {return ns_count;} private int ns_count = 0;
 	public Xow_ns[]		Ords_ary() {return ords;} private Xow_ns[] ords = new Xow_ns[Xow_ns_mgr_.Ordinal_max];
 	public int			Ords_len() {return ords_len;} private int ords_len;
@@ -58,7 +58,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private Xow_ns		Ids_get_or_empty(int id) {
 		Xow_ns rv = Ids_get_or_null(id);
 		return rv == null ? Ns__empty : rv;
-	}	private static final Xow_ns Ns__empty = new Xow_ns(Int_.MaxValue, Byte_.Zero, Bry_.Empty, false);
+	}	private static final Xow_ns Ns__empty = new Xow_ns(Int_.Max_value, Byte_.Zero, Bry_.Empty, false);
 	public Xow_ns		Names_get_or_null(byte[] name_bry) {return this.Names_get_or_null(name_bry, 0, name_bry.length);}
 	public Xow_ns		Names_get_or_null(byte[] src, int bgn, int end) {
 		Object rv = name_hash.Get_by_mid(src, bgn, end);
@@ -174,18 +174,18 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		int ns_len = id_hash.Count();
 		id_hash.Sort_by(this);
 		// assert that all items are grouped in pairs of subj, talk; note that subj is even and talk is odd
-		int nxt_ns_id = Int_.MinValue;
-		int prv_ns_id = Int_.MinValue;
+		int nxt_ns_id = Int_.Min_value;
+		int prv_ns_id = Int_.Min_value;
 		for (int i = 0; i < ns_len; i++) {
 			Xow_ns ns = (Xow_ns)id_hash.Get_at(i);
 			int ns_id = ns.Id();
 			if (ns_id < 0						// ignore negative ns (which don't have subj/talk pairing) 			
 				|| ns.Is_alias()				// ignore alias
 				) continue;			
-			if (nxt_ns_id != Int_.MinValue) {	// nxt_ns_id is set
+			if (nxt_ns_id != Int_.Min_value) {	// nxt_ns_id is set
 				if (nxt_ns_id != ns_id)			// prv was subj, but cur does not match expected talk_id; create talk for prv subj
 					Ords_sort_add(nxt_ns_id);
-				nxt_ns_id = Int_.MinValue;		// always reset value
+				nxt_ns_id = Int_.Min_value;		// always reset value
 			}
 			if (ns_id % 2 == 0)					// subj
 				nxt_ns_id = ns_id + 1;			// anticipate nxt_ns_id
@@ -195,7 +195,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			}
 			prv_ns_id = ns_id;
 		}
-		if (nxt_ns_id != Int_.MinValue)			// handle trailing ns_id; EX: 0, 1, 2; need to make 3
+		if (nxt_ns_id != Int_.Min_value)			// handle trailing ns_id; EX: 0, 1, 2; need to make 3
 			Ords_sort_add(nxt_ns_id);
 		
 		// sort again b/c new ns may have been added
@@ -254,7 +254,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			byte[] line = lines[i];
 			if (line.length == 0) continue;
 			byte[][] flds = Bry_.Split(line, Byte_ascii.Pipe);
-			int cur_id = Bry_.To_int_or(flds[0], Int_.MinValue);
+			int cur_id = Bry_.To_int_or(flds[0], Int_.Min_value);
 			this.Aliases_add(cur_id, String_.new_u8(flds[1]));
 		}
 		Ords_sort();

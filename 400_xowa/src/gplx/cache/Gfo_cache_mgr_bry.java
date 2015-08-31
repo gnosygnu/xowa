@@ -40,7 +40,7 @@ class Gfo_cache_itm_comparer implements gplx.lists.ComparerAble {
 class Io_url_exists_mgr {
 	private gplx.cache.Gfo_cache_mgr_bry cache_mgr = new gplx.cache.Gfo_cache_mgr_bry();
 	public Io_url_exists_mgr() {
-		cache_mgr.Compress_max_(Int_.MaxValue);
+		cache_mgr.Compress_max_(Int_.Max_value);
 	}
 	public boolean Has(Io_url url) {
 		byte[] url_key = url.RawBry();

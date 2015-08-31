@@ -21,7 +21,7 @@ import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_conn_info_ {
 	public static final Db_conn_info Null			= Noop_conn_info.I;
 	public static final Db_conn_info Test			= Mysql_conn_info.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
-	public static Db_conn_info parse_(String raw)		{return Db_conn_info_pool._.Parse(raw);}
+	public static Db_conn_info parse(String raw)		{return Db_conn_info_pool._.Parse(raw);}
 	public static Db_conn_info sqlite_(Io_url url)		{return Sqlite_conn_info.load_(url);}
 	public static Db_conn_info tdb_(Io_url url)			{return Tdb_conn_info.new_(url);}
 	public static Db_conn_info mem_(String db)			{return Db_conn_info__mem.new_(db);}

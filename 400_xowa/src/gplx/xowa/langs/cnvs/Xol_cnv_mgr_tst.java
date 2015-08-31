@@ -25,7 +25,7 @@ public class Xol_cnv_mgr_tst {
 		fxt.Parser_fxt().Init_page_create("Template:Test_x1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{Test_x0}}", "{{test}}", "val");
 	}
-	@Test  public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.parse_(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	@Test  public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.parse(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 		fxt.Parser_fxt().Init_page_create("Template:X1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{x0}}", "{{test}}", "val");
 	}
@@ -79,7 +79,7 @@ class Xol_cnv_mgr_fxt {
 	}
 	public void Test_convert_by_ttl(String lang_key, String raw, boolean expd) {
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7(lang_key));
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(raw));
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(raw));
 		Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, ttl);
 		if (expd)
 			Tfds.Eq_true(page.Exists());

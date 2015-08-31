@@ -40,7 +40,7 @@ public class KeyVal_ {
 			rv[i] = vals[i - vals_bgn];
 		return rv;
 	}
-	public static String Ary_x_to_str(KeyVal... ary) {
+	public static String Ary_to_str(KeyVal... ary) {
 		String_bldr sb = String_bldr_.new_();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
@@ -48,7 +48,7 @@ public class KeyVal_ {
 			sb.Add(itm.Key()).Add("=");
 			Object itm_val = itm.Val();
 			if (Type_adp_.Eq_typeSafe(itm_val, KeyVal[].class))
-				sb.Add(Ary_x_to_str((KeyVal[])itm_val));
+				sb.Add(Ary_to_str((KeyVal[])itm_val));
 			else
 				sb.Add(Object_.Xto_str_strict_or_null_mark(itm_val));
 			sb.Add_char_nl();
@@ -63,12 +63,12 @@ public class KeyVal_ {
 		}
 		return null;
 	}
-	public static String Ary_xto_str_nested(KeyVal... ary) {
+	public static String Ary_to_str_nested(KeyVal... ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
-		Ary_xto_str_nested(bfr, 0, ary);
+		Ary_to_str_nested(bfr, 0, ary);
 		return bfr.Xto_str_and_clear();
 	}
-	private static void Ary_xto_str_nested(Bry_bfr bfr, int indent, KeyVal[] ary) {
+	private static void Ary_to_str_nested(Bry_bfr bfr, int indent, KeyVal[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			KeyVal itm = ary[i];
@@ -82,11 +82,11 @@ public class KeyVal_ {
 				Class<?> val_type = Type_adp_.ClassOf_obj(val);
 				if		(Type_adp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
 					bfr.Add_byte_nl();												// add nl		: "\n"
-					Ary_xto_str_nested(bfr, indent + 1, (KeyVal[])val);
+					Ary_to_str_nested(bfr, indent + 1, (KeyVal[])val);
 					continue;														// don't add \n below
 				}
 				else if (Type_adp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
-					boolean val_as_bool = Bool_.cast_(val);
+					boolean val_as_bool = Bool_.cast(val);
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}
 				else
@@ -96,9 +96,8 @@ public class KeyVal_ {
 		}
 	}
 	public static KeyVal as_(Object obj) {return obj instanceof KeyVal ? (KeyVal)obj : null;}
-	public static KeyVal new_(String key)				{return new KeyVal(KeyVal_.Key_tid_str, key, key);}
-	public static KeyVal new_(String key, Object val)	{return new KeyVal(KeyVal_.Key_tid_str, key, val);}
-	public static KeyVal int_(int key, Object val)		{return new KeyVal(KeyVal_.Key_tid_int, key, val);}
-	public static KeyVal obj_(Object key, Object val)	{return new KeyVal(KeyVal_.Key_tid_obj, key, val);}
-	public static final byte Key_tid_obj = 0, Key_tid_str = 1, Key_tid_int = 2;
+	public static KeyVal new_(String key)				{return new KeyVal(Type_adp_.Tid__str, key, key);}
+	public static KeyVal new_(String key, Object val)	{return new KeyVal(Type_adp_.Tid__str, key, val);}
+	public static KeyVal int_(int key, Object val)		{return new KeyVal(Type_adp_.Tid__int, key, val);}
+	public static KeyVal obj_(Object key, Object val)	{return new KeyVal(Type_adp_.Tid__obj, key, val);}
 }

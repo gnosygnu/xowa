@@ -116,7 +116,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
 		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
 		Tab_name_(String_.new_u8(ttl.Full_txt()));
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));

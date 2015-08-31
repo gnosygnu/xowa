@@ -38,20 +38,19 @@ public class Xoa_url_parser {
 		this.encoder = app.Utl__encoder_mgr().Xourl();
 		this.vnt_mgr = wiki.Type_is_edit() ? wiki.Lang().Vnt_mgr() : null;
 	}
-	public Xoa_url Parse_by_urlbar(String str) {
+	public Xoa_url Parse_by_urlbar_or_null(String str) {
 		Xoae_app app = (Xoae_app)wiki.App();
 		byte[] bry = Strip_mobile_segment(Bry_.new_u8(str));
 		byte[] fmt = app.Gui_mgr().Url_macro_mgr().Fmt_or_null(bry);
 		if (fmt != null) bry = fmt;
-		// if (app.Wiki_mgr().Wiki_regy().Url_is_invalid_domain(rv)) {	// handle lang_code entered; EX: "war" should redirect to "war" article in current wiki, not war.wikipedia.org; DATE:2014-02-07
-		//	rv.Page_bry_(rv.Wiki_bry());
-		//	rv.Wiki_bry_(wiki.Domain_bry());
-		// }
 		Xoa_url rv = Xoa_url.blank(); 
-		this.Parse(rv, bry, 0, bry.length);
-		if (rv.Page_is_main()) {	// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
-			Xow_wiki actl_wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(rv.Wiki_bry()); // NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
-			rv.Page_bry_(actl_wiki.Props().Main_page());
+		this.Parse(rv, bry, 0, bry.length); if (rv.Page_bry() == null) {Xoa_url_.Invalid_warn(str); return null;}
+		byte[] wiki_bry = rv.Wiki_bry();
+		Xow_xwiki_itm xwiki_itm = app.User().Wikii().Xwiki_mgr().Get_by_key(wiki_bry); 
+		if (xwiki_itm == null) {Xoa_url_.Invalid_warn(str); return null;}	// if wiki doesn't exist, warn and return nothing; DATE:2015-08-25
+		if (rv.Page_is_main()) {		// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
+			Xow_wiki wiki_itm = app.Wiki_mgri().Get_by_key_or_make_init_y(wiki_bry); // NOTE: must call Init to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
+			rv.Page_bry_(wiki_itm.Props().Main_page());
 		}
 		return rv;
 	}
@@ -111,7 +110,7 @@ public class Xoa_url_parser {
 		tmp_tid = Xoa_url_.Tid_unknown;
 		tmp_raw = gfo_url.Raw();
 		tmp_wiki = gfo_url.Segs__get_at_1st();
-		tmp_page = gfo_url.Segs__get_at_nth(); 
+		tmp_page = gfo_url.Segs__get_at_nth();
 		tmp_anch = gfo_url.Anch(); tmp_qargs = gfo_url.Qargs();
 		tmp_wiki_is_missing = false;
 		tmp_page_is_main = false;

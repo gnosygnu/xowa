@@ -19,9 +19,9 @@ package gplx.xmls; import gplx.*;
 import org.junit.*;
 public class XmlDoc_tst {
 	String xml; XmlDoc xdoc; XmlNde xnde;
-	@Test  public void parse_() {
+	@Test  public void parse() {
 		xml = String_.Concat("<root/>");
-		xdoc = XmlDoc_.parse_(xml);
+		xdoc = XmlDoc_.parse(xml);
 		Tfds.Eq("root", xdoc.Root().Name());
 		Tfds.Eq(true, xdoc.Root().NdeType_element());
 	}
@@ -34,7 +34,7 @@ public class XmlDoc_tst {
 			,	"</a>"
 			, "</root>"
 			);
-		xdoc = XmlDoc_.parse_(xml);
+		xdoc = XmlDoc_.parse(xml);
 		xnde = xdoc.Root().SubNdes().Get_at(0);
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("<a><b/><b/></a>", xnde.Xml_outer());	
@@ -47,7 +47,7 @@ public class XmlDoc_tst {
 			,	"</a>"
 			, "</root>"
 			);
-		xdoc = XmlDoc_.parse_(xml);
+		xdoc = XmlDoc_.parse(xml);
 		xnde = xdoc.Root().SubNdes().Get_at(0);
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("test me", xnde.Text_inner());
@@ -57,7 +57,7 @@ public class XmlDoc_tst {
 			( "<root atr0=\"0\" atr1=\"1\">"
 			, "</root>"
 			);
-		xdoc = XmlDoc_.parse_(xml);
+		xdoc = XmlDoc_.parse(xml);
 		XmlAtrList atrs = xdoc.Root().Atrs();
 		XmlAtr atr = atrs.Get_at(1);
 		tst_Atr(atr, "atr1", "1");

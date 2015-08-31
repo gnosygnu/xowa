@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class SolidBrushAdp_ {
 	public static SolidBrushAdp as_(Object obj) {return obj instanceof SolidBrushAdp ? (SolidBrushAdp)obj : null;}
-	public static SolidBrushAdp cast_(Object obj) {try {return (SolidBrushAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SolidBrushAdp.class, obj);}}
+	public static SolidBrushAdp cast(Object obj) {try {return (SolidBrushAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SolidBrushAdp.class, obj);}}
 	public static final SolidBrushAdp Black = new_(ColorAdp_.Black);
 	public static final SolidBrushAdp White = new_(ColorAdp_.White);
 	public static final SolidBrushAdp Null = new_(ColorAdp_.Null);

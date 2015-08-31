@@ -28,7 +28,7 @@ public class Base85_utl_tst {
 		tst_Log(       614125, 4);
 		tst_Log(     52200624, 4);
 		tst_Log(     52200625, 5);
-		tst_Log(Int_.MaxValue, 5);
+		tst_Log(Int_.Max_value, 5);
 	}	void tst_Log(int val, int expd) {Tfds.Eq(expd, Base85_utl.DigitCount(val));}
 	@Test  public void To_str() {
 		tst_XtoStr(           0, "!");

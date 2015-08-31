@@ -133,10 +133,10 @@ public class Scrib_lib_title_tst {
 	private static String ttl_slow(boolean exists, int ttl_id, boolean redirect) {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
-		, "  isRedirect=" + Bool_.Xto_str_lower(redirect)
+		, "  isRedirect=" + Bool_.To_str_lower(redirect)
 		, "  id=" + Int_.Xto_str(ttl_id)
 		, "  contentModel=" + Scrib_lib_title.Key_wikitexet
-		, "  exists=" + Bool_.Xto_str_lower(exists)
+		, "  exists=" + Bool_.To_str_lower(exists)
 		);
 	}
 	private static String file_info_absent() {

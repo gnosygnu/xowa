@@ -19,7 +19,7 @@ package gplx.core.json; import gplx.*; import gplx.core.*;
 public class Json_kv_ary_srl {
 	public static KeyVal Kv_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid_kv:
+			case Json_itm_.Tid__kv:
 				Json_kv kv = (Json_kv)itm;
 				return KeyVal_.new_(kv.Key_as_str(), Val_by_itm(kv.Val()));
 			default:
@@ -28,14 +28,14 @@ public class Json_kv_ary_srl {
 	}
 	private static Object Val_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid_bool:		return Bool_.Xto_str_lower(Bool_.cast_(itm.Data()));
-			case Json_itm_.Tid_int:
-			case Json_itm_.Tid_null:
-			case Json_itm_.Tid_string:
-			case Json_itm_.Tid_decimal:		return itm.Data();
-			case Json_itm_.Tid_array:		return Val_by_itm_ary((Json_ary)itm);
-			case Json_itm_.Tid_nde:			return Val_by_itm_nde((Json_nde)itm);
-			case Json_itm_.Tid_kv:			// kv should never be val; EX: "a":"b":c; not possible
+			case Json_itm_.Tid__bool:		return Bool_.To_str_lower(Bool_.cast(itm.Data()));
+			case Json_itm_.Tid__int:
+			case Json_itm_.Tid__null:
+			case Json_itm_.Tid__str:
+			case Json_itm_.Tid__decimal:	return itm.Data();
+			case Json_itm_.Tid__ary:		return Val_by_itm_ary((Json_ary)itm);
+			case Json_itm_.Tid__nde:		return Val_by_itm_nde((Json_nde)itm);
+			case Json_itm_.Tid__kv:			// kv should never be val; EX: "a":"b":c; not possible
 			default:						throw Err_.new_unhandled(itm.Tid());
 		}
 	}

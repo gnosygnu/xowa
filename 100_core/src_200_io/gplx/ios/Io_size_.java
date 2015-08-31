@@ -35,13 +35,13 @@ public class Io_size_ {
 		String[] unit = Io_size_.Units[exp_1024];
 		return val_as_decimal.To_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, unit_pad);
 	}
-	public static long parse_or_(String raw, long or) {
+	public static long parse_or(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
 		String[] terms = String_.Split(raw, " ");
 		int termsLen = Array_.Len(terms); if (termsLen > 2) return or;
 
 		Decimal_adp val = null;
-		try {val = Decimal_adp_.parse_(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
+		try {val = Decimal_adp_.parse(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
 
 		int unitPow = 0;
 		if (termsLen > 1) {
@@ -88,14 +88,14 @@ public class Io_size_ {
 	public static int	Load_int_(GfoMsg m) {return (int)Load_long_(m);}
 	public static long	Load_long_(GfoMsg m) {
 		String v = m.ReadStr("v");
-		long rv = parse_or_(v, Long_.MinValue); if (rv == Long_.MinValue) throw Err_.new_wo_type("invalid val", "val", v);
+		long rv = parse_or(v, Long_.Min_value); if (rv == Long_.Min_value) throw Err_.new_wo_type("invalid val", "val", v);
 		return rv;
 	}
 	public static String	To_str_mb(long v)				{return Long_.Xto_str(v / Io_mgr.Len_mb_long);}
 	public static long		To_long_by_int_mb(int v)		{return (long)v * Io_mgr.Len_mb_long;}
 	public static long		To_long_by_msg_mb(GfoMsg m, long cur) {
-		long val = m.ReadLongOr("v", Int_.MinValue);
-		return val == Int_.MinValue ? cur : (val * Io_mgr.Len_mb_long);
+		long val = m.ReadLongOr("v", Int_.Min_value);
+		return val == Int_.Min_value ? cur : (val * Io_mgr.Len_mb_long);
 	}
 }
 class Io_size_fmtr_arg implements Bry_fmtr_arg {	

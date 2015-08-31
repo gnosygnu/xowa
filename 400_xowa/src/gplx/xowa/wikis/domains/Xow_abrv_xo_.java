@@ -50,6 +50,6 @@ public class Xow_abrv_xo_ {
 				domain_bry = type.Domain_bry();
 			}
 		}
-		return Xow_domain_itm_.parse(domain_bry);	// for consolidation's sake, parse abrv to domain_bry and pass to Xow_domain_itm_.parse_()
+		return Xow_domain_itm_.parse(domain_bry);	// for consolidation's sake, parse abrv to domain_bry and pass to Xow_domain_itm_.parse()
 	}
 }

@@ -93,7 +93,7 @@ public class GfxStringData {
 //		}
 		float x = GfuiAlign_.CalcInsideOfAxis(alignH.Val(), (int)width, ownerSize.Width());
 		float y = 0; int alignVVal = alignV.Val(); float ownerHeight = ownerSize.Height();
-		if 		(alignVVal == GfuiAlign_.Null.Val())	y = Int_.MinValue;
+		if 		(alignVVal == GfuiAlign_.Null.Val())	y = Int_.Min_value;
 		else if (alignVVal == GfuiAlign_.Lo.Val())		y = height - descent;
 		else if (alignVVal == GfuiAlign_.Mid.Val())		y = (ownerHeight - (ownerHeight - height) / 2);// - descent; // COMMENT: subtracting descent is theoretically correct, but practically results in text shifted up
 		else if (alignVVal == GfuiAlign_.Hi.Val())		y = ownerHeight - descent;

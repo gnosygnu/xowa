@@ -22,11 +22,12 @@ import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 public class IconAdp {
-	public Icon UnderIcon() {return icon;} final Icon icon;
+	public Icon UnderIcon() {return icon;} private final Icon icon;
 	public Image XtoImage() {return ((ImageIcon)icon).getImage();}		
-	public Io_url Url() {return url;} Io_url url = Io_url_.Empty;
+	public Io_url Url() {return url;} private Io_url url = Io_url_.Empty;
 	IconAdp(Icon icon) {this.icon = icon;}
 	public static IconAdp new_(Icon icon) {return new IconAdp(icon);}
+	public static IconAdp file_or_blank(Io_url url) {return file_(url);}
 	public static IconAdp file_(Io_url url) {
 				Icon icon = new ImageIcon(url.Xto_api());
 		IconAdp rv = new IconAdp(icon);

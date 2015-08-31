@@ -27,7 +27,7 @@ public class Db_conn_ {
 			if (rdr.MoveNextPeer()) {
 				Object rv_obj = rdr.ReadAt(0);
 				if (rv_obj != null)		// Max(fil_id) will be NULL if tbl is empty
-					rv = Int_.cast_or_(rv_obj, or);
+					rv = Int_.cast_or(rv_obj, or);
 			}
 			return rv;
 		}

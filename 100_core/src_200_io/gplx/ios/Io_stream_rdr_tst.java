@@ -34,9 +34,9 @@ class Io_stream_rdr_fxt {
 	private java.io.InputStream stream;	
 	private int stream_bry_len;
 	public void Clear() {
-		expd_bytes_read = Int_.MinValue;
+		expd_bytes_read = Int_.Min_value;
 	}
-	public Io_stream_rdr_fxt Expd_bytes_read(int v) {expd_bytes_read = v; return this;} private int expd_bytes_read = Int_.MinValue;
+	public Io_stream_rdr_fxt Expd_bytes_read(int v) {expd_bytes_read = v; return this;} private int expd_bytes_read = Int_.Min_value;
 	public Io_stream_rdr_fxt Init_stream(String v) {
 		byte[] stream_bry = Bry_.new_a7(v);
 		stream_bry_len = stream_bry.length;

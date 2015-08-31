@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
+import gplx.core.json.*;
 import gplx.xowa.wikis.domains.*;
 public class Site_meta_itm {
 	public Ordered_hash			General_list() {return general_list;} private final Ordered_hash general_list = Ordered_hash_.new_bry_();
@@ -34,7 +35,7 @@ public class Site_meta_itm {
 	public Ordered_hash			Protocol_list() {return protocol_list;} private final Ordered_hash protocol_list = Ordered_hash_.new_bry_();
 	public Ordered_hash			Defaultoption_list() {return defaultoption_list;} private final Ordered_hash defaultoption_list = Ordered_hash_.new_();
 	public Ordered_hash			Language_list() {return language_list;} private final Ordered_hash language_list = Ordered_hash_.new_bry_();
-	public static void Build_site_meta(Xowmf_mgr wmf_mgr, Io_url db_url, String[] reqd_ary, DateAdp cutoff) {
+	public static void Build_site_meta(Json_parser json_parser, Xowmf_mgr wmf_mgr, Io_url db_url, String[] reqd_ary, DateAdp cutoff) {
 		Ordered_hash reqd_hash = Ordered_hash_.new_();
 		int reqd_len = reqd_ary.length;
 		for (int i = 0; i < reqd_len; ++i)
@@ -67,7 +68,7 @@ public class Site_meta_itm {
 			json_db.Tbl__core().Insert(site_abrv, domain_bry, Bool_.N, json_date, json_text);
 		}
 
-		Site_json_parser json_parser = new Site_json_parser();
+		Site_json_parser site_parser = new Site_json_parser(json_parser);
 		reqd_len = reqd_ary.length;
 		for (int i = 0; i < reqd_len; ++i) {
 			String domain_str = reqd_ary[i];
@@ -75,7 +76,7 @@ public class Site_meta_itm {
 			Site_core_itm core_itm = json_db.Tbl__core().Select_itm(site_abrv);
 			if (core_itm.Json_completed()) continue;
 			Site_meta_itm meta_itm = new Site_meta_itm();
-			json_parser.Parse_root(meta_itm, String_.new_u8(core_itm.Site_domain()), core_itm.Json_text());
+			site_parser.Parse_root(meta_itm, String_.new_u8(core_itm.Site_domain()), core_itm.Json_text());
 			json_db.Save(meta_itm, site_abrv);
 		}
 	}

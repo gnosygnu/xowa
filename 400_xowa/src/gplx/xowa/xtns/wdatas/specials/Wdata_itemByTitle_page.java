@@ -59,7 +59,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		page_bry = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(page_bry);		// NOTE: space is converted to + on postback to url; decode
 		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 	if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);	if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
-		Xoa_ttl wdata_ttl = Xoa_ttl.parse_(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
+		Xoa_ttl wdata_ttl = Xoa_ttl.parse(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
 		Wdata_doc doc = wdata_mgr.Pages_get(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();
 		Xoae_page qid_page = wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (qid_page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}

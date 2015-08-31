@@ -51,7 +51,7 @@ public class Xow_lang_mgr_fxt {
 	Xoae_app app;
 	public void tst(String raw, String expd) {
 		Xop_ctx ctx = wiki.Ctx();
-		ctx.Cur_page().Ttl_(Xoa_ttl.parse_(wiki, Bry_.new_a7("test_page")));
+		ctx.Cur_page().Ttl_(Xoa_ttl.parse(wiki, Bry_.new_a7("test_page")));
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(raw_bry);

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.metas.updates.*; import gplx.dbs.metas.*;
 import gplx.xowa.files.caches.*;
-import gplx.xowa.users.bmks.*;
+import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_mgr {
 	private final Xoa_app app;
 	private final Xoud_id_mgr id_mgr;
@@ -41,6 +41,7 @@ public class Xou_db_mgr {
 		this.cache_mgr = new Xou_cache_mgr(app.Wiki_mgri(), app.Fsys_mgr().File_dir(), db_file);
 		this.xfer_itm_finder = new Xou_file_itm_finder(cache_mgr);
 		this.bmk_mgr.Conn_(conn, created);
+		// this.history_mgr.Conn_(conn, created);
 		if (drd) {
 			cfg_mgr.Conn_(conn, created);
 			site_mgr.Conn_(conn, created);

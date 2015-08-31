@@ -293,7 +293,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		txt_box.setSelectionStart(0); txt_box.setSelectionEnd(0); // else selects whole text and scrolls to end of selection
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if (ctx.Match(k, GxwElem_lang.AlignH_cmd))  AlignH_(GfuiAlign_.cast_(m.CastObj("v")));
+		if (ctx.Match(k, GxwElem_lang.AlignH_cmd))  AlignH_(GfuiAlign_.cast(m.CastObj("v")));
 		return txt_box.Invk(ctx, ikey, k, m);
 	}
 }

@@ -31,9 +31,9 @@ public class Xof_xfer_itm_tst {
 	@Test  public void Explicit_ratio_small()		{tst_Calc_view("120,80"	, "200,100"	, "120,60");}		// see NOTE_1:view ratio > file ratio
 	private void tst_Calc_view(String lnki_str, String file_str, String expd_str) {
 		Int_2_ref rv = new Int_2_ref();
-		Int_2_val lnki = Int_2_val.parse_(lnki_str);
-		Int_2_val file = Int_2_val.parse_(file_str);
-		Int_2_val expd = Int_2_val.parse_(expd_str);
+		Int_2_val lnki = Int_2_val.parse(lnki_str);
+		Int_2_val file = Int_2_val.parse(file_str);
+		Int_2_val expd = Int_2_val.parse(expd_str);
 		Xof_xfer_itm_.Calc_view(rv, Xop_lnki_type.Id_thumb, lnki.Val_0(), lnki.Val_1(), file.Val_0(), file.Val_1(), true);
 		Tfds.Eq(expd.Val_0(), rv.Val_0());
 		Tfds.Eq(expd.Val_1(), rv.Val_1());

@@ -111,7 +111,7 @@ public class GfuiMenuBar implements GfoInvkAble {
 		String keyChar = String_.MidByLen(text, pos + 1, 1);
 		if (!Char_.IsLetterEnglish(String_.CharAt(keyChar, 0))) return ipt;	// keyChar is not a character; EX: 'A & B' (keyChar = space)
 		String keyCharRaw = "key." + String_.Lower(keyChar);
-		ipt = IptKey_.parse_(keyCharRaw);
+		ipt = IptKey_.parse(keyCharRaw);
 		text = String_.MidByLen(text, 0, pos) + String_.Mid(text, pos + 1);	// remove mnemPrefix; ex: &File -> File && key.f
 		itm.Text_(text);
 		return ipt;
@@ -241,7 +241,7 @@ class GfuiMenuBarItmType {
 	public int Val() {return val;} int val;
 	public String Name() {return name;} private String name;
 	GfuiMenuBarItmType(int v, String n) {val = v; name = n; regy.Add(n, this);}
-	public static GfuiMenuBarItmType parse_(String raw) {
+	public static GfuiMenuBarItmType parse(String raw) {
 		try {return (GfuiMenuBarItmType)regy.Get_by(raw);}
 		catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("GfuiMenuBarItmType", raw);}
 	}

@@ -41,7 +41,7 @@ class Luaj_value_ {
 			KeyVal kv = null;
 			if (itm_val.type() == LuaValue.TFUNCTION) {			// function is converted to Scrib_lua_proc
 				String func_key = itm_key.tojstring();
-				int func_id = Int_.cast_(itm_val_obj);
+				int func_id = Int_.cast(itm_val_obj);
 				Scrib_lua_proc lua_func = new Scrib_lua_proc(func_key, func_id);
 				if (itm_key.type() == LuaValue.TSTRING)			// most functions are named
 					kv = KeyVal_.new_(func_key, lua_func);
@@ -103,11 +103,11 @@ class Luaj_value_ {
 			KeyVal itm = ary[i];
 			LuaValue itm_val = X_obj_to_val(server, itm.Val());
 			switch (itm.Key_tid()) {
-				case KeyVal_.Key_tid_int:
-					rv.set(Int_.cast_(itm.Key_as_obj()), itm_val);
+				case Type_adp_.Tid__int:
+					rv.set(Int_.cast(itm.Key_as_obj()), itm_val);
 					break;
-				case KeyVal_.Key_tid_str:
-				case KeyVal_.Key_tid_obj:
+				case Type_adp_.Tid__str:
+				case Type_adp_.Tid__obj:
 					rv.set(itm.Key(), itm_val);
 					break;
 			}				

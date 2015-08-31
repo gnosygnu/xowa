@@ -268,7 +268,7 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.cast_(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(Bool_.cast(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
 		underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	@gplx.Virtual public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
@@ -279,7 +279,7 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.cast_(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(Bool_.cast(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	@gplx.Virtual public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.control_();}

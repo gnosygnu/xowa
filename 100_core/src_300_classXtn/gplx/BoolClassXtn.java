@@ -21,7 +21,7 @@ public class BoolClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}
 	@Override public Class<?> UnderClass()					{return boolean.class;}
 	public Object DefaultValue()								{return false;}
-	public boolean Eq(Object lhs, Object rhs) {try {return Bool_.cast_(lhs) == Bool_.cast_(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return Bool_.cast(lhs) == Bool_.cast(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object ParseOrNull(String raw)				{
 		if	(	String_.Eq(raw, "true")
 			||	String_.Eq(raw, "True")	// needed for Store_Wtr() {boolVal.toString();}

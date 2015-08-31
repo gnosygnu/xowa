@@ -31,7 +31,7 @@ class Xof_img_wkr_query_img_size_imageMagick implements Xof_img_wkr_query_img_si
 		int pos_bgn = String_.FindFwd(size_str, "<{", 0);		if (pos_bgn == String_.Find_none) return SizeAdp_.Zero; // NOTE: RE: "FindFwd(,0)"; multiple frames are possible; 1st frame must be used as last frame is not accurate; EX:w.Chess:[[File:ChessCastlingMovie.gif|thumb|250px]]
 		int pos_end = String_.FindFwd(size_str, "}>", pos_bgn); if (pos_end == String_.Find_none) return SizeAdp_.Zero;
 		size_str = String_.Mid(size_str, pos_bgn + Marker_bgn_len, pos_end);
-		return SizeAdp_.parse_or_(size_str, SizeAdp_.Zero);
+		return SizeAdp_.parse_or(size_str, SizeAdp_.Zero);
 	}
 	static final String Marker_bgn = "<{", Marker_end = "}>"; static final int Marker_bgn_len = String_.Len(Marker_bgn);
 }

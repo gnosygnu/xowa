@@ -231,10 +231,10 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public void Eval(Pxd_parser state) {
 		Pxd_itm[] tkn_ary = state.Tkns();
 		int tkn_idx = this.Ary_idx();
-		if (tkn_idx == 0) state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.MinValue));
+		if (tkn_idx == 0) state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.Min_value));
 		Pxd_itm day_itm = tkn_ary[tkn_idx - 1];
 		if (day_itm.Seg_idx() != DateAdp_.SegIdx_day) {
-			state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.MinValue));
+			state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.Min_value));
 		}
 	}
 	public static final Pxd_itm_day_suffix _ = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
@@ -312,7 +312,7 @@ class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unixtime(ary_idx, this.Seg_idx());}
 	@Override public void Eval(Pxd_parser state) {
 		Pxd_itm[] tkns = state.Tkns();
-		unixtime = Pxd_itm_int_.Read_nearest_as_int_and_skip(state, tkns, this.Ary_idx(), true, Int_.MinValue);
+		unixtime = Pxd_itm_int_.Read_nearest_as_int_and_skip(state, tkns, this.Ary_idx(), true, Int_.Min_value);
 	}
 	@Override public void Time_ini(DateAdpBldr bldr) {
 		DateAdp date = DateAdp_.unixtime_utc_seconds_(unixtime);

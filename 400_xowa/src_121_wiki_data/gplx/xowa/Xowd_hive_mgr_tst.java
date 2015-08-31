@@ -91,7 +91,7 @@ class Xowd_hive_mgr_fxt {
 		return this;
 	}
 //	public void Get(String ttl_str, boolean exists) {
-//		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
+//		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));
 //		Xowd_page_itm row = mgr.Get(ttl.Ns(), ttl.Full_txt());
 //		Tfds.Eq(exists, row != null);
 //	}

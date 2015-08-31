@@ -59,7 +59,7 @@ class Xowc_xtn_pages_fxt {
 	}
 	private void Test_ns_canonical_itm(String name, int expd_ns_id) {
 		Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_a7(name));
-		int actl_ns_id = ns == null ? Int_.MinValue : ns.Id();
+		int actl_ns_id = ns == null ? Int_.Min_value : ns.Id();
 		Tfds.Eq(expd_ns_id, actl_ns_id);
 	}
 }

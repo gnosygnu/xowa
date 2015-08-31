@@ -34,11 +34,11 @@ class IptKeyChain implements IptArg {
 		}
 		key = sb.To_str();
 	}
-	public static IptKeyChain parse_(String raw) {
+	public static IptKeyChain parse(String raw) {
 		String[] itms = String_.Split(raw, ",");
 		IptArg[] rv = new IptArg[itms.length];
 		for (int i = 0; i < rv.length; i++)
-			rv[i] = IptArg_.parse_(String_.Trim(itms[i]));
+			rv[i] = IptArg_.parse(String_.Trim(itms[i]));
 		return new IptKeyChain(rv);
 	}
 }

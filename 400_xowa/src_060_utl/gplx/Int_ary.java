@@ -42,5 +42,27 @@ public class Int_ary {
 		ary[len] = v;
 		++len;
 	}
+	public int Pop_or(int or) {
+		if (len == 0) return or;
+		int rv = ary[len - 1];
+		--len;
+		return rv;
+	}
+	public int Idx_of(int key) {
+		for (int i = len - 1; i > -1; --i) {
+			int val = ary[i];
+			if (val == key) return i;
+		}
+		return -1;
+	}
+	public boolean Del_by_key_from_end(int key) {
+		int key_idx = Idx_of(key); if (key_idx == -1) return false;
+		int last_idx = len - 1;
+		for (int i = key_idx; i < last_idx; ++i)
+			ary[i] = ary[i + 1];
+		ary[last_idx] = 0;
+		--len;
+		return true;
+	}
 	public int Get_at(int i) {return ary[i];}
 }

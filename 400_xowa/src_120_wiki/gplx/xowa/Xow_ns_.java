@@ -30,7 +30,7 @@ public class Xow_ns_ {
 		, Id_help				=  12				, Id_help_talk			=  13
 		, Id_category			=  14				, Id_category_talk		=  15
 		, Id_portal				= 100				, Id_portal_talk		= 101
-	    , Id_null				= Int_.MinValue
+	    , Id_null				= Int_.Min_value
 		;
 	public static final String
 		  Key_media				= "Media"

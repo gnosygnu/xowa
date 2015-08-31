@@ -56,7 +56,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 		public static final Sqlite_engine _ = new Sqlite_engine();
 }
-class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
+class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {
 		try {
 			int val = rdr.getInt(k);
@@ -108,14 +108,14 @@ class Sqlite_rdr extends Db_data_rdr {		@Override public float ReadFloat(String 
 	@Override public boolean ReadBool(String key) {return ReadBoolOr(key, false);}
 	@Override public boolean ReadBoolOr(String key, boolean or) {
 		Object val = Read(key);
-		return val == null ? or : Int_.cast_(val) == 1;
+		return val == null ? or : Int_.cast(val) == 1;
 	}
 	@Override public byte ReadByte(String key) {return ReadByteOr(key, Byte_.Zero);}
 	@Override public byte ReadByteOr(String key, byte or) {
 		Object val = Read(key);
-		return val == null ? or : (byte)Int_.cast_(val);
+		return val == null ? or : (byte)Int_.cast(val);
 	}
-	@Override public long ReadLong(String key) {return ReadLongOr(key, Long_.MinValue);}
+	@Override public long ReadLong(String key) {return ReadLongOr(key, Long_.Min_value);}
 	@Override public long ReadLongOr(String key, long or) {
 		Object val = Read(key);
 		if (val == null) return or;

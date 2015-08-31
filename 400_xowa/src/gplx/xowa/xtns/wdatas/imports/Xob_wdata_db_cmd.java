@@ -152,9 +152,9 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 			for (int j = 0; j < val_grp_len; j++) {
 				Json_itm val_itm = val_grp.Get_at(j);
 				byte[] val = Bry_.Empty;
-				if		(val_itm.Tid() == Json_itm_.Tid_string)
+				if		(val_itm.Tid() == Json_itm_.Tid__str)
 					val = val_itm.Data_bry();
-				else if (val_itm.Tid() == Json_itm_.Tid_kv) {	// EX: q80 and de aliases
+				else if (val_itm.Tid() == Json_itm_.Tid__kv) {	// EX: q80 and de aliases
 					val = ((Json_kv)val_itm).Val().Data_bry();
 				}
 				insert_stmt.Clear()
@@ -205,7 +205,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 			byte[] key = kv.Key().Data_bry();
 			Json_itm kv_val = kv.Val();
 			byte[] val = Bry_.Empty;
-			if (kv_val.Tid() == Json_itm_.Tid_string)
+			if (kv_val.Tid() == Json_itm_.Tid__str)
 				val = kv_val.Data_bry();
 			else {
 				Json_nde val_nde = (Json_nde)kv.Val();

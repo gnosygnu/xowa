@@ -20,11 +20,11 @@ import gplx.core.strings.*; import gplx.core.regxs.*;
 public class RegxPatn_cls_ioMatch_ {
 	public static final String Wildcard			= "*";
 	public static final String OrDelimiter		= "|";
-	public static final RegxPatn_cls_ioMatch All = RegxPatn_cls_ioMatch_.parse_(Wildcard, false);
+	public static final RegxPatn_cls_ioMatch All = RegxPatn_cls_ioMatch_.parse(Wildcard, false);
 	public static final String ImpossiblePath		= "<>";				//"<>" should be an impossible url; NOTE: do not pick * or | or : or \
-	public static final RegxPatn_cls_ioMatch None = RegxPatn_cls_ioMatch_.parse_(RegxPatn_cls_ioMatch_.ImpossiblePath, false);
-	public static RegxPatn_cls_ioMatch cast_(Object obj) {try {return (RegxPatn_cls_ioMatch)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, RegxPatn_cls_ioMatch.class, obj);}}
-	public static RegxPatn_cls_ioMatch parse_(String raw, boolean caseSensitive) {
+	public static final RegxPatn_cls_ioMatch None = RegxPatn_cls_ioMatch_.parse(RegxPatn_cls_ioMatch_.ImpossiblePath, false);
+	public static RegxPatn_cls_ioMatch cast(Object obj) {try {return (RegxPatn_cls_ioMatch)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, RegxPatn_cls_ioMatch.class, obj);}}
+	public static RegxPatn_cls_ioMatch parse(String raw, boolean caseSensitive) {
 		String compiled = RegxPatn_cls_ioMatch_.Compile(raw);
 		return new RegxPatn_cls_ioMatch(raw, compiled, caseSensitive);
 	}

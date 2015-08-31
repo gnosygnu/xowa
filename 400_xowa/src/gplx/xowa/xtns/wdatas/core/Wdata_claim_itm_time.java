@@ -31,7 +31,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 	public byte[] After() {return after;} private final byte[] after;
 	public byte[] Precision() {return precision;} private final byte[] precision;
 	public int Precision_int() {
-		if (precision_int == Int_.MinValue) {
+		if (precision_int == Int_.Min_value) {
 			precision_int = Bry_.To_int_or(precision, -1);
 			if (precision_int == -1) {
 				precision_int = Wdata_date.Fmt_ymdhns;
@@ -39,9 +39,9 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			}
 		}
 		return precision_int;
-	}	private int precision_int = Int_.MinValue;
+	}	private int precision_int = Int_.Min_value;
 	public int Before_int() {
-		if (before_int == Int_.MinValue) {
+		if (before_int == Int_.Min_value) {
 			before_int = Bry_.To_int_or(before, -1);
 			if (before_int == -1) {
 				before_int = 0;
@@ -49,9 +49,9 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			}
 		}
 		return before_int;
-	}	private int before_int = Int_.MinValue;
+	}	private int before_int = Int_.Min_value;
 	public int After_int() {
-		if (after_int == Int_.MinValue) {
+		if (after_int == Int_.Min_value) {
 			after_int = Bry_.To_int_or(after, -1);
 			if (after_int == -1) {
 				after_int = 0;
@@ -59,7 +59,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			}
 		}
 		return after_int;
-	}	private int after_int = Int_.MinValue;
+	}	private int after_int = Int_.Min_value;
 	public byte[] Calendar() {return calendar;} private final byte[] calendar;
 	public byte[] Calendar_ttl() {return calendar_ttl;} public void Calendar_ttl_(byte[] v) {calendar_ttl = v;} private byte[] calendar_ttl;
 	public boolean Calendar_is_julian() {return Bry_.Eq(calendar, Calendar_julian);}

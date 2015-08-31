@@ -57,7 +57,7 @@ class Sites_html_bldr_fxt {
 	}
 	private void Init_regy_mgr(String... ary) {xtn_mgr.Regy_mgr().Set_many(ary);}
 	public void Init_ttl(String lnki_ttl) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(lnki_ttl));
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(lnki_ttl));
 		xtn_mgr.Regy_mgr().Match(page, ttl);
 	}
 	public void Test_bld(String expd) {

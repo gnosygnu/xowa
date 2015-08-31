@@ -40,8 +40,8 @@ class Meta_parser__fld_fxt {
 	private final Meta_parser__fld fld_parser = new Meta_parser__fld();
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	public void Clear() {}
-	public Meta_type_itm Make_type(int tid_ansi) {return new Meta_type_itm(tid_ansi, -1, null, Int_.MinValue, Int_.MinValue);}
-	public Meta_type_itm Make_type(int tid_ansi, int len_1) {return new Meta_type_itm(tid_ansi, -1, null, len_1, Int_.MinValue);}
+	public Meta_type_itm Make_type(int tid_ansi) {return new Meta_type_itm(tid_ansi, -1, null, Int_.Min_value, Int_.Min_value);}
+	public Meta_type_itm Make_type(int tid_ansi, int len_1) {return new Meta_type_itm(tid_ansi, -1, null, len_1, Int_.Min_value);}
 	public Meta_type_itm Make_type(int tid_ansi, int len_1, int len_2) {return new Meta_type_itm(tid_ansi, -1, null, len_1, len_2);}
 	public Meta_fld_itm Make_fld(String name, int tid_ansi, int nullable) {return Make_fld(name, tid_ansi, nullable, false, false, null);}
 	public Meta_fld_itm Make_fld(String name, int tid_ansi, int nullable, boolean autonumber, boolean primary_key) {return Make_fld(name, tid_ansi, nullable, false, false, null);}

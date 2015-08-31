@@ -53,7 +53,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		int dif = max / 2;
 		int pos = dif;
 		Xoctg_idx_itm rv = null;
-		int comp_prv = Int_.MinValue, comp_cur = 0;
+		int comp_prv = Int_.Min_value, comp_cur = 0;
 		while (true) {
 			rv = (Xoctg_idx_itm)itms.Get_at(pos);
 			comp_cur = Bry_.Compare(find, rv.Sortkey());
@@ -80,7 +80,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		*/
 		boolean dir_fwd = bmk_comp == CompareAble_.More;		// bmk is > than find; move forward			
 		fld_rdr.Data_(src);
-		int comp_prv = bmk_comp, comp_cur = Int_.MinValue; int pos_cur = bmk_bgn;
+		int comp_prv = bmk_comp, comp_cur = Int_.Min_value; int pos_cur = bmk_bgn;
 		tmp_prv_itm.Parse(fld_rdr.Pos_(pos_cur), pos_cur);	// fill prv_itm to whatever binary search found
 		while (true) {
 			int itm_bgn = dir_fwd ? Bry_finder.Find_fwd(src, Byte_ascii.Pipe, pos_cur, src_len) : Bry_finder.Find_bwd(src, Byte_ascii.Pipe, pos_cur);

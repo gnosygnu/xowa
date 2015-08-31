@@ -58,8 +58,8 @@ class StatRng_fxt {
 }
 class StatRng {
 //		public String Key;
-	public int Lo = Int_.MaxValue;
-	public int Hi = Int_.MinValue;
+	public int Lo = Int_.Max_value;
+	public int Hi = Int_.Min_value;
 	public long Sum = 0;
 	public int Count = 0;
 	public float Avg() {return Sum  / Count;}
@@ -73,21 +73,21 @@ class StatRng {
 	public int Slot_ary_len;
 	public StatRng(int lo_ary_len, int hi_ary_len, int... slot_hi_ary) {
 		this.Lo_ary_len = lo_ary_len;
-		this.Lo_ary_bound = Int_.MaxValue;
-		this.Lo_ary = NewBoundAry(lo_ary_len, Int_.MaxValue);		
+		this.Lo_ary_bound = Int_.Max_value;
+		this.Lo_ary = NewBoundAry(lo_ary_len, Int_.Max_value);		
 		this.Hi_ary_len = hi_ary_len;
-		this.Hi_ary_bound = Int_.MinValue;
-		this.Hi_ary = NewBoundAry(hi_ary_len, Int_.MinValue);
+		this.Hi_ary_bound = Int_.Min_value;
+		this.Hi_ary = NewBoundAry(hi_ary_len, Int_.Min_value);
 		if (slot_hi_ary != null && slot_hi_ary.length > 0) {
 			Slot_ary_len = slot_hi_ary.length + 1; // + 1 to hold max value
 			Slot_ary = new StatRng[Slot_ary_len];
-			int slot_lo = Int_.MinValue;
+			int slot_lo = Int_.Min_value;
 			for (int i = 0; i < Slot_ary_len - 1; i++) {
 				int slot_hi = slot_hi_ary[i];
 				Slot_ary[i] = NewSlot(slot_lo, slot_hi);
 				slot_lo = slot_hi;
 			}
-			Slot_ary[Slot_ary_len - 1] = NewSlot(slot_lo, Int_.MaxValue);
+			Slot_ary[Slot_ary_len - 1] = NewSlot(slot_lo, Int_.Max_value);
 		}
 	}
 	public void Assign(Object key, int val) {
@@ -104,10 +104,10 @@ class StatRng {
 			}
 		}
 		if (val < Lo_ary_bound) {
-			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAble_.More, Int_.MinValue, key, val);
+			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAble_.More, Int_.Min_value, key, val);
 		} 
 		if (val > Hi_ary_bound) {
-			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAble_.Less, Int_.MaxValue, key, val);
+			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAble_.Less, Int_.Max_value, key, val);
 		} 
 	}
 	int CalcCutoff(StatItm[] ary, int comp, int bgn_bound, Object key, int val) {

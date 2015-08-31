@@ -54,7 +54,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 	}
 	private boolean Search_by_all_pages_v2() {
 		rslts_2.Clear();
-		Xoa_ttl search_ttl = Xoa_ttl.parse_(wiki, search_bry); if (search_ttl == null) return false;
+		Xoa_ttl search_ttl = Xoa_ttl.parse(wiki, search_bry); if (search_ttl == null) return false;
 		byte[] search_ttl_bry = search_ttl.Page_db();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_search_suggest(this, rslts_2, search_ttl.Ns(), search_ttl_bry, max_results, all_pages_min, all_pages_extend, true, false);
 		return true;
@@ -63,7 +63,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 		rslts_2.Clear();
 		Xowd_page_itm rslt_nxt = new Xowd_page_itm();
 		Xowd_page_itm rslt_prv = new Xowd_page_itm();
-		Xoa_ttl search_ttl = Xoa_ttl.parse_(wiki, search_bry); if (search_ttl == null) return false;
+		Xoa_ttl search_ttl = Xoa_ttl.parse(wiki, search_bry); if (search_ttl == null) return false;
 		byte[] search_ttl_bry = search_ttl.Page_db();
 		List_adp page_list = List_adp_.new_();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(this, page_list, rslt_nxt, rslt_prv, Int_obj_ref.zero_(), wiki.Ns_mgr().Ns_main(), search_ttl_bry, max_results, all_pages_min, all_pages_extend, true, false);

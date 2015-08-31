@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xowc_xtn_pages implements GfoInvkAble {
 	public boolean Init_needed()		{return init_needed;}			private boolean init_needed = true;
-	public int Ns_page_id()			{return ns_page_id;}			private int ns_page_id = Int_.MinValue;
-	public int Ns_page_talk_id()	{return ns_page_talk_id;}		private int ns_page_talk_id = Int_.MinValue;
-	public int Ns_index_id()		{return ns_index_id;}			private int ns_index_id = Int_.MinValue;
-	public int Ns_index_talk_id()	{return ns_index_talk_id;}		private int ns_index_talk_id = Int_.MinValue;
+	public int Ns_page_id()			{return ns_page_id;}			private int ns_page_id = Int_.Min_value;
+	public int Ns_page_talk_id()	{return ns_page_talk_id;}		private int ns_page_talk_id = Int_.Min_value;
+	public int Ns_index_id()		{return ns_index_id;}			private int ns_index_id = Int_.Min_value;
+	public int Ns_index_talk_id()	{return ns_index_talk_id;}		private int ns_index_talk_id = Int_.Min_value;
 	public void Ns_names_(byte[] page_name, byte[] page_talk_name, byte[] index_name, byte[] index_talk_name) {
 		this.page_name = page_name; this.page_talk_name = page_talk_name; this.index_name = index_name; this.index_talk_name = index_talk_name;
 	}	
@@ -31,7 +31,7 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 	, index_name		= Default_ns_index_name
 	, index_talk_name	= Default_ns_index_talk_name;
 	public void Reset() {
-		ns_page_id = ns_page_talk_id = ns_index_id = ns_index_talk_id = Int_.MinValue;
+		ns_page_id = ns_page_talk_id = ns_index_id = ns_index_talk_id = Int_.Min_value;
 		init_needed = true;
 	}
 	public void Init(Xow_ns_mgr ns_mgr) {

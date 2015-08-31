@@ -22,8 +22,8 @@ public class Xoh_js_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_js_cbk_fxt fxt = new Xoh_js_cbk_fxt();
 	@Test   public void Get_title() {
 		fxt.Fxt().Init_page_create("exists");
-		fxt.Test_get_title("exists", "1" , "0" , Int_.Xto_str(Int_.MinValue), "Exists", "false", "0001-01-01 00:00:00", "0");
-		fxt.Test_get_title("absent", "0", "-1", Int_.Xto_str(Int_.MinValue), null	, "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("exists", "1" , "0" , Int_.Xto_str(Int_.Min_value), "Exists", "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("absent", "0", "-1", Int_.Xto_str(Int_.Min_value), null	, "false", "0001-01-01 00:00:00", "0");
 	}
 }
 class Xoh_js_cbk_fxt {
@@ -35,7 +35,7 @@ class Xoh_js_cbk_fxt {
 	public void Test_get_title(String ttl, Object... expd) {
 		Xoae_app app = fxt.App();
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7("mock_page")));
+		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse(wiki, Bry_.new_a7("mock_page")));
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab();
 		tab.Page_(page);
 		Xoh_js_cbk exec = tab.Html_itm().Js_cbk();

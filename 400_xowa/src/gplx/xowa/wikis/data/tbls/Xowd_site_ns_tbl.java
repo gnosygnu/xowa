@@ -70,7 +70,7 @@ public class Xowd_site_ns_tbl {
 				.Crt_int(fld_id, ns_id)
 				.Exec_select__rls_auto();
 		try {
-			return rdr.Move_next() ? Int_.cast_(rdr.Read_int(fld_count)) : 0;
+			return rdr.Move_next() ? Int_.cast(rdr.Read_int(fld_count)) : 0;
 		}	finally {rdr.Rls();}
 	}
 	public void Update_ns_count(int ns_id, int ns_count) {

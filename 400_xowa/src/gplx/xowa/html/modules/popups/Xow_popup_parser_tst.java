@@ -497,7 +497,7 @@ class Xop_popup_parser_fxt {
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
 	public void Test_parse(String raw, String ttl, String expd)	{
-		Xoae_page page = Xoae_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7(ttl)));
+		Xoae_page page = Xoae_page.create_(wiki, Xoa_ttl.parse(wiki, Bry_.new_a7(ttl)));
 		page.Data_raw_(Bry_.new_u8(raw));
 		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_u8(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());

@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class Xob_stat_itm implements NewAble {
 	public String Ns() {return ns;} private String ns;
 	public int  Fils;
-	public long Size, SizeMax = Int_.MinValue, SizeMin = Int_.MaxValue;
+	public long Size, SizeMax = Int_.Min_value, SizeMin = Int_.Max_value;
 	public int SizeMaxIdx, SizeMinIdx;
 	public void Tally(long size, int idx) {
 		Fils++;

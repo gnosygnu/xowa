@@ -26,7 +26,7 @@ public class Xoa_fmtr_itm implements GfoInvkAble {
 	}
 	public String Run() {
 		GfoInvkAble src_invk = (GfoInvkAble)app.Gfs_mgr().Run_str(src);
-		int len = Int_.cast_(GfoInvkAble_.InvkCmd(src_invk, Invk_len));
+		int len = Int_.cast(GfoInvkAble_.InvkCmd(src_invk, Invk_len));
 		Bry_bfr bfr = Bry_bfr.new_();
 		Bfmtr_eval_invk eval_mgr = new Bfmtr_eval_invk(app);
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(fmt).Eval_mgr_(eval_mgr);  

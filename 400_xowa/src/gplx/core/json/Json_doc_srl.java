@@ -61,10 +61,10 @@ public class Json_doc_srl {
 	private void Write_indent() {if (ws_enabled && indent > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent);}
 	private void Write_str(byte[] v) {
 		if (v == null)
-			bfr.Add(Bry_null);
+			bfr.Add(Object_.Bry__null);
 		else
 			bfr.Add_byte(Byte_ascii.Quote).Add(v).Add_byte(Byte_ascii.Quote);
-	}	private static final byte[] Bry_null = Bry_.new_a7("null");
+	}
 	private void Write_comma(boolean comma) {
 		if (comma)
 			bfr.Add_byte(Byte_ascii.Comma);

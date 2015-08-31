@@ -28,7 +28,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		if (wikis == null)			wikis = Xow_wmf_api_mgr.Wikis;
 		if (db_url == null)			db_url = bldr.App().Fsys_mgr().Cfg_site_meta_fil();
 		if (cutoff_time == null)	cutoff_time = DateAdp_.Now().Add_day(-1);
-		Site_meta_itm.Build_site_meta(bldr.App().Wmf_mgr(), db_url, wikis, cutoff_time);
+		Site_meta_itm.Build_site_meta(bldr.App().Utl__json_parser(), bldr.App().Wmf_mgr(), db_url, wikis, cutoff_time);
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

@@ -30,6 +30,7 @@ class Mwm_tkn__root implements Mwm_tkn {
 	public int Uid() {return Mwm_tkn_.Uid__root;}
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
+	public void Src_end_(int v) {this.src_end = v;}
 	public Mwm_tkn Init(Mwm_tkn__root root, int tid, int uid, int src_bgn, int src_end) {throw Err_.new_unsupported();}
 	public Mwm_tkn Init_as_root(int src_bgn, int src_end) {
 		this.src_bgn = src_bgn; this.src_end = src_end;
@@ -64,10 +65,22 @@ class Mwm_tkn__root implements Mwm_tkn {
 		Mwm_tkn rv = root_reg.Get_at(tkn_mkr, uid);
 		return rv == null ? root_ary.Get_at(uid) : rv;
 	}
-	public void Regy__move(Mwm_tkn new_owner, Mwm_tkn sub) {
-//			int cur_owner_id = root_reg.Get_owner_id(sub.Uid());
-//			Mwm_tkn cur_owner = Regy__get_tkn(cur_owner_id);
-//			root_reg.Change_owner(cur_owner, new_owner);
+	public void Regy__move(int new_owner_uid, int cur_uid) {
+		int old_owner_uid = root_reg.Update_owner_id(cur_uid, new_owner_uid);
+		if (!root_sub.Del_by_key_from_end(old_owner_uid, cur_uid)) throw Err_.new_("mwm.parse", "unable to find sub in owner", "old_owner_uid", old_owner_uid, "new_owner_uid", new_owner_uid, "cur_uid", cur_uid);
+		root_sub.Add(new_owner_uid, cur_uid);
 	}
-	public void Regy__update_end(int uid, int end) {}
+	public void Regy__move_to_end(int src_uid, int trg_uid) {
+		Int_ary subs_ary = root_sub.Get_at(Mwm_tkn_.Uid__root);
+		int bgn_idx = subs_ary.Idx_of(src_uid);
+		int subs_len = subs_ary.Len();
+		for (int i = bgn_idx + 1; i < subs_len; ++i) {
+			int sub_uid = subs_ary.Get_at(i);
+			Regy__move(trg_uid, sub_uid);
+		}
+	}
+	public void Regy__update_end(int uid, int end) {
+		if (root_reg.Update_end(uid, end))
+			root_ary.Update_end(uid, end);
+	}
 }

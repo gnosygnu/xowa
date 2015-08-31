@@ -86,7 +86,7 @@ class Xocfg_meta_itm_bool extends Xocfg_meta_itm_base {
 }
 class Xocfg_meta_itm_int extends Xocfg_meta_itm_base {
 	public Xocfg_meta_itm_int(String prop_key, int prop_dflt) {this.Set(Xodfg_pref_itm_type_.Tid_int, prop_key, prop_dflt);}
-	public Xocfg_meta_itm_int Rng_bgn_(int bgn) {return Rng_(bgn, Int_.MaxValue);}
+	public Xocfg_meta_itm_int Rng_bgn_(int bgn) {return Rng_(bgn, Int_.Max_value);}
 	public Xocfg_meta_itm_int Rng_(int bgn, int end) {
 		return this;
 	}

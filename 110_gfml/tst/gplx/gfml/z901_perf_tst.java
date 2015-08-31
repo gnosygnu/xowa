@@ -29,7 +29,7 @@ public class z901_perf_tst {
 //			sbXml.Add(longText);
 //			sbXml.Add("/>");
 //			tmr.Bgn();
-//			gplx.xmls.XmlDoc_.parse_(sbXml.To_str());
+//			gplx.xmls.XmlDoc_.parse(sbXml.To_str());
 //			tmr.End_and_print("xml");	// 400
 
 		String_bldr sbGfml = String_bldr_.new_();

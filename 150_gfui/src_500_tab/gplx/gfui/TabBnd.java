@@ -39,7 +39,7 @@ class TabBoxEvt_tabSelectByBtn {
 }
 class TabBnd_selectTab implements InjectAble, GfoInvkAble {
 	public void Inject(Object obj) {
-		tabBox = TabBox_.cast_(obj);
+		tabBox = TabBox_.cast(obj);
 		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectNext_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Tab), IptKey_.add_(IptKey_.Ctrl, IptKey_.PageDown));
 		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectPrev_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Tab, IptKey_.Shift), IptKey_.add_(IptKey_.Ctrl, IptKey_.PageUp));
 	}
@@ -59,7 +59,7 @@ class TabBnd_selectTab implements InjectAble, GfoInvkAble {
 }
 class TabBnd_reorderTab implements InjectAble, GfoInvkAble {
 	public void Inject(Object owner) {
-		GfuiBtn btn = GfuiBtn_.cast_(owner);
+		GfuiBtn btn = GfuiBtn_.cast(owner);
 		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MovePrev_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Left));
 		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MoveNext_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Right));
 	}
@@ -75,8 +75,8 @@ class TabBnd_reorderTab implements InjectAble, GfoInvkAble {
 		TabBoxEvt_orderChanged.Publish(tabBox, curIdx, newIdx);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, MoveNext_cmd))			MoveTab(GfuiBtn_.cast_(ctx.MsgSrc()),  1);
-		else if	(ctx.Match(k, MovePrev_cmd))			MoveTab(GfuiBtn_.cast_(ctx.MsgSrc()), -1);
+		if		(ctx.Match(k, MoveNext_cmd))			MoveTab(GfuiBtn_.cast(ctx.MsgSrc()),  1);
+		else if	(ctx.Match(k, MovePrev_cmd))			MoveTab(GfuiBtn_.cast(ctx.MsgSrc()), -1);
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	public static final String MoveNext_cmd = "MoveNext", MovePrev_cmd = "MovePrev";

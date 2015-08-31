@@ -74,12 +74,12 @@ public class RegxPatn_cls_like_tst {
 	}
 	void tst_Match(String raw, String regx, boolean expd) {tst_Match(raw, regx, RegxPatn_cls_like.EscapeDefault, expd);}
 	void tst_Match(String raw, String regx, char escape, boolean expd) {
-		RegxPatn_cls_like like = RegxPatn_cls_like_.parse_(regx, escape);
+		RegxPatn_cls_like like = RegxPatn_cls_like_.parse(regx, escape);
 		boolean actl = like.Matches(raw);
 		Tfds.Eq(expd, actl, "raw={0} regx={1} expd={2}", raw, regx, expd);
 	}
 	void tst_EscapeRegxChar(char regexChar) {
-		RegxPatn_cls_like like = RegxPatn_cls_like_.parse_(Object_.Xto_str_strict_or_empty(regexChar), '|');
+		RegxPatn_cls_like like = RegxPatn_cls_like_.parse(Object_.Xto_str_strict_or_empty(regexChar), '|');
 		Tfds.Eq(true, like.Matches(Object_.Xto_str_strict_or_empty(regexChar)));
 		Tfds.Eq(false, like.Matches("a"));				// catches errors for improper escaping of wildcard
 	}

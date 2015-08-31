@@ -45,7 +45,7 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	}
 	public Io_stream_rdr Get_to_fsys_near(Xof_fsdb_itm rv, byte[] orig_repo, byte[] orig_ttl, Xof_ext orig_ext, double lnki_time, int lnki_page) {
 		Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
-		thm_itm.Init_by_req(Int_.MaxValue, lnki_time, lnki_page);
+		thm_itm.Init_by_req(Int_.Max_value, lnki_time, lnki_page);
 		boolean found = Select_thm_bin(Bool_.N, thm_itm, orig_repo, orig_ttl);
 		if (found) {
 			tmp_ids.Init_by_thm(found, thm_itm);

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import org.junit.*;
 public class ScreenAdp_tst {
-	@Test  public void parse_() {
-		ScreenAdp actl = ScreenAdp_.parse_("{screen{0}");
+	@Test  public void parse() {
+		ScreenAdp actl = ScreenAdp_.parse("{screen{0}");
 		Tfds.Eq(0, actl.Index());
 	}
 	@Test  public void opposite_() {

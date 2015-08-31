@@ -57,7 +57,7 @@ abstract class Json_parser__base {
 	public boolean Kv__mw_bool(Json_kv[] ary, int i)	{
 		Json_kv kv = ary[i]; if (kv == null) return false;
 		Json_itm val = kv.Val();
-		if (	val.Tid() == Json_itm_.Tid_string
+		if (	val.Tid() == Json_itm_.Tid__str
 			&&	Bry_.Len_eq_0(val.Data_bry())) {
 			return true;
 		}
@@ -78,12 +78,12 @@ class Json_parser__list_nde__base extends Json_parser__base {
 		int len = grp.Len();
 		for (int i = 0; i < len; ++i) {
 			Json_nde sub = null;
-			if (grp.Tid() == Json_itm_.Tid_nde) {
-				Json_kv kv = Json_nde.cast_(grp).Get_at_as_kv(i);
+			if (grp.Tid() == Json_itm_.Tid__nde) {
+				Json_kv kv = Json_nde.cast(grp).Get_at_as_kv(i);
 				sub = kv.Val_as_nde();
 			}
 			else {
-				sub = Json_nde.cast_(grp.Get_at(i));
+				sub = Json_nde.cast(grp.Get_at(i));
 			}
 			Parse_nde(context, sub);
 		}
@@ -318,7 +318,7 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 		Json_kv subscribers_kv = atrs[1];
 		byte[] scribunto = Bry_.Empty;
 		byte[][] subscribers_bry_ary = Bry_.Ary_empty;
-		if (subscribers_kv.Val().Tid() == Json_itm_.Tid_array)
+		if (subscribers_kv.Val().Tid() == Json_itm_.Tid__ary)
 			subscribers_bry_ary = Kv__bry_ary(atrs, 1);
 		else {
 			Json_nde subscribers_nde = subscribers_kv.Val_as_nde();

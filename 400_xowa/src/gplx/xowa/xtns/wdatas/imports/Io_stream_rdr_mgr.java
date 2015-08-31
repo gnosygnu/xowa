@@ -42,7 +42,7 @@ class Io_stream_rdr_mgr {
 		int match_ary_len = filter_ary.length;
 		Criteria_ioMatch[] match_ary = new Criteria_ioMatch[match_ary_len];
 		for (int i = 0; i < match_ary_len; ++i)
-			match_ary[i] = Criteria_ioMatch.parse_(true, filter_ary[i], dir.Info().CaseSensitive());
+			match_ary[i] = Criteria_ioMatch.parse(true, filter_ary[i], dir.Info().CaseSensitive());
 
 		// get files and check each file for match
 		IoItmFil rv = null;

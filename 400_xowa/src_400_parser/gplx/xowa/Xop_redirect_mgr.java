@@ -47,7 +47,7 @@ public class Xop_redirect_mgr {
 		if (ttl_end == Bry_.NotFound)	return Redirect_null_ttl;
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
-		return Xoa_ttl.parse_(wiki, redirect_bry);
+		return Xoa_ttl.parse(wiki, redirect_bry);
 	}
 	public static final Xoa_ttl Extract_redirect_is_null = null;
 	public static final int Redirect_max_allowed = 4;

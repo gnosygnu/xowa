@@ -37,7 +37,8 @@ public class Hiero_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 				ctx.Para().Process_nl(ctx, root, src, xnde.Tag_close_end(), xnde.Tag_close_end());	// NOTE: this should create an extra stub "p" so that remaining text gets enclosed in <p>; EX:w:Hieroglyphics;
 				break;
 		}
-	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
+	}
+	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		xtn_mgr.Html_wtr().Render_blocks(bfr, hctx, blocks, Hiero_html_mgr.scale, false);
 	}

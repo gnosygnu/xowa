@@ -62,7 +62,7 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	public String Node_OuterXml() {return nde.Xml_outer();}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new XmlDataRdr();}
 	void LoadString(String raw) {
-		XmlDoc xdoc = XmlDoc_.parse_(raw);
+		XmlDoc xdoc = XmlDoc_.parse(raw);
 		XmlNdeList list = Xpath_.SelectElements(xdoc.Root());
 		ctor_(list, xdoc.Root());
 	}

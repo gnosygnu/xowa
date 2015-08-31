@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class RlsAble_ {
 	public static RlsAble as_(Object obj) {return obj instanceof RlsAble ? (RlsAble)obj : null;}
-	public static RlsAble cast_(Object obj) {try {return (RlsAble)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, RlsAble.class, obj);}}
+	public static RlsAble cast(Object obj) {try {return (RlsAble)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, RlsAble.class, obj);}}
 	public static final RlsAble Null = new RlsAble__noop();
 }
 class RlsAble__noop implements RlsAble {

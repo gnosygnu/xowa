@@ -40,7 +40,7 @@ public class Math_ {
 	public static float	Abs(float val)	{return val > 0 ? val : val * -1;}
 	public static double Abs_double(double val)	{return val > 0 ? val : val * -1;}
 	public static int	Log10(int val) {
-		if (val <= 0) return Int_.MinValue;
+		if (val <= 0) return Int_.Min_value;
 		int rv = -1, baseVal = 10;
 		while (val != 0) {
 			val = (val / baseVal);

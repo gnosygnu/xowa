@@ -42,7 +42,7 @@ class Xodb_upgrade_mgr {
 //				KeyVal kv = kv_ary[i];
 //				String kv_key = kv.Key();
 //				if (String_.Eq(kv_key, gfs_data_storage_format)) {
-//					byte data_storage_format_byte = Byte_.parse_(kv.Val_to_str_or_empty());
+//					byte data_storage_format_byte = Byte_.parse(kv.Val_to_str_or_empty());
 //					String data_storage_format_name = Xoi_dump_mgr.Wtr_tid_to_str(data_storage_format_byte);
 //					kv.Val_(data_storage_format_name);	// update memory
 //					db_mgr.Tbl_xowa_cfg().Update(Xodb_mgr_sql.Grp__wiki_init, gfs_data_storage_format, data_storage_format_name); // update_database

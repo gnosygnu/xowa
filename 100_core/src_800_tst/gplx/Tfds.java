@@ -19,6 +19,7 @@ package gplx;
 import gplx.core.strings.*; import gplx.core.consoles.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
+	public static void Eq_bool	(boolean expd	, boolean   actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
 	public static void Eq_bool	(boolean expd	, boolean   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 	public static void Eq_byte	(byte expd	, byte   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 	public static void Eq_int	(int  expd	, int    actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}

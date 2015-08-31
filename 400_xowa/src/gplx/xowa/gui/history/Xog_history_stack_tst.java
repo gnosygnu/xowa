@@ -71,7 +71,7 @@ class Xog_history_stack_fxt {
 	}
 	public Xog_history_stack_fxt Exec_add_one(String ttl_str, String arg_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		byte[] url_bry = ttl_bry;
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));			

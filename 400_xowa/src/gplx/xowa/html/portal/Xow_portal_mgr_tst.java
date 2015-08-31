@@ -40,7 +40,7 @@ class Xowh_portal_mgr_fxt {
 		}
 	}	private Xoae_app app; Xowe_wiki wiki;
 	public void Test_div_ns_bry(String ttl, String expd) {
-		Tfds.Eq(expd, String_.new_a7(wiki.Html_mgr().Portal_mgr().Div_ns_bry(wiki.Utl__bfr_mkr(), Xoa_ttl.parse_(wiki, Bry_.new_a7(ttl)), wiki.Ns_mgr())));
+		Tfds.Eq(expd, String_.new_a7(wiki.Html_mgr().Portal_mgr().Div_ns_bry(wiki.Utl__bfr_mkr(), Xoa_ttl.parse(wiki, Bry_.new_a7(ttl)), wiki.Ns_mgr())));
 	}
 	public void Test_div_personal_bry(String expd) {
 		Tfds.Eq(expd, String_.new_a7(wiki.Html_mgr().Portal_mgr().Div_personal_bry()));

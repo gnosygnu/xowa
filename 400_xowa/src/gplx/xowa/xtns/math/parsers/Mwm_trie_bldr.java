@@ -23,6 +23,9 @@ class Mwm_trie_bldr {
 		rv.Add(" "		, new Mwm_lxr__ws());
 		rv.Add("\\"		, new Mwm_lxr__backslash());
 		rv.Add("{"		, new Mwm_lxr__curly_bgn());
+		rv.Add("}"		, new Mwm_lxr__curly_end());
+		rv.Add("["		, new Mwm_lxr__brack_bgn());
+		rv.Add("]"		, new Mwm_lxr__brack_end());
 		return rv;
 	}
 }

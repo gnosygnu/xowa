@@ -19,7 +19,7 @@ package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
-		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
+		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
 
 		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
 		tbl.IsDirty_set(true);

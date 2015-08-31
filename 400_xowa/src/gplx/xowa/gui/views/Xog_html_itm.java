@@ -103,7 +103,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_delete, m);
 	}
 	@gplx.Virtual public String	Html_elem_atr_get_str(String id, String atr_key)		{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_as_obj, id, atr_key);}
-	@gplx.Virtual public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return Bool_.parse_(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
+	@gplx.Virtual public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return Bool_.parse(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
 	
 
 	public void Html_atr_set(String elem_id, String atr_key, String atr_val) {

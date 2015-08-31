@@ -19,7 +19,7 @@ package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*;
 class TdbFlushWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
-		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_flush cmd = Db_qry_flush.cast_(cmdObj);
+		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_flush cmd = Db_qry_flush.cast(cmdObj);
 		if (Array_.Len(cmd.TableNames()) == 0)
 			engine.FlushAll();
 		else {

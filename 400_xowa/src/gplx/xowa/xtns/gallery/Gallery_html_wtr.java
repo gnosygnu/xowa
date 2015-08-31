@@ -89,7 +89,7 @@ public class Gallery_html_wtr {
 				if (	itm.Link_bgn() != Bry_.NotFound				// link is not -1; EX: "A.png" has no link specified
 					&&	(itm.Link_end() - itm.Link_bgn()) > 0		// and link_end - link_bgn > 0; EX: "A.png|link="; DATE:2014-06-15
 					)
-					lnki_link_ttl = Xoa_ttl.parse_(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
+					lnki_link_ttl = Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
 				byte[] lnki_href = app.Html__href_wtr().Build_to_bry(wiki, lnki_link_ttl);
 				byte[] lnki_alt = itm.Alt_bgn() == Bry_.NotFound ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
 				img_core_fmtr.Init(itm_elem_id, html_src, html_w, html_h);

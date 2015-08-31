@@ -48,7 +48,7 @@ public class Xop_ctx {
 	public Xop_curly_wkr		Curly() 			{return curly;} private Xop_curly_wkr curly = new Xop_curly_wkr();
 
 	public boolean					Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
-	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.MaxValue;
+	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.Max_value;
 	public Xop_keeplist_wiki	Tmpl_keeplist()		{return tmpl_keeplist;} public void Tmpl_keeplist_(Xop_keeplist_wiki v) {this.tmpl_keeplist = v;} private Xop_keeplist_wiki tmpl_keeplist;
 	public boolean					Tmpl_args_parsing() {return tmpl_args_parsing;} public Xop_ctx Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v; return this;} private boolean tmpl_args_parsing;
 	public Bry_bfr				Tmpl_output() {return tmpl_output;} public Xop_ctx Tmpl_output_(Bry_bfr v) {tmpl_output = v; return this;} private Bry_bfr tmpl_output;	// OBSOLETE: after tmpl_prepend_nl rewrite; DATE:2014-08-21
@@ -299,7 +299,7 @@ public class Xop_ctx {
 		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
 	public static Xop_ctx new_(Xowe_wiki wiki) {
-		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.new_(wiki, Xoa_ttl.parse_(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
+		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.new_(wiki, Xoa_ttl.parse(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
 		return rv;
 	}
 	public static Xop_ctx new_sub_(Xowe_wiki wiki) {return new_sub_(wiki, wiki.Ctx().cur_page);}

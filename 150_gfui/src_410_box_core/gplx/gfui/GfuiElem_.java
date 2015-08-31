@@ -21,7 +21,7 @@ public class GfuiElem_ {
 		  InitKey_focusAble = "focusAble"
 		, InitKey_ownerWin = "ownerForm";
 	public static GfuiElem as_(Object obj) {return obj instanceof GfuiElem ? (GfuiElem)obj : null;}
-	public static GfuiElem cast_(Object obj) {try {return (GfuiElem)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiElem.class, obj);}}
+	public static GfuiElem cast(Object obj) {try {return (GfuiElem)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiElem.class, obj);}}
 	public static GfuiElemBase sub_(String key, GfuiElem owner) {
 		GfuiElemBase rv = new_();
 		rv.Owner_(owner, key);

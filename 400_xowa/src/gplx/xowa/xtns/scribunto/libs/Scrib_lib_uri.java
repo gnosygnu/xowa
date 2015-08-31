@@ -55,7 +55,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] qry_bry = args.Extract_qry_args(wiki, 1);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		if (ttl == null) return rslt.Init_null();
 		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
 		if (ttl.Ns().Id() == Xow_ns_.Id_media) {	// change "Media:" -> "File:"

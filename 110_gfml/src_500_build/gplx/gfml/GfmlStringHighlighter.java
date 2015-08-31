@@ -43,7 +43,7 @@ class GfmlStringHighlighter {
 			if (i == 0) rawBfrBgn = bgnPos;
 
 			// endPos
-			int nxtMarkPos = nxtMark == GfmlStringHighlighterMarker.Null ? Int_.MaxValue : nxtMark.Pos();
+			int nxtMarkPos = nxtMark == GfmlStringHighlighterMarker.Null ? Int_.Max_value : nxtMark.Pos();
 			endPos = curMark.Pos() + excerptLen;
 			if (endPos >= nxtMarkPos) endPos = nxtMarkPos;
 			if (endPos > rawLen ) endPos = rawLen + 1;

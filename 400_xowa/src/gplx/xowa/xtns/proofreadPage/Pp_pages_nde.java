@@ -26,7 +26,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private int step_int;
 	private byte[] include, exclude, step_bry, header, onlysection;
 	private byte[] toc_cur, toc_nxt, toc_prv;
-	private int ns_index_id = Int_.MinValue, ns_page_id = Int_.MinValue;
+	private int ns_index_id = Int_.Min_value, ns_page_id = Int_.Min_value;
 	private int bgn_page_int = -1, end_page_int = -1;
 	private Xow_ns ns_page;
 	private Xoa_ttl index_ttl;
@@ -86,9 +86,9 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		end_page_bry = amp_mgr.Decode_as_bry(end_page_bry);
 		Xowc_xtn_pages cfg_pages = wiki.Cfg_parser().Xtns().Itm_pages();
 		if (cfg_pages.Init_needed()) cfg_pages.Init(wiki.Ns_mgr());
-		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == Int_.MinValue) return Fail_msg("wiki does not have an Index ns");
-		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == Int_.MinValue) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
-		index_ttl = Xoa_ttl.parse_(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
+		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == Int_.Min_value) return Fail_msg("wiki does not have an Index ns");
+		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == Int_.Min_value) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
+		index_ttl = Xoa_ttl.parse(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
 		ns_page = wiki.Ns_mgr().Ids_get_or_null(ns_page_id);
 		if (onlysection != null)
 			bgn_sect_bry = end_sect_bry = null;
@@ -260,14 +260,14 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private int Get_max_page_idx(Xowe_wiki wiki, Xoa_ttl index_ttl) {
 		List_adp rslt = List_adp_.new_();
 		Int_obj_ref rslt_count = Int_obj_ref.zero_();
-		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), Int_.MaxValue, 0, Int_.MaxValue, false, false);
+		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), Int_.Max_value, 0, Int_.Max_value, false, false);
 		int len = rslt_count.Val();
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)rslt.Get_at(i);
-			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
+			Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
-			int page_leaf_val = Bry_.To_int_or(page_ttl_leaf, Int_.MinValue);			if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
+			int page_leaf_val = Bry_.To_int_or(page_ttl_leaf, Int_.Min_value);			if (page_leaf_val == Int_.Min_value) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
@@ -303,7 +303,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
 				.Add_byte(Byte_ascii.Slash)				// EX: '/'
 				.Add_int_variable(page.Val());			// EX: '123'
-			rv[rv_idx++] = Xoa_ttl.parse_(wiki, ttl_bfr.Xto_bry_and_clear());
+			rv[rv_idx++] = Xoa_ttl.parse(wiki, ttl_bfr.Xto_bry_and_clear());
 		}
 		ttl_bfr.Mkr_rls(); 
 		return rv;
@@ -313,7 +313,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			step_int = 1;
 			return true;
 		}
-		step_int = Bry_.To_int_or(step_bry, Int_.MinValue);
+		step_int = Bry_.To_int_or(step_bry, Int_.Min_value);
 		if (step_int < 1 || step_int > 1000) {
 			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_u8(step_bry));
 			return false;

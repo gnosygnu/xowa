@@ -110,7 +110,7 @@ class Pp_index_page {
 		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
 		return (Xoa_ttl[])rv.To_ary(Xoa_ttl.class);
 	}
-	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse_(wiki, ns_page_id, bry);}
+	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse(wiki, ns_page_id, bry);}
 	public static final Pp_index_page Null = new Pp_index_page();
 }
 class Pp_index_arg {

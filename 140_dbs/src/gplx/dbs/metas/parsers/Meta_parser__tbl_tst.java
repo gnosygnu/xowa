@@ -46,7 +46,7 @@ class Meta_parser__tbl_fxt {
 		Meta_tbl_itm rv = new Meta_tbl_itm(tbl_name, "NONE");
 		int len = fld_names.length;
 		for (int i = 0; i < len; ++i) {
-			rv.Flds().Add(new Meta_fld_itm(fld_names[i], new Meta_type_itm(Db_meta_fld.Tid_int, Sqlite_tid.Tid_int, Bry_.new_a7("int"), Int_.MinValue, Int_.MinValue)));
+			rv.Flds().Add(new Meta_fld_itm(fld_names[i], new Meta_type_itm(Db_meta_fld.Tid_int, Sqlite_tid.Tid_int, Bry_.new_a7("int"), Int_.Min_value, Int_.Min_value)));
 		}
 		return rv;
 	}

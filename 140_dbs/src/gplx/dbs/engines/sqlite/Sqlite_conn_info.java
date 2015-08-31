@@ -28,7 +28,7 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 		return rv;
 	}
 	public static Db_conn_info load_(Io_url url) {
-		return Db_conn_info_.parse_(Bld_raw
+		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key"		, Tid_const
 		, "data source"		, url.Xto_api()
 		, "version"			, "3"
@@ -36,7 +36,7 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 	}
 	public static Db_conn_info make_(Io_url url) {
 		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());
-		return Db_conn_info_.parse_(Bld_raw
+		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key"		, Tid_const
 		, "data source"		, url.Xto_api()
 		, "version"			, "3"

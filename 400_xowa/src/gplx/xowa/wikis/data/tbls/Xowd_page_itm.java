@@ -92,7 +92,7 @@ public class Xowd_page_itm implements Xobl_data_itm {
 	public void Clear() {
 		id = Id_null; text_len = 0;	// text_len should be 0 b/c text defaults to 0;
 		text_db_id = tdb_row_idx = 0; // default to 0, b/c some tests do not set and will fail at -1
-		ns_id = Int_.MinValue;
+		ns_id = Int_.Min_value;
 		ttl_full_db = ttl_page_db = null; text = Bry_.Empty;	// default to Ary_empty for entries that have <text />
 		ns = null;
 		redirected = exists = false;

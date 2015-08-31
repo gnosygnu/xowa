@@ -120,7 +120,7 @@ public class Scrib_lib_ustring__lib_tst {
 	@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
 		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
 		Exec_gsub_regx("a b c", "%f[%W]", 5, "()", "a() b() c();3");
-		Exec_gsub_regx("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.MaxValue, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
+		Exec_gsub_regx("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.Max_value, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
 	}
 	@Test  public void Gsub_frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
 		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a

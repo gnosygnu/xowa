@@ -44,7 +44,7 @@ class Criteria_const implements Criteria {
 	public boolean				Matches(Object comp) {return val;} private final boolean val;
 	public void				Val_from_args(Hash_adp args) {;}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String			To_str() {return String_.Concat(" IS ", Bool_.Xto_str_lower(val));}
+	public String			To_str() {return String_.Concat(" IS ", Bool_.To_str_lower(val));}
 }
 class Criteria_not implements Criteria {
 	private final Criteria criteria;

@@ -26,5 +26,7 @@ class Mwm_lxr_ {
 	,	Tid__backslash		= 1
 	,	Tid__curly_bgn		= 2
 	,	Tid__curly_end		= 3
+	,	Tid__brack_bgn		= 4
+	,	Tid__brack_end		= 5
 	;
 }

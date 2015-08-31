@@ -24,7 +24,7 @@ public class Xoh_lnki_bldr {
 	private byte[] img_rel_path; private int img_w, img_h; private boolean img_pos_is_left;
 	public Xoh_lnki_bldr(Xoa_app app, Xoh_href_wtr href_wtr) {
 		this.app = app; this.href_wtr = href_wtr;
-		this.img_root_dir = app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "app", "img").To_http_file_bry();
+		this.img_root_dir = app.Fsys_mgr().Bin_xowa_file_dir().To_http_file_bry();
 	}
 	public Xoh_lnki_bldr Clear() {
 		href = title = id = caption = null;

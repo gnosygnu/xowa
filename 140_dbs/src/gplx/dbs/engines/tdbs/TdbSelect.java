@@ -20,7 +20,7 @@ import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
-		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
+		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
 		if (cmd.From().Tbls().Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.Xto_sql());
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().BaseTable().TblName());

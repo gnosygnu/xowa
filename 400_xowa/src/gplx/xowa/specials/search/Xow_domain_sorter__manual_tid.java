@@ -36,7 +36,7 @@ class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
 	}
 	private int Get_sort_idx_or_neg1(Xow_domain_itm domain) {
 		int sort_idx = domain.Sort_idx(); if (sort_idx != -1) return sort_idx;
-		sort_idx = Int_.MaxValue;
+		sort_idx = Int_.Max_value;
 		for (int i = 0; i < ary_len; ++i) {
 			Xow_domain_crt_itm crt = ary[i];
 			if (crt.Matches(cur_domain, domain)) {sort_idx = i; break;}

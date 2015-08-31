@@ -52,7 +52,7 @@ public class Xous_window_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rect))					return rect;
-		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse_(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_maximized))				return Yn.Xto_str(maximized);
 		else if	(ctx.Match(k, Invk_maximized_))				maximized = m.ReadYn("v");
 		return this;

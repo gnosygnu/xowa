@@ -28,8 +28,7 @@ public class Xog_win_itm_ {
 		app.Usere().Cfg_mgr().Startup_mgr().Window_mgr().Init_window(win_box);
 		win.Resizer().Exec_win_resize(app, win_box.Width(), win_box.Height());
 
-		IconAdp.regy_loadDir_shallow(app.Usere().Fsys_mgr().Root_dir().GenSubDir_nest("app", "img", "win"));
-		win_box.Icon_(IconAdp.regy_("xowa.app"));
+		win_box.Icon_(IconAdp.file_or_blank(app.Fsys_mgr().Bin_xowa_dir().GenSubFil_nest("file", "app.window", "app_icon.png")));
 	}
 	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiWin win, Io_url img_dir, String id, String file) {
 		GfuiBtn rv = kit.New_btn(id, win);

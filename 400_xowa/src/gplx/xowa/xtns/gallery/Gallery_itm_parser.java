@@ -171,14 +171,14 @@ public class Gallery_itm_parser {
 				cur_itm.Ttl_end_(fld_end);
 				byte[] ttl_bry = Bry_.Mid(src, cur_itm.Ttl_bgn(), fld_end);
 				ttl_bry = Xoa_app_.Utl__encoder_mgr().Http_url_ttl().Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
-				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
+				Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 				if (	ttl == null				// invalid ttl; EX:	"<invalid>"
 					||	ttl.Anch_bgn() == 1		// anchor-only ttl; EX: "#invalid"; DATE:2014-03-18
 					)
 					cur_itm.Reset();
 				else {
 					if (!ttl.Ns().Id_file_or_media())	// ttl does not have "File:"; MW allows non-ns names; EX: "A.png" instead of "File:A.png"; DATE:2013-11-18 
-						ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_file, ttl_bry);
+						ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_file, ttl_bry);
 					cur_itm.Ttl_(ttl);
 					cur_itm.Ext_(Xof_ext_.new_by_ttl_(ttl_bry));
 				}

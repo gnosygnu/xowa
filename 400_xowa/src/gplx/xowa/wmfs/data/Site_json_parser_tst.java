@@ -376,12 +376,16 @@ public class Site_json_parser_tst {
 //		}
 }
 class Site_json_parser_fxt {
-	private final Site_json_parser parser = new Site_json_parser();
+	private final Json_parser json_parser = new Json_parser();
+	private final Site_json_parser site_meta_parser;
 	private Site_meta_itm site_meta;
+	public Site_json_parser_fxt() {
+		this.site_meta_parser = new Site_json_parser(json_parser);
+	}
 	public void Exec_parse(String raw) {
-		Json_doc jdoc = Json_doc.new_apos_(raw);
+		Json_doc jdoc = json_parser.Parse_by_apos(raw);
 		site_meta = new Site_meta_itm();
-		parser.Parse_root(site_meta, "en.wikipedia.org", jdoc.Root());
+		site_meta_parser.Parse_root(site_meta, "en.wikipedia.org", jdoc.Root_nde());
 	}
 	public Site_namespace_itm Make_namespace(int id, boolean case_tid_is_cs, String canonical, String localized, boolean subpages, boolean content, String defaultcontentmodel) {
 		return new Site_namespace_itm(id, case_tid_is_cs ? Xow_ns_case_.Bry__all : Xow_ns_case_.Bry__1st, Bry_.new_u8_safe(canonical), Bry_.new_u8_safe(localized), subpages, content, Bry_.new_u8_safe(defaultcontentmodel));

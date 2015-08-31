@@ -72,7 +72,7 @@ class Xow_ns_mgr_fxt {
 		for (int i = 0; i < ns_names_len; ++i) {
 			String ns_name = ns_names[i];
 			Xow_ns actl_ns = ns_mgr.Names_get_or_null(Bry_.new_u8(ns_name));
-			int actl_id = actl_ns == null ? Int_.MinValue : actl_ns.Id();
+			int actl_id = actl_ns == null ? Int_.Min_value : actl_ns.Id();
 			Tfds.Eq(expd_id, actl_id, ns_name);
 		}
 	}

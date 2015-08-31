@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 public class GfmlDoc_ {
-	public static GfmlDoc parse_any_eol_(String raw) {return parse_(String_.Replace(raw, String_.CrLf, String_.Lf));}
-	public static GfmlDoc parse_(String raw) {
+	public static GfmlDoc parse_any_eol_(String raw) {return parse(String_.Replace(raw, String_.CrLf, String_.Lf));}
+	public static GfmlDoc parse(String raw) {
 		GfmlBldr bldr = GfmlBldr_.default_();
 		return bldr.XtoGfmlDoc(raw);
 	}

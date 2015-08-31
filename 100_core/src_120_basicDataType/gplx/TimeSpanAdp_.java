@@ -34,8 +34,8 @@ public class TimeSpanAdp_ {
 		return TimeSpanAdp_.fracs_(fracs);
 	}
 	public static TimeSpanAdp from_(long bgn) {return TimeSpanAdp_.fracs_(Env_.TickCount() - bgn);}
-	public static final long parse_null = Long_.MinValue;
-	public static TimeSpanAdp parse_(String raw) {
+	public static final long parse_null = Long_.Min_value;
+	public static TimeSpanAdp parse(String raw) {
 		byte[] bry = Bry_.new_u8(raw);
 		long fracs = parse_to_fracs(bry, 0, bry.length, false);
 		return fracs == parse_null ? null : TimeSpanAdp_.fracs_(fracs);
@@ -157,6 +157,6 @@ public class TimeSpanAdp_ {
 	@gplx.Internal protected static final int Idx_Hour = 3;
 	static int[] ZeroPadding	= {3, 2, 2, 2,};
 	static String[] Sprs	= {".", MajorDelimiter, MajorDelimiter, "",};
-	public static TimeSpanAdp cast_(Object arg) {try {return (TimeSpanAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TimeSpanAdp.class, arg);}}
+	public static TimeSpanAdp cast(Object arg) {try {return (TimeSpanAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TimeSpanAdp.class, arg);}}
 	public static final double Ratio_f_to_s = 1000;
 }

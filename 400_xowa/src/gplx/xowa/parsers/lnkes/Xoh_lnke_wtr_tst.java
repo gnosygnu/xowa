@@ -25,7 +25,7 @@ public class Xoh_lnke_wtr_tst {
 	@Test  public void Caption()		{fxt.Test_parse_page_wiki_str("[irc://a b]"				, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">b</a>");}
 	@Test  public void Caption_wtxt()	{fxt.Test_parse_page_wiki_str("[irc://a ''b'']"			, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\"><i>b</i></a>");}
 	@Test  public void Xowa_protocol()	{
-		String img = "<img src=\"file:///mem/xowa/user/test_user/app/img/xowa/protocol.png\"/>";
+		String img = "<img src=\"file:///mem/xowa/bin/any/xowa/file/app.general/xowa_exec.png\"/>";
 		fxt.Wiki().Sys_cfg().Xowa_proto_enabled_(true);
 		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a\" z]"			, "<a href=\"xowa-cmd:a\">z" + img + "</a>");
 		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a.b('c_d');\" z]"	, "<a href=\"xowa-cmd:a.b('c_d');\">z" + img + "</a>");

@@ -19,7 +19,7 @@ package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*;
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
-		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
+		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
 		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
 		List_adp deleted = List_adp_.new_();
 		int rv = 0;

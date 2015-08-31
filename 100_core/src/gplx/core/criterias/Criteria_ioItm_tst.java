@@ -37,7 +37,7 @@ public class Criteria_ioItm_tst {
 		tst_Match(false, crt, fil.ModifiedTime_(DateAdp_.parse_gplx("2000-12-31")));
 	}
 	@Test  public void IoMatch() {
-		Criteria crt = Criteria_ioMatch.parse_(true, "*.txt", false);
+		Criteria crt = Criteria_ioMatch.parse(true, "*.txt", false);
 		CriteriaFxt fx_crt = new CriteriaFxt();
 		fx_crt.tst_Matches(crt, Io_url_.new_any_("file.txt"));
 		fx_crt.tst_MatchesNot(crt, Io_url_.new_any_("file.xml"));

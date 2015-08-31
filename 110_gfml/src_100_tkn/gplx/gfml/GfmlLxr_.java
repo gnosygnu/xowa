@@ -31,7 +31,7 @@ public class GfmlLxr_ {
 	public static final GfmlLxr Null = new GfmlLxr_null();
 	public static final String CmdTknChanged_evt = "Changed";
 	public static GfmlLxr as_(Object obj) {return obj instanceof GfmlLxr ? (GfmlLxr)obj : null;}
-	public static GfmlLxr cast_(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
+	public static GfmlLxr cast(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
 }
 class GfmlLxr_null implements GfmlLxr {
 	public String Key() {return "gfml.nullLxr";}
@@ -85,7 +85,7 @@ class GfmlLxr_group implements GfmlLxr {
 				sb.Add_mid(stream.Ary(), stream.Pos(), hookLength);
 			stream.MoveNextBy(hookLength);
 
-			String found = String_.cast_(trie.FindMatch(stream));
+			String found = String_.cast(trie.FindMatch(stream));
 			if (found == null) break;
 			hookLength = trie.LastMatchCount;
 		}
@@ -213,5 +213,5 @@ class GfmlLxr_frame extends GfmlLxr_singleton {		GfmlFrame frame; GfmlLxr endLxr
 		return rv;
 	}	GfmlLxr_frame() {}
 	public static GfmlLxr_frame as_(Object obj) {return obj instanceof GfmlLxr_frame ? (GfmlLxr_frame)obj : null;}
-	public static GfmlLxr_frame cast_(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr_frame.class, obj);}}
+	public static GfmlLxr_frame cast(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr_frame.class, obj);}}
 }

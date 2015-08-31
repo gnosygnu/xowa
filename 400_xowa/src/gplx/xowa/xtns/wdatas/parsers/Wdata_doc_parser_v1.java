@@ -24,9 +24,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		try {
 			Json_itm kv_val = doc.Find_nde(Bry_entity);
 			switch (kv_val.Tid()) {
-				case Json_itm_.Tid_string:	// "entity":"q1"
+				case Json_itm_.Tid__str:	// "entity":"q1"
 					return kv_val.Data_bry();
-				case Json_itm_.Tid_array:	// "entity":["item",1]
+				case Json_itm_.Tid__ary:	// "entity":["item",1]
 					Json_ary kv_val_as_ary = (Json_ary)kv_val;
 					Json_itm entity_id = kv_val_as_ary.Get_at(1);
 					return Bry_.Add(Byte_ascii.Ltr_q, entity_id.Data_bry());
@@ -37,18 +37,18 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
-			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(Bry_links)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_links)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_kv wiki_kv		= Json_kv.cast_(list_nde.Get_at(i));
+				Json_kv wiki_kv		= Json_kv.cast(list_nde.Get_at(i));
 				byte[] site_bry			= wiki_kv.Key().Data_bry();
 				byte[] title_bry = null; byte[][] badges_bry_ary = null;
-				if (wiki_kv.Val().Tid() == Json_itm_.Tid_nde) {	// v1.2: "enwiki":{name:"Earth", badges:[]}
-					Json_nde val_nde	= Json_nde.cast_(wiki_kv.Val());
-					Json_kv name_kv		= Json_kv.cast_(val_nde.Get_at(0));
+				if (wiki_kv.Val().Tid() == Json_itm_.Tid__nde) {	// v1.2: "enwiki":{name:"Earth", badges:[]}
+					Json_nde val_nde	= Json_nde.cast(wiki_kv.Val());
+					Json_kv name_kv		= Json_kv.cast(val_nde.Get_at(0));
 					title_bry = name_kv.Val().Data_bry();
-					Json_kv badges_kv	= Json_kv.cast_(val_nde.Get_at(1));
+					Json_kv badges_kv	= Json_kv.cast(val_nde.Get_at(1));
 					if (badges_kv != null) {// TEST:some tests do not define a badges nde; ignore if null; DATE:2014-09-19
 						Json_ary badges_ary	= Json_ary.cast_or_null(badges_kv.Val());
 						badges_bry_ary = badges_ary.Xto_bry_ary();
@@ -66,11 +66,11 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Ordered_hash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
 		try {
 			byte[] langval_key = label_or_description ? Bry_label : Bry_description;
-			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_kv data_kv		= Json_kv.cast_(list_nde.Get_at(i));
+				Json_kv data_kv		= Json_kv.cast(list_nde.Get_at(i));
 				byte[] lang_bry			= data_kv.Key().Data_bry();
 				Wdata_langtext_itm itm = new Wdata_langtext_itm(lang_bry, data_kv.Val().Data_bry());
 				rv.Add(lang_bry, itm);
@@ -80,25 +80,25 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
-			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_kv data_kv		= Json_kv.cast_(list_nde.Get_at(i));
+				Json_kv data_kv		= Json_kv.cast(list_nde.Get_at(i));
 				byte[] lang_bry			= data_kv.Key().Data_bry();
 				byte[][] vals_bry_ary	= null;
 				Json_itm data_val		= data_kv.Val();
 				switch (data_val.Tid()) {
-					case Json_itm_.Tid_array:		// EX: 'en':['en_val_1','en_val_2']
+					case Json_itm_.Tid__ary:		// EX: 'en':['en_val_1','en_val_2']
 						Json_ary vals_ary	= Json_ary.cast_or_null(data_val);
 						vals_bry_ary = vals_ary.Xto_bry_ary();
 						break;
-					case Json_itm_.Tid_nde:			// EX: 'en':{'0:en_val_1','1:en_val_2'}; PAGE:wd.q:621080 DATE:2014-09-21
-						Json_nde vals_nde	= Json_nde.cast_(data_val);
+					case Json_itm_.Tid__nde:			// EX: 'en':{'0:en_val_1','1:en_val_2'}; PAGE:wd.q:621080 DATE:2014-09-21
+						Json_nde vals_nde	= Json_nde.cast(data_val);
 						int vals_len = vals_nde.Len();
 						vals_bry_ary = new byte[vals_len][];
 						for (int j = 0; j < vals_len; ++j) {
-							Json_kv vals_sub_kv = Json_kv.cast_(vals_nde.Get_at(j));
+							Json_kv vals_sub_kv = Json_kv.cast(vals_nde.Get_at(j));
 							vals_bry_ary[j] = vals_sub_kv.Val().Data_bry();
 						}
 						break;
@@ -117,7 +117,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			byte[] src = doc.Src();
 			int len = list_nde.Len();
 			for (int i = 0; i < len; i++) {
-				Json_nde claim_nde			= Json_nde.cast_(list_nde.Get_at(i));
+				Json_nde claim_nde			= Json_nde.cast(list_nde.Get_at(i));
 				Wdata_claim_itm_core claim_itm	= Make_claim_itm(src, claim_nde);
 				temp_list.Add(claim_itm);
 			}
@@ -151,7 +151,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		int len = prop_nde.Len();	// should have 5 (m, q, g, rank, refs), but don't enforce (can rely on keys)
 		Wdata_claim_itm_core rv = null;
 		for (int i = 0; i < len; i++) {
-			Json_kv kv = Json_kv.cast_(prop_nde.Get_at(i));
+			Json_kv kv = Json_kv.cast(prop_nde.Get_at(i));
 			Json_itm kv_key = kv.Key();
 			Byte_obj_val bv = (Byte_obj_val)Prop_key_hash.Get_by_mid(src, kv_key.Src_bgn(), kv_key.Src_end());
 			if (bv == null) {Warn("invalid prop node: ~{0}", String_.new_u8(src, kv_key.Src_bgn(), kv_key.Src_end())); return null;}
@@ -164,7 +164,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 					rv.Wguid_(kv.Data_bry());
 					break;
 				case Prop_tid_rank:
-					rv.Rank_tid_((byte)Int_.cast_(((Json_itm_int)kv.Val()).Data_as_int()));
+					rv.Rank_tid_((byte)Int_.cast(((Json_itm_int)kv.Val()).Data_as_int()));
 					break;
 				case Prop_tid_q:
 					break;
@@ -177,7 +177,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	private Wdata_claim_itm_core New_prop_by_m(byte[] src, Json_ary ary) {
 		byte snak_tid = Wdata_dict_snak_tid.Xto_tid(ary.Get_at(0).Data_bry());
-		int pid = Json_itm_int.cast_(ary.Get_at(1)).Data_as_int();
+		int pid = Json_itm_int.cast(ary.Get_at(1)).Data_as_int();
 		switch (snak_tid) {
 			case Wdata_dict_snak_tid.Tid_novalue		: return Wdata_claim_itm_system.new_novalue(pid);
 			case Wdata_dict_snak_tid.Tid_somevalue		: return Wdata_claim_itm_system.new_somevalue(pid);
@@ -192,31 +192,31 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			case Wdata_dict_val_tid.Tid_string:
 				return new Wdata_claim_itm_str(pid, snak_tid, ary.Get_at(3).Data_bry());
 			case Wdata_dict_val_tid.Tid_entity: {
-				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
-				Json_kv entity_kv = Json_kv.cast_(sub_nde.Get_at(1));
+				Json_nde sub_nde = Json_nde.cast(ary.Get_at(3));
+				Json_kv entity_kv = Json_kv.cast(sub_nde.Get_at(1));
 				return new Wdata_claim_itm_entity(pid, snak_tid, Wdata_dict_value_entity_tid.Tid_item, entity_kv.Val().Data_bry());
 			}
 			case Wdata_dict_val_tid.Tid_time: {
-				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
+				Json_nde sub_nde = Json_nde.cast(ary.Get_at(3));
 				return new Wdata_claim_itm_time(pid, snak_tid, Get_val(sub_nde, 0), Get_val(sub_nde, 1), Get_val(sub_nde, 2), Get_val(sub_nde, 3), Get_val(sub_nde, 4), Get_val(sub_nde, 5));
 			}
 			case Wdata_dict_val_tid.Tid_globecoordinate: case Wdata_dict_val_tid.Tid_bad: {
-				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
+				Json_nde sub_nde = Json_nde.cast(ary.Get_at(3));
 				return new Wdata_claim_itm_globecoordinate(pid, snak_tid, Get_val(sub_nde, 0), Get_val(sub_nde, 1), Get_val(sub_nde, 2), Get_val(sub_nde, 3), Get_val(sub_nde, 4));
 			}
 			case Wdata_dict_val_tid.Tid_quantity: {
-				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
+				Json_nde sub_nde = Json_nde.cast(ary.Get_at(3));
 				return new Wdata_claim_itm_quantity(pid, snak_tid, Get_val(sub_nde, 0), Get_val(sub_nde, 1), Get_val(sub_nde, 2), Get_val(sub_nde, 3));
 			}
 			case Wdata_dict_val_tid.Tid_monolingualtext: {
-				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
+				Json_nde sub_nde = Json_nde.cast(ary.Get_at(3));
 				return new Wdata_claim_itm_monolingualtext(pid, snak_tid, Get_val(sub_nde, 1), Get_val(sub_nde, 0));
 			}
 			default: {throw Err_.new_unhandled(val_tid);}
 		}		
 	}
 	private static byte[] Get_val(Json_nde sub_nde, int i) {
-		Json_kv kv = Json_kv.cast_(sub_nde.Get_at(i));
+		Json_kv kv = Json_kv.cast(sub_nde.Get_at(i));
 		return kv.Val().Data_bry();
 	}
 	private void Warn(String fmt, Object... args) {usr_dlg.Warn_many("", "", fmt, args);}
@@ -229,11 +229,11 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_rank	, Prop_tid_rank)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_refs	, Prop_tid_refs);
 	Ordered_hash Bld_hash(Json_doc doc, byte[] key) {
-		Json_nde nde = Json_nde.cast_(doc.Get_grp(key)); if (nde == null) return Empty_ordered_hash_bry;
+		Json_nde nde = Json_nde.cast(doc.Get_grp(key)); if (nde == null) return Empty_ordered_hash_bry;
 		Ordered_hash rv = Ordered_hash_.new_bry_();
 		int len = nde.Len();
 		for (int i = 0; i < len; i++) {
-			Json_kv kv = Json_kv.cast_(nde.Get_at(i));
+			Json_kv kv = Json_kv.cast(nde.Get_at(i));
 			byte[] kv_key = kv.Key().Data_bry();
 			rv.Add(kv_key, kv);
 		}

@@ -19,7 +19,7 @@ package gplx;
 import gplx.core.primitives.*;
 public class GfoInvkAble_ {
 	public static GfoInvkAble as_(Object obj) {return obj instanceof GfoInvkAble ? (GfoInvkAble)obj : null;}
-	public static GfoInvkAble cast_(Object obj) {try {return (GfoInvkAble)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfoInvkAble.class, obj);}}
+	public static GfoInvkAble cast(Object obj) {try {return (GfoInvkAble)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfoInvkAble.class, obj);}}
 	public static final String_obj_val Rv_unhandled = String_obj_val.new_("Unhandled"), Rv_handled = String_obj_val.new_("Handled"), Rv_host = String_obj_val.new_("Host")
 		, Rv_cancel = String_obj_val.new_("Cancel"), Rv_error = String_obj_val.new_("Error");
 

@@ -23,7 +23,7 @@ public class Json_kv_ary_srl_tst {
 	@Test   public void Bool_n()				{fxt.Test_parse("{'k0':false}"					, fxt.ary_(fxt.kv_bool_("k0", false)));}
 	@Test   public void Num()					{fxt.Test_parse("{'k0':123}"					, fxt.ary_(fxt.kv_int_("k0", 123)));}
 	@Test   public void Str()					{fxt.Test_parse("{'k0':'v0'}"					, fxt.ary_(fxt.kv_str_("k0", "v0")));}
-	@Test   public void Num_dec()				{fxt.Test_parse("{'k0':1.23}"					, fxt.ary_(fxt.kv_dec_("k0", Decimal_adp_.parse_("1.23"))));}
+	@Test   public void Num_dec()				{fxt.Test_parse("{'k0':1.23}"					, fxt.ary_(fxt.kv_dec_("k0", Decimal_adp_.parse("1.23"))));}
 	@Test   public void Ary_int()				{fxt.Test_parse("{'k0':[1,2,3]}"				, fxt.ary_(fxt.kv_obj_("k0", fxt.ary_(fxt.kv_int_("1", 1), fxt.kv_int_("2", 2), fxt.kv_int_("3", 3)))));}
 	@Test   public void Ary_empty()				{fxt.Test_parse("{'k0':[]}"						, fxt.ary_(fxt.kv_obj_("k0", fxt.ary_())));}
 	@Test   public void Subs_int()				{fxt.Test_parse("{'k0':{'k00':1,'k01':2}}"		, fxt.ary_(fxt.kv_obj_("k0", fxt.ary_(fxt.kv_int_("k00", 1), fxt.kv_int_("k01", 2)))));}
@@ -38,13 +38,13 @@ class Json_kv_ary_srl_fxt {
 	public void Test_parse(String raw_str, KeyVal[] expd) {
 		byte[] raw_bry = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw_bry);
-		KeyVal[] actl = Json_kv_ary_srl.Val_by_itm_nde(doc.Root());
-		Tfds.Eq_str_lines(KeyVal_.Ary_x_to_str(expd), KeyVal_.Ary_x_to_str(actl));
+		KeyVal[] actl = Json_kv_ary_srl.Val_by_itm_nde(doc.Root_nde());
+		Tfds.Eq_str_lines(KeyVal_.Ary_to_str(expd), KeyVal_.Ary_to_str(actl));
 	}
 	public KeyVal[] ary_(KeyVal... ary) {return ary;}
 	public KeyVal kv_obj_(String key, Object val)		{return KeyVal_.new_(key, val);}
 	public KeyVal kv_str_(String key, String val)		{return KeyVal_.new_(key, val);}
 	public KeyVal kv_int_(String key, int val)			{return KeyVal_.new_(key, val);}
-	public KeyVal kv_bool_(String key, boolean val)		{return KeyVal_.new_(key, Bool_.Xto_str_lower(val));}
+	public KeyVal kv_bool_(String key, boolean val)		{return KeyVal_.new_(key, Bool_.To_str_lower(val));}
 	public KeyVal kv_dec_(String key, Decimal_adp val)	{return KeyVal_.new_(key, val.To_str());}
 }
