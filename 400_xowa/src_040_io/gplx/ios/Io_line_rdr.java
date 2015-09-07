@@ -126,7 +126,7 @@ public class Io_line_rdr {
 //				++url_idx;
 //				bfr_state = Bfr_state_end;
 		}
-		if (old_bfr_len > 0) Array_.CopyTo(bfr, bfr_last_read, load_ary, 0, old_bfr_len);	// copy old_bfr over	
+		if (old_bfr_len > 0) Array_.Copy_to(bfr, bfr_last_read, load_ary, 0, old_bfr_len);	// copy old_bfr over	
 		file_pos += read_len;
 		bfr = load_ary;
 		bfr_last_read = 0;

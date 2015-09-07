@@ -65,7 +65,7 @@ public class Xol_lang_srl {
 							switch (cs_byte) {
 								case Byte_ascii.Num_0: cur_cs = false; break;
 								case Byte_ascii.Num_1: cur_cs = true; break;
-								default: throw Err_.new_wo_type("case sensitive should be 0 or 1", "cs", Byte_.Xto_str(cs_byte)); 
+								default: throw Err_.new_wo_type("case sensitive should be 0 or 1", "cs", Byte_.To_str(cs_byte)); 
 							}
 							break;
 					}

@@ -88,8 +88,8 @@ public class HashAlgo_tth192 implements HashAlgo {
 		if (branchRv == null || branchRv.length != blockA.length + blockB.length + 1)
 			branchRv = new byte[blockA.length + blockB.length + 1];
 		branchRv[0] = 0x01;		// branch hash mark.
-		Array_.CopyTo(blockA, branchRv, 1);
-		Array_.CopyTo(blockB, branchRv, blockA.length + 1);
+		Array_.Copy_to(blockA, branchRv, 1);
+		Array_.Copy_to(blockB, branchRv, blockA.length + 1);
 		return CalcHash(branchRv);
 	}
 	byte[] CalcHash_leaf(byte[] raw, int i) {
@@ -109,7 +109,7 @@ public class HashAlgo_tth192 implements HashAlgo {
 		}
 
 		rv[0] = 0x00;		// leaf hash mark.
-		Array_.CopyTo(raw, rv, 1);
+		Array_.Copy_to(raw, rv, 1);
 		return CalcHash(rv);
 	}
 	byte[] CalcHash(byte[] raw) {

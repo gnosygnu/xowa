@@ -40,6 +40,7 @@ public class Json_parser_tst {
 	@Test   public void Subs_empty()			{fxt.Test_parse("{'k0':{}}", fxt.itm_nde_().Add_many(fxt.itm_kv_("k0", fxt.itm_nde_())));}
 	@Test   public void Subs_ws()				{fxt.Test_parse("{'k0': { 'k00' : 1 } }", fxt.itm_nde_().Add_many(fxt.itm_kv_("k0", fxt.itm_nde_().Add_many(fxt.itm_kv_("k00", 1)))));}
 	@Test   public void Ws()					{fxt.Test_parse(" { 'k0' : 'v0' } ", fxt.itm_nde_().Add_many(fxt.itm_kv_("k0", "v0")));}
+	@Test   public void Root_is_ary()			{fxt.Test_parse("[ 1 , 2 , 3 ]", fxt.itm_ary_().Add_many(fxt.itm_int_(1), fxt.itm_int_(2), fxt.itm_int_(3)));}
 	public static String Replace_apos_as_str(String v) {return String_.new_u8(Replace_apos(Bry_.new_u8(v)));}
 	public static byte[] Replace_apos(byte[] v) {return Bry_.Replace(v, Byte_ascii.Apos, Byte_ascii.Quote);}
 }
@@ -50,10 +51,10 @@ class Json_parser_fxt {
 			factory = parser.Factory();
 		}
 	}	Json_parser parser; Json_factory factory; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	Json_itm itm_int_(int v)								{return Json_itm_tmp.new_int_(v);}
-	Json_itm itm_str_(String v)								{return Json_itm_tmp.new_str_(v);}
+	public Json_itm itm_int_(int v)						{return Json_itm_tmp.new_int_(v);}
+	Json_itm itm_str_(String v)							{return Json_itm_tmp.new_str_(v);}
 	public Json_ary itm_ary_()							{return factory.Ary(-1, -1);}
-	public Json_nde itm_nde_()								{return factory.Nde(null, -1);}
+	public Json_nde itm_nde_()							{return factory.Nde(null, -1);}
 	public Json_kv itm_kv_null_(String k)				{return factory.Kv(itm_str_(k), factory.Null());}
 	public Json_kv itm_kv_(String k, String v)			{return factory.Kv(itm_str_(k), itm_str_(v));}
 	public Json_kv itm_kv_(String k, int v)				{return factory.Kv(itm_str_(k), itm_int_(v));}
@@ -77,7 +78,7 @@ class Json_parser_fxt {
 	public void Test_parse(String raw_str, Json_itm... expd_ary) {
 		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
-		doc.Root_nde().Print_as_json(tmp_bfr, 0);
+		doc.Root_grp().Print_as_json(tmp_bfr, 0);
 		String actl = tmp_bfr.Xto_str_and_clear();
 		String expd = Xto_str(raw, doc, expd_ary, 0, expd_ary.length);
 		Tfds.Eq_str_lines(expd, actl, actl);

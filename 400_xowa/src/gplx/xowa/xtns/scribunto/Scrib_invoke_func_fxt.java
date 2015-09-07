@@ -164,6 +164,10 @@ public class Scrib_invoke_func_fxt {
 		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
 		return (KeyVal[])actl[0].Val();
 	}
+	public Object Test_scrib_proc_rv_as_obj(Scrib_lib lib, String proc_name, Object[] args) {
+		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		return actl[0].Val();
+	}
 	private KeyVal[] Test_scrib_proc_rv(Scrib_lib lib, String proc_name, KeyVal[] args) {
 		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
 		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();

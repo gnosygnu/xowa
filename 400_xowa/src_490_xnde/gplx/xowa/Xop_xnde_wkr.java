@@ -658,6 +658,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_quiz:					xnde_xtn = tkn_mkr.Xnde_quiz(); break;
 					case Xop_xnde_tag_.Tid_indicator:				xnde_xtn = tkn_mkr.Xnde_indicator(); break;
 					case Xop_xnde_tag_.Tid_xowa_html:				xnde_xtn = tkn_mkr.Xnde_xowa_html(); break;
+					case Xop_xnde_tag_.Tid_graph:					xnde_xtn = tkn_mkr.Xnde_graph(); break;
 					case Xop_xnde_tag_.Tid_listing_buy:
 					case Xop_xnde_tag_.Tid_listing_do:
 					case Xop_xnde_tag_.Tid_listing_drink:

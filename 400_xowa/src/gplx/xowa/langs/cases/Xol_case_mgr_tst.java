@@ -93,7 +93,7 @@ class Xol_case_mgr_fxt {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xol_case_itm itm = ary[i];
-			sb.Add(Byte_.Xto_str(itm.Tid())).Add_char_pipe().Add(String_.new_u8(itm.Src_ary())).Add_char_pipe().Add(String_.new_u8(itm.Trg_ary())).Add_char_nl();
+			sb.Add(Byte_.To_str(itm.Tid())).Add_char_pipe().Add(String_.new_u8(itm.Src_ary())).Add_char_pipe().Add(String_.new_u8(itm.Trg_ary())).Add_char_nl();
 		}
 		return sb.Xto_str_and_clear();
 	}

@@ -40,7 +40,7 @@ public class Gfs_nde {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Gfs_nde[] new_subs = new Gfs_nde[subs_max];
-			Array_.CopyTo(subs, 0, new_subs, 0, subs_len);
+			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = nde;
@@ -67,7 +67,7 @@ public class Gfs_nde {
 		if (new_len > args_max) {	// ary too small >>> expand
 			args_max = new_len * 2;
 			Gfs_nde[] new_args = new Gfs_nde[args_max];
-			Array_.CopyTo(args, 0, new_args, 0, args_len);
+			Array_.Copy_to(args, 0, new_args, 0, args_len);
 			args = new_args;
 		}
 		args[args_len] = nde;

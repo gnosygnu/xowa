@@ -20,19 +20,19 @@ class Mwm_tkn__root implements Mwm_tkn {
 	private final Mwm_root_reg root_reg;
 	private final Mwm_root_ary root_ary = new Mwm_root_ary();
 	private final Mwm_root_sub root_sub = new Mwm_root_sub();
-	public Mwm_tkn__root(Mwm_tkn_mkr tkn_mkr) {
-		this.tkn_mkr = tkn_mkr;
+	private Mwm_tkn_mkr tkn_mkr;
+	public Mwm_tkn__root() {
 		this.root_reg = new Mwm_root_reg(this);
 	}
 	public Mwm_tkn__root Root() {return this;}
-	public Mwm_tkn_mkr Tkn_mkr() {return tkn_mkr;} private final Mwm_tkn_mkr tkn_mkr;
 	public int Tid() {return Mwm_tkn_.Tid__root;}
 	public int Uid() {return Mwm_tkn_.Uid__root;}
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
 	public void Src_end_(int v) {this.src_end = v;}
 	public Mwm_tkn Init(Mwm_tkn__root root, int tid, int uid, int src_bgn, int src_end) {throw Err_.new_unsupported();}
-	public Mwm_tkn Init_as_root(int src_bgn, int src_end) {
+	public Mwm_tkn Init_as_root(Mwm_tkn_mkr tkn_mkr, int src_bgn, int src_end) {
+		this.tkn_mkr = tkn_mkr;
 		this.src_bgn = src_bgn; this.src_end = src_end;
 		int expd_len = (src_end - src_bgn) / 5;
 		root_reg.Init(expd_len);

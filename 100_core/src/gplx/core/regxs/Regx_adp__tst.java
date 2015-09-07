@@ -63,7 +63,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 	Regx_match match_(int bgn) {return match_(bgn, Int_.Min_value);}
 	Regx_match match_(int bgn, int len) {return new Regx_match(true, bgn, bgn + len, Regx_group.Ary_empty);}
 	void tst_Matches(String find, String input, Regx_match... expd) {
-		List_adp expdList = Array_.XtoList(expd);			
+		List_adp expdList = Array_.To_list(expd);			
 		List_adp actlList = Regx_adp_.Find_all(input, find);
 		Tfds.Eq_list(expdList, actlList, this);
 	}

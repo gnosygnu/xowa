@@ -125,11 +125,11 @@ class Bry_bfr_mkr_mgr {
 	private void Expand() {
 		int new_max = ary_max == 0 ? 2 : ary_max * 2;
 		Bry_bfr[] new_ary = new Bry_bfr[new_max];
-		Array_.CopyTo(ary, 0, new_ary, 0, ary_max);
+		Array_.Copy_to(ary, 0, new_ary, 0, ary_max);
 		ary = new_ary;
 		ary_max = new_max;
 		int[] new_free = new int[ary_max];
-		Array_.CopyTo(free, 0, new_free, 0, free_len);
+		Array_.Copy_to(free, 0, new_free, 0, free_len);
 		free = new_free;
 	}
 //		public void Rls(Bry_bfr v) {

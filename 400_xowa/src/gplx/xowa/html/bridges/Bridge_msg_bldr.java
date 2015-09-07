@@ -58,7 +58,7 @@ public class Bridge_msg_bldr {
 	}
 	private void Bld_json() {
 		wtr.Clear();
-		wtr.Doc_bgn();
+		wtr.Doc_nde_bgn();
 		wtr.Nde_bgn(Key_rslt);
 		wtr.Kv_bool(Key_rslt_pass, rslt_pass);
 		if (rslt_msg != null) wtr.Kv_str(Key_rslt_msg, rslt_msg);
@@ -72,7 +72,7 @@ public class Bridge_msg_bldr {
 			wtr.Nde_end();
 		}
 		Bld_json_for_hash(wtr, data_root);
-		wtr.Doc_end();
+		wtr.Doc_nde_end();
 	}
 	private void Bld_json_for_hash(Json_wtr wtr, Gfo_tree_list hash) {
 		int len = hash.Len(); if (len == 0) return;

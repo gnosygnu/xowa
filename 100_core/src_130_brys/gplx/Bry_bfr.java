@@ -83,7 +83,7 @@ public class Bry_bfr {
 		int val_len = val.length;
 		if (bfr_len + val_len > bfr_max) Resize((bfr_max + val_len) * 2);
 		Bry_.Copy_by_pos(val, 0, val_len, bfr, bfr_len);
-		// Array_.CopyTo(val, 0, bfr, bfr_len, val_len);
+		// Array_.Copy_to(val, 0, bfr, bfr_len, val_len);
 		bfr_len += val_len;
 		return this;
 	}
@@ -92,7 +92,7 @@ public class Bry_bfr {
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8_by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
-		// Array_.CopyTo(val, bgn, bfr, bfr_len, len);
+		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
 	}
@@ -100,7 +100,7 @@ public class Bry_bfr {
 		int len = src.bfr_len;
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(src.bfr, 0, len, bfr, bfr_len);
-		// Array_.CopyTo(src.bfr, 0, bfr, bfr_len, len);
+		// Array_.Copy_to(src.bfr, 0, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
 	}
@@ -145,7 +145,7 @@ public class Bry_bfr {
 		}
 		src_len = src_end - src_bgn;
 		Bry_.Copy_by_pos(src.bfr, src_bgn, src_end, bfr, bfr_len);
-		// Array_.CopyTo(src.bfr, src_bgn, bfr, bfr_len, src_len);
+		// Array_.Copy_to(src.bfr, src_bgn, bfr, bfr_len, src_len);
 		bfr_len += src_len;
 		src.Clear();
 		return this;

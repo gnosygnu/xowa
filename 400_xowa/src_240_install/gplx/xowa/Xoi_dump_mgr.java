@@ -93,6 +93,6 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 		else										throw Err_.new_unhandled(v);
 	}
 	private static final KeyVal[] Options_search_version_list = KeyVal_.Ary(KeyVal_.new_("1"), KeyVal_.new_("2")); 
-	public static String Options_search_version_str(byte v)		{return Byte_.Xto_str(v);}
+	public static String Options_search_version_str(byte v)		{return Byte_.To_str(v);}
 	public static byte Options_search_version_parse(String v)	{return Byte_.parse(v);}
 }

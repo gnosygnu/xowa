@@ -112,6 +112,6 @@ public class Xol_func_name_regy {
 		int len = end - bgn;
 		if (len > lower_ary_len) {lower_ary = new byte[len]; lower_ary_len = len;}
 		lower_ary_len = len;
-		Array_.CopyTo(src, bgn, lower_ary, 0, len);
+		Array_.Copy_to(src, bgn, lower_ary, 0, len);
 	}	byte[] lower_ary = new byte[255]; int lower_ary_len = 255;
 }

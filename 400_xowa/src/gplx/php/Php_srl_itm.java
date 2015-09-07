@@ -100,7 +100,7 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Php_srl_itm_kv[] new_subs = new Php_srl_itm_kv[subs_max];
-			Array_.CopyTo(subs, 0, new_subs, 0, subs_len);
+			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = itm;

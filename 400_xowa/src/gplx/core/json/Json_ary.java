@@ -39,7 +39,7 @@ public class Json_ary extends Json_itm_base implements Json_grp {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Json_itm[] new_subs = new Json_itm[subs_max];
-			Array_.CopyTo(subs, 0, new_subs, 0, subs_len);
+			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = itm;

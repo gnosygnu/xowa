@@ -606,7 +606,7 @@ public class Bry_ {
 		else				return new byte[] {b3};
 	}
 	public static boolean To_bool_by_int(byte[] ary) {
-		int rv = To_int_or(ary, null, 0, ary.length, Int_.Min_value);
+		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, Bool_.Y, null);
 		switch (rv) {
 			case 0: return false;
 			case 1: return true;
@@ -615,15 +615,15 @@ public class Bry_ {
 	}
 	public static byte To_int_as_byte(byte[] ary, int bgn, int end, byte or)	{return (byte)To_int_or(ary, bgn, end, or);}
 	public static int To_int(byte[] ary) {
-		int rv = To_int_or(ary, null, 0, ary.length, Int_.Min_value);
+		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, Bool_.Y, null);
 		if (rv == Int_.Min_value) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary));
 		return rv;
 	}
-	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, null, 0, ary.length, -1);}
-	public static int To_int_or(byte[] ary, int or)								{return To_int_or(ary, null, 0, ary.length, or);}
-	public static int To_int_or(byte[] ary, int bgn, int end, int or)			{return To_int_or(ary, null, bgn, end, or);}
-	public static int To_int_or(byte[] ary, byte[] ignore_ary, int or)			{return To_int_or(ary, ignore_ary, 0, ary.length, or);}
-	public static int To_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
+	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, 0	, ary.length, -1, Bool_.Y, null);}
+	public static int To_int_or(byte[] ary, int or)								{return To_int_or(ary, 0	, ary.length, or, Bool_.Y, null);}
+	public static int To_int_or(byte[] ary, int bgn, int end, int or)			{return To_int_or(ary, bgn	, end		, or, Bool_.Y, null);}
+	public static int To_int_or__strict(byte[] ary, int or)						{return To_int_or(ary, 0	, ary.length, or, Bool_.N, null);}
+	private static int To_int_or(byte[] ary, int bgn, int end, int or, boolean sign_is_valid, byte[] ignore_ary) {
 		if (	ary == null
 			||	end == bgn				// null-len
 			)	return or;
@@ -637,44 +637,9 @@ public class Bry_ {
 					multiple *= 10;
 					break;
 				case Byte_ascii.Dash:
-					return i == bgn ? rv * -1 : or;
+					return i == bgn && sign_is_valid ? rv * -1 : or;
 				case Byte_ascii.Plus:
-					return i == bgn ? rv : or;
-				default:
-					boolean invalid = true;
-					if (ignore_ary != null) {
-						int ignore_ary_len = ignore_ary.length;
-						for (int j = 0; j < ignore_ary_len; j++) {
-							if (b == ignore_ary[j]) {
-								invalid = false;
-								break;
-							}
-						}
-					}
-					if (invalid) return or;
-					break;
-			}
-		}
-		return rv;
-	}
-	public static long To_long_or(byte[] ary, long or) {return To_long_or(ary, null, 0, ary.length, or);}
-	public static long To_long_or(byte[] ary, byte[] ignore_ary, int bgn, int end, long or) {
-		if (	ary == null
-			||	end == bgn				// null-len
-			)	return or;
-		long rv = 0, multiple = 1;
-		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
-			byte b = ary[i];
-			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv += multiple * (b - Byte_ascii.Num_0);
-					multiple *= 10;
-					break;
-				case Byte_ascii.Dash:
-					return i == bgn ? rv * -1 : or;
-				case Byte_ascii.Plus:
-					return i == bgn ? rv : or;
+					return i == bgn && sign_is_valid ? rv : or;
 				default:
 					boolean invalid = true;
 					if (ignore_ary != null) {
@@ -740,6 +705,41 @@ public class Bry_ {
 			}
 		}
 		return To_int_or(ary, bgn, end_num, or);
+	}
+	public static long To_long_or(byte[] ary, long or) {return To_long_or(ary, null, 0, ary.length, or);}
+	public static long To_long_or(byte[] ary, byte[] ignore_ary, int bgn, int end, long or) {
+		if (	ary == null
+			||	end == bgn				// null-len
+			)	return or;
+		long rv = 0, multiple = 1;
+		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
+			byte b = ary[i];
+			switch (b) {
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					rv += multiple * (b - Byte_ascii.Num_0);
+					multiple *= 10;
+					break;
+				case Byte_ascii.Dash:
+					return i == bgn ? rv * -1 : or;
+				case Byte_ascii.Plus:
+					return i == bgn ? rv : or;
+				default:
+					boolean invalid = true;
+					if (ignore_ary != null) {
+						int ignore_ary_len = ignore_ary.length;
+						for (int j = 0; j < ignore_ary_len; j++) {
+							if (b == ignore_ary[j]) {
+								invalid = false;
+								break;
+							}
+						}
+					}
+					if (invalid) return or;
+					break;
+			}
+		}
+		return rv;
 	}
 	public static double To_double(byte[] ary, int bgn, int end)				{return Double_.parse(String_.new_u8(ary, bgn, end));}
 	public static double To_double_or(byte[] bry, double or)					{return Double_.parse_or(String_.new_u8(bry, 0, bry.length), or);}

@@ -84,17 +84,17 @@ public class XmlFileSplitter {
 	}
 	public byte[] SplitHdr(byte[] src, int findPos) {
 		hdr = new byte[findPos];
-		Array_.CopyTo(src, 0, hdr, 0, findPos);
+		Array_.Copy_to(src, 0, hdr, 0, findPos);
 		byte[] rv = new byte[src.length - findPos];
-		Array_.CopyTo(src, findPos, rv, 0, rv.length);
+		Array_.Copy_to(src, findPos, rv, 0, rv.length);
 		return rv;
 	}
 	public byte[][] SplitRest(byte[] src, int findPos) {
 		byte[][] rv = new byte[2][];
 		rv[0] = new byte[findPos];
-		Array_.CopyTo(src, 0, rv[0], 0, findPos);
+		Array_.Copy_to(src, 0, rv[0], 0, findPos);
 		rv[1] = new byte[src.length - findPos];
-		Array_.CopyTo(src, findPos, rv[1], 0, rv[1].length);
+		Array_.Copy_to(src, findPos, rv[1], 0, rv[1].length);
 		return rv;
 	}
 	public int FindMatchPos(byte[] src, byte[][] wordAry) {return FindMatchPos(src, wordAry, true);}

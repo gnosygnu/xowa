@@ -18,4 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 class Mwm_ctx {		
 	public Int_ary Stack() {return stack;} private final Int_ary stack = new Int_ary(4);
+	public void Clear() {
+		stack.Clear();
+	}
 }

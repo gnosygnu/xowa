@@ -65,14 +65,13 @@ class Mwm_parser_fxt {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private final Mwm_parser parser = new Mwm_parser();
 	private final Mwm_tkn__root expd_root, actl_root;
-	private final Mwm_tkn_mkr tkn_mkr = new Mwm_tkn_mkr();
 	public Mwm_parser_fxt() {
-		this.expd_root = new Mwm_tkn__root(tkn_mkr);
-		this.actl_root = new Mwm_tkn__root(tkn_mkr);
+		this.expd_root = new Mwm_tkn__root();
+		this.actl_root = new Mwm_tkn__root();
 	}
 	public void Clear() {
-		expd_root.Init_as_root(0, 8);
-		actl_root.Init_as_root(0, 8);
+		expd_root.Init_as_root(parser.Tkn_mkr(), 0, 8);
+		actl_root.Init_as_root(parser.Tkn_mkr(), 0, 8);
 	}
 	public void Test_parse(String src_str, Mwm_tkn... expd_tkns) {
 		byte[] src_bry = Bry_.new_u8(src_str);
@@ -93,7 +92,7 @@ class Mwm_parser_fxt {
 	}
 	private Mwm_tkn leaf(int tid, int bgn, int end) {
 		int uid = expd_root.Regy__add(tid, bgn, end, null);
-		return new Mwm_tkn__leaf().Init(expd_root, tid, uid, bgn, end);
+		return new Mwm_tkn__leaf_raw().Init(expd_root, tid, uid, bgn, end);
 	}
 	private Mwm_tkn node(int tid, int bgn, int end, Mwm_tkn tkn) {
 		int uid = expd_root.Regy__add(tid, bgn, end, tkn);
@@ -101,7 +100,7 @@ class Mwm_parser_fxt {
 	}
 	public Mwm_tkn text	(int bgn, int end) {return leaf(Mwm_tkn_.Tid__text	, bgn, end);}
 	public Mwm_tkn ws	(int bgn, int end) {return leaf(Mwm_tkn_.Tid__ws	, bgn, end);}
-	public Mwm_tkn func	(int bgn, int end) {return node(Mwm_tkn_.Tid__func	, bgn, end, new Mwm_tkn__node());}
+	public Mwm_tkn func	(int bgn, int end) {return node(Mwm_tkn_.Tid__fnc	, bgn, end, new Mwm_tkn__node());}
 	public Mwm_tkn brack(int bgn, int end, Mwm_tkn... subs) {return node_w_subs(Mwm_tkn_.Tid__brack, bgn, end, subs);}
 	public Mwm_tkn curly(int bgn, int end, Mwm_tkn... subs) {return node_w_subs(Mwm_tkn_.Tid__curly, bgn, end, subs);}
 	private Mwm_tkn node_w_subs(int tid, int bgn, int end, Mwm_tkn... subs) {

@@ -16,16 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
-import gplx.core.btries.*;
-class Mwm_trie_bldr {
-	public static Btrie_fast_mgr new_() {
-		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
-		rv.Add(" "		, new Mwm_lxr__ws());
-		rv.Add("\\"		, new Mwm_lxr__backslash());
-		rv.Add("{"		, new Mwm_lxr__curly_bgn());
-		rv.Add("}"		, new Mwm_lxr__curly_end());
-		rv.Add("["		, new Mwm_lxr__brack_bgn());
-		rv.Add("]"		, new Mwm_lxr__brack_end());
-		return rv;
+class Mwm_lxr__leaf implements Mwm_lxr {
+	public Mwm_lxr__leaf(int tkn_tid) {this.tkn_tid = tkn_tid;} private final int tkn_tid;
+	public int		Tid() {return Mwm_lxr_.Tid__raw;}
+	public int		Make_tkn(Mwm_ctx ctx, Mwm_tkn__root root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
+		root.Regy__add(tkn_tid, bgn_pos, cur_pos, null);
+		return cur_pos;
 	}
 }

@@ -27,8 +27,9 @@ class Kv_ary_utl {
 	}
 	public static KeyVal[] new_kvs(KeyVal... vals) {return vals;}
 	public static String Ary_to_str(Json_wtr wtr, KeyVal[] ary) {
+		wtr.Doc_nde_bgn();
 		Ary_to_str(wtr, 0, ary);
-		return wtr.To_str_and_clear();
+		return wtr.Doc_nde_end().To_str_and_clear();
 	}
 	private static void Ary_to_str(Json_wtr wtr, int indent, KeyVal[] ary) {
 		int len = ary.length;
@@ -44,7 +45,7 @@ class Kv_ary_utl {
 			if (Type_adp_.Eq(val_type, KeyVal[].class))
 				Ary_to_str__nde(wtr, indent, itm.Key(), (KeyVal[])itm.Val());
 			else if (Type_adp_.Is_array(val_type))
-				Ary_to_str__ary(wtr, indent, itm.Key(), Array_.cast(itm.Val()));
+				Ary_to_str__ary(wtr, indent, itm.Key(), Array_.cast(val));
 			else
 				throw Err_.new_unhandled(type_tid);
 		}
@@ -70,7 +71,7 @@ class Kv_ary_utl {
 			if (itm_type_tid == Type_adp_.Tid__obj) {
 				if (Type_adp_.Eq(itm_type, KeyVal.class))
 					Ary_to_str__itm(wtr, indent + 1, (KeyVal)itm);
-				if (Type_adp_.Is_array(itm_type))
+				else if (Type_adp_.Is_array(itm_type))
 					Ary_to_str__ary_itms(wtr, indent + 1, Array_.cast(itm));
 				else
 					throw Err_.new_unhandled(itm_type);

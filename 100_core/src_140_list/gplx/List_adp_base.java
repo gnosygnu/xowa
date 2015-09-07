@@ -23,7 +23,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public Object To_ary(Class<?> memberType) {
 		Object rv = Array_.Create(memberType, count);
 		for (int i = 0; i < count; i++)
-			Array_.Set(rv, i, list[i]);
+			Array_.Set_at(rv, i, list[i]);
 		return rv;
 	}
 	public Object[] To_obj_ary() {
@@ -45,7 +45,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		return list[index];
 	}
 	protected void Add_base(Object o) {
-		if (count == Array_.LenAry(list)) Resize_expand();
+		if (count == Array_.Len_obj(list)) Resize_expand();
 		list[count] = o;
 		count++;
 	}
@@ -64,9 +64,9 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		int newLen = count - delLen;
 		Object[] newList = new Object[newLen];
 		if (delBgn != 0)			// copy elements < delBgn; skip if delBgn == 0
-			Array_.CopyTo(list, 0, newList, 0, delBgn);
+			Array_.Copy_to(list, 0, newList, 0, delBgn);
 		if (delEnd != count -1 )	// copy elements > delEnd; skip if delEnd == lastIdx			
-			Array_.CopyTo(list, delEnd + 1, newList, delBgn, newLen - delBgn);
+			Array_.Copy_to(list, delEnd + 1, newList, delBgn, newLen - delBgn);
 		list = newList;
 		count = list.length;
 	}
@@ -93,7 +93,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		list[trg] = o;
 	}
 	protected void AddAt_base(int pos, Object o) {
-		if (count + 1 >= Array_.LenAry(list)) Resize_expand();
+		if (count + 1 >= Array_.Len_obj(list)) Resize_expand();
 		for (int i = count; i > pos; i--)
 			list[i] = list[i - 1];
 		list[pos] = o;
@@ -156,7 +156,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			list[i] = (i == count - 1) ? null : list[i + 1];
 		}
 	}
-	@gplx.Internal protected int Capacity() {return Array_.LenAry(list);}
+	@gplx.Internal protected int Capacity() {return Array_.Len_obj(list);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_len))			return count;
 		else if	(ctx.Match(k, Invk_get_at))			return Get_at(m.ReadInt("v"));

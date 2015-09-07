@@ -21,9 +21,10 @@ public class Scrib_proc_args {
 	public Scrib_proc_args(KeyVal[] v) {Init(v);}
 	public int Len() {return ary_len;}
 	public KeyVal[] Ary() {return ary;}
-	public boolean		Pull_bool(int i)				{Object rv = Get_or_fail(i); return Bool_.cast(rv);}
-	public String	Pull_str(int i)					{Object rv = Get_or_fail(i); return String_.cast(rv);}
-	public byte[]	Pull_bry(int i)					{Object rv = Get_or_fail(i); return Bry_.new_u8(String_.cast(rv));}
+	public boolean		Pull_bool(int i)				{return Bool_.cast(Get_or_fail(i));}
+	public String	Pull_str(int i)					{return String_.cast(Get_or_fail(i));}
+	public byte[]	Pull_bry(int i)					{return Bry_.new_u8(String_.cast(Get_or_fail(i)));}
+	public KeyVal[] Pull_kv_ary(int i)				{return (KeyVal[])Get_or_fail(i);}
 	public int		Pull_int(int i)					{Object rv = Get_or_fail(i);
 		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
@@ -43,6 +44,7 @@ public class Scrib_proc_args {
 			}
 		}
 	}	
+	public Object Pull_obj(int i) {return Get_or_fail(i);}
 	public String	Cast_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: String_.cast		(rv);}
 	public byte[]	Cast_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_u8(String_.cast	(rv));}	// NOTE: cast is deliberate; Scrib call checkType whi
 	public byte[]	Cast_bry_or_empty(int i)		{Object rv = Get_or_null(i); return rv == null ? Bry_.Empty : Bry_.new_u8(String_.cast	(rv));}
@@ -54,10 +56,6 @@ public class Scrib_proc_args {
 	public String	Xstr_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Object_.Xto_str_loose_or(rv, null);}	// NOTE: Modules can throw exceptions in which return value is nothing; do not fail; return ""; EX: -logy; DATE:2013-10-14
 	public byte[]	Xstr_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_u8(Object_.Xto_str_loose_or(rv, null));}
 	public KeyVal[] Cast_kv_ary_or_null(int i)		{Object rv = Get_or_null(i); return rv == null ? null			: (KeyVal[])rv;}
-	public KeyVal[] Pull_kv_ary(int i) {
-		Object rv = Get_or_fail(i);
-		return (KeyVal[])rv;
-	}
 	public byte[][]	Cast_params_as_bry_ary_or_rest_of_ary(int params_idx)	{	// PAGE:ru.w:Ленин,_Владимир_Ильич; DATE:2014-07-01 MW:LanguageLibrary.php|ConvertPlural: if (is_array($args[0])) $args = $args[0];  $forms = array_values(array_map('strval', $args));
 		if (params_idx < 0 || params_idx >= ary_len) return Bry_.Ary_empty;
 		Object o = ary[params_idx].Val();

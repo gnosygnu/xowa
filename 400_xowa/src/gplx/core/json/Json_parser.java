@@ -36,8 +36,11 @@ public class Json_parser {
 			}
 			Skip_ws();
 			Json_doc doc = new Json_doc();
-			Json_nde root = Make_nde(doc);
-			if (root_is_nde) {}
+			Json_grp root = null;
+			if (root_is_nde)
+				root = Make_nde(doc);
+			else
+				root = Make_ary(doc);
 			doc.Ctor(src, root);
 			return doc;
 		}

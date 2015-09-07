@@ -37,7 +37,7 @@ public class Err extends RuntimeException {
 		if (msgs_idx == msgs_len) {
 			int new_len = msgs_len * 2;
 			Err_msg[] new_ary = new Err_msg[new_len];
-			Array_.CopyTo(msgs_ary, new_ary, 0);
+			Array_.Copy_to(msgs_ary, new_ary, 0);
 			this.msgs_ary = new_ary;
 			this.msgs_len = new_len;
 		}

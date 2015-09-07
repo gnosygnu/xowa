@@ -20,7 +20,7 @@ import org.junit.*;
 public class Json_wtr_tst {
 	@Before public void init() {fxt.Clear();} private final Json_wtr_fxt fxt = new Json_wtr_fxt();
 	@Test   public void Root() {
-		fxt.Wtr().Doc_bgn().Doc_end();
+		fxt.Wtr().Doc_nde_bgn().Doc_nde_end();
 		fxt.Test
 		( "{"
 		, "}"
@@ -28,10 +28,10 @@ public class Json_wtr_tst {
 	}
 	@Test   public void Kv() {
 		fxt.Wtr()
-			.Doc_bgn()
+			.Doc_nde_bgn()
 			.Kv_str("k0", "v0")
 			.Kv_str("k1", "v1")
-			.Doc_end();
+			.Doc_nde_end();
 		fxt.Test
 		( "{ 'k0':'v0'"
 		, ", 'k1':'v1'"
@@ -40,7 +40,7 @@ public class Json_wtr_tst {
 	}
 	@Test   public void Nde() {
 		fxt.Wtr()
-			.Doc_bgn()
+			.Doc_nde_bgn()
 				.Nde_bgn("s0")
 					.Nde_bgn("s00")
 					.Nde_end()
@@ -49,7 +49,7 @@ public class Json_wtr_tst {
 					.Nde_bgn("s10")
 					.Nde_end()
 				.Nde_end()
-			.Doc_end();
+			.Doc_nde_end();
 		fxt.Test
 		( "{ 's0':"
 		, "  { 's00':"
@@ -66,16 +66,36 @@ public class Json_wtr_tst {
 	}
 	@Test   public void Ary() {
 		fxt.Wtr()
-			.Doc_bgn()
+			.Doc_nde_bgn()
 			.Ary_bgn("a0")
 			.Ary_itm_str("v0")
 			.Ary_itm_str("v1")
 			.Ary_end()
-			.Doc_end();
+			.Doc_nde_end();
 		fxt.Test
 		( "{ 'a0':"
 		, "  [ 'v0'"
 		, "  , 'v1'"
+		, "  ]"
+		, "}"
+		);
+	}
+	@Test   public void Nde__nested() {
+		fxt.Wtr()
+			.Doc_nde_bgn()
+			.Ary_bgn("a0")
+				.Ary_itm_obj(KeyVal_.Ary
+				(	KeyVal_.new_("k1", "v1")
+				,	KeyVal_.new_("k2", "v2")
+				))
+			.Ary_end()
+			.Doc_nde_end();
+		fxt.Test
+		( "{ 'a0':"
+		, "  ["
+		, "    { 'k1':'v1'"
+		, "    , 'k2':'v2'"
+		, "    }"
 		, "  ]"
 		, "}"
 		);

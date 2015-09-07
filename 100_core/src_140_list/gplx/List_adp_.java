@@ -58,7 +58,7 @@ public class List_adp_ {
 		int ary_len = Array_.Len(ary);
 		List_adp rv = size_(ary_len);
 		for (int i = 0; i < ary_len; i++)
-			rv.Add(Array_.Get(ary, i));
+			rv.Add(Array_.Get_at(ary, i));
 		return rv;
 	}
 	public static final int Capacity_initial = 8;

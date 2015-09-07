@@ -420,6 +420,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_math:
 			case Xop_xnde_tag_.Tid_indicator:
 			case Xop_xnde_tag_.Tid_xowa_html:
+			case Xop_xnde_tag_.Tid_graph:
 				Xox_xnde xtn = xnde.Xnde_xtn();
 				xtn.Xtn_write(bfr, app, ctx, this, hctx, xnde, src);
 				break;

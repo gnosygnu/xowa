@@ -71,6 +71,7 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.gallery.Gallery_xnde Xnde_gallery()								{return new gplx.xowa.xtns.gallery.Gallery_xnde();}
 	public gplx.xowa.xtns.imaps.Imap_xnde Xnde_imageMap()									{return new gplx.xowa.xtns.imaps.Imap_xnde();}
 	public gplx.xowa.xtns.hieros.Hiero_xnde Xnde_hiero()									{return new gplx.xowa.xtns.hieros.Hiero_xnde();}
+	public gplx.xowa.xtns.graphs.Graph_xnde Xnde_graph()									{return new gplx.xowa.xtns.graphs.Graph_xnde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pages_nde Xnde_pages()							{return new gplx.xowa.xtns.proofreadPage.Pp_pages_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde Xnde_pagelist()						{return new gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde Xnde_pagequality()				{return new gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde();}

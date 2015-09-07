@@ -44,7 +44,7 @@ class Mwm_lxr__backslash implements Mwm_lxr {
 					break;
 			}
 		}
-		root.Regy__add(Mwm_tkn_.Tid__func, bgn_pos, cur_pos, new Mwm_tkn__node());
+		root.Regy__add(Mwm_tkn_.Tid__fnc, bgn_pos, cur_pos, new Mwm_tkn__node());
 		return cur_pos;
 	}
 }

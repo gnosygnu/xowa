@@ -28,7 +28,7 @@ public class Xopg_tmpl_prepend_mgr {
 		if (new_len > stack_max) {
 			stack_max += 8;
 			Bry_bfr[] new_stack = new Bry_bfr[stack_max];
-			Array_.CopyTo(stack, new_stack, 0);
+			Array_.Copy_to(stack, new_stack, 0);
 			stack = new_stack;
 		}
 		stack[stack_len] = bfr;

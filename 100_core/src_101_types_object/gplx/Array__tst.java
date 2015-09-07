@@ -35,7 +35,7 @@ public class Array__tst {
 		tst_ReplaceInsert(ary_obj(0, 1, 2, 4, 5)	, ary_obj(1, 2, 3), 1, 2, ary_obj(0, 1, 2, 3, 4, 5));
 		tst_ReplaceInsert(ary_obj(0, 1, 2, 3, 4, 5)	, ary_obj(1, 2, 3), 1, 3, ary_obj(0, 1, 2, 3, 4, 5));
 		tst_ReplaceInsert(ary_obj(0, 1, 9, 4, 5)	, ary_obj(2, 3)   , 2, 1, ary_obj(0, 1, 2, 3, 4, 5));
-	}	void tst_ReplaceInsert(Object[] cur, Object[] add, int curReplacePos, int addInsertPos, Object[] expd) {Tfds.Eq_ary(expd, Array_.ReplaceInsert(cur, add, curReplacePos, addInsertPos));}
+	}	void tst_ReplaceInsert(Object[] cur, Object[] add, int curReplacePos, int addInsertPos, Object[] expd) {Tfds.Eq_ary(expd, Array_.Replace_insert(cur, add, curReplacePos, addInsertPos));}
 	Object[] ary_obj(Object... ary) {return ary;}			
 	int[] ary_(int... ary) {return ary;}
 }

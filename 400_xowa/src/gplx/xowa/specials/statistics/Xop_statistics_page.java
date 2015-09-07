@@ -105,7 +105,7 @@ class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
 class Xop_statistics_stats_wiki_grp implements Bry_fmtr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
 	public void XferAry(Bry_bfr bfr, int idx) {
-		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.Xto_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
+		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.To_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
 	}
 	private Bry_fmtr fmtr_wiki = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	""	

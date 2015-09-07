@@ -18,12 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import gplx.core.btries.*;
 class Mwm_parser {
+	private final Mwm_ctx ctx = new Mwm_ctx();
+	private final Btrie_fast_mgr trie;		
+	public Mwm_tkn_mkr Tkn_mkr() {return tkn_mkr;} private final Mwm_tkn_mkr tkn_mkr = new Mwm_tkn_mkr();
+	public Mwm_parser() {
+		this.trie = Mwm_lxr_trie_bldr.new_(tkn_mkr);
+	}
 	public void Parse(Mwm_tkn__root root, byte[] src) {
 		int src_len = src.length;
-		Btrie_fast_mgr trie = Mwm_trie_bldr.new_();
-		Parse(trie, root, new Mwm_ctx(), src, src_len, 0, src_len);
+		ctx.Clear();
+		root.Init_as_root(tkn_mkr, 0, src.length);
+		Parse(root, ctx, src, src_len, 0, src_len);
 	}
-	private int Parse(Btrie_fast_mgr trie, Mwm_tkn__root root, Mwm_ctx ctx, byte[] src, int src_len, int bgn_pos, int end_pos) {
+	private int Parse(Mwm_tkn__root root, Mwm_ctx ctx, byte[] src, int src_len, int bgn_pos, int end_pos) {
 		int pos = bgn_pos;
 		int txt_bgn = pos, txt_uid = -1;
 		byte b = src[pos];

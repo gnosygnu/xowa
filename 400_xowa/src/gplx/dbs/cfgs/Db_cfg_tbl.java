@@ -39,7 +39,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Delete_grp(String grp)				{conn.Stmt_delete(tbl_name, fld_grp).Crt_str(fld_grp, grp).Exec_delete();}
 	public void Delete_all()						{conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
 	public void Insert_yn		(String grp, String key, boolean  val)		{Insert_str(grp, key, val ? "y" : "n");}
-	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.Xto_str(val));}
+	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.To_str(val));}
 	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.Xto_str(val));}
 	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.Xto_str(val));}
 	public void Insert_date		(String grp, String key, DateAdp val)		{Insert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
@@ -52,7 +52,7 @@ public class Db_cfg_tbl implements RlsAble {
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Xto_api());}
 	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
-	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.Xto_str(val));}
+	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.To_str(val));}
 	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.Xto_str(val));}
 	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.Xto_str(val));}
 	public void Update_date		(String grp, String key, DateAdp val)		{Update_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}

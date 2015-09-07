@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 public class Scrib_lib_text implements Scrib_lib {
 	private final Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
+	private final Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 	public Scrib_lib_text(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
@@ -27,7 +28,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		notify_wiki_changed_fnc = mod.Fncs_get_by_key("notify_wiki_changed");
 		return mod;
 	}	private Scrib_lua_proc notify_wiki_changed_fnc;
-	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_unstrip:							return Unstrip(args, rslt);
@@ -51,14 +52,55 @@ public class Scrib_lib_text implements Scrib_lib {
 		if (Html_entity_ == null) Html_entity_ = Scrib_lib_text_html_entities.new_();
 		return rslt.Init_obj(Html_entity_);
 	}	private static KeyVal[] Html_entity_;
+//		public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+//			Object itm = args.Pull_obj(0);
+//			Class<?> itm_type = itm.getClass();
+//			KeyVal[] itm_as_kvy = null;
+//			Object itm_as_ary = null;	
+//			if		(Type_adp_.Eq(itm_type, typeof(KeyVal[])))	itm_as_kvy = (KeyVal[])itm;
+//			else if	(Type_adp_.Is_array(itm_type))				itm_as_ary = Array_.cast(itm);
+//			int flags = args.Cast_int_or(1, 0);
+//			if (itm_as_kvy != null && !Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
+//				itm_as_kvy = json_util.Reindex_arrays(itm_as_kvy, true);
+//			byte[] rv = null;
+//			if	(itm_as_kvy != null)
+//				rv = json_util.Encode_as_nde(itm_as_kvy, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
+//			else if	(itm_as_ary != null)
+//				rv = json_util.Encode_as_ary(itm_as_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);;
+//			if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
+//			return rslt.Init_obj(rv);
+//		}
 	public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		KeyVal[] kv_ary = args.Pull_kv_ary(0);
+		Object itm = args.Pull_obj(0);
+		Class<?> itm_type = itm.getClass();
+		KeyVal[] itm_as_kvy = null;
+		Object itm_as_ary = null;	
+		if		(Type_adp_.Eq(itm_type, KeyVal[].class))	itm_as_kvy = (KeyVal[])itm;
+		else if	(Type_adp_.Is_array(itm_type))				itm_as_ary = Array_.cast(itm);
 		int flags = args.Cast_int_or(1, 0);
-		if (!Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
-			kv_ary = json_util.Reindex_arrays(kv_ary, true);
-		byte[] rv = json_util.Encode(kv_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
-		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
-		return rslt.Init_obj(rv);
+		synchronized (reindex_data) {
+			if (	itm_as_kvy != null 
+				&&	itm_as_kvy.length > 0
+				&&	!Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
+				) {
+				json_util.Reindex_arrays(reindex_data, itm_as_kvy, true);
+				if (reindex_data.Rv_is_kvy()) {
+					itm_as_kvy = reindex_data.Rv_as_kvy();
+					itm_as_ary = null;
+				}
+				else {
+					itm_as_ary = reindex_data.Rv_as_ary();
+					itm_as_kvy = null;
+				}
+			}
+			byte[] rv = null;
+			if (itm_as_kvy != null)
+				rv = json_util.Encode_as_nde(itm_as_kvy, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
+			else
+				rv = json_util.Encode_as_ary(itm_as_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
+			if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
+			return rslt.Init_obj(rv);
+		}
 	}
 	public boolean JsonDecode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] json = args.Pull_bry(0);
@@ -66,11 +108,19 @@ public class Scrib_lib_text implements Scrib_lib {
 		int opts = Scrib_lib_text__json_util.Opt__force_assoc;
 		if (Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
 			opts = Enm_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
-		KeyVal[] rv = json_util.Decode(core.App().Utl__json_parser(), json, opts);
-		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
-		if (!(Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)))
-			rv = json_util.Reindex_arrays(rv, false);
-		return rslt.Init_obj(rv);
+		synchronized (procs) {
+			byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
+			if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
+			if (rv_tid == Bool_.Y_byte && !(Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
+				KeyVal[] rv_as_kvy = (KeyVal[])json_util.Decode_rslt_as_nde();
+				synchronized (reindex_data) {
+					json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
+					return rslt.Init_obj(reindex_data.Rv_is_kvy() ? reindex_data.Rv_as_kvy() : reindex_data.Rv_as_ary());
+				}
+			}
+			else
+				return rslt.Init_obj(json_util.Decode_rslt_as_ary());
+		}
 	}
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), KeyVal_.Ary_empty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -82,7 +132,6 @@ public class Scrib_lib_text implements Scrib_lib {
 		rv[3] = KeyVal_.new_("nowiki_protocols", KeyVal_.Ary_empty);	// NOTE: code implemented, but waiting for it to be used; DATE:2014-03-20
 		return rslt.Init_obj(rv);
 	}
-	public void Init_for_tests() {json_util.Init_for_tests();}
 	private String Init_lib_text_get_msg(Xow_msg_mgr msg_mgr, String msg_key) {
 		return String_.new_u8(msg_mgr.Val_by_key_obj(Bry_.new_u8(msg_key)));
 	}

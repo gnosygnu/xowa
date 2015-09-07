@@ -33,7 +33,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
 	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
-		try {Add(k, Byte_.Xto_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v);}
+		try {Add(k, Byte_.To_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}

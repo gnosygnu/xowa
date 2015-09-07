@@ -371,7 +371,7 @@ public class String_ implements GfoInvkAble {
 	public static String[] Split_lang(String s, char c) {return s.split(Character.toString(c));}	
 
 	static String Format_do(String s, Object[] ary) {
-		int aryLength = Array_.LenAry(ary); if (aryLength == 0) return s; // nothing to format
+		int aryLength = Array_.Len_obj(ary); if (aryLength == 0) return s; // nothing to format
 		String_bldr sb = String_bldr_.new_();
 		char bracketBgn = '{', bracketEnd = '}';
 		String aryVal = null; char c, next;

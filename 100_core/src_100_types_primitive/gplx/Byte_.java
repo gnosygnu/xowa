@@ -32,8 +32,8 @@ public class Byte_ {
 		catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public static byte		By_int(int v)	{return v > 127 ? (byte)(v - 256) : (byte)v;} // PERF?: (byte)(v & 0xff)
-	public static int		Xto_int(byte v) {return v < 0 ? (int)v + 256 : v;}
-	public static String	Xto_str(byte v)	{return new Byte(v).toString();} 
+	public static int		To_int(byte v)	{return v < 0 ? (int)v + 256 : v;}
+	public static String	To_str(byte v)	{return new Byte(v).toString();} 
 	public static boolean In(byte v, byte... ary) {
 		for (byte itm : ary)
 			if (v == itm) return true;

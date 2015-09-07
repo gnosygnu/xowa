@@ -17,16 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 class Mwm_tkn_mkr {
-	private final Mwm_tkn__leaf tmp_leaf = new Mwm_tkn__leaf();
+	private final Mwm_tkn[] leaf_protos = new Mwm_tkn[Mwm_tkn_.Tid_len];
+	public void Reg_leaf(int tid, Mwm_tkn tkn) {
+		leaf_protos[tid] = tkn;
+	}
 	public Mwm_tkn Make_leaf(Mwm_tkn__root root, int tid, int uid, int bgn, int end) {
-		synchronized (tmp_leaf) {
-			tmp_leaf.Init(root, tid, uid, bgn, end);
-			return tmp_leaf;
-		}
+		Mwm_tkn proto = leaf_protos[tid];
+		return proto == null ? null : proto.Init(root, tid, uid, bgn, end);
 	}
 	public Mwm_tkn Make_func(Mwm_tkn__root root, int uid, int bgn, int end) {
 		Mwm_tkn__node rv = new Mwm_tkn__node();
-		rv.Init(root, Mwm_tkn_.Tid__func, uid, bgn, end);
+		rv.Init(root, Mwm_tkn_.Tid__fnc, uid, bgn, end);
 		return rv;
 	}
 	public Mwm_tkn Make_curly(Mwm_tkn__root root, int uid, int bgn, int end) {

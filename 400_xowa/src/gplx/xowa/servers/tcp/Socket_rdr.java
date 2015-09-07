@@ -27,8 +27,10 @@ public class Socket_rdr {
 	public Socket_rdr Open() {
 		try {
 		//			this.Rls();
-			if (server == null)
+			if (server == null) {
 				server = new java.net.ServerSocket(port);
+				server.setReuseAddress(true);
+			}
 			client = server.accept();
 			client.setSoTimeout(10000);
 			stream = client.getInputStream();			

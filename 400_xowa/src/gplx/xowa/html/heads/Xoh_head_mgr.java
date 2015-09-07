@@ -31,7 +31,7 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 	;
 	public Xoh_head_mgr() {
 		Itms_add(itm__css, itm__globals, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery
-		, itm__mathjax, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
+		, itm__mathjax, itm__graph, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
 		, itm__dbui
 		);
 	}
@@ -42,13 +42,14 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 	public Xoh_head_itm__toc					Itm__toc() {return itm__toc;} private final Xoh_head_itm__toc itm__toc = new Xoh_head_itm__toc();
 	public Xoh_head_itm__collapsible			Itm__collapsible() {return itm__collapsible;} private final Xoh_head_itm__collapsible itm__collapsible = new Xoh_head_itm__collapsible();
 	public Xoh_head_itm__navframe				Itm__navframe() {return itm__navframe;} private final Xoh_head_itm__navframe itm__navframe = new Xoh_head_itm__navframe();
+	public Xoh_head_itm__top_icon				Itm__top_icon() {return itm__top_icon;} private final Xoh_head_itm__top_icon itm__top_icon = new Xoh_head_itm__top_icon();
 	public Xoh_head_itm__gallery				Itm__gallery() {return itm__gallery;} private final Xoh_head_itm__gallery itm__gallery = new Xoh_head_itm__gallery();
+	public Xoh_head_itm__title_rewrite			Itm__title_rewrite() {return itm__title_rewrite;} private final Xoh_head_itm__title_rewrite itm__title_rewrite = new Xoh_head_itm__title_rewrite();
 	public Xoh_head_itm__mathjax				Itm__mathjax() {return itm__mathjax;} private final Xoh_head_itm__mathjax itm__mathjax = new Xoh_head_itm__mathjax();
 	public Xoh_head_itm__hiero					Itm__hiero() {return itm__hiero;} private final Xoh_head_itm__hiero itm__hiero = new Xoh_head_itm__hiero();
-	public Xoh_head_itm__top_icon				Itm__top_icon() {return itm__top_icon;} private final Xoh_head_itm__top_icon itm__top_icon = new Xoh_head_itm__top_icon();
-	public Xoh_head_itm__search_suggest			Itm__search_suggest() {return itm__search_suggest;} private final Xoh_head_itm__search_suggest itm__search_suggest = new Xoh_head_itm__search_suggest();
+	public Xoh_head_itm__graph					Itm__graph() {return itm__graph;} private final Xoh_head_itm__graph itm__graph = new Xoh_head_itm__graph();
 	public Xoh_head_itm__timeline				Itm__timeline() {return itm__timeline;} private final Xoh_head_itm__timeline itm__timeline = new Xoh_head_itm__timeline();
-	public Xoh_head_itm__title_rewrite			Itm__title_rewrite() {return itm__title_rewrite;} private final Xoh_head_itm__title_rewrite itm__title_rewrite = new Xoh_head_itm__title_rewrite();
+	public Xoh_head_itm__search_suggest			Itm__search_suggest() {return itm__search_suggest;} private final Xoh_head_itm__search_suggest itm__search_suggest = new Xoh_head_itm__search_suggest();
 	public Xoh_head_itm__dbui					Itm__dbui() {return itm__dbui;} private final Xoh_head_itm__dbui itm__dbui = new Xoh_head_itm__dbui();
 	public Xoh_head_mgr Init(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		this.app = app; this.wiki = wiki; this.page = page;
@@ -157,10 +158,10 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 				int flag = itms[i].Flags();
 				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__css_include))		list__css_include.Add(itm);
 				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__css_text))			list__css_text.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_include))			list__js_include.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_global))		list__js_head_global.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_script))		list__js_head_script.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_tail_script))		list__js_tail_script.Add(itm);
+				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_include))		list__js_include.Add(itm);
+				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_global))	list__js_head_global.Add(itm);
+				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_script))	list__js_head_script.Add(itm);
+				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_tail_script))	list__js_tail_script.Add(itm);
 				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_window_onload))	list__js_window_onload.Add(itm);
 			}
 		}

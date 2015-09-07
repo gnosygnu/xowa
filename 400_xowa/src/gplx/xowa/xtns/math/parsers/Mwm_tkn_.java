@@ -21,39 +21,104 @@ class Mwm_tkn_ {
 	public static final Mwm_tkn[] Ary_empty = new Mwm_tkn[0];
 	public static final int Uid__root = 0;
 	public static final int
-		Tid__root			= 0
-	,	Tid__text			= 1
-	,	Tid__ws				= 2
-	,	Tid__func			= 3
-	,	Tid__curly			= 4
-	,	Tid__brack			= 5
+		Tid__root					=  0
+	,	Tid__text					=  1
+	,	Tid__ws						=  2
+	,	Tid__curly					=  3
+	,	Tid__brack					=  4
+	,	Tid__lit_basic				=  5
+	,	Tid__lit_uf_lt				=  6
+	,	Tid__lit_uf_op				=  7
+	,	Tid__dlm_basic				=  8
+	,	Tid__dlm_uf_lt				=  9
+	,	Tid__dlm_uf_op				= 10
+	,	Tid__sub					= 11
+	,	Tid__sup					= 12
+	,	Tid__next_row				= 13
+	,	Tid__next_cell				= 14
+	,	Tid__fnc					= 15
+	,	Tid__fnc_latex				= 16
+	,	Tid__fnc_mw					= 17
+	,	Tid__matrix_bgn				= 18
+	,	Tid__matrix_end				= 19
+	,	Tid__pmatrix_bgn			= 20
+	,	Tid__pmatrix_end			= 21
+	,	Tid__bmatrix_bgn			= 22
+	,	Tid__bmatrix_end			= 23
+	,	Tid__Bmatrix_bgn			= 24
+	,	Tid__Bmatrix_end			= 25
+	,	Tid__vmatrix_bgn			= 26
+	,	Tid__vmatrix_end			= 27
+	,	Tid__Vmatrix_bgn			= 28
+	,	Tid__Vmatrix_end			= 29
+	,	Tid__array_bgn				= 30
+	,	Tid__array_end				= 31
+	,	Tid__align_bgn				= 32
+	,	Tid__align_end				= 33
+	,	Tid__alignat_bgn			= 34
+	,	Tid__alignat_end			= 35
+	,	Tid__smallmatrix_bgn		= 36
+	,	Tid__smallmatrix_end		= 37
+	,	Tid__cases_bgn				= 38
+	,	Tid__cases_end				= 39
 	;
-	public static byte[]
-		Bry__root			= Bry_.new_a7("root")
-	,	Bry__text			= Bry_.new_a7("text")
-	,	Bry__ws				= Bry_.new_a7("ws")
-	,	Bry__func			= Bry_.new_a7("func")
-	,	Bry__curly			= Bry_.new_a7("curly")
-	,	Bry__brack			= Bry_.new_a7("brack")
-	;
-	public static byte[] Tid_to_bry(int tid) {
-		switch (tid) {
-			case Tid__root:			return Bry__root;
-			case Tid__text:			return Bry__text;
-			case Tid__ws:			return Bry__ws;
-			case Tid__func:			return Bry__func;
-			case Tid__curly:		return Bry__curly;
-			case Tid__brack:		return Bry__brack;
-			default:				throw Err_.new_unhandled(tid);
-		}
+	public static final int Tid_len = 40;
+	private static final byte[][] Bry__ary = Bry__ary__new();
+	private static byte[][] Bry__ary__new() {
+		byte[][] rv = new byte[Tid_len][];
+		Reg_itm(rv, Tid__root					, "root");
+		Reg_itm(rv, Tid__text					, "text");
+		Reg_itm(rv, Tid__ws						, "ws");
+		Reg_itm(rv, Tid__fnc					, "func");
+		Reg_itm(rv, Tid__curly					, "curly");
+		Reg_itm(rv, Tid__brack					, "brack");
+		Reg_itm(rv, Tid__lit_basic				, "literal_basic");
+		Reg_itm(rv, Tid__lit_uf_lt				, "literal_uf_lt");
+		Reg_itm(rv, Tid__lit_uf_op				, "literal_uf_op");
+		Reg_itm(rv, Tid__dlm_basic				, "delimiter_basic");
+		Reg_itm(rv, Tid__dlm_uf_lt				, "delimiter_uf_lt");
+		Reg_itm(rv, Tid__dlm_uf_op				, "delimiter_uf_op");
+		Reg_itm(rv, Tid__sub					, "sub");
+		Reg_itm(rv, Tid__sup					, "sup");
+		Reg_itm(rv, Tid__next_row				, "next_row");
+		Reg_itm(rv, Tid__next_cell				, "next_cell");
+		Reg_itm(rv, Tid__fnc_latex				, "func_latex");
+		Reg_itm(rv, Tid__fnc_mw					, "func_mediawiki");
+		Reg_itm(rv, Tid__matrix_bgn				, "matrix_bgn");
+		Reg_itm(rv, Tid__matrix_end				, "matrix_end");
+		Reg_itm(rv, Tid__pmatrix_bgn			, "pmatrix_bgn");
+		Reg_itm(rv, Tid__pmatrix_end			, "pmatrix_end");
+		Reg_itm(rv, Tid__bmatrix_bgn			, "bmatrix_bgn");
+		Reg_itm(rv, Tid__bmatrix_end			, "bmatrix_end");
+		Reg_itm(rv, Tid__Bmatrix_bgn			, "Bmatrix_bgn");
+		Reg_itm(rv, Tid__Bmatrix_end			, "Bmatrix_bgn");
+		Reg_itm(rv, Tid__vmatrix_bgn			, "vmatrix_bgn");
+		Reg_itm(rv, Tid__vmatrix_end			, "vmatrix_end");
+		Reg_itm(rv, Tid__Vmatrix_bgn			, "Vmatrix_bgn");
+		Reg_itm(rv, Tid__Vmatrix_end			, "Vmatrix_end");
+		Reg_itm(rv, Tid__array_bgn				, "array_bgn");
+		Reg_itm(rv, Tid__array_end				, "array_end");
+		Reg_itm(rv, Tid__align_bgn				, "align_bgn");
+		Reg_itm(rv, Tid__align_end				, "align_end");
+		Reg_itm(rv, Tid__alignat_bgn			, "alignat_bgn");
+		Reg_itm(rv, Tid__alignat_end			, "alignat_end");
+		Reg_itm(rv, Tid__smallmatrix_bgn		, "smallmatrix_bgn");
+		Reg_itm(rv, Tid__smallmatrix_end		, "smallmatrix_end");
+		Reg_itm(rv, Tid__cases_bgn				, "cases_bgn");
+		Reg_itm(rv, Tid__cases_end				, "cases_end");
+		return rv;
 	}
+	private static void Reg_itm(byte[][] ary, int id, String name) {ary[id] = Bry_.new_a7(name);}
+	public static byte[] Tid_to_bry(int tid) {return Bry__ary[tid];}
 	public static boolean Tid_is_node(int tid) {
 		switch (tid) {
-			case Mwm_tkn_.Tid__text:
-			case Mwm_tkn_.Tid__ws:
-				return false;
-			default:
+			case Mwm_tkn_.Tid__root:
+			case Mwm_tkn_.Tid__fnc:
+			case Mwm_tkn_.Tid__curly:
+			case Mwm_tkn_.Tid__brack:
 				return true;
+			default:
+				return false;
 		}
 	}
 	public static void Tkn_to_bry__bgn(Bry_bfr bfr, int indent, Mwm_tkn tkn) {

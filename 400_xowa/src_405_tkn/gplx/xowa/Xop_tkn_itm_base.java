@@ -36,7 +36,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		int subs_pos_ary_len = subs_pos_ary.length;
 		if (pos_idx + 1 > subs_pos_ary_len)  {
 			int[] new_subs_pos_ary = new int[(pos_idx + 1) * 2];
-			Array_.CopyTo(subs_pos_ary, 0, new_subs_pos_ary, 0, subs_pos_ary.length);
+			Array_.Copy_to(subs_pos_ary, 0, new_subs_pos_ary, 0, subs_pos_ary.length);
 			subs_pos_ary = new_subs_pos_ary;
 		}
 		subs_pos_ary[pos_idx] = bgn;
@@ -56,7 +56,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Xop_tkn_itm[] new_subs = new Xop_tkn_itm[subs_max];
-			Array_.CopyTo(subs, 0, new_subs, 0, subs_len);
+			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = sub;

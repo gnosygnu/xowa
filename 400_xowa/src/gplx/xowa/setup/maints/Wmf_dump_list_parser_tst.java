@@ -108,7 +108,7 @@ class Wmf_dump_list_parser_fxt {
 	private Wmf_dump_list_parser parser = new Wmf_dump_list_parser();
 	public String itm(String wiki_abrv, String dump_date, byte status_done, String status_msg, String status_time) {
 		return String_.Concat_with_str("\n", wiki_abrv, dump_date
-		, Byte_.Xto_str(status_done)
+		, Byte_.To_str(status_done)
 		, status_msg
 		, status_time
 		);
@@ -128,7 +128,7 @@ class Wmf_dump_list_parser_fxt {
 		DateAdp status_time = itm.Status_time();
 		String status_time_str = status_time == null ? "" : status_time.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time); 
 		return String_.Concat_with_str("\n", String_.new_a7(itm.Wiki_abrv()), itm.Dump_date().XtoStr_fmt("yyyyMMdd")
-			, Byte_.Xto_str(itm.Status_tid())
+			, Byte_.To_str(itm.Status_tid())
 			, String_.new_a7(itm.Status_msg())
 			, status_time_str
 			);

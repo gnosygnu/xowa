@@ -22,6 +22,7 @@ public class Xoh_head_itm_ {
 	, Key__css				= Bry_.new_a7("css")
 	, Key__gallery			= Bry_.new_a7("gallery")
 	, Key__globals			= Bry_.new_a7("globals")
+	, Key__graph			= Bry_.new_a7("graph")
 	, Key__hiero			= Bry_.new_a7("hiero")
 	, Key__mathjax			= Bry_.new_a7("mathjax")
 	, Key__navframe			= Bry_.new_a7("navframe")

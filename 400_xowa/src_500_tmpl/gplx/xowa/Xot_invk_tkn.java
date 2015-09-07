@@ -447,7 +447,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	}	Arg_nde_tkn[] args = Arg_nde_tkn.Ary_empty; int args_max;
 	Arg_nde_tkn[] Resize(Arg_nde_tkn[] src, int cur_len, int new_len) {
 		Arg_nde_tkn[] rv = new Arg_nde_tkn[new_len];
-		Array_.CopyTo(src, 0, rv, 0, cur_len);
+		Array_.Copy_to(src, 0, rv, 0, cur_len);
 		return rv;
 	}
 	public Xot_invk_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}

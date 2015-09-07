@@ -16,17 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
-class Mwm_tkn__leaf implements Mwm_tkn {
+class Mwm_tkn__leaf_repl implements Mwm_tkn {
+	private final byte[] repl;
+	public Mwm_tkn__leaf_repl(int tid, byte[] repl) {
+		this.tid = tid;
+		this.repl = repl;
+	}
 	public Mwm_tkn Init(Mwm_tkn__root root, int tid, int uid, int src_bgn, int src_end) {
 		this.root = root;
-		this.tid = tid;
 		this.uid = uid;
 		this.src_bgn = src_bgn;
 		this.src_end = src_end;
 		return this;
 	}
 	public Mwm_tkn__root Root() {return root;} private Mwm_tkn__root root;
-	public int Tid() {return tid;} private int tid;
+	public int Tid() {return tid;} private final int tid;
 	public int Uid() {return uid;} private int uid;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;

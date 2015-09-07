@@ -23,10 +23,11 @@ interface Mwm_lxr {
 class Mwm_lxr_ {
 	public static final int
 		Tid__ws				= 0
-	,	Tid__backslash		= 1
-	,	Tid__curly_bgn		= 2
-	,	Tid__curly_end		= 3
-	,	Tid__brack_bgn		= 4
-	,	Tid__brack_end		= 5
+	,	Tid__raw			= 1
+	,	Tid__backslash		= 2
+	,	Tid__curly_bgn		= 3
+	,	Tid__curly_end		= 4
+	,	Tid__brack_bgn		= 5
+	,	Tid__brack_end		= 6
 	;
 }

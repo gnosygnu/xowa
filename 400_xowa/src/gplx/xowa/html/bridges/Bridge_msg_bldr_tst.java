@@ -21,7 +21,7 @@ public class Bridge_msg_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Bridge_msg_bldr_fxt fxt = new Bridge_msg_bldr_fxt();
 	@Test   public void Bld() {
 		fxt.Bldr().Rslt_pass_y_().Notify_pass_("passed").Data("key1", true).Data("key2", 1).Data("key3", "val3");
-		fxt.Test_to_json_str("{ 'rslt':{ 'pass':true}, 'notify':{ 'text':'passed', 'status':'success'}, 'data':{ 'key1':true, 'key2':1, 'key3':'val3'}}");
+		fxt.Test_to_json_str("{'rslt':{'pass':true},'notify':{'text':'passed','status':'success'},'data':{'key1':true,'key2':1,'key3':'val3'}}");
 	}
 }
 class Bridge_msg_bldr_fxt {

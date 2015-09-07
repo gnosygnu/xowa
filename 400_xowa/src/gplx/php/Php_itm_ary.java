@@ -28,7 +28,7 @@ public class Php_itm_ary implements Php_itm, Php_itm_sub {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Php_itm_sub[] new_ary = new Php_itm_sub[subs_max];
-			Array_.CopyTo(ary, 0, new_ary, 0, subs_len);
+			Array_.Copy_to(ary, 0, new_ary, 0, subs_len);
 			ary = new_ary;
 		}
 		ary[subs_len] = v;
