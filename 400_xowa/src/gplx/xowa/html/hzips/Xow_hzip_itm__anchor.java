@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.html.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xow_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
 	private Bry_rdr bry_rdr = new Bry_rdr();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*;
 public class Xoh_lnki_text_fmtr implements Bry_fmtr_arg {	// formats alt or caption
 	private final Bry_bfr_mkr bfr_mkr; private final Xoh_html_wtr html_wtr;
 	private Xop_ctx ctx; private Xoh_wtr_ctx hctx; private byte[] src; private Xop_tkn_itm text_tkn; private Bry_fmtr fmtr; 

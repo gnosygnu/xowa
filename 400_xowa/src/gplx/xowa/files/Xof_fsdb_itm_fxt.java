@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.repos.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xof_fsdb_itm_fxt {
 	private byte[] wiki_abrv;
 	private byte[] lnki_ttl;

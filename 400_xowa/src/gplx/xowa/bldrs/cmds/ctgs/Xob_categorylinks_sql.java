@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*;
+import gplx.ios.*;
+import gplx.xowa.bldrs.sqls.*;
 public class Xob_categorylinks_sql extends Xob_categorylinks_base {
 	private Db_idx_mode idx_mode = Db_idx_mode.Itm_end;
 	public Xob_categorylinks_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}

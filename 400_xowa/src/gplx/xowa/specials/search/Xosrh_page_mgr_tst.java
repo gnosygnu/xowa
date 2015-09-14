@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_page_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrh_page_mgr_fxt fxt = new Xosrh_page_mgr_fxt();
 	@Test   public void Basic() {

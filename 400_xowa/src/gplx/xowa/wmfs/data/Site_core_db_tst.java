@@ -21,8 +21,10 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.cmds.utils.*;
 public class Site_core_db_tst {
 	@Test  public void Basic() {
+//			Xoa_app app = Xoa_app_fxt.app_();
 //			Db_conn_bldr.I.Reg_default_sqlite();
 //			Io_url db_url = Tfds.RscDir.GenSubFil_nest("400_xowa", "site_meta.sqlite3");
-//			Xob_site_meta_cmd.Build_site_meta(db_url, Xow_wmf_api_mgr.Wikis, DateAdp_.parse_iso8561("2015-08-11 23:38:00"));
+//			gplx.core.consoles.Console_adp__sys.I.Write_str(db_url.Xto_api());
+//			Site_meta_itm.Build_site_meta(app.Utl__json_parser(), app.Wmf_mgr(), db_url, Xow_wmf_api_mgr.Wikis, DateAdp_.parse_iso8561("2015-09-08 23:00:00"));
 	}
 }

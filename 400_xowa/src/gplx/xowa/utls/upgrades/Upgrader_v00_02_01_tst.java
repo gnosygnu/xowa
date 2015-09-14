@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.utls.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.utls.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.bldrs.installs.*;
 public class Upgrader_v00_02_01_tst {
 	@Test  public void Run() {
 		Xoae_app app = Xoa_app_fxt.app_();

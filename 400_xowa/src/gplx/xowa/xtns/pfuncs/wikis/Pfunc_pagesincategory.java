@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pagesincategory extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (Bry_.Len_eq_0(val_dat_ary)) {bb.Add_int_fixed(0, 1); return;}

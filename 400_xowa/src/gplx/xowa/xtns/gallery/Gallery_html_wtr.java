@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.pages.*;
+import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.parsers.*;
 public class Gallery_html_wtr {
 	private final Xoh_arg_img_core img_core_fmtr_basic = new Xoh_arg_img_core__basic(), img_core_fmtr_hdump = new Xoh_arg_img_core__hdump();
 	public void Write_html(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Xoae_page page, Gallery_xnde mgr, byte[] src) {

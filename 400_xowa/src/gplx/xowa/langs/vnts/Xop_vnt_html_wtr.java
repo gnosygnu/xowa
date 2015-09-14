@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.html.*;
+import gplx.xowa.parsers.*;
 public class Xop_vnt_html_wtr {
 	public static void Write(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xop_vnt_tkn vnt) {
 		byte[] cur_lang_vnt = ctx.Wiki().Lang().Vnt_mgr().Cur_vnt();

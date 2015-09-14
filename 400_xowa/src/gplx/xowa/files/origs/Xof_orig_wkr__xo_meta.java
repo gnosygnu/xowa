@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.flds.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.tdbs.metas.*;
 public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
 	private final Io_url wiki_meta_dir; private final byte dir_spr_byte;  private final Bry_bfr url_bfr = Bry_bfr.new_(255);
 	private final Gfo_fld_rdr meta_rdr = Gfo_fld_rdr.xowa_(); private final Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();

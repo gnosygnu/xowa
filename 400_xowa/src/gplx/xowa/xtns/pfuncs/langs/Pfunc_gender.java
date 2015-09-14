@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.primitives.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.genders.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_gender extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_gender;}
 	@Override public boolean Func_require_colon_arg() {return true;}

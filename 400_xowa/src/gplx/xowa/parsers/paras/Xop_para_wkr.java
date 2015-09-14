@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.tblws.*; import gplx.core.btries.*;
+import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
+import gplx.core.btries.*; 
 public class Xop_para_wkr implements Xop_ctx_wkr {
 	private boolean para_enabled;
 	private byte cur_mode;

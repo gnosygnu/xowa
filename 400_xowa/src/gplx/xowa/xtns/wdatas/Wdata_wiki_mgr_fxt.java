@@ -19,6 +19,8 @@ package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*; import gplx.core.json.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.xowa.apps.langs.*;
+import gplx.xowa.tdbs.hives.*;
 public class Wdata_wiki_mgr_fxt {
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}

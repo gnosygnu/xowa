@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.core.primitives.*; import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.core.btries.*; import gplx.core.primitives.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 class Imap_parser {
 	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
 	private byte[] imap_img_src;

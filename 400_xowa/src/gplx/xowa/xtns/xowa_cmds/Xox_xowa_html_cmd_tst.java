@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 import gplx.xowa.html.*; import gplx.xowa.gui.*; import gplx.xowa.pages.*;
+import gplx.xowa.parsers.*;
 public class Xox_xowa_html_cmd_tst {
 	@Before public void init() {fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
 	@Test  public void Head_end() {

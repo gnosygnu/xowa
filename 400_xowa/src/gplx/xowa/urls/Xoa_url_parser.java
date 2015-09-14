@@ -240,7 +240,7 @@ public class Xoa_url_parser {
 		if (colon_pos == Bry_.NotFound) return null;								// no colon
 		Xow_xwiki_itm alias_itm = wiki.Xwiki_mgr().Get_by_mid(bry, 0, colon_pos);	// check for alias;
 		if (alias_itm == null) return null;											// colon-word is not alias; EX:A:B
-		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Meta_mgr().Ns_mgr().Get_or_load(tmp_wiki);
+		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Meta_mgr().Ns__get_or_load(tmp_wiki);
 		if (ns_mgr.Names_get_or_null(alias_itm.Key_bry()) != null)					// special case to handle collision between "wikipedia" alias and "Wikipedia" namespace; if alias exists as ns, ignore it; EX:sv.wikipedia.org/wiki/Wikipedia:Main_Page DATE:2015-07-31
 			return null;
 		byte[] rv = Bry_.Mid(bry, colon_pos + 1); 

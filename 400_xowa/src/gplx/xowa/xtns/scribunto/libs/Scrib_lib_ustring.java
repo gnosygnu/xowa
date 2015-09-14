@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.core.regxs.*; import gplx.intl.*;
+import gplx.xowa.parsers.*;
 public class Scrib_lib_ustring implements Scrib_lib {
 	private final String_surrogate_utl surrogate_utl = new String_surrogate_utl();
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core; gsub_mgr = new Scrib_lib_ustring_gsub_mgr(core, regx_converter);} private Scrib_core core; Scrib_lib_ustring_gsub_mgr gsub_mgr;
@@ -48,7 +49,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public static final String Invk_find = "find", Invk_match = "match", Invk_gmatch_init = "gmatch_init", Invk_gmatch_callback = "gmatch_callback", Invk_gsub = "gsub";
 	private static final String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
 	public boolean Find(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String text_str		= args.Pull_str(0);
+		String text_str		= args.Xstr_str_or_null(0);
 		String regx			= args.Pull_str(1);
 		int bgn_char_idx	= args.Cast_int_or(2, 1);
 		boolean plain			= args.Cast_bool_or_n(3);

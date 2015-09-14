@@ -19,7 +19,8 @@ package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import
 import gplx.core.btries.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
-import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*;
+import gplx.xowa.gui.views.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*;	
 public class Xow_popup_parser {
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_parser parser;
 	private Btrie_fast_mgr tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;

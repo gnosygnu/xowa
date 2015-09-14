@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.core.primitives.*;
 public class Xopg_redlink_idx_list {
 	private final Int_list list = new Int_list();
 	public int Len() {return list.Len();}

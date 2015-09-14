@@ -20,6 +20,7 @@ import gplx.core.primitives.*; import gplx.dbs.cfgs.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.parsers.logs.*;
 import gplx.xowa.html.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private Gallery_xtn_mgr xtn_mgr;
 	public byte Mode()						{return mode;} private byte mode;

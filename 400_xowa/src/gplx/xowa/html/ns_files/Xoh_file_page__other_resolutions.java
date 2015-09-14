@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import gplx.core.primitives.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.parsers.lnkis.*;
 class Xoh_file_page__other_resolutions implements Bry_fmtr_arg {
 	private Xow_repo_mgr repo_mgr; private Xof_file_itm orig_itm; private Xoh_file_page_wtr file_page;
 	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.tidy.*; import gplx.xowa.html.utils.*; import gplx.xowa.html.skins.*;
+import gplx.xowa.parsers.xndes.*;
 public class Xoh_html_mgr implements GfoInvkAble {
 	public Xoh_html_mgr(Xoae_app app) {
 		js_cleaner = new Xoh_js_cleaner(app);

@@ -19,6 +19,7 @@ package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.files.gui.*;
+import gplx.xowa.tdbs.metas.*;
 public class Xof_xfer_queue {
 	private final List_adp xfer_list = List_adp_.new_(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.new_bry_();
 	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.neg1_();

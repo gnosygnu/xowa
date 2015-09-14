@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Xof_math_html_wtr {
 	private Xof_math_itm tmp_math_itm = new Xof_math_itm();
 	private Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");

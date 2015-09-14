@@ -19,6 +19,7 @@ package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.primitives.*;
 import gplx.xowa.html.*;
 import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
 	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {} // NOTE: <dynamicPageList> has no attributes

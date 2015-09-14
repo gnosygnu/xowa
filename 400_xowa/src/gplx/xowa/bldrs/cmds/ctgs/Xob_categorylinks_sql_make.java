@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
-import gplx.xowa.bldrs.*;
+import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	private Gfo_usr_dlg usr_dlg; private final Xowe_wiki wiki; private final Db_idx_mode idx_mode; private Xowd_db_mgr core_db_mgr;

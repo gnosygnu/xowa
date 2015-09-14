@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Scrib_frame_ {
 	public static final byte Tid_null = 0, Tid_current = 1, Tid_parent = 2, Tid_dynamic = 3;
 	public static final int Arg_adj_current = 1, Arg_adj_owner = 0;

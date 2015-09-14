@@ -19,7 +19,7 @@ package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.core.btries.*; import gplx.html.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
 	private Xowe_wiki wiki; private Xoae_app app; private Xoae_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;

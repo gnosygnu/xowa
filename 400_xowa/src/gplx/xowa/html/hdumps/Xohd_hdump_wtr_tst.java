@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*; import gplx.xowa.files.*;
 import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.xtns.hieros.*; import gplx.xowa.xtns.gallery.*;
+import gplx.xowa.parsers.*;
 public class Xohd_hdump_wtr_tst {
 	@Before public void init() {fxt.Clear();} private Xohd_hdump_wtr_fxt fxt = new Xohd_hdump_wtr_fxt();
 //		@Test   public void Image_full() {

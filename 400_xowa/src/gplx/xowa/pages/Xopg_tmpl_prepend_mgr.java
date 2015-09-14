@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.pages; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xopg_tmpl_prepend_mgr {
 	private Bry_bfr[] stack = Bry_bfr_.Ary_empty; private int stack_len, stack_max;
 	public void Clear() {

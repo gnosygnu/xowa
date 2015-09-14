@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	private final Xoh_arg_img_core arg_img_core;
 	private Bry_bfr scratch_bfr = Bry_bfr.reset_(128);

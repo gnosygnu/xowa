@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.xowa.apps.langs.*;
 public class Xow_lang_itm {
 	private final Xow_lang_grp html_grp; private final Xow_xwiki_itm xwiki; private final Xoac_lang_itm lang;
 	public Xow_lang_itm(Xow_lang_grp html_grp, Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {

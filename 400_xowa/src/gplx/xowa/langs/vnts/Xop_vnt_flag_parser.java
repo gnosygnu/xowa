@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*;
 class Xop_vnt_flag_parser {
 	private Xop_vnt_flag_lang_bldr flag_lang_bldr;
 	public Xop_vnt_flag_parser(Xol_vnt_mgr vnt_mgr) {flag_lang_bldr = new Xop_vnt_flag_lang_bldr(vnt_mgr);}
@@ -26,7 +27,7 @@ class Xop_vnt_flag_parser {
 	public int Rslt_tkn_pos() {return rslt_tkn_pos;} private int rslt_tkn_pos;
 	public int Rslt_pipe_last() {return rslt_pipe_last;} private int rslt_pipe_last;
 	public Xop_vnt_flag[] Rslt_flags() {return rslt_flags;} private Xop_vnt_flag[] rslt_flags;
-	public void Parse(Xowe_wiki wiki, Xop_vnt_tkn vnt_tkn, int pipe_tkn_count, byte[] src) {
+	public void Parse(Xowe_wiki wiki, Xoa_url page_url, Xop_vnt_tkn vnt_tkn, int pipe_tkn_count, byte[] src) {
 		this.Clear();
 		rslt_flags = new Xop_vnt_flag[pipe_tkn_count];
 		int rv_idx = 0;
@@ -52,7 +53,7 @@ class Xop_vnt_flag_parser {
 				case Xop_tkn_itm_.Tid_newLine:	// skip ws
 					break;
 				default:
-					wiki.Appe().Usr_dlg().Log_many("", "", "unknown tkn in vnt flag; tid=~{0} txt=~{1}", sub.Tkn_tid(), String_.new_u8(src, sub.Src_bgn(), sub.Src_end()));
+					wiki.Appe().Usr_dlg().Log_many("", "", "unknown tkn in vnt flag; url=~{0} tid=~{1} txt=~{2}", page_url.To_str(), sub.Tkn_tid(), String_.new_u8(src, sub.Src_bgn(), sub.Src_end()));
 					flag_bfr.Add_mid(src, sub.Src_bgn(), sub.Src_end());
 					break;
 			}

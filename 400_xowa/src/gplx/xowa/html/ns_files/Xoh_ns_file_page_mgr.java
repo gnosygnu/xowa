@@ -19,6 +19,7 @@ package gplx.xowa.html.ns_files; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();

@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
-import gplx.gfui.*; import gplx.xowa.files.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_itm_tst {		
 	@Before public void init() {fxt.ini();} Xof_xfer_itm_fxt fxt = new Xof_xfer_itm_fxt();
 	@Test  public void Box()						{tst_Calc_view("40,50"	, "40,40"	, "40,40");}	// EX:[[File:Crystal Clear app kedit.svg|50x40px]]

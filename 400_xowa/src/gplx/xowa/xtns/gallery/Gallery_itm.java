@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.files.*; import gplx.xowa.files.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Gallery_itm implements Js_img_wkr {
 	private Gallery_xnde xnde; private Xof_file_itm xfer_itm; private Xowe_wiki wiki; private Xop_ctx ctx; private byte[] src; private byte[] gallery_li_id_bry; private int gallery_itm_idx;
 	public Xoa_ttl Ttl() {return ttl;} public Gallery_itm Ttl_(Xoa_ttl v) {ttl = v; return this;} private Xoa_ttl ttl;

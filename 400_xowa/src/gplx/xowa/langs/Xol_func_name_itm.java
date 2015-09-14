@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Xol_func_name_itm {
 	public byte Tid() {return tid;} private byte tid = Xot_defn_.Tid_null;
 	public Xot_defn Func() {return func;} private Xot_defn func = Xot_defn_.Null;

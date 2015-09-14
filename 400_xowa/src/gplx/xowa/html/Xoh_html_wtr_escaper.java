@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*; import gplx.html.*;
+import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, byte[] src) {
 		Escape(amp_mgr, tmp_bfr, src, 0, src.length, true, false);

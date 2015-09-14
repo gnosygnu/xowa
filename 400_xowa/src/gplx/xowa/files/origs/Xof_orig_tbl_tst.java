@@ -19,6 +19,7 @@ package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 import gplx.dbs.*; import gplx.xowa.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xof_orig_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Xof_orig_tbl_fxt fxt = new Xof_orig_tbl_fxt();
 	@Test   public void Select_in() {

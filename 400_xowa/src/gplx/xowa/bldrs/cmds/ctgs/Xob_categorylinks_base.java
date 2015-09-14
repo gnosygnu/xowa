@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.ctgs.*;
+import gplx.xowa.bldrs.sqls.*;
 public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
 	private DateAdp_parser date_parser = DateAdp_parser.new_(); private Sql_file_parser sql_parser; Uca_trie trie; private Bry_bfr uca_bfr = Bry_bfr.reset_(255);		
 	public abstract Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser);

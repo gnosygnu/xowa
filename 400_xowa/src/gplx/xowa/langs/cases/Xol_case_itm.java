@@ -38,6 +38,7 @@ class Xol_case_itm_byt implements Xol_case_itm {
 		}
 	}
 	public byte Tid() {return tid;} private byte tid;
+	public boolean Is_single_byte() {return true;}
 	public byte[] Src_ary() {return src_ary;} private byte[] src_ary;
 	public byte[] Trg_ary() {return trg_ary;} private byte[] trg_ary;
 	public byte Src_byte() {return src_byte;} private byte src_byte;
@@ -47,11 +48,7 @@ class Xol_case_itm_byt implements Xol_case_itm {
 	public void Case_reuse_upper(byte[] ary, int bgn, int len) {ary[bgn] = upper_byte;}
 	public void Case_reuse_lower(byte[] ary, int bgn, int len) {ary[bgn] = lower_byte;}
 	public Xol_case_itm Clone() {return new Xol_case_itm_byt(tid, src_byte, trg_byte);}
-	public int Utf8_id_lower() {return lower_byte;}
-	public boolean Eq_lo(Gfo_case_itm trg_obj) {
-		Xol_case_itm_byt trg_itm = (Xol_case_itm_byt)trg_obj;
-		return lower_byte == trg_itm.lower_byte;
-	}
+	public int Utf8_id_lo() {return lower_byte;}
 	public int Hashcode_lo() {return lower_byte;}
 	public int Len_lo() {return 1;}
 	public byte[] Asymmetric_bry() {return null;}
@@ -69,6 +66,7 @@ class Xol_case_itm_bry implements Xol_case_itm {
 		hashcode_ci_lo = Bry_obj_ref.CalcHashCode(lower_ary, 0, len_lo);
 	}
 	public byte Tid() {return tid;} public Xol_case_itm_bry Tid_(byte v) {tid = v; return this;} private byte tid;
+	public boolean Is_single_byte() {return false;}
 	public byte[] Src_ary() {return src_ary;} private byte[] src_ary;
 	public byte[] Trg_ary() {return trg_ary;} private byte[] trg_ary;
 	public void Case_build_upper(Bry_bfr bfr) {bfr.Add(upper_ary);} private byte[] upper_ary;
@@ -84,10 +82,6 @@ class Xol_case_itm_bry implements Xol_case_itm {
 	public Xol_case_itm Clone() {return new Xol_case_itm_bry(tid, src_ary, trg_ary);}
 	public int Len_lo() {return len_lo;} private int len_lo;
 	public int Utf8_id_lo() {return utf8_id_lo;} private int utf8_id_lo;
-	public boolean Eq_lo(Gfo_case_itm trg_obj) {
-		Xol_case_itm_bry trg_itm = (Xol_case_itm_bry)trg_obj;
-		return utf8_id_lo == trg_itm.utf8_id_lo;
-	}
 	public byte[] Asymmetric_bry() {return asymmetric_bry;} private byte[] asymmetric_bry;
 	public int Hashcode_lo() {return hashcode_ci_lo;} private int hashcode_ci_lo;
 }

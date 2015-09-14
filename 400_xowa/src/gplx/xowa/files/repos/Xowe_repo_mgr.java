@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.xfers.*;
 import gplx.xowa.wikis.domains.*;
+import gplx.xowa.parsers.utils.*;
+import gplx.xowa.tdbs.metas.*;
 public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	private Xowe_wiki wiki; private final List_adp repos = List_adp_.new_();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {

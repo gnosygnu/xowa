@@ -19,6 +19,7 @@ package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*; import gplx.gfui.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.downloads.*;
 import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.apis.*; 
+import gplx.xowa.tdbs.metas.*;
 public class Xof_xfer_mgr {
 	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final Xof_file_mgr file_mgr; private final Xowmf_mgr wmf_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.intl; import gplx.*;
 public interface Gfo_case_itm {
-	boolean Eq_lo(Gfo_case_itm itm);
 	int Hashcode_lo();
 	int Len_lo();
 	byte[] Asymmetric_bry();
+	int Utf8_id_lo();	// lower-case byte or byte[] as single utf8 int
 }

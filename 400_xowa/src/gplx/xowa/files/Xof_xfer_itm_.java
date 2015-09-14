@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.*;
+import gplx.core.primitives.*;
+import gplx.gfui.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_itm_ {
 	public static void Calc_xfer_size(Int_2_ref rv, byte lnki_type, int thumb_default_w, int file_w, int file_h, int lnki_w, int lnki_h, boolean lnki_thumb, double lnki_upright, Xof_ext ext, int exec_tid) {
 		boolean ext_is_svg = ext.Id_is_svg();

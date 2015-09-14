@@ -24,9 +24,11 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.css.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
-import gplx.xowa.bldrs.xmls.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.tdbs.*;
+import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
 import gplx.xowa.urls.*;
+import gplx.xowa.xtns.gallery.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
 public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xowe_wiki(Xoae_app app, Xol_lang lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
 		this.ev_mgr = GfoEvMgr.new_(this);
@@ -87,7 +89,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public String					Domain_str() {return domain_str;} private final String domain_str;
 	public int						Domain_tid() {return domain_tid;} private final int domain_tid;
 	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
-	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
+	public Xow_domain_itm			Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
 	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
 	public Xowd_db_mgr				Data__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
@@ -102,6 +104,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xoh_page_wtr_mgr_base	Html__page_wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xoa_url_parser			Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;
+	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
 	public Xow_wiki_props			Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
 
@@ -264,6 +267,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
 		init_in_process = false;
 		app.Api_root().Wikis().Get(domain_bry).Subscribe(this);
+		app.Meta_mgr().Init_by_wiki(this);
 	}
 	private void Html__hdump_enabled_(boolean v) {
 		this.html_mgr__hdump_enabled = v;

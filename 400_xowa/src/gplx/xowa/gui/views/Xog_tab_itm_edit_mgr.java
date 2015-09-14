@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes

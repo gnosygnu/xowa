@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*;
 public class Xop_vnt_lxr_ {
 	public static void set_(Xowe_wiki wiki) {
 		Btrie_fast_mgr wiki_trie = wiki.Parser().Wtxt_trie();
@@ -75,7 +76,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 			int rule_subs_bgn = 0;
 			int pipe_tkn_count = vnt_tkn.Vnt_pipe_tkn_count();
 			if (pipe_tkn_count > 0) {
-				flag_parser.Parse(wiki, vnt_tkn, pipe_tkn_count, src);
+				flag_parser.Parse(wiki, ctx.Cur_page().Url(), vnt_tkn, pipe_tkn_count, src);
 				vnt_flag_ary = flag_parser.Rslt_flags();
 				rule_subs_bgn = flag_parser.Rslt_tkn_pos();
 				vnt_tkn.Vnt_pipe_idx_last_(flag_parser.Rslt_pipe_last());

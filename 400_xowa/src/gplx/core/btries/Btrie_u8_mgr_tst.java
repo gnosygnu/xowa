@@ -53,7 +53,7 @@ public class Btrie_u8_mgr_tst {
 		fxt.Init_add(Bry_.new_u8("i")	, "1");
 		fxt.Test_match("i"	, "1");				// exact=y
 		fxt.Test_match("I"	, "1");				// upper=y
-		fxt.Test_match("İ"	, null);			// utf_8=n; note that a trie with "i" doesn't match a src with "İ" even though "İ" lower-cases to "i"
+		fxt.Test_match("İ"	, "1");				// utf_8=y; note that "i" matches "İ" b/c hash is case-insensitive and "İ" lower-cases to "i"; DATE:2015-09-07
 	}
 	@Test  public void Utf8_asymmetric_multiple() {	// PURPOSE: problems in original implementation of Hash_adp_bry and uneven source / target counts;
 		fxt.Init_add(Bry_.new_u8("İİ")	, "1");

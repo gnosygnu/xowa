@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.btries.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
 	public int Grps_len() {return grps.Count();} List_adp grps = List_adp_.new_();

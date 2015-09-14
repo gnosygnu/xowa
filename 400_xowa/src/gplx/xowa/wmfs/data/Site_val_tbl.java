@@ -29,7 +29,7 @@ class Site_val_tbl implements Db_tbl {
 		this.fld_val					= flds.Add_str("val", 255);
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_name(tbl_name, Db_meta_idx.Bld_idx_name(tbl_name, "main"), fld_site_abrv, fld_val)));}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
 	public void Rls() {
 		stmt_select = Db_stmt_.Rls(stmt_select);
@@ -39,7 +39,7 @@ class Site_val_tbl implements Db_tbl {
 	public void Select(byte[] site_abrv, Ordered_hash list) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_site_abrv);
 		list.Clear();
-		Db_rdr rdr = stmt_select.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_select__rls_auto();
+		Db_rdr rdr = stmt_select.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_select__rls_manual();
 		try {
 			while (rdr.Move_next()) {
 				byte[] val = rdr.Read_bry_by_str(fld_val);

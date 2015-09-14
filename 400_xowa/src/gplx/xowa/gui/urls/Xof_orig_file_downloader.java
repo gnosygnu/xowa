@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xof_orig_file_downloader {
 	public static Xof_fsdb_itm Make_fsdb(Xowe_wiki wiki, byte[] lnki_ttl, Xof_img_size img_size, Xof_url_bldr url_bldr) {
 		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();

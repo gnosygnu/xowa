@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_vnt_lxr_tst {
 	private Xop_vnt_lxr_fxt fxt = new Xop_vnt_lxr_fxt();
 	@Before public void init() {fxt.Clear();}

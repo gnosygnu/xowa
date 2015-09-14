@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.html.parsers; import gplx.*; import gplx.core.*; import gplx.core.html.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.*;
+import gplx.xowa.parsers.xndes.*;
 class Gfo_html_parser {
 	private final Gfo_msg_log msg_log = Gfo_msg_log.Test();
 	private final Xop_xatr_parser xatr_parser = new Xop_xatr_parser();

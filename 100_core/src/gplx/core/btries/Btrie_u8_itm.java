@@ -60,7 +60,7 @@ class Btrie_u8_itm {
 			byte[] asymmetric_bry = case_itm.Asymmetric_bry();
 			if (asymmetric_bry != null) {											// case_itm has asymmetry_bry; only itms in Xol_case_itm_ that are created with Tid_upper and Tid_lower will be non-null
 				rv.asymmetric_bry = asymmetric_bry;									// set itm to asymmetric_bry; EX: for İ, asymmetric_bry = i
-				nxts.Add_bry_obj(asymmetric_bry, rv);								// add the asymmetric_bry to the hash; in above example, this allows "i" to match "İ"
+//					nxts.Add_bry_obj(asymmetric_bry, rv);								// add the asymmetric_bry to the hash; in above example, this allows "i" to match "İ"
 			}
 		}
 		return rv;

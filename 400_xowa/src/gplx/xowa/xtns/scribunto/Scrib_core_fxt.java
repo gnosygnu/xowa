@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.scribunto.engines.process.*;
+import gplx.xowa.xtns.scribunto.engines.process.*; import gplx.xowa.parsers.tmpls.*;
 public class Scrib_core_fxt {
 	public Scrib_core_fxt() {}
 	public Scrib_core_fxt(Xop_fxt fxt) {

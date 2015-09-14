@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.ttls.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		Db_conn_bldr.I.Reg_default_mem();

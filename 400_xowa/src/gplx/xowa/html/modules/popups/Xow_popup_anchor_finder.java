@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.parsers.*;
 class Xow_popup_anchor_finder {
 	private byte[] src, find;
 	private int src_len, nl_lhs;

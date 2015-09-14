@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.wikis.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.dbs.*; 
-import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apis.xowa.bldrs.imports.*;	
+import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apis.xowa.bldrs.imports.*;
+import gplx.xowa.parsers.utils.*;
 public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInvkAble {
 	private Xowd_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;

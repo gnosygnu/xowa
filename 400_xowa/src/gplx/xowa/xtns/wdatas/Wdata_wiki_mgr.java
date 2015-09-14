@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.core.json.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
+import gplx.xowa.parsers.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
 	private final Wdata_prop_val_visitor prop_val_visitor;

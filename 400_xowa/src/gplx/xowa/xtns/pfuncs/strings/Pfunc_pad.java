@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.intl.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pad extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW: CoreParserFunctions.php|pad
 		int self_args_len = self.Args_len();

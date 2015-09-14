@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
+import gplx.xowa.parsers.*;
 class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 	private Xoh_wtr_ctx hctx; private Imap_map map; private Imap_xtn_mgr xtn_mgr;
 	private int img_elem_id, img_w, img_h;

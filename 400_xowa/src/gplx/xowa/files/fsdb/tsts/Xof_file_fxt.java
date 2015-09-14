@@ -19,6 +19,7 @@ package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.data.*;
+import gplx.xowa.parsers.lnkis.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
 	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();

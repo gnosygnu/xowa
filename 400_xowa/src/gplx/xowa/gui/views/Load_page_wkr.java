@@ -38,7 +38,7 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 			Xoae_app app = wiki.Appe();
 			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());
 			if (Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
-				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mkr)
+				Xow_wiki_.Rls_mem(wiki, false);								// clear caches (which will clear bry_bfr_mkr)
 			else															// not low in memory
 				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mkr only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
 			this.page = wiki.Load_page_by_ttl(url, ttl, wiki.Lang(), tab, false);

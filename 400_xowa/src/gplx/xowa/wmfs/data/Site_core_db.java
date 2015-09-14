@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
 import gplx.dbs.*;
+import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.xwikis.*;
 public class Site_core_db {
 	private Db_conn conn;
 	private final Site_core_tbl tbl__core;
@@ -61,7 +63,7 @@ public class Site_core_db {
 		{ tbl__core, tbl__general, tbl__namespace, tbl__statistic, tbl__interwikimap, tbl__namespacealias, tbl__specialpagealias, tbl__library
 		, tbl__extension, tbl__skin, tbl__magicword, tbl__functionhook, tbl__showhook, tbl__extensiontag, tbl__protocol, tbl__defaultoption, tbl__language
 		};
-		if (created) Db_tbl_.Create_tbl(tbl_ary);
+		if (created) Db_tbl_.Create_tbl(tbl_ary);	// NOTE: each table also creates index; will be "slower", but logic is simpler for updates
 	}
 	public Site_core_tbl		Tbl__core() {return tbl__core;}
 	public Site_namespace_tbl	Tbl__namespace() {return tbl__namespace;}
@@ -105,13 +107,51 @@ public class Site_core_db {
 		tbl__defaultoption.Select(site_abrv, site_meta.Defaultoption_list());
 		tbl__language.Select(site_abrv, site_meta.Language_list());
 	}
-	public Xow_ns_mgr Load_ns(byte[] domain_bry) {
+	public Xow_ns_mgr Load_namespace(byte[] domain_bry) {
 		Xow_ns_mgr rv = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
-		Ordered_hash namespace_hash = Ordered_hash_.new_();
-		tbl__namespace.Select(gplx.xowa.wikis.domains.Xow_abrv_xo_.To_bry(domain_bry), namespace_hash);
-		Ns_mgr__load(rv, namespace_hash);
+		Ordered_hash hash = Ordered_hash_.new_();
+		tbl__namespace.Select(Xow_abrv_xo_.To_bry(domain_bry), hash);
+		Ns_mgr__load(rv, hash);
 		return rv;
 	}
+	public void Load_interwikimap(Xow_domain_itm domain_itm, gplx.xowa.wikis.xwikis.Xow_xwiki_mgr xwiki_mgr) {
+		Ordered_hash hash = Ordered_hash_.new_();
+		tbl__interwikimap.Select(domain_itm.Abrv_xo(), hash);
+		int len = hash.Count();
+		for (int i = 0; i < len; ++i)  {
+			Site_interwikimap_itm itm = (Site_interwikimap_itm)hash.Get_at(i);
+			Xow_xwiki_itm xwiki_itm = Xow_xwiki_itm_bldr.I.Bld(domain_itm, itm.Prefix(), itm.Url(), null);
+			xwiki_mgr.Add_itm(xwiki_itm);
+		}
+	}
+	public void Load_extensiontag(Xow_domain_itm domain_itm, gplx.xowa.parsers.xndes.Xop_xnde_tag_regy xnde_tag_regy) {
+		try {
+//				Ordered_hash tag_hash = Ordered_hash_.new_();
+//				tbl__extensiontag.Select(domain_itm.Abrv_xo(), tag_hash);
+//				Hash_adp_bry key_hash = To_key_hash(tag_hash);
+//				xnde_tag_regy.Init_by_meta(key_hash);
+			xnde_tag_regy.Init_by_meta(null);
+		}
+		catch (Exception e) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to load extensiontag; wiki=~{0} err=~{1}", domain_itm.Domain_str(), Err_.Message_gplx_full(e));
+		}
+	}
+//		private static Hash_adp_bry To_key_hash(Ordered_hash tag_hash) {
+//			Hash_adp_bry rv = Hash_adp_bry.ci_a7();	// ASCII: assume all xtn tags do not have non-ASCII chars
+//			int len = tag_hash.Count(); if (len == 0) return null;
+//			for (int i = 0; i < len; ++i) {
+//				byte[] tag = (byte[])tag_hash.Get_at(i);
+//				int idx_last = tag.length - 1;
+//				if (	tag.length < 3
+//					||	tag[0]			!= Byte_ascii.Angle_bgn
+//					||	tag[idx_last]	!= Byte_ascii.Angle_end
+//					)
+//					throw Err_.new_("site_meta", "invalid extensiontag", "tag", tag);
+//				byte[] key = Bry_.Mid(tag, 1, idx_last);
+//				rv.Add(key, key);
+//			}
+//			return rv;
+//		}
 	private static void Ns_mgr__load(Xow_ns_mgr rv, Ordered_hash hash) {
 		rv.Clear();
 		int len = hash.Count();

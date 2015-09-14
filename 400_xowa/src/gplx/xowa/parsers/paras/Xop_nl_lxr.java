@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*;
+import gplx.core.btries.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_nl_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_nl;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Nl, this);}

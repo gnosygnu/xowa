@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_wmf_api_tst {
 	private final Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init()		{fxt.Clear(true); fxt.Src_commons_repo().Wmf_api_(true); fxt.Src_en_wiki_repo().Wmf_api_(true);}

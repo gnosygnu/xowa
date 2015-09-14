@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pft_func_formatdate extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_formatdate;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pft_func_formatdate().Name_(name);}

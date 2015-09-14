@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*;
 class Xow_hzip_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb); private Xow_hzip_mgr hzip_mgr; private Xowe_wiki wiki;
 	private Xodump_stats_itm stats = new Xodump_stats_itm(); private final Ordered_hash redlink_uids = Ordered_hash_.new_();

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.primitives.*; import gplx.xowa.urls.encoders.*;
-import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_hdr_mgr {
 	private final Url_encoder_mgr encoder_mgr; private final Xoae_page page;
 	private final Hash_adp hdrs_hash = Hash_adp_.new_(); private final Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private final Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();

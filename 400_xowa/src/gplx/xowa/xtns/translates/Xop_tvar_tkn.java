@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.parsers.*;
 public class Xop_tvar_tkn extends Xop_tkn_itm_base {
 	public Xop_tvar_tkn(int tkn_bgn, int tkn_end, int key_bgn, int key_end, int txt_bgn, int txt_end, byte[] wikitext) {
 		this.Tkn_ini_pos(false, tkn_bgn, tkn_end);

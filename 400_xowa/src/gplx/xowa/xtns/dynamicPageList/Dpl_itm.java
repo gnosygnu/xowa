@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.html.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 class Dpl_itm {
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
@@ -139,8 +140,8 @@ class Dpl_itm {
 	private void Parse_missing_key(Gfo_usr_dlg usr_dlg, byte[] page_ttl, byte[] src, int fld_bgn, int fld_end) {
 		byte[] key_bry = Bry_.Mid(src, fld_bgn, fld_end);
 		boolean log = 
-			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null
-			||	Bry_.Has_at_bgn(key_bry, Html_tag_.Comm_bgn)			// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
+			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null	// known invalid key; just log it; handles common items like orcer and showcurid
+			||	Bry_.Has_at_bgn(key_bry, Html_tag_.Comm_bgn)					// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
 			);
 		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_u8(page_ttl), String_.new_u8(key_bry));
 		if (log)
@@ -152,7 +153,8 @@ class Dpl_itm {
 	.Add_str_obj("orcer"						, Bool_obj_val.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
 	.Add_str_obj("addcategorydatefirst"			, Bool_obj_val.True)
 	.Add_str_obj("mainspace"					, Bool_obj_val.True)
-	.Add_str_obj("showcurid"					, Bool_obj_val.True)
+	.Add_str_obj("showcurid"					, Bool_obj_val.True)	// ignore for now; puts unique id at end of link for google news; https://www.mediawiki.org/wiki/Extension:DynamicPageList_%28Wikimedia%29; DATE:2015-09-07
+	.Add_str_obj("googlehack"					, Bool_obj_val.True)	// same as showcurid
 	.Add_str_obj("sort"							, Bool_obj_val.True)	// fr.n
 	.Add_str_obj("supresserror"					, Bool_obj_val.True)	// fr.n
 	.Add_str_obj("supresserrors"				, Bool_obj_val.True)	// frequency: 3 - 10

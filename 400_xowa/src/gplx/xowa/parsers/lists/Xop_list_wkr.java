@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.tblws.*;
+import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
 public class Xop_list_wkr implements Xop_ctx_wkr {
 	private int listId = 0; byte[] curSymAry = new byte[Max_list_depth]; int curSymLen = 0; byte[] prvSymAry = Bry_.Empty;
 	private HierPosAryBldr posBldr = new HierPosAryBldr(Max_list_depth);

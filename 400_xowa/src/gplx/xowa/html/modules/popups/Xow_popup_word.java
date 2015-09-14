@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.parsers.*;
 public class Xow_popup_word {
 	public Xow_popup_word(int tid, int bfr_bgn, int idx, int bgn, int end, Xop_tkn_itm tkn) {this.tid = tid; this.bfr_bgn = bfr_bgn; this.idx = idx; this.bgn = bgn; this.end = end; this.tkn = tkn;}
 	public int Tid() {return tid;} private int tid;

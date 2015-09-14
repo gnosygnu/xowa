@@ -24,7 +24,7 @@ public class Xosp_special_mgr {
 	private final Hash_adp_bry hash;
 	public Xosp_special_mgr(Xowv_wiki wiki) {
 		this.wiki = wiki;
-//			this.hash = Hash_adp_bry.ci_u8(wiki.Lang().Case_mgr());
+		// hash.Add_str_obj(Xows_special_meta_.Key__statistics				, page_statistics);
 		this.hash = Hash_adp_bry.cs();
 	}
 	public void Get_by_ttl(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {

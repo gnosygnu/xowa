@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*;
 public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 	private Xowd_cat_core_tbl tbl;

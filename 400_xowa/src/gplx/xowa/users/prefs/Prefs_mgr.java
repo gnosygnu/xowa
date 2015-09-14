@@ -19,6 +19,7 @@ package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.html.*; import gplx.gfui.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.urls.*;
+import gplx.xowa.parsers.*;
 public class Prefs_mgr implements GfoInvkAble {
 	public Prefs_mgr(Xoae_app app) {
 		this.app = app;

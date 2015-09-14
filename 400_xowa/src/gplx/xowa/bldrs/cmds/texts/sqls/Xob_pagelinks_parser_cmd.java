@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.dbs.*;
+import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_pagelinks_parser_cmd extends Xob_sql_dump_base implements Sql_file_parser_cmd {
 	private Db_conn core_conn;

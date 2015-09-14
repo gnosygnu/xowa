@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Group() {return group;} public References_nde Group_(byte[] v) {group = v; return this;} private byte[] group = Bry_.Empty;
 	public int List_idx() {return list_idx;} public References_nde List_idx_(int v) {list_idx = v; return this;} private int list_idx;

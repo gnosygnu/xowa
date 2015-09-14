@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.xowa.html.*; import gplx.xowa.pages.skins.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Indicator_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public String Name() {return name;} private String name;
 	public byte[] Html() {return html;} private byte[] html;

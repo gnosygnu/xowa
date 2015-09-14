@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
 	public Ref_html_wtr(Xowe_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();

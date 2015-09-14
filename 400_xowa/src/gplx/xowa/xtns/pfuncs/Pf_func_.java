@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pf_func_ {
 	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
 	public static final byte Name_dlm = Byte_ascii.Colon;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.*;
 public class Xol_duration_mgr {
 	private Xol_msg_itm[] interval_msgs = null;
 	public Xol_duration_mgr(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;

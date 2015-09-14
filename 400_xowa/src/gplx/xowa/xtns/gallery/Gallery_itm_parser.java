@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
 	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();

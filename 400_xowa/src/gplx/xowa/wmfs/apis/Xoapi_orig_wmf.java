@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
-import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.html.hrefs.*;
 public class Xoapi_orig_wmf extends Xoapi_orig_base {

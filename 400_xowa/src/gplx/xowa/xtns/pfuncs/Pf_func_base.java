@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Pf_func_base implements Pf_func {
 	public byte Defn_tid() {return Xot_defn_.Tid_func;}
 	public byte[] Name() {return name;} public Pf_func_base Name_(byte[] v) {name = v; name_len = v.length; return this;} private byte[] name = Bry_.Empty; int name_len = 0;

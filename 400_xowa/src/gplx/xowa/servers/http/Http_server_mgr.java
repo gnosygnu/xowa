@@ -90,6 +90,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		synchronized (thread_lock) {
 			Init_gui();
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(wiki_domain);		// get the wiki; assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
+			if (Env_.System_memory_total() > Io_mgr.Len_gb)	Xow_wiki_.Rls_mem(wiki, true);			// release memory at 1 GB; DATE:2015-09-11
 			if (Bry_.Len_eq_0(page_ttl)) page_ttl = wiki.Props().Main_page();
 			Xoa_url page_url = wiki.Utl__url_parser().Parse(page_ttl);								// get the url (needed for query args)
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, page_ttl);											// get the ttl

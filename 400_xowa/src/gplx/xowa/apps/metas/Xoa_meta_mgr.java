@@ -16,9 +16,29 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+import gplx.xowa.wmfs.data.*;
 public class Xoa_meta_mgr {
+	private final Xoa_app app;
+	private final Hash_adp_bry ns__hash = Hash_adp_bry.cs();
+	private Site_core_db core_db;
 	public Xoa_meta_mgr(Xoa_app app) {
-		this.ns_mgr = new Xoa_ns_mgr(app);
+		this.app = app;
 	}
-	public Xoa_ns_mgr Ns_mgr() {return ns_mgr;} private final Xoa_ns_mgr ns_mgr;
+	public void Ns__add(byte[] wiki_domain, Xow_ns_mgr ns_mgr) {ns__hash.Add(wiki_domain, ns_mgr);}	// TEST:public
+	public Xow_ns_mgr Ns__get_or_load(byte[] wiki_domain) {
+		Xow_ns_mgr rv = (Xow_ns_mgr)ns__hash.Get_by_bry(wiki_domain);
+		if (rv == null) {
+			Core_db__assert();
+			rv = core_db.Load_namespace(wiki_domain);
+			Ns__add(wiki_domain, rv);
+		}
+		return rv;
+	}
+	public void Init_by_wiki(Xow_wiki wiki) {
+		Core_db__assert();
+		core_db.Load_extensiontag(wiki.Domain_itm(), wiki.Mw_parser_mgr().Xnde_tag_regy());
+	}
+	private void Core_db__assert() {
+		if (core_db == null) core_db = new Site_core_db(app.Fsys_mgr().Cfg_site_meta_fil());
+	}
 }

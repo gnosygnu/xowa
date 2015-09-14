@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*;
+import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_tblw_wkr implements Xop_ctx_wkr {
 	private int tblw_te_ignore_count = 0;
 	public boolean Cell_pipe_seen() {return cell_pipe_seen;} public Xop_tblw_wkr Cell_pipe_seen_(boolean v) {cell_pipe_seen = v; return this;} private boolean cell_pipe_seen; // status of 1st cell pipe; EX: \n| a | b | c || -> flag pipe between a and b but ignore b and c
@@ -48,7 +48,6 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		}
 		if (ctx.Apos().Stack_len() > 0)							// open apos; note that apos keeps its own stack, as they are not "structural" (not sure about this)
 			ctx.Apos().EndFrame(ctx, root, src, cur_pos, true);	// close it
-
 		Xop_tblw_tkn prv_tkn = ctx.Stack_get_tbl();
 		if (	prv_tkn == null									// prv_tkn not found; i.e.: no earlier "{|" or "<table>"
 			|| (	ctx.Stack_get_tblw_tb() == null				// no {| on stack; DATE:2014-05-05
@@ -192,10 +191,25 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				switch (prv_tid) {
 					case Xop_tkn_itm_.Tid_tblw_tr: break;	// noop; <tr><td>
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><td>           -> <td></td><td>
-						if (!tbl_is_xml)					// only for "\n|" not <td>
-							ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; DATE:2014-02-20; ru.w:;[[Help:Download]]; DATE:2014-02-20
-						ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_td);	// <td>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
+						if (	prv_tkn.Tblw_xml()			// prv is <td>
+							&&	!tbl_is_xml					// cur is "\n|"
+							) {								// insert <tr>; EX: "<tr><td>\n|" -> "<tr><td><tr><td>" PAGE:fi.w:Salibandyn_maailmanmestaruuskilpailut_2012 DATE:2015-09-07
+							int prv_tr_tkn_idx = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr);
+                                if (prv_tr_tkn_idx != Xop_ctx.Stack_not_found) { 	// <tr> exists
+								int prv_tb_tkn_idx = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tb);
+								if (prv_tb_tkn_idx < prv_tr_tkn_idx) 			// don't close <tr> above current tbl
+									ctx.Stack_pop_til(root, src, prv_tr_tkn_idx, true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);	// close <tr>
+							}
+							new_tkn = tkn_mkr.Tblw_tr(bgn_pos, cur_pos, tbl_is_xml, true);	// make a new <tr>
+							new_tkn.Atrs_rng_set(bgn_pos, bgn_pos);
+							ctx.Subs_add_and_stack_tblw(root, prv_tkn, new_tkn);
+						}
+						else {
+							if (!tbl_is_xml)					// only for "\n|" not <td>
+								ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; DATE:2014-02-20; ru.w:;[[Help:Download]]; DATE:2014-02-20
+							ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_td);		// <td>
+							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
+						}
 						break;
 					case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th><td>           -> <th></th><td>
 						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);

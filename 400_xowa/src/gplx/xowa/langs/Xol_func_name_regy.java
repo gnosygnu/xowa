@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Xol_func_name_regy {
 	private final Xoa_lang_mgr lang_mgr; private final Xol_lang lang;
 	private final Xol_func_name_itm finder = new Xol_func_name_itm();

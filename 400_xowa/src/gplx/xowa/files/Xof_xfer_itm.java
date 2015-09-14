@@ -16,7 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
 import gplx.xowa.files.gui.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.parsers.utils.*;
 public class Xof_xfer_itm implements Xof_file_itm {
 	public Xof_xfer_itm() {
 		lnki_type = orig_repo_id = Byte_.Max_value_127;

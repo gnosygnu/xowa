@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.xowa.parsers.lnkes.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.html.*;
 interface Imap_link_owner {
 	void Link_tid_(int v);
 	void Link_href_(byte[] v);

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.scribunto.libs.*;
-import gplx.xowa.xtns.scribunto.engines.process.*;
+import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.process.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Scrib_invoke_func_fxt {
 	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr.reset_(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
 	public Xop_fxt Parser_fxt() {return fxt;}

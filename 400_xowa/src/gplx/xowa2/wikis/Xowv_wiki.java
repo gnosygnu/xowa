@@ -22,6 +22,7 @@ import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.case
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.css.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.xowa.parsers.*;
 import gplx.xowa.urls.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.gui.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
@@ -47,7 +48,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public boolean							Type_is_edit() {return Bool_.N;}
 	public byte[]						Domain_bry() {return domain_bry;} private final byte[] domain_bry;
 	public String						Domain_str() {return domain_str;} private final String domain_str;
-	public Xow_domain_itm					Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
+	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
 	public int							Domain_tid() {return domain_tid;} private final int domain_tid;
 	public byte[]						Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
 	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
@@ -64,6 +65,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xow_hzip_mgr					Html__hzip_mgr() {return html__hzip_mgr;} private final Xow_hzip_mgr html__hzip_mgr;
 	public Xohd_hdump_rdr				Html__hdump_rdr() {return html__hdump_rdr;} private final Xohd_hdump_rdr html__hdump_rdr;
 	public Xoh_page_wtr_mgr_base		Html__page_wtr_mgr() {return html__page_wtr_mgr;} private final Xohv_page_wtr_mgr html__page_wtr_mgr = new Xohv_page_wtr_mgr();
+	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_wiki_props				Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
 	public Xol_lang						Lang() {throw Err_.new_unimplemented();}
 	public Xoa_url_parser				Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;

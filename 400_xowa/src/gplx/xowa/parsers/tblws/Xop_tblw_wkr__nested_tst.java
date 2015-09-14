@@ -139,41 +139,6 @@ public class Xop_tblw_wkr__nested_tst {
 			, ""
 			));
 	}
-	@Test   public void Tblw_tblx_tblw_fails() {	// PURPOSE: {| -> <table> -> \n| was not rendering as <td>; PAGE:en.w:Paris#Demographics; DATE:2014-03-18
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "{|"
-			, "|-"
-			, "|a"
-			, "</td></tr>"
-			, "<tr><td><table>"
-			, "<tr><td>b</td>"
-			, "</tr>"
-			, "|c"
-			, "</td></tr></table>"
-			, "|}"
-			), String_.Concat_lines_nl_skip_last
-			( "<table>"
-			, "  <tr>"
-			, "    <td>a"
-			, "    </td>"
-			, "  </tr>"
-			, "  <tr>"
-			, "    <td>"
-			, "      <table>"
-			, "        <tr>"
-			, "          <td>b"
-			, "          </td>"
-			, "        </tr>"
-			, "        <tr>"
-			, "          <td>c"
-			, "          </td>"
-			, "        </tr>"
-			, "      </table>"
-			, "    </td>"
-			, "  </tr>"
-			, "</table>"
-			));
-	}
 //		@Test   public void Nested_tbl_missing() {	// PURPOSE: nested table not rendering properly; EX:ar.s:; DATE:2014-03-18
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 //				( "{|"

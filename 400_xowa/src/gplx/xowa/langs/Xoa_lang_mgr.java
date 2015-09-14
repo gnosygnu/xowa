@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.intl.*; 
-import gplx.xowa.apps.fsys.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.langs.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.vnts.*;
 public class Xoa_lang_mgr implements GfoInvkAble {
 	private final Xoa_fsys_mgr fsys_mgr; private final Gfo_msg_log msg_log; private final Xol_lang lang_en; 
 	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Hash_adp_bry fallback_regy = Hash_adp_bry.cs();

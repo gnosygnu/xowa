@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*; import gplx.xowa.parsers.amps.*;
+import gplx.xowa.html.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;

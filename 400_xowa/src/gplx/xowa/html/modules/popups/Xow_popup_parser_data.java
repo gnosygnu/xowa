@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.xowa.apis.xowa.html.modules.*;
+import gplx.xowa.parsers.*;
 public class Xow_popup_parser_data {
 	public int Tmpl_max() {return tmpl_max;} private int tmpl_max;
 	public int Words_needed_val() {return words_needed_val;} private int words_needed_val;

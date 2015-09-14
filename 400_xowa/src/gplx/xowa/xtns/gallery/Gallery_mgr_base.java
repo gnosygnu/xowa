@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
 	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
 	private Gallery_img_pad_fmtr_arg__basic img_pad_fmtr__basic = new Gallery_img_pad_fmtr_arg__basic(); private Gallery_img_pad_fmtr_arg__hdump img_pad_fmtr__hdump = new Gallery_img_pad_fmtr_arg__hdump();

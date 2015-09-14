@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.intl.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Xow_defn_cache {	// stores compiled Xot_defn
 	private Xol_lang lang;		// needed to lowercase names;
 	private Bry_bfr upper_1st_bfr = Bry_bfr.reset_(255);

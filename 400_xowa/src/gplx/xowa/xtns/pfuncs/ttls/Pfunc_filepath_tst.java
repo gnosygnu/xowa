@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.dbs.*;
 import gplx.xowa.tdbs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_filepath_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	private final Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 

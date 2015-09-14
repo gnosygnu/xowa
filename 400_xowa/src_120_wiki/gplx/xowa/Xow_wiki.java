@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
 import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.xowa.parsers.*;
 import gplx.xowa.urls.*;
 public interface Xow_wiki extends Xow_ttl_parser {
 	boolean						Type_is_edit();
@@ -29,7 +30,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	String						Domain_str();
 	int							Domain_tid();			// Xow_domain_type_.Int__wikipedia
 	byte[]						Domain_abrv();			// enwiki
-	Xow_domain_itm					Domain_itm();
+	Xow_domain_itm				Domain_itm();
 	Xow_fsys_mgr				Fsys_mgr();
 	Xowd_db_mgr					Data__core_mgr();
 	Xof_fsdb_mode				File__fsdb_mode();
@@ -43,6 +44,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	Xohd_hdump_rdr				Html__hdump_rdr();
 	Xoh_page_wtr_mgr_base		Html__page_wtr_mgr();
 	boolean						Html__css_installing(); void Html__css_installing_(boolean v);
+	Xow_mw_parser_mgr			Mw_parser_mgr();
 	Xow_xwiki_mgr				Xwiki_mgr();
 	Xow_wiki_props				Props();
 	void						Init_by_wiki();

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.html.*;
 import gplx.xowa.html.*;
-import gplx.xowa.parsers.logs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Scrib_invoke_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_invoke;}

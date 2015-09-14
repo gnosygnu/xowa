@@ -19,6 +19,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; 
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.tdbs.metas.*;
 public class Xow_file_mgr implements GfoInvkAble {
 	private Xof_wkr_mgr wkr_mgr;
 	public Xow_file_mgr(Xowe_wiki wiki) {

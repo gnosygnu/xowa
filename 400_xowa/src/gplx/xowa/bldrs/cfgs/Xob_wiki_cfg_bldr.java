@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.strings.*;
+import gplx.xowa.wikis.xwikis.cfgs.*;
 public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	public Xob_wiki_cfg_bldr(Xob_bldr bldr) {this.app = bldr.App();} private Xoae_app app;
 	public void Exec() {

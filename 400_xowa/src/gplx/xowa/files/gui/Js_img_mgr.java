@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Js_img_mgr {
 	public static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Xof_file_itm itm) {
 		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), itm.Html_view_url(), itm.Orig_w(), itm.Orig_h(), itm.Html_orig_url(), itm.Orig_ttl(), itm.Html_gallery_mgr_h());

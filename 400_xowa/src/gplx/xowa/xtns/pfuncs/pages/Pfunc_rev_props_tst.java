@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_rev_props_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset(); fxt.Page().Revision_data().User_(Bry_.new_a7("user")).Protection_level_(Bry_.new_a7("normal"));}

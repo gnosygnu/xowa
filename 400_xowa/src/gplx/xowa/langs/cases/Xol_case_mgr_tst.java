@@ -39,6 +39,13 @@ public class Xol_case_mgr_tst {
 		fxt.Test_reuse_1st_upper("É");
 		fxt.Lower("Ι", "ι");	// PURPOSE:test reversal; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 	}
+	@Test   public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
+		Hash_adp_bry hash = Hash_adp_bry.c__u8(Bool_.N, Xol_case_mgr_.U8());
+		byte[] upper = Bry_.new_u8("YÖNLENDİRME");
+		byte[] lower = Bry_.new_u8("yönlendirme");
+		hash.Add(upper, upper);								// add upper to hash
+		Tfds.Eq_bry(upper, (byte[])hash.Get_by_bry(lower));	// get upper by using lower
+	}
 //		@Test  public void Hack() {
 //			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
 //			Bry_bfr bfr = Bry_bfr.new_();

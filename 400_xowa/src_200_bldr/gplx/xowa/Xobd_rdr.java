@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.consoles.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.parsers.tmpls.*;
 public class Xobd_rdr implements Xob_cmd {
 	private Xob_bldr bldr; private Xowe_wiki wiki;
 	public Xobd_rdr(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki;}

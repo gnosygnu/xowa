@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_lnki_title_fmtr implements Bry_fmtr_arg {
 	public Xoh_lnki_title_fmtr Set(byte[] src, Xop_tkn_itm tkn) {this.src = src; this.tkn = tkn; return this;}
 	public void XferAry(Bry_bfr bfr, int idx) {

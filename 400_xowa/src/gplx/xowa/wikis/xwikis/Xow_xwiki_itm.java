@@ -47,13 +47,4 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public static Xow_xwiki_itm new_(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry) {
 		return new Xow_xwiki_itm(key_bry, url_fmt, lang_id, domain_tid, domain_bry, domain_bry);
 	}
-	public static Xow_xwiki_itm new_by_mw(Bry_bfr bfr, Gfo_url_parser url_parser, Gfo_url url, byte[] key, byte[] mw_url, byte[] domain_name) {// EX: "commons|//commons.wikimedia.org/wiki/Category:$1|Wikimedia Commons" "DMOZ|http://www.dmoz.org/Regional/Europe/$1/"|DMOZ"
-		byte[] gfs_url = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(bfr, mw_url);				// EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
-		url_parser.Parse(url, gfs_url, 0, gfs_url.length);
-		byte[] domain_bry = url.Segs__get_at_1st();											// extract "commons.wikimedia.org"
-		Xow_domain_itm domain = Xow_domain_itm_.parse(domain_bry);
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_actl_key());
-		int lang_id = lang_itm == null ? Xol_lang_itm_.Id__unknown : lang_itm.Id();
-		return new Xow_xwiki_itm(key, gfs_url, lang_id, domain.Domain_type_id(), domain_bry, domain_name);
-	}
 }

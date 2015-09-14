@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
 	private Xob_dump_src_id page_src;
 	private Xowd_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
@@ -176,9 +177,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 	}
 	private void Free() {
-		ctx.App().Free_mem(true);
-		gplx.xowa.xtns.scribunto.Scrib_core.Core_invalidate();
-		wiki.Cache_mgr().Free_mem_all();
+		Xow_wiki_.Rls_mem(wiki, true);
 	}
 	protected void Reset_db_y_() {this.reset_db = true;}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

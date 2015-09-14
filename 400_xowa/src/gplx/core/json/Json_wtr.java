@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
+import gplx.core.primitives.*;
 public class Json_wtr {
 	private final Bry_bfr bfr = Bry_bfr.new_(255);
 	private final Int_ary idx_stack = new Int_ary(4);
@@ -70,6 +71,10 @@ public class Json_wtr {
 	public Json_wtr Ary_end() {
 		Write_grp_end(Bool_.N, Sym_ary_end);
 		return Write_nl();
+	}
+	public Json_wtr Kv_bool_as_mw(String key, boolean val)	{
+		if (val) Kv_bry(key, Bry_.Empty);	// if true, write 'key:""'; if false, write nothing
+		return this;
 	}
 	public Json_wtr Kv_bool(String key, boolean val)		{return Kv_bool(Bry_.new_u8(key), val);}
 	public Json_wtr Kv_bool(byte[] key, boolean val)		{return Kv_raw(key, val ? Bool_.True_bry : Bool_.False_bry);}
@@ -180,6 +185,7 @@ public class Json_wtr {
 		Write_grp_end(Bool_.N, Sym_ary_end);
 	}
 	private void Write_str(byte[] bry) {
+		if (bry == null) {bfr.Add(Object_.Bry__null); return;}
 		int len = bry.length;
 		bfr.Add_byte(opt_quote_byte);
 		for (int i = 0; i < len; ++i) {

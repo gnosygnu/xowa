@@ -217,3 +217,6 @@ public class Xosrh_core_tst {
 //			return rv;
 //		}
 //	}
+//	interface Xobl_data_itm {
+//		void Srl_save(Bry_bfr bfr);
+//	}

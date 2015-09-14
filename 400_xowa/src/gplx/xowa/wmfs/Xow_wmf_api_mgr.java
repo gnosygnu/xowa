@@ -21,12 +21,19 @@ import gplx.xowa.wmfs.data.*;
 public class Xow_wmf_api_mgr {
 	public void Trg_engine_key(String v) {this.trg_engine_key = v;} private String trg_engine_key = gplx.ios.IoEngine_.SysKey;
 	public byte[] Api_exec(Gfo_usr_dlg usr_dlg, Xowmf_mgr wmf_mgr, String domain_str, String api_args) {
-		String call	= String_.Format("https://{0}/w/api.php?{1}", domain_str, api_args);	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-		usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", domain_str, call);
-		byte[] rslt = wmf_mgr.Download_wkr().Download_xrg().Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
-		if (rslt == null) usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call);
+		String url = String_.Format("https://{0}/w/api.php?{1}", domain_str, api_args);	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+		usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", domain_str, url);
+		byte[] rslt = wmf_mgr.Download_wkr().Download_xrg().Trg_engine_key_(trg_engine_key).Exec_as_bry(url);
+		if (rslt == null) usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", url);
 		return rslt;
 	}
+	public static byte[] Bld_api_url(byte[] wiki, byte[] qarg_bry) {
+		return Bry_.Add(Bry__api_url_bgn, wiki, Bry__api_url_mid, qarg_bry);
+	}
+	private static final byte[]
+		Bry__api_url_bgn = Bry_.new_a7("https://")
+	,	Bry__api_url_mid = Bry_.new_a7("/w/api/php?")
+	;
 	public static String[] Wikis = new String[]
 { "commons.wikimedia.org"
 , "species.wikimedia.org"

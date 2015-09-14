@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
 	Btrie_fast_mgr trie = expression_();
 	Val_stack val_stack = new Val_stack();

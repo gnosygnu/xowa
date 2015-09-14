@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_file_wtr__basic {		
 	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 	private final Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.html.*;
-import gplx.xowa.parsers.lnkes.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_popup_wrdx_mkr {
 	private boolean skip_space;
 	private Xop_tkn_itm prv_tkn_seen, prv_tkn_added;

@@ -148,7 +148,8 @@ class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
 			}
 			else {							// known itm; use its hash_code
 				b_int = itm.Hashcode_lo();
-				i += itm.Len_lo() - 1;
+				int b_len = Utf8_.Len_of_char_by_1st_byte(b);	// NOTE: must calc b_len for langs with asymmetric upper / lower; PAGE:tr.w:Zvishavane DATE:2015-09-07
+				i += b_len - 1;
 			}
 			rv = (31 * rv) + b_int;
 		}
@@ -176,7 +177,7 @@ class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
 				if (!Bry_.Match(src, src_c_bgn, src_c_end, trg, trg_c_bgn, trg_c_end)) return false;// syms do not match; return false;
 			}
 			else {
-				if (!src_c_itm.Eq_lo(trg_c_itm)) return false;										// lower-case hash-codes don't match; return false;
+				if (src_c_itm.Utf8_id_lo() != trg_c_itm.Utf8_id_lo()) return false;					// lower-case utf8-ids don't match; return false; NOTE: using utf8-ids instead of hash-code to handle asymmetric brys; DATE:2015-09-07
 			}
 			src_c_bgn = src_c_end;
 			trg_c_bgn = trg_c_end;

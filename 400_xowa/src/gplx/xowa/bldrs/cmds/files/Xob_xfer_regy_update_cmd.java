@@ -32,7 +32,7 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 		this.Update_status(make_db_provider);
 	}
 	private void Copy_atrs_to_make_db(Db_conn make_db_provider) {
-		wiki.File_mgr().Init_file_mgr_by_load(wiki);
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);	// NOTE: this gets current fsdb to update from xfer_regy; this never uses -prv/ or /prv/ databases; DATE:2015-09-10
 		Fsm_mnt_itm fsdb_abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__get_main();		// 0 = fsdb.main
 		Db_conn conn = fsdb_abc_mgr.Atr_mgr().Db__core().Conn();								// 0 = fsdb.atr.00
 		Io_url fsdb_atr_url = ((gplx.dbs.engines.sqlite.Sqlite_conn_info)conn.Conn_info()).Url();

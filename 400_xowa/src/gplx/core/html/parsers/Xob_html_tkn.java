@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.html.parsers; import gplx.*; import gplx.core.*; import gplx.core.html.*;
 import gplx.xowa.*;
+import gplx.xowa.parsers.xndes.*;
 interface Gfo_html_tkn {
 	int Tid();
 	byte[] Key();

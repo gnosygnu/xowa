@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*;
+import gplx.xowa.parsers.xndes.*;
 public class Xop_log_basic_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr; private Xop_log_basic_tbl log_tbl;
 	private boolean save_page_ttl, save_log_time, save_args_len, save_args_str;

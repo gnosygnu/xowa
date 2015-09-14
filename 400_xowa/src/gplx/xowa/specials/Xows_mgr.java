@@ -75,7 +75,6 @@ public class Xows_mgr {
 		byte[] special_name = slash_pos == Bry_.NotFound
 				? ttl.Base_txt_wo_qarg()							// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
 				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
-//			byte[] special_name = ttl.Base_txt_wo_qarg();	// NOTE: ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
 		Object o = hash.Get_by_bry(special_name);
 		if (o == null) {
 			gplx.xowa.Xol_specials_itm special_itm = wiki.Lang().Specials_mgr().Get_by_alias(special_name);

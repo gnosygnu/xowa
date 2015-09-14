@@ -16,14 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.net.*;
-import gplx.srls.dsvs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.srls.dsvs.*; import gplx.xowa.wikis.domains.*;
 class Xow_xwiki_mgr_srl extends Dsv_wkr_base {
 	private byte[] key, url_fmt, name;
-	private final Xow_xwiki_mgr mgr;
-	private final Gfo_url_parser url_parser; private final Gfo_url tmp_url = new Gfo_url(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public Xow_xwiki_mgr_srl(Xow_xwiki_mgr mgr, Gfo_url_parser url_parser) {
-		this.mgr = mgr; this.url_parser = url_parser;
+	private final Xow_domain_itm cur_domain; private final Xow_xwiki_mgr mgr;
+	public Xow_xwiki_mgr_srl(Xow_domain_itm cur_domain, Xow_xwiki_mgr mgr) {
+		this.cur_domain = cur_domain; this.mgr = mgr;
 	}
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
@@ -35,7 +33,7 @@ class Xow_xwiki_mgr_srl extends Dsv_wkr_base {
 		}
 	}
 	@Override public void Commit_itm(Dsv_tbl_parser parser, int pos) {
-		Xow_xwiki_itm itm = Xow_xwiki_itm.new_by_mw(tmp_bfr, url_parser, tmp_url, key, url_fmt, name);
+		Xow_xwiki_itm itm = Xow_xwiki_itm_bldr.I.Bld(cur_domain, key, url_fmt, name);
 		mgr.Add_itm(itm);
 	}
 }

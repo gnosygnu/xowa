@@ -19,7 +19,8 @@ package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.html.hdumps.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.html.hdumps.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
 public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
@@ -60,7 +61,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		if (!xtn_ref_enabled) gplx.xowa.xtns.cite.References_nde.Enabled = false;
 		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);
 		gplx.xowa.xtns.imaps.Imap_xnde.Log_wkr = log_mgr.Make_wkr();
-		gplx.xowa.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
+		gplx.xowa.parsers.xndes.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pft_func_date_int extends Pf_func_base {
 	public Pft_func_date_int(int id, int date_tid) {this.id = id; this.date_tid = date_tid;} private int date_tid;
 	@Override public int Id() {return id;} private int id;

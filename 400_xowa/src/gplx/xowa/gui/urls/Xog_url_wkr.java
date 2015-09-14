@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.net.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.html.hrefs.*;
+import gplx.xowa.html.hrefs.*; import gplx.xowa.html.doms.*;
 import gplx.xowa.gui.views.*;
 public class Xog_url_wkr {
 	private final Xoa_url tmp_url = Xoa_url.blank();

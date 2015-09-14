@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.parsers.*;
 public class Xoh_lnki_title_fmtr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_lnki_title_fmtr_fxt fxt = new Xoh_lnki_title_fmtr_fxt();
 	@Test   public void Basic() {

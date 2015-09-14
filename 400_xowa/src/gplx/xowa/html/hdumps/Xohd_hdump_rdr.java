@@ -19,6 +19,7 @@ package gplx.xowa.html.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.html.heads.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.pages.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
+import gplx.xowa.parsers.*;
 public class Xohd_hdump_rdr {
 	private final Bry_bfr_mkr bfr_mkr; private final Xow_hzip_mgr hzip_mgr;
 	private final Xohd_abrv_mgr abrv_mgr; private final Xohd_page_html_mgr__load load_mgr; 

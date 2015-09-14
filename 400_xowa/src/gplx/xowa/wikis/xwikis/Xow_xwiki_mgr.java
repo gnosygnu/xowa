@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.apps.langs.*;
 import gplx.xowa.html.hrefs.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.cfgs.*;	
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private Xow_xwiki_mgr_srl srl;
 	private final Ordered_hash list = Ordered_hash_.new_bry_();
@@ -27,7 +27,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public Xow_xwiki_mgr() {}	// FIXME: current placeholder for viewer
 	public Xow_xwiki_mgr(Xowe_wiki wiki, Gfo_url_parser url_parser) {
 		this.wiki = wiki;
-		srl = new Xow_xwiki_mgr_srl(this, url_parser);
+		srl = new Xow_xwiki_mgr_srl(wiki.Domain_itm(), this);
 	}		
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private final Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
 	public int Len() {return list.Count();}
@@ -144,9 +144,9 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				case Xow_domain_type_.Int__species:
 				case Xow_domain_type_.Int__meta:
 				case Xow_domain_type_.Int__incubator:			domain_str = String_.Format("{0}.wikimedia.org", wiki_name); break;			// EX: commons.wikimedia.org
-				case Xow_domain_type_.Int__wikidata:				domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
+				case Xow_domain_type_.Int__wikidata:			domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
 				case Xow_domain_type_.Int__mediawiki:			domain_str = String_.Format("www.mediawiki.org", wiki_name); break;
-				case Xow_domain_type_.Int__wmfblog:	domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
+				case Xow_domain_type_.Int__wmfblog:				domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
 				default:										domain_str = String_.Format("{0}.{1}.org", lang_key_str, wiki_name); break;	// EX: en.wiktionary.org
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);

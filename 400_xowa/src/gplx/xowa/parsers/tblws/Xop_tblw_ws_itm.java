@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.xndes.*;
 public class Xop_tblw_ws_itm {
 	public byte Tblw_type() {return tblw_type;} private byte tblw_type;
 	public int Hook_len() {return hook_len;} private int hook_len;

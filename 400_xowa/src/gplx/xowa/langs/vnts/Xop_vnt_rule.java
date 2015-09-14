@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.*;
 public class Xop_vnt_rule extends Xop_tkn_itm_base {
 	public Xop_vnt_rule(byte[] rule_macro, byte[] rule_lang, Xop_tkn_itm[] rule_subs) {this.rule_macro = rule_macro; this.rule_lang = rule_lang; this.rule_subs = rule_subs;}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_vnt_rule;}

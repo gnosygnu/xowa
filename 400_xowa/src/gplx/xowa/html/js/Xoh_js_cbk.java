@@ -20,6 +20,7 @@ import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa
 import gplx.core.json.*;
 import gplx.xowa.html.js.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.parsers.*;
 public class Xoh_js_cbk implements GfoInvkAble {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;

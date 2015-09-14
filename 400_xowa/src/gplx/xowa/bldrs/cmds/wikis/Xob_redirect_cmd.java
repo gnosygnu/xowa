@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.utils.*;
 public class Xob_redirect_cmd extends Xob_dump_mgr_base {		
 	private Db_conn conn; private Xob_redirect_tbl redirect_tbl;
 	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Url_encoder encoder;

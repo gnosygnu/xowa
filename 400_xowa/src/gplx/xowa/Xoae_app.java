@@ -19,14 +19,15 @@ package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*; import gplx.core.json.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.apps.metas.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
-import gplx.xowa.bldrs.css.*;
-import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
 import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.bridges.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
-import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
+import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
 import gplx.xowa.wmfs.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
 public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_type app_type, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
@@ -104,7 +105,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xop_xatr_parser		Xatr_parser() {return xatr_parser;} private Xop_xatr_parser xatr_parser = new Xop_xatr_parser();
-	public Xop_xnde_tag_regy	Xnde_tag_regy() {return xnde_tag_regy;} private Xop_xnde_tag_regy xnde_tag_regy = new Xop_xnde_tag_regy();
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
 	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();

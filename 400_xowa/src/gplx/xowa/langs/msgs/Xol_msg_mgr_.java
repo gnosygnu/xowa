@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.php.*;
+import gplx.php.*; import gplx.xowa.parsers.*;
 public class Xol_msg_mgr_ {
 //		public static String Get_msg_val_gui_or_null(Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {
 //			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);

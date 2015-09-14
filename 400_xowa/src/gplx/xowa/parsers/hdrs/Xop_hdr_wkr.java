@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.xndes.*;
 public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}

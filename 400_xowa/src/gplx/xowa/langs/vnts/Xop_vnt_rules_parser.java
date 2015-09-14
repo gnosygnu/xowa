@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.miscs.*;
 class Xop_vnt_rules_parser {
 	private byte mode;
 	private Xop_vnt_tkn vnt_tkn;		

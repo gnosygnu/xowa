@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.installs.*;
 public class Xowm_dump_file_ {
 	public static Xowm_dump_file parse(byte[] src) {
 		int src_len = src.length;

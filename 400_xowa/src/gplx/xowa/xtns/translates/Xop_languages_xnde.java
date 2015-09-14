@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Xop_languages_xnde implements Xox_xnde {
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
