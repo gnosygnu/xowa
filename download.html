@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_windows_64_v2.9.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_windows_64_v2.9.2.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_windows_v2.9.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_windows_v2.9.2.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_linux_64_v2.9.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_linux_64_v2.9.2.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_linux_v2.9.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_linux_v2.9.2.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_macosx_64_v2.9.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_macosx_64_v2.9.2.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.1.1/xowa_app_macosx_v2.9.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.2.1/xowa_app_macosx_v2.9.2.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.9.1.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.9.2.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -55,25 +55,14 @@
     </h2>
 
     <h2>
-      <span class='mw-headline' id='v2.9.1.1_.282015-09-07.29'>v2.9.1.1 (2015-09-07)</span>
+      <span class='mw-headline' id='v2.9.2.1_.282015-09-14.29'>v2.9.2.1 (2015-09-14)</span>
     </h2>
-    <p>
-      <b>major</b>
-    </p>
-    <ul>
-      <li>
-        Graph: Add support for Graph extension; EX:/bin/any/xowa/xtns/Graph {detected by gnosygnu.build.warning}. See: [[Help:Diagnostics/Javascript/Graph]] <a href="https://en.wikipedia.org/wiki/Greek_withdrawal_from_the_eurozone">https://en.wikipedia.org/wiki/Greek_withdrawal_from_the_eurozone</a> <a href="https://de.wikipedia.org/wiki/Freital">https://de.wikipedia.org/wiki/Freital</a>
-      </li>
-    </ul>
     <p>
       <b>fix</b>
     </p>
     <ul>
       <li>
-        Setup: Remove Mac OS X dmg setup file {detected by anonymous4}.
-      </li>
-      <li>
-        Setup: Update shortcut icon path (affects firefox addon and http server not showing xowa icon in tab) {detected by gnosygnu.gui}. [broken since:v2.8.5]
+        Setup: Restore save icon for Option pages {detected by gnosygnu.gui}. See: [[Help:Options/Window]] [broken since:v2.8.5]
       </li>
     </ul>
     <p>
@@ -81,10 +70,10 @@
     </p>
     <ul>
       <li>
-        Package: Release image update for German wikis (2015-09). See: <a href="https://archive.org/details/Xowa_dewiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_dewiki_latest</a>
+        Package: Release image update for German wikis (2015-09).
       </li>
       <li>
-        Package: Release image update for Turkish wikis (2015-09). See: <a href="https://archive.org/details/Xowa_trwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_trwiki_latest</a>
+        Package: Release image update for Turkish wikis (2015-09).
       </li>
     </ul>
     <p>
@@ -92,12 +81,32 @@
     </p>
     <ul>
       <li>
-        Scribunto.Text: Add more support for JsonEncode / JsonDecode.
+        Scribunto.Text: Allow ints to be passed for text in UStringLibrary's Find (affects a few hundred pages with script error on ro.w) {detected by gnosygnu.build.warning}. See: <a href="https://ro.wikipedia.org/wiki/Innsbruck">https:/ro.wikipedia.org/wiki/Innsbruck</a> <a href="https://ro.wikipedia.org/wiki/Victor_Ciorbea">https://ro.wikipedia.org/wiki/Victor_Ciorbea</a>
+      </li>
+      <li>
+        HttpServer: Clear caches once memory usage reaches 1 GB {requested by anonymous}.
       </li>
     </ul>
     <p>
-      <br>
+      <b>significant</b>
     </p>
+    <ul>
+      <li>
+        Lang: Fix redirect not working in languages with asymmetric upper-case / lower-case (affects a few dozen pages showing script error in tr.w) {detected by gnosygnu.build.warning}. See: <a href="https://tr.wikipedia.org/wiki/Zvishavane">https://tr.wikipedia.org/wiki/Zvishavane</a> <a href="https://tr.wikibooks.org/wiki/Radyasyon_Onkolojisi">https://tr.wikibooks.org/wiki/Radyasyon_Onkolojisi</a>
+      </li>
+      <li>
+        Parser.Table: Automatically add &lt;tr&gt; when sequence is &lt;td&gt;\n| (affects a few dozen infoboxes on fi.w with misplaced icon) {detected by gnosygnu.gui}. See: <a href="https://fi.wikipedia.org/wiki/Salibandyn_maailmanmestaruuskilpailut_2012">https://fi.wikipedia.org/wiki/Salibandyn_maailmanmestaruuskilpailut_2012</a>
+      </li>
+    </ul>
+    <p>
+      <b>dev</b>
+    </p>
+    <ul>
+      <li>
+        Source: Consolidate working folders into xowa /src/ root.
+      </li>
+    </ul>
+    
 <!-- page_end -->
     </div>
   </div>
