@@ -18,6 +18,55 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.9.3.1_.282015-09-20_19:00_Sun.29'>Release: v2.9.3.1 (2015-09-20 19:00 Sun)</span>
+    </h2>
+    <p>
+      v2.9.3 is another light release. It has a few fixes for Chinese wikis.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Handle_new_relative_urls_for_CSS'>Handle new relative urls for CSS</span>
+    </h3>
+    <p>
+      Wikimedia changed their url format for CSS resources this week. Previously it used to be "//simple.wikipedia.org/w/...". Now it is just "/w/..." Unfortunately, since XOWA didn't handle relative-style urls, the CSS files weren't being downloaded for new wikis. This is fixed now.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Parser_fixes_for_Chinese_wikis'>Parser fixes for Chinese wikis</span>
+    </h3>
+    <p>
+      After building the images for the Chinese wikis, I noticed that there were issues with blank message boxes and blank reference text. It turned out that these were broken by the language dropdown back in v2.8.1. I spent a good deal of time fixing these issues, but realized that the current implementation of variant handling (-{zh-hans:text}-) needs to be rewritten.
+    </p>
+    <p>
+      The current version is much better than the last version, but there are still some changes that need to be done.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Minor_source_code_reorganization'>Minor source code reorganization</span>
+    </h3>
+    <p>
+      I spent a good deal of time reorganizing the main XOWA project codebase. In particular, XOWA had a lot of extra "Source Folders" in addition to "src". These folders arose from the C# to Java conversion and C# having a broader scope for a non-public class than Java (in C#, non-public classes can be seen by classes across namespaces).
+    </p>
+    <p>
+      Source code cleanup is an ongoing process, but this should make a substantial difference.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Image_packages_for_Portuguese.2C_Romanian.2C_and_Indonesian_wikis'>Image packages for Portuguese, Romanian, and Indonesian wikis</span>
+    </h3>
+    <p>
+      These wikis were fairly straightforward. See <a href="https://archive.org/details/Xowa_ptwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_ptwiki_latest</a> <a href="https://archive.org/details/Xowa_rowiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_rowiki_latest</a> and <a href="https://archive.org/details/Xowa_idwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_idwiki_latest</a>
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.9.4'>Next release: v2.9.4</span>
+    </h3>
+    <p>
+      For images, I'm going to work on Hungarian, Thai and Serbian.
+    </p>
+    <p>
+      For development, I'm going to put the Math parser to the side and work on rewriting the Chinese / Serbian language translation
+    </p>
+    <p>
+      <br>
+    </p>
+
+    <h2>
       <span class='mw-headline' id='Release:_v2.9.2.1_.282015-09-13_21:00_Sun.29'>Release: v2.9.2.1 (2015-09-13 21:00 Sun)</span>
     </h2>
     <p>
@@ -47,7 +96,43 @@
     <p>
       <br>
     </p>
-
+    <h2>
+      <span class='mw-headline' id='Release:_v2.9.1.1_.282015-09-06_20:00_Sun.29'>Release: v2.9.1.1 (2015-09-06 20:00 Sun)</span>
+    </h2>
+    <p>
+      v2.9.1 is a light release. It adds a new Graph extension.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Added_Graph_extension._Help:Diagnostics.2FJavascript.2FGraph'>Added Graph extension. [[Help:Diagnostics/Javascript/Graph]]
+    </h3>
+    <p>
+      MediaWiki recently began incorporating a new Javascript-centric extension for making graphs. They only show up on a few pages, but I wanted to make sure XOWA handled them before they show up on more.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Removed_Mac_OS_X_DMG'>Removed Mac OS X DMG</span>
+    </h3>
+    <p>
+      I ended up removing the Mac OS X DMG. The main problem is that future updates (for example v2.9.1) would actually overwrite any existing wikis. I'll reinstate the DMG at a future release, but I'll need to make some XOWA changes to allow customized user wiki folders.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Updated_images_for_German_and_Turkish_wikis'>Updated images for German and Turkish wikis</span>
+    </h3>
+    <p>
+      These updates were uploaded earlier this week to <a href="https://archive.org/details/Xowa_dewiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_dewiki_latest</a> and <a href="https://archive.org/details/Xowa_trwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_trwiki_latest</a> .
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.9.2'>Next release: v2.9.2</span>
+    </h3>
+    <p>
+      For images, I'm going to work on Chinese, Indonesian and Romainian.
+    </p>
+    <p>
+      For development, I plan to work on the Math parser and some more infrastructure items.
+    </p>
+    <p>
+      <br>
+    </p>
+    
     <h2>
       <span class='mw-headline' id='Release:_v2.9.1.1_.282015-09-06_20:00_Sun.29'>Release: v2.9.1.1 (2015-09-06 20:00 Sun)</span>
     </h2>
