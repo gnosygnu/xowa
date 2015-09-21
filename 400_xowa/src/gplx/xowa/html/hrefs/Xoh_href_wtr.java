@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.xwikis.*;
 public class Xoh_href_wtr {
 	private final Bry_bfr encoder_bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255);
@@ -70,11 +71,11 @@ public class Xoh_href_wtr {
 		bfr.Add_bfr_and_clear(encoder_bfr);
 	}
 	private void Build_to_bfr_page(Xoa_ttl ttl, byte[] ttl_full, int page_bgn) {
-		int anch_bgn = Bry_finder.Find_fwd(ttl_full, Byte_ascii.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
+		int anch_bgn = Bry_find_.Find_fwd(ttl_full, Byte_ascii.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
 		if (anch_bgn == Bry_.NotFound)	// no anchor; just add page
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, ttl_full.length);
 		else {							// anchor exists; check if anchor is preceded by ws; EX: [[A #b]] -> "/wiki/A#b"
-			int page_end = Bry_finder.Find_bwd_last_ws(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
+			int page_end = Bry_find_.Find_bwd_last_ws(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
 			page_end = page_end == Bry_.NotFound ? anch_bgn : page_end;			// if ws not found, use # pos; else use 1st ws pos
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, page_end);			// add page
 			encoder.Encode(encoder_bfr, ttl_full, anch_bgn, ttl_full.length);	// add anchor

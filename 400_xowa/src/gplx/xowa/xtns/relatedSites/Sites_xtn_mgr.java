@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.langs.htmls.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 public class Sites_xtn_mgr extends Xox_mgr_base {
 	public Sites_xtn_mgr() {
 		html_bldr = new Sites_html_bldr(this);

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.cnvs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.miscs.*;
@@ -67,7 +68,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			name_had_subst = name_key_tkn.Dat_ary_had_subst();
 			name_ary_orig = name_ary;	// cache name_ary_orig
 			name_ary_len = name_ary.length;
-			name_bgn = Bry_finder.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
+			name_bgn = Bry_find_.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
 			if (	name_ary_len == 0			// name is blank; can occur with failed inner tmpl; EX: {{ {{does not exist}} }}
 				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le cœur sur la main| }}
 				) {								
@@ -122,7 +123,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_func:
 					if (defn.Defn_require_colon_arg()) {
-						colon_pos =  Bry_finder.Find_fwd(name_ary, Byte_ascii.Colon);
+						colon_pos =  Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
 						if (colon_pos == Bry_.NotFound)
 							defn = Xot_defn_.Null;
 					}						
@@ -132,7 +133,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
-					int raw_colon_pos = Bry_finder.Find_fwd(name_ary, Byte_ascii.Colon);
+					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
 					if (raw_colon_pos == Bry_.NotFound) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
 						name_ary = Bry_.Mid(name_ary, finder.Subst_end() + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
@@ -194,7 +195,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		}
 		if (	defn.Defn_tid() == Xot_defn_.Tid_null		// name is not a known defn
 			&&	lang.Vnt_mgr().Enabled()) {					// lang has vnts
-			Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
+			Xowd_page_itm page = lang.Vnt_mgr().Convert_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
 			if (page != Xowd_page_itm.Null) {
 				name_ary = page.Ttl_page_db();
 				Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
@@ -265,7 +266,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
 							byte[] tmp_src = rslt_bfr.Xto_bry_and_clear();
-							rslt_bfr.Add(wiki.Parser().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
+							rslt_bfr.Add(wiki.Parser_mgr().Main().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
 						}
 						if (Cache_enabled) {
 							byte[] rslt_val = rslt_bfr.Xto_bry_and_clear();
@@ -350,7 +351,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			}
 		}
 		if (transclude_src !=  null) {
-			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), transclude_src);
+			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), transclude_src);
 			return Eval_sub(ctx, transclude_tmpl, caller, src, bfr);
 		}
 		else {				
@@ -375,7 +376,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (tmpl_page_bry != null) {
 			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing ctxs is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
-			rv = wiki.Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
+			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
 			byte[] frame_ttl = tmpl_page_itm.Ttl().Full_txt();		// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
@@ -406,7 +407,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 			if (	cache_itm != null) {
 				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Cur_page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
-					transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt());
+					transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt());
 					page_ttl = cache_itm.Ttl();
 				}
 			}

@@ -79,7 +79,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		html_id_img = hcmd_id + "_img";
 		html_id_a	= hcmd_id + "_a";
 		html_a_href = ""; html_img_src = "";
-		html_img_alt = String_.new_u8(Bry_.Replace(code, Xoa_consts.Nl_bry, gplx.html.Html_entity_.Nl_bry));
+		html_img_alt = String_.new_u8(Bry_.Replace(code, Xoa_consts.Nl_bry, gplx.langs.htmls.Html_entity_.Nl_bry));
 		String html_img_alt_tmp = "", html_img_src_tmp = "", html_a_href_tmp = "";
 		html_img_src = png_file.To_http_file_str();			
 		html_a_href = aud_file.To_http_file_str();
@@ -98,7 +98,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		}
 		else {
 			html_img_alt_tmp = html_img_src_tmp = html_a_href_tmp = "";
-			score_xtn.Html_txt().Bld_bfr_many(bfr, html_id_pre, lang_is_abc ? "xowa-score-abc" : "xowa-score-lilypond", gplx.html.Html_utl.Escape_html_as_bry(code));
+			score_xtn.Html_txt().Bld_bfr_many(bfr, html_id_pre, lang_is_abc ? "xowa-score-abc" : "xowa-score-lilypond", gplx.langs.htmls.Html_utl.Escape_html_as_bry(code));
 			page.Html_cmd_mgr().Add(this);
 		}
 		score_xtn.Html_img().Bld_bfr_many(bfr, html_id_a, html_a_href_tmp, html_a_xowa_ttl, html_id_img, html_img_src_tmp, html_img_alt_tmp);
@@ -180,9 +180,9 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 	}
 	public static byte[] Get_lilypond_version(String rslt_str) {
 		byte[] rslt = Bry_.new_u8(rslt_str);	// expect 1st line to be of form "GNU LilyPond 2.16.2"
-		int bgn_pos	= Bry_finder.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_.NotFound) return Version_unknown;
+		int bgn_pos	= Bry_find_.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_.NotFound) return Version_unknown;
 		bgn_pos += Version_find_bgn.length + 1;	// +1 for trailing space
-		int end_pos = Bry_finder.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_.NotFound) return Version_unknown;
+		int end_pos = Bry_find_.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_.NotFound) return Version_unknown;
 		if (rslt[end_pos - 1] == Byte_ascii.Cr) end_pos = end_pos - 1;
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}

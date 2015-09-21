@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.servers.http.*;
 public class Xoh_head_itm__server extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__server;}

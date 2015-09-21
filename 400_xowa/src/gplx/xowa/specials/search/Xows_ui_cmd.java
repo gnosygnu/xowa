@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.threads.*; import gplx.html.*;
+import gplx.core.threads.*; import gplx.langs.htmls.*;
 import gplx.xowa.wikis.*; import gplx.xowa.files.gui.*; import gplx.xowa.gui.views.*;
 class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 	private final Xows_core mgr; private final Xows_ui_qry qry; private final Xows_ui_rslt rslt; 

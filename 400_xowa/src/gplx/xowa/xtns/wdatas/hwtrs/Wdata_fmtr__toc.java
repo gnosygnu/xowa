@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.langs.htmls.encoders.*;
 class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
 	private final List_adp itms = List_adp_.new_(); private final  Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
 	private byte[] tbl_hdr; 

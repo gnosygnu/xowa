@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.primitives.*; import gplx.php.*;
+import gplx.core.primitives.*; import gplx.langs.phps.*;
 public class Process_recv_msg {
 	private Php_srl_parser parser = new Php_srl_parser();
 	public Process_recv_msg() {

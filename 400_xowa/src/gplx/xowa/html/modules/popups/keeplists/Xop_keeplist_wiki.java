@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups.keeplists; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.html.modules.popups.*;
-import gplx.core.regxs.*;
+import gplx.langs.regxs.*;
 public class Xop_keeplist_wiki {
 	public Xop_keeplist_wiki(Xowe_wiki wiki) {
 		srl = new Xop_keeplist_wiki_srl(wiki);

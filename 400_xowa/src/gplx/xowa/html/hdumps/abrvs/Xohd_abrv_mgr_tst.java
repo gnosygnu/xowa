@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.abrvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
 import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 public class Xohd_abrv_mgr_tst {
 	@Before public void init() {
 		fxt.Clear();

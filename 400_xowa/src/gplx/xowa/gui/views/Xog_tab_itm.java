@@ -138,7 +138,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoae_app app = wiki.Appe(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		try {
 			if (page.Tab_data().Cancel_show()) return;	// Special:Search canceled show; NOTE: must be inside try b/c finally handles thread
-			wiki.Ctx().Cur_page_(page);
+			wiki.Parser_mgr().Ctx().Cur_page_(page);
 			if (page.Missing()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
 					page = Xoae_page.create_(wiki, ttl);
@@ -147,6 +147,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 					Xog_tab_itm_read_mgr.Show_page(this, page, false);
 				}
 				else {
+					wkr.Page().Tab_data().Tab().Page_(page);	// NOTE: must set tab's page to current page, so that switching to it will update url bar; EX:pt.b:A"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR""" DATE:2015-09-17
 					if (page.Redirected_ttls().Count() > 0)
 						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), String_.new_u8((byte[])page.Redirected_ttls().Get_at(0)));
 					else {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.stringutils; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pos extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_strx_pos;}
@@ -27,8 +28,8 @@ public class Pfunc_pos extends Pf_func_base {
 		byte[] find = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 0, Byte_ascii.Space_bry);	// MW: use " " if find is missing
 		byte[] offset_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, null);
 		int offset = offset_bry == null ? 0 : Bry_.To_int_or_neg1(offset_bry);
-		int pos = Bry_finder.Find_fwd(str, find, offset);
-		if (pos != Bry_finder.Not_found)
+		int pos = Bry_find_.Find_fwd(str, find, offset);
+		if (pos != Bry_find_.Not_found)
 			trg.Add_int_variable(pos);
 	}
 }	

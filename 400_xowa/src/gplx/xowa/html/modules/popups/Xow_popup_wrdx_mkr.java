@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_popup_wrdx_mkr {
 	private boolean skip_space;
@@ -183,7 +184,7 @@ public class Xow_popup_wrdx_mkr {
 		return false;
 	}
 	public void Xnde_ignore_ids_(byte[] xnde_id_ignore_bry) {
-		byte[][] ary = Bry_.Split(xnde_id_ignore_bry, Byte_ascii.Pipe);
+		byte[][] ary = Bry_split_.Split(xnde_id_ignore_bry, Byte_ascii.Pipe);
 		int ary_len = ary.length;
 		xnde_id_ignore_list.Clear();
 		for (int i = 0; i < ary_len; i++) {

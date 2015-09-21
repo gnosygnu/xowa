@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
-import gplx.intl.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.core.intls.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.langs.*;
 public class Xol_mw_lang_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_mw_lang_parser_fxt fxt = new Xol_mw_lang_parser_fxt();
 	@Test  public void Core_keywords() {

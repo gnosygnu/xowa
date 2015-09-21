@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.xtns.relatedSites.*;
+import gplx.langs.htmls.*; import gplx.xowa.xtns.relatedSites.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.utils.*;
 public class Xoh_page_wtr_wkr_ {
 	public static byte[] Bld_page_content_sub(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Bry_bfr tmp_bfr) {
@@ -37,8 +38,8 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_head_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] head_end = page.Html_data().Custom_head_end();
 		if (head_end == null) return;
-		int insert_pos = Bry_finder.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
-		if (insert_pos == Bry_finder.Not_found) {
+		int insert_pos = Bry_find_.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
+		if (insert_pos == Bry_find_.Not_found) {
 			Gfo_usr_dlg_.I.Warn_many("", "", "could not find </head>");
 			return;
 		}
@@ -47,8 +48,8 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_html_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] html_end = page.Html_data().Custom_html_end();
 		if (html_end == null) return;
-		int insert_pos = Bry_finder.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
-		if (insert_pos == Bry_finder.Not_found) {
+		int insert_pos = Bry_find_.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
+		if (insert_pos == Bry_find_.Not_found) {
 			Gfo_usr_dlg_.I.Warn_many("", "", "could not find </html>");
 			return;
 		}

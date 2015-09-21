@@ -149,7 +149,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				if		(ignore_prv) {
 					ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_htmlTidy_tblw));
 					++tblw_te_ignore_count;
-					cur_pos = Bry_finder.Find_fwd_until(src, cur_pos, src_len, Byte_ascii.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
+					cur_pos = Bry_find_.Find_fwd_until(src, cur_pos, src_len, Byte_ascii.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
 					return cur_pos;
 				}
 				if (auto_create) {
@@ -481,7 +481,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		root.Subs_del_between(ctx, subs_bgn, subs_pos);
 		int atrs_bgn = prv_tblw.Src_end(), atrs_end = last_atr_tkn.Src_end();
 		if (prv_tblw.Tkn_tid() == Xop_tkn_itm_.Tid_tblw_tr)	// NOTE: if "|-" gobble all trailing dashes; REF: Parser.php!doTableStuff; $line = preg_replace( '#^\|-+#', '', $line ); DATE:2013-06-21
-			atrs_bgn = Bry_finder.Find_fwd_while(src, atrs_bgn, src.length, Byte_ascii.Dash);
+			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, Byte_ascii.Dash);
 		prv_tblw.Atrs_rng_set(atrs_bgn, atrs_end);
 		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki && atrs_bgn != -1) {
 			Xop_xatr_itm[] atrs = ctx.App().Xatr_parser().Parse(ctx.Msg_log(), src, atrs_bgn, atrs_end);

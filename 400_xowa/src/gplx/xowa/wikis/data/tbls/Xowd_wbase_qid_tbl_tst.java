@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import org.junit.*; import gplx.dbs.*;
+import gplx.xowa.nss.*;
 public class Xowd_wbase_qid_tbl_tst {
 	private final Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
 	@Before public void init() {fxt.Clear();}

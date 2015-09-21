@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*;
@@ -122,7 +123,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	private void Win__link_clicked(String anchor_raw) {
 		String url = url_box.Text();
-		int pos = String_.FindFwd(url, gplx.html.Html_tag_.Anchor_str);
+		int pos = String_.FindFwd(url, gplx.langs.htmls.Html_tag_.Anchor_str);
 		if (pos != Bry_.NotFound) url = String_.Mid(url, 0, pos);
 		String anchor_str = Parse_evt_location_changing(anchor_raw);
 		byte[] anchor_bry = Bry_.new_u8(anchor_str);
@@ -144,7 +145,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		app.Gfs_mgr().Run_str(snippet);
 	}
 	private static String Parse_evt_location_changing(String v) { // EX: about:blank#anchor -> anchor
-		int pos = String_.FindFwd(v, gplx.html.Html_tag_.Anchor_str);
+		int pos = String_.FindFwd(v, gplx.langs.htmls.Html_tag_.Anchor_str);
 		return pos == Bry_.NotFound
 			? null
 			: String_.Mid(v, pos + 1);
@@ -157,7 +158,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			// NOTE: if moving from "Edit" to "Read", reload page (else Preview changes will still show); NOTE: do not call Exec_page_reload / Exec_page_refresh, which will fire redlinks code
 			page = tab_mgr.Active_tab().History_mgr().Cur_page(wiki);	// NOTE: must set to CurPage() else changes will be lost when going Bwd,Fwd
 			tab.Page_(page);			
-			wiki.ParsePage_root(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+			wiki.Parser_mgr().Parse(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			Xoa_url url = page.Url();
 			if (url.Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit))	// url has ?action=edit
 				url = tab.Wiki().Utl__url_parser().Parse(url.To_bry_full_wo_qargs());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
@@ -185,7 +186,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
 		if (new_page.Missing()) return;
 		if (Xows_special_meta_.Itm__search.Match_ttl(new_page.Ttl()))		// if Special:Search, reload page; needed for async loading; DATE:2015-04-19
-			new_page = new_page.Wikie().Load_page_by_ttl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+			new_page = new_page.Wikie().Data_mgr().Load_page_by_ttl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt(), new_page.Ttl().Full_txt());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);
@@ -195,7 +196,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xog_tab_itm tab = tab_mgr.Active_tab();
 		Xoae_page page = tab.History_mgr().Cur_page(tab.Wiki());	// NOTE: must set to CurPage() else changes will be lost when going Bwd,Fwd
 		tab.Page_(page);
-		page.Wikie().ParsePage_root(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+		page.Wikie().Parser_mgr().Parse(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		Page__refresh();
 	}
 	public void Page__refresh() {
@@ -254,7 +255,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
-			Xoae_page new_page = wiki.Load_page_by_ttl(url, ttl);
+			Xoae_page new_page = wiki.Data_mgr().Load_page_by_ttl(url, ttl);
 			if (new_page.Missing()) {return Bry_.Empty;}
 			gplx.xowa.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
 			Xog_tab_itm tab = tab_mgr.Active_tab();

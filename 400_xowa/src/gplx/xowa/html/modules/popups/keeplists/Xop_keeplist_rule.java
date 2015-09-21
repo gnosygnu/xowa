@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups.keeplists; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.html.modules.popups.*;
-import gplx.core.regxs.*;
+import gplx.langs.regxs.*;
 public class Xop_keeplist_rule {
 	private Gfo_pattern[] excludes; private int excludes_len;
 	public Xop_keeplist_rule(Gfo_pattern[] includes, Gfo_pattern[] excludes) {

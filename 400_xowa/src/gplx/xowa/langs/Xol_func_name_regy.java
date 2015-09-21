@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*; import gplx.core.intls.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xol_func_name_regy {
 	private final Xoa_lang_mgr lang_mgr; private final Xol_lang lang;
@@ -79,14 +79,14 @@ public class Xol_func_name_regy {
 				case Xot_defn_.Tid_safesubst:
 				case Xot_defn_.Tid_subst:
 					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
-					if (match_pos < txt_end) txt_bgn = Bry_finder.Find_fwd_while_not_ws(src, match_pos, txt_end);
+					if (match_pos < txt_end) txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos, txt_end);
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 				case Xot_defn_.Tid_msgnw:
 					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
 					if (match_pos + 1 < txt_end)	// +1 to include ":" (keyword id "raw", not "raw:")
-						txt_bgn = Bry_finder.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
+						txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
 					break;
 				default: return finder;
 			}

@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 class Pp_index_parser {
 	public static Pp_index_page Parse(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);
 		if (src == null) return Pp_index_page.Null;
-		Xop_parser sub_parser = new Xop_parser(wiki, wiki.Parser().Tmpl_lxr_mgr(), wiki.Parser().Wtxt_lxr_mgr());
+		Xop_parser sub_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 		Xop_root_tkn index_root = tkn_mkr.Root(src);

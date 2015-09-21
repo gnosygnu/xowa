@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.fsdb.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.fsdb.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xob_orig_tbl_bldr extends Xob_itm_basic_base implements Xob_cmd {
 	private Db_conn conn; private boolean schema_1;
 	public Xob_orig_tbl_bldr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}

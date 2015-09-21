@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.html.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.nss.*;
 class Dpl_itm {
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
@@ -65,7 +66,7 @@ class Dpl_itm {
 					key_id = Dpl_itm_keys.Parse(src, fld_bgn, fld_end, Dpl_itm_keys.Key_null);
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
-						fld_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Nl, pos);
+						fld_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
 						if (fld_bgn == Bry_.NotFound) loop = false;
 					}
 					else {									// known key; set pos to val_bgn
@@ -96,7 +97,7 @@ class Dpl_itm {
 	private static final byte Dlm_fld = Byte_ascii.Eq, Dlm_row = Byte_ascii.Nl;
 	public void Parse_cmd(Xowe_wiki wiki, byte key_id, byte[] val) {
 		sub_root.Clear();
-		val = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
+		val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
 		switch (key_id) {
 			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = List_adp_.new_(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
 			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = List_adp_.new_(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;

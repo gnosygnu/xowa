@@ -23,10 +23,10 @@ class Xoi_cmd_imageMagick_download extends Gfo_thread_cmd_download implements Gf
 	public Xoi_cmd_imageMagick_download(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Io_url trg) {this.Ctor(usr_dlg, kit); this.trg = trg;} Io_url trg;
 	@Override public byte Async_init() {	// <a href="ImageMagick-6.8.1-9-Q16-x86-windows.zip">
 //			byte[] raw = xrg.Exec_as_bry(Src_imageMagick);
-//			int find_pos = Bry_finder.Find_fwd(raw, Bry_windows_zip);				if (find_pos == Bry_.NotFound) return Fail();
-//			int bgn_pos = Bry_finder.Find_bwd(raw, Byte_ascii.Quote, find_pos);	if (bgn_pos == Bry_.NotFound) return Fail();
+//			int find_pos = Bry_find_.Find_fwd(raw, Bry_windows_zip);				if (find_pos == Bry_.NotFound) return Fail();
+//			int bgn_pos = Bry_find_.Find_bwd(raw, Byte_ascii.Quote, find_pos);	if (bgn_pos == Bry_.NotFound) return Fail();
 //			++bgn_pos;
-//			int end_pos = Bry_finder.Find_fwd(raw, Byte_ascii.Quote, bgn_pos);		if (end_pos == Bry_.NotFound) return Fail();
+//			int end_pos = Bry_find_.Find_fwd(raw, Byte_ascii.Quote, bgn_pos);		if (end_pos == Bry_.NotFound) return Fail();
 //			String src = Src_imageMagick + String_.new_a7(Bry_.Mid(raw, bgn_pos, end_pos));
 		String src = "http://ftp.sunet.se/pub/multimedia/graphics/ImageMagick/binaries/ImageMagick-6.8.8-1-Q16-x86-windows.zip";
 		this.Init("downloading", src, trg);

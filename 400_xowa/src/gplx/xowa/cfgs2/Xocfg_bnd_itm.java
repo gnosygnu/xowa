@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs2; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.cmds.*;
-import gplx.gfs.*; import gplx.xowa.apps.*;
+import gplx.langs.gfss.*; import gplx.xowa.apps.*;
 public class Xocfg_bnd_itm implements GfoInvkAble {
 	private Xocfg_bnd_mgr mgr;
 	public Xocfg_bnd_itm(Xocfg_bnd_mgr mgr, Xog_cmd_itm cmd, Xog_bnd_itm bnd) {

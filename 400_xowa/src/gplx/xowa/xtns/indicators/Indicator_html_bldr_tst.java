@@ -50,7 +50,7 @@ class Indicator_html_bldr_fxt {
 		this.xtn_mgr = wiki.Xtn_mgr().Xtn_indicator();
 		xtn_mgr.Enabled_y_();
 		xtn_mgr.Xtn_init_by_wiki(wiki);
-		this.page = wiki.Ctx().Cur_page();
+		this.page = wiki.Parser_mgr().Ctx().Cur_page();
 	}
 	public void Init_indicator(String name, String html) {
 		Indicator_xnde xnde = new Indicator_xnde();

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.dbs.engines.sqlite.*;
 class Xob_orig_regy_tbl {

@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.data.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.lnkis.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
@@ -34,7 +35,7 @@ class Xof_file_fxt {
 		this.fsdb_mgr = (Xof_fsdb_mgr__sql)wiki.File_mgr().Fsdb_mgr();
 		this.orig_mgr = wiki.File__orig_mgr();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
-		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
+		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);

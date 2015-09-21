@@ -113,7 +113,7 @@ public class Scrib_lib_mw__invoke_tst {
 	@Test  public void Err_mod_blank()				{fxt.Test_parse_err("{{#invoke:}}"			, Scrib_invoke_func.Err_mod_missing);}
 	@Test  public void Err_mod_missing()			{fxt.Test_parse_err("{{#invoke:Missing}}"	, Scrib_invoke_func.Err_mod_missing);}
 	@Test  public void Err_mod_custom()	{
-		fxt.Test_error(Err_.new_("err_type", "fail", "key0", "val0"), "<strong class='error'><span class='scribunto-error' id='mw-scribunto-error-0'>Script error: fail</span></strong>");
+		fxt.Test_error(Err_.new_("err_type", "fail", "key0", "val0"), "<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">Script error: fail</span></strong>");
 	}
 	private void Init_preprocess() {
 		fxt.Init_tmpl("{{#invoke:Mod_0|Func_0|1|c|d}}");	// current

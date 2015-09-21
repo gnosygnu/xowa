@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.php.*; import gplx.srls.dsvs.*;
+import gplx.langs.phps.*; import gplx.langs.dsvs.*;
+import gplx.xowa.apps.gfss.*;
 public class Hiero_mw_tables_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
 	private Php_text_itm_parser quote_parser = new Php_text_itm_parser();

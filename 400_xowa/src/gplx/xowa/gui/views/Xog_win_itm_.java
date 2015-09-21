@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.cmds.*;
+import gplx.xowa.langs.*;
 public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {
 		Xoae_app app = win.App(); GfuiWin win_box = win.Win_box();			

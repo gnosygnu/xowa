@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
+import gplx.core.tests.*;
 public class Io_fil_chkr implements Tst_chkr {
 	public Io_fil_chkr(Io_url url, String data) {this.expd_url = url; this.expd_data = data;}
 	public Io_url Expd_url() {return expd_url;} public Io_fil_chkr Expd_url_(Io_url v) {expd_url = v; return this;} Io_url expd_url;

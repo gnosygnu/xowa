@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.langs.*;
 class Xoctg_fmtr_all {
 	public Xoctg_fmtr_all(byte tid) {this.Ctor(tid);}
 	public byte Tid() {return tid;} private byte tid;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.nss.*;
 public class Xob_xml_dumper_tst {
 	private final Xob_xml_dumper_fxt fxt = new Xob_xml_dumper_fxt();
 	@Before public void init() {fxt.Clear();}

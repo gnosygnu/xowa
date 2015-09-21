@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.tdbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.tdbs.*; import gplx.xowa.nss.*;
 public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_mgr_txt(Xowe_wiki wiki, Xow_data_mgr data_mgr) {
 		this.wiki = wiki;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.wms.apis.*; import gplx.xowa.files.fsdb.*;
 public class Xof_orig_wkr_ {
 	public static final Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
 	public static void Find_by_list(Xof_orig_wkr wkr, Ordered_hash rv, List_adp itms) {

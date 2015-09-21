@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.ios.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_make_id_wkr extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public Xob_make_id_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "core.make_id";

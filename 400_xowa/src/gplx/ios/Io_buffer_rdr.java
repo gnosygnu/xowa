@@ -60,7 +60,7 @@ public class Io_buffer_rdr implements RlsAble {
 		if (rdr != null) rdr.Rls();
 	}
 	@gplx.Internal protected void Dump_to_file(int bgn, int len, String url_str, String msg) {	// DBG:
-		String text = String_.new_u8_by_len(bfr, bgn, len);
+		String text = String_.new_u8__by_len(bfr, bgn, len);
 		Io_mgr.I.AppendFilStr(Io_url_.new_any_(url_str), msg + text + "\n");
 	}
 	public static Io_buffer_rdr new_(Io_stream_rdr rdr, int bfr_len) {

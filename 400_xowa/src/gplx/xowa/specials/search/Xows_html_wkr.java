@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.langs.numbers.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.langs.numbers.*;
 class Xows_html_wkr {		
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Xows_ui_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;

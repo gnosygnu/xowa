@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.langs.*;
 public class Xob_i18n_parser {
 	public static void Load_msgs(boolean dirty, Xol_lang lang, Io_url i18n_fil) {
 		String i18n_str = Io_mgr.I.LoadFilStr_args(i18n_fil).MissingIgnored_().Exec(); if (String_.Len_eq_0(i18n_str)) return;

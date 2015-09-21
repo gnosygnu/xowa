@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.fsdb.meta.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_fsdb_reduce_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_fsdb_reduce_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_fsdb_reduce;}

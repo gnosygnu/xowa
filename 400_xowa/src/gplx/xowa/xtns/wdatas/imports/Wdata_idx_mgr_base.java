@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.json.*; import gplx.ios.*;
+import gplx.langs.jsons.*; import gplx.ios.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wdatas.imports.*;
 abstract class Wdata_idx_mgr_base {
 	public void Ctor(Xob_itm_dump_base wkr, Xob_bldr bldr, Xowe_wiki wiki, int dump_fil_len) {

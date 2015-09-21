@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.html.*; import gplx.xowa.langs.cases.*;
+import gplx.xowa.html.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_page_displaytitle;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_displaytitle().Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
-		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser();
+		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser_mgr().Main();
 		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_root_tkn display_ttl_root = parser.Parse_text_to_wdom(display_ttl_ctx, val_dat_ary, false);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();

@@ -39,7 +39,7 @@ class IoStream_mem extends IoStream_base {
 		// expand buffer if needed; necessary to emulate fileStream writing; ex: FileStream fs = new FileStream(); fs.Write(data); where data may be unknown length
 		int length = (int)position + count + -offset;
 		int bufLen = Array_.Len(buffer);
-		if (bufLen < length) buffer = Bry_.Resize_manual(buffer, length);
+		if (bufLen < length) buffer = Bry_.Resize(buffer, length);
 		for (int i = 0; i < count; i++)
 			buffer[position + i] = array[offset + i];
 		position += count +-offset;

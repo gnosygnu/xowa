@@ -47,9 +47,9 @@ class Texvc_checker {
 			Texvc_tkn arg_tkn = root.Subs__get_at(root_idx);
 			// skip ws, dlm, lit
 			int arg_tid = arg_tkn.Tid();
-			switch (arg_tid) {
-				case Texvc_tkn_.Tid__func:
-				case Texvc_tkn_.Tid__curly:
+//				switch (arg_tid) {
+//					case Texvc_tkn_.Tid__func:
+//					case Texvc_tkn_.Tid__curly:
 					root.Regy__move(arg_tkn.Uid(), func_tkn.Uid());
 					--root_len;
 					--root_idx;
@@ -57,8 +57,8 @@ class Texvc_checker {
 					if (arg_tid == Texvc_tkn_.Tid__func) {
 						Check_func(arg_tkn);
 					}
-					break;
-			}
+//						break;
+//				}
 		}
 		List_adp_.Pop_last(func_stack);
 	}

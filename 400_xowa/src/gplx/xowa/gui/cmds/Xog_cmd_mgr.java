@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.xowa.apis.xowa.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.apis.xowa.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xog_cmd_mgr {
 	public void Init_by_kit(Xoae_app app) {
 		invk_mgr.Ctor(app, this);

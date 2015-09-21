@@ -45,7 +45,7 @@ class Xow_hzip_mgr_fxt {
 		Tfds.Eq(expd, String_.new_u8(src));
 	}
 	public void Test_html(String html, String expd) {
-		Xop_ctx ctx = wiki.Ctx(); Xop_parser parser = wiki.Parser(); Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
+		Xop_ctx ctx = wiki.Parser_mgr().Ctx(); Xop_parser parser = wiki.Parser_mgr().Main(); Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		ctx.Para().Enabled_n_();
 		ctx.Cur_page().Redlink_lnki_list().Clear();			
 		byte[] html_bry = Bry_.new_u8(html);

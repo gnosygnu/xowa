@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_int_tst {
 	@Before public void init() {fxt.Reset();} private Pf_msg_mgr_fxt fxt = new Pf_msg_mgr_fxt();
 	@Test  public void Basic()					{fxt.Test_parse_en("{{int:january}}"								, "January");}

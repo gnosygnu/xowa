@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
+import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.html.*;
 class Hiero_parser {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private List_adp blocks = List_adp_.new_();
@@ -40,8 +40,8 @@ class Hiero_parser {
 				int new_pos = trie.Match_pos();
 				switch (itm.Tid()) {
 					case Hiero_parser_itm.Tid_comment:
-						int end_comm = Bry_finder.Find_fwd(src, Html_tag_.Comm_end, new_pos, end);
-						if (end_comm == Bry_finder.Not_found)	// --> not found; for now, ignore <!--
+						int end_comm = Bry_find_.Find_fwd(src, Html_tag_.Comm_end, new_pos, end);
+						if (end_comm == Bry_find_.Not_found)	// --> not found; for now, ignore <!--
 							pos = new_pos;
 						else
 							pos = end_comm + Html_tag_.Comm_end_len;

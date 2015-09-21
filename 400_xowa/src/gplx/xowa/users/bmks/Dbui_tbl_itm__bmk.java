@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.json.*; import gplx.html.*;
+import gplx.langs.jsons.*; import gplx.langs.htmls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.html.bridges.*; import gplx.xowa.html.bridges.dbuis.*; import gplx.xowa.html.bridges.dbuis.tbls.*; import gplx.xowa.html.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {

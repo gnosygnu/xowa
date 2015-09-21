@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs2; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.cmds.*;
-import gplx.xowa.fmtrs.*;
+import gplx.xowa.apps.fmtrs.*;
 public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 	private Xog_bnd_mgr_srl bnd_mgr_srl; private Xog_cmd_mgr cmd_mgr;
 	private Xoa_fmtr_sort_mgr sorter;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
 import gplx.xowa.html.modules.popups.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*;
 public class Scrib_lib_uri implements Scrib_lib {
 	public Scrib_lib_uri(Scrib_core core) {this.core = core;} private Scrib_core core;

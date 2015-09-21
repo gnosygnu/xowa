@@ -48,8 +48,8 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 		}
 		byte b_1 = pos + 1 < src_len ? src[pos + 1] : Byte_ascii.Null;
 		if (b_1 != bgn_1) return this;
-		int end_pos = Bry_finder.Find_fwd(src, end_bry, pos + 2, src_len);
-		if (end_pos == Bry_finder.Not_found) return this;
+		int end_pos = Bry_find_.Find_fwd(src, end_bry, pos + 2, src_len);
+		if (end_pos == Bry_find_.Not_found) return this;
 		pos = end_pos + end_bry.length;
 		return this.Skip_ws();
 	}

@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.utils.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
 public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public Xodb_save_mgr_txt(Xowe_wiki wiki, Xodb_load_mgr_txt load_mgr) {
 		this.wiki = wiki;
@@ -113,8 +114,8 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 class Bry_comparer_fld_last implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
-		int lhs_bgn = Bry_finder.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_.NotFound) lhs_bgn = -1;
-		int rhs_bgn = Bry_finder.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_.NotFound) rhs_bgn = -1;
+		int lhs_bgn = Bry_find_.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_.NotFound) lhs_bgn = -1;
+		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_.NotFound) rhs_bgn = -1;
 		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
 	public static final Bry_comparer_fld_last _ = new Bry_comparer_fld_last(); 

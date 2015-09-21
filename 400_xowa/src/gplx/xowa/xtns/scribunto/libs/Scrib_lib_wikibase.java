@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 import gplx.xowa.wikis.domains.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;

@@ -25,7 +25,7 @@ public class Xop_translate_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		byte[] translate_src = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		translate_src = Bry_.Trim(translate_src, 0, translate_src.length);
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		xtn_root = wiki.Parser().Parse_text_to_wdom_old_ctx(sub_ctx, translate_src, true);
+		xtn_root = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(sub_ctx, translate_src, true);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Write_tkn(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);

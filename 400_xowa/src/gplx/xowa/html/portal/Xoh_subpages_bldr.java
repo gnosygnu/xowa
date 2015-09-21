@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.html.hrefs.*;
+import gplx.xowa.nss.*;
 public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);
 	private byte[][] segs;
@@ -28,7 +29,7 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 				)
 			)	return Bry_.Empty;						// doesn't match above; return empty;
 		byte[] raw = ttl.Raw();
-		this.segs = Bry_.Split(raw, Byte_ascii.Slash);
+		this.segs = Bry_split_.Split(raw, Byte_ascii.Slash);
 		fmtr_grp.Bld_bfr(tmp_bfr, this);
 		return tmp_bfr.Xto_bry_and_clear();
 	}

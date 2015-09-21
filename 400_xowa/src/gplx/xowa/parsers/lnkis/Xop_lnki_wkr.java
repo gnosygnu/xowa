@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.primitives.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
@@ -153,7 +154,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_upright:
 						if (arg.KeyTkn_exists()) {
 							int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
-							val_tkn_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
+							val_tkn_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
 							if (val_tkn_end - val_tkn_bgn > 19) val_tkn_end = val_tkn_bgn + 19;	// HACK: limit upright tkn to 19 digits; 20 or more will overflow long; WHEN: rewrite number_parser to handle doubles; PAGE:de.w:Feuerland DATE:2015-02-03
 							number_parser.Parse(src, val_tkn_bgn, val_tkn_end);
 							if (number_parser.Has_err())

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa2.files.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr {
 	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final Bry_bfr key_bfr = Bry_bfr.reset_(512);

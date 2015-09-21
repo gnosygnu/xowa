@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.net; import gplx.*; import gplx.core.*;
 public interface Gfo_inet_conn {
 	void		Clear();
-	void		Upload_data(byte[] url, byte[] data);
-	byte[]		Download_data(byte[] url);
+	void		Upload_by_bytes(String url, byte[] data);
+	byte[]		Download_as_bytes_or_null(String url);	// return null instead of throwing exception
 }

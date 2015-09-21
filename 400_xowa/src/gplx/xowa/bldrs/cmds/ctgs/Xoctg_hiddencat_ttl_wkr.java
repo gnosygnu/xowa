@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*; import gplx.xowa.tdbs.*; import gplx.xowa.bldrs.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
 	public Xoctg_hiddencat_ttl_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;} private Xob_sql_join_wkr_ctg_hidden join_wkr;
 	public String Cmd_key() {return Xob_cmd_keys.Key_tdb_cat_hidden_ttl;}
@@ -57,7 +58,7 @@ class Xob_sql_join_wkr_ctg_hidden implements Xob_sql_join_wkr {
 	public void Process_match(Io_line_rdr main, Io_line_rdr join, byte[] key_bry) {
 		byte[] src = join.Bfr();
 		int itm_end = join.Itm_pos_end();
-		int pipe_pos = Bry_finder.Find_bwd(src, Byte_ascii.Pipe, itm_end);
+		int pipe_pos = Bry_find_.Find_bwd(src, Byte_ascii.Pipe, itm_end);
 		if (pipe_pos == Bry_.NotFound) throw Err_.new_wo_type("failed to find pipe for name", "excerpt", String_.new_u8(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
 		file_bfr.Add_mid(src, pipe_pos + 1, itm_end - 1).Add_byte_pipe();
 		file_bfr.Add(key_bry).Add_byte_nl();

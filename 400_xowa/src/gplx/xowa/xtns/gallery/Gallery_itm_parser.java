@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
@@ -30,7 +32,7 @@ public class Gallery_itm_parser {
 	private Xop_ctx ctx;
 	public Gallery_itm_parser Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; Xol_lang lang = wiki.Lang();
-		this.ctx = wiki.Ctx();
+		this.ctx = wiki.Parser_mgr().Ctx();
 		trie.Clear();
 		Byte_obj_ref tmp_bref = Byte_obj_ref.zero_();
 		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_alt, Fld_alt);		// NOTE: MW uses "gallery-@gplx.Internal protected-alt" which just maps to "img-alt"
@@ -72,7 +74,7 @@ public class Gallery_itm_parser {
 		}
 		byte[] lnki_caption = cur_itm.Caption_bry();
 		if (Bry_.Len_gt_0(lnki_caption)) {
-			Xop_root_tkn caption_tkn = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);
+			Xop_root_tkn caption_tkn = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);
 			cur_itm.Caption_tkn_(caption_tkn);
 		}
 		Xopg_redlink_logger file_wkr = ctx.Lnki().File_wkr();	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
@@ -162,7 +164,7 @@ public class Gallery_itm_parser {
 	private void Fld_end() {
 		int fld_end = cur_pos;
 		if (cur_fld != Fld_caption) {
-			int non_ws_pos = Bry_finder.Find_bwd_non_ws_or_not_found(src, cur_pos - 1, itm_bgn) + 1;	// SEE:non_ws_pos
+			int non_ws_pos = Bry_find_.Find_bwd_non_ws_or_not_found(src, cur_pos - 1, itm_bgn) + 1;	// SEE:non_ws_pos
 			if (non_ws_pos != Bry_.NotFound + 1)
 				fld_end = non_ws_pos;
 		}
@@ -239,7 +241,7 @@ public class Gallery_itm_parser {
 }
 /*
 SEE:non_ws_pos;
-int non_ws_pos = Bry_finder.Find_bwd_non_ws(src, cur_pos - 1, itm_bgn) + 1;
+int non_ws_pos = Bry_find_.Find_bwd_non_ws(src, cur_pos - 1, itm_bgn) + 1;
 . -1 to start before cur_pos (which is usually pipe);
 . +1 to place after non_ws_char
 EX: text="b c |"; cur_pos = 4;

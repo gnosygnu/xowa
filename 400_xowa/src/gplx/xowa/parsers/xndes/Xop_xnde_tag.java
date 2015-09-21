@@ -69,7 +69,7 @@ public class Xop_xnde_tag {
 	}
 	public Xop_xnde_tag_lang Langs_get(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, int cur_lang, byte[] src, int bgn, int end) {
 		if (langs == null) return Xop_xnde_tag_lang._;						// no langs defined; always return true; EX:<b>
-		if (Bry_.Eq(name_bry, src, bgn, end)) return Xop_xnde_tag_lang._;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
+		if (Bry_.Eq(src, bgn, end, name_bry)) return Xop_xnde_tag_lang._;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
 		synchronized (langs) {
 			langs_key.Val_(cur_lang);
 		}

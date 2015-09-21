@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.pages.*;
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 public class Xodump_stats_tbl implements RlsAble {
 	private static final String tbl_name = "hdump_stats"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private static final String

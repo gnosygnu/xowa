@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
 class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;

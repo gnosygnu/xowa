@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.ios.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.sqls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.apis.xowa.bldrs.imports.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;	
@@ -27,7 +28,6 @@ class Xob_wbase_json_dump_db {
 	private final Json_parser json_parser;
 	private final Xob_wdata_pid_sql pid_cmd = new Xob_wdata_pid_sql(); private final Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
 	private Xowd_page_tbl page_tbl;
-	private final Xow_page_mgr page_mgr;
 	private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private DateAdp page_modified_on;
 	private Xowd_db_mgr db_mgr;
@@ -38,10 +38,9 @@ class Xob_wbase_json_dump_db {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
 		this.json_parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_mgr = wiki.Ns_mgr();
-		this.page_mgr = wiki.Page_mgr();
 	}
 	public void Parse_bgn(long src_fil_len, String src_fil_name) {
-		Xowe_wiki_bldr.Create(wiki, src_fil_len, src_fil_name);
+		Xowe_wiki_.Create(wiki, src_fil_len, src_fil_name);
 		this.db_mgr = wiki.Data__core_mgr();
 		this.page_tbl = db_mgr.Tbl__page();
 		pid_cmd.Cmd_ctor(bldr, wiki); qid_cmd.Cmd_ctor(bldr, wiki);
@@ -72,7 +71,7 @@ class Xob_wbase_json_dump_db {
 		int random_int = ns.Count() + 1; ns.Count_(random_int);
 		byte[] json_zip = text_zip_mgr.Zip(text_zip_tid, json_bry);
 		Xowd_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), json_zip.length);
-		page_mgr.Create(page_core_tbl, text_db.Tbl__text(), ++page_id, ns.Id(), id, Bool_.N, page_modified_on, json_zip, json_bry.length, random_int, text_db.Id(), -1);
+		db_mgr.Create_page(page_core_tbl, text_db.Tbl__text(), ++page_id, ns.Id(), id, Bool_.N, page_modified_on, json_zip, json_bry.length, random_int, text_db.Id(), -1);
 		if (jdoc_is_qid) {
 			qid_cmd.Parse_jdoc(jdoc);
 			++page_count_main;

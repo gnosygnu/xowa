@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
 	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
@@ -145,7 +145,7 @@ public abstract class Gallery_mgr_base {
 		Gallery_box_w_fmtr_arg box_w_fmtr_arg = hctx_is_hdump ? (Gallery_box_w_fmtr_arg)box_w_fmtr__hdump : (Gallery_box_w_fmtr_arg)box_w_fmtr__basic;
 		itm_li_bgn_fmtr.Bld_bfr_many(bfr, gallery_li_id, box_w_fmtr_arg.Init(img_uid, itm_div_width));
 		bfr.Add(itm_html);
-		wiki.Parser().Parse_text_to_html(tmp_bfr, page, true, itm_caption);
+		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, true, itm_caption);
 		itm_caption = tmp_bfr.Xto_bry_and_clear();
 		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).Xto_bry_and_clear();
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);

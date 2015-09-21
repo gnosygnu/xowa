@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.core.net.*;
-import gplx.core.threads.*;
+import gplx.core.net.*; import gplx.core.threads.*; import gplx.langs.htmls.encoders.*;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.Charset;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Poem_nde implements Xox_xnde {
 	private Xop_root_tkn xtn_root;
@@ -53,14 +53,14 @@ public class Poem_nde implements Xox_xnde {
 			}
 			switch (src[line_bgn]) {
 				case Byte_ascii.Space:																			// "\n\s" -> "\n&#160;"
-					int space_end = Bry_finder.Find_fwd_while(src, line_bgn, src_end, Byte_ascii.Space);
+					int space_end = Bry_find_.Find_fwd_while(src, line_bgn, src_end, Byte_ascii.Space);
 					int space_count = space_end - line_bgn;
 					line_bgn = space_end;
 					for (int i = 0; i < space_count; ++i)
 						bfr.Add(Html_entity_.Nbsp_num_bry);
 					break;
 				case Byte_ascii.Colon: {																		// "\n:" -> <span class='mw-poem-indented' style='display: inline-block; margin-left: #em;'>
-					int colon_end = Bry_finder.Find_fwd_while(src, line_bgn, src_end, Byte_ascii.Colon);
+					int colon_end = Bry_find_.Find_fwd_while(src, line_bgn, src_end, Byte_ascii.Colon);
 					int colon_count = colon_end - line_bgn;
 					line_bgn = colon_end;
 					bfr.Add(Indent_bgn).Add_int_variable(colon_count).Add(Indent_end);							// add <span class='mw-poem-indented' style='display: inline-block; margin-left: #em;'>
@@ -68,8 +68,8 @@ public class Poem_nde implements Xox_xnde {
 					break;
 				}
 			}
-			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.Nl, line_bgn, src_end);						// find end "\n"
-			if (line_end == Bry_finder.Not_found) line_end = src_end;											// no "\n"; use eos;
+			int line_end = Bry_find_.Find_fwd(src, Byte_ascii.Nl, line_bgn, src_end);						// find end "\n"
+			if (line_end == Bry_find_.Not_found) line_end = src_end;											// no "\n"; use eos;
 			bfr.Add_mid(src, line_bgn, line_end);																// add everything from line_bgn to line_end
 			if (indent_enabled) bfr.Add(Html_tag_.Span_rhs);													// if "\n:", add </span>
 			line_bgn = line_end + 1;																			// +1 to skip over end "\n"

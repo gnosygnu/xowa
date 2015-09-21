@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.specials.search.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.cfgs.gui.*; import gplx.xowa.users.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.views.*; import gplx.xowa.gui.urls.url_macros.*;
 import gplx.xowa.gui.views.boots.*;
 public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {

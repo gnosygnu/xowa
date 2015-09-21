@@ -88,7 +88,7 @@ public class Fsd_fil_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 	}
-	public void Select_all(Bry_bfr key_bfr, gplx.cache.Gfo_cache_mgr_bry cache) {
+	public void Select_all(Bry_bfr key_bfr, gplx.core.caches.Gfo_cache_mgr_bry cache) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

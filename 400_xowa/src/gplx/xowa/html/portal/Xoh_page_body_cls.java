@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.nss.*;
 public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 	public static byte[] Calc(Bry_bfr tmp_bfr, Xoa_ttl ttl, int page_tid) {
 		tmp_bfr.Add(Bry_id_prefix).Add_int_variable(ttl.Ns().Id());						// ns-0; note that special is ns--1 DATE:2014-09-24

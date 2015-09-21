@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.users.data.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
 import gplx.xowa.langs.genders.*;
@@ -118,7 +119,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		}
 	}
 	private void Available_from_bulk(byte[] raw) {
-		byte[][] wikis = Bry_.Split(raw, Byte_ascii.Nl);
+		byte[][] wikis = Bry_split_.Split(raw, Byte_ascii.Nl);
 		Xowe_wiki usr_wiki = Wiki();
 		int wikis_len = wikis.length;
 		for (int i = 0; i < wikis_len; i++)

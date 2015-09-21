@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_i18n_tst {		
 	@Before public void init() {fxt.Clear();} private Pfunc_i18n_fxt fxt = new Pfunc_i18n_fxt();
 	@Test  public void Casing()	{fxt.lang_("de").Ini().Reg_func("fullurl", false, "VOLLSTÄNDIGE_URL").Load().Fxt().Test_parse_tmpl_str_test("{{vollstÄndige_url:a}}", "{{test}}"	, "//de.wikipedia.org/wiki/A");}

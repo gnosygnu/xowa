@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
 	Btrie_fast_mgr trie = expression_();
@@ -106,7 +107,7 @@ public class Pfunc_expr_shunter {
 					case Expr_tkn_.Tid_operator:
 						Func_tkn cur_prc = (Func_tkn)t;
 						if (Byte_ascii.Is_ltr(cur_byt)) {
-							int nxt_pos = Bry_finder.Find_fwd_while_letter(src, cur_pos, src_len);
+							int nxt_pos = Bry_find_.Find_fwd_while_letter(src, cur_pos, src_len);
 							if (nxt_pos > cur_pos)
 								return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, Bry_.Mid(src, bgn_pos, nxt_pos));
 						}

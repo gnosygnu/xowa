@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.wikis.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.dbs.*; 
 import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apis.xowa.bldrs.imports.*;
 import gplx.xowa.parsers.utils.*;
@@ -24,8 +26,8 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 	private Xowd_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;
 	private DateAdp modified_latest = DateAdp_.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k				
-	private Dg_match_mgr dg_match_mgr; private final Xow_page_mgr page_mgr; private Xob_ns_to_db_mgr ns_to_db_mgr; 
-	public Xob_page_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.page_mgr = wiki.Page_mgr();}
+	private Dg_match_mgr dg_match_mgr; private Xob_ns_to_db_mgr ns_to_db_mgr; 
+	public Xob_page_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return Xob_cmd_keys.Key_text_page;}
 	public void Wkr_bgn(Xob_bldr bldr) {
 		Xoae_app app = wiki.Appe();
@@ -60,7 +62,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		}
 		byte[] text_zip = text_zip_mgr.Zip(text_zip_tid, text_raw);
 		Xowd_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), text_zip.length);
-		try {page_mgr.Create(page_core_tbl, text_db.Tbl__text(), id, page.Ns_id(), page.Ttl_page_db(), redirect, modified, text_zip, text_raw_len, random_int, text_db.Id(), -1);}
+		try {db_mgr.Create_page(page_core_tbl, text_db.Tbl__text(), id, page.Ns_id(), page.Ttl_page_db(), redirect, modified, text_zip, text_raw_len, random_int, text_db.Id(), -1);}
 		catch (Exception e) {
 			throw Err_.new_exc(e, "bldr", "create page in db failed; skipping page", "id", id, "ns", page.Ns_id(), "name", page.Ttl_page_db(), "redirect", redirect, "modified", modified, "text_len", text_raw_len, "text_db_id", text_db.Id());
 		}

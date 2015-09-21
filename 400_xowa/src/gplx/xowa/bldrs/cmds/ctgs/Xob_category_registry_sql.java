@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.dbs.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.bldrs.wtrs.*;
 public class Xob_category_registry_sql implements Xob_cmd {
 	public Xob_category_registry_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public String Cmd_key() {return Xob_cmd_keys.Key_text_cat_core;}

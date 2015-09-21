@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
+import gplx.core.btries.*; import gplx.core.consoles.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;	
 import gplx.xowa.wikis.domains.*;
 public class Xof_repo_itm implements GfoInvkAble {
 	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr; private final Bry_bfr tmp_bfr = Bry_bfr.reset_(300);

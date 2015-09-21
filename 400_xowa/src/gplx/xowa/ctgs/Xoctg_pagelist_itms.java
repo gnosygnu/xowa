@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
 	private Xoh_href_wtr href_wtr; private Xou_history_mgr history_mgr; private Bry_fmtr fmtr_itm;

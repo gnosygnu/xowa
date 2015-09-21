@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.langs.*;
 public class Xop_redirect_mgr {
 	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
 	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
@@ -33,7 +35,7 @@ public class Xop_redirect_mgr {
 	public Xoa_ttl Extract_redirect(byte[] src) {return Extract_redirect(src, src.length);}
 	public Xoa_ttl Extract_redirect(byte[] src, int src_len) {	// NOTE: this proc is called by every page. be careful of changes; DATE:2014-07-05
 		if (src_len == 0) return Redirect_null_ttl;
-		int bgn = Bry_finder.Find_fwd_while_not_ws(src, 0, src_len);
+		int bgn = Bry_find_.Find_fwd_while_not_ws(src, 0, src_len);
 		if (bgn == src_len) return Redirect_null_ttl; // article is entirely whitespace
 		int kwd_end = Xop_redirect_mgr_.Get_kwd_end_or_end(src, bgn, src_len);
 		if (kwd_end == src_len) return Redirect_null_ttl;
@@ -43,7 +45,7 @@ public class Xop_redirect_mgr {
 		int ttl_bgn = Xop_redirect_mgr_.Get_ttl_bgn_or_neg1(src, kwd_end, src_len);
 		if (ttl_bgn == Bry_.NotFound)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
-		int ttl_end = Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
+		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
 		if (ttl_end == Bry_.NotFound)	return Redirect_null_ttl;
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18

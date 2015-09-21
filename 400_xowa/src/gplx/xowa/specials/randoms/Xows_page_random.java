@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.xowa.nss.*;
 public class Xows_page_random implements Xows_page {
 	public Xows_page_random(Xowe_wiki wiki) {}
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__random;}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 public class Btrie_u8_mgr implements Btrie_mgr {
 	private Btrie_u8_itm root; private Gfo_case_mgr case_mgr;
 	Btrie_u8_mgr(Gfo_case_mgr case_mgr) {

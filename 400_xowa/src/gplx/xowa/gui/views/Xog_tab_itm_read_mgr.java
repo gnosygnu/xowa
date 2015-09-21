@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.core.threads.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.gui.history.*; import gplx.xowa.pages.*;
+import gplx.xowa.langs.*;
 public class Xog_tab_itm_read_mgr {
 	public static void Async(Xog_tab_itm tab) {tab.Async();}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}

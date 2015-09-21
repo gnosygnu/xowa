@@ -89,7 +89,7 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Add_mid(byte[] val, int bgn, int end) {
 		int len = end - bgn;
-		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8_by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
+		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
 		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
@@ -183,7 +183,7 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Add_u8_int(int val) {
 		if (bfr_len + 4 > bfr_max) Resize((bfr_max + 4) * 2);
-		int utf8_len = gplx.intl.Utf16_.Encode_int(val, bfr, bfr_len);
+		int utf8_len = gplx.core.intls.Utf16_.Encode_int(val, bfr, bfr_len);
 		bfr_len += utf8_len;
 		return this;
 	}
@@ -282,9 +282,9 @@ public class Bry_bfr {
 	public Bry_bfr Add_str_u8(String str) {
 		try {
 			int str_len = str.length();							
-			int bry_len = Bry_.new_u8_by_len(str, str_len);
+			int bry_len = Bry_.new_u8__by_len(str, str_len);
 			if (bfr_len + bry_len > bfr_max) Resize((bfr_max + bry_len) * 2);
-			Bry_.new_u8_write(str, str_len, bfr, bfr_len);
+			Bry_.new_u8__write(str, str_len, bfr, bfr_len);
 			bfr_len += bry_len;
 			return this;
 		}

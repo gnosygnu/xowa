@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.html.*;
+import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {

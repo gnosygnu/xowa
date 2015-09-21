@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.xtns.*;
+import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr_tst {
 	@Before public void init() {fxt.init();} private Wdata_hwtr_mgr_fxt fxt = new Wdata_hwtr_mgr_fxt();
 	@Test   public void Stub() {}

@@ -38,7 +38,7 @@ public class Prefs_converter {
 	}
 	public String Convert(String raw) {
 		list.Clear();
-		GfoMsg root_msg = gplx.gfs.Gfs_msg_bldr._.ParseToMsg(raw);
+		GfoMsg root_msg = gplx.langs.gfss.Gfs_msg_bldr._.ParseToMsg(raw);
 		int len = root_msg.Subs_count();		
 		for (int i = 0; i < len; i++) {
 			GfoMsg msg = root_msg.Subs_getAt(i);

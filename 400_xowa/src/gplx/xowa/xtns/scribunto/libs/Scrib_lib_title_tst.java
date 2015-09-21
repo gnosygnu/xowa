@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.wikis.data.*;
+import gplx.dbs.*; import gplx.xowa.files.commons.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.ttls.*;
 public class Scrib_lib_title_tst {
@@ -97,7 +97,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_obj(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")									, Scrib_lib_title.CascadingProtection_rv);
 	}
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
-		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
+		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
 		Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);

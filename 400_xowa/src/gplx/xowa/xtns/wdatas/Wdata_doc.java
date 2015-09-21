@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
+import gplx.langs.jsons.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
 public class Wdata_doc {
 	private Wdata_wiki_mgr mgr; private Int_obj_ref tmp_key;
 	public Wdata_doc(byte[] qid, Wdata_wiki_mgr mgr, Json_doc jdoc) {this.qid = qid; this.mgr = mgr; this.jdoc = jdoc;}

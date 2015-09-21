@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hdumps.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*;
-import gplx.xowa.pages.*; import gplx.xowa2.gui.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.pages.*; import gplx.xowa.gui.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 public class Xob_hdump_bldr {
 	private final Xowd_db_mgr wiki_db_mgr; private final Xob_ns_to_db_mgr ns_to_db_mgr; int prv_row_len = 0;
 	private final Xodump_stats_itm stats_itm = new Xodump_stats_itm(); private final Xodump_stats_tbl stats_tbl;

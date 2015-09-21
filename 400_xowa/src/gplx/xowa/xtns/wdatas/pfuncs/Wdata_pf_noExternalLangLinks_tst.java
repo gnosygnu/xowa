@@ -36,7 +36,7 @@ class Wdata_pf_noExternalLangLinks_fxt {
 			parser_fxt = new Xop_fxt();
 			app = parser_fxt.App();
 			wiki = parser_fxt.Wiki();
-			data = wiki.Ctx().Cur_page().Wdata_external_lang_links();
+			data = wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links();
 		}
 		expd_sort = expd_enabled = Bool_.__byte;
 		expd_langs = null;

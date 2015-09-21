@@ -29,14 +29,14 @@ public class Bry_rdr {
 	public void Pos_add_one() {++pos;}
 	public int Or_int() {return or_int;} public void Or_int_(int v) {or_int = v;} private int or_int = Int_.Min_value;
 	public byte[] Or_bry() {return or_bry;} public void Or_bry_(byte[] v) {or_bry = v;} private byte[] or_bry;
-	public int Find_fwd(byte find) {return Bry_finder.Find_fwd(src, find, pos);}
-	public int Find_fwd_ws() {return Bry_finder.Find_fwd_until_ws(src, pos, src_len);}
+	public int Find_fwd(byte find) {return Bry_find_.Find_fwd(src, find, pos);}
+	public int Find_fwd_ws() {return Bry_find_.Find_fwd_until_ws(src, pos, src_len);}
 	public int Find_fwd__pos_at_lhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.N);}
 	public int Find_fwd__pos_at_rhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.Y);}
 	public int Find_fwd__pos_at(byte[] find_bry, boolean pos_at_rhs) {
-		int find_pos = Bry_finder.Find_fwd(src, find_bry, pos, src_len);
+		int find_pos = Bry_find_.Find_fwd(src, find_bry, pos, src_len);
 		if (pos_at_rhs) find_pos += find_bry.length;
-		if (find_pos != Bry_finder.Not_found) pos = find_pos;
+		if (find_pos != Bry_find_.Not_found) pos = find_pos;
 		return find_pos;
 	}
 	public int Read_int_to_semic()	{return Read_int_to(Byte_ascii.Semic);}

@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.html.tocs.*;
 public class Xop_under_lxr implements Xop_lxr {
 	private Btrie_mgr words_trie_ci, words_trie_cs;
-	public byte Lxr_tid() {return Xop_lxr_.Tid_under;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_under;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
@@ -64,6 +64,7 @@ public class Xop_under_lxr implements Xop_lxr {
 			}
 		}
 	}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	private static final int[] under_kwds = new int[] // REF.MW:MagicWord.php
 	{ Xol_kwd_grp_.Id_toc, Xol_kwd_grp_.Id_notoc, Xol_kwd_grp_.Id_forcetoc
 	, Xol_kwd_grp_.Id_nogallery, Xol_kwd_grp_.Id_noheader, Xol_kwd_grp_.Id_noeditsection
@@ -114,9 +115,10 @@ public class Xop_under_lxr implements Xop_lxr {
 class Xop_word_lxr implements Xop_lxr {
 	private int kwd_id;
 	public Xop_word_lxr(int kwd_id) {this.kwd_id = kwd_id;}
-	public byte Lxr_tid() {return Xop_lxr_.Tid_word;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_word;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_under_lxr.Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, kwd_id);	// for now, all word_lxrs only call the under_lxr; DATE:2014-02-14
 		return cur_pos;

@@ -17,18 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
+import gplx.xowa.langs.*; import gplx.xowa.nss.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
-	private Xowe_wiki wiki;
-	public Xop_parser(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
+	private final Xowe_wiki wiki;
+	private final Btrie_fast_mgr tmpl_trie, wtxt_trie;
+	Xop_parser(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
 		this.wiki = wiki;
 		this.tmpl_lxr_mgr = tmpl_lxr_mgr; this.tmpl_trie = tmpl_lxr_mgr.Trie();
 		this.wtxt_lxr_mgr = wtxt_lxr_mgr; this.wtxt_trie = wtxt_lxr_mgr.Trie();
 	}
-	public Xop_lxr_mgr Tmpl_lxr_mgr() {return tmpl_lxr_mgr;} private Xop_lxr_mgr tmpl_lxr_mgr;
-	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private Xop_lxr_mgr wtxt_lxr_mgr;
-	public Btrie_fast_mgr Tmpl_trie() {return tmpl_trie;} private Btrie_fast_mgr tmpl_trie;
-	public Btrie_fast_mgr Wtxt_trie() {return wtxt_trie;} private Btrie_fast_mgr wtxt_trie;
+	public Xop_lxr_mgr Tmpl_lxr_mgr() {return tmpl_lxr_mgr;} private final Xop_lxr_mgr tmpl_lxr_mgr;
+	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private final Xop_lxr_mgr wtxt_lxr_mgr;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		wtxt_lxr_mgr.Init_by_wiki(wiki);
@@ -38,7 +38,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		wtxt_lxr_mgr.Init_by_lang(lang);
 	}
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
 		return bfr.To_bry_and_rls();
 	}
@@ -46,7 +46,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
-		Xop_parser parser = wiki.Parser();
+		Xop_parser parser = wiki.Parser_mgr().Main();
 		byte[] wtxt = parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
 		root.Reset();
 		ctx.Para().Enabled_(para_enabled);
@@ -64,7 +64,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl_props.OnlyInclude_exists = false; int subs_len = root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		boolean only_include_chk = Bry_finder.Find_fwd(src, Xop_xnde_tag_.Name_onlyinclude, 0, src.length) != Bry_.NotFound;
+		boolean only_include_chk = Bry_find_.Find_fwd(src, Xop_xnde_tag_.Name_onlyinclude, 0, src.length) != Bry_.NotFound;
 		if (only_include_chk) tmpl_props.OnlyInclude_exists = true;
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
 	}	private Xot_compile_data tmpl_props = new Xot_compile_data();
@@ -94,7 +94,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
-		return wiki.Parser().Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
+		return wiki.Parser_mgr().Main().Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
 	}
 	public byte[] Parse_text_to_wtxt(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
 		Parse(root, ctx, tkn_mkr, src, Xop_parser_.Parse_tid_page_tmpl, tmpl_trie, Xop_parser_.Doc_bgn_bos);
@@ -138,7 +138,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		return pos;
 	}
 	public int Parse_to_stack_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, Btrie_fast_mgr trie, int pos, int end) {
-		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
+		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate \n at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Xop_lxr lxr = null;
 		while (true) {
@@ -191,7 +191,8 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 			tkn.Src_end_(pos);
 		return tkn;
 	}
-	public static Xop_parser new_wiki_(Xowe_wiki wiki) {
+	public static Xop_parser new_(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {return new Xop_parser(wiki, tmpl_lxr_mgr, wtxt_lxr_mgr);}
+	public static Xop_parser new_wiki(Xowe_wiki wiki) {
 		Xop_parser rv = new Xop_parser(wiki, Xop_lxr_mgr.new_tmpl_(), Xop_lxr_mgr.new_wiki_());
 		rv.Init_by_wiki(wiki);
 		rv.Init_by_lang(wiki.Lang());

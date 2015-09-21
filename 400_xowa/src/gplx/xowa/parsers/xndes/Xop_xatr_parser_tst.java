@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Xop_xatr_parser_tst {		
 	@Test  public void Kv_quote_double() 		{fxt.tst_("a=\"b\"", fxt.new_atr_("a", "b"));} private Xop_xatr_parser_fxt fxt = new Xop_xatr_parser_fxt();
 	@Test  public void Kv_quote_single()		{fxt.tst_("a='b'", fxt.new_atr_("a", "b"));}

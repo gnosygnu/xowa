@@ -23,9 +23,9 @@ public class Xoi_mirror_parser {
 		List_adp rv = List_adp_.new_();
 		int pos = 0;
 		while (true) {
-			int bgn = Bry_finder.Find_fwd(raw, CONST_href_bgn, pos); if (bgn == Bry_.NotFound) break;
+			int bgn = Bry_find_.Find_fwd(raw, CONST_href_bgn, pos); if (bgn == Bry_.NotFound) break;
 			bgn += CONST_href_bgn.length;			
-			int end = Bry_finder.Find_fwd(raw, CONST_href_end, bgn); if (end == Bry_.NotFound) return String_.Ary_empty;
+			int end = Bry_find_.Find_fwd(raw, CONST_href_end, bgn); if (end == Bry_.NotFound) return String_.Ary_empty;
 			byte[] date = Bry_.Mid(raw, bgn, end); 
 			pos = end + CONST_href_end.length;			
 			if (Bry_.Match(date, CONST_date_parent_dir)) continue;

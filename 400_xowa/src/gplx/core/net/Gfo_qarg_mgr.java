@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
+import gplx.langs.htmls.encoders.*;
 public class Gfo_qarg_mgr {
 	private final List_adp list = List_adp_.new_();
 	private final Hash_adp hash = Hash_adp_bry.cs();

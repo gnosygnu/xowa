@@ -49,7 +49,7 @@ public abstract class Pf_func_base implements Pf_func {
 			int subs_len = name_val_tkn.Subs_len();
 			if (subs_len == 0) {	// no subs; either {{#func}} or {{#func:}}
 				int src_bgn = name_tkn.Src_bgn();
-				int colon_pos = Bry_finder.Find_bwd(src, Byte_ascii.Colon, self.Src_end(), src_bgn);	// look for ":"; NOTE: used to be src_bgn - 1, but this would always search one character too many; DATE:2014-02-11
+				int colon_pos = Bry_find_.Find_bwd(src, Byte_ascii.Colon, self.Src_end(), src_bgn);	// look for ":"; NOTE: used to be src_bgn - 1, but this would always search one character too many; DATE:2014-02-11
 				if (colon_pos == Bry_.NotFound)		// no colon; EX: {{#func}}
 					return Eval_arg_or_null_is_null;
 				else {									// colon found; EX: {{#func:}}

@@ -32,7 +32,7 @@ public class Nearby_mgr implements Xows_page {
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		page.Data_raw_(Bld_html(wiki));
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
-//			wiki.ParsePage(page, false);	// do not clear else previous Search_text will be lost		
+//			wiki.Parser_mgr().Parse(page, false);	// do not clear else previous Search_text will be lost		
 	}
 	byte[] Bld_html(Xowe_wiki wiki) {
 		form_fmtr.Bld_bfr_many(tmp_bfr);
@@ -94,7 +94,7 @@ public class Nearby_mgr implements Xows_page {
 			visited.Add_bry_bry(ttl_bry);
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			if (page.Missing()) continue;
-			wiki.ParsePage(page, true);
+			wiki.Parser_mgr().Parse(page, true);
 			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 			Collect_lnkis(lnkis, page.Root());
 			if (lnkis.Has(trg)) {
@@ -113,7 +113,7 @@ public class Nearby_mgr implements Xows_page {
 		if (next_pool.Count() > 0)
 			Examine_page(next_pool);
 //			++pages_count;
-//			wiki.ParsePage(page, true);
+//			wiki.Parser_mgr().Parse(page, true);
 //			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 //			int len = lnkis.Count();
 //			for (int i = 0; i < len; i++) {
@@ -134,7 +134,7 @@ public class Nearby_mgr implements Xows_page {
 //			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 //			if (page.Missing()) return;
 //			++pages_count;
-//			wiki.ParsePage(page, true);
+//			wiki.Parser_mgr().Parse(page, true);
 //			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 //			Collect_lnkis(lnkis, page.Root());
 //			if (lnkis.Has(trg)) {

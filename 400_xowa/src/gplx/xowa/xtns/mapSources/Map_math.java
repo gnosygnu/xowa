@@ -151,7 +151,7 @@ class Map_math {// REF.MW:MapSources_math.php
 				case Byte_ascii.Space:
 					Parse_input_word(rv, src, ++word_idx, word_bgn, i);
 					++words_len;
-					i = Bry_finder.Find_fwd_while_space_or_tab(src, i, src_len);
+					i = Bry_find_.Find_fwd_while_space_or_tab(src, i, src_len);
 					word_bgn = i;
 					break;
 			}
@@ -180,7 +180,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	private void Parse_input_word(double[] rv, byte[] input, int word_idx, int word_bgn, int word_end) {
 		if (word_idx >= Input_units_len) return;
 		byte unit_dlm = Input_units[word_idx];
-		int pos = Bry_finder.Find_fwd(input, unit_dlm, word_bgn, word_end);
+		int pos = Bry_find_.Find_fwd(input, unit_dlm, word_bgn, word_end);
 		if (pos != Bry_.NotFound)	// remove dlms from end of bry; EX: "123'" -> "123"
 			word_end = pos;
 		if (!Parse_input_word_is_compass(input[word_bgn])) {	// if ( is_numeric( $v ) ) {

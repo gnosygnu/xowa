@@ -41,7 +41,7 @@ public class Xoa_css_img_downloader {
 			Bry_bfr bfr = Bry_bfr.new_(src_len);
 			Hash_adp img_hash = Hash_adp_bry.cs();
 			while (true) {
-				int url_pos = Bry_finder.Find_fwd(src, Bry_url, prv_pos);
+				int url_pos = Bry_find_.Find_fwd(src, Bry_url, prv_pos);
 				if (url_pos == Bry_.NotFound) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;
 				int bgn_pos = url_pos + Bry_url_len;	// set bgn_pos after "url("
 				byte bgn_byte = src[bgn_pos];
@@ -57,14 +57,14 @@ public class Xoa_css_img_downloader {
 						quoted = false;
 						break;
 				}
-				int end_pos = Bry_finder.Find_fwd(src, end_byte, bgn_pos, src_len);
+				int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
 				if (end_pos == Bry_.NotFound) {	// unclosed "url("; exit since nothing else will be found
-					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8_by_len(src, prv_pos, prv_pos + 25));
+					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, src_len);
 					break;
 				}	
 				if (end_pos - bgn_pos == 0) {		// empty; "url()"; ignore
-					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8_by_len(src, prv_pos, prv_pos + 25));
+					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, bgn_pos);
 					prv_pos = bgn_pos;
 					continue;
@@ -128,10 +128,10 @@ public class Xoa_css_img_downloader {
 		}
 		bfr.Add_mid(src, old_pos, find_bgn - Bry_import_len).Add_byte_nl();
 		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).Add_byte_nl();			
-		if (Bry_finder.Find_fwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = Bry_.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
+		if (Bry_find_.Find_fwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = Bry_.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
 		bfr.Add(css_trg_bry).Add_byte_nl();
 		bfr.Add_byte_nl();
-		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
+		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
 		return semic_pos + Int_.Const_dlm_len;
 	}
 	private static final byte[]
@@ -143,11 +143,11 @@ public class Xoa_css_img_downloader {
 		int pos_bgn = 0;
 		if (Bry_.Has_at_bgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
 		if (Bry_.Has_at_bgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
-		int pos_slash = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, pos_bgn, raw_len);
+		int pos_slash = Bry_find_.Find_fwd(raw, Byte_ascii.Slash, pos_bgn, raw_len);
 		if (pos_slash == Bry_.NotFound) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
 		if (pos_slash == raw_len - 1) return null; // "site.org/" is invalid
 		int pos_end = raw_len;
-		int pos_question = Bry_finder.Find_bwd(raw, Byte_ascii.Question);
+		int pos_question = Bry_find_.Find_bwd(raw, Byte_ascii.Question);
 		if (pos_question != Bry_.NotFound)
 			pos_end = pos_question;	// remove query params; EX: img_name?key=val 
 		return Bry_.Mid(raw, pos_bgn, pos_end);

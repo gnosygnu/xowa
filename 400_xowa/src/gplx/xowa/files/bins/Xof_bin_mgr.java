@@ -19,7 +19,7 @@ package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.primitives.*; import gplx.ios.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.wmfs.*;
+import gplx.xowa.wms.*;
 public class Xof_bin_mgr {		
 	private final Fsm_mnt_mgr mnt_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();

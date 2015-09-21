@@ -19,18 +19,8 @@ package gplx;
 import gplx.core.strings.*; import gplx.lists.*;
 public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	private Object[] list; private int count;
-	public Object To_ary_and_clear(Class<?> memberType) {Object rv = To_ary(memberType); this.Clear(); return rv;}
-	public Object To_ary(Class<?> memberType) {
-		Object rv = Array_.Create(memberType, count);
-		for (int i = 0; i < count; i++)
-			Array_.Set_at(rv, i, list[i]);
-		return rv;
-	}
-	public Object[] To_obj_ary() {
-		Object[] rv = new Object[count];
-		for (int i = 0; i < count; ++i)
-			rv[i] = list[i];
-		return rv;
+	public List_adp_base(int capacity) {
+		this.list = new Object[capacity];
 	}
 	public java.util.Iterator iterator() {
 		if (count == 0)
@@ -122,7 +112,6 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			list[i-1] = tmp;
 		}
 	}
-	public String[] To_str_ary() {return (String[])To_ary(String.class);}
 	public Object Get_at(int i) {return Get_at_base(i);}
 	public Object Get_at_last() {if (count == 0) throw Err_.new_invalid_op("cannot call Get_at_last on empty list"); return Get_at_base(count - 1);}
 	public void Add(Object item) {Add_base(item);}
@@ -132,8 +121,25 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public List_adp_base() {
 		list = new Object[List_adp_.Capacity_initial];
 	}
-	public List_adp_base(int capacity) {
-		list = new Object[capacity];
+	public Object To_ary_and_clear(Class<?> memberType) {Object rv = To_ary(memberType); this.Clear(); return rv;}
+	public Object To_ary(Class<?> memberType) {
+		Object rv = Array_.Create(memberType, count);
+		for (int i = 0; i < count; i++)
+			Array_.Set_at(rv, i, list[i]);
+		return rv;
+	}
+	public String[] To_str_ary() {return (String[])To_ary(String.class);}
+	public Object[] To_obj_ary() {
+		Object[] rv = new Object[count];
+		for (int i = 0; i < count; ++i)
+			rv[i] = list[i];
+		return rv;
+	}
+	public String To_str() {
+		Bry_bfr bfr = Bry_bfr.new_();
+		for (int i = 0; i < count; ++i)
+			bfr.Add_obj(list[i]);
+		return bfr.Xto_str_and_clear();
 	}
 	private void BoundsChk(int bgn, int end, int len) {
 		if (	bgn >= 0 && bgn < len

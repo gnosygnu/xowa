@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data.srl; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.data.*;
 import gplx.core.primitives.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.pages.*;
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 class Xohd_page_srl_itm__body extends Xohd_page_srl_itm__base {
 	public Xohd_page_srl_itm__body() {this.Save_tid_n_();}
 	@Override public byte Tid() {return Xohd_page_srl_itm_.Tid_body;}

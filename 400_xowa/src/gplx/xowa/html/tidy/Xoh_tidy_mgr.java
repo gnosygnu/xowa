@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.apps.fsys.*;
 public class Xoh_tidy_mgr implements GfoInvkAble {
 	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
@@ -63,9 +63,9 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 	}
 	public static boolean Tidy_unwrap(Bry_bfr bfr) {
 		byte[] bfr_bry = bfr.Bfr();
-		int find = Bry_finder.Find_fwd(bfr_bry, Html_tag_.Body_lhs); if (find == Bry_finder.Not_found) return false;
+		int find = Bry_find_.Find_fwd(bfr_bry, Html_tag_.Body_lhs); if (find == Bry_find_.Not_found) return false;
 		bfr.Delete_rng_to_bgn(find + Html_tag_.Body_lhs.length);
-		find = Bry_finder.Find_bwd(bfr_bry, Html_tag_.Body_rhs, bfr.Len()); if (find == Bry_finder.Not_found) return false;
+		find = Bry_find_.Find_bwd(bfr_bry, Html_tag_.Body_rhs, bfr.Len()); if (find == Bry_find_.Not_found) return false;
 		bfr.Delete_rng_to_end(find);
 		return true;
 	}

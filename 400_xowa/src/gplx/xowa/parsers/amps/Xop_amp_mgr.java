@@ -45,8 +45,8 @@ public class Xop_amp_mgr {
 		rslt_pos = amp_pos + 1;	// default to fail pos; after amp;
 		rslt_val = -1;			// clear any previous setting
 		int cur_pos = int_bgn, int_end = -1;
-		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, cur_pos, src_len);
-		if (semic_pos == Bry_finder.Not_found) return false;
+		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, cur_pos, src_len);
+		if (semic_pos == Bry_find_.Not_found) return false;
 		int_end = semic_pos - 1;	// int_end = pos before semicolon
 		int multiple = ncr_is_hex ? 16 : 10, val = 0, factor = 1, cur = 0;
 		for (int i = int_end; i >= int_bgn; i--) {
@@ -64,7 +64,7 @@ public class Xop_amp_mgr {
 				if (cur < 0 || cur > 10)		return false;
 			}
 			val += cur * factor;
-			if (val > gplx.intl.Utf8_.Codepoint_max)  return false;	// fail if value > largest_unicode_codepoint
+			if (val > gplx.core.intls.Utf8_.Codepoint_max)  return false;	// fail if value > largest_unicode_codepoint
 			factor *= multiple;
 		}
 		rslt_val = val;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.srl.*;
-import gplx.xowa2.gui.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.gui.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xohd_page_html_mgr__save {
 	private Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
 	public void Update(Bry_bfr tmp_bfr, Xowd_html_tbl tbl, Xoae_page page) {

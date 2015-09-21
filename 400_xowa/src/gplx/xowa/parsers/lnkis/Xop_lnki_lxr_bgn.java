@@ -16,11 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.tmpls.*;	
 public class Xop_lnki_lxr_bgn implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_lnki_bgn;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_lnki_bgn;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_tkn_itm prv_tkn = ctx.Stack_get_last();
 		if (prv_tkn != null

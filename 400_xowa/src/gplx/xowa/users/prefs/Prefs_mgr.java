@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.html.*; import gplx.gfui.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.*; import gplx.gfui.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.urls.*;
 import gplx.xowa.parsers.*;
@@ -55,7 +55,7 @@ public class Prefs_mgr implements GfoInvkAble {
 	private void Props_set_and_reload() {
 		Xoae_page page = app.Gui_mgr().Browser_win().Active_page();
 		Props_set(page.Data_raw());
-		page.Wikie().ParsePage_root(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
+		page.Wikie().Parser_mgr().Parse(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
 		// app.Api_root().Gui().Page().View().Reload();	// force reload to update page; needed for language; DATE:2014-05-26; NOTE: deactivate on 2015-08-13; refreshing page causes options to not show
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab != null) tab.Exec_notify(Bool_.Y, "options saved");
 	}
@@ -105,7 +105,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		Xowe_wiki wiki = app.Usere().Wiki();	// NOTE: this limits prefs to home_wiki only
 		Xop_root_tkn root = new Xop_root_tkn();
 		Xop_ctx ctx = Xop_ctx.new_(wiki);		// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
-		wiki.Parser().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), src, 0);
+		wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), src, 0);
 		return root.Data_mid();			
 	}
 	public Object Eval(byte[] code) {return app.Gfs_mgr().Run_str(String_.new_a7(code));}

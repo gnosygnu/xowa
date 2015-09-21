@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.ios.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {			// search version 2
 	private Xowd_db_mgr db_mgr; private Xowd_search_link_tbl search_page_tbl; private Xowd_search_word_tbl search_word_tbl;

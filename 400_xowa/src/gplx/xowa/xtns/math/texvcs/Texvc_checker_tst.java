@@ -35,9 +35,9 @@ public class Texvc_checker_tst {
 		);
 	}
 	@Test   public void Mathrm() {
-//			fxt.Test_check("\\mathrm\\frac{a}{b}"	, "\\mathrm{\\frac{a}{b}}");
-//			fxt.Test_check("\\mathrm\\frac a b}"	, "\\mathrm{\\frac{a}{b}}");
-//			fxt.Test_check("\\mathrm{\\frac{a}{b}}"	, "\\mathrm{\\frac{a}{b}}");
+		fxt.Test_check("\\mathrm\\frac{a}{b}"	, "\\mathrm{\\frac{a}{b}}");
+		fxt.Test_check("\\mathrm{\\frac{a}{b}}"	, "\\mathrm{\\frac{a}{b}}");
+		fxt.Test_check("\\frac a b"	, "\\frac a b");
 	}
 }
 class Texvc_checker_fxt extends Texvc_parser_fxt {		private final Texvc_checker checker = new Texvc_checker();

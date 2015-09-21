@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
-import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	private final Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
@@ -31,7 +31,8 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w, int lnki_h) {return Lnki_(lnki_ttl, Bool_.Y, lnki_w, lnki_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
 	public Xof_xfer_queue_html_fxt Lnki_(String lnki_ttl, boolean thumb, int lnki_w, int lnki_h, double upright, int seek_time) { // NOTE: only one xfer_itm; supports one Lnki_ per test only
 		Xowe_wiki wiki = this.En_wiki();
-		xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, wiki.Ctx(), wiki.Ctx().Cur_page(), queue, Bry_.new_u8(lnki_ttl), thumb ? Xop_lnki_type.Id_thumb : Xop_lnki_type.Id_null, upright, lnki_w, lnki_h, Xof_lnki_time.X_int(seek_time), Xof_lnki_page.Null, false);
+		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
+		xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, ctx.Cur_page(), queue, Bry_.new_u8(lnki_ttl), thumb ? Xop_lnki_type.Id_thumb : Xop_lnki_type.Id_null, upright, lnki_w, lnki_h, Xof_lnki_time.X_int(seek_time), Xof_lnki_page.Null, false);
 		return this;
 	}
 	public Xof_file_itm Xfer_itm() {return xfer_itm;} private Xof_file_itm xfer_itm; 

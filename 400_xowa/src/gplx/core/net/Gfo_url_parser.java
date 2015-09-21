@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 public class Gfo_url_parser {
 	private final Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	private final Bry_ary segs_ary = new Bry_ary(4), qargs = new Bry_ary(4);
@@ -46,7 +46,7 @@ public class Gfo_url_parser {
 			rel = true;
 		}
 		if (!rel) {	// search for ":"; NOTE: only search if not rel; i.e.: "//"
-			int colon_pos = Bry_finder.Find_fwd(src, Byte_ascii.Colon, pos, src_end);	// no colon found; EX: "//a.org/b"; "a.org/b"
+			int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, pos, src_end);	// no colon found; EX: "//a.org/b"; "a.org/b"
 			if (colon_pos != Bry_.NotFound)											// colon found; EX: "http://" or "https://"
 				pos = colon_pos + Int_.Const_dlm_len;
 			if (pos < src_end && src[pos] == Byte_ascii.Slash) {					// skip slash after colon
@@ -55,7 +55,7 @@ public class Gfo_url_parser {
 					pos += 1;
 			}
 		}
-		int slash_pos = Bry_finder.Find_fwd(src, Byte_ascii.Slash, pos, src_end);
+		int slash_pos = Bry_find_.Find_fwd(src, Byte_ascii.Slash, pos, src_end);
 		if (slash_pos == Bry_.NotFound)												// no terminating slash; EX: http://a.org
 			slash_pos = src_end;
 		slash_pos = Bry_.Trim_end_pos(src, slash_pos);
@@ -79,7 +79,7 @@ public class Gfo_url_parser {
 		int pos = src_bgn;
 		Object protocol_obj = protocols.Match_bgn(src, src_bgn, src_end);
 		pos = protocols.Match_pos();
-		pos = Bry_finder.Find_fwd_while(src, pos, src_end, Byte_ascii.Slash);
+		pos = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Slash);
 		if (protocol_obj == null) {
 			this.protocol_tid = Gfo_protocol_itm.Tid_unknown;
 		}
@@ -130,7 +130,7 @@ public class Gfo_url_parser {
 			case Area__qarg_key_1st:
 			case Area__qarg_key_nth:
 				if (anch_nth_bgn == -1)
-					anch_nth_bgn = Bry_finder.Find_bwd(src, Byte_ascii.Hash, src_end);
+					anch_nth_bgn = Bry_find_.Find_bwd(src, Byte_ascii.Hash, src_end);
 				if (pos == anch_nth_bgn) {
 					End_area(pos, b);
 					area = Area__anch;

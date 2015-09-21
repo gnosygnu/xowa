@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Lst_pfunc_wkr {
 	private boolean mode_include = true;
@@ -41,13 +42,13 @@ public class Lst_pfunc_wkr {
 			if (src_page_bry == null) return; // {{#lst:missing}} -> ""
 			Xoae_page page = ctx.Cur_page();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;
-			defn_tmpl = wiki.Parser().Parse_text_to_defn_obj(sub_ctx, sub_ctx.Tkn_mkr(), src_ttl.Ns(), src_ttl_bry, src_page_bry);	// NOTE: parse as tmpl to ignore <noinclude>
+			defn_tmpl = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(sub_ctx, sub_ctx.Tkn_mkr(), src_ttl.Ns(), src_ttl_bry, src_page_bry);	// NOTE: parse as tmpl to ignore <noinclude>
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 			page.Tmpl_stack_del();									// take template off stack; evaluate will never recurse, and will fail if ttl is still on stack; DATE:2014-03-10
 			defn_tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.Page_is_caller, tmp_bfr);
 			src = tmp_bfr.To_bry_and_rls();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;	// put template back on stack; 
-			Xop_root_tkn root = wiki.Parser().Parse_text_to_wdom(sub_ctx, src, true);	// NOTE: pass sub_ctx as old_ctx b/c entire document will be parsed, and references outside the section should be ignored;
+			Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(sub_ctx, src, true);	// NOTE: pass sub_ctx as old_ctx b/c entire document will be parsed, and references outside the section should be ignored;
 			src = root.Data_mid();	// NOTE: must set src to root.Data_mid() which is result of parse; else <nowiki> will break text; DATE:2013-07-11
 			wiki.Cache_mgr().Lst_cache().Add(defn_tmpl, Xow_ns_case_.Id_all);
 			page.Tmpl_stack_del();

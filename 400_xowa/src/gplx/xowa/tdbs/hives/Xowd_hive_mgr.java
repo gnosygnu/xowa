@@ -16,6 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.tdbs.xdats.*;
 public class Xowd_hive_mgr {
 	public Xowd_hive_mgr(Xowe_wiki wiki, byte dir_tid) {
 		this.wiki = wiki; fsys_mgr = wiki.Tdb_fsys_mgr(); this.dir_tid = dir_tid;

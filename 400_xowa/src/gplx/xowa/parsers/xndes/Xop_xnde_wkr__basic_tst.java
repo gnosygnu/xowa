@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.nss.*;
 public class Xop_xnde_wkr__basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}

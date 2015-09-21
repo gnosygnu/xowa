@@ -19,7 +19,19 @@ package gplx;
 public class Enm_ {
 	public static int		To_int(Object enm) {return Ordinal_lang(enm);}
 	public static boolean		Has_int(int val, int find)	{return find == (val & find);}
-	public static int		Add_int(int lhs, int rhs)		{return lhs | rhs;}
+	public static int		Add_int(int lhs, int rhs)	{return lhs | rhs;}
+	public static int		Add_int_ary(int... ary) {
+		int rv = 0;
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			int itm = ary[i];
+			if (rv == 0)
+				rv = itm;
+			else
+				rv = Flip_int(true, rv, itm);
+		}
+		return rv;
+	}
 	public static int		Flip_int(boolean enable, int val, int find) {
 		boolean has = find == (val & find);
 		return (has ^ enable) ? val ^ find : val;

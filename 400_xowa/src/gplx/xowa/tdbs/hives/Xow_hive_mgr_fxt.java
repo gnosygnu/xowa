@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.tdbs.xdats.*;
 public class Xow_hive_mgr_fxt {
 	public void Clear() {
 		if (hive_mgr == null) {

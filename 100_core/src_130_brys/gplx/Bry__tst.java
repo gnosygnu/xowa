@@ -17,8 +17,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import org.junit.*; import gplx.core.primitives.*;
-import gplx.texts.*;
 public class Bry__tst {
+	private final Bry__fxt fxt = new Bry__fxt();
+	@Test  public void new_ascii_() {
+		fxt.Test_new_a7("a"		, Bry_.new_ints(97));				// one
+		fxt.Test_new_a7("abc"	, Bry_.new_ints(97, 98, 99));		// many
+		fxt.Test_new_a7(""		, Bry_.Empty);						// none
+		fxt.Test_new_a7("¢€𤭢"	, Bry_.new_ints(63, 63, 63, 63));	// non-ascii -> ?
+	}
+	@Test  public void new_u8() {
+		fxt.Test_new_u8("a"		, Bry_.new_ints(97));						// one
+		fxt.Test_new_u8("abc"	, Bry_.new_ints(97, 98, 99));				// many
+		fxt.Test_new_u8("¢"		, Bry_.new_ints(194, 162));					// bry_len=2; cent
+		fxt.Test_new_u8("€"		, Bry_.new_ints(226, 130, 172));			// bry_len=3; euro
+		fxt.Test_new_u8("𤭢"	, Bry_.new_ints(240, 164, 173, 162));		// bry_len=3; example from en.w:UTF-8
+	}
+	@Test   public void Add__bry_plus_byte() {
+		fxt.Test_add("a"		, Byte_ascii.Pipe		, "a|");			// basic
+		fxt.Test_add(""			, Byte_ascii.Pipe		, "|");				// empty String
+	}
+	@Test   public void Add__byte_plus_bry() {
+		fxt.Test_add(Byte_ascii.Pipe	, "a"			, "|a");			// basic
+		fxt.Test_add(Byte_ascii.Pipe	, ""			, "|");				// empty String
+	}
+	@Test   public void Add_w_dlm() {
+		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", "b", "c")	, "a|b|c");					// basic
+		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a")				, "a");					// one item
+		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", null, "c")	, "a||c");					// null
+	}
+	@Test   public void Add_w_dlm_bry() {
+		fxt.Test_add_w_dlm("<>", String_.Ary("a","b","c"), "a<>b<>c");
+	}
 	@Test  public void MidByPos() {
 		tst_MidByPos("abcba", 0, 1, "a");
 		tst_MidByPos("abcba", 0, 2, "ab");
@@ -176,16 +205,6 @@ public class Bry__tst {
 		return rv;
 	}
 	void tst_IncrementLast(byte[] ary, byte[] expd) {Tfds.Eq_ary(expd, Bry_.Increment_last(Bry_.Copy(ary)));}
-	@Test   public void Split() {
-		tst_Split("a|b|c"		, Byte_ascii.Pipe, "a", "b", "c");
-		tst_Split("a|b|c|"		, Byte_ascii.Pipe, "a", "b", "c");
-		tst_Split("|"			, Byte_ascii.Pipe, "");
-		tst_Split(""			, Byte_ascii.Pipe);
-	}
-	void tst_Split(String raw_str, byte dlm, String... expd) {
-		byte[][] actl_bry = Bry_.Split(Bry_.new_a7(raw_str), dlm);
-		Tfds.Eq_ary_str(expd, String_.Ary(actl_bry));
-	}
 	@Test   public void Replace_between() {
 		tst_Replace_between("a[0]b"					, "[", "]", "0", "a0b");
 		tst_Replace_between("a[0]b[1]c"				, "[", "]", "0", "a0b0c");
@@ -209,7 +228,7 @@ public class Bry__tst {
 		Split_bry_tst("a|"			, "|"	, String_.Ary("a"));
 	}
 	void Split_bry_tst(String src, String dlm, String[] expd) {
-		String[] actl = String_.Ary(Bry_.Split(Bry_.new_a7(src), Bry_.new_a7(dlm)));
+		String[] actl = String_.Ary(Bry_split_.Split(Bry_.new_a7(src), Bry_.new_a7(dlm)));
 		Tfds.Eq_ary_str(expd, actl);
 	}
 	@Test   public void Split_lines() {
@@ -219,7 +238,7 @@ public class Bry__tst {
 		Tst_split_lines("a\rb"		, "a", "b");					// cr only
 	}
 	void Tst_split_lines(String src, String... expd) {		
-		Tfds.Eq_ary(expd, New_ary(Bry_.Split_lines(Bry_.new_a7(src))));
+		Tfds.Eq_ary(expd, New_ary(Bry_split_.Split_lines(Bry_.new_a7(src))));
 	}
 	String[] New_ary(byte[][] lines) {
 		int len = lines.length;
@@ -239,33 +258,18 @@ public class Bry__tst {
 	void Tst_match_bwd_any(String src, int src_end, int src_bgn, String find, boolean expd) {
 		Tfds.Eq(expd, Bry_.Match_bwd_any(Bry_.new_a7(src), src_end, src_bgn, Bry_.new_a7(find)));
 	}
-	private Bry__fxt fxt = new Bry__fxt();
 	@Test   public void Trim_end() {
 		fxt.Test_trim_end("a "		, Byte_ascii.Space, "a");	// trim.one
 		fxt.Test_trim_end("a   "	, Byte_ascii.Space, "a");	// trim.many
 		fxt.Test_trim_end("a"		, Byte_ascii.Space, "a");	// trim.none
 		fxt.Test_trim_end(""		, Byte_ascii.Space, "");	// empty
 	}
-	@Test  public void new_ascii_() {
-		fxt.Test_new_a7("a"		, Bry_.ints_(97));				// one
-		fxt.Test_new_a7("abc"	, Bry_.ints_(97, 98, 99));		// many
-		fxt.Test_new_a7(""		, Bry_.Empty);					// none
-		fxt.Test_new_a7("¢€𤭢"	, Bry_.ints_(63, 63, 63, 63));	// non-ascii -> ?
-	}
-	@Test  public void new_u8() {
-		fxt.Test_new_u8("a"		, Bry_.ints_(97));						// one
-		fxt.Test_new_u8("abc"	, Bry_.ints_(97, 98, 99));				// many
-		fxt.Test_new_u8("¢"		, Bry_.ints_(194, 162));				// bry_len=2; cent
-		fxt.Test_new_u8("€"		, Bry_.ints_(226, 130, 172));			// bry_len=3; euro
-		fxt.Test_new_u8("𤭢"	, Bry_.ints_(240, 164, 173, 162));		// bry_len=3; example from en.w:UTF-8
-	}
-	@Test   public void Add_w_dlm() {
-		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", "b", "c")	, "a|b|c");					// basic
-		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a")				, "a");					// one item
-		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", null, "c")	, "a||c");					// null
-	}
-	@Test   public void Add_w_dlm_bry() {
-		fxt.Test_add_w_dlm("<>", String_.Ary("a","b","c"), "a<>b<>c");
+	@Test   public void Mid_w_trim() {
+		fxt.Test_Mid_w_trim("abc", "abc");								// no ws
+		fxt.Test_Mid_w_trim(" a b c ", "a b c");						// ws at bgn and end
+		fxt.Test_Mid_w_trim("\r\n\t a\r\n\t b \r\n\t ", "a\r\n\t b");	// space at bgn and end
+		fxt.Test_Mid_w_trim("", "");									// handle 0 bytes
+		fxt.Test_Mid_w_trim("   ", "");									// handle all ws
 	}
 }
 class Bry__fxt {
@@ -274,7 +278,10 @@ class Bry__fxt {
 		Tfds.Eq(expd, String_.new_u8(Bry_.Trim_end(raw_bry, trim, raw_bry.length)));
 	}
 	public void Test_new_u8(String raw, byte[] expd)			{Tfds.Eq_ary(expd, Bry_.new_u8(raw));}
-	public void Test_new_a7(String raw, byte[] expd)		{Tfds.Eq_ary(expd, Bry_.new_a7(raw));}
+	public void Test_new_a7(String raw, byte[] expd)			{Tfds.Eq_ary(expd, Bry_.new_a7(raw));}
+	public void Test_add(String s, byte b, String expd)			{Tfds.Eq_str(expd, String_.new_u8(Bry_.Add(Bry_.new_u8(s), b)));}
+	public void Test_add(byte b, String s, String expd)			{Tfds.Eq_str(expd, String_.new_u8(Bry_.Add(b, Bry_.new_u8(s))));}
 	public void Test_add_w_dlm(String dlm, String[] itms, String expd)	{Tfds.Eq(expd, String_.new_u8(Bry_.Add_w_dlm(Bry_.new_u8(dlm), Bry_.Ary(itms))));}
 	public void Test_add_w_dlm(byte dlm, String[] itms, String expd)	{Tfds.Eq(expd, String_.new_u8(Bry_.Add_w_dlm(dlm, Bry_.Ary(itms))));}
+	public void Test_Mid_w_trim(String src, String expd) {byte[] bry = Bry_.new_u8(src); Tfds.Eq(expd, String_.new_u8(Bry_.Mid_w_trim(bry, 0, bry.length)));}
 }

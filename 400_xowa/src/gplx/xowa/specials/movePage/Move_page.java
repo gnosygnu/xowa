@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.langs.msgs.*;
 import gplx.xowa.html.hrefs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.utils.*;
 public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
@@ -65,11 +67,11 @@ public class Move_page implements Xows_page {
 		if (src_ttl == null) return Bry_.Empty;
 		ns_list_fmtr.Init_by_page(wiki, page, src_ttl);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		wiki.Parser().Parse_text_to_html(tmp_bfr, page, true, msg_mgr.Val_by_key_obj("movepagetext"));
+		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, true, msg_mgr.Val_by_key_obj("movepagetext"));
 		fmtr_all.Bld_bfr_many(tmp_bfr
 		, msg_mgr.Val_by_key_obj("move-page-legend")
 		, Bry_.Add(Xoh_href_.Bry__wiki, src_ttl.Full_db())
-		, gplx.html.Html_utl.Escape_html_as_bry(src_ttl.Full_txt())
+		, gplx.langs.htmls.Html_utl.Escape_html_as_bry(src_ttl.Full_txt())
 		, src_ttl.Full_txt()
 		, msg_mgr.Val_by_key_obj("newtitle")
 		, ns_list_fmtr

@@ -19,6 +19,7 @@ package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.net.*; import gplx.core.threads.*;
 import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.core.js.*;
+import gplx.xowa.nss.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
 		this.app = gui_mgr.App();

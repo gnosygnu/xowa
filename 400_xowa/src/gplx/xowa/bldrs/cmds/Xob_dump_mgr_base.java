@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
@@ -37,8 +39,8 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		poll_mgr = new Xobu_poll_mgr(bldr.App());	// init in ctor so gfs can invoke methods
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		parser = wiki.Parser();
-		ctx = wiki.Ctx();
+		parser = wiki.Parser_mgr().Main();
+		ctx = wiki.Parser_mgr().Ctx();
 		root = ctx.Tkn_mkr().Root(Bry_.Empty);			
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql		
 		wiki.Db_mgr_as_sql().Core_data_mgr().Init_by_load(gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(wiki));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)

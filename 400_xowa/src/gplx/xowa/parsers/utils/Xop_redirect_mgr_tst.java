@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.parsers.tmpls.*;
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_redirect_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xop_redirect_mgr_fxt fxt = new Xop_redirect_mgr_fxt();
 	@Test  public void Basic()					{fxt.Test_redirect("#REDIRECT [[a]]", "A");}

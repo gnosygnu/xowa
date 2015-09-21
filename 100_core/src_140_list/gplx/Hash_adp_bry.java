@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.primitives.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	private final Hash_adp_bry_itm_base proto, key_ref;
 	Hash_adp_bry(Hash_adp_bry_itm_base proto) {
@@ -29,11 +29,17 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	@Override protected boolean Has_base(Object key)					{return super.Has_base(key_ref.Init((byte[])key));}
 	public int Get_as_int(byte[] key) {return Get_as_int(key, 0, key.length);}
 	public int Get_as_int(byte[] key, int bgn, int end) {
-		Object o = Get_by_mid(key, bgn, end); if (o == null) throw Err_.new_("core", "unknown key", "key", key);
-		return ((Int_obj_val)o).Val();
+		int rv = Get_as_int_or(key, bgn, end, Int_.Min_value); if (rv == Int_.Min_value) throw Err_.new_("core", "unknown key", "key", key);
+		return rv;
+	}
+	public int Get_as_int_or(byte[] key, int or) {return Get_as_int_or(key, 0, key.length, or);}
+	public int Get_as_int_or(byte[] key, int bgn, int end, int or) {
+		Object o = Get_by_mid(key, bgn, end); 
+		return (o == null) ? or : ((Int_obj_val)o).Val();
 	}
 	public Object Get_by_bry(byte[] src)							{return super.Fetch_base(key_ref.Init(src));}
 	public Object Get_by_mid(byte[] src, int bgn, int end)			{return super.Fetch_base(key_ref.Init(src, bgn, end));}
+	public Hash_adp_bry Add_byte_int(byte key, int val)				{this.Add_base(Bry_.new_bytes(key), Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_byte(byte[] key, byte val)			{this.Add_base(key, Byte_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_int(byte[] key, int val)			{this.Add_base(key, Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_bry(byte[] key)						{this.Add_base(key, key); return this;}

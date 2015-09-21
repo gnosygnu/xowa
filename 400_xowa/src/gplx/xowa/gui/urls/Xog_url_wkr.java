@@ -53,7 +53,7 @@ public class Xog_url_wkr {
 //		private Xoa_url Exec_url_xcmd(Xog_win_itm win) {		// EX: /xcmd/
 //			byte[] xowa_href_bry = tmp_url.Page();
 //			int xowa_href_bry_len = xowa_href_bry.length;
-//			int slash_pos = Bry_finder.Find_fwd(xowa_href_bry, Byte_ascii.Slash); if (slash_pos == Bry_.NotFound) slash_pos = xowa_href_bry_len;
+//			int slash_pos = Bry_find_.Find_fwd(xowa_href_bry, Byte_ascii.Slash); if (slash_pos == Bry_.NotFound) slash_pos = xowa_href_bry_len;
 //			byte[] xowa_cmd_bry = Bry_.Mid(xowa_href_bry, 0, slash_pos);
 //			String xowa_cmd_str = String_.new_u8(xowa_cmd_bry);
 //			GfoMsg m = GfoMsg_.new_cast_(xowa_cmd_str);
@@ -102,7 +102,7 @@ public class Xog_url_wkr {
 		if (qargs_len > 0) {	// remove anchors from qargs; EX: "to=B#mw_pages"
 			for (int i = 0; i < qargs_len; i++) {
 				Gfo_qarg_itm arg = qargs[i];
-				int anch_pos = Bry_finder.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
+				int anch_pos = Bry_find_.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
 				if (anch_pos != Bry_.NotFound)
 					arg.Val_bry_(Bry_.Mid(arg.Val_bry(), 0, anch_pos));
 			}				
@@ -145,7 +145,7 @@ public class Xog_url_wkr {
 //			if (qargs_len > 0) {	// remove anchors from qargs; EX: "to=B#mw_pages"
 //				for (int i = 0; i < qargs_len; i++) {
 //					Gfo_qarg_itm arg = qargs[i];
-//					int anch_pos = Bry_finder.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
+//					int anch_pos = Bry_find_.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
 //					if (anch_pos != Bry_.NotFound)
 //						arg.Val_bry_(Bry_.Mid(arg.Val_bry(), 0, anch_pos));
 //				}				

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.*;
 public class Listing_xtn_mgr extends Xox_mgr_base {
@@ -71,7 +72,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	}
 	private byte[] Load_txt(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
 		byte[] rv = wiki.Msg_mgr().Val_by_key_obj(Bry_.new_u8(ttl)); if (Bry_.Len_eq_0(rv)) return null;	// ttl does not exist; note that msg_mgr returns "" for missing values
-		rv = wiki.Parser().Parse_text_to_html(sub_ctx, rv);
+		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, rv);
 		rv = Html_utl.Escape_html_as_bry(rv);
 		return rv;
 	}

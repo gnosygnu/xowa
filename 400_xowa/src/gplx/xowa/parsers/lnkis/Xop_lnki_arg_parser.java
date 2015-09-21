@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
 	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
 	private final Bry_bfr int_bfr = Bry_bfr.reset_(16);
@@ -94,7 +94,7 @@ public class Xop_lnki_arg_parser {
 					case Key_space:		break;	// ignore space; EX: "100 px"
 					case Key_dim_px:	{		// 2nd px found; EX: "40pxpx"; "40px px"
 						int tmp_pos = size_trie.Match_pos();
-						tmp_pos = Bry_finder.Find_fwd_while_space_or_tab(src, tmp_pos, itm_end);	// look for next ws pos; 
+						tmp_pos = Bry_find_.Find_fwd_while_space_or_tab(src, tmp_pos, itm_end);	// look for next ws pos; 
 						if (tmp_pos == itm_end)	// no non-ws found; tmp_pos == itm_end; allow itm; EX: "40pxpx"; "40px px"; DATE:2014-03-01
 							i = itm_end;
 						else					// non-ws found; consider as caption; EX: "20px20px"; "20pxpxpx"

@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.primitives.*; import gplx.core.json.*; import gplx.php.*; import gplx.gfs.*;
+import gplx.core.primitives.*; import gplx.langs.jsons.*; import gplx.langs.phps.*; import gplx.langs.gfss.*;
+import gplx.xowa.apps.gfss.*;
+import gplx.xowa.langs.*;
 interface Json_itm_wkr {
 	void Read_kv_sub(byte[] key, byte[] val);
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.xowa.nss.*;
 public class Xoh_href_wtr_tst {		
 	private final Xoh_href_wtr_fxt fxt = new Xoh_href_wtr_fxt();
 	@Test   public void Xwiki_enc()					{fxt.Test_build("wikt:abc?d"				, "/site/en.wiktionary.org/wiki/abc%3Fd");}	

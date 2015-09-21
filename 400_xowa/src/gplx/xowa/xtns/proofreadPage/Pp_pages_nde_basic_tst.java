@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.cfgs.*;
 public class Pp_pages_nde_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {

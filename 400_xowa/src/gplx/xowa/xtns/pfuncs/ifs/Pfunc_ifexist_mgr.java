@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.wmfs.apis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wms.apis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 public class Pfunc_ifexist_mgr {
 	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 	private Hash_adp regy = Hash_adp_bry.cs();
@@ -44,7 +45,7 @@ public class Pfunc_ifexist_mgr {
 		boolean rv = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl_bry);
 		if (	!rv
 			&&	wiki.Lang().Vnt_mgr().Enabled()) {
-			Xowd_page_itm page = wiki.Lang().Vnt_mgr().Convert_ttl(wiki, ns, ttl_bry);
+			Xowd_page_itm page = wiki.Lang().Vnt_mgr().Convert_mgr().Convert_ttl(wiki, ns, ttl_bry);
 			if (page != Xowd_page_itm.Null)
 				rv = page.Exists();
 		}

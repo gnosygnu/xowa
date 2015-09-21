@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.langs.cfgs.*;
 public class Xoac_wiki_itm implements Cfg_nde_obj, Xoac_wiki_obj {
 	public Xoac_wiki_itm(byte[] key) {this.key_bry = key;}
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
@@ -30,6 +31,6 @@ public class Xoac_wiki_itm implements Cfg_nde_obj, Xoac_wiki_obj {
 	public void Nde_subs_del(byte[] key) {throw Err_.new_wo_type("leafs cannot delete itms", "key", String_.new_u8(key));}
 	public void Nde_atrs_set(byte[][] ary) {
 		int ary_len = ary.length;
-		if (ary_len > 0) aliases = Bry_.Split(ary[0], Byte_ascii.Semic);
+		if (ary_len > 0) aliases = Bry_split_.Split(ary[0], Byte_ascii.Semic);
 	}
 }

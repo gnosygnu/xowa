@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.gfui.*;
-import gplx.xowa.wmfs.*;
+import gplx.xowa.wms.*;
 public interface Xof_img_wkr_query_img_size {
 	SizeAdp Exec(Io_url url);
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 public class Bridge_cmd_mgr {
 	private final Json_parser parser;
 	private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();

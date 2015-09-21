@@ -60,7 +60,7 @@ class Wdata_itemByTitle_page_fxt {
 		wdata_fxt.Init_qids_add("en", Xow_domain_type_.Int__wikipedia, wdata_label, qid);		
 	}
 	public void Test_open(String link, String expd) {
-		Xoae_page page = wiki.Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
 		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(link));
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_a7(link));

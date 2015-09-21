@@ -40,16 +40,16 @@ public class Wmf_latest_parser {
 //			byte[] size_or = Bry_.new_a7("0 B");
 		int size_end = 0; int src_len = src.length;
 		while (true) {
-			int name_bgn = Bry_finder.Move_fwd(src, name_bgn_bry, size_end, src_len); if (name_bgn == Bry_finder.Not_found) break;
-			int name_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, name_bgn, src_len);
+			int name_bgn = Bry_find_.Move_fwd(src, name_bgn_bry, size_end, src_len); if (name_bgn == Bry_find_.Not_found) break;
+			int name_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, name_bgn, src_len);
 			byte[] name = Bry_.Mid(src, name_bgn, name_end);
-			int date_bgn = Bry_finder.Move_fwd(src, date_bgn_bry, name_end, src_len); if (date_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "date_bgn not found"); break;}
-			date_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_bgn, src_len); if (date_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "date_bgn not found"); break;}
-			int date_end = Bry_finder.Find_fwd(src, date_end_bry, date_bgn, src_len);
+			int date_bgn = Bry_find_.Move_fwd(src, date_bgn_bry, name_end, src_len); if (date_bgn == Bry_find_.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "date_bgn not found"); break;}
+			date_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, date_bgn, src_len); if (date_bgn == Bry_find_.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "date_bgn not found"); break;}
+			int date_end = Bry_find_.Find_fwd(src, date_end_bry, date_bgn, src_len);
 			byte[] date_bry = Bry_.Mid(src, date_bgn, date_end);
 			DateAdp date = DateAdp_.parse_fmt(String_.new_a7(Replace_or(tmp_bfr, date_trie, date_bry, 3, date_or)), "dd-MM-yyyy HH:mm");
-			int size_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "size_bgn not found"); break;}
-			size_end = Bry_finder.Find_fwd(src, Byte_ascii.Cr, size_bgn, src_len);
+			int size_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_find_.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "size_bgn not found"); break;}
+			size_end = Bry_find_.Find_fwd(src, Byte_ascii.Cr, size_bgn, src_len);
 			byte[] size_bry = Bry_.Mid(src, size_bgn, size_end);
 			long size = Long_.parse_or(String_.new_u8(size_bry), -1);
 			Wmf_latest_itm itm = new Wmf_latest_itm(name, date, size);

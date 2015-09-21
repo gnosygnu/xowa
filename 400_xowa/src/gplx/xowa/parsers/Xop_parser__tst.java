@@ -52,7 +52,7 @@ class Xop_parser__fxt {
 	}
 	public void Test_parse_to_html(String raw, boolean para_enabled, String expd)  {
 		byte[] raw_bry = Bry_.new_u8(raw);
-		fxt.Wiki().Parser().Parse_text_to_html(bfr, fxt.Page(), para_enabled, raw_bry);
+		fxt.Wiki().Parser_mgr().Main().Parse_text_to_html(bfr, fxt.Page(), para_enabled, raw_bry);
 		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Scrib_lib_language_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();

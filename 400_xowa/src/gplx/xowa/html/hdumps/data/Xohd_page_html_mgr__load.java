@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hdumps.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.dbs.*; import gplx.ios.*;
 import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.html.hdumps.data.srl.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.gui.*;
 public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
 	private final Bry_rdr rdr = new Bry_rdr(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();

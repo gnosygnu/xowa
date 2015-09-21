@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 class Prefs_html_wtr {
 	public Prefs_html_wtr(Prefs_mgr prefs_mgr) {this.prefs_mgr = prefs_mgr;} Prefs_mgr prefs_mgr; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Write(Bry_bfr bfr, byte[] src, Html_nde hnde, int prop_idx, byte[] trg_type, byte[] trg_val) {

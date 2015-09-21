@@ -23,14 +23,14 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public void AutoClose(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos, Xop_tkn_itm tkn) {}
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos) {
-		int lxr_end_pos = Bry_finder.Find_fwd_while(src, lxr_cur_pos, src_len, Byte_ascii.Curly_bgn);	// NOTE: can be many consecutive {; EX: {{{{{1}}}|a}}
+		int lxr_end_pos = Bry_find_.Find_fwd_while(src, lxr_cur_pos, src_len, Byte_ascii.Curly_bgn);	// NOTE: can be many consecutive {; EX: {{{{{1}}}|a}}
 		ctx.Subs_add_and_stack(root, tkn_mkr.Tmpl_curly_bgn(lxr_bgn_pos, lxr_end_pos));
 		return lxr_end_pos;
 	}		
 	public int MakeTkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos) {
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_brack_bgn)	// WORKAROUND: ignore }} if inside lnki; EX.CM:Template:Protected; {{#switch:a|b=[[a|ja=}}]]}}
 			return ctx.Lxr_make_txt_(lxr_cur_pos);
-		int lxr_end_pos = Bry_finder.Find_fwd_while(src, lxr_cur_pos, src_len, Byte_ascii.Curly_end);	// NOTE: can be many consecutive }; EX: {{a|{{{1}}}}}
+		int lxr_end_pos = Bry_find_.Find_fwd_while(src, lxr_cur_pos, src_len, Byte_ascii.Curly_end);	// NOTE: can be many consecutive }; EX: {{a|{{{1}}}}}
 		int end_tkn_len = lxr_end_pos - lxr_bgn_pos;
 		boolean vnt_enabled = ctx.Wiki().Lang().Vnt_mgr().Enabled();
 		while (end_tkn_len > 0) {

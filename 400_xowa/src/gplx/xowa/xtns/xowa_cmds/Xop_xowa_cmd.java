@@ -35,7 +35,7 @@ public class Xop_xowa_cmd implements Xox_xnde {
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_root_tkn sub_root = tkn_mkr.Root(xtn_src);
-		xtn_html = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, ctx.Tkn_mkr(), xtn_src);
+		xtn_html = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, ctx.Tkn_mkr(), xtn_src);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		bfr.Add(xtn_html);

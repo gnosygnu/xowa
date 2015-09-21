@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.html.*; import gplx.xowa.files.gui.*;
+import gplx.langs.htmls.*; import gplx.xowa.files.gui.*;
 class Xows_ui_async {
 	private final Xows_html_row html_row; private final Xog_js_wkr js_wkr;
 	private final Xows_db_row[] rows; private final int rows_len;

@@ -23,10 +23,10 @@ public class Xoh_rtl_utl {
 		int src_len = src.length;
 		int pos = 0;
 		while (true) {
-			int ul_bgn = Bry_finder.Find_fwd(src, Ul_bgn, pos, src_len);
-			if (ul_bgn == Bry_finder.Not_found) break;	// no more <ul
-			int ul_end = Bry_finder.Find_fwd(src, Ul_end, ul_bgn + Ul_bgn.length, src_len);
-			if (ul_end == Bry_finder.Not_found) break;	// no more </ul>
+			int ul_bgn = Bry_find_.Find_fwd(src, Ul_bgn, pos, src_len);
+			if (ul_bgn == Bry_find_.Not_found) break;	// no more <ul
+			int ul_end = Bry_find_.Find_fwd(src, Ul_end, ul_bgn + Ul_bgn.length, src_len);
+			if (ul_end == Bry_find_.Not_found) break;	// no more </ul>
 			bfr.Add_mid(src, pos, ul_bgn);					// add pos -> <ul
 			ul_end += Ul_end.length;
 			Reverse_li_src(bfr, src, ul_bgn, ul_end, tmp_ary);
@@ -39,17 +39,17 @@ public class Xoh_rtl_utl {
 		int pos = ul_bgn;
 		int tmp_idx = 0;
 		while (true) {
-			int li_bgn = Bry_finder.Find_fwd(src, Li_bgn, pos, ul_end);
-			if (li_bgn == Bry_finder.Not_found) break;	// no more <li
-			int li_end = Bry_finder.Find_fwd(src, Li_end, pos, ul_end);
-			if (li_end == Bry_finder.Not_found) break;	// no more </li>
+			int li_bgn = Bry_find_.Find_fwd(src, Li_bgn, pos, ul_end);
+			if (li_bgn == Bry_find_.Not_found) break;	// no more <li
+			int li_end = Bry_find_.Find_fwd(src, Li_end, pos, ul_end);
+			if (li_end == Bry_find_.Not_found) break;	// no more </li>
 			tmp_ary[tmp_idx++] = li_bgn;
 			tmp_ary[tmp_idx++] = li_end + Li_end.length;
 			pos = li_end + Li_end.length;
 		}
-		int ul_bgn_rhs = Bry_finder.Find_fwd(src, Byte_ascii.Gt, ul_bgn);
+		int ul_bgn_rhs = Bry_find_.Find_fwd(src, Byte_ascii.Gt, ul_bgn);
 		if (tmp_idx < 3	// 0 or 1 li; add everything between ul
-			|| ul_bgn_rhs == Bry_finder.Not_found
+			|| ul_bgn_rhs == Bry_find_.Not_found
 			) {
 			bfr.Add_mid(src, ul_bgn, ul_end);
 			return;

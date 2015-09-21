@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.wikis.*;
+import gplx.langs.htmls.*; import gplx.xowa.wikis.*;
 public class Insider_xtn_mgr extends Xox_mgr_base {
 	public Insider_xtn_mgr() {
 		html_bldr = new Insider_html_bldr(this);

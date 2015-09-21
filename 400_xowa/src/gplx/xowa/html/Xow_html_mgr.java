@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.ctgs.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.html.portal.*; import gplx.xowa.html.tocs.*; import gplx.xowa.wikis.modules.*; import gplx.xowa.html.hzips.*;
 public class Xow_html_mgr implements GfoInvkAble {

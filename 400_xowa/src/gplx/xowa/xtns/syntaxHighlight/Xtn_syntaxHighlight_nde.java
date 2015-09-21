@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.syntaxHighlight; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.html.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte[] lang = Bry_.Empty; private byte[] style = null; private byte[] enclose = Bry_.Empty;
@@ -60,10 +60,10 @@ public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			bfr.Add(Xoh_consts.__end_quote);
 		}
 		int text_bgn = xnde.Tag_open_end();
-		int text_end = Bry_finder.Find_bwd_while(src, xnde.Tag_close_bgn(), -1, Byte_ascii.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
+		int text_end = Bry_find_.Find_bwd_while(src, xnde.Tag_close_bgn(), -1, Byte_ascii.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
 		if (line_enabled || enclose_is_none) {
 			bfr.Add_byte_nl();
-			byte[][] lines = Bry_.Split_lines(Bry_.Mid(src, text_bgn, text_end));
+			byte[][] lines = Bry_split_.Split_lines(Bry_.Mid(src, text_bgn, text_end));
 			int lines_len = lines.length;
 			int line_idx = start;
 			int line_end = (line_idx + lines_len) - 1; // EX: line_idx=9 line_len=1; line_end=9

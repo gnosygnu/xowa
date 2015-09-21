@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.xtns.*;
 public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 	private Wdata_wiki_mgr wdata_mgr;

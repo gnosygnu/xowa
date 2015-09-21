@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.langs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.apps.fsys.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cfgs.*;
 public class Xobc_utl_make_lang implements GfoInvkAble {
 	private final Xoa_lang_mgr lang_mgr; private final Xoa_fsys_mgr fsys_mgr; Xol_mw_lang_parser lang_parser;
 	public Xobc_utl_make_lang(Xoa_lang_mgr lang_mgr, Xoa_fsys_mgr fsys_mgr, Gfo_msg_log msg_log) {

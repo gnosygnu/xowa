@@ -34,7 +34,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			++pos;
 			b = src[pos];
 		}
-		int gt_pos = Bry_finder.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_.NotFound) return String_.Find_none;
+		int gt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_.NotFound) return String_.Find_none;
 		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos);
 		bry_ref.Val_(bry);
 		return bry == null ? String_.Find_none : bry.length + pos;
@@ -76,12 +76,12 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		while (true) {
 			if (i == end) {
 				if (mode == Mode_val_quote) {		// quote still open
-					int reset_pos = Bry_finder.Find_fwd(src, Byte_ascii.Space, atr_bgn, end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
-					boolean reset_found = reset_pos != Bry_finder.Not_found;
+					int reset_pos = Bry_find_.Find_fwd(src, Byte_ascii.Space, atr_bgn, end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
+					boolean reset_found = reset_pos != Bry_find_.Not_found;
 					valid = false; val_end = reset_found ? reset_pos : end;
 					Make(log_mgr, src, val_end);	// create invalid atr
 					if (reset_found) {				// space found; resume from text after space; EX: "a='b c=d"; PAGE:en.w:Aubervilliers DATE:2014-06-25
-						i = Bry_finder.Find_fwd_while_not_ws(src, reset_pos, end);	// skip ws
+						i = Bry_find_.Find_fwd_while_not_ws(src, reset_pos, end);	// skip ws
 						atr_bgn = -1;
 						mode = Mode_atr_bgn;
 						val_bfr.Clear();

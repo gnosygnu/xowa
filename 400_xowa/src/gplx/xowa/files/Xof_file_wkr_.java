@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.consoles.*;
+import gplx.core.consoles.*; import gplx.langs.htmls.encoders.*;
 public class Xof_file_wkr_ {
 	public static final Url_encoder Md5_decoder = Url_encoder.new_http_url_().Itms_raw_same_many(Byte_ascii.Plus);
 	public static byte[] Md5_fast(byte[] v) {return Bry_.new_a7(gplx.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.ios.IoStream_.ary_(v)));}

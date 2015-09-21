@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_orig_regy_update_cmd extends Xob_itm_basic_base implements Xob_cmd {	// downloads latest orig data
 	public Xob_orig_regy_update_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "oimg.orig_qry";

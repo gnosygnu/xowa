@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(128);

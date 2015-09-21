@@ -73,13 +73,13 @@ class Xows_text_tkn__ellipsis implements Xows_text_tkn {
 			mgr.Word__add(bgn__ws, tkn_bgn);	// add word; EX: "Dreams" in "Dreams..."
 			mgr.Bgn__ws_clear();				// clear ws flag, else space will create word; EX: "A... B"
 		}
-		int rv = Bry_finder.Find_fwd_while(src, tkn_end, src_end, ellipsis_byte);
+		int rv = Bry_find_.Find_fwd_while(src, tkn_end, src_end, ellipsis_byte);
 		mgr.Word__add(tkn_bgn, rv);				// add ellipssis
 		return rv;
 	}
 	public static Xows_text_tkn new_(Btrie_slim_mgr trie, String ellipsis) {
 		byte[] bry = Bry_.new_u8(ellipsis);
-		Xows_text_tkn rv = new Xows_text_tkn__ellipsis(Bry_.Get_at_end_or_fail(bry));
+		Xows_text_tkn rv = new Xows_text_tkn__ellipsis(Bry_.Get_at_end(bry));
 		trie.Add_obj(bry, rv);
 		return rv;
 	}

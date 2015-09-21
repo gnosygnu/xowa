@@ -62,7 +62,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		if (Bry_.Len_eq_0(search_bry)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
 		if (	search_suggest_mgr.Auto_wildcard()	// add * automatically if option set
 			&&	wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// only apply to sql
-			&&	Bry_finder.Find_fwd(search_bry, Byte_ascii.Star) == -1		// search term does not have asterisk
+			&&	Bry_find_.Find_fwd(search_bry, Byte_ascii.Star) == -1		// search term does not have asterisk
 			)
 			search_bry = Bry_.Add(search_bry, Byte_ascii.Star);
 		// url.Page_bry_(Bry_.Add(Xows_special_meta_.Itm__search.Ttl_bry(), Byte_ascii.Slash_bry, search_bry));// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
@@ -85,7 +85,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		}
 		// page found; return it;
 		else {
-			wiki.ParsePage(search_page, true);
+			wiki.Parser_mgr().Parse(search_page, true);
 			page.Data_raw_(search_page.Data_raw());
 			if (page.Root() != null) // NOTE: null when going from w:Earth -> q:Earth; DATE:2013-03-20
 				page.Root().Data_htm_(search_page.Root().Data_htm());

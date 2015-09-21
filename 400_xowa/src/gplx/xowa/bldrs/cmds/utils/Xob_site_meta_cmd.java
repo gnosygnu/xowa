@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.data.*;
+import gplx.xowa.wms.*; import gplx.xowa.wms.sites.*;
 import gplx.xowa.wikis.domains.*;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
@@ -25,10 +25,11 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 	public Xob_site_meta_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_site_meta;}
 	public void Cmd_run() {
-		if (wikis == null)			wikis = Xow_wmf_api_mgr.Wikis;
-		if (db_url == null)			db_url = bldr.App().Fsys_mgr().Cfg_site_meta_fil();
+		Xoa_app app = bldr.App();
+		if (wikis == null)			wikis = Xow_domain_regy.All;
+		if (db_url == null)			db_url = app.Fsys_mgr().Cfg_site_meta_fil();
 		if (cutoff_time == null)	cutoff_time = DateAdp_.Now().Add_day(-1);
-		Site_meta_itm.Build_site_meta(bldr.App().Utl__json_parser(), bldr.App().Wmf_mgr(), db_url, wikis, cutoff_time);
+		new Site_api_mgr().Load_all(app.Usr_dlg(), app.Utl__inet_conn(), db_url, wikis, cutoff_time);
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

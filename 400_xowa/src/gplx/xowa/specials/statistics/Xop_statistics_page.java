@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.statistics; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.nss.*;
 public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
 //		private Xop_statistics_stats_wiki_grp stats_wiki = new Xop_statistics_stats_wiki_grp();

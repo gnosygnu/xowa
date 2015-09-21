@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
 public class Xodb_page_rdr__tdb implements Xodb_page_rdr {
 	private final Xow_ns_mgr ns_mgr; private final Xotdb_fsys_mgr fsys_mgr;
 	private int cur_ns_ord = -1; private Xow_ns cur_ns; private Io_url[] cur_file_ary; private Io_url cur_file; private int cur_file_idx = -1;

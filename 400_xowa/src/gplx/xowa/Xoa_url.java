@@ -54,7 +54,7 @@ public class Xoa_url {
 			return Bry_.Mid(raw, page_bgn, raw_len);// else take everything after "/wiki/";
 	}
 	private int Page_bgn(int raw_len) {
-		int wiki_pos = Bry_finder.Find_fwd(raw, Xoh_href_.Bry__wiki, 0, raw_len);	 // look for /wiki/
+		int wiki_pos = Bry_find_.Find_fwd(raw, Xoh_href_.Bry__wiki, 0, raw_len);	 // look for /wiki/
 		return wiki_pos == Bry_.NotFound ? Bry_.NotFound : wiki_pos + Xoh_href_.Bry__wiki.length;
 	}
 	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
@@ -87,7 +88,7 @@ public class Wdata_hwtr_mgr {
 		return bfr.Xto_bry_and_clear();
 	}
 	public static void Write_link_wikidata(Bry_bfr bfr, byte[] href, byte[] text) {
-		text = gplx.html.Html_utl.Escape_html_as_bry(text);
+		text = gplx.langs.htmls.Html_utl.Escape_html_as_bry(text);
 		fmtr_link_wikidata.Bld_bfr_many(bfr, href, text);
 	}	private static final Bry_fmtr fmtr_link_wikidata = Bry_fmtr.new_("<a href='/wiki/~{href}'>~{text}</a>", "href", "text");
 }

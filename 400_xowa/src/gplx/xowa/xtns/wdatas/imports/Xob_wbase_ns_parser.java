@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wmfs.data.*;
+import gplx.xowa.wms.sites.*;
 class Xob_wbase_ns_parser {
 	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs();
 	private final Site_core_db core_db;
@@ -29,7 +30,7 @@ class Xob_wbase_ns_parser {
 		Xow_ns_mgr ns_mgr = (Xow_ns_mgr)ns_mgr_hash.Get_by_bry(wiki_abrv);
 		rv.Init(Xow_ns_.Id_main, 0);	// default to Main ns
 		int ttl_len = ttl.length;
-		int colon_pos = Bry_finder.Find_fwd(ttl, Byte_ascii.Colon, 0, ttl_len); if (colon_pos == Bry_finder.Not_found) return;
+		int colon_pos = Bry_find_.Find_fwd(ttl, Byte_ascii.Colon, 0, ttl_len); if (colon_pos == Bry_find_.Not_found) return;
 		if (ns_mgr == null) {			// ns_mgr not found; load from db
 			wiki_abrv = Bry_.Replace(wiki_abrv, Byte_ascii.Underline, Byte_ascii.Dash);
 			byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(wiki_abrv);

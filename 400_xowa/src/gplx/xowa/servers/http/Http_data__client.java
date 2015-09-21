@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 public class Http_data__client {
 	public Http_data__client(byte[] server_host, String ip_address_str) {
 		this.server_host = server_host;

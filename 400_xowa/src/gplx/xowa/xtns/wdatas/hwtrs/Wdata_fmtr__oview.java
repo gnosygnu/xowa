@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.xtns.*;
 class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 	private Xoapi_wikibase wikibase_api; private Url_encoder href_encoder;

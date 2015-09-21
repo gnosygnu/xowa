@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
-import gplx.core.json.*;
+import gplx.ios.*; import gplx.core.net.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apis.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.urls.encoders.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.*;
-import gplx.xowa.wmfs.*;
+import gplx.xowa.wms.*;
 import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.bridges.*;
 import gplx.xowa.users.*;
 public interface Xoa_app {
@@ -48,4 +48,5 @@ public interface Xoa_app {
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Url_encoder_mgr			Utl__encoder_mgr();
 	Json_parser				Utl__json_parser();
+	Gfo_inet_conn			Utl__inet_conn();
 }	

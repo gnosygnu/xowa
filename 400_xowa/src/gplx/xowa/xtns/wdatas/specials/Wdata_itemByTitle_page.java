@@ -38,9 +38,9 @@ public class Wdata_itemByTitle_page implements Xows_page {
 			site_bry = arg_hash.Get_val_bry_or(Arg_site, Bry_.Empty);
 			page_bry = arg_hash.Get_val_bry_or(Arg_page, Bry_.Empty);
 		}
-		int site_bgn = Bry_finder.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr);
+		int site_bgn = Bry_find_.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr);
 		if (site_bgn != Bry_.NotFound) {						// leaf arg is available
-			int page_bgn = Bry_finder.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr, site_bgn + 1);			
+			int page_bgn = Bry_find_.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr, site_bgn + 1);			
 			int raw_bry_len = raw_bry.length;
 			if (page_bgn != Bry_.NotFound && page_bgn < raw_bry_len) {	// pipe is found and not last char (EX: "enwiki/" is invalid
 				site_bry = Bry_.Mid(raw_bry, site_bgn + 1, page_bgn);

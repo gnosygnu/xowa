@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
+import gplx.xowa.cfgs.*;
 import gplx.xowa.html.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
@@ -353,7 +355,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
 			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
-			full_bfr.Add(gplx.html.Html_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
+			full_bfr.Add(gplx.langs.htmls.Html_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
 		page_bfr.Mkr_rls();
 		ctx.Tmpl_output_(null);
@@ -364,7 +366,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		tmp_ctx.Cur_page().Ttl_(ctx.Cur_page().Ttl());	// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
 		tmp_ctx.Lnki().File_wkr_(null);	// NOTE: set file_wkr to null, else items will be double-counted
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_tmpl);
-		Xop_parser tmp_parser = new Xop_parser(wiki, wiki.Parser().Tmpl_lxr_mgr(), wiki.Parser().Wtxt_lxr_mgr());
+		Xop_parser tmp_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
 		Xop_root_tkn rv = tmp_ctx.Tkn_mkr().Root(wikitext);
 		tmp_parser.Parse_text_to_wdom(rv, tmp_ctx, tmp_ctx.Tkn_mkr(), wikitext, Xop_parser_.Doc_bgn_bos);
 		return rv;

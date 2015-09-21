@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import org.junit.*; import gplx.core.primitives.*;
 import gplx.xowa.apis.xowa.html.modules.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.gui.views.*;
 public class Xow_popup_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();

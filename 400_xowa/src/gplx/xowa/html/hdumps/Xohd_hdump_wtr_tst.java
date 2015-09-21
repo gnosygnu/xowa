@@ -114,7 +114,7 @@ class Xodb_hdump_mgr__base_fxt {
 		if (fxt == null) {
 			fxt = new Xop_fxt();
 			wiki = fxt.Wiki();
-			page = wiki.Ctx().Cur_page();
+			page = wiki.Parser_mgr().Ctx().Cur_page();
 			hdump_wtr = new Xohd_hdump_wtr(fxt.App(), fxt.Wiki());
 		}
 		fxt.Reset();

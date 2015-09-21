@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
+import gplx.xowa.apps.gfss.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_bldr {
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private final Gfo_url_parser url_parser = new Gfo_url_parser(); private final Gfo_url url = new Gfo_url();
 	public Xow_xwiki_itm Bld(Xow_domain_itm cur_domain, byte[] key, byte[] mw_url, byte[] domain_name) {
-		byte[] xo_url = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, mw_url);			// EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
+		byte[] xo_url = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, mw_url);			// EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
 		url_parser.Parse(url, xo_url, 0, xo_url.length);
 		byte[] domain_bry = url.Segs__get_at_1st();											// extract "commons.wikimedia.org"
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);

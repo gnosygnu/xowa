@@ -76,6 +76,7 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public String						LoadFilStr(String url) {return LoadFilStr_args(Io_url_.new_fil_(url)).Exec();}
 	public String						LoadFilStr(Io_url url) {return LoadFilStr_args(url).Exec();}
 	public IoEngine_xrg_loadFilStr		LoadFilStr_args(Io_url url) {return IoEngine_xrg_loadFilStr.new_(url);}
+	public byte[]						LoadFilBryOrNull(Io_url url) {return ExistsFil(url) ? LoadFilBry(url) : null;}
 	public byte[]						LoadFilBry(String url) {return LoadFilBry_reuse(Io_url_.new_fil_(url), Bry_.Empty, Int_obj_ref.zero_());}
 	public byte[]						LoadFilBry(Io_url url) {return LoadFilBry_reuse(url, Bry_.Empty, Int_obj_ref.zero_());}
 	public void							LoadFilBryByBfr(Io_url url, Bry_bfr bfr) {

@@ -22,7 +22,7 @@ class Xob_css_parser__import {
 	private final Xob_css_parser__url url_parser;
 	public Xob_css_parser__import(Xob_css_parser__url url_parser) {this.url_parser = url_parser;}
 	public Xob_css_tkn__base Parse(byte[] src, int src_len, int tkn_bgn, int tkn_end) {	// " @import"
-		int bgn_pos = Bry_finder.Find_fwd_while_ws(src, tkn_end, src_len);	// skip any ws after " @import"
+		int bgn_pos = Bry_find_.Find_fwd_while_ws(src, tkn_end, src_len);	// skip any ws after " @import"
 		if (bgn_pos == src_len) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.import:EOS after import; bgn=~{0}", tkn_bgn);
 		if (!Bry_.Has_at_bgn(src, Tkn_url_bry, bgn_pos, src_len)) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.import:url missing; bgn=~{0}", tkn_bgn);
 		tkn_end = bgn_pos + Tkn_url_bry.length;
@@ -31,7 +31,7 @@ class Xob_css_parser__import {
 		Xob_css_tkn__url url_frag = (Xob_css_tkn__url)frag;
 		byte[] src_url = url_frag.Src_url();
 		src_url = Bry_.Replace(src_url, Byte_ascii.Space, Byte_ascii.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
-		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, frag.Pos_end(), src_len);
+		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, frag.Pos_end(), src_len);
 		return Xob_css_tkn__import.new_(tkn_bgn, semic_pos + 1, src_url, url_frag.Trg_url(), url_frag.Quote_byte());
 	}
 	private static final byte[] Tkn_url_bry = Bry_.new_a7("url(");

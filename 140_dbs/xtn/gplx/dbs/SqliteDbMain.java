@@ -228,7 +228,7 @@ public class SqliteDbMain {
 			stmt.setInt(3, Bry_.new_a7(flds[3])[0] - 32);
 			byte[] orig = Bry_.new_a7(flds[4]);
 			int orig_mode = orig[0] - Byte_ascii.Num_0;
-			int comma_pos = Bry_finder.Find_fwd(orig, Byte_ascii.Comma);
+			int comma_pos = Bry_find_.Find_fwd(orig, Byte_ascii.Comma);
 			int orig_w = Bry_.To_int_or(orig, 2, comma_pos, -1);
 			int orig_h = Bry_.To_int_or(orig, comma_pos + 1, orig.length, -1);
 			stmt.setInt(4, orig_mode);			

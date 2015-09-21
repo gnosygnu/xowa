@@ -54,7 +54,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		f += (data[fld_bgn + 16] - Byte_ascii.Num_0) *  100;
 		f += (data[fld_bgn + 17] - Byte_ascii.Num_0) *   10;
 		f += (data[fld_bgn + 18] - Byte_ascii.Num_0);
-		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8_by_len(data, fld_bgn, 20));
+		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8__by_len(data, fld_bgn, 20));
 		fld_end = pos + 20;
 		pos = fld_end + 1; ++fld_idx;
 		return DateAdp_.new_(y, M, d, H, m, s, f);

@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.consoles.*; import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
-import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.gfss.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
 import gplx.xowa.files.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.gui.views.boots.*;
-import gplx.xowa.urls.encoders.*;
+import gplx.langs.htmls.encoders.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
 		try {
@@ -58,7 +58,7 @@ public class Xoa_app_ {
 		}
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.9.2.1";
+	public static final String Version = "2.9.3.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys_str;
 	public static String User_agent = "";
@@ -125,6 +125,8 @@ class Xoa_app_boot_mgr {
 			,	App_cmd_arg.opt_("server_port_send").Example_("55001").Note_("applies to --app_mode server; port where xowa server will send messages; clients should listen for messages from this port")
 			,	App_cmd_arg.opt_("http_server_port").Example_("8080").Note_("applies to --app_mode http_server; port used by http_server; default is 8080")
 			,	App_cmd_arg.opt_("http_server_home").Example_("home/wiki/Main_Page").Note_("applies to --app_mode http_server; default home page for root address. EX: navigating to localhost:8080 will navigate to localhost:8080/home/wiki/Main_Page")
+			,	App_cmd_arg.opt_("http_server.max_clients").Example_("15").Note_("applies to --app_mode http_server; limits maximum number of concurrent connections; default is 0 (no limit)")
+			,	App_cmd_arg.opt_("http_server.max_clients_timeout").Example_("50").Note_("applies to --app_mode http_server; time in milliseconds to wait before checking again to see if a connection is free; default is 50 (wait 50 ms)")
 			,	App_cmd_arg.sys_header_("show_license").Dflt_(true)
 			,	App_cmd_arg.sys_args_("show_args").Dflt_(true)
 			,	App_cmd_arg.sys_help_()
@@ -163,6 +165,8 @@ class Xoa_app_boot_mgr {
 			int server_port_send = args_mgr.Args_get("server_port_send").Val_as_int_or(55001);
 			int http_server_port = args_mgr.Args_get("http_server_port").Val_as_int_or(8080);
 			String http_server_home = args_mgr.Args_get("http_server_home").Val_as_str_or("home/wiki/Main_Page");
+			int http_server_max_clients = args_mgr.Args_get("http_server.max_clients").Val_as_int_or(0);
+			int http_server_max_clients_timeout = args_mgr.Args_get("http_server.max_clients_timeout").Val_as_int_or(50);
 			Xoa_app_.Op_sys_str = args_mgr.Args_get("bin_dir_name").Val_as_str_or(Bin_dir_name());
 			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys_str);
 			String cmd_text = args_mgr.Args_get("cmd_text").Val_as_str_or(null);
@@ -179,8 +183,10 @@ class Xoa_app_boot_mgr {
 				if (launch_url != null)
 					app.Api_root().App().Startup().Tabs().Manual_(launch_url);
 				app.Tcp_server().Rdr_port_(server_port_recv).Wtr_port_(server_port_send);
-				app.Http_server().Port_(http_server_port);
-				app.Http_server().Home_(http_server_home);
+				gplx.xowa.servers.http.Http_server_mgr server_mgr = app.Http_server();
+				server_mgr.Port_(http_server_port);
+				server_mgr.Home_(http_server_home);
+				server_mgr.Wkr_pool().Init(http_server_max_clients, http_server_max_clients_timeout);
 				app.Init_by_app(); chkpoint = "init_gfs";
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx_full(e));}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.regxs.*; import gplx.intl.*;
+import gplx.langs.regxs.*; import gplx.core.intls.*;
 import gplx.xowa.parsers.*;
 public class Scrib_lib_ustring implements Scrib_lib {
 	private final String_surrogate_utl surrogate_utl = new String_surrogate_utl();

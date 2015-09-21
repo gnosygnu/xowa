@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
-import gplx.core.regxs.*;
+import gplx.langs.regxs.*;
 public class RegxPatn_cls_ioMatch {
 	public String Raw() {return raw;} private String raw;
 	public boolean CaseSensitive() {return caseSensitive;} private boolean caseSensitive;

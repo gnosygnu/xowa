@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.html.hrefs.*;
-import gplx.xowa.apps.langs.*;
+import gplx.xowa.langs.cfgs.*;
 public class Xow_lang_mgr {
 	Xow_lang_mgr() {
 		int len = Xol_lang_itm_.Id__max;
@@ -79,7 +79,7 @@ public class Xow_lang_mgr {
 			byte[] ttl_bry = ttl.Page_txt_w_anchor();
 			boolean empty_xwiki = false;
 			if (Bry_.Len_eq_0(ttl_bry)) {
-				ttl_bry = wiki.Ctx().Cur_page().Ttl().Page_txt();
+				ttl_bry = wiki.Parser_mgr().Ctx().Cur_page().Ttl().Page_txt();
 				empty_xwiki = true;
 			}			
 			itm.Atrs_set(ttl_bry, empty_xwiki, slink.Badges());

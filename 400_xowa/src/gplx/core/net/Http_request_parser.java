@@ -64,7 +64,7 @@ public class Http_request_parser {
 					server_wtr.Write_str_w_nl(String_.Format("http.request.parser; unknown line; line={0} request={1}", line_str, To_str()));
 					continue;
 				}
-				int val_bgn = Bry_finder.Find_fwd_while_ws(line, trie.Match_pos(), line_len);	// skip ws after key; EX: "Host: "
+				int val_bgn = Bry_find_.Find_fwd_while_ws(line, trie.Match_pos(), line_len);	// skip ws after key; EX: "Host: "
 				int tid = ((Int_obj_val)o).Val();
 				switch (tid) {
 					case Tid_get:
@@ -91,7 +91,7 @@ public class Http_request_parser {
 		}
 	}
 	private void Parse_type(int tid, int val_bgn, byte[] line, int line_len) {	// EX: "POST /xowa-cmd:exec_as_json HTTP/1.1"
-		int url_end = Bry_finder.Find_bwd(line, Byte_ascii.Space, line_len); if (url_end == Bry_finder.Not_found) throw Err_.new_wo_type("invalid protocol", "line", line, "request", To_str());
+		int url_end = Bry_find_.Find_bwd(line, Byte_ascii.Space, line_len); if (url_end == Bry_find_.Not_found) throw Err_.new_wo_type("invalid protocol", "line", line, "request", To_str());
 		switch (tid) {
 			case Tid_get	: this.type = Http_request_itm.Type_get; break;
 			case Tid_post	: this.type = Http_request_itm.Type_post; break;
@@ -102,8 +102,8 @@ public class Http_request_parser {
 	}
 	private void Parse_content_type(int val_bgn, byte[] line, int line_len) {	// EX: Content-Type: multipart/form-data; boundary=---------------------------72432484930026
 		// handle wolfram and other clients; DATE:2015-08-03
-		int boundary_bgn = Bry_finder.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_finder.Not_found) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
-		int content_type_end = Bry_finder.Find_bwd(line, Byte_ascii.Semic, boundary_bgn);
+		int boundary_bgn = Bry_find_.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_find_.Not_found) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
+		int content_type_end = Bry_find_.Find_bwd(line, Byte_ascii.Semic, boundary_bgn);
 		this.content_type = Bry_.Mid(line, val_bgn, content_type_end);
 		this.content_type_boundary = Bry_.Add(Tkn_content_type_boundary_end, Bry_.Mid(line, boundary_bgn += Tkn_boundary.length, line_len));
 	}
@@ -142,7 +142,7 @@ public class Http_request_parser {
 		int tkn_len = tkn.length;
 		if (!Bry_.Match(src, src_pos, src_pos + tkn_len, tkn)) throw Err_.new_wo_type("http.request.parser; invalid form_data line", "tkn", tkn, "line", src, "request", To_str());
 		int rv = src_pos += tkn_len;
-		return Bry_finder.Find_fwd_while_ws(src, rv, src_len);
+		return Bry_find_.Find_fwd_while_ws(src, rv, src_len);
 	}
 	private String To_str() {return Make_request_itm().To_str(tmp_bfr, Bool_.N);}
 	private static final int Tid_get = 1, Tid_post = 2, Tid_host = 3, Tid_user_agent = 4, Tid_accept = 5, Tid_accept_language = 6, Tid_accept_encoding = 7, Tid_dnt = 8

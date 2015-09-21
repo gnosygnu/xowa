@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.core.primitives.*;
+import gplx.xowa.langs.*;
 class Xows_text_parser__v1 {
 	private Xol_lang lang; private Bry_bfr bfr = Bry_bfr.new_(255);
 	private final Ordered_hash list = Ordered_hash_.new_bry_();

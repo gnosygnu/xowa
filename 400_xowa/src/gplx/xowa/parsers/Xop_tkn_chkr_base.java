@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+import gplx.core.tests.*;
 public class Xop_tkn_chkr_base implements Tst_chkr {
 	@gplx.Virtual public Class<?> TypeOf() {return Xop_tkn_itm.class;}
 	@gplx.Virtual public byte Tkn_tid() {return Byte_.Max_value_127;}

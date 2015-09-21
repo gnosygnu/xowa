@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.ios.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 class Wdata_idx_wtr {
 	public Wdata_idx_wtr(Io_url dump_dir, int dump_fil_max, Io_url make_dir) {
 		this.dump_dir = dump_dir;

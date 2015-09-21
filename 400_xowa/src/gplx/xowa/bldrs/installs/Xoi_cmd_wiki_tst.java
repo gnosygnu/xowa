@@ -20,11 +20,11 @@ import org.junit.*;
 import gplx.core.consoles.*;
 import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.dumps.*;
+import gplx.xowa.wms.*; import gplx.xowa.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
-//			Bld_import_list(Xow_wmf_api_mgr.Wikis);
-//			Bld_cfg_files(Xow_wmf_api_mgr.Wikis);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
+//			Bld_import_list(Xow_domain_regy.All);
+//			Bld_cfg_files(Xow_domain_regy.All);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
 	}
 	public void Bld_import_list(String... ary) {
 		int ary_len = ary.length;

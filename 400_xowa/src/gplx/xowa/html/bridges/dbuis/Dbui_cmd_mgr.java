@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.bridges.dbuis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.bridges.*;
-import gplx.core.json.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.langs.jsons.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
 public class Dbui_cmd_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	private boolean init;
@@ -34,7 +34,7 @@ public class Dbui_cmd_mgr {
 	public String Save(Json_nde data)	{return Get_tbl(data).Save(data.Get_bry(Arg_row_id), data.Get_bry(Arg_row_pkey), To_hash(data.Get(Arg_vals)));}
 	public String Reorder(Json_nde data){
 		byte[] pkeys_concat = data.Get_bry(Arg_pkeys);
-		return Get_tbl(data).Reorder(Bry_.Split(pkeys_concat, Byte_ascii.Pipe), -1);
+		return Get_tbl(data).Reorder(Bry_split_.Split(pkeys_concat, Byte_ascii.Pipe), -1);
 	}
 	private Dbui_tbl_itm Get_tbl(Json_nde data) {
 		byte[] tbl_key = data.Get_bry(Arg_tbl_key);

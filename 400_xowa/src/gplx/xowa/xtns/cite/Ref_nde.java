@@ -45,7 +45,7 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (ctx.Tid_is_popup()) return;
 		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
-			body = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
+			body = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		byte[] references_group = ctx.References_group();	// set by <references>
 		if (references_group != null) {
 			group = references_group;		// override <ref group> with <references group>; note that MW throws an error if nested <ref> has different group than outer <references>; Cite error: <ref> tag in <references> has conflicting group attribute "a".

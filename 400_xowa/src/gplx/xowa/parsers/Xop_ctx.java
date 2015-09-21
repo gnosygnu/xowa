@@ -16,37 +16,39 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.lst.*;
+import gplx.core.btries.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.gui.*; import gplx.xowa.xtns.lst.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.html.modules.popups.keeplists.*;
 public class Xop_ctx {
 	private Xop_ctx_wkr[] wkrs = new Xop_ctx_wkr[] {};
 	Xop_ctx(Xowe_wiki wiki, Xoae_page page) {
-		this.app = wiki.Appe(); this.msg_log = app.Msg_log();
-		this.wiki = wiki; this.cur_page = page;
+		this.app = wiki.Appe(); this.msg_log = app.Msg_log(); this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
+		this.wiki = wiki; this.cur_page = page; this.lang = wiki.Lang();
 		this.wkrs = new Xop_ctx_wkr[] {para, apos, xnde, list, lnki, hdr, amp, lnke, tblw, invk};
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Ctor_ctx(this);
 		this.xnde_tag_regy = wiki.Mw_parser_mgr().Xnde_tag_regy();
 	}
-	public Xoae_app				App()				{return app;} private Xoae_app app;
-	public Xowe_wiki			Wiki()				{return wiki;} private Xowe_wiki wiki;
-	public Xol_lang				Lang()				{return wiki.Lang();}
-	public Xop_tkn_mkr			Tkn_mkr()			{return app.Tkn_mkr();}
+	public Xoae_app				App()				{return app;} private final Xoae_app app;
+	public Xowe_wiki			Wiki()				{return wiki;} private final Xowe_wiki wiki;
+	public Xol_lang				Lang()				{return lang;} private final Xol_lang lang;
+	public Xop_tkn_mkr			Tkn_mkr()			{return tkn_mkr;} private final Xop_tkn_mkr tkn_mkr;
 	public Xoae_page			Cur_page()			{return cur_page;} public void Cur_page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_.Parse_tid_null;
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_.Parse_tid_null;
-	public Xop_amp_wkr			Amp()				{return amp;}	private Xop_amp_wkr  amp  = new Xop_amp_wkr();
-	public Xop_apos_wkr			Apos()				{return apos;}	private Xop_apos_wkr apos = new Xop_apos_wkr();
-	public Xop_lnke_wkr			Lnke()				{return lnke;}	private Xop_lnke_wkr lnke = new Xop_lnke_wkr();
-	public Xop_lnki_wkr			Lnki()				{return lnki;}	private Xop_lnki_wkr lnki = new Xop_lnki_wkr();
-	public Xop_hdr_wkr			Hdr()				{return hdr;}	private Xop_hdr_wkr  hdr  = new Xop_hdr_wkr();
-	public Xop_para_wkr			Para()				{return para;}	private Xop_para_wkr para = new Xop_para_wkr();
-	public Xop_list_wkr			List()				{return list;}	private Xop_list_wkr list = new Xop_list_wkr();
-	public Xop_tblw_wkr			Tblw()				{return tblw;}	private Xop_tblw_wkr tblw = new Xop_tblw_wkr();
-	public Xop_xnde_wkr			Xnde()				{return xnde;}	private Xop_xnde_wkr xnde = new Xop_xnde_wkr();
-	public Xot_invk_wkr			Invk()				{return invk;}	private Xot_invk_wkr invk = new Xot_invk_wkr();
-	public Xop_curly_wkr		Curly() 			{return curly;} private Xop_curly_wkr curly = new Xop_curly_wkr();
+	public Xop_amp_wkr			Amp()				{return amp;}	private final Xop_amp_wkr  amp  = new Xop_amp_wkr();
+	public Xop_apos_wkr			Apos()				{return apos;}	private final Xop_apos_wkr apos = new Xop_apos_wkr();
+	public Xop_lnke_wkr			Lnke()				{return lnke;}	private final Xop_lnke_wkr lnke = new Xop_lnke_wkr();
+	public Xop_lnki_wkr			Lnki()				{return lnki;}	private final Xop_lnki_wkr lnki = new Xop_lnki_wkr();
+	public Xop_hdr_wkr			Hdr()				{return hdr;}	private final Xop_hdr_wkr  hdr  = new Xop_hdr_wkr();
+	public Xop_para_wkr			Para()				{return para;}	private final Xop_para_wkr para = new Xop_para_wkr();
+	public Xop_list_wkr			List()				{return list;}	private final Xop_list_wkr list = new Xop_list_wkr();
+	public Xop_tblw_wkr			Tblw()				{return tblw;}	private final Xop_tblw_wkr tblw = new Xop_tblw_wkr();
+	public Xop_xnde_wkr			Xnde()				{return xnde;}	private final Xop_xnde_wkr xnde = new Xop_xnde_wkr();
+	public Xot_invk_wkr			Invk()				{return invk;}	private final Xot_invk_wkr invk = new Xot_invk_wkr();
+	public Xop_curly_wkr		Curly() 			{return curly;} private final Xop_curly_wkr curly = new Xop_curly_wkr();
 	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
 
 	public boolean					Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
@@ -264,18 +266,18 @@ public class Xop_ctx {
 		int src_len = src.length;
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_newLine: break;	// NOOP: just a marker
-			case Xop_tkn_itm_.Tid_list: list.AutoClose(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
+			case Xop_tkn_itm_.Tid_list: list.AutoClose(this, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, tkn); break;
 			case Xop_tkn_itm_.Tid_xnde: xnde.AutoClose(this, root, src, src_len, bgn_pos, cur_pos, tkn, closing_tkn_tid); break;
 			case Xop_tkn_itm_.Tid_apos: apos.AutoClose(this, src, src_len, bgn_pos, cur_pos, tkn); break;
 			case Xop_tkn_itm_.Tid_lnke: lnke.AutoClose(this, src, src_len, bgn_pos, cur_pos, tkn); break;
-			case Xop_tkn_itm_.Tid_hdr:  hdr.AutoClose(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
+			case Xop_tkn_itm_.Tid_hdr:  hdr.AutoClose(this, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, tkn); break;
 			case Xop_tkn_itm_.Tid_tblw_tb:
 			case Xop_tkn_itm_.Tid_tblw_tr:
 			case Xop_tkn_itm_.Tid_tblw_td:
 			case Xop_tkn_itm_.Tid_tblw_th:
 			case Xop_tkn_itm_.Tid_tblw_tc: tblw.AutoClose(this, root, src, src_len, bgn_pos, cur_pos, tkn); break;
-			case Xop_tkn_itm_.Tid_lnki: lnki.Auto_close(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
-			case Xop_tkn_itm_.Tid_pre: para.AutoClose(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
+			case Xop_tkn_itm_.Tid_lnki: lnki.Auto_close(this, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, tkn); break;
+			case Xop_tkn_itm_.Tid_pre: para.AutoClose(this, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, tkn); break;
 		}
 	}
 	public void Stack_pop_idx(int tilIdx) {
@@ -304,9 +306,9 @@ public class Xop_ctx {
 		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.new_(wiki, Xoa_ttl.parse(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
 		return rv;
 	}
-	public static Xop_ctx new_sub_(Xowe_wiki wiki) {return new_sub_(wiki, wiki.Ctx().cur_page);}
+	public static Xop_ctx new_sub_(Xowe_wiki wiki) {return new_sub_(wiki, wiki.Parser_mgr().Ctx().cur_page);}
 	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
-		Xop_ctx ctx = wiki.Ctx();
+		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		Xop_ctx rv = new Xop_ctx(wiki, page);
 		new_copy(ctx, rv);
 		return rv;

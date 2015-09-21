@@ -102,7 +102,7 @@ public class Gfui_bnd_parser {
 		if (is_numeric) {	// EX: "key.#10" or "#10"
 			int tkn_bgn = itm_bgn;
 			if (src_is_gfui) {	// remove "key." in "key.#10"
-				tkn_bgn = Bry_finder.Move_fwd(src, Byte_ascii.Dot, itm_bgn, itm_end);
+				tkn_bgn = Bry_find_.Move_fwd(src, Byte_ascii.Dot, itm_bgn, itm_end);
 				if (tkn_bgn == -1) throw Err_.new_wo_type("invalid keycode.dot", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 				++tkn_bgn;		// skip #
 			}

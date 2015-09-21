@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.core.primitives.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_claims_parser_v2 {
 	public void Make_claim_itms(byte[] qid, List_adp claim_itms_list, byte[] src, Json_kv claim_grp) {
 		Json_ary claim_itms_ary = Json_ary.cast_or_null(claim_grp.Val());

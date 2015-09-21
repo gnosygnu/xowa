@@ -16,11 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_pre_lxr implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_pre;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_pre;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_space, this);}	// NOTE: do not treat \n\t as shorthand pre; EX:pl.w:Main_Page; DATE:2014-05-06
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (	!ctx.Para().Enabled()					// para disabled; "\n\s" should just be "\n\s"; NOTE: para disabled in <gallery>
 			||	(	ctx.Stack_len() > 0					// bounds check
@@ -32,7 +34,7 @@ public class Xop_pre_lxr implements Xop_lxr {
 			ctx.Subs_add(root, tkn_mkr.Space(root, cur_pos - 1, cur_pos));
 			return cur_pos;
 		}
-		int txt_pos = Bry_finder.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Space);	// NOTE: was Find_fwd_while_tab_or_space, which incorrectly converted tabs to spaces; PAGE:en.w:Cascading_Style_Sheets; DATE:2014-06-23
+		int txt_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Space);	// NOTE: was Find_fwd_while_tab_or_space, which incorrectly converted tabs to spaces; PAGE:en.w:Cascading_Style_Sheets; DATE:2014-06-23
 		if (txt_pos == src_len) return cur_pos;			// "\n\s" at EOS; treat as \n only; EX: "a\n   " -> ""; also bounds check
 		byte b = src[txt_pos];
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) {		// BOS; gobble up all \s\t; EX: "BOS\s\s\sa" -> "BOSa"
@@ -51,9 +53,9 @@ public class Xop_pre_lxr implements Xop_lxr {
 				break;
 			case Xop_tkn_itm_.Tid_list:					// close all lists unless [[Category]]; SEE:NOTE_4; rewritten; DATE:2015-03-31
 				boolean close_all_lists = true;
-				if (Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_bgn, txt_pos, src_len) == txt_pos) {		// look for "[["
+				if (Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_bgn, txt_pos, src_len) == txt_pos) {		// look for "[["
 					int tmp_pos = txt_pos + Xop_tkn_.Lnki_bgn.length;
-					if (Bry_finder.Find_fwd(src, ctx.Wiki().Ns_mgr().Ns_category().Name_db_w_colon(), tmp_pos, src_len) == tmp_pos)	// look for "Category:"
+					if (Bry_find_.Find_fwd(src, ctx.Wiki().Ns_mgr().Ns_category().Name_db_w_colon(), tmp_pos, src_len) == tmp_pos)	// look for "Category:"
 						close_all_lists = false;		// "[[Category:" found; "\n\s[[Category:" should not close list; note that [[Category]] is invisible
 				}
 				if (close_all_lists)

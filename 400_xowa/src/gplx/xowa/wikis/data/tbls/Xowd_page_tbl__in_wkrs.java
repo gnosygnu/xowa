@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.xowa.nss.*;
 class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 	private Xow_ns_mgr ns_mgr; private Ordered_hash hash;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; PAGE:en.w:Space_Liability_Convention; DATE:2013-10-24

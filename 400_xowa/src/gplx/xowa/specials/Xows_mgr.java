@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
 import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.diags.*;
@@ -71,13 +72,13 @@ public class Xows_mgr {
 		hash.Add_str_obj(Xows_special_meta_.Key__diag					, page_diag);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		int slash_pos = Bry_finder.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
+		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
 		byte[] special_name = slash_pos == Bry_.NotFound
 				? ttl.Base_txt_wo_qarg()							// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
 				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
 		Object o = hash.Get_by_bry(special_name);
 		if (o == null) {
-			gplx.xowa.Xol_specials_itm special_itm = wiki.Lang().Specials_mgr().Get_by_alias(special_name);
+			Xol_specials_itm special_itm = wiki.Lang().Specials_mgr().Get_by_alias(special_name);
 			if (special_itm != null)
 				o = hash.Get_by_bry(special_itm.Special());
 		}

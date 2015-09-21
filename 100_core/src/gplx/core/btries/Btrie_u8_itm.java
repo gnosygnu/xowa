@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 class Btrie_u8_itm {
 	private Hash_adp_bry nxts;
 	private byte[] asymmetric_bry;
@@ -40,8 +40,8 @@ class Btrie_u8_itm {
 		else {																		// itm has asymmetric_bry; EX: "İ" was added to trie, must match "İ" and "i"; 
 			if (called_by_match) {													// called by mgr.Match
 				return
-					(	Bry_.Eq(rv.key, src, c_bgn, c_end)							// key matches src;				EX: "aİ"
-					||	Bry_.Eq(rv.asymmetric_bry, src, c_bgn, c_end)				// asymmetric_bry matches src;	EX: "ai"; note that "aI" won't match
+					(	Bry_.Eq(src, c_bgn, c_end, rv.key)						// key matches src;				EX: "aİ"
+					||	Bry_.Eq(src, c_bgn, c_end, rv.asymmetric_bry)				// asymmetric_bry matches src;	EX: "ai"; note that "aI" won't match
 					)
 					? rv : null;
 			}

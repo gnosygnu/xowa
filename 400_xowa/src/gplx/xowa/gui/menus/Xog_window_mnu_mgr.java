@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
+import gplx.xowa.langs.*;
 public class Xog_window_mnu_mgr implements GfoInvkAble {
 	private Ordered_hash hash = Ordered_hash_.new_();
 	public Xog_mnu_grp Browser() {return browser;} private Xog_mnu_grp browser;

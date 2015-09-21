@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
 import gplx.ios.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.html.js.*;
 class Http_server_wkr_v2 implements GfoInvkAble {
+	private final int uid;
+	private final Http_server_mgr server_mgr;
 	private final Http_server_wtr server_wtr;
 	private final Http_client_wtr client_wtr = Http_client_wtr_.new_stream();
 	private final Http_client_rdr client_rdr = Http_client_rdr_.new_stream();
@@ -32,7 +34,8 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
-	public Http_server_wkr_v2(Http_server_mgr server_mgr){
+	public Http_server_wkr_v2(Http_server_mgr server_mgr, int uid){
+		this.server_mgr = server_mgr; this.uid = uid;
 		this.app = server_mgr.App(); this.server_wtr = server_mgr.Server_wtr(); this.url_encoder = server_mgr.Encoder();
 		this.root_dir_http = app.Fsys_mgr().Root_dir().To_http_file_str();
 		this.root_dir_fsys = Bry_.new_u8(app.Fsys_mgr().Root_dir().Raw());
@@ -60,6 +63,10 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 			String request_str = request == null ? "<<NULL>>" : request.To_str(tmp_bfr, Bool_.N);
 			server_wtr.Write_str_w_nl(String_.Format("failed to process request;\nrequest={0}\nerr_msg={1}", request_str, Err_.Message_gplx_full(e)));
 		}
+		finally {
+			server_mgr.Wkr_pool().Del(uid);
+			server_mgr.Uid_pool().Del(uid);
+		}
 	}
 	private void Process_get(Http_request_itm request, byte[] url) {
 		server_wtr.Write_str_w_nl(String_.new_u8(request.Host()) + "|GET|" + String_.new_u8(request.Url()));	// use request url
@@ -70,9 +77,9 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	}
 	private void Serve_file(byte[] url) {
 		tmp_bfr.Clear().Add(root_dir_fsys);	// add "C:\xowa\"
-		int question_pos = Bry_finder.Find_fwd(url, Byte_ascii.Question);
+		int question_pos = Bry_find_.Find_fwd(url, Byte_ascii.Question);
 		int url_bgn = Bry_.Has_at_bgn(url, Url__fsys) ? Url__fsys_len : 0;	// most files will have "/fsys/" at start, but Mathjax will not
-		int url_end = question_pos == Bry_finder.Not_found ? url.length : question_pos;	// ignore files with query params; EX: /file/A.png?key=val
+		int url_end = question_pos == Bry_find_.Not_found ? url.length : question_pos;	// ignore files with query params; EX: /file/A.png?key=val
 		url_encoder.Decode(url, url_bgn, url_end, tmp_bfr, false);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
 		byte[] path = tmp_bfr.Xto_bry_and_clear();
 		client_wtr.Write_bry(Xosrv_http_wkr_.Rsp__http_ok);
@@ -171,8 +178,8 @@ class Xosrv_http_wkr_ {
 }
 class Http_file_utl {
 	public static byte[] To_mime_type_by_path_as_bry(byte[] path_bry) {
-		int dot_pos = Bry_finder.Find_bwd(path_bry, Byte_ascii.Dot);
-		return dot_pos == Bry_finder.Not_found ? Mime_octet_stream : To_mime_type_by_ext_as_bry(path_bry, dot_pos, path_bry.length);
+		int dot_pos = Bry_find_.Find_bwd(path_bry, Byte_ascii.Dot);
+		return dot_pos == Bry_find_.Not_found ? Mime_octet_stream : To_mime_type_by_ext_as_bry(path_bry, dot_pos, path_bry.length);
 	}
 	public static byte[] To_mime_type_by_ext_as_bry(byte[] ext_bry, int bgn, int end) {
 		Object o = mime_hash.Get_by_mid(ext_bry, bgn, end);

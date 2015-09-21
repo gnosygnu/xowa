@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.urls; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.nss.*;
 public class Xoa_url_parser__xwiki_tst {
 	private final Xoa_url_parser_fxt tstr = new Xoa_url_parser_fxt();
 	@Test  public void Commons() {	// PURPOSE: "C" was being picked up as an xwiki to commons; PAGE:no.b:C/Variabler; DATE:2014-10-14
@@ -70,5 +70,11 @@ public class Xoa_url_parser__xwiki_tst {
 		tstr.Prep_get_ns_mgr_from_meta("sv.wikipedia.org").Add_new(Xow_ns_.Id_project, "Wikipedia");
 		tstr.Run_parse(xwiki, "sv.wikipedia.org/wiki/wikipedia:X").Chk_wiki("sv.wikipedia.org").Chk_page("wikipedia:X");
 		tstr.Run_parse(xwiki, "sv.wikipedia.org/wiki/Wikipedia:X").Chk_wiki("sv.wikipedia.org").Chk_page("Wikipedia:X");
+	}
+	@Test  public void Xwiki__to_ns() {	// PURPOSE: handle alias of "wikipedia" in current, but no "Wikipedia" ns in other wiki; PAGE:pt.w:Wikipedia:P�gina_de_testes DATE:2015-09-17
+		tstr.Prep_create_wiki("pt.wikipedia.org");
+		tstr.Prep_get_ns_mgr_from_meta("pt.wikipedia.org").Add_new(Xow_ns_.Id_project, "Project");	// clear ns_mgr and add only "Project" ns, not "Wikipedia" ns
+		tstr.Prep_xwiki(tstr.Wiki(), "wikipedia", "en.wikipedia.org", null);	// add alias of "wikipedia" in current wiki
+		tstr.Run_parse(tstr.Wiki(), "pt.wikipedia.org/wiki/Wikipedia:X").Chk_wiki("pt.wikipedia.org").Chk_page("Wikipedia:X");	// should get "pt.wikipedia.org", not "en.wikipedia.org" (through alias)
 	}
 }

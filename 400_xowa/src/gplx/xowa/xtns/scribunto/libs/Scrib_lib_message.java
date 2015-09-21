@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.primitives.*; import gplx.html.*;
+import gplx.core.primitives.*; import gplx.langs.htmls.*;
+import gplx.xowa.apps.gfss.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
 public class Scrib_lib_message implements Scrib_lib {
 	public Scrib_lib_message(Scrib_core core) {this.core = core;} private Scrib_core core;
@@ -102,7 +104,7 @@ class Scrib_lib_message_data {
 		if (raw_msg_key != null) {
 			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-			byte[] raw_msg_val = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, raw_msg_key);
+			byte[] raw_msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, raw_msg_key);
 			Xol_msg_itm_.update_val_(raw_msg_itm, raw_msg_val);
 			byte[] raw_msg_rv = wiki.Msg_mgr().Val_by_itm(tmp_bfr, raw_msg_itm, args);
 			tmp_bfr.Mkr_rls();
@@ -133,7 +135,7 @@ class Scrib_lib_message_data {
 			&&	raw_msg_key == null		// ignore if raw_msg; note that raw_msg can generate empty String; EX:raw_msg={{empty}} -> ""; PAGE:it.w:L'Internazionale DATE:2015-02-25
 			) {	
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			bfr.Add(gplx.html.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.html.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
+			bfr.Add(gplx.langs.htmls.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
 			return bfr.To_bry_and_rls();
 		}
 		switch (fmt_tid) {
@@ -145,7 +147,7 @@ class Scrib_lib_message_data {
 				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).To_bry_and_rls();
 				break;
 			case Fmt_tid_escaped:
-				msg_val = gplx.html.Html_utl.Escape_html_as_bry(msg_val);
+				msg_val = gplx.langs.htmls.Html_utl.Escape_html_as_bry(msg_val);
 				break;
 		}
 		return msg_val;

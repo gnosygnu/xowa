@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*;
-import gplx.xowa.wmfs.dumps.*;
+import gplx.xowa.wms.dumps.*;
 public class Xoi_dump_mgr implements GfoInvkAble {
 	public String[] Server_urls() {return server_urls;} private String[] server_urls = String_.Ary(Xowm_dump_file_.Server_wmf_https, Xowm_dump_file_.Server_your_org, Xowm_dump_file_.Server_c3sl, Xowm_dump_file_.Server_masaryk);
 	public String[] Custom_cmds() {return custom_cmds;} private String[] custom_cmds = String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);

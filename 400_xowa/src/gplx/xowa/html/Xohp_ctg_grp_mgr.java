@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.langs.*;
 public class Xohp_ctg_grp_mgr {
 	final Bry_fmtr grp_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	"<div id=\"catlinks\" class=\"catlinks\">"

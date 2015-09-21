@@ -30,6 +30,7 @@ public class Bit_ {
 		rv[i] = bits[i] ? Byte_ascii.Num_1 : Byte_ascii.Num_0;
     		return String_.new_a7(rv);
 	}
+	public static int Get_flag(int i) {return Base2_ary[i];}
 	public static int[] Bld_pow_ary(int... seg_ary) {
 		int seg_ary_len = seg_ary.length;
 		int pow = 0;

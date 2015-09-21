@@ -43,7 +43,7 @@ public class String_ implements GfoInvkAble {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
 	}
-	public static String new_u8_by_len(byte[] v, int bgn, int len)	{
+	public static String new_u8__by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
 		if (bgn + len > v_len) len = v_len - bgn;
 		return new_u8(v, bgn, bgn + len);

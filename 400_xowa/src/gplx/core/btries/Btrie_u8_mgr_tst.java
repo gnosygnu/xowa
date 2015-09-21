@@ -45,9 +45,9 @@ public class Btrie_u8_mgr_tst {
 	}
 	@Test  public void Uft8_asymmetric() {
 		fxt.Init_add(Bry_.new_u8("İ")	, "1");
-		fxt.Test_match("İ"	, "1");				// exact=y; İ = Bry_.ints_(196,176)
-		fxt.Test_match("i"	, "1");				// lower=y; i = Bry_.ints_(105)
-		fxt.Test_match("I"	, null);			// upper=n; I = Bry_.ints_( 73); see Btrie_u8_itm and rv.asymmetric_bry
+		fxt.Test_match("İ"	, "1");				// exact=y; İ = Bry_.new_ints(196,176)
+		fxt.Test_match("i"	, "1");				// lower=y; i = Bry_.new_ints(105)
+		fxt.Test_match("I"	, null);			// upper=n; I = Bry_.new_ints( 73); see Btrie_u8_itm and rv.asymmetric_bry
 
 		fxt.Clear();
 		fxt.Init_add(Bry_.new_u8("i")	, "1");

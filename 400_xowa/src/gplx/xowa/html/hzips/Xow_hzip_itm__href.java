@@ -21,28 +21,28 @@ class Xow_hzip_itm__href {
 	public void Save(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos, byte bgn_quote) {
 //			// ignore anchors; EX: "#a"
 //			int proto_bgn	= pos;
-//			int proto_end	= Bry_finder.Find_fwd(src, Byte_ascii.Colon, proto_bgn, src_len);
+//			int proto_end	= Bry_find_.Find_fwd(src, Byte_ascii.Colon, proto_bgn, src_len);
 //			byte proto_tid	= Tid_proto_other;
-//			if (proto_end != Bry_finder.Not_found) {
+//			if (proto_end != Bry_find_.Not_found) {
 //				Object proto_obj = proto_trie.Match_exact(src, pos, proto_bgn);
 //				if (proto_obj != null)
 //					proto_tid = ((Byte_obj_val)proto_obj).Val();
-//				pos = Bry_finder.Find_fwd_while(src, proto_bgn + 1, src_len, Byte_ascii.Slash);	// eat /; EX: http:// should position after /
+//				pos = Bry_find_.Find_fwd_while(src, proto_bgn + 1, src_len, Byte_ascii.Slash);	// eat /; EX: http:// should position after /
 //			}
 //			// stats.Lnke_proto_reg(proto_tid, src, proto_bgn, proto_end);
 //
 //			int domain_bgn		= pos;
-//			int domain_end		= Bry_finder.Find_fwd(src, Byte_ascii.Slash, domain_bgn, src_len);
-//			if (domain_end == Bry_finder.Not_found)		// href has no slash; assume entire String is domain EX: "www.a.org"
-//				domain_end = Bry_finder.Find_fwd(src, bgn_quote, pos, src_len);
+//			int domain_end		= Bry_find_.Find_fwd(src, Byte_ascii.Slash, domain_bgn, src_len);
+//			if (domain_end == Bry_find_.Not_found)		// href has no slash; assume entire String is domain EX: "www.a.org"
+//				domain_end = Bry_find_.Find_fwd(src, bgn_quote, pos, src_len);
 //
-//			int tld_pos = Bry_finder.Find_bwd(src, Byte_ascii.Dot, domain_bgn, src_len);
+//			int tld_pos = Bry_find_.Find_bwd(src, Byte_ascii.Dot, domain_bgn, src_len);
 //			byte tld_tid = Tid_tld_other;
 //			if (tld_pos != Bry_.NotFound) {
 //				Object tld_obj = tld_trie.Match_exact(src, domain_bgn, domain_end);
 //				if (tld_obj != null)
 //					tld_tid = ((Byte_obj_val)tld_obj).Val();
-//				pos = Bry_finder.Find_fwd_while(src, domain_bgn + 1, src_len, Byte_ascii.Slash);	// eat /; EX: http:// should position after /
+//				pos = Bry_find_.Find_fwd_while(src, domain_bgn + 1, src_len, Byte_ascii.Slash);	// eat /; EX: http:// should position after /
 //			}
 //			// stats.Lnke_tld_reg(tld_tid, src, domain_bgn, domain_end);
 	}

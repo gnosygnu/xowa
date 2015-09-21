@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 class Scrib_lib_text__json_util {
 	private final Json_wtr wtr = new Json_wtr();
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, KeyVal[] kv_ary, boolean is_encoding) {

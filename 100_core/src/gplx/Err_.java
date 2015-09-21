@@ -36,6 +36,7 @@ public class Err_ {
 	public static Err new_parse_exc(Exception e, Class<?> c, String raw)	{return new_parse(Type_adp_.FullNameOf_type(c), raw).Args_add("e", Err_.Message_lang(e));}
 	public static Err new_parse(String type, String raw)							{return new Err(Bool_.Y, Trace_null, Type__gplx, "parse failed", "type", type, "raw", raw);}
 	public static Err new_null()													{return new Err(Bool_.Y, Trace_null, Type__gplx, "null obj");}
+	public static Err new_null(String arg)											{return new Err(Bool_.Y, Trace_null, Type__gplx, "null obj", "arg", arg);}
 	public static Err new_missing_idx(int idx, int len)								{return new Err(Bool_.Y, Trace_null, Type__gplx, "index is out of bounds", "idx", idx, "len", len);}
 	public static Err new_missing_key(String key)									{return new Err(Bool_.Y, Trace_null, Type__gplx, "key not found", "key", key);}
 	public static Err new_invalid_op(String msg)									{return new Err(Bool_.Y, Trace_null, Type__gplx, msg);}

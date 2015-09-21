@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*; import gplx.xowa.urls.*;
+import org.junit.*; import gplx.xowa.urls.*; import gplx.xowa.nss.*;
 public class Xoh_href_parser_tst {
 	private final Xoh_href_parser_fxt fxt = new Xoh_href_parser_fxt();
 	@Test   public void Wiki__basic() {

@@ -44,7 +44,7 @@ class Imap_desc_tid {
 	private static byte[][] Parse_lang_types(Xowe_wiki wiki) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj("imagemap_desc_types");
 		if (Bry_.Len_eq_0(val)) return null;					// no msg in lang; return;
-		byte[][] ary = Bry_.Split(val, Byte_ascii.Comma);		// msg is 5 words concatenated by comma: EX:top-right,bottom-right-bottom-left,top-left,none
+		byte[][] ary = Bry_split_.Split(val, Byte_ascii.Comma);		// msg is 5 words concatenated by comma: EX:top-right,bottom-right-bottom-left,top-left,none
 		int ary_len = ary.length;
 		if (ary_len != 5) wiki.Appe().Usr_dlg().Warn_many("", "", "imap_desc does not have 5 items; wiki=~{0} val=~{1}", wiki.Domain_bry(), val);
 		for (int i = 0; i < 5; ++i)

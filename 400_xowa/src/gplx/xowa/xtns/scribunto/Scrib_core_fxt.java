@@ -22,20 +22,20 @@ public class Scrib_core_fxt {
 	public Scrib_core_fxt(Xop_fxt fxt) {
 		app = fxt.App();
 		wiki = fxt.Wiki();
-		core = Scrib_core.Core_new_(app, wiki.Ctx());
+		core = Scrib_core.Core_new_(app, wiki.Parser_mgr().Ctx());
 	}
 	public Scrib_core_fxt Clear() {
 		if (core == null) {
 			app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			core = Scrib_core.Core_new_(app, wiki.Ctx());
+			core = Scrib_core.Core_new_(app, wiki.Parser_mgr().Ctx());
 			server = new Process_server_mock();
 			core.Interpreter().Server_(server);
 		}
 		server.Clear();
 		core.Proc_mgr().Clear();
 		core.Frame_parent_(null);
-		core.When_page_changed(wiki.Ctx().Cur_page());
+		core.When_page_changed(wiki.Parser_mgr().Ctx().Cur_page());
 		expd_server_rcvd_list.Clear();
 		return this;
 	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

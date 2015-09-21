@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.php.*; import gplx.xowa.parsers.*;
+import gplx.langs.phps.*; import gplx.xowa.parsers.*;
+import gplx.xowa.apps.gfss.*;
 public class Xol_msg_mgr_ {
 //		public static String Get_msg_val_gui_or_null(Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {
 //			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
@@ -58,13 +59,13 @@ public class Xol_msg_mgr_ {
 		if (has_tmpl) {
 			Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 			Xop_root_tkn sub_root = tkn_mkr.Root(msg_val);
-			msg_val = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, tkn_mkr, msg_val);
+			msg_val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, tkn_mkr, msg_val);
 		}
 		return msg_val;
 	}
 	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_lang lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
-		int slash_pos = Bry_finder.Find_bwd(msg_key, Byte_ascii.Slash);
+		int slash_pos = Bry_find_.Find_bwd(msg_key, Byte_ascii.Slash);
 		if (slash_pos != Bry_.NotFound) {	// key is of format "key/lang"; EX: "January/en"
 			int msg_key_len = msg_key.length;
 			if (slash_pos != msg_key_len) {		// get text after slash; EX: "en"
@@ -93,7 +94,7 @@ public class Xol_msg_mgr_ {
 			}
 		}
 		else {																	// page found; dump entire contents
-			msg_val = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Data_raw());			// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
+			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Data_raw());			// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
 			msg_in_wiki.Src_(Xol_msg_itm.Src_wiki);
 		}
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);

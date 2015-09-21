@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+import gplx.langs.htmls.encoders.*;
 public class Xoh_cfg_file {
 	public Xoh_cfg_file(Url_encoder url_encoder, Io_url xowa_dir) {
 		Io_url mw_file_dir = xowa_dir.GenSubDir_nest("file", "mediawiki.file");

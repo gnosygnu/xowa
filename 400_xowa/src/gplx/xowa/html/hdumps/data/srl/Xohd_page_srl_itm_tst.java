@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data.srl; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.data.*;
-import org.junit.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.pages.*;
-import gplx.xowa2.gui.*;
+import org.junit.*;
+import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.pages.*;
+import gplx.xowa.gui.*;
 public class Xohd_page_srl_itm_tst {
 	@Before public void init() {fxt.Clear();} private Xohd_page_srl_itm_fxt fxt = new Xohd_page_srl_itm_fxt();
 	@Test   public void Body() {

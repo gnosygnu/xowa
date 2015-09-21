@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.tdbs.*;
+import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.tdbs.*; import gplx.xowa.nss.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public Xob_parse_dump_templates_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "parse.dump_templates";

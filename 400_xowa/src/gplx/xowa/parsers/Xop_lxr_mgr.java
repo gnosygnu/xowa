@@ -17,11 +17,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_lxr_mgr {
-	private Xop_lxr[] ary;
+	private final Xop_lxr[] ary;
+	private final List_adp page_lxr_list = List_adp_.new_();
 	public Xop_lxr_mgr(Xop_lxr[] ary) {this.ary = ary;}
-	public Btrie_fast_mgr Trie() {return trie;} private Btrie_fast_mgr trie = Btrie_fast_mgr.cs();
+	public Btrie_fast_mgr Trie() {return trie;} private final Btrie_fast_mgr trie = Btrie_fast_mgr.cs();
+	public void Page__add(Xowe_wiki wiki, Xop_lxr... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Xop_lxr lxr = ary[i];
+			lxr.Init_by_wiki(wiki, trie);
+			page_lxr_list.Add(lxr);
+		}
+	}
+	public void Page__del_all() {
+		int len = page_lxr_list.Count();
+		for (int i = 0; i < len; ++i) {
+			Xop_lxr lxr = (Xop_lxr)page_lxr_list.Get_at(i);
+			lxr.Term(trie);
+		}
+	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
@@ -62,6 +79,17 @@ public class Xop_lxr_mgr {
 		, Xop_pre_lxr._, Xop_nl_tab_lxr._
 		, Xop_comm_lxr._
 		, Xop_under_lxr._
+		});
+	}
+	public static Xop_lxr_mgr new_anchor_encoder() {
+		return new Xop_lxr_mgr(new Xop_lxr[]
+		{ Xop_pipe_lxr._, new Xop_eq_lxr(false), Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
+		, Xop_curly_bgn_lxr._, Xop_curly_end_lxr._
+		, Xop_amp_lxr._, Xop_colon_lxr._
+		, Xop_apos_lxr._
+		, Xop_lnki_lxr_bgn._, Xop_lnki_lxr_end._
+		, Xop_lnke_lxr._, Xop_lnke_end_lxr._
+		, Xop_xnde_lxr._
 		});
 	}
 	public static final Xop_lxr_mgr Popup_lxr_mgr	// same as orig_page, except apos_lxr added

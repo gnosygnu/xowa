@@ -45,7 +45,7 @@ public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
 			this.file_size_bry = Bry_.new_a7(gplx.ios.Io_size_.To_str(file_size));
 		}
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
-			? String_.Format(Str_commons_notice, gplx.html.Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
+			? String_.Format(Str_commons_notice, gplx.langs.htmls.Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
 			: "";
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, commons_notice);
 	}

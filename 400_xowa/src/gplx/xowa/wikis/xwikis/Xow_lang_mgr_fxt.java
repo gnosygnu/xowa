@@ -50,12 +50,12 @@ public class Xow_lang_mgr_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	Xoae_app app;
 	public void tst(String raw, String expd) {
-		Xop_ctx ctx = wiki.Ctx();
+		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		ctx.Cur_page().Ttl_(Xoa_ttl.parse(wiki, Bry_.new_a7("test_page")));
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(raw_bry);
-		wiki.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), raw_bry);
+		wiki.Parser_mgr().Main().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), raw_bry);
 		wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, raw_bry, root);
 
 		Bry_bfr html_bfr = Bry_bfr.new_();

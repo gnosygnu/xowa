@@ -29,7 +29,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 	public void AutoClose(Xop_ctx ctx, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {}
 	public int Stack_len() {return stack.Count();}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		cur_pos = Bry_finder.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Apos);
+		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Apos);
 		int apos_len = cur_pos - bgn_pos;
 		dat.Ident(ctx, src, apos_len, cur_pos);
 		Xop_apos_tkn apos_tkn = tkn_mkr.Apos(bgn_pos, cur_pos, apos_len, dat.Typ(), dat.Cmd(), dat.Lit_apos());

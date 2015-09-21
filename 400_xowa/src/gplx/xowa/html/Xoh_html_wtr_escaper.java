@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.langs.htmls.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, byte[] src) {
@@ -32,7 +32,7 @@ public class Xoh_html_wtr_escaper {
 					if (nowiki_skip) {
 						byte[] nowiki_name = Xop_xnde_tag_.Tag_nowiki.Name_bry();
 						int nowiki_name_len = nowiki_name.length;
-						if (Bry_.Eq(nowiki_name, src, i + 1, i + 1 + nowiki_name_len)) {	// <nowiki found;
+						if (Bry_.Eq(src, i + 1, i + 1 + nowiki_name_len, nowiki_name)) {	// <nowiki found;
 							int end_gt = Escape_nowiki_skip(bfr, src, i, end, nowiki_name, nowiki_name_len);
 							if (end_gt != Bry_.NotFound) {
 								i = end_gt;
@@ -103,7 +103,7 @@ public class Xoh_html_wtr_escaper {
 						if (	tag_is_bgn															// <nowiki < found
 							||	(i + nowiki_name_len + 2 > end) 									// not enough chars for "/nowiki>"
 							||	src[i + 1] != Byte_ascii.Slash 										// / 
-							||	!Bry_.Eq(nowiki_name, src, i + 2, i + 2 + nowiki_name_len)		//  nowiki
+							||	!Bry_.Eq(src, i + 2, i + 2 + nowiki_name_len, nowiki_name)		//  nowiki
 							||	src[i + 2 + nowiki_name_len] != Byte_ascii.Gt						//        >
 							)	return Bry_.NotFound;
 						end_lt = i;

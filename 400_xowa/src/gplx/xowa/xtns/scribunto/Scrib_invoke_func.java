@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.pfuncs.*;
@@ -73,6 +75,6 @@ public class Scrib_invoke_func extends Pf_func_base {
 		byte[] script_error_msg = msg_mgr.Val_by_id(Xol_msg_itm_.Id_scribunto_parser_error);
 		error_fmtr.Bld_bfr_many(bfr, script_error_msg, error);
 	}
-	private static final Bry_fmtr error_fmtr = Bry_fmtr.new_("<strong class='error'><span class='scribunto-error' id='mw-scribunto-error-0'>~{0}: ~{1}</span></strong>");	// <!--~{0}: ~{1}.-->
+	private static final Bry_fmtr error_fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0}: ~{1}</span></strong>");	// NOTE: must be "error" not 'error'; iferror checks for quote not apos; DATE:2015-09-17
 	public static final String Err_mod_missing = "No such module";
 }

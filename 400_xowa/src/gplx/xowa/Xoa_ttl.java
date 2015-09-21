@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.wikis.ttls.*;
 public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
@@ -85,7 +86,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	}
 	public byte[] Page_txt_wo_qargs() {	// assume that no Special page has non-ascii characters
 		int full_txt_len = full_txt.length;
-		int ques_pos = Bry_finder.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
+		int ques_pos = Bry_find_.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_.NotFound ? full_txt_len : ques_pos);
 	}
 	public static Xoa_ttl parse(Xowe_wiki wiki, int ns_id, byte[] ttl) {
@@ -99,7 +100,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
 	private static final int Char__bidi = 1, Char__ws = 2;
 	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
-	.Add_many_int(Char__bidi	, Bry_.ints_(0xE2, 0x80, 0x8E), Bry_.ints_(0xE2, 0x80, 0x8F), Bry_.ints_(0xE2, 0x80, 0xAA), Bry_.ints_(0xE2, 0x80, 0xAB), Bry_.ints_(0xE2, 0x80, 0xAC), Bry_.ints_(0xE2, 0x80, 0xAD), Bry_.ints_(0xE2, 0x80, 0xAE))
+	.Add_many_int(Char__bidi	, Bry_.new_ints(0xE2, 0x80, 0x8E), Bry_.new_ints(0xE2, 0x80, 0x8F), Bry_.new_ints(0xE2, 0x80, 0xAA), Bry_.new_ints(0xE2, 0x80, 0xAB), Bry_.new_ints(0xE2, 0x80, 0xAC), Bry_.new_ints(0xE2, 0x80, 0xAD), Bry_.new_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
 	;
 	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
@@ -177,7 +178,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 								byte[] ns_name = ns.Name_txt();
 								int ns_name_len = ns_name.length;
 								int tmp_bfr_end = bfr.Len();
-								if (!Bry_.Eq(ns_name, bfr.Bfr(), ltr_bgn, tmp_bfr_end) && ns_name_len == tmp_bfr_end - ltr_bgn) {	// if (a) ns_name != bfr_txt (b) both are same length; note that (b) should not happen, but want to safeguard against mismatched arrays
+								if (!Bry_.Eq(bfr.Bfr(), ltr_bgn, tmp_bfr_end, ns_name) && ns_name_len == tmp_bfr_end - ltr_bgn) {	// if (a) ns_name != bfr_txt (b) both are same length; note that (b) should not happen, but want to safeguard against mismatched arrays
 									Bry_.Set(bfr.Bfr(), ltr_bgn, tmp_bfr_end, ns_name);
 								}
 								ns_bgn = ltr_bgn;
@@ -232,7 +233,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 										b_ary = amp_itm.Xml_name_bry();
 										break;
 									case Xop_amp_trie_itm.Char_int_null:	// &#xx;
-										int end_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, match_pos, end);
+										int end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, match_pos, end);
 										if (end_pos == Bry_.NotFound) {} // &# but no terminating ";" noop: defaults to current_byte which will be added below;
 										else {
 											b_ary = amp_itm.Xml_name_bry();									
@@ -247,7 +248,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							else {
 								boolean pass = amp_mgr.Parse_as_int(amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex, src, end, cur2, match_pos);
 								if (pass) {
-									b_ary = gplx.intl.Utf16_.Encode_int_to_bry(amp_mgr.Rslt_val());
+									b_ary = gplx.core.intls.Utf16_.Encode_int_to_bry(amp_mgr.Rslt_val());
 									if (b_ary.length == 1 && b_ary[0] == Byte_ascii.Hash)	// NOTE: A&#x23;B should be interpreted as A#b; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
 										anch_bgn = (txt_bb_len) + 1; 
 									match_pos = amp_mgr.Rslt_pos();
@@ -263,7 +264,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							&&	src[cur + 3] == Byte_ascii.Dash
 							) {
 							int cur3 = cur + 3;//cur = ttlTrie.Match_pos();
-							int find = Bry_finder.Find_fwd(src, Xop_comm_lxr.End_ary, cur3, end);
+							int find = Bry_find_.Find_fwd(src, Xop_comm_lxr.End_ary, cur3, end);
 							if (find != -1) {
 								cur = find + Xop_comm_lxr.End_ary.length;
 								continue;
@@ -341,7 +342,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		if (	ns.Case_match() == Xow_ns_case_.Id_1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
 			byte char_1st = full_txt[page_bgn];
-			int char_1st_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(char_1st);
+			int char_1st_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(char_1st);
 			int page_end = page_bgn + char_1st_len;
 			if (	char_1st_len > 1) {			// 1st char is multi-byte char
 				int full_txt_len = full_txt.length;
@@ -374,30 +375,6 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public static final int Max_len = 2048;	// ASSUME: max len of 256 * 8 bytes
 	public static final int Null_wik_bgn = -1;
 	public static final Xoa_ttl Null = null;
-}
-class Xoa_url_encoder {
-	public byte[] Encode(byte[] src) {
-		int src_len = src.length;
-		for (int i = 0; i < src_len; i++) {
-			byte b = src[i];
-			switch (b) {
-				case Byte_ascii.Space:		bb.Add(Bry_underline); break;
-				case Byte_ascii.Amp:		bb.Add(Bry_amp); break;
-				case Byte_ascii.Apos:		bb.Add(Bry_apos); break;
-				case Byte_ascii.Eq:			bb.Add(Bry_eq); break;
-				case Byte_ascii.Plus:		bb.Add(Bry_plus); break;
-				default:					bb.Add_byte(b); break;
-				// FUTURE: html_entities, etc:
-			}
-		}
-		return bb.Xto_bry_and_clear();
-	}
-	private static final byte[] Bry_amp = Bry_.new_a7("%26"), Bry_eq = Bry_.new_a7("%3D")
-		, Bry_plus = Bry_.new_a7("%2B"), Bry_apos = Bry_.new_a7("%27")
-		, Bry_underline = new byte[] {Byte_ascii.Underline}
-		;
-	Bry_bfr bb = Bry_bfr.new_();
-	public static final Xoa_url_encoder _ = new Xoa_url_encoder(); Xoa_url_encoder() {}
 }
 class Xoa_ttl_trie {
 	public static Btrie_fast_mgr new_() {

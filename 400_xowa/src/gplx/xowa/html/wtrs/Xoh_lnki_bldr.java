@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.wtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.html.hrefs.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.hrefs.*;
 public class Xoh_lnki_bldr {
 	private final Xoa_app app; private final Xoh_href_wtr href_wtr; private final byte[] img_root_dir;
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

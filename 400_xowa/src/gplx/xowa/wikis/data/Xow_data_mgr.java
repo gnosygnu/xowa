@@ -17,6 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.xowa.bldrs.cmds.ctgs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.gui.views.*;
 import gplx.xowa.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -79,6 +82,52 @@ public class Xow_data_mgr implements GfoInvkAble {
 			ttl = redirect_ttl;
 		}
 		return rv;
+	}
+	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl)						{return Load_page_by_ttl(url, ttl, wiki.Lang(), wiki.Appe().Gui_mgr().Browser_win().Active_tab(), true);}
+	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab)	{return Load_page_by_ttl(url, ttl, wiki.Lang(), tab, true);}
+	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xol_lang lang, Xog_tab_itm tab, boolean parse_page) {
+		wiki.Init_assert();
+		Xoae_page page = Xoae_page.new_(wiki, ttl); page.Tab_data().Tab_(tab);
+		this.Get_page(page, url, ttl, false, false);						// get page from data_mgr
+		if (page.Missing()) {													// page doesn't exist
+			boolean vnt_missing = true;
+			Xol_vnt_mgr vnt_mgr = lang.Vnt_mgr();
+			if (vnt_mgr.Enabled()) {	// if vnt enabled, then try to load by vnt form; DATE:2015-09-15
+				gplx.xowa.wikis.data.tbls.Xowd_page_itm page_itm = vnt_mgr.Convert_mgr().Convert_ttl(wiki, ttl);
+				if (page_itm.Exists()) {
+					Xoa_ttl vnt_ttl = Xoa_ttl.parse(wiki, ttl.Ns().Id(), page_itm.Ttl_page_db());
+					page = this.Get_page(vnt_ttl, false);
+					vnt_missing = page.Missing();
+				}
+			}
+			if (vnt_missing) {
+				if (ttl.Ns().Id_file()) {
+					Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(wiki.Commons_wiki_key());
+					if (commons_wiki != null) {										// commons exists
+						if (!Bry_.Eq(wiki.Domain_bry(), commons_wiki.Domain_bry())) {		// !Bry_.Eq is recursion guard
+							Xoae_page rv = commons_wiki.Data_mgr().Load_page_by_ttl(url, ttl, wiki.Lang(), tab, true);
+							if (rv.Exists()) {
+								rv.Commons_mgr().Source_wiki_(wiki);
+								return rv;
+							}
+							else {
+								page.Missing_(false);
+								page.Commons_mgr().Xowa_mockup_(true);
+								return page;
+							}
+						}
+					}
+				}
+				else
+					return page.Missing_();
+			}
+		}
+		if (page.Missing()) return page;										// NOTE: commons can return null page
+		page.Tab_data().Tab_(tab);
+		page.Lang_(lang);
+		if (parse_page)
+			wiki.Parser_mgr().Parse(page, false);	// NOTE: do not clear page b/c reused for search
+		return page;
 	}
 	public Xoae_page Redirect(Xoae_page page, byte[] page_bry) {
 		Xoa_ttl trg_ttl = Xoa_ttl.parse(wiki, page_bry);

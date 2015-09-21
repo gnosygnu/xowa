@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.html.*; import gplx.xowa.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Articles_func extends Pf_func_base {
@@ -31,8 +32,8 @@ public class Articles_func extends Pf_func_base {
 		Parse(xtn_itm, argx);
 	}
 	private void Parse(Articles_xtn_skin_itm xtn_itm, byte[] argx) {
-		int pos = Bry_finder.Find_fwd(argx, Const_dlm);
-		if (pos == Bry_finder.Not_found)						// && missing; argx is both ttl and text
+		int pos = Bry_find_.Find_fwd(argx, Const_dlm);
+		if (pos == Bry_find_.Not_found)						// && missing; argx is both ttl and text
 			xtn_itm.Add(new Articles_itm(argx, argx));
 		else {													// && exists; split by &&
 			byte[] ttl	= Bry_.Trim(Bry_.Mid(argx, 0, pos));

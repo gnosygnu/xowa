@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.apps.langs.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cfgs.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 import gplx.xowa.wikis.xwikis.cfgs.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	private Xoae_app app;
@@ -71,7 +72,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		for (int i = 0; i < list_len; i++) {
 			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
 //				wiki.Defn_cache().ReduceCache();
-			if (clear_ctx) wiki.Ctx().Clear();	// NOTE: clear_ctx will reset toc and refs
+			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear();	// NOTE: clear_ctx will reset toc and refs
 			wiki.Cache_mgr().Page_cache().Free_mem_all();
 			wiki.Cache_mgr().Tmpl_result_cache().Clear();
 		}

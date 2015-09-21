@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 class Xof_wiki_finder {	// UNUSED
 	private Xowe_wiki wiki_0, wiki_1;
 	private Xowd_page_itm db_page = new Xowd_page_itm(); 
@@ -32,7 +33,7 @@ class Xof_wiki_finder {	// UNUSED
 	private Xoae_page Get_page__by_wiki(Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ns_id, ttl_bry) ;
 		Xoa_url url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
-		return wiki.Load_page_by_ttl(url, ttl);
+		return wiki.Data_mgr().Load_page_by_ttl(url, ttl);
 	}
 	private int qry_count, qry_count_max = 1000;
 	public boolean Find_page(Xof_wiki_finder_itm itm, int ns_id, byte[] ttl_bry) {

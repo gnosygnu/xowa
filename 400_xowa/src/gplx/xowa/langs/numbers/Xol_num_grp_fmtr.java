@@ -32,7 +32,7 @@ public class Xol_num_grp_fmtr {
 			switch (b) {
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9: {
-					int num_end = Bry_finder.Find_fwd_while_num(src, pos, src_len);
+					int num_end = Bry_find_.Find_fwd_while_num(src, pos, src_len);
 					int num_len = num_end - pos;
 					if (num_len > grp_len) {
 						if (!dirty) {
@@ -49,7 +49,7 @@ public class Xol_num_grp_fmtr {
 					break;
 				}
 				case Byte_ascii.Dot: {
-					int num_end = Bry_finder.Find_fwd_while_num(src, pos + 1, src_len);	// +1 to skip dot
+					int num_end = Bry_find_.Find_fwd_while_num(src, pos + 1, src_len);	// +1 to skip dot
 					if (dirty)
 						bfr.Add_mid(src, pos, num_end);
 					pos = num_end;

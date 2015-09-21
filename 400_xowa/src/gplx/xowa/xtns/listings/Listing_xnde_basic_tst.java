@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Listing_xnde_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	private Listing_xtn_mgr listings_xtn_mgr;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
-import gplx.xowa.langs.*; import gplx.xowa.apps.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cfgs.*;
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.cfgs.*;	
 public class Xow_xwiki_mgr implements GfoInvkAble {
@@ -28,8 +28,10 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public Xow_xwiki_mgr(Xowe_wiki wiki, Gfo_url_parser url_parser) {
 		this.wiki = wiki;
 		srl = new Xow_xwiki_mgr_srl(wiki.Domain_itm(), this);
-	}		
-	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private final Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
+		this.xwiki_domain_tid = Xwiki_tid(wiki.Domain_tid());
+	}
+	public int						Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
+	public Xow_lang_mgr				Lang_mgr() {return lang_mgr;} private final Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
 	public int Len() {return list.Count();}
 	public void Clear() {hash.Clear(); list.Clear();}
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
@@ -66,7 +68,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
 	}
 	public void Add_bulk(byte[] raw) {
-		byte[][] rows = Bry_.Split(raw, Byte_ascii.Nl);
+		byte[][] rows = Bry_split_.Split(raw, Byte_ascii.Nl);
 		int rows_len = rows.length;
 		Hash_adp_bry lang_regy = Xol_lang_itm_.Regy();
 		for (int i = 0; i < rows_len; i++) {
@@ -76,7 +78,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		}
 	}
 	public Xow_xwiki_itm Add_bulk_row(Hash_adp_bry lang_regy, byte[] row) {
-		byte[][] flds = Bry_.Split(row, Byte_ascii.Pipe); int flds_len = flds.length;
+		byte[][] flds = Bry_split_.Split(row, Byte_ascii.Pipe); int flds_len = flds.length;
 		byte[] alias = Bry_.Empty, domain_bry = Bry_.Empty;
 		for (int j = 0; j < flds_len; j++) {
 			byte[] fld = flds[j];
@@ -115,7 +117,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		return tmp_bfr.To_str_and_rls();
 	}
 	public void Add_bulk_peers(byte[] raw) {
-		byte[][] keys = Bry_.Split(raw, Byte_ascii.Tilde);
+		byte[][] keys = Bry_split_.Split(raw, Byte_ascii.Tilde);
 		int len = keys.length;
 		Ordered_hash peers = Ordered_hash_.new_();
 		Cfg_nde_root peer_root = wiki.Appe().Wiki_mgr().Groups();
@@ -216,4 +218,15 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	  Invk_add_bulk = "add_bulk", Invk_add_bulk_langs = "add_bulk_langs", Invk_add_bulk_peers = "add_bulk_peers", Invk_add_many = "add_many"
 	, Invk_itms_print = "itms_print", Invk_count = "count", Invk_clear = "clear"
 	;
+	private static int Xwiki_tid(int tid) {
+		switch (tid) {
+			case Xow_domain_type_.Int__commons:
+			case Xow_domain_type_.Int__species:
+			case Xow_domain_type_.Int__incubator:
+			case Xow_domain_type_.Int__mediawiki:
+			case Xow_domain_type_.Int__wmfblog:
+			case Xow_domain_type_.Int__home:					return Xow_domain_type_.Int__wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
+			default:											return tid;
+		}
+	}
 }

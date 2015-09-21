@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.files.*;
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Xowd_html_tbl html_tbl;
 	public Xob_hdump_img_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}

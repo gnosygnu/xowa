@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.ios.*;
+import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
 class Xob_wbase_json_dump_parser {
 	private final Gfo_usr_dlg usr_dlg; private final Xoae_app app; private final Xob_bldr bldr; private final Xowe_wiki wiki;
@@ -36,8 +37,8 @@ class Xob_wbase_json_dump_parser {
 		Io_buffer_rdr buffer_rdr = Io_buffer_rdr.new_(stream_rdr, 10 * Io_mgr.Len_mb); long buffer_rdr_len = buffer_rdr.Fil_len();
 		try {
 			Io_url stream_rdr_url = stream_rdr.Url();
-			int page_bgn = Bry_finder.Find_fwd(buffer_rdr.Bfr(), id_bgn);
-			if (page_bgn == Bry_finder.Not_found)						{usr_dlg.Warn_many("", "", "wbase.import:initial id not found: url=~{0}", stream_rdr_url.Raw()); return;}
+			int page_bgn = Bry_find_.Find_fwd(buffer_rdr.Bfr(), id_bgn);
+			if (page_bgn == Bry_find_.Not_found)						{usr_dlg.Warn_many("", "", "wbase.import:initial id not found: url=~{0}", stream_rdr_url.Raw()); return;}
 			if (!Bry_.Match(buffer_rdr.Bfr(), 0, page_bgn, json_bgn))	{usr_dlg.Warn_many("", "", "wbase.import:doc_bgn is not '[\n': url=~{0}", stream_rdr_url.Raw()); return;}
 			Xowd_page_itm page = new Xowd_page_itm();
 			dump_db.Parse_bgn(stream_rdr.Len(), stream_rdr.Url().NameAndExt());

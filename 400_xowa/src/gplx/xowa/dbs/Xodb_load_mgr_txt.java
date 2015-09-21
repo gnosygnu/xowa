@@ -17,8 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.specials.search.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
+import gplx.xowa.gui.views.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
 	private final Xowd_page_itm tmp_page = new Xowd_page_itm();
@@ -112,7 +114,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private void Find_ttls__add_itms(List_adp rv, Xob_xdat_file rdr, Xob_xdat_itm xdat_itm) {
 		byte[] raw = rdr.Src();
 		int itm_bgn = xdat_itm.Itm_bgn(), itm_end = xdat_itm.Itm_end();
-		int pos = Bry_finder.Find_fwd(raw, Byte_ascii.Pipe, itm_bgn, raw.length);
+		int pos = Bry_find_.Find_fwd(raw, Byte_ascii.Pipe, itm_bgn, raw.length);
 		if (pos == Bry_.NotFound) throw wiki.Appe().Usr_dlg().Fail_many(GRP_KEY, "invalid_search_file", "search file is invalid");
 		pos += Int_.Const_dlm_len;	// pipe
 		
@@ -318,7 +320,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}
 	private static void Load_ctg_v1_parse(List_adp rv, Gfo_usr_dlg usr_dlg, byte[] ary) {
 		int aryLen = ary.length;
-		int pos = Bry_finder.Find_fwd(ary, Byte_ascii.Pipe, 0, aryLen);
+		int pos = Bry_find_.Find_fwd(ary, Byte_ascii.Pipe, 0, aryLen);
 		int rowCount = (aryLen - pos + 1) / (Base85_utl.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld);
 		rv.Clear();
 		boolean garbage = false;
@@ -356,7 +358,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		byte[] src = xdat.Src(); int itm_end = xdat.Itm_end();
 		int bgn = xdat.Itm_bgn();
 		int timestamp	= Base85_utl.XtoIntByAry(src, bgn +  6		, bgn +  10);
-		int ttl_end = Bry_finder.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, bgn + 12, itm_end);
+		int ttl_end = Bry_find_.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, bgn + 12, itm_end);
 		if (ttl_end == -1) return false;
 		byte[] ttl		= Bry_.Mid				(src, bgn + 12		, ttl_end);
 		byte[] text		= Bry_.Mid				(src, ttl_end + 1	, itm_end - 1);
@@ -373,7 +375,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			page.Modified_on_(Bit_.Xto_date_short(timestamp));
 		}
 		int name_bgn = timestamp_end + 1;
-		int name_end = Bry_finder.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, name_bgn, src_len);			
+		int name_end = Bry_find_.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, name_bgn, src_len);			
 		page.Text_(Bry_.Mid(src, name_end + 1, row_end - 1));	// +1 to skip dlm
 	}
 	Xowd_regy_mgr Get_regy_by_site(byte regy_tid) {

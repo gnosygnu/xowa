@@ -35,7 +35,7 @@ class Xows_db_matcher_bldr {
 				break;
 			case Xows_db_matcher.Tid_word_quote:
 				List_adp tmp = List_adp_.new_();
-				byte[][] words = Bry_.Split(matcher.Raw(), Byte_ascii.Space, Bool_.Y);
+				byte[][] words = Bry_split_.Split(matcher.Raw(), Byte_ascii.Space, Bool_.Y);
 				int words_len = words.length;
 				for (int i = 0; i < words_len; ++i) {
 					byte[] word = words[i];

@@ -31,10 +31,10 @@ class Imap_parser {
 	public Imap_parser(Imap_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	public void Init(Xowe_wiki wiki, Xoa_url page_url, Gfo_usr_dlg usr_dlg) {
 		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page_url; this.usr_dlg = usr_dlg;
-		this.wiki_ctx = wiki.Ctx();
+		this.wiki_ctx = wiki.Parser_mgr().Ctx();
 		if (imap_ctx == null) {
 			imap_ctx = Xop_ctx.new_(wiki);
-			imap_root = app.Tkn_mkr().Root(Bry_.Empty);
+			imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
 		}
 	}
 	public void Clear() {
@@ -54,11 +54,11 @@ class Imap_parser {
 		itm_bgn = src_bgn; itm_end = src_bgn - 1;
 		while (true) {
 			if (itm_end == src_end) break;
-			itm_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
+			itm_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
-			itm_end = Bry_finder.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);		// look for \n
-			if (itm_end == Bry_finder.Not_found) itm_end = src_end;								// no \n; make EOS = \n
-			itm_end = Bry_finder.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
+			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);		// look for \n
+			if (itm_end == Bry_find_.Not_found) itm_end = src_end;								// no \n; make EOS = \n
+			itm_end = Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
 			byte b = src[itm_bgn];
 			if (b == Byte_ascii.Hash) {
@@ -92,7 +92,7 @@ class Imap_parser {
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
-		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_finder.Trim_bwd_space_tab(src, itm_bgn, itm_end));
+		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_bgn, itm_end));
 		switch (tid_desc) {
 			case Imap_desc_tid.Tid_null: return Add_err(Bool_.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;
@@ -107,8 +107,8 @@ class Imap_parser {
 	}
 	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {
 		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
-		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
-		int grp_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
+		int pos = Bry_find_.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
+		int grp_end = Bry_find_.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
 		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap_No valid link was found");}
 		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
@@ -150,7 +150,7 @@ class Imap_parser {
 		else {
 			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
-		pos = Bry_finder.Trim_fwd_space_tab(src, pos, itm_end);
+		pos = Bry_find_.Trim_fwd_space_tab(src, pos, itm_end);
 		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.To_ary_and_clear(Double_obj_val.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
@@ -172,7 +172,7 @@ class Imap_parser {
 	private Xop_tkn_itm Parse_link(byte[] raw) {
 		imap_root.Clear();
 		imap_ctx.Clear();			
-		wiki.Parser().Parse_text_to_wdom(imap_root, imap_ctx, wiki.Appe().Tkn_mkr(), raw, 0);
+		wiki.Parser_mgr().Main().Parse_text_to_wdom(imap_root, imap_ctx, wiki.Appe().Parser_mgr().Tkn_mkr(), raw, 0);
 		int subs_len = imap_root.Subs_len();
 		for (int i = 0; i < subs_len; ++i) {
 			Xop_tkn_itm sub = imap_root.Subs_get(i);
@@ -185,7 +185,7 @@ class Imap_parser {
 		return null;
 	}
 	private int Parse_img(Imap_map imap, int itm_bgn, int itm_end, int src_end) {
-		int img_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws
+		int img_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws
 		int img_end = Parse_img__get_img_end(itm_end, src_end);
 		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
 		Xop_tkn_itm tkn_itm = Parse_link(imap_img_src);			// NOTE: need to parse before imap_root.Data_mid() below
@@ -208,7 +208,7 @@ class Imap_parser {
 		int rv = line_end;
 		int pos = line_end + 1;
 		while (pos < src_end) {
-			pos = Bry_finder.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
+			pos = Bry_find_.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
 			if (pos == src_end) break;
 			byte b = src[pos];
 			if (b == Byte_ascii.Nl)	// new-line; end
@@ -217,8 +217,8 @@ class Imap_parser {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
 					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
-					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.Nl, pos);
-					if (next_line == Bry_finder.Not_found) next_line = src_end;
+					int next_line = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
+					if (next_line == Bry_find_.Not_found) next_line = src_end;
 					rv = next_line;
 					pos = rv + 1;
 				}

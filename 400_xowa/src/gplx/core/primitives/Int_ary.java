@@ -46,6 +46,10 @@ public class Int_ary {
 		ary[len] = v;
 		++len;
 	}
+	public int Pop_or_fail() {
+		if (len == 0) throw Err_.new_("core.int_ary", "stack is empty");
+		return Pop_or(-1);
+	}
 	public int Pop_or(int or) {
 		if (len == 0) return or;
 		int rv = ary[len - 1];

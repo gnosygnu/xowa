@@ -16,6 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.apps.gfss.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.wikis.metas.*;
 public class Xow_cfg_wiki_core {
 	public Xow_cfg_wiki_core(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public void Save() {

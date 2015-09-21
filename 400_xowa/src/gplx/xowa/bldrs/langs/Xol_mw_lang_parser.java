@@ -16,8 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.intl.*; import gplx.php.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.core.intls.*; import gplx.langs.phps.*;
+import gplx.xowa.apps.gfss.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.nss.*;
 public class Xol_mw_lang_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
 	public Xol_mw_lang_parser(Gfo_msg_log msg_log) {evaluator = new Php_evaluator(msg_log);}

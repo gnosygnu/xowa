@@ -26,13 +26,13 @@ class Xol_num_mgr__commafy_5 extends Xol_num_mgr { 	@Override public byte[] Comm
 			b = num[++num_bgn];				// skip negative sign
 		}
 		if (Byte_ascii.Is_num(b)) {			// check for preg_match( '/^-?\d{1,4}(\.\d+)?$/', $_ )
-			int num_end = Bry_finder.Find_fwd_while_num(num, num_bgn, num_len);
+			int num_end = Bry_find_.Find_fwd_while_num(num, num_bgn, num_len);
 			if (num_end - num_bgn < 5) {	// 1-4 digits
 				if (num_end == num_len) return num; // no decimal; exit
 				b = num[num_end];
 				if (	b == Byte_ascii.Dot	
 					&&	num_end != num_len - 1) {	// if dot at end, then no match on above regx; fall-thru to below
-					num_end = Bry_finder.Find_fwd_while_num(num, num_end + 1, num_len);
+					num_end = Bry_find_.Find_fwd_while_num(num, num_end + 1, num_len);
 					if (num_end == num_len) return num;	// only numbers after dot; matches regx;
 				}
 			}

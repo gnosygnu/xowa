@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 import gplx.xowa.parsers.*;
@@ -113,9 +115,9 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	public static byte[] Get_low_qid(byte[] bry) {	// HACK: wdata currently does not differentiate between "Vandalism" and "Wikipedia:Vandalism", combining both into "Vandalism:q4664011|q6160"; get lowest qid
 		int bry_len = bry.length;
-		int pipe_pos = Bry_finder.Find_fwd(bry, Byte_ascii.Pipe, 0, bry_len);
+		int pipe_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe, 0, bry_len);
 		if (pipe_pos == Bry_.NotFound) return bry;
-		byte[][] qids = Bry_.Split(bry, Byte_ascii.Pipe);
+		byte[][] qids = Bry_split_.Split(bry, Byte_ascii.Pipe);
 		int qids_len = qids.length;
 		int qid_min = Int_.Max_value;
 		int qid_idx = 0;

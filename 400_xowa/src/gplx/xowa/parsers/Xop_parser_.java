@@ -25,7 +25,7 @@ public class Xop_parser_ {
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
-		Xop_parser parser = wiki.Parser();
+		Xop_parser parser = wiki.Parser_mgr().Main();
 		byte[] wtxt = parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
 		root.Reset();
 		ctx.Para().Enabled_(para_enabled);

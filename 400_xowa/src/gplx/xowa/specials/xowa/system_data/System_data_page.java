@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.urls.*;
 public class System_data_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
@@ -28,7 +29,7 @@ public class System_data_page implements Xows_page {
 		Io_url file_url = Path_from_type(wiki, type_val.Val()); if (file_url == null) return;
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		byte[] file_txt = Io_mgr.I.LoadFilBry(file_url);
-		file_txt = gplx.html.Html_utl.Escape_html_as_bry(file_txt, true, false, false, false, false);	// escape < or "</pre>" in messages will cause pre to break
+		file_txt = gplx.langs.htmls.Html_utl.Escape_html_as_bry(file_txt, true, false, false, false, false);	// escape < or "</pre>" in messages will cause pre to break
 		fmtr_all.Bld_bfr_many(tmp_bfr, file_url.Raw(), file_txt);
 		page.Data_raw_(tmp_bfr.To_bry_and_rls());
 	}

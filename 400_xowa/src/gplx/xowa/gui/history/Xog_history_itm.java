@@ -42,7 +42,7 @@ public class Xog_history_itm {
 		bfr.Add(key).Add_byte_pipe().Add(bmk_bry).Add_byte_nl();
 	}
 	public static Xog_history_itm Srl_load(byte[] raw) {
-		byte[][] atrs = Bry_.Split(raw, Byte_ascii.Pipe);
+		byte[][] atrs = Bry_split_.Split(raw, Byte_ascii.Pipe);
 		byte[] bmk_bry = atrs.length == 6 ? atrs[5] : Bry_.Empty;
 		bmk_bry = Bry_.Replace(bmk_bry, Byte_ascii.Tilde, Byte_ascii.Pipe);
 		return new Xog_history_itm(atrs[0], atrs[1], atrs[2], atrs[3], atrs[4] == Bool_.Y_bry, String_.new_a7(bmk_bry));

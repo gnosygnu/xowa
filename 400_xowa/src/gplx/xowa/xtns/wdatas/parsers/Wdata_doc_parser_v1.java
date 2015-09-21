@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.primitives.*; import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.core.primitives.*; import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Wdata_doc_parser_v1(Gfo_usr_dlg usr_dlg) {this.usr_dlg = usr_dlg;} private Gfo_usr_dlg usr_dlg;
 	public Wdata_doc_parser_v1() {}

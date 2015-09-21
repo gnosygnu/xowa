@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Xop_under_lxr_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -142,13 +142,13 @@ public class Xop_under_lxr_tst {
 	@Test  public void Hook_alt() {	// PURPOSE: ja wikis use alternate __; DATE:2014-03-04
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, true, "＿＿TOC＿＿");
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a＿＿TOC＿＿b", "ab");
 	}
 	@Test  public void Ascii_ci() {	// PURPOSE: case-insensitive ascii; DATE:2014-07-10
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__TOC__");
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b", "ab");
 		fxt.Test_parse_page_all_str("a__toc__b", "ab");
 	}
@@ -156,7 +156,7 @@ public class Xop_under_lxr_tst {
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		lang.Case_mgr_u8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__AÉI__");
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__AÉI__b", "ab");
 		fxt.Test_parse_page_all_str("a__aéi__b", "ab");
 	}
@@ -164,13 +164,13 @@ public class Xop_under_lxr_tst {
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		lang.Case_mgr_u8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__İÇİNDEKİLER__");	// __TOC__ for tr.w
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__İçindekiler__b", "ab");
 	}
 	@Test  public void Cs() {	// PURPOSE: cs (ascii / utf8 doesn't matter); DATE:2014-07-11
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.Y, "__TOC__");
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__toc__b"		, "a__toc__b");		// ci.pass
 	}
@@ -178,7 +178,7 @@ public class Xop_under_lxr_tst {
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.N, "__TOC__");
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_notoc	, Bool_.Y, "__NOTOC__");
-		wiki.Parser().Init_by_lang(lang);
+		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__toc__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__NOTOC__b"	, "ab");			// cs.pass

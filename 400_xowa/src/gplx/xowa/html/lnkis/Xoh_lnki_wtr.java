@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
+import gplx.langs.htmls.*; import gplx.xowa.files.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xoh_lnki_wtr {
@@ -49,7 +50,7 @@ public class Xoh_lnki_wtr {
 		}
 		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
 		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
-			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_domain_tid()				// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
+			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_mgr().Xwiki_domain_tid()	// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
 			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_key())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {

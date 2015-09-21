@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.bldrs.langs.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.bldrs.langs.*;
+import gplx.xowa.wikis.*;
 public class Wdata_xtn_mgr extends Xox_mgr_base {
 	private static final String XTN_KEY_STR = "Wikibase"; public static final byte[] XTN_KEY = Bry_.new_a7(XTN_KEY_STR);
 	@Override public boolean Enabled_default() {return false;}

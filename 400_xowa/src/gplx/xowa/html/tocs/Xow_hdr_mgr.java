@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*; import gplx.xowa.urls.encoders.*;
+import gplx.core.primitives.*; import gplx.langs.htmls.encoders.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_hdr_mgr {
 	private final Url_encoder_mgr encoder_mgr; private final Xoae_page page;

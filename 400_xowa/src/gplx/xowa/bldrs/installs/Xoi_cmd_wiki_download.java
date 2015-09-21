@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.gfui.*;
 import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
-import gplx.xowa.wmfs.dumps.*;
+import gplx.xowa.wms.dumps.*;
 class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_thread_cmd {	private Xoi_setup_mgr install_mgr; private String wiki_key, dump_date, dump_type;
 	public Xoi_cmd_wiki_download Ctor_download_(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {
 		this.install_mgr = install_mgr;

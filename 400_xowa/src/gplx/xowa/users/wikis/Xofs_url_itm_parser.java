@@ -58,7 +58,7 @@ class Xofs_url_itm_parser {
 						}
 						else {
 							int name_bgn = i + 2;	// skip "~{"
-							int name_end = Bry_finder.Find_fwd(raw, Byte_ascii.Curly_end, name_bgn);
+							int name_end = Bry_find_.Find_fwd(raw, Byte_ascii.Curly_end, name_bgn);
 							byte[] name = (byte[])names.Get_by_mid(raw, name_bgn, name_end);
 							if (name == null) throw Err_.new_wo_type("name not found", "raw", raw_str, "name", String_.new_u8(raw, name_bgn, name_end));
 							url_bfr.Add(name);

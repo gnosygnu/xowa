@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.strings.*;
+import gplx.xowa.langs.*;
 public class Xobc_utl_make_lang_tst {		
 	@Before public void init() {fxt.Clear();} private Xobc_utl_make_lang_fxt fxt = new Xobc_utl_make_lang_fxt();
 	@Test  public void Parse() {

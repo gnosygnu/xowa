@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.ios.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.wms.apis.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
 public class Xof_xfer_queue_base_fxt {
 	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok._;
 	public Xof_repo_itm Src_commons_repo() {return src_commons_repo;} private Xof_repo_itm src_commons_repo;

@@ -17,6 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.dbs.*;
+import gplx.xowa.bldrs.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_app_fxt {

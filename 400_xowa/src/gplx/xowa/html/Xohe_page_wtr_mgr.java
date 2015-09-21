@@ -61,7 +61,7 @@ public class Xohe_page_wtr_mgr extends Xoh_page_wtr_mgr_base implements GfoInvkA
 			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
 		}
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();
-		byte[] bry = wtr.Write(this, page, wiki.Ctx(), tmp_bfr);
+		byte[] bry = wtr.Write(this, page, wiki.Parser_mgr().Ctx(), tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		return bry;
 	}

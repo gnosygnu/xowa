@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data.srl; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.data.*;
 import gplx.core.primitives.*; import gplx.xowa.html.hdumps.core.*; 
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 public class Xohd_page_srl_mgr {
 	private final Xohd_page_srl_itm[] itm_ary; private final Xohd_page_srl_itm itm_body;
 	private final Int_obj_ref count_ref = Int_obj_ref.zero_();

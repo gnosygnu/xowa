@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 public class Hiero_mw_tables_parser_tst {
 	@Before public void init() {fxt.Reset();} private Hiero_mw_tables_parser_fxt fxt = new Hiero_mw_tables_parser_fxt();
 	@Test  public void Basic() {// DATE:2014-04-19

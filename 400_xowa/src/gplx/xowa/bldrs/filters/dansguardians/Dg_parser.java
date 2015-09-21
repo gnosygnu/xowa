@@ -39,7 +39,7 @@ class Dg_parser {
 		int file_id = ++next_id;
 		while (line_bgn < src_len) {
 			++line_idx;
-			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.Nl, line_bgn); if (line_end == Bry_finder.Not_found) line_end = src_len;
+			int line_end = Bry_find_.Find_fwd(src, Byte_ascii.Nl, line_bgn); if (line_end == Bry_find_.Not_found) line_end = src_len;
 			Dg_rule line = Parse_line(rel_path, file_id, line_idx, src, line_bgn, line_end);
 			if (line.Tid() != Dg_rule.Tid_invalid)
 				lines.Add(line);
@@ -54,8 +54,8 @@ class Dg_parser {
 		if (src[line_bgn] == Byte_ascii.Hash)	return Dg_rule.Itm_comment;	// ignore lines starting with hash; EX: "# comment"
 		while (brack_bgn < line_end) {	// look for terms bracketed by "<>"
 			if (src[brack_bgn] != Byte_ascii.Lt) {Warn("dg.invalid_line.term must start with angle_bgn", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;}
-			int brack_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
-			if (brack_end == Bry_finder.Not_found) {Warn("dg.invalid_line.angle_end not found", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;} 
+			int brack_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
+			if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.angle_end not found", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;} 
 			byte[] word = Bry_.Mid(src, brack_bgn + 1, brack_end);
 			words.Add(word);
 			int next_pos = brack_end + 1;
@@ -69,8 +69,8 @@ class Dg_parser {
 			else {
 				brack_bgn = brack_end + 1;
 				if (src[brack_bgn] != Byte_ascii.Lt) {Warn("dg.invalid_line.wrong_term_dlm", rel_path, line_idx, src, line_bgn, line_end); break;}
-				brack_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
-				if (brack_end == Bry_finder.Not_found) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
+				brack_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
+				if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
 				int parse_score = Bry_.To_int_or(src, brack_bgn + 1, brack_end, Int_.Min_value);
 				if (parse_score == Int_.Min_value) {Warn("dg.invalid_line.score is invalid", rel_path, line_idx, src, line_bgn, line_end); break;}
 				score = parse_score;

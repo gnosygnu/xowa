@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.srls.dsvs.*; import gplx.xowa.wikis.domains.*;
+import gplx.langs.dsvs.*; import gplx.xowa.wikis.domains.*;
 class Xow_xwiki_mgr_srl extends Dsv_wkr_base {
 	private byte[] key, url_fmt, name;
 	private final Xow_domain_itm cur_domain; private final Xow_xwiki_mgr mgr;

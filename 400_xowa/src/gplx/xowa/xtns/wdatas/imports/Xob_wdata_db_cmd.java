@@ -17,7 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();

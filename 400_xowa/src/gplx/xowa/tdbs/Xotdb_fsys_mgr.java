@@ -16,6 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.tdbs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.bldrs.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.tdbs.utils.*;
 public class Xotdb_fsys_mgr {
 	private final Io_url root_dir; private final Xow_ns_mgr ns_mgr;
 	public Xotdb_fsys_mgr(Io_url root_dir, Xow_ns_mgr ns_mgr) {

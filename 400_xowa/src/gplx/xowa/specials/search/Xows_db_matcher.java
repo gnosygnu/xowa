@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.regxs.*;
+import gplx.langs.regxs.*;
 public class Xows_db_matcher {
 	private final Gfo_pattern raw_pattern;
 	public Xows_db_matcher(int tid, byte[] raw, Xows_db_matcher lhs, Xows_db_matcher rhs) {
@@ -44,7 +44,7 @@ public class Xows_db_matcher {
 				return false;
 			}
 			case Xows_db_matcher.Tid_word_quote:	// note that raw does not have quotes; EX: "B*" -> B*
-				return Bry_finder.Find_fwd(page_ttl_lc, raw) != Bry_finder.Not_found;
+				return Bry_find_.Find_fwd(page_ttl_lc, raw) != Bry_find_.Not_found;
 			case Xows_db_matcher.Tid_not:
 				return !rhs.Matches(page_ttl_lc, page_ttl_words);
 			case Xows_db_matcher.Tid_or:

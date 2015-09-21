@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*;
 import gplx.xowa.urls.*;
 public class Xoh_lnke_wtr {

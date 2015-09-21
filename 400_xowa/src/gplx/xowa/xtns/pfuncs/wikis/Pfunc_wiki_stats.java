@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.wikis.metas.*;
 public class Pfunc_wiki_stats extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr rslt_bfr) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);

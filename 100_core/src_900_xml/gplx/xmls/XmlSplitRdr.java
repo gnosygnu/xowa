@@ -45,7 +45,7 @@ public class XmlSplitRdr {
 		curSum += curRead;
 		done = curSum == curLen;
 		if (done && curRead != curAry.length) // on last pass, readAry may have garbage at end, remove
-			curAry = (byte[])Bry_.Resize_manual(curAry, curRead);
+			curAry = Bry_.Resize(curAry, curRead);
 	}
 	public void Rls() {stream.Rls();}
 }

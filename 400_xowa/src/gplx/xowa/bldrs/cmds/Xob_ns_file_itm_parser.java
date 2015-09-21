@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.srls.dsvs.*;
+import gplx.langs.dsvs.*;
+import gplx.xowa.nss.*;
 public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	private byte[] ns_ids_bry; private String name; private final List_adp rslts = List_adp_.new_();
 	private Xow_ns_mgr ns_mgr; private byte db_file_tid; private boolean mode_each = false;

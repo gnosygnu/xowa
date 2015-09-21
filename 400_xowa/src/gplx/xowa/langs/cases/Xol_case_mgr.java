@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.intl.*;
+import gplx.core.btries.*; import gplx.core.intls.*;
 public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.new_(); private Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
 	public Xol_case_mgr(byte tid) {this.tid = tid;}
@@ -64,7 +64,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 		while (true) {
 			if (pos >= end) break;
 			byte b = src[pos];
-			int b_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(b);
+			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
 			Object o = trie.Match_bgn_w_byte(b, src, pos, end);	// NOTE: used to be (b, src, bgn, end) which would never case correctly; DATE:2013-12-25
 			if (o != null && pos < end) {	// pos < end used for casing 1st letter only; upper_1st will pass end of 1
 				Xol_case_itm itm = (Xol_case_itm)o;
@@ -82,7 +82,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 		int src_len = src.length;
 		if (src_len == 0) return src; // empty bry
 		byte b = src[0];
-		int b_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(b);
+		int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
 		Object o = upper_trie.Match_bgn_w_byte(b, src, 0, b_len);
 		if (o == null) return src;	// 1st letter is not a lower case char (either num, symbol, or upper)
 		Xol_case_itm itm = (Xol_case_itm)o;
@@ -102,7 +102,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 		while (true) {
 			if (pos >= end) break;
 			byte b = src[pos];
-			int b_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(b);
+			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
 			Object o = trie.Match_bgn_w_byte(b, src, pos, end);	// NOTE: used to be (b, src, bgn, end) which would never case correctly; DATE:2013-12-25
 			if (o != null && pos < end) {	// pos < end used for casing 1st letter only; upper_1st will pass end of 1
 				Xol_case_itm itm = (Xol_case_itm)o;
@@ -122,7 +122,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 	public byte[] Case_build_1st_lower(Bry_bfr bfr, byte[] src, int bgn, int end) {return Case_build_1st(bfr, Bool_.N, src, bgn, end);}
 	public byte[] Case_build_1st(Bry_bfr bfr, boolean upper, byte[] src, int bgn, int end) {
 		if (bgn == end) return Bry_.Empty;	// upper "" -> ""
-		int b_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(src[bgn]);
+		int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(src[bgn]);
 		bfr.Add(Case_build(upper, src, bgn, bgn + b_len));
 		bfr.Add_mid(src, bgn + b_len, end);
 		return bfr.Xto_bry_and_clear();

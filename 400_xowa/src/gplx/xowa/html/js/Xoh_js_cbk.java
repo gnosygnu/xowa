@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.core.json.*;
+import gplx.langs.jsons.*;
 import gplx.xowa.html.js.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.parsers.*;
@@ -46,19 +46,19 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	}
 	private String Parse_to_html(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
-		Xop_ctx ctx = wiki.Ctx();
+		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
 		byte[] raw = Bry_.new_u8(m.Args_getAt(0).Val_to_str_or_empty());
 		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.parse(m.Args_getAt(1).Val_to_str_or_empty());
 		try {
-			wiki.Ctx().Para().Enabled_(para_enabled);
-			wiki.Parser().Parse_text_to_wdom(root, wiki.Ctx(), wiki.Ctx().Tkn_mkr(), raw, 0);
+			ctx.Para().Enabled_(para_enabled);
+			wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), raw, 0);
 			byte[] data = root.Data_mid();
-			wiki.Html_mgr().Html_wtr().Write_all(bfr, wiki.Ctx(), data, root);
+			wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, data, root);
 			return bfr.Xto_str_and_clear();
 		}
 		finally {
-			wiki.Ctx().Para().Enabled_(old_para_enabled);
+			ctx.Para().Enabled_(old_para_enabled);
 		}
 	}
 	private String Get_page(GfoMsg m) {
@@ -95,7 +95,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			byte[][] ttls = Bry_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.Nl);
+			byte[][] ttls = Bry_split_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.Nl);
 			int ttls_len = ttls.length;
 			String[][] rv = new String[ttls_len][];
 			for (int i = 0; i < ttls_len; i++) {
@@ -135,7 +135,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 			wdata_mgr.Wdata_wiki().Init_assert();	// NOTE: must assert else ns_mgr won't load Property
 			int len = m.Args_count();
 			if (len < 1) return null;
-			byte[][] langs = Bry_.Split(m.Args_getAt(0).Val_to_bry(), Byte_ascii.Semic);
+			byte[][] langs = Bry_split_.Split(m.Args_getAt(0).Val_to_bry(), Byte_ascii.Semic);
 			int langs_len = langs.length;
 			String[] rv = new String[len - 1];
 			for (int i = 1; i < len; i++) {

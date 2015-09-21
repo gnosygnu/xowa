@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.apps.*;
+import gplx.xowa.apps.gfss.*;
 public class Xoa_cfg_db_txt implements Xoa_cfg_db {
 	private Bry_fmtr fmtr = Bry_fmtr.new_("app.cfgs.get('~{msg}', '~{wiki}').val = '~{val}';\n", "msg", "wiki", "val");
 	public void Cfg_reset_all(Xoa_cfg_mgr cfg_mgr) {

@@ -16,9 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.tests.*;
+import gplx.xowa.cfgs.*;
 import gplx.xowa.langs.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.tdbs.hives.*;
 public class Xop_fxt {
 	public Xop_fxt() {
@@ -36,11 +39,11 @@ public class Xop_fxt {
 		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
-		ctx = wiki.Ctx();
+		ctx = wiki.Parser_mgr().Ctx();
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
 		wiki.File_mgr().Repo_mgr().Page_finder_(mock_wkr);
-		parser = wiki.Parser();
-		tkn_mkr = app.Tkn_mkr();
+		parser = wiki.Parser_mgr().Main();
+		this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
 		ctx.Para().Enabled_n_();
 		hdom_wtr = wiki.Html_mgr().Html_wtr();
 		wiki.Html_mgr().Img_suppress_missing_src_(false);
@@ -343,7 +346,7 @@ public class Xop_fxt {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_url page_url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
-		return wiki.Load_page_by_ttl(page_url, ttl).Data_raw();
+		return wiki.Data_mgr().Load_page_by_ttl(page_url, ttl).Data_raw();
 	}
 	public static void Reg_xwiki_alias(Xowe_wiki wiki, String alias, String domain) {
 		byte[] domain_bry = Bry_.new_a7(domain);

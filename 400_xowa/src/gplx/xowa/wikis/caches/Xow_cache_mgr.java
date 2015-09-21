@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.apps.langs.*;
+import gplx.xowa.langs.cfgs.*;
 public class Xow_cache_mgr {
 	private Xowe_wiki wiki;
 	public Xow_cache_mgr(Xowe_wiki wiki) {

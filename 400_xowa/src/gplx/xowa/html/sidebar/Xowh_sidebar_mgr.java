@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.btries.*; import gplx.xowa.langs.msgs.*;
+import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
@@ -52,7 +53,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			);
 	}	private static byte[] Ignore_wiki_ess = Bry_.new_a7("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_u8("special:Random/Página djvu");
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
-		byte[][] lines = Bry_.Split(src, Byte_ascii.Nl);
+		byte[][] lines = Bry_split_.Split(src, Byte_ascii.Nl);
 		int lines_len = lines.length;
 		Url_encoder id_encoder = Xoa_app_.Utl__encoder_mgr().Id();
 		Xowh_sidebar_itm cur_grp = null;
@@ -63,9 +64,9 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			if	(line[0] != Byte_ascii.Star) continue;	// skip non-list items; must begin with "*"
 			byte tid = line[1] == Byte_ascii.Star ? Xowh_sidebar_itm.Tid_itm : Xowh_sidebar_itm.Tid_grp;
 			byte[] bry = Bry_.Trim(line, tid, line_len);	// trim *, **; note that tid indicates # of asterisks
-			bry = gplx.html.Html_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
+			bry = gplx.langs.htmls.Html_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
 			if (ignore_trie.Match_bgn(bry, 0, bry.length) != null) continue; // ignore SEARCH, TOOLBOX, LANGUAGES
-			int pipe_pos = Bry_finder.Find_fwd(bry, Byte_ascii.Pipe);
+			int pipe_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe);
 			byte[] text_key = tid == Xowh_sidebar_itm.Tid_grp ? bry : Bry_.Mid(bry, pipe_pos + 1, bry.length);	// get text_key; note that grp is entire bry, while itm is after |
 			byte[] text_val = Resolve_key(text_key);
 			byte[] id = id_encoder.Encode(bfr.Add(CONST_id_prefix), text_key).Xto_bry_and_clear();	// build id; "n-encoded_id"
@@ -116,7 +117,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	private byte[] Resolve_key(byte[] key) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj(key);
 		if (Bry_.Len_eq_0(val)) val = key;	// if key is not found, default to val
-		return wiki.Parser().Parse_text_to_wtxt(val);
+		return wiki.Parser_mgr().Main().Parse_text_to_wtxt(val);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_grp_fmt_))		html_grp_fmtr.Fmt_(m.ReadBry("v"));

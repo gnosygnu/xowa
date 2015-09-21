@@ -44,7 +44,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			Xop_root_tkn sub_root = tkn_mkr.Root(src);
 			boolean prv_recursing = ref_mgr.References__recursing();
 			ref_mgr.References__recursing_(true);
-			wiki.Parser().Parse_text_to_wdom(sub_root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse inner contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
+			wiki.Parser_mgr().Main().Parse_text_to_wdom(sub_root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse inner contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
 			ref_mgr.References__recursing_(prv_recursing);
 		}
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>

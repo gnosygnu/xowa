@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.urls; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.nss.*;
 public class Xoa_url_parser_fxt {
 	protected final Xoae_app app; protected final Xowe_wiki cur_wiki;
 	protected final Xoa_url_parser parser;

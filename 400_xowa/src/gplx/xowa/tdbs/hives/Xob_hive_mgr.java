@@ -19,7 +19,9 @@ package gplx.xowa.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.ios.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.sqls.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*;
+import gplx.xowa.tdbs.xdats.*;
 public class Xob_hive_mgr {
 	public Xob_hive_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.fsys_mgr = wiki.Tdb_fsys_mgr();} private Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr;
 	public void Clear() {regy.Clear(); xdat.Clear();}

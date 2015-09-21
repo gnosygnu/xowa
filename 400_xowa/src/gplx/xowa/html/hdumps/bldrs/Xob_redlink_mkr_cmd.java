@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.html.hdumps.data.*;
+import gplx.dbs.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.html.hdumps.data.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private int commit_interval = 10000, commit_count = 0;

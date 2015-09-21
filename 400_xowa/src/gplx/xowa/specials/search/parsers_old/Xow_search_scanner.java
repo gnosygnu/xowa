@@ -40,11 +40,11 @@ class Xow_search_scanner {
 				}
 				switch (cur_tid) {
 					case Xow_search_tkn.Tid_space:	// discard spaces
-						pos = Bry_finder.Find_fwd_while(src, pos, src_len, Byte_ascii.Space);
+						pos = Bry_find_.Find_fwd_while(src, pos, src_len, Byte_ascii.Space);
 						break;
 					case Xow_search_tkn.Tid_quote:	// find end quote and add as word
 						int quote_bgn = pos + 1;
-						int quote_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
+						int quote_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
 						if (quote_end == Bry_.NotFound) throw Err_.new_wo_type("could not find end quote", "src", String_.new_u8(src));
 						Tkns_add_word(Xow_search_tkn.Tid_word_quoted, quote_bgn, quote_end);
 						pos = quote_end + 1;		// +1 to place after quote
@@ -121,7 +121,7 @@ class Xow_search_scanner {
 			int words_len = words.length;
 			if (	words_len == 1					// only one word
 				&&	!Bry_.Eq(words[0], cur_word)	// split word not same as raw
-				&&	Bry_finder.Find_fwd(cur_word, Byte_ascii.Star) == -1	// no asterisk
+				&&	Bry_find_.Find_fwd(cur_word, Byte_ascii.Star) == -1	// no asterisk
 				) {
 				tkns.Add(Xow_search_tkn.new_bry(tid, words[0]));
 				return;

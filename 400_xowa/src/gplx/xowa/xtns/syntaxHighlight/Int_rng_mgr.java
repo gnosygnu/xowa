@@ -37,7 +37,7 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 		return false;
 	}
 	public boolean Parse(byte[] src) {
-		byte[][] lines = Bry_.Split(src, Byte_ascii.Comma);
+		byte[][] lines = Bry_split_.Split(src, Byte_ascii.Comma);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			if (!Parse_line(lines[i])) {

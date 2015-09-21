@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
-import org.junit.*; import gplx.core.regxs.*;
+import org.junit.*; import gplx.langs.regxs.*;
 public class RegxPatn_cls_like_tst {
 	@Test  public void Basic() {
 		tst_Match("abcd", "abcd", true);				// basic; pass

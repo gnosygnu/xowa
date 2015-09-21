@@ -39,7 +39,7 @@ public class Wdata_date {
 			case Byte_ascii.Dash:	year_sign = -1; break;
 			default:				throw Err_.new_unhandled(date[0]);
 		}
-		int year_end = Bry_finder.Find_fwd(date, Byte_ascii.Dash, 1);
+		int year_end = Bry_find_.Find_fwd(date, Byte_ascii.Dash, 1);
 		long year		= Long_.parse_or(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Err_.new_wo_type("parse failed", "raw", String_.new_a7(date));
 		int month		= Bry_.To_int_or(date, year_end +  1, year_end +  3, -1);
 		int day			= Bry_.To_int_or(date, year_end +  4, year_end +  6, -1);

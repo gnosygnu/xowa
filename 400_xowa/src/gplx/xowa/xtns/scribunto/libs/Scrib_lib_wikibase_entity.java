@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wdatas.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;

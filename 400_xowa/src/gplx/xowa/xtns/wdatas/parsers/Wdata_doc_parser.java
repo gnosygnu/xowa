@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 public interface Wdata_doc_parser {
 	byte[] Parse_qid(Json_doc doc);
 	Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc);

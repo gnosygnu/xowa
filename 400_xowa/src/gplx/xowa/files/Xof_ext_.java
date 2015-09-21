@@ -81,7 +81,7 @@ public class Xof_ext_ {
 	}
 	public static Xof_ext new_by_ttl_(byte[] ttl) {
 		int ttl_len = ttl.length;
-		int dot_pos = Bry_finder.Find_bwd(ttl, Byte_ascii.Dot);
+		int dot_pos = Bry_find_.Find_bwd(ttl, Byte_ascii.Dot);
 		byte[] ext = (dot_pos == Bry_.NotFound || dot_pos == ttl_len) ? Bry_.Empty : Bry_.Lcase__all(ttl, dot_pos + 1, ttl_len); // +1 to bgn after .
 		return new_(Get_id_by_ext_(ext), ext);
 	}
@@ -96,7 +96,7 @@ public class Xof_ext_ {
 		return rv;
 	}
 	public static byte[] Lower_ext(byte[] ttl) {
-		int dot_pos = Bry_finder.Find_bwd(ttl, Byte_ascii.Dot);
+		int dot_pos = Bry_find_.Find_bwd(ttl, Byte_ascii.Dot);
 		int ttl_len = ttl.length;
 		if (dot_pos == Bry_.NotFound || dot_pos == ttl_len - 1) return ttl;
 		Object o = ext_hash.Get_by_mid(ttl, dot_pos + 1, ttl_len);

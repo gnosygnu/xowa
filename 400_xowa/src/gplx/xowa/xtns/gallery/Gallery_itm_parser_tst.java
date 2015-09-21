@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Gallery_itm_parser_tst {
 	@Before public void init() {fxt.Init();} private Gallery_itm_parser_fxt fxt = new Gallery_itm_parser_fxt();
 	@Test   public void All()				{fxt.Test_parse("File:A.png|a|alt=b|link=c"		, fxt.Expd("File:A.png", "a" , "b" , "c"));}

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*;
 import gplx.ios.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 public class Xob_tst {		
 	@Before public void init() {fxt = new Xob_fxt().Ctor_mem();} private Xob_fxt fxt;
 	// @After public void term() {fxt.Wiki().Ctx().Sys_load_tmpls_(true);} // commented during wiki.Ctx() removal; DATE:2014-04-22

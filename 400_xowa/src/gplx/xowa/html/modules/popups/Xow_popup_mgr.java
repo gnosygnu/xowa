@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.core.primitives.*; import gplx.core.threads.*;
 import gplx.core.js.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
@@ -190,7 +191,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	}
 	public static Int_obj_ref[] Ns_allowed_parse(Xowe_wiki wiki, byte[] raw) {
 		List_adp rv = List_adp_.new_();
-		byte[][] ary = Bry_.Split(raw, Byte_ascii.Pipe);
+		byte[][] ary = Bry_split_.Split(raw, Byte_ascii.Pipe);
 		int ary_len = ary.length;
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		for (int i = 0; i < ary_len; i++) {

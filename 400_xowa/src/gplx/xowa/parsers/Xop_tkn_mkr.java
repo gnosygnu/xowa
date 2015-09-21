@@ -16,19 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
+import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.vnts.*;
 public class Xop_tkn_mkr {
-	Xop_space_tkn space_tkn_immutable = new Xop_space_tkn(true, -1, -1);
 	public Xop_root_tkn Root(byte[] raw)													{return new Xop_root_tkn().Root_src_(raw);}
 	public Xop_txt_tkn Txt(int bgn, int end)												{return new Xop_txt_tkn(bgn, end);}
-//		public Xop_space_tkn Space(Xop_tkn_grp grp, int bgn, int end)							{grp.Subs_src_pos_(grp.Subs_len(), bgn, end); return space_tkn_immutable;}
 	public Xop_space_tkn Space(Xop_tkn_grp grp, int bgn, int end)							{Xop_space_tkn rv = new Xop_space_tkn(false, bgn, end); grp.Subs_src_pos_(grp.Subs_len(), bgn, end); return rv;}
 	public Xop_space_tkn Space_mutable(int bgn, int end)									{return new Xop_space_tkn(false, bgn, end);}
 	public Xop_apos_tkn Apos(int bgn, int end
 		, int aposLen, int typ, int cmd, int lit_apos)										{return new Xop_apos_tkn(bgn, end, aposLen, typ, cmd, lit_apos);}
 	public Xop_tkn_itm Amp_txt(int bgn, int end, Xop_amp_trie_itm itm)						{return new Xop_amp_tkn_txt(bgn, end, itm);}
 	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int, byte[] val_bry)				{return new Xop_amp_tkn_num(bgn, end, val_int, val_bry);}
-	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int)								{return new Xop_amp_tkn_num(bgn, end, val_int, gplx.intl.Utf16_.Encode_int_to_bry(val_int));}
+	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int)								{return new Xop_amp_tkn_num(bgn, end, val_int, gplx.core.intls.Utf16_.Encode_int_to_bry(val_int));}
 	public Xop_nl_tkn NewLine(int bgn, int end, byte nl_typ, int nl_len)					{return new Xop_nl_tkn(bgn, end, nl_typ, nl_len);}
 	public Xop_lnki_tkn Lnki(int bgn, int end)												{return (Xop_lnki_tkn)new Xop_lnki_tkn().Tkn_ini_pos(false, bgn, end);}
 	public Xop_list_tkn List_bgn(int bgn, int end, byte listType, int symLen)				{return Xop_list_tkn.bgn_(bgn, end, listType, symLen);}
@@ -91,9 +89,8 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.translates.Xop_languages_xnde Xnde_languages()					{return new gplx.xowa.xtns.translates.Xop_languages_xnde();}
 	public gplx.xowa.xtns.translates.Xop_tvar_tkn Tvar(int tkn_bgn, int tkn_end, int key_bgn, int key_end, int txt_bgn, int txt_end, byte[] wikitext) 
 																							{return new gplx.xowa.xtns.translates.Xop_tvar_tkn(tkn_bgn, tkn_end, key_bgn, key_end, txt_bgn, txt_end, wikitext);}
-	public gplx.xowa.langs.vnts.Xop_vnt_tkn Vnt(int bgn_lhs, int bgn_rhs)					{return new gplx.xowa.langs.vnts.Xop_vnt_tkn(bgn_lhs, bgn_rhs);}
-	public gplx.xowa.langs.vnts.Xop_vnt_eqgt_tkn Vnt_eqgt(int bgn, int end)					{return new gplx.xowa.langs.vnts.Xop_vnt_eqgt_tkn(bgn, end);}
-
+	public Xop_vnt_tkn Vnt(int bgn_lhs, int bgn_rhs)										{return new Xop_vnt_tkn(bgn_lhs, bgn_rhs);}
+	public Xop_vnt_eqgt_tkn Vnt_eqgt(int bgn, int end)										{return new Xop_vnt_eqgt_tkn(bgn, end);}
 //		public void Clear() {
 //			space_tkns_len = txt_tkns_len = 0;
 //		}

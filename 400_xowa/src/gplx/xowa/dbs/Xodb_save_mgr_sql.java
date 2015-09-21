@@ -19,9 +19,8 @@ package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.*;
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
-	private final Xow_page_mgr page_mgr;
 	private final Xodb_mgr_sql db_mgr;
-	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr, Xow_page_mgr page_mgr) {this.db_mgr = db_mgr; this.page_mgr = page_mgr;} 
+	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;} 
 	public boolean Create_enabled() {return create_enabled;} public void Create_enabled_(boolean v) {create_enabled = v;} private boolean create_enabled;
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;
 	public int Page_id_next() {return page_id_next;} public void Page_id_next_(int v) {page_id_next = v;} private int page_id_next;
@@ -53,7 +52,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		page_core_tbl.Insert_bgn();
 		page_text_tbl.Insert_bgn();
 		try {
-			page_mgr.Create(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, DateAdp_.Now(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
+			db_mgr.Core_data_mgr().Create_page(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, DateAdp_.Now(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
 			db_file.Tbl__ns().Update_ns_count(ns_id, ns_count);
 			db_file.Tbl__cfg().Update_int("db", "page.id_next", page_id + 1);
 		} finally {

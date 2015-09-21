@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
-import gplx.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private final Object thread_lock = new Object();
 	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();

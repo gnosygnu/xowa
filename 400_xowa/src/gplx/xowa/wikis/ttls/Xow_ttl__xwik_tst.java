@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.nss.*;
 public class Xow_ttl__xwik_tst {
 	@Before public void init() {fxt.Reset();} private Xow_ttl_fxt fxt = new Xow_ttl_fxt();
 	@Test   public void Known()						{fxt.Init_ttl("fr:a")			.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("a").Test();}

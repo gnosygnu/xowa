@@ -41,7 +41,7 @@ class Imap_fxt_base {
 	@gplx.Virtual public void Reset() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		wiki.Ctx().Para().Enabled_n_();
+		wiki.Parser_mgr().Ctx().Para().Enabled_n_();
 	}
 	public Imap_itm_shape itm_rect_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_rect, link, pts_ary);}
 	public Imap_itm_shape itm_circle_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_circle, link, pts_ary);}
@@ -58,7 +58,7 @@ class Imap_fxt_base {
 	}
 	private Xop_tkn_itm Make_link_tkn(byte[] src) {
 		Xop_root_tkn root_tkn = new Xop_root_tkn();			
-		wiki.Parser().Parse_text_to_wdom(root_tkn, wiki.Ctx(), app.Tkn_mkr(), src, Xop_parser_.Doc_bgn_bos);
+		wiki.Parser_mgr().Main().Parse_text_to_wdom(root_tkn, wiki.Parser_mgr().Ctx(), app.Parser_mgr().Tkn_mkr(), src, Xop_parser_.Doc_bgn_bos);
 		return root_tkn.Subs_get(0);
 	}
 }

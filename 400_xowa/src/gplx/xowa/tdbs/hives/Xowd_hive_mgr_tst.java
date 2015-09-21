@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.tdbs.*;
 import org.junit.*;
+import gplx.xowa.nss.*;
 public class Xowd_hive_mgr_tst {
 	Xowd_hive_mgr_fxt fxt = new Xowd_hive_mgr_fxt();
 	@Before public void init() {fxt.Clear();}

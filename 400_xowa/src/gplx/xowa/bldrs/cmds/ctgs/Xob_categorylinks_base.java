@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.ctgs.*;
-import gplx.xowa.bldrs.sqls.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
 public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
 	private DateAdp_parser date_parser = DateAdp_parser.new_(); private Sql_file_parser sql_parser; Uca_trie trie; private Bry_bfr uca_bfr = Bry_bfr.reset_(255);		
 	public abstract Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser);
@@ -37,7 +37,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 				? 0 : Bit_.Xto_int_date_short(cur_modified_on);
 		}
 		else if (Bry_.Eq(fld_key, Fld_cl_sortkey)) {
-			int nl_pos = Bry_finder.Find_fwd(src, Byte_ascii.Nl, fld_bgn, fld_end);
+			int nl_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl, fld_bgn, fld_end);
 			if (nl_pos != Bry_.NotFound)	// sortkey sometimes has format of "sortkey\ntitle"; EX: "WALES, JIMMY\nJIMMY WALES"; discard 2nd to conserve hard-disk space
 				fld_end = nl_pos;
 			cur_sortkey = Bry_.Mid(src, fld_bgn, fld_end);
@@ -79,8 +79,8 @@ class Xoctg_link_sql_sorter implements gplx.lists.ComparerAble {
 		byte[] lhs_bry = lhs.Bfr(); int lhs_bgn = 0, lhs_end = lhs.Row_bgn() - 1;
 		byte[] rhs_bry = rhs.Bfr(); int rhs_bgn = 0, rhs_end = rhs.Row_bgn() - 1;
 		for (int i = 0; i < 3; i++) {
-			lhs_bgn = lhs_end + 1; lhs_end = Bry_finder.Find_fwd(lhs_bry, Byte_ascii.Pipe, lhs_bgn);
-			rhs_bgn = rhs_end + 1; rhs_end = Bry_finder.Find_fwd(rhs_bry, Byte_ascii.Pipe, rhs_bgn);
+			lhs_bgn = lhs_end + 1; lhs_end = Bry_find_.Find_fwd(lhs_bry, Byte_ascii.Pipe, lhs_bgn);
+			rhs_bgn = rhs_end + 1; rhs_end = Bry_find_.Find_fwd(rhs_bry, Byte_ascii.Pipe, rhs_bgn);
 			int comp = Bry_.Compare(lhs_bry, lhs_bgn, lhs_end, rhs_bry, rhs_bgn, rhs_end);
 			if (comp != CompareAble_.Same) return comp;
 		}

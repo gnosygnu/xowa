@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
+import gplx.langs.htmls.encoders.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;

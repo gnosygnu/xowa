@@ -35,7 +35,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);
 		Close_open_itms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
 		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos, Xop_xnde_tag_.Tag_h2);	// pass h2; should pass h# where # is correct #, but for purpose of Para_wkr, <h2> tag does not matter
-		int new_pos = Bry_finder.Find_fwd_while(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
+		int new_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
 		int hdr_len = new_pos - cur_pos + 1;														// +1 b/c Hook has 1 eq: "\n="
 		switch (hdr_len) {
 			case 1: ctx.Msg_log().Add_itm_none(Xop_hdr_log.Len_1, src, bgn_pos, new_pos); break;			// <h1>; flag

@@ -16,16 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.paras.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.paras.*;
 public class Xop_comm_lxr implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_comment;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_comment;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Bgn_ary, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int lhs_end = cur_pos;
-		int end_pos = Bry_finder.Find_fwd(src, End_ary, cur_pos, src_len);	// search for "-->"	// NOTE: do not reuse cur_pos, else cur_pos may become -1 and fatal error in ctx.Msg_log() below; DATE:2014-06-08
+		int end_pos = Bry_find_.Find_fwd(src, End_ary, cur_pos, src_len);	// search for "-->"	// NOTE: do not reuse cur_pos, else cur_pos may become -1 and fatal error in ctx.Msg_log() below; DATE:2014-06-08
 		int rhs_bgn = end_pos;
-		if (end_pos == Bry_finder.Not_found) {								// "-->" not found
+		if (end_pos == Bry_find_.Not_found) {								// "-->" not found
 			ctx.Msg_log().Add_itm_none(Xop_comm_log.Eos, src, bgn_pos, cur_pos);
 			cur_pos = src_len;												// gobble up rest of content
 		}

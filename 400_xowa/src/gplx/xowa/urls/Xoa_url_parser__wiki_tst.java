@@ -35,8 +35,7 @@ public class Xoa_url_parser__wiki_tst {
 	}
 	@Test  public void Vnt() {
 		Xowe_wiki wiki = tstr.Wiki();
-		wiki.Lang().Vnt_mgr().Enabled_(true);
-		wiki.Lang().Vnt_mgr().Vnt_grp().Add(new gplx.xowa.langs.vnts.Vnt_mnu_itm(Bry_.new_a7("zh-hans"), Bry_.new_a7("zh-hant")));
+		gplx.xowa.parsers.vnts.Xop_vnt_parser_fxt.Vnt_mgr__init(wiki.Lang().Vnt_mgr(), 0, String_.Ary("zh-hans", "zh-hant"));
 		tstr.Run_parse("en.wikipedia.org/zh-hans/A").Chk_wiki("en.wikipedia.org").Chk_page("A").Chk_vnt("zh-hans");
 	}
 }

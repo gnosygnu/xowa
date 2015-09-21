@@ -57,7 +57,7 @@ public class Xog_history_stack {
 	}
 	public void Srl_load(byte[] bry) {
 		list.Clear();
-		byte[][] lines = Bry_.Split_lines(bry);
+		byte[][] lines = Bry_split_.Split_lines(bry);
 		int len = lines.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] line = lines[i];

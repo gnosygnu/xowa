@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data.srl; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.data.*;
-import gplx.core.primitives.*; import gplx.xowa.html.hzips.*; import gplx.xowa2.gui.*;
+import gplx.core.primitives.*; import gplx.xowa.html.hzips.*; import gplx.xowa.gui.*;
 public interface Xohd_page_srl_itm {	// INFO: serializes Xog_page to a byte[] before storing in the wiki_page_html table
 	byte	Tid();
 	void	Save(Xog_page hpg, Bry_bfr bfr);

@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.html.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Listing_xnde(int tag_id) {}
@@ -64,7 +65,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private Listing_xtn_mgr xtn_mgr;
 	private byte[] html_output = Bry_.Empty;
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		this.wiki = wiki; this.parser = wiki.Parser(); this.msg_mgr = wiki.Lang().Msg_mgr();
+		this.wiki = wiki; this.parser = wiki.Parser_mgr().Main(); this.msg_mgr = wiki.Lang().Msg_mgr();
 		xtn_mgr = (Listing_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Listing_xtn_mgr.Xtn_key_static);
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) return;
 		Xoae_app app = wiki.Appe();
@@ -103,7 +104,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		bfr.Add(Xoa_consts.Invk_end);			// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		html_output = wiki.Parser().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
+		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
 		return true;
 	}
 	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Html_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
@@ -203,7 +204,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
 		tmp_bfr.Add(Xoa_consts.Invk_end);			// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		rv = wiki.Parser().Parse_text_to_html(sub_ctx, tmp_bfr.Xto_bry_and_clear());
+		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.Xto_bry_and_clear());
 		Xol_msg_itm position_text = xtn_mgr.Position_text();
 		if (Bry_.Len_eq_0(position_text.Val())) return rv;
 		return position_text.Fmt(tmp_bfr, rv);

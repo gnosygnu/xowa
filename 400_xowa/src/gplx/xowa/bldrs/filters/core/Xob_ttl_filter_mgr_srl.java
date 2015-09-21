@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
-import gplx.srls.dsvs.*;
+import gplx.langs.dsvs.*;
 class Xob_ttl_filter_mgr_srl extends Dsv_wkr_base {
 	private byte[] ttl; private Hash_adp_bry hash;
 	public Xob_ttl_filter_mgr_srl Init(Hash_adp_bry hash) {this.hash = hash; return this;}

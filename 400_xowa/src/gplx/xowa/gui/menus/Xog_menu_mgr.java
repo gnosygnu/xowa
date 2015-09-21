@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
+import gplx.xowa.langs.*;
 public class Xog_menu_mgr implements GfoInvkAble {
 	private Xoae_app app;
 	public Xog_menu_mgr(Xoa_gui_mgr gui_mgr) {

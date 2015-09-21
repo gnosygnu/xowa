@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.tdbs; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.tdbs.bldrs.*;
 public class Xotdb_page_raw_parser {
 	public void Init(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, int load_len) {
 		this.wiki = wiki; ns_mgr = wiki.Ns_mgr();
@@ -34,7 +36,7 @@ public class Xotdb_page_raw_parser {
 	}	Io_line_rdr rdr; Xowe_wiki wiki; Xow_ns_mgr ns_mgr; Xow_ns ns_itm;
 	public void Skip_first_line() {
 		rdr.Read_next();
-		int pos = Bry_finder.Find_fwd(rdr.Bfr(), Byte_ascii.Nl);
+		int pos = Bry_find_.Find_fwd(rdr.Bfr(), Byte_ascii.Nl);
 //			rdr.Move(pos + 1);
 		rdr.Truncate(pos + 1);
 	}

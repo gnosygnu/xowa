@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.apps.progs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.langs.htmls.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -226,7 +226,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
-		tag_end_pos = Bry_finder.Find_fwd_while(src, tag_end_pos, src_len, Byte_ascii.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
+		tag_end_pos = Bry_find_.Find_fwd_while(src, tag_end_pos, src_len, Byte_ascii.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
 		byte tag_end_byte = src[tag_end_pos];
 		if (tag_end_byte == Byte_ascii.Slash) {	// inline
 			boolean valid = true;
@@ -251,7 +251,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			end_rhs = gtPos;
 		else {				// <noinclude>; search for end tag
 			while (true) {
-				int end_lhs = Bry_finder.Find_fwd(src, end_bry, findPos);
+				int end_lhs = Bry_find_.Find_fwd(src, end_bry, findPos);
 				if (end_lhs == -1 || (end_lhs + end_bry_len) == src_len) break;	// nothing found or EOS;
 				findPos = end_lhs;
 				for (int i = end_lhs + end_bry_len; i < src_len; i++) {
@@ -313,7 +313,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_domain_type_.Int__home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.langs.htmls.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -409,7 +409,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	}		
 	private int Make_xtag_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_xnde_tag end_tag) {
 		int end_tag_id = end_tag.Id();
-		cur_pos = Bry_finder.Find_fwd_while_not_ws(src, cur_pos, src_len) + 1;
+		cur_pos = Bry_find_.Find_fwd_while_not_ws(src, cur_pos, src_len) + 1;
 		int prv_xnde_pos = ctx.Stack_idx_find_but_stop_at_tbl(Xop_tkn_itm_.Tid_xnde);	// find any previous xnde on stack
 		Xop_xnde_tkn bgn_nde = (Xop_xnde_tkn)ctx.Stack_get(prv_xnde_pos);
 		int bgn_tag_id = bgn_nde == null ? -1 : bgn_nde.Tag().Id();
@@ -473,7 +473,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.langs.htmls.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {                
 			if (pre2_pending) {
 				pre2_pending = false;
@@ -541,7 +541,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] close_bry) {
 		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
 		if (tag_bgn > -1 
-			&& Bry_.Eq(Pfunc_tag.Xtag_bgn_lhs, src, tag_bgn, tag_bgn + Pfunc_tag.Xtag_bgn_lhs.length))	// xtn created by tag
+			&& Bry_.Eq(src, tag_bgn, tag_bgn + Pfunc_tag.Xtag_bgn_lhs.length, Pfunc_tag.Xtag_bgn_lhs))	// xtn created by tag
 			return Find_xtn_end_tag(ctx, src, src_len, open_end, close_bry, tag_bgn + Pfunc_tag.Xtag_bgn);
 		else {	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
 			xtn_end_tag_trie.Clear();
@@ -557,14 +557,14 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	}
 	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
 		int tag_id = Bry_.To_int_or(src, tag_bgn, tag_bgn + 10, -1);
-		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_finder.Not_found;}
+		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
 		byte[] tag_end = tmp.To_bry_and_rls();
-		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
-		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_finder.Not_found;}
-		rv = Bry_finder.Find_bwd(src, Byte_ascii.Lt, rv - 1);
-		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_finder.Not_found;}
+		int rv = Bry_find_.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
+		if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
+		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1);
+		if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
 		return rv;
 	}
 	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int name_bgn, int name_end, int atrs_bgn, int atrs_end, Xop_xatr_itm[] atrs, boolean inline, boolean pre2_hack) {
@@ -676,7 +676,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_source:	// added on DATE:2014-06-24
 					case Xop_xnde_tag_.Tid_pre:	 // NOTE: pre must be an xtn, but does not create an xtn node (it gobbles up everything between); still need to touch the para_wkr; DATE:2014-02-20
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_bgn);
-						if (Bry_finder.Find_fwd(src, Byte_ascii.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_finder.Not_found)
+						if (Bry_find_.Find_fwd(src, Byte_ascii.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_find_.Not_found)
 							ctx.Para().Process_nl(ctx, root, src, xnde.Tag_open_bgn(), xnde.Tag_open_bgn());
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_end);
 						break;

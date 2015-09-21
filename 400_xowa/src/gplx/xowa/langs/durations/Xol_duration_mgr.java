@@ -49,7 +49,7 @@ public class Xol_duration_mgr {
 			Xol_interval_itm interval = intervals[i];
 			Xol_msg_itm msg_itm = interval_msgs[interval.Duration_itm().Tid()];
 			byte[] msg_bry = msg_itm.Fmt(tmp_bfr, interval.Val());
-			msg_bry = ctx.Wiki().Parser().Parse_text_to_html(ctx, msg_bry);
+			msg_bry = ctx.Wiki().Parser_mgr().Main().Parse_text_to_html(ctx, msg_bry);
 			msgs_ary[i] = msg_bry;
 		}
 		return List_to_str(msgs_ary);

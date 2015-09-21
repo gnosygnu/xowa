@@ -16,7 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*; import gplx.xowa.pages.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.apps.gfss.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.parsers.*; 
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
@@ -72,8 +76,8 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		byte[] page_display = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl());
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) { 	// VNT
-			page_name = vnt_mgr.Convert_text(wiki, page_name);
-			page_display = vnt_mgr.Convert_text(wiki, page_display);
+			page_name = vnt_mgr.Convert_mgr().Convert_text(wiki, page_name);
+			page_display = vnt_mgr.Convert_mgr().Convert_text(wiki, page_display);
 		}
 		fmtr.Bld_bfr_many(html_bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
@@ -121,7 +125,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			return;
 		}
 		if	(ns_id == Xow_ns_.Id_mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
-			bfr.Add(gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
+			bfr.Add(Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
 		if (ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
@@ -129,7 +133,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
 		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl__bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
-		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Ctx(), hctx, page.Root().Data_mid(), page.Root());
+		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		if (tidy_enabled) {
 			tidy_mgr.Run_tidy_html(page, hdom_bfr);
 			bfr.Add_bfr_and_clear(hdom_bfr);
@@ -151,7 +155,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		}
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) 	// VNT
-			bfr.Add(vnt_mgr.Convert_text(wiki, bfr.Xto_bry_and_clear()));
+			bfr.Add(vnt_mgr.Convert_mgr().Convert_text(wiki, bfr.Xto_bry_and_clear()));
 	}
 	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);
@@ -162,7 +166,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		if	(	ns_id == Xow_ns_.Id_mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			&&	page_tid == Xow_page_tid.Tid_wikitext
 			)
-			data_raw = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw);
+			data_raw = Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw);
 		int data_raw_len = data_raw.length;
 		if (mgr.Html_capable())
 			Xoh_html_wtr_escaper.Escape(page.Wikie().Appe().Parser_amp_mgr(), bfr, data_raw, 0, data_raw_len, false, false);	// NOTE: must escape; assume that browser will automatically escape (&lt;) (which Mozilla does)

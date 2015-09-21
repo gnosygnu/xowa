@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.threads.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wmfs.dumps.*;
+import gplx.xowa.wms.dumps.*;
 abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Ctor(Xoi_setup_mgr install_mgr, String wiki_key) {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;

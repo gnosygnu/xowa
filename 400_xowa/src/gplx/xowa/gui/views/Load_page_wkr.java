@@ -41,17 +41,17 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 				Xow_wiki_.Rls_mem(wiki, false);								// clear caches (which will clear bry_bfr_mkr)
 			else															// not low in memory
 				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mkr only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
-			this.page = wiki.Load_page_by_ttl(url, ttl, wiki.Lang(), tab, false);
+			this.page = wiki.Data_mgr().Load_page_by_ttl(url, ttl, wiki.Lang(), tab, false);
 			this.hdump_enabled = wiki.Html__hdump_enabled();
 			wait_count = 0;
 			while (gplx.xowa.html.modules.popups.Xow_popup_mgr.Running() && ++wait_count < 100)
 				Thread_adp_.Sleep(10);
 			if (hdump_enabled && page.Revision_data().Html_db_id() != -1) {
-				// wiki.ParsePage(page, false);
+				// wiki.Parser_mgr().Parse(page, false);
 				wiki.Html__hdump_rdr().Get_by_ttl(page);
 			}
 			else
-				wiki.ParsePage(page, false);
+				wiki.Parser_mgr().Parse(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);
 		}
 		catch (Exception e) {

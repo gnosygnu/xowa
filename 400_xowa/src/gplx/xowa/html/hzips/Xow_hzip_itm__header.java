@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.wikis.ttls.*;
+import gplx.langs.htmls.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_itm__header {
 	private Xow_hzip_mgr hzip_mgr;
 	public Xow_hzip_itm__header(Xow_hzip_mgr hzip_mgr) {this.hzip_mgr = hzip_mgr;}
@@ -31,12 +31,12 @@ public class Xow_hzip_itm__header {
 				return Xow_hzip_mgr.Unhandled;
 		}
 		int span_lhs_bgn = pos + 2;		// +2 to skip # and >; EX: "<h2>"
-		int span_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, span_lhs_bgn, src_len);		if (span_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("h.span_end_missing", bgn, pos);
+		int span_lhs_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, span_lhs_bgn, src_len);		if (span_lhs_end == Bry_find_.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("h.span_end_missing", bgn, pos);
 		++span_lhs_end;					// +1 to skip >
 		bfr.Add(Xow_hzip_dict.Bry_hdr_lhs);
 		byte hdr_num = (byte)(hdr_num_byte - Byte_ascii.Num_0);
 		bfr.Add_byte(hdr_num);
-		int hdr_end = Bry_finder.Find_fwd(src, Hdr_end, span_lhs_end, src_len);					if (hdr_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("h.capt_end_missing", bgn, span_lhs_end);
+		int hdr_end = Bry_find_.Find_fwd(src, Hdr_end, span_lhs_end, src_len);					if (hdr_end == Bry_find_.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("h.capt_end_missing", bgn, span_lhs_end);
 		bfr.Add_mid(src, span_lhs_end, hdr_end);
 		hdr_end += Hdr_end.length;
 		bfr.Add(Xow_hzip_dict.Escape_bry);
@@ -46,7 +46,7 @@ public class Xow_hzip_itm__header {
 	public int Load(Bry_bfr bfr, byte[] src, int src_len, int bgn) {
 		byte hdr_num = (byte)(src[bgn] + Byte_ascii.Num_0);
 		int capt_bgn = bgn + 1;
-		int capt_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, capt_bgn, src_len);		if (capt_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("hdr.capt_end_missing", bgn, capt_bgn);
+		int capt_end = Bry_find_.Find_fwd(src, Xow_hzip_dict.Escape, capt_bgn, src_len);		if (capt_end == Bry_find_.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("hdr.capt_end_missing", bgn, capt_bgn);
 		bfr.Add_str_a7("<h").Add_byte(hdr_num).Add_str("><span class='mw-headline' id='").Add_mid(src, capt_bgn, capt_end).Add_str("'>").Add_mid(src, capt_bgn, capt_end).Add_str("</span></h").Add_byte(hdr_num).Add_str(">");
 		return capt_end + 1;
 	}

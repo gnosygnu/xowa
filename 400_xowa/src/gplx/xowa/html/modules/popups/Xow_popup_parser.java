@@ -39,7 +39,7 @@ public class Xow_popup_parser {
 		wtxt_ctx.Tmpl_tkn_max_(v);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		this.wiki = wiki; this.app = wiki.Appe(); this.parser = wiki.Parser(); this.tkn_mkr = app.Tkn_mkr();
+		this.wiki = wiki; this.app = wiki.Appe(); this.parser = wiki.Parser_mgr().Main(); this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
 		this.tmpl_ctx = Xop_ctx.new_(wiki); this.wtxt_ctx = Xop_ctx.new_(wiki);
 		Xop_lxr_mgr tmpl_lxr_mgr = Xop_lxr_mgr.Popup_lxr_mgr;
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
@@ -213,7 +213,7 @@ class Xow_popup_parser_ {
 		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(Xoa_app_.Utl__encoder_mgr().Href().Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
 		if (anch == null) return rv;
 		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
-		return hdr_bgn == Bry_finder.Not_found ? rv : hdr_bgn;
+		return hdr_bgn == Bry_find_.Not_found ? rv : hdr_bgn;
 	}
 	public static int Calc_read_len(Xop_ctx ctx, int tmpl_read_cur, int tmpl_read_len, byte[] src, int bgn, int end) {// DATE:2014-07-19
 		int rv_default = tmpl_read_cur + tmpl_read_len;
@@ -243,7 +243,7 @@ class Xow_popup_parser_ {
 				break;
 		}
 		if (end_bry == null) return Bry_.NotFound;	// no end defined for tkn; return null which should revert to dflt
-		int end_pos = Bry_finder.Find_fwd(src, end_bry, pos);
-		return end_pos == Bry_finder.Not_found ? Bry_finder.Not_found : end_pos + end_bry.length;
+		int end_pos = Bry_find_.Find_fwd(src, end_bry, pos);
+		return end_pos == Bry_find_.Not_found ? Bry_find_.Not_found : end_pos + end_bry.length;
 	}
 }

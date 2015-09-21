@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.domains.*;
 class Xou_user_ {
 	public static Xowe_wiki new_or_create_(Xoue_user user, Xoae_app app) {

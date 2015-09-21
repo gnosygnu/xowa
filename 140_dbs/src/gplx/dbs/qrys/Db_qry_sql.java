@@ -44,7 +44,7 @@ public class Db_qry_sql implements Db_qry {
 		int args_idx = 0, args_len = args.length, pos = 0;
 		Bry_bfr bfr = Bry_bfr.new_(src_len);
 		while (pos < src_len) {
-			int question_pos = Bry_finder.Find_fwd(src, Byte_ascii.Question, pos);
+			int question_pos = Bry_find_.Find_fwd(src, Byte_ascii.Question, pos);
 			if (question_pos == Bry_.NotFound)
 				question_pos = src_len;
 			bfr.Add_mid(src, pos, question_pos);

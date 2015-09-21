@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xop_lnki_wkr_ {
@@ -33,8 +35,8 @@ public class Xop_lnki_wkr_ {
 	}
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int pipe_pos) {
 		int ttl_bgn = lnki.Src_bgn() + Xop_tkn_.Lnki_bgn_len;
-		ttl_bgn = Bry_finder.Find_fwd_while(src, ttl_bgn, pipe_pos, Byte_ascii.Space);		// remove \s from bgn
-		int ttl_end = Bry_finder.Find_bwd_while(src, pipe_pos, ttl_bgn, Byte_ascii.Space);	// remove \s from end
+		ttl_bgn = Bry_find_.Find_fwd_while(src, ttl_bgn, pipe_pos, Byte_ascii.Space);		// remove \s from bgn
+		int ttl_end = Bry_find_.Find_bwd_while(src, pipe_pos, ttl_bgn, Byte_ascii.Space);	// remove \s from end
 		++ttl_end; // +1 to place after non-ws; EX: [[ a ]]; ttl_end should go from 3 -> 4
 		return Parse_ttl(ctx, src, lnki, ttl_bgn, ttl_end);
 	}

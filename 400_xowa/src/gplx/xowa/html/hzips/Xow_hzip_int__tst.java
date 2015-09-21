@@ -44,7 +44,7 @@ class Xow_hzip_int__fxt {
 	public void Test_srl(int val, int... bytes) {
 		Xow_hzip_int_.Save_bin_int_abrv(bfr, val);
 		byte[] save = bfr.Xto_bry_and_clear();
-		Tfds.Eq_ary(Bry_.ints_(bytes), save, "save");
+		Tfds.Eq_ary(Bry_.new_ints(bytes), save, "save");
 		int load = Xow_hzip_int_.Load_bin_int_abrv(save, save.length, 0, read);
 		Tfds.Eq(val, load, "load");
 		Tfds.Eq(bytes.length, read.Val(), "load_read");

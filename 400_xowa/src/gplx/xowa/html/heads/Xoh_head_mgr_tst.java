@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*;
 import gplx.xowa.gui.*;
+import gplx.xowa.langs.*;
 public class Xoh_head_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_head_mgr_fxt fxt = new Xoh_head_mgr_fxt();
 	@Test   public void Css() {

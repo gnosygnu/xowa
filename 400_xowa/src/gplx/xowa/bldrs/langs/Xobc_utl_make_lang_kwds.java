@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.apps.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cfgs.*;
 public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform {
 	private final Xoa_lang_mgr lang_mgr;
 	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
@@ -127,7 +127,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 				case Byte_ascii.Nl:
 					if (pos - fld_bgn > 0 || fld_idx == 1) {
 						byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
-						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_.Split(cur_val, Byte_ascii.Tilde));
+						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_split_.Split(cur_val, Byte_ascii.Tilde));
 						rv.Add(row);
 					}
 					fld_bgn = pos + 1;

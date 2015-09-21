@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pad extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW: CoreParserFunctions.php|pad
@@ -37,7 +37,7 @@ public class Pfunc_pad extends Pf_func_base {
 		if (pad_dir_right) bfr.Add(val);
 		for (int val_idx = val_len; val_idx < pad_len_int; val_idx++) {
 			byte b = pad_str[pad_idx];
-			int b_len = gplx.intl.Utf8_.Len_of_char_by_1st_byte(b);
+			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
 			if (b_len == 1)
 				bfr.Add_byte(b);
 			else

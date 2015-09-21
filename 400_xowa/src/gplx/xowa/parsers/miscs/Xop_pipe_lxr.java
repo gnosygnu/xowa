@@ -16,11 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.vnts.*;
 public class Xop_pipe_lxr implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_pipe;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_pipe;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Pipe, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int cur_stack_tid = ctx.Cur_tkn_tid(), rv = -1;
 		switch (cur_stack_tid) {
@@ -61,7 +63,7 @@ public class Xop_pipe_lxr implements Xop_lxr {
 					return cur_pos;
 				}
 			case Xop_tkn_itm_.Tid_vnt:
-				gplx.xowa.langs.vnts.Xop_vnt_tkn vnt_tkn = (gplx.xowa.langs.vnts.Xop_vnt_tkn)ctx.Stack_get_typ(Xop_tkn_itm_.Tid_vnt);
+				Xop_vnt_tkn vnt_tkn = (Xop_vnt_tkn)ctx.Stack_get_typ(Xop_tkn_itm_.Tid_vnt);
 				vnt_tkn.Vnt_pipe_tkn_count_add_();
 				ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 				return cur_pos;

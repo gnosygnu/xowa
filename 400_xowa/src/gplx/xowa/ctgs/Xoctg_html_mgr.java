@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.nss.*;
 public class Xoctg_html_mgr implements GfoInvkAble {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
 	private final Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);

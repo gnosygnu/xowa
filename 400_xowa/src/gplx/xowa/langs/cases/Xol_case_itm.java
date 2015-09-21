@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*;
-import gplx.intl.*;
+import gplx.core.intls.*;
 public interface Xol_case_itm extends Gfo_case_itm {
 	byte Tid();
 	byte[] Src_ary();

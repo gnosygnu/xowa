@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
-import gplx.xowa.apps.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*;
+import gplx.xowa.apps.gfss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.core_data_mgr = new Xowd_db_mgr(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Domain_itm());
 		this.load_mgr = new Xodb_load_mgr_sql(this, core_data_mgr);
-		this.save_mgr = new Xodb_save_mgr_sql(this, wiki.Page_mgr());
+		this.save_mgr = new Xodb_save_mgr_sql(this);
 	}
 	public byte Tid() {return Tid_sql;} public String Tid_name() {return "sqlite3";} public static final byte Tid_sql = 1;		
 	public Xowd_db_mgr Core_data_mgr() {return core_data_mgr;} private final Xowd_db_mgr core_data_mgr;

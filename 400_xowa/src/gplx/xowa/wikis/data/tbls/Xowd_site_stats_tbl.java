@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.xowa.wikis.metas.*;
 public class Xowd_site_stats_tbl {
 	private final String tbl_name = "site_stats";
 	private final String fld_row_id, fld_good_articles, fld_total_pages, fld_images;

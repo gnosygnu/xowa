@@ -25,8 +25,8 @@ public class Xoh_href_parser {
 		if (seg_obj == null) {
 			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 			if (vnt_mgr.Enabled() && raw[0] == Byte_ascii.Slash) {
-				int slash_end = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, 1);
-				if (vnt_mgr.Vnt_grp().Has(Bry_.Mid(raw, 1, slash_end))) {
+				int slash_end = Bry_find_.Find_fwd(raw, Byte_ascii.Slash, 1);
+				if (vnt_mgr.Regy().Has(Bry_.Mid(raw, 1, slash_end))) {
 					raw = Bry_.Add(wiki.Domain_bry(), raw);
 				}
 			}

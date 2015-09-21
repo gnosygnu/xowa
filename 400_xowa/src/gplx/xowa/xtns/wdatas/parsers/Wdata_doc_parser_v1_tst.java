@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_doc_parser_v1_tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v1_fxt fxt = new Wdata_doc_parser_v1_fxt();
 	@Test   public void Entity_v1_1() {

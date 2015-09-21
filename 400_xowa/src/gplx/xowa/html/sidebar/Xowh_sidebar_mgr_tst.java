@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*; import gplx.core.strings.*;
+import gplx.xowa.langs.*;
 public class Xowh_sidebar_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xowh_sidebar_mgr_fxt fxt = new Xowh_sidebar_mgr_fxt();
 	@Test  public void Grp() {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.wikis.*;
+import gplx.langs.htmls.*; import gplx.xowa.wikis.*;
 public class Indicator_xtn_mgr extends Xox_mgr_base {
 	public Indicator_xtn_mgr() {
 	}

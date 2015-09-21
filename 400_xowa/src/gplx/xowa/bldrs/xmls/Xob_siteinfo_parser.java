@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*; import gplx.xmls.*; // NOTE: gplx.xmls does not support Android; DATE:2013-01-17
+import gplx.xowa.nss.*;
 public class Xob_siteinfo_parser {
 	public static byte[] Siteinfo_extract(gplx.ios.Io_stream_rdr src_rdr) {
 		Io_buffer_rdr rdr = Io_buffer_rdr.Null;
 		try {
 			rdr = Io_buffer_rdr.new_(src_rdr, Io_mgr.Len_mb);	// ASSUME: siteInfo is fully contained in the 1st MB of the src_xml
 			byte[] src = rdr.Bfr();
-			int bgn = Bry_finder.Find_fwd(src, Bry_siteinfo_bgn, 0)  ; if (bgn == Bry_.NotFound) return null;
-			int end = Bry_finder.Find_fwd(src, Bry_siteinfo_end, bgn); if (end == Bry_.NotFound) return null;
+			int bgn = Bry_find_.Find_fwd(src, Bry_siteinfo_bgn, 0)  ; if (bgn == Bry_.NotFound) return null;
+			int end = Bry_find_.Find_fwd(src, Bry_siteinfo_end, bgn); if (end == Bry_.NotFound) return null;
 			return Bry_.Mid(src, bgn, end + Bry_siteinfo_end.length);
 		}
 		catch (Exception e) {Err_.Noop(e); return null;}
@@ -56,9 +57,9 @@ public class Xob_siteinfo_parser {
 	}
 	private static byte[] Siteinfo_parse_mainpage(byte[] url) {			
 		byte[] wiki_bry = Xoa_consts.Url_wiki_intermediary;
-		int bgn_pos	= Bry_finder.Find_fwd(url, wiki_bry, 0);
+		int bgn_pos	= Bry_find_.Find_fwd(url, wiki_bry, 0);
 		if (bgn_pos == Bry_.NotFound) {							// "/wiki/" not found; EX: http://mywiki/My_main_page
-			bgn_pos	= Bry_finder.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page
+			bgn_pos	= Bry_find_.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page
 			if (bgn_pos == Bry_.NotFound) throw Err_.new_wo_type("could not parse main page url", "url", String_.new_u8(url));
 			++bgn_pos;												// add 1 to position after slash
 		}

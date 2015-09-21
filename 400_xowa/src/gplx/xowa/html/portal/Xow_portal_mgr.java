@@ -16,12 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.domains.*; 
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.html.portal.vnts.*;
 public class Xow_portal_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
+	private final Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xowh_sidebar_mgr(wiki);
@@ -72,8 +76,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		Bry_fmtr_arg vnt_menu = null;
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
 		if (vnt_mgr.Enabled()) {
-			Vnt_mnu_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
-			vnt_menu_fmtr.Init(vnt_mgr.Vnt_grp(), wiki.Domain_bry(), ttl.Full_db(), vnt_mgr.Cur_vnt());
+			vnt_menu_fmtr.Init(vnt_mgr.Regy(), wiki.Domain_bry(), ttl.Full_db(), vnt_mgr.Cur_key());
 			vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
 		}
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();

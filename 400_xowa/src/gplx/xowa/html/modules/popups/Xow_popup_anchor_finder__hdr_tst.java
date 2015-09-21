@@ -76,7 +76,7 @@ class Xop_popup_hdr_finder_fxt {
 	private Xow_popup_anchor_finder finder = new Xow_popup_anchor_finder();
 	public void Clear() {
 	}
-	public void Test_find_not(String src_str, String hdr_str) {Test_find(src_str, hdr_str, Bry_finder.Not_found);}
+	public void Test_find_not(String src_str, String hdr_str) {Test_find(src_str, hdr_str, Bry_find_.Not_found);}
 	public void Test_find(String src_str, String hdr_str, int expd)  {
 		byte[] src = Bry_.new_u8(src_str);
 		byte[] hdr = Bry_.new_u8(hdr_str);

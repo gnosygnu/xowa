@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.nss.*;
 public class Xoh_subpages_bldr_tst {
 	@Before public void init() {fxt.Init();} private Xoh_subpages_bldr_fxt fxt = new Xoh_subpages_bldr_fxt();
 	@Test  public void Basic() {

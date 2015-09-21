@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.btries.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.nss.*;
 public class Xob_xml_parser {
 	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
 	public Xob_xml_parser Tag_len_max_(int v) {tag_len_max = v; return this;} private int tag_len_max = 255; // max size of any (a) xml tag, (b) int or (c) date; everything else goes into a data_bfr

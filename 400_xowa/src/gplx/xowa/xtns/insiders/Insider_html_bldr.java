@@ -16,8 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
 import gplx.xowa.html.hrefs.*;
+import gplx.xowa.nss.*;
 class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.new_();
 	private Insider_html_bldr html_bldr;

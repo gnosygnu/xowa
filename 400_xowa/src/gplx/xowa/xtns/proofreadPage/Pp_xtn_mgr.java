@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 public class Pp_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}

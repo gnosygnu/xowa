@@ -191,7 +191,7 @@ public class Scrib_lib_language implements Scrib_lib {
 				int date_bry_len = date_bry.length;
 				if (	date_bry[date_bry_len -  1] == Byte_ascii.Ltr_Z
 					&&	date_bry[date_bry_len - 10] == Byte_ascii.Ltr_T) {
-					int year_bgn = Bry_finder.Find_fwd_while(date_bry, 1, date_bry_len, Byte_ascii.Num_0);
+					int year_bgn = Bry_find_.Find_fwd_while(date_bry, 1, date_bry_len, Byte_ascii.Num_0);
 					date_bry = Bry_.Mid(date_bry, year_bgn);	// lop off beginning "+000000..."
 				}
 			}

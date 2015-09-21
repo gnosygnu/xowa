@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.wtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*;
+import gplx.langs.htmls.*;
 public class Xoh_anchor_kv_bldr {
 	private byte[] base_url; private boolean has_qarg;
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(16), apos_bfr = Bry_bfr.new_(16);

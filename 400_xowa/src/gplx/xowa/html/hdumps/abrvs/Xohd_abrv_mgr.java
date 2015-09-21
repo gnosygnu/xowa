@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.abrvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.lnkis.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.fsys.*;
-import gplx.xowa2.gui.*;
+import gplx.xowa.gui.*;
 public class Xohd_abrv_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
 	private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;

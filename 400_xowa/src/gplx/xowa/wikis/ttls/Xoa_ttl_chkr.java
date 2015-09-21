@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.tests.*;
 public class Xoa_ttl_chkr implements Tst_chkr {
 	public Class<?> TypeOf() {return Xoa_ttl.class;}
 	public int Chk(Tst_mgr mgr, String path, Object o) {

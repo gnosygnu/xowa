@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.json.*;
+import gplx.core.primitives.*; import gplx.langs.jsons.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-import gplx.xowa.apps.langs.*;
-import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.langs.cfgs.*;
+import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
 public class Wdata_wiki_mgr_fxt {
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
@@ -99,9 +100,9 @@ public class Wdata_wiki_mgr_fxt {
 		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
 		xdat_file.Save(file_orig);
 	}
-	public void Init_external_links_mgr_clear() {wiki.Ctx().Cur_page().Wdata_external_lang_links().Reset();}
+	public void Init_external_links_mgr_clear() {wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links().Reset();}
 	public void Init_external_links_mgr_add(String... langs) {
-		Wdata_external_lang_links_data external_lang_links = wiki.Ctx().Cur_page().Wdata_external_lang_links();
+		Wdata_external_lang_links_data external_lang_links = wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links();
 		external_lang_links.Enabled_(true);
 		int len = langs.length;
 		for (int i = 0; i < len; i++) {
@@ -131,7 +132,7 @@ public class Wdata_wiki_mgr_fxt {
 		wiki.Xwiki_mgr().Lang_mgr().Clear();
 
 		// setup langs
-		Xoae_page page = wiki.Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
 		Xoa_lang_mgr lang_mgr = app.Lang_mgr();
 		lang_mgr.Groups().Set_bulk(Bry_.new_a7(String_.Concat_lines_nl
 			(	"+||grp|wiki"
@@ -168,7 +169,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
-		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Ctx().Cur_page().Wdata_external_lang_links());
+		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
 	}	List_adp tmp_langs = List_adp_.new_();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {
@@ -183,7 +184,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_write_json_as_html(String raw_str, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw_str);
-		raw_bry = gplx.core.json.Json_parser_tst.Replace_apos(raw_bry);
+		raw_bry = gplx.langs.jsons.Json_parser_tst.Replace_apos(raw_bry);
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());

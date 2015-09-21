@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.langs.*;
 class Xoctg_fmtr_grp implements Bry_fmtr_arg {
 	public void Init_from_all(Xowe_wiki wiki, Xol_lang lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list) {
 		this.wiki = wiki; this.mgr = mgr; this.itms_fmtr = mgr.Fmtr_itm(); this.itms_list = itms_list; len = itms_list.Len();
@@ -29,7 +30,7 @@ class Xoctg_fmtr_grp implements Bry_fmtr_arg {
 			while (cur_idx < len) {
 				Xoctg_view_itm itm = itms_list.Itms()[cur_idx];
 				byte[] itm_sortkey = itm.Sortkey();
-				byte[] ttl_char_0_new = gplx.intl.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
+				byte[] ttl_char_0_new = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
 				byte[] grp_name = ttl_char_0_new;
 				if (Bry_.Eq(ttl_char_0, ttl_char_0_new)) {
 					grp_name = Bry_.Add(ttl_char_0, Byte_ascii.Space_bry, wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_list_continues));

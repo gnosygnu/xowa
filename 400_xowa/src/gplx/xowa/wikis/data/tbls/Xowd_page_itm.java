@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.primitives.*;
+import gplx.xowa.nss.*;
 public class Xowd_page_itm {
 	public Xowd_page_itm() {this.Clear();}
 	public int			Id() {return id;} public Xowd_page_itm Id_(int v) {id = v; id_val = null; return this;} private int id;

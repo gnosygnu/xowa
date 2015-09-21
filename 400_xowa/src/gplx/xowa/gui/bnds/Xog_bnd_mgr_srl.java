@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.core.primitives.*; import gplx.srls.dsvs.*; import gplx.gfui.*; import gplx.xowa.cfgs2.*;
+import gplx.core.primitives.*; import gplx.langs.dsvs.*; import gplx.gfui.*; import gplx.xowa.cfgs2.*;
 public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 	private Xoae_app app;
 	private Xog_bnd_mgr bnd_mgr;

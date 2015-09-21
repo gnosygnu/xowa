@@ -238,7 +238,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		}
 		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_u8(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
-		cur_wiki.Parser().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
+		cur_wiki.Parser_mgr().Main().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
 		return rslt.Init_obj(tmp_bfr.To_str_and_rls());
 	}
@@ -283,7 +283,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		// get argx
 		byte[] fnc_name = fnc_name_ref.Val();
 		int fnc_name_len = fnc_name.length;
-		int fnc_name_colon_pos = Bry_finder.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
+		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
 		if (fnc_name_colon_pos == Bry_.NotFound) {
 			KeyVal arg_argx = (KeyVal)rv.Get_at(0);
 			argx_ref.Val_(arg_argx.Val_to_bry());
@@ -315,7 +315,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			sub_src = core.Wiki().Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
 		if (sub_src !=  null) {
 			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
-			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
+			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 			Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
 			return rslt.Init_obj(sub_bfr.To_str_and_rls());

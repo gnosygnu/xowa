@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.wmfs.data.*;
+import gplx.xowa.nss.*;
+import gplx.xowa.wms.sites.*;
 public class Xoa_meta_mgr {
 	private final Xoa_app app;
 	private final Hash_adp_bry ns__hash = Hash_adp_bry.cs();

@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.core.btries.*; import gplx.html.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.btries.*;
+import gplx.langs.htmls.*; import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.vnts.*;
+import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
 	private Xowe_wiki wiki; private Xoae_app app; private Xoae_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
 	public Xoh_html_wtr(Xowe_wiki wiki, Xow_html_mgr html_mgr) {
@@ -385,7 +385,7 @@ public class Xoh_html_wtr {
 				bfr.Add_byte(Tag__bgn).Add(name);
 				if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
 				bfr.Add_byte(Tag__end);
-				int tag_close_bgn = Bry_finder.Find_bwd_while(src, xnde.Tag_close_bgn(), -1, Byte_ascii.Space) + 1;	// trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
+				int tag_close_bgn = Bry_find_.Find_bwd_while(src, xnde.Tag_close_bgn(), -1, Byte_ascii.Space) + 1;	// trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
 				Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, xnde.Tag_open_end(), tag_close_bgn, false, false);	// <source> is a .Xtn(); render literally everything between > and <; DATE:2014-03-11
 				bfr.Add(Tag__end_bgn).Add(name).Add_byte(Tag__end);
 				break;

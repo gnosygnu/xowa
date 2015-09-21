@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.pages; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.skins.*; import gplx.xowa.xtns.indicators.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.skins.*; import gplx.xowa.xtns.indicators.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
 	public boolean					Html_restricted() {return html_restricted;} private boolean html_restricted = true;

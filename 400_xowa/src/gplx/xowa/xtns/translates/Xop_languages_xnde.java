@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Xop_languages_xnde implements Xox_xnde {
@@ -29,7 +30,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 	public Xoa_ttl Root_ttl() {return root_ttl;} private Xoa_ttl root_ttl;
 	private Xoa_ttl Root_ttl_of(Xowe_wiki wiki, Xoa_ttl ttl) {
 		byte[] page_bry = ttl.Page_db();
-		int slash_pos = Bry_finder.Find_bwd(page_bry, Xoa_ttl.Subpage_spr);
+		int slash_pos = Bry_find_.Find_bwd(page_bry, Xoa_ttl.Subpage_spr);
 		if (slash_pos == Bry_.NotFound) return ttl;
 		byte[] root_bry = Bry_.Mid(page_bry, 0, slash_pos);
 		return Xoa_ttl.parse(wiki, ttl.Ns().Id(), root_bry);

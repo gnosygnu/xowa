@@ -52,7 +52,7 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 				Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 				break;
 			case Parse_content_tid_html:
-				bfr.Add(ctx.Wiki().Parser().Parse_text_to_html(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
+				bfr.Add(ctx.Wiki().Parser_mgr().Main().Parse_text_to_html(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
 				break;
 			case Parse_content_tid_none: default:
 				break;

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.urls; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.html.hrefs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xoa_url_parser {
 	private final Url_encoder encoder;
@@ -178,7 +179,7 @@ public class Xoa_url_parser {
 			int tmp_seg_idx = Bld_main_page_or_vnt(bgn_seg);
 			seg_idx = tmp_seg_idx;
 			int tmp_vnt_seg = bgn_seg + 1;
-			if (vnt_mgr.Enabled() && tmp_vnt_seg < tmp_segs_len && vnt_mgr.Vnt_grp().Has(tmp_segs[tmp_vnt_seg])) {	// check if "/zh-hans/"
+			if (vnt_mgr.Enabled() && tmp_vnt_seg < tmp_segs_len && vnt_mgr.Regy().Has(tmp_segs[tmp_vnt_seg])) {	// check if "/zh-hans/"
 				tmp_vnt = tmp_segs[tmp_vnt_seg];
 			}
 			if (tmp_seg_idx == -1) return;	// main_page or vnt; exit
@@ -236,12 +237,15 @@ public class Xoa_url_parser {
 	}
 	private byte[] Bld_page_by_alias(byte[] bry) {
 		if (bry == null) return null;
-		int colon_pos = Bry_finder.Find_fwd(bry, Byte_ascii.Colon);					// check for colon; EX: commons:Earth
-		if (colon_pos == Bry_.NotFound) return null;								// no colon
-		Xow_xwiki_itm alias_itm = wiki.Xwiki_mgr().Get_by_mid(bry, 0, colon_pos);	// check for alias;
-		if (alias_itm == null) return null;											// colon-word is not alias; EX:A:B
+		int colon_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Colon);						// check for colon; EX: commons:Earth
+		if (colon_pos == Bry_.NotFound) return null;									// no colon
+		Xow_wiki alias_wiki = wiki;														// default alias_wiki to cur_wiki
+		if (!tmp_wiki_is_missing)														// tmp_wiki exists; use it for alias wikis; DATE:2015-09-17
+			alias_wiki = wiki.App().Wiki_mgri().Get_by_key_or_make_init_n(tmp_wiki);
+		Xow_xwiki_itm alias_itm = alias_wiki.Xwiki_mgr().Get_by_mid(bry, 0, colon_pos);	// check for alias;
+		if (alias_itm == null) return null;												// colon-word is not alias; EX:A:B
 		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Meta_mgr().Ns__get_or_load(tmp_wiki);
-		if (ns_mgr.Names_get_or_null(alias_itm.Key_bry()) != null)					// special case to handle collision between "wikipedia" alias and "Wikipedia" namespace; if alias exists as ns, ignore it; EX:sv.wikipedia.org/wiki/Wikipedia:Main_Page DATE:2015-07-31
+		if (ns_mgr.Names_get_or_null(alias_itm.Key_bry()) != null)						// special case to handle collision between "wikipedia" alias and "Wikipedia" namespace; if alias exists as ns, ignore it; EX:sv.wikipedia.org/wiki/Wikipedia:Main_Page DATE:2015-07-31
 			return null;
 		byte[] rv = Bry_.Mid(bry, colon_pos + 1); 
 		tmp_wiki = alias_itm.Domain_bry();
@@ -283,8 +287,8 @@ public class Xoa_url_parser {
 		return tmp_bfr.Xto_str_and_clear();
 	}
 	private static byte[] Strip_mobile_segment(byte[] v) {// DATE:2014-05-03
-		int pos = Bry_finder.Find_fwd(v, Byte_ascii.Dot);
-		if (	pos == Bry_finder.Not_found		// no dot; EX: "A"
+		int pos = Bry_find_.Find_fwd(v, Byte_ascii.Dot);
+		if (	pos == Bry_find_.Not_found		// no dot; EX: "A"
 			||	pos + 2 >= v.length				// not enough space for .m.; EX: "A.b"
 			)	
 			return v;

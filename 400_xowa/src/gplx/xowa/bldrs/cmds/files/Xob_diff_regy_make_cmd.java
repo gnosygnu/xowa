@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.fsdb.*; import gplx.dbs.engines.sqlite.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_diff_regy_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Xob_cmd_keys.Key_diff_regy_make;}
@@ -49,7 +50,7 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 		DataRdr rdr = make_db_provider.Exec_sql_as_rdr(Xob_diff_regy_tbl.Make_deletes);
 		int cur_db_id = -1, cur_count = 0;
 		Bry_bfr atr_bfr = Bry_bfr.new_(), bin_bfr = Bry_bfr.new_();
-		Io_url sql_tmp_dir = wiki.Ctx().App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "tmp_sql");
+		Io_url sql_tmp_dir = wiki.App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "tmp_sql");
 		while (rdr.MoveNextPeer()) {
 			byte	diff_is_orig	= rdr.ReadByte("diff_is_orig");
 			int		diff_db_id		= rdr.ReadInt("diff_db_id");

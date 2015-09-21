@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.ios.*; import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*;
+import gplx.langs.htmls.encoders.*;
+import gplx.ios.*; import gplx.xowa.apps.*; import gplx.xowa.wikis.*;
 interface Xosp_fbrow_cmd {
 	Xosp_fbrow_cmd Make_new();
 	Xosp_fbrow_rslt Write_html(Xoa_url_arg_mgr arg_mgr, GfoInvkAble select_invkable);

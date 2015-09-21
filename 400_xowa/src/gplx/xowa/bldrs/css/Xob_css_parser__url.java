@@ -20,7 +20,7 @@ class Xob_css_parser__url {
 	private final byte[] site;
 	public Xob_css_parser__url(byte[] site) {this.site = site;}
 	public Xob_css_tkn__base Parse(byte[] src, int src_len, int tkn_bgn, int tkn_end) {	// " url"
-		int bgn_pos = Bry_finder.Find_fwd_while_ws(src, tkn_end, src_len);	// skip any ws after " url("
+		int bgn_pos = Bry_find_.Find_fwd_while_ws(src, tkn_end, src_len);	// skip any ws after " url("
 		if (bgn_pos == src_len) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:EOS; bgn=~{0}", tkn_bgn);			
 		byte end_byte = src[bgn_pos];	// note that first non-ws byte should determine end_byte
 		byte quote_byte = end_byte;
@@ -33,11 +33,11 @@ class Xob_css_parser__url {
 				quote_byte = Byte_ascii.Null;
 				break;
 		}
-		int end_pos = Bry_finder.Find_fwd(src, end_byte, bgn_pos, src_len);
+		int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
 		if (end_pos == Bry_.NotFound)	// unclosed "url("; exit since nothing else will be found
-			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8_by_len(src, tkn_bgn, tkn_bgn + 128));
+			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8__by_len(src, tkn_bgn, tkn_bgn + 128));
 		if (end_pos - bgn_pos == 0)		// empty; "url()"; ignore
-			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8_by_len(src, tkn_bgn, tkn_bgn + 128));
+			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8__by_len(src, tkn_bgn, tkn_bgn + 128));
 		byte[] url_orig = Bry_.Mid(src, bgn_pos, end_pos); int url_orig_len = url_orig.length;
 		++end_pos;	// increment end_pos so rv will be after it;
 		if (	end_byte != Byte_ascii.Paren_end) {	// end_byte is apos / quote

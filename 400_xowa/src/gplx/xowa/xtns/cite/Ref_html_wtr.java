@@ -139,7 +139,7 @@ class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
 		byte[] backlabel 
 			= itm_idx_minor < cfg.Backlabels_len()
 			? cfg.Backlabels()[itm.Idx_minor()]
-			: wiki.Parser().Parse_text_to_html(wiki.Ctx(), wiki.Msg_mgr().Val_by_key_args(Ref_html_wtr_cfg.Msg_backlabels_err, itm.Idx_minor()))
+			: wiki.Parser_mgr().Main().Parse_text_to_html(wiki.Parser_mgr().Ctx(), wiki.Msg_mgr().Val_by_key_args(Ref_html_wtr_cfg.Msg_backlabels_err, itm.Idx_minor()))
 			;
 		itm_fmtr.Bld_bfr_many(trg
 			, fmtr.Atrs_(cfg.Itm_id_key_one(), itm.Name(), itm.Idx_major(), itm.Idx_minor())

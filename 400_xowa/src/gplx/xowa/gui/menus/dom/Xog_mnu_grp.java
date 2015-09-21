@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
 import gplx.gfui.*;
-import gplx.xowa.apps.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.gfss.*;
+import gplx.xowa.gui.views.*;
 public class Xog_mnu_grp extends Xog_mnu_base {
 	public Xog_mnu_grp(Xoa_gui_mgr gui_mgr, boolean mnu_is_popup, String key) {
 		this.app = gui_mgr.App(); this.mnu_is_popup = mnu_is_popup; this.key = key;

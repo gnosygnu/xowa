@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.html.hdumps.abrvs.*;
+import gplx.langs.htmls.*; import gplx.xowa.html.hdumps.abrvs.*;
 public interface Gallery_box_w_fmtr_arg extends Bry_fmtr_arg {
 	Gallery_box_w_fmtr_arg Init(int uid, int width);
 }

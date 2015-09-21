@@ -221,7 +221,7 @@ public class Wdata_hwtr_msgs {
 		int len = ids.length;
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; ++i)
-			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
+			rv[i] = gplx.langs.htmls.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
 		return rv;
 	}
 	private static byte[] Name_(byte[] v) {return Bry_.Ucase__1st(Bry_.Copy(v));}

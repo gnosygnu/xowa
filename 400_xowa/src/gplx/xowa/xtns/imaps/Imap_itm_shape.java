@@ -39,7 +39,7 @@ class Imap_link_owner_ {
 				}
 				case Xop_tkn_itm_.Tid_lnke: {
 					Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
-					Xop_ctx ctx = wiki.Ctx();
+					Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 					int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 					Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
 					lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);

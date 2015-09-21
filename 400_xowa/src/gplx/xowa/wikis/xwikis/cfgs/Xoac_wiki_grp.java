@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.langs.cfgs.*;
 interface Xoac_wiki_obj {}
 public class Xoac_wiki_grp implements Cfg_nde_obj, Xoac_wiki_obj {
 	public Xoac_wiki_grp(byte[] key) {this.key_bry = key; this.name_bry = key_bry;}

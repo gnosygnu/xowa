@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
-import gplx.intl.*; import gplx.xowa.langs.numbers.*;
+import gplx.core.intls.*; import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Pf_formatnum_fa_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {

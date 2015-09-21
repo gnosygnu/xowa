@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.dbs.*; import gplx.dbs.qrys.*;
+import gplx.xowa.nss.*;
 public class Xowd_page_tbl implements RlsAble {
 	private final String tbl_name = "page";
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id;
@@ -179,7 +180,7 @@ public class Xowd_page_tbl implements RlsAble {
 	}
 	public void Select_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		String search_bgn = String_.new_u8(key);
-		String search_end = String_.new_u8(gplx.intl.Utf8_.Increment_char_at_last_pos(key));
+		String search_end = String_.new_u8(gplx.core.intls.Utf8_.Increment_char_at_last_pos(key));
 		String sql = String_.Format
 		( "SELECT {0}, {1}, {2}, {3} FROM {4} INDEXED BY {4}__title WHERE {1} = {5} AND {2} BETWEEN '{6}' AND '{7}' ORDER BY {3} DESC LIMIT {8};"
 		, fld_id, fld_ns, fld_title, fld_len

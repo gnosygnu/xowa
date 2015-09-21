@@ -17,7 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.primitives.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
 import gplx.ios.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	private final Ordered_hash list = Ordered_hash_.new_(); private Xol_lang lang;

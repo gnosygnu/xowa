@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.nss.*;
 public class Xow_data_mgr_tst {
 	Xow_data_mgr_fxt fxt = new Xow_data_mgr_fxt();
 	@Before public void init() {fxt.Clear(); Tfds.Now_enabled_y_();}

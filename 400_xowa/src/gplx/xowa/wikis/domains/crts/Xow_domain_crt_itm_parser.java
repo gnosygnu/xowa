@@ -28,12 +28,12 @@ class Xow_domain_crt_itm_parser {
 	}
 	public List_adp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
 		List_adp rv = List_adp_.new_();
-		byte[][] line_ary = Bry_.Split_lines(raw);
+		byte[][] line_ary = Bry_split_.Split_lines(raw);
 		int line_len = line_ary.length;
 		for (int i = 0; i < line_len; ++i) {
 			byte[] line = line_ary[i];
 			if (line.length == 0) continue; // ignore blank lines
-			byte[][] word_ary = Bry_.Split(line, Byte_ascii.Pipe);
+			byte[][] word_ary = Bry_split_.Split(line, Byte_ascii.Pipe);
 			int word_len = word_ary.length;
 			if (word_len != 2) return null;	// not A|B; exit now;
 			Xow_domain_crt_itm key_itm = Xow_domain_crt_itm_parser.I.Parse_as_in(word_ary[0]);
@@ -56,7 +56,7 @@ class Xow_domain_crt_itm_parser {
 		return in_ary == null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__in(in_ary);
 	}
 	public Xow_domain_crt_itm[] Parse_as_ary(byte[] raw) {
-		byte[][] terms = Bry_.Split(raw, Byte_ascii.Comma, Bool_.Y);
+		byte[][] terms = Bry_split_.Split(raw, Byte_ascii.Comma, Bool_.Y);
 		int len = terms.length;
 		Xow_domain_crt_itm[] rv_ary = new Xow_domain_crt_itm[len];
 		for (int i = 0; i < len; ++i) {

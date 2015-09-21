@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
-import org.junit.*;
-import gplx.xowa.wikis.*;
+import org.junit.*; import gplx.core.tests.*;
+import gplx.xowa.wikis.*; import gplx.xowa.langs.cfgs.*;
 public class Xoac_wiki_grp_tst {
 	Xoac_wiki_grp_fxt fxt = new Xoac_wiki_grp_fxt();
 	@Before public void init() {fxt.Clear();}

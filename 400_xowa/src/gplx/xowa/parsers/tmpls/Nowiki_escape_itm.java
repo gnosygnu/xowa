@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.parsers.amps.*;
 public class Nowiki_escape_itm {
 	public Nowiki_escape_itm(byte[] src, byte[] trg) {this.src = src; this.trg = trg; this.src_adj = src.length - 1;}
 	private int src_adj;

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.langs.htmls.encoders.*;
 public class Xob_redirect_tbl {
 	private Url_encoder encoder; private Db_stmt insert_stmt;
 	public Xob_redirect_tbl(Io_url root_dir, Url_encoder encoder) {

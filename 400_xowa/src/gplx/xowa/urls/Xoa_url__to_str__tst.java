@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.urls; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.html.hrefs.*;
+import gplx.xowa.nss.*;
 public class Xoa_url__to_str__tst {
 	private final Xoa_url__to_str__fxt fxt = new Xoa_url__to_str__fxt();
 	@Test   public void Http()				{fxt.Chk_to_str_href(Bool_.N, "http://a.org/b"						, "http://a.org/b");}
@@ -27,8 +28,7 @@ public class Xoa_url__to_str__tst {
 	@Test   public void Full__anch()		{fxt.Chk_to_str_href(Bool_.Y, "#b"									, "en.wikipedia.org/wiki/Page_1#b");}
 	@Test   public void Vnt() {
 		Xowe_wiki zh_wiki = fxt.Prep_create_wiki("zh.wikipedia.org");
-		zh_wiki.Lang().Vnt_mgr().Enabled_(true);
-		zh_wiki.Lang().Vnt_mgr().Vnt_grp_(Bry_.Ary("zh-hans", "zh-hant"));
+		gplx.xowa.parsers.vnts.Xop_vnt_parser_fxt.Vnt_mgr__init(zh_wiki.Lang().Vnt_mgr(), 0, String_.Ary("zh-hans", "zh-hant"));
 		fxt.Chk_to_str_href(zh_wiki, Bool_.Y, "/site/zh.wikipedia.org/zh-hans/A"	, "zh.wikipedia.org/zh-hans/A");
 		fxt.Chk_to_str_href(zh_wiki, Bool_.Y, "/site/zh.wikipedia.org/zh-hant/A"	, "zh.wikipedia.org/zh-hant/A");
 		fxt.Chk_to_str_href(zh_wiki, Bool_.Y, "/site/zh.wikipedia.org/zh-cn/A"		, "zh.wikipedia.org/wiki/A");

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
+import gplx.core.btries.*; import gplx.xowa.langs.*;
+import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_tblw_lxr implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_tblw;}
+	public int Lxr_tid() {return Xop_lxr_.Tid_tblw;}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int rv = Handle_bang(wlxr_type, ctx, ctx.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos);
 		if (rv != Continue) return rv;
@@ -54,11 +55,11 @@ public class Xop_tblw_lxr implements Xop_lxr {
 					}
 				}
 				if (wlxr_type == Xop_tblw_wkr.Tblw_type_th2) {											// !!; extra check to make sure \n! exists; DATE:2014-10-19
-					int prv_th_pos = Bry_finder.Find_bwd(src, Byte_ascii.Nl, bgn_pos);				// search for previous \n
-					boolean invalid = prv_th_pos == Bry_finder.Not_found;									// no \n; invalid
+					int prv_th_pos = Bry_find_.Find_bwd(src, Byte_ascii.Nl, bgn_pos);				// search for previous \n
+					boolean invalid = prv_th_pos == Bry_find_.Not_found;									// no \n; invalid
 					if (!invalid) {
 						++prv_th_pos;																	// skip \n
-						prv_th_pos = Bry_finder.Find_fwd_while_space_or_tab(src, prv_th_pos, src_len);	// skip \s; needed for "\n\s!" which is still a tblw
+						prv_th_pos = Bry_find_.Find_fwd_while_space_or_tab(src, prv_th_pos, src_len);	// skip \s; needed for "\n\s!" which is still a tblw
 						if (prv_th_pos == bgn_pos)														// invalid: "\n" is directly in front of "!!"
 							invalid = true;
 						else
@@ -129,6 +130,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 		core_trie.Add(Hook_th2,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_th2));
 	}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Term(Btrie_fast_mgr core_trie) {}
 	public static final byte[] Hook_tb = Bry_.new_a7("\n{|"), Hook_te = Bry_.new_a7("\n|}"), Hook_tr = Bry_.new_a7("\n|-")
 		, Hook_td = Bry_.new_a7("\n|"), Hook_th = Bry_.new_a7("\n!"), Hook_tc = Bry_.new_a7("\n|+")
 		, Hook_td2 = Bry_.new_a7("||"), Hook_th2 = Bry_.new_a7("!!");

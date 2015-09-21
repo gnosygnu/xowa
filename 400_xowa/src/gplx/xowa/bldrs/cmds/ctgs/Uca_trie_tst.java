@@ -22,11 +22,11 @@ public class Uca_trie_tst {
 	@Test  public void Basic() {
 		Uca_trie_fxt fxt = new Uca_trie_fxt();
 		fxt.Clear();
-		fxt.Init_trie_itm("a", Bry_.ints_(10, 11));
-		fxt.Init_trie_itm("b", Bry_.ints_(20, 21));
-		fxt.Init_trie_itm("c", Bry_.ints_(30, 31));
-		fxt.Test_decode(Bry_.ints_(10, 11), "a");
-		fxt.Test_decode(Bry_.ints_(10, 11, 20, 21, 30, 31), "abc");
+		fxt.Init_trie_itm("a", Bry_.new_ints(10, 11));
+		fxt.Init_trie_itm("b", Bry_.new_ints(20, 21));
+		fxt.Init_trie_itm("c", Bry_.new_ints(30, 31));
+		fxt.Test_decode(Bry_.new_ints(10, 11), "a");
+		fxt.Test_decode(Bry_.new_ints(10, 11, 20, 21, 30, 31), "abc");
 	}
 }
 class Uca_trie_fxt {
@@ -37,7 +37,7 @@ class Uca_trie_fxt {
 		}
 		trie.Clear();
 	}	Uca_trie trie; Bry_bfr bfr;
-	public void Init_trie_itm(String charAsStr, byte[] uca) {trie.Init_itm(gplx.intl.Utf16_.Decode_to_int(Bry_.new_u8(charAsStr), 0), uca);}
+	public void Init_trie_itm(String charAsStr, byte[] uca) {trie.Init_itm(gplx.core.intls.Utf16_.Decode_to_int(Bry_.new_u8(charAsStr), 0), uca);}
 	public void Test_decode(byte[] bry, String expd) {
 		trie.Decode(bfr, bry, 0, bry.length);
 		Tfds.Eq(expd, bfr.Xto_str_and_clear());

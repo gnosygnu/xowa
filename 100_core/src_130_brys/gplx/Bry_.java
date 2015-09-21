@@ -24,8 +24,8 @@ public class Bry_ {
 	public static final byte[] Empty = new byte[0];
 	public static final byte[][] Ary_empty = new byte[0][];
 	public static final Class<?> Cls_ref_type = byte[].class;
-	public static byte[] bytes_(byte... ary) {return ary;}
-	public static byte[] ints_ (int... ary) {
+	public static byte[] new_bytes(byte... ary) {return ary;}
+	public static byte[] new_ints(int... ary) {
 		int len = ary.length;
 		byte[] rv = new byte[len];
 		for (int i = 0; i < len; i++)
@@ -33,32 +33,29 @@ public class Bry_ {
 		return rv;
 	}
 	public static byte[] new_a7(String str) {
-		try {
-			if (str == null) return null;
-			int str_len = str.length();						
-			if (str_len == 0) return Bry_.Empty;
-			byte[] rv = new byte[str_len];
-			for (int i = 0; i < str_len; ++i) {
-				char c = str.charAt(i);							
-				if (c > 128) c = '?';
-				rv[i] = (byte)c;
-			}
-			return rv;
+		if (str == null) return null;
+		int str_len = str.length();						
+		if (str_len == 0) return Bry_.Empty;
+		byte[] rv = new byte[str_len];
+		for (int i = 0; i < str_len; ++i) {
+			char c = str.charAt(i);							
+			if (c > 128) c = '?';
+			rv[i] = (byte)c;
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid ASCII sequence", "str", str);}
+		return rv;
 	}
 	public static byte[] new_u8_safe(String str) {return str == null ? null : new_u8(str);}
 	public static byte[] new_u8(String str) {
 		try {
 			int str_len = str.length();							
-			int bry_len = new_u8_by_len(str, str_len);
+			int bry_len = new_u8__by_len(str, str_len);
 			byte[] rv = new byte[bry_len];
-			new_u8_write(str, str_len, rv, 0);
+			new_u8__write(str, str_len, rv, 0);
 			return rv;
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
-	public static int new_u8_by_len(String s, int s_len) {
+	public static int new_u8__by_len(String s, int s_len) {
 		int rv = 0;
 		for (int i = 0; i < s_len; ++i) {
 			char c = s.charAt(i);									
@@ -73,7 +70,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static void new_u8_write(String str, int str_len, byte[] bry, int bry_pos) {
+	public static void new_u8__write(String str, int str_len, byte[] bry, int bry_pos) {
 		for (int i = 0; i < str_len; ++i) {
 			char c = str.charAt(i);								
 			if		(	 c <   128) {
@@ -101,58 +98,19 @@ public class Bry_ {
 			}
 		}
 	}
-	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(orig) ? val_if_not_blank : orig;}
-	public static byte Get_at_end_or_fail(byte[] bry) {
-		if (bry == null) throw Err_.new_wo_type("bry is null");
-		int bry_len = bry.length;
-		if (bry_len == 0) throw Err_.new_wo_type("bry has 0 len");
-		return bry[bry_len - 1];
+	public static byte[] Copy(byte[] src) {
+		int src_len = src.length;
+		byte[] trg = new byte[src_len];
+		for (int i = 0; i < src_len; ++i)
+			trg[i] = src[i];
+		return trg;
 	}
-	public static int While_fwd(byte[] src, byte while_byte, int bgn, int end) {
-		for (int i = bgn; i < end; i++)
-			if (src[i] != while_byte) return i;
-		return end;
-	}
-	public static byte[][] Ary_add(byte[][] lhs, byte[][] rhs) {
-		int lhs_len = lhs.length, rhs_len = rhs.length;
-		if		(lhs_len == 0) return rhs;
-		else if	(rhs_len == 0) return lhs;
-		else {
-			byte[][] rv = new byte[lhs_len + rhs_len][];
-			for (int i = 0; i < lhs_len; i++)
-				rv[i]			= lhs[i];
-			for (int i = 0; i < rhs_len; i++)
-				rv[i + lhs_len] = rhs[i];
-			return rv;
-		}
-	}
-	public static byte[][] Ary(byte[]... ary) {return ary;}
-	public static byte[][] Ary(String... ary) {
-		int ary_len = ary.length;
-		byte[][] rv = new byte[ary_len][];
-		for (int i = 0; i < ary_len; i++) {
-			String itm = ary[i];
-			rv[i] = itm == null ? null : Bry_.new_u8(itm);
-		}
-		return rv;
-	}
-	public static byte[][] Ary_obj(Object... ary) {
-		if (ary == null) return Bry_.Ary_empty;
-		int ary_len = ary.length;
-		byte[][] rv = new byte[ary_len][];
-		for (int i = 0; i < ary_len; i++) {
-			Object itm = ary[i];
-			rv[i] = itm == null ? null : Bry_.new_u8(Object_.Xto_str_strict_or_empty(itm));
-		}
-		return rv;
-	}
-	public static boolean Ary_eq(byte[][] lhs, byte[][] rhs) {
-		int lhs_len = lhs.length;
-		int rhs_len = rhs.length;
-		if (lhs_len != rhs_len) return false;
-		for (int i = 0; i < lhs_len; ++i)
-			if (!Bry_.Eq(lhs[i], rhs[i])) return false;
-		return true;
+	public static byte[] Resize(byte[] src, int trg_len) {return Resize(src, 0, trg_len);}
+	public static byte[] Resize(byte[] src, int src_bgn, int trg_len) {
+		byte[] trg = new byte[trg_len];
+		int src_len = src.length; if (src_len > trg_len) src_len = trg_len;	// trg_len can be less than src_len
+		Copy_by_len(src, src_bgn, src_len, trg, 0);
+		return trg;
 	}
 	public static byte[] Repeat_space(int len) {return Repeat(Byte_ascii.Space, len);}
 	public static byte[] Repeat(byte b, int len) {
@@ -161,39 +119,35 @@ public class Bry_ {
 			rv[i] = b;
 		return rv;
 	}
-	public static byte[] Copy(byte[] src) {
+	public static byte[] Add(byte[] src, byte b) {
 		int src_len = src.length;
-		byte[] trg = new byte[src_len];
-		for (int i = 0; i < src_len; i++)
-			trg[i] = src[i];
-		return trg;
-	}
-	public static void Copy_by_pos(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
-		int trg_adj = trg_bgn - src_bgn;
-		for (int i = src_bgn; i < src_end; i++)
-			trg[i + trg_adj] = src[i];
-	}
-	public static void Copy_by_len(byte[] src, int src_bgn, int src_len, byte[] trg, int trg_bgn) {
-		for (int i = 0; i < src_len; i++)
-			trg[i + trg_bgn] = src[i + src_bgn];
-	}
-	public static byte[] Replace_one(byte[] src, byte[] find, byte[] repl) {
-		int src_len = src.length;
-		int findPos = Bry_finder.Find(src, find, 0, src_len, true); if (findPos == Bry_.NotFound) return src;
-		int findLen = find.length, replLen = repl.length;
-		int rvLen = src_len + replLen - findLen;
-		byte[] rv = new byte[rvLen];
-		Copy_by_len(src	, 0					, findPos						, rv, 0		);
-		Copy_by_len(repl, 0					, replLen						, rv, findPos	);
-		Copy_by_len(src	, findPos + findLen	, src_len - findPos - findLen	, rv, findPos + replLen);
+		byte[] rv = new byte[src_len + 1];
+		Copy_by_pos(src, 0, src_len, rv, 0);
+		rv[src_len] = b;
 		return rv;
 	}
-	public static void Replace_all_direct(byte[] src, byte find, byte repl) {Replace_all_direct(src, find, repl, 0, src.length);}
-	public static void Replace_all_direct(byte[] src, byte find, byte repl, int bgn, int end) {
-		for (int i = bgn; i < end; i++) {
-			byte b = src[i];
-			if (b == find) src[i] = repl;			
+	public static byte[] Add(byte b, byte[] src) {
+		int src_len = src.length;
+		byte[] rv = new byte[src_len + 1];
+		Copy_by_pos(src, 0, src_len, rv, 1);
+		rv[0] = b;
+		return rv;
+	}
+	public static byte[] Add(byte[]... all) {
+		int all_len = all.length, rv_len = 0;
+		for (int i = 0; i < all_len; ++i) {
+			byte[] cur = all[i]; if (cur == null) continue;
+			rv_len += cur.length;
 		}
+		byte[] rv = new byte[rv_len];
+		int rv_idx = 0;
+		for (int i = 0; i < all_len; ++i) {
+			byte[] cur = all[i]; if (cur == null) continue;
+			int cur_len = cur.length;
+			for (int j = 0; j < cur_len; ++j)
+				rv[rv_idx++] = cur[j];
+		}
+		return rv;
 	}
 	public static byte[] Add_w_dlm(byte[] dlm, byte[]... ary) {
 		int ary_len = ary.length;
@@ -242,39 +196,71 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static byte[] Add(byte[] ary, byte b) {
-		int ary_len = ary.length;
-		byte[] rv = new byte[ary_len + 1];
-		for (int i = 0; i < ary_len; i++)
-			rv[i] = ary[i];
-		rv[ary_len] = b;
-		return rv;
+	public static int Len(byte[] v)			{return v == null ? 0 : v.length;}
+	public static boolean Len_gt_0(byte[] v)	{return v != null && v.length > 0;}
+	public static boolean Len_eq_0(byte[] v)	{return v == null || v.length == 0;}
+	public static byte Get_at_end(byte[] bry) {return bry[bry.length - 1];}	// don't bother checking for errors; depend on error trace
+	public static boolean Has_at(byte[] src, int src_len, int pos, byte b) {return (pos < src_len) && (src[pos] == b);}
+	public static boolean Has(byte[] src, byte[] lkp) {return Bry_find_.Find_fwd(src, lkp) != Bry_find_.Not_found;}
+	public static boolean Has(byte[] src, byte lkp) {
+		if (src == null) return false;
+		int len = src.length;
+		for (int i = 0; i < len; i++)
+			if (src[i] == lkp) return true;
+		return false;
 	}
-	public static byte[] Add(byte b, byte[] ary) {
-		int ary_len = ary.length + 1;
-		byte[] rv = new byte[ary_len];
-		for (int i = 1; i < ary_len; i++)
-			rv[i] = ary[i - 1];
-		rv[0] = b;
-		return rv;
-	}
-	public static byte[] Add(byte[]... all) {
-		int all_len = all.length, rv_len = 0;
-		for (int i = 0; i < all_len; i++) {
-			byte[] cur = all[i]; if (all[i] == null) continue;
-			rv_len += cur.length;
+	public static boolean Has_at_bgn(byte[] src, byte[] lkp) {return Has_at_bgn(src, lkp, 0, src.length);}
+	public static boolean Has_at_bgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
+		int lkp_len = lkp.length;
+		if (lkp_len + src_bgn > src_end) return false; // lkp is longer than src
+		for (int i = 0; i < lkp_len; i++) {
+			if (lkp[i] != src[i + src_bgn]) return false;
 		}
-		byte[] rv = new byte[rv_len];
-		int rv_idx = 0;
-		for (int i = 0; i < all_len; i++) {
-			byte[] cur = all[i]; if (all[i] == null) continue;
-			int cur_len = cur.length;
-			for (int j = 0; j < cur_len; j++)
-				rv[rv_idx++] = cur[j];
+		return true;
+	}
+	public static boolean Has_at_end(byte[] src, byte[] lkp) {int src_len = src.length; return Has_at_end(src, lkp, src_len - lkp.length, src_len);}
+	public static boolean Has_at_end(byte[] src, byte[] lkp, int src_bgn, int src_end) {
+		int lkp_len = lkp.length;
+		if (src_bgn < 0) return false;
+		int pos = src_end - lkp_len; if (pos < src_bgn) return false; // lkp is longer than src
+		for (int i = 0; i < lkp_len; i++) {
+			if (lkp[i] != src[i + pos]) return false;
 		}
+		return true;
+	}
+	public static boolean Has_at_bgn(byte[] src, byte lkp, int src_bgn) {return src_bgn < src.length ? src[src_bgn] == lkp : false;}
+	public static void Set(byte[] src, int bgn, int end, byte[] repl) {
+		int repl_len = repl.length;
+		for (int i = 0; i < repl_len; i++)
+			src[i + bgn] = repl[i];
+	}
+	public static void Copy_by_pos(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
+		int trg_adj = trg_bgn - src_bgn;
+		for (int i = src_bgn; i < src_end; i++)
+			trg[i + trg_adj] = src[i];
+	}
+	private static void Copy_by_len(byte[] src, int src_bgn, int src_len, byte[] trg, int trg_bgn) {
+		for (int i = 0; i < src_len; i++)
+			trg[i + trg_bgn] = src[i + src_bgn];
+	}
+	public static byte[] Replace_one(byte[] src, byte[] find, byte[] repl) {
+		int src_len = src.length;
+		int findPos = Bry_find_.Find(src, find, 0, src_len, true); if (findPos == Bry_.NotFound) return src;
+		int findLen = find.length, replLen = repl.length;
+		int rvLen = src_len + replLen - findLen;
+		byte[] rv = new byte[rvLen];
+		Copy_by_len(src	, 0					, findPos						, rv, 0		);
+		Copy_by_len(repl, 0					, replLen						, rv, findPos	);
+		Copy_by_len(src	, findPos + findLen	, src_len - findPos - findLen	, rv, findPos + replLen);
 		return rv;
 	}
-	public static int LastIdx(byte[] src) {return src.length - 1;}
+	public static void Replace_all_direct(byte[] src, byte find, byte repl) {Replace_all_direct(src, find, repl, 0, src.length);}
+	public static void Replace_all_direct(byte[] src, byte find, byte repl, int bgn, int end) {
+		for (int i = bgn; i < end; i++) {
+			byte b = src[i];
+			if (b == find) src[i] = repl;			
+		}
+	}
 	public static byte[] Limit(byte[] src, int len) {
 		if (src == null) return null;
 		int src_len = src.length;
@@ -314,20 +300,46 @@ public class Bry_ {
 		return Mid(src, bgn, src.length);
 	}
 	public static byte[] Mid(byte[] src, int bgn, int end) {
-		try {
-			int len = end - bgn; if (len == 0) return Bry_.Empty;
-			byte[] rv = new byte[len];
-			for (int i = bgn; i < end; i++)
-				rv[i - bgn] = src[i];
-			return rv;
-		}	catch (Exception e) {
-			String msg = "";
-			if		(src == null)					msg = "src is null";
-			else if (bgn < 0 || bgn > src.length)	msg = "invalid bgn";
-			else if (end < 0 || end > src.length)	msg = "invalid end";
-			else if (end < bgn)						msg = "end < bgn";
-			throw Err_.new_exc(e, "core", msg, "bgn", bgn, "end", end, "src", src == null ? "" : String_.new_u8_by_len(src, bgn, 32));
+		int len = end - bgn; if (len == 0) return Bry_.Empty;
+		byte[] rv = new byte[len];
+		for (int i = bgn; i < end; i++)
+			rv[i - bgn] = src[i];
+		return rv;
+	}
+	public static byte[] Mid_w_trim(byte[] src, int bgn, int end) {
+		int len = end - bgn; if (len == 0) return Bry_.Empty;
+		int actl_bgn = bgn, actl_end = end;
+		// trim at bgn
+		boolean chars_seen = false;
+		for (int i = bgn; i < end; ++i) {
+			switch (src[i]) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+					break;
+				default:
+					chars_seen = true;
+					actl_bgn = i;
+					i = end;
+					break;
+			}
 		}
+		if (!chars_seen) return Bry_.Empty;	// all ws
+		// trim at end
+		for (int i = end - 1; i >= actl_bgn; --i) {
+			switch (src[i]) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+					break;
+				default:
+					actl_end = i + 1;
+					i = -1;
+					break;
+			}
+		}
+		// extract mid
+		len = actl_end - actl_bgn; if (len == 0) return Bry_.Empty;
+		byte[] rv = new byte[len];
+		for (int i = actl_bgn; i < actl_end; ++i)
+			rv[i - actl_bgn] = src[i];
+		return rv;
 	}
 	public static byte[] mask_(int len, byte... itms) {
 		byte[] rv = new byte[len];
@@ -380,90 +392,48 @@ public class Bry_ {
 		}
 		return trimmed ? Bry_.Mid(v, 0, pos + 1) : v;
 	}
-	public static boolean Has(byte[] src, byte[] lkp) {return Bry_finder.Find_fwd(src, lkp) != Bry_finder.Not_found;}
-	public static boolean Has(byte[] src, byte lkp) {
-		if (src == null) return false;
-		int len = src.length;
-		for (int i = 0; i < len; i++)
-			if (src[i] == lkp) return true;
-		return false;
+	public static int Compare(byte[] lhs, byte[] rhs) {
+		if		(lhs == null)	return CompareAble_.More;
+		else if (rhs == null)	return CompareAble_.Less;
+		else					return Compare(lhs, 0, lhs.length, rhs, 0, rhs.length);
 	}
-	public static boolean Has_at_end(byte[] src, byte[] lkp) {int src_len = src.length; return Has_at_end(src, lkp, src_len - lkp.length, src_len);}
-	public static boolean Has_at_end(byte[] src, byte[] lkp, int src_bgn, int src_end) {
-		int lkp_len = lkp.length;
+	public static int Compare(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs, int rhs_bgn, int rhs_end) {
+		int lhs_len = lhs_end - lhs_bgn, rhs_len = rhs_end - rhs_bgn;
+		int min = lhs_len < rhs_len ? lhs_len : rhs_len;
+		int rv = CompareAble_.Same;
+		for (int i = 0; i < min; i++) {
+			rv = (lhs[i + lhs_bgn] & 0xff) - (rhs[i + rhs_bgn] & 0xff);	// PATCH.JAVA:need to convert to unsigned byte
+			if (rv != CompareAble_.Same) return rv > CompareAble_.Same ? CompareAble_.More : CompareAble_.Less; // NOTE: changed from if (rv != CompareAble_.Same) return rv; DATE:2013-04-25
+		}
+		return Int_.Compare(lhs_len, rhs_len);	// lhs and rhs share same beginning bytes; return len comparisons
+	}
+	public static boolean Eq(byte[] src, byte[] val) {return Eq(src, 0, src == null ? 0 : src.length, val);}
+	public static boolean Eq(byte[] src, int src_bgn, int src_end, byte[] val) {
+		if		(src == null && val == null) return true;
+		else if (src == null || val == null) return false;
 		if (src_bgn < 0) return false;
-		int pos = src_end - lkp_len; if (pos < src_bgn) return false; // lkp is longer than src
-		for (int i = 0; i < lkp_len; i++) {
-			if (lkp[i] != src[i + pos]) return false;
+		int val_len = val.length;
+		if (val_len != src_end - src_bgn) return false;
+		int src_len = src.length;
+		for (int i = 0; i < val_len; i++) {
+			int src_pos = i + src_bgn;
+			if (src_pos == src_len) return false;
+			if (val[i] != src[src_pos]) return false;
 		}
 		return true;
 	}
-	public static boolean Has_at_bgn(byte[] src, byte lkp, int src_bgn) {
-		return src_bgn < src.length ? src[src_bgn] == lkp : false;
-	}
-	public static boolean Has_at_bgn(byte[] src, byte[] lkp) {return Has_at_bgn(src, lkp, 0, src.length);}
-	public static boolean Has_at_bgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
-		int lkp_len = lkp.length;
-		if (lkp_len + src_bgn > src_end) return false; // lkp is longer than src
-		for (int i = 0; i < lkp_len; i++) {
-			if (lkp[i] != src[i + src_bgn]) return false;
+	public static boolean Eq_ci_a7(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
+		if		(lhs == null && rhs == null) return true;
+		else if (lhs == null || rhs == null) return false;
+		int lhs_len = lhs.length;
+		int rhs_len = rhs_end - rhs_bgn;
+		if (lhs_len != rhs_len) return false;
+		for (int i = 0; i < lhs_len; i++) {
+			byte lhs_b = lhs[i];				if (lhs_b > 64 && lhs_b < 91) lhs_b += 32;	// lowercase
+			byte rhs_b = rhs[i + rhs_bgn];		if (rhs_b > 64 && rhs_b < 91) rhs_b += 32;	// lowercase
+			if (lhs_b != rhs_b) return false;
 		}
 		return true;
-	}
-	public static int Skip_fwd(byte[] src, int src_bgn, byte skip) {
-		int src_len = src.length;
-		for (int i = src_bgn; i < src_len; i++) {
-			byte b = src[i];
-			if (b != skip) return i;
-		}
-		return 0;
-	}
-	public static int Skip_bwd(byte[] src, int src_bgn, byte skip) {
-		for (int i = src_bgn; i > -1; i--) {
-			byte b = src[i];
-			if (b != skip) return i;
-		}
-		return src.length;
-	}
-	public static int Skip_fwd_nl(byte[] src, int src_bgn) {
-		int src_len = src.length;
-		for (int i = src_bgn; i < src_len; i++) {
-			byte b = src[i];
-			switch (b) {
-				case Byte_ascii.Nl: case Byte_ascii.Cr:
-					break;
-				default:
-					return i;
-			}
-		}
-		return 0;
-	}
-	public static int Skip_bwd_nl(byte[] src, int src_bgn) {
-		for (int i = src_bgn; i > -1; i--) {
-			byte b = src[i];
-			switch (b) {
-				case Byte_ascii.Nl: case Byte_ascii.Cr:
-					break;
-				default:
-					return i;
-			}
-		}
-		return src.length;
-	}
-	public static byte[] Resize_manual(byte[] src, int rvLen) {
-		byte[] rv = new byte[rvLen];
-		int src_len = src.length;
-		if (src_len > rvLen) src_len = rvLen; // resizing smaller; only copy as many elements as in rvLen
-		for (int i = 0; i < src_len; i++)
-			rv[i] = src[i];
-		return rv;
-	}
-	public static byte[] Resize(byte[] src, int trgLen) {return Resize(src, 0, trgLen);}
-	public static byte[] Resize(byte[] src, int src_bgn, int trgLen) {
-		byte[] trg = new byte[trgLen];
-		int src_len = src.length > trgLen ? trgLen : src.length;	// trgLen can either expand or shrink
-		Copy_by_len(src, src_bgn, src_len, trg, 0);
-		return trg;
 	}
 	public static boolean Match(byte[] src, byte[] find) {return Match(src, 0, src.length, find, 0, find.length);}
 	public static boolean Match(byte[] src, int src_bgn, byte[] find) {return Match(src, src_bgn, src.length, find, 0, find.length);}
@@ -488,65 +458,6 @@ public class Bry_ {
 			int find_pos = find_len - i - 1;
 			if (src_pos < src_bgn) return false;	// ran out of src; exit; EX: src=ab; find=abc
 			if (src[src_pos] != find[find_pos]) return false;
-		}
-		return true;
-	}
-	public static int Compare(byte[] lhs, byte[] rhs) {
-		if		(lhs == null)	return CompareAble_.More;
-		else if (rhs == null)	return CompareAble_.Less;
-		else					return Compare(lhs, 0, lhs.length, rhs, 0, rhs.length);
-	}
-	public static int Compare(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs, int rhs_bgn, int rhs_end) {
-		int lhs_len = lhs_end - lhs_bgn, rhs_len = rhs_end - rhs_bgn;
-		int min = lhs_len < rhs_len ? lhs_len : rhs_len;
-		int rv = CompareAble_.Same;
-		for (int i = 0; i < min; i++) {
-			rv = (lhs[i + lhs_bgn] & 0xff) - (rhs[i + rhs_bgn] & 0xff);	// PATCH.JAVA:need to convert to unsigned byte
-			if (rv != CompareAble_.Same) return rv > CompareAble_.Same ? CompareAble_.More : CompareAble_.Less; // NOTE: changed from if (rv != CompareAble_.Same) return rv; DATE:2013-04-25
-		}
-		return Int_.Compare(lhs_len, rhs_len);	// lhs and rhs share same beginning bytes; return len comparisons
-	}
-	public static int Len(byte[] v) {return v == null ? 0 : v.length;}
-	public static boolean Len_gt_0(byte[] v) {return v != null && v.length > 0;}
-	public static boolean Len_eq_0(byte[] v) {return v == null || v.length == 0;}
-	public static void Set(byte[] src, int bgn, int end, byte[] repl) {
-		int repl_len = repl.length;
-		for (int i = 0; i < repl_len; i++)
-			src[i + bgn] = repl[i];
-	}
-	public static boolean Eq_itm(byte[] src, int src_len, int pos, byte chk) {
-		return	pos < src_len
-			&&	src[pos] == chk;
-	}
-	public static boolean Eq(byte[] lhs, byte[] rhs) {
-		if		(lhs == null && rhs == null) return true;
-		else if (lhs == null || rhs == null) return false;
-		int lhs_len = lhs.length;
-		if (lhs_len != rhs.length) return false;
-		for (int i = 0; i < lhs_len; i++)	// NOTE: lhs_len == rhsLen
-			if (lhs[i] != rhs[i]) return false;
-		return true;
-	}
-	public static boolean Eq(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
-		if		(lhs == null && rhs == null) return true;
-		else if (lhs == null || rhs == null) return false;
-		int lhs_len = lhs.length;
-		int rhs_len = rhs_end - rhs_bgn;
-		if (lhs_len != rhs_len) return false;
-		for (int i = 0; i < lhs_len; i++)
-			if (lhs[i] != rhs[i + rhs_bgn]) return false;
-		return true;
-	}
-	public static boolean Eq_ci_a7(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
-		if		(lhs == null && rhs == null) return true;
-		else if (lhs == null || rhs == null) return false;
-		int lhs_len = lhs.length;
-		int rhs_len = rhs_end - rhs_bgn;
-		if (lhs_len != rhs_len) return false;
-		for (int i = 0; i < lhs_len; i++) {
-			byte lhs_b = lhs[i];				if (lhs_b > 64 && lhs_b < 91) lhs_b += 32;	// lowercase
-			byte rhs_b = rhs[i + rhs_bgn];		if (rhs_b > 64 && rhs_b < 91) rhs_b += 32;	// lowercase
-			if (lhs_b != rhs_b) return false;
 		}
 		return true;
 	}
@@ -745,6 +656,47 @@ public class Bry_ {
 	public static double To_double_or(byte[] bry, double or)					{return Double_.parse_or(String_.new_u8(bry, 0, bry.length), or);}
 	public static double To_double_or(byte[] ary, int bgn, int end, double or)	{return Double_.parse_or(String_.new_u8(ary, bgn, end), or);}
 	public static Decimal_adp To_decimal(byte[] ary, int bgn, int end)			{return Decimal_adp_.parse(String_.new_u8(ary, bgn, end));}
+	public static byte[][] Ary_add(byte[][] lhs, byte[][] rhs) {
+		int lhs_len = lhs.length, rhs_len = rhs.length;
+		if		(lhs_len == 0) return rhs;
+		else if	(rhs_len == 0) return lhs;
+		else {
+			byte[][] rv = new byte[lhs_len + rhs_len][];
+			for (int i = 0; i < lhs_len; i++)
+				rv[i]			= lhs[i];
+			for (int i = 0; i < rhs_len; i++)
+				rv[i + lhs_len] = rhs[i];
+			return rv;
+		}
+	}
+	public static byte[][] Ary(byte[]... ary) {return ary;}
+	public static byte[][] Ary(String... ary) {
+		int ary_len = ary.length;
+		byte[][] rv = new byte[ary_len][];
+		for (int i = 0; i < ary_len; i++) {
+			String itm = ary[i];
+			rv[i] = itm == null ? null : Bry_.new_u8(itm);
+		}
+		return rv;
+	}
+	public static byte[][] Ary_obj(Object... ary) {
+		if (ary == null) return Bry_.Ary_empty;
+		int ary_len = ary.length;
+		byte[][] rv = new byte[ary_len][];
+		for (int i = 0; i < ary_len; i++) {
+			Object itm = ary[i];
+			rv[i] = itm == null ? null : Bry_.new_u8(Object_.Xto_str_strict_or_empty(itm));
+		}
+		return rv;
+	}
+	public static boolean Ary_eq(byte[][] lhs, byte[][] rhs) {
+		int lhs_len = lhs.length;
+		int rhs_len = rhs.length;
+		if (lhs_len != rhs_len) return false;
+		for (int i = 0; i < lhs_len; ++i)
+			if (!Bry_.Eq(lhs[i], rhs[i])) return false;
+		return true;
+	}
 	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
 	public static final String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
 	public static DateAdp ReadCsvDte(byte[] ary, Int_obj_ref posRef, byte lkp) {// ASSUME: fmt = yyyyMMdd HHmmss.fff
@@ -767,7 +719,7 @@ public class Bry_ {
 		f += (ary[bgn + 16] - Ascii_zero) *  100;
 		f += (ary[bgn + 17] - Ascii_zero) *   10;
 		f += (ary[bgn + 18] - Ascii_zero);
-		if (ary[bgn + 19] != lkp) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8_by_len(ary, bgn, 20));
+		if (ary[bgn + 19] != lkp) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8__by_len(ary, bgn, 20));
 		posRef.Val_add(19 + 1); // +1=lkp.len
 		return DateAdp_.new_(y, M, d, H, m, s, f);
 	}
@@ -780,10 +732,10 @@ public class Bry_ {
 			int pos = bgn + 1;	// +1 to skip quote
 			if (make) bb = Bry_bfr.new_(16);
 			while (true) {
-				if (pos == aryLen) throw Err_.new_wo_type("endOfAry reached, but no quote found", "txt", String_.new_u8_by_len(ary, bgn, pos));
+				if (pos == aryLen) throw Err_.new_wo_type("endOfAry reached, but no quote found", "txt", String_.new_u8__by_len(ary, bgn, pos));
 				byte b = ary[pos];
 				if (b == Dlm_quote) {                            
-					if (pos == aryLen - 1) throw Err_.new_wo_type("endOfAry reached, quote found but lkp not", "txt", String_.new_u8_by_len(ary, bgn, pos));
+					if (pos == aryLen - 1) throw Err_.new_wo_type("endOfAry reached, quote found but lkp not", "txt", String_.new_u8__by_len(ary, bgn, pos));
 					byte next = ary[pos + 1];
 					if		(next == Dlm_quote) {	// byte followed by quote
 						if (make) bb.Add_byte(b);
@@ -793,7 +745,7 @@ public class Bry_ {
 						posRef.Val_(pos + 2);	// 1=endQuote;1=lkp;
 						return make ? bb.Xto_bry() : Bry_.Empty;
 					}
-					else throw Err_.new_wo_type("quote found, but not doubled", "txt", String_.new_u8_by_len(ary, bgn, pos + 1));
+					else throw Err_.new_wo_type("quote found, but not doubled", "txt", String_.new_u8__by_len(ary, bgn, pos + 1));
 				}
 				else {
 					if (make) bb.Add_byte(b);
@@ -808,12 +760,12 @@ public class Bry_ {
 					return make ? Bry_.Mid(ary, bgn, i) : Bry_.Empty;
 				}
 			}
-			throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "txt", String_.new_u8_by_len(ary, bgn, aryLen));
+			throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "txt", String_.new_u8__by_len(ary, bgn, aryLen));
 		}
 	}
 	public static int ReadCsvInt(byte[] ary, Int_obj_ref posRef, byte lkp) {
 		int bgn = posRef.Val();
-		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
+		int pos = Bry_find_.Find_fwd(ary, lkp, bgn, ary.length);
 		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
 		int rv = Bry_.To_int_or(ary, posRef.Val(), pos, -1);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
@@ -821,7 +773,7 @@ public class Bry_ {
 	}
 	public static double ReadCsvDouble(byte[] ary, Int_obj_ref posRef, byte lkp) {
 		int bgn = posRef.Val();
-		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
+		int pos = Bry_find_.Find_fwd(ary, lkp, bgn, ary.length);
 		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
 		double rv = Bry_.To_double(ary, posRef.Val(), pos);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
@@ -829,32 +781,10 @@ public class Bry_ {
 	}
 	public static void ReadCsvNext(byte[] ary, Int_obj_ref posRef, byte lkp) {
 		int bgn = posRef.Val();
-		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
+		int pos = Bry_find_.Find_fwd(ary, lkp, bgn, ary.length);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 	}
 	public static byte Byte_NegSign = (byte)'-';
-	public static byte[][] Split(byte[] src, byte dlm) {return Split(src, dlm, false);}
-	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
-		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
-		int src_len = src.length, src_pos = 0, fld_bgn = 0;
-		List_adp rv = List_adp_.new_();
-		while (true) {
-			boolean last = src_pos == src_len;
-			byte b = last ? dlm : src[src_pos];
-			if (b == dlm) {
-				if (last && (src_pos - fld_bgn == 0)) {}
-				else {
-					byte[] itm = Bry_.Mid(src, fld_bgn, src_pos);
-					if (trim) itm = Bry_.Trim(itm);						
-					rv.Add(itm);
-				}
-				fld_bgn = src_pos + 1;
-			}
-			if (last) break;
-			++src_pos;
-		}
-		return (byte[][])rv.To_ary(byte[].class);
-	}
 	public static byte[] Replace_create(byte[] src, byte find, byte replace) {
 		byte[] rv = Bry_.Copy(src);
 		Replace_reuse(rv, find, replace);
@@ -888,8 +818,8 @@ public class Bry_ {
 		int bfr_bgn = pos;
 		int replace_count = 0;
 		while (pos < src_end) {
-			int find_pos = Bry_finder.Find_fwd(src, find, pos);
-			if (find_pos == Bry_finder.Not_found) break;
+			int find_pos = Bry_find_.Find_fwd(src, find, pos);
+			if (find_pos == Bry_find_.Not_found) break;
 			dirty = true;
 			bfr.Add_mid(src, bfr_bgn, find_pos);
 			bfr.Add(repl);
@@ -910,14 +840,14 @@ public class Bry_ {
 		int pos = 0;
 		while (true) {
 			if (pos >= src_len) break;
-			int bgn_pos = Bry_finder.Find_fwd(src, bgn, pos);
+			int bgn_pos = Bry_find_.Find_fwd(src, bgn, pos);
 			if (bgn_pos == Bry_.NotFound) {
 				bfr.Add_mid(src, pos, src_len);
 				break;
 			}
 			else {
 				int bgn_rhs = bgn_pos + bgn_len;
-				int end_pos = replace_all ? bgn_rhs : Bry_finder.Find_fwd(src, end, bgn_rhs);
+				int end_pos = replace_all ? bgn_rhs : Bry_find_.Find_fwd(src, end, bgn_rhs);
 				if (end_pos == Bry_.NotFound) {
 					bfr.Add_mid(src, pos, src_len);
 					break;
@@ -941,48 +871,6 @@ public class Bry_ {
 			}
 		}
 		return 0;
-	}
-	public static byte[][] Split(byte[] src, byte[] dlm) {
-		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
-		int cur_pos = 0, src_len = src.length, dlm_len = dlm.length;
-		List_adp rv = List_adp_.new_();
-		while (true) {
-			int find_pos = Bry_finder.Find_fwd(src, dlm, cur_pos);
-			if (find_pos == Bry_.NotFound) {
-				if (cur_pos == src_len) break;	// dlm is last sequence in src; do not create empty itm
-				find_pos = src_len;			
-			}
-			rv.Add(Bry_.Mid(src, cur_pos, find_pos));
-			if (find_pos == src_len) break;
-			cur_pos = find_pos + dlm_len;
-		}
-		return (byte[][])rv.To_ary(byte[].class);
-	}
-	public static byte[][] Split_lines(byte[] src) {
-		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
-		int src_len = src.length, src_pos = 0, fld_bgn = 0;
-		List_adp rv = List_adp_.new_();
-		while (true) {
-			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.Nl : src[src_pos];
-			int nxt_bgn = src_pos + 1; 
-			switch (b) {
-				case Byte_ascii.Cr:
-				case Byte_ascii.Nl:
-					if (	b == Byte_ascii.Cr		// check for crlf
-						&& nxt_bgn < src_len && src[nxt_bgn] == Byte_ascii.Nl) {
-							++nxt_bgn;
-					}
-					if (last && (src_pos - fld_bgn == 0)) {}	// ignore trailing itms
-					else
-						rv.Add(Bry_.Mid(src, fld_bgn, src_pos));
-					fld_bgn = nxt_bgn;
-					break;
-			}
-			if (last) break;
-			src_pos = nxt_bgn;
-		}
-		return (byte[][])rv.To_ary(byte[].class);
 	}
 	public static byte[] Increment_last(byte[] ary) {return Increment_last(ary, ary.length - 1);}
 	public static byte[] Increment_last(byte[] ary, int end_idx) {
@@ -1033,8 +921,4 @@ public class Bry_ {
 		return rv;
 	}
 	public static byte[] Null_if_empty(byte[] v) {return Len_eq_0(v) ? null : v;}
-	public static byte Get_at_end(byte[] v) {
-		int v_len = v.length;
-		return v_len == 0 ? Byte_ascii.Null : v[v_len - 1];
-	}		
 }

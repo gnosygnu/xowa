@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.specials.*;
 public class Xop_mylanguage_page implements Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__my_language;}

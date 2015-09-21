@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.xowa.wmfs.*;
+import gplx.core.primitives.*; import gplx.xowa.wms.*;
 public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_img {
 	private final Xowmf_mgr wmf_mgr; private final ProcessAdp cmd_convert, cmd_convert_svg_to_png;
 	private boolean init_needed = true;

@@ -33,7 +33,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.json.*;
+import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.primitives.*; import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.pages.*;
 public class Http_server_mgr implements GfoInvkAble {
 	private final Object thread_lock = new Object();
@@ -51,6 +51,8 @@ public class Http_server_mgr implements GfoInvkAble {
 	public Http_request_parser Request_parser() {return request_parser;} private final Http_request_parser request_parser;
 	public Url_encoder Encoder() {return encoder;} private final Url_encoder encoder = Url_encoder.new_http_url_();
 	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
+	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
+	public Int_pool Uid_pool() {return uid_pool;} private final Int_pool uid_pool = new Int_pool();
 	public String Home() {return home;} public void Home_(String v) {home = v;} private String home = "home/wiki/Main_Page";
 	private void Init_gui() {	// create a shim gui to automatically handle default XOWA gui JS calls
 		if (init_gui_done) return;
@@ -94,12 +96,12 @@ public class Http_server_mgr implements GfoInvkAble {
 			if (Bry_.Len_eq_0(page_ttl)) page_ttl = wiki.Props().Main_page();
 			Xoa_url page_url = wiki.Utl__url_parser().Parse(page_ttl);								// get the url (needed for query args)
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, page_ttl);											// get the ttl
-			Xoae_page page = wiki.Load_page_by_ttl(page_url, ttl);									// get page and parse it
+			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(page_url, ttl);						// get page and parse it
 			Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab
 			app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 			if (page.Missing()) {																	// if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
 				page.Data_raw_(Bry_.new_a7("'''Page not found.'''"));
-				wiki.ParsePage(page, false);			
+				wiki.Parser_mgr().Parse(page, false);			
 			}
 			page.Html_data().Head_mgr().Itm__server().Init_by_http(data__client).Enabled_y_();
 			byte[] output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode.Tid_read);		// write html from page data
