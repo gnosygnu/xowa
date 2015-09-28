@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_windows_64_v2.9.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_windows_64_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_windows_v2.9.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_windows_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_linux_64_v2.9.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_linux_64_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_linux_v2.9.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_linux_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_macosx_64_v2.9.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_macosx_64_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.3.1/xowa_app_macosx_v2.9.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_macosx_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.9.3.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.9.4.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -55,58 +55,28 @@
     </h2>
 
     <h2>
-      <span class='mw-headline' id='v2.9.3.1_.282015-09-21.29'>v2.9.3.1 (2015-09-21)</span>
+      <span class='mw-headline' id='v2.9.4.1_.282015-09-28.29'>v2.9.4.1 (2015-09-28)</span>
     </h2>
-    <p>
-      <b>major</b>
-    </p>
-    <ul>
-      <li>
-        Css: Handle new CSS relative urls (affects no css downloaded for new wikis). See: <a href="https://simple.wikipedia.org/wiki/">https://simple.wikipedia.org</a>
-      </li>
-    </ul>
-    <p>
-      <b>fix</b>
-    </p>
-    <ul>
-      <li>
-        Lang: Use fallback languages to resolve variants (affects many zh.w pages missing text for message boxes or references); EX:if zh-cn, then -{zh;zh-hans|A}- -&gt; "A" x&gt; "". See: <a href="https://zh.wikipedia.org/wiki/釣魚臺列嶼主權問題">https://zh.wikipedia.org/wiki/釣魚臺列嶼主權問題</a> <a href="https://zh.wikipedia.org/wiki/清朝">https://zh.wikipedia.org/wiki/清朝</a> [broken since:v2.8.1]
-      </li>
-      <li>
-        Scribunto: Fix #iferror to handle scribunto errors (affects a few dozen pt.w pages with red error message text); EX:&lt;strong class="error"&gt; x&gt; &lt;strong class='error'&gt;. See: <a href="https://pt.wikipedia.org/wiki/Molibdênio">https://pt.wikipedia.org/wiki/Molibdênio</a> <a href="https://pt.wikipedia.org/wiki/Salmão">https://pt.wikipedia.org/wiki/Salmão</a> <a href="https://pt.wikipedia.org/wiki/Fluxo_de_trabalho">https://pt.wikipedia.org/wiki/Fluxo_de_trabalho</a> [broken since:v2.7.2]
-      </li>
-      <li>
-        Url: Fix pages not being loaded correctly on startup; EX:pt.wikipedia.org/wiki/Wikipedia:Página_de_testes x&gt; en.wikipedia.org/wiki/Página_de_testes. See: <a href="https://pt.wikipedia.org/wiki/Wikipedia:Página_de_testes">https://pt.wikipedia.org/wiki/Wikipedia:Página_de_testes</a> [broken since:v2.8.1]
-      </li>
-    </ul>
-    <p>
-      <b>add</b>
-    </p>
-    <ul>
-      <li>
-        HttpServer: Add command-line argument to limit maximum number of connections; EX:--http_server.max_clients 15 --http_server.max_clients_timeout 100 {requested by anonymous}.
-      </li>
-    </ul>
     <p>
       <b>package</b>
     </p>
     <ul>
       <li>
-        Package: Release image update for Portuguese wikis (2015-09).
+        Package: Release image update for Hungarian wikis (2015-09).
       </li>
       <li>
-        Package: Release image update for Romanian wikis (2015-09).
-      </li>
-      <li>
-        Package: Release image update for Indonesian wikis (2015-09).
+        Package: Release image update for Thai wikis (2015-09).
       </li>
     </ul>
     <p>
-      <b>minor</b>
+      <b>significant</b>
     </p>
     <ul>
       <li>
-        Url: Use variant form of url if title does not exist (affects zh.* pages not retrievable from the url bar when a variant form is used). See: <a href="https://zh.wikipedia.org/wiki/Template:铁道路线/车站列表">https://zh.wikipedia.org/wiki/Template:铁道路线/车站列表</a>
+        Wikidata: Show precision, globe and other minor time / geo coordinates (affects: several dozen hu.w pages showing script error for population). See: <a href="https://hu.wikipedia.org/wiki/Egyiptom">https://hu.wikipedia.org/wiki/Egyiptom</a>
+      </li>
+      <li>
+        Xwiki: Do not show commons.wikimedia.org in wikis list if wiki is not imported {detected by anonymous}.
       </li>
     </ul>
     <p>
@@ -114,29 +84,12 @@
     </p>
     <ul>
       <li>
-        Api: Parse fallback and variants data from "general". See: <a href="https://zh.wikipedia.org/wiki/api.php?action=query&amp;format=json&amp;meta=siteinfo&amp;siprop=general|namespaces|statistics|interwikimap|namespacealiases|specialpagealiases|libraries|extensions|skins|magicwords|functionhooks|showhooks|extensiontags|protocols|defaultoptions|languages">https://zh.wikipedia.org/w/api.php?action=query&amp;format=json&amp;meta=siteinfo&amp;siprop=general|namespaces|statistics|interwikimap|namespacealiases|specialpagealiases|libraries|extensions|skins|magicwords|functionhooks|showhooks|extensiontags|protocols|defaultoptions|languages</a>
-      </li>
-      <li>
-        Url: Update url bar / windows bar with url if page is missing. See: <a href="https://pt.wikipedia.org/wiki/">https://pt.wikipedia.org/wiki/</a>"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR"""
+        HttpServer: Fix id generator not releasing ids (affects: error message occasionally appearing on console).
       </li>
     </ul>
     <p>
-      <b>dev</b>
+      <br>
     </p>
-    <ul>
-      <li>
-        Source: Consolidate all working folders into /src/.
-      </li>
-      <li>
-        Source: Refactor variant classes.
-      </li>
-      <li>
-        Source: Refactor Xowe_wiki.
-      </li>
-      <li>
-        Source: Refactor Bry_.
-      </li>
-    </ul>
     <p>
       <br>
     </p>
