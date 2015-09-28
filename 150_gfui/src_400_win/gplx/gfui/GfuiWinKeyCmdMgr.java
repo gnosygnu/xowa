@@ -30,7 +30,7 @@ class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 		int keyVal = iptData.Key().Val();
 		GfuiElem sender = GfuiElem_.as_(iptData.Sender());
 		if (GfuiTextBox_.as_(sender) != null				// is sender textBox?
-			&& !Enm_.Has_int(keyVal, IptKey_.Alt.Val())		// does key not have alt
+			&& !Bitmask_.Has_int(keyVal, IptKey_.Alt.Val())		// does key not have alt
 			) return false;									// ignore keys from textbox if they do not have alt
 		List_adp elemList = (List_adp)listHash.Get_by(keyVal); if (elemList == null) return false;
 		for (int i = 0; i < elemList.Count(); i++) {

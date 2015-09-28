@@ -17,45 +17,76 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
+import gplx.xowa.langs.vnts.*;
 class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
-//		private final Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
-	public void Parse(byte[] src, int src_bgn, int src_end) {
-		Bry_split_.Split(src, Byte_ascii.Semic, false, this);	// trim=false for "&#entity;" check below
+	private final Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
+	private Vnt_rule_undi_mgr undis; private Vnt_rule_bidi_mgr bidis;
+	private int src_end, src_len; private byte[] rule_raw;
+	public byte[] Raw() {return rule_raw;}
+	public void Init(Xol_vnt_regy vnt_regy) {
+		this.vnt_trie.Clear();
+		int len = vnt_regy.Len();
+		for (int i = 0; i < len; ++i) {
+			Xol_vnt_itm itm = (Xol_vnt_itm)vnt_regy.Get_at(i);
+			vnt_trie.Add_obj(itm.Key(), itm);
+		}
 	}
-	public int Split(byte[] src, int itm_bgn, int itm_end) {
-		int html_entity_pos = Bry_find_.Find_bwd_while_alphanum(src, itm_bgn);
-		if (Bry_.Eq(src, html_entity_pos - 2, html_entity_pos, Bry__html_entity)) return Bry_split_.Rv__extend; // reject "&#entity;"; EX: "&nbsp;zh-hans;"
-		/*
-		itm_bgn = skip fwd for ws;
-		itm_bgn = skip fwd for "=>"
-		Object vnt_obj = vnt_trie.Match_bgn(src, itm_bgn, itm_end); if (vnt_obj == null) return Bry_split_.Rv__extend;	// reject ";not_variant"; EX: ";border" in "zh-hans:<span style='color:blue;border:1px;'>;zh-hant:"
-		itm_end = skip bwd for ws
-//			val = trim( val[0] );
-//			trg = trim( val[1] );
-//			$u = explode( '=>', val, 2 );
-//			// if trg is empty, strtr() could return a wrong result
-//			if ( count( $u ) == 1 && trg && in_array( val, $variants ) ) {
-//				bidi_ary[val] = trg;
-//			} elseif ( count( $u ) == 2 ) {
-//				$from = trim( $u[0] );
-//				val = trim( $u[1] );
-//				if ( array_key_exists( val, $unidtable )
-//					&& !is_array( $unidtable[val] )
-//					&& trg
-//					&& in_array( val, $variants ) ) {
-//					$unidtable[val] = array( $from => trg );
-//				} elseif ( trg && in_array( val, $variants ) ) {
-//					$unidtable[val][$from] = trg;
-//				}
-//			}
-//			// syntax error, pass
-//			if ( !isset( $this->mConverter->mVariantNames[val] ) ) {
-//				bidi_ary = array();
-//				$unidtable = array();
-//				break;
-//			}
-		*/
+	public void Clear(Vnt_rule_undi_mgr undis, Vnt_rule_bidi_mgr bidis, byte[] rule_raw) {
+		this.undis = undis; this.bidis = bidis;
+		undis.Clear(); bidis.Clear();
+		this.rule_raw = rule_raw;
+	}
+	public void Parse(byte[] src, int src_bgn, int src_end) {
+		this.src_end = src_end; this.src_len = src.length;
+		Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Semic, false, this);	// trim=false for "&#entity;" check below
+	}
+	public int Split(byte[] src, int itm_bgn, int itm_end) {	// macro=>zh-hans:text;
+		int html_entity_pos = Bry_find_.Find_bwd_while_alphanum(src, itm_end);
+		byte html_entity_byte =  src[html_entity_pos];
+		if (html_entity_byte == Byte_ascii.Hash) html_entity_byte = src[html_entity_pos - 2];	// skip #; EX: &#123;
+		if (html_entity_byte == Byte_ascii.Amp) return Bry_split_.Rv__extend;					// reject "&#entity;"; EX: "&nbsp;zh-hans;"
+		if (itm_end != src_end) {
+			int nxt_lang_bgn = Bry_find_.Find_fwd(src, Bry__bidi_dlm, itm_end + 1, src_len);		// look for next "=>"
+			if (nxt_lang_bgn == Bry_find_.Not_found)
+				nxt_lang_bgn = Bry_find_.Find_fwd_while_ws(src, itm_end + 1, src_len);				// skip any ws after end ";"; EX: "a:1; b:2"; NOTE: +1 to skip semic;
+			else
+				nxt_lang_bgn += 2;
+			int nxt_lang_end = Bry_find_.Find_fwd(src, Byte_ascii.Colon, nxt_lang_bgn, src_len);	// get colon;
+			if (nxt_lang_end != Bry_find_.Not_found) {
+				nxt_lang_end = Bry_find_.Find_bwd__skip_ws(src, nxt_lang_end, src_len);				// trim
+				if (vnt_trie.Match_bgn(src, nxt_lang_bgn, nxt_lang_end) == null) return Bry_split_.Rv__extend;	// reject ";not_variant"; EX: ";border" in "zh-hans:<span style='color:blue;border:1px;'>;zh-hant:"
+			}
+		}
+		int undi_bgn = Bry_find_.Find_fwd_while_ws(src, itm_bgn, itm_end);						// skip any ws after bgn ";"; EX: " a=>b:c;"
+		int undi_end = Bry_find_.Find_fwd(src, Bry__bidi_dlm, undi_bgn, itm_end);				// look for "=>"
+		int lang_bgn = undi_bgn;				// default lang_bgn to undi_bgn; assumes no bidi found
+		if (undi_end != Bry_find_.Not_found) {	// "=>" found; bidi exists
+			lang_bgn = Bry_find_.Find_fwd_while_ws(src, undi_end + 2, itm_end);		// set lang_bgn after => and gobble up ws
+			undi_end = Bry_find_.Find_bwd__skip_ws(src, undi_end, undi_bgn);		// trim ws from end of bd;
+		}
+		Object vnt_obj = vnt_trie.Match_bgn(src, lang_bgn, itm_end);
+		if (vnt_obj == null) {
+			return (itm_bgn == 0) ? Bry_split_.Rv__cancel : Bry_split_.Rv__extend;	// if 1st item; cancel rest; otherwise, extend
+		}
+		int lang_end = vnt_trie.Match_pos();
+		int text_bgn = Bry_find_.Find_fwd_while_ws(src, lang_end, itm_end); if (src[text_bgn] != Byte_ascii.Colon) return Bry_split_.Rv__extend;
+		++text_bgn;
+		Xol_vnt_itm vnt_itm = (Xol_vnt_itm)vnt_obj;
+		byte[] vnt_key = vnt_itm.Key();
+		byte[] text_bry = Bry_.Mid_w_trim(src, text_bgn, itm_end);
+		if (undi_end == Bry_find_.Not_found)
+			bidis.Set(vnt_key, text_bry);
+		else {
+			byte[] undi_bry = Bry_.Mid(src, undi_bgn, undi_end);
+			if (itm_end - text_bgn > 0)
+				undis.Set(vnt_key, undi_bry, text_bry);
+		}
 		return Bry_split_.Rv__ok;
 	}
-	private static final byte[] Bry__html_entity = Bry_.new_a7("&#");
+	public void To_bry__dbg(Bry_bfr bfr) {
+		undis.To_bry__dbg(bfr);
+		if (bfr.Len_gt_0()) bfr.Add_byte_nl();
+		bidis.To_bry__dbg(bfr);
+	}
+	private static final byte[] Bry__bidi_dlm = Bry_.new_a7("=>");
 }

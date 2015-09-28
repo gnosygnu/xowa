@@ -35,11 +35,30 @@ public class Bry_split__tst {
 		fxt.Test_Split(" a b | c d "	, Byte_ascii.Pipe, Bool_.Y, "a b", "c d");
 		fxt.Test_Split(" a \n b "		, Byte_ascii.Nl  , Bool_.N, " a ", " b ");			// ws as dlm
 		fxt.Test_Split(" a \n b "		, Byte_ascii.Nl  , Bool_.Y, "a", "b");				// ws as dlm; trim
+		fxt.Test_Split("a|extend|b"		, Byte_ascii.Pipe, Bool_.Y, "a", "extend|b");		// extend
+		fxt.Test_Split("extend|a"		, Byte_ascii.Pipe, Bool_.Y, "extend|a");			// extend
+		fxt.Test_Split("a|cancel|b"		, Byte_ascii.Pipe, Bool_.Y, "a");					// cancel
 	}
 }
 class Bry_split__fxt {
+	private final Bry_split_wkr__example wkr = new Bry_split_wkr__example();
 	public void Test_Split(String raw_str, byte dlm, boolean trim, String... expd) {
-		byte[][] actl_ary = Bry_split_.Split(Bry_.new_a7(raw_str), dlm, trim);
+		byte[] src = Bry_.new_a7(raw_str);
+		Bry_split_.Split(src, 0, src.length, dlm, trim, wkr);
+		byte[][] actl_ary = wkr.To_ary();
 		Tfds.Eq_ary_str(expd, String_.Ary(actl_ary));
+	}
+}
+class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {
+	private final List_adp list = List_adp_.new_();
+	public int Split(byte[] src, int itm_bgn, int itm_end) {
+		byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
+		if		(Bry_.Eq(bry, Bry_.new_a7("extend"))) return Bry_split_.Rv__extend;
+		else if (Bry_.Eq(bry, Bry_.new_a7("cancel"))) return Bry_split_.Rv__cancel;
+		list.Add(bry);
+		return Bry_split_.Rv__ok;
+	}
+	public byte[][] To_ary() {
+		return (byte[][])list.To_ary_and_clear(byte[].class);
 	}
 }

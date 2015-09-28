@@ -138,7 +138,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public String To_str() {
 		Bry_bfr bfr = Bry_bfr.new_();
 		for (int i = 0; i < count; ++i)
-			bfr.Add_obj(list[i]);
+			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(list[i])).Add_byte_nl();
 		return bfr.Xto_str_and_clear();
 	}
 	private void BoundsChk(int bgn, int end, int len) {

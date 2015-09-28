@@ -230,7 +230,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Claims_time() {
-		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06"));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06", 9));
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"
@@ -241,7 +241,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"          type:'time'"
 		,	"          value:"
 		,	"            time:'+00000002001-02-03T04:05:06Z'"
-		,	"            precision:'11'"
+		,	"            precision:'9'"
 		,	"            before:'0'"
 		,	"            after:'0'"
 		,	"            timezone:'0'"
@@ -341,7 +341,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"              type:'time'"
 		,	"              value:"
 		,	"                time:'+00000002001-02-03T04:05:06Z'"
-		,	"                precision:'11'"
+		,	"                precision:'14'"
 		,	"                before:'0'"
 		,	"                after:'0'"
 		,	"                timezone:'0'"

@@ -106,7 +106,7 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 						this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
 					bfr.Add_mid(src, tag_close_bgn, tag_close_end);	// write tag_end
 					if (tag_close_bgn == Int_.Min_value) {// xtn is unclosed; add a </xtn> else rest of page will be gobbled; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
-						bfr.Add(tag.XtnEndTag());
+						bfr.Add(tag.Xtn_end_tag());
 						bfr.Add(Byte_ascii.Gt_bry);
 					}
 				}

@@ -21,6 +21,8 @@ public class Xol_convert_wkr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xol_convert_wkr(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private final byte[] key;
+	public void Add(byte[] src, byte[] trg) {trie.Add_obj(src, trg);}
+	public void Del(byte[] src)				{trie.Del(src);}
 	public boolean Convert_text(Bry_bfr bfr, byte[] src) {return Convert_text(bfr, src, 0, src.length);}
 	public boolean Convert_text(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		int pos = bgn;
@@ -47,7 +49,7 @@ public class Xol_convert_wkr {
 				pos = trie.Match_pos();
 			}
 		}
-		if (!matched) bfr.Add(src);	// no convert; make sure to add back src, else bfr will be blank
+		if (!matched) bfr.Add_mid(src, bgn, end);	// no convert; make sure to add back src, else bfr will be blank
 		return matched;
 	}
 	public void Rebuild(Xol_convert_regy regy, byte[][] ary) {

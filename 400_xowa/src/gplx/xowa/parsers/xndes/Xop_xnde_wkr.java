@@ -71,10 +71,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
 					++atrs_bgn_pos;	// set bgn_pos to be after ws
 					break;
-				case Byte_ascii.Slash: case Byte_ascii.Gt:
+				case Byte_ascii.Slash: case Byte_ascii.Angle_end:
 					++atrs_bgn_pos;	// set bgn_pos to be after char
 					break;
-				case Byte_ascii.Backslash:
+				case Byte_ascii.Backslash:	// NOTE: MW treats \ as /; EX: <br\>" -> "<br/>
 					++tag_end_pos;
 					break;
 				case Byte_ascii.Dollar:// handles <br$2>;
@@ -246,7 +246,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		int end_rhs = -1, findPos = gtPos;
-		byte[] end_bry = Xop_xnde_tag_.Tag_noinclude.XtnEndTag(); int end_bry_len = end_bry.length;
+		byte[] end_bry = Xop_xnde_tag_.Tag_noinclude.Xtn_end_tag(); int end_bry_len = end_bry.length;
 		if (tag_is_closing)	// </noinclude>; no end tag to search for; DATE:2014-05-02
 			end_rhs = gtPos;
 		else {				// <noinclude>; search for end tag
@@ -281,7 +281,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				break;
 			case Byte_ascii.Backslash:	// allow <br\>; EX:w:Mosquito
 				if (tag.Inline_by_backslash())
-					src[tag_end_pos] = Byte_ascii.Slash;	
+					src[tag_end_pos] = Byte_ascii.Slash;
 				break;
 			case Byte_ascii.Gt:		// ">" "normal" tag; noop
 				break;
@@ -323,7 +323,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 
 		boolean tag_ignore = false;
 		int tagId = tag.Id();
-		if (tagId == Xop_xnde_tag_.Tid_table || tag.TblSub()) {							// tbl tag; EX: <table>,<tr>,<td>,<th>
+		if (tagId == Xop_xnde_tag_.Tid_table || tag.Tbl_sub()) {							// tbl tag; EX: <table>,<tr>,<td>,<th>
 			Tblw_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, gtPos + 1, tagId, atrs_bgn, atrs_end);
 			return gtPos + 1;
 		}
@@ -338,8 +338,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		else if (tagId == prv_xnde_tagId && tag.Repeat_mids()) {	// EX: "<li>a<li>b" -> "<li>a</li><li>b"
 			End_tag(ctx, root, prv_xnde, src, src_len, bgn_pos - 1, bgn_pos - 1, tagId, true, tag);
 		}
-		else if (tag.SingleOnly()) inline = true; // <br></br> not allowed; convert <br> to <br/> </br> will be escaped
-		else if (tag.NoInline() && inline) {
+		else if (tag.Single_only()) inline = true; // <br></br> not allowed; convert <br> to <br/> </br> will be escaped
+		else if (tag.No_inline() && inline) {
 			Xop_xnde_tkn xnde_inline = Xnde_bgn(ctx, tkn_mkr, root, tag, Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);
 			End_tag(ctx, root, xnde_inline, src, src_len, bgn_pos, gtPos, tagId, false, tag);
 			ctx.Msg_log().Add_itm_none(Xop_xnde_log.No_inline, src, bgn_pos, gtPos);
@@ -347,7 +347,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		Xop_xnde_tkn xnde = null;
 		xnde = Xnde_bgn(ctx, tkn_mkr, root, tag, inline ? Xop_xnde_tkn.CloseMode_inline : Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);
-		if (!inline && tag.BgnNdeMode() != Xop_xnde_tag_.BgnNdeMode_inline)
+		if (!inline && tag.Bgn_nde_mode() != Xop_xnde_tag_.Bgn_nde_mode_inline)
 			ctx.Stack_add(xnde);
 		if (tag_ignore)
 			xnde.Tag_visible_(false);
@@ -414,7 +414,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		Xop_xnde_tkn bgn_nde = (Xop_xnde_tkn)ctx.Stack_get(prv_xnde_pos);
 		int bgn_tag_id = bgn_nde == null ? -1 : bgn_nde.Tag().Id();
 
-		int end_nde_mode = end_tag.EndNdeMode();
+		int end_nde_mode = end_tag.End_nde_mode();
 		boolean force_end_tag_to_match_bgn_tag = false;
 		switch (bgn_tag_id) {
 			case Xop_xnde_tag_.Tid_sub:		if (end_tag_id == Xop_xnde_tag_.Tid_sup) force_end_tag_to_match_bgn_tag = true; break;
@@ -426,7 +426,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			end_tag_id = bgn_tag_id;
 			ctx.Msg_log().Add_itm_none(Xop_xnde_log.Sub_sup_swapped, src, bgn_pos, cur_pos);
 		}
-		if (end_tag_id == Xop_xnde_tag_.Tid_table || end_tag.TblSub()) {
+		if (end_tag_id == Xop_xnde_tag_.Tid_table || end_tag.Tbl_sub()) {
 			Tblw_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, end_tag_id);
 			return cur_pos;
 		}
@@ -437,10 +437,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			return cur_pos;
 		}
 		switch (end_nde_mode) {
-			case Xop_xnde_tag_.EndNdeMode_inline:	// PATCH.WP: allows </br>, </br/> and many other variants
+			case Xop_xnde_tag_.End_nde_mode_inline:	// PATCH.WP: allows </br>, </br/> and many other variants
 				Xnde_bgn(ctx, tkn_mkr, root, end_tag, Xop_xnde_tkn.CloseMode_inline, src, bgn_pos, cur_pos, Int_.Min_value, Int_.Min_value, null);	// NOTE: atrs is null b/c </br> will never have atrs
 				return cur_pos;
-			case Xop_xnde_tag_.EndNdeMode_escape:	// handle </hr>
+			case Xop_xnde_tag_.End_nde_mode_escape:	// handle </hr>
 				ctx.Lxr_make_(false);
 				ctx.Msg_log().Add_itm_none(Xop_xnde_log.Escaped_xnde, src, bgn_pos, cur_pos - 1);
 				return cur_pos;
@@ -576,13 +576,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			xnde.Tag_close_rng_(open_end, open_end);			// NOTE: inline tag, so set TagClose to open_end; should noop
 		}
 		else {
-			byte[] close_bry = tag.XtnEndTag_tmp();				// get tmp bry (so as not to new)
+			byte[] close_bry = tag.Xtn_end_tag_tmp();				// get tmp bry (so as not to new)
 			if (tag.Langs() != null) {							// cur tag has langs; EX:<section>; DATE:2014-07-18
 				Xop_xnde_tag_lang tag_lang = tag.Langs_get(ctx.Lang().Case_mgr(), ctx.Cur_page().Lang().Lang_id(), src, name_bgn, name_end);
 				if (tag_lang == null)							// tag does not match lang; EX:<trecho> and lang=de;
 					return ctx.Lxr_make_txt_(open_end);
 				if (tag_lang != Xop_xnde_tag_lang._)			// tag matches; note Xop_xnde_tag_lang._ is a wildcard match; EX:<section>
-					close_bry = tag_lang.XtnEndTag_tmp();
+					close_bry = tag_lang.Xtn_end_tag_tmp();
 			}
 			int src_offset = open_bgn - 1;						// open bgn to start at <; -2 to ignore </ ; +1 to include <
 			int close_ary_len = close_bry.length;

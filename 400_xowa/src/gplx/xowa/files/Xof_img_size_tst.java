@@ -76,7 +76,7 @@ public class Xof_img_size_tst {
 		fxt.Lnki_type_(Xop_lnki_type.Id_frame).Lnki_ext_(Xof_ext_.Id_png).Lnki_(200, 200).Orig_(2038, 1529).Test_html(200, 150, Bool_.N);
 	}
 	@Test  	public void Frame_and_thumb(){ // PURPOSE: frame and thumb should be treated as frame; Enm.Has(val, Id_frame) vs val == Id_frame; PAGE:en.w:History_of_Western_Civilization; DATE:2015-04-16
-		fxt.Lnki_type_(Enm_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);	// mut return same as Lnki_lt_orig_frame above
+		fxt.Lnki_type_(Bitmask_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);	// mut return same as Lnki_lt_orig_frame above
 	}
 	@Test  	public void Video__use_orig_w(){ // PURPOSE: video should use orig_w; DATE:2015-08-07
 		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(500, 250).Test_html(500, 250, Bool_.N);

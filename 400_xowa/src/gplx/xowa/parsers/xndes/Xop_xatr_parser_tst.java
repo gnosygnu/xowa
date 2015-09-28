@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_xatr_parser_tst {		
-	@Test  public void Kv_quote_double() 		{fxt.tst_("a=\"b\"", fxt.new_atr_("a", "b"));} private Xop_xatr_parser_fxt fxt = new Xop_xatr_parser_fxt();
+	private final Xop_xatr_parser_fxt fxt = new Xop_xatr_parser_fxt();
+	@Test  public void Kv_quote_double() 		{fxt.tst_("a=\"b\"", fxt.new_atr_("a", "b"));}
 	@Test  public void Kv_quote_single()		{fxt.tst_("a='b'", fxt.new_atr_("a", "b"));}
 	@Test  public void Kv_quote_none()			{fxt.tst_("a=b", fxt.new_atr_("a", "b"));}
 	@Test  public void Kv_empty()				{fxt.tst_("a=''", fxt.new_atr_("a", ""));}

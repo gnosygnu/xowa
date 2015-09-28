@@ -61,7 +61,7 @@ public class Scrib_lib_text implements Scrib_lib {
 //			if		(Type_adp_.Eq(itm_type, typeof(KeyVal[])))	itm_as_kvy = (KeyVal[])itm;
 //			else if	(Type_adp_.Is_array(itm_type))				itm_as_ary = Array_.cast(itm);
 //			int flags = args.Cast_int_or(1, 0);
-//			if (itm_as_kvy != null && !Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
+//			if (itm_as_kvy != null && !Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))
 //				itm_as_kvy = json_util.Reindex_arrays(itm_as_kvy, true);
 //			byte[] rv = null;
 //			if	(itm_as_kvy != null)
@@ -82,7 +82,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		synchronized (reindex_data) {
 			if (	itm_as_kvy != null 
 				&&	itm_as_kvy.length > 0
-				&&	!Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
+				&&	!Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
 				) {
 				json_util.Reindex_arrays(reindex_data, itm_as_kvy, true);
 				if (reindex_data.Rv_is_kvy()) {
@@ -107,12 +107,12 @@ public class Scrib_lib_text implements Scrib_lib {
 		byte[] json = args.Pull_bry(0);
 		int flags = args.Cast_int_or(1, 0);
 		int opts = Scrib_lib_text__json_util.Opt__force_assoc;
-		if (Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
-			opts = Enm_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
+		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
+			opts = Bitmask_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
 		synchronized (procs) {
 			byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
 			if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
-			if (rv_tid == Bool_.Y_byte && !(Enm_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
+			if (rv_tid == Bool_.Y_byte && !(Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
 				KeyVal[] rv_as_kvy = (KeyVal[])json_util.Decode_rslt_as_nde();
 				synchronized (reindex_data) {
 					json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);

@@ -23,16 +23,17 @@ public class Bry_split_ {
 	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
 		synchronized (thread_lock) {
 			Bry_split_wkr__to_ary wkr = Bry_split_wkr__to_ary.I;
-			Split(src, dlm, trim, wkr);
+			Split(src, 0, src == null ? 0 : src.length, dlm, trim, wkr);
 			return wkr.To_ary();
 		}
 	}
-	public static void Split(byte[] src, byte dlm, boolean trim, Bry_split_wkr wkr) {
-		if (src == null) return;
-		int src_len = src.length, pos = 0; if (src_len == 0) return;
+	public static int Split(byte[] src, int src_bgn, int src_end, byte dlm, boolean trim, Bry_split_wkr wkr) {
+		if (src == null || src_end - src_bgn < 1) return 0;
+		int pos = src_bgn; 
 		int itm_bgn = -1, itm_end = -1;
+		int count = 0;
 		while (true) {
-			boolean pos_is_last = pos == src_len;
+			boolean pos_is_last = pos == src_end;
 			byte b = pos_is_last ? dlm : src[pos];
 			int nxt_pos = pos + 1;
 			boolean process = true;
@@ -51,9 +52,9 @@ public class Bry_split_ {
 					else {
 						int rv = wkr.Split(src, itm_bgn, itm_end);
 						switch (rv) {
-							case Rv__ok:		break;
+							case Rv__ok:		++count; break;
 							case Rv__extend:	reset = false; break;
-							case Rv__cancel:	pos_is_last = true; break;
+							case Rv__cancel:	return count;
 							default:			throw Err_.new_unhandled(rv);
 						}
 					}
@@ -67,6 +68,7 @@ public class Bry_split_ {
 			if (pos_is_last) break;
 			pos = nxt_pos;
 		}
+		return count;
 	}
 	public static byte[][] Split(byte[] src, byte[] dlm) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
@@ -115,12 +117,16 @@ public class Bry_split_ {
 class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
 	private final List_adp list = List_adp_.new_();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
-		byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
-		list.Add(bry);
-		return Bry_split_.Rv__ok;
+		synchronized (list) {
+			byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
+			list.Add(bry);
+			return Bry_split_.Rv__ok;
+		}
 	}
 	public byte[][] To_ary() {
-		return (byte[][])list.To_ary_and_clear(byte[].class);
+		synchronized (list) {
+			return (byte[][])list.To_ary_and_clear(byte[].class);
+		}
 	}
         public static final Bry_split_wkr__to_ary I = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}
 }

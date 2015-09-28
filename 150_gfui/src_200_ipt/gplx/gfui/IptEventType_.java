@@ -32,7 +32,7 @@ public class IptEventType_ {
 		if (ary.length == 0) return IptEventType_.None;
 		int newVal = ary[0].Val();
 		for (int i = 1; i < ary.length; i++)
-			newVal = Enm_.Flip_int(true, newVal, ary[i].Val());
+			newVal = Bitmask_.Flip_int(true, newVal, ary[i].Val());
 		return getOrNew_(newVal);
 	}
 	static IptEventType getOrNew_(int v) {
@@ -46,7 +46,7 @@ public class IptEventType_ {
 	}
 	@gplx.Internal protected static boolean Has(IptEventType val, IptEventType find) {
 		if (find == IptEventType_.None && val != IptEventType_.None) return false; // check .None manually b/c 0 is identity when BitShifting
-		return Enm_.Has_int(val.Val(), find.Val());
+		return Bitmask_.Has_int(val.Val(), find.Val());
 	}
 	public static IptEventType default_(IptArg[] args) {
 		IptEventType rv = IptEventType_.None;

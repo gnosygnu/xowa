@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
+import gplx.Bitmask_;
 import gplx.Byte_ascii;
 import gplx.Enm_;
 import gplx.GfoEvMgr_;
@@ -108,12 +109,12 @@ class Swt_lnr_key implements KeyListener {
 			case 327680: 	val = IptKey_.Insert.Val(); break;
 		}
 		if (Has_ctrl(ev.stateMask)) 							val |= IptKey_.KeyCode_Ctrl;
-		if (Enm_.Has_int(ev.stateMask, IptKey_.KeyCode_Shift))	val |= IptKey_.KeyCode_Alt;
-		if (Enm_.Has_int(ev.stateMask, IptKey_.KeyCode_Ctrl))	val |= IptKey_.KeyCode_Shift;
+		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Shift))	val |= IptKey_.KeyCode_Alt;
+		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Ctrl))	val |= IptKey_.KeyCode_Shift;
 //		Tfds.Write(String_.Format("val={4} keyCode={0} stateMask={1} keyLocation={2} character={3}", ev.keyCode, ev.stateMask, ev.keyLocation, ev.character, val));
 		return IptEvtDataKey.int_(val);		
 	}
-	public static boolean Has_ctrl(int val) {return Enm_.Has_int(val, IptKey_.KeyCode_Alt);}	// NOTE:SWT's ctrl constant is different from SWING's 
+	public static boolean Has_ctrl(int val) {return Bitmask_.Has_int(val, IptKey_.KeyCode_Alt);}	// NOTE:SWT's ctrl constant is different from SWING's 
 }
 class Swt_lnr_mouse implements MouseListener {
 	public Swt_lnr_mouse(GxwElem elem) {this.elem = elem;} GxwElem elem;

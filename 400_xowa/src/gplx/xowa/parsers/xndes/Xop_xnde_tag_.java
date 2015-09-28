@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.langs.*;
 public class Xop_xnde_tag_ {
-	public static final int EndNdeMode_normal = 0, EndNdeMode_inline = 1, EndNdeMode_escape = 2; // escape is for hr which does not support </hr>
-	public static final int BgnNdeMode_normal = 0, BgnNdeMode_inline = 1;
+	public static final int End_nde_mode_normal = 0, End_nde_mode_inline = 1, End_nde_mode_escape = 2; // escape is for hr which does not support </hr>
+	public static final int Bgn_nde_mode_normal = 0, Bgn_nde_mode_inline = 1;
 	public static final byte[] Name_onlyinclude = Bry_.new_a7("onlyinclude");
-	public static final byte[] XtnEndTag_bgn = Bry_.new_a7("</");//, XtnEndTag_end = Bry_.new_a7(">");
-	public static final byte
-  Tid_b = 0
+	public static final byte[] Xtn_end_tag_bgn = Bry_.new_a7("</");//, Xtn_end_tag_end = Bry_.new_a7(">");
+	public static final int
+  Tid__null = -1
+, Tid_b = 0
 , Tid_strong = 1
 , Tid_i = 2
 , Tid_em = 3
@@ -147,64 +148,64 @@ public class Xop_xnde_tag_ {
 		return rv;
 	}
 	public static final Xop_xnde_tag
-  Tag_b = new_(Tid_b, "b").NoInline_()
-, Tag_strong = new_(Tid_strong, "strong").NoInline_()
-, Tag_i = new_(Tid_i, "i").NoInline_()
-, Tag_em = new_(Tid_em, "em").NoInline_()
-, Tag_cite = new_(Tid_cite, "cite").NoInline_()
-, Tag_dfn = new_(Tid_dfn, "dfn").NoInline_()
-, Tag_var = new_(Tid_var, "var").NoInline_()
-, Tag_u = new_(Tid_u, "u").NoInline_().Repeat_ends_()	// PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders; DATE:2014-09-05
-, Tag_ins = new_(Tid_ins, "ins").NoInline_()
-, Tag_abbr = new_(Tid_abbr, "abbr").NoInline_()
-, Tag_strike = new_(Tid_strike, "strike").NoInline_()
-, Tag_del = new_(Tid_del, "del").NoInline_()
-, Tag_s = new_(Tid_s, "s").NoInline_()
-, Tag_sub = new_(Tid_sub, "sub").NoInline_()
-, Tag_sup = new_(Tid_sup, "sup").NoInline_()
-, Tag_big = new_(Tid_big, "big").NoInline_()
-, Tag_small = new_(Tid_small, "small").NoInline_()
-, Tag_code = new_(Tid_code, "code").NoInline_().Repeat_ends_()
-, Tag_tt = new_(Tid_tt, "tt").NoInline_().Repeat_ends_()
-, Tag_kbd = new_(Tid_kbd, "kbd").NoInline_()
-, Tag_samp = new_(Tid_samp, "samp").NoInline_()
-, Tag_blockquote = new_(Tid_blockquote, "blockquote").NoInline_().Repeat_mids_().Section_().Block_open_bgn_().Block_close_end_()	// NOTE: should be open_end_, but leaving for now; DATE:2014-03-11; added Repeat_mids_(); PAGE:en.w:Ring_a_Ring_o'_Roses DATE:2014-06-26
-, Tag_pre = new_(Tid_pre, "pre").NoInline_().Section_().Xtn_().Raw_().Block_open_bgn_().Block_close_end_().Ignore_empty_().Xtn_skips_template_args_()
-, Tag_font = new_(Tid_font, "font").NoInline_()
-, Tag_center = new_(Tid_center, "center").NoInline_().Block_open_end_().Block_close_end_() // removed .Repeat_ends_(); added Nest_(); EX: w:Burr Truss; DATE:2012-12-12
-, Tag_p = new_(Tid_p, "p").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
+  Tag_b = new_(Tid_b, "b").No_inline_()
+, Tag_strong = new_(Tid_strong, "strong").No_inline_()
+, Tag_i = new_(Tid_i, "i").No_inline_()
+, Tag_em = new_(Tid_em, "em").No_inline_()
+, Tag_cite = new_(Tid_cite, "cite").No_inline_()
+, Tag_dfn = new_(Tid_dfn, "dfn").No_inline_()
+, Tag_var = new_(Tid_var, "var").No_inline_()
+, Tag_u = new_(Tid_u, "u").No_inline_().Repeat_ends_()	// PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders; DATE:2014-09-05
+, Tag_ins = new_(Tid_ins, "ins").No_inline_()
+, Tag_abbr = new_(Tid_abbr, "abbr").No_inline_()
+, Tag_strike = new_(Tid_strike, "strike").No_inline_()
+, Tag_del = new_(Tid_del, "del").No_inline_()
+, Tag_s = new_(Tid_s, "s").No_inline_()
+, Tag_sub = new_(Tid_sub, "sub").No_inline_()
+, Tag_sup = new_(Tid_sup, "sup").No_inline_()
+, Tag_big = new_(Tid_big, "big").No_inline_()
+, Tag_small = new_(Tid_small, "small").No_inline_()
+, Tag_code = new_(Tid_code, "code").No_inline_().Repeat_ends_()
+, Tag_tt = new_(Tid_tt, "tt").No_inline_().Repeat_ends_()
+, Tag_kbd = new_(Tid_kbd, "kbd").No_inline_()
+, Tag_samp = new_(Tid_samp, "samp").No_inline_()
+, Tag_blockquote = new_(Tid_blockquote, "blockquote").No_inline_().Repeat_mids_().Section_().Block_open_bgn_().Block_close_end_()	// NOTE: should be open_end_, but leaving for now; DATE:2014-03-11; added Repeat_mids_(); PAGE:en.w:Ring_a_Ring_o'_Roses DATE:2014-06-26
+, Tag_pre = new_(Tid_pre, "pre").No_inline_().Section_().Xtn_().Raw_().Block_open_bgn_().Block_close_end_().Ignore_empty_().Xtn_skips_template_args_()
+, Tag_font = new_(Tid_font, "font").No_inline_()
+, Tag_center = new_(Tid_center, "center").No_inline_().Block_open_end_().Block_close_end_() // removed .Repeat_ends_(); added Nest_(); EX: w:Burr Truss; DATE:2012-12-12
+, Tag_p = new_(Tid_p, "p").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
 , Tag_span = new_(Tid_span, "span").Section_()
 , Tag_div = new_(Tid_div, "div").Section_().Block_open_end_().Block_close_end_()
-, Tag_hr = new_(Tid_hr, "hr").SingleOnly_().BgnNdeMode_inline_().Inline_by_backslash_().EndNdeMode_escape_().Section_().Block_close_end_()
-, Tag_br = new_(Tid_br, "br").SingleOnly_().BgnNdeMode_inline_().Inline_by_backslash_().EndNdeMode_inline_().Section_()
-, Tag_h1 = new_(Tid_h1, "h1").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
-, Tag_h2 = new_(Tid_h2, "h2").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
-, Tag_h3 = new_(Tid_h3, "h3").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
-, Tag_h4 = new_(Tid_h4, "h4").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
-, Tag_h5 = new_(Tid_h5, "h5").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
-, Tag_h6 = new_(Tid_h6, "h6").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_hr = new_(Tid_hr, "hr").Single_only_().Single_only_html_().Bgn_nde_mode_inline_().Inline_by_backslash_().End_nde_mode_escape_().Section_().Block_close_end_()
+, Tag_br = new_(Tid_br, "br").Single_only_().Single_only_html_().Bgn_nde_mode_inline_().Inline_by_backslash_().End_nde_mode_inline_().Section_()
+, Tag_h1 = new_(Tid_h1, "h1").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_h2 = new_(Tid_h2, "h2").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_h3 = new_(Tid_h3, "h3").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_h4 = new_(Tid_h4, "h4").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_h5 = new_(Tid_h5, "h5").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_h6 = new_(Tid_h6, "h6").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
 , Tag_li = new_(Tid_li, "li").Repeat_mids_().Empty_ignored_().Block_open_bgn_().Block_close_end_()
 , Tag_dt = new_(Tid_dt, "dt").Repeat_mids_()
 , Tag_dd = new_(Tid_dd, "dd").Repeat_mids_()
-, Tag_ol = new_(Tid_ol, "ol").NoInline_().Block_open_bgn_().Block_close_end_()
-, Tag_ul = new_(Tid_ul, "ul").NoInline_().Block_open_bgn_().Block_close_end_()
-, Tag_dl = new_(Tid_dl, "dl").NoInline_()
-, Tag_table = new_(Tid_table, "table").NoInline_().Block_open_bgn_().Block_close_end_()
-, Tag_tr = new_(Tid_tr, "tr").TblSub_().Block_open_bgn_().Block_open_end_()
-, Tag_td = new_(Tid_td, "td").TblSub_().Block_open_end_().Block_close_bgn_()
-, Tag_th = new_(Tid_th, "th").TblSub_().Block_open_end_().Block_close_bgn_()
+, Tag_ol = new_(Tid_ol, "ol").No_inline_().Block_open_bgn_().Block_close_end_()
+, Tag_ul = new_(Tid_ul, "ul").No_inline_().Block_open_bgn_().Block_close_end_()
+, Tag_dl = new_(Tid_dl, "dl").No_inline_()
+, Tag_table = new_(Tid_table, "table").No_inline_().Block_open_bgn_().Block_close_end_()
+, Tag_tr = new_(Tid_tr, "tr").Tbl_sub_().Block_open_bgn_().Block_open_end_()
+, Tag_td = new_(Tid_td, "td").Tbl_sub_().Block_open_end_().Block_close_bgn_()
+, Tag_th = new_(Tid_th, "th").Tbl_sub_().Block_open_end_().Block_close_bgn_()
 , Tag_thead = new_(Tid_thead, "thead")
 , Tag_tfoot = new_(Tid_tfoot, "tfoot")
 , Tag_tbody = new_(Tid_tbody, "tbody")
-, Tag_caption = new_(Tid_caption, "caption").NoInline_().TblSub_()
+, Tag_caption = new_(Tid_caption, "caption").No_inline_().Tbl_sub_()
 , Tag_colgroup = new_(Tid_colgroup, "colgroup")
 , Tag_col = new_(Tid_col, "col")
 , Tag_a = new_(Tid_a, "a").Restricted_()
-, Tag_img = new_(Tid_img, "img").Restricted_()	// NOTE: was .Xtn() DATE:2014-11-06
-, Tag_ruby = new_(Tid_ruby, "ruby").NoInline_()
-, Tag_rt = new_(Tid_rt, "rt").NoInline_()
-, Tag_rb = new_(Tid_rb, "rb").NoInline_()
-, Tag_rp = new_(Tid_rp, "rp").NoInline_()
+, Tag_img = new_(Tid_img, "img").Single_only_html_().Restricted_()	// NOTE: was .Xtn() DATE:2014-11-06
+, Tag_ruby = new_(Tid_ruby, "ruby").No_inline_()
+, Tag_rt = new_(Tid_rt, "rt").No_inline_()
+, Tag_rb = new_(Tid_rb, "rb").No_inline_()
+, Tag_rp = new_(Tid_rp, "rp").No_inline_()
 , Tag_includeonly = new_(Tid_includeonly, "includeonly")
 , Tag_noinclude = new_(Tid_noinclude, "noinclude")
 , Tag_onlyinclude = new_(Tid_onlyinclude, "onlyinclude")
@@ -245,8 +246,8 @@ public class Xop_xnde_tag_ {
 , Tag_bdi = new_(Tid_bdi, "bdi")
 , Tag_data = new_(Tid_data, "data")
 , Tag_mark = new_(Tid_mark, "mark")
-, Tag_wbr = new_(Tid_wbr, "wbr").SingleOnly_()
-, Tag_bdo = new_(Tid_bdo, "bdo").NoInline_().Section_().Block_open_bgn_().Block_close_end_()
+, Tag_wbr = new_(Tid_wbr, "wbr").Single_only_().Single_only_html_()
+, Tag_bdo = new_(Tid_bdo, "bdo").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
 , Tag_listing_buy = new_(Tid_listing_buy, "buy").Xtn_mw_()
 , Tag_listing_do = new_(Tid_listing_do, "do").Xtn_mw_()
 , Tag_listing_drink = new_(Tid_listing_drink, "drink").Xtn_mw_()

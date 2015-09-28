@@ -53,7 +53,7 @@ class Xop_vnt_tkn_mok {
 	}
 	public Xop_vnt_tkn_mok Flags_none_()						{flags_list.Clear(); return this;}
 	public Xop_vnt_tkn_mok Flags_unknown_(String... v)	{flags_list.Add(Xop_vnt_flag_.Flag_unknown); return this;}
-	public Xop_vnt_tkn_mok Flags_langs_(int... ary)		{flags_list.Add(Xop_vnt_flag.new_lang(Enm_.Add_int_ary(ary))); return this;}
+	public Xop_vnt_tkn_mok Flags_langs_(int... ary)		{flags_list.Add(Xop_vnt_flag.new_lang(Bitmask_.Add_int_ary(ary))); return this;}
 	public Xop_vnt_tkn_mok Flags_codes_(String... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
@@ -122,7 +122,7 @@ class Xop_vnt_lxr_fxt {
 		int itm_mask = itm.Mask();
 		for (int i = 0; i < 32; ++i) {
 			int mask = gplx.core.brys.Bit_.Get_flag(i);
-			if (Enm_.Has_int(mask, itm_mask)) {
+			if (Bitmask_.Has_int(mask, itm_mask)) {
 				Xol_vnt_itm vnt = vnt_regy.Get_at(i);
 				bfr.Add(vnt.Key()).Add_byte(Byte_ascii.Semic);
 			}

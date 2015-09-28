@@ -23,7 +23,7 @@ public class IptKey implements IptArg {
 	public boolean Eq(IptArg comp)			{return String_.Eq(key, comp.Key());}
 	public String XtoUiStr()			{return IptKeyStrMgr._.To_str(this);}
 	public IptKey Add(IptKey comp)		{return IptKey_.add_(this, comp);}
-	public boolean Mod_shift()				{return Enm_.Has_int(val, IptKey_.Shift.Val());}
-	public boolean Mod_ctrl()				{return Enm_.Has_int(val, IptKey_.Ctrl.Val());}
-	public boolean Mod_alt()				{return Enm_.Has_int(val, IptKey_.Alt.Val());}
+	public boolean Mod_shift()				{return Bitmask_.Has_int(val, IptKey_.Shift.Val());}
+	public boolean Mod_ctrl()				{return Bitmask_.Has_int(val, IptKey_.Ctrl.Val());}
+	public boolean Mod_alt()				{return Bitmask_.Has_int(val, IptKey_.Alt.Val());}
 }

@@ -44,7 +44,7 @@ class Xohd_page_srl_itm__html_module implements Xohd_page_srl_itm {
 	public int Load(Xog_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref) {
 		itm_bgn += 2; // skip bin_int_abrv of [1, 0]
 		byte flag = bry[itm_bgn];
-		hpg.Head_mgr().Init(Enm_.Has_byte(flag, Tid_math), Enm_.Has_byte(flag, Tid_imap), Enm_.Has_byte(flag, Tid_packed), Enm_.Has_byte(flag, Tid_hiero));
+		hpg.Head_mgr().Init(Bitmask_.Has_byte(flag, Tid_math), Bitmask_.Has_byte(flag, Tid_imap), Bitmask_.Has_byte(flag, Tid_packed), Bitmask_.Has_byte(flag, Tid_hiero));
 		return 3;
 	}
 	public void Save(Xog_page hpg, Bry_bfr bfr) {
@@ -60,10 +60,10 @@ class Xohd_page_srl_itm__html_module implements Xohd_page_srl_itm {
 	}
 	public static byte Calc_flag(boolean math, boolean imap, boolean packed, boolean hiero) {
 		byte rv = 0;
-		if (math)			rv = Enm_.Add_byte(rv, Tid_math);
-		if (imap)			rv = Enm_.Add_byte(rv, Tid_imap);
-		if (packed)			rv = Enm_.Add_byte(rv, Tid_packed);
-		if (hiero)			rv = Enm_.Add_byte(rv, Tid_hiero);
+		if (math)			rv = Bitmask_.Add_byte(rv, Tid_math);
+		if (imap)			rv = Bitmask_.Add_byte(rv, Tid_imap);
+		if (packed)			rv = Bitmask_.Add_byte(rv, Tid_packed);
+		if (hiero)			rv = Bitmask_.Add_byte(rv, Tid_hiero);
 		return rv;
 	}
 	private static final byte		// SERIALIZED; only supports 8 different types

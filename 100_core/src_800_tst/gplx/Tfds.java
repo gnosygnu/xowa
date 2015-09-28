@@ -166,6 +166,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	private static final DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
 	public static void WriteText(String text) {Console_adp__sys.I.Write_str(text);}
+	public static void Write(byte[] s, int b, int e) {Write(Bry_.Mid(s, b, e));}
 	public static void Write() {Write("tmp");}
 	public static void Write(Object... ary) {
 		String_bldr sb = String_bldr_.new_();

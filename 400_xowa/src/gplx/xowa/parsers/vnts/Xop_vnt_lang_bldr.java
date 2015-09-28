@@ -25,7 +25,7 @@ class Xop_vnt_lang_bldr {	// performant way of building langs; EX: -{zh;zh-hans;
 	public void Add(byte[] key) {
 		Xol_vnt_itm vnt = vnt_regy.Get_by(key); if (vnt == null) return;	// ignore invalid vnts; EX: -{zh;zhx}-
 		int vnt_mask = vnt.Mask__vnt();
-		this.rslt_mask = (rslt_mask == 0) ? vnt_mask : Enm_.Flip_int(true, rslt_mask, vnt_mask);
+		this.rslt_mask = (rslt_mask == 0) ? vnt_mask : Bitmask_.Flip_int(true, rslt_mask, vnt_mask);
 	}
 	public Xop_vnt_flag Bld() {
 		return (rslt_mask == 0) ? Xop_vnt_flag_.Flag_unknown : Xop_vnt_flag.new_lang(rslt_mask);

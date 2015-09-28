@@ -113,7 +113,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 				) continue;
 			byte[] dir_name_as_bry = Bry_.new_u8(name);
 			Xow_xwiki_itm xwiki = Available_add(usr_wiki, dir_name_as_bry);
-			if (xwiki != null)			// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
+			if (xwiki != null)				// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
 				xwiki.Offline_(true);	// mark xwiki as offline; needed for available wikis sidebar; DATE:2014-09-21
 			app.Setup_mgr().Maint_mgr().Wiki_mgr().Add(dir_name_as_bry);
 		}

@@ -28,7 +28,7 @@ public class IptKey_ {
 		if (ary.length == 0) return IptKey_.None;
 		int newVal = ary[0].Val();
 		for (int i = 1; i < ary.length; i++)
-			newVal = Enm_.Flip_int(true, newVal, ary[i].Val());
+			newVal = Bitmask_.Flip_int(true, newVal, ary[i].Val());
 		return get_or_new_(newVal);
 	}
 	public static IptKey api_(int val) {
@@ -138,9 +138,9 @@ public class IptKey_ {
 	}
 	public static String To_str(int val) {
 		String mod_str = "", rv = "";
-		boolean mod_c = Enm_.Has_int(val, IptKey_.Ctrl.Val());	if (mod_c) {mod_str += "c"; val = Enm_.Flip_int(Bool_.N, val, IptKey_.Ctrl.Val());}
-		boolean mod_a = Enm_.Has_int(val, IptKey_.Alt.Val());	if (mod_a) {mod_str += "a"; val = Enm_.Flip_int(Bool_.N, val, IptKey_.Alt.Val());}
-		boolean mod_s = Enm_.Has_int(val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; val = Enm_.Flip_int(Bool_.N, val, IptKey_.Shift.Val());}
+		boolean mod_c = Bitmask_.Has_int(val, IptKey_.Ctrl.Val());	if (mod_c) {mod_str += "c"; val = Bitmask_.Flip_int(Bool_.N, val, IptKey_.Ctrl.Val());}
+		boolean mod_a = Bitmask_.Has_int(val, IptKey_.Alt.Val());	if (mod_a) {mod_str += "a"; val = Bitmask_.Flip_int(Bool_.N, val, IptKey_.Alt.Val());}
+		boolean mod_s = Bitmask_.Has_int(val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; val = Bitmask_.Flip_int(Bool_.N, val, IptKey_.Shift.Val());}
 		if (String_.Len_gt_0(mod_str)) {
 			rv = "mod." + mod_str;
             if (val == 0) return rv;	// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"

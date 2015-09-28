@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiBorderEdge {
 	public int Val() {return val;} int val;
-	public boolean Has(GfuiBorderEdge comp) {return Enm_.Has_int(val, comp.val);}
+	public boolean Has(GfuiBorderEdge comp) {return Bitmask_.Has_int(val, comp.val);}
 	public GfuiBorderEdge Add(GfuiBorderEdge comp) {
 		return new GfuiBorderEdge(comp.val + val);
 	}

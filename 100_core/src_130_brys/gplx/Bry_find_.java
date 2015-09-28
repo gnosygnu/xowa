@@ -162,6 +162,21 @@ public class Bry_find_ {
 		}
 		return end;
 	}
+	public static int Find_bwd__skip_ws(byte[] src, int end, int bgn) {
+		int src_len = src.length;
+		if (end == src_len) return end;
+		if (end > src_len || end < 0) return Bry_find_.Not_found;
+		int pos = end - 1;	// start from end - 1; handles situations where len is passed in
+		for (int i = pos; i >= bgn; --i) {
+			switch (src[i]) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+					break;
+				default:
+					return i + 1;
+			}
+		}
+		return bgn;
+	}
 	public static int Find_bwd_while(byte[] src, int cur, int end, byte while_byte) {
 		--cur;
 		while (true) {
@@ -295,6 +310,7 @@ public class Bry_find_ {
 	}
 	public static int Find_bwd_while_alphanum(byte[] src, int cur) {return Find_bwd_while_alphanum(src, cur, -1);}
 	public static int Find_bwd_while_alphanum(byte[] src, int cur, int end) {
+		--cur;
 		while (cur > end) {
 			switch (src[cur]) {
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:

@@ -152,14 +152,14 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				default:										domain_str = String_.Format("{0}.{1}.org", lang_key_str, wiki_name); break;	// EX: en.wiktionary.org
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);
-			Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry);
-			boolean offline_exists = lang_wiki != null;
+			// Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry); // DELETE: causes commons to show; DATE:2015-09-23
+			// boolean offline_exists = lang_wiki != null;
 			String fmt = String_.Format("http://" + domain_str + "/wiki/~{0}");
 			int aliases_len = wiki_itm.Aliases().length;
 			for (int j = 0; j < aliases_len; j++) {
 				byte[] alias = wiki_itm.Aliases()[j];
 				if (wiki.Ns_mgr().Names_get_or_null(alias, 0, alias.length) != null) continue;	// NOTE: do not add xwiki if alias matches namespace; EX: en.wiktionary.org has ns of "Wiktionary"; do not add alias of "wiktionary"; note that wikipedia does have an alias to wiktionary
-				Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(alias, Bry_.new_u8(fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);	// NOTE: domain_tid must be used, not wiki.Domain_tid; DATE:2014-09-14
+				Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(alias, Bry_.new_u8(fmt), lang_id, domain_tid, domain_bry); // .Offline_(offline_exists);	// NOTE: domain_tid must be used, not wiki.Domain_tid; DATE:2014-09-14
 				Add_itm(xwiki, null);
 			}
 		}
@@ -180,11 +180,11 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			Xoac_lang_itm lang = (Xoac_lang_itm)langs.Get_at(i);
 			String domain_str = String_.Format("{0}.{1}.org", String_.new_u8(lang.Key_bry()), wiki_tid_name_str); // EX: fr.wikipedia.org
 			byte[] domain_bry = Bry_.new_u8(domain_str);
-			Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry);
-			boolean offline_exists = lang_wiki != null;
+			// Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry); // DELETE: causes commons to show; DATE:2015-09-23
+			// boolean offline_exists = lang_wiki != null;
 			String url_fmt = String_.Format("http://" + domain_str + "/wiki/~{0}");
 			int lang_id = Xol_lang_itm_.Get_by_key(lang.Key_bry()).Id();
-			Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(lang.Key_bry(), Bry_.new_u8(url_fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);
+			Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(lang.Key_bry(), Bry_.new_u8(url_fmt), lang_id, domain_tid, domain_bry); // .Offline_(offline_exists);
 			Add_itm(xwiki, lang);
 		}
 		lang_mgr.Grps_sort();

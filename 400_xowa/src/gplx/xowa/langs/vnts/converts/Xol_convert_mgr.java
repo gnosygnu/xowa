@@ -44,10 +44,11 @@ public class Xol_convert_mgr {
 		if (new_wkr_idx == -1) throw Err_.new_("lang.vnt", "unknown vnt", "key", cur_vnt);
 		this.cur_wkr_idx = new_wkr_idx;
 	}
-	public byte[] Convert_text(Xowe_wiki wiki, byte[] src) {return Convert_text(wiki, src, 0, src.length);}
-	public byte[] Convert_text(Xowe_wiki wiki, byte[] src, int bgn, int end) {
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		Xol_convert_wkr converter = wkr_ary[cur_wkr_idx];
+	public byte[] Convert_text(byte[] src) {return Convert_text(src, 0, src.length);}
+	public byte[] Convert_text(byte[] src, int bgn, int end) {return Convert_text(cur_wkr_idx, src, bgn, end);}
+	public byte[] Convert_text(int vnt_idx, byte[] src, int bgn, int end) {
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();
+		Xol_convert_wkr converter = wkr_ary[vnt_idx];
 		converter.Convert_text(tmp_bfr, src, bgn, end);
 		return tmp_bfr.To_bry_and_rls();
 	}

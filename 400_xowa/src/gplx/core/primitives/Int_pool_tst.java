@@ -52,6 +52,14 @@ public class Int_pool_tst {
 		tstr.Exec_del(2);
 		tstr.Test_get(0);
 	}
+	@Test  public void Del__out_of_order_2() {
+		tstr.Test_get(0);
+		tstr.Test_get(1);
+		tstr.Test_get(2);
+		tstr.Exec_del(1);
+		tstr.Exec_del(2);
+		tstr.Exec_del(0);
+	}
 }
 class Int_pool_tstr {
 	private final Int_pool pool = new Int_pool();

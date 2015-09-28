@@ -50,6 +50,13 @@ public class List_adp_ {
 		list.Del_at(last_idx);
 		return rv;
 	}
+	public static Object Pop_or(List_adp list, Object or) {
+		int list_len = list.Count(); if (list_len == 0) return or;
+		int last_idx = list_len - 1;
+		Object rv = list.Get_at(last_idx);
+		list.Del_at(last_idx);
+		return rv;
+	}
 	public static void DisposeAll(List_adp list) {
 		for (int i = 0; i < list.Count(); i++)
 			((RlsAble)list.Get_at(i)).Rls();

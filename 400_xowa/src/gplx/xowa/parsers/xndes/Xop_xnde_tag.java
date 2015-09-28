@@ -22,32 +22,33 @@ public class Xop_xnde_tag {
 		this.id = id;
 		this.name_bry = Bry_.new_a7(name_str);
 		this.name_str = name_str;
-		name_len = name_bry.length;
-		xtn_end_tag = Bry_.Add(Xop_xnde_tag_.XtnEndTag_bgn, name_bry);	// always force endtag; needed for <noinclude>
-		xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
+		this.name_len = name_bry.length;
+		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Xtn_end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
+		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
-	public int Id() {return id;} public Xop_xnde_tag Id_(int v) {id = v; return this;} private int id;
-	public byte[] Name_bry() {return name_bry;} private byte[] name_bry;
-	public String Name_str() {return name_str;} private String name_str;
-	public int Name_len() {return name_len;} private int name_len;
+	public int Id() {return id;} private final int id;
+	public byte[] Name_bry() {return name_bry;} private final byte[] name_bry;
+	public String Name_str() {return name_str;} private final String name_str;
+	public int Name_len() {return name_len;} private final int name_len;
+	public byte[] Xtn_end_tag() {return xtn_end_tag;} private final byte[] xtn_end_tag;
+	public byte[] Xtn_end_tag_tmp() {return xtn_end_tag_tmp;} private final byte[] xtn_end_tag_tmp;
 	public boolean Xtn() {return xtn;} public Xop_xnde_tag Xtn_() {xtn = true; return this;} private boolean xtn;
 	public boolean Xtn_mw() {return xtn_mw;} public Xop_xnde_tag Xtn_mw_() {xtn_mw = true; xtn = true; return this;} private boolean xtn_mw;	// NOTE: Xtn_mw_() marks both xtn and xtn_mw as true
-	public byte[] XtnEndTag() {return xtn_end_tag;} private byte[] xtn_end_tag;
-	public byte[] XtnEndTag_tmp() {return xtn_end_tag_tmp;} private byte[] xtn_end_tag_tmp;
-	public int BgnNdeMode() {return bgnNdeMode;} private int bgnNdeMode = Xop_xnde_tag_.BgnNdeMode_normal;
-	public Xop_xnde_tag BgnNdeMode_inline_() {bgnNdeMode = Xop_xnde_tag_.BgnNdeMode_inline; return this;}
-	public int EndNdeMode() {return endNdeMode;} private int endNdeMode = Xop_xnde_tag_.EndNdeMode_normal;
-	public Xop_xnde_tag EndNdeMode_inline_() {endNdeMode = Xop_xnde_tag_.EndNdeMode_inline; return this;}
-	public Xop_xnde_tag EndNdeMode_escape_() {endNdeMode = Xop_xnde_tag_.EndNdeMode_escape; return this;}
-	public boolean SingleOnly() {return singleOnly;} public Xop_xnde_tag SingleOnly_() {singleOnly = true; return this;} private boolean singleOnly;
-	public boolean TblSub() {return tblSub;} public Xop_xnde_tag TblSub_() {tblSub = true; return this;} private boolean tblSub;
+	public int Bgn_nde_mode() {return bgn_nde_mode;} private int bgn_nde_mode = Xop_xnde_tag_.Bgn_nde_mode_normal;
+	public Xop_xnde_tag Bgn_nde_mode_inline_() {bgn_nde_mode = Xop_xnde_tag_.Bgn_nde_mode_inline; return this;}
+	public int End_nde_mode() {return end_nde_mode;} private int end_nde_mode = Xop_xnde_tag_.End_nde_mode_normal;
+	public Xop_xnde_tag End_nde_mode_inline_() {end_nde_mode = Xop_xnde_tag_.End_nde_mode_inline; return this;}
+	public Xop_xnde_tag End_nde_mode_escape_() {end_nde_mode = Xop_xnde_tag_.End_nde_mode_escape; return this;}
+	public boolean Single_only() {return single_only;} public Xop_xnde_tag Single_only_() {single_only = true; return this;} private boolean single_only;
+	public boolean Tbl_sub() {return tbl_sub;} public Xop_xnde_tag Tbl_sub_() {tbl_sub = true; return this;} private boolean tbl_sub;
 	public boolean Restricted() {return restricted;} public Xop_xnde_tag Restricted_() {restricted = true; return this;} private boolean restricted;
-	public boolean NoInline() {return noInline;} public Xop_xnde_tag NoInline_() {noInline = true; return this;} private boolean noInline;
+	public boolean No_inline() {return no_inline;} public Xop_xnde_tag No_inline_() {no_inline = true; return this;} private boolean no_inline;
 	public boolean Inline_by_backslash() {return inline_by_backslash;} public Xop_xnde_tag Inline_by_backslash_() {inline_by_backslash = true; return this;} private boolean inline_by_backslash;
 	public boolean Section() {return section;} public Xop_xnde_tag Section_() {section = true; return this;} private boolean section;
 	public boolean Repeat_ends() {return repeat_ends;} public Xop_xnde_tag Repeat_ends_() {repeat_ends = true; return this;} private boolean repeat_ends;
 	public boolean Repeat_mids() {return repeat_mids;} public Xop_xnde_tag Repeat_mids_() {repeat_mids = true; return this;} private boolean repeat_mids;
 	public boolean Empty_ignored() {return empty_ignored;} public Xop_xnde_tag Empty_ignored_() {empty_ignored = true; return this;} private boolean empty_ignored;
+	public boolean Single_only_html() {return single_only_html;} public Xop_xnde_tag Single_only_html_() {single_only_html = true; return this;} private boolean single_only_html;
 	public boolean Raw() {return raw;} public Xop_xnde_tag Raw_() {raw = true; return this;} private boolean raw;
 	public static final byte Block_noop = 0, Block_bgn = 1, Block_end = 2;
 	public byte Block_open() {return block_open;} private byte block_open = Block_noop;

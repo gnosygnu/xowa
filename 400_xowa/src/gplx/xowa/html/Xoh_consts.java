@@ -23,10 +23,11 @@ public class Xoh_consts {
 	, Img_h_str					= "height"
 	;
 	public static final byte[] 
-	  __end = Bry_.new_a7(">")
-	, __end_quote = Bry_.new_a7("\">")
-	, __inline_quote = Bry_.new_a7("\"/>")
-	, Space_2 = Bry_.new_a7("  ")
+	  __end				= Bry_.new_a7(">")
+	, __inline			= Bry_.new_a7("/>")
+	, __end_quote		= Bry_.new_a7("\">")
+	, __inline_quote	= Bry_.new_a7("\"/>")
+	, Space_2			= Bry_.new_a7("  ")
 
 	, A_bgn = Bry_.new_a7("<a href=\""), A_bgn_lnki_0 = Bry_.new_a7("\" title=\""), A_mid_xowa_title = Bry_.new_a7("\" xowa_title=\"")
 	, A_mid_id = Bry_.new_a7("\" id=\"xowa_lnki_")

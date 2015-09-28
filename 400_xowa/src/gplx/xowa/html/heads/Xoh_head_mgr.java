@@ -156,13 +156,13 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 			boolean enabled = itm.Enabled();
 			if (enabled) {
 				int flag = itms[i].Flags();
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__css_include))		list__css_include.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__css_text))			list__css_text.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_include))		list__js_include.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_global))	list__js_head_global.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_script))	list__js_head_script.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_tail_script))	list__js_tail_script.Add(itm);
-				if (Enm_.Has_int(flag, Xoh_head_itm__base.Flag__js_window_onload))	list__js_window_onload.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__css_include))		list__css_include.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__css_text))			list__css_text.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__js_include))		list__js_include.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_global))	list__js_head_global.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__js_head_script))	list__js_head_script.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__js_tail_script))	list__js_tail_script.Add(itm);
+				if (Bitmask_.Has_int(flag, Xoh_head_itm__base.Flag__js_window_onload))	list__js_window_onload.Add(itm);
 			}
 		}
 	}

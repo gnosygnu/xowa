@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.vnts.*;
 class Xol_vnt_itm_sorter__rule implements gplx.lists.ComparerAble {
-	private Ordered_hash hash;
-	public void Sort(Ordered_hash hash, Xop_vnt_rule_tkn[] ary) {
+	private Hash_adp hash;
+	public void Sort(Hash_adp hash, Xop_vnt_rule_tkn[] ary) {
 		synchronized (hash) {
 			this.hash = hash;
 			Array_.Sort(ary, this);

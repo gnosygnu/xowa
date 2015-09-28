@@ -68,10 +68,10 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	private static KeyVal[] Time_value(Wdata_claim_itm_time itm) {
 		KeyVal[] rv = new KeyVal[6];
 		rv[0] = KeyVal_.new_(Wdata_dict_value_time.Str_time				, String_.new_a7(itm.Time()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_time.Str_precision		, Wdata_dict_value_time.Val_precision_int);	// NOTE: must return int, not str; DATE:2014-02-18
-		rv[2] = KeyVal_.new_(Wdata_dict_value_time.Str_before			, Wdata_dict_value_time.Val_before_int);
-		rv[3] = KeyVal_.new_(Wdata_dict_value_time.Str_after			, Wdata_dict_value_time.Val_after_int);
-		rv[4] = KeyVal_.new_(Wdata_dict_value_time.Str_timezone			, Wdata_dict_value_time.Val_timezone_str);
+		rv[1] = KeyVal_.new_(Wdata_dict_value_time.Str_precision		, itm.Precision_int());		// NOTE: must return int, not str; DATE:2014-02-18
+		rv[2] = KeyVal_.new_(Wdata_dict_value_time.Str_before			, itm.Before_int());
+		rv[3] = KeyVal_.new_(Wdata_dict_value_time.Str_after			, itm.After_int());
+		rv[4] = KeyVal_.new_(Wdata_dict_value_time.Str_timezone			, Wdata_dict_value_time.Val_timezone_str);	// ASSUME: always 0 b/c UTF?; DATE:2015-09-21
 		rv[5] = KeyVal_.new_(Wdata_dict_value_time.Str_calendarmodel	, Wdata_dict_value_time.Val_calendarmodel_str);
 		return rv;
 	}
@@ -80,13 +80,13 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 		rv[0] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_type, Wdata_dict_val_tid.Str_globecoordinate);
 		rv[1] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_value, Globecoordinate_value(itm));
 	}
-	private static KeyVal[] Globecoordinate_value(Wdata_claim_itm_globecoordinate itm) {
+	private static KeyVal[] Globecoordinate_value(Wdata_claim_itm_globecoordinate itm) {			
 		KeyVal[] rv = new KeyVal[5];
 		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse(String_.new_a7(itm.Lat())));
 		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse(String_.new_a7(itm.Lng())));
-		rv[2] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_altitude			, null);
-		rv[3] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_globe				, Wdata_dict_value_globecoordinate.Val_globe_dflt_str);
-		rv[4] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_precision			, .00001d);
+		rv[2] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_altitude			, String_.new_u8(itm.Alt()));
+		rv[3] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_globe				, String_.new_u8(itm.Glb()));
+		rv[4] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_precision			, itm.Prc_as_num().To_double());
 		return rv;
 	}
 	public void Visit_system(Wdata_claim_itm_system itm) {

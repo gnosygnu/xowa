@@ -1,0 +1,74 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.langs.vnts.converts.*;
+import gplx.xowa.html.*;
+class Vnt_html_doc_wkr implements Mwh_doc_wkr {
+	private final Hash_adp_bry atr_hash = Hash_adp_bry.ci_a7();
+	private Bry_bfr bfr;
+	private final Xol_convert_mgr convert_mgr; private int convert_vnt_idx;
+	public Vnt_html_doc_wkr(Xol_convert_mgr convert_mgr) {
+		this.convert_mgr = convert_mgr;
+		atr_hash.Add_many_str("title", "alt");
+	}
+	public Hash_adp_bry Nde_regy() {return nde_regy;} private final Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
+	public void Init(Bry_bfr bfr, int convert_vnt_idx) {this.bfr = bfr; this.convert_vnt_idx = convert_vnt_idx;}
+	public void On_atr_each		(Mwh_atr_parser mgr, byte[] src, int nde_tid, boolean valid, boolean repeated, boolean key_exists, byte[] key_bry, byte[] val_bry_manual, int[] itm_ary, int itm_idx) {
+		int val_bgn = itm_ary[itm_idx + Mwh_atr_mgr.Idx_val_bgn];
+		int val_end = itm_ary[itm_idx + Mwh_atr_mgr.Idx_val_end];
+		if (	atr_hash.Get_by_mid(key_bry, 0, key_bry.length) == null		// title, alt
+			||	!key_exists
+			||	Bry_find_.Find_fwd(src, Bry__url_frag, val_bgn, val_end) != Bry_find_.Not_found
+			) {		// handle name-only attribs like "<span title>"
+			int atr_bgn = itm_ary[itm_idx + Mwh_atr_mgr.Idx_atr_bgn];
+			int atr_end = itm_ary[itm_idx + Mwh_atr_mgr.Idx_atr_end];
+			bfr.Add_mid(src, atr_bgn, atr_end);
+		}
+		else {
+			bfr.Add_byte_space();
+			bfr.Add(key_bry);
+			bfr.Add_byte(Byte_ascii.Eq);
+			byte quote_byte = Mwh_atr_itm.Calc_qte_byte(itm_ary, itm_idx);
+			bfr.Add_byte(quote_byte);
+			bfr.Add(convert_mgr.Convert_text(convert_vnt_idx, src, val_bgn, val_end));
+			bfr.Add_byte(quote_byte);
+		}
+	}
+	public void On_txt_end		(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {
+		switch (nde_tid) {
+			case Xop_xnde_tag_.Tid_code:
+			case Xop_xnde_tag_.Tid_script:
+			case Xop_xnde_tag_.Tid_pre:
+				bfr.Add_mid(src, itm_bgn, itm_end);
+				break;
+			default:					
+				bfr.Add(convert_mgr.Convert_text(convert_vnt_idx, src, itm_bgn, itm_end));
+				break;
+		}
+	}
+	public void On_nde_head_bgn(Mwh_doc_parser mgr, byte[] src, int nde_tid, int key_bgn, int key_end) {
+		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_mid(src, key_bgn, key_end);	// EX: "<span"
+	}
+	public void On_nde_head_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end, boolean inline) {
+		bfr.Add(inline ? Xoh_consts.__inline : Xoh_consts.__end);			// add "/>" or ">"
+	}
+	public void On_nde_tail_end	(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {bfr.Add_mid(src, itm_bgn, itm_end);}
+	public void On_comment_end  (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {bfr.Add_mid(src, itm_bgn, itm_end);}
+	private static final byte[] Bry__url_frag = Bry_.new_a7("://");	// REF.MW: if ( !strpos( $attr, '://' ) ) {
+}

@@ -16,52 +16,48 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.xowa.langs.vnts.*;
 class Vnt_flag_parser implements gplx.core.brys.Bry_split_wkr {
-	private final Hash_adp_bry flag_regy = Vnt_flag_itm_.Regy;
-	private final Hash_adp_bry vnt_regy = Hash_adp_bry.cs();
-	private final boolean[] flag_ary = new boolean[Vnt_flag_itm_.Tid__max];
-	private int count = 0;
-	public int Count() {return count;}
-	public boolean Get(int tid) {return flag_ary[tid];}
-	public void Set_y(int tid) {flag_ary[tid] = Bool_.Y;}
-	public void Set_y_many(int... ary) {
-		int len = ary.length;
-		for (int i = 0; i < len; ++i)
-			flag_ary[ary[i]] = Bool_.Y;
-	}
-	public void Set_n(int tid) {flag_ary[tid] = Bool_.N;}
-	public void Limit(int tid) {
-		for (int i = 0; i < Vnt_flag_itm_.Tid__max; ++i) {
-			if (i != tid) flag_ary[i] = false;
+	private final Hash_adp_bry codes_regy = Vnt_flag_code_.Regy;
+	private Vnt_flag_code_mgr codes; private Vnt_flag_lang_mgr langs;
+	private Xol_vnt_regy vnt_regy;
+	public void Parse(Vnt_flag_code_mgr codes, Vnt_flag_lang_mgr langs, Xol_vnt_regy vnt_regy, byte[] src, int src_bgn, int src_end) {
+		this.codes = codes; this.langs = langs; this.vnt_regy = vnt_regy;
+		codes.Clear(); langs.Clear();
+		if (src_end != Bry_find_.Not_found)			// "|" found; EX: -{A|}-
+			Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Semic, true, this);
+		int codes_count = codes.Count(), langs_count = langs.Count();
+		if		(codes_count == 0)											codes.Set_y(Vnt_flag_code_.Tid_show);
+		else if (codes.Limit_if_exists(Vnt_flag_code_.Tid_raw))				{}
+		else if (codes.Limit_if_exists(Vnt_flag_code_.Tid_name))			{}
+		else if (codes.Limit_if_exists(Vnt_flag_code_.Tid_del))				{}
+		else if (codes_count == 1 && codes.Get(Vnt_flag_code_.Tid_title))	codes.Set_y(Vnt_flag_code_.Tid_hide);
+		else if (codes.Get(Vnt_flag_code_.Tid_hide)) {
+			boolean exists_d = codes.Get(Vnt_flag_code_.Tid_descrip);
+			boolean exists_t = codes.Get(Vnt_flag_code_.Tid_title);
+			codes.Clear();
+			codes.Set_y_many(Vnt_flag_code_.Tid_add, Vnt_flag_code_.Tid_hide);
+			if (exists_d) codes.Set_y(Vnt_flag_code_.Tid_descrip);
+			if (exists_t) codes.Set_y(Vnt_flag_code_.Tid_title);
 		}
-	}
-	public boolean Limit_if_exists(int tid) {
-		boolean exists = flag_ary[tid]; if (!exists) return false;
-		for (int i = 0; i < Vnt_flag_itm_.Tid__max; ++i) {
-			if (i != tid) flag_ary[i] = false;
+		else {
+			if (codes.Get(Vnt_flag_code_.Tid_aout))
+				codes.Set_y_many(Vnt_flag_code_.Tid_add, Vnt_flag_code_.Tid_show);
+			if (codes.Get(Vnt_flag_code_.Tid_descrip))
+				codes.Set_n(Vnt_flag_code_.Tid_show);
+			if (langs_count > 0)
+				codes.Clear();
 		}
-		return true;
-	}
-	public boolean Limit_if_exists_vnts() {
-		return false;
-	}
-	public void Clear() {
-		count = 0;
-		for (int i = 0; i < Vnt_flag_itm_.Tid__max; ++i)
-			flag_ary[i] = false;
-	}
-	public void Parse(byte[] src, int src_bgn, int src_end) {
-		this.Clear();
-		Bry_split_.Split(src, Byte_ascii.Semic, true, this);
 	}
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
-		int flag_tid = flag_regy.Get_as_int_or(src, itm_bgn, itm_end, -1);
-		if (flag_tid == -1) {
-			int vnt_tid = vnt_regy.Get_as_int_or(src, itm_bgn, itm_end, -1);
-			if (vnt_tid == -1) return Bry_split_.Rv__ok; // unknown flag; ignore
+		int flag_tid = codes_regy.Get_as_int_or(src, itm_bgn, itm_end, -1);
+		if (flag_tid == -1) {	// try to find flags like "zh-hans", "zh-hant"; allow syntaxes like "-{zh-hans;zh-hant|XXXX}-"
+			Xol_vnt_itm vnt_itm = vnt_regy.Get_by(src, itm_bgn, itm_end);
+			if (vnt_itm == null) return Bry_split_.Rv__ok; // unknown flag; ignore
+			langs.Add(vnt_itm);
+			return Bry_split_.Rv__ok;
 		}
-		flag_ary[flag_tid] = true;
-		++count;
+		codes.Add(flag_tid);
 		return Bry_split_.Rv__ok;
 	}
 }
