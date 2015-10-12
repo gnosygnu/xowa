@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_windows_64_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_windows_64_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_windows_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_windows_v2.9.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_linux_64_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_linux_64_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_linux_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_linux_v2.9.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_macosx_64_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_macosx_64_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.9.4.1/xowa_app_macosx_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.10.2.1/xowa_app_macosx_v2.9.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.9.4.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.10.2.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -55,17 +55,54 @@
     </h2>
 
     <h2>
-      <span class='mw-headline' id='v2.9.4.1_.282015-09-28.29'>v2.9.4.1 (2015-09-28)</span>
+      <span class='mw-headline' id='v2.10.2.1_.282015-10-11.29'>v2.10.2.1 (2015-10-11)</span>
     </h2>
     <p>
-      <b>package</b>
+      <b>major</b>
     </p>
     <ul>
       <li>
-        Package: Release image update for Hungarian wikis (2015-09).
+        Luaj: Increase maximum number of Lua local variables from 200 to 249 (affects broken references on 2.6 million en.w pages from 2015-10 dump). See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a> <a href="https://en.wikipedia.org/wiki/Module:Citation/CS1">https://en.wikipedia.org/wiki/Module:Citation/CS1</a> <a href="http://www.lua.org/source/5.1/luaconf.h.html" class="external text" rel="nofollow">http://www.lua.org/source/5.1/luaconf.h.html</a>
       </li>
       <li>
-        Package: Release image update for Thai wikis (2015-09).
+        Lang: Support variant syntax for Chinese / Serbian languages (affects Chinese / Serbian pages not rendering correctly). See: <a href="https://sr.wikipedia.org/wiki/Земља">https://sr.wikipedia.org/sr-ec/Земља</a> <a href="https://sr.wikipedia.org/wiki/Земља">https://sr.wikipedia.org/sr-el/Земља</a>
+      </li>
+      <li>
+        Xtn.SyntaxHighlight: Update &lt;syntaxhighlight&gt; behavior (affects &lt;syntaxhighlight&gt; / &lt;source&gt; tags not showing correctly). See: <a href="https://en.wikipedia.org/wiki/Type_system">https://en.wikipedia.org/wiki/Type_system</a> <a href="https://en.wikipedia.org/wiki/Comment_(computer_programming)">https://en.wikipedia.org/wiki/Comment_(computer_programming)</a> <a href="https://en.wikipedia.org/wiki/Mergesort">https://en.wikipedia.org/wiki/Mergesort</a> <a href="https://uk.wikibooks.org/wiki/HTML">https://uk.wikibooks.org/wiki/HTML</a>
+      </li>
+    </ul>
+    <p>
+      <b>fix</b>
+    </p>
+    <ul>
+      <li>
+        Xtn.Imagemap: Fix imagemap not showing "desc" attribute (affects imagemap not showing describe info). See: <a href="https://zh.wikipedia.org/wiki/加拿大行政区划">https://zh.wikipedia.org/wiki/加拿大行政区划</a> [broken since:v2.9.3.1]
+      </li>
+      <li>
+        Http_server: Do not release unique ids if max_clients not specified (affects error messages in console if http_server.max_clients not specified). [broken since:v2.9.3.1]
+      </li>
+      <li>
+        Http_server: Fix broken support for "--http_server_home" {detected by MDE}. [broken since:v2.8.1.1]
+      </li>
+      <li>
+        Wikidata: Fix incorrect twisty image after clicking. [broken since:v2.8.5.1]
+      </li>
+    </ul>
+    <p>
+      <b>add</b>
+    </p>
+    <ul>
+      <li>
+        Site.cfg: Enable extensions on a per-wiki basis (affects some pages showing wrong content); EX:&lt;do&gt; should not be enabled on en.w {detected by bmihal}. See: <a href="https://en.wikipedia.org/wiki/Type_system">https://en.wikipedia.org/wiki/Type_system</a> <a href="https://fr.wikipedia.org/wiki/Wikipédia:Le">https://fr.wikipedia.org/wiki/Wikipédia:Le</a> Bistro/13_novembre_2008
+      </li>
+      <li>
+        Site.cfg: Enable interwiki aliases on a per-wiki basis [[Help:Site_config]].
+      </li>
+      <li>
+        Interwiki: Show all available languages "In other languages", not just those specified in xowa.gfs. See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
+      </li>
+      <li>
+        Import: Add support for building custom wikis. See: [[Help:Import/Dansguardian]]
       </li>
     </ul>
     <p>
@@ -73,10 +110,24 @@
     </p>
     <ul>
       <li>
-        Wikidata: Show precision, globe and other minor time / geo coordinates (affects: several dozen hu.w pages showing script error for population). See: <a href="https://hu.wikipedia.org/wiki/Egyiptom">https://hu.wikipedia.org/wiki/Egyiptom</a>
+        File: Download file when clicking on "Size of this preview" {detected by anonymous4}. See: <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg">https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg</a>
       </li>
       <li>
-        Xwiki: Do not show commons.wikimedia.org in wikis list if wiki is not imported {detected by anonymous}.
+        Bookmarks: Do not load bookmarks from cache (affects bookmarks page not showing recent changes when going back / forward) {detected by anonymous4}. See: <a href="https://simple.wikipedia.org/wiki/Special:XowaBookmarks">https://simple.wikipedia.org/wiki/Special:XowaBookmarks</a>
+      </li>
+      <li>
+        Lang: Handle recursive variants; EX:a-{b-{c}-d-{e}-f}-g. See: <a href="https://sr.wikipedia.org/wiki/Еквадор">https://sr.wikipedia.org/wiki/Еквадор</a>
+      </li>
+      <li>
+        Lang: Implement H macro; EX:-{H|zh-cn:cn;zh-hk:hk;zh-tw:tw}-. See: <a href="https://zh.wikivoyage.org/wiki/西安">https://zh.wikivoyage.org/wiki/西安</a> <a href="https://zh.wikipedia.org/wiki/Portal:首頁">https://zh.wikipedia.org/wiki/Portal:首頁</a>
+      </li>
+    </ul>
+    <p>
+      <b>minor</b>
+    </p>
+    <ul>
+      <li>
+        Url: Change tab name to match &lt;title&gt; name (affects tab name showing url on Chinese pages with variants) {detected by anonymous4}. See: <a href="https://zh.wikipedia.org/wiki/釣魚臺列嶼主權問題">https://zh.wikipedia.org/zh-cn/釣魚臺列嶼主權問題</a>
       </li>
     </ul>
     <p>
@@ -84,15 +135,55 @@
     </p>
     <ul>
       <li>
-        HttpServer: Fix id generator not releasing ids (affects: error message occasionally appearing on console).
+        Xtn.Indicators: Warn if name is empty for &lt;indicators&gt; (affects messages in log). See: <a href="https://zh.wikipedia.org/wiki/Project:重庆维基人">https://zh.wikipedia.org/wiki/Project:重庆维基人</a>
+      </li>
+      <li>
+        Command-line: Do not show error window if app mode is command-line or http-server.
+      </li>
+      <li>
+        Site.cfg: Ignore "dispatch" property in "statistics" (affects warnings in log file).
       </li>
     </ul>
     <p>
-      <br>
+      <b>doc</b>
     </p>
+    <ul>
+      <li>
+        Doc: Add details for installing Firefox Addon for Pale Moon {suggested by pirate}. See: [[Help:XOWA viewer]]
+      </li>
+      <li>
+        Doc: Add details for dansguardian filter. See: [[Help:Import/Dansguardian]]
+      </li>
+    </ul>
     <p>
-      <br>
+      <b>dev</b>
     </p>
+    <ul>
+      <li>
+        Source: Replace singleton identifier "_" with "Instance".
+      </li>
+      <li>
+        Source: Standardize To_* function names for Bry_bfr.
+      </li>
+      <li>
+        Source: Change Bry_fmtr_arg to Fmt__do.
+      </li>
+      <li>
+        Source: Refactor "In other languages".
+      </li>
+      <li>
+        Source: Refactor Xow_xwiki_mgr.
+      </li>
+      <li>
+        Source: Refactor Gfo_cmd_arg_mgr.
+      </li>
+      <li>
+        Source: Cleanup gplx.xowa.langs.
+      </li>
+      <li>
+        Source: Refactor Int_.
+      </li>
+    </ul>
     
 <!-- page_end -->
     </div>

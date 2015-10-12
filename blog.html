@@ -18,6 +18,74 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.10.2.1_.282015-10-11_22:45_Sun.29'>Release: v2.10.2.1 (2015-10-11 22:45 Sun)</span>
+    </h2>
+    <p>
+      v2.10.2 is a major release. It has a critical fix for the 2015-10 English Wikipedia dump. It also features better functionality for Chinese / Serbian language wikis. Finally, it also has some significant under-the-hood changes
+    </p>
+    <h3>
+      <span class='mw-headline' id='Fix_for_broken_references_in_2015-10_English_Wikipedia_dump'>Fix for broken references in 2015-10 English Wikipedia dump</span>
+    </h3>
+    <p>
+      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="/site/en.wikipedia.org/wiki/Module:Citation/CS1">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
+    </p>
+    <p>
+      I recompiled a new version of luaj_xowa.jar to fix this issue.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Language_support_for_Chinese_.2F_Serbian_languages'>Language support for Chinese / Serbian languages</span>
+    </h3>
+    <p>
+      This item basically involves the following changes:
+    </p>
+    <ul>
+      <li>
+        Serbian languages now have language dropdowns. For example, sr.wikipedia.org now allows you to switch between Cyrillic and Latin variants
+      </li>
+      <li>
+        Chinese and Serbian wikis now fully implement the "-{}-" syntax. This includes some significant functions like recursive conversion, word-interchangeability, and adhoc rule-definition. See: <a href="/site/www.mediawiki.org/wiki/Writing_systems/Syntax">https://www.mediawiki.org/wiki/Writing_systems/Syntax</a>
+      </li>
+    </ul>
+    <p>
+      I'm really hoping that the new functionality matches MediaWiki. If you're a Chinese / Serbian user, please take a moment to spot-check a few pages and let me know if there is anything amiss.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Better_support_for_.3Csource.3E_and_.3Csyntaxhighlight.3E'>Better support for &lt;source&gt; and &lt;syntaxhighlight&gt;</span>
+    </h3>
+    <p>
+      MediaWiki recently changed the &lt;syntaxhighlight&gt; extension away from geshi to Pygments. In the process, it looks like they changed a few of the general parsing rules as well. v2.10.4 has better support for these blocks, though actual syntax coloring is still some time away.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Full_support_for_interwiki_links'>Full support for interwiki links</span>
+    </h3>
+    <p>
+      v2.10.2 now incorporates online calls to Wikimedia APIs. The first use was to download a full list of interwiki aliases for each wiki. For those users in offline mode, you can manually generate the list. For more info, see <a href="/wiki/Help:Site_config" id="xowa_lnki_20" title="Site config">Help:Site config</a>
+    </p>
+    <h3>
+      <span class='mw-headline' id='Support_for_Dansguardian_import_filter'>Support for Dansguardian import filter</span>
+    </h3>
+    <p>
+      XOWA supports custom creation of wikis by matching articles against words. For example, you can create an English Wikipedia that doesn't have any Pokemon articles. Or you can create an English Wikipedia that just has Pokemon articles. The system is intricate but should be quite powerful. For more info, see <a href="/wiki/Help:Import/Dansguardian" id="xowa_lnki_21" title="Import/Dansguardian" class="xowa-visited">Help:Import/Dansguardian</a>
+    </p>
+    <h3>
+      <span class='mw-headline' id='More_source_code_cleanup'>More source code cleanup</span>
+    </h3>
+    <p>
+      There was a lot of source code cleanup. The process is still ongoing as I'm working on removing old code, as well as rewriting some knottier sections.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.10.2'>Next release: v2.10.2</span>
+    </h3>
+    <p>
+      I didn't have time to generate any wikis this week. I'm going to do English, Serbian and one of Malay, Hebrew, Bulgarian for v2.10.2
+    </p>
+    <p>
+      For code, I'm going to start working on an article update function (update the offline article with the latest version from online Wikipedia).
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
       <span class='mw-headline' id='Release:_NONE_.282015-10-04_22:00_Sun.29'>Release: NONE (2015-10-04 22:00 Sun)</span>
     </h2>
     <p>
