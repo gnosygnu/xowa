@@ -47,11 +47,11 @@ public class StringTableBldr {
 			}
 			sb.Add(String_.CrLf);
 		}
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	
 	public static StringTableBldr new_() {return new StringTableBldr();} StringTableBldr() {}
-	Ordered_hash cols = Ordered_hash_.new_();
+	Ordered_hash cols = Ordered_hash_.New();
 	List_adp rows = List_adp_.new_();
 	String_bldr sb = String_bldr_.new_();
 }

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.files.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.lnkis.*;
-import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.lnkis.*;
+import gplx.xowa.htmls.hdumps.core.*;
 public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	private static final Imap_map_fmtr map_fmtr_arg = new Imap_map_fmtr();
 	public Imap_map(int id) {this.id = id;}
@@ -50,7 +50,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h);
-		js_wkr.Html_elem_replace_html("imap_div_" + Int_.Xto_str(html_uid), tmp_bfr.To_str_and_rls());
+		js_wkr.Html_elem_replace_html("imap_div_" + Int_.To_str(html_uid), tmp_bfr.To_str_and_rls());
 	}
 	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h) {
 		byte[] desc_style = Calc_desc_style(html_w, html_h);

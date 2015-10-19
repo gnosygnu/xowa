@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.ios.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.wms.apis.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
 public class Xof_xfer_queue_base_fxt {
-	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok._;
+	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok.Instance;
 	public Xof_repo_itm Src_commons_repo() {return src_commons_repo;} private Xof_repo_itm src_commons_repo;
 	public Xof_repo_itm Src_en_wiki_repo() {return src_en_wiki_repo;} private Xof_repo_itm src_en_wiki_repo;
 	@gplx.Virtual public void Clear(boolean src_repo_is_wmf) {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			en_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__enwiki);
@@ -33,7 +33,7 @@ public class Xof_xfer_queue_base_fxt {
 			app.Wiki_mgr().Add(en_wiki);
 			
 			Xof_file_mgr file_mgr = app.File_mgr();
-			file_mgr.Img_mgr().Wkr_resize_img_(Xof_img_wkr_resize_img_mok._);
+			file_mgr.Img_mgr().Wkr_resize_img_(Xof_img_wkr_resize_img_mok.Instance);
 			file_mgr.Img_mgr().Wkr_query_img_size_(new Xof_img_wkr_query_img_size_test());
 			app.Wmf_mgr().Api_mgr().Api_orig_(api_size);
 
@@ -91,23 +91,23 @@ public class Xof_xfer_queue_base_fxt {
 		if (src_fils != null) {
 			for (int i = 0; i < src_fils.length; i++) {
 				Io_fil src_fil = src_fils[i];
-				Io_mgr.I.SaveFilStr(src_fil.Url(), src_fil.Data());
+				Io_mgr.Instance.SaveFilStr(src_fil.Url(), src_fil.Data());
 			}
 		}
 	}
 	public void tst_trg_fils() {
 		for (int i = 0; i < trg_fils.length; i++) {
 			Io_fil trg_fil = trg_fils[i];
-			String data = Io_mgr.I.LoadFilStr(trg_fil.Url());
+			String data = Io_mgr.Instance.LoadFilStr(trg_fil.Url());
 			Tfds.Eq_str_lines(trg_fil.Data(), data, trg_fil.Url().Raw());
 		}		
 	}
-	public void	 save_(Io_fil v)						{Io_mgr.I.SaveFilStr(v.Url(), v.Data());}
+	public void	 save_(Io_fil v)						{Io_mgr.Instance.SaveFilStr(v.Url(), v.Data());}
 	public Io_fil reg_(String url, String... v)	{return new Io_fil(Io_url_.mem_fil_(url), String_.Concat_lines_nl(v));}
 	public Io_fil img_(String url_str, int w, int h)	{return file_(url_str, file_img(w, h));}
 	public Io_fil svg_(String url_str, int w, int h)	{return file_(url_str, file_svg(w, h));}
 	public Io_fil ogg_(String url_str)					{return file_(url_str, "");}
-	public void fil_absent(String url)					{Tfds.Eq_false(Io_mgr.I.ExistsFil(Io_url_.mem_fil_(url)), "fil should not exist: {0}", url);}
+	public void fil_absent(String url)					{Tfds.Eq_false(Io_mgr.Instance.ExistsFil(Io_url_.mem_fil_(url)), "fil should not exist: {0}", url);}
 	Io_fil file_(String url_str, String data)			{return new Io_fil(Io_url_.mem_fil_(url_str), data);}
 	String file_img(int w, int h) {return String_.Format("{0},{1}", w, h);}
 	String file_svg(int w, int h) {return String_.Format("<svg width=\"{0}\" height=\"{1}\" />", w, h);}

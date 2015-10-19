@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 public class IoEngineFxt {
-	IoEngine EngineOf(Io_url url) {return IoEnginePool._.Get_by(url.Info().EngineKey());}
+	IoEngine EngineOf(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey());}
 	public void tst_ExistsPaths(boolean expd, Io_url... ary) {			
 		for (Io_url fil : ary) {
 			if (fil.Type_dir())

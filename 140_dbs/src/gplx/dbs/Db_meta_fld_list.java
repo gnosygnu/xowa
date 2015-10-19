@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_meta_fld_list {
-	private final Ordered_hash flds = Ordered_hash_.new_();
+	private final Ordered_hash flds = Ordered_hash_.New();
 	private final List_adp keys = List_adp_.new_();
 	public void Clear() {flds.Clear(); keys.Clear();}
 	public Db_meta_fld Get_by(String name)	{return (Db_meta_fld)flds.Get_by(name);}

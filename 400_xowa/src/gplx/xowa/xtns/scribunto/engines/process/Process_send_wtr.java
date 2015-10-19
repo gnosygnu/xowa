@@ -21,7 +21,7 @@ public class Process_send_wtr {
 	public String Encode(Object o) {
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 		Encode_obj(tmp_bfr, o);
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	public void Encode_bool(Bry_bfr bfr, boolean v)		{bfr.Add(v ? CONST_bool_true : CONST_bool_false);}
 	public void Encode_int(Bry_bfr bfr, int v)			{bfr.Add_int_variable(v);}

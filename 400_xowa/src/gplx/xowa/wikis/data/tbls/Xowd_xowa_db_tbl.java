@@ -53,7 +53,7 @@ public class Xowd_xowa_db_tbl {
 				list.Add(Xowd_db_file.load_(props, rdr.Read_int(fld_id), rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid));
 			}
 		}	finally {rdr.Rls();}
-		list.Sort_by(Xowd_db_file_sorter__id.I);
+		list.Sort_by(Xowd_db_file_sorter__id.Instance);
 		return (Xowd_db_file[])list.To_ary(Xowd_db_file.class);
 	}
 	public void Commit_all(Xowd_db_mgr core_data_mgr) {
@@ -85,5 +85,5 @@ class Xowd_db_file_sorter__id implements gplx.lists.ComparerAble {
 		Xowd_db_file rhs = (Xowd_db_file)rhsObj;
 		return Int_.Compare(lhs.Id(), rhs.Id());
 	}
-	public static final Xowd_db_file_sorter__id I = new Xowd_db_file_sorter__id(); Xowd_db_file_sorter__id() {}
+	public static final Xowd_db_file_sorter__id Instance = new Xowd_db_file_sorter__id(); Xowd_db_file_sorter__id() {}
 }

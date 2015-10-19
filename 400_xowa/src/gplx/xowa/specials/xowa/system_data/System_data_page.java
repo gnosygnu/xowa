@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 public class System_data_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__system_data;}
@@ -28,7 +28,7 @@ public class System_data_page implements Xows_page {
 		Byte_obj_val type_val = (Byte_obj_val)type_hash.Get_by_bry(file_type); if (type_val == null) return; 
 		Io_url file_url = Path_from_type(wiki, type_val.Val()); if (file_url == null) return;
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		byte[] file_txt = Io_mgr.I.LoadFilBry(file_url);
+		byte[] file_txt = Io_mgr.Instance.LoadFilBry(file_url);
 		file_txt = gplx.langs.htmls.Html_utl.Escape_html_as_bry(file_txt, true, false, false, false, false);	// escape < or "</pre>" in messages will cause pre to break
 		fmtr_all.Bld_bfr_many(tmp_bfr, file_url.Raw(), file_txt);
 		page.Data_raw_(tmp_bfr.To_bry_and_rls());
@@ -38,7 +38,7 @@ public class System_data_page implements Xows_page {
 		switch (type) {
 			case Type_log_session:			return app.Log_wtr().Session_fil();
 			case Type_cfg_app:				return app.Fsys_mgr().Cfg_app_fil();
-			case Type_cfg_lang:				return Xol_lang_.xo_lang_fil_(app.Fsys_mgr(), wiki.Lang().Key_str());
+			case Type_cfg_lang:				return Xol_lang_itm_.xo_lang_fil_(app.Fsys_mgr(), wiki.Lang().Key_str());
 			case Type_cfg_user:				return app.Usere().Fsys_mgr().App_data_cfg_user_fil();
 			case Type_cfg_custom:			return app.Usere().Fsys_mgr().App_data_cfg_custom_fil();
 			case Type_usr_history:			return app.Usere().Fsys_mgr().App_data_history_fil();

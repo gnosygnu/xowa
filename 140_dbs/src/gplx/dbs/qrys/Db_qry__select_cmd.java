@@ -21,8 +21,8 @@ public class Db_qry__select_cmd implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_select;}
 	public boolean			Exec_is_rdr() {return true;}
 	public String		Base_table() {return from.BaseTable().TblName();}
-	public String		Xto_sql() {return Sql_qry_wtr_.I.Xto_str(this, false);}		
-	public String		Xto_sql_prepare() {return Sql_qry_wtr_.I.Xto_str(this, true);}		
+	public String		Xto_sql() {return Sql_qry_wtr_.Instance.Xto_str(this, false);}		
+	public String		Xto_sql_prepare() {return Sql_qry_wtr_.Instance.Xto_str(this, true);}		
 	public DataRdr		Exec_qry_as_rdr(Db_conn conn) {return conn.Exec_qry_as_rdr(this);}
 	public GfoNde ExecRdr_nde(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;

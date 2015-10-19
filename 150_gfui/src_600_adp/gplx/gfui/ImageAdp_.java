@@ -40,7 +40,7 @@ public class ImageAdp_ {
 	}
 	public static ImageAdp txt_mem_(Io_url url, SizeAdp size) {return new ImageAdp_txt(url, size);}
 	public static ImageAdp txt_fil_(Io_url url) {
-		String raw = Io_mgr.I.LoadFilStr(url);			
+		String raw = Io_mgr.Instance.LoadFilStr(url);			
 		SizeAdp size = null;
 		if		(String_.Eq(raw, ""))			size = SizeAdp_.Zero;
 		else if	(String_.Eq(url.Ext(), ".svg")) size = SizeOf_svg(url);
@@ -51,7 +51,7 @@ public class ImageAdp_ {
 	public static ImageAdp file_(Io_url url) {
 		if (url.EqNull()) throw Err_.new_wo_type("cannot load image from null url");
 		if (String_.Eq(url.Info().Key(), IoUrlInfo_.Mem.Key())) return txt_fil_(url);
-		if (!Io_mgr.I.ExistsFil(url)) return Null;
+		if (!Io_mgr.Instance.ExistsFil(url)) return Null;
 
 				BufferedImage img = null;
 		try {
@@ -97,14 +97,14 @@ public class ImageAdp_ {
 		else if (imageType == BufferedImage.TYPE_USHORT_555_RGB)	return 16;	//?
 		else if (imageType == BufferedImage.TYPE_USHORT_565_RGB)	return 16;	//?
 		else if (imageType == BufferedImage.TYPE_USHORT_GRAY)		return 16;	//?
-		else														{UsrDlg_._.Warn("unknown bits per pixel", "imageType", imageType, "url", url.Xto_api()); return 8;}
+		else														{UsrDlg_.Instance.Warn("unknown bits per pixel", "imageType", imageType, "url", url.Xto_api()); return 8;}
 	}
 	}
 class Gfui_svg_util {
 	public static SizeAdp QuerySize(Io_url url) {
 		try {
 			// NOTE: not using XmlDoc b/c invalid doctypes can cause xml to hang; <?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"	"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><!-- Created with Inkscape (http://www.inkscape.org/) --> <svg xmlns="http://www.w3.org/2000/svg"
-			String xml = Io_mgr.I.LoadFilStr(url);
+			String xml = Io_mgr.Instance.LoadFilStr(url);
 			int pos = String_.FindFwd(xml, "<svg", 0); if (pos == -1) return null;
 			Int_obj_ref pos_ref = Int_obj_ref.new_(pos);
 			double w = ParseAtr(xml, pos_ref, "width");

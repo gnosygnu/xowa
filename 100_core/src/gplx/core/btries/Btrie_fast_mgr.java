@@ -108,7 +108,7 @@ public class Btrie_fast_mgr {
 				pos = match_pos;
 			}
 		}
-		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
+		return dirty ? tmp_bfr.To_bry_and_clear() : src;
 	}
 	public static Btrie_fast_mgr cs()			{return new Btrie_fast_mgr(Bool_.N);}
 	public static Btrie_fast_mgr ci_a7()		{return new Btrie_fast_mgr(Bool_.Y);}

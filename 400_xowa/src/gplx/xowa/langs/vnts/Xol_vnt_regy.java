@@ -48,9 +48,9 @@ public class Xol_vnt_regy {
 		}
 		return rv;
 	}
-	public boolean Mask__match_any(int lhs, int rhs) {		// EX: match "zh-cn|zh-hans|zh-hant" against "zh|zh-hans|zh-hant"			
+	public boolean Mask__match_any(int lhs, int rhs) {			// EX: match "zh-cn|zh-hans|zh-hant" against "zh|zh-hans|zh-hant"			
 		for (int i = 0; i < hash_len; ++i) {
-			int mask = gplx.core.brys.Bit_.Get_flag(i);	// 1,2,4,8
+			int mask = gplx.core.brys.Bit_.Get_flag(i);		// 1,2,4,8
 			if (Bitmask_.Has_int(lhs, mask)) {				// lhs has mask; EX: for lhs=6, mask=1 -> 'n'; mask=2 -> 'y'
 				if (Bitmask_.Has_int(rhs, mask))			// if rhs does not have mask, return false;
 					return true;
@@ -58,5 +58,4 @@ public class Xol_vnt_regy {
 		}
 		return false;	// should only occur when len = 0;
 	}
-	public void Mask__sort(Xop_vnt_rule_tkn... ary)	{Xol_vnt_itm_sorter__rule.I.Sort(hash, ary);}
 }

@@ -28,5 +28,5 @@ public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
 		else	throw Err_.new_unhandled(raw);
 	}
 	@Override public Object XtoDb(Object obj)					{return Int_.cast(obj);}
-	public static final IoItmClassXtn _ = new IoItmClassXtn(); IoItmClassXtn() {}
+	public static final IoItmClassXtn Instance = new IoItmClassXtn(); IoItmClassXtn() {}
 }

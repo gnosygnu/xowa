@@ -31,7 +31,7 @@ public class Xob_diff_regy_exec_cmd extends Xob_itm_basic_base implements Xob_cm
 		if (sql_dir == null)
 			sql_dir = wiki.Parser_mgr().Ctx().App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "tmp_sql");
 		Xob_diff_regy_sql_runner runner = new Xob_diff_regy_sql_runner();
-		Io_url[] urls = Io_mgr.I.QueryDir_fils(sql_dir);
+		Io_url[] urls = Io_mgr.Instance.QueryDir_fils(sql_dir);
 		int urls_len = urls.length;
 		for (int i = 0; i < urls_len; ++i)
 			runner.Exec(app, urls[i]);
@@ -63,7 +63,7 @@ class Xob_diff_regy_sql_runner {
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(Bry_.new_u8(wiki_domain));
 		app.Usr_dlg().Prog_many("", "", "running sql: url=~{0}", url.NameAndExt());
 		Db_conn conn = Get_conn(wiki, fsdb_db_id, fsdb_db_tid);
-		conn.Exec_sql(Io_mgr.I.LoadFilStr(url));
+		conn.Exec_sql(Io_mgr.Instance.LoadFilStr(url));
 		if (fsdb_db_tid == Fsdb_db_tid_.Tid_bin)
 			conn.Exec_sql("VACUUM;");
 	}
@@ -78,7 +78,7 @@ class Xob_diff_regy_sql_runner {
 			throw Err_.new_unhandled(fsdb_db_tid);
 	}
 	public static String Build_url(String wiki_domain, int fsdb_db_id, String fsdb_db_type) {
-		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.Xto_str_pad_bgn_zero(fsdb_db_id, 3), fsdb_db_type);
+		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.To_str_pad_bgn_zero(fsdb_db_id, 3), fsdb_db_type);
 	}
 }
 class Fsdb_db_tid_ {

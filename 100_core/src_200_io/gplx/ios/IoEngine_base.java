@@ -49,7 +49,7 @@ public abstract class IoEngine_base implements IoEngine {
 		Io_url recycleUrl = xrg.RecycleUrl();
 		if (recycleUrl.Type_fil()) {
 			this.MoveFil(IoEngine_xrg_xferFil.move_(xrg.Url(), recycleUrl).Overwrite_(false).ReadOnlyFails_(true).MissingFails_(xrg.MissingFails()));
-			IoRecycleBin._.Regy_add(xrg);
+			IoRecycleBin.Instance.Regy_add(xrg);
 		}
 		else
 			this.MoveDirDeep(IoEngine_xrg_xferDir.move_(xrg.Url(), recycleUrl).Overwrite_(false).ReadOnlyFails_(true));

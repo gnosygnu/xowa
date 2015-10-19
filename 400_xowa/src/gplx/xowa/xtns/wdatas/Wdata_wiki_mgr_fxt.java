@@ -17,23 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.langs.jsons.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.guis.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-import gplx.xowa.langs.cfgs.*;
-import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
+import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Wdata_wiki_mgr_fxt {
+	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
 	public Wdata_wiki_mgr_fxt Init(Xop_fxt parser_fxt, boolean reset) {
 		this.parser_fxt = parser_fxt;
 		this.wiki = parser_fxt.Wiki();
 		app = wiki.Appe();
+		app.Xwiki_mgr__sitelink_mgr().Init_by_app();
 		wdoc_bldr = new Wdata_doc_bldr();
 		wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		wdata_mgr.Clear();
 		if (reset) {
-			Io_mgr.I.InitEngine_mem();
+			Io_mgr.Instance.InitEngine_mem();
 			parser_fxt.Reset();
 		}
 		return this;
@@ -49,14 +50,14 @@ public class Wdata_wiki_mgr_fxt {
 	public Wdata_claim_itm_core Make_claim_str(int pid, String val) {return Make_claim_str(pid, Bry_.new_u8(val));}
 	public Wdata_claim_itm_core Make_claim_str(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
 	public Wdata_claim_itm_core Make_claim_time(int pid, String val) {return Make_claim_time(pid, val, Bry_.Empty, Bry_.Empty);}
-	public Wdata_claim_itm_core Make_claim_time(int pid, String val, int precision) {return Make_claim_time(pid, val, Int_.Xto_bry(precision), Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_time(int pid, String val, int precision) {return Make_claim_time(pid, val, Int_.To_bry(precision), Bry_.Empty);}
 	public Wdata_claim_itm_core Make_claim_time(int pid, String val, byte[] precision, byte[] calendar) {
 		return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_time.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, precision, calendar);
 	}
 	public Wdata_claim_itm_core Make_claim_monolingual(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(lang), Bry_.new_u8(text));}
 	public Wdata_claim_itm_core Make_claim_quantity(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_a7(amount), Bry_.new_a7(unit), Bry_.new_a7(ubound), Bry_.new_a7(lbound));}
-	public Wdata_claim_itm_core Make_claim_entity_qid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_item, Int_.Xto_bry(val));}
-	public Wdata_claim_itm_core Make_claim_entity_pid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_property, Int_.Xto_bry(val));}
+	public Wdata_claim_itm_core Make_claim_entity_qid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_item, Int_.To_bry(val));}
+	public Wdata_claim_itm_core Make_claim_entity_pid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_property, Int_.To_bry(val));}
 	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat) {return Make_claim_geo(pid, lon, lat, ".00001", null, "http://www.wikidata.org/entity/Q2");}
 	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat, String prc, String alt, String glb) {
 		return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_a7(lat), Bry_.new_a7(lon), Bry_.new_a7(alt), Bry_.new_a7(prc), Bry_.new_a7(glb));
@@ -75,7 +76,7 @@ public class Wdata_wiki_mgr_fxt {
 		int len = prefixes.length;
 		for (int i = 0; i < len; i++) {
 			String prefix = prefixes[i];
-			wiki.Xwiki_mgr().Add_full(prefix, prefix + ".wikipedia.org");
+			wiki.Xwiki_mgr().Add_by_atrs(prefix, prefix + ".wikipedia.org");
 		}
 	}
 	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
@@ -94,7 +95,7 @@ public class Wdata_wiki_mgr_fxt {
 		regy_mgr.Save();
 
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512().Mkr_rls();
-		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_a7(qid)).Add_byte_nl().Xto_bry_and_clear();
+		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_a7(qid)).Add_byte_nl().To_bry_and_clear();
 		Xob_xdat_file xdat_file = new Xob_xdat_file();
 		xdat_file.Insert(bfr, itm);
 		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
@@ -128,43 +129,28 @@ public class Wdata_wiki_mgr_fxt {
 		parser_fxt.Test_parse_page_tmpl_str(raw, expd);
 	}
 	public void Test_parse_langs(String raw, String expd) {
-		// clear langs, else dupes
-		wiki.Xwiki_mgr().Lang_mgr().Clear();
-
 		// setup langs
 		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
-		Xoa_lang_mgr lang_mgr = app.Lang_mgr();
-		lang_mgr.Groups().Set_bulk(Bry_.new_a7(String_.Concat_lines_nl
-			(	"+||grp|wiki"
-			,	"+|wiki|grp|grp1"
-			,	"+|grp1|itm|en|English"
-			,	"+|grp1|itm|fr|French"
-			,	"+|grp1|itm|de|German"
-			,	"+|grp1|itm|pl|Polish"
-			)));
-		wiki.Xwiki_mgr().Add_bulk_langs(Bry_.new_a7("wiki"));
-		String bulk = String_.Concat_lines_nl
-			(	"en.wikipedia.org|en.wikipedia.org"
-			,	"fr.wikipedia.org|fr.wikipedia.org"
-			,	"de.wikipedia.org|de.wikipedia.org"
-			,	"pl.wikipedia.org|pl.wikipedia.org"
-			);
-		wiki.Appe().Usere().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_a7(bulk));
-
-		// register lang itms (needed for perf)
-		Xow_xwiki_mgr xwiki_mgr = wiki.Xwiki_mgr();
-		int len = xwiki_mgr.Len();
-		for (int i = 0; i < len; i++) {
-			Xow_xwiki_itm xwiki_itm = xwiki_mgr.Get_at(i);
-			byte[] lang_key = Xol_lang_itm_.Get_by_id(xwiki_itm.Lang_id()).Key();
-			Object lang_obj = app.Lang_mgr().Groups().Grps_get(Bry_.new_a7("wiki")).Nde_subs_get_at(0).Nde_subs_get(lang_key);
-			wiki.Xwiki_mgr().Lang_mgr().Itms_reg(xwiki_itm, (Xoac_lang_itm)lang_obj);
-		}
+		app.Xwiki_mgr__sitelink_mgr().Parse(Bry_.new_u8(String_.Concat_lines_nl
+		( "0|grp1"
+		, "1|en|English"
+		, "1|fr|French"
+		, "1|de|German"
+		, "1|pl|Polish"
+		)));
+		wiki.Xwiki_mgr().Add_by_sitelink_mgr();
+		wiki.Appe().Usere().Wiki().Xwiki_mgr().Add_by_csv(Bry_.new_a7(String_.Concat_lines_nl
+		( "1|en.wikipedia.org|en.wikipedia.org"
+		, "1|fr.wikipedia.org|fr.wikipedia.org"
+		, "1|de.wikipedia.org|de.wikipedia.org"
+		, "1|pl.wikipedia.org|pl.wikipedia.org"
+		)));
 
 		parser_fxt.Page_ttl_("Q1_en");
 		parser_fxt.Exec_parse_page_all_as_str(raw);
 		Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
+		
+		wdata_lang_wtr.Page_(page).Fmt__do(tmp_bfr);
 	    Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_rls());
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {

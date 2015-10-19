@@ -29,5 +29,5 @@ public class Int_2_val {
 		int v1 = Int_.parse_or(itms[1], Int_.Min_value); if (v1 == Int_.Min_value) return Null_ptr;
 		return new Int_2_val(v0, v1);
 	}
-	public static String Xto_str(Bry_bfr bfr, int x, int y) {return bfr.Add_int_variable(x).Add_byte_comma().Add_int_variable(y).Xto_str_and_clear();}
+	public static String Xto_str(Bry_bfr bfr, int x, int y) {return bfr.Add_int_variable(x).Add_byte_comma().Add_int_variable(y).To_str_and_clear();}
 }

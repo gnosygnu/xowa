@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.primitives.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowd_page_itm {
 	public Xowd_page_itm() {this.Clear();}
 	public int			Id() {return id;} public Xowd_page_itm Id_(int v) {id = v; id_val = null; return this;} private int id;
@@ -118,7 +118,7 @@ public class Xowd_page_itm {
 		this.id_val = null;
 		this.html_db_id = orig.html_db_id;
 	}
-	public void Srl_save(Bry_bfr bfr) {gplx.xowa.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
+	public void Srl_save(Bry_bfr bfr) {gplx.xowa.wikis.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
 	public static final int Id_null = -1, Modified_on_null_int = 0;
 	public static final Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
 	public static final Xowd_page_itm Null = null;

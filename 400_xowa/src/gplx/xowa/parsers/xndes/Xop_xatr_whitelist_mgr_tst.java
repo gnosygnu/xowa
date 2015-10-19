@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xatr_whitelist_mgr_tst {
-	Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
+	private final Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "style"			, true);
@@ -46,17 +46,21 @@ public class Xop_xatr_whitelist_mgr_tst {
 	}
 }
 class Xop_xatr_whitelist_fxt {
+	private Xop_xatr_whitelist_mgr whitelist_mgr;
+	private Mwh_atr_itm atr_itm = new Mwh_atr_itm(null, false, false, false, -1, -1, -1, -1, null, -1, -1, null, -1, 0);
 	public void Clear() {
 		if (whitelist_mgr == null) whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
-	}	private Xop_xatr_whitelist_mgr whitelist_mgr;
+	}
 	public void Whitelist(int tag_id, String key_str, boolean expd) {
 		byte[] key_bry = Bry_.new_a7(key_str);
-		atr_itm.Key_rng_(0, key_bry.length);
+		// atr_itm.Key_rng_(0, key_bry.length);
+		atr_itm.Key_bry_(key_bry);
 		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, key_bry, atr_itm), key_str);
-	}	private Xop_xatr_itm atr_itm = new Xop_xatr_itm(0, 0);
+	}
 	public void Whitelist(int tag_id, String key_str, String val_str, boolean expd) {
 		byte[] key_bry = Bry_.new_a7(key_str);
-		atr_itm.Key_rng_(0, key_bry.length);
+		// atr_itm.Key_rng_(0, key_bry.length);
+		atr_itm.Key_bry_(key_bry);
 		atr_itm.Val_bry_(Bry_.new_a7(val_str));
 		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, key_bry, atr_itm), key_str);
 	}

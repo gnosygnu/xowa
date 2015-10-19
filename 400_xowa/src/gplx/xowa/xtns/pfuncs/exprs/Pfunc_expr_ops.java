@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
 interface Expr_tkn {
 	int Tid();
@@ -37,7 +37,7 @@ class Ws_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_space;}
 	public byte[] Val_ary() {return val_ary;} private byte[] val_ary;
 	public String Val_str() {return val_str;} private String val_str;
-	public Ws_tkn(byte b) {this.val_ary = new byte[] {b}; this.val_str = Char_.To_str(Char_.XbyInt(b));}
+	public Ws_tkn(byte b) {this.val_ary = new byte[] {b}; this.val_str = Char_.To_str(Char_.By_int(b));}
 }
 class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_lhs;}
@@ -48,13 +48,13 @@ class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int Precedence() {return -1;}
 	public Func_tkn GetAlt() {return this;}
 	public boolean Calc(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {throw Err_.new_unimplemented();}
-	public static Paren_bgn_tkn _ = new Paren_bgn_tkn(); Paren_bgn_tkn() {}
+	public static Paren_bgn_tkn Instance = new Paren_bgn_tkn(); Paren_bgn_tkn() {}
 }
 class Paren_end_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_rhs;}
 	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_u8(val_str);
 	public String Val_str() {return val_str;} static final String val_str = ")";
-	public static Paren_end_tkn _ = new Paren_end_tkn(); Paren_end_tkn() {}
+	public static Paren_end_tkn Instance = new Paren_end_tkn(); Paren_end_tkn() {}
 }
 class Num_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_number;}		
@@ -131,27 +131,27 @@ class Func_tkn_plus extends Func_tkn_base {
 	public Func_tkn_plus(String v) {this.Ctor(v);}
 	@Override public int ArgCount()		{return 2;}
 	@Override public int Precedence()	{return 6;}
-	@Override public Func_tkn GetAlt() {return Func_tkn_plus_positive._;}
+	@Override public Func_tkn GetAlt() {return Func_tkn_plus_positive.Instance;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		Decimal_adp rhs = val_stack.Pop();
 		Decimal_adp lhs = val_stack.Pop();
 		val_stack.Push(lhs.Add(rhs));
 		return true;
 	}
-	public static final Func_tkn_plus _ = new Func_tkn_plus(); Func_tkn_plus() {}
+	public static final Func_tkn_plus Instance = new Func_tkn_plus(); Func_tkn_plus() {}
 }
 class Func_tkn_plus_positive extends Func_tkn_base {
 	Func_tkn_plus_positive(String v) {this.Ctor(v);}
 	@Override public int ArgCount()		{return 1;}
 	@Override public int Precedence()	{return 10;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {return true;}// effectively a noop
-	public static final Func_tkn_plus_positive _ = new Func_tkn_plus_positive("+");
+	public static final Func_tkn_plus_positive Instance = new Func_tkn_plus_positive("+");
 }
 class Func_tkn_minus extends Func_tkn_base {
 	public Func_tkn_minus(String v) {this.Ctor(v);}
 	@Override public int ArgCount()		{return 2;}
 	@Override public int Precedence()	{return 6;}
-	@Override public Func_tkn GetAlt() {return Func_tkn_minus_negative._;}
+	@Override public Func_tkn GetAlt() {return Func_tkn_minus_negative.Instance;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		Decimal_adp rhs = val_stack.Pop();
 		Decimal_adp lhs = val_stack.Pop();
@@ -168,7 +168,7 @@ class Func_tkn_minus_negative extends Func_tkn_base {
 		val_stack.Push(val.Multiply(Decimal_adp_.Neg1));
 		return true;
 	}
-	public static final Func_tkn_minus_negative _ = new Func_tkn_minus_negative("-");
+	public static final Func_tkn_minus_negative Instance = new Func_tkn_minus_negative("-");
 }
 class Func_tkn_divide extends Func_tkn_base {
 	public Func_tkn_divide(String v) {this.Ctor(v);}
@@ -222,7 +222,7 @@ class Func_tkn_e_op extends Func_tkn_base {
 	public Func_tkn_e_op(String v) {this.Ctor(v);}
 	@Override public int ArgCount()		{return 2;}
 	@Override public int Precedence()	{return 9;}	// NOTE: needs to be < than - sign
-	@Override public Func_tkn GetAlt() {return Func_tkn_e_const._;}
+	@Override public Func_tkn GetAlt() {return Func_tkn_e_const.Instance;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		Decimal_adp rhs = val_stack.Pop();
 		Decimal_adp lhs = val_stack.Pop();
@@ -364,7 +364,7 @@ class Func_tkn_e_const extends Func_tkn_base {
 		val_stack.Push(Decimal_adp_.Const_e);
 		return true;
 	}
-	public static final Func_tkn_e_const _ = new Func_tkn_e_const("e");
+	public static final Func_tkn_e_const Instance = new Func_tkn_e_const("e");
 }
 class Func_tkn_pi extends Func_tkn_base {
 	public Func_tkn_pi(String v) {this.Ctor(v);}

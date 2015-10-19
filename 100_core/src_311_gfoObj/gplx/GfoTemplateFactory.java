@@ -27,6 +27,6 @@ public class GfoTemplateFactory implements GfoInvkAble {
 		Object o = hash.Get_by(k);
 		return o == null ? GfoInvkAble_.Rv_unhandled : o;
 	}
-        public static final GfoTemplateFactory _ = new GfoTemplateFactory(); GfoTemplateFactory() {}
+        public static final GfoTemplateFactory Instance = new GfoTemplateFactory(); GfoTemplateFactory() {}
 	Hash_adp hash = Hash_adp_.new_();
 }

@@ -24,10 +24,10 @@ public class Fsm_cfg_mgr {
 	}
 	public void Ctor_by_load() {
 		Db_cfg_hash hash		= Grps_get_or_load(Grp_core);
-		this.next_id			= hash.Get(Key_next_id).To_int_or(-1); if (next_id == -1) throw Err_.new_wo_type("next_id not found in cfg", "url", tbl.Conn().Conn_info().Xto_api());
-		this.schema_thm_page	= hash.Get(Key_schema_thm_page).To_yn_or_n();
-		this.patch__next_id		= hash.Get(Key_patch__next_id).To_yn_or_n();
-		this.patch__page_gt_1	= hash.Get(Key_patch__page_gt_1).To_yn_or_n();
+		this.next_id			= hash.Get_by(Key_next_id).To_int_or(-1); if (next_id == -1) throw Err_.new_wo_type("next_id not found in cfg", "url", tbl.Conn().Conn_info().Xto_api());
+		this.schema_thm_page	= hash.Get_by(Key_schema_thm_page).To_yn_or_n();
+		this.patch__next_id		= hash.Get_by(Key_patch__next_id).To_yn_or_n();
+		this.patch__page_gt_1	= hash.Get_by(Key_patch__page_gt_1).To_yn_or_n();
 	}
 	public Db_cfg_tbl				Tbl() {return tbl;}
 	public int Next_id()			{return next_id++;} private int next_id = 1;

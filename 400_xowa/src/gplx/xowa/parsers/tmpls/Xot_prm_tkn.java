@@ -49,7 +49,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 				find_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, find_bfr);
 			prm_idx = Bry_.To_int_or__trim_ws(find_bfr.Bfr(), 0, find_bfr.Len(), -1);	// parse as number first; NOTE: trim needed to transform "{{{ 1 }}}" to "1"; it.w:Portale:Giochi_da_tavolo; DATE:2014-02-09
 			if (prm_idx == -1)
-				prm_key = find_bfr.Xto_bry_and_clear_and_trim();									// not a number; parse as key; NOTE: must trim; PAGE:en.w:William Shakespeare; {{Relatebardtree}}
+				prm_key = find_bfr.To_bry_and_clear_and_trim();									// not a number; parse as key; NOTE: must trim; PAGE:en.w:William Shakespeare; {{Relatebardtree}}
 		}
 		Arg_nde_tkn arg_nde = null;
 		if (prm_idx == -1) {	// prm is key; EX: "{{{key1}}}"

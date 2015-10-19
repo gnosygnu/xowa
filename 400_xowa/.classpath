@@ -6,7 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/140_dbs"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/150_gfui"/>
-	<classpathentry kind="lib" path="lib/luaj_xowa.jar"/>
 	<classpathentry kind="lib" path="lib/jtidy_xowa.jar"/>
+	<classpathentry kind="lib" path="lib/luaj_xowa.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -233,7 +233,7 @@ class Pxd_parser_ {
 		int len = suffix_ary.length;
 		for (int i = 0; i < len; i++) {
 			String suffix = suffix_ary[i];
-			trie.Add_obj(suffix, Pxd_itm_day_suffix._);
+			trie.Add_obj(suffix, Pxd_itm_day_suffix.Instance);
 		}
 	}
 	private static void Init_relative() {

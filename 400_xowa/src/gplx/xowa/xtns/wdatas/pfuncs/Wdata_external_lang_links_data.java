@@ -45,7 +45,7 @@ public class Wdata_external_lang_links_data {
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = self.Args_get_by_idx(i);
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, self, tmp_bfr);
-			byte[] lang = tmp_bfr.Xto_bry_and_clear();
+			byte[] lang = tmp_bfr.To_bry_and_clear();
 			Langs_add(lang);
 		}
 		tmp_bfr.Mkr_rls();

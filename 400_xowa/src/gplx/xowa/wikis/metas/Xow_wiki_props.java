@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.html.hrefs.*;
+import gplx.xowa.htmls.hrefs.*;
 public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse() which will not work with ""; DATE:2014-02-16
 	public Xow_wiki_props Main_page_(byte[] v) {main_page = v; return this;}
@@ -42,7 +42,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Siteinfo_misc() {return siteinfo_misc;}
 	public byte[] Siteinfo_mainpage() {return siteinfo_mainpage;} private byte[] siteinfo_mainpage = Bry_.Empty;
 	public DateAdp Modified_latest() {return modified_latest;} private DateAdp modified_latest;
-	public Xow_wiki_props SiteName_(int v) {site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_type_.Get_type_as_bry(v)))); return this;} 
+	public Xow_wiki_props SiteName_(int v) {site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_tid_.Get_type_as_bry(v)))); return this;} 
 	public Xow_wiki_props Siteinfo_misc_(byte[] v) {
 		siteinfo_misc = v;
 		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);

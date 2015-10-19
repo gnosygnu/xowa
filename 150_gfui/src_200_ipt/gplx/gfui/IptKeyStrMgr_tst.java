@@ -50,7 +50,7 @@ public class IptKeyStrMgr_tst {
 		tst_FetchByKeyPress('A', IptKey_.add_(IptKey_.A, IptKey_.Shift));
 		tst_FetchByKeyPress('1', IptKey_.add_(IptKey_.D1));
 		tst_FetchByKeyPress('!', IptKey_.add_(IptKey_.D1, IptKey_.Shift));
-	}	void tst_FetchByKeyPress(char c, IptKey expd) {Tfds.Eq(expd.Key(), IptKeyStrMgr._.FetchByKeyPress((int)c).Key());}
+	}	void tst_FetchByKeyPress(char c, IptKey expd) {Tfds.Eq(expd.Key(), IptKeyStrMgr.Instance.FetchByKeyPress((int)c).Key());}
 	void tst_XtoUiStr(IptKey key, String expd) {Tfds.Eq(expd, key.XtoUiStr());}
 	void tst_XtoUiStrShifted(IptKey key, String expdNormal, String expdShifted) {
 		Tfds.Eq(expdNormal, key.XtoUiStr());

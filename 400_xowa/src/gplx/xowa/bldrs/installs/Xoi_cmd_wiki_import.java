@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.gui.views.*; import gplx.xowa.bldrs.cmds.utils.*;
-import gplx.xowa.html.hrefs.*;
+import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.guis.views.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.htmls.hrefs.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public Xoi_cmd_wiki_import(Xoi_setup_mgr install_mgr, String wiki_key, String wiki_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.wiki_date = wiki_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, wiki_date, dump_type;
 	public static final String KEY = "wiki.import";
@@ -49,7 +49,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_page);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_id);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_search_title);
-		if (wiki.Import_cfg().Category_version() == gplx.xowa.ctgs.Xoa_ctg_mgr.Version_1)
+		if (wiki.Import_cfg().Category_version() == gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Version_1)
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_category);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_calc_stats);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_core_term);
@@ -59,7 +59,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_init);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_page);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_css);	
-		if (wiki.Import_cfg().Category_version() == gplx.xowa.ctgs.Xoa_ctg_mgr.Version_1) {
+		if (wiki.Import_cfg().Category_version() == gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Version_1) {
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core_v1);
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core);
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_link);
@@ -89,12 +89,12 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		wiki.Init_assert();
 		if		(String_.Eq(src_url.Ext(), ".xml")) {
 			if (app.Setup_mgr().Dump_mgr().Delete_xml_file())
-				Io_mgr.I.DeleteFil(src_url);
+				Io_mgr.Instance.DeleteFil(src_url);
 		}
 		else if (String_.Eq(src_url.Ext(), ".bz2")) {
 			Io_url trg_fil = app.Fsys_mgr().Wiki_dir().GenSubFil_nest("#dump", "done", src_url.NameAndExt());
 			if (import_move_bz2_to_done)
-				Io_mgr.I.MoveFil_args(src_url, trg_fil, true).Exec();
+				Io_mgr.Instance.MoveFil_args(src_url, trg_fil, true).Exec();
 		}
 		running = false;
 		wiki.Import_cfg().Src_fil_xml_(null).Src_fil_bz2_(null);	// reset file else error when going from Import/Script to Import/List

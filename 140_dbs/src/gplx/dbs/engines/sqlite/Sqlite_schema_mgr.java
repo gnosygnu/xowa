@@ -34,7 +34,7 @@ public class Sqlite_schema_mgr {
 	}
 	private void Init(Db_engine engine) {
 		init = false;
-		Gfo_usr_dlg_.I.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Xto_api());
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Xto_api());
 		Meta_parser__tbl tbl_parser = new Meta_parser__tbl();
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
 		Db_rdr rdr = engine.New_stmt_prep(qry).Exec_select__rls_auto();	
@@ -56,11 +56,11 @@ public class Sqlite_schema_mgr {
 						idx_mgr.Add(idx_itm);
 						break;
 					default:
-						Gfo_usr_dlg_.I.Log_many("", "", "db.schema.unknown type: conn=~{0} type=~{1} name=~{2} sql=~{3}", engine.Conn_info().Xto_api(), type_str, name, sql);
+						Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unknown type: conn=~{0} type=~{1} name=~{2} sql=~{3}", engine.Conn_info().Xto_api(), type_str, name, sql);
 						break;
 				}
 			}
 		}	finally {rdr.Rls();}
-		Gfo_usr_dlg_.I.Log_many("", "", "db.schema.load.end");
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.end");
 	}
 }

@@ -28,7 +28,7 @@ public class IptEvtDataKey {
 		IptKey keyArg = IptKey_.api_(val);
 		return new_(keyArg);
 	}
-	@gplx.Internal protected static IptEvtDataKey new_(IptKey key) {
+	public static IptEvtDataKey new_(IptKey key) {
 		IptEvtDataKey rv = new IptEvtDataKey();
 		rv.key = key;
 		return rv;

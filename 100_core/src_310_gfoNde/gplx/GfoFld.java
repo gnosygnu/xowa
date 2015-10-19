@@ -19,7 +19,7 @@ package gplx;
 public class GfoFld {
 	public String Key() {return key;} private String key;
 	public ClassXtn Type() {return type;} ClassXtn type;
-	public static final GfoFld Null = new_(String_.Null_mark, ObjectClassXtn._);
+	public static final GfoFld Null = new_(String_.Null_mark, ObjectClassXtn.Instance);
 	public static GfoFld new_(String key, ClassXtn c) {
 		GfoFld rv = new GfoFld();
 		rv.key = key; rv.type = c;

@@ -66,7 +66,7 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 			if (!Bry_.Eq(unit, Wdata_claim_itm_quantity.Unit_1))
 				tmp_bfr.Add_byte_space().Add(unit);				
 		} catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write quantity; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write quantity; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
 		}
 	}	private static final byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
 	public void Visit_time(Wdata_claim_itm_time itm) {itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);}
@@ -85,7 +85,7 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 				tmp_bfr.Add_byte(Byte_ascii.Paren_end);
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write globecoordinate; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write globecoordinate; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
 		}
 	}
 	public void Visit_system(Wdata_claim_itm_system itm) {

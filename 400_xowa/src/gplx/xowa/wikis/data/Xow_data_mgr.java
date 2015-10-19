@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.xowa.bldrs.cmds.ctgs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.gui.views.*;
-import gplx.xowa.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.guis.views.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xow_data_mgr implements GfoInvkAble {
@@ -46,7 +46,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 				if (	!called_from_msg	// if called from msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09
 					&&	Xow_page_tid.Identify_by_ttl(ttl.Page_db()) == Xow_page_tid.Tid_wikitext // skip ".js" and ".css" pages in MediaWiki; DATE:2014-06-13
 					) {		
-					Xol_lang lang = wiki.Lang();
+					Xol_lang_itm lang = wiki.Lang();
 					byte[] msg_key = ttl.Page_db();
 					Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 					msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
@@ -65,7 +65,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		while (true) {
 			boolean exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl.Page_db());
 			if (!exists) return rv.Missing_();
-			if (wiki.App().App_type().Uid_is_gui())	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
+			if (wiki.App().Mode().Tid_is_gui())	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
 				wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_u8(ttl.Raw()));
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
 			byte[] bry = db_page.Text();
@@ -85,7 +85,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 	}
 	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl)						{return Load_page_by_ttl(url, ttl, wiki.Lang(), wiki.Appe().Gui_mgr().Browser_win().Active_tab(), true);}
 	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab)	{return Load_page_by_ttl(url, ttl, wiki.Lang(), tab, true);}
-	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xol_lang lang, Xog_tab_itm tab, boolean parse_page) {
+	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xol_lang_itm lang, Xog_tab_itm tab, boolean parse_page) {
 		wiki.Init_assert();
 		Xoae_page page = Xoae_page.new_(wiki, ttl); page.Tab_data().Tab_(tab);
 		this.Get_page(page, url, ttl, false, false);						// get page from data_mgr
@@ -94,7 +94,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 			Xol_vnt_mgr vnt_mgr = lang.Vnt_mgr();
 			if (vnt_mgr.Enabled()) {	// if vnt enabled, then try to load by vnt form; DATE:2015-09-15
 				gplx.xowa.wikis.data.tbls.Xowd_page_itm page_itm = vnt_mgr.Convert_mgr().Convert_ttl(wiki, ttl);
-				if (page_itm.Exists()) {
+				if (page_itm != null && page_itm.Exists()) {
 					Xoa_ttl vnt_ttl = Xoa_ttl.parse(wiki, ttl.Ns().Id(), page_itm.Ttl_page_db());
 					page = this.Get_page(vnt_ttl, false);
 					vnt_missing = page.Missing();

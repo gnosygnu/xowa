@@ -19,14 +19,14 @@ package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
 import gplx.fsdb.data.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.lnkis.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
 	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();
 	public void Rls() {}
 	public void Reset() {
-		Io_mgr.I.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
+		Io_mgr.Instance.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
 		Io_url root_url = Xoa_test_.Url_root();
 		Xoa_test_.Db_init(root_url);
 		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), root_url);
@@ -37,13 +37,13 @@ class Xof_file_fxt {
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
 		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 		fsdb_mgr.Bin_mgr().Wkrs__del(Xof_bin_wkr_.Key_http_wmf);	// never use http_wmf wkr for these tests
 		Xof_bin_wkr__fsdb_sql bin_wkr_fsdb = (Xof_bin_wkr__fsdb_sql)fsdb_mgr.Bin_mgr().Wkrs__get_or_null(Xof_bin_wkr_.Key_fsdb_wiki);
-		fsdb_mgr.Bin_mgr().Resizer_(Xof_img_wkr_resize_img_mok._);
+		fsdb_mgr.Bin_mgr().Resizer_(Xof_img_wkr_resize_img_mok.Instance);
 		bin_wkr_fsdb.Resize_allowed_(true);
 	}
 	public void Init__orig_w_fsdb__commons_orig(String ttl, int w, int h) {
@@ -67,7 +67,7 @@ class Xof_file_fxt {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Init_at_lnki(arg.Exec_tid(), wiki.Domain_itm().Abrv_xo(), ttl_bry, arg.Lnki_type(), arg.Lnki_upright(), arg.Lnki_w(), arg.Lnki_h(), arg.Lnki_time(), Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
 		List_adp itms_list = List_adp_.new_(); itms_list.Add(itm);
-		orig_mgr.Find_by_list(Ordered_hash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
+		orig_mgr.Find_by_list(Ordered_hash_.New_bry(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_main, ttl_bry);
 		Xoae_page page = Xoae_page.new_(wiki, ttl);
 		fsdb_mgr.Fsdb_search_by_list(itms_list, wiki, page, Xog_js_wkr_.Noop);
@@ -77,8 +77,8 @@ class Xof_file_fxt {
 	}
 	public void Test_fsys_exists_y(String url)			{Test_fsys_exists(url, Bool_.Y);}
 	public void Test_fsys_exists_n(String url)			{Test_fsys_exists(url, Bool_.N);}
-	public void Test_fsys_exists(String url, boolean expd) {Tfds.Eq(expd, Io_mgr.I.ExistsFil(Io_url_.new_any_(url)));}
-	public void Test_fsys(String url, String expd_bin)	{Tfds.Eq(expd_bin, Io_mgr.I.LoadFilStr(url));}
+	public void Test_fsys_exists(String url, boolean expd) {Tfds.Eq(expd, Io_mgr.Instance.ExistsFil(Io_url_.new_any_(url)));}
+	public void Test_fsys(String url, String expd_bin)	{Tfds.Eq(expd_bin, Io_mgr.Instance.LoadFilStr(url));}
 }
 class Xof_repo_fxt {
 	public static void Repos_init(Xof_file_mgr file_mgr, boolean src_repo_is_wmf, Xowe_wiki wiki) {

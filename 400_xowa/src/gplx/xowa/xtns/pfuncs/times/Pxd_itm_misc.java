@@ -54,7 +54,7 @@ class Pxd_itm_colon extends Pxd_itm_base {
 class Pxd_itm_null extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_null;}
 	@Override public int Eval_idx() {return 99;}
-	public static final Pxd_itm_null _ = new Pxd_itm_null(); 
+	public static final Pxd_itm_null Instance = new Pxd_itm_null(); 
 }
 class Pxd_itm_dash extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_dash;}
@@ -123,12 +123,12 @@ class Pxd_itm_sorter implements gplx.lists.ComparerAble {
 		Pxd_itm rhs = (Pxd_itm)rhsObj;
 		return Int_.Compare(lhs.Eval_idx(), rhs.Eval_idx());
 	}
-	public static final Pxd_itm_sorter _ = new Pxd_itm_sorter();
+	public static final Pxd_itm_sorter Instance = new Pxd_itm_sorter();
 	public static Pxd_itm[] XtoAryAndSort(Pxd_itm[] src, int src_len) {
 		Pxd_itm[] rv = new Pxd_itm[src_len];
 		for (int i = 0; i < src_len; i++)
 			rv[i] = src[i];
-		Array_.Sort(rv, Pxd_itm_sorter._);
+		Array_.Sort(rv, Pxd_itm_sorter.Instance);
 		return rv;
 	}
 }

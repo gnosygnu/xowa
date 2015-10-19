@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class GfuiComboBox extends GfuiElemBase {
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.comboBox_();} GxwComboBox comboBox;
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.comboBox_();} GxwComboBox comboBox;
 	public Object SelectedItm() {return comboBox.SelectedItm();} public void SelectedItm_set(Object v) {comboBox.SelectedItm_set(v);}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);

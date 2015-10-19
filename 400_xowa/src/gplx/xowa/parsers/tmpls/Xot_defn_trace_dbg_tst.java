@@ -25,7 +25,7 @@ public class Xot_defn_trace_dbg_tst {
 		fx.Init_defn_add("concat", "{{{1}}}{{{2}}}");
 		fx.Init_defn_add("bool_str", "{{#ifeq:{{{1}}}|1|y|n}}");
 		fx.Init_defn_add("mid_1", "{{print|[ {{concat|{{{1}}}|{{{2}}}}} ]}}");
-		fx.Ctx().Defn_trace_(Xot_defn_trace_dbg._);
+		fx.Ctx().Defn_trace_(Xot_defn_trace_dbg.Instance);
 	}
 	@Test  public void Tmpl() {
 		fx.tst_

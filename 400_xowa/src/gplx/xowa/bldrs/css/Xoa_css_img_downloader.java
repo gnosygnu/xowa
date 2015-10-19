@@ -27,12 +27,12 @@ public class Xoa_css_img_downloader {
 	public void Chk(byte[] wiki_domain, Io_url css_fil) {
 		this.wiki_domain = wiki_domain;
 		List_adp img_list = List_adp_.new_();
-		byte[] old_bry = Io_mgr.I.LoadFilBry(css_fil);
+		byte[] old_bry = Io_mgr.Instance.LoadFilBry(css_fil);
 		byte[] rel_url_prefix = Bry_.Add(Bry_fwd_slashes, wiki_domain);
 		byte[] new_bry = Convert_to_local_urls(rel_url_prefix, old_bry, img_list);
 		Io_url img_dir = css_fil.OwnerDir();
 		Download_fils(img_dir, img_list.To_str_ary());
-		Io_mgr.I.SaveFilBry(css_fil, new_bry);
+		Io_mgr.Instance.SaveFilBry(css_fil, new_bry);
 	}
 	public byte[] Convert_to_local_urls(byte[] rel_url_prefix, byte[] src, List_adp list) {
 		try {
@@ -96,7 +96,7 @@ public class Xoa_css_img_downloader {
 				if (!quoted) bfr.Add_byte(Byte_ascii.Quote);
 				prv_pos = end_pos;
 			}
-			return bfr.Xto_bry_and_clear();
+			return bfr.To_bry_and_clear();
 		}
 		catch (Exception e) {
 			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", String_.new_u8(rel_url_prefix), Err_.Message_gplx_full(e));
@@ -157,9 +157,9 @@ public class Xoa_css_img_downloader {
 		for (int i = 0; i < ary_len; i++) {
 			String src = ary[i];
 			Io_url trg = css_dir.GenSubFil_nest(Op_sys.Cur().Fsys_http_frag_to_url_str(Replace_invalid_chars_str(src)));
-			if (Io_mgr.I.ExistsFil(trg)) continue;
+			if (Io_mgr.Instance.ExistsFil(trg)) continue;
 			download_wkr.Download(true, "https://" + src, trg, "download: " + src); // ILN
-			if (Io_mgr.I.QueryFil(trg).Size() == 0) {	// warn if 0 byte files downloaded; DATE:2015-07-06
+			if (Io_mgr.Instance.QueryFil(trg).Size() == 0) {	// warn if 0 byte files downloaded; DATE:2015-07-06
 				Xoa_app_.Usr_dlg().Warn_many("", "", "css.download; 0 byte file downloaded; file=~{0}", trg.Raw());
 			}
 		}

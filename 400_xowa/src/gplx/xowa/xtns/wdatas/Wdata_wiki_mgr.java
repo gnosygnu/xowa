@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.apis.xowa.xtns.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 import gplx.xowa.parsers.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
@@ -58,7 +58,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	public void Qids_add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
 		Xow_abrv_wm_.To_abrv(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
-		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).Xto_bry();
+		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).To_bry();
 		qids_cache.Add(qids_key, qid);
 	}
 	public byte[] Qids_get(Xowe_wiki wiki, Xoa_ttl ttl) {return Qids_get(wiki.Wdata_wiki_abrv(), ttl);}
@@ -77,7 +77,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public Int_obj_val Pids_add(byte[] pids_key, int pid_id) {Int_obj_val rv = Int_obj_val.new_(pid_id); pids_cache.Add(pids_key, rv); return rv;}
 	public int Pids_get(byte[] lang_key, byte[] pid_name) {
 		if (!enabled) return Pid_null;
-		byte[] pids_key = Bry_.Add(lang_key, Xoa_consts.Pipe_bry, pid_name);
+		byte[] pids_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);
 		Int_obj_val rv = (Int_obj_val)pids_cache.Get_by(pids_key);
 		if (rv == null) {
 			int pid_id = this.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name); if (pid_id == Pid_null) return Pid_null;
@@ -177,7 +177,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	private void Hwtr_msgs_make() {
 		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return;
-		Xol_lang new_lang = app.Usere().Lang();
+		Xol_lang_itm new_lang = app.Usere().Lang();
 		Xowe_wiki cur_wiki = this.Wdata_wiki();			
 		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
 		Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
@@ -197,7 +197,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		return jdoc_parser.Parse(src);
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))					return Yn.Xto_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))					return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))					enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_domain))						return String_.new_u8(domain);
 		else if	(ctx.Match(k, Invk_domain_))					domain = m.ReadBry("v");
@@ -223,11 +223,11 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static final byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
-			case Xow_domain_type_.Int__wikidata:
+			case Xow_domain_tid_.Int__wikidata:
 				if (ns_id == Xow_ns_.Id_main || ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
-			case Xow_domain_type_.Int__home:
+			case Xow_domain_tid_.Int__home:
 				if (ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;

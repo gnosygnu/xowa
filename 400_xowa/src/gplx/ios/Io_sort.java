@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 import gplx.lists.*;
 public class Io_sort {
 	public Io_sort Memory_max_(int v) {memory_max = v; return this;} private int memory_max = Io_mgr.Len_kb;
-	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter._, key_gen);}
+	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter.Instance, key_gen);}
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, ComparerAble row_comparer, Io_line_rdr_key_gen key_gen) {
 		Io_line_rdr rdr = new Io_line_rdr(usr_dlg, src_fil_gen.Prv_urls()).Load_len_(4 * Io_mgr.Len_kb).Key_gen_(key_gen);	// NOTE: do not set load_len to memory_max; only want to load in increments
 		List_adp rv = List_adp_.new_();
@@ -70,11 +70,11 @@ public class Io_sort {
 		for (int i = 0; i < len; i++) {
 			Io_sort_split_itm itm = (Io_sort_split_itm)list.Get_at(i);
 			int add_len = itm.Row_end() - itm.Row_bgn();
-			if ((tmp.Len() + add_len) > Const_bfr_max) Io_mgr.I.AppendFilBfr(url, tmp);
+			if ((tmp.Len() + add_len) > Const_bfr_max) Io_mgr.Instance.AppendFilBfr(url, tmp);
 			tmp.Add_mid(itm.Bfr(), itm.Row_bgn(), itm.Row_end());
 			itm.Rls();
 		}
-		Io_mgr.I.AppendFilBfr(url, tmp);
+		Io_mgr.Instance.AppendFilBfr(url, tmp);
 		list.Clear();
 		url_list.Add(url);
 	}
@@ -84,7 +84,7 @@ public class Io_sort {
 		int default_load_len = memory_max / urls_len + 1;
 		for (int i = 0; i < urls_len; i++) {
 			Io_url url = urls[i];
-			int file_len = (int)Io_mgr.I.QueryFil(url).Size();
+			int file_len = (int)Io_mgr.Instance.QueryFil(url).Size();
 			int load_len = file_len < default_load_len ? file_len : default_load_len;	// PERF.NOTE: 32 MB is default, but if file is 1 MB (or else) only create a bfr for 1 MB; using 32 MB will throw OutOfMemory on -Xmx 64m; DATE:20130112
 			Io_line_rdr stream_bfr = new Io_line_rdr(usr_dlg, url).Key_gen_(key_gen).Load_len_(load_len);
 			boolean read = stream_bfr.Read_next();

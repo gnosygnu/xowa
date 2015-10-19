@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*; import gplx.lists.*;
-import gplx.xowa.tdbs.*;
+import gplx.xowa.wikis.tdbs.*;
 class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	public Io_sort_filCmd_reg() {}
 	public void Bfr_add(Io_line_rdr stream) {
@@ -35,7 +35,7 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 		itm_count = 0;
 	}
 	public void Flush(Io_url fil) {
-		Io_mgr.I.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
+		Io_mgr.Instance.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
 	}	private Bry_bfr bfr = Bry_bfr.new_(); int fil_idx = 0; int itm_count = 0;
 }
 class Io_url_gen_nest implements gplx.ios.Io_url_gen {
@@ -48,6 +48,6 @@ class Io_url_gen_nest implements gplx.ios.Io_url_gen {
 		}
 		return rv;
 	}
-	public void Del_all() {if (Io_mgr.I.ExistsDir(root_dir)) Io_mgr.I.DeleteDirDeep(root_dir);}
+	public void Del_all() {if (Io_mgr.Instance.ExistsDir(root_dir)) Io_mgr.Instance.DeleteDirDeep(root_dir);}
 	public Io_url_gen_nest(Io_url root_dir, String ext) {this.root_dir = root_dir; this.ext = Bry_.new_u8(ext);} Io_url root_dir; byte[] ext; int fil_idx;
 }

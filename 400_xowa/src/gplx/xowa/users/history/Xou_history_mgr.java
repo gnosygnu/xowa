@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.html.hrefs.*; 
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.htmls.hrefs.*; 
 public class Xou_history_mgr implements GfoInvkAble {
 	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
 	private final Io_url history_fil;
-	private Ordered_hash itms = Ordered_hash_.new_bry_();
+	private Ordered_hash itms = Ordered_hash_.New_bry();
 	private boolean load_chk = false;
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Xou_history_mgr(Io_url history_fil) {this.history_fil = history_fil;}
@@ -73,14 +73,14 @@ public class Xou_history_mgr implements GfoInvkAble {
 		tmp_bfr.Add(page);
 		Gfo_qarg_mgr qarg_mgr = url.Qargs_mgr();
 		qarg_mgr.To_bry(tmp_bfr, Xoa_app_.Utl__encoder_mgr().Href(), Bool_.N);
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Sort() {itms.Sort_by(sorter);}
 	public void Load() {
 		if (load_chk) return;
 		load_chk = true;
 		itms.Clear();
-		Xou_history_itm_srl.Load(Io_mgr.I.LoadFilBry(history_fil), itms);
+		Xou_history_itm_srl.Load(Io_mgr.Instance.LoadFilBry(history_fil), itms);
 		itms.Sort_by(sorter);
 	}
 	public void Save(Xoae_app app) {
@@ -90,13 +90,13 @@ public class Xou_history_mgr implements GfoInvkAble {
 		itms.Sort_by(sorter);
 		if (itms_len > current_itms_max) itms = Archive(app);
 		byte[] ary = Xou_history_itm_srl.Save(itms);
-		Io_mgr.I.SaveFilBry(app.Usere().Fsys_mgr().App_data_history_fil(), ary);
+		Io_mgr.Instance.SaveFilBry(app.Usere().Fsys_mgr().App_data_history_fil(), ary);
 	}
 	public Ordered_hash Archive(Xoae_app app) {
 		itms.Sort_by(sorter);
 		int itms_len = itms.Count();
-		Ordered_hash current_itms = Ordered_hash_.new_bry_();
-		Ordered_hash archive_itms = Ordered_hash_.new_bry_();
+		Ordered_hash current_itms = Ordered_hash_.New_bry();
+		Ordered_hash archive_itms = Ordered_hash_.New_bry();
 		for (int i = 0; i < itms_len; i++) {
 			Xou_history_itm  itm = (Xou_history_itm)itms.Get_at(i);
 			Ordered_hash itms_hash = (i < current_itms_reset) ? current_itms : archive_itms;
@@ -104,7 +104,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		}
 		byte[] ary = Xou_history_itm_srl.Save(archive_itms);
 		Io_url url = app.Usere().Fsys_mgr().App_data_history_fil().GenNewNameOnly(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
-		Io_mgr.I.SaveFilBry(url, ary);
+		Io_mgr.Instance.SaveFilBry(url, ary);
 		return current_itms;
 	}	private int current_itms_max = 512, current_itms_reset = 256;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -146,6 +146,6 @@ class Xou_history_itm_srl {
 		int listLen = list.Count();
 		for (int i = 0; i < listLen; i++)
 			((Xou_history_itm)list.Get_at(i)).Save(bb);
-		return bb.Xto_bry();
+		return bb.To_bry();
 	}
 }

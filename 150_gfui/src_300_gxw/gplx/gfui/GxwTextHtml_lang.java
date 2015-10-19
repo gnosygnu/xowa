@@ -159,8 +159,8 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 	}
 	public String Html_print() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add("selBgn=").Add(Int_.Xto_str(Html_sel_bgn())).Add_char_crlf();
-		sb.Add("selEnd=").Add(Int_.Xto_str(Html_sel_end())).Add_char_crlf();
+		sb.Add("selBgn=").Add(Int_.To_str(Html_sel_bgn())).Add_char_crlf();
+		sb.Add("selEnd=").Add(Int_.To_str(Html_sel_end())).Add_char_crlf();
 		sb.Add("selTxt=").Add(Html_sel_text()).Add_char_crlf();
 		KeyVal[] atrs = Html_sel_atrs();
 		for (int i = 0; i < atrs.length; i++) {

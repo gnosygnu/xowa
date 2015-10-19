@@ -20,5 +20,5 @@ public class Iterator_null implements java.util.Iterator {
 	public boolean hasNext() {return false;}
 	public Object next() {return null;}
 	public void remove() {}
-	public static final Iterator_null _ = new Iterator_null();
+	public static final Iterator_null Instance = new Iterator_null();
 }

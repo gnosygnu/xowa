@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import
 import gplx.core.net.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.files.origs.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 class Xows_cmd__file_check {
 	private Io_url tmp_dir;
 	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
@@ -40,7 +40,7 @@ class Xows_cmd__file_check {
 			Write_kv(bfr, "fsdb.atr_file", atr_main.Url());
 		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {Write_kv(bfr, "fsdb.orig", wiki.File__fsdb_core().File__orig_tbl_ary()[0].Conn().Conn_info().Xto_raw());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
-		Fsdb_sql_mkr sql_mkr = schema_1 ? Fsdb_sql_mkr__v1.I : Fsdb_sql_mkr__v2.I;
+		Fsdb_sql_mkr sql_mkr = schema_1 ? Fsdb_sql_mkr__v1.Instance : Fsdb_sql_mkr__v2.Instance;
 		String sql = "";
 		try {
 			Xof_orig_tbl orig_tbl = wiki.File__fsdb_core().File__orig_tbl_ary()[0];
@@ -96,10 +96,10 @@ class Xows_cmd__file_check {
 			byte[] bin_data = (byte[])row[bin_data_ordinal];
 			file_bry = gplx.xowa.files.repos.Xof_repo_itm_.Ttl_invalid_fsys_chars(tmp_bfr, file_bry);
 			Io_url bin_url = tmp_dir.GenSubFil(String_.new_u8(file_bry));
-			bin_url = tmp_dir.GenSubFil(bin_url.NameOnly() + "_" + Int_.Xto_str(owner_id) + bin_url.Ext());
+			bin_url = tmp_dir.GenSubFil(bin_url.NameOnly() + "_" + Int_.To_str(owner_id) + bin_url.Ext());
 			Write_kv(bfr, "fsdb.bin.export", bin_url.Raw());
 			Write_kv(bfr, "fsdb.bin.len", bin_data.length);
-			Io_mgr.I.SaveFilBry(bin_url, bin_data);
+			Io_mgr.Instance.SaveFilBry(bin_url, bin_data);
 		}
 	}
 	private static void Write_kv(Bry_bfr bfr, String key, Object val) {
@@ -115,7 +115,7 @@ class Xows_cmd__file_check {
 		bfr.Add_str_u8("------------------------------------------------------").Add_byte_nl();
 	}
 	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_file = Bry_.new_a7("file");
-        public static final Xows_cmd__file_check I = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
+        public static final Xows_cmd__file_check Instance = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
 }
 interface Fsdb_sql_mkr {
 	String Orig_by_ttl(byte[] ttl);
@@ -130,10 +130,10 @@ abstract class Fsdb_sql_mkr__base {
 class Fsdb_sql_mkr__v1 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM wiki_orig WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_xtn_thm WHERE thm_owner_id = {0};", id);}
-        public static final Fsdb_sql_mkr I = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
+        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
 }
 class Fsdb_sql_mkr__v2 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM orig_reg WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_thm WHERE thm_owner_id = {0};", id);}
-        public static final Fsdb_sql_mkr I = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
+        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
 }

@@ -33,7 +33,7 @@ class Gfo_i18n_itm {
 		synchronized (tmp_fmtr) {
 			tmp_fmtr.Fmt_(val);
 			tmp_fmtr.Bld_bfr_many(tmp_bfr, args);
-			rv = tmp_bfr.Xto_bry_and_clear();
+			rv = tmp_bfr.To_bry_and_clear();
 		}
 		return val_cmd == null ? rv : val_cmd.Process(src, key, rv);
 	}

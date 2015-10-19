@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.xowa.bldrs.xmls.*;
-import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_dumper_cmd implements Xob_cmd {
 	private final Xowe_wiki wiki; private final Gfo_usr_dlg usr_dlg;
 	private final Xob_xml_dumper xml_dumper = new Xob_xml_dumper(); private int commit_interval = 1000;
@@ -26,7 +26,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_util_xml_dump;}
 	public void Cmd_init(Xob_bldr bldr) {
 		dump_url = wiki.Fsys_mgr().Root_dir().GenSubFil(wiki.Domain_str() + "-dump.xml");
-		Io_mgr.I.DeleteFil(dump_url);
+		Io_mgr.Instance.DeleteFil(dump_url);
 	}
 	public void Cmd_run() {
 		usr_dlg.Plog_many("", "", Cmd_key() + ":bgn;");
@@ -52,7 +52,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 		usr_dlg.Plog_many("", "", Cmd_key() + ":end;");
 	}
 	private void Commit() {
-		Io_mgr.I.AppendFilStr(dump_url, xml_dumper.Bld_str());
+		Io_mgr.Instance.AppendFilStr(dump_url, xml_dumper.Bld_str());
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_end() {}

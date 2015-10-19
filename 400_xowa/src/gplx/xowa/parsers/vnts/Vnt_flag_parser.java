@@ -21,6 +21,10 @@ class Vnt_flag_parser implements gplx.core.brys.Bry_split_wkr {
 	private final Hash_adp_bry codes_regy = Vnt_flag_code_.Regy;
 	private Vnt_flag_code_mgr codes; private Vnt_flag_lang_mgr langs;
 	private Xol_vnt_regy vnt_regy;
+	private Vnt_log_mgr log_mgr;
+	public void Init(Vnt_log_mgr log_mgr) {
+		this.log_mgr = log_mgr;
+	}
 	public void Parse(Vnt_flag_code_mgr codes, Vnt_flag_lang_mgr langs, Xol_vnt_regy vnt_regy, byte[] src, int src_bgn, int src_end) {
 		this.codes = codes; this.langs = langs; this.vnt_regy = vnt_regy;
 		codes.Clear(); langs.Clear();
@@ -54,6 +58,7 @@ class Vnt_flag_parser implements gplx.core.brys.Bry_split_wkr {
 		if (flag_tid == -1) {	// try to find flags like "zh-hans", "zh-hant"; allow syntaxes like "-{zh-hans;zh-hant|XXXX}-"
 			Xol_vnt_itm vnt_itm = vnt_regy.Get_by(src, itm_bgn, itm_end);
 			if (vnt_itm == null) return Bry_split_.Rv__ok; // unknown flag; ignore
+			if (log_mgr != null) log_mgr.Log_lang(vnt_itm, Vnt_log_mgr.Scope__lang);
 			langs.Add(vnt_itm);
 			return Bry_split_.Rv__ok;
 		}

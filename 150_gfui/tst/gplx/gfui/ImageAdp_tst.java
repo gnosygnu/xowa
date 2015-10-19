@@ -34,13 +34,13 @@ public class ImageAdp_tst {
 	@Test  public void SaveAsBmp() {
 		img = ImageAdp_.file_(load);
 		Io_url save = load.GenNewNameOnly("strawberry_temp");
-		DateAdp beforeModifiedTime = Io_mgr.I.QueryFil(save).ModifiedTime();
+		DateAdp beforeModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
 		img.SaveAsBmp(save);
-		DateAdp afterModifiedTime = Io_mgr.I.QueryFil(save).ModifiedTime();
+		DateAdp afterModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
 		Tfds.Eq_true(CompareAble_.Is_more(afterModifiedTime, beforeModifiedTime));
 
-		String loadHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.I.OpenStreamRead(load));
-		String saveHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.I.OpenStreamRead(save));
+		String loadHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(load));
+		String saveHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(save));
 		Tfds.Eq(loadHash, saveHash);
 	}
 }

@@ -25,5 +25,5 @@ public class Double__tst {
 	}
 }
 class Double__fxt {
-	public void Test_Xto_str_loose(double v, String expd) {Tfds.Eq(expd, Double_.Xto_str_loose(v));}
+	public void Test_Xto_str_loose(double v, String expd) {Tfds.Eq(expd, Double_.To_str_loose(v));}
 }

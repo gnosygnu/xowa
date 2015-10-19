@@ -39,7 +39,7 @@ public class Gfo_qarg_mgr {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by(key);
 		return arg == null ? or : String_.new_u8(arg.Val_bry());
 	}
-	public void			Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_a7(Int_.Xto_str(val)));}
+	public void			Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_a7(Int_.To_str(val)));}
 	public void			Set_val_by_bry(byte[] key, byte[] val) {		
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by(key);
 		if (arg == null) {
@@ -68,13 +68,13 @@ public class Gfo_qarg_mgr {
 			Gfo_qarg_itm itm = Get_arg(key); if (itm == null) continue;
 			bfr.Add_byte(Byte_ascii.Amp).Add(itm.Key_bry()).Add_byte(Byte_ascii.Eq).Add(itm.Val_bry());
 		}
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public byte[] To_bry() {
 		int len = list.Count(); if (len == 0) return Bry_.Empty;
 		Bry_bfr bfr = Bry_bfr.new_();
 		To_bry(bfr, gplx.xowa.Xoa_app_.Utl__encoder_mgr().Href(), false);
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public void To_bry(Bry_bfr bfr, Url_encoder href_encoder, boolean encode) {
 		int len = list.Count(); if (len == 0) return;

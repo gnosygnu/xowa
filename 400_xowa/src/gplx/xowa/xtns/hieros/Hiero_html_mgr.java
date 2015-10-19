@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_html_mgr {		
 	private Bry_bfr html_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), content_bfr = Bry_bfr.reset_(255), tbl_content_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), temp_bfr = Bry_bfr.reset_(255);
 	private Xoh_wtr_ctx hctx;
@@ -102,7 +102,7 @@ class Hiero_html_mgr {
 			else
 				temp_bfr.Add(v);
 		}
-		byte[] prefab_bry = temp_bfr.Xto_bry_and_clear();
+		byte[] prefab_bry = temp_bfr.To_bry_and_clear();
 		Hiero_prefab_itm prefab_itm = prefab_mgr.Get_by_key(prefab_bry);
 		if (prefab_itm != null) {
 			byte[] td_height = wtr.Td_height(Resize_glyph(prefab_bry, cartouche_opened));
@@ -159,7 +159,7 @@ class Hiero_html_mgr {
 				byte[] td_height = wtr.Td_height(Resize_glyph(v, cartouche_opened, total));
 				temp_bfr.Add(Render_glyph(v, td_height));
 			}
-			wtr.Td(content_bfr, temp_bfr.Xto_bry_and_clear());
+			wtr.Td(content_bfr, temp_bfr.To_bry_and_clear());
 		}
 	}
 	private byte[] Render_glyph(byte[] src)						{return Render_glyph(src, Bry_.Empty);}

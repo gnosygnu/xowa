@@ -36,7 +36,7 @@ public class IptBndMgr implements SrlAble {
 		List_adp del = List_adp_.new_();
 		for (int i = 0; i < cfgs.Count(); i++) {
 			IptCfgPtr ptr = (IptCfgPtr)cfgs.Get_at(i);
-			IptCfg cfg = IptCfgRegy._.GetOrNew(ptr.CfgKey());
+			IptCfg cfg = IptCfgRegy.Instance.GetOrNew(ptr.CfgKey());
 			cfg.Owners_del(ptr.CfgKey());
 			for (IptBndHash list : regy) {
 				for (int j = 0; j < list.Count(); j++) {
@@ -134,7 +134,7 @@ public class IptBndMgr implements SrlAble {
 		if (evData.EventType() == IptEventType_.KeyDown) {
 			chainP = chainMgr.Process(evData.EventArg());
 			if (!String_.Eq(chainP, "") && itm == null)
-				UsrDlg_._.Note("cancelled... {0}", chainP);
+				UsrDlg_.Instance.Note("cancelled... {0}", chainP);
 		}
 		if (itm == null) {
 			return false;
@@ -148,7 +148,7 @@ public class IptBndMgr implements SrlAble {
 		return this;
 	}
 	IptArgChainMgr chainMgr = new IptArgChainMgr();
-	Ordered_hash hash = Ordered_hash_.new_(); IptEventType curTypes = IptEventType_.None;
+	Ordered_hash hash = Ordered_hash_.New(); IptEventType curTypes = IptEventType_.None;
 	public static IptBndMgr new_() {return new IptBndMgr();}
 	IptBndHash[] regy = new IptBndHash[8];
 	IptBndMgr() {ClearLists();}
@@ -206,7 +206,7 @@ class IptBndHash implements SrlAble {
 			((IptBndListItm)hash.Get_at(i)).Srl(m);
 		return this;
 	}
-	Ordered_hash hash = Ordered_hash_.new_();
+	Ordered_hash hash = Ordered_hash_.New();
 	public IptBndHash(IptEventType eventType) {this.eventType = eventType;}
 }
 class IptBndListItm implements SrlAble {
@@ -219,7 +219,7 @@ class IptBndListItm implements SrlAble {
 			IptBnd bnd = (IptBnd)list.Get_at(i);
 			try {bnd.Exec(evData);}
 			catch (Exception exc) {
-				UsrDlg_._.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.To_str(bnd)).Add("exc", Err_.Message_lang(exc)));
+				UsrDlg_.Instance.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.To_str(bnd)).Add("exc", Err_.Message_lang(exc)));
 				return false;
 			}
 			if (evData.CancelIteration) break;
@@ -248,7 +248,7 @@ class IptArgChainMgr {
 		}
 		active = hash;
 		activeKey = activeKey + arg.Key() + ",";
-		UsrDlg_._.Note("{0} pressed...", activeKey);
+		UsrDlg_.Instance.Note("{0} pressed...", activeKey);
 		return "";
 	}
 	public String ActiveKey() {return activeKey;}

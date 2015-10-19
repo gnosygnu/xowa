@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*;
-//	public class Xob_pagelinks_parser_tst {
+public class Xob_pagelinks_parser_tst {
 //		@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Ctor_fsys();} Db_mgr_fxt fxt = new Db_mgr_fxt();
 //		@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();} 
-//		@Test   public void Basic() {
+	@Test   public void Basic() {
 //			if (Xoa_test_.Db_skip()) return; 
 //			fxt.Init_db_sqlite();
 //			fxt.Wiki().Db_mgr_as_sql().Core_data_mgr().Db__cat_core().Tbl__cat_core().Create_tbl();
@@ -37,7 +37,7 @@ import org.junit.*;
 //			;
 //			Tst_ctg_hidden(Bool_.Y, 1, 3);
 //			Tst_ctg_hidden(Bool_.N, 2);
-//		}
+	}
 //		private void Init_ctgs(params int[] ctgs) {
 //			int len = ctgs.length;
 //			Xowd_cat_core_tbl tbl = fxt.Wiki().Db_mgr_as_sql().Core_data_mgr().Db__cat_core().Tbl__cat_core().Create_tbl();
@@ -55,7 +55,7 @@ import org.junit.*;
 //			for (int i = 0; i < len; i++) {
 //				int ctg_id = ctgs[i];
 //				Xowd_category_itm ctg_itm = tbl.Select(ctg_id);
-//				Tfds.Eq(expd_hidden, ctg_itm.Hidden(), Int_.Xto_str(ctg_id));
+//				Tfds.Eq(expd_hidden, ctg_itm.Hidden(), Int_.To_str(ctg_id));
 //			}
 //		}
-//	}
+}

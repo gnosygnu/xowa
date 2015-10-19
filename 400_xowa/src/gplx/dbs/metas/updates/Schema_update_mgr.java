@@ -25,7 +25,7 @@ public class Schema_update_mgr {
 			Schema_update_cmd cmd = (Schema_update_cmd)cmds.Get_at(i);
 			try {cmd.Exec(schema_mgr, conn);}
 			catch (Exception e) {
-				Gfo_usr_dlg_.I.Warn_many("", "", "failed to run update cmd; name=~{0} err=~{1}", cmd.Name(), Err_.Message_gplx_full(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to run update cmd; name=~{0} err=~{1}", cmd.Name(), Err_.Message_gplx_full(e));
 			}
 		}
 	}

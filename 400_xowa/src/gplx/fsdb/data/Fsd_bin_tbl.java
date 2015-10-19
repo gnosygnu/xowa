@@ -67,7 +67,7 @@ public class Fsd_bin_tbl implements RlsAble {
 		byte[] rv = Select(owner_id, url);
 		if (rv == null) return false;
 		if (saved_in_parts.Val_y()) return true;
-		Io_mgr.I.SaveFilBry(url, rv);
+		Io_mgr.Instance.SaveFilBry(url, rv);
 		return true;
 	}
 	private byte[] Select(int owner_id, Io_url url) {

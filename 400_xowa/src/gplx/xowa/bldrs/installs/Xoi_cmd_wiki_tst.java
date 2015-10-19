@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wms.*; import gplx.xowa.wms.dumps.*;
+import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
 //			Bld_import_list(Xow_domain_regy.All);
@@ -33,7 +33,7 @@ public class Xoi_cmd_wiki_tst {
 		Bry_fmtr_arg_time time_fmtr = new Bry_fmtr_arg_time();
 		for (int i = 0; i < ary_len; i++)
 			Bld_import_list_itm2(bfr, parser, time_fmtr, ary, i);
-		Io_mgr.I.SaveFilStr("C:\\temp.txt", bfr.Xto_str());
+		Io_mgr.Instance.SaveFilStr("C:\\temp.txt", bfr.To_str());
 	}
 	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
 		String domain_str = ary[i];
@@ -44,7 +44,7 @@ public class Xoi_cmd_wiki_tst {
 		String url = "https://dumps.wikimedia.org/" + wmf_key + "/latest";
 		byte[] latest_html = null;
 		for (int j = 0; j < 5; ++j) {
-			latest_html = Io_mgr.I.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(url);
+			latest_html = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(url);
 			if (latest_html != null) break;
 			Tfds.Write("fail|" + url);
 			if (j == 4) return;
@@ -57,11 +57,11 @@ public class Xoi_cmd_wiki_tst {
 		Wmf_latest_itm latest_itm = parser.Get_by(pages_articles_key);
 		bfr.Add(domain_bry).Add_byte_pipe();
 		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-		bfr.Add(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_type_id())).Add_byte_pipe();
+		bfr.Add(Xow_domain_tid_.Get_type_as_bry(domain_itm.Domain_type_id())).Add_byte_pipe();
 		long src_size = latest_itm.Size();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
 		bfr.Add_str(gplx.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
-		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).XferAry(bfr, 0);
+		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).Fmt__do(bfr);
 		bfr.Add_byte_pipe();
 		bfr.Add_str(latest_itm.Date().XtoStr_fmt_yyyy_MM_dd_HH_mm());
 		bfr.Add_byte_pipe();
@@ -87,9 +87,9 @@ public class Xoi_cmd_wiki_tst {
 			Tfds.WriteText(String_.Format("passed: {0}\n", itm));
 		bfr.Add_str(itm).Add_byte_pipe();
 		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-		bfr.Add(Xow_domain_type_.Get_type_as_bry(dump_file.Wiki_type().Wiki_tid())).Add_byte_pipe();
-//			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
-//			if (lang_itm == null) lang_itm = Xol_lang_itm_.Get_by_key(Xol_lang_.Key_en);	// commons, species, meta, etc will have no lang
+		bfr.Add(Xow_domain_tid_.Get_type_as_bry(dump_file.Wiki_type().Wiki_tid())).Add_byte_pipe();
+//			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key(wiki_type.Lang_key());
+//			if (lang_itm == null) lang_itm = Xol_lang_stub_.Get_by_key(Xol_lang_itm_.Key_en);	// commons, species, meta, etc will have no lang
 //			bfr.Add(lang_itm.Local_name()).Add_byte_pipe();
 //			bfr.Add(lang_itm.Canonical_name()).Add_byte_pipe();
 		long src_size = dump_file.File_len();
@@ -120,10 +120,10 @@ public class Xoi_cmd_wiki_tst {
 				api.Build_cfg(bfr, wiki);
 			}
 			catch (Exception e) {
-				Console_adp__sys.I.Write_str_w_nl(Err_.Message_gplx_full(e));
+				Console_adp__sys.Instance.Write_str_w_nl(Err_.Message_gplx_full(e));
 			}
 		}
 		bfr.Add_str_a7("app.bldr.wiki_cfg_bldr.run;").Add_byte_nl();
-		Io_mgr.I.SaveFilStr("C:\\xowa_build_cfg.gfs", bfr.Xto_str());
+		Io_mgr.Instance.SaveFilStr("C:\\xowa_build_cfg.gfs", bfr.To_str());
 	}
 }

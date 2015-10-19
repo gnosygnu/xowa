@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.xtns.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
 	@gplx.Internal protected Wdata_fmtr__toc_div	Fmtr_toc() {return fmtr_toc;} private final Wdata_fmtr__toc_div fmtr_toc = new Wdata_fmtr__toc_div();
@@ -77,7 +77,7 @@ public class Wdata_hwtr_mgr {
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, "", "", "", "", "", "", "");
 		bfr.Add_str_a7("</div>");
 		bfr.Add_str_a7("</div>");
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public byte[] Write(Wdata_doc wdoc) {
 		bfr.Add_str_a7("<div id='wb-item' class='wikibase-entityview wb-item' lang='en' dir='ltr'>");
@@ -85,7 +85,7 @@ public class Wdata_hwtr_mgr {
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, fmtr_toc, fmtr_claim, fmtr_slink, fmtr_label, fmtr_descr, fmtr_alias, fmtr_json);
 		bfr.Add_str_a7("</div>");
 		bfr.Add_str_a7("</div>");
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public static void Write_link_wikidata(Bry_bfr bfr, byte[] href, byte[] text) {
 		text = gplx.langs.htmls.Html_utl.Escape_html_as_bry(text);

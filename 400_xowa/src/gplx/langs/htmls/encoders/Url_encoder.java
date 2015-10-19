@@ -27,7 +27,7 @@ public class Url_encoder implements Url_encoder_interface {
 		Url_encoder_itm_hex hex = new Url_encoder_itm_hex(primary_encode_marker);
 		for (int i = 0; i < 256; i++) {
 			encode_ary[i] = hex;						// default encode to hex
-			decode_ary[i] = Url_encoder_itm_same._;		// default decode to same; needed for files; EX: A!%21.png -> A!!.png;
+			decode_ary[i] = Url_encoder_itm_same.Instance;		// default decode to same; needed for files; EX: A!%21.png -> A!!.png;
 		}
 		decode_ary[primary_encode_marker] = hex;
 	}
@@ -49,15 +49,15 @@ public class Url_encoder implements Url_encoder_interface {
 	}
 	public void Itms_raw_same_rng(int bgn, int end) {
 		for (int i = bgn; i <= end; i++) {
-			encode_ary[i] = Url_encoder_itm_same._;
-			decode_ary[i] = Url_encoder_itm_same._;
+			encode_ary[i] = Url_encoder_itm_same.Instance;
+			decode_ary[i] = Url_encoder_itm_same.Instance;
 		}
 	}
 	public Url_encoder Itms_raw_same_many(int... ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
-			encode_ary[ary[i]] = Url_encoder_itm_same._;
-			decode_ary[ary[i]] = Url_encoder_itm_same._;
+			encode_ary[ary[i]] = Url_encoder_itm_same.Instance;
+			decode_ary[ary[i]] = Url_encoder_itm_same.Instance;
 		}
 		return this;
 	}
@@ -75,20 +75,20 @@ public class Url_encoder implements Url_encoder_interface {
 		synchronized (thread_lock) {
 			tmp_bfr.Add(Io_url.Http_file_bry);
 			Encode(tmp_bfr, url.RawBry());
-			return tmp_bfr.Xto_bry_and_clear();
+			return tmp_bfr.To_bry_and_clear();
 		}
 	}
 	public String Encode_str(String str)					{
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_str_and_clear();
+			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.To_str_and_clear();
 		}
 	}
 	public byte[] Encode_bry(String str)					{
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();
+			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.To_bry_and_clear();
 		}
 	}
-	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();}
+	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.To_bry_and_clear();}
 	public Bry_bfr Encode(Bry_bfr bfr, byte[] bry)	{Encode(bfr,	 bry, 0, bry.length); return bfr;}
 	public void Encode(Bry_bfr bfr, byte[] bry, int bgn, int end) {
 		synchronized (thread_lock) {
@@ -106,15 +106,15 @@ public class Url_encoder implements Url_encoder_interface {
 	}
 	public String Decode_str(String str) {
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_u8(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
+			byte[] bry = Bry_.new_u8(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.To_str_and_clear();
 		}
 	}
 	public byte[] Decode(byte[] bry)								{return Decode(tmp_bfr, bry,   0, bry.length);}
 	public byte[] Decode(byte[] bry, int bgn, int end)				{return Decode(tmp_bfr, bry, bgn,        end);}
-	public byte[] Decode(Bry_bfr bfr, byte[] bry, int bgn, int end)	{Decode(bry, bgn,        end, bfr    , false); return bfr.Xto_bry_and_clear();}
+	public byte[] Decode(Bry_bfr bfr, byte[] bry, int bgn, int end)	{Decode(bry, bgn,        end, bfr    , false); return bfr.To_bry_and_clear();}
 	public byte[] Decode_lax(byte[] bry) {
 		synchronized (thread_lock) {
-			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
+			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.To_bry_and_clear();
 		}
 	}
 	public void Decode(byte[] bry, int bgn, int end, Bry_bfr bfr, boolean fail_when_invalid) {
@@ -145,7 +145,7 @@ public class Url_encoder implements Url_encoder_interface {
 		mediawiki_base(rv, true);
 		rv.Itms_decode_marker(Byte_ascii.Dot);
 		rv.Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);
-		rv.Itms_raw_html_ent(Byte_ascii.Amp, Xop_amp_trie._);
+		rv.Itms_raw_html_ent(Byte_ascii.Amp, Xop_amp_trie.Instance);
 		return rv;
 	}
 	public static Url_encoder new_http_url_() {
@@ -230,7 +230,7 @@ interface Url_encoder_itm {
 class Url_encoder_itm_same implements Url_encoder_itm {
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {bfr.Add_byte(b); return 0;}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {bfr.Add_byte(b); return 0;}
-	public static final Url_encoder_itm _ = new Url_encoder_itm_same();
+	public static final Url_encoder_itm Instance = new Url_encoder_itm_same();
 } 
 class Url_encoder_itm_diff implements Url_encoder_itm {
 	public Url_encoder_itm_diff(byte orig, byte repl) {this.orig = orig; this.repl = repl;} private byte orig, repl;
@@ -254,14 +254,14 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 				return 0;
 			}
 		}
-		int hex_val = Int_.Xto_int_hex(src[idx + 1]);
+		int hex_val = Int_.To_int_hex(src[idx + 1]);
 		if (hex_val == -1) {	// invalid hex byte; EX: %GC; DATE:2014-04-10
 			bfr.Add_byte(b);
 			return 0;
 		}
 		int v_0 = hex_val * 16;
 		if (v_0 != -1) {
-			int v_1 = Int_.Xto_int_hex(src[idx + 2]);
+			int v_1 = Int_.To_int_hex(src[idx + 2]);
 			if (v_1 != -1) {
 				bfr.Add_byte((byte)(v_0 + v_1));
 				return 2;

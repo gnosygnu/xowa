@@ -32,7 +32,7 @@ public class Xop_xnde_wkr__xatrs_tst {
 		fxt.Test_parse_page_all_str("<span style='color:red' style='color:green' style='color:blue'>a</span>"	, "<span style='color:blue'>a</span>");		// three
 	}
 	@Test  public void Non_ws() {			// PURPOSE: <br$2/> is valid; symbols function as ws
-		fxt.Init_log_(Xop_xatr_parser.Log_invalid_atr).Test_parse_page_wiki("<br$2/>"	, fxt.tkn_xnde_(0, 7).Atrs_rng_(3, 5));
+		fxt.Test_parse_page_wiki("<br$2/>"	, fxt.tkn_xnde_(0, 7).Atrs_rng_(3, 5));
 	}
 	@Test  public void Invalid() {			// PURPOSE: make sure brx does not match br
 		fxt.Test_parse_page_wiki("<brx/>"	, fxt.tkn_bry_(0, 1), fxt.tkn_txt_(1, 6));

@@ -30,7 +30,7 @@ public interface String_bldr {
 	String_bldr Add_str_w_crlf(String v);
 	String_bldr Add_spr_unless_first(String s, String spr, int i);
 	String_bldr Clear();
-	String Xto_str_and_clear();
+	String To_str_and_clear();
 	String To_str();
 	int Count();
 	String_bldr Add(byte[] v);
@@ -70,7 +70,7 @@ abstract class String_bldr_base implements String_bldr {
 		return this;
 	}
 	public String_bldr Clear() {Del(0, Count()); return this;}
-	public String Xto_str_and_clear() {
+	public String To_str_and_clear() {
 		String rv = To_str();
 		Clear();
 		return rv;

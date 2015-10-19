@@ -25,7 +25,7 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 		Xoae_app app = install_mgr.App(); Gfui_kit kit = app.Gui_mgr().Kit();
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(wiki_key));
 		Io_url wiki_dir = wiki.Import_cfg().Src_dir();
-		Io_url[] urls = Io_mgr.I.QueryDir_args(wiki_dir).Recur_(false).FilPath_("*.xml.bz2").ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.Instance.QueryDir_args(wiki_dir).Recur_(false).FilPath_("*.xml.bz2").ExecAsUrlAry();
 		if (urls.length == 0) {
 			kit.Ask_ok(GRP_KEY, "dump.unzip_latest.file_missing", "Could not find a dump file for ~{0} in ~{1}", wiki_key, wiki_dir.Raw());
 			return Gfo_thread_cmd_.Init_cancel_step;
@@ -35,10 +35,10 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 		super.Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz(), src, trg);
 		this.Term_cmd_for_src_(Term_cmd_for_src_move);
 		this.Term_cmd_for_src_url_(app.Fsys_mgr().Wiki_dir().GenSubFil_nest("#dump", "done", src.NameAndExt()));
-		if (Io_mgr.I.ExistsFil(trg)) {
+		if (Io_mgr.Instance.ExistsFil(trg)) {
 			int rslt = kit.Ask_yes_no_cancel(GRP_KEY, "target_exists", "Target file already exists: '~{0}'.\nDo you want to delete it?", trg.Raw());
 			switch (rslt) {
-				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.I.DeleteFil(trg); break;
+				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.Instance.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
 				default:						throw Err_.new_unhandled(rslt);

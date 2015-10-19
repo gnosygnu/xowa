@@ -19,7 +19,7 @@ package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 class Imap_parser {
-	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
+	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private byte[] imap_img_src;
 	private Imap_itm_img imap_img;
 	private Imap_itm_dflt imap_dflt;
@@ -92,7 +92,7 @@ class Imap_parser {
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
-		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_bgn, itm_end));
+		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn));
 		switch (tid_desc) {
 			case Imap_desc_tid.Tid_null: return Add_err(Bool_.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;

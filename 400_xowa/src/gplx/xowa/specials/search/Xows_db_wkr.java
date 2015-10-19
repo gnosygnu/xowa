@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.langs.cases.*;
 import gplx.gfui.*;
 class Xows_db_wkr {
@@ -77,7 +77,7 @@ class Xows_db_wkr {
 				int page_ns = rdr.Read_int(page_tbl.Fld_page_ns());
 				if (!qry.Ns_mgr().Has(page_ns)) continue;						// ignore: ns doesn't match
 				byte[] page_ttl = rdr.Read_bry_by_str(page_tbl.Fld_page_title());
-				// Io_mgr.I.AppendFilStr("C:\\temp.txt", String_.new_u8(word.Text()) + "|" + Int_.Xto_str(page_ns) + "|" + String_.new_u8(page_ttl) + "\n");
+				// Io_mgr.Instance.AppendFilStr("C:\\temp.txt", String_.new_u8(word.Text()) + "|" + Int_.To_str(page_ns) + "|" + String_.new_u8(page_ttl) + "\n");
 				byte[] page_ttl_lc = case_mgr.Case_build_lower(Xoa_ttl.Replace_unders(page_ttl));
 				byte[][] page_ttl_words = Bry_split_.Split(page_ttl_lc, Byte_ascii.Space, Bool_.Y);
 				if (!matcher.Matches(page_ttl_lc, page_ttl_words)) continue;	// ignore: ttl doesn't match matcher

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
+import gplx.xowa.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = Bry_.Empty;
 	public byte[] Group() {return group;} private byte[] group = Bry_.Empty;
 	public byte[] Follow() {return follow;} private byte[] follow = Bry_.Empty;
@@ -32,18 +32,18 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
 	public Xop_root_tkn Body() {return body;} private Xop_root_tkn body;
 	public boolean Exists_in_lnki_title() {return exists_in_lnki_title;} public Ref_nde Exists_in_lnki_title_(boolean v) {exists_in_lnki_title = v; return this;} private boolean exists_in_lnki_title;
-	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
-		if (xatr_key_obj == null) return;
-		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
-		switch (xatr_key.Val()) {
-			case Xatr_id_name:		name = wiki.Appe().Sanitizer().Escape_id(xatr.Val_as_bry(src)); break;
-			case Xatr_id_follow:	follow = xatr.Val_as_bry(src); break;
-			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
+	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
+		if (xatr_id_obj == null) return;
+		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		switch (xatr_id.Val()) {
+			case Xatr_id_name:		name = wiki.Appe().Sanitizer().Escape_id(xatr.Val_as_bry()); break;
+			case Xatr_id_follow:	follow = xatr.Val_as_bry(); break;
+			case Xatr_id_group:		group = xatr.Val_as_bry(); break;
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
-		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
+		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
 			body = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		byte[] references_group = ctx.References_group();	// set by <references>
@@ -72,8 +72,8 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		related[related_len] = itm;
 		related_len = new_len;
 	}
-	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
 	public static final int Idx_minor_follow = -2;
+	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name))
 	.Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group))

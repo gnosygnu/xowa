@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Byte_obj_val {
 	public byte Val() {return val;} private byte val;
-	@Override public String toString() {return Int_.Xto_str(val);}
+	@Override public String toString() {return Int_.To_str(val);}
 	@Override public int hashCode() {return val;}
 	@Override public boolean equals(Object obj) {return obj == null ? false : val == ((Byte_obj_val)obj).Val();}
         public static Byte_obj_val new_(byte val) {

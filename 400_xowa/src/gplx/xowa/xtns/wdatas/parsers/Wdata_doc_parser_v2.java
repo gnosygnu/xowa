@@ -28,7 +28,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_sitelinks)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			Ordered_hash rv = Ordered_hash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_sitelink.Dict;
 			for (int i = 0; i < list_len; ++i) {
@@ -56,7 +56,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 		try {
 			byte[] langval_key = label_or_description ? Bry_labels : Bry_descriptions;
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			Ordered_hash rv = Ordered_hash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {
@@ -82,7 +82,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			Ordered_hash rv = Ordered_hash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {

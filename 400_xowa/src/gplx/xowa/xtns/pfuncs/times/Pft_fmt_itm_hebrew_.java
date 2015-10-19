@@ -214,7 +214,7 @@ class Pft_fmt_itm_hebrew_ {
 	};
 	public static String Calc_hebrew_numeral(int num) {
 		if (num > 9999 || num <= 0)
-			return Int_.Xto_str(num);
+			return Int_.To_str(num);
 		
 		String tmp = "";
 		int pow10 = 1000; 

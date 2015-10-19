@@ -32,9 +32,9 @@ public class PoolIds {
 		return rv;
 	}
 	public int FetchNextAndCommit(String dbInfo, String url) {
-		Db_conn conn = Db_conn_pool.I.Get_or_new(dbInfo);
-		int rv = PoolIds._.FetchNext(conn, url);
-		PoolIds._.Commit(conn, url, rv + 1);
+		Db_conn conn = Db_conn_pool.Instance.Get_or_new(dbInfo);
+		int rv = PoolIds.Instance.FetchNext(conn, url);
+		PoolIds.Instance.Commit(conn, url, rv + 1);
 		return rv;
 	}
 	public void Commit(Db_conn conn, String url, int val) {
@@ -47,5 +47,5 @@ public class PoolIds {
 	public static final String Tbl_Name					= "pool_ids";
 	@gplx.Internal protected static final String Fld_id_path				= "id_path";
 	@gplx.Internal protected static final String Fld_id_next_id			= "id_next_id";
-	public static final PoolIds _ = new PoolIds(); PoolIds() {}
+	public static final PoolIds Instance = new PoolIds(); PoolIds() {}
 }

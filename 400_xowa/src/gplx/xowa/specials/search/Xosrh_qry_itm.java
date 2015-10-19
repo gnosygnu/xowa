@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.*;
 class Xosrh_qry_itm {
 	public Xosrh_qry_itm(byte tid, byte[] word, Xosrh_qry_itm lhs, Xosrh_qry_itm rhs) {
 		this.tid = tid; this.word = word; this.lhs = lhs; this.rhs = rhs;
@@ -29,7 +29,7 @@ class Xosrh_qry_itm {
 	public String Xto_str(byte[] src) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xto_str_bld(src, bfr);
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public Xosrh_qry_ids Matches(byte[] src) {
 		switch (tid) {
@@ -74,7 +74,7 @@ class Xosrh_qry_itm {
 				ids = Search_word(wiki, cancelable, tmp_bfr, ns_mgr, word, results_max);
 				break;
 			case Xosrh_qry_itm.Tid_word_quote:
-				Ordered_hash tmp_search_list = Ordered_hash_.new_();
+				Ordered_hash tmp_search_list = Ordered_hash_.New();
 				byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split_ttl_into_words(wiki.Lang(), tmp_search_list, tmp_bfr, word);
 				int words_len = words.length;
 				List_adp prv_list = null;
@@ -182,7 +182,7 @@ class Xosrh_qry_itm {
 		}
 		tmp_hash.Clear();
 		return rv;
-	}	static Ordered_hash tmp_hash = Ordered_hash_.new_();
+	}	static Ordered_hash tmp_hash = Ordered_hash_.New();
 	List_adp Evaluate_not_found(String msg, Object... args) {
 		return null;
 	}

@@ -31,11 +31,11 @@ import gplx.core.criterias.*;
 public class IoEngine_system extends IoEngine_base {
 	@Override public String Key() {return IoEngine_.SysKey;}
 	@Override public void DeleteDirDeep(IoEngine_xrg_deleteDir args) {utl.DeleteDirDeep(this, args.Url(), args);}
-	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
+	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void XferFil(IoEngine_xrg_xferFil args) {utl.XferFil(this, args);}
 	@Override public IoItmDir QueryDirDeep(IoEngine_xrg_queryDir args) {return utl.QueryDirDeep(this, args);}
 	@Override public void CopyDir(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.copy_(src, trg).Recur_().Exec();}
-	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
+	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void DeleteFil_api(IoEngine_xrg_deleteFil args) {
 		Io_url url = args.Url();
 		File fil = Fil_(url);	
@@ -98,14 +98,14 @@ public class IoEngine_system extends IoEngine_base {
 	}
 	@SuppressWarnings("resource") public static String Load_from_stream_as_str(InputStream stream, String url_str) {
 		InputStreamReader reader = null;
-		try 	{reader = new InputStreamReader(stream, IoEngineArgs._.LoadFilStr_Encoding);}
+		try 	{reader = new InputStreamReader(stream, IoEngineArgs.Instance.LoadFilStr_Encoding);}
 		catch 	(UnsupportedEncodingException e) {
 			Closeable_close(stream, url_str, false);
-			throw Err_text_unsupported_encoding(IoEngineArgs._.LoadFilStr_Encoding, "", url_str, e);
+			throw Err_text_unsupported_encoding(IoEngineArgs.Instance.LoadFilStr_Encoding, "", url_str, e);
 		}
 		
 		// make other objects
-	    char[] readerBuffer = new char[IoEngineArgs._.LoadFilStr_BufferSize];
+	    char[] readerBuffer = new char[IoEngineArgs.Instance.LoadFilStr_BufferSize];
 	    int pos = 0;
 	    StringWriter sw = new StringWriter();
 	    
@@ -135,7 +135,7 @@ public class IoEngine_system extends IoEngine_base {
 		File dir = new File(url.Xto_api());
 		if (!dir.exists()) return;
 		boolean rv = dir.delete();
-		if (!rv) throw Err_.new_(IoEngineArgs._.Err_IoException, "delete dir failed", "url", url.Xto_api());
+		if (!rv) throw Err_.new_(IoEngineArgs.Instance.Err_IoException, "delete dir failed", "url", url.Xto_api());
 	}
 	@Override public IoItmDir QueryDir(Io_url url) {
 		IoItmDir rv = IoItmDir_.scan_(url);
@@ -185,7 +185,7 @@ public class IoEngine_system extends IoEngine_base {
 				if (!Op_sys.Cur().Tid_is_drd())
 					IoEngine_system_xtn.SetWritable(f, true);
 			}
-			if (!rv) throw Err_.new_(IoEngineArgs._.Err_IoException, "set file attribute failed", "attribute", "readOnly", "cur", Fil_ReadOnly(f), "new", atr.ReadOnly(), "url", url.Xto_api());
+			if (!rv) throw Err_.new_(IoEngineArgs.Instance.Err_IoException, "set file attribute failed", "attribute", "readOnly", "cur", Fil_ReadOnly(f), "new", atr.ReadOnly(), "url", url.Xto_api());
 		}
 		if (atr.Hidden() != f.isHidden()) {
 			//Runtime.getRuntime().exec("attrib +H myHiddenFile.java");			
@@ -265,7 +265,7 @@ public class IoEngine_system extends IoEngine_base {
 			long pos = 0, count = 0, read = 0;
 			try 	{count = srcChannel.size();}
 			catch 	(IOException e) {throw Err_.new_exc(e, "io", "size failed", "src", srcUrl.Xto_api());}
-			int totalBufferSize = IoEngineArgs._.LoadFilStr_BufferSize;
+			int totalBufferSize = IoEngineArgs.Instance.LoadFilStr_BufferSize;
 			long transferSize = (count > totalBufferSize) ? totalBufferSize : count;	// transfer as much as fileSize, but limit to LoadFilStr_BufferSize 
 			while 	(pos < count) {
 				try 	{read = trgChannel.transferFrom(srcChannel, pos, transferSize);}
@@ -389,7 +389,7 @@ public class IoEngine_system extends IoEngine_base {
 		java.net.URL src_url = null;
 		HttpURLConnection src_conn = null;
 		if (user_agent_needs_resetting) {user_agent_needs_resetting = false; System.setProperty("http.agent", "");}
-		boolean exists = Io_mgr.I.ExistsDir(xrg.Trg().OwnerDir());
+		boolean exists = Io_mgr.Instance.ExistsDir(xrg.Trg().OwnerDir());
 		Gfo_usr_dlg prog_dlg = null;
 		String src_str = xrg.Src();
 		Io_download_fmt xfer_fmt = xrg.Download_fmt();
@@ -402,7 +402,7 @@ public class IoEngine_system extends IoEngine_base {
 			return false;
 		}
 		try {
-			trg_stream = Io_mgr.I.OpenStreamWrite(xrg.Trg());
+			trg_stream = Io_mgr.Instance.OpenStreamWrite(xrg.Trg());
 			src_url = new java.net.URL(src_str);
 			src_conn = (HttpURLConnection)src_url.openConnection();
 //			src_conn.setReadTimeout(5000);	// do not set; if file does not exist, will wait 5 seconds before timing out; want to fail immediately
@@ -414,7 +414,7 @@ public class IoEngine_system extends IoEngine_base {
 			if (xrg.Exec_meta_only()) return true;
 	        src_stream = new java.io.BufferedInputStream(src_conn.getInputStream());
 	        if (!exists) {
-	        	Io_mgr.I.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
+	        	Io_mgr.Instance.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
 	        }
     		byte[] download_bfr = new byte[Download_bfr_len];	// NOTE: download_bfr was originally member variable; DATE:2013-05-03
     		xfer_fmt.Bgn(content_length);
@@ -423,7 +423,7 @@ public class IoEngine_system extends IoEngine_base {
     			if (xrg.Prog_cancel()) {
     				src_stream.close();
     				trg_stream.Rls();
-    				Io_mgr.I.DeleteFil(xrg.Trg());
+    				Io_mgr.Instance.DeleteFil(xrg.Trg());
     			}
     			xfer_fmt.Prog(count);
     			trg_stream.Write(download_bfr, 0, count);
@@ -467,7 +467,7 @@ public class IoEngine_system extends IoEngine_base {
 	}	Io_url session_fil; Bry_bfr prog_fmt_bfr;
 		byte[] download_bfr; static final int Download_bfr_len = Io_mgr.Len_kb * 128;
 	public static Err Err_Fil_NotFound(Io_url url) {
-		return Err_.new_(IoEngineArgs._.Err_FileNotFound, "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();
+		return Err_.new_(IoEngineArgs.Instance.Err_FileNotFound, "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();
 	}
 	public static Err Err_Fil_NotFound(Exception e, Io_url url) {
 		return Err_.new_exc(e, "io", "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();
@@ -475,7 +475,7 @@ public class IoEngine_system extends IoEngine_base {
 	void MarkFileWritable(File fil, Io_url url, boolean readOnlyFails, String op) {	
 		if (Fil_ReadOnly(fil)) {
 			if (readOnlyFails)	// NOTE: java will always allow final files to be deleted; programmer api is responsible for check
-				throw Err_.new_(IoEngineArgs._.Err_ReadonlyFileNotWritable, "writable operation attempted on readOnly file", "op", op, "url", url.Xto_api());
+				throw Err_.new_(IoEngineArgs.Instance.Err_ReadonlyFileNotWritable, "writable operation attempted on readOnly file", "op", op, "url", url.Xto_api());
 			else
 				Fil_Writable(fil);
 		}
@@ -483,7 +483,7 @@ public class IoEngine_system extends IoEngine_base {
 	void DeleteFil_lang(File fil, Io_url url) {	
 		boolean rv = Fil_Delete(fil);
 		if (!rv)
-			throw Err_.new_(IoEngineArgs._.Err_IoException, "file not deleted", "url", url.Xto_api());
+			throw Err_.new_(IoEngineArgs.Instance.Err_IoException, "file not deleted", "url", url.Xto_api());
 	}
 	IoEngineUtl utl = IoEngineUtl.new_();
 	public static IoEngine_system new_() {return new IoEngine_system();} IoEngine_system() {}
@@ -496,7 +496,7 @@ class IoEngineArgs {
 	public String	Err_ReadonlyFileNotWritable = "gplx.ios.ReadonlyFileNotWritable";
 	public String	Err_FileNotFound 			= "gplx.ios.FileNotFound";
 	public String	Err_IoException				= "gplx.ios.IoException";
-	public static final IoEngineArgs _ = new IoEngineArgs();
+	public static final IoEngineArgs Instance = new IoEngineArgs();
 }
 class IoEngine_system_xtn {
 	// PATCH.DROID:VerifyError if file.setExecutable is referenced directly in IoEngine_system. However, if placed in separate class
@@ -513,10 +513,10 @@ class Io_download_http {
 		Io_stream_rdr_http rdr = new Io_stream_rdr_http(xrg); 
 		IoStream trg_stream = null;
 		try {			
-			boolean exists = Io_mgr.I.ExistsDir(xrg.Trg().OwnerDir());
+			boolean exists = Io_mgr.Instance.ExistsDir(xrg.Trg().OwnerDir());
 		    if (!exists)
-		    	Io_mgr.I.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
-		    trg_stream = Io_mgr.I.OpenStreamWrite(xrg.Trg());
+		    	Io_mgr.Instance.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
+		    trg_stream = Io_mgr.Instance.OpenStreamWrite(xrg.Trg());
 		    byte[] bfr = new byte[Download_bfr_len];
 		    rdr.Open();
 		    while (rdr.Read(bfr, 0, Download_bfr_len) != Read_done) {		    	
@@ -527,7 +527,7 @@ class Io_download_http {
 			if (trg_stream != null) trg_stream.Rls();
 		}
 		if (xrg.Rslt() != IoEngine_xrg_downloadFil.Rslt_pass)
-			Io_mgr.I.DeleteFil_args(xrg.Trg()).MissingFails_off().Exec();
+			Io_mgr.Instance.DeleteFil_args(xrg.Trg()).MissingFails_off().Exec();
 	}
 	public static final int Read_done = -1;
 	public static final int Download_bfr_len = Io_mgr.Len_kb * 128;

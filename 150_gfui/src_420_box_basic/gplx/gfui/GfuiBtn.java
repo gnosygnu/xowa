@@ -34,23 +34,23 @@ public class GfuiBtn extends GfuiElemBase {
 		Object o = GfoInvkAble_.InvkCmd(UnderElem(), Invk_btn_img);
 		return o == UnderElem() ? null : (ImageAdp)o;	// NOTE: lgc guard
 	}	public GfuiBtn Btn_img_(ImageAdp v) {GfoInvkAble_.InvkCmd_val(UnderElem(), Invk_btn_img_, v); return this;}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.control_();}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.control_();}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		focusBorder = GfuiBorderMgr.new_().All_(PenAdp_.new_(ColorAdp_.Gray, 1));
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.TextMgr().AlignH_(GfuiAlign_.Mid);
 		this.Border().All_(PenAdp_.black_()); this.Border().Bounds_sync(RectAdp_.size_(this.Size().Op_subtract(1)));
 		GfuiBtn_.FocusBorderRect_set(focusBorder, this);
-		Inject_(GfuiBtnClickBnd._);
-		Inject_(GfuiFocusXferBnd._);
+		Inject_(GfuiBtnClickBnd.Instance);
+		Inject_(GfuiFocusXferBnd.Instance);
 		this.CustomDraw_set(true);
 	}
 	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		this.kit = kit;
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		focusBorder = GfuiBorderMgr.new_().All_(PenAdp_.new_(ColorAdp_.Gray, 1));
-		Inject_(GfuiBtnClickBnd._);
-		Inject_(GfuiFocusXferBnd._);
+		Inject_(GfuiBtnClickBnd.Instance);
+		Inject_(GfuiFocusXferBnd.Instance);
 	}	Gfui_kit kit;
 	@gplx.Internal protected static void DoThis(GfuiElem click, GfoMsg clickMsg, GfoInvkAbleCmd clickInvkCmd) {
 		try {
@@ -61,9 +61,9 @@ public class GfuiBtn extends GfuiElemBase {
 			else if (clickMsg != null && clickMsg != GfoMsg_.Null) {
 				GfsCtx ctx = GfsCtx.new_().MsgSrc_(click);
 				if (String_.Eq(clickMsg.Key(), "."))
-					GfsCore._.ExecOne_to(ctx, click, clickMsg.Subs_getAt(0));
+					GfsCore.Instance.ExecOne_to(ctx, click, clickMsg.Subs_getAt(0));
 				else
-					GfsCore._.ExecOne(ctx, clickMsg);
+					GfsCore.Instance.ExecOne(ctx, clickMsg);
 			}
 		}	catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));}
 	}

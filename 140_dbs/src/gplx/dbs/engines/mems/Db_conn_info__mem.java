@@ -29,5 +29,5 @@ public class Db_conn_info__mem extends Db_conn_info__base {
 		, "database", database
 		));
 	}
-        public static final Db_conn_info__mem I = new Db_conn_info__mem(); Db_conn_info__mem() {}
+        public static final Db_conn_info__mem Instance = new Db_conn_info__mem(); Db_conn_info__mem() {}
 }

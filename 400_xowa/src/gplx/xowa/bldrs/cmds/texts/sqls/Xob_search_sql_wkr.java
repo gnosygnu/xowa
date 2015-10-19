@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; impo
 import gplx.ios.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {			// search version 2
 	private Xowd_db_mgr db_mgr; private Xowd_search_link_tbl search_page_tbl; private Xowd_search_word_tbl search_word_tbl;
 	private int search_id = 0; private byte[] prv_word = Bry_.Empty; private int page_count;
@@ -58,7 +58,7 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 }
 class Xob_search_wkr extends Xob_itm_basic_base implements Xobd_wkr {
 	private Xowd_db_file search_db; private Xowd_search_temp_tbl search_temp_tbl;
-	private Xol_lang lang; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255); private final Ordered_hash list = Ordered_hash_.new_bry_();
+	private Xol_lang_itm lang; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255); private final Ordered_hash list = Ordered_hash_.New_bry();
 	public String Wkr_key() {return Xob_cmd_keys.Key_text_search_wkr;}
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {

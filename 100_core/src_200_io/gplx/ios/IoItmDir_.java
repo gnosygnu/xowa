@@ -37,7 +37,7 @@ public class IoItmDir_ {
 		return rv;
 	}
 	public static void Make(IoItmDir dir) {
-		Io_mgr.I.CreateDir(dir.Url());
+		Io_mgr.Instance.CreateDir(dir.Url());
 		int len = dir.SubDirs().Count();
 		for (int i = 0; i < len; ++i) {
 			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
@@ -48,8 +48,8 @@ public class IoItmDir_ {
 			IoItmFil sub_fil = (IoItmFil)dir.SubFils().Get_at(i);
 			String text = String_.Repeat("a", (int)sub_fil.Size());
 			Io_url sub_url = sub_fil.Url();
-			Io_mgr.I.SaveFilStr(sub_url, text);
-			Io_mgr.I.UpdateFilModifiedTime(sub_url, sub_fil.ModifiedTime());
+			Io_mgr.Instance.SaveFilStr(sub_url, text);
+			Io_mgr.Instance.UpdateFilModifiedTime(sub_url, sub_fil.ModifiedTime());
 		}
 	}
 }

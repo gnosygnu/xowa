@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.pages.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.funcs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.miscs.*;
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
@@ -49,7 +49,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	}
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		boolean rv = false;
-		Xot_defn defn = tmpl_defn; Xowe_wiki wiki = ctx.Wiki(); Xol_lang lang = wiki.Lang();
+		Xot_defn defn = tmpl_defn; Xowe_wiki wiki = ctx.Wiki(); Xol_lang_itm lang = wiki.Lang();
 		byte[] name_ary = defn.Name(), argx_ary = Bry_.Empty; Arg_itm_tkn name_key_tkn = name_tkn.Key_tkn();
 		byte[] name_ary_orig = Bry_.Empty;
 		int name_bgn = 0, name_ary_len = 0; 
@@ -61,7 +61,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				if (defn_tid == Xot_defn_.Tid_subst)
 					name_tkn_bfr.Add(Get_first_subst_itm(lang.Kwd_mgr()));
 				name_tkn.Tmpl_evaluate(ctx, src, caller, name_tkn_bfr);
-				name_ary = name_tkn_bfr.Xto_bry_and_clear();
+				name_ary = name_tkn_bfr.To_bry_and_clear();
 			}
 			else													// tmpl is static; note that dat_ary is still valid but rest of name may not be; EX: {{subst:name{{{1}}}}}
 				name_ary = Bry_.Mid(src, name_key_tkn.Dat_bgn(), name_key_tkn.Dat_end());
@@ -99,7 +99,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (ns_eval != null && !template_prefix_found)									// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
 				return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 
-			Xol_func_name_itm finder = lang.Func_regy().Find_defn(name_ary, name_bgn, name_ary_len);
+			Xol_func_itm finder = lang.Func_regy().Find_defn(name_ary, name_bgn, name_ary_len);
 			defn = finder.Func();
 			int colon_pos = -1;
 			switch (finder.Tid()) {
@@ -110,7 +110,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						bfr.Add_byte(Byte_ascii.Pipe);						// add |
 						bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());		// add entire arg; "k=v"; note that src must be added, not evaluated, else <nowiki> may be dropped and cause stack overflow; PAGE:ru.w:Близкие_друзья_(Сезон_2) DATE:2014-10-21
 					}
-					Xot_fmtr_prm._.Print(bfr);
+					Xot_fmtr_prm.Instance.Print(bfr);
 					bfr.Add(Xop_curly_end_lxr.Hook);
 					return true;				// NOTE: nothing else to do; return
 				case Xot_defn_.Tid_safesubst:
@@ -253,7 +253,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				Bry_bfr rslt_bfr = wiki.Utl__bfr_mkr().Get_k004();
 				try {
 					Bld_key(invk_tmpl, name_ary, rslt_bfr);
-					byte[] rslt_key = rslt_bfr.Xto_bry_and_clear();
+					byte[] rslt_key = rslt_bfr.To_bry_and_clear();
 					Object o = wiki.Cache_mgr().Tmpl_result_cache().Get_by(rslt_key);
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(bfr);
 					if (o != null) {
@@ -265,11 +265,11 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
-							byte[] tmp_src = rslt_bfr.Xto_bry_and_clear();
+							byte[] tmp_src = rslt_bfr.To_bry_and_clear();
 							rslt_bfr.Add(wiki.Parser_mgr().Main().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
 						}
 						if (Cache_enabled) {
-							byte[] rslt_val = rslt_bfr.Xto_bry_and_clear();
+							byte[] rslt_val = rslt_bfr.To_bry_and_clear();
 							bfr.Add(rslt_val);
 							Hash_adp cache = wiki.Cache_mgr().Tmpl_result_cache();
 							cache.Del(rslt_key);
@@ -288,7 +288,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		boolean skip = false;
 		skip = this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max();
 		if (!skip) {
-			gplx.xowa.html.modules.popups.keeplists.Xop_keeplist_wiki tmpl_keeplist = ctx.Tmpl_keeplist();
+			gplx.xowa.htmls.modules.popups.keeplists.Xop_keeplist_wiki tmpl_keeplist = ctx.Tmpl_keeplist();
 			if (tmpl_keeplist != null && tmpl_keeplist.Enabled()) {
 				byte[] ttl_lower = Xoa_ttl.Replace_spaces(ctx.Wiki().Lang().Case_mgr().Case_build_lower(ttl));
 				skip = !tmpl_keeplist.Match(ttl_lower);

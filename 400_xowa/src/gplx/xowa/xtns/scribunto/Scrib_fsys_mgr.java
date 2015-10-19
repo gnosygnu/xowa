@@ -34,14 +34,14 @@ public class Scrib_fsys_mgr {
 		gplx.ios.Io_fil lib_fil = (gplx.ios.Io_fil)lib_fil_obj;
 		String lib_data = lib_fil.Data();
 		if (lib_data == null) {
-			lib_data = Io_mgr.I.LoadFilStr(lib_fil.Url());
+			lib_data = Io_mgr.Instance.LoadFilStr(lib_fil.Url());
 			lib_fil.Data_(lib_data);
 		}
 		return lib_data;
 	}
 	private static Ordered_hash libs_init(Io_url script_dir) {
-		Ordered_hash rv = Ordered_hash_.new_();
-		Io_url[] fils = Io_mgr.I.QueryDir_args(script_dir).Recur_().ExecAsUrlAry();
+		Ordered_hash rv = Ordered_hash_.New();
+		Io_url[] fils = Io_mgr.Instance.QueryDir_args(script_dir).Recur_().ExecAsUrlAry();
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];

@@ -109,5 +109,5 @@ public class Xot_tmpl_wtr {
 		}
 	}
 	public static String Err_string = "";
-	public static final Xot_tmpl_wtr _ = new Xot_tmpl_wtr(); Xot_tmpl_wtr() {}
+	public static final Xot_tmpl_wtr Instance = new Xot_tmpl_wtr(); Xot_tmpl_wtr() {}
 }

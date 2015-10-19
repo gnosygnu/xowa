@@ -29,7 +29,7 @@ public class Url_encoder_tst {
 		byte[] raw = Bry_.new_a7("0%.jpg");
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		fxt.Encoder_id().Encoder().Decode(raw, 0, raw.length, tmp_bfr, false);
-		Tfds.Eq("0%.jpg", tmp_bfr.Xto_str_and_clear()); 
+		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
 	}
 	@Test  public void Id_nbsp() 			{fxt.Encoder_id().Test_encode("a&nbsp;b", "a.C2.A0b");}	// NOTE: not just .A0 (160) but utf8-encoded .C2.A0
 	@Test  public void Url_syms() 			{fxt.Encoder_url().Test_encode_decode("!?^~", "%21%3F%5E%7E");}

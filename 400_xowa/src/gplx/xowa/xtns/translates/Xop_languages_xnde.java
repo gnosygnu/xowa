@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Xop_languages_xnde implements Xox_xnde {
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
@@ -56,17 +56,17 @@ public class Xop_languages_xnde implements Xox_xnde {
 				&& 	page_ttl_bry[lang_bgn - 1] == Xoa_ttl.Subpage_spr		// prv char must be /; EX: "Page/fr"
 				) {
 				byte[] lang_key = Bry_.Mid(page_ttl_bry, lang_bgn, page_ttl_bry_len);
-				if (Bry_.Eq(lang_key, Xol_lang_.Key_en))			// lang is english; mark english found;
+				if (Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))			// lang is english; mark english found;
 					english_needed = false;
-				Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(lang_key);
+				Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_key);
 				if (lang_itm == null) continue; // not a known lang
 				rv.Add(lang_itm);
 			}
 		}
 		if (rv.Count() == 0) return List_adp_.Noop;	// no lang items; handles situations where just "Page" is returned
 		if (english_needed)	// english not found; always add; handles situations wherein Page/fr and Page/de added, but not Page/en
-			rv.Add(Xol_lang_itm_.Get_by_key(Xol_lang_.Key_en));
-		rv.Sort_by(Xol_lang_itm_.Comparer_key);
+			rv.Add(Xol_lang_stub_.Get_by_key_or_en(Xol_lang_itm_.Key_en));
+		rv.Sort_by(Xol_lang_stub_.Comparer_key);
 		return rv;
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
@@ -108,24 +108,24 @@ class Xop_languages_fmtr implements Bry_fmtr_arg {
 		this.root_ttl = root_ttl;
 		this.cur_lang = cur_lang;
 	}	private List_adp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = langs.Count();
 		Xoh_href_wtr href_wtr = wiki.Appe().Html__href_wtr();
 		int ns_id = root_ttl.Ns().Id();
 		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.parse below
 		for (int i = 0; i < len; i++) {
-			Xol_lang_itm lang = (Xol_lang_itm)langs.Get_at(i);
+			Xol_lang_stub lang = (Xol_lang_stub)langs.Get_at(i);
 			byte[] lang_key = lang.Key();
-			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_.Key_en);
+			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_itm_.Key_en);
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
 			Xoa_ttl lang_ttl = Xoa_ttl.parse(wiki, ns_id, lang_ttl_bry);
 			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
 			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt());
 			Bry_fmtr fmtr = null;
-			if		(Bry_.Eq(lang_key, Xol_lang_.Key_en)) 	fmtr = Xop_languages_xnde.fmtr_itm_english;
+			if		(Bry_.Eq(lang_key, Xol_lang_itm_.Key_en)) 	fmtr = Xop_languages_xnde.fmtr_itm_english;
 			else if	(Bry_.Eq(lang_key, cur_lang))			fmtr = Xop_languages_xnde.fmtr_itm_selected;
 			else 												fmtr = Xop_languages_xnde.fmtr_itm_basic;
-			fmtr.Bld_bfr_many(bfr, lang_href, lang_title, lang.Localized_name());
+			fmtr.Bld_bfr_many(bfr, lang_href, lang_title, lang.Canonical_name());
 		}
 	}
 }

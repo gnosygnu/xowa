@@ -118,8 +118,8 @@ public class IoEngine_memory extends IoEngine_base {
 		IoItmDir ownerDir = FetchDir(url.OwnerDir()); if (ownerDir == null) return; // no ownerDir; no need to unregister
 		ownerDir.SubDirs().Del(url);
 	}
-	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
-	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
+	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
+	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw Err_.new_wo_type("trg already exists", "trg", trg);
 		IoItmDir dir = FetchDir(src); dir.Name_(trg.NameAndExt());
 		for (Object filObj : dir.SubFils()) {			// move all subFiles

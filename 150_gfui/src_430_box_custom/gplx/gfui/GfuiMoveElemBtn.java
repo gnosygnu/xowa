@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.lbl_();}
+public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Text_("*");

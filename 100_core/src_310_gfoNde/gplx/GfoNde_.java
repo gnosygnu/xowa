@@ -31,7 +31,7 @@ public class GfoNde_ {
 			GfoFldList flds = GfoFldList_.new_(); 
 			int fldLen = rdr.FieldCount();
 			for (int i = 0; i < fldLen; i++)
-				flds.Add(rdr.KeyAt(i), ObjectClassXtn._);
+				flds.Add(rdr.KeyAt(i), ObjectClassXtn.Instance);
 			while (rdr.MoveNextPeer()) {
 				Object[] valAry = new Object[fldLen];
 				for (int i = 0; i < fldLen; i++)

@@ -51,7 +51,7 @@ public class Tst_mgr {
 		int max_len = expd_ary_len > actl_ary_len ? expd_ary_len : actl_ary_len;
 		int err = 0;
 		for (int i = 0; i < max_len; i++) {
-			String path = ownerPath + Int_.Xto_str(i);
+			String path = ownerPath + Int_.To_str(i);
 			Tst_chkr expd_obj = i < expd_ary_len ? expd_ary[i] : Tst_mgr.Null_chkr;
 			Object actl_obj = i < actl_ary_len ? actl_ary[i] : "<NULL OBJ>";
 			String actl_type = i < actl_ary_len ? Type_adp_.NameOf_obj(actl_obj) : "<NULL TYPE>";
@@ -86,7 +86,7 @@ public class Tst_mgr {
 			Object itm = Array_.Get_at(ary, i);
 			ary_sb.Add(Object_.Xto_str_strict_or_null_mark(itm)).Add(",");
 		}
-		return ary_sb.Xto_str_and_clear();
+		return ary_sb.To_str_and_clear();
 	}	String_bldr ary_sb = String_bldr_.new_();
 	String Build() {
 		String_bldr sb = String_bldr_.new_();
@@ -104,7 +104,7 @@ public class Tst_mgr {
 			if (!itm.Pass())
 				sb.Add_fmt("\n{0}  {1}  {2}  '{3}'", String_.PadEnd("", comp_max, " "), " " + String_.PadEnd("", path_max, " "), " " + String_.PadEnd("", name_max, " ") + " ", itm.Actl());
 		}
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	int Max(int max, String s) {int len = String_.Len(s); return len > max ? len : max;}
 	public static final Tst_chkr Null_chkr = new Tst_chkr_null();

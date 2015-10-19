@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_switch extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_switch;}
@@ -83,7 +83,7 @@ public class Pfunc_switch extends Pf_func_base {
 			return Bry_.Trim(src, itm.Dat_bgn(), itm.Dat_end());
 		else {
 			itm.Tmpl_evaluate(ctx, src, caller, tmp);
-			return tmp.Xto_bry_and_clear_and_trim();
+			return tmp.To_bry_and_clear_and_trim();
 		}
 	}
 	public static final byte[] Dflt_keyword = Bry_.new_a7("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29

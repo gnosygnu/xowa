@@ -33,7 +33,7 @@ public abstract class Xof_bin_wkr__fsys_base implements Xof_bin_wkr, GfoInvkAble
 	private boolean Get_to_fsys(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
 		Io_url src_url = this.Get_src_url(Xof_repo_itm_.Mode_by_bool(lnki_is_thumb), String_.new_u8(orig_repo), orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page);
 		if (src_url == Io_url_.Empty) return false;
-		byte[] bin = Io_mgr.I.LoadFilBry(src_url);
+		byte[] bin = Io_mgr.Instance.LoadFilBry(src_url);
 		return bin != Io_mgr.LoadFilBry_fail;
 	}
 	protected abstract Io_url Get_src_url(byte mode, String wiki, byte[] ttl_wo_ns, byte[] md5, Xof_ext ext, int w, double time, int page);

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*;
-import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_log_basic_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr; private Xop_log_basic_tbl log_tbl;
 	private boolean save_page_ttl, save_log_time, save_args_len, save_args_str;
@@ -25,7 +25,7 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 	public Xop_log_basic_wkr(Xop_log_mgr log_mgr, Xop_log_basic_tbl log_tbl) {this.log_mgr = log_mgr; this.log_tbl = log_tbl;}
 	public boolean Log_bgn(Xoae_page page, byte[] src, Xop_xnde_tkn xnde) {return true;}
 	public void Log_end_xnde(Xoae_page page, int log_tid, byte[] src, Xop_xnde_tkn xnde_tkn) {
-		Xop_xatr_itm[] atrs_ary = xnde_tkn.Atrs_ary();
+		Mwh_atr_itm[] atrs_ary = xnde_tkn.Atrs_ary();
 		Log_end(page, Null_log_bgn, log_tid, Null_log_msg, src
 			, xnde_tkn.Src_bgn(), xnde_tkn.Src_end()
 			, atrs_ary == null ? 0 : atrs_ary.length

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*;
 public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	private boolean init;
 	@Override public boolean Enabled_default() {return true;}

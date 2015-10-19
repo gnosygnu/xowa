@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_deploy_copy_cmd extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
 	public Xob_deploy_copy_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Xob_cmd_keys.Key_deploy_copy;}
@@ -35,14 +35,14 @@ public class Xob_deploy_copy_cmd extends Xob_itm_basic_base implements Xob_cmd, 
 	}
 	public void Cmd_term() {}
 	private void Copy_dir_ns(Io_url root, String name) {
-		Io_url[] ns_dirs = Io_mgr.I.QueryDir_args(root).DirOnly_().ExecAsUrlAry();
+		Io_url[] ns_dirs = Io_mgr.Instance.QueryDir_args(root).DirOnly_().ExecAsUrlAry();
 		for (int i = 0; i < ns_dirs.length; i++) {
 			Io_url ns_dir = ns_dirs[i];
 			Io_url src_sub_dir = ns_dir.GenSubDir(name);
 			String dir_name = name;
 			if (zip) {
 				Io_url src_zip_dir = ns_dir.GenSubDir(name + Xob_deploy_zip_cmd.Dir_zip_suffix);
-				if (Io_mgr.I.ExistsDir(src_zip_dir)) {
+				if (Io_mgr.Instance.ExistsDir(src_zip_dir)) {
 					src_sub_dir = src_zip_dir;
 					dir_name = name + Xob_deploy_zip_cmd.Dir_zip_suffix;
 				}
@@ -57,7 +57,7 @@ public class Xob_deploy_copy_cmd extends Xob_itm_basic_base implements Xob_cmd, 
 	}
 	private void Copy_dir(Io_url src, Io_url trg) {
 		bldr.Usr_dlg().Prog_many(GRP_KEY, "copy", "copying to ~{1}", src.Xto_api(), trg.Xto_api());
-		Io_mgr.I.CopyDirDeep(src, trg);
+		Io_mgr.Instance.CopyDirDeep(src, trg);
 	}
 	boolean zip; Io_url trg_root_dir;
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

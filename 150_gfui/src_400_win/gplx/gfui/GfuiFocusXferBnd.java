@@ -48,5 +48,5 @@ class GfuiFocusXferBnd implements InjectAble, GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_FocusNext = "FocusNext", Invk_FocusPrev = "FocusPrev";
-	public static final GfuiFocusXferBnd _ = new GfuiFocusXferBnd(); GfuiFocusXferBnd() {}
+	public static final GfuiFocusXferBnd Instance = new GfuiFocusXferBnd(); GfuiFocusXferBnd() {}
 }

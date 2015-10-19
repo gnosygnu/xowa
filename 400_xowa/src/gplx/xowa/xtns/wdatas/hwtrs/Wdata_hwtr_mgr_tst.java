@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.xtns.*;
+import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr_tst {
 	@Before public void init() {fxt.init();} private Wdata_hwtr_mgr_fxt fxt = new Wdata_hwtr_mgr_fxt();
 	@Test   public void Stub() {}
@@ -281,7 +281,7 @@ public class Wdata_hwtr_mgr_tst {
 //		}
 }
 class Wdata_hwtr_mgr_fxt {
-	private Wdata_hwtr_mgr doc_hwtr; private Ordered_hash resolved_ttls = Ordered_hash_.new_bry_();
+	private Wdata_hwtr_mgr doc_hwtr; private Ordered_hash resolved_ttls = Ordered_hash_.New_bry();
 	public Wdata_wiki_mgr_fxt Wdata_fxt() {return wdata_fxt;} private Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	public void init() {
 		if (doc_hwtr == null) {
@@ -290,7 +290,7 @@ class Wdata_hwtr_mgr_fxt {
 			Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
 			wdata_fxt.Init();
 			toggle_mgr.Ctor_by_app(wdata_fxt.App());	// must init, else null error
-			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), toggle_mgr, new Xow_xwiki_mgr());
+			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), toggle_mgr, new Xow_xwiki_mgr(wdata_fxt.Wiki()));
 			doc_hwtr.Init_by_lang(msgs);				
 		}
 		resolved_ttls.Clear();
@@ -309,15 +309,15 @@ class Wdata_hwtr_mgr_fxt {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(Bry_.Empty, tmp_bfr, doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr());
 		claim.Welcome(html_wtr);
-		byte[] actl = tmp_bfr.Xto_bry_and_clear();
+		byte[] actl = tmp_bfr.To_bry_and_clear();
 		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	public void Test_json(Wdata_doc wdoc, String expd) {
 		Wdata_fmtr__json fmtr_json = doc_hwtr.Fmtr_json();
 		fmtr_json.Init_by_wdoc(wdoc.Jdoc());
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
-		fmtr_json.XferAry(tmp_bfr, 0);
-		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
+		fmtr_json.Fmt__do(tmp_bfr);
+		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
 }
 class Wdata_lbl_wkr__test implements Wdata_lbl_wkr {

@@ -41,8 +41,8 @@ class Fs_root_dir_fxt {
 	private Orig_fil_tbl orig_fil_tbl;
 	private Io_url url;
 	public void Reset() {
-		Db_conn_bldr.I.Reg_default_mem();
-		Io_mgr.I.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		url = Io_url_.mem_dir_("mem/dir/");
 		root_dir = new Fs_root_dir();
 		orig_fil_tbl = new Orig_fil_tbl();
@@ -61,7 +61,7 @@ class Fs_root_dir_fxt {
 	}
 	public static void Save_img(String url, int w, int h) {
 		gplx.gfui.SizeAdp img_size = gplx.gfui.SizeAdp_.new_(w, h);
-		Io_mgr.I.SaveFilStr(url, img_size.To_str());
+		Io_mgr.Instance.SaveFilStr(url, img_size.To_str());
 	}
 	public void Test_xto_fil_bry(String url_str, String expd) {
 		Io_url url = Io_url_.new_fil_(url_str);

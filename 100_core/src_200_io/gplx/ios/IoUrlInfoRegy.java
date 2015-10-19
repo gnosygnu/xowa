@@ -28,10 +28,10 @@ public class IoUrlInfoRegy implements GfoInvkAble {
 	}
 	public void Reset() {
 		hash.Clear();
-		Reg(IoUrlInfo_rel.new_(Op_sys.Cur().Tid_is_wnt() ? (IoUrlInfo)IoUrlInfo_wnt._ : (IoUrlInfo)IoUrlInfo_lnx._));
+		Reg(IoUrlInfo_rel.new_(Op_sys.Cur().Tid_is_wnt() ? (IoUrlInfo)IoUrlInfo_wnt.Instance : (IoUrlInfo)IoUrlInfo_lnx.Instance));
 		Reg(IoUrlInfo_.Mem);
-		Reg(IoUrlInfo_lnx._);
-		Reg(IoUrlInfo_wnt._);
+		Reg(IoUrlInfo_lnx.Instance);
+		Reg(IoUrlInfo_wnt.Instance);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Add)) {
@@ -40,12 +40,12 @@ public class IoUrlInfoRegy implements GfoInvkAble {
 			String engineKey = m.ReadStrOr("engineKey", IoEngine_.SysKey);
 			if (ctx.Deny()) return this;
 			IoUrlInfo_alias alias =  IoUrlInfo_alias.new_(srcDirStr, trgDirStr, engineKey);
-			IoUrlInfoRegy._.Reg(alias);
+			IoUrlInfoRegy.Instance.Reg(alias);
 		}
 		return this;
 	}	public static final String Invk_Add = "Add";
-	Ordered_hash hash = Ordered_hash_.new_();
-        public static final IoUrlInfoRegy _ = new IoUrlInfoRegy();
+	Ordered_hash hash = Ordered_hash_.New();
+        public static final IoUrlInfoRegy Instance = new IoUrlInfoRegy();
 	IoUrlInfoRegy() {
 		this.Reset();
 	}

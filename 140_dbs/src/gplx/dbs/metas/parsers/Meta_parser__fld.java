@@ -63,11 +63,11 @@ public class Meta_parser__fld {
 //			return fld;	// NOTE: will happen for tests; EX: "fld_1 int" vs "fld_1 int,"
 	}
 	private static final Btrie_slim_mgr fld_trie = fld_trie_init
-	( Meta_fld_wkr__nullable_null.I
-	, Meta_fld_wkr__nullable_not.I
-	, Meta_fld_wkr__autonumber.I
-	, Meta_fld_wkr__primary_key.I
-	, Meta_fld_wkr__default.I
+	( Meta_fld_wkr__nullable_null.Instance
+	, Meta_fld_wkr__nullable_not.Instance
+	, Meta_fld_wkr__autonumber.Instance
+	, Meta_fld_wkr__primary_key.Instance
+	, Meta_fld_wkr__default.Instance
 	);
 	private static Btrie_slim_mgr fld_trie_init(Meta_fld_wkr__base... wkrs) {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();

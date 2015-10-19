@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.*; import gplx.gfui.*;
-import gplx.xowa.gui.views.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.guis.views.*;
+import gplx.xowa.apps.urls.*;
 import gplx.xowa.parsers.*;
 public class Prefs_mgr implements GfoInvkAble {
 	public Prefs_mgr(Xoae_app app) {
@@ -50,7 +50,7 @@ public class Prefs_mgr implements GfoInvkAble {
 			pos = hnde.Tag_rhs_end();
 		}
 		bfr.Add_mid(src, pos, src.length);
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}	private Bry_fmtr props_get_fmtr; 
 	private void Props_set_and_reload() {
 		Xoae_page page = app.Gui_mgr().Browser_win().Active_page();
@@ -78,7 +78,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		byte[] eval_code = hnde.Atrs_val_by_key_bry(Bry_prop);
 		if 	(eval_code == null) eval_code = hnde.Atrs_val_by_key_bry(Bry_prop_set);
 		String hnde_val = null;
-		String hnde_key = "xowa_prop_" + Int_.Xto_str(i);
+		String hnde_key = "xowa_prop_" + Int_.To_str(i);
 		Xog_html_itm html_itm = html_box_mok == null ? app.Gui_mgr().Browser_win().Active_tab().Html_itm() : html_box_mok;	// TEST:
 		byte elem_tid = Prefs_mgr.Elem_tid_tid_of(hnde);
 		switch (elem_tid) {

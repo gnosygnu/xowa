@@ -27,7 +27,7 @@ public class GfmlLxr_ {
 		GfmlTkn tkn = GfmlTkn_.singleton_(key, raw, val, cmd);
 		return GfmlLxr_.solo_(key, tkn);
 	}
-	@gplx.Internal protected static GfmlLxr frame_(String key, GfmlFrame frame, String bgn, String end) {return GfmlLxr_frame.new_(key, frame, bgn, end, GfmlBldrCmd_pendingTkns_add._, GfmlBldrCmd_frameEnd.data_());}
+	@gplx.Internal protected static GfmlLxr frame_(String key, GfmlFrame frame, String bgn, String end) {return GfmlLxr_frame.new_(key, frame, bgn, end, GfmlBldrCmd_pendingTkns_add.Instance, GfmlBldrCmd_frameEnd.data_());}
 	public static final GfmlLxr Null = new GfmlLxr_null();
 	public static final String CmdTknChanged_evt = "Changed";
 	public static GfmlLxr as_(Object obj) {return obj instanceof GfmlLxr ? (GfmlLxr)obj : null;}
@@ -90,7 +90,7 @@ class GfmlLxr_group implements GfmlLxr {
 			hookLength = trie.LastMatchCount;
 		}
 		if (ignoreOutput) return GfmlTkn_.IgnoreOutput;
-		String raw = sb.Xto_str_and_clear();
+		String raw = sb.To_str_and_clear();
 		return outputTkn.MakeNew(raw, raw);
 	}
 	public GfmlLxr SubLxr() {throw Err_sublxr();}

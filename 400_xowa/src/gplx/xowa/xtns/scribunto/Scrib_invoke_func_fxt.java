@@ -31,7 +31,7 @@ public class Scrib_invoke_func_fxt {
 		core = core_fxt.Core();
 		server = core_fxt.Server();
 		core.Interpreter().Server_(server);
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		fxt.Reset();
 		core.When_page_changed(fxt.Page());
 		init_tmpl = init_page = null;
@@ -85,11 +85,11 @@ public class Scrib_invoke_func_fxt {
 	}
 	public void Test_parse_err(String raw, String expd_err_type) {
 		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), expd_err_type);
-		fxt.Test_parse_page_tmpl_str(raw, tmp_bfr.Xto_str_and_clear());
+		fxt.Test_parse_page_tmpl_str(raw, tmp_bfr.To_str_and_clear());
 	}
 	public void Test_error(Exception e, String expd) {
 		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), e);
-		Tfds.Eq_str(expd, tmp_bfr.Xto_str_and_clear(), "error");
+		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "error");
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_lib_proc_kv(Scrib_lib lib, String func_name, KeyVal[] args, String expd) {
@@ -114,7 +114,7 @@ public class Scrib_invoke_func_fxt {
 	public void Clear_for_lib() {Clear_for_lib("en.wikipedia.org", "en");}
 	public void Clear_for_lib(String domain, String lang) {
 		Xoae_app app = Xoa_app_fxt.app_();
-		fxt = new Xop_fxt(app, Xoa_app_fxt.wiki_(app, domain, app.Lang_mgr().Get_by_key_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
+		fxt = new Xop_fxt(app, Xoa_app_fxt.wiki_(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
 		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
@@ -140,7 +140,7 @@ public class Scrib_invoke_func_fxt {
 			KeyVal kv = ary[i];
 			bfr.Add_str(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public void Test_scrib_proc_bool(Scrib_lib lib, String proc_name, Object[] args, boolean expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_int(Scrib_lib lib, String proc_name, Object[] args, int expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
@@ -186,7 +186,7 @@ class Scrib_lua_rsp_bldr {
 		bfr.Add_str_a7("s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:3;s:4:\"args\";");
 		Bld_kv_ary(bfr, ary);
 		bfr.Add_str_a7("}");
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();

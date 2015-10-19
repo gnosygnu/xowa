@@ -44,7 +44,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 		return sb.To_str();			
 	}
 	@Override public void Exec() {
-		IoEnginePool._.Get_by(this.Url().Info().EngineKey()).RecycleFil(this);
+		IoEnginePool.Instance.Get_by(this.Url().Info().EngineKey()).RecycleFil(this);
 	}
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;

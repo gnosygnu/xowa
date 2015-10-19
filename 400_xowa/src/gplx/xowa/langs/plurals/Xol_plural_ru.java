@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.plurals; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xol_plural_ru implements Xol_plural {
-	public byte[] Plural_eval(Xol_lang lang, int count, byte[][] forms) {
+	public byte[] Plural_eval(Xol_lang_itm lang, int count, byte[][] forms) {
 		int forms_len = forms.length;
 		switch (forms_len) {
 			case 0:	return null;				// forms is empty; do nothing
@@ -36,5 +36,5 @@ public class Xol_plural_ru implements Xol_plural {
 			}
 		}
 	}
-	public static final Xol_plural_ru _ = new Xol_plural_ru(); Xol_plural_ru() {}
+	public static final Xol_plural_ru Instance = new Xol_plural_ru(); Xol_plural_ru() {}
 }

@@ -34,7 +34,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 			String path_str = arg_mgr.Read_str_or_null("path"); if (path_str == null) return Xosp_fbrow_rslt.err_("url has unknown path");
 			// if (Op_sys.Cur().Tid_is_wnt()) path_str = String_.Replace(path_str, "/", "\\");
 			Io_url path_url = Io_url_.new_any_(path_str);
-			IoItmDir dir = Io_mgr.I.QueryDir_args(path_url).DirInclude_(true).ExecAsDir();
+			IoItmDir dir = Io_mgr.Instance.QueryDir_args(path_url).DirInclude_(true).ExecAsDir();
 			dir.SubDirs().Sort(); dir.SubFils().Sort();
 			Xosp_fbrow_data_dir dir_itm = Xosp_fbrow_data_dir.new_(dir);
 			Process_itms(dir_itm);
@@ -42,7 +42,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 			byte[] cmd_src = this.Cmd_src();
 			byte[] cmd_row = Html_body_cmd_row.Bld_bry_many(tmp_bfr, url_enc, cmd_src, this.Cmd_gui());
 			html_wtr.Write(tmp_bfr, cmd_src, cmd_row, dir_itm);
-			return new Xosp_fbrow_rslt(Html_head_default, tmp_bfr.Xto_bry_and_clear());
+			return new Xosp_fbrow_rslt(Html_head_default, tmp_bfr.To_bry_and_clear());
 		}
 		else
 			return Write_html_selected(arg_mgr, selected_str, select_invkable);
@@ -110,7 +110,7 @@ class Xosp_fbrow_html implements Bry_fmtr_arg {
 		, this
 		);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = dir.Count();
 		for (int i = 0; i < len; ++i) {
 			Xosp_fbrow_data_sub itm = (Xosp_fbrow_data_sub)dir.Get_at(i);				
@@ -176,7 +176,7 @@ class Xosp_fbrow_cmd__err implements Xosp_fbrow_cmd {
 	public Xosp_fbrow_cmd Make_new() {return this;}
 	public Xosp_fbrow_rslt Write_html(Xoa_url_arg_mgr arg_mgr, GfoInvkAble select_invkable) {return Rslt;}
 	private static final Xosp_fbrow_rslt Rslt = new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_a7("url has unknown cmd"));
-		public static final Xosp_fbrow_cmd__err I = new Xosp_fbrow_cmd__err(); Xosp_fbrow_cmd__err() {}
+		public static final Xosp_fbrow_cmd__err Instance = new Xosp_fbrow_cmd__err(); Xosp_fbrow_cmd__err() {}
 }
 class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	@Override protected byte[] Cmd_src() {return Regy_key;}
@@ -192,7 +192,7 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 		Xowv_wiki wiki = (Xowv_wiki)GfoInvkAble_.InvkCmd_val(select_invkable, Xoav_wiki_mgr.Invk_import_by_fil, path_str + wikis[0]);
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		done_fmtr.Bld_bfr_many(bfr, wiki.Domain_str());
-		return new Xosp_fbrow_rslt(Bry_.Empty, bfr.Xto_bry_and_clear());
+		return new Xosp_fbrow_rslt(Bry_.Empty, bfr.To_bry_and_clear());
 	}
 	private static final Bry_fmtr done_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<a href='/site/~{domain}/wiki/Earth'>~{domain} Main Page</a>"
@@ -200,7 +200,7 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	, "domain");
 	private static final byte[] Ext_xowa = Bry_.new_a7(".xowa");
 	public static final byte[] Regy_key = Bry_.new_a7("xowa.wiki.add");
-		public static final Xosp_fbrow_cmd__wiki_add I = new Xosp_fbrow_cmd__wiki_add();
+		public static final Xosp_fbrow_cmd__wiki_add Instance = new Xosp_fbrow_cmd__wiki_add();
 }
 class Xosp_fbrow_cmd__root_set extends Xosp_fbrow_cmd__base {
 	@Override protected byte[] Cmd_src() {return Regy_key;}
@@ -213,5 +213,5 @@ class Xosp_fbrow_cmd__root_set extends Xosp_fbrow_cmd__base {
 		return new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_u8(selected));
 	}
 	public static final byte[] Regy_key = Bry_.new_a7("xowa.fsys.root_");
-		public static final Xosp_fbrow_cmd__root_set I = new Xosp_fbrow_cmd__root_set();
+		public static final Xosp_fbrow_cmd__root_set Instance = new Xosp_fbrow_cmd__root_set();
 }

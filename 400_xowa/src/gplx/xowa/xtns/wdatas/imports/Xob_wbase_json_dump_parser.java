@@ -46,7 +46,7 @@ class Xob_wbase_json_dump_parser {
 				int cur_pos = Extract_page(page, buffer_rdr, page_bgn);
 				if (cur_pos == -1) break;
 				if (cur_pos < page_bgn)
-					bldr.Print_prog_msg(buffer_rdr.Fil_pos(), buffer_rdr_len, 1, prog_fmt, Int_.Xto_str_pad_bgn_zero((int)(buffer_rdr.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(buffer_rdr.Fil_len() / Io_mgr.Len_mb))), "", page.Ttl_page_db());
+					bldr.Print_prog_msg(buffer_rdr.Fil_pos(), buffer_rdr_len, 1, prog_fmt, Int_.To_str_pad_bgn_zero((int)(buffer_rdr.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(buffer_rdr.Fil_len() / Io_mgr.Len_mb))), "", page.Ttl_page_db());
 				page_bgn = cur_pos;
 			}
 			dump_db.Parse_end();

@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public interface Xol_grammar {
-	boolean Grammar_eval(Bry_bfr bfr, Xol_lang lang, byte[] word, byte[] type);
+	boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type);
 }

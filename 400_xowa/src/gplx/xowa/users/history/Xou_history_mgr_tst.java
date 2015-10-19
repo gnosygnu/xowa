@@ -52,7 +52,7 @@ class Xou_history_mgr_fxt {
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 			under = app.Usere().History_mgr();
 		}
-		Io_mgr.I.DeleteDirDeep(Io_url_.new_dir_("mem/xowa/user/test_user/app/data/history/"));
+		Io_mgr.Instance.DeleteDirDeep(Io_url_.new_dir_("mem/xowa/user/test_user/app/data/history/"));
 		under.Clear();
 	}
 	public Xou_history_mgr_fxt Add_many(String... ary) {
@@ -88,7 +88,7 @@ class Xou_history_mgr_fxt {
 	public Xou_history_mgr_fxt Invk(String key, Object v) {GfoInvkAble_.InvkCmd_val(under, key, v); return this;}
 	public Xou_history_mgr_fxt Save() {under.Save(app); return this;}
 	public Xou_history_mgr_fxt Fil_tst(String expd_url, String expd) {
-		String actl = Io_mgr.I.LoadFilStr(expd_url);
+		String actl = Io_mgr.Instance.LoadFilStr(expd_url);
 		Tfds.Eq_str_lines(expd, actl);
 		return this;
 	}

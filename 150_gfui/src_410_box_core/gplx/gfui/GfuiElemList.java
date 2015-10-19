@@ -44,7 +44,7 @@ public class GfuiElemList {
 		owner.IptBnds().Cfgs_delAll();
 		box.Dispose();
 	}
-	GfuiElem owner; Ordered_hash hash = Ordered_hash_.new_();
+	GfuiElem owner; Ordered_hash hash = Ordered_hash_.New();
 	public static GfuiElemList new_(GfuiElem owner) {
 		GfuiElemList rv = new GfuiElemList();
 		rv.owner = owner;

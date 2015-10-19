@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*; import gplx.xmls.*; // NOTE: gplx.xmls does not support Android; DATE:2013-01-17
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser {
 	public static byte[] Siteinfo_extract(gplx.ios.Io_stream_rdr src_rdr) {
 		Io_buffer_rdr rdr = Io_buffer_rdr.Null;
@@ -50,13 +50,13 @@ public class Xob_siteinfo_parser {
 				Siteinfo_parse_ns(wiki, usr_dlg, sub_nde);
 			}
 			else if (	String_.Eq(sub_nde.Name(), "#text")) {}	// NOTE: JAVA has node names for "#text"
-			// else throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.root.unknown_sub", "unknown sub for root nde: ~{0}", sub_nde.Name());	// NOTE: do not fail if MW introduces something odd in future (or if JAVA starts picking up other elements)
+			// else throw Err_mgr.Instance.fmt_(GRP_KEY, "siteinfo.root.unknown_sub", "unknown sub for root nde: ~{0}", sub_nde.Name());	// NOTE: do not fail if MW introduces something odd in future (or if JAVA starts picking up other elements)
 		}
-		wiki.Props().Siteinfo_misc_(siteinfo_misc_bfr.Xto_bry_and_clear());
+		wiki.Props().Siteinfo_misc_(siteinfo_misc_bfr.To_bry_and_clear());
 		wiki.Props().Bldr_version_(Bry_.new_a7(Xoa_app_.Version));
 	}
 	private static byte[] Siteinfo_parse_mainpage(byte[] url) {			
-		byte[] wiki_bry = Xoa_consts.Url_wiki_intermediary;
+		byte[] wiki_bry = gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki;
 		int bgn_pos	= Bry_find_.Find_fwd(url, wiki_bry, 0);
 		if (bgn_pos == Bry_.NotFound) {							// "/wiki/" not found; EX: http://mywiki/My_main_page
 			bgn_pos	= Bry_find_.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page

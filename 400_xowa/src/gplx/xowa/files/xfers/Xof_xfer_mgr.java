@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.gfui.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.downloads.*;
-import gplx.xowa.wms.*; import gplx.xowa.wms.apis.*; 
-import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.apis.*; 
+import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_mgr {
 	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final Xof_file_mgr file_mgr; private final Xowmf_mgr wmf_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();
@@ -95,7 +95,7 @@ public class Xof_xfer_mgr {
 			lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
 			trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_thumb, lnki_w);
 			if (!Img_convert(src_url, trg_url)) return false;	// convert failed; exit
-			if (orig_ext.Id_is_djvu()) Io_mgr.I.DeleteFil(src_url);	// convert passed; if djvu, delete intermediary .tiff file;
+			if (orig_ext.Id_is_djvu()) Io_mgr.Instance.DeleteFil(src_url);	// convert passed; if djvu, delete intermediary .tiff file;
 		}
 		return true;
 	}	Int_2_ref calc_size = new Int_2_ref();
@@ -173,7 +173,7 @@ public class Xof_xfer_mgr {
 							return true;
 						else {								// width fails; cleanup invalid thumb
 							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
-							Io_mgr.I.DeleteFil(trg_url);	// delete file
+							Io_mgr.Instance.DeleteFil(trg_url);	// delete file
 							meta_itm.Thumbs_del(lnki_w);	// delete thumb
 							lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
 						}
@@ -215,7 +215,7 @@ public class Xof_xfer_mgr {
 							return true;
 						else {								// width fails; cleanup invalid thumb; EX:w:[[File:Upper and Middle Manhattan.jpg|x120px]]
 							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
-							Io_mgr.I.DeleteFil(trg_url);	// delete file
+							Io_mgr.Instance.DeleteFil(trg_url);	// delete file
 							meta_itm.Thumbs_del(lnki_w);	// delete thumb
 							lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
 						}
@@ -249,7 +249,7 @@ public class Xof_xfer_mgr {
 					rslt.Clear();						
 				}
 				else													// something failed; delete file
-					Io_mgr.I.DeleteFil(trg_url);
+					Io_mgr.Instance.DeleteFil(trg_url);
 			}
 			if (!thumb_pass)	// NOTE: thumb failed; mark itm as oga
 				meta_itm.Update_thumb_oga_();
@@ -291,7 +291,7 @@ public class Xof_xfer_mgr {
 	}	String_obj_ref img_convert_rslt = String_obj_ref.null_();
 	private boolean Img_convert(Io_url src_url, Io_url trg_url) {
 		rslt.Atrs_src_trg_(src_url.Xto_api(), trg_url);	// NOTE: must be set at start; Img_rename_by_size may overwrite trg
-		if (Io_mgr.I.ExistsFil(trg_url)) return true; // NOTE: already converted; occurs when same image used twice on same page (EX: flags)
+		if (Io_mgr.Instance.ExistsFil(trg_url)) return true; // NOTE: already converted; occurs when same image used twice on same page (EX: flags)
 		if (!file_mgr.Img_mgr().Wkr_resize_img().Resize_exec(src_url, trg_url, lnki_w, lnki_h, orig_ext.Id(), img_convert_rslt)) {
 			return rslt.Fail("convert failed|" + src_url.Raw() + "|" + img_convert_rslt.Val());
 		}
@@ -313,7 +313,7 @@ public class Xof_xfer_mgr {
 			String new_name = Xof_lnki_time.Null_y(lnki_thumbtime) ? file_w + "px" : file_w + "px" + Xof_meta_thumb_parser.Dlm_seek_str + Xof_lnki_time.X_str(lnki_thumbtime);
 			Io_url new_trg = trg_url.GenNewNameOnly(new_name);
 			if (trg_url.Eq(new_trg)) return true;	// HACK: io will delete file if moving unto itself; (i.e.: mv A.png A.png is same as del A.png); problem is that this proc is being called too many times
-			try {Io_mgr.I.MoveFil_args(trg_url, new_trg, true).Exec();}
+			try {Io_mgr.Instance.MoveFil_args(trg_url, new_trg, true).Exec();}
 			catch (Exception exc) {Err_.Noop(exc); return rslt.Fail("move failed");}
 			rslt.Trg_(new_trg);
 		}
@@ -322,7 +322,7 @@ public class Xof_xfer_mgr {
 	private boolean Cmd_download(String src_str, Io_url trg_url, boolean cur_is_orig) {
 		boolean exists = false;
 		if (check_file_exists_before_xfer) {
-			gplx.ios.IoItmFil fil_itm = Io_mgr.I.QueryFil(trg_url);
+			gplx.ios.IoItmFil fil_itm = Io_mgr.Instance.QueryFil(trg_url);
 			exists = fil_itm.Exists() && fil_itm.Size() > 0;
 		}
 		boolean pass = false;

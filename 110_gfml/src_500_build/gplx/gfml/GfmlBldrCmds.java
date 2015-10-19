@@ -19,22 +19,22 @@ package gplx.gfml; import gplx.*;
 class GfmlBldrCmd_pendingTkns_add implements GfmlBldrCmd {
 	public String Key() {return "gfml.pendingTkns_add";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurFrame().WaitingTkns().Add(tkn);}
-	public static final GfmlBldrCmd_pendingTkns_add _ = new GfmlBldrCmd_pendingTkns_add(); GfmlBldrCmd_pendingTkns_add() {}
+	public static final GfmlBldrCmd_pendingTkns_add Instance = new GfmlBldrCmd_pendingTkns_add(); GfmlBldrCmd_pendingTkns_add() {}
 }
 class GfmlBldrCmd_dataTkn_set implements GfmlBldrCmd {
 	public String Key() {return "gfml.elm_data";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().DatTkn_set(tkn);}
-	public static final GfmlBldrCmd_dataTkn_set _ = new GfmlBldrCmd_dataTkn_set(); GfmlBldrCmd_dataTkn_set() {}
+	public static final GfmlBldrCmd_dataTkn_set Instance = new GfmlBldrCmd_dataTkn_set(); GfmlBldrCmd_dataTkn_set() {}
 }
 class GfmlBldrCmd_elemKey_set implements GfmlBldrCmd {
 	public String Key() {return "gfml.elm_key";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().KeyTkn_set(tkn);}
-	public static final GfmlBldrCmd_elemKey_set _ = new GfmlBldrCmd_elemKey_set(); GfmlBldrCmd_elemKey_set() {}
+	public static final GfmlBldrCmd_elemKey_set Instance = new GfmlBldrCmd_elemKey_set(); GfmlBldrCmd_elemKey_set() {}
 }
 class GfmlBldrCmd_ndeName_set implements GfmlBldrCmd {
 	public String Key() {return "gfml.ndeName_set";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeHeader_set(tkn);}
-	public static final GfmlBldrCmd_ndeName_set _ = new GfmlBldrCmd_ndeName_set(); GfmlBldrCmd_ndeName_set() {}
+	public static final GfmlBldrCmd_ndeName_set Instance = new GfmlBldrCmd_ndeName_set(); GfmlBldrCmd_ndeName_set() {}
 }
 class GfmlBldrCmd_ndeBody_bgn implements GfmlBldrCmd {
 	public String Key() {return "gfml.nodeBody_bgn";}
@@ -42,37 +42,37 @@ class GfmlBldrCmd_ndeBody_bgn implements GfmlBldrCmd {
 		bldr.CurNdeFrame().NdeBody_bgn(tkn);
 		bldr.CurNdeFrame().BgnPos_set(bldr.StreamPos() - String_.Len(tkn.Raw()));// stream has already advanced tkn.len so subtract
 	}
-	public static final GfmlBldrCmd_ndeBody_bgn _ = new GfmlBldrCmd_ndeBody_bgn(); GfmlBldrCmd_ndeBody_bgn() {}
+	public static final GfmlBldrCmd_ndeBody_bgn Instance = new GfmlBldrCmd_ndeBody_bgn(); GfmlBldrCmd_ndeBody_bgn() {}
 }
 class GfmlBldrCmd_ndeProp_bgn implements GfmlBldrCmd {
 	public String Key() {return "cmd.gfml.ndeProp_bgn";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeProp_bgn(tkn);}
-	public static final GfmlBldrCmd_ndeProp_bgn _ = new GfmlBldrCmd_ndeProp_bgn(); GfmlBldrCmd_ndeProp_bgn() {}
+	public static final GfmlBldrCmd_ndeProp_bgn Instance = new GfmlBldrCmd_ndeProp_bgn(); GfmlBldrCmd_ndeProp_bgn() {}
 }
 class GfmlBldrCmd_ndeHdr_bgn implements GfmlBldrCmd {
 	public String Key() {return "cmd.gfml.ndeHdr_bgn";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeParen_bgn(tkn);}
-	public static final GfmlBldrCmd_ndeHdr_bgn _ = new GfmlBldrCmd_ndeHdr_bgn(); GfmlBldrCmd_ndeHdr_bgn() {}
+	public static final GfmlBldrCmd_ndeHdr_bgn Instance = new GfmlBldrCmd_ndeHdr_bgn(); GfmlBldrCmd_ndeHdr_bgn() {}
 }
 class GfmlBldrCmd_ndeHdr_end implements GfmlBldrCmd {
 	public String Key() {return "cmd.gfml.ndeHdr_end";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeParen_end(tkn);}
-	public static final GfmlBldrCmd_ndeHdr_end _ = new GfmlBldrCmd_ndeHdr_end(); GfmlBldrCmd_ndeHdr_end() {}
+	public static final GfmlBldrCmd_ndeHdr_end Instance = new GfmlBldrCmd_ndeHdr_end(); GfmlBldrCmd_ndeHdr_end() {}
 }
 class GfmlBldrCmd_ndeInline implements GfmlBldrCmd {
 	public String Key() {return "gfml.nodeInline_exec_end";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeInline(tkn);}
-	public static final GfmlBldrCmd_ndeInline _ = new GfmlBldrCmd_ndeInline(); GfmlBldrCmd_ndeInline() {}
+	public static final GfmlBldrCmd_ndeInline Instance = new GfmlBldrCmd_ndeInline(); GfmlBldrCmd_ndeInline() {}
 }
 class GfmlBldrCmd_ndeDot implements GfmlBldrCmd {
 	public String Key() {return "gfml.ndeDot";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().NdeDot(tkn);}
-	public static final GfmlBldrCmd_ndeDot _ = new GfmlBldrCmd_ndeDot(); GfmlBldrCmd_ndeDot() {}
+	public static final GfmlBldrCmd_ndeDot Instance = new GfmlBldrCmd_ndeDot(); GfmlBldrCmd_ndeDot() {}
 }
 class GfmlBldrCmd_atrSpr implements GfmlBldrCmd {
 	public String Key() {return "gfml.nodeInline_atrSpr";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurNdeFrame().AtrSpr(tkn);}
-        public static final GfmlBldrCmd_atrSpr _ = new GfmlBldrCmd_atrSpr(); GfmlBldrCmd_atrSpr() {}
+        public static final GfmlBldrCmd_atrSpr Instance = new GfmlBldrCmd_atrSpr(); GfmlBldrCmd_atrSpr() {}
 }
 class GfmlBldrCmd_frameBgn implements GfmlBldrCmd {
 	public String Key() {return "gfml.frame_bgn";}
@@ -124,5 +124,5 @@ class GfmlBldrCmd_whitespace implements GfmlBldrCmd {
 		else
 			bldr.CurFrame().WaitingTkns().Add(tkn);
 	}
-	public static final GfmlBldrCmd_whitespace _ = new GfmlBldrCmd_whitespace(); GfmlBldrCmd_whitespace() {}
+	public static final GfmlBldrCmd_whitespace Instance = new GfmlBldrCmd_whitespace(); GfmlBldrCmd_whitespace() {}
 }

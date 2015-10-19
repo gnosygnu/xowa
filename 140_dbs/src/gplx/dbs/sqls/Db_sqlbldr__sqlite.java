@@ -37,7 +37,7 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			tmp_bfr.Add_str_a7(fld);
 		}
 		tmp_bfr.Add_str_a7(");");
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	public String Bld_create_tbl(Db_meta_tbl tbl) {
 		tmp_bfr.Add_str_a7("CREATE TABLE IF NOT EXISTS ").Add_str_a7(tbl.Name()).Add_byte_nl();
@@ -50,13 +50,13 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			tmp_bfr.Add_byte_nl();
 		}
 		tmp_bfr.Add_str_a7(");");
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	public String Bld_alter_tbl_add(String tbl, Db_meta_fld fld) {
 		tmp_bfr.Add_str_a7("ALTER TABLE ").Add_str_a7(tbl).Add_str_a7(" ADD ");
 		Bld_fld(tmp_bfr, fld);
 		tmp_bfr.Add_byte_semic();
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	public String Bld_drop_tbl(String tbl) {
 		return String_.Format("DROP TABLE IF EXISTS {0};", tbl);
@@ -95,5 +95,5 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			default:						throw Err_.new_unhandled(tid);
 		}
 	}
-        public static final Db_sqlbldr__sqlite I = new Db_sqlbldr__sqlite(); Db_sqlbldr__sqlite() {}
+        public static final Db_sqlbldr__sqlite Instance = new Db_sqlbldr__sqlite(); Db_sqlbldr__sqlite() {}
 }

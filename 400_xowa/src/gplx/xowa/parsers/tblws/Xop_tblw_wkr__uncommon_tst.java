@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xop_tblw_wkr__uncommon_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; PAGE:en.w:Turks_in_Denmark; DATE:2014-03-02
+	@Test   public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; PAGE:en.w:Turks_in_Denmark; DATE:2014-03-02
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "<caption>a"

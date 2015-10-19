@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_xnde_wkr__basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
@@ -120,7 +120,7 @@ public class Xop_xnde_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("<code><script src='a'>b</script></code>", "<code>&lt;script src='a'>b&lt;/script></code>");
 	}
 	@Test   public void Script_in_syntaxhighlight() {
-		fxt.Test_parse_page_all_str("<syntaxhighlight><script>alert('fail');</script></syntaxhighlight>", "<pre style=\"overflow:auto;\">&lt;script&gt;alert('fail');&lt;/script&gt;</pre>");
+		fxt.Test_parse_page_all_str("<syntaxhighlight><script>alert('fail');</script></syntaxhighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&lt;script&gt;alert('fail');&lt;/script&gt;</pre></div>");
 	}
 	@Test   public void Script_in_math() {
 		fxt.App().File_mgr().Math_mgr().Renderer_is_mathjax_(false);

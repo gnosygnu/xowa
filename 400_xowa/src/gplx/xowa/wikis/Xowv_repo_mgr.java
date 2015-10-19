@@ -59,7 +59,7 @@ public class Xowv_repo_mgr implements Xow_repo_mgr {
 	public Xof_repo_pair Add_repo(Xoa_app app, Io_url wiki_root, byte[] src_repo_key, byte[] trg_repo_key) {
 		Xof_repo_itm src_repo = Add(app, wiki_root, src_repo_key), trg_repo = Add(app, wiki_root, trg_repo_key);
 		byte[] src_wiki_key = src_repo.Wiki_domain();//, trg_wiki_key = trg_repo.Wiki_key();
-//			if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_type_.Bry__home)) throw Err_mgr._.fmt_(GRP_KEY, "add_repo", "wiki keys do not match: ~{0} ~{1}", String_.new_u8(src_wiki_key), String_.new_u8(trg_wiki_key));
+//			if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_tid_.Bry__home)) throw Err_mgr.Instance.fmt_(GRP_KEY, "add_repo", "wiki keys do not match: ~{0} ~{1}", String_.new_u8(src_wiki_key), String_.new_u8(trg_wiki_key));
 		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Count(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;

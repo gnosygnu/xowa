@@ -41,7 +41,7 @@ public class Scrib_core {
 	}
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
-	public Xol_lang Lang() {return lang;} private Xol_lang lang;
+	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
 	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
 	public Xoae_page Page() {return page;} private Xoae_page page;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
@@ -110,7 +110,7 @@ public class Scrib_core {
 	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = Bry_.Empty;
 	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, KeyVal... args) {
 		this.RegisterLibrary(lib.Procs());
-		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.I.LoadFilStr(url));
+		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.Instance.LoadFilStr(url));
 		Scrib_lua_proc setupInterface_func = rv.Fncs_get_by_key("setupInterface");
 		if (setupInterface_func != null)
 			engine.CallFunction(setupInterface_func.Id(), Scrib_kv_utl_.base1_obj_(args));
@@ -142,7 +142,7 @@ public class Scrib_core {
 		}
 		return rv;
 	}
-	public Ordered_hash Frame_created_list() {return frame_created_list;} private Ordered_hash frame_created_list = Ordered_hash_.new_();	// created by NewChildFrame
+	public Ordered_hash Frame_created_list() {return frame_created_list;} private Ordered_hash frame_created_list = Ordered_hash_.New();	// created by NewChildFrame
 	public Xot_invk Frame_current() {return frame_current;} private Xot_invk frame_current;
 	public Xot_invk Frame_parent() {return frame_parent;} private Xot_invk frame_parent;
 	@gplx.Internal protected void Frame_current_(Xot_invk v) {frame_current = v;} // TEST:
@@ -170,6 +170,9 @@ public class Scrib_core {
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
 			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
 			bfr.Add_str(rslt);
+//				byte[] rslt_bry = Bry_.new_u8(rslt);	// CHART
+//				gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
+//				bfr.Add(rslt_bry);
 			if (!Env_.Mode_testing())
 				engine.CleanupChunks(KeyVal_.Ary(KeyVal_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
 		}

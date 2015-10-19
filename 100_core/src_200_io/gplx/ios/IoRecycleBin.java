@@ -56,5 +56,5 @@ public class IoRecycleBin {
 		String sourceApp = String_.GetStrBefore(url.NameAndExt_noDirSpr(), ";");
 		return url.OwnerDir().GenSubFil_ary(sourceApp, ".recycle.csv");
 	}
-	public static final IoRecycleBin _ = new IoRecycleBin(); IoRecycleBin() {}
+	public static final IoRecycleBin Instance = new IoRecycleBin(); IoRecycleBin() {}
 }

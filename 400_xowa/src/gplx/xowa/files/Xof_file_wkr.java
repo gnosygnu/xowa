@@ -19,7 +19,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.ios.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.htmls.hdumps.core.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xof_orig_mgr orig_mgr; private final Xof_bin_mgr bin_mgr; private final Fsm_mnt_mgr mnt_mgr; private final Xou_cache_mgr cache_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xog_js_wkr js_wkr;
@@ -27,7 +27,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xoa_page hpg; private final List_adp imgs;
 	public Xof_file_wkr(Xof_orig_mgr orig_mgr, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xoa_page hpg, List_adp imgs) {
 		this.orig_mgr = orig_mgr; this.bin_mgr = bin_mgr; this.mnt_mgr = mnt_mgr; this.cache_mgr = cache_mgr;
-		this.usr_dlg = Gfo_usr_dlg_.I; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
+		this.usr_dlg = Gfo_usr_dlg_.Instance; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
 		this.hpg = hpg; this.imgs = imgs;
 	}
 	public String Name() {return "xowa.load_imgs";}
@@ -58,7 +58,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			if (repo == null) return false;
 			fsdb.Init_at_html(fsdb.Lnki_exec_tid(), img_size, repo, url_bldr);
 			if (fsdb.Orig_ext().Is_not_viewable(fsdb.Lnki_exec_tid())) return false;	// file not viewable; exit; EX: exec_tid = page and fsdb is audio
-			IoItmFil file = Io_mgr.I.QueryFil(fsdb.Html_view_url());
+			IoItmFil file = Io_mgr.Instance.QueryFil(fsdb.Html_view_url());
 			if (!file.Exists()) {
 				if (bin_mgr.Find_to_url_as_bool(fsdb.Lnki_exec_tid(), fsdb)) {
 					if (fsdb.Fsdb_insert()) Save_bin(fsdb, mnt_mgr, fsdb.Html_view_url());
@@ -117,7 +117,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		fsdb.Init_at_html(fsdb.Lnki_exec_tid(), img_size, repo_itm, url_bldr);
 	}
 	public static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr, Io_url html_url) {
-		long rdr_len = Io_mgr.I.QueryFil(html_url).Size();
+		long rdr_len = Io_mgr.Instance.QueryFil(html_url).Size();
 		Io_stream_rdr rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
 		try {
 			rdr.Open();

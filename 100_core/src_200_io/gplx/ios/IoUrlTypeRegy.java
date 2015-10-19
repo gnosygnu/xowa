@@ -36,8 +36,8 @@ public class IoUrlTypeRegy implements GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 //			return this;
 	}	public static final String Invk_Get = "Get";
-	Ordered_hash hash = Ordered_hash_.new_();
-        public static final IoUrlTypeRegy _ = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
+	Ordered_hash hash = Ordered_hash_.New();
+        public static final IoUrlTypeRegy Instance = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
 }
 class IoUrlTypeGrp implements GfoInvkAble {
 	public String[] AsAry() {
@@ -46,7 +46,7 @@ class IoUrlTypeGrp implements GfoInvkAble {
 			rv[i] = (String)list.Get_at(i);
 		return rv;
 	}
-	Ordered_hash list = Ordered_hash_.new_();
+	Ordered_hash list = Ordered_hash_.New();
 	public IoUrlTypeGrp(String key) {this.key = key;} private String key;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_AddMany)) {

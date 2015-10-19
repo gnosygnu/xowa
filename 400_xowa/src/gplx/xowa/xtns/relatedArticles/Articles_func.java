@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.html.*; import gplx.xowa.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.htmls.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Articles_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_relatedArticles;}
@@ -41,7 +41,7 @@ public class Articles_func extends Pf_func_base {
 			xtn_itm.Add(new Articles_itm(ttl, text));
 		}
 	}
-	public static final Articles_func _ = new Articles_func(); Articles_func() {}
+	public static final Articles_func Instance = new Articles_func(); Articles_func() {}
 	private static final byte[] Const_dlm = new byte[] {Byte_ascii.Amp, Byte_ascii.Amp};
 }
 class Articles_itm {
@@ -55,7 +55,7 @@ class Articles_itm {
 class Articles_itm_fmtr implements Bry_fmtr_arg {
 	private Xowe_wiki wiki; private List_adp itms;
 	public void Init(Xowe_wiki wiki, List_adp itms) {this.wiki = wiki; this.itms = itms;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Articles_itm itm = (Articles_itm)itms.Get_at(i);
@@ -64,7 +64,7 @@ class Articles_itm_fmtr implements Bry_fmtr_arg {
 		}
 	}
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_("\n      <li class=\"interwiki-relart\"><a href=\"/wiki/~{ttl}\">~{text}</a></li>",  "ttl", "text");
-	public static final Articles_itm_fmtr _ = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
+	public static final Articles_itm_fmtr Instance = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
 }
 class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.new_();
@@ -76,7 +76,7 @@ class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
 		itms_fmtr.Init(wiki, itms);
 		html_fmtr.Bld_bfr_many(bfr, wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title"), itms_fmtr);
 	}
-	private static final Articles_itm_fmtr itms_fmtr = Articles_itm_fmtr._;
+	private static final Articles_itm_fmtr itms_fmtr = Articles_itm_fmtr.Instance;
 	private static final Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(  "<div class=\"portal\" role=\"navigation\" id=\"p-relatedarticles\">"
 	, "  <h3>~{h3}</h3>"

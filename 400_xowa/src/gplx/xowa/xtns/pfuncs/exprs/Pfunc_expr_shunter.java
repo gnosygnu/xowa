@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
 	Btrie_fast_mgr trie = expression_();
@@ -140,7 +140,7 @@ public class Pfunc_expr_shunter {
 							prc_stack.Pop();
 							prv_prc = prc_stack.GetLast();
 						}
-						if (prv_prc == Paren_bgn_tkn._)
+						if (prv_prc == Paren_bgn_tkn.Instance)
 							prc_stack.Pop();
 						else
 							return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unexpected_closing_bracket);
@@ -164,8 +164,8 @@ public class Pfunc_expr_shunter {
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Tab));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Nl));
-		Trie_add(rv, Paren_bgn_tkn._);
-		Trie_add(rv, Paren_end_tkn._);
+		Trie_add(rv, Paren_bgn_tkn.Instance);
+		Trie_add(rv, Paren_end_tkn.Instance);
 		Trie_add(rv, new Func_tkn_plus("+"));
 		Trie_add(rv, new Func_tkn_minus("-"));
 		Trie_add(rv, new Func_tkn_minus(Char_.To_str((char)8722)));
@@ -218,5 +218,5 @@ public class Pfunc_expr_shunter {
 		return rv;
 	}
 	private static void Trie_add(Btrie_fast_mgr trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
-	public static final Pfunc_expr_shunter _ = new Pfunc_expr_shunter(); Pfunc_expr_shunter() {}
+	public static final Pfunc_expr_shunter Instance = new Pfunc_expr_shunter(); Pfunc_expr_shunter() {}
 }

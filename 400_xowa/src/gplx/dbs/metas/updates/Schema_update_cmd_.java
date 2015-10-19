@@ -29,7 +29,7 @@ class Schema_update_cmd__tbl_create implements Schema_update_cmd {
 	public boolean Exec_is_done() {return exec_is_done;} private boolean exec_is_done;
 	public void Exec(Schema_db_mgr db_mgr, Db_conn conn) {
 		if (db_mgr.Tbl_mgr().Has(tbl_name)) return;
-		Gfo_usr_dlg_.I.Log_many("", "", "schema.tbl.create: tbl=~{0}", tbl_name);
+		Gfo_usr_dlg_.Instance.Log_many("", "", "schema.tbl.create: tbl=~{0}", tbl_name);
 		Sqlite_engine_.Tbl_create(conn, tbl_name, tbl_sql);
 		Sqlite_engine_.Idx_create(conn, tbl_idxs);
 		exec_is_done = true;

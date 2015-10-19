@@ -60,7 +60,7 @@ public class Xof_cache_mgr implements GfoInvkAble {
 		if (Env_.Mode_testing()) return;				// NOTE: needed else test breaks in sqlite mode; DATE:2015-02-21
 		Xofc_fil_itm cache_fil_itm = this.Reg(itm, 0);	// get item
 		if (cache_fil_itm.Size() == 0) {				// item does not exist; size will be 0, since 0 passed above
-			long fil_size = Io_mgr.I.QueryFil(itm.Html_view_url()).Size();
+			long fil_size = Io_mgr.Instance.QueryFil(itm.Html_view_url()).Size();
 			cache_fil_itm.Size_(fil_size);
 		}
 	}

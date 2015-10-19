@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.html.heads.*; import gplx.xowa.html.modules.popups.*;
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.modules.popups.*;
 public class Xow_module_mgr implements GfoInvkAble {
 	private Hash_adp_bry regy = Hash_adp_bry.cs();
 	public Xow_module_mgr(Xowe_wiki wiki) {

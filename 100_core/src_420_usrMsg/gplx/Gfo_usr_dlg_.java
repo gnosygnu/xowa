@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_usr_dlg_ {
-	public static Gfo_usr_dlg			I		= Gfo_usr_dlg_noop._;	// NOTE: global instance which can be reassigned
-        public static final Gfo_usr_dlg	Noop	= Gfo_usr_dlg_noop._;
+	public static Gfo_usr_dlg			Instance	= Gfo_usr_dlg_noop.Instance;	// NOTE: global instance which can be reassigned
+        public static final Gfo_usr_dlg	Noop		= Gfo_usr_dlg_noop.Instance;
 	public static Gfo_usr_dlg Test() {
 		if (test == null)
 			test = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
@@ -49,5 +49,5 @@ class Gfo_usr_dlg_noop implements Gfo_usr_dlg {
 	public String Log_direct(String msg) {return "";}
 	public String Plog_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return this;}
-        public static final Gfo_usr_dlg_noop _ = new Gfo_usr_dlg_noop(); Gfo_usr_dlg_noop() {}
+        public static final Gfo_usr_dlg_noop Instance = new Gfo_usr_dlg_noop(); Gfo_usr_dlg_noop() {}
 }

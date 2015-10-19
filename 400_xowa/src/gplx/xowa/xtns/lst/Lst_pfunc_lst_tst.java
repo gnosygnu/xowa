@@ -89,7 +89,7 @@ class Lst_pfunc_lst_fxt {
 		if (fxt == null) fxt = new Xop_fxt();
 		fxt.Reset();
 		fxt.Wiki().Cache_mgr().Free_mem_all();
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		return this;
 	}
 	public Xop_fxt Fxt() {return fxt;} private Xop_fxt fxt;

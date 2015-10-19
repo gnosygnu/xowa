@@ -29,6 +29,6 @@ public class Xoctg_hiddencat_parser_txt extends Xoctg_hiddencat_parser_base {
 		fld_wtr.Write_int_base85_len5_fld(cur_id);
 	}
 	@Override public void Cmd_end() {
-		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter._, Io_line_rdr_key_gen_.noop, new Io_sort_fil_basic(bldr.Usr_dlg(), this.Make_url_gen(), make_fil_len));
+		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter.Instance, Io_line_rdr_key_gen_.noop, new Io_sort_fil_basic(bldr.Usr_dlg(), this.Make_url_gen(), make_fil_len));
 	}
 }

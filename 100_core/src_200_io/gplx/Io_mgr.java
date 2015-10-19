@@ -19,7 +19,7 @@ package gplx;
 import gplx.core.primitives.*; import gplx.ios.*; /*IoItmFil, IoItmDir..*/
 public class Io_mgr {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.ios whenever copying/deleting file
 	public boolean							Exists(Io_url url) {return url.Type_dir() ? ExistsDir(url) : ExistsFil(url);}
-	public boolean							ExistsFil(Io_url url) {return IoEnginePool._.Get_by(url.Info().EngineKey()).ExistsFil_api(url);}
+	public boolean							ExistsFil(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).ExistsFil_api(url);}
 	public void							ExistsFilOrFail(Io_url url) {if (!ExistsFil(url)) throw Err_.new_wo_type("could not find file", "url", url);}
 	public void							SaveFilStr(String url, String text) {SaveFilStr_args(Io_url_.new_fil_(url), text).Exec();}
 	public void							SaveFilStr(Io_url url, String text) {SaveFilStr_args(url, text).Exec();}
@@ -32,16 +32,16 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public IoEngine_xrg_xferFil			MoveFil_args(Io_url src, Io_url trg, boolean overwrite) {return IoEngine_xrg_xferFil.move_(src, trg).Overwrite_(overwrite);}
 	public void							CopyFil(Io_url src, Io_url trg, boolean overwrite) {IoEngine_xrg_xferFil.copy_(src, trg).Overwrite_(overwrite).Exec();}
 	public IoEngine_xrg_xferFil			CopyFil_args(Io_url src, Io_url trg, boolean overwrite) {return IoEngine_xrg_xferFil.copy_(src, trg).Overwrite_(overwrite);}
-	public IoRecycleBin RecycleBin()	{return recycleBin;} IoRecycleBin recycleBin = IoRecycleBin._; 
+	public IoRecycleBin RecycleBin()	{return recycleBin;} IoRecycleBin recycleBin = IoRecycleBin.Instance; 
 
 	public IoStream						OpenStreamWrite(Io_url url)		{return OpenStreamWrite_args(url).Exec();}
 	public IoEngine_xrg_openWrite		OpenStreamWrite_args(Io_url url) {return IoEngine_xrg_openWrite.new_(url);}
-	public IoItmFil						QueryFil(Io_url url) {return IoEnginePool._.Get_by(url.Info().EngineKey()).QueryFil(url);}
-	public void							UpdateFilAttrib(Io_url url, IoItmAttrib attrib) {IoEnginePool._.Get_by(url.Info().EngineKey()).UpdateFilAttrib(url, attrib);}
-	public void							UpdateFilModifiedTime(Io_url url, DateAdp modified) {IoEnginePool._.Get_by(url.Info().EngineKey()).UpdateFilModifiedTime(url, modified);}
+	public IoItmFil						QueryFil(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).QueryFil(url);}
+	public void							UpdateFilAttrib(Io_url url, IoItmAttrib attrib) {IoEnginePool.Instance.Get_by(url.Info().EngineKey()).UpdateFilAttrib(url, attrib);}
+	public void							UpdateFilModifiedTime(Io_url url, DateAdp modified) {IoEnginePool.Instance.Get_by(url.Info().EngineKey()).UpdateFilModifiedTime(url, modified);}
 
-	public boolean							ExistsDir(Io_url url) {return IoEnginePool._.Get_by(url.Info().EngineKey()).ExistsDir(url);}
-	public void							CreateDir(Io_url url) {IoEnginePool._.Get_by(url.Info().EngineKey()).CreateDir(url);}
+	public boolean							ExistsDir(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).ExistsDir(url);}
+	public void							CreateDir(Io_url url) {IoEnginePool.Instance.Get_by(url.Info().EngineKey()).CreateDir(url);}
 	public boolean							CreateDirIfAbsent(Io_url url) {
 		boolean exists = ExistsDir(url);
 		if (!exists) {
@@ -70,7 +70,7 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 			this.DeleteDirDeep(url);
 	}
 	public void AliasDir_sysEngine(String srcRoot, String trgRoot)			{AliasDir(srcRoot, trgRoot, IoEngine_.SysKey);}
-	public void AliasDir(String srcRoot, String trgRoot, String engineKey)	{IoUrlInfoRegy._.Reg(IoUrlInfo_.alias_(srcRoot, trgRoot, engineKey));}
+	public void AliasDir(String srcRoot, String trgRoot, String engineKey)	{IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.alias_(srcRoot, trgRoot, engineKey));}
 	public IoStream						OpenStreamRead(Io_url url)		{return OpenStreamRead_args(url).ExecAsIoStreamOrFail();}
 	public IoEngine_xrg_openRead		OpenStreamRead_args(Io_url url)	{return IoEngine_xrg_openRead.new_(url);}
 	public String						LoadFilStr(String url) {return LoadFilStr_args(Io_url_.new_fil_(url)).Exec();}
@@ -131,30 +131,30 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public IoEngine InitEngine_mem() {return IoEngine_.Mem_init_();}
 	public IoEngine InitEngine_mem_(String key) {
 		IoEngine engine = IoEngine_.mem_new_(key);
-		IoEnginePool._.Add_if_dupe_use_nth(engine);
-		IoUrlInfoRegy._.Reg(IoUrlInfo_.mem_(key, key));
+		IoEnginePool.Instance.Add_if_dupe_use_nth(engine);
+		IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.mem_(key, key));
 		return engine;
 	}
 	public boolean DownloadFil(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg).Exec();}
 	public IoEngine_xrg_downloadFil DownloadFil_args(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg);}
-	public static final Io_mgr I = new Io_mgr(); public Io_mgr() {}
+	public static final Io_mgr Instance = new Io_mgr(); public Io_mgr() {}
 	public static final int Len_kb = 1024, Len_mb = 1048576, Len_gb = 1073741824, Len_gb_2 = 2147483647;
 	public static final long Len_mb_long = Len_mb;
 	public static final long Len_null = -1;
 }
 class Io_mgr_ {
 	public static int Delete_dir_empty(Io_url url) {
-		IoItmDir dir = Io_mgr.I.QueryDir_args(url).ExecAsDir();
+		IoItmDir dir = Io_mgr.Instance.QueryDir_args(url).ExecAsDir();
 		int sub_dirs_len = dir.SubDirs().Count();
 		int deleted_dirs = 0;
 		for (int i = 0; i < sub_dirs_len; ++i) {
 			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
-			deleted_dirs += Io_mgr.I.Delete_dir_empty(sub_dir.Url());
+			deleted_dirs += Io_mgr.Instance.Delete_dir_empty(sub_dir.Url());
 		}
 		if (	dir.SubFils().Count() == 0
 			&&	deleted_dirs == sub_dirs_len
 			) {
-			Io_mgr.I.DeleteDirIfEmpty(url);
+			Io_mgr.Instance.DeleteDirIfEmpty(url);
 			return 1;
 		}
 		else

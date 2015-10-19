@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_cfg_wiki_core_tst {
 	Xow_cfg_wiki_core_fxt fxt = new Xow_cfg_wiki_core_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -104,8 +104,8 @@ class Xow_cfg_wiki_core_fxt {
 		for (int i = 0; i < expd_len; i++) {
 			Xow_ns expd = expd_ary[i];
 			Xow_ns actl = wiki.Ns_mgr().Ids_get_or_null(expd.Id());
-			Tfds.Eq(expd.Case_match(), actl.Case_match(), Int_.Xto_str(expd.Id()));
-			Tfds.Eq(expd.Name_str(), actl.Name_str(), Int_.Xto_str(expd.Id()));
+			Tfds.Eq(expd.Case_match(), actl.Case_match(), Int_.To_str(expd.Id()));
+			Tfds.Eq(expd.Name_str(), actl.Name_str(), Int_.To_str(expd.Id()));
 		}
 	}
 }

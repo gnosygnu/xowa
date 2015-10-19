@@ -33,8 +33,8 @@ class Xof_orig_tbl_fxt {
 	private Xof_orig_tbl tbl;
 	public void Clear() {
 		Io_url test_url = Io_url_.mem_fil_("mem/file/en.wikipedia.org/file/orig_regy");
-		Db_conn_bldr.I.Reg_default_mem();
-		Db_conn conn = Db_conn_bldr.I.New(test_url);
+		Db_conn_bldr.Instance.Reg_default_mem();
+		Db_conn conn = Db_conn_bldr.Instance.New(test_url);
 		tbl = new Xof_orig_tbl(conn, Bool_.Y);
 		tbl.Create_tbl();
 	}
@@ -45,7 +45,7 @@ class Xof_orig_tbl_fxt {
 		return rv;
 	}
 	public void Test_select_in(String[] itms, Xof_orig_itm... expd) {
-		Ordered_hash rv = Ordered_hash_.new_();
+		Ordered_hash rv = Ordered_hash_.New();
 		List_adp list = List_adp_.new_();
 		int itms_len = itms.length;
 		for (int i = 0; i < itms_len; ++i) {
@@ -71,6 +71,6 @@ class Xof_orig_tbl_fxt {
 				;
 			bfr.Add_byte_nl();
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

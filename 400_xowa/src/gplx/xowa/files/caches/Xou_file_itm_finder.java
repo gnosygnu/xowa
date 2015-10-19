@@ -48,7 +48,7 @@ public class Xou_file_itm_finder {
 //				img_size.Html_size_calc(exec_tid, xfer.Lnki_w(), xfer.Lnki_h(), (byte)xfer.Lnki_type(), Xof_patch_upright_tid_.Tid_all, xfer.Lnki_upright(), cache_itm.Orig_ext_id(), cache_itm.Orig_w(), cache_itm.Orig_h(), Xof_img_size.Thumb_width_img);
 //				xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, cache_itm, Bool_.N), url_bldr.To_url_trg(repo, cache_itm, Bool_.Y));
 			xfer.Init_at_html(exec_tid, img_size, repo, url_bldr);
-			if (Io_mgr.I.ExistsFil(xfer.Html_view_url())) {
+			if (Io_mgr.Instance.ExistsFil(xfer.Html_view_url())) {
 				cache_itm.Update_view_stats();
 				return true;
 			}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_proc_mgr {
-	private Ordered_hash hash = Ordered_hash_.new_();
+	private Ordered_hash hash = Ordered_hash_.New();
 	public void Clear() {hash.Clear();}
 	public Scrib_proc Get_by_key(String key) {return (Scrib_proc)hash.Get_by(key);}
 	public Scrib_proc Get_at(int i) {return (Scrib_proc)hash.Get_at(i);}

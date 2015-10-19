@@ -19,14 +19,6 @@ package gplx;
 public class Char_ {
 	public static final Class<?> Cls_ref_type = Character.class;
 	public static final char Null = '\0', NewLine = '\n';
-	public static final int CharLen = 1;
-	public static final int AsciiZero = 48;
-	public static boolean IsNumber(char c) {
-		switch (c) {
-			case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': return true;
-			default: return false;
-		}
-	}
 	public static boolean IsCaseLower(char c) {return Character.isLowerCase(c);}				
 	public static boolean IsLetterOrDigit(char c) {return Character.isLetterOrDigit(c);}	
 	public static boolean IsLetterEnglish(char c) {
@@ -48,11 +40,22 @@ public class Char_ {
 			default: return false;
 		}
 	}
+	public static boolean IsNumber(char c) {
+		switch (c) {
+			case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': return true;
+			default: return false;
+		}
+	}
 	public static boolean IsWhitespace(char c) {
 		switch (c) {
 			case ' ': case '\t': case '\n': case '\r': return true;
 			default: return false;
 		}
+	}
+	public static boolean In(char match, char... ary) {
+		for (char itm : ary)
+			if (itm == match) return true;
+		return false;
 	}
 	public static int To_int_or(char c, int or) {
 		switch (c) {
@@ -61,17 +64,10 @@ public class Char_ {
 			default: return or;
 		}
 	}
-	public static boolean In(char match, char... ary) {
-		for (char itm : ary)
-			if (itm == match) return true;
-		return false;
-	}
 	public static String To_str(char[] ary, int pos, int length) {return new String(ary, pos, length);}
-	public static byte[] XtoByteAry(int v) {return Bry_.new_u8(Char_.To_str((char)v));}
-	public static char XbyInt(int i) {return (char)i;}
 	public static String To_str(int b) {return To_str((char)b);}
 	public static String To_str(char c) {return String.valueOf(c);}	
-	public static byte XtoByte(char c) {return (byte)c;}
+	public static char By_int(int i) {return (char)i;}
 	public static char cast(Object o) {try {return (Character)o;} catch(Exception e) {throw Err_.new_type_mismatch_w_exc(e, char.class, o);}}
 	public static char parse(String raw) {try {return raw.charAt(0);} catch(Exception exc) {throw Err_.new_parse_exc(exc, char.class, raw);}}
 }

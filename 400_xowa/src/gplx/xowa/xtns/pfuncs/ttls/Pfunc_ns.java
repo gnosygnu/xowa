@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 	private boolean encode;
@@ -33,7 +33,7 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 		if (ns_id == Int_.Min_value) {
 			Object o = ctx.Wiki().Ns_mgr().Names_get_or_null(val_dat_ary, 0, val_dat_ary_len);
 			if (o == null
-				&& !Bry_.Eq(ctx.Lang().Key_bry(), Xol_lang_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex
+				&& !Bry_.Eq(ctx.Lang().Key_bry(), Xol_lang_itm_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex
 					o = canonical.Get_by_mid(val_dat_ary, 0, val_dat_ary_len);				
 			if (o != null) {
 				Xow_ns itm = (Xow_ns)o;

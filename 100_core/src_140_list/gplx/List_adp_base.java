@@ -24,7 +24,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	}
 	public java.util.Iterator iterator() {
 		if (count == 0)
-			return Iterator_null._;
+			return Iterator_null.Instance;
 		else
 			return new Iterator_objAry(list, count);
 	}
@@ -128,6 +128,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			Array_.Set_at(rv, i, list[i]);
 		return rv;
 	}
+	public String[] To_str_ary_and_clear() {String[] rv = To_str_ary(); this.Clear(); return rv;}
 	public String[] To_str_ary() {return (String[])To_ary(String.class);}
 	public Object[] To_obj_ary() {
 		Object[] rv = new Object[count];
@@ -139,7 +140,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		Bry_bfr bfr = Bry_bfr.new_();
 		for (int i = 0; i < count; ++i)
 			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(list[i])).Add_byte_nl();
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	private void BoundsChk(int bgn, int end, int len) {
 		if (	bgn >= 0 && bgn < len

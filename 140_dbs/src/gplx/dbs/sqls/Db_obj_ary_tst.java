@@ -31,12 +31,12 @@ class Db_obj_ary_fxt {
 	public Db_obj_ary_fxt Init_fld(String name, int tid) {flds_list.Add(new Db_fld(name, tid)); return this;} private List_adp flds_list = List_adp_.new_();
 	public Db_obj_ary_fxt Init_vals(Object... ary) {vals_list.Add(ary); return this;} private List_adp vals_list = List_adp_.new_();
 	public Db_obj_ary_fxt Test_sql(String expd) {
-		Sql_qry_wtr_ansi cmd_wtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.I;
+		Sql_qry_wtr_ansi cmd_wtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.Instance;
 		String_bldr sb = String_bldr_.new_();
 		crt.Flds_((Db_fld[])flds_list.To_ary_and_clear(Db_fld.class));
 		crt.Vals_((Object[][])vals_list.To_ary_and_clear(Object[].class));
 		cmd_wtr.Append_db_obj_ary(sb, crt);
-		Tfds.Eq(expd, sb.Xto_str_and_clear());
+		Tfds.Eq(expd, sb.To_str_and_clear());
 		return this;
 	}
 }

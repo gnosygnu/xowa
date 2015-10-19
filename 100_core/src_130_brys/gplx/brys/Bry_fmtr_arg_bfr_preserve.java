@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.brys; import gplx.*;
 public class Bry_fmtr_arg_bfr_preserve implements Bry_fmtr_arg {
-	public Bry_fmtr_arg_bfr_preserve Data_(Bry_bfr v) {bfr = v; return this;}
-	public void XferAry(Bry_bfr trg, int idx) {trg.Add_bfr_and_preserve(bfr);}
 	public Bry_fmtr_arg_bfr_preserve(Bry_bfr bfr) {this.bfr = bfr;} Bry_bfr bfr;
+	public Bry_fmtr_arg_bfr_preserve Data_(Bry_bfr v) {bfr = v; return this;}
+	public void Fmt__do(Bry_bfr trg) {trg.Add_bfr_and_preserve(bfr);}
 }

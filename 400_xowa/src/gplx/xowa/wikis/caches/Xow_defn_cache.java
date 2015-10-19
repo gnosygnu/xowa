@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.intls.*; import gplx.core.caches.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xow_defn_cache {	// stores compiled Xot_defn
-	private Xol_lang lang;		// needed to lowercase names;
+	private Xol_lang_itm lang;		// needed to lowercase names;
 	private Bry_bfr upper_1st_bfr = Bry_bfr.reset_(255);
 	private Gfo_cache_mgr cache = new Gfo_cache_mgr().Max_size_(64 * 1024 * 1024).Reduce_by_(32 * 1024 * 1024);
-	public Xow_defn_cache(Xol_lang lang) {this.lang = lang;}
+	public Xow_defn_cache(Xol_lang_itm lang) {this.lang = lang;}
 	public Xot_defn Get_by_key(byte[] name) {return (Xot_defn)cache.Get_by_key(name);}
 	public void Free_mem_all()	{cache.Clear();}
 	public void Free_mem_some() {cache.Reduce_recent();}

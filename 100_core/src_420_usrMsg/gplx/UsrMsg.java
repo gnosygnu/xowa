@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class UsrMsg {
 	public int VisibilityDuration() {return visibilityDuration;} public UsrMsg VisibilityDuration_(int v) {visibilityDuration = v; return this;} int visibilityDuration = 3000;
 	public String Hdr() {return hdr;} public UsrMsg Hdr_(String val) {hdr = val; return this;} private String hdr;
-	public Ordered_hash Args() {return args;} Ordered_hash args = Ordered_hash_.new_();
+	public Ordered_hash Args() {return args;} Ordered_hash args = Ordered_hash_.New();
 	public UsrMsg Add(String k, Object v) {
 		args.Add(k, KeyVal_.new_(k, v));
 		return this;
@@ -38,7 +38,7 @@ public class UsrMsg {
 				KeyVal kv = (KeyVal)args.Get_at(i);
 				m.Add(kv.Key(), kv.Val());
 			}
-			return Object_.Xto_str_strict_or_null_mark(invk.Invk(GfsCtx._, 0, cmd, m));
+			return Object_.Xto_str_strict_or_null_mark(invk.Invk(GfsCtx.Instance, 0, cmd, m));
 		}
 		String_bldr sb = String_bldr_.new_();
 		sb.Add(hdr).Add(spr);

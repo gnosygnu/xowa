@@ -131,7 +131,7 @@ class GfmlFldPool {
 			}
 		}
 	}
-	Ordered_hash keyedRegy = Ordered_hash_.new_();
+	Ordered_hash keyedRegy = Ordered_hash_.New();
 	public static GfmlFldPool new_(GfmlType type) {
 		GfmlFldPool rv = new GfmlFldPool();
 		rv.InitByType(type);

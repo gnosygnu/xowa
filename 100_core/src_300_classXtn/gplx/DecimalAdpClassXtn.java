@@ -23,5 +23,5 @@ public class DecimalAdpClassXtn extends ClassXtn_base implements ClassXtn {
 	public boolean Eq(Object lhs, Object rhs) {try {return Decimal_adp_.cast(lhs).Eq(Decimal_adp_.cast(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object ParseOrNull(String raw)				{return Decimal_adp_.parse(raw);}
 	@Override public String XtoUi(Object obj, String fmt)		{return Decimal_adp_.cast(obj).To_str();}
-	public static final DecimalAdpClassXtn _ =  new DecimalAdpClassXtn(); DecimalAdpClassXtn() {} // added to ClassXtnPool by default
+	public static final DecimalAdpClassXtn Instance =  new DecimalAdpClassXtn(); DecimalAdpClassXtn() {} // added to ClassXtnPool by default
 }

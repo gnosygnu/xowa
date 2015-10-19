@@ -69,7 +69,7 @@ public class GfsCore_tst {
 		core.AddDeep(obj1_1, "1", "1_1");
 
 		GfoMsg root = GfoMsg_.root_("1", "1_1", GfsCore_tst_nest.Prop2);
-		Object actl = core.ExecOne(GfsCtx._, root);
+		Object actl = core.ExecOne(GfsCtx.Instance, root);
 		Tfds.Eq("val2", actl);
 	}
 	void tst_String__Len_Err(GfoMsg m, Err expd) {

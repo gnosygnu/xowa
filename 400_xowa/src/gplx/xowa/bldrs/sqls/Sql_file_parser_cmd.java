@@ -28,7 +28,7 @@ class Sql_file_parser_cmd_max_len implements Sql_file_parser_cmd {
 			String itm = (String)log.Get_at(i);
 			sb.Add(String_.Len(itm) + "|" + itm + "\n");
 		}
-		Io_mgr.I.SaveFilStr(url, sb.To_str());
+		Io_mgr.Instance.SaveFilStr(url, sb.To_str());
 	}
 	public int Max_len() {return max_len;} private int max_len; 
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {

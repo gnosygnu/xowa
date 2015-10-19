@@ -24,7 +24,7 @@ public class Pfunc_grammar_tst {
 		fxt.Test_parse_tmpl_str_test("{{grammar:a|b}}"						, "{{test}}"	, "[[:Template:grammar]]");
 	}
 	@Test  public void Finnish() {
-		fxt.Lang_by_id_(Xol_lang_itm_.Id_fi);
+		fxt.Lang_by_id_(Xol_lang_stub_.Id_fi);
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:elative|Wikiuutiset}}"		, "{{test}}"	, "Wikiuutisista");
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:talo}}"						, "{{test}}"	, "");
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|talo}}"			, "{{test}}"	, "talon");
@@ -39,7 +39,7 @@ public class Pfunc_grammar_tst {
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:illative|sängy}}"			, "{{test}}"	, "sängyyn");
 	}
 	@Test  public void Russian() {
-		fxt.Lang_by_id_(Xol_lang_itm_.Id_ru);
+		fxt.Lang_by_id_(Xol_lang_stub_.Id_ru);
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:unknown}}"					, "{{test}}"	, "");
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aвики}}"			, "{{test}}"	, "aвики");
 		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aВики}}"			, "{{test}}"	, "aВики");

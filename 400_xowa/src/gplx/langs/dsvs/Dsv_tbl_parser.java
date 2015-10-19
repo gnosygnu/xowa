@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 	private Dsv_wkr_base mgr;
-	private Dsv_fld_parser[] fld_parsers = new Dsv_fld_parser[2];
+	private Dsv_fld_parser[] fld_parsers = new Dsv_fld_parser[2]; private int fld_parsers_len = 2;
 	public byte[] Src() {return src;} private byte[] src;
 	public int Fld_bgn() {return fld_bgn;} private int fld_bgn = 0;
 	public int Fld_idx() {return fld_idx;} private int fld_idx = 0;
@@ -30,7 +30,7 @@ public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 	public void Init(Dsv_wkr_base mgr, Dsv_fld_parser... fld_parsers) {
 		this.mgr = mgr;
 		this.fld_parsers = fld_parsers;
-		int fld_parsers_len = fld_parsers.length;
+		this.fld_parsers_len = fld_parsers.length;
 		for (int i = 0; i < fld_parsers_len; i++)
 			fld_parsers[i].Init(fld_dlm, row_dlm);
 	}
@@ -50,10 +50,10 @@ public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 		fld_idx = 0;
 	}
 	public void Parse(byte[] src) {
+		int src_len = src.length; if (src_len == 0) return; // NOTE: do not process if empty; note that loop below will process once for empty row
 		this.src = src;
-		int src_len = src.length;			
 		int pos = 0;
-		while (pos < src_len) {
+		while (true) {
 			if (fld_idx == 0 && skip_blank_lines) {	// row committed; skip blank lines
 				while (pos < src_len) {
 					if (src[pos] == row_dlm) {
@@ -64,12 +64,16 @@ public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 						break;
 				}
 			}
+			if (fld_idx == fld_parsers_len) break;
 			Dsv_fld_parser fld_parser = fld_parsers[fld_idx];
 			pos = fld_parser.Parse(this, mgr, src, pos, src_len, fld_idx, fld_bgn);
+			if (	pos > src_len						// pos is now fully past src_len; exit
+				||	pos == src_len && fld_idx == 0		// last pos but fld_idx > 0; do one more iteration which will "commit row; EX: 2 fields and src of "a|"; EOS should close out row
+				) break;
 		}
 	}
 	public void Rls() {
-		src = null; fld_parsers = null; mgr = null;
+		src = null; fld_parsers = null; mgr = null; fld_parsers_len = 0;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_load_by_str))		Parse(m.ReadBry("v"));

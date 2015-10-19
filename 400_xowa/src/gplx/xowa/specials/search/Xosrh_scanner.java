@@ -127,7 +127,7 @@ class Xosrh_scanner {
 		}
 		tkns.Add(new_tkn_(tid, src_bgn, src_end));
 	}
-	Ordered_hash tmp_list = Ordered_hash_.new_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
+	Ordered_hash tmp_list = Ordered_hash_.New(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 	Xosrh_qry_tkn new_tkn_(byte tid, int val_bgn, int val_end) {return Xosrh_qry_tkn.new_pos_(tid, val_bgn, val_end);}
 	private static byte[] Bry_and = Bry_.new_a7("AND");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()// NOTE:ci.ascii:OR / AND only
@@ -138,7 +138,7 @@ class Xosrh_scanner {
 	.Add_str_byte(")", Xosrh_qry_tkn.Tid_paren_end)
 	.Add_str_byte("or", Xosrh_qry_tkn.Tid_or)
 	.Add_str_byte("and", Xosrh_qry_tkn.Tid_and);
-	public static final Xosrh_scanner _ = new Xosrh_scanner(); Xosrh_scanner() {}
+	public static final Xosrh_scanner Instance = new Xosrh_scanner(); Xosrh_scanner() {}
 }
 class Xosrh_qry_tkn {
 	Xosrh_qry_tkn(byte tid, int val_bgn, int val_end, byte[] val_bry) {this.tid = tid; this.val_bgn = val_bgn; this.val_end = val_end; this.val_bry = val_bry;}

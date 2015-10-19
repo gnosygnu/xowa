@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public interface Xop_tblw_tkn extends Xop_tkn_itm {
 	int Tblw_tid();
 	boolean Tblw_xml();
@@ -24,5 +24,5 @@ public interface Xop_tblw_tkn extends Xop_tkn_itm {
 	int Atrs_bgn();
 	int Atrs_end();
 	void Atrs_rng_set(int bgn, int end);
-	Xop_xatr_itm[] Atrs_ary(); Xop_tblw_tkn Atrs_ary_as_tblw_(Xop_xatr_itm[] v);
+	Mwh_atr_itm[] Atrs_ary(); Xop_tblw_tkn Atrs_ary_as_tblw_(Mwh_atr_itm[] v);
 }

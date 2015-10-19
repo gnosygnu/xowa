@@ -61,7 +61,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 		if (page_idx < 0 || page_idx >= pages_ary.length) return Grp_empty;
 		if (	sort_tid != Xosrh_rslt_itm_sorter.Tid_ttl_asc 
 			&&	cancelable == Cancelable_.Never								// cancelable != Cancelable_.Never for search_suggest
-			&&	wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_txt.Tid_txt	// txt only has search_title fields (page_id, word_id), so it needs to do another load to get page fields; note that sql has page fields already
+			&&	wiki.Db_mgr().Tid() == gplx.xowa.wikis.dbs.Xodb_mgr_txt.Tid_txt	// txt only has search_title fields (page_id, word_id), so it needs to do another load to get page fields; note that sql has page fields already
 			) {	
 			wiki.Db_mgr().Load_mgr().Load_by_ids(cancelable, cur_ids, itms_bgn, itms_end);
 		}
@@ -74,7 +74,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 	}
 	public List_adp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {
 		search = wiki.Lang().Case_mgr().Case_build_lower(search, 0, search.length);
-		Xosrh_qry_itm cur_root = Xosrh_parser._.Parse(search);
+		Xosrh_qry_itm cur_root = Xosrh_parser.Instance.Parse(search);
 		cur_root.Search(cancelable, bfr, search, wiki, itms_per_page, ns_mgr);
 		return cur_root.Matches(search).Ids();
 	}

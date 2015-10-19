@@ -33,6 +33,6 @@ public class Mem_kit extends Gfui_kit_base {
 	@Override protected Gxw_tab_mgr New_tab_mgr_impl() {return new Mem_tab_mgr();}
 	@Override protected Gxw_tab_itm New_tab_itm_impl() {return new Mem_tab_itm();}
 	@Override protected GxwElem New_btn_impl() {return factory.control_();}
-	@Override public ImageAdp New_img_load(Io_url url) {return ImageAdp_null._;}
-	public static final Mem_kit _ = new Mem_kit(); Mem_kit() {}
+	@Override public ImageAdp New_img_load(Io_url url) {return ImageAdp_null.Instance;}
+	public static final Mem_kit Instance = new Mem_kit(); Mem_kit() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.langs.numbers.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.langs.numbers.*;
 class Xows_html_wkr {		
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Xows_ui_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
@@ -31,7 +31,7 @@ class Xows_html_wkr {
 		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + List_adp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
 		byte[] option_link = lnki_bldr.Href_(Bry_.new_a7("home"), wiki.Ttl_parse(Bry_.new_a7("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
 		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Paging_link(Bool_.N), Paging_link(Bool_.Y), tbls);
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Gen_tbl(Bry_bfr bfr, Xows_ui_rslt rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
 		html_rows.Init(rslt);
@@ -95,7 +95,7 @@ class Xows_html_row implements Bry_fmtr_arg {
 	private final Object thread_lock = new Object();
 	public Xows_html_row(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
 	public Xows_html_row Init(Xows_ui_rslt rslt) {this.rslt = rslt; return this;}
-	public void XferAry(Bry_bfr bfr, int idx) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
+	public void Fmt__do(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
 		int len = rslt.Len();
 		for (int i = 0; i < len; ++i) {
 			Xows_db_row row = rslt.Get_at(i);

@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.brys; import gplx.*;
 public class Bry_fmtr_arg_bry implements Bry_fmtr_arg {
 	public Bry_fmtr_arg_bry Data_(byte[] v) {ary = v; return this;}
-	public void XferAry(Bry_bfr trg, int idx) {trg.Add(ary);}
+	public void Fmt__do(Bry_bfr bfr) {bfr.Add(ary);}
 	public Bry_fmtr_arg_bry(byte[] v) {this.ary = v;}	byte[] ary;
 }

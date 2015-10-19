@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pf_func_ {
@@ -30,18 +30,18 @@ public class Pf_func_ {
 		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, bfr);	// NOTE: must add key b/c parser functions do not have keys and some usages pass in xml_tkns; EX: {{#if|<a href='{{{1}}}'|}}; "<a href" should not be interpreted as key
 		if (nde.KeyTkn_exists()) bfr.Add_byte(Byte_ascii.Eq);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.Xto_bry_and_clear_and_trim();
+		return bfr.To_bry_and_clear_and_trim();
 	}
 	public static byte[] Eval_val_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
 		Bry_bfr bfr = Bry_bfr.new_();
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.Xto_bry_and_clear_and_trim();
+		return bfr.To_bry_and_clear_and_trim();
 	}
 	public static byte[] Eval_tkn(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xot_invk caller, Xop_tkn_itm tkn) {
 		tkn.Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	private static final Number_parser lhs_parser = new Number_parser().Hex_enabled_(true), rhs_parser = new Number_parser().Hex_enabled_(true);
 	public static boolean Eq_(byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
@@ -64,7 +64,7 @@ public class Pf_func_ {
 		if (rhs_parser.Has_err()) return false;
 		return lhs_parser.Has_frac() || rhs_parser.Has_frac() ? lhs_parser.Rv_as_dec().Eq(rhs_parser.Rv_as_dec()) : lhs_parser.Rv_as_int() == rhs_parser.Rv_as_int();
 	}
-	public static void Reg(gplx.xowa.langs.Xol_func_name_regy func_regy, Xol_lang lang) {
+	public static void Reg(gplx.xowa.langs.funcs.Xol_func_regy func_regy, Xol_lang_itm lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		int[] kwd_ary = Ary_get(!lang.Kwd_mgr__strx());
 		int len = kwd_ary.length;
@@ -295,7 +295,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_ttl_subj_txt:
 			case Xol_kwd_grp_.Id_ttl_subj_url:
 			case Xol_kwd_grp_.Id_ttl_talk_txt:
-			case Xol_kwd_grp_.Id_ttl_talk_url:					return Pfunc_ttl._;
+			case Xol_kwd_grp_.Id_ttl_talk_url:					return Pfunc_ttl.Instance;
 
 			case Xol_kwd_grp_.Id_site_sitename:
 			case Xol_kwd_grp_.Id_site_servername:
@@ -305,7 +305,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_site_stylepath:
 			case Xol_kwd_grp_.Id_site_contentlanguage:
 			case Xol_kwd_grp_.Id_site_directionmark:
-			case Xol_kwd_grp_.Id_site_currentversion:			return Pfunc_wiki_props._;
+			case Xol_kwd_grp_.Id_site_currentversion:			return Pfunc_wiki_props.Instance;
 
 			case Xol_kwd_grp_.Id_num_pages:
 			case Xol_kwd_grp_.Id_num_articles:
@@ -314,25 +314,25 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_num_views:
 			case Xol_kwd_grp_.Id_num_users:
 			case Xol_kwd_grp_.Id_num_users_active:
-			case Xol_kwd_grp_.Id_num_admins:					return Pfunc_wiki_stats._;
+			case Xol_kwd_grp_.Id_num_admins:					return Pfunc_wiki_stats.Instance;
 
 			case Xol_kwd_grp_.Id_page_id:
 			case Xol_kwd_grp_.Id_rev_id:
 			case Xol_kwd_grp_.Id_rev_pagesize:
 			case Xol_kwd_grp_.Id_rev_user:
-			case Xol_kwd_grp_.Id_rev_protectionlevel:			return Pfunc_rev_props._;
-			case Xol_kwd_grp_.Id_page_displaytitle:				return Pfunc_displaytitle._;
-			case Xol_kwd_grp_.Id_page_defaultsort:				return Pfunc_defaultsort._;
-			case Xol_kwd_grp_.Id_noeditsection:					return Pfunc_noeditsection._;
-			case Xol_kwd_grp_.Id_site_pagesincategory:			return Pfunc_pagesincategory._;
+			case Xol_kwd_grp_.Id_rev_protectionlevel:			return Pfunc_rev_props.Instance;
+			case Xol_kwd_grp_.Id_page_displaytitle:				return Pfunc_displaytitle.Instance;
+			case Xol_kwd_grp_.Id_page_defaultsort:				return Pfunc_defaultsort.Instance;
+			case Xol_kwd_grp_.Id_noeditsection:					return Pfunc_noeditsection.Instance;
+			case Xol_kwd_grp_.Id_site_pagesincategory:			return Pfunc_pagesincategory.Instance;
 
 			case Xol_kwd_grp_.Id_url_ns:						return new Pfunc_ns(false);
 			case Xol_kwd_grp_.Id_url_nse:						return new Pfunc_ns(true);
 			case Xol_kwd_grp_.Id_url_urlencode:					return new Pfunc_urlencode();
-			case Xol_kwd_grp_.Id_str_lc:						return new Pfunc_case(Xol_lang.Tid_lower, false);
-			case Xol_kwd_grp_.Id_str_lcfirst:					return new Pfunc_case(Xol_lang.Tid_lower, true);
-			case Xol_kwd_grp_.Id_str_uc:						return new Pfunc_case(Xol_lang.Tid_upper, false);
-			case Xol_kwd_grp_.Id_str_ucfirst:					return new Pfunc_case(Xol_lang.Tid_upper, true);
+			case Xol_kwd_grp_.Id_str_lc:						return new Pfunc_case(Xol_lang_itm.Tid_lower, false);
+			case Xol_kwd_grp_.Id_str_lcfirst:					return new Pfunc_case(Xol_lang_itm.Tid_lower, true);
+			case Xol_kwd_grp_.Id_str_uc:						return new Pfunc_case(Xol_lang_itm.Tid_upper, false);
+			case Xol_kwd_grp_.Id_str_ucfirst:					return new Pfunc_case(Xol_lang_itm.Tid_upper, true);
 			case Xol_kwd_grp_.Id_str_padleft:					return new Pfunc_pad(Xol_kwd_grp_.Id_str_padleft, false);
 			case Xol_kwd_grp_.Id_str_padright:					return new Pfunc_pad(Xol_kwd_grp_.Id_str_padright, true);
 			case Xol_kwd_grp_.Id_str_formatnum:					return new Pf_formatnum();
@@ -381,32 +381,32 @@ public class Pf_func_ {
 
 			case Xol_kwd_grp_.Id_xowa_dbg:						return new Xop_xowa_dbg();
 			case Xol_kwd_grp_.Id_xowa:							return new gplx.xowa.xtns.xowa_cmds.Xop_xowa_func();
-			case Xol_kwd_grp_.Id_xtn_geodata_coordinates:		return gplx.xowa.xtns.geodata.Geo_coordinates_func._;
-			case Xol_kwd_grp_.Id_lst:							return gplx.xowa.xtns.lst.Lst_pfunc_lst._;
-			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx._;
+			case Xol_kwd_grp_.Id_xtn_geodata_coordinates:		return gplx.xowa.xtns.geodata.Geo_coordinates_func.Instance;
+			case Xol_kwd_grp_.Id_lst:							return gplx.xowa.xtns.lst.Lst_pfunc_lst.Instance;
+			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx.Instance;
 			case Xol_kwd_grp_.Id_invoke:						return new gplx.xowa.xtns.scribunto.Scrib_invoke_func();
 
 			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_property();
 			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_noExternalLangLinks();
 			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_wbreponame();
 
-			case Xol_kwd_grp_.Id_mapSources_deg2dd:				return gplx.xowa.xtns.mapSources.Map_deg2dd_func._;
-			case Xol_kwd_grp_.Id_mapSources_dd2dms:				return gplx.xowa.xtns.mapSources.Map_dd2dms_func._;
-			case Xol_kwd_grp_.Id_mapSources_geoLink:			return gplx.xowa.xtns.mapSources.Map_geolink_func._;
+			case Xol_kwd_grp_.Id_mapSources_deg2dd:				return gplx.xowa.xtns.mapSources.Map_deg2dd_func.Instance;
+			case Xol_kwd_grp_.Id_mapSources_dd2dms:				return gplx.xowa.xtns.mapSources.Map_dd2dms_func.Instance;
+			case Xol_kwd_grp_.Id_mapSources_geoLink:			return gplx.xowa.xtns.mapSources.Map_geolink_func.Instance;
 
-			case Xol_kwd_grp_.Id_geoCrumbs_isin:				return gplx.xowa.xtns.geoCrumbs.Geoc_isin_func._;
+			case Xol_kwd_grp_.Id_geoCrumbs_isin:				return gplx.xowa.xtns.geoCrumbs.Geoc_isin_func.Instance;
 
-			case Xol_kwd_grp_.Id_relatedArticles:				return gplx.xowa.xtns.relatedArticles.Articles_func._;
-			case Xol_kwd_grp_.Id_insider:						return gplx.xowa.xtns.insiders.Insider_func._;
+			case Xol_kwd_grp_.Id_relatedArticles:				return gplx.xowa.xtns.relatedArticles.Articles_func.Instance;
+			case Xol_kwd_grp_.Id_insider:						return gplx.xowa.xtns.insiders.Insider_func.Instance;
 
-			case Xol_kwd_grp_.Id_massMessage_target:			return gplx.xowa.xtns.massMessage.Message_target_func._;
+			case Xol_kwd_grp_.Id_massMessage_target:			return gplx.xowa.xtns.massMessage.Message_target_func.Instance;
 
-			case Xol_kwd_grp_.Id_pendingChangeLevel:			return gplx.xowa.xtns.flaggedRevs.Pending_change_level_func._;
-			case Xol_kwd_grp_.Id_pagesUsingPendingChanges:		return gplx.xowa.xtns.flaggedRevs.Pages_using_pending_changes_func._;
+			case Xol_kwd_grp_.Id_pendingChangeLevel:			return gplx.xowa.xtns.flaggedRevs.Pending_change_level_func.Instance;
+			case Xol_kwd_grp_.Id_pagesUsingPendingChanges:		return gplx.xowa.xtns.flaggedRevs.Pages_using_pending_changes_func.Instance;
 
 			case Xol_kwd_grp_.Id_cascadingSources:
 																return new Pf_func_noop(id);
-			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang._;
+			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang.Instance;
 			default:											throw Err_.new_unhandled(id);
 		}
 	}
@@ -421,6 +421,6 @@ class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
-	public static final Pf_func_bang _ = new Pf_func_bang();
+	public static final Pf_func_bang Instance = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}
 }

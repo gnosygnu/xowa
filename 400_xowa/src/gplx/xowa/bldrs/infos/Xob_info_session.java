@@ -40,12 +40,12 @@ public class Xob_info_session {
 	public static Xob_info_session Load(Db_cfg_tbl tbl) {
 		Db_cfg_hash hash = tbl.Select_as_hash(Cfg_grp);
 		return new Xob_info_session
-		( hash.Get(Cfg_key__user).To_str_or("")
-		, hash.Get(Cfg_key__version).To_str_or("")
-		, hash.Get(Cfg_key__wiki_domain).To_str_or("")
-		, hash.Get(Cfg_key__dump_name).To_str_or("")
-		, hash.Get(Cfg_key__time).To_date_or(DateAdp_.MinValue)
-		, hash.Get(Cfg_key__guid).To_guid_or(Guid_adp_.Empty)
+		( hash.Get_by(Cfg_key__user).To_str_or("")
+		, hash.Get_by(Cfg_key__version).To_str_or("")
+		, hash.Get_by(Cfg_key__wiki_domain).To_str_or("")
+		, hash.Get_by(Cfg_key__dump_name).To_str_or("")
+		, hash.Get_by(Cfg_key__time).To_date_or(DateAdp_.MinValue)
+		, hash.Get_by(Cfg_key__guid).To_guid_or(Guid_adp_.Empty)
 		);
 	}
 	public static final String Cfg_grp = gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_session

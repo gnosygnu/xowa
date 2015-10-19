@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.lnkis.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.lnkis.*;
 public class Xop_amp_trie_itm {
 	public Xop_amp_trie_itm(byte tid, int char_int, byte[] xml_name_bry) {
 		this.tid = tid;

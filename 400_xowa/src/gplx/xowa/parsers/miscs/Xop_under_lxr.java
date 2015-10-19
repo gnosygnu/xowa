@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.langs.*;
-import gplx.xowa.html.tocs.*;
+import gplx.core.btries.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.htmls.tocs.*;
 public class Xop_under_lxr implements Xop_lxr {
 	private Btrie_mgr words_trie_ci, words_trie_cs;
 	public int Lxr_tid() {return Xop_lxr_.Tid_under;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		int under_kwds_len = under_kwds.length;
 		Xop_under_lxr lxr = new Xop_under_lxr();
@@ -56,7 +57,7 @@ public class Xop_under_lxr implements Xop_lxr {
 					if (kwd_case_match)					// cs; add word directly to trie
 						core_trie.Add(kwd_bry, word_lxr);
 					else {								// NOTE: next part is imprecise; XOWA parser is cs, but kwd is ci; for now, just add all upper and all lower
-						Gfo_usr_dlg_.I.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_u8(kwd_grp.Key()), String_.new_u8(kwd_bry));
+						Gfo_usr_dlg_.Instance.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_u8(kwd_grp.Key()), String_.new_u8(kwd_bry));
 						core_trie.Add(lang.Case_mgr().Case_build_lower(kwd_bry), word_lxr);
 						core_trie.Add(lang.Case_mgr().Case_build_upper(kwd_bry), word_lxr);	
 					}
@@ -110,14 +111,14 @@ public class Xop_under_lxr implements Xop_lxr {
 			default:								break;	// ignore anything else
 		}				
 	}
-	public static final Xop_under_lxr _ = new Xop_under_lxr(); Xop_under_lxr() {}
+	public static final Xop_under_lxr Instance = new Xop_under_lxr(); Xop_under_lxr() {}
 }
 class Xop_word_lxr implements Xop_lxr {
 	private int kwd_id;
 	public Xop_word_lxr(int kwd_id) {this.kwd_id = kwd_id;}
 	public int Lxr_tid() {return Xop_lxr_.Tid_word;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_under_lxr.Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, kwd_id);	// for now, all word_lxrs only call the under_lxr; DATE:2014-02-14

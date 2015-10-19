@@ -34,6 +34,7 @@ public class Mwh_atr_itm {
 	public boolean Valid() {return valid;} private final boolean valid;
 	public boolean Key_exists() {return key_exists;} private final boolean key_exists;
 	public boolean Repeated() {return repeated;} private final boolean repeated;
+	public boolean Invalid() {return repeated || !valid;} 
 	public int Atr_bgn() {return atr_bgn;} private int atr_bgn;
 	public int Atr_end() {return atr_end;} private int atr_end;
 	public int Key_bgn() {return key_bgn;} private final int key_bgn;
@@ -45,42 +46,21 @@ public class Mwh_atr_itm {
 	public byte[] Val_bry() {return val_bry;} private byte[] val_bry;
 	public int Eql_pos() {return eql_pos;} private final int eql_pos;
 	public int Qte_tid() {return qte_tid;} private final int qte_tid;
+	public byte Qte_byte() {
+		switch (qte_tid) {
+			case Mwh_atr_itm_.Qte_tid__none:	return Byte_ascii.Null;
+			case Mwh_atr_itm_.Qte_tid__apos:	return Byte_ascii.Apos;
+			case Mwh_atr_itm_.Qte_tid__qute:	return Byte_ascii.Quote;
+			default:							throw Err_.new_unhandled(qte_tid);
+		}
+	}
 	public Mwh_atr_itm Atr_rng(int bgn, int end) {this.atr_bgn = bgn; this.atr_end = end; return this;}
+	public void Key_bry_(byte[] v) {this.key_bry = v;}
+	public void Val_bry_(byte[] v) {this.val_bry = v;}
 	public String Val_as_str() {return String_.new_u8(Val_as_bry());}
 	public byte[] Val_as_bry() {if (val_bry == null) val_bry = Bry_.Mid(src, val_bgn, val_end); return val_bry;}	// NOTE: val_bry is cached
 	public byte[] Val_as_bry__blank_to_null() {byte[] rv = Val_as_bry(); return Bry_.Len_eq_0(rv) ? null : rv;}
 	public int Val_as_int_or(int or) {return val_bry == null ? Bry_.To_int_or__lax(src, val_bgn, val_end, or) : Bry_.To_int_or(val_bry, or);}
 	public boolean Val_as_bool_by_int() {return Val_as_int_or(0) == 1;}
 	public boolean Val_as_bool() {return Bry_.Eq(Bry_.Lcase__all(Val_as_bry()), Bool_.True_bry);}
-	public static final Mwh_atr_itm[] Ary_empty = new Mwh_atr_itm[0];
-	public static final int Atr_tid__invalid = 1, Atr_tid__repeat = 2, Atr_tid__pair = 4, Atr_tid__name = 8;	// NOTE: id order is important; see above;
-	public static final int Qte_tid__none = 0, Qte_tid__apos = 1, Qte_tid__qute = 2;
-	public static final int Mask__qte__none = 0, Mask__qte__apos = 1, Mask__qte_qute = 2;
-	public static final int 
-	  Mask__valid		= 8
-	, Mask__repeated	= 16
-	, Mask__key_exists	= 32
-	, Mask__val_made	= 64
-	;
-	public static final boolean Mask__valid__n = false, Mask__valid__y = true;
-	public static final boolean Mask__key_exists__n = false, Mask__key_exists__y = true;
-	public static final boolean Mask__repeated__n = false, Mask__repeated__y = true;
-	public static final boolean Mask__val_made__n = false, Mask__val_made__y = true;
-	public static int Calc_atr_utl(int qte_tid, boolean valid, boolean repeated, boolean key_exists, boolean val_made) {
-		int rv = qte_tid;
-		if (valid)			rv |= Mwh_atr_itm.Mask__valid;
-		if (repeated)		rv |= Mwh_atr_itm.Mask__repeated;
-		if (key_exists)		rv |= Mwh_atr_itm.Mask__key_exists;
-		if (val_made)		rv |= Mwh_atr_itm.Mask__val_made;
-		return rv;
-	}
-	public static int Calc_qte_tid(int val) {
-		return val & ((1 << 3) - 1);
-	}
-	public static byte Calc_qte_byte(int[] data_ary, int idx) {
-		int val = data_ary[idx + Mwh_atr_mgr.Idx_atr_utl];
-		int qte_tid = (val & ((1 << 3) - 1));
-		return qte_tid == Qte_tid__apos ? Byte_ascii.Apos : Byte_ascii.Quote;
-	}
-//		public static final byte Key_tid_generic = 0, Key_tid_id = 1, Key_tid_style = 2, Key_tid_role = 3;
 }

@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 import org.junit.*;
 public class IptCfg_tst {
 	@Before public void setup() {
-		IptCfgRegy._.Clear();
+		IptCfgRegy.Instance.Clear();
 		box = new IptBndsOwner_mok();
 		cfg = new IptCfg_mok();
 		key = IptBndsOwner_mok.Invk_Reg;

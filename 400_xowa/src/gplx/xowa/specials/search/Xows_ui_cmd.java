@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.threads.*; import gplx.langs.htmls.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.gui.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.wikis.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*;
 class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 	private final Xows_core mgr; private final Xows_ui_qry qry; private final Xows_ui_rslt rslt; 
 	private final Xow_wiki wiki; private final Xoae_page page; private final Xog_tab_close_mgr tab_close_mgr; private final Xog_js_wkr js_wkr;
@@ -25,7 +25,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 	private Xows_db_cache cache;
 	public Xows_ui_cmd(Xows_core mgr, Xows_ui_qry qry, Xow_wiki wiki, Xoae_page page, Xog_tab_close_mgr tab_close_mgr, Xog_js_wkr js_wkr) {
 		this.mgr = mgr; this.qry = qry; this.wiki = wiki; this.page = page; this.tab_close_mgr = tab_close_mgr; this.js_wkr = js_wkr;
-		this.async = wiki.App().App_type().Uid_is_gui() && qry.Async_db();
+		this.async = wiki.App().Mode().Tid_is_gui() && qry.Async_db();
 		this.rslt = new Xows_ui_rslt();
 		this.key = Html_utl.Encode_id_as_bry(Bry_.Add(qry.Key(), Byte_ascii.Pipe_bry, wiki.Domain_bry()));
 	}
@@ -45,7 +45,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 		if (!cache.Done() && (qry.Itms_end() > cache.Itms_end())) {
 			if (async) {
 				fill_from_cache = false; // NOTE: do not retrieve cached results to page, else ui_async cmd will add out of order; DATE:2015-04-24
-				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.html.wtrs.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
+				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.htmls.wtrs.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_search_db, this, Invk_search_db).Start();
 			}
 			else

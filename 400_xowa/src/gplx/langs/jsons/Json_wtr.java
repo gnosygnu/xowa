@@ -20,14 +20,14 @@ import gplx.core.primitives.*;
 public class Json_wtr {
 	private final Bry_bfr bfr = Bry_bfr.new_(255);
 	private final Int_ary idx_stack = new Int_ary(4);
-	private int idx = 0;
-	private int indent;
+	private int idx = 0;		
 	public Bry_bfr Bfr() {return bfr;}
-	public void Indent_(int v) {this.indent = v;}
+	public void Indent_(int v) {this.indent = v;} private int indent;
 	public byte Opt_quote_byte() {return opt_quote_byte;} public Json_wtr Opt_quote_byte_(byte v) {opt_quote_byte = v; return this;} private byte opt_quote_byte = Byte_ascii.Quote;
 	public boolean Opt_ws() {return opt_ws;} public Json_wtr Opt_ws_(boolean v) {opt_ws = v; return this;} private boolean opt_ws = true;
-	public byte[] To_bry_and_clear() {return bfr.Xto_bry_and_clear();}
-	public String To_str_and_clear() {return bfr.Xto_str_and_clear();}
+	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
+	public String To_str_and_clear() {return bfr.To_str_and_clear();}
+	public Json_wtr () {this.Clear();}
 	public Json_wtr Clear() {
 		indent = -1;
 		idx_stack.Clear();
@@ -63,7 +63,7 @@ public class Json_wtr {
 	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_adp_.To_tid_obj(itm), itm);}
 	public Json_wtr Ary_itm_by_type_tid(int itm_type_tid, Object itm) {
 		Write_indent_itm();
-		Write_val_obj(itm_type_tid, itm);
+		Write_val_obj(Bool_.Y, itm_type_tid, itm);
 		Write_nl();
 		++idx;
 		return this;
@@ -78,10 +78,10 @@ public class Json_wtr {
 	}
 	public Json_wtr Kv_bool(String key, boolean val)		{return Kv_bool(Bry_.new_u8(key), val);}
 	public Json_wtr Kv_bool(byte[] key, boolean val)		{return Kv_raw(key, val ? Bool_.True_bry : Bool_.False_bry);}
-	public Json_wtr Kv_int(String key, int val)			{return Kv_raw(Bry_.new_u8(key), Int_.Xto_bry(val));}
-	public Json_wtr Kv_long(String key, long val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Long_.Xto_str(val)));}
-	public Json_wtr Kv_float(String key, float val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Float_.Xto_str(val)));}
-	public Json_wtr Kv_double(String key, double val)	{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Double_.Xto_str(val)));}
+	public Json_wtr Kv_int(String key, int val)			{return Kv_raw(Bry_.new_u8(key), Int_.To_bry(val));}
+	public Json_wtr Kv_long(String key, long val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Long_.To_str(val)));}
+	public Json_wtr Kv_float(String key, float val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Float_.To_str(val)));}
+	public Json_wtr Kv_double(String key, double val)	{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Double_.To_str(val)));}
 	private Json_wtr Kv_raw(byte[] key, byte[] val) {
 		Write_indent_itm();
 		Write_key(key);
@@ -99,10 +99,29 @@ public class Json_wtr {
 		Write_nl();
 		return this;
 	}
+	public Object Get_x(Json_itm itm) {
+		switch (itm.Tid()) {
+			case Json_itm_.Tid__ary:
+			case Json_itm_.Tid__nde:
+				return itm;
+			default:
+			case Json_itm_.Tid__kv:		throw Err_.new_unsupported();
+			case Json_itm_.Tid__bool:
+			case Json_itm_.Tid__int:
+			case Json_itm_.Tid__decimal:
+			case Json_itm_.Tid__str:
+				return itm.Data();
+		}
+	}
+	public void Kv_itm_x(byte[] key, Json_itm itm) {
+		Object val = Get_x(itm);
+		int val_tid = Type_adp_.To_tid_obj(val);
+		Kv_obj(key, val, val_tid);
+	}
 	public Json_wtr Kv_obj(byte[] key, Object val, int val_tid) {
 		Write_indent_itm();
 		Write_key(key);
-		Write_val_obj(val_tid, val);
+		Write_val_obj(Bool_.N, val_tid, val);
 		Write_nl();
 		return this;
 	}
@@ -130,7 +149,7 @@ public class Json_wtr {
 		++idx;
 		return this;
 	}
-	private void Write_val_obj(int type_tid, Object obj) {
+	private void Write_val_obj(boolean called_by_ary, int type_tid, Object obj) {
 		switch (type_tid) {
 			case Type_adp_.Tid__null:				bfr.Add(Object_.Bry__null); break;
 			case Type_adp_.Tid__bool:				bfr.Add_bool(Bool_.cast(obj)); break;
@@ -145,42 +164,80 @@ public class Json_wtr {
 			case Type_adp_.Tid__date:
 			case Type_adp_.Tid__decimal:			Write_str(Bry_.new_u8(Object_.Xto_str_strict_or_empty(obj))); break;
 			case Type_adp_.Tid__obj:
-				Class<?> type = obj.getClass();
-				if (Type_adp_.Eq(type, KeyVal[].class)) {
-					if (idx == 0) {	// if nde, and first item, then put on new line
-						bfr.Del_by_1();
-						if (opt_ws) {
-							bfr.Add_byte_nl();
-							++indent;
-							Write_indent();
-							--indent;
-						}
-					}
-					KeyVal[] kvy = (KeyVal[])obj;
-					Write_grp_bgn(Sym_nde_bgn, Bool_.N);
-					int kvy_len = kvy.length;
-					for (int i = 0; i < kvy_len; ++i) {
-						KeyVal kv = kvy[i];
-						Object kv_val = kv.Val();
-						Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_adp_.To_tid_obj(kv_val));
-					}
-					Write_grp_end(Bool_.Y, Sym_nde_end);
-				}
-				else if (Type_adp_.Is_array(type))
-					Write_val_ary(obj);
+				int grp_type = Grp_type__get(obj);
+				if (grp_type < Grp_type__json_ary)
+					Write_val_obj__nde(called_by_ary, grp_type, obj);
 				else
-					throw Err_.new_unhandled(type);
+					Write_val_itm__ary(called_by_ary, grp_type, obj);
 				break;
 			default:								throw Err_.new_unhandled(type_tid);
 		}
 	}
-	private void Write_val_ary(Object ary_obj) {
+	private void Handle_nde_as_ary_itm_0() {
+		if (idx == 0) {	// if nde, and first item, then put on new line
+			bfr.Del_by_1();
+			if (opt_ws) {
+				bfr.Add_byte_nl();
+				++indent;
+				Write_indent();
+				--indent;
+			}
+		}
+	}
+	private void Write_val_obj__nde(boolean called_by_ary, int grp_type, Object obj) {
+		if (grp_type == Grp_type__json_nde) {
+			if (idx == 0) {	// if nde, and first item, then put on new line
+				if (!called_by_ary) {
+					bfr.Del_by_1();
+					if (opt_ws) {
+						bfr.Add_byte_nl();
+						++indent;
+						Write_indent();
+						--indent;
+					}
+				}
+			}
+//				else {
+				bfr.Add_byte_nl();
+//				}
+			Write_grp_bgn(Sym_nde_bgn, Bool_.Y);
+			Json_nde sub_nde = (Json_nde)obj;
+			int sub_nde_len = sub_nde.Len();
+			for (int i = 0; i < sub_nde_len; ++i) {
+				Json_kv sub_kv = sub_nde.Get_at_as_kv(i);
+				Kv_itm_x(sub_kv.Key_as_bry(), sub_kv.Val());
+			}
+		}
+		else {
+			Handle_nde_as_ary_itm_0();
+			Write_grp_bgn(Sym_nde_bgn, Bool_.N);
+			KeyVal[] kvy = (KeyVal[])obj;
+			int kvy_len = kvy.length;
+			for (int i = 0; i < kvy_len; ++i) {
+				KeyVal kv = kvy[i];
+				Object kv_val = kv.Val();
+				Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_adp_.To_tid_obj(kv_val));
+			}
+		}
+		Write_grp_end(Bool_.Y, Sym_nde_end);
+	}
+	private void Write_val_itm__ary(boolean called_by_ary, int grp_type, Object obj) {
 		Ary_bgn_keyless();
-		Object ary = Array_.cast(ary_obj);	
-		int len = Array_.Len(ary);
-		for (int i = 0; i < len; ++i) {
-			Object itm = Array_.Get_at(ary, i);
-			Ary_itm_obj(itm);
+		if (grp_type == Grp_type__json_ary) {
+			Json_ary sub_ary = (Json_ary)(obj);
+			int len = sub_ary.Len();
+			for (int i = 0; i < len; ++i) {
+				Json_itm sub_itm = sub_ary.Get_at(i);
+				Ary_itm_obj(Get_x(sub_itm));
+			}
+		}
+		else {
+			Object ary = Array_.cast(obj);	
+			int len = Array_.Len(ary);
+			for (int i = 0; i < len; ++i) {
+				Object itm = Array_.Get_at(ary, i);
+				Ary_itm_obj(itm);
+			}
 		}
 		Write_grp_end(Bool_.N, Sym_ary_end);
 	}
@@ -227,4 +284,13 @@ public class Json_wtr {
 	, Sym_ary_end	= Bry_.new_a7("]")
 	, Sym_itm_spr	= Bry_.new_a7(",")
 	;
+	private static final int Grp_type__json_nde = 1, Grp_type__kv_ary = 2, Grp_type__json_ary = 3, Grp_type__obj_ary = 4;
+	private static int Grp_type__get(Object obj) {
+		Class<?> type = obj.getClass();
+		if		(Type_adp_.Eq(type, KeyVal[].class))		return Grp_type__kv_ary;
+		else if (Type_adp_.Is_array(type))					return Grp_type__obj_ary;
+		else if (Type_adp_.Eq(type, Json_nde.class))		return Grp_type__json_nde;
+		else if (Type_adp_.Eq(type, Json_ary.class))		return Grp_type__json_ary;
+		else												throw Err_.new_unhandled(type);
+	}
 }

@@ -93,9 +93,9 @@ public class TimeSpanAdp_ {
 					sb.Add(Sprs[i]);
 				if (val < 10)	// zeroPad
 					sb.Add("0");
-				sb.Add(Int_.Xto_str(val));
+				sb.Add(Int_.To_str(val));
 			}
-			return sb.Xto_str_and_clear();
+			return sb.To_str_and_clear();
 		}
 		boolean fmt_fracs = !String_.Eq(fmt, TimeSpanAdp_.Fmt_NoFractionals);
 		boolean fmt_padZeros = String_.Eq(fmt, TimeSpanAdp_.Fmt_PadZeros);
@@ -116,7 +116,7 @@ public class TimeSpanAdp_ {
 			zeros = first && !fmt_padZeros ? 1 : padZerosAry[i];	// if first, don't zero pad (avoid "01")
 			dlm = first ? "" : Sprs[i];						// if first, don't use dlm (avoid ":01")
 			sb.Add(dlm);
-			sb.Add(Int_.Xto_str_pad_bgn_zero(val, zeros));
+			sb.Add(Int_.To_str_pad_bgn_zero(val, zeros));
 			first = false;
 		}
 		return sb.To_str();

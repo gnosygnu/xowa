@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.apps.gfss.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.apps.gfs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.parsers.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.metas.*;
 public class Xow_cfg_wiki_core {
 	public Xow_cfg_wiki_core(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public void Save() {
 	}
 	public byte[] Build_gfs() {
-		Gfs_bldr wtr = new Gfs_bldr();
+		Xoa_gfs_bldr wtr = new Xoa_gfs_bldr();
 		Xow_wiki_props props = wiki.Props();
 		wtr.Add_proc_init_many(Xowe_wiki.Invk_props).Add_nl();
 		wtr.Add_proc_cont_one(Xow_wiki_props.Invk_bldr_version_).Add_parens_str(props.Bldr_version()).Add_nl();
@@ -37,7 +37,7 @@ public class Xow_cfg_wiki_core {
 		wtr.Add_proc_cont_one(Xow_ns_mgr.Invk_clear).Add_nl();
 		wtr.Add_proc_cont_one(Xow_ns_mgr.Invk_load).Add_paren_bgn().Add_nl();
 		wtr.Add_quote_xtn_bgn();
-		Xol_csv_parser csv_parser = Xol_csv_parser._;
+		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		int nms_len = wiki.Ns_mgr().Count();
 		for (int i = 0; i < nms_len; i++) {
 			Xow_ns ns = wiki.Ns_mgr().Ords_get_at(i);
@@ -55,7 +55,7 @@ public class Xow_cfg_wiki_core {
 	public static void Load_ns_(Xow_ns_mgr ns_mgr, byte[] src) {// 10|1|Template
 		int len = src.length; int pos = 0, fld_bgn = 0, fld_idx = 0, row_bgn = 0;
 		int cur_id = Int_.Min_value; byte cur_case_match = Byte_.Max_value_127; byte[] cur_name = Bry_.Empty;
-		Xol_csv_parser csv_parser = Xol_csv_parser._;
+		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == len;
 			byte b = last ? Byte_ascii.Nl : src[pos];

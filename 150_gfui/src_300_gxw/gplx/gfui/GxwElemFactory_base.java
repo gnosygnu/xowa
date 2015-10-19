@@ -31,9 +31,9 @@ public abstract class GxwElemFactory_base {
 	//	@gplx.Internal protected GxwElem spacer_() {return MockControl.new_();}
 	}
 class GxwElemFactory_ {
-	public static GxwElemFactory_base _ = new GxwElemFactory_cls_mock();
-	public static void winForms_() {_ = new GxwElemFactory_cls_lang();}
-		public static void swt_(org.eclipse.swt.widgets.Display display) {_ = new GxwElemFactory_swt(display);}
+	public static GxwElemFactory_base Instance = new GxwElemFactory_cls_mock();
+	public static void winForms_() {Instance = new GxwElemFactory_cls_lang();}
+		public static void swt_(org.eclipse.swt.widgets.Display display) {Instance = new GxwElemFactory_swt(display);}
 	}
 class GxwElemFactory_cls_lang extends GxwElemFactory_base {
 	@gplx.Internal @Override protected GxwElem control_() {return new GxwElem_lang();}
@@ -61,9 +61,9 @@ class GxwElemFactory_cls_lang extends GxwElemFactory_base {
 }
 class GxwElemFactory_cls_mock extends GxwElemFactory_base {
 	@gplx.Internal @Override protected GxwElem control_() {return GxwElem_mock_base.new_();}
-	@gplx.Internal @Override protected GxwWin win_app_() {return MockForm._;}
-	@gplx.Internal @Override protected GxwWin win_tool_(KeyValHash ctorArgs)	{return MockForm._;}
-	@gplx.Internal @Override protected GxwWin win_toaster_(KeyValHash ctorArgs)	{return MockForm._;}
+	@gplx.Internal @Override protected GxwWin win_app_() {return MockForm.Instance;}
+	@gplx.Internal @Override protected GxwWin win_tool_(KeyValHash ctorArgs)	{return MockForm.Instance;}
+	@gplx.Internal @Override protected GxwWin win_toaster_(KeyValHash ctorArgs)	{return MockForm.Instance;}
 	@gplx.Internal @Override protected GxwElem lbl_() {return GxwElem_mock_base.new_();}
 	@gplx.Internal @Override protected GxwTextFld text_fld_() {return new MockTextBox();}
 	@gplx.Internal @Override protected GxwTextFld text_memo_() {return new MockTextBoxMulti();}

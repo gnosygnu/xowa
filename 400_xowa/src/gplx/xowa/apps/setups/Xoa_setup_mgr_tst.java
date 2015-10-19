@@ -29,8 +29,8 @@ class Xoa_setup_mgr_fxt {
 	public void Clear() {}
 	public void Test_delete_old_dir(String dir_str, String version_prv, String version_del, boolean expd) {
 		Io_url dir = Io_url_.new_fil_(dir_str);
-		Io_mgr.I.CreateDirIfAbsent(dir);
+		Io_mgr.Instance.CreateDirIfAbsent(dir);
 		Xoa_setup_mgr.Delete_old_dir(Gfo_usr_dlg_.Noop, version_prv, version_del, dir);
-		Tfds.Eq(expd, !Io_mgr.I.ExistsDir(dir), version_prv + "|" + version_del);
+		Tfds.Eq(expd, !Io_mgr.Instance.ExistsDir(dir), version_prv + "|" + version_del);
 	}
 }

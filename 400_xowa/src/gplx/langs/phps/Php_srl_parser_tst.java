@@ -98,7 +98,7 @@ class Php_srl_parser_fxt {
 		Php_srl_itm_ary root = parser.Parse(raw);
 		Php_srl_itm root_sub = root.Subs_get_at(0).Val();
 		root_sub.Xto_bfr(tmp_bfr, 0);
-		String actl = tmp_bfr.Xto_str_and_clear();
+		String actl = tmp_bfr.To_str_and_clear();
 		String expd = Xto_str(expd_ary, 0, expd_ary.length);
 		Tfds.Eq_str_lines(expd, actl, actl);
 	}
@@ -107,6 +107,6 @@ class Php_srl_parser_fxt {
 			Php_srl_itm itm = ary[i];
 			itm.Xto_bfr(tmp_bfr, 0);
 		}
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 }

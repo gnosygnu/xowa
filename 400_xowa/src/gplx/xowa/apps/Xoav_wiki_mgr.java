@@ -19,8 +19,10 @@ package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.*; import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
 import gplx.xowa.wikis.*;
 public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
-	private final Xoav_app app; private final Ordered_hash hash = Ordered_hash_.new_bry_();		
+	private final Xoav_app app; private final Ordered_hash hash = Ordered_hash_.New_bry();		
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
+	public int Count() {return hash.Count();}
+	public Xow_wiki Get_at_i(int i) {return (Xow_wiki)hash.Get_at(i);}
 	public Xowv_wiki Get_by_domain(byte[] domain) {return (Xowv_wiki)hash.Get_by(domain);}
 	public Xowv_wiki Import_by_fil(Io_url fil) {
 		Io_url wiki_dir = fil.OwnerDir();
@@ -40,6 +42,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		return Load(Gen_domain_str(fil.NameOnly()), fil.OwnerDir());
 	}
 	public boolean Has(byte[] key) {return hash.Has(key);}
+	public Xow_wiki Get_by_key_or_null_i(byte[] key) {return (Xowv_wiki)hash.Get_by(key);}
 	public Xow_wiki Get_by_key_or_make_init_y(byte[] key) {
 		Xow_wiki rv = this.Get_by_domain(key);
 		// if (rv == null) rv = New_wiki(key);	// TODO: must init wiki, but need wiki_url; DATE:2015-05-23
@@ -47,7 +50,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	}
 	public Xow_wiki	Get_by_key_or_make_init_n(byte[] key) {return Get_by_key_or_make_init_y(key);}
 	public void Load_by_dir(Io_url wiki_root_dir)	{
-		Io_url[] wiki_dirs = Io_mgr.I.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
+		Io_url[] wiki_dirs = Io_mgr.Instance.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
 		for (Io_url wiki_dir : wiki_dirs) {
 			String wiki_dir_url = wiki_dir.Raw();
 			if (String_.Has_at_bgn(wiki_dir_url, "#")) continue;

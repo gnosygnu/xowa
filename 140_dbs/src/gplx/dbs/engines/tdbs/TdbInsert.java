@@ -29,7 +29,7 @@ class TdbInsertWkr implements Db_qryWkr {
 	}
 	int InsertRowsBySelect(TdbEngine engine, TdbTable tbl, Db_qry_insert insert) {
 		int count = 0;
-		DataRdr rdr = (DataRdr)TdbSelectWkr._.Exec(engine, insert.Select());
+		DataRdr rdr = (DataRdr)TdbSelectWkr.Instance.Exec(engine, insert.Select());
 		Sql_select_fld_list insertFlds = insert.Cols(); int insertFldsCount = insertFlds.Count();
 		GfoFldList selectFldsForNewRow = null;
 		try {selectFldsForNewRow = insertFlds.XtoGfoFldLst(tbl);}

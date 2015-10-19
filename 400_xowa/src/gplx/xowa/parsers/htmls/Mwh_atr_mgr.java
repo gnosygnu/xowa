@@ -64,7 +64,7 @@ public class Mwh_atr_mgr {
 		}
 		data_ary[data_idx + Idx_nde_uid] = nde_uid;
 		data_ary[data_idx + Idx_nde_tid] = nde_tid;
-		data_ary[data_idx + Idx_atr_utl] = Mwh_atr_itm.Calc_atr_utl(qte_tid, valid, repeated, key_exists, val_made);
+		data_ary[data_idx + Idx_atr_utl] = Mwh_atr_itm_.Calc_atr_utl(qte_tid, valid, repeated, key_exists, val_made);
 		data_ary[data_idx + Idx_atr_bgn] = atr_bgn;
 		data_ary[data_idx + Idx_atr_end] = atr_end;
 		data_ary[data_idx + Idx_key_bgn] = key_bgn;
@@ -78,7 +78,7 @@ public class Mwh_atr_mgr {
 		int atr_utl_idx = (atr_uid * Idx__mult) + Idx_atr_utl;
 		int atr_utl = data_ary[atr_utl_idx];
 		int val_bry_exists = atr_utl & Atr_utl__val_bry_exists; 
-		data_ary[atr_utl_idx] = Mwh_atr_itm.Atr_tid__repeat | val_bry_exists;
+		data_ary[atr_utl_idx] = Mwh_atr_itm_.Atr_tid__repeat | val_bry_exists;
 	}
 	public static final int
 	  Idx_nde_uid			=  0

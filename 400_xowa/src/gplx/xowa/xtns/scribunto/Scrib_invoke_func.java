@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.html.*;
+import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Scrib_invoke_func extends Pf_func_base {

@@ -25,7 +25,7 @@ public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		temp_dir = wiki.Fsys_mgr().Tmp_dir().GenSubDir(this.Cmd_key());
-		Io_mgr.I.DeleteDirDeep(temp_dir);
+		Io_mgr.Instance.DeleteDirDeep(temp_dir);
 		Cmd_bgn_hook();
 	}
 	public abstract void Cmd_bgn_hook(); 
@@ -33,7 +33,7 @@ public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd
 	@gplx.Virtual public void Cmd_end() {}
 	public void Cmd_term() {}	
 	public Io_line_rdr rdr_(Io_url dir) {
-		Io_url[] fils = Io_mgr.I.QueryDir_fils(dir);
+		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(dir);
 		return new Io_line_rdr(bldr.Usr_dlg(), fils).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	}
 }

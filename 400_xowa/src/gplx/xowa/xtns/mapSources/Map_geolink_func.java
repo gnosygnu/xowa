@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Map_geolink_func extends Pf_func_base {
@@ -66,7 +66,7 @@ public class Map_geolink_func extends Pf_func_base {
 	private static final Xol_msg_itm tmp_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
 	private static byte[] Xto_coord(Bry_bfr bfr, Map_math math, boolean pass, byte[] dir, byte[] or) {
 		return pass
-			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).Xto_bry_and_clear()
+			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).To_bry_and_clear()
 			: or
 			;
 	}
@@ -78,7 +78,7 @@ public class Map_geolink_func extends Pf_func_base {
 	}
 	private static byte[] Xto_dec(Bry_bfr bfr, Map_math math, boolean pass) {
 		return pass
-			? bfr.Add_double(math.Dec()).Xto_bry_and_clear()
+			? bfr.Add_double(math.Dec()).To_bry_and_clear()
 			: Bry_arg_5_fail
 			;
 	}
@@ -90,7 +90,7 @@ public class Map_geolink_func extends Pf_func_base {
 /*
 	return wfMsgReplaceArgs( $pattern, $args );
 */
-	public static final Map_geolink_func _ = new Map_geolink_func(); Map_geolink_func() {}
+	public static final Map_geolink_func Instance = new Map_geolink_func(); Map_geolink_func() {}
 	private static final byte Key_tid_lat_val = 1, Key_tid_long_val = 2, Key_tid_lat_pos = 3, Key_tid_lat_neg = 4, Key_tid_long_pos = 5, Key_tid_long_min = 6, Key_tid_prec = 7;
 	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("lat"			, Key_tid_lat_val)

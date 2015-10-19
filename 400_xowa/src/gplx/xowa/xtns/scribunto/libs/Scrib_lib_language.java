@@ -86,7 +86,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		boolean exists = false;
 		if (	lang_code != null									// null check; protecting against Module passing in nil from lua
 			&&	String_.Eq(lang_code, String_.Lower(lang_code))		// must be lower-case; REF.MW: $code === strtolower( $code )
-			&&	Xol_lang_itm_.Exists(Bry_.new_a7(lang_code))
+			&&	Xol_lang_stub_.Exists(Bry_.new_a7(lang_code))
 			)
 			exists = true;
 		return rslt.Init_obj(exists);
@@ -116,9 +116,9 @@ public class Scrib_lib_language implements Scrib_lib {
 			byte b = lang_code[i];
 			if (b == Byte_ascii.Dash) {}
 			else {
-				byte tid = Xol_lang_.Char_tid(b);
+				byte tid = Xol_lang_itm_.Char_tid(b);
 				switch (tid) {
-					case Xol_lang_.Char_tid_ltr_l: case Xol_lang_.Char_tid_ltr_u: case Xol_lang_.Char_tid_num:
+					case Xol_lang_itm_.Char_tid_ltr_l: case Xol_lang_itm_.Char_tid_ltr_u: case Xol_lang_itm_.Char_tid_num:
 						break;
 					default:
 						valid = false;
@@ -132,7 +132,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean FetchLanguageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);
 		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages;
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(lang_code);
+		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code);
 		return rslt.Init_obj(lang_itm == null ? String_.Empty : String_.new_u8(lang_itm.Canonical_name()));
 	}
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
@@ -142,13 +142,13 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean GetFallbacksFor(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);
-		Xol_lang lang = core.App().Lang_mgr().Get_by_key(lang_code); if (lang == null) return rslt.Init_many_empty();	// lang is not valid; return empty array per MW;
+		Xol_lang_itm lang = core.App().Lang_mgr().Get_by(lang_code); if (lang == null) return rslt.Init_many_empty();	// lang is not valid; return empty array per MW;
 		return rslt.Init_bry_ary(lang.Fallback_bry_ary());
 	}
 	public boolean Lcfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, Bool_.N);}
 	public boolean Ucfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, Bool_.Y);}
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
 		Bry_bfr bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b128().Mkr_rls();
 		return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
@@ -156,13 +156,13 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.N);}
 	public boolean Uc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.Y);}
 	private boolean Case_all(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
 		return rslt.Init_obj(lang.Case_mgr().Case_build(upper, word, 0, word.length));
 	}
 	public boolean CaseFold(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Uc(args, rslt);}	// REF.MW:Language.php!caseFold; http://www.w3.org/International/wiki/Case_folding
 	public boolean FormatNum(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] num = args.Xstr_bry_or_null(1);
 		boolean skip_commafy = false;
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
@@ -177,7 +177,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean FormatDate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] fmt_bry = args.Pull_bry(1);
 		byte[] date_bry = args.Cast_bry_or_empty(2);	// NOTE: optional empty is required b/c date is sometimes null; use Bry_.Empty b/c this is what Pft_func_time.ParseDate takes; DATE:2013-04-05
 		boolean utc = args.Cast_bool_or_n(3);
@@ -203,14 +203,14 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean ParseFormattedNumber(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] num = args.Xstr_bry_or_null(1);
 		if (num == null) return rslt.Init_null(); // ParseFormattedNumber can sometimes take 1 arg ({'en'}), or null arg ({'en', null}); return null (not ""); DATE:2014-01-07
 		byte[] rv = lang.Num_mgr().Raw(num);
 		return rslt.Init_obj(rv);
 	}
 	public boolean FormatDuration(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
 		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
@@ -218,7 +218,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean GetDurationIntervals(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
 		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
@@ -226,14 +226,14 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(Xol_interval_itm.Xto_kv_ary(rv));
 	}
 	public boolean ConvertPlural(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		int count = args.Pull_int(1);
 		byte[][] words = args.Cast_params_as_bry_ary_or_rest_of_ary(2);
 		byte[] rv = lang.Plural().Plural_eval(lang, count, words);
 		return rslt.Init_obj(rv);
 	}
 	public boolean ConvertGrammar(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
 		byte[] type = args.Pull_bry(2);
 		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
@@ -242,12 +242,12 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw Err_.new_unimplemented();}
 	public boolean IsRTL(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Xol_lang lang = lang_(args);
+		Xol_lang_itm lang = lang_(args);
 		return rslt.Init_obj(!lang.Dir_ltr());
 	}
-	private Xol_lang lang_(Scrib_proc_args args) {
+	private Xol_lang_itm lang_(Scrib_proc_args args) {
 		byte[] lang_code = args.Cast_bry_or_null(0);
-		Xol_lang lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_key_or_load(lang_code);
+		Xol_lang_itm lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_or_load(lang_code);
 		if (lang == null) throw Err_.new_wo_type("lang_code is not valid", "lang_code", String_.new_u8(lang_code));
 		return lang;
 	}

@@ -73,8 +73,8 @@ public class Gfo_msg_root {
 		return cur_list;
 	}
 	Gfo_msg_grp root;
-	Ordered_hash owners = Ordered_hash_.new_();
+	Ordered_hash owners = Ordered_hash_.New();
 	int uid_list_next = 0;
 	int uid_item_next = 0;
-        public static final Gfo_msg_root _ = new Gfo_msg_root("gplx");
+        public static final Gfo_msg_root Instance = new Gfo_msg_root("gplx");
 }

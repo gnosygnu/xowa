@@ -23,7 +23,7 @@ public class GfoNdeRdr_ {
 		Object[] vals = new Object[pairsLen];
 		for (int i = 0; i < pairsLen; i++) {
 			KeyVal pair = kvList.GetAt(i);
-			flds.Add(pair.Key(), StringClassXtn._);
+			flds.Add(pair.Key(), StringClassXtn.Instance);
 			vals[i] = pair.Val_to_str_or_empty();
 		}
 		GfoNde nde = GfoNde_.vals_(flds, vals);

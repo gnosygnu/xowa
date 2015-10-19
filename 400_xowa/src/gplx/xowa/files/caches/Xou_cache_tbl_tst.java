@@ -26,9 +26,9 @@ class Xou_cache_tbl_fxt {
 	private final Bry_bfr lnki_key_bfr = Bry_bfr.new_(255);
 	private Xou_cache_tbl tbl;
 	public void Clear() {
-		Io_mgr.I.InitEngine_mem();
-		Db_conn_bldr.I.Reg_default_mem();
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Io_url_.mem_fil_("mem/test.xowa"));
+		Io_mgr.Instance.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
+		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/test.xowa"));
 		this.tbl = new Xou_cache_tbl(conn_data.Conn());
 		tbl.Create_tbl();
 	}

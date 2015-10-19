@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*; import gplx.xowa.html.*;
+import gplx.ios.*; import gplx.xowa.htmls.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
 import gplx.core.net.*;
 public class Xoa_css_extractor {	
-	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);	
+	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
 	public Xoa_css_extractor Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg;
 	public Xoa_css_extractor Failover_dir_(Io_url v) {failover_dir = v; return this;} private Io_url failover_dir;
@@ -50,9 +50,9 @@ public class Xoa_css_extractor {
 			this.wiki_html_dir = wiki.App().Fsys_mgr().Wiki_css_dir(wiki.Domain_str());	// EX: /xowa/user/anonymous/wiki/en.wikipedia.org
 			Io_url css_comm_fil = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
-			wiki.Html__page_wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
-			if (wiki.Domain_tid() == Xow_domain_type_.Int__home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
-			if (Io_mgr.I.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
+			wiki.Html__wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
+			if (wiki.Domain_tid() == Xow_domain_tid_.Int__home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
+			if (Io_mgr.Instance.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
 			if (wiki.Html__css_installing()) return;
 			wiki.Html__css_installing_(true);
 			wiki.App().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
@@ -95,7 +95,7 @@ public class Xoa_css_extractor {
 			return false;
 		}
 		Xowd_db_file core_db = core_db_mgr.Db__core();
-		return gplx.xowa.html.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
+		return gplx.xowa.htmls.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
 	}
 	public void Css_common_setup() {
 		if (opt_download_css_common)
@@ -105,7 +105,7 @@ public class Xoa_css_extractor {
 	}
 	private void Css_common_failover() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
-		Io_mgr.I.CopyFil(Css_common_failover_url(), trg_fil, true);
+		Io_mgr.Instance.CopyFil(Css_common_failover_url(), trg_fil, true);
 		css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private void Css_common_download() {
@@ -113,19 +113,19 @@ public class Xoa_css_extractor {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
 		css_stylesheet_common_missing = !Css_scrape_setup();
 		if (css_stylesheet_common_missing)
-			Io_mgr.I.CopyFil(Css_common_failover_url(), trg_fil, true);
+			Io_mgr.Instance.CopyFil(Css_common_failover_url(), trg_fil, true);
 		else 
 			css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private Io_url Css_common_failover_url() {
 		Io_url css_commons_url = failover_dir.GenSubDir("xowa_common_override").GenSubFil_ary("xowa_common_", String_.new_u8(wiki_code), ".css");
-		if (Io_mgr.I.ExistsFil(css_commons_url)) return css_commons_url;	// specific css exists for wiki; use it; EX: xowa_common_wiki_mediawikiwiki.css
+		if (Io_mgr.Instance.ExistsFil(css_commons_url)) return css_commons_url;	// specific css exists for wiki; use it; EX: xowa_common_wiki_mediawikiwiki.css
 		return failover_dir.GenSubFil(lang_is_ltr ? Css_common_name_ltr : Css_common_name_rtl);
 	}
 	public void Css_wiki_setup() {
 		boolean css_stylesheet_wiki_missing = true;
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
-		if (Io_mgr.I.ExistsFil(trg_fil)) return;	// don't download if already there
+		if (Io_mgr.Instance.ExistsFil(trg_fil)) return;	// don't download if already there
 		css_stylesheet_wiki_missing = !Css_wiki_generate(trg_fil);
 		if (css_stylesheet_wiki_missing)
 			Failover(trg_fil);
@@ -136,9 +136,9 @@ public class Xoa_css_extractor {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Css_wiki_generate_section(bfr, Ttl_common_css);
 		Css_wiki_generate_section(bfr, Ttl_vector_css);
-		byte[] bry = bfr.Xto_bry_and_clear();
+		byte[] bry = bfr.To_bry_and_clear();
 		bry = Bry_.Replace(bry, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
-		Io_mgr.I.SaveFilBry(trg_fil, bry);
+		Io_mgr.Instance.SaveFilBry(trg_fil, bry);
 		return true;
 	}	private static final byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
 	private boolean Css_wiki_generate_section(Bry_bfr bfr, byte[] ttl) {
@@ -152,7 +152,7 @@ public class Xoa_css_extractor {
 	public void Logo_setup() {
 		boolean logo_missing = true;
 		Io_url logo_url = wiki_html_dir.GenSubFil("logo.png");
-		if (Io_mgr.I.ExistsFil(logo_url)) return;	// don't download if already there
+		if (Io_mgr.Instance.ExistsFil(logo_url)) return;	// don't download if already there
 		logo_missing = !Logo_download(logo_url);
 		if (logo_missing)
 			Failover(logo_url);
@@ -172,7 +172,7 @@ public class Xoa_css_extractor {
 	}
 	private boolean Logo_copy_from_css(Io_url trg_fil) {
 		Io_url commons_file = wiki_html_dir.GenSubFil(Css_common_name);
-		byte[] commons_src = Io_mgr.I.LoadFilBry(commons_file);
+		byte[] commons_src = Io_mgr.Instance.LoadFilBry(commons_file);
 		int bgn_pos = Bry_find_.Find_fwd(commons_src, Bry_mw_wiki_logo);				if (bgn_pos == Bry_find_.Not_found) return false;
 		bgn_pos += Bry_mw_wiki_logo.length;
 		int end_pos = Bry_find_.Find_fwd(commons_src, Byte_ascii.Quote, bgn_pos + 1);	if (end_pos == Bry_find_.Not_found) return false;
@@ -181,7 +181,7 @@ public class Xoa_css_extractor {
 		if (wiki_html_dir.Info().DirSpr_byte() == Byte_ascii.Backslash)
 			src_bry = Bry_.Replace(src_bry, Byte_ascii.Slash, Byte_ascii.Backslash);
 		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_u8(src_bry));
-		Io_mgr.I.CopyFil(src_fil, trg_fil, true);
+		Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);
 		return true;
 	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
 	private String Logo_find_src() {
@@ -211,18 +211,18 @@ public class Xoa_css_extractor {
 	}	
 	private void Failover(Io_url trg_fil) {
 		usr_dlg.Note_many("", "", "copying failover file: trg_fil=~{0};", trg_fil.Raw());
-		Io_mgr.I.CopyFil(failover_dir.GenSubFil(trg_fil.NameAndExt()), trg_fil, true);		
+		Io_mgr.Instance.CopyFil(failover_dir.GenSubFil(trg_fil.NameAndExt()), trg_fil, true);		
 	}
 	public boolean Css_scrape_setup() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
-		// if (Io_mgr.I.ExistsFil(trg_fil)) return;	// don't download if already there; DELETED: else main_page is not scraped for all stylesheet links; simple.d: fails; DATE:2014-02-11
+		// if (Io_mgr.Instance.ExistsFil(trg_fil)) return;	// don't download if already there; DELETED: else main_page is not scraped for all stylesheet links; simple.d: fails; DATE:2014-02-11
 		byte[] css_url = Css_scrape();
 		if (css_url == null) {
 			Css_common_failover();
 			return false;
 		}
 		else {
-			Io_mgr.I.SaveFilBry(trg_fil, css_url);
+			Io_mgr.Instance.SaveFilBry(trg_fil, css_url);
 			css_img_downloader.Chk(wiki_domain, trg_fil);
 			return true;
 		}
@@ -267,14 +267,14 @@ public class Xoa_css_extractor {
 			tmp_bfr.Add(Xoa_css_img_downloader.Bry_comment_bgn).Add_str(css_url).Add(Xoa_css_img_downloader.Bry_comment_end).Add_byte_nl();
 			tmp_bfr.Add(css_bry).Add_byte_nl().Add_byte_nl();
 		}
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	private static byte[] Url_root_fix(byte[] domain, byte[] url) {// DATE:2015-09-20
 		if (url.length < 3) return url;	// need at least 2 chars
 		if (	url[0] == Byte_ascii.Slash	// starts with "/"	EX: "/w/api.php"
 			&&	url[1] != Byte_ascii.Slash	// but not "//";	EX: "//en.wikipedia.org"
 			)
-			return Bry_.Add(gplx.xowa.html.hrefs.Xoh_href_.Bry__https, domain, url);
+			return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__https, domain, url);
 		else
 			return url;
 	}

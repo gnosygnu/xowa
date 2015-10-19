@@ -130,7 +130,7 @@ public class Fsd_thm_tbl implements RlsAble {
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Count(); if (len == 0) return Bool_.N;
-		list.Sort_by(Fsdb_thm_itm_sorter.I);
+		list.Sort_by(Fsdb_thm_itm_sorter.Instance);
 		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
 		Fsd_thm_itm max = null;
 		for (int i = 0; i < len; ++i) {

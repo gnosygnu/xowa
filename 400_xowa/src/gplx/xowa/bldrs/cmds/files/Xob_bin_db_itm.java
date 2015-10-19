@@ -28,11 +28,11 @@ class Xob_bin_db_itm {
 		this.id = id; this.pt_id = pt_id; this.db_url = db_url;
 	}
 	public static String Gen_name_v1(int pt_id) {
-		return String_.Format("fsdb.bin.{0}.sqlite3", Int_.Xto_str_pad_bgn_zero(pt_id, 4));
+		return String_.Format("fsdb.bin.{0}.sqlite3", Int_.To_str_pad_bgn_zero(pt_id, 4));
 	}
 	public static String Gen_name_v2(String domain_str, int ns_id, int pt_id) {
-		String ns_id_str = Int_.Xto_str_pad_bgn_zero(ns_id, 3);
-		String pt_id_str = Int_.Xto_str_pad_bgn_zero(pt_id, 3);
+		String ns_id_str = Int_.To_str_pad_bgn_zero(ns_id, 3);
+		String pt_id_str = Int_.To_str_pad_bgn_zero(pt_id, 3);
 		return String_.Format("{0}-file-ns.{1}-db.{2}.xowa", domain_str, ns_id_str, pt_id_str);
 	}
 	public static Xob_bin_db_itm new_v1(Fsm_bin_fil fil) {

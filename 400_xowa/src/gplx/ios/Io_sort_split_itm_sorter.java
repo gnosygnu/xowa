@@ -22,5 +22,5 @@ public class Io_sort_split_itm_sorter implements gplx.lists.ComparerAble {
 //			Tfds.Write(String_.new_u8(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end()), String_.new_u8(rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end()));
 		return Bry_.Compare(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end(), rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end());
 	}
-	public static final Io_sort_split_itm_sorter _ = new Io_sort_split_itm_sorter(); Io_sort_split_itm_sorter() {}
+	public static final Io_sort_split_itm_sorter Instance = new Io_sort_split_itm_sorter(); Io_sort_split_itm_sorter() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
+import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; 
 import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
@@ -70,7 +70,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		usr_dlg.Log_many("", "", "import.category.v2: insert done; committing; rows=~{0}", cur_row_count);
 		name_id_rdr.Rls();
 		if (String_.Eq(sql_parser.Src_fil().NameAndExt(), Xob_ctg_v1_sql_make.Url_sql))	// delete temp xowa_categorylinks.sql file created by cat_v1
-			Io_mgr.I.DeleteFil(sql_parser.Src_fil());
+			Io_mgr.Instance.DeleteFil(sql_parser.Src_fil());
 	}
 	private int Save_ctg(byte[] new_ctg_ttl) {
 		if (cur_cat_ttl != Bry_.Empty && cur_cat_id != -1)
@@ -131,7 +131,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	private static Io_line_rdr New_registry_rdr(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg) {
 		Io_url make_dir = Xob_category_registry_sql.Tmp_dir(wiki);
 		usr_dlg.Prog_many("", "", "loading category_registry files: ~{0}", make_dir.Raw());
-		Io_url[] urls = Io_mgr.I.QueryDir_args(make_dir).ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.Instance.QueryDir_args(make_dir).ExecAsUrlAry();
 		return new Io_line_rdr(usr_dlg, urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	}
 	private static final byte[] Ttl_last = null, Ttl_first = Bry_.Empty;

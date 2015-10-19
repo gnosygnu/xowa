@@ -76,7 +76,7 @@ public class Xou_cache_itm {
 			.Add_int_variable(w).Add_byte_pipe().Add_int_variable(h).Add_byte_pipe().Add_double(time).Add_byte_pipe().Add_int_variable(page)
 			.Add_int_variable(user_thumb_w)
 			;
-		return key_bfr.Xto_bry_and_clear();
+		return key_bfr.To_bry_and_clear();
 	}
 }
 class Xof_cache_mgr_sorter implements gplx.lists.ComparerAble {
@@ -85,5 +85,5 @@ class Xof_cache_mgr_sorter implements gplx.lists.ComparerAble {
 		Xou_cache_itm rhs = (Xou_cache_itm)rhsObj;
 		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
-	public static final Xof_cache_mgr_sorter I = new Xof_cache_mgr_sorter(); Xof_cache_mgr_sorter() {}
+	public static final Xof_cache_mgr_sorter Instance = new Xof_cache_mgr_sorter(); Xof_cache_mgr_sorter() {}
 }

@@ -24,12 +24,12 @@ interface Bin_fetcher {
 class Bin_fetcher_fsys implements Bin_fetcher {
 	public void Init_src_url(Io_url src) {this.src = src;} private Io_url src;
 	public boolean Save_as_url(Io_url trg) {
-		try {Io_mgr.I.CopyFil(src, trg, true); return true;}
+		try {Io_mgr.Instance.CopyFil(src, trg, true); return true;}
 		catch (Exception exc) {Err_.Noop(exc); return false;}
 	}
 	public boolean Save_as_bry(Bry_obj_ref bry_ref) {
 		try {
-			byte[] bry = Io_mgr.I.LoadFilBry(src);
+			byte[] bry = Io_mgr.Instance.LoadFilBry(src);
 			bry_ref.Val_(bry);
 			return true;
 		}

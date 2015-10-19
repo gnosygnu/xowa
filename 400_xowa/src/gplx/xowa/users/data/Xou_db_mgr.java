@@ -35,7 +35,7 @@ public class Xou_db_mgr {
 	public Xou_cache_mgr		Cache_mgr() {return cache_mgr;} private Xou_cache_mgr cache_mgr;
 	public Xou_file_itm_finder	File__xfer_itm_finder() {return xfer_itm_finder;} private Xou_file_itm_finder xfer_itm_finder;
 	public void Init_by_app(boolean drd, Io_url db_url) {
-		Db_conn_bldr_data db_conn_bldr = Db_conn_bldr.I.Get_or_new(db_url);
+		Db_conn_bldr_data db_conn_bldr = Db_conn_bldr.Instance.Get_or_new(db_url);
 		Db_conn conn = db_conn_bldr.Conn(); boolean created = db_conn_bldr.Created();
 		this.db_file = new Xou_db_file(conn); db_file.Init_assert();
 		this.cache_mgr = new Xou_cache_mgr(app.Wiki_mgri(), app.Fsys_mgr().File_dir(), db_file);

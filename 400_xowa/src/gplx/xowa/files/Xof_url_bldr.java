@@ -62,9 +62,9 @@ public class Xof_url_bldr {
 		this.file_is_thumb = file_mode == Xof_repo_itm_.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;			
 		return this;
 	}
-	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
-	public String Xto_str() {Bld(); String rv = bfr.Xto_str(); Clear(); return rv;}
-	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
+	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.To_bry_and_clear(); Clear(); return rv;}
+	public String Xto_str() {Bld(); String rv = bfr.To_str(); Clear(); return rv;}
+	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.To_str()); Clear(); return rv;}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_fsdb_itm itm, boolean orig) {
 		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
 		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();

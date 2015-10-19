@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Gallery_itm_parser_tst {
 	@Before public void init() {fxt.Init();} private Gallery_itm_parser_fxt fxt = new Gallery_itm_parser_fxt();
 	@Test   public void All()				{fxt.Test_parse("File:A.png|a|alt=b|link=c"		, fxt.Expd("File:A.png", "a" , "b" , "c"));}
@@ -79,7 +79,7 @@ class Gallery_itm_parser_fxt {
 	public String[] Expd(String ttl, String caption)									{return new String[] {ttl, caption, null, null, null};}
 	public String[] Expd(String ttl, String caption, String alt)						{return new String[] {ttl, caption, alt, null, null};}
 	public String[] Expd(String ttl, String caption, String alt, String link)			{return new String[] {ttl, caption, alt, link, null};}
-	public String[] Expd(String ttl, String caption, String alt, String link, int page)	{return new String[] {ttl, caption, alt, link, Int_.Xto_str(page)};}
+	public String[] Expd(String ttl, String caption, String alt, String link, int page)	{return new String[] {ttl, caption, alt, link, Int_.To_str(page)};}
 	public void Init_kwd_set(int kwd_id, String kwd_val) {
 		wiki.Lang().Kwd_mgr().Get_or_new(kwd_id).Itms()[0].Val_(Bry_.new_a7(kwd_val));
 		parser.Init_by_wiki(wiki);

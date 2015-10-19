@@ -29,5 +29,5 @@ class GfuiTipTextMgr implements GfuiWinOpenAble {
 		ToolTipManager.sharedInstance().setReshowDelay(0);
 		jcomp.setToolTipText(sub.TipText());
 	}
-		public static final GfuiTipTextMgr _ = new GfuiTipTextMgr();
+		public static final GfuiTipTextMgr Instance = new GfuiTipTextMgr();
 }

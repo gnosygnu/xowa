@@ -31,7 +31,7 @@ class Xoa_fmtr_itm_fxt {
 		app = Xoa_app_fxt.app_();
 		Xoa_app_fxt.wiki_tst_(app);	// create enwiki
 		itm = new Xoa_fmtr_itm(app);
-		GfsCore._.MsgParser_(gplx.langs.gfss.Gfs_msg_bldr._);
+		GfsCore.Instance.MsgParser_(gplx.langs.gfs.Gfs_msg_bldr.Instance);
 	}
 	public Xoa_fmtr_itm_fxt Init_src(String v) {itm.Src_(v); return this;}
 	public Xoa_fmtr_itm_fxt Init_fmt(String v) {itm.Fmt_(Bry_.new_a7(v)); return this;}

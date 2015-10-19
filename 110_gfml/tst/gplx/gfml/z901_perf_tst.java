@@ -23,7 +23,7 @@ public class z901_perf_tst {
 //		@Test 
 	public void Long() {
 //			String longText = String_.Repeat("a", 30 * 1000 * 1000);
-		String longText = Io_mgr.I.LoadFilStr(Io_url_.new_any_("C:\\core_weekly.temp.gfio"));
+		String longText = Io_mgr.Instance.LoadFilStr(Io_url_.new_any_("C:\\core_weekly.temp.gfio"));
 //			String_bldr sbXml = String_bldr_.new_();
 //			sbXml.Add("<");
 //			sbXml.Add(longText);
@@ -108,7 +108,7 @@ class TimerWatch {
 		this.End();
 		Tfds.Write(XtoStr_ms() + " " + text);
 	}
-	public String XtoStr_ms() {return Long_.Xto_str(duration);}
+	public String XtoStr_ms() {return Long_.To_str(duration);}
         public static TimerWatch new_() {
 		TimerWatch rv = new TimerWatch();
 		rv.Bgn();

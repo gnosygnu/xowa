@@ -24,7 +24,7 @@ public class SqlDoc {
 		return bldr.XtoGfmlDoc(raw);
 	}	
 	static GfmlLxr RootLxr_() {
-		GfmlTkn txtTkn = GfmlTkn_.cmd_("tkn:text", SqlCmd_root._);
+		GfmlTkn txtTkn = GfmlTkn_.cmd_("tkn:text", SqlCmd_root.Instance);
 		GfmlLxr rv = GfmlLxr_.general_("lxr:root", txtTkn);
 		whitespace_(rv);
 		operator_(rv
@@ -50,14 +50,14 @@ public class SqlDoc {
 		return rv;
 	}
 	static GfmlLxr quote_(GfmlLxr lxr, String quote) {
-		GfmlLxr rv = GfmlLxr_frame.new_("gfml.quote_0", SqlFrame_quote._, quote, quote, SqlCmd_quote_str._, SqlCmd_quote_end._);
+		GfmlLxr rv = GfmlLxr_frame.new_("gfml.quote_0", SqlFrame_quote.Instance, quote, quote, SqlCmd_quote_str.Instance, SqlCmd_quote_end.Instance);
 
 		GfmlLxr escape = lxr_escape_("gfml.quote_0_escape", quote + quote, quote);
 		rv.SubLxr_Add(escape);
 		lxr.SubLxr_Add(rv);
 		return rv;
 	}
-	static GfmlLxr lxr_escape_(String key, String raw, String escape) {return GfmlLxr_.symbol_(key, raw, escape, GfmlBldrCmd_pendingTkns_add._);}
+	static GfmlLxr lxr_escape_(String key, String raw, String escape) {return GfmlLxr_.symbol_(key, raw, escape, GfmlBldrCmd_pendingTkns_add.Instance);}
 
 	static void operator_(GfmlLxr lxr, String... opAry) {
 		for (String op : opAry) {
@@ -71,7 +71,7 @@ class SqlCmd_quote_str implements GfmlBldrCmd {
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
 		bldr.CurFrame().WaitingTkns().Add(GfmlTkn_.raw_(tkn.Raw()));
 	}
-	public static final SqlCmd_quote_str _ = new SqlCmd_quote_str(); SqlCmd_quote_str() {}
+	public static final SqlCmd_quote_str Instance = new SqlCmd_quote_str(); SqlCmd_quote_str() {}
 }
 class SqlCmd_quote_end implements GfmlBldrCmd {
 	public String Key() {return "sql:root";}
@@ -82,26 +82,26 @@ class SqlCmd_quote_end implements GfmlBldrCmd {
 			GfmlTkn pnd = (GfmlTkn)list.Get_at(i);
 			sb.Add(pnd.Val());
 		}
-		//Int_.Xto_str(bldr.CurNdeFrame().Nde().SubTkns().length)
+		//Int_.To_str(bldr.CurNdeFrame().Nde().SubTkns().length)
 		GfmlAtr atr = GfmlAtr.new_(GfmlTkn_.raw_("word"), GfmlTkn_.raw_(sb.To_str()), GfmlType_.String);
 		bldr.CurNdeFrame().CurNde().SubObjs_Add(atr);
 		bldr.Frames_end();
 	}
-	public static final SqlCmd_quote_end _ = new SqlCmd_quote_end(); SqlCmd_quote_end() {}
+	public static final SqlCmd_quote_end Instance = new SqlCmd_quote_end(); SqlCmd_quote_end() {}
 }
 class SqlCmd_root implements GfmlBldrCmd {
 	public String Key() {return "sql:root";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {			
 		GfmlSqlUtl.Atr_add(bldr, "word", tkn);
 	}
-	public static final SqlCmd_root _ = new SqlCmd_root(); SqlCmd_root() {}
+	public static final SqlCmd_root Instance = new SqlCmd_root(); SqlCmd_root() {}
 }
 class SqlFrame_quote extends GfmlFrame_base {
 	@Override public int FrameType() {return GfmlFrame_.Type_data;}
 	@Override public void Build_end(GfmlBldr bldr, GfmlFrame ownerFrame) {
 	}
 	@Override protected GfmlFrame_base MakeNew_hook() {return new SqlFrame_quote();}
-	public static final SqlFrame_quote _ = new SqlFrame_quote(); SqlFrame_quote() {}
+	public static final SqlFrame_quote Instance = new SqlFrame_quote(); SqlFrame_quote() {}
 }
 class SqlCmd_operator implements GfmlBldrCmd {
 	public String Key() {return "sql:operator";}

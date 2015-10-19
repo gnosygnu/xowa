@@ -22,8 +22,8 @@ public class Xof_file_fxt {
 	private final Xowe_wiki wiki;
 	Xof_file_fxt(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		Io_mgr.I.InitEngine_mem();
-		Db_conn_bldr.I.Reg_default_mem();
+		Io_mgr.Instance.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
 		wiki.File_mgr().Version_2_y_();
 	}
 	public static Xof_file_fxt new_(Xowe_wiki wiki) {return new Xof_file_fxt(wiki);}
@@ -37,7 +37,7 @@ public class Xof_file_fxt {
 		return this;
 	}
 	public Xof_file_fxt Init_orig() {
-		Db_conn conn = Db_conn_bldr.I.Get_or_new(Io_url_.mem_fil_("mem/xowa/wiki/" + wiki.Domain_str() + "/orig.xowa")).Conn();
+		Db_conn conn = Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/xowa/wiki/" + wiki.Domain_str() + "/orig.xowa")).Conn();
 		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(conn, Bool_.Y);
 		orig_tbl.Create_tbl();
 		wiki.File_mgr().Orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.new_v2_gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());

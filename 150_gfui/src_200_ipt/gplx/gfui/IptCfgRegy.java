@@ -27,7 +27,7 @@ public class IptCfgRegy implements GfoInvkAble {
 		}
 		return this;
 	}	public static final String Invk_Get = "Get", Invk_get = "get";
-	Ordered_hash hash = Ordered_hash_.new_();
-	public static final IptCfgRegy _ = new IptCfgRegy();
+	Ordered_hash hash = Ordered_hash_.New();
+	public static final IptCfgRegy Instance = new IptCfgRegy();
 	public IptCfgRegy() {}
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.langs.phps.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_int extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_int;}
@@ -25,7 +25,7 @@ public class Pfunc_int extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] msg_key = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki();
-		Xol_lang page_lang = ctx.Cur_page().Lang();
+		Xol_lang_itm page_lang = ctx.Cur_page().Lang();
 		byte[][] args_ary = Bry_.Ary_empty;
 		int args_len = self.Args_len();
 		if (args_len > 0) {

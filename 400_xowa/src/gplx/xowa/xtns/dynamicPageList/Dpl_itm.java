@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 class Dpl_itm {
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
@@ -118,7 +118,7 @@ class Dpl_itm {
 			case Dpl_itm_keys.Key_gallerycaption:		gallery_caption = val; break;	// FUTURE: parse for {{int:}}?
 			case Dpl_itm_keys.Key_galleryshowfilesize:	gallery_filesize = Dpl_itm_keys.Parse_as_bool(val, true); break;
 			case Dpl_itm_keys.Key_galleryshowfilename:	gallery_filename = Dpl_itm_keys.Parse_as_bool(val, true); break;
-			case Dpl_itm_keys.Key_ordermethod:			sort_tid = Dpl_sort.Parse(val); break;
+			case Dpl_itm_keys.Key_ordermethod:			sort_tid = Dpl_sort.Parse_ordermethod(val); break;
 		}
 	}
 	private void Parse_ctg_date(byte[] val) {

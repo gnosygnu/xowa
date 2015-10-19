@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.core.net.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.wms.*; import gplx.xowa.wms.sites.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.sites.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.site_cfgs.*;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
 	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
@@ -29,7 +30,52 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		if (wikis == null)			wikis = Xow_domain_regy.All;
 		if (db_url == null)			db_url = app.Fsys_mgr().Cfg_site_meta_fil();
 		if (cutoff_time == null)	cutoff_time = DateAdp_.Now().Add_day(-1);
-		new Site_api_mgr().Load_all(app.Usr_dlg(), app.Utl__inet_conn(), db_url, wikis, cutoff_time);
+		Load_all(app, db_url, wikis, cutoff_time);
+	}
+	private void Load_all(Xoa_app app, Io_url db_url, String[] reqd_ary, DateAdp cutoff) {
+		Site_json_parser site_parser = new Site_json_parser(app.Utl__json_parser());
+		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
+		Gfo_inet_conn inet_conn = app.Utl__inet_conn();
+		Ordered_hash reqd_hash = Ordered_hash_.New();
+		int reqd_len = reqd_ary.length;
+		for (int i = 0; i < reqd_len; ++i)
+			reqd_hash.Add_as_key_and_val(reqd_ary[i]);
+
+		Site_core_db json_db = new Site_core_db(db_url);			
+		Site_core_itm[] actl_ary = json_db.Tbl__core().Select_all_downloaded(cutoff);
+		int actl_len = actl_ary.length;
+		for (int i = 0; i < actl_len; ++i) {	// remove items that have been completed after cutoff date
+			Site_core_itm actl_itm = actl_ary[i];
+			reqd_hash.Del(String_.new_u8(actl_itm.Site_domain()));
+		}
+		
+		reqd_len = reqd_hash.Count();
+		for (int i = 0; i < reqd_len; ++i) {
+			String domain_str = (String)reqd_hash.Get_at(i);
+			DateAdp json_date = DateAdp_.Now();
+			byte[] json_text = null;
+			for (int j = 0; j < 5; ++j) {
+				json_text = gplx.xowa.bldrs.wms.Xowm_api_mgr.Call_by_qarg(usr_dlg, inet_conn, domain_str, Xoa_site_cfg_loader__inet.Qarg__all);
+				if (json_text == null)
+					gplx.core.threads.Thread_adp_.Sleep(1000);
+				else
+					break;
+			}
+			byte[] domain_bry = Bry_.new_u8(domain_str);
+			byte[] site_abrv = Xow_abrv_xo_.To_bry(domain_bry);
+			json_db.Tbl__core().Insert(site_abrv, domain_bry, Bool_.N, json_date, json_text);
+		}
+
+		reqd_len = reqd_ary.length;
+		for (int i = 0; i < reqd_len; ++i) {
+			String domain_str = reqd_ary[i];
+			byte[] site_abrv = Xow_abrv_xo_.To_bry(Bry_.new_u8(domain_str));
+			Site_core_itm core_itm = json_db.Tbl__core().Select_itm(site_abrv);
+			if (core_itm.Json_completed()) continue;
+			Site_meta_itm meta_itm = new Site_meta_itm();
+			site_parser.Parse_root(meta_itm, String_.new_u8(core_itm.Site_domain()), core_itm.Json_text());
+			json_db.Save(meta_itm, site_abrv);
+		}
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

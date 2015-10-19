@@ -65,7 +65,7 @@ class Xows_text_parser__v2 {
 	public void Word__add(int bgn__ws, int word_end) {
 		if (bgn__ws == word_end) return;	// handle situations like "A!" where sym is at eos
 		if (bgn__ws == -1) return;			// handle situations like "A... " where " " is different than "..."
-		byte[] word = dirty ? bfr.Xto_bry_and_clear() : Bry_.Mid(src, bgn__ws, word_end);
+		byte[] word = dirty ? bfr.To_bry_and_clear() : Bry_.Mid(src, bgn__ws, word_end);
 		word_mgr.Add(word);
 		if (bgn__dash != -1) {
 			word_mgr.Add(Bry_.Mid(src, bgn__dash, word_end));
@@ -83,7 +83,7 @@ class Xows_text_parser__v2 {
 	public boolean Ws__is_word_end(int pos) {return parser__ws.Is_word_end(src, end, pos);}
 }
 class Xob_word_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Clear() {hash.Clear();}
 	public int Len() {return hash.Count();}
 	public Xob_word_itm Get_at(int i) {return (Xob_word_itm)hash.Get_at(i);}

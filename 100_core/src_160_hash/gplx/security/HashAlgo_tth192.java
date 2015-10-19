@@ -160,7 +160,7 @@ class HashDlgWtrDefault implements HashDlgWtr {
 		current += increment;
 		int percentage = (current * 100) / total;
 		if (percentage <= lastPercentage) return;
-		dialog.Write_tmp(String_.LimitToFirst(p, dialog.Chars_per_line_max()) + Int_.Xto_str(percentage) + "%");
+		dialog.Write_tmp(String_.LimitToFirst(p, dialog.Chars_per_line_max()) + Int_.To_str(percentage) + "%");
 		lastPercentage = percentage;			
 	}
 	public void End() {}

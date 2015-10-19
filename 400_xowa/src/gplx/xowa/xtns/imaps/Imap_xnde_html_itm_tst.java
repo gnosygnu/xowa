@@ -28,6 +28,6 @@ class Imap_html_bldr_fxt extends Imap_fxt_base {
 	private Imap_pts_fmtr_arg pts_fmtr_arg = new Imap_pts_fmtr_arg();
 	public void Test_shape_html(Imap_itm_shape shape, String expd) {
 		Imap_shapes_fmtr.Fmt_shape(bfr, Imap_html_fmtrs.Area, pts_fmtr_arg, shape);
-		Tfds.Eq(expd, bfr.Xto_str_and_clear());
+		Tfds.Eq(expd, bfr.To_str_and_clear());
 	}
 }

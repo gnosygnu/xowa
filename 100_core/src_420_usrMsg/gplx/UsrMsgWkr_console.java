@@ -24,7 +24,7 @@ public class UsrMsgWkr_console implements UsrMsgWkr {
 			text = "!!!!" + text;
 		else if (type == UsrMsgWkr_.Type_Stop)
 			text = "****" + text;
-		Console_adp__sys.I.Write_str(text);
+		Console_adp__sys.Instance.Write_str(text);
 	}
 	public static void RegAll(UsrDlg dlg) {
 		UsrMsgWkr wkr = new UsrMsgWkr_console();

@@ -59,13 +59,13 @@ public class Xob_wiki_cfg_bldr_tst {
 	}
 //		@Test  public void Lang_names_run() {
 //			Io_url dir = Io_url_.new_dir_("/var/www/mediawiki/languages/messages/");
-//			Io_url[] fils = Io_mgr.I.QueryDir_args(dir).ExecAsUrlAry();
+//			Io_url[] fils = Io_mgr.Instance.QueryDir_args(dir).ExecAsUrlAry();
 //			int fils_len = fils.length;
 //			String_bldr sb = String_bldr_.new_();
 //			for (int i = 0; i < fils_len; i++) {
 //				Io_url fil = fils[i];
 //				String lang_code = String_.Lower(String_.Replace(fil.NameOnly(), "Messages", ""));
-//				String txt = Io_mgr.I.LoadFilStr(fil);
+//				String txt = Io_mgr.Instance.LoadFilStr(fil);
 //				String[] lines = String_.Split(txt, '\n');
 //				String line = lines[1];
 //				line = String_.Replace(line, "/** ", "");
@@ -89,11 +89,11 @@ public class Xob_wiki_cfg_bldr_tst {
 //				String[] terms = String_.Split(line, '|');
 //				sb.Add(lang_code).Add("|").Add(String_.Trim(terms[0])).Add("|").Add(String_.Trim(terms[1])).Add("\n");
 //			}
-//			Tfds.Write(sb.Xto_str_and_clear());
+//			Tfds.Write(sb.To_str_and_clear());
 //		}
 	@Test  public void Ns_aliases() {
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
 		(	"<api>"
 		,	"<query>"
 		,	"<namespacealiases>"
@@ -127,7 +127,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			if (String_.Len_eq_0(wiki)) continue;
 			try {
 			String api = protocol + wiki + "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases";
-			String xml = String_.new_u8(Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
+			String xml = String_.new_u8(Io_mgr.Instance.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
 			if (xml == null) continue;	// not found
 			gplx.xmls.XmlDoc xdoc = gplx.xmls.XmlDoc_.parse(xml);
 			gplx.xmls.XmlNde xnde = gplx.xmls.Xpath_.SelectFirst(xdoc.Root(), "query/namespacealiases");
@@ -138,13 +138,13 @@ public class Xob_wiki_cfg_bldr_tst {
 				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
 				int id = Int_.parse(ns_nde.Atrs().FetchValOr("id", "-1"));
 				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
-				sb.Add(Int_.Xto_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
+				sb.Add(Int_.To_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
 			}
 			sb.Add("\");');\n");
 			}
 			catch(Exception e) {sb.Add("// fail: " + wiki + " " + Err_.Message_gplx_full(e)).Add_char_nl();}
 		}
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 }
 class Xob_wiki_cfg_bldr_fxt {
@@ -156,7 +156,7 @@ class Xob_wiki_cfg_bldr_fxt {
 		wiki_cfg_bldr.Clear();
 		hash.Clear();
 		return this;
-	}	private Xoae_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; Ordered_hash hash = Ordered_hash_.new_();
+	}	private Xoae_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; Ordered_hash hash = Ordered_hash_.New();
 	public Xob_wiki_cfg_bldr_fxt Init_cmd(String wiki, String key, String text) {
 		wiki_cfg_bldr.Itms_get_or_new(wiki).Itms_add(key, text);
 		return this;
@@ -172,7 +172,7 @@ class Xob_wiki_cfg_bldr_fxt {
 			KeyVal kv = (KeyVal)hash.Get_at(i);
 			String wiki = kv.Key();
 			String expd = (String)kv.Val();
-			String actl = Io_mgr.I.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
+			String actl = Io_mgr.Instance.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
 			Tfds.Eq_str_lines(expd, actl);
 		}
 	}

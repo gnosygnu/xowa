@@ -19,7 +19,7 @@ package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gpl
 class Xosrh_parser {
 	public Xosrh_qry_itm Parse(byte[] src) {
 		this.src = src;
-		Xosrh_qry_tkn[] tkns = Xosrh_scanner._.Scan(src);
+		Xosrh_qry_tkn[] tkns = Xosrh_scanner.Instance.Scan(src);
 		return Parse_itm_or(make_ctx.Init(tkns));
 	}	private Xosrh_parser_ctx make_ctx = new Xosrh_parser_ctx(); byte[] src;
 	Xosrh_qry_itm Parse_itm_or(Xosrh_parser_ctx make_ctx) {
@@ -70,7 +70,7 @@ class Xosrh_parser {
 				return Xosrh_qry_itm.word_(src, word_tkn);
 		}
 	}
-	public static final Xosrh_parser _ = new Xosrh_parser(); Xosrh_parser() {}
+	public static final Xosrh_parser Instance = new Xosrh_parser(); Xosrh_parser() {}
 }
 class Xosrh_parser_ctx {
 	public Xosrh_parser_ctx Init(Xosrh_qry_tkn[] ary) {

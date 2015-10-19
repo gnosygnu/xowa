@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.tdbs.xdats.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_calc_stats_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Xob_cmd_keys.Key_tdb_calc_stats;}
@@ -48,11 +48,11 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			Xow_ns ns = wiki.Ns_mgr().Ords_ary()[i];
 			if (ns.Id() < 0) continue;
 			bfr.Add_byte_nl();
-			Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.Xto_str_pad_bgn_zero(ns.Count(), 10));
+			Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.To_str_pad_bgn_zero(ns.Count(), 10));
 		}
 		bfr.Add_byte_nl().Add_byte(Byte_ascii.Semic).Add_byte_nl();
 		Io_url wiki_gfs = Wiki_gfs_url(wiki);
-		Io_mgr.I.SaveFilBfr(wiki_gfs, bfr);
+		Io_mgr.Instance.SaveFilBfr(wiki_gfs, bfr);
 	}
 	private void Gen_call(boolean first, Bry_bfr bfr, String key, Object... vals) {
 		if (!first) bfr.Add_byte(Byte_ascii.Dot);
@@ -83,7 +83,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		return Calc_count_articles_dir(ns, hive_dir);
 	}
 	int Calc_count_articles_dir(Xow_ns ns, Io_url dir) {
-		Io_url[] subs = Io_mgr.I.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
+		Io_url[] subs = Io_mgr.Instance.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
 		int count = 0;
 		int subs_len = subs.length;
 		bldr.Usr_dlg().Prog_one(GRP_KEY, "count", "calculating: ~{0}", dir.Raw());
@@ -99,7 +99,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	int Calc_count_articles_fil(Xow_ns ns, Io_url fil) {
 		if (String_.Eq(fil.NameAndExt(), Xotdb_dir_info_.Name_reg_fil)) return 0;
 		int rv = 0;
-		byte[] bry = Io_mgr.I.LoadFilBry(fil);
+		byte[] bry = Io_mgr.Instance.LoadFilBry(fil);
 		Xob_xdat_file xdat_file = new Xob_xdat_file().Parse(bry, bry.length, fil);
 		Xowd_page_itm page = Xowd_page_itm.new_tmp();
 		int count = xdat_file.Count();

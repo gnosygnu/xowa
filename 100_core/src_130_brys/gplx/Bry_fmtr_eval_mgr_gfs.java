@@ -19,7 +19,7 @@ package gplx;
 public class Bry_fmtr_eval_mgr_gfs implements Bry_fmtr_eval_mgr {
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public byte[] Eval(byte[] cmd) {			
-		return enabled ? Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(GfsCore._.ExecText(String_.new_u8(cmd)))) : null;
+		return enabled ? Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(GfsCore.Instance.ExecText(String_.new_u8(cmd)))) : null;
 	}
-        public static final Bry_fmtr_eval_mgr_gfs _ = new Bry_fmtr_eval_mgr_gfs(); Bry_fmtr_eval_mgr_gfs() {}
+        public static final Bry_fmtr_eval_mgr_gfs Instance = new Bry_fmtr_eval_mgr_gfs(); Bry_fmtr_eval_mgr_gfs() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.bldrs.cmds.files.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.files.*; import gplx.xowa.bldrs.cmds.files.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Io_url prv_url;
@@ -42,8 +42,8 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 //			// rotate db
 //			DateAdp wiki_date = wiki.Db_mgr().Dump_date_query();
 //			Io_url archive_url = prv_url.GenNewNameOnly("oimg_lnki_" + wiki_date.XtoStr_fmt("yyyyMMdd"));
-//			Io_mgr.I.CopyFil(cur_file.Url(), archive_url, true);
-//			Io_mgr.I.CopyFil(cur_file.Url(), prv_url, true);
+//			Io_mgr.Instance.CopyFil(cur_file.Url(), archive_url, true);
+//			Io_mgr.Instance.CopyFil(cur_file.Url(), prv_url, true);
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

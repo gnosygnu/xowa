@@ -41,7 +41,7 @@ class GfsRegy implements GfoInvkAble {
 		hash.Del(k);
 	}
 	Hash_adp typeHash = Hash_adp_.new_();
-	Ordered_hash hash = Ordered_hash_.new_();
+	Ordered_hash hash = Ordered_hash_.New();
         public static GfsRegy new_() {return new GfsRegy();} GfsRegy() {}
 }
 class GfsRegyItm implements GfoInvkAble {

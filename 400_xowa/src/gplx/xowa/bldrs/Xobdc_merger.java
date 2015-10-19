@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*; import gplx.lists.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wtrs.*;
 public class Xobdc_merger {
-	public static void Basic(Gfo_usr_dlg usr_dlg, Io_url_gen dump_url_gen, Io_url sort_dir, int memory_max, Io_line_rdr_key_gen key_gen, Io_sort_cmd make_cmd) {Basic(usr_dlg, dump_url_gen, sort_dir, memory_max, Io_sort_split_itm_sorter._, key_gen, make_cmd);}
+	public static void Basic(Gfo_usr_dlg usr_dlg, Io_url_gen dump_url_gen, Io_url sort_dir, int memory_max, Io_line_rdr_key_gen key_gen, Io_sort_cmd make_cmd) {Basic(usr_dlg, dump_url_gen, sort_dir, memory_max, Io_sort_split_itm_sorter.Instance, key_gen, make_cmd);}
 	public static void Basic(Gfo_usr_dlg usr_dlg, Io_url_gen dump_url_gen, Io_url sort_dir, int memory_max, ComparerAble row_comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd make_cmd) {
 		Io_sort sort = new Io_sort().Memory_max_(memory_max);
 		Io_url_gen sort_url_gen = Io_url_gen_.dir_(sort_dir);

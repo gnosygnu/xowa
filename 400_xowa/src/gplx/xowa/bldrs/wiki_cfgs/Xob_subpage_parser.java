@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.langs.phps.*; import gplx.xowa.bldrs.langs.*;
+import gplx.langs.phps.*; import gplx.xowa.langs.bldrs.*;
 class Xob_subpage_parser {
 	public Xob_subpage_wiki[] Parse(byte[] src) {
 		src = Bry_.Add(Bry_.new_a7("$a = array("), src, Bry_.new_a7(");"));

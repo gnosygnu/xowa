@@ -38,7 +38,7 @@ public class Xof_repo_itm_ {
 			if (Op_sys_.Wnt_invalid_char(b)) b = Byte_ascii.Underline;
 			bfr.Add_byte(b);
 		}
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public static byte[] Ttl_shorten_ttl(Bry_bfr bfr, byte[] ttl, int ttl_max, byte[] md5, byte[] ext_bry) {
 		byte[] rv = ttl;
@@ -49,7 +49,7 @@ public class Xof_repo_itm_ {
 			bfr.Add(md5);												// add md5;					EX: "abcdefghijklmnopqrstuvwxyz0123456"
 			bfr.Add_byte(Byte_ascii.Dot);								// add dot;					EX: "."
 			bfr.Add(ext_bry);											// add ext;					EX: ".png"
-			rv = bfr.Xto_bry_and_clear();
+			rv = bfr.To_bry_and_clear();
 		}
 		return rv;
 	}

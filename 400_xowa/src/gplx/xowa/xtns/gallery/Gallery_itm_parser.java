@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
@@ -31,7 +31,7 @@ public class Gallery_itm_parser {
 	private Bry_bfr caption_bfr = Bry_bfr.reset_(255); private int caption_bgn;
 	private Xop_ctx ctx;
 	public Gallery_itm_parser Init_by_wiki(Xowe_wiki wiki) {
-		this.wiki = wiki; Xol_lang lang = wiki.Lang();
+		this.wiki = wiki; Xol_lang_itm lang = wiki.Lang();
 		this.ctx = wiki.Parser_mgr().Ctx();
 		trie.Clear();
 		Byte_obj_ref tmp_bref = Byte_obj_ref.zero_();
@@ -52,7 +52,7 @@ public class Gallery_itm_parser {
 			byte cur_mode = Parse_itm();
 			if (cur_itm.Ttl() != null) {
 				if (caption_bfr.Len() > 0)
-					cur_itm.Caption_bry_(caption_bfr.Xto_bry_and_clear_and_trim());
+					cur_itm.Caption_bry_(caption_bfr.To_bry_and_clear_and_trim());
 				Make_lnki_tkn(mgr, xnde, src);
 				rv.Add(cur_itm);
 				cur_itm = new Gallery_itm();
@@ -226,9 +226,9 @@ public class Gallery_itm_parser {
 	}
 	private static final byte Fld_null = 0, Fld_ttl = 1, Fld_caption = 2, Fld_alt = 3, Fld_link = 4, Fld_page = 5;
 	private static final byte Mode_eos = 1, Mode_nl = 2, Mode_pipe = 3, Mode_text = 4;
-	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang lang, int kwd_id, byte trie_key) {
+	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang_itm lang, int kwd_id, byte trie_key) {
 		Xol_kwd_grp grp = lang.Kwd_mgr().Get_at(kwd_id);
-		if (grp == null) {Gfo_usr_dlg_.I.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_u8(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
+		if (grp == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_u8(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
 		Xol_kwd_itm[] itms = grp.Itms();
 		int len = itms.length;
 		Byte_obj_val trie_ref = Byte_obj_val.new_(trie_key);

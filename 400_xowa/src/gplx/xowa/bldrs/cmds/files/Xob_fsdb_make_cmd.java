@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*;	
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
@@ -66,7 +66,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		// trg_mnt_itm
 		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
-		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
+		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
 		this.trg_mnt_itm = trg_mnt_mgr.Mnts__get_insert();
@@ -128,7 +128,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (!resume_enabled) // clear cfg entries if resume disabled; note that disabled by default; DATE:2014-10-24
 			bldr_cfg_tbl.Delete_grp(Cfg_fsdb_make);
 		Db_cfg_hash bmk_hash = bldr_cfg_tbl.Select_as_hash(Cfg_fsdb_make);
-		String tier_id_str = bmk_hash.Get(Cfg_tier_id_bmk).To_str_or(null);
+		String tier_id_str = bmk_hash.Get_by(Cfg_tier_id_bmk).To_str_or(null);
 		if (tier_id_str == null) {	// bmks not found; new db;
 			bldr_conn.Txn_bgn("bldr__fsdb_make__bldr_conn");
 			bldr_cfg_tbl.Insert_int(Cfg_fsdb_make, Cfg_tier_id_bmk	, tier_id_bmk);
@@ -145,11 +145,11 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				usr_dlg.Note_many("", "", "restoring from bmk: tier_id=~{0}", tier_id_bmk);
 			}
 			if (page_id_bmk == -1) {
-				page_id_bmk = bmk_hash.Get(Cfg_page_id_bmk).To_int();
+				page_id_bmk = bmk_hash.Get_by(Cfg_page_id_bmk).To_int();
 				usr_dlg.Note_many("", "", "restoring from bmk: page_id=~{0}", page_id_bmk);
 			}
 			if (lnki_id_bmk == -1) {
-				lnki_id_bmk = bmk_hash.Get(Cfg_lnki_id_bmk).To_int();
+				lnki_id_bmk = bmk_hash.Get_by(Cfg_lnki_id_bmk).To_int();
 				usr_dlg.Note_many("", "", "restoring from bmk: lnki_id=~{0}", lnki_id_bmk);
 			}
 		}
@@ -287,7 +287,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		if (exec_done) {
 			bldr_cfg_tbl.Delete_grp(Cfg_fsdb_make);	// delete bmks for future reruns; DATE:2014-08-20
-			Io_mgr.I.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa.file.make.cfg.gfs")).MissingFails_off().Exec();
+			Io_mgr.Instance.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa.file.make.cfg.gfs")).MissingFails_off().Exec();
 		}
 		bldr_conn.Rls_conn();
 	}

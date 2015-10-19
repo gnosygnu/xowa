@@ -33,7 +33,7 @@ public class IptKey_ {
 	}
 	public static IptKey api_(int val) {
 		IptKey rv = (IptKey)enm_mgr.Get(val);
-		return (rv == null) ? new_(val, "key_" + Int_.Xto_str(val)) : rv;
+		return (rv == null) ? new_(val, "key_" + Int_.To_str(val)) : rv;
 	}
 	public static IptKey parse(String raw) {return get_or_new_(enm_mgr.GetVal(raw));}
 	public static IptKey rdr_or_(DataRdr rdr, String key, IptKey or) {
@@ -44,7 +44,7 @@ public class IptKey_ {
 		List_adp list = List_adp_.new_();
 		for (IptKey key : add)
 			list.Add(key);
-		IptKeyStrMgr._.XtoIptKeyAry(list);
+		IptKeyStrMgr.Instance.XtoIptKeyAry(list);
 		for (IptKey key : del)
 			list.Del(key);
 		return list;
@@ -53,7 +53,7 @@ public class IptKey_ {
 		List_adp list = List_adp_.new_();
 		for (IptKey key : add)
 			list.Add(key);
-		IptKeyStrMgr._.XtoIptKeyAry(list);
+		IptKeyStrMgr.Instance.XtoIptKeyAry(list);
 		for (IptKey key : del)
 			list.Del(key);
 		return (IptKey[])list.To_ary(IptKey.class);
@@ -105,7 +105,7 @@ public class IptKey_ {
 	private static Ordered_hash ui_str_hash;
 	public static Ordered_hash Ui_str_hash() {
 		if (ui_str_hash == null) {
-			ui_str_hash = Ordered_hash_.new_();
+			ui_str_hash = Ordered_hash_.New();
 			All_add(ui_str_hash
 			, IptKey_.Back, IptKey_.Tab, IptKey_.Clear, IptKey_.Enter
 			, IptKey_.Pause, IptKey_.CapsLock, IptKey_.Escape, IptKey_.Space
@@ -147,7 +147,7 @@ public class IptKey_ {
 			rv += "+";
 		}
 		IptKey key = (IptKey)IptKey_.Ui_str_hash().Get_by(Int_obj_ref.new_(val));
-		String key_str = key == null ? "key.#" + Int_.Xto_str(val) : key.Key();
+		String key_str = key == null ? "key.#" + Int_.To_str(val) : key.Key();
 		return rv + key_str;
 	}
 }

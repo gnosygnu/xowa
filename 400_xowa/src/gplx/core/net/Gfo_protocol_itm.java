@@ -76,7 +76,7 @@ public class Gfo_protocol_itm {
 	, Tid_relative_1			= 29		// [//a.org]
 	, Tid_relative_2			= 30		// [[//a.org]]
 	;
-	public static final Ordered_hash Regy = Ordered_hash_.new_bry_();
+	public static final Ordered_hash Regy = Ordered_hash_.New_bry();
 	public static final Gfo_protocol_itm 
 	  Itm_http					= new_(Tid_http			, "http://")
 	, Itm_https					= new_(Tid_https		, "https://")

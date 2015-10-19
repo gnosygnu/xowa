@@ -35,20 +35,20 @@ public class IoEngine_xrg_downloadFil {
 	public boolean Src_last_modified_query() {return src_last_modified_query;} public IoEngine_xrg_downloadFil Src_last_modified_query_(boolean v) {src_last_modified_query = v; return this;} private boolean src_last_modified_query;
 	public String Trg_engine_key() {return trg_engine_key;} public IoEngine_xrg_downloadFil Trg_engine_key_(String v) {trg_engine_key = v; return this;} private String trg_engine_key = IoEngine_.SysKey;
 	public Io_download_fmt Download_fmt() {return download_fmt;} private final Io_download_fmt download_fmt = new Io_download_fmt();
-	public boolean Exec() {return IoEnginePool._.Get_by(trg.Info().EngineKey()).DownloadFil(this);}
-	public Io_stream_rdr Exec_as_rdr() {return IoEnginePool._.Get_by(IoEngine_.SysKey).DownloadFil_as_rdr(this);}
+	public boolean Exec() {return IoEnginePool.Instance.Get_by(trg.Info().EngineKey()).DownloadFil(this);}
+	public Io_stream_rdr Exec_as_rdr() {return IoEnginePool.Instance.Get_by(IoEngine_.SysKey).DownloadFil_as_rdr(this);}
 	public boolean Exec_meta_only() {return exec_meta_only;} private boolean exec_meta_only;
 	public byte[] Exec_as_bry(String src) {
 		this.Src_(src); this.Trg_(trg_mem);
 		download_fmt.Download_init(src, prog_fmt_hdr);	// NOTE: must set src else NULL error
-		boolean pass = IoEnginePool._.Get_by(trg_engine_key).DownloadFil(this);
-		return pass ? Io_mgr.I.LoadFilBry(trg_mem) : null;
+		boolean pass = IoEnginePool.Instance.Get_by(trg_engine_key).DownloadFil(this);
+		return pass ? Io_mgr.Instance.LoadFilBry(trg_mem) : null;
 	}	private Io_url trg_mem = Io_url_.mem_fil_("mem/download.tmp");
 	public boolean Exec_meta(String src) {
 		this.Src_(src); this.Trg_(trg_mem);	// NOTE: set Trg_ else error in download proc
 		download_fmt.Download_init(src, prog_fmt_hdr);	// NOTE: must set src else NULL error
 		exec_meta_only = true;
-		boolean rv = IoEnginePool._.Get_by(trg_engine_key).DownloadFil(this);
+		boolean rv = IoEnginePool.Instance.Get_by(trg_engine_key).DownloadFil(this);
 		exec_meta_only = false;
 		return rv;
 	}

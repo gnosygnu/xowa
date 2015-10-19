@@ -26,12 +26,12 @@ public class BinaryHeap_Io_line_rdr_tst {
 	}
 }
 class BinaryHeap_Io_line_rdr_fxt {
-	BinaryHeap_Io_line_rdr heap = new BinaryHeap_Io_line_rdr(Io_sort_split_itm_sorter._); int file_total;
+	BinaryHeap_Io_line_rdr heap = new BinaryHeap_Io_line_rdr(Io_sort_split_itm_sorter.Instance); int file_total;
 	public BinaryHeap_Io_line_rdr_fxt Add(String... ary) {
 		file_total = ary.length;
 		for (int i = 0; i < file_total; i++) {
 			Io_url url = Io_url_.mem_fil_("mem/fil_" + ary[i] + ".txt");
-			Io_mgr.I.SaveFilStr(url, ary[i]);
+			Io_mgr.Instance.SaveFilStr(url, ary[i]);
 			Io_line_rdr stream = new Io_line_rdr(Gfo_usr_dlg_.Test(), url);
 			stream.Read_next();
 			heap.Add(stream);

@@ -44,12 +44,8 @@ public class Xop_xnde_tag_regy {
 		Xop_xnde_tag[] ary = Xop_xnde_tag_.Ary;
 		for (int i = 0; i < len; ++i) {
 			Xop_xnde_tag xnde = ary[i];
-			if (	xtn_hash != null				// xtn_hash is null during tests or when wiki is not in site_meta_db
-				&&	xnde.Xtn_mw()					// only apply filter to xtn_xnde, not basic_xnde; EX: <dynamicpagelist> not <table>
-				&&	!xtn_hash.Has(xnde.Name_bry())	// xtn_xnde is not in xtn_hash
-				)	continue;						// skip; xtn is not defined in site_meta_db
-			if (is_tmpl && !xnde.Xtn())				// is_tmpl and basic_xnde; EX: <b>
-				continue;							// skip; tmpl only needs xtn_xnde;
+			if (Ignore_xnde(xtn_hash, xnde))	continue;	// skip; xtn is not defined in site_meta_db
+			if (is_tmpl && !xnde.Xtn())			continue;	// is_tmpl and basic_xnde; EX: <b>
 			Add_itm(trie, xnde);
 		}
 		if (is_tmpl) {								// is_tmpl also has <nowiki>, <includeonly>, <noinclude>, <onlyinclude>
@@ -58,6 +54,13 @@ public class Xop_xnde_tag_regy {
 			Add_itm(trie, Xop_xnde_tag_.Tag_noinclude);
 			Add_itm(trie, Xop_xnde_tag_.Tag_onlyinclude);
 		}
+	}
+	private boolean Ignore_xnde(Hash_adp_bry xtn_hash, Xop_xnde_tag xnde) {
+		return 	xtn_hash != null					// xtn_hash is null during tests or when wiki is not in site_meta_db
+			&&	xnde.Xtn_mw()						// only apply filter to xtn_xnde, not basic_xnde; EX: <dynamicpagelist> not <table>
+			&&	!xtn_hash.Has(xnde.Name_bry())		// xtn_xnde is not in xtn_hash
+			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid_translate, Xop_xnde_tag_.Tid_languages)	// always include <translate> and <languages>; TODO:filter out when extensions supported in site_cfg; DATE:2015-10-13
+			;										// skip; xtn is not defined in site_meta_db
 	}
 	private void Add_itm(Btrie_slim_mgr trie, Xop_xnde_tag xnde) {
 		trie.Add_obj(xnde.Name_bry(), xnde);

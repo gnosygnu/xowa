@@ -19,9 +19,9 @@ package gplx.xowa.specials.search.parsers; import gplx.*; import gplx.xowa.*; im
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 class Xows_text_parser__v1 {
-	private Xol_lang lang; private Bry_bfr bfr = Bry_bfr.new_(255);
-	private final Ordered_hash list = Ordered_hash_.new_bry_();
-	public void Init(Xol_lang lang) {this.lang = lang;}
+	private Xol_lang_itm lang; private Bry_bfr bfr = Bry_bfr.new_(255);
+	private final Ordered_hash list = Ordered_hash_.New_bry();
+	public void Init(Xol_lang_itm lang) {this.lang = lang;}
 	public void Parse(byte[] src, int src_len, int bgn, int end) {
 		if (lang != null) {	// null lang passed in by searcher
 			src = lang.Case_mgr().Case_build_lower(src);
@@ -31,7 +31,7 @@ class Xows_text_parser__v1 {
 		while (true) {
 			if (word_done || i == src_len) {
 				if (bfr.Len() > 0) {
-					byte[] word = bfr.Xto_bry_and_clear();
+					byte[] word = bfr.To_bry_and_clear();
 					if (!list.Has(word)) list.Add(word, word);	// don't add same word twice; EX: Title of "Can Can" should only have "Can" in index
 				}
 				if (i == src_len) break;

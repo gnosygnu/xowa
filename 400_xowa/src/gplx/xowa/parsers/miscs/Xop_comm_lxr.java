@@ -21,7 +21,7 @@ import gplx.xowa.parsers.paras.*;
 public class Xop_comm_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_comment;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Bgn_ary, this);}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int lhs_end = cur_pos;
@@ -91,7 +91,7 @@ public class Xop_comm_lxr implements Xop_lxr {
 	}
 	public static final byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
 	private static final int End_len = End_ary.length;
-	public static final Xop_comm_lxr _ = new Xop_comm_lxr(); Xop_comm_lxr() {}
+	public static final Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
 	private static final String Xowa_skip_text_str = "XOWA_SKIP";
 	private static final byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
 	public static final byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");

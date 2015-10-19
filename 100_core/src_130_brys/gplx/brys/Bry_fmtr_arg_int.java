@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.brys; import gplx.*;
 public class Bry_fmtr_arg_int implements Bry_fmtr_arg {
 	public Bry_fmtr_arg_int Data_(int v) {val = Int_.cast(v); val_digits = Int_.DigitCount(val); return this;}
-	public void XferAry(Bry_bfr trg, int idx) {trg.Add_int_fixed(val, val_digits);}
+	public void Fmt__do(Bry_bfr bfr) {bfr.Add_int_fixed(val, val_digits);}
 	public Bry_fmtr_arg_int(int v) {this.val = v; this.val_digits = Int_.DigitCount(v);} int val, val_digits;
 }

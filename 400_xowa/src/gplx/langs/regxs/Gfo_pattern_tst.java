@@ -69,7 +69,7 @@ class Gfo_pattern_itm_fxt {
 			Tfds.Eq(expd, pattern.Match(Bry_.new_u8(itm)), "pattern={0} itm={1} expd={2}", String_.new_u8(pattern.Raw()), itm, expd);
 		}
 	}
-	public Gfo_pattern_itm_wild itm_wild_() {return Gfo_pattern_itm_wild._;}
+	public Gfo_pattern_itm_wild itm_wild_() {return Gfo_pattern_itm_wild.Instance;}
 	public Gfo_pattern_itm_text itm_text_(String raw) {
 		Gfo_pattern_itm_text rv = new Gfo_pattern_itm_text();
 		byte[] bry = Bry_.new_u8(raw);
@@ -88,6 +88,6 @@ class Gfo_pattern_itm_fxt {
 			Gfo_pattern_itm itm = ary[i];
 			itm.Xto_str(sb);
 		}
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 }

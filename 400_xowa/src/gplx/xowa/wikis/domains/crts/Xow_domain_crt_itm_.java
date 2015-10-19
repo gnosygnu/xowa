@@ -21,7 +21,7 @@ class Xow_domain_crt_itm_ {
 }
 class Xow_domain_crt_itm__any_wiki implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return true;}
-        public static final Xow_domain_crt_itm__any_wiki I = new Xow_domain_crt_itm__any_wiki(); Xow_domain_crt_itm__any_wiki() {}
+        public static final Xow_domain_crt_itm__any_wiki Instance = new Xow_domain_crt_itm__any_wiki(); Xow_domain_crt_itm__any_wiki() {}
 }
 class Xow_domain_crt_itm__in implements Xow_domain_crt_itm {
 	private final Xow_domain_crt_itm[] ary;
@@ -38,34 +38,34 @@ class Xow_domain_crt_itm__in implements Xow_domain_crt_itm {
 class Xow_domain_crt_itm__any_standard implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {
 		switch (comp.Domain_type_id()) {
-			case Xow_domain_type_.Int__wikipedia:
-			case Xow_domain_type_.Int__wiktionary:
-			case Xow_domain_type_.Int__wikisource:
-			case Xow_domain_type_.Int__wikivoyage:
-			case Xow_domain_type_.Int__wikiquote:
-			case Xow_domain_type_.Int__wikibooks:
-			case Xow_domain_type_.Int__wikiversity:
-			case Xow_domain_type_.Int__wikinews:		return true;
-			default:								return false;
+			case Xow_domain_tid_.Int__wikipedia:
+			case Xow_domain_tid_.Int__wiktionary:
+			case Xow_domain_tid_.Int__wikisource:
+			case Xow_domain_tid_.Int__wikivoyage:
+			case Xow_domain_tid_.Int__wikiquote:
+			case Xow_domain_tid_.Int__wikibooks:
+			case Xow_domain_tid_.Int__wikiversity:
+			case Xow_domain_tid_.Int__wikinews:		return true;
+			default:									return false;
 		}
 	}
-        public static final Xow_domain_crt_itm__any_standard I = new Xow_domain_crt_itm__any_standard(); Xow_domain_crt_itm__any_standard() {}
+        public static final Xow_domain_crt_itm__any_standard Instance = new Xow_domain_crt_itm__any_standard(); Xow_domain_crt_itm__any_standard() {}
 }
 class Xow_domain_crt_itm__none implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return false;}
-        public static final Xow_domain_crt_itm__none I = new Xow_domain_crt_itm__none(); Xow_domain_crt_itm__none() {}
+        public static final Xow_domain_crt_itm__none Instance = new Xow_domain_crt_itm__none(); Xow_domain_crt_itm__none() {}
 }
 class Xow_domain_crt_itm__self implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return Bry_.Eq(cur.Domain_bry(), comp.Domain_bry());}
-        public static final Xow_domain_crt_itm__self I = new Xow_domain_crt_itm__self(); Xow_domain_crt_itm__self() {}
+        public static final Xow_domain_crt_itm__self Instance = new Xow_domain_crt_itm__self(); Xow_domain_crt_itm__self() {}
 }
 class Xow_domain_crt_itm__same_lang implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return Bry_.Eq(cur.Lang_orig_key(), comp.Lang_orig_key());}
-        public static final Xow_domain_crt_itm__same_lang I = new Xow_domain_crt_itm__same_lang(); Xow_domain_crt_itm__same_lang() {}
+        public static final Xow_domain_crt_itm__same_lang Instance = new Xow_domain_crt_itm__same_lang(); Xow_domain_crt_itm__same_lang() {}
 }
 class Xow_domain_crt_itm__same_type implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return cur.Domain_type_id() == comp.Domain_type_id();}
-        public static final Xow_domain_crt_itm__same_type I = new Xow_domain_crt_itm__same_type(); Xow_domain_crt_itm__same_type() {}
+        public static final Xow_domain_crt_itm__same_type Instance = new Xow_domain_crt_itm__same_type(); Xow_domain_crt_itm__same_type() {}
 }
 class Xow_domain_crt_itm__lang implements Xow_domain_crt_itm {
 	private final byte[] lang_key;

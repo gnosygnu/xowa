@@ -132,7 +132,7 @@ public class Sql_file_parser {
 					default:								throw Err_.new_unhandled(mode);
 				}
 			}
-			Io_mgr.I.AppendFilByt(trg_fil_gen.Nxt_url(), fil_bfr.Xto_bry_and_clear());
+			Io_mgr.Instance.AppendFilByt(trg_fil_gen.Nxt_url(), fil_bfr.To_bry_and_clear());
 		}
 		finally {rdr.Rls();}
 	}
@@ -141,7 +141,7 @@ public class Sql_file_parser {
 		if (fil_bfr.Len() > trg_len) {
 			Io_url trg_fil = trg_fil_gen.Nxt_url();				
 			usr_dlg.Prog_one(GRP_KEY, "make", "making ~{0}", trg_fil.NameAndExt());
-			Io_mgr.I.AppendFilByt(trg_fil, fil_bfr.Xto_bry_and_clear());
+			Io_mgr.Instance.AppendFilByt(trg_fil, fil_bfr.To_bry_and_clear());
 		}
 	}
 	private void Commit_fld(int fld_idx, Bry_bfr val_bfr, Bry_bfr fil_bfr, Sql_file_parser_data data) {

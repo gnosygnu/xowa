@@ -42,6 +42,6 @@ public class Wdata_doc_bldr {
 		return rv;
 	}
 	private void Init() {
-		descr_list = Ordered_hash_.new_bry_(); label_list = Ordered_hash_.new_bry_(); slink_list = Ordered_hash_.new_bry_(); alias_list = Ordered_hash_.new_bry_(); claim_list = Ordered_hash_.new_();
+		descr_list = Ordered_hash_.New_bry(); label_list = Ordered_hash_.New_bry(); slink_list = Ordered_hash_.New_bry(); alias_list = Ordered_hash_.New_bry(); claim_list = Ordered_hash_.New();
 	}
 }

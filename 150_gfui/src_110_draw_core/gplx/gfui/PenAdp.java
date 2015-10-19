@@ -23,7 +23,7 @@ public class PenAdp implements GfoInvkAble {
 	public float Width() {return width;} public void Width_set(float v) {width = v; InitUnder();} float width;
 	public ColorAdp Color() {return color;} public void Color_set(ColorAdp v) {color = v; InitUnder();} ColorAdp color;
 		public BasicStroke UnderStroke() {if (underStroke == null) InitUnder(); return underStroke;} BasicStroke underStroke; 
-	void InitUnder() {underStroke = PenAdpCache._.Fetch(width);}
+	void InitUnder() {underStroke = PenAdpCache.Instance.Fetch(width);}
 		public PenAdp Clone() {return PenAdp_.new_(color, width);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Width_))	Width_set(m.ReadFloat(Invk_Width_));
@@ -49,5 +49,5 @@ class PenAdpCache {
 		return (BasicStroke)rv;
 	}
 		Hash_adp hash = Hash_adp_.new_();
-	public static final PenAdpCache _ = new PenAdpCache(); PenAdpCache() {}
+	public static final PenAdpCache Instance = new PenAdpCache(); PenAdpCache() {}
 }

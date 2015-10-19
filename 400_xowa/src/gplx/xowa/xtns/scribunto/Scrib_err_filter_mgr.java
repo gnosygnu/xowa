@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_err_filter_mgr implements GfoInvkAble {
-	private final Ordered_hash hash_by_mod = Ordered_hash_.new_();
+	private final Ordered_hash hash_by_mod = Ordered_hash_.New();
 	public void Clear() {hash_by_mod.Clear();}
 	public boolean Count_eq_0() {return hash_by_mod.Count() == 0;}
 	public boolean Match(String mod, String fnc, String err) {
@@ -57,7 +57,7 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 				}
 			}
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	private List_adp Get_itms_or_null(String mod, String fnc) {
 		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod); if (hash_by_fnc == null) return null;
@@ -66,7 +66,7 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 	private List_adp New_itms(String mod, String fnc) {
 		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod);
 		if (hash_by_fnc == null) {
-			hash_by_fnc = Ordered_hash_.new_();
+			hash_by_fnc = Ordered_hash_.New();
 			hash_by_mod.Add(mod, hash_by_fnc);
 		}
 		List_adp list_of_err = (List_adp)hash_by_fnc.Get_by(fnc);

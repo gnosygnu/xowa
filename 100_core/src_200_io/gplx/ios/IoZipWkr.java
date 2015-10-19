@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 import gplx.stores.*; /*GfoNdeRdr_*/
 public class IoZipWkr {
-	public Io_url ExeUrl()		{return (Io_url)GfoRegy._.FetchValOrFail(Regy_ExeUrl);}
-	public String ExeArgFmt()	{return (String)GfoRegy._.FetchValOrFail(Regy_ExeArgFmt);}
+	public Io_url ExeUrl()		{return (Io_url)GfoRegy.Instance.FetchValOrFail(Regy_ExeUrl);}
+	public String ExeArgFmt()	{return (String)GfoRegy.Instance.FetchValOrFail(Regy_ExeArgFmt);}
 	public void Expand(Io_url srcUrl, Io_url trgUrl) {			
 		String exeArgs = Expand_genCmdString(srcUrl, trgUrl);
 		process.Exe_url_(this.ExeUrl()).Args_str_(exeArgs);
@@ -32,8 +32,8 @@ public class IoZipWkr {
 	public static IoZipWkr regy_() {return new IoZipWkr();}
 	static final String Regy_ExeUrl = "gplx.ios.IoZipWkr.ExeUrl", Regy_ExeArgFmt = "gplx.ios.IoZipWkr.ExeArgFmt";
 	public static IoZipWkr new_(Io_url exeUrl, String expandArgs) {
-		GfoRegy._.RegObj(Regy_ExeUrl, exeUrl);
-		GfoRegy._.RegObj(Regy_ExeArgFmt, expandArgs);
+		GfoRegy.Instance.RegObj(Regy_ExeUrl, exeUrl);
+		GfoRegy.Instance.RegObj(Regy_ExeArgFmt, expandArgs);
 		IoZipWkr rv = new IoZipWkr();
 		return rv;
 	}

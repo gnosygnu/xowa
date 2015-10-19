@@ -21,7 +21,7 @@ public class Db_qry_flush implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_flush;}
 	public boolean			Exec_is_rdr() {return false;}
 	public String		Base_table() {return tableNames[0];}
-	public String		Xto_sql() {return Sql_qry_wtr_.I.Xto_str(this, false);}		
+	public String		Xto_sql() {return Sql_qry_wtr_.Instance.Xto_str(this, false);}		
 	public int Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 
 	public String[] TableNames() {return tableNames;} private String[] tableNames;

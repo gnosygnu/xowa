@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.langs.xmls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_dumper {
 	private final Gfo_xml_wtr wtr = new Gfo_xml_wtr();
@@ -38,7 +38,7 @@ public class Xob_xml_dumper {
 	}
 	private void Write_siteinfo(Xow_domain_itm domain, String wiki_abrv, String main_page, String ns_case, String app_version) {
 		wtr.Nde_lhs("siteinfo");
-		wtr.Nde_txt_bry("sitename"				, Xow_domain_type_.Get_type_as_bry(domain.Domain_type_id()));
+		wtr.Nde_txt_bry("sitename"				, Xow_domain_tid_.Get_type_as_bry(domain.Domain_type_id()));
 		wtr.Nde_txt_str("dbname"				, wiki_abrv);
 		wtr.Nde_txt_str("base"				, main_page);
 		wtr.Nde_txt_str("generator"				, app_version);

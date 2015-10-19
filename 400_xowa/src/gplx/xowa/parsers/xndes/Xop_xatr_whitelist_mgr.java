@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xatr_whitelist_mgr {
-	public boolean Chk(int tag_id, byte[] src, Xop_xatr_itm xatr) {
+	public boolean Chk(int tag_id, byte[] src, Mwh_atr_itm xatr) {
 		byte[] key_bry = xatr.Key_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
 		if (key_bry == null) {
@@ -41,12 +41,12 @@ public class Xop_xatr_whitelist_mgr {
 				&& (itm.Exact() ? key_trie.Match_pos() == chk_end : true)	// if exact, check for exact; else always true
 			;
 		switch (itm_key_tid) {
-			case Xop_xatr_itm.Key_tid_style:
+			case Mwh_atr_itm_.Key_tid__style:
 				if (!Scrub_style(xatr, src)) return false;
-				xatr.Val_bry_(gplx.xowa.parsers.amps.Xop_amp_mgr.I.Decode_as_bry(xatr.Val_as_bry(src)));	// NOTE: must decode style values; "&#amp;#000000" -> "#000000"; see MW:checkCss; PAGE:en.w:Boron DATE:2015-07-29
+				xatr.Val_bry_(gplx.xowa.parsers.amps.Xop_amp_mgr.Instance.Decode_as_bry(xatr.Val_as_bry()));	// NOTE: must decode style values; "&#amp;#000000" -> "#000000"; see MW:checkCss; PAGE:en.w:Boron DATE:2015-07-29
 				break;
-			case Xop_xatr_itm.Key_tid_role:
-				if (!Bry_.Eq(Val_role_presentation, xatr.Val_as_bry(src))) return false; // MW: For now we only support role="presentation"; DATE:2014-04-05
+			case Mwh_atr_itm_.Key_tid__role:
+				if (!Bry_.Eq(Val_role_presentation, xatr.Val_as_bry())) return false; // MW: For now we only support role="presentation"; DATE:2014-04-05
 				break;
 		}
 		return rv;
@@ -169,18 +169,18 @@ public class Xop_xatr_whitelist_mgr {
 	}
 	private Xop_xatr_whitelist_itm  Ini_key_trie_add(byte[] key, boolean exact) {
 		Object key_tid_obj = tid_hash.Get_by(key);
-		byte key_tid = key_tid_obj == null ? Xop_xatr_itm.Key_tid_generic : ((Byte_obj_val)key_tid_obj).Val();
+		byte key_tid = key_tid_obj == null ? Mwh_atr_itm_.Key_tid__generic : ((Byte_obj_val)key_tid_obj).Val();
 		Xop_xatr_whitelist_itm rv = new Xop_xatr_whitelist_itm(key, key_tid, exact);
 		key_trie.Add_obj(key, rv);
 		return rv;
 	}
 	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_a7()
-	.Add_str_byte("id", Xop_xatr_itm.Key_tid_id)
-	.Add_str_byte("style", Xop_xatr_itm.Key_tid_style)
-	.Add_str_byte("role", Xop_xatr_itm.Key_tid_role)
+	.Add_str_byte("id", Mwh_atr_itm_.Key_tid__id)
+	.Add_str_byte("style", Mwh_atr_itm_.Key_tid__style)
+	.Add_str_byte("role", Mwh_atr_itm_.Key_tid__role)
 	;
 	private Btrie_slim_mgr key_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:HTML.node_name
-	public boolean Scrub_style(Xop_xatr_itm xatr, byte[] raw) { // REF:Sanitizer.php|checkCss; '! expression | filter\s*: | accelerator\s*: | url\s*\( !ix'; NOTE: this seems to affect MS IE only; DATE:2013-04-01
+	public boolean Scrub_style(Mwh_atr_itm xatr, byte[] raw) { // REF:Sanitizer.php|checkCss; '! expression | filter\s*: | accelerator\s*: | url\s*\( !ix'; NOTE: this seems to affect MS IE only; DATE:2013-04-01
 		byte[] val_bry = xatr.Val_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
 		if (val_bry == null) {

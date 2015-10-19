@@ -40,6 +40,6 @@ class Uca_trie_fxt {
 	public void Init_trie_itm(String charAsStr, byte[] uca) {trie.Init_itm(gplx.core.intls.Utf16_.Decode_to_int(Bry_.new_u8(charAsStr), 0), uca);}
 	public void Test_decode(byte[] bry, String expd) {
 		trie.Decode(bfr, bry, 0, bry.length);
-		Tfds.Eq(expd, bfr.Xto_str_and_clear());
+		Tfds.Eq(expd, bfr.To_str_and_clear());
 	}
 }

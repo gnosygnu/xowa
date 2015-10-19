@@ -21,7 +21,7 @@ class Mwh_atr_parser_fxt {
 	private final Mwh_atr_parser parser = new Mwh_atr_parser();
 	private final Mwh_doc_wkr__atr_bldr wkr = new Mwh_doc_wkr__atr_bldr();
 	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.Y,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(val)	, -1, -1);}
-	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, null				, -1, -1);}
+	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(key)	, -1, -1);}
 	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(Bry_.Empty, Bool_.N, Bool_.N, Bool_.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}
 	public void Test_val_as_int(String raw, int expd) {
 		byte[] src = Bry_.new_u8(raw);
@@ -44,14 +44,14 @@ class Mwh_atr_parser_fxt {
 		for (int i = 0; i < len; ++i) {
 			To_bfr(expd_bfr, i < expd_len ? expd_ary[i] : null, actl_bfr, i < actl_len ? actl_ary[i] : null);
 		}
-		Tfds.Eq_str_lines(expd_bfr.Xto_str_and_clear(), actl_bfr.Xto_str_and_clear());
+		Tfds.Eq_str_lines(expd_bfr.To_str_and_clear(), actl_bfr.To_str_and_clear());
 	}
 	private void To_bfr(Bry_bfr expd_bfr, Mwh_atr_itm expd_itm, Bry_bfr actl_bfr, Mwh_atr_itm actl_itm) {
 		To_bfr__main(expd_bfr, expd_itm);
 		To_bfr__main(actl_bfr, actl_itm);
 		To_bfr__head(expd_bfr, expd_itm);
 		To_bfr__head(actl_bfr, actl_itm);
-		if (expd_itm.Atr_bgn() != -1) {
+		if (expd_itm != null && expd_itm.Atr_bgn() != -1) {
 			To_bfr__atr_rng(expd_bfr, expd_itm);
 			To_bfr__atr_rng(actl_bfr, actl_itm);
 		}
@@ -73,27 +73,4 @@ class Mwh_atr_parser_fxt {
 		if (itm == null) return;
 		bfr.Add_str_a7("rng:").Add_int_variable(itm.Atr_bgn()).Add_byte_semic().Add_int_variable(itm.Atr_end()).Add_byte_nl();
 	}
-}
-class Mwh_doc_wkr__atr_bldr implements Mwh_doc_wkr {
-	private final List_adp list = List_adp_.new_();
-	public Hash_adp_bry Nde_regy() {return null;}
-	public void On_atr_each(Mwh_atr_parser mgr, byte[] src, int nde_tid, boolean valid, boolean repeated, boolean key_exists, byte[] key_bry, byte[] val_bry_manual, int[] data_ary, int itm_idx) {
-		int atr_bgn = data_ary[itm_idx + Mwh_atr_mgr.Idx_atr_bgn];
-		int atr_end = data_ary[itm_idx + Mwh_atr_mgr.Idx_atr_end];
-		int key_bgn = data_ary[itm_idx + Mwh_atr_mgr.Idx_key_bgn];
-		int key_end = data_ary[itm_idx + Mwh_atr_mgr.Idx_key_end];
-		int val_bgn = data_ary[itm_idx + Mwh_atr_mgr.Idx_val_bgn];
-		int val_end = data_ary[itm_idx + Mwh_atr_mgr.Idx_val_end];
-		int eql_pos = data_ary[itm_idx + Mwh_atr_mgr.Idx_eql_pos];
-		int qte_tid = data_ary[itm_idx + Mwh_atr_mgr.Idx_atr_utl];
-		qte_tid = Mwh_atr_itm.Calc_qte_tid(qte_tid);
-		Mwh_atr_itm atr = new Mwh_atr_itm(src, valid, repeated, key_exists, atr_bgn, atr_end, key_bgn, key_end, key_bry, val_bgn, val_end, val_bry_manual, eql_pos, qte_tid);
-		list.Add(atr);
-	}
-	public void On_txt_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
-	public void On_nde_head_bgn(Mwh_doc_parser mgr, byte[] src, int nde_tid, int key_bgn, int key_end) {}
-	public void On_nde_head_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end, boolean inline) {}
-	public void On_nde_tail_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
-	public void On_comment_end (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}
-	public Mwh_atr_itm[] To_atr_ary() {return (Mwh_atr_itm[])list.To_ary_and_clear(Mwh_atr_itm.class);}
 }

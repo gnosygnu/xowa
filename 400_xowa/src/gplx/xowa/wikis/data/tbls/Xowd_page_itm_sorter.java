@@ -32,8 +32,8 @@ public class Xowd_page_itm_sorter implements ComparerAble {
 			case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
 			case Tid_ttl:		return Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 			case Tid_ctg_tid_sortkey:
-				gplx.xowa.ctgs.Xoctg_page_xtn lhs_xtn = (gplx.xowa.ctgs.Xoctg_page_xtn)lhs.Xtn();
-				gplx.xowa.ctgs.Xoctg_page_xtn rhs_xtn = (gplx.xowa.ctgs.Xoctg_page_xtn)rhs.Xtn();
+				gplx.xowa.wikis.ctgs.Xoctg_page_xtn lhs_xtn = (gplx.xowa.wikis.ctgs.Xoctg_page_xtn)lhs.Xtn();
+				gplx.xowa.wikis.ctgs.Xoctg_page_xtn rhs_xtn = (gplx.xowa.wikis.ctgs.Xoctg_page_xtn)rhs.Xtn();
 				if (lhs_xtn == null || rhs_xtn == null) return CompareAble_.Same;
 				int tid_comparable = Byte_.Compare(lhs_xtn.Tid(), rhs_xtn.Tid());
 				if (tid_comparable != CompareAble_.Same) return tid_comparable;

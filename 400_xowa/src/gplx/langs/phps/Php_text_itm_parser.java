@@ -33,7 +33,7 @@ public class Php_text_itm_parser {
 					Php_text_itm itm = (Php_text_itm)tmp_list.Get_at(i);
 					itm.Bld(tmp_bfr, raw);
 				}
-				rv = tmp_bfr.Xto_bry_and_clear();
+				rv = tmp_bfr.To_bry_and_clear();
 				break;
 		}
 		return rv;
@@ -101,7 +101,7 @@ public class Php_text_itm_parser {
 				case Byte_ascii.Dollar:
 					if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, i)); txt_bgn = -1;}
 					if (i == raw_last) {
-						//throw Err_mgr._.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
+						//throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
 					}
 					int int_end = Find_fwd_non_int(raw, i + 1, raw_len);	// +1 to search after $
 					int int_val = Bry_.To_int_or(raw, i + 1, int_end, -1); // +1 to search after $
@@ -109,7 +109,7 @@ public class Php_text_itm_parser {
 						tmp_list.Add(new Php_text_itm_text(i, i + 1)); 
 						continue;
 					}
-					//throw Err_mgr._.fmt_auto_(GRP_KEY, "invalid_arg", String_.new_u8(raw));
+					//throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "invalid_arg", String_.new_u8(raw));
 					tmp_list.Add(new Php_text_itm_arg(i, int_end, int_val));
 					rslt_val = Rslt_fmt;
 					i = int_end - 1;	// -1 b/c i++ in for loop 
@@ -125,7 +125,7 @@ public class Php_text_itm_parser {
 	private void Parse_utf16(List_adp rv, byte[] src, int bgn, int src_len) {
 		int end = bgn + 4;
 		if (end >= src_len) throw Err_.new_wo_type("utf16_parse", "src", String_.new_u8(src));
-		int v = Int_.Xto_int_hex(src, bgn, end);	// +2; skip "\" + "u"
+		int v = Int_.To_int_hex(src, bgn, end);	// +2; skip "\" + "u"
 		byte[] literal = gplx.core.intls.Utf16_.Encode_int_to_bry(v);
 		rv.Add(new Php_text_itm_utf16(bgn, end, literal));
 	}

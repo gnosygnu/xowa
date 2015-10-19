@@ -21,18 +21,18 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoae_page page) {this.page = page; return this;} private Xoae_page page;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		List_adp slink_list = page.Slink_list();
 		Xoa_ttl page_ttl = page.Ttl();
 		byte[] qid = Write_wdata_links(slink_list, page.Wikie(), page_ttl, page.Wdata_external_lang_links());
 		if (!Bry_.Eq(qid, Qid_null) && !page_ttl.Ns().Id_special())	// don't write "In other languages" if no qid; also skip Special ns; needed for pages with wbase page, but no sitelinks; PAGE:en.w:Tintinan; DATE:2015-08-03
-			page.Wikie().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wikie(), slink_list, qid);
+			page.Wiki().App().Xwiki_mgr__sitelink_mgr().Write_html(bfr, page.Wikie(), slink_list, qid);
 	}
 	public static byte[] Write_wdata_links(List_adp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
 		try {
 			switch (wiki.Domain_tid()) {
-				case Xow_domain_type_.Int__home:		// home will never be in wikidata
-				case Xow_domain_type_.Int__wikidata:	// wikidata will never be in wikidata
+				case Xow_domain_tid_.Int__home:		// home will never be in wikidata
+				case Xow_domain_tid_.Int__wikidata:	// wikidata will never be in wikidata
 					return Qid_null;
 			}
 			Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
@@ -55,7 +55,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);
 				tmp_bfr.Add(slink.Name());
-				Xoa_ttl slink_ttl = Xoa_ttl.parse(wiki, tmp_bfr.Xto_bry_and_clear());
+				Xoa_ttl slink_ttl = Xoa_ttl.parse(wiki, tmp_bfr.To_bry_and_clear());
 				if (slink_ttl == null) continue;								// invalid ttl
 				Xow_xwiki_itm xwiki_itm = slink_ttl.Wik_itm();
 				if (	xwiki_itm == null									// not a known xwiki; EX: [[zzz:abc]]
@@ -66,7 +66,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			}
 			tmp_bfr.Mkr_rls();
 			if (external_links_mgr_enabled && external_links_mgr.Sort())
-				slink_list.Sort_by(Xoa_ttl_sorter._);
+				slink_list.Sort_by(Xoa_ttl_sorter.Instance);
 			return doc.Qid();
 		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}
@@ -77,5 +77,5 @@ class Xoa_ttl_sorter implements gplx.lists.ComparerAble {
 		Xoa_ttl lhs = (Xoa_ttl)lhsObj, rhs = (Xoa_ttl)rhsObj;
 		return Bry_.Compare(lhs.Raw(), rhs.Raw());
 	}
-	public static final Xoa_ttl_sorter _ = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
+	public static final Xoa_ttl_sorter Instance = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
 }

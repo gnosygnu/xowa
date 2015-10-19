@@ -25,7 +25,7 @@ class Dg_log_mgr {
 	private final Dg_page_rule_tbl	tbl_page_rule = new Dg_page_rule_tbl();
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(16);
 	public void Init(Io_url db_url) {
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(db_url);
+		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(db_url);
 		conn = conn_data.Conn(); boolean created = conn_data.Created();
 		tbl_file.Conn_(conn, created);
 		tbl_rule.Conn_(conn, created);

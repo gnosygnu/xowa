@@ -32,15 +32,14 @@ public class Xol_vnt_regy_fxt {
 	public void Test_calc(String[] ary, int expd) {
 		Tfds.Eq(expd, mgr.Mask__calc(Bry_.Ary(ary)));
 	}
-	public void Test_sort(String[] vnt_ary, String[] expd) {
-		int vnt_len = vnt_ary.length;
-		Xop_vnt_rule_tkn[] rule_ary = new Xop_vnt_rule_tkn[vnt_len];
-		for (int i = 0; i < vnt_len; ++i)
-			rule_ary[i] = new Xop_vnt_rule_tkn(Bry_.Empty, Bry_.new_u8(vnt_ary[i]), gplx.xowa.parsers.Xop_tkn_itm_.Ary_empty);
-		mgr.Mask__sort(rule_ary);
-		for (int i = 0; i < vnt_len; ++i)
-			vnt_ary[i] = String_.new_u8(rule_ary[i].Rule_lang());
-		Tfds.Eq_ary_str(expd, vnt_ary);
+	public static void Init__vnt_mgr(Xol_vnt_mgr vnt_mgr, int cur_idx, String[] ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Xol_vnt_itm itm = vnt_mgr.Regy__get_or_new(Bry_.new_a7(ary[i]));
+			vnt_mgr.Lang().Lang_mgr().Get_by_or_load(itm.Key()).Fallback_bry_(Bry_.new_a7("zh-hans,zh-hant"));
+		}
+		vnt_mgr.Init_end();
+		vnt_mgr.Cur_itm_(Bry_.new_a7(ary[cur_idx]));
 	}
 	public static Xol_vnt_regy new_chinese() {	// REF.MW:/languages/classes/LanguageZh.php|LanguageZh|__construct
 		Xol_vnt_regy rv = new Xol_vnt_regy();

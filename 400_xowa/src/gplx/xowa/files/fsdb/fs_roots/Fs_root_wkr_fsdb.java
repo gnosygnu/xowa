@@ -41,9 +41,9 @@ public class Fs_root_wkr_fsdb {
 			int upright_patch = wiki.File_mgr().Patch_upright();
 			img_size.Html_size_calc(fsdb_itm.Lnki_exec_tid(), fsdb_itm.Lnki_w(), fsdb_itm.Lnki_h(), fsdb_itm.Lnki_type(), upright_patch, fsdb_itm.Lnki_upright(), fsdb_itm.Orig_ext().Id(), orig_itm.Fil_w(), orig_itm.Fil_h(), Xof_img_size.Thumb_width_img);
 			int html_w = img_size.Html_w(), html_h = img_size.Html_h();
-			String thumb_name = Int_.Xto_str(html_w) + orig_url.Ext();
+			String thumb_name = Int_.To_str(html_w) + orig_url.Ext();
 			Io_url thumb_url = thumb_dir.GenSubFil_ary(thumb_rel + orig_url.Info().DirSpr(), thumb_name);
-			if (!Io_mgr.I.ExistsFil(thumb_url)) {
+			if (!Io_mgr.Instance.ExistsFil(thumb_url)) {
 				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Resize_exec(orig_url, thumb_url, html_w, html_h, fsdb_itm.Orig_ext().Id(), tmp_resize_result))
 					return false;
 			}

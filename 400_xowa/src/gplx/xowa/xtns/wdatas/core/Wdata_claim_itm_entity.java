@@ -44,6 +44,6 @@ public class Wdata_claim_itm_entity extends Wdata_claim_itm_core { 	public Wdata
 	}
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_entity(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), this.Entity_tid_str(), Int_.Xto_str(entity_id));
+		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), this.Entity_tid_str(), Int_.To_str(entity_id));
 	}
 }

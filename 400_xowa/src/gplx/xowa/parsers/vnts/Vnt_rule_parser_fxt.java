@@ -25,13 +25,13 @@ class Vnt_rule_parser_fxt {
 		vnt_regy.Add(Bry_.new_a7("x1"), Bry_.new_a7("lang1"));
 		vnt_regy.Add(Bry_.new_a7("x2"), Bry_.new_a7("lang2"));
 		vnt_regy.Add(Bry_.new_a7("x3"), Bry_.new_a7("lang3"));
-		parser.Init(vnt_regy);
+		parser.Init(null, vnt_regy);
 	}
 	public void Test_parse(String raw, String... expd_ary) {
 		byte[] src = Bry_.new_u8(raw);
 		parser.Clear(undis, bidis, src);
 		parser.Parse(src, 0, src.length);
 		parser.To_bry__dbg(bfr);
-		Tfds.Eq_str_lines(String_.Concat_lines_nl_skip_last(expd_ary), bfr.Xto_str_and_clear());
+		Tfds.Eq_str_lines(String_.Concat_lines_nl_skip_last(expd_ary), bfr.To_str_and_clear());
 	}
 }

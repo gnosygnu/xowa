@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.lnkis.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.lnkis.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {
 	public Xows_page_allpages(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -75,7 +75,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		wiki.Parser_mgr().Ctx().Cur_page().Html_data().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
 		url.Page_bry_(Bry_.Add(Bry_.new_a7("Special:"), ttl.Page_txt_wo_qargs()));	// HACK: need to re-set Page b/c href_wtr does not eliminate qargs; DATE:2013-02-08
-		if (wiki.Domain_tid() == Xow_domain_type_.Int__home) {wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
+		if (wiki.Domain_tid() == Xow_domain_tid_.Int__home) {wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
 		if (rslt_list_ttls == null) this.Itms_per_page_(itms_per_page);
 		boolean found = Build_data(url, ttl); if (!found) return;
 		Build_html(page);
@@ -124,7 +124,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		byte[] anchor_prv = Build_html_end(tmp_bfr, rslt_prv, false);
 		byte[] anchor_nxt = Build_html_end(tmp_bfr, rslt_nxt, true);
 		html_all.Bld_bfr_many(tmp_bfr, this, anchor_prv, anchor_nxt);
-		page.Data_raw_(tmp_bfr.Xto_bry_and_clear());
+		page.Data_raw_(tmp_bfr.To_bry_and_clear());
 		tmp_bfr.Mkr_rls();
 		page.Html_data().Html_restricted_n_();
 	}
@@ -143,7 +143,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		if (!ns.Id_main()) ttl_bry = Bry_.Add(ns.Name_db_w_colon(), ttl_bry);
 		return Xoa_ttl.parse(wiki, ttl_bry);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = rslt_list_ttls.length;
 		html_itm_fmtr.XferAry_bgn();
 		for (int i = 0; i < len; i += itms_per_grp) {
@@ -182,7 +182,7 @@ class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
 		init_ns = mgr.Init_ns();
 	} 	int itms_per_grp, ttls_len, itm_pct; Xowd_page_itm[] ttls; Xow_ns init_ns;
 	public void XferAry_end() {ttls = null;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int itm_end = itm_idx + itms_per_grp;
 		for (int i = itm_idx; i < itm_end; i++) {
 			if (i >= ttls_len) break;	// handle odd number of itms; EX: interval=3; items=4; proc gets called on 0 (0-2) and 3 (3-5); ArrayIndex for 4, 5 

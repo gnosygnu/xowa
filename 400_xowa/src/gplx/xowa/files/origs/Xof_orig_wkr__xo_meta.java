@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.flds.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
 	private final Io_url wiki_meta_dir; private final byte dir_spr_byte;  private final Bry_bfr url_bfr = Bry_bfr.new_(255);
 	private final Gfo_fld_rdr meta_rdr = Gfo_fld_rdr.xowa_(); private final Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
@@ -32,8 +32,8 @@ public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
 			.Add_byte(md5[1]).Add_byte(dir_spr_byte)		// 6/
 			.Add_mid(md5, 0, 3).Add_str_a7(".csv")			// 061.csv
 			;
-		Io_url meta_url = Io_url_.new_fil_(url_bfr.Xto_str_and_clear());
-		byte[] meta_src = Io_mgr.I.LoadFilBry(meta_url); if (meta_src.length == 0) return Xof_orig_itm.Null;
+		Io_url meta_url = Io_url_.new_fil_(url_bfr.To_str_and_clear());
+		byte[] meta_src = Io_mgr.Instance.LoadFilBry(meta_url); if (meta_src.length == 0) return Xof_orig_itm.Null;
 		meta_rdr.Ini(meta_src, 0);
 		Xof_meta_fil meta_fil = new Xof_meta_fil(null, md5);	// NOTE: need to register file before loading it; defect wherein 2 files with same hash prefix would skip one b/c Loaded file was not registered; EX.WS: en.wikiquote.org/The Hitchhiker's Guide to the Galaxy; NMMP_dolphin_with_locator.jpeg, da6f95736ed249f371f30bf5f1205fbd; Hoags_object.jpg, daed4a54e48e4266bd2f2763b7c4018c
 		meta_fil.Load(meta_rdr, parser);

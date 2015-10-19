@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.core.criterias.*;
 public class Db_crt_tst {
 	@Before public void setup() {
-		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn._).Add("name", StringClassXtn._), Object_.Ary(1, "me"));
+		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), Object_.Ary(1, "me"));
 	}
 	@Test  public void EqualTest() {
 		crt = Db_crt_.eq_("id", 1);

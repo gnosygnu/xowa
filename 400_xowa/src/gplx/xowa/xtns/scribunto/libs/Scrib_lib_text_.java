@@ -62,6 +62,6 @@ class Scrib_lib_text_ {
 			}
 		}
 		bfr.Add(Colon_encoded);
-		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.Xto_str_and_clear());
+		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.To_str_and_clear());
 	}	private static final byte[] Colon_encoded = Bry_.new_a7("&#58;");
 }

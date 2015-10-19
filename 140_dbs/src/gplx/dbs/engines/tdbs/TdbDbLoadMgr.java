@@ -19,7 +19,7 @@ package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs
 class TdbDbLoadMgr {
 	public TdbDatabase LoadTbls(Io_url dbInfo) {
 		TdbDatabase db = TdbDatabase.new_(dbInfo);
-		if (!Io_mgr.I.ExistsFil(dbInfo)) {
+		if (!Io_mgr.Instance.ExistsFil(dbInfo)) {
 			db.IsNew_set(true);
 			return db;
 		}
@@ -42,7 +42,7 @@ class TdbDbLoadMgr {
 		if (db.Files().Count() == 0) throw Err_.new_wo_type("fatal error: db has no files", "connectInfo", db.DbUrl());
 	}
 	DataRdr MakeDataRdr(Io_url fil) {
-		String text = Io_mgr.I.LoadFilStr(fil);
+		String text = Io_mgr.Instance.LoadFilStr(fil);
 		return TdbStores.rdr_(text);
 	}
 	public static TdbDbLoadMgr new_() {return new TdbDbLoadMgr();} TdbDbLoadMgr() {}

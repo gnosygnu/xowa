@@ -47,7 +47,7 @@ public class Xoa_repo_mgr implements GfoInvkAble {
 		}
 		return null;
 	}
-	public Xof_repo_itm Add(Xof_repo_itm itm) {hash.Add(itm.Key(), itm); return itm;} private Ordered_hash hash = Ordered_hash_.new_bry_();
+	public Xof_repo_itm Add(Xof_repo_itm itm) {hash.Add(itm.Key(), itm); return itm;} private Ordered_hash hash = Ordered_hash_.New_bry();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_set))			return Set(m.ReadStr("key"), m.ReadStr("url"), m.ReadStr("wiki"));
 		else	return GfoInvkAble_.Rv_unhandled;

@@ -22,10 +22,10 @@ public class IoEngine_xrg_loadFilStr {
 	public boolean MissingIgnored() {return missingIgnored;} public IoEngine_xrg_loadFilStr MissingIgnored_() {return MissingIgnored_(true);} public IoEngine_xrg_loadFilStr MissingIgnored_(boolean v) {missingIgnored = v; return this;} private boolean missingIgnored = false;
 	public boolean BomUtf8Convert() {return bomUtf8Convert;} public IoEngine_xrg_loadFilStr BomUtf8Convert_(boolean v) {bomUtf8Convert = v; return this;} private boolean bomUtf8Convert = true;
 	public String Exec() {
-		String s = IoEnginePool._.Get_by(url.Info().EngineKey()).LoadFilStr(this);
+		String s = IoEnginePool.Instance.Get_by(url.Info().EngineKey()).LoadFilStr(this);
 		if (bomUtf8Convert && String_.Len(s) > 0 && String_.CodePointAt(s, 0) == Bom_Utf8) {
 			s = String_.Mid(s, 1);
-			UsrDlg_._.Warn(UsrMsg.new_("UTF8 BOM removed").Add("url", url.Xto_api()));
+			UsrDlg_.Instance.Warn(UsrMsg.new_("UTF8 BOM removed").Add("url", url.Xto_api()));
 		}
 		return s;
 	}

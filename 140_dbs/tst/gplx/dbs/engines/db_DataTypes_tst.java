@@ -24,7 +24,7 @@ public class db_DataTypes_tst {
 		fx.RunAll(Db_conn_fxt.Mysql());
 	}
 	@Test  public void Tdb() {if (Tfds.SkipDb) return;
-		fx.Select_FloatStr_(Float_.Xto_str(Float_.Div(1, 3)));
+		fx.Select_FloatStr_(Float_.To_str(Float_.Div(1, 3)));
 		fx.RunAll(Db_conn_fxt.Tdb("110_dbs_multiple_data_types.dsv"));
 	}
 	@Test  public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
@@ -70,7 +70,7 @@ class DataTypes_base_fxt {
 		Tfds.Eq_decimal(rdr.ReadDecimal("amount"), Decimal_adp_.parts_(12, 345));
 	}
 	public void UpdateDate_hook() {
-		conn.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.eq_("unique_id", 1)).Arg_obj_("last_update", DateAdpClassXtn._.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
+		conn.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.eq_("unique_id", 1)).Arg_obj_("last_update", DateAdpClassXtn.Instance.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
 
 		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);
 		rdr.MoveNextPeer();

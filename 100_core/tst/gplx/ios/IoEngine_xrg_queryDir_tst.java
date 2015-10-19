@@ -58,7 +58,7 @@ public class IoEngine_xrg_queryDir_tst {
 	
 	Io_url[] save_text_(Io_url... ary) {
 		for (Io_url url : ary)
-			Io_mgr.I.SaveFilStr(url, url.Raw());
+			Io_mgr.Instance.SaveFilStr(url, url.Raw());
 		return ary;
 	}
 	void tst_ExecPathAry(IoEngine_xrg_queryDir finder, Io_url... expd) {Tfds.Eq_ary(expd, finder.ExecAsUrlAry());}

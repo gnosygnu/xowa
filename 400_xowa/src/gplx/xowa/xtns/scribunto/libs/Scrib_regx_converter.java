@@ -44,7 +44,7 @@ public class Scrib_regx_converter {
 					bfr.Add(q_flag ? Bry_dollar_escaped : Bry_dollar_literal);
 					break;
 				case Byte_ascii.Paren_bgn: {
-					if (i + 1 >= len) throw Err_.new_wo_type("Unmatched open-paren at pattern character " + Int_.Xto_str(i));
+					if (i + 1 >= len) throw Err_.new_wo_type("Unmatched open-paren at pattern character " + Int_.To_str(i));
 					boolean capt_itm = src[i + 1] == Byte_ascii.Paren_end;	// current is "()" 						
 					++grps_len;
 					capt_list.Add(KeyVal_.int_(grps_len, capt_itm));
@@ -55,7 +55,7 @@ public class Scrib_regx_converter {
 				}
 				case Byte_ascii.Paren_end:
 					if (grps_open.Count() == 0)
-						throw Err_.new_wo_type("Unmatched close-paren at pattern character " + Int_.Xto_str(i));
+						throw Err_.new_wo_type("Unmatched close-paren at pattern character " + Int_.To_str(i));
 					List_adp_.DelAt_last(grps_open);
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
@@ -90,8 +90,8 @@ public class Scrib_regx_converter {
 									}
 									synchronized (fmtr_balanced) {
 										++bct;
-										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.Xto_bry(bct), Byte_.Ary(char_0), Byte_.Ary(char_1));
-										bfr.Add(bfr_balanced.Xto_bry_and_clear());
+										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.To_bry(bct), Byte_.Ary(char_0), Byte_.Ary(char_1));
+										bfr.Add(bfr_balanced.To_bry_and_clear());
 									}
 								}
 								break;
@@ -116,7 +116,7 @@ public class Scrib_regx_converter {
 							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 								grps_len = nxt - Byte_ascii.Num_0;
 								if (grps_len == 0 || grps_len > capt_list.Count() || grps_open_Has(grps_open, grps_len))
-									throw Err_.new_wo_type("invalid capture index %" + grps_len + " at pattern character " + Int_.Xto_str(i));
+									throw Err_.new_wo_type("invalid capture index %" + grps_len + " at pattern character " + Int_.To_str(i));
 								bfr.Add(Bry_bf2_seg_0).Add_int_variable(grps_len);//.Add(Bry_bf2_seg_1);	// $bfr .= "\\g{m$grps_len}";
 								break;
 							default:
@@ -130,7 +130,7 @@ public class Scrib_regx_converter {
 					i = bracketedCharSetToRegex(bfr, src, i, len);
 					q_flag = true;
 					break;
-				case Byte_ascii.Brack_end: throw Err_.new_wo_type("Unmatched close-bracket at pattern character " + Int_.Xto_str(i));
+				case Byte_ascii.Brack_end: throw Err_.new_wo_type("Unmatched close-bracket at pattern character " + Int_.To_str(i));
 				case Byte_ascii.Dot:
 					q_flag = true;
 					bfr.Add_byte(Byte_ascii.Dot);
@@ -158,7 +158,7 @@ public class Scrib_regx_converter {
 		}
 		if (grps_open.Count() > 0) throw Err_.new_wo_type("Unclosed capture beginning at pattern character " + Int_.cast(grps_open.Get_at(0)));
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
-		regx = bfr.Xto_str_and_clear();
+		regx = bfr.To_str_and_clear();
 		return regx;
 	}	private Bry_bfr bfr = Bry_bfr.new_();
 	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] src, int i, int len) {

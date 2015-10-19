@@ -29,7 +29,7 @@ public class Xol_plural_ru_tst {
 		Tst(5, String_.Ary("a"), "a");				// 1 form; count % 10 != (1, 2, 3, 4); but only 1 element, so take 1st
 	}
 	private void Tst(int count, String[] forms, String expd) {
-		byte[] actl = Xol_plural_ru._.Plural_eval(null, count, Bry_.Ary(forms));
+		byte[] actl = Xol_plural_ru.Instance.Plural_eval(null, count, Bry_.Ary(forms));
 		Tfds.Eq_bry(Bry_.new_a7(expd), actl);
 	}
 }

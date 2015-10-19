@@ -30,7 +30,7 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
 	public boolean Async_prog_enabled()	{return false;}
 	@gplx.Virtual public byte Async_init() {
-		if (!Io_mgr.I.ExistsFil(fil)) {kit.Ask_ok(GRP_KEY, "file_missing", "File does not exist: '~{0}'", fil.Raw()); return Gfo_thread_cmd_.Init_cancel_step;}
+		if (!Io_mgr.Instance.ExistsFil(fil)) {kit.Ask_ok(GRP_KEY, "file_missing", "File does not exist: '~{0}'", fil.Raw()); return Gfo_thread_cmd_.Init_cancel_step;}
 		return Gfo_thread_cmd_.Init_ok;
 	}
 	public boolean Async_term() {return true;}
@@ -38,13 +38,13 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public boolean Async_running() {return false;} 
 	@gplx.Virtual public void Async_run() {Exec_find_replace();}	// NOTE: do not run async; if multiple commands for same file then they will not always work
 	public void Exec_find_replace() {
-		String raw = Io_mgr.I.LoadFilStr(fil);
+		String raw = Io_mgr.Instance.LoadFilStr(fil);
 		int pairs_len = pairs.Count();
 		for (int i = 0; i < pairs_len; i++) {
 			KeyVal kv = (KeyVal)pairs.Get_at(i);
 			raw = String_.Replace(raw, kv.Key(), kv.Val_to_str_or_null());
 		}
-		Io_mgr.I.SaveFilStr(fil, raw);
+		Io_mgr.Instance.SaveFilStr(fil, raw);
 		usr_dlg.Prog_many(GRP_KEY, "done", "replace completed: ~{0} ~{1}", fil.Raw(), pairs_len);
 	}
 	public List_adp pairs = List_adp_.new_();

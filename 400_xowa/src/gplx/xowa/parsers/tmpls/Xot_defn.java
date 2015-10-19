@@ -30,5 +30,5 @@ class Xot_defn_null implements Xot_defn {
 	public Xot_defn Clone(int id, byte[] name) {return this;}
 	public int Cache_size() {return 0;}
 	public void Rls() {}
-	public static final Xot_defn_null _ = new Xot_defn_null(); Xot_defn_null() {}
+	public static final Xot_defn_null Instance = new Xot_defn_null(); Xot_defn_null() {}
 }

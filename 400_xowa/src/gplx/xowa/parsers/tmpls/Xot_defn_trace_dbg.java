@@ -41,7 +41,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 //					bfr.Add_mid(src, val_tkn.Dat_bgn(), val_tkn.Dat_end());
 //				}
 //				else {
-//					Xot_fmtr_prm raw_fmtr = Xot_fmtr_prm._;
+//					Xot_fmtr_prm raw_fmtr = Xot_fmtr_prm.Instance;
 //					nde.ValTkn().Tmpl_fmt(ctx, src, raw_fmtr);
 //					raw_fmtr.Print(bfr);
 //				}
@@ -133,7 +133,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 	}
 	public void Clear() {bfr.Clear(); indent = 0; count = 0;}
 	int indent = 0, count = 0;
-	public static final Xot_defn_trace_dbg _ = new Xot_defn_trace_dbg(); Xot_defn_trace_dbg() {}
+	public static final Xot_defn_trace_dbg Instance = new Xot_defn_trace_dbg(); Xot_defn_trace_dbg() {}
 	private static final byte[] Ary_invk_lbl = Bry_.new_a7("*invk\n"), Ary_lnk_lbl = Bry_.new_a7("*lnk: "), Ary_args_lbl = Bry_.new_a7("*args\n")
 		, Ary_result_lbl = Bry_.new_a7("*result\n")
 		, Ary_eval_lbl = Bry_.new_a7("*eval\n")

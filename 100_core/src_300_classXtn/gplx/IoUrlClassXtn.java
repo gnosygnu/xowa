@@ -25,5 +25,5 @@ public class IoUrlClassXtn extends ClassXtn_base implements ClassXtn {
 	@Override public String XtoUi(Object obj, String fmt)		{return Io_url_.cast(obj).Raw();}
 	@Override public boolean MatchesClass(Object obj)				{return Io_url_.as_(obj) != null;}
 	public boolean Eq(Object lhs, Object rhs) {try {return Io_url_.cast(lhs).Eq(Io_url_.cast(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
-	public static final IoUrlClassXtn _ =  new IoUrlClassXtn(); IoUrlClassXtn() {} // added to ClassXtnPool by default
+	public static final IoUrlClassXtn Instance =  new IoUrlClassXtn(); IoUrlClassXtn() {} // added to ClassXtnPool by default
 }

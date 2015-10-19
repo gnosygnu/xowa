@@ -37,5 +37,5 @@ public class BoolClassXtn extends ClassXtn_base implements ClassXtn {
 		throw Err_.new_parse_type(boolean.class, raw);
 	}
 	@Override public Object XtoDb(Object obj)					{return obj;}
-	public static final BoolClassXtn _ =  new BoolClassXtn(); BoolClassXtn() {} // added to ClassXtnPool by default
+	public static final BoolClassXtn Instance =  new BoolClassXtn(); BoolClassXtn() {} // added to ClassXtnPool by default
 }

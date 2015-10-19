@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.html.*;
+import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
 	public Ref_html_wtr(Xowe_wiki wiki) {
@@ -123,14 +123,14 @@ class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
 		return itm; // no itm has text; TODO:WARN
 	}
 	private boolean HasTxt(Ref_nde v) {return v.Body() != null && v.Body().Root_src().length > 0;}
-	public void XferAry(Bry_bfr trg, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int related_len = itm.Related_len();
 		Bry_fmtr itm_fmtr = cfg.Grp_html_list();
-		Fmt(itm_fmtr, wiki, trg, itm);
+		Fmt(itm_fmtr, wiki, bfr, itm);
 		for (int i = 0; i < related_len; i++) {
 			Ref_nde link_itm = itm.Related_get(i);
 			if (link_itm.Nested()) continue;
-			Fmt(itm_fmtr, wiki, trg, link_itm);
+			Fmt(itm_fmtr, wiki, bfr, link_itm);
 		}
 	}
 	private void Fmt(Bry_fmtr itm_fmtr, Xowe_wiki wiki, Bry_bfr trg, Ref_nde itm) {

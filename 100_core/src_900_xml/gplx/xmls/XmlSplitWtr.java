@@ -26,7 +26,7 @@ public class XmlSplitWtr {
 	public void Bgn(int partIdx) {
 		String partStr = opts.Namer().GenStrIdxOnly(partIdx);
 		url = Io_url_.mem_fil_(partStr);
-		stream = Io_mgr.I.OpenStreamWrite(url);
+		stream = Io_mgr.Instance.OpenStreamWrite(url);
 		init = true;
 	}	boolean init = true; byte[] hdr; XmlFileSplitterOpts opts; Io_url partDir; IoStream stream;
 	public void Write(byte[] ary) {

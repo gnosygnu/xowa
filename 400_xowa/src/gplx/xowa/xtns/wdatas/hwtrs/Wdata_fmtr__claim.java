@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__claim_grp implements Bry_fmtr_arg {
 	private Wdata_fmtr__claim_tbl fmtr_tbl = new Wdata_fmtr__claim_tbl(); private boolean is_empty;
 	private Xoapi_toggle_itm toggle_itm;
@@ -33,7 +33,7 @@ class Wdata_fmtr__claim_grp implements Bry_fmtr_arg {
 		toc_data.Make(list_count);
 		fmtr_tbl.Init_by_wdoc(ttl, list);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (is_empty) return;
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_tbl);
 	}
@@ -59,7 +59,7 @@ class Wdata_fmtr__claim_tbl implements Bry_fmtr_arg {
 		this.list = list;
 		this.ttl = ttl;
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_claim_grp grp = (Wdata_claim_grp)list.Get_at(i);
@@ -101,13 +101,13 @@ class Wdata_fmtr__claim_row implements Bry_fmtr_arg {
 	public void Init_by_grp(byte[] ttl, Wdata_claim_grp claim_grp) {
 		this.ttl = ttl; this.claim_grp = claim_grp;
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = claim_grp.Len();
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {
 			Wdata_claim_itm_core itm = claim_grp.Get_at(i);
 			itm.Welcome(claim_html_wtr);
-			byte[] val = tmp_bfr.Xto_bry_and_clear();
+			byte[] val = tmp_bfr.To_bry_and_clear();
 			fmtr_qual.Init_by_claim(ttl, itm);
 			fmtr_ref.Init_by_claim(ttl, itm);
 			row_fmtr.Bld_bfr_many(bfr, Wdata_dict_rank.Xto_str(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
@@ -153,7 +153,7 @@ class Wdata_fmtr__qual_tbl implements Bry_fmtr_arg {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.Qualifiers());
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (claim.Qualifiers() == null || claim.Qualifiers().Len() == 0) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_row);
 	}
@@ -172,7 +172,7 @@ class Wdata_fmtr__qual_row implements Bry_fmtr_arg {
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wdata_claim_grp_list quals) {this.ttl = ttl; this.quals = quals;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = quals.Len();
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {
@@ -181,7 +181,7 @@ class Wdata_fmtr__qual_row implements Bry_fmtr_arg {
 			for (int j = 0; j < grp_len; ++j) {
 				Wdata_claim_itm_core itm = grp.Get_at(j);
 				itm.Welcome(claim_html_wtr);
-				byte[] val = tmp_bfr.Xto_bry_and_clear();
+				byte[] val = tmp_bfr.To_bry_and_clear();
 				row_fmtr.Bld_bfr_many(bfr, grp.Id(), lbl_mgr.Get_text__pid(grp.Id()), val);
 			}
 		}
@@ -217,7 +217,7 @@ class Wdata_fmtr__ref_tbl implements Bry_fmtr_arg {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.References());
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (claim.References() == null) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_row);
 	}
@@ -247,7 +247,7 @@ class Wdata_fmtr__ref_row implements Bry_fmtr_arg {
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wdata_references_grp[] ref_grps) {this.ttl = ttl; this.ref_grps = ref_grps;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = ref_grps.length;
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {
@@ -260,7 +260,7 @@ class Wdata_fmtr__ref_row implements Bry_fmtr_arg {
 				for (int k = 0; k < grp2_len; ++k) {
 					Wdata_claim_itm_core itm = grp2.Get_at(k);
 					itm.Welcome(claim_html_wtr);
-					byte[] val = tmp_bfr.Xto_bry_and_clear();
+					byte[] val = tmp_bfr.To_bry_and_clear();
 					row_fmtr.Bld_bfr_many(bfr, grp2.Id(), lbl_mgr.Get_text__pid(grp2.Id()), val);
 				}
 			}

@@ -77,7 +77,7 @@ public class Texvc_root implements Texvc_tkn {
 		if (regy_tkn.Update_end(uid, end))
 			regy_nde.Update_end(uid, end);
 	}
-	public String Print_tex_str(Bry_bfr bfr) {Print_tex_bry(bfr, src, 0); return bfr.Xto_str_and_clear();}
+	public String Print_tex_str(Bry_bfr bfr) {Print_tex_bry(bfr, src, 0); return bfr.To_str_and_clear();}
 	public void Print_tex_bry(Bry_bfr bfr, byte[] src, int indent) {
 		int subs_len = Subs__len();
 		for (int i = 0; i < subs_len; ++i) {
@@ -85,7 +85,7 @@ public class Texvc_root implements Texvc_tkn {
 			sub_tkn.Print_tex_bry(bfr, src, indent + 1);
 		}
 	}
-	public String Print_dbg_str(Bry_bfr bfr) {Print_dbg_bry(bfr, 0); return bfr.Xto_str_and_clear();}
+	public String Print_dbg_str(Bry_bfr bfr) {Print_dbg_bry(bfr, 0); return bfr.To_str_and_clear();}
 	public void Print_dbg_bry(Bry_bfr bfr, int indent) {
 		int len = this.Subs__len();
 		for (int i = 0; i < len; ++i) {

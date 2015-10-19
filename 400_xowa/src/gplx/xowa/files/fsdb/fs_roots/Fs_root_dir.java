@@ -61,7 +61,7 @@ class Fs_root_dir {
 	}
 	private Orig_fil_mgr Init_fs_fil_mgr() {	// NOTE: need to read entire dir, b/c ttl may be "A.png", but won't know which subdir
 		Orig_fil_mgr rv = new Orig_fil_mgr();
-		Io_url[] fils = Io_mgr.I.QueryDir_args(url).Recur_(recurse).ExecAsUrlAry();
+		Io_url[] fils = Io_mgr.Instance.QueryDir_args(url).Recur_(recurse).ExecAsUrlAry();
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
@@ -80,9 +80,9 @@ class Fs_root_dir {
 	private Db_conn Init_db_fil_mgr() {
 		Io_url db_url = url.GenSubFil("^orig_regy.sqlite3");
 		boolean created = false; boolean schema_is_1 = Bool_.Y;
-		Db_conn conn = Db_conn_bldr.I.Get(db_url);
+		Db_conn conn = Db_conn_bldr.Instance.Get(db_url);
 		if (conn == null) {
-			conn = Db_conn_bldr.I.New(db_url);
+			conn = Db_conn_bldr.Instance.New(db_url);
 			created = true;
 		}
 		cfg_tbl = new Db_cfg_tbl(conn, schema_is_1 ? "fsdb_cfg" : "xowa_cfg");

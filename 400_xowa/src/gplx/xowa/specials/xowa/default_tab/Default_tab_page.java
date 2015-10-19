@@ -21,7 +21,7 @@ public class Default_tab_page implements Xows_page {
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		page.Data_raw_(Bry_.Empty);
 		page.Html_data().Custom_html_(Bry_.Empty);
-		page.Html_data().Custom_name_(Tab_name_bry);
+		page.Html_data().Custom_tab_name_(Tab_name_bry);
 	}
 	public static final byte[] Tab_name_bry = Bry_.new_a7("New Tab");
 }

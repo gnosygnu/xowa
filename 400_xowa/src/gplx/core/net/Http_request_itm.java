@@ -76,7 +76,7 @@ public class Http_request_itm {
 				bfr.Add_kv_dlm(line, String_.new_u8(itm.Key()), itm.Val());
 			}
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public static final int Type_get = 1, Type_post = 2;
 }

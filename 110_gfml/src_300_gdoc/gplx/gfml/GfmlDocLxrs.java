@@ -41,11 +41,11 @@ class GfmlDocLxrs {
 		rootLxr.SubLxr_Add(ary);
 	}
 	public static GfmlLxr Root_lxr() {
-		GfmlTkn txtTkn = GfmlTkn_.cmd_("tkn:text", GfmlBldrCmd_dataTkn_set._);
+		GfmlTkn txtTkn = GfmlTkn_.cmd_("tkn:text", GfmlBldrCmd_dataTkn_set.Instance);
 		return GfmlLxr_.general_("lxr:root", txtTkn);
 	}
 	public static GfmlLxr Whitespace_lxr() {
-		GfmlTkn tkn = GfmlTkn_.cmd_("key:gfml.whitespace_0", GfmlBldrCmd_whitespace._);
+		GfmlTkn tkn = GfmlTkn_.cmd_("key:gfml.whitespace_0", GfmlBldrCmd_whitespace.Instance);
 		GfmlLxr rv = GfmlLxr_.range_("lxr:gfml.whitespace_0", String_.Ary(" ", String_.Tab, String_.CrLf, String_.Lf), tkn, false);
 		return rv;
 	}
@@ -103,7 +103,7 @@ class GfmlDocLxrs {
 	public static GfmlLxr QuoteFold_lxr() {
 		GfmlLxr rv = GfmlLxr_.frame_("gfml.quote_fold_0", GfmlFrame_.quote_(), "^'", "'^");
 
-		GfmlTkn tkn = GfmlTkn_.valConst_("key:gfml.quote_fold_0_whitespace", GfmlTkn_.NullVal, GfmlBldrCmd_whitespace._);
+		GfmlTkn tkn = GfmlTkn_.valConst_("key:gfml.quote_fold_0_whitespace", GfmlTkn_.NullVal, GfmlBldrCmd_whitespace.Instance);
 		GfmlLxr whitespace = GfmlLxr_.range_("lxr:gfml.quote_fold_0_whitespace", String_.Ary(String_.Tab, String_.CrLf, String_.Lf), tkn, false);
 		GfmlLxr escapeBgn = lxr_escape_("gfml.quote_fold_0_escape_bgn", "^'^'", "^'");
 		GfmlLxr escapeEnd = lxr_escape_("gfml.quote_fold_0_escape_end", "'^'^", "'^");
@@ -114,17 +114,17 @@ class GfmlDocLxrs {
 		Comment1_lxr());
 		return rv;
 	}
-	public static GfmlLxr ElmKey_lxr()			{return lxr_symbol_("gfml.elm_key_0", "=", GfmlBldrCmd_elemKey_set._);}
-	public static GfmlLxr NdeHeader_lxr()		{return lxr_symbol_("gfml.node_name_0", ":", GfmlBldrCmd_ndeName_set._);}
-	public static GfmlLxr NdeInline_lxr()		{return lxr_symbol_("gfml.node_inline_0", ";", GfmlBldrCmd_ndeInline._);}
-	public static GfmlLxr NdeBodyBgn_lxr()		{return lxr_symbol_("gfml.node_body_0_begin", "{", GfmlBldrCmd_ndeBody_bgn._);}
+	public static GfmlLxr ElmKey_lxr()			{return lxr_symbol_("gfml.elm_key_0", "=", GfmlBldrCmd_elemKey_set.Instance);}
+	public static GfmlLxr NdeHeader_lxr()		{return lxr_symbol_("gfml.node_name_0", ":", GfmlBldrCmd_ndeName_set.Instance);}
+	public static GfmlLxr NdeInline_lxr()		{return lxr_symbol_("gfml.node_inline_0", ";", GfmlBldrCmd_ndeInline.Instance);}
+	public static GfmlLxr NdeBodyBgn_lxr()		{return lxr_symbol_("gfml.node_body_0_begin", "{", GfmlBldrCmd_ndeBody_bgn.Instance);}
 	public static GfmlLxr NdeBodyEnd_lxr()		{return lxr_symbol_("gfml.node_body_0_end", "}", GfmlBldrCmd_frameEnd.nde_(GfmlNdeSymType.BodyEnd));}
-	public static GfmlLxr NdePropBgn_lxr()		{return lxr_symbol_("lxr.gfml.node_prop_0_bgn", "[", GfmlBldrCmd_ndeProp_bgn._);}
+	public static GfmlLxr NdePropBgn_lxr()		{return lxr_symbol_("lxr.gfml.node_prop_0_bgn", "[", GfmlBldrCmd_ndeProp_bgn.Instance);}
 	public static GfmlLxr NdePropEnd_lxr()		{return lxr_symbol_("lxr.gfml.node_prop_0_end", "]", GfmlBldrCmd_frameEnd.nde_(GfmlNdeSymType.PrpEnd));}
-	public static GfmlLxr NdeDot_lxr()			{return lxr_symbol_("gfml.node_drill_0", ".", GfmlBldrCmd_ndeDot._);}
-	public static GfmlLxr NdeHdrBgn_lxr()		{return lxr_symbol_("lxr.gfml.node_hdr_0_bgn", "(", GfmlBldrCmd_ndeHdr_bgn._);}
-	public static GfmlLxr NdeHdrEnd_lxr()		{return lxr_symbol_("lxr.gfml.node_hdr_0_end", ")", GfmlBldrCmd_ndeHdr_end._);}
-	public static GfmlLxr AtrSpr_lxr()			{return lxr_symbol_("lxr.gfml.atrSpr", ",", GfmlBldrCmd_atrSpr._);}
-	static GfmlLxr lxr_escape_(String key, String raw, String escape) {return GfmlLxr_.symbol_(key, raw, escape, GfmlBldrCmd_pendingTkns_add._);}
+	public static GfmlLxr NdeDot_lxr()			{return lxr_symbol_("gfml.node_drill_0", ".", GfmlBldrCmd_ndeDot.Instance);}
+	public static GfmlLxr NdeHdrBgn_lxr()		{return lxr_symbol_("lxr.gfml.node_hdr_0_bgn", "(", GfmlBldrCmd_ndeHdr_bgn.Instance);}
+	public static GfmlLxr NdeHdrEnd_lxr()		{return lxr_symbol_("lxr.gfml.node_hdr_0_end", ")", GfmlBldrCmd_ndeHdr_end.Instance);}
+	public static GfmlLxr AtrSpr_lxr()			{return lxr_symbol_("lxr.gfml.atrSpr", ",", GfmlBldrCmd_atrSpr.Instance);}
+	static GfmlLxr lxr_escape_(String key, String raw, String escape) {return GfmlLxr_.symbol_(key, raw, escape, GfmlBldrCmd_pendingTkns_add.Instance);}
 	static GfmlLxr lxr_symbol_(String key, String raw, GfmlBldrCmd cmd) {return GfmlLxr_.symbol_(key, raw, raw, cmd);}
 }

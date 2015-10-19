@@ -21,7 +21,7 @@ import gplx.xowa.files.fsdb.*; import gplx.xowa.files.caches.*; import gplx.xowa
 import gplx.xowa.apps.*; import gplx.xowa.wikis.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_mgr_tst {
 //		@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
-	@After  public void term() {Gfo_usr_dlg_.I = Gfo_usr_dlg_.Noop;}
+	@After  public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test  public void Stub() {}
 //		@Test   public void Thumb() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
@@ -104,10 +104,10 @@ public class Xofv_file_mgr_tst {
 //		}
 //		public Xofv_file_mgr_fxt Init_xfer_add(Xof_xfer_mkr mkr)	{file_mgr.Reg(mkr.Make()); return this;}
 //		public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_itm_mkr mkr)	{mkr.Make(file_mgr.Cache_mgr()); return this;}
-//		public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr.I.SaveFilStr(s, ""); return this;}
+//		public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr.Instance.SaveFilStr(s, ""); return this;}
 //		public Xofv_file_mgr_fxt Exec_process_lnki() {file_mgr.Process_lnki(); return this;}
 //		public Xofv_file_mgr_fxt Test_fsys_get(String path) {
-//			Tfds.Eq_true(Io_mgr.I.ExistsFil(Io_url_.mem_fil_(path)), "fsys: " + path);
+//			Tfds.Eq_true(Io_mgr.Instance.ExistsFil(Io_url_.mem_fil_(path)), "fsys: " + path);
 //			return this;
 //		}
 //	}

@@ -46,6 +46,6 @@ public class Gfo_qarg_itm {
 				bfr.Add(itm.Val_bry());
 			bfr.Add_byte_nl();
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

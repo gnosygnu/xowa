@@ -19,16 +19,16 @@ package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.dbs.*;
 import gplx.xowa.apps.*;	
-import gplx.xowa.gui.*;
+import gplx.xowa.guis.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; 
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.specials.*;
-import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.css.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.hdumps.*; import gplx.xowa.htmls.hzips.*; import gplx.xowa.htmls.css.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
-public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
+public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, GfoInvkAble {
 	private final Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
@@ -40,11 +40,11 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.html__hzip_mgr = new Xow_hzip_mgr(app.Usr_dlg(), this);
 		this.html__hdump_rdr = new Xohd_hdump_rdr(app, this);
-		this.xwiki_mgr = new Xow_xwiki_mgr();
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
 		this.url__parser = new Xoa_url_parser(this);
+		this.xwiki_mgr = new Xow_xwiki_mgr(this);
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
@@ -66,14 +66,14 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_hzip_mgr					Html__hzip_mgr() {return html__hzip_mgr;} private final Xow_hzip_mgr html__hzip_mgr;
 	public Xohd_hdump_rdr				Html__hdump_rdr() {return html__hdump_rdr;} private final Xohd_hdump_rdr html__hdump_rdr;
-	public Xoh_page_wtr_mgr_base		Html__page_wtr_mgr() {return html__page_wtr_mgr;} private final Xohv_page_wtr_mgr html__page_wtr_mgr = new Xohv_page_wtr_mgr();
+	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
 	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_wiki_props				Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
-	public Xol_lang						Lang() {throw Err_.new_unimplemented();}
+	public Xol_lang_itm					Lang() {throw Err_.new_unimplemented();}
 	public Xoa_url_parser				Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;
 
 	public Xosp_special_mgr Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
-	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private Xow_xwiki_mgr xwiki_mgr;
+	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
 	public Xoav_app Appv() {return app;} private final Xoav_app app;
 	public void Init_by_wiki() {
 		if (!init_needed) return;
@@ -106,4 +106,5 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
 		return Xoa_ttl.parse(app.Utl__bfr_mkr(), app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, app.Utl_msg_log(), raw, 0, raw.length);
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw Err_.new_unimplemented_w_msg("implemented for Xoa_cfg_mgr");}
 }

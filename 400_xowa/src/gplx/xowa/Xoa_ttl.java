@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.apps.urls.*;
 public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public boolean ForceLiteralLink() {return forceLiteralLink;} private boolean forceLiteralLink;
@@ -51,16 +52,16 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Anch_txt() {return anch_bgn == -1	? Bry_.Empty : Bry_.Mid(full_txt, anch_bgn, full_txt.length);}
 	public byte[] Talk_txt() {return ns.Id_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Subj_txt() {return ns.Id_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
-	public byte[] Full_url() {return Xoa_url_encoder._.Encode(full_txt);}
+	public byte[] Full_url() {return Xoa_url_encoder.Instance.Encode(full_txt);}
 	public String Full_db_as_str() {return String_.new_u8(Full_db());}
 	public byte[] Full_db()  {return ns.Gen_ttl(this.Page_db());}
-	public byte[] Page_url() {return Xoa_url_encoder._.Encode(this.Page_txt());}
-	public byte[] Leaf_url() {return Xoa_url_encoder._.Encode(this.Leaf_txt());}
-	public byte[] Base_url() {return Xoa_url_encoder._.Encode(this.Base_txt());}
+	public byte[] Page_url() {return Xoa_url_encoder.Instance.Encode(this.Page_txt());}
+	public byte[] Leaf_url() {return Xoa_url_encoder.Instance.Encode(this.Leaf_txt());}
+	public byte[] Base_url() {return Xoa_url_encoder.Instance.Encode(this.Base_txt());}
 	public byte[] Root_txt() {return root_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, page_bgn, root_bgn - 1);}
 	public byte[] Rest_txt() {return root_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, root_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
-	public byte[] Talk_url() {return Xoa_url_encoder._.Encode(this.Talk_txt());}
-	public byte[] Subj_url() {return Xoa_url_encoder._.Encode(this.Subj_txt());}
+	public byte[] Talk_url() {return Xoa_url_encoder.Instance.Encode(this.Talk_txt());}
+	public byte[] Subj_url() {return Xoa_url_encoder.Instance.Encode(this.Subj_txt());}
 	public int Qarg_bgn() {return qarg_bgn;} private int qarg_bgn = -1;
 	public byte[] Qarg_txt() {return this.Qarg_bgn() == -1 ? null : Bry_.Mid(full_txt, this.Qarg_bgn(), full_txt.length);}
 	public byte[] Base_txt_wo_qarg() {
@@ -281,7 +282,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
-						b_ary = anchor_encoder_bfr.Xto_bry_and_clear();
+						b_ary = anchor_encoder_bfr.To_bry_and_clear();
 						match_pos = cur + 1;
 					}
 					break;
@@ -294,7 +295,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
-						b_ary = anchor_encoder_bfr.Xto_bry_and_clear();
+						b_ary = anchor_encoder_bfr.To_bry_and_clear();
 						match_pos = cur + 1;
 					}
 					else {
@@ -338,7 +339,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			msg_log.Add_itm_none(Xop_ttl_log.Ttl_is_ns_only, src, bgn, end);
 			return false;
 		}
-		full_txt = bfr.Xto_bry_and_clear();
+		full_txt = bfr.To_bry_and_clear();
 		if (	ns.Case_match() == Xow_ns_case_.Id_1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
 			byte char_1st = full_txt[page_bgn];

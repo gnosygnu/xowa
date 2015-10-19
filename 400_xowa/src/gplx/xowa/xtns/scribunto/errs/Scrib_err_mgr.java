@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 class Scrib_err_mgr implements GfoInvkAble {
-	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private int key_id = 0;
 	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {

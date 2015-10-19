@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_wdata_pid_base_tst {
 	gplx.xowa.bldrs.Xob_fxt fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();
 	Io_url reg_(Xowe_wiki wdata, String wiki) {return Wdata_idx_wtr.dir_pid_(wdata, wiki).GenSubFil(Xotdb_dir_info_.Name_reg_fil);}
@@ -69,6 +69,6 @@ public class Xob_wdata_pid_base_tst {
 		}			
 		bfr.Add_str_a7("  }").Add_byte_nl();
 		bfr.Add_str_a7("}").Add_byte_nl();
-		return String_.Replace(bfr.Xto_str_and_clear(), "'", "\""); 
+		return String_.Replace(bfr.To_str_and_clear(), "'", "\""); 
 	}
 }

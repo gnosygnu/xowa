@@ -49,7 +49,7 @@ public class Texvc_tkn_ {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
 			ary[i].Print_dbg_bry(bfr, 0);
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public static void Print_dbg_str__bgn(Bry_bfr bfr, int indent, Texvc_tkn tkn) {
 		if (indent > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);

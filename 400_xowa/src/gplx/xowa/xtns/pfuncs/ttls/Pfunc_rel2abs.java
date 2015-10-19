@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -164,7 +164,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 			}
 			tmp_bfr.Add_mid(tmp, seg_ary[j] - tmp_adj, seg_ary[j+1] - tmp_adj);
 		}
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	private static int[] seg_ary = new int[Xoa_ttl.Max_len];
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_rel2abs;}

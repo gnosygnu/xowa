@@ -55,7 +55,7 @@ class Xows_core {
 			boolean searching_db = cmd.Search();				
 			html_wkr.Gen_tbl(tmp_bfr, cmd.Rslt(), cmd_key, cmd.Wiki().Domain_bry(), searching_db);
 		}
-		page.Data_raw_(html_wkr.Gen_page(tmp_bfr.Xto_bry_and_clear()));
+		page.Data_raw_(html_wkr.Gen_page(tmp_bfr.To_bry_and_clear()));
 	}
 	public void Search_end(Xows_ui_cmd cmd) {
 		cmd_hash.Del(cmd.Key());
@@ -69,7 +69,7 @@ class Xows_core {
 	private void Assert_page_count(Xowe_wiki wiki) {
 		Xowd_db_file search_db = wiki.Data__core_mgr().Db__search();
 		if (ask_for_upgrade
-			&& wiki.App().App_type().Uid_is_gui()
+			&& wiki.App().Mode().Tid_is_gui()
 			&& !search_db.Tbl__search_word().Ddl__page_count()
 			&& !upgraded_wikis.Has(wiki.Domain_bry()) ) {
 			ask_for_upgrade = false;

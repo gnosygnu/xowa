@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.files.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*;
+import gplx.xowa.files.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Gallery_itm implements Js_img_wkr {
 	private Gallery_xnde xnde; private Xof_file_itm xfer_itm; private Xowe_wiki wiki; private Xop_ctx ctx; private byte[] src; private byte[] gallery_li_id_bry; private int gallery_itm_idx;
@@ -51,7 +51,7 @@ public class Gallery_itm implements Js_img_wkr {
 		try {
 			xfer_itm.Init_at_gallery_end(html_w, html_h, html_view_url, html_orig_url);
 			gallery_mgr.Write_html_itm(bfr, tmp_bfr, wiki.Appe(), wiki, ctx.Cur_page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, xnde, Bry_.Empty, gallery_itm_idx, xfer_itm, false);
-			String itm_html = bfr.Xto_str_and_clear();
+			String itm_html = bfr.To_str_and_clear();
 			js_wkr.Html_elem_replace_html(String_.new_u8(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
 				page.Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21

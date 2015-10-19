@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xows_ns_mgr {
-	private final Ordered_hash ns_hash = Ordered_hash_.new_(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
+	private final Ordered_hash ns_hash = Ordered_hash_.New(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	private boolean ns_all, ns_main;
 	public void Clear() {
 		ns_hash.Clear();
@@ -75,7 +75,7 @@ public class Xows_ns_mgr {
 				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.Get_at(i);
 				tmp_bfr.Add_int_variable(ns_id_ref.Val());
 			}
-			return tmp_bfr.Xto_bry_and_clear();
+			return tmp_bfr.To_bry_and_clear();
 		}
 	}
 	private static final byte[] Hash_key_all = new byte[] {Byte_ascii.Star}, Hash_key_main = new byte[] {Byte_ascii.Num_0};

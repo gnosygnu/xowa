@@ -56,7 +56,7 @@ public class Xofc_fil_itm implements CompareAble {
 			.Add_int_variable(h).Add_byte_pipe()
 			.Add_int_variable(Xof_lnki_time.X_int(time))
 			;
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public static byte[] Gen_hash_key_v2(Bry_bfr bfr, int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
 		bfr	.Add_int_variable(dir_id).Add_byte_pipe()
@@ -66,7 +66,7 @@ public class Xofc_fil_itm implements CompareAble {
 			.Add_double(Xof_lnki_time.Db_save_double(time)).Add_byte_pipe()
 			.Add_int_variable(page)
 			;
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public int compareTo(Object obj) {Xofc_fil_itm comp = (Xofc_fil_itm)obj; return -Long_.Compare(cache_time, comp.cache_time);}	// - for DESC sort
 	public static final Xofc_fil_itm Null = null;

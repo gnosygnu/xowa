@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.ctgs.*;
-import gplx.xowa.nss.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.wikis.ctgs.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 
@@ -31,7 +31,7 @@ public class Db_mgr_fxt {
 	public Xowd_page_itm doc_wo_date_(int id, String title, String text) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, text);}
 	public Xowd_page_itm doc_ttl_(int id, String title) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, "IGNORE");}
 	public Db_mgr_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
-	public Db_mgr_fxt Init_fil(Io_url url, String raw) {Io_mgr.I.SaveFilStr(url, raw); return this;}
+	public Db_mgr_fxt Init_fil(Io_url url, String raw) {Io_mgr.Instance.SaveFilStr(url, raw); return this;}
 	public Db_mgr_fxt Exec_run(Xobd_wkr wkr)		{bldr_fxt.Run(wkr); return this;}
 	public Db_mgr_fxt Exec_run(Xob_cmd cmd)			{bldr_fxt.Run_cmds(cmd); return this;}
 	public Db_mgr_fxt Exec_run(Xobd_parser_wkr wkr) {bldr_fxt.Run(wkr); return this;}
@@ -109,7 +109,7 @@ public class Db_mgr_fxt {
 		Tfds.Eq_ary(expd, Xto_int_ary(ctg));
 	}
 	public void Test_file(String url, String expd) {
-		String actl = Io_mgr.I.LoadFilStr(url);
+		String actl = Io_mgr.Instance.LoadFilStr(url);
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	int[] Xto_int_ary(Xoctg_data_ctg ctg) {
@@ -127,11 +127,11 @@ public class Db_mgr_fxt {
 	}
 	public void Init_db_sqlite() {
 		Xowe_wiki wiki = this.Wiki();
-		Db_conn_pool.I.Clear();
-		Db_conn_bldr.I.Reg_default_sqlite();
-		Io_mgr.I.DeleteDir_cmd(wiki.Fsys_mgr().Root_dir()).MissingIgnored_().Exec();
+		Db_conn_pool.Instance.Clear();
+		Db_conn_bldr.Instance.Reg_default_sqlite();
+		Io_mgr.Instance.DeleteDir_cmd(wiki.Fsys_mgr().Root_dir()).MissingIgnored_().Exec();
 		wiki.Db_mgr_create_as_sql().Core_data_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
-		Io_mgr.I.SaveFilStr(wiki.Import_cfg().Src_dir().GenSubFil("a.xml"), "<test/>");
+		Io_mgr.Instance.SaveFilStr(wiki.Import_cfg().Src_dir().GenSubFil("a.xml"), "<test/>");
 	}
 	public void Rls() {
 		this.Wiki().Db_mgr_as_sql().Core_data_mgr().Rls();

@@ -192,7 +192,7 @@ class Swt_lnr__menu_btn_cmd implements Listener {
 	public Swt_lnr__menu_btn_cmd(GfoInvkAble invk, String cmd) {this.invk = invk; this.cmd = cmd;} GfoInvkAble invk; String cmd;
 	public void handleEvent(Event ev) {
 		try {GfoInvkAble_.InvkCmd(invk, cmd);}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, Err_.Message_gplx_full(e));}
 	}	
 }
 class Swt_lnr__menu_btn_msg implements Listener {
@@ -203,7 +203,7 @@ class Swt_lnr__menu_btn_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
 	}	
 }
 class Swt_lnr__menu_chk_msg implements Listener {
@@ -219,6 +219,6 @@ class Swt_lnr__menu_chk_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
 	}	
 }

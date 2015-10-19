@@ -20,7 +20,7 @@ public class Bry_fmtr_vals implements Bry_fmtr_arg {
 	private final Bry_fmtr fmtr; private Object[] vals;
 	Bry_fmtr_vals(Bry_fmtr fmtr) {this.fmtr = fmtr;}
 	public Bry_fmtr_vals Vals_(Object... v) {this.vals = v; return this;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		fmtr.Bld_bfr_ary(bfr, vals);
 	}
 	public static Bry_fmtr_vals new_fmt(String fmt, String... keys) {

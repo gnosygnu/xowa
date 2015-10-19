@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.langs.cfgs.*;
+import gplx.xowa.wikis.xwikis.sitelinks.*;
 public class Xow_cache_mgr {
 	private Xowe_wiki wiki;
 	public Xow_cache_mgr(Xowe_wiki wiki) {
@@ -32,28 +32,16 @@ public class Xow_cache_mgr {
 	public KeyVal[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
 			List_adp list = List_adp_.new_();
-			Cfg_nde_root root = wiki.Appe().Lang_mgr().Groups();
-			int len = root.Root_len();
-			for (int i = 0; i < len; i++) {
-				Cfg_nde_obj nde = root.Root_get_at(i);
-				Scrib_lang_names_grps(list, nde);
+			Xoa_sitelink_itm_mgr itm_mgr = wiki.App().Xwiki_mgr__sitelink_mgr().Itm_mgr();
+			int len = itm_mgr.Len();
+			for (int i = 0; i < len; ++i) {
+				Xoa_sitelink_itm itm = itm_mgr.Get_at(i);
+				KeyVal kv = KeyVal_.new_(String_.new_u8(itm.Key()), String_.new_u8(itm.Name()));
+				list.Add(kv);
 			}
 			scrib_lang_names = (KeyVal[])list.To_ary(KeyVal.class);
 		}
 		return scrib_lang_names;
-	}	private static KeyVal[] scrib_lang_names;
-	private void Scrib_lang_names_grps(List_adp list, Cfg_nde_obj nde) {
-		int len = nde.Nde_subs_len();
-		for (int i = 0; i < len; i++) {
-			Cfg_nde_obj lang_nde = nde.Nde_subs_get_at(i);
-			if (lang_nde.Nde_typ_is_grp())
-				Scrib_lang_names_grps(list, lang_nde);
-			else {
-				Xoac_lang_itm lang_itm = (Xoac_lang_itm)lang_nde;
-				KeyVal kv = KeyVal_.new_(String_.new_u8(lang_itm.Key_bry()), String_.new_u8(lang_itm.Local_name_bry()));
-				list.Add(kv);
-			}
-		}
 	}
 	public void Free_mem_all() {
 		tmpl_result_cache.Clear();
@@ -62,4 +50,5 @@ public class Xow_cache_mgr {
 		lst_cache.Free_mem_all();
 		scrib_lang_names = null;
 	}
+	private static KeyVal[] scrib_lang_names;
 }

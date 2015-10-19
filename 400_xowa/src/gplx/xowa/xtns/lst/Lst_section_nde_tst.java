@@ -23,7 +23,7 @@ public class Lst_section_nde_tst {
 		fxt.Test_parse_page_all_str("a<section name=\"b\">c</section>d", "ad");
 	}
 	@Test  public void German() {	// PURPOSE: non-english tags for section DATE:2014-07-18
-		fxt.Lang_by_id_(Xol_lang_itm_.Id_de);
+		fxt.Lang_by_id_(Xol_lang_stub_.Id_de);
 		fxt.Test_parse_page_all_str("a<abschnitt name=\"b\">c</abschnitt>d"	, "ad");		// check that German works
 		fxt.Test_parse_page_all_str("a<section name=\"b\">c</section>d"		, "ad");		// check that English still works
 		fxt.Test_parse_page_all_str("a<trecho name=\"b\">c</trecho>d"		, "a&lt;trecho name=&quot;b&quot;&gt;c&lt;/trecho&gt;d");		// check that Portuguese does not work

@@ -66,7 +66,7 @@ public class Pxd_parser_tst {
 		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);
+			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
 		else
 			Tfds.Eq(expd, date.XtoStr_fmt_yyyy_MM_dd());
 	}
@@ -74,7 +74,7 @@ public class Pxd_parser_tst {
 		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);
+			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
 		else
 			Tfds.Eq(expd, date.XtoStr_fmt("HH:mm:ss.fff"));
 	}
@@ -82,7 +82,7 @@ public class Pxd_parser_tst {
 		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);
+			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
 		else
 			Tfds.Eq(expd, date.XtoStr_fmt("yyyy-MM-dd HH:mm:ss.fff"));
 	}

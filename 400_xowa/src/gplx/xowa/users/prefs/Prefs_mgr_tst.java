@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import org.junit.*;
-import gplx.gfui.*; import gplx.xowa.apps.gfss.*;
-import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.xowa.apps.gfs.*;
+import gplx.xowa.guis.views.*;
 public class Prefs_mgr_tst {
 	private Prefs_mgr_fxt fxt = new Prefs_mgr_fxt();
 	@Before public void init() {fxt.Clear();}	
@@ -133,7 +133,7 @@ class Prefs_mgr_fxt {
 	private Prefs_mgr prefs_mgr; private Gfui_html_mok html_box;
 	public void Clear() {
 		if (app == null) {
-			GfsCore._.Clear();	// NOTE: clear GfsCore, else Props test will fail for mass run
+			GfsCore.Instance.Clear();	// NOTE: clear GfsCore, else Props test will fail for mass run
 			Xoa_gfs_mgr.Msg_parser_init();
 			app = Xoa_app_fxt.app_();
 			prefs_mgr = new Prefs_mgr(app);	

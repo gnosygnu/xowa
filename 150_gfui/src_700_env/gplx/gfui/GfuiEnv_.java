@@ -55,27 +55,27 @@ public class GfuiEnv_ {
 
 		// reg interruptLnr
 		if (swingHack) {	// TODO: move to kit dependent functionality; WHEN: swing kit
-			UsrDlg_._.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin._);
-			UsrDlg_._.Reg(UsrMsgWkr_.Type_Stop, GfuiInterruptLnr.new_());
+			UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin.Instance);
+			UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Stop, GfuiInterruptLnr.new_());
 		}
 		IptBndMgr_win = IptCfg_.new_("gplx.gfui.GfuiWin");
 
 		// alias default dirs
-		Io_mgr.I.AliasDir_sysEngine("app:\\", Env_.AppUrl().OwnerDir().Raw());
+		Io_mgr.Instance.AliasDir_sysEngine("app:\\", Env_.AppUrl().OwnerDir().Raw());
 
-		GfsCore._.MsgParser_(GfoMsgParser_gfml._);
-		GfsCore._.AddLib(GfsLibIni_core._);
-		GfsCore._.AddLib(GfsLibIni_gfui._);
+		GfsCore.Instance.MsgParser_(GfoMsgParser_gfml.Instance);
+		GfsCore.Instance.AddLib(GfsLibIni_core.Instance);
+		GfsCore.Instance.AddLib(GfsLibIni_gfui.Instance);
 		Io_url iniFile = Env_.AppUrl().GenSubFil(".gfs");
-		if (Io_mgr.I.ExistsFil(iniFile))
-			GfsCore._.ExecFile(iniFile);
+		if (Io_mgr.Instance.ExistsFil(iniFile))
+			GfsCore.Instance.ExecFile(iniFile);
 	}
 	public static void Init_swt(String[] args, Class<?> type) {
 		Env_.Init_swt(args, type);
 		if (!Op_sys.Cur().Tid_is_drd()) GxwElemFactory_.winForms_();
-		GfsCore._.MsgParser_(GfoMsgParser_gfml._);
+		GfsCore.Instance.MsgParser_(GfoMsgParser_gfml.Instance);
 	}
-	public static void Gfs_init() {GfsCore._.MsgParser_(GfoMsgParser_gfml._);}
+	public static void Gfs_init() {GfsCore.Instance.MsgParser_(GfoMsgParser_gfml.Instance);}
 	public static IptCfg IptBndMgr_win;
 	public static void DoEvents() {;} 
 	public static void ShowMsg(String message) {javax.swing.JOptionPane.showMessageDialog(null, message, "", javax.swing.JOptionPane.INFORMATION_MESSAGE, null);}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public interface Xow_ttl_parser {
 	Xoa_ttl Ttl_parse(byte[] ttl);
 	Xoa_ttl Ttl_parse(int ns_id, byte[] ttl);

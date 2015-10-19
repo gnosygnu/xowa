@@ -47,7 +47,7 @@ public class Io_sort_misc_tst {
 	}
 	Io_line_rdr new_Io_line_rdr(String url_str, String text) {
 		Io_url url = Io_url_.mem_fil_(url_str);
-		Io_mgr.I.SaveFilStr(url, text);
+		Io_mgr.Instance.SaveFilStr(url, text);
 		Io_line_rdr rv = new Io_line_rdr(Gfo_usr_dlg_.Test(), url);
 		rv.Read_next();
 		return rv;

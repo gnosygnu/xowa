@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.modules.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	@Override public byte Tid() {return Gallery_mgr_base_.Packed_tid;}

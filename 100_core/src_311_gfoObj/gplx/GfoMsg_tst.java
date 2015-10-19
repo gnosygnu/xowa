@@ -19,7 +19,7 @@ package gplx;
 import org.junit.*;
 public class GfoMsg_tst {
 	@Before public void setup() {
-		GfsCore._.AddObj(new Mok(), "Mok");
+		GfsCore.Instance.AddObj(new Mok(), "Mok");
 	}
 	@Test  public void Write1() {
 		GfoMsg m = GfoMsg_.root_leafArgs_(String_.Ary("a", "b"), KeyVal_.new_("int0", 1));

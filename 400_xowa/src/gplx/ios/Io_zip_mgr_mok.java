@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 public class Io_zip_mgr_mok implements Io_zip_mgr {
 	public void Zip_fil(Io_url src_fil, Io_url trg_fil) {
-		byte[] src_bry = Io_mgr.I.LoadFilBry(src_fil);
+		byte[] src_bry = Io_mgr.Instance.LoadFilBry(src_fil);
 		byte[] zip_bry = Zip_bry(src_bry, 0, src_bry.length);
-		Io_mgr.I.SaveFilBry(trg_fil, zip_bry);
+		Io_mgr.Instance.SaveFilBry(trg_fil, zip_bry);
 	}
 	public void Zip_dir(Io_url src_dir, Io_url trg_fil) {}
 	public byte[] Zip_bry(byte[] src, int bgn, int len)			{return Bry_.Add(Bry_zipped, Bry_.Mid(src, bgn, len));}
@@ -32,5 +32,5 @@ public class Io_zip_mgr_mok implements Io_zip_mgr {
 	}
 	public void Unzip_to_dir(Io_url src_fil, Io_url trg_dir) {}
 	private static final byte[] Bry_zipped = Bry_.new_a7("zipped:");
-	public static final Io_zip_mgr_mok _ = new Io_zip_mgr_mok(); Io_zip_mgr_mok() {}
+	public static final Io_zip_mgr_mok Instance = new Io_zip_mgr_mok(); Io_zip_mgr_mok() {}
 }

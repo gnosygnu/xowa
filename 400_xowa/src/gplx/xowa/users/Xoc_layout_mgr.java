@@ -48,7 +48,7 @@ public class Xoc_layout_mgr implements GfoInvkAble {
 	}
 }
 class Enm_mgr {
-	private Ordered_hash str_hash = Ordered_hash_.new_(); private Hash_adp val_hash = Hash_adp_.new_();
+	private Ordered_hash str_hash = Ordered_hash_.New(); private Hash_adp val_hash = Hash_adp_.new_();
 	private Int_obj_ref tmp_val_ref = Int_obj_ref.zero_(); 
 	public Enm_mgr Add(byte val, String str) {
 		Int_obj_ref val_ref = Int_obj_ref.new_(val);

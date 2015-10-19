@@ -67,8 +67,8 @@ public class TdbDbSaveMgr_tst {
 			,	"================================, ,\" \",//"
 			);
 		TdbTable tbl = db.MakeTbl("tbl", TdbFile.MainFileId);
-		tbl.Flds().Add("id", IntClassXtn._);
-		tbl.Flds().Add("name", StringClassXtn._);
+		tbl.Flds().Add("id", IntClassXtn.Instance);
+		tbl.Flds().Add("name", StringClassXtn.Instance);
 
 		tbl.DataObj_Wtr(wtr);
 		String actl = wtr.To_str();

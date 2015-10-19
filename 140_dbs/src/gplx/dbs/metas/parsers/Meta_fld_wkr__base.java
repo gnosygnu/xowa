@@ -45,14 +45,14 @@ class Meta_fld_wkr__end_comma extends Meta_fld_wkr__base {
 	@Override public int Tid() {return Tid_end_comma;}
 	@Override protected void When_match(Meta_fld_itm fld) {}
 	private static final byte[] Hook = Bry_.new_a7(",");
-        public static final Meta_fld_wkr__end_comma I = new Meta_fld_wkr__end_comma();
+        public static final Meta_fld_wkr__end_comma Instance = new Meta_fld_wkr__end_comma();
 }
 class Meta_fld_wkr__end_paren extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__end_paren() {this.Ctor(Hook);}
 	@Override public int Tid() {return Tid_end_paren;}
 	@Override protected void When_match(Meta_fld_itm fld) {}
 	private static final byte[] Hook = Bry_.new_a7(")");
-        public static final Meta_fld_wkr__end_paren I = new Meta_fld_wkr__end_paren();
+        public static final Meta_fld_wkr__end_paren Instance = new Meta_fld_wkr__end_paren();
 }
 class Meta_fld_wkr__nullable_null extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__nullable_null() {this.Ctor(Hook);}
@@ -60,7 +60,7 @@ class Meta_fld_wkr__nullable_null extends Meta_fld_wkr__base {
 		fld.Nullable_tid_(Meta_fld_itm.Nullable_null);
 	}
 	private static final byte[] Hook = Bry_.new_a7("null");
-        public static final Meta_fld_wkr__nullable_null I = new Meta_fld_wkr__nullable_null();
+        public static final Meta_fld_wkr__nullable_null Instance = new Meta_fld_wkr__nullable_null();
 }
 class Meta_fld_wkr__nullable_not extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__nullable_not() {this.Ctor(Hook, Bry_null);}
@@ -68,7 +68,7 @@ class Meta_fld_wkr__nullable_not extends Meta_fld_wkr__base {
 		fld.Nullable_tid_(Meta_fld_itm.Nullable_not_null);
 	}
 	private static final byte[] Hook = Bry_.new_a7("not"), Bry_null = Bry_.new_a7("null");
-        public static final Meta_fld_wkr__nullable_not I = new Meta_fld_wkr__nullable_not();
+        public static final Meta_fld_wkr__nullable_not Instance = new Meta_fld_wkr__nullable_not();
 }
 class Meta_fld_wkr__primary_key extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__primary_key() {this.Ctor(Hook, Bry_key);}
@@ -76,7 +76,7 @@ class Meta_fld_wkr__primary_key extends Meta_fld_wkr__base {
 		fld.Primary_key_y_();
 	}
 	private static final byte[] Hook = Bry_.new_a7("primary"), Bry_key = Bry_.new_a7("key");
-        public static final Meta_fld_wkr__primary_key I = new Meta_fld_wkr__primary_key();
+        public static final Meta_fld_wkr__primary_key Instance = new Meta_fld_wkr__primary_key();
 }
 class Meta_fld_wkr__autonumber extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__autonumber() {this.Ctor(Hook);}
@@ -84,7 +84,7 @@ class Meta_fld_wkr__autonumber extends Meta_fld_wkr__base {
 		fld.Autonumber_y_();
 	}
 	private static final byte[] Hook = Bry_.new_a7("autoincrement");
-        public static final Meta_fld_wkr__autonumber I = new Meta_fld_wkr__autonumber();
+        public static final Meta_fld_wkr__autonumber Instance = new Meta_fld_wkr__autonumber();
 }
 class Meta_fld_wkr__default extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__default() {this.Ctor(Hook);}
@@ -113,5 +113,5 @@ class Meta_fld_wkr__default extends Meta_fld_wkr__base {
 	}
 	@Override protected void When_match(Meta_fld_itm fld) {}
 	private static final byte[] Hook = Bry_.new_a7("default");
-        public static final Meta_fld_wkr__default I = new Meta_fld_wkr__default();
+        public static final Meta_fld_wkr__default Instance = new Meta_fld_wkr__default();
 }

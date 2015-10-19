@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.bldrs.langs.*; import gplx.xowa.html.*;
+import gplx.xowa.langs.bldrs.*; import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public abstract class Xox_mgr_base implements Xox_mgr {
 	public Xox_mgr_base() {
@@ -34,15 +34,16 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	@gplx.Virtual public void Xtn_init_by_app(Xoae_app app) {}
 	@gplx.Virtual public void Xtn_init_by_wiki(Xowe_wiki wiki) {}
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))			return Yn.Xto_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))			return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			{enabled = m.ReadYn("v"); enabled_manually = true;}
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_";
-	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {Xtn_write_escape(app, bfr, src, xnde.Src_bgn(), xnde.Src_end());}
-	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src)					{Xtn_write_escape(app, bfr, src, 0, src.length);}
+	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde)	{Xtn_write_escape(app, bfr, src, xnde.Src_bgn(), xnde.Src_end());}
+	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src)						{Xtn_write_escape(app, bfr, src, 0, src.length);}
 	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src, int bgn, int end)	{Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, bgn, end, true, false);}
+	public static void Xtn_write_escape_pre(Xoae_app app, Bry_bfr bfr, byte[] src, int bgn, int end){Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, bgn, end, false, false);}
 	public static void Xtn_write_unsupported(Xoae_app app, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde, byte parse_content_tid) {
 		bfr.Add(Xowa_not_implemented);
 		Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_bgn(), xnde.Tag_open_end());

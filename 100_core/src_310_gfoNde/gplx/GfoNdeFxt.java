@@ -29,7 +29,7 @@ public class GfoNdeFxt {
 	static GfoFldList GfoFldList_by_count_(int count) {
 		GfoFldList rv = GfoFldList_.new_();
 		for (int i = 0; i < count; i++)
-			rv.Add("fld" + Int_.Xto_str(i), StringClassXtn._);
+			rv.Add("fld" + Int_.To_str(i), StringClassXtn.Instance);
 		return rv;
 	}
 }

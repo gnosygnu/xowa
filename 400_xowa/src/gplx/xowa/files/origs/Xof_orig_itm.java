@@ -51,6 +51,6 @@ public class Xof_orig_itm {
 		bfr.Add_str_a7("w").Add_byte_eq().Add_int_variable(itm.w).Add_byte_semic();
 		bfr.Add_str_a7("h").Add_byte_eq().Add_int_variable(itm.h).Add_byte_semic();
 		bfr.Add_str_a7("redirect").Add_byte_eq().Add(itm.redirect).Add_byte_semic();
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

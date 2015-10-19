@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 public class Xop_redirect_mgr {
 	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
 	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
@@ -87,7 +87,7 @@ public class Xop_redirect_mgr {
 		Bry_bfr fmt_bfr = app.Utl__bfr_mkr().Get_b512();
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
-		return fmt_bfr.Xto_bry_and_clear();
+		return fmt_bfr.To_bry_and_clear();
 	}	private static byte[] Bry_redirect_dlm = Bry_.new_a7(" <--- "), Bry_redirect_arg = Bry_.new_a7("?redirect=no");		
 }
 class Xop_redirect_mgr_ {

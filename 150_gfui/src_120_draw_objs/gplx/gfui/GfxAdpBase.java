@@ -24,23 +24,23 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 public class GfxAdpBase implements GfxAdp {
 	public void DrawLine(PenAdp pen, PointAdp src, PointAdp trg) {
-				gfx.setColor(ColorAdpCache._.GetNativeColor(pen.Color()));
+				gfx.setColor(ColorAdpCache.Instance.GetNativeColor(pen.Color()));
 		gfx.setStroke(pen.UnderStroke());
 		gfx.drawLine(src.X(), src.Y(), trg.X(), trg.Y());
 			}
 	public void DrawRect(PenAdp pen, PointAdp pos, SizeAdp size)			{this.DrawRect(pen, pos.X(), pos.Y(), size.Width(), size.Height());}
 	public void DrawRect(PenAdp pen, RectAdp rect)							{this.DrawRect(pen, rect.X(), rect.Y(), rect.Width(), rect.Height());}
 	public void DrawRect(PenAdp pen, int x, int y, int width, int height)	{
-				gfx.setPaint(ColorAdpCache._.GetNativeColor(pen.Color()));
+				gfx.setPaint(ColorAdpCache.Instance.GetNativeColor(pen.Color()));
 		gfx.setStroke(pen.UnderStroke());
 		gfx.drawRect(x, y, width, height);
 			}
 	public void FillRect(SolidBrushAdp brush, int x, int y, int width, int height) {
-				gfx.setPaint(ColorAdpCache._.GetNativeColor(brush.Color()));
+				gfx.setPaint(ColorAdpCache.Instance.GetNativeColor(brush.Color()));
 		gfx.fillRect(x, y, width, height);
 			}
 	public void DrawStringXtn(String s, FontAdp font, SolidBrushAdp brush, float x, float y, float width, float height, GfxStringData sd) {
-				gfx.setPaint(ColorAdpCache._.GetNativeColor(brush.Color()));
+				gfx.setPaint(ColorAdpCache.Instance.GetNativeColor(brush.Color()));
 		// height = y - ascent + descent -> rect.y - rect.height [assume ascent] + 2 [assume descent]
 	    gfx.setClip((int)x, (int)y - (int)height + 2, (int)width, (int)height);		
 		if (sd == null || sd.mnemonicString == null) {

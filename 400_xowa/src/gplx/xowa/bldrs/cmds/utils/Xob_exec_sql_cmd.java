@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*;
 public class Xob_exec_sql_cmd implements Xob_cmd {
 	private Xowe_wiki wiki; private int file_idx = -1; private String sql;
 	public Xob_exec_sql_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;}

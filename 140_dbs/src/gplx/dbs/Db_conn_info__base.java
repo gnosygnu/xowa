@@ -47,6 +47,6 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 			bfr.Add_str_u8(itm);
 			bfr.Add_byte(i % 2 == 0 ? Byte_ascii.Eq : Byte_ascii.Semic);
 		}
-		return bfr.Xto_str();
+		return bfr.To_str();
 	}
 }

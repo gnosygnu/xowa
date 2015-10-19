@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.nss.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wtrs.*;
 public class Xob_category_registry_sql implements Xob_cmd {
 	public Xob_category_registry_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
@@ -26,7 +26,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		// setup
 		wiki.Html_mgr().Importing_ctgs_(Bool_.Y);
 		Io_url rslt_dir = Xob_category_registry_sql.Tmp_dir(wiki);
-		Io_mgr.I.DeleteDirDeep(rslt_dir);
+		Io_mgr.Instance.DeleteDirDeep(rslt_dir);
 		Xob_tmp_wtr rslt_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.dir_(rslt_dir), Io_mgr.Len_mb);
 		// read data
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();

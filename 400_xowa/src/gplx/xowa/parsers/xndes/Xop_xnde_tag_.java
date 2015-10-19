@@ -170,7 +170,7 @@ public class Xop_xnde_tag_ {
 , Tag_kbd = new_(Tid_kbd, "kbd").No_inline_()
 , Tag_samp = new_(Tid_samp, "samp").No_inline_()
 , Tag_blockquote = new_(Tid_blockquote, "blockquote").No_inline_().Repeat_mids_().Section_().Block_open_bgn_().Block_close_end_()	// NOTE: should be open_end_, but leaving for now; DATE:2014-03-11; added Repeat_mids_(); PAGE:en.w:Ring_a_Ring_o'_Roses DATE:2014-06-26
-, Tag_pre = new_(Tid_pre, "pre").No_inline_().Section_().Xtn_().Raw_().Block_open_bgn_().Block_close_end_().Ignore_empty_().Xtn_skips_template_args_()
+, Tag_pre = new_(Tid_pre, "pre").No_inline_().Section_().Xtn_mw_().Raw_().Block_open_bgn_().Block_close_end_().Ignore_empty_().Xtn_skips_template_args_()
 , Tag_font = new_(Tid_font, "font").No_inline_()
 , Tag_center = new_(Tid_center, "center").No_inline_().Block_open_end_().Block_close_end_() // removed .Repeat_ends_(); added Nest_(); EX: w:Burr Truss; DATE:2012-12-12
 , Tag_p = new_(Tid_p, "p").No_inline_().Section_().Block_open_bgn_().Block_close_end_()
@@ -217,13 +217,13 @@ public class Xop_xnde_tag_ {
 , Tag_references = new_(Tid_references, "references").Xtn_mw_()
 , Tag_source = new_(Tid_source, "source").Xtn_mw_().Block_open_bgn_().Block_close_end_()	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 , Tag_syntaxHighlight = new_(Tid_syntaxHighlight, "syntaxHighlight").Xtn_mw_().Block_open_bgn_().Block_close_end_()	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
-, Tag_gallery = new_(Tid_gallery, "gallery").Xtn_().Block_open_bgn_().Block_close_end_().Xtn_auto_close_()
-, Tag_imageMap = new_(Tid_imageMap, "imageMap").Xtn_()
+, Tag_gallery = new_(Tid_gallery, "gallery").Xtn_mw_().Block_open_bgn_().Block_close_end_().Xtn_auto_close_()
+, Tag_imageMap = new_(Tid_imageMap, "imageMap").Xtn_mw_()
 , Tag_timeline = new_(Tid_timeline, "timeline").Xtn_mw_()
 , Tag_hiero = new_(Tid_hiero, "hiero").Xtn_mw_()
 , Tag_inputBox = new_(Tid_inputBox, "inputBox").Xtn_mw_()
 , Tag_pages = new_(Tid_pages, "pages").Xtn_mw_()
-, Tag_section = new_(Tid_section, "section").Xtn_mw_().Langs_(Xol_lang_itm_.Id_de, "Abschnitt").Langs_(Xol_lang_itm_.Id_he, "קטע").Langs_(Xol_lang_itm_.Id_pt, "trecho") // DATE:2014-07-18
+, Tag_section = new_(Tid_section, "section").Xtn_mw_().Langs_(Xol_lang_stub_.Id_de, "Abschnitt").Langs_(Xol_lang_stub_.Id_he, "קטע").Langs_(Xol_lang_stub_.Id_pt, "trecho") // DATE:2014-07-18
 , Tag_pagequality = new_(Tid_pagequality, "pagequality").Xtn_mw_()
 , Tag_pagelist = new_(Tid_pagelist, "pagelist").Xtn_mw_()
 , Tag_categoryList = new_(Tid_categoryList, "categoryList").Xtn_mw_()

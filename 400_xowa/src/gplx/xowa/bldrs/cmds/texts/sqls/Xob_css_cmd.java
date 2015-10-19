@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.html.css.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.css.*;
 public class Xob_css_cmd implements Xob_cmd {
 	private final Xob_bldr bldr; private final Xowe_wiki wiki; private final Gfo_usr_dlg usr_dlg;
 	private Io_url css_dir; private String css_key;
@@ -35,7 +35,7 @@ public class Xob_css_cmd implements Xob_cmd {
 		core_db.Conn().Txn_bgn("bldr__css");
 		core_db.Tbl__css_core().Create_tbl();
 		core_db.Tbl__css_file().Create_tbl();
-		gplx.xowa.html.css.Xowd_css_core_mgr.Set(core_db.Tbl__css_core(), core_db.Tbl__css_file(), css_dir, css_key);
+		gplx.xowa.htmls.css.Xowd_css_core_mgr.Set(core_db.Tbl__css_core(), core_db.Tbl__css_file(), css_dir, css_key);
 		core_db.Tbl__cfg().Upsert_yn(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__tbl_css_core, Bool_.Y);
 		core_db.Conn().Txn_end();
 		usr_dlg.Plog_many("", "", Cmd_key() + ":end;");

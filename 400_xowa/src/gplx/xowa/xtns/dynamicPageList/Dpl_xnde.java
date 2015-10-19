@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*;
-import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
+import gplx.xowa.htmls.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
-	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {} // NOTE: <dynamicPageList> has no attributes
+	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		itm.Parse(wiki, ctx, ctx.Cur_page().Ttl().Full_txt(), src, xnde);
 		Dpl_page_finder.Find_pages(pages, wiki, itm);
@@ -76,13 +76,13 @@ class Dpl_page_finder {
 		rv.Clear();
 		List_adp includes = itm.Ctg_includes(); if (includes == null) return;
 		int includes_len = includes.Count();
-		Ordered_hash old_regy = Ordered_hash_.new_(), new_regy = Ordered_hash_.new_(), cur_regy = Ordered_hash_.new_();
+		Ordered_hash old_regy = Ordered_hash_.New(), new_regy = Ordered_hash_.New(), cur_regy = Ordered_hash_.New();
 		Xodb_load_mgr load_mgr = wiki.Db_mgr().Load_mgr();
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
 		Int_obj_ref tmp_id = Int_obj_ref.zero_();
 		List_adp del_list = List_adp_.new_();
 		int ns_filter = itm.Ns_filter();
-		Ordered_hash exclude_pages = Ordered_hash_.new_();
+		Ordered_hash exclude_pages = Ordered_hash_.New();
 		Find_excludes(exclude_pages, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
 
 		for (int i = 0; i < includes_len; i++) {	// loop over includes
@@ -92,7 +92,7 @@ class Dpl_page_finder {
 			Del_old_pages_not_in_cur(i, tmp_id, old_regy, cur_regy, del_list);
 			Add_cur_pages_also_in_old(i, tmp_id, old_regy, cur_regy, new_regy, exclude_pages, ns_filter);
 			old_regy = new_regy;
-			new_regy = Ordered_hash_.new_();
+			new_regy = Ordered_hash_.New();
 		}			
 		int pages_len = old_regy.Count();
 		for (int i = 0; i < pages_len; i++) {		// loop over old and create pages

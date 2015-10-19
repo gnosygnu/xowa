@@ -54,7 +54,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		Connection rv = Conn_make_by_url("jdbc:sqlite://" + String_.Replace(conn_info_as_sqlite.Url().Raw(), "\\", "/"), "", "");
 		return rv;
 	}
-		public static final Sqlite_engine _ = new Sqlite_engine();
+		public static final Sqlite_engine Instance = new Sqlite_engine();
 }
 class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {

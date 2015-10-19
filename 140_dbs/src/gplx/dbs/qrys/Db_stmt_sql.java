@@ -37,31 +37,32 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
+	public Db_stmt Val_int_by_bool(String k, boolean v)	{return Add_int(Bool_.N, k, v ? 1 : 0);}
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
-		try {Add(k, Int_.Xto_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v);}
+		try {Add(k, Int_.To_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_long(String k, long v)	{return Add_long(Bool_.Y, k, v);}
 	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
 	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
-		try {Add(k, Long_.Xto_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v);} 
+		try {Add(k, Long_.To_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v);} 
 		return this;
 	}
 	public Db_stmt Crt_float(String k, float v)	{return Add_float(Bool_.Y, k, v);}
 	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
 	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
-		try {Add(k, Float_.Xto_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v);}
+		try {Add(k, Float_.To_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_double(String k, double v)	{return Add_double(Bool_.Y, k, v);}
 	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
 	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
-		try {Add(k, Double_.Xto_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
+		try {Add(k, Double_.To_str(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
 		return this;
 	}
 	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.Y, k, v);}
@@ -93,7 +94,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
 			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
-			Add(Key_na, bfr.Xto_str_and_clear());
+			Add(Key_na, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;
 	}
@@ -128,7 +129,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	}
 	public String Xto_sql() {
 		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.To_ary_and_clear(Object.class));
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	public int Args_len() {return args.Count();}
 	public String Args_get_at(int i) {return (String)args.Get_at(i);}
@@ -153,7 +154,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 			pos_prv = pos_cur + 1;
 		}
 		tmp_bfr.Add_mid(sql_bry, pos_prv, sql_bry.length);
-		tmp_fmtr.Fmt_(tmp_bfr.Xto_bry_and_clear());
+		tmp_fmtr.Fmt_(tmp_bfr.To_bry_and_clear());
 	}
 	public static String Xto_str(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str, List_adp args) {
 		Init_fmtr(tmp_bfr, tmp_fmtr, sql_str);
@@ -172,6 +173,6 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 			ary[i] = str;
 		}
 		tmp_fmtr.Bld_bfr_many(tmp_bfr, ary);
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	} 
 }

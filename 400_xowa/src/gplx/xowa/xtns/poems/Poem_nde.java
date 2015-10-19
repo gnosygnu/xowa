@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Poem_nde implements Xox_xnde {
 	private Xop_root_tkn xtn_root;
@@ -74,7 +74,7 @@ public class Poem_nde implements Xox_xnde {
 			if (indent_enabled) bfr.Add(Html_tag_.Span_rhs);													// if "\n:", add </span>
 			line_bgn = line_end + 1;																			// +1 to skip over end "\n"
 		}
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	private static byte[]
 	  Div_poem_bgn = Bry_.new_a7("<div class=\"poem\">\n<p>\n")	// NOTE: always enclose in <p>; MW does this implicitly in its modified parse; DATE:2014-04-27

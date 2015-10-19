@@ -22,8 +22,8 @@ import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;
 	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs();
-	private final Ordered_hash rules = Ordered_hash_.new_bry_();
-	private final Ordered_hash rule_group_hash = Ordered_hash_.new_bry_(), rule_tally_hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash rules = Ordered_hash_.New_bry();
+	private final Ordered_hash rule_group_hash = Ordered_hash_.New_bry(), rule_tally_hash = Ordered_hash_.New_bry();
 	private final Dg_parser parser = new Dg_parser();
 	private final Xob_ttl_filter_mgr ttl_filter_mgr = new Xob_ttl_filter_mgr();
 	private final Dg_log_mgr log_mgr = new Dg_log_mgr();
@@ -33,7 +33,7 @@ public class Dg_match_mgr {
 		ttl_filter_mgr.Load(Bool_.N, root_dir.GenSubFil("xowa.title.include.txt"));
 		ttl_filter_mgr.Load(Bool_.Y, root_dir.GenSubFil("xowa.title.exclude.txt"));
 		Io_url dg_root_url = root_dir.GenSubDir("dansguardian");
-		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_.I.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);
+		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_.Instance.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);
 		Init_by_files(files);
 		if (log_enabled) log_mgr.Commit();
 	}
@@ -77,7 +77,7 @@ public class Dg_match_mgr {
 		}
 		return rv;
 	}
-	public boolean Match(int log_tid, int page_id, int page_ns, byte[] page_ttl, byte[] page_ttl_db, Xol_lang lang, byte[] src) {
+	public boolean Match(int log_tid, int page_id, int page_ns, byte[] page_ttl, byte[] page_ttl_db, Xol_lang_itm lang, byte[] src) {
 		int src_len = src.length;
 		int clude_type = 0;
 		if		(ttl_filter_mgr.Match_include(page_ttl_db)) clude_type = -1;

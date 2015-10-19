@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.bldrs.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.wikis.*;
 public class Wdata_xtn_mgr extends Xox_mgr_base {
 	private static final String XTN_KEY_STR = "Wikibase"; public static final byte[] XTN_KEY = Bry_.new_a7(XTN_KEY_STR);
@@ -27,7 +27,7 @@ public class Wdata_xtn_mgr extends Xox_mgr_base {
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!Enabled()) return;
 	}
-	public void Load_msgs(Xowe_wiki wdata_wiki, Xol_lang lang) {
+	public void Load_msgs(Xowe_wiki wdata_wiki, Xol_lang_itm lang) {
 		wdata_wiki.Msg_mgr().Lang_(lang);
 		Xtn_load_i18n(wdata_wiki, XTN_KEY_STR, "lib" , "i18n", lang.Key_str() + ".json");
 		Xtn_load_i18n(wdata_wiki, XTN_KEY_STR, "repo", "i18n", lang.Key_str() + ".json");

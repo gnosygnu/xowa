@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
-	private Ordered_hash regy = Ordered_hash_.new_bry_();
+	private Ordered_hash regy = Ordered_hash_.New_bry();
 	public int Count() {return regy.Count();}
 	public Cite_xtn_mgr Xtn_cite() {return xtn_cite;} private Cite_xtn_mgr xtn_cite;
 	public Imap_xtn_mgr Xtn_imap() {return xtn_imap;} private Imap_xtn_mgr xtn_imap;

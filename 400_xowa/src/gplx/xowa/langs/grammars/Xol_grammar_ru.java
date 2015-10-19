@@ -38,7 +38,7 @@ public class Xol_grammar_ru implements Xol_grammar {
 		Xol_grammar_ru_genitive_itm itm = new Xol_grammar_ru_genitive_itm(tid, find_bry, repl_bry);
 		trie.Add(find_bry, itm);
 	}
-	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang lang, byte[] word, byte[] type) {
+	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {
 		if (Bry_.Len_eq_0(word)) return true;	// empty_string returns ""
 		byte tid = Xol_grammar_.Tid_of_type(type);
 		switch (tid) {

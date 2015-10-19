@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 public class GfoMsgParser_gfml implements GfoMsgParser {
 	public GfoMsg ParseToMsg(String s) {return GfmlDataNde.XtoMsg(s);}
-        public static final GfoMsgParser_gfml _ = new GfoMsgParser_gfml(); GfoMsgParser_gfml() {}
+        public static final GfoMsgParser_gfml Instance = new GfoMsgParser_gfml(); GfoMsgParser_gfml() {}
 }

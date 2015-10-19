@@ -20,7 +20,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 	public GfuiStatusBox VisibilityDuration_(int v) {timer.Interval_(v); visibilityDuration = v; return this;} int visibilityDuration;
 	@Override public void Opened_cbk() {
 		super.Opened_cbk();
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Note, this);
+		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Note, this);
 	}
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
 		if (	!active
@@ -49,7 +49,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 	@Override public boolean DisposeCbk() {
 		super.DisposeCbk();
 		timer.Rls();
-		UsrDlg_._.RegOff(UsrMsgWkr_.Type_Note, this);
+		UsrDlg_.Instance.RegOff(UsrMsgWkr_.Type_Note, this);
 		if (timerCmd != null) timerCmd.Rls();
 		return true;
 	}

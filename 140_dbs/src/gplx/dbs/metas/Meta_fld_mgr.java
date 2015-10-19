@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
 public class Meta_fld_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return hash.Count();}
 	public void Add(Meta_fld_itm itm) {hash.Add(itm.Name(), itm);}
 	public boolean Has(String name) {return hash.Has(name);}

@@ -232,7 +232,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	}
 	@Test  public void Ogv_width_seek_again_should_dirty() { // PURPOSE: outlier case wherein (a) downloading thumb then (b) downloading thumb seek; (b) does not dirty file since (a) exists; PAGE:en.w:Wikipedia
 		fxt.Src_en_wiki_repo().Ext_rules().Get_or_new(Xof_ext_.Bry_ogv).View_max_(0);
-		Io_mgr.I.SaveFilStr("mem/xowa/file/#meta/en.wikipedia.org/d/d0.csv", "A.ogv|0||2?0,0|1?300,40\n");	// simulate (a)
+		Io_mgr.Instance.SaveFilStr("mem/xowa/file/#meta/en.wikipedia.org/d/d0.csv", "A.ogv|0||2?0,0|1?300,40\n");	// simulate (a)
 		fxt	.Lnki_("A.ogv", true, -1, -1, -1, 5)															
 		.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/-1px-seek%3D5-A.ogv.jpg", 300, 40)	
 				)

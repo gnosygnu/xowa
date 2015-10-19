@@ -74,7 +74,7 @@ public class HexDecUtl {
 			case 0: return '0'; case 1: return '1'; case 2: return '2'; case 3: return '3'; case 4: return '4';
 			case 5: return '5'; case 6: return '6'; case 7: return '7'; case 8: return '8'; case 9: return '9';
 			case 10: return 'A'; case 11: return 'B'; case 12: return 'C'; case 13: return 'D'; case 14: return 'E'; case 15: return 'F';
-			default: throw Err_.new_parse("hexstring", Int_.Xto_str(val));
+			default: throw Err_.new_parse("hexstring", Int_.To_str(val));
 		}
 	}
 	static byte Xto_byte(int v) {
@@ -82,7 +82,7 @@ public class HexDecUtl {
 			case  0: return Byte_ascii.Num_0; case  1: return Byte_ascii.Num_1; case  2: return Byte_ascii.Num_2; case  3: return Byte_ascii.Num_3; case  4: return Byte_ascii.Num_4;
 			case  5: return Byte_ascii.Num_5; case  6: return Byte_ascii.Num_6; case  7: return Byte_ascii.Num_7; case  8: return Byte_ascii.Num_8; case  9: return Byte_ascii.Num_9;
 			case 10: return Byte_ascii.Ltr_A; case 11: return Byte_ascii.Ltr_B; case 12: return Byte_ascii.Ltr_C; case 13: return Byte_ascii.Ltr_D; case 14: return Byte_ascii.Ltr_E; case 15: return Byte_ascii.Ltr_F;
-			default: throw Err_.new_parse("hexstring", Int_.Xto_str(v));
+			default: throw Err_.new_parse("hexstring", Int_.To_str(v));
 		}
 	}
 	public static void Write(byte[] bry, int bgn, int end, int val) {

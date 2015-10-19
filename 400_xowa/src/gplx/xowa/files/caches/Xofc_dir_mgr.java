@@ -19,7 +19,7 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.dbs.*;
 class Xofc_dir_mgr {
 	private final Xofc_dir_tbl tbl = new Xofc_dir_tbl();
-	private final Ordered_hash hash_by_names = Ordered_hash_.new_bry_(); private final Hash_adp hash_by_ids = Hash_adp_.new_();
+	private final Ordered_hash hash_by_names = Ordered_hash_.New_bry(); private final Hash_adp hash_by_ids = Hash_adp_.new_();
 	private Xof_cache_mgr cache_mgr;
 	public Xofc_dir_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
@@ -81,12 +81,12 @@ class Xofc_dir_mgr {
 	private void Db_recalc_next_id(Xofc_dir_itm itm, String err) {
 		if (String_.Has(err, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
 			int next_id = tbl.Select_max_uid() + 1;				
-			Gfo_usr_dlg_.I.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
 			itm.Id_(next_id);
 			cache_mgr.Next_id_(next_id + 1);
 			err = tbl.Db_save(itm);
 			if (err == null) return;
 		}
-		Gfo_usr_dlg_.I.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
+		Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
 	}
 }

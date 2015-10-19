@@ -79,7 +79,7 @@ public class Io_download_fmt {
 		,	rate_fmtr_arg.Val_(prog_rate)
 		,	prog_left_fmtr_arg.Seconds_(prog_left / 1000)
 		);
-		prog_msg = prog_bfr.Xto_str_and_clear();
+		prog_msg = prog_bfr.To_str_and_clear();
 		if (usr_dlg != null)
 			usr_dlg.Prog_none("", "prog", prog_msg);
 	}

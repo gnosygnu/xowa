@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.ios.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.xdats.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Io_sort_cmd_ns implements Io_make_cmd {
 	Xob_xdat_file_wtr fil_wtr; Bry_bfr reg_bfr = Bry_bfr.new_(), key_bfr_0 = Bry_bfr.new_(512), key_bfr_n = Bry_bfr.new_(512);
 	int fil_count = 0, itm_count = 0;
@@ -43,7 +43,7 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 	}
 	public void Sort_end() {
 		Flush();
-		Io_mgr.I.AppendFilBfr(reg_url, reg_bfr);
+		Io_mgr.Instance.AppendFilBfr(reg_url, reg_bfr);
 		//fil_wtr.Rls(); reg_bfr.Rls(); key_bfr_0.Rls(); key_bfr_n.Rls();
 	}
 	private void Flush() {

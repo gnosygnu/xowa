@@ -36,5 +36,5 @@ class GfuiBtnClickBnd implements InjectAble, GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	static final String ExecMouseUp_cmd = "ExecMouseUp";
-	public static final GfuiBtnClickBnd _ = new GfuiBtnClickBnd(); GfuiBtnClickBnd() {}
+	public static final GfuiBtnClickBnd Instance = new GfuiBtnClickBnd(); GfuiBtnClickBnd() {}
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
 public class Scrib_lib_language_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
@@ -49,7 +49,7 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_fetchLanguageName, Object_.Ary("enx"), "");
 	}
 	@Test  public void GetFallbacksFor() {
-		Xol_lang other_lang = fxt.Core().App().Lang_mgr().Get_by_key_or_new(Bry_.new_a7("zh"));
+		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("zh"));
 		other_lang.Fallback_bry_(Bry_.new_a7("gan-hant, zh-hant, zh-hans"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_language.Invk_getFallbacksFor, Object_.Ary("zh"), String_.Concat_lines_nl
 		( "1="
@@ -63,7 +63,7 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_language.Invk_getFallbacksFor, Object_.Ary("unknown"));
 	}
 	@Test  public void FormatNum() {
-		Xol_lang other_lang = fxt.Core().App().Lang_mgr().Get_by_key_or_new(Bry_.new_a7("de")).Init_by_load_assert();	// NOTE: must call Init_by_load_assert, else load will be called by scrib and sprs below will get overwritten during load;
+		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("de")).Init_by_load_assert();	// NOTE: must call Init_by_load_assert, else load will be called by scrib and sprs below will get overwritten during load;
 		fxt.Parser_fxt().Init_lang_numbers_separators(other_lang, ".", ",");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("de", 1234), "1.234");		// german spr
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", 1234), "1,234");		// english spr
@@ -116,8 +116,8 @@ public class Scrib_lib_language_tst {
 	}
 	@Test  public void IsRTL() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isRTL, Object_.Ary("en"), false);
-		Xol_lang other_lang = fxt.Core().App().Lang_mgr().Get_by_key_or_new(Bry_.new_a7("ar"));
-		GfoInvkAble_.InvkCmd_val(other_lang, Xol_lang.Invk_dir_rtl_, true);
+		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("ar"));
+		GfoInvkAble_.InvkCmd_val(other_lang, Xol_lang_itm.Invk_dir_rtl_, true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isRTL, Object_.Ary("ar"), true);
 	}
 	@Test  public void Format_duration() {

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.wms.apis.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
 public class Pfunc_ifexist_mgr {
 	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 	private Hash_adp regy = Hash_adp_bry.cs();
@@ -58,7 +58,7 @@ public class Pfunc_ifexist_mgr {
 		Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Wiki_commons();
 		boolean env_is_testing = Env_.Mode_testing();
 		if (	commons_wiki != null														// null check
-			&&	(	commons_wiki.Init_assert().Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// make sure tid=sql; tid=txt automatically created for online images; DATE:2014-09-21
+			&&	(	commons_wiki.Init_assert().Db_mgr().Tid() == gplx.xowa.wikis.dbs.Xodb_mgr_sql.Tid_sql	// make sure tid=sql; tid=txt automatically created for online images; DATE:2014-09-21
 				||	env_is_testing
 				)
 			) {

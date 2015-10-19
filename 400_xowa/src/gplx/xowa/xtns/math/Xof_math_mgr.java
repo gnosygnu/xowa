@@ -38,7 +38,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	}
 	public boolean Find_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Make_itm(rv, wiki_key, math_bry);
-		return Io_mgr.I.ExistsFil(rv.Png_url());
+		return Io_mgr.Instance.ExistsFil(rv.Png_url());
 	}
 	public boolean Renderer_is_mathjax() {return renderer_is_mathjax;} public void Renderer_is_mathjax_(boolean v) {renderer_is_mathjax = v;} private boolean renderer_is_mathjax = true;
 	private Io_url Make_png_fil(Io_url math_dir, String hash) {
@@ -49,7 +49,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 			.Add(String_.CharAt(hash, 2)).Add(Math_dir_spr)
 			.Add(hash).Add(".png")
 			;
-		return Io_url_.new_fil_(tmp_sb.Xto_str_and_clear());
+		return Io_url_.new_fil_(tmp_sb.To_str_and_clear());
 	}
 	public boolean MakePng(byte[] math, String hash, Io_url png_url, String prog_fmt) {
 		if (!enabled) return false;
@@ -57,14 +57,14 @@ public class Xof_math_mgr implements GfoInvkAble {
 		Io_url tex_url = tmp_dir.GenSubFil("xowa_math_temp.tex");
 		String latex = Latex_wrap(math);
 		prog_fmt = String_.Replace(prog_fmt, "~", "~~");	// double-up ~ or else will break in progress bar
-		Io_mgr.I.SaveFilStr(tex_url, latex);
+		Io_mgr.Instance.SaveFilStr(tex_url, latex);
 		cmd_convert_tex_to_dvi.Prog_fmt_(prog_fmt + " tex_to_dvi: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		boolean pass = cmd_convert_tex_to_dvi.Run(tex_url.Raw(), tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
 			app.Usr_dlg().Warn_many(GRP_KEY, "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		// NOTE: latex sometimes throws errors, but will generate .dvi; for sake of simplicity; always try to run dvipng
-		Io_mgr.I.CreateDirIfAbsent(png_url.OwnerDir());
+		Io_mgr.Instance.CreateDirIfAbsent(png_url.OwnerDir());
 		cmd_convert_dvi_to_png.Prog_fmt_(prog_fmt + " dvi_to_png: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		pass = cmd_convert_dvi_to_png.Run(tex_url.GenNewExt(".dvi"), png_url, tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
@@ -93,7 +93,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	));
 	public boolean Enabled() {return enabled;} public Xof_math_mgr Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))		return Yn.Xto_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))		return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))		enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_renderer))		return renderer_is_mathjax ? "mathjax" : "latex";
 		else if	(ctx.Match(k, Invk_renderer_))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");

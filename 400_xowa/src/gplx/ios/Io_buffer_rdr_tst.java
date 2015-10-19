@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 import org.junit.*; import gplx.ios.*;
 public class Io_buffer_rdr_tst {
 	@Before public void init() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		fil = Io_url_.mem_fil_("mem/byteStreamRdr.txt");
 		ini_Write("0123456789");
 		rdr = Io_buffer_rdr.new_(Io_stream_rdr_.file_(fil), 4);
@@ -52,7 +52,7 @@ public class Io_buffer_rdr_tst {
 		rdr.Bfr_load_all();	// NOTE: change to zip_rdrs make eof detection difficult; force another load to ensure that file_pos goes past file_len
 		tst_Bfr("8", "9").tst_ReadDone(true);
 	}
-	private void ini_Write(String s) {Io_mgr.I.SaveFilStr(fil, s);}
+	private void ini_Write(String s) {Io_mgr.Instance.SaveFilStr(fil, s);}
 	Io_buffer_rdr_tst tst_Bfr(String... expdAry) {
 		String[] actlAry = new String[rdr.Bfr_len()];
 		for (int i = 0; i < actlAry.length; i++)

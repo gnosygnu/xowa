@@ -20,7 +20,7 @@ import gplx.lists.*;
 class GfmlPragmaType implements GfmlPragma {
 	public String KeyOfPragma() {return pragmaKey;} private String pragmaKey = "_type";
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
-		Ordered_hash list = Ordered_hash_.new_(); List_adp replaced = List_adp_.new_();
+		Ordered_hash list = Ordered_hash_.New(); List_adp replaced = List_adp_.new_();
 		for (int i = 0 ; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde typNde = pragmaNde.SubHnds().Get_at(i);
 			GfmlType type = GfmlTypeCompiler.Compile(typNde, GfmlType_.Root, bldr.TypeMgr().TypeRegy(), list);

@@ -26,7 +26,7 @@ public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 		html_grp.Bld_bfr_many(bfr, this);
 		page.Data_raw_(bfr.To_bry_and_rls());
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xou_history_itm itm = mgr.Get_at(i);

@@ -47,10 +47,9 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_str_intf(To_str_able expd, To_str_able actl)						{Eq_wkr(expd.To_str(), actl.To_str(), true, String_.Empty);}
 	public static void Eq_str_lines(String lhs, String rhs)									{Eq_str_lines(lhs, rhs, EmptyStr);}
 	public static void Eq_str_lines(String lhs, String rhs, String note)					{
-		if		(lhs == null && rhs == null)	return;	// true
-		else if (lhs == null)					throw Err_.new_wo_type("lhs is null", "note", note);
-		else if (rhs == null)					throw Err_.new_wo_type("rhs is null", "note", note);
-		else									Eq_ary_wkr(String_.Split(lhs, Char_.NewLine), String_.Split(rhs, Char_.NewLine), false, note);
+		if (lhs == null) lhs = "";
+		if (rhs == null) rhs = "";
+		Eq_ary_wkr(String_.Split(lhs, Char_.NewLine), String_.Split(rhs, Char_.NewLine), false, note);
 	}
 	public static void Eq(Object expd, Object actl, String fmt, Object... args)		{Eq_wkr(expd, actl, true, String_.Format(fmt, args));}
 	public static void Eq_rev(Object actl, Object expd)										{Eq_wkr(expd, actl, true, EmptyStr);}
@@ -69,7 +68,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_ary(Object lhs, Object rhs, String fmt, Object... args){Eq_ary_wkr(lhs, rhs, true, String_.Format(fmt, args));}	
 	public static void Eq_ary_str(Object lhs, Object rhs, String note)			{Eq_ary_wkr(lhs, rhs, false, note);}					
 	public static void Eq_ary_str(Object lhs, Object rhs)						{Eq_ary_wkr(lhs, rhs, false, EmptyStr);}					
-	public static void Eq_list(List_adp lhs, List_adp rhs)									{Eq_list_wkr(lhs, rhs, TfdsEqListItmStr_cls_default._, EmptyStr);}
+	public static void Eq_list(List_adp lhs, List_adp rhs)									{Eq_list_wkr(lhs, rhs, TfdsEqListItmStr_cls_default.Instance, EmptyStr);}
 	public static void Eq_list(List_adp lhs, List_adp rhs, TfdsEqListItmStr xtoStr)			{Eq_list_wkr(lhs, rhs, xtoStr, EmptyStr);}
 	private static void Eq_exec_y(Object lhs, Object rhs, String fmt, Object[] args) {
 		if (Object_.Eq(lhs, rhs)) return;
@@ -154,18 +153,19 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	static TfdsMsgBldr msgBldr = TfdsMsgBldr.new_();
 	public static final Io_url RscDir		= Io_url_.Usr().GenSubDir_nest("xowa", "dev", "tst");
 	public static DateAdp Now_time0_add_min(int minutes) {return time0.Add_minute(minutes);}
-	@gplx.Internal protected static boolean Now_enabled() {return now_enabled;} static boolean now_enabled;
-	public static void Now_enabled_n_() {now_enabled = false;}
+	@gplx.Internal protected static boolean Now_enabled() {return now_enabled;} private static boolean now_enabled; private static boolean now_freeze;
+	public static void Now_enabled_n_() {now_enabled = false; now_freeze = false;}
 	public static void Now_set(DateAdp date) {now_enabled = true; nowTime = date;}
 	public static void Now_enabled_y_() {now_enabled = true; nowTime = time0;}
+	public static void Now_freeze_y_() {now_freeze = true;}
 	@gplx.Internal protected static DateAdp Now() {
 		DateAdp rv = nowTime;
-		nowTime = rv.Add_minute(1);
+		if (!now_freeze) nowTime = rv.Add_minute(1);
 		return rv;
 	}
 	private static final DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
-	public static void WriteText(String text) {Console_adp__sys.I.Write_str(text);}
+	public static void WriteText(String text) {Console_adp__sys.Instance.Write_str(text);}
 	public static void Write(byte[] s, int b, int e) {Write(Bry_.Mid(s, b, e));}
 	public static void Write() {Write("tmp");}
 	public static void Write(Object... ary) {
@@ -180,7 +180,7 @@ class TfdsEqListItmStr_cls_default implements TfdsEqListItmStr {
 	public String To_str(Object cur, Object actl) {
 		return Object_.Xto_str_strict_or_null_mark(cur);
 	}
-	public static final TfdsEqListItmStr_cls_default _ = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
+	public static final TfdsEqListItmStr_cls_default Instance = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
 }
 class TfdsEqAryItm {
 	public int Idx() {return idx;} public TfdsEqAryItm Idx_(int v) {idx = v; return this;} int idx;
@@ -213,14 +213,14 @@ class TfdsMsgBldr {
 		for (int i = 0; i < list.Count(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
 			sb.Add_fmt_line("{0}: {1} {2} {3}"
-				, Int_.Xto_str_pad_bgn_zero(itm.Idx(), 4)
+				, Int_.To_str_pad_bgn_zero(itm.Idx(), 4)
 				, String_.PadBgn(itm.Lhs(), lhsLenMax, " ")
 				, itm.Eq() ? "==" : "!="
 				, String_.PadBgn(itm.Rhs(), rhsLenMax, " ")
 				);
 		}
 //			String compSym = isEq ? "  " : "!=";
-//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.Xto_str_pad_bgn_zero(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
+//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.To_str_pad_bgn_zero(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
 //			foreach (Object obj in list) {
 //				String itmComparison = (String)obj;
 //				sb.Add_fmt_line("{0}{1}", "\t\t", itmComparison);

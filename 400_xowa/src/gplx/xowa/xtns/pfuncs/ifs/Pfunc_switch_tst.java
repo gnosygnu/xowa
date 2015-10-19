@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Pfunc_switch_tst {		
 	@Before public void init()				{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic_a()			{fxt.Test_parse_tmpl_str_test("{{#switch:a|a=1|b=2|3}}"					, "{{test}}"			, "1");}

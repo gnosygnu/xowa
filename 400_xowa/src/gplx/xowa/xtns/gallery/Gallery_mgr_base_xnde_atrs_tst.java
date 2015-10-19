@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-import gplx.xowa.html.*;
+import gplx.xowa.htmls.*;
 public class Gallery_mgr_base_xnde_atrs_tst {
 	private Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
 	@Before public void init() {fxt.Reset();}

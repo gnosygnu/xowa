@@ -22,7 +22,7 @@ public class GfuiBnd_box_status implements GfoInvkAble, UsrMsgWkr {
 		box.Invoke(GfoInvkAbleCmd.arg_(this, WriteText_cmd, umsg.To_str()));
 	}
 	public void WriteText(String text) {
-		GfuiElem lastFocus = GfuiFocusMgr._.FocusedElem();	// HACK:WINFORMS:.Visible=true will automatically transfer focus to textBox; force Focus back to original
+		GfuiElem lastFocus = GfuiFocusMgr.Instance.FocusedElem();	// HACK:WINFORMS:.Visible=true will automatically transfer focus to textBox; force Focus back to original
 		box.Text_(text);
 		GfuiWin ownerWin = box.OwnerWin();
 		if (ownerWin != null && !ownerWin.Visible()) {

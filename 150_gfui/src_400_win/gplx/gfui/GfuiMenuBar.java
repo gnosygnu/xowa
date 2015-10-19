@@ -47,8 +47,8 @@ public class GfuiMenuBar implements GfoInvkAble {
 			root.ForeColor_(ColorAdp_.Black).BackColor_(ColorAdp_.White);
 			root.ExecProps();
 			curOwnerItm = root;
-			GfsCore._.AddObj(this, "GfuiMenuBar_");
-			GfsCore._.ExecRegy("gplx.gfui.GfuiMenuBar.ini");
+			GfsCore.Instance.AddObj(this, "GfuiMenuBar_");
+			GfsCore.Instance.ExecRegy("gplx.gfui.GfuiMenuBar.ini");
 		}
 		catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));}
 	}
@@ -79,7 +79,7 @@ public class GfuiMenuBar implements GfoInvkAble {
 			GfuiMenuBarItm itm = GfuiMenuBarItm.sub_(curOwnerItm);
 			itm.Type_(GfuiMenuBarItmType.Spr);
 			itm.Text_(text);
-			itm.Key_(curOwnerItm.Key() + "." + text + Int_.Xto_str(separatorIdx++));
+			itm.Key_(curOwnerItm.Key() + "." + text + Int_.To_str(separatorIdx++));
 			itm.ExecProps();
 		}
 		else if (ctx.Match(k, Invk_RegCmd)) {
@@ -197,8 +197,8 @@ class GfuiMenuBarItm {
 		if (mnem != '\0') itm.setMnemonic(mnem); 		
 	}
 	void SetProps(JComponent itm) {
-		if (backColor != null) itm.setBackground(ColorAdpCache._.GetNativeColor(backColor));
-		if (foreColor != null) itm.setForeground(ColorAdpCache._.GetNativeColor(foreColor));
+		if (backColor != null) itm.setBackground(ColorAdpCache.Instance.GetNativeColor(backColor));
+		if (foreColor != null) itm.setForeground(ColorAdpCache.Instance.GetNativeColor(foreColor));
 		itm.setFont(MakeFont(itm.getFont()));		
 		if (String_.Len(tipText) > 0) itm.setToolTipText(tipText);		
 	}
@@ -258,7 +258,7 @@ class GxwBorderFactory {
 class GfuiMenuBarItmCmd implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		try {
-			GfsCore._.ExecOne(GfsCtx._, GfuiMenuBarItm.CmdMsg(itm));
+			GfsCore.Instance.ExecOne(GfsCtx.Instance, GfuiMenuBarItm.CmdMsg(itm));
 		}
 		catch (Exception e) {
 			GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));

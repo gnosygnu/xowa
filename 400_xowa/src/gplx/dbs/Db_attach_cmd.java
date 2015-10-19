@@ -33,7 +33,7 @@ public class Db_attach_cmd {
 		return this;
 	}
 	public void Exec() {
-		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
+		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		if (diff_db) conn.Env_db_attach(attach_name, attach_url);
 		conn.Txn_bgn(attach_name);	// NOTE: BEGIN TRAN must occur after ATTACH else sqlite will throw error
 		int len = sql_list.Count();

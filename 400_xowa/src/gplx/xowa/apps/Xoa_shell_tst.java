@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.apps.gfss.*;
+import org.junit.*; import gplx.xowa.apps.gfs.*;
 public class Xoa_shell_tst {
 	@Test  public void Fetch_page() {	// PURPOSE.fix: fetch_page failed with nullRef; DATE:2013-04-12
 		Xop_fxt parser_fxt = new Xop_fxt();

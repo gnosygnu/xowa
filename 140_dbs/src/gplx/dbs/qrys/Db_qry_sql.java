@@ -52,7 +52,7 @@ public class Db_qry_sql implements Db_qry {
 				Gen_sql_arg(bfr, args[args_idx++]);
 			pos = question_pos + 1;
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	private static void Gen_sql_arg(Bry_bfr bfr, Object val) {
 		if (val == null) {bfr.Add(Bry_null); return;}

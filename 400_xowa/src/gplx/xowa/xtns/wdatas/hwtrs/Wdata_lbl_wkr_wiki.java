@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.xtns.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 	private Wdata_wiki_mgr wdata_mgr;
 	private Xoapi_wikibase wikibase_api;
@@ -41,7 +41,7 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 			else {
 				itm.Load_vals(label.Lang(), label.Text());
 				if (itm.Text_en_enabled()) {
-					Wdata_langtext_itm en_label = (Wdata_langtext_itm)labels.Get_by(Xol_lang_.Key_en);
+					Wdata_langtext_itm en_label = (Wdata_langtext_itm)labels.Get_by(Xol_lang_itm_.Key_en);
 					itm.Text_en_(en_label == null ? Bry_.Empty : en_label.Text());
 				}
 			}

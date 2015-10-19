@@ -51,11 +51,11 @@ public class GfuiChkBox extends GfuiElemBase {
 	}
 	@Override public boolean FocusGotCbk() {super.FocusGotCbk(); this.Redraw(); return true;}	// Redraw for focusBorder
 	@Override public boolean FocusLostCbk() {super.FocusLostCbk(); this.Redraw(); return true;}	// Redraw for focusBorder
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.lbl_();}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		focusBorder.All_(PenAdp_.new_(ColorAdp_.Gray, 1));
-		Inject_(GfuiFocusXferBnd._).Inject_(GfuiBtnClickBnd._);
+		Inject_(GfuiFocusXferBnd.Instance).Inject_(GfuiBtnClickBnd.Instance);
 		this.CustomDraw_set(true);
 	}
 }

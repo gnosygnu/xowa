@@ -72,7 +72,7 @@ class DsvParser {
 				qteOn = false;
 			}
 			else
-				throw Err_.new_wo_type("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr", "sym", strm.Cur(), "text", strm.Xto_str_by_pos(strm.Pos() - 10, strm.Pos() + 10));
+				throw Err_.new_wo_type("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr", "sym", strm.Cur(), "text", strm.To_str_by_pos(strm.Pos() - 10, strm.Pos() + 10));
 		}
 		else {																// regular char; append and continue
 			sb.Add(strm.Cur());
@@ -80,7 +80,7 @@ class DsvParser {
 		}
 	}
 	void ProcessFld(CharStream strm) {
-		String val = sb.Xto_str_and_clear();
+		String val = sb.To_str_and_clear();
 		if (cmdSeqOn) {
 			cmdSeqOn = false;
 			if (String_.Eq(val, sym.CmdDlm()) && qteOn) {		// 2 cmdDlms in a row; cmdSeq encountered; next fld must be cmdName
@@ -177,7 +177,7 @@ class DsvTblBldr {
 		if (stage == Stage_Row) CreateTbl();	// CreateTbl if ROW is in progress; NOTE: exclude HDR, as first HDR would have called CreateTbl
 		fldTypes.Clear();
 		for (Object fldTypeObj : tkns) {
-			ClassXtn type = ClassXtnPool._.Get_by_or_fail((String)fldTypeObj);
+			ClassXtn type = ClassXtnPool.Instance.Get_by_or_fail((String)fldTypeObj);
 			fldTypes.Add(type);
 		}
 		layout.HeaderList().Add_LeafTypes();
@@ -228,13 +228,13 @@ class DsvTblBldr {
 		int fldNamesCount = fldNames.Count(), fldTypesCount = fldTypes.Count();
 		if (fldNamesCount == 0 && fldTypesCount == 0) {			// csv tbls where no names or types, just values
 			for (int i = 0; i < valCount; i++)
-				tbl.SubFlds().Add("fld" + i, StringClassXtn._);
+				tbl.SubFlds().Add("fld" + i, StringClassXtn.Instance);
 		}
 		else {													// all else, where either names or types is defined
 			int maxCount = fldNamesCount > fldTypesCount ? fldNamesCount : fldTypesCount;
 			for (int i = 0; i < maxCount; i++) {
 				String name = i < fldNamesCount ? (String)fldNames.Get_at(i) : "fld" + i;
-				ClassXtn typx = i < fldTypesCount ? (ClassXtn)fldTypes.Get_at(i) : StringClassXtn._;
+				ClassXtn typx = i < fldTypesCount ? (ClassXtn)fldTypes.Get_at(i) : StringClassXtn.Instance;
 				tbl.SubFlds().Add(name, typx);
 			}
 		}

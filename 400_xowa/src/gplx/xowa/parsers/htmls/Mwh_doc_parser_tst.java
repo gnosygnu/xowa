@@ -21,6 +21,7 @@ public class Mwh_doc_parser_tst {
 	private final Mwh_doc_parser_fxt fxt = new Mwh_doc_parser_fxt();
 	@Test   public void Text__basic()				{fxt.Test_parse("abc"				, fxt.Make_txt("abc"));}
 	@Test   public void Comment()					{fxt.Test_parse("a<!--b-->c"		, fxt.Make_txt("a"), fxt.Make_comment("<!--b-->"), fxt.Make_txt("c"));}
+	@Test   public void Entity()					{fxt.Test_parse("a&nbsp;b"			, fxt.Make_txt("a"), fxt.Make_entity("&nbsp;"), fxt.Make_txt("b"));}
 	@Test   public void Fail__inline_eos()			{fxt.Test_parse("a<b/"				, fxt.Make_txt("a<b/"));}
 	@Test   public void Fail__unknown()				{fxt.Test_parse("a<bc/>d"			, fxt.Make_txt("a<bc/>d"));}
 	@Test   public void Node__inline()				{fxt.Test_parse("a<b/>c"			, fxt.Make_txt("a"), fxt.Make_nde_head("<b/>")	, fxt.Make_txt("c"));}

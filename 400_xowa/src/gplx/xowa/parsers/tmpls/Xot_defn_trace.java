@@ -37,7 +37,7 @@ class Xot_defn_trace_brief implements Xot_defn_trace {
 		else
 			itm = (Xot_defn_trace_itm_brief)o;
 		itm.Count_add();
-	}	private Ordered_hash hash = Ordered_hash_.new_();
+	}	private Ordered_hash hash = Ordered_hash_.New();
 	public void Trace_end(int trg_bgn, Bry_bfr trg) {}
 	public void Print(byte[] src, Bry_bfr bb) {
 		int count = hash.Count(); if (count == 0) return;

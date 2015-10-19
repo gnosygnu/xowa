@@ -160,7 +160,7 @@ public class GfuiElemBase implements GfuiElem {
 	@gplx.Virtual public boolean DisposeCbk()							{return true;}
 	@gplx.Virtual public boolean VisibleChangedCbk()						{return true;}
 	@gplx.Virtual public boolean FocusGotCbk() {
-		GfuiFocusMgr._.FocusedElem_set(this);
+		GfuiFocusMgr.Instance.FocusedElem_set(this);
 		return true;
 	}
 	@gplx.Virtual public boolean FocusLostCbk()							{return true;}
@@ -262,7 +262,7 @@ public class GfuiElemBase implements GfuiElem {
 		public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
 
 	@gplx.Virtual public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
-		this.kit = Swing_kit._;	// NOTE: assume that callers want Swing; SWT / Mem should be calling ctor_kit_GfuiElemBase
+		this.kit = Swing_kit.Instance;	// NOTE: assume that callers want Swing; SWT / Mem should be calling ctor_kit_GfuiElemBase
 		underElem = UnderElem_make(ctorArgs);
 		underElem.Host_set(this);
 		underMgr = underElem.Core();
@@ -282,10 +282,10 @@ public class GfuiElemBase implements GfuiElem {
 		this.Focus_able_(Bool_.cast(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	@gplx.Virtual public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.control_();}
+	@gplx.Virtual public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.control_();}
 	public Object SubItms_getObj(String key) {return injected.Get_by(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
-	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.new_();
+	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.New();
 	Hash_adp injected = Hash_adp_.new_();
 	GxwCore_base underMgr;
 	@gplx.Internal protected static boolean SizeChanged_ignore = false;
@@ -300,5 +300,5 @@ class GfuiFocusMgr implements GfoEvMgrOwner {
 		this.focusedElem = focused;
 		GfoEvMgr_.PubVal(this, FocusChanged_evt, focused);
 	}
-	public static final GfuiFocusMgr _ = new GfuiFocusMgr(); GfuiFocusMgr() {}
+	public static final GfuiFocusMgr Instance = new GfuiFocusMgr(); GfuiFocusMgr() {}
 }

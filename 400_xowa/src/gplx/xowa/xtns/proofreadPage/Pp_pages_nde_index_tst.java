@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.cfgs.*;
+import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_index_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
 		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();

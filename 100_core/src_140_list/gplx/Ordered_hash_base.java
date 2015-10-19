@@ -67,9 +67,9 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 	private String To_str_ui() {
 		String_bldr sb = String_bldr_.new_();
 		int count = ordered.Count();
-		int pad = String_.Len(Int_.Xto_str(count));
+		int pad = String_.Len(Int_.To_str(count));
 		for (int i = 0; i < count; i++) {
-			sb	.Add(Int_.Xto_str_pad_bgn_zero(i, pad))
+			sb	.Add(Int_.To_str_pad_bgn_zero(i, pad))
 				.Add(":").Add(ordered.Get_at(i).toString())
 				.Add(Op_sys.Cur().Nl_str());
 		}

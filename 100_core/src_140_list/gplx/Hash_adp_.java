@@ -34,5 +34,5 @@ class Hash_adp_noop implements Hash_adp {
 	public boolean Add_if_dupe_use_1st(Object key, Object val) {return false;}
 	public void Del(Object key) {}
 	public void Clear() {}
-	public java.util.Iterator iterator() {return gplx.lists.Iterator_null._;}
+	public java.util.Iterator iterator() {return gplx.lists.Iterator_null.Instance;}
 }

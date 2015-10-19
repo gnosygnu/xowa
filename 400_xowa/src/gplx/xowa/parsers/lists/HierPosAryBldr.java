@@ -53,7 +53,7 @@ public class HierPosAryBldr {
 	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryIdx; i++)
-			sb.Add_spr_unless_first(Int_.Xto_str(ary[i]), " ", i);
+			sb.Add_spr_unless_first(Int_.To_str(ary[i]), " ", i);
 		return sb.To_str();
 	}
 	int[] ary; int aryIdx = -1; int root = -1;

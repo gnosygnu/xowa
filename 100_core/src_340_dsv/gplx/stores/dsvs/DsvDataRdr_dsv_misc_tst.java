@@ -52,7 +52,7 @@ public class DsvDataRdr_dsv_misc_tst {
 			,	",val1"
 			);
 		fx.tst_Tbls(DsvTblBldr.NullTblName);
-		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", IntClassXtn._).Add("fld1", StringClassXtn._));
+		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", IntClassXtn.Instance).Add("fld1", StringClassXtn.Instance));
 		fx.tst_Dat(0, fx.ary_(null, "val1"));
 	}
 	@Test  public void Null_String() {
@@ -61,7 +61,7 @@ public class DsvDataRdr_dsv_misc_tst {
 			,	",val1"
 			);
 		fx.tst_Tbls(DsvTblBldr.NullTblName);
-		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", StringClassXtn._).Add("fld1", StringClassXtn._));
+		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", StringClassXtn.Instance).Add("fld1", StringClassXtn.Instance));
 		fx.tst_Dat(0, fx.ary_(null, "val1"));
 	}
 	@Test  public void EmptyString() {
@@ -70,7 +70,7 @@ public class DsvDataRdr_dsv_misc_tst {
 			,	"\"\",val1"
 			);
 		fx.tst_Tbls(DsvTblBldr.NullTblName);
-		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", StringClassXtn._).Add("fld1", StringClassXtn._));
+		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", StringClassXtn.Instance).Add("fld1", StringClassXtn.Instance));
 		fx.tst_Dat(0, fx.ary_("", "val1"));
 	}
 }

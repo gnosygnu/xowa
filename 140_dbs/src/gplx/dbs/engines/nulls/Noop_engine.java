@@ -40,5 +40,5 @@ public class Noop_engine implements Db_engine {
 	public void				Env_db_detach(String alias)						{}
 	public boolean				Meta_tbl_exists(String tbl)						{return false;}
 	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
-        public static final Noop_engine _ = new Noop_engine(); Noop_engine() {}
+        public static final Noop_engine Instance = new Noop_engine(); Noop_engine() {}
 }

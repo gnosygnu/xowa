@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import org.junit.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.tdbs.hives.*;
 public class Xows_page_allpages_tst {		
 	@Before public void init() {fxt.Clear();} private Xows_page_allpages_fxt fxt = new Xows_page_allpages_fxt();
 	@Test  public void Build_data() {

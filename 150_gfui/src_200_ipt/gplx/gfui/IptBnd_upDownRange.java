@@ -31,7 +31,7 @@ public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 		if		(ctx.Match(k, Invk_TxtBox_dec))		ExecCmd(cmd, curVal - 1);
 		else if	(ctx.Match(k, Invk_TxtBox_inc))		ExecCmd(cmd, curVal + 1);
 		else if	(ctx.Match(k, Invk_TxtBox_exec))	{
-			Object valObj = IntClassXtn._.ParseOrNull(txtBox.Text()); if (valObj == null) throw Err_.new_wo_type("invalid int", "text", txtBox.Text());
+			Object valObj = IntClassXtn.Instance.ParseOrNull(txtBox.Text()); if (valObj == null) throw Err_.new_wo_type("invalid int", "text", txtBox.Text());
 			ExecCmd(doIt, Int_.cast(valObj));
 		}
 		else if	(ctx.Match(k, evt))			WhenEvt(ctx, m);
@@ -41,7 +41,7 @@ public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 	public int Adj() {return adj;} public IptBnd_upDownRange Adj_(int v) {adj = v; return this;} int adj;
 	void WhenEvt(GfsCtx ctx, GfoMsg m) {
 		curVal = m.ReadInt(arg) + adj;
-		txtBox.Text_(Int_.Xto_str(curVal));
+		txtBox.Text_(Int_.To_str(curVal));
 	}
 	void ExecCmd(String c, int val) {
 		GfoInvkAble_.InvkCmd_val(src, c, val - adj);

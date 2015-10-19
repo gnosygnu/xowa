@@ -55,14 +55,14 @@ public class GxwCore_lang extends GxwCore_base {
 	@Override public ColorAdp BackColor() {return XtoColorAdp(control.getBackground());}
 	@Override public void BackColor_set(ColorAdp v) {
 		if (control instanceof JComponent) {
-			((JComponent)control).setBackground(ColorAdpCache._.GetNativeColor(v));
+			((JComponent)control).setBackground(ColorAdpCache.Instance.GetNativeColor(v));
 		}
 		else if (control instanceof RootPaneContainer) {
 			RootPaneContainer container = (RootPaneContainer)control;
-			container.getContentPane().setBackground(ColorAdpCache._.GetNativeColor(v));
+			container.getContentPane().setBackground(ColorAdpCache.Instance.GetNativeColor(v));
 		}
 	}
-	@Override public ColorAdp ForeColor() {return XtoColorAdp(control.getForeground());} @Override public void ForeColor_set(ColorAdp v) {control.setForeground(ColorAdpCache._.GetNativeColor(v));}
+	@Override public ColorAdp ForeColor() {return XtoColorAdp(control.getForeground());} @Override public void ForeColor_set(ColorAdp v) {control.setForeground(ColorAdpCache.Instance.GetNativeColor(v));}
 	@Override public FontAdp TextFont() {
 		if (prvFont != null) return prvFont;
 		Font f = control.getFont();

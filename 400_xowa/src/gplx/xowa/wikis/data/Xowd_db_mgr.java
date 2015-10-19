@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;	
 public class Xowd_db_mgr {
 	private Xowd_db_file[] dbs__ary = new Xowd_db_file[0]; private int dbs__ary_len = 0; private final Xowd_db_file_hash db_file_hash = new Xowd_db_file_hash();
@@ -41,7 +41,7 @@ public class Xowd_db_mgr {
 	}
 	public Xowd_db_file				Dbs__make_by_tid(byte tid, String ns_ids, int part_id, String file_name_suffix) {
 		Io_url url = wiki_root_dir.GenSubFil(domain_itm.Domain_str() + file_name_suffix);
-		Xowd_db_file rv = Xowd_db_file.make_(db__core.Info_session(), props, dbs__ary_len, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.I.New(url));
+		Xowd_db_file rv = Xowd_db_file.make_(db__core.Info_session(), props, dbs__ary_len, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.Instance.New(url));
 		Dbs__add_and_save(rv);
 		Dbs__set_by_tid(rv);
 		return rv;
@@ -52,7 +52,7 @@ public class Xowd_db_mgr {
 			Xowd_db_file db = dbs__ary[i];
 			if (!Byte_.In(db.Tid(), tids)) continue;
 			db.Rls();
-			Io_mgr.I.DeleteFil_args(db.Url()).MissingFails_off().Exec();
+			Io_mgr.Instance.DeleteFil_args(db.Url()).MissingFails_off().Exec();
 			db.Cmd_mode_(Db_cmd_mode.Tid_delete);
 		}
 		db__core.Tbl__db().Commit_all(this);
@@ -60,7 +60,7 @@ public class Xowd_db_mgr {
 	}
 	public void Init_by_load(Io_url core_url) {
 		db_file_hash.Clear();
-		Db_conn core_conn = Db_conn_bldr.I.Get(core_url);
+		Db_conn core_conn = Db_conn_bldr.Instance.Get(core_url);
 		props = Xowd_core_db_props.Cfg_load(core_url, core_conn);
 		Dbs__set_by_tid(Xowd_db_file.load_(props, Xowd_db_file_.Id_core, Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
 		dbs__ary = db__core.Tbl__db().Select_all(props, core_url.OwnerDir());
@@ -77,7 +77,7 @@ public class Xowd_db_mgr {
 		String core_file_name = Core_file_name(props.Layout_text(), domain_itm.Domain_str());
 		byte core_db_tid = Core_db_tid(props.Layout_text());
 		Io_url core_db_url = wiki_root_dir.GenSubFil(core_file_name);
-		Db_conn conn = Db_conn_bldr.I.New(core_db_url);
+		Db_conn conn = Db_conn_bldr.Instance.New(core_db_url);
 		conn.Txn_bgn("make__core__tbls");
 		Dbs__set_by_tid(Xowd_db_file.make_(info_session, props, Xowd_db_file_.Id_core, core_db_tid, core_db_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, core_file_name, conn));
 		db__core.Tbl__db().Create_tbl();
@@ -127,8 +127,8 @@ public class Xowd_db_mgr {
 		String tid_idx_str = "";
 		switch (tid) {
 			case Xowd_db_file_.Tid_cat_core		: break;
-			case Xowd_db_file_.Tid_cat_link		: tid_idx_str = "-db." + Int_.Xto_str_pad_bgn_zero(tid_idx, 3); break;
-			default								: tid_idx_str = tid_idx == 1 ? "" : "-db." + Int_.Xto_str_pad_bgn_zero(tid_idx, 3); break;
+			case Xowd_db_file_.Tid_cat_link		: tid_idx_str = "-db." + Int_.To_str_pad_bgn_zero(tid_idx, 3); break;
+			default								: tid_idx_str = tid_idx == 1 ? "" : "-db." + Int_.To_str_pad_bgn_zero(tid_idx, 3); break;
 		}
 		return String_.Format("-{0}{1}.xowa", tid_name, tid_idx_str);	// EX: en.wikipedia.org-text-001.sqlite3
 	}

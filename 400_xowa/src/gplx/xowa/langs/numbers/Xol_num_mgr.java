@@ -31,8 +31,8 @@ public class Xol_num_mgr implements GfoInvkAble {
 		return num;
 	}
 	public byte[] Format_num_no_separators(byte[] num) {return Format_num(num, true);}
-	public byte[] Format_num_by_long(long val)	{return Format_num(Bry_.new_a7(Long_.Xto_str(val)));}
-	public byte[] Format_num(int val)			{return Format_num(Bry_.new_a7(Int_.Xto_str(val)));}
+	public byte[] Format_num_by_long(long val)	{return Format_num(Bry_.new_a7(Long_.To_str(val)));}
+	public byte[] Format_num(int val)			{return Format_num(Bry_.new_a7(Int_.To_str(val)));}
 	public byte[] Format_num(byte[] num)		{return Format_num(num, false);}
 	public byte[] Format_num(byte[] num, boolean skip_commafy) {
 		if (!skip_commafy) {

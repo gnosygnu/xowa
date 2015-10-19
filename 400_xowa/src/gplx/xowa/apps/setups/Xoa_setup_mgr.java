@@ -30,8 +30,8 @@ public class Xoa_setup_mgr {
 	@gplx.Internal protected static void Delete_old_dir(Gfo_usr_dlg usr_dlg, String version_prv, String version_del, Io_url dir) {
 		if (Xoa_version_.Compare(version_prv, version_del) != CompareAble_.Less) return;
 		usr_dlg.Log_many("", "", "setup:checking if dir exists: version_prv=~{0} version_del=~{1} dir=~{2}", version_prv, version_del, dir.Raw());
-		if (!Io_mgr.I.ExistsDir(dir)) return;
+		if (!Io_mgr.Instance.ExistsDir(dir)) return;
 		usr_dlg.Log_many("", "", "setup:deleting dir", version_prv, version_del, dir.Raw());
-		Io_mgr.I.DeleteDirDeep(dir);
+		Io_mgr.Instance.DeleteDirDeep(dir);
 	}
 }

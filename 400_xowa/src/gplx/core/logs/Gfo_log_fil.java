@@ -46,10 +46,10 @@ public class Gfo_log_fil {
 		if (session != null) session.Add_by_bfr(msg_bfr);
 	}
 	public void Flush() {
-		Io_mgr.I.AppendFilBfr(fil_cur, fil_bfr);
+		Io_mgr.Instance.AppendFilBfr(fil_cur, fil_bfr);
 	}
 	private Io_url Fil_new() {
-		String part = size_max == -1 ? "" : "-" + Int_.Xto_str(++file_idx);
+		String part = size_max == -1 ? "" : "-" + Int_.To_str(++file_idx);
 		return dir.OwnerDir().GenSubFil_ary(key, part, ".log");
 	}
 }

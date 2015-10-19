@@ -55,7 +55,7 @@ class Io_line_rdr_fxt {
 	public Io_line_rdr_fxt File_lines_(int count) {
 		for (int i = 0; i < count; i++)
 			tmp.Add_int_fixed(i, 2).Add_byte_nl();
-		Io_mgr.I.SaveFilBry(rdr.Urls()[0], tmp.Xto_bry_and_clear());
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.To_bry_and_clear());
 		return this;
 	}
 //	public Io_url[] Src_fils() {return src_fils;} public Io_line_rdr_fxt Src_fils_(Io_url[] v) {src_fils = v; return this;} Io_url[] src_fils;
@@ -69,14 +69,14 @@ class Io_line_rdr_fxt {
 	public Io_line_rdr_fxt File_lines_pipe_(int count) {
 		for (int i = 0; i < count; i++)
 			tmp.Add_int_fixed(i, 2).Add_byte(Byte_ascii.Pipe).Add_byte_nl();
-		Io_mgr.I.SaveFilBry(rdr.Urls()[0], tmp.Xto_bry_and_clear());
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.To_bry_and_clear());
 		return this;
 	}
 
 	public Io_line_rdr_fxt File_lines_(int fil_idx, int bgn, int end) {
 		for (int i = bgn; i < end; i++)
 			tmp.Add_int_fixed(i, 2).Add_byte_nl();
-		Io_mgr.I.SaveFilBry(rdr.Urls()[fil_idx], tmp.Xto_bry_and_clear());
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[fil_idx], tmp.To_bry_and_clear());
 		return this;
 	}
 	public Io_line_rdr_fxt Clear() {rdr.Clear(); return this;}

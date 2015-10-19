@@ -43,7 +43,7 @@ public class Sqlite_txn_mgr {
 		txn_list.Add(name);
 	}
 	public String Txn_end() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return "";}
+		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return "";}
 		String txn_last = (String)List_adp_.Pop_last(txn_list);
 		if (txn_list.Count() == 0) {// no txns left; commit it
 			engine.Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));
@@ -54,7 +54,7 @@ public class Sqlite_txn_mgr {
 		return txn_last;
 	}
 	public void	Txn_cxl() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
+		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
 		String txn_last = (String)List_adp_.Pop_last(txn_list);
 		if (txn_list.Count() == 0) {// no txns left; rollback
 			engine.Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));
@@ -64,7 +64,7 @@ public class Sqlite_txn_mgr {
 			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("ROLBACK TRANSACTION TO SAVEPOINT {0};", txn_last)));
 	}
 	public void	Txn_sav() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
+		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
 		String name = (String)txn_list.Get_at(txn_list.Count() - 1);
 		this.Txn_end(); this.Txn_bgn(name);
 	}

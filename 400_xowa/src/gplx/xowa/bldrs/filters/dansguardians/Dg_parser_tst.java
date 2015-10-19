@@ -52,6 +52,6 @@ class Dg_parser_fxt {
 		bfr	.Add_str("score=").Add_int_variable(line.Score()).Add_byte_nl()
 			.Add_str("words=").Add_str(String_.Concat_with_str(";", Dg_word.Ary_concat(line.Words(), tmp_bfr, Byte_ascii.Tick))).Add_byte_nl()
 			;
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

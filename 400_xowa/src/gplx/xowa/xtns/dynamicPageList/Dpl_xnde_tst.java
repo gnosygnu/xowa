@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.strings.*; import gplx.xowa.cfgs.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.core.strings.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.nss.*;
 public class Dpl_xnde_tst {
 	private Dpl_xnde_fxt fxt = new Dpl_xnde_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -173,6 +173,16 @@ public class Dpl_xnde_tst {
 		fxt.Fxt().Test_parse_page_wiki_str("<dynamicpagelist>category=a</dynamicpagelist>", "No pages meet these criteria.");
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached invalid ns_page for next tests
 	}
+	@Test  public void Ordermethod__invalid() {	// PURPOSE: do not fail if ordermethod is invalid; PAGE:sr.d:Викиречник:Википројекат_1001_арапска_реч/Списак_уноса; DATE:2015-10-16
+		fxt.Ctg_create("Ctg_0", "A", "B", "C");
+		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
+		( "<DynamicPageList>"
+		, "category=Ctg_0"
+		, "ordermethod=ascending"	// should not throw error
+		, "ordermethod=sortkey"
+		, "</DynamicPageList>")
+		, fxt.Ul(Itm_html_null, "A", "B", "C"));
+	}
 	private static final String Itm_html_null = null;
 }
 class Dpl_page_mok {
@@ -194,7 +204,7 @@ class Dpl_xnde_fxt {
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
 		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 	}
 	public Xowe_wiki Wiki() {return fxt.Wiki();}
 	public Xop_fxt Fxt() {return fxt;}
@@ -234,7 +244,7 @@ class Dpl_xnde_fxt {
 			bfr.Add(">").Add(page).Add("</a></li>").Add_char_nl();
 		}
 		bfr.Add("</ul>").Add_char_nl();
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public void Ul_pages(String raw, String expd) {
 		fxt.Test_parse_page_wiki_str(raw, expd);

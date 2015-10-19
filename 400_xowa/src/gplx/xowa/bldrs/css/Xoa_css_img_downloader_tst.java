@@ -82,8 +82,8 @@ public class Xoa_css_img_downloader_tst {
 	@Test  public void Clean_exc_site_only() 		{fxt.Test_clean_img_url("//site"								, null);}
 	@Test  public void Clean_exc_site_only_2() 		{fxt.Test_clean_img_url("//site/"								, null);}
 	@Test  public void Import_url() {
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem/www/b.css", "imported_css");
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem/www/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"mem/www/b.css\") screen; z"
 		, 	String_.Concat_lines_nl
@@ -101,8 +101,8 @@ public class Xoa_css_img_downloader_tst {
 		fxt.Test_import_url("https://a.org"			, "https://a.org");	// unless starts with https EX:: handle @import(https://...); PAGE:tr.n:Main_Page; DATE:2014-06-04
 	}
 	@Test  public void Import_url_relative() {	// PURPOSE: if directory, add domain; "/a/b.css" -> "//domain/a/b.css"; DATE:2014-02-03
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem/en.wikipedia.org/www/b.css", "imported_css");
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem/en.wikipedia.org/www/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"/www/b.css\") screen; z"	// starts with "/"
 		, 	String_.Concat_lines_nl
@@ -116,8 +116,8 @@ public class Xoa_css_img_downloader_tst {
 	}
 	@Test  public void Import_url_relative_skip() {	// PURPOSE: if rel path, skip; "//site/a/b.css"; DATE:2014-02-03
 		fxt.Downloader().Stylesheet_prefix_(Bry_.new_a7("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem//en.wikipedia.org/a/b.css", "imported_css");
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem//en.wikipedia.org/a/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"//en.wikipedia.org/a/b.css\") screen; z"	// starts with "//"
 		, 	String_.Concat_lines_nl
@@ -130,8 +130,8 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Import_url_space() {		// PURPOSE: some css has spaces; replace with underlines else fails when downloaded; EX: https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem/www/b_c.css", "imported_css");
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem/www/b_c.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"mem/www/b c.css\") screen; z"
 		, 	String_.Concat_lines_nl
@@ -145,8 +145,8 @@ public class Xoa_css_img_downloader_tst {
 	}
 	@Test  public void Wikisource_freedimg() {	// PURPOSE: check that "wikimedia" is replaced for FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
 		fxt.Downloader().Stylesheet_prefix_(Bry_.new_a7("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
-		Io_mgr.I.InitEngine_mem();
-		Io_mgr.I.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
+		Io_mgr.Instance.InitEngine_mem();
+		Io_mgr.Instance.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
 		fxt.Test_css_convert
 		(	"x @import url(\"//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css\") screen; z"	// starts with "//"
 		, 	String_.Concat_lines_nl

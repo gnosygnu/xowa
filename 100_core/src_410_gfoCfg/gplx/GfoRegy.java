@@ -32,8 +32,8 @@ public class GfoRegy implements GfoInvkAble {
 	public void Del(String key) {hash.Del(key);}
 	public void RegObj(String key, Object val) {RegItm(key, val, GfoRegyItm.ValType_Obj, Io_url_.Empty);}
 	public void RegDir(Io_url dirUrl, String match, boolean recur, String chopBgn, String chopEnd) {
-		Io_url[] filUrls = Io_mgr.I.QueryDir_args(dirUrl).FilPath_(match).Recur_(recur).ExecAsUrlAry();
-		if (filUrls.length == 0 && !Io_mgr.I.ExistsDir(dirUrl)) {UsrDlg_._.Stop(UsrMsg.new_("dirUrl does not exist").Add("dirUrl", dirUrl.Xto_api())); return;}
+		Io_url[] filUrls = Io_mgr.Instance.QueryDir_args(dirUrl).FilPath_(match).Recur_(recur).ExecAsUrlAry();
+		if (filUrls.length == 0 && !Io_mgr.Instance.ExistsDir(dirUrl)) {UsrDlg_.Instance.Stop(UsrMsg.new_("dirUrl does not exist").Add("dirUrl", dirUrl.Xto_api())); return;}
 		for (Io_url filUrl : filUrls) {
 			String key = filUrl.NameAndExt();
 			int pos = String_.Find_none;
@@ -89,6 +89,6 @@ public class GfoRegy implements GfoInvkAble {
 	}
 	Hash_adp hash = Hash_adp_.new_();
 	public static final String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
-        public static final GfoRegy _ = new GfoRegy(); GfoRegy() {}
+        public static final GfoRegy Instance = new GfoRegy(); GfoRegy() {}
         @gplx.Internal protected static GfoRegy new_() {return new GfoRegy();}
 }

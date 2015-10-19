@@ -38,7 +38,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 			,	"0,me"
 			,	"1,you"
 			);
-		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", IntClassXtn._).Add("fld1", StringClassXtn._));
+		fx.tst_Flds(0, GfoFldList_.new_().Add("fld0", IntClassXtn.Instance).Add("fld1", StringClassXtn.Instance));
 		fx.tst_Dat(0
 			,	fx.ary_(0, "me")
 			,	fx.ary_(1, "you")
@@ -51,7 +51,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 			,	"0,me"
 			,	"1,you"
 			);
-		fx.tst_Flds(0, GfoFldList_.new_().Add("id", IntClassXtn._).Add("name", StringClassXtn._));
+		fx.tst_Flds(0, GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance));
 		fx.tst_Dat(0
 			,	fx.ary_(0, "me")
 			,	fx.ary_(1, "you")

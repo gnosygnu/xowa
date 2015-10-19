@@ -19,9 +19,9 @@ package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import
 import gplx.ios.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.sqls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.apis.xowa.bldrs.imports.*;
+import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 class Xob_wbase_json_dump_db {
 	private final Gfo_usr_dlg usr_dlg; private final Xoae_app app; private final Xowe_wiki wiki; private final Xob_bldr bldr;

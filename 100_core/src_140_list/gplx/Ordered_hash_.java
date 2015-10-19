@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.primitives.*;
 public class Ordered_hash_ {
-	public static Ordered_hash new_()			{return new Ordered_hash_base();}
-	public static Ordered_hash new_bry_()		{return new Ordered_hash_bry();}
+	public static Ordered_hash New()			{return new Ordered_hash_base();}
+	public static Ordered_hash New_bry()		{return new Ordered_hash_bry();}
 }
 class Ordered_hash_bry extends Ordered_hash_base {
 	private final Bry_obj_ref tmp_ref = Bry_obj_ref.null_();

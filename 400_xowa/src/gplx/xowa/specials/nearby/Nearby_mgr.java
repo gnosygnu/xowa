@@ -52,7 +52,7 @@ public class Nearby_mgr implements Xows_page {
 			tmp_bfr.Add_str_a7("</tr>");
 		}
 		tmp_bfr.Add_str_a7("</table>");
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	Bry_fmtr form_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"<form id='xowa_nearby_form' action='/wiki/Special:XowaNearby'>"
@@ -66,7 +66,7 @@ public class Nearby_mgr implements Xows_page {
 		,	"</form>"
 		));
 	Xoa_ttl trg_ttl;
-	Ordered_hash src_pool = Ordered_hash_.new_bry_();
+	Ordered_hash src_pool = Ordered_hash_.New_bry();
 	public List_adp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
 		this.wiki = wiki; this.excluded = excluded;
 		Xoa_ttl src_ttl = Xoa_ttl.parse(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
@@ -84,7 +84,7 @@ public class Nearby_mgr implements Xows_page {
 	}
 	private void Examine_page(Ordered_hash src_pool){
 		int len = src_pool.Count();
-		Ordered_hash next_pool = Ordered_hash_.new_bry_();
+		Ordered_hash next_pool = Ordered_hash_.New_bry();
 		for (int i = 0; i < len; i++) {
 			Nearby_itmx itmx = (Nearby_itmx)src_pool.Get_at(i);
 			Xoa_ttl ttl = itmx.Ttl();
@@ -95,7 +95,7 @@ public class Nearby_mgr implements Xows_page {
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			if (page.Missing()) continue;
 			wiki.Parser_mgr().Parse(page, true);
-			Ordered_hash lnkis = Ordered_hash_.new_bry_();
+			Ordered_hash lnkis = Ordered_hash_.New_bry();
 			Collect_lnkis(lnkis, page.Root());
 			if (lnkis.Has(trg)) {
 				++results_cur;
@@ -114,7 +114,7 @@ public class Nearby_mgr implements Xows_page {
 			Examine_page(next_pool);
 //			++pages_count;
 //			wiki.Parser_mgr().Parse(page, true);
-//			Ordered_hash lnkis = Ordered_hash_.new_bry_();
+//			Ordered_hash lnkis = Ordered_hash_.New_bry();
 //			int len = lnkis.Count();
 //			for (int i = 0; i < len; i++) {
 //				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(i);
@@ -135,7 +135,7 @@ public class Nearby_mgr implements Xows_page {
 //			if (page.Missing()) return;
 //			++pages_count;
 //			wiki.Parser_mgr().Parse(page, true);
-//			Ordered_hash lnkis = Ordered_hash_.new_bry_();
+//			Ordered_hash lnkis = Ordered_hash_.New_bry();
 //			Collect_lnkis(lnkis, page.Root());
 //			if (lnkis.Has(trg)) {
 //				++results_cur;

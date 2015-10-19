@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.net.*; import gplx.xowa.urls.*;
+import gplx.core.net.*; import gplx.xowa.apps.urls.*;
 import gplx.xowa.apps.progs.*; import gplx.xowa.wikis.xwikis.*;	
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.Wiki().Utl__url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); 
@@ -288,7 +288,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		byte[] rhs_dlm_bry = Bry_quote;
 		if (lhs_dlm_pos - proto_end_pos > 0) {
 			Bry_bfr bfr = ctx.App().Utl__bfr_mkr().Get_k004();
-			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).Xto_bry_and_clear();
+			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).To_bry_and_clear();
 			bfr.Mkr_rls();
 		}
 		int rhs_dlm_pos = Bry_find_.Find_fwd(src, rhs_dlm_bry, lnke_bgn_pos, src_len); if (rhs_dlm_pos == Bry_.NotFound) return ctx.Lxr_make_txt_(cur_pos);

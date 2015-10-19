@@ -19,7 +19,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; 
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.wikis.tdbs.metas.*;
 public class Xow_file_mgr implements GfoInvkAble {
 	private Xof_wkr_mgr wkr_mgr;
 	public Xow_file_mgr(Xowe_wiki wiki) {
@@ -40,7 +40,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public byte Version() {
 		if (version == Bool_.__byte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
-			if (!Io_mgr.I.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
+			if (!Io_mgr.Instance.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
 				version = Version_1;
 				fsdb_mode = Xof_fsdb_mode.new_v0();
 			}
@@ -121,7 +121,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 		if (	db_core == null			// "-file-core.xowa" not found
 			&&	!wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()	// DATE:2015-08-10
 			)
-			db_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, false);	// make it
+			db_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, false);	// make it
 		this.version = Version_2;
 		this.fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 		orig_mgr.Init_by_wiki(wiki, fsdb_mode, db_core.File__orig_tbl_ary(), Xof_url_bldr.new_v2());

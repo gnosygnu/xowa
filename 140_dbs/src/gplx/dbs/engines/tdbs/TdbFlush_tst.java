@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.ios.*; /*IoMgrFxt*/ import gplx.dbs.qrys.*;
 public class TdbFlush_tst {
 	@Before public void setup() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		engine = fx_engine.run_MakeEngine(dbPath);
 	}
 	TdbEngine engine; Io_url dbPath = Io_url_.mem_fil_("mem/dir/db0.dsv"); DateAdp time = DateAdp_.parse_gplx("2001-01-01");
@@ -82,14 +82,14 @@ public class TdbFlush_tst {
 class TdbEngineFxt {
 	public TdbEngine run_MakeEngine(Io_url url) {
 		Db_conn_info connectInfo = Db_conn_info_.tdb_(url);
-		TdbEngine engine = (TdbEngine)TdbEngine._.New_clone(connectInfo);
+		TdbEngine engine = (TdbEngine)TdbEngine.Instance.New_clone(connectInfo);
 		engine.Conn_open();
 		return engine;
 	}
 	public TdbFile run_MakeFile(TdbEngine engine, Io_url url) {return engine.Db().MakeFile(url);}
 	public TdbTable run_MakeTbl(TdbEngine engine, String tblName, int srcId) {
 		TdbTable rv = engine.Db().MakeTbl(tblName, srcId);
-		rv.Flds().Add("id", IntClassXtn._);
+		rv.Flds().Add("id", IntClassXtn.Instance);
 		return rv;
 	}
 	public void run_InsertRow(TdbEngine engine, String tblName, int idVal) {
@@ -106,14 +106,14 @@ class TdbEngineFxt {
 	public static TdbEngineFxt new_() {return new TdbEngineFxt();} TdbEngineFxt() {}
 }
 class IoMgrFxt {
-	public void run_UpdateFilModifiedTime(Io_url url, DateAdp val) {Io_mgr.I.UpdateFilModifiedTime(url, val);}
+	public void run_UpdateFilModifiedTime(Io_url url, DateAdp val) {Io_mgr.Instance.UpdateFilModifiedTime(url, val);}
 	public void tst_QueryFilModified(boolean expdMatch, Io_url url, DateAdp expt) {
-		IoItmFil filItem = Io_mgr.I.QueryFil(url);
+		IoItmFil filItem = Io_mgr.Instance.QueryFil(url);
 		DateAdp actl = filItem.ModifiedTime();
 		boolean actlMatch = String_.Eq(expt.XtoStr_gplx(), actl.XtoStr_gplx());
 		Tfds.Eq(expdMatch, actlMatch, expt.XtoStr_gplx() + (expdMatch ? "!=" : "==") + actl.XtoStr_gplx());
 	}
-	public void tst_Exists(boolean expd, Io_url url) {Tfds.Eq(expd, Io_mgr.I.ExistsFil(url));}
+	public void tst_Exists(boolean expd, Io_url url) {Tfds.Eq(expd, Io_mgr.Instance.ExistsFil(url));}
 
 	public static IoMgrFxt new_() {return new IoMgrFxt();} IoMgrFxt() {}
 }

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
 	private Xob_dump_src_id page_src;
@@ -261,7 +261,7 @@ class Xob_dump_mgr_base_ {
 class Xob_dump_bmk_mgr {
 	private Bry_bfr save_bfr = Bry_bfr.reset_(1024);
 	public Io_url Cfg_url() {return cfg_url;} public Xob_dump_bmk_mgr Cfg_url_(Io_url v) {cfg_url = v; return this;} private Io_url cfg_url;
-	public void Reset() {Io_mgr.I.DeleteFil(cfg_url);}
+	public void Reset() {Io_mgr.Instance.DeleteFil(cfg_url);}
 	public void Load(Xoae_app app, Xob_dump_mgr_base dump_mgr) {
 		app.Gfs_mgr().Run_url_for(dump_mgr, cfg_url);
 	}
@@ -269,7 +269,7 @@ class Xob_dump_bmk_mgr {
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_ns_bgn_, ns_id);
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_db_bgn_, db_id);
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_pg_bgn_, pg_id);
-		Io_mgr.I.SaveFilBfr(cfg_url, save_bfr);
+		Io_mgr.Instance.SaveFilBfr(cfg_url, save_bfr);
 	}
 	private void Save_itm(Bry_bfr save_bfr, String key, int val) {
 		String fmt = "{0}('{1}');\n";
@@ -301,9 +301,9 @@ class Xob_rate_mgr {
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;
-		Io_mgr.I.AppendFilByt(log_file, save_bfr.Xto_bry_and_clear());
+		Io_mgr.Instance.AppendFilByt(log_file, save_bfr.To_bry_and_clear());
 	}
-	public String Rate_as_str() {return Int_.Xto_str(Rate());}
+	public String Rate_as_str() {return Int_.To_str(Rate());}
 	public int Rate() {
 		int elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
 		return Math_.Div_safe_as_int(item_len, elapsed);

@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.ios.*;
 import gplx.fsdb.meta.*;
 class Xob_bin_db_mgr {
 	private final int[] ns_ids; private final int ns_ids_len;
-	private final Ordered_hash nth_hash = Ordered_hash_.new_(); private final Int_obj_ref tier_key = Int_obj_ref.neg1_();
+	private final Ordered_hash nth_hash = Ordered_hash_.New(); private final Int_obj_ref tier_key = Int_obj_ref.neg1_();
 	public Xob_bin_db_mgr(int[] ns_ids) {
 		this.ns_ids = ns_ids; this.ns_ids_len = ns_ids.length;
 	}
@@ -48,7 +48,7 @@ class Xob_bin_db_mgr {
 		for (int i = 0; i < len; ++i) {	// iterated tiers to calculate max_size
 			Xob_bin_db_itm nth = (Xob_bin_db_itm)nth_hash.Get_at(i);
 			if (nth.Id() == -1) continue;	// ignore default nth
-			IoItmFil nth_itm = Io_mgr.I.QueryFil(nth.Db_url());
+			IoItmFil nth_itm = Io_mgr.Instance.QueryFil(nth.Db_url());
 			nth.Db_len_(nth_itm.Size());
 		}
 	}

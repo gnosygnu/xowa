@@ -29,7 +29,7 @@ class Xof_redlink_wkr implements Gfo_thread_wkr {
 		int len = uids.length;
 		for (int i = 0; i < len; ++i) {
 			int uid = uids[i];
-			js_wkr.Html_atr_set(Int_.Xto_str(uid), "", "");
+			js_wkr.Html_atr_set(Int_.To_str(uid), "", "");
 		}
 	}
 }

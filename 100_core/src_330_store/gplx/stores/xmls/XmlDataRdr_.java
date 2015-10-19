@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.stores.xmls; import gplx.*; import gplx.stores.*;
 public class XmlDataRdr_ {
 	public static XmlDataRdr file_(Io_url url) {
-		String text = Io_mgr.I.LoadFilStr(url);
+		String text = Io_mgr.Instance.LoadFilStr(url);
 		return new XmlDataRdr(text);
 	}
 	public static XmlDataRdr text_(String text) {return new XmlDataRdr(text);}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.ios.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.xdats.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_make_cmd_site implements Io_make_cmd {
 	Xob_xdat_file_wtr fil_wtr; Bry_bfr cur_bfr = Bry_bfr.new_(), reg_bfr = Bry_bfr.new_(), reg_key_0 = Bry_bfr.new_(512), reg_key_n = Bry_bfr.new_(512);
 	int make_fil_max = 65 * Io_mgr.Len_kb, fil_count = 0, itm_count = 0, itm_key_end = 0; Io_url reg_url;
@@ -84,7 +84,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 		fil_wtr.Bfr().Add_bfr_and_clear(cur_bfr);
 		fil_wtr.Add_idx(line_dlm);
 		Flush();
-		Io_mgr.I.AppendFilBfr(reg_url, reg_bfr);
+		Io_mgr.Instance.AppendFilBfr(reg_url, reg_bfr);
 		//fil_wtr.Rls(); cur_bfr.Rls(); fil_wtr.Rls(); reg_bfr.Rls(); reg_key_0.Rls(); reg_key_n.Rls();
 	}
 //		private void Flush_large(byte[] bry, int itm_bgn, int itm_end, int itm_len) {
@@ -93,7 +93,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 //			fil_wtr.Add_idx_direct(itm_len, Byte_.Zero);
 //			IoStream stream = IoStream_.Null;
 //			try {
-//				stream = Io_mgr.I.OpenStreamWrite(fil_wtr.Fil_url());
+//				stream = Io_mgr.Instance.OpenStreamWrite(fil_wtr.Fil_url());
 //				fil_wtr.FlushIdx(stream);
 //				stream.Write_and_flush(bry, itm_bgn, itm_end);
 //				fil_wtr.Clear();

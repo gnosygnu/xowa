@@ -60,5 +60,5 @@ class Gfo_pattern_itm_wild implements Gfo_pattern_itm {
 		return ctx.Itm_idx_is_last() ? src_len : pos;
 	}
 	public void Xto_str(String_bldr sb) {sb.Add(this.Tid()).Add("|*");}
-	public static final Gfo_pattern_itm_wild _ = new Gfo_pattern_itm_wild(); Gfo_pattern_itm_wild() {}
+	public static final Gfo_pattern_itm_wild Instance = new Gfo_pattern_itm_wild(); Gfo_pattern_itm_wild() {}
 }

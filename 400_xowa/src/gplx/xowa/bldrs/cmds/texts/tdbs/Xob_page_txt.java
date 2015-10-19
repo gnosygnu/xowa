@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.xdats.*; import gplx.xowa.tdbs.stats.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*; import gplx.xowa.wikis.tdbs.stats.*;
 public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public Xob_page_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return Xob_cmd_keys.Key_tdb_make_page;}
@@ -29,7 +29,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.Appe().Setup_mgr().Dump_mgr().Data_storage_format();
 		fsys_mgr = wiki.Tdb_fsys_mgr();			
 		make_dir = fsys_mgr.Ns_dir();
-		if (Io_mgr.I.QueryDir_args(make_dir).DirOnly_().ExecAsUrlAry().length > 0) throw bldr.Usr_dlg().Fail_many("xowa.bldr.itm", "dir_empty", "dir_must_be_empty: ~{0}", make_dir.Raw());
+		if (Io_mgr.Instance.QueryDir_args(make_dir).DirOnly_().ExecAsUrlAry().length > 0) throw bldr.Usr_dlg().Fail_many("xowa.bldr.itm", "dir_empty", "dir_must_be_empty: ~{0}", make_dir.Raw());
 		this.Init_dump(Xob_cmd_keys.Key_tdb_make_page, make_dir);
 		this.data_rpt_typ = stat_mgr.GetOrNew(Xotdb_dir_info_.Tid_page);
 		ttl_wtr_mgr = new Xob_tmp_wtr_mgr(new Xob_tmp_wtr_wkr__ttl(temp_dir, dump_fil_len));			
@@ -60,7 +60,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		ttl_wtr_mgr.Flush_all(bldr.Usr_dlg());
 		Xobdc_merger.Ns(bldr.Usr_dlg(), ttl_wtr_mgr.Regy(), Xotdb_dir_info_.Name_title, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_cmd_ns(bldr.Usr_dlg()));
 		ttl_wtr_mgr.Rls_all();
-		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.Instance.DeleteDirDeep(temp_dir);
 	}
 	public void Wkr_print() {bldr.Usr_dlg().Note_many(GRP_KEY, "print", "~{0}", stat_mgr.Print(wiki.Ns_mgr()));}
 	Xob_xdat_file_wtr Page_wtr_get(Xow_ns ns) {

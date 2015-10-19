@@ -28,7 +28,7 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
 	public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
 		bldr.Import_marker().Bgn(wiki);
-		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_type_.Int__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
+		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Int__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
 		if (wbase_enabled == Bool_.Y_byte)		// if wbase_enabled, auto-add wdata_wkrs bldr
 			this.Cmd_ini_wdata(bldr, wiki);
 	}
@@ -45,7 +45,7 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 		if (wiki.Appe().Setup_mgr().Dump_mgr().Css_wiki_update()) {
 			Io_url url = wiki.Appe().Fsys_mgr().Wiki_css_dir(wiki.Domain_str()).GenSubFil(Xoa_css_extractor.Css_wiki_name);
 			usr_dlg.Log_many("", "", "deleting css: ~{0}", url.Raw());
-			Io_mgr.I.DeleteFil_args(url).MissingFails_off().Exec();
+			Io_mgr.Instance.DeleteFil_args(url).MissingFails_off().Exec();
 		}
 	}
 	public void Cmd_term() {}

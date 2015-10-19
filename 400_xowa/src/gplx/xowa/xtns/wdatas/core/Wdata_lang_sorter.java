@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.apis.xowa.xtns.*;
+import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_lang_sorter implements GfoEvObj, gplx.lists.ComparerAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Wdata_lang_sorter() {evMgr = GfoEvMgr.new_(this);}

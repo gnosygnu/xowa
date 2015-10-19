@@ -17,32 +17,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
 	private int xatr_lat = Xatr_meridian_null, xatr_long = Xatr_meridian_null;
-	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
-		if (xatr_obj == null) return;
-		byte xatr_tid = ((Byte_obj_val)xatr_obj).Val();
-		switch (xatr_tid) {
-			case Listing_xatrs.Tid_name:		xatr_name = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_alt:			xatr_alt = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_address:		xatr_address = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_directions:	xatr_directions = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_phone:		xatr_phone = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_tollfree:	xatr_tollfree = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_email:		xatr_email = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_fax:			xatr_fax = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_url:			xatr_url = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_hours:		xatr_hours = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_price:		xatr_price = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_checkin:		xatr_checkin = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_checkout:	xatr_checkout = xatr.Val_as_bry__blank_to_null(src); break;
-			case Listing_xatrs.Tid_lat:			xatr_lat = xatr.Val_as_int_or(src, Xatr_meridian_null); break;
-			case Listing_xatrs.Tid_long:		xatr_long = xatr.Val_as_int_or(src, Xatr_meridian_null); break;
+	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
+		if (xatr_id_obj == null) return;
+		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		switch (xatr_id.Val()) {
+			case Listing_xatrs.Tid_name:		xatr_name = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_alt:			xatr_alt = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_address:		xatr_address = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_directions:	xatr_directions = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_phone:		xatr_phone = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_tollfree:	xatr_tollfree = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_email:		xatr_email = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_fax:			xatr_fax = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_url:			xatr_url = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_hours:		xatr_hours = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_price:		xatr_price = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_checkin:		xatr_checkin = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_checkout:	xatr_checkout = xatr.Val_as_bry__blank_to_null(); break;
+			case Listing_xatrs.Tid_lat:			xatr_lat = xatr.Val_as_int_or(Xatr_meridian_null); break;
+			case Listing_xatrs.Tid_long:		xatr_long = xatr.Val_as_int_or(Xatr_meridian_null); break;
 		}
 	}
 	private void Init_args() {
@@ -68,13 +68,12 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		this.wiki = wiki; this.parser = wiki.Parser_mgr().Main(); this.msg_mgr = wiki.Lang().Msg_mgr();
 		xtn_mgr = (Listing_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Listing_xtn_mgr.Xtn_key_static);
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) return;
-		Xoae_app app = wiki.Appe();
-		Xop_xatr_itm[] atrs = Xop_xatr_itm.Xatr_parse(app, this, Listing_xatrs.Key_hash, wiki, src, xnde);
+		Mwh_atr_itm[] atrs = Xox_xnde_.Xatr__set(wiki, this, Listing_xatrs.Key_hash, src, xnde);
 		Init_args();
 		Html_wtr hwtr = xtn_mgr.Hwtr();
 		if (!Bld_by_template(xnde, atrs, src)) {
 			Bld_by_args(xtn_mgr, hwtr, xnde, src);
-			html_output = hwtr.Xto_bry_and_clear();
+			html_output = hwtr.To_bry_and_clear();
 		}
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
@@ -83,26 +82,26 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		else
 			bfr.Add(html_output);
 	}
-	private boolean Bld_by_template(Xop_xnde_tkn xnde, Xop_xatr_itm[] atrs, byte[] src) {
+	private boolean Bld_by_template(Xop_xnde_tkn xnde, Mwh_atr_itm[] atrs, byte[] src) {
 		byte[] listings_template = xtn_mgr.Listings_template();
 		if (listings_template == null) return false;
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		bfr.Add(Xoa_consts.Invk_bgn);			// "{{"
+		bfr.Add(Bry__invk_bgn);					// "{{"
 		bfr.Add(listings_template);				// name
 		int atrs_len = atrs.length;
 		for (int i = 0; i < atrs_len; i++) {
-			Xop_xatr_itm atr = atrs[i];
+			Mwh_atr_itm atr = atrs[i];
 			bfr.Add_byte_pipe();				// "|"
 			byte[] atr_key = atr.Key_bry(); if (atr_key == null) continue;	// skip keyless atrs; PAGE:nl.v:Rome;EX:<sleep phone='' "abc"/> DATE:2014-06-04
 			bfr.Add(atr_key);					// key
 			bfr.Add_byte(Byte_ascii.Eq);		// "="
-			bfr.Add(atr.Val_as_bry(src));		// val; NOTE: must use Val_as_bry(src), not Val_bry, else int or "" will not be captured; DATE:2014-05-21
+			bfr.Add(atr.Val_as_bry());			// val; NOTE: must use Val_as_bry(src), not Val_bry, else int or "" will not be captured; DATE:2014-05-21
 		}
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {
 			bfr.Add_byte_pipe();				// "|"
 			bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		}
-		bfr.Add(Xoa_consts.Invk_end);			// "}}"
+		bfr.Add(Bry__invk_end);					// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
 		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
 		return true;
@@ -110,7 +109,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Html_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
 		wtr.Nde_full(Tag_strong, xatr_name);							// <strong>name</strong>
 		if (xatr_url != null)
-			wtr.Nde_full_atrs(Tag_a, wtr.Xto_bry_and_clear(), false
+			wtr.Nde_full_atrs(Tag_a, wtr.To_bry_and_clear(), false
 			, Atr_a_href		, xatr_url
 			, Atr_a_class		, Atr_a_class_external_text
 			, Atr_a_rel			, Atr_a_rel_nofollow
@@ -200,11 +199,11 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (position_template == null) return null;
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 		byte[] rv = position_template.Fmt(tmp_bfr, xatr_lat, xatr_long);
-		tmp_bfr.Add(Xoa_consts.Invk_bgn);			// "{{"
+		tmp_bfr.Add(Bry__invk_bgn);					// "{{"
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
-		tmp_bfr.Add(Xoa_consts.Invk_end);			// "}}"
+		tmp_bfr.Add(Bry__invk_end);					// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.Xto_bry_and_clear());
+		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
 		Xol_msg_itm position_text = xtn_mgr.Position_text();
 		if (Bry_.Len_eq_0(position_text.Val())) return rv;
 		return position_text.Fmt(tmp_bfr, rv);
@@ -227,6 +226,10 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	, Txt_colon_space				= Bry_.new_a7(": ")
 	, Txt_dot_space					= Bry_.new_a7(". ")
 	, Txt_mailto					= Bry_.new_a7("mailto:")
+	;
+	private static final byte[]
+	  Bry__invk_bgn					= gplx.xowa.parsers.tmpls.Xop_curly_bgn_lxr.Hook
+	, Bry__invk_end					= gplx.xowa.parsers.tmpls.Xop_curly_end_lxr.Hook
 	;
 }
 class Listing_xatrs {

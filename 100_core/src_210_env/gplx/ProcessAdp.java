@@ -61,7 +61,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		if (!args_fmtr.Fmt_null()) {
 			Bry_bfr tmp_bfr = Bry_bfr.new_();
 			args_fmtr.Bld_bfr_many(tmp_bfr, args);
-			args_str = tmp_bfr.Xto_str_and_clear();
+			args_str = tmp_bfr.To_str_and_clear();
 		}
 		prog_dlg.Log_many(GRP_KEY, "run", "running process: ~{0} ~{1}", exe_url.Raw(), args_str);
 		exit_code = Exit_init;
@@ -158,7 +158,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	        			elapsed = notify_checkpoint;
 	        			notify_checkpoint += notify_interval;
 	        			notify_fmtr.Bld_bfr_many(notify_bfr, exe_url.NameAndExt(), args_str, elapsed / 1000);
-	        			prog_dlg.Prog_none(GRP_KEY, "notify.prog", notify_bfr.Xto_str_and_clear());
+	        			prog_dlg.Prog_none(GRP_KEY, "notify.prog", notify_bfr.To_str_and_clear());
 	        		}
 	        	}
 	        	if (thread_timeout == 0) break;
@@ -179,7 +179,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		}
 		if (elapsed != notify_checkpoint) {
 			notify_fmtr.Bld_bfr_many(notify_bfr, exe_url.NameAndExt(), args_str, elapsed / 1000);
-			if (prog_dlg != null) prog_dlg.Prog_none(GRP_KEY, "notify.prog", notify_bfr.Xto_str_and_clear());
+			if (prog_dlg != null) prog_dlg.Prog_none(GRP_KEY, "notify.prog", notify_bfr.To_str_and_clear());
 		}
         return this;
     }
@@ -241,7 +241,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
         exit_code = process.exitValue();
         WhenEnd_run();
         process.destroy();
-    	rslt_out = sb.Xto_str_and_clear();    	
+    	rslt_out = sb.To_str_and_clear();    	
 	}
 	public void Process_term() {
 		try {
@@ -327,7 +327,7 @@ class Thread_ProcessAdp_sync extends Thread {
 	        String result = input_gobbler.Rslt() + "\n" + error_gobbler.Rslt();
 	        process_adp.Process_post(result);
     	} 	catch (Exception e) {	// NOTE: warn; do not throw, else multiple errors if timidity not available; PAGE:fr.u:Pentatoniques_altérées/Gammes_avec_deux_notes_altérées DATE:2015-05-08
-    		Gfo_usr_dlg_.I.Warn_many("", "", "process.sync failed; cmd=~{0} args=~{1}", process_adp.Exe_url().Raw(), process_adp.Args_str());    		
+    		Gfo_usr_dlg_.Instance.Warn_many("", "", "process.sync failed; cmd=~{0} args=~{1}", process_adp.Exe_url().Raw(), process_adp.Args_str());    		
     	}
     	finally {done = true;}
     }
@@ -347,7 +347,7 @@ class StreamGobbler extends Thread {
 				sb.Add(s);
 			}
 			stream.close();
-			rslt = sb.Xto_str_and_clear();
+			rslt = sb.To_str_and_clear();
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "io", "failed reading stream", "name", name);}
 	}

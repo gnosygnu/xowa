@@ -29,5 +29,5 @@ public class Bry_fmtr_arg_ {
 	public static final Bry_fmtr_arg Noop = new Bry_fmtr_arg__noop();
 }
 class Bry_fmtr_arg__noop implements Bry_fmtr_arg {
-	public void XferAry(Bry_bfr trg, int idx) {}
+	public void Fmt__do(Bry_bfr bfr) {}
 }

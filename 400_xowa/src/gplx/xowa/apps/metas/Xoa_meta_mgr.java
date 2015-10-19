@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.wms.sites.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.bldrs.wms.sites.*;
 public class Xoa_meta_mgr {
 	private final Xoa_app app;
 	private final Hash_adp_bry ns__hash = Hash_adp_bry.cs();
@@ -34,10 +34,6 @@ public class Xoa_meta_mgr {
 			Ns__add(wiki_domain, rv);
 		}
 		return rv;
-	}
-	public void Init_by_wiki(Xow_wiki wiki) {
-		Core_db__assert();
-		core_db.Load_extensiontag(wiki.Domain_itm(), wiki.Mw_parser_mgr().Xnde_tag_regy());
 	}
 	private void Core_db__assert() {
 		if (core_db == null) core_db = new Site_core_db(app.Fsys_mgr().Cfg_site_meta_fil());

@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.strings.*;
 public class Gfo_usr_dlg__gui_test implements Gfo_usr_dlg__gui {
-	public String[] Xto_str_ary() {return msgs.To_str_ary();}
+	public String[] Xto_str_ary()			{return msgs.To_str_ary();}
+	public String[] Xto_str_ary_and_clear() {String[] rv = msgs.To_str_ary(); this.Clear(); return rv;}
 	public List_adp Warns() {return warns;}
 	public String_ring Prog_msgs() {return ring;} String_ring ring = new String_ring().Max_(0);
 	public void Clear() {msgs.Clear(); warns.Clear();}

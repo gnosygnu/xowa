@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.flaggedRevs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.pages.skins.*;
+import org.junit.*; import gplx.xowa.wikis.pages.skins.*;
 public class Pending_change_level_func_tst {
 	@Before public void init()				{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {

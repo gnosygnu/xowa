@@ -21,12 +21,12 @@ public class GfoInvkXtoStr {
 		GfsCtx ctx = GfsCtx.wtr_();
 		GfoMsg m = GfoMsg_.rdr_(k);
 		invk.Invk(ctx, 0, k, m);
-		String invkKey = GfsCore._.FetchKey(invk);
+		String invkKey = GfsCore.Instance.FetchKey(invk);
 		GfoMsg root = GfoMsg_.new_cast_(invkKey);
 		root.Subs_add(m);
 		return root;
 	}
-	public static GfoMsg WriteMsg(GfoInvkAble invk, String k, Object... ary) {return WriteMsg(GfsCore._.FetchKey(invk), invk, k, ary);}
+	public static GfoMsg WriteMsg(GfoInvkAble invk, String k, Object... ary) {return WriteMsg(GfsCore.Instance.FetchKey(invk), invk, k, ary);}
 	public static GfoMsg WriteMsg(String invkKey, GfoInvkAble invk, String k, Object... ary) {
 		GfsCtx ctx = GfsCtx.wtr_();
 		GfoMsg m = GfoMsg_.wtr_();

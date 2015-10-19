@@ -174,7 +174,7 @@ public class Json_parser {
 	}
 	private Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
 	private Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_u8__by_len(src, bgn, 20);
+		String msg = String_.Format(fmt, args) + " " + Int_.To_str(bgn) + " " + String_.new_u8__by_len(src, bgn, 20);
 		return Err_.new_wo_type(msg);
 	}
 	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");

@@ -20,8 +20,8 @@ import org.junit.*;
 public class Xow_domain_uid__tst {
 	@Before public void init() {fxt.Clear();} private final Xow_domain_uid__fxt fxt = new Xow_domain_uid__fxt();
 	@Test  public void Basic() {
-		fxt.Test(Xow_domain_uid_.Tid_commons	, "commons.wikimedia.org"	, "", Xow_domain_type_.Int__commons);
-		fxt.Test(100							, "en.wikipedia.org"		, "en", Xow_domain_type_.Int__wikipedia);
+		fxt.Test(Xow_domain_uid_.Tid_commons	, "commons.wikimedia.org"	, "", Xow_domain_tid_.Int__commons);
+		fxt.Test(100							, "en.wikipedia.org"		, "en", Xow_domain_tid_.Int__wikipedia);
 	}
 }
 class Xow_domain_uid__fxt {

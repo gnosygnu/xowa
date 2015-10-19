@@ -26,7 +26,7 @@ public class FontAdp implements GfoInvkAble {
 	@gplx.Internal protected Font UnderFont() {if (font == null) InitUnder(); return font;}	Font font = null;
 	void InitUnder() {
 		if (Env_.Mode_testing()) return; // WORKAROUND/.NET: NUnit will randomlyly throw exceptions
-		font = FontAdpCache._.GetNativeFont(this);
+		font = FontAdpCache.Instance.GetNativeFont(this);
 		if (ownerGxwCore != null) ownerGxwCore.TextFont_set(this);
 	}
 	@gplx.Internal protected FontAdp OwnerGxwCore_(GxwCore_base v) {ownerGxwCore = v; return this;} GxwCore_base ownerGxwCore;
@@ -77,5 +77,5 @@ class FontAdpCache {
 	public static int XtoOsDpi(float v) {return Math.round((v * 72) / screenResolutionInDpi);} // WORKAROUND/JAVA: Java needs 72 dpi screen resolution; wnt uses 96 or 120 dpi
 	public static int XtoJavaDpi(float v) {return Math.round((v * screenResolutionInDpi) / 72);}
 	static int screenResolutionInDpi = -1;
-		public static final FontAdpCache _ = new FontAdpCache(); FontAdpCache() {}
+		public static final FontAdpCache Instance = new FontAdpCache(); FontAdpCache() {}
 }

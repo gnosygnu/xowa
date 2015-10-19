@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.langs.*;
-public class Pft_func_time_basic_tst {		
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+public class Pft_func_time_basic_tst {
 	@Before	public void init()					{fxt.Reset(); Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term()				{Tfds.Now_enabled_n_();}
 	@Test   public void Utc_date()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2012-01-02 03:04:05}}"				, "2012-01-02");}
@@ -84,7 +84,7 @@ public class Pft_func_time_basic_tst {
 	@Test   public void Timezone_wrap()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d H:i:s|2012-01-31 22:30:05+01:30}}"	, "2012-02-01 00:00:05");}	// PURPOSE: handle timezone wrap ; DATE:2014-08-26
 	@Test   public void Rfc5322()				{fxt.Test_parse_tmpl_str("{{#time:r|}}"							, "Mon, 02 Jan 2012 08:04:05 +0000");}
 	@Test   public void Lang() {
-		Xol_lang fr_lang = fxt.App().Lang_mgr().Get_by_key_or_new(Bry_.new_a7("fr"));
+		Xol_lang_itm fr_lang = fxt.App().Lang_mgr().Get_by_or_new(Bry_.new_a7("fr"));
 		Xol_msg_itm msg_itm = fr_lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_a7("January"));
 		msg_itm.Atrs_set(Bry_.new_a7("Janvier"), false, false);
 		fxt.Test_parse_tmpl_str("{{#time:F|2012-01|fr}}"					, "Janvier");

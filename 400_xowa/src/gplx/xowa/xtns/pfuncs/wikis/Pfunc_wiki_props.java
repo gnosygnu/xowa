@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.wikis.metas.*;
 public class Pfunc_wiki_props extends Pf_func_base {
@@ -38,5 +38,5 @@ public class Pfunc_wiki_props extends Pf_func_base {
 		}
 	}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_props(id).Name_(name);}
-	public static final Pfunc_wiki_props _ = new Pfunc_wiki_props(-1);
+	public static final Pfunc_wiki_props Instance = new Pfunc_wiki_props(-1);
 }

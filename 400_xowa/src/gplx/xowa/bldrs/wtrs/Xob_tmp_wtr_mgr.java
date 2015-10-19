@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xob_tmp_wtr_mgr {
 	public Xob_tmp_wtr[] Regy() {return regy;} private Xob_tmp_wtr[] regy = new Xob_tmp_wtr[Ns_ordinal_max];
 	public Xob_tmp_wtr_mgr(Xob_tmp_wtr_wkr wkr) {this.wkr = wkr;} private Xob_tmp_wtr_wkr wkr;

@@ -43,7 +43,7 @@ public class Xob_base_fxt {
 			fxt_ary[i].Init_(bldr, wiki);
 	}
 	public Xob_base_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
-	public Xob_base_fxt Init_fil(Io_url url, String raw) {Io_mgr.I.SaveFilStr(url, raw); return this;}
+	public Xob_base_fxt Init_fil(Io_url url, String raw) {Io_mgr.Instance.SaveFilStr(url, raw); return this;}
 	public Xob_base_fxt Exec_cmd(String cmd_key, GfoMsg... msgs) {
 		Xob_cmd cmd = (Xob_cmd)bldr.Cmd_mgr().Add_cmd(wiki, cmd_key);
 		this.bldr_itm = cmd;
@@ -58,7 +58,7 @@ public class Xob_base_fxt {
 	}
 	public Xob_base_fxt Test_fil(String url, String expd) {return Test_fil(Io_url_.new_fil_(url), expd);}
 	public Xob_base_fxt Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
 		return this;
 	}
 	public static void Run_cmd(Xob_bldr bldr, Xob_cmd cmd) {

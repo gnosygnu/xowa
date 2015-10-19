@@ -32,7 +32,7 @@ public class GfuiTextMemo extends GfuiTextBox {		public int LinesPerScreen() {re
 	public void SelectionStart_toFirstChar() {textBox.SelectionStart_toFirstChar(); GfoEvMgr_.Pub(this, SelectionStartChanged_evt);}
 	public void ScrollTillSelectionStartIsFirstLine() {textBox.ScrollTillSelectionStartIsFirstLine();}
 
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.text_memo_();}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.text_memo_();}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		textBox = (GxwTextMemo)UnderElem();

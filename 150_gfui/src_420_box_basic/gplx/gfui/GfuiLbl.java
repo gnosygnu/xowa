@@ -35,5 +35,5 @@ public class GfuiLbl extends GfuiElemBase { // standard label does not support t
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.lbl_();}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 }

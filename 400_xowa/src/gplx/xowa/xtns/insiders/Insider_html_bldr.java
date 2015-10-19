@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
-import gplx.xowa.html.hrefs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
+import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.wikis.nss.*;
 class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.new_();
 	private Insider_html_bldr html_bldr;
@@ -43,7 +43,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_sidebar_ttl(), xtn_mgr.Msg_about_page(), xtn_mgr.Msg_about_ttl(), this);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href();
 		for (int i = 0; i < list_len; ++i) {
@@ -54,7 +54,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 			if (hash.Has(user_ttl_bry)) continue;
 			hash.Add(user_ttl_bry, user_ttl_bry);
 			href_encoder.Encode(tmp_ttl, user_ttl_bry);
-			user_ttl_bry = tmp_ttl.Xto_bry_and_clear();
+			user_ttl_bry = tmp_ttl.To_bry_and_clear();
 			fmtr_itm.Bld_bfr(bfr, user_ttl_bry, user_ttl.Page_txt());
 		}
 	}

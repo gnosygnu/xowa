@@ -57,5 +57,5 @@ class Fsdb_thm_itm_sorter implements gplx.lists.ComparerAble {
 			comp =	Double_.Compare	(lhs.Time()	, rhs.Time());	if (comp != CompareAble_.Same) return  comp;	// sort by increasing time
 		return		Int_.Compare	(lhs.Page()	, rhs.Page());													// sort by increasing page
 	}
-	public static final Fsdb_thm_itm_sorter I = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
+	public static final Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
 }

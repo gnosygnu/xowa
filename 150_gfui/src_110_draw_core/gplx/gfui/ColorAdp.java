@@ -52,5 +52,5 @@ class ColorAdpCache {
 		return (java.awt.Color)rv;
 	}
 	Hash_adp hash = Hash_adp_.new_();
-	public static final ColorAdpCache _ = new ColorAdpCache(); ColorAdpCache() {}
+	public static final ColorAdpCache Instance = new ColorAdpCache(); ColorAdpCache() {}
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
 public class Meta_tbl_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public void Add(Meta_tbl_itm itm) {hash.Add(itm.Name(), itm);}
 	public boolean Has(String name) {return hash.Has(name);}
 	public Meta_tbl_itm Get_by(String name) {return (Meta_tbl_itm)hash.Get_by(name);}

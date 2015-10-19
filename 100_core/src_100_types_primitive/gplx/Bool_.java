@@ -26,7 +26,7 @@ public class Bool_ implements GfoInvkAble {
 	public static final String		True_str = "true", False_str = "false";
 	public static final byte[] True_bry = Bry_.new_a7(True_str), False_bry = Bry_.new_a7(False_str);
 	public static boolean		cast(Object obj)				{try {return (Boolean)obj;} catch (Exception e) {throw Err_.new_type_mismatch_w_exc(e, boolean.class, obj);}}
-	public static boolean		cast_or(Object obj, boolean v)	{try {return (Boolean)obj;} catch (Exception e) {Err_.Noop(e); return v;}}
+	public static boolean		cast_or(Object obj, boolean v)		{try {return (Boolean)obj;} catch (Exception e) {Err_.Noop(e); return v;}}
 	public static boolean		parse(String raw) {
 		if		(	String_.Eq(raw, True_str)
 				||	String_.Eq(raw, "True")	// needed for Store_Wtr(){boolVal.toString();}
@@ -42,7 +42,6 @@ public class Bool_ implements GfoInvkAble {
 	public static int		To_int(boolean v)			{return v ? Y_int		: N_int;}
 	public static byte		To_byte(boolean v)			{return v ? Y_byte		: N_byte;}
 	public static String	To_str_lower(boolean v)	{return v ? True_str	: False_str;}
-	public static final boolean[] Ary_empty = new boolean[0];
 
 	public static final Bool_ Gfs = new Bool_();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

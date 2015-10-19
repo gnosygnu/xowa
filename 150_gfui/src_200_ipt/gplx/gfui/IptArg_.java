@@ -56,7 +56,7 @@ public class IptArg_ {
 		if		(String_.Eq(bgn, "wheel"))			return IptMouseWheel_.parse(raw);
 		else if (String_.Eq(bgn, "mouse"))			return IptMouseBtn_.parse(raw);
 		else if (String_.Eq(bgn, "key"))			return IptKey_.parse(raw);
-		else										return IptMacro._.parse(raw);
+		else										return IptMacro.Instance.parse(raw);
 	}
 	// NOTE: the following two methods should theoretically be interface methods, but since they are only used by two procs, they will be handled with if/else
 	@gplx.Internal protected static IptEventType EventType_default(IptArg arg) {
@@ -83,13 +83,13 @@ class IptMacro {
 		if (regy == null) Init();
 		Ordered_hash list = (Ordered_hash)regy.Get_by(prefix);
 		if (list == null) {
-			list = Ordered_hash_.new_();
+			list = Ordered_hash_.New();
 			regy.Add(prefix, list);
 		}
 		list.Add_if_dupe_use_nth(alias, arg);
 	}
 	void Init() {
-		regy = Ordered_hash_.new_();
+		regy = Ordered_hash_.New();
 		Reg("mod", "c", IptKey_.add_(IptKey_.Ctrl));
 		Reg("mod", "a", IptKey_.add_(IptKey_.Alt));
 		Reg("mod", "s", IptKey_.add_(IptKey_.Shift));
@@ -114,5 +114,5 @@ class IptMacro {
 	}
 	Ordered_hash regy;
 	static Err parse_err(String raw, String loc) {return Err_.new_("gfui", "could not parse IptArg", "raw", raw, "loc", loc).Trace_ignore_add_1_();}
-	public static final IptMacro _ = new IptMacro(); IptMacro() {}
+	public static final IptMacro Instance = new IptMacro(); IptMacro() {}
 }

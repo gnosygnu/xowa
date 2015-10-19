@@ -31,8 +31,8 @@ public class Xob_mirror_mgr {
 		byte[] trg_url = Xob_css_tkn__url.To_fsys(src_url);
 		code_hash.Add_if_dupe_use_1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_css, String_.new_u8(src_url), trg_url));
 	}
-	public Ordered_hash Code_hash() {return code_hash;} private final Ordered_hash code_hash = Ordered_hash_.new_();
-	public Ordered_hash File_hash() {return file_hash;} private final Ordered_hash file_hash = Ordered_hash_.new_();
+	public Ordered_hash Code_hash() {return code_hash;} private final Ordered_hash code_hash = Ordered_hash_.New();
+	public Ordered_hash File_hash() {return file_hash;} private final Ordered_hash file_hash = Ordered_hash_.New();
 	public void Exec() {
 		usr_dlg.Plog_many("", "", "html_mirror:download.root_page; url=~{0}", page_url);
 		IoEngine_xrg_downloadFil download_xrg = download_wkr.Download_xrg();
@@ -44,7 +44,7 @@ public class Xob_mirror_mgr {
 			for (int i = 0; i < code_ary_len; ++i) {
 				Xobc_download_itm code = code_ary[i];
 				byte[] code_src = download_xrg.Exec_as_bry(code.Http_str());
-				Io_mgr.I.SaveFilBry(fsys_root.Gen_sub_path_for_os(String_.new_u8(code.Fsys_url())), code_src);
+				Io_mgr.Instance.SaveFilBry(fsys_root.Gen_sub_path_for_os(String_.new_u8(code.Fsys_url())), code_src);
 				css_parser.Parse(code_src);
 			}
 		}

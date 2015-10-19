@@ -33,8 +33,8 @@ class GfmlBldrCmdRegy {
 	Hash_adp hash = Hash_adp_.new_();
 	public static GfmlBldrCmdRegy new_() {
 		GfmlBldrCmdRegy rv = new GfmlBldrCmdRegy();
-		rv.Add(GfmlBldrCmd_elemKey_set._);
-		rv.Add(GfmlBldrCmd_dataTkn_set._);
+		rv.Add(GfmlBldrCmd_elemKey_set.Instance);
+		rv.Add(GfmlBldrCmd_dataTkn_set.Instance);
 		return rv;
 	}	GfmlBldrCmdRegy() {}
 }

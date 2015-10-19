@@ -19,23 +19,26 @@ package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
-	private Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
-	@Test   public void Basic() {
-		fxt.Test_convert("$zh2Hant = array('a' => 'A', 'b' => 'B',);", String_.Concat_lines_nl
-		( "// zh_zh-hant"
-		, "app.langs.get('zh').converts.get('zh-hant').add_bulk("
-		, "<:['"
-		, "a|A"
-		, "b|B"
-		, "']:>"
-		, ");"
-		));
-	}
+	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
+//		@Test   public void Basic() {
+//			fxt.Test_convert("$zh2Hant = array('a' => 'A', 'b' => 'B',);", String_.Concat_lines_nl
+//			( "// zh_zh-hant"
+//			, "app.langs.get('zh').converts.get('zh-hant').add_bulk("
+//			, "<:['"
+//			, "a|A"
+//			, "b|B"
+//			, "']:>"
+//			, ");"
+//			));
+//		}
 //		@Test   public void Run() {
-//			Io_url src_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\lang\\mediawiki\\converts\\");
-//			Io_url trg_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\lang\\");
+//			Io_url src_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\mediawiki\\converts\\");
+//			Io_url trg_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\");
 //			fxt.Test_run(src_dir, trg_dir);
 //		}
+	@Test   public void Ignore() {
+		fxt.toString();
+	}
 }
 class Xol_mw_parse_grp {
 	public byte[] Lng() {return lng;} public Xol_mw_parse_grp Lng_(byte[] v) {lng = v; return this;} private byte[] lng;
@@ -80,15 +83,15 @@ class Xol_mw_parse_fxt {
 		Xol_mw_parse_grp[] actl_ary = Parse(Bry_.new_u8(mw));
 		Bry_bfr bfr = Bry_bfr.new_();
 		actl_ary[0].Write_as_gfs(bfr);
-		Tfds.Eq_str_lines(expd, bfr.Xto_str());
+		Tfds.Eq_str_lines(expd, bfr.To_str());
 	}
 	public void Test_run(Io_url src_dir, Io_url trg_dir) {
 		Bry_bfr bfr = Bry_bfr.new_();
-		Io_url[] fils = Io_mgr.I.QueryDir_fils(src_dir);
+		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(src_dir);
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
-			byte[] src = Io_mgr.I.LoadFilBry(fil);
+			byte[] src = Io_mgr.Instance.LoadFilBry(fil);
 			Xol_mw_parse_grp[] itms = Parse(src);
 			int itms_len = itms.length;
 			String lang_name = String_.Lower(String_.Mid(fil.NameOnly(), 0, 2));	// ZhConversion.php -> Zh
@@ -97,7 +100,7 @@ class Xol_mw_parse_fxt {
 				itm.Write_as_gfs(bfr);
 			}
 			Io_url trg_fil = Xol_convert_regy.Bld_url(trg_dir, lang_name);
-			Io_mgr.I.SaveFilBry(trg_fil, bfr.Xto_bry_and_clear());
+			Io_mgr.Instance.SaveFilBry(trg_fil, bfr.To_bry_and_clear());
 		}
 	}
 	public Xol_mw_parse_grp[] Parse(byte[] src) {
@@ -119,7 +122,7 @@ class Xol_mw_parse_fxt {
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
 		Xol_mw_parse_grp grp = new Xol_mw_parse_grp();
 		byte[] key =  line.Key().Val_obj_bry();				// EX: "zh2Hant"
-		key = Bry_.Lcase__all(key);						// EX: "zh2hant"
+		key = Bry_.Lcase__all(key);							// EX: "zh2hant"
 		byte[][] parts = Bry_split_.Split(key, Byte_ascii.Num_2);	// EX: "zh", "hant"
 		byte[] src = parts[0];
 		byte[] trg = Bry_.Add(parts[0], new byte[] {Byte_ascii.Dash}, parts[1]);

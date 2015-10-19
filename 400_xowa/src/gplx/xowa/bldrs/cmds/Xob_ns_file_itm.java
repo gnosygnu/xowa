@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*;
 public class Xob_ns_file_itm {
 	public Xob_ns_file_itm(byte db_file_tid, String file_name, int[] ns_ids) {
@@ -32,7 +32,7 @@ public class Xob_ns_file_itm {
 		String rv = String_.Format("-{0}{1}{2}.xowa"				// EX: -text-ns.000-db.001.xowa
 			, Xowd_db_file_.To_key(db_file_tid)						// text
 			, String_.Len_eq_0(file_name) ? "" : "-" + file_name	// if empty, don't add "ns.000" segment; produces en.wikipedia.org-text-001.xowa
-			, nth_db_idx == 1 ? "" : "-db." + Int_.Xto_str_pad_bgn_zero(nth_db_idx, 3)			// "-db.001"
+			, nth_db_idx == 1 ? "" : "-db." + Int_.To_str_pad_bgn_zero(nth_db_idx, 3)			// "-db.001"
 			);
 		++nth_db_idx;
 		return rv;

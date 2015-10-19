@@ -34,7 +34,7 @@ public class Xob_unzip_wkr {
 		else if	(String_.Eq(src_ext, gplx.ios.Io_stream_.Ext_gz))		process = decompress_gz;
 		else															throw Err_.new_unhandled(src_ext);
 		Io_url trg_owner_dir = trg.OwnerDir();
-		Io_mgr.I.CreateDirIfAbsent(trg_owner_dir);
+		Io_mgr.Instance.CreateDirIfAbsent(trg_owner_dir);
 		process.Run_mode_(process_run_mode);
 		process.Run(src, trg, trg_owner_dir.Xto_api());
 	}

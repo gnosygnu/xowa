@@ -23,6 +23,6 @@ public class Json_itm_ {
 	public static byte[] To_bry(Bry_bfr bfr, Json_itm itm) {
 		if (itm == null) return Bry_.Empty;
 		itm.Print_as_json(bfr, 0);
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 }

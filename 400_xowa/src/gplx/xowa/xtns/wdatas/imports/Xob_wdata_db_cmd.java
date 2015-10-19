@@ -19,12 +19,12 @@ package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();
 	private Wdata_wiki_mgr wdata_mgr; private Json_parser json_parser;
-	private byte[] lang_key = Xol_lang_.Key_en;
+	private byte[] lang_key = Xol_lang_itm_.Key_en;
 	public Xob_wdata_db_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
 	@Override public byte Init_redirect() {return Bool_.N_byte;}	// json will never be found in a redirect

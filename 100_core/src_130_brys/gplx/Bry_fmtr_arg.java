@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public interface Bry_fmtr_arg {
-	void XferAry(Bry_bfr bfr, int idx);
+	void Fmt__do(Bry_bfr bfr);
 }

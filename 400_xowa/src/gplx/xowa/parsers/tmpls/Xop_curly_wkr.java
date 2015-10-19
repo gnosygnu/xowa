@@ -147,7 +147,7 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 		}
 		return lxr_end_pos;
 	}
-	private Xot_prm_wkr prm_wkr = Xot_prm_wkr._;
+	private Xot_prm_wkr prm_wkr = Xot_prm_wkr.Instance;
 	public static final byte[] Hook_prm_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Hook_prm_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
 }
 /*

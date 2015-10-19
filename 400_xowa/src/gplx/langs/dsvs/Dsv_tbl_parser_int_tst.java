@@ -34,7 +34,7 @@ class Mok_int_itm implements To_str_able {
 	private String fld_0;
 	private int fld_1, fld_2;
 	public Mok_int_itm(String fld_0, int fld_1, int fld_2) {this.fld_0 = fld_0; this.fld_1 = fld_1; this.fld_2 = fld_2;}
-	public String To_str() {return String_.Concat_with_str("|", fld_0, Int_.Xto_str(fld_1), Int_.Xto_str(fld_2));}
+	public String To_str() {return String_.Concat_with_str("|", fld_0, Int_.To_str(fld_1), Int_.To_str(fld_2));}
 }
 class Mok_int_mgr extends Mok_mgr_base {
 	public void Clear() {itms.Clear();}
@@ -42,7 +42,7 @@ class Mok_int_mgr extends Mok_mgr_base {
 	private String fld_0;
 	private int fld_1, fld_2;
 	@Override public Dsv_fld_parser[] Fld_parsers() {
-		return new Dsv_fld_parser[] {Dsv_fld_parser_bry._, Dsv_fld_parser_int._, Dsv_fld_parser_int._};
+		return new Dsv_fld_parser[] {Dsv_fld_parser_bry.Instance, Dsv_fld_parser_int.Instance, Dsv_fld_parser_int.Instance};
 	}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {

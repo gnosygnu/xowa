@@ -91,7 +91,7 @@ public class Io_size_ {
 		long rv = parse_or(v, Long_.Min_value); if (rv == Long_.Min_value) throw Err_.new_wo_type("invalid val", "val", v);
 		return rv;
 	}
-	public static String	To_str_mb(long v)				{return Long_.Xto_str(v / Io_mgr.Len_mb_long);}
+	public static String	To_str_mb(long v)				{return Long_.To_str(v / Io_mgr.Len_mb_long);}
 	public static long		To_long_by_int_mb(int v)		{return (long)v * Io_mgr.Len_mb_long;}
 	public static long		To_long_by_msg_mb(GfoMsg m, long cur) {
 		long val = m.ReadLongOr("v", Int_.Min_value);
@@ -101,7 +101,7 @@ public class Io_size_ {
 class Io_size_fmtr_arg implements Bry_fmtr_arg {	
 	public long Val() {return val;} public Io_size_fmtr_arg Val_(long v) {val = v; return this;} long val;
 	public byte[] Suffix() {return suffix;} public Io_size_fmtr_arg Suffix_(byte[] v) {suffix = v; return this;} private byte[] suffix;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		long cur = val; int pow = 0;
 		while (cur >= 1024) {
 			cur /= 1024;

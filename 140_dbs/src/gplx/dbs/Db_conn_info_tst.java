@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 import org.junit.*;
 public class Db_conn_info_tst {
 	@Before public void setup() {
-		regy.Add(Db_conn_info_mock._);
+		regy.Add(Db_conn_info_mock.Instance);
 	}	private final Db_conn_info_pool regy = new Db_conn_info_pool();
 	@Test  public void Parse() {
 		tst_Parse("gplx_key=mock;id=1;", kv_("id", "1"));							 // one; gplx_key removed
@@ -42,5 +42,5 @@ class Db_conn_info_mock extends Db_conn_info__base {
 			rv.kvs[i] = m.Args_getAt(i);
 		return rv;
 	}
-        public static final Db_conn_info_mock _ = new Db_conn_info_mock(); Db_conn_info_mock() {}
+        public static final Db_conn_info_mock Instance = new Db_conn_info_mock(); Db_conn_info_mock() {}
 }

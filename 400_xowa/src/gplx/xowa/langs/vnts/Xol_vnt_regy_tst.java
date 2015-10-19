@@ -46,8 +46,4 @@ public class Xol_vnt_regy_tst {
 		, String_.Ary("zh", "zh-hant", "zh-hans")
 		);
 	}
-	@Test  public void Sort() {
-		fxt.Test_sort(String_.Ary("zh"								)	, String_.Ary("zh"));
-		fxt.Test_sort(String_.Ary("zh", "zh-hans", "zh-cn"			)	, String_.Ary("zh-cn", "zh-hans", "zh"));
-	}
 }

@@ -24,5 +24,5 @@ public class StringClassXtn extends ClassXtn_base implements ClassXtn {
 	@Override public Object ParseOrNull(String raw)				{return raw;}
 	@Override public String XtoUi(Object obj, String fmt)		{return String_.as_(obj);}
 	public boolean Eq(Object lhs, Object rhs) {try {return String_.Eq(String_.cast(lhs), String_.cast(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
-	public static final StringClassXtn _ =  new StringClassXtn(); StringClassXtn() {} // added to ClassXtnPool by default
+	public static final StringClassXtn Instance =  new StringClassXtn(); StringClassXtn() {} // added to ClassXtnPool by default
 }

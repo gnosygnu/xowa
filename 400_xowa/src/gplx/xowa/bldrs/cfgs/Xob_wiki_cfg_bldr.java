@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.strings.*;
-import gplx.xowa.wikis.xwikis.cfgs.*;
 public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	public Xob_wiki_cfg_bldr(Xob_bldr bldr) {this.app = bldr.App();} private Xoae_app app;
 	public void Exec() {
@@ -30,14 +29,14 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	private void Exec_fil(Xoac_wiki_cfg_bldr_fil fil) {
 		String wiki_key = fil.Wiki();
 		Io_url cfg_file = app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki_key + ".gfs");
-		String cfg_text = Io_mgr.I.LoadFilStr_args(cfg_file).MissingIgnored_().Exec();
+		String cfg_text = Io_mgr.Instance.LoadFilStr_args(cfg_file).MissingIgnored_().Exec();
 		int len = fil.Itms_count();
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < len; i++) {
 			Xoac_wiki_cfg_bldr_cmd cmd = fil.Itms_get_at(i);
 			cfg_text = cmd.Exec(sb, wiki_key, cfg_text);
 		}
-		Io_mgr.I.SaveFilStr(cfg_file, cfg_text);
+		Io_mgr.Instance.SaveFilStr(cfg_file, cfg_text);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		 		return Itms_get_or_new(m.ReadStr("v"));
@@ -53,5 +52,5 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 			hash.Add(wiki, rv);
 		}
 		return rv;
-	}	private Ordered_hash hash = Ordered_hash_.new_();
+	}	private Ordered_hash hash = Ordered_hash_.New();
 }

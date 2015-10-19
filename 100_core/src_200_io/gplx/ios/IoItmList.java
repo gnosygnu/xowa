@@ -36,7 +36,7 @@ public class IoItmList extends Ordered_hash_base {
 			rv[i] = IoItm_base_.as_(i).Url();
 		return rv;
 	}
-	@Override public void Sort() {Sort_by(IoItmBase_comparer_nest._);}
+	@Override public void Sort() {Sort_by(IoItmBase_comparer_nest.Instance);}
 	@Override protected Object Fetch_base(Object keyObj) {
 		String key = MakeKey((String)keyObj);
 		return super.Fetch_base(key);
@@ -72,5 +72,5 @@ class IoItmBase_comparer_nest implements ComparerAble {
 		Io_url url = itm.Url();
 		return String_.Count(url.OwnerDir().Raw(), url.Info().DirSpr()); // use OwnerDir, else dir.Raw will return extra dirSeparator
 	}
-	public static final IoItmBase_comparer_nest _ = new IoItmBase_comparer_nest(); IoItmBase_comparer_nest() {}
+	public static final IoItmBase_comparer_nest Instance = new IoItmBase_comparer_nest(); IoItmBase_comparer_nest() {}
 }

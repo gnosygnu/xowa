@@ -31,7 +31,7 @@ public class Xop_amp_trie {
 	, Bry_xowa_nl			= Bry_.new_a7("&xowa_nl;")
 	, Bry_xowa_dash			= Bry_.new_a7("&xowa_dash;")
 	;
-	public static final Btrie_slim_mgr _ = new_(); Xop_amp_trie() {}
+	public static final Btrie_slim_mgr Instance = new_(); Xop_amp_trie() {}
 	private static Btrie_slim_mgr new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		Reg_name(rv, Bool_.Y,   60, Bry_xowa_lt);

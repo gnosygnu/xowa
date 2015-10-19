@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_parser {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private List_adp blocks = List_adp_.new_();
@@ -75,7 +75,7 @@ class Hiero_parser {
 	}
 	private void New_token(Hiero_parser_itm itm) {
 		if (cur_tkn.Len_gt_0())
-			cur_block.Add(cur_tkn.Xto_bry_and_clear());
+			cur_block.Add(cur_tkn.To_bry_and_clear());
 		if (itm != null)
 			cur_block.Add(itm.Key());
 	}

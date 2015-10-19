@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.xtns.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.xtns.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_xnde;}
 	public int Tblw_tid() {return tag.Id();}	// NOTE: tblw tkns actually return xnde as Tblw_tid
@@ -31,9 +31,9 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	public int Atrs_end() {return atrs_end;} public Xop_xnde_tkn Atrs_end_(int v) {atrs_end = v; return this;} private int atrs_end = Xop_tblw_wkr.Atrs_null;
 	public Xop_xnde_tkn Atrs_rng_(int bgn, int end) {atrs_bgn = bgn; atrs_end = end; return this;}
 	public void Atrs_rng_set(int bgn, int end) {Atrs_rng_(bgn, end);}
-	public Xop_xatr_itm[] Atrs_ary() {return atrs_ary;}
-	public Xop_xnde_tkn Atrs_ary_(Xop_xatr_itm[] v) {atrs_ary = v; return this;} private Xop_xatr_itm[] atrs_ary;
-	public Xop_tblw_tkn Atrs_ary_as_tblw_(Xop_xatr_itm[] v) {atrs_ary = v; return this;}
+	public Mwh_atr_itm[] Atrs_ary() {return atrs_ary;}
+	public Xop_xnde_tkn Atrs_ary_			(Mwh_atr_itm[] v) {atrs_ary = v; return this;} private Mwh_atr_itm[] atrs_ary;
+	public Xop_tblw_tkn Atrs_ary_as_tblw_	(Mwh_atr_itm[] v) {atrs_ary = v; return this;}
 	public Xop_xnde_tag Tag() {return tag;} public Xop_xnde_tkn Tag_(Xop_xnde_tag v) {tag = v; return this;} private Xop_xnde_tag tag;
 	public int Tag_open_bgn() {return tag_open_bgn;} private int tag_open_bgn = Int_.Null;
 	public int Tag_open_end() {return tag_open_end;} private int tag_open_end = Int_.Null;
@@ -75,7 +75,13 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 			}
 		}
 	}
+//		public static Xop_ctx Hack_ctx;	// CHART
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
+//			if (ctx.Scribunto) {	// CHART
+//				byte[] key = uniq_mgr.Add(Bry_.Mid(src, this.Src_bgn(), this.Src_end()));
+//				bfr.Add(key);
+//				return true;
+//			}
 		int subs_len = this.Subs_len();
 		switch (tag.Id()) {
 			case Xop_xnde_tag_.Tid_noinclude:		// do not evaluate subs

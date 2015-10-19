@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import
 import gplx.ios.*; import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.dbs.*;
 import gplx.fsdb.meta.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 class Xows_cmd__sql_dump {
 	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
 		Db_conn conn = null;
@@ -27,7 +27,7 @@ class Xows_cmd__sql_dump {
 		byte[] wiki_bry = arg_hash.Get_val_bry_or(Arg_wiki, null);
 		if (wiki_bry == null) {
 			byte[] db_file_bry = arg_hash.Get_val_bry_or(Arg_db_file, null); if (db_file_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no db_type: url=~{0}", url.Raw()); return;}
-			conn = Db_conn_bldr.I.Get(Io_url_.new_fil_(String_.new_u8(db_file_bry)));
+			conn = Db_conn_bldr.Instance.Get(Io_url_.new_fil_(String_.new_u8(db_file_bry)));
 		}
 		else {
 			byte[] db_type_bry = arg_hash.Get_val_bry_or(Arg_db_type, null); if (db_type_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no db_type: url=~{0}", url.Raw()); return;}
@@ -41,7 +41,7 @@ class Xows_cmd__sql_dump {
 		}
 		Db_rdr_utl.Load_and_write(conn, String_.new_u8(sql_bry), bfr);
 	}
-        public static final Xows_cmd__sql_dump I = new Xows_cmd__sql_dump(); Xows_cmd__sql_dump() {}
+        public static final Xows_cmd__sql_dump Instance = new Xows_cmd__sql_dump(); Xows_cmd__sql_dump() {}
 	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_db_file = Bry_.new_a7("db_file"), Arg_db_type = Bry_.new_a7("db_type"), Arg_sql = Bry_.new_a7("sql");
 	private static final byte Db_type_fsdb_abc = 1, Db_type_fsdb_atr = 2, Db_type_wiki_core = 3;
 	private static final Hash_adp_bry db_type_hash = Hash_adp_bry.cs()

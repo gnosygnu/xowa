@@ -28,7 +28,7 @@ public class GfsCore implements GfoInvkAble {
 	public void AddDeep(GfoInvkAble invk, String... ary) {
 		GfoInvkCmdMgrOwner cur = (GfoInvkCmdMgrOwner)((GfsRegyItm)root.Get_by(ary[0])).InvkAble();
 		for (int i = 1; i < ary.length - 1; i++)
-			cur = (GfoInvkCmdMgrOwner)cur.InvkMgr().Invk(GfsCtx._, 0, ary[i], GfoMsg_.Null, cur);
+			cur = (GfoInvkCmdMgrOwner)cur.InvkMgr().Invk(GfsCtx.Instance, 0, ary[i], GfoMsg_.Null, cur);
 		cur.InvkMgr().Add_cmd(ary[ary.length - 1], invk);
 	}
 	public String FetchKey(GfoInvkAble invk) {return root.FetchByType(invk).Key();}
@@ -43,21 +43,21 @@ public class GfsCore implements GfoInvkAble {
 		return rv;
 	}
 	public void ExecRegy(String key) {
-		GfoRegyItm itm = GfoRegy._.FetchOrNull(key);
-		if (itm == null) {UsrDlg_._.Warn(UsrMsg.new_("could not find script for key").Add("key", key)); return;}
+		GfoRegyItm itm = GfoRegy.Instance.FetchOrNull(key);
+		if (itm == null) {UsrDlg_.Instance.Warn(UsrMsg.new_("could not find script for key").Add("key", key)); return;}
 		Io_url url = itm.Url();
-		if (!Io_mgr.I.ExistsFil(url)) {
-			UsrDlg_._.Warn(UsrMsg.new_("script url does not exist").Add("key", key).Add("url", url));
+		if (!Io_mgr.Instance.ExistsFil(url)) {
+			UsrDlg_.Instance.Warn(UsrMsg.new_("script url does not exist").Add("key", key).Add("url", url));
 			return;
 		}
-		this.ExecText(Io_mgr.I.LoadFilStr(url));
+		this.ExecText(Io_mgr.Instance.LoadFilStr(url));
 	}
-	public Object ExecFile_ignoreMissing(Io_url url) {if (!Io_mgr.I.ExistsFil(url)) return null; return ExecText(Io_mgr.I.LoadFilStr(url));}
-	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.I.LoadFilStr(url));}
+	public Object ExecFile_ignoreMissing(Io_url url) {if (!Io_mgr.Instance.ExistsFil(url)) return null; return ExecText(Io_mgr.Instance.LoadFilStr(url));}
+	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.Instance.LoadFilStr(url));}
 	public Object ExecFile_ignoreMissing(GfoInvkAble root, Io_url url) {
-		if (!Io_mgr.I.ExistsFil(url)) return null; 
+		if (!Io_mgr.Instance.ExistsFil(url)) return null; 
 		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
-		return Exec_bry(Io_mgr.I.LoadFilBry(url), root);
+		return Exec_bry(Io_mgr.Instance.LoadFilBry(url), root);
 	}
 	public Object Exec_bry(byte[] bry) {return Exec_bry(bry, root);}
 	public Object Exec_bry(byte[] bry, GfoInvkAble root) {
@@ -84,13 +84,13 @@ public class GfsCore implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 //			return this;
 	}	public static final String Invk_ExecFil = "ExecFil";
-        public static final GfsCore _ = new GfsCore();
+        public static final GfsCore Instance = new GfsCore();
         @gplx.Internal protected static GfsCore new_() {return new GfsCore();}
 }
 class GfsCore_ {
 	public static final String Arg_primitive = "v";
 	public static Object Exec(GfsCtx ctx, GfoInvkAble owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
-		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_._.Warn("empty msg"); return GfoInvkAble_.Rv_unhandled;}
+		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_.Instance.Warn("empty msg"); return GfoInvkAble_.Rv_unhandled;}
 		if (owner_primitive != null) owner_msg.Parse_(false).Add(GfsCore_.Arg_primitive, owner_primitive);
 		Object rv = owner_invk.Invk(ctx, 0, owner_msg.Key(), owner_msg);
 		if		(rv == GfoInvkAble_.Rv_cancel)		return rv;
@@ -151,7 +151,7 @@ class GfsCore_ {
 //			else if	(ctx.Match(k, Invk_Load)) {
 //				Io_url url = (Io_url)m.ReadObj("url", Io_url_.Parser);
 //				if (ctx.Deny()) return this;
-//				String loadText = Io_mgr.I.LoadFilStr(url);
+//				String loadText = Io_mgr.Instance.LoadFilStr(url);
 //				GfoMsg loadMsg = core.MsgParser().ParseToMsg(loadText);
 //				return core.Exec(ctx, loadMsg);
 //			}

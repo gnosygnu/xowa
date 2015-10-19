@@ -22,7 +22,7 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	public abstract String Key();
 	public abstract GxwElemFactory_base Factory();
 	public GfuiWin Main_win() {return main_win;} public Gfui_kit Main_win_(GfuiWin v) {main_win = v; return this;} private GfuiWin main_win;
-	public Gfui_clipboard Clipboard() {return Gfui_clipboard_null.Null;}
+	public Gfui_clipboard Clipboard() {return Gfui_clipboard_.Null;}
 	public GfoInvkAbleCmd Kit_term_cbk() {return kit_term_cbk;} public void	Kit_term_cbk_(GfoInvkAbleCmd v) {kit_term_cbk = v;} private GfoInvkAbleCmd kit_term_cbk;
 	public void Cfg_set(String type, String key, Object val) {}
 	public boolean Kit_mode__ready() {return true;}
@@ -82,10 +82,10 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	protected abstract Gxw_tab_mgr New_tab_mgr_impl();
 	protected abstract Gxw_tab_itm New_tab_itm_impl();
 	protected abstract GxwElem New_btn_impl();
-	@gplx.Virtual public Gfui_dlg_file New_dlg_file(byte type, String msg) {return Gfui_dlg_file_null._;}
-	@gplx.Virtual public Gfui_dlg_msg New_dlg_msg(String msg) {return Gfui_dlg_msg_null._;}
-	@gplx.Virtual public Gfui_mnu_grp New_mnu_popup(String key, GfuiElem owner) {return Gfui_mnu_grp_null.Null;}
-	@gplx.Virtual public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) {return Gfui_mnu_grp_null.Null;}
+	@gplx.Virtual public Gfui_dlg_file New_dlg_file(byte type, String msg) {return Gfui_dlg_file_.Noop;}
+	@gplx.Virtual public Gfui_dlg_msg New_dlg_msg(String msg) {return Gfui_dlg_msg_.Noop;}
+	@gplx.Virtual public Gfui_mnu_grp New_mnu_popup(String key, GfuiElem owner) {return Gfui_mnu_grp_.Noop;}
+	@gplx.Virtual public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) {return Gfui_mnu_grp_.Noop;}
 	public abstract ImageAdp New_img_load(Io_url url);
 	public Object New_color(int a, int r, int g, int b) {return null;}
 	public float Calc_font_height(GfuiElem elem, String s) {return 13;}

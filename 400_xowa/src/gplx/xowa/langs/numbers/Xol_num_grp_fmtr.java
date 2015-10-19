@@ -62,7 +62,7 @@ public class Xol_num_grp_fmtr {
 					break;
 			}
 		}
-		return dirty ? bfr.Xto_bry_and_clear() : src;
+		return dirty ? bfr.To_bry_and_clear() : src;
 	}
 	private void Fmt_grp(Bry_bfr bfr, byte[] src, int bgn, int end, int len, int grp_len) {
 		int seg_0 = bgn + (len % grp_len);	// 5 digit number will have seg_0 of 2; 12345 -> 12,345

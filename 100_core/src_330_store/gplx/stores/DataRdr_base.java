@@ -78,7 +78,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	}
 	@gplx.Virtual public boolean ReadBool(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Bool_.cast(BoolClassXtn._.ParseOrNull(String_.as_(val))) : Bool_.cast(val);} 
+		try {return (parse) ? Bool_.cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : Bool_.cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(boolean.class, key, val, exc);}
 	}
 	@gplx.Virtual public boolean ReadBoolOr(String key, boolean or) {
@@ -206,9 +206,9 @@ public abstract class DataRdr_base implements SrlMgr {
 		return Err_.new_("DataRdr_ReadFailed", "failed to read data", "key", key, "val", val, "type", type, "innerMsg", innerMsg).Trace_ignore_add_1_();
 	}
 	static void Err_dataRdr_ReadFailed_useOr(Class<?> type, String key, Object val, Object or) {
-		UsrDlg_._.Warn(UsrMsg.new_("failed to read data; substituting default").Add("key", key).Add("val", val).Add("default", or).Add("type", type));
+		UsrDlg_.Instance.Warn(UsrMsg.new_("failed to read data; substituting default").Add("key", key).Add("val", val).Add("default", or).Add("type", type));
 	}
 	static void Err_dataRdr_ReadFailed_useOr(Exception exc, Class<?> type, String key, Object val, Object or) {
-		UsrDlg_._.Warn(UsrMsg.new_("failed to read data; substituting default").Add("key", key).Add("val", val).Add("default", or).Add("type", type));
+		UsrDlg_.Instance.Warn(UsrMsg.new_("failed to read data; substituting default").Add("key", key).Add("val", val).Add("default", or).Add("type", type));
 	}
 }

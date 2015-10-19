@@ -51,7 +51,7 @@ public class Io_stream_rdr_ {
 	public static byte[] Load_all_as_bry(Io_stream_rdr rdr) {return Load_all_as_bry(Bry_bfr.new_(), rdr);}
 	public static byte[] Load_all_as_bry(Bry_bfr rv, Io_stream_rdr rdr) {
 		Load_all_to_bfr(rv, rdr);
-		return rv.Xto_bry_and_clear();
+		return rv.To_bry_and_clear();
 	}
 	public static void Load_all_to_bfr(Bry_bfr rv, Io_stream_rdr rdr) {
 		try {
@@ -176,11 +176,11 @@ class Io_stream_rdr_file extends Io_stream_rdr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_raw;}
 	public Io_stream_rdr Open() {
 		try {
-			if (!Io_mgr.I.Exists(url))
+			if (!Io_mgr.Instance.Exists(url))
 				stream = Wrap_stream(new java.io.ByteArrayInputStream(Bry_.Empty));
 			else {
 				if (url.Info().EngineKey() == gplx.ios.IoEngine_.MemKey)
-					stream = Wrap_stream(new java.io.ByteArrayInputStream(Io_mgr.I.LoadFilBry(url.Xto_api())));
+					stream = Wrap_stream(new java.io.ByteArrayInputStream(Io_mgr.Instance.LoadFilBry(url.Xto_api())));
 				else
 					stream = Wrap_stream(new java.io.FileInputStream(url.Xto_api()));
 			}

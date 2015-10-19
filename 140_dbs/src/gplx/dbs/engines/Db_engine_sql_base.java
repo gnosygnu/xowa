@@ -65,16 +65,16 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 	}
 	public void Ddl_append_fld(String tbl, Db_meta_fld fld)		{
-		Gfo_usr_dlg_.I.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
+		Gfo_usr_dlg_.Instance.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		try {
-			Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));
-			Gfo_usr_dlg_.I.Plog_many("", "", "column added to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
+			Exec_as_int(Db_sqlbldr__sqlite.Instance.Bld_alter_tbl_add(tbl, fld));
+			Gfo_usr_dlg_.Instance.Plog_many("", "", "column added to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		}
 		catch (Exception e) {	// catch error if column already added to table
-			Gfo_usr_dlg_.I.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
 		}
 	}
-	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_drop_tbl(tbl));}
+	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.Instance.Bld_drop_tbl(tbl));}
 	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url) {}
 	@gplx.Virtual public void	Env_db_detach(String alias) {}
 	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}

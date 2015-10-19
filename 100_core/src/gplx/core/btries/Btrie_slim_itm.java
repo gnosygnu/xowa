@@ -79,7 +79,7 @@ public class Btrie_slim_itm {
 		Btrie_slim_itm rv = new Btrie_slim_itm(b, val, case_any);
 		ary[ary_len] = rv;
 		ary_len = new_len;
-		ByteHashItm_sorter._.Sort(ary, ary_len);
+		ByteHashItm_sorter.Instance.Sort(ary, ary_len);
 		return rv;
 	}
 	public void Ary_del(byte b) {
@@ -126,5 +126,5 @@ class ByteHashItm_sorter {// quicksort
 		if (lo < j) Sort_recurse(lo, j);
 		if (i < hi) Sort_recurse(i, hi);
 	}
-	public static final ByteHashItm_sorter _ = new ByteHashItm_sorter(); ByteHashItm_sorter() {}
+	public static final ByteHashItm_sorter Instance = new ByteHashItm_sorter(); ByteHashItm_sorter() {}
 }

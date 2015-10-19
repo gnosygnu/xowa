@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.apis.xowa.bldrs.imports.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.xtns.wdatas.imports.*;
 public class Xob_init_cmd extends Xob_init_base {
 	public Xob_init_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki);}

@@ -32,7 +32,7 @@ public class Pfunc_wiki_props_tst {
 	@Test   public void NumArticles_raw()			{Init_numArticles(1234); fxt.Test_parse_tmpl_str_test("{{NUMBEROFARTICLES:R}}"			, "{{test}}", "1234"); Init_numArticles(2);}
 	@Test   public void NumArticles_fmt()			{Init_numArticles(1234); fxt.Test_parse_tmpl_str_test("{{NUMBEROFARTICLES}}"			, "{{test}}", "1,234"); Init_numArticles(2);}
 	@Test   public void NumArticles_fmt_i18n()	{ // PURPOSE: use lang's num_mgr; PAGE:ru.u:Main_Page; DATE:2014-07-03
-		fxt.Lang_by_id_(Xol_lang_itm_.Id_ru);
+		fxt.Lang_by_id_(Xol_lang_stub_.Id_ru);
 		Init_numArticles(1234); fxt.Test_parse_tmpl_str_test("{{NUMBEROFARTICLES}}"			, "{{test}}", "1234"); Init_numArticles(2);
 	}
 	private Pfunc_wiki_props_tst Init_numArticles(int v) {fxt.Wiki().Stats().NumArticles_(v); return this;}

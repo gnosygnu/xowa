@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.msgs.*;
-import gplx.xowa.html.hrefs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
 public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
@@ -39,7 +39,7 @@ public class Move_page implements Xows_page {
 		page.Data_raw_(html);
 	}
 	private void Exec_rename(Xowe_wiki wiki, Xoae_page page) {
-		gplx.xowa.dbs.Xodb_save_mgr save_mgr = wiki.Db_mgr().Save_mgr();
+		gplx.xowa.wikis.dbs.Xodb_save_mgr save_mgr = wiki.Db_mgr().Save_mgr();
 		int trg_ns_id = args.Trg_ns();
 		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_wo_type("unknown ns", "ns", trg_ns_id);
 		byte[] trg_ttl_bry = args.Trg_ttl();
@@ -126,7 +126,7 @@ class Move_trg_ns_list_fmtr implements Bry_fmtr_arg {
 		this.wiki = wiki;
 		this.ttl = ttl;
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Ids_len();
 		for (int i = 0; i < ns_len; i++) {

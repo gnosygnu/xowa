@@ -23,7 +23,7 @@ public class GfoFldList_ {
 	public static GfoFldList str_(String... names) {
 		GfoFldList rv = new GfoFldList_base();
 		for (String name : names)
-			rv.Add(name, StringClassXtn._);
+			rv.Add(name, StringClassXtn.Instance);
 		return rv;
 	}
 }
@@ -50,7 +50,7 @@ class GfoFldList_base implements GfoFldList {
 		}
 		return sb.To_str();
 	}
-	Ordered_hash hash = Ordered_hash_.new_(); Hash_adp idxs = Hash_adp_.new_(); // PERF: idxs used for Idx_of; need to recalc if Del ever added 
+	Ordered_hash hash = Ordered_hash_.New(); Hash_adp idxs = Hash_adp_.new_(); // PERF: idxs used for Idx_of; need to recalc if Del ever added 
 }
 class GfoFldList_null implements GfoFldList {
 	public int Count() {return 0;}

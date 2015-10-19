@@ -35,7 +35,7 @@ public class Xoa_fmtr_itm implements GfoInvkAble {
 			eval_mgr.Invk_(itm_invk);
 			fmtr.Bld_bfr(bfr, Bry_.Ary_empty);
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src))					return src;

@@ -58,7 +58,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			this.wmf_api = true;
 		}
 		else {
-			Io_url root_url = App_cmd_arg.Val_as_url_rel_url_or(root_str, app_fsys.File_dir(), Io_url_.new_dir_(root_str), true);
+			Io_url root_url = Gfo_cmd_arg_itm_.Val_as_url__rel_url_or(root_str, Bool_.Y, app_fsys.File_dir(), Io_url_.new_dir_(root_str));
 			this.root_bry = root_url.RawBry();
 			this.dir_spr = root_url.Info().DirSpr_byte();
 			this.root_http = root_url.To_http_file_bry();

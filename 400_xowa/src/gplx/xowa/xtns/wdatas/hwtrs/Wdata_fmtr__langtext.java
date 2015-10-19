@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;
 	private byte[] col_hdr_lang_name, col_hdr_lang_code, col_hdr_text; private int list_len;
@@ -36,7 +36,7 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 		list.Sort_by(lang_sorter);
 		fmtr_row.Init_by_page(list);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (list_len == 0) return;
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), col_hdr_lang_name, col_hdr_lang_code, col_hdr_text, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
 	}
@@ -60,12 +60,12 @@ interface Wdata_fmtr__langtext_row extends Bry_fmtr_arg {
 class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
-			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Html_utl.Escape_html_as_bry(lang_itm.Localized_name()), Html_utl.Escape_html_as_bry(itm.Text()));
+			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(itm.Lang());
+			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Html_utl.Escape_html_as_bry(lang_itm.Canonical_name()), Html_utl.Escape_html_as_bry(itm.Text()));
 		}
 	}
 	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
@@ -95,7 +95,7 @@ class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
 class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);
@@ -103,7 +103,7 @@ class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
 			int vals_len = vals_ary.length;
 			for (int j = 0; j < vals_len; ++j) {
 				byte[] val = vals_ary[j];
-				Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
+				Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(itm.Lang());
 				byte[] lang_code = Byte_ascii.Dash_bry;
 				byte[] lang_code_style = lang_code_style_n;
 				if (j == 0) {

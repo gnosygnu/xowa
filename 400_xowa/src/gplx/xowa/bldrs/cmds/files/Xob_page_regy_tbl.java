@@ -34,7 +34,7 @@ class Xob_page_regy_tbl {
 		Sqlite_engine_.Db_detach(cur, "page_db");
 	}
 	private static void Create_data__insert_redirect(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
-		if (!Io_mgr.I.ExistsFil(join)) return;	// redirect_db will not exist when commons.wikimedia.org is set up on new machine
+		if (!Io_mgr.Instance.ExistsFil(join)) return;	// redirect_db will not exist when commons.wikimedia.org is set up on new machine
 		usr_dlg.Note_many("", "", "inserting redirect: ~{0}", join.OwnerDir().NameOnly());
 		Sqlite_engine_.Db_attach(cur, "redirect_db", join.Raw());
 		cur.Exec_sql(String_.Format(Sql_create_redirect, repo_tid));

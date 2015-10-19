@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
-import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
-import gplx.xowa.html.modules.popups.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.htmls.tocs.*;
+import gplx.xowa.htmls.modules.popups.*; import gplx.xowa.htmls.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 import gplx.xowa.parsers.*;
 public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {
@@ -40,7 +40,7 @@ public class Xoae_page implements Xoa_page {
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xopg_redlink_lnki_list	Redlink_lnki_list() {return redlink_lnki_list;} private Xopg_redlink_lnki_list redlink_lnki_list;
-	public Xol_lang					Lang() {return lang;} public Xoae_page Lang_(Xol_lang v) {lang = v; return this;} private Xol_lang lang;
+	public Xol_lang_itm					Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public Xopg_tab_data			Tab_data() {return tab_data;} private final Xopg_tab_data tab_data = new Xopg_tab_data();
 	public Xopg_hdump_data			Hdump_data() {return hdump_data;} private final Xopg_hdump_data hdump_data = new Xopg_hdump_data();

@@ -22,7 +22,7 @@ public class Xow_abrv_xo_ {
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
 		return Xow_abrv_xo_.To_bry(domain_itm.Domain_bry(), domain_itm.Lang_orig_key(), domain_itm.Domain_type());
 	}
-	public static byte[] To_bry(byte[] domain_bry, byte[] lang_key, Xow_domain_type type) {	// en.wikipedia.org -> en.w			
+	public static byte[] To_bry(byte[] domain_bry, byte[] lang_key, Xow_domain_tid type) {	// en.wikipedia.org -> en.w			
 		byte[] type_abrv = type.Abrv();
 		if		(type.Multi_lang())			// wikipedia,wiktionary,etc..
 			return Bry_.Add(lang_key, Byte_ascii.Dot_bry, type_abrv);
@@ -34,18 +34,18 @@ public class Xow_abrv_xo_ {
 	public static Xow_domain_itm To_itm(byte[] src) {
 		int src_len = src.length;
 		byte[] domain_bry = src;	// default to src; handles unknown abrv like "a.wikia.com";"xowa";others
-		Xow_domain_type type = null;
+		Xow_domain_tid type = null;
 		int dot_pos = Bry_find_.Find_fwd(src, Byte_ascii.Dot);
 		if (dot_pos != Bry_find_.Not_found) {	// dot found; EX: "en.w"
-			type = Xow_domain_type_.Get_abrv_as_itm(src, dot_pos + 1, src_len);
+			type = Xow_domain_tid_.Get_abrv_as_itm(src, dot_pos + 1, src_len);
 			if (type != null) {		// type found; EX: ".w"
-				Xol_lang_itm lang = Xol_lang_itm_.Get_by_key(src, 0, dot_pos);
+				Xol_lang_stub lang = Xol_lang_stub_.Get_by_key_or_null(src, 0, dot_pos);
 				if (lang != null)	// lang found; EX: "en."
 					domain_bry = Bry_.Add(lang.Key(), type.Domain_bry());
 			}
 		}
 		else {						// dot missing; EX: "c"
-			type = Xow_domain_type_.Get_abrv_as_itm(src, 0, src_len);
+			type = Xow_domain_tid_.Get_abrv_as_itm(src, 0, src_len);
 			if (type != null) {		// type found; EX: "c"
 				domain_bry = type.Domain_bry();
 			}

@@ -41,11 +41,11 @@ public class PerfLogMgr_fxt {
 			PerfLogItm itm = (PerfLogItm)itmObj;
 			sb.Add(itm.To_str()).Add_char_crlf();
 		}
-		Io_mgr.I.AppendFilStr(url, sb.To_str());
+		Io_mgr.Instance.AppendFilStr(url, sb.To_str());
 		entries.Clear();
 	}
 	List_adp entries = List_adp_.new_(); PerfLogTmr tmr = PerfLogTmr.new_(); Io_url url = Io_url_.Empty;
-	public static final PerfLogMgr_fxt _ = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
+	public static final PerfLogMgr_fxt Instance = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
 	class PerfLogItm {
 		public String To_str() {
 			String secondsStr = TimeSpanAdp_.To_str(milliseconds, TimeSpanAdp_.Fmt_Default);

@@ -29,7 +29,7 @@ public class Xob_ttl_filter_mgr {
 	public boolean Match_include(byte[] src) {return include_is_empty ? false : include_hash.Has(src);}
 	public boolean Match_exclude(byte[] src) {return exclude_is_empty ? false : exclude_hash.Has(src);}
 	public void Load(boolean exclude, Io_url url) {
-		byte[] src = Io_mgr.I.LoadFilBry_loose(url);
+		byte[] src = Io_mgr.Instance.LoadFilBry_loose(url);
 		if (Bry_.Len_gt_0(src)) Load(exclude, src);
 	}
 	public void Load(boolean exclude, byte[] src) {

@@ -87,6 +87,6 @@ class Wdata_date_fxt {
 		if (msgs == null) msgs = Wdata_hwtr_msgs.new_en_();
 		Wdata_date date = Wdata_date.parse(Bry_.new_a7(raw), precision, init_before, init_after, init_calendar_is_julian);
 		Wdata_date.Xto_str(tmp_bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
-		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
+		Tfds.Eq(expd, tmp_bfr.To_str_and_clear());
 	}
 }

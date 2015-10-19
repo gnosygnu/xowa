@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 public class Xol_grammar_fi implements Xol_grammar {
 	public boolean Vowel_harmony(byte[] word, int word_len) {
 		// $aou = preg_match( '/[aou][^äöy]*$/i', $word );
@@ -35,7 +35,7 @@ public class Xol_grammar_fi implements Xol_grammar {
 		}
 		return aou_found;
 	}
-	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang lang, byte[] word, byte[] type) {
+	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {
 		if (Bry_.Len_eq_0(word)) return true;	// empty_string returns ""
 		byte tid = Xol_grammar_.Tid_of_type(type);
 		if (tid == Xol_grammar_.Tid_unknown) {bfr.Add(word); return true;} // unknown type returns word

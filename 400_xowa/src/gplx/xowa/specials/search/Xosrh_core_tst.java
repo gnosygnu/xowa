@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_core_tst {
 //		@Before public void Init() {fxt.Clear();} private Xos_search_mgr_fxt fxt = new Xos_search_mgr_fxt();
 	@Test   public void Basic() {
@@ -121,7 +121,7 @@ public class Xosrh_core_tst {
 //				Xobl_regy_itm itm = ary[i];
 //				itm.Srl_save(tmp_bfr);
 //			}
-//			Io_mgr.I.SaveFilBfr(url, tmp_bfr);
+//			Io_mgr.Instance.SaveFilBfr(url, tmp_bfr);
 //		}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 //		public void Init_data(Io_url fil, params Xobl_data_itm[] ary) {
 //			Xob_xdat_file xdat_file = new Xob_xdat_file();
@@ -129,7 +129,7 @@ public class Xosrh_core_tst {
 //			for (int i = 0; i < ary_len; i++) {
 //				Xobl_data_itm itm = ary[i];
 //				itm.Srl_save(tmp_bfr);
-//				xdat_file.Insert(bfr, tmp_bfr.Xto_bry_and_clear());
+//				xdat_file.Insert(bfr, tmp_bfr.To_bry_and_clear());
 //			}
 //			xdat_file.Save(fil);
 //		}
@@ -159,7 +159,7 @@ public class Xosrh_core_tst {
 //			search_mgr.Page_mgr().Ns_mgr().Add_all(); // WORKAROUND: xdat fmt does not store ns with search data; pages will be retrieved with ns_id = null; force ns_all (instead of allowing ns_main default);
 //		}
 //		public void Clear() {
-//			Io_mgr.I.InitEngine_mem();
+//			Io_mgr.Instance.InitEngine_mem();
 //			app = Xoa_app_fxt.app_();
 //			wiki = Xoa_app_fxt.wiki_tst_(app);
 //			search_mgr = wiki.Special_mgr().Page_search();

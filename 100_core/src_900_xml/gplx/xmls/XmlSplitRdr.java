@@ -23,7 +23,7 @@ public class XmlSplitRdr {
 	public int CurRead() {return curRead;} int curRead;
 	public boolean Done() {return done;} private boolean done;		
 	public XmlSplitRdr InitAll_(Io_url url) {
-		stream = Io_mgr.I.OpenStreamRead(url);
+		stream = Io_mgr.Instance.OpenStreamRead(url);
 		curLen = stream.Len();
 		curAry = new byte[(int)curLen];
 		curSum = 0;
@@ -32,8 +32,8 @@ public class XmlSplitRdr {
 		return this;
 	}
 	public XmlSplitRdr Init_(Io_url url, int curArySize) {
-		stream = Io_mgr.I.OpenStreamRead(url);
-		curLen = Io_mgr.I.QueryFil(url).Size();
+		stream = Io_mgr.Instance.OpenStreamRead(url);
+		curLen = Io_mgr.Instance.QueryFil(url).Size();
 		curAry = new byte[curArySize];
 		curSum = 0;
 		curRead = 0;

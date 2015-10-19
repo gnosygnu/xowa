@@ -20,7 +20,7 @@ import org.junit.*;
 public class Pfunc_tag_tst {		
 	@Before public void init()			{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic()			{fxt.Test_html_full_str("{{#tag:pre|a|id=b|style=c}}"				, "<pre id=\"b\" style=\"c\">a</pre>");}
-//		@Test   public void Missing_val()	{fxt.ini_Msg(Mwl_tag_rsc._.Invalid).Test_parse_tmpl_str_test("{{#tag:pre|a|id=}}"	, "{{test}}"	, "");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=}} -> ""
+//		@Test   public void Missing_val()	{fxt.ini_Msg(Mwl_tag_rsc.Instance.Invalid).Test_parse_tmpl_str_test("{{#tag:pre|a|id=}}"	, "{{test}}"	, "");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=}} -> ""
 	@Test   public void Atr2_empty()	{fxt.Test_html_full_str("{{#tag:pre|a|id=b|}}"						, "<pre id=\"b\">a</pre>");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=a|}} -> "<references group=a/>"
 	@Test   public void Val_apos()		{fxt.Test_html_full_str("{{#tag:pre|a|id='b'}}"						, "<pre id=\"b\">a</pre>");}
 	@Test   public void Val_quote()		{fxt.Test_html_full_str("{{#tag:pre|a|id=\"b\"}}"					, "<pre id=\"b\">a</pre>");}

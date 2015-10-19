@@ -255,7 +255,7 @@ public class Gfo_url_parser {
 				tmp_bfr.Add_byte_eq().Add(qarg_val);
 		}
 		qargs.Clear();
-		segs_ary.Set_at_last(tmp_bfr.Xto_bry_and_clear());
+		segs_ary.Set_at_last(tmp_bfr.To_bry_and_clear());
 	}
 	public static final byte[] Bry_double_slash = new byte[] {Byte_ascii.Slash, Byte_ascii.Slash};
 }

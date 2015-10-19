@@ -50,7 +50,7 @@ class Nearby_mgr_fxt {
 			tmp_bfr = Bry_bfr.new_();
 		}
 		fxt.Reset();
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		nearby_mgr.Results_max_(1);
 		return this;
 	} 	private Xop_fxt fxt; Nearby_mgr nearby_mgr; Hash_adp_bry excluded; Bry_bfr tmp_bfr;
@@ -72,6 +72,6 @@ class Nearby_mgr_fxt {
 				tmp_bfr.Add(ttl.Page_db());
 			}
 		}
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 }

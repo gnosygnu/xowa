@@ -21,7 +21,7 @@ public class Xop_macro_lxr implements Xop_lxr {
 	public Xop_macro_lxr() {}
 	public int Lxr_tid() {return Xop_lxr_.Tid_macro;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Tab, this); core_trie.Add(Xop_tab_tkn.Bry_tab_ent, this);}	
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Tab);
@@ -31,5 +31,5 @@ public class Xop_macro_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.Tab(bgn_pos, cur_pos));
 		return cur_pos;
 	}
-	public static final Xop_tab_lxr _ = new Xop_tab_lxr();
+	public static final Xop_tab_lxr Instance = new Xop_tab_lxr();
 }

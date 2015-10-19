@@ -70,7 +70,7 @@ class TabBoxFxt implements GfoInvkAble {
 		for (int i = 0; i < tabBox.Tabs_Count(); i++)
 			tabBox.Tabs_DelAt(0);
 		for (int i = 0; i < count; i++)
-			tabBox.Tabs_Add(Int_.Xto_str(i), Int_.Xto_str(i));
+			tabBox.Tabs_Add(Int_.To_str(i), Int_.To_str(i));
 		return this;
 	}
 	@gplx.Internal protected TabBoxFxt Del_at(int index) {tabBox.Tabs_DelAt(index); return this;}
@@ -102,7 +102,7 @@ class TabBoxFxt implements GfoInvkAble {
 //		@gplx.Internal protected TabBoxFxt tst_Raised(boolean expd) {Tfds.Eq(expd, received != null); return this;}
 //		@gplx.Internal protected TabBoxFxt Reorder(int i, int delta) {
 //			tabBox.Width_(240);	// needed for lytMgr
-//			TabBnd_reorderTab reorderBnd = TabBnd_reorderTab._;
+//			TabBnd_reorderTab reorderBnd = TabBnd_reorderTab.Instance;
 //			received = null;
 //			TabPnl pnl = tabBox.Tabs_FetchAt(i);
 //			reorderBnd.MoveTab(pnl.SubTabBtn(), delta);

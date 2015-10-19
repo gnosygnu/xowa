@@ -22,7 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	private final Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
-		Db_conn_bldr.I.Reg_default_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
 		super.Clear(src_repo_is_wmf);
 		this.Api_size().Clear();
 	}

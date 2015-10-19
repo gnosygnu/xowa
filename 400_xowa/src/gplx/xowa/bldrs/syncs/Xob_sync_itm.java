@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.syncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*;
 class Xob_sync_grp {
-	private final Ordered_hash itms = Ordered_hash_.new_();
+	private final Ordered_hash itms = Ordered_hash_.New();
 	public Xob_sync_grp Ctor_itm(DateAdp dump_time, DateAdp upload_time) {
 		this.dump_time = dump_time; this.upload_time = upload_time;
 		return this;
@@ -29,7 +29,7 @@ class Xob_sync_grp {
 	public void Itms__add(Xob_sync_pkg file) {itms.Add(file.Path(), file);}
 	public Xob_sync_pkg Itms__get_at(int i) {return (Xob_sync_pkg)itms.Get_at(i);}
 }
-class Xob_sync_pkg extends Xob_sync_fil {	private final Ordered_hash itms = Ordered_hash_.new_();
+class Xob_sync_pkg extends Xob_sync_fil {	private final Ordered_hash itms = Ordered_hash_.New();
 	public Xob_sync_pkg Ctor_itm(String url, byte zip_tid) {
 		this.url = url; this.zip_tid = zip_tid;
 		return this;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xow_wiki_stats implements GfoInvkAble {
 	public Xow_wiki_stats(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public int NumPages() {return num_pages;} public Xow_wiki_stats NumPages_(int v) {num_pages = v; return this;} private int num_pages;					// in entire wiki: 28,433,596

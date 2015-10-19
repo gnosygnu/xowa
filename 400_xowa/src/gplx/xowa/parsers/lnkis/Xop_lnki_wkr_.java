@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xop_lnki_wkr_ {
@@ -77,7 +77,7 @@ public class Xop_lnki_wkr_ {
 		if (ttl_in_xwiki == null) return ttl; // occurs if ttl is bad in xwiki; EX: [[en:<bad>]]
 		return ttl_in_xwiki.Ns().Id_file() ? ttl_in_xwiki : ttl;
 	}
-	public static int Chk_for_tail(Xol_lang lang, byte[] src, int cur_pos, int src_len, Xop_lnki_tkn lnki) {
+	public static int Chk_for_tail(Xol_lang_itm lang, byte[] src, int cur_pos, int src_len, Xop_lnki_tkn lnki) {
 		int bgn_pos = cur_pos;
 		Btrie_slim_mgr lnki_trail = lang.Lnki_trail_mgr().Trie();
 		while (true) {	// loop b/c there can be multiple consecutive lnki_trail_chars; EX: [[A]]bcde

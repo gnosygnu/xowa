@@ -134,15 +134,15 @@ public class Wdata_date {
 		int after = date.after;
 		if (before == 0) {
 			if (after != 0)
-				bry = tmp_bfr.Add(msgs.Sym_plus()).Add_int_variable(after).Xto_bry_and_clear();
+				bry = tmp_bfr.Add(msgs.Sym_plus()).Add_int_variable(after).To_bry_and_clear();
 		}
 		else {
 			if		(after == 0)
-				bry = tmp_bfr.Add(msgs.Sym_minus()).Add_int_variable(before).Xto_bry_and_clear();
+				bry = tmp_bfr.Add(msgs.Sym_minus()).Add_int_variable(before).To_bry_and_clear();
 			else if (before == after)
-				bry = tmp_bfr.Add(msgs.Sym_plusminus()).Add_int_variable(before).Xto_bry_and_clear();
+				bry = tmp_bfr.Add(msgs.Sym_plusminus()).Add_int_variable(before).To_bry_and_clear();
 			else
-				bry = tmp_bfr.Add(msgs.Sym_minus()).Add_int_variable(before).Add(msgs.Sym_list_comma()).Add(msgs.Sym_plus()).Add_int_variable(after).Xto_bry_and_clear();
+				bry = tmp_bfr.Add(msgs.Sym_minus()).Add_int_variable(before).Add(msgs.Sym_list_comma()).Add(msgs.Sym_plus()).Add_int_variable(after).To_bry_and_clear();
 		}
 		if (bry != null) {
 			bry = tmp_fmtr.Fmt_(msgs.Sym_fmt_parentheses()).Bld_bry_many(tmp_bfr, bry);

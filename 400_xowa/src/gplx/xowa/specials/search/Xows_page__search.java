@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.xowa.apis.xowa.specials.*;
+import gplx.core.primitives.*; import gplx.xowa.apps.apis.xowa.specials.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	private final Xoae_app app; private final Xow_domain_itm wiki_domain; private final Xoapi_search search_api;		
@@ -34,7 +34,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__search;}
 	private void Multi_wikis_changed() {
 		Xow_domain_crt_itm crt = search_api.Multi_wikis_crt(wiki_domain);
-		this.search_domain_ary = app.Usere().Wiki().Xwiki_mgr().Get_by_crt(wiki_domain, crt);
+		this.search_domain_ary = Get_by_crt(app.Usere().Wiki().Xwiki_mgr(), wiki_domain, crt);
 		if (search_domain_ary.length == 0) search_domain_ary = new Xow_domain_itm[] {wiki_domain};	// default to current if bad input
 		Multi_sorts_changed();
 	}
@@ -45,7 +45,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		Xow_domain_sorter__manual.Sort(sorter, search_domain_ary);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		if (wiki.Domain_tid() == Xow_domain_type_.Int__home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
+		if (wiki.Domain_tid() == Xow_domain_tid_.Int__home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
 		if (search_domain_ary == null) Multi_wikis_changed();
 		// get args
 		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();
@@ -61,7 +61,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		}
 		if (Bry_.Len_eq_0(search_bry)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
 		if (	search_suggest_mgr.Auto_wildcard()	// add * automatically if option set
-			&&	wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// only apply to sql
+			&&	wiki.Db_mgr().Tid() == gplx.xowa.wikis.dbs.Xodb_mgr_sql.Tid_sql	// only apply to sql
 			&&	Bry_find_.Find_fwd(search_bry, Byte_ascii.Star) == -1		// search term does not have asterisk
 			)
 			search_bry = Bry_.Add(search_bry, Byte_ascii.Star);
@@ -101,4 +101,14 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
 	private static final byte[] Qarg__fulltext = Bry_.new_a7("fulltext"), Qarg__fulltext__y = Bry_.new_a7("y");
+	private static Xow_domain_itm[] Get_by_crt(gplx.xowa.wikis.xwikis.Xow_xwiki_mgr xwiki_mgr, Xow_domain_itm cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
+		List_adp rv = List_adp_.new_();
+		int len = xwiki_mgr.Len();
+		for (int i = 0; i < len; ++i) {
+			gplx.xowa.wikis.xwikis.Xow_xwiki_itm xwiki = xwiki_mgr.Get_at(i); if (!xwiki.Offline()) continue;
+			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(xwiki.Domain_bry());
+			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
+		}
+		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
+	}
 }

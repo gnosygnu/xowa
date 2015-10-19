@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pft_func_time extends Pf_func_base {
 	Pft_func_time(boolean utc) {this.utc = utc;} private boolean utc;
@@ -33,11 +33,11 @@ public class Pft_func_time extends Pf_func_base {
 		if (date == null || error_bfr.Len() > 0)
 			bfr.Add_str_a7("<strong class=\"error\">").Add_bfr_and_clear(error_bfr).Add_str("</strong>");
 		else {
-			Xol_lang lang = ctx.Lang();
+			Xol_lang_itm lang = ctx.Lang();
 			if (Bry_.Len_gt_0(arg_lang)) {
-				Xol_lang_itm specified_lang_itm = Xol_lang_itm_.Get_by_key(arg_lang);
+				Xol_lang_stub specified_lang_itm = Xol_lang_stub_.Get_by_key_or_null(arg_lang);
 				if (specified_lang_itm != null) {	// NOTE: if lang_code is bad, then ignore (EX:bad_code)
-					Xol_lang specified_lang = ctx.Wiki().Appe().Lang_mgr().Get_by_key_or_new(arg_lang);
+					Xol_lang_itm specified_lang = ctx.Wiki().Appe().Lang_mgr().Get_by_or_new(arg_lang);
 					lang = specified_lang;	
 				}
 			}
@@ -59,7 +59,7 @@ public class Pft_func_time extends Pf_func_base {
 	public static final Pft_func_time _Lcl = new Pft_func_time(false), _Utc = new Pft_func_time(true);
 }
 class DateAdpTranslator_xapp {
-	public static void Translate(Xowe_wiki wiki, Xol_lang lang, int type, int val, Bry_bfr bb) {
+	public static void Translate(Xowe_wiki wiki, Xol_lang_itm lang, int type, int val, Bry_bfr bb) {
 		lang.Init_by_load_assert();
 		byte[] itm_val = lang.Msg_mgr().Val_by_id(type + val); if (itm_val == null) return;
 		bb.Add(itm_val);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.xowa.wms.*;
+import gplx.core.primitives.*; import gplx.xowa.bldrs.wms.*;
 public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_img {
 	private final Xowmf_mgr wmf_mgr; private final ProcessAdp cmd_convert, cmd_convert_svg_to_png;
 	private boolean init_needed = true;
@@ -24,8 +24,8 @@ public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_im
 		this.wmf_mgr = wmf_mgr; this.cmd_convert = cmd_convert; this.cmd_convert_svg_to_png = cmd_convert_svg_to_png;
 	}
 	public boolean Resize_exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
-		if (!Io_mgr.I.ExistsFil(src)) return false;
-		Io_mgr.I.CreateDirIfAbsent(trg.OwnerDir());
+		if (!Io_mgr.Instance.ExistsFil(src)) return false;
+		Io_mgr.Instance.CreateDirIfAbsent(trg.OwnerDir());
 		if (init_needed) {
 			init_needed = false;
 			Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();

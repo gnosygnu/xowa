@@ -77,23 +77,23 @@ public class Io_mgr__tst {
 	}
 }
 class Io_mgr__fxt {
-	public void Clear() {Io_mgr.I.InitEngine_mem();}
+	public void Clear() {Io_mgr.Instance.InitEngine_mem();}
 	public void Exec_itm_create(String... ary) {
 		for (String itm : ary) {
 			Io_url url = Io_url_.new_any_(itm);
 			if (url.Type_dir())
-				Io_mgr.I.CreateDir(url);
+				Io_mgr.Instance.CreateDir(url);
 			else
-				Io_mgr.I.SaveFilStr(url, url.NameAndExt());
+				Io_mgr.Instance.SaveFilStr(url, url.NameAndExt());
 		}
 	}
-	public void Exec_dir_delete_empty(String url)		{Io_mgr.I.Delete_dir_empty(Io_url_.mem_dir_(url));}
+	public void Exec_dir_delete_empty(String url)		{Io_mgr.Instance.Delete_dir_empty(Io_url_.mem_dir_(url));}
 	public void Test_itm_exists_n(String... ary)	{Test_itm_exists(Bool_.N, ary);}
 	public void Test_itm_exists_y(String... ary)	{Test_itm_exists(Bool_.Y, ary);}
 	public void Test_itm_exists(boolean expd, String... ary) {
 		for (String itm : ary) {
 			Io_url url = Io_url_.new_any_(itm);
-			boolean actl = url.Type_dir() ? Io_mgr.I.ExistsDir(url) : Io_mgr.I.ExistsFil(url);
+			boolean actl = url.Type_dir() ? Io_mgr.Instance.ExistsDir(url) : Io_mgr.Instance.ExistsFil(url);
 			Tfds.Eq(expd, actl, itm);
 		}
 	}

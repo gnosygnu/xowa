@@ -29,7 +29,7 @@ class Dg_match_mgr_fxt {
 	private Dg_match_mgr match_mgr;
 	private final List_adp rule_list = List_adp_.new_();
 	public void Clear() {
-		Db_conn_bldr.I.Reg_default_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
 		Io_url root_dir = Io_url_.mem_dir_("mem/dg/");
 		match_mgr = new Dg_match_mgr(root_dir.GenSubDir("words"), 1, 0, Bool_.Y, Bool_.Y, root_dir.GenSubDir("log"));
 		rule_list.Clear();

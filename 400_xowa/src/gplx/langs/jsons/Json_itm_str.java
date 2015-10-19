@@ -73,6 +73,6 @@ class Json_itm_str extends Json_itm_base {
 					break;
 			}		
 		}
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 }

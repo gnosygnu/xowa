@@ -47,13 +47,13 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 		else if	(ctx.Match(k, Invk_lua_timeout_))					lua_timeout = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_lua_timeout_polling))			return lua_timeout_polling;
 		else if	(ctx.Match(k, Invk_lua_timeout_polling_))			lua_timeout_polling = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_lua_log_enabled))				return Yn.Xto_str(lua_log_enabled);
+		else if	(ctx.Match(k, Invk_lua_log_enabled))				return Yn.To_str(lua_log_enabled);
 		else if	(ctx.Match(k, Invk_lua_log_enabled_))				lua_log_enabled = m.ReadBool("v");
 		else if	(ctx.Match(k, Invk_lua_timeout_busy_wait))			return lua_timeout_busy_wait;
 		else if	(ctx.Match(k, Invk_lua_timeout_busy_wait_))			lua_timeout_busy_wait = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_lua_timeout_loop))				return lua_timeout_loop;
 		else if	(ctx.Match(k, Invk_lua_timeout_loop_))				lua_timeout_loop = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_luaj_debug_enabled))				return Yn.Xto_str(luaj_debug_enabled);
+		else if	(ctx.Match(k, Invk_luaj_debug_enabled))				return Yn.To_str(luaj_debug_enabled);
 		else if	(ctx.Match(k, Invk_luaj_debug_enabled_))			Luaj_debug_enabled_(m.ReadBool("v"));
 		else if	(ctx.Match(k, Invk_invoke_wkr))						return m.ReadYnOrY("v") ? Invoke_wkr_or_new() : GfoInvkAble_.Null;
 		else														return super.Invk(ctx, ikey, k, m);

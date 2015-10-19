@@ -21,8 +21,8 @@ public class Xol_convert_wkr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xol_convert_wkr(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private final byte[] key;
-	public void Add(byte[] src, byte[] trg) {trie.Add_obj(src, trg);}
-	public void Del(byte[] src)				{trie.Del(src);}
+	public void Add(byte[] src, byte[] trg) {trie.Add_obj(src, trg);}	// called by -{H}-
+	public void Del(byte[] src)				{trie.Del(src);}			// called by -{-}-
 	public boolean Convert_text(Bry_bfr bfr, byte[] src) {return Convert_text(bfr, src, 0, src.length);}
 	public boolean Convert_text(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		int pos = bgn;
@@ -52,16 +52,16 @@ public class Xol_convert_wkr {
 		if (!matched) bfr.Add_mid(src, bgn, end);	// no convert; make sure to add back src, else bfr will be blank
 		return matched;
 	}
-	public void Rebuild(Xol_convert_regy regy, byte[][] ary) {
+	public void Init(Xol_convert_regy regy, byte[][] vnt_ary) {	// EX: "zh-cn" should add all converts from "zh-hans" "zh-cn" to its wkr
 		trie.Clear();
-		int len = ary.length;
+		int len = vnt_ary.length;
 		for (int i = 0; i < len; ++i) {
-			byte[] key = ary[i];
-			Xol_convert_grp grp = regy.Get_or_null(key); if (grp == null) continue;	// vnts may not have convert mapping; EX: zh-my
-			Rebuild_grp(grp);
+			byte[] key = vnt_ary[i];
+			Xol_convert_grp grp = regy.Get_or_null(key); if (grp == null) continue;	// vnt may not have convert mapping; EX: zh-my
+			Init_grp(grp);
 		}
 	}
-	private void Rebuild_grp(Xol_convert_grp grp) {
+	private void Init_grp(Xol_convert_grp grp) {
 		int len = grp.Len();
 		for (int i = 0; i < len; ++i) {
 			Xol_convert_itm itm = grp.Get_at(i);

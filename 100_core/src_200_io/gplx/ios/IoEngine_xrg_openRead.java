@@ -19,9 +19,9 @@ package gplx.ios; import gplx.*;
 public class IoEngine_xrg_openRead {
 	public Io_url Url() {return url;} Io_url url;
 	public String ErrMsg() {return errMsg;} private String errMsg;
-	public IoStream ExecAsIoStreamOrFail() {return IoEnginePool._.Get_by(url.Info().EngineKey()).OpenStreamRead(url);}
+	public IoStream ExecAsIoStreamOrFail() {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).OpenStreamRead(url);}
 	public IoStream ExecAsIoStreamOrNull() {
-		try {return IoEnginePool._.Get_by(url.Info().EngineKey()).OpenStreamRead(url);}
+		try {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).OpenStreamRead(url);}
 		catch (Exception exc) {
 			errMsg = Err_.Message_lang(exc);
 			return IoStream_.Null;

@@ -37,5 +37,5 @@ public class Mysql_conn_info extends Db_conn_info__base {
 		rv.pwd = m.ReadStr("pwd");
 		return rv;
 	}
-        public static final Mysql_conn_info _ = new Mysql_conn_info(); Mysql_conn_info() {}
+        public static final Mysql_conn_info Instance = new Mysql_conn_info(); Mysql_conn_info() {}
 }

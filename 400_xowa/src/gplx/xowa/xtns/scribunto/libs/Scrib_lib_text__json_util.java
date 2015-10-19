@@ -22,7 +22,7 @@ class Scrib_lib_text__json_util {
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, KeyVal[] kv_ary, boolean is_encoding) {
 		int next = 0;
 		if (is_encoding) {
-			Array_.Sort(kv_ary, KeyVal__sorter__key_is_numeric.I);
+			Array_.Sort(kv_ary, KeyVal__sorter__key_is_numeric.Instance);
 			next = 1;
 		}
 		boolean is_sequence = true;
@@ -196,7 +196,7 @@ class KeyVal__sorter__key_is_numeric implements gplx.lists.ComparerAble {
 		int rhs_int = Int_.parse_or(rhs_itm.Key(), Int_.Min_value);
 		return CompareAble_.Compare(lhs_int, rhs_int);
 	}
-	public static final KeyVal__sorter__key_is_numeric I = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
+	public static final KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
 }
 class Scrib_lib_text__reindex_data {
 	public boolean				Rv_is_kvy() {return rv_is_kvy;} private boolean rv_is_kvy;

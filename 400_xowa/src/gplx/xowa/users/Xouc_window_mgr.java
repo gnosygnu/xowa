@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.*; import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.xowa.guis.views.*;
 public class Xouc_window_mgr implements GfoInvkAble {
 	public Xouc_window_mgr(Xoue_user user) {this.user = user;} private Xoue_user user;
 	public byte Mode_tid() {return mode_tid;} private byte mode_tid = Mode_tid_previous;
@@ -30,7 +30,7 @@ public class Xouc_window_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_mode_list))				return Options_mode_list;
 		else if	(ctx.Match(k, Invk_rect))					return rect;
 		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_safe_mode))				return Yn.Xto_str(safe_mode);
+		else if	(ctx.Match(k, Invk_safe_mode))				return Yn.To_str(safe_mode);
 		else if	(ctx.Match(k, Invk_safe_mode_))				safe_mode = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_previous_adj))			return previous_adj;
 		else if	(ctx.Match(k, Invk_previous_adj_))			previous_adj = Rect_ref.parse(m.ReadStr("v"));

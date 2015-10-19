@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.*; import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.files.*; import gplx.xowa.wikis.tdbs.metas.*;
 public class Xofw_wiki_wkr_mock implements Xofw_wiki_finder {
 	int repo_idx; byte[] repo_wiki_key;
 	public Xofw_wiki_wkr_mock Clear_en_wiki() {return Clear(1, Bry_en_wiki);}

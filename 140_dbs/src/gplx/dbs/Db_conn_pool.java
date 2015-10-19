@@ -39,8 +39,8 @@ public class Db_conn_pool {
 		for (Db_engine itm : ary)
 			engine_hash.Add(itm.Tid(), itm);
 	}
-        public static final Db_conn_pool I = new Db_conn_pool(); Db_conn_pool() {this.Init();}
+        public static final Db_conn_pool Instance = new Db_conn_pool(); Db_conn_pool() {this.Init();}
 	private void Init() {
-		this.Engines__add(Noop_engine._, TdbEngine._, Mysql_engine._, Postgres_engine._, Sqlite_engine._, Db_engine__mem._);
+		this.Engines__add(Noop_engine.Instance, TdbEngine.Instance, Mysql_engine.Instance, Postgres_engine.Instance, Sqlite_engine.Instance, Db_engine__mem.Instance);
 	}
 }

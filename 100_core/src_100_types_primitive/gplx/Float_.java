@@ -23,9 +23,9 @@ public class Float_ {
 	public static boolean IsNaN(float v) {return Float.isNaN(v);}		
 	public static float cast(Object obj)	{try {return (Float)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, float.class, obj);}}
 	public static float parse(String raw)	{try {return Float.parseFloat(raw);} catch(Exception exc) {throw Err_.new_parse_exc(exc, float.class, raw);}} 
-	public static String Xto_str(float v) {
+	public static String To_str(float v) {
 				int v_int = (int)v;
-		return v - v_int == 0 ? Int_.Xto_str(v_int) : Float.toString(v);
+		return v - v_int == 0 ? Int_.To_str(v_int) : Float.toString(v);
 			}
 	public static float Div(int val, int divisor) {return (float)val / (float)divisor;}
 	public static float Div(long val, long divisor) {return (float)val / (float)divisor;}

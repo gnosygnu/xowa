@@ -52,6 +52,6 @@ public class Sql_select_fld_list {
 		}
 		return sb.To_str();
 	}
-	Ordered_hash hash = Ordered_hash_.new_();
+	Ordered_hash hash = Ordered_hash_.New();
 	public static Sql_select_fld_list new_() {return new Sql_select_fld_list();} Sql_select_fld_list() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.xowa.ctgs.*; import gplx.xowa.bldrs.*;
+import org.junit.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.*;
 public class Xoctg_link_idx_wkr_tst {		
 	@Before public void init() {fxt.Clear();} private Xob_base_fxt fxt = new Xob_base_fxt();
 	@Test   public void Basic() {

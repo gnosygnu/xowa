@@ -19,19 +19,19 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.nulls.*; import gplx.dbs.engines.mems.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.tdbs.*;
 import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_conn_info_ {
-	public static final Db_conn_info Null			= Noop_conn_info.I;
+	public static final Db_conn_info Null			= Noop_conn_info.Instance;
 	public static final Db_conn_info Test			= Mysql_conn_info.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
-	public static Db_conn_info parse(String raw)		{return Db_conn_info_pool._.Parse(raw);}
+	public static Db_conn_info parse(String raw)		{return Db_conn_info_pool.Instance.Parse(raw);}
 	public static Db_conn_info sqlite_(Io_url url)		{return Sqlite_conn_info.load_(url);}
 	public static Db_conn_info tdb_(Io_url url)			{return Tdb_conn_info.new_(url);}
 	public static Db_conn_info mem_(String db)			{return Db_conn_info__mem.new_(db);}
 	public static final String Key_tdb = Tdb_conn_info.Tid_const;
 }
 class Db_conn_info_pool {
-	private Ordered_hash regy = Ordered_hash_.new_();
+	private Ordered_hash regy = Ordered_hash_.New();
 	public Db_conn_info_pool() {
-		this.Add(Noop_conn_info.I).Add(Tdb_conn_info._).Add(Mysql_conn_info._).Add(Postgres_conn_info._).Add(Sqlite_conn_info._);
-		this.Add(Db_conn_info__mem.I);
+		this.Add(Noop_conn_info.Instance).Add(Tdb_conn_info.Instance).Add(Mysql_conn_info.Instance).Add(Postgres_conn_info.Instance).Add(Sqlite_conn_info.Instance);
+		this.Add(Db_conn_info__mem.Instance);
 	}
 	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Tid(), itm); return this;}
 	public Db_conn_info Parse(String raw) {// assume each pair has format of: name=val;
@@ -52,5 +52,5 @@ class Db_conn_info_pool {
 		}
 		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
 	}
-	public static final Db_conn_info_pool _ = new Db_conn_info_pool();
+	public static final Db_conn_info_pool Instance = new Db_conn_info_pool();
 }

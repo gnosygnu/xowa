@@ -22,7 +22,7 @@ public class Pf_formatnum_fa_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.app_();
-		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
+		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
 		app.Gfs_mgr().Run_str_for(lang, Persian_numbers_gfs);
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "fa.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);

@@ -47,7 +47,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 	private String Custom_config() {
 		if (custom_config == null) {	// NOTE: LoadFilStr never returns null, so this will only execute once
 			Io_url custom_config_url = config.User().Fsys_mgr().App_data_cfg_custom_fil();
-			custom_config = Io_mgr.I.LoadFilStr_args(custom_config_url).MissingIgnored_().Exec();				
+			custom_config = Io_mgr.Instance.LoadFilStr_args(custom_config_url).MissingIgnored_().Exec();				
 		}
 		return custom_config;
 	}	private String custom_config;
@@ -60,7 +60,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 		}
 		custom_config = v;
 		// Io_url custom_config_url = config.User().Fsys_mgr().App_data_cfg_custom_fil();	// DELETE: no longer sync user_cfg to custom.gfs; already saved in user.gfs; DATE:2014-05-30
-		// Io_mgr.I.SaveFilStr(custom_config_url, v);
+		// Io_mgr.Instance.SaveFilStr(custom_config_url, v);
 	}
 	public static final byte Page_home = 0, Page_last = 1, Page_xowa = 2;
 }

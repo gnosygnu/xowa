@@ -81,7 +81,7 @@ public class Xowd_db_file {
 		return rv;
 	}
 	public static Xowd_db_file load_(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid) {
-		Db_conn conn = Db_conn_bldr.I.Get(url);
+		Db_conn conn = Db_conn_bldr.Instance.Get(url);
 		if (conn == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xowd_db_file_.To_key(tid), url.Raw());
 			conn = Db_conn_.Noop;

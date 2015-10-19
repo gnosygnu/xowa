@@ -46,7 +46,7 @@ class Io_url_exists_mgr {
 		byte[] url_key = url.RawBry();
 		Object rv_obj = cache_mgr.Get_or_null(url_key);
 		if (rv_obj != null) return ((Bool_obj_ref)rv_obj).Val(); // cached val exists; use it
-		boolean exists = Io_mgr.I.ExistsFil(url);
+		boolean exists = Io_mgr.Instance.ExistsFil(url);
 		cache_mgr.Add(url_key, Bool_obj_ref.new_(exists));
 		return exists;
 	}

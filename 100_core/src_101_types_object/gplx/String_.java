@@ -355,13 +355,13 @@ public class String_ implements GfoInvkAble {
 			c = String_.CharAt(raw, i);
 			if (c == dlm) {
 				if (!addEmptyIfDlmIsLast && sb.Count() == 0 && i == rawLen - 1) {}
-				else list.Add(sb.Xto_str_and_clear());
+				else list.Add(sb.To_str_and_clear());
 			}
 			else
 				sb.Add(c);
 		}
 		if (sb.Count() > 0)
-			list.Add(sb.Xto_str_and_clear());
+			list.Add(sb.To_str_and_clear());
 		return list.To_str_ary();
 	}
 	public static String[] Split(String s, String separator) {return Split_do(s, separator, false);}
@@ -431,7 +431,7 @@ public class String_ implements GfoInvkAble {
 		while (true) {
 			if (sprMatched
 				|| i == textLength) {	// last pass; add whatever's in sb to list
-				list.Add(sb.Xto_str_and_clear());
+				list.Add(sb.To_str_and_clear());
 				if (sprMatched && i == textLength) list.Add(""); // if s ends with spr and last pass, add emptyString as last
 				sprMatched = false;
 			}
@@ -543,6 +543,6 @@ public class String_ implements GfoInvkAble {
 			if (val != null) bfr.Add_str_u8(val);
 			bfr.Add_byte_nl();
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

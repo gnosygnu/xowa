@@ -78,7 +78,7 @@ public class Xoa_css_extractor_basic_tst {
 }
 class Xoa_css_extractor_fxt {
 	public void Clear() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Test();
 		css_installer = new Xoa_css_extractor();
 		css_installer.Download_xrg().Trg_engine_key_(IoEngine_.MemKey);
@@ -101,8 +101,8 @@ class Xoa_css_extractor_fxt {
 		page_fetcher.Add(ns_id, Bry_.new_a7(ttl), Bry_.new_a7(text));
 	}
 	public void Init_fil_empty(String url) 			{Init_fil(url, "");}
-	public void Init_fil(String url, String text) 	{Io_mgr.I.SaveFilStr(url, text);}
-	public void Test_fil(String url, String expd) 	{Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(Io_url_.new_any_(url)));}
+	public void Init_fil(String url, String text) 	{Io_mgr.Instance.SaveFilStr(url, text);}
+	public void Test_fil(String url, String expd) 	{Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(Io_url_.new_any_(url)));}
 	public void Exec_logo_setup() {
 		css_installer.Mainpage_download();
 		css_installer.Logo_setup();

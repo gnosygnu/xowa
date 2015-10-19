@@ -38,7 +38,7 @@ public class IoEngine_fil_basic_memory_tst extends IoEngine_fil_basic_base {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 
-		IoRecycleBin bin = IoRecycleBin._;
+		IoRecycleBin bin = IoRecycleBin.Instance;
 		List_adp list = Tfds.RscDir.XtoNames(); 
 //			foreach (String s in list)
 //				Tfds.Write(s);

@@ -22,7 +22,7 @@ public class DateAdpClassXtn_tst {
 		tst_XtoDb("20091115 220102.999", "2009-11-15 22:01:02.999");
 	}
 	void tst_XtoDb(String val, String expdRaw) {
-		String actlRaw = (String)DateAdpClassXtn._.XtoDb(DateAdp_.parse_gplx(val));
+		String actlRaw = (String)DateAdpClassXtn.Instance.XtoDb(DateAdp_.parse_gplx(val));
 		Tfds.Eq(expdRaw, actlRaw);
 	}
 }

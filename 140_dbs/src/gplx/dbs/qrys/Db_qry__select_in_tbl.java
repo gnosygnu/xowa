@@ -73,7 +73,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 						if (i != 0) bfr.Add_byte_comma();
 						bfr.Add_str_a7(order_fld);
 					}
-					order_by_sql = bfr.Xto_str_and_clear();
+					order_by_sql = bfr.To_str_and_clear();
 					break;
 			}
 		}

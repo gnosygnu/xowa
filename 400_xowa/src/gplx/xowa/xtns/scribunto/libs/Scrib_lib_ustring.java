@@ -143,7 +143,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				if (	j < capts_len				// bounds check	b/c null can be passed
 					&&	Bool_.cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
 					)
-					tmp_list.Add(Int_.Xto_str(grp.Bgn() + Scrib_lib_ustring.Base1));	// return index only for (); NOTE: always return as String; callers expect String, and may do operations like len(result), which will fail if int; DATE:2013-12-20
+					tmp_list.Add(Int_.To_str(grp.Bgn() + Scrib_lib_ustring.Base1));	// return index only for (); NOTE: always return as String; callers expect String, and may do operations like len(result), which will fail if int; DATE:2013-12-20
 				else
 					tmp_list.Add(grp.Val());		// return match
 			}
@@ -190,7 +190,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		}
 		else if	(Object_.Eq(repl_type, Int_.Cls_ref_type)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 			tmp_repl_tid = Repl_tid_string;
-			tmp_repl_bry = Bry_.new_u8(Int_.Xto_str(Int_.cast(repl_obj)));
+			tmp_repl_bry = Bry_.new_u8(Int_.To_str(Int_.cast(repl_obj)));
 		}
 		else if	(Object_.Eq(repl_type, KeyVal[].class)) {
 			tmp_repl_tid = Repl_tid_table;
@@ -232,7 +232,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		int text_len = String_.Len(text);
 		if (pos < text_len)
 			tmp_bfr.Add_str(String_.Mid(text, pos, text_len));			// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	private void Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, byte[] repl_bry, String text, Regx_match match) {
 		switch (repl_tid) {

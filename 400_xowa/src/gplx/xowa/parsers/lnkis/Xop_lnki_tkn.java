@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.pfuncs.ttls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	@Override public byte	Tkn_tid() {return tkn_tid;} private byte tkn_tid = Xop_tkn_itm_.Tid_lnki;

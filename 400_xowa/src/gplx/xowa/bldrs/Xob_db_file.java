@@ -34,7 +34,7 @@ public class Xob_db_file {
 	public static Xob_db_file new__redlink(Io_url dir)				{return new_(dir, Name__redlink);}
 	public static Xob_db_file new_(Io_url dir, String name) {
 		Io_url url = dir.GenSubFil(name);
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(url);
+		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(url);
 		Db_conn conn = conn_data.Conn();
 		Xob_db_file rv = new Xob_db_file(url, conn);
 		if (conn_data.Created())

@@ -24,5 +24,5 @@ public class DateAdpClassXtn extends ClassXtn_base implements ClassXtn {
 	@Override public Object ParseOrNull(String raw)				{return DateAdp_.parse_gplx(raw);}
 	@Override public Object XtoDb(Object obj)					{return DateAdp_.cast(obj).XtoStr_gplx_long();}
 	@Override public String XtoUi(Object obj, String fmt)		{return DateAdp_.cast(obj).XtoStr_fmt(fmt);}
-	public static final DateAdpClassXtn _ =  new DateAdpClassXtn(); DateAdpClassXtn() {} // added to ClassXtnPool by default
+	public static final DateAdpClassXtn Instance =  new DateAdpClassXtn(); DateAdpClassXtn() {} // added to ClassXtnPool by default
 }

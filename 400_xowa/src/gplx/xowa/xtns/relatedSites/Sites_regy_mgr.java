@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
 public class Sites_regy_mgr implements GfoInvkAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	private Xow_xwiki_mgr xwiki_mgr;

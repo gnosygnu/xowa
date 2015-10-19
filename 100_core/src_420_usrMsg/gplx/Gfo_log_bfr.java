@@ -25,5 +25,5 @@ public class Gfo_log_bfr {
 		bfr.Add_byte_nl();
 		return this;
 	}
-	public String Xto_str() {return bfr.Xto_str_and_clear();}
+	public String Xto_str() {return bfr.To_str_and_clear();}
 }

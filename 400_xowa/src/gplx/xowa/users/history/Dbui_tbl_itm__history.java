@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.langs.jsons.*; import gplx.langs.htmls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
-import gplx.xowa.html.bridges.*; import gplx.xowa.html.bridges.dbuis.*; import gplx.xowa.html.bridges.dbuis.tbls.*; import gplx.xowa.html.bridges.dbuis.fmtrs.*;
+import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	private final Xoa_app app; private final Xoud_history_tbl tbl;
 	private final Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
@@ -30,7 +30,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	public Dbui_btn_itm[] Edit_btns() {return Dbui_btn_itm.Ary_empty;}
 	public Dbui_col_itm[] Cols() {return cols;}
 	public void Reg(Bridge_cmd_mgr bridge_mgr) {
-		Dbui_cmd_mgr dbui_mgr = Dbui_cmd_mgr.I;
+		Dbui_cmd_mgr dbui_mgr = Dbui_cmd_mgr.Instance;
 		dbui_mgr.Init_by_bridge(bridge_mgr);
 		dbui_mgr.Add(this);
 	}
@@ -38,7 +38,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	public void Select(Bry_bfr bfr, int top) {
 		tbl.Select_by_top(select_list, 100);
 		Xoud_history_row[] db_rows = (Xoud_history_row[])select_list.To_ary_and_clear(Xoud_history_row.class);
-		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Help:Options/PageHistory"))).Img_16x16(gplx.xowa.html.wtrs.Xoh_img_path.Img_option).Bld_to_bry();
+		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Help:Options/PageHistory"))).Img_16x16(gplx.xowa.htmls.wtrs.Xoh_img_path.Img_option).Bld_to_bry();
 		byte[] delete_confirm_msg = app.Api_root().Usr().Bookmarks().Delete_confirm() ? Msg__delete_confirm : Bry_.Empty;
 		tbl_fmtr.Write(bfr, this, option_link, delete_confirm_msg, To_ui_rows(db_rows));
 	}	private static final byte[] Msg__delete_confirm = Bry_.new_a7(" data-dbui-delete_confirm_msg='Are you sure you want to delete this row?'");
@@ -61,12 +61,12 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 		int id = Bry_.To_int(pkey);
 		return tbl.Select_or_null(id);
 	}
-	private Dbui_row_itm Get_ui_row(Xoud_history_row row) {return Get_ui_row(Int_.Xto_bry(row.Id()), row.Wiki(), row.Url(), row.Count(), row.Time());}
+	private Dbui_row_itm Get_ui_row(Xoud_history_row row) {return Get_ui_row(Int_.To_bry(row.Id()), row.Wiki(), row.Url(), row.Count(), row.Time());}
 	private Dbui_row_itm Get_ui_row(byte[] pkey, byte[] wiki, byte[] url, int count, DateAdp time) {
 		Dbui_val_itm[] vals = new Dbui_val_itm[4];
 		vals[0] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
 		vals[1] = new Dbui_val_itm(wiki, wiki);
-		byte[] count_bry = Int_.Xto_bry(count);
+		byte[] count_bry = Int_.To_bry(count);
 		vals[2] = new Dbui_val_itm(count_bry, count_bry);
 		byte[] time_bry = Bry_.new_u8(time.XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
 		vals[3] = new Dbui_val_itm(time_bry, time_bry);

@@ -36,15 +36,15 @@ class Xow_domain_crt_itm_parser {
 			byte[][] word_ary = Bry_split_.Split(line, Byte_ascii.Pipe);
 			int word_len = word_ary.length;
 			if (word_len != 2) return null;	// not A|B; exit now;
-			Xow_domain_crt_itm key_itm = Xow_domain_crt_itm_parser.I.Parse_as_in(word_ary[0]);
+			Xow_domain_crt_itm key_itm = Xow_domain_crt_itm_parser.Instance.Parse_as_in(word_ary[0]);
 			if (key_itm == Xow_domain_crt_itm_.Null) return null;		// invalid key; exit;
 			if (is_ary) {
-				Xow_domain_crt_itm[] ary_itm = Xow_domain_crt_itm_parser.I.Parse_as_ary(word_ary[1]);
+				Xow_domain_crt_itm[] ary_itm = Xow_domain_crt_itm_parser.Instance.Parse_as_ary(word_ary[1]);
 				if (ary_itm == null) return null;
 				rv.Add(new Xow_domain_crt_kv_ary(key_itm, ary_itm));
 			}
 			else {
-				Xow_domain_crt_itm val_itm = Xow_domain_crt_itm_parser.I.Parse_as_in(word_ary[1]);
+				Xow_domain_crt_itm val_itm = Xow_domain_crt_itm_parser.Instance.Parse_as_in(word_ary[1]);
 				if (val_itm == Xow_domain_crt_itm_.Null) return null;	// invalid val; exit;
 				rv.Add(new Xow_domain_crt_kv_itm(key_itm, val_itm));
 			}
@@ -70,22 +70,22 @@ class Xow_domain_crt_itm_parser {
 		Xow_domain_crt_itm rv = (Xow_domain_crt_itm)itm_hash.Get_by_bry(raw); if (rv != null) return rv;	// singleton; EX: <self>, <same_type>, etc..
 		int raw_len = raw.length;
 		if		(Bry_.Has_at_bgn(raw, Wild_lang)) {		// EX: *.wikipedia
-			int wiki_tid = Xow_domain_type_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
-			return wiki_tid == Xow_domain_type_.Int__null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
+			int wiki_tid = Xow_domain_tid_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
+			return wiki_tid == Xow_domain_tid_.Int__null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
 		}
 		else if	(Bry_.Has_at_end(raw, Wild_type)) {		// EX: en.*
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(raw, 0, raw_len - Wild_type.length);
+			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(raw, 0, raw_len - Wild_type.length);
 			return lang_itm == null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__lang(lang_itm.Key());
 		}
 		else
 			return new Xow_domain_crt_itm__wiki(raw);	// EX: en.wikipedia.org
 	}
 	private static final Hash_adp_bry itm_hash = Hash_adp_bry.cs()
-	.Add_str_obj("<self>"		, Xow_domain_crt_itm__self.I)
-	.Add_str_obj("<same_type>"	, Xow_domain_crt_itm__same_type.I)
-	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.I)
-	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.I)
+	.Add_str_obj("<self>"		, Xow_domain_crt_itm__self.Instance)
+	.Add_str_obj("<same_type>"	, Xow_domain_crt_itm__same_type.Instance)
+	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.Instance)
+	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.Instance)
 	;
 	private static final byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
-        public static final Xow_domain_crt_itm_parser I = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
+        public static final Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
 }

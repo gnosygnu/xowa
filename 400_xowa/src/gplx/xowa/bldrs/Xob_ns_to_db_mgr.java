@@ -19,7 +19,7 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
 	private final Xob_ns_to_db_wkr wkr; private final Xowd_db_mgr db_mgr; private final long db_max; private boolean one_file_conn_init = true;
-	private final Ordered_hash db_list = Ordered_hash_.new_();
+	private final Ordered_hash db_list = Ordered_hash_.New();
 	public Xob_ns_to_db_mgr(Xob_ns_to_db_wkr wkr, Xowd_db_mgr db_mgr, long db_max) {
 		this.wkr = wkr; this.db_mgr = db_mgr; this.db_max = db_max;
 	}
@@ -57,7 +57,7 @@ public class Xob_ns_to_db_mgr {
 		return rv;
 	}
 	private Xowd_db_file Init_db(Xob_ns_file_itm ns_file_itm) {
-		Xowd_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), Int_.Xto_str(ns_file_itm.Ns_ids(), "|"), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
+		Xowd_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), Int_.To_str(ns_file_itm.Ns_ids(), "|"), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
 		ns_file_itm.Nth_db_id_(rv.Id());
 		Init_tbl(rv);
 		return rv;

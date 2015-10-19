@@ -49,7 +49,7 @@ public class SqliteDbMain {
 //	}
 	private void CreateMany(int number, int base_val) {
 		long time_bgn = Env_.TickCount();
-		Db_conn provider = Db_conn_pool.I.Get_or_new__sqlite(Io_url_.new_fil_("E:\\test.sqlite3"));		
+		Db_conn provider = Db_conn_pool.Instance.Get_or_new__sqlite(Io_url_.new_fil_("E:\\test.sqlite3"));		
 		String tbl_sql = String_.Concat_lines_nl
 		( "CREATE TABLE fsdb_xtn_thm"
 		, "( thm_id            integer             NOT NULL    PRIMARY KEY"
@@ -162,7 +162,7 @@ public class SqliteDbMain {
 		);
 		stat.executeUpdate(sql);
 	
-		Console_adp__sys.I.Write_str_w_nl(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
+		Console_adp__sys.Instance.Write_str_w_nl(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 //		stat.executeUpdate("BEGIN TRANSACTION");
 		stat.executeUpdate("PRAGMA synchronous=OFF");
 		stat.executeUpdate("PRAGMA count_changes=OFF");
@@ -180,9 +180,9 @@ public class SqliteDbMain {
 		}
 	}
 	void Iterate_dir(Io_url dir) {
-		Io_url[] urls = Io_mgr.I.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.Instance.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
 		int urls_len = urls.length;
-		Console_adp__sys.I.Write_str_w_nl(dir.Raw());
+		Console_adp__sys.Instance.Write_str_w_nl(dir.Raw());
 		boolean is_root = false;
 		for (int i = 0; i < urls_len; i++) {
 			Io_url url = urls[i];
@@ -208,7 +208,7 @@ public class SqliteDbMain {
 	}
 	void Insert_file(Io_url url) {
 		if (String_.EqNot(url.Ext(), ".csv")) return;
-		String raw = Io_mgr.I.LoadFilStr(url);
+		String raw = Io_mgr.Instance.LoadFilStr(url);
 		String[] lines = String_.SplitLines_nl(raw);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {

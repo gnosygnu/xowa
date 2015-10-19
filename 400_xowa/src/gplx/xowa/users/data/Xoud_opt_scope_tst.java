@@ -22,11 +22,11 @@ public class Xoud_opt_scope_tst {
 	private Xoud_opt_scope_fxt fxt = new Xoud_opt_scope_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
-		fxt.Test_parse("en.w"		, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Int__wikipedia));
-		fxt.Test_parse("en.*"		, fxt.Make(Xol_lang_itm_.Id_en, Xoud_opt_scope.Type_id_wildcard));
-		fxt.Test_parse("*.w"		, fxt.Make(Xoud_opt_scope.Lang_id_wildcard, Xow_domain_type_.Int__wikipedia));
+		fxt.Test_parse("en.w"		, fxt.Make(Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia));
+		fxt.Test_parse("en.*"		, fxt.Make(Xol_lang_stub_.Id_en, Xoud_opt_scope.Type_id_wildcard));
+		fxt.Test_parse("*.w"		, fxt.Make(Xoud_opt_scope.Lang_id_wildcard, Xow_domain_tid_.Int__wikipedia));
 		fxt.Test_parse("<any>"		, Xoud_opt_scope.App);
-		fxt.Test_parse("en.w,fr.d"	, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_type_.Int__wikipedia), fxt.Make(Xol_lang_itm_.Id_fr, Xow_domain_type_.Int__wiktionary));
+		fxt.Test_parse("en.w,fr.d"	, fxt.Make(Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia), fxt.Make(Xol_lang_stub_.Id_fr, Xow_domain_tid_.Int__wiktionary));
 	}
 }
 class Xoud_opt_scope_fxt {
@@ -47,6 +47,6 @@ class Xoud_opt_scope_fxt {
 			if (i != 0) bfr.Add_str_a7(",");
 			bfr.Add_str_a7(itm.To_str());
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 }

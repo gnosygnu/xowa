@@ -33,4 +33,9 @@ public class Xof_math_mgr_html_tst {
 	@Test  public void Quote() { // PURPOSE: assert that quote is not escaped; DATE:2014-07-20
 		fxt.Test_html_full_str("<math>a\"b</math>", "<span id='xowa_math_txt_0'>a\"b</span>");
 	}
+	@Test  public void Vnt() { // PURPOSE: if vnt, armor math; PAGE:sr.w:Земља; DATE:2015-10-11
+		fxt.Wiki().Lang().Vnt_mgr().Enabled_(Bool_.Y);
+		fxt.Test_html_full_str("<math>abc</math>", "-{R|<span id='xowa_math_txt_0'>abc</span>}-");	// NOTE: this also armors the id which is good for the mathjax.js
+		fxt.Wiki().Lang().Vnt_mgr().Enabled_(Bool_.N);
+	}
 }

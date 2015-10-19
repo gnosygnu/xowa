@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 import gplx.core.consoles.*;
 public class Gfo_cache_mgr {
-	private Ordered_hash hash = Ordered_hash_.new_bry_();
-	private Ordered_hash recent = Ordered_hash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.New_bry();
+	private Ordered_hash recent = Ordered_hash_.New_bry();
 	public int Max_size() {return max_size;} public Gfo_cache_mgr Max_size_(int v) {max_size = v; return this;} private int max_size;
 	public int Reduce_by() {return reduce_by;} public Gfo_cache_mgr Reduce_by_(int v) {reduce_by = v; return this;} private int reduce_by;
 	public int Cur_size() {return cur_size;} private int cur_size;
@@ -65,7 +65,7 @@ public class Gfo_cache_mgr {
 		hash.Add(key, itm);
 	}
 	public void Reduce_recent() {
-//			Console_adp__sys.I.WriteLine("reducing");
+//			Console_adp__sys.Instance.WriteLine("reducing");
 		int len = recent.Count();
 		for (int i = 0; i < len; i++) {
 			Gfo_cache_data itm = (Gfo_cache_data)recent.Get_at(i);
@@ -74,7 +74,7 @@ public class Gfo_cache_mgr {
 		recent.Clear();
 	}
 	public void Reduce_cache() {
-		Console_adp__sys.I.Write_str_w_nl("compacting:");			
+		Console_adp__sys.Instance.Write_str_w_nl("compacting:");			
 //			hash.Sort();
 //			int len = hash.Count();
 //			List_adp deleted = List_adp_.new_();

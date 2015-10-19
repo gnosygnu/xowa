@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class IptCfg_ {
-	public static final IptCfg Null = IptCfg_null._;
-	public static IptCfg new_(String key) {return IptCfgRegy._.GetOrNew(key);}
+	public static final IptCfg Null = IptCfg_null.Instance;
+	public static IptCfg new_(String key) {return IptCfgRegy.Instance.GetOrNew(key);}
 }
 class IptCfg_null implements IptCfg {
 	public String CfgKey() {return "<<NULL KEY>>";}
@@ -27,5 +27,5 @@ class IptCfg_null implements IptCfg {
 	public void Owners_del(String key) {}
 	public Object NewByKey(Object o) {return this;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}
-	public static final IptCfg_null _ = new IptCfg_null(); IptCfg_null() {}
+	public static final IptCfg_null Instance = new IptCfg_null(); IptCfg_null() {}
 }

@@ -44,8 +44,8 @@ public class Yn {
 		if (v_int == Bool_.__int) Err_.new_unhandled(v);
 		return v_int == Bool_.Y_int;
 	}
-	public static String Xto_str(boolean v) {return v ? "y" : "n";}
-	public static String Xto_nullable_str(byte v) {
+	public static String To_str(boolean v) {return v ? "y" : "n";}
+	public static String To_nullable_str(byte v) {
 		switch (v) {
 			case Bool_.Y_byte:		return "y";
 			case Bool_.N_byte:		return "n";
@@ -53,7 +53,7 @@ public class Yn {
 			default:				throw Err_.new_unhandled(v);
 		}
 	}
-	public static byte Xto_nullable_byte(String v) {
+	public static byte To_nullable_byte(String v) {
 		if (v != null && String_.Len(v) == 1) {
 			char c = String_.CharAt(v, 0);
 			switch (c) {

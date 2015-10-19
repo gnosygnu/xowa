@@ -35,7 +35,7 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 		));
 	}
 	public static Db_conn_info make_(Io_url url) {
-		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());
+		Io_mgr.Instance.CreateDirIfAbsent(url.OwnerDir());
 		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key"		, Tid_const
 		, "data source"		, url.Xto_api()
@@ -43,5 +43,5 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 			
 		));
 	}
-	public static final Sqlite_conn_info _ = new Sqlite_conn_info(); Sqlite_conn_info() {}
+	public static final Sqlite_conn_info Instance = new Sqlite_conn_info(); Sqlite_conn_info() {}
 }

@@ -26,7 +26,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt_cmd(Db_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);}
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {
 		this.engine = engine;
-		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).Xto_sql() : Sql_qry_wtr_.I.Xto_str(qry, true);
+		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).Xto_sql() : Sql_qry_wtr_.Instance.Xto_str(qry, true);
 		Reset_stmt();
 	}
 	public Db_stmt Reset_stmt() {
@@ -46,6 +46,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
+	public Db_stmt Val_int_by_bool(String k, boolean v)	{return Add_int(Bool_.N, k, v ? 1 : 0);}
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {

@@ -22,7 +22,7 @@ public class IoEngine_fil_xfer_memory_tst extends IoEngine_fil_xfer_base {
 		root = Io_url_.mem_dir_("mem");
 	}	@Override protected IoEngine engine_() {return IoEngine_.Mem_init_();}
 	@Override protected Io_url AltRoot() {
-		Io_mgr.I.InitEngine_mem_("mem2");
+		Io_mgr.Instance.InitEngine_mem_("mem2");
 		return Io_url_.mem_dir_("mem2");
 	}
 }

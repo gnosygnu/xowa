@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xot_invk_wkr_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -214,10 +214,10 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{Missing}}", "[[:Template_foreign:Missing]]");
 		ns.Name_bry_(old_ns);
 	}
-	@Test  public void Xnde_xtn_preserved() {	// PURPOSE: tmpl was dropping .Xtn ndes; EX: below was just ab
+	@Test  public void Xnde_xtn_preserved() {	// PURPOSE: tmpl was dropping .Xtn ndes;
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_template", "{{{1}}}");
-		fxt.Test_parse_page_all_str("{{test_template|a<source>1</source>b}}", "a<pre>1</pre>b");
+		fxt.Test_parse_page_all_str("{{test_template|a<source>1</source>b}}", "a<div class=\"mw-highlight\"><pre style=\"overflow:auto\">1</pre></div>b");	// was just ab
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Recurse() {

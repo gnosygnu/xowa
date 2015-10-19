@@ -131,7 +131,7 @@ class Wdata_pf_property_data_fxt {
 			app = parser_fxt.App();
 			wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		}
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		wdata_mgr.Clear();
 		parser_fxt.Reset();
 		expd_id_int = -1;

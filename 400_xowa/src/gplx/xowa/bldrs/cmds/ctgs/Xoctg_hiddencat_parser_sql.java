@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*;
 public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
@@ -36,13 +36,13 @@ public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 	@Override public void Cmd_end() {
 		tbl.Update_end();
 		if (!Env_.Mode_testing())	// NOTE: do not delete when testing
-			Io_mgr.I.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());	// delete /wiki/wiki_name/tmp
-		Io_url[] sql_files = Io_mgr.I.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sql.gz").ExecAsUrlAry();
+			Io_mgr.Instance.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());	// delete /wiki/wiki_name/tmp
+		Io_url[] sql_files = Io_mgr.Instance.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sql.gz").ExecAsUrlAry();
 		int len = sql_files.length;
 		for (int i = 0; i < len; i++) {
 			Io_url sql_file = sql_files[i];
-			Io_mgr.I.DeleteFil(sql_file);
+			Io_mgr.Instance.DeleteFil(sql_file);
 		}
-		Io_mgr.I.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa_categorylinks.sql")).MissingFails_off().Exec();
+		Io_mgr.Instance.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa_categorylinks.sql")).MissingFails_off().Exec();
 	}
 }

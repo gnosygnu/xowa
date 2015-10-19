@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Imap_xnde_html_all_tst {
-	@Before public void init() {fxt.Reset();} private Imap_xnde_html_fxt fxt = new Imap_xnde_html_fxt();
+	@Before public void init() {fxt.Reset();} private final Imap_xnde_html_fxt fxt = new Imap_xnde_html_fxt();
 	@Test  public void Basic() {
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "<imagemap>"

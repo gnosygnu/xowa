@@ -19,7 +19,7 @@ package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.primitives.*; import gplx.ios.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.wms.*;
+import gplx.xowa.bldrs.wms.*;
 public class Xof_bin_mgr {		
 	private final Fsm_mnt_mgr mnt_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
@@ -29,7 +29,7 @@ public class Xof_bin_mgr {
 	private final Io_stream_rdr_wrapper rdr_wrapper = new Io_stream_rdr_wrapper();
 	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_img_wkr_resize_img resize_wkr, Io_download_fmt download_fmt) {
 		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.download_fmt = download_fmt;
-		this.usr_dlg = Gfo_usr_dlg_.I;
+		this.usr_dlg = Gfo_usr_dlg_.Instance;
 		this.Resizer_(resize_wkr);
 	}
 	public void Resizer_(Xof_img_wkr_resize_img v) {resizer = v;} private Xof_img_wkr_resize_img resizer;
@@ -173,7 +173,7 @@ public class Xof_bin_mgr {
 	private boolean Set_found(boolean save_to_fsys, Xof_fsdb_itm fsdb, Io_url fsys_url, Io_stream_rdr_wrapper rdr_wrapper) {
 		long fsdb_len = -1;
 		if (save_to_fsys)
-			fsdb_len = Io_mgr.I.QueryFil(fsys_url).Size();
+			fsdb_len = Io_mgr.Instance.QueryFil(fsys_url).Size();
 		else
 			fsdb_len = rdr_wrapper.Rdr().Len();
 		fsdb.File_size_(fsdb_len);

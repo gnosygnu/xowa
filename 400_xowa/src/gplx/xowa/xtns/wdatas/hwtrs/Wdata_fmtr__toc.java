@@ -23,9 +23,9 @@ class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
 	public void Init_by_lang(Wdata_hwtr_msgs msgs)	{this.tbl_hdr = msgs.Toc_tbl_hdr();}
 	public void Init_by_wdoc(Wdata_doc wdoc)		{itms.Clear();}
 	public void Add(Wdata_toc_data toc_data)		{itms.Add(toc_data);}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int itms_len = itms.Count();
-		if (itms_len <= gplx.xowa.html.tocs.Xow_hdr_mgr.Toc_min) return;
+		if (itms_len <= gplx.xowa.htmls.tocs.Xow_hdr_mgr.Toc_min) return;
 		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.To_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}
@@ -43,7 +43,7 @@ class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
 class Wdata_fmtr__toc_itm implements Bry_fmtr_arg {
 	private Wdata_toc_data[] ary;
 	public void Init_by_itm(Wdata_toc_data[] v)				{this.ary = v;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Wdata_toc_data itm = ary[i];

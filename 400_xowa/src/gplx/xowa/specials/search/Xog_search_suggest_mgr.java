@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.net.*; import gplx.core.threads.*;
-import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.core.js.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
 		this.app = gui_mgr.App();
@@ -100,7 +100,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_search_async))			Search_async();
 		else if	(ctx.Match(k, Invk_notify))					Notify();
-		else if	(ctx.Match(k, Invk_enabled))				return Yn.Xto_str(enabled);
+		else if	(ctx.Match(k, Invk_enabled))				return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))				enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_results_max))			return results_max;
 		else if	(ctx.Match(k, Invk_results_max_))			results_max = m.ReadInt("v");
@@ -111,9 +111,9 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_all_pages_extend_))		all_pages_extend = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_all_pages_min))			return all_pages_min;
 		else if	(ctx.Match(k, Invk_all_pages_min_))			all_pages_min = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_auto_wildcard))			return Yn.Xto_str(auto_wildcard);
+		else if	(ctx.Match(k, Invk_auto_wildcard))			return Yn.To_str(auto_wildcard);
 		else if	(ctx.Match(k, Invk_auto_wildcard_))			auto_wildcard = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_log_enabled))			return Yn.Xto_str(log_enabled);
+		else if	(ctx.Match(k, Invk_log_enabled))			return Yn.To_str(log_enabled);
 		else if	(ctx.Match(k, Invk_log_enabled_))			log_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_args_default))			return args_default_str;
 		else if	(ctx.Match(k, Invk_args_default_))			Args_default_str_(m.ReadStr("v"));

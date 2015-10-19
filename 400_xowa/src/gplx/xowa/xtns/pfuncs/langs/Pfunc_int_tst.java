@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Pfunc_int_tst {
 	@Before public void init() {fxt.Reset();} private Pf_msg_mgr_fxt fxt = new Pf_msg_mgr_fxt();
 	@Test  public void Basic()					{fxt.Test_parse_en("{{int:january}}"								, "January");}
@@ -35,7 +35,7 @@ public class Pfunc_int_tst {
 		fxt.Test_parse_en("{{int:january/en}}", "January");
 	}
 	@Test  public void Lang_specified_by_page() {
-		fxt.Test_parse_lang("fr", "{{int:Lang}}", "fr");	// NOTE: "Lang" msg is added by Xol_lang; message_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);
+		fxt.Test_parse_lang("fr", "{{int:Lang}}", "fr");	// NOTE: "Lang" msg is added by Xol_lang_itm; message_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);
 	}
 	@Test  public void Lang_missing_msg_return_en() {	// PURPOSE: if key does not exist in non-english language, use English; EX: la.w:Fasciculus:HannibalFrescoCapitolinec1510.jpg; DATE:2013-09-10
 		fxt.Init_msg_gfs("en_only_key", "en_only_val", false, false);
@@ -81,7 +81,7 @@ public class Pfunc_int_tst {
 }
 class Pf_msg_mgr_fxt {
 	private Xop_fxt fxt;
-	private Xol_lang en_lang;
+	private Xol_lang_itm en_lang;
 	private Xowe_wiki en_wiki;
 	public void Reset() {
 		fxt = new Xop_fxt();	// new fxt, else transclude tests will fail
@@ -89,7 +89,7 @@ class Pf_msg_mgr_fxt {
 		en_lang = en_wiki.Lang();
 	}
 	public void Init_msg_gfs(String key, String val, boolean fmt, boolean tmpl) {Init_msg_gfs(en_lang, key, val, fmt, tmpl);}
-	public void Init_msg_gfs(Xol_lang lang, String key, String val, boolean fmt, boolean tmpl) {
+	public void Init_msg_gfs(Xol_lang_itm lang, String key, String val, boolean fmt, boolean tmpl) {
 		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_u8(key));
 		msg_itm.Atrs_set(Bry_.new_u8(val), fmt, tmpl);
 	}
@@ -106,7 +106,7 @@ class Pf_msg_mgr_fxt {
 		alt_fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}
 	public void Test_parse_lang(String other_lang_id, String raw, String expd) {
-		Xol_lang other_lang = fxt.App().Lang_mgr().Get_by_key_or_new(Bry_.new_a7(other_lang_id));
+		Xol_lang_itm other_lang = fxt.App().Lang_mgr().Get_by_or_new(Bry_.new_a7(other_lang_id));
 		other_lang.Init_by_load();
 		fxt.Page().Lang_(other_lang); 
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", expd);

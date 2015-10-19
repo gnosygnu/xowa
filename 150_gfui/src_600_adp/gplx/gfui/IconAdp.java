@@ -34,11 +34,11 @@ public class IconAdp {
 		rv.url = url;
 		return rv;
 			}
-	public static void regy_loadDir_(Io_url imgDir) {GfoRegy._.RegDir(imgDir, "*.png", true, "_", ".");} 
-	public static void regy_loadDir_shallow(Io_url imgDir) {GfoRegy._.RegDir(imgDir, "*.png", false, "_", ".");} 
+	public static void regy_loadDir_(Io_url imgDir) {GfoRegy.Instance.RegDir(imgDir, "*.png", true, "_", ".");} 
+	public static void regy_loadDir_shallow(Io_url imgDir) {GfoRegy.Instance.RegDir(imgDir, "*.png", false, "_", ".");} 
 	public static IconAdp regy_(String key) {
-		GfoRegyItm itm = GfoRegy._.FetchOrNull(key);
-		if (itm == null) {UsrDlg_._.Warn("missing icon; key={0}", key); return null;}
+		GfoRegyItm itm = GfoRegy.Instance.FetchOrNull(key);
+		if (itm == null) {UsrDlg_.Instance.Warn("missing icon; key={0}", key); return null;}
 		if	(itm.ValType() != GfoRegyItm.ValType_Url) throw Err_.new_wo_type("regyItm should be of type url", "key", key);
 		return IconAdp.file_(itm.Url());
 	}

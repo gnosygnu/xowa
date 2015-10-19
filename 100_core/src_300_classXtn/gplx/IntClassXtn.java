@@ -24,5 +24,5 @@ public class IntClassXtn extends ClassXtn_base implements ClassXtn {
 	public boolean Eq(Object lhs, Object rhs) {try {return Int_.cast(lhs) == Int_.cast(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object XtoDb(Object obj)					{return Int_.cast(obj);}	// necessary for enums
 
-	public static final IntClassXtn _ = new IntClassXtn(); IntClassXtn() {} // added to ClassXtnPool by default
+	public static final IntClassXtn Instance = new IntClassXtn(); IntClassXtn() {} // added to ClassXtnPool by default
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.popup_history; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.xowa.html.modules.popups.*;
+import gplx.xowa.htmls.modules.popups.*;
 public class Popup_history_page implements Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__popup_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {

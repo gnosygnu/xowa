@@ -45,14 +45,14 @@ public class Xob_info_file {
 	public static Xob_info_file Load(Db_cfg_tbl tbl) {
 		Db_cfg_hash hash = tbl.Select_as_hash(Cfg_grp);
 		return new Xob_info_file
-		( hash.Get(Cfg_key__id				).To_int_or(-1)
-		, hash.Get(Cfg_key__type			).To_str_or("unknown")
-		, hash.Get(Cfg_key__ns_ids			).To_str_or("")
-		, hash.Get(Cfg_key__part_id			).To_int_or(-1)
-		, hash.Get(Cfg_key__guid			).To_guid_or(Guid_adp_.Empty)
-		, hash.Get(Cfg_key__schema_version	).To_int_or(2)
-		, hash.Get(Cfg_key__core_file_name	).To_str_or("")
-		, hash.Get(Cfg_key__orig_file_name	).To_str_or("")
+		( hash.Get_by(Cfg_key__id				).To_int_or(-1)
+		, hash.Get_by(Cfg_key__type				).To_str_or("unknown")
+		, hash.Get_by(Cfg_key__ns_ids			).To_str_or("")
+		, hash.Get_by(Cfg_key__part_id			).To_int_or(-1)
+		, hash.Get_by(Cfg_key__guid				).To_guid_or(Guid_adp_.Empty)
+		, hash.Get_by(Cfg_key__schema_version	).To_int_or(2)
+		, hash.Get_by(Cfg_key__core_file_name	).To_str_or("")
+		, hash.Get_by(Cfg_key__orig_file_name	).To_str_or("")
 		);
 	}
 	private static final String Cfg_grp = gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_db

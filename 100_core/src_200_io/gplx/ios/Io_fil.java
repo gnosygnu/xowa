@@ -28,7 +28,7 @@ public class Io_fil implements gplx.CompareAble {
 		Io_fil[] rv = new Io_fil[url_ary_len];
 		for (int i = 0; i < url_ary_len; i++) {
 			Io_url url = url_ary[i];
-			String data = Io_mgr.I.LoadFilStr(url);
+			String data = Io_mgr.Instance.LoadFilStr(url);
 			Io_fil fil = new Io_fil(url, data);
 			rv[i] = fil;
 		}

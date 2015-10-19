@@ -51,7 +51,7 @@ public class Xop_lnki_wkr__uncommon_tst {
 		fxt.Test_html_wiki_frag("[[File:A.png|upright=1.333333333333333333333333333333333333333333333333333333333333333333333]]", " width=\"0\" height=\"0\"");	// failure would print out original lnki
 	}
 	@Test  public void Persian() {	// PURPOSE: handle il8n nums; EX:[[پرونده:Shahbazi 3.jpg|۲۰۰px]] -> 200px; PAGE:fa.w:فهرست_آثار_علیرضا_شاپور_شهبازی; DATE:2015-07-18
-		Xol_lang lang = fxt.Wiki().Lang();
+		Xol_lang_itm lang = fxt.Wiki().Lang();
 		fxt.App().Gfs_mgr().Run_str_for(lang, gplx.xowa.xtns.pfuncs.numbers.Pf_formatnum_fa_tst.Persian_numbers_gfs);
 		lang.Evt_lang_changed();	// force rebuild of size_trie
 		fxt.Test_html_wiki_frag("[[File:A.png|۲۰۰px]]", " width=\"200\" height=\"0\"");

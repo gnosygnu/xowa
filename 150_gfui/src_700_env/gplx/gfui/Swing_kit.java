@@ -29,5 +29,5 @@ public class Swing_kit extends Gfui_kit_base {
 	@Override protected Gxw_tab_mgr New_tab_mgr_impl() {return new Mem_tab_mgr();}
 	@Override protected Gxw_tab_itm New_tab_itm_impl() {return new Mem_tab_itm();}
 	@Override protected GxwElem New_btn_impl() {return factory.control_();}
-	public static final Swing_kit _ = new Swing_kit(); Swing_kit() {}
+	public static final Swing_kit Instance = new Swing_kit(); Swing_kit() {}
 }

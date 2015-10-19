@@ -30,5 +30,5 @@ public class Bry_cache {
 			return ((Bry_obj_ref)rv).Val();
 	}
 	Hash_adp hash = Hash_adp_.new_(); Bry_obj_ref hash_ref = Bry_obj_ref.null_();
-	public static final Bry_cache _ = new Bry_cache(); Bry_cache() {}
+	public static final Bry_cache Instance = new Bry_cache(); Bry_cache() {}
 }

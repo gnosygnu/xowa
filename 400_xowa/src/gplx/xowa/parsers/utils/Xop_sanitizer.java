@@ -32,7 +32,7 @@ public class Xop_sanitizer {
 	private void trie_add(String hook, byte tid) {trie.Add_stub(hook, tid);}
 	public byte[] Escape_id(byte[] src) {
 		boolean dirty = Escape_id(src, 0, src.length, tmp_bfr);
-		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
+		return dirty ? tmp_bfr.To_bry_and_clear() : src;
 	}
 	public boolean Escape_id(byte[] src, int bgn, int end, Bry_bfr bfr) {
 		boolean dirty = false;

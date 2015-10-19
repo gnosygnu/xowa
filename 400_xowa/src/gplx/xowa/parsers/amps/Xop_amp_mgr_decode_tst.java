@@ -33,10 +33,10 @@ public class Xop_amp_mgr_decode_tst {
 	@Test  public void Hex_zero_padded()			{fxt.Test_decode_as_bry("&#x03a3;"			, "Σ");}
 	@Test  public void Hex_upper_x()				{fxt.Test_decode_as_bry("&#X3A3;"			, "Σ");}
 	@Test  public void Num_fail_large_codepoint()	{fxt.Test_decode_as_bry("&#538189831;"		, "&#538189831;");}
-	@Test  public void Num_ignore_extra_x()			{fxt.Test_decode_as_bry("&#xx26D0;"			, Char_.To_str(Char_.XbyInt(9936)));}	// 2nd x is ignored
+	@Test  public void Num_ignore_extra_x()			{fxt.Test_decode_as_bry("&#xx26D0;"			, Char_.To_str(Char_.By_int(9936)));}	// 2nd x is ignored
 }
 class Xop_amp_mgr_fxt {
-	private Xop_amp_mgr amp_mgr = Xop_amp_mgr.I;
+	private Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	public void Reset() {}
 	public void Test_decode_as_bry(String raw, String expd) {
 		Tfds.Eq(expd, String_.new_u8(amp_mgr.Decode_as_bry(Bry_.new_u8(raw))));

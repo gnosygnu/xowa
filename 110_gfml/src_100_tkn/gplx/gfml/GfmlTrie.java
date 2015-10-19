@@ -23,7 +23,7 @@ public class GfmlTrie {
 		for (int i = 0; i < rv.length; i++)
 			rv[i] = String_.cast(symbols.Get_at(i));
 		return rv;
-	}	Ordered_hash symbols = Ordered_hash_.new_();
+	}	Ordered_hash symbols = Ordered_hash_.New();
 	public int LastMatchCount; // PERF: prop is faster than method
 	public Object FindMatch(CharStream stream) {
 		Object result = null; int moveCount = 0; LastMatchCount = 0;

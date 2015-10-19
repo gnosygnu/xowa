@@ -41,7 +41,7 @@ public class TabBox extends GfuiElemBase {
 		if		(ctx.Match(k, TabBoxEvt_tabSelectByBtn.Key))	TabBoxEvt_tabSelectByBtn.Rcvd(ctx.MsgSrc(), this);
 		else if	(ctx.Match(k, TabBoxEvt_tabSelect.Key))			TabBoxEvt_tabSelect.Select(this, ctx, m);
 		else if	(ctx.Match(k, TabBoxEvt_nameChange.Key))		TabBoxEvt_nameChange.Rcvd(this, ctx, m);
-		else return super.Invk(GfsCtx._, 0, k, m);
+		else return super.Invk(GfsCtx.Instance, 0, k, m);
 		return this;
 	}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {

@@ -30,21 +30,21 @@ class Pfunc_i18n_fxt {
 		if (app == null) app = Xoa_app_fxt.app_();
 		app.Lang_mgr().Clear();	// else lang values retained from last run
 		app.Free_mem(false); // else tmpl_result_cache will get reused from last run for {{test}}
-		lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7(lang_key));
+		lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7(lang_key));
 		wiki = Xoa_app_fxt.wiki_(app, lang_key + ".wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 		return this;
-	}	private Xoae_app app; private Xop_fxt fxt; Xol_lang lang; Xowe_wiki wiki;
+	}	private Xoae_app app; private Xop_fxt fxt; Xol_lang_itm lang; Xowe_wiki wiki;
 	public Pfunc_i18n_fxt Reg_func(String name, boolean case_match, String word) {
 		Io_url url = Io_url_.mem_fil_("mem/xowa/bin/any/xowa/cfg/lang/core/" + lang_key + ".gfs");
 		String func = "keywords.load_text('" + name + "|" + (case_match ? "1" : "0") + "|" + name + "~" + word + "~');";
-		Io_mgr.I.SaveFilStr(url, func);
+		Io_mgr.Instance.SaveFilStr(url, func);
 		return this;
 	}
 	public Pfunc_i18n_fxt Reg_msg(String key, String val) {
 		Io_url url = Io_url_.mem_fil_("mem/xowa/bin/any/xowa/cfg/lang/core/" + lang_key + ".gfs");
 		String func = "messages.load_text('" + key + "|" + val + "');";
-		Io_mgr.I.SaveFilStr(url, func);
+		Io_mgr.Instance.SaveFilStr(url, func);
 		return this;
 	}
 	public Pfunc_i18n_fxt Load() {

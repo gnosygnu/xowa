@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
-import gplx.xowa.html.hrefs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
+import gplx.xowa.htmls.hrefs.*;
 class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.new_();
 	private Sites_html_bldr html_bldr;
@@ -41,7 +41,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Xoh_href_parser href_parser = wiki.Appe().Html__href_parser();
 		for (int i = 0; i < list_len; ++i) {
@@ -55,8 +55,8 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	}
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		Xoa_app_.Utl__encoder_mgr().Href().Encode(tmp_bfr, ttl_page_db);
-		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
-		if (xwiki_itm.Domain_tid() != Xow_domain_type_.Int__other)
+		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.To_bry_and_clear());			
+		if (xwiki_itm.Domain_tid() != Xow_domain_tid_.Int__other)
 			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}

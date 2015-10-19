@@ -40,9 +40,9 @@ public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 		if (mnt_id == Fsm_mnt_mgr.Mnt_idx_user)		return file_user_core;
 		if (layout.Tid_is_all_or_few())				return file_main_core;
 		Io_url url = wiki_dir.GenSubFil(file_name);
-		Db_conn conn = Db_conn_bldr.I.Get(url);
+		Db_conn conn = Db_conn_bldr.Instance.Get(url);
 		if (conn == null) {	// bin file deleted or not downloaded; use Noop Db_conn and continue; do not fail; DATE:2015-04-16
-			Gfo_usr_dlg_.I.Warn_many("", "", "fsdb.bin:file does not exist; url=~{0}", url);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "fsdb.bin:file does not exist; url=~{0}", url);
 			conn = Db_conn_.Noop; 
 		}
 		return new Fsdb_db_file(url, conn);
@@ -51,7 +51,7 @@ public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 		if (mnt_id == Fsm_mnt_mgr.Mnt_idx_user) return Fsdb_db_mgr__v2_bldr.Make_bin_tbl(file_user_core);
 		if (layout.Tid_is_all_or_few())			return Fsdb_db_mgr__v2_bldr.Make_bin_tbl(file_main_core);
 		Io_url url = wiki_dir.GenSubFil(file_name);
-		Db_conn conn = Db_conn_bldr.I.New(url);
+		Db_conn conn = Db_conn_bldr.Instance.New(url);
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, Cfg_tbl_name); cfg_tbl.Create_tbl();
 		return Fsdb_db_mgr__v2_bldr.Make_bin_tbl(new Fsdb_db_file(url, conn));
 	}

@@ -30,7 +30,7 @@ class IptEventMgr implements GfoInvkAble {
 	@gplx.Internal protected static void ExecKeyPress(GfuiElem sender, IptEvtDataKeyHeld keyPressState) {
 //            Tfds.Write(keyPressState.KeyChar());
 		if (keyHandled) {keyPressState.Handled_set(true); return;}
-		IptEventData iptData = IptEventData.new_(sender, IptEventType_.KeyPress, IptKeyStrMgr._.FetchByKeyPress((int)(byte)keyPressState.KeyChar()), keyStateCur, keyPressState, mouseStateCur);
+		IptEventData iptData = IptEventData.new_(sender, IptEventType_.KeyPress, IptKeyStrMgr.Instance.FetchByKeyPress((int)(byte)keyPressState.KeyChar()), keyStateCur, keyPressState, mouseStateCur);
 		sender.IptBnds().Process(iptData);
 		SendData(iptData);
 	}

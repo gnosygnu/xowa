@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.dbs.metas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.dbs.*;
+import gplx.dbs.metas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.dbs.*;
 public class Xowd_core_db_props {
 	public Xowd_core_db_props(int schema, Xowd_db_layout layout_text, Xowd_db_layout layout_html, Xowd_db_layout layout_file, byte zip_tid_text, byte zip_tid_html) {
 		this.schema = schema;
@@ -50,12 +50,12 @@ public class Xowd_core_db_props {
 	private static Xowd_core_db_props Cfg_load(Db_cfg_tbl tbl) {
 		Db_cfg_hash cfg_hash = tbl.Select_as_hash(Cfg_grp);
 		return new Xowd_core_db_props
-		( cfg_hash.Get(Cfg_key__schema_version).To_int()
-		, Xowd_db_layout.get_(cfg_hash.Get(Cfg_key__layout_text).To_str())
-		, Xowd_db_layout.get_(cfg_hash.Get(Cfg_key__layout_html).To_str())
-		, Xowd_db_layout.get_(cfg_hash.Get(Cfg_key__layout_file).To_str())
-		, cfg_hash.Get(Cfg_key__zip_tid_text).To_byte()
-		, cfg_hash.Get(Cfg_key__zip_tid_html).To_byte()
+		( cfg_hash.Get_by(Cfg_key__schema_version).To_int()
+		, Xowd_db_layout.get_(cfg_hash.Get_by(Cfg_key__layout_text).To_str())
+		, Xowd_db_layout.get_(cfg_hash.Get_by(Cfg_key__layout_html).To_str())
+		, Xowd_db_layout.get_(cfg_hash.Get_by(Cfg_key__layout_file).To_str())
+		, cfg_hash.Get_by(Cfg_key__zip_tid_text).To_byte()
+		, cfg_hash.Get_by(Cfg_key__zip_tid_html).To_byte()
 		);
 	}
 	private static final String Cfg_grp = Xow_cfg_consts.Grp__wiki_core

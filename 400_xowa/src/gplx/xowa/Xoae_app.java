@@ -17,21 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfss.*;
-import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
+import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.html.*;
-import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.bridges.*;
+import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
-import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
-import gplx.xowa.wms.*;
-import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*;
+import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.servers.tcp.*; import gplx.xowa.apps.servers.http.*;
+import gplx.xowa.bldrs.wms.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
 public class Xoae_app implements Xoa_app, GfoInvkAble {
-	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_type app_type, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
+	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
-		this.app_type = app_type;
+		this.mode = mode;
 		Io_url.Http_file_str_encoder = Xoa_app_.Utl__encoder_mgr().Fsys();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir);
 		log_wtr = usr_dlg.Log_wkr();
@@ -64,8 +64,10 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		html_mgr = new Xoh_html_mgr(this);
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
+		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
 	}
-	public Xoa_app_type				App_type()					{return app_type;} private final Xoa_app_type app_type;
+	public boolean						Tid_is_edit()				{return Bool_.Y;}
+	public Xoa_app_mode				Mode()						{return mode;} private final Xoa_app_mode mode;
 	public Xoa_fsys_mgr				Fsys_mgr()					{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr			File__cache_mgr()			{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr				File__img_mgr()				{return file_mgr.Img_mgr();}
@@ -79,10 +81,16 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr			Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
-	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} public void Utl__inet_conn_(Gfo_inet_conn v) {this.inet_conn = v;} private Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_http();
+	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_meta_mgr				Meta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	public Xoa_parser_mgr			Parser_mgr()				{return parser_mgr;} private final Xoa_parser_mgr parser_mgr = new Xoa_parser_mgr();
+	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final Xoa_site_cfg_mgr site_cfg_mgr;
+	public Xoa_sitelink_mgr			Xwiki_mgr__sitelink_mgr()	{return xwiki_mgr__sitelink_mgr;} private final Xoa_sitelink_mgr xwiki_mgr__sitelink_mgr = new Xoa_sitelink_mgr();
+	public boolean						Xwiki_mgr__missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
+	public boolean						Xwiki_mgr__exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
+	public Xow_xwiki_itm_parser		Xwiki_mgr__itm_parser()		{return xwiki_mgr__itm_parser;}	private final Xow_xwiki_itm_parser xwiki_mgr__itm_parser = new Xow_xwiki_itm_parser();
+
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
 	public Xoa_wiki_mgr			Wiki_mgri() {return wiki_mgr;}
@@ -105,7 +113,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
-	public Xop_xatr_parser		Xatr_parser() {return xatr_parser;} private Xop_xatr_parser xatr_parser = new Xop_xatr_parser();
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
 	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();
@@ -120,8 +127,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();
 	public Xoa_sys_cfg			Sys_cfg() {return sys_cfg;} private Xoa_sys_cfg sys_cfg;
 	public Bry_fmtr				Tmp_fmtr() {return tmp_fmtr;} Bry_fmtr tmp_fmtr = Bry_fmtr.new_("");
-	public boolean					Xwiki_mgr__missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
-	public boolean					Xwiki_mgr__exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
@@ -132,7 +137,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;
-	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.I;
+	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
 
 	private Xoa_fmtr_mgr fmtr_mgr;
 	public Number_parser Utl_num_parser() {return utl_num_parser;} private Number_parser utl_num_parser = new Number_parser();
@@ -144,7 +149,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr.Init_by_app();
 		html__css_installer.Init_by_app(this);
 		wiki_mgr.Init_by_app();
-		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
+		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
 		ctg_mgr.Init_by_app(this);
 		setup_mgr.Init_by_app(this);
 		thread_mgr.Usr_dlg_(Xoa_app_.Usr_dlg());
@@ -155,9 +160,10 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {
 		if (Launch_done()) return;
+		xwiki_mgr__sitelink_mgr.Init_by_app();
 		stage = Xoa_stage_.Tid_launch;
 		user.Cfg_mgr().Setup_mgr().Setup_run_check(this); log_bfr.Add("app.upgrade.done");
-		gplx.xowa.users.prefs.Prefs_converter._.Check(this);
+		gplx.xowa.users.prefs.Prefs_converter.Instance.Check(this);
 		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
 	}
 	public byte Stage() {return stage;} public Xoae_app Stage_(byte v) {stage = v; return this;} private byte stage = Xoa_stage_.Tid_ctor;
@@ -215,7 +221,9 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_xowa))					return this;  
 		else if	(ctx.Match(k, Invk_fmtrs))					return fmtr_mgr;  
 		else if	(ctx.Match(k, Invk_cfg))					return cfg_regy;
+		else if	(ctx.Match(k, Invk_xwiki_langs_load))		xwiki_mgr__sitelink_mgr.Parse(m.ReadBry("v"));  
 		else return GfoInvkAble_.Rv_unhandled;
+		return this;
 	}
 	public static final String Invk_gui = "gui", Invk_bldr = "bldr", Invk_wikis = "wikis", Invk_files = "files", Invk_langs = "langs", Invk_users = "users"
 	, Invk_sys_cfg = "sys_cfg", Invk_fsys = "fsys", Invk_cur = "cur", Invk_shell = "shell", Invk_log = "log"
@@ -225,6 +233,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	, Invk_fmtrs = "fmtrs"
 	, Invk_cfg = "cfg"
 	, Invk_api = "api"
+	, Invk_xwiki_langs_load = "xwiki_langs_load"
 	;
 	public static final String Invk_term_cbk = "term_cbk";
 }

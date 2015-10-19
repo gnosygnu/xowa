@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.xowa.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*; import gplx.dbs.*;
-import gplx.xowa.wms.sites.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*; import gplx.dbs.*;
+import gplx.xowa.bldrs.wms.sites.*;
 public class Xob_wdata_qid_base_tst {
 	private gplx.xowa.bldrs.Xob_fxt fxt; // NOTE: reset memory instance (don't just call clear)
 	@Before public void init() {
 		this.fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();
-		gplx.dbs.Db_conn_bldr.I.Reg_default_mem();
+		gplx.dbs.Db_conn_bldr.Instance.Reg_default_mem();
 	}
 	@Test  public void Basic() {	
 		fxt.doc_ary_

@@ -32,8 +32,8 @@ public class Wdata_lbl_itm {
 	public void Load_vals(byte[] lang, byte[] text) {this.lang = lang; this.text = text;}
 	public static byte[] Make_ttl(boolean is_pid, int id) {
 		return is_pid
-			? Bry_.Add(Ttl_prefix_pid, Int_.Xto_bry(id))
-			: Bry_.Add(Ttl_prefix_qid, Int_.Xto_bry(id))
+			? Bry_.Add(Ttl_prefix_pid, Int_.To_bry(id))
+			: Bry_.Add(Ttl_prefix_qid, Int_.To_bry(id))
 			;
 	}
 	private static final byte[] Ttl_prefix_pid = Bry_.new_a7("Property:P"), Ttl_prefix_qid = Bry_.new_a7("Q");

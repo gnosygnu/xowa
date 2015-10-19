@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class StatRng_tst {
-//		Mwl_parser_fxt fx = new Mwl_parser_fxt(); Pf_func_lang_rsc rsc = Pf_func_lang_rsc._;
+//		Mwl_parser_fxt fx = new Mwl_parser_fxt(); Pf_func_lang_rsc rsc = Pf_func_lang_rsc.Instance;
 	StatRng_fxt fx = new StatRng_fxt();
 	@Test  public void Empty()				{
  			fx.ini_(1, 1, 5);
@@ -34,6 +34,6 @@ public class StatRng_tst {
 }
 /*
 public class Pf_func_switch_tst {
-//		Mwl_parser_fxt fx = new Mwl_parser_fxt(); Pf_func_lang_rsc rsc = Pf_func_lang_rsc._;
+//		Mwl_parser_fxt fx = new Mwl_parser_fxt(); Pf_func_lang_rsc rsc = Pf_func_lang_rsc.Instance;
 
 */

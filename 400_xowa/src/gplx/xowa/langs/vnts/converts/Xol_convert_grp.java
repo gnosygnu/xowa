@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.langs.parsers.*;
 public class Xol_convert_grp implements GfoInvkAble {// group of convert_itm by vnt; EX:  zh-hant {A -> A1; B -> B1}
-	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xol_convert_grp(byte[] key) {this.key = key;}
 	public byte[]				Key()							{return key;} private final byte[] key;
 	public int					Len()							{return hash.Count();}
@@ -32,7 +33,7 @@ public class Xol_convert_grp implements GfoInvkAble {// group of convert_itm by 
 		int len = raw.length;
 		int pos = 0, fld_bgn = 0, fld_idx = 0;
 		byte[] src = Bry_.Empty, trg = Bry_.Empty;
-		Xol_csv_parser csv_parser = Xol_csv_parser._;
+		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == len;
 			byte b = last ? Byte_ascii.Nl : raw[pos];

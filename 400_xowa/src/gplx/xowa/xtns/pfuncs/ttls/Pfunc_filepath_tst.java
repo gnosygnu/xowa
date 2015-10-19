@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.dbs.*;
-import gplx.xowa.tdbs.*;
+import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_filepath_tst {
@@ -26,8 +26,8 @@ public class Pfunc_filepath_tst {
 	private Xowe_wiki en_wiki, commons_wiki;
 	@Before public void init() {
 		fxt.Reset();
-		Io_mgr.I.InitEngine_mem();
-		Db_conn_bldr.I.Reg_default_mem();
+		Io_mgr.Instance.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
 		Xoae_app app = fxt.App();
 		en_wiki = fxt.Wiki();
 		// Init_orig_mgr(en_wiki);
@@ -40,7 +40,7 @@ public class Pfunc_filepath_tst {
 		app.File_mgr().Repo_mgr().Set("src_commons", "mem/xowa/file/commons/src/", commons_wiki.Domain_str());
 		app.File_mgr().Repo_mgr().Set("trg_commons", "mem/xowa/file/commons/trg/", commons_wiki.Domain_str());
 		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src_commons"), Bry_.new_a7("trg_commons"));
-		Io_mgr.I.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
+		Io_mgr.Instance.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
 	}
 	@Test  public void Wiki_is_local() {
 		fxt.Init_page_create(en_wiki, "File:A.png", "");

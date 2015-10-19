@@ -33,7 +33,7 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 
-		IoRecycleBin bin = IoRecycleBin._;
+		IoRecycleBin bin = IoRecycleBin.Instance;
 		List_adp list = root.XtoNames(); list.Del_at(0); // remove drive
 		IoEngine_xrg_recycleFil recycleXrg = bin.Send_xrg(fil)
 			.RootDirNames_(list)

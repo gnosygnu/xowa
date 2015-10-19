@@ -33,9 +33,8 @@ public class Long_ {
 		try {String s = String_.as_(v); return s == null ? Long_.cast(v) : Long_.parse(s);}
 		catch (Exception e) {throw Err_.new_cast(e, long.class, v);}
 	}
-	public static long Xby_int(int v) {return (long)v;}
-	public static String Xto_str(long v) {return Long.toString(v);}	
-	public static String Xto_str_PadBgn(long v, int reqdPlaces) {return String_.Pad(Xto_str(v), reqdPlaces, "0", true);}	// ex: 1, 3 returns 001
+	public static String To_str(long v) {return Long.toString(v);}	
+	public static String To_str_PadBgn(long v, int reqdPlaces) {return String_.Pad(To_str(v), reqdPlaces, "0", true);}	// ex: 1, 3 returns 001
 	public static long parse_or(String raw, long or) {
 		if (raw == null) return or;
 		try {

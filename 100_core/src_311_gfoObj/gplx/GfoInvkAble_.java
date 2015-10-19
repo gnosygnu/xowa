@@ -26,7 +26,7 @@ public class GfoInvkAble_ {
 	public static Object InvkCmd(GfoInvkAble invk, String k)				{return InvkCmd_msg(invk, k, GfoMsg_.Null);}
 	public static Object InvkCmd_val(GfoInvkAble invk, String k, Object v)	{return InvkCmd_msg(invk, k, GfoMsg_.new_cast_(k).Add("v", v));}
 	public static Object InvkCmd_msg(GfoInvkAble invk, String k, GfoMsg m)	{
-		Object rv = invk.Invk(GfsCtx._, 0, k, m);
+		Object rv = invk.Invk(GfsCtx.Instance, 0, k, m);
 		if (rv == GfoInvkAble_.Rv_unhandled) throw Err_.new_wo_type("invkable did not handle message", "key", k);
 		return rv;
 	}

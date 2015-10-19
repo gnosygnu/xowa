@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
 public class Db_cfg_hash {		
-	private final String grp; private final Ordered_hash hash = Ordered_hash_.new_();
+	private final String grp; private final Ordered_hash hash = Ordered_hash_.New();
 	public Db_cfg_hash(String grp) {this.grp = grp;}
 	public int			Len() {return hash.Count();}
 	public Db_cfg_itm	Get_at(int i) {return (Db_cfg_itm)hash.Get_at(i);}
-	public Db_cfg_itm	Get(String key) {
+	public Db_cfg_itm	Get_by(String key) {
 		Db_cfg_itm rv = (Db_cfg_itm)hash.Get_by(key);
 		return rv == null ? Db_cfg_itm.Empty : rv;
 	}

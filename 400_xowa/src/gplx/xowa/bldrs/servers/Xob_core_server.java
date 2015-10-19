@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.servers; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.setup.maints.*;
+import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.bldrs.servers.jobs.*;
 public class Xob_core_server {
 	private Xob_wmf_mgr wmf_mgr;

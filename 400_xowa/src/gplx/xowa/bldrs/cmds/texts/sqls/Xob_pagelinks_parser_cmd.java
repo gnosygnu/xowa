@@ -57,7 +57,7 @@ public class Xob_pagelinks_parser_cmd extends Xob_sql_dump_base implements Sql_f
 			case Fld__pl_title:
 				byte[] tmp_trg_ttl = Bry_.Mid(src, fld_bgn, fld_end);
 				temp_tbl.Insert(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
-				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.Xto_str_fmt(rows, "#,##0"));
+				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
 				break;
 		}
 	}

@@ -21,16 +21,16 @@ public class Xop_xnde_wkr__text_block_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Source_wikitext() {	// PURPOSE.ASSERT: wikitext should be rendered literally; DATE:2014-03-11
-		fxt.Test_parse_page_wiki_str("<source>''a''</source>", "<pre>''a''</pre>");
+		fxt.Test_parse_page_wiki_str("<source>''a''</source>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">''a''</pre></div>");
 	}
 	@Test  public void Source_nowiki() {	// PURPOSE.ASSERT: onlyinclude should be rendered literally; DATE:2014-03-11
-		fxt.Test_parse_page_wiki_str("<source><onlyinclude>a</onlyinclude></source>", "<pre>&lt;onlyinclude&gt;a&lt;/onlyinclude&gt;</pre>");
+		fxt.Test_parse_page_wiki_str("<source><onlyinclude>a</onlyinclude></source>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&lt;onlyinclude&gt;a&lt;/onlyinclude&gt;</pre></div>");
 	}
 	@Test  public void Source_escape() {
-		fxt.Test_parse_page_wiki_str("<source><b></source>", "<pre>&lt;b&gt;</pre>");
+		fxt.Test_parse_page_wiki_str("<source><b></source>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&lt;b&gt;</pre></div>");
 	}
 	@Test  public void Source_escape_amp() {	// PURPOSE: &lt; should be rendered as &amp;lt; PAGE:uk.b:HTML; DATE:2014-03-11
-		fxt.Test_parse_page_wiki_str("<source>&lt;</source>", "<pre>&amp;lt;</pre>");
+		fxt.Test_parse_page_wiki_str("<source>&lt;</source>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&amp;lt;</pre></div>");
 	}
 	@Test  public void Source_pre() {	// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 		fxt.Init_para_y_();
@@ -39,9 +39,9 @@ public class Xop_xnde_wkr__text_block_tst {
 		, "  a"
 		, "  </source>"
 		), String_.Concat_lines_nl_skip_last
-		( "  <pre>"
+		( "  <div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		, "  a"
-		, "</pre>"
+		, "</pre></div>"
 		));
 		fxt.Init_para_n_();
 	}

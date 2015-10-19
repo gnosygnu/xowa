@@ -93,7 +93,7 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	@Override public SrlMgr SrlMgr_new(Object o) {return new GfmlDataWtr();}
 	StackAdp stack = StackAdp_.new_();
 	GfmlDoc gdoc = GfmlDoc.new_(); GfmlNde nde;
-	String keyedSpr = GfmlDataWtrOpts._.KeyedSpr(); boolean indentNodes, ignoreNullNames;
+	String keyedSpr = GfmlDataWtrOpts.Instance.KeyedSpr(); boolean indentNodes, ignoreNullNames;
         public static GfmlDataWtr new_() {return new GfmlDataWtr();}
 	GfmlDataWtr() {this.nde = this.gdoc.RootNde();}
 }

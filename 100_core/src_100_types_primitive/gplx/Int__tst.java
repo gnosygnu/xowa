@@ -26,7 +26,7 @@ public class Int__tst {
 		tst_XtoStr_PadLeft_Zeroes(-12	, 3, "-12");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-123	, 3, "-123");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-1234	, 3, "-1234");		// negative
-	}	void tst_XtoStr_PadLeft_Zeroes(int val, int zeros, String expd) {Tfds.Eq(expd, Int_.Xto_str_pad_bgn_zero(val, zeros));}
+	}	void tst_XtoStr_PadLeft_Zeroes(int val, int zeros, String expd) {Tfds.Eq(expd, Int_.To_str_pad_bgn_zero(val, zeros));}
 	@Test  public void parseOr_() {
 		tst_ParseOr("", -1);		// empty
 		tst_ParseOr("123", 123);	// single
@@ -41,7 +41,7 @@ public class Int__tst {
 	@Test  public void Xto_fmt() {
 		tst_XtoStr_fmt(1, "1");
 		tst_XtoStr_fmt(1000, "1,000");
-	}	void tst_XtoStr_fmt(int v, String expd) {Tfds.Eq(expd, Int_.Xto_str_fmt(v, "#,###"));}
+	}	void tst_XtoStr_fmt(int v, String expd) {Tfds.Eq(expd, Int_.To_str_fmt(v, "#,###"));}
 	@Test  public void AryRng() {
 		tst_AryRng(1, 3, Int_.Ary(1, 2, 3));
 	}	void tst_AryRng(int bgn, int end, int[] expd) {Tfds.Eq_ary(expd, Int_.AryRng(bgn, end));}
@@ -71,7 +71,7 @@ public class Int__tst {
 		tst_DigitCount(100, 3);
 		tst_DigitCount(-1, 2);
 		tst_DigitCount(-100, 4);
-	}	void tst_DigitCount(int val, int expd) {Tfds.Eq(expd, Int_.DigitCount(val), Int_.Xto_str(val));}
+	}	void tst_DigitCount(int val, int expd) {Tfds.Eq(expd, Int_.DigitCount(val), Int_.To_str(val));}
 	@Test  public void Log10() {
 		tst_Log10(            0,  0);
 		tst_Log10(            1,  0);
@@ -98,14 +98,14 @@ public class Int__tst {
 	}
 	@Test  public void Xto_int_hex_tst() {
 		Xto_int_hex("007C", 124);
-	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.Xto_int_hex(Bry_.new_a7(raw)));}
+	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.To_int_hex(Bry_.new_a7(raw)));}
 	@Test  public void Ary_parse() {
 		Ary_parse__tst("1,2,3"							, 3, Int_.Ary_empty,   1,   2,   3);
 		Ary_parse__tst("123,321,213"					, 3, Int_.Ary_empty, 123, 321, 213);
 		Ary_parse__tst(" 1,  2,3"						, 3, Int_.Ary_empty,   1,   2,   3);
 		Ary_parse__tst("-1,+2,-3"						, 3, Int_.Ary_empty,  -1,   2,  -3);
-		Ary_parse__tst(Int_.Xto_str(Int_.Min_value)		, 1, Int_.Ary_empty, Int_.Min_value);
-		Ary_parse__tst(Int_.Xto_str(Int_.Max_value)		, 1, Int_.Ary_empty, Int_.Max_value);
+		Ary_parse__tst(Int_.To_str(Int_.Min_value)		, 1, Int_.Ary_empty, Int_.Min_value);
+		Ary_parse__tst(Int_.To_str(Int_.Max_value)		, 1, Int_.Ary_empty, Int_.Max_value);
 		Ary_parse__tst("1,2"							, 1, Int_.Ary_empty);
 		Ary_parse__tst("1"								, 2, Int_.Ary_empty);
 		Ary_parse__tst("a"								, 1, Int_.Ary_empty);

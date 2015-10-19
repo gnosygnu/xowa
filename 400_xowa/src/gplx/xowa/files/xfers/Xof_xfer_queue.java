@@ -19,9 +19,9 @@ package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.files.gui.*;
-import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
-	private final List_adp xfer_list = List_adp_.new_(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.new_bry_();
+	private final List_adp xfer_list = List_adp_.new_(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
 	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.neg1_();
 	public int Count() {return xfer_list.Count();}
 	public void Clear() {
@@ -66,7 +66,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v2(Xowe_wiki wiki, Xoae_page page) {
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
-		Xog_js_wkr js_wkr = wiki.App().App_type().Uid_supports_js() ? page.Tab_data().Tab().Html_itm() : Xog_js_wkr_.Noop;
+		Xog_js_wkr js_wkr = wiki.App().Mode().Tid_supports_js() ? page.Tab_data().Tab().Html_itm() : Xog_js_wkr_.Noop;
 		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(Xfer_itms_to_fsdb_itms(wiki, page, xfer_list, wiki.File_mgr().Patch_upright()), wiki, page, js_wkr);
 	}
 	private List_adp Xfer_itms_to_fsdb_itms(Xowe_wiki cur_wiki, Xoae_page page, List_adp xfer_list, int upright_patch) {

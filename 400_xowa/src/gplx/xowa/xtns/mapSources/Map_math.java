@@ -136,7 +136,7 @@ class Map_math {// REF.MW:MapSources_math.php
 			letter = minus;
 		if (letter != null)
 			tmp_bfr.Add_byte_space().Add(letter);
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	private void Parse_input(byte[] src) {	// REF.MW: toDec
 		src = Parse_input_normalize(tmp_bfr, src);
@@ -268,7 +268,7 @@ class Map_math {// REF.MW:MapSources_math.php
 				i = Input_trie.Match_pos();
 			}
 		}
-		return bfr.Xto_bry_and_clear_and_trim();
+		return bfr.To_bry_and_clear_and_trim();
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
 	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
@@ -315,5 +315,5 @@ class Map_math {// REF.MW:MapSources_math.php
 	.Add_str_byte("e"					, Input_tid_compass)
 	.Add_str_byte("w"					, Input_tid_compass)
 	;
-	public static final Map_math _ = new Map_math();
+	public static final Map_math Instance = new Map_math();
 }

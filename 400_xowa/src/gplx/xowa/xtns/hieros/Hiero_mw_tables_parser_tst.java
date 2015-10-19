@@ -65,9 +65,9 @@ class Hiero_mw_tables_parser_fxt {
 	public void Test_bld_all(String raw, String expd) {
 		Io_url load_url = Io_url_.mem_fil_("mem/hiero/load.php");
 		Io_url save_url = Io_url_.mem_fil_("mem/hiero/save.php");
-		Io_mgr.I.SaveFilStr(load_url, raw);
+		Io_mgr.Instance.SaveFilStr(load_url, raw);
 		parser.Bld_all(load_url, save_url);
-		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(save_url));
+		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(save_url));
 	}
 	public void Exec_bld_all(String load, String save) {
 		parser.Bld_all(Io_url_.new_fil_(load), Io_url_.new_fil_(save));

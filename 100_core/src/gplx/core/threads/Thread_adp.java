@@ -39,7 +39,7 @@ public class Thread_adp implements Runnable {
 //	public void Stop() {thread.stop();}
 	public boolean IsAlive() {return thread.isAlive();}
 	@Override public void run() {
-		invk.Invk(GfsCtx._, 0, cmd, msg);
+		invk.Invk(GfsCtx.Instance, 0, cmd, msg);
 	}
 		public static final Thread_adp Null = new Thread_adp(Thread_adp_.Name_null, GfoInvkAble_.Null, "", GfoMsg_.Null);
 }

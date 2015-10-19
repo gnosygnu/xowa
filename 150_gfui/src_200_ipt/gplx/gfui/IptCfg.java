@@ -70,7 +70,7 @@ class IptCfg_base implements IptCfg {
 		}
 		list.Add(owner);
 		owner.IptBnds().Cfgs().Add(new IptCfgPtr(cfgKey, bndKey));
-	}	Ordered_hash owners = Ordered_hash_.new_();
+	}	Ordered_hash owners = Ordered_hash_.New();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.MatchIn(k, Invk_Add, Invk_set)) {
 			String bndKey = m.ReadStr("bndKey");
@@ -82,7 +82,7 @@ class IptCfg_base implements IptCfg {
 		return this;
 	}	public static final String Invk_Add = "Add", Invk_set = "set";
 	public IptCfg_base(String cfgKey) {this.cfgKey = cfgKey;}
-	Ordered_hash hash = Ordered_hash_.new_();
+	Ordered_hash hash = Ordered_hash_.New();
 	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} @gplx.Internal protected static final IptCfg HashProto = new IptCfg_base(); @gplx.Internal protected IptCfg_base() {}
 }
 class IptCfgPtr {

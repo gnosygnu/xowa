@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.primitives.*; import gplx.core.criterias.*;
-import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.dbs.*; import gplx.dbs.qrys.*;
-import gplx.xowa.nss.*;
+import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements RlsAble {
 	private final String tbl_name = "page";
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id;
@@ -134,7 +134,7 @@ public class Xowd_page_tbl implements RlsAble {
 	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, List_adp rv, int bgn, int end) {
 		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.To_ary(Xowd_page_itm.class);
 		int len = page_ary.length; if (len == 0) return false;
-		Ordered_hash hash = Ordered_hash_.new_();
+		Ordered_hash hash = Ordered_hash_.New();
 		for (int i = 0; i < len; i++) {
 			if (cancelable.Canceled()) return false;
 			Xowd_page_itm p = page_ary[i];
@@ -185,7 +185,7 @@ public class Xowd_page_tbl implements RlsAble {
 		( "SELECT {0}, {1}, {2}, {3} FROM {4} INDEXED BY {4}__title WHERE {1} = {5} AND {2} BETWEEN '{6}' AND '{7}' ORDER BY {3} DESC LIMIT {8};"
 		, fld_id, fld_ns, fld_title, fld_len
 		, tbl_name
-		, Int_.Xto_str(ns.Id()), search_bgn, search_end, Int_.Xto_str(max_results)
+		, Int_.To_str(ns.Id()), search_bgn, search_end, Int_.To_str(max_results)
 		);
 		Db_qry qry = Db_qry_sql.rdr_(sql);
 		Db_rdr rdr = conn.Stmt_new(qry).Exec_select__rls_auto();

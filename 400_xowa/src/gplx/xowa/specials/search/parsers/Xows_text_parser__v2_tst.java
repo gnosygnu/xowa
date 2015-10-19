@@ -144,7 +144,7 @@ class Xows_text_parser__v2_fxt {
 			tmp_bfr.Add(word.Word()).Add_byte_pipe();
 			tmp_bfr.Add_int_variable(word.Count());
 		}
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	private String To_str(Xob_word_mgr word_mgr) {
 		int len = word_mgr.Len();

@@ -93,6 +93,6 @@ public class Json_doc_wtr {
 		bfr.Add_byte(Byte_ascii.Colon);
 		return this;
 	}
-	public byte[] Bld() {return bfr.Xto_bry_and_clear();}
-	public String Bld_as_str() {return bfr.Xto_str_and_clear();}
+	public byte[] Bld() {return bfr.To_bry_and_clear();}
+	public String Bld_as_str() {return bfr.To_str_and_clear();}
 }

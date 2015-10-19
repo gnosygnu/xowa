@@ -21,7 +21,7 @@ import gplx.xowa.parsers.tmpls.*;
 public class Xop_lnki_lxr_bgn implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_lnki_bgn;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_tkn_itm prv_tkn = ctx.Stack_get_last();
@@ -37,7 +37,7 @@ public class Xop_lnki_lxr_bgn implements Xop_lxr {
 		ctx.Subs_add_and_stack(root, lnki); 
 		return cur_pos;
 	}
-	public static final Xop_lnki_lxr_bgn _ = new Xop_lnki_lxr_bgn();
+	public static final Xop_lnki_lxr_bgn Instance = new Xop_lnki_lxr_bgn();
 }
 class Xop_lnki_size	{public static final int  None = 0, Width		= 1, Height		= 2, WidthHeight = 4, Upright	= 8;}
 /*

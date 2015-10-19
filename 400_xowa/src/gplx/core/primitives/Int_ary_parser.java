@@ -35,5 +35,5 @@ public class Int_ary_parser extends Obj_ary_parser_base {
 		parser.Parse(bry, bgn, end); if (parser.Has_err() || parser.Has_frac()) throw Err_.new_wo_type("failed to parse number", "val", String_.new_u8(bry, bgn, end));
 		ary[ary_idx++] = parser.Rv_as_int();
 	}
-	public static final Int_ary_parser _ = new Int_ary_parser();
+	public static final Int_ary_parser Instance = new Int_ary_parser();
 }

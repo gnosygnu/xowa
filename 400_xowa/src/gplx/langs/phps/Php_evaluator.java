@@ -102,9 +102,9 @@ public class Php_evaluator implements Php_tkn_wkr {
 			case Mode_val:
 				Php_itm line_val = null;
 				switch (tkn_tid) {
-					case Php_tkn_.Tid_null:		Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_null._; break;
-					case Php_tkn_.Tid_false:	Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_bool_false._; break;
-					case Php_tkn_.Tid_true:		Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_bool_true._; break;
+					case Php_tkn_.Tid_null:		Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_null.Instance; break;
+					case Php_tkn_.Tid_false:	Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_bool_false.Instance; break;
+					case Php_tkn_.Tid_true:		Expect(Php_tkn_.Tid_semic, Mode_key_bgn); line_val = Php_itm_bool_true.Instance; break;
 					case Php_tkn_.Tid_quote:
 						Expect(Php_tkn_.Tid_semic, Mode_key_bgn);
 						Php_tkn_quote tkn_quote = (Php_tkn_quote)tkn; 
@@ -138,9 +138,9 @@ public class Php_evaluator implements Php_tkn_wkr {
 				break;
 			case Mode_ary_subs:
 				switch (tkn_tid) {
-					case Php_tkn_.Tid_null:		Ary_add_itm(Php_itm_null._); break;
-					case Php_tkn_.Tid_false:	Ary_add_itm(Php_itm_bool_false._); break;
-					case Php_tkn_.Tid_true:		Ary_add_itm(Php_itm_bool_true._); break;
+					case Php_tkn_.Tid_null:		Ary_add_itm(Php_itm_null.Instance); break;
+					case Php_tkn_.Tid_false:	Ary_add_itm(Php_itm_bool_false.Instance); break;
+					case Php_tkn_.Tid_true:		Ary_add_itm(Php_itm_bool_true.Instance); break;
 					case Php_tkn_.Tid_quote:
 						Php_tkn_quote tkn_quote = (Php_tkn_quote)tkn;
 						Ary_add_itm(new Php_itm_quote(tkn_quote.Quote_text(src)));

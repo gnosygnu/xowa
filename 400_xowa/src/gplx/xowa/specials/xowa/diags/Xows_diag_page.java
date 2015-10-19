@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.apps.urls.*;
 public class Xows_diag_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__diag;}
@@ -28,12 +28,12 @@ public class Xows_diag_page implements Xows_page {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001();
 		bfr.Add_str_a7("<pre>\n");
 		switch (cmd_type_val.Val()) {
-			case Type_file_check:	Xows_cmd__file_check.I.Exec(bfr, wiki.App(), url, arg_hash); break;
-			case Type_fs_check:		Xows_cmd__fs_check.I.Exec(bfr, wiki.App(), url, arg_hash); break;
-			case Type_sql_dump:		Xows_cmd__sql_dump.I.Exec(bfr, wiki.App(), url, arg_hash); break;
+			case Type_file_check:	Xows_cmd__file_check.Instance.Exec(bfr, wiki.App(), url, arg_hash); break;
+			case Type_fs_check:		Xows_cmd__fs_check.Instance.Exec(bfr, wiki.App(), url, arg_hash); break;
+			case Type_sql_dump:		Xows_cmd__sql_dump.Instance.Exec(bfr, wiki.App(), url, arg_hash); break;
 		}
 		bfr.Add_str_a7("</pre>\n");
-		page.Data_raw_(bfr.Xto_bry_and_clear());
+		page.Data_raw_(bfr.To_bry_and_clear());
 	}
 	private static final byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_file_check = 1, Type_fs_check = 2, Type_sql_dump = 3;

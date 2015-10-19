@@ -16,18 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.pages.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.files.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.html.hdumps.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.htmls.hdumps.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.parsers.vnts.*;
 public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
-	private Xob_hdump_bldr hdump_bldr; private Xob_link_dump_cmd link_dump_cmd; private boolean hzip_enabled = true;
+	private Xob_hdump_bldr hdump_bldr; private Xob_link_dump_cmd link_dump_cmd; private boolean hzip_enabled = false;
+	private Vnt_convert_lang converter_lang;
 	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_file_lnki_temp;}
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
@@ -44,11 +46,16 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		Db_conn conn = make_db_file.Conn();
 		this.tbl = new Xob_lnki_temp_tbl(conn);
 		tbl.Create_tbl();
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		if (vnt_mgr.Enabled()) {
+			this.converter_lang = vnt_mgr.Convert_lang();
+			converter_lang.Log__init(conn);
+		}
 		return conn;
 	}
 	@Override protected void Cmd_bgn_end() {
 		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);							// NOTE: must call after wiki.init
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Ctgs_enabled_(false);		// disable categories else progress messages written (also for PERF)
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Ctgs_enabled_(false);			// disable categories else progress messages written (also for PERF)
 		if (wiki.File__bin_mgr() != null)
 			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// remove wmf wkr, else will try to download images during parsing
 		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons);
@@ -65,10 +72,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		gplx.xowa.parsers.xndes.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
-		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr();
+		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File__fsdb_mode().Tid_v2_bld_y_();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
@@ -78,7 +85,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);
 		Fsm_mnt_mgr.Patch(trg_mnt_mgr.Mnts__get_main().Cfg_mgr().Tbl()); // NOTE: see fsdb_make; DATE:2014-04-26
 		if (gen_hdump) {
-			gplx.xowa.apis.xowa.bldrs.imports.Xoapi_import import_cfg = wiki.Appe().Api_root().Bldr().Wiki().Import();
+			gplx.xowa.apps.apis.xowa.bldrs.imports.Xoapi_import import_cfg = wiki.Appe().Api_root().Bldr().Wiki().Import();
 			hdump_bldr = new Xob_hdump_bldr(wiki.Ns_mgr(), wiki.Db_mgr_as_sql(), tbl.Conn(), import_cfg.Html_db_max(), hzip_enabled);
 			link_dump_cmd = new Xob_link_dump_cmd();
 			link_dump_cmd.Init_by_wiki(wiki);
@@ -103,7 +110,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 			if (gen_html) {
 				page.Root_(root);
 				if (!page.Redirected())
-					wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_view_mode.Tid_read);
+					wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_page_.Tid_read);
 			}
 			if (gen_hdump) {
 				page.Root_(root);
@@ -122,12 +129,14 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	}
 	@Override public void Exec_commit_hook() {
 		tbl.Conn().Txn_sav();
+//			if (converter_lang != null) converter_lang.Log__save();
 		if (gen_hdump) {
 			hdump_bldr.Commit();
 			link_dump_cmd.Wkr_commit();
 		}
 	}
 	@Override public void Exec_end_hook() {
+//			if (converter_lang != null) converter_lang.Log__rls();
 		if (gen_hdump) {
 			hdump_bldr.Bld_term();
 			link_dump_cmd.Wkr_end();
@@ -193,7 +202,7 @@ class Xob_lnki_temp_wkr_ {
 		for (int i = 0; i < aliases_len; i++) {
 			String alias = aliases[i];
 			int id = i < ids_len ? rv[i] : -1;
-			wiki.Appe().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.Xto_str_fmt(id, "0000"), alias);
+			wiki.Appe().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.To_str_fmt(id, "0000"), alias);
 		}
 		if (aliases_len != ids_len) throw Err_.new_wo_type("mismatch in aliases and ids", "aliases", aliases_len, "ids", ids_len);
 		return rv;

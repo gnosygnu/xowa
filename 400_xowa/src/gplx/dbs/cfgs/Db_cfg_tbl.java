@@ -40,8 +40,8 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Delete_all()						{conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
 	public void Insert_yn		(String grp, String key, boolean  val)		{Insert_str(grp, key, val ? "y" : "n");}
 	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.To_str(val));}
-	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.Xto_str(val));}
-	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.Xto_str(val));}
+	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.To_str(val));}
+	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.To_str(val));}
 	public void Insert_date		(String grp, String key, DateAdp val)		{Insert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public void Insert_guid		(String grp, String key, Guid_adp val)		{Insert_str(grp, key, val.To_str());}
 	public void Insert_bry		(String grp, String key, byte[] val)		{Insert_str(grp, key, String_.new_u8(val));}
@@ -53,8 +53,8 @@ public class Db_cfg_tbl implements RlsAble {
 	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
 	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.To_str(val));}
-	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.Xto_str(val));}
-	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.Xto_str(val));}
+	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.To_str(val));}
+	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.To_str(val));}
 	public void Update_date		(String grp, String key, DateAdp val)		{Update_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public void Update_guid		(String grp, String key, Guid_adp val)		{Update_str(grp, key, val.To_str());}
 	public void Update_bry		(String grp, String key, byte[] val)		{Update_str(grp, key, String_.new_u8(val));}
@@ -63,7 +63,7 @@ public class Db_cfg_tbl implements RlsAble {
 		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_update();
 	}
 	public void Upsert_yn		(String grp, String key, boolean val)			{Upsert_str(grp, key, val ? "y" : "n");}
-	public void Upsert_int		(String grp, String key, int val)			{Upsert_str(grp, key, Int_.Xto_str(val));}
+	public void Upsert_int		(String grp, String key, int val)			{Upsert_str(grp, key, Int_.To_str(val));}
 	public void Upsert_str		(String grp, String key, String val) {
 		String cur_val = this.Select_str_or(grp, key, null);
 		if (cur_val == null)	this.Insert_str(grp, key, val);
@@ -102,6 +102,16 @@ public class Db_cfg_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 		return rv;
+	}
+	public void Select_as_hash_bry(Hash_adp_bry rv, String grp) {
+		rv.Clear();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_grp).Crt_str(fld_grp, grp).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				rv.Add(rdr.Read_bry_by_str(fld_key), rdr.Read_bry_by_str(fld_val));
+			}
+		}
+		finally {rdr.Rls();}
 	}
 	// NOTE: Assert guarantees that a value exists in database and returns it (Select + Insert); (1) String val = Assert('grp', 'key', 'val'); (2) Update('grp', 'key', 'val2');
 	public boolean			Assert_yn	(String grp, String key, boolean  or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_yn		(grp, key, or); return or;} return Parse_yn		(grp, key, val);}

@@ -32,22 +32,22 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public boolean Async_prog_enabled()	{return true;}
 	public void Async_prog_run(int async_sleep_sum) {
 		String size_str = " please wait...";
-		if (trg.Type_fil()) size_str = gplx.ios.Io_size_.To_str(Io_mgr.I.QueryFil(trg).Size());
+		if (trg.Type_fil()) size_str = gplx.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg).Size());
 		usr_dlg.Prog_many(GRP_KEY, "unzip", "unzipping: ~{0}", size_str);
 	}
 	@gplx.Virtual public byte Async_init() {
-		if (!Io_mgr.I.ExistsFil(src)) {
+		if (!Io_mgr.Instance.ExistsFil(src)) {
 			kit.Ask_ok(GRP_KEY, "source_missing", "Source file does not exist: '~{0}'", src.Raw());
 			return Gfo_thread_cmd_.Init_cancel_step;
 		}
 		trg_is_dir = trg.Type_dir();
 		if (delete_trg_if_exists
-			&&	(( trg_is_dir && Io_mgr.I.ExistsDir(trg))
-				||	(!trg_is_dir && Io_mgr.I.ExistsFil(trg)))
+			&&	(( trg_is_dir && Io_mgr.Instance.ExistsDir(trg))
+				||	(!trg_is_dir && Io_mgr.Instance.ExistsFil(trg)))
 			) {
 			int rslt = kit.Ask_yes_no_cancel(GRP_KEY, "target_exists", "Target file already exists: '~{0}'.\nDo you want to delete it?", trg.Raw());
 			switch (rslt) {
-				case Gfui_dlg_msg_.Btn_yes:		if (trg_is_dir) Io_mgr.I.DeleteDirDeep(trg); else Io_mgr.I.DeleteFil(trg); break;
+				case Gfui_dlg_msg_.Btn_yes:		if (trg_is_dir) Io_mgr.Instance.DeleteDirDeep(trg); else Io_mgr.Instance.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
 			}
@@ -61,7 +61,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	}
 	public boolean Async_term() {
 		if (rename_dir) {
-			Io_url[] dirs = Io_mgr.I.QueryDir_args(trg.OwnerDir()).DirOnly_().Recur_(false).ExecAsUrlAry();
+			Io_url[] dirs = Io_mgr.Instance.QueryDir_args(trg.OwnerDir()).DirOnly_().Recur_(false).ExecAsUrlAry();
 			int dirs_len = dirs.length;
 			Io_url zip_dir = Io_url_.Empty;
 			for (int i = 0; i < dirs_len; i++) {
@@ -76,14 +76,14 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 				return false;
 			}
 			if (!String_.Eq(String_.Lower(zip_dir.Raw()), String_.Lower(trg.Raw())))	// HACK: inkscape is itself
-				Io_mgr.I.MoveDirDeep(zip_dir, trg);
+				Io_mgr.Instance.MoveDirDeep(zip_dir, trg);
 		}
 		switch (term_cmd_for_src) {
 			case Term_cmd_for_src_noop: break;
-			case Term_cmd_for_src_delete: Io_mgr.I.DeleteFil(src); break;
+			case Term_cmd_for_src_delete: Io_mgr.Instance.DeleteFil(src); break;
 			case Term_cmd_for_src_move:
 				if (term_cmd_for_src_url == Io_url_.Empty) throw Err_.new_wo_type("move specified, but no url");
-				Io_mgr.I.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
+				Io_mgr.Instance.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
 				break;
 			default: throw Err_.new_unhandled(term_cmd_for_src);
 		}

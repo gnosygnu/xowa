@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.tdbs.*;
+import org.junit.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xows_html_wkr_tst {
@@ -68,8 +68,8 @@ class Xows_html_wkr_fxt {
 		html_row.Init(rslt);
 		for (int i = 0; i < rows.length; ++i)
 			rslt.Add(rows[i]);
-		html_row.XferAry(tmp_bfr, 0);
-		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
+		html_row.Fmt__do(tmp_bfr);
+		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
 	public Xows_db_row Make_row(int len, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);

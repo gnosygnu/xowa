@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.langs.phps.*; import gplx.langs.dsvs.*;
-import gplx.xowa.apps.gfss.*;
+import gplx.xowa.apps.gfs.*;
 public class Hiero_mw_tables_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
 	private Php_text_itm_parser quote_parser = new Php_text_itm_parser();
@@ -31,7 +31,7 @@ public class Hiero_mw_tables_parser {
 	}
 	public void Load_data(Hiero_xtn_mgr xtn_mgr, Io_url load_fil) {// NOTE: parsing tables.php instead of tables.ser b/c latter is too difficult to read / debug
 		evaluator.Clear();
-		parser.Parse_tkns(Io_mgr.I.LoadFilBry(load_fil), evaluator);
+		parser.Parse_tkns(Io_mgr.Instance.LoadFilBry(load_fil), evaluator);
 		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
@@ -79,7 +79,7 @@ public class Hiero_mw_tables_parser {
 		}		
 	}
 	public void Save_data(Hiero_xtn_mgr xtn_mgr, Io_url save_fil) {
-		Gfs_bldr bldr = new Gfs_bldr();
+		Xoa_gfs_bldr bldr = new Xoa_gfs_bldr();
 		int len = -1;
 
 		Hiero_prefab_mgr prefab_mgr = xtn_mgr.Prefab_mgr();
@@ -112,7 +112,7 @@ public class Hiero_mw_tables_parser {
 		}
 		bldr.Add_quote_xtn_end();
 		bldr.Add_paren_end().Add_term_nl();
-		Io_mgr.I.SaveFilBfr(save_fil, bldr.Bfr());
+		Io_mgr.Instance.SaveFilBfr(save_fil, bldr.Bfr());
 	}
 	private static final byte Tid_prefabs = 0, Tid_files = 1, Tid_phonemes = 2;
 	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs().Add_str_byte("wh_prefabs", Tid_prefabs).Add_str_byte("wh_files", Tid_files).Add_str_byte("wh_phonemes", Tid_phonemes);

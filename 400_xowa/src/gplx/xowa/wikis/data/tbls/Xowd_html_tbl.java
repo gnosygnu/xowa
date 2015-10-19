@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.dbs.cfgs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.cfgs.*;
 public class Xowd_html_tbl implements RlsAble {
 	private final String tbl_name = "html"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_page_id, fld_html_tid, fld_html_data;
@@ -31,7 +31,7 @@ public class Xowd_html_tbl implements RlsAble {
 	}
 	public Db_conn Conn() {return conn;}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
-	public void Create_idx() {conn.Ddl_create_idx(Gfo_usr_dlg_.I, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_page_id, fld_html_tid));}
+	public void Create_idx() {conn.Ddl_create_idx(Gfo_usr_dlg_.Instance, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_page_id, fld_html_tid));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public int Insert(int page_id, int tid, byte[] data) {

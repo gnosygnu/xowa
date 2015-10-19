@@ -21,9 +21,9 @@ public class IoEngine_stream_xfer_tst {
 	@Before public void setup() {
 		srcEngine = IoEngine_memory.new_("mock1");
 		trgEngine = IoEngine_memory.new_("mock2");
-		IoEnginePool._.Add_if_dupe_use_nth(srcEngine); IoEnginePool._.Add_if_dupe_use_nth(trgEngine);
-		IoUrlInfoRegy._.Reg(IoUrlInfo_.mem_("mem1/", srcEngine.Key()));
-		IoUrlInfoRegy._.Reg(IoUrlInfo_.mem_("mem2/", trgEngine.Key()));
+		IoEnginePool.Instance.Add_if_dupe_use_nth(srcEngine); IoEnginePool.Instance.Add_if_dupe_use_nth(trgEngine);
+		IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.mem_("mem1/", srcEngine.Key()));
+		IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.mem_("mem2/", trgEngine.Key()));
 		srcDir = Io_url_.mem_dir_("mem1/dir"); trgDir = Io_url_.mem_dir_("mem2/dir");
 	}
 	@Test  public void TransferBetween() {

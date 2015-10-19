@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Xowd_page_itm_tst {
 	@Before public void init() {fxt.Init();} private Xowd_page_itm_fxt fxt = new Xowd_page_itm_fxt();
 	@Test  public void Ttl_() {

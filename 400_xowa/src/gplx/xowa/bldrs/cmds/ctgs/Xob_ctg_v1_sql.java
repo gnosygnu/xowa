@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*;
 import gplx.xowa.bldrs.wtrs.*;
 public class Xob_ctg_v1_sql extends Xob_ctg_v1_base {
 	@Override public String Wkr_key() {return Xob_cmd_keys.Key_text_cat_core_v1;}
@@ -32,7 +32,7 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 	public void Sort_bgn() {
 		usr_dlg = wiki.Appe().Usr_dlg();
 		Io_url sql_url = wiki.Fsys_mgr().Root_dir().GenSubFil(Url_sql);
-		Io_mgr.I.DeleteFil_args(sql_url).MissingFails_off().Exec();
+		Io_mgr.Instance.DeleteFil_args(sql_url).MissingFails_off().Exec();
 		sql_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.fil_(sql_url), Io_mgr.Len_mb);
 		sql_wtr.Bfr().Add_str(Xob_categorylinks_sql.Sql_categorylinks).Add(Sql_hdr);
 	}
@@ -73,6 +73,6 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 			}
 		}
 		bfr.Mkr_rls();
-		return dirty ? bfr.Xto_bry_and_clear() : bry;
+		return dirty ? bfr.To_bry_and_clear() : bry;
 	}
 }

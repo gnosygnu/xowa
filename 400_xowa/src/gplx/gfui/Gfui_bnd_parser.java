@@ -94,7 +94,7 @@ public class Gfui_bnd_parser {
 			Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)tkns.Get_at(i);
 			tkn.Write(tmp_bfr, !src_is_gfui);
 		}
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	private void Process_sym(boolean src_is_gfui, boolean is_numeric, Gfui_bnd_tkn sym_tkn, int itm_bgn, int itm_end) {
 		Hash_adp_bry regy = src_is_gfui ? gfui_regy : norm_regy;

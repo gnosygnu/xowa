@@ -47,7 +47,7 @@ public class XmlFileSplitter {
 		XmlSplitWtr partWtr = new XmlSplitWtr().Init_(partDir, hdr, opts);
 		while (true) {
 			partWtr.Bgn(partIdx++);
-			if (opts.StatusFmt() != null) Console_adp__sys.I.Write_str_w_nl(String_.Format(opts.StatusFmt(), partWtr.Url().NameOnly()));
+			if (opts.StatusFmt() != null) Console_adp__sys.Instance.Write_str_w_nl(String_.Format(opts.StatusFmt(), partWtr.Url().NameOnly()));
 			partWtr.Write(tempAry);
 			if (!first) {
 				rdr.Read();

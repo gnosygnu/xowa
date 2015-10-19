@@ -22,7 +22,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	@gplx.Internal protected void Add(Xow_domain_crt_kv_itm itm) {list.Add(itm);}
 	public boolean Parse_as_itms(byte[] raw) {
 		this.Clear();
-		Xow_domain_crt_kv_itm[] ary = Xow_domain_crt_itm_parser.I.Parse_as_kv_itms_or_null(raw);
+		Xow_domain_crt_kv_itm[] ary = Xow_domain_crt_itm_parser.Instance.Parse_as_kv_itms_or_null(raw);
 		if (ary == null) return false; // invalid parse; leave current value as is and exit;
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
@@ -31,7 +31,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	}
 	public boolean Parse_as_arys(byte[] raw) {
 		this.Clear();
-		Xow_domain_crt_kv_ary[] ary = Xow_domain_crt_itm_parser.I.Parse_as_kv_arys_or_null(raw);
+		Xow_domain_crt_kv_ary[] ary = Xow_domain_crt_itm_parser.Instance.Parse_as_kv_arys_or_null(raw);
 		if (ary == null) return false; // invalid parse; leave current value as is and exit;
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
@@ -44,7 +44,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.Get_at(i);
 			if (kv.Key().Matches(cur, comp)) return kv.Val();
 		}
-		return Xow_domain_crt_itm__none.I;
+		return Xow_domain_crt_itm__none.Instance;
 	}
 	public Xow_domain_crt_itm[] Find_ary(Xow_domain_itm cur, Xow_domain_itm comp) {
 		int len = list.Count();

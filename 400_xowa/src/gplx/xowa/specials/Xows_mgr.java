@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
 import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.diags.*;
@@ -25,7 +25,7 @@ import gplx.xowa.xtns.wdatas.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 public class Xows_mgr {
 	private final Hash_adp_bry hash;
-	public Xows_mgr(Xowe_wiki wiki, Xol_lang lang) {
+	public Xows_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		hash = Hash_adp_bry.ci_u8(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
 		page_search = new Xows_page__search(wiki);
@@ -49,7 +49,7 @@ public class Xows_mgr {
 	public Xosp_fbrow_special			Page_file_browser() {return page_file_browser;} private final Xosp_fbrow_special page_file_browser = new Xosp_fbrow_special();
 	public Xows_bmk_page				Page_bmk() {return page_bmk;} private final Xows_bmk_page page_bmk = new Xows_bmk_page();
 	public Xows_diag_page				Page_diag() {return page_diag;} private final Xows_diag_page page_diag = new Xows_diag_page();
-	public void Evt_lang_changed(Xol_lang lang) {
+	public void Evt_lang_changed(Xol_lang_itm lang) {
 		hash.Clear();
 		hash.Add_str_obj(Xows_special_meta_.Key__search					, page_search);
 		hash.Add_str_obj(Xows_special_meta_.Key__all_pages				, page_allpages);

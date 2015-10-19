@@ -223,7 +223,7 @@ class GfoMsg_base implements GfoMsg {
 	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		To_str(sb, new XtoStrWkr_gplx(), this);
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	void To_str(String_bldr sb, XtoStrWkr wkr, GfoMsg m) {
 		sb.Add(m.Key());
@@ -261,8 +261,8 @@ class XtoStrWkr_gplx implements XtoStrWkr {
 		Class<?> type = Type_adp_.ClassOf_obj(o);
 		String rv = null;
 		if		(type == String.class)	rv = String_.cast(o);
-		else if (Int_.TypeMatch(type))		return Int_.Xto_str(Int_.cast(o));
-		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		return Yn.Xto_str(Bool_.cast(o));
+		else if (Int_.TypeMatch(type))		return Int_.To_str(Int_.cast(o));
+		else if (Type_adp_.Eq(type, Bool_.Cls_ref_type))		return Yn.To_str(Bool_.cast(o));
 		else if (type == DateAdp.class)	return DateAdp_.cast(o).XtoStr_gplx();
 		else								rv = Object_.Xto_str_strict_or_empty(o);
 		return String_.Replace(rv, "'", "''");

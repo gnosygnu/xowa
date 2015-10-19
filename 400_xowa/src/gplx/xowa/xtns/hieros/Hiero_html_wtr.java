@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_html_wtr {
 	private Hiero_phoneme_mgr phoneme_mgr;
 	private Bry_bfr temp_bfr = Bry_bfr.reset_(255);		
 	public Hiero_html_wtr(Hiero_html_mgr mgr, Hiero_phoneme_mgr phoneme_mgr) {this.phoneme_mgr = phoneme_mgr;}
-	public void Init_for_write(Xoh_wtr_ctx hctx) {this.hiero_img_dir = hctx.Mode_is_hdump() ? gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Key_hiero_dir : Hiero_xtn_mgr.Img_src_dir;} private byte[] hiero_img_dir = null;
+	public void Init_for_write(Xoh_wtr_ctx hctx) {this.hiero_img_dir = hctx.Mode_is_hdump() ? gplx.xowa.htmls.hdumps.abrvs.Xohd_abrv_.Key_hiero_dir : Hiero_xtn_mgr.Img_src_dir;} private byte[] hiero_img_dir = null;
 	public void Hr(Bry_bfr bfr)			{bfr.Add(Html_tag_.Hr_inl).Add_byte_nl();}
 	public void Tbl_eol(Bry_bfr bfr)	{bfr.Add(Tbl_eol_bry);}	
 	public byte[] Td_height(int height) {
-		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).Xto_bry_and_clear();
+		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).To_bry_and_clear();
 	}
 	private static final byte[] 
 	  Option_bgn_bry = Bry_.new_a7("height: ")
@@ -130,7 +130,7 @@ class Hiero_html_wtr {
 	;
 	public byte[] Img_phoneme(byte[] img_cls, byte[] td_height, byte[] glyph_esc, byte[] code) {
 		byte[] code_esc = Html_utl.Escape_html_as_bry(temp_bfr, code);
-		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).Xto_bry_and_clear(); // "~{code} [~{glyph}]"
+		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).To_bry_and_clear(); // "~{code} [~{glyph}]"
 		return Img(img_cls, td_height, glyph_esc, code_esc, img_title);
 	}
 	public byte[] Img_file(byte[] img_cls, byte[] td_height, byte[] glyph_esc) {return Img(img_cls, td_height, glyph_esc, glyph_esc, glyph_esc);}

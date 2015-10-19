@@ -34,7 +34,7 @@ class GfmlTypeCompiler_fxt {
 	}
 	public void tst_Compile(GfmlNde_mok nde, GfmlTyp_mok expd) {
 		GfmlNde gnde = run_Resolve(this.Regy(), "_type/type", nde);
-		Ordered_hash list = Ordered_hash_.new_();
+		Ordered_hash list = Ordered_hash_.New();
 		GfmlType actlType = GfmlTypeCompiler.Compile(gnde, GfmlType_.Root, this.Regy(), list);
 		GfmlTyp_mok actl = GfmlTyp_mok.type_(actlType);
 		TfdsTstr_fxt tstr = TfdsTstr_fxt.new_();
@@ -57,7 +57,7 @@ class GfmlTypeCompiler_fxt {
 		for (int i = 0; i < max; i++) {
 			GfmlFld_mok expdFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlFld_mok actlFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.Xto_str(i) + " fld");
+			tstr.SubName_push(Int_.To_str(i) + " fld");
 			tst(tstr, expdFld, actlFld);
 			tstr.SubName_pop();
 		}

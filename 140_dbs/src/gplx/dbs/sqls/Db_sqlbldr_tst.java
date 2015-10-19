@@ -61,7 +61,7 @@ public class Db_sqlbldr_tst {
 	}
 }
 class Db_sqlbldr_fxt {
-	private Db_sqlbldr__sqlite sqlbldr = Db_sqlbldr__sqlite.I;
+	private Db_sqlbldr__sqlite sqlbldr = Db_sqlbldr__sqlite.Instance;
 	public void Test_create_idx(Db_meta_idx idx, String expd) {Tfds.Eq(expd, sqlbldr.Bld_create_idx(idx));}
 	public void Test_create_tbl(Db_meta_tbl tbl, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_create_tbl(tbl));}
 	public void Test_alter_tbl_add(String tbl, Db_meta_fld fld, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_alter_tbl_add(tbl, fld));}

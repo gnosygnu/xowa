@@ -56,9 +56,9 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 	public String Bld(Object[] cmd_objs) {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		Bld_recursive(tmp_bfr, 0, (KeyVal[])cmd_objs[5]);
-		byte[] values_str = tmp_bfr.Xto_bry_and_clear();
+		byte[] values_str = tmp_bfr.To_bry_and_clear();
 		tmp_bfr.Add(Bry_rv_bgn).Add_int_variable(values_str.length).Add(Bry_rv_mid).Add(values_str).Add(Bry_rv_end);
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}
 	private void Bld_recursive(Bry_bfr bfr, int depth, KeyVal[] ary) {
 		int len = ary.length;

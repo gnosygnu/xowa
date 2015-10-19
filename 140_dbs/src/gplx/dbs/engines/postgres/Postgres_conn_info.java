@@ -38,5 +38,5 @@ public class Postgres_conn_info extends Db_conn_info__base {
 		rv.pwd = m.ReadStr("password");
 		return rv;
 	}
-        public static final Postgres_conn_info _ = new Postgres_conn_info(); Postgres_conn_info() {}
+        public static final Postgres_conn_info Instance = new Postgres_conn_info(); Postgres_conn_info() {}
 }

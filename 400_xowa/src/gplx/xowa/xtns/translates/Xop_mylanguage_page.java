@@ -25,7 +25,7 @@ public class Xop_mylanguage_page implements Xows_page {
 		byte[] page_bry = ttl.Leaf_txt_wo_qarg(); 					// EX: Help:A
 		byte[] lang_key = wiki.Appe().Usere().Lang().Key_bry();		// EX: fr
 		byte[] trg_bry = page_bry;
-		boolean lang_is_english = Bry_.Eq(lang_key, Xol_lang_.Key_en); 
+		boolean lang_is_english = Bry_.Eq(lang_key, Xol_lang_itm_.Key_en); 
 		if (!lang_is_english)
 			trg_bry = Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, page_bry, lang_key);
 		Xoae_page found_page = wiki.Data_mgr().Redirect(page, trg_bry);

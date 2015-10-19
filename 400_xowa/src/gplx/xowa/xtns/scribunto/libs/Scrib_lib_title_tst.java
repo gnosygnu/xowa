@@ -22,7 +22,7 @@ import gplx.fsdb.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.ttls.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
-		Db_conn_bldr.I.Reg_default_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
 		fxt.Clear_for_lib();
 		fxt.Core().Wiki().File__fsdb_mode().Tid_v2_bld_y_();
 		lib = fxt.Core().Lib_title().Init();
@@ -46,7 +46,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Module", "A")									, ttl_fast(828, "Module", "A"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary(828, "A")										, ttl_fast(828, "Module", "A"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b")							, ttl_fast(10, "Template", "A", "b"));
-		fxt.Parser_fxt().Wiki().Xwiki_mgr().Add_full("fr", "fr.wikipedia.org");
+		fxt.Parser_fxt().Wiki().Xwiki_mgr().Add_by_atrs("fr", "fr.wikipedia.org");
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b", "fr")					, ttl_fast(0, "", "Template:A", "b", "fr"));
 		fxt.Parser_fxt().Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "a[b"), Scrib_invoke_func_fxt.Null_rslt_ary);	// PURPOSE: handle bad MakeTitle cmds; PAGE:en.w:Disney; DATE:2013-10-15
@@ -99,7 +99,7 @@ public class Scrib_lib_title_tst {
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}
 	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
@@ -109,7 +109,7 @@ public class Scrib_lib_title_tst {
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
 //			Db_meta_tbl meta = new Xowd_page_tbl().new_meta();
-//			Db_conn_pool.I.Set_mem(url_str, meta);
+//			Db_conn_pool.Instance.Set_mem(url_str, meta);
 //			Db_conn_info url = Db_conn_info_.mem_(url_str);
 //			Xowd_page_tbl tbl = new Xowd_page_tbl(Bool_.N, url);
 //			tbl.Insert(id, ns_id, Bry_.new_u8(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
@@ -122,7 +122,7 @@ public class Scrib_lib_title_tst {
 		( "1="
 		, "  isLocal=true"
 		, "  interwiki=" + xwiki
-		, "  namespace=" + Int_.Xto_str(ns_id)
+		, "  namespace=" + Int_.To_str(ns_id)
 		, "  nsText=" + ns_str
 		, "  text=" + ttl
 		, "  fragment=" + anchor
@@ -134,7 +134,7 @@ public class Scrib_lib_title_tst {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  isRedirect=" + Bool_.To_str_lower(redirect)
-		, "  id=" + Int_.Xto_str(ttl_id)
+		, "  id=" + Int_.To_str(ttl_id)
 		, "  contentModel=" + Scrib_lib_title.Key_wikitexet
 		, "  exists=" + Bool_.To_str_lower(exists)
 		);
@@ -149,8 +149,8 @@ public class Scrib_lib_title_tst {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  exists=true"
-		, "  width=" + Int_.Xto_str(w)
-		, "  height=" + Int_.Xto_str(h)
+		, "  width=" + Int_.To_str(w)
+		, "  height=" + Int_.To_str(h)
 		, "  pages=<<NULL>>"
 		);
 	}

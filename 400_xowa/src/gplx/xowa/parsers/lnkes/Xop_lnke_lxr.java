@@ -28,11 +28,11 @@ public class Xop_lnke_lxr implements Xop_lxr {
 			Gfo_protocol_itm itm = ary[i];
 			Ctor_lxr_add(core_trie, itm.Key_w_colon_bry(), itm.Tid());
 		}
-		core_trie.Add(Bry_relative_1, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, Xoa_consts.Url_relative_prefix, Gfo_protocol_itm.Tid_relative_1));
-		core_trie.Add(Bry_relative_2, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, Xoa_consts.Url_relative_prefix, Gfo_protocol_itm.Tid_relative_2));
+		core_trie.Add(Bry_relative_1, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, Gfo_protocol_itm.Bry_relative, Gfo_protocol_itm.Tid_relative_1));
+		core_trie.Add(Bry_relative_2, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, Gfo_protocol_itm.Bry_relative, Gfo_protocol_itm.Tid_relative_2));
 		Ctor_lxr_add(core_trie, Bry_.new_a7("xowa-cmd"), Gfo_protocol_itm.Tid_xowa);
 	}	private static final byte[] Bry_relative_1 = Bry_.new_a7("[//"), Bry_relative_2 = Bry_.new_a7("[[//");
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	private void Ctor_lxr_add(Btrie_fast_mgr core_trie, byte[] protocol_bry, byte tid) {
 		core_trie.Add(protocol_bry										, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_text, protocol_bry, tid));
@@ -42,5 +42,5 @@ public class Xop_lnke_lxr implements Xop_lxr {
 		if (this.tid == Gfo_protocol_itm.Tid_xowa && !ctx.Wiki().Sys_cfg().Xowa_proto_enabled()) return ctx.Lxr_make_txt_(cur_pos);
 		return ctx.Lnke().MakeTkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, protocol, tid, lnke_typ);
 	}
-	public static final Xop_lnke_lxr _ = new Xop_lnke_lxr(); Xop_lnke_lxr() {}
+	public static final Xop_lnke_lxr Instance = new Xop_lnke_lxr(); Xop_lnke_lxr() {}
 }

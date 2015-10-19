@@ -66,7 +66,7 @@ public class Array_ {
 	public static String To_str_nested_obj(Object o) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		To_str_nested_ary(bfr, (Object)o, 0);	
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	private static void To_str_nested_ary(Bry_bfr bfr, Object ary, int indent) {
 		int len = Len(ary);

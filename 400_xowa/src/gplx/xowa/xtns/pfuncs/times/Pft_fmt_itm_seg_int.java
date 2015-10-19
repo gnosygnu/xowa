@@ -21,7 +21,7 @@ class Pft_fmt_itm_seg_int implements Pft_fmt_itm {
 	public Pft_fmt_itm_seg_int(int segIdx, int len, boolean fixed_len) {this.segIdx = segIdx; this.fixed_len = fixed_len; this.len = len;} private int segIdx, len; boolean fixed_len;
 	public int TypeId() {return Pft_fmt_itm_.Tid_seg_int;}
 	public int SegIdx() {return segIdx;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int val = date.Segment(segIdx);
 		if (fixed_len)	bfr.Add_int_fixed(val, len);
 		else			bfr.Add_int_variable(val);
@@ -29,24 +29,24 @@ class Pft_fmt_itm_seg_int implements Pft_fmt_itm {
 }
 class Pft_fmt_itm_raw implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_raw;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		// TODO: should flag .Raw() on bldr to skip transliterating numerals in foreign languages; DATE:2013-12-31
 	}
 }
 class Pft_fmt_itm_seg_str implements Pft_fmt_itm {
 	public Pft_fmt_itm_seg_str(int segIdx, int type) {this.segIdx = segIdx; this.type = type;} private int segIdx, type;
 	public int TypeId() {return Pft_fmt_itm_.Tid_seg_str;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		DateAdpTranslator_xapp.Translate(wiki, lang, type, date.Segment(segIdx), bfr);
 	}
 }
 class Pft_fmt_itm_year_isLeap implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_year_isLeap;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_fixed(DateAdp_.IsLeapYear(date.Year()) ? 1 : 0, 1);}
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_fixed(DateAdp_.IsLeapYear(date.Year()) ? 1 : 0, 1);}
 }
 class Pft_fmt_itm_hour_base12 implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hour_base12;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int val = date.Hour();
 		switch (val) {
 			case 0: val = 12; break;
@@ -60,29 +60,29 @@ class Pft_fmt_itm_hour_base12 implements Pft_fmt_itm {
 }
 class Pft_fmt_itm_timestamp_unix implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_timestamp_unix;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_long_variable(date.Timestamp_unix());}
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_long_variable(date.Timestamp_unix());}
 }
 class Pft_fmt_itm_raw_ary implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_raw_ary;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_mid(src, bgn, end);}
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_mid(src, bgn, end);}
 	public Pft_fmt_itm_raw_ary(byte[] src, int bgn, int end) {this.src = src; this.bgn = bgn; this.end = end;} private byte[] src; int bgn; int end;
 }
 class Pft_fmt_itm_raw_byt implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_raw_byt;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_byte(b);}
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_byte(b);}
 	public Pft_fmt_itm_raw_byt(byte b) {this.b = b;} private byte b;
 }
 class Pft_fmt_itm_daysInMonth implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_daysInMonth;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_variable(DateAdp_.DaysInMonth(date));}
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_variable(DateAdp_.DaysInMonth(date));}
 }
 class Pft_fmt_itm_dayOfYear implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_dayOfYear;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_variable(date.DayOfYear() - Int_.Base1);}	// php is base1; .net/java is base0
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_variable(date.DayOfYear() - Int_.Base1);}	// php is base1; .net/java is base0
 }
 class Pft_fmt_itm_am_pm implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_AmPm;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		boolean am = date.Hour() < 13;
 		byte[] val = null;
 		if		( am &&  lower) val = Ary_am_lower;
@@ -95,7 +95,7 @@ class Pft_fmt_itm_am_pm implements Pft_fmt_itm {
 }
 class Pft_fmt_itm_dow_base0 implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_dow_base0;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int dow = date.DayOfWeek();
 		if (dow == 0) dow = 7;
 		bfr.Add_int_fixed(dow, 1);
@@ -104,7 +104,7 @@ class Pft_fmt_itm_dow_base0 implements Pft_fmt_itm {
 class Pft_fmt_itm_iso_fmt implements Pft_fmt_itm {
 	public Pft_fmt_itm_iso_fmt() {}
 	public int TypeId() {return Pft_fmt_itm_.Tid_iso_fmt;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_str(date.XtoStr_fmt("yyyy-MM-dd"));
 		bfr.Add_byte(Byte_ascii.Ltr_T);
 		bfr.Add_str(date.XtoStr_fmt("HH:mm:ss"));
@@ -114,7 +114,7 @@ class Pft_fmt_itm_iso_fmt implements Pft_fmt_itm {
 class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
 	public Pft_fmt_itm_rfc_5322() {}
 	public int TypeId() {return Pft_fmt_itm_.Tid_rfc_5322;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {// Mon, 02 Jan 2012 10:15:01 +0000
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {// Mon, 02 Jan 2012 10:15:01 +0000
 		int dow = date.DayOfWeek();
 		DateAdpTranslator_xapp.Translate(wiki, lang, DateAdp_.SegIdx_dayOfWeek, dow, bfr);
 		bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
@@ -125,7 +125,7 @@ class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
 class Pft_fmt_itm_timezone_offset implements Pft_fmt_itm {
 	public Pft_fmt_itm_timezone_offset() {}
 	public int TypeId() {return Pft_fmt_itm_.Tid_timezone_offset;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_int_variable(date.Timezone_offset());
 	}
 }

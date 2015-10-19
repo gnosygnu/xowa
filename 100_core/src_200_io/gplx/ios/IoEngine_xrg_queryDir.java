@@ -36,12 +36,12 @@ public class IoEngine_xrg_queryDir {
 		filCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, crt);
 		return this;
 	}
-	public IoItmDir ExecAsDir() {return IoEnginePool._.Get_by(url.Info().EngineKey()).QueryDirDeep(this);}
+	public IoItmDir ExecAsDir() {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).QueryDirDeep(this);}
 	public Io_url[] ExecAsUrlAry() {return ExecAsItmHash().XtoIoUrlAry();}
 	public IoItmHash ExecAsItmHash() {
 		Criteria crt = dirInclude ? Criteria_.All : Criteria_fld.new_(IoItm_base_.Prop_Type, Criteria_.eq_(IoItmFil.Type_Fil));
 		IoItmHash list = ExecAsDir().XtoIoItmList(crt);
-		list.Sort_by(IoItmBase_comparer_nest._);
+		list.Sort_by(IoItmBase_comparer_nest.Instance);
 		return list;
 	}
 	public static IoEngine_xrg_queryDir new_(Io_url url) {

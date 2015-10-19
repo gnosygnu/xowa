@@ -68,8 +68,8 @@ public class Swt_kit implements Gfui_kit {
 		this.msg_wkr_stop 	= new Swt_msg_wkr_stop(this, gui_wtr);
 		this.display 		= new Display();
 		this.clipboard 		= new Swt_clipboard(display);
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin._);
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Stop, msg_wkr_stop);
+		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin.Instance);
+		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Stop, msg_wkr_stop);
 		if (xul_runner_path != null) System.setProperty("org.eclipse.swt.browser.XULRunnerPath", xul_runner_path);
 		this.Kit_mode_(Swt_kit_mode.Tid_ready); 
 		gui_wtr.Log_many("", "", "swt.kit.init.done");
@@ -207,7 +207,7 @@ public class Swt_kit implements Gfui_kit {
 			return rv;
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_full(e));
 			return 8;
 		}
 	}
@@ -235,7 +235,7 @@ public class Swt_kit implements Gfui_kit {
 	}
 	public static final String Invk_Cfg_add = "Cfg_add", Invk_ask_file = "ask_file";	// private or public?
 	public static final String Invk_shell_close = "shell_close";	// public
-	public static final Swt_kit _ = new Swt_kit(); private Swt_kit() {}	// singleton b/c of following line "In particular, some platforms which SWT supports will not allow more than one active display" (http://help.eclipse.org/indigo/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/Display.html)
+	public static final Swt_kit Instance = new Swt_kit(); private Swt_kit() {}	// singleton b/c of following line "In particular, some platforms which SWT supports will not allow more than one active display" (http://help.eclipse.org/indigo/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/Display.html)
 	public static final String Cfg_Html_BrowserType = "BrowserType";
 	public static int Cfg_Html_BrowserType_parse(String v) {
 		if		(String_.Eq(v, "mozilla"))	return Swt_html.Browser_tid_mozilla;

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.*;
 public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	// search version 2; upgrade
 	private int commit_interval = 100000, progress_interval = 10000;
 	public Xob_search_sql_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
@@ -40,9 +40,9 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 		Xowd_page_tbl page_tbl = db_mgr.Tbl__page();
 		Db_rdr page_rdr = page_tbl.Select_all();
 		try {
-			Xol_lang lang = wiki.Lang();
+			Xol_lang_itm lang = wiki.Lang();
 			Bry_bfr bfr = Bry_bfr.reset_(1024);
-			Ordered_hash hash = Ordered_hash_.new_();
+			Ordered_hash hash = Ordered_hash_.New();
 			int page_count = 0;
 			String fld_page_id = page_tbl.Fld_page_id(), fld_page_ttl = page_tbl.Fld_page_title();
 			while (page_rdr.Move_next()) {

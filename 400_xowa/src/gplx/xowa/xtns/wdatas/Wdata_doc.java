@@ -41,8 +41,8 @@ public class Wdata_doc {
 		return (Wdata_claim_grp)o;
 	}	
 	public byte[] Label_list__get(byte[] lang_key) {return Lang_text_list__get(this.Label_list(), lang_key);}
-	public byte[] Label_list__get_or_fallback(Xol_lang lang) {return Lang_text_list__get_or_fallback(this.Label_list(), lang);}
-	public byte[] Descr_list__get_or_fallback(Xol_lang lang) {return Lang_text_list__get_or_fallback(this.Descr_list(), lang);}
+	public byte[] Label_list__get_or_fallback(Xol_lang_itm lang) {return Lang_text_list__get_or_fallback(this.Label_list(), lang);}
+	public byte[] Descr_list__get_or_fallback(Xol_lang_itm lang) {return Lang_text_list__get_or_fallback(this.Descr_list(), lang);}
 	public byte[] Slink_list__get_or_fallback(byte[] abrv_wm) {
 		Wdata_sitelink_itm rv = (Wdata_sitelink_itm)this.Slink_list().Get_by(abrv_wm);
 		return rv == null ? null : rv.Name();
@@ -52,9 +52,9 @@ public class Wdata_doc {
 		Wdata_langtext_itm rv = (Wdata_langtext_itm)rv_obj;
 		return rv.Text();
 	}
-	public byte[] Lang_text_list__get_or_fallback(Ordered_hash lang_text_list, Xol_lang lang) {
+	public byte[] Lang_text_list__get_or_fallback(Ordered_hash lang_text_list, Xol_lang_itm lang) {
 		byte[] rv = Lang_text_list__get(lang_text_list, lang.Key_bry()); if (rv != null) return rv;
-		byte[][] ary = lang.Fallback_bry_ary();	// NOTE: en is currently automatically being added by Xol_lang
+		byte[][] ary = lang.Fallback_bry_ary();	// NOTE: en is currently automatically being added by Xol_lang_itm
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] lang_key = ary[i];

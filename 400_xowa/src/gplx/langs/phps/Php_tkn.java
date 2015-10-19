@@ -70,5 +70,5 @@ class Php_tkn_quote extends Php_tkn_base {
 }
 class Php_tkn_declaration extends Php_tkn_base {
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_declaration;}
-	public static final Php_tkn_declaration _ = new Php_tkn_declaration();	
+	public static final Php_tkn_declaration Instance = new Php_tkn_declaration();	
 }

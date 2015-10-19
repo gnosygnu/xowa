@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Bry_fmtr_arg_fmtr_objs implements Bry_fmtr_arg {
 	public Bry_fmtr_arg_fmtr_objs Atrs_(Bry_fmtr fmtr, Object... objs) {this.fmtr = fmtr; this.objs = objs; return this;}
-	public void XferAry(Bry_bfr trg, int idx) {
-		fmtr.Bld_bfr_many(trg, objs);
-	}
+	public void Fmt__do(Bry_bfr bfr) {fmtr.Bld_bfr_many(bfr, objs);}
 	public Bry_fmtr_arg_fmtr_objs(Bry_fmtr fmtr, Object[] objs) {this.fmtr = fmtr; this.objs = objs;} Bry_fmtr fmtr; Object[] objs;
 }

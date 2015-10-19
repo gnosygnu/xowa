@@ -54,7 +54,7 @@ public class Utf8__tst {
 //				bgn = end;
 //				bgn_bry = end_by_codepoint_next;
 //			}
-//			Tfds.WriteText(bfr.Xto_str_and_clear());
+//			Tfds.WriteText(bfr.To_str_and_clear());
 //		}
 }
 class Utf8__fxt {

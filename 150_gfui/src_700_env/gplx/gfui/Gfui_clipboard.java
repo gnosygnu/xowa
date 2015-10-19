@@ -23,5 +23,4 @@ class Gfui_clipboard_null implements Gfui_clipboard {
 	public void Copy(String s) {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return this;}
 	public void Rls() {}
-	public static final Gfui_clipboard_null Null = new Gfui_clipboard_null(); Gfui_clipboard_null() {}
 }

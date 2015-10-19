@@ -19,7 +19,7 @@ package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*;
 public class Xop_languages_xnde_tst {
 	@Before public void init() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		fxt.Reset();
 		fxt.Page_ttl_("Help:A");
 		fxt.Init_page_create("Help:A", "");				// create for AllPages 

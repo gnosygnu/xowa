@@ -19,7 +19,7 @@ package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.files.xfers.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.utils.*;
-import gplx.xowa.tdbs.metas.*;
+import gplx.xowa.wikis.tdbs.metas.*;
 public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	private Xowe_wiki wiki; private final List_adp repos = List_adp_.new_();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {
@@ -195,7 +195,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		Xoa_repo_mgr repo_mgr = wiki.Appe().File_mgr().Repo_mgr();
 		Xof_repo_itm src_repo = repo_mgr.Get_by(src_repo_key), trg_repo = repo_mgr.Get_by(trg_repo_key);
 		byte[] src_wiki_key = src_repo.Wiki_domain(), trg_wiki_key = trg_repo.Wiki_domain();
-		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_type_.Bry__home)) throw Err_.new_wo_type("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
+		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_tid_.Bry__home)) throw Err_.new_wo_type("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
 		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Count(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;

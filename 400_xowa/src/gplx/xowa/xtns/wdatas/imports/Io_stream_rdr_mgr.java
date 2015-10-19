@@ -21,7 +21,7 @@ import gplx.core.criterias.*;
 class Io_stream_rdr_mgr {
 	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {			
 		IoItmFil src_itm = null;
-		if (src_fil != null) src_itm = Io_mgr.I.QueryFil(src_fil);
+		if (src_fil != null) src_itm = Io_mgr.Instance.QueryFil(src_fil);
 
 		// specified file doesn't exist; try to find similar file based on filter
 		if (src_itm == null || !src_itm.Exists()) {
@@ -46,7 +46,7 @@ class Io_stream_rdr_mgr {
 
 		// get files and check each file for match
 		IoItmFil rv = null;
-		IoItmHash itm_hash = Io_mgr.I.QueryDir_args(dir).ExecAsItmHash();
+		IoItmHash itm_hash = Io_mgr.Instance.QueryDir_args(dir).ExecAsItmHash();
 		int len = itm_hash.Count();
 		for (int i = 0; i < len; ++i) {
 			IoItm_base itm = itm_hash.Get_at(i);

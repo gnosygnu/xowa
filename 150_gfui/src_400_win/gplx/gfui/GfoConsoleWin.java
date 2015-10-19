@@ -47,7 +47,7 @@ public class GfoConsoleWin implements GfoInvkAble, UsrMsgWkr {
 		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Clear, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.C));			
 		logger = new GfuiTextBoxLogger(this).Init(statusBox);
 //			gplx.ios.GfioApp.InitGfs();
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Note, this);
+		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Note, this);
 
 		win.Lyt_activate();
 		win.Lyt().Bands_add(GftBand.fillWidth_());
@@ -82,7 +82,7 @@ public class GfoConsoleWin implements GfoInvkAble, UsrMsgWkr {
 		return this;
 	}	public static final String Invk_Show	= "Show"
 			;
-	public static final GfoConsoleWin _ = new GfoConsoleWin(); GfoConsoleWin() {}
+	public static final GfoConsoleWin Instance = new GfoConsoleWin(); GfoConsoleWin() {}
 }
 class GfoConsoleWinCmds implements GfoInvkAble {
 	GfuiWin win; GfuiTextBox consoleFilBox, consoleBox, statusBox, resultBox;
@@ -92,8 +92,8 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		consoleBox = (GfuiTextBox)win.SubElems().Get_by("consoleBox");
 		resultBox = (GfuiTextBox)win.SubElems().Get_by("resultBox");
 		statusBox = (GfuiTextBox)win.SubElems().Get_by("statusBox");
-		GfsCore._.AddObj(this, "gfoConsoleWin");
-		GfsCore._.ExecRegy("gplx.gfui.GfoConsoleWin.ini");
+		GfsCore.Instance.AddObj(this, "gfoConsoleWin");
+		GfsCore.Instance.ExecRegy("gplx.gfui.GfoConsoleWin.ini");
 	}
 	public void Results_add(String s) {
 		if (!String_.Has_at_end(s, GfuiTextBox_.NewLine))
@@ -106,9 +106,9 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		String cmdText = consoleBox.SelLen() == 0 ? consoleBox.Text() : consoleBox.SelText();
 		String cmd = FixNewLines(cmdText);
 		GfoMsg runMsg = GfoMsg_.Null;
-		try {runMsg = GfsCore._.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
+		try {runMsg = GfsCore.Instance.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
-		Object rv = GfsCore._.ExecMany(ctx, runMsg);
+		Object rv = GfsCore.Instance.ExecMany(ctx, runMsg);
 		resultBox.Text_(Object_.Xto_str_strict_or_empty(rv));
 	}
 	void Help() {
@@ -120,9 +120,9 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		try {runMsg = GfmlDataNde.XtoMsgNoRoot(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		try {
-		Object rv = GfsCore._.ExecOne(ctx, runMsg);
+		Object rv = GfsCore.Instance.ExecOne(ctx, runMsg);
 		if (rv != GfoInvkAble_.Rv_handled && rv != GfoInvkAble_.Rv_unhandled) {
-			UsrDlg_._.Note(Object_.Xto_str_strict_or_empty(rv));
+			UsrDlg_.Instance.Note(Object_.Xto_str_strict_or_empty(rv));
 		}
 //			Results_add(FixNewLines(ctx.Results_XtoStr()));
 		} catch (Exception e) {statusBox.Text_("help failed " + Err_.Message_gplx_full(e)); return;}
@@ -137,7 +137,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		}
 		else
 			url = Io_url_.new_any_(consoleFilStr);
-		Io_mgr.I.SaveFilStr(url, consoleBox.Text());
+		Io_mgr.Instance.SaveFilStr(url, consoleBox.Text());
 	}
 	void Load() {
 		String consoleFilStr = consoleFilBox.Text();
@@ -149,7 +149,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 			dir = dir.OwnerDir();
 		}
 		Io_url url = GfuiIoDialogUtl.SelectFile(dir); if (url == Io_url_.Empty) return;
-		consoleBox.Text_(Io_mgr.I.LoadFilStr(url));
+		consoleBox.Text_(Io_mgr.Instance.LoadFilStr(url));
 	}
 	String FixNewLines(String cmd) {
 		cmd = String_.Replace(cmd, "\n", "\r\n");
@@ -193,7 +193,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 			Io_url v = m.ReadIoUrl("v");
 			if (ctx.Deny()) return this;
 			consoleFilBox.Text_(v.Xto_api());
-			consoleBox.Text_(Io_mgr.I.LoadFilStr(v));
+			consoleBox.Text_(Io_mgr.Instance.LoadFilStr(v));
 		}
 		else return win.Invk(ctx, ikey, k, m);
 		return this;

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.xowa.tdbs.*;
-import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.xowa.wikis.nss.*;
 public class Xow_data_mgr_tst {
 	Xow_data_mgr_fxt fxt = new Xow_data_mgr_fxt();
 	@Before public void init() {fxt.Clear(); Tfds.Now_enabled_y_();}
@@ -151,14 +151,14 @@ class Xow_data_mgr_fxt {
 	public Xow_data_mgr_fxt Tst_regy_title(String expd) {return Tst_regy(Xotdb_dir_info_.Name_title, expd);}
 	Xow_data_mgr_fxt Tst_regy(String name, String expd) {
 		Io_url file_orig = Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/ns/000/" + name + "/reg.csv");
-		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(file_orig));
+		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(file_orig));
 		return this;
 	}
 	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xotdb_dir_info_.Tid_page , Xow_ns_.Id_main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xotdb_dir_info_.Tid_ttl, Xow_ns_.Id_main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data(byte dir_tid, int ns_id, int fil, String expd) {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(dir_tid, ns_id, fil);
-		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
 		return this;
 	}
 }

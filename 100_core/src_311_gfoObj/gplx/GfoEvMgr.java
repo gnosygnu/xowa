@@ -20,7 +20,7 @@ import gplx.lists.*;
 public class GfoEvMgr {
 	@gplx.Internal protected void AddSub(GfoEvMgrOwner pub, String pubEvt, GfoEvObj sub, String subPrc) {
 		GfoEvLnk lnk = new GfoEvLnk(pub, pubEvt, sub, subPrc);
-		if (subsRegy == null) subsRegy = Ordered_hash_.new_();
+		if (subsRegy == null) subsRegy = Ordered_hash_.New();
 		AddInList(subsRegy, pubEvt, lnk);
 		sub.EvMgr().AddPub(pubEvt, lnk);
 	}
@@ -37,7 +37,7 @@ public class GfoEvMgr {
 		list.Add(lnk);
 	}
 	@gplx.Internal protected void AddPub(String pubEvt, GfoEvLnk lnk) {
-		if (pubsRegy == null) pubsRegy = Ordered_hash_.new_();
+		if (pubsRegy == null) pubsRegy = Ordered_hash_.New();
 		AddInList(pubsRegy, pubEvt, lnk);
 	}
 	@gplx.Internal protected void Pub(GfsCtx ctx, String evt, GfoMsg m) {

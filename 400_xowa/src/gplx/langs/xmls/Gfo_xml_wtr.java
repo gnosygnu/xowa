@@ -76,7 +76,7 @@ public class Gfo_xml_wtr {
 	}
 	public Gfo_xml_wtr Nde_txt_int(String name, int text) {
 		this.Nde_lhs(Bool_.N, name);
-		this.Txt_bry(Int_.Xto_bry(text));
+		this.Txt_bry(Int_.To_bry(text));
 		this.Nde_rhs();
 		return this;
 	}
@@ -92,7 +92,7 @@ public class Gfo_xml_wtr {
 		bfr.Add_byte(quote_byte);
 		return this;
 	}
-	public Gfo_xml_wtr Atr_kv_int(String key, int val)			{return Atr_kv_bry(key, Int_.Xto_bry(val));}
+	public Gfo_xml_wtr Atr_kv_int(String key, int val)			{return Atr_kv_bry(key, Int_.To_bry(val));}
 	public Gfo_xml_wtr Atr_kv_str_a7(String key, String val)	{return Atr_kv_bry(key, Bry_.new_a7(val));}
 	public Gfo_xml_wtr Atr_kv_str_u8(String key, String val)	{return Atr_kv_bry(key, Bry_.new_u8(val));}
 	public Gfo_xml_wtr Atr_kv_bry(String key, byte[] val) {
@@ -133,7 +133,7 @@ public class Gfo_xml_wtr {
 		return this;
 	}
 	public Gfo_xml_wtr Txt_str_u8(String txt)	{return Txt_bry(Bry_.new_u8(txt));}
-	public String Bld_str() {return bfr.Xto_str_and_clear();}
+	public String Bld_str() {return bfr.To_str_and_clear();}
 	private static final byte[]
 	  Bry_nde_rhs_bgn		= Bry_.new_a7("</")
 //		, Bry_nde_inline		= Bry_.new_a7("/>")

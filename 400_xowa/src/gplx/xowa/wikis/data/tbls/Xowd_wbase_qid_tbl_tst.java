@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import org.junit.*; import gplx.dbs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowd_wbase_qid_tbl_tst {
 	private final Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -30,9 +30,9 @@ public class Xowd_wbase_qid_tbl_tst {
 class Xowd_wbase_qid_tbl_fxt {
 	private Xowd_wbase_qid_tbl qid_tbl;
 	public void Clear() {
-		Io_mgr.I.InitEngine_mem();
-		Db_conn_bldr.I.Reg_default_mem();
-		Db_conn conn = Db_conn_bldr.I.New(Io_url_.mem_fil_("mem/db/wbase.xowa"));
+		Io_mgr.Instance.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
+		Db_conn conn = Db_conn_bldr.Instance.New(Io_url_.mem_fil_("mem/db/wbase.xowa"));
 		this.qid_tbl = new Xowd_wbase_qid_tbl(conn, Bool_.N, Bool_.Y);	// simulate v2.4.2 with bad "spaces"
 		qid_tbl.Create_tbl();
 	}
@@ -42,7 +42,7 @@ class Xowd_wbase_qid_tbl_fxt {
 		qid_tbl.Insert_end();
 	}
 	public void Test_select(String src_wiki, int src_ns, String src_ttl, String expd) {
-		byte[] actl = qid_tbl.Select_qid(Bry_.new_u8(src_wiki), Bry_.new_a7(Int_.Xto_str(src_ns)), Bry_.new_u8(src_ttl));
+		byte[] actl = qid_tbl.Select_qid(Bry_.new_u8(src_wiki), Bry_.new_a7(Int_.To_str(src_ns)), Bry_.new_u8(src_ttl));
 		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

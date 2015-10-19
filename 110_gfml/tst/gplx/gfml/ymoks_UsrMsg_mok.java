@@ -20,8 +20,8 @@ class UsrMsg_mok {
 	public String Main() {return main;} public UsrMsg_mok Main_(String v) {main = v; return this;} private String main;
 	public UsrMsg_mok Add_(String k, Object o) {hash.Add(k, KeyVal_.new_(k, o)); return this;}
 	public UsrMsg_mok Require_(String k) {required.Add(k, k); return this;}
-	public Ordered_hash Args() {return hash;} Ordered_hash hash = Ordered_hash_.new_();
-	public Ordered_hash Required() {return required;} Ordered_hash required = Ordered_hash_.new_();
+	public Ordered_hash Args() {return hash;} Ordered_hash hash = Ordered_hash_.New();
+	public Ordered_hash Required() {return required;} Ordered_hash required = Ordered_hash_.New();
 	public static UsrMsg_mok new_(UsrMsg um) {
 		UsrMsg_mok rv = new UsrMsg_mok();
 		if (um != null) {

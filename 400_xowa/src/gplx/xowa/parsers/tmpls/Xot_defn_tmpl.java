@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xot_defn_tmpl implements Xot_defn {
 	public byte Defn_tid() {return Xot_defn_.Tid_tmpl;}
 	public boolean Defn_require_colon_arg() {return false;}

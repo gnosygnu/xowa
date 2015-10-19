@@ -26,6 +26,7 @@ public interface Db_stmt extends RlsAble {
 	Db_stmt Val_byte(byte v);
 	Db_stmt Crt_int(String k, int v);
 	Db_stmt Val_int(String k, int v);
+	Db_stmt Val_int_by_bool(String k, boolean v);
 	Db_stmt Val_int(int v);
 	Db_stmt Crt_long(String k, long v);
 	Db_stmt Val_long(String k, long v);

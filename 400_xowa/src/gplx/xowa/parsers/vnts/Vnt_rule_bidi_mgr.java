@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Vnt_rule_bidi_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Len() {return hash.Count();}
 	public boolean Has_none() {return hash.Count() == 0;}
 	public void Clear() {hash.Clear();}

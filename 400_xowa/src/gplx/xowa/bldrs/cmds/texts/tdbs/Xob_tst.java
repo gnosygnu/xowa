@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*;
-import gplx.ios.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.nss.*;
+import gplx.ios.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
 public class Xob_tst {		
 	@Before public void init() {fxt = new Xob_fxt().Ctor_mem();} private Xob_fxt fxt;
 	// @After public void term() {fxt.Wiki().Ctx().Sys_load_tmpls_(true);} // commented during wiki.Ctx() removal; DATE:2014-04-22
@@ -172,7 +172,7 @@ public class Xob_tst {
 	private void tst_Parse(String raw, String... expd) {
 		Xoae_app app = Xoa_app_fxt.app_();	// NOTE: resets mem file system, so must happen first
 		Io_url url = Io_url_.mem_fil_("mem/raw_page.csv");
-		Io_mgr.I.SaveFilStr(url, raw);
+		Io_mgr.Instance.SaveFilStr(url, raw);
 		Xotdb_page_raw_parser parser = new Xotdb_page_raw_parser();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Id_template, Xow_ns_case_.Id_1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);

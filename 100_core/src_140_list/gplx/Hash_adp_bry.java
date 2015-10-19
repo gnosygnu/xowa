@@ -68,8 +68,8 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 		key_itm.Init(key_bry, 0, key_bry.length);
 		super.Add_base(key_itm, val);
 	}
-	public static Hash_adp_bry cs()												{return new Hash_adp_bry(Hash_adp_bry_itm_cs._);}
-	public static Hash_adp_bry ci_a7()											{return new Hash_adp_bry(Hash_adp_bry_itm_ci_a7._);}
+	public static Hash_adp_bry cs()												{return new Hash_adp_bry(Hash_adp_bry_itm_cs.Instance);}
+	public static Hash_adp_bry ci_a7()											{return new Hash_adp_bry(Hash_adp_bry_itm_ci_a7.Instance);}
 	public static Hash_adp_bry ci_u8(Gfo_case_mgr case_mgr)						{return new Hash_adp_bry(Hash_adp_bry_itm_ci_u8.get_or_new(case_mgr));}
 	public static Hash_adp_bry c__u8(boolean case_match, Gfo_case_mgr case_mgr)	{return case_match ? cs() : ci_u8(case_mgr);}
 }
@@ -103,7 +103,7 @@ class Hash_adp_bry_itm_cs extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final Hash_adp_bry_itm_cs _ = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
+        public static final Hash_adp_bry_itm_cs Instance = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
 }
 class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 	private byte[] src; int src_bgn, src_end;
@@ -136,7 +136,7 @@ class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final Hash_adp_bry_itm_ci_a7 _ = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
+        public static final Hash_adp_bry_itm_ci_a7 Instance = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
 }
 class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
 	private final Gfo_case_mgr case_mgr;

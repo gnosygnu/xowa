@@ -29,6 +29,6 @@ public class Fsd_fil_itm {
 	public int Ext_id() {return ext_id;} private int ext_id;
 	public static final Fsd_fil_itm Null = null;
 	public static byte[] Gen_cache_key(Bry_bfr bfr, int dir_id, byte[] name) {
-		return bfr.Add_int_variable(dir_id).Add_byte_pipe().Add(name).Xto_bry_and_clear();
+		return bfr.Add_int_variable(dir_id).Add_byte_pipe().Add(name).To_bry_and_clear();
 	}
 }

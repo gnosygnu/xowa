@@ -60,9 +60,9 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 			this.Pos_(screenX_max / 2 - this.Width()/2, PopupAnchorTop);	//screenRect.Bottom - 1
 			//		gplx.gfui.npis.FormNpi.BringToFrontDoNotFocus(gplx.gfui.npis.ControlNpi.Hwnd(this.UnderElem()));
 						if (!this.Visible()) {
-//					GfuiElem last = GfuiFocusMgr._.FocusedElem();
+//					GfuiElem last = GfuiFocusMgr.Instance.FocusedElem();
 				this.Visible_on_();
-//					GfuiFocusMgr._.FocusedElem_set(last);
+//					GfuiFocusMgr.Instance.FocusedElem_set(last);
 			}
 			timer.Interval_(growingTimerInterval);
 			popupState = PopupState.Growing;
@@ -83,8 +83,8 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		timer.Enabled_on();
 	}
 //		public override boolean FocusGotCbk() {
-//			GfuiElem last = GfuiFocusMgr._.FocusedElemPrev();
-//			GfuiFocusMgr._.FocusedElem_set(last);
+//			GfuiElem last = GfuiFocusMgr.Instance.FocusedElemPrev();
+//			GfuiFocusMgr.Instance.FocusedElem_set(last);
 //			last.Focus();
 //			return false;
 //		}
@@ -124,7 +124,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		this.Pos_(this.X(), PopupAnchorTop);	//this.Top - increment
 		this.Size_(SizeAdp_.new_(this.Width(), this.Height() + increment));
 	}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.win_toaster_(ctorArgs);}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
 
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);

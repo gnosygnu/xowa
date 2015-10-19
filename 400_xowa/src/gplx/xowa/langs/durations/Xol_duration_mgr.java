@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
+import gplx.xowa.langs.msgs.*;
 public class Xol_duration_mgr {
 	private Xol_msg_itm[] interval_msgs = null;
-	public Xol_duration_mgr(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;
+	public Xol_duration_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Xol_interval_itm[] Get_duration_intervals(long seconds, Xol_duration_itm[] intervals) {
 		if (intervals == null) intervals = Xol_duration_itm_.Ary_default;
-		Array_.Sort(intervals, Xol_duration_itm_sorter._);
+		Array_.Sort(intervals, Xol_duration_itm_sorter.Instance);
 		int intervals_len = intervals.length;
 		long val = seconds;
 		List_adp rv = List_adp_.new_();
@@ -85,7 +86,7 @@ public class Xol_duration_mgr {
 					tmp_bfr.Add(segs_ary[i]);
 				}
 				tmp_bfr.Add(Msg_and).Add(Msg_word_separator).Add(segs_ary[last_idx]);
-				return tmp_bfr.Xto_bry_and_clear();
+				return tmp_bfr.To_bry_and_clear();
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	private String Bld_qry_delete(Db_qry_delete cmd) {
 		sb.Add_many("DELETE FROM ", cmd.Base_table());
 		Bld_where(sb, cmd.Where());
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	private String Bld_qry_insert(Db_qry_insert cmd) {
 		if (cmd.Select() != null) {
@@ -49,7 +49,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 				sb.Add(i == cmd.Cols().Count() - 1 ? ") " : ", ");
 			}
 			sb.Add(Bld_qry_select(cmd.Select()));
-			return sb.Xto_str_and_clear();
+			return sb.To_str_and_clear();
 		}
 		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_insert has no columns", "base_table", cmd.Base_table());
 		int last = arg_count - 1;
@@ -66,7 +66,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			this.Bld_val(sb, arg);
 			sb.Add(i == last ? ")" : ", ");
 		}
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	private String Bld_qry_update(Db_qry_update cmd) {
 		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_update has no columns", "base_table", cmd.Base_table());
@@ -79,7 +79,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			this.Bld_val(sb, (Db_arg)pair.Val());
 		}
 		Bld_where(sb, cmd.Where());
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	private String Bld_qry_select(Db_qry__select_cmd cmd) {
 		sb.Add("SELECT ");
@@ -97,7 +97,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		Bld_select_group_by(sb, cmd.GroupBy());
 		Bld_select_order_by(sb, cmd.OrderBy());
 		Bld_select_limit(sb, cmd.Limit());
-		return sb.Xto_str_and_clear();
+		return sb.To_str_and_clear();
 	}
 	private void Bld_select_group_by(String_bldr sb, Sql_group_by groupBy) {
 		if (groupBy == null) return;

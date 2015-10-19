@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 class Xowd_db_file_hash {
-	private final Ordered_hash hash = Ordered_hash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Count_total() {return count_total;} private int count_total;
 	public void Clear() {hash.Clear(); count_total = 0;}
 	public void Del(Xowd_db_file file) {
@@ -31,7 +31,7 @@ class Xowd_db_file_hash {
 		byte tid = file.Tid();
 		Ordered_hash tids = (Ordered_hash)hash.Get_by(tid);
 		if (tids == null) {
-			tids = Ordered_hash_.new_();
+			tids = Ordered_hash_.New();
 			hash.Add(tid, tids);
 		}
 		tids.Add(file.Id(), file);

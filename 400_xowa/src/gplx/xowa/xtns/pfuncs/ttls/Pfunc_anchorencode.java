@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b}} -> a+b
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -46,7 +46,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 			Xop_tkn_itm sub = root.Subs_get(i);
 			Tkn(src, sub, root, i, tmp_bfr);
 		}
-		byte[] unencoded = tmp_bfr.Xto_bry_and_clear();
+		byte[] unencoded = tmp_bfr.To_bry_and_clear();
 		encoder.Encode(tmp_bfr, unencoded);
 		bfr.Add_bfr_and_clear(tmp_bfr);
 	}

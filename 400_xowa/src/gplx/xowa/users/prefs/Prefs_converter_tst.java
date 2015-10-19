@@ -34,7 +34,7 @@ public class Prefs_converter_tst {
 	}
 }
 class Prefs_converter_fxt {
-	Prefs_converter converter = Prefs_converter._;
+	Prefs_converter converter = Prefs_converter.Instance;
 	public void Test_convert(String raw, String expd) {
 		String actl = converter.Convert(raw);
 		Tfds.Eq_str_lines(expd, actl);

@@ -20,7 +20,7 @@ public class DbMaprMgr {
 	public DbMaprArg[] RootIndexFlds() {return rootIndexFlds;} public DbMaprMgr RootIndexFlds_(DbMaprArg... val) {rootIndexFlds = val; return this;} DbMaprArg[] rootIndexFlds;
 	public DbMaprItm Root() {return root;} public DbMaprMgr Root_(DbMaprItm v) {root = v; return this;} DbMaprItm root;
 	public List_adp OwnerStack() {return ownerStack;} List_adp ownerStack = List_adp_.new_();
-	public Ordered_hash ContextVars() {return contextVars;} Ordered_hash contextVars = Ordered_hash_.new_();
+	public Ordered_hash ContextVars() {return contextVars;} Ordered_hash contextVars = Ordered_hash_.New();
 	public List_adp MaprStack() {return maprStack;} List_adp maprStack = List_adp_.new_();
 	public void EnvStack_add(DbMaprItm mapr, SrlObj gobj) {
 		for (Object argObj : mapr.ContextFlds()) {

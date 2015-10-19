@@ -33,5 +33,5 @@ public class Tdb_conn_info extends Db_conn_info__base {
 		rv.url = url;
 		return rv;
 	}
-        public static final Tdb_conn_info _ = new Tdb_conn_info();
+        public static final Tdb_conn_info Instance = new Tdb_conn_info();
 }

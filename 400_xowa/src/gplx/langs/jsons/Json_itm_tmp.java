@@ -27,5 +27,5 @@ public class Json_itm_tmp implements Json_itm {	// TEST:
 	public boolean Data_eq(byte[] comp) {return false;}
 	public void Clear() {}
 	public static Json_itm new_str_(String v)	{return new Json_itm_tmp(Json_itm_.Tid__str, "\"" + v + "\"");}
-	public static Json_itm new_int_(int v)		{return new Json_itm_tmp(Json_itm_.Tid__int, Int_.Xto_str(v));}
+	public static Json_itm new_int_(int v)		{return new Json_itm_tmp(Json_itm_.Tid__int, Int_.To_str(v));}
 }

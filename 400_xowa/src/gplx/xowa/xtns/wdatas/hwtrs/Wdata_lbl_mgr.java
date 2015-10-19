@@ -30,7 +30,7 @@ public class Wdata_lbl_mgr {
 	@gplx.Internal protected void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
 	public Wdata_lbl_itm Get_itm__ttl(byte[] ttl) {
 		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.Get_by(ttl);
-		if (rv == null) Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_u8(ttl));	// NOTE: should not happen
+		if (rv == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_u8(ttl));	// NOTE: should not happen
 		return rv;
 	}
 	public byte[] Get_text__ttl(byte[] ttl, byte[] or) {
@@ -43,12 +43,12 @@ public class Wdata_lbl_mgr {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
 		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.Get_by(int_hash_key.Val_(id));
 		if (rv_itm != null) return rv_itm.Text();	// found; return lbl
-		Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.Xto_str(is_pid), id);	// NOTE: should not happen
+		Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.To_str(is_pid), id);	// NOTE: should not happen
 		return Wdata_lbl_itm.Make_ttl(is_pid, id);	// missing; return ttl; EX: "Property:P1", "Q1";
 	}
 	public void Queue_if_missing__ttl(byte[] ttl) {Queue_if_missing__ttl(ttl, Bool_.N);}
 	public void Queue_if_missing__ttl(byte[] ttl, boolean get_en) {
-		if (ttl == null) {Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_u8(ttl)); return;}
+		if (ttl == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_u8(ttl)); return;}
 		boolean has = ttl_hash.Has(ttl);
 		if (!has) Queue_add(qid_hash, Bool_.N, Qid_int(ttl), get_en);
 	}

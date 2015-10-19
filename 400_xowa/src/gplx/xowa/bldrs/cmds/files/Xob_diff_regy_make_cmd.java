@@ -68,26 +68,26 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 	private void Make_delete_sql_file(Bry_bfr atr_bfr, Bry_bfr bin_bfr, Io_url sql_tmp_dir, int cur_db_id, int cur_count) {
 		Make_delete_sql_file(atr_bfr, sql_tmp_dir, cur_db_id, cur_count, Fsdb_db_tid_.Tid_atr);
 		Make_delete_sql_file(bin_bfr, sql_tmp_dir, cur_db_id, cur_count, Fsdb_db_tid_.Tid_bin);
-		app.Usr_dlg().Note_many("", "", "file.diff:sql generated: db_id=~{0} count=~{1}", Int_.Xto_str_pad_bgn_space(cur_db_id, 3), Int_.Xto_str_pad_bgn_space(cur_count, 7));
+		app.Usr_dlg().Note_many("", "", "file.diff:sql generated: db_id=~{0} count=~{1}", Int_.To_str_pad_bgn_space(cur_db_id, 3), Int_.To_str_pad_bgn_space(cur_count, 7));
 	}
 	private void Make_delete_sql_file(Bry_bfr bfr, Io_url sql_dir, int db_id, int cur_count, byte db_tid) {
 		if (db_id != -1 && cur_count > 0) { // do not write 1st bfr
 			bfr.Add_str_a7("COMMIT;\n");
-			String sql_url_name = String_.Format("{0}-{1}-{2}.sql", wiki.Domain_str(), Int_.Xto_str_pad_bgn_zero(db_id, 3), Fsdb_db_tid_.Xto_key(db_tid));
+			String sql_url_name = String_.Format("{0}-{1}-{2}.sql", wiki.Domain_str(), Int_.To_str_pad_bgn_zero(db_id, 3), Fsdb_db_tid_.Xto_key(db_tid));
 			Io_url sql_url = sql_dir.GenSubFil(sql_url_name);
-			Io_mgr.I.SaveFilBfr(sql_url, bfr);
+			Io_mgr.Instance.SaveFilBfr(sql_url, bfr);
 		}
 		bfr.Clear();	// clear bfr if cur_count == 0
 		bfr.Add_str_a7("BEGIN TRANSACTION;\n");
 	}
 	private void Make_delete_sql_item(Bry_bfr atr_bfr, Bry_bfr bin_bfr, byte diff_is_orig, int diff_db_id, int diff_fil_id, int diff_thm_id) {
 		if (diff_is_orig == Byte_.Zero) {
-			atr_bfr.Add_str_a7("DELETE FROM fsdb_xtn_thm WHERE thm_id = " + Int_.Xto_str(diff_thm_id) + ";\n");
-			bin_bfr.Add_str_a7("DELETE FROM fsdb_bin WHERE bin_owner_id = " + Int_.Xto_str(diff_thm_id) + ";\n");
+			atr_bfr.Add_str_a7("DELETE FROM fsdb_xtn_thm WHERE thm_id = " + Int_.To_str(diff_thm_id) + ";\n");
+			bin_bfr.Add_str_a7("DELETE FROM fsdb_bin WHERE bin_owner_id = " + Int_.To_str(diff_thm_id) + ";\n");
 		}
 		else {
-			atr_bfr.Add_str_a7("UPDATE fsdb_fil SET fil_bin_db_id = -1 WHERE fil_id = " + Int_.Xto_str(diff_fil_id) + ";\n");
-			bin_bfr.Add_str_a7("DELETE FROM fsdb_bin WHERE bin_owner_id = " + Int_.Xto_str(diff_fil_id) + ";\n");
+			atr_bfr.Add_str_a7("UPDATE fsdb_fil SET fil_bin_db_id = -1 WHERE fil_id = " + Int_.To_str(diff_fil_id) + ";\n");
+			bin_bfr.Add_str_a7("DELETE FROM fsdb_bin WHERE bin_owner_id = " + Int_.To_str(diff_fil_id) + ";\n");
 		}
 	}
 }

@@ -44,7 +44,7 @@ public class ImageAdp_base implements ImageAdp, RlsAble {
 	public void SaveAsBmp(Io_url url) {SaveAs(url, "bmp");}
 	public void SaveAsPng(Io_url url) {SaveAs(url, "png");}
 	void SaveAs(Io_url url, String fmtStr) {
-		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());
+		Io_mgr.Instance.CreateDirIfAbsent(url.OwnerDir());
 			    File fil = new File(url.Xto_api());
 //		String[] formatNames = ImageIO.getWriterFormatNames();
 //		for (String s : formatNames)

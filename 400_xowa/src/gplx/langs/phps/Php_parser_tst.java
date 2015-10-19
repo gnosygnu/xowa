@@ -132,7 +132,7 @@ class Php_parser_fxt {
 	Tst_mgr tst_mgr = new Tst_mgr();
 	Gfo_msg_log_chkr log_mgr_chkr = new Gfo_msg_log_chkr(); 
 	public void Clear() {log_mgr_chkr.Clear(); tkn_wkr.Clear(); line_wkr.Clear();}
-	public Php_tkn_chkr_base tkn_declaration() 						{return Php_tkn_declaration_chkr._;}
+	public Php_tkn_chkr_base tkn_declaration() 						{return Php_tkn_declaration_chkr.Instance;}
 	public Php_tkn_chkr_base tkn_txt(int bgn, int end) 				{return new Php_tkn_txt_chkr(bgn, end);}
 	public Php_tkn_chkr_base tkn_ws(int bgn, int end) 				{return new Php_tkn_ws_chkr(bgn, end);}
 	public Php_tkn_chkr_base tkn_generic(int bgn, int end, byte tid) 	{return new Php_tkn_generic_chkr(bgn, end, tid);}
@@ -197,7 +197,7 @@ abstract class Php_tkn_chkr_base implements Tst_chkr {
 class Php_tkn_declaration_chkr extends Php_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Php_tkn_declaration.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_declaration;}
-	public static final Php_tkn_declaration_chkr _ = new Php_tkn_declaration_chkr(); 
+	public static final Php_tkn_declaration_chkr Instance = new Php_tkn_declaration_chkr(); 
 }
 class Php_tkn_txt_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_txt_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}

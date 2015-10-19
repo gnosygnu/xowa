@@ -45,9 +45,9 @@ public class GfuiWin extends GfuiElemBase {
 		win.OpenedCmd_set(GfoInvkAbleCmd.new_(this, Evt_Opened));
 		GfoEvMgr_.Sub(this, GfuiElemKeys.IptRcvd_evt, keyCmdMgr, GfuiWinKeyCmdMgr.CheckForHotKey_cmd);
 		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.Alt.Add(IptKey_.F4));
-//			IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin._, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
+//			IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
 		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.F12));
-		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr._);
+		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
 	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
@@ -56,16 +56,16 @@ public class GfuiWin extends GfuiElemBase {
 		win.OpenedCmd_set(GfoInvkAbleCmd.new_(this, Evt_Opened));
 		GfoEvMgr_.Sub(this, GfuiElemKeys.IptRcvd_evt, keyCmdMgr, GfuiWinKeyCmdMgr.CheckForHotKey_cmd);
 		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.Alt.Add(IptKey_.F4));
-		IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin._, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
+		IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
 		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.F12));
-		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr._);
+		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
 	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {
 		String type = (String)ctorArgs.FetchValOr(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_app);
-		if		(String_.Eq(type, GfuiWin_.InitKey_winType_tool))		return GxwElemFactory_._.win_tool_(ctorArgs);
-		else if	(String_.Eq(type, GfuiWin_.InitKey_winType_toaster))	return GxwElemFactory_._.win_toaster_(ctorArgs);
-		else															return GxwElemFactory_._.win_app_();
+		if		(String_.Eq(type, GfuiWin_.InitKey_winType_tool))		return GxwElemFactory_.Instance.win_tool_(ctorArgs);
+		else if	(String_.Eq(type, GfuiWin_.InitKey_winType_toaster))	return GxwElemFactory_.Instance.win_toaster_(ctorArgs);
+		else															return GxwElemFactory_.Instance.win_app_();
 	}
 	@Override public void Opened_cbk() {
 		if (!smallOpenSize.Eq(SizeAdp_.Null)) super.Size_(smallOpenSize);	// NOTE: call before opened = true, else Layout will happen again
@@ -107,8 +107,8 @@ public class GfuiWin extends GfuiElemBase {
 		else if	(ctx.Match(k, Invk_Show))								Show();
 		else if	(ctx.Match(k, Evt_Opened))								Opened_cbk();
 		else if	(ctx.Match(k, StopAppByAltF4_evt))						StopAppByAltF4(IptEventData.ctx_(ctx, m));
-		else if	(ctx.Match(k, Invk_ShowFocusOwner))						GfuiEnv_.ShowMsg(GfuiFocusMgr._.FocusedElem().Key_of_GfuiElem());
-		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_._.Note(UsrMsg.new_(DateAdp_.Now().toString())); return this;}
+		else if	(ctx.Match(k, Invk_ShowFocusOwner))						GfuiEnv_.ShowMsg(GfuiFocusMgr.Instance.FocusedElem().Key_of_GfuiElem());
+		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_.Instance.Note(UsrMsg.new_(DateAdp_.Now().toString())); return this;}
 		else if	(ctx.MatchIn(k, Invk_Close, GfuiQuitMode.Destroy_cmd))	Close();
 		else if	(ctx.MatchIn(k, Invk_Hide, GfuiQuitMode.Suspend_cmd))	Hide();
 		else {

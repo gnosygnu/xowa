@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class GfsCtx {
-	public Ordered_hash Vars() {return vars;} Ordered_hash vars = Ordered_hash_.new_();
+	public Ordered_hash Vars() {return vars;} Ordered_hash vars = Ordered_hash_.New();
 	public boolean Fail_if_unhandled() {return fail_if_unhandled;} public GfsCtx Fail_if_unhandled_(boolean v) {fail_if_unhandled = v; return this;} private boolean fail_if_unhandled;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public GfsCtx Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} Gfo_usr_dlg usr_dlg;
 	public boolean Help_browseMode() {return help_browseMode;} public GfsCtx Help_browseMode_(boolean v) {help_browseMode = v; return this;} private boolean help_browseMode;
@@ -40,12 +40,12 @@ public class GfsCtx {
 		}
 		return String_.In(k, match);
 	}
-	public boolean Write_note(String fmt, Object... ary) {UsrDlg_._.Note(fmt, ary); return false;}
-	public boolean Write_warn(String fmt, Object... ary) {UsrDlg_._.Note("! " + fmt, ary); return false;}
-	public boolean Write_stop(UsrMsg umsg) {UsrDlg_._.Note("* " + umsg.To_str()); return false;}
-	public boolean Write_stop(String fmt, Object... ary) {UsrDlg_._.Note("* " + fmt, ary); return false;}
+	public boolean Write_note(String fmt, Object... ary) {UsrDlg_.Instance.Note(fmt, ary); return false;}
+	public boolean Write_warn(String fmt, Object... ary) {UsrDlg_.Instance.Note("! " + fmt, ary); return false;}
+	public boolean Write_stop(UsrMsg umsg) {UsrDlg_.Instance.Note("* " + umsg.To_str()); return false;}
+	public boolean Write_stop(String fmt, Object... ary) {UsrDlg_.Instance.Note("* " + fmt, ary); return false;}
 	public boolean Deny() {return deny;} private boolean deny;
-        public static final GfsCtx _ = new GfsCtx();
+        public static final GfsCtx Instance = new GfsCtx();
         public static GfsCtx new_() {return new GfsCtx();} GfsCtx() {}
         public static GfsCtx rdr_() {
 		GfsCtx rv = new GfsCtx();

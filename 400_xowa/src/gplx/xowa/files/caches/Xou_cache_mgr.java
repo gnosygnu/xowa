@@ -21,7 +21,7 @@ import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr {
 	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final Bry_bfr key_bfr = Bry_bfr.reset_(512);
-	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Object thread_lock = new Object();
+	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Object thread_lock = new Object();
 	private final Io_url cache_dir; private boolean db_load_needed = true;
 	public Xou_cache_mgr(Xoa_wiki_mgr wiki_mgr, Io_url cache_dir, Xou_db_file db_file) {
 		this.wiki_mgr = wiki_mgr; this.cache_dir = cache_dir;
@@ -116,7 +116,7 @@ public class Xou_cache_mgr {
 		synchronized (thread_lock) {
 			try {
 				this.Db_save(); cache_tbl.Select_all(key_bfr, hash);			// save and load
-				Ordered_hash grp_hash = Ordered_hash_.new_();				// aggregate by file path; needed when same commons file used by two wikis
+				Ordered_hash grp_hash = Ordered_hash_.New();				// aggregate by file path; needed when same commons file used by two wikis
 				int len = hash.Count();
 				for (int i = 0; i < len; ++i) {
 					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
@@ -129,7 +129,7 @@ public class Xou_cache_mgr {
 					}
 					grp.Add(itm);
 				}
-				grp_hash.Sort_by(Xou_cache_grp_sorter.I);				// sorts by cache_time desc
+				grp_hash.Sort_by(Xou_cache_grp_sorter.Instance);				// sorts by cache_time desc
 				len = grp_hash.Count();
 				long fsys_size_calc = 0, fsys_size_temp = 0;
 				List_adp deleted = List_adp_.new_();
@@ -152,7 +152,7 @@ public class Xou_cache_mgr {
 					fsys_size_cur -= grp.File_size();
 				}
 				conn.Txn_end();
-				Io_mgr.I.Delete_dir_empty(cache_dir);
+				Io_mgr.Instance.Delete_dir_empty(cache_dir);
 			}
 			catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_full(e)); return;}
 		}
@@ -194,9 +194,9 @@ class Xou_cache_grp {
 			cache_hash.Del(itm.Lnki_key());
 			itm.Db_state_(Db_cmd_mode.Tid_delete);
 			cache_tbl.Db_save(itm);
-			gplx.ios.IoItmFil fil = Io_mgr.I.QueryFil(itm.File_url());
+			gplx.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(itm.File_url());
 			if (fil.Exists()) {
-				Io_mgr.I.DeleteFil(itm.File_url());
+				Io_mgr.Instance.DeleteFil(itm.File_url());
 				deleted = true;
 			}
 			else {
@@ -213,5 +213,5 @@ class Xou_cache_grp_sorter implements gplx.lists.ComparerAble {
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;
 		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
-	public static final Xou_cache_grp_sorter I = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
+	public static final Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
 }

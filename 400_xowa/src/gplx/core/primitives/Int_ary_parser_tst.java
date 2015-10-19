@@ -22,7 +22,7 @@ public class Int_ary_parser_tst {
 	@Test  public void One()		{tst_ints("1"				, 0, 1, Int_.Ary(1));}
 	@Test  public void None()		{tst_ints(""				, 0, 0, Int_.Ary());}
 	private void tst_ints(String raw, int bgn, int end, int[] expd) {
-		int[] actl = Int_ary_parser._.Parse_ary(Bry_.new_a7(raw), bgn, end, Byte_ascii.Comma);
+		int[] actl = Int_ary_parser.Instance.Parse_ary(Bry_.new_a7(raw), bgn, end, Byte_ascii.Comma);
 		Tfds.Eq_ary(expd, actl);
 	}
 }

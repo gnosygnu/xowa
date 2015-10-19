@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wms.apis.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.files.downloads.*;
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;
 	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final Xof_img_size img_size = new Xof_img_size();
@@ -33,7 +33,7 @@ public class Xof_orig_mgr {
 //			}
 		if (!fsdb_mode.Tid_v2_bld()) {	// add if gui, but not if bld
 			Io_url wiki_meta_dir = wiki.App().Fsys_mgr().File_dir().GenSubDir_nest("#meta", wiki.Domain_str());
-			if (Io_mgr.I.ExistsDir(wiki_meta_dir)) {
+			if (Io_mgr.Instance.ExistsDir(wiki_meta_dir)) {
 				Xof_orig_wkr__xo_meta xo_meta = new Xof_orig_wkr__xo_meta(wiki_meta_dir);
 				this.Wkrs__add_many(xo_meta);
 			}
@@ -63,7 +63,7 @@ public class Xof_orig_mgr {
 				Xof_orig_itm orig = (Xof_orig_itm)rv.Get_by(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) continue;
 				if (orig.Insert_new()) this.Insert(orig.Repo(), fsdb.Lnki_ttl(), orig.Ext_id(), orig.W(), orig.H(), orig.Redirect());	// NOTE: orig_page must be same as find_arg not orig.Page() else will not be found for next call; DATE:2015-04-14
 				Xof_file_wkr.Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);
-				if (!Io_mgr.I.ExistsFil(fsdb.Html_view_url()))
+				if (!Io_mgr.Instance.ExistsFil(fsdb.Html_view_url()))
 					fsdb.File_exists_n_();
 			} catch (Exception e) {
 				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: exc=~{0}", Err_.Message_gplx_full(e));

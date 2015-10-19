@@ -39,7 +39,7 @@ class Sql_select_fld_fld extends Sql_select_fld_base {
 class Sql_select_fld_count extends Sql_select_fld_func_base {
 	public Sql_select_fld_count(String tbl, String fld, String alias) {this.ctor_(tbl, fld, alias);}
 	@Override public String XtoSql_functionName() {return "COUNT";}
-	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn._);}
+	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn.Instance);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
 		if (groupByVal == null) return 1;
 		return Int_.cast(groupByVal) + 1;
@@ -48,7 +48,7 @@ class Sql_select_fld_count extends Sql_select_fld_func_base {
 class Sql_select_fld_sum extends Sql_select_fld_func_base {
 	public Sql_select_fld_sum(String tbl, String fld, String alias) {this.ctor_(tbl, fld, alias);}
 	@Override public String XtoSql_functionName() {return "SUM";}
-	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn._);}
+	@Override public void GroupBy_type(GfoFld fld) {this.ValType_set(IntClassXtn.Instance);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
 		if (groupByVal == null) return Int_.cast(curVal);
 		return Int_.cast(groupByVal) + Int_.cast(curVal);

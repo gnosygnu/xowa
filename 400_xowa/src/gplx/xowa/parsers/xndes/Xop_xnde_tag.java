@@ -61,7 +61,7 @@ public class Xop_xnde_tag {
 	public Ordered_hash Langs() {return langs;} private Ordered_hash langs; private Int_obj_ref langs_key;
 	public Xop_xnde_tag Langs_(int lang_code, String name) {
 		if (langs == null) {
-			langs = Ordered_hash_.new_();
+			langs = Ordered_hash_.New();
 			langs_key = Int_obj_ref.neg1_();
 		}
 		Xop_xnde_tag_lang lang_tag = new Xop_xnde_tag_lang(lang_code, name);
@@ -69,8 +69,8 @@ public class Xop_xnde_tag {
 		return this;
 	}
 	public Xop_xnde_tag_lang Langs_get(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, int cur_lang, byte[] src, int bgn, int end) {
-		if (langs == null) return Xop_xnde_tag_lang._;						// no langs defined; always return true; EX:<b>
-		if (Bry_.Eq(src, bgn, end, name_bry)) return Xop_xnde_tag_lang._;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
+		if (langs == null) return Xop_xnde_tag_lang.Instance;						// no langs defined; always return true; EX:<b>
+		if (Bry_.Eq(src, bgn, end, name_bry)) return Xop_xnde_tag_lang.Instance;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
 		synchronized (langs) {
 			langs_key.Val_(cur_lang);
 		}

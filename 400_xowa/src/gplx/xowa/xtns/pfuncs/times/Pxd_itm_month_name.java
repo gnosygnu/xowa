@@ -237,7 +237,7 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 			state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.Min_value));
 		}
 	}
-	public static final Pxd_itm_day_suffix _ = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
+	public static final Pxd_itm_day_suffix Instance = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
 }
 class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_day_relative(int adj, int ary_idx) {Ctor(ary_idx); this.adj = adj;}

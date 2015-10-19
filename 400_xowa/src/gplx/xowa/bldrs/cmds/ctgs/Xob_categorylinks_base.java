@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.ctgs.*;
+import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.wikis.ctgs.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
 public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
 	private DateAdp_parser date_parser = DateAdp_parser.new_(); private Sql_file_parser sql_parser; Uca_trie trie; private Bry_bfr uca_bfr = Bry_bfr.reset_(255);		
@@ -56,7 +56,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 					trie.Init();
 				}
 				trie.Decode(uca_bfr, cur_sortkey, 0, cur_sortkey.length);
-				cur_sortkey = uca_bfr.Len() == 0 ? Sortkey_space : uca_bfr.Xto_bry_and_clear();
+				cur_sortkey = uca_bfr.Len() == 0 ? Sortkey_space : uca_bfr.To_bry_and_clear();
 			}
 			fld_wtr.Bfr_(file_bfr);
 			fld_wtr.Write_bry_escape_fld(cur_ctg);
@@ -67,7 +67,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 		}
 	}	int cur_id = -1, cur_date = -1; byte[] cur_ctg = null, cur_sortkey = null; byte cur_tid = Byte_.Max_value_127; boolean cur_collation_is_uca; int[] cur_modified_on = new int[7];
 	@Override public void Cmd_end() {
-		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter._, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
+		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter.Instance, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
 	}		
 	private static final byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
@@ -86,5 +86,5 @@ class Xoctg_link_sql_sorter implements gplx.lists.ComparerAble {
 		}
 		return CompareAble_.Same;
 	}
-	public static final Xoctg_link_sql_sorter _ = new Xoctg_link_sql_sorter(); Xoctg_link_sql_sorter() {}
+	public static final Xoctg_link_sql_sorter Instance = new Xoctg_link_sql_sorter(); Xoctg_link_sql_sorter() {}
 }

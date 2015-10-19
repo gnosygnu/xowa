@@ -23,5 +23,5 @@ public class LongClassXtn extends ClassXtn_base implements ClassXtn {
 	public boolean Eq(Object lhs, Object rhs) {try {return Long_.cast(lhs) == Long_.cast(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object ParseOrNull(String raw)				{return raw == null ? (Object)null : Long_.parse(raw);}
 	@Override public Object XtoDb(Object obj)					{return Long_.cast(obj);}						// necessary for enums
-	public static final LongClassXtn _ = new LongClassXtn(); LongClassXtn() {} // added to ClassXtnPool by default
+	public static final LongClassXtn Instance = new LongClassXtn(); LongClassXtn() {} // added to ClassXtnPool by default
 }

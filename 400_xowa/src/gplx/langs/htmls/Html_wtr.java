@@ -82,9 +82,9 @@ public class Html_wtr {
 		bfr.Add_byte(Byte_ascii.Gt);
 		return this;
 	}
-	public byte[] Xto_bry_and_clear() {return bfr.Xto_bry_and_clear();}
-	public byte[] Xto_bry() {return bfr.Xto_bry();}
-	public String Xto_str() {return bfr.Xto_str();}
+	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
+	public byte[] Xto_bry() {return bfr.To_bry();}
+	public String Xto_str() {return bfr.To_str();}
 	public static void Write_atr_bry(Bry_bfr bfr, byte[] key, byte[] val) {Write_atr_bry(bfr, Bool_.Y, Byte_ascii.Quote, key, val);}
 	public static void Write_atr_bry(Bry_bfr bfr, boolean write_space, byte atr_quote, byte[] key, byte[] val) {
 		if (Bry_.Len_eq_0(val)) return;	// don't write empty

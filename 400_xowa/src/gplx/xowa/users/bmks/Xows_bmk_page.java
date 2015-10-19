@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.specials.*;
 public class Xows_bmk_page implements Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__bookmarks;}

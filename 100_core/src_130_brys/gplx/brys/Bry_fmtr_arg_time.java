@@ -30,7 +30,7 @@ public class Bry_fmtr_arg_time implements Bry_fmtr_arg {
 	int[] units = new int[] {86400, 3600, 60, 1};
 	int units_len;
 	byte[] spr = new byte[] {Byte_ascii.Space};
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (seconds == 0) {	// handle 0 separately (since it will always be < than units[*]
 			bfr.Add_int_fixed(0, 2).Add(segs[units_len - 1]);
 			return;

@@ -20,7 +20,7 @@ import gplx.core.criterias.*; import gplx.dbs.sqls.*;
 public class Db_qry_update implements Db_qry_arg_owner {
 	public int			Tid() {return Db_qry_.Tid_update;}
 	public boolean			Exec_is_rdr() {return false;}
-	public String		Xto_sql() {return Sql_qry_wtr_.I.Xto_str(this, false);}
+	public String		Xto_sql() {return Sql_qry_wtr_.Instance.Xto_str(this, false);}
 	public int			Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 	public String		Base_table() {return base_table;} private String base_table;
 	public String[]		Cols_for_update() {return cols_for_update;} private String[] cols_for_update;

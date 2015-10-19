@@ -23,7 +23,7 @@ public class Db_meta_idx {
 	public String Name() {return name;} private final String name;		
 	public boolean Unique() {return unique;} private final boolean unique;
 	public String[] Flds() {return flds;} private final String[] flds;
-	public String To_sql_create() {return Db_sqlbldr__sqlite.I.Bld_create_idx(this);}
+	public String To_sql_create() {return Db_sqlbldr__sqlite.Instance.Bld_create_idx(this);}
 	public static Db_meta_idx new_unique_by_name(String tbl, String idx_name, String... flds)			{return new Db_meta_idx(tbl, idx_name, Bool_.Y, flds);}
 	public static Db_meta_idx new_normal_by_name(String tbl, String idx_name, String... flds)			{return new Db_meta_idx(tbl, idx_name, Bool_.N, flds);}
 	public static Db_meta_idx new_unique_by_tbl(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.Y, flds);}

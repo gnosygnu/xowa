@@ -34,7 +34,7 @@ public class Scrib_fsys_mgr_tst {
 class Scrib_fsys_mgr_fxt {
 	private Scrib_fsys_mgr fsys_mgr;
 	public void Clear() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 		fsys_mgr = new Scrib_fsys_mgr();
 	}
 	public Scrib_fsys_mgr_fxt Init(String root_dir, String... rel_paths) {
@@ -45,7 +45,7 @@ class Scrib_fsys_mgr_fxt {
 		for (int i = 0; i < rel_paths_len; i++) {
 			String rel_path = rel_paths[i];
 			Io_url fil_url = script_dir.GenSubFil(rel_path);
-			Io_mgr.I.SaveFilStr(fil_url, fil_url.Raw());
+			Io_mgr.Instance.SaveFilStr(fil_url, fil_url.Raw());
 		}
 		return this;
 	}

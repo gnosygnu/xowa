@@ -51,7 +51,7 @@ public class Gfo_fld_wtr extends Gfo_fld_base {
 	public boolean Flush_needed(int v) {return bfr.Len() + v > bfr_max;}
 	public void Flush() {
 		if (Fil_gen().Cur_url() == null) fil_gen.Nxt_url();
-		Io_mgr.I.AppendFilBfr(fil_gen.Cur_url(), bfr);
+		Io_mgr.Instance.AppendFilBfr(fil_gen.Cur_url(), bfr);
 	}
 	public void Flush_nxt() {Flush(); fil_gen.Nxt_url();}
 	public Gfo_fld_wtr Ctor_xdat() {return (Gfo_fld_wtr)super.Ctor_xdat_base();}

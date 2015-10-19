@@ -20,7 +20,7 @@ class Imap_map_fmtr implements Bry_fmtr_arg {
 	private int imap_id;
 	public void Init(int imap_id, Imap_itm_shape[] shapes, double scale) {this.imap_id = imap_id; shapes_fmtr_arg.Init(shapes, scale);}
 	public Imap_pts_fmtr_arg Pts_fmtr() {return shapes_fmtr_arg.Pts_fmtr();}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Imap_html_fmtrs.Map.Bld_bfr_many(bfr, imap_id, shapes_fmtr_arg);
 	}
 	private static final Imap_shapes_fmtr shapes_fmtr_arg = new Imap_shapes_fmtr();
@@ -29,7 +29,7 @@ class Imap_shapes_fmtr implements Bry_fmtr_arg {
 	private Imap_itm_shape[] shapes;
 	public void Init(Imap_itm_shape[] shapes, double scale) {this.shapes = shapes; pts_fmtr_arg.Scale_(scale);}
 	public Imap_pts_fmtr_arg Pts_fmtr() {return pts_fmtr_arg;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int shapes_len = shapes.length;
 		Bry_fmtr fmtr = Imap_html_fmtrs.Area;
 		for (int i = 0; i < shapes_len; ++i) {

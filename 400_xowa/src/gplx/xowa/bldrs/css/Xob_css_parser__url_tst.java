@@ -39,7 +39,7 @@ class Xob_css_parser__url_fxt {
 		this.src_bry = Bry_.new_u8(src_str);
 		this.Exec_parse_hook();
 		cur_frag.Write(bfr, src_bry);
-		String actl_str = bfr.Xto_str_and_clear();
+		String actl_str = bfr.To_str_and_clear();
 		Tfds.Eq(expd_tid, cur_frag.Tid(), "wrong tid; expd={0}, actl={1}", expd_tid, cur_frag.Tid());
 		Tfds.Eq(expd_str, actl_str);
 	}

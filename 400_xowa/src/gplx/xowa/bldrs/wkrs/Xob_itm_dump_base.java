@@ -35,14 +35,14 @@ public abstract class Xob_itm_dump_base extends Xob_itm_basic_base {
 		temp_dir = wiki.Fsys_mgr().Tmp_dir().GenSubDir(tmp_dir_key);
 		if (make_dir_val == null)	make_dir = temp_dir.GenSubDir("make");
 		else						make_dir = make_dir_val;
-		Io_mgr.I.DeleteDirDeep_ary(temp_dir, make_dir);
+		Io_mgr.Instance.DeleteDirDeep_ary(temp_dir, make_dir);
 		dump_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("dump"));
 	}
 	@gplx.Virtual public void Term_dump(Io_sort_cmd make_cmd) {
-		Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr); dump_bfr.Rls();
+		Io_mgr.Instance.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr); dump_bfr.Rls();
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_.first_pipe, make_cmd);
 	}
-	protected void Flush_dump() {Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);}
+	protected void Flush_dump() {Io_mgr.Instance.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_sort_mem_len_))		sort_mem_len = gplx.ios.Io_size_.Load_int_(m);
 		else if	(ctx.Match(k, Invk_dump_fil_len_)) 		dump_fil_len = gplx.ios.Io_size_.Load_int_(m);

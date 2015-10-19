@@ -49,7 +49,7 @@ public class Xot_defn_tmpl_ {
 		for (int i = 0; i < subs_len; i++)
 			orig.Subs_get(i).Tmpl_evaluate(ctx, src, caller, arg_bfr);
 		Arg_itm_tkn rv = tkn_mkr.ArgItm(-1, -1);	// NOTE: was -1, 0; DATE:2013-04-10
-		byte[] rv_ary = orig_arg.KeyTkn_exists() && val_tkn ? arg_bfr.Xto_bry_and_clear_and_trim() : arg_bfr.Xto_bry_and_clear();	// // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY; PAGE:en.w:Coord in Chernobyl disaster, Sahara
+		byte[] rv_ary = orig_arg.KeyTkn_exists() && val_tkn ? arg_bfr.To_bry_and_clear_and_trim() : arg_bfr.To_bry_and_clear();	// // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY; PAGE:en.w:Coord in Chernobyl disaster, Sahara
 		rv.Dat_ary_(rv_ary);
 		return rv;
 	}

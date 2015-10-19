@@ -42,8 +42,8 @@ public class HierStrBldr {
 			multipleAry[i] = (idx / multiple) * multiple;	// NOTE: rounds down to multiple; EX: 11 -> 10
 		}
 		for (int i = 0; i < multipleAry.length; i++)
-			sb.Add_fmt(dirFmt, Int_.Xto_str_fmt(multipleAry[i], numFmt));
-		sb.Add_fmt(filFmt, Int_.Xto_str_fmt(idx, numFmt));
+			sb.Add_fmt(dirFmt, Int_.To_str_fmt(multipleAry[i], numFmt));
+		sb.Add_fmt(filFmt, Int_.To_str_fmt(idx, numFmt));
 		return sb.To_str();
 	}
 	public HierStrBldr Ctor_io(Io_url root, String dirFmt, String filFmt, String numFmt, int... filCountMaxs) {

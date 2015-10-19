@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Xot_prm_wkr implements Xop_arg_wkr {
-	private static Arg_bldr arg_bldr = Arg_bldr._;
+	private static Arg_bldr arg_bldr = Arg_bldr.Instance;
 	public boolean Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos, Xop_curly_bgn_tkn bgn, int keep_curly_bgn) {
 		int loop_bgn = bgn.Tkn_sub_idx() + 1;	// +1 to ignore curly_bgn
 		int loop_end = root.Subs_len();
@@ -28,7 +28,7 @@ class Xot_prm_wkr implements Xop_arg_wkr {
 			return false;
 		}
 		Xot_prm_tkn prm_tkn = tkn_mkr.Tmpl_prm(bgn.Src_bgn(), lxr_cur_pos);
-		arg_bldr.Bld(ctx, tkn_mkr, Xot_prm_wkr._, Xop_arg_wkr_.Typ_prm, root, prm_tkn, lxr_bgn_pos, lxr_cur_pos, loop_bgn, loop_end, src);
+		arg_bldr.Bld(ctx, tkn_mkr, Xot_prm_wkr.Instance, Xop_arg_wkr_.Typ_prm, root, prm_tkn, lxr_bgn_pos, lxr_cur_pos, loop_bgn, loop_end, src);
 		root.Subs_del_after(bgn.Tkn_sub_idx() + keep_curly_bgn);	// NOTE: keep_curly_bgn determines whether or not to delete opening {{{
 		root.Subs_add(prm_tkn);
 		return true;
@@ -42,5 +42,5 @@ class Xot_prm_wkr implements Xop_arg_wkr {
 		}
 		return true;
 	}
-	public static final Xot_prm_wkr _ = new Xot_prm_wkr(); Xot_prm_wkr() {}
+	public static final Xot_prm_wkr Instance = new Xot_prm_wkr(); Xot_prm_wkr() {}
 }

@@ -70,6 +70,6 @@ class IptKeyStrMgr {
 		charKeys[charVal] = k;
 	}
 	IptKey[] charKeys;
-	Hash_adp literals; Ordered_hash keys = Ordered_hash_.new_();
-	public static final IptKeyStrMgr _ = new IptKeyStrMgr(); IptKeyStrMgr() {}
+	Hash_adp literals; Ordered_hash keys = Ordered_hash_.New();
+	public static final IptKeyStrMgr Instance = new IptKeyStrMgr(); IptKeyStrMgr() {}
 }

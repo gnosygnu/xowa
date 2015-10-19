@@ -31,7 +31,7 @@ public class Mysql_engine extends Db_engine_sql_base {
 		Mysql_conn_info conn_info_as_mysql = (Mysql_conn_info)conn_info; 
 		return Conn_make_by_url("jdbc:mysql://localhost/" + conn_info_as_mysql.Database() + "?characterEncoding=UTF8", conn_info_as_mysql.Uid(), conn_info_as_mysql.Pwd());
 	}
-		public static final Mysql_engine _ = new Mysql_engine(); Mysql_engine() {}
+		public static final Mysql_engine Instance = new Mysql_engine(); Mysql_engine() {}
 }
 class Mysql_rdr extends Db_data_rdr {
 		//PATCH:MYSQL:byte actually returned as int by Jdbc ResultSet (or MYSQL impmentation); convert to byte 

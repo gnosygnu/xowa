@@ -24,8 +24,8 @@ class Xoud_opt_scope {
 	public int Lang_id() {return lang_id;} private final int lang_id;
 	public int Type_id() {return type_id;} private final int type_id;
 	public String To_str() {
-		String lang_str = lang_id == Lang_id_wildcard ? "*" : String_.new_u8(Xol_lang_itm_.Get_by_id(lang_id).Key());
-		String type_str = type_id == Lang_id_wildcard ? "*" : String_.new_u8(Xow_domain_type_.Get_type_as_bry(type_id));
+		String lang_str = lang_id == Lang_id_wildcard ? "*" : String_.new_u8(Xol_lang_stub_.Get_by_id(lang_id).Key());
+		String type_str = type_id == Lang_id_wildcard ? "*" : String_.new_u8(Xow_domain_tid_.Get_type_as_bry(type_id));
 		return lang_str + "." + type_str;
 	}
 	public static final int Lang_id_wildcard = -1, Type_id_wildcard = -1;
@@ -34,7 +34,7 @@ class Xoud_opt_scope {
 class Xoud_opt_scope_parser {
 	private Gfo_usr_dlg usr_dlg; private final List_adp list = List_adp_.new_();
 	public Xoud_opt_scope[] Parse(byte[] src) {
-		usr_dlg = Gfo_usr_dlg_.I;
+		usr_dlg = Gfo_usr_dlg_.Instance;
 		list.Clear();
 		int pos = 0; int src_len = src.length;
 		while (pos < src_len) {
@@ -52,7 +52,7 @@ class Xoud_opt_scope_parser {
 		if (lang_dot == 1 && src[bgn] == Byte_ascii.Star)
 			lang_id = Xoud_opt_scope.Lang_id_wildcard;
 		else {
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_null(src, bgn, lang_dot);	if (lang_itm == null) return Warn("scope.parse.invalid_lang: src=~{0}", src, bgn, end);
+			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(src, bgn, lang_dot);	if (lang_itm == null) return Warn("scope.parse.invalid_lang: src=~{0}", src, bgn, end);
 			lang_id = lang_itm.Id();
 		}
 		Object type_tid_obj = btrie_by_type.Match_bgn(src, lang_dot + 1, end);				if (type_tid_obj == null) return Warn("scope.parse.invalid_type: src=~{0}", src, bgn, end);
@@ -64,22 +64,22 @@ class Xoud_opt_scope_parser {
 		return Xoud_opt_scope.App;
 	}
 	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()
-	.Add_str_int("w"			, Xow_domain_type_.Int__wikipedia)
-	.Add_str_int("d"			, Xow_domain_type_.Int__wiktionary)
-	.Add_str_int("s"			, Xow_domain_type_.Int__wikisource)
-	.Add_str_int("v"			, Xow_domain_type_.Int__wikivoyage)
-	.Add_str_int("q"			, Xow_domain_type_.Int__wikiquote)
-	.Add_str_int("b"			, Xow_domain_type_.Int__wikibooks)
-	.Add_str_int("u"			, Xow_domain_type_.Int__wikiversity)
-	.Add_str_int("n"			, Xow_domain_type_.Int__wikinews)
+	.Add_str_int("w"			, Xow_domain_tid_.Int__wikipedia)
+	.Add_str_int("d"			, Xow_domain_tid_.Int__wiktionary)
+	.Add_str_int("s"			, Xow_domain_tid_.Int__wikisource)
+	.Add_str_int("v"			, Xow_domain_tid_.Int__wikivoyage)
+	.Add_str_int("q"			, Xow_domain_tid_.Int__wikiquote)
+	.Add_str_int("b"			, Xow_domain_tid_.Int__wikibooks)
+	.Add_str_int("u"			, Xow_domain_tid_.Int__wikiversity)
+	.Add_str_int("n"			, Xow_domain_tid_.Int__wikinews)
 	.Add_str_int("*"			, Xoud_opt_scope.Type_id_wildcard)
-	.Add_str_int("xowa"			, Xow_domain_type_.Int__home)
-	.Add_str_int("wd"			, Xow_domain_type_.Int__wikidata)
-	.Add_str_int("c"			, Xow_domain_type_.Int__commons)
-	.Add_str_int("species"		, Xow_domain_type_.Int__species)
-	.Add_str_int("meta"			, Xow_domain_type_.Int__meta)
-	.Add_str_int("mw"			, Xow_domain_type_.Int__mediawiki)
-	.Add_str_int("wmf"			, Xow_domain_type_.Int__wmfblog)
+	.Add_str_int("xowa"			, Xow_domain_tid_.Int__home)
+	.Add_str_int("wd"			, Xow_domain_tid_.Int__wikidata)
+	.Add_str_int("c"			, Xow_domain_tid_.Int__commons)
+	.Add_str_int("species"		, Xow_domain_tid_.Int__species)
+	.Add_str_int("meta"			, Xow_domain_tid_.Int__meta)
+	.Add_str_int("mw"			, Xow_domain_tid_.Int__mediawiki)
+	.Add_str_int("wmf"			, Xow_domain_tid_.Int__wmfblog)
 	;
 	private static final Xoud_opt_scope[] Ary_app = new Xoud_opt_scope[] {Xoud_opt_scope.App};
 }

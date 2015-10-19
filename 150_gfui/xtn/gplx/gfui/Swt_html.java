@@ -67,7 +67,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public void Html_doc_html_load_by_url(Io_url path, String html) {
 		this.html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
 		this.load_by_url_path = path.To_http_file_str(); 
-		Io_mgr.I.SaveFilStr(path, html);
+		Io_mgr.Instance.SaveFilStr(path, html);
 		browser.setUrl(path.Xto_api());
 	}
 	public byte 		Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
@@ -99,7 +99,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 			if (quote_val) bfr.Add_byte(Byte_ascii.Apos);
 		}
 		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic);
-		return Eval_script(bfr.Xto_str_and_clear());
+		return Eval_script(bfr.To_str_and_clear());
 	}
 	private static String Escape_quote(String v) {
 		String rv = v;
@@ -149,12 +149,6 @@ class Swt_core_cmds_html extends Swt_core_cmds {
 		this.Focus();
 	}
 }
-class Swt_html_eval_rslt {
-	public void Clear() {error = null; result = null;}
-	public boolean Result_pass() {return error == null;}
-	public Object Result() {return result;} public void Result_set(Object v) 	{result = v; error = null;} private Object result;
-	public String Error () {return error;} 	public void Error_set(String v) 	{error = v; result = null;} private String error;
-}
 class Swt_html_lnr_traverse implements TraverseListener {
 	public Swt_html_lnr_traverse(Swt_html html_box) {}
 	@Override public void keyTraversed(TraverseEvent arg0) {}
@@ -163,7 +157,7 @@ class Swt_html_lnr_title implements TitleListener {
 	private Swt_html html_box;
 	public Swt_html_lnr_title(Swt_html html_box) {this.html_box = html_box;}
 	@Override public void changed(TitleEvent ev) {
-		try {UsrDlg_._.Note(ev.title);}		
+		try {UsrDlg_.Instance.Note(ev.title);}		
 		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
 	}
 }

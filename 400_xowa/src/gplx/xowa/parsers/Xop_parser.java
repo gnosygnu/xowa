@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
 	private final Xowe_wiki wiki;
@@ -33,7 +33,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		wtxt_lxr_mgr.Init_by_wiki(wiki);
 	}
-	public void Init_by_lang(Xol_lang lang) {
+	public void Init_by_lang(Xol_lang_itm lang) {
 		tmpl_lxr_mgr.Init_by_lang(lang);
 		wtxt_lxr_mgr.Init_by_lang(lang);
 	}
@@ -101,7 +101,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		int subs_len = root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		return Xot_tmpl_wtr._.Write_all(ctx, root, src);	// NOTE: generate new src since most callers will use it;
+		return Xot_tmpl_wtr.Instance.Write_all(ctx, root, src);	// NOTE: generate new src since most callers will use it;
 	}
 	public void Parse_wtxt_to_wdom(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] wtxt, int doc_bgn_pos) {
 		root.Root_src_(wtxt);	// always set latest src; needed for Parse_all wherein src will first be raw and then parsed tmpl
@@ -112,6 +112,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		byte parse_tid_old = ctx.Parse_tid();	// NOTE: must store parse_tid b/c ctx can be reused by other classes
 		ctx.Parse_tid_(parse_type);
 		ctx.Page_bgn(root, src);
+		ctx.App().Parser_mgr().Core__uniq_mgr().Clear();
 		Parse_to_src_end(root, ctx, tkn_mkr, src, trie, doc_bgn_pos, len);
 		ctx.Page_end(root, src, len);
 		ctx.Parse_tid_(parse_tid_old);

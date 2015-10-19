@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
 	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
 	private final Bry_bfr int_bfr = Bry_bfr.reset_(16);
 	private final Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
 	private int lnki_w, lnki_h;
-	public void Evt_lang_changed(Xol_lang lang) {
+	public void Evt_lang_changed(Xol_lang_itm lang) {
 		Bry_bfr tmp_bfr = int_bfr;
 		Byte_obj_ref rslt = Byte_obj_ref.zero_();
 		Xol_kwd_mgr mgr = lang.Kwd_mgr();
@@ -103,7 +103,7 @@ public class Xop_lnki_arg_parser {
 					}
 					case Key_dim_x:		{
 						if (mode_width) {
-							this.lnki_w = int_bfr.XtoIntAndClear(-1);
+							this.lnki_w = int_bfr.To_int_and_clear(-1);
 							mode_width = false;
 							break;
 						}
@@ -111,7 +111,7 @@ public class Xop_lnki_arg_parser {
 					}
 				}
 			}
-			int dim = int_bfr.XtoIntAndClear(-1);
+			int dim = int_bfr.To_int_and_clear(-1);
 			if	(mode_width)	this.lnki_w = dim;
 			else				this.lnki_h = dim;
 			return Tid_dim;
@@ -126,7 +126,7 @@ public class Xop_lnki_arg_parser {
 		if (list == null && Env_.Mode_testing()) return;	// TEST: allows partial parsing of $magicWords
 		size_trie.Clear(); px_trie.Clear();
 		for (int i = 0; i < 10; i++)
-			size_trie.Add((byte)(i + Char_.AsciiZero), Byte_obj_val.new_(Key_dim_num));
+			size_trie.Add((byte)(i + Byte_ascii.Num_0), Byte_obj_val.new_(Key_dim_num));
 		int len = digit_mgr.Len(); // NOTE: add non-english numbers; EX: ۲۰۰px; DATE:2015-07-18
 		for (int i = 0; i < len; ++i) {
 			KeyVal kv = digit_mgr.Get_at(i);

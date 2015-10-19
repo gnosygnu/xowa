@@ -29,6 +29,6 @@ public class GfmlFldList {
 		hash.Del(fld);
 		hash.Del(fld.Name());
 	}
-	Ordered_hash hash = Ordered_hash_.new_();
+	Ordered_hash hash = Ordered_hash_.New();
 	public static GfmlFldList new_() {return new GfmlFldList();} GfmlFldList() {}
 }

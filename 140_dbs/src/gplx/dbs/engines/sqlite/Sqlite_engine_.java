@@ -51,7 +51,7 @@ public class Sqlite_engine_ {
 		p.Exec_qry(qry);
 	}
 	public static void Pragma_page_size(Db_conn p, int val) {
-		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.Xto_str(val) + ";");
+		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.To_str(val) + ";");
 		p.Exec_qry(qry);
 	}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Db_meta_idx[] idx_ary) {
@@ -75,10 +75,10 @@ public class Sqlite_engine_ {
 		}
 	}
 	public static Db_conn Conn_load_or_make_(Io_url url, Bool_obj_ref created) {
-		boolean exists = Io_mgr.I.ExistsFil(url);
+		boolean exists = Io_mgr.Instance.ExistsFil(url);
 		created.Val_(!exists);
 		Db_conn_info connect = exists ? Sqlite_conn_info.load_(url) : Sqlite_conn_info.make_(url); 
-		Db_conn p = Db_conn_pool.I.Get_or_new(connect);
+		Db_conn p = Db_conn_pool.Instance.Get_or_new(connect);
 		if (!exists)
 			Pragma_page_size(p, 4096);
 		return p;

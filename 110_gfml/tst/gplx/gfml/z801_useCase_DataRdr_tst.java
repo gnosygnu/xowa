@@ -59,7 +59,7 @@ public class z801_useCase_DataRdr_tst {
 		fx_rdr.tst_Atrs(subRdr, kv_("x", "1"), kv_("y", "2"));
 	}
 	KeyVal kv_(String key, Object val) {return KeyVal_.new_(key, val);}
-	DataRdr_Fxt fx_rdr = DataRdr_Fxt._;
+	DataRdr_Fxt fx_rdr = DataRdr_Fxt.Instance;
 	DataRdr rdr, subRdr;
 }
 class DataRdr_Fxt {
@@ -77,5 +77,5 @@ class DataRdr_Fxt {
 			actlAry[i] = rdr.KeyValAt(i);
 		Tfds.Eq_ary_str(expdAry, actlAry);
 	}
-	public static final DataRdr_Fxt _ = new DataRdr_Fxt(); DataRdr_Fxt() {}
+	public static final DataRdr_Fxt Instance = new DataRdr_Fxt(); DataRdr_Fxt() {}
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.xowa.langs.parsers.*;
 public class Xol_case_itm_ {
 	public static final byte Tid_both = 0, Tid_upper = 1, Tid_lower = 2;
 	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, Bry_.new_u8(src_str), Bry_.new_u8(trg_str));}
@@ -30,7 +31,7 @@ public class Xol_case_itm_ {
 		int src_len = src.length, src_pos = 0, fld_bgn = 0, fld_idx = 0;
 		byte cur_cmd = Byte_.Zero;
 		byte[] cur_lhs = null;
-		Xol_csv_parser csv_parser = Xol_csv_parser._;
+		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = src_pos == src_len;
 			byte b = last ? Byte_ascii.Nl : src[src_pos];
@@ -73,7 +74,7 @@ public class Xol_case_itm_ {
 		return (Xol_case_itm[])list.To_ary(Xol_case_itm.class);
 	}
 	public static Xol_case_itm[] parse_mw_(byte[] raw) {
-		Ordered_hash hash = Ordered_hash_.new_bry_();
+		Ordered_hash hash = Ordered_hash_.New_bry();
 		int pos = 0;
 		pos = parse_mw_grp(hash, raw, Bool_.Y, pos);
 		pos = parse_mw_grp(hash, raw, Bool_.N, pos);

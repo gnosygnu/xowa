@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 	private final Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
 	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
@@ -29,7 +29,7 @@ class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 		this.is_empty = list.Count() == 0; if (is_empty) return;
 		fmtr_tbl.Init_by_wdoc(list);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (is_empty) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_tbl);
 	}
@@ -75,7 +75,7 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 			grp.Rows().Sort_by(lang_sorter);
 		}
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			Wdata_slink_grp grp = grps[i];
 			if (grp.Rows().Count() == 0) continue;
@@ -106,15 +106,15 @@ class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 		fmtr_badges.Init_by_ctor(lbl_regy);
 	}
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
 			Xow_domain_itm domain_info = itm.Domain_info();
 			byte[] wmf_key			= domain_info.Abrv_wm();
-			Xol_lang_itm lang_itm	= domain_info.Lang_actl_itm();
+			Xol_lang_stub lang_itm	= domain_info.Lang_actl_itm();
 			byte[] lang_key			= lang_itm.Key();
-			byte[] lang_name		= lang_itm.Localized_name();
+			byte[] lang_name		= lang_itm.Canonical_name();
 			byte[] domain_bry		= domain_info.Domain_bry();
 			byte[] page_name		= itm.Name();
 			fmtr_badges.Init_by_itm(itm.Badges());
@@ -145,7 +145,7 @@ class Wdata_fmtr__slink_badges implements Bry_fmtr_arg {
 	private Wdata_lbl_mgr lbl_regy; private byte[][] badges;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy) {this.lbl_regy = lbl_regy;}
 	public void Init_by_itm(byte[][] badges) {this.badges = badges;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int len = badges.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] ttl = badges[i];

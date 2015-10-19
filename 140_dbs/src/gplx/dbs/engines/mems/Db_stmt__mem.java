@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Db_stmt__mem implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final Ordered_hash val_list = Ordered_hash_.new_();
+	private final Ordered_hash val_list = Ordered_hash_.New();
 	public Db_stmt__mem(Db_engine__mem engine, Db_qry qry) {Ctor_stmt(engine, qry);} private Db_engine__mem engine;
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {this.engine = (Db_engine__mem)engine; this.qry = qry;}
 	public Hash_adp Crts() {return crt_hash;} private final Hash_adp crt_hash = Hash_adp_.new_();
@@ -45,6 +45,7 @@ public class Db_stmt__mem implements Db_stmt {
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
+	public Db_stmt Val_int_by_bool(String k, boolean v)	{return Add_int(Bool_.N, k, v ? 1 : 0);}
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
@@ -101,7 +102,7 @@ public class Db_stmt__mem implements Db_stmt {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
 			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
-			Add("", Bool_.N, bfr.Xto_str_and_clear());
+			Add("", Bool_.N, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;
 	}

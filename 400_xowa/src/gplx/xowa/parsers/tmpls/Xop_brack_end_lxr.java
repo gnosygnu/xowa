@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.langs.*;
 public class Xop_brack_end_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_brack_end;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int acs_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_brack_bgn);
@@ -30,5 +30,5 @@ public class Xop_brack_end_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn);
 		return cur_pos;
 	}
-	public static final Xop_brack_end_lxr _ = new Xop_brack_end_lxr(); Xop_brack_end_lxr() {}
+	public static final Xop_brack_end_lxr Instance = new Xop_brack_end_lxr(); Xop_brack_end_lxr() {}
 }

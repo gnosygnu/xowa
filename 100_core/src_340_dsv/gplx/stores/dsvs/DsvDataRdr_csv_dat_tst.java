@@ -137,9 +137,9 @@ public class DsvDataRdr_csv_dat_tst {
 		fx.tst_DatCsv(fx.ary_("0", "me"));
 	}
 //		@Test  public void Hdr_Manual() {
-//			fx.Parser_(DsvParser.csv_(false, GfoFldList_.new_().Add("id", IntClassXtn._).Add("name", StringClassXtn._), true));
+//			fx.Parser_(DsvParser.csv_(false, GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), true));
 //			fx.run_parse_("0,me"); 
-//			fx.tst_DatCsv(fx.ary_(0, "me"));	// NOTE: testing auto-parsing of id to int b/c id fld is IntClassXtn._;
+//			fx.tst_DatCsv(fx.ary_(0, "me"));	// NOTE: testing auto-parsing of id to int b/c id fld is IntClassXtn.Instance;
 //		}
 }
 class DsvDataRdr_fxt {
@@ -164,7 +164,7 @@ class DsvDataRdr_fxt {
 		for (int i = 0; i < flds.Count(); i++) {
 			GfoFld fld = flds.Get_at(i);
 			sb.Add(fld.Key()).Add(",").Add(fld.Type().Key());
-			list.Add(sb.Xto_str_and_clear());
+			list.Add(sb.To_str_and_clear());
 		}
 	}
 	public DsvDataRdr_fxt tst_Tbls(String... expdNames) {
@@ -195,7 +195,7 @@ class DsvDataRdr_fxt {
 				if (j != 0) sb.Add("~");
 				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(row.ReadAt(j)));
 			}
-			expdList.Add(sb.Xto_str_and_clear());
+			expdList.Add(sb.To_str_and_clear());
 		}
 		for (Object[] expdRow : expdRows) {
 			if (expdRow == null) {
@@ -206,7 +206,7 @@ class DsvDataRdr_fxt {
 				if (j != 0) sb.Add("~");
 				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(expdRow[j]));
 			}
-			actlList.Add(sb.Xto_str_and_clear());
+			actlList.Add(sb.To_str_and_clear());
 		}
 		Tfds.Eq_list(expdList, actlList);
 		return this;

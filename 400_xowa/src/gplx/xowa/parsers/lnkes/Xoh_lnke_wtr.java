@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*;
-import gplx.xowa.urls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.apps.urls.*;
 public class Xoh_lnke_wtr {
 //		private Xoae_app app;
 	public Xoh_lnke_wtr(Xowe_wiki wiki) {}// this.app = wiki.Appe();}

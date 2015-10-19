@@ -46,7 +46,7 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, GfoInvkAble {
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki cur_wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		if (!fsdb_enabled) return;
 		int len = itms.Count();
-		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
+		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		Xow_wiki wiki = page.Commons_mgr().Source_wiki_or(cur_wiki);
 		Xou_cache_mgr cache_mgr = wiki.App().User().User_db_mgr().Cache_mgr();
 		for (int i = 0; i < len; i++) {

@@ -25,7 +25,6 @@ public class Bry_bfr_mkr {
 	public Bry_bfr Get_m001() {return mkr_m001.Get();}
 	public void Rls(Bry_bfr v) {
 		v.Mkr_rls();
-//			v.Mkr_mgr().Rls(v);
 	}
 	public void Reset_if_gt(int v) {
 		for (byte i = Tid_b128; i <= Tid_m001; i++)
@@ -35,12 +34,11 @@ public class Bry_bfr_mkr {
 		for (byte i = Tid_b128; i <= Tid_m001; i++)
 			mkr(i).Clear_fail_check();
 	}
-
 	public void Clear() {
 		for (byte i = Tid_b128; i <= Tid_m001; i++)
 			mkr(i).Clear();
 	}
-	Bry_bfr_mkr_mgr mkr(byte tid) {
+	private Bry_bfr_mkr_mgr mkr(byte tid) {
 		switch (tid) {
 			case Tid_b128: 	return mkr_b128;
 			case Tid_b512: 	return mkr_b512;
@@ -51,9 +49,8 @@ public class Bry_bfr_mkr {
 	}
 }
 class Bry_bfr_mkr_mgr {
-	private final Object thread_lock;
+	private final Object thread_lock = new Object();
 	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
-		thread_lock = new Object();
 		synchronized (thread_lock) {
 			this.mgr_id = mgr_id;
 			this.reset = reset;
@@ -72,7 +69,7 @@ class Bry_bfr_mkr_mgr {
 			for (int i = 0; i < ary_max; i++) {
 				Bry_bfr itm = ary[i];
 				if (itm != null) {
-					if (!itm.Mkr_idx_is_null()) throw Err_.new_wo_type("failed to clear bfr", "idx", Int_.Xto_str(i));
+					if (!itm.Mkr_idx_is_null()) throw Err_.new_wo_type("failed to clear bfr", "idx", Int_.To_str(i));
 					itm.Clear();
 				}
 				ary[i] = null;
@@ -132,18 +129,6 @@ class Bry_bfr_mkr_mgr {
 		Array_.Copy_to(free, 0, new_free, 0, free_len);
 		free = new_free;
 	}
-//		public void Rls(Bry_bfr v) {
-//			synchronized (thread_lock) {
-//				int idx = v.Mkr_itm();
-//				if (idx == -1) throw Err_mgr._.fmt_("gplx.Bry_bfr", "rls_failed", "rls called on bfr that was not created by factory");
-//				int new_ary_len = nxt_idx - 1;
-//				if (idx == new_ary_len)
-//					nxt_idx = new_ary_len;
-//				else
-//					free[free_len++] = idx;
-//				v.Mkr_(null, -1);
-//			}
-//		}
 	public void Rls(int idx) {
 		synchronized (thread_lock) {
 			if (idx == -1) throw Err_.new_wo_type("rls called on bfr that was not created by factory");

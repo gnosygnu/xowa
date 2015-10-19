@@ -19,7 +19,7 @@ package gplx.xowa.specials.search.parsers_old; import gplx.*; import gplx.xowa.*
 import gplx.core.primitives.*; import gplx.core.btries.*;
 class Xow_search_scanner {
 	private final List_adp tkns = List_adp_.new_(); private byte[] src; private int src_len, pos, txt_bgn;
-	private final Ordered_hash tmp_list = Ordered_hash_.new_(); private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final Ordered_hash tmp_list = Ordered_hash_.New(); private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Xow_search_tkn[] Scan(byte[] src) {
 		this.src = src; this.src_len = src.length;
 		tkns.Clear(); pos = 0; txt_bgn = -1; 

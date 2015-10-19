@@ -19,29 +19,29 @@ package gplx.stores; import gplx.*;
 import org.junit.*;
 public class GfoNdeRdr_read_tst {
 	@Test  public void ReadInt() {
-		rdr = rdr_(IntClassXtn._, "id", 1);
+		rdr = rdr_(IntClassXtn.Instance, "id", 1);
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
 	@Test  public void ReadIntOr() {
-		rdr = rdr_(IntClassXtn._, "id", 1);
+		rdr = rdr_(IntClassXtn.Instance, "id", 1);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 1);
 	}
 	@Test  public void ReadIntElse_minus1() {
-		rdr = rdr_(IntClassXtn._, "id", null);
+		rdr = rdr_(IntClassXtn.Instance, "id", null);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), -1);
 	}
 	@Test  public void ReadInt_parse() {
-		rdr = rdr_(StringClassXtn._, "id", "1");
+		rdr = rdr_(StringClassXtn.Instance, "id", "1");
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
 	@Test  public void ReadIntElse_parse() {
-		rdr = rdr_(StringClassXtn._, "id", "2");
+		rdr = rdr_(StringClassXtn.Instance, "id", "2");
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 2);
 	}
 	GfoNdeRdr rdr_(ClassXtn type, String key, Object val) {	// makes rdr with one row and one val
 		GfoFldList flds = GfoFldList_.new_().Add(key, type);
 		GfoNde row = GfoNde_.vals_(flds, new Object[] {val});
-		boolean parse = type == StringClassXtn._;	// assumes type is either StringClassXtn or IntClassXtn
+		boolean parse = type == StringClassXtn.Instance;	// assumes type is either StringClassXtn or IntClassXtn
 		return GfoNdeRdr_.leaf_(row, parse);
 	}
 	GfoNdeRdr rdr;

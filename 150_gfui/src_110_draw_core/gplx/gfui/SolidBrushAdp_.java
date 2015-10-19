@@ -22,7 +22,7 @@ public class SolidBrushAdp_ {
 	public static final SolidBrushAdp Black = new_(ColorAdp_.Black);
 	public static final SolidBrushAdp White = new_(ColorAdp_.White);
 	public static final SolidBrushAdp Null = new_(ColorAdp_.Null);
-	public static SolidBrushAdp new_(ColorAdp color) {return SolidBrushAdpCache._.Get_by(color);}
+	public static SolidBrushAdp new_(ColorAdp color) {return SolidBrushAdpCache.Instance.Get_by(color);}
 }
 class SolidBrushAdpCache {
 	public SolidBrushAdp Get_by(ColorAdp color) {
@@ -34,5 +34,5 @@ class SolidBrushAdpCache {
 		return rv;
 	}
 	Hash_adp hash = Hash_adp_.new_();
-	public static final SolidBrushAdpCache _ = new SolidBrushAdpCache(); SolidBrushAdpCache() {}
+	public static final SolidBrushAdpCache Instance = new SolidBrushAdpCache(); SolidBrushAdpCache() {}
 }

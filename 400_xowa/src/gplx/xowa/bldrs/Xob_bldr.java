@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*;
-import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.bldrs.langs.*;
+import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.langs.bldrs.*;
 public class Xob_bldr implements GfoInvkAble {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
 	public Xob_bldr(Xoae_app app) {
@@ -69,7 +69,7 @@ public class Xob_bldr implements GfoInvkAble {
 			}
 			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", TimeSpanAdp_.from_(time_bgn).XtoStrUiAbbrv());
 			cmd_mgr.Clear();
-			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.I.Read_line("press enter to continue");}
+			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.Instance.Read_line("press enter to continue");}
 		}
 		catch (Exception e) {
 			app.Bldr__running_(false);

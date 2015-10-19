@@ -60,7 +60,7 @@ class Indicator_html_bldr_fxt {
 	}
 	public void Test_bld(String expd) {
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-		page.Html_data().Indicators().XferAry(tmp_bfr, 0);
-		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
+		page.Html_data().Indicators().Fmt__do(tmp_bfr);
+		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
 }

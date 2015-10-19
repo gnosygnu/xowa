@@ -68,7 +68,7 @@ class Xow_domain_sorter__manual_tid implements gplx.lists.ComparerAble {
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
 		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(Xow_domain_type_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_type_.Get_type_as_bry(rhs.Domain_type_id()));
+		else										return Bry_.Compare(Xow_domain_tid_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_tid_.Get_type_as_bry(rhs.Domain_type_id()));
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
 		Object o = sort_hash.Get_by(sort_key.Val_(tid));
@@ -79,7 +79,7 @@ class Xow_domain_sorter__manual_tid implements gplx.lists.ComparerAble {
 		int[] id_ints = new int[len];
 		for (int i = 0; i < len; ++i) {
 			byte[] id_bry = id_brys[i];
-			int id_int = Xow_domain_type_.Get_type_as_tid(id_bry);
+			int id_int = Xow_domain_tid_.Get_type_as_tid(id_bry);
 			id_ints[i] = id_int;
 		}
 		return new Xow_domain_sorter__manual_tid(id_ints);
@@ -113,7 +113,7 @@ class Xow_domain_sorter__manual_lang implements gplx.lists.ComparerAble {
 		int[] id_ints = new int[len];
 		for (int i = 0; i < len; ++i) {
 			byte[] id_bry = id_brys[i];
-			int id_int = Xol_lang_itm_.Get_by_key_or_intl(id_bry).Id();
+			int id_int = Xol_lang_stub_.Get_by_key_or_intl(id_bry).Id();
 			id_ints[i] = id_int;
 		}
 		return new Xow_domain_sorter__manual_lang(id_ints);

@@ -69,6 +69,6 @@ public abstract class Json_parser__itm__base {
 	public boolean Kv__has(Json_kv[] ary, int i)			{return Kv__bry_or_empty(ary, i) != null;}
 	protected abstract void Parse_hook_nde(Json_nde sub, Json_kv[] atrs);
 	protected void Warn(String msg, Json_kv kv) {
-		Gfo_usr_dlg_.I.Warn_many("", "", msg + ": path=~{0}.~{1} excerpt=~{2}", context, kv.Key_as_bry(), Json_itm_.To_bry(tmp_bfr, cur_itm));
+		Gfo_usr_dlg_.Instance.Warn_many("", "", msg + ": path=~{0}.~{1} excerpt=~{2}", context, kv.Key_as_bry(), Json_itm_.To_bry(tmp_bfr, cur_itm));
 	}
 }

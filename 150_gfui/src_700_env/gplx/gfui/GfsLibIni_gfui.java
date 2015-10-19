@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfsLibIni_gfui implements GfsLibIni {
 	public void Ini(GfsCore core) {
-		core.AddCmd(IptCfgRegy._, "IptBndMgr_");
+		core.AddCmd(IptCfgRegy.Instance, "IptBndMgr_");
 	}
-	public static final GfsLibIni_gfui _ = new GfsLibIni_gfui(); GfsLibIni_gfui() {}
+	public static final GfsLibIni_gfui Instance = new GfsLibIni_gfui(); GfsLibIni_gfui() {}
 }

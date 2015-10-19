@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	private Xowd_wbase_qid_tbl tbl;
 	@Override public String Wkr_key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}

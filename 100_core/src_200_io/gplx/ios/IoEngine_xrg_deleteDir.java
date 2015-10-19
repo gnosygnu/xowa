@@ -25,7 +25,7 @@ public class IoEngine_xrg_deleteDir {
 	public Criteria MatchCrt() {return matchCrt;} public IoEngine_xrg_deleteDir MatchCrt_(Criteria v) {matchCrt = v; return this;} Criteria matchCrt = Criteria_.All;
 	public Criteria SubDirScanCrt() {return subDirScanCrt;} public IoEngine_xrg_deleteDir SubDirScanCrt_(Criteria v) {subDirScanCrt = v; return this;} Criteria subDirScanCrt = Criteria_.All;
 	public Console_adp UsrDlg() {return usrDlg;} public IoEngine_xrg_deleteDir UsrDlg_(Console_adp v) {usrDlg = v; return this;} Console_adp usrDlg = Console_adp_.Noop;
-	public void Exec() {IoEnginePool._.Get_by(url.Info().EngineKey()).DeleteDirDeep(this);}
+	public void Exec() {IoEnginePool.Instance.Get_by(url.Info().EngineKey()).DeleteDirDeep(this);}
 	public static IoEngine_xrg_deleteDir new_(Io_url url) {
 		IoEngine_xrg_deleteDir rv = new IoEngine_xrg_deleteDir();
 		rv.url = url;

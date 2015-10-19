@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.stores; import gplx.*;
 public class DbMaprItm {
 	public String TableName() {return tableName;} public DbMaprItm TableName_(String val) {tableName = val; return this;} private String tableName;
-	public Ordered_hash Flds() {return flds;} Ordered_hash flds = Ordered_hash_.new_();
+	public Ordered_hash Flds() {return flds;} Ordered_hash flds = Ordered_hash_.New();
 	public Hash_adp ContextFlds() {return contextFlds;} Hash_adp contextFlds = Hash_adp_.new_();
 	public Hash_adp ConstantFlds() {return constantFlds;} Hash_adp constantFlds = Hash_adp_.new_();
 	public List_adp Subs() {return subs;}

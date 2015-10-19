@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*;
 import gplx.ios.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.parsers.tmpls.*;
 public class Xobd_rdr implements Xob_cmd {
 	private Xob_bldr bldr; private Xowe_wiki wiki;
@@ -49,7 +49,7 @@ public class Xobd_rdr implements Xob_cmd {
 			while (true) {
 				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == Bry_.NotFound) break;
 				if (cur_pos < prv_pos)
-					bldr.Print_prog_msg(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.Xto_str_pad_bgn_zero((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_u8(page.Ttl_full_db()));
+					bldr.Print_prog_msg(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.To_str_pad_bgn_zero((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_u8(page.Ttl_full_db()));
 				prv_pos = cur_pos;
 				try {
 					for (int i = 0; i < wkr_ary_len; i++)
@@ -61,14 +61,14 @@ public class Xobd_rdr implements Xob_cmd {
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
 					String msg = Decimal_adp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|" + Err_.Message_gplx_log(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
 					bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
-					Console_adp__sys.I.Write_str_w_nl(msg);
+					Console_adp__sys.Instance.Write_str_w_nl(msg);
 				}
 			}
 		}
 		catch (Exception e) {
 			String msg = Err_.Message_lang(e);
 			bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
-			Console_adp__sys.I.Write_str_w_nl(msg);
+			Console_adp__sys.Instance.Write_str_w_nl(msg);
 			throw Err_.new_exc(e, "xo", "error while reading dump");
 		}
 		finally {fil.Rls();}
@@ -81,7 +81,7 @@ public class Xobd_rdr implements Xob_cmd {
 		for (int i = 0; i < wkr_ary_len; i++)
 			wkr_ary[i].Wkr_print();
 	}
-	public void Wkr_add(Xobd_wkr wkr) {wkrs.Add(wkr.Wkr_key(), wkr);} private Ordered_hash wkrs = Ordered_hash_.new_();
+	public void Wkr_add(Xobd_wkr wkr) {wkrs.Add(wkr.Wkr_key(), wkr);} private Ordered_hash wkrs = Ordered_hash_.New();
 	public Xobd_wkr Wkr_get(String key) {return (Xobd_wkr)wkrs.Get_by(key);}
 	public Xobd_parser Page_parser_assert() {
 		if (page_parser == null) {
@@ -91,7 +91,7 @@ public class Xobd_rdr implements Xob_cmd {
 		return page_parser;
 	}	private Xobd_parser page_parser;
 	public static Io_url Find_fil_by(Io_url dir, String filter) {
-		Io_url[] fil_ary = Io_mgr.I.QueryDir_args(dir).FilPath_(filter).ExecAsUrlAry();
+		Io_url[] fil_ary = Io_mgr.Instance.QueryDir_args(dir).FilPath_(filter).ExecAsUrlAry();
 		int fil_ary_len = fil_ary.length;
 		return fil_ary_len == 0 ? null : fil_ary[fil_ary_len - 1];	// return last
 	}

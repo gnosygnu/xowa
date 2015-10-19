@@ -17,20 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.ios.*; import gplx.core.net.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apis.*;
+import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apps.apis.*;
+import gplx.xowa.apps.gfs.*;
 import gplx.xowa.bldrs.css.*;
-import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.*;
-import gplx.xowa.wms.*;
-import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.bridges.*;
+import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;	
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.bridges.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
+import gplx.xowa.langs.*; 
+import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.users.*;
-public interface Xoa_app {
-	Xoa_app_type			App_type();
+public interface Xoa_app extends GfoInvkAble {
+	boolean					Tid_is_edit();
+	Xoa_app_mode			Mode();
 	Xoapi_root				Api_root();
 	Xoa_fsys_mgr			Fsys_mgr();
 	Xoa_wiki_mgr			Wiki_mgri();
+	Xoa_lang_mgr			Lang_mgr();
+	Xoa_gfs_mgr				Gfs_mgr();
 	Xof_cache_mgr			File__cache_mgr();
 	Xof_img_mgr				File__img_mgr();
 	Io_download_fmt			File__download_fmt();
@@ -39,14 +43,17 @@ public interface Xoa_app {
 	Xoh_lnki_bldr			Html__lnki_bldr();
 	Xoa_css_extractor		Html__css_installer();
 	Xoh_bridge_mgr			Html__bridge_mgr();
-	Xoa_meta_mgr			Meta_mgr();
 	Xou_user				User();
 	Xowmf_mgr				Wmf_mgr();
 	boolean					Xwiki_mgr__missing(byte[] domain);
+	Xoa_sitelink_mgr		Xwiki_mgr__sitelink_mgr();
+	Xow_xwiki_itm_parser	Xwiki_mgr__itm_parser();
 	boolean					Bldr__running(); void Bldr__running_(boolean v);
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Url_encoder_mgr			Utl__encoder_mgr();
 	Json_parser				Utl__json_parser();
 	Gfo_inet_conn			Utl__inet_conn();
+	Xoa_meta_mgr			Meta_mgr();
+	Xoa_site_cfg_mgr		Site_cfg_mgr();
 }	

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Lst_pfunc_lstx extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_lstx;}
@@ -29,5 +29,5 @@ public class Lst_pfunc_lstx extends Pf_func_base {
 		byte[] sect_replace = Pf_func_.Eval_arg_or(ctx, src, caller, self, args_len, 1, Lst_pfunc_wkr.Null_arg);
 		new Lst_pfunc_wkr().Init_exclude(src_ttl_bry, sect_exclude, sect_replace).Exec(bfr, ctx);
 	}
-	public static final Lst_pfunc_lstx _ = new Lst_pfunc_lstx(); Lst_pfunc_lstx() {}
+	public static final Lst_pfunc_lstx Instance = new Lst_pfunc_lstx(); Lst_pfunc_lstx() {}
 }

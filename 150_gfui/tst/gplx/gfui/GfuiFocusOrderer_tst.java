@@ -69,7 +69,7 @@ public class GfuiFocusOrderer_tst {
 	GfuiElem sub_(GfuiElem owner, int i) {return owner.SubElems().Get_at(i);}
 	void ini_Subs(GfuiElem owner, List_adp list, PointAdp... points) {
 		for (int i = 0; i < points.length; i++) {
-			GfuiElem sub = GfuiElem_.sub_(Int_.Xto_str(i), owner);
+			GfuiElem sub = GfuiElem_.sub_(Int_.To_str(i), owner);
 			sub.Pos_(points[i]);
 			sub.UnderElem().Core().Focus_index_set(i);
 			list.Add(sub);

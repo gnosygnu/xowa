@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-import gplx.xowa.html.*; import gplx.xowa.gui.*; import gplx.xowa.pages.*;
+import gplx.xowa.htmls.*; import gplx.xowa.guis.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.parsers.*;
 public class Xox_xowa_html_cmd_tst {
 	@Before public void init() {fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
@@ -50,7 +50,7 @@ class Xox_xowa_html_cmd_fxt {
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		fxt.Page().Root_(root);
 		html_mgr.Html_wtr().Write_all(bfr, fxt.Ctx(), raw_bry, root);
-		byte[] actl = html_mgr.Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Write(html_mgr.Page_wtr_mgr(), fxt.Page(), fxt.Ctx(), bfr);
+		byte[] actl = html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(fxt.Page(), fxt.Ctx(), bfr);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

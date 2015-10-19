@@ -74,6 +74,6 @@ class Xofs_url_itm_parser {
 					break;
 			}
 		}
-		itm.Url_(url_bfr.Xto_str_and_clear());
+		itm.Url_(url_bfr.To_str_and_clear());
 	}
 }

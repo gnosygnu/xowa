@@ -20,7 +20,7 @@ public class Xou_user_mgr implements GfoInvkAble {
 	public Xou_user_mgr(Xoae_app app, Xoue_user user) {this.app = app; this.Add(user);} private Xoae_app app;
 	public void Add(Xoue_user itm) {regy.Add(itm.Key(), itm);}
 	Xoue_user GetByKey(String key) {return (Xoue_user)regy.Get_by(key);}
-	Ordered_hash regy = Ordered_hash_.new_();
+	Ordered_hash regy = Ordered_hash_.New();
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get)) {

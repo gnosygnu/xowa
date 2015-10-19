@@ -46,7 +46,7 @@ public class Scrib_core_fxt {
 	public KeyVal kv_func_(String key, int id) {return KeyVal_.new_(key, new Scrib_lua_proc(key, id));}
 	public Scrib_core_fxt Init_lib_fil(String name, String text) {
 		Io_url url = core.Fsys_mgr().Script_dir().GenSubFil(name);
-		Io_mgr.I.SaveFilStr(url, text);
+		Io_mgr.Instance.SaveFilStr(url, text);
 		return this;
 	}
 	public Scrib_core_fxt Init_server_prep_add(String v) {server.Prep_add(v); return this;}

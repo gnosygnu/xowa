@@ -45,7 +45,7 @@ public class Db_conn {
 	public void				Env_db_detach(String alias)											{engine.Env_db_detach(alias);}
 	public void				Env_vacuum()														{Exec_sql_plog_ntx("vacuuming: url=" + this.Conn_info().Xto_api(), "VACUUM;");}
 	public void				Ddl_create_tbl(Db_meta_tbl meta)									{engine.Ddl_create_tbl(meta); engine.Ddl_create_idx(Gfo_usr_dlg_.Noop, meta.Idxs());}
-	public void				Ddl_create_idx(Db_meta_idx... idxs)							{engine.Ddl_create_idx(Gfo_usr_dlg_.I, idxs);}
+	public void				Ddl_create_idx(Db_meta_idx... idxs)							{engine.Ddl_create_idx(Gfo_usr_dlg_.Instance, idxs);}
 	public void				Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Ddl_create_idx(usr_dlg, idxs);}
 	public void				Ddl_append_fld(String tbl, Db_meta_fld fld)							{engine.Ddl_append_fld(tbl, fld);}
 	public void				Ddl_delete_tbl(String tbl)											{engine.Ddl_delete_tbl(tbl);}
@@ -59,18 +59,18 @@ public class Db_conn {
 			itm.Rls();
 		}
 		engine.Conn_term();
-		Db_conn_pool.I.Del(engine.Conn_info());
+		Db_conn_pool.Instance.Del(engine.Conn_info());
 	}
 	public int				Exec_sql(String sql)			{return this.Exec_qry(Db_qry_sql.dml_(sql));}
 	public Db_rdr			Exec_sql_as_rdr_v2(String sql)	{return this.Stmt_new(Db_qry_sql.dml_(sql)).Exec_select__rls_auto();}
 	public int				Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
 	public int				Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
 	public int				Exec_sql_plog(boolean txn, String msg, String sql) {
-		Gfo_usr_dlg_.I.Plog_many("", "", msg);
+		Gfo_usr_dlg_.Instance.Plog_many("", "", msg);
 		if (txn) this.Txn_bgn(msg);
 		int rv = Exec_sql(sql);
 		if (txn) this.Txn_end();
-		Gfo_usr_dlg_.I.Plog_many("", "", "done:" + msg);
+		Gfo_usr_dlg_.Instance.Plog_many("", "", "done:" + msg);
 		return rv;
 	}
 	public int				Exec_qry(Db_qry qry)		{return Int_.cast(engine.Exec_as_obj(qry));}

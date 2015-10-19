@@ -19,9 +19,9 @@ package gplx.brys; import gplx.*;
 public class Bry_fmtr_arg_ary_dim2 implements Bry_fmtr_arg {
 	public Bry_fmtr_arg_ary_dim2 Data_(byte[][] v) {ary_dim2 = v; return this;}
 	public Bry_fmtr_arg_ary_dim2 Ary_dim2_(byte[][] v) {this.ary_dim2 = v; return this;}
-	public void XferAry(Bry_bfr trg, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		for (byte[] ary : ary_dim2)
-			trg.Add(ary);
+			bfr.Add(ary);
 	}
 	public Bry_fmtr_arg_ary_dim2() {} byte[][] ary_dim2 = new byte[0][];
 }

@@ -17,17 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 class Dg_parser {
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I; private final Bry_bfr key_bldr = Bry_bfr.reset_(32);
+	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final Bry_bfr key_bldr = Bry_bfr.reset_(32);
 	private final List_adp files = List_adp_.new_(), lines = List_adp_.new_(), words = List_adp_.new_();
 	private int next_id = 0;
 	public Dg_file[] Parse_dir(Io_url dir) {
-		Io_url[] fil_urls = Io_mgr.I.QueryDir_args(dir).Recur_(true).ExecAsUrlAry();
-		this.usr_dlg = Gfo_usr_dlg_.I;
+		Io_url[] fil_urls = Io_mgr.Instance.QueryDir_args(dir).Recur_(true).ExecAsUrlAry();
+		this.usr_dlg = Gfo_usr_dlg_.Instance;
 		files.Clear();
 		int len = fil_urls.length;
 		for (int i = 0; i < len; ++i) {
 			Io_url fil_url = fil_urls[i];
-			byte[] fil_src = Io_mgr.I.LoadFilBry_loose(fil_url);
+			byte[] fil_src = Io_mgr.Instance.LoadFilBry_loose(fil_url);
 			Dg_file file = Parse_fil(i, fil_url.GenRelUrl_orEmpty(dir), fil_src);
 			if (file != null) files.Add(file);
 		}
@@ -77,7 +77,7 @@ class Dg_parser {
 				break;
 			}
 		}
-		byte[] key = key_bldr.Add_int_variable(file_id).Add_byte_dot().Add_int_variable(line_idx).Xto_bry_and_clear();
+		byte[] key = key_bldr.Add_int_variable(file_id).Add_byte_dot().Add_int_variable(line_idx).To_bry_and_clear();
 		return new Dg_rule(file_id, ++next_id, line_idx, Dg_rule.Tid_rule, key, score, Ary_new_by_ary((byte[][])words.To_ary_and_clear(byte[].class)));
 	}
 	private static Dg_word[] Ary_new_by_ary(byte[][] ary) {

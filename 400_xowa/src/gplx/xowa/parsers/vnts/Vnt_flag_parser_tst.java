@@ -38,6 +38,7 @@ public class Vnt_flag_parser_tst {
 	@Test   public void Lang__one()				{fxt.Test_parse("zh-hans"				, "S;zh-hans");}
 	@Test   public void Lang__many()			{fxt.Test_parse("zh-cn;zh-hk"			, "S;zh-cn;zh-hk");}
 	@Test   public void Lang__many__ws()		{fxt.Test_parse(" zh-cn ; zh-hk "		, "S;zh-cn;zh-hk");}
+	@Test   public void Lang__many__dupe()		{fxt.Test_parse("zh-cn;zh-cn"			, "S;zh-cn");}
 	@Test   public void Lang__zap__codes()		{fxt.Test_parse("+;S;zh-hans;"			, "zh-hans");}
 }
 class Vnt_flag_parser_fxt {
@@ -50,6 +51,6 @@ class Vnt_flag_parser_fxt {
 		parser.Parse(codes, langs, vnt_regy, src, 0, src.length);
 		codes.To_bfr__dbg(bfr);
 		langs.To_bfr__dbg(bfr);
-		Tfds.Eq_str(expd, bfr.Xto_str_and_clear());
+		Tfds.Eq_str(expd, bfr.To_str_and_clear());
 	}
 }

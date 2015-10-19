@@ -16,21 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.tdbs.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.bldrs.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, GfoInvkAble {
 	protected Xob_ctg_v1_base() {}	// TEST:needed for fxt
 	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
 	public abstract Io_sort_cmd Make_sort_cmd();
-	public Ordered_hash Wkr_hooks() {return wkr_hooks;} private Ordered_hash wkr_hooks = Ordered_hash_.new_bry_();
+	public Ordered_hash Wkr_hooks() {return wkr_hooks;} private Ordered_hash wkr_hooks = Ordered_hash_.New_bry();
 	public void Wkr_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir(Xotdb_dir_info_.Name_category));
 		Bry_bfr tmp_bfr = bldr.App().Utl__bfr_mkr().Get_b512();
-		Xol_lang lang = wiki.Lang();
+		Xol_lang_itm lang = wiki.Lang();
 		wkr_hooks_add(tmp_bfr, lang.Ns_names());
 		wkr_hooks_add(tmp_bfr, lang.Ns_aliases());
 		wkr_hooks_add(tmp_bfr, Xow_ns_.Canonical);
@@ -87,14 +87,14 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	public static void Process_ctg_row(Gfo_fld_wtr fld_wtr, int dump_fil_len, Io_url_gen dump_url_gen, int page_id, byte[] src, int src_len, int bgn, int end) {
 		int len = end - bgn;
 		Bry_bfr dump_bfr = fld_wtr.Bfr();
-		if (dump_bfr.Len() + row_fixed_len + len > dump_fil_len) Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
+		if (dump_bfr.Len() + row_fixed_len + len > dump_fil_len) Io_mgr.Instance.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
 		byte[] ttl = Bry_.Mid(src, bgn, end);
 		Bry_.Replace_reuse(ttl, Byte_ascii.Space, Byte_ascii.Underline);
 		fld_wtr.Write_bry_escape_fld(ttl).Write_int_base85_len5_row(page_id);
 	}
 	public void Wkr_end() {
 		this.Term_dump(this.Make_sort_cmd());
-		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.Instance.DeleteDirDeep(temp_dir);
 	}
 	private Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	Btrie_fast_mgr trie = Btrie_fast_mgr.cs().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
@@ -137,7 +137,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	}
 	private void wkr_hooks_add(Bry_bfr tmp_bfr, byte[] word) {
 		tmp_bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Brack_bgn).Add(word).Add_byte(Byte_ascii.Colon);
-		byte[] key = tmp_bfr.Xto_bry_and_clear();
+		byte[] key = tmp_bfr.To_bry_and_clear();
 		if (!wkr_hooks.Has(key)) wkr_hooks.Add(key, key);
 	}	
 	static final String GRP_KEY = "xowa.bldr.make_ctg";

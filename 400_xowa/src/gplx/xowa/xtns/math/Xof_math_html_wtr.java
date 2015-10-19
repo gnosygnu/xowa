@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.html.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.vnts.*;
 public class Xof_math_html_wtr {
 	private Xof_math_itm tmp_math_itm = new Xof_math_itm();
 	private Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
@@ -36,15 +36,20 @@ public class Xof_math_html_wtr {
 			bfr.Add_str(tmp_math_itm.Png_url().To_http_file_str());
 			bfr.Add(Xoh_consts.__inline_quote);
 		}
-		else {
-			int id = page.File_math().Count();
-			Xof_math_itm new_math_itm = tmp_math_itm.Clone().Id_(id);
-			Bry_fmtr math_fmtr = renderer_is_latex ? math_fmtr_latex : math_fmtr_mathjax;
-			math_fmtr.Bld_bfr_many(tmp_bfr, id, math_bry);
-			bfr.Add_bfr_and_clear(tmp_bfr);
-			if (enabled && renderer_is_latex)	// NOTE: only generate images if math is enabled; otherwise "downloading" prints at bottom of screen, but no action (also a lot of file IO)
-				page.File_math().Add(new_math_itm);
-		}
+		else
+			Write_for_mathjax(bfr, page, enabled, renderer_is_latex, math_bry, tmp_bfr);
+	}
+	private void Write_for_mathjax(Bry_bfr bfr, Xoae_page page, boolean enabled, boolean renderer_is_latex, byte[] math_bry, Bry_bfr tmp_bfr) {
+		int id = page.File_math().Count();
+		Xof_math_itm new_math_itm = tmp_math_itm.Clone().Id_(id);
+		Bry_fmtr math_fmtr = renderer_is_latex ? math_fmtr_latex : math_fmtr_mathjax;
+		boolean armor_math = page.Lang().Vnt_mgr().Enabled() && !renderer_is_latex;	// REF.MW:LangConverter.php|armourMath
+		if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_bgn);
+		math_fmtr.Bld_bfr_many(tmp_bfr, id, math_bry);
+		bfr.Add_bfr_and_clear(tmp_bfr);
+		if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_end);
+		if (enabled && renderer_is_latex)	// NOTE: only generate images if math is enabled; otherwise "downloading" prints at bottom of screen, but no action (also a lot of file IO)
+			page.File_math().Add(new_math_itm);
 	}
 	private static byte[] Escape_tex(Bry_bfr tmp_bfr, boolean mathjax, byte[] bry) {return Escape_tex(false, tmp_bfr, mathjax, bry, 0, bry.length);}
 	private static byte[] Escape_tex(boolean write_to_bfr, Bry_bfr bfr, boolean mathjax, byte[] bry, int bgn, int end) {
@@ -80,6 +85,6 @@ public class Xof_math_html_wtr {
 		if (write_to_bfr)
 			return null;
 		else
-			return dirty ? bfr.Xto_bry_and_clear() : bry;
+			return dirty ? bfr.To_bry_and_clear() : bry;
 	}
 }

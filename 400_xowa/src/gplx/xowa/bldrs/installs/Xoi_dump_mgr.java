@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*;
-import gplx.xowa.wms.dumps.*;
+import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_dump_mgr implements GfoInvkAble {
 	public String[] Server_urls() {return server_urls;} private String[] server_urls = String_.Ary(Xowm_dump_file_.Server_wmf_https, Xowm_dump_file_.Server_your_org, Xowm_dump_file_.Server_c3sl, Xowm_dump_file_.Server_masaryk);
 	public String[] Custom_cmds() {return custom_cmds;} private String[] custom_cmds = String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
@@ -52,16 +52,16 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_wiki_storage_type))					return Wiki_storage_type_str(wiki_storage_type);
 		else if	(ctx.Match(k, Invk_wiki_storage_type_))					wiki_storage_type = Wiki_storage_type_parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_wiki_storage_type_list))				return Options_storage_type_list;
-		else if	(ctx.Match(k, Invk_css_wiki_update))					return Yn.Xto_str(css_wiki_update);
+		else if	(ctx.Match(k, Invk_css_wiki_update))					return Yn.To_str(css_wiki_update);
 		else if	(ctx.Match(k, Invk_css_wiki_update_))					css_wiki_update = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_css_commons_download))				return Yn.Xto_str(css_commons_download);
+		else if	(ctx.Match(k, Invk_css_commons_download))				return Yn.To_str(css_commons_download);
 		else if	(ctx.Match(k, Invk_css_commons_download_))				css_commons_download = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_delete_xml_file))					return Yn.Xto_str(delete_xml_file);
+		else if	(ctx.Match(k, Invk_delete_xml_file))					return Yn.To_str(delete_xml_file);
 		else if	(ctx.Match(k, Invk_delete_xml_file_))					delete_xml_file = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_search_version))						return Options_search_version_str(search_version);
 		else if	(ctx.Match(k, Invk_search_version_))					search_version = Options_search_version_parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_search_version_list))				return Options_search_version_list;
-		else if	(ctx.Match(k, Invk_import_bz2_by_stdout))				return Yn.Xto_str(import_bz2_by_stdout);
+		else if	(ctx.Match(k, Invk_import_bz2_by_stdout))				return Yn.To_str(import_bz2_by_stdout);
 		else if	(ctx.Match(k, Invk_import_bz2_by_stdout_))				import_bz2_by_stdout = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

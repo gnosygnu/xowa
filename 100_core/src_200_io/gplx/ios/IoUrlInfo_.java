@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 public class IoUrlInfo_ {
-	public static final IoUrlInfo Nil = IoUrlInfo_nil._;
-	public static final IoUrlInfo Wnt = IoUrlInfo_wnt._;
-	public static final IoUrlInfo Lnx = IoUrlInfo_lnx._;
+	public static final IoUrlInfo Nil = IoUrlInfo_nil.Instance;
+	public static final IoUrlInfo Wnt = IoUrlInfo_wnt.Instance;
+	public static final IoUrlInfo Lnx = IoUrlInfo_lnx.Instance;
 	public static final IoUrlInfo Mem = IoUrlInfo_mem.new_("mem", IoEngine_.MemKey);
 
 	public static IoUrlInfo mem_(String key, String engineKey) {return IoUrlInfo_mem.new_(key, engineKey);}

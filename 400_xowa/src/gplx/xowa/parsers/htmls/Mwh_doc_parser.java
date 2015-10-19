@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*;
-import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Mwh_doc_parser {
 	private final Mwh_doc_mgr dom_mgr = new Mwh_doc_mgr(16);
 	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
 	private final List_adp nde_stack = List_adp_.new_();
+	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance; private final Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
 	private byte[] src; private int src_end;
 	private Mwh_doc_wkr wkr;
 	private Hash_adp_bry nde_regy;
@@ -34,11 +35,28 @@ public class Mwh_doc_parser {
 		int pos = txt_bgn = src_bgn;
 		nde_uid = cur_nde_tid = -1;
 		cur_nde = null;
+
 		while (pos < src_end) {
-			if (src[pos] == Byte_ascii.Angle_bgn)	// "<": possible nde start
-				pos = Parse_nde(pos);
-			else									// else, just increment
-				++pos;
+			byte b = src[pos];
+			switch (b) {
+				case Byte_ascii.Angle_bgn:	// "<": possible nde start
+					pos = Parse_nde(pos);
+					break;
+				case Byte_ascii.Amp:		// "&": check for entity; EX: &nbsp; in sr-ec -> sr-el
+					Xop_tkn_itm tkn = amp_mgr.Parse_as_tkn(tkn_mkr, src, src_end, pos, pos + 1);
+					if (tkn == null)
+						++pos;
+					else {
+						wkr.On_txt_end(this, src, cur_nde_tid, txt_bgn, pos);
+						wkr.On_entity_end(this, src, cur_nde_tid, tkn.Src_bgn(), tkn.Src_end());
+						pos = tkn.Src_end();
+						txt_bgn = pos;
+					}
+					break;
+				default:					// else, just increment
+					++pos;
+					break;
+			}
 		}
 		if (src_end != txt_bgn) wkr.On_txt_end(this, src, cur_nde_tid, txt_bgn, pos);
 	}
@@ -142,10 +160,45 @@ public class Mwh_doc_parser {
 					break;
 				case Nde_end_tid__ws:
 				case Nde_end_tid__slash:
-				case Nde_end_tid__backslash: // handled above
-					pos = atr_parser.Parse(wkr, nde_uid, cur_nde_tid, src, pos, src_end);
-					nde_end_tid = atr_parser.Nde_end_tid();
-					txt_bgn = pos;
+				case Nde_end_tid__backslash:
+					// look for ">" or "/>"
+					int tmp_pos = pos, atrs_end = src_end, head_end = src_end;
+					boolean loop = true;
+					while (loop) {
+						byte b = src[tmp_pos];
+						switch (b) {
+							// angle_end -> stop iterating
+							case Byte_ascii.Angle_end:
+								atrs_end = tmp_pos;
+								head_end = tmp_pos + 1;
+								nde_end_tid = Mwh_doc_parser.Nde_end_tid__gt;
+								loop = false;
+								break;
+							// slash -> check for "/>" or " / "
+							case Byte_ascii.Slash:
+								int nxt_pos = tmp_pos + 1;
+								if		(nxt_pos == src_end) {
+									nde_end_tid = Mwh_doc_parser.Nde_end_tid__invalid;
+									loop = false;
+								}
+								else if (src[nxt_pos] == Byte_ascii.Angle_end) {
+									atrs_end = tmp_pos;
+									head_end = tmp_pos + 2;
+									nde_end_tid = Mwh_doc_parser.Nde_end_tid__inline;
+									loop = false;
+								}				
+								break;
+						}
+						if (loop) {
+							++tmp_pos;
+							if (tmp_pos == src_end) break;
+						}
+						else
+							break;
+					}
+					atr_parser.Parse(wkr, nde_uid, cur_nde_tid, src, pos, atrs_end);
+					pos = head_end;
+					txt_bgn = head_end;
 					break;
 			}
 			switch (nde_end_tid) {

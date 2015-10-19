@@ -22,7 +22,7 @@ public class Bry_split_ {
 	public static byte[][] Split(byte[] src, byte dlm) {return Split(src, dlm, false);}
 	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
 		synchronized (thread_lock) {
-			Bry_split_wkr__to_ary wkr = Bry_split_wkr__to_ary.I;
+			Bry_split_wkr__to_ary wkr = Bry_split_wkr__to_ary.Instance;
 			Split(src, 0, src == null ? 0 : src.length, dlm, trim, wkr);
 			return wkr.To_ary();
 		}
@@ -128,5 +128,5 @@ class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
 			return (byte[][])list.To_ary_and_clear(byte[].class);
 		}
 	}
-        public static final Bry_split_wkr__to_ary I = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}
+        public static final Bry_split_wkr__to_ary Instance = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}
 }

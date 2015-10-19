@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
-	private Ordered_hash itms = Ordered_hash_.new_();
+	private Ordered_hash itms = Ordered_hash_.New();
 	private Xoa_fmtr_sort_wkr wkr = new Xoa_fmtr_sort_wkr();
 	private Gfo_sort_able sort_able;
 	public Xoa_fmtr_sort_mgr(Gfo_sort_able sort_able) {this.sort_able = sort_able;}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*;
 import gplx.xowa.parsers.*;
 class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 	private Xoh_wtr_ctx hctx; private Imap_map map; private Imap_xtn_mgr xtn_mgr;
@@ -32,7 +32,7 @@ class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 		this.img_cls = img_cls;
 		this.img_href = img_href;
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Bry_fmtr fmtr = Imap_html_fmtrs.Img_anchor_none;
 		byte[] anchor_href = Bry_.Empty, anchor_text = Bry_.Empty;
 		Imap_itm_dflt itm_dflt = map.Dflt();

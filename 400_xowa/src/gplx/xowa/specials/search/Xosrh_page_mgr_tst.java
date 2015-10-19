@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*;
 public class Xosrh_page_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrh_page_mgr_fxt fxt = new Xosrh_page_mgr_fxt();
 	@Test   public void Basic() {
@@ -49,7 +49,7 @@ class Xosrh_page_mgr_fxt {
 			Base85_utl.XtoStrByAry(i, id_bry, 0, 5);
 			tmp_itm.Ns_id_(Xow_ns_.Id_main).Init(i, Bry_.To_a7_bry(i, 0), false, 10, 0, i - bgn);
 			Xotdb_page_itm_.Txt_id_save(tmp_bfr, tmp_itm);
-			hive_mgr.Create(id_bry, tmp_bfr.Xto_bry_and_clear(), null);
+			hive_mgr.Create(id_bry, tmp_bfr.To_bry_and_clear(), null);
 		}
 		return this;
 	}

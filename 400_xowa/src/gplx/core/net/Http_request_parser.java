@@ -121,7 +121,7 @@ public class Http_request_parser {
 			if (Bry_.Has_at_bgn(line, content_type_boundary)) break;
 			tmp_bfr.Add(line);
 		}
-		byte[] val = tmp_bfr.Xto_bry_and_clear();
+		byte[] val = tmp_bfr.To_bry_and_clear();
 		post_data_hash.Add(key, val);
 		return line;
 	}

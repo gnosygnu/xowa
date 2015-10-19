@@ -25,6 +25,6 @@ public class Sql_select {
 	public void Add(String fldName, String alias) {flds.Add(Sql_select_fld_.new_fld(Sql_select_fld_base.Tbl_null, fldName, alias));}
 	public void Add(Sql_select_fld_base fld) {flds.Add(fld);}
 
-	public static final Sql_select All = all_(); static Sql_select all_() {Sql_select rv = new_(); rv.Add(Sql_select_fld_wild._); return rv;}
+	public static final Sql_select All = all_(); static Sql_select all_() {Sql_select rv = new_(); rv.Add(Sql_select_fld_wild.Instance); return rv;}
 	public static Sql_select new_() {return new Sql_select();} Sql_select() {}
 }

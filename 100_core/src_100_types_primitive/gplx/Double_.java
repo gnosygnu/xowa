@@ -36,15 +36,15 @@ public class Double_ {
 		try {String s = String_.as_(v); return s == null ? Double_.cast(v) : Double_.parse(s);}
 		catch (Exception e) {throw Err_.new_cast(e, double.class, v);}
 	}
-	public static String Xto_str(double v) {
+	public static String To_str(double v) {
 				int v_int = (int)v;
-		return v - v_int == 0 ? Int_.Xto_str(v_int) : Double.toString(v);
+		return v - v_int == 0 ? Int_.To_str(v_int) : Double.toString(v);
 			}
-	public static String Xto_str_loose(double v) {
+	public static String To_str_loose(double v) {
 		int v_as_int = (int)v;			
 		return v == v_as_int
-			? Int_.Xto_str(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
-			: Float_.Xto_str((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
+			? Int_.To_str(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
+			: Float_.To_str((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
 	}
 	public static int Compare(double lhs, double rhs) {
 		if		(lhs == rhs) 	return CompareAble_.Same;

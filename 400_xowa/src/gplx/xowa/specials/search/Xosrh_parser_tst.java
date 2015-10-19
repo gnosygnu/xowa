@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xosearch_parser_fxt fxt = new Xosearch_parser_fxt();
 	@Test   public void Scan_word() 			{fxt.Test_scan("abc", "abc");}
@@ -62,7 +62,7 @@ class Xosearch_searcher_fxt {
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 			mgr = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_search_ttl);
 			tmp_bfr = Bry_bfr.reset_(255);
-			parser = Xosrh_parser._;
+			parser = Xosrh_parser.Instance;
 		}
 		return this;
 	}
@@ -79,7 +79,7 @@ class Xosearch_searcher_fxt {
 			tmp_bfr.Add_byte(Byte_ascii.Semic);
 			tmp_bfr.Add_base85_len_5(0);
 		}
-		mgr.Create(wiki.Ns_mgr().Ns_main(), ttl_bry, tmp_bfr.Xto_bry_and_clear(), null);
+		mgr.Create(wiki.Ns_mgr().Ns_main(), ttl_bry, tmp_bfr.To_bry_and_clear(), null);
 	}
 	public void Test_search(String ttl_str, int... expd) {
 		byte[] ttl_bry = Bry_.new_a7(ttl_str);
@@ -93,8 +93,8 @@ class Xosearch_searcher_fxt {
 class Xosearch_parser_fxt {
 	public Xosearch_parser_fxt Clear() {
 		if (parser == null) {
-			parser = Xosrh_parser._;
-			matches = Ordered_hash_.new_bry_();
+			parser = Xosrh_parser.Instance;
+			matches = Ordered_hash_.New_bry();
 		}
 		matches.Clear();
 		return this;
@@ -134,12 +134,12 @@ class Xosearch_parser_fxt {
 	}
 	public void Test_scan(String raw, String... expd) {
 		byte[] src = Bry_.new_a7(raw);
-		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner._.Scan(src);
+		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner.Instance.Scan(src);
 		Tfds.Eq_ary(expd, To_strings(src, actl_itms));
 	}
 	public void Test_scan_tids(String raw, byte... expd) {
 		byte[] src = Bry_.new_a7(raw);
-		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner._.Scan(src);
+		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner.Instance.Scan(src);
 		Tfds.Eq_ary(expd, To_tids(actl_itms));
 	}
 	String[] To_strings(byte[] src, Xosrh_qry_tkn[] ary) {

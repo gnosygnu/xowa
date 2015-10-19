@@ -52,5 +52,5 @@ public class Db_engine__mem implements Db_engine {
 		return mem_tbl.Meta().Flds_has(fld);
 	}
 //		public boolean			Meta_fld_exists(String name)					{return tbl_hash.Has(name);}
-        public static final Db_engine__mem _ = new Db_engine__mem(); Db_engine__mem() {}
+        public static final Db_engine__mem Instance = new Db_engine__mem(); Db_engine__mem() {}
 }

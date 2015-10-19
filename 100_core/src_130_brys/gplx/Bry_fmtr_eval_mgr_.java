@@ -22,6 +22,6 @@ public class Bry_fmtr_eval_mgr_ {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		Bry_fmtr fmtr = Bry_fmtr.tmp_();
 		fmtr.Eval_mgr_(eval_mgr).Fmt_(fmt).Bld_bfr_none(bfr);
-		return Io_url_.new_any_(bfr.Xto_str_and_clear());
+		return Io_url_.new_any_(bfr.To_str_and_clear());
 	}
 }

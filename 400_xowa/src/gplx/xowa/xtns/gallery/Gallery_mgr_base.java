@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.core.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.files.*; import gplx.xowa.htmls.hdumps.abrvs.*; import gplx.xowa.htmls.hdumps.core.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
 	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
 	private Gallery_img_pad_fmtr_arg__basic img_pad_fmtr__basic = new Gallery_img_pad_fmtr_arg__basic(); private Gallery_img_pad_fmtr_arg__hdump img_pad_fmtr__hdump = new Gallery_img_pad_fmtr_arg__hdump();
@@ -63,7 +63,7 @@ public abstract class Gallery_mgr_base {
 			page.Hdump_data().Imgs_add(new Xohd_data_itm__gallery_mgr(gallery_uid, max_width));
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
-		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).Xto_bry_and_clear();
+		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).To_bry_and_clear();
 		Box_hdr_write(bfr, wiki.Appe().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
 		byte[] box_caption = xnde.Atr_caption();
 		if (Bry_.Len_gt_0(box_caption)) box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
@@ -91,7 +91,7 @@ public abstract class Gallery_mgr_base {
 			xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_gallery_v2);
 		}
 		int img_uid = xfer_itm.Html_uid();
-		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).Xto_bry_and_clear();
+		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).To_bry_and_clear();
 		byte[] itm_html = Bry_.Empty;
 		int html_w_expand = xfer_itm.Html_w();
 		int html_h_expand = xfer_itm.Html_h();
@@ -131,7 +131,7 @@ public abstract class Gallery_mgr_base {
 			itm_div1_fmtr.Bld_bfr_many(tmp_bfr, vpad_fmtr.Init(img_uid, vpad));	// <div style="margin:~{vpad}px auto;">
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, hctx, src, lnki, xfer_itm, alt);
 			tmp_bfr.Add(itm_divs_end_bry);
-			itm_html = tmp_bfr.Xto_bry_and_clear();
+			itm_html = tmp_bfr.To_bry_and_clear();
 		}
 
 		byte[] show_filenames_link = Bry_.Empty;
@@ -146,8 +146,8 @@ public abstract class Gallery_mgr_base {
 		itm_li_bgn_fmtr.Bld_bfr_many(bfr, gallery_li_id, box_w_fmtr_arg.Init(img_uid, itm_div_width));
 		bfr.Add(itm_html);
 		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, true, itm_caption);
-		itm_caption = tmp_bfr.Xto_bry_and_clear();
-		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).Xto_bry_and_clear();
+		itm_caption = tmp_bfr.To_bry_and_clear();
+		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).To_bry_and_clear();
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
@@ -187,7 +187,7 @@ public abstract class Gallery_mgr_base {
 			tmp_bfr.Add_byte_space();
 			tmp_bfr.Add(trailer);
 		}
-		return tmp_bfr.Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_clear();
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, List_adp xatr_list, boolean hctx_is_hdump, int uid) {
 		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);
@@ -204,10 +204,10 @@ public abstract class Gallery_mgr_base {
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {
-				Xop_xatr_itm xatr = (Xop_xatr_itm)xatr_list.Get_at(i);
+				Mwh_atr_itm xatr = (Mwh_atr_itm)xatr_list.Get_at(i);
 				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid_ul, src, xatr)) continue;
 				byte[] key = xatr.Key_bry();
-				byte[] val = xatr.Val_as_bry(src);
+				byte[] val = xatr.Val_as_bry();
 				Html_wtr.Write_atr_bry(bfr, key, val);
 			}
 		}

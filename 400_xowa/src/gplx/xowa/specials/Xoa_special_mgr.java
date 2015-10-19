@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 public class Xoa_special_mgr implements GfoInvkAble {
-	private Ordered_hash hash = Ordered_hash_.new_();
+	private Ordered_hash hash = Ordered_hash_.New();
 	public Xoa_special_mgr() {
 		hash.Add(gplx.xowa.xtns.wdatas.specials.Wdata_itemByTitle_cfg.Key, new gplx.xowa.xtns.wdatas.specials.Wdata_itemByTitle_cfg());
 	}

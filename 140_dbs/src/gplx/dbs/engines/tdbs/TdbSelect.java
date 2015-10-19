@@ -44,12 +44,12 @@ class TdbSelectWkr implements Db_qryWkr {
 		}
 		return rv;
 	}
-	public static final TdbSelectWkr _ = new TdbSelectWkr(); TdbSelectWkr() {}
+	public static final TdbSelectWkr Instance = new TdbSelectWkr(); TdbSelectWkr() {}
 }
 class TdbGroupByWkr {
 	public static GfoNdeList GroupByExec(Db_qry__select_cmd select, GfoNdeList selectRows, TdbTable tbl) {
 		GfoNdeList rv = GfoNdeList_.new_();
-		Ordered_hash groupByHash = Ordered_hash_.new_();
+		Ordered_hash groupByHash = Ordered_hash_.New();
 		List_adp groupByFlds = select.GroupBy().Flds();
 		GfoFldList selectFldsForNewRow = select.Cols().Flds().XtoGfoFldLst(tbl);
 		Sql_select_fld_list selectFlds = select.Cols().Flds();
@@ -85,7 +85,7 @@ class TdbGroupByWkr {
 			}
 			else {
 				if (o == null) {
-					Ordered_hash nextHash = Ordered_hash_.new_();
+					Ordered_hash nextHash = Ordered_hash_.New();
 					curHash.Add(val, nextHash);
 					curHash = nextHash;
 				}

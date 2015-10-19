@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
 public class Xob_category_registry_sql_tst {
 	@Before	public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xob_category_registry_sql_fxt fxt = new Xob_category_registry_sql_fxt();
 	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();}
@@ -47,7 +47,7 @@ class Xob_category_registry_sql_fxt {
 	}
 	public void Test_ids(int[] expd) {
 		Io_url rslts_dir = Xob_category_registry_sql.Tmp_dir(wiki);
-		String rslts_txt = Io_mgr.I.LoadFilStr(Io_mgr.I.QueryDir_fils(rslts_dir)[0]);
+		String rslts_txt = Io_mgr.Instance.LoadFilStr(Io_mgr.Instance.QueryDir_fils(rslts_dir)[0]);
 		int[] actl = Parse_rslts_txt(rslts_txt);
 		Tfds.Eq_ary(expd, actl);
 	}

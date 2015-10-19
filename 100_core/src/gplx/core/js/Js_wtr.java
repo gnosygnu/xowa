@@ -21,8 +21,8 @@ public class Js_wtr {
 	private int arg_idx = 0, ary_idx = 0;
 	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Quote;
 	public void Clear()							{bfr.Clear();}
-	public String To_str()						{return bfr.Xto_str();}
-	public String To_str_and_clear()			{return bfr.Xto_str_and_clear();}
+	public String To_str()						{return bfr.To_str();}
+	public String To_str_and_clear()			{return bfr.To_str_and_clear();}
 	public Js_wtr Func_init(String name) {return Func_init(Bry_.new_u8(name));}
 	public Js_wtr Func_init(byte[] name) {
 		bfr.Add(name).Add_byte(Byte_ascii.Paren_bgn);

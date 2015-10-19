@@ -46,7 +46,7 @@ public class Xop_lxr_mgr {
 			lxr.Init_by_wiki(wiki, trie);
 		}
 	}
-	public void Init_by_lang(Xol_lang lang) {
+	public void Init_by_lang(Xol_lang_itm lang) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xop_lxr lxr = ary[i];
@@ -55,53 +55,53 @@ public class Xop_lxr_mgr {
 	}
 	public static Xop_lxr_mgr new_tmpl_() {
 		return new Xop_lxr_mgr(new Xop_lxr[] 
-		{ Xop_pipe_lxr._, new Xop_eq_lxr(true), Xop_colon_lxr._, Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
-		, Xop_curly_bgn_lxr._, Xop_curly_end_lxr._
-		, Xop_brack_bgn_lxr._, Xop_brack_end_lxr._
-		, Xop_comm_lxr._
-		, Xop_xnde_lxr._	// needed for xtn, noinclude, etc.
-		, Xop_under_lxr._
-		, gplx.xowa.xtns.translates.Xop_tvar_lxr._
-		, Xop_cr_lxr._		// always ignore \r; DATE:2014-03-02
+		{ Xop_pipe_lxr.Instance, new Xop_eq_lxr(true), Xop_colon_lxr.Instance, Xop_space_lxr.Instance, Xop_tab_lxr.Instance, Xop_nl_lxr.Instance
+		, Xop_curly_bgn_lxr.Instance, Xop_curly_end_lxr.Instance
+		, Xop_brack_bgn_lxr.Instance, Xop_brack_end_lxr.Instance
+		, Xop_comm_lxr.Instance
+		, Xop_xnde_lxr.Instance	// needed for xtn, noinclude, etc.
+		, Xop_under_lxr.Instance
+		, gplx.xowa.xtns.translates.Xop_tvar_lxr.Instance
+		, Xop_cr_lxr.Instance		// always ignore \r; DATE:2014-03-02
 		});
 	}
 	public static Xop_lxr_mgr new_wiki_() {
 		return new Xop_lxr_mgr(new Xop_lxr[] 
-		{ Xop_pipe_lxr._, new Xop_eq_lxr(false), Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
-		, Xop_amp_lxr._, Xop_apos_lxr._, Xop_colon_lxr._
-		, Xop_lnki_lxr_bgn._, Xop_lnki_lxr_end._
-		, Xop_list_lxr._
-		, Xop_hdr_lxr._
-		, Xop_hr_lxr._
-		, Xop_xnde_lxr._
-		, Xop_lnke_lxr._, Xop_lnke_end_lxr._
-		, Xop_tblw_lxr._
-		, Xop_pre_lxr._, Xop_nl_tab_lxr._
-		, Xop_comm_lxr._
-		, Xop_under_lxr._
+		{ Xop_pipe_lxr.Instance, new Xop_eq_lxr(false), Xop_space_lxr.Instance, Xop_tab_lxr.Instance, Xop_nl_lxr.Instance
+		, Xop_amp_lxr.Instance, Xop_apos_lxr.Instance, Xop_colon_lxr.Instance
+		, Xop_lnki_lxr_bgn.Instance, Xop_lnki_lxr_end.Instance
+		, Xop_list_lxr.Instance
+		, Xop_hdr_lxr.Instance
+		, Xop_hr_lxr.Instance
+		, Xop_xnde_lxr.Instance
+		, Xop_lnke_lxr.Instance, Xop_lnke_end_lxr.Instance
+		, Xop_tblw_lxr.Instance
+		, Xop_pre_lxr.Instance, Xop_nl_tab_lxr.Instance
+		, Xop_comm_lxr.Instance
+		, Xop_under_lxr.Instance
 		});
 	}
 	public static Xop_lxr_mgr new_anchor_encoder() {
 		return new Xop_lxr_mgr(new Xop_lxr[]
-		{ Xop_pipe_lxr._, new Xop_eq_lxr(false), Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
-		, Xop_curly_bgn_lxr._, Xop_curly_end_lxr._
-		, Xop_amp_lxr._, Xop_colon_lxr._
-		, Xop_apos_lxr._
-		, Xop_lnki_lxr_bgn._, Xop_lnki_lxr_end._
-		, Xop_lnke_lxr._, Xop_lnke_end_lxr._
-		, Xop_xnde_lxr._
+		{ Xop_pipe_lxr.Instance, new Xop_eq_lxr(false), Xop_space_lxr.Instance, Xop_tab_lxr.Instance, Xop_nl_lxr.Instance
+		, Xop_curly_bgn_lxr.Instance, Xop_curly_end_lxr.Instance
+		, Xop_amp_lxr.Instance, Xop_colon_lxr.Instance
+		, Xop_apos_lxr.Instance
+		, Xop_lnki_lxr_bgn.Instance, Xop_lnki_lxr_end.Instance
+		, Xop_lnke_lxr.Instance, Xop_lnke_end_lxr.Instance
+		, Xop_xnde_lxr.Instance
 		});
 	}
 	public static final Xop_lxr_mgr Popup_lxr_mgr	// same as orig_page, except apos_lxr added
 		= new Xop_lxr_mgr(new Xop_lxr[] 
-		{ Xop_pipe_lxr._, new Xop_eq_lxr(true), Xop_colon_lxr._, Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
-		, Xop_curly_bgn_lxr._, Xop_curly_end_lxr._
-		, Xop_brack_bgn_lxr._, Xop_brack_end_lxr._
-		, Xop_comm_lxr._
-		, Xop_xnde_lxr._	// needed for xtn, noinclude, etc.
-		, Xop_under_lxr._
-		, gplx.xowa.xtns.translates.Xop_tvar_lxr._
-		, Xop_cr_lxr._		// always ignore \r; DATE:2014-03-02
-		, gplx.xowa.parsers.apos.Xop_apos_lxr._	// needed else multiple apos may be split across blocks;
+		{ Xop_pipe_lxr.Instance, new Xop_eq_lxr(true), Xop_colon_lxr.Instance, Xop_space_lxr.Instance, Xop_tab_lxr.Instance, Xop_nl_lxr.Instance
+		, Xop_curly_bgn_lxr.Instance, Xop_curly_end_lxr.Instance
+		, Xop_brack_bgn_lxr.Instance, Xop_brack_end_lxr.Instance
+		, Xop_comm_lxr.Instance
+		, Xop_xnde_lxr.Instance	// needed for xtn, noinclude, etc.
+		, Xop_under_lxr.Instance
+		, gplx.xowa.xtns.translates.Xop_tvar_lxr.Instance
+		, Xop_cr_lxr.Instance		// always ignore \r; DATE:2014-03-02
+		, gplx.xowa.parsers.apos.Xop_apos_lxr.Instance	// needed else multiple apos may be split across blocks;
 		});
 }

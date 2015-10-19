@@ -42,14 +42,14 @@ public class Db_cfg_itm {
 	public static		Db_cfg_itm new_str		(String grp, String key, String val)			{return new Db_cfg_itm(grp		, key, val);}
 	public static		Db_cfg_itm new_bry		(String key, byte[] val)						{return new Db_cfg_itm(Grp_none	, key, String_.new_u8(val));}
 	public static		Db_cfg_itm new_bry		(String grp, String key, byte[] val)			{return new Db_cfg_itm(grp		, key, String_.new_u8(val));}
-	public static		Db_cfg_itm new_int		(String key, int val)							{return new Db_cfg_itm(Grp_none	, key, Int_.Xto_str(val));}
-	public static		Db_cfg_itm new_int		(String grp, String key, int val)				{return new Db_cfg_itm(grp		, key, Int_.Xto_str(val));}
-	public static		Db_cfg_itm new_long		(String key, long val)							{return new Db_cfg_itm(Grp_none	, key, Long_.Xto_str(val));}
-	public static		Db_cfg_itm new_long		(String grp, String key, long val)				{return new Db_cfg_itm(grp		, key, Long_.Xto_str(val));}
+	public static		Db_cfg_itm new_int		(String key, int val)							{return new Db_cfg_itm(Grp_none	, key, Int_.To_str(val));}
+	public static		Db_cfg_itm new_int		(String grp, String key, int val)				{return new Db_cfg_itm(grp		, key, Int_.To_str(val));}
+	public static		Db_cfg_itm new_long		(String key, long val)							{return new Db_cfg_itm(Grp_none	, key, Long_.To_str(val));}
+	public static		Db_cfg_itm new_long		(String grp, String key, long val)				{return new Db_cfg_itm(grp		, key, Long_.To_str(val));}
 	public static		Db_cfg_itm new_byte		(String key, byte val)							{return new Db_cfg_itm(Grp_none	, key, Byte_.To_str(val));}
 	public static		Db_cfg_itm new_byte		(String grp, String key, byte val)				{return new Db_cfg_itm(grp		, key, Byte_.To_str(val));}
-	public static		Db_cfg_itm new_yn		(String key, boolean val)						{return new Db_cfg_itm(Grp_none	, key, Yn.Xto_str(val));}
-	public static		Db_cfg_itm new_yn		(String grp, String key, boolean val)			{return new Db_cfg_itm(grp		, key, Yn.Xto_str(val));}
+	public static		Db_cfg_itm new_yn		(String key, boolean val)						{return new Db_cfg_itm(Grp_none	, key, Yn.To_str(val));}
+	public static		Db_cfg_itm new_yn		(String grp, String key, boolean val)			{return new Db_cfg_itm(grp		, key, Yn.To_str(val));}
 	public static		Db_cfg_itm new_DateAdp	(String key, DateAdp val)						{return new Db_cfg_itm(Grp_none	, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.*;
 public class Listing_xtn_mgr extends Xox_mgr_base {
@@ -63,7 +63,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 			hwtr.Nde_full_atrs(Listing_xnde.Tag_abbr, symbol_text, true
 				, Listing_xnde.Atr_a_title, Html_utl.Escape_html_as_bry(template_text)
 				);
-			rv = hwtr.Xto_bry_and_clear();
+			rv = hwtr.To_bry_and_clear();
 		}
 		else {
 			rv = template_text;

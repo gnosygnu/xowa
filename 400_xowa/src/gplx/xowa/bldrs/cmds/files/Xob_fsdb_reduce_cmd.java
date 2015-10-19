@@ -50,12 +50,12 @@ class Fsdb_reduce_wkr {
 		this.quality = quality;
 	}
 	public byte[] Reduce(byte[] orig_bry) {
-		Io_mgr.I.SaveFilBry(src_url, orig_bry);
+		Io_mgr.Instance.SaveFilBry(src_url, orig_bry);
 		convert_process.Run(src_url, trg_url, dpi, quality); // -strip -quality 50% -density 72 -resample 72
 		if (!convert_process.Exit_code_pass()) {
 			// throw err with convert_process.Rslt_out();
 		}
-		byte[] rv = Io_mgr.I.LoadFilBry(trg_url);
+		byte[] rv = Io_mgr.Instance.LoadFilBry(trg_url);
 		// fail if 0; fail if greater than;
 		// warn if not between 50% - 70% of size
 		return rv;

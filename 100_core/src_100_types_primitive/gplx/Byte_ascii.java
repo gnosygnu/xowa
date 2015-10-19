@@ -101,6 +101,7 @@ public class Byte_ascii {
 	, Quote_bry				= new byte[] {Byte_ascii.Quote}
 	, Hash_bry				= new byte[] {Byte_ascii.Hash}
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
+	, Angle_bgn_bry			= new byte[] {Byte_ascii.Angle_bgn}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
 	, Amp_bry				= new byte[] {Byte_ascii.Amp}

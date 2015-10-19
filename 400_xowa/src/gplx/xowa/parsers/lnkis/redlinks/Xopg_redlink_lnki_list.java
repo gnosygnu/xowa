@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.users.*;
 public class Xopg_redlink_lnki_list {
-	private int lnki_idx = gplx.xowa.html.lnkis.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: default to 1, not 0, b/c 0 is ignored by wtr; DATE:2014-10-09		
+	private int lnki_idx = gplx.xowa.htmls.lnkis.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: default to 1, not 0, b/c 0 is ignored by wtr; DATE:2014-10-09		
 	public Xopg_redlink_lnki_list(boolean ttl_is_module) {			// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		this.disabled = ttl_is_module;
 	}

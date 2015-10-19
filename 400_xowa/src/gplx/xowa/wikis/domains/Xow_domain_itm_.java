@@ -29,50 +29,50 @@ public class Xow_domain_itm_ {
 		int raw_len = raw.length;
 		int dot_0 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, 0, raw_len);
 		if (dot_0 == Bry_.NotFound) {	// 0 dots; check for "home"
-			return Bry_.Eq(raw, Xow_domain_type_.Bry__home)
+			return Bry_.Eq(raw, Xow_domain_tid_.Bry__home)
 				? Xow_domain_uid_.To_domain(Xow_domain_uid_.Tid_xowa)
 				: new_other(raw);
 		}
 		int dot_1 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, dot_0 + 1, raw_len);
 		if (dot_1 == Bry_.NotFound) {	// 1 dot; check for "wikimediafoundation.org"
-			return Bry_.Match(raw, 0, dot_0, Xow_domain_type_.Bry__wmforg)
-				? Xow_domain_itm.new_(raw, Xow_domain_type_.Int__wmfblog, Xol_lang_itm_.Key__unknown)
+			return Bry_.Match(raw, 0, dot_0, Xow_domain_tid_.Bry__wmforg)
+				? Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__wmfblog, Xol_lang_stub_.Key__unknown)
 				: new_other(raw);
 		}
 		// 2 dots
-		int seg_1_tid = Xow_domain_type_.Get_type_as_tid(raw, dot_0 + 1, dot_1);	// parse middle; EX: ".wikipedia."
-		if (seg_1_tid == Xow_domain_type_.Int__null) return new_other(raw);			// seg_1 is unknown; return other;
+		int seg_1_tid = Xow_domain_tid_.Get_type_as_tid(raw, dot_0 + 1, dot_1);	// parse middle; EX: ".wikipedia."
+		if (seg_1_tid == Xow_domain_tid_.Int__null) return new_other(raw);			// seg_1 is unknown; return other;
 		switch (seg_1_tid) {
-			case Xow_domain_type_.Int__wikipedia: case Xow_domain_type_.Int__wiktionary: case Xow_domain_type_.Int__wikisource: case Xow_domain_type_.Int__wikibooks:
-			case Xow_domain_type_.Int__wikiversity: case Xow_domain_type_.Int__wikiquote: case Xow_domain_type_.Int__wikinews: case Xow_domain_type_.Int__wikivoyage:	// ~{lang}.~{type}.org
+			case Xow_domain_tid_.Int__wikipedia: case Xow_domain_tid_.Int__wiktionary: case Xow_domain_tid_.Int__wikisource: case Xow_domain_tid_.Int__wikibooks:
+			case Xow_domain_tid_.Int__wikiversity: case Xow_domain_tid_.Int__wikiquote: case Xow_domain_tid_.Int__wikinews: case Xow_domain_tid_.Int__wikivoyage:	// ~{lang}.~{type}.org
 				byte[] lang_orig = Bry_.Mid(raw, 0, dot_0);
 				byte[] lang_actl = Get_lang_code_for_mw_messages_file(lang_orig);
 				return Xow_domain_itm.new_(raw, seg_1_tid, lang_actl, lang_orig);	// NOTE: seg_tids must match wiki_tids
-			case Xow_domain_type_.Int__wikidata: case Xow_domain_type_.Int__mediawiki:// ~www.~{type}.org
-				return Xow_domain_itm.new_(raw, seg_1_tid, Xol_lang_itm_.Key__unknown);
-			case Xow_domain_type_.Int__wikimedia:									// ~{type}.wikimedia.org;
-				int seg_0_tid = Xow_domain_type_.Get_type_as_tid(raw, 0, dot_0);	// try to get "incubator", "meta", etc..
-				if (seg_0_tid == Xow_domain_type_.Int__null) {						// not a known name; try language
+			case Xow_domain_tid_.Int__wikidata: case Xow_domain_tid_.Int__mediawiki:// ~www.~{type}.org
+				return Xow_domain_itm.new_(raw, seg_1_tid, Xol_lang_stub_.Key__unknown);
+			case Xow_domain_tid_.Int__wikimedia:									// ~{type}.wikimedia.org;
+				int seg_0_tid = Xow_domain_tid_.Get_type_as_tid(raw, 0, dot_0);	// try to get "incubator", "meta", etc..
+				if (seg_0_tid == Xow_domain_tid_.Int__null) {						// not a known name; try language
 					byte[] lang_override = Xow_abrv_wm_override.To_lang_key_or_null(raw);	// handle "lang-like" wikimedia domains like "ar.wikimedia.org" which is actually to "Argentina Wikimedia"
 					if (lang_override == null) {
-						Xol_lang_itm wikimedia_lang = Xol_lang_itm_.Get_by_key_or_null(raw, 0, dot_0);
-						return wikimedia_lang == null ? new_other(raw) : Xow_domain_itm.new_(raw, Xow_domain_type_.Int__wikimedia, wikimedia_lang.Key());
+						Xol_lang_stub wikimedia_lang = Xol_lang_stub_.Get_by_key_or_null(raw, 0, dot_0);
+						return wikimedia_lang == null ? new_other(raw) : Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__wikimedia, wikimedia_lang.Key());
 					}
 					else
-						return Xow_domain_itm.new_(raw, Xow_domain_type_.Int__wikimedia, lang_override, Bry_.Mid(raw, 0, dot_0));
+						return Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__wikimedia, lang_override, Bry_.Mid(raw, 0, dot_0));
 				}
 				switch (seg_0_tid) {
-					case Xow_domain_type_.Int__commons: case Xow_domain_type_.Int__species: case Xow_domain_type_.Int__meta: case Xow_domain_type_.Int__incubator:
-						return Xow_domain_itm.new_(raw, seg_0_tid, Xol_lang_itm_.Key__unknown);						// NOTE: seg_tids must match wiki_tids; NOTE: lang_key is "en" (really, "multi" but making things easier)
+					case Xow_domain_tid_.Int__commons: case Xow_domain_tid_.Int__species: case Xow_domain_tid_.Int__meta: case Xow_domain_tid_.Int__incubator:
+						return Xow_domain_itm.new_(raw, seg_0_tid, Xol_lang_stub_.Key__unknown);						// NOTE: seg_tids must match wiki_tids; NOTE: lang_key is "en" (really, "multi" but making things easier)
 					default:
 						return new_other(raw);
 				}
-			case Xow_domain_type_.Int__other:
+			case Xow_domain_tid_.Int__other:
 			default:
 				return new_other(raw);
 		}
 	}
-	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_type_.Int__other, Xol_lang_itm_.Key__unknown);}
+	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__other, Xol_lang_stub_.Key__unknown);}
 	private static byte[] Get_lang_code_for_mw_messages_file(byte[] v) {
 		Object o = lang_to_gfs_hash.Get_by_bry(v);
 		return o == null ? v : (byte[])o;
@@ -103,6 +103,7 @@ public class Xow_domain_itm_ {
 	, Bry__incubator							= Bry_.new_a7(Str__incubator)
 	, Bry__wmforg								= Bry_.new_a7(Str__wmforg)
 	, Bry__home									= Bry_.new_a7(Str__home)
+	, Bry__simplewiki							= Bry_.new_a7("simple.wikipedia.org")
 	;
 	public static final byte[] Seg__org = Bry_.new_a7("org"), Seg__www = Bry_.new_a7("www");
 }

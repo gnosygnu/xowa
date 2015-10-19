@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.langs.jsons.*; import gplx.xowa.html.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.langs.jsons.*; import gplx.xowa.htmls.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__json implements Bry_fmtr_arg {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;
@@ -32,10 +32,10 @@ class Wdata_fmtr__json implements Bry_fmtr_arg {
 		this.jdoc = jdoc;
 		toc_data.Make(0);
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (jdoc == null) return;	// TEST: wdoc doesn't have jdoc
 		jdoc.Root_nde().Print_as_json(tmp_bfr, 0);
-		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.Xto_bry_and_clear());
+		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.To_bry_and_clear());
 	}
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""

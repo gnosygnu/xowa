@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.btries.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.wikis.nss.*;
 public class Xob_xml_parser {
 	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
 	public Xob_xml_parser Tag_len_max_(int v) {tag_len_max = v; return this;} private int tag_len_max = 255; // max size of any (a) xml tag, (b) int or (c) date; everything else goes into a data_bfr
@@ -75,13 +75,13 @@ public class Xob_xml_parser {
 					case Xob_xml_parser_.Id_title_end:
 						if (title_needed) {
 							data_bfr_add = false;
-							byte[] ttl = data_bfr.Xto_bry_and_clear();
+							byte[] ttl = data_bfr.To_bry_and_clear();
 							Bry_.Replace_reuse(ttl, Byte_ascii.Space, Byte_ascii.Underline);
 							rv.Ttl_(ttl, ns_mgr);
 							title_needed = false;
 						}
 						break;
-					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Text_(data_bfr.Xto_bry_and_clear()); break;
+					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Text_(data_bfr.To_bry_and_clear()); break;
 					case Xob_xml_parser_.Id_amp: case Xob_xml_parser_.Id_quot: case Xob_xml_parser_.Id_lt: case Xob_xml_parser_.Id_gt:
 					case Xob_xml_parser_.Id_cr_nl: case Xob_xml_parser_.Id_cr:
 						if (data_bfr_add) data_bfr.Add_byte(itm.Subst_byte());

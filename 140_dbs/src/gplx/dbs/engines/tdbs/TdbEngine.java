@@ -41,7 +41,7 @@ public class TdbEngine implements Db_engine {
 		Db_qryWkr wkr = (Db_qryWkr)wkrs.Get_by_or_fail(qry.Tid());
 		return wkr.Exec(this, qry);
 	}
-	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.I.Xto_str(qry, true));}
+	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.Instance.Xto_str(qry, true));}
 	public Object	New_stmt_prep_as_obj(String sql) {throw Err_.new_unimplemented();}
 	public Db_rdr	New_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public Db_rdr	New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
@@ -67,10 +67,10 @@ public class TdbEngine implements Db_engine {
 	public boolean			Meta_fld_exists(String tbl, String fld)			{return false;}
 
 	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
-	public static final TdbEngine _ = new TdbEngine(); 
+	public static final TdbEngine Instance = new TdbEngine(); 
 	void CtorTdbEngine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;
-		wkrs.Add(Db_qry_.Tid_select, TdbSelectWkr._);
+		wkrs.Add(Db_qry_.Tid_select, TdbSelectWkr.Instance);
 		wkrs.Add(Db_qry_.Tid_insert, TdbInsertWkr.new_());
 		wkrs.Add(Db_qry_.Tid_update, TdbUpdateWkr.new_());
 		wkrs.Add(Db_qry_.Tid_delete, TdbDeleteWkr.new_());

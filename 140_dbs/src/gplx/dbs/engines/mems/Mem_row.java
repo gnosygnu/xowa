@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Mem_row implements GfoInvkAble {
-	private final Ordered_hash hash = Ordered_hash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Object	Get_by(String key) {return hash.Get_by(key);}
 	public Object	Get_at(int i) {return hash.Get_at(i);}
 	public void		Set_by(String key, Object val)		{hash.Add_if_dupe_use_nth(key, val);}

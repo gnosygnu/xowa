@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.strings.*;
 public class Bry_fmtr {
 	public byte[] Fmt() {return fmt;} private byte[] fmt = Bry_.Empty;
 	public boolean Fmt_null() {return fmt.length == 0;}
-	public Bry_fmtr_eval_mgr Eval_mgr() {return eval_mgr;} public Bry_fmtr Eval_mgr_(Bry_fmtr_eval_mgr v) {eval_mgr = v; return this;} Bry_fmtr_eval_mgr eval_mgr = Bry_fmtr_eval_mgr_gfs._;
+	public Bry_fmtr_eval_mgr Eval_mgr() {return eval_mgr;} public Bry_fmtr Eval_mgr_(Bry_fmtr_eval_mgr v) {eval_mgr = v; return this;} Bry_fmtr_eval_mgr eval_mgr = Bry_fmtr_eval_mgr_gfs.Instance;
 	public Bry_fmtr Fmt_(byte[] v) {fmt = v; dirty = true; return this;} public Bry_fmtr Fmt_(String v) {return Fmt_(Bry_.new_u8(v));}
 	public Bry_fmtr Keys_(String... ary) {
 		if (keys == null)	keys = Hash_adp_.new_();
@@ -62,7 +62,7 @@ public class Bry_fmtr {
 		for (int i = 0; i < itms_len; i++) {
 			Bry_fmtr_itm itm = itms[i];
 			if (itm.Arg)
-				args[itm.ArgIdx].XferAry(bfr, itm.ArgIdx);
+				args[itm.ArgIdx].Fmt__do(bfr);
 			else
 				bfr.Add(itm.Dat);
 		}
@@ -88,14 +88,14 @@ public class Bry_fmtr {
 				bfr.Add(itm.Dat);
 		}
 	}
-	public byte[] Bld_bry_none(Bry_bfr bfr) {Bld_bfr_ary(bfr, Object_.Ary_empty); return bfr.Xto_bry_and_clear();}
+	public byte[] Bld_bry_none(Bry_bfr bfr) {Bld_bfr_ary(bfr, Object_.Ary_empty); return bfr.To_bry_and_clear();}
 	public byte[] Bld_bry_many(Bry_bfr bfr, Object... args) {
 		Bld_bfr_ary(bfr, args);
-		return bfr.Xto_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public String Bld_str_many(Bry_bfr bfr, String fmt, Object... args) {
 		this.Fmt_(fmt).Bld_bfr_many(bfr, args);
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public String Bld_str_many(String... args) {
 		if (dirty) Compile(); 
@@ -134,9 +134,9 @@ public class Bry_fmtr {
 				if		(lkp_is_active) {
 					if (cur_byte == char_arg_end) {
 						if (lkp_is_numeric)
-							list.Add(Bry_fmtr_itm.arg_(lkp_bfr.XtoInt(0) - baseInt));
+							list.Add(Bry_fmtr_itm.arg_(lkp_bfr.To_int(0) - baseInt));
 						else {
-							byte[] key_fmt = lkp_bfr.Xto_bry();
+							byte[] key_fmt = lkp_bfr.To_bry();
 							Object idx_ref = keys.Get_by(Bry_obj_ref.new_(key_fmt));
 							if (idx_ref == null) {
 								int lkp_bfr_len = lkp_bfr.Len();
@@ -195,7 +195,7 @@ public class Bry_fmtr {
 						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.Nl;
 						else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
 						else {
-							if (fail_when_invalid_escapes) throw Err_.new_wo_type("unknown escape code", "code", Char_.XbyInt(nxt_byte), "fmt_pos", fmt_pos + 1);
+							if (fail_when_invalid_escapes) throw Err_.new_wo_type("unknown escape code", "code", Char_.By_int(nxt_byte), "fmt_pos", fmt_pos + 1);
 							else
 								tmp_byte = cur_byte;
 						}
@@ -254,12 +254,12 @@ public class Bry_fmtr {
 			tmp_bfr.Add_byte(Byte_ascii.Curly_end);
 			tmp_bfr.Add_byte(Byte_ascii.Apos);
 		}
-		return tmp_bfr.Xto_str_and_clear();
+		return tmp_bfr.To_str_and_clear();
 	}	static Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	public void Bld_bfr_many_and_set_fmt(Object... args) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		this.Bld_bfr_many(bfr, args);
-		byte[] bry = bfr.Xto_bry_and_clear();
+		byte[] bry = bfr.To_bry_and_clear();
 		this.Fmt_(bry).Compile();
 	}
 	public static String Escape_tilde(String v) {return String_.Replace(v, "~", "~~");}

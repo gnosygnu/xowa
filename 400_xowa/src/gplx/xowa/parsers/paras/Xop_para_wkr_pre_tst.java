@@ -236,9 +236,9 @@ public class Xop_para_wkr_pre_tst {
 		), String_.Concat_lines_nl
 		( "<p>"			// this is wrong, but will be stripped by tidy
 		, "</p>"
-		, " <pre>"
+		, " <div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		, " a"
-		, "</pre>"
+		, "</pre></div>"
 		, ""
 		, "<p><br/>"	// also wrong, but leave for now
 		, "</p>"

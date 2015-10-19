@@ -75,7 +75,7 @@ public class DsvDataWtr_csv_tst {
 	}
 	@Test  public void Hdr_Flds() {
 		wtr = DsvDataWtr_.csv_hdr_();
-		GfoFldList flds = GfoFldList_.new_().Add("id", StringClassXtn._).Add("name", StringClassXtn._);
+		GfoFldList flds = GfoFldList_.new_().Add("id", StringClassXtn.Instance).Add("name", StringClassXtn.Instance);
 		root = fx_nde.csv_hdr_(flds); this.AddCsvRow(root, "0", "me");
 		expd = String_.Concat_lines_crlf
 			(	"id,name"

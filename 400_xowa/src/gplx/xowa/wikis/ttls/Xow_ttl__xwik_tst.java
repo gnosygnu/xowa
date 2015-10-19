@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.xowa.nss.*;
+import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_ttl__xwik_tst {
 	@Before public void init() {fxt.Reset();} private Xow_ttl_fxt fxt = new Xow_ttl_fxt();
 	@Test   public void Known()						{fxt.Init_ttl("fr:a")			.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("a").Test();}
@@ -36,7 +36,7 @@ public class Xow_ttl__xwik_tst {
 		fxt.Init_ttl(":::fr:Test").Expd_xwik_txt("").Expd_page_txt(":fr:Test").Expd_force_literal_link(1).Test();
 	}
 	@Test   public void Ns_should_precede_xwiki() {// PURPOSE: the "Wikipedia" in "Wikipedia:Main page" should be interpreted as namespace, not an alias
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("Wikipedia"), Bry_.new_a7("en.wikipedia.org"));
+		fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("Wikipedia"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Init_ttl("Wikipedia:Test").Expd_xwik_txt("").Expd_full_txt("Wikipedia:Test").Test();
 	}
 }

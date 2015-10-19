@@ -28,5 +28,5 @@ public class Xow_page_fetcher_test implements Xow_page_fetcher {
 		Xowd_page_itm rv = (Xowd_page_itm)pages.Get_by(Make_key(ns_id, ttl));
 		return rv == null ? null : rv.Text();
 	}
-	String Make_key(int ns_id, byte[] ttl) {return Int_.Xto_str(ns_id) + "|" + String_.new_u8(ttl);}
+	String Make_key(int ns_id, byte[] ttl) {return Int_.To_str(ns_id) + "|" + String_.new_u8(ttl);}
 }

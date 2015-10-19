@@ -49,7 +49,7 @@ class IoUrlInfo_nil implements IoUrlInfo {
 	public String NameOnly(String raw) {return "";}
 	public String Ext(String raw) {return "";}
 	public String XtoRootName(String raw, int rawLen) {return "";}
-	public static final IoUrlInfo_nil _ = new IoUrlInfo_nil(); IoUrlInfo_nil() {}
+	public static final IoUrlInfo_nil Instance = new IoUrlInfo_nil(); IoUrlInfo_nil() {}
 }
 abstract class IoUrlInfo_base implements IoUrlInfo {
 	@gplx.Internal protected static final int DirSprLen = 1;
@@ -134,7 +134,7 @@ class IoUrlInfo_wnt extends IoUrlInfo_base {
 			? Char_.To_str(String_.CharAt(raw, 0))
 			: null;
 	}
-	public static final IoUrlInfo_wnt _ = new IoUrlInfo_wnt(); IoUrlInfo_wnt() {}
+	public static final IoUrlInfo_wnt Instance = new IoUrlInfo_wnt(); IoUrlInfo_wnt() {}
 }
 class IoUrlInfo_lnx extends IoUrlInfo_base {
 	@Override public String Key()			{return "lnx";}
@@ -154,7 +154,7 @@ class IoUrlInfo_lnx extends IoUrlInfo_base {
 			? DirSprStr
 			: super.Xto_api(raw);					// NOTE: super.Xto_api will strip off last /
 	}
-	public static final IoUrlInfo_lnx _ = new IoUrlInfo_lnx(); IoUrlInfo_lnx() {}
+	public static final IoUrlInfo_lnx Instance = new IoUrlInfo_lnx(); IoUrlInfo_lnx() {}
 }
 class IoUrlInfo_rel extends IoUrlInfo_base {
 	@Override public String Key()			{return "rel";}

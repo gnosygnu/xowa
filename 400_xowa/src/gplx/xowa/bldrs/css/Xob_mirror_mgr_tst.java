@@ -42,7 +42,7 @@ class Xob_mirror_mgr_fxt {
 }
 class Io_fsys_fxt {
 	public void Clear() {
-		Io_mgr.I.InitEngine_mem();
+		Io_mgr.Instance.InitEngine_mem();
 	}
 	public void Init_fil(String url_str) {
 		Io_url url = Io_url_.new_fil_(url_str);
@@ -50,7 +50,7 @@ class Io_fsys_fxt {
 	}
 	public void Init_fil(String url_str, String text) {Init_fil(Io_url_.new_fil_(url_str), text);}
 	public void Init_fil(Io_url url, String text) {
-		Io_mgr.I.SaveFilStr(url, text);
+		Io_mgr.Instance.SaveFilStr(url, text);
 	}
 	public void Test_fil(String url_str) {
 		Io_url url = Io_url_.new_fil_(url_str);
@@ -58,6 +58,6 @@ class Io_fsys_fxt {
 	}
 	public void Test_fil(String url, String expd) {Test_fil(Io_url_.new_fil_(url), expd);}
 	public void Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
 	}
 }

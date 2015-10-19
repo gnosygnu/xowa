@@ -38,8 +38,8 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public Xow_wiki					Wikii() {return this.Wiki();}
 	public int						Gender() {return Xol_gender_.Tid_unknown;}
 	public Xoae_app					Appe() {return app;} private final Xoae_app app;
-	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		
-	public void Lang_(Xol_lang v) {
+	public Xol_lang_itm Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang_itm lang;		
+	public void Lang_(Xol_lang_itm v) {
 		lang = v;
 		this.Msg_mgr().Lang_(v);
 		wiki.Msg_mgr().Clear();	// clear home wiki msgs whenever lang changes; else messages cached from old lang will not be replaced; EX:Read/Edit; DATE:2014-05-26
@@ -58,7 +58,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	}	private Xow_msg_mgr msg_mgr;
 	public void Init_by_app(Xoae_app app) {
 		Io_url user_system_cfg = fsys_mgr.App_data_cfg_dir().GenSubFil(Xou_fsys_mgr.Name_user_system_cfg);
-		if (!Io_mgr.I.ExistsFil(user_system_cfg)) Xou_user_.User_system_cfg_make(app.Usr_dlg(), user_system_cfg);
+		if (!Io_mgr.Instance.ExistsFil(user_system_cfg)) Xou_user_.User_system_cfg_make(app.Usr_dlg(), user_system_cfg);
 		user_db_mgr.Init_by_app(Bool_.N, fsys_mgr.Root_dir().OwnerDir().GenSubFil("xowa.user." + key + ".sqlite3")); // EX: /xowa/user/xowa.user.anonymous.sqlite3
 		if (!Env_.Mode_testing()) {
 			this.Available_from_fsys();
@@ -69,7 +69,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());
 		history_mgr.Save(app);
 		if (app.Gui_mgr().Browser_win().Tab_mgr().Html_load_tid__url())
-			Io_mgr.I.DeleteDirDeep(fsys_mgr.App_temp_html_dir());
+			Io_mgr.Instance.DeleteDirDeep(fsys_mgr.App_temp_html_dir());
 		app.File_mgr().Cache_mgr().Db_term();
 	}
 	public void Bookmarks_add(byte[] wiki_domain, byte[] ttl_full_txt) {
@@ -102,14 +102,14 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public static final String Key_xowa_user = "anonymous";
 	public static final String Evt_lang_changed = "lang_changed";
 	public void Available_from_fsys() {
-		Io_url[] dirs = Io_mgr.I.QueryDir_args(app.Fsys_mgr().Wiki_dir()).Recur_(false).DirOnly_().ExecAsUrlAry();
+		Io_url[] dirs = Io_mgr.Instance.QueryDir_args(app.Fsys_mgr().Wiki_dir()).Recur_(false).DirOnly_().ExecAsUrlAry();
 		Xowe_wiki usr_wiki = Wiki();
 		int dirs_len = dirs.length;
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
 			String name = dir.NameOnly();
 			if (String_.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)
-//					|| !Io_mgr.I.ExistsDir(dir.GenSubFil_nest("ns"))
+//					|| !Io_mgr.Instance.ExistsDir(dir.GenSubFil_nest("ns"))
 				) continue;
 			byte[] dir_name_as_bry = Bry_.new_u8(name);
 			Xow_xwiki_itm xwiki = Available_add(usr_wiki, dir_name_as_bry);
@@ -126,6 +126,6 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 			Available_add(usr_wiki, wikis[i]);
 	}
 	private Xow_xwiki_itm Available_add(Xowe_wiki usr_wiki, byte[] wiki_name) {
-		return usr_wiki.Xwiki_mgr().Add_full(wiki_name, wiki_name);
+		return usr_wiki.Xwiki_mgr().Add_by_atrs(wiki_name, wiki_name);
 	}
 }

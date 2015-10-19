@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.lnki_trails.*;
+import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_lnki_wkr__basic_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();

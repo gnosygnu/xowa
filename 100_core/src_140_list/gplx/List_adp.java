@@ -33,6 +33,7 @@ public interface List_adp extends EnumerAble {
 	Object To_ary(Class<?> memberType);
 	Object To_ary_and_clear(Class<?> memberType);
 	String[] To_str_ary();
+	String[] To_str_ary_and_clear();
 	String To_str();
 	Object[] To_obj_ary();
 	void Resize_bounds(int i);
@@ -64,10 +65,11 @@ class List_adp_noop implements List_adp {
 	public void Resize_bounds(int i) {}
 	public Object To_ary(Class<?> memberType) {return Object_.Ary_empty;}
 	public Object To_ary_and_clear(Class<?> memberType) {return Object_.Ary_empty;}
-	public String[] To_str_ary() {return new String[0];}
+	public String[] To_str_ary() {return String_.Ary_empty;}
+	public String[] To_str_ary_and_clear() {return To_str_ary();}
 	public String To_str() {return "";}
 	public Object[] To_obj_ary() {return Object_.Ary_empty;}
-	public java.util.Iterator iterator() {return Iterator_null._;}
+	public java.util.Iterator iterator() {return Iterator_null.Instance;}
 	public void Reverse() {}
 	public void Sort() {}
 	public void Sort_by(ComparerAble comparer) {}

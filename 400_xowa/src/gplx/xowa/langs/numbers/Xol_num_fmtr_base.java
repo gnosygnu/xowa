@@ -52,9 +52,9 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 				i = dlm_match_pos - 1; // NOTE: handle multi-byte delims
 			}
 		}
-		return tmp.Xto_bry_and_clear();
+		return tmp.To_bry_and_clear();
 	}
-	public byte[] Fmt(int val) {return Fmt(Bry_.new_a7(Int_.Xto_str(val)));}
+	public byte[] Fmt(int val) {return Fmt(Bry_.new_a7(Int_.To_str(val)));}
 	public byte[] Fmt(byte[] src) {	// SEE: DOC_1:Fmt
 		int src_len = src.length;
 		int num_bgn = -1, dec_pos = -1;
@@ -95,7 +95,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 			Gfo_num_fmt_wkr wkr = Get_or_new(src_len - num_bgn);
 			wkr.Fmt(src, num_bgn, src_len, tmp);
 		}
-		return tmp.Xto_bry_and_clear();
+		return tmp.To_bry_and_clear();
 	}
 	private Gfo_num_fmt_wkr Get_or_new(int src_len) {
 		Gfo_num_fmt_wkr rv = null;

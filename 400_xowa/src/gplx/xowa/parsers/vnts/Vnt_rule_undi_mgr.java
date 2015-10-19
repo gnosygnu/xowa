@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Vnt_rule_undi_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Len() {return hash.Count();}
 	public boolean Has_none() {return hash.Count() == 0;}
 	public void Clear() {hash.Clear();}
@@ -51,7 +51,7 @@ class Vnt_rule_undi_mgr {
 	}
 }
 class Vnt_rule_undi_grp {
-	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Vnt_rule_undi_grp(byte[] vnt) {this.vnt = vnt;}
 	public int Len() {return hash.Count();}
 	public Vnt_rule_undi_itm Get_at(int i) {return (Vnt_rule_undi_itm)hash.Get_at(i);}

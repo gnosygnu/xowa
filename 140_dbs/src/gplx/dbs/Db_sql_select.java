@@ -30,7 +30,7 @@ class Db_sql_qry__select {
 //		public int				Limit() {return limit;} private int limit;
 //		public int				Offset() {return offset;} private int offset;
 	public Db_sql_qry__select Select_all_()						{this.select = Db_sql_col_.Ary(new Db_sql_col__all(0, from)); return this;}
-	public Db_sql_qry__select Select_flds_(String... ary)	{this.select = Db_sql_col_bldr.I.new_fld_many(ary); return this;}
+	public Db_sql_qry__select Select_flds_(String... ary)	{this.select = Db_sql_col_bldr.Instance.new_fld_many(ary); return this;}
 	public static Db_sql_qry__select new_(String from) {return new Db_sql_qry__select(from);}
 }
 class Db_sql_bldr {
@@ -63,7 +63,7 @@ class Db_sql_col_bldr {
 		}
 		return (Db_sql_col[])tmp_list.To_ary_and_clear(Db_sql_col.class);
 	}
-        public static final Db_sql_col_bldr I = new Db_sql_col_bldr(); Db_sql_col_bldr() {}
+        public static final Db_sql_col_bldr Instance = new Db_sql_col_bldr(); Db_sql_col_bldr() {}
 }
 class Db_sql_col__name {
 	public Db_sql_col__name(int ord, String key) {this.ord = ord; this.key = key;}

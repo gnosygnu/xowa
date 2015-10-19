@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.files.commons.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.wms.*;
+import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.xtns.math.*;
 public class Xof_file_mgr implements GfoInvkAble {
 	public Xoa_repo_mgr			Repo_mgr() {return repo_mgr;} private Xoa_repo_mgr repo_mgr;

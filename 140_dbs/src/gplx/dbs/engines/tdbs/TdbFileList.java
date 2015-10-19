@@ -59,5 +59,5 @@ public class TdbFileList extends Ordered_hash_base {
 	DsvStoreLayout layout;
 	public static final String StoreTblName = "_files";
 	static final String Fld_id = "id"; static final String Fld_path = "url";
-	static final GfoFldList FldList = GfoFldList_.new_().Add(Fld_id, IntClassXtn._).Add(Fld_path, StringClassXtn._).Add("format", StringClassXtn._);
+	static final GfoFldList FldList = GfoFldList_.new_().Add(Fld_id, IntClassXtn.Instance).Add(Fld_path, StringClassXtn.Instance).Add("format", StringClassXtn.Instance);
 }

@@ -44,7 +44,7 @@ public class Json_kv_ary_srl {
 		KeyVal[] rv = new KeyVal[subs_len];
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm sub = itm.Get_at(i);
-			KeyVal kv = KeyVal_.new_(Int_.Xto_str(i + Int_.Base1), Val_by_itm(sub));
+			KeyVal kv = KeyVal_.new_(Int_.To_str(i + Int_.Base1), Val_by_itm(sub));
 			rv[i] = kv;
 		}
 		return rv;

@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Xot_defn_ {
-	public static final Xot_defn Null = Xot_defn_null._;
+	public static final Xot_defn Null = Xot_defn_null.Instance;
 	public static final byte 
 	  Tid_null = 0
 	, Tid_func = 1

@@ -86,7 +86,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	DbMaprMgr mgr; Db_conn conn; String curTableName; Db_qry_insert insertCmd;		
 	public static DbMaprWtr new_by_url_(Db_conn_info url) {
 		DbMaprWtr rv = new DbMaprWtr();
-		rv.conn = Db_conn_pool.I.Get_or_new(url);
+		rv.conn = Db_conn_pool.Instance.Get_or_new(url);
 		return rv;
 	}	DbMaprWtr() {}
 	public static final String Key_Mgr = "DbMapr.mgr";

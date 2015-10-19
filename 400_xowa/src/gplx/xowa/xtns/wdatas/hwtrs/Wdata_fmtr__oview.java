@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.xtns.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 	private Xoapi_wikibase wikibase_api; private Url_encoder href_encoder;
 	private Wdata_fmtr__oview_alias_itm fmtr_aliases = new Wdata_fmtr__oview_alias_itm();
@@ -33,7 +33,7 @@ class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 	public void Init_by_wdoc(Wdata_doc wdoc) {
 		this.wdoc = wdoc;
 	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		byte[][] core_langs		= wikibase_api.Core_langs();			
 		byte[] oview_label		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Label_list(), core_langs);
 		byte[] oview_descr		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Descr_list(), core_langs);
@@ -79,7 +79,7 @@ class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 class Wdata_fmtr__oview_alias_itm implements Bry_fmtr_arg {
 	private byte[][] ary;
 	public void Init_by_itm(byte[][] ary) {this.ary = ary;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		if (ary == null) return;
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)

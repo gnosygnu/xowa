@@ -30,13 +30,13 @@ public class Pfunc_urlfunc_tst {
 	@Test   public void Fullurl_arg()		{fxt.Test_parse_tmpl_str_test("{{fullurle:a&b! c|action=edit}}"				, "{{test}}", "//en.wikipedia.org/wiki/A%26b!_c?action=edit");}
 	@Test   public void Random()			{fxt.Test_parse_tmpl_str_test("{{fullurle:a&b! c|action=edit}}"				, "{{test|a|b|c}}", "//en.wikipedia.org/wiki/A%26b!_c?action=edit");}
 	@Test   public void Xwiki()	{
-		fxt.Wiki().Xwiki_mgr().Add_full("commons", "commons.wikimedia.org");
+		fxt.Wiki().Xwiki_mgr().Add_by_atrs("commons", "commons.wikimedia.org");
 		fxt.Reset().Test_parse_tmpl_str_test("{{localurl:commons:A}}"		, "{{test}}", "//commons.wikimedia.org/wiki/A");
 		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:commons:A}}"		, "{{test}}", "//commons.wikimedia.org/wiki/A");
 		fxt.Reset().Test_parse_tmpl_str_test("{{canonicalurl:commons:A}}"	, "{{test}}", "https://commons.wikimedia.org/wiki/A");
 	}
 	@Test   public void Xwiki_qarg_fix()	{
-		fxt.Wiki().Xwiki_mgr().Add_full("commons", "commons.wikimedia.org");
+		fxt.Wiki().Xwiki_mgr().Add_by_atrs("commons", "commons.wikimedia.org");
 		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:commons:A|key=val}}"	, "{{test}}", "//commons.wikimedia.org/wiki/A?key=val");
 	}
 }

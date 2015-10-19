@@ -71,7 +71,7 @@ class Dg_word {
 			bfr.Add(itm.Raw());
 		}
 		bfr.Add_byte_apos();
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public static Dg_word[] Ary_new_by_str_ary(String[] ary) {
 		int ary_len = ary.length;

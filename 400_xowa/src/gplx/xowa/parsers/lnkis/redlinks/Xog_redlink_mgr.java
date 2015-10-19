@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.hdumps.core.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xog_redlink_mgr implements GfoInvkAble {
 	private Xog_win_itm win; private Xog_html_itm html_itm; private Xowe_wiki wiki; private Xoae_page page;
@@ -29,7 +29,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 		this.redlink_lnki_list = page.Redlink_lnki_list();
 		this.lnki_list = redlink_lnki_list.Lnki_list();
 		this.thread_id = redlink_lnki_list.Thread_id();
-		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_.I : Gfo_usr_dlg_.Noop;
+		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_.Instance : Gfo_usr_dlg_.Noop;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) Redlink();
@@ -40,7 +40,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 		synchronized (this) {	// NOTE: attempt to eliminate random IndexBounds errors; DATE:2014-09-02
 			if (redlink_lnki_list.Disabled()) return;
 			List_adp work_list = List_adp_.new_();
-			Ordered_hash page_hash = Ordered_hash_.new_bry_();
+			Ordered_hash page_hash = Ordered_hash_.New_bry();
 			page_hash.Clear(); // NOTE: do not clear in Page_bgn, else will fail b/c of threading; EX: Open Page -> Preview -> Save; DATE:2013-11-17
 			work_list.Clear();
 			int len = lnki_list.Count();
@@ -79,7 +79,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 				Xowd_page_itm db_page = (Xowd_page_itm)page_hash.Get_by(full_db);
 				if (db_page == null) continue;	// pages shouldn't be null, but just in case
 				if (!db_page.Exists()) {
-					String lnki_id = Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.Xto_str(lnki.Html_uid());
+					String lnki_id = Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.To_str(lnki.Html_uid());
 					if (variants_enabled) {
 						Xowd_page_itm vnt_page = vnt_mgr.Convert_mgr().Convert_ttl(wiki, lnki.Ttl());
 						if (vnt_page != null) {
@@ -97,13 +97,13 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 					if (win.Usr_dlg().Canceled()) return;
 					if (redlink_lnki_list.Thread_id() != thread_id) return;
 					int uid = lnki.Html_uid();
-					gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.Xto_str(uid));
+					gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.To_str(uid));
 					redlink_mgr.Add(uid);
 					++redlink_count;
 				}
 			}
 			if (log_enabled)
-				usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.Xto_str_and_clear());
+				usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.To_str_and_clear());
 		}
 	}
 	public static final Xog_redlink_mgr Null = new Xog_redlink_mgr(); Xog_redlink_mgr() {}
@@ -118,6 +118,6 @@ class Xog_redlink_wkr {
 		}
 	}
 	public static void Redlink(Xog_html_itm html_itm, int uid) {
-		gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.Xto_str(uid));
+		gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.To_str(uid));
 	}
 }

@@ -56,7 +56,7 @@ public class Xof_math_subst_regy {
 		}
 		for (int i = 0; i < dollarSignCount; i++)
 			bfr.Add_byte(Byte_ascii.Dollar);
-		return bfr.Xto_bry_and_clear_and_trim();
+		return bfr.To_bry_and_clear_and_trim();
 	}	boolean init = false;
 	public Xof_math_subst_regy Init() {
 		if (init) return this;

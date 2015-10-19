@@ -51,7 +51,8 @@ public class Err_ {
 		return new Err(Bool_.Y, Trace_null, Type__gplx, "cast failed", "type", Type_adp_.NameOf_type(t), "obj", o_str);
 	}
 
-	public static String Message_lang(Exception e)		{return e.getMessage();} 
+	public static String Message_lang(Exception e)			{return e.getMessage();} 
+	public static String Message_lang_error(Error e)		{return e.getMessage();} 
 		public static String Trace_lang(Exception e) 	{return Trace_lang_exec(e.getStackTrace());}
 	public static String Trace_lang(Error e) 		{return Trace_lang_exec(e.getStackTrace());}
 	private static String Trace_lang_exec(StackTraceElement[] ary) {

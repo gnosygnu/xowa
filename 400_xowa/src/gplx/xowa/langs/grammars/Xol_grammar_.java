@@ -38,18 +38,18 @@ public class Xol_grammar_ {
 	}
 	public static Xol_grammar new_by_lang_id(int lang_id) {
 		switch (lang_id) {
-			case Xol_lang_itm_.Id_fi:	return new Xol_grammar_fi();
-			case Xol_lang_itm_.Id_ru:	return new Xol_grammar_ru();
-			case Xol_lang_itm_.Id_pl:	return Xol_grammar__noop._;
-			default:					return Xol_grammar__unimplemented._;
+			case Xol_lang_stub_.Id_fi:	return new Xol_grammar_fi();
+			case Xol_lang_stub_.Id_ru:	return new Xol_grammar_ru();
+			case Xol_lang_stub_.Id_pl:	return Xol_grammar__noop.Instance;
+			default:					return Xol_grammar__unimplemented.Instance;
 		}
 	}
 }
 class Xol_grammar__unimplemented implements Xol_grammar {
-	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang lang, byte[] word, byte[] type) {return false;}
-	public static final Xol_grammar__unimplemented _ = new Xol_grammar__unimplemented(); Xol_grammar__unimplemented() {}
+	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {return false;}
+	public static final Xol_grammar__unimplemented Instance = new Xol_grammar__unimplemented(); Xol_grammar__unimplemented() {}
 }
 class Xol_grammar__noop implements Xol_grammar {
-	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang lang, byte[] word, byte[] type) {bfr.Add(word); return true;}
-	public static final Xol_grammar__noop _ = new Xol_grammar__noop(); Xol_grammar__noop() {}
+	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {bfr.Add(word); return true;}
+	public static final Xol_grammar__noop Instance = new Xol_grammar__noop(); Xol_grammar__noop() {}
 }

@@ -128,11 +128,11 @@ public class Int_ implements GfoInvkAble {
 		if (val < 0) throw Err_.new_wo_type("key must be >= 0", "key", key, "val", val);
 		return this;
 	}
-	public static String Xto_str_pad_bgn_space(int v, int reqdPlaces)	{return Xto_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
-	public static String Xto_str_pad_bgn_zero(int v, int reqdPlaces)	{return Xto_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Num_0, true);}	// EX: 1, 3 returns "001"
-	static String Xto_str_pad_bgn_zero(int val, int places, byte pad_chr, boolean bgn) {
+	public static String To_str_pad_bgn_space(int v, int reqdPlaces)	{return To_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
+	public static String To_str_pad_bgn_zero(int v, int reqdPlaces)	{return To_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Num_0, true);}	// EX: 1, 3 returns "001"
+	static String To_str_pad_bgn_zero(int val, int places, byte pad_chr, boolean bgn) {
 		int len = DigitCount(val);
-		int pad_len = places - len; if (pad_len < 0) return Int_.Xto_str(val);
+		int pad_len = places - len; if (pad_len < 0) return Int_.To_str(val);
 		Bry_bfr bfr = Bry_bfr.new_();
 		boolean neg = val < 0;
 		if (bgn) {	// special logic to handle negative numbers; EX: -1 -> "-001", not "00-1"
@@ -146,20 +146,20 @@ public class Int_ implements GfoInvkAble {
 			bfr.Add_int_fixed(val, len);
 		bfr.Add_byte_repeat(pad_chr, pad_len);
 		if (bgn) bfr.Add_int_fixed(val, len);	// NOTE: neg handled above
-		return bfr.Xto_str();
+		return bfr.To_str();
 	}
 	public static int read_(Object o) {String s = String_.as_(o); return s != null ? Int_.parse(s) : Int_.cast(o);}
 	public static int parse(String raw) {try {return Integer.parseInt(raw);} catch(Exception e) {throw Err_.new_parse_exc(e, int.class, raw);}}
 	public static int cast(Object obj) {try {return (Integer)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, int.class, obj);}}
 	public static int cast_or(Object obj, int or) {try {return (Integer)obj;} catch(Exception e) {Err_.Noop(e); return or;}}
 	public static int Xby_double_(double v) {return (int)v;}
-	public static String Xto_str(int v) {return new Integer(v).toString();}
-	public static String Xto_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
+	public static String To_str(int v) {return new Integer(v).toString();}
+	public static String To_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
 	public static boolean TypeMatch(Class<?> type) {return type == int.class || type == Integer.class;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_XtoStr_PadBgn))			{
 			int v = m.ReadInt(GfsCore_.Arg_primitive), pad = m.ReadInt("pad");
-			return ctx.Deny() ? (Object)this : Xto_str_pad_bgn_zero(v, pad);
+			return ctx.Deny() ? (Object)this : To_str_pad_bgn_zero(v, pad);
 		}
 		else if	(ctx.Match(k, "Add")) {
 			int v = m.ReadInt(GfsCore_.Arg_primitive), operand = m.ReadInt("operand");
@@ -168,18 +168,17 @@ public class Int_ implements GfoInvkAble {
 		else												return GfoInvkAble_.Rv_unhandled;			
 	}	public static final String Invk_XtoStr_PadBgn = "XtoStr_PadBgn";
         public static final Int_ Gfs = new Int_();
-//		public static int Xto_int_hex(String v) {return Integer.parseInt(v, 16);}	
-	public static int Xto_int_hex(byte[] src) {return Xto_int_hex(src, 0, src.length);}
-	public static int Xto_int_hex(byte[] src, int bgn, int end) {
+	public static int To_int_hex(byte[] src) {return To_int_hex(src, 0, src.length);}
+	public static int To_int_hex(byte[] src, int bgn, int end) {
 		int rv = 0; int factor = 1;
 		for (int i = end - 1; i >= bgn; i--) {
-			int val = Xto_int_hex(src[i]);
+			int val = To_int_hex(src[i]);
 			rv += (val * factor);
 			factor *= 16;
 		}
 		return rv;
 	}
-	public static int Xto_int_hex(byte b) {
+	public static int To_int_hex(byte b) {
 		switch (b) {
 			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
@@ -192,18 +191,18 @@ public class Int_ implements GfoInvkAble {
 				return -1;
 		}
 	}
-	public static String Xto_str_hex(int v) {return Xto_str_hex(Bool_.Y, Bool_.Y, v);}
-	public static String Xto_str_hex(boolean zero_pad, boolean upper, int v) {
+	public static String To_str_hex(int v) {return To_str_hex(Bool_.Y, Bool_.Y, v);}
+	public static String To_str_hex(boolean zero_pad, boolean upper, int v) {
 		String rv = Integer.toHexString(v); 
 		int rv_len = String_.Len(rv);
 		if (zero_pad && rv_len < 8) rv = String_.Repeat("0", 8 - rv_len) + rv;
 		return upper ? String_.Upper(rv) : rv;
 	}
-	public static String Xto_str(int[] ary) {return Xto_str(ary, " ");}
-	public static String Xto_str(int[] ary, String dlm) {
+	public static String To_str(int[] ary) {return To_str(ary, " ");}
+	public static String To_str(int[] ary, String dlm) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.length; i++)
-			sb.Add_spr_unless_first(Int_.Xto_str(ary[i]), dlm, i);
+			sb.Add_spr_unless_first(Int_.To_str(ary[i]), dlm, i);
 		return sb.To_str();
 	}
 	public static int[] Ary_parse(String raw_str, int reqd_len, int[] or) {
@@ -251,7 +250,7 @@ public class Int_ implements GfoInvkAble {
 			rv[i] = Int_.parse(ary[i]);
 		return rv;
 	}
-	public static byte[] Xto_bry(int v) {return Bry_.new_a7(Xto_str(v));}
+	public static byte[] To_bry(int v) {return Bry_.new_a7(To_str(v));}
 	public static final int
 		Min_value	= Integer.MIN_VALUE	
 	,	Max_value	= Integer.MAX_VALUE	

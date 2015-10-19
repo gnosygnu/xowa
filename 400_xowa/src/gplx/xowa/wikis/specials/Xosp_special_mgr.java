@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.file_browsers.*;
-import gplx.xowa.gui.*;
+import gplx.xowa.guis.*;
 public class Xosp_special_mgr {
 	private final Xowv_wiki wiki;
 	private final Hash_adp_bry hash;

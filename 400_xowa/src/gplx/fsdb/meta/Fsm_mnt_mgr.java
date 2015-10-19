@@ -31,8 +31,8 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 		}
 		this.insert_idx = cfg_tbl.Select_int(Cfg_grp_core, Cfg_key_mnt_insert_idx);
 		Db_cfg_hash cfg_hash = this.Mnts__get_main().Cfg_mgr().Grps_get_or_load(Xof_fsdb_mgr_cfg.Grp_xowa);
-		boolean use_thumb_w	= cfg_hash.Get(Xof_fsdb_mgr_cfg.Key_upright_use_thumb_w).To_yn_or_n();
-		boolean fix_default	= cfg_hash.Get(Xof_fsdb_mgr_cfg.Key_upright_fix_default).To_yn_or_n();
+		boolean use_thumb_w	= cfg_hash.Get_by(Xof_fsdb_mgr_cfg.Key_upright_use_thumb_w).To_yn_or_n();
+		boolean fix_default	= cfg_hash.Get_by(Xof_fsdb_mgr_cfg.Key_upright_fix_default).To_yn_or_n();
 		this.patch_upright_tid = Xof_patch_upright_tid_.Merge(use_thumb_w, fix_default);
 	}
 	public int			Mnts__len()						{return mnt_ary_len;}

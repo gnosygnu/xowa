@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.statistics; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
-import gplx.xowa.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.wikis.nss.*;
 public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
 //		private Xop_statistics_stats_wiki_grp stats_wiki = new Xop_statistics_stats_wiki_grp();
@@ -45,7 +45,7 @@ public class Xop_statistics_page implements Xows_page {
 }
 class Xop_statistics_stats_page_grp implements Bry_fmtr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void XferAry(Bry_bfr bfr, int idx) {			
+	public void Fmt__do(Bry_bfr bfr) {			
 		byte[] lbl_header_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_pages);
 		byte[] lbl_articles = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_articles);
 		byte[] lbl_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages);
@@ -71,7 +71,7 @@ class Xop_statistics_stats_page_grp implements Bry_fmtr_arg {
 class Xop_statistics_stats_ns_grp implements Bry_fmtr_arg {
 	private Xop_statistics_stats_ns_itm ns_itm_fmtr = new Xop_statistics_stats_ns_itm();
 	public void Wiki_(Xowe_wiki v) {this.wiki = v; ns_itm_fmtr.Wiki_(v);} private Xowe_wiki wiki;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		byte[] lbl_header_ns = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_ns);
 		fmtr_ns_grp.Bld_bfr_many(bfr, lbl_header_ns, ns_itm_fmtr);
 	}
@@ -84,7 +84,7 @@ class Xop_statistics_stats_ns_grp implements Bry_fmtr_arg {
 }
 class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Count();
 		for (int i = 0; i < ns_len; i++) {
@@ -105,7 +105,7 @@ class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
 }
 class Xop_statistics_stats_wiki_grp implements Bry_fmtr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.To_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
 	}
 	private Bry_fmtr fmtr_wiki = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

@@ -26,7 +26,7 @@ public class GfmlDoc {
 	@gplx.Internal protected void RootLxr_set(GfmlLxr v) {rootLxr = v;}
 	@gplx.Internal protected void Clear() {
 		usrMsgs.Clear();
-		rootNde = GfmlNde.named_(GfmlTkn_.cmd_("tkn.gfml.root_tkn", GfmlBldrCmd_pendingTkns_add._), GfmlType_.Null);
+		rootNde = GfmlNde.named_(GfmlTkn_.cmd_("tkn.gfml.root_tkn", GfmlBldrCmd_pendingTkns_add.Instance), GfmlType_.Null);
 		rootNde.DocPos_(GfmlDocPos_.Root);
 	}
 	@gplx.Internal protected static GfmlDoc new_() {
@@ -41,5 +41,5 @@ public class GfmlDoc {
 //		public GfmlTkn BgnBrace() {return bgnBrace;} public GfmlDocEditor BgnBrace_(GfmlTkn v) {bgnBrace = v; return this;} GfmlTkn bgnBrace = GfmlTkn_.new_("{", "");
 //		public GfmlTkn EndBrace() {return endBrace;} public GfmlDocEditor EndBrace_(GfmlTkn v) {endBrace = v; return this;} GfmlTkn endBrace = GfmlTkn_.new_("}", "");
 //		public GfmlTkn Hnd() {return hnd;} public GfmlDocEditor Hnd_(GfmlTkn v) {hnd = v; return this;} GfmlTkn hnd = GfmlTkn_.new_(":", "");
-//        public static final GfmlDocEditor _ = new GfmlDocEditor(); GfmlDocEditor() {}
+//        public static final GfmlDocEditor Instance = new GfmlDocEditor(); GfmlDocEditor() {}
 //	}

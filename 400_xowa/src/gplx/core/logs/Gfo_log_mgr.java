@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.logs; import gplx.*; import gplx.core.*;
 public class Gfo_log_mgr {
-	private final Ordered_hash fil_list = Ordered_hash_.new_();
+	private final Ordered_hash fil_list = Ordered_hash_.New();
 	private final Gfo_log_fil session_fil;
 	private final Io_url dir;
 	private final long size_dflt = Io_mgr.Len_mb * 2;

@@ -21,7 +21,7 @@ class Imap_pts_fmtr_arg implements Bry_fmtr_arg {
 	private double scale = 1; private Double_obj_val[] pts;
 	public void Scale_(double v) {this.scale = v;}
 	public void Pts_(Double_obj_val[] v) {this.pts = v;}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		int pts_len = pts.length;
 		for (int i = 0; i < pts_len; ++i) {
 			Double_obj_val pt = pts[i];

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.gui.views.*;
-import gplx.xowa.apis.xowa.startups.tabs.*;
+import gplx.xowa.guis.views.*;
+import gplx.xowa.apps.apis.xowa.startups.tabs.*;
 public class Xous_window_mgr implements GfoInvkAble {
 	public Xous_window_mgr(Xoue_user user) {
 		this.user = user;
@@ -27,9 +27,9 @@ public class Xous_window_mgr implements GfoInvkAble {
 	public boolean Maximized() {return maximized;} private boolean maximized = false;
 	public void Save_window(gplx.gfui.GfuiWin win) {
 		Xoae_app app = user.Appe();
-		gplx.xowa.cfgs.Xoa_cfg_mgr cfg_mgr = app.Cfg_mgr();
+		gplx.xowa.apps.cfgs.Xoa_cfg_mgr cfg_mgr = app.Cfg_mgr();
 		if (user.Cfg_mgr().Startup_mgr().Window_mgr().Mode_tid() == Xouc_window_mgr.Mode_tid_previous) {
-			cfg_mgr.Set_by_app("app.user.session.window.maximized"	, Yn.Xto_str(win.Maximized()));
+			cfg_mgr.Set_by_app("app.user.session.window.maximized"	, Yn.To_str(win.Maximized()));
 			cfg_mgr.Set_by_app("app.user.session.window.rect"		, win.Rect().Xto_str());
 		}
 		Xoapi_startup_tabs startup_tabs = app.Api_root().App().Startup().Tabs();
@@ -48,12 +48,12 @@ public class Xous_window_mgr implements GfoInvkAble {
 			Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
 			bfr.Add_str(tab.Page().Url().To_str());
 		}
-		return bfr.Xto_str_and_clear();
+		return bfr.To_str_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rect))					return rect;
 		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_maximized))				return Yn.Xto_str(maximized);
+		else if	(ctx.Match(k, Invk_maximized))				return Yn.To_str(maximized);
 		else if	(ctx.Match(k, Invk_maximized_))				maximized = m.ReadYn("v");
 		return this;
 	}	public static final String Invk_rect = "rect", Invk_rect_ = "rect_", Invk_maximized = "maximized", Invk_maximized_ = "maximized_";

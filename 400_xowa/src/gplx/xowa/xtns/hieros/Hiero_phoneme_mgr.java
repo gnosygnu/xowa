@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.dsvs.*;
 class Hiero_phoneme_mgr implements GfoInvkAble {
-	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Hiero_phoneme_srl srl;
 	public Hiero_phoneme_mgr() {srl = new Hiero_phoneme_srl(this);}
 	public int Len() {return hash.Count();}

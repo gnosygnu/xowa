@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.xowa.html.sidebar.*;
+import gplx.xowa.htmls.sidebar.*;
 public class Xow_msg_mgr implements GfoInvkAble {
-	private final Xowe_wiki wiki; private Xol_lang lang; private final Xol_msg_mgr msg_mgr;
-	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang lang) {
+	private final Xowe_wiki wiki; private Xol_lang_itm lang; private final Xol_msg_mgr msg_mgr;
+	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
 		this.msg_mgr = new Xol_msg_mgr(wiki, false);
 	}
 	public void Clear() {msg_mgr.Clear();}
-	public void Lang_(Xol_lang v) {
+	public void Lang_(Xol_lang_itm v) {
 		this.lang = v;
 		this.Clear();
 	}
@@ -97,7 +97,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		if (accesskey_found)
 			bfr.Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Brack_bgn).Add(accesskey_val).Add_byte(Byte_ascii.Brack_end);
 		bfr.Add_byte(Byte_ascii.Quote);
-		byte[] rv = bfr.Xto_bry_and_clear();
+		byte[] rv = bfr.To_bry_and_clear();
 		if (itm == null)
 			return rv;
 		else {

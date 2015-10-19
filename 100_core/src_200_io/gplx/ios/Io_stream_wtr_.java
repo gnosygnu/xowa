@@ -76,11 +76,11 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 	java.io.OutputStream zip_stream;
 	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} Io_url url;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} Bry_bfr trg_bfr; java.io.ByteArrayOutputStream mem_stream;
-	public byte[] To_ary_and_clear() {return trg_bfr.Xto_bry_and_clear();}
+	public byte[] To_ary_and_clear() {return trg_bfr.To_bry_and_clear();}
 	@SuppressWarnings("resource") public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream = null;
 		if (trg_bfr == null) {
-			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");			
+			if (!Io_mgr.Instance.ExistsFil(url)) Io_mgr.Instance.SaveFilStr(url, "");			
 			try {bry_stream = new java.io.FileOutputStream(url.Raw());}
 			catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}		
 		}
@@ -134,7 +134,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 	public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream;
 		if (trg_bfr == null) {
-			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");	// create file if it doesn't exist
+			if (!Io_mgr.Instance.ExistsFil(url)) Io_mgr.Instance.SaveFilStr(url, "");	// create file if it doesn't exist
 			try {bry_stream = new java.io.FileOutputStream(url.Xto_api());}
 			catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}
 		}
@@ -170,7 +170,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Raw());}
 	}
 	public byte[] To_ary_and_clear() {
-		byte[] rv = trg_bfr.Xto_bry_and_clear();
+		byte[] rv = trg_bfr.To_bry_and_clear();
 		this.Rls();
 		return rv;
 	}
@@ -183,7 +183,7 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 	public Io_stream_wtr Open() {
 		try {
 			if (trg_bfr == null)
-				bry_stream = Io_mgr.I.OpenStreamWrite(url);
+				bry_stream = Io_mgr.Instance.OpenStreamWrite(url);
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}
 		return this;
@@ -197,7 +197,7 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 			trg_bfr.Add_mid(bry, bgn, bgn + len);
 	}
 	public byte[] To_ary_and_clear() {		 
-		return trg_bfr == null ? Io_mgr.I.LoadFilBry(url) : trg_bfr.Xto_bry_and_clear();
+		return trg_bfr == null ? Io_mgr.Instance.LoadFilBry(url) : trg_bfr.To_bry_and_clear();
 	}
 	public void Flush() {
 		if (trg_bfr == null)

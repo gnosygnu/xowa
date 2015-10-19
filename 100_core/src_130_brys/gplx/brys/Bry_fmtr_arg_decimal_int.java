@@ -19,7 +19,7 @@ package gplx.brys; import gplx.*;
 public class Bry_fmtr_arg_decimal_int implements Bry_fmtr_arg {
 	public int Val() {return val;} public Bry_fmtr_arg_decimal_int Val_(int v) {val = v; return this;} int val;
 	public Bry_fmtr_arg_decimal_int Places_(int v) {places = v; multiple = (int)Math_.Pow(10, v); return this;} int multiple = 1000, places = 3;
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Fmt__do(Bry_bfr bfr) {
 		bfr.Add_int_variable(val / multiple).Add_byte(Byte_ascii.Dot).Add_int_fixed(val % multiple, places);
 	}
 }

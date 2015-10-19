@@ -93,7 +93,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		if (i == Gfui_tab_itm_data.Idx_null) return;	// 0 tabs; return;
 		msg_tabs_select_by_idx_swt.Clear();
 		msg_tabs_select_by_idx_swt.Add("v", i);
-		cmd_sync.Invk(GfsCtx._, 0, Invk_tabs_select_by_idx_swt, msg_tabs_select_by_idx_swt);
+		cmd_sync.Invk(GfsCtx.Instance, 0, Invk_tabs_select_by_idx_swt, msg_tabs_select_by_idx_swt);
 	}	private GfoMsg msg_tabs_select_by_idx_swt = GfoMsg_.new_cast_(Invk_tabs_select_by_idx_swt);
 	@Override public void Tabs_switch(int src, int trg) {Tabs_switch(tab_folder.getItem(src), tab_folder.getItem(trg));}
 	public boolean Tabs_switch(CTabItem src_tab_itm, CTabItem trg_tab_itm) {
@@ -120,7 +120,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		if (itm == null) return;	// 0 tabs; return;
 		msg_tabs_select_by_itm_swt.Clear();
 		msg_tabs_select_by_itm_swt.Add("v", itm);
-		cmd_sync.Invk(GfsCtx._, 0, Invk_tabs_select_by_itm_swt, msg_tabs_select_by_itm_swt);
+		cmd_sync.Invk(GfsCtx.Instance, 0, Invk_tabs_select_by_itm_swt, msg_tabs_select_by_itm_swt);
 	}	private GfoMsg msg_tabs_select_by_itm_swt = GfoMsg_.new_cast_(Invk_tabs_select_by_itm_swt);
 	private void Tabs_select_by_idx_swt(int idx) {
 		tab_folder.setSelection(idx);

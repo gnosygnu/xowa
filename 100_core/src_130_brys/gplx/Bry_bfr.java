@@ -50,7 +50,7 @@ public class Bry_bfr {
 	public byte[] To_bry_and_rls() {
 		byte[] rv = null;
 		synchronized (bfr) {
-			rv = Xto_bry();
+			rv = To_bry();
 			this.Clear();
 			if (reset > 0) Reset_if_gt(reset);
 			synchronized (mkr_mgr) {
@@ -279,6 +279,7 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr Add_str(String v) {return Add_str_u8(v);}
+	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}
 	public Bry_bfr Add_str_u8(String str) {
 		try {
 			int str_len = str.length();							
@@ -290,6 +291,7 @@ public class Bry_bfr {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
+	public Bry_bfr Add_str_a7_w_nl(String s) {Add_str_a7(s); return Add_byte_nl();}
 	public Bry_bfr Add_str_a7(String str) {
 		try {
 			int bry_len = str.length();						
@@ -310,8 +312,8 @@ public class Bry_bfr {
 		this.Add_byte(line ? Byte_ascii.Nl : Byte_ascii.Tab);
 		return this;
 	}
-	public Bry_bfr Add_float(float f) {Add_str(Float_.Xto_str(f)); return this;}
-	public Bry_bfr Add_double(double v) {Add_str(Double_.Xto_str(v)); return this;}
+	public Bry_bfr Add_float(float f) {Add_str(Float_.To_str(f)); return this;}
+	public Bry_bfr Add_double(double v) {Add_str(Double_.To_str(v)); return this;}
 	public Bry_bfr Add_dte(DateAdp val) {return Add_dte_segs(val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
 	public Bry_bfr Add_dte_segs(int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
 		if (bfr_len + 19      > bfr_max) Resize((bfr_len + 19) * 2);
@@ -403,7 +405,7 @@ public class Bry_bfr {
 		else if	(o_type == Boolean.class)			Add_yn(Bool_.cast(o));				
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
-		else										((Bry_fmtr_arg)o).XferAry(this, 0);
+		else										((Bry_fmtr_arg)o).Fmt__do(this);
 		return this;
 	}
 	public Bry_bfr Add_obj_strict(Object o) {
@@ -420,7 +422,7 @@ public class Bry_bfr {
 		else if	(o_type == Boolean.class)			Add_bool(Bool_.cast(o));			
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
-		else										((Bry_fmtr_arg)o).XferAry(this, 0);
+		else										((Bry_fmtr_arg)o).Fmt__do(this);
 		return this;
 	}
 	public Bry_bfr Add_yn(boolean v) {Add_byte(v ? Byte_ascii.Ltr_y : Byte_ascii.Ltr_n); return this;}
@@ -495,31 +497,26 @@ public class Bry_bfr {
 		return this;
 	}
 	public boolean Eq(byte b) {return bfr_len == 1 && bfr[0] == b;}
-	public byte[] Xto_bry(int bgn, int end) {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, bgn, end);}
-	public byte[] Xto_bry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
-	public byte[] Xto_bry_and_reset(int v) {
-		byte[] rv = Xto_bry();
-		this.Clear().Reset_if_gt(v);
-		return rv;
-	}
-	public byte[] Xto_bry_and_clear_and_trim() {return Xto_bry_and_clear_and_trim(true, true, Bry_.Trim_ary_ws);}
-	public byte[] Xto_bry_and_clear_and_trim(boolean trim_bgn, boolean trim_end, byte[] trim_bry) {
+	public byte[] To_bry(int bgn, int end) {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, bgn, end);}
+	public byte[] To_bry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
+	public byte[] To_bry_and_clear_and_trim() {return To_bry_and_clear_and_trim(true, true, Bry_.Trim_ary_ws);}
+	public byte[] To_bry_and_clear_and_trim(boolean trim_bgn, boolean trim_end, byte[] trim_bry) {
 		byte[] rv = Bry_.Trim(bfr, 0, bfr_len, trim_bgn, trim_end, trim_bry);
 		this.Clear();
 		return rv;
 	}
-	public byte[] Xto_bry_and_clear() {
-		byte[] rv = Xto_bry();
+	public byte[] To_bry_and_clear() {
+		byte[] rv = To_bry();
 		this.Clear();
 		if (reset > 0) Reset_if_gt(reset);
 		return rv;
 	}
-	public String Xto_str()								{return String_.new_u8(Xto_bry());}
-	public String Xto_str_by_pos(int bgn, int end)		{return String_.new_u8(Xto_bry(), bgn, end);}
-	public String Xto_str_and_clear()					{return String_.new_u8(Xto_bry_and_clear());}
-	public String Xto_str_and_clear_and_trim()			{return String_.new_u8(Xto_bry_and_clear_and_trim());}
-	public int XtoIntAndClear(int or) {int rv = XtoInt(or); this.Clear(); return rv;}
-	public int XtoInt(int or) {
+	public String To_str()								{return String_.new_u8(To_bry());}
+	public String To_str_by_pos(int bgn, int end)		{return String_.new_u8(To_bry(), bgn, end);}
+	public String To_str_and_clear()					{return String_.new_u8(To_bry_and_clear());}
+	public String To_str_and_clear_and_trim()			{return String_.new_u8(To_bry_and_clear_and_trim());}
+	public int To_int_and_clear(int or) {int rv = To_int(or); this.Clear(); return rv;}
+	public int To_int(int or) {
 		switch (bfr_len) {
 			case 0: return or;
 			case 1: {

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.tdbs.*;
-import gplx.xowa.bldrs.sqls.*; import gplx.xowa.tdbs.bldrs.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.xowa.bldrs.sqls.*; import gplx.xowa.wikis.tdbs.bldrs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
 	private final Sql_file_parser parser = new Sql_file_parser(); private boolean fail = false;
 	public abstract String Cmd_key();
@@ -48,7 +48,7 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 	}
 	@gplx.Virtual public void Cmd_end() {
 		if (fail) return;
-		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_all._, new Io_sort_fil_basic(bldr.Usr_dlg(), make_url_gen, make_fil_len));
+		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_all.Instance, new Io_sort_fil_basic(bldr.Usr_dlg(), make_url_gen, make_fil_len));
 	}
 	public void Cmd_term() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

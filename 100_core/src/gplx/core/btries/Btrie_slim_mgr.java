@@ -21,11 +21,12 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	Btrie_slim_mgr(boolean case_match) {root = new Btrie_slim_itm(Byte_.Zero, null, !case_match);}	private Btrie_slim_itm root;
 	public int Count() {return count;} private int count;
 	public int Match_pos() {return match_pos;} private int match_pos;
+	public Object Match_exact(byte[] src) {return src == null ? null : Match_exact(src, 0, src.length);}
 	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
 		Object rv = Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
-	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);}
+	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos  ? Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
 	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_len) {
 		Object rv = null; int cur_pos = match_pos = bgn_pos;
 		Btrie_slim_itm cur = root;
@@ -47,6 +48,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Bry_.new_u8(val));}
 	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_slim_mgr Add_bry(byte[] v)							{return (Btrie_slim_mgr)Add_obj(v, v);}
+	public Btrie_slim_mgr Add_bry_bry(byte[] key, byte[] val)		{return (Btrie_slim_mgr)Add_obj(key, val);}
 	public Btrie_slim_mgr Add_bry_byte(byte b, byte val)			{return (Btrie_slim_mgr)Add_obj(new byte[] {b}, Byte_obj_val.new_(val));}
 	public Btrie_slim_mgr Add_bry_byte(byte[] bry, byte val)		{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(val));}
 	public Btrie_slim_mgr Add_str_byte__many(byte val, String... ary) {
@@ -127,7 +129,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 				pos = match_pos;
 			}
 		}
-		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
+		return dirty ? tmp_bfr.To_bry_and_clear() : src;
 	}
 	public void Clear() {root.Clear(); count = 0;}
 	public static Btrie_slim_mgr cs()				{return new Btrie_slim_mgr(Bool_.Y);}

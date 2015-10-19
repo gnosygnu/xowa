@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.*; import gplx.xowa.html.modules.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.wikis.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.apps.fsys.*;
 public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	@Override public boolean Enabled_default() {return true;}
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("hiero");

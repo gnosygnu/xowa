@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class UsrDlg_ {
-	public static final UsrDlg _ = UsrDlg.new_();
+	public static final UsrDlg Instance = UsrDlg.new_();
 }

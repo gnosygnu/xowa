@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.ctgs.*; import gplx.xowa.tdbs.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; 
 public class Xoctg_link_idx_wkr extends Xob_idx_base {	// NOTE: similar functionality to Xob_make_cmd_site, but more complicated due to p,f,s; not inheriting
 	Io_url src_link_dir; int make_fil_max = Int_.Min_value;
@@ -28,7 +28,7 @@ public class Xoctg_link_idx_wkr extends Xob_idx_base {	// NOTE: similar function
 		if (make_fil_max == Int_.Min_value) make_fil_max = Io_mgr.Len_mb;
 		make_link_mgr = new Xoctg_make_link_mgr(usr_dlg, make_fil_max, wiki.Tdb_fsys_mgr()); 
 		make_main_mgr = new Xoctg_make_main_mgr(usr_dlg, make_fil_max, wiki.Tdb_fsys_mgr());
-		Io_mgr.I.DeleteDirDeep_ary(make_link_mgr.Make_dir(), make_main_mgr.Make_dir());
+		Io_mgr.Instance.DeleteDirDeep_ary(make_link_mgr.Make_dir(), make_main_mgr.Make_dir());
 	}	Gfo_fld_rdr fld_rdr; Xoctg_make_link_mgr make_link_mgr;
 	@Override public void Cmd_run() {
 		Xoctg_make_link_grp cur_grp = null;
@@ -56,7 +56,7 @@ public class Xoctg_link_idx_wkr extends Xob_idx_base {	// NOTE: similar function
 		make_main_mgr.Flush();
 	}	private Xoctg_idx_data_link link_data = new Xoctg_idx_data_link();
 	@Override public void Cmd_end() {
-		if (delete_temp) Io_mgr.I.DeleteDirDeep_ary(src_link_dir, make_main_mgr.Src_dir());
+		if (delete_temp) Io_mgr.Instance.DeleteDirDeep_ary(src_link_dir, make_main_mgr.Src_dir());
 	}	boolean delete_temp = true;
 	private void Write_grp(byte[] cur_name, Xoctg_make_link_mgr make_link_mgr) {
 		make_main_mgr.Grps_write(cur_name, make_link_mgr.Subc_grp().Count(), make_link_mgr.File_grp().Count(), make_link_mgr.Page_grp().Count());
@@ -162,7 +162,7 @@ class Xoctg_make_main_mgr {
 		make_dir = fsys_mgr.Url_site_dir(Xotdb_dir_info_.Tid_category2_main);
 		make_cmd = new Xob_make_cmd_site(usr_dlg, make_dir, make_fil_max);
 		src_dir = fsys_mgr.Tmp_dir().GenSubDir_nest(Xob_cmd_keys.Key_tdb_cat_hidden_ttl, "make");
-		hidden_rdr = new Io_line_rdr(usr_dlg, Io_mgr.I.QueryDir_fils(src_dir));
+		hidden_rdr = new Io_line_rdr(usr_dlg, Io_mgr.Instance.QueryDir_fils(src_dir));
 	}	Gfo_fld_wtr make_fld_wtr; Bry_bfr make_fil_bfr; int make_fil_max; Xob_make_cmd_site make_cmd; Io_line_rdr hidden_rdr;
 	public Io_url Src_dir() {return src_dir;} Io_url src_dir;
 	public Io_url Make_dir() {return make_dir;} Io_url make_dir;

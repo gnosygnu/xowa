@@ -17,16 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
+import gplx.xowa.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+public class References_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	public byte[] Group() {return group;} public References_nde Group_(byte[] v) {group = v; return this;} private byte[] group = Bry_.Empty;
 	public int List_idx() {return list_idx;} public References_nde List_idx_(int v) {list_idx = v; return this;} private int list_idx;
-	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
-		if (xatr_key_obj == null) return;
-		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
-		switch (xatr_key.Val()) {
-			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
+	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
+		if (xatr_id_obj == null) return;
+		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		switch (xatr_id.Val()) {
+			case Xatr_id_group:		group = xatr.Val_as_bry(); break;
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
@@ -34,7 +34,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		Ref_itm_mgr ref_mgr = ctx.Cur_page().Ref_mgr();
 		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
-		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
+		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 			Xop_ctx references_ctx = Xop_ctx.new_sub_page_(wiki, ctx, ctx.Lst_page_regy()).References_group_(group);	// changed from following: "Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);"; DATE:2015-05-16;

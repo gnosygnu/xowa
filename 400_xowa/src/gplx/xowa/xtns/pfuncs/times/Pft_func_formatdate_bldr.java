@@ -21,10 +21,10 @@ public class Pft_func_formatdate_bldr {
 	public int Idx_cur() {return idx_cur;} private int idx_cur;
 	public Pft_func_formatdate_bldr Idx_nxt_(int v) {idx_nxt = v; return this;} private int idx_nxt;
 	public Pft_fmt_itm[] Fmt_itms() {return fmt_itms;} Pft_fmt_itm[] fmt_itms;
-	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm fmt_itm) {
+	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_fmt_itm fmt_itm) {
 		fmt_itm.Fmt(bfr, wiki, lang, date, this);
 	}
-	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm[] fmt_itms) {
+	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_fmt_itm[] fmt_itms) {
 		this.fmt_itms = fmt_itms;
 		int len = fmt_itms.length;
 		idx_cur = 0; idx_nxt = -1;
@@ -44,7 +44,7 @@ public class Pft_func_formatdate_bldr {
 			}
 		}
 		if (last != null) {
-			int year_int = bfr.XtoIntAndClear(-1);
+			int year_int = bfr.To_int_and_clear(-1);
 			if (year_int != -1) {	// handle no format; EX:{{#time:xh}} DATE:2014-07-20
 				date = DateAdp_.seg_(new int[]  {year_int, date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()});
 				last.Fmt(bfr, wiki, lang, date, this);

@@ -40,7 +40,7 @@ public class Object_ {
 		if		(Type_adp_.Eq(c, String_.Cls_ref_type))		return (String)v;
 		else if	(Type_adp_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
 		else if (Type_adp_.Eq(c, Bool_.Cls_ref_type))		return Bool_.cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
-		else if	(Type_adp_.Eq(c, Double_.Cls_ref_type))		return Double_.Xto_str_loose(Double_.cast(v));
+		else if	(Type_adp_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}
 	public static final byte[] Bry__null = Bry_.new_a7("null");

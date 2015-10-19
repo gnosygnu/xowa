@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_grammar extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_grammar;}
@@ -25,7 +25,7 @@ public class Pfunc_grammar extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		byte[] word = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
-		Xol_lang lang = ctx.Cur_page().Lang();
+		Xol_lang_itm lang = ctx.Cur_page().Lang();
 		boolean pass = false;
 		try {pass = lang.Grammar().Grammar_eval(bfr, lang, word, argx);}
 		catch (Exception e) {Err_.Noop(e);}

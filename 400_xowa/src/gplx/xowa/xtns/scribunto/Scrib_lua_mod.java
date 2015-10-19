@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_lua_mod {
-	private Ordered_hash hash = Ordered_hash_.new_();
+	private Ordered_hash hash = Ordered_hash_.New();
 	public Scrib_lua_mod(Scrib_core core, String name) {this.name = name; this.core = core;} private Scrib_core core;
 	public int Lua_id() {return lua_id;} private int lua_id = -1;
 	public String Name() {return name;} private String name;

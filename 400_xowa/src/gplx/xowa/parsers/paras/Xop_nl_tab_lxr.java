@@ -21,7 +21,7 @@ import gplx.xowa.parsers.tblws.*;
 public class Xop_nl_tab_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_nl_tab;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_nl_tab, this);} private static final byte[] Hook_nl_tab = new byte[] {Byte_ascii.Nl, Byte_ascii.Tab};
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int non_ws_pos = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);
@@ -49,5 +49,5 @@ public class Xop_nl_tab_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.Tab(cur_pos - 1, cur_pos));
 		return cur_pos;
 	}
-	public static final Xop_nl_tab_lxr _ = new Xop_nl_tab_lxr(); Xop_nl_tab_lxr() {}
+	public static final Xop_nl_tab_lxr Instance = new Xop_nl_tab_lxr(); Xop_nl_tab_lxr() {}
 }

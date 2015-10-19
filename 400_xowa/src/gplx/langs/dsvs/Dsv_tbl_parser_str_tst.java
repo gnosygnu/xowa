@@ -53,6 +53,13 @@ public class Dsv_tbl_parser_str_tst {
 		, fxt.itm_str_("b")
 		);
 	}
+	@Test  public void Incomplete_row_2() {	// PURPOSE: handle multiple incomplete cells
+		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		( "a|")
+		, fxt.mgr_str_(3)
+		, fxt.itm_str_("a", "")
+		);
+	}
 }
 abstract class Mok_mgr_base extends Dsv_wkr_base {
 	public abstract To_str_able[] Itms();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.pages.skins.*;
+import org.junit.*; import gplx.xowa.wikis.pages.skins.*;
 public class Articles_func_tst {
 	@Before public void init()				{fxt.Reset();} private Articles_func_fxt fxt = new Articles_func_fxt();
 	@Test  public void Basic() {
@@ -44,7 +44,7 @@ class Articles_func_fxt {
 		fxt.Test_parse_page_all_str(raw, "");
 		Xopg_xtn_skin_fmtr_arg fmtr_arg = new Xopg_xtn_skin_fmtr_arg(fxt.Page(), Xopg_xtn_skin_itm_tid.Tid_sidebar);
 		Bry_bfr bfr = Bry_bfr.new_();
-		fmtr_arg.XferAry(bfr, 0);
-		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
+		fmtr_arg.Fmt__do(bfr);
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

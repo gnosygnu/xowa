@@ -74,7 +74,7 @@ public class Xob_orig_regy_update_bmk_mgr implements GfoInvkAble {
 			repo_dirty = false;
 		}
 		if (ns_enable && ns_dirty) {
-			Save(Cfg_ns_prv, Int_.Xto_str(ns_prv));
+			Save(Cfg_ns_prv, Int_.To_str(ns_prv));
 			ns_dirty = false;
 		}
 		if (ttl_enable && ttl_dirty) {

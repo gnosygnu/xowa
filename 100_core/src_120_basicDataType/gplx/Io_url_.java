@@ -38,16 +38,16 @@ public class Io_url_ {
 	public static Io_url Usr_Gplx() {return Usr().GenSubDir("gplx");}
 	public static Io_url mem_dir_(String raw) {
 		raw = EndsWith_or_add(raw, Op_sys.Lnx.Fsys_dir_spr_str());
-		return new Io_url(raw, IoUrlInfoRegy._.Match(raw));
+		return new Io_url(raw, IoUrlInfoRegy.Instance.Match(raw));
 	}
-	public static Io_url mem_fil_(String raw) {return new_inf_(raw, IoUrlInfoRegy._.Match(raw));}
+	public static Io_url mem_fil_(String raw) {return new_inf_(raw, IoUrlInfoRegy.Instance.Match(raw));}
 	public static Io_url wnt_fil_(String raw) {return new_inf_(raw, IoUrlInfo_.Wnt);}
 	public static Io_url wnt_dir_(String raw) {return new_inf_(EndsWith_or_add(raw, Op_sys.Wnt.Fsys_dir_spr_str()), IoUrlInfo_.Wnt);}
 	public static Io_url lnx_fil_(String raw) {return new_inf_(raw, IoUrlInfo_.Lnx);}
 	public static Io_url lnx_dir_(String raw) {return new_inf_(EndsWith_or_add(raw, Op_sys.Lnx.Fsys_dir_spr_str()), IoUrlInfo_.Lnx);}
 	public static Io_url new_fil_(String raw) {return new_any_(raw);}
 	public static Io_url new_dir_(String raw) {return new_any_(raw);}	// NOTE: for now, same as new_fil; stack overflow when doing new_dir
-	public static Io_url new_any_(String raw) {return new_inf_(raw, IoUrlInfoRegy._.Match(raw));}
+	public static Io_url new_any_(String raw) {return new_inf_(raw, IoUrlInfoRegy.Instance.Match(raw));}
 	public static Io_url new_inf_(String raw, IoUrlInfo info) {return String_.Eq(raw, "") ? Io_url_.Empty : new Io_url(raw, info);}
 	public static Io_url http_any_(String src, boolean wnt) {
 		return new_any_(parse_http_file(src, wnt));

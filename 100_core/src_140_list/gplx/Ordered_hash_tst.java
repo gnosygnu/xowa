@@ -19,7 +19,7 @@ package gplx;
 import org.junit.*;
 public class Ordered_hash_tst {
 	@Before public void setup() {
-		hash = Ordered_hash_.new_();
+		hash = Ordered_hash_.New();
 	}
 	@Test  public void Get_at() {
 		hash.Add("key1", "val1");
