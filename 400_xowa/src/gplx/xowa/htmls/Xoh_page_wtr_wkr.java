@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; 
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
@@ -150,7 +150,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		if (ns_id == Xow_ns_.Id_category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, tidy_bfr);
 
 		// tidy html
-		gplx.xowa.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
+		gplx.xowa.htmls.core.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		if (tidy_mgr.Enabled()) tidy_mgr.Run_tidy_html(page, tidy_bfr);
 		
 		// add back to main bfr

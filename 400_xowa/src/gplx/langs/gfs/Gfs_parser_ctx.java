@@ -88,14 +88,14 @@ class Gfs_err_mgr {
 	}
 	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
 	String Fail_msg(String type, KeyValList fail_args) {
-		tmp_fail_bfr.Add_str(type).Add_byte(Byte_ascii.Colon);
+		tmp_fail_bfr.Add_str_u8(type).Add_byte(Byte_ascii.Colon);
 		int len = fail_args.Count();
 		for (int i = 0; i < len; i++) {
 			tmp_fail_bfr.Add_byte(Byte_ascii.Space);
 			KeyVal kv = fail_args.GetAt(i);
-			tmp_fail_bfr.Add_str(kv.Key());
+			tmp_fail_bfr.Add_str_u8(kv.Key());
 			tmp_fail_bfr.Add_byte(Byte_ascii.Eq).Add_byte(Byte_ascii.Apos);
-			tmp_fail_bfr.Add_str(kv.Val_to_str_or_empty()).Add_byte(Byte_ascii.Apos);
+			tmp_fail_bfr.Add_str_u8(kv.Val_to_str_or_empty()).Add_byte(Byte_ascii.Apos);
 		}
 		return tmp_fail_bfr.To_str_and_clear();
 	}

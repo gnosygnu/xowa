@@ -97,7 +97,7 @@ class Xow_cfg_wiki_core_fxt {
 		wiki.Cfg_wiki_core().Load(raw);
 		Tfds.Eq_str_lines(raw, String_.new_a7(wiki.Cfg_wiki_core().Build_gfs()));
 	}
-	public Xow_ns ns_(int id, boolean case_match, String name) {return new Xow_ns(id, case_match ? Xow_ns_case_.Id_all : Xow_ns_case_.Id_1st, Bry_.new_u8(name), false);}
+	public Xow_ns ns_(int id, boolean case_match, String name) {return new Xow_ns(id, case_match ? Xow_ns_case_.Tid__all : Xow_ns_case_.Tid__1st, Bry_.new_u8(name), false);}
 	public void Load_tst(String raw, Xow_ns... expd_ary) {
 		wiki.Cfg_wiki_core().Load(raw);
 		int expd_len = expd_ary.length;

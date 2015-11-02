@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.ios.*; import gplx.texts.*;
+import gplx.core.ios.*; import gplx.core.texts.*;
 public class Process_stream_rdr {
 	public Process_stream_rdr(byte[] bry_header, byte[] bry_body) {this.bry_header = bry_header; this.bry_body = bry_body;} private byte[] bry_header, bry_body;
 	public IoStream_stream_rdr Rdr() {return rdr;} IoStream_stream_rdr rdr = new IoStream_stream_rdr();

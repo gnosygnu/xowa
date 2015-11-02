@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.files.gui.*;
+import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.files.gui.*;
 public class Xows_ui_async_tst {
 	@Before public void init() {fxt.Clear();} private Xows_ui_async_fxt fxt = new Xows_ui_async_fxt();
 	@Test   public void Basic() {			

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 class Xosp_fbrow_data_dir {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public Xosp_fbrow_data_dir(Io_url url) {this.url = url;}

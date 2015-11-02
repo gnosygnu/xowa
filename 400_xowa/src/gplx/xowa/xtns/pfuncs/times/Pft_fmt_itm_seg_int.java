@@ -105,10 +105,10 @@ class Pft_fmt_itm_iso_fmt implements Pft_fmt_itm {
 	public Pft_fmt_itm_iso_fmt() {}
 	public int TypeId() {return Pft_fmt_itm_.Tid_iso_fmt;}
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		bfr.Add_str(date.XtoStr_fmt("yyyy-MM-dd"));
+		bfr.Add_str_a7(date.XtoStr_fmt("yyyy-MM-dd"));
 		bfr.Add_byte(Byte_ascii.Ltr_T);
-		bfr.Add_str(date.XtoStr_fmt("HH:mm:ss"));
-		bfr.Add_str(date.XtoStr_tz());
+		bfr.Add_str_a7(date.XtoStr_fmt("HH:mm:ss"));
+		bfr.Add_str_a7(date.XtoStr_tz());
 	}
 }
 class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
@@ -118,8 +118,8 @@ class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
 		int dow = date.DayOfWeek();
 		DateAdpTranslator_xapp.Translate(wiki, lang, DateAdp_.SegIdx_dayOfWeek, dow, bfr);
 		bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
-		bfr.Add_str(date.XtoStr_fmt("dd MMM yyyy HH:mm:ss"));	// NOTE: always UTC time 
-		bfr.Add(CONST_timezone);								// NOTE: always UTC time zone
+		bfr.Add_str_a7(date.XtoStr_fmt("dd MMM yyyy HH:mm:ss"));	// NOTE: always UTC time 
+		bfr.Add(CONST_timezone);									// NOTE: always UTC time zone
 	}	static final byte[] CONST_timezone = Bry_.new_a7(" +0000"); 
 }
 class Pft_fmt_itm_timezone_offset implements Pft_fmt_itm {

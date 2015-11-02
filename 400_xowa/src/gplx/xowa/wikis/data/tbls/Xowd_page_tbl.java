@@ -54,6 +54,11 @@ public class Xowd_page_tbl implements RlsAble {
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
+	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
+		this.Insert_bgn();
+		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
+		this.Insert_end();
+	}
 	public void Insert_bgn() {conn.Txn_bgn("schema__page__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
@@ -321,4 +326,12 @@ public class Xowd_page_tbl implements RlsAble {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
+	public static void Assert_col__page_html_db_id(Xowd_db_mgr db_mgr) {
+		Xowd_page_tbl page_tbl = db_mgr.Tbl__page(); Db_conn page_conn = page_tbl.Conn();
+		boolean html_flds_exists = page_conn.Meta_fld_exists(page_tbl.Tbl_name(), page_tbl.Fld_html_db_id());
+		if (html_flds_exists) return;
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_html_db_id()).Default_(-1));
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_redirect_id()).Default_(-1));
+		page_tbl.Hdump_enabled_(Bool_.Y);
+	}
 }

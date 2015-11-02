@@ -24,7 +24,7 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		if (!	(	ns.Subpages_enabled()				// ns has subpages
-				&&	ttl.Leaf_bgn() != Bry_.NotFound		// ttl has leaf text; EX: Help:A/B
+				&&	ttl.Leaf_bgn() != Bry_find_.Not_found		// ttl has leaf text; EX: Help:A/B
 				&&	ns.Id() != ns_mgr.Ns_page_id()		// ns is not [[Page:]]; PAGE:en.s:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species DATE:2014-09-06
 				)
 			)	return Bry_.Empty;						// doesn't match above; return empty;

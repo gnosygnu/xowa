@@ -85,5 +85,5 @@ public class Xow_ns_ {
 	public static final String Ns_name_wikipedia = "Wikipedia";
 	public static final byte[] Ns_name_main_bry = Bry_.new_a7(Key_main);
 	public static final byte[] Ns_prefix_main = Bry_.new_a7("Main:");
-	private static Xow_ns Canonical_new_(int id, String name) {return new Xow_ns(id, Xow_ns_case_.Id_1st, Bry_.new_a7(name), false);}	// NOTE: for id/name reference only; case_match and alias does not matter;
+	private static Xow_ns Canonical_new_(int id, String name) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_a7(name), false);}	// NOTE: for id/name reference only; case_match and alias does not matter;
 }

@@ -45,7 +45,7 @@ public class Db_qry_sql implements Db_qry {
 		Bry_bfr bfr = Bry_bfr.new_(src_len);
 		while (pos < src_len) {
 			int question_pos = Bry_find_.Find_fwd(src, Byte_ascii.Question, pos);
-			if (question_pos == Bry_.NotFound)
+			if (question_pos == Bry_find_.Not_found)
 				question_pos = src_len;
 			bfr.Add_mid(src, pos, question_pos);
 			if (args_idx < args_len)
@@ -70,9 +70,9 @@ public class Db_qry_sql implements Db_qry {
 		else if (Type_adp_.Eq(val_type, Byte_.Cls_ref_type))
 			bfr.Add_byte(Byte_.cast(val));
 		else if (Type_adp_.Eq(val_type, DateAdp_.Cls_ref_type))
-			bfr.Add_byte_apos().Add_str(DateAdp_.cast(val).XtoStr_gplx_long()).Add_byte_apos();
+			bfr.Add_byte_apos().Add_str_a7(DateAdp_.cast(val).XtoStr_gplx_long()).Add_byte_apos();
 		else if (Type_adp_.Eq(val_type, Decimal_adp_.Cls_ref_type))
-			bfr.Add_str(Decimal_adp_.cast(val).To_str());
+			bfr.Add_str_a7(Decimal_adp_.cast(val).To_str());
 		else {
 			byte[] val_bry = Bry_.new_u8(Object_.Xto_str_strict_or_null(val));
 			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);

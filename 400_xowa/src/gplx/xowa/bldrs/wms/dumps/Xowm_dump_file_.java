@@ -20,8 +20,8 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.installs.*;
 public class Xowm_dump_file_ {
 	public static Xowm_dump_file parse(byte[] src) {
 		int src_len = src.length;
-		int dash_0 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, 0			, src_len); if (dash_0 == Bry_.NotFound) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
-		int dash_1 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, dash_0 + 1	, src_len); if (dash_1 == Bry_.NotFound) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
+		int dash_0 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, 0			, src_len); if (dash_0 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
+		int dash_1 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, dash_0 + 1	, src_len); if (dash_1 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
 		byte[] domain_bry = Xow_abrv_wm_.Parse_to_domain_bry(Bry_.Mid(src, 0, dash_0));
 		return new Xowm_dump_file(String_.new_u8(domain_bry), String_.new_u8(src, dash_0 + 1, dash_1), String_.new_u8(src, dash_1 + 1, src_len));
 	}
@@ -45,7 +45,7 @@ public class Xowm_dump_file_ {
 			Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:dump date; server_url=~{0} dump_date=~{1}", dump_server, dump_date);
 			Xoi_mirror_parser mirror_parser = new Xoi_mirror_parser();
 			String dump_wiki_url = dump_server + String_.new_a7(rv.Dump_abrv()) + "/";
-			byte[] dump_url_wiki_html = gplx.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;
+			byte[] dump_url_wiki_html = gplx.core.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;
 			String[] dump_available_dates = mirror_parser.Parse(String_.new_u8(dump_url_wiki_html));
 			String dump_dates_latest = Xoi_mirror_parser.Find_last_lte(dump_available_dates, dump_date);
 			if (String_.Eq(dump_dates_latest, "")) return;	// nothing found

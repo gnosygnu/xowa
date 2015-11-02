@@ -87,6 +87,6 @@ public class Scrib_lib_wikibase_tst {
 	}
 	@Test  public void ResolvePropertyId() {
 		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("zh-hans", "prop_a").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary("2"), "prop_a");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary("p2"), "prop_a");
 	}
 }	

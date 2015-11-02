@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.hdumps.abrvs.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.makes.*;
 public interface Gallery_box_w_fmtr_arg extends Bry_fmtr_arg {
 	Gallery_box_w_fmtr_arg Init(int uid, int width);
 }
@@ -34,7 +34,7 @@ class Gallery_box_w_fmtr_arg__hdump implements Gallery_box_w_fmtr_arg {
 	private int uid;
 	public Gallery_box_w_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
 	public void Fmt__do(Bry_bfr bfr) {
-		bfr.Add(Xohd_abrv_.Key_gallery_box_w);
+		bfr.Add(Xoh_make_trie_.Bry__gallery_box_w);
 		bfr.Add_int_variable(uid);
 		bfr.Add_byte_apos();
 	}
@@ -56,7 +56,7 @@ class Gallery_img_pad_fmtr_arg__hdump implements Gallery_img_pad_fmtr_arg {
 	private int uid;
 	public Gallery_img_pad_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
 	public void Fmt__do(Bry_bfr bfr) {
-		bfr.Add(Xohd_abrv_.Key_gallery_img_pad);
+		bfr.Add(Xoh_make_trie_.Bry__gallery_img_pad);
 		bfr.Add_int_variable(uid);
 		bfr.Add_byte_apos();
 	}

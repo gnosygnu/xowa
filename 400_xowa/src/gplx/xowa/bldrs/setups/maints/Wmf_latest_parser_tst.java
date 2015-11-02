@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-import org.junit.*; import gplx.ios.*;
+import org.junit.*; import gplx.core.ios.*;
 public class Wmf_latest_parser_tst {
 	@Before public void init() {fxt.Clear();} private Wmf_latest_parser_fxt fxt = new Wmf_latest_parser_fxt();
 	@Test  public void Parse() {

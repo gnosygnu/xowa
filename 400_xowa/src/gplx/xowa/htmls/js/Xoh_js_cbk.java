@@ -29,10 +29,10 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	public Xoh_js_cbk(Xog_html_itm html_itm) {this.html_itm = html_itm; this.app = html_itm.Owner_tab().Tab_mgr().Win().App();}
 	private String Xowa_exec_test(GfoMsg m) {	// concat args with pipe; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc|arg0|arg1
 		bfr.Clear();
-		bfr.Add_str(m.Key());
+		bfr.Add_str_u8(m.Key());
 		int len = m.Args_count();
 		for (int i = 0; i < len; i++)
-			bfr.Add_str_a7("|").Add_str(m.Args_getAt(i).Val_to_str_or_empty());
+			bfr.Add_str_a7("|").Add_str_u8(m.Args_getAt(i).Val_to_str_or_empty());
 		return bfr.To_str_and_clear();
 	}
 	private String[] Xowa_exec_test_as_array(GfoMsg m) {// return args as array; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc,arg0,arg1

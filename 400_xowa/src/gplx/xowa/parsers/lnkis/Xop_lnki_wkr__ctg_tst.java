@@ -69,7 +69,7 @@ public class Xop_lnki_wkr__ctg_tst {
 		, "[[Category:B]]" // category should not show below
 		), String_.Concat_lines_nl_skip_last
 		( "<ul>"
-		, "  <li> <a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>"
+		, "  <li> <a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>"
 		, "  </li>"
 		, "</ul>"
 		, ""

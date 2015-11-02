@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; 
+import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.encoders.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; 
 import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
@@ -118,7 +118,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		while (true) {
 			int compare = Bry_.Compare(ttl, 0, ttl.length, name_id_rdr.Bfr(), name_id_rdr.Key_pos_bgn(), name_id_rdr.Key_pos_end());
 			switch (compare) {
-				case CompareAble_.Same: return Base85_utl.XtoIntByAry(name_id_rdr.Bfr(), name_id_rdr.Key_pos_end() + 1, name_id_rdr.Itm_pos_end() - 2);
+				case CompareAble_.Same: return Base85_.To_int_by_bry(name_id_rdr.Bfr(), name_id_rdr.Key_pos_end() + 1, name_id_rdr.Itm_pos_end() - 2);
 				case CompareAble_.More:
 					boolean reading = name_id_rdr.Read_next();
 					if (!reading) return Cur_cat_id_null; // eof return

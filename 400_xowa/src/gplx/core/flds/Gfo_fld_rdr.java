@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.flds; import gplx.*; import gplx.core.*;
+import gplx.core.encoders.*;
 public class Gfo_fld_rdr extends Gfo_fld_base {
 	private Bry_bfr bfr = Bry_bfr.new_(); private static final byte[] Bry_nil = Bry_.new_a7("\\0");
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;
@@ -28,8 +29,8 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 
 	public String Read_str_simple()	{Move_next_simple(); return String_.new_u8(data, fld_bgn, fld_end);}
 	public byte[] Read_bry_simple() {Move_next_simple(); return Bry_.Mid(data, fld_bgn, fld_end);}	// was Mid_by_len???; 20120915
-	public int Read_int_base85_lenN(int len)	{fld_bgn = pos; fld_end = pos + len - 1	; pos = pos + len + 1	; return Base85_utl.XtoIntByAry(data, fld_bgn, fld_end);}
-	public int Read_int_base85_len5()			{fld_bgn = pos; fld_end = pos + 4		; pos = pos + 6			; return Base85_utl.XtoIntByAry(data, fld_bgn, fld_end);}
+	public int Read_int_base85_lenN(int len)	{fld_bgn = pos; fld_end = pos + len - 1	; pos = pos + len + 1	; return Base85_.To_int_by_bry(data, fld_bgn, fld_end);}
+	public int Read_int_base85_len5()			{fld_bgn = pos; fld_end = pos + 4		; pos = pos + 6			; return Base85_.To_int_by_bry(data, fld_bgn, fld_end);}
 	public int Read_int() 			{Move_next_simple(); return Bry_.To_int_or(data, fld_bgn, fld_end, -1);}
 	public byte Read_int_as_byte() 	{Move_next_simple(); return (byte)Bry_.To_int_or(data, fld_bgn, fld_end, -1);}
 	public byte Read_byte() 		{Move_next_simple(); return data[fld_bgn];}

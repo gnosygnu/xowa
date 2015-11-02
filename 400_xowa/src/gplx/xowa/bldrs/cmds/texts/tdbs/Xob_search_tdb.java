@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; impo
 public class Xob_search_tdb extends Xob_search_base {
 	public Xob_search_tdb(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Wkr_key() {return Xob_cmd_keys.Key_tdb_make_search_title;}
-	@Override public gplx.ios.Io_make_cmd Make_cmd_site() {
+	@Override public gplx.core.ios.Io_make_cmd Make_cmd_site() {
 		return new Xob_make_cmd_site(bldr.Usr_dlg(), this.make_dir, this.make_fil_len);
 	}
 }

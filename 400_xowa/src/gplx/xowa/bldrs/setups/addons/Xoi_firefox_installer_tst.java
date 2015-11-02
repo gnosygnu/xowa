@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.addons; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xoi_firefox_installer_tst {
 	private Xoi_firefox_pref_fxt fxt = new Xoi_firefox_pref_fxt();
 	@Test  public void Pref_update() {

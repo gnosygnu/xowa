@@ -89,7 +89,7 @@ public class Prefs_converter {
 		else {
 			if (depth != 0) bfr.Add_byte(Byte_ascii.Dot);
 			if (String_.Eq(m.Key(), "scripts")) {bfr.Clear(); return;}
-			bfr.Add_str(m.Key());
+			bfr.Add_str_u8(m.Key());
 			int args_count = m.Args_count();
 			if (args_count > 0) {
 				bfr.Add_byte(Byte_ascii.Paren_bgn);
@@ -97,7 +97,7 @@ public class Prefs_converter {
 					if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
 					KeyVal kv = m.Args_getAt(i);
 					bfr.Add_byte(Byte_ascii.Quote);
-					bfr.Add_str(kv.Val_to_str_or_empty());
+					bfr.Add_str_u8(kv.Val_to_str_or_empty());
 					bfr.Add_byte(Byte_ascii.Quote);
 				}
 				bfr.Add_byte(Byte_ascii.Paren_end);

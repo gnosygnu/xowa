@@ -107,6 +107,6 @@ class Gallery_itm_parser_fxt {
 		return rv;
 	}
 	private String Xto_str_ary_itm(byte[] src, int bgn, int end) {
-		return bgn == Bry_.NotFound && end == Bry_.NotFound ? null : String_.new_u8(src, bgn, end);
+		return bgn == Bry_find_.Not_found && end == Bry_find_.Not_found ? null : String_.new_u8(src, bgn, end);
 	}
 }

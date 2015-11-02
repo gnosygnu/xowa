@@ -52,14 +52,14 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 			tmp_bfr.Add(itm.Amount()).Add_byte_space();
 			if (hi_diff.Eq(lo_diff)) {		// delta is same in both directions; EX: val=50 hi=60 lo=40 -> hi_diff == lo_diff == 10
 				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plusminus()).Add_str(hi_diff.To_str());
+					tmp_bfr.Add(msgs.Sym_plusminus()).Add_str_a7(hi_diff.To_str());
 			}
 			else {							// delta is diff in both directions; EX: val=50 hi=60 lo=30 -> hi_diff == 10, lo_diff == 20
 				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plus()).Add_str(hi_diff.To_str());
+					tmp_bfr.Add(msgs.Sym_plus()).Add_str_a7(hi_diff.To_str());
 				if (lo_diff_val != 0) {		// skip if 0
 					if (hi_diff_val != 0) tmp_bfr.Add(Time_plus_minus_spr);
-					tmp_bfr.Add(msgs.Sym_minus()).Add_str(lo_diff.To_str());
+					tmp_bfr.Add(msgs.Sym_minus()).Add_str_a7(lo_diff.To_str());
 				}
 			}
 			byte[] unit = itm.Unit();

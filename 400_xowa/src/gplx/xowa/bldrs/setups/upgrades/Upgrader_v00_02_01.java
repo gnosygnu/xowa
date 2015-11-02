@@ -27,7 +27,7 @@ class Upgrader_v00_02_01 {
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.bgn", "siteinfo.bgn for ~{0}", siteinfo_url.Raw());
 		String siteinfo_str = Io_mgr.Instance.LoadFilStr_args(siteinfo_url).MissingIgnored_(true).Exec(); if (String_.Len_eq_0(siteinfo_str)) throw Err_.new_wo_type("could not find siteinfo.xml", "url", siteinfo_url.Raw());
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.parse", "parsing siteinfo");
-		gplx.xowa.bldrs.xmls.Xob_siteinfo_parser.Siteinfo_parse(wiki, usr_dlg, siteinfo_str);	// NOTE: this also resets the namespaces on the wiki; not necessary, but is benign
+		gplx.xowa.bldrs.cmds.texts.xmls.Xob_siteinfo_parser_.Parse(Bry_.new_u8(siteinfo_str), wiki);	// NOTE: this also resets the namespaces on the wiki; not necessary, but is benign
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.save", "saving siteinfo");
 		byte[] wiki_core_bry = wiki.Cfg_wiki_core().Build_gfs();
 		Io_mgr.Instance.SaveFilBry(wiki.Tdb_fsys_mgr().Cfg_wiki_core_fil(), wiki_core_bry);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.core.intls.*; import gplx.langs.phps.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.core.intls.*; import gplx.langs.phps.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.apps.fsys.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.parsers.*; import gplx.xowa.langs.specials.*;
@@ -227,7 +227,7 @@ public class Xol_mw_lang_parser {
 			Bry_.Replace_all_direct(kv_val, Byte_ascii.Underline, Byte_ascii.Space); // NOTE: siteInfo.xml names have " " not "_" (EX: "User talk"). for now, follow that convention
 			int ns_id = Id_by_mw_name(kv_key);
 //				if (ns_id == Xow_ns_.Id_null) throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "namespace_names", String_.new_u8(kv_key));
-			rv[i / 2] = new Xow_ns(ns_id, Xow_ns_case_.Id_1st, kv_val, false);	// note that Xow_ns is being used as glorified id-name struct; case_match and alias values do not matter
+			rv[i / 2] = new Xow_ns(ns_id, Xow_ns_case_.Tid__1st, kv_val, false);	// note that Xow_ns is being used as glorified id-name struct; case_match and alias values do not matter
 		}
 		return rv;
 	}

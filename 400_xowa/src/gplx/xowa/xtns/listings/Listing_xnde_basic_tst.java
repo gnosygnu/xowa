@@ -30,7 +30,7 @@ public class Listing_xnde_basic_tst {
 	@Test  public void Url() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' url='http://site.org'/>"
-		,	"<a href=\"http://site.org\" class=\"external text\" rel=\"nofollow\" title=\"name_0\"><strong>name_0</strong></a>. "
+		,	"<a href=\"http://site.org\" rel=\"nofollow\" class=\"external text\" title=\"name_0\"><strong>name_0</strong></a>. "
 		);
 	}
 	@Test  public void Alt() {

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.tests.*;
+import gplx.core.tests.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.cfgs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.nss.*;
@@ -103,7 +104,7 @@ public class Xop_fxt {
 	public Xop_tblw_td_tkn_chkr tkn_tblw_td_(int bgn, int end) 		{return (Xop_tblw_td_tkn_chkr)new Xop_tblw_td_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
-	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_len_(hdr_len).Src_rng_(bgn, end);}
+	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_level_(hdr_len).Src_rng_(bgn, end);}
 	public Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid_br);}
 	public Xop_xnde_tkn_chkr tkn_xnde_()							{return tkn_xnde_(String_.Pos_neg1, String_.Pos_neg1);}
 	public Xop_xnde_tkn_chkr tkn_xnde_(int bgn, int end)			{return (Xop_xnde_tkn_chkr)new Xop_xnde_tkn_chkr().Src_rng_(bgn, end);}
@@ -165,7 +166,7 @@ public class Xop_fxt {
 	public Xop_fxt	Init_para_y_() {ctx.Para().Enabled_y_(); return this;}
 	public Xop_fxt	Init_para_n_() {ctx.Para().Enabled_n_(); return this;}
 	public Xop_fxt	Init_log_(Gfo_msg_itm... itms) {for (Gfo_msg_itm itm : itms) log_itms.Add(itm); return this;} List_adp log_itms = List_adp_.new_();
-	public void		Init_defn_add(String name, String text) {Init_defn_add(name, text, Xow_ns_case_.Id_all);}
+	public void		Init_defn_add(String name, String text) {Init_defn_add(name, text, Xow_ns_case_.Tid__all);}
 	public void		Init_defn_add(String name, String text, byte case_match) {
 		Xot_defn_tmpl itm = run_Parse_tmpl(Bry_.new_a7(name), Bry_.new_u8(text));
 		wiki.Cache_mgr().Defn_cache().Add(itm, case_match);
@@ -418,5 +419,16 @@ public class Xop_fxt {
 	public static Xop_fxt new_nonwmf() {
 		Xoae_app app = Xoa_app_fxt.app_();
 		return new Xop_fxt(app, Xoa_app_fxt.wiki_nonwmf(app, "nethackwiki"));
+	}
+	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	public String Exec__parse_to_hdump(String src_str) {
+		byte[] src_bry = Bry_.new_u8(src_str);
+		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);
+		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
+		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
+		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
+		ctx.Cur_page().Redlink_lnki_list().Clear();
+		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
+		return tmp_bfr.To_str_and_clear();
 	}
 }

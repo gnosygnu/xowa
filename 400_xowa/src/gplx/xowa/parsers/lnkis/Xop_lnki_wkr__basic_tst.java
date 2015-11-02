@@ -53,7 +53,7 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Image() {
 		fxt.Test_parse_page_wiki("[[Image:a]]"				, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file).Trg_tkn_(fxt.tkn_arg_val_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))));
 		fxt.Test_parse_page_wiki("[[Image:a|border]]"		, fxt.tkn_lnki_().Border_(Bool_.Y_byte));
-		fxt.Test_parse_page_wiki("[[Image:a|thumb]]"			, fxt.tkn_lnki_().ImgType_(Xop_lnki_type.Id_thumb));
+		fxt.Test_parse_page_wiki("[[Image:a|thumb]]"		, fxt.tkn_lnki_().ImgType_(Xop_lnki_type.Id_thumb));
 		fxt.Test_parse_page_wiki("[[Image:a|left]]"			, fxt.tkn_lnki_().HAlign_(Xop_lnki_align_h.Left));
 		fxt.Test_parse_page_wiki("[[Image:a|top]]"			, fxt.tkn_lnki_().VAlign_(Xop_lnki_align_v.Top));
 		fxt.Test_parse_page_wiki("[[Image:a|10px]]"			, fxt.tkn_lnki_().Width_(10).Height_(-1));

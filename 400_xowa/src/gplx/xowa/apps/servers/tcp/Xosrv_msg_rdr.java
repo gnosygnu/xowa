@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.primitives.*;
-import gplx.ios.*; import gplx.texts.*;
+import gplx.core.ios.*; import gplx.core.texts.*;
 public class Xosrv_msg_rdr {
 	public Xosrv_msg_rdr(byte[] default_body_bry, IoStream rdr) {this.default_body_bry = default_body_bry; default_body_bry_len = default_body_bry.length; this.rdr = rdr;} private byte[] header_bry = new byte[24], default_body_bry; int default_body_bry_len;
 	public IoStream Rdr() {return rdr;} private IoStream rdr;
@@ -45,7 +45,7 @@ public class Xosrv_msg_rdr {
 	}
 	private static byte[] Read_fld(byte[] bry, int bry_len, Int_obj_ref fld_bgn, Bool_obj_ref fail_ref, String_obj_ref fld_ref) {
 		int fld_end = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe, fld_bgn.Val(), bry_len);
-		if (fld_end == Bry_.NotFound) {fail_ref.Val_y_(); return null;}
+		if (fld_end == Bry_find_.Not_found) {fail_ref.Val_y_(); return null;}
 		byte[] rv = Bry_.Mid(bry, fld_bgn.Val(), fld_end);
 		fld_bgn.Val_(fld_end + 1);	// +1 to place after pipe
 		return rv;

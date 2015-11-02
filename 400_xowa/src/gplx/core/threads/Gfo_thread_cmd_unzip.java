@@ -32,7 +32,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public boolean Async_prog_enabled()	{return true;}
 	public void Async_prog_run(int async_sleep_sum) {
 		String size_str = " please wait...";
-		if (trg.Type_fil()) size_str = gplx.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg).Size());
+		if (trg.Type_fil()) size_str = gplx.core.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg).Size());
 		usr_dlg.Prog_many(GRP_KEY, "unzip", "unzipping: ~{0}", size_str);
 	}
 	@gplx.Virtual public byte Async_init() {

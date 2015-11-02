@@ -56,16 +56,16 @@ public class Xoi_cmd_wiki_tst {
 		byte[] pages_articles_key = Bry_.new_a7(wmf_key + "-latest-pages-articles.xml.bz2");
 		Wmf_latest_itm latest_itm = parser.Get_by(pages_articles_key);
 		bfr.Add(domain_bry).Add_byte_pipe();
-		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
+		bfr.Add_str_u8(dump_file.File_url()).Add_byte_pipe();
 		bfr.Add(Xow_domain_tid_.Get_type_as_bry(domain_itm.Domain_type_id())).Add_byte_pipe();
 		long src_size = latest_itm.Size();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
-		bfr.Add_str(gplx.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
+		bfr.Add_str_a7(gplx.core.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
 		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).Fmt__do(bfr);
 		bfr.Add_byte_pipe();
-		bfr.Add_str(latest_itm.Date().XtoStr_fmt_yyyy_MM_dd_HH_mm());
+		bfr.Add_str_a7(latest_itm.Date().XtoStr_fmt_yyyy_MM_dd_HH_mm());
 		bfr.Add_byte_pipe();
-		bfr.Add_str(dump_file.Dump_date());
+		bfr.Add_str_a7(dump_file.Dump_date());
 		bfr.Add_byte_nl();
 	}
 	/*
@@ -94,7 +94,7 @@ public class Xoi_cmd_wiki_tst {
 //			bfr.Add(lang_itm.Canonical_name()).Add_byte_pipe();
 		long src_size = dump_file.File_len();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
-		bfr.Add_str(gplx.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
+		bfr.Add_str(gplx.core.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
 		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).XferAry(bfr, 0);
 		bfr.Add_byte_pipe();
 		bfr.Add_str(dump_file.File_modified().XtoStr_fmt_yyyy_MM_dd_HH_mm());

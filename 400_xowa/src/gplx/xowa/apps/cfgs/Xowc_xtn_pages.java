@@ -24,7 +24,10 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 	public int Ns_index_id()		{return ns_index_id;}			private int ns_index_id = Int_.Min_value;
 	public int Ns_index_talk_id()	{return ns_index_talk_id;}		private int ns_index_talk_id = Int_.Min_value;
 	public void Ns_names_(byte[] page_name, byte[] page_talk_name, byte[] index_name, byte[] index_talk_name) {
-		this.page_name = page_name; this.page_talk_name = page_talk_name; this.index_name = index_name; this.index_talk_name = index_talk_name;
+		this.page_name = Xoa_ttl.Replace_spaces(page_name);	// ensure underlines, not space; EX:"Mục_lục" not "Mục lục"; PAGE:vi.s:Việt_Nam_sử_lược/Quyển_II DATE:2015-10-27
+		this.page_talk_name = Xoa_ttl.Replace_spaces(page_talk_name);
+		this.index_name = Xoa_ttl.Replace_spaces(index_name);
+		this.index_talk_name = Xoa_ttl.Replace_spaces(index_talk_name);
 	}	
 	private byte[] 
 	  page_name			= Default_ns_page_name

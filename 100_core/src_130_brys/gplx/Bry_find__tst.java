@@ -41,7 +41,7 @@ public class Bry_find__tst {
 	@Test  public void Find_bwd_last_ws() {
 		fxt.Test_Find_bwd_1st_ws_tst("a b"			, 2, 1);					// basic
 		fxt.Test_Find_bwd_1st_ws_tst("a   b"		, 3, 1);					// multiple
-		fxt.Test_Find_bwd_1st_ws_tst("ab"			, 1, Bry_.NotFound);		// none
+		fxt.Test_Find_bwd_1st_ws_tst("ab"			, 1, Bry_find_.Not_found);		// none
 	}
 	@Test  public void Trim_fwd_space_tab() {
 		fxt.Test_Trim_fwd_space_tab(" a b"			, 1);

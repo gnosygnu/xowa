@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.ios.*; import gplx.dbs.*;
+import gplx.core.ios.*; import gplx.dbs.*;
 import gplx.fsdb.data.*;
 public class Fsm_bin_fil {
 	private final Fsd_bin_tbl tbl;
@@ -31,7 +31,7 @@ public class Fsm_bin_fil {
 	public Db_conn			Conn()		{return conn;}		private final Db_conn conn;
 	public boolean				Select_to_url(int id, Io_url url)	{return tbl.Select_to_url(id, url);}
 	public Io_stream_rdr	Select_as_rdr(int id)				{return tbl.Select_as_rdr(id);}
-	public void				Insert(int bin_id, byte owner_tid, long rdr_len, gplx.ios.Io_stream_rdr rdr) {
+	public void				Insert(int bin_id, byte owner_tid, long rdr_len, gplx.core.ios.Io_stream_rdr rdr) {
 		tbl.Insert_rdr(bin_id, owner_tid, rdr_len, rdr);
 		Bin_len_(bin_len + rdr_len);
 	}

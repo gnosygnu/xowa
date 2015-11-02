@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.downloads.*;
 public class Xoa_maint_mgr implements GfoInvkAble {

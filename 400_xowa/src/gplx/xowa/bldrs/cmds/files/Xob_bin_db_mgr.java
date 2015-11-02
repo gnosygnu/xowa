@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.primitives.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.core.ios.*;
 import gplx.fsdb.meta.*;
 class Xob_bin_db_mgr {
 	private final int[] ns_ids; private final int ns_ids_len;

@@ -116,7 +116,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static byte[] Get_low_qid(byte[] bry) {	// HACK: wdata currently does not differentiate between "Vandalism" and "Wikipedia:Vandalism", combining both into "Vandalism:q4664011|q6160"; get lowest qid
 		int bry_len = bry.length;
 		int pipe_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe, 0, bry_len);
-		if (pipe_pos == Bry_.NotFound) return bry;
+		if (pipe_pos == Bry_find_.Not_found) return bry;
 		byte[][] qids = Bry_split_.Split(bry, Byte_ascii.Pipe);
 		int qids_len = qids.length;
 		int qid_min = Int_.Max_value;

@@ -35,7 +35,7 @@ public class Xof_img_size {
 				&&	!Xop_lnki_type.Id_is_thumbable(lnki_type)		// not thumb which is implicitly 220; PAGE:en.w:Edward_Snowden; DATE:2015-08-17
 				)
 				lnki_w = orig_w;									// use original size; EX:[[File:A.ogv]] -> [[File:A.ogv|550px]] where 550px is orig_w; DATE:2015-08-07
-			if (Bitmask_.Has_int(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
+			if (Bitmask_.Has_int(lnki_type, Xop_lnki_type.Id_frame)	// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
 				&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
 				html_w = file_w = orig_w;
 				html_h = file_h = orig_h;

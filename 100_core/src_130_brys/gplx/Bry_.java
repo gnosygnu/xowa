@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import java.lang.*;
-import gplx.core.primitives.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.core.ios.*;
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
-	public static final int NotFound = -1;
 	public static final byte[] Empty = new byte[0];
 	public static final byte[][] Ary_empty = new byte[0][];
 	public static final Class<?> Cls_ref_type = byte[].class;
@@ -32,6 +31,8 @@ public class Bry_ {
 			rv[i] = (byte)ary[i];
 		return rv;
 	}
+	public static byte[] Coalesce_to_empty(byte[] v) {return v == null ? Bry_.Empty : v;}
+	public static byte[] Coalesce(byte[] v, byte[] or) {return v == null ? or : v;}
 	public static byte[] new_a7(String str) {
 		if (str == null) return null;
 		int str_len = str.length();						
@@ -245,7 +246,7 @@ public class Bry_ {
 	}
 	public static byte[] Replace_one(byte[] src, byte[] find, byte[] repl) {
 		int src_len = src.length;
-		int findPos = Bry_find_.Find(src, find, 0, src_len, true); if (findPos == Bry_.NotFound) return src;
+		int findPos = Bry_find_.Find(src, find, 0, src_len, true); if (findPos == Bry_find_.Not_found) return src;
 		int findLen = find.length, replLen = repl.length;
 		int rvLen = src_len + replLen - findLen;
 		byte[] rv = new byte[rvLen];
@@ -300,11 +301,13 @@ public class Bry_ {
 		return Mid(src, bgn, src.length);
 	}
 	public static byte[] Mid(byte[] src, int bgn, int end) {
-		int len = end - bgn; if (len == 0) return Bry_.Empty;
-		byte[] rv = new byte[len];
-		for (int i = bgn; i < end; i++)
-			rv[i - bgn] = src[i];
-		return rv;
+		try {
+			int len = end - bgn; if (len == 0) return Bry_.Empty;
+			byte[] rv = new byte[len];
+			for (int i = bgn; i < end; i++)
+				rv[i - bgn] = src[i];
+			return rv;
+		} catch (Exception e) {Err_.Noop(e); throw Err_.new_("Bry_", "mid failed", "bgn", bgn, "end", end);}
 	}
 	public static byte[] Mid_w_trim(byte[] src, int bgn, int end) {
 		int len = end - bgn; if (len == 0) return Bry_.Empty;
@@ -443,11 +446,26 @@ public class Bry_ {
 		if (src_end > src_len) src_end = src_len;			// must limit src_end to src_len, else ArrayIndexOutOfBounds below; DATE:2015-01-31
 		int find_len = find_end - find_bgn;
 		if (find_len != src_end - src_bgn) return false;
-		if (find_len == 0) return src_end - src_bgn == 0; // "" only matches ""
+		if (find_len == 0) return src_end - src_bgn == 0;	// "" only matches ""
 		for (int i = 0; i < find_len; i++) {
 			int pos = src_bgn + i;
 			if (pos >= src_end) return false;	// ran out of src; exit; EX: src=ab; find=abc
 			if (src[pos] != find[i + find_bgn]) return false;
+		}
+		return true;
+	}
+	public static boolean Match_w_swap(byte[] src, int src_bgn, int src_end, byte[] find, int find_bgn, int find_end, byte swap_src, byte swap_trg) {// same as above, but used by XOWA for ttl matches;
+		int src_len = src.length;
+		if (src_end > src_len) src_end = src_len;			// must limit src_end to src_len, else ArrayIndexOutOfBounds below; DATE:2015-01-31
+		int find_len = find_end - find_bgn;
+		if (find_len != src_end - src_bgn) return false;
+		if (find_len == 0) return src_end - src_bgn == 0;	// "" only matches ""
+		for (int i = 0; i < find_len; i++) {
+			int pos = src_bgn + i;
+			if (pos >= src_end) return false;	// ran out of src; exit; EX: src=ab; find=abc
+			byte src_byte = src[pos];			if (src_byte == swap_src) src_byte = swap_trg;
+			byte trg_byte = find[i + find_bgn];	if (trg_byte == swap_src) trg_byte = swap_trg;
+			if (src_byte != trg_byte) return false;
 		}
 		return true;
 	}
@@ -496,12 +514,12 @@ public class Bry_ {
 		if (neg == 1) ary[0] = Byte_NegSign;
 
 		for (int i = 0; i < pad; i++)		// fill ary with pad
-			ary[i + aryBgn] = Byte_ascii.To_a7_byte(0);
+			ary[i + aryBgn] = Byte_ascii.To_a7_str(0);
 		aryBgn += pad;						// advance aryBgn by pad
 		for (int i = neg; i < ary_len - pad; i++) {
 			int denominator = (int)(factor / 10); // cache denominator to check for divide by 0
 			int digit = denominator == 0 ? 0 : (int)((val % factor) / denominator);
-			ary[aryBgn + i] = Byte_ascii.To_a7_byte(digit);
+			ary[aryBgn + i] = Byte_ascii.To_a7_str(digit);
 			factor /= 10;
 		}
 		return ary;
@@ -766,7 +784,7 @@ public class Bry_ {
 	public static int ReadCsvInt(byte[] ary, Int_obj_ref posRef, byte lkp) {
 		int bgn = posRef.Val();
 		int pos = Bry_find_.Find_fwd(ary, lkp, bgn, ary.length);
-		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
+		if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
 		int rv = Bry_.To_int_or(ary, posRef.Val(), pos, -1);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 		return rv;
@@ -774,7 +792,7 @@ public class Bry_ {
 	public static double ReadCsvDouble(byte[] ary, Int_obj_ref posRef, byte lkp) {
 		int bgn = posRef.Val();
 		int pos = Bry_find_.Find_fwd(ary, lkp, bgn, ary.length);
-		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
+		if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
 		double rv = Bry_.To_double(ary, posRef.Val(), pos);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 		return rv;
@@ -841,14 +859,14 @@ public class Bry_ {
 		while (true) {
 			if (pos >= src_len) break;
 			int bgn_pos = Bry_find_.Find_fwd(src, bgn, pos);
-			if (bgn_pos == Bry_.NotFound) {
+			if (bgn_pos == Bry_find_.Not_found) {
 				bfr.Add_mid(src, pos, src_len);
 				break;
 			}
 			else {
 				int bgn_rhs = bgn_pos + bgn_len;
 				int end_pos = replace_all ? bgn_rhs : Bry_find_.Find_fwd(src, end, bgn_rhs);
-				if (end_pos == Bry_.NotFound) {
+				if (end_pos == Bry_find_.Not_found) {
 					bfr.Add_mid(src, pos, src_len);
 					break;
 				}

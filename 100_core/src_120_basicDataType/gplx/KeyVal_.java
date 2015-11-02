@@ -73,11 +73,11 @@ public class KeyVal_ {
 		for (int i = 0; i < len; ++i) {
 			KeyVal itm = ary[i];
 			if (indent > 0)
-				bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);				// add indent	: "  "
-			bfr.Add_str(Object_.Xto_str_strict_or_empty(itm.Key())).Add_byte_eq();		// add key + eq : "key="
+				bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);					// add indent	: "  "
+			bfr.Add_str_u8(Object_.Xto_str_strict_or_empty(itm.Key())).Add_byte_eq();// add key + eq : "key="
 			Object val = itm.Val();
 			if (val == null)
-				bfr.Add_str(String_.Null_mark);
+				bfr.Add_str_a7(String_.Null_mark);
 			else {
 				Class<?> val_type = Type_adp_.ClassOf_obj(val);
 				if		(Type_adp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
@@ -90,7 +90,7 @@ public class KeyVal_ {
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}
 				else
-					bfr.Add_str(Object_.Xto_str_strict_or_null_mark(val));						// call toString()
+					bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val));						// call toString()
 			}
 			bfr.Add_byte_nl();
 		}

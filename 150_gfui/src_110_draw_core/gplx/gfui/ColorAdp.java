@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.strings.*; import gplx.texts.*;
+import gplx.core.strings.*; import gplx.core.texts.*;
 public class ColorAdp {
 	public int Value()	{return val;} int val;
 	public int Alpha()	{return (255 & val >> 24);}

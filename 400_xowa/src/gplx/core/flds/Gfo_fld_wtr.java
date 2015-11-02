@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.flds; import gplx.*; import gplx.core.*;
-import gplx.ios.*;
+import gplx.core.ios.*; import gplx.core.encoders.*;
 public class Gfo_fld_wtr extends Gfo_fld_base {
 	public Bry_bfr Bfr() {return bfr;} public Gfo_fld_wtr Bfr_(Bry_bfr v) {bfr = v; return this;} Bry_bfr bfr;
 	public Gfo_fld_wtr() {this.bfr = Bry_bfr.new_();}
-	public Gfo_fld_wtr Write_int_base85_len5_fld(int v)						{bfr.Add_base85(v, Base85_utl.Len_int);			bfr.Add_byte(fld_dlm); return this;}
+	public Gfo_fld_wtr Write_int_base85_len5_fld(int v)						{bfr.Add_base85(v, Base85_.Len_int);			bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_base85_lenN_fld(int v, int len)			{bfr.Add_base85(v, len);						bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_variable_fld(int v)						{bfr.Add_int_variable(v);						bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_fixed_fld(int v, int len)					{bfr.Add_int_fixed(v, len);						bfr.Add_byte(fld_dlm); return this;}
@@ -31,7 +31,7 @@ public class Gfo_fld_wtr extends Gfo_fld_base {
 	public Gfo_fld_wtr Write_dlm_row()										{												bfr.Add_byte(row_dlm); return this;}
 	public Gfo_fld_wtr Write_dlm_fld()										{												bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_base85_lenN_row(int v, int len)			{bfr.Add_base85(v, len);						bfr.Add_byte(row_dlm); return this;}
-	public Gfo_fld_wtr Write_int_base85_len5_row(int v)						{bfr.Add_base85(v, Base85_utl.Len_int);			bfr.Add_byte(row_dlm); return this;}
+	public Gfo_fld_wtr Write_int_base85_len5_row(int v)						{bfr.Add_base85(v, Base85_.Len_int);			bfr.Add_byte(row_dlm); return this;}
 	public Gfo_fld_wtr Write_bry_escape_row(byte[] val)						{Write_bry_escape(val, 0, val.length);			bfr.Add_byte(row_dlm); return this;}
 	public Gfo_fld_wtr Write_bry_escape_row(byte[] val, int bgn, int end)	{Write_bry_escape(val, bgn, end);				bfr.Add_byte(row_dlm); return this;}
 	public Gfo_fld_wtr Write_double_row(double v)							{bfr.Add_double(v);								bfr.Add_byte(row_dlm); return this;}

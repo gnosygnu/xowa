@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.downloads; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xof_download_wkr_test implements Xof_download_wkr {
 	public IoEngine_xrg_downloadFil Download_xrg() {return IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Trg_engine_key_(IoEngine_.MemKey);}
 	public byte Download(boolean src_is_web, String src_str, Io_url trg_url, String prog_fmt_hdr) {

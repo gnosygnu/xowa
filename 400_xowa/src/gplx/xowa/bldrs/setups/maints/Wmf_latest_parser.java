@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-import gplx.core.btries.*; import gplx.ios.*;
+import gplx.core.btries.*; import gplx.core.ios.*;
 public class Wmf_latest_parser {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Count() {return hash.Count();}

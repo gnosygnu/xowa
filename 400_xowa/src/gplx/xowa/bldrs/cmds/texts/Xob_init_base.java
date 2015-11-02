@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.xtns.wdatas.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
-import gplx.xowa.bldrs.css.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.xtns.wdatas.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cmds.texts.xmls.*;
+import gplx.xowa.bldrs.css.*; import gplx.xowa.wikis.domains.*;
 public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	private Xob_bldr bldr; private Xowe_wiki wiki; private Gfo_usr_dlg usr_dlg;
 	private byte wbase_enabled = Bool_.__byte;
@@ -34,10 +33,8 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {						// parse site_info
-		gplx.ios.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr();
-		usr_dlg.Plog_many("", "", "reading dump header: ~{0}", src_rdr.Url().Raw());
-		byte[] siteinfo_xml = Xob_siteinfo_parser.Siteinfo_extract(src_rdr);
-		Xob_siteinfo_parser.Siteinfo_parse(wiki, usr_dlg, String_.new_u8(siteinfo_xml));
+		gplx.core.ios.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr(); usr_dlg.Plog_many("", "", "reading dump header: ~{0}", src_rdr.Url().Raw());
+		Xob_siteinfo_parser_.Parse(Xob_siteinfo_parser_.Extract(src_rdr), wiki);
 		this.Cmd_run_end(wiki);					// save site info
 	}
 	public void Cmd_end() {

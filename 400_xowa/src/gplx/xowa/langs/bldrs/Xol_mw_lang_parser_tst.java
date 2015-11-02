@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
-import gplx.core.intls.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.core.intls.*; import gplx.core.log_msgs.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.specials.*;
 public class Xol_mw_lang_parser_tst {		

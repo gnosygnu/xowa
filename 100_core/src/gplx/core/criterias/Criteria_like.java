@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
-import gplx.texts.*; /*RegxPatn_cls_like*/
+import gplx.core.texts.*; /*RegxPatn_cls_like*/
 public class Criteria_like implements Criteria {
 	@gplx.Internal protected Criteria_like(boolean negated, RegxPatn_cls_like pattern) {
 		this.negated = negated; this.pattern = pattern;

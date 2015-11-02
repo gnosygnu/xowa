@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
 public class Xof_bin_updater {
 	private final Fsd_img_itm tmp_img_itm = new Fsd_img_itm(); private final Fsd_thm_itm tmp_thm_itm = Fsd_thm_itm.new_(); private final Fsd_fil_itm tmp_fil_itm = new Fsd_fil_itm();		

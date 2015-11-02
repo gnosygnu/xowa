@@ -206,53 +206,53 @@ class Pft_fmt_itm_hebrew_ {
 	, Rslt_month_days_count		= 3
 	;
 
-	private static final String[][] Numeral_tbls = new String[][]
-	{ new String[] {"", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י"}
-	, new String[] {"", "י", "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק"}
-	, new String[] {"", "ק", "ר", "ש", "ת", "תק", "תר", "תש", "תת", "תתק", "תתר"}
-	, new String[] {"", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י"}
+	private static final byte[][][] Numeral_tbls = new byte[][][]
+	{ new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
+	, new byte[][] {Bry_.Empty, Bry_.new_u8("י"), Bry_.new_u8("כ"), Bry_.new_u8("ל"), Bry_.new_u8("מ"), Bry_.new_u8("נ")	, Bry_.new_u8("ס")	, Bry_.new_u8("ע")	, Bry_.new_u8("פ")	, Bry_.new_u8("צ")	, Bry_.new_u8("ק")}
+	, new byte[][] {Bry_.Empty, Bry_.new_u8("ק"), Bry_.new_u8("ר"), Bry_.new_u8("ש"), Bry_.new_u8("ת"), Bry_.new_u8("תק")	, Bry_.new_u8("תר")	, Bry_.new_u8("תש")	, Bry_.new_u8("תת")	, Bry_.new_u8("תתק"), Bry_.new_u8("תתר")}
+	, new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
 	};
-	public static String Calc_hebrew_numeral(int num) {
-		if (num > 9999 || num <= 0)
-			return Int_.To_str(num);
+	public static byte[] Calc_hebrew_numeral(int num) {
+		if (num > 9999 || num <= 0) return Int_.To_bry(num);
 		
-		String tmp = "";
+		byte[] tmp = Bry_.Empty;
 		int pow10 = 1000; 
 		for (int i = 3; i >= 0; pow10 /= 10, i--) {
 			if (num >= pow10) {
 				if (num == 15 || num == 16) {
-					tmp += Numeral_tbls[0][9] + Numeral_tbls[0][num - 9];
+					tmp = Bry_.Add(tmp, Numeral_tbls[0][9], Numeral_tbls[0][num - 9]);
 					num = 0;
 				} else {
-					tmp += Numeral_tbls[i][(int)(num / pow10)];
+					tmp = Bry_.Add(tmp, Numeral_tbls[i][(int)(num / pow10)]);
 					if (pow10 == 1000)
-						tmp += "'";
+						tmp = Bry_.Add(tmp, Byte_ascii.Apos_bry);
 				}
 			}
 			num = num % pow10;
 		}
-		String rv = "";
-		int tmp_len = String_.Len(tmp);
+		byte[] rv = Bry_.Empty;
+		int tmp_len = tmp.length;
 		if (tmp_len == 2) {
-			rv = tmp + "'";
+			rv = Bry_.Add(tmp, Byte_ascii.Apos_bry);
 		}
 		else {
-			rv  = String_.Mid(tmp, 0, tmp_len - 1) + "\"";
-			rv += String_.Mid(tmp, tmp_len - 1);
+			rv  = Bry_.Add(Bry_.Mid(tmp, 0, tmp_len - 2), Byte_ascii.Quote_bry);
+			rv  = Bry_.Add(rv, Bry_.Mid(tmp, tmp_len - 2, tmp_len));
 		}
-		int rv_len = String_.Len(rv);
-		String start = String_.Mid(rv, 0, rv_len - 1);
-		String end = String_.Mid(rv, rv_len - 1);
-		if		(String_.Eq(end, "כ"))
-			rv = start + "ך";
-		else if	(String_.Eq(end, "מ"))
-			rv = start + "ם";
-		else if	(String_.Eq(end, "נ"))
-			rv = start + "ן";
-		else if	(String_.Eq(end, "פ"))
-			rv = start + "ף";
-		else if	(String_.Eq(end, "צ"))
-			rv = start + "ץ";
+		int rv_len = rv.length;
+		Object end_obj = end_trie.Match_bgn(rv, rv_len - 2, rv_len);
+		if (end_obj != null) {
+			byte[] end = (byte[])end_obj;
+			byte[] start = Bry_.Mid(rv, 0, rv_len - 2);
+			rv = Bry_.Add(start, end);
+		}
 		return rv;
 	}
+	private static final gplx.core.btries.Btrie_slim_mgr end_trie = gplx.core.btries.Btrie_slim_mgr.cs()
+	.Add_str_str("כ", "ך")
+	.Add_str_str("מ", "ם")
+	.Add_str_str("נ", "ן")
+	.Add_str_str("פ", "ף")
+	.Add_str_str("צ", "ץ")
+	;
 }

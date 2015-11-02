@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.pages.skins.*;
+import gplx.core.primitives.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 	public String Name() {return name;} private String name;

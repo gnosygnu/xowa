@@ -274,7 +274,7 @@ class Xob_dump_bmk_mgr {
 	private void Save_itm(Bry_bfr save_bfr, String key, int val) {
 		String fmt = "{0}('{1}');\n";
 		String str = String_.Format(fmt, key, val);
-		save_bfr.Add_str(str);
+		save_bfr.Add_str_u8(str);
 	}
 }
 class Xob_rate_mgr {
@@ -297,7 +297,7 @@ class Xob_rate_mgr {
 		int dif = (int)(end - bgn) / 1000;
 		Decimal_adp rate = Decimal_adp_.divide_safe_(count, dif);
 		save_bfr
-			.Add_str(rate.To_str("#,##0.000")).Add_byte_pipe()
+			.Add_str_a7(rate.To_str("#,##0.000")).Add_byte_pipe()
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;

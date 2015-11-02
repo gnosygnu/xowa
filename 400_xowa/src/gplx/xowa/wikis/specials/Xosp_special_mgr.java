@@ -19,7 +19,7 @@ package gplx.xowa.wikis.specials; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.net.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.file_browsers.*;
-import gplx.xowa.guis.*;
+import gplx.xowa.htmls.*;
 public class Xosp_special_mgr {
 	private final Xowv_wiki wiki;
 	private final Hash_adp_bry hash;
@@ -28,15 +28,15 @@ public class Xosp_special_mgr {
 		// hash.Add_str_obj(Xows_special_meta_.Key__statistics				, page_statistics);
 		this.hash = Hash_adp_bry.cs();
 	}
-	public void Get_by_ttl(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
+	public void Get_by_ttl(Xoh_page rv, Gfo_url url, Xoa_ttl ttl) {
 		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Qargs(), wiki.Appv().Wiki_mgr());
-		rv.Init(wiki, -1, null, ttl);
-		rv.Page_body_(rslt.Html_body());
+		rv.Init(wiki, null, ttl, -1);
+		rv.Body_(rslt.Html_body());
 		rv.Html_head_xtn_(rslt.Html_head());
 	}
 	public void Get_by_url(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
-		byte[] special_name = slash_pos == Bry_.NotFound
+		byte[] special_name = slash_pos == Bry_find_.Not_found
 				? ttl.Base_txt_wo_qarg()							// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
 				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
 		Object o = hash.Get_by_bry(special_name);

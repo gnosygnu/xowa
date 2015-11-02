@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 class Gfo_inet_conn__http implements Gfo_inet_conn {
 	private final IoEngine_xrg_downloadFil downloader = IoEngine_xrg_downloadFil.new_("", Io_url_.Empty);
 	public int				Tid() {return Gfo_inet_conn_.Tid__http;}

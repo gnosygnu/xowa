@@ -56,14 +56,14 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	private void Gen_call(boolean first, Bry_bfr bfr, String key, Object... vals) {
 		if (!first) bfr.Add_byte(Byte_ascii.Dot);
-		bfr.Add_str(key);
+		bfr.Add_str_u8(key);
 		int len = vals.length;
 		if (len > 0) {
 			bfr.Add_byte(Byte_ascii.Paren_bgn);
 			for (int i = 0; i < len; i++) {
 				if (i != 0) bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
 				Object val = vals[i];
-				bfr.Add_str(Object_.Xto_str_strict_or_null_mark(val));
+				bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val));
 			}
 			bfr.Add_byte(Byte_ascii.Paren_end);
 		}

@@ -45,27 +45,27 @@ public class Xoh_dom_ {
 		return null;
 	}
 	public static boolean Select_tag(Xoh_find rv, byte[] src, byte[] nde, byte[] key, int rng_bgn, int rng_end) {
-		int tag_bgn = Bry_find_.Find_fwd(src, nde, 		   rng_bgn, rng_end); 					if (tag_bgn == Bry_.NotFound) return false;
-		int tag_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, tag_bgn, rng_end); 					if (tag_end == Bry_.NotFound) return false;
-		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_.NotFound) return false;
+		int tag_bgn = Bry_find_.Find_fwd(src, nde, 		   rng_bgn, rng_end); 					if (tag_bgn == Bry_find_.Not_found) return false;
+		int tag_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, tag_bgn, rng_end); 					if (tag_end == Bry_find_.Not_found) return false;
+		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_find_.Not_found) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_.NotFound) return false;
+		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
 		++val_bgn;
-		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_.NotFound) return false;
+		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
 	public static boolean Find_atr_val_in_tag(Xoh_find rv, byte[] src, byte[] key, int tag_bgn, int tag_end) {
-		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_.NotFound) return false;
+		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_find_.Not_found) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_.NotFound) return false;
+		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
 		++val_bgn;
-		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_.NotFound) return false;
+		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
 	public static String Title_by_href(byte[] href, byte[] html_src) {
-		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.A_name_bry, Html_atr_.Href_bry, href, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_bry, 0);
+		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.A_name_bry, Html_atr_.Bry__href, href, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_bry, 0);
 		return String_.new_u8(xowa_title);
 	}	private static final Xoh_find dom_find = new Xoh_find();
 }

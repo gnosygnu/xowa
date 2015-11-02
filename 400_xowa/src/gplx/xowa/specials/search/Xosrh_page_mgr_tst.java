@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 public class Xosrh_page_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrh_page_mgr_fxt fxt = new Xosrh_page_mgr_fxt();
@@ -46,7 +46,7 @@ class Xosrh_page_mgr_fxt {
 		Xowd_page_itm tmp_itm = new Xowd_page_itm();
 		for (int i = bgn; i < end; i++) {
 			byte[] id_bry = new byte[5];	// NOTE: do not reuse; will break hive_mgr
-			Base85_utl.XtoStrByAry(i, id_bry, 0, 5);
+			Base85_.Set_bry(i, id_bry, 0, 5);
 			tmp_itm.Ns_id_(Xow_ns_.Id_main).Init(i, Bry_.To_a7_bry(i, 0), false, 10, 0, i - bgn);
 			Xotdb_page_itm_.Txt_id_save(tmp_bfr, tmp_itm);
 			hive_mgr.Create(id_bry, tmp_bfr.To_bry_and_clear(), null);

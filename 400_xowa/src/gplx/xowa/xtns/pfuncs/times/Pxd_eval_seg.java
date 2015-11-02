@@ -88,12 +88,8 @@ class Pxd_eval_seg {
 		switch (itm.Digits()) {
 			case 1:
 			case 2:
-				if		(val > 0 && val < 13) {
+				if		(val > -1 && val < 13) {
 					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_month);
-					return true;
-				}
-				else if (val == 0) {// 0 day means subtract 1; EX:w:Mariyinsky_Palace; DATE:2014-03-25
-					Pxd_itm_int_.Convert_to_rel(tctx, itm, Pxd_parser_.Unit_name_month, DateAdp_.SegIdx_month, -1);
 					return true;
 				}
 				break;
@@ -106,12 +102,8 @@ class Pxd_eval_seg {
 		switch (itm.Digits()) {
 			case 1:
 			case 2:
-				if (val > 0 && val < 32) { 
+				if (val > -1 && val < 32) { 
 					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_day);
-					return true;
-				}
-				else if (val == 0) {	// 0 day means subtract 1; EX:w:Mariyinsky_Palace; DATE:2014-03-25
-					Pxd_itm_int_.Convert_to_rel(tctx, itm, Pxd_parser_.Unit_name_day, DateAdp_.SegIdx_day, -1);
 					return true;
 				}
 				break;

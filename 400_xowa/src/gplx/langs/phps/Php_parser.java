@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.log_msgs.*;
 public class Php_parser {
 	Php_lxr[] lxrs; int lxrs_len;
 	int txt_bgn; Php_tkn_txt txt_tkn;

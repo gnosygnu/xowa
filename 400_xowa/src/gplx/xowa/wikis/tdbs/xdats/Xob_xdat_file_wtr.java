@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.ios.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.core.ios.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_xdat_file_wtr {
 	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_.Tid_raw);}
 	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xotdb_dir_info_.Tid_name(dir_tid) + Xotdb_dir_info.Wtr_dir(tid)), tid);}
@@ -69,7 +69,7 @@ public class Xob_xdat_file_wtr {
 		for (int i = 0; i < idx_pos; i++) {
 			int idx_bry_pos = i * Len_idx_itm;
 			int cur_pos = idx[i];
-			Base85_utl.XtoStrByAry(cur_pos - prv_pos, idx_bry, idx_bry_pos, Len_base85);
+			Base85_.Set_bry(cur_pos - prv_pos, idx_bry, idx_bry_pos, Len_base85);
 			idx_bry[idx_bry_pos + Len_base85] = Dlm_fld;
 			prv_pos = cur_pos;
 		}
@@ -98,7 +98,7 @@ public class Xob_xdat_file_wtr {
 //			for (int i = 0; i < idx_pos; i++) {
 //				int idx_bry_pos = i * Len_idx_itm;
 //				int cur_pos = idx[i];
-//				Base85_utl.XtoStrByAry(cur_pos - prv_pos, idx_bry, idx_bry_pos, Len_base85);
+//				Base85_.Set_bry(cur_pos - prv_pos, idx_bry, idx_bry_pos, Len_base85);
 //				idx_bry[idx_bry_pos + Len_base85] = Dlm_idx;
 //				prv_pos = cur_pos;
 //			}

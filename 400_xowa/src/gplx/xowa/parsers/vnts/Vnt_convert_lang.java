@@ -114,9 +114,9 @@ public class Vnt_convert_lang {
 						pos += 2;	// skip "-{"
 						frame_bfr.Add(Bry__curly_bgn);
 						if (!warning_done) {
-							frame_bfr.Add_str("<span class=\"error\">max depth");
+							frame_bfr.Add_str_a7("<span class=\"error\">max depth");
 							// wfMessage('language-converter-depth-warning')->numParams($this->mMaxDepth)->inContentLanguage()->text()
-							frame_bfr.Add_str("</span>");
+							frame_bfr.Add_str_a7("</span>");
 							warning_done = true;
 						}
 						continue;

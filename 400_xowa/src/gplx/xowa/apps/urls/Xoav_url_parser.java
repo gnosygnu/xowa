@@ -30,7 +30,7 @@ public class Xoav_url_parser {
 	}
 	private int Parse_wiki(Xoav_url rv, byte[] src, int src_len, int pos) {
 		int wiki_bgn = pos + Bry_site.length;
-		int wiki_end = Bry_find_.Find_fwd(src, Byte_ascii.Slash, wiki_bgn, src_len); if (wiki_end == Bry_.NotFound) throw Err_.new_wo_type("could not find wiki_end", "src", String_.new_u8(src));
+		int wiki_end = Bry_find_.Find_fwd(src, Byte_ascii.Slash, wiki_bgn, src_len); if (wiki_end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wiki_end", "src", String_.new_u8(src));
 		rv.Wiki_bry_(Bry_.Mid(src, wiki_bgn, wiki_end));
 		return wiki_end;
 	}

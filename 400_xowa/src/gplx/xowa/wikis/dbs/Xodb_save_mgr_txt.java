@@ -43,7 +43,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		int ns_id = ttl.Ns().Id();
 		Xotdb_page_itm_.Txt_page_save(tmp, page_id, DateAdp_.Now(), ttl_bry, text, true);
 		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, fil_idx);
-		byte[] page_rdr_bry = gplx.ios.Io_stream_rdr_.Load_all(page_rdr_url);
+		byte[] page_rdr_bry = gplx.core.ios.Io_stream_rdr_.Load_all(page_rdr_url);
 		Xob_xdat_file page_rdr = new Xob_xdat_file();
 		if (Bry_.Len_gt_0(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
 		int row_idx = page_rdr.Count();
@@ -114,8 +114,8 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 class Bry_comparer_fld_last implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
-		int lhs_bgn = Bry_find_.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_.NotFound) lhs_bgn = -1;
-		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_.NotFound) rhs_bgn = -1;
+		int lhs_bgn = Bry_find_.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_find_.Not_found) lhs_bgn = -1;
+		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
 		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
 	public static final Bry_comparer_fld_last Instance = new Bry_comparer_fld_last(); 

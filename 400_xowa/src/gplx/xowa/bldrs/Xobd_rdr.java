@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.parsers.tmpls.*;
 public class Xobd_rdr implements Xob_cmd {
@@ -40,14 +40,14 @@ public class Xobd_rdr implements Xob_cmd {
 		long fil_len = 0;
 		Gfo_usr_dlg usr_dlg = bldr.App().Usr_dlg();
 		try {
-			gplx.ios.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr();
+			gplx.core.ios.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr();
 			fil = Io_buffer_rdr.new_(src_rdr, optRdrBfrSize);
 			fil_len = fil.Fil_len();
-			if (src_rdr.Tid() == gplx.ios.Io_stream_.Tid_bzip2) fil_len = (fil_len * 100) / 18;	// HACK: no way to get actual file progress; assume 18% compression
+			if (src_rdr.Tid() == gplx.core.ios.Io_stream_.Tid_bzip2) fil_len = (fil_len * 100) / 18;	// HACK: no way to get actual file progress; assume 18% compression
 			// fil.Seek(bldr.Opts().ResumeAt());
 			int prv_pos = 0;
 			while (true) {
-				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == Bry_.NotFound) break;
+				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == Bry_find_.Not_found) break;
 				if (cur_pos < prv_pos)
 					bldr.Print_prog_msg(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.To_str_pad_bgn_zero((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_u8(page.Ttl_full_db()));
 				prv_pos = cur_pos;

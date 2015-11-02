@@ -45,7 +45,7 @@ class Xow_search_scanner {
 					case Xow_search_tkn.Tid_quote:	// find end quote and add as word
 						int quote_bgn = pos + 1;
 						int quote_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
-						if (quote_end == Bry_.NotFound) throw Err_.new_wo_type("could not find end quote", "src", String_.new_u8(src));
+						if (quote_end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find end quote", "src", String_.new_u8(src));
 						Tkns_add_word(Xow_search_tkn.Tid_word_quoted, quote_bgn, quote_end);
 						pos = quote_end + 1;		// +1 to place after quote
 						break;

@@ -41,7 +41,7 @@ public class Xoa_url__to_str__tst {
 	@Test   public void Alias() {
 		fxt.Prep_add_xwiki_to_wiki("wikt", "en.wiktionary.org");
 		Xow_wiki en_d = fxt.Prep_create_wiki("en.wiktionary.org");
-		en_d.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Id_all);
+		en_d.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Tid__all);
 		fxt.Chk_to_str_href(Bool_.N, "/wiki/wikt:a"	, "en.wiktionary.org/wiki/a");
 	}
 	@Test   public void Unknown()			{fxt.Chk_to_str_href(Bool_.N, "/wiki/{{{extlink}}}"					, "");}	// {{{extlink}}} not a valid title; return empty

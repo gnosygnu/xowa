@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;

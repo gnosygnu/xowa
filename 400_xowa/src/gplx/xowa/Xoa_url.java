@@ -48,14 +48,14 @@ public class Xoa_url {
 	public byte[] Page_for_lnki() {
 		int raw_len = raw.length;
 		int page_bgn = Page_bgn(raw_len);
-		if (page_bgn == Bry_.NotFound)	// no /wiki/ found; return page
+		if (page_bgn == Bry_find_.Not_found)	// no /wiki/ found; return page
 			return page_bry == null ? Bry_.Empty : page_bry;	// guard against null ref
 		else
 			return Bry_.Mid(raw, page_bgn, raw_len);// else take everything after "/wiki/";
 	}
 	private int Page_bgn(int raw_len) {
 		int wiki_pos = Bry_find_.Find_fwd(raw, Xoh_href_.Bry__wiki, 0, raw_len);	 // look for /wiki/
-		return wiki_pos == Bry_.NotFound ? Bry_.NotFound : wiki_pos + Xoh_href_.Bry__wiki.length;
+		return wiki_pos == Bry_find_.Not_found ? Bry_find_.Not_found : wiki_pos + Xoh_href_.Bry__wiki.length;
 	}
 	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);}
 	public String To_str()					{return String_.new_u8(To_bry(Bool_.Y, Bool_.Y));}

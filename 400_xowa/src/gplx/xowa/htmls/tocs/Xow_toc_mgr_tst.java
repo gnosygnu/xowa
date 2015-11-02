@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import org.junit.*; import gplx.xowa.parsers.*;
+import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xow_toc_mgr_tst {
 	private Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
 	@Before public void init() {fxt.Clear();}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 interface Xob_sql_join_wkr {
 	Io_line_rdr New_main_rdr();
 	Io_line_rdr New_join_rdr();

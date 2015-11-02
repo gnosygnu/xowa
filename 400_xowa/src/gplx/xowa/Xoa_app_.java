@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.core.ios.*; import gplx.core.log_msgs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.guis.views.boots.*;
 import gplx.xowa.apps.boots.*; import gplx.xowa.apps.gfs.*;
@@ -28,13 +28,13 @@ public class Xoa_app_ {
 			boot_mgr.Run(args, arg_mgr);
 		} catch (Error e) {	
 			if (arg_mgr.App_type().Tid_is_gui())
-				Xog_error_win.Run(Err_.Message_lang_error(e), Err_.Trace_lang(e));
+				Xog_error_win.Run(Err_.Message_lang(e), Err_.Trace_lang(e));
 			else
 				throw e;
 		}
 	}
 	public static final String		Name			= "xowa";
-	public static final String		Version			= "2.10.3.1";
+	public static final String		Version			= "2.11.1.1";
 	public static String	Build_date		= "2012-12-30 00:00:00";
 	public static String	Op_sys_str;
 	public static String	User_agent		= "";

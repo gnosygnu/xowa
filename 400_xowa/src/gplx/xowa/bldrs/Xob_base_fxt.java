@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_base_fxt {
 	public Xob_base_fxt Clear() {
 		if (app == null) {

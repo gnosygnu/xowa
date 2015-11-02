@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_toc_mgr implements Bry_fmtr_arg {
 	private static final int Toc_levels = 32; // assume 6 max levels * 5 max heading (9999.); add 2 for good measure
@@ -38,7 +39,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		int hdrs_len = hdr_mgr.Len();
 		for (int i = 0; i < hdrs_len; i++) {
 			Xop_hdr_tkn hdr = hdr_mgr.Get_at(i);
-			int eq_cur = hdr.Hdr_len();
+			int eq_cur = hdr.Hdr_level();
 			switch (CompareAble_.Compare(eq_cur, eq_prv)) {
 				case CompareAble_.More:	// always increase slot
 					if (eq_prv != 0) {	// add to path_bfr, unless 1st

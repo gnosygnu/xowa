@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Dpl_xnde implements Xox_xnde {

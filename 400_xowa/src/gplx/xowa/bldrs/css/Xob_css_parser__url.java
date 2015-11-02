@@ -34,7 +34,7 @@ class Xob_css_parser__url {
 				break;
 		}
 		int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
-		if (end_pos == Bry_.NotFound)	// unclosed "url("; exit since nothing else will be found
+		if (end_pos == Bry_find_.Not_found)	// unclosed "url("; exit since nothing else will be found
 			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8__by_len(src, tkn_bgn, tkn_bgn + 128));
 		if (end_pos - bgn_pos == 0)		// empty; "url()"; ignore
 			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8__by_len(src, tkn_bgn, tkn_bgn + 128));

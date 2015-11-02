@@ -26,7 +26,7 @@ class Xow_popup_anchor_finder {
 		int lhs_bgn = bgn;
 		while (true) {
 			lhs_bgn = Bry_find_.Find_fwd(src, Hdr_bgn, nl_lhs, src_len);
-			if (lhs_bgn == Bry_.NotFound) break;	// "\n=" not found; exit;
+			if (lhs_bgn == Bry_find_.Not_found) break;	// "\n=" not found; exit;
 			if (Find_hdr(lhs_bgn)) return lhs_bgn;
 		}
 		return Find_id(bgn);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; 
 public class Xoctg_link_idx_wkr extends Xob_idx_base {	// NOTE: similar functionality to Xob_make_cmd_site, but more complicated due to p,f,s; not inheriting
 	Io_url src_link_dir; int make_fil_max = Int_.Min_value;

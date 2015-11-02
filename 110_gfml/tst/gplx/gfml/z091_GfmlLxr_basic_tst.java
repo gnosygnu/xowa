@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 import org.junit.*;
-import gplx.texts.*; /*CharStream*/
+import gplx.core.texts.*; /*CharStream*/
 public class z091_GfmlLxr_basic_tst {
 	@Before public void setup() {
 		rootLxr = GfmlLxr_.general_("gfml.root", GfmlTkn_.cmd_("tkn:text", GfmlBldrCmd_.Null));

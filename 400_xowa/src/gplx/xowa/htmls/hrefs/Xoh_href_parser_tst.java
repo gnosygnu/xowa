@@ -61,7 +61,7 @@ public class Xoh_href_parser_tst {
 	}
 	@Test   public void Site__xwiki_cases_correctly() {	// PURPOSE: xwiki links should use case_match of xwiki (en.wiktionary.org) not cur_wiki (en.wikipedia.org); EX:w:Alphabet
 		Xowe_wiki en_wiktionary_org = fxt.Prep_create_wiki("en.wiktionary.org");
-		en_wiktionary_org.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Id_all);
+		en_wiktionary_org.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Tid__all);
 		fxt.Prep_add_xwiki_to_user("en.wiktionary.org", "en.wiktionary.org");
 		fxt.Run_parse_by_href("/site/en.wiktionary.org/wiki/alphabet");				
 		fxt.Chk_to_str("en.wiktionary.org/wiki/alphabet").Chk_page("alphabet");

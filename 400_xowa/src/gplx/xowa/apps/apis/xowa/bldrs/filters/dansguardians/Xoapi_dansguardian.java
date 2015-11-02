@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*; import gplx.xowa.apps.apis.xowa.bldrs.filters.*;
-import gplx.ios.*; import gplx.xowa.bldrs.filters.dansguardians.*;
+import gplx.core.ios.*; import gplx.xowa.bldrs.filters.dansguardians.*;
 public class Xoapi_dansguardian implements GfoInvkAble {
 	public void Ctor_by_app(Xoa_app app) {
 		root_dir = app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter");

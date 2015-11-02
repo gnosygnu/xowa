@@ -8,20 +8,14 @@
 	<classpathentry kind="src" path="src_120_basicDataType"/>
 	<classpathentry kind="src" path="src_130_brys"/>
 	<classpathentry kind="src" path="src_140_list"/>
-	<classpathentry kind="src" path="src_150_text"/>
-	<classpathentry kind="src" path="src_160_hash"/>
-	<classpathentry kind="src" path="src_200_io"/>
 	<classpathentry kind="src" path="src_210_env"/>
 	<classpathentry kind="src" path="src_300_classXtn"/>
 	<classpathentry kind="src" path="src_310_gfoNde"/>
 	<classpathentry kind="src" path="src_311_gfoObj"/>
 	<classpathentry kind="src" path="src_330_store"/>
-	<classpathentry kind="src" path="src_340_dsv"/>
 	<classpathentry kind="src" path="src_400_gfs"/>
 	<classpathentry kind="src" path="src_410_gfoCfg"/>
 	<classpathentry kind="src" path="src_420_usrMsg"/>
-	<classpathentry kind="src" path="src_800_tst"/>
-	<classpathentry kind="src" path="src_900_xml"/>
 	<classpathentry kind="src" path="tst"/>
 	<classpathentry kind="src" path="xtn"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>

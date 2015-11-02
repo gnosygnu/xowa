@@ -54,7 +54,7 @@ class Xow_ns_fxt {
 	public Xow_ns_fxt Expd_id_subj_(boolean v) {expd_id_subj = v; return this;} private boolean expd_id_subj;
 	public Xow_ns_fxt Expd_id_talk_(boolean v) {expd_id_talk = v; return this;} private boolean expd_id_talk;
 	public void Test(int nsId) {
-		Xow_ns actl = new Xow_ns(nsId, Xow_ns_case_.Id_1st, Bry_.Empty, false);
+		Xow_ns actl = new Xow_ns(nsId, Xow_ns_case_.Tid__1st, Bry_.Empty, false);
 		Tfds.Eq(expd_id_subjId, actl.Id_subj_id());
 		Tfds.Eq(expd_id_talkId, actl.Id_talk_id());
 		Tfds.Eq(expd_id_subj, actl.Id_subj());

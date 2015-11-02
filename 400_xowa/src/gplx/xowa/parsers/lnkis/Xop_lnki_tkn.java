@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xop_lnki_tkn extends Xop_tkn_itm_base {
@@ -24,7 +24,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public void				Tkn_tid_to_txt() {tkn_tid = Xop_tkn_itm_.Tid_txt;}
 	public int				Ns_id() {return ns_id;} public Xop_lnki_tkn Ns_id_(int v) {ns_id = v; return this;} private int ns_id;
 	public Xoa_ttl			Ttl() {return ttl;} public Xop_lnki_tkn Ttl_(Xoa_ttl v) {ttl = v; return this;} private Xoa_ttl ttl;
-	public byte				Lnki_type() {return lnki_type;} public Xop_lnki_tkn Lnki_type_(byte v) {lnki_type = (byte)Bitmask_.Add_int(lnki_type, v); return this;} private byte lnki_type = Xop_lnki_type.Id_null;
+	public byte				Lnki_type() {return lnki_type;} private byte lnki_type = Xop_lnki_type.Id_null;
 	public int				Tail_bgn() {return tail_bgn;} public Xop_lnki_tkn Tail_bgn_(int v) {tail_bgn = v; return this;} private int tail_bgn = -1;
 	public int				Tail_end() {return tail_end;} public Xop_lnki_tkn Tail_end_(int v) {tail_end = v; return this;} private int tail_end = -1;
 	public byte				Border() {return border;} public Xop_lnki_tkn Border_(byte v) {border = v; return this;} private byte border = Bool_.__byte;
@@ -60,6 +60,11 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 		return !((caption_tkn == Xop_tkn_null.Null_tkn)		// trg only; no caption: EX: [[a]] vs. [[a|b]] which has a trg of a and a caption of b
 				||	(ns_id == Xow_ns_.Id_category			// a Category only has a target; any caption is ignored; EX: [[Category:a|b], b is ignored			
 					&& !ttl.ForceLiteralLink()));				
+	}
+	public Xop_lnki_tkn Lnki_type_(byte v) {
+		if (lnki_type == Xop_lnki_type.Id_null)	// NOTE:per MW:1.25.2, only use 1st argument of thumb|frame|frameless;/includes/parser/Parser.php; // use first appearing option, discard others.; DATE:2015-11-01
+			lnki_type = v;
+		return this;
 	}
 	public static final double Upright_null = -1;
 	public static final int Width_null = -1, Height_null = -1;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.specials.search.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.specials.search.*; import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
@@ -34,7 +34,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public void Load_page(Xowd_page_itm rv, Xow_ns ns, boolean timestamp_enabled) {Load_page(rv, rv.Text_db_id(), rv.Tdb_row_idx(), ns, timestamp_enabled, tmp_xdat_file, tmp_xdat_itm);}
 	public void Load_page(Xowd_page_itm rv, int txt_fil_idx, int txt_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		Io_url file = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns.Id(), txt_fil_idx);
-		byte[] bry = gplx.ios.Io_stream_rdr_.Load_all(file); int bry_len = bry.length;
+		byte[] bry = gplx.core.ios.Io_stream_rdr_.Load_all(file); int bry_len = bry.length;
 		xdat_file.Clear().Parse(bry, bry_len, file).GetAt(xdat_itm, txt_row_idx);
 		Load_page_parse(rv, bry, bry_len, xdat_itm.Itm_bgn(), xdat_itm.Itm_end(), timestamp_enabled);
 	}
@@ -60,7 +60,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		for (int i = 0; i < len; i++) {
 			if (cancelable.Canceled()) return;
 			Xowd_page_itm itm = (Xowd_page_itm)list.Get_at(i + bgn);
-			Base85_utl.XtoStrByAry(itm.Id(), id_bry, 0, 5);
+			Base85_.Set_bry(itm.Id(), id_bry, 0, 5);
 			int cur_fil_idx = this.Find_file_idx_by_site(Xotdb_dir_info_.Tid_id, id_bry);
 			if (cur_fil_idx != prv_fil_idx) {
 				if (!this.Load_xdat_file(cancelable, tmp_xdat_file, Xotdb_dir_info_.Tid_id, cur_fil_idx)) continue; // file not found; ignore
@@ -115,13 +115,13 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		byte[] raw = rdr.Src();
 		int itm_bgn = xdat_itm.Itm_bgn(), itm_end = xdat_itm.Itm_end();
 		int pos = Bry_find_.Find_fwd(raw, Byte_ascii.Pipe, itm_bgn, raw.length);
-		if (pos == Bry_.NotFound) throw wiki.Appe().Usr_dlg().Fail_many(GRP_KEY, "invalid_search_file", "search file is invalid");
+		if (pos == Bry_find_.Not_found) throw wiki.Appe().Usr_dlg().Fail_many(GRP_KEY, "invalid_search_file", "search file is invalid");
 		pos += Int_.Const_dlm_len;	// pipe
 		
 		while (pos < itm_end) {
-			int page_id 	= Base85_utl.XtoIntByAry(raw, pos, pos + 4);
+			int page_id 	= Base85_.To_int_by_bry(raw, pos, pos + 4);
 			pos += 6;	// 5 + 1 for semic;
-			int page_len 	= Base85_utl.XtoIntByAry(raw, pos, pos + 4);
+			int page_len 	= Base85_.To_int_by_bry(raw, pos, pos + 4);
 			rv.Add(Xowd_page_itm.new_srch(page_id, page_len));
 			pos += 6;	// 5 + 1 for pipe
 //				if (match.Itms_len() == max_results) break;
@@ -161,9 +161,9 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		byte[] bry = tmp_xdat_itm.Itm_bry();
 		int bgn = name.length + 1;
 		boolean hidden			= bry[bgn] == Byte_ascii.Ltr_y;
-		int count_subcs		= Base85_utl.XtoIntByAry(bry, bgn +  2, bgn +  6);
-		int count_files		= Base85_utl.XtoIntByAry(bry, bgn +  8, bgn + 12);
-		int count_pages		= Base85_utl.XtoIntByAry(bry, bgn + 14, bgn + 18);
+		int count_subcs		= Base85_.To_int_by_bry(bry, bgn +  2, bgn +  6);
+		int count_files		= Base85_.To_int_by_bry(bry, bgn +  8, bgn + 12);
+		int count_pages		= Base85_.To_int_by_bry(bry, bgn + 14, bgn + 18);
 		rv.Hidden_(hidden);
 		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
 			Xoctg_idx_mgr idx_mgr = rv.Grp_by_tid(i);
@@ -178,7 +178,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			idx_mgr.Total_(count);
 		}
 	}
-	public boolean Load_by_id(Xowd_page_itm page, int id)			{Base85_utl.XtoStrByAry(id, tmp_id_bry, 0, 5); return Load_by_id(page, tmp_id_bry);} private byte[] tmp_id_bry = new byte[5];
+	public boolean Load_by_id(Xowd_page_itm page, int id)			{Base85_.Set_bry(id, tmp_id_bry, 0, 5); return Load_by_id(page, tmp_id_bry);} private byte[] tmp_id_bry = new byte[5];
 	boolean Load_by_id(Xowd_page_itm page, byte[] id_bry)	{
 		if (!Load_xdat_itm(tmp_xdat_itm, Xotdb_dir_info_.Tid_id, id_bry, true)) return false;;
 		Xotdb_page_itm_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
@@ -321,16 +321,16 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private static void Load_ctg_v1_parse(List_adp rv, Gfo_usr_dlg usr_dlg, byte[] ary) {
 		int aryLen = ary.length;
 		int pos = Bry_find_.Find_fwd(ary, Byte_ascii.Pipe, 0, aryLen);
-		int rowCount = (aryLen - pos + 1) / (Base85_utl.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld);
+		int rowCount = (aryLen - pos + 1) / (Base85_.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld);
 		rv.Clear();
 		boolean garbage = false;
 		for (int i = 0; i < rowCount; i++) {
 			Xowd_page_itm row = new Xowd_page_itm();
 			rv.Add(row);
 			if (garbage) continue;
-			int bgn = pos + 1 + (i * (Base85_utl.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld));
+			int bgn = pos + 1 + (i * (Base85_.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld));
 			try {
-				int id = Base85_utl.XtoIntByAry(ary, bgn, bgn + Base85_utl.Len_int - 1);
+				int id = Base85_.To_int_by_bry(ary, bgn, bgn + Base85_.Len_int - 1);
 				if (id < 0) throw Err_.new_wo_type("invalid id", "id", id);
 				row.Id_(id);
 			}
@@ -357,7 +357,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public static boolean Load_page_or_false(Xowd_page_itm page, Xob_xdat_itm xdat, int ns_id) {
 		byte[] src = xdat.Src(); int itm_end = xdat.Itm_end();
 		int bgn = xdat.Itm_bgn();
-		int timestamp	= Base85_utl.XtoIntByAry(src, bgn +  6		, bgn +  10);
+		int timestamp	= Base85_.To_int_by_bry(src, bgn +  6		, bgn +  10);
 		int ttl_end = Bry_find_.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, bgn + 12, itm_end);
 		if (ttl_end == -1) return false;
 		byte[] ttl		= Bry_.Mid				(src, bgn + 12		, ttl_end);
@@ -371,7 +371,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		int timestamp_bgn = row_bgn + 5 + 1;
 		int timestamp_end = timestamp_bgn + 5;
 		if (timestamp_enabled) {
-			int timestamp = Base85_utl.XtoIntByAry(src, timestamp_bgn, timestamp_end - 1);
+			int timestamp = Base85_.To_int_by_bry(src, timestamp_bgn, timestamp_end - 1);
 			page.Modified_on_(Bit_.Xto_date_short(timestamp));
 		}
 		int name_bgn = timestamp_end + 1;

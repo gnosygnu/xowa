@@ -72,7 +72,7 @@ public class Bry__tst {
 		byte[] expd = new byte[expdAryAsInt.length];
 		for (int i = 0; i < expd.length; i++) {
 			int expdInt = expdAryAsInt[i];
-			expd[i] = expdInt == Bry_.Byte_NegSign ? Bry_.Byte_NegSign : Byte_ascii.To_a7_byte(expdAryAsInt[i]);
+			expd[i] = expdInt == Bry_.Byte_NegSign ? Bry_.Byte_NegSign : Byte_ascii.To_a7_str(expdAryAsInt[i]);
 		}
 		Tfds.Eq_ary(expd, Bry_.To_a7_bry(val, Int_.DigitCount(val)));
 	}

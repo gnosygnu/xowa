@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.wikis.tdbs.*;
+import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xows_html_wkr_tst {

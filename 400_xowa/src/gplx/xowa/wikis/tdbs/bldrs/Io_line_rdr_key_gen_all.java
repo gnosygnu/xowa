@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Io_line_rdr_key_gen_all implements Io_line_rdr_key_gen {
 	public void Gen(Io_line_rdr bfr) {
 		bfr.Key_pos_bgn_(bfr.Itm_pos_bgn()).Key_pos_end_(bfr.Itm_pos_end());

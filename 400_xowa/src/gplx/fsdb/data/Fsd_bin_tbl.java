@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.ios.*;
+import gplx.dbs.*; import gplx.core.ios.*;
 import gplx.dbs.engines.sqlite.*;
 public class Fsd_bin_tbl implements RlsAble {
 	private final String tbl_name = "fsdb_bin"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();

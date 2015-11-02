@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 import gplx.core.strings.*;
-import gplx.texts.*; /*CharStream*/	
+import gplx.core.texts.*; /*CharStream*/	
 public class GfmlLxr_ {
 	public static GfmlLxr general_(String key, GfmlTkn protoTkn) {return GfmlLxr_general.new_(key, protoTkn);}
 	public static GfmlLxr solo_(String key, GfmlTkn singletonTkn) {return GfmlLxr_singleton.new_(key, singletonTkn.Raw(), singletonTkn);}

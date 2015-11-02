@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import gplx.ios.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.downloads.*;
+import gplx.core.ios.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.downloads.*;
 public abstract class Xoapi_orig_base {
 	public boolean Api_query_size(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] ttl, int width, int height) {
-		if (!gplx.ios.IoEngine_system.Web_access_enabled) return false;	// don't check api if download disabled else "download_failed" messages in log (particularly during pkg_make) DATE:2015-02-12
+		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return false;	// don't check api if download disabled else "download_failed" messages in log (particularly during pkg_make) DATE:2015-02-12
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		Xof_repo_pair[] repos = repo_mgr.Repos_ary();
 		int len = repos.length;

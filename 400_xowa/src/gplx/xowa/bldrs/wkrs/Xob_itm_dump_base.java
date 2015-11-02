@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.apps.*;
 public abstract class Xob_itm_dump_base extends Xob_itm_basic_base {
 	protected int sort_mem_len = Int_.Neg1, dump_fil_len = Int_.Neg1, make_fil_len = Int_.Neg1;
@@ -44,9 +44,9 @@ public abstract class Xob_itm_dump_base extends Xob_itm_basic_base {
 	}
 	protected void Flush_dump() {Io_mgr.Instance.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_sort_mem_len_))		sort_mem_len = gplx.ios.Io_size_.Load_int_(m);
-		else if	(ctx.Match(k, Invk_dump_fil_len_)) 		dump_fil_len = gplx.ios.Io_size_.Load_int_(m);
-		else if	(ctx.Match(k, Invk_make_fil_len_)) 		make_fil_len = gplx.ios.Io_size_.Load_int_(m);
+		if		(ctx.Match(k, Invk_sort_mem_len_))		sort_mem_len = gplx.core.ios.Io_size_.Load_int_(m);
+		else if	(ctx.Match(k, Invk_dump_fil_len_)) 		dump_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
+		else if	(ctx.Match(k, Invk_make_fil_len_)) 		make_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
 		else if (ctx.Match(k, Invk_delete_temp_))		delete_temp = m.ReadBool("v");
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.ios.*; import gplx.dbs.*;
+import gplx.core.ios.*; import gplx.dbs.*;
 public class Fsm_bin_mgr {
 	private final Fsdb_db_mgr core_mgr; private final int mnt_id; private final Fsm_bin_tbl tbl;
 	private Fsm_bin_fil[] dbs__ary = Fsm_bin_fil.Ary_empty; private int dbs__ary_len = 0; private Fsm_bin_fil nth_db;		

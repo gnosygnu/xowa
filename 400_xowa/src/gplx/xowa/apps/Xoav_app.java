@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import gplx.core.net.*; import gplx.langs.jsons.*;
-import gplx.ios.*;
+import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.langs.jsons.*;
+import gplx.core.ios.*;
 import gplx.dbs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.core.intls.*; import gplx.xowa.users.data.*;
 import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.apps.gfs.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.bridges.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.users.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.langs.*;

@@ -25,20 +25,20 @@ public class Pxd_parser_tst {
 	@Test  public void Month_name_0__day__year__bad_day()			{tst_date_("Mar 32 2001"			, "Invalid day: 32");}
 	@Test  public void Month_name_0__day__year__bad_year()			{tst_date_("Mar 3 999"				, "0999-03-03");}
 	@Test  public void Month_name_0__day__year__bad_day_year()		{tst_date_("Mar 32 999"				, "Invalid day: 32");}
-	@Test  public void Month_name_0__year()							{tst_date_("Mar 2001"				, "2001-03-01");}
+	@Test  public void Month_name_0__year()							{tst_date_("Mar 2001"				, "2001-03-27");}
 	@Test  public void Month_name_0__day()							{tst_date_("Mar 02"					, "2012-03-02");}
 	@Test  public void Month_name_0__day_fail()						{tst_date_("Mar 32"					, "Invalid day: 32");}
-	@Test  public void Month_name_0()								{tst_date_("Mar"					, "2012-03-01");}	// y: ,.,.. Feb;  n: / Feb, - Feb
+	@Test  public void Month_name_0()								{tst_date_("Mar"					, "2012-03-27");}	// y: ,.,.. Feb;  n: / Feb, - Feb
 	@Test  public void Month_name_1__day__year()					{tst_date_("2 Mar 2001"				, "2001-03-02");}	// y: 3-Feb-2012; 3 Feb 2012;
 	@Test  public void Month_name_1__year__day()					{tst_date_("2001 Mar 02"			, "2001-03-02");}	// y: 2012-Feb-3 n:2012.Feb.3;2012 Feb 3; 2012,Feb,3;2012/Feb/3
 	@Test  public void Month_name_1__day__year__guess()				{tst_date_("02 Mar 01"				, "2001-03-02");}
 	@Test  public void Month_name_1__day()							{tst_date_("02 Mar"					, "2012-03-02");}
-	@Test  public void Month_name_1__year()							{tst_date_("2003 Mar"				, "2003-03-01");}
+	@Test  public void Month_name_1__year()							{tst_date_("2003 Mar"				, "2003-03-27");}
 	@Test  public void Month_name_2__day__year()					{tst_date_("2001.02.Mar"			, "2001-03-02");}	// y: 2012.5.Feb; 2012 5 Feb n: 2012-5-Feb; 2012/5/Feb
 	@Test  public void Year_0__month__day()							{tst_date_("2001-03-31"				, "2001-03-31");}
 	@Test  public void Year_0__day__month__fail()					{tst_date_("2001-31-03"				, "Invalid month: 31");}	// n:2012.31.03; 2012/31/03
-	@Test  public void Year_0__month()								{tst_date_("2001-03"				, "2001-03-01");}
-	@Test  public void Year_0()										{tst_date_("2001"					, "2001-01-01");}
+	@Test  public void Year_0__month()								{tst_date_("2001-03"				, "2001-03-27");}
+	@Test  public void Year_0()										{tst_date_("2001"					, "2001-02-27");}
 	@Test  public void Year_1()										{tst_date_("31-2001"				, "Invalid date: 4 digit year must be either yyyy-##-## or ##-##-yyyy");}	// n:31-2012; 31.2012; 31/2012; 03-2012; 03.2012; 03/2012
 	@Test  public void Year_2__month__day()							{tst_date_("03/31/2001"				, "2001-03-31");}	// n: 03.31.2012;03-31-2012
 	@Test  public void Year_2__day__month()							{tst_date_("31-03-2001"				, "2001-03-31");}	// y: 31.03.2012; n:31/03/2012
@@ -58,7 +58,7 @@ public class Pxd_parser_tst {
 	@Test  public void Time_len_6()									{tst_time_("041526"					, "04:15:26.000");}
 	@Test  public void Time_len_12()								{tst_both_("201601020304"			, "2016-01-02 03:04:00.000");}	// PURPOSE: handle 12 digit datetime; PAGE:en.w:Boron; DATE:2015-07-29
 	@Test  public void Err_one_num()								{tst_time_("2"						, "Invalid year: 2");}	// occurs on some templates; PAGE:en.w:Voyager 1 and {{date}}
-	@Test  public void Dmy_at_y_dot()								{tst_date_("1.2.70"					, "1970-02-01");}	// PURPOSE: dmy when delimiter is dot
+	@Test  public void Dmy_at_y_dot()								{tst_date_("1.2.70"					, "1970-02-27");}	// PURPOSE: dmy when delimiter is dot
 	@Test  public void Mdy_at_y_slash()								{tst_date_("1/2/70"					, "1970-01-02");}	// PURPOSE: mdy when delimiter is slash
 	@Test  public void Ago()										{tst_date_("1 month ago"			, "2012-01-27");}
 

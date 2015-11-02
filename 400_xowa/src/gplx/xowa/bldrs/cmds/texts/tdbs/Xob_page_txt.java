@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
@@ -85,8 +85,8 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		}
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_page_file_len_))		page_file_len = gplx.ios.Io_size_.Load_int_(m);
-		else if (ctx.Match(k, Invk_title_file_len_))	title_file_len = gplx.ios.Io_size_.Load_int_(m);
+		if		(ctx.Match(k, Invk_page_file_len_))		page_file_len = gplx.core.ios.Io_size_.Load_int_(m);
+		else if (ctx.Match(k, Invk_title_file_len_))	title_file_len = gplx.core.ios.Io_size_.Load_int_(m);
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
 	}	private static final String Invk_page_file_len_ = "page_file_len_", Invk_title_file_len_ = "title_file_len_";

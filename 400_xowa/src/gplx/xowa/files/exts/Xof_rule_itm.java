@@ -24,8 +24,8 @@ public class Xof_rule_itm implements GfoInvkAble {
 	public long View_max() {return view_max;} public Xof_rule_itm View_max_(long v) {view_max = v; return this;} long view_max = Max_wildcard;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))		return owner;
-		else if (ctx.Match(k, Invk_make_max_))	make_max = gplx.ios.Io_size_.Load_int_(m);
-		else if (ctx.Match(k, Invk_view_max_))	view_max = gplx.ios.Io_size_.Load_int_(m);
+		else if (ctx.Match(k, Invk_make_max_))	make_max = gplx.core.ios.Io_size_.Load_int_(m);
+		else if (ctx.Match(k, Invk_view_max_))	view_max = gplx.core.ios.Io_size_.Load_int_(m);
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_owner = "owner", Invk_make_max_ = "make_max_", Invk_view_max_ = "view_max_";

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.hdumps.*;
+import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
+import gplx.xowa.apps.gfs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_mgr_sql(Xowe_wiki wiki) {

@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.btries.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.servers.tcp.*; import gplx.xowa.apps.servers.http.*;

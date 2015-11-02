@@ -79,7 +79,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	public boolean ResolvePropertyId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		byte[] prop = args.Pull_bry(0); if (Bry_.Len_eq_0(prop)) return rslt.Init_ary_empty();
-		Wdata_doc wdoc = Get_wdoc(Bry_.Add(Byte_ascii.Ltr_p, prop)); if (wdoc == null) return rslt.Init_ary_empty();
+		Wdata_doc wdoc = Get_wdoc(prop); if (wdoc == null) return rslt.Init_ary_empty(); // prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
 		return rslt.Init_obj(wdoc.Label_list__get_or_fallback(core.Lang()));
 	}
 	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			

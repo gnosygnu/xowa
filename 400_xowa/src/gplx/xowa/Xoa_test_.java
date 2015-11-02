@@ -28,6 +28,11 @@ public class Xoa_test_ {
 		wiki.Db_mgr_create_as_sql();
 		wiki.Data__core_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
 	}
+	public static void Init__db__mem(gplx.xowa.wikis.Xowv_wiki wiki) {
+		Db__init__mem();
+		wiki.Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
+//			wiki.Data__core_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
+	}
 	public static void Db__init__mem() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
+import gplx.core.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	private final Xof_xfer_queue queue = new Xof_xfer_queue();

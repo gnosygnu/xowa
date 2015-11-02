@@ -46,7 +46,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public Xow_wiki_props Siteinfo_misc_(byte[] v) {
 		siteinfo_misc = v;
 		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);
-		if (pipe_0 != Bry_.NotFound)
+		if (pipe_0 != Bry_find_.Not_found)
 			site_name = Bry_.Mid(siteinfo_misc, 0, pipe_0);
 		return this;
 	}	private byte[] siteinfo_misc = Bry_.Empty;

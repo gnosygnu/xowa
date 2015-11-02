@@ -46,7 +46,7 @@ public class GfoConsoleWin implements GfoInvkAble, UsrMsgWkr {
 		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Help, IptKey_.add_(IptKey_.Ctrl, IptKey_.D));			
 		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Clear, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.C));			
 		logger = new GfuiTextBoxLogger(this).Init(statusBox);
-//			gplx.ios.GfioApp.InitGfs();
+//			gplx.core.ios.GfioApp.InitGfs();
 		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Note, this);
 
 		win.Lyt_activate();

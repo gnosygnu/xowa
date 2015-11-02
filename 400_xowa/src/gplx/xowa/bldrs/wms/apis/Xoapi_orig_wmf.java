@@ -33,7 +33,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 			int xml_len = xml.length;
 			int pos = 0;
 			pos = Bry_find_.Find_fwd(xml, Bry_xml_ii			, pos, xml_len); 
-			if (pos == Bry_.NotFound) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", String_.new_u8(xml)); return false;}
+			if (pos == Bry_find_.Not_found) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", String_.new_u8(xml)); return false;}
 			pos += Bry_xml_ii.length;
 
 			byte[] orig_wiki = null, orig_page = null; int orig_w = 0, orig_h = 0;
@@ -48,7 +48,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 				orig_wiki = gplx.xowa.wikis.xwikis.Xow_xwiki_mgr.Get_domain_from_url(url_parser, url, file_url);
 				byte[] page = Xoa_ttl.Replace_spaces(url.Segs__get_at_nth());
 				int colon_pos = Bry_find_.Find_fwd(page, Byte_ascii.Colon, 0, page.length);
-				if (colon_pos != Bry_.NotFound)
+				if (colon_pos != Bry_find_.Not_found)
 					page = Bry_.Mid(page, colon_pos + 1, page.length);
 				orig_page = page;
 			}
@@ -60,9 +60,9 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	private static Gfo_url_parser url_parser = new Gfo_url_parser(); private static Gfo_url url = new Gfo_url();
 	private static boolean Parse_xml_val(Int_2_ref rv, Gfo_usr_dlg usr_dlg, byte[] xml, int xml_len, int pos, byte[] key) {
 		int bgn = 0, end = 0;
-		bgn = Bry_find_.Find_fwd(xml, key, pos, xml_len); if (bgn == Bry_.NotFound) return false;
+		bgn = Bry_find_.Find_fwd(xml, key, pos, xml_len); if (bgn == Bry_find_.Not_found) return false;
 		bgn += key.length;
-		end = Bry_find_.Find_fwd(xml, Byte_ascii.Quote	, bgn, xml_len); if (end == Bry_.NotFound) return false;
+		end = Bry_find_.Find_fwd(xml, Byte_ascii.Quote	, bgn, xml_len); if (end == Bry_find_.Not_found) return false;
 		rv.Val_all_(bgn, end);
 		return true;
 	}

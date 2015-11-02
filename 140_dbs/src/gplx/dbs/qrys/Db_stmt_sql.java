@@ -90,10 +90,10 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		try {Add(k, Val_str_wrap(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
-	public Db_stmt Val_rdr_(gplx.ios.Io_stream_rdr v, long rdr_len) {
+	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
-			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
+			gplx.core.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
 			Add(Key_na, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;
@@ -146,7 +146,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		int arg_idx = 0; int pos_prv = 0;
 		tmp_bfr.Clear();
 		while (true) {
-			int pos_cur = Bry_find_.Find_fwd(sql_bry, Byte_ascii.Question, pos_prv); if (pos_cur == Bry_.NotFound) break;
+			int pos_cur = Bry_find_.Find_fwd(sql_bry, Byte_ascii.Question, pos_prv); if (pos_cur == Bry_find_.Not_found) break;
 			tmp_bfr.Add_mid(sql_bry, pos_prv, pos_cur);
 			tmp_bfr.Add_byte(Byte_ascii.Tilde).Add_byte(Byte_ascii.Curly_bgn);
 			tmp_bfr.Add_int_variable(arg_idx++);

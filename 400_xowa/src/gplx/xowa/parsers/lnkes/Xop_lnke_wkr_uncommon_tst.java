@@ -43,7 +43,7 @@ public class Xop_lnke_wkr_uncommon_tst {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"[[http://a.org a]] [[http://b.org b]]"
 		), String_.Concat_lines_nl_skip_last
-		(	"[<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">a</a>] [<a href=\"http://b.org\" class=\"external text\" rel=\"nofollow\">b</a>]"
+		(	"[<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">a</a>] [<a href=\"http://b.org\" rel=\"nofollow\" class=\"external text\">b</a>]"
 		));
 	}
 }

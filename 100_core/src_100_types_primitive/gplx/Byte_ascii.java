@@ -20,6 +20,7 @@ public class Byte_ascii {
 	public static final byte
 	      Null			=   0												 , Backfeed         =   8, Tab				=   9
 		, Nl			=  10, Formfeed			=  12, Cr				=  13
+		,					   Escape			=  27
 													 , Space			=  32, Bang				=  33, Quote			=  34
 		, Hash			=  35, Dollar           =  36, Percent			=  37, Amp				=  38, Apos				=  39
 		, Paren_bgn		=  40, Paren_end		=  41, Star				=  42, Plus				=  43, Comma			=  44
@@ -75,14 +76,15 @@ public class Byte_ascii {
 	public static boolean Is_num(byte b) {
 		return b > Byte_ascii.Slash && b < Byte_ascii.Colon;
 	}
-	public static int Xto_digit(byte b) {return b - Byte_ascii.Num_0;}
-	public static byte To_a7_byte(int digit) {
+	public static byte	To_a7_int(byte b)		{return (byte)(b - Byte_ascii.Num_0);}
+	public static byte	To_a7_str(int digit)	{
 		switch (digit) {
 			case 0: return Byte_ascii.Num_0; case 1: return Byte_ascii.Num_1; case 2: return Byte_ascii.Num_2; case 3: return Byte_ascii.Num_3; case 4: return Byte_ascii.Num_4;
 			case 5: return Byte_ascii.Num_5; case 6: return Byte_ascii.Num_6; case 7: return Byte_ascii.Num_7; case 8: return Byte_ascii.Num_8; case 9: return Byte_ascii.Num_9;
 			default: throw Err_.new_("Byte_ascii", "unknown digit", "digit", digit);
 		}
 	}
+	public static String To_str(byte b) {return Char_.To_str((char)b);}
 	public static byte Case_upper(byte b) {
 		return b > 96 && b < 123
 			? (byte)(b - 32)
@@ -102,6 +104,7 @@ public class Byte_ascii {
 	, Hash_bry				= new byte[] {Byte_ascii.Hash}
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
 	, Angle_bgn_bry			= new byte[] {Byte_ascii.Angle_bgn}
+	, Angle_end_bry			= new byte[] {Byte_ascii.Angle_end}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
 	, Amp_bry				= new byte[] {Byte_ascii.Amp}

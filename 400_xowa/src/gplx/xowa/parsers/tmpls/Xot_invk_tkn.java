@@ -82,7 +82,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			// ignore "{{Template:"; EX: {{Template:a}} is the same thing as {{a}}
 			boolean template_prefix_found = false;
 			int tmpl_ns_len = wiki.Ns_mgr().Tmpls_get_w_colon(name_ary, name_bgn, name_ary_len);
-			if (tmpl_ns_len != Bry_.NotFound) {
+			if (tmpl_ns_len != Bry_find_.Not_found) {
 				name_ary = Bry_.Mid(name_ary, name_bgn + tmpl_ns_len, name_ary_len);
 				name_ary_len = name_ary.length;
 				name_bgn = 0;
@@ -124,7 +124,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				case Xot_defn_.Tid_func:
 					if (defn.Defn_require_colon_arg()) {
 						colon_pos =  Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
-						if (colon_pos == Bry_.NotFound)
+						if (colon_pos == Bry_find_.Not_found)
 							defn = Xot_defn_.Null;
 					}						
 					else {
@@ -134,7 +134,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
-					if (raw_colon_pos == Bry_.NotFound) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
+					if (raw_colon_pos == Bry_find_.Not_found) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
 						name_ary = Bry_.Mid(name_ary, finder.Subst_end() + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;

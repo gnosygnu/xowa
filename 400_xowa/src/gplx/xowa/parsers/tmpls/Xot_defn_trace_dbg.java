@@ -94,9 +94,9 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 				String s = (String)argKeys.Get_at(i);
 				String key = String_.GetStrBefore(s, "=");
 				String val = String_.GetStrAfter(s, "=");
-				bfr.Add_byte_repeat(Byte_ascii.Space, indent + 2).Add_str(key)
+				bfr.Add_byte_repeat(Byte_ascii.Space, indent + 2).Add_str_u8(key)
 					.Add_byte_repeat(Byte_ascii.Space, key_max - String_.Len(key))
-					.Add_byte(Byte_ascii.Colon).Add_byte(Byte_ascii.Space).Add_str(val).Add_byte_nl();
+					.Add_byte(Byte_ascii.Colon).Add_byte(Byte_ascii.Space).Add_str_u8(val).Add_byte_nl();
 			}
 		}
 

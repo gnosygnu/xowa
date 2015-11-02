@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.threads.*;
-import gplx.texts.HexDecUtl;
+import gplx.core.texts.HexDecUtl;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.core.threads.Thread_adp_;
-import gplx.ios.*;
 import java.io.*;
 public class Process_server implements Scrib_server {
     private Process process;

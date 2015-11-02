@@ -43,10 +43,10 @@ public class Xop_redirect_mgr {
 		Object redirect_itm = redirect_hash.Get_by_mid(src, bgn, kwd_end);
 		if (redirect_itm == null)		return Redirect_null_ttl; // not a redirect kwd
 		int ttl_bgn = Xop_redirect_mgr_.Get_ttl_bgn_or_neg1(src, kwd_end, src_len);
-		if (ttl_bgn == Bry_.NotFound)	return Redirect_null_ttl;
+		if (ttl_bgn == Bry_find_.Not_found)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
 		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
-		if (ttl_end == Bry_.NotFound)	return Redirect_null_ttl;
+		if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 		return Xoa_ttl.parse(wiki, redirect_bry);
@@ -112,16 +112,16 @@ class Xop_redirect_mgr_ {
 					if (colon_null)
 						colon_null = false;
 					else
-						return Bry_.NotFound;
+						return Bry_find_.Not_found;
 					break;
 				default:
 					break;
 				case Byte_ascii.Brack_bgn:
 					int nxt_pos = i + 1;
-					if (nxt_pos >= end) return Bry_.NotFound;	// [ at eos
-					return src[nxt_pos] == Byte_ascii.Brack_bgn ? i : Bry_.NotFound;
+					if (nxt_pos >= end) return Bry_find_.Not_found;	// [ at eos
+					return src[nxt_pos] == Byte_ascii.Brack_bgn ? i : Bry_find_.Not_found;
 			}
 		}
-		return Bry_.NotFound;
+		return Bry_find_.Not_found;
 	}
 }

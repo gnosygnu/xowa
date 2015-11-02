@@ -53,7 +53,7 @@ public class Utf16_ {
 	public static byte[] Encode_hex_to_bry(String raw) {return Encode_hex_to_bry(Bry_.new_a7(raw));}
 	public static byte[] Encode_hex_to_bry(byte[] raw) {
 		if (raw == null) return null;
-		int int_val = gplx.texts.HexDecUtl.parse_or(raw, Int_.Min_value);
+		int int_val = gplx.core.texts.HexDecUtl.parse_or(raw, Int_.Min_value);
 		return int_val == Int_.Min_value ? null : Encode_int_to_bry(int_val);
 	}
 	public static byte[] Encode_int_to_bry(int c) {

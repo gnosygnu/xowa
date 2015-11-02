@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 public class Xob_ctg_v1_txt extends Xob_ctg_v1_base {
 	@Override public String Wkr_key() {return Xob_cmd_keys.Key_tdb_make_category;}

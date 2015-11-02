@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Criteria_ioItm_tst {
 	IoItmFil fil; Criteria crt; IoItm_fxt fx = IoItm_fxt.new_();
 	@Test  public void IoType() {

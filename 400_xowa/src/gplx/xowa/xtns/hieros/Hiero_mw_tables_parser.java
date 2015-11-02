@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.log_msgs.*;
 import gplx.langs.phps.*; import gplx.langs.dsvs.*;
 import gplx.xowa.apps.gfs.*;
 public class Hiero_mw_tables_parser {

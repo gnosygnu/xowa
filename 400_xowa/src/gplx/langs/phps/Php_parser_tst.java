@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
-import org.junit.*; import gplx.core.tests.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.log_msgs.*;
 public class Php_parser_tst {
 	Php_parser_fxt fxt = new Php_parser_fxt();
 	@Before public void init() {fxt.Clear();}

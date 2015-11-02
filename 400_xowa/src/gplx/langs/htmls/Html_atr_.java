@@ -17,13 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Html_atr_ {
-	public static final String
-	  Src_str = "src"
-	;
 	public static final byte[] 
-	  Id_bry		= Bry_.new_a7("id")
-	, Cls_bry		= Bry_.new_a7("class")
-	, Style_bry		= Bry_.new_a7("style")
-	, Href_bry		= Bry_.new_a7("href")
+	  Bry__id		= Bry_.new_a7("id")
+	, Bry__class	= Bry_.new_a7("class")
+	, Bry__rel		= Bry_.new_a7("rel")
+	, Bry__href		= Bry_.new_a7("href")
+	, Bry__title	= Bry_.new_a7("title")
+	, Bry__style	= Bry_.new_a7("style")
 	;
 }

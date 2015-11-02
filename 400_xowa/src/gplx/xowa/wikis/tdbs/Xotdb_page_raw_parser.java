@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.encoders.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.bldrs.*;
 public class Xotdb_page_raw_parser {
@@ -43,10 +43,10 @@ public class Xotdb_page_raw_parser {
 	public boolean Read(Xowd_page_itm page) {
 		boolean read = false;
 		read = rdr.Read_next(); if (!read) return false;
-		int id = Base85_utl.XtoIntByAry(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 2);
+		int id = Base85_.To_int_by_bry(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 2);
 		page.Id_(id);
 		read = rdr.Read_next(); if (!read) throw Err_.new_wo_type("could not read timestamp");
-		int timestamp = Base85_utl.XtoIntByAry(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);
+		int timestamp = Base85_.To_int_by_bry(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);
 		page.Modified_on_(Bit_.Xto_date_short(timestamp));
 		read = rdr.Read_next(); if (!read) throw Err_.new_wo_type("could not read ttl");
 		byte[] ttl = Bry_.Mid(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);

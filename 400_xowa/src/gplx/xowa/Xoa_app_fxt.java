@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_app_fxt {
@@ -28,16 +28,39 @@ public class Xoa_app_fxt {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		return app_("linux", Io_url_.mem_dir_("mem/xowa/"));
 	}
+	public static Xoav_app Make__app__view() {
+		Io_mgr.Instance.InitEngine_mem();
+		Db_conn_bldr.Instance.Reg_default_mem();
+		return Make__app__view("linux", Io_url_.mem_dir_("mem/xowa/"));
+	}
+	public static Xoav_app Make__app__view(String op_sys, Io_url root_dir) {
+		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
+		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
+		Xoav_app rv = new Xoav_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_gui, op_sys, root_dir, root_dir.GenSubDir("file"), root_dir.GenSubDir("css"));
+		return rv;
+	}
 	public static Xoae_app app_(String op_sys, Io_url root_dir) {
 		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
 		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
 		Xoae_app app = new Xoae_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_cmd, root_dir, root_dir.GenSubDir("wiki"), root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), op_sys);
-		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.ios.Io_stream_.Tid_raw);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
+		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.core.ios.Io_stream_.Tid_raw);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
 		GfsCore.Instance.Clear();							// NOTE: must clear
 		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_app);	// NOTE: must add app to GfsCore; app.Gfs_mgr() always adds current app to GfsCore; note this causes old test to leave behind GfsCore for new test
 		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_xowa);	// add alias for app; DATE:2014-06-09
 		return app;
 	}
+	public static Xowv_wiki Make__wiki__view(Xoa_app app) {return Make__wiki__view(app, "en.wikipedia.org");}
+	public static Xowv_wiki Make__wiki__view(Xoa_app app, String domain_str) {
+		byte[] domain_bry = Bry_.new_u8(domain_str);
+		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(domain_str);
+		Xowv_wiki rv = new Xowv_wiki((Xoav_app)app, domain_bry, wiki_dir);
+		((Xoav_wiki_mgr)app.Wiki_mgri()).Add(rv);
+		return rv;
+	}
+//		public static Xow_wiki Make__wiki__view(Xoa_app app, String domain_str) {
+//			byte[] domain_bry = Bry_.new_u8(domain_str);
+//			return app.Wiki_mgri().Get_by_key_or_make_init_y(domain_bry);
+//		}
 	public static Xowe_wiki wiki_nonwmf(Xoae_app app, String key) {
 		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);
 		Xol_lang_itm_.Lang_init(lang);

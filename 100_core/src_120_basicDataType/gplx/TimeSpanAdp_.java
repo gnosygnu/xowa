@@ -47,7 +47,7 @@ public class TimeSpanAdp_ {
 			switch (b) {
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					int unit_digit = Byte_ascii.Xto_digit(b);
+					int unit_digit = Byte_ascii.To_a7_int(b);
 					unit_val = (unit_multiple == 1) ? unit_digit : unit_val + (unit_digit * unit_multiple);
 					switch (colon_pos) {
 						case 0:		val_s = unit_val; break;
@@ -80,7 +80,7 @@ public class TimeSpanAdp_ {
 		}
 		return sign * (val_f + (val_s * Divisors[1]) + (val_m * Divisors[2]) + (val_h * Divisors[3]));
 	}
-	@gplx.Internal protected static String To_str(long frc, String fmt) {
+	public static String To_str(long frc, String fmt) {
 		String_bldr sb = String_bldr_.new_();
 		int[] units = Split_long(frc, Divisors);
 

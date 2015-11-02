@@ -25,7 +25,7 @@ public class Xop_lnke_wkr_relative_tst {
 			);
 	}
 	@Test  public void Relative_external() {
-		fxt.Test_parse_page_wiki_str("[//www.a.org a]", "<a href=\"https://www.a.org\" class=\"external text\" rel=\"nofollow\">a</a>");
+		fxt.Test_parse_page_wiki_str("[//www.a.org a]", "<a href=\"https://www.a.org\" rel=\"nofollow\" class=\"external text\">a</a>");
 	}
 	@Test  public void Relative_internal() {
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");

@@ -48,7 +48,7 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 				Thread_adp_.Sleep(10);
 			if (hdump_enabled && page.Revision_data().Html_db_id() != -1) {
 				// wiki.Parser_mgr().Parse(page, false);
-				wiki.Html__hdump_rdr().Get_by_ttl(page);
+				wiki.Html__hdump_mgr().Load_mgr().Load(page);
 			}
 			else
 				wiki.Parser_mgr().Parse(page, false);

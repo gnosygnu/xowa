@@ -98,10 +98,10 @@ public class Db_stmt__mem implements Db_stmt {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
-	public Db_stmt Val_rdr_(gplx.ios.Io_stream_rdr v, long rdr_len) {
+	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
-			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
+			gplx.core.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
 			Add("", Bool_.N, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;

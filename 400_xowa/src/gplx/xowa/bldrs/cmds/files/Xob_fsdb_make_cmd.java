@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.fsdb.*; import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*;	
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {

@@ -73,7 +73,7 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 			Class<?> kv_val_type = kv_val.getClass();
 			boolean kv_val_is_array = Type_adp_.Eq(kv_val_type, KeyVal[].class);
 			if (print_key && !kv_val_is_array)
-				bfr.Add_str(kv.Key()).Add_byte(Byte_ascii.Colon);
+				bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
 			if		(Type_adp_.Eq(kv_val_type, Bool_.Cls_ref_type))
 				bfr.Add(Bool_.cast(kv_val) ? gplx.langs.jsons.Json_itm_.Bry__true : gplx.langs.jsons.Json_itm_.Bry__false);
 			else if	(kv_val_is_array) {
@@ -86,7 +86,7 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 				}
 			}
 			else
-				bfr.Add_str(kv.Val_to_str_or_empty());
+				bfr.Add_str_u8(kv.Val_to_str_or_empty());
 		}
 	}
 

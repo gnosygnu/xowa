@@ -31,7 +31,7 @@ public class Scrib_fsys_mgr {
 	public String Get_or_null(String name) {
 		if (libs == null) libs = libs_init(script_dir);
 		Object lib_fil_obj = libs.Get_by(name); if (lib_fil_obj == null) return null;
-		gplx.ios.Io_fil lib_fil = (gplx.ios.Io_fil)lib_fil_obj;
+		gplx.core.ios.Io_fil lib_fil = (gplx.core.ios.Io_fil)lib_fil_obj;
 		String lib_data = lib_fil.Data();
 		if (lib_data == null) {
 			lib_data = Io_mgr.Instance.LoadFilStr(lib_fil.Url());
@@ -46,7 +46,7 @@ public class Scrib_fsys_mgr {
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
 			if (!String_.Eq(fil.Ext(), ".lua")) continue;	// ignore readme.txt, readme
-			gplx.ios.Io_fil fil_itm = new gplx.ios.Io_fil(fil, null);
+			gplx.core.ios.Io_fil fil_itm = new gplx.core.ios.Io_fil(fil, null);
 			rv.Add_if_dupe_use_1st(fil.NameOnly(), fil_itm);
 			rv.Add_if_dupe_use_1st(String_.Replace(String_.DelEndIf(fil.GenRelUrl_orEmpty(script_dir), ".lua"), "\\", "/"), fil_itm);
 		}
@@ -55,7 +55,7 @@ public class Scrib_fsys_mgr {
 	public void Shrink() {
 		int len = libs.Count();
 		for (int i = 0; i < len; i++) {
-			gplx.ios.Io_fil fil = (gplx.ios.Io_fil)libs.Get_at(i);
+			gplx.core.ios.Io_fil fil = (gplx.core.ios.Io_fil)libs.Get_at(i);
 			fil.Url_(null).Data_(null);
 		}
 	}

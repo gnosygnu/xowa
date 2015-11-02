@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 class Hiero_html_mgr {		
 	private Bry_bfr html_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), content_bfr = Bry_bfr.reset_(255), tbl_content_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), temp_bfr = Bry_bfr.reset_(255);
 	private Xoh_wtr_ctx hctx;

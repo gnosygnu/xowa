@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.core.encoders.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
 public class Xob_category_registry_sql_tst {
 	@Before	public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xob_category_registry_sql_fxt fxt = new Xob_category_registry_sql_fxt();
 	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();}
@@ -59,7 +59,7 @@ class Xob_category_registry_sql_fxt {
 			String line = lines[i];
 			if (String_.Len_eq_0(line)) break;	// ignore blank line
 			String[] flds = String_.Split(line, '|');
-			list.Add(Base85_utl.XtoIntByStr(flds[1]));
+			list.Add(Base85_.To_int_by_str(flds[1]));
 		}
 		return (int[])list.To_ary_and_clear(int.class);
 	}

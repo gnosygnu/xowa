@@ -21,7 +21,7 @@ public class Xoh_href_gui_utl {
 	public static String Html_extract_text(String site, String page, String text_str) {
 		byte[] text_bry = Bry_.new_u8(text_str);
 		int text_len = text_bry.length;
-		int text_tid = Byte_ascii.Xto_digit(text_bry[0]);
+		int text_tid = Byte_ascii.To_a7_int(text_bry[0]);
 		switch (text_tid) {
 			case Text_tid_none: return "";	// "0"
 			case Text_tid_text: return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "1|"

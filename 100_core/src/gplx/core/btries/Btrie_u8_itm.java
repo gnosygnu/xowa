@@ -40,7 +40,7 @@ class Btrie_u8_itm {
 		else {																		// itm has asymmetric_bry; EX: "İ" was added to trie, must match "İ" and "i"; 
 			if (called_by_match) {													// called by mgr.Match
 				return
-					(	Bry_.Eq(src, c_bgn, c_end, rv.key)						// key matches src;				EX: "aİ"
+					(	Bry_.Eq(src, c_bgn, c_end, rv.key)							// key matches src;				EX: "aİ"
 					||	Bry_.Eq(src, c_bgn, c_end, rv.asymmetric_bry)				// asymmetric_bry matches src;	EX: "ai"; note that "aI" won't match
 					)
 					? rv : null;

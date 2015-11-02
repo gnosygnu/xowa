@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*;
-import gplx.ios.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 public class Xob_tst {		
 	@Before public void init() {fxt = new Xob_fxt().Ctor_mem();} private Xob_fxt fxt;
@@ -175,7 +175,7 @@ public class Xob_tst {
 		Io_mgr.Instance.SaveFilStr(url, raw);
 		Xotdb_page_raw_parser parser = new Xotdb_page_raw_parser();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
-		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Id_template, Xow_ns_case_.Id_1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
+		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Id_template, Xow_ns_case_.Tid__1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
 		List_adp actl = List_adp_.new_();
 		Xowd_page_itm page = new Xowd_page_itm();
 		while (parser.Read(page)) {

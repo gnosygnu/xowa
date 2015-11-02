@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.ios.*;
+import org.junit.*; import gplx.core.ios.*;
 public class Sql_file_parser_tst {
 	Sql_file_parser_fxt fxt = new Sql_file_parser_fxt();
 	@Before public void init() {fxt.Clear();}

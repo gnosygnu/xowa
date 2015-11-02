@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.hdumps.core.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.core.makes.imgs.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Xog_redlink_mgr implements GfoInvkAble {
 	private Xog_win_itm win; private Xog_html_itm html_itm; private Xowe_wiki wiki; private Xoae_page page;

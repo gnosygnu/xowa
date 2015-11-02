@@ -23,14 +23,14 @@ public class Xop_lnke_wkr_text_tst {
 		fxt.Test_parse_page_wiki("irc://a", fxt.tkn_lnke_(0, 7).Lnke_typ_(Xop_lnke_tkn.Lnke_typ_text).Lnke_rng_(0, 7));
 	}
 	@Test  public void Text_html() {
-		fxt.Test_parse_page_wiki_str("irc://a", "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">irc://a</a>");
+		fxt.Test_parse_page_wiki_str("irc://a", "<a href=\"irc://a\" rel=\"nofollow\" class=\"external free\">irc://a</a>");
 	}
 	@Test  public void Text_after() {
 		fxt.Test_parse_page_wiki("irc://a b c", fxt.tkn_lnke_(0, 7).Lnke_rng_(0, 7), fxt.tkn_space_(7, 8), fxt.tkn_txt_(8, 9), fxt.tkn_space_(9, 10), fxt.tkn_txt_(10, 11));
 	}
 	@Test  public void Text_before_ascii() {	// PURPOSE: free form external urls should not match if preceded by letters; EX:de.w:Sylvie_und_Bruno; DATE:2014-05-11
 		fxt.Ctx().Lang().Case_mgr_u8_();
-		String expd_lnke_html = "<a href=\"tel:a\" class=\"external text\" rel=\"nofollow\">tel:a</a>";
+		String expd_lnke_html = "<a href=\"tel:a\" rel=\"nofollow\" class=\"external free\">tel:a</a>";
 		fxt.Test_parse_page_wiki_str("titel:a"		, "titel:a");
 		fxt.Test_parse_page_wiki_str(" tel:a"		, " " + expd_lnke_html);
 		fxt.Test_parse_page_wiki_str("!tel:a"		, "!" + expd_lnke_html);
@@ -60,21 +60,21 @@ public class Xop_lnke_wkr_text_tst {
 		,	"*irc://b"	
 		),String_.Concat_lines_nl_skip_last
 		(	"<ul>"
-		,	"  <li><a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">irc://a</a>"
+		,	"  <li><a href=\"irc://a\" rel=\"nofollow\" class=\"external free\">irc://a</a>"
 		,	"  </li>"
-		,	"  <li><a href=\"irc://b\" class=\"external text\" rel=\"nofollow\">irc://b</a>"
+		,	"  <li><a href=\"irc://b\" rel=\"nofollow\" class=\"external free\">irc://b</a>"
 		,	"  </li>"
 		,	"</ul>"
 		));
 	}
 	@Test  public void Defect_reverse_caption_link() { // PURPOSE: bad lnke formatting (caption before link); ] should show up at end, but only [ shows up; PAGE:en.w:Paul Philippoteaux; [caption http://www.americanheritage.com]
-		fxt.Test_parse_page_wiki_str("[caption irc://a]", "[caption <a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">irc://a</a>]");
+		fxt.Test_parse_page_wiki_str("[caption irc://a]", "[caption <a href=\"irc://a\" rel=\"nofollow\" class=\"external free\">irc://a</a>]");
 	}
 	@Test  public void Lnki() {	// PURPOSE: trailing lnki should not get absorbed into lnke; DATE:2014-07-11
 		fxt.Test_parse_page_wiki_str
 		( "http://a.org[[B]]"	// NOTE: [[ should create another lnki
 		,String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a><a href=\"/wiki/B\">B</a>"
+		( "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a><a href=\"/wiki/B\">B</a>"
 		));
 	}
 	@Test   public void Protocol_only() {	// PURPOSE: protocol only should return text; DATE:2014-10-09
@@ -84,16 +84,16 @@ public class Xop_lnke_wkr_text_tst {
 		fxt.Test_parse_page_wiki_str("[http:]"		, "[http:]");
 	}
 	@Test   public void Ignore_punctuation_at_end() {	// PURPOSE: ignore "," and related punctuation at end; DATE:2014-10-09
-		fxt.Test_parse_page_wiki_str("http://a.org,"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>,");			// basic
-		fxt.Test_parse_page_wiki_str("http://a.org,,"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>,,");			// many
-		fxt.Test_parse_page_wiki_str("http://a.org/b,c"	, "<a href=\"http://a.org/b,c\" class=\"external text\" rel=\"nofollow\">http://a.org/b,c</a>");	// do not ignore if in middle
-		fxt.Test_parse_page_wiki_str("http://a.org:"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>:");			// colon at end; compare to "http:"
+		fxt.Test_parse_page_wiki_str("http://a.org,"	, "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>,");			// basic
+		fxt.Test_parse_page_wiki_str("http://a.org,,"	, "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>,,");			// many
+		fxt.Test_parse_page_wiki_str("http://a.org/b,c"	, "<a href=\"http://a.org/b,c\" rel=\"nofollow\" class=\"external free\">http://a.org/b,c</a>");	// do not ignore if in middle
+		fxt.Test_parse_page_wiki_str("http://a.org:"	, "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>:");			// colon at end; compare to "http:"
 	}
 	@Test   public void Ignore_punctuation_at_end__paren_end() {	// PURPOSE: end parent has special rules; DATE:2014-10-10
-		fxt.Test_parse_page_wiki_str("(http://a.org)"	, "(<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>)");			// trim=y
-		fxt.Test_parse_page_wiki_str("http://a.org/b(c)", "<a href=\"http://a.org/b(c)\" class=\"external text\" rel=\"nofollow\">http://a.org/b(c)</a>");	// trim=n
+		fxt.Test_parse_page_wiki_str("(http://a.org)"	, "(<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>)");			// trim=y
+		fxt.Test_parse_page_wiki_str("http://a.org/b(c)", "<a href=\"http://a.org/b(c)\" rel=\"nofollow\" class=\"external free\">http://a.org/b(c)</a>");	// trim=n
 	}
 	@Test   public void Sym_quote() {	// PURPOSE: quote should interrupt lnke; DATE:2014-10-10
-		fxt.Test_parse_page_wiki_str("http://a.org/b\"c", "<a href=\"http://a.org/b\" class=\"external text\" rel=\"nofollow\">http://a.org/b</a>&quot;c");
+		fxt.Test_parse_page_wiki_str("http://a.org/b\"c", "<a href=\"http://a.org/b\" rel=\"nofollow\" class=\"external free\">http://a.org/b</a>&quot;c");
 	}
 }

@@ -22,8 +22,42 @@ public class Gfo_poolable_mgr_tst {
 	@Before public void init() {tstr.Clear();}
 	@Test  public void Get__one() {
 		tstr.Test__get(0);
-		tstr.Test__mgr__free(0, 0);
+		tstr.Test__free__len(0);
 		tstr.Test__pool__len(2);
+	}
+	@Test  public void Get__many__expand() {
+		tstr.Test__get(0);
+		tstr.Test__get(1);
+		tstr.Test__get(2);
+		tstr.Test__free__len(0);
+		tstr.Test__pool__len(4);
+	}
+	@Test  public void Rls__lifo() {
+		tstr.Test__get(0);
+		tstr.Test__get(1);
+		tstr.Test__get(2);
+		tstr.Exec__rls(2);
+		tstr.Exec__rls(1);
+		tstr.Exec__rls(0);
+		tstr.Test__pool__nxt(0);
+		tstr.Test__free__len(0);
+	}
+	@Test  public void Rls__fifo() {
+		tstr.Test__get(0);
+		tstr.Test__get(1);
+		tstr.Test__get(2);
+		tstr.Exec__rls(0);
+		tstr.Exec__rls(1);
+		tstr.Test__pool__nxt(3);
+		tstr.Test__free__len(2);			// 2 items in free_ary
+		tstr.Test__free__ary(0, 1, 0, 0);
+
+		tstr.Test__get(1);
+		tstr.Exec__rls(1);
+
+		tstr.Exec__rls(2);
+		tstr.Test__free__len(0);			// 0 items in free_ary
+		tstr.Test__free__ary(0, 0, 0, 0);
 	}
 }
 class Gfo_poolable_mgr_tstr {
@@ -33,12 +67,11 @@ class Gfo_poolable_mgr_tstr {
 		Sample_poolable_itm actl_itm = (Sample_poolable_itm)mgr.Get_fast();
 		Tfds.Eq(expd_idx, actl_itm.Pool__idx(), "pool_idx");
 	}
-	public void Test__mgr__free(int... expd) {
-		Tfds.Eq_ary(expd, mgr.Free(), "mgr.Free()");
-	}
-	public void Test__pool__len(int expd) {
-		Tfds.Eq(expd, mgr.Pool_len(), "mgr.Pool_len()");
-	}
+	public void Test__free__ary(int... expd)	{Tfds.Eq_ary(expd, mgr.Free_ary(), "mgr.Free_ary()");}
+	public void Test__free__len(int expd)			{Tfds.Eq(expd, mgr.Free_len(), "mgr.Free_len()");}
+	public void Test__pool__len(int expd)			{Tfds.Eq(expd, mgr.Pool_len(), "mgr.Pool_len()");}
+	public void Test__pool__nxt(int expd)			{Tfds.Eq(expd, mgr.Pool_nxt(), "mgr.Pool_nxt()");}
+	public void Exec__rls(int idx) {mgr.Rls_fast(idx);}
 }
 class Sample_poolable_itm implements Gfo_poolable_itm {
 	public Sample_poolable_itm(int pool_idx, Object[] make_args) {this.pool_idx = pool_idx; this.pool__make_args = make_args;}

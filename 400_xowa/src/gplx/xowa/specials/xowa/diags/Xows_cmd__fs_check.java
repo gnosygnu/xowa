@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.ios.*; import gplx.core.net.*;
+import gplx.core.ios.*; import gplx.core.net.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.apps.urls.*;
 class Xows_cmd__fs_check {

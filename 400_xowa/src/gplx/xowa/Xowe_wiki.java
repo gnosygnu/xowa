@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.users.*; import gplx.xowa.htmls.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.wikis.dbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.exts.*;		
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.wtrs.*; import gplx.xowa.htmls.hzips.*; import gplx.xowa.htmls.hdumps.*; import gplx.xowa.htmls.css.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.css.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
 import gplx.xowa.guis.views.*;
@@ -37,9 +37,8 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.url__parser = new Xoa_url_parser(this);
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
+		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.html_mgr = new Xow_html_mgr(this);
-		this.html_mgr__hdump_rdr = new Xohd_hdump_rdr(app, this);
-		this.html_mgr__hdump_wtr = new Xohd_hdump_wtr(app, this);
 
 		tdb_fsys_mgr = new Xotdb_fsys_mgr(wiki_dir, ns_mgr);
 		redirect_mgr = new Xop_redirect_mgr(this);
@@ -77,8 +76,9 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	}
 	public GfoEvMgr					EvMgr() {return ev_mgr;} private final GfoEvMgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
-	public Xoa_ttl					Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse(this, ttl);}
-	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse(this, ns_id, ttl);}
+	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.parse(this, ttl);}
+	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.new_(this, app.Msg_log(), src, src_bgn, src_end);}
+	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.parse(this, ns_id, ttl);}
 	public boolean						Type_is_edit() {return Bool_.Y;}
 	public Xoa_app					App() {return app;}
 	public Xol_lang_itm				Lang() {return lang;} private final Xol_lang_itm lang;
@@ -88,7 +88,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
 	public Xow_domain_itm			Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
 	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
-	public Xowd_db_mgr				Data__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
+	public Xowd_db_mgr				Data__core_mgr() {if (db_mgr == null) return null; return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
 	public Fsdb_db_mgr				File__fsdb_core() {return file_mgr.Db_core();}
 	public Xow_repo_mgr				File__repo_mgr() {return file_mgr.Repo_mgr();}
@@ -96,8 +96,6 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xof_bin_mgr				File__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
 	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
 	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
-	public Xow_hzip_mgr				Html__hzip_mgr() {return html_mgr.Hzip_mgr();}
-	public Xohd_hdump_rdr			Html__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xoa_url_parser			Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;
@@ -106,7 +104,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xow_wiki_props			Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
 	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final Xow_parser_mgr parser_mgr;
 
-	public Xohd_hdump_wtr			Html__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
+	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;
 	public Xow_gui_mgr				Gui_mgr() {return gui_mgr;} private final Xow_gui_mgr gui_mgr = new Xow_gui_mgr();
 	public Xow_user					User() {return user;} private Xow_user user = new Xow_user();
@@ -200,6 +198,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_default);
 		Html__hdump_enabled_(html_mgr__hdump_enabled);
 		html_mgr.Init_by_wiki(this);
+		html__hdump_mgr.Init_by_db(this);
 		this.Copy_cfg(app.Usere().Wiki());
 		Xow_repo_mgr_.Assert_repos(app, this);
 		xtn_mgr.Init_by_wiki(this);
@@ -212,9 +211,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	private void Html__hdump_enabled_(boolean v) {
 		this.html_mgr__hdump_enabled = v;
 		if (html_mgr__hdump_enabled) {
-			Xowd_html_tbl.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
-			html_mgr__hdump_rdr.Init_by_db(this.Data__core_mgr());
-			html_mgr__hdump_wtr.Init_by_db(this.Data__core_mgr());
+			Xowd_page_tbl.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
 		}
 	}
 	public void Rls() {

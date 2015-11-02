@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.files.*;
+import gplx.dbs.*; import gplx.core.ios.*; import gplx.xowa.files.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
 public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble, Sql_file_parser_cmd {
 	private Db_conn conn = null; private Db_stmt stmt = null;

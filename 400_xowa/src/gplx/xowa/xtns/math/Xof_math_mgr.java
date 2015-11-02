@@ -32,7 +32,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	public void Make_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Io_url math_dir = Make_math_dir(wiki_key);
 		math_bry = app.Math_subst_regy().Subst(math_bry);
-		String md5 = gplx.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.ios.IoStream_.ary_(math_bry));
+		String md5 = gplx.core.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.core.ios.IoStream_.ary_(math_bry));
 		Io_url png_fil = Make_png_fil(math_dir, md5);
 		rv.Ctor(math_bry, md5, png_fil);
 	}

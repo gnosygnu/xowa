@@ -47,7 +47,7 @@ public class Gfo_url_parser {
 		}
 		if (!rel) {	// search for ":"; NOTE: only search if not rel; i.e.: "//"
 			int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, pos, src_end);	// no colon found; EX: "//a.org/b"; "a.org/b"
-			if (colon_pos != Bry_.NotFound)											// colon found; EX: "http://" or "https://"
+			if (colon_pos != Bry_find_.Not_found)											// colon found; EX: "http://" or "https://"
 				pos = colon_pos + Int_.Const_dlm_len;
 			if (pos < src_end && src[pos] == Byte_ascii.Slash) {					// skip slash after colon
 				pos += 1;
@@ -56,7 +56,7 @@ public class Gfo_url_parser {
 			}
 		}
 		int slash_pos = Bry_find_.Find_fwd(src, Byte_ascii.Slash, pos, src_end);
-		if (slash_pos == Bry_.NotFound)												// no terminating slash; EX: http://a.org
+		if (slash_pos == Bry_find_.Not_found)												// no terminating slash; EX: http://a.org
 			slash_pos = src_end;
 		slash_pos = Bry_.Trim_end_pos(src, slash_pos);
 		site_data.Atrs_set(rel, pos, slash_pos);

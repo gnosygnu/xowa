@@ -63,7 +63,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				return rslt.Init_many_objs(bgn_codepoint_idx + Scrib_lib_ustring.Base1, bgn_codepoint_idx + Scrib_lib_ustring.Base1 - 1);
 			if (plain) {
 				int pos = String_.FindFwd(text_str, regx, bgn_codepoint_idx);
-				boolean found = pos != Bry_.NotFound;
+				boolean found = pos != Bry_find_.Not_found;
 				return found 
 					? rslt.Init_many_objs(pos + Scrib_lib_ustring.Base1, pos + Scrib_lib_ustring.Base1 + String_.Len(regx) - Scrib_lib_ustring.End_adj)
 					: rslt.Init_ary_empty()
@@ -224,14 +224,14 @@ class Scrib_lib_ustring_gsub_mgr {
 		for (int i = 0; i < len; i++) {
 			if (limit > -1 && repl_count == limit) break;
 			Regx_match rslt = rslts[i];
-			tmp_bfr.Add_str(String_.Mid(text, pos, rslt.Find_bgn()));	// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
+			tmp_bfr.Add_str_u8(String_.Mid(text, pos, rslt.Find_bgn()));	// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
 			Exec_repl_itm(tmp_bfr, repl_tid, repl_bry, text, rslt);
 			pos = rslt.Find_end();
 			++repl_count;
 		}
 		int text_len = String_.Len(text);
 		if (pos < text_len)
-			tmp_bfr.Add_str(String_.Mid(text, pos, text_len));			// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
+			tmp_bfr.Add_str_u8(String_.Mid(text, pos, text_len));			// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
 		return tmp_bfr.To_str_and_clear();
 	}
 	private void Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, byte[] repl_bry, String text, Regx_match match) {
@@ -257,7 +257,7 @@ class Scrib_lib_ustring_gsub_mgr {
 											idx -= List_adp_.Base1;
 											if (idx < match.Groups().length) {	// retrieve numbered capture; TODO: support more than 9 captures
 												Regx_group grp = match.Groups()[idx];
-												tmp_bfr.Add_str(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+												tmp_bfr.Add_str_u8(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 											}
 											else {
 												tmp_bfr.Add_byte(Byte_ascii.Percent);
@@ -297,7 +297,7 @@ class Scrib_lib_ustring_gsub_mgr {
 				String find_str = String_.Mid(text, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				Object actl_repl_obj = repl_hash.Get_by(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
-					tmp_bfr.Add_str(find_str);
+					tmp_bfr.Add_str_u8(find_str);
 				else
 					tmp_bfr.Add((byte[])actl_repl_obj);					
 				break;
@@ -319,7 +319,7 @@ class Scrib_lib_ustring_gsub_mgr {
 					}
 				}
 				KeyVal[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
-				tmp_bfr.Add_str(Scrib_kv_utl_.Val_to_str(rslts, 0));
+				tmp_bfr.Add_str_u8(Scrib_kv_utl_.Val_to_str(rslts, 0));
 				break;
 			}
 			default: throw Err_.new_unhandled(repl_tid);

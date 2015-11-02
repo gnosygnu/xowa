@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.vnts.*;
 public class Xof_math_html_wtr {
 	private Xof_math_itm tmp_math_itm = new Xof_math_itm();
@@ -33,7 +33,7 @@ public class Xof_math_html_wtr {
 		boolean enabled = app.File_mgr().Math_mgr().Enabled();
 		if (renderer_is_latex && app.File_mgr().Math_mgr().Find_itm(tmp_math_itm, page.Wiki().Domain_str(), math_bry)) {
 			bfr.Add(Xoh_consts.Img_bgn);
-			bfr.Add_str(tmp_math_itm.Png_url().To_http_file_str());
+			bfr.Add_str_u8(tmp_math_itm.Png_url().To_http_file_str());
 			bfr.Add(Xoh_consts.__inline_quote);
 		}
 		else

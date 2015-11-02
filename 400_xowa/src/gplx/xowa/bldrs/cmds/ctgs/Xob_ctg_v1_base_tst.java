@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_ctg_v1_base_tst {
 	Xowd_page_wkr_ctg_fxt fxt = new Xowd_page_wkr_ctg_fxt();
 	@Test  public void One() 		{fxt.ini_("[[Category:A]]").tst_("A");}

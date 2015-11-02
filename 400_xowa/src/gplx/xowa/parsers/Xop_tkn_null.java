@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xop_tkn_null implements Xop_tkn_itm {
 	public byte Tkn_tid() {return Xop_tkn_itm_.Tid_null;}
 	public boolean Tkn_immutable() {return true;}
@@ -49,5 +50,6 @@ public class Xop_tkn_null implements Xop_tkn_itm {
 	public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {}
 	public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {}
 	public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {return true;}
+	public void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {}
 	public static final Xop_tkn_null Null_tkn = new Xop_tkn_null();
 }

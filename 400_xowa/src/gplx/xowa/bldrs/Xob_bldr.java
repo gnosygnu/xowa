@@ -87,9 +87,9 @@ public class Xob_bldr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_pause_at_end_))			pause_at_end = m.ReadBoolOrTrue("val");
 		else if	(ctx.Match(k, Invk_cmds))					return cmd_mgr;
 		else if	(ctx.Match(k, Invk_wiki_cfg_bldr))			return wiki_cfg_bldr;
-		else if	(ctx.Match(k, Invk_sort_mem_len_)) 			sort_mem_len = gplx.ios.Io_size_.Load_int_(m);
-		else if	(ctx.Match(k, Invk_dump_fil_len_)) 			dump_fil_len = gplx.ios.Io_size_.Load_int_(m);
-		else if	(ctx.Match(k, Invk_make_fil_len_)) 			make_fil_len = gplx.ios.Io_size_.Load_int_(m);
+		else if	(ctx.Match(k, Invk_sort_mem_len_)) 			sort_mem_len = gplx.core.ios.Io_size_.Load_int_(m);
+		else if	(ctx.Match(k, Invk_dump_fil_len_)) 			dump_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
+		else if	(ctx.Match(k, Invk_make_fil_len_)) 			make_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
 		else if	(ctx.Match(k, Invk_run)) 					Run();
 		else if	(ctx.Match(k, Invk_cancel)) 				Cancel();
 		else	return GfoInvkAble_.Rv_unhandled;

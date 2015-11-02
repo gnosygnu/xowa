@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.threads.*; import gplx.ios.*;
+import gplx.core.threads.*; import gplx.core.ios.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.htmls.hdumps.core.*;
+import gplx.xowa.htmls.core.makes.imgs.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xof_orig_mgr orig_mgr; private final Xof_bin_mgr bin_mgr; private final Fsm_mnt_mgr mnt_mgr; private final Xou_cache_mgr cache_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xog_js_wkr js_wkr;
@@ -35,10 +35,10 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		int len = imgs.Count();
 		for (int i = 0; i < len; ++i)
-			Ctor_by_hdump(hpg, (Xohd_data_itm__base)imgs.Get_at(i));
+			Ctor_by_hdump(hpg, (Xohd_img_itm__base)imgs.Get_at(i));
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");
 	}
-	private void Ctor_by_hdump(Xoa_page hpg, Xohd_data_itm__base hdump) {
+	private void Ctor_by_hdump(Xoa_page hpg, Xohd_img_itm__base hdump) {
 		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
 		fsdb.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), hdump.Lnki_ttl(), hdump.Lnki_type(), hdump.Lnki_upright(), hdump.Lnki_w(), hdump.Lnki_h(), hdump.Lnki_time(), hdump.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
 		fsdb.Init_at_hdoc(hdump.Html_uid(), hdump.Html_elem_tid());
@@ -118,7 +118,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	public static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr, Io_url html_url) {
 		long rdr_len = Io_mgr.Instance.QueryFil(html_url).Size();
-		Io_stream_rdr rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
+		Io_stream_rdr rdr = gplx.core.ios.Io_stream_rdr_.file_(html_url);
 		try {
 			rdr.Open();
 			Fsm_mnt_itm mnt_itm = mnt_mgr.Mnts__get_insert();

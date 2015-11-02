@@ -38,7 +38,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	public void Select(Bry_bfr bfr, int top) {
 		tbl.Select_by_top(select_list, 100);
 		Xoud_history_row[] db_rows = (Xoud_history_row[])select_list.To_ary_and_clear(Xoud_history_row.class);
-		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Help:Options/PageHistory"))).Img_16x16(gplx.xowa.htmls.wtrs.Xoh_img_path.Img_option).Bld_to_bry();
+		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Help:Options/PageHistory"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();
 		byte[] delete_confirm_msg = app.Api_root().Usr().Bookmarks().Delete_confirm() ? Msg__delete_confirm : Bry_.Empty;
 		tbl_fmtr.Write(bfr, this, option_link, delete_confirm_msg, To_ui_rows(db_rows));
 	}	private static final byte[] Msg__delete_confirm = Bry_.new_a7(" data-dbui-delete_confirm_msg='Are you sure you want to delete this row?'");

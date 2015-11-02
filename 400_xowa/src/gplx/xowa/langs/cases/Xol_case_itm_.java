@@ -83,8 +83,8 @@ public class Xol_case_itm_ {
 	private static int parse_mw_grp(Ordered_hash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
 		byte[] find = section_is_upper ? parse_mw_upper : parse_mw_lower;
 		int raw_len = raw.length;
-		int pos = Bry_find_.Find_fwd(raw, find, find_bgn);					if (pos == Bry_.NotFound) throw Err_.new_wo_type("could not find section name", "name", String_.new_u8(find));
-		pos = Bry_find_.Find_fwd(raw, Byte_ascii.Curly_bgn, pos, raw_len);	if (pos == Bry_.NotFound) throw Err_.new_wo_type("could not find '{' after section name", "name", String_.new_u8(find));
+		int pos = Bry_find_.Find_fwd(raw, find, find_bgn);					if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find section name", "name", String_.new_u8(find));
+		pos = Bry_find_.Find_fwd(raw, Byte_ascii.Curly_bgn, pos, raw_len);	if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find '{' after section name", "name", String_.new_u8(find));
 		int itm_bgn = 0;
 		boolean quote_off = true, itm_is_first = true;
 		byte[] cur_lhs = Bry_.Empty;

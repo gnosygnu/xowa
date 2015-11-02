@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.ios.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.downloads.*;
+import org.junit.*; import gplx.core.ios.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.downloads.*;
 public class Xoa_css_extractor_basic_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_css_extractor_fxt fxt = new Xoa_css_extractor_fxt();
 	@Test   public void Logo_download() {

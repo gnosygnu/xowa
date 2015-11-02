@@ -19,7 +19,7 @@ package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.lnkis.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.apps.urls.*;
 public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {

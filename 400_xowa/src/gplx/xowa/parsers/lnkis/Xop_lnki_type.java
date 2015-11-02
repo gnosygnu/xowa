@@ -29,27 +29,27 @@ public class Xop_lnki_type {
 				)
 			return true;
 		else if (	Bitmask_.Has_int(id, Id_frame)		// [[File:A.png|frame]]     -> 400,200 (frame is always default size)
-				||	id == Id_null					// [[File:A.png]]           -> 400,200 (default to original size)
+				||	id == Id_null						// [[File:A.png]]           -> 400,200 (default to original size)
 				||	Bitmask_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: still used by one test; DATE:2015-08-03
 				)
 			return false;
-		else										// should not happen
+		else											// should not happen
 			throw Err_.new_unhandled(id);
 	}
-	public static boolean Id_limits_large_size(byte id) {// Linker.php|makeThumbLink2|Do not present an image bigger than the source, for bitmap-style images; assuming original of 400,200
+	public static boolean Id_limits_large_size(byte id) {	// Linker.php|makeThumbLink2|Do not present an image bigger than the source, for bitmap-style images; assuming original of 400,200
 		if		(	Bitmask_.Has_int(id, Id_thumb)		// [[File:A.png|600px|thumb]]      -> 400,200
 				||	Bitmask_.Has_int(id, Id_frameless)	// [[File:A.png|600px|frameless]]  -> 400,200
 				||	Bitmask_.Has_int(id, Id_frame)		// [[File:A.png|600px|frame]]      -> 400,200 (frame is always default size)
 				)
 			return true;
-		else if (	id == Id_null					// [[File:A.png|600px]]            -> 600,400; uses orig file of 400,200, but <img> tag src_width / src_height set to 600,400
+		else if (	id == Id_null						// [[File:A.png|600px]]            -> 600,400; uses orig file of 400,200, but <img> tag src_width / src_height set to 600,400
 				||	Bitmask_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: leaving in b/c of above failed-deprecate; DATE:2015-08-03
 				)
 			return false;
-		else										// should not happen;
+		else											// should not happen;
 			throw Err_.new_unhandled(id);
 	}
-	public static boolean Id_supports_upright(byte id) {// REF:Linker.php|makeImageLink;if ( isset( $fp['thumbnail'] ) || isset( $fp['manualthumb'] ) || isset( $fp['framed'] ) || isset( $fp['frameless'] ) || !$hp['width'] )  DATE:2014-05-22
+	public static boolean Id_supports_upright(byte id) {	// REF:Linker.php|makeImageLink;if ( isset( $fp['thumbnail'] ) || isset( $fp['manualthumb'] ) || isset( $fp['framed'] ) || isset( $fp['frameless'] ) || !$hp['width'] )  DATE:2014-05-22
 		if		(	Bitmask_.Has_int(id, Id_thumb)
 				||	Bitmask_.Has_int(id, Id_frameless)
 				||	Bitmask_.Has_int(id, Id_frame)
@@ -59,7 +59,7 @@ public class Xop_lnki_type {
 				||	Bitmask_.Has_int(id, Id_none)
 				)
 				return false;
-		else										// should not happen;
+		else											// should not happen;
 			throw Err_.new_unhandled(id);
 	}
 }

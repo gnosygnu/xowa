@@ -30,7 +30,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 	private int nde_uid, nde_tid;
 	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.null_();
 	public int Nde_end_tid() {return nde_end_tid;} private int nde_end_tid;
-	public int Parse(Mwh_doc_wkr wkr, int nde_uid, int nde_tid, byte[] src, int src_bgn, int src_end) {
+	public int Parse(Mwh_atr_wkr wkr, int nde_uid, int nde_tid, byte[] src, int src_bgn, int src_end) {
 		this.nde_uid = nde_uid; this.nde_tid = nde_tid;
 		this.nde_end_tid = Mwh_doc_parser.Nde_end_tid__invalid;
 		this.atr_bgn = -1;
@@ -440,7 +440,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 			++pos;
 			b = src[pos];
 		}
-		int gt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_.NotFound) return Bry_find_.Not_found;
+		int gt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
 		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos);
 		bry_ref.Val_(bry);
 		return bry == null ? Bry_find_.Not_found : bry.length + pos;

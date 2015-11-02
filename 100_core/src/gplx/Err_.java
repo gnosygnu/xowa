@@ -51,10 +51,8 @@ public class Err_ {
 		return new Err(Bool_.Y, Trace_null, Type__gplx, "cast failed", "type", Type_adp_.NameOf_type(t), "obj", o_str);
 	}
 
-	public static String Message_lang(Exception e)			{return e.getMessage();} 
-	public static String Message_lang_error(Error e)		{return e.getMessage();} 
-		public static String Trace_lang(Exception e) 	{return Trace_lang_exec(e.getStackTrace());}
-	public static String Trace_lang(Error e) 		{return Trace_lang_exec(e.getStackTrace());}
+	public static String Message_lang(Throwable e) {return e.getMessage();} 
+		public static String Trace_lang(Throwable e) 	{return Trace_lang_exec(e.getStackTrace());}
 	private static String Trace_lang_exec(StackTraceElement[] ary) {
 		String rv = "";
 		int len = ary.length;
@@ -70,6 +68,6 @@ public class Err_ {
 	}
 	public static String Message_gplx_full(Exception e)	{return cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return cast_or_make(e).To_str__log();}
-	public static Err cast_or_make(Exception e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
+	public static Err cast_or_make(Throwable e) {return Type_adp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_adp_.NameOf_obj(e), Err_.Message_lang(e));}
 	public static final String Type__op_canceled = "gplx.op_canceled";
 }

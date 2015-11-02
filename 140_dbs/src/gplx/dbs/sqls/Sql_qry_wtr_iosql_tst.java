@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.core.strings.*;
 import gplx.core.criterias.*; /*Criteria_base*/
-import gplx.ios.*; import gplx.dbs.sqls.*;
+import gplx.core.ios.*; import gplx.dbs.sqls.*;
 public class Sql_qry_wtr_iosql_tst {
 	@Test  public void Type() {
 		fld = IoItm_base_.Prop_Type;

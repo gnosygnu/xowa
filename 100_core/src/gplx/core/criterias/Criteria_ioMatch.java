@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
-import gplx.texts.*;
+import gplx.core.texts.*;
 public class Criteria_ioMatch implements Criteria { // EX: url IOMATCH '*.xml|*.txt'
 	public Criteria_ioMatch(boolean match, RegxPatn_cls_ioMatch pattern) {this.match = match; this.pattern = pattern;}
 	public byte				Tid() {return Criteria_.Tid_iomatch;}

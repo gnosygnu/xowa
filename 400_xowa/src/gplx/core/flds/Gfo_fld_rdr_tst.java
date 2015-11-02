@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.flds; import gplx.*; import gplx.core.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Gfo_fld_rdr_tst {
 	Gfo_fld_rdr_fxt fxt = new Gfo_fld_rdr_fxt();
 	@Test  public void Read_int() 							{fxt.ini_xdat().Raw_("123|")			.tst_Read_int(123);}

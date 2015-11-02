@@ -26,7 +26,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) return ctx.Lxr_make_txt_(cur_pos); // simulated nl at beginning of every parse
 		int trim_category_pos = Scan_fwd_for_ctg(ctx, src, cur_pos, src_len);
-		if (trim_category_pos != Bry_.NotFound) {		// [[Category]] found after ws
+		if (trim_category_pos != Bry_find_.Not_found) {		// [[Category]] found after ws
 			int root_subs_len = root.Subs_len();
 			if (root_subs_len > 0) {
 				Xop_tkn_itm tkn = root.Subs_get(root_subs_len - 1);
@@ -104,14 +104,14 @@ public class Xop_nl_lxr implements Xop_lxr {
 							&& Bry_.Has_at(src, src_len, ctg_trie.Match_pos(), Byte_ascii.Colon)) {	// check that next char is :
 							return i;// return pos of 1st [
 						}
-						return Bry_.NotFound;
+						return Bry_find_.Not_found;
 					}
 					break;
 				default:	// non-ws; return not found
-					return Bry_.NotFound;
+					return Bry_find_.Not_found;
 			}
 		}
-		return Bry_.NotFound;
+		return Bry_find_.Not_found;
 	}
 	public static final Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
 }

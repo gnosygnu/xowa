@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.log_msgs.*;
 class Pxd_parser {
 	byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
@@ -140,7 +140,8 @@ class Pxd_parser {
 				return DateAdp_.MinValue;			
 			}
 		}
-		DateAdpBldr bldr = new DateAdpBldr(DateAdp_.Now().Year(), 1, 1, 0, 0, 0, 0);
+		DateAdp now = DateAdp_.Now();
+		DateAdpBldr bldr = new DateAdpBldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = (Pxd_itm)tkns[i];
 			itm.Time_ini(bldr);

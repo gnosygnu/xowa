@@ -238,7 +238,7 @@ public class Xoa_url_parser {
 	private byte[] Bld_page_by_alias(byte[] bry) {
 		if (bry == null) return null;
 		int colon_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Colon);						// check for colon; EX: commons:Earth
-		if (colon_pos == Bry_.NotFound) return null;									// no colon
+		if (colon_pos == Bry_find_.Not_found) return null;									// no colon
 		Xow_wiki alias_wiki = wiki;														// default alias_wiki to cur_wiki
 		if (!tmp_wiki_is_missing)														// tmp_wiki exists; use it for alias wikis; DATE:2015-09-17
 			alias_wiki = wiki.App().Wiki_mgri().Get_by_key_or_make_init_n(tmp_wiki);

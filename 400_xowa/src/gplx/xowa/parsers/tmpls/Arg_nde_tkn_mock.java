@@ -38,5 +38,5 @@ class Arg_itm_tkn_mock extends Arg_itm_tkn_base {
 		this.Dat_ary_(dat_ary);
 		this.val = v;
 	}	String val;
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {bfr.Add_str(val); return true;}
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {bfr.Add_str_u8(val); return true;}
 }

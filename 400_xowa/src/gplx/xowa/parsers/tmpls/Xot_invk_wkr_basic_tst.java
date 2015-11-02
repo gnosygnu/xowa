@@ -435,7 +435,7 @@ public class Xot_invk_wkr_basic_tst {
 	}
 	@Test  public void Tmpl_case_match() {	// PURPOSE: template name should match by case; EX:es.d:eclipse; DATE:2014-02-12
 		fxt.Init_defn_clear();
-		fxt.Init_defn_add("CASE_MATCH", "found", Xow_ns_case_.Id_all);
+		fxt.Init_defn_add("CASE_MATCH", "found", Xow_ns_case_.Tid__all);
 		fxt.Test_parse_tmpl_str("{{case_match}}",	"[[:Template:case_match]]");		// Xot_invk_tkn will do 2 searches: "test" and "Test"
 		fxt.Test_parse_tmpl_str("{{cASE_MATCH}}",	"found");				// Xot_invk_tkn will do 2 searches: "tEST" and "TEST"
 		fxt.Init_defn_clear();

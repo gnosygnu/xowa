@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.primitives.*;
+import gplx.core.encoders.*;
 public class Bry_bfr {
 	private Bry_bfr_mkr_mgr mkr_mgr; private int reset;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
@@ -93,6 +94,18 @@ public class Bry_bfr {
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
 		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
+		bfr_len += len;
+		return this;
+	}
+	public Bry_bfr Add_mid_w_swap(byte[] val, int bgn, int end, byte swap_src, byte swap_trg) {
+		int len = end - bgn;
+		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
+		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
+		int val_len = end - bgn;
+		for (int i = 0; i < val_len; ++i) {
+			byte b = val[i + bgn]; if (b == swap_src) b = swap_trg;
+			bfr[i + bfr_len] = b;
+		}
 		bfr_len += len;
 		return this;
 	}
@@ -278,8 +291,8 @@ public class Bry_bfr {
 			Add(val);
 		return this;
 	}
-	public Bry_bfr Add_str(String v) {return Add_str_u8(v);}
 	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}
+	public Bry_bfr Add_str_u8_null(String s) {return Add_str_u8(s == null ? String_.Null_mark : s);}
 	public Bry_bfr Add_str_u8(String str) {
 		try {
 			int str_len = str.length();							
@@ -291,6 +304,7 @@ public class Bry_bfr {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
+	public Bry_bfr Add_str_a7_null(String s) {return Add_str_a7(s == null ? String_.Null_mark : s);}
 	public Bry_bfr Add_str_a7_w_nl(String s) {Add_str_a7(s); return Add_byte_nl();}
 	public Bry_bfr Add_str_a7(String str) {
 		try {
@@ -312,8 +326,8 @@ public class Bry_bfr {
 		this.Add_byte(line ? Byte_ascii.Nl : Byte_ascii.Tab);
 		return this;
 	}
-	public Bry_bfr Add_float(float f) {Add_str(Float_.To_str(f)); return this;}
-	public Bry_bfr Add_double(double v) {Add_str(Double_.To_str(v)); return this;}
+	public Bry_bfr Add_float(float f) {Add_str_a7(Float_.To_str(f)); return this;}
+	public Bry_bfr Add_double(double v) {Add_str_a7(Double_.To_str(v)); return this;}
 	public Bry_bfr Add_dte(DateAdp val) {return Add_dte_segs(val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
 	public Bry_bfr Add_dte_segs(int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
 		if (bfr_len + 19      > bfr_max) Resize((bfr_len + 19) * 2);
@@ -398,7 +412,7 @@ public class Bry_bfr {
 		else if	(o_type == Integer.class)         Add_int_variable(Int_.cast(o));    
 		else if	(o_type == Byte.class)            Add_byte(Byte_.cast(o));           
 		else if	(o_type == Long.class)            Add_long_variable(Long_.cast(o));  
-		else if	(o_type == String.class)          Add_str((String)o);
+		else if	(o_type == String.class)          Add_str_u8((String)o);
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
@@ -415,7 +429,7 @@ public class Bry_bfr {
 		else if	(o_type == Integer.class)         Add_int_variable(Int_.cast(o));    
 		else if	(o_type == Byte.class)            Add_byte(Byte_.cast(o));           
 		else if	(o_type == Long.class)            Add_long_variable(Long_.cast(o));  
-		else if	(o_type == String.class)          Add_str((String)o);
+		else if	(o_type == String.class)          Add_str_u8((String)o);
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
@@ -430,7 +444,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_base85(int v, int pad)	{
 		int new_len = bfr_len + pad;
 		if (new_len > bfr_max) Resize((new_len) * 2);
-		Base85_utl.XtoStrByAry(v, bfr, bfr_len, pad);
+		Base85_.Set_bry(v, bfr, bfr_len, pad);
 		bfr_len = new_len;
 		return this;
 	}

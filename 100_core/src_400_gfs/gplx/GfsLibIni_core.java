@@ -26,8 +26,8 @@ public class GfsLibIni_core implements GfsLibIni {
 		core.AddObj(GfoTemplateFactory.Instance, "factory");
 		core.AddObj(GfoRegy.Instance, "GfoRegy_");
 		core.AddObj(GfsCore.Instance, "GfsCore_");
-		core.AddObj(gplx.ios.IoUrlInfoRegy.Instance, "IoUrlInfoRegy_");
-		core.AddObj(gplx.ios.IoUrlTypeRegy.Instance, "IoUrlTypeRegy_");
+		core.AddObj(gplx.core.ios.IoUrlInfoRegy.Instance, "IoUrlInfoRegy_");
+		core.AddObj(gplx.core.ios.IoUrlTypeRegy.Instance, "IoUrlTypeRegy_");
 
 		GfoRegy.Instance.Parsers().Add("Io_url", Io_url_.Parser);
 	}

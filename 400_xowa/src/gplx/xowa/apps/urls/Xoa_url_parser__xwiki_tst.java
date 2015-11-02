@@ -56,10 +56,10 @@ public class Xoa_url_parser__xwiki_tst {
 		Xowe_wiki en_d = tstr.Prep_create_wiki("en.wiktionary.org");
 		Xow_ns_mgr ns_mgr = en_d.Ns_mgr();
 
-		ns_mgr.Ns_main().Case_match_(Xow_ns_case_.Id_all);
+		ns_mgr.Ns_main().Case_match_(Xow_ns_case_.Tid__all);
 		tstr.Run_parse("en.wiktionary.org/wiki/a").Chk_wiki("en.wiktionary.org").Chk_page("a");
 
-		ns_mgr.Ns_category().Case_match_(Xow_ns_case_.Id_all);
+		ns_mgr.Ns_category().Case_match_(Xow_ns_case_.Tid__all);
 		tstr.Run_parse("en.wiktionary.org/wiki/Category:a").Chk_wiki("en.wiktionary.org").Chk_page("Category:a");
 
 		tstr.Run_parse("en.wiktionary.org/wiki/A/B/C").Chk_page("A/B/C");

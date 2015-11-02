@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores.xmls; import gplx.*; import gplx.stores.*;
-import gplx.xmls.*; /*Xpath_*/
+import gplx.langs.xmls.*; /*Xpath_*/
 public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode() {return nde.Name();} public String To_str() {return nde.Xml_outer();}
 	@Override public int FieldCount() {return nde.Atrs() == null ? 0 : nde.Atrs().Count();} // nde.Attributes == null when nde is XmlText; ex: <node>val</node>

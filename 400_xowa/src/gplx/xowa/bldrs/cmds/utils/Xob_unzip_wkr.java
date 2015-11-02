@@ -29,9 +29,9 @@ public class Xob_unzip_wkr {
 	}
 	public void Decompress(Io_url src, Io_url trg) {
 		String src_ext = src.Ext();
-		if		(String_.Eq(src_ext, gplx.ios.Io_stream_.Ext_bz2))		process = decompress_bz2;
-		else if	(String_.Eq(src_ext, gplx.ios.Io_stream_.Ext_zip))		process = decompress_zip;
-		else if	(String_.Eq(src_ext, gplx.ios.Io_stream_.Ext_gz))		process = decompress_gz;
+		if		(String_.Eq(src_ext, gplx.core.ios.Io_stream_.Ext_bz2))		process = decompress_bz2;
+		else if	(String_.Eq(src_ext, gplx.core.ios.Io_stream_.Ext_zip))		process = decompress_zip;
+		else if	(String_.Eq(src_ext, gplx.core.ios.Io_stream_.Ext_gz))		process = decompress_gz;
 		else															throw Err_.new_unhandled(src_ext);
 		Io_url trg_owner_dir = trg.OwnerDir();
 		Io_mgr.Instance.CreateDirIfAbsent(trg_owner_dir);

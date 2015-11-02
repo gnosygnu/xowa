@@ -181,7 +181,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		if (word_idx >= Input_units_len) return;
 		byte unit_dlm = Input_units[word_idx];
 		int pos = Bry_find_.Find_fwd(input, unit_dlm, word_bgn, word_end);
-		if (pos != Bry_.NotFound)	// remove dlms from end of bry; EX: "123'" -> "123"
+		if (pos != Bry_find_.Not_found)	// remove dlms from end of bry; EX: "123'" -> "123"
 			word_end = pos;
 		if (!Parse_input_word_is_compass(input[word_bgn])) {	// if ( is_numeric( $v ) ) {
 			double word_val = Bry_.To_double_or(input, word_bgn, word_end, Double_.NaN);

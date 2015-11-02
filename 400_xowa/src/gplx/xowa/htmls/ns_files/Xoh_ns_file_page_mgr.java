@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.primitives.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
@@ -42,7 +42,7 @@ public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
 		if (xfer_itm.File_exists()) {	// file exists
 			long file_size = Io_mgr.Instance.QueryFil(xfer_itm.Html_orig_url()).Size();
 			if (file_size == -1) file_size = 0; // QueryFil returns -1 if file doesn't exist
-			this.file_size_bry = Bry_.new_a7(gplx.ios.Io_size_.To_str(file_size));
+			this.file_size_bry = Bry_.new_a7(gplx.core.ios.Io_size_.To_str(file_size));
 		}
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
 			? String_.Format(Str_commons_notice, gplx.langs.htmls.Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))

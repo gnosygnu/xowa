@@ -57,7 +57,7 @@ class Json_itm_str extends Json_itm_base {
 						case Byte_ascii.Ltr_b:				bfr.Add_byte(Byte_ascii.Backfeed); break;
 						case Byte_ascii.Ltr_f:				bfr.Add_byte(Byte_ascii.Formfeed); break;
 						case Byte_ascii.Ltr_u:
-							int utf8_val = gplx.texts.HexDecUtl.parse_or(src, i + 1, i + 5, -1);
+							int utf8_val = gplx.core.texts.HexDecUtl.parse_or(src, i + 1, i + 5, -1);
 							int len = gplx.core.intls.Utf16_.Encode_int(utf8_val, utf8_bry, 0);
 							bfr.Add_mid(utf8_bry, 0, len);
 							i += 4;

@@ -26,8 +26,8 @@ public class Xop_tkn_chkr_lnke extends Xop_tkn_chkr_base {
 	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
 		Xop_lnke_tkn actl = (Xop_lnke_tkn)actl_obj;
 		err += mgr.Tst_val(lnke_typ == Xop_lnke_tkn.Lnke_typ_null, path, "lnke_typ", lnke_typ, actl.Lnke_typ());
-		err += mgr.Tst_val(lnke_bgn == -1, path, "lnke_bgn", lnke_bgn, actl.Lnke_bgn());
-		err += mgr.Tst_val(lnke_end == -1, path, "lnke_end", lnke_end, actl.Lnke_end());
+		err += mgr.Tst_val(lnke_bgn == -1, path, "lnke_bgn", lnke_bgn, actl.Lnke_href_bgn());
+		err += mgr.Tst_val(lnke_end == -1, path, "lnke_end", lnke_end, actl.Lnke_href_end());
 		return err;
 	}
 }

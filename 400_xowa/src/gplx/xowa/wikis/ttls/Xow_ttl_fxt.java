@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.log_msgs.*;
 class Xow_ttl_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
 	public Xow_ttl_fxt Init_ttl(String raw) {test_raw = raw; return this;} private String test_raw = "";

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.strings.*;
-import gplx.xmls.*;
+import gplx.langs.xmls.*;
 import gplx.xowa.bldrs.cfgs.*;
 public class Xoi_wiki_props_api_tst {
 	private Xoi_wiki_props_fxt fxt = new Xoi_wiki_props_fxt();
@@ -47,7 +47,7 @@ public class Xoi_wiki_props_api_tst {
 //				.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
 //				, "");
 //		}
-//		Tfds.Eq_str_lines(Query_ns(protocol, gplx.ios.IoEngine_.MemKey, wikis), String_.Concat_lines_nl
+//		Tfds.Eq_str_lines(Query_ns(protocol, gplx.core.ios.IoEngine_.MemKey, wikis), String_.Concat_lines_nl
 //		(	"app.bldr.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
 //		,	"4|WP"
 //		,	"5|WT"
@@ -82,7 +82,7 @@ class Xoi_wiki_props_fxt {
 		bfr.Add_str_a7("aliases").Add_byte_nl();
 		for (int i = 0; i < len; i++) {
 			Xoi_wiki_props_alias alias = v.Alias_ary()[i];
-			bfr.Add_int_variable(alias.Id()).Add_byte_pipe().Add_str(alias.Alias()).Add_byte_nl();
+			bfr.Add_int_variable(alias.Id()).Add_byte_pipe().Add_str_u8(alias.Alias()).Add_byte_nl();
 		}
 		bfr.Add_str_a7("ns").Add_byte_nl();
 		len = v.Ns_ary().length;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.ios.*; import gplx.core.caches.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.caches.*; import gplx.xowa.files.fsdb.*;
 import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	private final Xof_bin_wkr_ids tmp_ids = new Xof_bin_wkr_ids();

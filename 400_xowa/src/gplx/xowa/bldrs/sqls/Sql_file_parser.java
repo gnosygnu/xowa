@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.flds.*; import gplx.ios.*;
+import gplx.core.flds.*; import gplx.core.ios.*;
 public class Sql_file_parser {
 	public Io_url Src_fil() {return src_fil;} public Sql_file_parser Src_fil_(Io_url v) {src_fil = v; return this;} Io_url src_fil;
 	public int Src_len() {return src_len;} public Sql_file_parser Src_len_(int v) {src_len = v; return this;} private int src_len = 8 * Io_mgr.Len_mb;
@@ -54,7 +54,7 @@ public class Sql_file_parser {
 	public void Parse(Gfo_usr_dlg usr_dlg) {
 		Io_buffer_rdr rdr = Io_buffer_rdr.Null;
 		try {
-			rdr = Io_buffer_rdr.new_(gplx.ios.Io_stream_rdr_.new_by_url_(src_fil), src_len);
+			rdr = Io_buffer_rdr.new_(gplx.core.ios.Io_stream_rdr_.new_by_url_(src_fil), src_len);
 			Bry_bfr fil_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_();
 			byte[] bfr = rdr.Bfr(); int bfr_len = rdr.Bfr_len(), fld_idx = 0, cur_pos = 0;
 			if (flds_req != null) Identify_flds(bfr);
@@ -73,9 +73,9 @@ public class Sql_file_parser {
 				switch (mode) {
 					case Mode_sql_bgn:
 						cur_pos = Bry_find_.Find_fwd(bfr, Bry_insert_into, cur_pos);
-						if (cur_pos == Bry_.NotFound || cur_pos > bfr_len) {reading_file = false; continue;}
+						if (cur_pos == Bry_find_.Not_found || cur_pos > bfr_len) {reading_file = false; continue;}
 						cur_pos = Bry_find_.Find_fwd(bfr, Bry_values, cur_pos);
-						if (cur_pos == Bry_.NotFound || cur_pos > bfr_len) throw Err_.new_wo_type("VALUES not found");	// something went wrong;
+						if (cur_pos == Bry_find_.Not_found || cur_pos > bfr_len) throw Err_.new_wo_type("VALUES not found");	// something went wrong;
 						mode = Mode_fld;
 						cur_pos += Bry_values.length;
 						break;

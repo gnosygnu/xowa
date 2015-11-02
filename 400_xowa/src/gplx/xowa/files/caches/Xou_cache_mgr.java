@@ -43,7 +43,7 @@ public class Xou_cache_mgr {
 		}
 		return KeyVal_.Ary
 		( KeyVal_.new_("cache folder", cache_dir.Xto_api())
-		, KeyVal_.new_("space used", gplx.ios.Io_size_.To_str(fsys_size))
+		, KeyVal_.new_("space used", gplx.core.ios.Io_size_.To_str(fsys_size))
 		, KeyVal_.new_("file count", len)
 		, KeyVal_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
 		);
@@ -194,7 +194,7 @@ class Xou_cache_grp {
 			cache_hash.Del(itm.Lnki_key());
 			itm.Db_state_(Db_cmd_mode.Tid_delete);
 			cache_tbl.Db_save(itm);
-			gplx.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(itm.File_url());
+			gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(itm.File_url());
 			if (fil.Exists()) {
 				Io_mgr.Instance.DeleteFil(itm.File_url());
 				deleted = true;

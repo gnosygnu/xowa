@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.texts.*;
+import gplx.core.texts.*;
 public class ColorAdp_ implements ParseAble {
 	public static ColorAdp as_(Object obj) {return obj instanceof ColorAdp ? (ColorAdp)obj : null;}
 	public static ColorAdp cast(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}

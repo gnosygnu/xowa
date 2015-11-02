@@ -26,7 +26,7 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 	public byte Tid() {return Xof_orig_wkr_.Tid_wmf_api;}
 	public void			Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}
 	public Xof_orig_itm Find_as_itm(byte[] ttl, int list_idx, int list_len) {
-		if (!gplx.ios.IoEngine_system.Web_access_enabled) return Xof_orig_itm.Null;	// don't check api if download disabled, else prog messages; DATE:2015-06-17
+		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return Xof_orig_itm.Null;	// don't check api if download disabled, else prog messages; DATE:2015-06-17
 		Xoa_app_.Usr_dlg().Prog_none("", "", Prog_msg(list_idx, list_len, ttl));
 		boolean found = orig_api.Api_query_size(api_rv, download_wkr, repo_mgr, ttl, Xof_img_size.Null, Xof_img_size.Null);	// pass in null size to look for orig; DATE:2015-02-10
 		if (!found) return Xof_orig_itm.Null;	// ttl not found by api; return

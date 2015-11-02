@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.files.*; import gplx.xowa.htmls.hdumps.abrvs.*; import gplx.xowa.htmls.hdumps.core.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.makes.imgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
 	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
@@ -60,7 +60,7 @@ public abstract class Gallery_mgr_base {
 		if (itms_per_row > 0) {
 			int max_width = itms_per_row * (itm_default_w + this.Get_all_padding());
 			box_style = Fmt_and_add(tmp_bfr, box_style_max_width_fmtr, box_style, max_width);
-			page.Hdump_data().Imgs_add(new Xohd_data_itm__gallery_mgr(gallery_uid, max_width));
+			page.Hdump_data().Imgs_add(new Xohd_img_itm__gallery_mgr(gallery_uid, max_width));
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
 		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).To_bry_and_clear();
@@ -111,11 +111,11 @@ public abstract class Gallery_mgr_base {
 			html_w_expand = lnki_w_orig; html_h_expand = lnki_h_orig;	// reset lnki_w_orig / lnki_h_orig else large captions
 		}
 		else {
-			byte[] alt = itm.Alt_bgn() == Bry_.NotFound && Bry_.Len_eq_0(itm_caption)	//	if ( $alt == '' && $text == '' )  $imageParameters['alt'] = $nt->getText();
+			byte[] alt = itm.Alt_bgn() == Bry_find_.Not_found && Bry_.Len_eq_0(itm_caption)	//	if ( $alt == '' && $text == '' )  $imageParameters['alt'] = $nt->getText();
 				? itm.Ttl().Page_txt()
 				: Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end()))
 				;
-			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_.NotFound
+			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_find_.Not_found
 				? ttl
 				: Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()))
 				;
@@ -151,7 +151,7 @@ public abstract class Gallery_mgr_base {
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
-			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__gallery_itm().Data_init_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
+			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__gallery_itm().Data_init_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_img_itm__gallery_itm.Tid_gallery);
 	}
 	private static final byte[] 
 	  Wrap_gallery_text_bgn = Bry_.new_a7("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
@@ -191,16 +191,16 @@ public abstract class Gallery_mgr_base {
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, List_adp xatr_list, boolean hctx_is_hdump, int uid) {
 		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);
-		Html_wtr.Write_atr_bry(bfr, Html_atr_.Id_bry, gallery_ul_uid);
-		Html_wtr.Write_atr_bry(bfr, Html_atr_.Cls_bry, cls);
+		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__id, gallery_ul_uid);
+		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__class, cls);
 		if (hctx_is_hdump) {
 			bfr.Add_byte_space();
-			bfr.Add(Xohd_abrv_.Key_gallery_box_max);
+			bfr.Add(Xoh_make_trie_.Bry__gallery_box_max);
 			bfr.Add_int_variable(uid);
 			bfr.Add_byte_apos();
 		}
 		else
-			Html_wtr.Write_atr_bry(bfr, Html_atr_.Style_bry, style);
+			Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__style, style);
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {

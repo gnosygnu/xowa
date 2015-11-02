@@ -21,14 +21,14 @@ import gplx.xowa.files.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.htmls.hdumps.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.parsers.vnts.*;
 public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
-	private Xob_hdump_bldr hdump_bldr; private Xob_link_dump_cmd link_dump_cmd; private boolean hzip_enabled = false;
+	private Xob_hdump_mgr hdump_bldr; private Xob_link_dump_cmd link_dump_cmd; private boolean hzip_enabled = false;
 	private Vnt_convert_lang converter_lang;
 	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_file_lnki_temp;}
@@ -86,7 +86,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		Fsm_mnt_mgr.Patch(trg_mnt_mgr.Mnts__get_main().Cfg_mgr().Tbl()); // NOTE: see fsdb_make; DATE:2014-04-26
 		if (gen_hdump) {
 			gplx.xowa.apps.apis.xowa.bldrs.imports.Xoapi_import import_cfg = wiki.Appe().Api_root().Bldr().Wiki().Import();
-			hdump_bldr = new Xob_hdump_bldr(wiki.Ns_mgr(), wiki.Db_mgr_as_sql(), tbl.Conn(), import_cfg.Html_db_max(), hzip_enabled);
+			hdump_bldr = new Xob_hdump_mgr(wiki, tbl.Conn(), import_cfg.Html_db_max(), import_cfg.Zip_tid_html(), hzip_enabled);
 			link_dump_cmd = new Xob_link_dump_cmd();
 			link_dump_cmd.Init_by_wiki(wiki);
 		}
@@ -114,7 +114,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 			}
 			if (gen_hdump) {
 				page.Root_(root);
-				hdump_bldr.Insert_page(page);
+				hdump_bldr.Insert(page);
 				link_dump_cmd.Page_bgn(page.Revision_data().Id());
 				List_adp lnki_list = page.Redlink_lnki_list().Lnki_list();
 				int len = lnki_list.Count();
@@ -192,39 +192,5 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		byte[] rv = ttl.Page_db();
 		return Bry_.Eq(rv, ttl_bry) ? null : rv;
 	}
-	public static boolean Ns_file_is_case_match_all(Xow_wiki wiki) {return wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Id_all;}
-}
-class Xob_lnki_temp_wkr_ {
-	public static int[] Ns_ids_by_aliases(Xowe_wiki wiki, String[] aliases) {
-		int[] rv = Xob_lnki_temp_wkr_.Ids_by_aliases(wiki.Ns_mgr(), aliases);
-		int aliases_len = aliases.length;
-		int ids_len = rv.length;
-		for (int i = 0; i < aliases_len; i++) {
-			String alias = aliases[i];
-			int id = i < ids_len ? rv[i] : -1;
-			wiki.Appe().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.To_str_fmt(id, "0000"), alias);
-		}
-		if (aliases_len != ids_len) throw Err_.new_wo_type("mismatch in aliases and ids", "aliases", aliases_len, "ids", ids_len);
-		return rv;
-	}
-	private static int[] Ids_by_aliases(Xow_ns_mgr ns_mgr, String[] aliases) {
-		List_adp list = List_adp_.new_();
-		int len = aliases.length;
-		for (int i = 0; i < len; i++) {
-			String alias = aliases[i];
-			if (String_.Eq(alias, Xow_ns_.Key_main))
-				list.Add(ns_mgr.Ns_main());
-			else {
-				Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_u8(alias));
-				if (ns != null)
-					list.Add(ns);
-			}
-		}
-		len = list.Count();
-		int[] rv = new int[len];
-		for (int i = 0; i < len; i++) {
-			rv[i] = ((Xow_ns)list.Get_at(i)).Id();
-		}
-		return rv;
-	}
+	public static boolean Ns_file_is_case_match_all(Xow_wiki wiki) {return wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Tid__all;}
 }

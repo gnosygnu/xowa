@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.hdumps.*;
+import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.core.*;
 public interface Xodb_mgr extends GfoInvkAble {
 	byte Tid();
 	String Tid_name();

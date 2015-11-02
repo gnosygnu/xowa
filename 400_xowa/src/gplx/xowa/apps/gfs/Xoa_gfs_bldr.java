@@ -29,7 +29,7 @@ public class Xoa_gfs_bldr {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			if (i != 0 || cont) bfr.Add_byte(Byte_ascii.Dot);
-			bfr.Add_str(ary[i]);
+			bfr.Add_str_u8(ary[i]);
 		}
 		return this;
 	}
@@ -63,7 +63,7 @@ public class Xoa_gfs_bldr {
 	public Xoa_gfs_bldr Add_quote_0()				{bfr.Add_byte(Byte_ascii.Apos); return this;}
 	public Xoa_gfs_bldr Add_term_nl()				{bfr.Add(Bry_semic_nl); return this;}
 	public Xoa_gfs_bldr Add_eq_str(String k, byte[] v) {
-		bfr.Add_str(k);
+		bfr.Add_str_u8(k);
 		bfr.Add(Bry_eq);
 		bfr.Add_byte_apos();
 		bfr.Add(v);

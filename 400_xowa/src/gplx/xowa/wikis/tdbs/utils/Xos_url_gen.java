@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xos_url_gen implements Io_url_gen {
 	public Xos_url_gen(Io_url root) {this.root = root;} Io_url root; int idx = 0;
 	public byte[] Ext() {return ext;} public Xos_url_gen Ext_(byte[] v) {ext = v; return this;} private byte[] ext = Bry_.new_a7(".csv");

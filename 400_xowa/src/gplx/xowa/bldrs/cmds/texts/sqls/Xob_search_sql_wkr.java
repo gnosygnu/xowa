@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.ios.*;
+import gplx.core.ios.*; import gplx.core.encoders.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
@@ -25,7 +25,7 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 	private int search_id = 0; private byte[] prv_word = Bry_.Empty; private int page_count;
 	public Xob_search_sql_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Wkr_key() {return Xob_cmd_keys.Key_text_search_wkr;}
-	@Override public gplx.ios.Io_make_cmd Make_cmd_site() {return this;}
+	@Override public gplx.core.ios.Io_make_cmd Make_cmd_site() {return this;}
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}	// noop	
 	public void Sort_bgn() {
 		this.usr_dlg = Xoa_app_.Usr_dlg();
@@ -43,7 +43,7 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 			prv_word = cur_word;
 			page_count = 0;
 		}
-		search_page_tbl.Insert_cmd_by_batch(search_id, Base85_utl.XtoIntByAry(bry, rdr.Key_pos_end() + 1, rdr.Key_pos_end() +  5)); // -1: ignore rdr_dlm
+		search_page_tbl.Insert_cmd_by_batch(search_id, Base85_.To_int_by_bry(bry, rdr.Key_pos_end() + 1, rdr.Key_pos_end() +  5)); // -1: ignore rdr_dlm
 		++page_count;
 		if (search_id % 10000 == 0)
 			usr_dlg.Prog_many("", "", "creating title index: count=~{0}", search_id);

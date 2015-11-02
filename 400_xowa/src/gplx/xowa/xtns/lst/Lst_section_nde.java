@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.langs.*; import gplx.xowa.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	public byte[] Section_name() {return section_name;} private byte[] section_name;

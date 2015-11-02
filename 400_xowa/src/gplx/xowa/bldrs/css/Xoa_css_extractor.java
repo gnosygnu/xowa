@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*; import gplx.xowa.htmls.*;
+import gplx.core.ios.*; import gplx.xowa.htmls.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
@@ -187,11 +187,11 @@ public class Xoa_css_extractor {
 	private String Logo_find_src() {
 		if (mainpage_html == null) return null;
 		int main_page_html_len = mainpage_html.length;
-		int logo_bgn = Bry_find_.Find_fwd(mainpage_html, Logo_find_bgn, 0); 		if (logo_bgn == Bry_.NotFound) return null;
+		int logo_bgn = Bry_find_.Find_fwd(mainpage_html, Logo_find_bgn, 0); 		if (logo_bgn == Bry_find_.Not_found) return null;
 		logo_bgn += Logo_find_bgn.length;
-		logo_bgn = Bry_find_.Find_fwd(mainpage_html, Logo_find_end, logo_bgn);		if (logo_bgn == Bry_.NotFound) return null;
+		logo_bgn = Bry_find_.Find_fwd(mainpage_html, Logo_find_end, logo_bgn);		if (logo_bgn == Bry_find_.Not_found) return null;
 		logo_bgn += Logo_find_end.length;
-		int logo_end = Bry_find_.Find_fwd(mainpage_html, Byte_ascii.Paren_end, logo_bgn, main_page_html_len);	if (logo_bgn == Bry_.NotFound) return null;
+		int logo_end = Bry_find_.Find_fwd(mainpage_html, Byte_ascii.Paren_end, logo_bgn, main_page_html_len);	if (logo_bgn == Bry_find_.Not_found) return null;
 		byte[] logo_bry = Bry_.Mid(mainpage_html, logo_bgn, logo_end);
 		return protocol_prefix + String_.new_u8(logo_bry);
 	}
@@ -240,9 +240,9 @@ public class Xoa_css_extractor {
 		byte[] protocol_prefix_bry = Bry_.new_u8(protocol_prefix);
 		Gfo_url gfo_url = new Gfo_url();
 		while (true) {
-			int url_bgn = Bry_find_.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_.NotFound) break;	// nothing left; stop
+			int url_bgn = Bry_find_.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_find_.Not_found) break;	// nothing left; stop
 			url_bgn += css_find_bgn_len;
-			int url_end = Bry_find_.Find_fwd(raw, Byte_ascii.Quote, url_bgn, raw_len); 	if (url_end == Bry_.NotFound) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8__by_len(raw, url_bgn, url_bgn + 32)); break;}
+			int url_end = Bry_find_.Find_fwd(raw, Byte_ascii.Quote, url_bgn, raw_len); 	if (url_end == Bry_find_.Not_found) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8__by_len(raw, url_bgn, url_bgn + 32)); break;}
 			byte[] css_url_bry = Bry_.Mid(raw, url_bgn, url_end);
 			css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 			css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
@@ -264,7 +264,7 @@ public class Xoa_css_extractor {
 			usr_dlg.Prog_many("", "main_page.css_download", "downloading css for '~{0}'", css_url);
 			download_xrg.Prog_fmt_hdr_(css_url);
 			byte[] css_bry = download_xrg.Exec_as_bry(css_url); if (css_bry == null) continue;	// css not found; continue
-			tmp_bfr.Add(Xoa_css_img_downloader.Bry_comment_bgn).Add_str(css_url).Add(Xoa_css_img_downloader.Bry_comment_end).Add_byte_nl();
+			tmp_bfr.Add(Xoa_css_img_downloader.Bry_comment_bgn).Add_str_u8(css_url).Add(Xoa_css_img_downloader.Bry_comment_end).Add_byte_nl();
 			tmp_bfr.Add(css_bry).Add_byte_nl().Add_byte_nl();
 		}
 		return tmp_bfr.To_bry_and_clear();

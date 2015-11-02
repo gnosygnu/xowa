@@ -73,7 +73,7 @@ public class Xog_url_wkr {
 			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.files.gui.Xog_js_wkr_.Noop, img_size, url_bldr, page))
 				return Rslt_handled;
 		}
-		gplx.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(href_url);
+		gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(href_url);
 		if (fil.Exists()) {
 			ProcessAdp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
@@ -92,7 +92,7 @@ public class Xog_url_wkr {
 			for (int i = 0; i < qargs_len; i++) {
 				Gfo_qarg_itm arg = qargs[i];
 				int anch_pos = Bry_find_.Find_bwd(arg.Val_bry(), Byte_ascii.Hash);	// NOTE: must .FindBwd to handle Category args like de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages; DATE:2013-06-18
-				if (anch_pos != Bry_.NotFound)
+				if (anch_pos != Bry_find_.Not_found)
 					arg.Val_bry_(Bry_.Mid(arg.Val_bry(), 0, anch_pos));
 			}				
 		}

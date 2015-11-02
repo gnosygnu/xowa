@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.wkrs.lnkes.*;
 interface Imap_link_owner {
 	void Link_tid_(int v);
 	void Link_href_(byte[] v);
@@ -40,8 +41,8 @@ class Imap_link_owner_ {
 				case Xop_tkn_itm_.Tid_lnke: {
 					Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
 					Xop_ctx ctx = wiki.Parser_mgr().Ctx();
-					int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
-					Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
+					int lnke_bgn = lnke.Lnke_href_bgn(), lnke_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
+					Xoh_lnke_html lnke_wtr = wiki.Html_mgr().Html_wtr().Wkr__lnke();
 					lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
 					link_owner.Link_href_(bfr.To_bry_and_clear());
 					lnke_wtr.Write_caption(bfr, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);

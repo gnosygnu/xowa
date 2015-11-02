@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*; import gplx.core.threads.*;
+import gplx.core.ios.*; import gplx.core.threads.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_decompress_bz2_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_decompress_bz2_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}		
@@ -46,7 +46,7 @@ public class Xob_decompress_bz2_cmd extends Xob_itm_basic_base implements Xob_cm
 		decompress.Prog_dlg_(app.Usr_dlg()).Run_mode_(ProcessAdp.Run_mode_async);
 		decompress.Run(src_fil, trg_fil, trg_fil.OwnerDir().Xto_api());
 		while (decompress.Exit_code() == ProcessAdp.Exit_init) {
-			String size = gplx.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg_fil).Size());
+			String size = gplx.core.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg_fil).Size());
 			app.Usr_dlg().Prog_many(GRP_KEY, "decompress", "decompressing: ~{0}", size);
 			Thread_adp_.Sleep(1000);
 		}

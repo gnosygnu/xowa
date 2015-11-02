@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xos_url_gen_tst {
 	@Test  public void Url_gen() {
 		tst_url_gen("mem/root/",          0, "mem/root/00/00/00/00/0000000000.csv");

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.btries.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.btries.*; import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 public class Xob_xml_parser {
 	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
@@ -44,7 +44,7 @@ public class Xob_xml_parser {
 				fil.Bfr_load_from(refill_pos);		// refill src from pos; 
 				src_len = fil.Bfr_len();
 			}
-			if (pos >= src_len) return Bry_.NotFound;	// no more src left; should only happen at end of file
+			if (pos >= src_len) return Bry_find_.Not_found;	// no more src left; should only happen at end of file
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {								// text_data; not an xml_nde (<id>), xml_escape (&lt;), or tab

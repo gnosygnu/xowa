@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
-import org.junit.*;
-import gplx.langs.phps.*;
+import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
 	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
 //		@Test   public void Basic() {
@@ -54,13 +53,13 @@ class Xol_mw_parse_grp {
 		Write_end(bfr);
 	}
 	private void Write_bgn(Bry_bfr bfr) {
-		bfr.Add_str_a7("// ").Add(lng).Add_str("_").Add(vnt).Add_byte_nl();
+		bfr.Add_str_a7("// ").Add(lng).Add_str_a7("_").Add(vnt).Add_byte_nl();
 		bfr.Add_str_a7("app.langs.get('");
 		bfr.Add(lng);
 		bfr.Add_str_a7("').converts.get('");
 		bfr.Add(vnt);
 		bfr.Add_str_a7("').add_bulk(");
-		bfr.Add_byte_nl().Add_str("<:['").Add_byte_nl();
+		bfr.Add_byte_nl().Add_str_a7("<:['").Add_byte_nl();
 	}
 	private void Write_itm(Bry_bfr bfr, Xol_mw_parse_itm itm) {
 		bfr.Add(itm.Src());

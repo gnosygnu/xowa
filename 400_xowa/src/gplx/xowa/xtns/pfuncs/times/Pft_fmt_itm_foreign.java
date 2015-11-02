@@ -90,7 +90,9 @@ class Pft_fmt_itm_hebrew_month_name_gen implements Pft_fmt_itm {
 class Pft_fmt_itm_hebrew_numeral implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_numeral;}
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		bfr.Add_str(Pft_fmt_itm_hebrew_.Calc_hebrew_numeral(date.Year()));
+		int num_int = bfr.To_int_and_clear(-1);
+		byte[] num_bry = Pft_fmt_itm_hebrew_.Calc_hebrew_numeral(num_int);
+		bfr.Add(num_bry);
 	}
 }
 class Pft_fmt_itm_iranian_year_idx implements Pft_fmt_itm {

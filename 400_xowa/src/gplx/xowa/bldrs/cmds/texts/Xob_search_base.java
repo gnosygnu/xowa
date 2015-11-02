@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.primitives.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*;

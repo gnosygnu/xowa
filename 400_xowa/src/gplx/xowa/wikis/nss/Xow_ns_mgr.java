@@ -71,15 +71,15 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	}
 	public Object		Names_get_w_colon(byte[] src, int bgn, int end) {	// NOTE: get ns for a name with a ":"; EX: "Template:A" should return "Template" ns
 		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end);
-		if (colon_pos == Bry_.NotFound) return null;	// name does not have ":"; return;
+		if (colon_pos == Bry_find_.Not_found) return null;	// name does not have ":"; return;
 		Object rv = name_hash.Get_by_mid(src, bgn, colon_pos);
 		return rv == null ? null : ((Xow_ns_mgr_name_itm)rv).Ns();
 	}
 	public int			Tmpls_get_w_colon(byte[] src, int bgn, int end)  {	// NOTE: get length of template name with a ":"; EX: "Template:A" returns 10; PERF
 		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end); 
-		if (colon_pos == Bry_.NotFound) return Bry_.NotFound;
+		if (colon_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
 		Object o = tmpl_hash.Get_by_mid(src, bgn, colon_pos + 1);	// +1 to include colon_pos
-		return o == null ? Bry_.NotFound : ((byte[])o).length;
+		return o == null ? Bry_find_.Not_found : ((byte[])o).length;
 	}
 	public void			Aliases_clear() {aliases.Clear();}		
 	public Xow_ns_mgr	Aliases_add(int ns_id, String name) {
@@ -122,7 +122,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	}
 	private void Fix_project_talk(Xow_ns ns) {
 		byte[] ns_name = ns.Name_bry();
-		if (Bry_find_.Find_fwd(ns.Name_bry(), Project_talk_fmt_arg)== Bry_.NotFound) return; // no $1 found; exit
+		if (Bry_find_.Find_fwd(ns.Name_bry(), Project_talk_fmt_arg)== Bry_find_.Not_found) return; // no $1 found; exit
 		Xow_ns project_ns = ords[ns.Ord_subj_id()];
 		if (project_ns == null) return;	// should warn or throw error; for now just exit
 		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_bry()));
@@ -130,7 +130,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(key, ns);
 		hash.Add_if_dupe_use_nth(key, ns_itm);
-		if (Bry_find_.Find_fwd(key, Byte_ascii.Underline) != Bry_.NotFound)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
+		if (Bry_find_.Find_fwd(key, Byte_ascii.Underline) != Bry_find_.Not_found)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
 			hash.Add_if_dupe_use_nth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
 	}
 	public Xow_ns_mgr Add_defaults() { // NOTE: needs to happen after File ns is added; i.e.: cannot be put in Xow_ns_mgr() {} ctor
@@ -140,7 +140,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		Aliases_add(gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module, "Module");		// always add "Module" ns; de.wikipedia.org has "Modul" defined in siteinfo.xml, but also uses Module
 		return this;
 	}
-	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_u8(name), Xow_ns_case_.Id_1st, false);}	// for tst_ constructor
+	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_u8(name), Xow_ns_case_.Tid__1st, false);}	// for tst_ constructor
 	public Xow_ns_mgr Add_new(int ns_id, byte[] name, byte caseMatchId, boolean alias) {
 		Bry_.Replace_all_direct(name, Byte_ascii.Space, Byte_ascii.Underline);	// standardize on _; EX: User talk -> User_talk; DATE:2013-04-21
 		Xow_ns ns = new Xow_ns(ns_id, caseMatchId, name, alias);
@@ -155,7 +155,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			case Xow_ns_.Id_category:
 				ns_category = ns;
 				if (category_trie == null)
-					category_trie = Btrie_slim_mgr.new_(ns.Case_match() == Xow_ns_case_.Id_all);
+					category_trie = Btrie_slim_mgr.new_(ns.Case_match() == Xow_ns_case_.Tid__all);
 				category_trie.Add_obj(ns.Name_bry(), this);
 				break;
 		}
@@ -223,7 +223,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		}
 	}
 	private void Ords_sort_add(int ns_id) {
-		this.Add_new(ns_id, Bry_.new_by_int(ns_id), Xow_ns_case_.Id_1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
+		this.Add_new(ns_id, Int_.To_bry(ns_id), Xow_ns_case_.Tid__1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
 	}
 	public byte[] Bld_ttl_w_ns(Bry_bfr bfr, boolean text_form, boolean literalize, int ns_id, byte[] ttl) {
 		if (ns_id == Xow_ns_.Id_main) return ttl;

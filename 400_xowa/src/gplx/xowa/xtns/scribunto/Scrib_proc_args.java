@@ -92,9 +92,9 @@ public class Scrib_proc_args {
 			for (int i = 0; i < len; i++) {
 				KeyVal kv = kvs[i];
 				if (i != 0) bfr.Add_byte(Byte_ascii.Amp);
-				bfr.Add_str(kv.Key());
+				bfr.Add_str_u8(kv.Key());
 				bfr.Add_byte(Byte_ascii.Eq);
-				bfr.Add_str(kv.Val_to_str_or_empty());
+				bfr.Add_str_u8(kv.Val_to_str_or_empty());
 			}
 			return bfr.To_bry_and_rls();
 		}

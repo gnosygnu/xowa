@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 import gplx.xowa.guis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_page_wtr_wkr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_page_wtr_fxt fxt = new Xoh_page_wtr_fxt();
 	@Test  public void Page_name() {

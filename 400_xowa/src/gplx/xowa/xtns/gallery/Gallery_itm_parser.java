@@ -165,7 +165,7 @@ public class Gallery_itm_parser {
 		int fld_end = cur_pos;
 		if (cur_fld != Fld_caption) {
 			int non_ws_pos = Bry_find_.Find_bwd_non_ws_or_not_found(src, cur_pos - 1, itm_bgn) + 1;	// SEE:non_ws_pos
-			if (non_ws_pos != Bry_.NotFound + 1)
+			if (non_ws_pos != Bry_find_.Not_found + 1)
 				fld_end = non_ws_pos;
 		}
 		switch (cur_fld) {

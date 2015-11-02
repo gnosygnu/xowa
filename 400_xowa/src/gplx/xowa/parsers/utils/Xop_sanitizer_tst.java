@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.parsers.amps.*;
+import org.junit.*; import gplx.core.log_msgs.*; import gplx.xowa.parsers.amps.*;
 public class Xop_sanitizer_tst {
 	Xop_sanitizer_fxt fxt = new Xop_sanitizer_fxt();
 	@Before public void init() {fxt.Clear();}

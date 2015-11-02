@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import org.junit.*;
-import gplx.stores.dsvs.*; /*DsvDataWtr*/
+import gplx.langs.dsvs.*; /*DsvDataWtr*/
 public class TdbDbSaveMgr_tst {
 	@Before public void setup() {
 		Io_url dbInfo = Io_url_.mem_fil_("mem/dir/db0.dsv");

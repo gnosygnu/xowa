@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
@@ -111,8 +111,8 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		if (xatr_url != null)
 			wtr.Nde_full_atrs(Tag_a, wtr.To_bry_and_clear(), false
 			, Atr_a_href		, xatr_url
-			, Atr_a_class		, Atr_a_class_external_text
 			, Atr_a_rel			, Atr_a_rel_nofollow
+			, Atr_a_class		, Atr_a_class_external_text
 			, Atr_a_title		, xatr_name
 			);
 		if (xatr_alt != null) {

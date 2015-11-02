@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Html_parser_tst {		
-	@Before public void init() {fxt.Clear();} private Xoh_parser_fxt fxt = new Xoh_parser_fxt();
+	@Before public void init() {fxt.Clear();} private Html_parser_fxt fxt = new Html_parser_fxt();
 	@Test   public void One() 				{fxt.Test_parse_find_all("<a id='id0'></a>", "id0");}
 	@Test   public void Many() 				{fxt.Test_parse_find_all("<a id='id0'></a><a id='id1'></a><a id='id2'></a>", "id0", "id1", "id2");}
 	@Test   public void Inline() 			{fxt.Test_parse_find_all("<a id='id0'/>", "id0");}
@@ -26,14 +26,14 @@ public class Html_parser_tst {
 	@Test   public void Quote_double() 		{fxt.Test_parse_find_all("<a id='id''0'/>", "id'0");}
 	@Test   public void Quote_escape() 		{fxt.Test_parse_find_all("<a id='id\\'0'/>", "id'0");}
 }
-class Xoh_parser_fxt {
+class Html_parser_fxt {
 	public void Clear() {
 		if (parser == null) {
 			parser = new Html_parser();			
 		}
 	}	private Html_parser parser;
-	public Xoh_parser_fxt Test_parse_find_all(String raw_str, String... expd) {return Test_parse_find(raw_str, Html_parser.Wildcard_str, Html_parser.Wildcard_str, expd);}
-	public Xoh_parser_fxt Test_parse_find(String raw_str, String find_key, String find_val, String... expd) {
+	public Html_parser_fxt Test_parse_find_all(String raw_str, String... expd) {return Test_parse_find(raw_str, Html_parser.Wildcard_str, Html_parser.Wildcard_str, expd);}
+	public Html_parser_fxt Test_parse_find(String raw_str, String find_key, String find_val, String... expd) {
 		byte[] raw = Bry_.new_a7(raw_str);
 		Html_nde[] actl_ndes = parser.Parse_as_ary(raw, 0, raw.length, Bry_.new_a7(find_key), Bry_.new_a7(find_val));
 		String[] actl = Xto_ids(raw, actl_ndes);

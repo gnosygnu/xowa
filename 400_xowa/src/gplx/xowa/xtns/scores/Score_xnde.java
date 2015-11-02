@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.htmls.*; import gplx.xowa.files.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
 public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
@@ -68,7 +68,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		if (ly_process.Exe_exists() == Bool_.N_byte) {Html_write_code_as_pre(bfr, app); return;}
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 		tmp_bfr.Add(code).Add_byte_pipe().Add_int_bool(lang_is_abc).Add_byte_pipe().Add_int_bool(code_is_raw);
-		sha1 = gplx.security.HashAlgo_.Sha1.Calc_hash_bry(tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
+		sha1 = gplx.core.security.HashAlgo_.Sha1.Calc_hash_bry(tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
 		sha1_prefix = String_.new_a7(sha1, 0, 8);
 		output_dir = app.Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "lilypond", Char_.To_str(sha1[0]), Char_.To_str(sha1[1]), String_.new_a7(sha1));	// NOTE: MW also adds an extra level for 8-len; EX: /.../sha1_32_len/sha1_8_len/
 		png_file = output_dir.GenSubFil(sha1_prefix + ".png");
@@ -180,9 +180,9 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 	}
 	public static byte[] Get_lilypond_version(String rslt_str) {
 		byte[] rslt = Bry_.new_u8(rslt_str);	// expect 1st line to be of form "GNU LilyPond 2.16.2"
-		int bgn_pos	= Bry_find_.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_.NotFound) return Version_unknown;
+		int bgn_pos	= Bry_find_.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_find_.Not_found) return Version_unknown;
 		bgn_pos += Version_find_bgn.length + 1;	// +1 for trailing space
-		int end_pos = Bry_find_.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_.NotFound) return Version_unknown;
+		int end_pos = Bry_find_.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_find_.Not_found) return Version_unknown;
 		if (rslt[end_pos - 1] == Byte_ascii.Cr) end_pos = end_pos - 1;
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}

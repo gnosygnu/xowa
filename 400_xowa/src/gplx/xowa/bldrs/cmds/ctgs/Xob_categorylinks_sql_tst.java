@@ -127,7 +127,7 @@ class Db_tst_qry {
 		}
 		if (!pass) {
 			bfr.Add(Lbl_row_hdr).Add_int_variable(expd_row_idx).Add_byte_nl();
-			bfr.Add_str(qry.Xto_sql()).Add_byte(Byte_ascii.Semic);
+			bfr.Add_str_u8(qry.Xto_sql()).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}	static final byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.brys.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.brys.*; import gplx.core.encoders.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xotdb_page_itm_ {
 	static final int Txt_len_id = 5, Txt_len_fil_idx = 5, Txt_len_row_idx = 5, Txt_len_type = 1, Txt_len_text_len = 5;
 	public static final int Txt_ttl_pos		= Txt_len_id + Txt_len_fil_idx + Txt_len_row_idx + Txt_len_type + Txt_len_text_len + 5;
@@ -30,11 +30,11 @@ public class Xotdb_page_itm_ {
 	private static void Txt_ttl_load(Xowd_page_itm page, byte[] bry, int bgn, int end) {
 		try {
 			page.Init_by_tdb
-			( Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4)
-			, Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10)
-			, Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16)
+			( Base85_.To_int_by_bry	(bry, bgn +  0, bgn +  4)
+			, Base85_.To_int_by_bry	(bry, bgn +  6, bgn + 10)
+			, Base85_.To_int_by_bry	(bry, bgn + 12, bgn + 16)
 			,							 bry[18] == Byte_ascii.Num_1
-			, Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24)
+			, Base85_.To_int_by_bry	(bry, bgn + 20, bgn + 24)
 			, page.Ns_id()
 			, Bry_.Mid					(bry, bgn + 26, end)
 			);
@@ -55,12 +55,12 @@ public class Xotdb_page_itm_ {
 		try {
 			page.Clear();
 			page.Init_by_tdb
-			( Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4)
-			, Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10)
-			, Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16)
+			( Base85_.To_int_by_bry	(bry, bgn +  0, bgn +  4)
+			, Base85_.To_int_by_bry	(bry, bgn +  6, bgn + 10)
+			, Base85_.To_int_by_bry	(bry, bgn + 12, bgn + 16)
 			,							 bry[18] == Byte_ascii.Num_1
-			, Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24)
-			, Base85_utl.XtoIntByAry	(bry, bgn + 26, bgn + 30)
+			, Base85_.To_int_by_bry	(bry, bgn + 20, bgn + 24)
+			, Base85_.To_int_by_bry	(bry, bgn + 26, bgn + 30)
 			, Bry_.Mid					(bry, bgn + 32, end)
 			);
 		} catch (Exception e) {throw Err_.new_exc(e, "xo", "parse_by_id failed", "id", String_.new_u8(bry, bgn, end));}
@@ -76,8 +76,8 @@ public class Xotdb_page_itm_ {
 	}
 	public static void Txt_page_save(Bry_bfr bfr, int id, DateAdp modified_on, byte[] title, byte[] text, boolean add_nl) {
 		int ts = Bit_.Xto_int_date_short(modified_on.XtoSegAry());
-		bfr	.Add_base85(id	, Base85_utl.Len_int)			.Add_byte(Txt_page_dlm)			// needed for mass template load
-			.Add_base85(ts	, Base85_utl.Len_int)			.Add_byte(Txt_page_dlm)
+		bfr	.Add_base85(id	, Base85_.Len_int)			.Add_byte(Txt_page_dlm)			// needed for mass template load
+			.Add_base85(ts	, Base85_.Len_int)			.Add_byte(Txt_page_dlm)
 			.Add(title)										.Add_byte(Txt_page_dlm)			// needed for rebuilding ttl files
 			.Add(text)										.Add_byte(Txt_page_dlm);
 		if (add_nl)

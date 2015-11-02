@@ -27,14 +27,13 @@ public class Xop_lnke_tkn extends Xop_tkn_itm_base {//20111222
 	public byte[] Lnke_xwiki_page() {return lnke_xwiki_page;} private byte[] lnke_xwiki_page;
 	public Gfo_qarg_itm[] Lnke_xwiki_qargs() {return lnke_xwiki_qargs;} Gfo_qarg_itm[] lnke_xwiki_qargs;
 	public void Lnke_xwiki_(byte[] wiki, byte[] page, Gfo_qarg_itm[] args) {this.lnke_xwiki_wiki = wiki; this.lnke_xwiki_page = page; this.lnke_xwiki_qargs = args;}
-	public int Lnke_bgn() {return lnke_bgn;} private int lnke_bgn;
-	public int Lnke_end() {return lnke_end;} private int lnke_end;
-	public Xop_lnke_tkn Lnke_rng_(int bgn, int end) {lnke_bgn = bgn; lnke_end = end; return this;}
+	public int Lnke_href_bgn() {return lnke_href_bgn;} private int lnke_href_bgn;
+	public int Lnke_href_end() {return lnke_href_end;} private int lnke_href_end;
 	public byte[] Protocol() {return protocol;} private byte[] protocol;
 	public byte Proto_tid() {return proto_tid;} private byte proto_tid;
 	public Xop_lnke_tkn Subs_add_ary(Xop_tkn_itm... ary) {for (Xop_tkn_itm itm : ary) super.Subs_add(itm); return this;}
 
-	public Xop_lnke_tkn(int bgn, int end, byte[] protocol, byte proto_tid, byte lnke_typ, int lnke_bgn, int lnke_end) {
-		this.Tkn_ini_pos(false, bgn, end); this.protocol = protocol; this.proto_tid = proto_tid; this.lnke_typ = lnke_typ; this.lnke_bgn = lnke_bgn; this.lnke_end = lnke_end;
+	public Xop_lnke_tkn(int bgn, int end, byte[] protocol, byte proto_tid, byte lnke_typ, int lnke_href_bgn, int lnke_href_end) {
+		this.Tkn_ini_pos(false, bgn, end); this.protocol = protocol; this.proto_tid = proto_tid; this.lnke_typ = lnke_typ; this.lnke_href_bgn = lnke_href_bgn; this.lnke_href_end = lnke_href_end;
 	}	Xop_lnke_tkn() {}
 }

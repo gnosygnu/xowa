@@ -32,7 +32,7 @@ public class Xow_defn_cache {	// stores compiled Xot_defn
 		byte[] name = defn.Name();
 		int cache_size = defn.Cache_size();			// OBSOLETE: * 2 b/c it has src and root; 
 		cache.Add_replace(name, defn, cache_size);
-		if (case_match == Xow_ns_case_.Id_1st) {
+		if (case_match == Xow_ns_case_.Tid__1st) {
 			name = lang.Case_mgr().Case_build_1st_upper(upper_1st_bfr, name, 0, name.length);
 			cache.Add_replace(name, defn, 0);
 		}

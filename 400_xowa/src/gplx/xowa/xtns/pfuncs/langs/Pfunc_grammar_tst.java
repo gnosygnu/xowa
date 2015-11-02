@@ -18,40 +18,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_grammar_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void English() {// for now, mark unimplemented langs by returning not_found; [[Template:grammar]]; wait for users to report
-		fxt.Test_parse_tmpl_str_test("{{grammar:a|b}}"						, "{{test}}"	, "[[:Template:grammar]]");
+		fxt	.Test_parse_tmpl_str_test ("{{grammar:a|b}}"			, "{{test}}", "[[:Template:grammar]]");
 	}
 	@Test  public void Finnish() {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_fi);
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:elative|Wikiuutiset}}"		, "{{test}}"	, "Wikiuutisista");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:talo}}"						, "{{test}}"	, "");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|talo}}"			, "{{test}}"	, "talon");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:elative|talo}}"				, "{{test}}"	, "talosta");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:inessive|talo}}"			, "{{test}}"	, "talossa");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:partitive|talo}}"			, "{{test}}"	, "taloa");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:illative|talo}}"			, "{{test}}"	, "taloon");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|sängy}}"			, "{{test}}"	, "sängyn");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:elative|sängy}}"			, "{{test}}"	, "sängystä");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:inessive|sängy}}"			, "{{test}}"	, "sängyssä");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:partitive|sängy}}"			, "{{test}}"	, "sängyä");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:illative|sängy}}"			, "{{test}}"	, "sängyyn");
+		fxt.Reset().Test_html_full_str("{{grammar:elative|Wikiuutiset}}"		, "Wikiuutisista");
+		fxt.Reset().Test_html_full_str("{{grammar:talo}}"						, "");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|talo}}"				, "talon");
+		fxt.Reset().Test_html_full_str("{{grammar:elative|talo}}"				, "talosta");
+		fxt.Reset().Test_html_full_str("{{grammar:inessive|talo}}"				, "talossa");
+		fxt.Reset().Test_html_full_str("{{grammar:partitive|talo}}"				, "taloa");
+		fxt.Reset().Test_html_full_str("{{grammar:illative|talo}}"				, "taloon");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|sängy}}"				, "sängyn");
+		fxt.Reset().Test_html_full_str("{{grammar:elative|sängy}}"				, "sängystä");
+		fxt.Reset().Test_html_full_str("{{grammar:inessive|sängy}}"				, "sängyssä");
+		fxt.Reset().Test_html_full_str("{{grammar:partitive|sängy}}"			, "sängyä");
+		fxt.Reset().Test_html_full_str("{{grammar:illative|sängy}}"				, "sängyyn");
 	}
 	@Test  public void Russian() {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_ru);
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:unknown}}"					, "{{test}}"	, "");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aвики}}"			, "{{test}}"	, "aвики");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aВики}}"			, "{{test}}"	, "aВики");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aь}}"				, "{{test}}"	, "aя");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aия}}"				, "{{test}}"	, "aии");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aка}}"				, "{{test}}"	, "aки");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aти}}"				, "{{test}}"	, "aтей");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aды}}"				, "{{test}}"	, "aдов");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:genitive|aник}}"			, "{{test}}"	, "aника");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:dative|a}}"					, "{{test}}"	, "a");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:accusative|a}}"				, "{{test}}"	, "a");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:instrumental|a}}"			, "{{test}}"	, "a");
-		fxt.Reset().Test_parse_tmpl_str_test("{{grammar:prepositional|a}}"			, "{{test}}"	, "a");
+		fxt.Reset().Test_html_full_str("{{grammar:unknown}}"					, "");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aвики}}"				, "aвики");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aВики}}"				, "aВики");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aь}}"				, "aя");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aия}}"				, "aии");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aка}}"				, "aки");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aти}}"				, "aтей");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aды}}"				, "aдов");
+		fxt.Reset().Test_html_full_str("{{grammar:genitive|aник}}"				, "aника");
+		fxt.Reset().Test_html_full_str("{{grammar:dative|a}}"					, "a");
+		fxt.Reset().Test_html_full_str("{{grammar:accusative|a}}"				, "a");
+		fxt.Reset().Test_html_full_str("{{grammar:instrumental|a}}"				, "a");
+		fxt.Reset().Test_html_full_str("{{grammar:prepositional|a}}"			, "a");
+	}
+	@Test  public void Hebrew() {
+		fxt.Lang_by_id_(Xol_lang_stub_.Id_he);
+		fxt.Reset().Test_html_full_str("{{grammar:unknown|abc}}"				, "abc");
+		fxt.Reset().Test_html_full_str("{{grammar:prefixed|וabc}}"				, "ווabc");	// waw: add ו
+		fxt.Reset().Test_html_full_str("{{grammar:prefixed|ווabc}}"				, "ווabc");	// waw: do not add ו if וו
+		fxt.Reset().Test_html_full_str("{{grammar:prefixed|הabc}}"				, "abc");	// he: remove ה
+		fxt.Reset().Test_html_full_str("{{grammar:prefixed|אabc}}"				, "־אabc");	// maqaf: add ־
 	}
 }

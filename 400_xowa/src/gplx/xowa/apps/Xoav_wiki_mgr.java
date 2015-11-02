@@ -63,6 +63,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		hash.Add_if_dupe_use_nth(domain_bry, rv);
 		return rv;
 	}
+	public void Add(Xow_wiki wiki) {hash.Add_if_dupe_use_nth(wiki.Domain_bry(), wiki);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_import_by_fil))		return Import_by_fil(Io_url_.new_fil_(m.ReadStr("v")));
 		else	return GfoInvkAble_.Rv_unhandled;

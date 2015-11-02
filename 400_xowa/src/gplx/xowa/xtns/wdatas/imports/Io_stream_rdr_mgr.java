@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.core.criterias.*;
 class Io_stream_rdr_mgr {
 	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {			

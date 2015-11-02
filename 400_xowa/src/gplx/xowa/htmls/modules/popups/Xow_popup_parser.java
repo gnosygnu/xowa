@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
 import gplx.core.btries.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*; import gplx.xowa.htmls.modules.popups.keeplists.*;
+import gplx.xowa.apps.apis.xowa.html.modules.*; import gplx.xowa.htmls.modules.popups.keeplists.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*;	
 public class Xow_popup_parser {
@@ -220,7 +220,7 @@ class Xow_popup_parser_ {
 		Xop_tkn_itm tkn = Get_expensive_dangling_tkn(ctx);
 		if (tkn == null) return rv_default;					// no expensive tkns found; return rv_default; EX: headers are not considered expensive
 		int tkn_end = Calc_tkn_end(tkn, src, end);
-		if (tkn_end == Bry_.NotFound) return rv_default;	// no end found; return rv_default; might want to return src.length at future date
+		if (tkn_end == Bry_find_.Not_found) return rv_default;	// no end found; return rv_default; might want to return src.length at future date
 		return tkn_end - bgn;
 	}
 	private static Xop_tkn_itm Get_expensive_dangling_tkn(Xop_ctx ctx) {
@@ -242,7 +242,7 @@ class Xow_popup_parser_ {
 				end_bry = Xop_tblw_lxr.Hook_te;
 				break;
 		}
-		if (end_bry == null) return Bry_.NotFound;	// no end defined for tkn; return null which should revert to dflt
+		if (end_bry == null) return Bry_find_.Not_found;	// no end defined for tkn; return null which should revert to dflt
 		int end_pos = Bry_find_.Find_fwd(src, end_bry, pos);
 		return end_pos == Bry_find_.Not_found ? Bry_find_.Not_found : end_pos + end_bry.length;
 	}

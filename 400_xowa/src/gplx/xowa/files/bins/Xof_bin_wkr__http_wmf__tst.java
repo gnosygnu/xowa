@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*; import gplx.ios.*; import gplx.xowa.files.repos.*;
+import org.junit.*; import gplx.core.ios.*; import gplx.xowa.files.repos.*;
 public class Xof_bin_wkr__http_wmf__tst {
 	private final Xof_bin_wkr__http_wmf__fxt fxt = new Xof_bin_wkr__http_wmf__fxt();
 	@Before public void init() {fxt.Clear();}

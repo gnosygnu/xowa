@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.texts.*;
+import gplx.core.texts.*;
 import gplx.xowa.xtns.scribunto.libs.*;
 public class Process_engine implements Scrib_engine {
 	private Scrib_core core; private Xoae_app app; private Scrib_xtn_mgr scrib_opts;

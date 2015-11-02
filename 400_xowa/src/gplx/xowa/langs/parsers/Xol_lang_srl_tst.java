@@ -208,7 +208,7 @@ class Xol_lang_srl_fxt {
 	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
-	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Id_1st, Bry_.new_u8(s), false);}
+	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_u8(s), false);}
 	public Xol_specials_itm special_(String key, String... words) {return new Xol_specials_itm(Bry_.new_u8(key), Bry_.Ary(words));}
 	public Xol_kwd_grp kwd_(String key, boolean case_match, String... words) {
 		Xol_kwd_grp rv = new Xol_kwd_grp(Bry_.new_u8(key));

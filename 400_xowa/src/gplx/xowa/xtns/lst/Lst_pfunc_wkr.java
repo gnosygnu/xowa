@@ -50,7 +50,7 @@ public class Lst_pfunc_wkr {
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;	// put template back on stack; 
 			Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(sub_ctx, src, true);	// NOTE: pass sub_ctx as old_ctx b/c entire document will be parsed, and references outside the section should be ignored;
 			src = root.Data_mid();	// NOTE: must set src to root.Data_mid() which is result of parse; else <nowiki> will break text; DATE:2013-07-11
-			wiki.Cache_mgr().Lst_cache().Add(defn_tmpl, Xow_ns_case_.Id_all);
+			wiki.Cache_mgr().Lst_cache().Add(defn_tmpl, Xow_ns_case_.Tid__all);
 			page.Tmpl_stack_del();
 			defn_tmpl.Data_mid_(src);
 			defn_tmpl.Ctx_(sub_ctx);

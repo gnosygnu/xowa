@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.lnkis.*;
-import gplx.xowa.htmls.hdumps.core.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.htmls.core.makes.imgs.*;
 public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	private static final Imap_map_fmtr map_fmtr_arg = new Imap_map_fmtr();
 	public Imap_map(int id) {this.id = id;}
@@ -44,7 +44,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 		this.a_href = a_href; this.img_alt = img_alt; this.img_cls_tid = img_cls; this.img_cls_other = img_cls_other;
 		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h());
 		if (hctx.Mode_is_hdump())
-			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__img(), xfer_itm, Xohd_data_itm__gallery_itm.Tid_basic);
+			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__img(), xfer_itm, Xohd_img_itm__gallery_itm.Tid_basic);
 	}
 	public void Html_update(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();

@@ -49,8 +49,8 @@ class Dg_parser_fxt {
 		Tfds.Eq_str_lines(Xto_str(bfr, expd), Xto_str(bfr, actl));
 	}
 	private String Xto_str(Bry_bfr bfr, Dg_rule line) {
-		bfr	.Add_str("score=").Add_int_variable(line.Score()).Add_byte_nl()
-			.Add_str("words=").Add_str(String_.Concat_with_str(";", Dg_word.Ary_concat(line.Words(), tmp_bfr, Byte_ascii.Tick))).Add_byte_nl()
+		bfr	.Add_str_a7("score=").Add_int_variable(line.Score()).Add_byte_nl()
+			.Add_str_a7("words=").Add_str_u8(String_.Concat_with_str(";", Dg_word.Ary_concat(line.Words(), tmp_bfr, Byte_ascii.Tick))).Add_byte_nl()
 			;
 		return bfr.To_str_and_clear();
 	}

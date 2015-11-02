@@ -88,7 +88,7 @@ public class Scrib_invoke_func_fxt {
 		fxt.Test_parse_page_tmpl_str(raw, tmp_bfr.To_str_and_clear());
 	}
 	public void Test_error(Exception e, String expd) {
-		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), e);
+		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), Err_.cast_or_make(e));
 		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "error");
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
@@ -138,7 +138,7 @@ public class Scrib_invoke_func_fxt {
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
 			KeyVal kv = ary[i];
-			bfr.Add_str(Object_.Xto_str_strict_or_null_mark(kv.Val()));
+			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
 		return bfr.To_str_and_clear();
 	}
@@ -201,11 +201,11 @@ class Scrib_lua_rsp_bldr {
 	private void Bld_bool(Bry_bfr bfr, boolean v)		{bfr.Add_str_a7("b:").Add_int_fixed(v ? 1 : 0, 1).Add_byte(Byte_ascii.Semic);}
 	private void Bld_int(Bry_bfr bfr, int v)			{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(Byte_ascii.Semic);}
 	private void Bld_double(Bry_bfr bfr, double v)	{bfr.Add_str_a7("d:").Add_double(v).Add_byte(Byte_ascii.Semic);}
-	private void Bld_str(Bry_bfr bfr, String v)		{bfr.Add_str_a7("s:").Add_int_variable(Bry_.new_u8(v).length).Add_str(":\"").Add_str(v).Add_str("\";");}	// NOTE: must use Bry_.new_u8(v).length to calculate full bry len
+	private void Bld_str(Bry_bfr bfr, String v)		{bfr.Add_str_a7("s:").Add_int_variable(Bry_.new_u8(v).length).Add_str_a7(":\"").Add_str_a7(v).Add_str_a7("\";");}	// NOTE: must use Bry_.new_u8(v).length to calculate full bry len
 	private void Bld_fnc(Bry_bfr bfr, Scrib_lua_proc v)	{bfr.Add_str_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:").Add_int_variable(v.Id()).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.Curly_end);}
 	private void Bld_kv_ary(Bry_bfr bfr, KeyVal[] ary) {
 		int len = ary.length;
-		bfr.Add_str_a7("a:").Add_int_variable(len).Add_str(":{");
+		bfr.Add_str_a7("a:").Add_int_variable(len).Add_str_a7(":{");
 		for (int i = 0; i < len; i++) {
 			KeyVal kv = ary[i];
 			Bld_obj(bfr, kv.Key_as_obj());

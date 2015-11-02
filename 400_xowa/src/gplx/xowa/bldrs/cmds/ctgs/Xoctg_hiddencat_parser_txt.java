@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.bldrs.sqls.*;
 public class Xoctg_hiddencat_parser_txt extends Xoctg_hiddencat_parser_base {
 	public Xoctg_hiddencat_parser_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki);}

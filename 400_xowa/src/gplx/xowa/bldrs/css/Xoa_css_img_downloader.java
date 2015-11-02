@@ -42,7 +42,7 @@ public class Xoa_css_img_downloader {
 			Hash_adp img_hash = Hash_adp_bry.cs();
 			while (true) {
 				int url_pos = Bry_find_.Find_fwd(src, Bry_url, prv_pos);
-				if (url_pos == Bry_.NotFound) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;
+				if (url_pos == Bry_find_.Not_found) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;
 				int bgn_pos = url_pos + Bry_url_len;	// set bgn_pos after "url("
 				byte bgn_byte = src[bgn_pos];
 				byte end_byte = Byte_ascii.Null;
@@ -58,7 +58,7 @@ public class Xoa_css_img_downloader {
 						break;
 				}
 				int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
-				if (end_pos == Bry_.NotFound) {	// unclosed "url("; exit since nothing else will be found
+				if (end_pos == Bry_find_.Not_found) {	// unclosed "url("; exit since nothing else will be found
 					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, src_len);
 					break;
@@ -76,7 +76,7 @@ public class Xoa_css_img_downloader {
 					continue;
 				}
 				int import_url_end = Import_url_chk(rel_url_prefix, src, src_len, prv_pos, url_pos, img_raw, bfr);	// check for embedded stylesheets via @import tag
-				if (import_url_end != Bry_.NotFound)  {
+				if (import_url_end != Bry_find_.Not_found)  {
 					prv_pos = import_url_end;
 					continue;
 				}
@@ -110,8 +110,8 @@ public class Xoa_css_img_downloader {
 			;
 	}
 	private int Import_url_chk(byte[] rel_url_prefix, byte[] src, int src_len, int old_pos, int find_bgn, byte[] url_raw, Bry_bfr bfr) {
-		if (find_bgn < Bry_import_len) return Bry_.NotFound;
-		if (!Bry_.Match(src, find_bgn - Bry_import_len, find_bgn, Bry_import)) return Bry_.NotFound;
+		if (find_bgn < Bry_import_len) return Bry_find_.Not_found;
+		if (!Bry_.Match(src, find_bgn - Bry_import_len, find_bgn, Bry_import)) return Bry_find_.Not_found;
 		byte[] css_url = url_raw; int css_url_len = css_url.length;
 		if (css_url_len > 0 && css_url[0] == Byte_ascii.Slash) {		// css_url starts with "/"; EX: "/page" or "//site/page" DATE:2014-02-03
 			if (css_url_len > 1 && css_url[1] != Byte_ascii.Slash)		// skip if css_url starts with "//"; EX: "//site/page"
@@ -124,7 +124,7 @@ public class Xoa_css_img_downloader {
 		byte[] css_trg_bry = download_wkr.Download_xrg().Exec_as_bry(css_src_str);
 		if (css_trg_bry == null) {
 			usr_dlg.Warn_many("", "", "could not import css: url=~{0}", css_src_str);
-			return Bry_.NotFound;	// css not found
+			return Bry_find_.Not_found;	// css not found
 		}
 		bfr.Add_mid(src, old_pos, find_bgn - Bry_import_len).Add_byte_nl();
 		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).Add_byte_nl();			
@@ -144,11 +144,11 @@ public class Xoa_css_img_downloader {
 		if (Bry_.Has_at_bgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
 		if (Bry_.Has_at_bgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
 		int pos_slash = Bry_find_.Find_fwd(raw, Byte_ascii.Slash, pos_bgn, raw_len);
-		if (pos_slash == Bry_.NotFound) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
+		if (pos_slash == Bry_find_.Not_found) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
 		if (pos_slash == raw_len - 1) return null; // "site.org/" is invalid
 		int pos_end = raw_len;
 		int pos_question = Bry_find_.Find_bwd(raw, Byte_ascii.Question);
-		if (pos_question != Bry_.NotFound)
+		if (pos_question != Bry_find_.Not_found)
 			pos_end = pos_question;	// remove query params; EX: img_name?key=val 
 		return Bry_.Mid(raw, pos_bgn, pos_end);
 	}

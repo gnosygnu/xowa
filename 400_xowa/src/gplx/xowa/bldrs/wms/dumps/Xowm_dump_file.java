@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms.dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.wikis.domains.*;
 public class Xowm_dump_file {
 	public Xowm_dump_file(String domain_str, String dump_date, String dump_type_str) {

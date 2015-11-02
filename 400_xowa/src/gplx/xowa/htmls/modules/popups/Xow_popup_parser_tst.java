@@ -68,7 +68,7 @@ public class Xow_popup_parser_tst {
 	@Test   public void Lnke_text() {	// PURPOSE: count entire lnke as one word
 		fxt.Init_tmpl_read_len_(32).Init_word_needed_(5).Test_parse
 		( "a http://b.org c d e f g", String_.Concat_lines_nl_skip_last
-		( "<p>a <a href=\"http://b.org\" class=\"external text\" rel=\"nofollow\">http://b.org</a> c d e"
+		( "<p>a <a href=\"http://b.org\" rel=\"nofollow\" class=\"external free\">http://b.org</a> c d e"
 		, "</p>"
 		));
 	}
@@ -507,7 +507,7 @@ class Xop_popup_parser_fxt {
 	}
 	public void Test_Assert_at_end(String raw, String expd) {
 		if (test_bfr == null) test_bfr = Bry_bfr.new_();
-		test_bfr.Clear().Add_str(raw);
+		test_bfr.Clear().Add_str_u8(raw);
 		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.Nl);
 		Tfds.Eq(expd, test_bfr.To_str_and_clear());
 	}	private Bry_bfr test_bfr;

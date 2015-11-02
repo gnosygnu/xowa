@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.texts.*; /*CharStream*/ 
+import gplx.core.texts.*; /*CharStream*/ 
 public class GfmlBldr {
 	@gplx.Internal protected GfmlDoc			Doc() {return gdoc;} GfmlDoc gdoc = GfmlDoc.new_();
 	@gplx.Internal protected GfmlFrame			CurFrame() {return curFrame;} GfmlFrame curFrame;

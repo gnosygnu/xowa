@@ -23,7 +23,7 @@ public class Json_itm_tmp implements Json_itm {	// TEST:
 	public int Src_bgn() {return -1;}
 	public int Src_end() {return -1;}
 	public Object Data() {return data;} private String data;
-	public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add_str(data);}
+	public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add_str_u8(data);}
 	public boolean Data_eq(byte[] comp) {return false;}
 	public void Clear() {}
 	public static Json_itm new_str_(String v)	{return new Json_itm_tmp(Json_itm_.Tid__str, "\"" + v + "\"");}

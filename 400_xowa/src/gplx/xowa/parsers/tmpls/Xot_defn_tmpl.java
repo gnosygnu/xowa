@@ -41,12 +41,12 @@ public class Xot_defn_tmpl implements Xot_defn {
 		int src_len = src.length;
 		while (true) {
 			int find_bgn = Bry_find_.Find_fwd(src, Bry_onlyinclude_bgn, pos, src_len);
-			if (find_bgn == Bry_.NotFound) {
+			if (find_bgn == Bry_find_.Not_found) {
 				break;
 			}
 			int find_bgn_lhs = find_bgn + Bry_onlyinclude_bgn_len;
 			int find_end = Bry_find_.Find_fwd(src, Bry_onlyinclude_end, find_bgn_lhs, src_len);
-			if (find_end == Bry_.NotFound) {
+			if (find_end == Bry_find_.Not_found) {
 				break;
 			}
 			bfr.Add_mid(src, find_bgn_lhs, find_end);

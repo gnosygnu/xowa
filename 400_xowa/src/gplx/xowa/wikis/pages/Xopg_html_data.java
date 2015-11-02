@@ -39,6 +39,7 @@ public class Xopg_html_data {
 	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr.reset_(255);
 	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
+	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
 	public boolean					Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
 	public boolean					Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
 	public Xopg_xtn_skin_mgr	Xtn_skin_mgr() {return xtn_skin_mgr;} private Xopg_xtn_skin_mgr xtn_skin_mgr = new Xopg_xtn_skin_mgr();
@@ -71,6 +72,7 @@ public class Xopg_html_data {
 		display_ttl = content_sub = display_ttl_vnt = null;
 		lang_convert_content = lang_convert_title = true;
 		lnke_autonumber = 1;
+		sect_uid = -1;
 		xtn_skin_mgr.Clear();
 		xtn_gallery_packed_exists = false;
 		xtn_imap_next_id = 0; xtn_gallery_next_id = -1;

@@ -28,13 +28,13 @@ public class Xow_domain_itm_ {
 		*/
 		int raw_len = raw.length;
 		int dot_0 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, 0, raw_len);
-		if (dot_0 == Bry_.NotFound) {	// 0 dots; check for "home"
+		if (dot_0 == Bry_find_.Not_found) {	// 0 dots; check for "home"
 			return Bry_.Eq(raw, Xow_domain_tid_.Bry__home)
 				? Xow_domain_uid_.To_domain(Xow_domain_uid_.Tid_xowa)
 				: new_other(raw);
 		}
 		int dot_1 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, dot_0 + 1, raw_len);
-		if (dot_1 == Bry_.NotFound) {	// 1 dot; check for "wikimediafoundation.org"
+		if (dot_1 == Bry_find_.Not_found) {	// 1 dot; check for "wikimediafoundation.org"
 			return Bry_.Match(raw, 0, dot_0, Xow_domain_tid_.Bry__wmforg)
 				? Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__wmfblog, Xol_lang_stub_.Key__unknown)
 				: new_other(raw);

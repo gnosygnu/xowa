@@ -54,7 +54,7 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 			canonical_add(ns.Id(), ns.Name_bry());
 	}
 	private static void canonical_add(int ns_id, byte[] ns_name) {
-		Xow_ns ns = new Xow_ns(ns_id, Xow_ns_case_.Id_all, ns_name, false);
+		Xow_ns ns = new Xow_ns(ns_id, Xow_ns_case_.Tid__all, ns_name, false);
 		canonical.Add(ns_name, ns);
 	}
 }	

@@ -67,7 +67,7 @@ class Dpl_itm {
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
 						fld_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
-						if (fld_bgn == Bry_.NotFound) loop = false;
+						if (fld_bgn == Bry_find_.Not_found) loop = false;
 					}
 					else {									// known key; set pos to val_bgn
 						fld_bgn = pos + Int_.Const_dlm_len;

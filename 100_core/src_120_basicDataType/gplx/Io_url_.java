@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.ios.*; /*IoUrlInfo_*/
+import gplx.core.ios.*; /*IoUrlInfo_*/
 public class Io_url_ {
 	public static final Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
 	public static final Io_url NullPtr = null;

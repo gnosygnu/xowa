@@ -56,14 +56,14 @@ public class Xotdb_fsys_mgr {
 	private static void Scan_dirs_zip(Xotdb_fsys_mgr fsys_mgr, byte id) {
 		Io_url[] dirs = Io_mgr.Instance.QueryDir_args(fsys_mgr.Ns_dir().GenSubDir_nest("000")).FilPath_("*page*").DirOnly_().Recur_(false).ExecAsUrlAry();
 		int len = dirs.length;
-		byte tid = gplx.ios.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
+		byte tid = gplx.core.ios.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
 		for (int i = 0; i < len; i++) {
 			Io_url dir = dirs[i];
 			String dir_name = dir.NameOnly();
-			if		(String_.Eq(dir_name, "page"))			{tid = gplx.ios.Io_stream_.Tid_raw; break;} 
-			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.ios.Io_stream_.Tid_zip;
-			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.ios.Io_stream_.Tid_gzip;
-			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.ios.Io_stream_.Tid_bzip2;
+			if		(String_.Eq(dir_name, "page"))			{tid = gplx.core.ios.Io_stream_.Tid_raw; break;} 
+			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.core.ios.Io_stream_.Tid_zip;
+			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.core.ios.Io_stream_.Tid_gzip;
+			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.core.ios.Io_stream_.Tid_bzip2;
 		}
 		fsys_mgr.Tdb_dir_regy()[id].Ext_tid_(tid);
 	}

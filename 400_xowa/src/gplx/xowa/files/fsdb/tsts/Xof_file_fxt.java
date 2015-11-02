@@ -58,9 +58,9 @@ class Xof_file_fxt {
 		Fsm_atr_fil atr_fil = mnt_itm.Atr_mgr().Db__core();
 		Fsm_bin_fil bin_fil = mnt_itm.Bin_mgr().Dbs__get_nth();
 		if (arg.Is_thumb())
-			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.core.ios.Io_stream_rdr_.mem_(arg.Bin()));
 		else
-			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.core.ios.Io_stream_rdr_.mem_(arg.Bin()));
 	}
 	public void Exec_get(Xof_exec_arg arg) {
 		byte[] ttl_bry = arg.Ttl();

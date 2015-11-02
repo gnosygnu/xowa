@@ -45,7 +45,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 		if (!cache.Done() && (qry.Itms_end() > cache.Itms_end())) {
 			if (async) {
 				fill_from_cache = false; // NOTE: do not retrieve cached results to page, else ui_async cmd will add out of order; DATE:2015-04-24
-				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.htmls.wtrs.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
+				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_search_db, this, Invk_search_db).Start();
 			}
 			else

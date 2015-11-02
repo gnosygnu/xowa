@@ -73,7 +73,7 @@ public class Xows_mgr {
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
-		byte[] special_name = slash_pos == Bry_.NotFound
+		byte[] special_name = slash_pos == Bry_find_.Not_found
 				? ttl.Base_txt_wo_qarg()							// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
 				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
 		Object o = hash.Get_by_bry(special_name);

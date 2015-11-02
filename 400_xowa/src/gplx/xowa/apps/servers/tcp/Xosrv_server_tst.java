@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xosrv_server_tst {
 	@Before public void init() {fxt.Clear();} private Xosrv_server_fxt fxt = new Xosrv_server_fxt();
 	@Test   public void Exec_js() {

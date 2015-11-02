@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*;
-import gplx.ios.*; import gplx.gfui.*; import gplx.xowa.files.*;
+import gplx.core.ios.*; import gplx.gfui.*; import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_basic_tst {
 	Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init() {fxt.Clear(true);}

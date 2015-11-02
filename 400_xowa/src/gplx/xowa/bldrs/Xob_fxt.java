@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.tests.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
+import gplx.core.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 public class Xob_fxt {
 	public Xob_fxt Ctor_mem() {
 		Io_mgr.Instance.InitEngine_mem();

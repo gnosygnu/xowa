@@ -217,7 +217,7 @@ class Xog_menu_bldr {
 	public Xog_menu_bldr Add_grp_bgn(String key) {
 		Indent();
 		bfr.Add(Const_itm_grp_bgn_lhs);
-		bfr.Add_str(key);
+		bfr.Add_str_u8(key);
 		bfr.Add(Const_itm_grp_bgn_rhs);
 		Indent_add();
 		return this;
@@ -231,7 +231,7 @@ class Xog_menu_bldr {
 	public Xog_menu_bldr Add_btn(String key) {
 		Indent();
 		bfr.Add(Const_itm_btn_bgn_lhs);
-		bfr.Add_str(key);
+		bfr.Add_str_u8(key);
 		bfr.Add(Const_itm_btn_bgn_rhs);
 		return this;
 	}

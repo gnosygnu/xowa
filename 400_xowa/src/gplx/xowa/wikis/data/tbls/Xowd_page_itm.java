@@ -90,7 +90,7 @@ public class Xowd_page_itm {
 		ns_id = ns.Id();
 		return this;
 	}
-	public void Clear() {
+	public Xowd_page_itm Clear() {
 		id = Id_null; text_len = 0;	// text_len should be 0 b/c text defaults to 0;
 		text_db_id = tdb_row_idx = 0; // default to 0, b/c some tests do not set and will fail at -1
 		ns_id = Int_.Min_value;
@@ -101,6 +101,7 @@ public class Xowd_page_itm {
 		id_val = null;
 		html_db_id = -1;
 		redirect_id = -1;
+		return this;
 	}
 	public void Copy(Xowd_page_itm orig) {
 		this.id = orig.id;

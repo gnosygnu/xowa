@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 public interface Xop_tkn_itm extends Xop_tkn_grp {
 	byte Tkn_tid();
 	Xop_tkn_itm Tkn_ini_pos(boolean immutable, int bgn, int end);
@@ -38,6 +39,7 @@ public interface Xop_tkn_itm extends Xop_tkn_grp {
 	void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr);
 	void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data); // SEE:NOTE_1:Tmpl_compile
 	boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr);
+	void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src);
 }
 /*
 NOTE_1: Tmpl_compile

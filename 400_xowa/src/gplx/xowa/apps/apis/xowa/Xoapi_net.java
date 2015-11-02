@@ -24,7 +24,7 @@ public class Xoapi_net implements GfoInvkAble, GfoEvObj {
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {
 		this.enabled = v;
-		gplx.ios.IoEngine_system.Web_access_enabled = v;
+		gplx.core.ios.IoEngine_system.Web_access_enabled = v;
 		GfoEvMgr_.PubVal(this, gplx.xowa.guis.menus.dom.Xog_mnu_evt_mgr.Evt_selected_changed, v);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

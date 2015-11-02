@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.qrys.*;
+import gplx.core.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.*;
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	private final Xodb_mgr_sql db_mgr;

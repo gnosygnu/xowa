@@ -77,7 +77,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 				grps.Add(cur_grp);
 			}
 			else {
-				if (pipe_pos == Bry_.NotFound) {		// not of format of "href|main"; (EX: "href_only")
+				if (pipe_pos == Bry_find_.Not_found) {		// not of format of "href|main"; (EX: "href_only")
 					if (!Ignore(wiki.Domain_bry(), bry))	// suppress warning if ignored; DATE:2014-02-11
 						wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "parse.line.missing_text", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_u8(bry));
 					continue;

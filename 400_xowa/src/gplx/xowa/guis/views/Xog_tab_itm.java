@@ -161,7 +161,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 				return;
 			}
 			if (!page.Redirected()) page.Url_(url);	// NOTE: handle redirect from commons
-			if (page.Ttl().Anch_bgn() != Bry_.NotFound) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
+			if (page.Ttl().Anch_bgn() != Bry_find_.Not_found) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
 			if (app.Api_root().Usr().History().Enabled()) {
@@ -177,7 +177,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
 				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
 				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
-					wiki.Html__hdump_wtr().Save(page);
+					wiki.Html__hdump_mgr().Save_mgr().Save(page);
 				}
 			}
 			else

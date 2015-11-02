@@ -72,11 +72,11 @@ public class Xoh_href_wtr {
 	}
 	private void Build_to_bfr_page(Xoa_ttl ttl, byte[] ttl_full, int page_bgn) {
 		int anch_bgn = Bry_find_.Find_fwd(ttl_full, Byte_ascii.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
-		if (anch_bgn == Bry_.NotFound)	// no anchor; just add page
+		if (anch_bgn == Bry_find_.Not_found)	// no anchor; just add page
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, ttl_full.length);
 		else {							// anchor exists; check if anchor is preceded by ws; EX: [[A #b]] -> "/wiki/A#b"
 			int page_end = Bry_find_.Find_bwd_last_ws(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
-			page_end = page_end == Bry_.NotFound ? anch_bgn : page_end;			// if ws not found, use # pos; else use 1st ws pos
+			page_end = page_end == Bry_find_.Not_found ? anch_bgn : page_end;			// if ws not found, use # pos; else use 1st ws pos
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, page_end);			// add page
 			encoder.Encode(encoder_bfr, ttl_full, anch_bgn, ttl_full.length);	// add anchor
 		}

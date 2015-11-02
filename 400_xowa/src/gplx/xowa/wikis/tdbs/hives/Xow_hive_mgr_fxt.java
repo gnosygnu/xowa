@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.tdbs.xdats.*;
+import gplx.core.encoders.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xow_hive_mgr_fxt {
 	public void Clear() {
 		if (hive_mgr == null) {
@@ -80,14 +79,14 @@ public class Xow_hive_mgr_fxt {
 	public Xow_hive_mgr_fxt Create_id(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Create_id(app, hive_mgr, id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}
 	public static void Create_id(Xoae_app app, Xob_hive_mgr hive_mgr, int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
-		byte[] key_bry = Base85_utl.XtoStrByAry(id, 5);
+		byte[] key_bry = Base85_.To_bry(id, 5);
 		bfr	.Add(key_bry)						.Add_byte_pipe()
 			.Add_base85_len_5(fil_idx)			.Add_byte_pipe()
 			.Add_base85_len_5(row_idx)			.Add_byte_pipe()
 			.Add_byte(type_redirect	? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
 			.Add_base85_len_5(itm_len)			.Add_byte_pipe()
 			.Add_base85_len_5(ns_id)			.Add_byte_pipe()
-			.Add_str(ttl)						.Add_byte_nl();
+			.Add_str_u8(ttl)					.Add_byte_nl();
 		byte[] row = bfr.To_bry_and_clear();
 		bfr.Mkr_rls();
 		hive_mgr.Create(Xotdb_dir_info_.Tid_id, key_bry, row);

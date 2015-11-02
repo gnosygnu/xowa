@@ -59,7 +59,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 			kit.Ask_ok(GRP_KEY, "download.fail", "download failed. Please select 'read from file' if you've already downloaded a dump: url=~{0} error=~{1}", src, xrg.Rslt_err_str());
 		}
 	}	boolean download_pass = true;
-	protected gplx.ios.IoEngine_xrg_downloadFil xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);
+	protected gplx.core.ios.IoEngine_xrg_downloadFil xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_async_bgn))				Download();
 		else if	(ctx.Match(k, Invk_owner))					return owner;

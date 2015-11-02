@@ -29,9 +29,12 @@ public class Html_tag_ {
 	  Br_inl					= Bry_.new_a7("<br/>")
 	, Hr_inl					= Bry_.new_a7("<hr/>")
 	, Body_lhs					= Bry_.new_a7("<body>")			, Body_rhs					= Bry_.new_a7("</body>")
+	, A_lhs_bgn					= Bry_.new_a7("<a")
+	, A_rhs						= Bry_.new_a7("</a>")
 	, B_lhs						= Bry_.new_a7("<b>")			, B_rhs						= Bry_.new_a7("</b>")
 	, I_lhs						= Bry_.new_a7("<i>")			, I_rhs						= Bry_.new_a7("</i>")
 	, P_lhs						= Bry_.new_a7("<p>")			, P_rhs						= Bry_.new_a7("</p>")
+	, Pre_lhs					= Bry_.new_a7("<pre>")			, Pre_rhs					= Bry_.new_a7("</pre>")
 	, Div_lhs					= Bry_.new_a7("<div>")			, Div_rhs					= Bry_.new_a7("</div>")
 	, Html_rhs					= Bry_.new_a7("</html>")
 	, Head_lhs_bgn				= Bry_.new_a7("<head")
@@ -41,6 +44,7 @@ public class Html_tag_ {
 	, Script_lhs				= Bry_.new_a7("<script>")
 	, Script_lhs_w_type			= Bry_.new_a7("<script type='text/javascript'>")
 	, Script_rhs				= Bry_.new_a7("</script>")
+	, Span_lhs					= Bry_.new_a7("<span")
 	, Span_rhs					= Bry_.new_a7("</span>")
 	;
 
@@ -55,5 +59,29 @@ public class Html_tag_ {
 	public static final int
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
+	;
+	public static final int 
+	  Id__eos		= -2
+	, Id__any		= -1
+	, Id__unknown	= 0
+	, Id__a			= 1
+	, Id__h2		= 2
+	, Id__h3		= 3
+	, Id__h4		= 4
+	, Id__h5		= 5
+	, Id__h6		= 6
+	, Id__span		= 7
+	, Id__div		= 8
+	, Id__comment	= 9
+	;
+	public static final Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
+	.Add_str_int("a"			, Id__a)
+	.Add_str_int("h2"			, Id__h2)
+	.Add_str_int("h3"			, Id__h3)
+	.Add_str_int("h4"			, Id__h4)
+	.Add_str_int("h5"			, Id__h5)
+	.Add_str_int("h6"			, Id__h6)
+	.Add_str_int("span"			, Id__span)
+	.Add_str_int("div"			, Id__div)
 	;
 }

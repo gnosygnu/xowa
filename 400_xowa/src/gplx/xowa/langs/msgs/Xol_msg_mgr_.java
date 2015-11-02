@@ -66,7 +66,7 @@ public class Xol_msg_mgr_ {
 	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
 		int slash_pos = Bry_find_.Find_bwd(msg_key, Byte_ascii.Slash);
-		if (slash_pos != Bry_.NotFound) {	// key is of format "key/lang"; EX: "January/en"
+		if (slash_pos != Bry_find_.Not_found) {	// key is of format "key/lang"; EX: "January/en"
 			int msg_key_len = msg_key.length;
 			if (slash_pos != msg_key_len) {		// get text after slash; EX: "en"
 				Object o = Xol_lang_stub_.Regy().Get_by_mid(msg_key, slash_pos + 1, msg_key_len);

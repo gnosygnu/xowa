@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 public class Xosrv_socket_rdr implements GfoInvkAble {
 	private Socket_rdr rdr = new Socket_rdr();
 	public int Port() {return port;} private int port;

@@ -406,12 +406,12 @@ class Scrib_lib_wikibase_srl_fxt {
 	}
 	private void Xto_str(Bry_bfr bfr, KeyVal kv, int depth) {
 		bfr.Add_byte_repeat(Byte_ascii.Space, depth * 2);
-		bfr.Add_str(kv.Key()).Add_byte(Byte_ascii.Colon);
+		bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
 		Object kv_val = kv.Val();
 		if		(kv_val == null) 							{bfr.Add_str_a7("null").Add_byte_nl(); return;}
 		Class<?> kv_val_cls = kv_val.getClass();
 		if 	(Type_adp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal[])kv_val, depth + 1);}
 		else if (Type_adp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal)kv_val, depth + 1);}
-		else bfr.Add_byte(Byte_ascii.Apos).Add_str(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		else bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
 	}
 }

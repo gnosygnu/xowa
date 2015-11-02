@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.core.log_msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.apps.urls.*;
@@ -88,7 +88,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Page_txt_wo_qargs() {	// assume that no Special page has non-ascii characters
 		int full_txt_len = full_txt.length;
 		int ques_pos = Bry_find_.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
-		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_.NotFound ? full_txt_len : ques_pos);
+		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_find_.Not_found ? full_txt_len : ques_pos);
 	}
 	public static Xoa_ttl parse(Xowe_wiki wiki, int ns_id, byte[] ttl) {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
@@ -235,7 +235,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 										break;
 									case Xop_amp_trie_itm.Char_int_null:	// &#xx;
 										int end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, match_pos, end);
-										if (end_pos == Bry_.NotFound) {} // &# but no terminating ";" noop: defaults to current_byte which will be added below;
+										if (end_pos == Bry_find_.Not_found) {} // &# but no terminating ";" noop: defaults to current_byte which will be added below;
 										else {
 											b_ary = amp_itm.Xml_name_bry();									
 											match_pos = end_pos + 1;
@@ -340,7 +340,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			return false;
 		}
 		full_txt = bfr.To_bry_and_clear();
-		if (	ns.Case_match() == Xow_ns_case_.Id_1st
+		if (	ns.Case_match() == Xow_ns_case_.Tid__1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
 			byte char_1st = full_txt[page_bgn];
 			int char_1st_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(char_1st);

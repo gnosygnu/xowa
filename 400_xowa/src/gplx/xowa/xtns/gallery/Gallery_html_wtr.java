@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.lnkis.*; import gplx.xowa.htmls.hdumps.core.*; import gplx.xowa.htmls.hdumps.pages.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*;
 public class Gallery_html_wtr {
 	private final Xoh_arg_img_core img_core_fmtr_basic = new Xoh_arg_img_core__basic(), img_core_fmtr_hdump = new Xoh_arg_img_core__hdump();
@@ -87,12 +88,12 @@ public class Gallery_html_wtr {
 				}
 				byte[] lnki_ttl = lnki.Ttl().Page_txt();
 				Xoa_ttl lnki_link_ttl = itm_ttl;					// default href to ttl
-				if (	itm.Link_bgn() != Bry_.NotFound				// link is not -1; EX: "A.png" has no link specified
+				if (	itm.Link_bgn() != Bry_find_.Not_found				// link is not -1; EX: "A.png" has no link specified
 					&&	(itm.Link_end() - itm.Link_bgn()) > 0		// and link_end - link_bgn > 0; EX: "A.png|link="; DATE:2014-06-15
 					)
 					lnki_link_ttl = Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
 				byte[] lnki_href = app.Html__href_wtr().Build_to_bry(wiki, lnki_link_ttl);
-				byte[] lnki_alt = itm.Alt_bgn() == Bry_.NotFound ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
+				byte[] lnki_alt = itm.Alt_bgn() == Bry_find_.Not_found ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
 				img_core_fmtr.Init(itm_elem_id, html_src, html_w, html_h);
 				int itm_margin = Gallery_html_wtr_utl.Calc_vpad(mgr.Itm_h(), html_h);
 				Gallery_html_wtr_.Itm_img_fmtr.Bld_bfr_many(itm_bfr
@@ -105,7 +106,7 @@ public class Gallery_html_wtr {
 					, lnki_alt
 					);
 				if (hctx_is_hdump)
-					hdump_imgs.Imgs_add_img(new Xohd_data_itm__gallery_itm().Data_init_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
+					hdump_imgs.Imgs_add_img(new Xohd_img_itm__gallery_itm().Data_init_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Xohd_img_itm__gallery_itm.Tid_gallery);
 			}
 			else {
 				Gallery_html_wtr_.Itm_txt_fmtr.Bld_bfr_many(itm_bfr

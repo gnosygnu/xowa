@@ -322,7 +322,7 @@ public class Xof_xfer_mgr {
 	private boolean Cmd_download(String src_str, Io_url trg_url, boolean cur_is_orig) {
 		boolean exists = false;
 		if (check_file_exists_before_xfer) {
-			gplx.ios.IoItmFil fil_itm = Io_mgr.Instance.QueryFil(trg_url);
+			gplx.core.ios.IoItmFil fil_itm = Io_mgr.Instance.QueryFil(trg_url);
 			exists = fil_itm.Exists() && fil_itm.Size() > 0;
 		}
 		boolean pass = false;
@@ -330,11 +330,11 @@ public class Xof_xfer_mgr {
 			pass = true;
 		else {
 			byte download_rslt = wmf_mgr.Download_wkr().Download(src_repo_is_wmf, src_str, trg_url, wmf_mgr.Download_wkr().Download_xrg().Prog_fmt_hdr());
-			if (download_rslt == gplx.ios.IoEngine_xrg_downloadFil.Rslt_fail_host_not_found) {
+			if (download_rslt == gplx.core.ios.IoEngine_xrg_downloadFil.Rslt_fail_host_not_found) {
 				wiki.File_mgr().Cfg_download().Enabled_(false);
 				throw Err_.new_wo_type("download_failed: host not found", "src", src_str, "trg", trg_url.Raw());
 			}
-			pass = download_rslt == gplx.ios.IoEngine_xrg_downloadFil.Rslt_pass;
+			pass = download_rslt == gplx.core.ios.IoEngine_xrg_downloadFil.Rslt_pass;
 		}
 		// update meta attributes; placed here b/c Cmd_download is called by 3 procs; note that thumb meta is handled by calling procs as the logic is more specific
 		if (cur_is_orig) {

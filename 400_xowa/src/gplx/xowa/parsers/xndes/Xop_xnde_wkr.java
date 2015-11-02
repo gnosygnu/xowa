@@ -536,7 +536,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					break;
 			}
 		}
-		return found ? rv : Bry_.NotFound;
+		return found ? rv : Bry_find_.Not_found;
 	}
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] close_bry) {
 		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
@@ -552,7 +552,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					return i;
 				}
 			}
-			return Bry_.NotFound;
+			return Bry_find_.Not_found;
 		}
 	}
 	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
@@ -590,14 +590,14 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				close_bry[i] = src[src_offset + i];
 			boolean auto_close = false;
 			int close_bgn = Find_xtn_end_lhs(ctx, tag, src, src_len, open_bgn, open_end, close_bry);
-			if (close_bgn == Bry_.NotFound) auto_close = true;	// auto-close if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>, <references> DATE:2014-08-23
+			if (close_bgn == Bry_find_.Not_found) auto_close = true;	// auto-close if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>, <references> DATE:2014-08-23
 			int close_end = -1;
 			if (auto_close) {
 				xnde_end = close_bgn = close_end = src_len;
 			}
 			else {
 				close_end = Find_end_tag_pos(src, src_len, close_bgn + close_bry.length);
-				if (close_end == Bry_.NotFound) return ctx.Lxr_make_log_(Xop_xnde_log.Xtn_end_not_found, src, open_bgn, open_end);
+				if (close_end == Bry_find_.Not_found) return ctx.Lxr_make_log_(Xop_xnde_log.Xtn_end_not_found, src, open_bgn, open_end);
 				xnde_end = close_end;
 			}
 

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.ios.*;
+import gplx.core.ios.*; import gplx.core.encoders.*;
 public class Xob_xdat_file {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} public Xob_xdat_file Src_len_(int v) {src_len = v; return this;} private int src_len;	// NOTE: src_len can be different than src.length (occurs when reusing brys)
@@ -154,7 +154,7 @@ public class Xob_xdat_file {
 				slot_bgn = itm_count * Len_idx_itm;
 				if (slot_bgn >= src_len) break;
 				if (src[slot_bgn] == Byte_ascii.Nl) break;
-				int tmp_val = Base85_utl.XtoIntByAry(src, slot_bgn, slot_bgn + Offset_base85);
+				int tmp_val = Base85_.To_int_by_bry(src, slot_bgn, slot_bgn + Offset_base85);
 				slot_new = slot_old + tmp_val;
 				int new_idx = itm_count + 1;
 				if (tmp_len < new_idx) {

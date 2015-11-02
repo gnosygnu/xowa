@@ -19,6 +19,7 @@ package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.net.*;
 import gplx.xowa.guis.history.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.*;
+import gplx.xowa.htmls.*;
 class Xogv_page_load_wkr implements Gfo_thread_wkr, GfoInvkAble {
 	private final Xoav_wiki_mgr wiki_mgr; private final Gfo_url_parser url_parser;
 	private final Xogv_tab_base tab; private final Xog_history_itm old_itm, new_itm;
@@ -28,15 +29,15 @@ class Xogv_page_load_wkr implements Gfo_thread_wkr, GfoInvkAble {
 	public String Name() {return Thread_name;} public static final String Thread_name = "xowa.page_load";
 	public boolean Resume() {return true;}
 	public void Exec() {
-		Xog_page new_hpg = Fetch_page(new_itm.Wiki(), new_itm.Page(), new_itm.Qarg());
+		Xoh_page new_hpg = Fetch_page(new_itm.Wiki(), new_itm.Page(), new_itm.Qarg());
 		tab.Show_page(old_itm, new_itm, new_hpg);
 	}
-	private Xog_page Fetch_page(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {
+	private Xoh_page Fetch_page(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {
 		Xowv_wiki wiki = wiki_mgr.Get_by_domain(wiki_domain);
-		if (wiki == null) return new Xog_page().Exists_n_();	// wiki does not exist; happens with xwiki; PAGE:s.w:Photon; EX:[[wikt:transmit]]; DATE:2015-04-27
+		if (wiki == null) return new Xoh_page().Exists_n_();	// wiki does not exist; happens with xwiki; PAGE:s.w:Photon; EX:[[wikt:transmit]]; DATE:2015-04-27
 		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
 		Gfo_url url = url_parser.Parse(Bry_.Add(wiki_domain, Byte_ascii.Slash_bry, page_bry, qarg_bry));
-		Xog_page rv = new Xog_page();
+		Xoh_page rv = new Xoh_page();
 		wiki.Pages_get(rv, url, ttl);
 		return rv;
 	}

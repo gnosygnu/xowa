@@ -169,7 +169,7 @@ public class Scrib_core {
 			func_args = Scrib_kv_utl_.base1_many_(proc);
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
 			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
-			bfr.Add_str(rslt);
+			bfr.Add_str_u8(rslt);
 //				byte[] rslt_bry = Bry_.new_u8(rslt);	// CHART
 //				gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
 //				bfr.Add(rslt_bry);

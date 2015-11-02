@@ -179,7 +179,7 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (byte[])val;} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte[].class, key, val, or); return or;}
 	}
-	public gplx.ios.Io_stream_rdr ReadRdr(String key) {return gplx.ios.Io_stream_rdr_.Noop;}
+	public gplx.core.ios.Io_stream_rdr ReadRdr(String key) {return gplx.core.ios.Io_stream_rdr_.Noop;}
 	public boolean SrlBoolOr(String key, boolean or) {return ReadBoolOr(key, or);}
 	public byte SrlByteOr(String key, byte or) {return ReadByteOr(key, or);}
 	public int SrlIntOr(String key, int or) {return ReadIntOr(key, or);}

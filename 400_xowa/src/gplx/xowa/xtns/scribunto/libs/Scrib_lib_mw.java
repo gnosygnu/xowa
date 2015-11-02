@@ -142,17 +142,17 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return invk.Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
 	}
 	private static boolean Verify_arg_key(byte[] src, int idx, Arg_nde_tkn nde) {
-		int key_int = Bry_.NotFound;
+		int key_int = Bry_find_.Not_found;
 		byte[] key_dat_ary = nde.Key_tkn().Dat_ary();
 		if (Env_.Mode_testing() && src == null)	// some tests will always pass a null src;
-			key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+			key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
 		else {
 			if (Bry_.Len_eq_0(key_dat_ary))	// should be called by current context;
-				key_int = Bry_.To_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_.NotFound);
+				key_int = Bry_.To_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_find_.Not_found);
 			else							// will be called by parent context; note that this calls Xot_defn_tmpl_.Make_itm which sets a key_dat_ary; DATE:2013-09-23
-				key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+				key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_find_.Not_found);
 		}
-		if (key_int == Bry_.NotFound)		// key is not-numeric
+		if (key_int == Bry_find_.Not_found)		// key is not-numeric
 			return false;
 		else								// key is numeric
 			return idx == key_int;
@@ -286,7 +286,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		byte[] fnc_name = fnc_name_ref.Val();
 		int fnc_name_len = fnc_name.length;
 		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
-		if (fnc_name_colon_pos == Bry_.NotFound) {
+		if (fnc_name_colon_pos == Bry_find_.Not_found) {
 			KeyVal arg_argx = (KeyVal)rv.Get_at(0);
 			argx_ref.Val_(arg_argx.Val_to_bry());
 			rv.Del_at(0);

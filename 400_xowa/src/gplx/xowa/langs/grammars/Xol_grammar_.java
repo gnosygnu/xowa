@@ -40,6 +40,7 @@ public class Xol_grammar_ {
 		switch (lang_id) {
 			case Xol_lang_stub_.Id_fi:	return new Xol_grammar_fi();
 			case Xol_lang_stub_.Id_ru:	return new Xol_grammar_ru();
+			case Xol_lang_stub_.Id_he:	return new Xol_grammar_he();
 			case Xol_lang_stub_.Id_pl:	return Xol_grammar__noop.Instance;
 			default:					return Xol_grammar__unimplemented.Instance;
 		}

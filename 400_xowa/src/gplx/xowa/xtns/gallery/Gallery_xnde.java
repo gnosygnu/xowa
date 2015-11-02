@@ -19,7 +19,7 @@ package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*; import gplx.dbs.cfgs.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.parsers.logs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 	private Gallery_xtn_mgr xtn_mgr;

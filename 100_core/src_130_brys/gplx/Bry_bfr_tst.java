@@ -110,7 +110,7 @@ public class Bry_bfr_tst {
 //				}
 //			}
 //            long l = Pow38_to(y, m, d, h, n, s);
-////			Base85_utl.XtoStrByAry(l, bb.
+////			Base85_.Set_bry(l, bb.
 //			bb.Add_int(l);
 	}
 //		@Test  public void InsertAt_str() {
@@ -132,7 +132,7 @@ public class Bry_bfr_tst {
 		tst_XtoAryAndClearAndTrim("  "		, "");
 	}
 	void tst_XtoAryAndClearAndTrim(String raw, String expd) {
-		bb.Add_str(raw);
+		bb.Add_str_u8(raw);
 		Tfds.Eq(expd, String_.new_u8(bb.To_bry_and_clear_and_trim()));
 	}
 	@Test  public void XtoInt() {
@@ -141,7 +141,7 @@ public class Bry_bfr_tst {
 		tst_XtoInt("9999999999", Int_.Min_value);
 	}
 	void tst_XtoInt(String raw, int expd) {
-		bb.Add_str(raw);
+		bb.Add_str_u8(raw);
 		Tfds.Eq(expd, bb.To_int_and_clear(Int_.Min_value));
 	}
 	static long Pow38_to(int year, int month, int day, int hour, int minute, int second, int frac) {
@@ -166,7 +166,7 @@ public class Bry_bfr_tst {
 		tst_Add_bfr_trimEnd_and_clear("a ", "a");
 	}
 	void tst_Add_bfr_trimEnd_and_clear(String raw, String expd) {
-		Bry_bfr tmp = Bry_bfr.new_().Add_str(raw);
+		Bry_bfr tmp = Bry_bfr.new_().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, false, true).To_str_and_clear());
 	}
 	@Test  public void Add_bfr_trimAll_and_clear() {
@@ -176,7 +176,7 @@ public class Bry_bfr_tst {
 		tst_Add_bfr_trimAll_and_clear("", "");
 	}
 	void tst_Add_bfr_trimAll_and_clear(String raw, String expd) {
-		Bry_bfr tmp = Bry_bfr.new_().Add_str(raw);
+		Bry_bfr tmp = Bry_bfr.new_().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, true, true).To_str_and_clear());
 	}
 	@Test  public void Add_int_pad_bgn() {
@@ -219,9 +219,9 @@ class ByteAryBfr_fxt {
 		byte[] val_bry = Bry_.new_u8(val);
 		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_.Ary(Byte_ascii.Apos, Byte_ascii.Apos), val_bry, 0, val_bry.length).To_str_and_clear());
 	}
-	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_u8(val)).To_str_and_clear());}
-	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_u8(val), val_bgn, val_end).To_str_and_clear());}
-	public void Test_Delete_rng(String init, int bgn, int end, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng(bgn, end).To_str_and_clear());}
-	public void Test_Delete_rng_to_bgn(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng_to_bgn(pos).To_str_and_clear());}
-	public void Test_Delete_rng_to_end(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng_to_end(pos).To_str_and_clear());}
+	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val)).To_str_and_clear());}
+	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val), val_bgn, val_end).To_str_and_clear());}
+	public void Test_Delete_rng(String init, int bgn, int end, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng(bgn, end).To_str_and_clear());}
+	public void Test_Delete_rng_to_bgn(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng_to_bgn(pos).To_str_and_clear());}
+	public void Test_Delete_rng_to_end(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng_to_end(pos).To_str_and_clear());}
 }

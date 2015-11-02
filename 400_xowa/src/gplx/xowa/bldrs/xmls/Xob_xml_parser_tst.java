@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.ios.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.core.ios.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_parser_tst {
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
@@ -107,9 +107,9 @@ public class Xob_xml_parser_tst {
 	}
 	@Test  public void Root() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
-		page_bldr.Bfr().Add_str("<root>\n");
+		page_bldr.Bfr().Add_str_a7("<root>\n");
 		page_bldr.Add(doc);
-		page_bldr.Bfr().Add_str("</root>");
+		page_bldr.Bfr().Add_str_a7("</root>");
 		fil = page_bldr.XtoByteStreamRdr();
 		tst_parse(fil, doc, 0);
 	}

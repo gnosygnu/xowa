@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.xowa.specials.*; import gplx.ios.*; import gplx.core.net.*;
+import gplx.xowa.specials.*; import gplx.core.ios.*; import gplx.core.net.*;
 public class Xosp_fbrow_special implements Xows_page {
 	private static final Xoa_url_arg_mgr url_args = new Xoa_url_arg_mgr(null);
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__file_browser;}

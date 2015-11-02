@@ -19,7 +19,7 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*;
 import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*; import gplx.xowa.bldrs.cmds.wikis.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.htmls.hdumps.bldrs.*;
+import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
 public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd_mgr(Xob_bldr bldr) {this.bldr = bldr;} private Xob_bldr bldr;
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}

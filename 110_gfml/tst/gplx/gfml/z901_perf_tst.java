@@ -29,7 +29,7 @@ public class z901_perf_tst {
 //			sbXml.Add(longText);
 //			sbXml.Add("/>");
 //			tmr.Bgn();
-//			gplx.xmls.XmlDoc_.parse(sbXml.To_str());
+//			gplx.langs.xmls.XmlDoc_.parse(sbXml.To_str());
 //			tmr.End_and_print("xml");	// 400
 
 		String_bldr sbGfml = String_bldr_.new_();
@@ -40,7 +40,7 @@ public class z901_perf_tst {
 //			sbGfml.Add(longText);
 		}
 //			tmr.Bgn();
-//			gplx.texts.CharStream.pos0_(sbGfml.To_str());
+//			gplx.core.texts.CharStream.pos0_(sbGfml.To_str());
 //			tmr.End_and_print("char");	// 1700
 
 		tmr.Bgn();

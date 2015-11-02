@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.pages.*;
+import gplx.gfui.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xog_tab_itm_edit_mgr {
@@ -34,7 +34,7 @@ public class Xog_tab_itm_edit_mgr {
 		Invalidate(wiki);
 		page.Data_raw_(new_text);
 		wiki.Parser_mgr().Parse(page, true);			// refresh html
-		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_wtr().Save(page);	// must go after wiki.Parse
+		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_mgr().Save_mgr().Save(page);	// must go after wiki.Parse
 		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after Parse, b/c Parse will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode
 			page.Html_data().Edit_preview_(Bry_.Empty);

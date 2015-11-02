@@ -39,7 +39,7 @@ abstract class Php_srl_itm_base implements Php_srl_itm {
 	@gplx.Virtual public void Xto_bfr(Bry_bfr bfr, int depth) {
 		Php_srl_wtr.Indent(bfr, depth);
 		bfr.Add(Php_srl_itm_.Names[this.Tid()]).Add_byte(Byte_ascii.Colon);
-		bfr.Add_str(Object_.Xto_str_strict_or_null_mark(this.Val())).Add_byte(Byte_ascii.Semic).Add_byte_nl();		
+		bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(this.Val())).Add_byte(Byte_ascii.Semic).Add_byte_nl();		
 	}
 	public void Clear() {}
 }

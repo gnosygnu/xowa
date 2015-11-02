@@ -22,8 +22,8 @@ public class Xowd_html_row {
 	public int		Tid()		{return tid;}		private final int tid;
 	public byte[]	Data()		{return data;}		private final byte[] data;
 	public static final int // SERIALIZED
-	  Tid_html		= 0
-	, Tid_img		= 1
-	, Tid_redlink	= 2
+	  Tid__html		= 0
+	, Tid__img		= 1
+	, Tid__redlink	= 2
 	;
 }

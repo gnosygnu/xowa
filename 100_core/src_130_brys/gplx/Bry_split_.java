@@ -76,7 +76,7 @@ public class Bry_split_ {
 		List_adp rv = List_adp_.new_();
 		while (true) {
 			int find_pos = Bry_find_.Find_fwd(src, dlm, cur_pos);
-			if (find_pos == Bry_.NotFound) {
+			if (find_pos == Bry_find_.Not_found) {
 				if (cur_pos == src_len) break;	// dlm is last sequence in src; do not create empty itm
 				find_pos = src_len;			
 			}

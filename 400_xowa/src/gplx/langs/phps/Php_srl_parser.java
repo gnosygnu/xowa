@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
-import gplx.texts.*;
+import gplx.core.texts.*;
 public class Php_srl_parser {
 	@gplx.Internal protected Php_srl_factory Factory() {return factory;} Php_srl_factory factory = new Php_srl_factory();
 	byte[] raw; int raw_len, pos;

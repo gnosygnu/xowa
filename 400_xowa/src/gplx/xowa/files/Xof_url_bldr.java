@@ -111,7 +111,7 @@ public class Xof_url_bldr {
 		bfr.Add_byte(dir_spr);															// add dir_spr;				EX: "\"
 		bfr.Add_int_variable(file_w).Add(Bry_px);										// add file_w;				EX: "220px"
 		if (Xof_lnki_time.Null_n(time))
-			bfr.Add_byte(time_dlm).Add_str(Xof_lnki_time.X_str(time));					// add time					EX: "@5"
+			bfr.Add_byte(time_dlm).Add_str_a7(Xof_lnki_time.X_str(time));				// add time					EX: "@5"
 		else if (page != Xof_lnki_page.Null)
 			bfr.Add_byte(Byte_ascii.Dash).Add_int_variable(page);						// add page					EX: "-5"
 		bfr.Add_byte(Byte_ascii.Dot);													// add .					EX: "."
@@ -131,7 +131,7 @@ public class Xof_url_bldr {
 				bfr.Add_int_variable(file_w);											// add file_w;				EX: "220"; PAGE:en.w:Alice_Brady; DATE:2015-08-06
 				bfr.Add(Bry_px_dash);													// add px;					EX: "px-"
 				if (Xof_lnki_time.Null_n(time))
-					bfr.Add(Bry_seek).Add_str(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;		EX: "seek%3D5-"
+					bfr.Add(Bry_seek).Add_str_a7(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;		EX: "seek%3D5-"
 				else
 					bfr.Add_byte(Byte_ascii.Dash);										// add mid;					EX: "-"; NOTE: was "mid-"; DATE:2015-08-06
 				break;

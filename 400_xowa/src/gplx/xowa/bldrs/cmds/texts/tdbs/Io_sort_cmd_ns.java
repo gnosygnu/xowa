@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.ios.*;
+import gplx.core.ios.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Io_sort_cmd_ns implements Io_make_cmd {
 	Xob_xdat_file_wtr fil_wtr; Bry_bfr reg_bfr = Bry_bfr.new_(), key_bfr_0 = Bry_bfr.new_(512), key_bfr_n = Bry_bfr.new_(512);

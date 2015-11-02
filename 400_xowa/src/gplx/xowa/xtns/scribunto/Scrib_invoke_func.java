@@ -58,10 +58,10 @@ public class Scrib_invoke_func extends Pf_func_base {
 			if (invoke_wkr != null)
 				invoke_wkr.Eval_end(ctx.Cur_page(), mod_name, fnc_name, log_time_bgn);
 		}
-		catch (Exception e) {
-			Error(bfr, wiki.Msg_mgr(), e);
+		catch (Throwable e) {
 			Err err = Err_.cast_or_make(e);
-			bfr.Add(Html_tag_.Comm_bgn).Add_str(err.To_str__full()).Add(Html_tag_.Comm_end);
+			Error(bfr, wiki.Msg_mgr(), err);
+			bfr.Add(Html_tag_.Comm_bgn).Add_str_u8(err.To_str__full()).Add(Html_tag_.Comm_end);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
 				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
@@ -70,7 +70,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}
-	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Exception e) {Error(bfr, msg_mgr, Err_.cast_or_make(e).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
+	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Err err) {Error(bfr, msg_mgr, Err_.cast_or_make(err).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {
 		byte[] script_error_msg = msg_mgr.Val_by_id(Xol_msg_itm_.Id_scribunto_parser_error);
 		error_fmtr.Bld_bfr_many(bfr, script_error_msg, error);

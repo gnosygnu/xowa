@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+import gplx.core.log_msgs.*;
 /*
 NOTE: naive implementation of PHP evaluator. intended only for parsing Messages**.php files in MediaWiki. Specifically, it assumes the following:
 - all lines are assignment lines: EX: $a = b;

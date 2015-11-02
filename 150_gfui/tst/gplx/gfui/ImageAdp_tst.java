@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.ios.*;
-import gplx.security.*;
+import gplx.core.ios.*;
+import gplx.core.security.*;
 public class ImageAdp_tst {
 	@Before public void setup() {
 		load = Tfds.RscDir.GenSubFil_nest("150_gfui", "imgs", "strawberry_java.bmp");	

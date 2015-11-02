@@ -53,7 +53,7 @@ class Xob_orig_regy_tbl {
 	}
 	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_conn conn, Xowe_wiki local_wiki, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page for xowa.wiki.image: ~{0}", join.OwnerDir().NameOnly());
-		boolean wiki_has_cs_file = repo_tid == Xof_repo_itm_.Repo_remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Id_all;
+		boolean wiki_has_cs_file = repo_tid == Xof_repo_itm_.Repo_remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Tid__all;
 		String lnki_ttl_fld = wiki_has_cs_file ? "Coalesce(o.lnki_commons_ttl, o.lnki_ttl)" : "o.lnki_ttl";	// NOTE: use lnki_commons_ttl if [[File]] is cs PAGE:en.d:water EX:[[image:wikiquote-logo.png|50px|none|alt=]]; DATE:2014-09-05
 		if (wiki_has_cs_file)
 			Sqlite_engine_.Idx_create(usr_dlg, conn, "orig_regy", Idx_ttl_remote);
