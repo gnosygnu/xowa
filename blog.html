@@ -18,6 +18,131 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v2.11.2.1_.282015-11-08_22:00_Sun.29">Release: v2.11.2.1 (2015-11-08 22:00 Sun)</span>
+    </h2>
+    <p>
+      v2.11.2 is a significant release. It addresses minor, but noticeable issues with gallery sections, location maps, and references. It also has some Wikibase fixes.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_Gallery_rendering_vertically_instead_of_horizontally">Fix for Gallery rendering vertically instead of horizontally</span>
+    </h3>
+    <p>
+      Wikimedia added a change a few weeks ago to force &lt;gallery&gt; tags to use a css. See <a href="https://phabricator.wikimedia.org/T110709" rel="nofollow" class="external free">https://phabricator.wikimedia.org/T110709</a> This resulted in galleries being shown vertically, instead of horizontally.
+    </p>
+    <p>
+      v2.11.2 now includes this css.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_Location_maps_not_working_on_non-English_wikis">Fix for Location maps not working on non-English wikis</span>
+    </h3>
+    <p>
+      This has been a bug for a few months, but I had misdiagnosed it as bad Module code. Basically, non-English wikis would copy-paste the same Module:Location_map code in to their wikis. This failed to work in XOWA, because:
+    </p>
+    <ul>
+      <li>
+        The Module code has a hard-coded reference to <code>Template</code>
+      </li>
+      <li>
+        XOWA actually generates the non-English name for Template for the wiki. For Croatian Wikipedia, this is <code>Šablon</code> not <code>Template</code>
+      </li>
+    </ul>
+    <p>
+      This basically broke location maps in non-English wikis. I should have caught this earlier, but the first few I looked at were all bad usages (no location coordinates passed).
+    </p>
+    <p>
+      v2.11.2 now uses the canonical name just like MediaWiki.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_extraneous_pre-sections_in_References">Fix for extraneous pre-sections in References</span>
+    </h3>
+    <p>
+      I think this is also a recent bug, but I can't track down the actual cause. MediaWiki has inconsistent logic for trimming whitespace around template and link arguments. The one at issue was a piece of code like <code>{{TemplateName| B\n }}</code>. On my local version of MediaWiki (1.25.2), it doesn't trim the <code>"\n "</code> after the B and creates a &lt;pre&gt; section. However, on Wikipedia, it does trim the whitespace and does not create a &lt;pre&gt; section.
+    </p>
+    <p>
+      I think this behavior changed recently, but couldn't find the actual line of code in MediaWiki. For now, XOWA will automatically trim end whitespace for all template arguments. In my opinion this is more intuitive behavior anyway.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Minor_Wikibase_fixes">Minor Wikibase fixes</span>
+    </h3>
+    <p>
+      These are a handful of signficant fixes that only affect some several dozen pages. They are in brief:
+    </p>
+    <ul>
+      <li>
+        in Lua code, entity.formatPropertyValues('P123') would not work. Note that entity.formatPropertyValues('property_name') did work
+      </li>
+      <li>
+        Lua code expects a "datatype" property on entity and a value of "globe-coordinate".
+      </li>
+      <li>
+        Lua code required actual numbers for quantity ("99"), not the literal Wikidata value ("+99")
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Minor_fixes_for_Redirect">Minor fixes for Redirect</span>
+    </h3>
+    <p>
+      These are two minor items worth more explanation:
+    </p>
+    <ul>
+      <li>
+        Redirects would not work if they had an argument. For example, #REDIRECT [[Target_page|link=collapsed]]
+      </li>
+      <li>
+        Clicking on "Redirected from" links at the top of the page would not work. For example, try <a href="https://en.wikipedia.org/wiki/UK">https://en.wikipedia.org/wiki/UK</a> and click on "Redirected from UK"
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Minor_JTidy_fix_to_always_enclose_body_text">Minor JTidy fix to always enclose body text</span>
+    </h3>
+    <p>
+      This was actually not working from the start. Basically tidy needs to take something like ...
+    </p>
+<pre>
+&lt;div class="floatleft"&gt;a&lt;/div&gt;a1&lt;div class="floatleft"&gt;b&lt;/div&gt;b1
+</pre>
+    <p>
+      ... and add some &lt;p&gt; tags to produce ...
+    </p>
+<pre>
+&lt;div class="floatleft"&gt;a&lt;/div&gt;&lt;p&gt;a1&lt;/p&gt;&lt;div class="floatleft"&gt;b&lt;/div&gt;&lt;p&gt;b1&lt;/p&gt;
+</pre>
+    <p>
+      This has a noticeable visual effect for some wikis (Croatian Wiktionary) which have HTML like the above.
+    </p>
+    <p>
+      I modified the jtidy_xowa.jar to handle this behavior.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Wiki_bundles_for_Danish.2C_Serbo-Croatian.2C_Croatian.2C_and_Estonian_wikis">Wiki bundles for Danish, Serbo-Croatian, Croatian, and Estonian wikis</span>
+    </h3>
+    <p>
+      These have been uploaded to archive.org
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/details/Xowa_dawiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_dawiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_shwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_shwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_hrwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_hrwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_eowiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_eowiki_latest</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v2.11.3">Next release: v2.11.3</span>
+    </h3>
+    <p>
+      I made some good progress with the rewritten HTML dump feature this week, but am still not done. I'm hoping to get ready for v2.11.3 but I need to work on a few other minor issues that have spilled over from this week. (namely in Wikibase).
+    </p>
+    <p>
+      For wikis, I'm generating 2015-11 English Wikipedia. I'm also going to continue through the minor wikis and try to do Slovak, Waray-Waray, Slovanian and Galician
+    </p>
+    <h2>
       <span class='mw-headline' id='Release:_v2.11.1.1_.282015-11-01_19:30_Sun.29'>Release: v2.11.1.1 (2015-11-01 19:30 Sun)</span>
     </h2>
     <p>
@@ -74,7 +199,7 @@
       </li>
     </ul>
     <p>
-      The rest are more trivial in comparison. You can check the <a href="/wiki/Help:Change_log" id="xowa_lnki_21" title="Change log" class="xowa-visited">Help:Change log</a> for more detail.
+      The rest are more trivial in comparison. You can check the [[Help:Change log]] for more detail.
     </p>
     <h3>
       <span class='mw-headline' id='Image_packages_for_Serbian.2C_Malay_and_Bulgarian_wikis'>Image packages for Serbian, Malay and Bulgarian wikis</span>
@@ -101,7 +226,7 @@
       <span class='mw-headline' id='Fix_for_broken_references_in_2015-10_English_Wikipedia_dump'>Fix for broken references in 2015-10 English Wikipedia dump</span>
     </h3>
     <p>
-      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="/site/en.wikipedia.org/wiki/Module:Citation/CS1">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
+      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="https://en.wikipedia.org/wiki/Module:Citation/CS1">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
     </p>
     <p>
       I recompiled a new version of luaj_xowa.jar to fix this issue.
@@ -117,7 +242,7 @@
         Serbian languages now have language dropdowns. For example, sr.wikipedia.org now allows you to switch between Cyrillic and Latin variants
       </li>
       <li>
-        Chinese and Serbian wikis now fully implement the "-{}-" syntax. This includes some significant functions like recursive conversion, word-interchangeability, and adhoc rule-definition. See: <a href="/site/www.mediawiki.org/wiki/Writing_systems/Syntax">https://www.mediawiki.org/wiki/Writing_systems/Syntax</a>
+        Chinese and Serbian wikis now fully implement the "-{}-" syntax. This includes some significant functions like recursive conversion, word-interchangeability, and adhoc rule-definition. See: <a href="https://www.mediawiki.org/wiki/Writing_systems/Syntax">https://www.mediawiki.org/wiki/Writing_systems/Syntax</a>
       </li>
     </ul>
     <p>
@@ -133,13 +258,13 @@
       <span class='mw-headline' id='Full_support_for_interwiki_links'>Full support for interwiki links</span>
     </h3>
     <p>
-      v2.10.2 now incorporates online calls to Wikimedia APIs. The first use was to download a full list of interwiki aliases for each wiki. For those users in offline mode, you can manually generate the list. For more info, see <a href="/wiki/Help:Site_config" id="xowa_lnki_20" title="Site config">Help:Site config</a>
+      v2.10.2 now incorporates online calls to Wikimedia APIs. The first use was to download a full list of interwiki aliases for each wiki. For those users in offline mode, you can manually generate the list. For more info, see [[Help:Site config]]
     </p>
     <h3>
       <span class='mw-headline' id='Support_for_Dansguardian_import_filter'>Support for Dansguardian import filter</span>
     </h3>
     <p>
-      XOWA supports custom creation of wikis by matching articles against words. For example, you can create an English Wikipedia that doesn't have any Pokemon articles. Or you can create an English Wikipedia that just has Pokemon articles. The system is intricate but should be quite powerful. For more info, see <a href="/wiki/Help:Import/Dansguardian" id="xowa_lnki_21" title="Import/Dansguardian" class="xowa-visited">Help:Import/Dansguardian</a>
+      XOWA supports custom creation of wikis by matching articles against words. For example, you can create an English Wikipedia that doesn't have any Pokemon articles. Or you can create an English Wikipedia that just has Pokemon articles. The system is intricate but should be quite powerful. For more info, see [[Help:Import/Dansguardian]]
     </p>
     <h3>
       <span class='mw-headline' id='More_source_code_cleanup'>More source code cleanup</span>
@@ -170,782 +295,6 @@
     </p>
     <p>
       Otherwise, next week's v2.10.2 will have more changes. I'll also resume generating wikis from the list below.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.9.4.1_.282015-09-27_20:45_Sun.29'>Release: v2.9.4.1 (2015-09-27 20:45 Sun)</span>
-    </h2>
-    <p>
-      v2.9.4 is a very light release. It has a few minor fixes. Most of my time this week was spent on Chinese / Serbian translation.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes'>Minor fixes</span>
-    </h3>
-    <p>
-      There is only one change worth more detail. I was using default values for Wikidata date precision which caused Script Error's to show on a few dozen Hungarian pages.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_packages_for_Hungarian_and_Thai_wikis'>Image packages for Hungarian and Thai wikis</span>
-    </h3>
-    <p>
-      These wikis are available at <a href="https://archive.org/details/Xowa_huwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_huwiki_latest</a> and <a href="https://archive.org/details/Xowa_thwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_thwiki_latest</a>
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.4'>Next release: v2.9.4</span>
-    </h3>
-    <p>
-      For images, I'm going to work on Serbian, Malay, Hebrew and Bulgarian
-    </p>
-    <p>
-      For development, I'm going to introduce the the Chinese / Serbian language translation.
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.9.3.1_.282015-09-20_19:00_Sun.29'>Release: v2.9.3.1 (2015-09-20 19:00 Sun)</span>
-    </h2>
-    <p>
-      v2.9.3 is another light release. It has a few fixes for Chinese wikis.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Handle_new_relative_urls_for_CSS'>Handle new relative urls for CSS</span>
-    </h3>
-    <p>
-      Wikimedia changed their url format for CSS resources this week. Previously it used to be "//simple.wikipedia.org/w/...". Now it is just "/w/..." Unfortunately, since XOWA didn't handle relative-style urls, the CSS files weren't being downloaded for new wikis. This is fixed now.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Parser_fixes_for_Chinese_wikis'>Parser fixes for Chinese wikis</span>
-    </h3>
-    <p>
-      After building the images for the Chinese wikis, I noticed that there were issues with blank message boxes and blank reference text. It turned out that these were broken by the language dropdown back in v2.8.1. I spent a good deal of time fixing these issues, but realized that the current implementation of variant handling (-{zh-hans:text}-) needs to be rewritten.
-    </p>
-    <p>
-      The current version is much better than the last version, but there are still some changes that need to be done.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_source_code_reorganization'>Minor source code reorganization</span>
-    </h3>
-    <p>
-      I spent a good deal of time reorganizing the main XOWA project codebase. In particular, XOWA had a lot of extra "Source Folders" in addition to "src". These folders arose from the C# to Java conversion and C# having a broader scope for a non-public class than Java (in C#, non-public classes can be seen by classes across namespaces).
-    </p>
-    <p>
-      Source code cleanup is an ongoing process, but this should make a substantial difference.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_packages_for_Portuguese.2C_Romanian.2C_and_Indonesian_wikis'>Image packages for Portuguese, Romanian, and Indonesian wikis</span>
-    </h3>
-    <p>
-      These wikis were fairly straightforward. See <a href="https://archive.org/details/Xowa_ptwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_ptwiki_latest</a> <a href="https://archive.org/details/Xowa_rowiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_rowiki_latest</a> and <a href="https://archive.org/details/Xowa_idwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_idwiki_latest</a>
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.4'>Next release: v2.9.4</span>
-    </h3>
-    <p>
-      For images, I'm going to work on Hungarian, Thai and Serbian.
-    </p>
-    <p>
-      For development, I'm going to put the Math parser to the side and work on rewriting the Chinese / Serbian language translation
-    </p>
-    <p>
-      <br>
-    </p>
-
-    <h2>
-      <span class='mw-headline' id='Release:_v2.9.2.1_.282015-09-13_21:00_Sun.29'>Release: v2.9.2.1 (2015-09-13 21:00 Sun)</span>
-    </h2>
-    <p>
-      v2.9.2 is another light release. It has a few minor parser changes.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Updated_images_for_English_and_Chinese_wikis'>Updated images for English and Chinese wikis</span>
-    </h3>
-    <p>
-      These updates were uploaded to <a href="https://archive.org/details/Xowa_enwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_enwiki_latest</a> and <a href="https://archive.org/details/Xowa_zhwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_zhwiki_latest</a> . I'm still uploading English now, but it should be there in the morning.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_parser_changes'>Minor parser changes</span>
-    </h3>
-    <p>
-      I made a few minor parser changes to handle articles in Romanian, Turkish and Finnish wikis.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.3'>Next release: v2.9.3</span>
-    </h3>
-    <p>
-      For images, I'm going to work on Indonesian, Romainian and Portuguese.
-    </p>
-    <p>
-      For development, I'm still working on the Math parser and some infrastructure items.
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.9.1.1_.282015-09-06_20:00_Sun.29'>Release: v2.9.1.1 (2015-09-06 20:00 Sun)</span>
-    </h2>
-    <p>
-      v2.9.1 is a light release. It adds a new Graph extension.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Added_Graph_extension._Help:Diagnostics.2FJavascript.2FGraph'>Added Graph extension. [[Help:Diagnostics/Javascript/Graph]]
-    </h3>
-    <p>
-      MediaWiki recently began incorporating a new Javascript-centric extension for making graphs. They only show up on a few pages, but I wanted to make sure XOWA handled them before they show up on more.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Removed_Mac_OS_X_DMG'>Removed Mac OS X DMG</span>
-    </h3>
-    <p>
-      I ended up removing the Mac OS X DMG. The main problem is that future updates (for example v2.9.1) would actually overwrite any existing wikis. I'll reinstate the DMG at a future release, but I'll need to make some XOWA changes to allow customized user wiki folders.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Updated_images_for_German_and_Turkish_wikis'>Updated images for German and Turkish wikis</span>
-    </h3>
-    <p>
-      These updates were uploaded earlier this week to <a href="https://archive.org/details/Xowa_dewiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_dewiki_latest</a> and <a href="https://archive.org/details/Xowa_trwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_trwiki_latest</a> .
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.2'>Next release: v2.9.2</span>
-    </h3>
-    <p>
-      For images, I'm going to work on Chinese, Indonesian and Romainian.
-    </p>
-    <p>
-      For development, I plan to work on the Math parser and some more infrastructure items.
-    </p>
-    <p>
-      <br>
-    </p>
-    
-    <h2>
-      <span class='mw-headline' id='Release:_v2.9.1.1_.282015-09-06_20:00_Sun.29'>Release: v2.9.1.1 (2015-09-06 20:00 Sun)</span>
-    </h2>
-    <p>
-      v2.9.1 is a light release. It adds a new Graph extension.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Added_Graph_extension._Help:Diagnostics.2FJavascript.2FGraph'>Added Graph extension. [[Help:Diagnostics/Javascript/Graph]]</span>
-    </h3>
-    <p>
-      MediaWiki recently began incorporating a new Javascript-centric extension for making graphs. They only show up on a few pages, but I wanted to make sure XOWA handled them before they show up on more.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Removed_Mac_OS_X_DMG'>Removed Mac OS X DMG</span>
-    </h3>
-    <p>
-      I ended up removing the Mac OS X DMG. The main problem is that future updates (for example v2.9.1) would actually overwrite any existing wikis. I'll reinstate the DMG at a future release, but I'll need to make some XOWA changes to allow customized user wiki folders.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Updated_images_for_German_and_Turkish_wikis'>Updated images for German and Turkish wikis</span>
-    </h3>
-    <p>
-      These updates were uploaded earlier this week to <a href="https://archive.org/details/Xowa_dewiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_dewiki_latest</a> and <a href="https://archive.org/details/Xowa_trwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_trwiki_latest</a> .
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.2'>Next release: v2.9.2</span>
-    </h3>
-    <p>
-      For images, I'm going to work on Chinese, Indonesian and Romainian.
-    </p>
-    <p>
-      For development, I plan to work on the Math parser and some more infrastructure items.
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.8.5.1_.282015-08-30_20:15_Sun.29'>Release: v2.8.5.1 (2015-08-30 20:15 Sun)</span>
-    </h2>
-    <p>
-      v2.8.5 is a light release. It includes a DMG for Mac OS X and moves the images from /user/anonymous/app to /bin/any/xowa/file
-    </p>
-    <h3>
-      <span class='mw-headline' id='New_Mac_OS_X_DMG'>New Mac OS X DMG</span>
-    </h3>
-    <p>
-      I spent some time putting together a DMG file for Mac OS X. For now, it's only for 64-bit versions (Snow Leopard and up).
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_update_for_Ukrainian_and_Finnish_wikis'>Image update for Ukrainian and Finnish wikis</span>
-    </h3>
-    <p>
-      These updates were uploaded earlier this week to <a href="https://archive.org/details/Xowa_ukwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_ukwiki_latest</a> and <a href="https://archive.org/details/Xowa_fiwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_fiwiki_latest</a> .
-    </p>
-    <p>
-      I was planning to upload German, but Wikimedia kicked off a new cycle over the weekend. I'll review German this week and upload accordingly
-    </p>
-    <h3>
-      <span class='mw-headline' id='Images_moved_from_.2Fuser.2Fanonymous.2Fapp_to_.2Fbin.2Fany.2Fxowa.2Ffile'>Images moved from /user/anonymous/app to /bin/any/xowa/file</span>
-    </h3>
-    <p>
-      I moved all files and images out of the "/user/" file hierarchy. Basically, I'm planning to reduce "/user/" to only a few files or directories. CSS files will probably be moved out within the next few months as well.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.9.1'>Next release: v2.9.1</span>
-    </h3>
-    <p>
-      For images, I'm going to continue image updates with German, Turkish and Indonesian.
-    </p>
-    <p>
-      For development, I plan to keep v2.9.1 light, so will work on either Android or other long-running items
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.8.4.1_.282015-08-23_21:40_Sun.29'>Release: v2.8.4.1 (2015-08-23 21:40 Sun)</span>
-    </h2>
-    <p>
-      v2.8.4 is a light release. It supports 7 new Wikimedia wikis and has some Firefox addon fixes.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_update_for_Persian_and_Bengali_wikis'>Image update for Persian and Bengali wikis</span>
-    </h3>
-    <p>
-      Persian wikis are at <a href="https://archive.org/details/Xowa_fawiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_fawiki_latest</a> and Bengali wikis are now at <a href="https://archive.org/details/Xowa_bnwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_bnwiki_latest</a> . Persian is still uploading but should be ready by the morning.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Import_Wikimedia_wikis_with_non-consistent_language_.28ar.wikimedia.org.3B_br.wikimedia.org.29'>Import Wikimedia wikis with non-consistent language (ar.wikimedia.org; br.wikimedia.org)</span>
-    </h3>
-    <p>
-      This was reported in <a href="https://github.com/gnosygnu/xowa/issues/21" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/21</a> . Basically, there were 7 new Wikimedia wikis with inconsistent language codes. For example, ar.wikimedia.org was not for Arabic Wikimedia, but for Argentinian Wikimedia. Unfortunately, this required some rewrite of the url code as XOWA assumed that the language codes were consistent: for example, "ar." always meant Arabic.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes_for_Firefox_Addon'>Minor fixes for Firefox Addon</span>
-    </h3>
-    <p>
-      There were a few issues with images not loading and sidebar links not working. See <a href="https://github.com/piotrex/XOWA-Addon/issues/2" class="external text" rel="nofollow">https://github.com/piotrex/XOWA-Addon/issues/2</a> and <a href="https://github.com/piotrex/XOWA-Addon/issues/3" class="external text" rel="nofollow">https://github.com/piotrex/XOWA-Addon/issues/3</a>
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.8.5'>Next release: v2.8.5</span>
-    </h3>
-    <p>
-      For this week, I'm going to continue image updates with Ukrainian, German and Finnish.
-    </p>
-    <p>
-      I spent some time on Math parsing this week, and may continue on this for next week. I'll try to work in some Android dev, as the alpha hasn't been updated for 2 months now.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.8.3.1_.282015-08-16_21:15_Sun.29'>Release: v2.8.3.1 (2015-08-16 21:15 Sun)</span>
-    </h2>
-    <p>
-      v2.8.3 is a significant release, but mostly from an infrastructure point-of-view. It has several application startup and deployment changes. It also has an update for English Wikipedia 2015-08-05
-    </p>
-    <h3>
-      <span class='mw-headline' id='English_Wikipedia_images_for_2015-08-05'>English Wikipedia images for 2015-08-05</span>
-    </h3>
-    <p>
-      The update itself contains about 157,000 new images. I'm posting v2b tonight and will post v2a and v1 over the next few days. See [[Help:Set up English Wikipedia#File databases: v1, v2a and v2b]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Application_startup_changes.2C_including_splash_animation.2C_fatal_error_window.2C_and_.exe_changes'>Application startup changes, including splash animation, fatal error window, and .exe changes</span>
-    </h3>
-    <p>
-      v2.8.3 has a number of application startup changes. The most noticeable one is a splash animation to show that XOWA is launching after you double-clicked the exe (or ran the sh).
-    </p>
-    <p>
-      In addition, I added a "fatal error" window to give more information if XOWA fails to run because of SWT or XULRunner.
-    </p>
-    <p>
-      Finally, I rebuilt xowa.exe with launch4j. Also, both exe's now support a standalone JRE. If you place a JRE in /xowa/bin/windows/java/jre , it will run on systems without java installed.
-    </p>
-    <p>
-      Unfortunately, these changes aren't uniform across all operating systems.
-    </p>
-    <ul>
-      <li>
-        Windows: All of the above apply
-      </li>
-      <li>
-        Linux: Only the first 2 apply. A standalone JRE will probably not happen due to the many varieties of Linux distros as well as the general Linux philosophy of a central package manager
-      </li>
-      <li>
-        Mac OS X: None apply. I had problems with the splash and the error window, whereas I haven't looked at the standalone JRE. I'll work on these for a future release, though it's difficult to say when.
-      </li>
-    </ul>
-    <h3>
-      <span class='mw-headline' id='XOWA_home_wiki_is_now_a_sqlite3_database'>XOWA home wiki is now a sqlite3 database</span>
-    </h3>
-    <p>
-      When v0.0.0 was first released, XOWA used text files for all its wikis. XOWA has since moved to sqlite3 databases in v0.7.1 but the home wiki still remained in the text file format.
-    </p>
-    <p>
-      With v2.8.3, the home wiki now is in a sqlite3 format. This should be the start of a number of changes, including better namespaces (everything is in the Help namespace), a functioning Search, image support, and overall better editing. Also, the home wiki will soon be part of the Android Alpha app.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Cleanup_of_.2Fxowa.2F_root_directory'>Cleanup of /xowa/ root directory</span>
-    </h3>
-    <p>
-      v2.8.3 now deploys much fewer files to the /xowa/ root directory. This was done primarily to avoid confusion for new users, as well as general deployment aesthetics. All other files have been moved to elsewhere in the /xowa/bin/xowa/ hierarchy. See the Change Log for more details.
-    </p>
-    <p>
-      For upgrade users, you can ignore these old files in the /xowa/ root directory or clean them up manually. You can also update your app by regenerating the XOWA root directory. See [[Help:Upgrading]] and "Upgrading by an xowa_app package and regenerating the XOWA root directory"
-    </p>
-    <h3>
-      <span class='mw-headline' id='Trivial_Scribunto_parser_fix'>Trivial Scribunto parser fix</span>
-    </h3>
-    <p>
-      v2.8.3 has one trivial Scribunto fix that caused "Script error" on about a dozen or so pages in English Wikipedia.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.8.4'>Next release: v2.8.4</span>
-    </h3>
-    <p>
-      Now that English Wikipedia images were finally released, I'm going to resume the long overdue backlog. I'm scheduling Ukraine, Persian and Bengali for this week.
-    </p>
-    <p>
-      I did some Android development this week, and will work on Search support. I'll also work on any issues the new builds turn up, including one outstanding one for broken Math expressions on some pages: <a href="https://github.com/gnosygnu/xowa/issues/10" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/10</a>
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.8.2.1_.282015-08-09_20:25_Sun.29'>Release: v2.8.2.1 (2015-08-09 20:25 Sun)</span>
-    </h2>
-    <p>
-      v2.8.2 is a light release. It has another attempt at a fix for the Windows 8.1 issue, and a bunch of minor fixes.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Windows_8.1_support_.28by_upgrading_to_SWT_4.6M1.29'>Windows 8.1 support (by upgrading to SWT 4.6M1)</span>
-    </h3>
-    <p>
-      There have been a number of reports of XOWA not working on Windows 8.1. See <a href="https://github.com/gnosygnu/xowa/issues/13" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/13</a> and <a href="https://github.com/gnosygnu/xowa/issues/14" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/14</a>
-    </p>
-    <p>
-      I was able to get a loaner Windows 8.1, and was able to reproduce the issue. I tried various ways to fix it, but the only thing that worked was upgrading to SWT 4.6M1. I'm hoping it handles the Windows 10 error in <a href="http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/" class="external text" rel="nofollow">http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/</a> as well as other random reports
-    </p>
-    <p>
-      If you're running Windows 8 or Windows 10 and it works, please drop by and comment on <a href="https://github.com/gnosygnu/xowa/issues/13" class="external text" rel="nofollow">github</a> or <a href="http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/" class="external text" rel="nofollow">sourceforge</a>
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes_for_file_download'>Minor fixes for file download</span>
-    </h3>
-    <p>
-      While generating the 2015-07 images, I noticed a bunch of minor file issues. They affect something like 5,000 images (out of 4,000,000). These were fixed in this release, and will show up in the next image update
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes_for_Wikibase'>Minor fixes for Wikibase</span>
-    </h3>
-    <p>
-      There were a handful of minor fixes with wikibase, primarily revolving around date.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.8.3'>Next release: v2.8.3</span>
-    </h3>
-    <p>
-      Packages were delayed again this week. Part of this is related to the erratic <a href="https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-August/001166.html" class="external text" rel="nofollow">Wikimedia dump server schedule</a>. The other part was due to the file issues found during the English Wikipedia 2015-07 generation.
-    </p>
-    <p>
-      I was planning to release the 2015-07 update today, but ran across a small issue. In addition, the dumps actually ran early this month, so I'm going to wait a week and release 2015-08 next week. At this point, I'll also regenerate all the other wikis, including Ukraine, Persian, Bengali, etc.
-    </p>
-    <p>
-      I'm going to focus more on packages this week, with English Wikipedia being the main priority. If I have time, I'm going to work on the home database as well as Android.
-    </p>
-
-    <h2>
-      <span class='mw-headline' id='Release:_Windows_64-bit_update_.282015-08-03_20:15_Mon.29'>Release: Windows 64-bit update (2015-08-03 20:15 Mon)</span>
-    </h2>
-    <p>
-      Unfortunately, I uploaded non-working versions of the Windows 64-bit app yesterday. See <a href="https://sourceforge.net/p/xowa/discussion/general/thread/652c6303/" class="external text" rel="nofollow">https://sourceforge.net/p/xowa/discussion/general/thread/652c6303/</a>
-    </p>
-    <p>
-      I uploaded a fixed application package for Windows 64-bit now: <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_windows_64_v2.8.1.1a.zip" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_windows_64_v2.8.1.1a.zip</a>
-    </p>
-    <p>
-      I'm going to skip the update package for now.
-    </p>
-    <p>
-      My apologies for the error.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.8.1.1_.282015-08-02_22:15_Sun.29'>Release: v2.8.1.1 (2015-08-02 22:15 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Language_conversion_dropdown_for_Chinese_wikis'>Language conversion dropdown for Chinese wikis</span>
-    </h3>
-    <p>
-      v2.8.1 now supports the language conversion dropdown for Chinese wikis. This enables users to switch between China, Macau, Malaysia, Singapore and Taiwan conversions for zh.wikipedia.org (as well as other zh.*.org wikis)
-    </p>
-    <p>
-      Unfortunately, I discovered this doesn't work perfectly for Serbian wikis. I'll fix this in a future release, but if you're a Serbian user, you will have to manually use explicit conversion links. For example: sr.wikipedia.org/sr-ec and sr.wikipedia.org/sr-el
-    </p>
-    <p>
-      Thanks to anonymous4 for reviewing and testing this feature.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Windows_8.1_support_.28by_downgrading_to_XULRunner_24.29'>Windows 8.1 support (by downgrading to XULRunner 24)</span>
-    </h3>
-    <p>
-      There were a few reports with XOWA not working on Windows 8.1. See: <a href="https://github.com/gnosygnu/xowa/issues/14" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/14</a> . I don't have a Windows 8.1 box, but it looks like the issues were related to the recent upgrade to XULRunner 31. Although XULRunner 31 works fine on Windows 7 and Windows XP, it looks like it fails on Windows 8.1. I downgraded to XULRunner 24 and it looks like that should fix the issue.
-    </p>
-    <p>
-      Thanks to anonymous#14 for helping me work through it.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fix_for_incorrect_Main_Page_in_various_wikis'>Fix for incorrect Main_Page in various wikis</span>
-    </h3>
-    <p>
-      v2.7.2 introduced a bug wherein the Main_Page was incorrectly detected for some wikis. This affected uk.wikisource.org, zh.wikipedia.org, www.wikidata.org and several others. If you've imported a wiki and the wiki doesn't open, please try to import it again with v2.8.1
-    </p>
-    <h3>
-      <span class='mw-headline' id='Scribunto_and_Wikibase_updates'>Scribunto and Wikibase updates</span>
-    </h3>
-    <p>
-      I discovered I accidentally disabled the build warning codes back in February. As a result, a number of minor Scribunto and Wikibase issues accumulated over the past few months. v2.8.1 resolves about 90% of these issues, though there are still a few more to go through.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Various_minor_fixes'>Various minor fixes</span>
-    </h3>
-    <p>
-      There were a lot of other minor fixes in v2.8.1. Most of these are parser related, but there are a few interesting items under the <b>change</b> section. Please have a look at the [[Help:Change log]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.8.2'>Next release: v2.8.2</span>
-    </h3>
-    <p>
-      I delayed packages for another wiki due to all the parser issues (particularly the Wikibase ones). I'm going to resume with images for 2015-07 English Wikipedia as well as the still-delayed Ukraine, Persian and Bengali wikis.
-    </p>
-    <p>
-      For v2.8.2, I'm going to make yet another attempt at converting the home wiki to a sqlite database. A new Android Alpha is still on the list as well.
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_NONE_.282015-07-26_21:55_Sun.29'>Release: NONE (2015-07-26 21:55 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I'm working on getting the multi-language dropdown for Chinese and Serbian wikis (and any other wikis with variant languages). I ended up rewriting a lot of internal URL logic to support URLs like "zh.wikipedia.org/zh-hans/A" instead of "zh.wikipedia.org/wiki/A". I didn't have much time to work on anything else.
-    </p>
-    <p>
-      I'll resume work on the other items for 2.8.1.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.7.3.3_.282015-07-21_23:45_Tue.29'>Release: v2.7.3.3 (2015-07-21 23:45 Tue)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Online_download_sometimes_downloads_wikis_from_your.org_instead_of_wikimedia.org'>Online download sometimes downloads wikis from your.org instead of wikimedia.org</span>
-    </h3>
-    <p>
-      As per <a href="https://github.com/gnosygnu/xowa/issues/7" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/7</a> partial dumps were only importable for time zones west of Greenich Mean Time. v2.7.3.3 fixes it for all time zones.
-    </p>
-    <p>
-      Yet another thanks to Anselm for working through this issue.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.7.3.2_.282015-07-20_23:45_Mon.29'>Release: v2.7.3.2 (2015-07-20 23:45 Mon)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Online_download_sometimes_downloads_wikis_from_your.org_instead_of_wikimedia.org_2'>Online download sometimes downloads wikis from your.org instead of wikimedia.org</span>
-    </h3>
-    <p>
-      Unfortunately, a change in v2.7.3.1 caused XOWA to download wikis from your.org for partial dumps.
-    </p>
-    <p>
-      Thanks to Anselm for continuing on this issue.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.7.3.1_.282015-07-19_20:00_Sun.29'>Release: v2.7.3.1 (2015-07-19 20:00 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='New_Bookmarks_page._See_Special:XowaBookmarks'>New Bookmarks page. See [[Special:XowaBookmarks]]</span>
-    </h3>
-    <p>
-      The old version of the Bookmarks page was a simple feature. It basically added bookmarks to the bottom of a wiki page. Unfortunately, it was part of the "home" wiki and used the old text database format. I needed to convert the home wiki for Android, but couldn't do it without breaking Bookmarks.
-    </p>
-    <p>
-      As a result, v2.7.3 now has a new Bookmarks page. These entries get saved in the user database (J:\gplx\xowa\xowa.user.anonymous.sqlite3) . In addition, it supports HTTP Server mode. For more info, see [[Help:Bookmarks]]
-    </p>
-    <p>
-      I didn't have time to add folder support for this release. I'm planning to add in the future, but it may wait until I can clear more Android tasks out of the way. If you want this feature, please create an issue at <a href="https://github.com/gnosygnu/xowa/issues" class="external text" rel="nofollow">github</a> .
-    </p>
-    <p>
-      Also, many thanks to anonymous4 for assisting with the HTML and CSS.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fix_for_Persian_Wiki_images'>Fix for Persian Wiki images</span>
-    </h3>
-    <p>
-      It turns out that MediaWiki allows pixel sizes in non-English numbers. For example [[File:A.png|۲۰۰px]] means 200px. Unfortunately, XOWA was interpreting this as no-image-size.
-    </p>
-    <p>
-      v2.7.3 now supports non-English pixel sizes.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_miscellaneous_fixes'>Minor miscellaneous fixes</span>
-    </h3>
-    <p>
-      There were a bunch of minor fixes. None of these are worth further explanation, so please take a quick look at the [[Help:Change log]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='New_javascript_libraries'>New javascript libraries</span>
-    </h3>
-    <p>
-      The new Bookmarks page uses more Javascript libraries. This includes jquery-ui for dragging and resizing as well as notifyjs for notification messages. I updated the existing jquery script to the latest version and also changed some of the core xowa ones.
-    </p>
-    <p>
-      This will probably become more of a future trend. Future GUI features will appear in Javascript rather than SWT. SWT / XULRunner is sometimes finicky cross-platform, and difficult to debug / reproduce. Meanwhile, GUI features implemented in Javascript can easily be used by the XOWA GUI as well as HTTP Server and Android.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.7.4'>Next release: v2.7.4</span>
-    </h3>
-    <p>
-      I decided to wait on Ukraine, Persian and Bengali wikis one week in order to generate 2015-07 versions (instead of 2015-06). I'll be pushing them out over the course of this week. In addition, English Wikipedia should be completing this week, so I'm hoping to get it out as soon as possible. I'll then go on to German, French and Arabic afterwards.
-    </p>
-    <p>
-      For v2.7.4, I'm going to move on to converting the home wiki to a sqlite database. Once that's done, I'll refresh the Android Alpha and try to add Bookmarks as well as bunch of other features.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.7.2.1_.282015-07-12_17:40_Sun.29'>Release: v2.7.2.1 (2015-07-12 17:40 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Handle_incomplete_XML_datadumps_at_http:.2F.2Fdumps.wikimedia.org.2Fbackup-index.html'>Handle incomplete XML datadumps at <a href="http://dumps.wikimedia.org/backup-index.html" class="external text" rel="nofollow">http://dumps.wikimedia.org/backup-index.html</a></span>
-    </h3>
-    <p>
-      WMF is currently having problems with the XML data dumps. Unfortunately, it failed in a way to break auto-dump downloading in [[Import Online]]. Basically, the "latest-pages-articles.xml.bz2" file is being wiped out in the new multi-phase dump. See <a href="https://phabricator.wikimedia.org/T89273" class="external text" rel="nofollow">https://phabricator.wikimedia.org/T89273</a> and <a href="https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-July/001156.html" class="external text" rel="nofollow">https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-July/001156.html</a>
-    </p>
-    <p>
-      v2.7.2 now goes back one dump month if the "latest-pages-articles.xml.bz2" is not there. In the case of Japanese Wikipedia, it does this:
-    </p>
-    <ul>
-      <li>
-        Checks <a href="http://dumps.wikimedia.org/jawiki/latest/" class="external text" rel="nofollow">http://dumps.wikimedia.org/jawiki/latest/</a> 
-        <ul>
-          <li>
-            If the file exists, download it.
-          </li>
-          <li>
-            If the file doesn't exist, go to <a href="http://dumps.wikimedia.org/jawiki/20150602/" class="external text" rel="nofollow">http://dumps.wikimedia.org/jawiki/20150602/</a> and try to download it
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <h3>
-      <span class='mw-headline' id='Image_updates_for_Spanish.2C_Japanese.2C_and_Swedish'>Image updates for Spanish, Japanese, and Swedish</span>
-    </h3>
-    <p>
-      I uploaded new wikis for <a href="https://archive.org/details/Xowa_eswiki_latest" class="external text" rel="nofollow">Spanish</a>, <a href="https://archive.org/details/Xowa_svwiki_latest" class="external text" rel="nofollow">Swedish</a> and <a href="https://archive.org/details/Xowa_jawiki_latest" class="external text" rel="nofollow">Japanese</a>.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Support_for_Extended_String_Functions_for_non_WMF_wikis_.28Wikia.2C_Nethack.29'>Support for Extended String Functions for non WMF wikis (Wikia, Nethack)</span>
-    </h3>
-    <p>
-      This was noted in <a href="https://github.com/gnosygnu/xowa/issues/5" class="external text" rel="nofollow">this github issue</a>. Some non Wikimedia Foundation wikis such as Wikia wikis and the nethack wiki use extended string functions like {{#replace}}, {{#sub}}, {{#count}}, etc.. I ended up implemented these, as they were not difficult, and they are prevalent in a lot of MediaWiki installations.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Rewritten_HTTP_server_engine_to_support_POST_requests'>Rewritten HTTP server engine to support POST requests</span>
-    </h3>
-    <p>
-      First, many thanks again to Mattze96 for the great HTTP server. It's been running fine for a year and a half, and been easy to patch. However, new features were needed for the HTTP server including:
-    </p>
-    <ul>
-      <li>
-        Support for POST and other AJAX calls
-      </li>
-      <li>
-        Server-side events
-      </li>
-      <li>
-        More logging
-      </li>
-      <li>
-        Unit testing capabilities
-      </li>
-    </ul>
-    <p>
-      Due to the changes involved, a rewrite of the core was easier and than trying to patch the existing piece. The new HTTP server engine is still a work in progress, but it is stable enough to introduce.
-    </p>
-    <p>
-      In addition, I fixed a bug with the Timeline javascript. For some reason, it failed in Firefox, but strangely not in XULRunner. Thanks to MDE for reporting it.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_parser_changes'>Minor parser changes</span>
-    </h3>
-    <p>
-      There were a handful of minor parser changes. The most meaningful was support for the {{gender}} function as well as a fix for coordinates and a bad default value of "http:\\/\\/www.wikidata.org\\/entity\\/Q2".
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.7.3'>Next release: v2.7.3</span>
-    </h3>
-    <p>
-      I was tempted to include the new Bookmarks page for v2.7.2, but I wanted to hold off and try to add some features such as bookmark folders and drag-and-drop. Unfortunately it's a blocking task for Android, as it stops me from adding the home wiki to Android. I'm going to try again to get it in for v2.7.3. I'll also work on a refresh of the Android Alpha.
-    </p>
-    <p>
-      For dumps, I'm in a holding pattern until WMF resumes. See <a href="https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-July/001160.html" class="external text" rel="nofollow">https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-July/001160.html</a> . I'll try to update Ukrainian, Persian and Bengali as they are quite old, but I'm still holding off on English, German, French and Arabic.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.7.1.1_.282015-07-05_19:30_Sun.29'>Release: v2.7.1.1 (2015-07-05 19:30 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Upload_of_English_Wikipedia_files_for_Android_Alpha'>Upload of English Wikipedia files for Android Alpha</span>
-    </h3>
-    <p>
-      I finished uploading the files for English Wikipedia. Note that these files are just like the 2015-04 set, except that the max file size is 1.5 GB instead of 3 GB. Android can't use 3 GB files.
-    </p>
-    <p>
-      Unfortunately, right now, there are 3 types of sets for English Wikipedia: v1, v2a and v2b. See [[Help:Set up English Wikipedia]] for more details. Users are strongly encouraged to download the new 2015-06 set (v2b), especially if they're going to use Android. However, I will continue to support monthly updates for v1 and v2a over the next year.
-    </p>
-    <p>
-      For more information on setting up English Wikipedia, see [[Help:Android/Alpha]]
-    </p>
-    <p>
-      XOWA droid can now run a complete version of English Wikipedia. Of course, I'll be making many more changes in the upcoming months. If you come across any bugs or have any suggestions, feel free to drop by and give me some feedback as per [[Help:Feedback]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fixes_for_CSS_generation'>Fixes for CSS generation</span>
-    </h3>
-    <p>
-      v2.7.1 fixes some minor CSS generation issues. The main problem was due to Wikimedia replacing http with https. This would have caused new wikis to have blank logos in the upper left hand corner. If you have a blank logo, try the following (using Simple Wikipedia as an example):
-    </p>
-    <ul>
-      <li>
-        Close XOWA
-      </li>
-      <li>
-        Delete this folder: J:\gplx\xowa\user\anonymous\wiki\simple.wikipedia.org
-      </li>
-      <li>
-        Restart XOWA and visit <code>simple.wikipedia.org/wiki/Main_Page</code>
-      </li>
-    </ul>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes_for_Firefox_Addon'>Minor fixes for Firefox Addon</span>
-    </h3>
-    <p>
-      There were some minor Firefox Addon issues that primarily affected Linux versions of Firefox. The most significant one was that the "XOWA Home" button in the toolbar did not work. There were a few other url issues with clicking items in the sidebar.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fixes_for_image_database_generation'>Fixes for image database generation</span>
-    </h3>
-    <p>
-      I tried to resume image database generation this week, but ran into a few snags. I make a handful of fixes to the image db generation.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.7.2'>Next release: v2.7.2</span>
-    </h3>
-    <p>
-      I spent most of the week on infrastructure for a new Bookmarks page that would work across XOWA versions of GUI, HTTP Server and Android. This UI infrastructure should also be the foundation for upcoming changes to the HTTP server as well as a future rewrite of the Options pages. I didn't want to release this for v2.7.1, but I will release it for v2.7.2. I'm also going to work on getting a new build of the Android Alpha with a few minor features.
-    </p>
-    <p>
-      I fell behind on dumps this weeks. I'm generating <s>Finnish</s> Swedish now, and will be uploading them during the week. Spanish should follow suit afterwards. Unfortunately, the Wikimedia dump servers look like they are having problems, so I may continue with refreshes of Japanese. Once the dumps resolve, I'll work on updates for English, German, French and Arabic.
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.6.5.1_.282015-06-28_21:30_Sun.29'>Release: v2.6.5.1 (2015-06-28 21:30 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='Updated_versions_of_SWT_and_XULRunner'>Updated versions of SWT and XULRunner</span>
-    </h3>
-    <p>
-      XOWA had been using 3-year old versions of SWT and XULRunner. Unfortunately, I haven't been able to update due to this SWT bug: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=429739" class="external text" rel="nofollow">https://bugs.eclipse.org/bugs/show_bug.cgi?id=429739</a>
-    </p>
-    <p>
-      Fortunately, this was fixed in the SWT 4.5 major release. As such, I've upgraded both SWT and XULRunner. Although this is a major infrastructure change, it will have probably only three noticeable changes:
-    </p>
-    <ul>
-      <li>
-        <b>Large upgrade packages for 2.6.5</b>: Since I'm re-releasing XULRunner, the upgrade packages will be much larger than normal
-      </li>
-      <li>
-        <b>Print button available</b>: This was fixed in SWT 4.3, but I've only been able to include the fix now. See [[Help:Printing]]
-      </li>
-      <li>
-        <b>Downloading wikis on some Linux distros won't crash</b>: For some reason, some recent Linux distros started crashing under the old XULRunner 10 when downloading items. XULRunner 17 and up doesn't seem to have this problem. See: <a href="https://sourceforge.net/p/xowa/tickets/375/" class="external text" rel="nofollow">https://sourceforge.net/p/xowa/tickets/375/</a>
-      </li>
-    </ul>
-    <p>
-      For more information, see: [[Help:SWT]] [[Help:HTML Browser]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fix_for_wikis_not_working_because_of_old_image_databases'>Fix for wikis not working because of old image databases</span>
-    </h3>
-    <p>
-      This was broken during the general database redesign in v2.4.3. XOWA was assuming that v1 image databases would have a format of "fsdb.atr.00.sqlite3". Instead some were "fsdb.atr#00.sqlite3". This only affects image databases from late 2013 and early 2014.
-    </p>
-    <p>
-      For more information, see: <a href="https://sourceforge.net/p/xowa/discussion/defects/thread/11a01c27/" class="external text" rel="nofollow">https://sourceforge.net/p/xowa/discussion/defects/thread/11a01c27/</a>
-    </p>
-    <p>
-      Also, thanks to William for patiently working with me to troubleshoot the issue.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Release_of_English_Wikipedia_text-only_version_for_Android_Alpha'>Release of English Wikipedia text-only version for Android Alpha</span>
-    </h3>
-    <p>
-      I had a minor snafu in uploading the English Wikipedia html dumps to archive.org. See: <a href="http://archive.org/post/1041291/item-does-not-have-metadata-https-ia902300usarchiveorg-editphpidentifierxowa_enwiki_latest" class="external text" rel="nofollow">http://archive.org/post/1041291/item-does-not-have-metadata-https-ia902300usarchiveorg-editphpidentifierxowa_enwiki_latest</a> However, I did get them uploaded. See [[Help:Android/Alpha]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Addition_of_Special:XowaDiags_for_troubleshooting'>Addition of Special:XowaDiags for troubleshooting</span>
-    </h3>
-    <p>
-      I created a new Special page for helping with general issues. For example, this will list all files in your English Wikipedia directory: <code>home/wiki/Special:XowaDiag?type=fs.check&amp;wiki=en.wikipedia.org</code>
-    </p>
-    <p>
-      Right now, it's pretty basic, and will change over the next few releases.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.7.1'>Next release: v2.7.1</span>
-    </h3>
-    <p>
-      I'm going to try to keep the next version stable, so I'll probably only work on XOWA droid items. However, I may add a new Bookmarks page for the HTTP server as well as Android.
-    </p>
-    <p>
-      For dumps, a lot depends on the Wikimedia dump servers. I'd like to work on German, but would rather wait for an official "July" version. I'll probably rebuild Spanish and Finnish.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.6.4.1_.282015-06-21_20:22_Sun.29'>Release: v2.6.4.1 (2015-06-21 20:22 Sun)</span>
-    </h2>
-    <h3>
-      <span class='mw-headline' id='XOWA_moving_from_sourceforge.net_to_github.com'>XOWA moving from sourceforge.net to github.com</span>
-    </h3>
-    <p>
-      In light of SourceForge <a href="http://www.reddit.com/r/sysadmin/comments/39xaa0/sourceforge_hijacks_firefox_project/" class="external text" rel="nofollow">aggressively</a> <a href="https://notepad-plus-plus.org/news/notepad-plus-plus-leaves-sf.html" class="external text" rel="nofollow">taking</a> <a href="http://www.i-programmer.info/news/136-open-source/8688-projects-abandon-sourceforge.html" class="external text" rel="nofollow">ownership</a> <a href="http://fossforce.com/2015/06/sourceforge-not-making-a-graceful-exit/" class="external text" rel="nofollow">of</a> <a href="http://www.infoworld.com/article/2929732/open-source-software/sourceforge-commits-reputational-suicide.html" class="external text" rel="nofollow">other</a> <a href="http://sourceforge.net/u/sf-editor1/profile/" class="external text" rel="nofollow">open</a><a href="http://sourceforge.net/u/sf-editor2/profile/" class="external text" rel="nofollow">-source</a> <a href="http://sourceforge.net/u/sf-editor3/profile/" class="external text" rel="nofollow">projects</a>, I've decided to move XOWA to github.com.
-    </p>
-    <p>
-      I'm still in the process of transitioning the xowa.sourceforge.net website as well as other links, but plan to be fully off within a month. I'll still check the sourceforge discussion boards, as well as leave some links up for a period of time. But all future releases will be at <a href="https://github.com/gnosygnu/xowa/releases/" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/releases/</a> while discussions will be at <a href="https://github.com/gnosygnu/xowa/issues/" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/</a>.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Images_not_being_downloaded_due_to_Wikimedia_change_from_http_to_https'>Images not being downloaded due to Wikimedia change from http to https</span>
-    </h3>
-    <p>
-      As per <a href="https://blog.wikimedia.org/2015/06/12/securing-wikimedia-sites-with-https/" class="external text" rel="nofollow">this blog post</a>, Wikimedia has started moving all traffic to https. Some of this seems to have been implemented during the past week. As a result, XOWA was failing in connections to the Wikimedia servers because it was using http.
-    </p>
-    <p>
-      For v2.6.4, I updated the links to https. Image downloads (and api calls) now work.
-    </p>
-    <h3>
-      <span class='mw-headline' id='English_Wikipedia_image_update_for_2015-06-02'>English Wikipedia image update for 2015-06-02</span>
-    </h3>
-    <p>
-      This was a long time in coming. The last good build was back in April. The main problem was that the dump server had been offline for all of May. There were also some XOWA issues, and I had to patch the new code to handle v2 as well as v1.
-    </p>
-    <p>
-      Image updates are currently a little confusing. There are currently 2 versions of image databases for English Wikipedia.
-    </p>
-    <ul>
-      <li>
-        v1: These are ".sqlite" databases in "/xowa/file/en.wikipedia.org/" directory. These were released in 2013-11.
-      </li>
-      <li>
-        v2: These are ".xowa" databases in "/xowa/wiki/en.wikipedia.org/" directory. The databases are about 3 GB each. These were released in 2015-04
-      </li>
-    </ul>
-    <p>
-      v1 is obsolete. I needed to make these changes for Android, as well as to simplify future deployments. I will still generate updates for it for the next year, but users are encourage to move over to a v2 series.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.6.5'>Next release: v2.6.5</span>
-    </h3>
-    <p>
-      I didn't get any of the planned changes done for this week, as both the table of contents and bookmarks were large items. I'm planning to work on them over the next few weeks.
-    </p>
-    <p>
-      Instead, for v2.6.5, I'm planning to release new versions of SWT and XULRunner. This will bring XOWA a little up to date with recent Mozilla Firefox core changes, as well as take care of other defects (primarily, print page)
-    </p>
-    <p>
-      For wikis, I'm going to upload the English Wikipedia HTML databases, and try to get German going as well.
     </p>
 <!-- page_end -->    
     </div>
