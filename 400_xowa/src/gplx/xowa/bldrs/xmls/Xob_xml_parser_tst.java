@@ -85,17 +85,17 @@ public class Xob_xml_parser_tst {
 	}
 	@Test  public void Ns_file() {
 		Xowd_page_itm doc = doc_(1, "File:a", "a", Date_1);
-		Tfds.Eq(Xow_ns_.Id_file, doc.Ns_id());
+		Tfds.Eq(Xow_ns_.Tid__file, doc.Ns_id());
 		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
-		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
+		Tfds.Eq(Xow_ns_.Tid__main, doc.Ns_id());
 		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main_book() {
 		Xowd_page_itm doc = doc_(1, "Book", "a", Date_1);
-		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
+		Tfds.Eq(Xow_ns_.Tid__main, doc.Ns_id());
 		Tfds.Eq("Book", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void XmlEntities() {

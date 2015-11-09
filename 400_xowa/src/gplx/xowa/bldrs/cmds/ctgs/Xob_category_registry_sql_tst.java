@@ -39,7 +39,7 @@ class Xob_category_registry_sql_fxt {
 	}
 	public void Rls() {fxt.Rls();}
 	public void Init_page_insert(String[] ttls) {
-		fxt.Init_page_insert(page_id_next, Xow_ns_.Id_category, ttls);
+		fxt.Init_page_insert(page_id_next, Xow_ns_.Tid__category, ttls);
 	}
 	public void Exec_category_registry_cmd() {
 		app.Bldr().Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core);

@@ -60,8 +60,8 @@ public class Xob_wdata_qid_base_tst {
 		// setup db
 		Site_core_db json_db = new Site_core_db(fxt.App().Fsys_mgr().Cfg_site_meta_fil());
 		Site_namespace_tbl ns_tbl = json_db.Tbl__namespace();
-		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Id_help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), Bool_.N, Bool_.N, Bry_.Empty);
-		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Id_help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), Bool_.N, Bool_.N, Bry_.Empty);
+		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), Bool_.N, Bool_.N, Bry_.Empty);
+		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), Bool_.N, Bool_.N, Bry_.Empty);
 		// run test
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(1, "11", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
 class Xou_user_ {
@@ -57,7 +57,7 @@ class Xou_user_ {
 			.Add_new(12, "Help").Add_new(13, "Help talk").Add_new(14, "Category").Add_new(15, "Category talk").Add_new(100, "Portal").Add_new(101, "Portal talk")
 			.Add_new(gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property, gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property_name)
 			.Add_new(730, "Data").Add_new(731, "Data talk")
-			.Add_new(Scrib_xtn_mgr.Ns_id_module, Scrib_xtn_mgr.Ns_name_module).Add_new(Scrib_xtn_mgr.Ns_id_module_talk, Scrib_xtn_mgr.Ns_name_module_talk)
+			.Add_new(Xow_ns_.Tid__module, Xow_ns_.Key__module).Add_new(Xow_ns_.Tid__module_talk, Xow_ns_.Key__module_talk)
 			.Add_defaults()
 			;
 		rv.Init();

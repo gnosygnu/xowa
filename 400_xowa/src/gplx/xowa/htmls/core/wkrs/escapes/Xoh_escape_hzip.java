@@ -20,12 +20,12 @@ import gplx.core.brys.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.hzips.stats.*;
 public class Xoh_escape_hzip implements Xoh_hzip_wkr {
 	public String Key() {return Xoh_hzip_dict_.Key__escape;}
-	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, Bry_parser parser, byte[] src, int hook_bgn) {// "    " -> 27,9,4
+	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm) {
 		stat_itm.Escape_add_one();
 		bfr.Add(Xoh_hzip_dict_.Bry__escape);
 	}
-	public int Decode(Bry_bfr bfr, Bry_parser parser, byte[] src, int hook_bgn) {
+	public int Decode(Bry_bfr bfr, Xoh_decode_ctx ctx, Bry_rdr rdr, byte[] src, int hook_bgn) {
 		bfr.Add_byte(Xoh_hzip_dict_.Escape);
-		return parser.Pos();
+		return rdr.Pos();
 	}
 }

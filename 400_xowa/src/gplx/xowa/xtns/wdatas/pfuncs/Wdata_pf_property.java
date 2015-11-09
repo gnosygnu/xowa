@@ -41,9 +41,9 @@ public class Wdata_pf_property extends Pf_func_base {
 		Wdata_pf_property_data data = new Wdata_pf_property_data();
 		data.Init_by_parse(ctx, src, caller, self, this, id);
 		Wdata_doc prop_doc = wdata_mgr.Pages_get(wiki, ttl, data); if (prop_doc == null) return; // NOTE: some pages will not exist in qid; EX: {{#property:P345}} for "Unknown_page" will not even had a qid; if no qid, then no pid
-		int pid = data.Id_int();
-		if (pid == Wdata_wiki_mgr.Pid_null)
-			pid = wdata_mgr.Pids_get(wiki.Wdata_wiki_lang(), data.Id());
+		int pid = data.Id_int();			// check if arg is number; EX: {{#property:p1}}
+		if (pid == Wdata_wiki_mgr.Pid_null)	// arg is name of property; EX: {{#property:name}}
+			pid = wdata_mgr.Pids__get_by_name(wiki.Wdata_wiki_lang(), data.Id());
 		if (pid == Wdata_wiki_mgr.Pid_null) {Print_self(app.Usr_dlg(), bfr, src, self, "prop_not_found", "prop id not found: ~{0} ~{1} ~{2}", wiki.Domain_str(), ttl.Page_db_as_str(), data.Id()); return;}
 		Wdata_claim_grp prop_grp = prop_doc.Claim_list_get(pid); if (prop_grp == null) return;// NOTE: some props may not exist; EX: {{#property:P345}} for "Unknown_movie" may have a qid, but doesn't have a defined pid
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, wiki.Wdata_wiki_lang()); // NOTE: was ctx.Cur_page().Lang().Key_bry(), but fails in simplewiki; DATE:2013-12-02

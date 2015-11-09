@@ -131,13 +131,13 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		}
 
 		// dump and exit if MediaWiki message;
-		if	(ns_id == Xow_ns_.Id_mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
+		if	(ns_id == Xow_ns_.Tid__mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			bfr.Add(Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
 
 		// if [[File]], add boilerplate header; note that html is XOWA-generated so does not need to be tidied
-		if (ns_id == Xow_ns_.Id_file) app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
+		if (ns_id == Xow_ns_.Tid__file) app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 
 		// get separate bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		Bry_bfr tidy_bfr = app.Utl__bfr_mkr().Get_m001();
@@ -147,7 +147,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			wiki.Html_mgr().Html_wtr().Write_all(tidy_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Id_category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, tidy_bfr);
+		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, tidy_bfr);
 
 		// tidy html
 		gplx.xowa.htmls.core.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
@@ -180,7 +180,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		tmp_bfr.Clear();
 	}
 	private void Write_body_edit(Bry_bfr bfr, byte[] data_raw, int ns_id, byte page_tid) {
-		if	(	ns_id == Xow_ns_.Id_mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
+		if	(	ns_id == Xow_ns_.Tid__mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			&&	page_tid == Xow_page_tid.Tid_wikitext
 			)
 			data_raw = Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw);

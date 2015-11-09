@@ -21,8 +21,8 @@ import gplx.xowa.wikis.nss.*;
 public class Xotdb_fsys_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xow_fsys_mgr_fxt fxt = new Xow_fsys_mgr_fxt();
 	@Test  public void Basic() {
-		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.N).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page/00/00/00/01/0000000123.xdat");
-		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.Y).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page_zip/00/00/00/01/0000000123.zip");
+		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.N).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page/00/00/00/01/0000000123.xdat");
+		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.Y).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page_zip/00/00/00/01/0000000123.zip");
 	}
 }
 class Xow_fsys_mgr_fxt {

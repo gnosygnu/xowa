@@ -33,7 +33,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		wiki.Init_db_mgr();
 		Xowd_page_tbl page_core_tbl = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
 		Db_rdr rdr = page_core_tbl.Conn().Stmt_select_order(page_core_tbl.Tbl_name(), String_.Ary(page_core_tbl.Fld_page_title(), page_core_tbl.Fld_page_id()), String_.Ary(page_core_tbl.Fld_page_ns()), page_core_tbl.Fld_page_title())
-			.Crt_int(page_core_tbl.Fld_page_ns(), Xow_ns_.Id_category)
+			.Crt_int(page_core_tbl.Fld_page_ns(), Xow_ns_.Tid__category)
 			.Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

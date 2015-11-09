@@ -33,7 +33,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_file_lnki_temp;}
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
-	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_.Ary(Xow_ns_.Id_main);
+	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_.Ary(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
 		cfg_tbl.Delete_all();
@@ -103,7 +103,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		page.Bldr__ns_ord_(ns_ord);
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
 		page.Redlink_lnki_list().Clear();
-		if (ns.Id_tmpl())
+		if (ns.Id_is_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
@@ -156,7 +156,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
 			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
-		if (lnki.Ns_id() == Xow_ns_.Id_media)
+		if (lnki.Ns_id() == Xow_ns_.Tid__media)
 			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
 		tbl.Insert_cmd_by_batch(ctx.Cur_page().Bldr__ns_ord(), ctx.Cur_page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
 	}
@@ -188,7 +188,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	}
 	public static byte[] Xto_commons(boolean ns_file_is_case_match_all, Xowe_wiki commons_wiki, byte[] ttl_bry) {
 		if (!ns_file_is_case_match_all) return null;	// return "" if wiki matches common
-		Xoa_ttl ttl = Xoa_ttl.parse(commons_wiki, Xow_ns_.Id_file, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse(commons_wiki, Xow_ns_.Tid__file, ttl_bry);
 		byte[] rv = ttl.Page_db();
 		return Bry_.Eq(rv, ttl_bry) ? null : rv;
 	}

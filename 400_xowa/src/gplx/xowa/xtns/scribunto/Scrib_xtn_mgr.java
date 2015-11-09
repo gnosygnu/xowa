@@ -75,6 +75,4 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 	}
 	public static Err err_(String fmt, Object... args)						{return Err_.new_wo_type(fmt, args).Trace_ignore_add_1_();}
 	public static Err err_(Exception e, String msg, Object... args)	{return Err_.new_exc(e, "xo", msg, args).Trace_ignore_add_1_();}
-	public static final int Ns_id_module = 828, Ns_id_module_talk = 829;
-	public static final String Ns_name_module = "Module", Ns_name_module_talk = "Module talk";
 }

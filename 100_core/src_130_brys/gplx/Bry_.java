@@ -286,8 +286,13 @@ public class Bry_ {
 		return String_.new_u8(ary);
 	}
 	public static byte[] Mid_safe(byte[] src, int bgn, int end) {
-		try {return Mid(src, bgn, end);}
-		catch (Exception e) {Err_.Noop(e); return Bry_.Add_w_dlm(Byte_ascii.Space, Bry_.new_by_int(bgn), Bry_.new_by_int(end));}
+		if (src == null) return null;
+		int src_len = src.length;
+		if		(bgn < 0)			bgn = 0;
+		if		(end >= src_len)	end = src_len;
+		if		(bgn > end) bgn = end;
+		else if (end < bgn) end = bgn;
+		return Mid(src, bgn, end);
 	}
 	public static byte[] Mid(byte[] src, int bgn) {return Mid(src, bgn, src.length);}
 	public static byte[] Mid_or(byte[] src, int bgn, int end, byte[] or) {

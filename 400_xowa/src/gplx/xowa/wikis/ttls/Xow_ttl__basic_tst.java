@@ -19,8 +19,8 @@ package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_ttl__basic_tst {
 	@Before public void init() {fxt.Reset();} private Xow_ttl_fxt fxt = new Xow_ttl_fxt();
-	@Test   public void Ns()						{fxt.Init_ttl("Help:Test")		.Expd_ns_id(Xow_ns_.Id_help).Expd_page_txt("Test").Test();}
-	@Test   public void Ns_false()					{fxt.Init_ttl("Helpx:Test")		.Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("Helpx:Test").Test();}
+	@Test   public void Ns()						{fxt.Init_ttl("Help:Test")		.Expd_ns_id(Xow_ns_.Tid__help).Expd_page_txt("Test").Test();}
+	@Test   public void Ns_false()					{fxt.Init_ttl("Helpx:Test")		.Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("Helpx:Test").Test();}
 	@Test   public void Ns_multiple()				{fxt.Init_ttl("Help:Talk:test")	.Expd_page_txt("Talk:test").Test();}
 	@Test   public void Full_txt()					{fxt.Init_ttl("Help:a & b")		.Expd_full_txt("Help:A & b").Test();}					// preserve
 	@Test   public void Full_url()					{fxt.Init_ttl("Help:a & b")		.Expd_full_url("Help:A_%26_b").Test();}					// escape
@@ -48,10 +48,10 @@ public class Xow_ttl__basic_tst {
 	@Test   public void Force_literal_link_y()		{fxt.Init_ttl(":Help:test")		.Expd_force_literal_link(1).Expd_page_txt("Test").Test();}
 	@Test   public void Force_literal_link_n()		{fxt.Init_ttl( "Help:test")		.Expd_force_literal_link(0).Expd_page_txt("Test").Test();}
 	@Test   public void Force_literal_link_y_2()	{fxt.Init_ttl("::Help:test")	.Expd_force_literal_link(1).Expd_page_txt("Test").Test();}	// PURPOSE: 2nd initial colon should be ignored; EX:mw:MediaWiki; [[::MediaWiki]]; DATE:2013-12-14
-	@Test   public void All_page()					{fxt.Init_ttl("test")			.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("Test").Expd_leaf_txt("Test").Expd_anch_txt("").Test();}
-	@Test   public void All_ns()					{fxt.Init_ttl("Help:test")		.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Id_help).Expd_page_txt("Test").Expd_leaf_txt("Test").Expd_anch_txt("").Test();}
-	@Test   public void Special()					{fxt.Init_ttl("Special:Random").Expd_ns_id(Xow_ns_.Id_special).Expd_page_txt("Random").Test();}
-	@Test   public void Special_xowa()				{fxt.Init_ttl("Special:xowa/Search/Ttl").Expd_ns_id(Xow_ns_.Id_special).Expd_page_txt("Xowa/Search/Ttl").Test();}
+	@Test   public void All_page()					{fxt.Init_ttl("test")			.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("Test").Expd_leaf_txt("Test").Expd_anch_txt("").Test();}
+	@Test   public void All_ns()					{fxt.Init_ttl("Help:test")		.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Tid__help).Expd_page_txt("Test").Expd_leaf_txt("Test").Expd_anch_txt("").Test();}
+	@Test   public void Special()					{fxt.Init_ttl("Special:Random").Expd_ns_id(Xow_ns_.Tid__special).Expd_page_txt("Random").Test();}
+	@Test   public void Special_xowa()				{fxt.Init_ttl("Special:xowa/Search/Ttl").Expd_ns_id(Xow_ns_.Tid__special).Expd_page_txt("Xowa/Search/Ttl").Test();}
 	@Test   public void Comment()					{fxt.Init_ttl("Ab<!--b-->").Expd_page_txt("Ab").Test();}
 	@Test   public void Comment_eos()				{fxt.Init_ttl("Ab<!--b--").Expd_page_txt(null).Test();}
 	@Test   public void Ns_case() {// PURPOSE: lowercase ns should be converted to proper case; EX: fr.w:Project:Sandbox (redirect link); en.w:Periclimenes imperator; [[commons:category:Periclimenes imperator|''Periclimenes imperator'']]; DATE: 2013-01-27

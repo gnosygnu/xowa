@@ -51,7 +51,7 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Tail_upper()		{fxt.Test_parse_page_wiki("[[a|b]]A" , fxt.tkn_lnki_(0, 7).Tail_bgn_(-1), fxt.tkn_txt_(7, 8));}	// make sure trie is case-insensitive
 	@Test  public void Tail_image()		{fxt.Test_parse_page_wiki("[[Image:a|b]]c", fxt.tkn_lnki_(0, 13).Tail_bgn_(-1).Tail_end_(-1), fxt.tkn_txt_(13, 14));}	// NOTE: this occurs on some pages;
 	@Test  public void Image() {
-		fxt.Test_parse_page_wiki("[[Image:a]]"				, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file).Trg_tkn_(fxt.tkn_arg_val_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))));
+		fxt.Test_parse_page_wiki("[[Image:a]]"				, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file).Trg_tkn_(fxt.tkn_arg_val_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))));
 		fxt.Test_parse_page_wiki("[[Image:a|border]]"		, fxt.tkn_lnki_().Border_(Bool_.Y_byte));
 		fxt.Test_parse_page_wiki("[[Image:a|thumb]]"		, fxt.tkn_lnki_().ImgType_(Xop_lnki_type.Id_thumb));
 		fxt.Test_parse_page_wiki("[[Image:a|left]]"			, fxt.tkn_lnki_().HAlign_(Xop_lnki_align_h.Left));
@@ -61,7 +61,7 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_wiki("[[Image:a|alt=b]]"			, fxt.tkn_lnki_().Alt_tkn_(fxt.tkn_arg_nde_().Key_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(10, 13))).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(14, 15)))));
 		fxt.Test_parse_page_wiki("[[Image:a|link=a]]"		, fxt.tkn_lnki_().Link_tkn_(fxt.tkn_arg_nde_().Key_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(10, 14))).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(15, 16)))));
 		fxt.Test_parse_page_wiki("[[Image:a|thumb|alt=b|c d]]"
-			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file)
+			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file)
 			.Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))))
 			.Alt_tkn_(fxt.tkn_arg_nde_().Key_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(16, 19))).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(20, 21))))
 			.Caption_tkn_(fxt.tkn_arg_nde_(22, 25).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(22, 23), fxt.tkn_space_(23, 24), fxt.tkn_txt_(24, 25)))))
@@ -76,17 +76,17 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test  public void Recurse() {
 		fxt.Test_parse_page_wiki("[[Image:a|b-[[c]]-d]]"
-			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file)
+			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file)
 			.Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))))
 			.Caption_tkn_(fxt.tkn_arg_nde_(10, 19).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(10, 12), fxt.tkn_lnki_(12, 17), fxt.tkn_txt_(17, 19))))
 		);
 	}
 	@Test  public void Outliers() {
-		fxt.Test_parse_page_wiki("[[Image:a=b.svg|thumb|10px]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file).Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9), fxt.tkn_eq_(9), fxt.tkn_txt_(10, 15)))));
-		fxt.Test_parse_page_wiki("[[Category:a|b]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_category));
+		fxt.Test_parse_page_wiki("[[Image:a=b.svg|thumb|10px]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file).Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9), fxt.tkn_eq_(9), fxt.tkn_txt_(10, 15)))));
+		fxt.Test_parse_page_wiki("[[Category:a|b]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__category));
 	}
 	@Test  public void Exc_caption_has_eq() {
-		fxt.Test_parse_page_wiki("[[Image:a.svg|thumb|a=b]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file)
+		fxt.Test_parse_page_wiki("[[Image:a.svg|thumb|a=b]]", fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file)
 			.Caption_tkn_(fxt.tkn_arg_nde_(20, 23).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(20, 21), fxt.tkn_eq_(21), fxt.tkn_txt_(22, 23)))));
 	}
 	@Test  public void Border_with_space_should_not_be_caption() {// happens with {{flag}}; EX: [[Image:Flag of Argentina.svg|22x20px|border |alt=|link=]]

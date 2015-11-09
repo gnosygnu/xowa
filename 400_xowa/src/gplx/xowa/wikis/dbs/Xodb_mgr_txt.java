@@ -29,7 +29,7 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_txt load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_txt save_mgr;
 	public DateAdp Dump_date_query() {
-		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, 0);
+		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 0);
 		return Io_mgr.Instance.QueryFil(url).ModifiedTime();
 	}
 	public byte Category_version() {

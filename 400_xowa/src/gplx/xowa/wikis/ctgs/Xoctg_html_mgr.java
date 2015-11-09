@@ -95,7 +95,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
 		byte[] all_label = msg_mgr.Val_by_id_args(fmtr_all.Msg_id_label(), view_ctg.Name());
 		byte[] all_stats = msg_mgr.Val_by_id_args(fmtr_all.Msg_id_stats(), view_grp.Len(), view_grp.Total());
-		Xoa_ttl ctg_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_category, view_ctg.Name());
+		Xoa_ttl ctg_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__category, view_ctg.Name());
 		byte[] all_navs = fmtr_all.Bld_bwd_fwd(wiki, ctg_ttl, view_grp);
 		fmtr_grp.Init_from_all(wiki, lang, view_ctg, fmtr_all, view_grp);
 		fmtr_all.Html_all().Bld_bfr_many(bfr, fmtr_all.Div_id(), all_label, all_stats, all_navs, lang.Key_bry(), lang.Dir_ltr_bry(), fmtr_grp);

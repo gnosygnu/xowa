@@ -69,7 +69,7 @@ public class Xog_history_mgr {
 		byte[] page = pg.Ttl().Full_url();		// get page_name only (no anchor; no query args)
 		byte[] anch = pg.Url().Anch_bry();
 		byte[] qarg = pg.Url().Qargs_mgr().To_bry();
-		boolean redirect_force = pg.Url().Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);
+		boolean redirect_force = pg.Url().Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no);
 		String bmk_pos = pg.Html_data().Bmk_pos();
 		if (bmk_pos == null) bmk_pos = Xog_history_itm.Html_doc_pos_toc;	// never allow null doc_pos; set to top
 		return new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);

@@ -34,7 +34,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 		else if (Bry_.Eq(fld_key, Fld_cl_timestamp)) {
 			date_parser.Parse_iso8651_like(cur_modified_on, src, fld_bgn, fld_end);
 			cur_date = fld_end - fld_bgn == 0	// ignore null dates added by ctg_v1
-				? 0 : Bit_.Xto_int_date_short(cur_modified_on);
+				? 0 : Int_flag_bldr_.To_int_date_short(cur_modified_on);
 		}
 		else if (Bry_.Eq(fld_key, Fld_cl_sortkey)) {
 			int nl_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl, fld_bgn, fld_end);

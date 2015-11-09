@@ -26,10 +26,15 @@ public class Html_atr {
 	public byte[] Key() {return key;} private final byte[] key;
 	public int Val_bgn() {return val_bgn;} private final int val_bgn;
 	public int Val_end() {return val_end;} private final int val_end;
+	public boolean Val_exists() {return val_end > val_bgn;}
 	public byte[] Val() {
 		if (val == null)
 			val = Bry_.Mid(src, val_bgn, val_end);
 		return val;
 	}	private byte[] val;
-	public static final Html_atr Noop = new Html_atr(-1, Bry_.Empty, Bry_.Empty, Bry_.Empty, 0, 0);
+	public void Html__add(Bry_bfr bfr) {
+		if (val_end > val_bgn)
+			bfr.Add_mid(src, val_bgn, val_end);
+	}
+	public static final Html_atr Noop = new Html_atr(-1, Bry_.Empty, Bry_.Empty, Bry_.Empty, -1, -1);
 }

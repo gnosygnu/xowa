@@ -30,6 +30,6 @@ public class Xows_special_meta {
 	public String Ttl_str() {return ttl_str;} private final String ttl_str;
 	public byte[] Ttl_bry() {return ttl_bry;} private final byte[] ttl_bry;
 	public boolean Match_ttl(Xoa_ttl ttl) {
-		return ttl.Ns().Id_special() && Bry_.Eq(ttl.Root_txt(), key_bry);
+		return ttl.Ns().Id_is_special() && Bry_.Eq(ttl.Root_txt(), key_bry);
 	}
 }

@@ -64,13 +64,13 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public boolean Load_by_id	(Xowd_page_itm rv, int id) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, rv, bgn, end);}
 	public boolean Load_ctg_v1(Xoctg_view_ctg rv, byte[] ctg_bry) {
-		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Id_category, ctg_bry); if (cat_page_id == Xowd_page_itm.Id_null) return false;			
+		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_bry); if (cat_page_id == Xowd_page_itm.Id_null) return false;			
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
 		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
 	}
 	public boolean Load_ctg_v2(Xoctg_data_ctg rv, byte[] ctg_bry) {throw Err_.new_unimplemented();}
 	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url ctg_url, byte[] ctg_ttl, int load_max) {
-		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Id_category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
+		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return;
 		List_adp list = List_adp_.new_();
 		Load_ctg_v2a_db_retrieve(rv, ctg_url, cat_page_id, load_max, ctg.File_idx(), list);
@@ -143,7 +143,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public int Load_ctg_count(byte[] ttl) {
 		if (db_mgr.Core_data_mgr().Db__cat_core() == null) return 0;
-		int page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Id_category, ttl);
+		int page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ttl);
 		if (page_id == Xowd_page_itm.Id_null) return 0;	// title not found; return 0;
 		return db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Select(page_id).Count_all();
 	}
@@ -164,7 +164,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				hash.Add(ttl, page);
 		}
 		len = hash.Count();	// must update len (!hash.Has() may have skipped titles)
-		db_mgr.Core_data_mgr().Tbl__page().Select_in__ttl(Cancelable_.Never, hash, Xow_ns_.Id_category, 0, len);
+		db_mgr.Core_data_mgr().Tbl__page().Select_in__ttl(Cancelable_.Never, hash, Xow_ns_.Tid__category, 0, len);
 		Ordered_hash hash2 = Ordered_hash_.New();
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);

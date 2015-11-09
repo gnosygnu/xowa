@@ -25,12 +25,7 @@ public class Xoh_lnke_html {
 		int href_bgn = lnke.Lnke_href_bgn(), href_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		byte lnke_type = Calc_type(lnke);
 		if (!hctx.Mode_is_alt()) {					// do not write "<a ...>" if mode is alt
-			if (hctx.Mode_is_hdump()) {
-				bfr.Add(Xoh_html_dict_.Hook__lnke);	// "<a data-xotype='lnke"
-				bfr.Add_byte(lnke_type).Add(Bry__href);
-			}
-			else
-				bfr.Add(Xoh_consts.A_bgn);
+			bfr.Add(Xoh_consts.A_bgn);
 			if (Write_href(bfr, ctx, src, lnke, href_bgn, href_end, proto_is_xowa))
 				bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_type));
 			bfr.Add(Xoh_lnke_dict_.Html__rhs_end);
@@ -83,9 +78,6 @@ public class Xoh_lnke_html {
 				html_wtr.Write_tkn(bfr, ctx, hctx, src, lnke, i, lnke.Subs_get(i));
 		}
 	}
-	private static final byte[]
-	  Bry__href				= Bry_.new_a7("' href=\"")
-	;
 	private static byte Calc_type(Xop_lnke_tkn lnke) {
 		if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)
 			return Xoh_lnke_dict_.Type__free;

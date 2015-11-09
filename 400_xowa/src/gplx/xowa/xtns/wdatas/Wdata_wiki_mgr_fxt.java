@@ -117,7 +117,7 @@ public class Wdata_wiki_mgr_fxt {
 	public void Test_get_low_qid(String qid, String expd) {
 		Tfds.Eq(expd, String_.new_a7(Wdata_wiki_mgr.Get_low_qid(Bry_.new_a7(qid))));
 	}
-	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse(wiki, Xow_ns_.Id_main, Bry_.new_u8(ttl_str)), expd);}
+	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, Bry_.new_u8(ttl_str)), expd);}
 	public void Test_link(Xoa_ttl ttl, String expd) {
 		byte[] qid_ttl = wdata_mgr.Qids_get(wiki, ttl);
 		Tfds.Eq(expd, String_.new_u8(qid_ttl));

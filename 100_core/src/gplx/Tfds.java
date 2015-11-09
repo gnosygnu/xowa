@@ -212,10 +212,17 @@ class TfdsMsgBldr {
 		}
 		for (int i = 0; i < list.Count(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
+			String eq_str = itm.Eq() ? "==" : "";
+			if (!itm.Eq()) {
+//					if (lhsLenMax < 8 )
+//						eq_str = "!=";
+//					else
+				eq_str = "\n!=   ";
+			}
 			sb.Add_fmt_line("{0}: {1} {2} {3}"
 				, Int_.To_str_pad_bgn_zero(itm.Idx(), 4)
 				, String_.PadBgn(itm.Lhs(), lhsLenMax, " ")
-				, itm.Eq() ? "==" : "!="
+				, eq_str
 				, String_.PadBgn(itm.Rhs(), rhsLenMax, " ")
 				);
 		}

@@ -34,7 +34,7 @@ public class Popup_history_page implements Xows_page {
 	}
 	private Bry_fmtr fmtr_main = Bry_fmtr.new_("<a href='~{href}'>~{ttl}</a>\n\n", "href", "ttl");	// NOTE: need to use anchor (as opposed to lnki or lnke) b/c xwiki will not work on all wikis
 	public static boolean Ttl_chk(Xoa_ttl ttl) {
-		return	ttl.Ns().Id_special()
+		return	ttl.Ns().Id_is_special()
 			&&	Bry_.Eq(ttl.Page_db(), Xows_special_meta_.Itm__popup_history.Key_bry());
 	}
 }

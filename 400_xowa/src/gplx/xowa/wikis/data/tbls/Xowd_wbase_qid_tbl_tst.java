@@ -22,9 +22,9 @@ public class Xowd_wbase_qid_tbl_tst {
 	private final Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Space() {
-		fxt.Exec_insert("enwiki", Xow_ns_.Id_main, "A B", "q1");
-		fxt.Test_select("enwiki", Xow_ns_.Id_main, "A B", "q1");
-		fxt.Test_select("enwiki", Xow_ns_.Id_main, "A_B", "q1");
+		fxt.Exec_insert("enwiki", Xow_ns_.Tid__main, "A B", "q1");
+		fxt.Test_select("enwiki", Xow_ns_.Tid__main, "A B", "q1");
+		fxt.Test_select("enwiki", Xow_ns_.Tid__main, "A_B", "q1");
 	}
 }
 class Xowd_wbase_qid_tbl_fxt {

@@ -47,7 +47,7 @@ public class Xotdb_page_raw_parser {
 		page.Id_(id);
 		read = rdr.Read_next(); if (!read) throw Err_.new_wo_type("could not read timestamp");
 		int timestamp = Base85_.To_int_by_bry(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);
-		page.Modified_on_(Bit_.Xto_date_short(timestamp));
+		page.Modified_on_(Int_flag_bldr_.To_date_short(timestamp));
 		read = rdr.Read_next(); if (!read) throw Err_.new_wo_type("could not read ttl");
 		byte[] ttl = Bry_.Mid(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);
 		page.Ttl_(ttl, ns_mgr);

@@ -179,8 +179,8 @@ public class Gallery_itm_parser {
 					)
 					cur_itm.Reset();
 				else {
-					if (!ttl.Ns().Id_file_or_media())	// ttl does not have "File:"; MW allows non-ns names; EX: "A.png" instead of "File:A.png"; DATE:2013-11-18 
-						ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_file, ttl_bry);
+					if (!ttl.Ns().Id_is_file_or_media())	// ttl does not have "File:"; MW allows non-ns names; EX: "A.png" instead of "File:A.png"; DATE:2013-11-18 
+						ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__file, ttl_bry);
 					cur_itm.Ttl_(ttl);
 					cur_itm.Ext_(Xof_ext_.new_by_ttl_(ttl_bry));
 				}

@@ -47,7 +47,7 @@ class Xosrh_page_mgr_fxt {
 		for (int i = bgn; i < end; i++) {
 			byte[] id_bry = new byte[5];	// NOTE: do not reuse; will break hive_mgr
 			Base85_.Set_bry(i, id_bry, 0, 5);
-			tmp_itm.Ns_id_(Xow_ns_.Id_main).Init(i, Bry_.To_a7_bry(i, 0), false, 10, 0, i - bgn);
+			tmp_itm.Ns_id_(Xow_ns_.Tid__main).Init(i, Bry_.To_a7_bry(i, 0), false, 10, 0, i - bgn);
 			Xotdb_page_itm_.Txt_id_save(tmp_bfr, tmp_itm);
 			hive_mgr.Create(id_bry, tmp_bfr.To_bry_and_clear(), null);
 		}

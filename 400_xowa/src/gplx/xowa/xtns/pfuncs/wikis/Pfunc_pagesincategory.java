@@ -28,7 +28,7 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 		if (Bry_.Len_eq_0(ctg_ttl_bry)) {bfr.Add_int_digits(1, 0); return;}			// no title; EX: "{{PAGESINCATEGORY:}}"
 		Xowe_wiki wiki = ctx.Wiki();
 		Xowd_db_mgr core_data_mgr = wiki.Data__core_mgr();
-		int ctg_id = core_data_mgr.Tbl__page().Select_id(Xow_ns_.Id_category, Xoa_ttl.Replace_spaces(ctg_ttl_bry));
+		int ctg_id = core_data_mgr.Tbl__page().Select_id(Xow_ns_.Tid__category, Xoa_ttl.Replace_spaces(ctg_ttl_bry));
 		if (ctg_id == Xowd_page_itm.Id_null) {bfr.Add_int_digits(1, 0); return;}	// category doesn't exist; EX: "{{PAGESINCATEGORY:Unknown_category}}"
 		Xowd_category_itm ctg_itm = core_data_mgr.Db__cat_core().Tbl__cat_core().Select(ctg_id);
 		if (ctg_itm == null) {bfr.Add_int_digits(1, 0); return;}					// category counts don't exist; shouldn't happen

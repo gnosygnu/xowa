@@ -57,7 +57,10 @@ public class Gallery_mgr_base_basic_tst {
 		, "  </li>"
 		, "</ul>"
 		));
-		fxt.Test_html_modules_js("");
+		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
+		( ""
+		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
+		));
 	}
 	@Test  public void Tmpl() {
 		fxt.Fxt().Init_defn_add("test_tmpl", "b");
@@ -112,6 +115,7 @@ public class Gallery_mgr_base_basic_tst {
 		fxt.Test_html_frag("<gallery mode=packed heights=300px>File:A.png|a</gallery>", "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-packed\">");
 		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
 		( ""
+		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
 		, "    var xowa_global_values = {"
 		, "      'gallery-packed-enabled' : true,"

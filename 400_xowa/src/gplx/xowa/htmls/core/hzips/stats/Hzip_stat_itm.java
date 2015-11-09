@@ -39,14 +39,14 @@ public class Hzip_stat_itm {
 	public int Hdr_6() {return hdr_6;} private int hdr_6;
 	public int Space() {return space;} public void Space_add(int v) {space += v;} private int space;
 	public int Escape() {return escape;} public void Escape_add_one() {++escape;} private int escape;
-	public void Hdr_add(byte hdr_num) {
+	public void Hdr_add(int hdr_num) {
 		switch (hdr_num) {
-			case 1:			++hdr_1; break;
-			case 2:			++hdr_2; break;
-			case 3:			++hdr_3; break;
-			case 4:			++hdr_4; break;
-			case 5:			++hdr_5; break;
-			case 6:			++hdr_6; break;
+			case 1:		++hdr_1; break;
+			case 2:		++hdr_2; break;
+			case 3:		++hdr_3; break;
+			case 4:		++hdr_4; break;
+			case 5:		++hdr_5; break;
+			case 6:		++hdr_6; break;
 			default:	throw Err_.new_unhandled(hdr_num);
 		}
 	}

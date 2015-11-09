@@ -46,7 +46,7 @@ public class Xoud_history_mgr implements GfoInvkAble {
 	}	private static final String Invk_update = "update";
 	public static boolean Skip_history(Xoa_ttl ttl) {
 		byte[] page_db = ttl.Page_db();
-		return	(	ttl.Ns().Id_special()
+		return	(	ttl.Ns().Id_is_special()
 				&&	(	Bry_.Eq(page_db, gplx.xowa.users.history.Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
 					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__popup_history.Key_bry())
 					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__default_tab.Key_bry())

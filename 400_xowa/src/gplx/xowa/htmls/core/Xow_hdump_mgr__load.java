@@ -42,7 +42,7 @@ public class Xow_hdump_mgr__load {
 			hpg.Init(hpg.Wiki(), hpg.Url(), ttl, tmp_dbpg.Id());
 			if (!html_db.Tbl__html_page().Select_by_page(hpg)) return Load__fail(hpg);	// nothing in "html_page" table
 			byte[] src = hzip_mgr.Parse(hpg.Url_bry_safe(), hpg.Body_flag(), hpg.Body());
-			hpg.Body_(make_mgr.Parse(hpg, src));
+			hpg.Body_(make_mgr.Parse(src, hpg, hpg.Wiki()));
 			return true;
 		}
 	}

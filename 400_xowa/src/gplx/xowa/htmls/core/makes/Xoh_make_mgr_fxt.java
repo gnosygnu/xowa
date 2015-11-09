@@ -61,7 +61,7 @@ class Xoh_make_mgr_fxt {
 	}
 	public Xoh_make_mgr_fxt Test_html(String expd) {
 		if (img_list.Count() > 0) hpg.Img_itms_((Xohd_img_itm__base[])img_list.To_ary_and_clear(Xohd_img_itm__base.class));
-		byte[] actl = hswap_mgr.Parse(hpg, hpg.Body());
+		byte[] actl = hswap_mgr.Parse(hpg.Body(), hpg, wiki);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 		return this;
 	}

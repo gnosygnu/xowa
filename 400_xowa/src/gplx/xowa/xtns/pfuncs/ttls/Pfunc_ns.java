@@ -37,21 +37,21 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 					o = canonical.Get_by_mid(val_dat_ary, 0, val_dat_ary_len);				
 			if (o != null) {
 				Xow_ns itm = (Xow_ns)o;
-				if (itm.Id() == Xow_ns_.Id_file) itm = ctx.Wiki().Ns_mgr().Ns_file();	// handles "Image" -> "File"
-				bfr.Add(encode ? itm.Name_enc() : itm.Name_txt());
+				if (itm.Id() == Xow_ns_.Tid__file) itm = ctx.Wiki().Ns_mgr().Ns_file();	// handles "Image" -> "File"
+				bfr.Add(encode ? itm.Name_enc() : itm.Name_ui());
 			}
 		}
 		else {
 			Xow_ns itm = (Xow_ns)ctx.Wiki().Ns_mgr().Ids_get_or_null(ns_id);
 			if (itm == null) return;	// occurs when ns_id is not known; EX: {{ns:999}}; SEE: Wiktionary:Grease pit archive/2007/October; "{{ns:114}}"
-			bfr.Add(encode ? itm.Name_enc() : itm.Name_txt());
+			bfr.Add(encode ? itm.Name_enc() : itm.Name_ui());
 		}
 	}
 	private static Hash_adp_bry canonical;
 	private static void canonical_() {
 		canonical = Hash_adp_bry.ci_a7();	// ASCII:canonical English names
-		for (Xow_ns ns : Xow_ns_.Canonical)
-			canonical_add(ns.Id(), ns.Name_bry());
+		for (Xow_ns ns : Xow_ns_canonical_.Ary)
+			canonical_add(ns.Id(), ns.Name_db());
 	}
 	private static void canonical_add(int ns_id, byte[] ns_name) {
 		Xow_ns ns = new Xow_ns(ns_id, Xow_ns_case_.Tid__all, ns_name, false);

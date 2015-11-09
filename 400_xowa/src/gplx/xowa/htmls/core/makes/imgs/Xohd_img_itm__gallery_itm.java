@@ -35,7 +35,7 @@ public class Xohd_img_itm__gallery_itm extends Xohd_img_itm__base {
 			.Add_int_variable(img_pad).Add_byte_pipe()
 			;
 	}
-	@Override public void Data_parse(Bry_rdr rdr) {
+	@Override public void Data_parse(Bry_rdr_old rdr) {
 		super.Data_parse(rdr);
 		this.box_w = rdr.Read_int_to_pipe();
 		this.img_w = rdr.Read_int_to_pipe();

@@ -140,20 +140,20 @@ public class Scrib_lib_site implements Scrib_lib {
 	}
 	private KeyVal[] Bld_ns(Xowe_wiki wiki, Xow_ns ns, int ns_id) {
 		int len = 16;
-		if		(ns_id <  Xow_ns_.Id_main) len = 14;
-		else if (ns_id == Xow_ns_.Id_main) len = 17;
+		if		(ns_id <  Xow_ns_.Tid__main) len = 14;
+		else if (ns_id == Xow_ns_.Tid__main) len = 17;
 		KeyVal[] rv = new KeyVal[len];
 		rv[ 0] = KeyVal_.new_("id"						, ns_id);
-		rv[ 1] = KeyVal_.new_("name"					, ns.Name_txt());
-		rv[ 2] = KeyVal_.new_("canonicalName"			, ns.Name_str());				// strtr( $canonical, "_", " " ),
+		rv[ 1] = KeyVal_.new_("name"					, ns.Name_ui());
+		rv[ 2] = KeyVal_.new_("canonicalName"			, ns.Name_db_str());			// strtr( $canonical, "_", " " ),
 		rv[ 3] = KeyVal_.new_("hasSubpages"				, ns.Subpages_enabled());		// MWNs::hasSubpages( $ns ),
 		rv[ 4] = KeyVal_.new_("hasGenderDistinction"	, ns.Is_gender_aware());		// MWNs::hasGenderDistinction( $ns ),
 		rv[ 5] = KeyVal_.new_("isCapitalized"			, ns.Is_capitalized());			// MWNs::isCapitalized( $ns ),
 		rv[ 6] = KeyVal_.new_("isContent"				, ns.Is_content());				// MWNs::isContent( $ns ),
 		rv[ 7] = KeyVal_.new_("isIncludable"			, ns.Is_includable());			// !MWNs::isNonincludable( $ns ),
 		rv[ 8] = KeyVal_.new_("isMovable"				, ns.Is_movable());				// MWNs::isMovable( $ns ),
-		rv[ 9] = KeyVal_.new_("isSubject"				, ns.Id_subj());
-		rv[10] = KeyVal_.new_("isTalk"					, ns.Id_talk());
+		rv[ 9] = KeyVal_.new_("isSubject"				, ns.Id_is_subj());
+		rv[10] = KeyVal_.new_("isTalk"					, ns.Id_is_talk());
 		rv[11] = KeyVal_.new_("defaultContentModel"		, null);						// MWNs::getNsContentModel( $ns ), ASSUME: always null?
 		rv[12] = KeyVal_.new_("aliases"					, ns.Aliases_as_scrib_ary());	// DATE:2014-02-15
 		if (ns_id < 0)
@@ -162,7 +162,7 @@ public class Scrib_lib_site implements Scrib_lib {
 			rv[13] = KeyVal_.new_("subject"				, ns_id);						// MWNs::getSubject( $ns );
 			rv[14] = KeyVal_.new_("talk"				, ns.Id_talk_id());				// MWNs::getTalk( $ns );
 			rv[15] = KeyVal_.new_("associated"			, ns.Id_alt_id());				// MWNs::getAssociated( $ns );
-			if (ns_id == Xow_ns_.Id_main)
+			if (ns_id == Xow_ns_.Tid__main)
 				rv[16] = KeyVal_.new_("displayName"		, wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ns_blankns));	// MWNs::getAssociated( $ns );
 		}
 		return rv;

@@ -142,7 +142,7 @@ public class Xoa_css_extractor {
 		return true;
 	}	private static final byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
 	private boolean Css_wiki_generate_section(Bry_bfr bfr, byte[] ttl) {
-		byte[] page = page_fetcher.Get_by(Xow_ns_.Id_mediawiki, ttl);
+		byte[] page = page_fetcher.Get_by(Xow_ns_.Tid__mediawiki, ttl);
 		if (page == null) return false;
 		if (bfr.Len() != 0) bfr.Add_byte_nl().Add_byte_nl();	// add "\n\n" between sections; !=0 checks against first
 		Css_wiki_section_hdr.Bld_bfr_many(bfr, ttl);			// add "/*XOWA:MediaWiki:Common.css*/\n"

@@ -20,8 +20,8 @@ import org.junit.*; import gplx.core.ios.*; import gplx.xowa.wikis.nss.*;
 public class Xoa_css_extractor_wiki_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_css_extractor_fxt fxt = new Xoa_css_extractor_fxt();
 	@Test   public void Css_wiki_generate() {
-		fxt.Init_page(Xow_ns_.Id_mediawiki, "Common.css"					, "css_0");
-		fxt.Init_page(Xow_ns_.Id_mediawiki, "Vector.css"					, "css_1");
+		fxt.Init_page(Xow_ns_.Tid__mediawiki, "Common.css"					, "css_0");
+		fxt.Init_page(Xow_ns_.Tid__mediawiki, "Vector.css"					, "css_1");
 		fxt.Exec_css_wiki_setup();
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_wiki.css", String_.Concat_lines_nl
 		(	"/*XOWA:MediaWiki:Common.css*/"
@@ -36,7 +36,7 @@ public class Xoa_css_extractor_wiki_tst {
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_wiki.css", "");
 	}
 	@Test  public void Css_wiki_tab() {	// PURPOSE: swap out &#09; for xdat files
-		fxt.Init_page(Xow_ns_.Id_mediawiki, "Common.css"					, "a&#09;b");
+		fxt.Init_page(Xow_ns_.Tid__mediawiki, "Common.css"					, "a&#09;b");
 		fxt.Exec_css_wiki_setup();
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_wiki.css", String_.Concat_lines_nl
 		(	"/*XOWA:MediaWiki:Common.css*/"

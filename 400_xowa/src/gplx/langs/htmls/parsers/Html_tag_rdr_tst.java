@@ -31,6 +31,10 @@ public class Html_tag_rdr_tst {
 		fxt.Test__move_fwd_head(Html_tag_.Id__comment	, "<!--2-->")		; fxt.Test__pos("3");
 		fxt.Test__move_fwd_head(Html_tag_.Id__any		, "<div id='1'>")	; fxt.Test__pos("6");
 	}
+	@Test   public void Meta() {
+		fxt.Init("<!DOCTYPE html>1<div id='1'>2</div>3");
+		fxt.Test__move_fwd_head(Html_tag_.Id__div		, "<div id='1'>")	; fxt.Test__pos("2");
+	}
 	@Test   public void Recursive() {
 		fxt.Init("1<a>2<a>3</a>4</a>5");
 		fxt.Test__move_fwd_head(Html_tag_.Id__a		, "<a>")	; fxt.Test__pos("2");
@@ -39,6 +43,7 @@ public class Html_tag_rdr_tst {
 }
 class Html_tag_rdr_fxt {
 	private final Html_tag_rdr rdr = new Html_tag_rdr();
+//		private final Html_doc_log log = new Html_doc_log();
 	public void Init(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		rdr.Init(src_bry, 0, src_bry.length);

@@ -40,7 +40,7 @@ class Xoh_subpages_bldr_fxt {
 	public void Init() {
 		this.app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_tst_(app);
-		wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_help).Subpages_enabled_(true);
+		wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__help).Subpages_enabled_(true);
 	}
 	public void Test_bld(String ttl_str, String expd) {
 		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str)));

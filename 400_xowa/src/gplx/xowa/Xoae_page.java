@@ -26,7 +26,7 @@ public class Xoae_page implements Xoa_page {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
 		hdr_mgr = new Xow_hdr_mgr(this, Xoa_app_.Utl__encoder_mgr());
-		redlink_lnki_list = new Xopg_redlink_lnki_list(ttl.Ns().Id_module());
+		redlink_lnki_list = new Xopg_redlink_lnki_list(ttl.Ns().Id_is_module());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Null
 	public Xow_wiki					Wiki() {return wiki;}

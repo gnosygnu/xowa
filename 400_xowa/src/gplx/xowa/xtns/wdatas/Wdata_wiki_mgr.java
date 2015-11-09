@@ -75,9 +75,19 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		return Bry_.Len_eq_0(rv) ? null : rv;				// JAVA: convert Bry_.Empty to null
 	}
 	public Int_obj_val Pids_add(byte[] pids_key, int pid_id) {Int_obj_val rv = Int_obj_val.new_(pid_id); pids_cache.Add(pids_key, rv); return rv;}
-	public int Pids_get(byte[] lang_key, byte[] pid_name) {
+	public int Pids__parse_as_int_or_null(byte[] pid_ttl) {	// EX: "p123" -> "123"
+		int len = pid_ttl.length; if (len == 0) return Wdata_wiki_mgr.Pid_null;
+		byte ltr_p = pid_ttl[0];	// make sure 1st char is "P" or "p"
+		switch (ltr_p) {
+			case Byte_ascii.Ltr_P:
+			case Byte_ascii.Ltr_p: break;
+			default: return Wdata_wiki_mgr.Pid_null;
+		}
+		return Bry_.To_int_or(pid_ttl, 1, len, Wdata_wiki_mgr.Pid_null);
+	}
+	public int Pids__get_by_name(byte[] lang_key, byte[] pid_name) {
 		if (!enabled) return Pid_null;
-		byte[] pids_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);
+		byte[] pids_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);		// EX: "en|name"
 		Int_obj_val rv = (Int_obj_val)pids_cache.Get_by(pids_key);
 		if (rv == null) {
 			int pid_id = this.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name); if (pid_id == Pid_null) return Pid_null;
@@ -224,7 +234,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
 			case Xow_domain_tid_.Int__wikidata:
-				if (ns_id == Xow_ns_.Id_main || ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
+				if (ns_id == Xow_ns_.Tid__main || ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
 			case Xow_domain_tid_.Int__home:

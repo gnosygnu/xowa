@@ -185,7 +185,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xoae_page cur_page = tab.Page(); Xowe_wiki cur_wiki = tab.Wiki();
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
 		if (new_page.Missing()) return;
-		if (new_page.Ttl().Ns().Id_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
+		if (new_page.Ttl().Ns().Id_is_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
 			new_page = new_page.Wikie().Data_mgr().Load_page_by_ttl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt(), new_page.Ttl().Full_txt());

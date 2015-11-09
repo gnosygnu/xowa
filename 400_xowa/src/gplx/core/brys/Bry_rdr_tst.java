@@ -41,8 +41,8 @@ public class Bry_rdr_tst {
 	}
 }
 class Bry_rdr_fxt {
-	private Bry_rdr rdr;
-	public void Clear() {rdr = new Bry_rdr();}
+	private Bry_rdr_old rdr;
+	public void Clear() {rdr = new Bry_rdr_old();}
 	public Bry_rdr_fxt Init_src(String v)	{rdr.Init(Bry_.new_u8(v)); return this;}
 	public Bry_rdr_fxt Init_pos(int v)		{rdr.Pos_(v); return this;}
 	public void Test_read_int(int expd_val) {

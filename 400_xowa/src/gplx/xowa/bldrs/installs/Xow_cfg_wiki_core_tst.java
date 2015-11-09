@@ -37,8 +37,8 @@ public class Xow_cfg_wiki_core_tst {
 		,	"']:>"
 		,	");"
 		)
-		,	fxt.ns_(Xow_ns_.Id_main		, true, "")
-		,	fxt.ns_(Xow_ns_.Id_project	, false, "Wikipedia")
+		,	fxt.ns_(Xow_ns_.Tid__main		, true, "")
+		,	fxt.ns_(Xow_ns_.Tid__project	, false, "Wikipedia")
 		);
 	}
 	public static final String Const_wiki_core_cfg = String_.Concat_lines_nl
@@ -89,7 +89,7 @@ class Xow_cfg_wiki_core_fxt {
 	}
 	public void Save_tst(String bldr_version, String main_page, String siteinfo_misc, int ns_user_case_match, String ns_user_name, String expd) {
 		wiki.Props().Bldr_version_(Bry_.new_a7(bldr_version)).Main_page_(Bry_.new_a7(main_page)).Siteinfo_misc_(Bry_.new_a7(siteinfo_misc));
-		Xow_ns ns_user = wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user);
+		Xow_ns ns_user = wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user);
 		ns_user.Case_match_((byte)ns_user_case_match); ns_user.Name_bry_(Bry_.new_a7(ns_user_name));
 		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Cfg_wiki_core().Build_gfs()));
 	}
@@ -105,7 +105,7 @@ class Xow_cfg_wiki_core_fxt {
 			Xow_ns expd = expd_ary[i];
 			Xow_ns actl = wiki.Ns_mgr().Ids_get_or_null(expd.Id());
 			Tfds.Eq(expd.Case_match(), actl.Case_match(), Int_.To_str(expd.Id()));
-			Tfds.Eq(expd.Name_str(), actl.Name_str(), Int_.To_str(expd.Id()));
+			Tfds.Eq(expd.Name_db_str(), actl.Name_db_str(), Int_.To_str(expd.Id()));
 		}
 	}
 }

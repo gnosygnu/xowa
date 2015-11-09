@@ -85,7 +85,7 @@ public class Xowd_page_itm {
 		}
 		else {
 			ns = (Xow_ns)o;
-			ttl_page_db = Bry_.Mid(v, ns.Name_txt_w_colon().length, v.length);	// EX: "Template:A" -> "Template:" + "A"
+			ttl_page_db = Bry_.Mid(v, ns.Name_ui_w_colon().length, v.length);	// EX: "Template:A" -> "Template:" + "A"
 		}
 		ns_id = ns.Id();
 		return this;

@@ -19,7 +19,7 @@ package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.brys.*;
 class Xows_paging_parser {
 	private final List_adp itm_list = List_adp_.new_();
-	private final Bry_rdr rdr = new Bry_rdr();
+	private final Bry_rdr_old rdr = new Bry_rdr_old();
 	public Xows_paging_itm[] Parse(byte[] raw) {	// EX: en.wikipedia.org|41|60;en.wiktionary.org|21|40;
 		rdr.Init(raw);
 		while (!rdr.Pos_is_eos()) {

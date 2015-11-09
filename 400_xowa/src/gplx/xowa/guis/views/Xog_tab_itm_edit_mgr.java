@@ -82,7 +82,7 @@ public class Xog_tab_itm_edit_mgr {
 		new_text = Xoa_ttl.Replace_spaces(new_text);	// ttls cannot have spaces; only underscores
 		Xoa_ttl new_ttl = Xoa_ttl.parse(wiki, new_text);
 		int new_ns_id = new_ttl.Ns().Id();
-		if (new_ns_id != Xow_ns_.Id_main) {
+		if (new_ns_id != Xow_ns_.Tid__main) {
 			win_itm.Usr_dlg().Warn_many("", "", "The new page name must remain in the same namespace");
 			return;
 		}

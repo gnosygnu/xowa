@@ -28,8 +28,8 @@ public class Xow_ns_mgr_tst {
 	@Test  public void Skip_even() 			{fxt.ini_ns_(-2, 2, 4).run_Ords_sort().tst_Ords(-2, -100, 2, 3, 4, 5);}
 	@Test  public void Ns_alias() {
 		fxt.Ns_mgr().Aliases_clear();
-		fxt.Ns_mgr().Add_new(Xow_ns_.Id_template, "Template");
-		fxt.Ns_mgr().Aliases_add(Xow_ns_.Id_template, "Templatex");
+		fxt.Ns_mgr().Add_new(Xow_ns_.Tid__template, "Template");
+		fxt.Ns_mgr().Aliases_add(Xow_ns_.Tid__template, "Templatex");
 		fxt.Ns_mgr().Init();
 		byte[] name = Bry_.new_a7("Templatex:Abc");
 		Tfds.Eq(10, fxt.Ns_mgr().Tmpls_get_w_colon(name, 0, name.length));

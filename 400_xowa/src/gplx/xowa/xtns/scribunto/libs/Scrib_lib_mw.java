@@ -304,12 +304,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
 		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
-		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
+		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
 		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
 		byte[] sub_src = null;
-		if (ttl.Ns().Id_tmpl()) {					// ttl is template; check tmpl_regy first before going to data_mgr
+		if (ttl.Ns().Id_is_tmpl()) {				// ttl is template; check tmpl_regy first before going to data_mgr
 			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)core.Wiki().Cache_mgr().Defn_cache().Get_by_key(ttl.Page_db());
 			if (tmpl != null) sub_src = tmpl.Data_raw();
 		}

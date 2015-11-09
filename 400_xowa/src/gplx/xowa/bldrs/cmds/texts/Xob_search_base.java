@@ -36,7 +36,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 			ns_main = wiki.Ns_mgr().Ns_main();
 	}	private Xob_tmp_wtr_mgr tmp_wtr_mgr; private Xow_ns ns_main;
 	public void Wkr_run(Xowd_page_itm page) {
-//			if (page.Ns_id() != Xow_ns_.Id_main) return; // limit to main ns for now
+//			if (page.Ns_id() != Xow_ns_.Tid__main) return; // limit to main ns for now
 		try {
 			byte[] ttl = page.Ttl_page_db();
 			byte[][] words = Split_ttl_into_words(lang, list, dump_bfr, ttl);

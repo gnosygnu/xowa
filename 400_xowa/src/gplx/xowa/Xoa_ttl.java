@@ -50,8 +50,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public int Wik_bgn() {return wik_bgn;}
 	public int Anch_bgn() {return anch_bgn;}	// NOTE: anch_bgn is not correct when page has trailing ws; EX: [[A #b]] should have anch_bgn of 3 (1st char after #), but instead it is 2
 	public byte[] Anch_txt() {return anch_bgn == -1	? Bry_.Empty : Bry_.Mid(full_txt, anch_bgn, full_txt.length);}
-	public byte[] Talk_txt() {return ns.Id_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
-	public byte[] Subj_txt() {return ns.Id_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
+	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
+	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Full_url() {return Xoa_url_encoder.Instance.Encode(full_txt);}
 	public String Full_db_as_str() {return String_.new_u8(Full_db());}
 	public byte[] Full_db()  {return ns.Gen_ttl(this.Page_db());}
@@ -176,7 +176,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							}
 							else {
 								ns = (Xow_ns)o;
-								byte[] ns_name = ns.Name_txt();
+								byte[] ns_name = ns.Name_ui();
 								int ns_name_len = ns_name.length;
 								int tmp_bfr_end = bfr.Len();
 								if (!Bry_.Eq(bfr.Bfr(), ltr_bgn, tmp_bfr_end, ns_name) && ns_name_len == tmp_bfr_end - ltr_bgn) {	// if (a) ns_name != bfr_txt (b) both are same length; note that (b) should not happen, but want to safeguard against mismatched arrays
@@ -362,8 +362,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			else
 				full_txt = case_mgr.Case_reuse_upper(full_txt, page_bgn, page_end);
 		}
-		Xow_ns tors_ns = ns.Id_talk() ? ns_mgr.Ords_get_at(ns.Ord_subj_id()) : ns_mgr.Ords_get_at(ns.Ord_talk_id());
-		tors_txt = tors_ns.Name_txt_w_colon();
+		Xow_ns tors_ns = ns.Id_is_talk() ? ns_mgr.Ords_get_at(ns.Ord_subj_id()) : ns_mgr.Ords_get_at(ns.Ord_talk_id());
+		tors_txt = tors_ns.Name_ui_w_colon();
 		return true;
 	}		
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}

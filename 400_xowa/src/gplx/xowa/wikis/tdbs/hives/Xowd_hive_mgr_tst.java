@@ -75,7 +75,7 @@ class Xowd_hive_mgr_fxt {
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Tst_fil(int fil, String expd) {
-		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, fil);
+		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, fil);
 		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
 		return this;
 	}

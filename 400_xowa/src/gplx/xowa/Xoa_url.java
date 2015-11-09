@@ -57,7 +57,7 @@ public class Xoa_url {
 		int wiki_pos = Bry_find_.Find_fwd(raw, Xoh_href_.Bry__wiki, 0, raw_len);	 // look for /wiki/
 		return wiki_pos == Bry_find_.Not_found ? Bry_find_.Not_found : wiki_pos + Xoh_href_.Bry__wiki.length;
 	}
-	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);}
+	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no);}
 	public String To_str()					{return String_.new_u8(To_bry(Bool_.Y, Bool_.Y));}
 	public byte[] To_bry_page_w_anch()		{
 		byte[] page = page_bry, anch = anch_bry;

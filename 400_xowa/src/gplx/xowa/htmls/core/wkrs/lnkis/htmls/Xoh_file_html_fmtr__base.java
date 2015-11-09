@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
-	private final Xoh_arg_img_core arg_img_core;
+	protected final Xoh_arg_img_core arg_img_core;
 	private Bry_bfr scratch_bfr = Bry_bfr.reset_(128);
 	public Xoh_file_html_fmtr__base() {
 		arg_img_core = New_arg_img_core();
@@ -38,7 +38,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	) {
 		fmtr_full_img.Bld_bfr_many(tmp_bfr, uid
 		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, a_xowa_title
-		, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt, Xoh_lnki_consts.Img_cls_to_bry(img_cls, img_cls_other));
+		, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt, Xoh_img_cls_.To_html(img_cls, img_cls_other));
 	}
 	private Bry_fmtr fmtr_full_img = Bry_fmtr.new_
 	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title} xowa_title=\"~{a_xowa_title}\">"

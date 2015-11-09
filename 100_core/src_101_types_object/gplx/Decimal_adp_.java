@@ -16,7 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import java.math.BigDecimal;import java.math.MathContext;import java.math.RoundingMode;public class Decimal_adp_ {
+import java.math.BigDecimal;import java.math.MathContext;import java.math.RoundingMode;import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+public class Decimal_adp_ {
 	public static final Class<?> Cls_ref_type = Decimal_adp.class;
 	public static Decimal_adp as_(Object obj) {return obj instanceof Decimal_adp ? (Decimal_adp)obj : null;}
 	public static final Decimal_adp Zero = new Decimal_adp(0);
@@ -53,5 +57,14 @@ import java.math.BigDecimal;import java.math.MathContext;import java.math.Roun
 		public static Decimal_adp divide_(long lhs, long rhs) {		return new Decimal_adp(new BigDecimal(lhs).divide(new BigDecimal(rhs), Gplx_rounding_context));	}	public static Decimal_adp int_(int v) {return new Decimal_adp(new BigDecimal(v));}	public static Decimal_adp long_(long v) {return new Decimal_adp(new BigDecimal(v));}
 	public static Decimal_adp float_(float v) {return new Decimal_adp(new BigDecimal(v));}	public static Decimal_adp double_(double v) {return new Decimal_adp(new BigDecimal(v));}
 	public static Decimal_adp double_thru_str_(double v) {return new Decimal_adp(BigDecimal.valueOf(v));}
-	public static Decimal_adp db_(Object v) {return new Decimal_adp((BigDecimal)v);}	public static Decimal_adp parse(String raw) {return new Decimal_adp(new BigDecimal(raw));}	public static Decimal_adp pow_10_(int v) {return new Decimal_adp(new BigDecimal(1).scaleByPowerOfTen(v));}
+	public static Decimal_adp db_(Object v) {return new Decimal_adp((BigDecimal)v);}	public static Decimal_adp parse(String raw) {
+		try {
+	        DecimalFormat nf = (DecimalFormat)NumberFormat.getInstance(Locale.getDefault());
+	        nf.setParseBigDecimal(true);
+	        BigDecimal bd = (BigDecimal)nf.parse(raw);
+			return new Decimal_adp(bd);
+		} catch (ParseException e) {
+			throw Err_.new_("Decimal_adp_", "parse to decimal failed", "raw", raw);
+		}
+	}	public static Decimal_adp pow_10_(int v) {return new Decimal_adp(new BigDecimal(1).scaleByPowerOfTen(v));}
 	public static final MathContext RoundDownContext = new MathContext(0, RoundingMode.DOWN);	public static final MathContext Gplx_rounding_context = new MathContext(14, RoundingMode.HALF_UP);	// changed from 28 to 14; DATE:2015-07-31	}

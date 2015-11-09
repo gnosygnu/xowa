@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.htmls.core.makes.imgs.*;
+import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	private static final Imap_map_fmtr map_fmtr_arg = new Imap_map_fmtr();
 	public Imap_map(int id) {this.id = id;}
@@ -55,7 +56,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h) {
 		byte[] desc_style = Calc_desc_style(html_w, html_h);
 		map_fmtr_arg.Init(id, shapes, Calc_scale(orig_w, orig_h, html_w, html_h));
-		img_fmtr_arg.Init(hctx, xtn_mgr, this, html_uid, img_alt, html_src, html_w, html_h, Xoh_lnki_consts.Img_cls_to_bry(img_cls_tid, img_cls_other), a_href);
+		img_fmtr_arg.Init(hctx, xtn_mgr, this, html_uid, img_alt, html_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href);
 		Imap_html_fmtrs.All.Bld_bfr_many(bfr, html_uid, desc_style, map_fmtr_arg, img_fmtr_arg);
 	}
 	private byte[] Calc_desc_style(int html_w, int html_h) {

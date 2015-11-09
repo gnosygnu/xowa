@@ -53,17 +53,17 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		root.Subs_del_after(lnki.Tkn_sub_idx() + 1);	// all tkns should now be converted to args in owner; delete everything in root
 		boolean lnki_is_file = false;
 		switch (lnki.Ns_id()) {
-			case Xow_ns_.Id_file:
+			case Xow_ns_.Tid__file:
 				if (	Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type())		// thumbs produce <div> cancels pre
 					||	lnki.Align_h() != Xop_lnki_align_h.Null				// halign (left, right, none) also produces <div>; DATE:2014-02-17
 					)
 					ctx.Para().Process_block_lnki_div();
 				lnki_is_file = true;
 				break;
-			case Xow_ns_.Id_media:
+			case Xow_ns_.Tid__media:
 				lnki_is_file = true;
 				break;
-			case Xow_ns_.Id_category:
+			case Xow_ns_.Tid__category:
 				if (!lnki.Ttl().ForceLiteralLink())					// NOTE: do not remove ws if literal; EX:[[Category:A]]\n[[Category:B]] should stay the same; DATE:2013-07-10
 					ctx.Para().Process_lnki_category(ctx, root, src,cur_pos, src_len);	// removes excessive ws between categories; EX: [[Category:A]]\n\s[[Category:B]] -> [[Category:A]][[Category:B]] (note that both categories will not be rendered directly in html, but go to the bottom of the page)
 				break;
@@ -120,7 +120,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_caption:
 						Xop_tkn_itm cur_caption_tkn = lnki.Caption_tkn();
 						if (	cur_caption_tkn == Xop_tkn_null.Null_tkn	// lnki doesn't have caption; add arg as caption
-							||	lnki.Ttl().Ns().Id_file_or_media()) {		// or lnki is File; always take last
+							||	lnki.Ttl().Ns().Id_is_file_or_media()) {	// or lnki is File; always take last
 							lnki.Caption_tkn_(arg);
 							if (arg.Eq_tkn() != Xop_tkn_null.Null_tkn) {	// equal tkn exists; add val tkns to key and then swap key with val
 								Arg_itm_tkn key_tkn = arg.Key_tkn(), val_tkn = arg.Val_tkn();

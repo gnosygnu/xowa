@@ -28,8 +28,8 @@ public class Xoh_page_wtr_wkr_ {
 	}
 	public static byte[] Bld_page_name(Bry_bfr tmp_bfr, Xoa_ttl ttl, byte[] display_ttl) {
 		if (display_ttl != null) return display_ttl;	// display_ttl explicitly set; use it
-		if (ttl.Ns().Id() == Xow_ns_.Id_special) {		// special: omit query args, else excessively long titles: EX:"Special:Search/earth?fulltext=y&xowa page index=1"
-			tmp_bfr.Add(ttl.Ns().Name_txt_w_colon()).Add(ttl.Page_txt_wo_qargs());
+		if (ttl.Ns().Id() == Xow_ns_.Tid__special) {		// special: omit query args, else excessively long titles: EX:"Special:Search/earth?fulltext=y&xowa page index=1"
+			tmp_bfr.Add(ttl.Ns().Name_ui_w_colon()).Add(ttl.Page_txt_wo_qargs());
 			return tmp_bfr.To_bry_and_clear();
 		}
 		else

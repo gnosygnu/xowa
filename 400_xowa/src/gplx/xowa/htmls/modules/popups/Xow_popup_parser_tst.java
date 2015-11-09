@@ -331,10 +331,10 @@ public class Xow_popup_parser_tst {
 		));
 	}
 	@Test   public void Ns_allowed() {
-		fxt.Test_ns_allowed("Help"				, Xow_ns_.Id_help);
-		fxt.Test_ns_allowed("(Main)"			, Xow_ns_.Id_main);
+		fxt.Test_ns_allowed("Help"				, Xow_ns_.Tid__help);
+		fxt.Test_ns_allowed("(Main)"			, Xow_ns_.Tid__main);
 		fxt.Test_ns_allowed(""					);
-		fxt.Test_ns_allowed("(Main)|Help"		, Xow_ns_.Id_main, Xow_ns_.Id_help);
+		fxt.Test_ns_allowed("(Main)|Help"		, Xow_ns_.Tid__main, Xow_ns_.Tid__help);
 	}
 	@Test   public void Read_til_stop_fwd() {
 		fxt.Init_word_needed_(2).Init_read_til_stop_fwd_(2)					// read fwd found hdr

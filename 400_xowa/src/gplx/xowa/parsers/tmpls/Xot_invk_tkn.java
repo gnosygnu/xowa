@@ -337,7 +337,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
-		if (page_ttl.Ns().Id_tmpl()) {					// ttl is template; check tmpl_regy first before going to data_mgr
+		if (page_ttl.Ns().Id_is_tmpl()) {							// ttl is template; check tmpl_regy first before going to data_mgr
 			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
 			if (tmpl != null) transclude_src = tmpl.Data_raw();
 		}
@@ -385,21 +385,21 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		return rv;
 	}
 	public static void Print_not_found(Bry_bfr bfr, Xow_ns_mgr ns_mgr, byte[] name_ary) {	// print missing as [[:Template:Missing]]; REF:MW: Parser.php|braceSubstitution|$text = "[[:$titleText]]"; EX:en.d:Kazakhstan; DATE:2014-03-25
-		byte[] template_ns_name = ns_mgr.Ns_template().Name_bry();
+		byte[] template_ns_name = ns_mgr.Ns_template().Name_db();
 		bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon).Add(template_ns_name).Add_byte(Byte_ascii.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 	}
 	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {
-			case Xow_ns_.Id_template:	// ttl is template not in cache, or some other ns; do load
+			case Xow_ns_.Tid__template:	// ttl is template not in cache, or some other ns; do load
 				Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
 				if (tmpl != null) {
 					if (tmpl.Root() == null) tmpl.Parse_tmpl(ctx);
 					transclude_tmpl = tmpl;
 				}
 				break;
-			case Xow_ns_.Id_special:
+			case Xow_ns_.Tid__special:
 				bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 				return true;
 		}

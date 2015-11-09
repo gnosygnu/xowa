@@ -16,74 +16,44 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*;
 public class Xow_ns_ {
 	public static final int	// PAGE:en.w:http://www.mediawiki.org/wiki/Help:Namespaces
-		  Id_media				=  -2
-		, Id_special			=  -1
-		, Id_main				=   0				, Id_talk				=   1
-		, Id_user				=   2				, Id_user_talk			=   3
-		, Id_project			=   4				, Id_project_talk		=   5
-		, Id_file				=   6				, Id_file_talk			=   7
-		, Id_mediawiki			=   8				, Id_mediaWiki_talk		=   9
-		, Id_template			=  10				, Id_template_talk		=  11
-		, Id_help				=  12				, Id_help_talk			=  13
-		, Id_category			=  14				, Id_category_talk		=  15
-		, Id_portal				= 100				, Id_portal_talk		= 101
-	    , Id_null				= Int_.Min_value
-		;
+	  Tid__media			=  -2
+	, Tid__special			=  -1
+	, Tid__main				=   0				, Tid__talk					=   1
+	, Tid__user				=   2				, Tid__user_talk			=   3
+	, Tid__project			=   4				, Tid__project_talk			=   5
+	, Tid__file				=   6				, Tid__file_talk			=   7
+	, Tid__mediawiki		=   8				, Tid__mediawiki_talk		=   9
+	, Tid__template			=  10				, Tid__template_talk		=  11
+	, Tid__help				=  12				, Tid__help_talk			=  13
+	, Tid__category			=  14				, Tid__category_talk		=  15
+	, Tid__portal			= 100				, Tid__portal_talk			= 101
+	, Tid__module			= 828				, Tid__module_talk			= 829
+	, Tid__null				= Int_.Min_value
+	;
 	public static final String
-		  Key_media				= "Media"
-		, Key_special			= "Special"
-		, Key_main				= "(Main)"			, Key_talk				= "Talk"
-		, Key_user				= "User"			, Key_user_talk			= "User talk"
-		, Key_project			= "Project"			, Key_project_talk		= "Project talk"
-		, Key_file				= "File"			, Key_file_talk			= "File talk"
-		, Key_mediaWiki			= "MediaWiki"		, Key_mediaWiki_talk	= "MediaWiki talk"
-		, Key_template			= "Template"		, Key_template_talk		= "Template talk"
-		, Key_help				= "Help"			, Key_help_talk			= "Help talk"
-		, Key_category			= "Category"		, Key_category_talk		= "Category talk"
-		, Key_portal			= "Portal"			, Key_portal_talk		= "Portal talk"
-		, Key_module			= "Module"			, Key_module_talk		= "Module talk"
-	    , Key_null				= "null"
-		;
-	public static final byte[] Bry_template = Bry_.new_a7(Key_template);
-	public static final byte[] Name_ui_main = Bry_.new_a7(Key_main);
-	public static int Canonical_id(byte[] canonical_name) {
-		if (canonical_hash == null) {
-			Xow_ns[] ary = Canonical;
-			int len = ary.length;
-			canonical_hash = Ordered_hash_.New_bry();
-			for (int i = 0; i < len; i++) {
-				Xow_ns ns = ary[i];
-				canonical_hash.Add(ns.Name_bry(), Int_obj_val.new_(ns.Id()));
-			}
-		}
-		Object rv_obj = canonical_hash.Get_by(canonical_name);
-		return rv_obj == null ? Xow_ns_.Id_null : ((Int_obj_val)rv_obj).Val();
-	}	private static Ordered_hash canonical_hash;
-	public static int Canonical_idx_media = 0;
-	public static final Xow_ns[] Canonical = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
-	{	Canonical_new_(Id_media,				Key_media)
-	,	Canonical_new_(Id_special,				Key_special)
-	,	Canonical_new_(Id_talk,					Key_talk)
-	,	Canonical_new_(Id_user,					Key_user)
-	,	Canonical_new_(Id_user_talk,			Key_user_talk)
-	,	Canonical_new_(Id_project,				Key_project)
-	,	Canonical_new_(Id_project_talk,			Key_project_talk)
-	,	Canonical_new_(Id_file,					Key_file)
-	,	Canonical_new_(Id_file_talk,			Key_file_talk)
-	,	Canonical_new_(Id_mediawiki,			Key_mediaWiki)
-	,	Canonical_new_(Id_mediaWiki_talk,		Key_mediaWiki_talk)
-	,	Canonical_new_(Id_template,				Key_template)
-	,	Canonical_new_(Id_template_talk,		Key_template_talk)
-	,	Canonical_new_(Id_help,					Key_help)
-	,	Canonical_new_(Id_help_talk,			Key_help_talk)
-	,	Canonical_new_(Id_category,				Key_category)
-	,	Canonical_new_(Id_category_talk,		Key_category_talk)
-	};
-	public static final String Ns_name_wikipedia = "Wikipedia";
-	public static final byte[] Ns_name_main_bry = Bry_.new_a7(Key_main);
-	public static final byte[] Ns_prefix_main = Bry_.new_a7("Main:");
-	private static Xow_ns Canonical_new_(int id, String name) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_a7(name), false);}	// NOTE: for id/name reference only; case_match and alias does not matter;
+	  Key__media			= "Media"
+	, Key__special			= "Special"
+	, Key__main				= "(Main)"			, Key__talk					= "Talk"
+	, Key__user				= "User"			, Key__user_talk			= "User talk"
+	, Key__project			= "Project"			, Key__project_talk			= "Project talk"
+	, Key__file				= "File"			, Key__file_talk			= "File talk"
+	, Key__mediawiki		= "MediaWiki"		, Key__mediawiki_talk		= "MediaWiki talk"
+	, Key__template			= "Template"		, Key__template_talk		= "Template talk"
+	, Key__help				= "Help"			, Key__help_talk			= "Help talk"
+	, Key__category			= "Category"		, Key__category_talk		= "Category talk"
+	, Key__portal			= "Portal"			, Key__portal_talk			= "Portal talk"
+	, Key__module			= "Module"			, Key__module_talk			= "Module talk"
+	, Key__null				= "null"
+	, Key__wikipedia		= "Wikipedia"
+	;
+	public static final String
+	  Alias__wikipedia = "Wikipedia"
+	;
+	public static final byte[] 
+	  Bry__main				= Bry_.new_a7(Key__main)
+	, Bry__file				= Bry_.new_a7(Key__file)
+	, Bry__template			= Bry_.new_a7(Key__template)
+	;
 }

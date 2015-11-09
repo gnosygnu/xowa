@@ -25,7 +25,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		tmp_bfr.Add_byte_space().Add(Bry_page_prefix).Add(Escape_cls(ttl.Full_db()));	// page-Page_title
 		if (page_tid == Xow_page_tid.Tid_json) {
 			switch (ttl.Ns().Id()) {
-				case Xow_ns_.Id_main:
+				case Xow_ns_.Tid__main:
 					tmp_bfr.Add_byte_space().Add(Bry_wb_entitypage);
 					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage);
 					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
@@ -44,10 +44,10 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 	}
 	private static void Add_type(Bry_bfr tmp_bfr, Xoa_ttl ttl) {
 		tmp_bfr.Add_byte_space();
-		if (ttl.Ns().Id_special()) {
+		if (ttl.Ns().Id_is_special()) {
 			tmp_bfr.Add(Bry_type_special);	// MW_TODO: add " mw-special-$canonicalName"
 		}
-		else if (ttl.Ns().Id_talk())
+		else if (ttl.Ns().Id_is_talk())
 			tmp_bfr.Add(Bry_type_talk);
 		else
 			tmp_bfr.Add(Bry_type_subject);

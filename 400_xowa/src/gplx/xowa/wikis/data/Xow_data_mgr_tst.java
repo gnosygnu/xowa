@@ -62,7 +62,7 @@ public class Xow_data_mgr_tst {
 			;
 	}
 	@Test  public void Update_zip() {
-//			fxt.Wiki().Fsys_mgr().Dir_regy()[Xow_ns_.Id_main].Ext_tid_(gplx.core.ios.Io_stream_.Tid_zip);
+//			fxt.Wiki().Fsys_mgr().Dir_regy()[Xow_ns_.Tid__main].Ext_tid_(gplx.core.ios.Io_stream_.Tid_zip);
 //			fxt.Wiki().Data_mgr().Zip_mgr_(new Io_zip_mgr_mok());
 //			fxt	.Create("A1", "A1 data")
 //				.Create("B12", "B12 data")
@@ -154,8 +154,8 @@ class Xow_data_mgr_fxt {
 		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(file_orig));
 		return this;
 	}
-	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xotdb_dir_info_.Tid_page , Xow_ns_.Id_main, 0, expd);}
-	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xotdb_dir_info_.Tid_ttl, Xow_ns_.Id_main, 0, expd);}
+	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xotdb_dir_info_.Tid_page , Xow_ns_.Tid__main, 0, expd);}
+	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xotdb_dir_info_.Tid_ttl, Xow_ns_.Tid__main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data(byte dir_tid, int ns_id, int fil, String expd) {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(dir_tid, ns_id, fil);
 		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));

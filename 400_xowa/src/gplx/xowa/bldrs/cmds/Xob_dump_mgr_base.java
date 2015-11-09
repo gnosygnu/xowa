@@ -226,7 +226,7 @@ class Xob_dump_mgr_base_ {
 		int load_count = 0;
 		usr_dlg.Note_many("", "", "tmpl_load init");
 		while (true) {
-			page_src.Get_pages(pages, 0, Xow_ns_.Id_template, cur_page_id);	// 0 is always template db
+			page_src.Get_pages(pages, 0, Xow_ns_.Tid__template, cur_page_id);	// 0 is always template db
 			int page_count = pages.Count();
 			if (page_count == 0) break;	// no more pages in db;
 			Xowd_page_itm page = null;

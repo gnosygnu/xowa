@@ -67,13 +67,13 @@ public class Xoa_url_parser__xwiki_tst {
 	@Test  public void Xwiki__to_enwiki() {	// PURPOSE: handle alias of "wikipedia" and sv.wikipedia.org/wiki/Wikipedia:Main_Page; DATE:2015-07-31
 		Xowe_wiki xwiki = tstr.Prep_create_wiki("sv.wikipedia.org");
 		tstr.Prep_xwiki(xwiki, "wikipedia", "en.wikipedia.org", null);
-		tstr.Prep_get_ns_mgr_from_meta("sv.wikipedia.org").Add_new(Xow_ns_.Id_project, "Wikipedia");
+		tstr.Prep_get_ns_mgr_from_meta("sv.wikipedia.org").Add_new(Xow_ns_.Tid__project, "Wikipedia");
 		tstr.Run_parse(xwiki, "sv.wikipedia.org/wiki/wikipedia:X").Chk_wiki("sv.wikipedia.org").Chk_page("wikipedia:X");
 		tstr.Run_parse(xwiki, "sv.wikipedia.org/wiki/Wikipedia:X").Chk_wiki("sv.wikipedia.org").Chk_page("Wikipedia:X");
 	}
 	@Test  public void Xwiki__to_ns() {	// PURPOSE: handle alias of "wikipedia" in current, but no "Wikipedia" ns in other wiki; PAGE:pt.w:Wikipedia:P�gina_de_testes DATE:2015-09-17
 		tstr.Prep_create_wiki("pt.wikipedia.org");
-		tstr.Prep_get_ns_mgr_from_meta("pt.wikipedia.org").Add_new(Xow_ns_.Id_project, "Project");	// clear ns_mgr and add only "Project" ns, not "Wikipedia" ns
+		tstr.Prep_get_ns_mgr_from_meta("pt.wikipedia.org").Add_new(Xow_ns_.Tid__project, "Project");	// clear ns_mgr and add only "Project" ns, not "Wikipedia" ns
 		tstr.Prep_xwiki(tstr.Wiki(), "wikipedia", "en.wikipedia.org", null);	// add alias of "wikipedia" in current wiki
 		tstr.Run_parse(tstr.Wiki(), "pt.wikipedia.org/wiki/Wikipedia:X").Chk_wiki("pt.wikipedia.org").Chk_page("Wikipedia:X");	// should get "pt.wikipedia.org", not "en.wikipedia.org" (through alias)
 	}

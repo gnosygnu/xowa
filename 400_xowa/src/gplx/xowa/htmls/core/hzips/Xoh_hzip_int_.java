@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.primitives.*; import gplx.core.encoders.*;
 public class Xoh_hzip_int_ {
+	public static final int Neg_1_adj = 1;
 	public static void Encode(int reqd, Bry_bfr bfr, int val) {
 		int bfr_len = bfr.Len();
 		int len_in_base85 = Base85_.Bry_len(val);

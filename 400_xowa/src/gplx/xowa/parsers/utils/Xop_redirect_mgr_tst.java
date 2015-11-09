@@ -40,6 +40,9 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void Frame_ttl() {	// PURPOSE: redirect should set invk frame title to redirect_trg, not original; PAGE:en.w:Statutory_city DATE:2014-08-22
 		fxt.Test_frame_ttl("Template:A", "#REDIRECT [[Template:B]]", "Template:B", "Template:B");
 	}
+	@Test  public void State_collapsed() {	// PURPOSE: state=collapsed broke redirects; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
+		fxt.Test_redirect("#REDIRECT [[Template:A|state=collapsed]]", "Template:A");
+	}
 }
 class Xop_redirect_mgr_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
@@ -62,7 +65,7 @@ class Xop_redirect_mgr_fxt {
 		Xop_redirect_mgr redirect_mgr = fxt.Ctx().Wiki().Redirect_mgr();
 		redirect_mgr.Clear();
 		byte[] raw_bry = Bry_.new_u8(raw_str);
-		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry, raw_bry.length);
+		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry);
 		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
 		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
 	}

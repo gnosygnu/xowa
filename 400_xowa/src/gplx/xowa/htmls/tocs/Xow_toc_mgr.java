@@ -134,13 +134,13 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 					break;
 				case Xop_tkn_itm_.Tid_lnki:
 					Xop_lnki_tkn lnki = (Xop_lnki_tkn)sub;
-					if (lnki.Ns_id() == Xow_ns_.Id_category
+					if (lnki.Ns_id() == Xow_ns_.Tid__category
 						&& !lnki.Ttl().ForceLiteralLink())		{}	// Category text should not print; DATE:2013-12-09
 					else {
 						if (lnki.Caption_exists())
 							Toc_text_recurse(ctx, bfr, src, html_wtr, html_wtr_opts, lnki.Caption_val_tkn(), depth);
 						else {
-							if (lnki.Ns_id() == Xow_ns_.Id_file) {}	// do not print lnk_ttl in TOC; if file; tr.w:Dünya_Mirasları; DATE:2014-06-06
+							if (lnki.Ns_id() == Xow_ns_.Tid__file) {}	// do not print lnk_ttl in TOC; if file; tr.w:Dünya_Mirasları; DATE:2014-06-06
 							else
 								bfr.Add(lnki.Ttl_ary());
 						}

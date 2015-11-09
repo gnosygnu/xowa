@@ -25,7 +25,7 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Url_encoder encoder;
 	public Xob_redirect_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.Reset_db_y_();}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wiki_redirect;}
-	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Id_file);}	// restrict to file ns
+	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__file);}	// restrict to file ns
 	@Override public byte Init_redirect() {return Bool_.Y_byte;}				// restrict to redirects
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
@@ -43,7 +43,7 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	}		
 	@Override protected void Cmd_bgn_end() {}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_src) {
-		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(page_src, page_src.length);
+		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(page_src);
 		byte[] redirect_ttl_bry = Xoa_ttl.Replace_spaces(redirect_ttl.Page_db());	// NOTE: spaces can still exist b/c redirect is scraped from #REDIRECT which sometimes has a mix; EX: "A_b c"
 		redirect_ttl_bry = encoder.Decode(redirect_ttl_bry);
 		redirect_tbl.Insert(page.Id(), Xoa_ttl.Replace_spaces(page.Ttl_page_db()), -1, redirect_ttl.Ns().Id(), redirect_ttl_bry, redirect_ttl.Anch_txt(), 1);

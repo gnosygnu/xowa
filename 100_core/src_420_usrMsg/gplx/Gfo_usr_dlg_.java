@@ -17,13 +17,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_usr_dlg_ {
+	private static Gfo_usr_dlg_base test__list, test__show;
 	public static Gfo_usr_dlg			Instance	= Gfo_usr_dlg_noop.Instance;	// NOTE: global instance which can be reassigned
         public static final Gfo_usr_dlg	Noop		= Gfo_usr_dlg_noop.Instance;
+	public static Gfo_usr_dlg__gui Test__list__init() {
+		if (test__list == null)
+			test__list = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
+		Gfo_usr_dlg__gui_.Test.Clear();
+		Instance = test__list;
+		return Gfo_usr_dlg__gui_.Test;
+	}
+	public static String Test__list__term__get_1st() {
+		Instance = Noop;
+		String[] rv = ((Gfo_usr_dlg__gui_test)test__list.Gui_wkr()).Warns().To_str_ary_and_clear();
+		return rv.length == 0 ? "" : rv[0];
+	}
+	public static void Test__show__init() {
+		if (test__show == null)
+			test__show = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Console);
+		Instance = test__show;
+	}
+	public static void Test__show__term() {
+		Instance = Noop;
+	}
 	public static Gfo_usr_dlg Test() {
-		if (test == null)
-			test = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
-		return test;
-	}	private static Gfo_usr_dlg_base test;
+		if (test__list == null)
+			test__list = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
+		return test__list;
+	}
 	public static Gfo_usr_dlg Test_console() {
 		if (test_console == null)
 			test_console = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Console);

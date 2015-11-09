@@ -148,4 +148,17 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 			file_is_orig = img_size.File_is_orig();
 		}
 	}
+	public void To_bfr(Bry_bfr bfr) {
+		bfr				   .Add_int_variable(html_uid);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_exec_tid);
+		bfr.Add_byte_pipe().Add(lnki_wiki_abrv);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_type);
+		bfr.Add_byte_pipe().Add_double(lnki_upright);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_upright_patch);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_w);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_h);
+		bfr.Add_byte_pipe().Add_double(lnki_time);
+		bfr.Add_byte_pipe().Add_int_variable(lnki_page);
+		bfr.Add_byte_nl();
+	}
 }

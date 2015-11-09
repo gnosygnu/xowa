@@ -32,13 +32,13 @@ public class Xob_search_base_tst {
 		(	fxt.doc_wo_date_(2, "A b",  "text")
 		,	fxt.doc_wo_date_(3, "B a",  "text")
 		)
-		.Fil_expd(fxt.fil_ns_sttl(Xow_ns_.Id_main, 0)
+		.Fil_expd(fxt.fil_ns_sttl(Xow_ns_.Tid__main, 0)
 		,	"!!!!;|!!!!;|"
 		,	"a|!!!!#;!!!!%|!!!!$;!!!!%"
 		,	"b|!!!!#;!!!!%|!!!!$;!!!!%"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_search_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Tid__main, Xotdb_dir_info_.Tid_search_ttl)
 		,	"0|a|b|2"
 		,	""
 		)

@@ -39,7 +39,7 @@ public class Xowd_site_ns_tbl {
 			Xow_ns ns = ns_mgr.Ids_get_at(i);
 			stmt.Clear()
 				.Val_int(fld_id, ns.Id())
-				.Val_str(fld_name, ns.Name_str())
+				.Val_str(fld_name, ns.Name_db_str())
 				.Val_byte(fld_case, ns.Case_match())
 				.Val_bool_as_byte(fld_is_alias, ns.Is_alias())
 				.Val_int(fld_count, ns.Count())

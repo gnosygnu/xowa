@@ -29,7 +29,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.title.lua")
 			, KeyVal_.new_("thisTitle", "")					// NOTE: pass blank; will be updated by GetCurrentTitle
-			, KeyVal_.new_("NS_MEDIA", Xow_ns_.Id_media)	// NOTE: MW passes down NS_MEDIA; this should be -2 on all wikis...
+			, KeyVal_.new_("NS_MEDIA", Xow_ns_.Tid__media)	// NOTE: MW passes down NS_MEDIA; this should be -2 on all wikis...
 			);
 		notify_page_changed_fnc = mod.Fncs_get_by_key("notify_page_changed");
 		return mod;
@@ -108,7 +108,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			int ns_id = Int_.cast(ns_obj);
 			Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 			if (ns != null)
-				return ns.Name_bry();
+				return ns.Name_db();
 		}
 		return null;
 	}
@@ -153,9 +153,9 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		if (	ttl == null
-			|| !ttl.Ns().Id_file_or_media()
+			|| !ttl.Ns().Id_is_file_or_media()
 			) return rslt.Init_obj(GetFileInfo_absent);
-		if (ttl.Ns().Id_media()) ttl = Xoa_ttl.parse(wiki, Xow_ns_.Id_file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
+		if (ttl.Ns().Id_is_media()) ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
 		// Xoae_page file_page = Pfunc_filepath.Load_page(wiki, ttl);	// EXPENSIVE
 		// boolean exists = !file_page.Missing();
 		// if (!exists) return rslt.Init_obj(KeyVal_.Ary(KeyVal_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
@@ -207,24 +207,24 @@ public class Scrib_lib_title implements Scrib_lib {
 	public static final KeyVal[] CascadingProtection_rv = KeyVal_.Ary(KeyVal_.new_("sources", Bool_.N), KeyVal_.new_("restrictions", KeyVal_.Ary_empty));
 	private KeyVal[] GetInexpensiveTitleData(Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
-		boolean ns_file_or_media = ns.Id_file_or_media(), ns_special = ns.Id_special();
+		boolean ns_file_or_media = ns.Id_is_file_or_media(), ns_special = ns.Id_is_special();
 		int rv_len = 7, rv_idx = 7;
 		if (ns_special) ++rv_len;
 		if (!ns_file_or_media) ++rv_len;
 		Xow_xwiki_itm xwiki_itm = ttl.Wik_itm();
 		String xwiki_str = xwiki_itm == null ? "" : xwiki_itm.Key_str();
 		KeyVal[] rv = new KeyVal[rv_len];
-		rv[ 0] = KeyVal_.new_("isLocal"				, true);								// title.isLocal; NOTE: always true; passing "http:" also returns true; not sure how to handle "Interwiki::fetch( $this->mInterwiki )->isLocal()"
-		rv[ 1] = KeyVal_.new_("interwiki"			, xwiki_str);							// $title->getInterwiki(),
-		rv[ 2] = KeyVal_.new_("namespace"		, ns.Id());								// $ns,
-		rv[ 3] = KeyVal_.new_("nsText"				, ns.Name_str());						// $title->getNsText(),
-		rv[ 4] = KeyVal_.new_("text"				, ttl.Page_txt());						// $title->getText(),
-		rv[ 5] = KeyVal_.new_("fragment"			, ttl.Anch_txt());						// $title->getFragment(),
-		rv[ 6] = KeyVal_.new_("thePartialUrl"		, ttl.Page_db());						// $title->getPartialUrl(),
+		rv[ 0] = KeyVal_.new_("isLocal"				, true);										// title.isLocal; NOTE: always true; passing "http:" also returns true; not sure how to handle "Interwiki::fetch( $this->mInterwiki )->isLocal()"
+		rv[ 1] = KeyVal_.new_("interwiki"			, xwiki_str);									// $title->getInterwiki(),
+		rv[ 2] = KeyVal_.new_("namespace"		, ns.Id());										// $ns,
+		rv[ 3] = KeyVal_.new_("nsText"				, Xow_ns_canonical_.To_canonical_or_local(ns)); // $title->getNsText(), NOTE: needed b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
+		rv[ 4] = KeyVal_.new_("text"				, ttl.Page_txt());								// $title->getText(),
+		rv[ 5] = KeyVal_.new_("fragment"			, ttl.Anch_txt());								// $title->getFragment(),
+		rv[ 6] = KeyVal_.new_("thePartialUrl"		, ttl.Page_db());								// $title->getPartialUrl(),
 		if (ns_special)
-			rv[rv_idx++] = KeyVal_.new_("exists"	, false);								// TODO: lookup specials
+			rv[rv_idx++] = KeyVal_.new_("exists"	, false);										// TODO: lookup specials
 		if (!ns_file_or_media)
-			rv[rv_idx++] = KeyVal_.new_("file"		, false);								// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
+			rv[rv_idx++] = KeyVal_.new_("file"		, false);										// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
 	}	private static final Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
 	public static final String Key_wikitexet = "wikitext";

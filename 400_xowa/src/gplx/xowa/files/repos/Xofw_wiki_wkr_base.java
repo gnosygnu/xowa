@@ -64,7 +64,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		if (db_page.Redirected()) {
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, file_ns, false);
 			byte[] src = db_page.Text();
-			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(src, src.length);
+			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(src);
 			return redirect_ttl == Xop_redirect_mgr.Redirect_null_ttl ? Xop_redirect_mgr.Redirect_null_bry : redirect_ttl.Page_db();
 		}
 		else

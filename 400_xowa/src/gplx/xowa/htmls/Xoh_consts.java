@@ -53,4 +53,5 @@ public class Xoh_consts {
 	, Atr_xowa_title_bry		= Bry_.new_a7(Atr_xowa_title_str)
 	;
 	public static final int Nbsp_int = 160;
+	public static String Escape_apos(String s) {return String_.Replace(s, "'", "\"");}
 }

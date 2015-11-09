@@ -25,11 +25,12 @@ public class Html_doc_parser {
 		this.txt_wkr = txt_wkr;
 		return this;
 	}
-	public void Reg(Html_doc_wkr... wkr_ary) {
+	public Html_doc_parser Reg_wkrs(Html_doc_wkr... wkr_ary) {
 		for (Html_doc_wkr wkr : wkr_ary) {
 			trie.Add_obj(wkr.Hook(), wkr);
 			list.Add(wkr);
 		}
+		return this;
 	}
 	public void Parse(byte[] src, int src_bgn, int src_end) {
 		txt_wkr.Init(src, src_bgn, src_end);
@@ -52,7 +53,9 @@ public class Html_doc_parser {
 					txt_bgn = -1;
 				}
 				Html_doc_wkr wkr = (Html_doc_wkr)o;
-				pos = wkr.Parse(pos);
+				int hook_end = trie.Match_pos();
+				try {pos = wkr.Parse(pos);}
+				catch (Exception e) {Err_.Noop(e); txt_bgn = pos; pos = hook_end;}
 			}	
 		}
 		if (txt_bgn != -1) txt_wkr.Parse(txt_bgn, src_end);

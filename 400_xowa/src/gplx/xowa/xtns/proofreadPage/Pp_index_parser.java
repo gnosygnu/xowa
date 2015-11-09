@@ -68,7 +68,7 @@ class Pp_index_parser {
 					Xop_lnki_tkn lnki = (Xop_lnki_tkn)sub;
 					int sub_ns_id = lnki.Ns_id();
 					if		(sub_ns_id == ns_page_id)		rv.Page_ttls().Add(lnki.Ttl());
-					else if	(sub_ns_id == Xow_ns_.Id_main)	rv.Main_lnkis().Add(lnki);
+					else if	(sub_ns_id == Xow_ns_.Tid__main)	rv.Main_lnkis().Add(lnki);
 					break;
 				}
 				case Xop_tkn_itm_.Tid_xnde: {

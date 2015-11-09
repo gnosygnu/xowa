@@ -17,9 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.brys.*;
-import gplx.xowa.htmls.core.hzips.stats.*;
 public interface Xoh_hzip_wkr {
 	String Key();
-	void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, Bry_parser parser, byte[] src, int hook_bgn);
-	int Decode(Bry_bfr bfr, Bry_parser parser, byte[] src, int hook_bgn);
+	int Decode(Bry_bfr bfr, Xoh_decode_ctx ctx, Bry_rdr parser, byte[] src, int hook_bgn);
 }

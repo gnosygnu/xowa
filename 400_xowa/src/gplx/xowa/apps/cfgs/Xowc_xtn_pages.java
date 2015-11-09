@@ -60,7 +60,7 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 	private int Set_canonical(Xow_ns_mgr ns_mgr, int aliases_added, int id, byte[] name) {
 		Xow_ns ns =  ns_mgr.Ids_get_or_null(id);
 		if (	ns == null							// ns doesn't exist; should throw error;
-			||	!Bry_.Eq(ns.Name_bry(), name)		// ns exists, but name doesn't match canonical
+			||	!Bry_.Eq(ns.Name_db(), name)		// ns exists, but name doesn't match canonical
 			) {
 			ns_mgr.Aliases_add(id, String_.new_a7(name));					
 			++aliases_added;

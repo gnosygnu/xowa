@@ -291,7 +291,7 @@ class Xol_lang_srl_fxt {
 		int len = ary.length;			
 		for (int i = 0; i < len; i++) {
 			Xow_ns ns = ary[i];
-			sb.Add(ns.Id()).Add("|").Add(ns.Name_str()).Add_char_nl();
+			sb.Add(ns.Id()).Add("|").Add(ns.Name_db_str()).Add_char_nl();
 		}
 		return sb.To_str_and_clear();
 	}

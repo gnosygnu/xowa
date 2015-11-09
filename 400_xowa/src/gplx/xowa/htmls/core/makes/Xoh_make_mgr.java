@@ -19,14 +19,14 @@ package gplx.xowa.htmls.core.makes; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.fsys.*;	
-import gplx.xowa.htmls.core.wkrs.hdrs.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.htmls.core.wkrs.*;
 public class Xoh_make_mgr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
+	private final Bry_bfr bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private Xoh_cfg_file cfg_file; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
 	private final byte[] root_dir, file_dir; private byte[] file_dir_comm, file_dir_wiki, hiero_img_dir; private final byte[] wiki_domain;
-	private final Xoh_hdr_make wkr__hdr = new Xoh_hdr_make();
-	private final Bry_parser parser = new Bry_parser();
+	private final Bry_rdr parser = new Bry_rdr();
+	private final Xoh_hdoc_wkr__base hdoc_parser = new Xoh_hdoc_wkr__base(new Xoh_hdoc_wkr__make());
 	public Xoh_make_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder, byte[] wiki_domain) {
 		this.usr_dlg = usr_dlg;
 		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
@@ -36,7 +36,13 @@ public class Xoh_make_mgr {
 		this.html_fmtr = Xoh_file_html_fmtr__hdump.Base;
 		this.wiki_domain = wiki_domain;
 	}
-	public byte[] Parse(Xoh_page hpg, byte[] src) {
+	public byte[] Parse(byte[] src, Xoh_page hpg, Xow_wiki wiki) {
+		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
+		hdoc_parser.Parse(bfr, wiki, hpg, hpg.Url_bry_safe(), src);
+		hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
+		return bfr.To_bry_and_clear();
+	}
+	public byte[] Parse_old(Xoh_page hpg, byte[] src) {
 		this.file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_domain_itm_.Bry__commons).Add_byte_slash().To_bry_and_clear();
 		this.file_dir_wiki = tmp_bfr.Add(file_dir).Add(wiki_domain).Add_byte_slash().To_bry_and_clear();
 		int src_len = src.length;
@@ -44,7 +50,7 @@ public class Xoh_make_mgr {
 		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
 		Xohd_img_itm__base[] imgs = hpg.Img_itms(); int imgs_len = hpg.Img_itms().length;
 		int pos = 0; int rng_bgn = -1;
-		parser.Init_src(hpg.Url_bry_safe(), src, src_len, 0);
+		parser.Ctor_by_page(hpg.Url_bry_safe(), src, src_len);
 		while (pos < src_len) {
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
@@ -73,7 +79,6 @@ public class Xoh_make_mgr {
 		switch (tid) {
 			case Xoh_make_trie_.Tid__dir:					bfr.Add(root_dir); return rv;
 			case Xoh_make_trie_.Tid__hiero_dir:				bfr.Add(hiero_img_dir); return rv;
-			case Xoh_make_trie_.Tid__hdr:				return wkr__hdr.Make(bfr, hpg, parser, src, hook_bgn);
 		}
 		if (itm.Elem_is_xnde()) rv += 2;		// if xnde, skip "/>"
 		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; hpg=~{0} text=~{1}", hpg.Url().To_str(), Bry_.Mid_safe(src, hook_end, uid_end)); return uid_end;}

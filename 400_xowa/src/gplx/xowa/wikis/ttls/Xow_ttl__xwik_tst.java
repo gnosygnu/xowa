@@ -19,11 +19,11 @@ package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_ttl__xwik_tst {
 	@Before public void init() {fxt.Reset();} private Xow_ttl_fxt fxt = new Xow_ttl_fxt();
-	@Test   public void Known()						{fxt.Init_ttl("fr:a")			.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("a").Test();}
-	@Test   public void Known_ns()					{fxt.Init_ttl("fr:Help:a")		.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Id_main).Expd_full_txt("Help:a").Expd_page_txt("Help:a").Test();} // NOTE: Page is "Help:a" b/c ns are unknowable in foreign wiki
-	@Test   public void Unknown()					{fxt.Init_ttl("frx:a")			.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("Frx:a").Test();}
-	@Test   public void Unknown_ns()				{fxt.Init_ttl("frx:Help:a")		.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("Frx:Help:a").Test();}
-	@Test   public void Known_ns_leaf_anch()		{fxt.Init_ttl("fr:Help:a/b/c#d").Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Id_main).Expd_page_txt("Help:a/b/c").Expd_leaf_txt("c").Expd_anch_txt("d").Expd_full_txt("Help:a/b/c").Test();}
+	@Test   public void Known()						{fxt.Init_ttl("fr:a")			.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("a").Test();}
+	@Test   public void Known_ns()					{fxt.Init_ttl("fr:Help:a")		.Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Tid__main).Expd_full_txt("Help:a").Expd_page_txt("Help:a").Test();} // NOTE: Page is "Help:a" b/c ns are unknowable in foreign wiki
+	@Test   public void Unknown()					{fxt.Init_ttl("frx:a")			.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("Frx:a").Test();}
+	@Test   public void Unknown_ns()				{fxt.Init_ttl("frx:Help:a")		.Expd_xwik_txt("").Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("Frx:Help:a").Test();}
+	@Test   public void Known_ns_leaf_anch()		{fxt.Init_ttl("fr:Help:a/b/c#d").Expd_xwik_txt("fr").Expd_ns_id(Xow_ns_.Tid__main).Expd_page_txt("Help:a/b/c").Expd_leaf_txt("c").Expd_anch_txt("d").Expd_full_txt("Help:a/b/c").Test();}
 	@Test   public void Colon_is_last() {
 		fxt.Init_ttl("fr:Help:").Expd_xwik_txt("fr").Expd_page_txt("Help:").Test();
 		fxt.Init_ttl("fr:_ _").Expd_xwik_txt("fr").Expd_page_txt("").Test();	// NOTE: fr:_ _ is invalid (resolves to "fr:");

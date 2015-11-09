@@ -27,7 +27,7 @@ public class Xows_ns_mgr {
 	}
 	public boolean Has(int ns_id) {
 		return ns_all								// all flag set
-			|| ns_main && ns_id == Xow_ns_.Id_main	// main flag set
+			|| ns_main && ns_id == Xow_ns_.Tid__main	// main flag set
 			|| ns_hash.Has(tmp_ns_id.Val_(ns_id))	// check against ns_hash
 			;
 	}
@@ -37,8 +37,8 @@ public class Xows_ns_mgr {
 		ns_hash.Add_as_key_and_val(Int_obj_ref.new_(ns_id));
 	}
 	public void Add_by_name(byte[] ns_name) {
-		int id = Xow_ns_.Canonical_id(ns_name);
-		if (id != Xow_ns_.Id_null)
+		int id = Xow_ns_canonical_.To_id(ns_name);
+		if (id != Xow_ns_.Tid__null)
 			Add_by_id(id);
 	}
 	public void Add_all() {

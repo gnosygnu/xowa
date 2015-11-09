@@ -344,8 +344,8 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}
 	public static byte Load_ctg_v1_tid(int ns_id) {
 		switch (ns_id) {
-			case Xow_ns_.Id_category: 	return Xoa_ctg_mgr.Tid_subc;
-			case Xow_ns_.Id_file:		return Xoa_ctg_mgr.Tid_file;
+			case Xow_ns_.Tid__category: 	return Xoa_ctg_mgr.Tid_subc;
+			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid_file;
 			default: 					return Xoa_ctg_mgr.Tid_page;
 		}		
 	}
@@ -363,7 +363,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		byte[] ttl		= Bry_.Mid				(src, bgn + 12		, ttl_end);
 		byte[] text		= Bry_.Mid				(src, ttl_end + 1	, itm_end - 1);
 		page.Init_by_tdb(-1, -1, xdat.Itm_idx(), Bool_.N, text.length, ns_id, ttl);
-		page.Modified_on_(Bit_.Xto_date_short(timestamp));
+		page.Modified_on_(Int_flag_bldr_.To_date_short(timestamp));
 		page.Text_(text);
 		return true;
 	}
@@ -372,7 +372,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		int timestamp_end = timestamp_bgn + 5;
 		if (timestamp_enabled) {
 			int timestamp = Base85_.To_int_by_bry(src, timestamp_bgn, timestamp_end - 1);
-			page.Modified_on_(Bit_.Xto_date_short(timestamp));
+			page.Modified_on_(Int_flag_bldr_.To_date_short(timestamp));
 		}
 		int name_bgn = timestamp_end + 1;
 		int name_end = Bry_find_.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, name_bgn, src_len);			

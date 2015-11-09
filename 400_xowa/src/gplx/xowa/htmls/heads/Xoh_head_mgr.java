@@ -30,7 +30,7 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 	, list__js_window_onload	= new Xoh_head_wkr()
 	;
 	public Xoh_head_mgr() {
-		Itms_add(itm__css, itm__globals, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery
+		Itms_add(itm__css, itm__globals, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery, itm__gallery_styles
 		, itm__mathjax, itm__graph, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
 		, itm__dbui
 		);
@@ -44,6 +44,7 @@ public class Xoh_head_mgr implements Bry_fmtr_arg {
 	public Xoh_head_itm__navframe				Itm__navframe() {return itm__navframe;} private final Xoh_head_itm__navframe itm__navframe = new Xoh_head_itm__navframe();
 	public Xoh_head_itm__top_icon				Itm__top_icon() {return itm__top_icon;} private final Xoh_head_itm__top_icon itm__top_icon = new Xoh_head_itm__top_icon();
 	public Xoh_head_itm__gallery				Itm__gallery() {return itm__gallery;} private final Xoh_head_itm__gallery itm__gallery = new Xoh_head_itm__gallery();
+	public Xoh_head_itm__gallery_styles			Itm__gallery_styles() {return itm__gallery_styles;} private final Xoh_head_itm__gallery_styles itm__gallery_styles = new Xoh_head_itm__gallery_styles();
 	public Xoh_head_itm__title_rewrite			Itm__title_rewrite() {return itm__title_rewrite;} private final Xoh_head_itm__title_rewrite itm__title_rewrite = new Xoh_head_itm__title_rewrite();
 	public Xoh_head_itm__mathjax				Itm__mathjax() {return itm__mathjax;} private final Xoh_head_itm__mathjax itm__mathjax = new Xoh_head_itm__mathjax();
 	public Xoh_head_itm__hiero					Itm__hiero() {return itm__hiero;} private final Xoh_head_itm__hiero itm__hiero = new Xoh_head_itm__hiero();

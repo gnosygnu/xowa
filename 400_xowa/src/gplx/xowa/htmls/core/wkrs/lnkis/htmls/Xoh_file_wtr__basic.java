@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.langs.htmls.*;
+import gplx.langs.htmls.*; 
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.files.*; 
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_file_wtr__basic {		
 	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
@@ -61,11 +61,11 @@ public class Xoh_file_wtr__basic {
 		if (	html_mgr.Img_suppress_missing_src()					// option to suppress src when file is missing
 			&&	!xfer_itm.File_exists()								// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
 			&&	!orig_ext.Id_is_media()								// file is media; never suppress; src needs to be available for "click" on play; note that most media will be missing (not downloaded)
-			&&	lnki.Ns_id() != Xow_ns_.Id_media					// ns is media; never suppress; "src" will use only orig_src; DATE:2014-01-30
+			&&	lnki.Ns_id() != Xow_ns_.Tid__media					// ns is media; never suppress; "src" will use only orig_src; DATE:2014-01-30
 			) {						
 			img_orig_src = img_view_src = Bry_.Empty;				// null out src
 		}
-		if		(lnki.Ns_id() == Xow_ns_.Id_media)					// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
+		if		(lnki.Ns_id() == Xow_ns_.Tid__media)					// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
 			this.Write_file_ns_media(bfr, ctx, src, lnki, img_orig_src);
 		else {
 			if	(	Xof_ext_.Id_is_video_strict(orig_ext.Id())		// id is .ogv or .webm
@@ -135,7 +135,7 @@ public class Xoh_file_wtr__basic {
 				case Xop_lnki_align_h.None:		bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
 			}
 			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
-			byte img_cls_tid = lnki.Border() == Bool_.Y_byte  ? Xoh_lnki_consts.Tid_img_cls_thumbborder : Xoh_lnki_consts.Tid_img_cls_none;
+			byte img_cls_tid = lnki.Border() == Bool_.Y_byte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
 			byte[] img_cls_other = lnki.Lnki_cls(); // PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3; DATE:2014-09-06
 			if (lnki_link_tkn == Arg_nde_tkn.Null)		// full
 				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
@@ -155,9 +155,9 @@ public class Xoh_file_wtr__basic {
 	}
 	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
 		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, src, lnki) : Bry_.Empty;
-		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_lnki_consts.Tid_img_cls_thumbimage : Xoh_lnki_consts.Tid_img_cls_none;
+		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_lnki_consts.Bry_none);
+		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
 		byte[] thumb = tmp_bfr.To_bry_and_clear();
 		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
 		return tmp_bfr.To_bry_and_rls();

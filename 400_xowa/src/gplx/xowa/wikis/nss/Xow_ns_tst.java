@@ -20,27 +20,27 @@ import org.junit.*;
 public class Xow_ns_tst {
 	@Before public void init() {fxt.Clear();} private Xow_ns_fxt fxt = new Xow_ns_fxt();
 	@Test   public void Category() {
-		fxt	.Expd_id_subjId_(Xow_ns_.Id_category)
-			.Expd_id_talkId_(Xow_ns_.Id_category_talk)
+		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
+			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(Bool_.Y)
 			.Expd_id_talk_(Bool_.N)
-			.Test(Xow_ns_.Id_category)
+			.Test(Xow_ns_.Tid__category)
 			;
 	}		
 	@Test   public void Category_talk() {
-		fxt	.Expd_id_subjId_(Xow_ns_.Id_category)
-			.Expd_id_talkId_(Xow_ns_.Id_category_talk)
+		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
+			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(Bool_.N)
 			.Expd_id_talk_(Bool_.Y)
-			.Test(Xow_ns_.Id_category_talk)
+			.Test(Xow_ns_.Tid__category_talk)
 			;
 	}
 	@Test   public void Special() {
-		fxt	.Expd_id_subjId_(Xow_ns_.Id_special)
-			.Expd_id_talkId_(Xow_ns_.Id_special)
+		fxt	.Expd_id_subjId_(Xow_ns_.Tid__special)
+			.Expd_id_talkId_(Xow_ns_.Tid__special)
 			.Expd_id_subj_(Bool_.Y)
 			.Expd_id_talk_(Bool_.N)
-			.Test(Xow_ns_.Id_special)
+			.Test(Xow_ns_.Tid__special)
 			;
 	}
 }
@@ -57,7 +57,7 @@ class Xow_ns_fxt {
 		Xow_ns actl = new Xow_ns(nsId, Xow_ns_case_.Tid__1st, Bry_.Empty, false);
 		Tfds.Eq(expd_id_subjId, actl.Id_subj_id());
 		Tfds.Eq(expd_id_talkId, actl.Id_talk_id());
-		Tfds.Eq(expd_id_subj, actl.Id_subj());
-		Tfds.Eq(expd_id_talk, actl.Id_talk());
+		Tfds.Eq(expd_id_subj, actl.Id_is_subj());
+		Tfds.Eq(expd_id_talk, actl.Id_is_talk());
 	}	
 }

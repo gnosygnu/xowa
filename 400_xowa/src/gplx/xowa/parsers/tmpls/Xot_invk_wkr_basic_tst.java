@@ -209,7 +209,7 @@ public class Xot_invk_wkr_basic_tst {
 	}
 	@Test  public void Missing_foreign() {
 		Xow_ns ns = fxt.Wiki().Ns_mgr().Ns_template();
-		byte[] old_ns = ns.Name_bry();
+		byte[] old_ns = ns.Name_db();
 		ns.Name_bry_(Bry_.new_a7("Template_foreign"));
 		fxt.Test_parse_tmpl_str("{{Missing}}", "[[:Template_foreign:Missing]]");
 		ns.Name_bry_(old_ns);
@@ -233,7 +233,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|{{{1}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
-		fxt.Test_parse_tmpl_str("{{test_1| a }}", " a ");
+		fxt.Test_parse_tmpl_str("{{test_1| a }}", " a");	// tmpl.trim_end: always trim end; DATE:2015-11-07
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Ws_trimmed_key_1() { // PURPOSE: trim prm when passed as key;
@@ -254,7 +254,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|1={{{1}}}{{{2}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
-		fxt.Test_parse_tmpl_str("{{test_1| a | b }}", "a  b");
+		fxt.Test_parse_tmpl_str("{{test_1| a | b }}", "a b");	// tmpl.trim_end: always trim end; DATE:2015-11-07
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Ws_eval_prm() {	// PURPOSE: skip ws in prm_idx; EX:it.w:Portale:Giochi_da_tavolo; it.w:Template:Alternate; DATE:2014-02-09
@@ -316,7 +316,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Tmpl_aliases() { // PURPOSE: handled aliases for Template ns
-		fxt.Wiki().Ns_mgr().Aliases_add(Xow_ns_.Id_template, "TemplateAlias");
+		fxt.Wiki().Ns_mgr().Aliases_add(Xow_ns_.Tid__template, "TemplateAlias");
 		fxt.Wiki().Ns_mgr().Init();
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("tmpl_key", "tmpl_val");
@@ -324,7 +324,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Tmpl_aliases_2() { // PURPOSE: handled aliases for other ns; DATE:2013-02-08
-		fxt.Wiki().Ns_mgr().Aliases_add(Xow_ns_.Id_project, "WP");
+		fxt.Wiki().Ns_mgr().Aliases_add(Xow_ns_.Tid__project, "WP");
 		fxt.Wiki().Ns_mgr().Init();
 		fxt.Init_defn_clear();
 		fxt.Init_page_create("Project:tmpl_key", "tmpl_val");

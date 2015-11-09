@@ -32,7 +32,7 @@ public class Xop_under_lxr_tst {
 	}
 	@Test   public void Notoc_basic() {
 		fxt.Wtr_cfg().Toc__show_(Bool_.Y);	// NOTE: must enable in order for TOC to show (and to make sure NOTOC suppresses) 
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str__esc(String_.Concat_lines_nl
 		(	"__NOTOC__"
 		,	"==a=="
 		,	"==b=="

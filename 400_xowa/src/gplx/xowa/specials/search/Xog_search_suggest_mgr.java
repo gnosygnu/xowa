@@ -41,7 +41,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		args_default = tmp_url.Qargs();
 	}
 	private String args_default_str = "";// default args for search
-	public static final int[] Ns_default_main = new int[] {Xow_ns_.Id_main};
+	public static final int[] Ns_default_main = new int[] {Xow_ns_.Tid__main};
 	public void Cancel() {
 		cur_cmd.Cancel();
 		long prv_time = Env_.TickCount();

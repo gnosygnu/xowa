@@ -20,9 +20,15 @@ public class Html_atr_ {
 	public static final byte[] 
 	  Bry__id		= Bry_.new_a7("id")
 	, Bry__class	= Bry_.new_a7("class")
-	, Bry__rel		= Bry_.new_a7("rel")
-	, Bry__href		= Bry_.new_a7("href")
 	, Bry__title	= Bry_.new_a7("title")
 	, Bry__style	= Bry_.new_a7("style")
+	// <a>
+	, Bry__href		= Bry_.new_a7("href")
+	, Bry__rel		= Bry_.new_a7("rel")
+	// <img>
+	, Bry__alt		= Bry_.new_a7("alt")
+	, Bry__src		= Bry_.new_a7("src")
+	, Bry__width	= Bry_.new_a7("width")
+	, Bry__height	= Bry_.new_a7("height")
 	;
 }

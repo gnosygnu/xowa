@@ -41,7 +41,7 @@ public class String_ implements GfoInvkAble {
 				? null
 				: new String(v, bgn, end - bgn, "UTF-8");		
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
+		catch (Exception e) {Err_.Noop(e); throw Err_.new_("core", "unsupported encoding", "bgn", bgn, "end", end);}
 	}
 	public static String new_u8__by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
@@ -115,7 +115,7 @@ public class String_ implements GfoInvkAble {
 		return false;
 	}
 	public static boolean EqNot(String lhs, String rhs) {return !Object_.Eq(lhs, rhs);}
-	public static boolean EqEmpty(String lhs, String rhs) {return lhs.equals("");} 
+	public static boolean EqEmpty(String lhs) {return lhs.equals("");} 
 	public static String IfNullOrEmpty(String s, String or) {return s == null || s.length() == 0 ? or : s;}	
 	public static int Compare(String lhs, String rhs) {return lhs.compareTo(rhs);} // NOTE: Compare instead of compareTo b/c javafy lowercases compareTo
 	public static int Compare_ignoreCase(String lhs, String rhs) {

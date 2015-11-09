@@ -124,10 +124,10 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 				switch (popup_ttl.Ns().Id()) {
-					case Xow_ns_.Id_media:
-					case Xow_ns_.Id_file:
+					case Xow_ns_.Tid__media:
+					case Xow_ns_.Tid__file:
 						return Bry_.Empty;		// do not popup for media or file
-					case Xow_ns_.Id_special:
+					case Xow_ns_.Tid__special:
 						if (!Xows_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return Bry_.Empty;	// do not popup for special, unless popupHistory; DATE:2015-04-20
 						break;
 				}
@@ -197,7 +197,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		for (int i = 0; i < ary_len; i++) {
 			byte[] bry = ary[i];
 			int bry_len = bry.length; if (bry_len == 0) continue;	// ignore empty entries; EX: "0|"
-			Xow_ns ns = Bry_.Eq(bry, Xow_ns_.Ns_name_main_bry) 
+			Xow_ns ns = Bry_.Eq(bry, Xow_ns_.Bry__main) 
 				? ns_mgr.Ns_main()
 				: ns_mgr.Names_get_or_null(bry)
 				;
@@ -279,10 +279,10 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			popup_wiki.Init_assert();
 			Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 			switch (popup_ttl.Ns().Id()) {
-				case Xow_ns_.Id_media:
-				case Xow_ns_.Id_file:
+				case Xow_ns_.Tid__media:
+				case Xow_ns_.Tid__file:
 					return;		// do not popup for media or file
-				case Xow_ns_.Id_special:
+				case Xow_ns_.Tid__special:
 					if (!Xows_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return;	// do not popup for special, unless popupHistory; DATE:2015-04-20
 					break;
 			}

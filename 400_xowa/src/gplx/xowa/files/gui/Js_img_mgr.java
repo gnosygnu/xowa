@@ -36,7 +36,7 @@ public class Js_img_mgr {
 		String html_id = To_doc_uid(uid);
 		js_wkr.Html_img_update(html_id, html_view_url.To_http_file_str(), html_w, html_h);
 		if (Xop_lnki_type.Id_is_thumbable(lnki_type)) {	// thumb needs to set cls and width
-			js_wkr.Html_atr_set(html_id, "class", gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_consts.Str_img_cls_thumbimage);
+			js_wkr.Html_atr_set(html_id, "class", gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_cls_.Str__thumbimage);
 			js_wkr.Html_atr_set("xowa_file_div_" + uid, "style", "width:" + html_w + "px;");
 		}
 		switch (elem_tid) {

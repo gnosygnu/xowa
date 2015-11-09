@@ -60,7 +60,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
 		if (ttl == null) return rslt.Init_null();
 		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
-		if (ttl.Ns().Id() == Xow_ns_.Id_media) {	// change "Media:" -> "File:"
+		if (ttl.Ns().Id() == Xow_ns_.Tid__media) {	// change "Media:" -> "File:"
 			bfr.Add(wiki.Ns_mgr().Ns_file().Name_db_w_colon());
 			bfr.Add(ttl.Page_db());
 			ttl_bry = bfr.To_bry_and_clear();

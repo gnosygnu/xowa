@@ -151,7 +151,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 					if (page.Redirected_ttls().Count() > 0)
 						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), String_.new_u8((byte[])page.Redirected_ttls().Get_at(0)));
 					else {
-						if (ttl.Ns().Id_file())
+						if (ttl.Ns().Id_is_file())
 							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[Help:Wikis/Commons]]: ~{0}", String_.new_u8(url.Raw()));
 						else
 							usr_dlg.Prog_one("", "", "could not find: ~{0}", String_.new_u8(url.Raw()));

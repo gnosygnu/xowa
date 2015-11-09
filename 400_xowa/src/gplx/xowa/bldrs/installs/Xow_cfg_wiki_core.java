@@ -42,7 +42,7 @@ public class Xow_cfg_wiki_core {
 		for (int i = 0; i < nms_len; i++) {
 			Xow_ns ns = wiki.Ns_mgr().Ords_get_at(i);
 			wtr.Bfr().Add_int_variable(ns.Id()).Add_byte_pipe().Add_int_fixed(ns.Case_match(), 1).Add_byte_pipe();
-			csv_parser.Save(wtr.Bfr(), ns.Name_txt());
+			csv_parser.Save(wtr.Bfr(), ns.Name_ui());
 			wtr.Add_nl();
 		}
 		wtr.Add_quote_xtn_end();

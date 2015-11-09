@@ -39,10 +39,10 @@ public class Xow_data_mgr implements GfoInvkAble {
 		rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoae_page.new_()
 		Xow_ns ns = ttl.Ns();
 		switch (ns.Id()) {
-			case Xow_ns_.Id_special:
+			case Xow_ns_.Tid__special:
 				wiki.Special_mgr().Special_gen(wiki, rv, url, ttl);
 				return rv;
-			case Xow_ns_.Id_mediawiki:
+			case Xow_ns_.Tid__mediawiki:
 				if (	!called_from_msg	// if called from msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09
 					&&	Xow_page_tid.Identify_by_ttl(ttl.Page_db()) == Xow_page_tid.Tid_wikitext // skip ".js" and ".css" pages in MediaWiki; DATE:2014-06-13
 					) {		
@@ -57,7 +57,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 				}
 				break;
 		}
-		return Get_page(rv, ns, ttl, called_from_tmpl, url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect,Xoa_url_.Qarg__redirect__yes));
+		return Get_page(rv, ns, ttl, called_from_tmpl, url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
 	public Xoae_page Get_page(Xoae_page rv, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl, boolean redirect_force) {
 		int redirects = 0;
@@ -71,7 +71,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 			byte[] bry = db_page.Text();
 			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id()).Html_db_id_(db_page.Html_db_id());
 			if (redirect_force) return rv;
-			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(bry, bry.length);
+			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(bry);
 			if  (	redirect_ttl == null				// not a redirect
 				||	redirects++ > 4)					// too many redirects; something went wrong
 				break;				
@@ -101,7 +101,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 				}
 			}
 			if (vnt_missing) {
-				if (ttl.Ns().Id_file()) {
+				if (ttl.Ns().Id_is_file()) {
 					Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(wiki.Commons_wiki_key());
 					if (commons_wiki != null) {										// commons exists
 						if (!Bry_.Eq(wiki.Domain_bry(), commons_wiki.Domain_bry())) {		// !Bry_.Eq is recursion guard
@@ -133,7 +133,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		Xoa_ttl trg_ttl = Xoa_ttl.parse(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.new_(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url).Redirected_(true);
-		return wiki.Data_mgr().Get_page(page, trg_ttl.Ns(), trg_ttl, false, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes));
+		return wiki.Data_mgr().Get_page(page, trg_ttl.Ns(), trg_ttl, false, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
 	public static final int File_idx_unknown = -1;
 	static final String GRP_KEY = "xowa.wiki.data";

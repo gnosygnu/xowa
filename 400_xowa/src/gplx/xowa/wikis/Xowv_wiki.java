@@ -98,7 +98,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, GfoInvkAble {
 	}
 	public void Pages_get(Xoh_page rv, Gfo_url url, Xoa_ttl ttl) {
 		if (init_needed) Init_by_wiki();
-		if (ttl.Ns().Id_special())
+		if (ttl.Ns().Id_is_special())
 			special_mgr.Get_by_ttl(rv, url, ttl);
 		else
 			html__hdump_mgr.Load_mgr().Load(rv, ttl);

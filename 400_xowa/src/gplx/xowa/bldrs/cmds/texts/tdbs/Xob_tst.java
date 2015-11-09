@@ -27,7 +27,7 @@ public class Xob_tst {
 		(	fxt.doc_(3, "2012-01-02 13:15", "Title 2a", "text2a\ny")
 		,	fxt.doc_(2, "2012-01-02 13:14", "Title 1",  "text1\nz")
 		)
-		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Id_main, 0)
+		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Tid__main, 0)
 		,	"!!!!@|!!!!>|"
 		,	"!!!!$\t#6>K6\tTitle 2a\ttext2a"
 		,	"y\t"
@@ -35,13 +35,13 @@ public class Xob_tst {
 		,	"z\t"
 		,	""
 		)
-		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Id_main, 0)
+		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Tid__main, 0)
 		,	"!!!!C|!!!!D|"
 		,	"!!!!#|!!!!!|!!!!\"|0|!!!!(|Title 1"
 		,	"!!!!$|!!!!!|!!!!!|0|!!!!)|Title 2a"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Tid__main, Xotdb_dir_info_.Tid_ttl)
 		,	"0|Title 1|Title 2a|2"
 		,	""
 		)
@@ -53,19 +53,19 @@ public class Xob_tst {
 		(	fxt.doc_(3, "2012-01-02 13:15", "↑", "t2")
 		,	fxt.doc_(2, "2012-01-02 13:14", "!", "t1")
 		)
-		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Id_main, 0)
+		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Tid__main, 0)
 		,	"!!!!5|!!!!3|"
 		,	"!!!!$\t#6>K6\t↑\tt2\t"
 		,	"!!!!#\t#6>K5\t!\tt1\t"
 		,	""
 		)
-		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Id_main, 0)
+		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Tid__main, 0)
 		,	"!!!!=|!!!!?|"
 		,	"!!!!#|!!!!!|!!!!\"|0|!!!!#|!"
 		,	"!!!!$|!!!!!|!!!!!|0|!!!!#|↑"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Tid__main, Xotdb_dir_info_.Tid_ttl)
 		,	"0|!|↑|2"
 		,	""
 		)
@@ -76,17 +76,17 @@ public class Xob_tst {
 		fxt.doc_ary_
 		(	fxt.doc_(2, "2012-01-02 13:14", "Template:A",  "test a")
 		)
-		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Id_template, 0)
+		.Fil_expd(fxt.fil_ns_page(Xow_ns_.Tid__template, 0)
 		,	"!!!!7|"
 		,	"!!!!#\t#6>K5\tA\ttest a\t"
 		,	""
 		)
-		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Id_template, 0)
+		.Fil_expd(fxt.fil_ns_title(Xow_ns_.Tid__template, 0)
 		,	"!!!!=|"
 		,	"!!!!#|!!!!!|!!!!!|0|!!!!'|A"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_template, Xotdb_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Tid__template, Xotdb_dir_info_.Tid_ttl)
 		,	"0|A|A|1"
 		,	""
 		)
@@ -175,7 +175,7 @@ public class Xob_tst {
 		Io_mgr.Instance.SaveFilStr(url, raw);
 		Xotdb_page_raw_parser parser = new Xotdb_page_raw_parser();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
-		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Id_template, Xow_ns_case_.Tid__1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
+		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Tid__template, Xow_ns_case_.Tid__1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
 		List_adp actl = List_adp_.new_();
 		Xowd_page_itm page = new Xowd_page_itm();
 		while (parser.Read(page)) {

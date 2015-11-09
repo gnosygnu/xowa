@@ -37,9 +37,9 @@ public class Xopg_redlink_lnki_list {
 		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// occurs for invalid links
 		Xow_ns ns = ttl.Ns();
 		lnki.Html_uid_(++lnki_idx);								// NOTE: set html_id in order html to print out "id='xowa_lnki_1'; want to print out id for consistency's sake, even if these links won't be check for redlinks; DATE:2015-05-07
-		if (	ns.Id_file_or_media()							// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
-			||	(ns.Id_ctg() && !ttl.ForceLiteralLink())		// ignore ctgs which have their own html builder, unless it is literal; EX: [[:Category:A]]; DATE:2014-02-24
-			||	ns.Id_special()									// ignore special, especially Search; EX: Special:Search/Earth
+		if (	ns.Id_is_file_or_media()						// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
+			||	(ns.Id_is_ctg() && !ttl.ForceLiteralLink())		// ignore ctgs which have their own html builder, unless it is literal; EX: [[:Category:A]]; DATE:2014-02-24
+			||	ns.Id_is_special()								// ignore special, especially Search; EX: Special:Search/Earth
 			||	ttl.Anch_bgn() == Xoa_ttl.Anch_bgn_anchor_only	// anchor only link; EX: [[#anchor]]
 			||	ttl.Wik_itm() != null							// xwiki lnki; EX: simplewiki links in homewiki; [[simplewiki:Earth]]
 			)

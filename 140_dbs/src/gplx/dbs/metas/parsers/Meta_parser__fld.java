@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
 public class Meta_parser__fld {
-	public Meta_type_itm Parse_type(Bry_rdr rdr) {
+	public Meta_type_itm Parse_type(Bry_rdr_old rdr) {
 		rdr.Skip_ws();
 		Object type_obj = type_trie.Match_bgn(rdr.Src(), rdr.Pos(), rdr.Src_len());
 		if (type_obj == null) throw Err_.new_wo_type("invalid fld type", "snip", rdr.Mid_by_len_safe(40));

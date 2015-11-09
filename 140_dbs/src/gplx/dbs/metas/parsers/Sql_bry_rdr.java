@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.core.brys.*;
-public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() {
+public class Sql_bry_rdr extends Bry_rdr_old {		public byte[] Read_sql_identifier() {
 		this.Skip_ws();
 		int bgn = pos, end = -1;
 		if (pos == src_len) return null;
@@ -33,7 +33,7 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 		}
 		return Bry_.Mid(src, bgn, end);
 	}
-	@Override public Bry_rdr Skip_ws() {
+	@Override public Bry_rdr_old Skip_ws() {
 		byte b_0 = pos < src_len ? src[pos] : Byte_ascii.Null;
 		byte bgn_1 = Byte_ascii.Null;
 		byte[] end_bry = null;

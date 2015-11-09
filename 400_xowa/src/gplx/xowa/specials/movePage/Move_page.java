@@ -133,7 +133,7 @@ class Move_trg_ns_list_fmtr implements Bry_fmtr_arg {
 			Xow_ns ns = ns_mgr.Ids_get_at(i);
 			if (ns.Is_meta()) continue;	// ignore [[Special:]] and [[Media:]]
 			byte[] bry_selected = ttl.Ns().Id() == ns.Id() ? Bry_selected : Bry_.Empty;
-			fmtr.Bld_bfr_many(bfr, ns.Id(), bry_selected, ns.Name_ui());
+			fmtr.Bld_bfr_many(bfr, ns.Id(), bry_selected, ns.Name_combo());
 		}
 	}
 	private static final byte[] Bry_selected = Bry_.new_a7(" selected=''");

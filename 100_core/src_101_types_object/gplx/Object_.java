@@ -20,6 +20,18 @@ public class Object_ {
 	public static final String Cls_val_name = "Object";
 	public static final Object[] Ary_empty = new Object[0];
 	public static Object[] Ary(Object... ary) {return ary;}
+	public static Object[] Ary_add(Object[] lhs, Object[] rhs) {
+		int lhs_len = lhs.length, rhs_len = rhs.length;
+		if		(lhs_len == 0) return rhs;
+		else if (rhs_len == 0) return lhs;
+		int rv_len = lhs_len + rhs_len;
+		Object[] rv = new Object[rv_len];
+		for (int i = 0; i < lhs_len; ++i)
+			rv[i] = lhs[i];
+		for (int i = lhs_len; i < rv_len; ++i)
+			rv[i] = rhs[i - lhs_len];
+		return rv;
+	}
 	public static boolean Eq(Object lhs, Object rhs) {
 		if		(lhs == null && rhs == null)	return true;
 		else if (lhs == null || rhs == null)	return false;

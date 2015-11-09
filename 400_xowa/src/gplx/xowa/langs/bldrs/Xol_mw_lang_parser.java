@@ -226,7 +226,7 @@ public class Xol_mw_lang_parser {
 			byte[] kv_val = brys[i + val_dif];
 			Bry_.Replace_all_direct(kv_val, Byte_ascii.Underline, Byte_ascii.Space); // NOTE: siteInfo.xml names have " " not "_" (EX: "User talk"). for now, follow that convention
 			int ns_id = Id_by_mw_name(kv_key);
-//				if (ns_id == Xow_ns_.Id_null) throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "namespace_names", String_.new_u8(kv_key));
+//				if (ns_id == Xow_ns_.Tid__null) throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "namespace_names", String_.new_u8(kv_key));
 			rv[i / 2] = new Xow_ns(ns_id, Xow_ns_case_.Tid__1st, kv_val, false);	// note that Xow_ns is being used as glorified id-name struct; case_match and alias values do not matter
 		}
 		return rv;
@@ -344,27 +344,27 @@ public class Xol_mw_lang_parser {
 	public static int Id_by_mw_name(byte[] src) {
 		if (mw_names == null) {
 			mw_names = Btrie_slim_mgr.cs();
-			mw_names.Add_obj("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Id_media));
-			mw_names.Add_obj("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Id_special));
-			mw_names.Add_obj("NS_MAIN", Int_obj_val.new_(Xow_ns_.Id_main));
-			mw_names.Add_obj("NS_TALK", Int_obj_val.new_(Xow_ns_.Id_talk));
-			mw_names.Add_obj("NS_USER", Int_obj_val.new_(Xow_ns_.Id_user));
-			mw_names.Add_obj("NS_USER_TALK", Int_obj_val.new_(Xow_ns_.Id_user_talk));
-			mw_names.Add_obj("NS_PROJECT", Int_obj_val.new_(Xow_ns_.Id_project));
-			mw_names.Add_obj("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Id_project_talk));
-			mw_names.Add_obj("NS_FILE", Int_obj_val.new_(Xow_ns_.Id_file));
-			mw_names.Add_obj("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Id_file_talk));
-			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Id_mediawiki));
-			mw_names.Add_obj("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Id_mediaWiki_talk));
-			mw_names.Add_obj("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Id_template));
-			mw_names.Add_obj("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Id_template_talk));
-			mw_names.Add_obj("NS_HELP", Int_obj_val.new_(Xow_ns_.Id_help));
-			mw_names.Add_obj("NS_HELP_TALK", Int_obj_val.new_(Xow_ns_.Id_help_talk));
-			mw_names.Add_obj("NS_CATEGORY", Int_obj_val.new_(Xow_ns_.Id_category));
-			mw_names.Add_obj("NS_CATEGORY_TALK", Int_obj_val.new_(Xow_ns_.Id_category_talk));
+			mw_names.Add_obj("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Tid__media));
+			mw_names.Add_obj("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Tid__special));
+			mw_names.Add_obj("NS_MAIN", Int_obj_val.new_(Xow_ns_.Tid__main));
+			mw_names.Add_obj("NS_TALK", Int_obj_val.new_(Xow_ns_.Tid__talk));
+			mw_names.Add_obj("NS_USER", Int_obj_val.new_(Xow_ns_.Tid__user));
+			mw_names.Add_obj("NS_USER_TALK", Int_obj_val.new_(Xow_ns_.Tid__user_talk));
+			mw_names.Add_obj("NS_PROJECT", Int_obj_val.new_(Xow_ns_.Tid__project));
+			mw_names.Add_obj("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Tid__project_talk));
+			mw_names.Add_obj("NS_FILE", Int_obj_val.new_(Xow_ns_.Tid__file));
+			mw_names.Add_obj("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Tid__file_talk));
+			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Tid__mediawiki));
+			mw_names.Add_obj("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Tid__mediawiki_talk));
+			mw_names.Add_obj("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Tid__template));
+			mw_names.Add_obj("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Tid__template_talk));
+			mw_names.Add_obj("NS_HELP", Int_obj_val.new_(Xow_ns_.Tid__help));
+			mw_names.Add_obj("NS_HELP_TALK", Int_obj_val.new_(Xow_ns_.Tid__help_talk));
+			mw_names.Add_obj("NS_CATEGORY", Int_obj_val.new_(Xow_ns_.Tid__category));
+			mw_names.Add_obj("NS_CATEGORY_TALK", Int_obj_val.new_(Xow_ns_.Tid__category_talk));
 		}
 		Object o = mw_names.Match_exact(src, 0, src.length);
-		return o == null ? Xow_ns_.Id_null : ((Int_obj_val)o).Val();
+		return o == null ? Xow_ns_.Tid__null : ((Int_obj_val)o).Val();
 	}	private static Btrie_slim_mgr mw_names;
 	public static final String Dir_name_core = "core";
 }

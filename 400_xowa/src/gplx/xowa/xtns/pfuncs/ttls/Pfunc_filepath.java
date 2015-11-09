@@ -28,7 +28,7 @@ public class Pfunc_filepath extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		Xowe_wiki wiki = ctx.Wiki();
-		Xoa_ttl ttl = wiki.Ttl_parse(Xow_ns_.Id_file, val_ary); if (ttl == null) return; // text is not valid ttl; exit;
+		Xoa_ttl ttl = wiki.Ttl_parse(Xow_ns_.Tid__file, val_ary); if (ttl == null) return; // text is not valid ttl; exit;
 		Xoae_page page = Load_page(wiki, ttl); if (page.Missing()) return; // page not found in wiki or commons; exit;
 		byte[] ttl_bry = page.Ttl().Page_url();
 

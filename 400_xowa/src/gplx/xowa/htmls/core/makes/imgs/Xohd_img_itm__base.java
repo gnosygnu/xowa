@@ -73,7 +73,7 @@ public abstract class Xohd_img_itm__base implements Xohd_img_itm {
 		, Int_.To_str(orig_repo_id), Int_.To_str(orig_ext), Yn.To_str(file_is_orig), Int_.To_str(file_w), Double_.To_str(lnki_time), Int_.To_str(lnki_page)
 		);
 	}
-	@gplx.Virtual public void Data_parse(Bry_rdr rdr) {
+	@gplx.Virtual public void Data_parse(Bry_rdr_old rdr) {
 		this.lnki_ttl = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(rdr.Read_bry_to_pipe());
 		this.orig_ext = rdr.Read_int_to_pipe();
 		this.lnki_type = rdr.Read_byte_to_pipe();

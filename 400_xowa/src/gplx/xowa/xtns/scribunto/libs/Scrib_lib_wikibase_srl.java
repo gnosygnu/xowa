@@ -141,11 +141,12 @@ class Scrib_lib_wikibase_srl {
 	private static KeyVal[] Srl_claims_prop_itm_core(String pid, Wdata_claim_itm_core itm) {
 		boolean snak_is_valued = itm.Snak_tid() != Wdata_dict_snak_tid.Tid_novalue;
 		int snak_is_valued_adj = snak_is_valued ? 1 : 0;
-		KeyVal[] rv = new KeyVal[2 + snak_is_valued_adj];
+		KeyVal[] rv = new KeyVal[3 + snak_is_valued_adj];
 		if (snak_is_valued)	// NOTE: novalue must not return slot (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16; ALSO: sv.w:Joseph_Jaquet; DATE:2015-07-31
 			rv[0] = KeyVal_.new_("datavalue", Srl_claims_prop_itm_core_val(itm));
 		rv[0 + snak_is_valued_adj] = KeyVal_.new_("property", pid);
 		rv[1 + snak_is_valued_adj] = KeyVal_.new_("snaktype", Wdata_dict_snak_tid.Xto_str(itm.Snak_tid()));
+		rv[2 + snak_is_valued_adj] = KeyVal_.new_("datatype", Wdata_dict_val_tid.To_str__srl(itm.Val_tid()));	// NOTE: datatype needed for Modules; PAGE:eo.w:WikidataKoord; DATE:2015-11-08
 		return rv;
 	}
 	private static final Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();

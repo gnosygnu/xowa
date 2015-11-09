@@ -30,8 +30,8 @@ public class Xob_page_cmd_tst {
 		)
 		.Exec_run(new Xob_page_cmd(fxt.Bldr(), fxt.Wiki()))
 		;
-		fxt.Test_load_ttl(Xow_ns_.Id_main, "A", fxt.page_(2, "2013-06-03 01:23", false, 6));
-		fxt.Test_load_page(Xow_ns_.Id_main, 2, "text_a");
-		fxt.Test_load_ttl(Xow_ns_.Id_main, "B", fxt.page_(1, "2013-06-03 12:34", true, 15));
+		fxt.Test_load_ttl(Xow_ns_.Tid__main, "A", fxt.page_(2, "2013-06-03 01:23", false, 6));
+		fxt.Test_load_page(Xow_ns_.Tid__main, 2, "text_a");
+		fxt.Test_load_ttl(Xow_ns_.Tid__main, "B", fxt.page_(1, "2013-06-03 12:34", true, 15));
 	}
 }

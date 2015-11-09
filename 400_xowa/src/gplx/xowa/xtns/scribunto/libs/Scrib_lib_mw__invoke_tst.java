@@ -30,7 +30,7 @@ public class Scrib_lib_mw__invoke_tst {
 	@Test  public void GetAllExpandedArguments_ws_prm_key_missing() {	// PURPOSE: do not trim val if key missing; parameterized value ("{{{1}}}")
 		fxt.Init_tmpl("{{#invoke:Mod_0|Prc_0|{{{1}}}}}");
 		fxt.Init_page("{{test| a }}");
-		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("current"),  "\n   a ");				// " a " -> " a "
+		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("current"),  "\n   a");				// " a " -> " a"	// tmpl.trim_end: always trim end; DATE:2015-11-07
 	}
 	@Test  public void GetAllExpandedArguments__ignore_empty_key() {// PURPOSE: ignore arguents that have an empty key (|=8|); EX:w:Fool's_mate; DATE:2014-03-05
 		fxt.Init_tmpl("{{#invoke:Mod_0|Prc_0}}");
@@ -45,7 +45,7 @@ public class Scrib_lib_mw__invoke_tst {
 	}
 	@Test  public void GetExpandedArgument_ws_key_missing() {	// PURPOSE: do not trim val if key missing; literal value
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0| a }}");
-		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, " a ");			// " a " -> " a "
+		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, " a");			// " a " -> " a"	// tmpl.trim_end: always trim end; DATE:2015-11-07
 	}
 	@Test  public void GetExpandedArgument_ws_key_prm_key_exists() {	// PURPOSE: trim val if key exists; parameterized value ("key={{{1}}}")
 		fxt.Init_tmpl("{{#invoke:Mod_0|Prc_0|key1={{{1}}}}}");
@@ -55,7 +55,7 @@ public class Scrib_lib_mw__invoke_tst {
 	@Test  public void GetExpandedArgument_ws_key_prm_key_missing() {	// PURPOSE: do not trim val if key missing; parameterized value ("{{{1}}}")
 		fxt.Init_tmpl("{{#invoke:Mod_0|Prc_0|{{{1}}}}}");
 		fxt.Init_page("{{test| a }}");
-		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, " a ");			// " a " -> " a "
+		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, " a");			// " a " -> " a"	// tmpl.trim_end: always trim end; DATE:2015-11-07
 	}
 	@Test  public void Preprocess() {
 		this.Init_preprocess();

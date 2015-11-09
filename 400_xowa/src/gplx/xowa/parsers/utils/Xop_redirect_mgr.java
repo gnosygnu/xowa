@@ -27,12 +27,15 @@ public class Xop_redirect_mgr {
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
 		Xoa_ttl rv = null;
 		for (int i = 0; i < Redirect_max_allowed; i++) {
-			rv = Extract_redirect(src, src.length);
+			rv = Extract_redirect(src);
 			if (rv != null) return rv;
 		}
 		return null;
 	}
-	public Xoa_ttl Extract_redirect(byte[] src) {return Extract_redirect(src, src.length);}
+	public Xoa_ttl Extract_redirect(byte[] src) {
+		if (src == null) return Redirect_null_ttl;
+		return Extract_redirect(src, src.length);
+	}
 	public Xoa_ttl Extract_redirect(byte[] src, int src_len) {	// NOTE: this proc is called by every page. be careful of changes; DATE:2014-07-05
 		if (src_len == 0) return Redirect_null_ttl;
 		int bgn = Bry_find_.Find_fwd_while_not_ws(src, 0, src_len);
@@ -45,8 +48,8 @@ public class Xop_redirect_mgr {
 		int ttl_bgn = Xop_redirect_mgr_.Get_ttl_bgn_or_neg1(src, kwd_end, src_len);
 		if (ttl_bgn == Bry_find_.Not_found)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
-		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
-		if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
+		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn); if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
+		int pipe_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, ttl_bgn); if (pipe_pos != Bry_find_.Not_found) ttl_end = pipe_pos;	// if pipe exists, end ttl at pipe; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 		return Xoa_ttl.parse(wiki, redirect_bry);
@@ -73,7 +76,7 @@ public class Xop_redirect_mgr {
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
 			byte[] redirect_ttl = (byte[])list.Get_at(i);
 			redirect_bfr.Add(Xoh_consts.A_bgn)			// '<a href="'
-				.Add(Xoh_href_.Bry__wiki)		// '/wiki/'
+				.Add(Xoh_href_.Bry__wiki)				// '/wiki/'
 				.Add(redirect_ttl)						// 'PageA'
 				.Add(Bry_redirect_arg)					// ?redirect=no
 				.Add(Xoh_consts.A_bgn_lnki_0)			// '" title="'

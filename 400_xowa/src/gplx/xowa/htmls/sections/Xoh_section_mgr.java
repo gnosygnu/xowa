@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 public class Xoh_section_mgr {
 	private final List_adp list = List_adp_.new_();
+	public void Clear() {list.Clear();}
 	public int Len() {return list.Count();}
 	public Xoh_section_itm Get_at(int i) {return (Xoh_section_itm)list.Get_at(i);}
 	public Xoh_section_itm Add(int uid, int level, byte[] anchor, byte[] display) {

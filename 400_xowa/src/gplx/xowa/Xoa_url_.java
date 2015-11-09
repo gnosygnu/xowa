@@ -28,7 +28,7 @@ public class Xoa_url_ {
 	public static String Main_page__home_str = gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home + gplx.xowa.htmls.hrefs.Xoh_href_.Str__wiki + gplx.xowa.Xoa_page_.Main_page_str;	// EX:home/wiki/Main_Page
 	public static final byte[]
 		Qarg__redirect			= Bry_.new_a7("redirect")
-	,	Qarg__redirect__yes		= Bry_.new_a7("yes")
+	,	Qarg__redirect__no		= Bry_.new_a7("no")
 	,	Qarg__action			= Bry_.new_a7("action")
 	,	Qarg__action__edit		= Bry_.new_a7("edit")
 	;

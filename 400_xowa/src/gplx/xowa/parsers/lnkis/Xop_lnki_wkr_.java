@@ -75,7 +75,7 @@ public class Xop_lnki_wkr_ {
 		if (!wiki.Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Has(xwiki_bry)) return ttl;	// alias not in xwikis; EX: [[en_bad:File:A.png]]
 		Xoa_ttl ttl_in_xwiki = Xoa_ttl.parse(wiki, ttl_in_xwiki_bry);
 		if (ttl_in_xwiki == null) return ttl; // occurs if ttl is bad in xwiki; EX: [[en:<bad>]]
-		return ttl_in_xwiki.Ns().Id_file() ? ttl_in_xwiki : ttl;
+		return ttl_in_xwiki.Ns().Id_is_file() ? ttl_in_xwiki : ttl;
 	}
 	public static int Chk_for_tail(Xol_lang_itm lang, byte[] src, int cur_pos, int src_len, Xop_lnki_tkn lnki) {
 		int bgn_pos = cur_pos;
@@ -86,7 +86,7 @@ public class Xop_lnki_wkr_ {
 			if (lnki_trail_bry == null) break;	// no longer a lnki_trail char; stop
 			cur_pos += lnki_trail_bry.length;	// lnki_trail char; add
 		}
-		if (bgn_pos != cur_pos && lnki.Ns_id() == Xow_ns_.Id_main) {	// only mark trail if Main ns (skip trail for Image)
+		if (bgn_pos != cur_pos && lnki.Ns_id() == Xow_ns_.Tid__main) {	// only mark trail if Main ns (skip trail for Image)
 			lnki.Tail_bgn_(bgn_pos).Tail_end_(cur_pos);
 			return cur_pos;
 		}

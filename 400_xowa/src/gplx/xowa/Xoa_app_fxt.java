@@ -57,10 +57,6 @@ public class Xoa_app_fxt {
 		((Xoav_wiki_mgr)app.Wiki_mgri()).Add(rv);
 		return rv;
 	}
-//		public static Xow_wiki Make__wiki__view(Xoa_app app, String domain_str) {
-//			byte[] domain_bry = Bry_.new_u8(domain_str);
-//			return app.Wiki_mgri().Get_by_key_or_make_init_y(domain_bry);
-//		}
 	public static Xowe_wiki wiki_nonwmf(Xoae_app app, String key) {
 		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);
 		Xol_lang_itm_.Lang_init(lang);
@@ -73,7 +69,7 @@ public class Xoa_app_fxt {
 		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(Bry_.new_u8(key)), wiki_dir);
 		rv.File_mgr().Meta_mgr().Depth_(2);					// TEST: written for 2 depth
 		rv.Props().Main_page_(Xoa_page_.Main_page_bry);		// TEST: default to Main Page (nothing tests loading Main Page from wiki.gfs)			
-		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);
+		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(true);
 		app.Wiki_mgr().Add(rv);
 		return rv;
 	}
@@ -86,11 +82,11 @@ public class Xoa_app_fxt {
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:c"), Bry_.new_a7("trg:c"));
 	}
 	public static void repo2_(Xoae_app app, Xowe_wiki wiki) {
-		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/http/en.wikipedia.org/"		, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
-		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/file/en.wikipedia.org/"		, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/http/en.wikipedia.org/"				, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/xowa/file/en.wikipedia.org/"			, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
-		app.File_mgr().Repo_mgr().Set("src:comm", "mem/http/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
-		app.File_mgr().Repo_mgr().Set("trg:comm", "mem/file/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		app.File_mgr().Repo_mgr().Set("src:comm", "mem/http/commons.wikimedia.org/"			, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:comm", "mem/xowa/file/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:comm"), Bry_.new_a7("trg:comm"));
 	}
 	public static void Init_gui(Xoae_app app, Xowe_wiki wiki) {

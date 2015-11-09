@@ -52,13 +52,13 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
 	public Xoh_file_img_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_file_img_wkr v) {lnki_file_wkr = v;} private Xoh_file_img_wkr lnki_file_wkr;
 	public byte[] Ttl_ary() {
-		return ttl.ForceLiteralLink() || ns_id != Xow_ns_.Id_main		// if [[:]] or non-main (Category, Template)
+		return ttl.ForceLiteralLink() || ns_id != Xow_ns_.Tid__main		// if [[:]] or non-main (Category, Template)
 			? ttl.Full_txt()											// use full_txt (no initial colon; capitalize first)
 			: ttl.Raw();												// use raw (preserve case, white-spaces)
 	}
 	public boolean Caption_exists() {
 		return !((caption_tkn == Xop_tkn_null.Null_tkn)		// trg only; no caption: EX: [[a]] vs. [[a|b]] which has a trg of a and a caption of b
-				||	(ns_id == Xow_ns_.Id_category			// a Category only has a target; any caption is ignored; EX: [[Category:a|b], b is ignored			
+				||	(ns_id == Xow_ns_.Tid__category			// a Category only has a target; any caption is ignored; EX: [[Category:a|b], b is ignored			
 					&& !ttl.ForceLiteralLink()));				
 	}
 	public Xop_lnki_tkn Lnki_type_(byte v) {

@@ -26,6 +26,6 @@ public class Xoh_arg_img_core__hdump implements Xoh_arg_img_core {
 		bfr.Add_byte_space();
 		bfr.Add(gplx.xowa.htmls.core.makes.Xoh_make_trie_.Bry__img);
 		bfr.Add_int_variable(uid);
-		bfr.Add_byte_apos();
+		bfr.Add_byte_quote();
 	}
 }

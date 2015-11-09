@@ -35,7 +35,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 		this.Qid_bgn();
 	}
 	public void Wkr_run(Xowd_page_itm page) {
-		if (page.Ns_id() != Xow_ns_.Id_main) return;	// qid pages are only in the Main namespace
+		if (page.Ns_id() != Xow_ns_.Tid__main) return;	// qid pages are only in the Main namespace
 		Json_doc jdoc = parser.Parse(page.Text()); 
 		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db())); return;}
 		this.Parse_jdoc(jdoc);
@@ -51,7 +51,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 			byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();
 			ns_parser.Find(ns_parser_rslt, sitelink_site, sitelink_ttl);
 			int sitelink_ns = ns_parser_rslt.Ns_id();
-			if (sitelink_ns != Xow_ns_.Id_main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
+			if (sitelink_ns != Xow_ns_.Tid__main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
 				sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
 			sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
 			this.Qid_add(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21

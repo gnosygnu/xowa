@@ -191,7 +191,7 @@ public class Xol_lang_srl {
 		for (int i = 0; i < ns_grp_len; i++) {
 			Xow_ns ns = ns_grp.Get_at(i);
 			bfr.Add_int_variable(ns.Id()).Add_byte_pipe();									// id|
-			csv_parser.Save(bfr, ns.Name_bry());											// name
+			csv_parser.Save(bfr, ns.Name_db());												// name
 			bfr.Add_byte_nl();																// \n
 		}
 		bldr.Add_quote_xtn_end();															// ']:>\n

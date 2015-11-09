@@ -47,6 +47,7 @@ public class Xowd_text_tbl implements RlsAble {
 		Db_rdr rdr = stmt_select.Clear().Val_int(fld_page_id, page_id).Exec_select__rls_manual();
 		try {
 			byte[] rv = (byte[])rdr.Read_bry(fld_text_data);
+			if (rv == null) rv = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert nul to empty String; DATE:2015-11-08
 			rv = zip_mgr.Unzip(zip_tid, rv);
 			return rv;
 		}	finally {rdr.Rls();}

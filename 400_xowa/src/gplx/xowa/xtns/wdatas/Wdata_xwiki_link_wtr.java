@@ -25,7 +25,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 		List_adp slink_list = page.Slink_list();
 		Xoa_ttl page_ttl = page.Ttl();
 		byte[] qid = Write_wdata_links(slink_list, page.Wikie(), page_ttl, page.Wdata_external_lang_links());
-		if (!Bry_.Eq(qid, Qid_null) && !page_ttl.Ns().Id_special())	// don't write "In other languages" if no qid; also skip Special ns; needed for pages with wbase page, but no sitelinks; PAGE:en.w:Tintinan; DATE:2015-08-03
+		if (!Bry_.Eq(qid, Qid_null) && !page_ttl.Ns().Id_is_special())	// don't write "In other languages" if no qid; also skip Special ns; needed for pages with wbase page, but no sitelinks; PAGE:en.w:Tintinan; DATE:2015-08-03
 			page.Wiki().App().Xwiki_mgr__sitelink_mgr().Write_html(bfr, page.Wikie(), slink_list, qid);
 	}
 	public static byte[] Write_wdata_links(List_adp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {

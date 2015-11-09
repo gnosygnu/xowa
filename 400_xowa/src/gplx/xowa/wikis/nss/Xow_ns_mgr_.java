@@ -24,7 +24,7 @@ public class Xow_ns_mgr_ {
 		rv = rv.Add_new(-2, "Media").Add_new(-1, "Special").Add_new(0, "").Add_new(1, "Talk").Add_new(2, "User").Add_new(3, "User_talk").Add_new(4, "Wikipedia").Add_new(5, "Wikipedia_talk")
 			.Add_new(6, "File").Add_new(7, "File_talk").Add_new(8, "MediaWiki").Add_new(9, "MediaWiki_talk").Add_new(10, "Template").Add_new(11, "Template_talk")
 			.Add_new(12, "Help").Add_new(13, "Help_talk").Add_new(14, "Category").Add_new(15, "Category_talk").Add_new(100, "Portal").Add_new(101, "Portal_talk").Add_new(108, "Book").Add_new(109, "Book_talk")
-			.Add_new(gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module, gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_name_module).Add_new(gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module_talk, gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_name_module_talk)
+			.Add_new(Xow_ns_.Tid__module, Xow_ns_.Key__module).Add_new(Xow_ns_.Tid__module_talk, Xow_ns_.Key__module_talk)
 			.Add_defaults()
 			;
 		rv.Init();
@@ -37,14 +37,14 @@ public class Xow_ns_mgr_ {
 			Xow_ns ns_name = ns_names.Get_at(i);
 			int ns_id = ns_name.Id();
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);
-			ns.Name_bry_(ns_name.Name_bry());
+			ns.Name_bry_(ns_name.Name_db());
 		}
 		ns_names = lang.Ns_aliases();
 		ns_names_len = ns_names.Len();
 		for (int i = 0; i < ns_names_len; i++) {
 			Xow_ns ns_name = ns_names.Get_at(i);
 			int ns_id = ns_name.Id();
-			ns_mgr.Aliases_add(ns_id, ns_name.Name_str());
+			ns_mgr.Aliases_add(ns_id, ns_name.Name_db_str());
 		}
 		ns_mgr.Init();
 	}

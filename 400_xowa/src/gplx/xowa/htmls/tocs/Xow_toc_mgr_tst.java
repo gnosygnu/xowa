@@ -17,9 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.htmls.core.htmls.*;
-public class Xow_toc_mgr_tst {
-	private Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
-	@Before public void init() {fxt.Clear();}
+public class Xow_toc_mgr_tst {		
+	@Before public void init() {fxt.Clear();} private final Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
 		( "==a=="
@@ -294,7 +293,7 @@ public class Xow_toc_mgr_tst {
 	@Test   public void Xnde_nest_inline() {	// PURPOSE: do not render inline xndes; EX: Magnetic_resonance_imaging
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
-		, "==a<span id='b'>b<br/></span>=="
+		, "==a<span id=\"b\">b<br/></span>=="
 		)
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
@@ -519,6 +518,7 @@ class Xow_toc_mgr_fxt {
 		Tfds.Eq_ary(String_.SplitLines_nl(expd), String_.SplitLines_nl(tmp.To_str_and_clear()), raw);
 	}
 	public void Test_html_all(String raw, String expd) {
+		expd = Xoh_consts.Escape_apos(expd);
 		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		toc_mgr.Clear();
 		fxt.Test_parse_page_all_str(raw, expd);

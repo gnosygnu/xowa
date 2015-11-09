@@ -25,11 +25,11 @@ public class Xoh_make_trie_ {
 	;
 	public static final byte[]
 	  Bry__dir						= Bry_.new_a7("~{xowa_dir}")
-	, Bry__img						= Bry_.new_a7("xowa_img='")
-	, Bry__img_style				= Bry_.new_a7("xowa_img_style='")
+	, Bry__img						= Bry_.new_a7("xowa_img=\"")
+	, Bry__img_style				= Bry_.new_a7("xowa_img_style=\"")
 	, Bry__file_play				= Bry_.new_a7("<xowa_play id='")
 	, Bry__file_info				= Bry_.new_a7("<xowa_info id='")
-	, Bry__file_mgnf				= Bry_.new_a7("<xowa_mgnf id='")
+	, Bry__file_mgnf				= Bry_.new_a7("<xowa_mgnf id=\"")
 	, Bry__hiero_dir				= Bry_.new_a7("~{xowa_hiero_dir}")
 	, Bry__gallery_box_max			= Bry_.new_a7("xowa_gly_box_max='")
 	, Bry__gallery_box_w			= Bry_.new_a7("xowa_gly_box_w='")
@@ -44,7 +44,6 @@ public class Xoh_make_trie_ {
 	;
 	public static Btrie_slim_mgr new_trie() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
-		trie_itm(rv, Tid__hdr				, Byte_ascii.Escape		, Xoh_html_dict_.Type__hdr);
 		trie_itm(rv, Tid__dir				, Byte_ascii.Escape		, Bry__dir);
 		trie_itm(rv, Tid__img				, Byte_ascii.Apos		, Bry__img);
 		trie_itm(rv, Tid__img_style			, Byte_ascii.Apos		, Bry__img_style);

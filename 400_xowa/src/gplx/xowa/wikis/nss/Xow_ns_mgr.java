@@ -101,9 +101,9 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		for (int i = 0; i < ords_len; i++) {
 			Xow_ns ns = ords[i];
 			if (ns == null) continue;	// TEST: allow gaps in ns numbers; see Talk_skip test and related
-			if (ns.Id() == Xow_ns_.Id_project_talk) Fix_project_talk(ns);	// NOTE: handle $1 talk as per Language.php!fixVariableInNamespace; placement is important as it must go before key registration but after ord sort
-			Rebuild_hashes__add(name_hash, ns, ns.Name_bry());
-			if (ns.Id_tmpl()) tmpl_hash.Add(ns.Name_db_w_colon(), ns.Name_db_w_colon());
+			if (ns.Id() == Xow_ns_.Tid__project_talk) Fix_project_talk(ns);	// NOTE: handle $1 talk as per Language.php!fixVariableInNamespace; placement is important as it must go before key registration but after ord sort
+			Rebuild_hashes__add(name_hash, ns, ns.Name_db());
+			if (ns.Id_is_tmpl()) tmpl_hash.Add(ns.Name_db_w_colon(), ns.Name_db_w_colon());
 		}
 		int aliases_len = aliases.Count();
 		for (int i = 0; i < aliases_len; i++) {
@@ -113,7 +113,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			ns.Aliases_add(kv.Key());	// register alias with official ns; EX: "Image" will be placed in "File"'s .Aliases
 			byte[] alias_bry = Bry_.new_u8(kv.Key());
 			Rebuild_hashes__add(name_hash, ns, alias_bry);
-			if (ns.Id_tmpl()) {
+			if (ns.Id_is_tmpl()) {
 				byte[] alias_name = Bry_.new_u8(kv.Key());
 				alias_name = Bry_.Add(alias_name, Byte_ascii.Colon);
 				tmpl_hash.Add_if_dupe_use_nth(alias_name, alias_name);
@@ -121,11 +121,11 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		}
 	}
 	private void Fix_project_talk(Xow_ns ns) {
-		byte[] ns_name = ns.Name_bry();
-		if (Bry_find_.Find_fwd(ns.Name_bry(), Project_talk_fmt_arg)== Bry_find_.Not_found) return; // no $1 found; exit
+		byte[] ns_name = ns.Name_db();
+		if (Bry_find_.Find_fwd(ns.Name_db(), Project_talk_fmt_arg)== Bry_find_.Not_found) return; // no $1 found; exit
 		Xow_ns project_ns = ords[ns.Ord_subj_id()];
 		if (project_ns == null) return;	// should warn or throw error; for now just exit
-		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_bry()));
+		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_db()));
 	}	private static final byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(key, ns);
@@ -134,10 +134,10 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			hash.Add_if_dupe_use_nth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
 	}
 	public Xow_ns_mgr Add_defaults() { // NOTE: needs to happen after File ns is added; i.e.: cannot be put in Xow_ns_mgr() {} ctor
-		Aliases_add(Xow_ns_.Id_file		, "Image");			// REF.MW: Setup.php; add "Image", "Image talk" for backward compatibility; note that MW hardcodes Image ns as well
-		Aliases_add(Xow_ns_.Id_file_talk, "Image_talk");
-		Aliases_add(Xow_ns_.Id_project	, "Project");		// always add "Project" ns (EX: Wikipedia is name for en.wikipedia.org; not sure if MW hardcodes, but it is in messages
-		Aliases_add(gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module, "Module");		// always add "Module" ns; de.wikipedia.org has "Modul" defined in siteinfo.xml, but also uses Module
+		Aliases_add(Xow_ns_.Tid__file		, "Image");			// REF.MW: Setup.php; add "Image", "Image talk" for backward compatibility; note that MW hardcodes Image ns as well
+		Aliases_add(Xow_ns_.Tid__file_talk	, "Image_talk");
+		Aliases_add(Xow_ns_.Tid__project	, "Project");		// always add "Project" ns (EX: Wikipedia is name for en.wikipedia.org; not sure if MW hardcodes, but it is in messages
+		Aliases_add(Xow_ns_.Tid__module		, "Module");		// always add "Module" ns; de.wikipedia.org has "Modul" defined in siteinfo.xml, but also uses Module
 		return this;
 	}
 	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_u8(name), Xow_ns_case_.Tid__1st, false);}	// for tst_ constructor
@@ -145,24 +145,24 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		Bry_.Replace_all_direct(name, Byte_ascii.Space, Byte_ascii.Underline);	// standardize on _; EX: User talk -> User_talk; DATE:2013-04-21
 		Xow_ns ns = new Xow_ns(ns_id, caseMatchId, name, alias);
 		switch (ns_id) {
-			case Xow_ns_.Id_main:					ns_main = ns; break;
-			case Xow_ns_.Id_template:				ns_template = ns; break;
-			case Xow_ns_.Id_portal:					ns_portal = ns; break;
-			case Xow_ns_.Id_project:				ns_project = ns; break;
-			case Xow_ns_.Id_mediawiki:				ns_mediawiki = ns; break;
-			case Scrib_xtn_mgr.Ns_id_module:		ns_module = ns; break;
-			case Xow_ns_.Id_file:					if (ns_file == null) ns_file = ns; break;	// NOTE: if needed, else Image will become the official ns_file
-			case Xow_ns_.Id_category:
+			case Xow_ns_.Tid__main:						ns_main = ns; break;
+			case Xow_ns_.Tid__template:					ns_template = ns; break;
+			case Xow_ns_.Tid__portal:					ns_portal = ns; break;
+			case Xow_ns_.Tid__project:					ns_project = ns; break;
+			case Xow_ns_.Tid__mediawiki:				ns_mediawiki = ns; break;
+			case Xow_ns_.Tid__module:					ns_module = ns; break;
+			case Xow_ns_.Tid__file:						if (ns_file == null) ns_file = ns; break;	// NOTE: if needed, else Image will become the official ns_file
+			case Xow_ns_.Tid__category:
 				ns_category = ns;
 				if (category_trie == null)
 					category_trie = Btrie_slim_mgr.new_(ns.Case_match() == Xow_ns_case_.Tid__all);
-				category_trie.Add_obj(ns.Name_bry(), this);
+				category_trie.Add_obj(ns.Name_db(), this);
 				break;
 		}
 		++ns_count;
 		if (!id_hash.Has(ns_hash_lkp.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
 			id_hash.Add(Int_obj_ref.new_(ns.Id()), ns);
-		name_hash.Add_if_dupe_use_nth(ns.Name_bry(), new Xow_ns_mgr_name_itm(ns.Name_bry(), ns));
+		name_hash.Add_if_dupe_use_nth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns.Name_db(), ns));
 		return this;
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -226,10 +226,10 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		this.Add_new(ns_id, Int_.To_bry(ns_id), Xow_ns_case_.Tid__1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
 	}
 	public byte[] Bld_ttl_w_ns(Bry_bfr bfr, boolean text_form, boolean literalize, int ns_id, byte[] ttl) {
-		if (ns_id == Xow_ns_.Id_main) return ttl;
+		if (ns_id == Xow_ns_.Tid__main) return ttl;
 		Xow_ns ns = Ids_get_or_null(ns_id); if (ns == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "ns_mgr:uknown ns_id; ns_id=~{0} ttl=~{1}", ns_id, ttl); return ttl;}
 		if (literalize) bfr.Add_byte(Byte_ascii.Colon);	// NOTE: add : to literalize ns; EX: [[Category:A]] will get thrown into category list; [[:Category:A]] will print
-		bfr.Add(text_form ? ns.Name_txt_w_colon() : ns.Name_db_w_colon());
+		bfr.Add(text_form ? ns.Name_ui_w_colon() : ns.Name_db_w_colon());
 		bfr.Add(ttl);
 		return bfr.To_bry_and_clear();
 	}

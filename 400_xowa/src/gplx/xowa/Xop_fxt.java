@@ -265,6 +265,7 @@ public class Xop_fxt {
 		Parse_chk(raw_bry, root, expd_ary);
 	}
 	public void Data_create(String ttl_str, String text_str) {Init_page_create(wiki, ttl_str, text_str);}
+	public void Test_parse_page_all_str__esc(String raw, String expd) {Test_parse_page_all_str(raw, Xoh_consts.Escape_apos(expd));}
 	public void Test_parse_page_all_str(String raw, String expd) {
 		String actl = Exec_parse_page_all_as_str(raw);
 		Tfds.Eq_ary_str(String_.SplitLines_nl(expd), String_.SplitLines_nl(actl), raw);
@@ -302,6 +303,7 @@ public class Xop_fxt {
 		tst_mgr.Tst_ary("tkns:", expd_ary, actl_ary);
 		tst_Log_check();
 	}
+	public Xop_fxt Test_parse_page_wiki_str__esc(String raw, String expd) {return Test_parse_page_wiki_str(raw, Xoh_consts.Escape_apos(expd));}
 	public Xop_fxt Test_parse_page_wiki_str(String raw, String expd) {
 		Tfds.Eq_str_lines(expd, Exec_parse_page_wiki_as_str(raw), raw);
 		return this;

@@ -21,6 +21,7 @@ import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.makes.imgs.*; import 
 import gplx.xowa.parsers.*;
 public class Xow_hdump_mgr__load_tst {
 	@Before public void init() {fxt.Clear();} private Xohd_hdump_wtr_fxt fxt = new Xohd_hdump_wtr_fxt();
+	@Test   public void Stub() {}
 //		@Test   public void Image_full() {
 //			fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
 //			fxt.Test_write_all
@@ -42,68 +43,68 @@ public class Xow_hdump_mgr__load_tst {
 //			, "</div>"
 //			));
 //		}
-	@Test   public void Audio_thumb() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer("A.oga", 0, 220, -1, Bool_.N, Xof_ext_.Id_oga));
-		fxt.Test_write_all
-		( "[[File:A.oga|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
-		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
-		, "    <div id=\"xowa_media_div\"><xowa_play id='0'/><xowa_info id='0'/>"
-		, "    </div>"
-		, "    <div class=\"thumbcaption\"><xowa_mgnf id='0'/>"
-		, "      test_caption"
-		, "    </div>"
-		, "  </div>"
-		, "</div>"
-		));
-	}
-	@Test   public void Video_thumb() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer("A.ogv", 0, 0, 0, Bool_.N, Xof_ext_.Id_ogv));
-		fxt.Test_write_all
-		( "[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
-		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
-		, "    <div id=\"xowa_media_div\">"
-		, "      <div>"
-		, "        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
-		, "          <img id=\"xowa_file_img_0\" xowa_img='0' alt=\"\" />"
-		, "        </a>"
-		, "      </div><xowa_play id='0'/>"
-		, "    </div>"
-		, "    <div class=\"thumbcaption\"><xowa_mgnf id='0'/>"
-		, "      test_caption"
-		, "    </div>"
-		, "  </div>"
-		, "</div>"
-		));
-	}
-	@Test   public void Hiero() {
-		Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(fxt.Fxt());
-		hiero_fxt.Reset();
-		hiero_fxt.Init_hiero_A1_B1();
-		fxt.Test_write_frag("<hiero>A1</hiero>", "src='~{xowa_hiero_dir}hiero_A1.png'");
-	}
-	@Test   public void Gallery() {
-		Gallery_mgr_base.File_found_mode = Bool_.__byte;
-		fxt.Test_write_all
-		( "<gallery>File:A.png|A1</gallery>", String_.Concat_lines_nl_skip_last
-		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" xowa_gly_box_max='0'>"
-		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" xowa_gly_box_w='0'>"
-		, "    <div xowa_gly_box_w='0'>"
-		, "      <div class=\"thumb\" style=\"width: 150px;\">"
-		, "        <div xowa_gly_img_pad='0'>"
-		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" xowa_img='0' /></a>"
-		, "        </div>"
-		, "      </div>"
-		, "      <div class=\"gallerytext\"><p>A1"
-		, "</p>"
-		, ""
-		, "      </div>"
-		, "    </div>"
-		, "  </li>"
-		, "</ul>"
-		));
-	}
+//		@Test   public void Audio_thumb() {
+//			fxt.Expd_itms_xfers(fxt.Make_xfer("A.oga", 0, 220, -1, Bool_.N, Xof_ext_.Id_oga));
+//			fxt.Test_write_all
+//			( "[[File:A.oga|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
+//			( "<div class=\"thumb tright\">"
+//			, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
+//			, "    <div id=\"xowa_media_div\"><xowa_play id='0'/><xowa_info id='0'/>"
+//			, "    </div>"
+//			, "    <div class=\"thumbcaption\"><xowa_mgnf id='0'/>"
+//			, "      test_caption"
+//			, "    </div>"
+//			, "  </div>"
+//			, "</div>"
+//			));
+//		}
+//		@Test   public void Video_thumb() {
+//			fxt.Expd_itms_xfers(fxt.Make_xfer("A.ogv", 0, 0, 0, Bool_.N, Xof_ext_.Id_ogv));
+//			fxt.Test_write_all
+//			( "[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
+//			( "<div class=\"thumb tright\">"
+//			, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
+//			, "    <div id=\"xowa_media_div\">"
+//			, "      <div>"
+//			, "        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
+//			, "          <img id=\"xowa_file_img_0\" xowa_img='0' alt=\"\" />"
+//			, "        </a>"
+//			, "      </div><xowa_play id='0'/>"
+//			, "    </div>"
+//			, "    <div class=\"thumbcaption\"><xowa_mgnf id='0'/>"
+//			, "      test_caption"
+//			, "    </div>"
+//			, "  </div>"
+//			, "</div>"
+//			));
+//		}
+//		@Test   public void Hiero() {
+//			Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(fxt.Fxt());
+//			hiero_fxt.Reset();
+//			hiero_fxt.Init_hiero_A1_B1();
+//			fxt.Test_write_frag("<hiero>A1</hiero>", "src='~{xowa_hiero_dir}hiero_A1.png'");
+//		}
+//		@Test   public void Gallery() {
+//			Gallery_mgr_base.File_found_mode = Bool_.__byte;
+//			fxt.Test_write_all
+//			( "<gallery>File:A.png|A1</gallery>", String_.Concat_lines_nl_skip_last
+//			( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" xowa_gly_box_max='0'>"
+//			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" xowa_gly_box_w='0'>"
+//			, "    <div xowa_gly_box_w='0'>"
+//			, "      <div class=\"thumb\" style=\"width: 150px;\">"
+//			, "        <div xowa_gly_img_pad='0'>"
+//			, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" xowa_img='0' /></a>"
+//			, "        </div>"
+//			, "      </div>"
+//			, "      <div class=\"gallerytext\"><p>A1"
+//			, "</p>"
+//			, ""
+//			, "      </div>"
+//			, "    </div>"
+//			, "  </li>"
+//			, "</ul>"
+//			));
+//		}
 }
 class Xodb_hdump_mgr__base_fxt {
 	protected Bry_bfr bfr = Bry_bfr.reset_(255);

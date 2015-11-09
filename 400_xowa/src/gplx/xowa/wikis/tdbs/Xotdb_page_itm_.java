@@ -75,7 +75,7 @@ public class Xotdb_page_itm_ {
 			.Add(page.Ttl_page_db())						.Add_byte_nl();
 	}
 	public static void Txt_page_save(Bry_bfr bfr, int id, DateAdp modified_on, byte[] title, byte[] text, boolean add_nl) {
-		int ts = Bit_.Xto_int_date_short(modified_on.XtoSegAry());
+		int ts = Int_flag_bldr_.To_int_date_short(modified_on.XtoSegAry());
 		bfr	.Add_base85(id	, Base85_.Len_int)			.Add_byte(Txt_page_dlm)			// needed for mass template load
 			.Add_base85(ts	, Base85_.Len_int)			.Add_byte(Txt_page_dlm)
 			.Add(title)										.Add_byte(Txt_page_dlm)			// needed for rebuilding ttl files

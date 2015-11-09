@@ -17,14 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.net.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.wikis.domains.*;
+import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm implements gplx.CompareAble {
+	private final boolean show_in_sitelangs_base;
 	public Xow_xwiki_itm(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] domain_name, byte[] abrv_wm) {
 		this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry); 
 		this.url_fmt = url_fmt; this.lang_id = lang_id;
 		this.url_fmtr = Bry_.Len_eq_0(url_fmt) ? null : Bry_fmtr.new_(url_fmt, "0");
 		this.domain_tid = domain_tid; this.domain_bry = domain_bry; this.domain_name = domain_name; this.abrv_wm = abrv_wm;
+		int key_bry_len = key_bry.length;
+		this.show_in_sitelangs_base
+			=	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
+			&&	domain_tid != Xow_domain_tid_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
+			&&	Bry_.Match(domain_bry, 0, key_bry_len, key_bry) && key_bry_len + 1 < domain_bry.length && domain_bry[key_bry_len] == Byte_ascii.Dot	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
+			;
 	}
 	public byte[]	Key_bry() {return key_bry;} private final byte[] key_bry;				// EX: commons
 	public String	Key_str() {return key_str;} private final String key_str;
@@ -37,11 +44,9 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public byte[]	Abrv_wm() {return abrv_wm;} private final byte[] abrv_wm;				// EX: enwiki; needed for sitelinks
 	public boolean		Offline() {return offline;} public Xow_xwiki_itm Offline_(boolean v) {offline = v; return this;} private boolean offline;
 	public int compareTo(Object obj) {Xow_xwiki_itm comp = (Xow_xwiki_itm)obj; return Bry_.Compare(key_bry, comp.key_bry);}
-	public boolean Type_is_xwiki_lang(byte[] cur_lang_key) {
-		return	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
-			&&	domain_tid != Xow_domain_tid_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+	public boolean Show_in_sitelangs(byte[] cur_lang_key) {
+		return	show_in_sitelangs_base
 			&&	!Bry_.Eq(key_bry, cur_lang_key) 			// lang is different than current; EX: [[en:A]] in en.wikipedia.org shouldn't link back to self
-			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
 			;
 	}
 	public static Xow_xwiki_itm new_(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] abrv_wm) {

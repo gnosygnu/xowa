@@ -83,7 +83,7 @@ public class Xop_hdr_wkr__basic_tst {
 	@Test  public void Err_end_hdr_is_1()			{fxt.Init_log_(Xop_hdr_log.Mismatched, Xop_hdr_log.Len_1).Test_parse_page_wiki_str("==a="			, "<h1>=a</h1>\n").tst_Log_check();}
 	@Test  public void Html_hdr_many() {
 		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str__esc(String_.Concat_lines_nl_skip_last
 		(	"==a=="
 		,	"==a=="
 		,	"==a=="

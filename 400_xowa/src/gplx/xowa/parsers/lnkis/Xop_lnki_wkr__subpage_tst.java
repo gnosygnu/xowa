@@ -20,9 +20,9 @@ import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_lnki_wkr__subpage_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Disabled() {	// PURPOSE: slash being interpreted as subpage; PAGE:en.w:[[/dev/null]]
-		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(false);
+		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(false);
 		fxt.Test_parse_page_all_str("[[/dev/null]]", "<a href=\"/wiki//dev/null\">/dev/null</a>");
-		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);
+		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(true);
 	}
 	@Test  public void False_match() {// PAGE:en.w:en.wiktionary.org/wiki/Wiktionary:Requests for cleanup/archive/2006
 		fxt.Test_parse_page_wiki_str

@@ -53,7 +53,7 @@ class Xodb_load_mgr_sql_fxt {
 	public void Rls() {fxt.Rls();}
 	public Xowd_page_itm[] pages_(Xowd_page_itm... ary) {return ary;}
 	public Xowd_page_itm ctg_(int id, String ttl, boolean hidden, int count_subcs, int count_files, int count_pages) {
-		Xowd_page_itm rv = new Xowd_page_itm().Ns_id_(Xow_ns_.Id_category).Id_(id).Ttl_page_db_(Bry_.new_a7(ttl));
+		Xowd_page_itm rv = new Xowd_page_itm().Ns_id_(Xow_ns_.Tid__category).Id_(id).Ttl_page_db_(Bry_.new_a7(ttl));
 		Xowd_category_itm ctg = Xowd_category_itm.load_(id, 0, hidden, count_subcs, count_files, count_pages);
 		rv.Xtn_(ctg);
 		return rv;
@@ -157,7 +157,7 @@ class Xoctg_mok_ctg {
 	public Xoctg_mok_ctg Grp_pages_(int bgn, int end, String last_itm_plus_one_sortkey) {
 		Xoctg_mok_grp grp = Grps_get_or_new(Xoa_ctg_mgr.Tid_page);
 		byte[] ttl_prefix = Bry_.new_a7("Page_");
-		int ns_id = Xow_ns_.Id_main;
+		int ns_id = Xow_ns_.Tid__main;
 		byte ctg_tid = Xoa_ctg_mgr.Tid_page;
 		for (int i = bgn; i < end; i++) {
 			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_a7(Int_.To_str_pad_bgn_zero(i, 3)));

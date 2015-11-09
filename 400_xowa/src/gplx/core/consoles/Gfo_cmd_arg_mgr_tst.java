@@ -102,7 +102,7 @@ class Gfo_cmd_arg_mgr_fxt {
 		return this;
 	}
 	public Gfo_cmd_arg_mgr_fxt Test_write(String... expd) {
-		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_test)usr_dlg.Gui_wkr()).Xto_str_ary_and_clear());
+		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_test)usr_dlg.Gui_wkr()).Msgs().To_str_ary_and_clear());
 		return this;
 	}
 	public void Test_val_as_url_rel_dir_or(String root_dir, String dir_spr, String val, String expd) {

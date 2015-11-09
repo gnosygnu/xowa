@@ -40,7 +40,9 @@ public abstract class Gallery_mgr_base {
 	@gplx.Virtual public int Get_gb_width(int thm_w, int thm_h) {// REF.MW: getGBWidth; Width of gallerybox <li>. Generally is the width of the image, plus padding on image plus padding on gallerybox.s
 		return itm_default_w + this.Get_thumb_padding() + this.Get_gb_padding();
 	}
-	@gplx.Virtual public void Get_modules(Xoae_page page) {} // REF.MW: getModules; Get a list of modules to include in the page.
+	@gplx.Virtual public void Get_modules(Xoae_page page) {		// REF.MW: getModules; Get a list of modules to include in the page.
+		page.Html_data().Head_mgr().Itm__gallery_styles().Enabled_y_();	// enable styles or some galleries will show up as list items; PAGE:s.w:Gothic_architecture DATE:2015-11-06
+	}
 	@gplx.Virtual public void Init(int itms_per_row, int itm_default_w, int itm_default_h) {
 		this.itms_per_row = itms_per_row;
 		this.itm_default_w = itm_default_w;
@@ -100,7 +102,7 @@ public abstract class Gallery_mgr_base {
 			file_found = File_found_mode == Bool_.Y_byte;
 		int vpad = -1, img_div_w = -1;
 		if (	!hctx_is_hdump				// always write img if hdump; DATE:2015-04-27
-			&&	(	!ttl.Ns().Id_file()
+			&&	(	!ttl.Ns().Id_is_file()
 				||	!file_found
 				)
 			) {	// itm is not a file, or is not found; write text
@@ -190,7 +192,7 @@ public abstract class Gallery_mgr_base {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, List_adp xatr_list, boolean hctx_is_hdump, int uid) {
-		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);
+		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Bry__ul);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__id, gallery_ul_uid);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__class, cls);
 		if (hctx_is_hdump) {

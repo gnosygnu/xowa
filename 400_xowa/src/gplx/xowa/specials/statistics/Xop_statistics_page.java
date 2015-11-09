@@ -91,7 +91,7 @@ class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
 			Xow_ns ns = ns_mgr.Ids_get_at(i);
 			if (ns.Is_meta()) continue;
 			if (ns.Count() == 0) continue;
-			byte[] ns_name = ns.Id_main() ? wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ns_blankns) : ns.Name_txt();
+			byte[] ns_name = ns.Id_is_main() ? wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ns_blankns) : ns.Name_ui();
 			fmtr_ns_itm.Bld_bfr_many(bfr, ns_name, wiki.Lang().Num_mgr().Format_num(ns.Count()));
 		}
 	}

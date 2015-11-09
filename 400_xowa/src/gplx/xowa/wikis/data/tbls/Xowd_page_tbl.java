@@ -167,10 +167,10 @@ public class Xowd_page_tbl implements RlsAble {
 	}
 	public void Select_by_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
-		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, Xow_ns_.Id_main), Db_crt_.like_(fld_title, ""));
+		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, Xow_ns_.Tid__main), Db_crt_.like_(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
 		search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
-		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Id_main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Tid__main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				if (cancelable.Canceled()) return;

@@ -29,7 +29,7 @@ abstract class Meta_fld_wkr__base {
 	public void Reg(Btrie_slim_mgr trie) {
 		trie.Add_obj(hook, this);
 	}
-	@gplx.Virtual public void Match(Bry_rdr rdr, Meta_fld_itm fld) {
+	@gplx.Virtual public void Match(Bry_rdr_old rdr, Meta_fld_itm fld) {
 		for (int i = 0; i < words_len; ++i) {
 			rdr.Skip_ws();
 			byte[] word = words_ary[i];
@@ -88,7 +88,7 @@ class Meta_fld_wkr__autonumber extends Meta_fld_wkr__base {
 }
 class Meta_fld_wkr__default extends Meta_fld_wkr__base {
 	public Meta_fld_wkr__default() {this.Ctor(Hook);}
-	@Override public void Match(Bry_rdr rdr, Meta_fld_itm fld) {
+	@Override public void Match(Bry_rdr_old rdr, Meta_fld_itm fld) {
 		Object default_val = null;
 		rdr.Skip_ws();
 		byte[] src = rdr.Src();

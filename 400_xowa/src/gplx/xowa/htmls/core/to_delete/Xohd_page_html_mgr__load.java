@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //	using gplx.xowa.wikis.dbs; using gplx.xowa.wikis.pages; using gplx.xowa.htmls.core.makes.imgs; using gplx.xowa.wikis.pages.skins;
 //	using gplx.xowa.wikis.data; using gplx.xowa.wikis.data.tbls; using gplx.xowa.guis;
 //	public class Xohd_page_html_mgr__load {
-//		private final Bry_rdr rdr = new Bry_rdr(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();
+//		private final Bry_rdr_old rdr = new Bry_rdr_old(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();
 //		public void Load_page(Xow_wiki wiki, Xoh_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 //			Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.text: ttl=~{0}", page_ttl.Full_db_as_str());
 //			tbl.Select_by_page(rows, page_id);
@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			}
 //			if (imgs.Count() > 0) hpg.Img_itms_((Xohd_img_itm__base[])imgs.To_ary_and_clear(typeof(Xohd_img_itm__base)));
 //		}
-//		public static Xohd_img_itm__base Load_img(Bry_rdr rdr) {
+//		public static Xohd_img_itm__base Load_img(Bry_rdr_old rdr) {
 //			int tid = rdr.Read_int_to_pipe();
 //			Xohd_img_itm__base img_itm = null;
 //			switch (tid) {

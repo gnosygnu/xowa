@@ -42,11 +42,11 @@ public class Scrib_lib_site_tst {
 		fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7).NumAdmins_(8);
 		wiki.Ns_mgr()
 			.Clear()
-			.Add_new(Scrib_xtn_mgr.Ns_id_module, "Module")
-			.Add_new(Scrib_xtn_mgr.Ns_id_module_talk, "Module talk")
-			.Add_new(Xow_ns_.Id_special, "Special")
-			.Add_new(Xow_ns_.Id_main, "")
-			.Add_new(Xow_ns_.Id_talk, "Talk")
+			.Add_new(Xow_ns_.Tid__module		, Xow_ns_.Key__module)
+			.Add_new(Xow_ns_.Tid__module_talk	, Xow_ns_.Key__module_talk)
+			.Add_new(Xow_ns_.Tid__special		, Xow_ns_.Key__special)
+			.Add_new(Xow_ns_.Tid__main			, "")
+			.Add_new(Xow_ns_.Tid__talk			, Xow_ns_.Key__talk)
 			.Init_w_defaults()
 			;
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last

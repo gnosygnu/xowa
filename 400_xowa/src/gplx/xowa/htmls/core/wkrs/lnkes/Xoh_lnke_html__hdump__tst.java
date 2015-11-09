@@ -20,9 +20,9 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_lnke_html__hdump__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	public static final String 
-	  Html__free		= "<a data-xotype='lnke1' href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>"
-	, Html__auto		= "<a data-xotype='lnke2' href=\"http://a.org\" rel=\"nofollow\" class=\"external autonumber\">[1]</a>"
-	, Html__text		= "<a data-xotype='lnke3' href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">a</a>"
+	  Html__free		= "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external free\">http://a.org</a>"
+	, Html__auto		= "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external autonumber\">[1]</a>"
+	, Html__text		= "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">a</a>"
 	;
 	@Test   public void Free()		{fxt.Test__html("http://a.org"				, Html__free);}
 	@Test   public void Auto()		{fxt.Test__html("[http://a.org]"			, Html__auto);}

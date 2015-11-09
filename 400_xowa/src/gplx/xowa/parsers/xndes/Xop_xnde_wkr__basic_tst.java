@@ -76,7 +76,7 @@ public class Xop_xnde_wkr__basic_tst {
 	}
 	@Test  public void Lnki() {
 		fxt.Test_parse_page_wiki("[[Image:a|b<br/>d]]"
-			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Id_file).Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))))
+			, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file).Trg_tkn_(fxt.tkn_arg_nde_().Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))))
 			.Caption_tkn_(fxt.tkn_arg_nde_(10, 17).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(10, 11), fxt.tkn_xnde_(11, 16), fxt.tkn_txt_(16, 17))))
 			);
 	}

@@ -21,7 +21,7 @@ public class Xob_xml_dumper_tst {
 	private final Xob_xml_dumper_fxt fxt = new Xob_xml_dumper_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test   public void Basic() {
-		fxt.Test_page(fxt.Make_ary(fxt.Make_page(1, Xow_ns_.Id_main, "A", "A_text")), String_.Concat_lines_nl_skip_last
+		fxt.Test_page(fxt.Make_ary(fxt.Make_page(1, Xow_ns_.Tid__main, "A", "A_text")), String_.Concat_lines_nl_skip_last
 		( "<mediawiki xmlns='http://www.mediawiki.org/xml/export-0.10/' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd' version='0.10' xml:lang='en'>"
 		, "  <siteinfo>"
 		, "    <sitename>other</sitename>"

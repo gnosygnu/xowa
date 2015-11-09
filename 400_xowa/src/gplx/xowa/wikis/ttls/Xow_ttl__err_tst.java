@@ -32,7 +32,7 @@ public class Xow_ttl__err_tst {
 		fxt.Init_ttl(String_.Repeat("A", 512)).Expd_page_txt(String_.Repeat("A", 512)).Test();
 //			fxt.Init_ttl("File:" + String_.Repeat("A", 255)).Expd_page_txt(String_.Repeat("A", 255)).Test();	// DELETE: removing multi-byte check; DATE:2013-02-02
 //			fxt.Init_ttl(String_.Repeat("A", 256)).Expd_err(Xop_ttl_log.Len_max).Test();
-//			fxt.Init_ttl("Special:" + String_.Repeat("A", 255)).Expd_ns_id(Xow_ns_.Id_special).Expd_page_txt(String_.Repeat("A", 255)).Test();
+//			fxt.Init_ttl("Special:" + String_.Repeat("A", 255)).Expd_ns_id(Xow_ns_.Tid__special).Expd_page_txt(String_.Repeat("A", 255)).Test();
 //			fxt.Init_ttl("Special:" + String_.Repeat("A", 512 + 8)).Expd_err(Xop_ttl_log.Len_max).Test();	// 8="Special:".length
 	}
 	@Test   public void Colon_is_last_ns() {fxt.Init_ttl("Help:").Expd_err(Xop_ttl_log.Ttl_is_ns_only).Test();}

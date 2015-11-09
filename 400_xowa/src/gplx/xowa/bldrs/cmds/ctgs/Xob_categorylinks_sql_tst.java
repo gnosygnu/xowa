@@ -23,7 +23,7 @@ public class Xob_categorylinks_sql_tst {
 	@Test   public void Basic() {
 		if (Xoa_test_.Db_skip()) return;
 		fxt.Init_db_sqlite();
-		fxt.Init_page_insert(Int_obj_ref.new_(1), Xow_ns_.Id_category, String_.Ary("Ctg_1", "Ctg_2"));
+		fxt.Init_page_insert(Int_obj_ref.new_(1), Xow_ns_.Tid__category, String_.Ary("Ctg_1", "Ctg_2"));
 		fxt.Init_fil(Xoa_test_.Url_wiki_enwiki().GenSubFil("xowa_categorylinks.sql"), String_.Concat
 		(	Xob_categorylinks_sql.Sql_categorylinks
 		,	"INSERT INTO `categorylinks` VALUES"

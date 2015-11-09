@@ -24,8 +24,8 @@ public class Xowm_rev_wkr__meta__wm_tst {
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test  public void Basic() {
 		Wmapi_itm__pge[] expd = fxt.Make_pge_ary
-		( fxt.Make_pge(Xow_ns_.Id_main, "A", 1, 11, 100, "2015-01-01T01:01:01Z", "user1", "note1")
-		, fxt.Make_pge(Xow_ns_.Id_main, "B", 2, 22, 200, "2015-02-02T02:02:02Z", "user2", "note2")
+		( fxt.Make_pge(Xow_ns_.Tid__main, "A", 1, 11, 100, "2015-01-01T01:01:01Z", "user1", "note1")
+		, fxt.Make_pge(Xow_ns_.Tid__main, "B", 2, 22, 200, "2015-02-02T02:02:02Z", "user2", "note2")
 		);
 		fxt.Init_inet_upload(expd);
 		fxt.Test_fetch(String_.Ary("A", "B"), expd);	// test get both
@@ -77,7 +77,7 @@ class Xowm_rev_wkr__meta__wm_fxt {
 		for (int i = 0; i < len; ++i) {
 			String ttl_str = ttl_ary[i];
 			byte[] ttl_bry = Bry_.new_u8(ttl_str);
-			rev_hash.Add(ttl_bry, new Wmapi_itm__pge().Init_ttl(Xow_ns_.Id_main, ttl_bry));
+			rev_hash.Add(ttl_bry, new Wmapi_itm__pge().Init_ttl(Xow_ns_.Tid__main, ttl_bry));
 		}
 	}
 }

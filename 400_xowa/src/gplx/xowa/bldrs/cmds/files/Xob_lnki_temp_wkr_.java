@@ -35,7 +35,7 @@ class Xob_lnki_temp_wkr_ {
 		int len = aliases.length;
 		for (int i = 0; i < len; i++) {
 			String alias = aliases[i];
-			if (String_.Eq(alias, Xow_ns_.Key_main))
+			if (String_.Eq(alias, Xow_ns_.Key__main))
 				list.Add(ns_mgr.Ns_main());
 			else {
 				Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_u8(alias));

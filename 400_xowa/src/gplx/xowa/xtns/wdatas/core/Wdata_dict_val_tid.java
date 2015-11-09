@@ -70,6 +70,18 @@ public class Wdata_dict_val_tid {
 			default								: return Str_unknown;
 		} 
 	}
+	public static String To_str__srl(byte tid) {	// for scrib.wbase
+		switch (tid) {
+			case Tid_string						: return Str_string;
+			case Tid_entity						: return Str_entity;
+			case Tid_time						: return Str_time;
+			case Tid_globecoordinate			: return "globe-coordinate";
+			case Tid_quantity					: return Str_quantity;
+			case Tid_monolingualtext			: return Str_monolingualtext;
+			case Tid_bad						: return Str_bad;	// NOTE: wikidata identifies several entries as "bad"; Q1615351|'s-Graveland, Q107538|Baco; DATE:2013-10-20
+			default								: return Str_unknown;
+		} 
+	}
 	public static byte Xto_tid(byte[] src) {return Xto_tid(src, 0, src.length);}
 	public static byte Xto_tid(byte[] src, int bgn, int end) {
 		Object bval_obj = Dict.Get_by_mid(src, bgn, end);

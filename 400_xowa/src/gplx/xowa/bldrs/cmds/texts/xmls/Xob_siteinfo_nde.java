@@ -43,7 +43,7 @@ public class Xob_siteinfo_nde {
 			Xow_ns ns = ns_mgr.Ords_get_at(i);
 			bfr.Add_int_variable(ns.Id()).Add_byte_pipe();
 			bfr.Add_str_u8(Xow_ns_case_.To_str(ns.Case_match())).Add_byte_pipe();
-			bfr.Add(ns.Name_txt()).Add_byte_nl();
+			bfr.Add(ns.Name_ui()).Add_byte_nl();
 		}
 	}
 }

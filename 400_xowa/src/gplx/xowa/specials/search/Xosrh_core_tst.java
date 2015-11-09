@@ -101,7 +101,7 @@ public class Xosrh_core_tst {
 //		public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_u8(bgn), Bry_.new_u8(end), count);}
 //		public Xowd_page_itm 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
 //		public Xowd_page_itm 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xowd_page_itm().Init(id, Bry_.new_u8(ttl), redirect, len, fil, row);}
-//		public Xowd_page_itm 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
+//		public Xowd_page_itm 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Tid__main, ttl);} 
 //		public Xowd_page_itm 		data_id_(int id, int ns, String ttl) {return new Xowd_page_itm().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_u8(ttl)).Text_db_id_(0).Text_len_(0);}
 //		public Xobl_search_ttl 	data_sttl_(String word, params int[] ids) {return new Xobl_search_ttl(Bry_.new_u8(word), data_ttl_word_page_ary_(ids));}
 //		public Xobl_search_ttl_page[] data_ttl_word_page_ary_(params int[] ids) {
@@ -135,7 +135,7 @@ public class Xosrh_core_tst {
 //		}
 //		public void Init_basic() {
 //			this.Init_regy_ns(wiki.Ns_mgr().Ns_main().Num_str(), Xotdb_dir_info_.Tid_search_ttl, this.regy_itm_(0, "A", "C", 5));
-//			this.Init_data(wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_search_ttl, Xow_ns_.Id_main, 0)
+//			this.Init_data(wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_search_ttl, Xow_ns_.Tid__main, 0)
 //				, this.data_sttl_("a"	,  0)
 //				, this.data_sttl_("b1"	,  1, 11, 21)
 //				, this.data_sttl_("b2"	,  2, 12, 22)

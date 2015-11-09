@@ -18,38 +18,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
-	@gplx.Internal @Override protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__hdump();}
+	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
+	@Override public void Html_full_img(Bry_bfr bfr, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
+		tmp_bfr.Add_str_a7(" data-xoimg=\"");
+		tmp_bfr.Add_int_digits(1, xfer_itm.Lnki_type()).Add_byte_pipe();
+		tmp_bfr.Add_int_variable(xfer_itm.Lnki_w()).Add_byte_pipe();
+		tmp_bfr.Add_int_variable(xfer_itm.Lnki_h()).Add_byte_pipe();
+		tmp_bfr.Add_double(xfer_itm.Lnki_upright()).Add_byte_pipe();
+		tmp_bfr.Add_double(xfer_itm.Lnki_time()).Add_byte_pipe();
+		tmp_bfr.Add_int_variable(xfer_itm.Lnki_page()).Add_byte_quote();
+		fmtr__img__full.Bld_bfr_many(bfr
+		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title
+		, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, img_src, img_w, img_h), Xoh_img_cls_.To_html(img_cls, img_cls_other));
+	}
+	private Bry_fmtr fmtr__img__full = Bry_fmtr.new_
+	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title}>"
+	+   "<img alt=\"~{img_alt}\"~{img_xoimg}~{img_core}~{img_class}/>"
+	+ "</a>"
+	, "a_href", "a_class", "a_rel", "a_title", "img_alt", "img_xoimg", "img_core", "img_class"
+	);
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
-//		}
-//		public override void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid
-//			, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
-//			, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
-//			tmp_bfr.Add_str_a7("<a xtid='a_img_full' xatrs='");
-//			tmp_bfr.Add_str_a7(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
-//			tmp_bfr.Add_str_a7(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
-//			tmp_bfr.Add_int_fixed(img_cls, 1).Add_byte_pipe();								// img_cls			: "" || thumbborder || thumbimage || other
-//			tmp_bfr.Add_int_variable(uid).Add_byte_pipe();									// uid
-//			tmp_bfr.Add_safe(img_cls_other).Add_byte_pipe();								// img_cls_other	: "" || {other}
-//			Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
-//			tmp_bfr.Add_str_a7("'/>");
 //		}
 	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
 		tmp_bfr.Add(Xoh_make_trie_.Bry__img_style);
 		tmp_bfr.Add_int_variable(uid);
-		tmp_bfr.Add_byte_apos();
+		tmp_bfr.Add_byte_quote();
 		byte[] div2_width_repl = tmp_bfr.To_bry_and_clear();
 		fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
 	}
 	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Xoh_make_trie_.Bry__file_mgnf, uid);}
 	@Override public void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Xoh_make_trie_.Bry__file_info, uid);}
 	@Override public void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Xoh_make_trie_.Bry__file_play, uid);}
-	public static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
+	private static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
 		bfr.Add(key);
 		bfr.Add_int_variable(uid);
 		bfr.Add(Bry_xnde_end);
-	}	private static final byte[] Bry_xnde_end = Bry_.new_a7("'/>");
+	}	private static final byte[] Bry_xnde_end = Bry_.new_a7("\"/>");
 	public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

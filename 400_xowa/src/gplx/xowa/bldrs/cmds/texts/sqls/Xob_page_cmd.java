@@ -69,7 +69,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		if (redirect && redirect_id_enabled)
 			redirect_tbl.Insert(id, page.Ttl_page_db(), redirect_ttl);
 		++page_count_all;
-		if (ns.Id_main() && !page.Redirected()) ++page_count_main;
+		if (ns.Id_is_main() && !page.Redirected()) ++page_count_main;
 		if (page_count_all % commit_interval == 0) {
 			page_core_tbl.Conn().Txn_sav(); text_db.Conn().Txn_sav();
 			if (redirect_id_enabled) redirect_tbl.Conn().Txn_sav();

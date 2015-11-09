@@ -32,6 +32,10 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")		, ttl_fast(10	, "Template", "A"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("a[b")					, Scrib_invoke_func_fxt.Null_rslt_ary);	// invalid
 	}
+	@Test  public void NewTitle__foreign() {// PURPOSE: always return English name b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
+		fxt.Core().Wiki().Ns_mgr().Ns_template().Name_bry_(Bry_.new_a7("Template_in_nonenglish_name"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")		, ttl_fast(10	, "Template", "A"));	// "Template" not "Template_in_nonenglish_name"
+	}
 	@Test   public void GetUrl() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl")							, "//en.wikipedia.org/wiki/Main_Page");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "action=edit")			, "//en.wikipedia.org/wiki/Main_Page?action=edit");
@@ -155,15 +159,3 @@ public class Scrib_lib_title_tst {
 		);
 	}
 }	
-//0000:                                                     '' !=        '1=isLocal=True'
-//0001: '  true;false;;828;Module;A;0;;wikitext;A;false;false' !=      'isRedirect=False'
-//0002:                                                <<N/A>> !=            'interwiki='
-//0003:                                                <<N/A>> !=         'namespace=828'
-//0004:                                                <<N/A>> !=         'nsText=Module'
-//0005:                                                <<N/A>> !=                'text=A'
-//0006:                                                <<N/A>> !=                  'id=0'
-//0007:                                                <<N/A>> !=             'fragment='
-//0008:                                                <<N/A>> != 'contentModel=wikitext'
-//0009:                                                <<N/A>> !=       'thePartialUrl=A'
-//0010:                                                <<N/A>> !=          'exists=False'
-//0011:                                                <<N/A>> !=      'fileExists=False'

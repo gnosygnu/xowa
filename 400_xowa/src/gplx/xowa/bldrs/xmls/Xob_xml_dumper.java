@@ -59,7 +59,7 @@ public class Xob_xml_dumper {
 		wtr.Atr_kv_int("key"					, ns.Id());
 		wtr.Atr_kv_str_a7("case"				, Xow_ns_case_.To_str(ns.Case_match()));
 		wtr.Nde_lhs_end();
-		wtr.Txt_bry(ns.Name_bry());
+		wtr.Txt_bry(ns.Name_db());
 		wtr.Nde_rhs();
 	}
 	public void Write_page(Xowd_page_itm page) {

@@ -20,34 +20,12 @@ import gplx.core.brys.*; import gplx.xowa.wikis.ttls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.hzips.stats.*; 	
 public class Xoh_lnke_hzip implements Xoh_hzip_wkr {
 	public String Key() {return Xoh_hzip_dict_.Key__lnke;}
-	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, Bry_parser parser, byte[] src, int hook_bgn) {
-		Parse(bfr, stat_itm, parser, src, hook_bgn);
-	}
-	public void Parse(Bry_bfr bfr, Hzip_stat_itm stat_itm, Bry_parser parser, byte[] src, int hook_bgn) {// EX: '<a data-xotype='lnke_bgn' data-xolnke='1' href="http://a.org" class="external text" rel="nofollow">http://a.org<!--xo.hdr--></a>'
-		// NOTE: not serializing caption b/c (a) caption not repeated as title and (b) finding </a> can be tricky, especially with tidy; EX: "[https://a.org b [[A]] c]"; note that lnkis can't be nested; EX: "[https://a.org b [https://b.org] c]"
-		int rng_bgn = hook_bgn - 2;			// -2 to skip "<a"
-		byte lnke_type = parser.Read_byte();
-		parser.Chk(Byte_ascii.Apos);
-		int href_bgn = parser.Fwd_end(Bry__href);
-		int href_end = parser.Fwd_bgn(Byte_ascii.Quote);
-		int rng_end = parser.Fwd_end(Byte_ascii.Angle_end);
-		int lnke_id = 0;
+	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, byte[] src, int rng_bgn, int rng_end, byte lnke_type, int href_bgn, int href_end, int lnke_id) {
 		switch (lnke_type) {
-			case Xoh_lnke_dict_.Type__free:				stat_itm.Lnke_txt_add();
-				rng_end = parser.Fwd_end(Html_tag_.A_rhs);
-				break;
-			case Xoh_lnke_dict_.Type__text:	stat_itm.Lnke_brk_text_n_add(); break;
-			case Xoh_lnke_dict_.Type__auto:	stat_itm.Lnke_brk_text_n_add();                    
-				if (parser.Is(Byte_ascii.Brack_bgn)) {		// HTML tidy can reparent lnkes in strange ways; DATE:2015-08-25
-					lnke_id = parser.Read_int_to(Byte_ascii.Brack_end);	// extract int; EX: "<a ...>[123]</a>"
-					rng_end = parser.Fwd_end(Html_tag_.A_rhs);
-				}
-				break;
+			case Xoh_lnke_dict_.Type__free:		stat_itm.Lnke_txt_add();break;
+			case Xoh_lnke_dict_.Type__text:		stat_itm.Lnke_brk_text_y_add(); break;
+			case Xoh_lnke_dict_.Type__auto:		stat_itm.Lnke_brk_text_n_add(); break;
 		}
-		Encode_exec(bfr, src, rng_bgn, rng_end, lnke_type, href_bgn, href_end, lnke_id);
-	}
-	public void Encode_exec(Bry_bfr bfr, byte[] src, int rng_bgn, int rng_end, byte lnke_type, int href_bgn, int href_end, int lnke_id) {
-		bfr.Del_by(2);										// delete "<h"
 		bfr.Add(Xoh_hzip_dict_.Bry__lnke);					// add hook
 		bfr.Add_byte(lnke_type);							// add type
 		bfr.Add_mid(src, href_bgn, href_end);				// add href
@@ -55,25 +33,25 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr {
 		if (lnke_type == Xoh_lnke_dict_.Type__auto)
 			Xoh_hzip_int_.Encode(1, bfr, lnke_id);
 	}
-	public int Decode(Bry_bfr bfr, Bry_parser parser, byte[] src, int hook_bgn) {
-		byte lnke_type = parser.Read_byte();
-		int href_bgn = parser.Pos();
-		int href_end = parser.Fwd_bgn(Xoh_hzip_dict_.Escape);
-		bfr.Add(Xoh_html_dict_.Hook__lnke).Add_byte(lnke_type).Add_str_a7("' href=\"");
+	public int Decode(Bry_bfr bfr, Xoh_decode_ctx ctx, Bry_rdr rdr, byte[] src, int hook_bgn) {
+		byte lnke_type = rdr.Read_byte();
+		int href_bgn = rdr.Pos();
+		int href_end = rdr.Find_fwd_lr(Xoh_hzip_dict_.Escape);
+		bfr.Add(Html_bldr_.Bry__a_lhs_w_href);
 		bfr.Add_mid(src, href_bgn, href_end);
 		bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_type)).Add(Xoh_lnke_dict_.Html__rhs_end);
 		switch (lnke_type)  {
 			case Xoh_lnke_dict_.Type__free:
-				bfr.Add_mid(src, href_bgn, href_end).Add(Html_tag_.A_rhs);
+				bfr.Add_mid(src, href_bgn, href_end).Add(Html_bldr_.Bry__a_rhs);
 				break;
 			case Xoh_lnke_dict_.Type__auto:
-				int lnke_id = parser.Read_int_by_base85(1);
+				int lnke_id = rdr.Read_int_by_base85(1);
 				if (lnke_id != 0)	// will be 0 when reparented by tidy
-					bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(lnke_id).Add_byte(Byte_ascii.Brack_end).Add(Html_tag_.A_rhs);
+					bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(lnke_id).Add_byte(Byte_ascii.Brack_end).Add(Html_bldr_.Bry__a_rhs);
 				break;
-			case Xoh_lnke_dict_.Type__text: break;	// caption not serialized
+			case Xoh_lnke_dict_.Type__text:
+				break;
 		}
-		return parser.Pos();
+		return rdr.Pos();
 	}
-	private static final byte[] Bry__href = Bry_.new_a7(" href=\"");
 }

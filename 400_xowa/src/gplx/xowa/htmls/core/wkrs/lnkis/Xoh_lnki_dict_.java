@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.xowa.htmls.core.parsers.*;
+import gplx.core.brys.*;
 public class Xoh_lnki_dict_ {
 	public static final byte	// SERIALIZED
 	  Type__caption_n				= Byte_ascii.Num_0
@@ -25,4 +25,10 @@ public class Xoh_lnki_dict_ {
 	, Type__diff					= Xoh_ttl_matcher.Tid__diff		// EX: [[A|b]]
 	, Type__trail					= Xoh_ttl_matcher.Tid__trail	// EX: [[A|b]]
 	;
+	public static void Ns_encode(Bry_bfr bfr, Xoa_ttl ttl) {
+		gplx.xowa.htmls.core.hzips.Xoh_hzip_int_.Encode(1, bfr, ttl.Ns().Id() + 2);
+	}
+	public static int Ns_decode(Bry_rdr rdr) {
+		return rdr.Read_int_by_base85(1) - 2;
+	}
 }

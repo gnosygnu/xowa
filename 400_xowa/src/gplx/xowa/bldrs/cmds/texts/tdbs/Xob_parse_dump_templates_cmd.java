@@ -27,7 +27,7 @@ public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements X
 		Init_dump(KEY);
 	}
 	public void Wkr_run(Xowd_page_itm page) {
-		if (page.Ns_id() != Xow_ns_.Id_template) return;
+		if (page.Ns_id() != Xow_ns_.Tid__template) return;
 		int id = page.Id(); byte[] title = page.Ttl_page_db(), text = page.Text(); int title_len = title.length, text_len = text.length;
 		if (FixedLen_page + title_len + text_len + dump_bfr.Len() > dump_fil_len) super.Flush_dump();
 		Xotdb_page_itm_.Txt_page_save(dump_bfr, id, page.Modified_on(), title, text, true);

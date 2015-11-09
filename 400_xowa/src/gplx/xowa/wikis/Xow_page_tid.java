@@ -21,10 +21,10 @@ import gplx.xowa.xtns.wdatas.*;
 public class Xow_page_tid {
 	public static byte Identify(int wiki_tid, int ns_id, byte[] ttl) {
 		switch (ns_id) {
-			case Xow_ns_.Id_mediawiki:
-			case Xow_ns_.Id_user:
+			case Xow_ns_.Tid__mediawiki:
+			case Xow_ns_.Tid__user:
 				return Identify_by_ttl(ttl);
-			case gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module:
+			case Xow_ns_.Tid__module:
 				return	(Bry_.Has_at_end(ttl, Ext_doc))
 					? Tid_wikitext : Tid_lua;
 			default:

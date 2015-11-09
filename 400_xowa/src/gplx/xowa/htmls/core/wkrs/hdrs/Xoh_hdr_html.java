@@ -28,8 +28,6 @@ public class Xoh_hdr_html {
 		if (hdr_len > 0) {													// NOTE: need to check hdr_len b/c it could be dangling
 			Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, hdr.Src_bgn()); 
 			bfr.Add(Bry__hdr_lhs_bgn).Add_int(hdr_len, 1, 1);				// '<h', '2'
-			if (hctx.Mode_is_hdump())
-				bfr.Add(Xoh_html_dict_.Type__hdr);
 			bfr.Add_byte(Byte_ascii.Angle_end);								// '>'
 			if (cfg.Toc__show()) {
 				bfr.Add(Bry__span_lhs_bgn);									// "<span class='mw-headline' id='"
@@ -43,8 +41,6 @@ public class Xoh_hdr_html {
 			wtr.Write_tkn(bfr, ctx, hctx, src, hdr, i, hdr.Subs_get(i));
 		if (hdr_len > 0) {													// NOTE: need to check hdr_len b/c it could be dangling
 			if (hdr.Hdr_end_manual() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Hdr_end_manual());	// '='
-			if (hctx.Mode_is_hdump())
-				bfr.Add(Xoh_html_dict_.Hdr__end);
 			if (cfg.Toc__show())
 				bfr.Add(Html_tag_.Span_rhs);								// '</span>'
 			bfr.Add(Bry__hdr_rhs_bgn).Add_int(hdr_len, 1, 1);				// '</h', '2'
@@ -52,6 +48,6 @@ public class Xoh_hdr_html {
 		}
 	}
 	private static final byte[] Bry__hdr_lhs_bgn = Bry_.new_a7("<h"), Bry__hdr_rhs_bgn = Bry_.new_a7("</h"), Bry__hdr_rhs_end = Bry_.new_a7(">\n")
-	, Bry__span_lhs_bgn = Bry_.new_a7("<span class='mw-headline' id='"), Bry__span_lhs_end = Bry_.new_a7("'>")
+	, Bry__span_lhs_bgn = Bry_.new_a7("<span class=\"mw-headline\" id=\""), Bry__span_lhs_end = Bry_.new_a7("\">")
 	;
 }

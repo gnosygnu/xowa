@@ -52,7 +52,7 @@ public class Xoh_lnki_wtr {
 		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
 		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
 			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_mgr().Xwiki_domain_tid()	// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
-			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_key())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
+			&&	xwiki_lang.Show_in_sitelangs(wiki.Domain_itm().Lang_orig_key())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {
 			Wdata_sitelink_itm slink = new Wdata_sitelink_itm(xwiki_lang.Abrv_wm(), xwiki_lang.Domain_name(), null).Page_ttl_(lnki_ttl);
@@ -63,9 +63,9 @@ public class Xoh_lnki_wtr {
 		redlinks_mgr.Lnki_add(lnki);
 		boolean stage_is_alt = hctx.Mode_is_alt();
 		switch (lnki.Ns_id()) {
-			case Xow_ns_.Id_media:		if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
-			case Xow_ns_.Id_file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
-			case Xow_ns_.Id_category:	if (!literal_link) {page.Html_data().Ctgs_add(lnki.Ttl()); return;} break;
+			case Xow_ns_.Tid__media:		if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
+			case Xow_ns_.Tid__file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
+			case Xow_ns_.Tid__category:	if (!literal_link) {page.Html_data().Ctgs_add(lnki.Ttl()); return;} break;
 		}
 		Write_plain_by_tkn(bfr, hctx, src, lnki, lnki_ttl);
 	}
@@ -99,10 +99,7 @@ public class Xoh_lnki_wtr {
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
-			if (hctx.Mode_is_hdump())
-				gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Html_plain(bfr, lnki);
-			else
-				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
+			bfr.Add(Xoh_consts.A_bgn);								// '<a href="'
 			app.Html__href_wtr().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
@@ -121,7 +118,7 @@ public class Xoh_lnki_wtr {
 					bfr.Add(Bry_xowa_visited);						// '" class="xowa-visited'
 			}
 			bfr.Add(Xoh_consts.__end_quote);						// '">'	
-			if (lnki_ttl.Anch_bgn() != -1 && !lnki_ttl.Ns().Id_main()) {	// anchor exists and not main_ns; anchor must be manually added b/c Xoa_ttl does not handle # for non main-ns
+			if (lnki_ttl.Anch_bgn() != -1 && !lnki_ttl.Ns().Id_is_main()) {	// anchor exists and not main_ns; anchor must be manually added b/c Xoa_ttl does not handle # for non main-ns
 				byte[] anch_txt = lnki_ttl.Anch_txt();
 				byte anch_spr 
 				= (anch_txt.length > 0 && anch_txt[0] == Byte_ascii.Hash)	// 1st char is #; occurs when page_txt has trailing space; causes 1st letter of anch_txt to start at # instead of 1st letter
@@ -168,14 +165,6 @@ public class Xoh_lnki_wtr {
 				return true;
 		}
 		return false;
-	}
-	public static void Html_plain(Bry_bfr bfr, Xop_lnki_tkn lnki) {
-		bfr.Add_str_a7
-			(  lnki.Caption_exists()				// caption exists; EX: [[A|b]]
-			|| lnki.Tail_bgn() != -1				// trailing chars; EX: [[A]]b
-			? "<a data-xotype='lnki1' href=\""		// embed caption
-			: "<a data-xotype='lnki0' href=\""		// use link only
-			);
 	}
 	public static byte[] Lnki_cls_visited(gplx.xowa.users.history.Xou_history_mgr history_mgr, byte[] wiki_key, byte[] page_ttl) {
 		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;

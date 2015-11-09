@@ -20,21 +20,20 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_hdr_html_tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Test   public void Basic() {
-		String html = String_.Concat_lines_nl_skip_last
-		( "z"
-		, ""
-		, "<h2 data-xotype='hdr_bgn'><span class='mw-headline' id='A_1'>A 1<!--xo.hdr--></span></h2>"
-		, "a 1"
-		, ""
-		, "<h2 data-xotype='hdr_bgn'><span class='mw-headline' id='B'>B<!--xo.hdr--></span></h2>"
-		, "b"
-		);
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "z"
 		, "==A 1=="			
 		, "a 1"
 		, "==B=="
 		, "b"
-		), html);
+		), String_.Concat_lines_nl_skip_last
+		( "z"
+		, ""
+		, "<h2><span class='mw-headline' id='A_1'>A 1</span></h2>"
+		, "a 1"
+		, ""
+		, "<h2><span class='mw-headline' id='B'>B</span></h2>"
+		, "b"
+		));
 	}
 }

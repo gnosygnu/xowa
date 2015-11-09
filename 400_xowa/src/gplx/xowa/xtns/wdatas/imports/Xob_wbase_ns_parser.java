@@ -28,7 +28,7 @@ class Xob_wbase_ns_parser {
 	}
 	public void Find(Xob_wbase_ns_parser_rslt rv, byte[] wiki_abrv, byte[] ttl) {	// enwiki, Category:Abc
 		Xow_ns_mgr ns_mgr = (Xow_ns_mgr)ns_mgr_hash.Get_by_bry(wiki_abrv);
-		rv.Init(Xow_ns_.Id_main, 0);	// default to Main ns
+		rv.Init(Xow_ns_.Tid__main, 0);	// default to Main ns
 		int ttl_len = ttl.length;
 		int colon_pos = Bry_find_.Find_fwd(ttl, Byte_ascii.Colon, 0, ttl_len); if (colon_pos == Bry_find_.Not_found) return;
 		if (ns_mgr == null) {			// ns_mgr not found; load from db

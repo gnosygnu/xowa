@@ -95,8 +95,8 @@ public class Xow_popup_wrdx_mkr {
 			case Xop_tkn_itm_.Tid_lnki: 
 				Xop_lnki_tkn lnki = (Xop_lnki_tkn)tkn;
 				switch (lnki.Ns_id()) {
-					case Xow_ns_.Id_category:	// skip [[Category:]]
-					case Xow_ns_.Id_file:		// skip [[File:]]
+					case Xow_ns_.Tid__category:	// skip [[Category:]]
+					case Xow_ns_.Tid__file:		// skip [[File:]]
 						add_tkn = add_subs = false;
 						break;
 					default:

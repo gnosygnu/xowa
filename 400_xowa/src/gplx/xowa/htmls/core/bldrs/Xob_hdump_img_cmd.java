@@ -81,36 +81,36 @@ interface Page_async_cmd {
 	void Prep();
 	void Exec();
 }
-class Page_async_cmd__img implements Page_async_cmd {
-	private Xoh_page hpg;
-	private List_adp missing = List_adp_.new_();
-	public Page_async_cmd__img(Xoh_page hpg) {this.hpg = hpg;}
-	public void Prep() {
-		int len = hpg.Img_count();
-		Xohd_img_itm__base[] ary = hpg.Img_itms();
-		missing.Clear();
-		for (int i = 0; i < len; ++i) {
-			Xohd_img_itm__base itm = ary[i];
-			boolean exists = Io_mgr.Instance.ExistsFil(itm.Html_view_url());
-			if (!exists) missing.Add(itm);
-		}
-	}
-	public void Exec() {
-		int len = missing.Count();
-		for (int i = 0; i < len; ++i) {
-//				Xohd_img_itm__base itm = (Xohd_img_itm__base)missing.Get_at(i);
-//				byte[] bytes = null; //fsdb.Db_get()ttl, file_w,....):
-//				Write file(bytes);
-		}
-	}
-}
-/*		
-CREATE TABLE xtn_gallery
-( src_page_id		integer		NOT NULL
-, html_uid			integer		NOT NULL
-, box_max			integer		NOT NULL
-, box_w				integer		NOT NULL
-, img_w				integer		NOT NULL
-, img_pad			integer		NOT NULL
-);	
-*/
+//	class Page_async_cmd__img : Page_async_cmd {
+//		private Xoh_page hpg;
+//		private List_adp missing = List_adp_.new_();
+//		public Page_async_cmd__img(Xoh_page hpg) {this.hpg = hpg;}
+//		public void Prep() {
+////			int len = hpg.Img_count();
+////			Xohd_img_itm__base[] ary = hpg.Img_itms();
+////			missing.Clear();
+////			for (int i = 0; i < len; ++i) {
+////				Xohd_img_itm__base itm = ary[i];
+////				boolean exists = Io_mgr.Instance.ExistsFil(itm.Html_view_url());
+////				if (!exists) missing.Add(itm);
+////			}
+//		}
+//		public void Exec() {
+//			int len = missing.Count();
+//			for (int i = 0; i < len; ++i) {
+////				Xohd_img_itm__base itm = (Xohd_img_itm__base)missing.Get_at(i);
+////				byte[] bytes = null; //fsdb.Db_get()ttl, file_w,....):
+////				Write file(bytes);
+//			}
+//		}
+//	}
+//	/*		
+//	CREATE TABLE xtn_gallery
+//	( src_page_id		integer		NOT NULL
+//	, html_uid			integer		NOT NULL
+//	, box_max			integer		NOT NULL
+//	, box_w				integer		NOT NULL
+//	, img_w				integer		NOT NULL
+//	, img_pad			integer		NOT NULL
+//	);	
+//	*/

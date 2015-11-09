@@ -58,7 +58,7 @@ public class Gallery_html_wtr {
 			byte[] itm_caption = Gallery_html_wtr_.Bld_caption(wiki, ctx, wtr, hctx, itm);
 			Xoa_ttl itm_ttl = itm.Ttl();
 			if (	itm_ttl != null				// ttl does not have invalid characters
-				&&	itm_ttl.Ns().Id_file()		// ttl is in file ns;
+				&&	itm_ttl.Ns().Id_is_file()	// ttl is in file ns;
 				) {
 				Xop_lnki_tkn lnki = ctx.Tkn_mkr().Lnki(itm.Ttl_bgn(), itm.Ttl_end()).Ttl_(itm_ttl).W_(mgr.Itm_w()).H_(mgr.Itm_h());
 				Xof_file_itm xfer_itm = wtr.Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki);

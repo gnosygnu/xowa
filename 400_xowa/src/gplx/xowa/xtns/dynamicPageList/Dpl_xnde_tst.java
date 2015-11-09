@@ -228,7 +228,7 @@ class Dpl_xnde_fxt {
 			Xoae_page page_obj = fxt.Wiki().Data_mgr().Get_page(page_ttl, false);
 			if (page_obj.Missing()) {
 				fxt.Init_page_create(ttl);
-				fxt.Init_id_create (id, 0, 0, false, 5, Xow_ns_.Id_main, ttl);
+				fxt.Init_id_create (id, 0, 0, false, 5, Xow_ns_.Tid__main, ttl);
 			}
 			page_ids[i] = id;
 		}

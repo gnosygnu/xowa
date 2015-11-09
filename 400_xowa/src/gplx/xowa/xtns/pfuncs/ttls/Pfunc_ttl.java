@@ -38,11 +38,11 @@ public class Pfunc_ttl extends Pf_func_base {
 			case Xol_kwd_grp_.Id_ttl_talk_txt: bfr.Add(ttl.Talk_txt()); break;
 			case Xol_kwd_grp_.Id_ttl_talk_url: bfr.Add(ttl.Talk_url()); break;
 			case Xol_kwd_grp_.Id_ns_num: bfr.Add_int_variable(ttl.Ns().Id()); break;
-			case Xol_kwd_grp_.Id_ns_txt: bfr.Add(ttl.Ns().Name_txt()); break;
+			case Xol_kwd_grp_.Id_ns_txt: bfr.Add(ttl.Ns().Name_ui()); break;
 			case Xol_kwd_grp_.Id_ns_url: bfr.Add(ttl.Ns().Name_enc()); break;
-			case Xol_kwd_grp_.Id_ns_subj_txt: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_subj_id()).Name_txt()); break;
+			case Xol_kwd_grp_.Id_ns_subj_txt: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_subj_id()).Name_ui()); break;
 			case Xol_kwd_grp_.Id_ns_subj_url: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_subj_id()).Name_enc()); break;
-			case Xol_kwd_grp_.Id_ns_talk_txt: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_talk_id()).Name_txt()); break;
+			case Xol_kwd_grp_.Id_ns_talk_txt: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_talk_id()).Name_ui()); break;
 			case Xol_kwd_grp_.Id_ns_talk_url: bfr.Add(ctx.Wiki().Ns_mgr().Ords_get_at(ttl.Ns().Ord_talk_id()).Name_enc()); break;
 		}
 	}

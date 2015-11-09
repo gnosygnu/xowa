@@ -54,10 +54,10 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Quantity_value(Wdata_claim_itm_quantity itm) {
 		KeyVal[] rv = new KeyVal[4];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_quantity.Str_amount			, String_.new_u8(itm.Amount()));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_quantity.Str_amount			, itm.Amount_as_num().To_str());	// NOTE: must be num b/c Module code will directly do math calc on it; EX: "99" not "+99"; PAGE:eo.w:Mud�; DATE:2015-11-08
 		rv[1] = KeyVal_.new_(Wdata_dict_value_quantity.Str_unit				, String_.new_u8(itm.Unit()));
-		rv[2] = KeyVal_.new_(Wdata_dict_value_quantity.Str_upperbound		, String_.new_u8(itm.Ubound()));
-		rv[3] = KeyVal_.new_(Wdata_dict_value_quantity.Str_lowerbound		, String_.new_u8(itm.Lbound()));
+		rv[2] = KeyVal_.new_(Wdata_dict_value_quantity.Str_upperbound		, itm.Ubound_as_num().To_str());
+		rv[3] = KeyVal_.new_(Wdata_dict_value_quantity.Str_lowerbound		, itm.Lbound_as_num().To_str());
 		return rv;
 	}
 	public void Visit_time(Wdata_claim_itm_time itm) {
