@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.gfo_ndes.*;
 import gplx.dbs.engines.tdbs.*;
 public class Sql_select_fld_list {
 	public int Count() {return hash.Count();}

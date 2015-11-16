@@ -43,6 +43,9 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void State_collapsed() {	// PURPOSE: state=collapsed broke redirects; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
 		fxt.Test_redirect("#REDIRECT [[Template:A|state=collapsed]]", "Template:A");
 	}
+	@Test  public void Parse_1st_link_only() {	// PURPOSE: do not take pipe from 2nd lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
+		fxt.Test_redirect("#REDIRECT [[Template:A]][[Category:B|b]]", "Template:A");
+	}
 }
 class Xop_redirect_mgr_fxt {
 	private Xop_fxt fxt = new Xop_fxt();

@@ -22,8 +22,7 @@ public class Xoh_escape_parser implements Html_doc_wkr {
 	private final Xoh_hdoc_wkr wkr;
 	public Xoh_escape_parser(Xoh_hdoc_wkr wkr) {this.wkr = wkr;}
 	public byte[] Hook() {return Xoh_hzip_dict_.Escape_bry;}
-	public void Init(byte[] src, int src_bgn, int src_end) {}
-	public int Parse(int pos) {
+	public int Parse(byte[] src, int src_bgn, int src_end, int pos) {
 		int rv = pos + 1;
 		wkr.On_escape(pos, rv);
 		return rv;

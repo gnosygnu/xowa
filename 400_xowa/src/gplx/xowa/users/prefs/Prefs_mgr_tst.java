@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import org.junit.*;
-import gplx.gfui.*; import gplx.xowa.apps.gfs.*;
+import gplx.gfui.*; import gplx.xowa.apps.gfs.*; import gplx.langs.gfs.*;
 import gplx.xowa.guis.views.*;
 public class Prefs_mgr_tst {
 	private Prefs_mgr_fxt fxt = new Prefs_mgr_fxt();

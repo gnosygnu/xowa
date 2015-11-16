@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.gfs.*;
 public class Xoa_app_eval_tst {
 	Xoa_app_eval_fxt fxt = new Xoa_app_eval_fxt();

@@ -19,15 +19,3 @@ package gplx.langs.htmls.parsers.styles; import gplx.*; import gplx.langs.*; imp
 public interface Html_atr_style_wkr {
 	boolean On_atr(byte[] src, int atr_idx, int atr_bgn, int atr_end, int key_bgn, int key_end, int val_bgn, int val_end);
 }
-class Html_atr_style_wkr__kv_list implements Html_atr_style_wkr {
-	private final List_adp list = List_adp_.new_();
-	public boolean On_atr(byte[] src, int atr_idx, int atr_bgn, int atr_end, int key_bgn, int key_end, int val_bgn, int val_end) {
-		KeyVal kv = KeyVal_.new_(String_.new_u8(src, key_bgn, key_end), String_.new_u8(src, val_bgn, val_end));
-		list.Add(kv);
-		return true;
-	}
-	public KeyVal[] Parse(byte[] src, int src_bgn, int src_end) {
-		Html_atr_style_parser.Parse(src, src_bgn, src_end, this);
-		return (KeyVal[])list.To_ary_and_clear(KeyVal.class);
-	}
-}

@@ -17,41 +17,43 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.htmls.core.hzips.stats.*;
-import gplx.xowa.htmls.core.wkrs.*; import gplx.langs.htmls.parsers.*;
+import gplx.langs.htmls.parsers.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.*;
 public class Xoh_hzip_mgr {
+	private final Xoh_hdoc_parser hdoc_parser = new Xoh_hdoc_parser(new Xoh_hdoc_wkr__hzip());		
 	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
-	private final Xoh_hdoc_wkr__base hdoc_parser = new Xoh_hdoc_wkr__base(new Xoh_hdoc_wkr__hzip());
-	private final Xoh_decode_ctx decode_ctx = new Xoh_decode_ctx();
-	public void Init_by_app(Xoa_app app) {decode_ctx.Init_by_app(app);}
-	public void Encode(Bry_bfr bfr, Xow_wiki wiki, byte[] page_url, byte[] src, Hzip_stat_itm stat_itm) {
-		hdoc_parser.Parse(bfr, wiki, null, page_url, src);
+	public Xoh_hdoc_ctx Hctx() {return hctx;} private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	public void Init_by_app(Xoa_app app) {hctx.Init_by_app(app);}
+	public void Encode(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {
+		hctx.Init_by_page(wiki, hpg.Url_bry_safe());
+		hdoc_parser.Parse(bfr, hpg, hctx, src);
 	}
-	public byte[] Decode(Bry_bfr bfr, Xow_wiki wiki, byte[] page_url, byte[] src) {
-		bfr.Clear();
-		((gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_hzip)Xoh_hzip_dict_.To_wkr(Xoh_hzip_dict_.Tid__lnki)).Ttl_parser_(wiki);
-		int pos = 0, add_bgn = -1; int src_len = src.length;
-		rdr.Ctor_by_page(page_url, src, src_len);
-		decode_ctx.Init_by_page(wiki);
+	public void Decode(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {
+		byte[] page_url = hpg.Url_bry_safe();
+		hctx.Init_by_page(wiki, page_url);
+		int pos = 0, txt_bgn = -1, src_len = src.length;
+		rdr.Init_by_page(page_url, src, src_len);
 		while (pos < src_len) {
 			if (src[pos] == Xoh_hzip_dict_.Escape) {
-				if (add_bgn != -1) {bfr.Add_mid(src, add_bgn, pos); add_bgn = -1;}
+				if (txt_bgn != -1) {bfr.Add_mid(src, txt_bgn, pos); txt_bgn = -1;}	// handle pending txt
+				int nxt_pos = pos + 1; if (nxt_pos == src_len) break;				// handle escape at end of document
+				Xoh_hzip_wkr wkr = hctx.Mkr().Hzip__wkr(src[nxt_pos]);
 				try {
-					Xoh_hzip_wkr wkr = Xoh_hzip_dict_.To_wkr(src[pos + 1]);
 					rdr.Init_by_hook(wkr.Key(), pos, pos + 2);
-					wkr.Decode(bfr, decode_ctx, rdr, src, pos);
+					wkr.Decode(bfr, Bool_.Y, hctx, hpg, rdr, src, pos);
 					pos = rdr.Pos();
 				} catch (Exception e) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", Err_.Message_gplx_log(e));
-					pos += 2;
+					wkr.Pool__rls();
+					Err err = Err_.cast_or_make(e);
+					if (!err.Logged()) Gfo_usr_dlg_.Instance.Warn_many("", "", Err_.Message_gplx_log(e), "page_url", page_url, "mid", Bry_.Mid_by_len_safe(src, pos, 255));
+					pos += 2;	// 2: skip escape and hook
 				}
 			}
 			else {
-				if (add_bgn == -1) add_bgn = pos;
+				if (txt_bgn == -1) txt_bgn = pos;
 				++pos;
 			}
 		}
-		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
-		return bfr.To_bry_and_clear();
+		if (txt_bgn != -1) bfr.Add_mid(src, txt_bgn, src_len);
 	}
 }

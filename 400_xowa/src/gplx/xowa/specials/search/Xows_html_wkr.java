@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.langs.numbers.*;
 class Xows_html_wkr {		
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
@@ -90,12 +91,12 @@ class Xows_html_wkr {
 	, Bry_hdr_len = Bry_.new_a7("Page length"), Bry_hdr_ttl = Bry_.new_a7("Page title")
 	;
 }
-class Xows_html_row implements Bry_fmtr_arg {
+class Xows_html_row extends gplx.core.brys.Bfr_arg_base {
 	private final Xoh_lnki_bldr lnki_bldr; private Xows_ui_rslt rslt;
 	private final Object thread_lock = new Object();
 	public Xows_html_row(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
 	public Xows_html_row Init(Xows_ui_rslt rslt) {this.rslt = rslt; return this;}
-	public void Fmt__do(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
+	@Override public void Bfr_arg__add(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
 		int len = rslt.Len();
 		for (int i = 0; i < len; ++i) {
 			Xows_db_row row = rslt.Get_at(i);

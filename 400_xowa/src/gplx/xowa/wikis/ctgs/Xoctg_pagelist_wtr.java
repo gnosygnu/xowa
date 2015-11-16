@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.users.history.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xoctg_pagelist_wtr {
 	private Xoctg_pagelist_mgr pagelist_mgr = new Xoctg_pagelist_mgr();
@@ -33,7 +34,7 @@ public class Xoctg_pagelist_wtr {
 			list.Itms().Itms_add(page);
 		}
 		pagelist_mgr.Init_by_wiki(wiki);
-		pagelist_mgr.Fmt__do(bfr);
+		pagelist_mgr.Bfr_arg__add(bfr);
 		pagelist_mgr.Grp_hidden().Itms().Itms_clear();
 		pagelist_mgr.Grp_normal().Itms().Itms_clear();
 	}

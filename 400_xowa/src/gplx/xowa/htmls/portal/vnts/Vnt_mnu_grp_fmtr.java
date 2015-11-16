@@ -16,15 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.vnts.*;
-public class Vnt_mnu_grp_fmtr implements Bry_fmtr_arg {
+public class Vnt_mnu_grp_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private final Xolg_vnt_itm_fmtr itm_fmtr = new Xolg_vnt_itm_fmtr();
 	private Xol_vnt_regy mgr; private byte[] page_vnt;
 	public void Init(Xol_vnt_regy mgr, byte[] wiki_domain, byte[] page_href, byte[] page_vnt) {
 		this.mgr = mgr; this.page_vnt = page_vnt;
 		itm_fmtr.Init(mgr, wiki_domain, page_href, page_vnt);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Xol_vnt_itm mnu_itm = mgr.Get_by(page_vnt);
 		fmtr.Bld_bfr_many(bfr, mnu_itm == null ? Bry_.Empty : mnu_itm.Name(), itm_fmtr);
 	}
@@ -40,10 +41,10 @@ public class Vnt_mnu_grp_fmtr implements Bry_fmtr_arg {
 	), "grp_text", "itms"
 	);
 }
-class Xolg_vnt_itm_fmtr implements Bry_fmtr_arg {
+class Xolg_vnt_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private Xol_vnt_regy mgr; private byte[] wiki_domain, page_href, page_vnt;
 	public void Init(Xol_vnt_regy mgr, byte[] wiki_domain, byte[] page_href, byte[] page_vnt) {this.mgr = mgr; this.wiki_domain = wiki_domain; this.page_href = page_href; this.page_vnt = page_vnt;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = mgr.Len();
 		for (int i = 0; i < len; ++i) {
 			Xol_vnt_itm itm = mgr.Get_at(i); if (!itm.Visible()) continue;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.lnkis.*;
@@ -26,7 +27,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 		arg_img_core = New_arg_img_core();
 	}
 	@gplx.Internal @gplx.Virtual protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__basic();}
-	@gplx.Virtual public void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);}
+	@gplx.Virtual public void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bfr_arg html) {fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);}
 	private final Bry_fmtr fmtr_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}"
 	, "</a>"
@@ -77,7 +78,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	, "      </div>"
 	), "uid", "a_href", "a_title", "img_core", "img_alt");
 
-	public void Html_thumb_part_caption(Bry_bfr tmp_bfr, byte[] magnify_btn, Bry_fmtr_arg caption) {fmtr_thumb_part_caption.Bld_bfr_many(tmp_bfr, magnify_btn, caption);}
+	public void Html_thumb_part_caption(Bry_bfr tmp_bfr, byte[] magnify_btn, Bfr_arg caption) {fmtr_thumb_part_caption.Bld_bfr_many(tmp_bfr, magnify_btn, caption);}
 	private Bry_fmtr fmtr_thumb_part_caption = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <div class=\"thumbcaption\">~{magnify_btn}"

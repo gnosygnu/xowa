@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.brys.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b}} -> a+b
@@ -25,8 +25,8 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_anchorencode().Name_(name);}
 	public static void Func_init(Xop_ctx ctx) {
 		if (anchor_ctx != null) return;// NOTE: called by Scrib_uri
-		encode_trie.Add(Byte_ascii.Colon, Bry_fmtr_arg_.byt_(Byte_ascii.Colon));
-		encode_trie.Add(Byte_ascii.Space, Bry_fmtr_arg_.byt_(Byte_ascii.Underline));
+		encode_trie.Add(Byte_ascii.Colon, Bfr_arg_.New_byte(Byte_ascii.Colon));
+		encode_trie.Add(Byte_ascii.Space, Bfr_arg_.New_byte(Byte_ascii.Underline));
 		anchor_ctx = Xop_ctx.new_sub_(ctx.Wiki());
 		anchor_ctx.Para().Enabled_n_();
 		anchor_tkn_mkr = anchor_ctx.Tkn_mkr();

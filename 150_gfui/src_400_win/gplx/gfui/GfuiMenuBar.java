@@ -29,6 +29,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
+import gplx.langs.gfs.*;
 public class GfuiMenuBar implements GfoInvkAble {
 	public Object Under() {return winMenu;}
 	public boolean Visible() {return visible;} private boolean visible;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
+import gplx.core.brys.fmtrs.*;
 public class Xoapi_toggle_itm implements GfoInvkAble {
 	private final Xoae_app app;	// NOTE: needed to get "img_dir" below
 	private byte[] img_title_val_y, img_title_val_n;

@@ -61,7 +61,7 @@ class Vnt_mnu_grp_fmtr_fxt {
 		Vnt_mnu_grp_fmtr vnt_grp_fmtr = new Vnt_mnu_grp_fmtr();
 		Bry_bfr bfr = Bry_bfr.new_();
 		vnt_grp_fmtr.Init(mgr, Bry_.new_u8(page_href), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_u8(selected_vnt));
-		vnt_grp_fmtr.Fmt__do(bfr);
+		vnt_grp_fmtr.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

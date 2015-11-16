@@ -25,6 +25,15 @@ public class Xoh_anch_href_parser_tst {
 	@Test   public void Page() {
 		fxt.Test__parse("/wiki/B", "", "B");
 	}
+	@Test   public void Href() {
+		fxt.Test__parse("#A", "", "A");
+	}
+	@Test   public void None() {
+		fxt.Test__parse("", "", "");
+	}
+	@Test   public void Inet() {
+		fxt.Test__parse("http://a.org", "", "http://a.org");
+	}
 	@Test   public void Fail__1st_seg_must_be_site_or_wiki() {
 		fxt.Test__parse__fail("/fail/A", "failed trie check: mid='fail/A' ctx='Main_Page' wkr='lnki.href' excerpt='/fail/A'");
 	}

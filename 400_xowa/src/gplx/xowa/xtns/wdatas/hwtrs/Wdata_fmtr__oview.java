@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
-class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
+class Wdata_fmtr__oview_tbl extends gplx.core.brys.Bfr_arg_base {
 	private Xoapi_wikibase wikibase_api; private Url_encoder href_encoder;
 	private Wdata_fmtr__oview_alias_itm fmtr_aliases = new Wdata_fmtr__oview_alias_itm();
 	private Bry_fmtr slink_fmtr = Bry_fmtr.new_("<a href='/site/~{domain_bry}/wiki/~{page_href}'>~{page_text}</a>", "domain_bry", "page_href", "page_text");
@@ -33,7 +34,7 @@ class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 	public void Init_by_wdoc(Wdata_doc wdoc) {
 		this.wdoc = wdoc;
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		byte[][] core_langs		= wikibase_api.Core_langs();			
 		byte[] oview_label		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Label_list(), core_langs);
 		byte[] oview_descr		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Descr_list(), core_langs);
@@ -76,10 +77,10 @@ class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 		return Bry_.Ary_empty;
 	}
 }
-class Wdata_fmtr__oview_alias_itm implements Bry_fmtr_arg {
+class Wdata_fmtr__oview_alias_itm extends gplx.core.brys.Bfr_arg_base {
 	private byte[][] ary;
 	public void Init_by_itm(byte[][] ary) {this.ary = ary;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (ary == null) return;
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
+import gplx.core.gfo_ndes.*;
 public class Sql_select_fld_ {
 	public static Sql_select_fld_base new_fld(String tbl, String fld, String alias)		{return new Sql_select_fld_fld(tbl, fld, alias);}
 	public static Sql_select_fld_base new_count(String tbl, String fld, String alias)	{return new Sql_select_fld_count(tbl, fld, alias);}

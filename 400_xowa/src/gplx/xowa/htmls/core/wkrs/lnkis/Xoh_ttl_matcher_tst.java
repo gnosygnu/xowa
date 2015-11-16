@@ -30,7 +30,8 @@ public class Xoh_ttl_matcher_tst {
 	}
 	@Test   public void Ns__same()				{fxt.Test__match("Help_talk:Ab"		, "Help talk:Ab", Xoh_ttl_matcher.Tid__same);}
 	@Test   public void Ns__diff()				{fxt.Test__match("Help_talk:Ab"		, "Help_talk:Ab", Xoh_ttl_matcher.Tid__diff);}
-	@Test   public void Trail__same()			{fxt.Test__match("A"				, "Abc", Xoh_ttl_matcher.Tid__trail, 1);}
+	@Test   public void Tail__same()			{fxt.Test__match("A"				, "Abc"	, Xoh_ttl_matcher.Tid__tail, 1);}
+	@Test   public void Head__same()			{fxt.Test__match("Ab"				, "A"	, Xoh_ttl_matcher.Tid__head, 1);}
 }
 class Xoh_ttl_matcher_fxt {
 	private final Xoh_ttl_matcher matcher = new Xoh_ttl_matcher();
@@ -44,7 +45,7 @@ class Xoh_ttl_matcher_fxt {
 	public void Test__match(String page_str, String capt_str, int expd_tid, int expd_trail_bgn) {
 		byte[] page_bry = Bry_.new_u8(page_str);
 		byte[] capt_bry = Bry_.new_u8(capt_str);
-		Tfds.Eq_int(expd_tid		, matcher.Match(rdr.Ctor_by_page(Bry_.Empty, page_bry, page_bry.length), wiki, page_bry, 0, page_bry.length, capt_bry, 0, capt_bry.length));
+		Tfds.Eq_int(expd_tid		, matcher.Match(rdr.Init_by_page(Bry_.Empty, page_bry, page_bry.length), wiki, page_bry, 0, page_bry.length, capt_bry, 0, capt_bry.length));
 		Tfds.Eq_int(expd_trail_bgn	, matcher.Trail_bgn());
 	}
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.brys.fmtrs.*;
 public class Swing_kit extends Gfui_kit_base {
 	private Bry_fmtr ask_fmtr = Bry_fmtr.new_(); private Bry_bfr ask_bfr = Bry_bfr.new_();
 	@Override public byte Tid() {return Gfui_kit_.Swing_tid;}

@@ -19,45 +19,36 @@ package gplx.langs.htmls.parsers; import gplx.*; import gplx.langs.*; import gpl
 import gplx.core.btries.*;
 public class Html_doc_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final List_adp list = List_adp_.new_();
-	private Html_txt_wkr txt_wkr;
-	public Html_doc_parser Reg_txt(Html_txt_wkr txt_wkr) {
+	private final Html_txt_wkr txt_wkr;
+	public Html_doc_parser(Html_txt_wkr txt_wkr, Html_doc_wkr... wkr_ary) {
 		this.txt_wkr = txt_wkr;
-		return this;
-	}
-	public Html_doc_parser Reg_wkrs(Html_doc_wkr... wkr_ary) {
-		for (Html_doc_wkr wkr : wkr_ary) {
+		for (Html_doc_wkr wkr : wkr_ary)
 			trie.Add_obj(wkr.Hook(), wkr);
-			list.Add(wkr);
-		}
-		return this;
 	}
-	public void Parse(byte[] src, int src_bgn, int src_end) {
-		txt_wkr.Init(src, src_bgn, src_end);
-		int len = list.Count();
-		for (int i = 0; i < len; ++i) {
-			Html_doc_wkr wkr = (Html_doc_wkr)list.Get_at(i);
-			wkr.Init(src, src_bgn, src_end);
-		}
-		int pos = src_bgn;
+	public void Parse(byte[] page_url, byte[] src, int src_bgn, int src_end) {
 		int txt_bgn = -1;
+		int pos = src_bgn;
 		while (pos < src_end) {
 			Object o = trie.Match_bgn(src, pos, src_end);
-			if (o == null) {
+			if (o == null) {									// not a known hook; add to txt
 				if (txt_bgn == -1) txt_bgn = pos;
 				++pos;
 			}
-			else {
-				if (txt_bgn != -1) {
+			else {												// known hook
+				if (txt_bgn != -1) {							// txt pending; handle it
 					txt_wkr.Parse(txt_bgn, pos);
 					txt_bgn = -1;
 				}
 				Html_doc_wkr wkr = (Html_doc_wkr)o;
-				int hook_end = trie.Match_pos();
-				try {pos = wkr.Parse(pos);}
-				catch (Exception e) {Err_.Noop(e); txt_bgn = pos; pos = hook_end;}
+				try {pos = wkr.Parse(src, src_bgn, src_end, pos);}
+				catch (Exception e) {
+					Err err = Err_.cast_or_make(e);
+					if (!err.Logged()) Gfo_usr_dlg_.Instance.Warn_many("", "", Err_.Message_gplx_log(e), "page_url", page_url, "mid", Bry_.Mid_by_len_safe(src, pos, 255));
+					txt_bgn = pos;								// set txt_bgn to hook_bgn which is "pos"; i.e.: txt resumes from start of failed hook
+					pos = trie.Match_pos();						// set pos to hook_end
+				}
 			}	
 		}
-		if (txt_bgn != -1) txt_wkr.Parse(txt_bgn, src_end);
+		if (txt_bgn != -1) txt_wkr.Parse(txt_bgn, src_end);		// handle add pending txt at EOS
 	}
 }

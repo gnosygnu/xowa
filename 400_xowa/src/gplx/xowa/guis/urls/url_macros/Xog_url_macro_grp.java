@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.urls.url_macros; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.urls.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.brys.fmtrs.*;
 public class Xog_url_macro_grp implements GfoInvkAble {
 	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public void Del(byte[] abrv) {trie.Del(abrv);}

@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src_000_err"/>
 	<classpathentry kind="src" path="src_100_interface"/>
-	<classpathentry kind="src" path="src_100_types_primitive"/>
 	<classpathentry kind="src" path="src_101_types_object"/>
 	<classpathentry kind="src" path="src_120_basicDataType"/>
 	<classpathentry kind="src" path="src_130_brys"/>
 	<classpathentry kind="src" path="src_140_list"/>
-	<classpathentry kind="src" path="src_210_env"/>
 	<classpathentry kind="src" path="src_300_classXtn"/>
-	<classpathentry kind="src" path="src_310_gfoNde"/>
 	<classpathentry kind="src" path="src_311_gfoObj"/>
 	<classpathentry kind="src" path="src_330_store"/>
-	<classpathentry kind="src" path="src_400_gfs"/>
-	<classpathentry kind="src" path="src_410_gfoCfg"/>
 	<classpathentry kind="src" path="src_420_usrMsg"/>
 	<classpathentry kind="src" path="tst"/>
 	<classpathentry kind="src" path="xtn"/>

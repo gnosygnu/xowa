@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import org.junit.*;
+import gplx.core.gfo_ndes.*;
 import gplx.stores.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xob_xfer_temp_itm_tst {

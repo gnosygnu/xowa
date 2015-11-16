@@ -19,14 +19,13 @@ package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; impo
 import gplx.core.brys.*;
 public class Xoh_lnki_dict_ {
 	public static final byte	// SERIALIZED
-	  Type__caption_n				= Byte_ascii.Num_0
-	, Type__caption_y				= Byte_ascii.Num_1
-	, Type__same					= Xoh_ttl_matcher.Tid__same		// EX: [[A]]
-	, Type__diff					= Xoh_ttl_matcher.Tid__diff		// EX: [[A|b]]
-	, Type__trail					= Xoh_ttl_matcher.Tid__trail	// EX: [[A|b]]
+	  Capt__same					= Xoh_ttl_matcher.Tid__same		// EX: [[A]]
+	, Capt__diff					= Xoh_ttl_matcher.Tid__diff		// EX: [[A|b]]
+	, Capt__trail					= Xoh_ttl_matcher.Tid__tail		// EX: [[A|b]]
+	, Capt__head					= Xoh_ttl_matcher.Tid__head		// EX: [[A_(b)|A]]
 	;
-	public static void Ns_encode(Bry_bfr bfr, Xoa_ttl ttl) {
-		gplx.xowa.htmls.core.hzips.Xoh_hzip_int_.Encode(1, bfr, ttl.Ns().Id() + 2);
+	public static void Ns_encode(Bry_bfr bfr, int ns_id) {
+		gplx.xowa.htmls.core.hzips.Xoh_hzip_int_.Encode(1, bfr, ns_id + 2);
 	}
 	public static int Ns_decode(Bry_rdr rdr) {
 		return rdr.Read_int_by_base85(1) - 2;

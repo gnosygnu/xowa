@@ -31,7 +31,7 @@ public abstract class Xoh_itm_parser_fxt_base {
 	}
 	public void Exec_parse(String src_str) {
 		this.src = Bry_.new_u8(src_str); this.src_len = src.length;
-		rdr.Ctor_by_page(Xoa_page_.Main_page_bry, src, src_len);
+		rdr.Init_by_page(Xoa_page_.Main_page_bry, src, src_len);
 		Exec_parse_hook(rdr, 0, src_len);
 	}
 	public abstract void Exec_parse_hook(Bry_rdr owner_rdr, int src_bgn, int src_end);

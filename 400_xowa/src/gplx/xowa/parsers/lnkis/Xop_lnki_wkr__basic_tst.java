@@ -54,8 +54,8 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_wiki("[[Image:a]]"				, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file).Trg_tkn_(fxt.tkn_arg_val_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))));
 		fxt.Test_parse_page_wiki("[[Image:a|border]]"		, fxt.tkn_lnki_().Border_(Bool_.Y_byte));
 		fxt.Test_parse_page_wiki("[[Image:a|thumb]]"		, fxt.tkn_lnki_().ImgType_(Xop_lnki_type.Id_thumb));
-		fxt.Test_parse_page_wiki("[[Image:a|left]]"			, fxt.tkn_lnki_().HAlign_(Xop_lnki_align_h.Left));
-		fxt.Test_parse_page_wiki("[[Image:a|top]]"			, fxt.tkn_lnki_().VAlign_(Xop_lnki_align_v.Top));
+		fxt.Test_parse_page_wiki("[[Image:a|left]]"			, fxt.tkn_lnki_().HAlign_(Xop_lnki_align_h_.Left));
+		fxt.Test_parse_page_wiki("[[Image:a|top]]"			, fxt.tkn_lnki_().VAlign_(Xop_lnki_align_v_.Top));
 		fxt.Test_parse_page_wiki("[[Image:a|10px]]"			, fxt.tkn_lnki_().Width_(10).Height_(-1));
 		fxt.Test_parse_page_wiki("[[Image:a|20x30px]]"		, fxt.tkn_lnki_().Width_(20).Height_(30));
 		fxt.Test_parse_page_wiki("[[Image:a|alt=b]]"			, fxt.tkn_lnki_().Alt_tkn_(fxt.tkn_arg_nde_().Key_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(10, 13))).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(14, 15)))));

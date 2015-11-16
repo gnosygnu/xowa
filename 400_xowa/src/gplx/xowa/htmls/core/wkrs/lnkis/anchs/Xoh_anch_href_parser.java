@@ -20,9 +20,12 @@ import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_anch_href_parser implements Xoh_itm_parser {
-	private byte[] src; private Xoa_ttl page_ttl; Xow_ttl_parser ttl_parser;
-	private final Bry_rdr rdr = new Bry_rdr();
+	private Xoa_ttl page_ttl; Xow_ttl_parser ttl_parser;
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
+	public Html_atr Atr() {return atr;} private Html_atr atr;
+	public byte Tid() {return tid;} private byte tid;
+	public byte[] Src() {return src;} private byte[] src; 
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
 	public int Val_end() {return val_end;} private int val_end;
 	public int Site_bgn() {return site_bgn;} private int site_bgn;
@@ -39,27 +42,58 @@ public class Xoh_anch_href_parser implements Xoh_itm_parser {
 		return page_ttl;
 	}
 	public void Parse(Bry_rdr owner_rdr, Xow_ttl_parser ttl_parser, Html_tag tag) {
-		Html_atr atr = tag.Atrs__get_by(Html_atr_.Bry__href);
+		this.atr = tag.Atrs__get_by_or_fail(Html_atr_.Bry__href);
 		Parse(owner_rdr, ttl_parser, atr.Val_bgn(), atr.Val_end());
 	}
 	public void Parse(Bry_rdr owner_rdr, Xow_ttl_parser ttl_parser, int href_bgn, int href_end) {
-		rdr.Init_by_sub(owner_rdr, "lnki.href", href_bgn, href_end).Dflt_dlm_(Byte_ascii.Slash);
-		site_bgn = -1; site_end = -1; page_bry = null; page_ttl = null;
+		rdr.Init_by_sub(owner_rdr, "lnki.href", href_bgn, href_end);
+		site_bgn = site_end = page_bgn = page_end = -1;
+		tid = Tid__null;
+		page_bry = null; page_ttl = null;
 		this.val_bgn = href_bgn; this.val_end = href_end;
 		this.src = owner_rdr.Src(); this.ttl_parser = ttl_parser;
-		rdr.Chk(Byte_ascii.Slash);
-		if (rdr.Chk(trie) == Href_tid__site) {	// EX: // "/site/wiki/A"
-			site_bgn = rdr.Pos();
-			site_end = rdr.Find_fwd_lr();
-			rdr.Chk(Bry__wiki);
+		if (val_end == val_bgn) {
+			page_bgn = page_end = 0;
+			return;		// handle empty String separately; EX: href=""
 		}
-		page_bgn = rdr.Pos();
-		page_end = rdr.Src_end();
+		int pos = href_bgn;
+		switch (src[pos]) {
+			case Byte_ascii.Hash:
+				tid = Tid__anch;
+				page_bgn = pos + 1;		// position page_bgn after #
+				page_end = val_end;		// anch ends at EOS
+				break;
+			default:
+				tid = Tid__inet;
+				page_bgn = pos;			// position page_bgn after #
+				page_end = val_end;		// anch ends at EOS
+				break;
+			case Byte_ascii.Slash:
+				rdr.Move_by_one();		// skip "/"
+				if (rdr.Chk(trie) == Tid__site) {	// EX: "/site/wiki/A"
+					tid = Tid__site;
+					site_bgn = rdr.Pos();
+					site_end = rdr.Find_fwd_lr();
+					rdr.Chk(Bry__wiki);
+				}
+				else {
+					tid = Tid__wiki;
+				}
+				page_bgn = rdr.Pos();
+				page_end = rdr.Src_end();
+				break;
+		}
 	}
-	private static final byte Href_tid__wiki = 1, Href_tid__site = 2;
+	public static final byte 
+	  Tid__null = 0		// EX: href=""
+	, Tid__wiki = 1		// EX: href="/wiki/A"
+	, Tid__site = 2		// EX: href="/site/en.wikipedia.org/wiki/A"
+	, Tid__anch = 3		// EX: href="#A"
+	, Tid__inet = 4		// EX: href="https://a.org/A"
+	;
 	private static final byte[] Bry__site = Bry_.new_a7("site/"), Bry__wiki = Bry_.new_a7("wiki/");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
-	.Add_bry_byte(Bry__wiki, Href_tid__wiki)
-	.Add_bry_byte(Bry__site, Href_tid__site)
+	.Add_bry_byte(Bry__wiki, Tid__wiki)
+	.Add_bry_byte(Bry__site, Tid__site)
 	;
 }

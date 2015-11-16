@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.gfui.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public Gfo_thread_cmd_unzip Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, ProcessAdp bzip2_process, ProcessAdp zip_process, ProcessAdp gz_process, Io_url src, Io_url trg) {

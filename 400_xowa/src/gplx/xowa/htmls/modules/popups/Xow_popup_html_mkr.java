@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.apis.xowa.html.modules.*;
 public class Xow_popup_html_mkr {
 	private Xoae_app app; private Xowe_wiki wiki;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.lists.*; /*StackAdp*/
+import gplx.lists.*; /*StackAdp*/ import gplx.core.gfo_ndes.*;
 public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {
 		if (!String_.Eq(key, GfmlDataWtrOpts.Key_const)) return;

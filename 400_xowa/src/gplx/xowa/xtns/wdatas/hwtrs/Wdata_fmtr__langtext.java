@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.html.*;
-class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
+class Wdata_fmtr__langtext_tbl extends gplx.core.brys.Bfr_arg_base {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;
 	private byte[] col_hdr_lang_name, col_hdr_lang_code, col_hdr_text; private int list_len;
 	public void Init_by_ctor(Wdata_toc_data toc_data, Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, String toggle_itm_key, Wdata_fmtr__langtext_row fmtr_row) {
@@ -36,7 +37,7 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 		list.Sort_by(lang_sorter);
 		fmtr_row.Init_by_page(list);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (list_len == 0) return;
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), col_hdr_lang_name, col_hdr_lang_code, col_hdr_text, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
 	}
@@ -54,13 +55,13 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	), "hdr_href", "hdr_text", "hdr_lang_name", "hdr_lang_code", "hdr_page", "toggle_btn", "toggle_hdr", "rows"
 	);
 }
-interface Wdata_fmtr__langtext_row extends Bry_fmtr_arg {
+interface Wdata_fmtr__langtext_row extends gplx.core.brys.Bfr_arg {
 	void Init_by_page(Ordered_hash list);
 }
-class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
+class Wdata_fmtr__langtext_row_base extends gplx.core.brys.Bfr_arg_base implements Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
@@ -92,10 +93,10 @@ class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
 //		, "              </span>"
 //		, "            </li>"
 }
-class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
+class Wdata_fmtr__alias_row extends gplx.core.brys.Bfr_arg_base implements Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);

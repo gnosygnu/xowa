@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.gfo_ndes.*;
 public class GfoNdeTstr {
 	public static void tst_ValsByCol(GfoNde nde, String fld, Object... expdAry) {
 		List_adp expd = List_adp_.new_();

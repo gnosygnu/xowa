@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.brys.fmtrs.*;
 public class Xoh_skin_itm implements GfoInvkAble {
 	private final Bry_fmtr fmtr = Bry_fmtr.new_();
 	public Xoh_skin_itm(String key, String fmt) {this.key = key; fmtr.Fmt_(fmt);}

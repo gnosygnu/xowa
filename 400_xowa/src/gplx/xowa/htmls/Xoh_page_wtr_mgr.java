@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

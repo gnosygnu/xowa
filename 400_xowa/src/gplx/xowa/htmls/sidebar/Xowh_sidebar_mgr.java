@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {

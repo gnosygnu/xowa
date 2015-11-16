@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.guis.langs.*;
 public class Xocfg_win implements GfoInvkAble {
 	public Xocfg_win(Xoae_app app) {}

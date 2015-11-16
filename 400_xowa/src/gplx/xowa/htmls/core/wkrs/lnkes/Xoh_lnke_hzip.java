@@ -16,27 +16,29 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.xowa.wikis.ttls.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.hzips.stats.*; 	
-public class Xoh_lnke_hzip implements Xoh_hzip_wkr {
+import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public String Key() {return Xoh_hzip_dict_.Key__lnke;}
-	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, byte[] src, int rng_bgn, int rng_end, byte lnke_type, int href_bgn, int href_end, int lnke_id) {
+	public Xoh_lnke_hzip Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, byte[] src, Xoh_lnke_parser arg) {
+		byte lnke_type = arg.Lnke_type();
 		switch (lnke_type) {
 			case Xoh_lnke_dict_.Type__free:		stat_itm.Lnke_txt_add();break;
 			case Xoh_lnke_dict_.Type__text:		stat_itm.Lnke_brk_text_y_add(); break;
 			case Xoh_lnke_dict_.Type__auto:		stat_itm.Lnke_brk_text_n_add(); break;
 		}
-		bfr.Add(Xoh_hzip_dict_.Bry__lnke);					// add hook
-		bfr.Add_byte(lnke_type);							// add type
-		bfr.Add_mid(src, href_bgn, href_end);				// add href
+		bfr.Add(Xoh_hzip_dict_.Bry__lnke);						// add hook
+		bfr.Add_byte(lnke_type);								// add type
+		bfr.Add_mid(src, arg.Href_bgn(), arg.Href_end());		// add href
 		bfr.Add_byte(Xoh_hzip_dict_.Escape);
 		if (lnke_type == Xoh_lnke_dict_.Type__auto)
-			Xoh_hzip_int_.Encode(1, bfr, lnke_id);
+			Xoh_hzip_int_.Encode(1, bfr, arg.Autonumber_id());
+		return this;
 	}
-	public int Decode(Bry_bfr bfr, Xoh_decode_ctx ctx, Bry_rdr rdr, byte[] src, int hook_bgn) {
+	public int Decode(Bry_bfr bfr, boolean write_to_bfr, Xoh_hdoc_ctx ctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int hook_bgn) {
 		byte lnke_type = rdr.Read_byte();
 		int href_bgn = rdr.Pos();
-		int href_end = rdr.Find_fwd_lr(Xoh_hzip_dict_.Escape);
+		int href_end = rdr.Find_fwd_lr();
 		bfr.Add(Html_bldr_.Bry__a_lhs_w_href);
 		bfr.Add_mid(src, href_bgn, href_end);
 		bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_type)).Add(Xoh_lnke_dict_.Html__rhs_end);
@@ -54,4 +56,8 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr {
 		}
 		return rdr.Pos();
 	}
+	public int				Pool__idx() {return pool_idx;} private int pool_idx;
+	public void				Pool__clear (Object[] args) {}
+	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr;
+	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_lnke_hzip rv = new Xoh_lnke_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 }

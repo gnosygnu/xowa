@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.stores.*; /*DsvDataWtr_*/
+import gplx.stores.*; /*DsvDataWtr_*/ import gplx.core.gfo_ndes.*;
 public class DataWtr_ {
 	public static final DataWtr Null = new DataWtr_null();
 }

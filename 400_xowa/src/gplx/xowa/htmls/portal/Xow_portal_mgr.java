@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.guis.*; import gplx.xowa.htmls.sidebar.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
@@ -73,7 +74,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 			talk_cls = Xow_portal_mgr.Cls_selected_y;
 		else
 			subj_cls = Xow_portal_mgr.Cls_selected_y;
-		Bry_fmtr_arg vnt_menu = null;
+		Bfr_arg vnt_menu = null;
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
 		if (vnt_mgr.Enabled()) {
 			vnt_menu_fmtr.Init(vnt_mgr.Regy(), wiki.Domain_bry(), ttl.Full_db(), vnt_mgr.Cur_itm().Key());

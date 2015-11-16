@@ -316,7 +316,7 @@ class Wdata_hwtr_mgr_fxt {
 		Wdata_fmtr__json fmtr_json = doc_hwtr.Fmtr_json();
 		fmtr_json.Init_by_wdoc(wdoc.Jdoc());
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
-		fmtr_json.Fmt__do(tmp_bfr);
+		fmtr_json.Bfr_arg__add(tmp_bfr);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
 }

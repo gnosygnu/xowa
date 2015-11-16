@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.primitives.*;
-import gplx.core.encoders.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.encoders.*;
 public class Bry_bfr {
 	private Bry_bfr_mkr_mgr mkr_mgr; private int reset;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
@@ -419,7 +418,7 @@ public class Bry_bfr {
 		else if	(o_type == Boolean.class)			Add_yn(Bool_.cast(o));				
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
-		else										((Bry_fmtr_arg)o).Fmt__do(this);
+		else										((Bfr_arg)o).Bfr_arg__add(this);
 		return this;
 	}
 	public Bry_bfr Add_obj_strict(Object o) {
@@ -436,7 +435,7 @@ public class Bry_bfr {
 		else if	(o_type == Boolean.class)			Add_bool(Bool_.cast(o));			
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
-		else										((Bry_fmtr_arg)o).Fmt__do(this);
+		else										((Bfr_arg)o).Bfr_arg__add(this);
 		return this;
 	}
 	public Bry_bfr Add_yn(boolean v) {Add_byte(v ? Byte_ascii.Ltr_y : Byte_ascii.Ltr_n); return this;}
@@ -556,7 +555,11 @@ public class Bry_bfr {
 		this.Mkr_rls();
 	}
 	@Override public int hashCode() {return Bry_obj_ref.CalcHashCode(bfr, 0, bfr_len);}
-	@Override public boolean equals(Object obj) {return obj == null ? false : Bry_.Match(bfr, 0, bfr_len, ((Bry_obj_ref)obj).Val());}	// NOTE: strange, but null check needed; throws null error; PAGE:c:File:Eug�ne_Delacroix_-_La_libert�_guidant_le_peuple.jpg
+	@Override public boolean equals(Object obj) {
+		if (obj == null) return false;	// NOTE: strange, but null check needed; throws null error; EX.WP: File:Eug�ne Delacroix - La libert� guidant le peuple.jpg
+		Bry_obj_ref comp = (Bry_obj_ref)obj;
+		return Bry_.Match(bfr, 0, bfr_len, comp.Val(), comp.Val_bgn(), comp.Val_end());
+	}
 	public void Resize(int v) {
 		bfr_max = v;
 		bfr = Bry_.Resize(bfr, 0, v);

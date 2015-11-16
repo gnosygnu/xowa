@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.phps.*;
 public class Xoa_gfs_php_mgr {
 	public static byte[] Xto_php(Bry_bfr bfr, boolean escape_backslash, byte[] src) {

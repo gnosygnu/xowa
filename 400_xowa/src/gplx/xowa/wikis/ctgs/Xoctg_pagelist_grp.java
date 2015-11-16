@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-public class Xoctg_pagelist_grp implements Bry_fmtr_arg {
+public class Xoctg_pagelist_grp extends gplx.core.brys.Bfr_arg_base {
 	public void Init_app(Xoae_app app, boolean type_is_normal, Bry_fmtr fmtr_grp, Bry_fmtr fmtr_itm) {
 		this.type_is_normal = type_is_normal;
 		this.fmtr_grp = fmtr_grp;
@@ -31,7 +32,7 @@ public class Xoctg_pagelist_grp implements Bry_fmtr_arg {
 	}	private byte[] lbl_ctg_help, lbl_ctg_text, lbl_hidden; private static final byte[] Key_pagecategorieslink = Bry_.new_a7("pagecategorieslink");
 	public boolean Type_is_normal() {return type_is_normal;} private boolean type_is_normal;
 	public Xoctg_pagelist_itms Itms() {return itms;} private Xoctg_pagelist_itms itms = new Xoctg_pagelist_itms();
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (type_is_normal)
 			fmtr_grp.Bld_bfr_many(bfr, lbl_ctg_help, lbl_ctg_text, itms);
 		else

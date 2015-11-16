@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.parsers; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.parsers.styles.*;
+import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.parsers.styles.*; import gplx.langs.htmls.parsers.clses.*;
 public class Html_tag implements Mwh_atr_wkr {
 	private Html_tag_rdr tag_rdr;
 	private Ordered_hash atrs_hash; private boolean atrs_null; private int atrs_bgn, atrs_end;
 	public Html_tag Init(Html_tag_rdr tag_rdr, boolean tag_is_tail, boolean tag_is_inline, int src_bgn, int src_end, int atrs_bgn, int atrs_end, int name_id) {
-		this.tag_rdr = tag_rdr; this.atrs_null = true;
+		this.tag_rdr = tag_rdr; this.src = tag_rdr.Src(); this.atrs_null = true;
 		this.tag_is_tail = tag_is_tail; this.tag_is_inline = tag_is_inline;
 		this.atrs_bgn = atrs_bgn; this.atrs_end = atrs_end;
 		this.name_id = name_id; this.src_bgn = src_bgn; this.src_end = src_end;
@@ -34,8 +34,18 @@ public class Html_tag implements Mwh_atr_wkr {
 		return rv;
 	}
 	public int Name_id() {return name_id;} private int name_id;
+	public Html_tag Chk_id(int chk) {
+		if (	chk == name_id
+			||	(name_id != Html_tag_.Id__eos && Int_.In(chk, Html_tag_.Id__any, Html_tag_.Id__comment))) {
+		}
+		else
+			tag_rdr.Rdr().Fail("name_id chk failed", "expecting", Html_tag_.To_str(chk));
+		return this;
+	}
+	public byte[] Src() {return src;} private byte[] src;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
+	public boolean Src_exists() {return src_end > src_bgn;}	// NOTE: only true if EOS where src_end == src_bgn == src_len
 	public boolean Tag_is_tail() {return tag_is_tail;} private boolean tag_is_tail;
 	public boolean Tag_is_inline() {return tag_is_inline;} private boolean tag_is_inline;
 	public boolean Atrs__match_pair(byte[] key, byte[] val) {
@@ -47,12 +57,12 @@ public class Html_tag implements Mwh_atr_wkr {
 		if (atrs_null) Atrs__make();
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(Html_atr_.Bry__class); if (rv == null) return false;
 		byte[] rv_val = rv.Val();
-		return Html_atr_cls_.Has(rv_val, 0, rv_val.length, val);
+		return Html_atr_class_.Has(rv_val, 0, rv_val.length, val);
 	}
-	public byte Atrs__cls_find_1st(Hash_adp_bry hash) {
+	public byte Atrs__cls_find_or_fail(Hash_adp_bry hash) {
 		if (atrs_null) Atrs__make();
 		Html_atr cls_atr = (Html_atr)atrs_hash.Get_by(Html_atr_.Bry__class); if (cls_atr == null) tag_rdr.Rdr().Fail("cls missing", String_.Empty, String_.Empty);
-		byte rv = Html_atr_cls_.Find_1st(tag_rdr.Src(), cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) tag_rdr.Rdr().Fail("cls val missing", String_.Empty, String_.Empty);
+		byte rv = Html_atr_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) tag_rdr.Rdr().Fail("cls val missing", String_.Empty, String_.Empty);
 		return rv;
 	}
 	private static final Html_atr_style_wkr__get_val_as_int style_wkr = new Html_atr_style_wkr__get_val_as_int();
@@ -74,11 +84,11 @@ public class Html_tag implements Mwh_atr_wkr {
 	public int Atrs__get_as_int_or(byte[] key, int or) {
 		if (atrs_null) Atrs__make();
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(key); if (rv == null) return or;
-		return Bry_.To_int_or(tag_rdr.Src(), rv.Val_bgn(), rv.Val_end(), or);
+		return Bry_.To_int_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
-	public Html_atr Atrs__get_by(byte[] key)			{return Atrs__get_by(key, Bool_.Y);}
-	public Html_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by(key, Bool_.N);}
-	public Html_atr Atrs__get_by(byte[] key, boolean fail_if_null) {
+	public Html_atr Atrs__get_by_or_fail(byte[] key)			{return Atrs__get_by_or_fail(key, Bool_.Y);}
+	public Html_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.N);}
+	public Html_atr Atrs__get_by_or_fail(byte[] key, boolean fail_if_null) {
 		if (atrs_null) Atrs__make();
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(key);
 		if (rv == null) {

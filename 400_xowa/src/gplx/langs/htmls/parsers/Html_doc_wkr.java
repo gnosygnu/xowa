@@ -18,6 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.parsers; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 public interface Html_doc_wkr {
 	byte[] Hook();
-	void Init(byte[] src, int src_bgn, int src_end);
-	int Parse(int pos);
+	int Parse(byte[] src, int src_bgn, int src_end, int pos);
 }

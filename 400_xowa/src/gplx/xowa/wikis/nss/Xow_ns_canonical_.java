@@ -53,7 +53,7 @@ public class Xow_ns_canonical_ {
 		Object rv_obj = id_hash.Get_by(key);
 		return rv_obj == null ? Xow_ns_.Tid__null : ((Int_obj_val)rv_obj).Val();
 	}
-	public static String To_canonical_or_local(Xow_ns ns) {	// NOTE: prefer canonical names if they exist; otherwise use local; PAGE:sh.w:Koprno; DATE:2015-11-08
+	public static String To_canonical_or_local_as_str(Xow_ns ns) {	// NOTE: prefer canonical names if they exist; otherwise use local; PAGE:sh.w:Koprno; DATE:2015-11-08
 		switch (ns.Id()) {
 			case Xow_ns_.Tid__media:					return Xow_ns_.Key__media;
 			case Xow_ns_.Tid__special:					return Xow_ns_.Key__special;
@@ -75,6 +75,30 @@ public class Xow_ns_canonical_ {
 			case Xow_ns_.Tid__module:					return Xow_ns_.Key__module;
 			case Xow_ns_.Tid__module_talk:				return Xow_ns_.Key__module_talk;
 			default:									return String_.new_u8(ns.Name_ui());
+		}
+	}
+	public static byte[] To_canonical_or_local_as_bry(Xow_ns ns) {
+		switch (ns.Id()) {
+			case Xow_ns_.Tid__media:					return Xow_ns_.Bry__media;
+			case Xow_ns_.Tid__special:					return Xow_ns_.Bry__special;
+			case Xow_ns_.Tid__talk:						return Xow_ns_.Bry__talk;
+			case Xow_ns_.Tid__user:						return Xow_ns_.Bry__user;
+			case Xow_ns_.Tid__user_talk:				return Xow_ns_.Bry__user_talk;
+			case Xow_ns_.Tid__project:					return Xow_ns_.Bry__project;
+			case Xow_ns_.Tid__project_talk:				return Xow_ns_.Bry__project_talk;
+			case Xow_ns_.Tid__file:						return Xow_ns_.Bry__file;
+			case Xow_ns_.Tid__file_talk:				return Xow_ns_.Bry__file_talk;
+			case Xow_ns_.Tid__mediawiki:				return Xow_ns_.Bry__mediawiki;
+			case Xow_ns_.Tid__mediawiki_talk:			return Xow_ns_.Bry__mediawiki_talk;
+			case Xow_ns_.Tid__template:					return Xow_ns_.Bry__template;
+			case Xow_ns_.Tid__template_talk:			return Xow_ns_.Bry__template_talk;
+			case Xow_ns_.Tid__help:						return Xow_ns_.Bry__help;
+			case Xow_ns_.Tid__help_talk:				return Xow_ns_.Bry__help_talk;
+			case Xow_ns_.Tid__category:					return Xow_ns_.Bry__category;
+			case Xow_ns_.Tid__category_talk:			return Xow_ns_.Bry__category_talk;
+			case Xow_ns_.Tid__module:					return Xow_ns_.Bry__module;
+			case Xow_ns_.Tid__module_talk:				return Xow_ns_.Bry__module_talk;
+			default:									return ns.Name_ui();
 		}
 	}
 }

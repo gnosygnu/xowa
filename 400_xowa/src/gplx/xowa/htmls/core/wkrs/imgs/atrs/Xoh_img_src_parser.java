@@ -38,8 +38,9 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 	public int File_page() {return file_page;} private int file_page;
 	public boolean File_time_exists() {return file_time != -1;}
 	public boolean File_page_exists() {return file_page != -1;}
+	public Html_atr Atr() {return atr;} private Html_atr atr;
 	public void Parse(Bry_rdr owner_rdr, byte[] domain_bry, Html_tag tag) {
-		Html_atr atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__src);
+		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__src);
 		if (!atr.Val_exists()) return;
 		Parse(owner_rdr, domain_bry, atr.Val_bgn(), atr.Val_end());
 	}
@@ -55,7 +56,7 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 			if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
 		}
 		file_is_orig = rdr.Chk(trie) == Tid__orig;					// check if 'orig/' or 'thumb/'
-		file_ttl_bgn = rdr.Move_by(4);								// 8 for 4 levels of md5; EX: "0/1/2/3/"
+		file_ttl_bgn = Skip_md5();									// skip md5; EX: "0/1/2/3/"
 		if (file_is_orig)
 			file_ttl_end = rdr.Src_end();		
 		else {
@@ -67,6 +68,21 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 			else if	(rdr.Is(Byte_ascii.Dash))
 				file_page = rdr.Read_int_to(Byte_ascii.Dot);		// EX: "220px-5.png"
 		}
+	}
+	private int Skip_md5() {
+		byte[] src = rdr.Src();
+		int pos = rdr.Pos();
+		while (true) {
+			if (	pos < val_end						// no more slashes; shouldn't happen; EX: "7/0/"
+				&&	src[pos + 1] == Byte_ascii.Slash) {	// pos is slash; EX: "7/0/"
+				pos += 2;
+				continue;
+			}
+			else {										// pos is not slash; title done
+				break;
+			}
+		}
+		return rdr.Move_to(pos);
 	}
 	private static final byte[] Bry__file = Bry_.new_a7("/file/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
 	private static final byte Tid__orig = 1, Tid__thumb = 2;

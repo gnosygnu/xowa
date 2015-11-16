@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.files.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*;
@@ -119,7 +120,7 @@ public class Gallery_html_wtr {
 		itm_bfr.Mkr_rls();
 		tmp_bfr.Mkr_rls();
 		int mgr_box_width_max = mgr_box_width_all < mgr_box_width_row ? mgr_box_width_row : mgr_box_width_all;
-		Gallery_html_wtr_.Mgr_all_fmtr.Bld_bfr_many(bfr, mgr_elem_id, mgr_box_cls, Bry_fmtr_arg_.fmtr_(mgr_box_style, Bry_fmtr_arg_.int_(mgr_box_width_max)), itm_bfr);
+		Gallery_html_wtr_.Mgr_all_fmtr.Bld_bfr_many(bfr, mgr_elem_id, mgr_box_cls, Bfr_arg_.New_bry_fmtr(mgr_box_style, Bfr_arg_.New_int(mgr_box_width_max)), itm_bfr);
 	}
 }
 class Gallery_html_wtr_ {

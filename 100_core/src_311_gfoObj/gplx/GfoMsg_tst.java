@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import org.junit.*;
+import org.junit.*; import gplx.langs.gfs.*;
 public class GfoMsg_tst {
 	@Before public void setup() {
 		GfsCore.Instance.AddObj(new Mok(), "Mok");

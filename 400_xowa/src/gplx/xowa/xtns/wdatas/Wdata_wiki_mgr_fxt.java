@@ -150,7 +150,7 @@ public class Wdata_wiki_mgr_fxt {
 		parser_fxt.Exec_parse_page_all_as_str(raw);
 		Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		
-		wdata_lang_wtr.Page_(page).Fmt__do(tmp_bfr);
+		wdata_lang_wtr.Page_(page).Bfr_arg__add(tmp_bfr);
 	    Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_rls());
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {

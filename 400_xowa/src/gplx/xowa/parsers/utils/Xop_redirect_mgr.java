@@ -49,7 +49,10 @@ public class Xop_redirect_mgr {
 		if (ttl_bgn == Bry_find_.Not_found)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
 		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn); if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
-		int pipe_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, ttl_bgn); if (pipe_pos != Bry_find_.Not_found) ttl_end = pipe_pos;	// if pipe exists, end ttl at pipe; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
+		int pipe_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, ttl_bgn); 
+		if (	pipe_pos != Bry_find_.Not_found	// if pipe exists; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
+			&&	pipe_pos < ttl_end)				// and pipe is before ]]; do not take pipe from next lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
+			ttl_end = pipe_pos;					// end ttl at pipe
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 		return Xoa_ttl.parse(wiki, redirect_bry);

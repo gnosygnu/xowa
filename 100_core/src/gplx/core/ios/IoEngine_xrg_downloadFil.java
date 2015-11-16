@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.brys.fmtrs.*;
 public class IoEngine_xrg_downloadFil {
 	public String Src() {return src;} public IoEngine_xrg_downloadFil Src_(String v) {src = v; return this;} private String src;
 	public Io_url Trg() {return trg;} public IoEngine_xrg_downloadFil Trg_(Io_url v) {trg = v; return this;} private Io_url trg;

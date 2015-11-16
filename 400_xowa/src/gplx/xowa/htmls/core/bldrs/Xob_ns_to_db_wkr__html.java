@@ -23,7 +23,7 @@ class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
 	public Xob_ns_to_db_wkr__html(Xowd_db_file page_db) {this.page_db = page_db;}
 	public byte Db_tid() {return Xowd_db_file_.Tid_html_data;}
 	public void Tbl_init(Xowd_db_file db) {			
-		Xoh_page_tbl tbl = db.Tbl__html_page();
+		Xoh_page_tbl tbl = db.Tbl__html();
 		tbl.Create_tbl();
 		tbl.Insert_bgn(); 
 	}

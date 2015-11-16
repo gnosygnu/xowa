@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.htmls.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
@@ -52,10 +53,10 @@ class Articles_itm {
 	public byte[] Ttl() {return ttl;} private byte[] ttl;
 	public byte[] Text() {return text;} private byte[] text;
 }
-class Articles_itm_fmtr implements Bry_fmtr_arg {
+class Articles_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private Xowe_wiki wiki; private List_adp itms;
 	public void Init(Xowe_wiki wiki, List_adp itms) {this.wiki = wiki; this.itms = itms;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Articles_itm itm = (Articles_itm)itms.Get_at(i);

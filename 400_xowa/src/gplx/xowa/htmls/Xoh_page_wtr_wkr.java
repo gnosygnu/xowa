@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; 
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
-public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
+public class Xoh_page_wtr_wkr extends gplx.core.brys.Bfr_arg_base {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final Xoh_page_wtr_mgr mgr; private final byte page_mode;
 	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
@@ -43,14 +44,14 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 						break;
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
-				Fmt__do(page_bfr);
+				Bfr_arg__add(page_bfr);
 				Write_page_by_tid(view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
 				if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
 					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
 				wdata_lang_wtr.Page_(null);
 			}
 			else
-				Fmt__do(bfr);
+				Bfr_arg__add(bfr);
 			this.page = null;
 			return bfr.To_bry_and_clear();
 		}
@@ -96,7 +97,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, page);	// add after </head>
 		Xoh_page_wtr_wkr_.Bld_html_end(bfr, page);	// add after </html>
 	}
-	public void Fmt__do(Bry_bfr bfr) {Write_body(bfr, Xoh_wtr_ctx.Basic, page);}
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {Write_body(bfr, Xoh_wtr_ctx.Basic, page);}
 	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page) {
 		synchronized (thread_lock_2) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();

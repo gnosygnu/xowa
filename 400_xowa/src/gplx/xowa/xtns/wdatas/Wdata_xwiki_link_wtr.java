@@ -19,9 +19,9 @@ package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
+public class Wdata_xwiki_link_wtr extends gplx.core.brys.Bfr_arg_base {
 	public Wdata_xwiki_link_wtr Page_(Xoae_page page) {this.page = page; return this;} private Xoae_page page;
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		List_adp slink_list = page.Slink_list();
 		Xoa_ttl page_ttl = page.Ttl();
 		byte[] qid = Write_wdata_links(slink_list, page.Wikie(), page_ttl, page.Wdata_external_lang_links());

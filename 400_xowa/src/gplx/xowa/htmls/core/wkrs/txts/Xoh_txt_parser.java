@@ -20,8 +20,5 @@ import gplx.langs.htmls.parsers.*;
 public class Xoh_txt_parser implements Html_txt_wkr {
 	private final Xoh_hdoc_wkr wkr;
 	public Xoh_txt_parser(Xoh_hdoc_wkr wkr) {this.wkr = wkr;}
-	public void Init(byte[] src, int src_bgn, int src_end) {}
-	public void Parse(int rng_bgn, int rng_end) {
-		wkr.On_txt(rng_bgn, rng_end);
-	}
+	public void Parse(int rng_bgn, int rng_end) {wkr.On_txt(rng_bgn, rng_end);}
 }

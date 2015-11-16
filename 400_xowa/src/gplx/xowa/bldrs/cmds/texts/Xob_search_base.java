@@ -68,7 +68,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 	public static byte[][] Split_ttl_into_words(Xol_lang_itm lang, Ordered_hash list, Bry_bfr bfr, byte[] ttl) {
 		if (lang != null)	// null lang passed in by searcher
 			ttl = lang.Case_mgr().Case_build_lower(ttl);
-		int ttl_len = ttl.length; Bry_obj_ref word_ref = Bry_obj_ref.new_(Bry_.Empty);
+		int ttl_len = ttl.length; Bry_obj_ref word_ref = Bry_obj_ref.New(Bry_.Empty);
 		int i = 0; boolean word_done = false;
 		while (true) {
 			if (word_done || i == ttl_len) {

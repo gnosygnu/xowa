@@ -98,12 +98,12 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		Xobd_rdr rv = (Xobd_rdr)dump_rdrs.Get_by(dump_rdrs_ref.Val_(wiki_key));
 		if (rv == null) {
 			rv = new Xobd_rdr(bldr, wiki);
-			dump_rdrs.Add(Bry_obj_ref.new_(wiki_key), rv);
+			dump_rdrs.Add(Bry_obj_ref.New(wiki_key), rv);
 			this.Add(rv);
 		}
 		return rv;
 	}
-	private Hash_adp dump_rdrs = Hash_adp_.new_(); private Bry_obj_ref dump_rdrs_ref = Bry_obj_ref.null_();
+	private Hash_adp dump_rdrs = Hash_adp_.new_(); private Bry_obj_ref dump_rdrs_ref = Bry_obj_ref.New_empty();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if			(ctx.Match(k, Invk_add))				return Add_cmd(Wiki_get_or_make(m), m.ReadStr("v"));
 		else if		(ctx.Match(k, Invk_add_many))			return Add_many(m);

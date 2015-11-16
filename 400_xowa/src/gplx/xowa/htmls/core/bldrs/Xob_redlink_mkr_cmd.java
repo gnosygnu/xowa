@@ -33,7 +33,8 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Db_attach_rdr attach_rdr = new Db_attach_rdr(link_dump_db.Conn(), "page_db", core_db.Url());
 		attach_rdr.Attach();
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
-		int cur_html_db_id = -1, cur_page_id = -1; Xoh_redlink_tbl redlink_tbl = null;
+		int cur_html_db_id = -1, cur_page_id = -1;
+		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.Conn());
 		Db_rdr rdr = attach_rdr.Exec_as_rdr(Sql_select);			
 		try {
 			while (rdr.Move_next()) {
@@ -41,7 +42,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				int html_db_id = rdr.Read_int(page_tbl.Fld_html_db_id());
 				if (html_db_id != cur_html_db_id) {
 					if (redlink_tbl != null) redlink_tbl.Conn().Txn_end();
-					redlink_tbl = wiki.Data__core_mgr().Dbs__get_at(html_db_id).Tbl__html_redlink();
+					// redlink_tbl = wiki.Data__core_mgr().Dbs__get_at(html_db_id).Tbl__html_redlink();
 					redlink_tbl.Conn().Txn_bgn("bldr__redlink");
 					cur_html_db_id = html_db_id;
 				}

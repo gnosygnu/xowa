@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.htmls.hrefs.*;
 class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
@@ -29,7 +30,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 		html_bldr.Bld_all(bfr, page, itms);
 	}
 }
-public class Sites_html_bldr implements Bry_fmtr_arg {
+public class Sites_html_bldr extends gplx.core.brys.Bfr_arg_base {
 	private Sites_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private List_adp list; private int list_len;
@@ -41,7 +42,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Xoh_href_parser href_parser = wiki.Appe().Html__href_parser();
 		for (int i = 0; i < list_len; ++i) {

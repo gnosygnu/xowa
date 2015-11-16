@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.gfui.*;
 public class Gfo_thread_cmd_base implements Gfo_thread_cmd {
 	@gplx.Virtual public String Async_key() {return "undefined";}

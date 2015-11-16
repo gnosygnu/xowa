@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.core.brys.args.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
@@ -30,12 +30,12 @@ public class Xoi_cmd_wiki_tst {
 		int ary_len = ary.length;
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		Wmf_latest_parser parser = new Wmf_latest_parser();
-		Bry_fmtr_arg_time time_fmtr = new Bry_fmtr_arg_time();
+		Bfr_arg__time time_fmtr = new Bfr_arg__time();
 		for (int i = 0; i < ary_len; i++)
 			Bld_import_list_itm2(bfr, parser, time_fmtr, ary, i);
 		Io_mgr.Instance.SaveFilStr("C:\\temp.txt", bfr.To_str());
 	}
-	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
+	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Bfr_arg__time time_fmtr, String[] ary, int i) {
 		String domain_str = ary[i];
 		byte[] domain_bry = Bry_.new_a7(domain_str);
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
@@ -61,7 +61,7 @@ public class Xoi_cmd_wiki_tst {
 		long src_size = latest_itm.Size();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
 		bfr.Add_str_a7(gplx.core.ios.Io_size_.To_str(src_size)).Add_byte_pipe();
-		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).Fmt__do(bfr);
+		time_fmtr.Seconds_(Math_.Div_safe_as_long(src_size, 1000000)).Bfr_arg__add(bfr);
 		bfr.Add_byte_pipe();
 		bfr.Add_str_a7(latest_itm.Date().XtoStr_fmt_yyyy_MM_dd_HH_mm());
 		bfr.Add_byte_pipe();

@@ -35,22 +35,26 @@ public class Html_tag_rdr_tst {
 		fxt.Init("<!DOCTYPE html>1<div id='1'>2</div>3");
 		fxt.Test__move_fwd_head(Html_tag_.Id__div		, "<div id='1'>")	; fxt.Test__pos("2");
 	}
-	@Test   public void Recursive() {
+	@Test   public void Recursive__same_tags() {
 		fxt.Init("1<a>2<a>3</a>4</a>5");
 		fxt.Test__move_fwd_head(Html_tag_.Id__a		, "<a>")	; fxt.Test__pos("2");
 		fxt.Test__move_fwd_tail(Html_tag_.Id__a		, "</a>")	; fxt.Test__pos("5");
 	}
+	@Test   public void Recursive__diff_tags() {
+		fxt.Init("1<div>2<a>3<img/>4</a>5</div>6");
+		fxt.Test__move_fwd_head(Html_tag_.Id__div	, "<div>")	; fxt.Test__pos("2");
+		fxt.Test__move_fwd_tail(Html_tag_.Id__div	, "</div>")	; fxt.Test__pos("6");
+	}
 }
 class Html_tag_rdr_fxt {
 	private final Html_tag_rdr rdr = new Html_tag_rdr();
-//		private final Html_doc_log log = new Html_doc_log();
 	public void Init(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		rdr.Init(src_bry, 0, src_bry.length);
 	}
 	public void Test__move_fwd_head(String expd) {Test__move_fwd_head(Html_tag_.Id__any, expd);}
 	public void Test__move_fwd_head(int match_name_id, String expd) {
-		Html_tag actl_tag = rdr.Tag__move_fwd_head(match_name_id);
+		Html_tag actl_tag = rdr.Tag__move_fwd_head(match_name_id).Chk_id(match_name_id);
 		Tfds.Eq_str(expd, String_.new_u8(rdr.Src(), actl_tag.Src_bgn(), actl_tag.Src_end()));
 	}
 	public void Test__move_fwd_tail(int match_name_id, String expd) {

@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.apps.urls.*;
-public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {
+public class Xows_page_allpages extends gplx.core.brys.Bfr_arg_base implements GfoInvkAble, Xows_page {
 	public Xows_page_allpages(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		html_itm_fmtr = new Xos_pagelist_html_itm_fmtr(this, wiki);
@@ -143,7 +143,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		if (!ns.Id_is_main()) ttl_bry = Bry_.Add(ns.Name_db_w_colon(), ttl_bry);
 		return Xoa_ttl.parse(wiki, ttl_bry);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = rslt_list_ttls.length;
 		html_itm_fmtr.XferAry_bgn();
 		for (int i = 0; i < len; i += itms_per_grp) {
@@ -167,7 +167,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
 	public static final String GRP_KEY = "xowa.special.allpages";
 }
-class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
+class Xos_pagelist_html_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
 	public Xos_pagelist_html_itm_fmtr(Xows_page_allpages mgr, Xowe_wiki wiki) {
 		this.mgr = mgr; this.wiki = wiki; this.href_wtr = wiki.Appe().Html__href_wtr(); this.wiki_key = wiki.Domain_bry();
 		this.itm_normal = mgr.Html_list_itm_normal(); this.itm_redirect = mgr.Html_list_itm_redirect();
@@ -182,7 +182,7 @@ class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
 		init_ns = mgr.Init_ns();
 	} 	int itms_per_grp, ttls_len, itm_pct; Xowd_page_itm[] ttls; Xow_ns init_ns;
 	public void XferAry_end() {ttls = null;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int itm_end = itm_idx + itms_per_grp;
 		for (int i = itm_idx; i < itm_end; i++) {
 			if (i >= ttls_len) break;	// handle odd number of itms; EX: interval=3; items=4; proc gets called on 0 (0-2) and 3 (3-5); ArrayIndex for 4, 5 

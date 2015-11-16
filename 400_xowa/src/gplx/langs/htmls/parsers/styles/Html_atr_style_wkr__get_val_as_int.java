@@ -29,7 +29,7 @@ public class Html_atr_style_wkr__get_val_as_int implements Html_atr_style_wkr {
 	}
 	public int Parse(byte[] src, int src_bgn, int src_end, byte[] find_key) {
 		this.find_key = find_key;
-		Html_atr_style_parser.Parse(src, src_bgn, src_end, this);
+		Html_atr_style_parser_.Parse(src, src_bgn, src_end, this);
 		return Bry_.To_int_or__lax(src, val_bgn, val_end, -1);
 	}
 }

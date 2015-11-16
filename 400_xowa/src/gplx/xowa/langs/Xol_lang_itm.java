@@ -63,7 +63,7 @@ public class Xol_lang_itm implements GfoInvkAble {
 	public boolean					Dir_ltr() {return dir_ltr;} private boolean dir_ltr = true;
 	public void					Dir_ltr_(boolean v) {
 		dir_ltr = v;
-		img_thumb_halign_default = dir_ltr ? Xop_lnki_align_h.Right : Xop_lnki_align_h.Left;
+		img_thumb_halign_default = dir_ltr ? Xop_lnki_align_h_.Right : Xop_lnki_align_h_.Left;
 	}
 	public byte[]				Dir_ltr_bry() {return dir_ltr ? Dir_bry_ltr : Dir_bry_rtl;}
 	public Xol_num_mgr			Num_mgr() {return num_mgr;} private final Xol_num_mgr num_mgr;
@@ -75,7 +75,7 @@ public class Xol_lang_itm implements GfoInvkAble {
 	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final Xol_lnki_trail_mgr lnki_trail_mgr;
 	public Xop_lnki_arg_parser	Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
 	public Xol_func_regy		Func_regy() {return func_regy;} private final Xol_func_regy func_regy;
-	public byte					Img_thumb_halign_default() {return img_thumb_halign_default;} private byte img_thumb_halign_default = Xop_lnki_align_h.Right;
+	public byte					Img_thumb_halign_default() {return img_thumb_halign_default;} private byte img_thumb_halign_default = Xop_lnki_align_h_.Right;
 	public Hash_adp_bry			Xatrs_section() {if (xatrs_section == null) xatrs_section = Lst_section_nde.new_xatrs_(this); return xatrs_section;} private Hash_adp_bry xatrs_section;
 	public void Evt_lang_changed() {
 		lnki_arg_parser.Evt_lang_changed(this);

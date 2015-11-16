@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 class Xoctg_fmtr_all {
 	public Xoctg_fmtr_all(byte tid) {this.Ctor(tid);}
@@ -152,7 +153,7 @@ class Xoctg_fmtr_all {
 	,	Div_id_file			= Bry_.new_a7("mw-category-media")
 	;
 }
-interface Xoctg_fmtr_itm extends Bry_fmtr_arg {
+interface Xoctg_fmtr_itm extends gplx.core.brys.Bfr_arg {
 	int Grp_end_idx();
 	boolean Grp_end_at_col();
 	int Col_idx(); void Col_idx_(int col_idx, int col_bgn);

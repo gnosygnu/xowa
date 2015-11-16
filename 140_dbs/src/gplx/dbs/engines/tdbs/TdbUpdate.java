@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/
+import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/ import gplx.core.gfo_ndes.*;
 import gplx.dbs.qrys.*;
 class TdbUpdateWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {

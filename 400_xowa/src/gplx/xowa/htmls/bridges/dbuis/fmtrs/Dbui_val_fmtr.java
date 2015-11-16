@@ -16,21 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public interface Dbui_val_fmtr {
 	Dbui_val_fmtr Init(Dbui_col_itm col, byte[] row_id, Dbui_val_itm val);
 }
-class Dbui_val_fmtr__view implements Bry_fmtr_arg, Dbui_val_fmtr {
+class Dbui_val_fmtr__view extends gplx.core.brys.Bfr_arg_base implements Dbui_val_fmtr {
 	private Dbui_val_itm val;
 	public Dbui_val_fmtr Init(Dbui_col_itm col, byte[] row_id, Dbui_val_itm val) {this.val = val; return this;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		bfr.Add(val.Html());
 	}
 }
-class Dbui_val_fmtr__edit implements Bry_fmtr_arg, Dbui_val_fmtr {
+class Dbui_val_fmtr__edit extends gplx.core.brys.Bfr_arg_base implements Dbui_val_fmtr {
 	private Dbui_col_itm col; private byte[] row_id; private Dbui_val_itm val;
 	public Dbui_val_fmtr Init(Dbui_col_itm col, byte[] row_id, Dbui_val_itm val) {this.col = col; this.row_id = row_id; this.val = val; return this;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		switch (col.Type()) {
 			case Dbui_col_itm.Type_id_str:	input_fmtr_str.Bld_bfr_many(bfr, col.Key(), col.Width(), val.Data(), row_id); break;
 			case Dbui_col_itm.Type_id_text: textarea_fmtr_str.Bld_bfr_many(bfr, col.Key(), col.Width(), val.Data(), row_id); break;

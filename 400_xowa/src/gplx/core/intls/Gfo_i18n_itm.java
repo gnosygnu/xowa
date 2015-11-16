@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.intls; import gplx.*; import gplx.core.*;
+import gplx.core.brys.fmtrs.*;
 class Gfo_i18n_itm {
 	public Gfo_i18n_itm(int src, byte[] key, byte[] val, boolean val_fmt_exists, Gfo_i18n_val_cmd val_cmd) {
 		this.src = src; this.key = key; this.val = val; this.val_fmt_exists = val_fmt_exists; this.val_cmd = val_cmd;

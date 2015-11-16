@@ -217,7 +217,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		rv[ 0] = KeyVal_.new_("isLocal"				, true);										// title.isLocal; NOTE: always true; passing "http:" also returns true; not sure how to handle "Interwiki::fetch( $this->mInterwiki )->isLocal()"
 		rv[ 1] = KeyVal_.new_("interwiki"			, xwiki_str);									// $title->getInterwiki(),
 		rv[ 2] = KeyVal_.new_("namespace"		, ns.Id());										// $ns,
-		rv[ 3] = KeyVal_.new_("nsText"				, Xow_ns_canonical_.To_canonical_or_local(ns)); // $title->getNsText(), NOTE: needed b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
+		rv[ 3] = KeyVal_.new_("nsText"				, Xow_ns_canonical_.To_canonical_or_local_as_str(ns)); // $title->getNsText(), NOTE: needed b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
 		rv[ 4] = KeyVal_.new_("text"				, ttl.Page_txt());								// $title->getText(),
 		rv[ 5] = KeyVal_.new_("fragment"			, ttl.Anch_txt());								// $title->getFragment(),
 		rv[ 6] = KeyVal_.new_("thePartialUrl"		, ttl.Page_db());								// $title->getPartialUrl(),

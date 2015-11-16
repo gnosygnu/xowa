@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
@@ -39,7 +40,7 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	+ "</a>"
 	, "a_href", "a_class", "a_rel", "a_title", "img_alt", "img_xoimg", "img_core", "img_class"
 	);
-//		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {
+//		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bfr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
 	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {

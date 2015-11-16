@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
-class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
+class Wdata_fmtr__slink_grp extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
 	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
 		fmtr_tbl.Init_by_ctor(lang_sorter, toggle_mgr, lbl_regy, href_encoder, fmtr_toc, xwiki_mgr);
@@ -29,7 +30,7 @@ class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 		this.is_empty = list.Count() == 0; if (is_empty) return;
 		fmtr_tbl.Init_by_wdoc(list);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (is_empty) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_tbl);
 	}
@@ -42,7 +43,7 @@ class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 	), "grps"
 	);
 }
-class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
+class Wdata_fmtr__slink_tbl extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_row fmtr_row = new Wdata_fmtr__slink_row();
 	private final Wdata_slink_grp[] grps = new Wdata_slink_grp[Wdata_slink_grp.Idx__len];
 	private Wdata_lang_sorter lang_sorter; private Wdata_hwtr_msgs msgs;
@@ -75,7 +76,7 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 			grp.Rows().Sort_by(lang_sorter);
 		}
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			Wdata_slink_grp grp = grps[i];
 			if (grp.Rows().Count() == 0) continue;
@@ -98,7 +99,7 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 	), "hdr_href", "hdr_text", "hdr_lang", "hdr_wiki", "hdr_page", "toggle_btn", "toggle_hdr", "rows"
 	);
 }
-class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
+class Wdata_fmtr__slink_row extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_badges fmtr_badges = new Wdata_fmtr__slink_badges(); private Xow_xwiki_mgr xwiki_mgr;
 	private Url_encoder href_encoder; private Ordered_hash list; 
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Xow_xwiki_mgr xwiki_mgr) {
@@ -106,7 +107,7 @@ class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 		fmtr_badges.Init_by_ctor(lbl_regy);
 	}
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
@@ -141,11 +142,11 @@ class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 	), "lang_name", "lang_code", "wmf_key", "href_site", "href_domain", "href_page", "page_name", "badges"
 	);
 }
-class Wdata_fmtr__slink_badges implements Bry_fmtr_arg {
+class Wdata_fmtr__slink_badges extends gplx.core.brys.Bfr_arg_base {
 	private Wdata_lbl_mgr lbl_regy; private byte[][] badges;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy) {this.lbl_regy = lbl_regy;}
 	public void Init_by_itm(byte[][] badges) {this.badges = badges;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = badges.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] ttl = badges[i];

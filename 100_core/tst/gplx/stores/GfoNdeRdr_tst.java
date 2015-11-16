@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.gfo_ndes.*;
 public class GfoNdeRdr_tst {
 	@Test  public void Subs_leafs() {
 		root = 

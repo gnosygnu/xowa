@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+import gplx.core.brys.*;
 import gplx.langs.htmls.*; 
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
@@ -47,9 +48,9 @@ public class Xoh_file_wtr__basic {
 		if (div_width < 1)
 			div_width = wiki.Html_mgr().Img_thumb_width();
 		int lnki_halign = lnki.Align_h();
-		if (lnki_halign == Xop_lnki_align_h.Null)
+		if (lnki_halign == Xop_lnki_align_h_.Null)
 			lnki_halign = wiki.Lang().Img_thumb_halign_default();	// if halign is not supplied, then default to align for language
-		byte[] lnki_halign_bry = Xop_lnki_align_h.Html_names[lnki_halign];
+		byte[] lnki_halign_bry = Xop_lnki_align_h_.Html_names[lnki_halign];
 		byte[] lnki_href = wiki.Appe().Html__href_wtr().Build_to_bry(wiki, lnki.Ttl());
 		byte[] img_view_src = xfer_itm.Html_view_url().To_http_file_bry();
 		byte[] img_orig_src = xfer_itm.Html_orig_url().To_http_file_bry();
@@ -109,7 +110,7 @@ public class Xoh_file_wtr__basic {
 	}
 	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_is_thumbable, int div_width, int lnki_halign, byte[] lnki_halign_bry
 		, byte[] lnki_ttl, Xof_ext orig_ext, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt) {
-		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Div_center_bgn);
+		if (lnki_halign == Xop_lnki_align_h_.Center) bfr.Add(Div_center_bgn);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] anchor_title = html_wtr.Cfg().Lnki__title()
 			? Arg_anchor_title(tmp_bfr, src, lnki, lnki_ttl, anchor_title_wkr)	// NOTE: Arg_anchor_title should only be called if there is no caption, else refs may not show; DATE:2014-03-05
@@ -125,14 +126,14 @@ public class Xoh_file_wtr__basic {
 				&& 	Bry_.Len_eq_0(alt)					// NOTE: if no alt, always use caption; DATE:2013-07-22
 				&& 	!lnki.Alt_exists()					// unless blank alt exists; EX: [[File:A.png|a|alt=]] should have alt of "", not "a" 
 				) {
-				Arg_caption(ctx, src, Xoh_wtr_ctx.Alt, lnki).Fmt__do(tmp_bfr);
+				Arg_caption(ctx, src, Xoh_wtr_ctx.Alt, lnki).Bfr_arg__add(tmp_bfr);
 				alt = tmp_bfr.To_bry_and_clear();
 			}
 			boolean div_align_exists = false;
 			switch (lnki.Align_h()) {
-				case Xop_lnki_align_h.Left:		bfr.Add(Div_float_left)	.Add_byte_nl();	div_align_exists = true; break;
-				case Xop_lnki_align_h.Right:	bfr.Add(Div_float_right).Add_byte_nl();	div_align_exists = true; break;
-				case Xop_lnki_align_h.None:		bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.Left:		bfr.Add(Div_float_left)	.Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.Right:	bfr.Add(Div_float_right).Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.None:		bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
 			}
 			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 			byte img_cls_tid = lnki.Border() == Bool_.Y_byte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
@@ -150,7 +151,7 @@ public class Xoh_file_wtr__basic {
 			}
 			if (div_align_exists) bfr.Add(Html_tag_.Div_rhs);	// close div from above
 		}
-		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Html_tag_.Div_rhs);
+		if (lnki_halign == Xop_lnki_align_h_.Center) bfr.Add(Html_tag_.Div_rhs);
 		tmp_bfr.Mkr_rls();
 	}
 	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
@@ -184,7 +185,7 @@ public class Xoh_file_wtr__basic {
 		return scratch_bfr.To_bry_and_clear();
 	}
 	private byte[] Arg_caption_div(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, byte[] img_orig_src, byte[] lnki_href) {
-		Bry_fmtr_arg caption = Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki);
+		Bfr_arg caption = Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki);
 		byte[] magnify_btn = Bry_.Empty;
 		if (lnki.Media_icon()) {
 			if (msg_file_enlarge == null) msg_file_enlarge = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_file_enlarge);
@@ -194,21 +195,21 @@ public class Xoh_file_wtr__basic {
 		html_fmtr.Html_thumb_part_caption(scratch_bfr, magnify_btn, caption);
 		return scratch_bfr.To_bry_and_clear();				
 	}	private byte[] msg_file_enlarge;
-	private Bry_fmtr_arg Arg_caption(Xop_ctx ctx, byte[] src, Xoh_wtr_ctx hctx_for_caption, Xop_lnki_tkn lnki) {
-		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr) : Bry_fmtr_arg_.Noop;
+	private Bfr_arg Arg_caption(Xop_ctx ctx, byte[] src, Xoh_wtr_ctx hctx_for_caption, Xop_lnki_tkn lnki) {
+		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr) : Bfr_arg_.Noop;
 	}
 	public byte[] Arg_alt_text(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
 		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Alt, src, lnki.Alt_tkn().Val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		media_alt_fmtr.Fmt__do(tmp_bfr);
+		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 
 	}		
 	private byte[] Arg_alt_html(Xop_ctx ctx, byte[] alt_src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
 		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Basic, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr());
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		media_alt_fmtr.Fmt__do(tmp_bfr);
+		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 
 	}
 	private byte[] Arg_play_btn(int uid, int width, int max_width, byte[] a_href, byte[] a_xowa_title) {
@@ -225,7 +226,7 @@ public class Xoh_file_wtr__basic {
 		Xop_tkn_itm anchor_title_tkn = lnki.Caption_tkn();
 		if (anchor_title_tkn == Xop_tkn_null.Null_tkn) return Bry_.Empty; // no caption; return empty; (do not use lnki); DATE:2013-12-31
 		tmp_bfr.Add(Atr_title);
-		anchor_title_wkr.Set(src, anchor_title_tkn).Fmt__do(tmp_bfr);
+		anchor_title_wkr.Set(src, anchor_title_tkn).Bfr_arg__add(tmp_bfr);
 		tmp_bfr.Add_byte(Byte_ascii.Quote);
 		return tmp_bfr.To_bry_and_clear();
 	}

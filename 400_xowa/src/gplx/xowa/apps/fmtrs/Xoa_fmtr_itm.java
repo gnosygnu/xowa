@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+import gplx.core.brys.fmtrs.*;
 public class Xoa_fmtr_itm implements GfoInvkAble {
 	public Xoa_fmtr_itm(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Src() {return src;} public Xoa_fmtr_itm Src_(String v) {this.src = v; return this;} private String src;

@@ -309,7 +309,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (argx_ary != Bry_.Empty) defn_func.Argx_dat_(argx_ary);
 		defn_func.Eval_argx(ctx, src, caller, invk);
 		if (defn_func_id == Xol_kwd_grp_.Id_invoke)	// NOTE: if #invoke, set frame_ttl to argx, not name; EX:{{#invoke:A}}
-			invk.Frame_ttl_(ctx.Wiki().Ns_mgr().Ns_module().Gen_ttl(Xoa_ttl.Replace_unders(defn_func.Argx_dat())));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14
+			invk.Frame_ttl_(Bry_.Add(Xow_ns_.Bry__module_w_colon, Xoa_ttl.Replace_unders(defn_func.Argx_dat())));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14; always use canonical English "Module"; DATE:2015-11-09
 		Bry_bfr bfr_func = Bry_bfr.new_();
 		defn_func.Func_evaluate(ctx, src, caller, invk, bfr_func);
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
@@ -377,7 +377,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing ctxs is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
-			byte[] frame_ttl = tmpl_page_itm.Ttl().Full_txt();		// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22
+			Xoa_ttl tmpl_page_ttl = tmpl_page_itm.Ttl();
+			byte[] frame_ttl = Bry_.Add(Xow_ns_canonical_.To_canonical_or_local_as_bry(tmpl_page_ttl.Ns()), Byte_ascii.Colon_bry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be canonical; DATE:2015-11-09
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
 			wiki.Cache_mgr().Defn_cache().Add(rv, ns_tmpl.Case_match());

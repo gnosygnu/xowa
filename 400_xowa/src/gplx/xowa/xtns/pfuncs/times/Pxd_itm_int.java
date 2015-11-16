@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.brys.*;
 interface Pxd_itm_int_interface extends Pxd_itm {
 	int Xto_int_or(int or);
 }
@@ -220,7 +221,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	}
 	private void Eval_unknown_at_pos_0(Pxd_parser tctx) {	// NOTE: assumes dmy format
 		Pxd_itm[] data_ary = tctx.Data_ary();
-		if (tctx.Data_ary_len() < 2) {tctx.Err_set(Pft_func_time_log.Invalid_year, Bry_fmtr_arg_.int_(val)); return;}
+		if (tctx.Data_ary_len() < 2) {tctx.Err_set(Pft_func_time_log.Invalid_year, Bfr_arg_.New_int(val)); return;}
 		Pxd_itm_int itm_1 = Pxd_itm_int_.CastOrNull(data_ary[1]);
 		if (itm_1 != null) {				// if 1st itm to right is number, parse it as month
 			if (!Pxd_eval_seg.Eval_as_m(tctx, itm_1)) return;

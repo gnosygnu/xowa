@@ -251,7 +251,7 @@ class Xoh_ctg_page_fxt {
 		fmtr_itm.Init_from_grp(new byte[] {grp_char_0}, 0);
 		fmtr_itm.Col_idx_(0, 0);
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		fmtr_itm.Fmt__do(bfr);
+		fmtr_itm.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 	public void Test_html_grp(byte tid, String expd) {
@@ -259,7 +259,7 @@ class Xoh_ctg_page_fxt {
 		Xoctg_fmtr_grp fmtr_grp = ctg_html.Fmtr_grp();
 		fmtr_grp.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, ctg.Grp_by_tid(tid));
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		fmtr_grp.Fmt__do(bfr);
+		fmtr_grp.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 	public void Test_html_all(byte tid, String expd) {

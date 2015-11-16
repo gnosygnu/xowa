@@ -30,8 +30,7 @@ public class Xowd_db_file {
 		this.tbl__site_stats = new Xowd_site_stats_tbl(conn, schema_is_1);
 		this.tbl__page = new Xowd_page_tbl(conn, schema_is_1);
 		this.tbl__text = new Xowd_text_tbl(conn, schema_is_1, props.Zip_tid_text());
-		this.tbl__html_page = new Xoh_page_tbl(conn);
-		this.tbl__html_redlink = new Xoh_redlink_tbl(conn);
+		this.tbl__html = new Xoh_page_tbl(conn);
 		this.tbl__css_core = new Xowd_css_core_tbl(conn);
 		this.tbl__css_file = new Xowd_css_file_tbl(conn);
 		this.tbl__cat_core = new Xowd_cat_core_tbl(conn, schema_is_1);
@@ -61,8 +60,7 @@ public class Xowd_db_file {
 	public Xowd_site_ns_tbl			Tbl__ns()			{return tbl__ns;}			private final Xowd_site_ns_tbl tbl__ns;
 	public Xowd_page_tbl			Tbl__page()			{return tbl__page;}			private final Xowd_page_tbl	tbl__page;
 	public Xowd_text_tbl			Tbl__text()			{return tbl__text;}			private final Xowd_text_tbl tbl__text;
-	public Xoh_page_tbl				Tbl__html_page()	{return tbl__html_page;}	private final Xoh_page_tbl tbl__html_page;
-	public Xoh_redlink_tbl			Tbl__html_redlink()	{return tbl__html_redlink;}	private final Xoh_redlink_tbl tbl__html_redlink;
+	public Xoh_page_tbl				Tbl__html()			{return tbl__html;}			private final Xoh_page_tbl tbl__html;
 	public Xowd_css_core_tbl		Tbl__css_core()		{return tbl__css_core;}		private final Xowd_css_core_tbl tbl__css_core;
 	public Xowd_css_file_tbl		Tbl__css_file()		{return tbl__css_file;}		private final Xowd_css_file_tbl tbl__css_file;
 	public Xowd_cat_core_tbl		Tbl__cat_core()		{return tbl__cat_core;}		private final Xowd_cat_core_tbl tbl__cat_core;

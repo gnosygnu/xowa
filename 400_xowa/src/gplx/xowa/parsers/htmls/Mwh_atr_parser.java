@@ -28,7 +28,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 	private byte qte_byte = Byte_ascii.Null;
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false, qte_closed = false;
 	private int nde_uid, nde_tid;
-	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.null_();
+	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.New_empty();
 	public int Nde_end_tid() {return nde_end_tid;} private int nde_end_tid;
 	public int Parse(Mwh_atr_wkr wkr, int nde_uid, int nde_tid, byte[] src, int src_bgn, int src_end) {
 		this.nde_uid = nde_uid; this.nde_tid = nde_tid;
@@ -434,16 +434,16 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		key_bfr_on = val_bfr_on = ws_is_before_val = qte_closed = false;
 	}
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
-		bry_ref.Val_(null);
+		bry_ref.Val_(Bry_.Empty);
 		byte b = src[pos];
 		if (b == Byte_ascii.Slash && pos + 1 < end) {	// if </ move pos to after /
 			++pos;
 			b = src[pos];
 		}
 		int gt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
-		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos);
+		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos); if (bry == null) return Bry_find_.Not_found;
 		bry_ref.Val_(bry);
-		return bry == null ? Bry_find_.Not_found : bry.length + pos;
+		return bry.length + pos;
 	}
 	private int Xnde_find_gt(byte[] src, int lt_pos, int end) {
 		int pos = lt_pos + 1; if (pos == end) return Bry_find_.Not_found;

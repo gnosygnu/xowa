@@ -44,7 +44,7 @@ class Articles_func_fxt {
 		fxt.Test_parse_page_all_str(raw, "");
 		Xopg_xtn_skin_fmtr_arg fmtr_arg = new Xopg_xtn_skin_fmtr_arg(fxt.Page(), Xopg_xtn_skin_itm_tid.Tid_sidebar);
 		Bry_bfr bfr = Bry_bfr.new_();
-		fmtr_arg.Fmt__do(bfr);
+		fmtr_arg.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

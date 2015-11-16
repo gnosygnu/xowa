@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.tests.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Free() {

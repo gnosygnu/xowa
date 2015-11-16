@@ -35,10 +35,11 @@ public class Xoh_href_parser {
 			switch (((Byte_obj_val)seg_obj).Val()) {
 				case Seg_xcmd_tid:									// convert "/xcmd/a" to "xowa-cmd:a"
 					raw = Bry_.Add(Gfo_protocol_itm.Bry_xcmd, Bry_.Mid(raw, btrie.Match_pos()));
-					bgn = 0;
 					break;
-				case Seg_wiki_tid:	// skip "/wiki/" or "/site/"
-				case Seg_site_tid:
+				case Seg_wiki_tid:	// add domain_bry; NOTE: needed for url-like pages; EX:"/wiki/http://A"; PAGE:esolangs.org/wiki/Language_list; DATE:2015-11-14
+					raw = Bry_.Add(wiki.Domain_bry(), raw);
+					break;
+				case Seg_site_tid:	// skip "/site"
 					bgn = btrie.Match_pos();
 					break;
 				default:

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm implements gplx.CompareAble {
 	private final boolean show_in_sitelangs_base;

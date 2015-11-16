@@ -54,4 +54,19 @@ public class Xoh_img_cls_ {
 		}
 		return Bry_.Add(Bry__html_class, cls, other_0, other_1, Byte_ascii.Quote_bry);
 	}
+	public static byte[] To_val(int tid, byte[] other) {
+		boolean other_is_empty = Bry_.Len_eq_0(other);
+		if (tid == Xoh_img_cls_.Tid__none && other_is_empty) return Bry_.Empty;
+		byte[] cls = null;
+		switch (tid) {
+			case Xoh_img_cls_.Tid__thumbimage:	cls = Bry__thumbimage; break;
+			case Xoh_img_cls_.Tid__thumbborder:	cls = Bry__thumbborder; break;
+		}
+		byte[] other_0 = Bry_.Empty, other_1 = Bry_.Empty;
+		if (!other_is_empty) {
+			if (cls != null) other_0 = Byte_ascii.Space_bry;
+			other_1 = other;
+		}
+		return Bry_.Add(cls, other_0, other_1);
+	}
 }

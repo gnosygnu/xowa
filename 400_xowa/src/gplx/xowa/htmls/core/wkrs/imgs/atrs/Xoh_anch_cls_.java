@@ -42,4 +42,11 @@ public class Xoh_anch_cls_ {
 			default:						throw Err_.new_unhandled(tid);
 		}
 	}
+	public static byte[] To_val(int tid) {
+		switch (tid) {
+			case Xoh_anch_cls_.Tid__none:	return Bry_.Empty;
+			case Xoh_anch_cls_.Tid__image:	return Bry__image;
+			default:						throw Err_.new_unhandled(tid);
+		}
+	}
 }

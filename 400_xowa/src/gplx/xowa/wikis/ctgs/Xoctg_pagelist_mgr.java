@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-public class Xoctg_pagelist_mgr implements Bry_fmtr_arg {
+import gplx.core.brys.fmtrs.*;
+public class Xoctg_pagelist_mgr extends gplx.core.brys.Bfr_arg_base {
 	public Xoctg_pagelist_mgr Init_by_app(Xoae_app app, Xoctg_pagelist_wtr hidden_wtr) {
 		this.fmtr_all = hidden_wtr.Fmtr_all();
 		grp_normal.Init_app(app, Bool_.Y, hidden_wtr.Fmtr_grp_normal(), hidden_wtr.Fmtr_itm());
@@ -29,7 +30,7 @@ public class Xoctg_pagelist_mgr implements Bry_fmtr_arg {
 	}
 	public Xoctg_pagelist_grp Grp_normal() {return grp_normal;} private Xoctg_pagelist_grp grp_normal = new Xoctg_pagelist_grp();
 	public Xoctg_pagelist_grp Grp_hidden() {return grp_hidden;} private Xoctg_pagelist_grp grp_hidden = new Xoctg_pagelist_grp();
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr_all.Bld_bfr_many(bfr, grp_normal, grp_hidden);
 	}
 }

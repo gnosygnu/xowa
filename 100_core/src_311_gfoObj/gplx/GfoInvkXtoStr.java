@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.langs.gfs.*;
 public class GfoInvkXtoStr {
 	public static GfoMsg ReadMsg(GfoInvkAble invk, String k) {
 		GfsCtx ctx = GfsCtx.wtr_();

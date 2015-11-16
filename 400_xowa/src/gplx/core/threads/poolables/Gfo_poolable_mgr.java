@@ -29,7 +29,7 @@ public class Gfo_poolable_mgr {
 	public void Clear_fast() {
 		this.pool = new Gfo_poolable_itm[pool_len];
 		for (int i = 0; i < pool_len; ++i)
-			pool[i] = prototype.Pool__make(i, make_args);
+			pool[i] = prototype.Pool__make(this, i, make_args);
 		this.free_ary = new int[pool_len];
 		pool_nxt = free_len = 0;
 	}
@@ -47,7 +47,7 @@ public class Gfo_poolable_mgr {
 			pool_idx = pool_nxt++;
 			rv = pool[pool_idx];
 			if (rv == null) {
-				rv = prototype.Pool__make(pool_idx, make_args);
+				rv = prototype.Pool__make(this, pool_idx, make_args);
 				pool[pool_idx] = rv;
 			}
 		}

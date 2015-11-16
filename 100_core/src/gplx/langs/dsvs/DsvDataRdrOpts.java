@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
+import gplx.core.gfo_ndes.*;
 public class DsvDataRdrOpts {
 	public boolean HasHeader() {return hasHeader;} public DsvDataRdrOpts HasHeader_(boolean val) {hasHeader = val; return this;} private boolean hasHeader = false;
 	public String NewLineSep() {return newLineSep;} public DsvDataRdrOpts NewLineSep_(String val) {newLineSep = val; return this;} private String newLineSep = String_.CrLf;

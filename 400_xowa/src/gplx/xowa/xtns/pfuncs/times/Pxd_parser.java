@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.btries.*; import gplx.core.log_msgs.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
 class Pxd_parser {
 	byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
@@ -37,7 +37,7 @@ class Pxd_parser {
 		if (seg_idx >= 0)	// ignore Seg_idx_null and Seg_idx_skip
 			seg_idxs[seg_idx] = val;
 	}
-	public void Err_set(Gfo_msg_itm itm, Bry_fmtr_arg... args) {
+	public void Err_set(Gfo_msg_itm itm, Bfr_arg... args) {
 		if (itm == null) return;
 		Bry_fmtr fmtr = itm.Fmtr();
 		fmtr.Bld_bfr(error_bfr, args);
@@ -128,7 +128,7 @@ class Pxd_parser {
 	}
 	DateAdp Evaluate(byte[] src, Bry_bfr error) {
 		if (tkns_len == 0) {
-			Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.bry_(src));
+			Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_bry(src));
 			return null;
 		}
 		Pxd_itm[] eval_ary = Pxd_itm_sorter.XtoAryAndSort(tkns, tkns_len);

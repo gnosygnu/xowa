@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.brys.fmtrs.*;
 public class Xol_msg_itm {
 	public Xol_msg_itm(int id, byte[] key) {this.id = id; this.key = key;}
 	public int Id() {return id;} private final int id;

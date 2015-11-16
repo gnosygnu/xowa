@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.users.history.*;
-abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
+abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implements Xoctg_fmtr_itm {
 	public void Init_from_all(Xowe_wiki wiki, Xol_lang_itm lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {
 		this.wiki = wiki; this.lang = lang; this.ctg = ctg; this.list = itms_list; this.len = itms_list_len; this.msg_mgr = wiki.Msg_mgr();
 		href_parser = wiki.Appe().Html__href_parser();
@@ -37,7 +38,7 @@ abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 	} int col_idx;
 	public int Grp_end_idx() {return grp_end_idx;} private int grp_end_idx;
 	public boolean Grp_end_at_col() {return grp_end_at_col;} private boolean grp_end_at_col;
-	@gplx.Virtual public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		for (int i = col_bgn; i < len; i++) {
 			if (i == col_end) {
 				grp_end_idx = i;
@@ -70,7 +71,7 @@ class Xoctg_fmtr_itm_page extends Xoctg_fmtr_itm_base {
 	public static final Xoctg_fmtr_itm_page Instance = new Xoctg_fmtr_itm_page(); Xoctg_fmtr_itm_page() {}
 }
 class Xoctg_fmtr_itm_file extends Xoctg_fmtr_itm_base {
-//		public override void Fmt__do(Bry_bfr bfr) {
+//		public override void Bfr_arg__add(Bry_bfr bfr) {
 //			html_itm = wiki.Html_mgr().Gallery_xtn_mgr().Html_gallery_itm_img();
 //			for (int i = list.Bgn(); i < len; i++) {
 //				Xoctg_view_itm itm = list.Itms()[i];

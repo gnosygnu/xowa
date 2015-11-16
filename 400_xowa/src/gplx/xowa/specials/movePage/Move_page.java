@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
@@ -120,13 +120,13 @@ public class Move_page implements Xows_page {
 	, "</form>"
 	), "move-page-legend", "src_href", "src_title", "src_text", "newtitle", "trg_ns_list", "trg_title", "move-leave-redirect", "movepagebtn");
 }
-class Move_trg_ns_list_fmtr implements Bry_fmtr_arg {
+class Move_trg_ns_list_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private Xowe_wiki wiki; private Xoa_ttl ttl;
 	public void Init_by_page(Xowe_wiki wiki, Xoae_page page, Xoa_ttl ttl) {
 		this.wiki = wiki;
 		this.ttl = ttl;
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Ids_len();
 		for (int i = 0; i < ns_len; i++) {

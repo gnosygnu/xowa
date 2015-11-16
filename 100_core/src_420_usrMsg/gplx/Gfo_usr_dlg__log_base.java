@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.strings.*; import gplx.core.consoles.*;
+import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.brys.fmtrs.*;
 public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;

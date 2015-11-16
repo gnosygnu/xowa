@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.args.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
@@ -33,28 +34,28 @@ public class Ref_html_wtr {
 			, Grp_id(itm)
 			, itm_group_is_default
 			? itm.Idx_major() + 1
-			: (Object)grp_key_fmtr.Atrs_(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
+			: (Object)grp_key_fmtr.Set(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
 			);
-	}	private Bry_fmtr_arg_fmtr_objs grp_key_fmtr = Bry_fmtr_arg_.fmtr_null_();
+	}	private Bfr_arg__bry_fmtr grp_key_fmtr = Bfr_arg_.New_bry_fmtr__null();
 	public Ref_html_wtr_cfg Cfg() {return cfg;} private Ref_html_wtr_cfg cfg;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Init_by_wiki(wiki);
 	}
-	private Bry_fmtr_arg Itm_id(Ref_nde itm, boolean caller_is_ref) {
+	private Bfr_arg Itm_id(Ref_nde itm, boolean caller_is_ref) {
 		if (itm.Name() == Bry_.Empty)
-			return itm_id_fmtr.Atrs_(cfg.Itm_id_uid(), itm.Uid());
+			return itm_id_fmtr.Set(cfg.Itm_id_uid(), itm.Uid());
 		else {
 			if (caller_is_ref)
-				return itm_id_fmtr.Atrs_(cfg.Itm_id_key_one(), itm.Name(), itm.Idx_major(), itm.Idx_minor());
+				return itm_id_fmtr.Set(cfg.Itm_id_key_one(), itm.Name(), itm.Idx_major(), itm.Idx_minor());
 			else
-				return itm_id_fmtr.Atrs_(cfg.Itm_id_key_many(), itm.Name(), itm.Idx_major());
+				return itm_id_fmtr.Set(cfg.Itm_id_key_many(), itm.Name(), itm.Idx_major());
 		}
-	}	private Bry_fmtr_arg_fmtr_objs itm_id_fmtr = Bry_fmtr_arg_.fmtr_null_();
-	private Bry_fmtr_arg Grp_id(Ref_nde itm) {
+	}	private Bfr_arg__bry_fmtr itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	private Bfr_arg Grp_id(Ref_nde itm) {
 		return itm.Name() == Bry_.Empty	// name is blank >>> uid 
-			? grp_id_fmtr.Atrs_(cfg.Grp_id_uid(), itm.Uid())
-			: grp_id_fmtr.Atrs_(cfg.Grp_id_key(), itm.Name(), itm.Idx_major());
-	}	private Bry_fmtr_arg_fmtr_objs grp_id_fmtr = Bry_fmtr_arg_.fmtr_null_();
+			? grp_id_fmtr.Set(cfg.Grp_id_uid(), itm.Uid())
+			: grp_id_fmtr.Set(cfg.Grp_id_key(), itm.Name(), itm.Idx_major());
+	}	private Bfr_arg__bry_fmtr grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
 	private int List_len(Ref_nde itm) {
 		int len = itm.Related_len();
 		int rv = len;
@@ -109,7 +110,7 @@ public class Ref_html_wtr {
 	}
 	private static Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
 }
-class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
+class Xoh_ref_list_fmtr extends gplx.core.brys.Bfr_arg_base {
 	public void Init(Xowe_wiki wiki, Ref_html_wtr_cfg cfg, Ref_nde itm) {
 		this.wiki = wiki; this.cfg = cfg; this.itm = itm;
 	} private Xowe_wiki wiki; private Ref_nde itm; private Ref_html_wtr_cfg cfg;
@@ -123,7 +124,7 @@ class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
 		return itm; // no itm has text; TODO:WARN
 	}
 	private boolean HasTxt(Ref_nde v) {return v.Body() != null && v.Body().Root_src().length > 0;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int related_len = itm.Related_len();
 		Bry_fmtr itm_fmtr = cfg.Grp_html_list();
 		Fmt(itm_fmtr, wiki, bfr, itm);
@@ -142,9 +143,9 @@ class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
 			: wiki.Parser_mgr().Main().Parse_text_to_html(wiki.Parser_mgr().Ctx(), wiki.Msg_mgr().Val_by_key_args(Ref_html_wtr_cfg.Msg_backlabels_err, itm.Idx_minor()))
 			;
 		itm_fmtr.Bld_bfr_many(trg
-			, fmtr.Atrs_(cfg.Itm_id_key_one(), itm.Name(), itm.Idx_major(), itm.Idx_minor())
+			, fmtr.Set(cfg.Itm_id_key_one(), itm.Name(), itm.Idx_major(), itm.Idx_minor())
 			, backlabel
 			);
 	}
-	private Bry_fmtr_arg_fmtr_objs fmtr = Bry_fmtr_arg_.fmtr_null_();
+	private Bfr_arg__bry_fmtr fmtr = Bfr_arg_.New_bry_fmtr__null();
 }

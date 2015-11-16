@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
+import gplx.core.gfo_regys.*;
 public class IconAdp {
 	public Icon UnderIcon() {return icon;} private final Icon icon;
 	public Image XtoImage() {return ((ImageIcon)icon).getImage();}		

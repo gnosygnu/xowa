@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_tbl_fmtr {
 	private final Dbui_head_cell_fmtr head_cell_fmtr = new Dbui_head_cell_fmtr();
@@ -32,10 +33,10 @@ public class Dbui_tbl_fmtr {
 	, "</div>"
 	), "tbl_key", "width", "origin", "delete_confirm_msg", "head_cells", "data_rows");
 }
-class Dbui_head_cell_fmtr implements Bry_fmtr_arg {
+class Dbui_head_cell_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private Dbui_tbl_itm tbl;
 	public Dbui_head_cell_fmtr Init(Dbui_tbl_itm tbl) {this.tbl = tbl; return this;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Dbui_col_itm[] cols = tbl.Cols(); int len = cols.length;
 		for (int i = 0; i < len; ++i) {
 			Dbui_col_itm col = cols[i];
@@ -48,13 +49,13 @@ class Dbui_head_cell_fmtr implements Bry_fmtr_arg {
 	, "    <div class='xo_head xo_resizable_col' style='width:~{width}px;'>~{display}</div>"
 	), "width", "display");
 }
-class Dbui_row_fmtr implements Bry_fmtr_arg {
+class Dbui_row_fmtr extends gplx.core.brys.Bfr_arg_base {
 	private final Dbui_cells_fmtr cells_fmtr = new Dbui_cells_fmtr();
 	private final Dbui_val_fmtr val_fmtr = Dbui_val_fmtr_.new_view();
 	private final Bry_bfr row_key_bfr = Bry_bfr.new_(255);
 	private Dbui_tbl_itm tbl; private Dbui_row_itm[] rows;
 	public Dbui_row_fmtr Init(Dbui_tbl_itm tbl, Dbui_row_itm[] rows) {this.tbl = tbl; this.rows = rows; return this;}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		byte[] tbl_key = tbl.Key();
 		int len = rows.length;
 		cells_fmtr.Ctor(val_fmtr, tbl.View_btns());

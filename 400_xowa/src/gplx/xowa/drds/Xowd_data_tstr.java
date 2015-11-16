@@ -29,12 +29,12 @@ public class Xowd_data_tstr {
 		Xowd_db_file html_db = wiki.Data__core_mgr().Db__html();
 		if (html_db == null) {
 			html_db = wiki.Data__core_mgr().Db__core();
-			html_db.Tbl__html_page().Create_tbl();
+			html_db.Tbl__html().Create_tbl();
 		}
 		byte[] html_bry = Bry_.new_u8(html);
 		Xoh_page gui_page = new Xoh_page();
 		gui_page.Body_(html_bry);
 		byte[] data = html_bry;
-		html_db.Tbl__html_page().Insert(page_id, 0, 0, Bry_.Empty, Bry_.Empty, Bry_.Empty, data);
+		html_db.Tbl__html().Insert(page_id, 0, gplx.core.ios.Io_stream_.Tid_raw, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Hzip__none, Bry_.Empty, Bry_.Empty, Bry_.Empty, data);
 	}
 }

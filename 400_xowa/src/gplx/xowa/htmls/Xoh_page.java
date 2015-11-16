@@ -27,7 +27,8 @@ public class Xoh_page implements Xoa_page {
 	public boolean						Exists()			{return exists;} public Xoh_page Exists_n_() {exists = false; return this;} private boolean exists = true;
 	public int						Page_id()			{return page_id;} private int page_id;
 	public byte[]					Body()				{return body;} public void Body_(byte[] v) {this.body = v;} private byte[] body;
-	public byte						Body_flag()			{return body_flag;}	private byte body_flag = Byte_.Max_value_127;
+	public int						Body_zip_tid()		{return body_zip_tid;}	private int body_zip_tid;
+	public int						Body_hzip_tid()		{return body_hzip_tid;}	private int body_hzip_tid;
 	public byte[]					Display_ttl()		{return display_ttl;} private byte[] display_ttl;
 	public byte[]					Content_sub()		{return content_sub;} private byte[] content_sub;
 	public byte[]					Sidebar_div()		{return sidebar_div;} private byte[] sidebar_div;
@@ -48,9 +49,9 @@ public class Xoh_page implements Xoa_page {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
 	}
-	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, byte body_flag, byte[] body) {
+	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {
 		head_mgr.Flag_(head_flag);
-		this.display_ttl = display_ttl; this.content_sub = content_sub; this.sidebar_div = sidebar_div; this.body = body; this.body_flag = body_flag;
+		this.display_ttl = display_ttl; this.content_sub = content_sub; this.sidebar_div = sidebar_div; this.body = body; this.body_zip_tid = zip_tid; this.body_hzip_tid = hzip_tid;
 	}
 	public Xoh_page Ctor_by_page(Bry_bfr tmp_bfr, Xoae_page page) {
 		this.page_id = page.Revision_data().Id();
@@ -64,6 +65,7 @@ public class Xoh_page implements Xoa_page {
 		return this;
 	}
 	private void Clear() {
+		this.body_zip_tid = -1; this.body_hzip_tid = -1;
 		display_ttl = content_sub = sidebar_div = Bry_.Empty;
 		img_itms = Xohd_img_itm__base.Ary_empty;
 		head_mgr.Clear(); gallery_itms.Clear(); redlink_uids.Clear(); commons_mgr.Clear();

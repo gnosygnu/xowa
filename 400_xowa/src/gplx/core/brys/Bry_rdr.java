@@ -24,11 +24,10 @@ public class Bry_rdr {
 	public int Src_end() {return src_end;} private int src_end; 
 	public Bry_rdr Dflt_dlm_(byte b) {this.dflt_dlm = b; return this;} private byte dflt_dlm;
 	public Bry_rdr Fail_throws_err_(boolean v) {this.fail_throws_err = v; return this;} private boolean fail_throws_err = true;
-	public Bry_rdr Ctor_by_page(byte[] ctx, byte[] src, int src_len)			{this.ctx = Quote(String_.new_u8(ctx)); this.src = src; this.src_end = src_len; this.pos = 0; return this;}
+	public Bry_rdr Init_by_page(byte[] ctx, byte[] src, int src_len)			{this.ctx = Quote(String_.new_u8(ctx)); this.src = src; this.src_end = src_len; this.pos = 0; return this;}
 	public Bry_rdr Init_by_hook(String wkr, int err_bgn, int pos)				{this.wkr = Quote(wkr); this.err_bgn = err_bgn; this.pos = pos; return this;}
 	public Bry_rdr Init_by_sub(Bry_rdr rdr, String wkr, int pos, int src_end)   {
 		this.src = rdr.src; this.ctx = rdr.ctx; this.wkr = Quote(wkr); this.err_bgn = pos; this.pos = pos; this.src_end = src_end;
-		this.dflt_dlm = Byte_ascii.Null;
 		return this;
 	}
 	public int Move_to(int v)			{this.pos = v; return pos;}
@@ -157,15 +156,15 @@ public class Bry_rdr {
 		arg_val = Quote(Object_.Xto_str_strict_or_null_mark(arg_val));
 		String err_msg = Msg_make(msg, arg_key, arg_val, excerpt_bgn, excerpt_end);
 		Gfo_usr_dlg_.Instance.Warn_many("", "", err_msg);
-		if (fail_throws_err) throw Err_.new_("Bry_rdr", err_msg);
+		if (fail_throws_err) throw Err_.new_("Bry_rdr", err_msg).Logged_y_();
 		return Bry_find_.Not_found;
 	}
 	public Err Err_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {return Err_.new_("Bry_rdr", Msg_make(msg, arg_key, arg_val, excerpt_bgn, excerpt_end));}
 	private String Msg_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {
 		if (String_.EqEmpty(arg_key))
-			return Err_msg.To_str(msg, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Mid_safe(src, excerpt_bgn, excerpt_end));
+			return String_.Replace(Err_msg.To_str(msg, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)), "\n", "\\n");
 		else
-			return Err_msg.To_str(msg, arg_key, arg_val, "ctx", ctx, "wkr", wkr, "excerpt", Quote(String_.new_u8(Bry_.Mid_by_len_safe(src, excerpt_bgn, excerpt_end))));
+			return String_.Replace(Err_msg.To_str(msg, arg_key, arg_val, "ctx", ctx, "wkr", wkr, "excerpt", Quote(String_.new_u8(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)))), "\n", "\\n");
 	}
 	private static String Quote(String v) {return "'" + v + "'";}
 }

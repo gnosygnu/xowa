@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.log_msgs; import gplx.*; import gplx.core.*;
+import gplx.core.brys.fmtrs.*;
 public class Gfo_msg_itm implements Gfo_msg_obj {
 	public Gfo_msg_itm(Gfo_msg_grp owner, int uid, byte cmd, byte[] key_bry, byte[] fmt, boolean add_to_owner) {
 		this.owner = owner; this.uid = uid; this.cmd = cmd; this.key_bry = key_bry; this.fmt = fmt;

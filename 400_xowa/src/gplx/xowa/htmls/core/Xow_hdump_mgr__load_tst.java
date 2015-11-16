@@ -117,7 +117,7 @@ class Xodb_hdump_mgr__base_fxt {
 			wiki = fxt.Wiki();
 			page = wiki.Parser_mgr().Ctx().Cur_page();
 			hdump_mgr = wiki.Html__hdump_mgr();
-			hdump_mgr.Init_by_db(wiki, gplx.core.ios.Io_stream_.Tid_raw, false);
+			hdump_mgr.Init_by_db(gplx.core.ios.Io_stream_.Tid_raw, false);
 		}
 		fxt.Reset();
 		page.Revision_data().Id_(0);
@@ -127,7 +127,7 @@ class Xodb_hdump_mgr__base_fxt {
 	@gplx.Virtual public void Exec_write(String raw) {
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(Bry_.new_u8(raw));
 		page.Root_(root);
-		hdump_mgr.Save_mgr().Make_body_as_hswap(page);
+		hdump_mgr.Save_mgr().Bld_hdump(page);
 	}
 	public Xohd_img_itm__base Make_xfer(String lnki_ttl, int html_uid, int html_w, int html_h, boolean file_is_orig, int file_ext_id) {
 		return new Xohd_img_itm__img().Data_init_base

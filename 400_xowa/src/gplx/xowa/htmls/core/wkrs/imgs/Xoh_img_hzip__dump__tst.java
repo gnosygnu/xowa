@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.tests.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_hzip__dump__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Basic() {	// [[File:A.png|border|class=other|220px|abc]]
 		fxt.Test__bicode
 		( "~%$+(#T\";A.png~0|220|110|0.5|-1|-1~abc~"
 		, Xoh_img_html__dump__tst.Html__basic
+		, "<a href='/wiki/File:A.png' class='image' title='abc'><img id='xoimg_0' alt='abc'></a>"
 		);
 	}
 }

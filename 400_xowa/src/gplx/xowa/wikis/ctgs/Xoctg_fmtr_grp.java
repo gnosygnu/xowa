@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-class Xoctg_fmtr_grp implements Bry_fmtr_arg {
+class Xoctg_fmtr_grp extends gplx.core.brys.Bfr_arg_base {
 	public void Init_from_all(Xowe_wiki wiki, Xol_lang_itm lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list) {
 		this.wiki = wiki; this.mgr = mgr; this.itms_fmtr = mgr.Fmtr_itm(); this.itms_list = itms_list; len = itms_list.Len();
 		itms_fmtr.Init_from_all(wiki, lang, ctg, mgr, itms_list, len);
 	}	private Xowe_wiki wiki; Xoctg_fmtr_itm itms_fmtr; Xoctg_view_grp itms_list; int len; Xoctg_fmtr_all mgr;
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (mgr.Grps_enabled()) {
 			if (len == 0) return;
 			int cur_idx = itms_list.Bgn(); int col_bgn = cur_idx;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.brys.*;
 class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_month_name(int ary_idx, byte[] name, int seg_idx, int seg_val) {Ctor(ary_idx); this.name = name; Seg_idx_(seg_idx); this.seg_val = seg_val;} private byte[] name;
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_month_name;}
@@ -231,10 +232,10 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public void Eval(Pxd_parser state) {
 		Pxd_itm[] tkn_ary = state.Tkns();
 		int tkn_idx = this.Ary_idx();
-		if (tkn_idx == 0) state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.Min_value));
+		if (tkn_idx == 0) state.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(Int_.Min_value));
 		Pxd_itm day_itm = tkn_ary[tkn_idx - 1];
 		if (day_itm.Seg_idx() != DateAdp_.SegIdx_day) {
-			state.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(Int_.Min_value));
+			state.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(Int_.Min_value));
 		}
 	}
 	public static final Pxd_itm_day_suffix Instance = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
@@ -290,7 +291,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unit_relative(adj, ary_idx);}
 	@Override public void Eval(Pxd_parser state) {
 		Pxd_itm itm = Pxd_itm_.Find_fwd_by_tid(state.Tkns(), this.Ary_idx() + 1, Pxd_itm_.Tid_unit);
-		if (itm == null) state.Err_set(Pft_func_time_log.Invalid_date, Bry_fmtr_arg_.int_(adj));
+		if (itm == null) state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj));
 		Pxd_itm_unit unit_tkn = (Pxd_itm_unit)itm;
 		unit_tkn.Unit_seg_val_(adj);
 	}
@@ -350,7 +351,7 @@ class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public void Eval(Pxd_parser state) {			
 		Pxd_itm hour = Next_non_ws_tkn(state.Tkns(), this.Ary_idx() + 1);
 		if (hour != null && hour.Seg_idx() == DateAdp_.SegIdx_hour) return;	// next item is hour
-		state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.bry_("T"));
+		state.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_bry("T"));
 	}
 	@Override public void Time_ini(DateAdpBldr bldr) {}
 	private static Pxd_itm Next_non_ws_tkn(Pxd_itm[] tkns, int bgn) {

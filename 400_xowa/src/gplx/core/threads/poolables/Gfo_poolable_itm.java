@@ -19,5 +19,6 @@ package gplx.core.threads.poolables; import gplx.*; import gplx.core.*; import g
 public interface Gfo_poolable_itm {
 	int					Pool__idx();
 	void				Pool__clear (Object[] args);
-	Gfo_poolable_itm	Pool__make	(int idx, Object[] args);
+	Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args);
+	void				Pool__rls();
 }

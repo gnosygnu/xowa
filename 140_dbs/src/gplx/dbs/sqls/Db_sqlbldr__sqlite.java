@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
 interface Db_sqlbldr {}
 public class Db_sqlbldr__sqlite implements Db_sqlbldr {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(1024);
+	private Bry_bfr tmp_bfr = Bry_bfr.reset_(1024);
+	public Db_sqlbldr__sqlite Bfr_(Bry_bfr bfr) {this.tmp_bfr = bfr; return this;}
 	public String Bld_create_idx(Db_meta_idx idx) {
 		tmp_bfr.Add_str_a7("CREATE ");
 		if (idx.Unique())
@@ -95,5 +96,5 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			default:						throw Err_.new_unhandled(tid);
 		}
 	}
-        public static final Db_sqlbldr__sqlite Instance = new Db_sqlbldr__sqlite(); Db_sqlbldr__sqlite() {}
+        public static final Db_sqlbldr__sqlite Instance = new Db_sqlbldr__sqlite();
 }

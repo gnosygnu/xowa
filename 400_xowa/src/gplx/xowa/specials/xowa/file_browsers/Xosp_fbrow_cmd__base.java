@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.core.ios.*; import gplx.xowa.apps.*; import gplx.xowa.wikis.*;
 interface Xosp_fbrow_cmd {
@@ -96,7 +97,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	), "url_enc", "cmd_src", "cmd_gui")
 	;
 }
-class Xosp_fbrow_html implements Bry_fmtr_arg {
+class Xosp_fbrow_html extends gplx.core.brys.Bfr_arg_base {
 	private final Url_encoder encoder; private Xosp_fbrow_data_dir dir; private byte[] cmd_src;
 	public Xosp_fbrow_html(Url_encoder encoder) {this.encoder = encoder;}
 	public void Write(Bry_bfr bfr, byte[] cmd_src, byte[] cmd_row, Xosp_fbrow_data_dir dir) {
@@ -110,7 +111,7 @@ class Xosp_fbrow_html implements Bry_fmtr_arg {
 		, this
 		);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = dir.Count();
 		for (int i = 0; i < len; ++i) {
 			Xosp_fbrow_data_sub itm = (Xosp_fbrow_data_sub)dir.Get_at(i);				

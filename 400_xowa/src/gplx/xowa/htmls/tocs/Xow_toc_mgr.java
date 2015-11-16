@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
-public class Xow_toc_mgr implements Bry_fmtr_arg {
+public class Xow_toc_mgr extends gplx.core.brys.Bfr_arg_base {
 	private static final int Toc_levels = 32; // assume 6 max levels * 5 max heading (9999.); add 2 for good measure
 	private Xoae_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr.reset_(Toc_levels);
 	public Xow_toc_mgr() {
@@ -32,7 +33,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		for (int i = 0; i < Toc_levels; i++)
 			path_ary[i].Lvl_idx_(0);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int path_idx = 0, toc_idx = 0, lvl_idx = 1, eq_prv = 0;
 		path_bfr.Clear();
 		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();
@@ -194,7 +195,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		if (hctx.Mode_is_hdump()) return;
 		this.page = page;
 		byte[] bry_contents = page.Wikie().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
-		bfmtr_main.Bld_bfr_many(bfr, Bry_fmtr_arg_.bry_(bry_contents), this);
+		bfmtr_main.Bld_bfr_many(bfr, Bfr_arg_.New_bry(bry_contents), this);
 	}
 	private static final byte[]
 	  Bry_list_bgn = Bry_.new_a7("  <ul>\n")

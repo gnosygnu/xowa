@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.langs.gfs.*;
 public class GfsLibIni_gfui implements GfsLibIni {
 	public void Ini(GfsCore core) {
 		core.AddCmd(IptCfgRegy.Instance, "IptBndMgr_");

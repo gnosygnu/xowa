@@ -19,14 +19,13 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.langs.htmls.parsers.*;
 import gplx.xowa.wikis.ttls.*;
 public interface Xoh_hdoc_wkr {
-	Xoh_hdoc_ctx	Ctx();
-	void On_new_page(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src, int src_bgn, int src_end);
+	void On_new_page(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
 	void On_escape	(int rng_bgn, int rng_end);
 	void On_txt		(int rng_bgn, int rng_end);
 	void On_space	(int rng_bgn, int rng_end);
-	void On_hdr		(int tag_bgn, int tag_end, int level, int capt_bgn, int capt_end, byte[] anch);
-	void On_lnke	(int tag_bgn, int tag_end, byte lnke_type, int autonumber_id, int href_bgn, int href_end);
+	void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser arg);
+	void On_lnke	(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_parser arg);
 	void On_lnki	(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser arg);
 	void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg);
-	void On_img_thm	(int rng_bgn, int rng_end);
+	void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg);
 }

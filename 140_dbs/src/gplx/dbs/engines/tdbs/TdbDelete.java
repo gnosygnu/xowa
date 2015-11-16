@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*;
+import gplx.core.criterias.*; import gplx.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;

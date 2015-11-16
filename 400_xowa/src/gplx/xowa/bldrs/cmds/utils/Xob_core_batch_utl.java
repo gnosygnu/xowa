@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.dumps.*;
 public class Xob_core_batch_utl implements GfoInvkAble {

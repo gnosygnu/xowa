@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 import gplx.xowa.apps.gfs.*;
+import gplx.langs.gfs.*;
 public class Xop_xowa_cmd_tst {
 	@Before public void init() {
 		Xoa_gfs_mgr.Msg_parser_init();

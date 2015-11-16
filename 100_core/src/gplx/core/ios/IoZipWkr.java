@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.stores.*; /*GfoNdeRdr_*/
+import gplx.core.gfo_regys.*;
 public class IoZipWkr {
 	public Io_url ExeUrl()		{return (Io_url)GfoRegy.Instance.FetchValOrFail(Regy_ExeUrl);}
 	public String ExeArgFmt()	{return (String)GfoRegy.Instance.FetchValOrFail(Regy_ExeArgFmt);}

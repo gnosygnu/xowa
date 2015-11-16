@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.portal.*;
 public class Xoh_page_mgr implements GfoInvkAble {
 	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private final Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();

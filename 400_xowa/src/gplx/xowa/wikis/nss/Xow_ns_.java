@@ -48,12 +48,26 @@ public class Xow_ns_ {
 	, Key__null				= "null"
 	, Key__wikipedia		= "Wikipedia"
 	;
+	public static final byte[]
+	  Bry__media			= Bry_.new_a7(Key__media)
+	, Bry__special			= Bry_.new_a7(Key__special)
+	, Bry__main				= Bry_.new_a7(Key__main)			, Bry__talk					= Bry_.new_a7(Key__talk)
+	, Bry__user				= Bry_.new_a7(Key__user)			, Bry__user_talk			= Bry_.new_a7(Key__user_talk)
+	, Bry__project			= Bry_.new_a7(Key__project)			, Bry__project_talk			= Bry_.new_a7(Key__project_talk)
+	, Bry__file				= Bry_.new_a7(Key__file)			, Bry__file_talk			= Bry_.new_a7(Key__file_talk)
+	, Bry__mediawiki		= Bry_.new_a7(Key__mediawiki)		, Bry__mediawiki_talk		= Bry_.new_a7(Key__mediawiki_talk)
+	, Bry__template			= Bry_.new_a7(Key__template)		, Bry__template_talk		= Bry_.new_a7(Key__template_talk)
+	, Bry__help				= Bry_.new_a7(Key__help)			, Bry__help_talk			= Bry_.new_a7(Key__help_talk)
+	, Bry__category			= Bry_.new_a7(Key__category)		, Bry__category_talk		= Bry_.new_a7(Key__category_talk)
+	, Bry__portal			= Bry_.new_a7(Key__portal)			, Bry__portal_talk			= Bry_.new_a7(Key__portal_talk)
+	, Bry__module			= Bry_.new_a7(Key__module)			, Bry__module_talk			= Bry_.new_a7(Key__module_talk)
+	, Bry__null				= Bry_.new_a7(Key__null)
+	;
 	public static final String
 	  Alias__wikipedia = "Wikipedia"
 	;
 	public static final byte[] 
-	  Bry__main				= Bry_.new_a7(Key__main)
-	, Bry__file				= Bry_.new_a7(Key__file)
-	, Bry__template			= Bry_.new_a7(Key__template)
+	  Bry__template_w_colon	= Bry_.new_a7(Key__template + ":")
+	, Bry__module_w_colon	= Bry_.new_a7(Key__module + ":")
 	;
 }

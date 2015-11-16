@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.gfo_ndes.*;
 public class DsvDataWtr_csv_tst {
 	@Test  public void Dat_Val_0() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root);

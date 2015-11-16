@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
+public class Xoh_ns_file_page_mgr extends gplx.core.brys.Bfr_arg_base {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private Xow_repo_mgr repo_mgr;
@@ -56,7 +56,7 @@ public class Xoh_ns_file_page_mgr implements Bry_fmtr_arg {
 		this.xfer_itm = xfer_itm;  this.file_size_bry = file_size_bry;
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, "");
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		alt_wtr.Init_by_fmtr(repo_mgr, xfer_itm, html_wtr);
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
 		if (orig_ext.Id_is_thumbable_img())

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.brys.*;
 public class Io_size_ {
 	public static String To_str(long val) {
 		long cur = val; int pow = 0;
@@ -98,10 +99,10 @@ public class Io_size_ {
 		return val == Int_.Min_value ? cur : (val * Io_mgr.Len_mb_long);
 	}
 }
-class Io_size_fmtr_arg implements Bry_fmtr_arg {	
+class Io_size_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
 	public long Val() {return val;} public Io_size_fmtr_arg Val_(long v) {val = v; return this;} long val;
 	public byte[] Suffix() {return suffix;} public Io_size_fmtr_arg Suffix_(byte[] v) {suffix = v; return this;} private byte[] suffix;
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		long cur = val; int pow = 0;
 		while (cur >= 1024) {
 			cur /= 1024;

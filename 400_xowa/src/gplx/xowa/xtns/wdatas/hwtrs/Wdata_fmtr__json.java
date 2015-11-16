@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.*; import gplx.xowa.apps.apis.xowa.html.*;
-class Wdata_fmtr__json implements Bry_fmtr_arg {
+class Wdata_fmtr__json extends gplx.core.brys.Bfr_arg_base {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;
 	public void Init_by_ctor(Wdata_toc_data toc_data, Xoapi_toggle_mgr toggle_mgr) {
@@ -32,7 +33,7 @@ class Wdata_fmtr__json implements Bry_fmtr_arg {
 		this.jdoc = jdoc;
 		toc_data.Make(0);
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		if (jdoc == null) return;	// TEST: wdoc doesn't have jdoc
 		jdoc.Root_nde().Print_as_json(tmp_bfr, 0);
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.To_bry_and_clear());

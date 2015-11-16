@@ -25,6 +25,7 @@ public class Err extends RuntimeException {
 		this.trace = is_gplx ? Err_.Trace_lang(this) : trace;	// NOTE: Err_ factory methods pass in null stack trace for gplx excs; call Stack_trace here, note that trace will not show constructor
 		Msgs_add(type, msg, args);
 	}
+	public boolean Logged() {return logged;} public Err Logged_y_() {logged = true; return this;} private boolean logged;
 	public int Trace_ignore() {return trace_ignore;} public Err Trace_ignore_add_1_() {++trace_ignore; return this;} private int trace_ignore = 0;
 	public Err Args_add(Object... args) {msgs_ary[msgs_idx - 1].Args_add(args); return this;}	// i - 1 to get current
 	@gplx.Internal protected boolean Type_match(String type) {

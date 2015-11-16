@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //namespace gplx.xowa.htmls.core.hzips.wkrs {
 //	using gplx.core.btries;
-//	using gplx.xowa.htmls.core.hzips.stats; 
+//	using gplx.xowa.htmls.core.hzips; 
 //	public class Xoh_hzip_href {
 //		public void Save(Bry_bfr bfr, Hzip_stat_itm stats, byte[] src, int src_len, int bgn, int pos, byte bgn_quote) {
 ////			// ignore anchors; EX: "#a"

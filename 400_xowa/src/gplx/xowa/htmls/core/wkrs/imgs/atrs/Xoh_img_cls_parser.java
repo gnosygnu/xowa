@@ -24,11 +24,12 @@ public class Xoh_img_cls_parser {
 	public int Other_bgn() {return other_bgn;} private int other_bgn;
 	public int Other_end() {return other_end;} private int other_end;
 	public boolean Other_exists() {return other_end > other_bgn;}
+	public Html_atr Atr() {return atr;} private Html_atr atr;
 	public void Parse(Bry_rdr owner_rdr, byte[] src, Html_tag tag) {
-		Html_atr atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);						// EX: class='thumbborder'
+		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);						// EX: class='thumbborder'
 		Parse(owner_rdr, src, atr.Val_bgn(), atr.Val_end());
 	}
-	public void Parse(Bry_rdr owner_rdr, byte[] src, int src_bgn, int src_end) {
+	private void Parse(Bry_rdr owner_rdr, byte[] src, int src_bgn, int src_end) {
 		if (src_bgn == -1) {
 			this.cls_tid = Xoh_img_cls_.Tid__none;
 			this.other_bgn = this.other_end = -1;

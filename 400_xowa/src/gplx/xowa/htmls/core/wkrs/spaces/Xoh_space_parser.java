@@ -20,13 +20,10 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_space_parser implements Html_doc_wkr {
 	private final Xoh_hdoc_wkr wkr;
-	private byte[] src; private int src_end;
 	public Xoh_space_parser(Xoh_hdoc_wkr wkr) {this.wkr = wkr;}
 	public byte[] Hook() {return Hook_bry;}
-	public void Init(byte[] src, int src_bgn, int src_end) {this.src = src; this.src_end = src_end;}
-	public int Parse(int pos) {
+	public int Parse(byte[] src, int src_bgn, int src_end, int pos) {
 		int rng_end = Bry_find_.Find_fwd_while(src, pos + Hook_len, src_end, Byte_ascii.Space);
-
 		wkr.On_space(pos, rng_end);
 		return rng_end;
 	}

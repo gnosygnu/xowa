@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.brys.*;
 class Pxd_itm_colon extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_colon;}
 	@Override public int Eval_idx() {return 20;}
@@ -26,7 +27,7 @@ class Pxd_itm_colon extends Pxd_itm_base {
 		switch (colon_count) {
 			case 1:			// hh:mm
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
-				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.bry_("null")); return;}
+				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_bry("null")); return;}
 				if (!Pxd_eval_seg.Eval_as_h(state, itm_int)) return;
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), true);
 				if (!Pxd_eval_seg.Eval_as_n(state, itm_int)) return;
@@ -37,13 +38,13 @@ class Pxd_itm_colon extends Pxd_itm_base {
 				break;
 			case 3:			// +hh:mm; DATE:2014-08-26
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
-				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null")); return;}
+				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null")); return;}
 				byte tz_positive_val = Pxd_eval_seg.Eval_as_tz_sym(state, tkns, itm_int);
 				if (tz_positive_val == Bool_.__byte) return;
 				boolean tz_negative = tz_positive_val == Bool_.N_byte;
 				if (!Pxd_eval_seg.Eval_as_tz_h(state, itm_int, tz_negative)) return;
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.Y);
-				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null")); return;}
+				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null")); return;}
 				if (tz_negative) itm_int.Val_(itm_int.Val() * -1);
 				if (!Pxd_eval_seg.Eval_as_tz_m(state, itm_int, tz_negative)) return;
 				break;

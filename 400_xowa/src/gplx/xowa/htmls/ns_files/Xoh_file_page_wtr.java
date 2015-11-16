@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 public class Xoh_file_page_wtr {
 	public int		Main_img_w() {return 800;}
 	public int		Main_img_h() {return 600;}

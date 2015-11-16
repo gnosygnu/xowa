@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.langs.jsons.*; import gplx.langs.htmls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;
@@ -83,7 +84,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private String Write_cells(Dbui_val_fmtr val_fmtr, Dbui_btn_itm[] btns, byte[] row_id, Dbui_row_itm row) {
 		cells_fmtr.Ctor(val_fmtr, btns);
 		cells_fmtr.Init(row_id, row);
-		cells_fmtr.Fmt__do(tmp_bfr);
+		cells_fmtr.Bfr_arg__add(tmp_bfr);
 		return app.Html__bridge_mgr().Msg_bldr().Clear().Data("html", tmp_bfr.To_bry_and_clear()).To_json_str();
 	}
 	private Xoud_bmk_itm_row Get_db_row(byte[] pkey) {

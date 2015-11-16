@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.*; /*GfoNdeList*/ import gplx.stores.*; import gplx.langs.dsvs.*; /*DsvStoreLayout*/
+import gplx.*; /*GfoNdeList*/ import gplx.stores.*; import gplx.langs.dsvs.*; /*DsvStoreLayout*/ import gplx.core.gfo_ndes.*;
 public class TdbTable {
 	public int Id() {return id;} int id;
 	public String Name() {return name;} private String name;

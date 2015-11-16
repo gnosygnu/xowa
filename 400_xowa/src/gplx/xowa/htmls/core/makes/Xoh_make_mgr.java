@@ -16,17 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.fsys.*;
 import gplx.xowa.htmls.core.wkrs.*;
+import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_make_mgr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private Xoh_cfg_file cfg_file; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
 	private final byte[] root_dir, file_dir; private byte[] file_dir_comm, file_dir_wiki, hiero_img_dir; private final byte[] wiki_domain;
 	private final Bry_rdr parser = new Bry_rdr();
-	private final Xoh_hdoc_wkr__base hdoc_parser = new Xoh_hdoc_wkr__base(new Xoh_hdoc_wkr__make());
+	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	private final Xoh_hdoc_parser make_parser = new Xoh_hdoc_parser(new Xoh_hdoc_wkr__make());
 	public Xoh_make_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder, byte[] wiki_domain) {
 		this.usr_dlg = usr_dlg;
 		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
@@ -37,8 +39,9 @@ public class Xoh_make_mgr {
 		this.wiki_domain = wiki_domain;
 	}
 	public byte[] Parse(byte[] src, Xoh_page hpg, Xow_wiki wiki) {
+		hctx.Init_by_page(wiki, hpg.Url_bry_safe());
 		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
-		hdoc_parser.Parse(bfr, wiki, hpg, hpg.Url_bry_safe(), src);
+		make_parser.Parse(bfr, hpg, hctx, src);
 		hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
 		return bfr.To_bry_and_clear();
 	}
@@ -50,7 +53,7 @@ public class Xoh_make_mgr {
 		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
 		Xohd_img_itm__base[] imgs = hpg.Img_itms(); int imgs_len = hpg.Img_itms().length;
 		int pos = 0; int rng_bgn = -1;
-		parser.Ctor_by_page(hpg.Url_bry_safe(), src, src_len);
+		parser.Init_by_page(hpg.Url_bry_safe(), src, src_len);
 		while (pos < src_len) {
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);

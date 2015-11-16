@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.threads.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.threads.*;
 public class Xoi_cmd_mgr implements GfoInvkAble {
 	List_adp cmds = List_adp_.new_();
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;

@@ -29,14 +29,16 @@ public class Xoh_img_xoimg_parser {
 	public double Lnki_upright() {return lnki_upright;} private double lnki_upright;
 	public double Lnki_time() {return lnki_time;} private double lnki_time;
 	public int Lnki_page() {return lnki_page;} private int lnki_page;
+	public void Clear() {
+		val_bgn = val_end = -1;
+	}
 	public void Parse(Bry_rdr owner_rdr, byte[] src, Html_tag tag) {
 		Html_atr atr = tag.Atrs__get_by_or_empty(Bry__name);
 		Parse(owner_rdr, src, atr.Val_bgn(), atr.Val_end());
 	}
 	public void Parse(Bry_rdr owner_rdr, byte[] src, int src_bgn, int src_end) {
-		if (src_bgn == -1) {
-			val_bgn = val_end = -1;
-		}
+		if (src_bgn == -1)
+			this.Clear();
 		else {				
 			rdr.Init_by_sub(owner_rdr, "img.xoimg", src_bgn, src_end).Dflt_dlm_(Byte_ascii.Pipe);
 			this.val_bgn = src_bgn;

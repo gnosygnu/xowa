@@ -21,11 +21,10 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 public class Xoh_anch_cls_parser {
 	private final Bry_rdr rdr = new Bry_rdr();
 	public byte Tid() {return tid;} private byte tid;
+	public Html_atr Atr() {return atr;} private Html_atr atr;
 	public void Parse(Bry_rdr owner_rdr, byte[] src, Html_tag tag) {
-		Html_atr atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);						// EX: class='image'
-		Parse(owner_rdr, src, atr.Val_bgn(), atr.Val_end());
-	}
-	public void Parse(Bry_rdr owner_rdr, byte[] src, int src_bgn, int src_end) {
+		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);		// EX: class='image'
+		int src_bgn = atr.Val_bgn(); int src_end = atr.Val_end();
 		if (src_bgn == -1)
 			tid = Xoh_anch_cls_.Tid__none;
 		else {

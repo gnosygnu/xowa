@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.parsers.*;
-class Imap_img_fmtr_arg implements Bry_fmtr_arg {
+class Imap_img_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
 	private Xoh_wtr_ctx hctx; private Imap_map map; private Imap_xtn_mgr xtn_mgr;
 	private int img_elem_id, img_w, img_h;
 	private byte[] img_alt, img_src, img_cls, img_href;
@@ -32,7 +32,7 @@ class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 		this.img_cls = img_cls;
 		this.img_href = img_href;
 	}
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Bry_fmtr fmtr = Imap_html_fmtrs.Img_anchor_none;
 		byte[] anchor_href = Bry_.Empty, anchor_text = Bry_.Empty;
 		Imap_itm_dflt itm_dflt = map.Dflt();

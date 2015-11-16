@@ -29,28 +29,25 @@ public class Html_tag_rdr {
 	public void Init(byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
 		tag__eos.Init(this, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Html_tag_.Id__eos);
-		rdr.Ctor_by_page(Bry_.Empty, src, src_end);
+		rdr.Init_by_page(Bry_.Empty, src, src_end);
 	}
 	public int Pos() {return pos;} private int pos;
 	public void Pos_(int v) {this.pos = v;}
 	public void Atrs__make(Mwh_atr_wkr atr_wkr, int head_bgn, int head_end) {atr_parser.Parse(atr_wkr, -1, -1, src, head_bgn, head_end);}
 	public void Fail(String msg, Html_tag tag) {rdr.Fail(msg, String_.Empty, String_.Empty, tag.Src_bgn(), tag.Src_end());}
-	public Html_tag Tag__move_fwd_head()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, Html_tag_.Id__any);}
-	public Html_tag Tag__move_fwd_head(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, match_name_id);}
-	public Html_tag Tag__move_fwd_tail(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, match_name_id);}
-	public Html_tag Tag__peek_fwd_head()					{return Tag__find(Bool_.N, Bool_.N, Bool_.N, Html_tag_.Id__any);}
-	public Html_tag Tag__peek_fwd_head(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, match_name_id);}
-	public Html_tag Tag__peek_fwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.Y, match_name_id);}
-	public Html_tag Tag__peek_bwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, match_name_id);}
-	public Html_tag Tag__peek_bwd_head()					{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, Html_tag_.Id__any);}
-	public Html_tag Tag__move_fwd_head(byte[] cls)			{
-		Html_tag rv = Tag__find(Bool_.Y, Bool_.N, Bool_.N, Html_tag_.Id__any);
-		if (!rv.Atrs__cls_has(cls)) rdr.Fail("missing cls", "cls", cls);
-		return rv;
-	}
-	private Html_tag Tag__find(boolean move, boolean bwd, boolean tail, int match_name_id) {
-		int tmp = pos;
-		int stop_pos = src_end; int adj = 1;
+	public Html_tag Tag__move_fwd_head()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, Html_tag_.Id__any);}
+	public Html_tag Tag__move_fwd_head(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
+//		public Html_tag Tag__move_fwd_tail()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, Html_tag_.Id__any);}
+	public Html_tag Tag__move_fwd_tail(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, match_name_id);}
+	public Html_tag Tag__peek_fwd_head()					{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, Html_tag_.Id__any);}
+	public Html_tag Tag__peek_fwd_head(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
+	public Html_tag Tag__peek_fwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.Y, pos, src_end, match_name_id);}
+	public Html_tag Tag__peek_bwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, pos, src_end, match_name_id);}
+	public Html_tag Tag__peek_bwd_head()					{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, pos, src_end, Html_tag_.Id__any);}
+	public Html_tag Tag__find_fwd_head(int bgn, int end, int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, bgn, end, match_name_id);}
+	private Html_tag Tag__find(boolean move, boolean bwd, boolean tail, int rng_bgn, int rng_end, int match_name_id) {
+		int tmp = rng_bgn;
+		int stop_pos = rng_end; int adj = 1;
 		if (bwd) {
 			stop_pos = -1;
 			adj = -1;
@@ -72,10 +69,10 @@ public class Html_tag_rdr {
 				tmp += adj;
 		}
 		if (rv == null) {
-			if (move)
-				rdr.Fail("missing tag", "name_id", match_name_id);
+			if (move && tail && !bwd)
+				rdr.Fail("move failed", "tag_name", Html_tag_.To_str(match_name_id));
 			else
-				return tag__eos;
+				return Tag__eos(rng_bgn);
 		}
 		if (move) pos = rv.Src_end();
 		return rv;
@@ -98,13 +95,15 @@ public class Html_tag_rdr {
 			if (depth == 0)
 				return true;
 			else {
-				depth_obj.Val_add(-1);
+				if (match_name_id == tag_name_id)
+					depth_obj.Val_add(-1);
 				return false;
 			}
 		}
 		else {
-			if (!bwd && tail && !tag_is_tail) {
-				depth_obj.Val_add(1);
+			if (!bwd && tail && !tag_is_tail && !tag.Tag_is_inline()) {
+				if (match_name_id == tag_name_id)
+					depth_obj.Val_add(1);
 				return false;
 			}
 			else
@@ -112,7 +111,7 @@ public class Html_tag_rdr {
 		}
 	}
 	public Html_tag Tag__extract(boolean move, boolean tail, int match_name_id, int tag_bgn) {
-		int name_bgn = tag_bgn + 1; if (name_bgn == src_end) return tag__eos;				// EX: "<EOS"
+		int name_bgn = tag_bgn + 1; if (name_bgn == src_end) return Tag__eos(tag_bgn);		// EX: "<EOS"
 		byte name_0 = src[name_bgn];
 		boolean cur_is_tail = false;
 		switch (name_0) {
@@ -121,7 +120,7 @@ public class Html_tag_rdr {
 					return Tag__comment(tag_bgn);
 				break;
 			case Byte_ascii.Slash:
-				++name_bgn; if (name_bgn == src_end) return tag__eos;						// EX: "</EOS"
+				++name_bgn; if (name_bgn == src_end) return Tag__eos(tag_bgn);				// EX: "</EOS"
 				name_0 = src[name_bgn];
 				cur_is_tail = true;
 				break;				
@@ -138,7 +137,7 @@ public class Html_tag_rdr {
 					break;
 				case Byte_ascii.Slash:														// EX: "<a/>"
 					name_end = name_pos;
-					tag_end = name_pos + 1; if (tag_end == src_end) return tag__eos;		// EX: "<a/EOS"
+					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
 					if (src[tag_end] == Byte_ascii.Angle_end) {
 						atrs_end = name_end;
 						inline = true;
@@ -154,12 +153,12 @@ public class Html_tag_rdr {
 					break;
 			}
 			if (!loop) break;
-			++name_pos; if (name_pos == src_end) return tag__eos;							// EX: "<abEOS"
+			++name_pos; if (name_pos == src_end) return Tag__eos(tag_bgn);					// EX: "<abEOS"
 			name_byte = src[name_pos];
 		}
 		if (tag_end == -1) {
 			tag_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, name_end, src_end);
-			if (tag_end == Bry_find_.Not_found) return tag__eos;
+			if (tag_end == Bry_find_.Not_found) return Tag__eos(tag_bgn);
 			int prv_pos = tag_end - 1;
 			if (src[prv_pos] == Byte_ascii.Slash) {
 				atrs_end = prv_pos;
@@ -217,6 +216,10 @@ public class Html_tag_rdr {
 	private Html_tag Tag__comment(int tag_bgn) {
 		int tag_end = Bry_find_.Move_fwd(src, gplx.langs.htmls.Html_tag_.Comm_end, tag_bgn, src_end); if (tag_end == Bry_find_.Not_found) tag_end = src_end;
 		return tag__comment.Init(this, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__comment);
+	}
+	private Html_tag Tag__eos(int tag_bgn) {
+		int tag_end = tag_bgn + 255; if (tag_end > src_end) tag_end = src_end;
+		return tag__comment.Init(this, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__eos);
 	}
 	private static final byte[] Bry__comment__mid = Bry_.new_a7("--"); 
 }

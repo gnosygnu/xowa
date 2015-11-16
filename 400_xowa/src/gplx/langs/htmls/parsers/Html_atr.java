@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.parsers; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-public class Html_atr {
-	private final byte[] src;
+public class Html_atr extends gplx.core.brys.Bfr_arg_base {
 	public Html_atr(int idx, byte[] key, byte[] val, byte[] src, int val_bgn, int val_end) {
 		this.idx = idx; this.key = key; this.val = val;
 		this.src = src; this.val_bgn = val_bgn; this.val_end = val_end;
 	}
+	public byte[] Src() {return src;} private final byte[] src;
 	public int Idx() {return idx;} private final int idx;
 	public byte[] Key() {return key;} private final byte[] key;
 	public int Val_bgn() {return val_bgn;} private final int val_bgn;
@@ -34,6 +34,11 @@ public class Html_atr {
 	}	private byte[] val;
 	public void Html__add(Bry_bfr bfr) {
 		if (val_end > val_bgn)
+			bfr.Add_mid(src, val_bgn, val_end);
+	}
+	@Override public boolean Bfr_arg__exists() {return this.Val_exists();}
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+		if (Val_exists())
 			bfr.Add_mid(src, val_bgn, val_end);
 	}
 	public static final Html_atr Noop = new Html_atr(-1, Bry_.Empty, Bry_.Empty, Bry_.Empty, -1, -1);

@@ -250,8 +250,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk parent_frame = frame_tid == Scrib_frame_.Tid_current ? core.Frame_current() : core.Frame_parent();
 		byte[] fnc_name = args.Pull_bry(1);
 		int fnc_name_len = fnc_name.length;
-		Bry_obj_ref argx_ref = Bry_obj_ref.null_();
-		Bry_obj_ref fnc_name_ref = Bry_obj_ref.new_(fnc_name);
+		Bry_obj_ref argx_ref = Bry_obj_ref.New_empty();
+		Bry_obj_ref fnc_name_ref = Bry_obj_ref.New(fnc_name);
 		KeyVal[] parser_func_args = CallParserFunction_parse_args(cur_wiki.Appe().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
 		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
 		Xol_func_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);

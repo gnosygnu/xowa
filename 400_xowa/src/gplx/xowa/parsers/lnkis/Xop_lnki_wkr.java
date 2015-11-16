@@ -55,7 +55,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		switch (lnki.Ns_id()) {
 			case Xow_ns_.Tid__file:
 				if (	Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type())		// thumbs produce <div> cancels pre
-					||	lnki.Align_h() != Xop_lnki_align_h.Null				// halign (left, right, none) also produces <div>; DATE:2014-02-17
+					||	lnki.Align_h() != Xop_lnki_align_h_.Null				// halign (left, right, none) also produces <div>; DATE:2014-02-17
 					)
 					ctx.Para().Process_block_lnki_div();
 				lnki_is_file = true;
@@ -102,17 +102,17 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_thumb:			lnki.Lnki_type_(Xop_lnki_type.Id_thumb); break;
 					case Xop_lnki_arg_parser.Tid_frame:			lnki.Lnki_type_(Xop_lnki_type.Id_frame); break;
 					case Xop_lnki_arg_parser.Tid_frameless:		lnki.Lnki_type_(Xop_lnki_type.Id_frameless); break;
-					case Xop_lnki_arg_parser.Tid_left:			lnki.Align_h_(Xop_lnki_align_h.Left); break;
-					case Xop_lnki_arg_parser.Tid_center:		lnki.Align_h_(Xop_lnki_align_h.Center); break;
-					case Xop_lnki_arg_parser.Tid_right:			lnki.Align_h_(Xop_lnki_align_h.Right); break;
-					case Xop_lnki_arg_parser.Tid_top:			lnki.Align_v_(Xop_lnki_align_v.Top); break;
-					case Xop_lnki_arg_parser.Tid_middle:		lnki.Align_v_(Xop_lnki_align_v.Middle); break;
-					case Xop_lnki_arg_parser.Tid_bottom:		lnki.Align_v_(Xop_lnki_align_v.Bottom); break;
-					case Xop_lnki_arg_parser.Tid_super:			lnki.Align_v_(Xop_lnki_align_v.Super); break;
-					case Xop_lnki_arg_parser.Tid_sub:			lnki.Align_v_(Xop_lnki_align_v.Sub); break;
-					case Xop_lnki_arg_parser.Tid_text_top:		lnki.Align_v_(Xop_lnki_align_v.TextTop); break;
-					case Xop_lnki_arg_parser.Tid_text_bottom:	lnki.Align_v_(Xop_lnki_align_v.TextBottom); break;
-					case Xop_lnki_arg_parser.Tid_baseline:		lnki.Align_v_(Xop_lnki_align_v.Baseline); break;
+					case Xop_lnki_arg_parser.Tid_left:			lnki.Align_h_(Xop_lnki_align_h_.Left); break;
+					case Xop_lnki_arg_parser.Tid_center:		lnki.Align_h_(Xop_lnki_align_h_.Center); break;
+					case Xop_lnki_arg_parser.Tid_right:			lnki.Align_h_(Xop_lnki_align_h_.Right); break;
+					case Xop_lnki_arg_parser.Tid_top:			lnki.Align_v_(Xop_lnki_align_v_.Top); break;
+					case Xop_lnki_arg_parser.Tid_middle:		lnki.Align_v_(Xop_lnki_align_v_.Middle); break;
+					case Xop_lnki_arg_parser.Tid_bottom:		lnki.Align_v_(Xop_lnki_align_v_.Bottom); break;
+					case Xop_lnki_arg_parser.Tid_super:			lnki.Align_v_(Xop_lnki_align_v_.Super); break;
+					case Xop_lnki_arg_parser.Tid_sub:			lnki.Align_v_(Xop_lnki_align_v_.Sub); break;
+					case Xop_lnki_arg_parser.Tid_text_top:		lnki.Align_v_(Xop_lnki_align_v_.TextTop); break;
+					case Xop_lnki_arg_parser.Tid_text_bottom:	lnki.Align_v_(Xop_lnki_align_v_.TextBottom); break;
+					case Xop_lnki_arg_parser.Tid_baseline:		lnki.Align_v_(Xop_lnki_align_v_.Baseline); break;
 					case Xop_lnki_arg_parser.Tid_class:			lnki.Lnki_cls_(Xop_lnki_wkr_.Val_extract(src, arg)); break;
 					case Xop_lnki_arg_parser.Tid_alt:			lnki.Alt_tkn_(arg); 
 						lnki.Alt_tkn().Tkn_ini_pos(false, arg.Src_bgn(), arg.Src_end());

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.xowa.parsers.tmpls.*;
 public class Xol_msg_itm_ {
 public static final int
   Id_dte_dow_name_sunday = 0

@@ -37,23 +37,22 @@ public class Xoh_img_parser {
 	public boolean Img_w_exists() {return img_w != -1;}
 	public int Img_h() {return img_h;} private int img_h;
 	public boolean File_w__diff__img_w() {return img_src_parser.File_w() != img_w;}
-	public int Parse(Xoh_hdoc_wkr hdoc_wkr, byte[] src, Html_tag_rdr tag_rdr, Html_tag anch_tag) {
+	public int Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, byte[] src, Html_tag_rdr tag_rdr, Html_tag anch_tag) {
 		// "<a href='/wiki/File:A.png' class='image'><img alt='' src='file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png' width='220' height='110' class='thumbimage'></a>"
 		this.src = src; this.anch_tag_bgn = anch_tag.Src_bgn(); this.anch_tag_end = anch_tag.Src_end();
 		this.rng_bgn = anch_tag_bgn;																	// <a
 		this.anch_title_atr = anch_tag.Atrs__get_by_or_empty(Html_atr_.Bry__title);						// title='abc'
 		anch_cls_parser.Parse(tag_rdr.Rdr(), src, anch_tag);											// class='image'
-		anch_href_parser.Parse(tag_rdr.Rdr(), hdoc_wkr.Ctx().Wiki(), anch_tag);							// href='/wiki/File:A.png'
-		Html_tag img_tag = tag_rdr.Tag__move_fwd_head(Html_tag_.Id__img);								// <img>
-		img_xoimg_parser.Parse(tag_rdr.Rdr(), src, img_tag);
+		anch_href_parser.Parse(tag_rdr.Rdr(), hctx.Wiki__ttl_parser(), anch_tag);						// href='/wiki/File:A.png'
+		Html_tag img_tag = tag_rdr.Tag__move_fwd_head().Chk_id(Html_tag_.Id__img);						// <img>
+		img_xoimg_parser.Parse(tag_rdr.Rdr(), src, img_tag);											// data-xoimg='...'
 		this.img_w = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__width, Xof_img_size.Size__neg1);		// width='220'
 		this.img_h = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__height, Xof_img_size.Size__neg1);		// height='110'
 		this.img_alt_atr = img_tag.Atrs__get_by_or_empty(Html_atr_.Bry__alt);							// alt='File:A.png'
 		img_cls_parser.Parse(tag_rdr.Rdr(), src, img_tag);												// class='thumbborder'
-		img_src_parser.Parse(tag_rdr.Rdr(), hdoc_wkr.Ctx().Wiki().Domain_bry(), img_tag);				// src='...'
+		img_src_parser.Parse(tag_rdr.Rdr(), hctx.Wiki__domain_bry(), img_tag);							// src='...'
 		Html_tag anch_tail_tag = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__a);							// </a>
 		this.rng_end = anch_tail_tag.Src_end();
-		hdoc_wkr.On_img(this);
 		return rng_end;
 	}
 	public static final byte[]

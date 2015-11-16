@@ -16,30 +16,39 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.tests.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnki_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Page__basic() {
-		fxt.Test__bicode("~$1#A~", Xoh_lnki_html__hdump__tst.Html__same);
+		fxt.Test__bicode("~$IA~", Xoh_lnki_html__hdump__tst.Html__same);
 	}
 	@Test   public void Page__alt_case() {
-		fxt.Test__bicode("~$1#a~", "<a href='/wiki/A' id='xowa_lnki_2' title='A'>a</a>");
+		fxt.Test__bicode("~$Ia~", "<a href='/wiki/A' id='xowa_lnki_2' title='A'>a</a>");
 	}
 	@Test   public void Page__ns() {
-		fxt.Test__bicode("~$1-A~", "<a href='/wiki/Template:A' id='xowa_lnki_2' title='Template:A'>Template:A</a>");
+		fxt.Test__bicode("~$)-A~", "<a href='/wiki/Template:A' id='xowa_lnki_2' title='Template:A'>Template:A</a>");
+	}
+	@Test   public void Anch__basic() {
+		fxt.Test__bicode("$Ya", "<a href='#a' id='xowa_lnki_2'>#a</a>");
 	}
 	@Test   public void Capt__basic() {
-		fxt.Test__bicode("~$2#A~b~", Xoh_lnki_html__hdump__tst.Html__diff);
+		fxt.Test__bicode("~$JA~b~", Xoh_lnki_html__hdump__tst.Html__diff);
 	}
 	@Test   public void Capt__nest() {
 		fxt.Test__bicode
-		( "~$2#A~<a href=\"/wiki/C\" id=\"xowa_lnki_3\" title=\"C\">C1</a>D~"
+		( "~$JA~<a href=\"/wiki/C\" id=\"xowa_lnki_3\" title=\"C\">C1</a>D~"
 		, "<a href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><a href=\"/wiki/C\" id=\"xowa_lnki_3\" title=\"C\">C1</a>D</a>"
 		);
 	// old: probably broken;	fxt.Test__bicode("~$1!#A~~$1!#C~C1</a>D</a>", "<a data-xotype='lnki1' href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><a data-xotype='lnki1' href=\"/wiki/C\" id=\"xowa_lnki_2\" title=\"C\">C1</a>D</a>");
 	}
-	@Test   public void Trail__basic() {
-		fxt.Test__bicode("~$3#A~b~", Xoh_lnki_html__hdump__tst.Html__trail);
+	@Test   public void Tail__basic() {
+		fxt.Test__bicode("~$KA~b~", Xoh_lnki_html__hdump__tst.Html__trail);
+	}
+	@Test   public void Head__basic() {
+		fxt.Test__bicode("~$LA~b~", "<a href='/wiki/Ab' id='xowa_lnki_2' title='Ab'>A</a>");
+	}
+	@Test   public void Head__case() {
+		fxt.Test__bicode("~$La~b~", "<a href='/wiki/Ab' id='xowa_lnki_2' title='Ab'>a</a>");
 	}
 //		@Test   public void Capt__site__xwiki() {
 //			fxt.Parser_fxt().Init_xwiki_add_wiki_and_user_("wikt", "en.wiktionary.org");

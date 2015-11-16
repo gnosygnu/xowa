@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.brys.fmtrs.*;
 public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private final Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);	// do not fail b/c msgs may contain excerpt of random text; EX:[[User:A|~A~]] DATE:2014-11-28

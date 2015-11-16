@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores; import gplx.*;
+import gplx.core.gfo_ndes.*;
 public class DataRdr_mem extends DataRdr_base implements GfoNdeRdr {
 	@Override public String NameOfNode() {return cur.Name();}
 	public GfoNde UnderNde() {return cur;}

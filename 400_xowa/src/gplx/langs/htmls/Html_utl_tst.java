@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Html_utl_tst {
-	@Before public void init() {fxt.Clear();} private Html_atr_cls_fxt fxt = new Html_atr_cls_fxt();
+	@Before public void init() {fxt.Clear();} private Html_atr_class_fxt fxt = new Html_atr_class_fxt();
 	@Test   public void Basic() 		{fxt.Test_del_comments("a<!-- b -->c"				, "ac");}
 	@Test   public void Bgn_missing() 	{fxt.Test_del_comments("a b c"						, "a b c");}
 	@Test   public void End_missing() 	{fxt.Test_del_comments("a<!-- b c"					, "a<!-- b c");}
@@ -37,7 +37,7 @@ public class Html_utl_tst {
 		fxt.Test_unescape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a&lt;&gt;&#39;&amp;&quot;b"		, "a<>'&\"b");	// basic
 	}
 }
-class Html_atr_cls_fxt {
+class Html_atr_class_fxt {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Clear() {
 		tmp_bfr.Clear();

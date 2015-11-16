@@ -68,7 +68,7 @@ class Xows_html_wkr_fxt {
 		html_row.Init(rslt);
 		for (int i = 0; i < rows.length; ++i)
 			rslt.Add(rows[i]);
-		html_row.Fmt__do(tmp_bfr);
+		html_row.Bfr_arg__add(tmp_bfr);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
 	public Xows_db_row Make_row(int len, String ttl_str) {

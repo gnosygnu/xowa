@@ -24,6 +24,12 @@ public class Int_flag_bldr {
 		this.val_ary = new int[pow_ary.length];
 		return this;
 	}
-	public int Encode()						{return Int_flag_bldr_.To_int(pow_ary, val_ary);}
-	public void Decode(int v)				{Int_flag_bldr_.To_int_ary(val_ary, pow_ary, v);}
+	public Int_flag_bldr Set(int idx, int val)		{val_ary[idx] = val; return this;}
+	public Int_flag_bldr Set(int idx, byte val)		{val_ary[idx] = val; return this;}
+	public Int_flag_bldr Set(int idx, boolean val)		{val_ary[idx] = val ? 1 : 0; return this;}
+	public int Get_as_int(int idx)					{return val_ary[idx];}
+	public byte Get_as_byte(int idx)				{return (byte)val_ary[idx];}
+	public boolean Get_as_bool(int idx)				{return val_ary[idx] == 1;}
+	public int Encode()								{return Int_flag_bldr_.To_int(pow_ary, val_ary);}
+	public void Decode(int v)						{Int_flag_bldr_.To_int_ary(val_ary, pow_ary, v);}
 }

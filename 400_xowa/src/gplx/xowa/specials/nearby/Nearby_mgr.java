@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Nearby_mgr implements Xows_page {
 	Xowe_wiki wiki; byte[] trg;

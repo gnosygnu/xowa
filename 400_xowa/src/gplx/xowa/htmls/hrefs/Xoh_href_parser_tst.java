@@ -35,11 +35,17 @@ public class Xoh_href_parser_tst {
 		fxt.Run_parse_by_href("/wiki/A#b").Chk_to_str("en.wikipedia.org/wiki/A#b").Chk_anch("b");
 	}
 	@Test   public void Wiki__xwiki__only()	{
-		fxt.Prep_add_xwiki_to_wiki("wikt", "en.wiktionary.org");
-		fxt.Run_parse_by_href("/wiki/wikt:").Chk_page_is_main_y().Chk_page("Main_Page").Chk_to_str("en.wiktionary.org/wiki/Main_Page");
+		fxt.Prep_add_xwiki_to_wiki("c", "commons.wikimedia.org");
+		fxt.Run_parse_by_href("/wiki/c:").Chk_page_is_main_y().Chk_page("Main_Page").Chk_to_str("commons.wikimedia.org/wiki/Main_Page");
 	}
 	@Test   public void Wiki__encoded() {
 		fxt.Run_parse_by_href("/wiki/A%22b%22c").Chk_page("A\"b\"c");
+	}
+	@Test   public void Wiki__triple_slash() {	// PURPOSE: handle triple slashes; PAGE:esolangs.org/wiki/Language_list; DATE:2015-11-14
+		fxt.Run_parse_by_href("/wiki////").Chk_to_str("en.wikipedia.org/wiki////").Chk_wiki("en.wikipedia.org").Chk_page("///");
+	}
+	@Test   public void Wiki__http() {	// PURPOSE: variant of triple slashes; DATE:2015-11-14
+		fxt.Run_parse_by_href("/wiki/http://a").Chk_to_str("en.wikipedia.org/wiki/Http://a").Chk_wiki("en.wikipedia.org").Chk_page("Http://a");
 	}
 	@Test   public void Site__basic() {
 		fxt.Run_parse_by_href("/site/en.wikipedia.org/wiki/A").Chk_tid(Xoa_url_.Tid_page).Chk_to_str("en.wikipedia.org/wiki/A").Chk_page("A");

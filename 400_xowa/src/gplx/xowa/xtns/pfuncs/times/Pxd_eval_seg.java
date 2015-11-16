@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.brys.*;
 class Pxd_eval_year {
 	public static void Eval_at_pos_0(Pxd_parser tctx, Pxd_itm_int cur) {
 		Pxd_itm[] data_ary = tctx.Data_ary();
@@ -80,7 +81,7 @@ class Pxd_eval_seg {
 				tctx.Seg_idxs_(itm, DateAdp_.SegIdx_year);
 				return true;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_year, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_year, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_m(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -94,7 +95,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_month, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_month, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_d(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -108,7 +109,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_day, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_h(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -122,7 +123,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_n(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -136,7 +137,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_s(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -150,7 +151,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_second, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_second, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_tz_h(Pxd_parser tctx, Pxd_itm_int itm, boolean negative) {
@@ -166,7 +167,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static boolean Eval_as_tz_m(Pxd_parser tctx, Pxd_itm_int itm, boolean negative) {
@@ -182,7 +183,7 @@ class Pxd_eval_seg {
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bry_fmtr_arg_.int_(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bfr_arg_.New_int(val));
 		return false;
 	}
 	public static byte Eval_as_tz_sym(Pxd_parser tctx, Pxd_itm[] tkns, Pxd_itm_int hour_itm) {
@@ -195,7 +196,7 @@ class Pxd_eval_seg {
 				break;
 			case Pxd_itm_.Tid_dash: return Bool_.N_byte;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null"));
+		tctx.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null"));
 		return Bool_.__byte;
 	}
 }

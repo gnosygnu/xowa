@@ -61,7 +61,7 @@ public class Gfo_poolable_mgr_tst {
 	}
 }
 class Gfo_poolable_mgr_tstr {
-	private final Gfo_poolable_mgr mgr = new Gfo_poolable_mgr(new Sample_poolable_itm(-1, Object_.Ary_empty), Object_.Ary("make"), Object_.Ary("clear"), 2, 8);
+	private final Gfo_poolable_mgr mgr = new Gfo_poolable_mgr(new Sample_poolable_itm(null, -1, Object_.Ary_empty), Object_.Ary("make"), Object_.Ary("clear"), 2, 8);
 	public void Clear() {mgr.Clear_fast();}
 	public void Test__get(int expd_idx) {
 		Sample_poolable_itm actl_itm = (Sample_poolable_itm)mgr.Get_fast();
@@ -74,10 +74,12 @@ class Gfo_poolable_mgr_tstr {
 	public void Exec__rls(int idx) {mgr.Rls_fast(idx);}
 }
 class Sample_poolable_itm implements Gfo_poolable_itm {
-	public Sample_poolable_itm(int pool_idx, Object[] make_args) {this.pool_idx = pool_idx; this.pool__make_args = make_args;}
+	private Gfo_poolable_mgr pool_mgr;
+	public Sample_poolable_itm(Gfo_poolable_mgr pool_mgr, int pool_idx, Object[] make_args) {this.pool_mgr = pool_mgr; this.pool_idx = pool_idx; this.pool__make_args = make_args;}
 	public int				Pool__idx() {return pool_idx;} private final int pool_idx;
 	public Object[]			Pool__make_args() {return pool__make_args;} private final Object[] pool__make_args;
 	public Object[]			Pool__clear_args() {return pool__clear_args;} private Object[] pool__clear_args;
 	public void				Pool__clear (Object[] args) {this.pool__clear_args = args;}
-	public Gfo_poolable_itm	Pool__make	(int idx, Object[] args) {return new Sample_poolable_itm(idx, args);}
+	public void				Pool__rls() {pool_mgr.Rls_safe(pool_idx);}
+	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {return new Sample_poolable_itm(pool_mgr, idx, args);}
 }

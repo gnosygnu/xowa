@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xohp_ctg_grp_mgr {
 	final Bry_fmtr grp_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
@@ -42,9 +43,9 @@ public class Xohp_ctg_grp_mgr {
 		grp_fmtr.Bld_bfr_many(bfr, categories_lbl, itm_mgr);
 	}
 }
-class Xoh_ctg_itm_fmtr implements Bry_fmtr_arg {
+class Xoh_ctg_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
 	public void Set(Xoae_page page, Bry_fmtr itm_fmtr) {this.page = page; this.itm_fmtr = itm_fmtr;} private Xoae_page page; Bry_fmtr itm_fmtr;
-	public void Fmt__do(Bry_bfr bfr) {
+	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		int ctgs_len = page.Category_list().length;
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		Bry_bfr tmp_href = Xoa_app_.Utl__bfr_mkr().Get_b128();

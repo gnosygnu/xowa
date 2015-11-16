@@ -22,8 +22,8 @@ public class Xoh_img_make__dump__tst {
 	@Before public void Init() {fxt.Clear();}
 	@Test   public void Html_exists__n() {
 		String
-		  orig = "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'/></a>"
-		, expd = "<a href='/wiki/File:A.png' class='image' title='abc'><img id='xoimg_0' alt='abc' src=''/></a>"
+		  orig = "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'></a>"
+		, expd = "<a href='/wiki/File:A.png' class='image' title='abc'><img id='xoimg_0' alt='abc'></a>"
 		;
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd)
 			.Imgs__add("en.w", "A.png", Xop_lnki_type.Id_null, 0.5, 220, 110, -1, -1)

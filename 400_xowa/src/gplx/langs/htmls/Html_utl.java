@@ -177,4 +177,5 @@ public class Html_utl {
 		}
 		return bfr.To_bry_and_clear();
 	}
+	public static String Replace_apos(String s) {return String_.Replace(s, "'", "\"");}
 }

@@ -31,6 +31,9 @@ public class Html_tag_ {
 	, Id__span		=  8
 	, Id__div		=  9
 	, Id__img		= 10
+	, Id__ul		= 11
+	, Id__li		= 12
+	, Id__p			= 13
 	;
 	public static final byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -47,6 +50,24 @@ public class Html_tag_ {
 	.Add_str_int("div"			, Id__div)
 	.Add_str_int("img"			, Id__img)
 	;
+	public static String To_str(int tid) {
+		switch (tid) {
+			case Id__eos:			return "EOS";
+			case Id__any:			return "any";
+			case Id__unknown:		return "unknown";
+			case Id__comment:		return "comment";
+			case Id__h2:			return "h2";
+			case Id__h3:			return "h2";
+			case Id__h4:			return "h2";
+			case Id__h5:			return "h2";
+			case Id__h6:			return "h2";
+			case Id__a:				return "a";
+			case Id__span:			return "span";
+			case Id__div:			return "div";
+			case Id__img:			return "img";
+			default:				throw Err_.new_unhandled(tid);
+		}
+	}
 	public static final byte[]
 	  Br_inl					= Bry_.new_a7("<br/>")
 	, Hr_inl					= Bry_.new_a7("<hr/>")

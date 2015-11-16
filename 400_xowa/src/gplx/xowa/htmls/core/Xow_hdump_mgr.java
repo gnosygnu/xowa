@@ -16,15 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.ios.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.data.*;
 public class Xow_hdump_mgr {
 	private final Xoh_page tmp_hpg = new Xoh_page(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
 	public Xow_hdump_mgr(Xow_wiki wiki) {
-		this.hzip_mgr = new Xow_hzip_mgr(wiki);
-		this.save_mgr = new Xow_hdump_mgr__save(wiki, hzip_mgr, tmp_hpg, tmp_bfr);
-		this.load_mgr = new Xow_hdump_mgr__load(wiki, hzip_mgr, tmp_hpg, tmp_bfr);
+		this.save_mgr = new Xow_hdump_mgr__save(wiki, hzip_mgr, zip_mgr, tmp_hpg, tmp_bfr);
+		this.load_mgr = new Xow_hdump_mgr__load(wiki, hzip_mgr, zip_mgr, tmp_hpg, tmp_bfr);
 	}
+	public Xow_hdump_mgr__save Save_mgr() {return save_mgr;} private Xow_hdump_mgr__save save_mgr;
+	public Xow_hdump_mgr__load Load_mgr() {return load_mgr;} private Xow_hdump_mgr__load load_mgr;
+	public Xoh_hzip_mgr Hzip_mgr() {return hzip_mgr;} private final Xoh_hzip_mgr hzip_mgr = new Xoh_hzip_mgr();
 	public void Init_by_db(Xow_wiki wiki) {
 		byte default_zip_tid = gplx.core.ios.Io_stream_.Tid_raw;
 		boolean default_hzip_enable = false;
@@ -33,12 +37,10 @@ public class Xow_hdump_mgr {
 			default_zip_tid = props.Zip_tid_html();
 			default_hzip_enable = props.Hzip_enabled();
 		}
-		Init_by_db(wiki, default_zip_tid, default_hzip_enable);
+		Init_by_db(default_zip_tid, default_hzip_enable);
 	}
-	public void Init_by_db(Xow_wiki wiki, byte default_zip_tid, boolean default_hzip_enable) {
-		hzip_mgr.Init_by_atrs(default_zip_tid, default_hzip_enable);
+	public void Init_by_db(byte default_zip_tid, boolean default_hzip_enable) {
+		int dflt_hzip_tid = default_hzip_enable ? Xoh_hzip_dict_.Hzip__none : Xoh_hzip_dict_.Hzip__v1;
+		save_mgr.Init_by_db(default_zip_tid, dflt_hzip_tid);
 	}
-	public Xow_hzip_mgr Hzip_mgr() {return hzip_mgr;} private Xow_hzip_mgr hzip_mgr;
-	public Xow_hdump_mgr__save Save_mgr() {return save_mgr;} private Xow_hdump_mgr__save save_mgr;
-	public Xow_hdump_mgr__load Load_mgr() {return load_mgr;} private Xow_hdump_mgr__load load_mgr;
 }

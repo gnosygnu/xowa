@@ -16,19 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.tests.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_hzip__view__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Basic__border__class__caption() {	// [[File:A.png|border|class=other|220px|abc]]
 		fxt.Test__bicode
 		( "~%!rC#T\";A.png~abc~other~"
-		, "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' class='thumbborder other'/></a>"
+		, "<a href='/wiki/File:A.png' class='image' title='abc'><img id='xoimg_0' alt='abc' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' class='thumbborder other'></a>"
 		);
 	}
 	@Test   public void Link() {	// [[File:A.png|link=B]]
 		fxt.Test__bicode
 		( "~%!H.#T\";B~#A.png~B~A.png~"
-		, "<a href='/wiki/B' title='B'><img alt='A.png' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'/></a>"
+		, "<a href='/wiki/B' title='B'><img id='xoimg_0' alt='A.png' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'></a>"
+		, "<a href='/wiki/B' title='B'><img id='xoimg_0' alt='A.png' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'></a>"
 		);
 	}
 	// link_site: [[File:A.png|link=//en.wiktionary.org/B]] -> [[File:Wiktionary-logo-en.svg|25x25px|link=//en.wiktionary.org/wiki/Special:Search/Earth|Search Wiktionary]] -> <a href="/site/en.wiktionary.org/wiki/Special:Search/Earth" rel="nofollow" title="Search Wiktionary" xowa_title="Wiktionary-logo-en.svg"><img id="xowa_file_img_88" alt="Search Wiktionary" src="file:///J:/xowa/file/commons.wikimedia.org/thumb/f/8/c/4/Wiktionary-logo-en.svg/23px.png" width="23" height="25"></a>

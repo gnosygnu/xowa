@@ -16,19 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.hzips.stats.*;
-public class Xoh_hdr_hzip implements Xoh_hzip_wkr {
+import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.htmls.core.hzips.*;
+public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public String Key() {return Xoh_hzip_dict_.Key__hdr;}
-	public void Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, byte[] src, int rng_bgn, int rng_end, int level, int capt_bgn, int capt_end, byte[] anch) {
+	public Xoh_hdr_hzip Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm, byte[] src, Xoh_hdr_parser arg) {
+		int level = arg.Hdr_level();
 		stat_itm.Hdr_add(level);
-		bfr.Add(Xoh_hzip_dict_.Bry__hdr);											// add hook
-		bfr.Add_int_digits(1, level);												// add level; EX: 2 in <h2>
-		bfr.Add_mid(src, capt_bgn, capt_end).Add_byte(Xoh_hzip_dict_.Escape);		// add caption
-		if (anch != null) bfr.Add(anch);											// add anchor
-		bfr.Add_byte(Xoh_hzip_dict_.Escape);										// add escape
+		bfr.Add(Xoh_hzip_dict_.Bry__hdr);													// add hook
+		bfr.Add_int_digits(1, level);														// add level; EX: 2 in <h2>
+		bfr.Add_mid(src, arg.Capt_bgn(), arg.Capt_end()).Add_byte(Xoh_hzip_dict_.Escape);	// add caption
+		bfr.Add_safe(arg.Anch_bry());														// add anchor
+		bfr.Add_byte(Xoh_hzip_dict_.Escape);												// add escape
+		return this;
 	}
-	public int Decode(Bry_bfr bfr, Xoh_decode_ctx ctx, Bry_rdr rdr, byte[] src, int hook_bgn) {
+	public int Decode(Bry_bfr bfr, boolean write_to_bfr, Xoh_hdoc_ctx ctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int hook_bgn) {
 		byte level = rdr.Read_byte();
 		int capt_bgn = rdr.Pos();
 		int capt_end = rdr.Find_fwd_lr(Xoh_hzip_dict_.Escape);
@@ -53,4 +55,8 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr {
 	, Bry__hdr__2 = Bry_.new_a7("\">")
 	, Bry__hdr__3 = Bry_.new_a7("</span>\n</h")
 	;
+	public int				Pool__idx() {return pool_idx;} private int pool_idx;
+	public void				Pool__clear (Object[] args) {}
+	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr;
+	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_hdr_hzip rv = new Xoh_hdr_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 }
