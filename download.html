@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_windows_64_v2.11.2.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_windows_64_v2.11.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_windows_v2.11.2.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_windows_v2.11.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_linux_64_v2.11.2.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_linux_64_v2.11.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_linux_v2.11.2.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_linux_v2.11.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_macosx_64_v2.11.2.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_macosx_64_v2.11.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.2.1/xowa_app_macosx_v2.11.2.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_macosx_v2.11.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.11.2.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.11.3.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -54,92 +54,42 @@
       <span class='mw-headline'>Change log</span>
     </h2>
     <h2>
-      <span class="mw-headline" id="v2.11.2.1_.282015-11-08.29">v2.11.2.1 (2015-11-08)</span>
+      <span class="mw-headline" id="v2.11.3.1_.282015-11-15.29">v2.11.3.1 (2015-11-15)</span>
     </h2>
-    <p>
-      <b>fix</b>
-    </p>
+    <h3>
+      <span class="mw-headline" id="fix">fix</span>
+    </h3>
     <ul>
       <li>
-        Url: Navigate to original REDIRECT page when clicking on "Redirected from" links (affects "Redirected from" links not working). See: <a href="https://da.wikipedia.org/wiki/Template:Lolland?redirect=no">https://da.wikipedia.org/wiki/Template:Lolland?redirect=no</a> [broken since:v2.8.1]
+        Redirect: Navigate to correct REDIRECT url when REDIRECT page has multiple links (affects "1. REDIRECT " showing up on pages). See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a> [broken since:v2.11.2]
       </li>
       <li>
-        Url: Show interwiki links in article text, not in "In other langauges" (affects empty links showing up on some pages). See: <a href="https://simple.wikipedia.org/wiki/Main_Page">https://simple.wikipedia.org/wiki/Main_Page</a> [broken since:v2.10.2]
+        Url: Parse "url-like" page names (affects some links not being clickable); EX:"/wiki/http://a.org" {detected by paul2520}. See: <a href="https://esolangs.org/wiki/Language_list">https://esolangs.org/wiki/Language_list</a> <a href="https://esolangs.org/wiki////">https://esolangs.org/wiki////</a> [broken since:v2.8.1]
       </li>
     </ul>
-    <p>
-      <b>change</b>
-    </p>
+    <h3>
+      <span class="mw-headline" id="change">change</span>
+    </h3>
     <ul>
       <li>
-        Gallery: Add mediawiki.page.gallery.css (affects &lt;gallery&gt; rendering as list items on many pages). See: <a href="https://simple.wikipedia.org/wiki/Gothic_architecture">https://simple.wikipedia.org/wiki/Gothic_architecture</a> <a href="https://da.wikipedia.org/wiki/Middelaldercentret">https://da.wikipedia.org/wiki/Middelaldercentret</a>
-      </li>
-      <li>
-        Scribunto.Title: Use canoncial namespace name, not local-language namespace name (affects broken location maps on many pages in many non-English wikis); EX:newTitle("Šablon:Location_map") -&gt; "Template:Location_map" x&gt; "Šablon:Location_map". See: <a href="https://sh.wikipedia.org/wiki/Koprno">https://sh.wikipedia.org/wiki/Koprno</a>
-      </li>
-      <li>
-        Parser.Template: Trim white space from end of template arg (affects references having empty &lt;pre&gt; sections); EX:{{A|b\n }} x&gt; should not generate pre. See: <a href="https://simple.wikipedia.org/wiki/Gothic_architecture">https://simple.wikipedia.org/wiki/Gothic_architecture</a> <a href="https://no.wikipedia.org/wiki/Israel">https://no.wikipedia.org/wiki/Israel</a>
+        Scribunto.Wikibase: For frame title, use canoncial namespace name, not local-language namespace name (affects several dozen sh.w pages with script error). See: <a href="https://sh.wikipedia.org/wiki/Cirnik_(Trebnje,_Slovenija)">https://sh.wikipedia.org/wiki/Cirnik_(Trebnje,_Slovenija)</a> <a href="https://sh.wikipedia.org/wiki/Okroglo_(Naklo,_Slovenija)">https://sh.wikipedia.org/wiki/Okroglo_(Naklo,_Slovenija)</a>
       </li>
     </ul>
-    <p>
-      <b>package</b>
-    </p>
+    <h3>
+      <span class="mw-headline" id="package">package</span>
+    </h3>
     <ul>
       <li>
-        Package: Release image update for Danish wikis (2015-11). See: <a href="https://archive.org/details/Xowa_dawiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_dawiki_latest</a>
+        Package: Release image update for Slovak wikis (2015-11). See: <a href="https://archive.org/details/Xowa_skwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_skwiki_latest</a>
       </li>
       <li>
-        Package: Release image update for Serbo-Croatian wikis (2015-10). See: <a href="https://archive.org/details/Xowa_shwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_shwiki_latest</a>
+        Package: Release image update for Waray-Waray wikis (2015-11). See: <a href="https://archive.org/details/Xowa_warwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_warwiki_latest</a>
       </li>
       <li>
-        Package: Release image update for Croatian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_hrwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_hrwiki_latest</a>
+        Package: Release image update for Slovenian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_slwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_slwiki_latest</a>
       </li>
       <li>
-        Package: Release image update for Estonian wikis (2015-10). See: <a href="https://archive.org/details/Xowa_eowiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_eowiki_latest</a>
-      </li>
-    </ul>
-    <p>
-      <b>significant</b>
-    </p>
-    <ul>
-      <li>
-        Scribunto.Wikibase: Retrieve property by numerical id (affects text not showing in infoboxes for many Croatian pages); EX:entity.FormatPropertyValues('P123'). See: <a href="https://hr.wikipedia.org/wiki/Hepatitis">https://hr.wikipedia.org/wiki/Hepatitis</a>
-      </li>
-      <li>
-        Scribunto.Wikibase: Return datatype of "globe-coordinate" (affects geocordinates not working on a dozen pages in eo.w); EX:prop.mainsnak.datatype should not be nil. See: <a href="https://eo.wikipedia.org/wiki/Mudá">https://eo.wikipedia.org/wiki/Mudá</a>
-      </li>
-      <li>
-        Scribunto.Wikibase: Return quantity as number not as literal string (affects script error on a dozen pages in eo.w); EX:"99" not "+99". See: <a href="https://eo.wikipedia.org/wiki/Mudá">https://eo.wikipedia.org/wiki/Mudá</a>
-      </li>
-      <li>
-        Redirect: Ignore other arguments of redirect (affects "1. REDIRECT " showing up on pages); EX:#REDIRECT [[Template:A|state=collapsed]]. See: <a href="https://da.wikipedia.org/wiki/Middelaldercentret">https://da.wikipedia.org/wiki/Middelaldercentret</a>
-      </li>
-      <li>
-        JTidy: Enable "encloseBodyText" (affects text not showing next to images); EX:&lt;div&gt;a&lt;/div&gt;a&lt;div&gt;b&lt;/div&gt; -&gt;&lt;div&gt;a&lt;/div&gt;&lt;p&gt;a&lt;/p&gt;&lt;div&gt;b&lt;/div&gt;. See: <a href="https://hr.wiktionary.org/wiki/brod">https://hr.wiktionary.org/wiki/brod</a>
-      </li>
-    </ul>
-    <p>
-      <b>trivial</b>
-    </p>
-    <ul>
-      <li>
-        Edit: Do not fail when retrieving page with no content (affects some pages in home wiki). See: [[Help:Blog/Archives/2015-01]]
-      </li>
-    </ul>
-    <p>
-      <b>doc</b>
-    </p>
-    <ul>
-      <li>
-        Diagnostics: Add better messages for JTidy diagnostics. See: [[Help:Diagnostics/HTML Tidy]] [[Help:Diagnostics/JTidy]]
-      </li>
-    </ul>
-    <p>
-      <b>dev</b>
-    </p>
-    <ul>
-      <li>
-        Source: Change test output for non-equal strings.
+        Package: Release image update for Galician wikis (2015-11). See: <a href="https://archive.org/details/Xowa_glwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_glwiki_latest</a>
       </li>
     </ul>
     
