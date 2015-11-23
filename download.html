@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_windows_64_v2.11.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_windows_64_v2.11.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_windows_v2.11.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_windows_v2.11.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_linux_64_v2.11.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_linux_64_v2.11.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_linux_v2.11.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_linux_v2.11.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_macosx_64_v2.11.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_macosx_64_v2.11.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.3.1/xowa_app_macosx_v2.11.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.11.4.1/xowa_app_macosx_v2.11.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.11.3.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.11.4.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -54,42 +54,70 @@
       <span class='mw-headline'>Change log</span>
     </h2>
     <h2>
-      <span class="mw-headline" id="v2.11.3.1_.282015-11-15.29">v2.11.3.1 (2015-11-15)</span>
+      <span class="mw-headline" id="v2.11.4.1_.282015-11-22.29">v2.11.4.1 (2015-11-22)</span>
     </h2>
-    <h3>
-      <span class="mw-headline" id="fix">fix</span>
-    </h3>
+    <p>
+      <b>fix</b>
+    </p>
     <ul>
       <li>
-        Redirect: Navigate to correct REDIRECT url when REDIRECT page has multiple links (affects "1. REDIRECT " showing up on pages). See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a> [broken since:v2.11.2]
+        Parser.Template: Do not trim whitespace from end of template arg (affects many fr.w pages with many single-letter paragraphs (citation bloc)). See: <a href="https://fr.wikipedia.org/wiki/Histoire_de_la_marine_française_sous_Louis_XV_et_Louis_XVI">https://fr.wikipedia.org/wiki/Histoire_de_la_marine_française_sous_Louis_XV_et_Louis_XVI</a> [broken since:v2.11.2]
       </li>
       <li>
-        Url: Parse "url-like" page names (affects some links not being clickable); EX:"/wiki/http://a.org" {detected by paul2520}. See: <a href="https://esolangs.org/wiki/Language_list">https://esolangs.org/wiki/Language_list</a> <a href="https://esolangs.org/wiki////">https://esolangs.org/wiki////</a> [broken since:v2.8.1]
+        Category: Fix category pages not loading. See: <a href="https://simple.wikipedia.org/wiki/Category:Computer_science">https://simple.wikipedia.org/wiki/Category:Computer_science</a>
       </li>
     </ul>
-    <h3>
-      <span class="mw-headline" id="change">change</span>
-    </h3>
+    <p>
+      <b>package</b>
+    </p>
     <ul>
       <li>
-        Scribunto.Wikibase: For frame title, use canoncial namespace name, not local-language namespace name (affects several dozen sh.w pages with script error). See: <a href="https://sh.wikipedia.org/wiki/Cirnik_(Trebnje,_Slovenija)">https://sh.wikipedia.org/wiki/Cirnik_(Trebnje,_Slovenija)</a> <a href="https://sh.wikipedia.org/wiki/Okroglo_(Naklo,_Slovenija)">https://sh.wikipedia.org/wiki/Okroglo_(Naklo,_Slovenija)</a>
+        Package: Release image update for French wikis (2015-11). See: <a href="https://archive.org/details/Xowa_frwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_frwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Lithuanian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_ltwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_ltwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Limburgish wikis (2015-11). See: <a href="https://archive.org/details/Xowa_liwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_liwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Estonian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_etwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_etwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Latvian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_lvwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_lvwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Nynorsk wikis (2015-11). See: <a href="https://archive.org/details/Xowa_nnwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_nnwiki_latest</a>
+      </li>
+      <li>
+        Package: Release image update for Cebuano wikis (2015-11). See: <a href="https://archive.org/details/Xowa_cebwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_cebwiki_latest</a>
       </li>
     </ul>
-    <h3>
-      <span class="mw-headline" id="package">package</span>
-    </h3>
+    <p>
+      <b>significant</b>
+    </p>
     <ul>
       <li>
-        Package: Release image update for Slovak wikis (2015-11). See: <a href="https://archive.org/details/Xowa_skwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_skwiki_latest</a>
+        Parser.Table: Ignore content after "|" if on same line as "|-" (affects several li.w pages with stray text at top of page); EX:"\n|-|&lt;b&gt;a&lt;/b&gt;\n" -&gt; "&lt;b&gt;a&lt;/b&gt;" should not show. See: <a href="https://lv.wikipedia.org/wiki/Starptautiskā_kosmosa_stacija">https://lv.wikipedia.org/wiki/Starptautiskā_kosmosa_stacija</a>
+      </li>
+    </ul>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Html: Write full namespace for anchor titles; EX:[[Help talk:A]] -&gt; "title='Help talk:A'" x&gt; "title='A'".
       </li>
       <li>
-        Package: Release image update for Waray-Waray wikis (2015-11). See: <a href="https://archive.org/details/Xowa_warwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_warwiki_latest</a>
+        Html: Do not write "rel=nofollow" if image is link to Wikimedia wiki; EX:[[File:A.png|link=//en.wiktionary.org/wiki/a]] -&gt; "" x&gt; "rel='nofollow'".
       </li>
+    </ul>
+    <p>
+      <b>dev</b>
+    </p>
+    <ul>
       <li>
-        Package: Release image update for Slovenian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_slwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_slwiki_latest</a>
-      </li>
-      <li>
-        Package: Release image update for Galician wikis (2015-11). See: <a href="https://archive.org/details/Xowa_glwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_glwiki_latest</a>
+        Source: Refactor Gfo_url_encoder.
       </li>
     </ul>
     

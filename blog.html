@@ -18,6 +18,68 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v2.11.4.1_.282015-11-22_20:00_Sun.29">Release: v2.11.4.1 (2015-11-22 20:00 Sun)</span>
+    </h2>
+    <p>
+      v2.11.4 is a minor release. It has one fix affecting French Wikipedia pages, and another for the simple-mode Category system.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_.22long-vertical_scrolling.22_on_French_Wikipedia">Fix for "long-vertical scrolling" on French Wikipedia</span>
+    </h3>
+    <p>
+      In v2.11.2, I added a fix to handle extraneous pre sections: see <a href="#Fix_for_extraneous_pre-sections_in_References" id="xolnki_10" title="">#Fix for extraneous pre-sections in References</a>. It turned out this fix was not correct, and caused pages in French Wikipedia to have large scrolling sections.
+    </p>
+    <p>
+      I reverted the fix for v2.11.4. As it turned out, the issue with extraneous pre sections was handled by the underlying templates themselves.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_simple-mode_Category_pages_not_loading">Fix for simple-mode Category pages not loading</span>
+    </h3>
+    <p>
+      XOWA generates a simple Category system when it builds a wiki (this is called v1). If you want an authentic version of the Category system (this is called v2), you can always import it separately under [[Import offline]].
+    </p>
+    <p>
+      The simple Category system looks like it broke some time ago during the general database redesign from .sqlite3 to .xowa. I fixed it for this release.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Wiki_bundles_for_French.2C_Lithuanian.2C_Limburgish.2C_Estonian.2C_Latvian.2C_Nynorsk.2C_and_Cebuano_wikis">Wiki bundles for French, Lithuanian, Limburgish, Estonian, Latvian, Nynorsk, and Cebuano wikis</span>
+    </h3>
+    <p>
+      There were a lot of wikis this week, but they were mostly small. These have been uploaded to archive.org:
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/details/Xowa_frwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_frwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_ltwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_ltwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_liwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_liwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_etwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_etwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_lvwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_lvwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_nnwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_nnwiki_latest</a>
+      </li>
+      <li>
+        <a href="https://archive.org/details/Xowa_cebwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_cebwiki_latest</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v2.11.5">Next release: v2.11.5</span>
+    </h3>
+    <p>
+      I was able to do a basic HTML dump for simple wiki, but there are still a number of issues. These should be fixed this week, and hopefully I can try the new HTML dump system on English Wikipedia.
+    </p>
+    <p>
+      For wikis, I'm going to work through the last of the old .sqlite3 wikis and go through Dutch (nl.*) and Latin wikis.
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_v2.11.3.1_.282015-11-15_20:00_Sun.29">Release: v2.11.3.1 (2015-11-15 20:00 Sun)</span>
     </h2>
     <p>
@@ -33,7 +95,7 @@
       <span class="mw-headline" id="Wiki_bundles_for_Slovak.2C_Slovenian.2C_Galician.2C_and_Waray-Waray_wikis">Wiki bundles for Slovak, Slovenian, Galician, and Waray-Waray wikis</span>
     </h3>
     <p>
-      These have been uploaded to archive.org
+      These have been uploaded to archive.org:
     </p>
     <ul>
       <li>
