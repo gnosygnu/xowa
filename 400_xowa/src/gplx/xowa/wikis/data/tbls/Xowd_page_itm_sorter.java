@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.lists.*; /*ComparerAble*/ import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.lists.*; /*ComparerAble*/ import gplx.xowa.wikis.data.tbls.*;
 public class Xowd_page_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xowd_page_itm lhs = (Xowd_page_itm)lhsObj, rhs = (Xowd_page_itm)rhsObj;

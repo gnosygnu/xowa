@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.files.gui.*;
 import gplx.xowa.wikis.tdbs.metas.*;

@@ -26,12 +26,12 @@ public class Xoh_space_hzip_tst {
 		fxt.Test__bicode("~!{\"!", String_.Repeat(" ", 85));
 	}
 	@Test   public void Many() {
-		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
+		fxt.Test__bicode(gplx.langs.htmls.Html_utl.Replace_apos(String_.Concat_lines_nl_skip_last
 		( "  <div id='bodyContent' class='mw-body-content'>"
 		, "~!%<div id='siteSub'>a</div>"
 		, "~!%<div id='contentSub'></div>"
 		, "</div>"
-		), String_.Concat_lines_nl_skip_last
+		)), String_.Concat_lines_nl_skip_last
 		( "  <div id='bodyContent' class='mw-body-content'>"
 		, "    <div id='siteSub'>a</div>"
 		, "    <div id='contentSub'></div>"

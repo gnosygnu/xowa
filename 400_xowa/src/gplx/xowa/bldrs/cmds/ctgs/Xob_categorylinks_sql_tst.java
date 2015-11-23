@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.core.stores.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
 public class Xob_categorylinks_sql_tst {
 	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Ctor_fsys();} Db_mgr_fxt fxt = new Db_mgr_fxt();
 	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();} 

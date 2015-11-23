@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.core.stores.*;
 import gplx.dbs.*;
 public class Xof_lnki_time {
 	public static double	Db_save_double(double v) {return v;}

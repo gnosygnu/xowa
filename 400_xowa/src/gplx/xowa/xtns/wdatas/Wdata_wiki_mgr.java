@@ -181,7 +181,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		Xoapi_toggle_mgr toggle_mgr = app.Api_root().Html().Page().Toggle_mgr();
 		Xoapi_wikibase wikibase_api = app.Api_root().Xtns().Wikibase();
 		hwtr_mgr = new Wdata_hwtr_mgr();
-		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), Xoa_app_.Utl__encoder_mgr().Href(), toggle_mgr, app.Usere().Wiki().Xwiki_mgr());
+		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, toggle_mgr, app.Usere().Wiki().Xwiki_mgr());
 		this.Hwtr_msgs_make();
 		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 	}

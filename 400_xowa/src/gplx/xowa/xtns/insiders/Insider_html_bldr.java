@@ -46,7 +46,7 @@ public class Insider_html_bldr extends gplx.core.brys.Bfr_arg_base {
 	}
 	@Override public void Bfr_arg__add(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
-		Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href();
+		Gfo_url_encoder href_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href;
 		for (int i = 0; i < list_len; ++i) {
 			byte[] itm = (byte[])list.Get_at(i);
 			Xoa_ttl user_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__user, itm);

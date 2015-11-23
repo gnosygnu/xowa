@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import java.awt.Font;
 import java.awt.Toolkit;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.envs.*;
 public class FontAdp implements GfoInvkAble {
 	public String Name() {return name;} public FontAdp Name_(String val) {name = val; InitUnder(); return this;} private String name;
 	public float Size() {return size;} public FontAdp Size_(float val) {size = val; InitUnder(); return this;} float size;

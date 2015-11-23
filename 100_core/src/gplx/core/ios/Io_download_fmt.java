@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.brys.args.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.args.*; import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 public class Io_download_fmt {
 	private final Io_size_fmtr_arg size_fmtr_arg = new Io_size_fmtr_arg(), rate_fmtr_arg = new Io_size_fmtr_arg().Suffix_(Bry_.new_a7("ps"));
 	private final Bfr_arg__time prog_left_fmtr_arg = new Bfr_arg__time(); private final Bfr_arg__decimal_int prog_pct_fmtr_arg = new Bfr_arg__decimal_int().Places_(2);

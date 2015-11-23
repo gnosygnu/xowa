@@ -21,21 +21,21 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*; import gplx.langs.
 public class Xoh_gly_grp_parser implements Html_atr_class_wkr {
 	public int Rng_bgn() {return rng_bgn;} private int rng_bgn;
 	public int Rng_end() {return rng_end;} private int rng_end;
-	private Xoh_gly_itm_parser itm_parser = new Xoh_gly_itm_parser();
+//		private Xoh_gly_itm_parser itm_parser = new Xoh_gly_itm_parser();
 	public int Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, byte[] src, Html_tag_rdr tag_rdr, Html_tag ul_tag) {
 		this.rng_bgn = ul_tag.Src_bgn();
 		/*
 		parse class for traditional
 		parse style for max_width
 		*/
-		Html_tag cur_tag = null;
-		while (true) {
-			cur_tag = tag_rdr.Tag__move_fwd_head();
-			if (cur_tag.Name_id() != Html_tag_.Id__li) break;	// no more <li>; break;
-			itm_parser.Parse(hdoc_wkr, hctx, src, tag_rdr, cur_tag);
-		}
+//			Html_tag cur_tag = null;
+//			while (true) {
+//				cur_tag = tag_rdr.Tag__move_fwd_head();
+//				if (cur_tag.Name_id() != Html_tag_.Id__li) break;	// no more <li>; break;
+//				itm_parser.Parse(hdoc_wkr, hctx, src, tag_rdr, cur_tag);
+//			}
 //			hdoc_wkr.On_thm(this);
-		cur_tag = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__ul);
+		Html_tag cur_tag = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__ul);
 		this.rng_end = cur_tag.Src_end();
 		return rng_end;
 	}
@@ -45,4 +45,5 @@ public class Xoh_gly_grp_parser implements Html_atr_class_wkr {
 //			}
 		return false;
 	}
+	public static final byte[] Atr__class__gallery = Bry_.new_a7("gallery");
 }

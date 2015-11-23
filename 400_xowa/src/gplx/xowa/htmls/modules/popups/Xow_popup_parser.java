@@ -210,7 +210,7 @@ public class Xow_popup_parser {
 class Xow_popup_parser_ {
 	public static int Tmpl_bgn_get_(Xoae_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
 		int rv = Xop_parser_.Doc_bgn_bos; if (itm.Mode_all()) return rv;
-		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(Xoa_app_.Utl__encoder_mgr().Href().Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
+		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
 		if (anch == null) return rv;
 		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
 		return hdr_bgn == Bry_find_.Not_found ? rv : hdr_bgn;

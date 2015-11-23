@@ -22,7 +22,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.envs.*;
 public class ClipboardAdp_ {
 	public static void SetText(String text) {
 				StringSelection data = new StringSelection(text);		

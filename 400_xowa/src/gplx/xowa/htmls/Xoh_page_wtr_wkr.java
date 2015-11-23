@@ -21,7 +21,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; 
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
-public class Xoh_page_wtr_wkr extends gplx.core.brys.Bfr_arg_base {
+public class Xoh_page_wtr_wkr {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final Xoh_page_wtr_mgr mgr; private final byte page_mode;
 	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
@@ -44,14 +44,20 @@ public class Xoh_page_wtr_wkr extends gplx.core.brys.Bfr_arg_base {
 						break;
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
-				Bfr_arg__add(page_bfr);
-				Write_page_by_tid(view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
-				if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
-					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
-				wdata_lang_wtr.Page_(null);
+				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Html().Page().View_html_generates_hdump()) {
+					Write_body(page_bfr, Xoh_wtr_ctx.Hdump, page);
+					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+				}
+				else {
+					Write_body(page_bfr, Xoh_wtr_ctx.Basic, page);
+					Write_page_by_tid(view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
+					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
+						Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
+					wdata_lang_wtr.Page_(null);
+				}
 			}
 			else
-				Bfr_arg__add(bfr);
+				Write_body(bfr, Xoh_wtr_ctx.Basic, page);
 			this.page = null;
 			return bfr.To_bry_and_clear();
 		}
@@ -97,7 +103,6 @@ public class Xoh_page_wtr_wkr extends gplx.core.brys.Bfr_arg_base {
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, page);	// add after </head>
 		Xoh_page_wtr_wkr_.Bld_html_end(bfr, page);	// add after </html>
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {Write_body(bfr, Xoh_wtr_ctx.Basic, page);}
 	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page) {
 		synchronized (thread_lock_2) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
@@ -166,7 +171,7 @@ public class Xoh_page_wtr_wkr extends gplx.core.brys.Bfr_arg_base {
 			) {
 			app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
 			if (app.Ctg_mgr().Pagecats_grouping_enabled())
-				app.Ctg_mgr().Pagectgs_wtr().Write(bfr, wiki, page);
+				app.Ctg_mgr().Pagectgs_wtr().Write(bfr, wiki, page, hctx);
 			else
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}

@@ -445,7 +445,7 @@ public class Xoh_html_wtr {
 		bfr.Add_byte(quote_byte);
 	}
 	private static void Xnde_atr_write_id(Bry_bfr bfr, Xoae_app app, byte[] bry, int bgn, int end) {
-		Xoa_app_.Utl__encoder_mgr().Id().Encode(bfr, bry, bgn, end);
+		gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(bfr, bry, bgn, end);
 	}
 	private void Xnde_subs(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		int subs_len = xnde.Subs_len();

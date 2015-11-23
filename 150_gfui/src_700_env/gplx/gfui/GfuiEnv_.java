@@ -16,7 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.gfml.*; import gplx.langs.gfs.*;
+import gplx.gfml.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
+import gplx.core.envs.Env_;
+import gplx.core.envs.Op_sys;
+import gplx.core.envs.Process_adp;
 import gplx.core.threads.*;
 import java.awt.AWTKeyStroke;
 import java.awt.Font;
@@ -79,7 +82,7 @@ public class GfuiEnv_ {
 	public static IptCfg IptBndMgr_win;
 	public static void DoEvents() {;} 
 	public static void ShowMsg(String message) {javax.swing.JOptionPane.showMessageDialog(null, message, "", javax.swing.JOptionPane.INFORMATION_MESSAGE, null);}
-	public static void BringToFront(ProcessAdp process) {} 
+	public static void BringToFront(Process_adp process) {} 
 	public static void DoEvents(int milliseconds) {
 				Thread_adp_.Sleep(milliseconds);
 			}

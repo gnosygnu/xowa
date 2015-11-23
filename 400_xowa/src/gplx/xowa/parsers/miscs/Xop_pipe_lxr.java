@@ -42,6 +42,18 @@ public class Xop_pipe_lxr implements Xop_lxr {
 			case Xop_tkn_itm_.Tid_tblw_tr:
 				rv = Xop_tblw_lxr_ws.Make(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, Xop_tblw_wkr.Tblw_type_td, false);
 				if (rv == Xop_tblw_lxr_ws.Tblw_ws_cell_pipe) {
+					int prv_nl_pos = Bry_find_.Find_bwd(src, Byte_ascii.Nl, cur_pos - 1, 0); if (prv_nl_pos == -1) prv_nl_pos = 0;	// find prv nl
+					if (Bry_.Match(src, prv_nl_pos, prv_nl_pos + 3, Xop_tblw_lxr.Hook_tr)) {					// "\n|-" aka tblw_tr
+						int nl_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl, cur_pos, src_len); if (nl_pos == Bry_find_.Not_found) nl_pos = src_len;	
+						ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, nl_pos, Xop_ignore_tkn.Ignore_tid_tr_w_td));	// gobble up rest of content between "|" and "\n"; PAGE:lv.w:Starptautiska_kosmosa_stacija; DATE:2015-11-21
+						return nl_pos;
+					}
+					else {
+						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
+						return cur_pos;
+					}
+				}
+				if (rv == Xop_tblw_lxr_ws.Tblw_ws_cell_pipe) {
 					ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 					return cur_pos;
 				}

@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.core.envs.*;
 public class Xob_unzip_wkr {
-	private ProcessAdp decompress_bz2, decompress_zip, decompress_gz, process;
+	private Process_adp decompress_bz2, decompress_zip, decompress_gz, process;
 	public int Process_exit_code() {return process.Exit_code();}
-	public byte Process_run_mode() {return process_run_mode;} public Xob_unzip_wkr Process_run_mode_(byte v) {process_run_mode = v; return this;} private byte process_run_mode = ProcessAdp.Run_mode_async;
+	public byte Process_run_mode() {return process_run_mode;} public Xob_unzip_wkr Process_run_mode_(byte v) {process_run_mode = v; return this;} private byte process_run_mode = Process_adp.Run_mode_async;
 	public Xob_unzip_wkr Init(Xoae_app app) {return Init(app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz());}
-	public Xob_unzip_wkr Init(ProcessAdp decompress_bz2, ProcessAdp decompress_zip, ProcessAdp decompress_gz) {
+	public Xob_unzip_wkr Init(Process_adp decompress_bz2, Process_adp decompress_zip, Process_adp decompress_gz) {
 		this.decompress_bz2 = decompress_bz2;
 		this.decompress_zip = decompress_zip;
 		this.decompress_gz  = decompress_gz;

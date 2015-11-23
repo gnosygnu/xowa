@@ -66,7 +66,7 @@ public class Xoh_file_wtr__basic {
 			) {						
 			img_orig_src = img_view_src = Bry_.Empty;				// null out src
 		}
-		if		(lnki.Ns_id() == Xow_ns_.Tid__media)					// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
+		if		(lnki.Ns_id() == Xow_ns_.Tid__media)				// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
 			this.Write_file_ns_media(bfr, ctx, src, lnki, img_orig_src);
 		else {
 			if	(	Xof_ext_.Id_is_video_strict(orig_ext.Id())		// id is .ogv or .webm
@@ -78,10 +78,10 @@ public class Xoh_file_wtr__basic {
 						)
 					) {	
 				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
-				this.Write_file_video(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_view_src, img_orig_src, img_alt, xfer_itm);
+				this.Write_file_video(bfr, ctx, hctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_view_src, img_orig_src, img_alt, xfer_itm);
 			}
 			else if  (orig_ext.Id_is_audio())						// audio
-				this.Write_file_audio(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
+				this.Write_file_audio(bfr, ctx, hctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
 			else													// image
 				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_is_thumbable, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, orig_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		}
@@ -92,17 +92,17 @@ public class Xoh_file_wtr__basic {
 	private void Write_file_ns_media(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src) {
 		html_fmtr.Html_full_media(bfr, img_orig_src, lnki.Ttl().Page_txt(), Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
 	}
-	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
-		byte[] content = Arg_content_audio(lnki, ctx, src, uid, lnki_href, img_orig_src, alt);
+	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
+		byte[] content = Arg_content_audio(lnki, ctx, hctx, src, uid, lnki_href, img_orig_src, alt);
 		if (lnki.Media_icon())
 			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);
 		else
 			bfr.Add(content);
 	}
-	private void Write_file_video(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt, Xof_file_itm xfer_itm) {
+	private void Write_file_video(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt, Xof_file_itm xfer_itm) {
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
 		boolean video_is_thumb = Xop_lnki_type.Id_defaults_to_thumb(lnki.Lnki_type());
-		byte[] content = Arg_content_video(ctx, src, lnki, xfer_itm, uid, video_is_thumb, lnki_href, img_view_src, img_orig_src, alt);
+		byte[] content = Arg_content_video(ctx, hctx, src, lnki, xfer_itm, uid, video_is_thumb, lnki_href, img_view_src, img_orig_src, alt);
 		if (video_is_thumb)
 			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);
 		else
@@ -145,7 +145,7 @@ public class Xoh_file_wtr__basic {
 				byte[] link_ref = link_tkn.Dat_to_bry(src);
 				byte[] link_ref_new = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_ref, lnki_href);
 				link_ref = link_ref_new == null ? lnki_href: link_ref_new;	// if parse fails, then assign to lnki_href; EX:link={{{1}}}
-				link_ref = Xoa_app_.Utl__encoder_mgr().Href_quotes().Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
+				link_ref = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes.Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 				if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl();
 				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, link_ref, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			}
@@ -155,37 +155,37 @@ public class Xoh_file_wtr__basic {
 		tmp_bfr.Mkr_rls();
 	}
 	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
-		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, src, lnki) : Bry_.Empty;
+		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, hctx, src, lnki) : Bry_.Empty;
 		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
 		byte[] thumb = tmp_bfr.To_bry_and_clear();
-		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
+		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
 		return tmp_bfr.To_bry_and_rls();
 	}
-	private byte[] Arg_content_audio(Xop_lnki_tkn lnki, Xop_ctx ctx, byte[] src, int uid, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
+	private byte[] Arg_content_audio(Xop_lnki_tkn lnki, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, int uid, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
 		byte[] info_btn = Bry_.Empty;
 		if (lnki.Media_icon()) {
 			html_fmtr.Html_thumb_part_info(scratch_bfr, uid, lnki_href, html_mgr.Img_media_info_btn());
 			info_btn = scratch_bfr.To_bry_and_clear();
 		}
 		int play_btn_width = lnki.W(); if (play_btn_width < 1) play_btn_width = html_mgr.Img_thumb_width();	// if no width set width to default img width
-		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, src, lnki), Arg_play_btn(uid, play_btn_width, Play_btn_max_width, img_orig_src, lnki.Ttl().Page_txt()), info_btn);
+		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, hctx, src, lnki), Arg_play_btn(uid, play_btn_width, Play_btn_max_width, img_orig_src, lnki.Ttl().Page_txt()), info_btn);
 		return scratch_bfr.To_bry_and_clear();
 	}
-	private byte[] Arg_content_video(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_thumb, byte[] a_href, byte[] view_src, byte[] orig_src, byte[] img_alt) {
+	private byte[] Arg_content_video(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_thumb, byte[] a_href, byte[] view_src, byte[] orig_src, byte[] img_alt) {
 		int thumb_w = xfer_itm.Html_w();
 		int play_btn_width = thumb_w; if (play_btn_width < 1) play_btn_width = wiki.Html_mgr().Img_thumb_width();
 		byte[] caption_html = Bry_.Empty, alt_html = Bry_.Empty;
 		if (lnki_thumb) {
-			caption_html = Arg_caption_div(ctx, src, lnki, uid, orig_src, a_href);
-			alt_html = Arg_alt_html(ctx, src, lnki);
+			caption_html = Arg_caption_div(ctx, hctx, src, lnki, uid, orig_src, a_href);
+			alt_html = Arg_alt_html(ctx, hctx, src, lnki);
 		}
 		html_fmtr.Html_thumb_file_video(scratch_bfr, Arg_play_btn(uid, play_btn_width, play_btn_width, orig_src, lnki.Ttl().Page_txt()), html_fmtr.Html_thumb_part_img(scratch_bfr, page, xfer_itm, lnki, uid, a_href, view_src, img_alt), caption_html, alt_html);
 		return scratch_bfr.To_bry_and_clear();
 	}
-	private byte[] Arg_caption_div(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, byte[] img_orig_src, byte[] lnki_href) {
-		Bfr_arg caption = Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki);
+	private byte[] Arg_caption_div(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, byte[] img_orig_src, byte[] lnki_href) {
+		Bfr_arg caption = Arg_caption(ctx, src, hctx, lnki);
 		byte[] magnify_btn = Bry_.Empty;
 		if (lnki.Media_icon()) {
 			if (msg_file_enlarge == null) msg_file_enlarge = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_file_enlarge);
@@ -205,9 +205,9 @@ public class Xoh_file_wtr__basic {
 		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 
 	}		
-	private byte[] Arg_alt_html(Xop_ctx ctx, byte[] alt_src, Xop_lnki_tkn lnki) {
+	private byte[] Arg_alt_html(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] alt_src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
-		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Basic, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr());
+		media_alt_fmtr.Set(ctx, hctx, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr());
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 

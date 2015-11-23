@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 public class Html_utl {
-	private static final Url_encoder encoder_id = Url_encoder.new_html_id_(); private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private static final Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id; private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
 		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
@@ -178,4 +178,9 @@ public class Html_utl {
 		return bfr.To_bry_and_clear();
 	}
 	public static String Replace_apos(String s) {return String_.Replace(s, "'", "\"");}
+	public static void Log(Exception e, String head, byte[] page_url, byte[] src, int pos) {
+		Err err = Err_.cast_or_make(e); if (err.Logged()) return;
+		String msg = String_.Format("{0}; page={1} err={2} mid={3} trace={4}", head, page_url, Err_.To_str(e), Bry_.Escape_ws(Bry_.Mid_by_len_safe(src, pos, 255)), err.To_str__log());
+		Gfo_usr_dlg_.Instance.Warn_many("", "", msg);
+	}
 }

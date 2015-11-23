@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
-import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*;
+import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_tag_parser implements Html_doc_wkr {
 	private final Xoh_hdoc_wkr hdoc_wkr;
@@ -26,11 +26,12 @@ public class Xoh_tag_parser implements Html_doc_wkr {
 	private final Xoh_hdr_parser		wkr__hdr = new Xoh_hdr_parser();
 	private final Xoh_lnki_parser	wkr__lnki = new Xoh_lnki_parser();	private final Xoh_lnke_parser		wkr__lnke = new Xoh_lnke_parser();
 	private final Xoh_img_parser		wkr__img = new Xoh_img_parser();	private final Xoh_thm_parser			wkr__thm = new Xoh_thm_parser();
+	private final Xoh_gly_grp_parser	wkr__gly = new Xoh_gly_grp_parser();
 	private Xoh_hdoc_ctx hctx;
 	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
 	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {this.hdoc_wkr = hdoc_wkr;}
 	public void Init(Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
-		this.hctx = hctx; tag_rdr.Init(src, src_bgn, src_end);
+		this.hctx = hctx; tag_rdr.Init(hctx.Page__url(), src, src_bgn, src_end);
 	}
 	public int Parse(byte[] src, int src_bgn, int src_end, int pos) {
 		tag_rdr.Pos_(pos);
@@ -54,16 +55,28 @@ public class Xoh_tag_parser implements Html_doc_wkr {
 					nxt = tag_rdr.Tag__peek_fwd_head();
 					if		(nxt.Name_id() == Html_tag_.Id__img) {
 						int rv = wkr__img.Parse(hdoc_wkr, hctx, src, tag_rdr, cur);
-						hdoc_wkr.On_img(wkr__img);
-						return rv;
+						if (rv != Xoh_hdoc_ctx.Invalid) {
+							hdoc_wkr.On_img(wkr__img);
+							return rv;
+						}
 					}
-					else if	(cur.Atrs__match_pair(Html_atr_.Bry__rel		, Xoh_lnke_parser.Bry__rel__nofollow))
+					else if	(cur.Atrs__match_pair(Html_atr_.Bry__rel		, Xoh_lnke_dict_.Html__rel__nofollow))
 						return wkr__lnke.Parse(hdoc_wkr, tag_rdr, cur);
 					else
 						return wkr__lnki.Parse(hdoc_wkr, hctx, src, tag_rdr, cur, hctx.Wiki__ttl_parser());
+					break;
 				case Html_tag_.Id__div:
-					if		(cur.Atrs__cls_has(Xoh_thm_parser.Atr__class__thumb))
-						return wkr__thm.Parse(hdoc_wkr, hctx, src, tag_rdr, cur);
+					if		(cur.Atrs__cls_has(Xoh_thm_parser.Atr__class__thumb)) {
+						int rv = wkr__thm.Parse(hdoc_wkr, hctx, src, tag_rdr, cur);
+						if (rv != Xoh_hdoc_ctx.Invalid) return rv;
+					}
+					break;
+				case Html_tag_.Id__ul:
+					if		(cur.Atrs__cls_has(Xoh_gly_grp_parser.Atr__class__gallery)) {
+						int rv = wkr__gly.Parse(hdoc_wkr, hctx, src, tag_rdr, cur);
+						hdoc_wkr.On_gly(wkr__gly);
+						if (rv != Xoh_hdoc_ctx.Invalid) return rv;
+					}
 					break;
 			}
 			hdoc_wkr.On_txt(pos, cur.Src_end());

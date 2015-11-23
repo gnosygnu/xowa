@@ -44,7 +44,7 @@ public class Xoh_page implements Xoa_page {
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
-	public byte[]					Url_bry_safe()		{return page_url == null ? Bry_.Empty : page_url.Raw();}
+	public byte[]					Url_bry_safe()		{return page_url == null ? Bry_.Empty : page_url.To_bry(Bool_.Y, Bool_.Y);}
 	public void Init(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
@@ -56,6 +56,7 @@ public class Xoh_page implements Xoa_page {
 	public Xoh_page Ctor_by_page(Bry_bfr tmp_bfr, Xoae_page page) {
 		this.page_id = page.Revision_data().Id();
 		this.body = page.Hdump_data().Body();
+		this.page_url = page.Url();
 		Xopg_html_data html_data = page.Html_data();
 		Xoh_head_mgr mod_mgr = html_data.Head_mgr();	
 		head_mgr.Init(mod_mgr.Itm__mathjax().Enabled(), mod_mgr.Itm__popups().Bind_hover_area(), mod_mgr.Itm__gallery().Enabled(), mod_mgr.Itm__hiero().Enabled());
@@ -64,7 +65,7 @@ public class Xoh_page implements Xoa_page {
 		this.sidebar_div = Xoh_page_.Save_sidebars(tmp_bfr, page, html_data);
 		return this;
 	}
-	private void Clear() {
+	public void Clear() {
 		this.body_zip_tid = -1; this.body_hzip_tid = -1;
 		display_ttl = content_sub = sidebar_div = Bry_.Empty;
 		img_itms = Xohd_img_itm__base.Ary_empty;

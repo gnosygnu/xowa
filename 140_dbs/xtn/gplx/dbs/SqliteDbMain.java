@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs;
-import gplx.*; import gplx.core.consoles.*; import gplx.dbs.engines.sqlite.*;
+import gplx.*; import gplx.core.consoles.*; import gplx.core.envs.Env_;
+import gplx.dbs.engines.sqlite.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;

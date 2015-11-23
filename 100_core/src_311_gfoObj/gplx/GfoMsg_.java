@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.primitives.*; import gplx.core.strings.*;
+import gplx.core.primitives.*; import gplx.core.strings.*; import gplx.core.brys.*;
 public class GfoMsg_ {
 	public static GfoMsg as_(Object obj) {return obj instanceof GfoMsg ? (GfoMsg)obj : null;}
 	public static final GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);

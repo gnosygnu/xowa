@@ -73,7 +73,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 	private static final byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
 	private static final byte[] Collation_uca = Bry_.new_a7("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
 }
-class Xoctg_link_sql_sorter implements gplx.lists.ComparerAble {
+class Xoctg_link_sql_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Io_sort_split_itm lhs = (Io_sort_split_itm)lhsObj, rhs = (Io_sort_split_itm)rhsObj;
 		byte[] lhs_bry = lhs.Bfr(); int lhs_bgn = 0, lhs_end = lhs.Row_bgn() - 1;

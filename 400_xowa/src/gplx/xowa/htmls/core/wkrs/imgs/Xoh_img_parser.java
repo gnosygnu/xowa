@@ -16,47 +16,52 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.core.primitives.*; import gplx.core.brys.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 public class Xoh_img_parser {		
 	private byte[] src;
-	public int Rng_bgn() {return rng_bgn;} private int rng_bgn;
-	public int Rng_end() {return rng_end;} private int rng_end;
-	public int Anch_tag_bgn() {return anch_tag_bgn;} private int anch_tag_bgn;
-	public int Anch_tag_end() {return anch_tag_end;} private int anch_tag_end;
-	public Xoh_anch_href_parser Anch_href_parser() {return anch_href_parser;} private Xoh_anch_href_parser anch_href_parser = new Xoh_anch_href_parser();
-	public Xoh_anch_cls_parser Anch_cls_parser() {return anch_cls_parser;} private Xoh_anch_cls_parser anch_cls_parser = new Xoh_anch_cls_parser();
-	public Xoh_img_src_parser Img_src_parser() {return img_src_parser;} private final Xoh_img_src_parser img_src_parser = new Xoh_img_src_parser();
-	public Xoh_img_cls_parser Img_cls_parser() {return img_cls_parser;} private final Xoh_img_cls_parser img_cls_parser = new Xoh_img_cls_parser();
-	public Xoh_img_xoimg_parser Img_xoimg_parser() {return img_xoimg_parser;} private Xoh_img_xoimg_parser img_xoimg_parser = new Xoh_img_xoimg_parser();
-	public Html_atr Anch_title_atr() {return anch_title_atr;} private Html_atr anch_title_atr;
-	public Html_atr Img_alt_atr() {return img_alt_atr;} private Html_atr img_alt_atr;
-	public boolean Img_alt__diff__anch_title() {return !Bry_.Match(src, img_alt_atr.Val_bgn(), img_alt_atr.Val_end(), src, anch_title_atr.Val_bgn(), anch_title_atr.Val_end());}
-	public int Img_w() {return img_w;} private int img_w;
-	public boolean Img_w_exists() {return img_w != -1;}
-	public int Img_h() {return img_h;} private int img_h;
-	public boolean File_w__diff__img_w() {return img_src_parser.File_w() != img_w;}
-	public int Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, byte[] src, Html_tag_rdr tag_rdr, Html_tag anch_tag) {
-		// "<a href='/wiki/File:A.png' class='image'><img alt='' src='file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png' width='220' height='110' class='thumbimage'></a>"
-		this.src = src; this.anch_tag_bgn = anch_tag.Src_bgn(); this.anch_tag_end = anch_tag.Src_end();
-		this.rng_bgn = anch_tag_bgn;																	// <a
-		this.anch_title_atr = anch_tag.Atrs__get_by_or_empty(Html_atr_.Bry__title);						// title='abc'
-		anch_cls_parser.Parse(tag_rdr.Rdr(), src, anch_tag);											// class='image'
-		anch_href_parser.Parse(tag_rdr.Rdr(), hctx.Wiki__ttl_parser(), anch_tag);						// href='/wiki/File:A.png'
-		Html_tag img_tag = tag_rdr.Tag__move_fwd_head().Chk_id(Html_tag_.Id__img);						// <img>
-		img_xoimg_parser.Parse(tag_rdr.Rdr(), src, img_tag);											// data-xoimg='...'
-		this.img_w = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__width, Xof_img_size.Size__neg1);		// width='220'
-		this.img_h = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__height, Xof_img_size.Size__neg1);		// height='110'
-		this.img_alt_atr = img_tag.Atrs__get_by_or_empty(Html_atr_.Bry__alt);							// alt='File:A.png'
-		img_cls_parser.Parse(tag_rdr.Rdr(), src, img_tag);												// class='thumbborder'
-		img_src_parser.Parse(tag_rdr.Rdr(), hctx.Wiki__domain_bry(), img_tag);							// src='...'
-		Html_tag anch_tail_tag = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__a);							// </a>
-		this.rng_end = anch_tail_tag.Src_end();
+	public int						Rng_bgn() {return rng_bgn;} private int rng_bgn;
+	public int						Rng_end() {return rng_end;} private int rng_end;
+	public Xoh_anch_href_parser		Anch_href() {return anch_href;} private Xoh_anch_href_parser anch_href = new Xoh_anch_href_parser();
+	public Xoh_anch_cls_parser		Anch_cls() {return anch_cls;} private Xoh_anch_cls_parser anch_cls = new Xoh_anch_cls_parser();
+	public Html_atr					Anch_title() {return anch_title;} private Html_atr anch_title;
+	public Bry_obj_ref				Anch_page() {return anch_page;} private Bry_obj_ref anch_page = Bry_obj_ref.New_empty();
+	public Xoh_img_src_parser		Img_src() {return img_src;} private final Xoh_img_src_parser img_src = new Xoh_img_src_parser();
+	public Xoh_img_cls_parser		Img_cls() {return img_cls;} private final Xoh_img_cls_parser img_cls = new Xoh_img_cls_parser();
+	public Xoh_img_xoimg_parser		Img_xoimg() {return img_xoimg_parser;} private Xoh_img_xoimg_parser img_xoimg_parser = new Xoh_img_xoimg_parser();
+	public Html_atr					Img_alt() {return img_alt;} private Html_atr img_alt;
+	public boolean						Img_alt__diff__anch_title() {return !Bry_.Match(src, img_alt.Val_bgn(), img_alt.Val_end(), src, anch_title.Val_bgn(), anch_title.Val_end());}
+	public int						Img_w() {return img_w;} private int img_w;
+	public int						Img_h() {return img_h;} private int img_h;
+	public boolean						Img_w__diff__file_w() {return img_w != img_src.File_w();}
+	public int Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, byte[] src, Html_tag_rdr tag_rdr, Html_tag anch_head) {
+		this.src = src; Bry_rdr rdr = tag_rdr.Rdr();
+		this.rng_bgn = anch_head.Src_bgn();																		// <a
+		if (!anch_href.Parse(rdr, hctx.App(), hctx.Wiki__ttl_parser(), anch_head)) return Xoh_hdoc_ctx.Invalid;	// href='/wiki/File:A.png'
+		if (!anch_cls.Parse(rdr, src, anch_head)) return Xoh_hdoc_ctx.Invalid;									// class='image'
+		this.anch_title = anch_head.Atrs__get_by_or_empty(Html_atr_.Bry__title);								// title='abc'
+		Html_atr xowa_title = anch_head.Atrs__get_by_or_empty(Bry__atr__xowa_title);							// xowa_title='A.png'
+		if (xowa_title.Val_dat_exists()) anch_page.Val_(xowa_title.Val());
+		Html_tag img_tag = tag_rdr.Tag__move_fwd_head().Chk_id(Html_tag_.Id__img);								// <img
+		img_xoimg_parser.Parse(rdr, src, img_tag);																// data-xoimg='...'
+		this.img_w = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__width, Xof_img_size.Size__neg1);				// width='220'
+		this.img_h = img_tag.Atrs__get_as_int_or(Html_atr_.Bry__height, Xof_img_size.Size__neg1);				// height='110'
+		this.img_alt = img_tag.Atrs__get_by_or_empty(Html_atr_.Bry__alt);										// alt='File:A.png'
+		img_cls.Parse(rdr, src, img_tag);																		// class='thumbborder'
+		if (!img_src.Parse(rdr, hctx.Wiki__domain_bry(), img_tag)) return Xoh_hdoc_ctx.Invalid;					// src='...'
+		if (anch_page.Val_is_empty()) {
+			anch_page.Val_(img_src.File_ttl_bry());
+			if (anch_page.Val_is_empty())
+				anch_page.Val_(anch_href.Page_ttl().Page_db());
+		}
+		Html_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__a);										// </a>
+		this.rng_end = anch_tail.Src_end();
 		return rng_end;
 	}
 	public static final byte[]
 	  Bry__cls__anch__image			= Bry_.new_a7("image")
 	, Bry__cls__img__thumbimage		= Bry_.new_a7("thumbimage")
+	, Bry__atr__xowa_title			= Bry_.new_a7("xowa_title")
 	;
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+import gplx.core.envs.Op_sys;
 import gplx.core.net.*; import gplx.core.threads.*; import gplx.langs.htmls.encoders.*;
 import java.io.*;
 import java.net.*;
@@ -72,7 +73,7 @@ class Http_server_wkr_v1 implements Runnable{
 			else if(req.contains("%file%")){
 				String path = req.replace("/%file%/", app_root_dir); err_line = "19";
 				path = path.substring(path.indexOf(app_root_dir)+5); err_line = "20";
-				Url_encoder url_converter = Url_encoder.new_http_url_(); err_line = "21";
+				Gfo_url_encoder url_converter = Gfo_url_encoder_.Http_url; err_line = "21";
 				path = url_converter.Decode_str(path); err_line = "22";
 				if(path.contains("?")){
 					path = path.substring(0, path.indexOf("?")); err_line = "23";
@@ -100,7 +101,7 @@ class Http_server_wkr_v1 implements Runnable{
 					for(int i = 4; i <= req_split.length-1; i++){
 						page_name += "/"+req_split[i]; err_line = "36";
 					}
-					Url_encoder url_converter = Url_encoder.new_http_url_(); err_line = "37";
+					Gfo_url_encoder url_converter = Gfo_url_encoder_.Http_url; err_line = "37";
 					page_name = url_converter.Decode_str(page_name); err_line = "38";
 					//page_name = app.Url_converter_url().Decode_str(page_name);
 				}

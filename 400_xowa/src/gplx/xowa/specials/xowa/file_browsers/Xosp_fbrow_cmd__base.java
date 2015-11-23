@@ -27,8 +27,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	public abstract Xosp_fbrow_cmd Make_new();
 	public Xosp_fbrow_rslt Write_html(Xoa_url_arg_mgr arg_mgr, GfoInvkAble select_invkable) {
 		// app.I18n_mgr_Get_txt_many("xowa.specials.file_browsers.errs.unknown_path", url.Raw());
-		Url_encoder encoder = Url_encoder.new_html_href_mw_();
-		Xosp_fbrow_html html_wtr = new Xosp_fbrow_html(encoder);
+		Xosp_fbrow_html html_wtr = new Xosp_fbrow_html();
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 		String selected_str = arg_mgr.Read_str_or_null("selected");
 		if (selected_str == null) {
@@ -98,8 +97,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	;
 }
 class Xosp_fbrow_html extends gplx.core.brys.Bfr_arg_base {
-	private final Url_encoder encoder; private Xosp_fbrow_data_dir dir; private byte[] cmd_src;
-	public Xosp_fbrow_html(Url_encoder encoder) {this.encoder = encoder;}
+	private final Gfo_url_encoder encoder = Gfo_url_encoder_.Href; private Xosp_fbrow_data_dir dir; private byte[] cmd_src;
 	public void Write(Bry_bfr bfr, byte[] cmd_src, byte[] cmd_row, Xosp_fbrow_data_dir dir) {
 		this.dir = dir; this.cmd_src = cmd_src;
 		// app.I18n_mgr_Get_txt_none("xowa.specials.file_browsers.html.hdr.name");

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys; import gplx.*; import gplx.core.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class Bry_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;

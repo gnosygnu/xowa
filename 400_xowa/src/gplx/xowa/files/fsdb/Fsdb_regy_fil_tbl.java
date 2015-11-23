@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.stores.*;
 import gplx.dbs.*;
 class Fsdb_regy_fil_tbl {
 	public Fsdb_regy_fil_itm Select(String name, boolean is_orig, int w, int thumbtime) {

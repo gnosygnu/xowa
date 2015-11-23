@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.lists.*; /*Ordered_hash_base*/ import gplx.langs.dsvs.*; /*DsvStoreLayout*/ import gplx.core.gfo_ndes.*;
+import gplx.core.lists.*; /*Ordered_hash_base*/ import gplx.langs.dsvs.*; /*DsvStoreLayout*/ import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*; import gplx.core.stores.*;
 public class TdbTableList extends Ordered_hash_base {
 	public TdbTable Get_by(String name) {return TdbTable.as_(Fetch_base(name));}
 	public TdbTable Get_by_or_fail(String name) {

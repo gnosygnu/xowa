@@ -52,7 +52,7 @@ public class Xoh_lnki_wtr {
 		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
 		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
 			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_mgr().Xwiki_domain_tid()	// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
-			&&	xwiki_lang.Show_in_sitelangs(wiki.Domain_itm().Lang_orig_key())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
+			&&	xwiki_lang.Show_in_sitelangs(wiki.Domain_itm().Lang_orig_key())	// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {
 			Wdata_sitelink_itm slink = new Wdata_sitelink_itm(xwiki_lang.Abrv_wm(), xwiki_lang.Domain_name(), null).Page_ttl_(lnki_ttl);
@@ -109,7 +109,7 @@ public class Xoh_lnki_wtr {
 			}
 			if (cfg.Lnki__title()) {
 				bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
-				byte[] lnki_title_bry = lnki_ttl.Page_txt();		// 'Abcd'		NOTE: use Page_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire
+				byte[] lnki_title_bry = lnki_ttl.Full_txt();		// 'Abcd'		NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
 				Html_utl.Escape_html_to_bfr(bfr, lnki_title_bry, 0, lnki_title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
 			}
 			if (!hctx.Mode_is_hdump()) {							// don't write visited for hdump

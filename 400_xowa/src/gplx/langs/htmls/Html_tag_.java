@@ -34,6 +34,7 @@ public class Html_tag_ {
 	, Id__ul		= 11
 	, Id__li		= 12
 	, Id__p			= 13
+	, Id__hr		= 14
 	;
 	public static final byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -49,6 +50,8 @@ public class Html_tag_ {
 	.Add_str_int("span"			, Id__span)
 	.Add_str_int("div"			, Id__div)
 	.Add_str_int("img"			, Id__img)
+	.Add_str_int("hr"			, Id__hr)
+	.Add_str_int("ul"			, Id__ul)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -65,6 +68,7 @@ public class Html_tag_ {
 			case Id__span:			return "span";
 			case Id__div:			return "div";
 			case Id__img:			return "img";
+			case Id__hr:			return "hr";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

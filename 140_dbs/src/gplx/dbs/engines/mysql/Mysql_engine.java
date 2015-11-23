@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mysql; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*;
+import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*;
 import java.sql.*; 
 public class Mysql_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Mysql_conn_info.Tid_const;}

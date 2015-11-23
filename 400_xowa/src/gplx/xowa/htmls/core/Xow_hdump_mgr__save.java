@@ -48,7 +48,7 @@ public class Xow_hdump_mgr__save {
 	private static byte[] Write(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1) {
 			hzip_mgr.Encode(bfr.Clear(), wiki, hpg, src);
-			src = bfr.To_bry_and_rls();
+			src = bfr.To_bry_and_clear();
 		}
 		if (zip_tid > gplx.core.ios.Io_stream_.Tid_raw)
 			src = zip_mgr.Zip((byte)zip_tid, src);

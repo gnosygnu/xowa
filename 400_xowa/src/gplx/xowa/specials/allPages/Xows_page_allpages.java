@@ -90,7 +90,7 @@ public class Xows_page_allpages extends gplx.core.brys.Bfr_arg_base implements G
 		init_ns = wiki.Ns_mgr().Ns_main();
 		arg_hash.Load(url.Qargs_ary());
 		byte[] from_val = Get_from(arg_hash, wiki, url, ttl); if (from_val == null) return false;
-		from_val = Xoa_app_.Utl__encoder_mgr().Id().Decode(from_val);
+		from_val = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Decode(from_val);
 		int ns_val = arg_hash.Get_val_int_or(Bry_arg_ns, init_ns.Id()); init_ns = wiki.Ns_mgr().Ids_get_or_null(ns_val);
 		boolean hide_redirects_val = arg_hash.Get_val_int_or(Bry_arg_hideredirects, 0) == 1; 
 		for (int i = 0; i < itms_per_page; i++)
@@ -135,7 +135,7 @@ public class Xows_page_allpages extends gplx.core.brys.Bfr_arg_base implements G
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512().Mkr_rls();
 		byte[] lbl_text = msg_itm.Fmt(tmp_bfr, ttl.Full_txt());
 		byte[] args__rest = arg_hash.Concat(tmp_bfr, Bry_arg_ns, Bry_arg_hideredirects);
-		byte[] arg_from = Xoa_app_.Utl__encoder_mgr().Id().Encode(ttl.Page_txt_wo_qargs());
+		byte[] arg_from = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(ttl.Page_txt_wo_qargs());
 		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
 	}
 	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xowd_page_itm itm) {

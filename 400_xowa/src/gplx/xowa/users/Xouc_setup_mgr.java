@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 public class Xouc_setup_mgr implements GfoInvkAble {
 	public Xouc_setup_mgr(Xoue_user user) {this.user = user;}
 	public Xoue_user User() {return user;} private Xoue_user user;
@@ -45,7 +46,7 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 	}
 	private boolean Run(String exe, String arg) {
 		boolean pass = false; String fail = "";
-		try {pass = new ProcessAdp().Exe_url_(Io_url_.new_fil_(exe)).Args_str_(arg).Run_wait_sync().Exit_code_pass();}
+		try {pass = new Process_adp().Exe_url_(Io_url_.new_fil_(exe)).Args_str_(arg).Run_wait_sync().Exit_code_pass();}
 		catch (Exception e) {
 			fail = Err_.Message_gplx_full(e);
 		}

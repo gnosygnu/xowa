@@ -21,7 +21,7 @@ import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.xwikis.*;
 public class Xoh_href_wtr {
 	private final Bry_bfr encoder_bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255);
-	private final Url_encoder encoder = Xoa_app_.Utl__encoder_mgr().Href(); 
+	private final Gfo_url_encoder encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href; 
 	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
 		synchronized (tmp_bfr) {
 			Build_to_bfr(tmp_bfr, wiki.App(), wiki.Domain_bry(), ttl, Bool_.N);

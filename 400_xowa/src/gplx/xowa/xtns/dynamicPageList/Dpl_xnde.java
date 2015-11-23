@@ -119,7 +119,7 @@ class Dpl_page_finder {
 			int itms_len = ctg_mgr.Total();
 			for (int i = 0; i < itms_len; i++) {
 				Xoctg_view_itm ctg_itm = ctg_mgr.Itms()[i];					
-				int ctg_itm_id = ctg_itm.Id();
+				int ctg_itm_id = ctg_itm.Page_id();
 				if (list.Has(tmp_id.Val_(ctg_itm_id))) continue;
 				list.Add(Int_obj_ref.new_(ctg_itm_id), ctg_itm);
 //					if (ctg_tid == Xoa_ctg_mgr.Tid_subc) {	// recurse subcategories
@@ -148,12 +148,12 @@ class Dpl_page_finder {
 		for (int j = 0; j < found_len; j++) {			// if new_page is in cur, add it
 			Xoctg_view_itm cur_itm = (Xoctg_view_itm)cur_regy.Get_at(j);
 			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_itm.Ttl().Ns().Id()) continue;
-			tmp_id.Val_(cur_itm.Id());					// set tmp_id, since it will be used at least once
+			tmp_id.Val_(cur_itm.Page_id());				// set tmp_id, since it will be used at least once
 			if (exclude_pages.Has(tmp_id)) continue;	// ignore excluded pages
 			if (i != 0) {								// skip logic for first ctg (which doesn't have a predecessor)
 				if (!old_regy.Has(tmp_id)) continue;	// cur_itm not in old_regy; ignore
 			}
-			new_regy.Add_as_key_and_val(Int_obj_ref.new_(cur_itm.Id()));
+			new_regy.Add_as_key_and_val(Int_obj_ref.new_(cur_itm.Page_id()));
 		}
 	}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.ios.*; import gplx.core.net.*;
+import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.net.*;
 import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apps.apis.*;
 import gplx.xowa.apps.gfs.*;
@@ -51,7 +51,6 @@ public interface Xoa_app extends GfoInvkAble {
 	boolean					Bldr__running(); void Bldr__running_(boolean v);
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
-	Url_encoder_mgr			Utl__encoder_mgr();
 	Json_parser				Utl__json_parser();
 	Gfo_inet_conn			Utl__inet_conn();
 	Xoa_meta_mgr			Meta_mgr();

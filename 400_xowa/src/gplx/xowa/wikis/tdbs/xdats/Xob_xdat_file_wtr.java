@@ -115,8 +115,8 @@ public class Xob_xdat_file_wtr {
 	private static final byte Dlm_fld = Byte_ascii.Pipe;		
 }
 class SortAlgo_quick {// quicksort
-	Object[] ary; int ary_len; gplx.lists.ComparerAble comparer;
-	public void Sort(Object[] ary, int ary_len, gplx.lists.ComparerAble comparer) {
+	Object[] ary; int ary_len; gplx.core.lists.ComparerAble comparer;
+	public void Sort(Object[] ary, int ary_len, gplx.core.lists.ComparerAble comparer) {
 		if (ary == null || ary_len < 2) return;
 		this.ary = ary; this.ary_len = ary_len; this.comparer = comparer;
 		Sort_recurse(0, ary_len - 1);

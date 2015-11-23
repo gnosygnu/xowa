@@ -19,7 +19,7 @@ package gplx.core.security; import gplx.*; import gplx.core.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import gplx.core.consoles.*;
+import gplx.core.consoles.*; import gplx.core.stores.*;
 import gplx.core.ios.*; /*IoStream*/import gplx.core.texts.*; /*Base32Converter*/
 public class HashAlgo_ {
 	public static final HashAlgo Null = new HashAlgo_null();

@@ -48,6 +48,6 @@ class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
 	, ",        {0}"
 	, ",        p.page_redirect_id"
 	, "FROM     page p"
-	, "         JOIN <attach_db>html_page h ON p.page_id = h.page_id"
+	, "         JOIN <attach_db>html h ON p.page_id = h.page_id"
 	);
 }

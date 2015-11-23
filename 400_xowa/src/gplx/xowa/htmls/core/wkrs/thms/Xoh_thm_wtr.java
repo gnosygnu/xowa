@@ -28,6 +28,7 @@ public class Xoh_thm_wtr extends gplx.core.brys.Bfr_arg_base {
 	, div_2_href	= new Bfr_arg__html_atr(Html_atr_.Bry__href)
 	;
 	private final Bfr_arg__bry_ary div_2_magnify = new Bfr_arg__bry_ary();
+	private final Bfr_arg__bry div_2_alt = new Bfr_arg__bry(Bry_.Empty);
 	private Bfr_arg div_1_img = Bfr_arg_.Noop, div_2_capt = Bfr_arg_.Noop;
 	public Xoh_thm_wtr Div_0_align_(int v)					{div_0_align.Val_(gplx.xowa.parsers.lnkis.Xop_lnki_align_h_.To_bry(v)); return this;}
 	public Xoh_thm_wtr Div_1_id_(int v)						{div_1_id.Set_by_arg(div_1_id_val.Set(Prefix__div_id, v)); return this;}
@@ -36,26 +37,41 @@ public class Xoh_thm_wtr extends gplx.core.brys.Bfr_arg_base {
 	public Xoh_thm_wtr Div_2_href_(Bfr_arg v)				{div_2_href.Set_by_arg(v); return this;}
 	public Xoh_thm_wtr Div_2_magnify_(byte[]... v)	{div_2_magnify.Set(v); return this;}
 	public Xoh_thm_wtr Div_2_capt_(Bfr_arg v)				{div_2_capt = v; return this;}
+	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	public Xoh_thm_wtr Div_2_alt_(boolean v, byte[] img_alt_bry) {
+		if (v) {
+//				img_alt.Bfr_arg__add(tmp_bfr);
+//				byte[] img_alt_bry = tmp_bfr.To_bry_and_clear();
+			alt_fmtr.Bld_bfr_many(tmp_bfr, img_alt_bry);
+			div_2_alt.Set(tmp_bfr.To_bry_and_clear());
+		}
+		return this;
+	}
 	public Xoh_thm_wtr Clear() {
-		Bfr_arg_.Clear(div_0_align, div_1_id, div_1_width, div_1_img, div_2_href, div_2_magnify, div_2_capt);
+		Bfr_arg_.Clear(div_0_align, div_1_id, div_1_width, div_1_img, div_2_href, div_2_magnify, div_2_capt, div_2_alt);
 		return this;
 	}
 	@Override public void Bfr_arg__add(Bry_bfr bfr) {
-		fmtr.Bld_bfr_many(bfr, div_0_align, div_1_id, div_1_width, div_1_img, div_2_href, div_2_magnify, div_2_capt);
+		fmtr.Bld_bfr_many(bfr, div_0_align, div_1_id, div_1_width, div_1_img, div_2_href, div_2_magnify, div_2_capt, div_2_alt);
 	}
 	public static final byte[] Prefix__div_id = Bry_.new_a7("xothm_");
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"thumb t~{div_0_align}\">"
 	, "  <div~{div_1_id} class=\"thumbinner\" style=\"width:~{div_1_width}px;\">"
-	, "~{div_1_img}"
+	, "    ~{div_1_img}"
 	, "    <div class=\"thumbcaption\">"
 	, "      <div class=\"magnify\">"
-	, "        <a~{div_2_href} class=\"@gplx.Internal protected\" title=\"Enlarge\">"
-	, "          <img src=\"~{div_2_magnify}\" width=\"15\" height=\"11\" alt=\"\">"
-	, "        </a>"
+	, "        <a~{div_2_href} class=\"internal\" title=\"Enlarge\"><img src=\"~{div_2_magnify}\" width=\"15\" height=\"11\" alt=\"\"></a>"
 	, "      </div>~{div_2_capt}"
-	, "    </div>"
+	, "    </div>~{div_2_alt}"
 	, "  </div>"
 	, "</div>"
-	), "div_0_align", "div_1_id", "div_1_width", "div_1_img", "div_2_href", "div_2_magnify", "div_2_capt");
+	), "div_0_align", "div_1_id", "div_1_width", "div_1_img", "div_2_href", "div_2_magnify", "div_2_capt", "div_2_alt");
+	private static final Bry_fmtr alt_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( ""
+	, "    <hr>"
+	, "    <div class=\"thumbcaption\">"
+	, "      ~{alt}"
+	, "    </div>"
+	), "alt");
 }

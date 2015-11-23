@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class GfuiCheckListBox extends GfuiElemBase {
 	public void Items_reverse() {checkListBox.Items_reverse();}
 	public void Items_count() {checkListBox.Items_count();}

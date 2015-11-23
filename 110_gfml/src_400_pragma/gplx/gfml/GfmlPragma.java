@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.lists.*;/*Hash_adp_list*/
+import gplx.core.lists.*;/*Hash_adp_list*/
 interface GfmlPragma {
 	String KeyOfPragma();
 	void Exec(GfmlBldr bldr, GfmlNde pragmaNde);

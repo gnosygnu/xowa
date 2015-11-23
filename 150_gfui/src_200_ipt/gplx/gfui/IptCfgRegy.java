@@ -18,7 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class IptCfgRegy implements GfoInvkAble {
 	public void Clear() {hash.Clear();}
-	public IptCfg GetOrNew(String k) {return (IptCfg)hash.Get_by_or_new(k, IptCfg_base.HashProto);}
+	public IptCfg GetOrNew(String k) {
+		IptCfg rv = (IptCfg)hash.Get_by(k);
+		if (rv == null) {
+			rv = (IptCfg)IptCfg_base.HashProto.NewByKey(k);
+			hash.Add(k, rv);
+		}
+		return rv;
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.MatchIn(k, Invk_Get, Invk_get)) {
 			String key = m.ReadStr("key");

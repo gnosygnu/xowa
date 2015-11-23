@@ -19,7 +19,7 @@ package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.xtns.scribunto.*;
-public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
+public class Xow_ns_mgr implements GfoInvkAble, gplx.core.lists.ComparerAble {
 	private Ordered_hash id_hash = Ordered_hash_.New();		// hash for retrieval by id
 	private Hash_adp_bry name_hash;								// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
 	private Hash_adp_bry tmpl_hash;								// hash for retrieval by name; PERF for templates

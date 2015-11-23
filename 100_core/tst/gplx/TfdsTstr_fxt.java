@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.strings.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class TfdsTstr_fxt {
 	public TfdsTstr_fxt Eq_str(Object expd, Object actl, String name) {
 		int nameLen = String_.Len(name); if (nameLen > nameLenMax) nameLenMax = nameLen;

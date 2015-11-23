@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_regys; import gplx.*; import gplx.core.*;
-import gplx.langs.gfs.*;
+import gplx.langs.gfs.*; import gplx.core.type_xtns.*;
 public class GfoRegy implements GfoInvkAble {
 	public int Count() {return hash.Count();}
 	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.new_();

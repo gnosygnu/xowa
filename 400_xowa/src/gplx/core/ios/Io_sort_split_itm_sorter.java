@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-public class Io_sort_split_itm_sorter implements gplx.lists.ComparerAble {
+public class Io_sort_split_itm_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Io_sort_split_itm lhs = (Io_sort_split_itm)lhsObj, rhs = (Io_sort_split_itm)rhsObj;
 //			Tfds.Write(String_.new_u8(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end()), String_.new_u8(rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end()));

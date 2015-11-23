@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
-import gplx.core.consoles.*;
+import gplx.core.consoles.*; import gplx.core.envs.*;
 public class Gfo_cache_mgr {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Ordered_hash recent = Ordered_hash_.New_bry();

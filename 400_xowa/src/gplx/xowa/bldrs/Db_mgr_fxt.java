@@ -96,7 +96,7 @@ public class Db_mgr_fxt {
 			int len = grp.Itms_list().Count();
 			for (int i = 0; i < len; i++) {
 				Xoctg_view_itm itm = (Xoctg_view_itm)grp.Itms_list().Get_at(i);
-				list.Add(itm.Id());
+				list.Add(itm.Page_id());
 			}
 		}
 		return (int[])list.To_ary_and_clear(int.class);

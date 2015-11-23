@@ -55,7 +55,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
 		byte[][] lines = Bry_split_.Split(src, Byte_ascii.Nl);
 		int lines_len = lines.length;
-		Url_encoder id_encoder = Xoa_app_.Utl__encoder_mgr().Id();
+		Gfo_url_encoder id_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id;
 		Xowh_sidebar_itm cur_grp = null;
 		Xop_link_parser link_parser = new Xop_link_parser();
 		for (int i = 0; i < lines_len; i++) {

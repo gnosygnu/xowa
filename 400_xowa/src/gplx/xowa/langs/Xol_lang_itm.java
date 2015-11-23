@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*; import gplx.core.intls.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.guis.langs.*;
@@ -75,7 +76,7 @@ public class Xol_lang_itm implements GfoInvkAble {
 	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final Xol_lnki_trail_mgr lnki_trail_mgr;
 	public Xop_lnki_arg_parser	Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
 	public Xol_func_regy		Func_regy() {return func_regy;} private final Xol_func_regy func_regy;
-	public byte					Img_thumb_halign_default() {return img_thumb_halign_default;} private byte img_thumb_halign_default = Xop_lnki_align_h_.Right;
+	public int					Img_thumb_halign_default() {return img_thumb_halign_default;} private int img_thumb_halign_default = Xop_lnki_align_h_.Right;
 	public Hash_adp_bry			Xatrs_section() {if (xatrs_section == null) xatrs_section = Lst_section_nde.new_xatrs_(this); return xatrs_section;} private Hash_adp_bry xatrs_section;
 	public void Evt_lang_changed() {
 		lnki_arg_parser.Evt_lang_changed(this);

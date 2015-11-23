@@ -118,7 +118,7 @@ class Pxd_itm_int_mhs_6 extends Pxd_itm_base implements Pxd_itm_int_interface {
 		bldr.Seg_set(DateAdp_.SegIdx_second	, Bry_.To_int_or(src, 4,  6, 0));
 	}
 }
-class Pxd_itm_sorter implements gplx.lists.ComparerAble {
+class Pxd_itm_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Pxd_itm lhs = (Pxd_itm)lhsObj;
 		Pxd_itm rhs = (Pxd_itm)rhsObj;

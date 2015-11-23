@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
-import gplx.lists.*; /*ComparerAble*/ import gplx.stores.*; /*GfoNdeRdr*/
+import gplx.core.lists.*; /*ComparerAble*/ import gplx.core.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;

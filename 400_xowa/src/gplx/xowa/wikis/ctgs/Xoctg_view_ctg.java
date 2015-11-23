@@ -51,7 +51,7 @@ public class Xoctg_view_ctg {
 		Xoctg_idx_mgr data_grp = data_ctg.Grp_by_tid(i); if (data_grp == null) return; // no itms in grp
 		byte[] url_bmk = url_ctg.Grp_idxs()[i]; byte url_bmk_fwd = url_ctg.Grp_fwds()[i];
 		data_grp.Find(view_grp.Itms_list(), data_grp.Src(), url_bmk_fwd != Bool_.N_byte, url_bmk, 200, tmp_last_plus_one);
-		view_grp.Itms_last_sortkey_(tmp_last_plus_one.Sortkey());
+		view_grp.Itms_last_sortkey_(tmp_last_plus_one.Sort_key());
 		view_grp.Itms_make();
 	}	private Xoctg_view_itm tmp_last_plus_one = new Xoctg_view_itm();
 }

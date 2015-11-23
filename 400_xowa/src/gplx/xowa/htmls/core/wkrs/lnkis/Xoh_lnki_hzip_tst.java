@@ -19,47 +19,95 @@ package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnki_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
-	@Test   public void Page__basic() {
-		fxt.Test__bicode("~$IA~", Xoh_lnki_html__hdump__tst.Html__same);
+	@Test   public void Href__basic() {
+		fxt.Test__bicode("~$!A~", Xoh_lnki_html__hdump__tst.Html__same);
 	}
-	@Test   public void Page__alt_case() {
-		fxt.Test__bicode("~$Ia~", "<a href='/wiki/A' id='xowa_lnki_2' title='A'>a</a>");
+	@Test   public void Href__case_diff() {
+		fxt.Test__bicode("~$!a~", "<a href='/wiki/A' id='xolnki_2' title='A'>a</a>");
 	}
-	@Test   public void Page__ns() {
-		fxt.Test__bicode("~$)-A~", "<a href='/wiki/Template:A' id='xowa_lnki_2' title='Template:A'>Template:A</a>");
+	@Test   public void Href__url_encoded() {
+		String html = "<a href=\"/wiki/A%27s\" id=\"xolnki_2\" title=\"A's\">A's</a>";
+		fxt.Test__bicode_raw("~$!A's~", html, html);
 	}
-	@Test   public void Anch__basic() {
-		fxt.Test__bicode("$Ya", "<a href='#a' id='xowa_lnki_2'>#a</a>");
+	@Test   public void Ns__same() {	// EX: [[Help:A]]
+		fxt.Test__bicode("~$A/A~", "<a href='/wiki/Help:A' id='xolnki_2' title='Help:A'>Help:A</a>");
 	}
-	@Test   public void Capt__basic() {
-		fxt.Test__bicode("~$JA~b~", Xoh_lnki_html__hdump__tst.Html__diff);
+	@Test   public void Ns__diff() {	// EX: [[Help:A_b|c]]
+		fxt.Test__bicode("~$B/A_b~c~", "<a href='/wiki/Help:A_b' id='xolnki_2' title='Help:A b'>c</a>");
+	}
+	@Test   public void Ns__space() {	// EX: [[Help talk:A b]]
+		fxt.Test__bicode("~$A0A b~", "<a href='/wiki/Help_talk:A_b' id='xolnki_2' title='Help talk:A b'>Help talk:A b</a>");
+	}
+	@Test   public void Ns__under() {	// EX: [[Help_talk:A_b]]; rare; just make sure codec can handle it; 
+		fxt.Test__bicode("~$B0A_b~Help_talk:A_b~", "<a href='/wiki/Help_talk:A_b' id='xolnki_2' title='Help talk:A b'>Help_talk:A_b</a>");
+	}
+	@Test   public void Ns__pipe() {	// EX: [[Help:A|]]
+		fxt.Test__bicode("~$E/A~", "<a href='/wiki/Help:A' id='xolnki_2' title='Help:A'>A</a>");
+	}
+	@Test   public void Ns__pipe_w_words() {	// EX: [[Help:A b|]]
+		fxt.Test__bicode("~$E/A b~", "<a href='/wiki/Help:A_b' id='xolnki_2' title='Help:A b'>A b</a>");
+	}
+	@Test   public void Anch__same() {
+		fxt.Test__bicode("~$2a~#a~", "<a href='#a' id='xolnki_2'>#a</a>");
+	}
+	@Test   public void Anch__diff() {
+		fxt.Test__bicode("~$2a~b~", "<a href='#a' id='xolnki_2'>b</a>");
+	}
+	@Test   public void Anch__diff__starts_w_same() {
+		fxt.Test__bicode("~$2a~a~", "<a href='#a' id='xolnki_2'>a</a>");
+	}
+	@Test   public void Capt__basic() {	// EX: [[A|b]]
+		fxt.Test__bicode("~$\"A~b~", Xoh_lnki_html__hdump__tst.Html__diff);
+	}
+	@Test   public void Capt__page_w_anch() {	// Ex: [[A#b|c]]
+		fxt.Test__bicode("~$\"A#b~b~", "<a href='/wiki/A#b' id='xolnki_2' title='A'>b</a>");
 	}
 	@Test   public void Capt__nest() {
 		fxt.Test__bicode
-		( "~$JA~<a href=\"/wiki/C\" id=\"xowa_lnki_3\" title=\"C\">C1</a>D~"
-		, "<a href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><a href=\"/wiki/C\" id=\"xowa_lnki_3\" title=\"C\">C1</a>D</a>"
+		( "~$\"A~<a href=\"/wiki/C\" id=\"xolnki_3\" title=\"C\">C1</a>D~"
+		, "<a href=\"/wiki/A\" id=\"xolnki_2\" title=\"A\"><a href=\"/wiki/C\" id=\"xolnki_3\" title=\"C\">C1</a>D</a>"
 		);
-	// old: probably broken;	fxt.Test__bicode("~$1!#A~~$1!#C~C1</a>D</a>", "<a data-xotype='lnki1' href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><a data-xotype='lnki1' href=\"/wiki/C\" id=\"xowa_lnki_2\" title=\"C\">C1</a>D</a>");
 	}
-	@Test   public void Tail__basic() {
-		fxt.Test__bicode("~$KA~b~", Xoh_lnki_html__hdump__tst.Html__trail);
+	@Test   public void Capt__reparent() {	// PURPOSE: PAGE:en.w:Abyssal_plain; DATE:2015-06-02; DELETE: not needed in new dump format;
+		fxt.Test__bicode
+		( "$\"A<font color=\"white\">A1</font>"
+		, "<a href=\"/wiki/A\" id=\"xolnki_2\" title=\"A\"><font color='white'>A1</font></a>"
+		);
 	}
-	@Test   public void Head__basic() {
-		fxt.Test__bicode("~$LA~b~", "<a href='/wiki/Ab' id='xowa_lnki_2' title='Ab'>A</a>");
+	@Test   public void Capt__xwiki() {
+		Xow_wiki wiki = fxt.Prep_create_wiki("wikt", "en.wiktionary.org");
+		wiki.Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
+		fxt.Test__bicode("$*en.wiktionary.orgawikt:a", Xoh_lnki_html__hdump__tst.Html__xwiki);
 	}
-	@Test   public void Head__case() {
-		fxt.Test__bicode("~$La~b~", "<a href='/wiki/Ab' id='xowa_lnki_2' title='Ab'>a</a>");
+	@Test   public void Capt__xwiki__qarg() {
+		Xow_wiki wiki = fxt.Prep_create_wiki("wikt", "en.wiktionary.org");
+		wiki.Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
+		fxt.Test__bicode("$*en.wiktionary.orga?action=editwikt:a?action=edit", "<a href='/site/en.wiktionary.org/wiki/a?action=edit' id='xolnki_2' title='a?action=edit'>wikt:a?action=edit</a>");
 	}
-//		@Test   public void Capt__site__xwiki() {
-//			fxt.Parser_fxt().Init_xwiki_add_wiki_and_user_("wikt", "en.wiktionary.org");
-//			fxt.Test__bicode("~$2!A~wikt:A~", Xoh_lnki_html__hdump__tst.Html__xwiki);
-//		}
-//		@Test   public void Lnki__apos() {
-//			fxt.Test__bicode("~$0+#A'b~", "<a data-xotype='lnki0' href=\"/wiki/Template:A&#39;b\" id=\"xowa_lnki_2\" title=\"Template:A&#39;b\">Template:A'b</a>");
-//		}
-//		@Test   public void Caption__reparent() {	// PURPOSE: PAGE:en.w:Abyssal_plain; DATE:2015-06-02
-//			String hzip = Xoh_hzip_fxt.Escape("~$1!#A~<font color='white'>A1</font></a>");
-//			fxt.Test__encode(hzip, "<a data-xotype='lnki0' href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><font color='white'>A1</font></a>");
-//			fxt.Test__decode(hzip, "<a data-xotype='lnki1' href=\"/wiki/A\" id=\"xowa_lnki_2\" title=\"A\"><font color='white'>A1</font></a>");
-//		}
+	@Test   public void Capt__xwiki__encode() {
+		Xow_wiki wiki = fxt.Prep_create_wiki("wikt", "en.wiktionary.org");
+		wiki.Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
+		fxt.Test__bicode("$)en.wiktionary.orgeorðe", "<a href='/site/en.wiktionary.org/wiki/eor%C3%B0e' id='xolnki_2' title='eorðe'>eorðe</a>");
+	}
+	@Test   public void Trail__basic() {
+		fxt.Test__bicode("~$#A~b~", Xoh_lnki_html__hdump__tst.Html__trail);
+	}
+	@Test   public void Short__basic() {
+		fxt.Test__bicode("~$$A~b~", "<a href='/wiki/Ab' id='xolnki_2' title='Ab'>A</a>");
+	}
+	@Test   public void Short__case() {
+		fxt.Test__bicode("~$$a~b~", "<a href='/wiki/Ab' id='xolnki_2' title='Ab'>a</a>");
+	}
+	@Test   public void Site__main_page() {
+		fxt.Test__bicode("~$)en.wikipedia.org~Main Page~"
+		, "<a href='/site/en.wikipedia.org/wiki/' id='xolnki_2' title='Main Page'>Main Page</a>"
+		, "<a href='/site/en.wikipedia.org/wiki/Main_Page' id='xolnki_2' title='Main Page'>Main Page</a>"
+		);
+	}
+	@Test   public void Site__qarg() {
+		fxt.Test__bicode("~$*en.wikipedia.org~A?b=c~d~", "<a href='/site/en.wikipedia.org/wiki/A?b=c' id='xolnki_2' title='A?b=c'>d</a>");
+	}
+	@Test   public void Inet__file() {
+		fxt.Test__bicode("~$:file:///C://A.png~b~", "<a href='file:///C://A.png' id='xolnki_2' title='file:///C://A.png'>b</a>");
+	}
 }

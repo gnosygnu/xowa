@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
+import gplx.core.stores.*;
 public class GfmlDataRdr extends GfmlDataRdr_base {
 	public static DataRdr raw_root_(String raw) {
 		GfmlDoc gdoc = GfmlDoc_.parse_any_eol_(raw);

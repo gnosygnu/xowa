@@ -48,7 +48,7 @@ public class Xob_xdat_file {
 		}
 		return rv;
 	}
-	public void Sort(Bry_bfr bfr, gplx.lists.ComparerAble comparer) {
+	public void Sort(Bry_bfr bfr, gplx.core.lists.ComparerAble comparer) {
 		int ary_len = itm_ends.length;
 		byte[][] brys = Src_extract_brys(ary_len);
 		Array_.Sort(brys, comparer);

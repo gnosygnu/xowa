@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xop_log_property_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr; private Db_conn conn; private Db_stmt stmt;

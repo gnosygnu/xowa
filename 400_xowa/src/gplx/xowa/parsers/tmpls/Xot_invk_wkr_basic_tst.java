@@ -233,7 +233,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|{{{1}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
-		fxt.Test_parse_tmpl_str("{{test_1| a }}", " a");	// tmpl.trim_end: always trim end; DATE:2015-11-07
+		fxt.Test_parse_tmpl_str("{{test_1| a }}", " a ");
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Ws_trimmed_key_1() { // PURPOSE: trim prm when passed as key;
@@ -254,7 +254,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|1={{{1}}}{{{2}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
-		fxt.Test_parse_tmpl_str("{{test_1| a | b }}", "a b");	// tmpl.trim_end: always trim end; DATE:2015-11-07
+		fxt.Test_parse_tmpl_str("{{test_1| a | b }}", "a  b");
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Ws_eval_prm() {	// PURPOSE: skip ws in prm_idx; EX:it.w:Portale:Giochi_da_tavolo; it.w:Template:Alternate; DATE:2014-02-09

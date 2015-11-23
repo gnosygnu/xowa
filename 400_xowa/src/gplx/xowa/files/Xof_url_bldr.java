@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*;
 public class Xof_url_bldr {
@@ -204,7 +205,7 @@ public class Xof_url_bldr {
 	  Bry_lossy_page  = Bry_.new_a7("lossy-page"), Bry_page = Bry_.new_a7("page")
 	, Bry_lossy_page1 = Bry_.new_a7("lossy-page1-"), Bry_page1 = Bry_.new_a7("page1-"), Bry_seek = Bry_.new_a7("seek%3D");
 	public static final Xof_url_bldr Temp = new Xof_url_bldr();
-	private static final Url_encoder encoder_src_http = Url_encoder.new_http_url_(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
+	private static final Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.Http_url; // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
 	public static Xof_url_bldr new_v2() {
 		Xof_url_bldr rv = new Xof_url_bldr();
 		rv.time_dlm = Byte_ascii.Dash;

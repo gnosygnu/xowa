@@ -42,8 +42,7 @@ public class Html_doc_parser {
 				Html_doc_wkr wkr = (Html_doc_wkr)o;
 				try {pos = wkr.Parse(src, src_bgn, src_end, pos);}
 				catch (Exception e) {
-					Err err = Err_.cast_or_make(e);
-					if (!err.Logged()) Gfo_usr_dlg_.Instance.Warn_many("", "", Err_.Message_gplx_log(e), "page_url", page_url, "mid", Bry_.Mid_by_len_safe(src, pos, 255));
+					Html_utl.Log(e, "html parse failed", page_url, src, pos);
 					txt_bgn = pos;								// set txt_bgn to hook_bgn which is "pos"; i.e.: txt resumes from start of failed hook
 					pos = trie.Match_pos();						// set pos to hook_end
 				}

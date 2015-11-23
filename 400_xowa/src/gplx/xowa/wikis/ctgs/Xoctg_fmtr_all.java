@@ -124,11 +124,11 @@ class Xoctg_fmtr_all {
 			arg_idx_lbl = url_arg_bgn;
 			arg_sortkey = view_grp.Itms_last_sortkey();
 			if (arg_sortkey == null)
-				arg_sortkey = view_grp.Itms_at_last().Sortkey();
+				arg_sortkey = view_grp.Itms_at_last().Sort_key();
 		}
 		else {
 			arg_idx_lbl = url_arg_end;
-			arg_sortkey = view_grp.Itms_at_first().Sortkey();
+			arg_sortkey = view_grp.Itms_at_first().Sort_key();
 		}
 		href_bfr.Add_byte(Byte_ascii.Question).Add(arg_idx_lbl).Add_byte(Byte_ascii.Eq);		// filefrom=
 		href_bfr.Add(arg_sortkey);																// Abc

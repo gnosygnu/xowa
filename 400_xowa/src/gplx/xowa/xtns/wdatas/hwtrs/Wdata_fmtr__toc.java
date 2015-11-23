@@ -62,10 +62,10 @@ class Wdata_fmtr__toc_itm extends gplx.core.brys.Bfr_arg_base {
 }
 class Wdata_toc_data {
 	private final Wdata_fmtr__toc_div fmtr_toc;
-	private final Url_encoder href_encoder;
+	private final Gfo_url_encoder href_encoder;
 	private final Bry_fmtr text_fmtr = Bry_fmtr.new_("~{orig} <sup><small>(~{len})</small></sup>", "orig", "len");
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(8);
-	public Wdata_toc_data(Wdata_fmtr__toc_div fmtr_toc, Url_encoder href_encoder) {this.fmtr_toc = fmtr_toc; this.href_encoder = href_encoder;}
+	public Wdata_toc_data(Wdata_fmtr__toc_div fmtr_toc, Gfo_url_encoder href_encoder) {this.fmtr_toc = fmtr_toc; this.href_encoder = href_encoder;}
 	public Wdata_toc_data Make(int itms_len) {
 		this.text = itms_len_enable ? text_fmtr.Bld_bry_many(tmp_bfr, orig, itms_len) : orig;
 		this.href = href_encoder.Encode(orig);

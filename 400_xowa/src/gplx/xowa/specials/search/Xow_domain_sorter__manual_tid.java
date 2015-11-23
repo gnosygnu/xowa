@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
-class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
+class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
 	private final Xow_domain_itm cur_domain;
 	private final Xow_domain_crt_itm[] ary; private final int ary_len;
 	public Xow_domain_sorter__manual(Xow_domain_itm cur_domain, Xow_domain_crt_itm[] ary) {
@@ -51,7 +51,7 @@ class Xow_domain_sorter__manual implements gplx.lists.ComparerAble {
 		Array_.Sort(ary, sorter);
 	}
 }
-class Xow_domain_sorter__manual_tid implements gplx.lists.ComparerAble {
+class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
 	private final Hash_adp sort_hash = Hash_adp_.new_(); private final Int_obj_ref sort_key = Int_obj_ref.neg1_();
 	public Xow_domain_sorter__manual_tid(int[] id_ary) {
 		int len = id_ary.length;
@@ -85,7 +85,7 @@ class Xow_domain_sorter__manual_tid implements gplx.lists.ComparerAble {
 		return new Xow_domain_sorter__manual_tid(id_ints);
 	}
 }
-class Xow_domain_sorter__manual_lang implements gplx.lists.ComparerAble {
+class Xow_domain_sorter__manual_lang implements gplx.core.lists.ComparerAble {
 	private final Hash_adp sort_hash = Hash_adp_.new_(); private final Int_obj_ref sort_key = Int_obj_ref.neg1_();
 	public Xow_domain_sorter__manual_lang(int[] id_ary) {
 		int len = id_ary.length;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.core.errs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.funcs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Scrib_lib_mw implements Scrib_lib {
@@ -377,7 +377,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return rslt.Init_ary_empty();
 	}
 }
-class Scrib_lib_mw_callParserFunction_sorter implements gplx.lists.ComparerAble {
+class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		KeyVal lhs = (KeyVal)lhsObj;
 		KeyVal rhs = (KeyVal)rhsObj;

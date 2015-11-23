@@ -47,10 +47,9 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 			Tkn(src, sub, root, i, tmp_bfr);
 		}
 		byte[] unencoded = tmp_bfr.To_bry_and_clear();
-		encoder.Encode(tmp_bfr, unencoded);
+		Gfo_url_encoder_.Id.Encode(tmp_bfr, unencoded);
 		bfr.Add_bfr_and_clear(tmp_bfr);
 	}
-	private static Url_encoder encoder = Url_encoder.new_html_id_();
 	private static void Tkn(byte[] src, Xop_tkn_itm sub, Xop_tkn_grp grp, int sub_idx, Bry_bfr tmp_bfr) {
 		switch (sub.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_lnke: Lnke(src, (Xop_lnke_tkn)sub, tmp_bfr); break;	// FUTURE: need to move number to lnke_tkn so that number will be correct/consistent? 

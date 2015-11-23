@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import org.junit.*; import gplx.core.gfo_ndes.*;
-import gplx.stores.*; /*DsvDataRdr*/ import gplx.langs.dsvs.*; /*DsvDataWtr*/
+import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
+import gplx.core.stores.*; /*DsvDataRdr*/ import gplx.langs.dsvs.*; /*DsvDataWtr*/
 public class TdbDbLoadMgr_tst {
 	@Before public void setup() {			
 		Io_url dbInfo = Io_url_.mem_fil_("mem/dir/db0.dsv");

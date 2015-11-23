@@ -50,7 +50,7 @@ class Html_tag_rdr_fxt {
 	private final Html_tag_rdr rdr = new Html_tag_rdr();
 	public void Init(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		rdr.Init(src_bry, 0, src_bry.length);
+		rdr.Init(Bry_.Empty, src_bry, 0, src_bry.length);
 	}
 	public void Test__move_fwd_head(String expd) {Test__move_fwd_head(Html_tag_.Id__any, expd);}
 	public void Test__move_fwd_head(int match_name_id, String expd) {

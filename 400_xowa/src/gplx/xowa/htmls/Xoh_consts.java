@@ -30,7 +30,7 @@ public class Xoh_consts {
 	, Space_2			= Bry_.new_a7("  ")
 
 	, A_bgn = Bry_.new_a7("<a href=\""), A_bgn_lnki_0 = Bry_.new_a7("\" title=\""), A_mid_xowa_title = Bry_.new_a7("\" xowa_title=\"")
-	, A_mid_id = Bry_.new_a7("\" id=\"xowa_lnki_")
+	, A_mid_id = Bry_.new_a7("\" id=\"xolnki_")
 	, A_end = Bry_.new_a7("</a>")
 	, Div_bgn_open = Bry_.new_a7("<div ")
 	, Div_end = Bry_.new_a7("</div>")

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.envs.*;
 public class GfoCacheMgr_tst {
 	@Before public void init() {fxt = new GfoCacheMgr_fxt();} GfoCacheMgr_fxt fxt;
 	@Test  public void teardown() {Env_.TickCount_Test = -1;}

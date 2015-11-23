@@ -33,7 +33,7 @@ public class Wdata_hwtr_mgr {
 	public Bry_fmtr Fmtr_main() {return fmtr_main;} private final Bry_fmtr fmtr_main = Bry_fmtr.new_("~{oview}~{toc}~{claims}~{links}~{labels}~{descriptions}~{aliases}~{json}", "oview", "toc", "claims", "links", "labels", "descriptions", "aliases", "json");
 	public Wdata_hwtr_msgs Msgs() {return msgs;} private Wdata_hwtr_msgs msgs;
 	@gplx.Internal protected Wdata_lbl_mgr Lbl_mgr() {return lbl_mgr;} private final Wdata_lbl_mgr lbl_mgr = new Wdata_lbl_mgr();
-	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Wdata_lbl_wkr lbl_wkr, Url_encoder href_encoder, Xoapi_toggle_mgr toggle_mgr, Xow_xwiki_mgr xwiki_mgr) {
+	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Wdata_lbl_wkr lbl_wkr, Gfo_url_encoder href_encoder, Xoapi_toggle_mgr toggle_mgr, Xow_xwiki_mgr xwiki_mgr) {
 		lbl_mgr.Wkr_(lbl_wkr);
 		fmtr_oview.Init_by_ctor(wikibase_api, href_encoder);
 		fmtr_claim.Init_by_ctor(new Wdata_toc_data(fmtr_toc, href_encoder), toggle_mgr, lbl_mgr);

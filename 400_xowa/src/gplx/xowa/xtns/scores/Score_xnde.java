@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
@@ -60,7 +60,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Cur_page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}
-		ProcessAdp ly_process = app.Prog_mgr().App_lilypond();
+		Process_adp ly_process = app.Prog_mgr().App_lilypond();
 		if (ly_process.Exe_exists() == Bool_.__byte && ly_process.Exe_url() != null) {	// TEST: ly_process.Exe_url() is null
 			boolean exists = Io_mgr.Instance.ExistsFil(ly_process.Exe_url());
 			ly_process.Exe_exists_(exists ? Bool_.Y_byte : Bool_.N_byte);
@@ -115,12 +115,12 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		Io_url ly_file = output_dir.GenSubFil(sha1_prefix + ".ly");
 		byte[] ly_text = null;
-		ProcessAdp ly_process = app.Prog_mgr().App_lilypond();
+		Process_adp ly_process = app.Prog_mgr().App_lilypond();
 		if (Score_xtn_mgr.Lilypond_version == null) Score_xtn_mgr.Lilypond_version = Get_lilypond_version(ly_process);
 		if	(lang_is_abc) {
 			Io_url abc_file = output_dir.GenSubFil(sha1_prefix + ".abc");
 			Io_mgr.Instance.SaveFilBry(abc_file, code);
-			ProcessAdp abc2ly_process = app.Prog_mgr().App_abc2ly();
+			Process_adp abc2ly_process = app.Prog_mgr().App_abc2ly();
 			if (!abc2ly_process.Run(abc_file, ly_file).Exit_code_pass()) {
 				fail_msg = abc2ly_process.Rslt_out();
 				app.Usr_dlg().Warn_many("", "", "abc2ly failed: ~{0}", fail_msg);
@@ -143,7 +143,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 			return;
 		}
 		if (output_ogg) {
-			ProcessAdp timidity_process = app.Prog_mgr().App_convert_midi_to_ogg();
+			Process_adp timidity_process = app.Prog_mgr().App_convert_midi_to_ogg();
 			Io_url ogg_file = ly_file.GenNewExt(".ogg");
 			if (!timidity_process.Run(ly_file.GenNewExt(".midi"), ogg_file).Exit_code_pass()) {	// NOTE: do not exit; timidity currently not working for windows
 				fail_msg = timidity_process.Rslt_out();
@@ -170,9 +170,9 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 			html_itm.Html_atr_set(html_id_pre, "textContent", fail_msg);
 		}
 	}
-	byte[] Get_lilypond_version(ProcessAdp lilypond_process) {
+	byte[] Get_lilypond_version(Process_adp lilypond_process) {
 		try {
-			ProcessAdp lilypond_version_proc = new ProcessAdp().Exe_url_(lilypond_process.Exe_url()).Args_str_("--version").Prog_dlg_(lilypond_process.Prog_dlg()).Run_mode_(ProcessAdp.Run_mode_sync_block);
+			Process_adp lilypond_version_proc = new Process_adp().Exe_url_(lilypond_process.Exe_url()).Args_str_("--version").Prog_dlg_(lilypond_process.Prog_dlg()).Run_mode_(Process_adp.Run_mode_sync_block);
 			lilypond_version_proc.Run();
 			return Get_lilypond_version(lilypond_version_proc.Rslt_out());
 		}

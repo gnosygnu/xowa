@@ -70,7 +70,7 @@ public class Xol_duration_itm_ {
 		return (Xol_duration_itm[])rv.To_ary(Xol_duration_itm.class);
 	}
 }
-class Xol_duration_itm_sorter implements gplx.lists.ComparerAble {
+class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xol_duration_itm lhs = (Xol_duration_itm)lhsObj;
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;

@@ -34,7 +34,7 @@ public class Xow_popup_html_mkr {
 		if (output_js_clean)	app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page.Ttl(), wrdx_bfr, 0);
 		if (output_tidy)		app.Html_mgr().Tidy_mgr().Run_tidy_html(page, wrdx_bfr);
 		byte[] hdom_bry = wrdx_bfr.To_bry_and_clear();
-		String page_url = wrdx_bfr.Add(page.Wiki().Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(Xoa_app_.Utl__encoder_mgr().Href()
+		String page_url = wrdx_bfr.Add(page.Wiki().Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href
 			.Encode(page.Ttl().Full_db()))	// NOTE: was page.Url().Raw(), but that doesn't work for Special:Search; PAGE:en.w:Earth and "Quotations"; DATE:2014-06-29
 			.To_str_and_clear()
 		;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.apps.progs.*;
+import gplx.core.btries.*; import gplx.core.envs.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.langs.htmls.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {

@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xoa_url_parser {
-	private final Url_encoder encoder;
+	private final Gfo_url_encoder encoder;
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private final Gfo_url_parser url_parser = new Gfo_url_parser(); private final Gfo_url gfo_url = new Gfo_url();
 	private final Xoa_app app; private final Xow_wiki wiki; private final byte[] domain_bry;
@@ -36,7 +36,7 @@ public class Xoa_url_parser {
 	public Xoa_url_parser(Xow_wiki wiki) {
 		this.app = wiki.App();
 		this.wiki = wiki; this.domain_bry = wiki.Domain_bry();
-		this.encoder = app.Utl__encoder_mgr().Xourl();
+		this.encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Xourl;
 		this.vnt_mgr = wiki.Type_is_edit() ? wiki.Lang().Vnt_mgr() : null;
 	}
 	public Xoa_url Parse_by_urlbar_or_null(String str) {
@@ -101,7 +101,7 @@ public class Xoa_url_parser {
 		Bld_qargs();
 		if (tmp_page_is_main) tmp_page = Xoa_page_.Main_page_bry_empty;
 		if (tmp_anch != null) {
-			byte[] anchor_bry = Xoa_app_.Utl__encoder_mgr().Id().Encode(tmp_anch);	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
+			byte[] anchor_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(tmp_anch);	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			tmp_anch = anchor_bry;
 		}
 		Make(rv);
@@ -138,7 +138,7 @@ public class Xoa_url_parser {
 	private void Bld_xowa() {
 		tmp_tid = Xoa_url_.Tid_xcmd;
 		tmp_page = Bry_.Mid(tmp_raw, Gfo_protocol_itm.Len_xcmd);		// NOTE: just get String after protocol; anchor (#) or query params (?) must not be parsed
-		tmp_page = Xoa_app_.Utl__encoder_mgr().Gfs().Decode(tmp_page);	// NOTE: should be decoded; EX: %20 -> " "
+		tmp_page = gplx.langs.htmls.encoders.Gfo_url_encoder_.Gfs.Decode(tmp_page);	// NOTE: should be decoded; EX: %20 -> " "
 	}
 	private void Bld_page_by_file_ns() {
 		tmp_tid = Xoa_url_.Tid_page;

@@ -42,7 +42,7 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 	private Xocfg_bnd_itm_srl Init(String key) {return new Xocfg_bnd_itm_srl(app, key);}
 	public Xocfg_bnd_itm Get_at(int i)		{return (Xocfg_bnd_itm)regy.Get_at(i);}
 	public int Len() {return regy.Count();}
-	public void Sort(gplx.lists.ComparerAble comparer) {regy.Sort_by(comparer);}
+	public void Sort(gplx.core.lists.ComparerAble comparer) {regy.Sort_by(comparer);}
 	private void Set_bulk(byte[] src) {
 		try {
 			bnd_mgr_srl.Load_by_bry(src);

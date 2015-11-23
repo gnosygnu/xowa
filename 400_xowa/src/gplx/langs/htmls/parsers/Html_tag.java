@@ -20,15 +20,15 @@ import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.parsers.styles.*; impo
 public class Html_tag implements Mwh_atr_wkr {
 	private Html_tag_rdr tag_rdr;
 	private Ordered_hash atrs_hash; private boolean atrs_null; private int atrs_bgn, atrs_end;
-	public Html_tag Init(Html_tag_rdr tag_rdr, boolean tag_is_tail, boolean tag_is_inline, int src_bgn, int src_end, int atrs_bgn, int atrs_end, int name_id) {
-		this.tag_rdr = tag_rdr; this.src = tag_rdr.Src(); this.atrs_null = true;
+	public Html_tag Init(Html_tag_rdr tag_rdr, byte[] src, boolean tag_is_tail, boolean tag_is_inline, int src_bgn, int src_end, int atrs_bgn, int atrs_end, int name_id) {
+		this.tag_rdr = tag_rdr; this.src = src; this.atrs_null = true;
 		this.tag_is_tail = tag_is_tail; this.tag_is_inline = tag_is_inline;
 		this.atrs_bgn = atrs_bgn; this.atrs_end = atrs_end;
 		this.name_id = name_id; this.src_bgn = src_bgn; this.src_end = src_end;
 		return this;
 	}
 	public Html_tag Copy() {
-		Html_tag rv = new Html_tag().Init(tag_rdr, tag_is_tail, tag_is_inline, src_bgn, src_end, atrs_bgn, atrs_end, name_id);
+		Html_tag rv = new Html_tag().Init(tag_rdr, src, tag_is_tail, tag_is_inline, src_bgn, src_end, atrs_bgn, atrs_end, name_id);
 		rv.atrs_null = false;
 		rv.atrs_hash = Copy(atrs_hash);
 		return rv;

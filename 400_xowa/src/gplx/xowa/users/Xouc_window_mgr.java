@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.xowa.guis.views.*;
 public class Xouc_window_mgr implements GfoInvkAble {
 	public Xouc_window_mgr(Xoue_user user) {this.user = user;} private Xoue_user user;

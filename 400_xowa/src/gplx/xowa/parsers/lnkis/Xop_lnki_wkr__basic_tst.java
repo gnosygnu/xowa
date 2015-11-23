@@ -265,7 +265,7 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Encoded_url() {	// PURPOSE.fix: url-encoded characters broke parser when embedded in link; DATE:2013-03-01
 		fxt.Init_xwiki_add_user_("commons.wikimedia.org");
 		fxt.Test_parse_page_wiki_str("[[File:A.png|link=//commons.wikimedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0?uselang=ru|b]]"
-		, "<a href=\"/site/commons.wikimedia.org/wiki/Заглавная_страница?uselang=ru\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>");
+		, "<a href=\"/site/commons.wikimedia.org/wiki/Заглавная_страница?uselang=ru\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>");
 	}
 	@Test  public void Link_invalid() {	// PURPOSE.fix: do not render invalid text; EX: link={{{1}}}; [[Fil:Randers_-_Hadsund_railway.png|120x160px|link={{{3}}}|Randers-Hadsund Jernbane]]; DATE:2013-03-04
 		fxt.Test_parse_page_wiki_str

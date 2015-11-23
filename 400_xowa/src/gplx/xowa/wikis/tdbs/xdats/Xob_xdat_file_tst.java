@@ -78,7 +78,7 @@ public class Xob_xdat_file_tst {
 		Tfds.Eq_str_lines(expd, String_.new_a7(Xob_xdat_file.Rebuid_header(Bry_.new_a7(orig), Bry_.new_a7("\n"))));		
 	}
 	Bry_bfr tmp = Bry_bfr.new_();
-	private void tst_Sort(Xob_xdat_file rdr, gplx.lists.ComparerAble comparer, String expd) {
+	private void tst_Sort(Xob_xdat_file rdr, gplx.core.lists.ComparerAble comparer, String expd) {
 		rdr.Sort(tmp, comparer);
 		Chk_file(rdr, expd);
 	}

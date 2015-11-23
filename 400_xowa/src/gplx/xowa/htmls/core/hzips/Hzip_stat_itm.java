@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 public class Hzip_stat_itm {
 	public void Clear() {
-		a_rhs = lnki_text_n = lnki_text_y = lnke_txt = lnke_brk_text_n = lnke_brk_text_y = 0;
+		a_rhs = lnki_text_n = lnki_text_y = lnke__free = lnke__auto = lnke__text = 0;
 		hdr_1 = hdr_2 = hdr_3 = hdr_4 = hdr_5 = hdr_6 = 0;
 		img_full = 0;
 		space = 0;
@@ -27,9 +27,9 @@ public class Hzip_stat_itm {
 	public int A_rhs() {return a_rhs;} public void A_rhs_add() {++a_rhs;} private int a_rhs;		
 	public int Lnki_text_n() {return lnki_text_n;} public void Lnki_text_n_add() {++lnki_text_n;} private int lnki_text_n;
 	public int Lnki_text_y() {return lnki_text_y;} public void Lnki_text_y_add() {++lnki_text_y;} private int lnki_text_y;
-	public int Lnke_txt() {return lnke_txt;} public void Lnke_txt_add() {++lnke_txt;} private int lnke_txt;
-	public int Lnke_brk_text_n() {return lnke_brk_text_n;} public void Lnke_brk_text_n_add() {++lnke_brk_text_n;} private int lnke_brk_text_n;
-	public int Lnke_brk_text_y() {return lnke_brk_text_y;} public void Lnke_brk_text_y_add() {++lnke_brk_text_y;} private int lnke_brk_text_y;
+	public int Lnke__free() {return lnke__free;} public void Lnke__free__add() {++lnke__free;} private int lnke__free;
+	public int Lnke__auto() {return lnke__auto;} public void Lnke__auto__add() {++lnke__auto;} private int lnke__auto;
+	public int Lnke__text() {return lnke__text;} public void Lnke__text__add() {++lnke__text;} private int lnke__text;
 	public int Img_full() {return img_full;} public void Img_full_add() {++img_full;} private int img_full;
 	public int Hdr_1() {return hdr_1;} private int hdr_1;
 	public int Hdr_2() {return hdr_2;} private int hdr_2;

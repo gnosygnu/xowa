@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
 import java.sql.*; 
+import gplx.core.stores.*;
 import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 public abstract class Db_engine_sql_base implements Db_engine {
 	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
@@ -79,7 +80,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	@gplx.Virtual public void	Env_db_detach(String alias) {}
 	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}
 	@gplx.Virtual public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
-	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
+	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.core.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
 	private Db_rdr New_rdr(Db_stmt stmt, Object rdr, String sql) {
 		Db_rdr__basic rv = (Db_rdr__basic)New_rdr_clone();	

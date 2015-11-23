@@ -21,55 +21,37 @@ import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.lnkis.anch
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final int[] flag_ary;
-	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ ( 1, 2, 3);
 	public String Key() {return Xoh_hzip_dict_.Key__lnki;}
-	public Xoh_lnki_hzip() {this.flag_ary = flag_bldr.Val_ary();}
 	public Xoh_lnki_hzip Encode(Bry_bfr bfr, Xoh_hdoc_ctx hctx, Hzip_stat_itm stat_itm, byte[] src, Xoh_lnki_parser arg) {
-		byte capt_type = arg.Capt_type();
-		Xoh_anch_href_parser anch_href_parser = arg.Anch_href_parser();
-		Xoa_ttl page_ttl = anch_href_parser.Page_ttl();
-		int page_ns_id = page_ttl.Ns().Id();
-		boolean page_ns_id_is_main = page_ns_id == Xow_ns_.Tid__main;
+		byte text_type = arg.Text_type();
+		Xoh_anch_href_parser anch_href_parser = arg.Href_parser();
+		int page_ns_id = anch_href_parser.Page_ns_id();
+		boolean page_ns_id_is_not_main = page_ns_id != Xow_ns_.Tid__main;
 		int href_type = anch_href_parser.Tid();
-		flag_ary[ 0] = page_ns_id_is_main ? 1 : 0;
-		flag_ary[ 1] = href_type;
-		flag_ary[ 2] = capt_type;
+		flag_bldr.Set(Flag__ns_is_not_main			, page_ns_id_is_not_main);
+		flag_bldr.Set(Flag__href_type				, href_type);
+		flag_bldr.Set(Flag__text_type				, text_type);
 
 		bfr.Add(Xoh_hzip_dict_.Bry__lnki);
 		Xoh_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
-		if (!page_ns_id_is_main)
+		if (page_ns_id_is_not_main)
 			Xoh_lnki_dict_.Ns_encode(bfr, page_ns_id);
-		switch (href_type) {
-			case Xoh_anch_href_parser.Tid__site:
-				bfr.Add_mid(src, anch_href_parser.Site_bgn(), anch_href_parser.Site_end()).Add_byte(Xoh_hzip_dict_.Escape);
-				break;
-		}
-		switch (capt_type) {
-			case Xoh_lnki_dict_.Capt__same:
+		if (href_type == Xoh_anch_href_parser.Tid__site)
+			bfr.Add_mid(src, anch_href_parser.Site_bgn(), anch_href_parser.Site_end()).Add_byte(Xoh_hzip_dict_.Escape);
+		switch (text_type) {
+			case Xoh_anch_capt_parser.Tid__href:
+			case Xoh_anch_capt_parser.Tid__href_pipe:
 				stat_itm.Lnki_text_n_add();
-				byte[] ttl_bry = page_ns_id_is_main
-					? arg.Capt_bry()				// main ns should write html_text; handles [[a]] with html of '<a href="A">a</a>'
-					: page_ttl.Page_db();			// non-main ns should write page_db only; EX: "Template:A" should write "A" since "Template" will be inferred by ns_id
-				bfr.Add(ttl_bry).Add_byte(Xoh_hzip_dict_.Escape);
+				bfr.Add_mid(arg.Href_bry(), arg.Href_bgn(), arg.Href_end());
+				bfr.Add_byte(Xoh_hzip_dict_.Escape);
 				break;
-			case Xoh_lnki_dict_.Capt__diff:
+			case Xoh_anch_capt_parser.Tid__capt:
+			case Xoh_anch_capt_parser.Tid__href_trail:
+			case Xoh_anch_capt_parser.Tid__capt_short:
 				stat_itm.Lnki_text_y_add();
-				bfr.Add(arg.Anch_href_parser().Page_bry());
+				bfr.Add_mid(arg.Href_bry(), arg.Href_bgn(), arg.Href_end());
 				bfr.Add_byte(Xoh_hzip_dict_.Escape);
-				bfr.Add(arg.Capt_bry());
-				bfr.Add_byte(Xoh_hzip_dict_.Escape);
-				break;
-			case Xoh_lnki_dict_.Capt__trail:
-				bfr.Add(arg.Capt_bry());
-				bfr.Add_byte(Xoh_hzip_dict_.Escape);
-				bfr.Add(arg.Trail_bry());
-				bfr.Add_byte(Xoh_hzip_dict_.Escape);
-				break;
-			case Xoh_lnki_dict_.Capt__head:
-				bfr.Add(arg.Capt_bry());
-				bfr.Add_byte(Xoh_hzip_dict_.Escape);
-				bfr.Add(arg.Trail_bry());
+				bfr.Add_mid(arg.Capt_bry(), arg.Capt_bgn(), arg.Capt_end());
 				bfr.Add_byte(Xoh_hzip_dict_.Escape);
 				break;
 		}
@@ -78,93 +60,110 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Decode(Bry_bfr bfr, boolean write_to_bfr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int hook_bgn) {
 		int flag = rdr.Read_int_by_base85(1);
 		flag_bldr.Decode(flag);
-		boolean page_ns_id_is_main = flag_bldr.Get_as_bool(0);
-		byte href_type = flag_bldr.Get_as_byte(1);
-		byte capt_type = flag_bldr.Get_as_byte(2);
+		boolean page_ns_id_is_not_main		= flag_bldr.Get_as_bool(Flag__ns_is_not_main);
+		byte href_type					= flag_bldr.Get_as_byte(Flag__href_type);
+		byte text_type					= flag_bldr.Get_as_byte(Flag__text_type);
 
-		int ns_id = Xow_ns_.Tid__main;
-		if (!page_ns_id_is_main)
-			ns_id = Xoh_lnki_dict_.Ns_decode(rdr);
+		int ns_id = page_ns_id_is_not_main ? Xoh_lnki_dict_.Ns_decode(rdr) : Xow_ns_.Tid__main;
 		int site_bgn = -1, site_end = -1;
-		switch (href_type) {
-			case Xoh_anch_href_parser.Tid__site:
-				site_bgn = rdr.Pos();
-				site_end = rdr.Find_fwd_lr();
+		if (href_type == Xoh_anch_href_parser.Tid__site) {
+			site_bgn = rdr.Pos();
+			site_end = rdr.Find_fwd_lr();
+		}
+		int href_bgn = rdr.Pos();
+		int href_end = rdr.Find_fwd_lr();
+		int capt_bgn = -1, capt_end = -1;
+		switch (text_type) {
+			case Xoh_anch_capt_parser.Tid__capt:
+			case Xoh_anch_capt_parser.Tid__capt_short:
+			case Xoh_anch_capt_parser.Tid__href_trail:
+				capt_bgn = rdr.Pos();
+				capt_end = rdr.Find_fwd_lr();
 				break;
 		}
-		int page_bgn = rdr.Pos();
-		int page_end = rdr.Find_fwd_lr();
-		int capt_bgn = -1, capt_end = -1;
-		if (capt_type != Xoh_lnki_dict_.Capt__same) {
-			capt_bgn = rdr.Pos();
-			capt_end = rdr.Find_fwd_lr();
-		}
-
-		byte[] page_bry = null;
-		if (capt_type == Xoh_lnki_dict_.Capt__head)
-			page_bry = Bry_.Add(Bry_.Mid(src, page_bgn, page_end), Bry_.Mid(src, capt_bgn, capt_end));
+		byte[] href_bry = null;
+		if (text_type == Xoh_anch_capt_parser.Tid__capt_short)
+			href_bry = Bry_.Add(Bry_.Mid(src, href_bgn, href_end), Bry_.Mid(src, capt_bgn, capt_end));
 		else
-			page_bry = Bry_.Mid(src, page_bgn, page_end);
-		byte[] title_bry = null, href_bry = null;
-		if (href_type == Xoh_anch_href_parser.Tid__anch)
-			href_bry = page_bry;
-		else {
-			Xow_ns ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(ns_id);
-			Xoa_ttl ttl = hctx.Wiki__ttl_parser().Ttl_parse(ns.Id(), page_bry); if (ttl == null) rdr.Fail("invalid ttl", String_.Empty, String_.new_u8(page_bry)); // TODO: parse title based on site
-			href_bry = ttl.Full_db();
-			title_bry = ttl.Full_txt();
-			if (href_type == Xoh_anch_href_parser.Tid__site) {
-				href_bry = ttl.Page_db();	// for xwiki, use page, not full alias; EX: "wikt:A" -> "A" x> "wikt:A"
+			href_bry = Bry_.Mid(src, href_bgn, href_end);
+		byte[] title_bry = null;
+		Xoa_ttl ttl = null;
+		if (href_type != Xoh_anch_href_parser.Tid__anch) {
+			switch (href_type) {
+				case Xoh_anch_href_parser.Tid__site:
+					Xow_ttl_parser ttl_parser = hctx.App().Wiki_mgri().Get_by_key_or_make_init_n(Bry_.Mid(src, site_bgn, site_end));
+					ttl = ttl_parser.Ttl_parse(ns_id, href_bry);
+					href_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_qarg.Encode(ttl.Full_db());
+					title_bry = ttl.Full_txt();
+					break;
+				case Xoh_anch_href_parser.Tid__wiki:
+					ttl = hctx.Wiki__ttl_parser().Ttl_parse(ns_id, href_bry); if (ttl == null) rdr.Fail("invalid ttl", String_.Empty, String_.new_u8(href_bry));
+					href_bry = ttl.Full_db_w_anch();
+					href_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(href_bry);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
+					title_bry = ttl.Full_txt();
+					break;
+				case Xoh_anch_href_parser.Tid__inet:
+					title_bry = href_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_qarg.Encode(href_bry);
+					break;
 			}
 		}
 
 		// gen html
 		bfr.Add(Html_bldr_.Bry__a_lhs_w_href);
 		switch (href_type) {
-			case Xoh_anch_href_parser.Tid__site:
-				bfr.Add(Xoh_href_.Bry__wiki).Add_mid(src, site_bgn, site_end);
-				bfr.Add(Xoh_href_.Bry__wiki);							// "/wiki/"
-				break;
 			case Xoh_anch_href_parser.Tid__anch:
 				bfr.Add_byte(Byte_ascii.Hash);							// "#"
 				break;
+			case Xoh_anch_href_parser.Tid__site:
+				bfr.Add(Xoh_href_.Bry__site).Add_mid(src, site_bgn, site_end);
+				bfr.Add(Xoh_href_.Bry__wiki);
+				break;
 			case Xoh_anch_href_parser.Tid__wiki:
-				bfr.Add(Xoh_href_.Bry__wiki);							// "/wiki/"
+				bfr.Add(Xoh_href_.Bry__wiki);
 				break;
 		}
 		bfr.Add(href_bry);
-		bfr.Add_str_a7("\" id=\"").Add_str_a7(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Lnki__uid__nxt());
+		bfr.Add(Html_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Lnki__uid__nxt());
 		if (href_type != Xoh_anch_href_parser.Tid__anch) {
-			bfr.Add_str_a7("\" title=\"");
-			bfr.Add(Html_utl.Escape_html_as_bry(title_bry));
+			bfr.Add(Html_bldr_.Bry__title__nth);
+			Html_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_bry.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.N);
 		}
-		bfr.Add_str_a7("\">");
+		bfr.Add(Html_bldr_.Bry__lhs_end_head_w_quote);
 		if (	href_type == Xoh_anch_href_parser.Tid__anch
-			&&	capt_type != Xoh_lnki_dict_.Capt__diff )
+			&&	text_type != Xoh_anch_capt_parser.Tid__capt )
 			bfr.Add_byte(Byte_ascii.Hash);
-		switch (capt_type) {
-			case Xoh_lnki_dict_.Capt__same:
+		switch (text_type) {
+			case Xoh_anch_capt_parser.Tid__href:
 				if (ns_id == Xow_ns_.Tid__main)
-					bfr.Add_mid(src, page_bgn, page_end);
+					bfr.Add_mid(src, href_bgn, href_end);
 				else
-					bfr.Add(title_bry);
+					bfr.Add(ttl.Full_txt());
 				break;
-			case Xoh_lnki_dict_.Capt__diff:
+			case Xoh_anch_capt_parser.Tid__href_pipe:
+				bfr.Add_mid(src, href_bgn, href_end);
+				break;
+			case Xoh_anch_capt_parser.Tid__capt:
 				bfr.Add_mid(src, capt_bgn, capt_end);
 				break;
-			case Xoh_lnki_dict_.Capt__trail:
-				bfr.Add_mid(src, page_bgn, page_end);
+			case Xoh_anch_capt_parser.Tid__href_trail:
+				bfr.Add_mid(src, href_bgn, href_end);
 				bfr.Add_mid(src, capt_bgn, capt_end);
 				break;
-			case Xoh_lnki_dict_.Capt__head:
-				bfr.Add_mid(src, page_bgn, page_end);
+			case Xoh_anch_capt_parser.Tid__capt_short:
+				bfr.Add_mid(src, href_bgn, href_end);
 				break;
 		}
-		bfr.Add_str_a7("</a>");
+		bfr.Add(Html_bldr_.Bry__a_rhs);
 		return rdr.Pos();
 	}
 	public int				Pool__idx() {return pool_idx;} private int pool_idx;
 	public void				Pool__clear (Object[] args) {}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_lnki_hzip rv = new Xoh_lnki_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
+	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 2, 3);
+	private static final int // SERIALIZED
+	  Flag__ns_is_not_main		=  0
+	, Flag__href_type			=  1	// "wiki", "site", "anch", "inet"
+	, Flag__text_type			=  2	// "href", "capt", "href_trail", "capt_short", "href_pipe"
+	;
 }

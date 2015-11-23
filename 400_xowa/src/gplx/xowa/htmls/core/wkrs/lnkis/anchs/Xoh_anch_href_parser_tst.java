@@ -35,17 +35,18 @@ public class Xoh_anch_href_parser_tst {
 		fxt.Test__parse("http://a.org", "", "http://a.org");
 	}
 	@Test   public void Fail__1st_seg_must_be_site_or_wiki() {
-		fxt.Test__parse__fail("/fail/A", "failed trie check: mid='fail/A' ctx='Main_Page' wkr='lnki.href' excerpt='/fail/A'");
+		fxt.Test__parse__fail("/fail/A", "failed trie check: mid='fail/A' ctx='Main_Page' wkr='anch.href' excerpt=/fail/A");
 	}
 	@Test   public void Fail__2nd_seg_must_be_wiki() {
-		fxt.Test__parse__fail("/site/A/B/C", "failed check: chk='wiki/' ctx='Main_Page' wkr='lnki.href' excerpt='/site/A/B/C'");
+		fxt.Test__parse__fail("/site/A/B/C", "failed check: chk='wiki/' ctx='Main_Page' wkr='anch.href' excerpt=/site/A/B/C");
 	}
 }
 class Xoh_anch_href_parser_fxt extends Xoh_itm_parser_fxt_base {
+	private final Xoae_app app;
 	private final Xoh_anch_href_parser parser = new Xoh_anch_href_parser();
 	private final Xow_ttl_parser ttl_parser;
 	public Xoh_anch_href_parser_fxt() {
-		Xoae_app app = Xoa_app_fxt.app_();
+		this.app = Xoa_app_fxt.app_();
 		ttl_parser = Xoa_app_fxt.wiki_tst_(app);
 	}
 	@Override public Xoh_itm_parser Parser_get() {return parser;}
@@ -55,6 +56,6 @@ class Xoh_anch_href_parser_fxt extends Xoh_itm_parser_fxt_base {
 		Tfds.Eq_str(expd_page, String_.new_u8(src, parser.Page_bgn(), parser.Page_end()));
 	}
 	@Override public void Exec_parse_hook(Bry_rdr owner_rdr, int src_bgn, int src_end) {
-		parser.Parse(owner_rdr, ttl_parser, src_bgn, src_end);
+		parser.Parse(owner_rdr, app, ttl_parser, src_bgn, src_end);
 	}
 }

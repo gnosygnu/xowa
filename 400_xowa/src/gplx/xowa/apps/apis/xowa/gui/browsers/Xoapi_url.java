@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
+import gplx.gfui.*; import gplx.xowa.guis.views.*; import gplx.core.envs.*;
 public class Xoapi_url implements GfoInvkAble {
 	public void Init_by_kit(Xoae_app app) {this.app = app;} private Xoae_app app;
 	private GfuiTextBox Url_box() {return app.Gui_mgr().Browser_win().Url_box();}

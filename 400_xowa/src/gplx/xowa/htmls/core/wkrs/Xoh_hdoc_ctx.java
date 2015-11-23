@@ -17,12 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.htmls.core.wkrs.mkrs.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;
 public class Xoh_hdoc_ctx {
 	private byte[] fsys__file;
 	public byte[]					Fsys__root()		{return fsys__root;} private byte[] fsys__root;
 	public byte[]					Fsys__file__comm()	{return fsys__file__comm;} private byte[] fsys__file__comm;
 	public byte[]					Fsys__file__wiki()	{return fsys__file__wiki;} private byte[] fsys__file__wiki;
+	public Xoa_app					App()				{return app;} private Xoa_app app;
 	public byte[]					Wiki__domain_bry()	{return wiki__domain_bry;} private byte[] wiki__domain_bry;
 	public Xow_ttl_parser			Wiki__ttl_parser()	{return wiki__ttl_parser;} private Xow_ttl_parser wiki__ttl_parser;
 	public Xoa_file_mgr				File__mgr()			{return file__mgr;} private final Xoa_file_mgr file__mgr = new Xoa_file_mgr();
@@ -33,6 +35,7 @@ public class Xoh_hdoc_ctx {
 	public int						Lnki__uid__nxt()	{return ++lnki__uid;} private int lnki__uid; // NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 	public void Init_by_app(Xoa_app app) {
 		Xoa_fsys_mgr fsys_mgr = app.Fsys_mgr();
+		this.app = app;
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
@@ -49,4 +52,5 @@ public class Xoh_hdoc_ctx {
 		bicode__stat.Clear();
 		this.lnki__uid = 1;	// NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 	}
+	public static final int Invalid = -1;
 }

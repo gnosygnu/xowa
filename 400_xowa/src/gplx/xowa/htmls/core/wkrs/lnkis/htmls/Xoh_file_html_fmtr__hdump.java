@@ -30,33 +30,36 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 		tmp_bfr.Add_double(xfer_itm.Lnki_upright()).Add_byte_pipe();
 		tmp_bfr.Add_double(xfer_itm.Lnki_time()).Add_byte_pipe();
 		tmp_bfr.Add_int_variable(xfer_itm.Lnki_page()).Add_byte_quote();
+//			fmtr__img__full.Bld_bfr_many(bfr
+//			, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title
+//			, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, img_src, img_w, img_h), Xoh_img_cls_.To_html(img_cls, img_cls_other));
 		fmtr__img__full.Bld_bfr_many(bfr
-		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title
-		, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, img_src, img_w, img_h), Xoh_img_cls_.To_html(img_cls, img_cls_other));
+		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, Xoa_ttl.Replace_spaces(a_xowa_title)
+		, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, Bry_.Empty, 0, 0), Xoh_img_cls_.To_html(img_cls, img_cls_other));
 	}
 	private Bry_fmtr fmtr__img__full = Bry_fmtr.new_
-	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title}>"
-	+   "<img alt=\"~{img_alt}\"~{img_xoimg}~{img_core}~{img_class}/>"
+	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title} xowa_title=\"~{a_xowa_title}\">"
+	+   "<img~{img_xoimg}~{img_core}~{img_class} alt=\"~{img_alt}\"/>"
 	+ "</a>"
-	, "a_href", "a_class", "a_rel", "a_title", "img_alt", "img_xoimg", "img_core", "img_class"
+	, "a_href", "a_class", "a_rel", "a_title", "a_xowa_title", "img_alt", "img_xoimg", "img_core", "img_class"
 	);
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bfr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
-	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
-		tmp_bfr.Add(Xoh_make_trie_.Bry__img_style);
-		tmp_bfr.Add_int_variable(uid);
-		tmp_bfr.Add_byte_quote();
-		byte[] div2_width_repl = tmp_bfr.To_bry_and_clear();
-		fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
-	}
-	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Xoh_make_trie_.Bry__file_mgnf, uid);}
-	@Override public void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Xoh_make_trie_.Bry__file_info, uid);}
-	@Override public void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Xoh_make_trie_.Bry__file_play, uid);}
-	private static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
-		bfr.Add(key);
-		bfr.Add_int_variable(uid);
-		bfr.Add(Bry_xnde_end);
-	}	private static final byte[] Bry_xnde_end = Bry_.new_a7("\"/>");
+//		public override void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
+//			tmp_bfr.Add(Xoh_make_trie_.Bry__img_style);
+//			tmp_bfr.Add_int_variable(uid);
+//			tmp_bfr.Add_byte_quote();
+//			byte[] div2_width_repl = tmp_bfr.To_bry_and_clear();
+//			fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
+//		}
+//		public override void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Xoh_make_trie_.Bry__file_mgnf, uid);}
+//		public override void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Xoh_make_trie_.Bry__file_info, uid);}
+//		public override void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Xoh_make_trie_.Bry__file_play, uid);}
+//		private static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
+//			bfr.Add(key);
+//			bfr.Add_int_variable(uid);
+//			bfr.Add(Bry_xnde_end);
+//		}	private static final byte[] Bry_xnde_end = Bry_.new_a7("\"/>");
 	public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

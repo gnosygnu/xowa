@@ -28,4 +28,5 @@ public interface Xoh_hdoc_wkr {
 	void On_lnki	(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser arg);
 	void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg);
 	void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg);
+	void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser arg);
 }

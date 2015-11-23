@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.stores.*;
 public class GfoNde implements GfoInvkAble {
 	public GfoFldList Flds() {return flds;} GfoFldList flds;
 	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();

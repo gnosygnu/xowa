@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.core.brys.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Poem_nde implements Xox_xnde {
 	private Xop_root_tkn xtn_root;

@@ -59,18 +59,18 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		Xowd_page_itm dbo_page = new Xowd_page_itm();
 		for (int i = 0; i < len; i++) {
 			Xoctg_view_itm itm = (Xoctg_view_itm)title_list.Get_at(i);
-			if (pct != 0 && i % pct == 0) usr_dlg.Prog_many("", "", "loading title data: ~{0} / ~{1} -- ~{2}", i, len, String_.new_u8(itm.Sortkey()));
-			boolean id_exists = wiki.Db_mgr().Load_mgr().Load_by_id(dbo_page, itm.Id());
+			if (pct != 0 && i % pct == 0) usr_dlg.Prog_many("", "", "loading title data: ~{0} / ~{1} -- ~{2}", i, len, String_.new_u8(itm.Sort_key()));
+			boolean id_exists = wiki.Db_mgr().Load_mgr().Load_by_id(dbo_page, itm.Page_id());
 			Xoa_ttl itm_ttl = null;
 			if (id_exists)
 				itm_ttl = Xoa_ttl.parse(wiki, dbo_page.Ns_id(), dbo_page.Ttl_page_db());
 			else {
-				itm_ttl = Xoa_ttl.parse(wiki, itm.Sortkey());
+				itm_ttl = Xoa_ttl.parse(wiki, itm.Sort_key());
 				if (itm_ttl == null)
 					itm_ttl = Xoa_ttl.parse(wiki, Bry_missing);
-				itm.Id_missing_(true);
+				itm.Missing_y_();
 			}
-			itm.Ttl_(itm_ttl);
+			itm.Set__ttl__sortkey(itm_ttl, itm.Sort_key());
 		}
 	}	List_adp title_list = List_adp_.new_(); static final byte[] Bry_missing = Bry_.new_a7("missing");
 	private void Add_titles(List_adp title_list, Xoctg_view_grp grp) {
@@ -97,7 +97,8 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		byte[] all_stats = msg_mgr.Val_by_id_args(fmtr_all.Msg_id_stats(), view_grp.Len(), view_grp.Total());
 		Xoa_ttl ctg_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__category, view_ctg.Name());
 		byte[] all_navs = fmtr_all.Bld_bwd_fwd(wiki, ctg_ttl, view_grp);
-		fmtr_grp.Init_from_all(wiki, lang, view_ctg, fmtr_all, view_grp);
+		Array_.Sort(view_grp.Itms(), Xoctg_view_itm_sorter_sortkey.Instance);
+		fmtr_grp.Init_from_all(wiki, lang, view_ctg, fmtr_all, view_grp);	// NOTE: must assert sorted for v1; PAGE:s.w:Category:Computer_science; DATE:2015-11-22
 		fmtr_all.Html_all().Bld_bfr_many(bfr, fmtr_all.Div_id(), all_label, all_stats, all_navs, lang.Key_bry(), lang.Dir_ltr_bry(), fmtr_grp);
 	}
 	public static final int Cols_max = 3;
@@ -117,19 +118,19 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		return this;
 	}	private static final String Invk_grp_max = "grp_max", Invk_grp_max_ = "grp_max_";
 }
-class Xoctg_view_itm_sorter_id implements gplx.lists.ComparerAble {
+class Xoctg_view_itm_sorter_id implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_view_itm lhs = (Xoctg_view_itm)lhsObj;
 		Xoctg_view_itm rhs = (Xoctg_view_itm)rhsObj;
-		return Int_.Compare(lhs.Id(), rhs.Id());
+		return Int_.Compare(lhs.Page_id(), rhs.Page_id());
 	}
 	public static final Xoctg_view_itm_sorter_id Instance = new Xoctg_view_itm_sorter_id(); 
 }
-class Xoctg_view_itm_sorter_sortkey implements gplx.lists.ComparerAble {
+class Xoctg_view_itm_sorter_sortkey implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_view_itm lhs = (Xoctg_view_itm)lhsObj;
 		Xoctg_view_itm rhs = (Xoctg_view_itm)rhsObj;
-		return Bry_.Compare(lhs.Sortkey(), rhs.Sortkey());
+		return Bry_.Compare(lhs.Sort_key(), rhs.Sort_key());
 	}
 	public static final Xoctg_view_itm_sorter_sortkey Instance = new Xoctg_view_itm_sorter_sortkey(); 
 }

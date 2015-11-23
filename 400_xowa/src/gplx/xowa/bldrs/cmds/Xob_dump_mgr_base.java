@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
@@ -41,8 +42,8 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	public void Cmd_bgn(Xob_bldr bldr) {
 		parser = wiki.Parser_mgr().Main();
 		ctx = wiki.Parser_mgr().Ctx();
-		root = ctx.Tkn_mkr().Root(Bry_.Empty);			
-		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql		
+		root = ctx.Tkn_mkr().Root(Bry_.Empty);
+		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
 		wiki.Db_mgr_as_sql().Core_data_mgr().Init_by_load(gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(wiki));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)
 		wiki.File__orig_mgr().Wkrs_del(Xof_orig_wkr_.Tid_wmf_api);
 		db_fsys_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
@@ -50,7 +51,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		poll_interval = poll_mgr.Poll_interval();
 
 		page_src = new Xob_dump_src_id().Init(wiki, this.Init_redirect(), select_size);
-		ns_ary = Init_ns_ary();						
+		ns_ary = Init_ns_ary();
 		Db_conn conn = Init_db_file();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		bmk_mgr.Cfg_url_(wiki_dir.GenSubFil("xowa.file.make.cfg.gfs"));

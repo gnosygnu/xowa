@@ -47,7 +47,7 @@ abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implement
 			}
 			Xoctg_view_itm itm = list.Itms()[i];
 			Xoa_ttl ttl = itm.Ttl();
-			byte[] itm_sortkey = itm.Sortkey();
+			byte[] itm_sortkey = itm.Sort_key();
 			byte[] ttl_bry = ttl.Page_txt();
 			if (!Bry_.Has_at_bgn(itm_sortkey, ttl_char_0, 0, itm_sortkey.length)) {
 				grp_end_idx = i;
@@ -63,8 +63,8 @@ abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implement
 		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
 		byte[] itm_full_ttl = ttl.Full_txt();// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
-		Bry_fmtr fmtr = itm.Id_missing() ? html_itm_missing : html_itm;
-		fmtr.Bld_bfr_many(bfr, itm_href, itm_full_ttl, itm_full_ttl, itm.Id(), itm_atr_cls);
+		Bry_fmtr fmtr = itm.Missing() ? html_itm_missing : html_itm;
+		fmtr.Bld_bfr_many(bfr, itm_href, itm_full_ttl, itm_full_ttl, itm.Page_id(), itm_atr_cls);
 	}
 }
 class Xoctg_fmtr_itm_page extends Xoctg_fmtr_itm_base {
@@ -97,9 +97,9 @@ class Xoctg_fmtr_itm_file extends Xoctg_fmtr_itm_base {
 class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 	@Override public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
 		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
-		int sub_ctgs = itm.Subs_ctgs();
-		int sub_pages = itm.Subs_pages();
-		int sub_files = itm.Subs_files();
+		int sub_ctgs = 0;	// itm.Subs_ctgs();
+		int sub_pages = 0;	// itm.Subs_pages();
+		int sub_files = 0;	// itm.Subs_files();
 		byte[] contains_title = msg_mgr.Val_by_id_args(Xol_msg_itm_.Id_ctgtree_subc_counts, sub_ctgs, sub_pages, sub_files);
 		byte[] contains_text = Bld_contains_text(sub_ctgs, sub_pages, sub_files);
 		html_itm.Bld_bfr_many(bfr, ttl.Page_db(), ttl_page, itm_href, ttl_page, contains_title, contains_text);

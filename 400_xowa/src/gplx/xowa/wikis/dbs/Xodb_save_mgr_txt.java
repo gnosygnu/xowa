@@ -111,7 +111,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	private Xowd_page_itm tmp_page = new Xowd_page_itm(); 
 	public static final int File_idx_unknown = -1;
 }
-class Bry_comparer_fld_last implements gplx.lists.ComparerAble {
+class Bry_comparer_fld_last implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
 		int lhs_bgn = Bry_find_.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_find_.Not_found) lhs_bgn = -1;

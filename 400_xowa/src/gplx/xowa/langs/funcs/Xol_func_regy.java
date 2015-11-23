@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.funcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.core.intls.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*; import gplx.core.intls.*; import gplx.core.envs.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.kwds.*;
 public class Xol_func_regy {

@@ -79,7 +79,7 @@ public class Xowd_xowa_db_tbl {
 		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().To_str());
 	}
 }
-class Xowd_db_file_sorter__id implements gplx.lists.ComparerAble {
+class Xowd_db_file_sorter__id implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xowd_db_file lhs = (Xowd_db_file)lhsObj;
 		Xowd_db_file rhs = (Xowd_db_file)rhsObj;

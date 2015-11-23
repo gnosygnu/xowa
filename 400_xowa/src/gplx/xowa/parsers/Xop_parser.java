@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.wikis.nss.*;
+import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
 	private final Xowe_wiki wiki;
@@ -42,7 +42,8 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
 		return bfr.To_bry_and_rls();
 	}
-	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, boolean para_enabled, byte[] src) {
+	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
+	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, Xoh_wtr_ctx hctx, boolean para_enabled, byte[] src) {
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
@@ -51,7 +52,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		root.Reset();
 		ctx.Para().Enabled_(para_enabled);
 		parser.Parse_wtxt_to_wdom(root, ctx, ctx.Tkn_mkr(), wtxt, Xop_parser_.Doc_bgn_bos);
-		wiki.Html_mgr().Html_wtr().Write_all(trg, ctx, wtxt, root);
+		wiki.Html_mgr().Html_wtr().Write_all(trg, ctx, hctx, wtxt, root);
 	}
 	public Xot_defn_tmpl Parse_text_to_defn_obj(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xow_ns ns, byte[] name, byte[] src) {
 		Xot_defn_tmpl rv = new Xot_defn_tmpl();

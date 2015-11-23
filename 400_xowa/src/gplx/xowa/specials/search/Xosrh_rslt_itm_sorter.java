@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.xowa.wikis.data.tbls.*;
-public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
+public class Xosrh_rslt_itm_sorter implements gplx.core.lists.ComparerAble {
 	public byte Tid() {return tid;} public Xosrh_rslt_itm_sorter Tid_(byte v) {tid = v; return this;} private byte tid = Tid_len_dsc;
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xowd_page_itm lhs = (Xowd_page_itm)lhsObj;

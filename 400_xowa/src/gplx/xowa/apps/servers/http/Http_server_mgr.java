@@ -33,7 +33,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.primitives.*; import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.primitives.*; import gplx.core.envs.*;
+import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.*;
 public class Http_server_mgr implements GfoInvkAble {
 	private final Object thread_lock = new Object();
@@ -49,7 +50,7 @@ public class Http_server_mgr implements GfoInvkAble {
 	public Xoae_app App() {return app;} private final Xoae_app app;
 	public Http_server_wtr Server_wtr() {return server_wtr;} private final Http_server_wtr server_wtr = Http_server_wtr_.new_console();
 	public Http_request_parser Request_parser() {return request_parser;} private final Http_request_parser request_parser;
-	public Url_encoder Encoder() {return encoder;} private final Url_encoder encoder = Url_encoder.new_http_url_();
+	public Gfo_url_encoder Encoder() {return encoder;} private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
 	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
 	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
 	public Int_pool Uid_pool() {return uid_pool;} private final Int_pool uid_pool = new Int_pool();
@@ -84,7 +85,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		Note("HTTP Server started: Navigate to http://localhost:" + Int_.To_str(port));
 	}
 	public void Run_xowa_cmd(Xoae_app app, String url_encoded_str) {
-		Url_encoder url_converter = Url_encoder.new_http_url_();	// create instance for each call
+		Gfo_url_encoder url_converter = Gfo_url_encoder_.New__http_url().Make();	// create instance for each call
 		String cmd = url_converter.Decode_str(url_encoded_str);
 		app.Gfs_mgr().Run_str(cmd);
 	}

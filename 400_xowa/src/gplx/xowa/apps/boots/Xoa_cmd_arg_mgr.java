@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.consoles.*;
+import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*;
 public class Xoa_cmd_arg_mgr {
 	Xoa_cmd_arg_mgr(Gfo_cmd_arg_mgr arg_mgr) {this.arg_mgr = arg_mgr;}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.lists.*; /*Ordered_hash_base*/
+import gplx.core.lists.*; /*Ordered_hash_base*/
 public class IoItmList extends Ordered_hash_base {
 	public boolean Has(Io_url url) {return Has_base(MakeKey(url));}
 	public void Add(IoItm_base itm) {

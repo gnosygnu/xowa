@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import java.sql.*;	
-import gplx.dbs.engines.*; import gplx.dbs.sqls.*;
+import gplx.dbs.engines.*; import gplx.dbs.sqls.*; import gplx.core.stores.*;
 public class Db_stmt_cmd implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
 	private Db_engine engine;

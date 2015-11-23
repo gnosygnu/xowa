@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
-import gplx.lists.*; /*ComparerAble*/
+import gplx.core.lists.*; /*ComparerAble*/
 public class GfoNdeList_ {
 	public static final GfoNdeList Null = new GfoNdeList_null();
 	public static GfoNdeList new_() {return new GfoNdeList_base();}

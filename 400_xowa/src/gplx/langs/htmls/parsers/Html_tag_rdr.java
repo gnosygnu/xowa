@@ -26,10 +26,10 @@ public class Html_tag_rdr {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;
 	public Bry_rdr Rdr() {return rdr;} private final Bry_rdr rdr = new Bry_rdr();		
-	public void Init(byte[] src, int src_bgn, int src_end) {
+	public void Init(byte[] ctx, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
-		tag__eos.Init(this, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Html_tag_.Id__eos);
-		rdr.Init_by_page(Bry_.Empty, src, src_end);
+		tag__eos.Init(this, src, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Html_tag_.Id__eos);
+		rdr.Init_by_page(ctx, src, src_end);
 	}
 	public int Pos() {return pos;} private int pos;
 	public void Pos_(int v) {this.pos = v;}
@@ -169,7 +169,7 @@ public class Html_tag_rdr {
 			++tag_end;	// position after ">"
 		}
 		Html_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
-		return tmp.Init(this, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, name_hash.Get_as_int_or(src, name_bgn, name_end, -1));
+		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, name_hash.Get_as_int_or(src, name_bgn, name_end, -1));
 	}
 	public boolean Read_and_move(byte match) {
 		byte b = src[pos];
@@ -215,11 +215,11 @@ public class Html_tag_rdr {
 	}
 	private Html_tag Tag__comment(int tag_bgn) {
 		int tag_end = Bry_find_.Move_fwd(src, gplx.langs.htmls.Html_tag_.Comm_end, tag_bgn, src_end); if (tag_end == Bry_find_.Not_found) tag_end = src_end;
-		return tag__comment.Init(this, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__comment);
+		return tag__comment.Init(this, src, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__comment);
 	}
 	private Html_tag Tag__eos(int tag_bgn) {
 		int tag_end = tag_bgn + 255; if (tag_end > src_end) tag_end = src_end;
-		return tag__comment.Init(this, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__eos);
+		return tag__comment.Init(this, src, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Html_tag_.Id__eos);
 	}
 	private static final byte[] Bry__comment__mid = Bry_.new_a7("--"); 
 }

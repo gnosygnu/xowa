@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.errs.*;
 import gplx.langs.jsons.*; import gplx.langs.htmls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;

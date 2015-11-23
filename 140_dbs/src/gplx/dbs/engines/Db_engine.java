@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
+import gplx.core.stores.*;
 public interface Db_engine {
 	String			Tid();
 	Db_conn_info	Conn_info();

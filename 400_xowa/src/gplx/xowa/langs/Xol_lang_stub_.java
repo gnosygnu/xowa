@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class Xol_lang_stub_ {	// lists all known stub_ary supported by MW
 	public static final byte[] Key__unknown = Bry_.Empty;
 	public static final ComparerAble Comparer_key = new Xol_sub_itm_comparer();

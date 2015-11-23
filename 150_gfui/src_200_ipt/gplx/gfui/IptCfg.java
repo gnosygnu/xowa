@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public interface IptCfg extends NewAble, GfoInvkAble {
+public interface IptCfg extends GfoInvkAble {
 	String CfgKey();
+	Object NewByKey(Object o);
 	IptCfgItm GetOrDefaultArgs(String key, GfoMsg m, IptArg[] argAry);
 	void Owners_add(String key, IptBndsOwner owner);
 	void Owners_del(String key);

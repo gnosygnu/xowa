@@ -53,13 +53,13 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Link_external_relative() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//fr.wikipedia.org/wiki/|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"https://fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"https://fr.wikipedia.org/wiki/\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_external_absolute() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://fr.wikipedia.org/wiki/|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"http://fr.wikipedia.org/wiki/\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_external_double_http() {// PURPOSE.fix: link=http://a.org?b=http://c.org breaks lnki; DATE:2013-02-03
@@ -72,35 +72,35 @@ public class Xop_lnki_wkr__link_tst {
 		fxt.Init_xwiki_add_user_("fr.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//fr.wikipedia.org/wiki/|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/fr.wikipedia.org/wiki/\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_relative_domain_only() {	// lnki_wtr fails if link is only domain; EX: wikimediafoundation.org; [[Image:Wikispecies-logo.png|35px|link=//species.wikimedia.org]]; // NOTE: changed href to return "/wiki/" instead of ""; DATE:2013-02-18
 		fxt.Init_xwiki_add_user_("fr.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//fr.wikipedia.org]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/fr.wikipedia.org/wiki/\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_absolute() {	// NOTE: changed href to return "wiki/" instead of "wiki"; DATE:2013-02-18
 		fxt.Init_xwiki_add_user_("fr.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://fr.wikipedia.org/wiki/|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/fr.wikipedia.org/wiki/\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_absolute_upload() {	// PURPOSE: link to upload.wikimedia.org omits /wiki/; EX: wikimediafoundation.org: [[File:Page1-250px-WMF_AR11_SHIP_spreads_15dec11_72dpi.png|right|125px|border|2010–2011 Annual Report|link=https://upload.wikimedia.org/wikipedia/commons/4/48/WMF_AR11_SHIP_spreads_15dec11_72dpi.pdf]]
 		fxt.Init_xwiki_add_user_("commons.wikimedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://upload.wikimedia.org/wikipedia/commons/7/70/A.png|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_relative_deep() {
 		fxt.Init_xwiki_add_user_("fr.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//fr.wikipedia.org/wiki/A/b|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/fr.wikipedia.org/wiki/A/b\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/fr.wikipedia.org/wiki/A/b\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_alias() {	// [[File:Commons-logo.svg|25x25px|link=http://en.wikipedia.org/wiki/commons:Special:Search/Earth|alt=|Search Commons]]
@@ -108,7 +108,7 @@ public class Xop_lnki_wkr__link_tst {
 		fxt.Init_xwiki_add_wiki_and_user_("en.wikipedia.org", "en.wikipedia.org"); // DATE:2015-07-22
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://en.wikipedia.org/wiki/commons:B|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/commons.wikimedia.org/wiki/B\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/commons.wikimedia.org/wiki/B\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 		fxt.Init_xwiki_clear();
 	}
@@ -117,7 +117,7 @@ public class Xop_lnki_wkr__link_tst {
 		fxt.Init_xwiki_add_wiki_and_user_("en.wikipedia.org", "en.wikipedia.org");	// DATE:2015-07-22
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://en.wikipedia.org/wiki/commons:Special:Search/B|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/commons.wikimedia.org/wiki/Special:Search/B\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/site/commons.wikimedia.org/wiki/Special:Search/B\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 		fxt.Init_xwiki_clear();
 	}

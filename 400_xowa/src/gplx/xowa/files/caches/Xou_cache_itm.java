@@ -79,7 +79,7 @@ public class Xou_cache_itm {
 		return key_bfr.To_bry_and_clear();
 	}
 }
-class Xof_cache_mgr_sorter implements gplx.lists.ComparerAble {
+class Xof_cache_mgr_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xou_cache_itm lhs = (Xou_cache_itm)lhsObj;
 		Xou_cache_itm rhs = (Xou_cache_itm)rhsObj;

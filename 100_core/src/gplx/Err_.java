@@ -52,6 +52,7 @@ public class Err_ {
 	}
 
 	public static String Message_lang(Throwable e) {return e.getMessage();} 
+	public static String To_str(Exception e) {return e.toString();}	// e.getMessage() is sometimes null?
 		public static String Trace_lang(Throwable e) 	{return Trace_lang_exec(e.getStackTrace());}
 	private static String Trace_lang_exec(StackTraceElement[] ary) {
 		String rv = "";

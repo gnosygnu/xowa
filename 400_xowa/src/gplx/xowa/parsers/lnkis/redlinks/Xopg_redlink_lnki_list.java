@@ -46,6 +46,6 @@ public class Xopg_redlink_lnki_list {
 			return;				
 		lnki_list.Add(lnki);
 	}
-	public static final String Lnki_id_prefix = "xowa_lnki_";
+	public static final String Lnki_id_prefix = "xolnki_";
 	public static final int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);
 }

@@ -47,7 +47,7 @@ public class Xoh_lnke_html {
 			else {							// xowa or regular; EX: http://a.org
 				if (proto_is_xowa) {
 					bfr.Add(Xop_lnke_wkr.Bry_xowa_protocol);
-					Xoa_app_.Utl__encoder_mgr().Gfs().Encode(bfr, src, href_bgn, href_end);
+					gplx.langs.htmls.encoders.Gfo_url_encoder_.Gfs.Encode(bfr, src, href_bgn, href_end);
 					return false;
 				}
 				else {						// regular; add href
@@ -57,12 +57,12 @@ public class Xoh_lnke_html {
 			}
 		}
 		else {	// xwiki
-			Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href_quotes();
+			Gfo_url_encoder href_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes;
 			bfr.Add(Xoh_href_.Bry__site).Add(lnke_xwiki_wiki).Add(Xoh_href_.Bry__wiki)
-				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));	// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
+				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));					// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)
 				Gfo_qarg_mgr.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
-			return false;
+			return ctx.Wiki().App().Xwiki_mgr__missing(lnke_xwiki_wiki);
 		}
 	}
 	public void Write_caption(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {

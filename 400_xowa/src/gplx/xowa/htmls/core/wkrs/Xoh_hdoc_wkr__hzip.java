@@ -33,4 +33,5 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser arg)	{hctx.Mkr().Lnki__hzip().Encode(bfr, hctx, stat_itm, src, arg).Pool__rls();}
 	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg)		{hctx.Mkr().Thm__hzip().Encode(bfr, this, stat_itm, src, arg).Pool__rls();}
 	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg)		{hctx.Mkr().Img__hzip().Encode(bfr, stat_itm, src, arg, Bool_.Y).Pool__rls();}
+	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser arg) {hctx.Mkr().Gly__hzip().Encode(bfr, stat_itm, src, arg).Pool__rls();}
 }

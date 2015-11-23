@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*; import gplx.dbs.sqls.*; import gplx.core.gfo_ndes.*;
+import gplx.core.criterias.*; import gplx.dbs.sqls.*; import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
 public class Db_qry__select_cmd implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_select;}
 	public boolean			Exec_is_rdr() {return true;}

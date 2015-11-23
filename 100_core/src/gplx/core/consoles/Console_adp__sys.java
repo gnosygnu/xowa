@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
+import gplx.core.envs.*;
 public class Console_adp__sys implements Console_adp {
 	private String tmp_txt;
 	public Console_adp__sys() {

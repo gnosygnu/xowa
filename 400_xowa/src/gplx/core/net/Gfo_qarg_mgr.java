@@ -73,10 +73,10 @@ public class Gfo_qarg_mgr {
 	public byte[] To_bry() {
 		int len = list.Count(); if (len == 0) return Bry_.Empty;
 		Bry_bfr bfr = Bry_bfr.new_();
-		To_bry(bfr, gplx.xowa.Xoa_app_.Utl__encoder_mgr().Href(), false);
+		To_bry(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, false);
 		return bfr.To_bry_and_clear();
 	}
-	public void To_bry(Bry_bfr bfr, Url_encoder href_encoder, boolean encode) {
+	public void To_bry(Bry_bfr bfr, Gfo_url_encoder href_encoder, boolean encode) {
 		int len = list.Count(); if (len == 0) return;
 		for (int i = 0; i < len; ++i) {
 			Gfo_qarg_itm itm = (Gfo_qarg_itm)list.Get_at(i);
@@ -86,8 +86,8 @@ public class Gfo_qarg_mgr {
 			Write_or_encode(bfr, href_encoder, encode, itm.Val_bry());
 		}
 	}
-	public static void Concat_bfr(Bry_bfr bfr, Url_encoder href_encoder, Gfo_qarg_itm[] ary) {Concat_bfr(bfr, href_encoder, ary, true);}
-	private static void Concat_bfr(Bry_bfr bfr, Url_encoder href_encoder, Gfo_qarg_itm[] ary, boolean encode) {
+	public static void Concat_bfr(Bry_bfr bfr, Gfo_url_encoder href_encoder, Gfo_qarg_itm[] ary) {Concat_bfr(bfr, href_encoder, ary, true);}
+	private static void Concat_bfr(Bry_bfr bfr, Gfo_url_encoder href_encoder, Gfo_qarg_itm[] ary, boolean encode) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Gfo_qarg_itm itm = ary[i];
@@ -97,7 +97,7 @@ public class Gfo_qarg_mgr {
 			Write_or_encode(bfr, href_encoder, encode, itm.Val_bry());
 		}
 	}
-	private static void Write_or_encode(Bry_bfr bfr, Url_encoder href_encoder, boolean encode, byte[] bry) {
+	private static void Write_or_encode(Bry_bfr bfr, Gfo_url_encoder href_encoder, boolean encode, byte[] bry) {
 		if (bry == null) return;	// NOTE: need null check b/c itm.Val_bry can be null
 		if (encode)
 			href_encoder.Encode(bfr, bry);

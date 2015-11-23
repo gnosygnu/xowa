@@ -122,14 +122,14 @@ class Xoctg_idx_mgr_fxt {
 		tmp_list.Clear();
 		idx_mgr.Find(tmp_list, src, fill_at_bgn, Bry_.new_a7(find), 3, tmp_last_plus_one);
 		Tfds.Eq_ary(expd_ary, To_str_ary(tmp_list));
-		Tfds.Eq(last_plus_one, String_.new_a7(tmp_last_plus_one.Sortkey()));
+		Tfds.Eq(last_plus_one, String_.new_a7(tmp_last_plus_one.Sort_key()));
 		return this;
 	}	List_adp tmp_list; Xoctg_view_itm tmp_last_plus_one = new Xoctg_view_itm();
 	String[] To_str_ary(List_adp list) {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = String_.new_a7(((Xoctg_view_itm)list.Get_at(i)).Sortkey());
+			rv[i] = String_.new_a7(((Xoctg_view_itm)list.Get_at(i)).Sort_key());
 		}
 		return rv;
 	}

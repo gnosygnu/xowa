@@ -30,6 +30,7 @@ public class Xow_domain_itm_tst {
 	@Test  public void Parse_other() 					{fxt.Test_parse("other.wiki"					, ""				, ""	, Xow_domain_tid_.Int__other);}
 	@Test  public void Parse_ua_wikimedia_org() 		{fxt.Test_parse("ua.wikimedia.org"				, "ua"				, "uk"	, Xow_domain_tid_.Int__wikimedia);}
 	@Test  public void Parse_ar_wikimedia_org() 		{fxt.Test_parse("ar.wikimedia.org"				, "ar"				, "es"	, Xow_domain_tid_.Int__wikimedia);}
+	@Test  public void Parse_blank() 					{fxt.Test_parse(""								, ""				, ""	, Xow_domain_tid_.Int__other);}
 }
 class Xow_domain_fxt {
 	public void Test_parse(String domain, String expd_orig_lang, String expd_actl_lang, int expd_tid) {

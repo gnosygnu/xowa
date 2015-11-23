@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.envs.*;
 import gplx.gfui.*;
 import gplx.xowa.bldrs.wms.*;
 public interface Xof_img_wkr_query_img_size {
 	SizeAdp Exec(Io_url url);
 }
 class Xof_img_wkr_query_img_size_imageMagick implements Xof_img_wkr_query_img_size {
-	private final Xowmf_mgr wmf_mgr; private final ProcessAdp cmd;
-	public Xof_img_wkr_query_img_size_imageMagick(Xowmf_mgr wmf_mgr, ProcessAdp cmd) {this.wmf_mgr = wmf_mgr; this.cmd = cmd;}
+	private final Xowmf_mgr wmf_mgr; private final Process_adp cmd;
+	public Xof_img_wkr_query_img_size_imageMagick(Xowmf_mgr wmf_mgr, Process_adp cmd) {this.wmf_mgr = wmf_mgr; this.cmd = cmd;}
 	public SizeAdp Exec(Io_url url) {
 		cmd.Prog_fmt_(String_.Replace(wmf_mgr.Download_wkr().Download_xrg().Prog_fmt_hdr(), "~", "~~") + " querying: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		cmd.Run(url);

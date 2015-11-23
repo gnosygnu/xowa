@@ -73,7 +73,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.lnki_exec_tid = exec_tid; this.lnki_wiki_abrv = wiki_abrv;
 		this.lnki_type = lnki_type; this.lnki_upright = upright; this.lnki_w = w; this.lnki_h = h; this.lnki_time = time; this.lnki_page = page;
 		this.file_is_orig = !Xof_xfer_itm_.Lnki_thumbable_calc(lnki_type, lnki_w, lnki_h);
-		this.lnki_ttl = Xof_file_wkr_.Md5_decoder.Decode_lax(Xof_file_wkr_.Ttl_standardize(ttl));
+		this.lnki_ttl = Xof_file_wkr_.Md5_decoder.Decode(Xof_file_wkr_.Ttl_standardize(ttl));
 		this.Orig_ttl_(ttl);
 		this.orig_ext = Xof_ext_.new_by_ttl_(ttl);
 		if (lnki_time != Xof_lnki_time.Null && !orig_ext.Id_is_media())	// thumbtime is set, but ext is not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0:02]] DATE:2014-07-22
@@ -110,7 +110,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void Orig_ttl_and_redirect_(byte[] ttl, byte[] redirect) {
 		this.orig_redirect = redirect;
 		this.lnki_ttl = orig_redirect == Xop_redirect_mgr.Redirect_null_bry ? Bry_.Copy(ttl) : orig_redirect;
-		this.lnki_ttl = Xof_file_wkr_.Md5_decoder.Decode_lax(Xof_file_wkr_.Ttl_standardize(lnki_ttl));	// NOTE: this line is repeated in static method below
+		this.lnki_ttl = Xof_file_wkr_.Md5_decoder.Decode(Xof_file_wkr_.Ttl_standardize(lnki_ttl));	// NOTE: this line is repeated in static method below
 		this.orig_ttl = lnki_ttl;
 		this.orig_ttl_md5 = Xof_file_wkr_.Md5_fast(lnki_ttl);	// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
 		this.orig_ext = Xof_ext_.new_by_ttl_(lnki_ttl);

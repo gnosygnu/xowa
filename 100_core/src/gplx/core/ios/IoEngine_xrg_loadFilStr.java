@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.texts.*;
+import gplx.core.texts.*; import gplx.core.envs.*;
 public class IoEngine_xrg_loadFilStr {
 	public Io_url Url() {return url;} public IoEngine_xrg_loadFilStr Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean MissingIgnored() {return missingIgnored;} public IoEngine_xrg_loadFilStr MissingIgnored_() {return MissingIgnored_(true);} public IoEngine_xrg_loadFilStr MissingIgnored_(boolean v) {missingIgnored = v; return this;} private boolean missingIgnored = false;

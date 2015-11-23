@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.lists.*;
+import gplx.core.envs.*;
+import gplx.core.lists.*;
 public class Io_sort {
 	public Io_sort Memory_max_(int v) {memory_max = v; return this;} private int memory_max = Io_mgr.Len_kb;
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter.Instance, key_gen);}

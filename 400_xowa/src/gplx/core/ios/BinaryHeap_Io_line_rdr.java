@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 class BinaryHeap_Io_line_rdr {
 	public BinaryHeap_Io_line_rdr(ComparerAble comparer) {this.comparer = comparer;} ComparerAble comparer;
 	Io_line_rdr[] ary = Ary_empty; int ary_len = 0, ary_max = 0;

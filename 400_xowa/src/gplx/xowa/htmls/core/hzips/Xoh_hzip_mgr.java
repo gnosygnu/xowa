@@ -44,8 +44,7 @@ public class Xoh_hzip_mgr {
 					pos = rdr.Pos();
 				} catch (Exception e) {
 					wkr.Pool__rls();
-					Err err = Err_.cast_or_make(e);
-					if (!err.Logged()) Gfo_usr_dlg_.Instance.Warn_many("", "", Err_.Message_gplx_log(e), "page_url", page_url, "mid", Bry_.Mid_by_len_safe(src, pos, 255));
+					gplx.langs.htmls.Html_utl.Log(e, "hzip decode failed", hpg.Url_bry_safe(), src, pos);
 					pos += 2;	// 2: skip escape and hook
 				}
 			}

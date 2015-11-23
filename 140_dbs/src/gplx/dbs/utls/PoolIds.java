@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
+import gplx.core.stores.*;
 import gplx.dbs.qrys.*;
 public class PoolIds {
 	public int FetchNext(Db_conn conn, String url) {

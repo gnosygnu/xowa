@@ -29,7 +29,7 @@ public class Xoh_make_mgr {
 	private final Bry_rdr parser = new Bry_rdr();
 	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	private final Xoh_hdoc_parser make_parser = new Xoh_hdoc_parser(new Xoh_hdoc_wkr__make());
-	public Xoh_make_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder, byte[] wiki_domain) {
+	public Xoh_make_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Gfo_url_encoder fsys_encoder, byte[] wiki_domain) {
 		this.usr_dlg = usr_dlg;
 		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
 		this.file_dir = fsys_mgr.File_dir().To_http_file_bry();

@@ -30,11 +30,21 @@ public class Xoh_hzip_fxt {
 		this.hzip_mgr = parser_fxt.Wiki().Html__hdump_mgr().Hzip_mgr();
 		hpg.Init(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 	}
+	public Xow_wiki Wiki() {return parser_fxt.Wiki();}
+	public void Clear() {hpg.Clear();}
+	public Xowe_wiki Prep_create_wiki(String alias, String domain) {
+		Xowe_wiki rv = Xoa_app_fxt.wiki_(parser_fxt.App(), domain);
+		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_u8(alias), Bry_.new_u8(domain), null);
+		return rv;
+	}
 	public void Test__bicode(String hzip, String html) {Test__bicode(hzip, html, html);}
 	public void Test__bicode(String hzip, String html_enc, String html_dec) {
-		hzip = Html_utl.Replace_apos(Xoh_hzip_fxt.Escape(hzip)); 
 		html_enc = Html_utl.Replace_apos(html_enc);
 		html_dec = Html_utl.Replace_apos(html_dec);
+		Test__bicode_raw(hzip, html_enc, html_dec);
+	}
+	public void Test__bicode_raw(String hzip, String html_enc, String html_dec) {
+		hzip = Xoh_hzip_fxt.Escape(hzip); 
 		Test__encode__raw(hzip, html_enc);
 		Test__decode__raw(hzip, html_dec);
 	}

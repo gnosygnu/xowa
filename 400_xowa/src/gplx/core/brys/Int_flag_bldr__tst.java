@@ -58,6 +58,8 @@ class Int_flag_bldr__fxt {
 	public void Test__to_int(int[] seg_ary, int[] val_ary, int expd) {
 		int[] pow_ary = Int_flag_bldr_.Bld_pow_ary(seg_ary);
 		Tfds.Eq(expd, Int_flag_bldr_.To_int(pow_ary, val_ary));
+		int[] actl_val_ary = Int_flag_bldr_.To_int_ary(pow_ary, expd);
+		Tfds.Eq_ary(val_ary, actl_val_ary);
 	}
 	public void Test__to_int_ary(int[] seg_ary, int val, int[] expd) {
 		int[] pow_ary = Int_flag_bldr_.Bld_pow_ary(seg_ary);

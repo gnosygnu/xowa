@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.envs.*;
 abstract class Xob_css_tkn__base {
 	public void Init(int tid, int pos_bgn, int pos_end) {
 		this.tid = tid; this.pos_bgn = pos_bgn; this.pos_end = pos_end;

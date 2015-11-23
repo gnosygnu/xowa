@@ -366,6 +366,10 @@ public class Xop_fxt {
 	public void Test_html_wiki_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_wiki(raw), expd_frags);}
 	public void Test_html_full_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_full(raw), expd_frags);}
 	public void Test_html_full_frag_n(String raw, String... expd_frags)		{Test_str_part_n(Exec_html_full(raw), expd_frags);}
+	public void Test__parse__wtxt_to_html(String raw, String expd) {
+		String actl = Exec_html_wiki(raw);
+		Tfds.Eq_str_lines(gplx.langs.htmls.Html_utl.Replace_apos(expd), actl, raw);
+	}
 
 	public void Test_str_full(String raw, String expd, String actl) {Tfds.Eq_str_lines(expd, actl, raw);}
 	private void Test_str_part_y(String actl, String... expd_parts) {

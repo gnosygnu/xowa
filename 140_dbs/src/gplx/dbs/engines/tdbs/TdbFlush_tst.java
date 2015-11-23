@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import org.junit.*;
-import gplx.core.ios.*; /*IoMgrFxt*/ import gplx.dbs.qrys.*;
+import gplx.core.ios.*; /*IoMgrFxt*/ import gplx.dbs.qrys.*; import gplx.core.type_xtns.*;
 public class TdbFlush_tst {
 	@Before public void setup() {
 		Io_mgr.Instance.InitEngine_mem();

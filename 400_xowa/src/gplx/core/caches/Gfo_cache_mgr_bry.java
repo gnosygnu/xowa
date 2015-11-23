@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.envs.*;
 public class Gfo_cache_mgr_bry extends Gfo_cache_mgr_base {
 	public Object Get_or_null(byte[] key) {return Base_get_or_null(key);}
 	public void Add(byte[] key, Object val) {Base_add(key, val);}
@@ -29,7 +29,7 @@ class Gfo_cache_itm {
 	public long Touched() {return touched;} private long touched;
 	public Gfo_cache_itm Touched_update() {touched = Env_.TickCount(); return this;}
 }
-class Gfo_cache_itm_comparer implements gplx.lists.ComparerAble {
+class Gfo_cache_itm_comparer implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Gfo_cache_itm lhs = (Gfo_cache_itm)lhsObj;
 		Gfo_cache_itm rhs = (Gfo_cache_itm)rhsObj;

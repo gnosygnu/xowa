@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+import gplx.core.stores.*;
 public class Db_engine__mem implements Db_engine {
 	private final Hash_adp tbl_hash = Hash_adp_.new_();
 	Db_engine__mem(Db_conn_info conn_info) {this.conn_info = conn_info;}

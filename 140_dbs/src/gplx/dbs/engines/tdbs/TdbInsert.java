@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.gfo_ndes.*;
-import gplx.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
+import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
+import gplx.core.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;

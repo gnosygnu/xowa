@@ -80,7 +80,7 @@ class Xoctg_pagelist_mgr_fxt {
 	public void Test_print_hidden(String expd) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xowd_page_itm[] page_ary = (Xowd_page_itm[])init_ctgs.To_ary_and_clear(Xowd_page_itm.class);
-		hidden_wtr.Print_hidden(bfr, fxt.Wiki(), page_ary);
+		hidden_wtr.Print_hidden(bfr, fxt.Wiki(), page_ary, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 //		Tfds.Write(bfr.To_bry_and_clear());
 	}

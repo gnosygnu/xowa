@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.stores.*;
 public class GfmlDataRdr_tst {
 	@Test  public void Raw() {
 		raw = "root:{}";

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.tests.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cmd_arg_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private final Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
 	@Test  public void Val__many() {

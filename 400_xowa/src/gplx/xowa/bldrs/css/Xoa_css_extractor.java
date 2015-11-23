@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.ios.*; import gplx.xowa.htmls.*;
-import gplx.langs.htmls.encoders.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.ios.*; import gplx.core.envs.*;
+import gplx.xowa.htmls.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
@@ -33,7 +33,7 @@ public class Xoa_css_extractor {
 	public Xoa_css_extractor Page_fetcher_(Xow_page_fetcher v) {page_fetcher = v; return this;} private Xow_page_fetcher page_fetcher;
 	public Xoa_css_extractor Css_img_downloader_(Xoa_css_img_downloader v) {this.css_img_downloader = v; return this;} private Xoa_css_img_downloader css_img_downloader;
 	public Xoa_css_extractor Opt_download_css_common_(boolean v) {opt_download_css_common = v; return this;} private boolean opt_download_css_common;
-	public Xoa_css_extractor Url_encoder_(Url_encoder v) {url_encoder = v; return this;} private Url_encoder url_encoder;
+	public Xoa_css_extractor Url_encoder_(Gfo_url_encoder v) {url_encoder = v; return this;} private Gfo_url_encoder url_encoder;
 	public Xoa_css_extractor Wiki_code_(byte[] v) {this.wiki_code = v; return this;} private byte[] wiki_code = null;
 	private byte[] mainpage_html; private boolean lang_is_ltr = true;
 	private final Gfo_url_parser url_parser = new Gfo_url_parser();
@@ -43,7 +43,7 @@ public class Xoa_css_extractor {
 		this.download_xrg = download_wkr.Download_xrg();
 		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_u8(protocol_prefix));
 		failover_dir = app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("html", "css", "failover");
-		url_encoder = Xoa_app_.Utl__encoder_mgr().Http_url();
+		url_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url;
 	}
 	public void Install(Xow_wiki wiki, String css_key) {
 		try {

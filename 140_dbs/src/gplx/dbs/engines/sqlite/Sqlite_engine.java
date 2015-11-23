@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import java.sql.*; 
-import gplx.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
+import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
 import gplx.dbs.qrys.*; 
 public class Sqlite_engine extends Db_engine_sql_base {
 	private final Sqlite_txn_mgr txn_mgr; private final Sqlite_schema_mgr schema_mgr;

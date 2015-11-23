@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_lnki_text_fmtr extends gplx.core.brys.Bfr_arg_base {	// formats alt or caption

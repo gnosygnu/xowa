@@ -20,13 +20,13 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 class Wdata_fmtr__oview_tbl extends gplx.core.brys.Bfr_arg_base {
-	private Xoapi_wikibase wikibase_api; private Url_encoder href_encoder;
+	private Xoapi_wikibase wikibase_api; private Gfo_url_encoder href_encoder;
 	private Wdata_fmtr__oview_alias_itm fmtr_aliases = new Wdata_fmtr__oview_alias_itm();
 	private Bry_fmtr slink_fmtr = Bry_fmtr.new_("<a href='/site/~{domain_bry}/wiki/~{page_href}'>~{page_text}</a>", "domain_bry", "page_href", "page_text");
 	private Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Wdata_doc wdoc;
 	private byte[] hdr_alias_y, hdr_alias_n;
-	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Url_encoder href_encoder) {this.wikibase_api = wikibase_api; this.href_encoder = href_encoder;}
+	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Gfo_url_encoder href_encoder) {this.wikibase_api = wikibase_api; this.href_encoder = href_encoder;}
 	public void Init_by_lang(byte[] lang_0, Wdata_hwtr_msgs msgs) {
 		this.hdr_alias_y = msgs.Oview_alias_y();
 		this.hdr_alias_n = msgs.Oview_alias_n();

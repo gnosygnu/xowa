@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.insertIntos; import gplx.*; import gplx.dbs.*;
-import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*;
+import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.core.stores.*;
 public abstract class InsertIntos_base_tst {
 	protected abstract Db_conn provider_();
 	protected Db_conn conn;

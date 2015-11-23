@@ -35,4 +35,5 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 	public void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser arg)		{wkr__hdr.Make(bfr, hpg, src, arg);}
 	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg)		{wkr__img.Make_by_parse(bfr, hpg, hctx, src, arg);}
 	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg)		{bfr.Add_mid(src, arg.Rng_bgn(), arg.Rng_end());}
+	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser arg) {}
 }

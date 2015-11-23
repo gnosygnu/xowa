@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.strings.*; import gplx.core.consoles.*;
+import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.tests.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
 	public static void Eq_bool	(boolean expd	, boolean   actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
@@ -31,8 +31,6 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_str	(String expd, String actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}
-	public static void Eq_able(EqAble expd, EqAble actl)									{Eq_able_wkr(expd, actl, true, EmptyStr);}
-	public static void Eq_able(EqAble expd, EqAble actl, String fmt, Object... args)	{Eq_able_wkr(expd, actl, true, String_.Format(fmt, args));}
 	public static void Eq_byte(byte expd, byte actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_long(long expd, long actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_float(float expd, float actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
@@ -73,15 +71,6 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	private static void Eq_exec_y(Object lhs, Object rhs, String fmt, Object[] args) {
 		if (Object_.Eq(lhs, rhs)) return;
 		String msg = msgBldr.Eq_xtoStr(lhs, rhs, String_.Format(fmt, args));
-		throw Err_.new_wo_type(msg);
-	}
-	static void Eq_able_wkr(EqAble lhs, EqAble rhs, boolean expd, String customMsg) {
-		boolean actl = false;
-		if		(lhs == null && rhs != null) actl = false;
-		else if (lhs != null && rhs == null) actl = false;
-		else	actl = lhs.Eq(rhs);
-		if (expd == actl) return;
-		String msg = msgBldr.Eq_xtoStr(lhs, rhs, customMsg);
 		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_wkr(Object lhs, Object rhs, boolean expd, String customMsg) {
@@ -168,6 +157,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void WriteText(String text) {Console_adp__sys.Instance.Write_str(text);}
 	public static void Write(byte[] s, int b, int e) {Write(Bry_.Mid(s, b, e));}
 	public static void Write() {Write("tmp");}
+	public static void Dbg(Object... ary) {Write(ary);}
 	public static void Write(Object... ary) {
 		String_bldr sb = String_bldr_.new_();
 		int aryLen = Array_.Len(ary);

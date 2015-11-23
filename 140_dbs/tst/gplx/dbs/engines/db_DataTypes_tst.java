@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.type_xtns.*; import gplx.core.stores.*;
 public class db_DataTypes_tst {
 	DataTypes_base_fxt fx = new DataTypes_base_fxt();
 	@Test  public void Mysql() {if (Tfds.SkipDb) return;

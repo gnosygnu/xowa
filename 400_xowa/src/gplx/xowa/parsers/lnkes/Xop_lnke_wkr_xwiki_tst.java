@@ -21,35 +21,35 @@ public class Xop_lnke_wkr_xwiki_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Xwiki() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
-		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/A a]", "<a href=\"/site/en.wikipedia.org/wiki/A\">a</a>");
+		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/wiki/A a]", "<a href='/site/en.wikipedia.org/wiki/A'>a</a>");
 	}
 	@Test  public void Xwiki_relative() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
-		fxt.Test_parse_page_wiki_str("[//en.wikipedia.org/ a]", "<a href=\"/site/en.wikipedia.org/wiki/\">a</a>");
+		fxt.Test__parse__wtxt_to_html("[//en.wikipedia.org/ a]", "<a href='/site/en.wikipedia.org/wiki/'>a</a>");
 	}
 	@Test  public void Xwiki_qarg() {// DATE:2013-02-02
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
-		fxt.Test_parse_page_wiki_str("http://en.wikipedia.org/wiki/Special:Allpages?from=Earth", "<a href=\"/site/en.wikipedia.org/wiki/Special:Allpages?from=Earth\">http://en.wikipedia.org/wiki/Special:Allpages?from=Earth</a>");
+		fxt.Test__parse__wtxt_to_html("http://en.wikipedia.org/wiki/Special:Allpages?from=Earth", "<a href='/site/en.wikipedia.org/wiki/Special:Allpages?from=Earth'>http://en.wikipedia.org/wiki/Special:Allpages?from=Earth</a>");
 	}
 	@Test  public void Lang_prefix() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("fr"), Bry_.new_a7("fr.wikipedia.org"));
-		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/fr:A a]", "<a href=\"/site/fr.wikipedia.org/wiki/A\">a</a>");
+		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/wiki/fr:A a]", "<a href='/site/fr.wikipedia.org/wiki/A' rel='nofollow' class='external text'>a</a>");
 	}
 	@Test  public void Xwiki_query_arg() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
-		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/A?action=edit a]", "<a href=\"/site/en.wikipedia.org/wiki/A?action=edit\">a</a>");
+		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/wiki/A?action=edit a]", "<a href='/site/en.wikipedia.org/wiki/A?action=edit'>a</a>");
 	}
 	@Test  public void Ignore_proto() {	// PURPOSE: handle other protocols; PAGE:uk.w:Маскалі; DATE:2015-07-28
-		fxt.Test_parse_page_wiki_str("[mailto:a b]", "<a href=\"mailto:a\" rel=\"nofollow\" class=\"external text\">b</a>");// should be /w/, not /en.wikipedia.org
+		fxt.Test__parse__wtxt_to_html("[mailto:a b]", "<a href='mailto:a' rel='nofollow' class='external text'>b</a>");// should be /w/, not /en.wikipedia.org
 	}
 	@Test  public void Ignore_alias() {	// PURPOSE: fictitious example to make sure aliases are not subbed for domains; DATE:2015-07-28
 		fxt.Init_xwiki_add_user_("w", "en.wikipedia.org");
-		fxt.Test_parse_page_wiki_str("[https://w/b c]", "<a href=\"https://w/b\" rel=\"nofollow\" class=\"external text\">c</a>");// should be /w/, not /en.wikipedia.org
+		fxt.Test__parse__wtxt_to_html("[https://w/b c]", "<a href='https://w/b' rel='nofollow' class='external text'>c</a>");// should be /w/, not /en.wikipedia.org
 	}
 	@Test  public void Xwiki__qargs() {	// PURPOSE: fix null ref error; PAGE:en.w:Wikipedia:Template_standardisation/demometa DATE:2015-08-02
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
-		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template_standardisation/demometa]"
-			, "<a href=\"/site/en.wikipedia.org/wiki/index.php?action=&#61;edit=&preload=&#61;Template:Afd2+starter=&editintro=&#61;Template:Afd3+starter=&title=&=\">[1]</a>");
+		fxt.Test__parse__wtxt_to_html("[http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template_standardisation/demometa]"
+			, "<a href='/site/en.wikipedia.org/wiki/index.php?action=&#61;edit=&preload=&#61;Template:Afd2+starter=&editintro=&#61;Template:Afd3+starter=&title=&='>[1]</a>");
 	}
 }

@@ -31,10 +31,10 @@ public class Xoh_make_trie_ {
 	, Bry__file_info				= Bry_.new_a7("<xowa_info id='")
 	, Bry__file_mgnf				= Bry_.new_a7("<xowa_mgnf id=\"")
 	, Bry__hiero_dir				= Bry_.new_a7("~{xowa_hiero_dir}")
-	, Bry__gallery_box_max			= Bry_.new_a7("xowa_gly_box_max='")
-	, Bry__gallery_box_w			= Bry_.new_a7("xowa_gly_box_w='")
-	, Bry__gallery_img_w			= Bry_.new_a7("xowa_gly_img_w='")
-	, Bry__gallery_img_pad			= Bry_.new_a7("xowa_gly_img_pad='")
+//		, Bry__gallery_box_max			= Bry_.new_a7("xowa_gly_box_max='")
+//		, Bry__gallery_box_w			= Bry_.new_a7("xowa_gly_box_w='")
+//		, Bry__gallery_img_w			= Bry_.new_a7("xowa_gly_img_w='")
+//		, Bry__gallery_img_pad			= Bry_.new_a7("xowa_gly_img_pad='")
 	, Bry__toc						= Bry_.new_a7("~{xowa_toc}")
 	;
 	public static final byte[]
@@ -51,10 +51,10 @@ public class Xoh_make_trie_ {
 		trie_itm(rv, Tid__file_info			, Byte_ascii.Apos		, Bry__file_info);
 		trie_itm(rv, Tid__file_mgnf			, Byte_ascii.Apos		, Bry__file_mgnf);
 		trie_itm(rv, Tid__hiero_dir			, Byte_ascii.Escape		, Bry__hiero_dir);
-		trie_itm(rv, Tid__gallery_box_max	, Byte_ascii.Apos		, Bry__gallery_box_max);
-		trie_itm(rv, Tid__gallery_box_w		, Byte_ascii.Apos		, Bry__gallery_box_w);
-		trie_itm(rv, Tid__gallery_img_w		, Byte_ascii.Apos		, Bry__gallery_img_w);
-		trie_itm(rv, Tid__gallery_img_pad	, Byte_ascii.Apos		, Bry__gallery_img_pad);
+//			trie_itm(rv, Tid__gallery_box_max	, Byte_ascii.Apos		, Bry__gallery_box_max);
+//			trie_itm(rv, Tid__gallery_box_w		, Byte_ascii.Apos		, Bry__gallery_box_w);
+//			trie_itm(rv, Tid__gallery_img_w		, Byte_ascii.Apos		, Bry__gallery_img_w);
+//			trie_itm(rv, Tid__gallery_img_pad	, Byte_ascii.Apos		, Bry__gallery_img_pad);
 		trie_itm(rv, Tid__toc				, Byte_ascii.Escape		, Bry__toc);
 		return rv;
 	}

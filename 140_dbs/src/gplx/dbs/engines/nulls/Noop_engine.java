@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
  package gplx.dbs.engines.nulls; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+ import gplx.core.stores.*;
 public class Noop_engine implements Db_engine {
 	public String			Tid() {return Noop_conn_info.Tid_const;}
 	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}

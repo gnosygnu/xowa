@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.envs.*;
 public class HierStrBldr {
 	public String Root() {return root;} public HierStrBldr Root_(String v) {root = v; return this;} private String root;
 	public Io_url RootAsIoUrl() {return Io_url_.new_dir_(root);}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
+import gplx.core.envs.*;
 public class Gfo_cmd_arg_itm_ {
 	public static final int Tid_general = 0, Tid_system = 1;
 	public static final int Val_tid_string = 0, Val_tid_yn = 1, Val_tid_url = 2, Val_tid_list_string = 3;

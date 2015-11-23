@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+import gplx.core.envs.*;
 class Xofs_url_itm {
 	public boolean Tid_is_xowa() {return tid_is_xowa;} public void Tid_is_xowa_(boolean v) {tid_is_xowa = v;} private boolean tid_is_xowa = true;
 	public String Raw() {return raw;} public void Raw_(String v) {raw = v;} private String raw;

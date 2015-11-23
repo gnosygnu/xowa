@@ -188,7 +188,7 @@ class Scrib_lib_text__json_util {
 		Opt__force_assoc		= 1
 	;
 }
-class KeyVal__sorter__key_is_numeric implements gplx.lists.ComparerAble {
+class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		KeyVal lhs_itm = (KeyVal)lhsObj;
 		KeyVal rhs_itm = (KeyVal)rhsObj;

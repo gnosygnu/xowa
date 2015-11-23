@@ -16,11 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Gfo_url_parser {
 	private final Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	private final Bry_ary segs_ary = new Bry_ary(4), qargs = new Bry_ary(4);
-	private final Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline);
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(500);
 	public byte[] Relative_url_protocol_bry() {return Gfo_protocol_itm.Itm_https.Key_w_colon_bry();}	// NOTE: https b/c any WMF wiki will now default to WMF; DATE:2015-07-26
 	public Gfo_url_parser() {
@@ -223,7 +222,7 @@ public class Gfo_url_parser {
 		return pos + 1;
 	}
 	private byte[] Make_bry(int bgn, int end) {
-		return encoded ? encoder.Decode(tmp_bfr, src, bgn, end) : Bry_.Mid(src, bgn, end);
+		return encoded ? gplx.langs.htmls.encoders.Gfo_url_encoder_.Xourl.Decode(tmp_bfr, Bool_.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);
 	}
 	private Gfo_qarg_itm[] Make_qargs() {
 		int qargs_len = qargs.Len(); if (qargs_len == 0) return Gfo_qarg_itm.Ary_empty;

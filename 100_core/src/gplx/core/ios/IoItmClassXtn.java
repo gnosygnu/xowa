@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.type_xtns.*;
 public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}						public static final String Key_const = "ioItemType";
 	@Override public Class<?> UnderClass()					{return int.class;}

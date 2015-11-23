@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+import gplx.core.envs.*;
 public class Xog_error_data {
 	public Xog_error_data(String full_msg, String err_details, String err_msg) {
 		this.full_msg = full_msg;

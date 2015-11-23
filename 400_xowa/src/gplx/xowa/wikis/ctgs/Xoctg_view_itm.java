@@ -19,37 +19,35 @@ package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.flds.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoctg_view_itm implements gplx.CompareAble {
-	public byte Tid() {return tid;} private byte tid;
-	public int Id() {return id;} private int id;
-	public boolean Id_missing() {return id_missing;} public Xoctg_view_itm Id_missing_(boolean v) {id_missing = v; return this;} private boolean id_missing;
-	public int Timestamp() {return timestamp;} private int timestamp;
-	public Xoa_ttl Ttl() {return ttl;} public Xoctg_view_itm Ttl_(Xoa_ttl v) {ttl = v; return this;} private Xoa_ttl ttl;
-	public int Page_size() {return page_size;} private int page_size;
-	public int Subs_ctgs() {return subs_ctgs;} private int subs_ctgs;
-	public int Subs_pages() {return subs_pages;} private int subs_pages;
-	public int Subs_files() {return subs_files;} private int subs_files;
-	public void Load_by_ttl_data(byte tid, int id, int timestamp, int page_size) {this.tid = tid; this.id = id; this.timestamp = timestamp; this.page_size = page_size;}
-	public byte[] Sortkey() {return sortkey;} public Xoctg_view_itm Sortkey_(byte[] v) {sortkey = v; return this;} private byte[] sortkey;
-	public void Subs_(int ctgs, int pages, int files) {this.subs_ctgs = ctgs; this.subs_pages = pages; this.subs_files = files;}
-	public byte[] Ttl_bry() {return ttl_bry;} private byte[] ttl_bry;
-	public Xow_ns Ns() {return ns;} private Xow_ns ns;
-	public void Load_by_id_data(Xow_ns ns, byte[] ttl_bry) {
-		this.ns = ns; this.ttl_bry = ttl_bry; this.sortkey = ttl_bry;
+	public byte				Tid() {return tid;} private byte tid;				// Xoa_ctg_mgr.Tid*
+	public int				Page_id() {return page_id;} private int page_id;
+	public Xoa_ttl			Ttl() {return ttl;} private Xoa_ttl ttl;
+	public byte[]			Sort_key() {return sort_key;} private byte[] sort_key;
+	public int				Sort_idx() {return sort_idx;} private int sort_idx;
+	public boolean				Missing() {return missing;} private boolean missing;				public void				Missing_y_() {missing = true;}
+
+	public Xoctg_view_itm	Set__page(byte tid, int page_id) {this.tid = tid; this.page_id = page_id; return this;}
+	public Xoctg_view_itm	Set__ttl__sortkey(Xoa_ttl ttl, byte[] sort_key) {
+		this.ttl = ttl;
+		Sort_key_(sort_key);
+		return this;
 	}
-	public static final Xoctg_view_itm[] Ary_empty = new Xoctg_view_itm[0];
-	public int compareTo(Object obj) {Xoctg_view_itm comp = (Xoctg_view_itm)obj; return Int_.Compare(id, comp.Id());}
-	public int Pos() {return pos;} public Xoctg_view_itm Pos_(int v) {pos = v; return this;} private int pos; 
-	public Xoctg_view_itm Parse(Gfo_fld_rdr fld_rdr, int pos) {
-		this.pos = pos;
-		id				= fld_rdr.Read_int_base85_len5();
-		timestamp		= fld_rdr.Read_int_base85_len5();
-		sortkey			= fld_rdr.Read_bry_escape();
+	public Xoctg_view_itm	Parse(Gfo_fld_rdr fld_rdr, int sort_idx) {	// NOTE: XO stores data as "page_id|ctg_added_on|sortkey"
+		this.sort_idx = sort_idx;
+		page_id	= fld_rdr.Read_int_base85_len5();
+		fld_rdr.Read_int_base85_len5();	// skip ctg_added_on; not used
+		Sort_key_(fld_rdr.Read_bry_escape());
 		return this;
 	}
 	public void Clear() {
-		this.pos		= 0;
-		id				= 0;
-		timestamp		= 0;
-		sortkey			= null;
+		sort_idx = page_id = 0;
+		sort_key = null;
 	}
+	private void Sort_key_(byte[] v) {
+		this.sort_key = v;
+		if (sort_key.length == 0)		// v1 will not have sortkey data; PAGE:s.w:Category:Computer_science DATE:2015-11-22
+			sort_key = ttl.Page_db();
+	}
+	public int compareTo(Object obj) {Xoctg_view_itm comp = (Xoctg_view_itm)obj; return Int_.Compare(page_id, comp.Page_id());}
+	public static final Xoctg_view_itm[] Ary_empty = new Xoctg_view_itm[0];
 }

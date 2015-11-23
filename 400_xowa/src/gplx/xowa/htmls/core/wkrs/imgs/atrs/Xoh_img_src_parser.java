@@ -39,21 +39,33 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 	public boolean File_time_exists() {return file_time != -1;}
 	public boolean File_page_exists() {return file_page != -1;}
 	public Html_atr Atr() {return atr;} private Html_atr atr;
-	public void Parse(Bry_rdr owner_rdr, byte[] domain_bry, Html_tag tag) {
-		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__src);
-		if (!atr.Val_exists()) return;
-		Parse(owner_rdr, domain_bry, atr.Val_bgn(), atr.Val_end());
+	private void Clear() {
+		val_bgn = val_end = repo_bgn = repo_end = file_ttl_bgn = file_ttl_end = file_w = file_time = file_page = -1;
+		repo_is_commons = file_is_orig = false;
+		file_ttl_bry = null;
+		atr = null;
 	}
-	public void Parse(Bry_rdr owner_rdr, byte[] domain_bry, int val_bgn, int val_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+	public boolean Parse(Bry_rdr owner_rdr, byte[] domain_bry, Html_tag tag) {
+		this.Clear();
+		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__src);
+		if (!atr.Val_dat_exists()) return true;	// empty src; just return true;
+		return Parse(owner_rdr, domain_bry, atr.Val_bgn(), atr.Val_end());
+	}
+	public boolean Parse(Bry_rdr owner_rdr, byte[] domain_bry, int val_bgn, int val_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+		this.Clear();
 		this.src = owner_rdr.Src();
 		this.val_bgn = val_bgn; this.val_end = val_end;
 		file_w = file_time = file_page = -1;
 		rdr.Init_by_sub(owner_rdr, "img.src.xowa", val_bgn, val_end).Dflt_dlm_(Byte_ascii.Slash);
+		rdr.Fail_throws_err_(Bool_.N);
 		repo_bgn = rdr.Find_fwd_rr(Bry__file);						// skip past /file/; EX: "file:///J:/xowa/file/commons.wikimedia.org/"
+		if (repo_bgn == -1) return false;
+		rdr.Fail_throws_err_(Bool_.Y);
 		repo_end = rdr.Find_fwd_lr();
 		repo_is_commons = Bry_.Match(rdr.Src(), repo_bgn, repo_end, Xow_domain_itm_.Bry__commons);
 		if (!repo_is_commons) {
-			if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
+			if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) return false; // rdr.Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
+//				if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
 		}
 		file_is_orig = rdr.Chk(trie) == Tid__orig;					// check if 'orig/' or 'thumb/'
 		file_ttl_bgn = Skip_md5();									// skip md5; EX: "0/1/2/3/"
@@ -68,6 +80,7 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 			else if	(rdr.Is(Byte_ascii.Dash))
 				file_page = rdr.Read_int_to(Byte_ascii.Dot);		// EX: "220px-5.png"
 		}
+		return true;
 	}
 	private int Skip_md5() {
 		byte[] src = rdr.Src();

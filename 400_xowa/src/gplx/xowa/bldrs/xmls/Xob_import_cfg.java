@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.envs.*;
 import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_import_cfg {
 	public Xob_import_cfg(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki; private boolean src_fil_is_bz2 = true;
@@ -43,7 +43,7 @@ public class Xob_import_cfg {
 			src_fil = src_fil_bz2; src_rdr_len = Io_mgr.Instance.QueryFil(src_fil_bz2).Size();
 			Xoae_app app = wiki.Appe();
 			if (app.Setup_mgr().Dump_mgr().Import_bz2_by_stdout()) {
-				ProcessAdp process = app.Prog_mgr().App_decompress_bz2_by_stdout();
+				Process_adp process = app.Prog_mgr().App_decompress_bz2_by_stdout();
 				return Io_stream_rdr_process.new_(process.Exe_url(), src_fil_bz2, process.Xto_process_bldr_args(src_fil_bz2.Raw()));
 			}
 			else

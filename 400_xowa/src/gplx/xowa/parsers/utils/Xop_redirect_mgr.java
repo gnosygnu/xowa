@@ -20,8 +20,8 @@ import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 public class Xop_redirect_mgr {
-	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
-	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
+	private final Xowe_wiki wiki; private final Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
+	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl;}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {

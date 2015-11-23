@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 import gplx.core.btries.*;
 public class Xoh_img_cls_ {
-	public static final byte 
-	  Tid__none				= 0
-	, Tid__thumbimage		= 2	// EX: [[File:A.png|thumb]]  -> "<img class='thumbimage'>"
-	, Tid__thumbborder		= 3	// EX: [[File:A.png|border]] -> "<img class='thumbborder'>"
+	public static final byte		// SERIALIZED
+	  Tid__none				= 0	// EX: [[File:A.png]]		 -> "<img>"
+	, Tid__thumbimage		= 1	// EX: [[File:A.png|thumb]]  -> "<img class='thumbimage'>"
+	, Tid__thumbborder		= 2	// EX: [[File:A.png|border]] -> "<img class='thumbborder'>"
 	;
 	public static final String 
 	  Str__thumbimage		= "thumbimage"
@@ -54,9 +54,9 @@ public class Xoh_img_cls_ {
 		}
 		return Bry_.Add(Bry__html_class, cls, other_0, other_1, Byte_ascii.Quote_bry);
 	}
-	public static byte[] To_val(int tid, byte[] other) {
+	public static byte[] To_val_or_null(int tid, byte[] other) {
 		boolean other_is_empty = Bry_.Len_eq_0(other);
-		if (tid == Xoh_img_cls_.Tid__none && other_is_empty) return Bry_.Empty;
+		if (tid == Xoh_img_cls_.Tid__none && other_is_empty) return null;
 		byte[] cls = null;
 		switch (tid) {
 			case Xoh_img_cls_.Tid__thumbimage:	cls = Bry__thumbimage; break;

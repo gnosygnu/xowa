@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.envs.*;
 public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public GfuiStatusBox Active_(boolean v)			{active = v; return this;} private boolean active = true;
 	public GfuiStatusBox VisibilityDuration_(int v) {timer.Interval_(v); visibilityDuration = v; return this;} int visibilityDuration;
 	@Override public void Opened_cbk() {

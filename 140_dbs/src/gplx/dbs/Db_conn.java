@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.*; import gplx.dbs.qrys.*;
+import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.core.stores.*;
 public class Db_conn {
 	private final List_adp rls_list = List_adp_.new_(); private final Db_engine engine;
 	public Db_conn(Db_engine engine) {this.engine = engine;}

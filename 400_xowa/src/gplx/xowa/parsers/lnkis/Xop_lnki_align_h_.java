@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public class Xop_lnki_align_h_ {
-	public static final byte Null = 0, None = 1, Left = 2, Center = 3, Right = 4;
+	public static final byte Null = 0, None = 1, Left = 2, Center = 3, Right = 4;	// SERIALIZED
 	public static final byte[][] Html_names = new byte[][]
 	{ Object_.Bry__null
 	, Bry_.new_a7("none")

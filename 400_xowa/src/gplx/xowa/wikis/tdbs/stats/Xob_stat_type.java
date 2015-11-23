@@ -20,7 +20,14 @@ import gplx.core.strings.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_stat_type {
 	public byte Tid() {return tid;} private byte tid;
 	public Xob_stat_type(byte tid) {this.tid = tid;}
-	public Xob_stat_itm GetOrNew(String ns) {return (Xob_stat_itm)regy.Get_by_or_new(ns, Xob_stat_itm.Instance);}
+	public Xob_stat_itm GetOrNew(String ns) {
+		Xob_stat_itm rv = (Xob_stat_itm)regy.Get_by(ns);
+		if (rv == null) {
+			rv = new Xob_stat_itm(ns);
+			regy.Add(ns, rv);
+		}
+		return rv;
+	}
 	public Xob_stat_itm GetAt(int i) {return (Xob_stat_itm)regy.Get_at(i);}
 	public int Count() {return regy.Count();}
 	public void To_str(String_bldr sb) {

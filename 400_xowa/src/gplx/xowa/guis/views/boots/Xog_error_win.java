@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
-import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.encoders.*; import gplx.core.envs.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class Xog_error_win extends JFrame implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_send_mail)) {
 			try {
-				Url_encoder url_encoder = Xoa_app_.Utl__encoder_mgr().Fsys_safe();
+				Gfo_url_encoder url_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_safe;
 				String subject = url_encoder.Encode_str("XOWA boot error: " + error_data.Err_msg());
 				String body = url_encoder.Encode_str(error_data.Err_details());
 				Desktop.getDesktop().mail(new URI("mailto:gnosygnu+xowa_error_boot@gmail.com?subject=" + subject + "&body=" + body));

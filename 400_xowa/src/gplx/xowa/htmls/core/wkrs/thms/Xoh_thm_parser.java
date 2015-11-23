@@ -22,6 +22,7 @@ import gplx.xowa.htmls.core.wkrs.thms.divs.*; import gplx.xowa.htmls.core.wkrs.i
 public class Xoh_thm_parser implements Html_atr_style_wkr {
 	public int Rng_bgn() {return rng_bgn;} private int rng_bgn;
 	public int Rng_end() {return rng_end;} private int rng_end;
+	public boolean Rng_valid() {return rng_valid;} private boolean rng_valid;
 	public byte Div_0_align() {return div_0_align;} private byte div_0_align;
 	public int Div_1_width() {return div_1_width;} private int div_1_width;
 	public Xoh_img_parser Img_parser() {return img_parser;} private final Xoh_img_parser img_parser = new Xoh_img_parser();
@@ -33,8 +34,11 @@ public class Xoh_thm_parser implements Html_atr_style_wkr {
 		Html_tag div_1 = tag_rdr.Tag__move_fwd_head();											// <div class='thumbinner'>
 		this.div_1_width = -1;
 		Html_atr_style_parser_.Parse(div_1, this);												// " style='120px'"
-		img_parser.Parse(hdoc_wkr, hctx, src, tag_rdr, tag_rdr.Tag__move_fwd_head());			// <a>
-		capt_parser.Parse(hdoc_wkr, tag_rdr, src, tag_rdr.Tag__move_fwd_head());				// <div>
+		rng_valid = false;
+		if (img_parser.Parse(hdoc_wkr, hctx, src, tag_rdr, tag_rdr.Tag__move_fwd_head()) != Xoh_hdoc_ctx.Invalid) {	// <a>
+			capt_parser.Parse(hdoc_wkr, tag_rdr, src, tag_rdr.Tag__move_fwd_head());				// <div>
+			rng_valid = true;
+		}
 		tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__div);											// </div> for div_1
 		Html_tag div_0_tail = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__div);					// </div> for div_0
 		this.rng_end = div_0_tail.Src_end();

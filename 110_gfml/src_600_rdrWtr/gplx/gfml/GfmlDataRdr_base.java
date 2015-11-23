@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.stores.*; /*DataRdr_base*/
+import gplx.core.stores.*; /*DataRdr_base*/
 public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode()			{return curNde.Hnd();}
 	@Override public int FieldCount()			{return curNde.SubKeys().Count();}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.envs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
 	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {

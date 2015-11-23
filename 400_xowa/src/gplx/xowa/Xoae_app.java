@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*;
+import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
@@ -32,7 +32,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
 		this.mode = mode;
-		Io_url.Http_file_str_encoder = Xoa_app_.Utl__encoder_mgr().Fsys();
+		Io_url.Http_file_str_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys;
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir);
 		log_wtr = usr_dlg.Log_wkr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
@@ -79,7 +79,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
-	public Url_encoder_mgr			Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_meta_mgr				Meta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.core.envs.*;
 public class Xow_parser_mgr {
 	private final Xowe_wiki wiki; private final Xop_tkn_mkr tkn_mkr;
 	private Xop_parser anchor_encode_parser;

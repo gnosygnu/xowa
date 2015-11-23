@@ -22,15 +22,16 @@ import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.a
 public class Xoh_thm_bldr {
 	private final Xoh_thm_wtr wtr = new Xoh_thm_wtr();
 	private final byte[] div_2_magnify = Bry_.new_a7("bin/any/xowa/file/mediawiki.file/magnify-clip.png");
-	public void Make(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int div_0_align, Xoh_img_bldr img_bldr, Bfr_arg div_2_href, Bfr_arg div_2_capt) {
+	public void Make(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int div_0_align, int div_1_width, boolean div_2_alt_exists, byte[] img_alt, Xoh_img_bldr img_bldr, Bfr_arg div_2_href, Bfr_arg div_2_capt) {
 		wtr.Clear();
 		wtr.Div_0_align_(div_0_align);
 		wtr.Div_1_id_(img_bldr.Fsdb_itm().Html_uid());
-		wtr.Div_1_width_(img_bldr.Fsdb_itm().File_w());
+		wtr.Div_1_width_(div_1_width);
 		wtr.Div_1_img_(img_bldr.Wtr());
 		wtr.Div_2_href_(div_2_href);
 		wtr.Div_2_magnify_(hctx.Fsys__root(), div_2_magnify);
 		wtr.Div_2_capt_(div_2_capt);
+		wtr.Div_2_alt_(div_2_alt_exists, img_alt);
 		wtr.Bfr_arg__add(bfr);
 	}
 }

@@ -29,12 +29,12 @@ public class Xoh_img_src_parser_tst {
 	@Test   public void Md5_depth_4() {
 		fxt.Test__parse("file:///C:/xowa/file/en.wikipedia.org/orig/7/0/1/0/A.png"					, "en.wikipedia.org"		, Bool_.Y, "A.png",  -1, -1, -1);
 	}
-	@Test   public void Fail__orig_mode() {
-		fxt.Test__parse__fail("file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png", "failed trie check: mid='fail/7/0/A.png' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png'");
-	}
-	@Test   public void Fail__repo_mode() {
-		fxt.Test__parse__fail("file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png", "repo must be commons or self: repo='en.wiktionary.org' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png'");
-	}
+//		@Test   public void Fail__orig_mode() {
+//			fxt.Test__parse__fail("file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png", "failed trie check: mid='fail/7/0/A.png' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png'");
+//		}
+//		@Test   public void Fail__repo_mode() {
+//			fxt.Test__parse__fail("file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png", "repo must be commons or self: repo='en.wiktionary.org' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png'");
+//		}
 }
 class Xoh_img_src_parser_fxt extends Xoh_itm_parser_fxt_base {
 	private final Xoh_img_src_parser parser = new Xoh_img_src_parser();

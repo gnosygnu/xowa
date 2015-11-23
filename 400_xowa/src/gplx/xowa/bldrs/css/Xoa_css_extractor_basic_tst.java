@@ -56,7 +56,7 @@ public class Xoa_css_extractor_basic_tst {
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_common.css", "failover");
 	}
 	@Test   public void Css_scrape_download() {
-		fxt.Css_installer().Url_encoder_(Url_encoder.new_http_url_());
+		fxt.Css_installer().Url_encoder_(Gfo_url_encoder_.Http_url);
 		fxt.Init_fil("mem/http/en.wikipedia.org"							, Xoa_css_extractor_fxt.Main_page_html);
 		fxt.Init_fil("mem/http/en.wikipedia.org/common.css"					, "download");
 		fxt.Init_fil("mem/http/www/a&0|b,c"									, "data=css_0");

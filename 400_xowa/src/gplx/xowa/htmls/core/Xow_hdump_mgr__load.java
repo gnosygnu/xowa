@@ -25,7 +25,7 @@ public class Xow_hdump_mgr__load {
 	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
-		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), Xoa_app_.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());			
+		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys, wiki.Domain_bry());			
 	}
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final Xoh_make_mgr make_mgr;
 	public void Load(Xoae_page wpg) {

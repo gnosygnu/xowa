@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.core.envs.*;
 public class Xoapi_selection implements GfoInvkAble {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Init_by_kit(Xoae_app app) {

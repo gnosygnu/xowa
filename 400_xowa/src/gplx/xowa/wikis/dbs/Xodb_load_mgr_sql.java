@@ -106,8 +106,9 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				prv_tid = cur_tid; 
 			}
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
-			Xoctg_view_itm view_itm = new Xoctg_view_itm().Sortkey_(db_ctg.Sortkey()).Ttl_(ttl);
-			view_itm.Load_by_ttl_data(cur_tid, db_page.Id(), Xowd_page_itm.Modified_on_null_int, db_page.Text_len());
+			Xoctg_view_itm view_itm = new Xoctg_view_itm();
+			view_itm.Set__page(cur_tid, db_page.Id());
+			view_itm.Set__ttl__sortkey(ttl, db_ctg.Sortkey());
 			view_grp.Itms_add(view_itm);
 		}
 		len = Xoa_ctg_mgr.Tid__max;
@@ -189,9 +190,8 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 			byte ctg_tid = Xodb_load_mgr_txt.Load_ctg_v1_tid(page.Ns_id());
 			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
 			Xoctg_view_itm ctg_itm = new Xoctg_view_itm();
-			ctg_itm.Load_by_ttl_data(ctg_tid, page.Id(), 0, page.Text_len());
-			ctg_itm.Ttl_(Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db()));
-			ctg_itm.Sortkey_(page.Ttl_page_db());
+			ctg_itm.Set__page(ctg_tid, page.Id());
+			ctg_itm.Set__ttl__sortkey(Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
 			ctg_grp.Itms_add(ctg_itm);
 			rv = true;
 		}

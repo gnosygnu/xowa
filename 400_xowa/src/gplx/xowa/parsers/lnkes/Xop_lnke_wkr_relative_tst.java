@@ -25,18 +25,18 @@ public class Xop_lnke_wkr_relative_tst {
 			);
 	}
 	@Test  public void Relative_external() {
-		fxt.Test_parse_page_wiki_str("[//www.a.org a]", "<a href=\"https://www.a.org\" rel=\"nofollow\" class=\"external text\">a</a>");
+		fxt.Test__parse__wtxt_to_html("[//www.a.org a]", "<a href='https://www.a.org' rel='nofollow' class='external text'>a</a>");
 	}
 	@Test  public void Relative_internal() {
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
-		fxt.Test_parse_page_wiki_str("[//en.wikipedia.org/wiki Wikipedia]", "<a href=\"/site/en.wikipedia.org/wiki/\">Wikipedia</a>");
+		fxt.Test__parse__wtxt_to_html("[//en.wikipedia.org/wiki Wikipedia]", "<a href='/site/en.wikipedia.org/wiki/'>Wikipedia</a>");
 	}
 	@Test  public void Relative_w_category() {	// EX: [//commons.wikimedia.org/wiki/Category:Diomedeidae A]
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
-		fxt.Test_parse_page_wiki_str("[//en.wikipedia.org/wiki/Category:A A]", "<a href=\"/site/en.wikipedia.org/wiki/Category:A\">A</a>");
+		fxt.Test__parse__wtxt_to_html("[//en.wikipedia.org/wiki/Category:A A]", "<a href='/site/en.wikipedia.org/wiki/Category:A'>A</a>");
 	}
 	@Test   public void Relurl() {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
-		fxt.Test_parse_page_wiki_str("[[//en.wikipedia.org/ a]]", "[<a href=\"/site/en.wikipedia.org/wiki/\">a</a>]");
+		fxt.Test__parse__wtxt_to_html("[[//en.wikipedia.org/ a]]", "[<a href='/site/en.wikipedia.org/wiki/'>a</a>]");
 	}
 }

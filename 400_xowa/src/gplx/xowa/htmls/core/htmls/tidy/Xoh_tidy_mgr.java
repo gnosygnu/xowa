@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.core.envs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.apps.fsys.*;
 public class Xoh_tidy_mgr implements GfoInvkAble {
@@ -25,7 +26,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 		wkr_tidy.Init_by_app(app);
 		wkr_jtidy.Init_by_app(app);
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
-		ProcessAdp.ini_(this, app.Usr_dlg(), wkr_tidy, cmd_eval, ProcessAdp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
+		Process_adp.ini_(this, app.Usr_dlg(), wkr_tidy, cmd_eval, Process_adp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
 		Wkr_tid_(Xoh_tidy_wkr_.Tid_jtidy);
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;

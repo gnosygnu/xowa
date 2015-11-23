@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.files.downloads.*;
+import gplx.xowa.files.downloads.*; import gplx.core.envs.*;
 public class Xoa_css_img_downloader {
 	private byte[] wiki_domain;
 	public Xoa_css_img_downloader Ctor(Gfo_usr_dlg usr_dlg, Xof_download_wkr download_wkr, byte[] stylesheet_prefix) {

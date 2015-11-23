@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys; import gplx.*; import gplx.core.*;
+import gplx.core.errs.*;
 public class Bry_rdr {
 	private final gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.neg1_();
 	private String ctx; private String wkr; private int err_bgn;		
@@ -144,10 +145,16 @@ public class Bry_rdr {
 		pos = find_end;
 		return pos;
 	}
-	public byte Chk(gplx.core.btries.Btrie_slim_mgr trie) {return Chk(trie, pos, src_end);}
+	public byte Chk(gplx.core.btries.Btrie_slim_mgr trie)				{return Chk(trie, pos, src_end);}
+	public byte Chk_or(gplx.core.btries.Btrie_slim_mgr trie, byte or)	{return Chk_or(trie, pos, src_end, or);}
 	public byte Chk(gplx.core.btries.Btrie_slim_mgr trie, int itm_bgn, int itm_end) {
+		byte rv = Chk_or(trie, itm_bgn, itm_end, Byte_.Max_value_127);
+		if (rv == Byte_.Max_value_127) {Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16))); return Byte_.Max_value_127;}
+		return rv;
+	}
+	public byte Chk_or(gplx.core.btries.Btrie_slim_mgr trie, int itm_bgn, int itm_end, byte or) {
 		Object rv_obj = trie.Match_bgn(src, itm_bgn, itm_end);
-		if (rv_obj == null) {Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16))); return Byte_.Max_value_127;}
+		if (rv_obj == null) return or;
 		pos = trie.Match_pos();
 		return ((gplx.core.primitives.Byte_obj_val)rv_obj).Val();
 	}
@@ -162,9 +169,9 @@ public class Bry_rdr {
 	public Err Err_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {return Err_.new_("Bry_rdr", Msg_make(msg, arg_key, arg_val, excerpt_bgn, excerpt_end));}
 	private String Msg_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {
 		if (String_.EqEmpty(arg_key))
-			return String_.Replace(Err_msg.To_str(msg, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)), "\n", "\\n");
+			return Err_msg.To_str(msg, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Escape_ws(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)));
 		else
-			return String_.Replace(Err_msg.To_str(msg, arg_key, arg_val, "ctx", ctx, "wkr", wkr, "excerpt", Quote(String_.new_u8(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)))), "\n", "\\n");
+			return Err_msg.To_str(msg, arg_key, arg_val, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Escape_ws(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)));
 	}
 	private static String Quote(String v) {return "'" + v + "'";}
 }

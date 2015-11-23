@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.brys.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 public abstract class Xoh_itm_parser_fxt_base {
 	private final Bry_rdr rdr = new Bry_rdr();
 	protected byte[] src; protected int src_len;

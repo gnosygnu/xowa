@@ -24,7 +24,7 @@ public class Xop_lnki_tkn_chkr extends Xop_tkn_chkr_base {
 	public byte ImgType() {return imgType;} public Xop_lnki_tkn_chkr ImgType_(byte v) {imgType = v; return this;} private byte imgType = Byte_.Max_value_127;
 	public int Width() {return width;} public Xop_lnki_tkn_chkr Width_(int v) {width = v; return this;} private int width = Int_.Min_value;
 	public int Height() {return height;} public Xop_lnki_tkn_chkr Height_(int v) {height = v; return this;} private int height = Int_.Min_value;
-	public byte HAlign() {return hAlign;} public Xop_lnki_tkn_chkr HAlign_(byte v) {hAlign = v; return this;} private byte hAlign = Byte_.Max_value_127;
+	public int HAlign() {return hAlign;} public Xop_lnki_tkn_chkr HAlign_(int v) {hAlign = v; return this;} private int hAlign = Byte_.Max_value_127;
 	public byte VAlign() {return vAlign;} public Xop_lnki_tkn_chkr VAlign_(byte v) {vAlign = v; return this;} private byte vAlign = Byte_.Max_value_127;
 	public byte Border() {return border;} public Xop_lnki_tkn_chkr Border_(byte v) {border = v; return this;} private byte border = Bool_.__byte;
 	public double Upright() {return upright;} public Xop_lnki_tkn_chkr Upright_(double v) {upright = v; return this;} double upright = Xop_lnki_tkn.Upright_null;

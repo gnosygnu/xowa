@@ -40,7 +40,7 @@ public class Xow_hdump_mgr {
 		Init_by_db(default_zip_tid, default_hzip_enable);
 	}
 	public void Init_by_db(byte default_zip_tid, boolean default_hzip_enable) {
-		int dflt_hzip_tid = default_hzip_enable ? Xoh_hzip_dict_.Hzip__none : Xoh_hzip_dict_.Hzip__v1;
+		int dflt_hzip_tid = default_hzip_enable ? Xoh_hzip_dict_.Hzip__v1 : Xoh_hzip_dict_.Hzip__none;
 		save_mgr.Init_by_db(default_zip_tid, dflt_hzip_tid);
 	}
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.stores.*;
 public class Yn {
 	public static final String Y = "y", N = "n";
 	public static boolean parse_by_char_or(String v, boolean or) {

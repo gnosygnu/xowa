@@ -28,10 +28,9 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
-	private Xob_hdump_mgr hdump_bldr; private Xob_link_dump_cmd link_dump_cmd; private boolean hzip_enabled = false;
-	private Vnt_convert_lang converter_lang;
+	private final Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
 	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	@Override public String Cmd_key() {return Xob_cmd_keys.Key_file_lnki_temp;}
+	@Override public String Cmd_key()		{return Xob_cmd_keys.Key_file_lnki_temp;}
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
 	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_.Ary(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
@@ -42,16 +41,16 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	}
 	@Override protected Db_conn Init_db_file() {
 		ctx.Lnki().File_wkr_(this);
-		Xob_db_file make_db_file = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
-		Db_conn conn = make_db_file.Conn();
-		this.tbl = new Xob_lnki_temp_tbl(conn);
-		tbl.Create_tbl();
+		Xob_db_file make_db = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
+		Db_conn make_conn = make_db.Conn();
+		this.tbl = new Xob_lnki_temp_tbl(make_conn); tbl.Create_tbl();
+		this.gen_hdump = hdump_bldr.Init(wiki, make_conn);
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) {
 			this.converter_lang = vnt_mgr.Convert_lang();
-			converter_lang.Log__init(conn);
+			converter_lang.Log__init(make_conn);
 		}
-		return conn;
+		return make_conn;
 	}
 	@Override protected void Cmd_bgn_end() {
 		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);							// NOTE: must call after wiki.init
@@ -84,12 +83,6 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(fsdb_core);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);
 		Fsm_mnt_mgr.Patch(trg_mnt_mgr.Mnts__get_main().Cfg_mgr().Tbl()); // NOTE: see fsdb_make; DATE:2014-04-26
-		if (gen_hdump) {
-			gplx.xowa.apps.apis.xowa.bldrs.imports.Xoapi_import import_cfg = wiki.Appe().Api_root().Bldr().Wiki().Import();
-			hdump_bldr = new Xob_hdump_mgr(wiki, tbl.Conn(), import_cfg.Html_db_max(), import_cfg.Zip_tid_html(), hzip_enabled);
-			link_dump_cmd = new Xob_link_dump_cmd();
-			link_dump_cmd.Init_by_wiki(wiki);
-		}
 		tbl.Insert_bgn();
 		log_mgr.Txn_bgn();
 	}
@@ -103,27 +96,15 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		page.Bldr__ns_ord_(ns_ord);
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
 		page.Redlink_lnki_list().Clear();
+		page.Url_(Xoa_url.new_(wiki.Domain_bry(), ttl.Full_db()));
 		if (ns.Id_is_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
-			if (gen_html) {
-				page.Root_(root);
-				if (!page.Redirected())
-					wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_page_.Tid_read);
-			}
-			if (gen_hdump) {
-				page.Root_(root);
-				hdump_bldr.Insert(page);
-				link_dump_cmd.Page_bgn(page.Revision_data().Id());
-				List_adp lnki_list = page.Redlink_lnki_list().Lnki_list();
-				int len = lnki_list.Count();
-				for (int i = 0; i < len; ++i) {
-					Xop_lnki_tkn lnki = (Xop_lnki_tkn)lnki_list.Get_at(i);
-					Xoa_ttl trg_ttl = lnki.Ttl();
-					link_dump_cmd.Add(lnki.Html_uid(), trg_ttl.Ns().Id(), trg_ttl.Page_db());
-				}
-			}
+			if (gen_html && !page.Redirected())
+				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page().Root_(root), Xopg_page_.Tid_read);
+			if (gen_hdump)
+				hdump_bldr.Insert(page.Root_(root));
 			root.Clear();
 		}
 	}
@@ -132,14 +113,12 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 //			if (converter_lang != null) converter_lang.Log__save();
 		if (gen_hdump) {
 			hdump_bldr.Commit();
-			link_dump_cmd.Wkr_commit();
 		}
 	}
 	@Override public void Exec_end_hook() {
 //			if (converter_lang != null) converter_lang.Log__rls();
 		if (gen_hdump) {
 			hdump_bldr.Bld_term();
-			link_dump_cmd.Wkr_end();
 		}
 		String err_filter_mgr = invoke_wkr.Err_filter_mgr().Print();
 		if (String_.Len_gt_0(err_filter_mgr)) usr_dlg.Warn_many("", "", err_filter_mgr);
@@ -163,20 +142,18 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_xtn_ref_enabled_))			xtn_ref_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_gen_html_))					gen_html = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_gen_hdump_))					gen_hdump = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_hzip_enabled_))				hzip_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_ns_ids_by_aliases))			ns_ids = Xob_lnki_temp_wkr_.Ns_ids_by_aliases(wiki, m.ReadStrAry("v", "|"));
+		else if	(ctx.Match(k, Invk_gen_html_))					gen_html = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk_hdump_bldr))					return hdump_bldr;
 		else if	(ctx.Match(k, Invk_property_wkr))				return this.Property_wkr();
 		else if	(ctx.Match(k, Invk_invoke_wkr))					return this.Invoke_wkr();
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
 	}
-	private static final String Invk_wdata_enabled_ = "wdata_enabled_", Invk_xtn_ref_enabled_ = "xtn_ref_enabled_"
+	private static final String Invk_wdata_enabled_ = "wdata_enabled_", Invk_xtn_ref_enabled_ = "xtn_ref_enabled_", Invk_gen_html_ = "gen_html_"
 	, Invk_ns_ids_ = "ns_ids_", Invk_ns_ids_by_aliases = "ns_ids_by_aliases"
-	, Invk_invoke_wkr = "invoke_wkr", Invk_property_wkr = "property_wkr"
-	, Invk_gen_html_ = "gen_html_", Invk_gen_hdump_ = "gen_hdump_", Invk_hzip_enabled_ = "hzip_enabled_"
+	, Invk_invoke_wkr = "invoke_wkr", Invk_property_wkr = "property_wkr", Invk_hdump_bldr = "hdump_bldr"
 	;
 	private Xop_log_invoke_wkr Invoke_wkr() {
 		if (invoke_wkr == null) invoke_wkr = ((Scrib_xtn_mgr)bldr.App().Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY)).Invoke_wkr_or_new();

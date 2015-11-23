@@ -22,7 +22,7 @@ public class Pfunc_urlencode extends Pf_func_base {	// EX: {{urlencode:a b}} -> 
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
-		Xoa_app_.Utl__encoder_mgr().Http_url().Encode(urlEncodeBfr, val_ary);
+		gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(urlEncodeBfr, val_ary);
 		bb.Add_bfr_and_preserve(urlEncodeBfr);
 		urlEncodeBfr.Clear();
 	}	private Bry_bfr urlEncodeBfr = Bry_bfr.new_(128);

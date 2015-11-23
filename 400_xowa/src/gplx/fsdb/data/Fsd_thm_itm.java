@@ -49,7 +49,7 @@ public class Fsd_thm_itm {
 	public static final Fsd_thm_itm[] Ary_empty = new Fsd_thm_itm[0];
 	public static Fsd_thm_itm new_() {return new Fsd_thm_itm();} Fsd_thm_itm() {}
 }
-class Fsdb_thm_itm_sorter implements gplx.lists.ComparerAble {
+class Fsdb_thm_itm_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Fsd_thm_itm lhs = (Fsd_thm_itm)lhsObj;
 		Fsd_thm_itm rhs = (Fsd_thm_itm)rhsObj;

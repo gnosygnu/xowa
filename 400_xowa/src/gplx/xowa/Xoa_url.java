@@ -100,7 +100,7 @@ public class Xoa_url {
 		if (show_qargs || qargs_ary.length > 0) {
 			Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 			bfr.Add(rv);
-			Gfo_qarg_mgr.Concat_bfr(bfr, Xoa_app_.Utl__encoder_mgr().Href(), qargs_ary);
+			Gfo_qarg_mgr.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
 			return bfr.To_bry_and_rls();
 		}
 		else

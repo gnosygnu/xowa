@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
+import gplx.core.envs.*;
 public class GfxStringData {
 	public String Val() {
 		if (ownerElem == null) return val;

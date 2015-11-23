@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.core.envs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.doms.*;
 import gplx.xowa.guis.views.*;
@@ -60,13 +60,13 @@ public class Xog_url_wkr {
 	}
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
-		Io_url href_url = Io_url_.http_any_(String_.new_u8(Xoa_app_.Utl__encoder_mgr().Http_url().Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
+		Io_url href_url = Io_url_.http_any_(String_.new_u8(gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
 			? html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_str, null)
 			: Xoh_dom_.Title_by_href(href_bry, Bry_.new_u8(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__root_html_get)));
 		if (xowa_ttl == null) {app.Gui_mgr().Kit().Ask_ok("", "", "could not find find anchor with href in html: href=~{0}", href_bry); return Rslt_handled;}
-		byte[] lnki_ttl = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
+		byte[] lnki_ttl = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
 		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
 		if (!Io_mgr.Instance.ExistsFil(href_url)) {
 //				if (!Xof_orig_file_downloader.Get_to_url(fsdb, href_url, wiki, lnki_ttl, url_bldr))
@@ -75,7 +75,7 @@ public class Xog_url_wkr {
 		}
 		gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(href_url);
 		if (fil.Exists()) {
-			ProcessAdp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
+			Process_adp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
 			fsdb.File_size_(fil.Size());
 			gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.Appe().User().User_db_mgr().Cache_mgr();

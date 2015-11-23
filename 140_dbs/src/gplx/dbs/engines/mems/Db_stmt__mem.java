@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+import gplx.core.stores.*;
 public class Db_stmt__mem implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
 	private final Ordered_hash val_list = Ordered_hash_.New();

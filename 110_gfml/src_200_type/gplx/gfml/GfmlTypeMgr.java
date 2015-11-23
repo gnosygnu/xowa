@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.lists.*;/*StackAdp*/
+import gplx.core.lists.*;/*StackAdp*/
 class GfmlTypeMgr {
 	public GfmlTypRegy TypeRegy() {return typeRegy;} GfmlTypRegy typeRegy = GfmlTypRegy.new_();
 	public GfmlFldPool FldPool() {return fldPool;} GfmlFldPool fldPool = GfmlFldPool.new_(GfmlType_.new_any_());

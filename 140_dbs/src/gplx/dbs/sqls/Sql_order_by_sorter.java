@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
 import gplx.core.gfo_ndes.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class Sql_order_by_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		GfoNde lhs = (GfoNde)lhsObj; GfoNde rhs = (GfoNde)rhsObj;

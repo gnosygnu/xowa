@@ -47,7 +47,7 @@ class Xoa_fmtr_sort_itm {
 	public int Comp_mult() {return comp_mult;} private int comp_mult;
 	public String Key() {return key;} private String key;
 }
-class Xoa_fmtr_sort_wkr implements gplx.lists.ComparerAble {
+class Xoa_fmtr_sort_wkr implements gplx.core.lists.ComparerAble {
 	public Xoa_fmtr_sort_itm[] Itms() {return itms;} public void Itms_(Xoa_fmtr_sort_itm[] v) {itms = v; itms_len = v.length;} private Xoa_fmtr_sort_itm[] itms; private int itms_len;
 	public int compare(Object lhsObj, Object rhsObj) {
 		GfoInvkAble lhs_invk = (GfoInvkAble)lhsObj;

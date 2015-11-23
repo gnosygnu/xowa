@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.core.log_msgs.*;
+import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.core.log_msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.apps.urls.*;
@@ -54,7 +54,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Full_url() {return Xoa_url_encoder.Instance.Encode(full_txt);}
 	public String Full_db_as_str() {return String_.new_u8(Full_db());}
-	public byte[] Full_db()  {return ns.Gen_ttl(this.Page_db());}
+	public byte[] Full_db()			{return ns.Gen_ttl(this.Page_db());}
+	public byte[] Full_db_w_anch()  {return Replace_spaces(full_txt);}
 	public byte[] Page_url() {return Xoa_url_encoder.Instance.Encode(this.Page_txt());}
 	public byte[] Leaf_url() {return Xoa_url_encoder.Instance.Encode(this.Leaf_txt());}
 	public byte[] Base_url() {return Xoa_url_encoder.Instance.Encode(this.Base_txt());}
@@ -135,7 +136,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		- forbid ~~~
 		- handle ip address urls for User and User talk
 		*/
-		Url_encoder anchor_encoder = null;
+		Gfo_url_encoder anchor_encoder = null;
 		Bry_bfr anchor_encoder_bfr = null;
 		bfr.Clear();
 		if (end - bgn == 0) {msg_log.Add_itm_none(Xop_ttl_log.Len_0, src, bgn, bgn); return false;}
@@ -278,7 +279,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					}
 					if (anch_bgn != -1) {
 						if (anchor_encoder == null) {
-							anchor_encoder = Url_encoder.new_html_id_();
+							anchor_encoder = Gfo_url_encoder_.Id;
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
@@ -291,7 +292,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 				case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end:
 					if (anch_bgn != -1) {
 						if (anchor_encoder == null) {
-							anchor_encoder = Url_encoder.new_html_id_();
+							anchor_encoder = Gfo_url_encoder_.Id;
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);

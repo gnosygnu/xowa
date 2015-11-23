@@ -58,8 +58,8 @@ class Xoi_cmd_msg_ok extends Gfo_thread_cmd_base implements Gfo_thread_cmd {
 //			return Gfo_thread_cmd_.Init_ok;
 //		}
 //		public override void Async_run() {
-//			ProcessAdp process = new ProcessAdp().Exe_url_(exec_url).Args_str_(exec_args).Prog_dlg_(usr_dlg);
-//			process.Run_mode_(ProcessAdp.Run_mode_sync_block);
+//			Process_adp process = new Process_adp().Exe_url_(exec_url).Args_str_(exec_args).Prog_dlg_(usr_dlg);
+//			process.Run_mode_(Process_adp.Run_mode_sync_block);
 //			process.Run();
 //		}
 //		public static final String KEY = "exec.sync";

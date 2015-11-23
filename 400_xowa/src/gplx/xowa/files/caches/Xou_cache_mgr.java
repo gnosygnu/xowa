@@ -207,7 +207,7 @@ class Xou_cache_grp {
 	}
 	public Xou_cache_itm Get_at(int i) {return (Xou_cache_itm)list.Get_at(i);}
 }
-class Xou_cache_grp_sorter implements gplx.lists.ComparerAble {
+class Xou_cache_grp_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xou_cache_grp lhs = (Xou_cache_grp)lhsObj;
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;

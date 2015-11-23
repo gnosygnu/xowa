@@ -290,7 +290,7 @@ class Wdata_hwtr_mgr_fxt {
 			Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
 			wdata_fxt.Init();
 			toggle_mgr.Ctor_by_app(wdata_fxt.App());	// must init, else null error
-			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), toggle_mgr, new Xow_xwiki_mgr(wdata_fxt.Wiki()));
+			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Gfo_url_encoder_.Href, toggle_mgr, new Xow_xwiki_mgr(wdata_fxt.Wiki()));
 			doc_hwtr.Init_by_lang(msgs);				
 		}
 		resolved_ttls.Clear();

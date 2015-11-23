@@ -20,8 +20,8 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.makes.imgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
-	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
-	private Gallery_img_pad_fmtr_arg__basic img_pad_fmtr__basic = new Gallery_img_pad_fmtr_arg__basic(); private Gallery_img_pad_fmtr_arg__hdump img_pad_fmtr__hdump = new Gallery_img_pad_fmtr_arg__hdump();
+	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); // private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
+	private Gallery_img_pad_fmtr_arg__basic img_pad_fmtr__basic = new Gallery_img_pad_fmtr_arg__basic(); // private Gallery_img_pad_fmtr_arg__hdump img_pad_fmtr__hdump = new Gallery_img_pad_fmtr_arg__hdump();
 	public abstract byte Tid();
 	public abstract byte[] Tid_bry();
 	@gplx.Virtual public boolean Tid_is_packed() {return false;}
@@ -129,7 +129,8 @@ public abstract class Gallery_mgr_base {
 			xfer_itm.Init_at_gallery_bgn(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
 			img_div_w = this.Get_thumb_div_width(html_w_expand);
 			itm_div0_fmtr.Bld_bfr_many(tmp_bfr, img_div_w);
-			Gallery_img_pad_fmtr_arg vpad_fmtr = hctx_is_hdump ? (Gallery_img_pad_fmtr_arg)img_pad_fmtr__hdump : (Gallery_img_pad_fmtr_arg)img_pad_fmtr__basic;
+			// Gallery_img_pad_fmtr_arg vpad_fmtr = hctx_is_hdump ? (Gallery_img_pad_fmtr_arg)img_pad_fmtr__hdump : (Gallery_img_pad_fmtr_arg)img_pad_fmtr__basic;
+			Gallery_img_pad_fmtr_arg vpad_fmtr = img_pad_fmtr__basic;
 			vpad = this.Get_vpad(itm_default_h, html_h_expand);
 			itm_div1_fmtr.Bld_bfr_many(tmp_bfr, vpad_fmtr.Init(img_uid, vpad));	// <div style="margin:~{vpad}px auto;">
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, hctx, src, lnki, xfer_itm, alt);
@@ -145,10 +146,11 @@ public abstract class Gallery_mgr_base {
 			);										// MW:passes know,noclasses which isn't relevant to XO
 		}
 		int itm_div_width = this.Get_gb_width(html_w_expand, html_h_expand);
-		Gallery_box_w_fmtr_arg box_w_fmtr_arg = hctx_is_hdump ? (Gallery_box_w_fmtr_arg)box_w_fmtr__hdump : (Gallery_box_w_fmtr_arg)box_w_fmtr__basic;
+		// Gallery_box_w_fmtr_arg box_w_fmtr_arg = hctx_is_hdump ? (Gallery_box_w_fmtr_arg)box_w_fmtr__hdump : (Gallery_box_w_fmtr_arg)box_w_fmtr__basic;
+		Gallery_box_w_fmtr_arg box_w_fmtr_arg = box_w_fmtr__basic;
 		itm_li_bgn_fmtr.Bld_bfr_many(bfr, gallery_li_id, box_w_fmtr_arg.Init(img_uid, itm_div_width));
 		bfr.Add(itm_html);
-		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, true, itm_caption);
+		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, hctx, true, itm_caption);
 		itm_caption = tmp_bfr.To_bry_and_clear();
 		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).To_bry_and_clear();
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
@@ -180,7 +182,7 @@ public abstract class Gallery_mgr_base {
 
 	private static final byte[] 
 	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"
-													  + "\n  </li>")
+											  + "\n  </li>")
 	, box_html_end_bry	= Bry_.new_a7		  ( "\n</ul>")
 	, itm_divs_end_bry	= Bry_.new_a7		  ( "\n        </div>\n      </div>")
 	;
@@ -196,13 +198,13 @@ public abstract class Gallery_mgr_base {
 		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Bry__ul);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__id, gallery_ul_uid);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__class, cls);
-		if (hctx_is_hdump) {
-			bfr.Add_byte_space();
-			bfr.Add(Xoh_make_trie_.Bry__gallery_box_max);
-			bfr.Add_int_variable(uid);
-			bfr.Add_byte_apos();
-		}
-		else
+//			if (hctx_is_hdump) {
+//				bfr.Add_byte_space();
+//				bfr.Add(Xoh_make_trie_.Bry__gallery_box_max);
+//				bfr.Add_int_variable(uid);
+//				bfr.Add_byte_apos();
+//			}
+//			else
 			Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__style, style);
 		if (xatr_list != null) {
 			int len = xatr_list.Count();

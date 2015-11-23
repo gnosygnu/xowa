@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
+import gplx.core.envs.*;
 public class Xoapi_fsys implements GfoInvkAble {
 	public void Ctor_by_app(Xoae_app app) {
 		this.plat_jar = Env_.AppUrl();

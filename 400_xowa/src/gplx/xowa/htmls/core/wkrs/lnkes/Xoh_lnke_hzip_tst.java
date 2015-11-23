@@ -20,17 +20,17 @@ import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Free() {
-		fxt.Test__bicode("~#1http://a.org~", Xoh_lnke_html__hdump__tst.Html__free);
+		fxt.Test__bicode("~#!http://a.org~", Xoh_lnke_html__hdump__tst.Html__free);
 	}
 	@Test   public void Auto() {
-		fxt.Test__bicode("~#2http://a.org~\"", Xoh_lnke_html__hdump__tst.Html__auto);
+		fxt.Test__bicode("~#*http://a.org~\"", Xoh_lnke_html__hdump__tst.Html__auto);
 	}
 	@Test   public void Text() {
-		fxt.Test__bicode("~#3http://a.org~a</a>", Xoh_lnke_html__hdump__tst.Html__text);
+		fxt.Test__bicode("~#'http://a.org~a~", Xoh_lnke_html__hdump__tst.Html__text);
 	}
 	@Test   public void Text__tidy() {	// PURPOSE:handle reparenting of html elements by HTML tidy EX:<font color="red">[http://a.org]</font>; DATE:2015-08-25
 		fxt.Test__bicode
-		( "~#2http://a.org~!<font color=\"red\">[123]</font></a>"
+		( "~#&http://a.org~<font color=\"red\">[123]</font>~"
 		, "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external autonumber\"><font color=\"red\">[123]</font></a>"
 		);
 	}

@@ -28,6 +28,7 @@ public class Xoh_hzip_dict_ {
 	, Tid__lnki					=   3 + Base85_ascii
 	, Tid__img					=   4 + Base85_ascii
 	, Tid__thm					=   5 + Base85_ascii
+	, Tid__gly					=   6 + Base85_ascii
 	, Tid__escape				=  84 + Base85_ascii
 	;
 	public static final byte[]
@@ -38,6 +39,7 @@ public class Xoh_hzip_dict_ {
 	, Bry__lnki					= Bry_.new_ints(Escape, Tid__lnki)
 	, Bry__img					= Bry_.new_ints(Escape, Tid__img)
 	, Bry__thm					= Bry_.new_ints(Escape, Tid__thm)
+	, Bry__gly					= Bry_.new_ints(Escape, Tid__gly)
 	;
 	public static final String
 	  Key__escape				= "escape"
@@ -47,6 +49,7 @@ public class Xoh_hzip_dict_ {
 	, Key__lnki					= "lnki"
 	, Key__img					= "img"
 	, Key__thm					= "thm"
+	, Key__gly					= "gly"
 	;
 	public static final int Hzip__none = 0, Hzip__v1 = 1;
 }

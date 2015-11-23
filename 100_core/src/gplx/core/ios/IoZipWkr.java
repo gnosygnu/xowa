@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.stores.*; /*GfoNdeRdr_*/
+import gplx.core.envs.*; import gplx.core.stores.*; /*GfoNdeRdr_*/
 import gplx.core.gfo_regys.*;
 public class IoZipWkr {
 	public Io_url ExeUrl()		{return (Io_url)GfoRegy.Instance.FetchValOrFail(Regy_ExeUrl);}
@@ -29,7 +29,7 @@ public class IoZipWkr {
 	@gplx.Internal protected String Expand_genCmdString(Io_url srcUrl, Io_url trgUrl) {
 		return String_.Format(this.ExeArgFmt(), srcUrl.Xto_api(), trgUrl.Xto_api());			
 	}
-	ProcessAdp process = new ProcessAdp();
+	Process_adp process = new Process_adp();
 	public static IoZipWkr regy_() {return new IoZipWkr();}
 	static final String Regy_ExeUrl = "gplx.core.ios.IoZipWkr.ExeUrl", Regy_ExeArgFmt = "gplx.core.ios.IoZipWkr.ExeArgFmt";
 	public static IoZipWkr new_(Io_url exeUrl, String expandArgs) {

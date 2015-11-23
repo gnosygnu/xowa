@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.net.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.wikis.domains.*;
 public class Xop_link_parser {
 	public byte[] Html_xowa_ttl()	{return html_xowa_ttl;} private byte[] html_xowa_ttl;
 	public byte Html_anchor_cls()	{return html_anchor_cls;} private byte html_anchor_cls;
@@ -46,7 +47,8 @@ public class Xop_link_parser {
 				}
 				raw = tmp_bfr.To_bry_and_clear();
 				html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_none;
-				html_anchor_rel = Xoh_lnki_consts.Tid_a_rel_nofollow;
+				Xow_domain_itm domain_itm = Xow_domain_itm_.parse(wiki_bry);
+				html_anchor_rel = domain_itm.Domain_type().Tid() == Xow_domain_tid_.Int__other ? Xoh_lnki_consts.Tid_a_rel_nofollow : Xoh_lnki_consts.Tid_a_rel_none;	// rel=nofollow if not WM wiki; DATE:2015-11-19
 				break;
 			case Gfo_protocol_itm.Tid_file:		// "file:///" or "File:A.png"
 				int proto_len = tmp_url.Protocol_bry().length;

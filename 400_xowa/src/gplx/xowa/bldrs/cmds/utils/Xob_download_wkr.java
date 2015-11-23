@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.core.ios.*;
+import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.envs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.bldrs.wms.dumps.*;
 public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
@@ -48,7 +48,7 @@ public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
 			usr_dlg.Warn_many("", "", "download failed: src=~{0} trg=~{1} err=~{2}", dump_src, dump_trg_zip.Raw(), Err_.Message_gplx_full(download_wkr.Rslt_err()));
 		if (unzip) {
 			usr_dlg.Note_many("", "", "unzipping file: now=~{0} trg=~{1}", DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_trg_bin.Raw());
-			Xob_unzip_wkr unzip_wkr = new Xob_unzip_wkr().Init(app).Process_run_mode_(ProcessAdp.Run_mode_sync_block);
+			Xob_unzip_wkr unzip_wkr = new Xob_unzip_wkr().Init(app).Process_run_mode_(Process_adp.Run_mode_sync_block);
 			unzip_wkr.Decompress(dump_trg_zip, dump_trg_bin);
 		}
 	}

@@ -21,6 +21,8 @@ import java.io.ByteArrayOutputStream;
 
 import org.w3c.tidy.Configuration;
 import org.w3c.tidy.Tidy;
+import gplx.core.envs.*;
+import gplx.core.envs.*;
 class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		private Tidy tidy;
 	private ByteArrayOutputStream wtr; 

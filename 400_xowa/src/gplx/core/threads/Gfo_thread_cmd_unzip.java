@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
-	public Gfo_thread_cmd_unzip Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, ProcessAdp bzip2_process, ProcessAdp zip_process, ProcessAdp gz_process, Io_url src, Io_url trg) {
+	public Gfo_thread_cmd_unzip Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Process_adp bzip2_process, Process_adp zip_process, Process_adp gz_process, Io_url src, Io_url trg) {
 		this.src = src; this.trg = trg; this.kit = kit; this.usr_dlg = usr_dlg;
-		unzip_wkr = new Xob_unzip_wkr().Init(bzip2_process, zip_process, gz_process).Process_run_mode_(ProcessAdp.Run_mode_async);
+		unzip_wkr = new Xob_unzip_wkr().Init(bzip2_process, zip_process, gz_process).Process_run_mode_(Process_adp.Run_mode_async);
 		return this;
 	}	private Io_url src, trg; private Gfui_kit kit; private Gfo_usr_dlg usr_dlg; private Xob_unzip_wkr unzip_wkr;
 	public GfoInvkAble Owner() {return owner;} public Gfo_thread_cmd_unzip Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
@@ -55,7 +55,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 		}
 		return Gfo_thread_cmd_.Init_ok;
 	}
-	public boolean Async_running() {return unzip_wkr.Process_exit_code() == ProcessAdp.Exit_init;}
+	public boolean Async_running() {return unzip_wkr.Process_exit_code() == Process_adp.Exit_init;}
 	public void Async_run() {
 		usr_dlg.Prog_many(GRP_KEY, "bgn", "unzipping");
 		unzip_wkr.Decompress(src, trg);

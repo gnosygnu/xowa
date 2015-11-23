@@ -22,14 +22,17 @@ public class Xoh_anch_cls_parser {
 	private final Bry_rdr rdr = new Bry_rdr();
 	public byte Tid() {return tid;} private byte tid;
 	public Html_atr Atr() {return atr;} private Html_atr atr;
-	public void Parse(Bry_rdr owner_rdr, byte[] src, Html_tag tag) {
+	public boolean Parse(Bry_rdr owner_rdr, byte[] src, Html_tag tag) {
 		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);		// EX: class='image'
 		int src_bgn = atr.Val_bgn(); int src_end = atr.Val_end();
-		if (src_bgn == -1)
+		if (src_bgn == -1) {
 			tid = Xoh_anch_cls_.Tid__none;
+			return false;
+		}
 		else {
 			rdr.Init_by_sub(owner_rdr, "anch.cls", src_bgn, src_end);
-			this.tid = rdr.Chk(Xoh_anch_cls_.Trie);
+			this.tid = rdr.Chk_or(Xoh_anch_cls_.Trie, Byte_ascii.Max_7_bit);
+			return tid != Byte_ascii.Max_7_bit;
 		}
 	}
 }

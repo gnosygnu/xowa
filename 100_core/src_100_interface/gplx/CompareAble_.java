@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class CompareAble_ {
 	public static Comparable as_(Object obj) {return obj instanceof Comparable ? (Comparable)obj : null;}
 	public static int Compare_obj(Object lhs, Object rhs) {return CompareComparables(as_(lhs), as_(rhs));}

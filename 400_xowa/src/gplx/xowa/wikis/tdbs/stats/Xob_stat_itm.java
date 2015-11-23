@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.strings.*;
-public class Xob_stat_itm implements NewAble {
+public class Xob_stat_itm {
 	public String Ns() {return ns;} private String ns;
 	public int  Fils;
 	public long Size, SizeMax = Int_.Min_value, SizeMin = Int_.Max_value;

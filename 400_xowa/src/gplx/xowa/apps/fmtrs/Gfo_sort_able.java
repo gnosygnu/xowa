@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public interface Gfo_sort_able {
-	void Sort(gplx.lists.ComparerAble comparer);
+	void Sort(gplx.core.lists.ComparerAble comparer);
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.core.strings.*;
+import org.junit.*; import gplx.core.strings.*; import gplx.core.type_xtns.*; import gplx.core.stores.*; import gplx.core.envs.*;
 interface TstRuleMgr {
 	boolean SkipChkVal(String expdTypeKey, TstAtr expd);
 	boolean SkipChkObj(String expdTypeKey, String atrKey, TstObj expd);

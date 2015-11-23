@@ -170,7 +170,7 @@ public class Arg_bldr {
 			trim = false;
 			switch (wkr_typ) {
 				case Xop_arg_wkr_.Typ_prm : trim = arg_idx == 0; break; 
-				case Xop_arg_wkr_.Typ_tmpl: trim = true; break;	// NOTE: was "key_exists || arg_idx == 0;"; PAGE:s.w:Gothic_architecture; DATE:2015-11-07
+				case Xop_arg_wkr_.Typ_tmpl: trim = key_exists || arg_idx == 0; break;	// NOTE: never set "trim = true"; PAGE:fr.w:Histoire_de_la_marine_française_sous_Louis_XV_et_Louis_XVI DATE:2015-11-17
 				case Xop_arg_wkr_.Typ_lnki: trim = !cur_itm_is_key; break;
 			}
 			if (trim) {

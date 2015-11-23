@@ -101,4 +101,14 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
+	@Test   public void Tr_with_pipe_ignores_content() {	// PURPOSE: "|-" followed by "|" ignores rest of content; EX: {|\n|-|<b>a</b>\n|} PAGE:lv.w:Starptautiska_kosmosa_stacija; DATE:2015-11-21
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|- |<b>a</b>"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "</table>"
+		));
+	}
 }

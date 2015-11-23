@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.langs.jsons.*;
+import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.langs.jsons.*; import gplx.core.brys.*;
 import gplx.core.ios.*;
 import gplx.dbs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.core.intls.*; import gplx.xowa.users.data.*;
 import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
@@ -72,13 +72,12 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
-	public Url_encoder_mgr			Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = Xop_amp_mgr.Instance;
 	public Xol_case_mgr Utl_case_mgr() {return utl_case_mgr;} private Xol_case_mgr utl_case_mgr = Xol_case_mgr_.U8();
-	public Url_encoder Utl_encoder_fsys() {return utl_encoder_fsys;} private Url_encoder utl_encoder_fsys = Url_encoder.new_fsys_lnx_();
+//		public Gfo_url_encoder Utl_encoder_fsys() {return utl_encoder_fsys;} private Gfo_url_encoder utl_encoder_fsys = Gfo_url_encoder.New_fsys_lnx();
 	public Gfo_msg_log Utl_msg_log() {return utl_msg_log;} private Gfo_msg_log utl_msg_log;
 	public Xoav_url_parser Utl_url_parser_xo() {return utl_url_parser_xo;} private Xoav_url_parser utl_url_parser_xo = new Xoav_url_parser();
 	public Gfo_url_parser Utl_url_parser_gfo() {return utl_url_parser_gfo;} private final Gfo_url_parser utl_url_parser_gfo = new Gfo_url_parser();

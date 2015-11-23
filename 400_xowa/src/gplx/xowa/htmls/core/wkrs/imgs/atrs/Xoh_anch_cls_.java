@@ -19,9 +19,9 @@ package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; 
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 public class Xoh_anch_cls_ {
-	public static final byte 
-	  Tid__none				= 0	// EX: [[File:A.png|link=A]]	-> "<a class=''>"
-	, Tid__image			= 1	// EX: [[File:A.png]]			-> "<a class='image'>"
+	public static final byte	// SERIALIZED
+	  Tid__image			= 0	// EX: [[File:A.png]]			-> "<a class='image'>"
+	, Tid__none				= 1	// EX: [[File:A.png|link=A]]	-> "<a class=''>"
 	;
 	public static final String 
 	  Str__image			= "image"

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
+import gplx.core.type_xtns.*;
 public class GfoNdeFxt {
 	public GfoNde root_(GfoNde... subs)								{return GfoNde_.root_(subs);}
 	public GfoNde tbl_(String name, GfoNde... rows)					{return GfoNde_.tbl_(name, GfoFldList_.Null, rows);}

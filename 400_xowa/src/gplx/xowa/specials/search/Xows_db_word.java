@@ -26,7 +26,7 @@ public class Xows_db_word {
 	public void Rslts_offset_add_1() {++rslts_offset;}
 	public void Rslts_done_y_() {rslts_done = true;}
 }
-class Xows_db_word_sorter implements gplx.lists.ComparerAble {
+class Xows_db_word_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xows_db_word lhs = (Xows_db_word)lhsObj;
 		Xows_db_word rhs = (Xows_db_word)rhsObj;

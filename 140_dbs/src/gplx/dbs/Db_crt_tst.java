@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import org.junit.*; import gplx.core.criterias.*; import gplx.core.gfo_ndes.*;
+import org.junit.*; import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class Db_crt_tst {
 	@Before public void setup() {
 		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), Object_.Ary(1, "me"));

@@ -30,15 +30,15 @@ class Gallery_box_w_fmtr_arg__basic extends gplx.core.brys.Bfr_arg_base implemen
 	}
 	private static final byte[] Style_bgn = Bry_.new_a7("style=\"width: "), Style_end = Bry_.new_a7("px\"");
 }
-class Gallery_box_w_fmtr_arg__hdump extends gplx.core.brys.Bfr_arg_base implements Gallery_box_w_fmtr_arg {
-	private int uid;
-	public Gallery_box_w_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
-		bfr.Add(Xoh_make_trie_.Bry__gallery_box_w);
-		bfr.Add_int_variable(uid);
-		bfr.Add_byte_apos();
-	}
-}
+//	class Gallery_box_w_fmtr_arg__hdump : gplx.core.brys.Bfr_arg_base, Gallery_box_w_fmtr_arg {
+//		private int uid;
+//		public Gallery_box_w_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
+//		public override void Bfr_arg__add(Bry_bfr bfr) {
+//			bfr.Add(Xoh_make_trie_.Bry__gallery_box_w);
+//			bfr.Add_int_variable(uid);
+//			bfr.Add_byte_apos();
+//		}
+//	}
 interface Gallery_img_pad_fmtr_arg extends gplx.core.brys.Bfr_arg {
 	Gallery_img_pad_fmtr_arg Init(int uid, int vpad);
 }
@@ -52,12 +52,12 @@ class Gallery_img_pad_fmtr_arg__basic extends gplx.core.brys.Bfr_arg_base implem
 	}
 	private static final byte[] Style_bgn = Bry_.new_a7("style=\"margin:"), Style_end = Bry_.new_a7("px auto;\"");
 }
-class Gallery_img_pad_fmtr_arg__hdump extends gplx.core.brys.Bfr_arg_base implements Gallery_img_pad_fmtr_arg {
-	private int uid;
-	public Gallery_img_pad_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
-		bfr.Add(Xoh_make_trie_.Bry__gallery_img_pad);
-		bfr.Add_int_variable(uid);
-		bfr.Add_byte_apos();
-	}
-}
+//	class Gallery_img_pad_fmtr_arg__hdump : gplx.core.brys.Bfr_arg_base, Gallery_img_pad_fmtr_arg {
+//		private int uid;
+//		public Gallery_img_pad_fmtr_arg Init(int uid, int width) {this.uid = uid; return this;}
+//		public override void Bfr_arg__add(Bry_bfr bfr) {
+//			bfr.Add(Xoh_make_trie_.Bry__gallery_img_pad);
+//			bfr.Add_int_variable(uid);
+//			bfr.Add_byte_apos();
+//		}
+//	}

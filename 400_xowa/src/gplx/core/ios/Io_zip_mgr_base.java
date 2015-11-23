@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import java.io.*;
 import java.util.zip.*;
+import gplx.core.envs.*;
 public class Io_zip_mgr_base implements Io_zip_mgr {
 	public void Zip_fil(Io_url src_fil, Io_url trg_fil) {
 		byte[] src_bry = Io_mgr.Instance.LoadFilBry(src_fil);

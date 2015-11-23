@@ -140,7 +140,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		int rv_count = rv.Count();
 		if (rv_count > 0) {
 			Xoctg_view_itm last_itm = (Xoctg_view_itm)rv.Get_at(rv_count - 1);
-			int last_itm_pos = last_itm.Pos();
+			int last_itm_pos = last_itm.Sort_idx();
 			tmp_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, last_itm_pos);
 			if (tmp_pos != Bry_find_.Not_found && tmp_pos < src_len - 1) {
 				++tmp_pos;	// position after pipe

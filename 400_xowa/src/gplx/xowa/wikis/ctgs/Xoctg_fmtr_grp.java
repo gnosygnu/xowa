@@ -30,7 +30,7 @@ class Xoctg_fmtr_grp extends gplx.core.brys.Bfr_arg_base {
 			byte[] ttl_char_0 = Bry_.Empty; int col_idx = -1; boolean col_bgn_needed = true;
 			while (cur_idx < len) {
 				Xoctg_view_itm itm = itms_list.Itms()[cur_idx];
-				byte[] itm_sortkey = itm.Sortkey();
+				byte[] itm_sortkey = itm.Sort_key();
 				byte[] ttl_char_0_new = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
 				byte[] grp_name = ttl_char_0_new;
 				if (Bry_.Eq(ttl_char_0, ttl_char_0_new)) {

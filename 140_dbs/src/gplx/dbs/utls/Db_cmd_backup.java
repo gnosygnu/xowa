@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
+import gplx.core.envs.*;
 public class Db_cmd_backup implements GfoInvkAble {
 	public String DbName() {return dbName;} public Db_cmd_backup DbName_(String val) {dbName = val; return this;} private String dbName = "db";
 	public Io_url ExeUrl() {return exeUrl;} public Db_cmd_backup ExeUrl_(Io_url val) {exeUrl = val; return this;} Io_url exeUrl;
@@ -51,7 +52,7 @@ public class Db_cmd_backup implements GfoInvkAble {
 		Io_url bkpCmdFil = bkpDir.GenSubFil_ary("backup_", dbName, ".cmd");
 		// Io_url bkpCmdFil = Io_url_.new_dir_("/home/").GenSubFil_ary("backup_", dbName, ".cmd"); // LNX: uncomment
 		Io_mgr.Instance.SaveFilStr_args(bkpCmdFil, cmdText).Exec(); // explicitly state utf8; 
-		ProcessAdp.run_wait_(bkpCmdFil);
+		Process_adp.run_wait_(bkpCmdFil);
 		Io_mgr.Instance.DeleteFil(bkpCmdFil);
 		return this;
 	}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import org.junit.*;
-import gplx.lists.*;
+import gplx.core.lists.*;
 public class CompareAble_tst implements ComparerAble {
 	@Test  public void Basic() {
 		String[] slotAry = new String[] {"b", "e", "h"};  // 0=b 1=e 2=h

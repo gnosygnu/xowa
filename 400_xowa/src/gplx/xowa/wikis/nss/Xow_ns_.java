@@ -65,7 +65,9 @@ public class Xow_ns_ {
 	;
 	public static final String
 	  Alias__wikipedia = "Wikipedia"
+	, Alias__image = "Image"
 	;
+	public static final byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
 	public static final byte[] 
 	  Bry__template_w_colon	= Bry_.new_a7(Key__template + ":")
 	, Bry__module_w_colon	= Bry_.new_a7(Key__module + ":")

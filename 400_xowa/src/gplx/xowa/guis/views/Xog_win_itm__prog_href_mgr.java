@@ -20,7 +20,7 @@ import gplx.gfui.*; import gplx.xowa.htmls.hrefs.*;
 public class Xog_win_itm__prog_href_mgr {
 	public static void Print(Xog_win_itm win) {	// PURPOSE: print href in prog box when in content editable mode
 		String href = win.Active_html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, "");// get selected href from html_box
-		href = Xoa_app_.Utl__encoder_mgr().Href().Decode_str(href);								// remove url encodings
+		href = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode_str(href);								// remove url encodings
 		if (!String_.Eq(href, win.Prog_box().Text()))
 			win.Usr_dlg().Prog_direct(href);
 	}

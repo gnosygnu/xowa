@@ -26,7 +26,7 @@ public class Xoctg_html_mgr_tst {
 	}
 	@Test   public void Page_itm_missing() {
 		fxt	.Init_itm_page("A1");
-		fxt	.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid_page).Itms()[0].Id_missing_(true);
+		fxt	.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid_page).Itms()[0].Missing_y_();
 		fxt	.Test_html_page(Xoa_ctg_mgr.Tid_page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">A1 (missing)</li>");
 	}
 	@Test   public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
@@ -229,17 +229,17 @@ class Xoh_ctg_page_fxt {
 	public Xoh_ctg_page_fxt Init_ctg_name_(String v) {ctg.Name_(Bry_.new_u8(v)); return this;}
 	public Xoh_ctg_page_fxt Init_ctg_pages_(int bgn, int count) {ctg.Pages().Bgn_(bgn).All_(count).End_(count); return this;}
 	public Xoh_ctg_page_fxt Init_ctg_files_(int bgn, int count) {ctg.Files().Bgn_(bgn).All_(count).End_(count); return this;}
-	public Xoh_ctg_page_fxt Init_itm_page(String... titles) {ctg.Pages().Itms_(itms_(titles)).End_(titles.length); return this;}
-	public Xoh_ctg_page_fxt Init_itm_file(String... titles) {ctg.Files().Itms_(itms_(titles)).End_(titles.length); return this;}
-	public Xoh_ctg_page_fxt Init_itm_ctg(String... titles) {ctg.Subcs().Itms_(itms_(titles)).End_(titles.length); return this;}
-	Xoctg_view_itm[] itms_(String... titles) {
+	public Xoh_ctg_page_fxt Init_itm_page(String... titles) {ctg.Pages().Itms_(itms_(Xoa_ctg_mgr.Tid_page, titles)).End_(titles.length); return this;}
+	public Xoh_ctg_page_fxt Init_itm_file(String... titles) {ctg.Files().Itms_(itms_(Xoa_ctg_mgr.Tid_file, titles)).End_(titles.length); return this;}
+	public Xoh_ctg_page_fxt Init_itm_ctg(String... titles) {ctg.Subcs().Itms_(itms_(Xoa_ctg_mgr.Tid_subc, titles)).End_(titles.length); return this;}
+	Xoctg_view_itm[] itms_(byte tid, String... titles) {
 		int len = titles.length;
 		Xoctg_view_itm[] rv = new Xoctg_view_itm[len];
 		for (int i = 0; i < len; i++) {
 			String title = titles[i];
 			byte[] title_bry = Bry_.new_u8(title);
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, title_bry);
-			rv[i] = new Xoctg_view_itm().Ttl_(ttl).Sortkey_(ttl.Page_txt());
+			rv[i] = new Xoctg_view_itm().Set__page(tid, 0).Set__ttl__sortkey(ttl, ttl.Page_txt());
 		}
 		return rv;
 	}

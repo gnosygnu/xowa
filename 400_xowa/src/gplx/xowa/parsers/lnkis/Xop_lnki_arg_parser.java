@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.envs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
 	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();

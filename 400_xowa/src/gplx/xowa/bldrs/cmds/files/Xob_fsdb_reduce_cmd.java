@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.fsdb.meta.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_fsdb_reduce_cmd extends Xob_itm_basic_base implements Xob_cmd {
@@ -39,10 +40,10 @@ public class Xob_fsdb_reduce_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 }
 class Fsdb_reduce_wkr {
-	private final ProcessAdp convert_process;
+	private final Process_adp convert_process;
 	private final Io_url src_url, trg_url;
 	private final int dpi, quality;
-	public Fsdb_reduce_wkr(ProcessAdp convert_process, Io_url tmp_dir, int dpi, int quality) {
+	public Fsdb_reduce_wkr(Process_adp convert_process, Io_url tmp_dir, int dpi, int quality) {
 		this.convert_process = convert_process;
 		this.src_url = tmp_dir.GenSubFil("fsdb_reduce.src.bin");
 		this.trg_url = tmp_dir.GenSubFil("fsdb_reduce.trg.bin");

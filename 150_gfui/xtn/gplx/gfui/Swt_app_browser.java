@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
 import gplx.*;
+import gplx.core.envs.Env_;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.browser.*; import org.eclipse.swt.custom.*; import org.eclipse.swt.events.*; import org.eclipse.swt.graphics.*; import org.eclipse.swt.layout.*; import org.eclipse.swt.widgets.*;
 public class Swt_app_browser {

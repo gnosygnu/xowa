@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
 public class Xob_redirect_cmd extends Xob_dump_mgr_base {		
 	private Db_conn conn; private Xob_redirect_tbl redirect_tbl;
-	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Url_encoder encoder;
+	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Gfo_url_encoder encoder;
 	public Xob_redirect_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.Reset_db_y_();}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wiki_redirect;}
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__file);}	// restrict to file ns
@@ -35,8 +35,8 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	@Override protected Db_conn Init_db_file() {
 		this.db_mgr = wiki.Db_mgr_as_sql();
 		redirect_mgr = wiki.Redirect_mgr();
-		encoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();
-		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Http_url_ttl()).Create_table();
+		encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl;
+		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl).Create_table();
 		conn = redirect_tbl.Conn();
 		conn.Txn_bgn("bldr__redirect");
 		return conn;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.stores.*;
 import gplx.dbs.qrys.*;
 public class Db_conn_ {
 	public static final Db_conn Noop = Db_conn_pool.Instance.Get_or_new(Db_conn_info_.Null);

@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 public class Bfr_arg__bry extends gplx.core.brys.Bfr_arg_base {
-	private final byte[] bry;
+	private byte[] bry;
 	public Bfr_arg__bry(byte[] v) {this.bry = v;}
+	public void Set(byte[] v) {this.bry = v;}
 	@Override public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add(bry);}
 }

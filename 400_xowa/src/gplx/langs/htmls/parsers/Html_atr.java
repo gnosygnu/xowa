@@ -26,7 +26,8 @@ public class Html_atr extends gplx.core.brys.Bfr_arg_base {
 	public byte[] Key() {return key;} private final byte[] key;
 	public int Val_bgn() {return val_bgn;} private final int val_bgn;
 	public int Val_end() {return val_end;} private final int val_end;
-	public boolean Val_exists() {return val_end > val_bgn;}
+	public boolean Val_dat_exists() {return val_end > val_bgn;}
+	public boolean Val_dat_missing() {return val_end == -1;}
 	public byte[] Val() {
 		if (val == null)
 			val = Bry_.Mid(src, val_bgn, val_end);
@@ -36,9 +37,9 @@ public class Html_atr extends gplx.core.brys.Bfr_arg_base {
 		if (val_end > val_bgn)
 			bfr.Add_mid(src, val_bgn, val_end);
 	}
-	@Override public boolean Bfr_arg__exists() {return this.Val_exists();}
+	@Override public boolean Bfr_arg__exists() {return this.Val_dat_exists();}
 	@Override public void Bfr_arg__add(Bry_bfr bfr) {
-		if (Val_exists())
+		if (Val_dat_exists())
 			bfr.Add_mid(src, val_bgn, val_end);
 	}
 	public static final Html_atr Noop = new Html_atr(-1, Bry_.Empty, Bry_.Empty, Bry_.Empty, -1, -1);

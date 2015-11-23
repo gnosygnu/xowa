@@ -40,7 +40,7 @@ public class Xoctg_idx_itm {
 		this.sortkey = orig.sortkey;
 	}
 }
-class Xoctg_idx_itm_sorter_sortkey implements gplx.lists.ComparerAble {
+class Xoctg_idx_itm_sorter_sortkey implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_idx_itm lhs = (Xoctg_idx_itm)lhsObj;
 		Xoctg_idx_itm rhs = (Xoctg_idx_itm)rhsObj;

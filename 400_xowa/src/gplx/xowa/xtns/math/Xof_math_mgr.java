@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.xowa.apps.progs.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.envs.*;
+import gplx.xowa.apps.progs.*;
 public class Xof_math_mgr implements GfoInvkAble {
 	private Xoae_app app;
-	public ProcessAdp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private ProcessAdp cmd_convert_tex_to_dvi = new ProcessAdp();
-	public ProcessAdp Cmd_convert_dvi_to_png() {return cmd_convert_dvi_to_png;} private ProcessAdp cmd_convert_dvi_to_png = new ProcessAdp();
+	public Process_adp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private Process_adp cmd_convert_tex_to_dvi = new Process_adp();
+	public Process_adp Cmd_convert_dvi_to_png() {return cmd_convert_dvi_to_png;} private Process_adp cmd_convert_dvi_to_png = new Process_adp();
 	public void Init_by_app(Xoae_app app) {
 		this.app = app;
 		Xoa_prog_mgr app_mgr = app.Prog_mgr();

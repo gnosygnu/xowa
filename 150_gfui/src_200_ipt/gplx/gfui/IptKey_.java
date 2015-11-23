@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 import java.awt.event.KeyEvent;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.stores.*;
 public class IptKey_ {
 	private static EnmMgr enm_mgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
 	public static IptKey[] Ary(IptKey... ary) {return ary;}

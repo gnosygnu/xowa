@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
-import org.junit.*; import gplx.core.gfo_ndes.*;
+import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class DsvDataRdr_dsv_hdr_tst {
 	@Before public void setup() {fx.Clear();} DsvDataRdr_fxt fx = DsvDataRdr_fxt.new_();
 	@Test  public void Names() {

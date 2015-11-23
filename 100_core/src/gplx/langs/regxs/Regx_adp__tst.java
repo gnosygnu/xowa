@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Regx_adp__tst implements TfdsEqListItmStr {
 	@Test  public void Match() {
 		tst_Match("a", "a", true);	// basic

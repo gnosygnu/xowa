@@ -31,7 +31,7 @@ public class Xows_db_row {
 	public int			Page_len()			{return page_len;}			private final int page_len;
 	public static Xows_db_row[] Ary(Xows_db_row... v) {return v;}
 }
-class Xows_db_row_sorter implements gplx.lists.ComparerAble {
+class Xows_db_row_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xows_db_row lhs = (Xows_db_row)lhsObj;
 		Xows_db_row rhs = (Xows_db_row)rhsObj;

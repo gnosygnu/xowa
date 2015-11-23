@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*;
+import gplx.core.threads.*; import gplx.core.envs.*;
 public class Load_page_wkr implements Gfo_thread_wkr {
 	private static final Object thread_lock = new Object(); private static boolean running = false;
 	private final Xog_tab_itm tab;

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.core.envs.*;
+import gplx.dbs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.wikis.*;
 public class Xof_cache_mgr implements GfoInvkAble {
 	private final Gfo_usr_dlg usr_dlg; private final Xoae_wiki_mgr wiki_mgr; private final Xoa_repo_mgr repo_mgr;

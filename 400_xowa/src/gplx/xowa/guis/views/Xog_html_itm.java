@@ -172,7 +172,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
-			: html_box.Html_js_eval_proc_as_bool(Xog_js_procs.Win__scroll_elem_into_view, Xoa_app_.Utl__encoder_mgr().Id().Encode_str(id));
+			: html_box.Html_js_eval_proc_as_bool(Xog_js_procs.Win__scroll_elem_into_view, gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode_str(id));
 	}
 	public void Js_enabled_(boolean v) {
 		html_box.Html_js_enabled_(v);

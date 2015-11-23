@@ -19,7 +19,7 @@ package gplx.langs.htmls.parsers.clses; import gplx.*; import gplx.langs.*; impo
 public class Html_atr_class_parser_ {
 	public static void Parse(Html_tag tag, Html_atr_class_wkr wkr) {
 		Html_atr atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__class);
-		if (atr.Val_exists())
+		if (atr.Val_dat_exists())
 			Parse(tag.Src(), atr.Val_bgn(), atr.Val_end(), wkr);
 	}
 	public static void Parse(byte[] src, int src_bgn, int src_end, Html_atr_class_wkr wkr) {

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.envs.*;
+import gplx.langs.htmls.encoders.*; 
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.htmls.hrefs.*;
 public class Xoapi_orig_wmf extends Xoapi_orig_base {
@@ -80,7 +81,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 			return tmp_bfr.To_str_and_clear();
 		}
 	}
-	private static Url_encoder tmp_encoder = Url_encoder.new_http_url_().Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);
+	private static Gfo_url_encoder tmp_encoder = Gfo_url_encoder_.New__http_url().Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline).Make();
 	private static final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private static final byte[]
 	  Bry_api					= Bry_.new_a7("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical

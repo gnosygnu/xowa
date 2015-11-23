@@ -72,7 +72,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		byte[] page = Xoa_ttl.Replace_spaces(ttl.Full_txt_wo_qarg());
 		tmp_bfr.Add(page);
 		Gfo_qarg_mgr qarg_mgr = url.Qargs_mgr();
-		qarg_mgr.To_bry(tmp_bfr, Xoa_app_.Utl__encoder_mgr().Href(), Bool_.N);
+		qarg_mgr.To_bry(tmp_bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, Bool_.N);
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Sort() {itms.Sort_by(sorter);}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.consoles.*;
+import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.langs.bldrs.*;
 public class Xob_bldr implements GfoInvkAble {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;

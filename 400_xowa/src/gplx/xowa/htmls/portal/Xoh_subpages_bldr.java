@@ -47,7 +47,7 @@ public class Xoh_subpages_bldr extends gplx.core.brys.Bfr_arg_base {
 			byte[] seg = segs[i];
 			ttl_bfr.Add(seg);
 			byte[] seg_ttl = ttl_bfr.To_bry();															
-			byte[] seg_ttl_enc = Xoa_app_.Utl__encoder_mgr().Href().Encode(ttl_bfr.To_bry());
+			byte[] seg_ttl_enc = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(ttl_bfr.To_bry());
 			byte[] href = Bry_.Add(Xoh_href_.Bry__wiki, seg_ttl_enc);		// EX: /wiki/Help:A
 			fmtr_itm.Bld_bfr(bfr, dlm, href, seg_ttl, seg);
 		}

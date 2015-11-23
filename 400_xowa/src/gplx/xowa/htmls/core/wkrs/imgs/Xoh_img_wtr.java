@@ -24,8 +24,10 @@ public class Xoh_img_wtr extends gplx.core.brys.Bfr_arg_base {
 	private final Bfr_arg__indent indent	= new Bfr_arg__indent();
 	private final Bfr_arg__html_atr
 	  anch_href			= new Bfr_arg__html_atr(Html_atr_.Bry__href)
+	, anch_rel			= new Bfr_arg__html_atr(Html_atr_.Bry__rel)
 	, anch_cls			= new Bfr_arg__html_atr(Html_atr_.Bry__class)
 	, anch_title		= new Bfr_arg__html_atr(Html_atr_.Bry__title)
+	, anch_xowa_title	= new Bfr_arg__html_atr(Xoh_img_parser.Bry__atr__xowa_title)
 	, img_id			= new Bfr_arg__html_atr(Html_atr_.Bry__id)
 	, img_xoimg			= new Bfr_arg__html_atr(Xoh_img_xoimg_parser.Bry__name)
 	, img_alt			= new Bfr_arg__html_atr(Html_atr_.Bry__alt)
@@ -37,19 +39,24 @@ public class Xoh_img_wtr extends gplx.core.brys.Bfr_arg_base {
 	private final Bfr_arg__id img_id_val = new Bfr_arg__id();
 	public Xoh_img_wtr() {
 		arg_ary = new Bfr_arg[] 
-		{ indent, anch_href, anch_cls, anch_title
-		, img_id, img_xoimg, img_alt, img_src, img_w, img_h, img_cls
+		{ indent, anch_href, anch_rel, anch_cls, anch_title, anch_xowa_title
+		, img_id, img_xoimg, img_src, img_w, img_h, img_cls, img_alt
 		};
 	}
+	public Bfr_arg__html_atr Img_alt() {return img_alt;}
 	public Xoh_img_wtr Indent_(int v)							{indent.Set(v); return this;}
 	public Xoh_img_wtr Anch_href_(Bfr_arg v)					{anch_href.Set_by_arg(v); return this;}
+	public Xoh_img_wtr Anch_rel_nofollow_()						{anch_rel.Set_by_bry(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_dict_.Html__rel__nofollow); return this;}
 	public Xoh_img_wtr Anch_cls_(Bfr_arg v)						{anch_cls.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Anch_title_(Bfr_arg v)					{anch_title.Set_by_arg(v); return this;}
+	public Xoh_img_wtr Anch_xowa_title_(byte[] v)				{anch_xowa_title.Set_by_bry(v); return this;}
 	public Xoh_img_wtr Img_id_(byte[] prefix, int uid)			{img_id.Set_by_arg(img_id_val.Set(prefix, uid)); return this;}
 	public Xoh_img_wtr Img_w_(int v)							{img_w.Set_by_int(v); return this;}
 	public Xoh_img_wtr Img_h_(int v)							{img_h.Set_by_int(v); return this;}
+	public Xoh_img_wtr Img_xoimg_(byte[] src, int bgn, int end)	{img_xoimg.Set_by_mid(src, bgn, end); return this;}
 	public Xoh_img_wtr Img_cls_(Bfr_arg v)						{img_cls.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Img_src_(Bfr_arg v)						{img_src.Set_by_arg(v); return this;}
+	public Xoh_img_wtr Img_src_empty_()							{img_src.Set_by_bry(Bry_.Empty); return this;}
 	public Xoh_img_wtr Img_alt_(Bfr_arg v)						{img_alt.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Clear() {			
 		for (Bfr_arg arg : arg_ary)
@@ -60,6 +67,6 @@ public class Xoh_img_wtr extends gplx.core.brys.Bfr_arg_base {
 		fmtr.Bld_bfr_many(bfr, (Object[])arg_ary);
 	}
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_
-	( "~{indent}<a~{anch_href}~{anch_cls}~{anch_title}><img~{img_id}~{img_alt}~{img_xoimg}~{img_src}~{img_w}~{img_h}~{img_cls}></a>"
-	, "indent", "anch_href", "anch_cls", "anch_title", "img_id", "img_xoimg", "img_alt", "img_src", "img_w", "img_h", "img_cls");
+	( "~{indent}<a~{anch_href}~{anch_rel}~{anch_cls}~{anch_title}~{anch_xowa_title}><img~{img_id}~{img_xoimg}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}></a>"
+	, "indent", "anch_href", "anch_rel", "anch_cls", "anch_title", "anch_xowa_title", "img_id", "img_xoimg", "img_src", "img_w", "img_h", "img_cls", "img_alt");
 }

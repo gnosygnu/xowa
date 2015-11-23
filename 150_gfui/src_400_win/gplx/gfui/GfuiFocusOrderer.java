@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.lists.*; /*ComparerAble*/
+import gplx.core.lists.*; /*ComparerAble*/
 class GfuiFocusOrderer {
 	public static void OrderByX(GfuiElem owner) {Order(owner, xcomparer, 0);}
 	public static void OrderByY(GfuiElem owner) {Order(owner, ycomparer, 0);}

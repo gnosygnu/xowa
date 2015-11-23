@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.*;
+import gplx.dbs.engines.*; import gplx.core.stores.*;
 public interface Db_stmt extends RlsAble {
 	Db_stmt Crt_bool_as_byte(String k, boolean v);
 	Db_stmt Val_bool_as_byte(String k, boolean v);

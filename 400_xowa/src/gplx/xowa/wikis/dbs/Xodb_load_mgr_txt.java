@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.specials.search.*; import gplx.core.encoders.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.core.envs.*;
+import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.specials.search.*; import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
@@ -307,8 +308,9 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		for (int i = 0; i < ctgs_len; i++) {
 			Xowd_page_itm itm = (Xowd_page_itm)ctgs.Get_at(i);
 			byte itm_tid = Load_ctg_v1_tid(itm.Ns_id());
-			Xoctg_view_itm sub = Load_ctg_v1_sub(itm_tid, itm);
-			sub.Ttl_(Xoa_ttl.parse(wiki, itm.Ns_id(), itm.Ttl_page_db())).Sortkey_(itm.Ttl_page_db());
+			Xoctg_view_itm sub = new Xoctg_view_itm();
+			sub.Set__page(itm_tid, itm.Id());
+			sub.Set__ttl__sortkey(Xoa_ttl.parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
 			view_ctg.Grp_by_tid(itm_tid).Itms_add(sub);				
 		}
 		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
@@ -344,15 +346,10 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}
 	public static byte Load_ctg_v1_tid(int ns_id) {
 		switch (ns_id) {
-			case Xow_ns_.Tid__category: 	return Xoa_ctg_mgr.Tid_subc;
+			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid_subc;
 			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid_file;
 			default: 					return Xoa_ctg_mgr.Tid_page;
 		}		
-	}
-	private static Xoctg_view_itm Load_ctg_v1_sub(byte tid, Xowd_page_itm data) {
-		Xoctg_view_itm rv = new Xoctg_view_itm();
-		rv.Load_by_ttl_data(tid, data.Id(), 0, data.Text_len());
-		return rv;
 	}
 	public static boolean Load_page_or_false(Xowd_page_itm page, Xob_xdat_itm xdat, int ns_id) {
 		byte[] src = xdat.Src(); int itm_end = xdat.Itm_end();
@@ -563,7 +560,7 @@ class Xob_random_itm {
 	public int Len() {return len;} private int len;
 	public Xob_random_itm(int idx, int bgn, int len) {this.idx = idx; this.bgn = bgn; this.len = len;}
 }
-class Xob_random_itm_comparer implements gplx.lists.ComparerAble {
+class Xob_random_itm_comparer implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		return Int_.Compare(((Xob_random_itm)lhsObj).End(), ((Xob_random_itm)rhsObj).End());
 	}

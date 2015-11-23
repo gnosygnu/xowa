@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 import org.junit.*;
-import gplx.stores.*;
+import gplx.core.stores.*;
 public class z801_useCase_DataRdr_tst {
 	String raw;
 	@Test  public void Subs_byName() {

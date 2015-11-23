@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
+import gplx.core.type_xtns.*; import gplx.core.stores.*;
 public class GfoNde_ {
 	public static final GfoNde[] Ary_empty = new GfoNde[0];
 	public static GfoNde[] ary_(GfoNde... ary) {return ary;}

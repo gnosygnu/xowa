@@ -16,52 +16,52 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.progs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*; import gplx.core.envs.*;
 public class Xoa_prog_mgr implements GfoInvkAble {
 	public void Init_by_app(Xoa_fsys_eval cmd_eval) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
-		ProcessAdp.ini_(this, usr_dlg, app_query_img_size			, cmd_eval, ProcessAdp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\identify", "-ping -format \"<{%w,%h}>\" \"~{file}\"", "file");
-		ProcessAdp.ini_(this, usr_dlg, app_resize_img				, cmd_eval, ProcessAdp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "\"~{source}\" -coalesce -resize ~{width}x~{height} \"~{target}\"", "source", "target", "width", "height");
-		ProcessAdp.ini_(this, usr_dlg, app_convert_svg_to_png		, cmd_eval, ProcessAdp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}inkscape\\inkscape", "-z -w ~{width} -f \"~{source}\" -e \"~{target}\"", "source", "target", "width").Thread_kill_name_("inkscape.exe");	// // -z=without-gui; -w=width; -f=file -e=export-png
-		ProcessAdp.ini_(this, usr_dlg, app_convert_tex_to_dvi		, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\latex", "-quiet -output-directory=~{temp_dir} -job-name=xowa_temp ~{tex_file}", "tex_file", "temp_dir");
-		ProcessAdp.ini_(this, usr_dlg, app_convert_dvi_to_png		, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\dvipng", "~{dvi_file} -o ~{png_file} -q* -T tight -bg Transparent", "dvi_file", "png_file", "temp_dir");
-		ProcessAdp.ini_(this, usr_dlg, app_convert_djvu_to_tiff		, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}djvulibre\\ddjvu", "-format=tiff -page=1 \"~{source}\" \"~{target}\"", "source", "target");
-		ProcessAdp.ini_(this, usr_dlg, app_decompress_bz2			, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
-		ProcessAdp.ini_(this, usr_dlg, app_decompress_bz2_by_stdout	, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -so \"~{src}\"", "src");	// x=extract; -so=stdout
-		ProcessAdp.ini_(this, usr_dlg, app_decompress_zip			, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
-		ProcessAdp.ini_(this, usr_dlg, app_decompress_gz			, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
-		ProcessAdp.ini_(this, usr_dlg, app_lua						, cmd_eval, ProcessAdp.Run_mode_async			,  0	 , "~{<>bin_plat_dir<>}lua\\lua", "", "");
-		ProcessAdp.ini_(this, usr_dlg, app_lilypond					, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\lilypond.exe", "\"-dsafe=#t\" -dbackend=ps --png --header=texidoc -dmidi-extension=midi \"~{file}\"", "file");
-		ProcessAdp.ini_(this, usr_dlg, app_abc2ly					, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\python.exe", "abc2ly.py -s \"--output=~{target}\" \"~{source}\"", "source", "target");
-		ProcessAdp.ini_(this, usr_dlg, app_trim_img					, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "-trim \"~{source}\"  \"~{target}\"", "source", "target");
-		ProcessAdp.ini_(this, usr_dlg, app_convert_midi_to_ogg		, cmd_eval, ProcessAdp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}timidity\\timidity", "-Ov \"--output-file=~{target}\" \"~{source}\"", "source", "target");
-		ProcessAdp.ini_(this, usr_dlg, app_view_web					, cmd_eval, ProcessAdp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
-		ProcessAdp.ini_(this, usr_dlg, app_view_text				, cmd_eval, ProcessAdp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
+		Process_adp.ini_(this, usr_dlg, app_query_img_size			, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\identify", "-ping -format \"<{%w,%h}>\" \"~{file}\"", "file");
+		Process_adp.ini_(this, usr_dlg, app_resize_img				, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "\"~{source}\" -coalesce -resize ~{width}x~{height} \"~{target}\"", "source", "target", "width", "height");
+		Process_adp.ini_(this, usr_dlg, app_convert_svg_to_png		, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}inkscape\\inkscape", "-z -w ~{width} -f \"~{source}\" -e \"~{target}\"", "source", "target", "width").Thread_kill_name_("inkscape.exe");	// // -z=without-gui; -w=width; -f=file -e=export-png
+		Process_adp.ini_(this, usr_dlg, app_convert_tex_to_dvi		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\latex", "-quiet -output-directory=~{temp_dir} -job-name=xowa_temp ~{tex_file}", "tex_file", "temp_dir");
+		Process_adp.ini_(this, usr_dlg, app_convert_dvi_to_png		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\dvipng", "~{dvi_file} -o ~{png_file} -q* -T tight -bg Transparent", "dvi_file", "png_file", "temp_dir");
+		Process_adp.ini_(this, usr_dlg, app_convert_djvu_to_tiff		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}djvulibre\\ddjvu", "-format=tiff -page=1 \"~{source}\" \"~{target}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_decompress_bz2			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
+		Process_adp.ini_(this, usr_dlg, app_decompress_bz2_by_stdout	, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -so \"~{src}\"", "src");	// x=extract; -so=stdout
+		Process_adp.ini_(this, usr_dlg, app_decompress_zip			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
+		Process_adp.ini_(this, usr_dlg, app_decompress_gz			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
+		Process_adp.ini_(this, usr_dlg, app_lua						, cmd_eval, Process_adp.Run_mode_async			,  0	 , "~{<>bin_plat_dir<>}lua\\lua", "", "");
+		Process_adp.ini_(this, usr_dlg, app_lilypond					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\lilypond.exe", "\"-dsafe=#t\" -dbackend=ps --png --header=texidoc -dmidi-extension=midi \"~{file}\"", "file");
+		Process_adp.ini_(this, usr_dlg, app_abc2ly					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\python.exe", "abc2ly.py -s \"--output=~{target}\" \"~{source}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_trim_img					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "-trim \"~{source}\"  \"~{target}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_convert_midi_to_ogg		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}timidity\\timidity", "-Ov \"--output-file=~{target}\" \"~{source}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_view_web					, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
+		Process_adp.ini_(this, usr_dlg, app_view_text				, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
 		int cmds_view_file_by_ext_len = cmds_view_file_by_ext.length;
 		for (int i= 0; i < cmds_view_file_by_ext_len; i++) {
-			ProcessAdp cmd = new ProcessAdp();
+			Process_adp cmd = new Process_adp();
 			cmds_view_file_by_ext [i] = cmd;
-			ProcessAdp.ini_(this, usr_dlg, cmd						, cmd_eval, ProcessAdp.Run_mode_async		,  0	, "cmd", "/c start \"~{file}\"", "file");
+			Process_adp.ini_(this, usr_dlg, cmd						, cmd_eval, Process_adp.Run_mode_async		,  0	, "cmd", "/c start \"~{file}\"", "file");
 		}
 	}
-	public ProcessAdp App_query_img_size()				{return app_query_img_size;}			private ProcessAdp app_query_img_size = new ProcessAdp();
-	public ProcessAdp App_resize_img()					{return app_resize_img;}				private ProcessAdp app_resize_img = new ProcessAdp();
-	public ProcessAdp App_convert_svg_to_png()			{return app_convert_svg_to_png;}		private ProcessAdp app_convert_svg_to_png = new ProcessAdp();
-	public ProcessAdp App_convert_tex_to_dvi()			{return app_convert_tex_to_dvi;}		private ProcessAdp app_convert_tex_to_dvi = new ProcessAdp();
-	public ProcessAdp App_convert_dvi_to_png()			{return app_convert_dvi_to_png;}		private ProcessAdp app_convert_dvi_to_png = new ProcessAdp();
-	public ProcessAdp App_convert_djvu_to_tiff()		{return app_convert_djvu_to_tiff;}		private ProcessAdp app_convert_djvu_to_tiff = new ProcessAdp();
-	public ProcessAdp App_view_web()					{return app_view_web;}					private ProcessAdp app_view_web = new ProcessAdp();
-	public ProcessAdp App_view_text()					{return app_view_text;}					private ProcessAdp app_view_text = new ProcessAdp();
-	public ProcessAdp App_decompress_bz2()				{return app_decompress_bz2;}			private ProcessAdp app_decompress_bz2 = new ProcessAdp();
-	public ProcessAdp App_decompress_zip()				{return app_decompress_zip;}			private ProcessAdp app_decompress_zip = new ProcessAdp();
-	public ProcessAdp App_decompress_gz()				{return app_decompress_gz;}				private ProcessAdp app_decompress_gz  = new ProcessAdp();
-	public ProcessAdp App_decompress_bz2_by_stdout()	{return app_decompress_bz2_by_stdout;}	private ProcessAdp app_decompress_bz2_by_stdout = new ProcessAdp();
-	public ProcessAdp App_lua()							{return app_lua;}						private ProcessAdp app_lua = new ProcessAdp();
-	public ProcessAdp App_lilypond()					{return app_lilypond;}					private ProcessAdp app_lilypond = new ProcessAdp();
-	public ProcessAdp App_abc2ly()						{return app_abc2ly;}					private ProcessAdp app_abc2ly = new ProcessAdp();
-	public ProcessAdp App_trim_img()					{return app_trim_img;}					private ProcessAdp app_trim_img = new ProcessAdp();
-	public ProcessAdp App_convert_midi_to_ogg()			{return app_convert_midi_to_ogg;}		private ProcessAdp app_convert_midi_to_ogg = new ProcessAdp();
-	public ProcessAdp App_by_ext(String ext)			{return App_by_ext_key(String_.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
+	public Process_adp App_query_img_size()				{return app_query_img_size;}			private Process_adp app_query_img_size = new Process_adp();
+	public Process_adp App_resize_img()					{return app_resize_img;}				private Process_adp app_resize_img = new Process_adp();
+	public Process_adp App_convert_svg_to_png()			{return app_convert_svg_to_png;}		private Process_adp app_convert_svg_to_png = new Process_adp();
+	public Process_adp App_convert_tex_to_dvi()			{return app_convert_tex_to_dvi;}		private Process_adp app_convert_tex_to_dvi = new Process_adp();
+	public Process_adp App_convert_dvi_to_png()			{return app_convert_dvi_to_png;}		private Process_adp app_convert_dvi_to_png = new Process_adp();
+	public Process_adp App_convert_djvu_to_tiff()		{return app_convert_djvu_to_tiff;}		private Process_adp app_convert_djvu_to_tiff = new Process_adp();
+	public Process_adp App_view_web()					{return app_view_web;}					private Process_adp app_view_web = new Process_adp();
+	public Process_adp App_view_text()					{return app_view_text;}					private Process_adp app_view_text = new Process_adp();
+	public Process_adp App_decompress_bz2()				{return app_decompress_bz2;}			private Process_adp app_decompress_bz2 = new Process_adp();
+	public Process_adp App_decompress_zip()				{return app_decompress_zip;}			private Process_adp app_decompress_zip = new Process_adp();
+	public Process_adp App_decompress_gz()				{return app_decompress_gz;}				private Process_adp app_decompress_gz  = new Process_adp();
+	public Process_adp App_decompress_bz2_by_stdout()	{return app_decompress_bz2_by_stdout;}	private Process_adp app_decompress_bz2_by_stdout = new Process_adp();
+	public Process_adp App_lua()							{return app_lua;}						private Process_adp app_lua = new Process_adp();
+	public Process_adp App_lilypond()					{return app_lilypond;}					private Process_adp app_lilypond = new Process_adp();
+	public Process_adp App_abc2ly()						{return app_abc2ly;}					private Process_adp app_abc2ly = new Process_adp();
+	public Process_adp App_trim_img()					{return app_trim_img;}					private Process_adp app_trim_img = new Process_adp();
+	public Process_adp App_convert_midi_to_ogg()			{return app_convert_midi_to_ogg;}		private Process_adp app_convert_midi_to_ogg = new Process_adp();
+	public Process_adp App_by_ext(String ext)			{return App_by_ext_key(String_.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_query_img_size))				return app_query_img_size;
 		else if	(ctx.Match(k, Invk_resize_img))					return app_resize_img;
@@ -93,18 +93,18 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 	public void Exec_view_web(byte[] url) {
 		url = Bry_.Replace(url, Quote_normal, Quote_escape); // escape quotes; DATE:2013-03-31
 		String url_str = String_.new_u8(url);
-		url_str = ProcessAdp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_view_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
+		url_str = Process_adp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_view_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
 		app_view_web.Run(url_str);
 	}	private static final byte[] Quote_normal = new byte[] {Byte_ascii.Quote}, Quote_escape = new byte[] {Byte_ascii.Quote, Byte_ascii.Quote};
-	private ProcessAdp App_by_ext_key(String ext) {return cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
+	private Process_adp App_by_ext_key(String ext) {return cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
 	public void Exec_view_by_ext(String exts_raw, String cmd, String args) {
 		String[] exts_ary = String_.Split(exts_raw, '|');
 		int exts_ary_len = exts_ary.length;
 		for (int i = 0; i < exts_ary_len; i++) 
 			App_by_ext_key(exts_ary[i]).Cmd_args(cmd, args);
-	}	ProcessAdp[] cmds_view_file_by_ext = new ProcessAdp[Xof_ext_.Id__max];
-	private ProcessAdp Init_by_exts(String... exts) {
-		ProcessAdp rv = App_by_ext_key(exts[0]);
+	}	Process_adp[] cmds_view_file_by_ext = new Process_adp[Xof_ext_.Id__max];
+	private Process_adp Init_by_exts(String... exts) {
+		Process_adp rv = App_by_ext_key(exts[0]);
 		int len = exts.length;
 		for (int i = 0; i < len; i++) {
 			cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(exts[i]))] = rv;

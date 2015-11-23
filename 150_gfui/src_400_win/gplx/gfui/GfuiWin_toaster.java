@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.envs.*;
 public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin owner, String text, int interval) {
 		this.TaskbarParkingWindowFix(owner);
 		ShowPopup(text, interval);

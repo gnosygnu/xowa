@@ -20,7 +20,7 @@ import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.wkrs.escapes.*; import gplx.xowa.htmls.core.wkrs.spaces.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*;
+import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
 public class Xoh_hdoc_mkr {
 	private Gfo_poolable_mgr
 	  pool__escape__hzip	= Gfo_poolable_mgr_.New(1, 32, new Xoh_escape_hzip())
@@ -30,6 +30,7 @@ public class Xoh_hdoc_mkr {
 	, pool__lnki__hzip		= Gfo_poolable_mgr_.New(1, 32, new Xoh_lnki_hzip())
 	, pool__img__hzip		= Gfo_poolable_mgr_.New(1, 32, new Xoh_img_hzip())
 	, pool__thm__hzip		= Gfo_poolable_mgr_.New(1, 32, new Xoh_thm_hzip())
+	, pool__gly__hzip		= Gfo_poolable_mgr_.New(1, 32, new Xoh_gly_hzip())
 	;
 	public Xoh_hzip_wkr Hzip__wkr(byte tid) {
 		switch (tid) {
@@ -40,6 +41,7 @@ public class Xoh_hdoc_mkr {
 			case Xoh_hzip_dict_.Tid__lnki:			return Lnki__hzip();
 			case Xoh_hzip_dict_.Tid__img:			return Img__hzip();
 			case Xoh_hzip_dict_.Tid__thm:			return Thm__hzip();
+			case Xoh_hzip_dict_.Tid__gly:			return Gly__hzip();
 			default:								throw Err_.new_unhandled(tid);
 		}
 	}
@@ -50,4 +52,5 @@ public class Xoh_hdoc_mkr {
 	public Xoh_lnki_hzip		Lnki__hzip()		{return (Xoh_lnki_hzip)			pool__lnki__hzip.Get_fast();}
 	public Xoh_img_hzip			Img__hzip()			{return (Xoh_img_hzip)			pool__img__hzip.Get_fast();}
 	public Xoh_thm_hzip			Thm__hzip()			{return (Xoh_thm_hzip)			pool__thm__hzip.Get_fast();}
+	public Xoh_gly_hzip			Gly__hzip()			{return (Xoh_gly_hzip)			pool__gly__hzip.Get_fast();}
 }

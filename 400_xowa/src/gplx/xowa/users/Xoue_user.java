@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.users.data.*;

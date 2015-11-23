@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
-	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
+	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
 		fmtr_tbl.Init_by_ctor(lang_sorter, toggle_mgr, lbl_regy, href_encoder, fmtr_toc, xwiki_mgr);
 	}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {fmtr_tbl.Init_by_lang(msgs);}
@@ -47,7 +47,7 @@ class Wdata_fmtr__slink_tbl extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_row fmtr_row = new Wdata_fmtr__slink_row();
 	private final Wdata_slink_grp[] grps = new Wdata_slink_grp[Wdata_slink_grp.Idx__len];
 	private Wdata_lang_sorter lang_sorter; private Wdata_hwtr_msgs msgs;
-	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
+	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
 		this.lang_sorter = lang_sorter;
 		fmtr_row.Init_by_ctor(lbl_regy, href_encoder, xwiki_mgr);
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
@@ -101,8 +101,8 @@ class Wdata_fmtr__slink_tbl extends gplx.core.brys.Bfr_arg_base {
 }
 class Wdata_fmtr__slink_row extends gplx.core.brys.Bfr_arg_base {
 	private final Wdata_fmtr__slink_badges fmtr_badges = new Wdata_fmtr__slink_badges(); private Xow_xwiki_mgr xwiki_mgr;
-	private Url_encoder href_encoder; private Ordered_hash list; 
-	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Xow_xwiki_mgr xwiki_mgr) {
+	private Gfo_url_encoder href_encoder; private Ordered_hash list; 
+	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Xow_xwiki_mgr xwiki_mgr) {
 		this.href_encoder = href_encoder; this.xwiki_mgr = xwiki_mgr;
 		fmtr_badges.Init_by_ctor(lbl_regy);
 	}

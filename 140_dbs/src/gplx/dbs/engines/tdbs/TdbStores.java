@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.stores.*;
-import gplx.stores.xmls.*; /*XmlDataRdr*/
+import gplx.core.stores.*;
+import gplx.core.stores.xmls.*; /*XmlDataRdr*/
 import gplx.langs.dsvs.*; /*DsvDataWtr*/
-import gplx.lists.*; /*GfoNdeRdr*/
+import gplx.core.lists.*; /*GfoNdeRdr*/
 class TdbStores {
 	public static final String Dsv = "dsv";
 	public static final String Xml = "xml";

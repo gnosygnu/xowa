@@ -23,5 +23,7 @@ public class Xop_ignore_tkn extends Xop_tkn_itm_base {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_ignore;}
 	@Override public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {}
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {return true;}
-	public static final byte Ignore_tid_null = 0, Ignore_tid_comment = 1, Ignore_tid_include_tmpl = 2, Ignore_tid_include_wiki = 3, Ignore_tid_htmlTidy_tblw = 3, Ignore_tid_xnde_dangling = 4, Ignore_tid_nbsp = 5, Ignore_tid_empty_li = 6, Ignore_tid_pre_at_bos = 7;
+	public static final byte 
+	  Ignore_tid_null = 0, Ignore_tid_comment = 1, Ignore_tid_include_tmpl = 2, Ignore_tid_include_wiki = 3, Ignore_tid_htmlTidy_tblw = 4
+	, Ignore_tid_xnde_dangling = 5, Ignore_tid_nbsp = 6, Ignore_tid_empty_li = 7, Ignore_tid_pre_at_bos = 8, Ignore_tid_tr_w_td = 9;
 }

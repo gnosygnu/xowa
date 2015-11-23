@@ -27,7 +27,7 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	private final Http_client_wtr client_wtr = Http_client_wtr_.new_stream();
 	private final Http_client_rdr client_rdr = Http_client_rdr_.new_stream();
 	private final Http_request_parser request_parser;
-	private final Url_encoder url_encoder;
+	private final Gfo_url_encoder url_encoder;
 	private final Xoae_app app;
 	private final String root_dir_http;
 	private final byte[] root_dir_fsys;
@@ -82,7 +82,7 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 		int question_pos = Bry_find_.Find_fwd(url, Byte_ascii.Question);
 		int url_bgn = Bry_.Has_at_bgn(url, Url__fsys) ? Url__fsys_len : 0;	// most files will have "/fsys/" at start, but Mathjax will not
 		int url_end = question_pos == Bry_find_.Not_found ? url.length : question_pos;	// ignore files with query params; EX: /file/A.png?key=val
-		url_encoder.Decode(url, url_bgn, url_end, tmp_bfr, false);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
+		url_encoder.Decode(tmp_bfr, Bool_.N, url, url_bgn, url_end);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
 		byte[] path = tmp_bfr.To_bry_and_clear();
 		client_wtr.Write_bry(Xosrv_http_wkr_.Rsp__http_ok);
 		// 	client_wtr.Write_str("Expires: Sun, 17-Jan-2038 19:14:07 GMT\n");

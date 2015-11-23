@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.envs.*;
 public class Xofs_url_itm_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xofs_url_itm_parser_fxt fxt = new Xofs_url_itm_parser_fxt();
 	@Test  public void Custom() 				{fxt.Test_parse_custom("/xowa/wiki/en.wikipedia.org/");}

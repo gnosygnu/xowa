@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.envs.*;
 public class Xof_repo_itm_ {
 	public static final int Dir_depth_null = -1, Dir_depth_wmf = 2, Dir_depth_xowa = 4;
 	public static final byte Mode_orig = 0, Mode_thumb = 1, Mode_nil = Byte_.Max_value_127;

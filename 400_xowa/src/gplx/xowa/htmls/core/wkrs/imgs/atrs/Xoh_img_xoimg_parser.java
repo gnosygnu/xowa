@@ -22,7 +22,7 @@ public class Xoh_img_xoimg_parser {
 	private final Bry_rdr rdr = new Bry_rdr();
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
 	public int Val_end() {return val_end;} private int val_end;
-	public boolean Val_exists() {return val_end > val_bgn;}
+	public boolean Val_dat_exists() {return val_end > val_bgn;}
 	public byte Lnki_type() {return lnki_type;} private byte lnki_type;
 	public int Lnki_w() {return lnki_w;} private int lnki_w;
 	public int Lnki_h() {return lnki_h;} private int lnki_h;

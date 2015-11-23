@@ -20,10 +20,10 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_lnki_html__hdump__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	public static final String 
-	  Html__same		= "<a href='/wiki/A' id='xowa_lnki_2' title='A'>A</a>"
-	, Html__diff		= "<a href='/wiki/A' id='xowa_lnki_2' title='A'>b</a>"
-	, Html__trail		= "<a href='/wiki/A' id='xowa_lnki_2' title='A'>Ab</a>"
-	, Html__xwiki		= "<a href='/site/en.wiktionary.org/wiki/A' id='xowa_lnki_2' title='A'>wikt:A</a>"
+	  Html__same		= "<a href='/wiki/A' id='xolnki_2' title='A'>A</a>"
+	, Html__diff		= "<a href='/wiki/A' id='xolnki_2' title='A'>b</a>"
+	, Html__trail		= "<a href='/wiki/A' id='xolnki_2' title='A'>Ab</a>"
+	, Html__xwiki		= "<a href='/site/en.wiktionary.org/wiki/a' id='xolnki_2' title='a'>wikt:a</a>"
 	;
 	@Before public void init() {fxt.Clear();}
 	@Test   public void Same()		{fxt.Test__html("[[A]]"				, Html__same);}
@@ -31,6 +31,6 @@ public class Xoh_lnki_html__hdump__tst {
 	@Test   public void Trail()		{fxt.Test__html("[[A]]b"			, Html__trail);}
 	@Test   public void Xwiki()	{
 		fxt.Parser_fxt().Init_xwiki_add_wiki_and_user_("wikt", "en.wiktionary.org");
-		fxt.Test__html("[[wikt:A]]", Html__xwiki);
+		fxt.Test__html("[[wikt:a]]", Html__xwiki);
 	}
 }

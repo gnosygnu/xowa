@@ -24,7 +24,7 @@ public class Xowd_hive_mgr {
 		dir_tid_reg = dir_tid == Xotdb_dir_info_.Tid_page ? Xotdb_dir_info_.Tid_ttl : dir_tid; 
 	} Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr; Xowd_regy_mgr reg_mgr; byte dir_tid;
 	byte dir_tid_reg;
-	public void Create(Xow_ns ns, byte[] key, byte[] data, gplx.lists.ComparerAble comparer) {
+	public void Create(Xow_ns ns, byte[] key, byte[] data, gplx.core.lists.ComparerAble comparer) {
 		if (reg_mgr == null) reg_mgr = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), dir_tid_reg));
 		int fil_idx = 0;
 		if (reg_mgr.Files_ary().length == 0) {
@@ -48,7 +48,7 @@ public class Xowd_hive_mgr {
 		xdat.Save(url);
 		reg_mgr.Save();
 	}
-	public void Create(byte[] key, byte[] data, gplx.lists.ComparerAble comparer) {
+	public void Create(byte[] key, byte[] data, gplx.core.lists.ComparerAble comparer) {
 		if (reg_mgr == null) reg_mgr = new Xowd_regy_mgr(fsys_mgr.Url_site_reg(dir_tid));
 		int fil_idx = 0;
 		if (reg_mgr.Files_ary().length == 0) {

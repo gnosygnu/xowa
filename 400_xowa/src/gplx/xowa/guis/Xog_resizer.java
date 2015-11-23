@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
+import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.xowa.users.*; import gplx.xowa.guis.views.*;
 public class Xog_resizer {
 	public void Exec_win_resize(Xoae_app app, int main_w, int main_h) {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.css.*;
