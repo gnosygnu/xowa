@@ -18,6 +18,60 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v2.12.1.1_.282015-12-06_21:30_Sun.29">Release: v2.12.1.1 (2015-12-06 21:30 Sun)</span>
+    </h2>
+    <p>
+      v2.12.1 is a minor release. It has several fixes directly affecting Italian Wikisource pages, and a few minor parser fixes for other wikis
+    </p>
+    <h3>
+      <span class="mw-headline" id="Wiki_bundles_for_Italian_wikis">Wiki bundles for Italian wikis</span>
+    </h3>
+    <p>
+      The Italian wikis have been posted to archive.org
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/details/Xowa_itwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_itwiki_latest</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Minor_fixes_for_Italian_Wikisource">Minor fixes for Italian Wikisource</span>
+    </h3>
+    <p>
+      These fixes addressed the following:
+    </p>
+    <ul>
+      <li>
+        Poems with references would show duplicate references at the bottom of the page. In addition, the text of the references may be incorrectly placed in the body of the poem.
+      </li>
+      <li>
+        Image maps with scribunto code relying on the page title generated script errors.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Minor_parser_fixes_including_mapsource_extension">Minor parser fixes including mapsource extension</span>
+    </h3>
+    <p>
+      These fixes are several, but the following are notable:
+    </p>
+    <ul>
+      <li>
+        Scribunto code calling json-decode was failing if the code was relying on integer keys. For example, {"1"="a"} needs to parse <code>1</code> as an integer, not a string. Otherwise, code calling <code>ipairs</code> would later fail
+      </li>
+      <li>
+        Mapsource functions such as {{#deg2dd}} would not handle non-ASCII double apostrophes. For example, <code>’’</code> needs to go to <code>''</code> and then to <code>"</code>. XOWA was doing the 1st part (<code>''</code>) but not the second (<code>"</code>)
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v2.12.2">Next release: v2.12.2</span>
+    </h3>
+    <p>
+      I spent a good deal of time working on most of these minor fixes, so my progress on Android was limited. However, I did get a text version of Simple Wikipedia working with the new dump and the new UI. I'm planning to work on images this week, and hope to have a new beta for v2.12.2
+    </p>
+    <p>
+      For wikis, I'm generating English now. I'll try to add Arabic this week as well.
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_NONE_.282015-11-29_19:30_Sun.29">Release: NONE (2015-11-29 19:30 Sun)</span>
     </h2>
     <p>
