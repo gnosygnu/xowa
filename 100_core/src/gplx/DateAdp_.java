@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import gplx.core.times.*;
 public class DateAdp_ implements GfoInvkAble {
 	public static final String Cls_ref_name = "Date";
 	public static final Class<?> Cls_ref_type = DateAdp.class;

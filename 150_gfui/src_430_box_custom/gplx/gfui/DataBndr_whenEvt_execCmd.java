@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.interfaces.*;
 public class DataBndr_whenEvt_execCmd implements InjectAble, GfoInvkAble, GfoEvObj {
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} GfoEvMgr evMgr;
 	public DataBndr_whenEvt_execCmd WhenArg_(String v) {whenArg = v; return this;} private String whenArg = "v";

@@ -26,7 +26,7 @@ public class Html_atr extends gplx.core.brys.Bfr_arg_base {
 	public byte[] Key() {return key;} private final byte[] key;
 	public int Val_bgn() {return val_bgn;} private final int val_bgn;
 	public int Val_end() {return val_end;} private final int val_end;
-	public boolean Val_dat_exists() {return val_end > val_bgn;}
+	public boolean Val_dat_exists() {return val_end != -1;}
 	public boolean Val_dat_missing() {return val_end == -1;}
 	public byte[] Val() {
 		if (val == null)

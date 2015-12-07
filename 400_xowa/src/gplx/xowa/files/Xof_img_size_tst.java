@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
+import org.junit.*; import gplx.core.bits.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_img_size_tst {
 	private final Xof_img_size_fxt fxt = new Xof_img_size_fxt();
 	@Before public void init() {

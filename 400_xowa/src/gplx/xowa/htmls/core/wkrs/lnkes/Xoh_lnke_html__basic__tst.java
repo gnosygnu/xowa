@@ -32,4 +32,15 @@ public class Xoh_lnke_html__basic__tst {
 		fxt.Wiki().Sys_cfg().Xowa_proto_enabled_(false);
 		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a\" b]"			, "[xowa-cmd:&quot;a&quot; b]");	// protocol is disabled: literalize String (i.e.: don't make it an anchor)
 	}
+	@Test   public void Xwiki() {
+		String wtxt = "[//en.wiktionary.org/wiki/A B]";
+		String html_https = "<a href='https://en.wiktionary.org/wiki/A' rel='nofollow' class='external text'>B</a>";
+		String html_xwiki = "<a href='/site/en.wiktionary.org/wiki/A'>B</a>";
+		fxt.Test__parse__wtxt_to_html(wtxt, html_https);			// https b/c wiki not installed
+		fxt.Init_xwiki_add_user_("en.wiktionary.org");
+		fxt.Test__parse__wtxt_to_html(wtxt, html_xwiki);			// xwiki b/c wiki installed
+		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
+		fxt.Test__parse__wtxt_to_html(wtxt, html_https);			// https b/c hdump, even though wiki installed
+		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic);
+	}
 }

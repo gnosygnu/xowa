@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 import java.awt.Image;
-public interface ImageAdp extends RlsAble {
+public interface ImageAdp extends Rls_able {
 	Gfui_kit Kit();
 	SizeAdp Size();
 	int Width();

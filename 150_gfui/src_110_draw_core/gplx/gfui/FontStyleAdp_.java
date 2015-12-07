@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.interfaces.*;
 public class FontStyleAdp_ implements ParseAble {
 	public static final FontStyleAdp 
 		  Plain			= new FontStyleAdp(0)

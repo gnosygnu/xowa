@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Xog_splash_win implements RlsAble {
+public class Xog_splash_win implements Rls_able {
 		private SplashScreen splash;
 	private Graphics2D graphics; private boolean graphics_init = true;
 		public Xog_splash_win(boolean app_mode_is_gui) {

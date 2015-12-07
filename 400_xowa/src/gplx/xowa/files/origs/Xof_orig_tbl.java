@@ -19,7 +19,7 @@ package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*; 
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
-public class Xof_orig_tbl implements RlsAble {
+public class Xof_orig_tbl implements Rls_able {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
 	private final Db_conn conn; private final Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();

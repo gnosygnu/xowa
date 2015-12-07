@@ -53,7 +53,7 @@ public class Xoh_img_wtr extends gplx.core.brys.Bfr_arg_base {
 	public Xoh_img_wtr Img_id_(byte[] prefix, int uid)			{img_id.Set_by_arg(img_id_val.Set(prefix, uid)); return this;}
 	public Xoh_img_wtr Img_w_(int v)							{img_w.Set_by_int(v); return this;}
 	public Xoh_img_wtr Img_h_(int v)							{img_h.Set_by_int(v); return this;}
-	public Xoh_img_wtr Img_xoimg_(byte[] src, int bgn, int end)	{img_xoimg.Set_by_mid(src, bgn, end); return this;}
+	public Xoh_img_wtr Img_xoimg_(Bfr_arg v)					{img_xoimg.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Img_cls_(Bfr_arg v)						{img_cls.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Img_src_(Bfr_arg v)						{img_src.Set_by_arg(v); return this;}
 	public Xoh_img_wtr Img_src_empty_()							{img_src.Set_by_bry(Bry_.Empty); return this;}

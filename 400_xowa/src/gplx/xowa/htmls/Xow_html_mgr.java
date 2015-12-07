@@ -26,10 +26,10 @@ public class Xow_html_mgr implements GfoInvkAble {
 		Xoae_app app = wiki.Appe();
 		page_wtr_mgr = new Xoh_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != gplx.gfui.Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
 		Io_url file_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("mediawiki.file");
-		img_media_play_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys.Encode_to_file_protocol(file_dir.GenSubFil("play.png"));
-		img_media_info_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys.Encode_to_file_protocol(file_dir.GenSubFil("info.png"));
-		img_thumb_magnify  = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys.Encode_to_file_protocol(file_dir.GenSubFil("magnify-clip.png"));
-		img_xowa_protocol = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys.Encode_to_file_protocol(app.Fsys_mgr().Bin_xowa_file_dir().GenSubFil_nest("app.general", "xowa_exec.png"));
+		img_media_play_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(file_dir.GenSubFil("play.png"));
+		img_media_info_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(file_dir.GenSubFil("info.png"));
+		img_thumb_magnify  = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(file_dir.GenSubFil("magnify-clip.png"));
+		img_xowa_protocol = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(app.Fsys_mgr().Bin_xowa_file_dir().GenSubFil_nest("app.general", "xowa_exec.png"));
 		portal_mgr = new Xow_portal_mgr(wiki);
 		imgs_mgr = new Xoh_imgs_mgr(this);
 		module_mgr = new Xow_module_mgr(wiki);

@@ -20,7 +20,7 @@ import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_parser implements Xoh_itm_parser {
-	private final Bry_rdr rdr = new Bry_rdr(); private byte[] src;
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash); private byte[] src;
 	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
 	public int Val_end() {return val_end;} private int val_end;
@@ -45,18 +45,18 @@ public class Xoh_img_src_parser implements Xoh_itm_parser {
 		file_ttl_bry = null;
 		atr = null;
 	}
-	public boolean Parse(Bry_rdr owner_rdr, byte[] domain_bry, Html_tag tag) {
+	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, Html_tag tag) {
 		this.Clear();
 		this.atr = tag.Atrs__get_by_or_empty(Html_atr_.Bry__src);
-		if (!atr.Val_dat_exists()) return true;	// empty src; just return true;
-		return Parse(owner_rdr, domain_bry, atr.Val_bgn(), atr.Val_end());
+		return Parse(err_wkr, domain_bry, atr.Val_bgn(), atr.Val_end());
 	}
-	public boolean Parse(Bry_rdr owner_rdr, byte[] domain_bry, int val_bgn, int val_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, int val_bgn, int val_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
 		this.Clear();
-		this.src = owner_rdr.Src();
+		this.src = err_wkr.Src();
 		this.val_bgn = val_bgn; this.val_end = val_end;
+		if (val_end == val_bgn) return true;	// empty src; just return true;
 		file_w = file_time = file_page = -1;
-		rdr.Init_by_sub(owner_rdr, "img.src.xowa", val_bgn, val_end).Dflt_dlm_(Byte_ascii.Slash);
+		rdr.Init_by_wkr(err_wkr, "img.src.xowa", val_bgn, val_end);
 		rdr.Fail_throws_err_(Bool_.N);
 		repo_bgn = rdr.Find_fwd_rr(Bry__file);						// skip past /file/; EX: "file:///J:/xowa/file/commons.wikimedia.org/"
 		if (repo_bgn == -1) return false;

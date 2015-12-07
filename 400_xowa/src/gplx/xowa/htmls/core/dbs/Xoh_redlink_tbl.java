@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*;
-public class Xoh_redlink_tbl implements RlsAble {
+public class Xoh_redlink_tbl implements Rls_able {
 	private final String tbl_name = "html_redlink"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_page_id, fld_redlink_uids;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;

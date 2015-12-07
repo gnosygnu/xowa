@@ -215,6 +215,26 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
+	@Test   public void Decode__key__int() {
+		KeyVal[] kv_ary = (KeyVal[])json_fxt.Test_json_decode(fxt, lib
+		, Scrib_lib_text__json_util.Flag__none
+		, Json_doc.Make_str_by_apos
+		( "{ '1':"
+		, "  { '11':'aa'"
+		, "  }"
+		, ", '2':'b'"
+		, "}"
+		)
+		, KeyVal_.Ary
+		( KeyVal_.int_(1, KeyVal_.Ary
+		(		KeyVal_.int_(11, "aa")
+		))
+		, KeyVal_.int_(2, "b")
+		)
+		);
+		Tfds.Eq(kv_ary[0].Key_as_obj(), 1);
+		Tfds.Eq(((KeyVal[])kv_ary[0].Val())[0].Key_as_obj(), 11);
+	}
 }
 class Scrib_lib_json_fxt {
 	private final Json_wtr wtr = new Json_wtr();
@@ -222,9 +242,10 @@ class Scrib_lib_json_fxt {
 		Test_json_decode(fxt, lib, Scrib_lib_text__json_util.Flag__none, json, obj);
 		Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none, obj, json);
 	}
-	public void Test_json_decode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, String raw, Object expd) {
+	public Object Test_json_decode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, String raw, Object expd) {
 		Object actl = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, Object_.Ary(raw, flag));
 		Tfds.Eq_str_lines(To_str(expd), To_str(actl), raw);
+		return actl;
 	}
 	public void Test_json_encode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, Object raw, String expd) {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_text.Invk_jsonEncode, Object_.Ary(raw, flag), "1=" + String_.Replace(expd, "'", "\""));

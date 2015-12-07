@@ -18,26 +18,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.parsers.*;
 public class Xoh_hdr_parser {
-	// gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser
-	public int Rng_bgn() {return rng_bgn;} private int rng_bgn;
-	public int Rng_end() {return rng_end;} private int rng_end;
+	public int Src_bgn() {return src_bgn;} private int src_bgn;
+	public int Src_end() {return src_end;} private int src_end;
 	public int Hdr_level() {return hdr_level;} private int hdr_level;
+	public int Anch_bgn() {return anch_bgn;} private int anch_bgn;
+	public int Anch_end() {return anch_end;} private int anch_end;
+	public boolean Anch_is_diff() {return anch_is_diff;} private boolean anch_is_diff;
 	public int Capt_bgn() {return capt_bgn;} private int capt_bgn;
 	public int Capt_end() {return capt_end;} private int capt_end;
-	public byte[] Anch_bry() {return anch_bry;} private byte[] anch_bry;
-	public int Parse(Xoh_hdoc_wkr wkr, byte[] src, Html_tag_rdr rdr, int hdr_level, int rng_bgn, Html_tag span) {// <h2><span class='mw-headline' id='A_1'>A 1</span></h2>
-		this.rng_bgn = rng_bgn; this.hdr_level = hdr_level;
-		Html_atr anch_atr = span.Atrs__get_by_or_fail(Html_atr_.Bry__id);
-		int anch_bgn = anch_atr.Val_bgn(), anch_end = anch_atr.Val_end();
-		this.capt_bgn = span.Src_end();
-		rdr.Tag__move_fwd_tail(hdr_level);												// find </h2> not </span> since <span> can be nested, but <h2> cannot
-		this.capt_end = rdr.Tag__peek_bwd_tail(Html_tag_.Id__span).Src_bgn();			// get </span> before </h2>
-		this.anch_bry = null;
-		if (!Bry_.Match_w_swap(src, capt_bgn, capt_end, src, anch_bgn, anch_end, Byte_ascii.Space, Byte_ascii.Underline))
-			this.anch_bry = Bry_.Mid(src, anch_bgn, anch_end);							// anch is different than capt; occurs with html and dupe-anchors; EX: "==<i>A</i>==" -> id='A'
-		this.rng_end = rdr.Pos();
-		wkr.On_hdr(this);
-		return rng_end;
+	public int Capt_rhs_bgn() {return capt_rhs_bgn;} private int capt_rhs_bgn;
+	public int Capt_rhs_end() {return capt_rhs_end;} private int capt_rhs_end;
+	public boolean Capt_rhs_exists() {return capt_rhs_exists;} private boolean capt_rhs_exists;
+	public void Clear() {
+		this.anch_bgn = anch_end = capt_bgn = capt_end = capt_rhs_bgn = capt_rhs_end -1;
+		this.anch_is_diff = capt_rhs_exists = false;
+	}
+	public boolean Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Html_tag_rdr tag_rdr, byte[] src, Html_tag hdr_head, Html_tag span_head) {
+		this.Clear();
+		this.src_bgn = hdr_head.Src_bgn(); this.hdr_level = hdr_head.Name_id();
+		Html_atr anch_atr = span_head.Atrs__get_by_or_fail(Html_atr_.Bry__id);
+		this.anch_bgn = anch_atr.Val_bgn(); this.anch_end = anch_atr.Val_end();
+		this.capt_bgn = span_head.Src_end();
+		Html_tag hdr_tail = tag_rdr.Tag__move_fwd_tail(hdr_level);							// find </h2> not </span_head> since <span_head> can be nested, but <h2> cannot
+		Html_tag span_tail = tag_rdr.Tag__peek_bwd_tail(Html_tag_.Id__span);				// get </span_head> before </h2>			
+		this.capt_end = span_tail.Src_bgn();
+		if (span_tail.Src_end() != hdr_tail.Src_bgn()) {
+			capt_rhs_exists = true;
+			capt_rhs_bgn = span_tail.Src_end(); capt_rhs_end = hdr_tail.Src_bgn();
+		}
+		this.anch_is_diff = !Bry_.Match_w_swap(src, capt_bgn, capt_end, src, anch_bgn, anch_end, Byte_ascii.Space, Byte_ascii.Underline);	// anch is different than capt; occurs with html and dupe-anchors; EX: "==<i>A</i>==" -> id='A'
+		this.src_end = tag_rdr.Pos();
+		hdoc_wkr.On_hdr(this);
+		return true;
 	}
 	public static final byte[] Bry__class__mw_headline	= Bry_.new_a7("mw-headline");
 }

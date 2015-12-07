@@ -30,6 +30,7 @@ public class Xoapi_import implements GfoInvkAble {
 	public byte		Zip_tid_text()			{return zip_tid_text;}			private byte zip_tid_text			= Io_stream_.Tid_gzip;
 	public byte		Zip_tid_html()			{return zip_tid_html;}			private byte zip_tid_html			= Io_stream_.Tid_gzip;
 	public boolean		Hzip_enabled()			{return hzip_enabled;}			private boolean hzip_enabled			= Bool_.Y;
+	public boolean		Hzip_mode_is_b256()		{return hzip_mode_is_b256;}		private boolean hzip_mode_is_b256		= Bool_.Y;
 	public String	User_name()				{return user_name;}				private String user_name			= "anonymous";
 	public Xowd_core_db_props New_props(String domain_str, long dump_file_size) {
 		Xowd_db_layout layout_text, layout_html, layout_file;
@@ -40,7 +41,7 @@ public class Xoapi_import implements GfoInvkAble {
 			layout_html	= dump_file_size < layout_html_max ? Xowd_db_layout.Itm_few : Xowd_db_layout.Itm_lot;
 			layout_file	= dump_file_size < layout_file_max ? Xowd_db_layout.Itm_few : Xowd_db_layout.Itm_lot;
 		}
-		return new Xowd_core_db_props(2, layout_text, layout_html, layout_file, zip_tid_text, zip_tid_html, hzip_enabled);
+		return new Xowd_core_db_props(2, layout_text, layout_html, layout_file, zip_tid_text, zip_tid_html, hzip_enabled, hzip_mode_is_b256);
 	}
 	public byte[] New_ns_file_map(long dump_file_size) {
 		return dump_file_size < layout_text_max ? Bry_.Empty : Ns_file_map__each;
@@ -72,6 +73,8 @@ public class Xoapi_import implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_zip_tid_html_)) 						zip_tid_html = Io_stream_.To_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_hzip_enabled)) 						return Yn.To_str(hzip_enabled);
 		else if	(ctx.Match(k, Invk_hzip_enabled_)) 						hzip_enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk_hzip_mode_is_b256)) 					return Yn.To_str(hzip_mode_is_b256);
+		else if	(ctx.Match(k, Invk_hzip_mode_is_b256_)) 				hzip_mode_is_b256 = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_user_name)) 							return user_name;
 		else if	(ctx.Match(k, Invk_user_name_)) 						user_name = m.ReadStr("v");
 		else	return GfoInvkAble_.Rv_unhandled;
@@ -91,7 +94,8 @@ public class Xoapi_import implements GfoInvkAble {
 	, Invk_zip_tid_text			= "zip_tid_text"		, Invk_zip_tid_text_		= "zip_tid_text_", Invk_zip_tid_list		= "zip_tid_list"
 	, Invk_zip_tid_html			= "zip_tid_html"		, Invk_zip_tid_html_		= "zip_tid_html_"
 	, Invk_user_name			= "user_name"			, Invk_user_name_			= "user_name_"
-	, Invk_hzip_enabled			= "hzip_enabled"		, Invk_hzip_enabled_			= "hzip_enabled_"
+	, Invk_hzip_enabled			= "hzip_enabled"		, Invk_hzip_enabled_		= "hzip_enabled_"
+	, Invk_hzip_mode_is_b256	= "hzip_mode_is_b256"	, Invk_hzip_mode_is_b256_	= "hzip_mode_is_b256_"
 	;
 	public static final byte[] Ns_file_map__each = Bry_.new_a7("<each>");
 }

@@ -189,7 +189,12 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			case Tblw_type_td2:
 				boolean create_th = false;
 				switch (prv_tid) {
-					case Xop_tkn_itm_.Tid_tblw_tr: break;	// noop; <tr><td>
+					case Xop_tkn_itm_.Tid_tblw_tr:
+						if (wlxr_type == Tblw_type_td2) {	// ignore sequences like "\n|- ||"; PAGE: nl.w:Tabel_van_Belgische_gemeenten; DATE:2015-12-03
+							ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_double_pipe));
+							return cur_pos;
+						}
+						break;
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><td>           -> <td></td><td>
 						if (	prv_tkn.Tblw_xml()			// prv is <td>
 							&&	!tbl_is_xml					// cur is "\n|"

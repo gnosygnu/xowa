@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*; import gplx.dbs.metas.updates.*;
-public class Xoud_history_tbl implements RlsAble {
+public class Xoud_history_tbl implements Rls_able {
 	private final String tbl_name = "user_history"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_wiki, fld_url, fld_time, fld_count;
 	private final Db_conn conn; private Db_stmt stmt_select_by_page, stmt_select_by_top, stmt_insert, stmt_update, stmt_delete;

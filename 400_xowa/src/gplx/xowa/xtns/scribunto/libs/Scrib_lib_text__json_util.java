@@ -95,7 +95,8 @@ class Scrib_lib_text__json_util {
 					Json_kv json_kv = root.Get_at_as_kv(i);
 					String kv_str = json_kv.Key_as_str();
 					Object kv_val = Decode_obj(json_kv.Val());
-					decode_rslt_as_nde[i] = KeyVal_.new_(kv_str, kv_val);
+					int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
+					decode_rslt_as_nde[i] = kv_int == Int_.Min_value ? KeyVal_.new_(kv_str, kv_val) : KeyVal_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 				}
 				return Bool_.Y_byte;
 			}
@@ -123,7 +124,10 @@ class Scrib_lib_text__json_util {
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; ++i) {
 			Json_kv itm = nde.Get_at_as_kv(i);
-			rv[i] = KeyVal_.new_(itm.Key_as_str(), Decode_obj(itm.Val()));
+			String kv_str = itm.Key_as_str();
+			int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
+			Object kv_val = Decode_obj(itm.Val());
+			rv[i] = kv_int == Int_.Min_value ? KeyVal_.new_(kv_str, kv_val) : KeyVal_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 		}
 		return rv;
 	}

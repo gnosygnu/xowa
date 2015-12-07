@@ -29,13 +29,11 @@ class Imap_parser {
 	private int itm_idx; private int itm_bgn, itm_end;
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
 	public Imap_parser(Imap_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
-	public void Init(Xowe_wiki wiki, Xoa_url page_url, Gfo_usr_dlg usr_dlg) {
-		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page_url; this.usr_dlg = usr_dlg;
+	public void Init(Xowe_wiki wiki, Xoae_page page, Gfo_usr_dlg usr_dlg) {// SCOPE.PAGE
+		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page.Url(); this.usr_dlg = usr_dlg;
 		this.wiki_ctx = wiki.Parser_mgr().Ctx();
-		if (imap_ctx == null) {
-			imap_ctx = Xop_ctx.new_(wiki);
-			imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
-		}
+		imap_ctx = Xop_ctx.new_(wiki, page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
+		imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
 	}
 	public void Clear() {
 		this.itm_idx = 0;
@@ -44,7 +42,7 @@ class Imap_parser {
 	}
 	public Imap_map Parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		Imap_map rv = new Imap_map(ctx.Cur_page().Html_data().Xtn_imap_next_id());
-		Init(wiki, ctx.Cur_page().Url(), wiki.Appe().Usr_dlg());
+		Init(wiki, ctx.Cur_page(), wiki.Appe().Usr_dlg());
 		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		return rv;
 	}
@@ -56,7 +54,7 @@ class Imap_parser {
 			if (itm_end == src_end) break;
 			itm_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
-			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);		// look for \n
+			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);			// look for \n
 			if (itm_end == Bry_find_.Not_found) itm_end = src_end;								// no \n; make EOS = \n
 			itm_end = Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
@@ -171,7 +169,7 @@ class Imap_parser {
 	}
 	private Xop_tkn_itm Parse_link(byte[] raw) {
 		imap_root.Clear();
-		imap_ctx.Clear();			
+		imap_ctx.Clear(false);	// NOTE: imap should not reset scrib; PAGE:it.s:La_guerra_del_vespro_siciliano/Indice DATE:2015-12-02
 		wiki.Parser_mgr().Main().Parse_text_to_wdom(imap_root, imap_ctx, wiki.Appe().Parser_mgr().Tkn_mkr(), raw, 0);
 		int subs_len = imap_root.Subs_len();
 		for (int i = 0; i < subs_len; ++i) {
@@ -194,7 +192,7 @@ class Imap_parser {
 		if (	tkn_itm == null									// no lnki or lnke
 			||	tkn_itm.Tkn_tid() != Xop_tkn_itm_.Tid_lnki		// no lnki; occurs with badly constructed maps; PAGE:en.w:Demography_of_the_United_Kingdom DATE:2015-01-22
 			)
-			imap_ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
 		else {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_itm_img(lnki_tkn);
@@ -216,7 +214,7 @@ class Imap_parser {
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
-					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
+					Xoa_app_.Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
 					int next_line = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
 					if (next_line == Bry_find_.Not_found) next_line = src_end;
 					rv = next_line;

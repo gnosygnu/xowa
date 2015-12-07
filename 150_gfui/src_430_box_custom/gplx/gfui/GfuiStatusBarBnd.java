@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.interfaces.*;
 public class GfuiStatusBarBnd implements InjectAble {
 	public GfuiStatusBar Bar() {return statusBar;} GfuiStatusBar statusBar = GfuiStatusBar.new_();
 	public void Inject(Object owner) {

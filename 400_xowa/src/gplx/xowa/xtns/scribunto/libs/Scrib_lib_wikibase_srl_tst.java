@@ -144,7 +144,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	""
 		);
 	}
-	@Test   public void Claims_somevalue() {	// PURPOSE: somevalue should always return value node; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
+	@Test   public void Claims_somevalue() {	// PURPOSE: changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // somevalue should always return value node; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07;
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_somevalue(2));
 		fxt.Test
 		(	"claims:"
@@ -152,9 +152,6 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"    1:"
 		,	"      id:'P2'"
 		,	"      mainsnak:"
-		,	"        datavalue:"
-		,	"          type:''"
-		,	"          value:''"
 		,	"        property:'P2'"
 		,	"        snaktype:'somevalue'"
 		,	"        datatype:'unknown'"

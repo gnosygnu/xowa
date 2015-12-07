@@ -16,8 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.bits.*;
 public class Xop_lnki_type {
 	public static final byte Id_null = 0, Id_none = 1, Id_frameless = 2, Id_frame = 4, Id_thumb = 8;
+	public static final byte Tid_null = 0, Tid_none = 1, Tid_frameless = 2, Tid_frame = 3, Tid_thumb = 4;	// SERIALIZED
+	public static byte To_tid(byte flag) {
+		switch (flag) {
+			case Xop_lnki_type.Id_null:				return Xop_lnki_type.Tid_null;
+			case Xop_lnki_type.Id_none:				return Xop_lnki_type.Tid_none;
+			case Xop_lnki_type.Id_frameless:		return Xop_lnki_type.Tid_frameless;
+			case Xop_lnki_type.Id_frame:			return Xop_lnki_type.Tid_frame;
+			case Xop_lnki_type.Id_thumb:			return Xop_lnki_type.Tid_thumb;
+			default:								throw Err_.new_unhandled(flag);
+		}
+	}
 	public static boolean Id_is_thumbable(byte id) {
 		return	(	Bitmask_.Has_int(id, Id_thumb)	// for purposes of displaying images on page, thumb and frame both create a thumb box
 				||	Bitmask_.Has_int(id, Id_frame)

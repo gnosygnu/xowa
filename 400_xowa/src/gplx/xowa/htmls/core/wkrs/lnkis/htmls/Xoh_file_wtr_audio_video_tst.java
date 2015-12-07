@@ -40,9 +40,9 @@ public class Xoh_file_wtr_audio_video_tst {
 		(	"[[File:A.ogg]]", String_.Concat_lines_nl_skip_last
 		(	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
-		,	"        <a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"A.ogg\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" width=\"220\" height=\"-1\" alt=\"\" />"	// note that src still exists (needed for clicking)
-		,	"        </a>"
+		+	        "<a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"A.ogg\">"
+		+	          "<img id=\"xowa_file_img_0\" src=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" width=\"220\" height=\"-1\" alt=\"\" />"	// note that src still exists (needed for clicking)
+		+	        "</a>"
 		,	"      </div>"
 		,	"      <div>"
 		,	"        <a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\" class=\"xowa_anchor_button\" style=\"width:218px;max-width:220px;\">"
@@ -117,9 +117,9 @@ public class Xoh_file_wtr_audio_video_tst {
 		(	"[[File:A.ogv|400px|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		(	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
-		,	"        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
-		,	"        </a>"
+		+	        "<a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
+		+	          "<img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
+		+	        "</a>"
 		,	"      </div>"
 		,	"      <div>"
 		,	"        <a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/d/0/A.ogv\" xowa_title=\"A.ogv\" class=\"xowa_anchor_button\" style=\"width:398px;max-width:400px;\">"
@@ -171,9 +171,9 @@ public class Xoh_file_wtr_audio_video_tst {
 		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"		// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
-		,	"        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
-		,	"        </a>"
+		+	        "<a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
+		+	          "<img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
+		+	        "</a>"
 		,	"      </div>"
 		,	"      <div>"
 		,	"        <a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/d/0/A.ogv\" xowa_title=\"A.ogv\" class=\"xowa_anchor_button\" style=\"width:398px;max-width:400px;\">"
@@ -205,9 +205,9 @@ public class Xoh_file_wtr_audio_video_tst {
 		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
-		,	"        <a href=\"/wiki/File:A.webm\" class=\"image\" title=\"A.webm\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
-		,	"        </a>"
+		+	        "<a href=\"/wiki/File:A.webm\" class=\"image\" title=\"A.webm\">"
+		+	          "<img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
+		+	        "</a>"
 		,	"      </div>"
 		,	"      <div>"
 		,	"        <a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/3/4/A.webm\" xowa_title=\"A.webm\" class=\"xowa_anchor_button\" style=\"width:398px;max-width:400px;\">"

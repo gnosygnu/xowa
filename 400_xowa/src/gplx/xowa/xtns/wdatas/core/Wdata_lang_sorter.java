@@ -69,7 +69,7 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.core.lists.ComparerAble
 		return new_sort;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Xoapi_wikibase.Evt_sort_langs_changed))	Langs_((byte[][])m.ReadObj("v", ParseAble_.Null));
+		if		(ctx.Match(k, Xoapi_wikibase.Evt_sort_langs_changed))	Langs_((byte[][])m.ReadObj("v", null));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

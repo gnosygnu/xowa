@@ -153,11 +153,11 @@ public class Xoh_page_wtr_wkr {
 			wiki.Html_mgr().Html_wtr().Write_all(tidy_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, tidy_bfr);
+		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, hctx, tidy_bfr);
 
 		// tidy html
 		gplx.xowa.htmls.core.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
-		if (tidy_mgr.Enabled()) tidy_mgr.Run_tidy_html(page, tidy_bfr);
+		if (tidy_mgr.Enabled()) tidy_mgr.Run_tidy_html(page, tidy_bfr, !hctx.Mode_is_hdump());
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);

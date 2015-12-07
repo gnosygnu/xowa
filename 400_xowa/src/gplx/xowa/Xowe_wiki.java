@@ -218,7 +218,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		if (rls_list == null) return;
 		int len = rls_list.Count();
 		for (int i = 0; i < len; i++) {
-			RlsAble rls = (RlsAble)rls_list.Get_at(i);
+			Rls_able rls = (Rls_able)rls_list.Get_at(i);
 			rls.Rls();
 		}
 	}

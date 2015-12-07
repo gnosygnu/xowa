@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.type_xtns.*;
+import gplx.core.type_xtns.*; import gplx.core.interfaces.*;
 public class IptBnd_txt_cmd implements InjectAble, GfoInvkAble, GfoEvObj {
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} GfoEvMgr evMgr;
 	public void Inject(Object owner) {

@@ -21,14 +21,15 @@ import gplx.xowa.parsers.amps.*;
 public class Gfo_url_encoder_ {
 	public static final Gfo_url_encoder
 	  Id				= Gfo_url_encoder_.New__html_id().Make()
-	, Href				= Gfo_url_encoder_.New__html_href_mw().Make()
+	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
+	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()
 	, Href_quotes		= Gfo_url_encoder_.New__html_href_quotes().Make()
 	, Href_qarg			= Gfo_url_encoder_.New__html_href_qarg().Make()
-	, Xourl				= Gfo_url_encoder_.New__html_href_mw().Init__same__many(Byte_ascii.Underline).Make()
+	, Xourl				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Underline).Make()
 	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
 	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
-	, Fsys				= Gfo_url_encoder_.New__fsys_lnx().Make()
-	, Fsys_safe			= Gfo_url_encoder_.New__fsys_wnt().Make()
+	, Fsys_lnx			= Gfo_url_encoder_.New__fsys_lnx().Make()
+	, Fsys_wnt			= Gfo_url_encoder_.New__fsys_wnt().Make()
 	, Gfs				= Gfo_url_encoder_.New__gfs().Make()
 	;
 	private static Gfo_url_encoder_mkr New__html_id() {			// EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
@@ -37,25 +38,28 @@ public class Gfo_url_encoder_ {
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			.Init__html_ent(Byte_ascii.Amp, Xop_amp_trie.Instance);
 	}
-	private static Gfo_url_encoder_mkr New__html_href_mw() {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"
+	private static Gfo_url_encoder_mkr New__html_href_mw(boolean use_anchor_encoder) {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"; REF.MW: ";:@$!*(),/"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			.Init__same__many
-			( Byte_ascii.Semic, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
-			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash, Byte_ascii.Colon
+			( Byte_ascii.Semic, Byte_ascii.Colon, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
+			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash
 			, Byte_ascii.Hash// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
 			)
-			.Init__anchor_encoder(New__html_id().Make());
+			.Init__anchor_encoder(use_anchor_encoder ? New__html_id().Make() : null);
 	}
 	private static Gfo_url_encoder_mkr New__html_href_qarg() {	// same as regular href encoder, but also do not encode qarg characters "?" and "="
-		return New__html_href_mw().Init__same__many(Byte_ascii.Question, Byte_ascii.Eq);
+		return New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Question, Byte_ascii.Eq);
 	}
-	private static Gfo_url_encoder_mkr New__html_href_quotes() {
-		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent)
-			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)				// convert " " to "_"
-			.Init__same__rng(0, 255)												// default everything to same;
-			.Init__diff__many(Byte_ascii.Percent, Byte_ascii.Apos
-			, Byte_ascii.Quote, Byte_ascii.Lt, Byte_ascii.Gt);						// encode ', ", <, >
+	private static Gfo_url_encoder_mkr New__html_href_quotes() {// same as href encoder, but do not encode ?, =, #, +; also, don't encode "%" vals
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
+			.Init__same__many
+			( Byte_ascii.Semic, Byte_ascii.Colon, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
+			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash
+			, Byte_ascii.Question, Byte_ascii.Eq, Byte_ascii.Hash, Byte_ascii.Plus// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
+			)
+			;
 	}
 	public static Gfo_url_encoder_mkr New__http_url() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.N)

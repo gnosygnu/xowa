@@ -17,18 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.users.history.*;
 abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implements Xoctg_fmtr_itm {
-	public void Init_from_all(Xowe_wiki wiki, Xol_lang_itm lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {
-		this.wiki = wiki; this.lang = lang; this.ctg = ctg; this.list = itms_list; this.len = itms_list_len; this.msg_mgr = wiki.Msg_mgr();
+	private Xou_history_mgr history_mgr; private Xoh_wtr_ctx hctx;
+	protected Xowe_wiki wiki; Xol_lang_itm lang; Xoctg_view_ctg ctg; protected int len; protected Xoh_href_parser href_parser; protected Bry_fmtr html_itm, html_itm_missing; protected Xoctg_view_grp list; protected Xow_msg_mgr msg_mgr;
+	public void Init_from_all(Xowe_wiki wiki, Xol_lang_itm lang, Xoh_wtr_ctx hctx, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {
+		this.wiki = wiki; this.lang = lang; this.hctx = hctx; this.ctg = ctg; this.list = itms_list; this.len = itms_list_len; this.msg_mgr = wiki.Msg_mgr();
 		href_parser = wiki.Appe().Html__href_parser();
 		html_itm = mgr.Html_itm();
 		html_itm_missing = mgr.Html_itm_missing();
 		history_mgr = wiki.Appe().Usere().History_mgr();
-	}	protected Xowe_wiki wiki; Xol_lang_itm lang; Xoctg_view_ctg ctg; protected int len; protected Xoh_href_parser href_parser; protected Bry_fmtr html_itm, html_itm_missing; protected Xoctg_view_grp list; protected Xow_msg_mgr msg_mgr;
-	Xou_history_mgr history_mgr;
+	}
 	public void Init_from_grp(byte[] ttl_char_0, int col_bgn) {this.ttl_char_0 = ttl_char_0; this.col_bgn = col_bgn;} private byte[] ttl_char_0; int col_bgn; int col_end;
 	public int Col_idx() {return col_idx;}
 	public void Col_idx_(int col_idx, int col_bgn) {
@@ -54,15 +55,15 @@ abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implement
 				grp_end_at_col = i == col_end;
 				return;
 			}
-			Bld_html(bfr, wiki, itm, ttl, ttl_bry, href_parser, html_itm);
+			Bld_html(bfr, wiki, hctx, itm, ttl, ttl_bry, href_parser, html_itm);
 		}
 		grp_end_idx = len;
 		grp_end_at_col = true;
 	}
-	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
+	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
 		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
 		byte[] itm_full_ttl = ttl.Full_txt();// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
-		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
+		byte[] itm_atr_cls = hctx.Mode_is_hdump() ? Bry_.Empty : Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Bry_fmtr fmtr = itm.Missing() ? html_itm_missing : html_itm;
 		fmtr.Bld_bfr_many(bfr, itm_href, itm_full_ttl, itm_full_ttl, itm.Page_id(), itm_atr_cls);
 	}
@@ -95,7 +96,7 @@ class Xoctg_fmtr_itm_file extends Xoctg_fmtr_itm_base {
 	public static final Xoctg_fmtr_itm_file Instance = new Xoctg_fmtr_itm_file(); Xoctg_fmtr_itm_file() {}
 }
 class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
-	@Override public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
+	@Override public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
 		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
 		int sub_ctgs = 0;	// itm.Subs_ctgs();
 		int sub_pages = 0;	// itm.Subs_pages();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.interfaces.*;
 public class IptBndMgr implements SrlAble {
 	@gplx.Internal protected IptEventType EventsToFwd() {return eventsToFwd;}
 	public void EventsToFwd_set(IptEventType v) {eventsToFwd = v;} IptEventType eventsToFwd = IptEventType_.KeyDown;

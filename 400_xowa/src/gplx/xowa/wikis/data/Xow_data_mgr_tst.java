@@ -138,13 +138,13 @@ class Xow_data_mgr_fxt {
 	}
 	public Xow_data_mgr_fxt Update(String ttl_str, String data) {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));
-		Xoae_page page = Xoae_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.New_test(wiki, ttl);
 		wiki.Db_mgr().Save_mgr().Data_update(page, Bry_.new_u8(data));
 		return this;
 	}
 	public Xow_data_mgr_fxt Rename(String old_ttl, String new_ttl) {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(old_ttl));
-		Xoae_page page = Xoae_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.New_test(wiki, ttl);
 		wiki.Db_mgr().Save_mgr().Data_rename(page, ttl.Ns().Id(), Bry_.new_u8(new_ttl));
 		return this;
 	}

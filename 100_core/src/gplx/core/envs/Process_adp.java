@@ -31,7 +31,7 @@ import gplx.Io_url;
 import gplx.Io_url_;
 import gplx.List_adp;
 import gplx.List_adp_;
-import gplx.RlsAble;
+import gplx.Rls_able;
 import gplx.String_;
 import gplx.Tfds;
 import gplx.Virtual;
@@ -45,7 +45,7 @@ import java.io.InputStreamReader;
 import javax.management.RuntimeErrorException;
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*;
 import gplx.langs.gfs.*;
-public class Process_adp implements GfoInvkAble, RlsAble {
+public class Process_adp implements GfoInvkAble, Rls_able {
 	public boolean Enabled() {return enabled;} public Process_adp Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public byte Exe_exists() {return exe_exists;} public Process_adp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = Bool_.__byte;
 	public Io_url Exe_url() {return exe_url;} public Process_adp Exe_url_(Io_url val) {exe_url = val; exe_exists = Bool_.__byte; return this;} Io_url exe_url;

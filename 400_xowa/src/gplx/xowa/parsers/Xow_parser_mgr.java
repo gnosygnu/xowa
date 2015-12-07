@@ -22,7 +22,7 @@ public class Xow_parser_mgr {
 	private Xop_parser anchor_encode_parser;
 	public Xow_parser_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.tkn_mkr = wiki.Appe().Parser_mgr().Tkn_mkr();
-		this.ctx = Xop_ctx.new_(wiki);
+		this.ctx = Xop_ctx.new_main_page(wiki);
 		this.main = Xop_parser.new_wiki(wiki);
 	}
 	public Xop_ctx Ctx() {return ctx;} private final Xop_ctx ctx;
@@ -40,7 +40,7 @@ public class Xow_parser_mgr {
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(page);		// notify scribunto about page changed
 		ctx.Cur_page_(page);
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Data_raw());
-		if (clear) {page.Clear();}
+		if (clear) {page.Clear_all();}
 		Xoa_ttl ttl = page.Ttl();
 		if (Xow_page_tid.Identify(wiki.Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext)	// only parse page if wikitext; skip .js, .css, Module; DATE:2013-11-10
 			main.Parse_text_to_wdom(root, ctx, tkn_mkr, page.Data_raw(), Xop_parser_.Doc_bgn_bos);

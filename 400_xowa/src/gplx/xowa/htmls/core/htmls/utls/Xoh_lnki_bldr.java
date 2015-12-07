@@ -35,7 +35,7 @@ public class Xoh_lnki_bldr {
 	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, v); return this;}
 	public Xoh_lnki_bldr Href_(Xow_wiki wiki, byte[] bry) {return Href_(wiki.Domain_bry(), wiki.Ttl_parse(bry));}
 	public Xoh_lnki_bldr Href_(byte[] domain_bry, Xoa_ttl ttl) {
-		href_wtr.Build_to_bfr(tmp_bfr, app, domain_bry, ttl, Bool_.Y);
+		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Mode_popup, domain_bry, ttl);
 		this.href = tmp_bfr.To_bry_and_clear();
 		return this;
 	}

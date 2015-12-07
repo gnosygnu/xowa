@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.interfaces.*;
 public class GfuiAlign_ implements ParseAble {
 	public static GfuiAlign as_(Object obj) {return obj instanceof GfuiAlign ? (GfuiAlign)obj : null;}
 	public static GfuiAlign cast(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}

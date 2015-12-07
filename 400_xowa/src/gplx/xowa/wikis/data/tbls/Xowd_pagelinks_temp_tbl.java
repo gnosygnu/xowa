@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.cfgs.*;
-public class Xowd_pagelinks_temp_tbl implements RlsAble {
+public class Xowd_pagelinks_temp_tbl implements Rls_able {
 	private final String tbl_name = "pagelinks_temp"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_src_id, fld_trg_ns, fld_trg_ttl;
 	private final Db_conn conn; private Db_stmt stmt_insert;

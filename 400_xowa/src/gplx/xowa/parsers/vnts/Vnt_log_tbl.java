@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*;
-public class Vnt_log_tbl implements RlsAble {
+public class Vnt_log_tbl implements Rls_able {
 	private final String tbl_name = "log_vnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_uid, fld_page_id, fld_rule_idx
 	, fld_flag_count, fld_lang_count, fld_undi_count, fld_bidi_count

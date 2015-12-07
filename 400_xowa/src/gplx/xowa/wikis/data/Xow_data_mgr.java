@@ -32,11 +32,11 @@ public class Xow_data_mgr implements GfoInvkAble {
 	public Xoae_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {tmp_url = wiki.Utl__url_parser().Parse(ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
 	public Xoae_page Get_page_from_msg(Xoa_ttl ttl) {tmp_url = wiki.Utl__url_parser().Parse(ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
 	public Xoae_page Get_page(Xoa_url url, Xoa_ttl ttl, boolean called_from_tmpl, boolean called_from_msg) {
-		Xoae_page rv = Xoae_page.new_(wiki, ttl);
+		Xoae_page rv = Xoae_page.New(wiki, ttl);
 		return Get_page(rv, url, ttl, called_from_tmpl, called_from_msg);
 	}
 	public Xoae_page Get_page(Xoae_page rv, Xoa_url url, Xoa_ttl ttl, boolean called_from_tmpl, boolean called_from_msg) {
-		rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoae_page.new_()
+		rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoae_page.New()
 		Xow_ns ns = ttl.Ns();
 		switch (ns.Id()) {
 			case Xow_ns_.Tid__special:
@@ -87,7 +87,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab)	{return Load_page_by_ttl(url, ttl, wiki.Lang(), tab, true);}
 	public Xoae_page Load_page_by_ttl(Xoa_url url, Xoa_ttl ttl, Xol_lang_itm lang, Xog_tab_itm tab, boolean parse_page) {
 		wiki.Init_assert();
-		Xoae_page page = Xoae_page.new_(wiki, ttl); page.Tab_data().Tab_(tab);
+		Xoae_page page = Xoae_page.New(wiki, ttl); page.Tab_data().Tab_(tab);
 		this.Get_page(page, url, ttl, false, false);						// get page from data_mgr
 		if (page.Missing()) {													// page doesn't exist
 			boolean vnt_missing = true;

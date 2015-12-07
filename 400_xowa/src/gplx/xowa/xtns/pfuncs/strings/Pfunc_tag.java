@@ -56,6 +56,7 @@ public class Pfunc_tag extends Pf_func_base {
 	public static final int
 	  Xtag_len = 27	// <xtag_bgn id='1234567890'/>
 	, Xtag_bgn = 14 // <xtag_bgn id='
+	, Id_len = 10
 	;
 	public static final byte[]
 	  Xtag_bgn_lhs = Bry_.new_a7("<xtag_bgn id='")

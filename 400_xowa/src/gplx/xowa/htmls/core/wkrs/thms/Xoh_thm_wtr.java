@@ -45,10 +45,13 @@ public class Xoh_thm_wtr extends gplx.core.brys.Bfr_arg_base {
 			alt_fmtr.Bld_bfr_many(tmp_bfr, img_alt_bry);
 			div_2_alt.Set(tmp_bfr.To_bry_and_clear());
 		}
+		else
+			div_2_alt.Set(Bry_.Empty);
 		return this;
 	}
 	public Xoh_thm_wtr Clear() {
-		Bfr_arg_.Clear(div_0_align, div_1_id, div_1_width, div_1_img, div_2_href, div_2_magnify, div_2_capt, div_2_alt);
+		Bfr_arg_.Clear(div_0_align, div_1_id, div_1_width, div_2_href, div_2_magnify, div_2_alt);
+		div_1_img = div_2_capt = Bfr_arg_.Noop;
 		return this;
 	}
 	@Override public void Bfr_arg__add(Bry_bfr bfr) {
@@ -57,21 +60,16 @@ public class Xoh_thm_wtr extends gplx.core.brys.Bfr_arg_base {
 	public static final byte[] Prefix__div_id = Bry_.new_a7("xothm_");
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"thumb t~{div_0_align}\">"
-	, "  <div~{div_1_id} class=\"thumbinner\" style=\"width:~{div_1_width}px;\">"
-	, "    ~{div_1_img}"
-	, "    <div class=\"thumbcaption\">"
-	, "      <div class=\"magnify\">"
-	, "        <a~{div_2_href} class=\"internal\" title=\"Enlarge\"><img src=\"~{div_2_magnify}\" width=\"15\" height=\"11\" alt=\"\"></a>"
-	, "      </div>~{div_2_capt}"
-	, "    </div>~{div_2_alt}"
-	, "  </div>"
+	,   "<div~{div_1_id} class=\"thumbinner\" style=\"width:~{div_1_width}px;\">~{div_1_img} "	// NOTE: trailing space is intentional; matches jtidy behavior
+	,     "<div class=\"thumbcaption\">"
+	,       "<div class=\"magnify\"><a~{div_2_href} class=\"internal\" title=\"Enlarge\"><img src=\"~{div_2_magnify}\" width=\"15\" height=\"11\" alt=\"\"></a></div>"
+	,       "~{div_2_capt}</div>~{div_2_alt}"
+	,   "</div>"
 	, "</div>"
 	), "div_0_align", "div_1_id", "div_1_width", "div_1_img", "div_2_href", "div_2_magnify", "div_2_capt", "div_2_alt");
 	private static final Bry_fmtr alt_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "    <hr>"
-	, "    <div class=\"thumbcaption\">"
-	, "      ~{alt}"
-	, "    </div>"
+	,     "<hr>"
+	,     "<div class=\"thumbcaption\">~{alt}</div>"
 	), "alt");
 }

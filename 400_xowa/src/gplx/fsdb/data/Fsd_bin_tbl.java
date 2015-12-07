@@ -19,7 +19,7 @@ package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.core.ios.*;
 import gplx.dbs.engines.sqlite.*;
-public class Fsd_bin_tbl implements RlsAble {
+public class Fsd_bin_tbl implements Rls_able {
 	private final String tbl_name = "fsdb_bin"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_owner_id, fld_owner_tid, fld_part_id, fld_data_url, fld_data;
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select; private Bry_bfr tmp_bfr;

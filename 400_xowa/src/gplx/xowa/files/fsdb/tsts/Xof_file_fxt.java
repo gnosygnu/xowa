@@ -70,7 +70,7 @@ class Xof_file_fxt {
 		List_adp itms_list = List_adp_.new_(); itms_list.Add(itm);
 		orig_mgr.Find_by_list(Ordered_hash_.New_bry(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, ttl_bry);
-		Xoae_page page = Xoae_page.new_(wiki, ttl);
+		Xoae_page page = Xoae_page.New(wiki, ttl);
 		fsdb_mgr.Fsdb_search_by_list(itms_list, wiki, page, Xog_js_wkr_.Noop);
 		if (arg.Rslt_orig_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_orig_exists()  == Bool_.Y_byte, itm.Orig_exists(), "orig_exists");
 		if (arg.Rslt_file_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_exists()  == Bool_.Y_byte, itm.File_exists(), "file_exists");

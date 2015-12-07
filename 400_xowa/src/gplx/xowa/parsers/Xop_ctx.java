@@ -61,10 +61,10 @@ public class Xop_ctx {
 	public boolean					Only_include_evaluate() {return only_include_evaluate;} public Xop_ctx Only_include_evaluate_(boolean v) {only_include_evaluate = v; return this;} private boolean only_include_evaluate;
 	public Lst_section_nde_mgr	Lst_section_mgr()	{if (lst_section_mgr == null) lst_section_mgr = new Lst_section_nde_mgr(); return lst_section_mgr;} private Lst_section_nde_mgr lst_section_mgr;
 	public Hash_adp_bry			Lst_page_regy()		{return lst_page_regy;} private Hash_adp_bry lst_page_regy;
-	public boolean Ref_ignore() {return ref_ignore;} public Xop_ctx Ref_ignore_(boolean v) {ref_ignore = v; return this;} private boolean ref_ignore;	// NOTE: only applies to sub_ctx's created by <pages> and {{#lst}}; if true, does not add <ref> to page.Ref_mgr; DATE:2014-04-24
-	public byte[] References_group() {return references_group;} public Xop_ctx References_group_(byte[] v) {references_group = v; return this;} private byte[] references_group;
-	public boolean Tid_is_popup() {return tid_is_popup;} public void Tid_is_popup_(boolean v) {tid_is_popup = v;} private boolean tid_is_popup = false;
-	public boolean Tid_is_image_map() {return tid_is_image_map;} public Xop_ctx Tid_is_image_map_(boolean v) {tid_is_image_map = v; return this;} private boolean tid_is_image_map;
+	public boolean					Ref_ignore() {return ref_ignore;} public Xop_ctx Ref_ignore_(boolean v) {ref_ignore = v; return this;} private boolean ref_ignore;	// NOTE: only applies to sub_ctx's created by <pages> and {{#lst}}; if true, does not add <ref> to page.Ref_mgr; DATE:2014-04-24
+	public byte[]				References_group() {return references_group;} public Xop_ctx References_group_(byte[] v) {references_group = v; return this;} private byte[] references_group;
+	public boolean					Tid_is_popup() {return tid_is_popup;} public void Tid_is_popup_(boolean v) {tid_is_popup = v;} private boolean tid_is_popup = false;
+	public boolean					Tid_is_image_map() {return tid_is_image_map;} public Xop_ctx Tid_is_image_map_(boolean v) {tid_is_image_map = v; return this;} private boolean tid_is_image_map;
 	public Xop_log_invoke_wkr	Xtn__scribunto__invoke_wkr() {
 		if (scrib_invoke_wkr == null)
 			scrib_invoke_wkr = ((Scrib_xtn_mgr)(app.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY))).Invoke_wkr();
@@ -72,8 +72,9 @@ public class Xop_ctx {
 	}	private Xop_log_invoke_wkr scrib_invoke_wkr;
 	public Xop_log_property_wkr Xtn__wikidata__property_wkr() {return app.Wiki_mgr().Wdata_mgr().Property_wkr();}
 	public Gfo_msg_log			Msg_log()			{return msg_log;} private Gfo_msg_log msg_log;
-	public Xop_ctx Clear() {
-		cur_page.Clear();
+	public Xop_ctx Clear_all() {return Clear(true);}
+	public Xop_ctx Clear(boolean clear_scrib) {
+		cur_page.Clear(clear_scrib);
 		stack = Xop_tkn_itm_.Ary_empty;
 		stack_len = stack_max = 0;
 		app.Wiki_mgr().Wdata_mgr().Clear();
@@ -96,12 +97,12 @@ public class Xop_ctx {
 		Stack_pop_til(root, src, 0, true, src_len, src_len, Xop_tkn_itm_.Tid_txt);
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Page_end(this, root, src, src_len);
 	}
-	public boolean		Lxr_make()	{return lxr_make;} public Xop_ctx Lxr_make_(boolean v) {lxr_make = v; return this;} private boolean lxr_make = false;
-	public int		Lxr_make_txt_(int pos) {lxr_make = false; return pos;}
-	public int		Lxr_make_log_(Gfo_msg_itm itm, byte[] src, int bgn_pos, int cur_pos) {lxr_make = false; msg_log.Add_itm_none(itm, src, bgn_pos, cur_pos); return cur_pos;}
-	public boolean Empty_ignored() {return empty_ignored;}
-	public void Empty_ignored_y_() {empty_ignored = true;} private boolean empty_ignored = false;
-	public void Empty_ignored_n_() {empty_ignored = false;}
+	public boolean				Lxr_make()	{return lxr_make;} public Xop_ctx Lxr_make_(boolean v) {lxr_make = v; return this;} private boolean lxr_make = false;
+	public int				Lxr_make_txt_(int pos) {lxr_make = false; return pos;}
+	public int				Lxr_make_log_(Gfo_msg_itm itm, byte[] src, int bgn_pos, int cur_pos) {lxr_make = false; msg_log.Add_itm_none(itm, src, bgn_pos, cur_pos); return cur_pos;}
+	public boolean				Empty_ignored() {return empty_ignored;}
+	public void				Empty_ignored_y_() {empty_ignored = Bool_.Y;} private boolean empty_ignored = false;
+	public void				Empty_ignored_n_() {empty_ignored = Bool_.N;}
 	public void Empty_ignore(Xop_root_tkn root, int empty_bgn) {
 		int empty_end = root.Subs_len();
 		for (int i = empty_bgn; i < empty_end; i++) {
@@ -303,15 +304,12 @@ public class Xop_ctx {
 		if (stack_pos == -1) return;
 		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
-	public static Xop_ctx new_(Xowe_wiki wiki) {
-		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.new_(wiki, Xoa_ttl.parse(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
-		return rv;
-	}
-	public static Xop_ctx new_sub_(Xowe_wiki wiki) {return new_sub_(wiki, wiki.Parser_mgr().Ctx().cur_page);}
+	public static Xop_ctx new_main_page(Xowe_wiki wiki)			{return new_(wiki, Xoa_page_.Main_page_bry);}	// HACK: use "Main_Page" to put in valid page title
+	public static Xop_ctx new_(Xowe_wiki wiki, byte[] ttl_bry)	{return new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ttl_bry)));}
+	public static Xop_ctx new_sub_(Xowe_wiki wiki)				{return new_sub_(wiki, wiki.Parser_mgr().Ctx().cur_page);}
 	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
-		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		Xop_ctx rv = new Xop_ctx(wiki, page);
-		new_copy(ctx, rv);
+		new_copy(wiki.Parser_mgr().Ctx(), rv);
 		return rv;
 	}
 	public static Xop_ctx new_sub_page_(Xowe_wiki wiki, Xop_ctx ctx, Hash_adp_bry lst_page_regy) {
@@ -320,8 +318,17 @@ public class Xop_ctx {
 		rv.lst_page_regy = lst_page_regy;				// NOTE: must share ref for lst only (do not share for sub_(), else stack overflow)
 		return rv;
 	}
+	public static Xop_ctx New_sub_by_ctx(Xop_ctx ctx) {
+		Xowe_wiki wiki = ctx.Wiki();
+		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ctx.Cur_page().Ttl().Full_db())));
+		new_copy(ctx, rv);
+		return rv;
+	}
 	private static void new_copy(Xop_ctx src, Xop_ctx trg) {
 		trg.Lnki().File_wkr_(src.Lnki().File_wkr());	// always share file_wkr between sub contexts
 		trg.tmpl_output = src.tmpl_output;				// share bfr for optimization purposes
+		trg.ref_ignore = src.ref_ignore;				// copy ref_ignore; needed for refs inside poem else duplicate refs; it.s:La_Secchia_rapita/Canto_primo; DATE:2015-12-03
+		trg.references_group = src.references_group;
+		trg.cur_page.Ref_mgr_(src.cur_page.Ref_mgr());
 	}		
 }

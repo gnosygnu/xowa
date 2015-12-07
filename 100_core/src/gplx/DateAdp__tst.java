@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import org.junit.*;
+import org.junit.*; import gplx.core.times.*;
 public class DateAdp__tst {
 	@Test  public void Parse_gplx() {
 		tst_Parse_gplx("99991231_235959.999", "99991231_235959.999");

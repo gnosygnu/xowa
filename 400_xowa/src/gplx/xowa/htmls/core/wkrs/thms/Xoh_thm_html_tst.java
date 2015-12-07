@@ -23,8 +23,8 @@ public class Xoh_thm_html_tst {
 		// fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
 		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
-		, "  <div id='xowa_file_div_0' class='thumbinner' style='width:220px;'>"
-		, "    <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xoimg='8|-1|-1|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
+		, "  <div class='thumbinner' style='width:220px;'>"
+		, "    <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xoimg='4|-1|-1|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
 		, "    <div class='thumbcaption'>"
 		, "      <div class='magnify'>"
 		, "        <a href='/wiki/File:A.png' class='internal' title='Enlarge'>"

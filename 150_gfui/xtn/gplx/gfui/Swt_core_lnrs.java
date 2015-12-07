@@ -16,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
-import gplx.Bitmask_;
 import gplx.Byte_ascii;
 import gplx.Enm_;
 import gplx.GfoEvMgr_;
@@ -25,6 +24,7 @@ import gplx.GfoMsg_;
 import gplx.GfsCtx;
 import gplx.String_;
 import gplx.Tfds;
+import gplx.core.bits.Bitmask_;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public interface GfuiInvkCmd extends GfoInvkAble, RlsAble {
+public interface GfuiInvkCmd extends GfoInvkAble, Rls_able {
 }
 class GfuiInvkCmd_ {
 	public static final String Invk_sync = "Sync";

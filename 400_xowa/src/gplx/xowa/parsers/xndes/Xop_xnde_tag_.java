@@ -21,7 +21,7 @@ public class Xop_xnde_tag_ {
 	public static final int End_nde_mode_normal = 0, End_nde_mode_inline = 1, End_nde_mode_escape = 2; // escape is for hr which does not support </hr>
 	public static final int Bgn_nde_mode_normal = 0, Bgn_nde_mode_inline = 1;
 	public static final byte[] Name_onlyinclude = Bry_.new_a7("onlyinclude");
-	public static final byte[] Xtn_end_tag_bgn = Bry_.new_a7("</");//, Xtn_end_tag_end = Bry_.new_a7(">");
+	public static final byte[] Xtn_end_tag_bgn = Bry_.new_a7("</");
 	public static final int
   Tid__null = -1
 , Tid_b = 0

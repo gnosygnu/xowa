@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.bits.*; import gplx.core.primitives.*;
 public class IptEventType_ {
 	static EnmMgr enmMgr = EnmMgr.new_().BitRngEnd_(128);
 	public static final IptEventType 

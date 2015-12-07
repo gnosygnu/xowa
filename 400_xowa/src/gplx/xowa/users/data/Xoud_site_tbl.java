@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
-public class Xoud_site_tbl implements RlsAble {
+public class Xoud_site_tbl implements Rls_able {
 	private final String tbl_name = "user_site"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn;
 	private final Db_conn conn;

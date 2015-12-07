@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 interface Imap_itm {
 	byte Itm_tid();
 }
@@ -49,9 +49,11 @@ class Imap_itm_desc implements Imap_itm {
 }
 class Imap_itm_dflt implements Imap_itm, Imap_link_owner {
 	public byte Itm_tid() {return Imap_itm_.Tid_dflt;}
-	public int Link_tid() {return link_tid;} public void Link_tid_(int v) {link_tid = v;} private int link_tid;
+	public int Link_tid() {return link_tid;} private int link_tid;
+	public Xop_tkn_itm Link_tkn() {return link_tkn;} private Xop_tkn_itm link_tkn;
+	public void Link_tid_(int tid, Xop_tkn_itm tkn) {link_tid = tid; link_tkn = tkn;} 
 	public byte[] Link_href() {return link_href;} public void Link_href_(byte[] v) {this.link_href = v;} private byte[] link_href;
-	public byte[] Link_text() {return link_text;} public void Link_text_(byte[] v) {this.link_text = v;} private byte[] link_text;		
+	public byte[] Link_text() {return link_text;} public void Link_text_(byte[] v) {this.link_text = v;} private byte[] link_text;
 }
 class Imap_err {
 	public Imap_err(int itm_idx, String err_key) {this.itm_idx = itm_idx; this.err_key = err_key;}

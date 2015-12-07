@@ -21,46 +21,53 @@ public class Xoh_hdr_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Same() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
-		( "~\"6A~~"
+		( "~\"'A~"
 		, "a"
 		), String_.Concat_lines_nl_skip_last
-		( "<h6>"
-		, "  <span class='mw-headline' id='A'>A</span>"
-		, "</h6>"
+		( "<h6><span class='mw-headline' id='A'>A</span></h6>"
 		, "a"
 		));
 	}
 	@Test   public void Diff() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
-		( "~\"2<i>A</i>~A~"
+		( "~\"+<i>A</i>~A~"
 		, "a"
 		), String_.Concat_lines_nl_skip_last
-		( "<h2>"
-		, "  <span class='mw-headline' id='A'><i>A</i></span>"
-		, "</h2>"
+		( "<h2><span class='mw-headline' id='A'><i>A</i></span></h2>"
 		, "a"
 		));
 	}
 	@Test   public void Diff_by_underscore() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
-		( "~\"2A 1~~"
+		( "~\"#A 1~"
 		, "a"
 		), String_.Concat_lines_nl_skip_last
-		( "<h2>"
-		, "  <span class='mw-headline' id='A_1'>A 1</span>"
-		, "</h2>"
+		( "<h2><span class='mw-headline' id='A_1'>A 1</span></h2>"
+		, "a"
+		));
+	}
+	@Test   public void Diff_by_lnki() {
+		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
+		( "~\"+<a href=\"/wiki/Category:A\" title=\"Category:A\">Category:A</a>~Category:A~"
+		, "a"
+		), String_.Concat_lines_nl_skip_last
+		( "<h2><span class='mw-headline' id='Category:A'><a href='/wiki/Category:A' title='Category:A'>Category:A</a></span></h2>"
 		, "a"
 		));
 	}
 	@Test   public void Same_w_underscore() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
-		( "~\"2A_1~~"
+		( "~\"#A_1~"
 		, "a"
 		), String_.Concat_lines_nl_skip_last
-		( "<h2>"
-		, "  <span class='mw-headline' id='A_1'>A_1</span>"
-		, "</h2>"
+		( "<h2><span class='mw-headline' id='A_1'>A_1</span></h2>"
 		, "a"
 		));
+	}
+	@Test   public void Tidy__bad_end() {
+		fxt.Test__bicode(
+		"~\"?A~AB~B~"
+		, "<h6><span class='mw-headline' id='AB'>A</span>B</h6>"
+		);
 	}
 }

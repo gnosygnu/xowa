@@ -541,31 +541,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] close_bry) {
 		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
 		if (tag_bgn > -1 
-			&& Bry_.Eq(src, tag_bgn, tag_bgn + Pfunc_tag.Xtag_bgn_lhs.length, Pfunc_tag.Xtag_bgn_lhs))	// xtn created by tag
-			return Find_xtn_end_tag(ctx, src, src_len, open_end, close_bry, tag_bgn + Pfunc_tag.Xtag_bgn);
-		else {	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
-			xtn_end_tag_trie.Clear();
-			xtn_end_tag_trie.Add_obj(close_bry, close_bry);
-			for (int i = open_end; i < src_len; i++) {
-				Object o = xtn_end_tag_trie.Match_bgn(src, i, src_len);
-				if (o != null) {
-					return i;
-				}
-			}
-			return Bry_find_.Not_found;
-		}
-	}
-	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
-		int tag_id = Bry_.To_int_or(src, tag_bgn, tag_bgn + 10, -1);
-		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
-		Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b128();
-		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
-		byte[] tag_end = tmp.To_bry_and_rls();
-		int rv = Bry_find_.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
-		if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
-		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1);
-		if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
-		return rv;
+			&& Bry_.Eq(src, tag_bgn, tag_bgn, Pfunc_tag.Xtag_bgn_lhs))	// xtn created by tag
+			return Xop_xnde_wkr_.Find_xtag_end(ctx, src, open_end, src_len);
+		else	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
+			return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, close_bry);
 	}
 	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int name_bgn, int name_end, int atrs_bgn, int atrs_end, Mwh_atr_itm[] atrs, boolean inline, boolean pre2_hack) {
 		// NOTE: find end_tag that exactly matches bgnTag; must be case sensitive;
@@ -704,7 +683,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		return xnde_end;
-	}	private Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
+	}
 	private Xop_xnde_tkn New_xnde_pair(Xop_ctx ctx, Xop_root_tkn root, Xop_tkn_mkr tkn_mkr, Xop_xnde_tag tag, int open_bgn, int open_end, int close_bgn, int close_end) {
 		Xop_xnde_tkn rv = tkn_mkr.Xnde(open_bgn, close_end).Tag_(tag).Tag_open_rng_(open_bgn, open_end).Tag_close_rng_(close_bgn, close_end).CloseMode_(Xop_xnde_tkn.CloseMode_pair);
 		int name_bgn = open_bgn + 1;
@@ -735,20 +714,6 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return gt_pos;
 	}
 	public static Xop_log_basic_wkr Timeline_log_wkr = Xop_log_basic_wkr.Null;
-}
-class Xop_xnde_wkr_ {
-	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
-		int subs_bgn = -1, subs_len = owner.Subs_len();
-		for (int i = 0; i < subs_len; i++) {
-			Xop_tkn_itm sub_itm = owner.Subs_get(i);
-			if (sub_itm.Tkn_tid() == Xop_tkn_itm_.Tid_pipe) {	// tkn is "|"; assume that caption should end here
-				subs_bgn = i;
-				break;
-			}
-		}
-		if (subs_bgn != -1) 
-			root.Subs_move(owner, subs_bgn, subs_len);			// move everything after "|" back to root
-	}
 }
 /*
 NOTE_1: special logic for <*include*>

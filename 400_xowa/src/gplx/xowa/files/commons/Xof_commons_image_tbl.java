@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.commons; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*;
-public class Xof_commons_image_tbl implements RlsAble {
+public class Xof_commons_image_tbl implements Rls_able {
 	private Db_stmt stmt_insert;
 	public Db_conn Conn() {return conn;}
 	public void Conn_(Db_conn v) {

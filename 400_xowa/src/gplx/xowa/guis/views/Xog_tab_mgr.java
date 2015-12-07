@@ -79,7 +79,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Xows_special_meta_.Itm__default_tab.Ttl_bry());
 		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar_or_null(ttl.Full_db_as_str()); if (url == null) throw Err_.new_("url", "invalid url", "url", url);
-		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.new_(cur_wiki, ttl));
+		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.New(cur_wiki, ttl));
 		rv.Page_update_ui();
 		rv.Show_url_bgn(url);
 		return rv;
@@ -218,7 +218,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_new_link(String link, boolean focus) {
 		Xowe_wiki wiki = active_tab.Wiki();
-		Xog_tab_itm new_tab = Tabs_new(focus, false, wiki, Xoae_page.new_(wiki, active_tab.Page().Ttl()));	// NOTE: do not use ttl from link, else middle-clicking pages with anchors won't work; DATE:2015-05-03
+		Xog_tab_itm new_tab = Tabs_new(focus, false, wiki, Xoae_page.New(wiki, active_tab.Page().Ttl()));	// NOTE: do not use ttl from link, else middle-clicking pages with anchors won't work; DATE:2015-05-03
 		Xoa_url url = wiki.Utl__url_parser().Parse_by_urlbar_or_null(link);	if (url == null) return; // NOTE: link must be of form domain/wiki/page; DATE:2014-05-27			
 		new_tab.Show_url_bgn(url);
 		if (focus)

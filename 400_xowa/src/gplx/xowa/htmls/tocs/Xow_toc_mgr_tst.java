@@ -454,11 +454,11 @@ public class Xow_toc_mgr_tst {
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#A\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">ACategory:B</span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#ACategory:B\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">ACategory:B</span></a>"
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='A'>A<a href=\"/wiki/Category:B\">Category:B</a></span></h2>"
+		, "<h2><span class='mw-headline' id='ACategory:B'>A<a href=\"/wiki/Category:B\">Category:B</a></span></h2>"
 		));
 	}
 	@Test   public void File() { // PURPOSE: file should show in in TOC; EX: tr.w:D�nya_Miraslari; DATE:2014-06-06

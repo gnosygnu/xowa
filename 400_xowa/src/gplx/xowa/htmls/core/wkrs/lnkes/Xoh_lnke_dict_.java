@@ -30,8 +30,8 @@ public class Xoh_lnke_dict_ {
 	, Html__rhs_end					= Bry_.new_a7("\">")
 	;
 	public static byte[] 
-	  Html__rel__nofollow	= Bry_.new_a7("nofollow")
-	, Html__cls__external	= Bry_.new_a7("external")
+	  Html__rel__nofollow		= Bry_.new_a7("nofollow")
+	, Html__cls__external		= Bry_.new_a7("external")
 	;
 	public static final Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Html__class__free, Type__free)

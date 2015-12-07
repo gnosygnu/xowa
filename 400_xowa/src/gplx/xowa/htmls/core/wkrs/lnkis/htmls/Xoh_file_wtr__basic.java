@@ -16,12 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.core.brys.*;
-import gplx.langs.htmls.*; 
+import gplx.core.brys.*; import gplx.core.bits.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.files.*; 
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.files.*; 	
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_file_wtr__basic {		
 	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
@@ -95,7 +93,7 @@ public class Xoh_file_wtr__basic {
 	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
 		byte[] content = Arg_content_audio(lnki, ctx, hctx, src, uid, lnki_href, img_orig_src, alt);
 		if (lnki.Media_icon())
-			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);
+			html_fmtr.Html_thumb_core(bfr, hctx.Mode_is_hdump(), uid, lnki_halign_bry, div_width, content);
 		else
 			bfr.Add(content);
 	}
@@ -104,7 +102,7 @@ public class Xoh_file_wtr__basic {
 		boolean video_is_thumb = Xop_lnki_type.Id_defaults_to_thumb(lnki.Lnki_type());
 		byte[] content = Arg_content_video(ctx, hctx, src, lnki, xfer_itm, uid, video_is_thumb, lnki_href, img_view_src, img_orig_src, alt);
 		if (video_is_thumb)
-			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);
+			html_fmtr.Html_thumb_core(bfr, hctx.Mode_is_hdump(), uid, lnki_halign_bry, div_width, content);
 		else
 			bfr.Add(content);
 	}
@@ -119,7 +117,7 @@ public class Xoh_file_wtr__basic {
 		if (lnki_is_thumbable) {	// is "thumb"
 			if (bfr.Len() > 0) bfr.Add_byte_nl();
 			byte[] content = Arg_content_thumb(lnki_file_wkr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_href, img_view_src, img_orig_src, alt, lnki_ttl, anchor_title);
-			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);
+			html_fmtr.Html_thumb_core(bfr, hctx.Mode_is_hdump(), uid, lnki_halign_bry, div_width, content);
 		}
 		else {
 			if	(	cfg_alt_defaults_to_caption 
@@ -139,15 +137,15 @@ public class Xoh_file_wtr__basic {
 			byte img_cls_tid = lnki.Border() == Bool_.Y_byte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
 			byte[] img_cls_other = lnki.Lnki_cls(); // PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3; DATE:2014-09-06
 			if (lnki_link_tkn == Arg_nde_tkn.Null)		// full
-				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			else {										// thumb
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
-				byte[] link_ref = link_tkn.Dat_to_bry(src);
-				byte[] link_ref_new = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_ref, lnki_href);
-				link_ref = link_ref_new == null ? lnki_href: link_ref_new;	// if parse fails, then assign to lnki_href; EX:link={{{1}}}
-				link_ref = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes.Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
-				if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl();
-				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, link_ref, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
+				byte[] link_arg = Xoa_ttl.Replace_spaces(link_tkn.Dat_to_bry(src));	// replace spaces with unders, else "/wiki/File:A b.ogg" instead of "A_b.ogg"; DATE:2015-11-27
+				byte[] link_arg_html = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_arg, lnki_href);
+				link_arg = link_arg_html == null ? lnki_href: link_arg_html;		// if parse fails, then assign to lnki_href; EX:link={{{1}}}
+				link_arg = Gfo_url_encoder_.Href_qarg.Encode(link_arg);			// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
+				// if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl(); // DELETE: not sure why this is here; breaks test; DATE:2015-11-28
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, link_arg, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			}
 			if (div_align_exists) bfr.Add(Html_tag_.Div_rhs);	// close div from above
 		}
@@ -158,7 +156,7 @@ public class Xoh_file_wtr__basic {
 		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, hctx, src, lnki) : Bry_.Empty;
 		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
+		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
 		byte[] thumb = tmp_bfr.To_bry_and_clear();
 		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
 		return tmp_bfr.To_bry_and_rls();

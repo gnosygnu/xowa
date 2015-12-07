@@ -59,7 +59,7 @@ public class List_adp_ {
 	}
 	public static void DisposeAll(List_adp list) {
 		for (int i = 0; i < list.Count(); i++)
-			((RlsAble)list.Get_at(i)).Rls();
+			((Rls_able)list.Get_at(i)).Rls();
 	}
 	public static List_adp new_ary_(Object ary) {	
 		int ary_len = Array_.Len(ary);

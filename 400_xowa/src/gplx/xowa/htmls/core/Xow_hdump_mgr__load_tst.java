@@ -117,7 +117,7 @@ class Xodb_hdump_mgr__base_fxt {
 			wiki = fxt.Wiki();
 			page = wiki.Parser_mgr().Ctx().Cur_page();
 			hdump_mgr = wiki.Html__hdump_mgr();
-			hdump_mgr.Init_by_db(gplx.core.ios.Io_stream_.Tid_raw, false);
+			hdump_mgr.Init_by_db(gplx.core.ios.Io_stream_.Tid_raw, false, false);
 		}
 		fxt.Reset();
 		page.Revision_data().Id_(0);

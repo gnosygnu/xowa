@@ -36,6 +36,7 @@ public class Xol_lang_srl {
 					break;
 				case Byte_ascii.Nl:
 					byte[] cur_name = csv_parser.Load(src, fld_bgn, pos);
+					cur_name = Xoa_ttl.Replace_spaces(cur_name);	// NOTE: *.gfs files will have names with \s instead of _; this comes from Language.php which also has same \s convention; EX: "Template talk" instead of "Template_talk"
 					Xow_ns ns = new Xow_ns(cur_id, Xow_ns_case_.Tid__1st, cur_name, false);
 					rv.Add(ns);
 					fld_bgn = pos + 1;

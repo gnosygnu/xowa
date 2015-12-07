@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src_100_interface"/>
 	<classpathentry kind="src" path="src_311_gfoObj"/>
 	<classpathentry kind="src" path="src_420_usrMsg"/>
 	<classpathentry kind="src" path="tst"/>

@@ -32,7 +32,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
 		this.mode = mode;
-		Io_url.Http_file_str_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys;
+		Io_url.Http_file_str_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx;
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir);
 		log_wtr = usr_dlg.Log_wkr();
 		cfg_mgr = new Xoa_cfg_mgr(this);

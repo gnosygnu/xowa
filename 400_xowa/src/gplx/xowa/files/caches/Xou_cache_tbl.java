@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*;
-public class Xou_cache_tbl implements RlsAble {
+public class Xou_cache_tbl implements Rls_able {
 	private String tbl_name = "file_cache"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String
 	  fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w

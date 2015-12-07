@@ -21,19 +21,18 @@ import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
-	private Bry_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;
+	private Xoh_hzip_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private final Xoh_hdr_make wkr__hdr = new Xoh_hdr_make();
 	private final Xoh_img_bldr wkr__img = new Xoh_img_bldr();		
-	public void On_new_page(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 	}
-	public void On_escape	(int rng_bgn, int rng_end)								{bfr.Add_mid(src, rng_bgn, rng_end);}
-	public void On_txt		(int rng_bgn, int rng_end)								{bfr.Add_mid(src, rng_bgn, rng_end);}
-	public void On_space	(int rng_bgn, int rng_end)								{bfr.Add_mid(src, rng_bgn, rng_end);}
-	public void On_lnke		(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_parser arg)	{bfr.Add_mid(src, arg.Rng_bgn(), arg.Rng_end());}
-	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser arg)	{bfr.Add_mid(src, arg.Rng_bgn(), arg.Rng_end());}
-	public void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser arg)		{wkr__hdr.Make(bfr, hpg, src, arg);}
-	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg)		{wkr__img.Make_by_parse(bfr, hpg, hctx, src, arg);}
-	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg)		{bfr.Add_mid(src, arg.Rng_bgn(), arg.Rng_end());}
-	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser arg) {}
+	public void On_escape	(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
+	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
+	public void On_lnke		(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_parser parser)	{bfr.Add_mid(src, parser.Src_bgn(), parser.Src_end());}
+	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser parser)	{bfr.Add_mid(src, parser.Src_bgn(), parser.Src_end());}
+	public void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser parser)		{wkr__hdr.Make(bfr, hpg, src, parser);}
+	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser parser)		{wkr__img.Make_by_parse(bfr, hpg, hctx, src, parser);}
+	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser parser)		{bfr.Add_mid(src, parser.Src_bgn(), parser.Src_end());}
+	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser parser)	{}
 }

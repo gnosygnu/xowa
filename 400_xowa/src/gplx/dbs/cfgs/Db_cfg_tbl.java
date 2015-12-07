@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
 import gplx.core.primitives.*;
-public class Db_cfg_tbl implements RlsAble {
+public class Db_cfg_tbl implements Rls_able {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_grp, fld_key, fld_val;
 	private Db_stmt stmt_insert, stmt_update, stmt_select;

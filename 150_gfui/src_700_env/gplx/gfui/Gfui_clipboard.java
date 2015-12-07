@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public interface Gfui_clipboard extends GfoInvkAble, RlsAble {
+public interface Gfui_clipboard extends GfoInvkAble, Rls_able {
 	void Copy(String s);
 }
 class Gfui_clipboard_null implements Gfui_clipboard {

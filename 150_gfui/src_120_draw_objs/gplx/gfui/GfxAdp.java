@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public interface GfxAdp extends RlsAble {
+public interface GfxAdp extends Rls_able {
 	void DrawLine(PenAdp pen, PointAdp src, PointAdp trg);
 	void DrawRect(PenAdp pen, int x, int y, int width, int height);
 	void DrawRect(PenAdp pen, PointAdp location, SizeAdp size);

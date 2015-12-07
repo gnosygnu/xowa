@@ -139,7 +139,7 @@ class Scrib_lib_wikibase_srl {
 		return (KeyVal[])rv.To_ary_and_clear(KeyVal.class);
 	}
 	private static KeyVal[] Srl_claims_prop_itm_core(String pid, Wdata_claim_itm_core itm) {
-		boolean snak_is_valued = itm.Snak_tid() != Wdata_dict_snak_tid.Tid_novalue;
+		boolean snak_is_valued = itm.Snak_tid() == Wdata_dict_snak_tid.Tid_value; // PURPOSE: was != Wdata_dict_snak_tid.Tid_novalue; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 
 		int snak_is_valued_adj = snak_is_valued ? 1 : 0;
 		KeyVal[] rv = new KeyVal[3 + snak_is_valued_adj];
 		if (snak_is_valued)	// NOTE: novalue must not return slot (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16; ALSO: sv.w:Joseph_Jaquet; DATE:2015-07-31
@@ -160,6 +160,6 @@ class Scrib_lib_wikibase_srl {
 			}
 	}
 	public static final String Key_type = "type", Key_value = "value";
-	private static final KeyVal[] Datavalue_somevalue = new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
+	private static final KeyVal[] Datavalue_somevalue = KeyVal_.Ary_empty;	// changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
 	private static final KeyVal[] Datavalue_novalue = KeyVal_.Ary_empty;
 }

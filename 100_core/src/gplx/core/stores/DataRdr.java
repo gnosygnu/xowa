@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
-public interface DataRdr extends SrlMgr, RlsAble {
+public interface DataRdr extends SrlMgr, Rls_able {
 	String NameOfNode(); String To_str();
 	Io_url Uri(); void Uri_set(Io_url s);
 	Hash_adp EnvVars();

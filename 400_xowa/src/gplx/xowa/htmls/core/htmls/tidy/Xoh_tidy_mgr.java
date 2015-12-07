@@ -37,9 +37,10 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 			: (Xoh_tidy_wkr)wkr_tidy
 			;
 	}
-	public void Run_tidy_html(Xoae_page page, Bry_bfr bfr) {
+	public void Run_tidy_html(Xoae_page page, Bry_bfr bfr, boolean indent) {
 		if (bfr.Len_eq_0()) return;						// document is empty; do not exec b/c tidy will never generate files for 0 len files, and previous file will remain; DATE:2014-06-04
 		Tidy_wrap(bfr);
+		wkr.Indent_(indent);
 		wkr.Exec_tidy(page, bfr);
 		Tidy_unwrap(bfr);
 	}

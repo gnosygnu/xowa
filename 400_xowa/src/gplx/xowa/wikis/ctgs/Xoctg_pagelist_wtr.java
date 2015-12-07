@@ -46,26 +46,26 @@ public class Xoctg_pagelist_wtr {
 	);
 	public Bry_fmtr Fmtr_grp_normal() {return fmtr_grp_normal;} private Bry_fmtr fmtr_grp_normal = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "" 
-	, "  <div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
-	, "    <a href=\"/wiki/~{ctg_help_page}\" title=\"~{ctg_help_page}\">~{ctg_text}</a>:"
-	, "    <ul>~{grp_itms}"
-	, "    </ul>"
-	, "  </div>"
+	,   "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
+	,     "<a href=\"/wiki/~{ctg_help_page}\" title=\"~{ctg_help_page}\">~{ctg_text}</a>:"
+	,     "<ul>~{grp_itms}"
+	,     "</ul>"
+	,   "</div>"
 	), "ctg_help_page", "ctg_text", "grp_itms"
 	);
 	public Bry_fmtr Fmtr_grp_hidden() {return fmtr_grp_hidden;} private Bry_fmtr fmtr_grp_hidden = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "" 
-	, "  <div id=\"mw-hidden-catlinks\" class=\"mw-hidden-catlinks mw-hidden-cats-user-shown\">~{hidden_ctg_txt}:"
-	, "    <ul>~{grp_itms}"
-	, "    </ul>"
-	, "  </div>"
+	,   "<div id=\"mw-hidden-catlinks\" class=\"mw-hidden-catlinks mw-hidden-cats-user-shown\">~{hidden_ctg_txt}:"
+	,     "<ul>~{grp_itms}"
+	,     "</ul>"
+	,   "</div>"
 	), "hidden_ctg_txt", "grp_itms"
 	);
 	public Bry_fmtr Fmtr_itm() {return fmtr_itm;} private Bry_fmtr fmtr_itm = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "      <li>"
-	, "        <a~{lnki_cls} href=\"~{lnki_href}\" title=\"~{lnki_ttl}\">~{lnki_text}</a>"
-	, "      </li>"
+	,       "<li>"
+	,         "<a~{lnki_cls} href=\"~{lnki_href}\" title=\"~{lnki_ttl}\">~{lnki_text}</a>"
+	,       "</li>"
 	), "lnki_cls", "lnki_href", "lnki_ttl", "lnki_text"
 	);
 }

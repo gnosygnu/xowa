@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-public interface Io_stream_rdr extends RlsAble {
+public interface Io_stream_rdr extends Rls_able {
 	byte Tid();
 	boolean Exists();
 	Io_url Url(); Io_stream_rdr Url_(Io_url v);

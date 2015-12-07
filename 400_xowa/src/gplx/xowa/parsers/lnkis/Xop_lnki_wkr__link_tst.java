@@ -41,7 +41,7 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Link_file_system() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=file:///C/B.png|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"file:///C/B.png\" class=\"image\" xowa_title=\"B.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"file:///C/B.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_file_ns() {

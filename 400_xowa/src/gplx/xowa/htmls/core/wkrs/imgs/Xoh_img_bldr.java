@@ -24,20 +24,20 @@ public class Xoh_img_bldr {
 	public Xoh_img_wtr			Wtr() {return wtr;} private final Xoh_img_wtr wtr = new Xoh_img_wtr();
 	public Xof_fsdb_itm			Fsdb_itm() {return fsdb_itm;} private Xof_fsdb_itm fsdb_itm;
 	public void Make_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_img_parser arg) {
-		Make( bfr, hpg, hctx, src, arg.Img_src().File_ttl_bry(), arg.Img_xoimg()
-			, arg.Anch_href().Rel_nofollow_exists(), arg.Anch_href().Atr(), arg.Anch_cls().Atr(), arg.Anch_title()
+		Make( bfr, hpg, hctx, src, arg.Img_src().File_ttl_bry(), arg.Img_xoimg(), arg.Img_xoimg().Val_dat_exists()
+			, arg.Rel_nofollow_exists(), arg.Anch_href().Atr(), arg.Anch_cls().Atr(), arg.Anch_title()
 			, arg.Img_w(), arg.Img_h(), arg.Img_src().Atr(), arg.Img_cls().Atr(), arg.Img_alt());
 		wtr.Bfr_arg__add(bfr);
 	}
-	public void Make(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, byte[] lnki_ttl, Xoh_img_xoimg_parser img_xoimg
+	public void Make(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, byte[] lnki_ttl, Xoh_img_xoimg_parser img_xoimg, boolean img_xoimg_exists
 		, boolean anch_rel_is_nofollow, Bfr_arg anch_href, Bfr_arg anch_cls, Bfr_arg anch_ttl
 		, int img_w, int img_h, Bfr_arg img_src, Bfr_arg img_cls, Bfr_arg img_alt) {
 		wtr.Clear();
 		this.fsdb_itm = hpg.Img_mgr().Make_img();
-		if (img_xoimg.Val_dat_exists()) {
+		if (img_xoimg_exists) {
 			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), lnki_ttl, img_xoimg.Lnki_type(), img_xoimg.Lnki_upright(), img_xoimg.Lnki_w(), img_xoimg.Lnki_h(), img_xoimg.Lnki_time(), img_xoimg.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
 			hctx.File__mgr().Check_cache(fsdb_itm);
-			wtr.Img_xoimg_(src, img_xoimg.Val_bgn(), img_xoimg.Val_end());
+			wtr.Img_xoimg_(img_xoimg);
 			wtr.Img_src_empty_().Img_w_(0).Img_h_(0);
 		}
 		else if (img_w != -1) {
@@ -45,6 +45,8 @@ public class Xoh_img_bldr {
 		}
 		if (anch_rel_is_nofollow) wtr.Anch_rel_nofollow_();
 		wtr.Anch_href_(anch_href).Anch_cls_(anch_cls).Anch_title_(anch_ttl).Anch_xowa_title_(lnki_ttl);
-		wtr.Img_id_(Xoh_img_mgr.Bry__html_uid, fsdb_itm.Html_uid()).Img_alt_(img_alt).Img_cls_(img_cls);
+		if (!hctx.Mode_is_diff())
+			wtr.Img_id_(Xoh_img_mgr.Bry__html_uid, fsdb_itm.Html_uid());
+		wtr.Img_alt_(img_alt).Img_cls_(img_cls);
 	}
 }

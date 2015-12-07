@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
-public class Xoud_bmk_itm_tbl implements RlsAble {
+public class Xoud_bmk_itm_tbl implements Rls_able {
 	private final String tbl_name = "bmk_itm"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
 	private Db_stmt stmt_update_sort;

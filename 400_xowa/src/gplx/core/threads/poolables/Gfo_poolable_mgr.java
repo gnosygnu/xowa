@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.threads.poolables; import gplx.*; import gplx.core.*; import gplx.core.threads.*;
 public class Gfo_poolable_mgr {
 	private final Object thread_lock = new Object();
-	private final Gfo_poolable_itm prototype; private final Object[] make_args, clear_args; 
+	private final Gfo_poolable_itm prototype; private final Object[] make_args; 
 	private Gfo_poolable_itm[] pool; private int pool_nxt, pool_len;
-	public Gfo_poolable_mgr(Gfo_poolable_itm prototype, Object[] make_args, Object[] clear_args, int init_pool_len, int pool_max) {// NOTE: random IndexOutOfBounds errors in Get around free_ary[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
-		this.prototype = prototype; this.make_args = make_args; this.clear_args = clear_args;
+	public Gfo_poolable_mgr(Gfo_poolable_itm prototype, Object[] make_args, int init_pool_len, int pool_max) {// NOTE: random IndexOutOfBounds errors in Get around free_ary[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
+		this.prototype = prototype; this.make_args = make_args;
 		this.pool_len = init_pool_len;
 		this.Clear_fast();
 	}
@@ -51,7 +51,6 @@ public class Gfo_poolable_mgr {
 				pool[pool_idx] = rv;
 			}
 		}
-		rv.Pool__clear(clear_args); // NOTE: ALWAYS call Clear when doing Get. caller may forget to call Clear, and reused bfr may have leftover bytes. unit tests will not catch, and difficult to spot in app
 		return rv;
 	}
 	public void Rls_safe(int idx) {synchronized (thread_lock) {Rls_safe(idx);}}

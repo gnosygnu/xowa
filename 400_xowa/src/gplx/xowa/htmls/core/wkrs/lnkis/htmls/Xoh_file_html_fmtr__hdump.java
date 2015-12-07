@@ -20,11 +20,12 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
-	@Override public void Html_full_img(Bry_bfr bfr, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
+	@Override public void Html_full_img(Bry_bfr bfr, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
 		tmp_bfr.Add_str_a7(" data-xoimg=\"");
-		tmp_bfr.Add_int_digits(1, xfer_itm.Lnki_type()).Add_byte_pipe();
+		tmp_bfr.Add_int_digits(1, Xop_lnki_type.To_tid(xfer_itm.Lnki_type())).Add_byte_pipe();
 		tmp_bfr.Add_int_variable(xfer_itm.Lnki_w()).Add_byte_pipe();
 		tmp_bfr.Add_int_variable(xfer_itm.Lnki_h()).Add_byte_pipe();
 		tmp_bfr.Add_double(xfer_itm.Lnki_upright()).Add_byte_pipe();
@@ -34,7 +35,7 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 //			, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title
 //			, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, img_src, img_w, img_h), Xoh_img_cls_.To_html(img_cls, img_cls_other));
 		fmtr__img__full.Bld_bfr_many(bfr
-		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, Xoa_ttl.Replace_spaces(a_xowa_title)
+		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, a_xowa_title
 		, img_alt, tmp_bfr.To_bry_and_clear(), arg_img_core.Init(uid, Bry_.Empty, 0, 0), Xoh_img_cls_.To_html(img_cls, img_cls_other));
 	}
 	private Bry_fmtr fmtr__img__full = Bry_fmtr.new_

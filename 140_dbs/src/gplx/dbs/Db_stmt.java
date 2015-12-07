@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.*; import gplx.core.stores.*;
-public interface Db_stmt extends RlsAble {
+public interface Db_stmt extends Rls_able {
 	Db_stmt Crt_bool_as_byte(String k, boolean v);
 	Db_stmt Val_bool_as_byte(String k, boolean v);
 	Db_stmt Val_bool_as_byte(boolean v);

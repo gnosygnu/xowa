@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.core.bits.*;
 import gplx.xowa.parsers.vnts.*;
 public class Xol_vnt_regy {
 	private final Hash_adp_bry hash = Hash_adp_bry.ci_a7(); private int hash_len;

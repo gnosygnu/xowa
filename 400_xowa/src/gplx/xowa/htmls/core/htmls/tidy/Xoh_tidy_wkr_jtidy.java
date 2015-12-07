@@ -29,6 +29,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 	public void tidy_init() {
 		long bgn = Env_.TickCount();
 		wtr = new ByteArrayOutputStream();
+		System.setProperty("line.separator", "\n");
 		tidy = new Tidy(); // obtain a new Tidy instance
 		tidy.setInputEncoding("UTF-8");			// -utf8
 		tidy.setOutputEncoding("UTF-8");		// -utf8
@@ -55,6 +56,10 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 	public void Init_by_app(Xoae_app app) {
 		this.app = app;
 	}
+	public void Indent_(boolean v) {
+				if (tidy == null) tidy_init();			// lazy create to skip tests
+		tidy.setIndentContent(v);
+			}
 	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 //		int bfr_len = bfr.Len();

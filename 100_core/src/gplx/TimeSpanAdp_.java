@@ -151,10 +151,11 @@ public class TimeSpanAdp_ {
 												   3600000,	//3,600,000 fracs in an hour (60 minutes * 60,000)
 	};
 	public static final String MajorDelimiter = ":";
-	@gplx.Internal protected static final int Idx_Frac = 0;
-	@gplx.Internal protected static final int Idx_Sec = 1;
-	@gplx.Internal protected static final int Idx_Min = 2;
-	@gplx.Internal protected static final int Idx_Hour = 3;
+	public static final int 
+	  Idx_Frac = 0
+	, Idx_Sec = 1
+	, Idx_Min = 2
+	, Idx_Hour = 3;
 	static int[] ZeroPadding	= {3, 2, 2, 2,};
 	static String[] Sprs	= {".", MajorDelimiter, MajorDelimiter, "",};
 	public static TimeSpanAdp cast(Object arg) {try {return (TimeSpanAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TimeSpanAdp.class, arg);}}

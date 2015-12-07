@@ -55,6 +55,7 @@ public class Xoh_page implements Xoa_page {
 	}
 	public Xoh_page Ctor_by_page(Bry_bfr tmp_bfr, Xoae_page page) {
 		this.page_id = page.Revision_data().Id();
+		this.wiki = page.Wiki();
 		this.body = page.Hdump_data().Body();
 		this.page_url = page.Url();
 		Xopg_html_data html_data = page.Html_data();

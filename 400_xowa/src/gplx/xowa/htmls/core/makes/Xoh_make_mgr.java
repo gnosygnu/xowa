@@ -23,7 +23,7 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xow
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_make_mgr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
+	private final Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(255); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private Xoh_cfg_file cfg_file; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
 	private final byte[] root_dir, file_dir; private byte[] file_dir_comm, file_dir_wiki, hiero_img_dir; private final byte[] wiki_domain;
 	private final Bry_rdr parser = new Bry_rdr();

@@ -25,13 +25,7 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 		this.url_fmt = url_fmt; this.lang_id = lang_id;
 		this.url_fmtr = Bry_.Len_eq_0(url_fmt) ? null : Bry_fmtr.new_(url_fmt, "0");
 		this.domain_tid = domain_tid; this.domain_bry = domain_bry; this.domain_name = domain_name; this.abrv_wm = abrv_wm;
-		int key_bry_len = key_bry.length;
-		this.show_in_sitelangs_base
-			=	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
-			&&	domain_tid != Xow_domain_tid_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
-			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
-			&&	Bry_.Match(domain_bry, 0, key_bry_len, key_bry) && key_bry_len + 1 < domain_bry.length && domain_bry[key_bry_len] == Byte_ascii.Dot	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
-			;
+		this.show_in_sitelangs_base = Calc_show_in_sitelangs(key_bry, url_fmt, lang_id, domain_tid, domain_bry);
 	}
 	public byte[]	Key_bry() {return key_bry;} private final byte[] key_bry;				// EX: commons
 	public String	Key_str() {return key_str;} private final String key_str;
@@ -52,4 +46,15 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public static Xow_xwiki_itm new_(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] abrv_wm) {
 		return new Xow_xwiki_itm(key_bry, url_fmt, lang_id, domain_tid, domain_bry, domain_bry, abrv_wm);
 	}
+	private static boolean Calc_show_in_sitelangs(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry) {
+		key_bry = Xow_domain_itm_.Alt_domain__get_subdomain_by_lang(key_bry);	// handle "nb" as alias for "no.wikipedia.org"; PAGE: nn.w:; DATE:2015-12-04
+		int key_len = key_bry.length;
+		boolean key_matches_domain_bgn = Bry_.Match(domain_bry, 0, key_len, key_bry) && key_len + 1 < domain_bry.length && domain_bry[key_len] == Byte_ascii.Dot;	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
+		return	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
+			&&	domain_tid != Xow_domain_tid_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
+			&&	key_matches_domain_bgn
+			;
+	}
+	
 }

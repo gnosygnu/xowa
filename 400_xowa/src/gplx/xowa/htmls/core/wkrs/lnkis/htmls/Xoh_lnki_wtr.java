@@ -41,6 +41,7 @@ public class Xoh_lnki_wtr {
 		redlinks_mgr = page.Redlink_lnki_list();		// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
 		file_wtr.Init_by_page(hctx, page);
 		this.history_mgr = app.Usere().History_mgr();
+		if (hctx.Mode_is_hdump()) cfg.Lnki__id_(false);
 	}
 	public void Write(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
@@ -63,7 +64,7 @@ public class Xoh_lnki_wtr {
 		redlinks_mgr.Lnki_add(lnki);
 		boolean stage_is_alt = hctx.Mode_is_alt();
 		switch (lnki.Ns_id()) {
-			case Xow_ns_.Tid__media:		if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
+			case Xow_ns_.Tid__media:	if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
 			case Xow_ns_.Tid__file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
 			case Xow_ns_.Tid__category:	if (!literal_link) {page.Html_data().Ctgs_add(lnki.Ttl()); return;} break;
 		}
@@ -100,7 +101,7 @@ public class Xoh_lnki_wtr {
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
 			bfr.Add(Xoh_consts.A_bgn);								// '<a href="'
-			app.Html__href_wtr().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
+			app.Html__href_wtr().Build_to_bfr(bfr, app, hctx.Mode(), wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
@@ -108,9 +109,12 @@ public class Xoh_lnki_wtr {
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
 			if (cfg.Lnki__title()) {
-				bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
-				byte[] lnki_title_bry = lnki_ttl.Full_txt();		// 'Abcd'		NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
-				Html_utl.Escape_html_to_bfr(bfr, lnki_title_bry, 0, lnki_title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+				byte[] title_bry = lnki_ttl.Full_txt();		// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
+				int title_len = title_bry.length;
+				if (title_len > 0) {
+					bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
+					Html_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+				}
 			}
 			if (!hctx.Mode_is_hdump()) {							// don't write visited for hdump
 				if (cfg.Lnki__visited()

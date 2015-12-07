@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.interfaces.*;
 public class GfuiCmdForm implements GfoInvkAble, InjectAble {
 	public void Inject(Object ownerObj) {
 		GfuiElem owner = (GfuiElem)ownerObj;

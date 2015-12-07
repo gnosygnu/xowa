@@ -74,13 +74,21 @@ public class Xow_domain_itm_ {
 	}
 	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_tid_.Int__other, Xol_lang_stub_.Key__unknown);}
 	private static byte[] Get_lang_code_for_mw_messages_file(byte[] v) {
-		Object o = lang_to_gfs_hash.Get_by_bry(v);
+		Object o = alt_domain__lang_by_subdomain.Get_by_bry(v);
 		return o == null ? v : (byte[])o;
 	}
-	private static final Hash_adp_bry lang_to_gfs_hash = Hash_adp_bry.ci_a7()	// ASCII:lang_code
+	public static byte[] Alt_domain__get_subdomain_by_lang(byte[] lang) {
+		Object o = alt_domain__subdomain_by_lang.Get_by_bry(lang);
+		return o == null ? lang : (byte[])o;
+	}
+	private static final Hash_adp_bry alt_domain__lang_by_subdomain = Hash_adp_bry.ci_a7()	// ASCII:lang_code
 	.Add_str_obj("simple"			, Bry_.new_a7("en"))
 	.Add_str_obj("zh-classical"		, Bry_.new_a7("lzh"))
 	.Add_str_obj("no"				, Bry_.new_a7("nb"))
+	;
+	private static final Hash_adp_bry alt_domain__subdomain_by_lang = Hash_adp_bry.ci_a7()	// ASCII:lang_code
+	.Add_str_obj("lzh"				, Bry_.new_a7("zh-classical"))
+	.Add_str_obj("nb"				, Bry_.new_a7("no"))
 	;
 	public static final String
 	  Str__enwiki								= "en.wikipedia.org"

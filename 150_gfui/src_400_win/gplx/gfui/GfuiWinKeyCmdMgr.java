@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.lists.*; /*Hash_adp_list*/
+import gplx.core.lists.*; import gplx.core.bits.*;
 class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 	private Hash_adp_list listHash = Hash_adp_list.new_();
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} private GfoEvMgr evMgr;

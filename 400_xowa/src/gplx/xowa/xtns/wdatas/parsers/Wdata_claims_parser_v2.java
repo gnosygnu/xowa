@@ -28,6 +28,9 @@ class Wdata_claims_parser_v2 {
 			Wdata_claim_itm_base itm = Parse_claim_itm(qid, claim_itm_nde, pid);
 			if (itm != null)	// HACK: itm can be null if value is "somevalue"; DATE:2014-09-20
 				claim_itms_list.Add(itm);
+			else {
+                    Tfds.Write();
+			}
 		}
 	}
 	private Wdata_claim_itm_core Parse_claim_itm(byte[] qid, Json_nde nde, int pid) {

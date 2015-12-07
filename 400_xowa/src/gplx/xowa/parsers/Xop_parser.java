@@ -70,7 +70,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
 	}	private Xot_compile_data tmpl_props = new Xot_compile_data();
 	public void Parse_page_all_clear(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
-		ctx.Cur_page().Clear(); ctx.App().Msg_log().Clear();
+		ctx.Cur_page().Clear_all(); ctx.App().Msg_log().Clear();
 		Parse_text_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);
 	}
 	public Xop_root_tkn Parse_text_to_wdom_old_ctx(Xop_ctx old_ctx, byte[] src, boolean doc_bgn_pos) {return Parse_text_to_wdom(Xop_ctx.new_sub_(old_ctx.Wiki()), src, doc_bgn_pos);}

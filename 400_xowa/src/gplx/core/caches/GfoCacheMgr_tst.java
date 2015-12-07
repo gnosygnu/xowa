@@ -59,7 +59,7 @@ class GfoCacheMgr_fxt {
 		return this;
 	}
 }
-class GfoCacheItm_mock implements RlsAble {
+class GfoCacheItm_mock implements Rls_able {
 	public void Rls() {}
 	public String S() {return s;} private String s;
 	public GfoCacheItm_mock(String s) {this.s = s;}

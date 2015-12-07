@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.core.bits.*;
 public class Xof_patch_upright_tid_ {
 	public static final int Tid_unpatched = 0, Tid_use_thumb_w = 1, Tid_fix_default = 2;
 	public static final int Tid_all = Tid_use_thumb_w | Tid_fix_default;

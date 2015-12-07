@@ -36,27 +36,32 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	@gplx.Internal protected Imap_err[] Errs() {return errs;} private Imap_err[] errs;
 	private byte img_cls_tid;
 	private byte[] a_href, img_alt, img_cls_other;
-	public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid
+	public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 		, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 		) {
 		xfer_itm.Html_img_wkr_(this);
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_imap);
 		this.a_href = a_href; this.img_alt = img_alt; this.img_cls_tid = img_cls; this.img_cls_other = img_cls_other;
-		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h());
+		Write_imap_div(tmp_bfr, page.Wikie(), hctx, src, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h());
 		if (hctx.Mode_is_hdump())
 			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__img(), xfer_itm, Xohd_img_itm__gallery_itm.Tid_basic);
 	}
 	public void Html_update(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
-		Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h);
+		Write_imap_div(tmp_bfr, (Xowe_wiki)page.Wiki(), Xoh_wtr_ctx.Basic, Bry_.Empty, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h);
 		js_wkr.Html_elem_replace_html("imap_div_" + Int_.To_str(html_uid), tmp_bfr.To_str_and_rls());
 	}
-	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h) {
+	private void Write_imap_div(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, byte[] src, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h) {
 		byte[] desc_style = Calc_desc_style(html_w, html_h);
+//			int shapes_len = shapes.length;
+//			for (int i = 0; i < shapes_len; ++i) {
+//				Imap_itm_shape shape = shapes[i];
+//				Imap_link_owner_.Write(shape, wiki.Appe(), wiki, hctx, src);
+//			}
 		map_fmtr_arg.Init(id, shapes, Calc_scale(orig_w, orig_h, html_w, html_h));
-		img_fmtr_arg.Init(hctx, xtn_mgr, this, html_uid, img_alt, html_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href);
+		img_fmtr_arg.Init(hctx, xtn_mgr, this, src, html_uid, img_alt, html_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href);
 		Imap_html_fmtrs.All.Bld_bfr_many(bfr, html_uid, desc_style, map_fmtr_arg, img_fmtr_arg);
 	}
 	private byte[] Calc_desc_style(int html_w, int html_h) {

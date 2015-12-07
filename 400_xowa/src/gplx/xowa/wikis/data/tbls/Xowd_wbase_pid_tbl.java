@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.xowa.xtns.wdatas.*;
-public class Xowd_wbase_pid_tbl implements RlsAble {
+public class Xowd_wbase_pid_tbl implements Rls_able {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_src_lang, fld_src_ttl, fld_trg_ttl;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;

@@ -20,20 +20,20 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xohp_ctg_grp_mgr {
 	final Bry_fmtr grp_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(	"<div id=\"catlinks\" class=\"catlinks\">"
-	,	"  <div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
-	,	"    ~{grp_lbl}"
-	,	"    <ul>~{grp_itms}"
-	,	"    </ul>"
-	,	"  </div>"
-	,	"</div>"
+	( "<div id=\"catlinks\" class=\"catlinks\">"
+	,   "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
+	,     "~{grp_lbl}"
+	,     "<ul>~{grp_itms}"
+	,     "</ul>"
+	,   "</div>"
+	, "</div>"
 	),	"grp_lbl", "grp_itms")
 	;
 	final Bry_fmtr itm_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(	""
-	,	"      <li>"
-	,	"        <a href=\"~{itm_href}\" class=\"internal\" title=\"~{itm_title}\">~{itm_text}</a>"	
-	,	"      </li>"
+	( ""
+	,       "<li>"
+	,         "<a href=\"~{itm_href}\" class=\"internal\" title=\"~{itm_title}\">~{itm_text}</a>"	
+	,       "</li>"
 	), 	"itm_href", "itm_title", "itm_text"
 	);
 	Xoh_ctg_itm_fmtr itm_mgr = new Xoh_ctg_itm_fmtr();

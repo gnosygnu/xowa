@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.core.stores.*;
 import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*; import gplx.core.gfo_ndes.*;
-public class Db_conn_fxt implements RlsAble {
+public class Db_conn_fxt implements Rls_able {
 	public Db_conn Conn() {return conn;} public Db_conn_fxt Conn_(Db_conn v) {conn = v; return this;} Db_conn conn;
 	public void DmlAffectedAvailable_(boolean v) {dmlAffectedAvailable = v;} private boolean dmlAffectedAvailable = true;
 	public void ini_DeleteAll(String tbl) {conn.Exec_qry(Db_qry_.delete_tbl_(tbl));}

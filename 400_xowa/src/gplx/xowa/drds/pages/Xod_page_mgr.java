@@ -21,15 +21,17 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
 public class Xod_page_mgr {
 	public Xod_page_itm Get_page(Xow_wiki wiki, String page_ttl) {
 		Xod_page_itm rv = new Xod_page_itm();
+
 		// load meta info like page_id, modified, etc
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page_ttl));
 		Xowd_page_itm dbpg = new Xowd_page_itm();
 		wiki.Data__core_mgr().Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());
-		rv.Init(ttl, dbpg);
+		rv.Init_by_dbpg(ttl, dbpg);
 
 		// load page data
 		Xoh_page hpg = new Xoh_page();
 		hpg.Init(wiki, Xoa_url.new_(wiki.Domain_bry(), ttl.Page_db()), ttl, 1);
+		rv.Init_by_hpg(hpg);
 		wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
 		Load_sections(rv, hpg);
 		return rv;

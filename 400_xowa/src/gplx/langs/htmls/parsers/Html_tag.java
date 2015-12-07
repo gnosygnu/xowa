@@ -39,7 +39,7 @@ public class Html_tag implements Mwh_atr_wkr {
 			||	(name_id != Html_tag_.Id__eos && Int_.In(chk, Html_tag_.Id__any, Html_tag_.Id__comment))) {
 		}
 		else
-			tag_rdr.Rdr().Fail("name_id chk failed", "expecting", Html_tag_.To_str(chk));
+			tag_rdr.Err_wkr().Fail("name_id chk failed", "expecting", Html_tag_.To_str(chk));
 		return this;
 	}
 	public byte[] Src() {return src;} private byte[] src;
@@ -48,6 +48,7 @@ public class Html_tag implements Mwh_atr_wkr {
 	public boolean Src_exists() {return src_end > src_bgn;}	// NOTE: only true if EOS where src_end == src_bgn == src_len
 	public boolean Tag_is_tail() {return tag_is_tail;} private boolean tag_is_tail;
 	public boolean Tag_is_inline() {return tag_is_inline;} private boolean tag_is_inline;
+	public int Atrs__len() {if (atrs_null) Atrs__make(); return atrs_hash.Count();}
 	public boolean Atrs__match_pair(byte[] key, byte[] val) {
 		if (atrs_null) Atrs__make();
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(key);
@@ -61,8 +62,8 @@ public class Html_tag implements Mwh_atr_wkr {
 	}
 	public byte Atrs__cls_find_or_fail(Hash_adp_bry hash) {
 		if (atrs_null) Atrs__make();
-		Html_atr cls_atr = (Html_atr)atrs_hash.Get_by(Html_atr_.Bry__class); if (cls_atr == null) tag_rdr.Rdr().Fail("cls missing", String_.Empty, String_.Empty);
-		byte rv = Html_atr_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) tag_rdr.Rdr().Fail("cls val missing", String_.Empty, String_.Empty);
+		Html_atr cls_atr = (Html_atr)atrs_hash.Get_by(Html_atr_.Bry__class); if (cls_atr == null) tag_rdr.Err_wkr().Fail("cls missing");
+		byte rv = Html_atr_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) tag_rdr.Err_wkr().Fail("cls val missing");
 		return rv;
 	}
 	private static final Html_atr_style_wkr__get_val_as_int style_wkr = new Html_atr_style_wkr__get_val_as_int();
@@ -78,7 +79,7 @@ public class Html_tag implements Mwh_atr_wkr {
 		return rv == null ? Bry_.Empty : rv.Val();
 	}		
 	public int Atrs__get_as_int(byte[] key) {
-		int rv = Atrs__get_as_int_or(key, Int_.Min_value); if (rv == Int_.Min_value) tag_rdr.Rdr().Fail("atr missing", "key", key);
+		int rv = Atrs__get_as_int_or(key, Int_.Min_value); if (rv == Int_.Min_value) tag_rdr.Err_wkr().Fail("atr missing", "key", key);
 		return rv;
 	}
 	public int Atrs__get_as_int_or(byte[] key, int or) {
@@ -86,13 +87,14 @@ public class Html_tag implements Mwh_atr_wkr {
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(key); if (rv == null) return or;
 		return Bry_.To_int_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
-	public Html_atr Atrs__get_by_or_fail(byte[] key)			{return Atrs__get_by_or_fail(key, Bool_.Y);}
+	public Html_atr Atrs__get_at(int i) {return (Html_atr)atrs_hash.Get_at(i);}
+	public Html_atr Atrs__get_by_or_fail(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.Y);}
 	public Html_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.N);}
 	public Html_atr Atrs__get_by_or_fail(byte[] key, boolean fail_if_null) {
 		if (atrs_null) Atrs__make();
 		Html_atr rv = (Html_atr)atrs_hash.Get_by(key);
 		if (rv == null) {
-			if (fail_if_null) tag_rdr.Rdr().Fail("atr missing", "key", key);
+			if (fail_if_null) tag_rdr.Err_wkr().Fail("atr missing", "key", key);
 			else return Html_atr.Noop;
 		}
 		return rv;

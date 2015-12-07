@@ -23,16 +23,19 @@ public class Xoh_thm_magnify_parser {
 	public int Rng_end() {return rng_end;} private int rng_end;
 	public boolean Exists() {return exists;} private boolean exists;
 	public Html_tag Magnify_tail_div() {return magnify_tail_div;} private Html_tag magnify_tail_div;
-	public int Parse(Xoh_hdoc_wkr hdoc_wkr, Html_tag_rdr tag_rdr, byte[] src, Html_tag div_caption) {
+	public boolean Parse(Xoh_hdoc_wkr hdoc_wkr, Html_tag_rdr tag_rdr, byte[] src, Html_tag div_caption) {
 		// rdr.Init_by_sub(tag_rdr.Rdr(), "thm.magnify", div_caption.Src_bgn(), div_caption.Src_end());
 		this.rng_bgn = div_caption.Src_bgn(); this.rng_end = div_caption.Src_end();
-		Html_tag div_magnify = tag_rdr.Tag__move_fwd_head().Chk_id(Html_tag_.Id__div);	// <div class="magnify">
+		Html_tag div_magnify = tag_rdr.Tag__move_fwd_head();
+		if (div_magnify.Name_id() != Html_tag_.Id__div) return false;	// NOTE: some thumbs can be artificially constructed and not have magnify div; PAGE:s.w:Asthma; DATE:2015-11-29
+		if (!div_magnify.Atrs__cls_has(Cls__magnify)) return false;
 		this.exists = div_magnify.Src_exists();
 		if (exists) {
 			magnify_tail_div = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__div);
 			this.rng_end = magnify_tail_div.Src_end();
 			tag_rdr.Pos_(rng_end);
 		}
-		return rng_end;
+		return true;
 	}
+	private static final byte[] Cls__magnify = Bry_.new_a7("magnify");
 }

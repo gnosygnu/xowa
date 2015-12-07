@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
-public class Fsd_thm_tbl implements RlsAble {
+public class Fsd_thm_tbl implements Rls_able {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
 	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;

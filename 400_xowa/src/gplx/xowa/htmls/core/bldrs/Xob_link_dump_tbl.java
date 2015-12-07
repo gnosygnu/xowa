@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*;
-class Xob_link_dump_tbl implements RlsAble {
+class Xob_link_dump_tbl implements Rls_able {
 	public static final String Tbl_name = "link_dump"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	public static final String
 	  Fld_uid				= flds.Add_int_pkey_autonum("uid")

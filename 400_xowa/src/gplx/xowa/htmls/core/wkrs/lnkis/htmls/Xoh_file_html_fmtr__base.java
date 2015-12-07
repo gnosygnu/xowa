@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
+import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;	
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
@@ -33,7 +34,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	, "</a>"
 	), "a_href", "a_xowa_title", "html"
 	);
-	@gplx.Virtual public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid
+	@gplx.Virtual public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 	, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 	, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 	) {
@@ -46,21 +47,27 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	+ "<img id=\"xowa_file_img_~{uid}\" alt=\"~{img_alt}\"~{img_core}~{img_class} /></a>"
 	, "uid", "a_href", "a_class", "a_rel", "a_title", "a_xowa_title", "img_core", "img_alt", "img_class"
 	);
-
-	@gplx.Virtual public void Html_thumb_core(Bry_bfr tmp_bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
+	@gplx.Virtual public void Html_thumb_core(Bry_bfr tmp_bfr, boolean mode_is_hdump, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
 		scratch_bfr.Add(Bry_style_bgn);
 		scratch_bfr.Add_int_variable(div2_width);
 		scratch_bfr.Add(Bry_style_end);
-		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, scratch_bfr.To_bry_and_clear(), div2_content);
-	}	private static final byte[] Bry_style_bgn = Bry_.new_a7("style=\"width:"), Bry_style_end = Bry_.new_a7("px;\"");
+		thumb_div_id_atr.Bfr_arg__clear();
+		if (!mode_is_hdump)
+			thumb_div_id_atr.Set_by_arg(thum_div_id_val.Set(Bry__id, uid));
+		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, thumb_div_id_atr, div1_halign, scratch_bfr.To_bry_and_clear(), div2_content);
+	}
+	private static final byte[] Bry_style_bgn = Bry_.new_a7("style=\"width:"), Bry_style_end = Bry_.new_a7("px;\"");
+	private final Bfr_arg__html_atr thumb_div_id_atr = new Bfr_arg__html_atr(Html_atr_.Bry__id);
+	private final Bfr_arg__id thum_div_id_val = new Bfr_arg__id();
+	private final byte[] Bry__id = Bry_.new_a7("xowa_file_div_");
 	protected Bry_fmtr fmtr_thumb_core = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
 	( "<div class=\"thumb t~{div1_halign}\">"
-	, "  <div id=\"xowa_file_div_~{uid}\" class=\"thumbinner\" ~{style}>"
-	, "~{div2_content}"
+	, "  <div~{div_id} class=\"thumbinner\" ~{style}>"
+	,     "~{div2_content}"
 	, "  </div>"
 	, "</div>"
 	, ""
-	), "uid", "div1_halign", "style", "div2_content"
+	), "div_id", "div1_halign", "style", "div2_content"
 	);
 	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoae_page page, Xof_file_itm xfer_itm, Xop_lnki_tkn lnki, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		Html_thumb_part_img(tmp_bfr, page, xfer_itm, uid, a_href, lnki.Ttl().Page_txt(), xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt);
@@ -71,10 +78,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	}
 	private Bry_fmtr fmtr_thumb_part_img = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "      <div>" 
-	, "        <a href=\"~{a_href}\" class=\"image\" title=\"~{a_title}\">"
-	, "          <img id=\"xowa_file_img_~{uid}\"~{img_core} alt=\"~{img_alt}\" />"
-	, "        </a>"
+	, "      <div><a href=\"~{a_href}\" class=\"image\" title=\"~{a_title}\"><img id=\"xowa_file_img_~{uid}\"~{img_core} alt=\"~{img_alt}\" /></a>"
 	, "      </div>"
 	), "uid", "a_href", "a_title", "img_core", "img_alt");
 
@@ -146,4 +150,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	), "uid", "a_width", "a_max_width", "a_href", "a_xowa_title", "img_src");
 
 	public static final Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
+	public static byte[] Escape_xowa_title(byte[] lnki_ttl) {
+		return gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes.Encode(lnki_ttl); // must encode xowa_title, particularly quotes; EX: xowa_title="A"b.png"; PAGE:en.w:Earth DATE:2015-11-27
+	}
 }

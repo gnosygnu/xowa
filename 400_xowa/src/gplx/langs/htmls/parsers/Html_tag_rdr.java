@@ -25,19 +25,17 @@ public class Html_tag_rdr {
 	private final Int_obj_ref tmp_depth = Int_obj_ref.zero_();
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;
-	public Bry_rdr Rdr() {return rdr;} private final Bry_rdr rdr = new Bry_rdr();		
+	public Bry_err_wkr Err_wkr() {return err_wkr;} private final Bry_err_wkr err_wkr = new Bry_err_wkr();
 	public void Init(byte[] ctx, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
 		tag__eos.Init(this, src, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Html_tag_.Id__eos);
-		rdr.Init_by_page(ctx, src, src_end);
+		err_wkr.Init_by_page(String_.new_u8(ctx), src);
 	}
 	public int Pos() {return pos;} private int pos;
 	public void Pos_(int v) {this.pos = v;}
 	public void Atrs__make(Mwh_atr_wkr atr_wkr, int head_bgn, int head_end) {atr_parser.Parse(atr_wkr, -1, -1, src, head_bgn, head_end);}
-	public void Fail(String msg, Html_tag tag) {rdr.Fail(msg, String_.Empty, String_.Empty, tag.Src_bgn(), tag.Src_end());}
 	public Html_tag Tag__move_fwd_head()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, Html_tag_.Id__any);}
 	public Html_tag Tag__move_fwd_head(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
-//		public Html_tag Tag__move_fwd_tail()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, Html_tag_.Id__any);}
 	public Html_tag Tag__move_fwd_tail(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, match_name_id);}
 	public Html_tag Tag__peek_fwd_head()					{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, Html_tag_.Id__any);}
 	public Html_tag Tag__peek_fwd_head(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
@@ -70,7 +68,7 @@ public class Html_tag_rdr {
 		}
 		if (rv == null) {
 			if (move && tail && !bwd)
-				rdr.Fail("move failed", "tag_name", Html_tag_.To_str(match_name_id));
+				err_wkr.Fail("move failed", "tag_name", Html_tag_.To_str(match_name_id));
 			else
 				return Tag__eos(rng_bgn);
 		}
@@ -181,7 +179,7 @@ public class Html_tag_rdr {
 			return false;
 	}
 	public int Read_int_to(byte to_char) {
-		int rv = Read_int_to(to_char, Int_.Max_value); if (rv == Int_.Max_value) rdr.Fail("invalid int", "pos", pos);
+		int rv = Read_int_to(to_char, Int_.Max_value); if (rv == Int_.Max_value) err_wkr.Fail("invalid int", "pos", pos);
 		return rv;
 	}
 	public int Read_int_to(byte to_char, int or_int) {

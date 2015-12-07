@@ -16,6 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-public interface Db_tbl extends RlsAble {
+public interface Db_tbl extends Rls_able {
 	void Create_tbl();
 }

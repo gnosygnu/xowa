@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.bits.*;
 public class GfuiBorderEdge {
 	public int Val() {return val;} int val;
 	public boolean Has(GfuiBorderEdge comp) {return Bitmask_.Has_int(val, comp.val);}

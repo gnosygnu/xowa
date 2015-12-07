@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsd_dir_tbl implements RlsAble {
+public class Fsd_dir_tbl implements Rls_able {
 	private final String tbl_name = "fsdb_dir"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_name;		
 	private final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name;		

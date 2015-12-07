@@ -108,7 +108,8 @@ public class Xow_hdr_mgr {
 					break;
 				case Xop_tkn_itm_.Tid_lnki:
 					Xop_lnki_tkn lnki = (Xop_lnki_tkn)sub;
-					if (lnki.Ns_id() == Xow_ns_.Tid__category) {}	// Category text should not print; DATE:2013-12-09
+					if (	lnki.Ns_id() == Xow_ns_.Tid__category	// Category text should not print; DATE:2013-12-09
+						&&	!lnki.Ttl().ForceLiteralLink()) {}		// unless it is literal link; EX: [[:Category:A]]; PAGE:s.w:Wikipedia:Requests_for_deletion/Log_1 DATE:2015-11-29
 					else {
 						if (lnki.Caption_exists())
 							Id_bld_recurse(raw_bfr, src, lnki.Caption_val_tkn());

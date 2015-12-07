@@ -20,12 +20,12 @@ import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.parsers.*;
 class Imap_img_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
-	private Xoh_wtr_ctx hctx; private Imap_map map; private Imap_xtn_mgr xtn_mgr;
+	private Xoh_wtr_ctx hctx; private Imap_map map; private Imap_xtn_mgr xtn_mgr; // private byte[] src;
 	private int img_elem_id, img_w, img_h;
 	private byte[] img_alt, img_src, img_cls, img_href;
 	private Int_2_ref margin_calc = new Int_2_ref();
-	public void Init(Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href) {
-		this.hctx = hctx; this.map = map; this.xtn_mgr = xtn_mgr;
+	public void Init(Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map, byte[] src, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href) {
+		this.hctx = hctx; this.map = map; this.xtn_mgr = xtn_mgr; // this.src = src;
 		this.img_elem_id = img_elem_id; this.img_w = img_w; this.img_h = img_h;
 		this.img_alt = img_alt;
 		this.img_src = img_src;
@@ -40,6 +40,9 @@ class Imap_img_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
 		Xoh_arg_img_core img_core_fmtr = xtn_mgr.Img_core_fmtr(hctx_is_hdump);
 		img_core_fmtr.Init(img_elem_id, img_src, img_w, img_h);			
 		if (itm_dflt != null) {
+//				Xowe_wiki wiki = map.Xtn_mgr().Wiki();
+//				if (src.length != 0)	// imap update will pass 0 src
+//					Imap_link_owner_.Write(itm_dflt, wiki.Appe(), wiki, hctx, src);
 			fmtr = itm_dflt.Link_tid() == Xop_tkn_itm_.Tid_lnki ? Imap_html_fmtrs.Img_anchor_lnki : Imap_html_fmtrs.Img_anchor_lnke;
 			anchor_href = itm_dflt.Link_href();
 			anchor_text = itm_dflt.Link_text();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.bits.*;
 public class Gfui_bnd_parser {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	private Hash_adp_bry

@@ -92,7 +92,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
 		Xoae_page page = ctx.Cur_page();
-		page.Clear();
+		page.Clear_all();
 		page.Bldr__ns_ord_(ns_ord);
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
 		page.Redlink_lnki_list().Clear();

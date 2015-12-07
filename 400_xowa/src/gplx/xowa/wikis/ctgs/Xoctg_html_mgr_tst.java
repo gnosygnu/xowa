@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xoctg_html_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_ctg_page_fxt fxt = new Xoh_ctg_page_fxt();
 	@Test   public void Page_itm() {
@@ -247,7 +247,7 @@ class Xoh_ctg_page_fxt {
 		Xoctg_fmtr_all list_mgr = ctg_html.Fmtr(tid);
 		Xoctg_fmtr_itm fmtr_itm = list_mgr.Fmtr_itm();
 		Xoctg_view_grp list = ctg.Grp_by_tid(tid);
-		fmtr_itm.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, list, list.Len());
+		fmtr_itm.Init_from_all(wiki, wiki.Lang(), Xoh_wtr_ctx.Basic, ctg, list_mgr, list, list.Len());
 		fmtr_itm.Init_from_grp(new byte[] {grp_char_0}, 0);
 		fmtr_itm.Col_idx_(0, 0);
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -257,14 +257,14 @@ class Xoh_ctg_page_fxt {
 	public void Test_html_grp(byte tid, String expd) {
 		Xoctg_fmtr_all list_mgr = ctg_html.Fmtr(tid);
 		Xoctg_fmtr_grp fmtr_grp = ctg_html.Fmtr_grp();
-		fmtr_grp.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, ctg.Grp_by_tid(tid));
+		fmtr_grp.Init_from_all(wiki, wiki.Lang(), Xoh_wtr_ctx.Basic, ctg, list_mgr, ctg.Grp_by_tid(tid));
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		fmtr_grp.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 	public void Test_html_all(byte tid, String expd) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		ctg_html.Bld_all(bfr, wiki, wiki.Lang(), ctg, tid);
+		ctg_html.Bld_all(bfr, wiki, wiki.Lang(), Xoh_wtr_ctx.Basic, ctg, tid);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 }

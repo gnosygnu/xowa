@@ -16,10 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
-import gplx.xowa.htmls.sections.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xod_page_itm {
-	public Xod_page_itm() {}
 	public int Page_id() {return page_id;} private int page_id;
 	public long Rev_id() {return rev_id;} private long rev_id;
 	public String Ttl_text() {return ttl_text;} private String ttl_text;
@@ -35,6 +34,7 @@ public class Xod_page_itm {
 	public String Head_name() {return head_ttl;} private String head_ttl;
 	public String First_allowed_editor_role() {return first_allowed_editor_role;} private String first_allowed_editor_role;
 	public List_adp Section_list() {return section_list;} private List_adp section_list = List_adp_.new_();
+	public Xoh_page Hpg() {return hpg;} private Xoh_page hpg;
 	public void Init(int page_id, int rev_id
 		, String ttl_text, String ttl_db, String redirected, String description, String modified_on
 		, boolean is_editable, boolean is_main_page, boolean is_disambiguation, int lang_count
@@ -46,8 +46,7 @@ public class Xod_page_itm {
 		this.is_editable = is_editable; this.is_main_page = is_main_page; this.is_disambiguation = is_disambiguation; this.lang_count = lang_count;
 		this.head_url = head_url; this.head_ttl= head_ttl; this.first_allowed_editor_role = first_allowed_editor_role;
 	}
-	public void Init() {}
-	public void Init(Xoa_ttl ttl, Xowd_page_itm db_page) {
+	public void Init_by_dbpg(Xoa_ttl ttl, Xowd_page_itm db_page) {
 		this.page_id = db_page.Id();
 		this.rev_id = page_id;
 		this.ttl_text = String_.new_u8(ttl.Page_txt());
@@ -62,6 +61,9 @@ public class Xod_page_itm {
 		this.head_url = null;
 		this.head_ttl = null;
 		this.first_allowed_editor_role = null;
+	}
+	public void Init_by_hpg(Xoh_page hpg) {
+		this.hpg = hpg;
 	}
 	public String To_str() {
 		Bry_bfr bfr = Bry_bfr.new_();

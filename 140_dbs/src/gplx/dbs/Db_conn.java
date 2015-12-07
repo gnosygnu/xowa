@@ -51,11 +51,11 @@ public class Db_conn {
 	public void				Ddl_delete_tbl(String tbl)											{engine.Ddl_delete_tbl(tbl);}
 	public boolean				Meta_tbl_exists(String tbl)											{return engine.Meta_tbl_exists(tbl);}
 	public boolean				Meta_fld_exists(String tbl, String fld)								{return engine.Meta_fld_exists(tbl, fld);}
-	public void				Rls_reg(RlsAble rls) {rls_list.Add(rls);}
+	public void				Rls_reg(Rls_able rls) {rls_list.Add(rls);}
 	public void				Rls_conn() {
 		int len = rls_list.Count();
 		for (int i = 0; i < len; ++i) {
-			RlsAble itm = (RlsAble)rls_list.Get_at(i);
+			Rls_able itm = (Rls_able)rls_list.Get_at(i);
 			itm.Rls();
 		}
 		engine.Conn_term();

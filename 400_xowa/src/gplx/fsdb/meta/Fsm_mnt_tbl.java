@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsm_mnt_tbl implements RlsAble {
+public class Fsm_mnt_tbl implements Rls_able {
 	private final String tbl_name = "fsdb_mnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_name, fld_url;		
 	private final Db_conn conn;

@@ -23,17 +23,17 @@ public class Xohp_ctg_grp_mgr_tst {
 	@Test   public void Basic() {
 		fxt.Init_ctgs("A", "B").Test_html(String_.Concat_lines_nl
 		(	"<div id=\"catlinks\" class=\"catlinks\">"
-		,	"  <div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
-		,	"    Categories"
-		,	"    <ul>"
-		,	"      <li>"
-		,	"        <a href=\"/wiki/Category:A\" class=\"internal\" title=\"A\">A</a>"
-		,	"      </li>"
-		,	"      <li>"
-		,	"        <a href=\"/wiki/Category:B\" class=\"internal\" title=\"B\">B</a>"
-		,	"      </li>"
-		,	"    </ul>"
-		,	"  </div>"
+		,	  "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
+		,	    "Categories"
+		,	    "<ul>"
+		,	      "<li>"
+		,	        "<a href=\"/wiki/Category:A\" class=\"internal\" title=\"A\">A</a>"
+		,	      "</li>"
+		,	      "<li>"
+		,	        "<a href=\"/wiki/Category:B\" class=\"internal\" title=\"B\">B</a>"
+		,	      "</li>"
+		,	    "</ul>"
+		,	  "</div>"
 		,	"</div>"
 		));
 	}

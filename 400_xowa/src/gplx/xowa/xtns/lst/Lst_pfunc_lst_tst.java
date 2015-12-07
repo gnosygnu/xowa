@@ -83,6 +83,43 @@ public class Lst_pfunc_lst_tst {
 		fxt.Fxt().Init_page_create("Sub_0", "<section begin=key_0 />a{{Sub_1}}<section end=key_0 />");
 		fxt.Fxt().Test_parse_page_all_str("{{#section:Sub_0|key_0}}", "ab");
 	}
+	@Test  public void Nested__ref() {				// PURPOSE: handle tags; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-02
+		fxt.Fxt().Init_page_create("Template:TagTemplate", "<ref>xyz</ref>");
+		fxt.Fxt().Init_page_create("PoemPage", "<poem>A{{TagTemplate}}B</poem>");
+		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", String_.Replace(String_.Concat_lines_nl_skip_last
+		( "<div class='poem'>"
+		, "<p>"
+		, "A<sup id='cite_ref-0' class='reference'><a href='#cite_note-0'>[1]</a></sup>B"
+		, "</p>"
+		, "</div><ol class='references'>"
+		, "<li id='cite_note-0'><span class='mw-cite-backlink'><a href='#cite_ref-0'>^</a></span> <span class='reference-text'>xyz</span></li>"
+		, "</ol>"
+		, ""
+		), "'", "\""));
+	}
+	@Test  public void Nested__ref_poem() {				// PURPOSE: handle tags; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-02
+		fxt.Fxt().Init_page_create("Template:TagTemplate", "{{#tag:ref|abc<poem>def</poem>xyz}}");
+		fxt.Fxt().Init_page_create("PoemPage", String_.Concat_lines_nl_skip_last
+		( "<poem>A{{TagTemplate}}"
+		, "    B"
+		, "</poem>"
+		));
+		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", String_.Replace(String_.Concat_lines_nl_skip_last
+		( "<div class='poem'>"
+		, "<p>"
+		, "A<sup id='cite_ref-0' class='reference'><a href='#cite_note-0'>[1]</a></sup><br/>"
+		, "&#160;&#160;&#160;&#160;B"
+		, "</p>"
+		, "</div><ol class='references'>"
+		, "<li id='cite_note-0'><span class='mw-cite-backlink'><a href='#cite_ref-0'>^</a></span> <span class='reference-text'>abc<div class='poem'>"
+		, "<p>"
+		, "def"
+		, "</p>"
+		, "</div>xyz</span></li>"
+		, "</ol>"
+		, ""
+		), "'", "\""));
+	}
 }
 class Lst_pfunc_lst_fxt {
 	public Lst_pfunc_lst_fxt Clear() {

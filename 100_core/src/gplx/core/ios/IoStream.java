@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-public interface IoStream extends RlsAble {
+public interface IoStream extends Rls_able {
 	Object UnderRdr();
 	Io_url Url();
 	long Pos();

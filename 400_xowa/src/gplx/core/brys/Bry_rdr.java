@@ -19,18 +19,20 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import gplx.core.errs.*;
 public class Bry_rdr {
 	private final gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.neg1_();
-	private String ctx; private String wkr; private int err_bgn;		
 	public byte[] Src() {return src;} private byte[] src;
 	public int Pos() {return pos;} private int pos;
 	public int Src_end() {return src_end;} private int src_end; 
 	public Bry_rdr Dflt_dlm_(byte b) {this.dflt_dlm = b; return this;} private byte dflt_dlm;
-	public Bry_rdr Fail_throws_err_(boolean v) {this.fail_throws_err = v; return this;} private boolean fail_throws_err = true;
-	public Bry_rdr Init_by_page(byte[] ctx, byte[] src, int src_len)			{this.ctx = Quote(String_.new_u8(ctx)); this.src = src; this.src_end = src_len; this.pos = 0; return this;}
-	public Bry_rdr Init_by_hook(String wkr, int err_bgn, int pos)				{this.wkr = Quote(wkr); this.err_bgn = err_bgn; this.pos = pos; return this;}
-	public Bry_rdr Init_by_sub(Bry_rdr rdr, String wkr, int pos, int src_end)   {
-		this.src = rdr.src; this.ctx = rdr.ctx; this.wkr = Quote(wkr); this.err_bgn = pos; this.pos = pos; this.src_end = src_end;
+	public Bry_rdr Fail_throws_err_(boolean v) {err_wkr.Fail_throws_err_(v); return this;}
+	public Bry_rdr Init_by_page(byte[] page, byte[] src, int src_len)			{err_wkr.Init_by_page(String_.new_u8(page), src);	this.pos = 0; this.src = src; this.src_end = src_len; return this;}
+	public Bry_rdr Init_by_sect(String sect, int sect_bgn, int pos)				{err_wkr.Init_by_sect(sect, sect_bgn);				this.pos = pos; return this;}
+	public Bry_rdr Init_by_wkr (Bry_err_wkr wkr, String sect, int pos, int src_end)   {
+		this.pos = pos; this.src = wkr.Src(); this.src_end = src_end;
+		err_wkr.Init_by_page(wkr.Page(), src); 
+		err_wkr.Init_by_sect(sect, pos); 
 		return this;
 	}
+	public Bry_err_wkr Err_wkr()		{return err_wkr;} private Bry_err_wkr err_wkr = new Bry_err_wkr();
 	public int Move_to(int v)			{this.pos = v; return pos;}
 	public int Move_by_one()			{return Move_by(1);}
 	public int Move_by(int v)			{this.pos += v; return pos;}
@@ -41,12 +43,12 @@ public class Bry_rdr {
 	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N);}
 	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N);}
 	private int Find_fwd(byte find, boolean ret_lhs, boolean pos_lhs) {
-		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {Fail("find failed", "find", Byte_ascii.To_str(find)); return Bry_find_.Not_found;}
+		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {err_wkr.Fail("find failed", "find", Byte_ascii.To_str(find)); return Bry_find_.Not_found;}
 		pos = find_pos + (pos_lhs ? 0 : 1);
 		return ret_lhs ? find_pos : pos;
 	}
 	private int Find_fwd(byte[] find, boolean ret_lhs, boolean pos_lhs) {
-		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {Fail("find failed", "find", String_.new_u8(find)); return Bry_find_.Not_found;}
+		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {err_wkr.Fail("find failed", "find", String_.new_u8(find)); return Bry_find_.Not_found;}
 		pos = find_pos + (pos_lhs ? 0 : find.length);
 		return ret_lhs ? find_pos : pos;
 	}
@@ -60,7 +62,7 @@ public class Bry_rdr {
 		byte rv = src[pos];
 		++pos;
 		if (pos < src_end) {
-			if (src[pos] != to_char) {Fail("read byte to failed", "to", Byte_ascii.To_str(to_char)); return Byte_.Max_value_127;}
+			if (src[pos] != to_char) {err_wkr.Fail("read byte to failed", "to", Byte_ascii.To_str(to_char)); return Byte_.Max_value_127;}
 			++pos;
 		}
 		return rv;
@@ -84,7 +86,7 @@ public class Bry_rdr {
 					break;
 				case Byte_ascii.Dash:
 					if (negative == -1) {	// 2nd negative
-						Fail("invalid int", "mid", String_.new_u8(src, bgn, pos));
+						err_wkr.Fail("invalid int", "mid", String_.new_u8(src, bgn, pos));
 						return Int_.Min_value;
 					}
 					else					// 1st negative
@@ -97,14 +99,14 @@ public class Bry_rdr {
 						match = true;
 					}
 					if (!match) {
-						Fail("invalid int", "mid", String_.new_u8(src, bgn, pos));
+						err_wkr.Fail("invalid int", "mid", String_.new_u8(src, bgn, pos));
 						return Int_.Min_value;
 					}
 					return rv * negative;
 				}
 			}
 		}
-		if (bgn == pos) {Fail("int is empty", String_.Empty, String_.Empty); return Int_.Min_value;}
+		if (bgn == pos) {err_wkr.Fail("int is empty"); return Int_.Min_value;}
 		return rv * negative;
 	}
 	public byte Read_byte_as_a7_int() {
@@ -135,13 +137,13 @@ public class Bry_rdr {
 		return rv;
 	}
 	public int Chk(byte find) {
-		if (src[pos] != find) {Fail("failed check", "chk", Byte_.To_str(find)); return Bry_find_.Not_found;}
+		if (src[pos] != find) {err_wkr.Fail("failed check", "chk", Byte_.To_str(find)); return Bry_find_.Not_found;}
 		++pos;
 		return pos;
 	}
 	public int Chk(byte[] find) {
 		int find_end = pos + find.length;
-		if (!Bry_.Match(src, pos, find_end, find)) {Fail("failed check", "chk", String_.new_u8(find)); return Bry_find_.Not_found;}
+		if (!Bry_.Match(src, pos, find_end, find)) {err_wkr.Fail("failed check", "chk", String_.new_u8(find)); return Bry_find_.Not_found;}
 		pos = find_end;
 		return pos;
 	}
@@ -149,7 +151,7 @@ public class Bry_rdr {
 	public byte Chk_or(gplx.core.btries.Btrie_slim_mgr trie, byte or)	{return Chk_or(trie, pos, src_end, or);}
 	public byte Chk(gplx.core.btries.Btrie_slim_mgr trie, int itm_bgn, int itm_end) {
 		byte rv = Chk_or(trie, itm_bgn, itm_end, Byte_.Max_value_127);
-		if (rv == Byte_.Max_value_127) {Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16))); return Byte_.Max_value_127;}
+		if (rv == Byte_.Max_value_127) {err_wkr.Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16))); return Byte_.Max_value_127;}
 		return rv;
 	}
 	public byte Chk_or(gplx.core.btries.Btrie_slim_mgr trie, int itm_bgn, int itm_end, byte or) {
@@ -158,20 +160,4 @@ public class Bry_rdr {
 		pos = trie.Match_pos();
 		return ((gplx.core.primitives.Byte_obj_val)rv_obj).Val();
 	}
-	public int Fail(String msg, String arg_key, Object arg_val) {return Fail(msg, arg_key, arg_val, err_bgn, err_bgn + 255);}
-	public int Fail(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {
-		arg_val = Quote(Object_.Xto_str_strict_or_null_mark(arg_val));
-		String err_msg = Msg_make(msg, arg_key, arg_val, excerpt_bgn, excerpt_end);
-		Gfo_usr_dlg_.Instance.Warn_many("", "", err_msg);
-		if (fail_throws_err) throw Err_.new_("Bry_rdr", err_msg).Logged_y_();
-		return Bry_find_.Not_found;
-	}
-	public Err Err_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {return Err_.new_("Bry_rdr", Msg_make(msg, arg_key, arg_val, excerpt_bgn, excerpt_end));}
-	private String Msg_make(String msg, String arg_key, Object arg_val, int excerpt_bgn, int excerpt_end) {
-		if (String_.EqEmpty(arg_key))
-			return Err_msg.To_str(msg, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Escape_ws(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)));
-		else
-			return Err_msg.To_str(msg, arg_key, arg_val, "ctx", ctx, "wkr", wkr, "excerpt", Bry_.Escape_ws(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end)));
-	}
-	private static String Quote(String v) {return "'" + v + "'";}
 }

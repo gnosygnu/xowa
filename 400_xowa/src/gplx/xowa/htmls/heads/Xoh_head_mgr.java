@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.core.bits.*;
 public class Xoh_head_mgr extends gplx.core.brys.Bfr_arg_base {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; 
 	private Xoh_head_itm__base[] itms; private int itms_len;

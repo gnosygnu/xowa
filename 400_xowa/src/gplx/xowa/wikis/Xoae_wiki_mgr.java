@@ -72,7 +72,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		for (int i = 0; i < list_len; i++) {
 			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
 //				wiki.Defn_cache().ReduceCache();
-			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear();	// NOTE: clear_ctx will reset toc and refs
+			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear_all();	// NOTE: clear_ctx will reset toc and refs
 			wiki.Cache_mgr().Page_cache().Free_mem_all();
 			wiki.Cache_mgr().Tmpl_result_cache().Clear();
 		}
@@ -103,7 +103,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 			lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
 			Xol_lang_itm_.Lang_init(lang);
 		}
-		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());
+		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr()); //app.Meta_mgr().Ns__get_or_load(key);
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(domain_itm.Domain_str());
 		Xowe_wiki rv = new Xowe_wiki(app, lang, ns_mgr, domain_itm, wiki_dir);
 		Add(rv);

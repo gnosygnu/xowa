@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.dbs.*;
-class Cldr_lang_tbl implements RlsAble {
+class Cldr_lang_tbl implements Rls_able {
 	private final String tbl_name = "cldr_lang"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_cldr_code, fld_lang_code, fld_lang_name;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;

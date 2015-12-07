@@ -52,7 +52,7 @@ public class Xoh_file_page_wtr {
 	public Bry_fmtr	Html_main_img() {return html_main_img;} private final Bry_fmtr html_main_img = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <a href=\"~{orig_href}\" xowa_title=\"~{thumb_name}\">"
-	, "    <img id=\"xowa_file_img_~{elem_id}\" alt=\"~{thumb_ttl}\" src=\"~{thumb_href}\" width=\"~{thumb_width}\" height=\"~{thumb_height}\" />"
+	, "    <img id=\"xowa_file_img_~{elem_id}\" alt=\"~{thumb_alt}\" src=\"~{thumb_href}\" width=\"~{thumb_width}\" height=\"~{thumb_height}\" />"
 	, "  </a>"
 	, "  <div class=\"mw-filepage-resolutioninfo\">Size of this preview: "
 	, "    <a href=\"~{thumb_href}\" class=\"mw-thumbnail-link\" xowa_title=\"~{thumb_name}\">"
@@ -75,32 +75,32 @@ public class Xoh_file_page_wtr {
 	, "  </span>"
 	, "</div>"
 	, ""
-	), "orig_width", "orig_height", "orig_href", "orig_file_size", "orig_mime_type", "elem_id", "thumb_width", "thumb_height", "thumb_href", "thumb_ttl", "thumb_name", "section_alts");
+	), "orig_width", "orig_height", "orig_href", "orig_file_size", "orig_mime_type", "elem_id", "thumb_width", "thumb_height", "thumb_href", "thumb_alt", "thumb_name", "section_alts");
 	public Bry_fmtr	Html_main_aud() {return html_main_aud;} private final Bry_fmtr html_main_aud = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <div>" 
-	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{lnki_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
+	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
 	, "      <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
 	, "    </a>" 
 	, "  </div>"
 	, "</div>"
 	, ""
-	), "lnki_url", "lnki_title", "play_width", "play_max_width", "play_icon");
+	), "lnki_url", "xowa_title", "play_width", "play_max_width", "play_icon");
 	public Bry_fmtr	Html_main_vid() {return html_main_vid;} private final Bry_fmtr html_main_vid = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <div>" 
-	, "    <a href=\"~{lnki_href}\" class=\"~{lnki_class}\" title=\"~{lnki_title}\">"
+	, "    <a href=\"~{lnki_href}\" class=\"~{lnki_class}\" title=\"~{xowa_title}\">"
 	, "      <img id=\"xowa_file_img_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
 	, "    </a>"
 	, "  </div>"
 	, "  <div>" 
-	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{lnki_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
+	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
 	, "      <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
 	, "    </a>" 
 	, "  </div>"
 	, "</div>"
 	, ""
-	), "elem_id", "lnki_href", "lnki_class", "lnki_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt", "lnki_url", "play_width", "play_max_width", "play_icon");
+	), "elem_id", "lnki_href", "lnki_class", "xowa_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt", "lnki_url", "play_width", "play_max_width", "play_icon");
 	public Bry_fmtr	Html_alts() {return html_alts;} private final Bry_fmtr html_alts = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "      <a href=\"~{thumb_href}\" class=\"mw-thumbnail-link\" xowa_title=\"~{xowa_title}\">"
 	, "        ~{thumb_width} × ~{thumb_height}"

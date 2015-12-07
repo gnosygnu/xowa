@@ -245,30 +245,19 @@ class Map_math {// REF.MW:MapSources_math.php
 		else								return 4;
 	}
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	private static byte[] Parse_input_normalize(Bry_bfr bfr, byte[] input) {
-		int input_end = input.length; if (input_end == 0) return null;
-		int i = 0;
-		while (i < input_end) {
-			byte b = input[i];
-			Object o = Input_trie.Match_bgn_w_byte(b, input, i, input_end);
-			if (o == null) {
-				bfr.Add_byte(b);
-				++i;
-			}
-			else {
-				byte tid = ((Byte_obj_val)o).Val();
-				switch (tid) {
-					case Input_tid_apos:			bfr.Add_byte(Byte_ascii.Apos).Add_byte_space(); break;				// EX: "'" -> "' "
-					case Input_tid_quote:			bfr.Add_byte(Byte_ascii.Quote).Add_byte_space(); break;				// EX: '"' -> '" '
-					case Input_tid_dash:			bfr.Add_byte(Byte_ascii.Dash); break;
-					case Input_tid_space:			bfr.Add_byte_space(); break;
-					case Input_tid_degree:			bfr.Add_byte(Byte_ascii.Slash); bfr.Add_byte_space(); break;		// EX: "°" -> "° "
-					case Input_tid_compass:			bfr.Add_byte_space(); bfr.Add_byte(Byte_ascii.Case_upper(b)); break;	// NOTE: always single-char ASCII; EX: N,E,S,W,n,e,s,w
-				}
-				i = Input_trie.Match_pos();
-			}
-		}
-		return bfr.To_bry_and_clear_and_trim();
+	public static byte[] Parse_input_normalize(Bry_bfr bfr, byte[] src) {
+		/*
+		$w = str_replace( array( '‘', '’', '′' ), "'", $input );
+		$w = str_replace( array( "''", '“', '”', '″' ), '"', $w );
+		$w = str_replace( '−', '-', $w );
+		$w = strtoupper( str_replace( array( '_', '/', "\t", "\n", "\r" ), ' ', $w ) );
+		$w = str_replace( array( '°', "'", '"' ), array( '° ', "' ", '" ' ), $w );
+		$w = trim( str_replace( array( 'N', 'S', 'E', 'W' ), array( ' N', ' S', ' E', ' W' ), $w ) );
+		*/
+		int src_end = src.length; if (src_end == 0) return null;			
+		src = Trie__normalize__apos.Replace(bfr, src, 0, src_end);		// normalize apos separately, since 2 apos can go to quotes; EX: ‘’ -> "; PAGE:it.v:Morro_d'Oro DATE:2015-12-06
+		src = Trie__normalize__rest.Replace(bfr, src, 0, src.length);	// normalize rest;
+		return Bry_.Trim(src);
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
 	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
@@ -282,38 +271,20 @@ class Map_math {// REF.MW:MapSources_math.php
 	, Compass_S = new byte[] {Byte_ascii.Ltr_S}
 	, Compass_W = new byte[] {Byte_ascii.Ltr_W}
 	;
-	private static final byte Input_tid_apos = 1, Input_tid_quote = 2, Input_tid_dash = 3, Input_tid_space = 4, Input_tid_degree = 5, Input_tid_compass = 6;
 	private static final byte Input_byte_degree = Byte_ascii.Slash;	// NOTE: ugly cheat to avoid using multi-byte char; note that all "/" are swapped out to " ", so any remaining "/" was added by the normalizer; EX:  "123° 4/5" -> "123/ 4 5"
 	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
 	private static final int Input_units_len = Input_units.length;
-	private static final byte[] Input_bry_degree = Bry_.new_u8("°");
-	private static final Btrie_slim_mgr Input_trie = Btrie_slim_mgr.cs()
-	.Add_str_byte("'"					, Input_tid_apos)		// NOTE: must add ' so that "'" -> "' "
-	.Add_str_byte("‘"					, Input_tid_apos)
-	.Add_str_byte("’"					, Input_tid_apos)
-	.Add_str_byte("′"					, Input_tid_apos)
-	.Add_str_byte("\""					, Input_tid_quote)		// NOTE: must add " so that '"' -> '" '
-	.Add_str_byte("''"					, Input_tid_quote)
-	.Add_str_byte("“"					, Input_tid_quote)
-	.Add_str_byte("”"					, Input_tid_quote)
-	.Add_str_byte("″"					, Input_tid_quote)
-	.Add_str_byte("-"					, Input_tid_dash)
-	.Add_str_byte("−"					, Input_tid_dash)
-	.Add_str_byte(" "					, Input_tid_space)
-	.Add_str_byte("_"					, Input_tid_space)
-	.Add_str_byte("/"					, Input_tid_space)
-	.Add_str_byte("\t"					, Input_tid_space)
-	.Add_str_byte("\n"					, Input_tid_space)
-	.Add_str_byte("\r"					, Input_tid_space)
-	.Add_bry_byte(Input_bry_degree		, Input_tid_degree)
-	.Add_str_byte("N"					, Input_tid_compass)
-	.Add_str_byte("S"					, Input_tid_compass)
-	.Add_str_byte("E"					, Input_tid_compass)
-	.Add_str_byte("W"					, Input_tid_compass)
-	.Add_str_byte("n"					, Input_tid_compass)
-	.Add_str_byte("s"					, Input_tid_compass)
-	.Add_str_byte("e"					, Input_tid_compass)
-	.Add_str_byte("w"					, Input_tid_compass)
-	;
+	private static final Btrie_slim_mgr Trie__normalize__apos = Btrie_slim_mgr.cs()
+	.Add_replace_many	(Byte_ascii.Apos_bry	, "‘", "’", "′");
+	private static final Btrie_slim_mgr Trie__normalize__rest = Btrie_slim_mgr.cs()
+	.Add_replace_many	("' "					, "'")
+	.Add_replace_many	("\" "					, "\"", "''", "“", "”", "″")
+	.Add_replace_many	(Byte_ascii.Dash_bry	, "-", "−")							// NOTE: emdash and endash
+	.Add_replace_many	(Byte_ascii.Space_bry	, " ", "_", "/", "\t", "\n", "\r") 	// NOTE: " " = &nbsp;
+	.Add_replace_many	("/ "					, "°")
+	.Add_replace_many	(" N"					, "N", "n")
+	.Add_replace_many	(" S"					, "S", "s")
+	.Add_replace_many	(" E"					, "E", "e")
+	.Add_replace_many	(" W"					, "W", "w");
 	public static final Map_math Instance = new Map_math();
 }

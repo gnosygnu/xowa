@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.langs.htmls.parsers.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.tags.*; import gplx.xowa.htmls.core.wkrs.txts.*; import gplx.xowa.htmls.core.wkrs.escapes.*; import gplx.xowa.htmls.core.wkrs.spaces.*;
+import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.tags.*; import gplx.xowa.htmls.core.wkrs.txts.*; import gplx.xowa.htmls.core.wkrs.escapes.*;
 public class Xoh_hdoc_parser {
 	private final Xoh_hdoc_wkr hdoc_wkr;
 	private final Html_doc_parser hdoc_parser;
@@ -27,11 +27,10 @@ public class Xoh_hdoc_parser {
 		this.tag_parser = new Xoh_tag_parser(hdoc_wkr);
 		this.hdoc_parser = new Html_doc_parser(new Xoh_txt_parser(hdoc_wkr)
 		, tag_parser
-		, new Xoh_escape_parser(hdoc_wkr)
-		, new Xoh_space_parser(hdoc_wkr)
+		, new Xoh_escape_data(hdoc_wkr)
 		);
 	}
-	public void Parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src) {
+	public void Parse(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src) {
 		int src_len = src.length;
 		tag_parser.Init(hctx, src, 0, src_len);
 		hdoc_wkr.On_new_page(bfr, hpg, hctx, src, 0, src_len);

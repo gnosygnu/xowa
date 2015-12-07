@@ -24,9 +24,12 @@ public class Int_flag_bldr {
 		this.val_ary = new int[pow_ary.length];
 		return this;
 	}
-	public Int_flag_bldr Set(int idx, int val)		{val_ary[idx] = val; return this;}
-	public Int_flag_bldr Set(int idx, byte val)		{val_ary[idx] = val; return this;}
-	public Int_flag_bldr Set(int idx, boolean val)		{val_ary[idx] = val ? 1 : 0; return this;}
+	public boolean Set_as_bool(int idx, boolean val)		{val_ary[idx] = val ? 1 : 0; return val;}
+	public byte Set_as_byte(int idx, byte val)		{val_ary[idx] = val; return val;}
+	public int Set_as_int(int idx, int val)			{val_ary[idx] = val; return val;}
+	public Int_flag_bldr Set(int idx, boolean val)		{Set_as_bool(idx, val); return this;}
+	public Int_flag_bldr Set(int idx, byte val)		{Set_as_byte(idx, val); return this;}
+	public Int_flag_bldr Set(int idx, int val)		{Set_as_int(idx, val); return this;}
 	public int Get_as_int(int idx)					{return val_ary[idx];}
 	public byte Get_as_byte(int idx)				{return (byte)val_ary[idx];}
 	public boolean Get_as_bool(int idx)				{return val_ary[idx] == 1;}

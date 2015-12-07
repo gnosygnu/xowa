@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
-public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
+public class Dsv_tbl_parser implements GfoInvkAble, Rls_able {
 	private Dsv_wkr_base mgr;
 	private Dsv_fld_parser[] fld_parsers = new Dsv_fld_parser[2]; private int fld_parsers_len = 2;
 	public byte[] Src() {return src;} private byte[] src;

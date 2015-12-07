@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
 	public Xoh_lnki_title_fmtr Set(byte[] src, Xop_tkn_itm tkn) {this.src = src; this.tkn = tkn; return this;}
@@ -36,8 +37,10 @@ public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
 				if (tkn_as_lnki.Caption_exists())
 					Bld_recurse(bfr, tkn_as_lnki.Caption_tkn());
 				else {
-					if (tkn_as_lnki.Ttl() != null)	// guard against invalid ttls
-						bfr.Add(tkn_as_lnki.Ttl().Page_txt());
+					if (tkn_as_lnki.Ttl() != null) {	// guard against invalid ttls
+						byte[] ttl_bry = tkn_as_lnki.Ttl().Page_txt();
+						Write_atr_text(bfr, ttl_bry, 0, ttl_bry.length); // handle titles with quotes; PAGE:s.w:Styx_(band) DATE:2015-11-29
+					}
 				}
 				if (tkn_as_lnki.Tail_bgn() != -1)
 					bfr.Add_mid(src, tkn_as_lnki.Tail_bgn(), tkn_as_lnki.Tail_end());
@@ -63,12 +66,13 @@ public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
 			byte b = src[i];
 			switch (b) {
 				case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
-				case Byte_ascii.Quote: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Amp:	// NOTE: escape possible javascript injection characters
-					bfr.Add(Escape_bgn);
-					bfr.Add_int_variable(b);
-					bfr.Add_byte(Byte_ascii.Semic);
+					bfr.Add_byte_space();
 					break;
-				default: bfr.Add_byte(b); break;
+				case Byte_ascii.Quote:		bfr.Add(Html_entity_.Quote_bry); break;
+				case Byte_ascii.Lt:			bfr.Add(Html_entity_.Lt_bry); break;
+				case Byte_ascii.Gt:			bfr.Add(Html_entity_.Gt_bry); break;
+				case Byte_ascii.Amp:		bfr.Add(Html_entity_.Amp_bry); break;
+				default:					bfr.Add_byte(b); break;
 			}
 		}
 	}

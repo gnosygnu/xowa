@@ -140,8 +140,10 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 				usr_dlg.Prog_many("", "", "parsing: ns=~{0} db=~{1} pg=~{2} count=~{3} time=~{4} rate=~{5} ttl=~{6}"
 					, ns.Id(), db_id, page.Id(), exec_count
 					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_u8(page.Ttl_page_db()));
-			ctx.Clear();
-			Exec_pg_itm_hook(ns_ord, ns, page, page.Text());
+			ctx.Clear_all();
+			byte[] page_src = page.Text();
+			if (page_src != null)	// some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
+				Exec_pg_itm_hook(ns_ord, ns, page, page_src);
 			ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
 			if (ctx.Wiki().Cache_mgr().Tmpl_result_cache().Count() > 50000) 
 				ctx.Wiki().Cache_mgr().Tmpl_result_cache().Clear();
@@ -155,7 +157,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 				Free();
 		}
 		catch (Exception exc) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_u8(page.Ttl_page_db()), Err_.Message_lang(exc));
+			bldr.Usr_dlg().Warn_many("", "", "parse failed: wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_str(), page.Ttl_full_db(), Err_.Message_gplx_log(exc));
 			ctx.App().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
@@ -216,7 +218,6 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	, Invk_poll_mgr = "poll_mgr", Invk_reset_db_ = "reset_db_"
 	, Invk_exec_count_max_ = "exec_count_max_", Invk_exit_now_ = "exit_now_", Invk_exit_after_commit_ = "exit_after_commit_"
 	;
-	private static final String GRP_KEY = "xowa.bldr.parse";
 }
 class Xob_dump_mgr_base_ {
 	public static void Load_all_tmpls(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, Xob_dump_src_id page_src) {

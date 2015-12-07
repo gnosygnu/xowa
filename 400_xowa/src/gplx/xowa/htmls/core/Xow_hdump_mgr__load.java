@@ -25,7 +25,7 @@ public class Xow_hdump_mgr__load {
 	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
-		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys, wiki.Domain_bry());			
+		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx, wiki.Domain_bry());			
 	}
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final Xoh_make_mgr make_mgr;
 	public void Load(Xoae_page wpg) {
@@ -45,13 +45,12 @@ public class Xow_hdump_mgr__load {
 			return true;
 		}
 	}
+	public byte[] Decode_as_bry(Bry_bfr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
 	private byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
 		if (zip_tid > gplx.core.ios.Io_stream_.Tid_raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
-		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1) {
-			hzip_mgr.Decode(tmp_bfr.Clear(), wiki, hpg, src);
-			src = tmp_bfr.To_bry_and_clear();
-		}
+		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1)
+			src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, Bool_.N);
 		return src;
 	}
 	private void Fill_page(Xoae_page wpg, Xoh_page hpg) {

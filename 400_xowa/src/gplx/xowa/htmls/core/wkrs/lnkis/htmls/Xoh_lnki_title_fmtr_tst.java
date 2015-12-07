@@ -23,8 +23,11 @@ public class Xoh_lnki_title_fmtr_tst {
 		fxt.Test_parse("a b c", "a b c");
 		fxt.Test_parse("a ''b'' c", "a b c");
 		fxt.Test_parse("a <i>b</i> c", "a b c");
-		fxt.Test_parse("a\nb", "a&#10;b");
-		fxt.Test_parse("a\"b", "a&#34;b");
+		fxt.Test_parse("a\nb", "a b");
+		fxt.Test_parse("a\"b", "a&quot;b");
+	}
+	@Test   public void Lnki__quotes() {	// PURPOSE: handle titles with quotes; PAGE:s.w:Styx_(band) DATE:2015-11-29
+		fxt.Test_parse("[[A\"B]]", "A&quot;B");
 	}
 }
 class Xoh_lnki_title_fmtr_fxt {

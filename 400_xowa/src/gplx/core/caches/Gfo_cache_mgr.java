@@ -44,7 +44,7 @@ public class Gfo_cache_mgr {
 		hash.Del(itm.Key());
 		itm.Rls();
 	}
-	public void Add_replace(byte[] key, RlsAble val, int size) {
+	public void Add_replace(byte[] key, Rls_able val, int size) {
 //			Del(key);
 //			Add(key, val, size);
 		Object o = hash.Get_by(key);
@@ -57,7 +57,7 @@ public class Gfo_cache_mgr {
 			itm.Replace(val, size);
 		}
 	}
-	public void Add(byte[] key, RlsAble val, int size) {
+	public void Add(byte[] key, Rls_able val, int size) {
 //			if (cur_size + size > 600000000) ReduceCache();
 		cur_size += size;
 //			++cur_size;
@@ -104,12 +104,12 @@ public class Gfo_cache_mgr {
 		}
 	}
 }
-class Gfo_cache_data implements gplx.CompareAble, RlsAble {
-	public Gfo_cache_data(byte[] key, RlsAble val, int size) {this.key = key; this.val = val; this.size = size; this.timestamp = Env_.TickCount();}
+class Gfo_cache_data implements gplx.CompareAble, Rls_able {
+	public Gfo_cache_data(byte[] key, Rls_able val, int size) {this.key = key; this.val = val; this.size = size; this.timestamp = Env_.TickCount();}
 	public byte[] Key() {return key;} private byte[] key;
-	public RlsAble Val() {return val;} private RlsAble val;
+	public Rls_able Val() {return val;} private Rls_able val;
 	public int Size() {return size;} private int size;
-	public void Replace(RlsAble val, int size) {this.val = val; this.size = size;}
+	public void Replace(Rls_able val, int size) {this.val = val; this.size = size;}
 	public long Timestamp() {return timestamp;} public void Timestamp_update() {timestamp = Env_.TickCount();} private long timestamp;
 	public int compareTo(Object obj) {
 		Gfo_cache_data comp = (Gfo_cache_data)obj;

@@ -26,7 +26,7 @@ public class Xoh_lnke_html {
 		byte lnke_type = Calc_type(lnke);
 		if (!hctx.Mode_is_alt()) {					// do not write "<a ...>" if mode is alt
 			bfr.Add(Xoh_consts.A_bgn);
-			if (Write_href(bfr, ctx, src, lnke, href_bgn, href_end, proto_is_xowa))
+			if (Write_href(bfr, hctx, ctx, src, lnke, href_bgn, href_end, proto_is_xowa))
 				bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_type));
 			bfr.Add(Xoh_lnke_dict_.Html__rhs_end);
 		}
@@ -37,9 +37,9 @@ public class Xoh_lnke_html {
 			bfr.Add(Xoh_consts.A_end);
 		}
 	}
-	public boolean Write_href(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {
+	public boolean Write_href(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {
 		byte[] lnke_xwiki_wiki = lnke.Lnke_xwiki_wiki();
-		if (lnke_xwiki_wiki == null) {
+		if (lnke_xwiki_wiki == null || hctx.Mode_is_hdump()) {	// if hdump, never write xwiki format (/site/); always write in url format (https:); note that xwiki is set when wiki is installed locally
 			if (lnke.Lnke_relative()) {		// relative; EX: //a.org
 				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, href_bgn, href_end);
 				return true;
@@ -62,7 +62,7 @@ public class Xoh_lnke_html {
 				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));					// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)
 				Gfo_qarg_mgr.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
-			return ctx.Wiki().App().Xwiki_mgr__missing(lnke_xwiki_wiki);
+			return ctx.Wiki().App().Xwiki_mgr__missing(lnke_xwiki_wiki);	// write "external" if hdump or xwiki is missing
 		}
 	}
 	public void Write_caption(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {

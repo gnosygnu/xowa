@@ -141,7 +141,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			wiki.Parser_mgr().Ctx().Cur_page_(page);
 			if (page.Missing()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
-					page = Xoae_page.create_(wiki, ttl);
+					page = Xoae_page.New_edit(wiki, ttl);
 					view_mode = Xopg_page_.Tid_edit;
 					history_mgr.Add(page);	// NOTE: must put new_page on stack so that pressing back will pop new_page, not previous page
 					Xog_tab_itm_read_mgr.Show_page(this, page, false);

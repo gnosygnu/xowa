@@ -27,7 +27,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
 	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos  ? Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
-	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_len) {
+	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_end) {
 		Object rv = null; int cur_pos = match_pos = bgn_pos;
 		Btrie_slim_itm cur = root;
 		while (true) {
@@ -36,7 +36,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 			if (nxt.Ary_is_empty()) {match_pos = cur_pos; return nxt.Val();}	// nxt is leaf; return nxt.Val() (which should be non-null)
 			Object nxt_val = nxt.Val();
 			if (nxt_val != null) {match_pos = cur_pos; rv = nxt_val;}			// nxt is node; cache rv (in case of false match)
-			if (cur_pos == src_len) return rv;									// increment cur_pos and exit if src_len
+			if (cur_pos == src_end) return rv;									// increment cur_pos and exit if src_end
 			b = src[cur_pos];
 			cur = nxt;
 		}
@@ -65,6 +65,13 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		Int_obj_val obj = Int_obj_val.new_(val);
 		for (int i = 0; i < len; i++)
 			Add_obj(ary[i], obj);
+		return this;
+	}
+	public Btrie_slim_mgr Add_replace_many(String trg_str, String... src_ary) {return Add_replace_many(Bry_.new_u8(trg_str), src_ary);}
+	public Btrie_slim_mgr Add_replace_many(byte[] trg_bry, String... src_ary) {
+		int len = src_ary.length;
+		for (int i = 0; i < len; i++)
+			Add_obj(Bry_.new_u8(src_ary[i]), trg_bry);
 		return this;
 	}
 	public Btrie_slim_mgr Add_stub(String key, byte val)		{byte[] bry = Bry_.new_u8(key); return (Btrie_slim_mgr)Add_obj(bry, new Btrie_itm_stub(val, bry));}

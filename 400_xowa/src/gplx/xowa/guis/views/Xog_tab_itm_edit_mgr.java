@@ -52,7 +52,7 @@ public class Xog_tab_itm_edit_mgr {
 		Xog_html_itm html_itm = tab.Html_itm();
 
 		byte[] new_text = Get_new_text(tab);
-		Xoae_page new_page = Xoae_page.new_(wiki, page.Ttl());
+		Xoae_page new_page = Xoae_page.New(wiki, page.Ttl());
 		new_page.Revision_data().Id_(page.Revision_data().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Data_raw_(new_text);
 		wiki.Parser_mgr().Parse(new_page, true);			// refresh html
@@ -102,7 +102,7 @@ public class Xog_tab_itm_edit_mgr {
 		ctx.Defn_trace().Clear(); // TODO: move_me
 		ctx.Defn_trace_(Xot_defn_trace_dbg.Instance);
 		Xoa_ttl ttl = page.Ttl();
-		Xoae_page new_page = Xoae_page.new_(wiki, ttl);
+		Xoae_page new_page = Xoae_page.New(wiki, ttl);
 		byte[] data = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		new_page.Data_raw_(data);
 		wiki.Parser_mgr().Parse(new_page, true);

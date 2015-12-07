@@ -29,6 +29,13 @@ public class Xoh_file_wtr_basic_tst {
 		));
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
+	@Test  public void Xowa_title__quotes() {	// PURPOSE: xowa_title should encode quotes DATE:2015-11-27
+		fxt.Test_parse_page_wiki_str
+		(	"[[File:A%22b.png]]"
+		,	String_.Concat_lines_nl_skip_last
+		(	"<a href=\"/wiki/File:A%22b.png\" class=\"image\" xowa_title=\"A%22b.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/d/4/A%22b.png\" width=\"0\" height=\"0\" /></a>"
+		));
+	}
 	@Test  public void Img_embed() {
 		fxt.Test_parse_page_wiki_str("[[File:A.png|9x8px|alt=abc]]", Xop_fxt.html_img_none("File:A.png", "abc", "file:///mem/wiki/repo/trg/thumb/7/0/A.png/9px.png", "A.png"));
 	}
@@ -238,7 +245,7 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|\n{|\n|-\n|b\n|}\n]]"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b&#10;\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"   b  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b \" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"   b  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
@@ -248,7 +255,7 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|b\nc]]"
 			,	String_.Concat_lines_nl
-			(	"<p><a href=\"/wiki/File:A.png\" class=\"image\" title=\"b&#10;c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			(	"<p><a href=\"/wiki/File:A.png\" class=\"image\" title=\"b c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			,	"</p>"
 			));
 		fxt.Init_para_n_();

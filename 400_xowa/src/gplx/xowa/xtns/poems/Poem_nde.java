@@ -29,7 +29,8 @@ public class Poem_nde implements Xox_xnde {
 			&& itm_end != itm_bgn)						--itm_end;	// ...if not same as 1st \n; EX: <poem>\n</poem>
 		Poem_xtn_mgr xtn_mgr = (Poem_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Poem_xtn_mgr.XTN_KEY);
 		byte[] poem_bry = Parse_lines(wiki.Utl__bfr_mkr(), src, itm_bgn, itm_end);
-		xtn_root = xtn_mgr.Parser().Parse_text_to_wdom_old_ctx(ctx, poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
+		// xtn_root = xtn_mgr.Parser().Parse_text_to_wdom_old_ctx(ctx, poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
+		xtn_root = xtn_mgr.Parser().Parse_text_to_wdom(Xop_ctx.New_sub_by_ctx(ctx), poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_root == null) return;	// inline poem; write nothing; EX: <poem/>

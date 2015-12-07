@@ -25,7 +25,8 @@ public class Xoh_thm_bldr {
 	public void Make(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int div_0_align, int div_1_width, boolean div_2_alt_exists, byte[] img_alt, Xoh_img_bldr img_bldr, Bfr_arg div_2_href, Bfr_arg div_2_capt) {
 		wtr.Clear();
 		wtr.Div_0_align_(div_0_align);
-		wtr.Div_1_id_(img_bldr.Fsdb_itm().Html_uid());
+		if (!hctx.Mode_is_diff())
+			wtr.Div_1_id_(img_bldr.Fsdb_itm().Html_uid());
 		wtr.Div_1_width_(div_1_width);
 		wtr.Div_1_img_(img_bldr.Wtr());
 		wtr.Div_2_href_(div_2_href);

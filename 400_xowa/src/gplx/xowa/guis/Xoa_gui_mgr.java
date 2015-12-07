@@ -81,7 +81,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_kit))							return kit;
 		else if	(ctx.Match(k, Invk_kit_))							this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
-		else if	(ctx.Match(k, Invk_run))							Run(RlsAble_.Null);
+		else if	(ctx.Match(k, Invk_run))							Run(Rls_able_.Null);
 		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", gplx.gfui.Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
 		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
 		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
@@ -94,7 +94,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_menus))							return menu_mgr;
 		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
 		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
-		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))			Lang_changed((Xol_lang_itm)m.ReadObj("v", ParseAble_.Null));
+		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))			Lang_changed((Xol_lang_itm)m.ReadObj("v", null));
 		else throw Err_.new_unhandled(k);
 		return this;
 	}
@@ -103,7 +103,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	, Invk_main_win = "main_win", Invk_browser_win = "browser_win", Invk_bnds = "bnds"
 	, Invk_bindings = "bindings", Invk_win_opts = "win_opts", Invk_layout = "layout", Invk_html = "html"
 	, Invk_search_suggest = "search_suggest", Invk_menus = "menus", Invk_cmds = "cmds", Invk_url_macros = "url_macros";
-	public void Run(RlsAble splash_win) {
+	public void Run(Rls_able splash_win) {
 		Gfo_log_bfr log_bfr = app.Log_bfr();
 		try {
 			Xoa_gui_mgr ui_mgr = app.Gui_mgr();

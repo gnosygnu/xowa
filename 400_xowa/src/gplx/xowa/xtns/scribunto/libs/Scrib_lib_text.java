@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.core.bits.*;
 import gplx.xowa.langs.msgs.*;
 public class Scrib_lib_text implements Scrib_lib {
 	private final Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();

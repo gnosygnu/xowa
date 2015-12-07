@@ -19,18 +19,24 @@ package gplx.xowa.htmls.core.wkrs.escapes; import gplx.*; import gplx.xowa.*; im
 import gplx.core.brys.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_escape_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
+	private byte escape_byte;
+	public byte[] Hook() {return hook;} private byte[] hook;
 	public String Key() {return Xoh_hzip_dict_.Key__escape;}
-	public Xoh_escape_hzip Encode(Bry_bfr bfr, Hzip_stat_itm stat_itm) {
-		stat_itm.Escape_add_one();
-		bfr.Add(Xoh_hzip_dict_.Bry__escape);
+	public Gfo_poolable_itm Encode(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
+		bfr.Add(hook);
+		hctx.Hzip__stat().Escape_add(escape_byte);
 		return this;
 	}
-	public int Decode(Bry_bfr bfr, boolean write_to_bfr, Xoh_hdoc_ctx ctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int hook_bgn) {
+	public int Decode(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, Bry_rdr rdr, byte[] src, int src_bgn, int src_end) {
 		bfr.Add_byte(Xoh_hzip_dict_.Escape);
 		return rdr.Pos();
 	}
-	public int				Pool__idx() {return pool_idx;} private int pool_idx;
-	public void				Pool__clear (Object[] args) {}
-	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr;
-	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_escape_hzip rv = new Xoh_escape_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
+	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
+	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {
+		Xoh_escape_hzip rv = new Xoh_escape_hzip();
+		rv.pool_mgr = mgr; rv.pool_idx = idx;
+		rv.hook = (byte[])args[0];
+		rv.escape_byte = rv.hook[0];
+		return rv;
+	}
 }

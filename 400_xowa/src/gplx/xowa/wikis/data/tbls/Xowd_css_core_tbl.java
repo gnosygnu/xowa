@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
-public class Xowd_css_core_tbl implements RlsAble {
+public class Xowd_css_core_tbl implements Rls_able {
 	private final String tbl_name = "css_core"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_key, fld_updated_on;
 	public Xowd_css_core_tbl(Db_conn conn) {

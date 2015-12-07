@@ -16,16 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.heads.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.heads.*;
 import gplx.core.ios.*; import gplx.core.primitives.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.pages.*;
 public class Xow_hdump_mgr__save {
 	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
-	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
+	private final Xoh_page tmp_hpg; private final Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
 	private int dflt_zip_tid, dflt_hzip_tid;
-	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
-		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
+	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg) {
+		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg;
 	}
-	public void Init_by_db(int dflt_zip_tid, int dflt_hzip_tid) {this.dflt_zip_tid = dflt_zip_tid; this.dflt_hzip_tid = dflt_hzip_tid;}
+	public void Init_by_db(int dflt_zip_tid, int dflt_hzip_tid, boolean mode_is_b256) {
+		this.dflt_zip_tid = dflt_zip_tid; this.dflt_hzip_tid = dflt_hzip_tid; tmp_bfr.Mode_is_b256_(mode_is_b256);
+	}
+	public byte[] Src_as_hzip() {return src_as_hzip;} private byte[] src_as_hzip;
 	public int Save(Xoae_page page) {
 		synchronized (tmp_hpg) {
 			Bld_hdump(page);
@@ -45,11 +48,9 @@ public class Xow_hdump_mgr__save {
 		wiki.Html__wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page); // save as hdump_fmt
 		page.Hdump_data().Body_(tmp_bfr.To_bry_and_clear());
 	}
-	private static byte[] Write(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
-		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1) {
-			hzip_mgr.Encode(bfr.Clear(), wiki, hpg, src);
-			src = bfr.To_bry_and_clear();
-		}
+	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
+		if (hzip_tid != Xoh_hzip_dict_.Hzip__none) src = hzip_mgr.Encode_as_bry((Xoh_hzip_bfr)bfr.Clear(), wiki, hpg, src);
+		src_as_hzip = src;
 		if (zip_tid > gplx.core.ios.Io_stream_.Tid_raw)
 			src = zip_mgr.Zip((byte)zip_tid, src);
 		return src;

@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import gplx.core.envs.*;
-public class TimerAdp implements RlsAble {
+public class TimerAdp implements Rls_able {
 	public TimerAdp Interval_(int interval) {
 				underTimer.setInitialDelay(interval);
 		underTimer.setDelay(interval);

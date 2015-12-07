@@ -61,9 +61,9 @@ public class Xop_fxt {
 	public void Lang_by_id_(int id) {ctx.Cur_page().Lang_(wiki.Appe().Lang_mgr().Get_by_or_new(Xol_lang_stub_.Get_by_id(id).Key()));}
 	public Xoh_html_wtr_cfg Wtr_cfg() {return hdom_wtr.Cfg();} private Xoh_html_wtr hdom_wtr;
 	public Xop_fxt Reset() {
-		ctx.Clear();
+		ctx.Clear_all();
 		ctx.App().Free_mem(false);
-		ctx.Cur_page().Clear();
+		ctx.Cur_page().Clear_all();
 		wiki.Db_mgr().Load_mgr().Clear();
 		app.Wiki_mgr().Clear();
 		Io_mgr.Instance.InitEngine_mem();	// clear created pages
@@ -286,12 +286,13 @@ public class Xop_fxt {
 		hdom_wtr.Write_all(actl_bfr, ctx, root.Root_src(), root);
 		return actl_bfr.To_str_and_clear();
 	}
+	public void Hctx_(Xoh_wtr_ctx v) {hctx = v;} private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
 	public String Exec_parse_page_wiki_as_str(String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, raw_bry, Xop_parser_.Doc_bgn_bos);
 		Bry_bfr actl_bfr = Bry_bfr.new_();
-		hdom_wtr.Write_all(actl_bfr, ctx, raw_bry, root);
+		hdom_wtr.Write_all(actl_bfr, ctx, hctx, raw_bry, root);
 		return actl_bfr.To_str_and_clear();
 	}
 	private void Parse_chk(byte[] raw_bry, Xop_root_tkn root, Tst_chkr[] expd_ary) {

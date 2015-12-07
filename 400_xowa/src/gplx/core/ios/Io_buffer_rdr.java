@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.ios.*;/*IoStream*/
-public class Io_buffer_rdr implements RlsAble {
+public class Io_buffer_rdr implements Rls_able {
 	private Io_stream_rdr rdr;
 	Io_buffer_rdr(Io_stream_rdr rdr, Io_url url, int bfr_len) {
 		this.rdr = rdr; this.url = url;

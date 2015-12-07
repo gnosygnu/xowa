@@ -20,90 +20,128 @@ import gplx.core.brys.*; import gplx.langs.htmls.*; import gplx.langs.htmls.pars
 import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
 import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_lnki_parser {
-	private final Xoh_anch_capt_parser capt_parser = new Xoh_anch_capt_parser();
+	private byte[] src;
+	private int href_ns_id; private byte[] href_ns_name; private int href_ns_name_len;
+	private byte[] capt_src; private int capt_bgn, capt_end;
 	private final Bry_rdr rdr = new Bry_rdr();
-	public int		Rng_bgn() {return rng_bgn;} private int rng_bgn;
-	public int		Rng_end() {return rng_end;} private int rng_end;
-	public byte		Text_type() {return text_type;} private byte text_type;
-	public byte[]	Href_bry() {return href_bry;} private byte[] href_bry;
-	public int		Href_bgn() {return href_bgn;} private int href_bgn;
-	public int		Href_end() {return href_end;} private int href_end;
-	public byte[]	Capt_bry() {return capt_bry;} private byte[] capt_bry;
-	public int		Capt_bgn() {return capt_bgn;} private int capt_bgn;
-	public int		Capt_end() {return capt_end;} private int capt_end;
-	public Xoh_anch_href_parser Href_parser() {return href_parser;} private final Xoh_anch_href_parser href_parser = new Xoh_anch_href_parser();
-	public int Parse(Xoh_hdoc_wkr wkr, Xoh_hdoc_ctx hctx, byte[] src, Html_tag_rdr tag_rdr, Html_tag anch_head, Xow_ttl_parser ttl_parser) {// <a href="/wiki/A" title="A">b</a>
-		this.rng_bgn = anch_head.Src_bgn();
-		rdr.Init_by_sub(tag_rdr.Rdr(), "lnki", rng_bgn, src.length);
-		href_parser.Parse(rdr, hctx.App(), hctx.Wiki__ttl_parser(), anch_head);					// href='/wiki/A'	
-		// get href
-		this.href_bry = src;
-		this.href_bgn = href_parser.Page_bgn(); this.href_end = href_parser.Page_end();
-		Xoa_ttl href_ttl = null; Xow_ns href_ns = null;
-		int href_ns_id = Xow_ns_.Tid__main; boolean href_cs_tid_1st = true;			
-		switch (href_parser.Tid()) {
-			case Xoh_anch_href_parser.Tid__anch:
-			case Xoh_anch_href_parser.Tid__inet:
-				break;
-			default:
-				href_ttl = href_parser.Page_ttl();
-				href_ns = href_ttl.Ns();
-				href_ns_id = href_ns.Id();
-				href_cs_tid_1st = href_ttl.Ns().Case_match() == Xow_ns_case_.Tid__1st;
-				this.href_bry = href_parser.Page_bry();
+	public int			Src_bgn() {return src_bgn;} private int src_bgn;
+	public int			Src_end() {return src_end;} private int src_end;
+	public boolean			Capt_has_ns() {return capt_has_ns;} private boolean capt_has_ns;
+	public byte			Text_tid() {return text_tid;} private byte text_tid;
+	public byte[]		Text_0_src() {return text_0_src;} private byte[] text_0_src;
+	public int			Text_0_bgn() {return text_0_bgn;} private int text_0_bgn;
+	public int			Text_0_end() {return text_0_end;} private int text_0_end;
+	public byte[]		Text_1_src() {return text_1_src;} private byte[] text_1_src;
+	public int			Text_1_bgn() {return text_1_bgn;} private int text_1_bgn;
+	public int			Text_1_end() {return text_1_end;} private int text_1_end;
+	public byte[]		Href_src() {return href_src;} private byte[] href_src;
+	public int			Href_bgn() {return href_bgn;} private int href_bgn;
+	public int			Href_end() {return href_end;} private int href_end;
+	public boolean			Title_missing_ns() {return title_missing_ns;} private boolean title_missing_ns;
+	public int			Title_tid() {return title_tid;} private int title_tid;
+	public int			Title_bgn() {return title_bgn;} private int title_bgn;
+	public int			Title_end() {return title_end;} private int title_end;
+	public Xoh_anch_href_itm Href_itm() {return href_itm;} private final Xoh_anch_href_itm href_itm = new Xoh_anch_href_itm();
+	public Xoh_anch_capt_itm Capt_itm() {return capt_itm;} private final Xoh_anch_capt_itm capt_itm = new Xoh_anch_capt_itm();
+	private void Init(byte[] src) {
+		this.src = href_src = capt_src = src;
+		capt_has_ns = title_missing_ns = false;
+		href_ns_id = Xow_ns_.Tid__main; href_ns_name = null; href_ns_name_len = 0;
+		href_bgn = href_end = capt_bgn = capt_end = title_bgn = title_end = -1;			
+		title_tid = Title__href;
+	}
+	public boolean Parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Html_tag_rdr tag_rdr, byte[] src, Html_tag anch_head) {
+		Init(src);
+		this.src_bgn = anch_head.Src_bgn();
+		rdr.Init_by_wkr(tag_rdr.Err_wkr(), "lnki", src_bgn, src.length);
+		Html_atr title_atr = anch_head.Atrs__get_by_or_empty(Html_atr_.Bry__title);
+		Parse_href(hctx, anch_head);
+		Parse_capt(tag_rdr, anch_head);
+		Parse_title(title_atr);
+		hdoc_wkr.On_lnki(this);
+		return true;
+	}
+	private void Parse_href(Xoh_hdoc_ctx hctx, Html_tag anch_head) {
+		href_itm.Parse(rdr.Err_wkr(), hctx, anch_head);
+		this.href_bgn = href_itm.Ttl_bgn(); this.href_end = href_itm.Ttl_end();
+		switch (href_itm.Tid()) {
+			case Xoh_anch_href_itm.Tid__wiki: case Xoh_anch_href_itm.Tid__site:
+				this.href_ns_id = href_itm.Ttl_ns_id();
+				this.href_src = href_itm.Ttl_full_txt();
 				this.href_bgn = 0;
-				this.href_end = href_bry.length;
+				this.href_end = href_src.length;
+				if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
+					int colon_pos = Bry_find_.Find_fwd(href_src, Byte_ascii.Colon, href_bgn, href_end);
+					this.href_ns_name = Xoa_ttl.Replace_unders(Bry_.Mid(href_src, href_bgn, colon_pos + 1));		// EX: 11="Template talk:"
+					this.href_ns_name_len = href_ns_name.length;
+				}
 				break;
 		}
-		// get capt
-		this.capt_bry = src;
+	}
+	private void Parse_capt(Html_tag_rdr tag_rdr, Html_tag anch_head) {
 		this.capt_bgn = anch_head.Src_end();										// capt starts after <a>
 		Html_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Html_tag_.Id__a);			// </a>
 		this.capt_end = anch_tail.Src_bgn();										// get capt between "<a>" and "</a>
-		this.rng_end = anch_tail.Src_end();
-		boolean capt_bgn_has_ns = true;
+		this.src_end = anch_tail.Src_end();
+		// skip ns in href / capt
 		if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
-			int colon_pos = Bry_find_.Find_fwd(href_bry, Byte_ascii.Colon, href_bgn, href_end);
-			byte[] ns_name = Xoa_ttl.Replace_unders(Bry_.Mid(href_bry, href_bgn, colon_pos + 1));			// EX: 11="Template talk:"
-			int ns_name_len = ns_name.length;
-			int ns_name_end = capt_bgn + ns_name_len;
-			href_bgn += ns_name_len;												// skip ns_name for href; EX: "Help:A" -> "A"; "Help" will be saved as encoded num
-			if (Bry_.Match(src, capt_bgn, ns_name_end, ns_name, 0, ns_name_len)) 	// href matches capt; EX: [[Help:A]] -> <a href='/wiki/Help:A'>Help:A</a>
-				capt_bgn = ns_name_end;
-			else
-				capt_bgn_has_ns = false;
+			int capt_bgn_wo_ns = capt_bgn + href_ns_name_len;
+			href_bgn += href_ns_name_len;											// skip ns_name for href; EX: "Help:A" -> "A"; "Help" will be saved as encoded number
+			if (Bry_.Match(capt_src, capt_bgn, capt_bgn_wo_ns, href_ns_name)) { 	// capt matches ns_name; EX: <a href='/wiki/Help:A'>Help:A</a> -> "Help:A" matches "Help:"
+				capt_bgn = capt_bgn_wo_ns;											// skip ns; "Help:"
+				capt_has_ns = true;
+			}
 		}
-		if (href_parser.Tid() == Xoh_anch_href_parser.Tid__anch)
-			this.text_type = Xoh_anch_capt_parser.Tid__capt;
-		else 
-			this.text_type = capt_parser.Parse(rdr, capt_bgn_has_ns, href_cs_tid_1st, href_bry, href_bgn, href_end, src, capt_bgn, capt_end);
-		int split_pos = capt_parser.Split_pos();
-		switch (text_type) {
-			case Xoh_anch_capt_parser.Tid__capt:	// nothing to do; href / capt already set above
+		// get text splits
+		this.text_tid	= href_itm.Tid() == Xoh_anch_href_itm.Tid__anch 
+						? Xoh_anch_capt_itm.Tid__diff
+						: capt_itm.Parse(rdr, capt_has_ns, href_src, href_bgn, href_end, src, capt_bgn, capt_end);
+		int split_pos = capt_itm.Split_pos();
+		this.text_0_src = href_src; this.text_0_bgn = href_bgn; this.text_0_end = href_end;
+		this.text_1_src = capt_src; this.text_1_bgn = capt_bgn; this.text_1_end = capt_end;
+		switch (text_tid) {
+			case Xoh_anch_capt_itm.Tid__same:
+			// case Xoh_anch_capt_itm.Tid__href_pipe:
+			case Xoh_anch_capt_itm.Tid__diff:		// nothing to do; href / capt already set above
 				break;
-			case Xoh_anch_capt_parser.Tid__href:	// redefine href to capt since both href and capt are same except for case-sensitivity / underscores; EX: [[a]], [[A b]]
-			case Xoh_anch_capt_parser.Tid__href_pipe:
-				this.href_bry = src;
-				this.href_bgn = capt_bgn;
-				this.href_end = capt_end;
+			case Xoh_anch_capt_itm.Tid__more:
+				this.text_1_bgn = split_pos;
 				break;
-			case Xoh_anch_capt_parser.Tid__href_trail:
-				this.href_bry = src;
-				this.href_bgn = capt_bgn;
-				this.href_end = split_pos;
-				this.capt_bgn = split_pos;
-				break;
-			case Xoh_anch_capt_parser.Tid__capt_short:
-				int tmp_capt_bgn = capt_bgn, tmp_capt_end = capt_end;
-				this.capt_bry = href_bry;
-				this.capt_bgn = split_pos;
-				this.capt_end = href_end;
-				this.href_bry = src;
-				this.href_bgn = tmp_capt_bgn;
-				this.href_end = tmp_capt_end;
+			case Xoh_anch_capt_itm.Tid__less:
+				this.text_0_end = split_pos;
+				this.text_1_src = href_src;
+				this.text_1_bgn = split_pos;
+				this.text_1_end = href_end;
 				break;
 		}
-		wkr.On_lnki(this);
-		return rng_end;
 	}
+	private void Parse_title(Html_atr title_atr) {
+		// Tfds.Dbg(Bry_.Mid(href_src, href_bgn, href_end), Bry_.Mid(src, capt_bgn, capt_end), Bry_.Mid(src, title_bgn, title_end));
+		title_bgn = title_atr.Val_bgn(); title_end = title_atr.Val_end();
+		if (href_ns_name != null) {	// ns_name exists
+			int title_bgn_wo_ns = title_bgn + href_ns_name_len;
+			if (Bry_.Match(src, title_bgn, title_bgn_wo_ns, href_ns_name))			// title matches ns_name;
+				title_bgn = title_bgn_wo_ns;										// skip ns; "Help:"
+			else
+				title_missing_ns = true;
+		}
+		if (title_end == -1)
+			title_tid = Title__missing;
+		else {
+			if		(Bry_.Match(src, title_bgn, title_end, href_src, href_bgn, href_end))
+				title_tid = Title__href;
+			else if (Bry_.Match(src, title_bgn, title_end, src, capt_bgn, capt_end))
+				title_tid = Title__capt;
+			else {
+				title_tid = Title__diff;
+				if (href_ns_name != null) title_bgn = title_atr.Val_bgn();	// since title is different, add back ns_name; EX: "<a href='/wiki/Help:A_b#c' title='Help:A b'>a</a>"; title should be "Help:A b", not "A b"
+			}
+		}
+	}
+	public static final int // SERIALIAZED
+	  Title__href			= 0
+	, Title__capt			= 1
+	, Title__diff			= 2
+	, Title__missing		= 3
+	;
 }

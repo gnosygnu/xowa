@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoctg_html_mgr implements GfoInvkAble {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
@@ -25,13 +25,13 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 	private final Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
 	private final Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
 	public Xoctg_data_cache Data_cache() {return data_cache;} private Xoctg_data_cache data_cache = new Xoctg_data_cache(); 
-	public void Bld_html(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
+	public void Bld_html(Xowe_wiki wiki, Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		try {
 			if (wiki.Db_mgr().Category_version() == Xoa_ctg_mgr.Version_2)
-				Bld_html_v2(wiki, page, tmp_bfr);
+				Bld_html_v2(wiki, page, hctx, tmp_bfr);
 			else
-				Bld_html_v1(wiki, page, tmp_bfr);
+				Bld_html_v1(wiki, page, hctx, tmp_bfr);
 			bfr.Add_bfr_and_preserve(tmp_bfr.Mkr_rls());
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
@@ -39,14 +39,14 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt()), Err_.Message_gplx_full(e));
 		}
 	}	private Xoctg_url url_ctg = new Xoctg_url();
-	private void Bld_html_v2(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
+	private void Bld_html_v2(Xowe_wiki wiki, Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr) {
 		byte[] ttl_bry = page.Ttl().Page_db();
 		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg().Name_(page.Ttl().Page_txt());
 		url_ctg.Parse(wiki.Appe().Usr_dlg(), page.Url());
 		wiki.Db_mgr().Load_mgr().Load_ctg_v2a(view_ctg, url_ctg, ttl_bry, Grp_max_default);
-		Bld_all(bfr, wiki, page.Lang(), view_ctg, Xoa_ctg_mgr.Tid_subc);
-		Bld_all(bfr, wiki, page.Lang(), view_ctg, Xoa_ctg_mgr.Tid_page);
-		Bld_all(bfr, wiki, page.Lang(), view_ctg, Xoa_ctg_mgr.Tid_file);
+		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_subc);
+		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_page);
+		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_file);
 	}
 	public void Get_titles(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, Xoctg_view_ctg ctg) {
 		title_list.Clear();
@@ -80,14 +80,14 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			title_list.Add(itm);
 		}
 	}
-	private void Bld_html_v1(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
+	private void Bld_html_v1(Xowe_wiki wiki, Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr) {
 		Xoctg_view_ctg ctg = new Xoctg_view_ctg().Name_(page.Ttl().Page_txt());
 		boolean found = wiki.Db_mgr().Load_mgr().Load_ctg_v1(ctg, page.Ttl().Page_db()); if (!found) return;
-		Bld_all(bfr, wiki, page.Lang(), ctg, Xoa_ctg_mgr.Tid_subc);
-		Bld_all(bfr, wiki, page.Lang(), ctg, Xoa_ctg_mgr.Tid_page);
-		Bld_all(bfr, wiki, page.Lang(), ctg, Xoa_ctg_mgr.Tid_file);
+		Bld_all(bfr, wiki, page.Lang(), hctx, ctg, Xoa_ctg_mgr.Tid_subc);
+		Bld_all(bfr, wiki, page.Lang(), hctx, ctg, Xoa_ctg_mgr.Tid_page);
+		Bld_all(bfr, wiki, page.Lang(), hctx, ctg, Xoa_ctg_mgr.Tid_file);
 	}
-	@gplx.Internal protected void Bld_all(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, Xoctg_view_ctg view_ctg, byte tid) {
+	@gplx.Internal protected void Bld_all(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, Xoh_wtr_ctx hctx, Xoctg_view_ctg view_ctg, byte tid) {
 		Xoctg_view_grp view_grp = view_ctg.Grp_by_tid(tid);
 		int view_grp_len = view_grp.Itms().length; if (view_grp_len == 0) return;
 		view_grp.End_(view_grp_len);
@@ -98,7 +98,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		Xoa_ttl ctg_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__category, view_ctg.Name());
 		byte[] all_navs = fmtr_all.Bld_bwd_fwd(wiki, ctg_ttl, view_grp);
 		Array_.Sort(view_grp.Itms(), Xoctg_view_itm_sorter_sortkey.Instance);
-		fmtr_grp.Init_from_all(wiki, lang, view_ctg, fmtr_all, view_grp);	// NOTE: must assert sorted for v1; PAGE:s.w:Category:Computer_science; DATE:2015-11-22
+		fmtr_grp.Init_from_all(wiki, lang, hctx, view_ctg, fmtr_all, view_grp);	// NOTE: must assert sorted for v1; PAGE:s.w:Category:Computer_science; DATE:2015-11-22
 		fmtr_all.Html_all().Bld_bfr_many(bfr, fmtr_all.Div_id(), all_label, all_stats, all_navs, lang.Key_bry(), lang.Dir_ltr_bry(), fmtr_grp);
 	}
 	public static final int Cols_max = 3;

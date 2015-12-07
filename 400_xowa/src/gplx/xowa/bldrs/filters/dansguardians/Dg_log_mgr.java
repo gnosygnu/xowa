@@ -68,7 +68,7 @@ class Dg_file_tbl {
 		.Exec_insert();
 	}
 }
-class Dg_rule_tbl implements RlsAble {
+class Dg_rule_tbl implements Rls_able {
 	private String tbl_name = "dg_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_file_id, fld_rule_id, fld_rule_idx, fld_rule_score, fld_rule_text;
 	private Db_conn conn; private Db_stmt stmt_insert;
@@ -101,7 +101,7 @@ class Dg_rule_tbl implements RlsAble {
 		.Exec_insert();
 	}
 }
-class Dg_page_score_tbl implements RlsAble {
+class Dg_page_score_tbl implements Rls_able {
 	private String tbl_name = "dg_page_score"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_page_ns, fld_page_ttl, fld_page_len, fld_page_score, fld_page_rule_count, fld_clude_type;
 	private Db_conn conn; private Db_stmt stmt_insert;
@@ -141,7 +141,7 @@ class Dg_page_score_tbl implements RlsAble {
 		.Exec_insert();
 	}
 }
-class Dg_page_rule_tbl implements RlsAble {
+class Dg_page_rule_tbl implements Rls_able {
 	private String tbl_name = "dg_page_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_rule_id, fld_rule_score_total;
 	private Db_conn conn; private Db_stmt stmt_insert;

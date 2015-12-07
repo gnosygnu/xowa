@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.core.bits.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xof_img_size {
 	public int Html_w() {return html_w;} private int html_w;

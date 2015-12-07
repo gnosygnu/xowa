@@ -447,6 +447,7 @@ public class Bry_ {
 	public static boolean Match(byte[] src, int src_bgn, byte[] find) {return Match(src, src_bgn, src.length, find, 0, find.length);}
 	public static boolean Match(byte[] src, int src_bgn, int src_end, byte[] find) {return Match(src, src_bgn, src_end, find, 0, find.length);}
 	public static boolean Match(byte[] src, int src_bgn, int src_end, byte[] find, int find_bgn, int find_end) {
+		if (src_bgn == -1) return false;
 		int src_len = src.length;
 		if (src_end > src_len) src_end = src_len;			// must limit src_end to src_len, else ArrayIndexOutOfBounds below; DATE:2015-01-31
 		int find_len = find_end - find_bgn;
@@ -967,5 +968,10 @@ public class Bry_ {
 			}
 		}
 		return dirty ? bfr.To_bry_and_clear() : src;
+	}
+	public static void Clear(byte[] bry) {
+		int len = bry.length;
+		for (int i = 0; i < len; ++i)
+			bry[i] = Byte_.Zero;
 	}
 }

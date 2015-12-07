@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*;
-public class Orig_fil_tbl implements RlsAble {
+public class Orig_fil_tbl implements Rls_able {
 	private String tbl_name = "orig_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select;

@@ -19,7 +19,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
-public class Xowd_page_tbl implements RlsAble {
+public class Xowd_page_tbl implements Rls_able {
 	private final String tbl_name = "page";
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id;
 	private final Db_meta_fld_list flds = Db_meta_fld_list.new_();

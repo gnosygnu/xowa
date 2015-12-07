@@ -32,7 +32,7 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		this.cfg_app_fil			= bin_xowa_dir.GenSubFil_nest("cfg", "app", "xowa.gfs");
 		this.cfg_lang_core_dir		= bin_xowa_dir.GenSubDir_nest("cfg", "lang", "core");
 		this.cfg_wiki_core_dir		= bin_xowa_dir.GenSubDir_nest("cfg", "wiki", "core");
-		this.cfg_site_meta_fil		= bin_xowa_dir.GenSubDir_nest("cfg", "wiki", "site_meta.sqlite3");
+		this.cfg_site_meta_fil		= bin_xowa_dir.GenSubFil_nest("cfg", "wiki", "site_meta.sqlite3");
 		this.home_wiki_dir			= bin_xowa_dir.GenSubDir_nest("wiki", Xow_domain_itm_.Str__home);
 	}
 	public Io_url Root_dir()					{return root_dir;} private final Io_url root_dir;

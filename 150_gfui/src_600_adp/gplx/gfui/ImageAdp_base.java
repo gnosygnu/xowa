@@ -24,7 +24,7 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-public class ImageAdp_base implements ImageAdp, RlsAble {
+public class ImageAdp_base implements ImageAdp, Rls_able {
 	@gplx.Internal protected ImageAdp_base(Image img) {this.under = img;}
 	public Gfui_kit Kit() {return kit;} public void Kit_(Gfui_kit v) {this.kit = v;} Gfui_kit kit;
 	public SizeAdp Size() {

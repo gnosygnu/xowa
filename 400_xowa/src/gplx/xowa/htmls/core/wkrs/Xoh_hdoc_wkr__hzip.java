@@ -19,19 +19,19 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.langs.htmls.parsers.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
-	private final Hzip_stat_itm stat_itm = new Hzip_stat_itm();
-	private Bry_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src; private int src_end;
-	public void On_new_page(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
-		this.bfr = bfr; this.hctx = hctx; this.src = src; this.src_end = src_end;
+	private final Xoh_stat_itm stat_itm = new Xoh_stat_itm();
+	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
+	private Xoh_page hpg;
+	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 		stat_itm.Clear();
 	}
-	public void On_txt		(int rng_bgn, int rng_end)								{bfr.Add_mid(src, rng_bgn, rng_end);}
-	public void On_escape	(int rng_bgn, int rng_end)								{hctx.Mkr().Escape__hzip().Encode(bfr, stat_itm).Pool__rls();}
-	public void On_space	(int rng_bgn, int rng_end)								{hctx.Mkr().Space__hzip().Encode(bfr, stat_itm, src, src_end, rng_bgn, rng_end).Pool__rls();}
-	public void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser arg)		{hctx.Mkr().Hdr__hzip().Encode(bfr, stat_itm, src, arg).Pool__rls();}
-	public void On_lnke		(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_parser arg)	{hctx.Mkr().Lnke__hzip().Encode(bfr, stat_itm, src, arg).Pool__rls();}
-	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser arg)	{hctx.Mkr().Lnki__hzip().Encode(bfr, hctx, stat_itm, src, arg).Pool__rls();}
-	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser arg)		{hctx.Mkr().Thm__hzip().Encode(bfr, this, stat_itm, src, arg).Pool__rls();}
-	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser arg)		{hctx.Mkr().Img__hzip().Encode(bfr, stat_itm, src, arg, Bool_.Y).Pool__rls();}
-	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser arg) {hctx.Mkr().Gly__hzip().Encode(bfr, stat_itm, src, arg).Pool__rls();}
+	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
+	public void On_escape	(int rng_bgn, int rng_end)									{hctx.Wkr_mkr().Mw__escape().Encode(bfr, this, hctx, hpg, Bool_.Y, src, null).Pool__rls();}
+	public void On_hdr		(gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_parser parser)		{hctx.Wkr_mkr().Mw__hdr().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
+	public void On_lnke		(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_parser parser)	{hctx.Wkr_mkr().Mw__lnke().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
+	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_parser parser)	{hctx.Wkr_mkr().Mw__lnki().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
+	public void On_img		(gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_parser parser)		{hctx.Wkr_mkr().Mw__img().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
+	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_parser parser)		{hctx.Wkr_mkr().Mw__thm().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
+	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_parser parser)	{hctx.Wkr_mkr().Mw__gly().Encode(bfr, this, hctx, hpg, Bool_.Y, src, parser).Pool__rls();}
 }

@@ -111,4 +111,19 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
+	@Test   public void Tr_with_pipe_should_ignore() {	// PURPOSE: ignore sequences like "\n|- ||"; PAGE: nl.w:Tabel_van_Belgische_gemeenten; DATE:2015-12-03
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|- ||"
+		, "|a|b"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td>b"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		));
+	}
 }

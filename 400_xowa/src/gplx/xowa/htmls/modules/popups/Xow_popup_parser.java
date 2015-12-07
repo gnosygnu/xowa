@@ -40,7 +40,7 @@ public class Xow_popup_parser {
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe(); this.parser = wiki.Parser_mgr().Main(); this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
-		this.tmpl_ctx = Xop_ctx.new_(wiki); this.wtxt_ctx = Xop_ctx.new_(wiki);
+		this.tmpl_ctx = Xop_ctx.new_main_page(wiki); this.wtxt_ctx = Xop_ctx.new_main_page(wiki);
 		Xop_lxr_mgr tmpl_lxr_mgr = Xop_lxr_mgr.Popup_lxr_mgr;
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		this.tmpl_trie = tmpl_lxr_mgr.Trie(); this.wtxt_trie = parser.Wtxt_lxr_mgr().Trie();
@@ -62,7 +62,7 @@ public class Xow_popup_parser {
 	}
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}
 	private void Init_ctxs(byte[] tmpl_src, Xoa_ttl ttl) {
-		tmpl_ctx.Clear(); 
+		tmpl_ctx.Clear_all(); 
 		tmpl_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, else page-dependent templates won't work; EX: {{FULLPAGENAME}}; PAGE:en.w:June_20; DATE:2014-06-20
 		tmpl_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());	// NOTE: must set data.Html_restricted() if Special:XowaPopupHistory
 		tmpl_ctx.Page_bgn(tmpl_root, tmpl_src);	
@@ -99,7 +99,7 @@ public class Xow_popup_parser {
 					) {	
 					new_tmpl_bgn = tmpl_bgn;
 					tmpl_read_len_cur = Xow_popup_parser_.Calc_read_len(wtxt_ctx, tmpl_read_len_cur, cfg.Tmpl_read_len(), tmpl_src, tmpl_bgn, tmpl_end);
-					wtxt_ctx.Clear();
+					wtxt_ctx.Clear_all();
 				}
 				else {
 					wrdx_mkr.Process_tkn(cfg, data, data.Wrdx_bfr(), wtxt_root, wtxt_bry, wtxt_len);
@@ -194,7 +194,7 @@ public class Xow_popup_parser {
 		}
 	}
 	private void Wtxt_ctx_init(boolean incremental, byte[] bry) {
-		wtxt_ctx.Clear();
+		wtxt_ctx.Clear_all();
 		wtxt_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());
 		wtxt_ctx.Para().Enabled_(!incremental);		// NOTE: if incremental, disable para; easier to work with \n rather than <p>; also, must be enabled before Page_bgn; DATE:2014-06-18DATE:2014-06-18
 		wtxt_ctx.Lnke().Dangling_goes_on_stack_(incremental);

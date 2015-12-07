@@ -163,6 +163,7 @@ public class Bry_bfr {
 		src.Clear();
 		return this;
 	}
+	public Bry_bfr Add_byte_as_a7(byte v)	{return Add_byte((byte)(v + Byte_ascii.Num_0));}
 	public Bry_bfr Add_byte_eq()			{return Add_byte(Byte_ascii.Eq);}
 	public Bry_bfr Add_byte_pipe()			{return Add_byte(Byte_ascii.Pipe);}
 	public Bry_bfr Add_byte_comma()			{return Add_byte(Byte_ascii.Comma);}
@@ -577,7 +578,11 @@ public class Bry_bfr {
         public static Bry_bfr new_()			{return new Bry_bfr(16);}
         public static Bry_bfr new_(int v)		{return new Bry_bfr(v);}
         public static Bry_bfr reset_(int v)		{return new Bry_bfr(16).Reset_(v);}	// PERF: set initial size to 16, not reset val; allows for faster "startup"; DATE:2014-06-14
+	protected Bry_bfr() {}
 	Bry_bfr(int bfr_max) {
+		Init(bfr_max);
+	}
+	protected void Init(int bfr_max) {
 		this.bfr_max = bfr_max;
 		this.bfr = new byte[bfr_max];
 	}

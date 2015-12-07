@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.bits.*;
 public class Xopg_module_mgr {
 	public boolean Math_exists() {return math_exists;} public void Math_exists_(boolean v) {math_exists = v;} private boolean math_exists;
 	public boolean Imap_exists() {return imap_exists;} public void Imap_exists_(boolean v) {imap_exists = v;} private boolean imap_exists;
