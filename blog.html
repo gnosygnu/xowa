@@ -18,6 +18,56 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.1.1.1_.282016-01-03_20:00_Sun.29">Release: v3.1.1.1 (2016-01-03 20:00 Sun)</span>
+    </h2>
+    <p>
+      v3.1.1 is a minor release. It has a few fixes for some English Wikipedia pages, and many trivial HTML changes.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Handle_refs_inside_.7B.7B.23tag.7D.7D">Handle refs inside {{#tag}}</span>
+    </h3>
+    <p>
+      I only saw this issue on one page in English Wikipedia (United Kingdom), but it has potential for more effects. Basically, XOWA did not handle &lt;ref&gt; inside a {{#tag}}. For example: {{#tag:ref|&lt;ref&gt;a&lt;/ref&gt;}}. For the United Kingdom page, this threw off the format, and made the Infobox as wide as the entire page.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_incorrect_search_word_counts_and_IPA_links">Fix for incorrect search word counts and IPA links</span>
+    </h3>
+    <p>
+      There was a minor issue with incorrect search counts for words. I don't think this affects anything for desktop searches, but it did throw off the Android search.
+    </p>
+    <p>
+      Meanwhile, due to incorrect URL generation, IPA links would not download from the web after being clicked.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Trivial_HTML_changes">Trivial HTML changes</span>
+    </h3>
+    <p>
+      v3.1.1 has a bunch of HTML changes to make it slightly closer to MediaWiki's HTML.
+    </p>
+    <ul>
+      <li>
+        The most significant one is the removal of the magnify icon, which is now being handled in CSS as opposed to a separate &lt;img&gt; tag.
+      </li>
+      <li>
+        There are a few other ones affecting incorrect escaping of quotes. This would cause incomplete titles when hovering over images or links.
+      </li>
+      <li>
+        Finally there are minor whitespace / attribute generation issues. None of these should be noticeable; they were made to handle log messages during bulk HTML generation
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.1.2">Next release: v3.1.2</span>
+    </h3>
+    <p>
+      I was on track to release the new Android version tonight, but ran into a last minute issue with thumbs and English Wikipedia. I'm pushing this out another week.
+    </p>
+    <p>
+      For wikis, I'll work on the French Wikipedia refresh, and try to add on Polish and Greek.
+    </p>
+    <p>
+      Finally, an apology to those I've promised minor changes. I've spent a lot of time on Android recently, and there's been a backlog of items. I'm hoping to be done with the Android version in the next few weeks and will work on these items as I get time.
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_NONE_.282015-12-27_22:00_Sun.29">Release: NONE (2015-12-27 22:00 Sun)</span>
     </h2>
     <p>

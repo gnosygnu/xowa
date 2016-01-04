@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_windows_64_v2.12.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_windows_64_v3.1.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_windows_v2.12.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_windows_v3.1.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_linux_64_v2.12.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_linux_64_v3.1.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_linux_v2.12.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_linux_v3.1.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_macosx_64_v2.12.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_macosx_64_v3.1.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.12.1.1/xowa_app_macosx_v2.12.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_macosx_v3.1.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.12.1.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.1.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -54,14 +54,17 @@
       <span class='mw-headline'>Change log</span>
     </h2>
     <h2>
-      <span class="mw-headline" id="v2.12.1.1_.282015-12-07.29">v2.12.1.1 (2015-12-07)</span>
+      <span class="mw-headline" id="v3.1.1.1_.282016-01-03.29">v3.1.1.1 (2016-01-03)</span>
     </h2>
     <p>
-      <b>package</b>
+      <b>fix</b>
     </p>
     <ul>
       <li>
-        Package: Release image update for Italian wikis (2015-11). See: <a href="https://archive.org/details/Xowa_itwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_itwiki_latest</a>
+        Search: Generate correct counts for search words (affects search results sometimes being off). [broken since:v2.4.4]
+      </li>
+      <li>
+        Url: Fix IPA audio links (affects IPA audio links would not download pronunciations when clicked); EX:[[File:A.png|link=file:///C:/A.png]] x&gt; href='/wiki/file:///C:/A.png'. See: <a href="https://en.wikipedia.org/wiki/Beethoven">https://en.wikipedia.org/wiki/Beethoven</a> [broken since:v2.8.1]
       </li>
     </ul>
     <p>
@@ -69,19 +72,21 @@
     </p>
     <ul>
       <li>
-        References: Do not duplicate references if inside &lt;poem&gt; within a &lt;page&gt; (affects duplicate references on many wikisource pages). See: <a href="https://it.wikisource.org/wiki/La_Secchia_rapita/Canto_primo">https://it.wikisource.org/wiki/La_Secchia_rapita/Canto_primo</a>
+        ParserFunctions: Handle &lt;refs&gt; inside {{#tag}} (affects incorrectly placed ref on 1 en.w page); EX:{{#tag:ref|&lt;ref&gt;a&lt;/ref&gt;b}}. See: <a href="https://en.wikipedia.org/wiki/UK">https://en.wikipedia.org/wiki/UK</a> <a href="https://en.wikisource.org/wiki/The_Canterville_Ghost">https://en.wikisource.org/wiki/The_Canterville_Ghost</a>
       </li>
       <li>
-        Poem: Handle recursive poems particularly inside references (affects poems showing incorrect reference text). See: <a href="https://it.wikisource.org/wiki/La_Secchia_rapita/Canto_primo">https://it.wikisource.org/wiki/La_Secchia_rapita/Canto_primo</a>
+        ParserFunctions: Add {{REVISIONSIZE}} (affects script error on 2 ru.w pages); EX:{{REVISIONSIZE}}. See: <a href="https://ru.wikipedia.org/wiki/%D0%AE%D1%80%D1%88%D0%BE%D1%80">https://ru.wikipedia.org/wiki/Юршор</a> <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%8F%D1%80%D1%81%D0%BA">https://ru.wikipedia.org/wiki/Красноярск</a>
+      </li>
+    </ul>
+    <p>
+      <b>significant</b>
+    </p>
+    <ul>
+      <li>
+        Url: Process first # as anchor, not last (affects script error on 1 en.w page); EX:A#B#C -&gt; "B#C" x&gt; "C" . See: <a href="https://en.wikipedia.org/wiki/Grand_Central_Terminal">https://en.wikipedia.org/wiki/Grand_Central_Terminal</a>
       </li>
       <li>
-        ImageMap: Do not clear scribunto for image map (affects script error on many dozen it.s pages). See: <a href="https://it.wikisource.org/wiki/La_guerra_del_vespro_siciliano/Indice">https://it.wikisource.org/wiki/La_guerra_del_vespro_siciliano/Indice</a> <a href="https://it.wikisource.org/wiki/Delle_Frascherie_di_Antonio_Abati_fasci_tre/Tavola_delle_poesie">https://it.wikisource.org/wiki/Delle_Frascherie_di_Antonio_Abati_fasci_tre/Tavola_delle_poesie</a> <a href="https://it.wikisource.org/wiki/Pensieri_e_giudizi/Indice_dei_nomi">https://it.wikisource.org/wiki/Pensieri_e_giudizi/Indice_dei_nomi</a> <a href="https://it.wikisource.org/wiki/Patria_Esercito_Re/Indice_generale">https://it.wikisource.org/wiki/Patria_Esercito_Re/Indice_generale</a>
-      </li>
-      <li>
-        Scribunto.Text: Detect integer keys for json_decode (affects script error on 1 it.s page). See: <a href="https://it.wikisource.org/wiki/Il_Re_Cervo">https://it.wikisource.org/wiki/Il_Re_Cervo</a>
-      </li>
-      <li>
-        Xtn.Mapsources: Handle coordinates with ’’ (affects script error on 1 it.v page). See: <a href="https://it.wikivoyage.org/wiki/Morro_d%27Oro">https://it.wikivoyage.org/wiki/Morro_d'Oro</a>
+        Html: Remove magnify.png from HTML (use CSS). See: <a href="https://en.wikipedia.org/wiki/Beethoven">https://en.wikipedia.org/wiki/Beethoven</a>
       </li>
     </ul>
     <p>
@@ -89,19 +94,7 @@
     </p>
     <ul>
       <li>
-        Parser.Table: Ignore sequences like "\n| ... ||" (affects broken table on 1 nl.w page). See: <a href="https://nl.wikipedia.org/wiki/Tabel_van_Belgische_gemeenten">https://nl.wikipedia.org/wiki/Tabel_van_Belgische_gemeenten</a>
-      </li>
-      <li>
-        File: Handle invalid file-system characters for file titles (affects files with quotes and other invalid file-system characters not downloaded when clicking on image). See: <a href="https://en.wikipedia.org/wiki/File:Volc%C3%A1n_Chimborazo,_%22El_Taita_Chimborazo%22.jpg">https://en.wikipedia.org/wiki/File:Volcán_Chimborazo,_%22El_Taita_Chimborazo%22.jpg</a>
-      </li>
-      <li>
-        Html: Encode quotes for xowa_title (affects files not downloadable if file name has quotes); EX:xowa_title="A"B.png". See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
-      </li>
-      <li>
-        Html: Encode headers with literal Category links (affects table of contents link not working if section header has category link); EX:[[:Category:A]] -&gt; id="Category:A" x&gt; "". See: <a href="https://simple.wikipedia.org/wiki/Wikipedia:Requests_for_deletion/Log_1">https://simple.wikipedia.org/wiki/Wikipedia:Requests_for_deletion/Log_1</a>
-      </li>
-      <li>
-        Interwiki: Show "[[nb:]]" and "[[lzh:]]" in "In other languages". See: <a href="https://nn.wikipedia.org/wiki/">https://nn.wikipedia.org/wiki/</a>
+        Parser.Lnki: Handle link arguments to anchors within current page (affects links not working for images if they link to section within current page); EX:[[File:A.png|link=#B]]. See: <a href="https://en.wikipedia.org/wiki/History_of_Nauru">https://en.wikipedia.org/wiki/History_of_Nauru</a>
       </li>
     </ul>
     <p>
@@ -109,30 +102,16 @@
     </p>
     <ul>
       <li>
-        Namespace: Standardize talk names to underscore, not space; EX:"Help_talk" not "Help talk".
+        Html: Remove underlines from "Redirected from" messages. See: <a href="https://en.wikipedia.org/wiki/Summer_Solstice">https://en.wikipedia.org/wiki/Summer_Solstice</a>
       </li>
       <li>
-        Html: Do not write "title" if empty; EX:title="".
+        Html: Escape quotes in alt for gallery file_names (affects incorrect alts for gallery itm); EX:&lt;gallery&gt;File:A"b.png&lt;/gallery&gt;. See: <a href="https://en.wikipedia.org/wiki/Alexandria,_Romania">https://en.wikipedia.org/wiki/Alexandria,_Romania</a>
       </li>
       <li>
-        Html: Convert spaces to underscores for link arguments; EX:[[File:A.png|link=File:A b.ogg]] -&gt; "/wiki/A_b.ogg" x&gt; "/wiki/A_b.ogg".
+        Html: Escape quotes in title for links on Category page (affects incorrect titles for category page links). See: <a href="https://simple.wikipedia.org/wiki/Category:Solo_organ_piece">https://simple.wikipedia.org/wiki/Category:Solo_organ_piece</a>
       </li>
       <li>
-        Html: Convert tab / new-lines to spaces for titles; EX:[[A|B\nC]].
-      </li>
-      <li>
-        Html: Convert quotes in internal links for titles (affects garbled titles for some images); EX:[[A|B"C]].
-      </li>
-      <li>
-        Make.Images: Ignore files with no text (affects generates log errors of "failed to parse page_name error"). See: <a href="https://it.wiktionary.org/wiki/miercuri">https://it.wiktionary.org/wiki/miercuri</a>
-      </li>
-    </ul>
-    <p>
-      <b>doc</b>
-    </p>
-    <ul>
-      <li>
-        Website: Fix links for French Wikipedia text {detected by anonymous}. See: <a href="https://archive.org/download/Xowa_frwiki_latest/Xowa_frwiki_2015-11-02_text.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_frwiki_latest/Xowa_frwiki_2015-11-02_text.7z</a>
+        Html: Do not output alt in caption if alt only has whitespace (affects useless &lt;hr&gt; when alt is just blank space); EX:[[File:A.png|thumb|alt= ]]. See: <a href="https://en.wikipedia.org/wiki/Bird">https://en.wikipedia.org/wiki/Bird</a>
       </li>
     </ul>
     
