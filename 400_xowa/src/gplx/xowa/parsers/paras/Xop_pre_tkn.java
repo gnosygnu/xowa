@@ -26,7 +26,7 @@ public class Xop_pre_tkn extends Xop_tkn_itm_base {
 	public byte Pre_tid() {return pre_tid;} private byte pre_tid = Pre_tid_null;
 	@Override public void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {
 		switch (pre_tid) {
-			case Xop_pre_tkn.Pre_tid_bgn: bfr.Add(Html_tag_.Pre_lhs); break;		// '<pre>'
+			case Xop_pre_tkn.Pre_tid_bgn: bfr.Add(Gfh_tag_.Pre_lhs); break;		// '<pre>'
 			case Xop_pre_tkn.Pre_tid_end: bfr.Add(Bry__pre__rhs); break;			// '\n</pre>\n\n'
 		}
 	}

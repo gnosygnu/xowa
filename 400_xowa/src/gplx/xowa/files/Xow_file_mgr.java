@@ -89,6 +89,10 @@ public class Xow_file_mgr implements GfoInvkAble {
 		return fsdb_mgr.Mnt_mgr().Mnts__get_main().Cfg_mgr().Grps_get_or_load(grp);
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr = new Xof_fsdb_mgr__sql();
+	public void Clear_for_tests() {	// NOTE: must clear else fsdb_mode will be cached for multiple runs; will generally be v1, but some tests will set to v2; DATE:2015-12-22
+		version = Bool_.__byte;
+		fsdb_mode = null;
+	}
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
 		xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_unknown);
 		byte[] xfer_itm_ttl = xfer_itm.Lnki_ttl();

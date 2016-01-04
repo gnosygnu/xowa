@@ -26,7 +26,7 @@ import gplx.xowa.xtns.pfuncs.*;
 public class Scrib_invoke_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_invoke;}
 	@Override public Pf_func New(int id, byte[] name) {return new Scrib_invoke_func().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// {{#invoke:mod_name|prc_name|prc_args...}}
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// {{#invoke:mod_name|prc_name|prc_args...}}
 		Xowe_wiki wiki = ctx.Wiki();
 		byte[] mod_name = Eval_argx(ctx, src, caller, self);
 		if (Bry_.Len_eq_0(mod_name)) {Error(bfr, wiki.Msg_mgr(), Err_mod_missing); return;}		// EX: "{{#invoke:}}"
@@ -62,12 +62,12 @@ public class Scrib_invoke_func extends Pf_func_base {
 		catch (Throwable e) {
 			Err err = Err_.cast_or_make(e);
 			Error(bfr, wiki.Msg_mgr(), err);
-			bfr.Add(Html_tag_.Comm_bgn).Add_str_u8(err.To_str__full()).Add(Html_tag_.Comm_end);
+			bfr.Add(Gfh_tag_.Comm_bgn).Add_str_u8(err.To_str__full()).Add(Gfh_tag_.Comm_end);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
 				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
 				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
-				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Cur_page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), err.To_str__log(), "\n", "\t");
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Cur_page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}

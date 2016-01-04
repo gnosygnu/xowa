@@ -89,7 +89,7 @@ public class Wdata_hwtr_mgr {
 		return bfr.To_bry_and_clear();
 	}
 	public static void Write_link_wikidata(Bry_bfr bfr, byte[] href, byte[] text) {
-		text = gplx.langs.htmls.Html_utl.Escape_html_as_bry(text);
+		text = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(text);
 		fmtr_link_wikidata.Bld_bfr_many(bfr, href, text);
 	}	private static final Bry_fmtr fmtr_link_wikidata = Bry_fmtr.new_("<a href='/wiki/~{href}'>~{text}</a>", "href", "text");
 }

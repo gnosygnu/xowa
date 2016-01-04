@@ -65,7 +65,7 @@ public class Xoh_dom_ {
 		return true;
 	}
 	public static String Title_by_href(byte[] href, byte[] html_src) {
-		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.Bry__a, Html_atr_.Bry__href, href, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_bry, 0);
+		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Gfh_tag_.Bry__a, Gfh_atr_.Bry__href, href, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_bry, 0);
 		return String_.new_u8(xowa_title);
 	}	private static final Xoh_find dom_find = new Xoh_find();
 }

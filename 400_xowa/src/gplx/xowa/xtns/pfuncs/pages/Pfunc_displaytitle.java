@@ -22,7 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_page_displaytitle;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_displaytitle().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser_mgr().Main();
 		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(wiki);

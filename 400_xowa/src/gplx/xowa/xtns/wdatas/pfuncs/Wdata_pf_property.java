@@ -24,7 +24,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wdata_pf_property extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_property;}
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_property().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// {{#property:pNumber|}}
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// {{#property:pNumber|}}
 		byte[] id = Eval_argx(ctx, src, caller, self);
 		Xop_log_property_wkr property_wkr = ctx.Xtn__wikidata__property_wkr();
 		long log_time_bgn = 0;

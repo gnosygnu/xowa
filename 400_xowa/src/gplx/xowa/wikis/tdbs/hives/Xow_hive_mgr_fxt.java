@@ -108,6 +108,6 @@ class Xob_reg_wtr {
 	}
 	public void Flush(Io_url url) {
 		Io_mgr.Instance.SaveFilBfr(url, bfr);
-//			Tfds.Write(url.Raw() + "\n" + Io_mgr.Instance.LoadFilStr(url));
+//			Tfds.Dbg(url.Raw() + "\n" + Io_mgr.Instance.LoadFilStr(url));
 	}
 }

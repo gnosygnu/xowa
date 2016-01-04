@@ -51,7 +51,7 @@ public class Xod_page_itm {
 		this.rev_id = page_id;
 		this.ttl_text = String_.new_u8(ttl.Page_txt());
 		this.ttl_db = ttl.Page_db_as_str();
-		this.modified_on = db_page.Modified_on().XtoStr_fmt_iso_8561();
+		this.modified_on = db_page.Modified_on().XtoStr_fmt_iso_8561_w_tz();
 		this.lang_count = 1;
 		this.redirected = null;
 		this.description = null;

@@ -21,7 +21,7 @@ import gplx.xowa.apps.gfs.*; import gplx.langs.gfs.*;
 public class Xop_xowa_func_tst {
 	@Before public void init() {
 		Xoa_gfs_mgr.Msg_parser_init();
-	} private Xop_fxt fxt = new Xop_fxt();
+	} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Template() {
 		GfsCore.Instance.AddCmd(fxt.App(), Xoae_app.Invk_app);
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(true);

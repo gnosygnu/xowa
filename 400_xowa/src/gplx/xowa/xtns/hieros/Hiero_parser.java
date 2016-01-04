@@ -40,11 +40,11 @@ class Hiero_parser {
 				int new_pos = trie.Match_pos();
 				switch (itm.Tid()) {
 					case Hiero_parser_itm.Tid_comment:
-						int end_comm = Bry_find_.Find_fwd(src, Html_tag_.Comm_end, new_pos, end);
+						int end_comm = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, new_pos, end);
 						if (end_comm == Bry_find_.Not_found)	// --> not found; for now, ignore <!--
 							pos = new_pos;
 						else
-							pos = end_comm + Html_tag_.Comm_end_len;
+							pos = end_comm + Gfh_tag_.Comm_end_len;
 						break;
 					case Hiero_parser_itm.Tid_block_spr:
 						New_block();
@@ -106,7 +106,7 @@ class Hiero_parser {
 		Init_itms(Hiero_parser_itm.Tid_tkn_spr, "*", ":", "(", ")");
 		Init_itms(Hiero_parser_itm.Tid_dot, ".");
 		Init_itms(Hiero_parser_itm.Tid_single_char , "!");
-		Init_itms(Hiero_parser_itm.Tid_comment, Html_tag_.Comm_bgn_str);
+		Init_itms(Hiero_parser_itm.Tid_comment, Gfh_tag_.Comm_bgn_str);
 	}
 	private void Init_itms(byte tid, String... keys) {
 		int keys_len = keys.length;

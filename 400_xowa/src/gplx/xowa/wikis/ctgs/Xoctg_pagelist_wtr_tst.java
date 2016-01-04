@@ -82,6 +82,6 @@ class Xoctg_pagelist_mgr_fxt {
 		Xowd_page_itm[] page_ary = (Xowd_page_itm[])init_ctgs.To_ary_and_clear(Xowd_page_itm.class);
 		hidden_wtr.Print_hidden(bfr, fxt.Wiki(), page_ary, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
-//		Tfds.Write(bfr.To_bry_and_clear());
+		// Tfds.Dbg(bfr.To_bry_and_clear());
 	}
 }

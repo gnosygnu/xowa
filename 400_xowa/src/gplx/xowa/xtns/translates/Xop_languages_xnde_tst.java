@@ -23,7 +23,7 @@ public class Xop_languages_xnde_tst {
 		fxt.Reset();
 		fxt.Page_ttl_("Help:A");
 		fxt.Init_page_create("Help:A", "");				// create for AllPages 
-	} 	private Xop_fxt fxt = new Xop_fxt();
+	} 	private final Xop_fxt fxt = new Xop_fxt();
 	@Test   public void None() {
 		fxt.Test_parse_page_all_str("<languages/>", "");	// empty
 	}

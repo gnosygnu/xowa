@@ -53,5 +53,5 @@ public class Js_img_mgr {
 				break;
 		}
 	}
-	public static String To_doc_uid(int html_uid) {return "xowa_file_img_" + Int_.To_str(html_uid);}
+	public static String To_doc_uid(int html_uid) {return gplx.xowa.htmls.Xoh_img_mgr.Str__html_uid + Int_.To_str(html_uid);}
 }

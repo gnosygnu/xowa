@@ -44,9 +44,9 @@ public class Xop_statistics_page implements Xows_page {
 	,	"</div>"
 	), "page_stats", "ns_stats");
 }
-class Xop_statistics_stats_page_grp extends gplx.core.brys.Bfr_arg_base {
+class Xop_statistics_stats_page_grp implements gplx.core.brys.Bfr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {			
+	public void Bfr_arg__add(Bry_bfr bfr) {			
 		byte[] lbl_header_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_pages);
 		byte[] lbl_articles = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_articles);
 		byte[] lbl_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages);
@@ -69,10 +69,10 @@ class Xop_statistics_stats_page_grp extends gplx.core.brys.Bfr_arg_base {
 	,	"  </tr>"
 	), "lbl_header_pages", "lbl_articles", "lbl_pages", "lbl_pages_desc", "page_count_main", "page_count_all");
 }
-class Xop_statistics_stats_ns_grp extends gplx.core.brys.Bfr_arg_base {
+class Xop_statistics_stats_ns_grp implements gplx.core.brys.Bfr_arg {
 	private Xop_statistics_stats_ns_itm ns_itm_fmtr = new Xop_statistics_stats_ns_itm();
 	public void Wiki_(Xowe_wiki v) {this.wiki = v; ns_itm_fmtr.Wiki_(v);} private Xowe_wiki wiki;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		byte[] lbl_header_ns = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_ns);
 		fmtr_ns_grp.Bld_bfr_many(bfr, lbl_header_ns, ns_itm_fmtr);
 	}
@@ -83,9 +83,9 @@ class Xop_statistics_stats_ns_grp extends gplx.core.brys.Bfr_arg_base {
 	,	"  </tr>~{ns_itms}"
 	), "lbl_header_ns", "ns_itms");
 }
-class Xop_statistics_stats_ns_itm extends gplx.core.brys.Bfr_arg_base {
+class Xop_statistics_stats_ns_itm implements gplx.core.brys.Bfr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Count();
 		for (int i = 0; i < ns_len; i++) {
@@ -104,9 +104,9 @@ class Xop_statistics_stats_ns_itm extends gplx.core.brys.Bfr_arg_base {
 	,	"  </tr>"
 	), "ns_name", "ns_count");
 }
-class Xop_statistics_stats_wiki_grp extends gplx.core.brys.Bfr_arg_base {
+class Xop_statistics_stats_wiki_grp implements gplx.core.brys.Bfr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.To_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
 	}
 	private Bry_fmtr fmtr_wiki = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

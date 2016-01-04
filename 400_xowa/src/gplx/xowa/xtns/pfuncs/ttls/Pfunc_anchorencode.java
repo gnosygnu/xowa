@@ -32,7 +32,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 		anchor_tkn_mkr = anchor_ctx.Tkn_mkr();
 		anchor_parser = ctx.Wiki().Parser_mgr().Anchor_encoder();
 	}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		if (anchor_ctx == null) Func_init(ctx);
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		Anchor_encode(val_ary, bfr, ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls());

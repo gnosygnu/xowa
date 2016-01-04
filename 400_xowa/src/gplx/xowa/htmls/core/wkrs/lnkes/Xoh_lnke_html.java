@@ -25,7 +25,7 @@ public class Xoh_lnke_html {
 		int href_bgn = lnke.Lnke_href_bgn(), href_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		byte lnke_type = Calc_type(lnke);
 		if (!hctx.Mode_is_alt()) {					// do not write "<a ...>" if mode is alt
-			bfr.Add(Xoh_consts.A_bgn);
+			bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 			if (Write_href(bfr, hctx, ctx, src, lnke, href_bgn, href_end, proto_is_xowa))
 				bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_type));
 			bfr.Add(Xoh_lnke_dict_.Html__rhs_end);
@@ -34,7 +34,7 @@ public class Xoh_lnke_html {
 		if (!hctx.Mode_is_alt()) {
 			if (proto_is_xowa)	// add <img />
 				bfr.Add(Xoh_consts.Img_bgn).Add(html_wtr.Html_mgr().Img_xowa_protocol()).Add(Xoh_consts.__inline_quote);
-			bfr.Add(Xoh_consts.A_end);
+			bfr.Add(Gfh_bldr_.Bry__a_rhs);
 		}
 	}
 	public boolean Write_href(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {

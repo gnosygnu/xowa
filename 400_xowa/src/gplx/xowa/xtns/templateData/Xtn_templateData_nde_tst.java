@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.templateData; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Xtn_templateData_nde_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic() {
 		fxt.Test_parse_page_all_str("<templateData>{\"description\":\"test\"}</templateData>", "<pre style=\"overflow:auto\">{&quot;description&quot;:&quot;test&quot;}</pre>");
 	}

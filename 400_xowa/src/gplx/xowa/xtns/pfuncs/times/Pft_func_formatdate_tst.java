@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pft_func_formatdate_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void Fmt_dmy()				{fxt.Test_parse_tmpl_str_test("{{#formatdate:2012-01-02|dmy}}"			, "{{test}}"			, "2 January 2012");}
 	@Test  public void Fmt_mdy()				{fxt.Test_parse_tmpl_str_test("{{#formatdate:2012-01-02|mdy}}"			, "{{test}}"			, "January 2, 2012");}

@@ -20,17 +20,17 @@ import org.junit.*; import gplx.core.primitives.*; import gplx.core.brys.*;
 public class Bry__tst {
 	private final Bry__fxt fxt = new Bry__fxt();
 	@Test  public void new_ascii_() {
-		fxt.Test_new_a7("a"		, Bry_.new_ints(97));				// one
-		fxt.Test_new_a7("abc"	, Bry_.new_ints(97, 98, 99));		// many
+		fxt.Test_new_a7("a"		, Bry_.New_by_ints(97));				// one
+		fxt.Test_new_a7("abc"	, Bry_.New_by_ints(97, 98, 99));		// many
 		fxt.Test_new_a7(""		, Bry_.Empty);						// none
-		fxt.Test_new_a7("¢€𤭢"	, Bry_.new_ints(63, 63, 63, 63));	// non-ascii -> ?
+		fxt.Test_new_a7("¢€𤭢"	, Bry_.New_by_ints(63, 63, 63, 63));	// non-ascii -> ?
 	}
 	@Test  public void new_u8() {
-		fxt.Test_new_u8("a"		, Bry_.new_ints(97));						// one
-		fxt.Test_new_u8("abc"	, Bry_.new_ints(97, 98, 99));				// many
-		fxt.Test_new_u8("¢"		, Bry_.new_ints(194, 162));					// bry_len=2; cent
-		fxt.Test_new_u8("€"		, Bry_.new_ints(226, 130, 172));			// bry_len=3; euro
-		fxt.Test_new_u8("𤭢"	, Bry_.new_ints(240, 164, 173, 162));		// bry_len=3; example from en.w:UTF-8
+		fxt.Test_new_u8("a"		, Bry_.New_by_ints(97));						// one
+		fxt.Test_new_u8("abc"	, Bry_.New_by_ints(97, 98, 99));				// many
+		fxt.Test_new_u8("¢"		, Bry_.New_by_ints(194, 162));					// bry_len=2; cent
+		fxt.Test_new_u8("€"		, Bry_.New_by_ints(226, 130, 172));			// bry_len=3; euro
+		fxt.Test_new_u8("𤭢"	, Bry_.New_by_ints(240, 164, 173, 162));		// bry_len=3; example from en.w:UTF-8
 	}
 	@Test   public void Add__bry_plus_byte() {
 		fxt.Test_add("a"		, Byte_ascii.Pipe		, "a|");			// basic

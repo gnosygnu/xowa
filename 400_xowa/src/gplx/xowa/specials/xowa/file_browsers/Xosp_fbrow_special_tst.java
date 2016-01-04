@@ -27,7 +27,7 @@ public class Xosp_fbrow_special_tst {
 		, "    <td>"
 		, "      <table width='100%'>"
 		, "        <tr>"
-		, "          <td align='left'><a href='javascript:get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=xowa.wiki.add&amp;path=mem/root/dir/&amp;selected=\", \"chk_\");'>import</a>"
+		, "          <td align='left'><a href='javascript:Xo__file_browser__get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=xowa.wiki.add&amp;path=mem/root/dir/&amp;selected=\", \"chk_\");'>import</a>"
 		, "      	 </td>"
 		, "        </tr>"
 		, "      </table>"

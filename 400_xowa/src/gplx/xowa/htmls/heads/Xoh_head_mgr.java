@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.bits.*;
-public class Xoh_head_mgr extends gplx.core.brys.Bfr_arg_base {
+public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; 
 	private Xoh_head_itm__base[] itms; private int itms_len;
 	private Xoh_head_wtr wtr = new Xoh_head_wtr();
@@ -73,7 +73,7 @@ public class Xoh_head_mgr extends gplx.core.brys.Bfr_arg_base {
 		for (int i = 0; i < itms_len; ++i)
 			itms[i].Clear();
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {Write(bfr, app, wiki, page);}
+	public void Bfr_arg__add(Bry_bfr bfr) {Write(bfr, app, wiki, page);}
 	public void Write(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		Set_wkrs();
 		wtr.Init(bfr);

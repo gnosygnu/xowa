@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.specials.*;
-public class Xou_history_html extends gplx.core.brys.Bfr_arg_base implements Xows_page {
+public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__page_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
@@ -27,7 +27,7 @@ public class Xou_history_html extends gplx.core.brys.Bfr_arg_base implements Xow
 		html_grp.Bld_bfr_many(bfr, this);
 		page.Data_raw_(bfr.To_bry_and_rls());
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xou_history_itm itm = mgr.Get_at(i);

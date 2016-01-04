@@ -24,18 +24,18 @@ public class Pfunc_case extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_lc;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_case(case_type, first).Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr trg) {
-		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
-		int val_dat_ary_len = val_dat_ary.length; if (val_dat_ary_len == 0) return; // nothing to uc / lc; just return
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == Bry_.Empty) return;
+		int argx_len = argx.length; if (argx_len == 0) return; // nothing to uc / lc; just return
 		Xol_lang_itm lang = ctx.Wiki().Lang();
 		boolean upper = case_type == Xol_lang_itm.Tid_upper;
 		if (first) {
 			Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();
-			val_dat_ary = lang.Case_mgr().Case_build_1st(tmp_bfr, upper, val_dat_ary, 0, val_dat_ary_len);
+			argx = lang.Case_mgr().Case_build_1st(tmp_bfr, upper, argx, 0, argx_len);
 			tmp_bfr.Mkr_rls();
 		}
 		else
-			val_dat_ary = lang.Case_mgr().Case_build(upper, val_dat_ary, 0, val_dat_ary_len);
-		trg.Add(val_dat_ary);
+			argx = lang.Case_mgr().Case_build(upper, argx, 0, argx_len);
+		bfr.Add(argx);
 	}
 }	

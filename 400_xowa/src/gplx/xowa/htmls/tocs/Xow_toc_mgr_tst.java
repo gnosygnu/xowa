@@ -473,7 +473,7 @@ public class Xow_toc_mgr_tst {
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='File:A.png_b'><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a> b</span></h2>"
+		, "<h2><span class='mw-headline' id='File:A.png_b'><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a> b</span></h2>"
 		));
 	}
 	@Test   public void Lnki_invalid() { // PURPOSE: invalid lnki was causing null ref; DATE:2014-02-07
@@ -503,7 +503,7 @@ public class Xow_toc_mgr_tst {
 class Xow_toc_mgr_fxt {		
 	private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
 	private Bry_bfr tmp = Bry_bfr.new_();
-	public Xop_fxt Fxt() {return fxt;} private Xop_fxt fxt = new Xop_fxt();
+	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 		toc_mgr.Clear();

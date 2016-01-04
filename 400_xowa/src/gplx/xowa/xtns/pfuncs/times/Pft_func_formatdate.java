@@ -23,7 +23,7 @@ public class Pft_func_formatdate extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_formatdate;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pft_func_formatdate().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		int self_args_len = self.Args_len();
 		byte[] date_bry = Eval_argx(ctx, src, caller, self);
 		byte[] fmt_bry = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);

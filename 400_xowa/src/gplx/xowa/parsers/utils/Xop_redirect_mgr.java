@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 public class Xop_redirect_mgr {
 	private final Xowe_wiki wiki; private final Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
@@ -70,24 +69,23 @@ public class Xop_redirect_mgr {
 			,	Xop_tkn_.Lnki_end			// "]]"
 			);
 	}
-	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
-		List_adp list = page.Redirected_ttls();
+	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, List_adp list) {
 		int list_len = list.Count();
 		if (list_len == 0) return Bry_.Empty;
-		Bry_bfr redirect_bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr redirect_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < list_len; i++) {
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
-			byte[] redirect_ttl = (byte[])list.Get_at(i);
-			redirect_bfr.Add(Xoh_consts.A_bgn)			// '<a href="'
-				.Add(Xoh_href_.Bry__wiki)				// '/wiki/'
-				.Add(redirect_ttl)						// 'PageA'
-				.Add(Bry_redirect_arg)					// ?redirect=no
-				.Add(Xoh_consts.A_bgn_lnki_0)			// '" title="'
-				.Add(redirect_ttl)						// 'PageA'
-				.Add(Xoh_consts.__end_quote)			// '">'
-				.Add(redirect_ttl)						// 'PageA'
-				.Add(Xoh_consts.A_end)					// </a>
-				;
+			byte[] ttl_unders = (byte[])list.Get_at(i);
+			byte[] ttl_spaces = Xoa_ttl.Replace_unders(ttl_unders);
+			redirect_bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href)	// '<a href="'
+				.Add(Xoh_href_.Bry__wiki)					// '/wiki/'
+				.Add(ttl_unders)							// 'PageA'
+				.Add(Bry_redirect_arg)						// ?redirect=no
+				.Add(Gfh_bldr_.Bry__title__nth)				// '" title="'
+				.Add(ttl_spaces)							// 'PageA'
+				.Add(Gfh_bldr_.Bry__lhs_end_head_w_quote)	// '">'
+				.Add(ttl_spaces)							// 'PageA'
+				.Add(Gfh_bldr_.Bry__a_rhs);					// </a>
 		}
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(Xol_msg_itm_.Id_redirectedfrom);
 		Bry_bfr fmt_bfr = app.Utl__bfr_mkr().Get_b512();

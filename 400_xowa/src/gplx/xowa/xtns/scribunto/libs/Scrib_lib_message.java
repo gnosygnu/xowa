@@ -135,7 +135,7 @@ class Scrib_lib_message_data {
 			&&	raw_msg_key == null		// ignore if raw_msg; note that raw_msg can generate empty String; EX:raw_msg={{empty}} -> ""; PAGE:it.w:L'Internazionale DATE:2015-02-25
 			) {	
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			bfr.Add(gplx.langs.htmls.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
+			bfr.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.Gfh_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
 			return bfr.To_bry_and_rls();
 		}
 		switch (fmt_tid) {
@@ -144,10 +144,10 @@ class Scrib_lib_message_data {
 				break;
 			case Fmt_tid_parseAsBlock:	// NOTE: MW passes msg_val through parser and strips <p> if tid==parse; XOWA does the opposite, so add <p> if parseAsBlock requested
 				Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).To_bry_and_rls();
+				msg_val = bfr.Add(Gfh_tag_.P_lhs).Add(msg_val).Add(Gfh_tag_.P_rhs).To_bry_and_rls();
 				break;
 			case Fmt_tid_escaped:
-				msg_val = gplx.langs.htmls.Html_utl.Escape_html_as_bry(msg_val);
+				msg_val = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(msg_val);
 				break;
 		}
 		return msg_val;

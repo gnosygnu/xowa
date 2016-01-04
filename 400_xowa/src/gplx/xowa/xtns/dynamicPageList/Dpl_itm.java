@@ -142,7 +142,7 @@ class Dpl_itm {
 		byte[] key_bry = Bry_.Mid(src, fld_bgn, fld_end);
 		boolean log = 
 			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null	// known invalid key; just log it; handles common items like orcer and showcurid
-			||	Bry_.Has_at_bgn(key_bry, Html_tag_.Comm_bgn)					// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
+			||	Bry_.Has_at_bgn(key_bry, Gfh_tag_.Comm_bgn)					// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
 			);
 		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_u8(page_ttl), String_.new_u8(key_bry));
 		if (log)

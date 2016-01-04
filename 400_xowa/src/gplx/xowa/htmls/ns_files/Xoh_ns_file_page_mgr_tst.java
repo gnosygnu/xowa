@@ -26,7 +26,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		( Xoh_ns_file_page_mgr_fxt.Hdr
 		, "<div class=\"fullImageLink\" id=\"file\">"
 		, "  <a href=\"file:///mem/file/orig.png\" xowa_title=\"Test.png\">"
-		, "    <img id=\"xowa_file_img_0\" alt=\"Test.png\" src=\"file:///mem/file/cur.png\" width=\"300\" height=\"200\" />"
+		, "    <img id=\"xoimg_0\" alt=\"Test.png\" src=\"file:///mem/file/cur.png\" width=\"300\" height=\"200\" />"
 		, "  </a>"
 		, "  <div class=\"mw-filepage-resolutioninfo\">Size of this preview: "
 		, "    <a href=\"file:///mem/file/cur.png\" class=\"mw-thumbnail-link\" xowa_title=\"Test.png\">"
@@ -72,7 +72,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		,	"<div class=\"fullImageLink\" id=\"file\">"
 		,	"  <div>"
 		,	"    <a href=\"file:///mem/file/thumb.png\" class=\"image\" title=\"Test.ogv\">"
-		,	"      <img id=\"xowa_file_img_0\" src=\"file:///mem/file/thumb.png\" width=\"300\" height=\"200\" alt=\"\" />"
+		,	"      <img id=\"xoimg_0\" src=\"file:///mem/file/thumb.png\" width=\"300\" height=\"200\" alt=\"\" />"
 		,	"    </a>"
 		,	"  </div>"
 		,	"  <div>"

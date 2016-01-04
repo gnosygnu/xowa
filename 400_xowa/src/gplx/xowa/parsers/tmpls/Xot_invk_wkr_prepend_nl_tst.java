@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xot_invk_wkr_prepend_nl_tst {		
-	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {	// PURPOSE: if {| : ; # *, auto add new_line REF.MW:Parser.php|braceSubstitution
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_inner", "# a");

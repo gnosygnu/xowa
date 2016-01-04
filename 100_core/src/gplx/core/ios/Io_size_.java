@@ -99,10 +99,10 @@ public class Io_size_ {
 		return val == Int_.Min_value ? cur : (val * Io_mgr.Len_mb_long);
 	}
 }
-class Io_size_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
+class Io_size_fmtr_arg implements Bfr_arg {
 	public long Val() {return val;} public Io_size_fmtr_arg Val_(long v) {val = v; return this;} long val;
 	public byte[] Suffix() {return suffix;} public Io_size_fmtr_arg Suffix_(byte[] v) {suffix = v; return this;} private byte[] suffix;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		long cur = val; int pow = 0;
 		while (cur >= 1024) {
 			cur /= 1024;

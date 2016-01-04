@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.users.history.*;
-abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implements Xoctg_fmtr_itm {
+abstract class Xoctg_fmtr_itm_base implements gplx.core.brys.Bfr_arg, Xoctg_fmtr_itm {
 	private Xou_history_mgr history_mgr; private Xoh_wtr_ctx hctx;
 	protected Xowe_wiki wiki; Xol_lang_itm lang; Xoctg_view_ctg ctg; protected int len; protected Xoh_href_parser href_parser; protected Bry_fmtr html_itm, html_itm_missing; protected Xoctg_view_grp list; protected Xow_msg_mgr msg_mgr;
 	public void Init_from_all(Xowe_wiki wiki, Xol_lang_itm lang, Xoh_wtr_ctx hctx, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {
@@ -39,7 +39,7 @@ abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implement
 	} int col_idx;
 	public int Grp_end_idx() {return grp_end_idx;} private int grp_end_idx;
 	public boolean Grp_end_at_col() {return grp_end_at_col;} private boolean grp_end_at_col;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		for (int i = col_bgn; i < len; i++) {
 			if (i == col_end) {
 				grp_end_idx = i;
@@ -62,7 +62,7 @@ abstract class Xoctg_fmtr_itm_base extends gplx.core.brys.Bfr_arg_base implement
 	}
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
 		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
-		byte[] itm_full_ttl = ttl.Full_txt();// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
+		byte[] itm_full_ttl = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(ttl.Full_txt());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 		byte[] itm_atr_cls = hctx.Mode_is_hdump() ? Bry_.Empty : Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Bry_fmtr fmtr = itm.Missing() ? html_itm_missing : html_itm;
 		fmtr.Bld_bfr_many(bfr, itm_href, itm_full_ttl, itm_full_ttl, itm.Page_id(), itm_atr_cls);
@@ -72,7 +72,7 @@ class Xoctg_fmtr_itm_page extends Xoctg_fmtr_itm_base {
 	public static final Xoctg_fmtr_itm_page Instance = new Xoctg_fmtr_itm_page(); Xoctg_fmtr_itm_page() {}
 }
 class Xoctg_fmtr_itm_file extends Xoctg_fmtr_itm_base {
-//		public override void Bfr_arg__add(Bry_bfr bfr) {
+//		public void Bfr_arg__add(Bry_bfr bfr) {
 //			html_itm = wiki.Html_mgr().Gallery_xtn_mgr().Html_gallery_itm_img();
 //			for (int i = list.Bgn(); i < len; i++) {
 //				Xoctg_view_itm itm = list.Itms()[i];

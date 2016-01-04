@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Map_geolink_func_tst {		
-	@Before public void init()				{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Example() {
 		fxt.Test_parse_tmpl_str_test
 		( "{{#geoLink: $1 $2 $3 $4 $5 $6|lat=10.5|long=20.5|plusLat=N|plusLong=E|minusLat=S|minusLong=W|precision=decimal places}}", "{{test}}"

@@ -27,7 +27,7 @@ public abstract class Pf_func_base implements Pf_func {
 	public void Rls() {name = null; argx_dat = null;}
 	public abstract Pf_func New(int id, byte[] name);
 	public Xot_defn Clone(int id, byte[] name) {return New(id, name);}
-	public abstract void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr);
+	public abstract void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src);
 	public byte[] Argx_dat() {return argx_dat;} public void Argx_dat_(byte[] v) {argx_dat = v;} private byte[] argx_dat = Bry_.Empty;
 	public byte[] Eval_argx(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self) {
 		if (argx_dat == Bry_.Empty) {

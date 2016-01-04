@@ -18,9 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Cancelable_ {
 	public static final Cancelable Never = new Cancelable_never();
+	public static Cancelable New_proxy() {return new Cancelable_proxy();}
 }
 class Cancelable_never implements Cancelable {
 	public boolean Canceled() {return false;}
 	public void Cancel() {}
 	public void Cancel_reset() {}
+}
+class Cancelable_proxy implements Cancelable {
+	private boolean canceled = false;
+	public boolean Canceled()		{return canceled;}
+	public void Cancel()		{canceled = true;}
+	public void Cancel_reset()	{canceled = false;}
 }

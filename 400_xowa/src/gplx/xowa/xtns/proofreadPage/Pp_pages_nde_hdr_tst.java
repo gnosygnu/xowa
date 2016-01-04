@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_hdr_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {
 		Io_mgr.Instance.InitEngine_mem();
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();

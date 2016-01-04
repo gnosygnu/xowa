@@ -50,7 +50,7 @@ public class Poem_nde implements Xox_xnde {
 					&&	Bry_.Match(src, line_bgn, line_end_w_br, Xowa_br_mark))									// "<br/>\n" already inserted by XOWA; do not insert again; DATE:2014-10-20
 					bfr.Add_byte_nl();
 				else
-					bfr.Add(Html_tag_.Br_inl).Add_byte_nl().Add(Xowa_br_mark);									// add "<br/>\n" unless 1st line; EX: "<poem>\n\s" should not add leading "<br/>\n"
+					bfr.Add(Gfh_tag_.Br_inl).Add_byte_nl().Add(Xowa_br_mark);									// add "<br/>\n" unless 1st line; EX: "<poem>\n\s" should not add leading "<br/>\n"
 			}
 			switch (src[line_bgn]) {
 				case Byte_ascii.Space:																			// "\n\s" -> "\n&#160;"
@@ -58,7 +58,7 @@ public class Poem_nde implements Xox_xnde {
 					int space_count = space_end - line_bgn;
 					line_bgn = space_end;
 					for (int i = 0; i < space_count; ++i)
-						bfr.Add(Html_entity_.Nbsp_num_bry);
+						bfr.Add(Gfh_entity_.Nbsp_num_bry);
 					break;
 				case Byte_ascii.Colon: {																		// "\n:" -> <span class='mw-poem-indented' style='display: inline-block; margin-left: #em;'>
 					int colon_end = Bry_find_.Find_fwd_while(src, line_bgn, src_end, Byte_ascii.Colon);
@@ -72,7 +72,7 @@ public class Poem_nde implements Xox_xnde {
 			int line_end = Bry_find_.Find_fwd(src, Byte_ascii.Nl, line_bgn, src_end);						// find end "\n"
 			if (line_end == Bry_find_.Not_found) line_end = src_end;											// no "\n"; use eos;
 			bfr.Add_mid(src, line_bgn, line_end);																// add everything from line_bgn to line_end
-			if (indent_enabled) bfr.Add(Html_tag_.Span_rhs);													// if "\n:", add </span>
+			if (indent_enabled) bfr.Add(Gfh_tag_.Span_rhs);													// if "\n:", add </span>
 			line_bgn = line_end + 1;																			// +1 to skip over end "\n"
 		}
 		return bfr.To_bry_and_clear();

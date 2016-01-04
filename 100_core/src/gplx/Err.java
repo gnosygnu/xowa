@@ -58,7 +58,7 @@ public class Err extends RuntimeException {
 		String nl_str = called_by_log ? "\t" : "\n";
 		String rv = ""; //nl_str + "----------------------------------------------------------------------" + nl_str;
 		for (int i = 0; i < msgs_idx; ++i) {
-			rv += "[err " + Int_.To_str(i) + "] " + msgs_ary[i].To_str() + nl_str;
+			rv += "[err " + Int_.To_str(i) + "] " + String_.Replace(msgs_ary[i].To_str(), "\n", nl_str) + nl_str;
 		}
 		if (include_trace)
 			rv += "[trace]:" + Trace_to_str(is_gplx, called_by_log, trace_ignore, trace == null ? Err_.Trace_lang(this) : trace);

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_misc_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void CascadingSources()		{fxt.Test_parse_page_all_str("{{CASCADINGSOURCES}}", "");} // PURPOSE: noop; DATE:2014-04-09
 }

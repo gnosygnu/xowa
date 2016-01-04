@@ -22,14 +22,14 @@ public class Pfunc_pos extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_strx_pos;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_pos().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr trg) {
-		byte[] str = Eval_argx(ctx, src, caller, self);
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] argx = Eval_argx(ctx, src, caller, self);
 		int self_args_len = self.Args_len();
 		byte[] find = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 0, Byte_ascii.Space_bry);	// MW: use " " if find is missing
 		byte[] offset_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, null);
 		int offset = offset_bry == null ? 0 : Bry_.To_int_or_neg1(offset_bry);
-		int pos = Bry_find_.Find_fwd(str, find, offset);
+		int pos = Bry_find_.Find_fwd(argx, find, offset);
 		if (pos != Bry_find_.Not_found)
-			trg.Add_int_variable(pos);
+			bfr.Add_int_variable(pos);
 	}
 }	

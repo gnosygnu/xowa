@@ -126,7 +126,7 @@ public class Xoh_hzip_int {
 			val -= tmp * div;
 		}
 	}
-	private static int To_int_by_bry(byte[] src, int bgn, int end, byte offset, int radix) {
+	public static int To_int_by_bry(byte[] src, int bgn, int end, byte offset, int radix) {
 		int rv = 0, factor = 1;
 		for (int i = end - 1; i >= bgn; --i) {
 			rv += ((src[i] & 0xFF) - offset) * factor;	// PATCH.JAVA:need to convert to unsigned byte
@@ -140,7 +140,7 @@ public class Xoh_hzip_int {
 	, B256__max__expd__3 = 16777216				//    16,777,216
 	;
 	private static final int[] B256__pow__ary = new int[] {1, B256__max__expd__1, B256__max__expd__2, B256__max__expd__3, Int_.Max_value};
-	private static final byte prefix__b256__2 = (byte)(252 & 0xFF), prefix__b256__3 = (byte)(253 & 0xFF), prefix__b256__4 = (byte)(254 & 0xFF), prefix__b256__5 = (byte)(255 & 0xFF);
+	public static final byte prefix__b256__2 = (byte)(252 & 0xFF), prefix__b256__3 = (byte)(253 & 0xFF), prefix__b256__4 = (byte)(254 & 0xFF), prefix__b256__5 = (byte)(255 & 0xFF);
 	private static final byte[] 
 	  prefix_ary__b256 = new byte[] {0, 0, prefix__b256__2, prefix__b256__3, prefix__b256__4, prefix__b256__5}
 	, prefix_ary__b085 = new byte[] {0, 0, 0, Byte_ascii.Curly_bgn, Byte_ascii.Pipe, Byte_ascii.Curly_end, Byte_ascii.Tilde}

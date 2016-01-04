@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
-public class Bfr_arg__time extends gplx.core.brys.Bfr_arg_base {
+public class Bfr_arg__time implements Bfr_arg {
 	public Bfr_arg__time() {
 		units_len = units.length;
 	}
@@ -30,7 +30,7 @@ public class Bfr_arg__time extends gplx.core.brys.Bfr_arg_base {
 	int[] units = new int[] {86400, 3600, 60, 1};
 	int units_len;
 	byte[] spr = new byte[] {Byte_ascii.Space};
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (seconds == 0) {	// handle 0 separately (since it will always be < than units[*]
 			bfr.Add_int_fixed(0, 2).Add(segs[units_len - 1]);
 			return;

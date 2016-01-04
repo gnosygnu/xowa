@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
-public class Indicator_html_bldr extends gplx.core.brys.Bfr_arg_base {
+public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Indicator_html_bldr_itm bldr_itm = new Indicator_html_bldr_itm();
 	private Ordered_hash list = Ordered_hash_.New();
 	public void Enabled_(boolean v) {enabled = v;} private boolean enabled = Bool_.Y;
@@ -31,7 +31,7 @@ public class Indicator_html_bldr extends gplx.core.brys.Bfr_arg_base {
 		if (!enabled) return;				// do not add if disabled; called from <page>; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 		list.Add_if_dupe_use_nth(xnde.Name(), xnde);	// Add_if_dupe_use_nth: 2nd indicator overwrites 1st; DATE:2015-04-29
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (list.Count() == 0) return;		// do not build html if no items; DATE:2015-04-29
 		bldr_itm.Init(list);
 		fmtr_grp.Bld_bfr_many(bfr, bldr_itm);
@@ -44,10 +44,10 @@ public class Indicator_html_bldr extends gplx.core.brys.Bfr_arg_base {
 	), "itms")
 	;
 }
-class Indicator_html_bldr_itm extends gplx.core.brys.Bfr_arg_base {
+class Indicator_html_bldr_itm implements gplx.core.brys.Bfr_arg {
 	private Ordered_hash list;
 	public void Init(Ordered_hash list) {this.list = list;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int list_len = list.Count();
 		for (int i = list_len - 1; i > -1; --i) {	// reverse order
 			Indicator_xnde xnde = (Indicator_xnde)list.Get_at(i);

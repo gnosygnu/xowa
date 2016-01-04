@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;	
 public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {

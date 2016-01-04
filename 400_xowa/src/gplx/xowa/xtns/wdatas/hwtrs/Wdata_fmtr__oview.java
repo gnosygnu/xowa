@@ -19,7 +19,7 @@ package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
-class Wdata_fmtr__oview_tbl extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__oview_tbl implements gplx.core.brys.Bfr_arg {
 	private Xoapi_wikibase wikibase_api; private Gfo_url_encoder href_encoder;
 	private Wdata_fmtr__oview_alias_itm fmtr_aliases = new Wdata_fmtr__oview_alias_itm();
 	private Bry_fmtr slink_fmtr = Bry_fmtr.new_("<a href='/site/~{domain_bry}/wiki/~{page_href}'>~{page_text}</a>", "domain_bry", "page_href", "page_text");
@@ -34,7 +34,7 @@ class Wdata_fmtr__oview_tbl extends gplx.core.brys.Bfr_arg_base {
 	public void Init_by_wdoc(Wdata_doc wdoc) {
 		this.wdoc = wdoc;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		byte[][] core_langs		= wikibase_api.Core_langs();			
 		byte[] oview_label		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Label_list(), core_langs);
 		byte[] oview_descr		= Wdata_langtext_itm.Get_text_or_empty(wdoc.Descr_list(), core_langs);
@@ -77,10 +77,10 @@ class Wdata_fmtr__oview_tbl extends gplx.core.brys.Bfr_arg_base {
 		return Bry_.Ary_empty;
 	}
 }
-class Wdata_fmtr__oview_alias_itm extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__oview_alias_itm implements gplx.core.brys.Bfr_arg {
 	private byte[][] ary;
 	public void Init_by_itm(byte[][] ary) {this.ary = ary;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (ary == null) return;
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)

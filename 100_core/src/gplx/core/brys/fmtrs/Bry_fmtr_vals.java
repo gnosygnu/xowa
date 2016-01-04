@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.fmtrs; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import gplx.core.brys.*;
-public class Bry_fmtr_vals extends gplx.core.brys.Bfr_arg_base {
+public class Bry_fmtr_vals implements Bfr_arg {
 	private final Bry_fmtr fmtr; private Object[] vals;
 	Bry_fmtr_vals(Bry_fmtr fmtr) {this.fmtr = fmtr;}
 	public Bry_fmtr_vals Vals_(Object... v) {this.vals = v; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr.Bld_bfr_ary(bfr, vals);
 	}
 	public static Bry_fmtr_vals new_fmt(String fmt, String... keys) {

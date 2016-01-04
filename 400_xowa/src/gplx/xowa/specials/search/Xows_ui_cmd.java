@@ -23,11 +23,12 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 	private final Xow_wiki wiki; private final Xoae_page page; private final Xog_tab_close_mgr tab_close_mgr; private final Xog_js_wkr js_wkr;
 	private final boolean async; private Xows_ui_async async_wkr; 
 	private Xows_db_cache cache;
-	public Xows_ui_cmd(Xows_core mgr, Xows_ui_qry qry, Xow_wiki wiki, Xoae_page page, Xog_tab_close_mgr tab_close_mgr, Xog_js_wkr js_wkr) {
-		this.mgr = mgr; this.qry = qry; this.wiki = wiki; this.page = page; this.tab_close_mgr = tab_close_mgr; this.js_wkr = js_wkr;
+	public Xows_ui_cmd(Xows_core mgr, Xows_ui_qry qry, Xow_wiki wiki, Xoae_page page, Xog_tab_close_mgr tab_close_mgr, Xog_js_wkr js_wkr, Xows_db_cache cache, Xows_ui_async async_wkr) {
+		this.mgr = mgr; this.qry = qry; this.wiki = wiki; this.page = page; this.tab_close_mgr = tab_close_mgr; this.js_wkr = js_wkr; this.async_wkr = async_wkr;
 		this.async = wiki.App().Mode().Tid_is_gui() && qry.Async_db();
 		this.rslt = new Xows_ui_rslt();
-		this.key = Html_utl.Encode_id_as_bry(Bry_.Add(qry.Key(), Byte_ascii.Pipe_bry, wiki.Domain_bry()));
+		this.key = Gfh_utl.Encode_id_as_bry(Bry_.Add(qry.Key(), Byte_ascii.Pipe_bry, wiki.Domain_bry()));
+		this.cache = cache;
 	}
 	public byte[] Key() {return key;} private final byte[] key;
 	public Xow_wiki Wiki() {return wiki;}
@@ -45,7 +46,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 		if (!cache.Done() && (qry.Itms_end() > cache.Itms_end())) {
 			if (async) {
 				fill_from_cache = false; // NOTE: do not retrieve cached results to page, else ui_async cmd will add out of order; DATE:2015-04-24
-				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
+				if (async_wkr == null) async_wkr = new Xows_ui_async__html(this, new Xows_html_row(new gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_search_db, this, Invk_search_db).Start();
 			}
 			else
@@ -68,7 +69,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 			for (int i = qry_itms_bgn; i < cache_count; ++i)
 				async_wkr.Add(cache.Get_at(i));
 		}
-		new Xows_db_wkr().Search(this, qry, rslt, cache, wiki);
+		new Xows_db_wkr().Search(this, this, qry, rslt, cache, wiki, wiki.Lang().Case_mgr());
 		mgr.Search_end(this);
 		if (this.Canceled()) return; 	// NOTE: must check else throws SWT exception
 		this.Hide_cancel_btn();

@@ -312,7 +312,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (defn_func_id == Xol_kwd_grp_.Id_invoke)	// NOTE: if #invoke, set frame_ttl to argx, not name; EX:{{#invoke:A}}
 			invk.Frame_ttl_(Bry_.Add(Xow_ns_.Bry__module_w_colon, Xoa_ttl.Replace_unders(defn_func.Argx_dat())));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14; always use canonical English "Module"; DATE:2015-11-09
 		Bry_bfr bfr_func = Bry_bfr.new_();
-		defn_func.Func_evaluate(ctx, src, caller, invk, bfr_func);
+		defn_func.Func_evaluate(bfr_func, ctx, caller, invk, src);
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
 			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
 		else

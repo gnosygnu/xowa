@@ -30,7 +30,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 		html_bldr.Bld_all(bfr, page, itms);
 	}
 }
-public class Sites_html_bldr extends gplx.core.brys.Bfr_arg_base {
+public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Sites_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private List_adp list; private int list_len;
@@ -42,7 +42,7 @@ public class Sites_html_bldr extends gplx.core.brys.Bfr_arg_base {
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Xoh_href_parser href_parser = wiki.Appe().Html__href_parser();
 		for (int i = 0; i < list_len; ++i) {

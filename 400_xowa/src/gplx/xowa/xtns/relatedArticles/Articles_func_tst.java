@@ -35,7 +35,7 @@ public class Articles_func_tst {
 	}
 }
 class Articles_func_fxt {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Reset() {
 		fxt.Wiki().Lang().Msg_mgr().Itm_by_key_or_new("relatedarticles-title", "Related articles");
 		fxt.Reset();

@@ -40,17 +40,17 @@ public class Xoh_html_wtr_escaper {
 							}
 						}
 					}
-					bfr.Add(Html_entity_.Lt_bry);
+					bfr.Add(Gfh_entity_.Lt_bry);
 					break;
 				case Byte_ascii.Gt:
-					bfr.Add(Html_entity_.Gt_bry);
+					bfr.Add(Gfh_entity_.Gt_bry);
 					break;
 				case Byte_ascii.Amp:
 					if (interpret_amp) {
 						int text_bgn = i + 1;	// i is &; i + 1 is first char after amp
 						Object o = (text_bgn < end) ? amp_trie.Match_bgn(src, text_bgn, end) : null;	// check if this is a valid &; note must check that text_bgn < end or else arrayIndex error; occurs when src is just "&"; DATE:2013-12-19
 						if (o == null)										// invalid; EX: "a&b"; "&bad;"; "&#letters;"; 
-							bfr.Add(Html_entity_.Amp_bry);					// escape & and continue
+							bfr.Add(Gfh_entity_.Amp_bry);					// escape & and continue
 						else {												// is either (1) a name or (2) an ncr (hex/dec)
 							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
 							int match_pos = amp_trie.Match_pos();
@@ -70,17 +70,17 @@ public class Xoh_html_wtr_escaper {
 										i = end_pos - 1;
 									}
 									else									// parse failed; escape and continue
-										bfr.Add(Html_entity_.Amp_bry);
+										bfr.Add(Gfh_entity_.Amp_bry);
 									break;
 								default: throw Err_.new_unhandled(itm_tid);
 							}
 						}
 					}
 					else
-						bfr.Add(Html_entity_.Amp_bry);
+						bfr.Add(Gfh_entity_.Amp_bry);
 					break;
 				case Byte_ascii.Quote:
-					bfr.Add(Html_entity_.Quote_bry);
+					bfr.Add(Gfh_entity_.Quote_bry);
 					break;
 				default:
 					bfr.Add_byte(b);
@@ -103,7 +103,7 @@ public class Xoh_html_wtr_escaper {
 						if (	tag_is_bgn															// <nowiki < found
 							||	(i + nowiki_name_len + 2 > end) 									// not enough chars for "/nowiki>"
 							||	src[i + 1] != Byte_ascii.Slash 										// / 
-							||	!Bry_.Eq(src, i + 2, i + 2 + nowiki_name_len, nowiki_name)		//  nowiki
+							||	!Bry_.Eq(src, i + 2, i + 2 + nowiki_name_len, nowiki_name)			//  nowiki
 							||	src[i + 2 + nowiki_name_len] != Byte_ascii.Gt						//        >
 							)	return Bry_find_.Not_found;
 						end_lt = i;

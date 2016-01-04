@@ -355,7 +355,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
 			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
-			full_bfr.Add(gplx.langs.htmls.Html_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
+			full_bfr.Add(gplx.langs.htmls.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
 		page_bfr.Mkr_rls();
 		ctx.Tmpl_output_(null);

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apps.apis.xowa.html.*;
-class Wdata_fmtr__claim_grp extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__claim_tbl fmtr_tbl = new Wdata_fmtr__claim_tbl(); private boolean is_empty;
 	private Xoapi_toggle_itm toggle_itm;
 	private Wdata_toc_data toc_data;
@@ -34,7 +34,7 @@ class Wdata_fmtr__claim_grp extends gplx.core.brys.Bfr_arg_base {
 		toc_data.Make(list_count);
 		fmtr_tbl.Init_by_wdoc(ttl, list);
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (is_empty) return;
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_tbl);
 	}
@@ -49,7 +49,7 @@ class Wdata_fmtr__claim_grp extends gplx.core.brys.Bfr_arg_base {
 	, "  </div>"
 	), "hdr_href", "hdr_text", "toggle_btn", "toggle_hdr", "tbls");
 }
-class Wdata_fmtr__claim_tbl extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__claim_tbl implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__claim_row fmtr_row = new Wdata_fmtr__claim_row(); private Wdata_lbl_mgr lbl_mgr; 
 	private Ordered_hash list; private byte[] ttl;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr; fmtr_row.Init_by_ctor(lbl_mgr);}
@@ -60,7 +60,7 @@ class Wdata_fmtr__claim_tbl extends gplx.core.brys.Bfr_arg_base {
 		this.list = list;
 		this.ttl = ttl;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_claim_grp grp = (Wdata_claim_grp)list.Get_at(i);
@@ -82,7 +82,7 @@ class Wdata_fmtr__claim_tbl extends gplx.core.brys.Bfr_arg_base {
 	, "            </div>"
 	), "pid", "pid_lbl", "itms");
 }
-class Wdata_fmtr__claim_row extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
 	private byte[] ttl;
 	private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_fmtr__qual_tbl fmtr_qual = new Wdata_fmtr__qual_tbl();
@@ -102,7 +102,7 @@ class Wdata_fmtr__claim_row extends gplx.core.brys.Bfr_arg_base {
 	public void Init_by_grp(byte[] ttl, Wdata_claim_grp claim_grp) {
 		this.ttl = ttl; this.claim_grp = claim_grp;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = claim_grp.Len();
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {
@@ -144,7 +144,7 @@ class Wdata_fmtr__claim_row extends gplx.core.brys.Bfr_arg_base {
 	), "rank_name", "value", "qualifiers", "references"
 	);
 }
-class Wdata_fmtr__qual_tbl extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__qual_tbl implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__qual_row fmtr_row = new Wdata_fmtr__qual_row(); private Wdata_claim_itm_core claim;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {fmtr_row.Init_by_ctor(lbl_mgr);}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
@@ -154,7 +154,7 @@ class Wdata_fmtr__qual_tbl extends gplx.core.brys.Bfr_arg_base {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.Qualifiers());
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (claim.Qualifiers() == null || claim.Qualifiers().Len() == 0) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_row);
 	}
@@ -166,14 +166,14 @@ class Wdata_fmtr__qual_tbl extends gplx.core.brys.Bfr_arg_base {
 	, "                  </div>"
 	), "itms");
 }
-class Wdata_fmtr__qual_row extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__qual_row implements gplx.core.brys.Bfr_arg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
 	private Wdata_claim_grp_list quals; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wdata_claim_grp_list quals) {this.ttl = ttl; this.quals = quals;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = quals.Len();
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {
@@ -208,7 +208,7 @@ class Wdata_fmtr__qual_row extends gplx.core.brys.Bfr_arg_base {
 	), "pid", "pid_lbl", "value"
 	);
 }
-class Wdata_fmtr__ref_tbl extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__ref_tbl implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__ref_row fmtr_row = new Wdata_fmtr__ref_row(); private Wdata_claim_itm_core claim;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {fmtr_row.Init_by_ctor(lbl_mgr);}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
@@ -218,7 +218,7 @@ class Wdata_fmtr__ref_tbl extends gplx.core.brys.Bfr_arg_base {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.References());
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (claim.References() == null) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_row);
 	}
@@ -240,7 +240,7 @@ class Wdata_fmtr__ref_tbl extends gplx.core.brys.Bfr_arg_base {
 	, "                </div>"
 	), "itms");
 }
-class Wdata_fmtr__ref_row extends gplx.core.brys.Bfr_arg_base {
+class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
@@ -248,7 +248,7 @@ class Wdata_fmtr__ref_row extends gplx.core.brys.Bfr_arg_base {
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wdata_references_grp[] ref_grps) {this.ttl = ttl; this.ref_grps = ref_grps;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = ref_grps.length;
 		claim_html_wtr.Init(ttl, tmp_bfr, msgs, lbl_mgr);
 		for (int i = 0; i < len; ++i) {

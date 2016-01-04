@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 public class Db_meta_fld_list {
 	private final Ordered_hash flds = Ordered_hash_.New();
 	private final List_adp keys = List_adp_.new_();
-	public void Clear() {flds.Clear(); keys.Clear();}
+	public void Clear() {flds.Clear(); keys.Clear(); str_ary = null; fld_ary = null;}
 	public Db_meta_fld Get_by(String name)	{return (Db_meta_fld)flds.Get_by(name);}
 	public Db_meta_fld Get_at(int idx)		{return (Db_meta_fld)flds.Get_at(idx);}
 	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.To_ary(String.class); return str_ary;} private String[] str_ary;

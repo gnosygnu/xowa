@@ -37,7 +37,8 @@ public class Xoh_make_fxt {
 	}
 	public void Test__html(String wtxt, String expd) {
 		expd = String_.Replace(expd, "'", "\"");
-		Tfds.Eq_str_lines(expd, parser_fxt.Exec__parse_to_hdump(wtxt));
+            String actl = parser_fxt.Exec__parse_to_hdump(wtxt);
+		Tfds.Eq_str_lines(expd, actl);
 	}
 	public void Test__make(String html, Xoh_page_chkr chkr) {
 		html = String_.Replace(html, "'", "\"");

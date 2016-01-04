@@ -44,10 +44,10 @@ public class Xop_amp_trie_itm {
 	}
 	public void Print_literal(Bry_bfr bfr) {
 		switch (char_int) {
-			case Byte_ascii.Lt:			bfr.Add(Html_entity_.Lt_bry); break; // NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"; MW does same; DATE:2014-11-07
-			case Byte_ascii.Gt:			bfr.Add(Html_entity_.Gt_bry); break;
-			case Byte_ascii.Quote:		bfr.Add(Html_entity_.Quote_bry); break;
-			case Byte_ascii.Amp:		bfr.Add(Html_entity_.Amp_bry); break;
+			case Byte_ascii.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break; // NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"; MW does same; DATE:2014-11-07
+			case Byte_ascii.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
+			case Byte_ascii.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
+			case Byte_ascii.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
 			default:
 				bfr.Add(u8_bry);		// write literal; EX: "[" not "&#91;"
 				break;

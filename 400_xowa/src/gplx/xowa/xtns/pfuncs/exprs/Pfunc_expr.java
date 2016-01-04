@@ -20,7 +20,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.core.log_ms
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_expr extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
 		Evaluate(bfr, ctx, val_dat_ary);
 	}

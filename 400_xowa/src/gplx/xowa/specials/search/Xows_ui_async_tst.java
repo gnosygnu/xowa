@@ -32,7 +32,7 @@ public class Xows_ui_async_tst {
 }
 class Xows_ui_async_fxt {
 	private Xows_html_row html_row; private static final byte[] Bry_enwiki = Bry_.new_a7("w");
-	private Xows_ui_async async;
+	private Xows_ui_async__html async;
 	private Xog_js_wkr__log js_wkr = new Xog_js_wkr__log();
 	private Xowe_wiki wiki;
 	public void Clear() {
@@ -40,7 +40,7 @@ class Xows_ui_async_fxt {
 		this.wiki = Xoa_app_fxt.wiki_(app, "w");
 		html_row = new Xows_html_row(wiki.App().Html__lnki_bldr());
 		html_row.Fmtr().Fmt_("~{page_key}");
-		async = new Xows_ui_async(Cancelable_.Never, html_row, js_wkr, 5, Bry_enwiki);
+		async = new Xows_ui_async__html(Cancelable_.Never, html_row, js_wkr, 5, Bry_enwiki);
 	}
 	public Xows_db_row Make_rslt(int len, String ttl) {
 		byte[] ttl_bry = Bry_.new_a7(ttl);

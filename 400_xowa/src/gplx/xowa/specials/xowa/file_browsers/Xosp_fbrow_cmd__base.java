@@ -65,7 +65,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	, "    .fsys_td_size      {text-align:right;}"
 	, "  </style>"
 	, "  <script type='text/javascript'>"
-	, "    function get_selected_chk(url_base, chk_prefix) {"
+	, "    function Xo__file_browser__get_selected_chk(url_base, chk_prefix) {"
 	, "		var list = document.getElementsByTagName('input');"
 	, "		var list_len = list.length;"
 	, "		var selected = '';"
@@ -87,7 +87,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	, "    <td>"
 	, "      <table width='100%'>"
 	, "        <tr>"
-	, "          <td align='left'><a href='javascript:get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=~{cmd_src}&amp;path=~{url_enc}&amp;selected=\", \"chk_\");'>~{cmd_gui}</a>"
+	, "          <td align='left'><a href='javascript:Xo__file_browser__get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=~{cmd_src}&amp;path=~{url_enc}&amp;selected=\", \"chk_\");'>~{cmd_gui}</a>"
 	, "      	 </td>"
 	, "        </tr>"
 	, "      </table>"
@@ -96,7 +96,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	), "url_enc", "cmd_src", "cmd_gui")
 	;
 }
-class Xosp_fbrow_html extends gplx.core.brys.Bfr_arg_base {
+class Xosp_fbrow_html implements gplx.core.brys.Bfr_arg {
 	private final Gfo_url_encoder encoder = Gfo_url_encoder_.Href; private Xosp_fbrow_data_dir dir; private byte[] cmd_src;
 	public void Write(Bry_bfr bfr, byte[] cmd_src, byte[] cmd_row, Xosp_fbrow_data_dir dir) {
 		this.dir = dir; this.cmd_src = cmd_src;
@@ -109,7 +109,7 @@ class Xosp_fbrow_html extends gplx.core.brys.Bfr_arg_base {
 		, this
 		);
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = dir.Count();
 		for (int i = 0; i < len; ++i) {
 			Xosp_fbrow_data_sub itm = (Xosp_fbrow_data_sub)dir.Get_at(i);				
@@ -188,15 +188,14 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	@Override protected Xosp_fbrow_rslt Write_html_selected(Xoa_url_arg_mgr arg_mgr, String selected, GfoInvkAble select_invkable) {
 		String[] wikis = String_.Split(selected, ";");
 		String path_str = arg_mgr.Read_str_or_null("path");
-		Xowv_wiki wiki = (Xowv_wiki)GfoInvkAble_.InvkCmd_val(select_invkable, Xoav_wiki_mgr.Invk_import_by_fil, path_str + wikis[0]);
+		Xowv_wiki wiki = (Xowv_wiki)GfoInvkAble_.InvkCmd_val(select_invkable, Xoav_wiki_mgr.Invk_import_by_fil, path_str + wikis[0]);			
 		Bry_bfr bfr = Bry_bfr.reset_(255);
-		done_fmtr.Bld_bfr_many(bfr, wiki.Domain_str());
+		done_fmtr.Bld_bfr_many(bfr, wiki.Domain_str(), wiki.Props().Main_page());
 		return new Xosp_fbrow_rslt(Bry_.Empty, bfr.To_bry_and_clear());
 	}
 	private static final Bry_fmtr done_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<a href='/site/~{domain}/wiki/Earth'>~{domain} Main Page</a>"
-	)
-	, "domain");
+	( "<a href='/site/~{domain}/wiki/~{main_page}'>~{domain} Main Page</a>"
+	), "domain", "main_page");
 	private static final byte[] Ext_xowa = Bry_.new_a7(".xowa");
 	public static final byte[] Regy_key = Bry_.new_a7("xowa.wiki.add");
 		public static final Xosp_fbrow_cmd__wiki_add Instance = new Xosp_fbrow_cmd__wiki_add();

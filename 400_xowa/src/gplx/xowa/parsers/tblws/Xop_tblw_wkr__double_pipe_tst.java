@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tblw_wkr__double_pipe_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void No_tblw() {			// PURPOSE: if || has no tblw, treat as lnki; none; DATE:2014-05-06
 		fxt.Test_parse_page_all_str("[[A||b|c]]", String_.Concat_lines_nl_skip_last
@@ -35,7 +35,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		) , String_.Concat_lines_nl_skip_last
 		( "<table>"
 		, "  <tr>"
-		, "    <td><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <td><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		, "    </td>"
 		, "  </tr>"
 		, "</table>"

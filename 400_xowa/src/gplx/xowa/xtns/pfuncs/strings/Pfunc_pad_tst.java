@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_pad_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test   public void L_len_3()			{fxt.Test_parse_tmpl_str_test("{{padleft: a|4|0}}"				, "{{test}}"	, "000a");}
 	@Test   public void L_str_ab()			{fxt.Test_parse_tmpl_str_test("{{padleft: a|4|01}}"				, "{{test}}"	, "010a");}

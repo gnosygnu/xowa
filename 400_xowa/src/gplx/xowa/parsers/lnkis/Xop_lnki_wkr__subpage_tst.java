@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_lnki_wkr__subpage_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Disabled() {	// PURPOSE: slash being interpreted as subpage; PAGE:en.w:[[/dev/null]]
 		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(false);
 		fxt.Test_parse_page_all_str("[[/dev/null]]", "<a href=\"/wiki//dev/null\">/dev/null</a>");

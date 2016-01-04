@@ -60,10 +60,10 @@ public class Xof_math_html_wtr {
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.langs.htmls.Html_entity_.Lt_bry; break;
-				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.langs.htmls.Html_entity_.Gt_bry; break;
+				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Lt_bry; break;
+				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Gt_bry; break;
 				// case Byte_ascii.Amp:	escaped = Const_amp; break;	// TOMBSTONE:never escape ampersand; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
-				// case Byte_ascii.Quote:	if (mathjax) escaped = gplx.langs.htmls.Html_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
+				// case Byte_ascii.Quote:	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				default:
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);

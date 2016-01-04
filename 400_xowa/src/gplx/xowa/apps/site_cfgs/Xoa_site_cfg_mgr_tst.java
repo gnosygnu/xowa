@@ -63,7 +63,7 @@ public class Xoa_site_cfg_mgr_tst {
 	}
 //		@Test   public void Print() {
 //			String s = fxt.Make_api(fxt.Make_api_interwikimap("k1", "v1", "k2", "v2"), fxt.Make_api_extensiontags2("k3", "v3", "k4", "v4"));
-//            Tfds.Write(s);
+//            Tfds.Dbg(s);
 //		}
 }
 class Xoa_site_cfg_mgr_fxt {

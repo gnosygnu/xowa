@@ -46,9 +46,17 @@ public class Xoud_cfg_mgr {
 		else
 			return Bry_.new_u8(rv);
 	}
-	public void Update_bry(String key, byte[] val) {Update_bry("", key, val);}
-	public void Update_bry(String grp, String key, byte[] val) {tbl.Update_bry(grp, key, val);}
-	public void Insert_bry(String key, byte[] val) {Insert_bry("", key, val);}
+	public void Upsert_int(String grp, String key, int val) {
+		int exists = Select_int_or(grp, key, Int_.Min_value);
+		if (exists == Int_.Min_value)
+			Insert_int(grp, key, val);
+		else
+			Update_int(grp, key, val);
+	}
+	public void Update_bry(String key, byte[] val)				{Update_bry("", key, val);}
+	public void Update_bry(String grp, String key, byte[] val)	{tbl.Update_bry(grp, key, val);}
+	public void Update_int(String grp, String key, int val)		{tbl.Update_int(grp, key, val);}
+	public void Insert_bry(String key, byte[] val)				{Insert_bry("", key, val);}
 	public void Insert_bry(String grp, String key, byte[] val)	{tbl.Insert_bry(grp, key, val);}
 	public void Insert_int(String grp, String key, int val)		{tbl.Insert_int(grp, key, val);}
 	public int Next_id(String tbl_name) {

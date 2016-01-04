@@ -22,13 +22,13 @@ public class Pfunc_ifexist extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_iferror;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_ifexist().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr rslt_bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		int args_len = self.Args_len();
-		byte[] val_bry = Eval_argx(ctx, src, caller, self);
-		if (Exists(ctx.Wiki(), val_bry))
-			rslt_bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0));
+		byte[] argx = Eval_argx(ctx, src, caller, self);
+		if (Exists(ctx.Wiki(), argx))
+			bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0));
 		else
-			rslt_bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1));
+			bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1));
 	}
 	public static boolean Exists(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (Mgr) {return Mgr.Exists(wiki, ttl_bry);}

@@ -38,14 +38,14 @@ public class Xop_para_tkn extends Xop_tkn_itm_base {
 		}
 		switch (para_end) {
 			case Xop_para_tkn.Tid_none:		break;
-			case Xop_para_tkn.Tid_para:		bfr.Add(Html_tag_.P_rhs).Add_byte_nl(); break;		// '<p>'
-			case Xop_para_tkn.Tid_pre:		bfr.Add(Html_tag_.Pre_rhs).Add_byte_nl(); break;	// '<pre>'
+			case Xop_para_tkn.Tid_para:		bfr.Add(Gfh_tag_.P_rhs).Add_byte_nl(); break;		// '<p>'
+			case Xop_para_tkn.Tid_pre:		bfr.Add(Gfh_tag_.Pre_rhs).Add_byte_nl(); break;	// '<pre>'
 			default:						throw Err_.new_unhandled(para_end);
 		}
 		switch (para_bgn) {
 			case Xop_para_tkn.Tid_none:		break;
-			case Xop_para_tkn.Tid_para:		Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, this.Src_bgn()); bfr.Add(Html_tag_.P_lhs); break;		// '</p>'
-			case Xop_para_tkn.Tid_pre:		Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, this.Src_bgn()); bfr.Add(Html_tag_.Pre_lhs); break;	// '</pre>'
+			case Xop_para_tkn.Tid_para:		Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, this.Src_bgn()); bfr.Add(Gfh_tag_.P_lhs); break;		// '</p>'
+			case Xop_para_tkn.Tid_pre:		Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, this.Src_bgn()); bfr.Add(Gfh_tag_.Pre_lhs); break;	// '</pre>'
 			default:						throw Err_.new_unhandled(para_bgn);
 		}
 		if (space_bgn > 0)

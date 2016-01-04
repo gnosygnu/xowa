@@ -32,7 +32,7 @@ public class Xoh_lnki_bldr {
 		img_pos_is_left = true;
 		return this;
 	}
-	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, v); return this;}
+	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, v); return this;}
 	public Xoh_lnki_bldr Href_(Xow_wiki wiki, byte[] bry) {return Href_(wiki.Domain_bry(), wiki.Ttl_parse(bry));}
 	public Xoh_lnki_bldr Href_(byte[] domain_bry, Xoa_ttl ttl) {
 		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Mode_popup, domain_bry, ttl);
@@ -40,7 +40,7 @@ public class Xoh_lnki_bldr {
 		return this;
 	}
 	public Xoh_lnki_bldr Title_(byte[] title) {
-		this.title = Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, title);
+		this.title = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, title);
 		return this;
 	}
 	public Xoh_lnki_bldr Img_pos_is_left_(boolean v) {this.img_pos_is_left = v; return this;}
@@ -52,7 +52,7 @@ public class Xoh_lnki_bldr {
 		return this;
 	}
 	public Xoh_lnki_bldr Caption_(byte[] text) {
-		this.caption = Html_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
+		this.caption = Gfh_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
 		return this;
 	}
 	public byte[] Bld_to_bry() {

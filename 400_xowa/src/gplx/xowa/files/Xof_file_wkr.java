@@ -35,6 +35,12 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		int len = imgs.Count();
 		for (int i = 0; i < len; ++i)
+			Exec_by_fsdb((Xof_fsdb_itm)imgs.Get_at(i));
+		Xoa_app_.Usr_dlg().Prog_none("", "", "");
+	}
+	public void Exec_old() {
+		int len = imgs.Count();
+		for (int i = 0; i < len; ++i)
 			Ctor_by_hdump(hpg, (Xohd_img_itm__base)imgs.Get_at(i));
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");
 	}
@@ -42,6 +48,9 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
 		fsdb.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), hdump.Lnki_ttl(), hdump.Lnki_type(), hdump.Lnki_upright(), hdump.Lnki_w(), hdump.Lnki_h(), hdump.Lnki_time(), hdump.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
 		fsdb.Init_at_hdoc(hdump.Html_uid(), hdump.Html_elem_tid());
+		Exec_by_fsdb(fsdb);
+	}
+	private void Exec_by_fsdb(Xof_fsdb_itm fsdb) {
 		fsdb.Orig_exists_n_();
 		Xof_orig_itm orig = orig_mgr.Find_by_ttl_or_null(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) return;
 		Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);

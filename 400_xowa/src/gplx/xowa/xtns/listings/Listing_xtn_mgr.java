@@ -28,13 +28,13 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 		if (!Enabled()) return;
 		this.Reset(wiki);
 	}
-	@gplx.Internal protected Html_wtr Hwtr() {return hwtr;} private Html_wtr hwtr;
+	@gplx.Internal protected Gfh_wtr Hwtr() {return hwtr;} private Gfh_wtr hwtr;
 	public void Clear() {
 		listings_template = phone_symbol = tollfree_symbol = fax_symbol = email_symbol = null;
 		checkin_msg = checkout_msg = position_template = position_text = null;
 	}
 	private void Reset(Xowe_wiki wiki) {
-		hwtr = new Html_wtr();
+		hwtr = new Gfh_wtr();
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
 		listings_template		= Load_txt(wiki, sub_ctx, "listings-template");
 		phone_symbol			= Load_txt(wiki, sub_ctx, "listings-phone-symbol", "listings-phone");
@@ -61,7 +61,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 		byte[] rv = null;
 		if (symbol_text != null) {
 			hwtr.Nde_full_atrs(Listing_xnde.Tag_abbr, symbol_text, true
-				, Listing_xnde.Atr_a_title, Html_utl.Escape_html_as_bry(template_text)
+				, Listing_xnde.Atr_a_title, Gfh_utl.Escape_html_as_bry(template_text)
 				);
 			rv = hwtr.To_bry_and_clear();
 		}
@@ -73,7 +73,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	private byte[] Load_txt(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
 		byte[] rv = wiki.Msg_mgr().Val_by_key_obj(Bry_.new_u8(ttl)); if (Bry_.Len_eq_0(rv)) return null;	// ttl does not exist; note that msg_mgr returns "" for missing values
 		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, rv);
-		rv = Html_utl.Escape_html_as_bry(rv);
+		rv = Gfh_utl.Escape_html_as_bry(rv);
 		return rv;
 	}
 	private Xol_msg_itm Load_msg(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {

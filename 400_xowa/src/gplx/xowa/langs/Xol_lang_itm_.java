@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.core.intls.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.gallery.*;
+import gplx.core.intls.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.apps.fsys.*;
 public class Xol_lang_itm_ {
@@ -266,5 +266,6 @@ kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_strx_urldecode, "#urldecode");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_pages, "pagesincategory_pages", "pages");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_subcats, "pagesincategory_subcats", "subcats");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_files, "pagesincategory_files", "files");
+kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_revisionsize, "REVISIONSIZE");
 	}
 }

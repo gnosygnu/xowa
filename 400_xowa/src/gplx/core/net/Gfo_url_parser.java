@@ -97,7 +97,7 @@ public class Gfo_url_parser {
 				case Byte_ascii.Question:	pos = Parse_qarg_key_1st(pos, b); break;
 				case Byte_ascii.Amp:		pos = Parse_qarg_key_nth(pos, b); break;
 				case Byte_ascii.Eq:			pos = Parse_qarg_val(pos, b); break;
-				case Byte_ascii.Hash:		pos = Parse_anch(pos, b); break;
+				case Byte_ascii.Hash:		if (anch_bgn == -1) pos = Parse_anch(pos, b); else ++pos; break;	// anchor begins at 1st #, not last #; EX:A#B#C has anchor of "B#C" not "C" PAGE:en.w:Grand_Central_Terminal; DATE:2015-12-31
 				case Byte_ascii.Percent:	encoded = true; ++pos; break;
 				default:
 					++pos;

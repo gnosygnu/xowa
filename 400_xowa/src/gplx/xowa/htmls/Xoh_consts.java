@@ -29,11 +29,8 @@ public class Xoh_consts {
 	, __inline_quote	= Bry_.new_a7("\"/>")
 	, Space_2			= Bry_.new_a7("  ")
 
-	, A_bgn = Bry_.new_a7("<a href=\""), A_bgn_lnki_0 = Bry_.new_a7("\" title=\""), A_mid_xowa_title = Bry_.new_a7("\" xowa_title=\"")
 	, A_mid_id = Bry_.new_a7("\" id=\"xolnki_")
-	, A_end = Bry_.new_a7("</a>")
 	, Div_bgn_open = Bry_.new_a7("<div ")
-	, Div_end = Bry_.new_a7("</div>")
 
 	, Img_bgn					= Bry_.new_a7("<img src=\"")
 	, Span_bgn_open				= Bry_.new_a7("<span")
@@ -47,7 +44,6 @@ public class Xoh_consts {
 	, Code_bgn_closed			= Bry_.new_a7("<code>")
 	, Code_bgn_open				= Bry_.new_a7("<code")
 	, Code_end					= Bry_.new_a7("</code>")
-	, Title_atr					= Bry_.new_a7("\" title=\"")
 	, Id_atr					= Bry_.new_a7(" id=\"")
 	, Style_atr					= Bry_.new_a7(" style=\"")
 	, Atr_xowa_title_bry		= Bry_.new_a7(Atr_xowa_title_str)

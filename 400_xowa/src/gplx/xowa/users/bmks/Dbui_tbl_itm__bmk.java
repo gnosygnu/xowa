@@ -94,9 +94,9 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private Dbui_row_itm Get_ui_row(Xoud_bmk_itm_row row) {return Get_ui_row(Int_.To_bry(row.Id()), row.Name(), row.Url(), row.Comment());}
 	private Dbui_row_itm Get_ui_row(byte[] pkey, byte[] name, byte[] url, byte[] comment) {
 		Dbui_val_itm[] vals = new Dbui_val_itm[3];
-		vals[0] = new Dbui_val_itm(name, Html_utl.Escape_html_as_bry(tmp_bfr, name));
-		vals[1] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
-		vals[2] = new Dbui_val_itm(comment, Html_utl.Escape_html_as_bry(comment));
+		vals[0] = new Dbui_val_itm(name, Gfh_utl.Escape_html_as_bry(tmp_bfr, name));
+		vals[1] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
+		vals[2] = new Dbui_val_itm(comment, Gfh_utl.Escape_html_as_bry(comment));
 		return new Dbui_row_itm(this, pkey, vals);
 	}
 	private String Fail_missing_row(byte[] row_pkey) {

@@ -19,9 +19,10 @@ package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; 
 import gplx.core.btries.*;
 public class Xoh_img_cls_ {
 	public static final byte		// SERIALIZED
-	  Tid__none				= 0	// EX: [[File:A.png]]		 -> "<img>"
-	, Tid__thumbimage		= 1	// EX: [[File:A.png|thumb]]  -> "<img class='thumbimage'>"
-	, Tid__thumbborder		= 2	// EX: [[File:A.png|border]] -> "<img class='thumbborder'>"
+	  Tid__none				= 0	// EX: [[File:A.png]]			-> "<img>"
+	, Tid__thumbimage		= 1	// EX: [[File:A.png|thumb]]		-> "<img class='thumbimage'>"
+	, Tid__thumbborder		= 2	// EX: [[File:A.png|border]]	-> "<img class='thumbborder'>"
+	, Tid__manual			= 3	// EX: [[File:A.png|class=x]]	-> "<img class='x'>"
 	;
 	public static final String 
 	  Str__thumbimage		= "thumbimage"
@@ -30,7 +31,7 @@ public class Xoh_img_cls_ {
 	public static final byte[]
 	  Bry__none				= Bry_.Empty
 	;
-	private static final byte[] 
+	public static final byte[] 
 	  Bry__thumbimage		= Bry_.new_a7(Str__thumbimage)
 	, Bry__thumbborder		= Bry_.new_a7(Str__thumbborder)
 	;

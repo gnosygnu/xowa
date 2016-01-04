@@ -19,7 +19,7 @@ package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
-public class Xoh_subpages_bldr extends gplx.core.brys.Bfr_arg_base {
+public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);
 	private byte[][] segs;
 	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
@@ -34,7 +34,7 @@ public class Xoh_subpages_bldr extends gplx.core.brys.Bfr_arg_base {
 		fmtr_grp.Bld_bfr(tmp_bfr, this);
 		return tmp_bfr.To_bry_and_clear();
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int segs_len = segs.length - 1;	// last seg is current page; do not print
 		for (int i = 0; i < segs_len; ++i) {
 			byte[] dlm = null;

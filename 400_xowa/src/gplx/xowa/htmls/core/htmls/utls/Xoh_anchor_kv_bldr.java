@@ -38,7 +38,7 @@ public class Xoh_anchor_kv_bldr {
 		tmp_bfr.Add_byte(has_qarg ? Byte_ascii.Amp : Byte_ascii.Question);
 		tmp_bfr.Add(key);
 		tmp_bfr.Add_byte(Byte_ascii.Eq);
-		tmp_bfr.Add(Html_utl.Escape_for_atr_val_as_bry(apos_bfr, Byte_ascii.Apos, bry));
+		tmp_bfr.Add(Gfh_utl.Escape_for_atr_val_as_bry(apos_bfr, Byte_ascii.Apos, bry));
 		return this;
 	}
 	public byte[] Bld_to_bry() {

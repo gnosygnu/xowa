@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_ttl extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_dat_ary = Eval_argx_or_null(ctx, src, caller, self, this.Name()); 
 		if (val_dat_ary == Bry_.Empty) return; // if argx is empty, return EX: {{PAGENAME:}}; DATE:2013-02-20
 		Xoa_ttl ttl = val_dat_ary == null ? ctx.Cur_page().Ttl() : Xoa_ttl.parse(ctx.Wiki(), val_dat_ary);

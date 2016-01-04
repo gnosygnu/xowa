@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_ifeq_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 
 	@Test  public void Ifeq_y()				{fxt.Test_parse_tmpl_str_test("{{#ifeq:1|1|a|b}}"				, "{{test}}"		, "a");}

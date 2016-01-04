@@ -46,10 +46,10 @@ public class Xoi_cmd_wiki_tst {
 		for (int j = 0; j < 5; ++j) {
 			latest_html = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(url);
 			if (latest_html != null) break;
-			Tfds.Write("fail|" + url);
+			Tfds.Dbg("fail|" + url);
 			if (j == 4) return;
 		}
-		Tfds.Write("pass|" + url);
+		Tfds.Dbg("pass|" + url);
 		parser.Parse(latest_html);
 		Xowm_dump_file dump_file = new Xowm_dump_file(domain_str, "latest", Xowm_dump_type_.Str__pages_articles);
 		dump_file.Server_url_(Xowm_dump_file_.Server_wmf_https);

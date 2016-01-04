@@ -26,7 +26,7 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	public Xob_redirect_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.Reset_db_y_();}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wiki_redirect;}
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__file);}	// restrict to file ns
-	@Override public byte Init_redirect() {return Bool_.Y_byte;}				// restrict to redirects
+	@Override public byte Init_redirect() {return Bool_.Y_byte;}					// restrict to redirects
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
 		cfg_tbl.Delete_all();

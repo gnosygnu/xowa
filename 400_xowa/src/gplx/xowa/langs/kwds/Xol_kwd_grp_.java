@@ -228,8 +228,9 @@ public static final int
 , Id_pagesincategory_pages = 206
 , Id_pagesincategory_subcats = 207
 , Id_pagesincategory_files = 208
+, Id_rev_revisionsize = 209
 ;
-public static final int Id__max = 209;
+public static final int Id__max = 210;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -442,6 +443,7 @@ case Xol_kwd_grp_.Id_strx_urldecode: return Bry_.new_a7("urldecode");
 case Xol_kwd_grp_.Id_pagesincategory_pages: return Bry_.new_u8("pagesincategory_pages");
 case Xol_kwd_grp_.Id_pagesincategory_subcats: return Bry_.new_u8("pagesincategory_subcats");
 case Xol_kwd_grp_.Id_pagesincategory_files: return Bry_.new_u8("pagesincategory_files");
+case Xol_kwd_grp_.Id_rev_revisionsize: return Bry_.new_u8("revisionsize");
 default: throw Err_.new_unhandled(id);
 		}
 	}

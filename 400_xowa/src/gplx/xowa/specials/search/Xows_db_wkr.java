@@ -20,8 +20,23 @@ import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.langs.cases.*;
 import gplx.gfui.*;
-class Xows_db_wkr {
-	public void Search(Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki) {
+public class Xows_db_wkr {
+	private Xol_case_mgr drd_case_mgr;
+	public Xows_db_row[] Search_by_drd(Cancelable cancelable, Xow_wiki wiki, Xows_ui_async ui_async, byte[] search, int search_results_max) {
+		Xows_ns_mgr ns_mgr = new Xows_ns_mgr(); ns_mgr.Add_main_if_empty();
+		Xows_ui_qry qry = new Xows_ui_qry(search, 0, search_results_max, Xosrh_rslt_itm_sorter.Tid_len_dsc, ns_mgr, Bool_.Y, new gplx.xowa.wikis.domains.Xow_domain_itm[] {wiki.Domain_itm()});
+		Xows_ui_rslt rslt = new Xows_ui_rslt();
+		Xows_db_cache cache = new Xows_db_cache(); cache.Init_by_db(Cancelable_.Never, search, wiki.Data__core_mgr().Db__search().Tbl__search_word());
+		Xows_ui_cmd cmd = new Xows_ui_cmd(null, qry, wiki, null, null, null, cache, ui_async);
+		if (drd_case_mgr == null) drd_case_mgr = Xol_case_mgr_.U8();
+		Search(cancelable, cmd, qry, rslt, cache, wiki, drd_case_mgr);
+		int len = cache.Count();
+		Xows_db_row[] rv = new Xows_db_row[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = cache.Get_at(i);
+		return rv;
+	}
+	@gplx.Internal protected void Search(Cancelable cancelable, Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki, Xol_case_mgr case_mgr) {
 		// assert matcher
 		Xowd_db_file search_db = wiki.Data__core_mgr().Db__search();
 		Xoa_app_.Usr_dlg().Prog_many("", "", "search started (please wait)");
@@ -48,13 +63,13 @@ class Xows_db_wkr {
 			while (true) {
 				boolean found_none = true;
 				for (int i = 0; i < word_ary_len; ++i) {	// loop each word to get rslts_wanted
-					if (cmd.Canceled()) return;
+					if (cancelable.Canceled()) return;
 					Xows_db_word word = word_ary[i];
 					if (word.Rslts_done()) continue;		// last db_search for word returned 0 results; don't search again;
 					int offset = word.Rslts_offset();
 					Xoa_app_.Usr_dlg().Prog_many("", "", "searching; wiki=~{0} total=~{1} offset=~{2} index=~{3} word=~{4}", wiki.Domain_str(), word_ary_len, offset, i, word.Text());
 					String sql = String_.Format(Search_sql, link_tbl.Tbl_name(), link_tbl.Fld_page_id(), link_tbl.Fld_word_id(), word.Id(), "page_len", "DESC", Int_.Max_value, offset); // need to return enough results to fill qry.Page_len() as many results may be discarded below; DATE:2015-04-24
-					int rslts_found = Search_pages(cmd, qry, rslt, cache, wiki, page_tbl, attach_rdr, sql, word, matcher, rslts_wanted);
+					int rslts_found = Search_pages(cancelable, cmd, qry, rslt, cache, wiki, case_mgr, page_tbl, attach_rdr, sql, word, matcher, rslts_wanted);
 					total_found += rslts_found;
 					if		(rslts_found == -1)		return;				// canceled
 					else if (rslts_found > 0)		found_none = false;	// NOTE: do not reverse and do rslts_found == 0; want to check if any word returns results;
@@ -66,13 +81,13 @@ class Xows_db_wkr {
 			cache.Sort();
 		}	finally {attach_rdr.Detach();}
 	}
-	private int Search_pages(Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki, Xowd_page_tbl page_tbl, Db_attach_rdr attach_rdr, String sql, Xows_db_word word, Xows_db_matcher matcher, int rslts_wanted) {
+	private int Search_pages(Cancelable cancelable, Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki, Xol_case_mgr case_mgr, Xowd_page_tbl page_tbl, Db_attach_rdr attach_rdr, String sql, Xows_db_word word, Xows_db_matcher matcher, int rslts_wanted) {
 		int rslts_found = 0;
-		Xow_ns_mgr ns_mgr = wiki.Ns_mgr(); Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
+		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		Db_rdr rdr = attach_rdr.Exec_as_rdr(sql);
 		try {
 			while (rdr.Move_next()) {
-				if (cmd.Canceled()) return -1;
+				if (cancelable.Canceled()) return -1;
 				word.Rslts_offset_add_1();
 				int page_ns = rdr.Read_int(page_tbl.Fld_page_ns());
 				if (!qry.Ns_mgr().Has(page_ns)) continue;						// ignore: ns doesn't match

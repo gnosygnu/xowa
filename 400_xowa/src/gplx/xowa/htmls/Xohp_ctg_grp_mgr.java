@@ -43,9 +43,9 @@ public class Xohp_ctg_grp_mgr {
 		grp_fmtr.Bld_bfr_many(bfr, categories_lbl, itm_mgr);
 	}
 }
-class Xoh_ctg_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Xoh_ctg_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	public void Set(Xoae_page page, Bry_fmtr itm_fmtr) {this.page = page; this.itm_fmtr = itm_fmtr;} private Xoae_page page; Bry_fmtr itm_fmtr;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int ctgs_len = page.Category_list().length;
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		Bry_bfr tmp_href = Xoa_app_.Utl__bfr_mkr().Get_b128();

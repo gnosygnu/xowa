@@ -37,7 +37,7 @@ class Xows_html_wkr {
 	public void Gen_tbl(Bry_bfr bfr, Xows_ui_rslt rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
 		html_rows.Init(rslt);
 		byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Img_pos_is_left_(Bool_.Y).Bld_to_bry();
-		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async.Gen_insert_key(wiki_domain), html_rows);
+		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async__html.Gen_insert_key(wiki_domain), html_rows);
 	}		
 	private byte[] Cancel_link(byte[] domain, byte[] cmd_key) {
 		lnki_bldr.Id_(Bry_.Add(Bry_.new_a7("xowa_cancel_"), domain));
@@ -52,14 +52,14 @@ class Xows_html_wkr {
 		boolean img_pos_is_left = true;
 		if (fwd) {
 			++paging_idx;
-			// if (paging_idx > qry.Page_max()) return Html_entity_.Nbsp_num_bry;
+			// if (paging_idx > qry.Page_max()) return Gfh_entity_.Nbsp_num_bry;
 			img_pos_is_left = false;
 			img_path = Xoh_img_path.Img_go_fwd;
 			title = Bry_paging_fwd;
 		}
 		else {
 			--paging_idx;
-			if (paging_idx < 0) return Html_entity_.Nbsp_num_bry;
+			if (paging_idx < 0) return Gfh_entity_.Nbsp_num_bry;
 			img_path = Xoh_img_path.Img_go_bwd;
 			title = Bry_paging_bwd;
 		}
@@ -91,12 +91,12 @@ class Xows_html_wkr {
 	, Bry_hdr_len = Bry_.new_a7("Page length"), Bry_hdr_ttl = Bry_.new_a7("Page title")
 	;
 }
-class Xows_html_row extends gplx.core.brys.Bfr_arg_base {
+class Xows_html_row implements gplx.core.brys.Bfr_arg {
 	private final Xoh_lnki_bldr lnki_bldr; private Xows_ui_rslt rslt;
 	private final Object thread_lock = new Object();
 	public Xows_html_row(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
 	public Xows_html_row Init(Xows_ui_rslt rslt) {this.rslt = rslt; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
+	public void Bfr_arg__add(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
 		int len = rslt.Len();
 		for (int i = 0; i < len; ++i) {
 			Xows_db_row row = rslt.Get_at(i);
@@ -109,7 +109,7 @@ class Xows_html_row extends gplx.core.brys.Bfr_arg_base {
 			byte[] title = row.Page_ttl().Full_txt();
 			lnki_bldr.Title_(title);
 			lnki_bldr.Caption_(title);
-			fmtr.Bld_bfr_many(bfr, Html_utl.Encode_id_as_str(row.Key()), row.Page_len(), lnki_bldr.Bld_to_bry());
+			fmtr.Bld_bfr_many(bfr, Gfh_utl.Encode_id_as_str(row.Key()), row.Page_len(), lnki_bldr.Bld_to_bry());
 		}
 	}
 	public Bry_fmtr Fmtr() {return fmtr;} private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

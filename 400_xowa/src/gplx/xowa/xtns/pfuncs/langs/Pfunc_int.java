@@ -22,7 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_int extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_int;}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] msg_key = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki();
 		Xol_lang_itm page_lang = ctx.Cur_page().Lang();

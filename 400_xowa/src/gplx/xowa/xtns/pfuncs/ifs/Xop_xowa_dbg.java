@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_xowa_dbg extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {			
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {			
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		bfr.Add(argx);
 		Argx_list.Add(argx);

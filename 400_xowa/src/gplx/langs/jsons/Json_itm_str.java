@@ -23,7 +23,7 @@ class Json_itm_str extends Json_itm_base {
 	@Override public byte Tid() {return Json_itm_.Tid__str;}
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
 		bfr.Add_byte(Byte_ascii.Quote);
-		gplx.langs.htmls.Html_utl.Escape_html_to_bfr(bfr, doc.Src(), this.Src_bgn(), this.Src_end(), true, true, true, true, false);	// false to apos for backwards compatibility
+		gplx.langs.htmls.Gfh_utl.Escape_html_to_bfr(bfr, doc.Src(), this.Src_bgn(), this.Src_end(), true, true, true, true, false);	// false to apos for backwards compatibility
 		bfr.Add_byte(Byte_ascii.Quote);
 	}
 	@Override public Object Data() {

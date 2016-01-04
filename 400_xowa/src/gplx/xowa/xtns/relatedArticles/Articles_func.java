@@ -23,7 +23,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Articles_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_relatedArticles;}
 	@Override public Pf_func New(int id, byte[] name) {return new Articles_func().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = this.Eval_argx(ctx, src, caller, self);
 		Articles_xtn_skin_itm xtn_itm = (Articles_xtn_skin_itm)ctx.Cur_page().Html_data().Xtn_skin_mgr().Get_or_null(Articles_xtn_skin_itm.KEY);
 		if (xtn_itm == null) {
@@ -53,10 +53,10 @@ class Articles_itm {
 	public byte[] Ttl() {return ttl;} private byte[] ttl;
 	public byte[] Text() {return text;} private byte[] text;
 }
-class Articles_itm_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Articles_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	private Xowe_wiki wiki; private List_adp itms;
 	public void Init(Xowe_wiki wiki, List_adp itms) {this.wiki = wiki; this.itms = itms;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Articles_itm itm = (Articles_itm)itms.Get_at(i);

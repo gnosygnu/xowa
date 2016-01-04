@@ -89,7 +89,7 @@ public class Xob_wiki_cfg_bldr_tst {
 //				String[] terms = String_.Split(line, '|');
 //				sb.Add(lang_code).Add("|").Add(String_.Trim(terms[0])).Add("|").Add(String_.Trim(terms[1])).Add("\n");
 //			}
-//			Tfds.Write(sb.To_str_and_clear());
+//			Tfds.Dbg(sb.To_str_and_clear());
 //		}
 	@Test  public void Ns_aliases() {
 		Io_mgr.Instance.InitEngine_mem();

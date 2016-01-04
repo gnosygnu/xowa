@@ -30,11 +30,11 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		qry_bgns_with.Add(Ary_dot_dot, Int_obj_ref.new_(Id_dot_dot));
 		qry_bgns_with.Add(Ary_dot_dot_slash, Int_obj_ref.new_(Id_dot_dot_slash));
 	}	static Btrie_fast_mgr qry_bgns_with;
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {// REF.MW:ParserFunctions_body.php
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
 		if (orig.length == 0) orig = ctx.Cur_page().Ttl().Full_txt();
-		bb.Add(Rel2abs(ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
+		bfr.Add(Rel2abs(ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
 		int last = end - 1;

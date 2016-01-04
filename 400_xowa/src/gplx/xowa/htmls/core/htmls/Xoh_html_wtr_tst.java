@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import org.junit.*;
 public class Xoh_html_wtr_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_(); fxt.Reset();}
 	@Test  public void Hr_basic()					{fxt.Test_parse_page_wiki_str("----"				, "<hr/>");}
 	@Test  public void Hr_extended()				{fxt.Test_parse_page_wiki_str("--------"			, "<hr/>");}

@@ -20,7 +20,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_plural extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW: CoreParserFunctions.php
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW: CoreParserFunctions.php
 		byte[] number = Eval_argx(ctx, src, caller, self);
 		int self_args_len = self.Args_len();
 		int arg_idx = Pf_func_.Eq_(number, Ary_Num_1) ? 0 : 1;

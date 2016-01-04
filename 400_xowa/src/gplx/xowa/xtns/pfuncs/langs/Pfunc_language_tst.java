@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_language_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void English()				{fxt.Test_parse_tmpl_str_test("{{#language:en}}"						, "{{test}}"	, "English");}
 	@Test  public void English_case()			{fxt.Test_parse_tmpl_str_test("{{#language:eN}}"						, "{{test}}"	, "English");}

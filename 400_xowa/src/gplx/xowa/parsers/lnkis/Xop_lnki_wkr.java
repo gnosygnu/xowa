@@ -46,6 +46,8 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
 		if (!arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_lnki, root, lnki, bgn_pos, cur_pos, lnki.Tkn_sub_idx() + 1, root.Subs_len(), src))
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
+		if (lnki.Ns_id() != Xow_ns_.Tid__main && Bry_.Len_eq_0(lnki.Ttl().Page_txt()))	// handle anchor-only pages; EX:[[File:#A]] PAGE:en.w:Spindale,_North_Carolina; DATE:2015-12-28
+			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
 		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki))	// convert "]]]" into "]" + "]]", not "]]" + "]"				
 			++cur_pos;																						// position "]]" at end of "]]]"
 		cur_pos = Xop_lnki_wkr_.Chk_for_tail(ctx.Lang(), src, cur_pos, src_len, lnki);

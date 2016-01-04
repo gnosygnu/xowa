@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Pfunc_case_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test  public void Lc()					{fxt.Test_parse_tmpl_str_test("{{lc:ABC}}"					, "{{test}}", "abc");}
 	@Test  public void Lc_first()			{fxt.Test_parse_tmpl_str_test("{{lcfirst:ABC}}"				, "{{test}}", "aBC");}

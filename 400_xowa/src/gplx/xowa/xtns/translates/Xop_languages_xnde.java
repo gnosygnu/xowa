@@ -101,14 +101,14 @@ public class Xop_languages_xnde implements Xox_xnde {
 	;
 	// "<img src=\"//bits.wikimedia.org/static-1.22wmf9/extensions/Translate/res/images/prog-1.png\" alt=\"~{img_alt}\" title=\"~{img_title}\" width=\"9\" height=\"9\" />&#160;•&#160;‎"
 }
-class Xop_languages_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Xop_languages_fmtr implements gplx.core.brys.Bfr_arg {
 	public void Init(List_adp langs, Xowe_wiki wiki, Xoa_ttl root_ttl, byte[] cur_lang) {
 		this.langs = langs;
 		this.wiki = wiki;
 		this.root_ttl = root_ttl;
 		this.cur_lang = cur_lang;
 	}	private List_adp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = langs.Count();
 		Xoh_href_wtr href_wtr = wiki.Appe().Html__href_wtr();
 		int ns_id = root_ttl.Ns().Id();

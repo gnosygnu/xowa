@@ -90,17 +90,17 @@ public class Xoh_lnki_wtr {
 		if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
 		if (Bry_.Eq(lnki_ttl.Full_txt(), page.Ttl().Full_txt())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; PAGE:en.w:January 1
 			if (lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) {		// only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
-				bfr.Add(Html_tag_.B_lhs);
+				bfr.Add(Gfh_tag_.B_lhs);
 				Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
-				bfr.Add(Html_tag_.B_rhs);
+				bfr.Add(Gfh_tag_.B_rhs);
 				return;
 			}
 		}
-		if (lnki.Xtn_sites_link()) return;									// lnki marked for relatedSites; don't write to page
+		if (lnki.Xtn_sites_link()) return;							// lnki marked for relatedSites; don't write to page
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
-			bfr.Add(Xoh_consts.A_bgn);								// '<a href="'
+			bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);					// '<a href="'
 			app.Html__href_wtr().Build_to_bfr(bfr, app, hctx.Mode(), wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
@@ -109,11 +109,11 @@ public class Xoh_lnki_wtr {
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
 			if (cfg.Lnki__title()) {
-				byte[] title_bry = lnki_ttl.Full_txt();		// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
+				byte[] title_bry = lnki_ttl.Full_txt();				// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
 				int title_len = title_bry.length;
 				if (title_len > 0) {
-					bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
-					Html_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+					bfr	.Add(Gfh_bldr_.Bry__title__nth);			// '" title=\"'
+					Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
 				}
 			}
 			if (!hctx.Mode_is_hdump()) {							// don't write visited for hdump
@@ -131,7 +131,7 @@ public class Xoh_lnki_wtr {
 				ttl_bry = Bry_.Add_w_dlm(anch_spr, ttl_bry, anch_txt);	// manually add anchor; else "Help:A#b" becomes "Help:A". note that lnki.Ttl_ary() uses .Full_txt (wiki + page but no anchor) to captialize 1st letter of page otherwise "Help:A#b" shows as "Help:A" (so Help:a -> Help:A); DATE:2013-06-21
 			}
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
-			bfr.Add(Xoh_consts.A_end);								// </a>
+			bfr.Add(Gfh_bldr_.Bry__a_rhs);							// </a>
 		}
 	}
 	private void Write_caption(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] ttl_bry, boolean tail_enabled, Xop_lnki_caption_wtr caption_wkr) {

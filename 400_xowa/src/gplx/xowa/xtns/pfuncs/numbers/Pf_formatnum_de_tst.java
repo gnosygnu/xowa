@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.core.intls.*; import gplx.xowa.langs.numbers.*;
 public class Pf_formatnum_de_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
 		fxt.Reset();
 		fxt.Init_lang_numbers_separators(".", ",");

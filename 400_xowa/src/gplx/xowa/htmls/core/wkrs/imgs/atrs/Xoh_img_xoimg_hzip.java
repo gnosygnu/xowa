@@ -20,7 +20,7 @@ import gplx.core.brys.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 public class Xoh_img_xoimg_hzip {
-	public void Encode(Bry_bfr bfr, Xoh_stat_itm stat_itm, byte[] src, Xoh_img_xoimg_parser arg) {
+	public void Encode(Bry_bfr bfr, Xoh_stat_itm stat_itm, byte[] src, Xoh_img_xoimg_data arg) {
 		boolean page_exists = arg.Lnki_page() != Xof_lnki_page.Null;
 		boolean time_exists = arg.Lnki_time() != Xof_lnki_time.Null;
 		boolean upright_exists = arg.Lnki_upright() != Xof_img_size.Upright_null;
@@ -39,8 +39,8 @@ public class Xoh_img_xoimg_hzip {
 		if (time_exists)		bfr.Add_double(arg.Lnki_time()).Add_byte(Xoh_hzip_dict_.Escape);
 		if (page_exists)		Xoh_hzip_int_.Encode(2, bfr, arg.Lnki_page());
 	}
-	public void Decode(Bry_bfr bfr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, Xoh_img_xoimg_parser arg) {
-		int flag = rdr.Read_int_by_base85(1);
+	public void Decode(Bry_bfr bfr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, Xoh_img_xoimg_data arg) {
+		int flag = rdr.Read_hzip_int(1);
 		flag_bldr.Decode(flag);
 		boolean page_exists	= flag_bldr.Get_as_bool(Flag__page_exists);
 		boolean time_exists	= flag_bldr.Get_as_bool(Flag__time_exists);
@@ -48,11 +48,11 @@ public class Xoh_img_xoimg_hzip {
 		boolean height_exists	= flag_bldr.Get_as_bool(Flag__height_exists);
 		boolean width_exists	= flag_bldr.Get_as_bool(Flag__width_exists);
 		byte tid			= flag_bldr.Get_as_byte(Flag__lnki_type);
-		int w				= width_exists		? rdr.Read_int_by_base85(2)					: Xof_img_size.Size__neg1;
-		int h				= height_exists		? rdr.Read_int_by_base85(2)					: Xof_img_size.Size__neg1;
+		int w				= width_exists		? rdr.Read_hzip_int(2)					: Xof_img_size.Size__neg1;
+		int h				= height_exists		? rdr.Read_hzip_int(2)					: Xof_img_size.Size__neg1;
 		double upright		= upright_exists	? rdr.Read_double_to(Xoh_hzip_dict_.Escape) : Xof_img_size.Upright_null;
 		double time			= time_exists		? rdr.Read_double_to(Xoh_hzip_dict_.Escape) : Xof_lnki_time.Null;
-		int page			= page_exists		? rdr.Read_int_by_base85(2)					: Xof_lnki_page.Null;
+		int page			= page_exists		? rdr.Read_hzip_int(2)					: Xof_lnki_page.Null;
 		arg.Set(tid, w, h, upright, time, page);
 	}
 	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_( 1, 1	, 1, 1, 1, 3);	

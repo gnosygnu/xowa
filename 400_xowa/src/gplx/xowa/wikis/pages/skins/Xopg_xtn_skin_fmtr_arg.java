@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
-public class Xopg_xtn_skin_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
+public class Xopg_xtn_skin_fmtr_arg implements gplx.core.brys.Bfr_arg {
 	private Xoae_page page; private byte xtn_skin_tid;
 	public Xopg_xtn_skin_fmtr_arg(Xoae_page page, byte xtn_skin_tid) {
 		this.page = page; this.xtn_skin_tid = xtn_skin_tid;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Xopg_xtn_skin_mgr mgr = page.Html_data().Xtn_skin_mgr();
 		int len = mgr.Count();
 		for (int i = 0; i < len; ++i) {

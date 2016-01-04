@@ -237,6 +237,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_pendingChangeLevel
 	, Xol_kwd_grp_.Id_pagesUsingPendingChanges
 	, Xol_kwd_grp_.Id_bang
+	, Xol_kwd_grp_.Id_rev_revisionsize
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -319,6 +320,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_page_id:
 			case Xol_kwd_grp_.Id_rev_id:
 			case Xol_kwd_grp_.Id_rev_pagesize:
+			case Xol_kwd_grp_.Id_rev_revisionsize:
 			case Xol_kwd_grp_.Id_rev_user:
 			case Xol_kwd_grp_.Id_rev_protectionlevel:			return Pfunc_rev_props.Instance;
 			case Xol_kwd_grp_.Id_page_displaytitle:				return Pfunc_displaytitle.Instance;
@@ -414,12 +416,12 @@ public class Pf_func_ {
 class Pf_func_noop extends Pf_func_base {
 	public Pf_func_noop(int id) {this.id = id;} private int id;
 	@Override public int Id() {return id;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {}
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {}
 	@Override public Pf_func New(int id, byte[] name) {return new Pf_func_noop(id).Name_(name);}
 }
 class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {bfr.Add_byte_pipe();}
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
 	public static final Pf_func_bang Instance = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}

@@ -49,7 +49,7 @@ public class Xoh_js_cleaner {
 					int frag_len = frag.length;
 					if (frag[0] == Byte_ascii.Lt) {	// jscript node; EX: <script
 						if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
-						bfr.Add(gplx.langs.htmls.Html_entity_.Lt_bry);
+						bfr.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry);
 						bfr.Add_mid(frag, 1, frag.length);
 						pos += frag_len; 
 					}
@@ -60,7 +60,7 @@ public class Xoh_js_cleaner {
 						else {
 							if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
 							bfr.Add(frag);
-							bfr.Add(gplx.langs.htmls.Html_entity_.Eq_bry);
+							bfr.Add(gplx.langs.htmls.Gfh_entity_.Eq_bry);
 							pos = atr_pos;
 						}
 					}

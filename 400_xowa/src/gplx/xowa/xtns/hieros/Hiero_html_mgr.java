@@ -19,7 +19,6 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 class Hiero_html_mgr {		
 	private Bry_bfr html_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), content_bfr = Bry_bfr.reset_(255), tbl_content_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), temp_bfr = Bry_bfr.reset_(255);
-	private Xoh_wtr_ctx hctx;
 	private boolean cartouche_opened = false;
 	public static int scale = 100;
 	private Hiero_prefab_mgr prefab_mgr; private Hiero_file_mgr file_mgr; private Hiero_phoneme_mgr phoneme_mgr;
@@ -31,7 +30,7 @@ class Hiero_html_mgr {
 		wtr = new Hiero_html_wtr(this, phoneme_mgr);
 	}
 	public void Render_blocks(Bry_bfr final_bfr, Xoh_wtr_ctx hctx, Hiero_block[] blocks, int scale, boolean hr_enabled) {
-		this.hctx = hctx; wtr.Init_for_write(hctx);
+		wtr.Init_for_write(hctx);
 		Hiero_html_mgr.scale = scale;
 		tbl_content_bfr.Clear(); content_bfr.Clear(); temp_bfr.Clear();
 		cartouche_opened = false;
@@ -41,9 +40,9 @@ class Hiero_html_mgr {
 		for (int i = 0; i < blocks_len; i++) {
 			Hiero_block block = blocks[i];
 			if (block.Len() == 1)
-				Render_block_single(content_bfr, hr_enabled, block);
+				Render_block_single(content_bfr, hctx, hr_enabled, block);
 			else
-				Render_block_many(content_bfr, hr_enabled, block);
+				Render_block_many(content_bfr, hctx, hr_enabled, block);
 			if (content_bfr.Len_gt_0())
 				tbl_content_bfr.Add_bfr_and_clear(content_bfr);	// $tbl_content = $tbl + $content;
 		}
@@ -51,7 +50,7 @@ class Hiero_html_mgr {
 			wtr.Tbl_inner(html_bfr, tbl_content_bfr);
 		wtr.Tbl_outer(final_bfr, html_bfr);
 	}
-	private void Render_block_single(Bry_bfr content_bfr, boolean hr_enabled, Hiero_block block) {
+	private void Render_block_single(Bry_bfr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {
 		byte[] code = block.Get_at(0);		// block has only one code (hence the proc name: Render_block_single)
 		byte b_0 = code[0];
 		switch (b_0) {
@@ -62,7 +61,7 @@ class Hiero_html_mgr {
 				break;
 			}
 			case Byte_ascii.Lt: {			// cartouche bgn
-				wtr.Td(content_bfr, Render_glyph(Tkn_lt));
+				wtr.Td(content_bfr, Render_glyph(hctx, Tkn_lt));
 				cartouche_opened = true;
 				wtr.Cartouche_bgn(content_bfr);
 				break;
@@ -70,17 +69,17 @@ class Hiero_html_mgr {
 			case Byte_ascii.Gt: {			// cartouche end
 				wtr.Cartouche_end(content_bfr);
 				cartouche_opened = false;
-				wtr.Td(content_bfr, Render_glyph(Tkn_gt));
+				wtr.Td(content_bfr, Render_glyph(hctx, Tkn_gt));
 				break;
 			}
 			default: {						// glyph or '.'
 				byte[] td_height = wtr.Td_height(Resize_glyph(code, cartouche_opened));
-				wtr.Td(content_bfr, Render_glyph(code, td_height));
+				wtr.Td(content_bfr, Render_glyph(hctx, code, td_height));
 				break;
 			}
 		}
 	}
-	private void Render_block_many(Bry_bfr content_bfr, boolean hr_enabled, Hiero_block block) {			
+	private void Render_block_many(Bry_bfr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {			
 		temp_bfr.Clear(); // build prefab_bry: "convert all codes into '&' to test prefabs glyph"
 		int block_len = block.Len();
 		boolean amp = false;
@@ -106,7 +105,7 @@ class Hiero_html_mgr {
 		Hiero_prefab_itm prefab_itm = prefab_mgr.Get_by_key(prefab_bry);
 		if (prefab_itm != null) {
 			byte[] td_height = wtr.Td_height(Resize_glyph(prefab_bry, cartouche_opened));
-			wtr.Td(content_bfr, Render_glyph(prefab_bry, td_height));
+			wtr.Td(content_bfr, Render_glyph(hctx, prefab_bry, td_height));
 		}
 		else {
 			int line_max = 0, total = 0, height = 0; // get block total height
@@ -157,20 +156,19 @@ class Hiero_html_mgr {
 				}
 				// resize the glyph according to the block total height
 				byte[] td_height = wtr.Td_height(Resize_glyph(v, cartouche_opened, total));
-				temp_bfr.Add(Render_glyph(v, td_height));
+				temp_bfr.Add(Render_glyph(hctx, v, td_height));
 			}
 			wtr.Td(content_bfr, temp_bfr.To_bry_and_clear());
 		}
 	}
-	private byte[] Render_glyph(byte[] src)						{return Render_glyph(src, Bry_.Empty);}
-	private byte[] Render_glyph(byte[] src, byte[] td_height) {
+	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src)					{return Render_glyph(hctx, src, Bry_.Empty);}
+	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src, byte[] td_height) {
 		int src_len = src.length; if (src_len == 0) return src; // bounds check
 		byte byte_n = src[src_len - 1];
-		byte[] img_cls = byte_n == Byte_ascii.Backslash		// REF.MW:isMirrored
-			? Bry_cls_mirrored								// 'class="mw-mirrored" '
-			: Bry_.Empty
-			;
-		byte[] glyph = Extract_code(src, src_len);						// trim backslashes from end; REF.MW:extractCode
+		byte[] img_cls = byte_n == Byte_ascii.Backslash				// REF.MW:isMirrored
+			? Bry_cls_mirrored										// 'class="mw-mirrored" '
+			: Bry_.Empty;
+		byte[] glyph = Extract_code(src, src_len);					// trim backslashes from end; REF.MW:extractCode
 		if		(Bry_.Eq(glyph, Tkn_dot_dot))						// render void block
 			return wtr.Void(Bool_.N);
 		else if (Bry_.Eq(glyph, Tkn_dot))							// render 1/2 width void block
@@ -182,18 +180,18 @@ class Hiero_html_mgr {
 
 		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph);
 		Hiero_file_itm file_itm = null;
-		byte[] glyph_esc = Html_utl.Escape_html_as_bry(glyph);
+		byte[] glyph_esc = Gfh_utl.Escape_html_as_bry(glyph);
 		if (phoneme_itm != null) {
 			byte[] code = phoneme_itm.Gardiner_code();
 			file_itm = file_mgr.Get_by_key(code);
 			if (file_itm != null)
-				return wtr.Img_phoneme(img_cls, td_height, glyph_esc, code);
+				return wtr.Img_phoneme(hctx, img_cls, td_height, glyph_esc, code);
 			else
 				return glyph_esc;
 		}
 		file_itm = file_mgr.Get_by_key(glyph);
 		return file_itm != null
-			? wtr.Img_file(img_cls, td_height, glyph_esc)
+			? wtr.Img_file(hctx, img_cls, td_height, glyph_esc)
 			: glyph_esc
 			;
 	}

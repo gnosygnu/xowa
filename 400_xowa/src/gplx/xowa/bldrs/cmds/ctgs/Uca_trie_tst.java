@@ -22,11 +22,11 @@ public class Uca_trie_tst {
 	@Test  public void Basic() {
 		Uca_trie_fxt fxt = new Uca_trie_fxt();
 		fxt.Clear();
-		fxt.Init_trie_itm("a", Bry_.new_ints(10, 11));
-		fxt.Init_trie_itm("b", Bry_.new_ints(20, 21));
-		fxt.Init_trie_itm("c", Bry_.new_ints(30, 31));
-		fxt.Test_decode(Bry_.new_ints(10, 11), "a");
-		fxt.Test_decode(Bry_.new_ints(10, 11, 20, 21, 30, 31), "abc");
+		fxt.Init_trie_itm("a", Bry_.New_by_ints(10, 11));
+		fxt.Init_trie_itm("b", Bry_.New_by_ints(20, 21));
+		fxt.Init_trie_itm("c", Bry_.New_by_ints(30, 31));
+		fxt.Test_decode(Bry_.New_by_ints(10, 11), "a");
+		fxt.Test_decode(Bry_.New_by_ints(10, 11, 20, 21, 30, 31), "abc");
 	}
 }
 class Uca_trie_fxt {

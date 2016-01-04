@@ -57,7 +57,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		while (true) {
 			rv = (Xoctg_idx_itm)itms.Get_at(pos);
 			comp_cur = Bry_.Compare(find, rv.Sortkey());
-			// Tfds.Write(dif, pos, comp_cur, comp_prv, String_.new_a7(find), String_.new_a7(rv.Sortkey()));
+			// Tfds.Dbg(dif, pos, comp_cur, comp_prv, String_.new_a7(find), String_.new_a7(rv.Sortkey()));
 			if (comp_cur == CompareAble_.Same) break;		// exact match; stop
 			dif /= 2;
 			if (dif == 0) dif = 1;							// make sure dif is at least 1
@@ -99,7 +99,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 			pos_cur = dir_fwd ? itm_bgn : itm_bgn - 1;	// -1 to position at pipe (note that -1 in FindBwd will position before)
 			tmp_prv_itm.Copy(tmp_cur_itm);
 		}
-		// Tfds.Write(arg_is_from, dir_fwd, String_.new_u8(find), String_.new_u8(tmp_cur_itm.Sortkey()), String_.new_u8(tmp_prv_itm.Sortkey()));
+		// Tfds.Dbg(arg_is_from, dir_fwd, String_.new_u8(find), String_.new_u8(tmp_cur_itm.Sortkey()), String_.new_u8(tmp_prv_itm.Sortkey()));
 		if (comp_cur == CompareAble_.Same) return tmp_cur_itm;
 		return (arg_is_from && dir_fwd) || (!arg_is_from && !dir_fwd) ? tmp_cur_itm : tmp_prv_itm;	// see note above
 	}	private Xoctg_idx_itm tmp_cur_itm = new Xoctg_idx_itm(), tmp_prv_itm = new Xoctg_idx_itm(); Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_();

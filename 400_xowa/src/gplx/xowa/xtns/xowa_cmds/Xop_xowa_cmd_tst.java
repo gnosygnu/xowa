@@ -23,7 +23,7 @@ public class Xop_xowa_cmd_tst {
 	@Before public void init() {
 		Xoa_gfs_mgr.Msg_parser_init();
 		fxt.Reset();
-	} private Xop_fxt fxt = new Xop_fxt();
+	} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		GfsCore.Instance.AddCmd(fxt.App(), Xoae_app.Invk_app);
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(false);

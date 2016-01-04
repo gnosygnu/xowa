@@ -123,7 +123,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	private void Win__link_clicked(String anchor_raw) {
 		String url = url_box.Text();
-		int pos = String_.FindFwd(url, gplx.langs.htmls.Html_tag_.Anchor_str);
+		int pos = String_.FindFwd(url, gplx.langs.htmls.Gfh_tag_.Anchor_str);
 		if (pos != Bry_find_.Not_found) url = String_.Mid(url, 0, pos);
 		String anchor_str = Parse_evt_location_changing(anchor_raw);
 		byte[] anchor_bry = Bry_.new_u8(anchor_str);
@@ -145,7 +145,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		app.Gfs_mgr().Run_str(snippet);
 	}
 	private static String Parse_evt_location_changing(String v) { // EX: about:blank#anchor -> anchor
-		int pos = String_.FindFwd(v, gplx.langs.htmls.Html_tag_.Anchor_str);
+		int pos = String_.FindFwd(v, gplx.langs.htmls.Gfh_tag_.Anchor_str);
 		return pos == Bry_find_.Not_found
 			? null
 			: String_.Mid(v, pos + 1);

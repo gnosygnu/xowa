@@ -21,10 +21,10 @@ import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
-		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary.length == 0) return;
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx.length == 0) return;
 		byte[] qry_arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
-		UrlString(ctx, tid, encode, val_dat_ary, bb, qry_arg);
+		UrlString(ctx, tid, encode, argx, bfr, qry_arg);
 	}
 	public static void UrlString(Xop_ctx ctx, byte tid, boolean encode, byte[] src, Bry_bfr trg, byte[] qry_arg) {
 		Xowe_wiki wiki = ctx.Wiki();

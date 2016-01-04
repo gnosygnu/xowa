@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import
 import gplx.core.intls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pad extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW: CoreParserFunctions.php|pad
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW: CoreParserFunctions.php|pad
 		int self_args_len = self.Args_len();
 		byte[] val = Eval_argx(ctx, src, caller, self);
 		int val_len = Utf8_.Len_of_bry(val);			// NOTE: length must be in chars, not bytes, else won't work for non-ASCII chars; EX:niǎo has length of 4, not 5; PAGE:zh.d:不 DATE:2014-08-27

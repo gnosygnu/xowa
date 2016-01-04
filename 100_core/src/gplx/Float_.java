@@ -23,6 +23,11 @@ public class Float_ {
 	public static boolean IsNaN(float v) {return Float.isNaN(v);}		
 	public static float cast(Object obj)	{try {return (Float)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, float.class, obj);}}
 	public static float parse(String raw)	{try {return Float.parseFloat(raw);} catch(Exception exc) {throw Err_.new_parse_exc(exc, float.class, raw);}} 
+	public static int Compare(float lhs, float rhs) {
+		if		( lhs == rhs)	return CompareAble_.Same;
+		else if ( lhs <  rhs)	return CompareAble_.Less;
+		else	/*lhs >  rhs*/	return CompareAble_.More;
+	}
 	public static String To_str(float v) {
 				int v_int = (int)v;
 		return v - v_int == 0 ? Int_.To_str(v_int) : Float.toString(v);

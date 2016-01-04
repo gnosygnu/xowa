@@ -36,7 +36,7 @@ public class Xoa_parser_mgr {
 //			int angle_bgn_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_bgn, src_bgn, src_end);
 //			if (angle_bgn_pos != Bry_find_.Not_found) {
 //				src = Bry_.Mid(src, src_bgn, src_end);
-//				src = Bry_.Replace(src, Byte_ascii.Angle_bgn_bry, gplx.langs.htmls.Html_entity_.Lt_bry);
+//				src = Bry_.Replace(src, Byte_ascii.Angle_bgn_bry, gplx.langs.htmls.Gfh_entity_.Lt_bry);
 //				src_bgn = 0;
 //				src_end = src.length;
 //			}

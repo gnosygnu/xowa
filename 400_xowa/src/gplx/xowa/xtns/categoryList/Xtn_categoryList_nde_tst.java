@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.categoryList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Xtn_categoryList_nde_tst {
-//		private Xop_fxt fxt = new Xop_fxt(); String raw_src;
+//		private final Xop_fxt fxt = new Xop_fxt(); String raw_src;
 	@Test  public void Basic() {
 	}
 }

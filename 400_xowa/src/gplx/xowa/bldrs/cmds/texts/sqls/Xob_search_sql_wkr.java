@@ -39,7 +39,7 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 		byte[] bry = rdr.Bfr();
 		byte[] cur_word = Bry_.Mid(bry, rdr.Key_pos_bgn(), rdr.Key_pos_end());
 		if (!Bry_.Eq(cur_word, prv_word)) {
-			search_word_tbl.Insert_cmd_by_batch(++search_id, cur_word, page_count);
+			search_word_tbl.Insert_cmd_by_batch(++search_id, prv_word, page_count);
 			prv_word = cur_word;
 			page_count = 0;
 		}

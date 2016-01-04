@@ -22,8 +22,8 @@ class Hiero_html_wtr {
 	private Hiero_phoneme_mgr phoneme_mgr;
 	private Bry_bfr temp_bfr = Bry_bfr.reset_(255);		
 	public Hiero_html_wtr(Hiero_html_mgr mgr, Hiero_phoneme_mgr phoneme_mgr) {this.phoneme_mgr = phoneme_mgr;}
-	public void Init_for_write(Xoh_wtr_ctx hctx) {this.hiero_img_dir = hctx.Mode_is_hdump() ? gplx.xowa.htmls.core.makes.Xoh_make_trie_.Bry__hiero_dir : Hiero_xtn_mgr.Img_src_dir;} private byte[] hiero_img_dir = null;
-	public void Hr(Bry_bfr bfr)			{bfr.Add(Html_tag_.Hr_inl).Add_byte_nl();}
+	public void Init_for_write(Xoh_wtr_ctx hctx) {this.hiero_img_dir = Hiero_xtn_mgr.Img_src_dir;} private byte[] hiero_img_dir = null;
+	public void Hr(Bry_bfr bfr)			{bfr.Add(Gfh_tag_.Hr_inl).Add_byte_nl();}
 	public void Tbl_eol(Bry_bfr bfr)	{bfr.Add(Tbl_eol_bry);}	
 	public byte[] Td_height(int height) {
 		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).To_bry_and_clear();
@@ -59,8 +59,7 @@ class Hiero_html_wtr {
 	, "                <td>"
 	, "                  " + Tbl_bgn_str
 	, "                    <tr>"
-	))
-	;
+	));
 	public void Cartouche_end(Bry_bfr bfr) {
 		bfr.Add(Cartouche_end_lhs_bry).Add_int_variable((Hiero_html_mgr.Cartouche_width * Hiero_html_mgr.scale) / 100).Add(Cartouche_end_rhs_bry);
 	}
@@ -85,7 +84,7 @@ class Hiero_html_wtr {
 		int height = (int)((Hiero_html_mgr.Max_height * Hiero_html_mgr.scale) / 100);
 		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph); if (phoneme_itm == null) throw Err_.new_wo_type("missing phoneme", "glyph", String_.new_u8(glyph));
 		byte[] code = phoneme_itm.Gardiner_code();
-		byte[] title = bgn ? Html_entity_.Lt_bry : Html_entity_.Gt_bry;
+		byte[] title = bgn ? Gfh_entity_.Lt_bry : Gfh_entity_.Gt_bry;
 		return cartouche_img_fmtr.Bld_bry_many(temp_bfr, hiero_img_dir, code, height, title);
 	}
 	private static final Bry_fmtr cartouche_img_fmtr = Bry_fmtr.new_(String_.Concat
@@ -93,7 +92,7 @@ class Hiero_html_wtr {
 	, " height='~{height}' title='~{title}'"
 	, " alt='~{title}' />"
 	)
-	, "path", "code", "height", "title");
+	, "path", "code", "height", "title", "hiero_tid");
 	public void Tbl_inner(Bry_bfr html_bfr, Bry_bfr text_bfr) {
 		html_bfr.Add(Tbl_inner_bgn).Add_bfr_and_clear(text_bfr).Add(Tbl_inner_end); //	$html .= self::TABLE_START . "<tr>\n" . $tableContentHtml . '</tr></table>';
 	}
@@ -127,15 +126,14 @@ class Hiero_html_wtr {
 	, "  </tr>"
 	, "</table>"
 	, ""
-	))
-	;
-	public byte[] Img_phoneme(byte[] img_cls, byte[] td_height, byte[] glyph_esc, byte[] code) {
-		byte[] code_esc = Html_utl.Escape_html_as_bry(temp_bfr, code);
+	));
+	public byte[] Img_phoneme(Xoh_wtr_ctx hctx, byte[] img_cls, byte[] td_height, byte[] glyph_esc, byte[] code) {
+		byte[] code_esc = Gfh_utl.Escape_html_as_bry(temp_bfr, code);
 		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).To_bry_and_clear(); // "~{code} [~{glyph}]"
-		return Img(img_cls, td_height, glyph_esc, code_esc, img_title);
+		return Img(hctx, img_cls, td_height, glyph_esc, code_esc, img_title);
 	}
-	public byte[] Img_file(byte[] img_cls, byte[] td_height, byte[] glyph_esc) {return Img(img_cls, td_height, glyph_esc, glyph_esc, glyph_esc);}
-	private byte[] Img(byte[] img_cls, byte[] td_height, byte[] glyph, byte[] img_src_name, byte[] img_title) {
+	public byte[] Img_file(Xoh_wtr_ctx hctx, byte[] img_cls, byte[] td_height, byte[] glyph_esc) {return Img(hctx, img_cls, td_height, glyph_esc, glyph_esc, glyph_esc);}
+	private byte[] Img(Xoh_wtr_ctx hctx, byte[] img_cls, byte[] td_height, byte[] glyph, byte[] img_src_name, byte[] img_title) {
 		byte[] img_src = Bld_img_src(hiero_img_dir, img_src_name);
 		return glyph_img_fmtr.Bld_bry_many(temp_bfr, img_cls, Hiero_html_mgr.Image_margin, td_height, img_src, img_title, glyph);
 	}
@@ -147,10 +145,9 @@ class Hiero_html_wtr {
 	, "      " + Tbl_bgn_str 
 	, "        <tr>"
 	));
-	private static final Bry_fmtr 
-	  glyph_img_fmtr	= Bry_fmtr.new_
-	  ( "\n            <img ~{img_cls}style='margin: ~{img_margin}px; ~{option}' src='~{img_src}' title='~{img_title}' alt='~{glyph}' />", "img_cls", "img_margin", "option", "img_src", "img_title", "glyph")
-	;
+	private static final Bry_fmtr glyph_img_fmtr = Bry_fmtr.new_
+	( "\n            <img ~{img_cls}style='margin: ~{img_margin}px; ~{option}' src='~{img_src}' title='~{img_title}' alt='~{glyph}' />"
+	, "img_cls", "img_margin", "option", "img_src", "img_title", "glyph");
 	public byte[] Void(boolean half) { // render void
 		int width = Hiero_html_mgr.Max_height;
 		if (half) width /= 2;
@@ -164,10 +161,11 @@ class Hiero_html_wtr {
 	, "                </td>"
 	, "              </tr>"
 	, "            </table>"
-	)
-	, "width");
+	), "width");
 	private static byte[] Bld_img_src(byte[] hiero_img_dir, byte[] name) {
 		return Bry_.Add(hiero_img_dir, Img_src_prefix, name, Img_src_ext);
 	}
-	private static final byte[] Img_src_prefix = Bry_.new_a7("hiero_"), Img_src_ext = Bry_.new_a7(".png");
+	private static final byte[] Img_src_prefix = Bry_.new_a7("hiero_")
+	, Img_src_ext = Bry_.new_a7(".png")
+	;
 }

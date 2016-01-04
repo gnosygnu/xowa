@@ -30,6 +30,16 @@ public class Xop_lnki_type {
 			default:								throw Err_.new_unhandled(flag);
 		}
 	}
+	public static byte To_flag(byte tid) {
+		switch (tid) {
+			case Xop_lnki_type.Tid_null:			return Xop_lnki_type.Id_null;
+			case Xop_lnki_type.Tid_none:			return Xop_lnki_type.Id_none;
+			case Xop_lnki_type.Tid_frameless:		return Xop_lnki_type.Id_frameless;
+			case Xop_lnki_type.Tid_frame:			return Xop_lnki_type.Id_frame;
+			case Xop_lnki_type.Tid_thumb:			return Xop_lnki_type.Id_thumb;
+			default:								throw Err_.new_unhandled(tid);
+		}
+	}
 	public static boolean Id_is_thumbable(byte id) {
 		return	(	Bitmask_.Has_int(id, Id_thumb)	// for purposes of displaying images on page, thumb and frame both create a thumb box
 				||	Bitmask_.Has_int(id, Id_frame)

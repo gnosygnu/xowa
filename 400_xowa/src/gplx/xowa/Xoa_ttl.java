@@ -103,7 +103,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
 	private static final int Char__bidi = 1, Char__ws = 2;
 	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
-	.Add_many_int(Char__bidi	, Bry_.new_ints(0xE2, 0x80, 0x8E), Bry_.new_ints(0xE2, 0x80, 0x8F), Bry_.new_ints(0xE2, 0x80, 0xAA), Bry_.new_ints(0xE2, 0x80, 0xAB), Bry_.new_ints(0xE2, 0x80, 0xAC), Bry_.new_ints(0xE2, 0x80, 0xAD), Bry_.new_ints(0xE2, 0x80, 0xAE))
+	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
 	;
 	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
@@ -196,7 +196,10 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						colon_count++;		// increment colon count
 						break;
 					}
-				case Byte_ascii.Hash: anch_bgn = (txt_bb_len) + 1; break; // flag last anch_bgn
+				case Byte_ascii.Hash: 
+					if (anch_bgn == -1)	// anchor begins at 1st #, not last #; EX:A#B#C has anchor of "B#C" not "C" PAGE:en.w:Grand_Central_Terminal; DATE:2015-12-31
+						anch_bgn = (txt_bb_len) + 1; 
+					break;
 				case Byte_ascii.Slash:
 					if (root_bgn == -1)
 						root_bgn = (txt_bb_len) + 1;

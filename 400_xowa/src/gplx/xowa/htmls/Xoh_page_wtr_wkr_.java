@@ -23,7 +23,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static byte[] Bld_page_content_sub(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Bry_bfr tmp_bfr) {
 		byte[] subpages = app.Html_mgr().Page_mgr().Subpages_bldr().Bld(wiki.Ns_mgr(), page.Ttl());
 		byte[] page_content_sub = page.Html_data().Content_sub();		// contentSub exists; SEE: {{#isin}}
-		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page);			
+		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page.Redirected_ttls());			
 		return Bry_.Add(subpages, page_content_sub, redirect_msg);
 	}
 	public static byte[] Bld_page_name(Bry_bfr tmp_bfr, Xoa_ttl ttl, byte[] display_ttl) {
@@ -38,7 +38,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_head_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] head_end = page.Html_data().Custom_head_end();
 		if (head_end == null) return;
-		int insert_pos = Bry_find_.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
+		int insert_pos = Bry_find_.Find_fwd(html_bfr.Bfr(), Gfh_tag_.Head_rhs);
 		if (insert_pos == Bry_find_.Not_found) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find </head>");
 			return;
@@ -48,7 +48,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_html_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] html_end = page.Html_data().Custom_html_end();
 		if (html_end == null) return;
-		int insert_pos = Bry_find_.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
+		int insert_pos = Bry_find_.Find_bwd(html_bfr.Bfr(), Gfh_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_find_.Not_found) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find </html>");
 			return;

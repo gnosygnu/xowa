@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_tag_tst {		
-	@Before public void init()			{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init()			{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic()			{fxt.Test_html_full_str("{{#tag:pre|a|id=b|style=c}}"				, "<pre id=\"b\" style=\"c\">a</pre>");}
 //		@Test   public void Missing_val()	{fxt.ini_Msg(Mwl_tag_rsc.Instance.Invalid).Test_parse_tmpl_str_test("{{#tag:pre|a|id=}}"	, "{{test}}"	, "");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=}} -> ""
 	@Test   public void Atr2_empty()	{fxt.Test_html_full_str("{{#tag:pre|a|id=b|}}"						, "<pre id=\"b\">a</pre>");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=a|}} -> "<references group=a/>"
@@ -36,5 +36,21 @@ public class Pfunc_tag_tst {
 		fxt.Init_page_create("Template:!", "|");
 		fxt.Init_page_create("Template:A", "{{#ifeq:{{{1}}}|expd|pass|fail}}");
 		fxt.Test_html_full_frag("{{#tag:ref|{{A{{!}}expd}}}}<references/>", "<span class=\"reference-text\">pass</span>");
+	}
+	@Test   public void Nested_ref__pair() {	// PURPOSE: handle refs inside tag; PAGE:en.w:UK; DATE:2015-12-26
+		fxt.Test_html_full_str("{{#tag:ref|<ref>a</ref>b}}<references/>", String_.Concat_lines_nl_skip_last
+		( "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[2]</a></sup><ol class=\"references\">"
+		, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">a</span></li>"
+		, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\"><sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>b</span></li>"
+		, "</ol>"
+		));
+	}
+	@Test   public void Nested_ref__inline() {	// PURPOSE: handle refs inside tag; PAGE:en.w:Earth; DATE:2015-12-29
+		fxt.Test_html_full_str("{{#tag:ref|<ref name='a'/>b}}<references/>", String_.Concat_lines_nl_skip_last
+		( "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[2]</a></sup><ol class=\"references\">"
+		, "<li id=\"cite_note-a-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-a_0-0\">^</a></span> <span class=\"reference-text\"></span></li>"
+		, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\"><sup id=\"cite_ref-a_0-0\" class=\"reference\"><a href=\"#cite_note-a-0\">[1]</a></sup>b</span></li>"
+		, "</ol>"
+		));
 	}
 }

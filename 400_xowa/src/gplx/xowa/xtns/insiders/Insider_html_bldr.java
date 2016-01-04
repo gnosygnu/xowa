@@ -33,7 +33,7 @@ class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 		html_bldr.Bld_all(bfr, page, itms);
 	}
 }
-public class Insider_html_bldr extends gplx.core.brys.Bfr_arg_base {
+public class Insider_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Insider_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private List_adp list; private int list_len;
@@ -44,7 +44,7 @@ public class Insider_html_bldr extends gplx.core.brys.Bfr_arg_base {
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_sidebar_ttl(), xtn_mgr.Msg_about_page(), xtn_mgr.Msg_about_ttl(), this);
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Gfo_url_encoder href_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href;
 		for (int i = 0; i < list_len; ++i) {

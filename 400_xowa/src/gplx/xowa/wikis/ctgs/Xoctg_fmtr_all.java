@@ -82,7 +82,7 @@ class Xoctg_fmtr_all {
 				,	"                    <span class=\"CategoryTreeToggle\" style=\"display: none;\" data-ct-title=\"~{itm_data_title}\" title=\"~{itm_title}\" data-ct-state=\"collapsed\">"
 				,	"                    </span> "
 				,	"                  </span>"
-				,	"                  <a href=\"~{itm_href}\" class=\"CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory\">~{itm_text}"
+				,	"                  <a href=\"~{itm_href}\" class=\"" + Xoa_ctg_mgr.Html__cls__str + "\">~{itm_text}"
 				,	"                  </a>"
 				,	"                  <span title=\"~{itm_contains_title}\" dir=\"ltr\">~{itm_contains_text}"
 				,	"                  </span>"

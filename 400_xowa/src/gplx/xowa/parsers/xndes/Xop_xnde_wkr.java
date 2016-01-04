@@ -219,10 +219,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
 		byte[] bry = null;
-		if		(len == 1	&& src[bgn_pos]		== Byte_ascii.Lt)		bry = Html_entity_.Lt_bry;
+		if		(len == 1	&& src[bgn_pos]		== Byte_ascii.Lt)		bry = Gfh_entity_.Lt_bry;
 		else if	(len == 2	&& src[bgn_pos]		== Byte_ascii.Lt
 							&& src[bgn_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;	// NOTE: should use bgn_pos, not cur_pos; DATE:2014-10-22
-		else															bry = Bry_.Add(Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
+		else															bry = Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
 		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
@@ -313,7 +313,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Int__home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.langs.htmls.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -473,7 +473,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.langs.htmls.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {                
 			if (pre2_pending) {
 				pre2_pending = false;
@@ -538,13 +538,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		return found ? rv : Bry_find_.Not_found;
 	}
-	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] close_bry) {
+	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] open_bry, byte[] close_bry) {
 		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
 		if (tag_bgn > -1 
 			&& Bry_.Eq(src, tag_bgn, tag_bgn, Pfunc_tag.Xtag_bgn_lhs))	// xtn created by tag
 			return Xop_xnde_wkr_.Find_xtag_end(ctx, src, open_end, src_len);
 		else	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
-			return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, close_bry);
+			return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, open_bry, close_bry);
 	}
 	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int name_bgn, int name_end, int atrs_bgn, int atrs_end, Mwh_atr_itm[] atrs, boolean inline, boolean pre2_hack) {
 		// NOTE: find end_tag that exactly matches bgnTag; must be case sensitive;
@@ -555,12 +555,12 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			xnde.Tag_close_rng_(open_end, open_end);			// NOTE: inline tag, so set TagClose to open_end; should noop
 		}
 		else {
-			byte[] close_bry = tag.Xtn_end_tag_tmp();				// get tmp bry (so as not to new)
+			byte[] close_bry = tag.Xtn_end_tag_tmp();			// get tmp bry (so as not to new)
 			if (tag.Langs() != null) {							// cur tag has langs; EX:<section>; DATE:2014-07-18
 				Xop_xnde_tag_lang tag_lang = tag.Langs_get(ctx.Lang().Case_mgr(), ctx.Cur_page().Lang().Lang_id(), src, name_bgn, name_end);
 				if (tag_lang == null)							// tag does not match lang; EX:<trecho> and lang=de;
 					return ctx.Lxr_make_txt_(open_end);
-				if (tag_lang != Xop_xnde_tag_lang.Instance)			// tag matches; note Xop_xnde_tag_lang._ is a wildcard match; EX:<section>
+				if (tag_lang != Xop_xnde_tag_lang.Instance)		// tag matches; note Xop_xnde_tag_lang._ is a wildcard match; EX:<section>
 					close_bry = tag_lang.Xtn_end_tag_tmp();
 			}
 			int src_offset = open_bgn - 1;						// open bgn to start at <; -2 to ignore </ ; +1 to include <
@@ -568,7 +568,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			for (int i = 2; i < close_ary_len; i++)				// 2 to ignore </
 				close_bry[i] = src[src_offset + i];
 			boolean auto_close = false;
-			int close_bgn = Find_xtn_end_lhs(ctx, tag, src, src_len, open_bgn, open_end, close_bry);
+			int close_bgn = Find_xtn_end_lhs(ctx, tag, src, src_len, open_bgn, open_end, tag.Xtn_bgn_tag(), close_bry);
 			if (close_bgn == Bry_find_.Not_found) auto_close = true;	// auto-close if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>, <references> DATE:2014-08-23
 			int close_end = -1;
 			if (auto_close) {
@@ -608,8 +608,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_xowa_cmd:				xnde_xtn = tkn_mkr.Xnde_xowa_cmd(); break;
 					case Xop_xnde_tag_.Tid_math:					xnde_xtn = tkn_mkr.Xnde_math(); break;
 					case Xop_xnde_tag_.Tid_poem:					xnde_xtn = tkn_mkr.Xnde_poem(); break;
-					case Xop_xnde_tag_.Tid_ref:						xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_ref() : null; break;
-					case Xop_xnde_tag_.Tid_references:				xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_references() : null; break;
+					case Xop_xnde_tag_.Tid_ref:						xnde_xtn = gplx.xowa.xtns.cites.References_nde.Enabled ? tkn_mkr.Xnde_ref() : null; break;
+					case Xop_xnde_tag_.Tid_references:				xnde_xtn = gplx.xowa.xtns.cites.References_nde.Enabled ? tkn_mkr.Xnde_references() : null; break;
 					case Xop_xnde_tag_.Tid_gallery:					xnde_xtn = tkn_mkr.Xnde_gallery(); break;
 					case Xop_xnde_tag_.Tid_imageMap:				xnde_xtn = tkn_mkr.Xnde_imageMap(); break;
 					case Xop_xnde_tag_.Tid_hiero:					xnde_xtn = tkn_mkr.Xnde_hiero(); break;

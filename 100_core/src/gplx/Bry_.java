@@ -23,13 +23,25 @@ public class Bry_ {
 	public static final byte[] Empty = new byte[0];
 	public static final byte[][] Ary_empty = new byte[0][];
 	public static final Class<?> Cls_ref_type = byte[].class;
-	public static byte[] new_bytes(byte... ary) {return ary;}
-	public static byte[] new_ints(int... ary) {
+	public static byte[] New_by_byte(byte b) {return new byte[] {b};}
+	public static byte[] New_by_ints(int... ary) {
 		int len = ary.length;
 		byte[] rv = new byte[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = (byte)ary[i];
 		return rv;
+	}
+	public static byte[] New_by_objs(Bry_bfr bfr, Object... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Object itm = ary[i];
+			Class<?> type = Type_adp_.ClassOf_obj(itm);
+			if		(Type_adp_.Eq(type, int.class))		bfr.Add_byte((byte)Int_.cast(itm));
+			else if	(Type_adp_.Eq(type, String.class))	bfr.Add_str_u8((String)itm);
+			else if	(Type_adp_.Eq(type, byte[].class))	bfr.Add((byte[])itm);
+			else											throw Err_.new_unhandled(Type_adp_.FullNameOf_type(type));
+		}
+		return bfr.To_bry_and_clear();
 	}
 	public static byte[] Coalesce_to_empty(byte[] v) {return v == null ? Bry_.Empty : v;}
 	public static byte[] Coalesce(byte[] v, byte[] or) {return v == null ? or : v;}
@@ -210,6 +222,8 @@ public class Bry_ {
 			if (src[i] == lkp) return true;
 		return false;
 	}
+	public static boolean Has_at_bgn(byte[] src, byte lkp)					{return Has_at_bgn(src, lkp, 0);}
+	public static boolean Has_at_bgn(byte[] src, byte lkp, int src_bgn)	{return src_bgn < src.length ? src[src_bgn] == lkp : false;}
 	public static boolean Has_at_bgn(byte[] src, byte[] lkp) {return Has_at_bgn(src, lkp, 0, src.length);}
 	public static boolean Has_at_bgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
 		int lkp_len = lkp.length;
@@ -229,7 +243,6 @@ public class Bry_ {
 		}
 		return true;
 	}
-	public static boolean Has_at_bgn(byte[] src, byte lkp, int src_bgn) {return src_bgn < src.length ? src[src_bgn] == lkp : false;}
 	public static void Set(byte[] src, int bgn, int end, byte[] repl) {
 		int repl_len = repl.length;
 		for (int i = 0; i < repl_len; i++)

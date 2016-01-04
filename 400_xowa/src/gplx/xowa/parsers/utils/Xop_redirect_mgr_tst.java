@@ -46,9 +46,12 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void Parse_1st_link_only() {	// PURPOSE: do not take pipe from 2nd lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
 		fxt.Test_redirect("#REDIRECT [[Template:A]][[Category:B|b]]", "Template:A");
 	}
+	@Test  public void Redirected_html() {	// PURPOSE: "Redirected from" message was using "_" instead of " "; PAGE:en.w:Summer_Solstice; DATE:2015-12-29
+		fxt.Test__redirected_html("A_B", "(Redirected from <a href=\"/wiki/A_B?redirect=no\" title=\"A B\">A B</a>)");
+	}
 }
 class Xop_redirect_mgr_fxt {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 	}
@@ -71,5 +74,11 @@ class Xop_redirect_mgr_fxt {
 		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry);
 		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
 		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
+	}
+	public void Test__redirected_html(String page_str, String expd_str) {
+		List_adp list = List_adp_.new_();
+		list.Add(Bry_.new_u8(page_str));
+		byte[] actl_bry = Xop_redirect_mgr.Bld_redirect_msg(fxt.App(), fxt.Wiki(), list);
+		Tfds.Eq_str(expd_str, String_.new_u8(actl_bry));
 	}
 }

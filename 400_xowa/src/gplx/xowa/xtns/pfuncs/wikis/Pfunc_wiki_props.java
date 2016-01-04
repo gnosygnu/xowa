@@ -22,7 +22,7 @@ import gplx.xowa.wikis.metas.*;
 public class Pfunc_wiki_props extends Pf_func_base {
 	public Pfunc_wiki_props(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		Xow_wiki_props props = ctx.Wiki().Props();
 	    switch (id) {
 			case Xol_kwd_grp_.Id_site_sitename:			bfr.Add(props.Site_name()); break;

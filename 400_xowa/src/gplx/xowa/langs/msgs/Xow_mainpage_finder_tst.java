@@ -55,7 +55,7 @@ public class Xow_mainpage_finder_tst {
 class Xow_mainpage_finder_fxt {
 	public void Clear() {
 		fxt.Reset_for_msgs();
-	}	private Xop_fxt fxt = new Xop_fxt();
+	}	private final Xop_fxt fxt = new Xop_fxt();
 	public void Init_siteinfo(String mainpage_val) {
 		fxt.Wiki().Props().Main_page_(Bry_.new_a7(mainpage_val));
 	}

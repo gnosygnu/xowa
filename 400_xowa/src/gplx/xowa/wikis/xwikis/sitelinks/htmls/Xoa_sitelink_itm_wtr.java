@@ -19,12 +19,12 @@ package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.domains.*;
-class Xoa_sitelink_itm_wtr extends gplx.core.brys.Bfr_arg_base {
+class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Xoa_app app; private Xoa_sitelink_grp grp;
 	public void Init_by_app(Xoa_app app) {this.app = app;}
 	public Xoa_sitelink_itm_wtr Fmt__init(Xoa_sitelink_grp grp) {this.grp = grp; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = grp.Len();
 		boolean tr_opened = false; int td_idx = 0;
 		for (int i = 0; i < len; ++i) {

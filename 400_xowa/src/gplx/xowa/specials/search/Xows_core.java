@@ -40,7 +40,7 @@ class Xows_core {
 			try {
 				Xowe_wiki wiki = wiki_mgr.Get_by_key_or_make(domain.Domain_bry()); wiki.Init_assert();
 				Assert_page_count(wiki);
-				Xows_ui_cmd cmd = new Xows_ui_cmd(this, qry, wiki, page, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm());
+				Xows_ui_cmd cmd = new Xows_ui_cmd(this, qry, wiki, page, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm(), null, null);	// null b/c args are only used by drd
 				qry.Cmds__add(cmd);
 			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "search:wiki failed; wiki=~{0} err=~{1}", domain.Domain_str(), Err_.Message_lang(e));}	// handle bad wikis, like "en.wikipedia.org-old"; DATE:2015-04-24
 		}

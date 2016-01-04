@@ -23,6 +23,7 @@ public class Xop_xnde_tag {
 		this.name_bry = Bry_.new_a7(name_str);
 		this.name_str = name_str;
 		this.name_len = name_bry.length;
+		this.xtn_bgn_tag = Bry_.Add(Byte_ascii.Angle_bgn_bry, name_bry);
 		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Xtn_end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
 		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
@@ -30,6 +31,7 @@ public class Xop_xnde_tag {
 	public byte[] Name_bry() {return name_bry;} private final byte[] name_bry;
 	public String Name_str() {return name_str;} private final String name_str;
 	public int Name_len() {return name_len;} private final int name_len;
+	public byte[] Xtn_bgn_tag() {return xtn_bgn_tag;} private final byte[] xtn_bgn_tag;
 	public byte[] Xtn_end_tag() {return xtn_end_tag;} private final byte[] xtn_end_tag;
 	public byte[] Xtn_end_tag_tmp() {return xtn_end_tag_tmp;} private final byte[] xtn_end_tag_tmp;
 	public boolean Xtn() {return xtn;} public Xop_xnde_tag Xtn_() {xtn = true; return this;} private boolean xtn;

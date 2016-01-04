@@ -65,7 +65,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	private Dbui_row_itm Get_ui_row(Xoud_history_row row) {return Get_ui_row(Int_.To_bry(row.Id()), row.Wiki(), row.Url(), row.Count(), row.Time());}
 	private Dbui_row_itm Get_ui_row(byte[] pkey, byte[] wiki, byte[] url, int count, DateAdp time) {
 		Dbui_val_itm[] vals = new Dbui_val_itm[4];
-		vals[0] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
+		vals[0] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
 		vals[1] = new Dbui_val_itm(wiki, wiki);
 		byte[] count_bry = Int_.To_bry(count);
 		vals[2] = new Dbui_val_itm(count_bry, count_bry);

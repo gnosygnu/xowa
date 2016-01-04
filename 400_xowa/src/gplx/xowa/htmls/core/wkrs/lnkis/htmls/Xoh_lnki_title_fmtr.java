@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
-public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
+public class Xoh_lnki_title_fmtr implements gplx.core.brys.Bfr_arg {
 	public Xoh_lnki_title_fmtr Set(byte[] src, Xop_tkn_itm tkn) {this.src = src; this.tkn = tkn; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Bld_recurse(bfr, tkn);
 	}
 	public void Bld_recurse(Bry_bfr bfr, Xop_tkn_itm tkn) {
@@ -49,7 +49,7 @@ public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
 				if (tkn.Tkn_tid() == Xop_tkn_itm_.Tid_xnde) {
 					Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn; 
 					if (xnde.Tag().Id() == Xop_xnde_tag_.Tid_ref) {	// if ref, disable tkn
-						gplx.xowa.xtns.cite.Ref_nde ref_xnde = (gplx.xowa.xtns.cite.Ref_nde)xnde.Xnde_xtn();
+						gplx.xowa.xtns.cites.Ref_nde ref_xnde = (gplx.xowa.xtns.cites.Ref_nde)xnde.Xnde_xtn();
 						ref_xnde.Exists_in_lnki_title_(true);	// ref found during html_title_wkr's generation; mark ref; will be ignored by references_html_wtr later; DATE:2014-03-05
 					}
 				}
@@ -68,10 +68,10 @@ public class Xoh_lnki_title_fmtr extends gplx.core.brys.Bfr_arg_base {
 				case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
 					bfr.Add_byte_space();
 					break;
-				case Byte_ascii.Quote:		bfr.Add(Html_entity_.Quote_bry); break;
-				case Byte_ascii.Lt:			bfr.Add(Html_entity_.Lt_bry); break;
-				case Byte_ascii.Gt:			bfr.Add(Html_entity_.Gt_bry); break;
-				case Byte_ascii.Amp:		bfr.Add(Html_entity_.Amp_bry); break;
+				case Byte_ascii.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
+				case Byte_ascii.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break;
+				case Byte_ascii.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
+				case Byte_ascii.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
 				default:					bfr.Add_byte(b); break;
 			}
 		}

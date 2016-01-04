@@ -23,7 +23,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pagesincategory extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_site_pagesincategory;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_pagesincategory().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {	// REF.MW: /includes/parser/CoreParserFunctions.php|pagesincategory
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {	// REF.MW: /includes/parser/CoreParserFunctions.php|pagesincategory
 		byte[] ctg_ttl_bry = Eval_argx(ctx, src, caller, self);
 		if (Bry_.Len_eq_0(ctg_ttl_bry)) {bfr.Add_int_digits(1, 0); return;}			// no title; EX: "{{PAGESINCATEGORY:}}"
 		Xowe_wiki wiki = ctx.Wiki();

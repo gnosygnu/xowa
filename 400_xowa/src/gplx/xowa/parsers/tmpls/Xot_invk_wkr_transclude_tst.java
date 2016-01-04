@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xot_invk_wkr_transclude_tst {		
-	@Before		public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before		public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@After	public void term() {fxt.Init_defn_clear();}
 	@Test  public void Template() {	// PURPOSE: {{:Template:Test}} is same as {{Template:Test}}; EX.WIKT:android; japanese and {{:Template:ja/script}}			
 		fxt.Init_defn_add("Test_1", "{{#if:|y|n}}");	// NOTE: must be of form "Test 1"; test_1 will fail

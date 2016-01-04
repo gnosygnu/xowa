@@ -17,20 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
-class Imap_map_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Imap_map_fmtr implements gplx.core.brys.Bfr_arg {
 	private int imap_id;
 	public void Init(int imap_id, Imap_itm_shape[] shapes, double scale) {this.imap_id = imap_id; shapes_fmtr_arg.Init(shapes, scale);}
 	public Imap_pts_fmtr_arg Pts_fmtr() {return shapes_fmtr_arg.Pts_fmtr();}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Imap_html_fmtrs.Map.Bld_bfr_many(bfr, imap_id, shapes_fmtr_arg);
 	}
 	private static final Imap_shapes_fmtr shapes_fmtr_arg = new Imap_shapes_fmtr();
 }
-class Imap_shapes_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Imap_shapes_fmtr implements gplx.core.brys.Bfr_arg {
 	private Imap_itm_shape[] shapes;
 	public void Init(Imap_itm_shape[] shapes, double scale) {this.shapes = shapes; pts_fmtr_arg.Scale_(scale);}
 	public Imap_pts_fmtr_arg Pts_fmtr() {return pts_fmtr_arg;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int shapes_len = shapes.length;
 		Bry_fmtr fmtr = Imap_html_fmtrs.Area;
 		for (int i = 0; i < shapes_len; ++i) {

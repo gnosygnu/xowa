@@ -100,33 +100,33 @@ public class Xoh_make_mgr {
 		byte[] a_href = Bry_.Add(Xoh_make_trie_.A_href_bgn, a_title);
 		try {
 			switch (tid) {
-				case Xoh_make_trie_.Tid__file_info: fmtr.Html_thumb_part_info	(bfr, uid, a_href, cfg_file.Img_media_info_btn()); return rv;
+				case Xoh_make_trie_.Tid__file_info: fmtr.Html_thumb_part_info	(bfr, uid, true, a_href, cfg_file.Img_media_info_btn()); return rv;
 				case Xoh_make_trie_.Tid__file_mgnf: fmtr.Html_thumb_part_magnify(bfr, uid, a_href, a_title, cfg_file.Img_thumb_magnify()); return rv;
-				case Xoh_make_trie_.Tid__file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
+				case Xoh_make_trie_.Tid__file_play: fmtr.Html_thumb_part_play	(bfr, uid, true, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
 				case Xoh_make_trie_.Tid__gallery_box_max: {
 					Xohd_img_itm__gallery_mgr gly = (Xohd_img_itm__gallery_mgr)hpg.Gallery_itms().Get_by(uid);
 					if (gly != null) {	// -1 means no box_max
-						byte[] style = Gallery_mgr_base.box_style_max_width_fmtr.Bld_bry_many(tmp_bfr, gly.Box_max());
-						Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Bry__style, style);
+						byte[] style = Gallery_html_wtr_.Fmtr__ul__style.Bld_bry_many(tmp_bfr, gly.Box_max());
+						Gfh_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Gfh_atr_.Bry__style, style);
 					}
 					return rv;
 				}
 				case Xoh_make_trie_.Tid__gallery_box_w: {
 					Xohd_img_itm__gallery_itm gly = (Xohd_img_itm__gallery_itm)img;
-					byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Box_w());
-					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Bry__style, style);
+					byte[] style = Gallery_html_wtr_.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Box_w());
+					Gfh_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Gfh_atr_.Bry__style, style);
 					return rv;
 				}
 				case Xoh_make_trie_.Tid__gallery_img_w: {
 					Xohd_img_itm__gallery_itm gly = (Xohd_img_itm__gallery_itm)img;
-					byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Img_w());
-					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Bry__style, style);
+					byte[] style = Gallery_html_wtr_.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Img_w());
+					Gfh_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Gfh_atr_.Bry__style, style);
 					return rv;
 				}
 				case Xoh_make_trie_.Tid__gallery_img_pad: {
 					Xohd_img_itm__gallery_itm gly = (Xohd_img_itm__gallery_itm)img;
-					byte[] style = Gallery_mgr_base.hdump_img_pad_fmtr.Bld_bry_many(tmp_bfr, gly.Img_pad());
-					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Bry__style, style);
+					byte[] style = Gallery_html_wtr_.hdump_img_pad_fmtr.Bld_bry_many(tmp_bfr, gly.Img_pad());
+					Gfh_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Gfh_atr_.Bry__style, style);
 					return rv;
 				}
 			}

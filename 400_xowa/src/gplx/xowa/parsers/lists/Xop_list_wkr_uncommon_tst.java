@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_list_wkr_uncommon_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Bug_specified_div() {	// FIX: </div> was not clearing state for lnki; PAGE:en.w:Ananke (moon)
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last

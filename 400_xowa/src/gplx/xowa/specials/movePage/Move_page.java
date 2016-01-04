@@ -71,7 +71,7 @@ public class Move_page implements Xows_page {
 		fmtr_all.Bld_bfr_many(tmp_bfr
 		, msg_mgr.Val_by_key_obj("move-page-legend")
 		, Bry_.Add(Xoh_href_.Bry__wiki, src_ttl.Full_db())
-		, gplx.langs.htmls.Html_utl.Escape_html_as_bry(src_ttl.Full_txt())
+		, gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(src_ttl.Full_txt())
 		, src_ttl.Full_txt()
 		, msg_mgr.Val_by_key_obj("newtitle")
 		, ns_list_fmtr
@@ -120,13 +120,13 @@ public class Move_page implements Xows_page {
 	, "</form>"
 	), "move-page-legend", "src_href", "src_title", "src_text", "newtitle", "trg_ns_list", "trg_title", "move-leave-redirect", "movepagebtn");
 }
-class Move_trg_ns_list_fmtr extends gplx.core.brys.Bfr_arg_base {
+class Move_trg_ns_list_fmtr implements gplx.core.brys.Bfr_arg {
 	private Xowe_wiki wiki; private Xoa_ttl ttl;
 	public void Init_by_page(Xowe_wiki wiki, Xoae_page page, Xoa_ttl ttl) {
 		this.wiki = wiki;
 		this.ttl = ttl;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Ids_len();
 		for (int i = 0; i < ns_len; i++) {

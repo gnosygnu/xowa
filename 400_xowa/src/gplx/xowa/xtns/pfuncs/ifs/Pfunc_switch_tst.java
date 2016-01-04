@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Pfunc_switch_tst {		
-	@Before public void init()				{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic_a()			{fxt.Test_parse_tmpl_str_test("{{#switch:a|a=1|b=2|3}}"					, "{{test}}"			, "1");}
 	@Test  public void Basic_b()			{fxt.Test_parse_tmpl_str_test("{{#switch:b|a=1|b=2|3}}"					, "{{test}}"			, "2");}
 	@Test  public void Basic_dflt()			{fxt.Test_parse_tmpl_str_test("{{#switch:z|a=1|b=2|3}}"					, "{{test}}"			, "3");}

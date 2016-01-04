@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.langs.cases.*;
 public class Xop_lnke_wkr_text_tst {
-	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Text_obj() {
 		fxt.Test_parse_page_wiki("irc://a", fxt.tkn_lnke_(0, 7).Lnke_typ_(Xop_lnke_tkn.Lnke_typ_text).Lnke_rng_(0, 7));
 	}

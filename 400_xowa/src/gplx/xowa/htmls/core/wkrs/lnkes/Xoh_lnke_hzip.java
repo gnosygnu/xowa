@@ -19,13 +19,14 @@ package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; impo
 import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
+	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
 	public String Key() {return Xoh_hzip_dict_.Key__lnke;}
 	public byte[] Hook() {return hook;} private byte[] hook;
-	public Gfo_poolable_itm Encode(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
-		Xoh_lnke_parser data = (Xoh_lnke_parser)data_obj;
-		boolean auto_exists		= flag_bldr.Set_as_bool(Flag__auto_exists		, data.Auto_id() != -1);
+	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
+		Xoh_lnke_data data = (Xoh_lnke_data)data_obj;
+		boolean auto_exists		= flag_bldr.Set_as_bool(Flag__auto_exists		, data.Auto_exists());
 		boolean capt_exists		= flag_bldr.Set_as_bool(Flag__capt_exists		, data.Capt_exists());
-		byte lnke_tid			= flag_bldr.Set_as_byte(Flag__lnke_tid			, data.Lnke_tid());
+		byte    lnke_tid		= flag_bldr.Set_as_byte(Flag__lnke_tid			, data.Lnke_tid());
 
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag_bldr.Encode());									// add flag
@@ -36,27 +37,19 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		hctx.Hzip__stat().Lnke_add(lnke_tid);
 		return this;
 	}
-	public int Decode(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, Bry_rdr rdr, byte[] src, int src_bgn, int src_end) {
-		int flag = rdr.Read_int_by_base85(1); flag_bldr.Decode(flag);
+	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
 		boolean   auto_exists		= flag_bldr.Get_as_bool(Flag__auto_exists);
 		boolean   capt_exists		= flag_bldr.Get_as_bool(Flag__capt_exists);
-		byte lnke_tid			= flag_bldr.Get_as_byte(Flag__lnke_tid);
+		byte   lnke_tid			= flag_bldr.Get_as_byte(Flag__lnke_tid);
 
 		int href_bgn = rdr.Pos(); int href_end = rdr.Find_fwd_lr();
 		int auto_id = -1, capt_bgn = -1, capt_end = -1;
-		if (auto_exists) auto_id = rdr.Read_int_by_base85(1);
+		if (auto_exists) auto_id = rdr.Read_hzip_int(1);
 		if (capt_exists) {capt_bgn = rdr.Pos(); capt_end = rdr.Find_fwd_lr();}
-		int rv = rdr.Pos();
 
-		bfr.Add(Html_bldr_.Bry__a_lhs_w_href);
-		bfr.Add_mid(src, href_bgn, href_end);
-		bfr.Add(Xoh_lnke_dict_.Html__atr__0).Add(Xoh_lnke_dict_.To_html_class(lnke_tid)).Add(Xoh_lnke_dict_.Html__rhs_end);
-		if		(auto_exists)	bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(auto_id).Add_byte(Byte_ascii.Brack_end);
-		else if (capt_exists)	bfr.Add_mid(src, capt_bgn, capt_end);
-		else					bfr.Add_mid(src, href_bgn, href_end);
-		bfr.Add(Html_bldr_.Bry__a_rhs);
-
-		return rv;
+		Xoh_lnke_data data = (Xoh_lnke_data)data_itm;
+		data.Init_by_decode(lnke_tid, auto_id, href_bgn, href_end, capt_bgn, capt_end, capt_exists);
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_lnke_hzip rv = new Xoh_lnke_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
-public class Bfr_arg__int extends gplx.core.brys.Bfr_arg_base {
+public class Bfr_arg__int implements Bfr_arg {
 	private int val, val_digits;
 	public Bfr_arg__int(int v) {Set(v);}
 	public Bfr_arg__int Set(int v) {
@@ -24,5 +24,5 @@ public class Bfr_arg__int extends gplx.core.brys.Bfr_arg_base {
 		this.val_digits = Int_.DigitCount(val);
 		return this;
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_int_digits(val_digits, val);}
+	public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_int_digits(val_digits, val);}
 }

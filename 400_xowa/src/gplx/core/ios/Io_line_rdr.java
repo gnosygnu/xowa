@@ -88,9 +88,6 @@ public class Io_line_rdr {
 		}
 		while (true) {
 			int compare = Bry_.Compare(ttl, 0, ttl.length, bfr, key_pos_bgn, key_pos_end);
-//				if (String_.new_u8(bfr, key_pos_bgn, key_pos_end) == "US Naval Jack.svg") {
-//                       Tfds.Write();
-//				}
 			if 		(compare == CompareAble_.Same) {	// eq; return true and move fwd; EX: "BA" and "BA"
 				return true;
 			}

@@ -20,16 +20,18 @@ import gplx.core.brys.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_escape_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private byte escape_byte;
+	public int Tid() {return Xoh_hzip_dict_.Tid__escape;}
 	public byte[] Hook() {return hook;} private byte[] hook;
 	public String Key() {return Xoh_hzip_dict_.Key__escape;}
-	public Gfo_poolable_itm Encode(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
-		bfr.Add(hook);
+	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
+		Xoh_escape_data data = (Xoh_escape_data)data_obj;
+		bfr.Add(hook);			// EX: 1,0
+		bfr.Add(data.Hook());	// EX: 2
 		hctx.Hzip__stat().Escape_add(escape_byte);
 		return this;
 	}
-	public int Decode(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, Bry_rdr rdr, byte[] src, int src_bgn, int src_end) {
-		bfr.Add_byte(Xoh_hzip_dict_.Escape);
-		return rdr.Pos();
+	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		bfr.Add_byte(rdr.Read_byte());
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {

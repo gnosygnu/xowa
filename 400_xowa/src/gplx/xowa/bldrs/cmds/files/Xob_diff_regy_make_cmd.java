@@ -35,8 +35,8 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 	}
 	private void Make_join_indexes(Db_conn make_db_provider) {
 		try {
-			Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_fsdb_regy__join);
-			Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_xfer_regy__join);
+			make_db_provider.Ddl_create_idx(Db_meta_idx.new_normal_by_name("fsdb_regy", "fsdb_regy__join", "fsdb_name", "fsdb_is_orig", "fsdb_repo", "fsdb_w", "fsdb_time", "fsdb_page"));
+			make_db_provider.Ddl_create_idx(Db_meta_idx.new_normal_by_name("xfer_regy", "xfer_regy__join", "lnki_ttl", "file_is_orig", "orig_repo", "file_w", "lnki_time", "lnki_page"));
 		}
 		catch (Exception exc) {
 			app.Usr_dlg().Warn_many("", "", "error while making indexes: err=~{0}", Err_.Message_gplx_full(exc));
@@ -110,8 +110,8 @@ class Xob_diff_regy_tbl {
 	, ", diff_size           bigint              NOT NULL"
 	, ");"
 	);
-	public static final Db_idx_itm Idx_fsdb_regy__join = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__join ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
-	public static final Db_idx_itm Idx_xfer_regy__join = Db_idx_itm.sql_("CREATE INDEX xfer_regy__join ON xfer_regy (lnki_ttl , file_is_orig, orig_repo, file_w, lnki_time, lnki_page);");
+//		public static final Db_idx_itm Idx_fsdb_regy__join = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__join ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
+//		public static final Db_idx_itm Idx_xfer_regy__join = Db_idx_itm.sql_("CREATE INDEX xfer_regy__join ON xfer_regy (lnki_ttl , file_is_orig, orig_repo, file_w, lnki_time, lnki_page);");
 	public static final Db_idx_itm Idx_diff_regy__load = Db_idx_itm.sql_("CREATE INDEX diff_regy__load ON diff_regy (diff_status, diff_db_id, diff_is_orig, diff_fil_id, diff_thm_id);");
 	public static final String
 	  Make_diff_regy = String_.Concat_lines_nl

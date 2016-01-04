@@ -89,16 +89,16 @@ public class Gfo_url_parser_tst {
 		tstr.Run_parse("https://site/A#B").Chk_page("A").Chk_anch("B");
 	}
 	@Test  public void Anch__repeat__2() {
-		tstr.Run_parse("https://site/A#B#C").Chk_page("A#B").Chk_anch("C");
+		tstr.Run_parse("https://site/A#B#C").Chk_page("A").Chk_anch("B#C");
 	}
 	@Test  public void Anch__repeat__3() {
-		tstr.Run_parse("https://site/A#B#C#D").Chk_page("A#B#C").Chk_anch("D");
+		tstr.Run_parse("https://site/A#B#C#D").Chk_page("A").Chk_anch("B#C#D");
 	}
 	@Test  public void Anch__missing() {
 		tstr.Run_parse("https://site/A#").Chk_page("A#").Chk_anch(null);
 	}
 	@Test  public void Anch__missing__eos() {
-		tstr.Run_parse("https://site/A#B#").Chk_page("A#B#").Chk_anch(null);
+		tstr.Run_parse("https://site/A#B#").Chk_page("A").Chk_anch("B#");
 	}
 	@Test  public void Anch__qargs__basic() {
 		tstr.Run_parse("https://site/A?B=C&D=E#F").Chk_page("A").Chk_qargs("B", "C", "D", "E").Chk_anch("F");

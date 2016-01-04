@@ -80,7 +80,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			int match_find_bgn_adj = -surrogate_utl.Count_surrogates__codepoint_idx1(text_bry, text_bry_len, bgn_byte_pos, match_find_bgn_codepoint - bgn_codepoint_idx); // NOTE: convert from java regex codepoint to lua / php char_idx; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
 			tmp_list.Add(match_find_bgn_codepoint + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1);
 			tmp_list.Add(match.Find_end()		  + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
-			//Tfds.Write(match_find_bgn_codepoint + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1
+			//Tfds.Dbg  (match_find_bgn_codepoint + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1
 			//			,match.Find_end()		  + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
 			AddCapturesFromMatch(tmp_list, match, text_str, regx_converter.Capt_ary(), false);
 			return rslt.Init_many_list(tmp_list);

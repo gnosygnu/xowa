@@ -62,14 +62,14 @@ public abstract class Gallery_mgr_base {
 		int gallery_uid = page.Html_data().Xtn_gallery_next_id();
 		if (itms_per_row > 0) {
 			int max_width = itms_per_row * (itm_default_w + this.Get_all_padding());
-			box_style = Fmt_and_add(tmp_bfr, box_style_max_width_fmtr, box_style, max_width);
+			box_style = Fmt_and_add(tmp_bfr, Gallery_html_wtr_.Fmtr__ul__style, box_style, max_width);
 			page.Hdump_data().Imgs_add(new Xohd_img_itm__gallery_mgr(gallery_uid, max_width));
 		}
-		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
-		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).To_bry_and_clear();
+		byte[] box_cls = Fmt_and_add(tmp_bfr, Gallery_html_wtr_.Fmtr__ul__cls, xnde.Atr_cls(), this.Tid_bry());
+		byte[] gallery_ul_id = tmp_bfr.Add(Gallery_html_wtr_.Id__ul).Add_int_variable(gallery_uid).To_bry_and_clear();
 		Box_hdr_write(bfr, wiki.Appe().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
 		byte[] box_caption = xnde.Atr_caption();
-		if (Bry_.Len_gt_0(box_caption)) box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
+		if (Bry_.Len_gt_0(box_caption)) Gallery_html_wtr_.Fmtr__li__txt.Bld_bfr_many(bfr, box_caption);
 
 		Xoae_app app = wiki.Appe(); Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		int itm_len = xnde.Itms_len();
@@ -78,7 +78,7 @@ public abstract class Gallery_mgr_base {
 		}
 		bfr.Add(box_html_end_bry);
 		tmp_bfr.Mkr_rls();
-	}	private static final byte[] box_id_prefix_bry = Bry_.new_a7("xowa_gallery_ul_"), itm_id_prefix_bry = Bry_.new_a7("xowa_gallery_li_");
+	}
 	public static byte File_found_mode = Bool_.__byte;
 	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_file_itm xfer_itm, boolean hctx_is_hdump) {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
@@ -94,7 +94,8 @@ public abstract class Gallery_mgr_base {
 			xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_gallery_v2);
 		}
 		int img_uid = xfer_itm.Html_uid();
-		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).To_bry_and_clear();
+		byte[] li_id = Gallery_html_wtr_.Bld_id(tmp_bfr, Gallery_html_wtr_.Id__li, img_uid);
+		byte[] li_id_atr = Gallery_html_wtr_.Bld_id_atr(tmp_bfr, hctx_is_hdump, li_id);
 		byte[] itm_html = Bry_.Empty;
 		int html_w_expand = xfer_itm.Html_w();
 		int html_h_expand = xfer_itm.Html_h();
@@ -107,8 +108,8 @@ public abstract class Gallery_mgr_base {
 				||	!file_found
 				)
 			) {	// itm is not a file, or is not found; write text
-			itm_html = itm_missing_fmtr.Bld_bry_many(tmp_bfr, this.Get_thumb_padding() + itm_default_h, ttl.Page_txt());
-			itm.Html_prepare(wiki, ctx, src, xnde, xfer_itm, gallery_li_id, i);
+			itm_html = Gallery_html_wtr_.Fmtr__div1__missing.Bld_bry_many(tmp_bfr, this.Get_thumb_padding() + itm_default_h, ttl.Page_txt());
+			itm.Html_prepare(wiki, ctx, src, xnde, xfer_itm, li_id, i);
 			xfer_itm.Html_img_wkr_(itm);
 			lnki.W_(lnki_w_orig).H_(lnki_h_orig);
 			html_w_expand = lnki_w_orig; html_h_expand = lnki_h_orig;	// reset lnki_w_orig / lnki_h_orig else large captions
@@ -116,8 +117,8 @@ public abstract class Gallery_mgr_base {
 		else {
 			byte[] alt = itm.Alt_bgn() == Bry_find_.Not_found && Bry_.Len_eq_0(itm_caption)	//	if ( $alt == '' && $text == '' )  $imageParameters['alt'] = $nt->getText();
 				? itm.Ttl().Page_txt()
-				: Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end()))
-				;
+				: Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end());
+			alt = Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, alt);	// NOTE: need to handle situations wherein alt has quotes; EX:File:A"b.png; PAGE:en.w:Alexandria,_Romania DATE:2015-12-27
 			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_find_.Not_found
 				? ttl
 				: Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()))
@@ -128,11 +129,11 @@ public abstract class Gallery_mgr_base {
 			int html_h_normal = xfer_itm.Html_h();
 			xfer_itm.Init_at_gallery_bgn(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
 			img_div_w = this.Get_thumb_div_width(html_w_expand);
-			itm_div0_fmtr.Bld_bfr_many(tmp_bfr, img_div_w);
+			Gallery_html_wtr_.Fmtr__div1__img.Bld_bfr_many(tmp_bfr, img_div_w);
 			// Gallery_img_pad_fmtr_arg vpad_fmtr = hctx_is_hdump ? (Gallery_img_pad_fmtr_arg)img_pad_fmtr__hdump : (Gallery_img_pad_fmtr_arg)img_pad_fmtr__basic;
 			Gallery_img_pad_fmtr_arg vpad_fmtr = img_pad_fmtr__basic;
 			vpad = this.Get_vpad(itm_default_h, html_h_expand);
-			itm_div1_fmtr.Bld_bfr_many(tmp_bfr, vpad_fmtr.Init(img_uid, vpad));	// <div style="margin:~{vpad}px auto;">
+			Gallery_html_wtr_.itm_div1_fmtr.Bld_bfr_many(tmp_bfr, vpad_fmtr.Init(img_uid, vpad));	// <div style="margin:~{vpad}px auto;">
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, hctx, src, lnki, xfer_itm, alt);
 			tmp_bfr.Add(itm_divs_end_bry);
 			itm_html = tmp_bfr.To_bry_and_clear();
@@ -148,7 +149,7 @@ public abstract class Gallery_mgr_base {
 		int itm_div_width = this.Get_gb_width(html_w_expand, html_h_expand);
 		// Gallery_box_w_fmtr_arg box_w_fmtr_arg = hctx_is_hdump ? (Gallery_box_w_fmtr_arg)box_w_fmtr__hdump : (Gallery_box_w_fmtr_arg)box_w_fmtr__basic;
 		Gallery_box_w_fmtr_arg box_w_fmtr_arg = box_w_fmtr__basic;
-		itm_li_bgn_fmtr.Bld_bfr_many(bfr, gallery_li_id, box_w_fmtr_arg.Init(img_uid, itm_div_width));
+		Gallery_html_wtr_.Fmtr__li__img.Bld_bfr_many(bfr, li_id_atr, box_w_fmtr_arg.Init(img_uid, itm_div_width));
 		bfr.Add(itm_html);
 		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, hctx, true, itm_caption);
 		itm_caption = tmp_bfr.To_bry_and_clear();
@@ -167,19 +168,6 @@ public abstract class Gallery_mgr_base {
 		lnki.H_(itm_default_h);
 	}
 	@gplx.Virtual public void Adjust_image_parameters(Xof_file_itm xfer_itm) {}	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.		
-	public static final Bry_fmtr
-	  box_style_max_width_fmtr		= Bry_fmtr.new_(	"max-width:~{max_width}px;_width:~{max_width}px;", "max_width")				// id=xowa_gallery_ul_1
-	, box_cls_fmtr					= Bry_fmtr.new_(	"gallery mw-gallery-~{mode}", "mode")
-	, box_caption_fmtr				= Bry_fmtr.new_(	"\n  <li class='gallerycaption'>~{caption}</li>", "caption")
-	, itm_li_bgn_fmtr				= Bry_fmtr.new_(	"\n  <li id=\"~{id}\" class=\"gallerybox\" ~{itm_box_w}>"					// id=xowa_gallery_li_1
-													  + "\n    <div ~{itm_box_w}>", "id", "itm_box_w")
-	, itm_div0_fmtr					= Bry_fmtr.new_(	"\n      <div class=\"thumb\" style=\"width: ~{width}px;\">", "width")
-	, itm_missing_fmtr				= Bry_fmtr.new_(	"\n      <div class=\"thumb\" style=\"height: ~{height}px;\">~{ttl_text}</div>", "height", "ttl_text")
-	, itm_div1_fmtr					= Bry_fmtr.new_(	"\n        <div ~{vpad}>\n          ", "vpad")
-	, hdump_box_w_fmtr				= Bry_fmtr.new_(	"width:~{width}px;", "width")
-	, hdump_img_pad_fmtr			= Bry_fmtr.new_(	"margin:~{width}px auto;", "width")
-	;
-
 	private static final byte[] 
 	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"
 											  + "\n  </li>")
@@ -195,9 +183,10 @@ public abstract class Gallery_mgr_base {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, List_adp xatr_list, boolean hctx_is_hdump, int uid) {
-		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Bry__ul);
-		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__id, gallery_ul_uid);
-		Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__class, cls);
+		bfr.Add_byte(Byte_ascii.Lt).Add(Gfh_tag_.Bry__ul);
+		if (!hctx_is_hdump)
+			Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__id, gallery_ul_uid);
+		Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__class, cls);
 //			if (hctx_is_hdump) {
 //				bfr.Add_byte_space();
 //				bfr.Add(Xoh_make_trie_.Bry__gallery_box_max);
@@ -205,7 +194,7 @@ public abstract class Gallery_mgr_base {
 //				bfr.Add_byte_apos();
 //			}
 //			else
-			Html_wtr.Write_atr_bry(bfr, Html_atr_.Bry__style, style);
+			Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__style, style);
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {
@@ -213,7 +202,7 @@ public abstract class Gallery_mgr_base {
 				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid_ul, src, xatr)) continue;
 				byte[] key = xatr.Key_bry();
 				byte[] val = xatr.Val_as_bry();
-				Html_wtr.Write_atr_bry(bfr, key, val);
+				Gfh_wtr.Write_atr_bry(bfr, key, val);
 			}
 		}
 		bfr.Add_byte(Byte_ascii.Gt);

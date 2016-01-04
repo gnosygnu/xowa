@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-public interface Xoa_wiki_mgr {
+public interface Xoa_wiki_mgr extends GfoInvkAble {
 	boolean		Has(byte[] key);
 	int			Count();
 	Xow_wiki	Get_at_i(int i);

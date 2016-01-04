@@ -175,7 +175,7 @@ public class Xow_popup_wrdx_mkr {
 		int atrs_len = atrs_ary.length;
 		for (int i = 0; i < atrs_len; i++) {
 			Mwh_atr_itm atr = atrs_ary[i];
-			if (	Bry_.Eq(atr.Key_bry(), Html_atr_.Bry__id)
+			if (	Bry_.Eq(atr.Key_bry(), Gfh_atr_.Bry__id)
 				&&	xnde_id_ignore_list.Get_by_bry(atr.Val_as_bry()) != null
 				) {
                     return true;

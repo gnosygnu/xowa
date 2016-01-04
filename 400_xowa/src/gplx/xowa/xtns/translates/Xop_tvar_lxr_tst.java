@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 	public class Xop_tvar_lxr_tst {
-	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_all_str("<tvar|1>''a''</>", "<i>a</i>");
 	}

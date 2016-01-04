@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_iferror_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void Basic_pass()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + 2 }} | error | ok }}"					, "{{test}}"	, "ok");}
 	@Test  public void Basic_fail()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + X }} | error | ok }}"					, "{{test}}"	, "error");}

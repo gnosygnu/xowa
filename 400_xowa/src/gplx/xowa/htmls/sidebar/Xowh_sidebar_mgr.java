@@ -64,7 +64,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			if	(line[0] != Byte_ascii.Star) continue;	// skip non-list items; must begin with "*"
 			byte tid = line[1] == Byte_ascii.Star ? Xowh_sidebar_itm.Tid_itm : Xowh_sidebar_itm.Tid_grp;
 			byte[] bry = Bry_.Trim(line, tid, line_len);	// trim *, **; note that tid indicates # of asterisks
-			bry = gplx.langs.htmls.Html_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
+			bry = gplx.langs.htmls.Gfh_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
 			if (ignore_trie.Match_bgn(bry, 0, bry.length) != null) continue; // ignore SEARCH, TOOLBOX, LANGUAGES
 			int pipe_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe);
 			byte[] text_key = tid == Xowh_sidebar_itm.Tid_grp ? bry : Bry_.Mid(bry, pipe_pos + 1, bry.length);	// get text_key; note that grp is entire bry, while itm is after |

@@ -30,7 +30,7 @@ public class Gallery_mgr_base_xnde_atrs_tst {
 	@Test  public void Atr_style() {	// PURPOSE: combine style with itms_per_row
 		fxt.Test_html_frag
 		( "<gallery perrow=2 style='color:blue;'>File:A.png</gallery>"
-		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" style=\"max-width:326px;_width:326px; color:blue;\">"
+		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" style=\"max-width:326px; _width:326px; color:blue;\">"
 		);
 	}
 	@Test  public void Atr_caption() {	// PURPOSE: caption atr adds new element

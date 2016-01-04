@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
-public class Bfr_arg__decimal_int extends gplx.core.brys.Bfr_arg_base {
+public class Bfr_arg__decimal_int implements Bfr_arg {
 	public int Val() {return val;} public Bfr_arg__decimal_int Val_(int v) {val = v; return this;} int val;
 	public Bfr_arg__decimal_int Places_(int v) {places = v; multiple = (int)Math_.Pow(10, v); return this;} int multiple = 1000, places = 3;
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		bfr.Add_int_variable(val / multiple).Add_byte(Byte_ascii.Dot).Add_int_fixed(val % multiple, places);
 	}
 }

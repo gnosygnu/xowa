@@ -66,7 +66,7 @@ class Synh_xtn_nde_ {
 		}
 		else {
 			bfr.Add(Xoh_consts.Pre_end);
-			bfr.Add(Xoh_consts.Div_end);
+			bfr.Add(Gfh_bldr_.Bry__div_rhs);
 		}
 	}
 	private static final byte[] 

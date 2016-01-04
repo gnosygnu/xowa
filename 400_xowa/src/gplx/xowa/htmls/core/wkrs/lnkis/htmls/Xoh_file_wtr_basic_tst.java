@@ -18,154 +18,156 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import org.junit.*;
 public class Xoh_file_wtr_basic_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Img_full() {	// PURPOSE: full with title was outputting invalid html; DATE:2013-12-31
+	@Test  public void Img__full() {	// PURPOSE: full with title was outputting invalid html; DATE:2013-12-31
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.png]]"
-		,	String_.Concat_lines_nl_skip_last
-		(	"<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"	// NOTE: used to output class=\"image\"A.png 
+		( "[[File:A.png]]"
+		, String_.Concat_lines_nl_skip_last
+		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"	// NOTE: used to output class=\"image\"A.png 
 		));
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Xowa_title__quotes() {	// PURPOSE: xowa_title should encode quotes DATE:2015-11-27
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A%22b.png]]"
-		,	String_.Concat_lines_nl_skip_last
-		(	"<a href=\"/wiki/File:A%22b.png\" class=\"image\" xowa_title=\"A%22b.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/d/4/A%22b.png\" width=\"0\" height=\"0\" /></a>"
+		( "[[File:A%22b.png]]"
+		, String_.Concat_lines_nl_skip_last
+		( "<a href=\"/wiki/File:A%22b.png\" class=\"image\" xowa_title=\"A%22b.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/d/4/A%22b.png\" width=\"0\" height=\"0\" /></a>"
 		));
 	}
-	@Test  public void Img_embed() {
+	@Test  public void Img__embed() {
 		fxt.Test_parse_page_wiki_str("[[File:A.png|9x8px|alt=abc]]", Xop_fxt.html_img_none("File:A.png", "abc", "file:///mem/wiki/repo/trg/thumb/7/0/A.png/9px.png", "A.png"));
 	}
-	@Test  public void Img_none() {	// NOTE: floatnone is WP behavior; MW omits div tag
+	@Test  public void Img__none() {	// NOTE: floatnone is WP behavior; MW omits div tag
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.png|none|20x30px|b]]"
-		,	String_.Concat_lines_nl_skip_last
-		(	"<div class=\"floatnone\">"
-		,	"<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/20px.png\" width=\"20\" height=\"30\" /></a></div>"
+		( "[[File:A.png|none|20x30px|b]]"
+		, String_.Concat_lines_nl_skip_last
+		( "<div class=\"floatnone\">"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/20px.png\" width=\"20\" height=\"30\" /></a></div>"
 		));
 	}
-	@Test  public void Img_thumb_none() {
+	@Test  public void Img__thumb_none() {
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.png|thumb|none|b]]"
-		,	Img_thumb_str("none")
+		( "[[File:A.png|thumb|none|b]]"
+		, Img_thumb_str("none")
 		);
 	}
-	@Test  public void Img_thumb_ltr() {
+	@Test  public void Img__thumb_ltr() {
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.png|thumb|b]]"
-		,	Img_thumb_str("right")
+		( "[[File:A.png|thumb|b]]"
+		, Img_thumb_str("right")
 		);
 	}
-	@Test  public void Img_thumb_rtl() {
+	@Test  public void Img__thumb_rtl() {
 		fxt.Wiki().Lang().Dir_ltr_(false);
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.png|thumb|b]]"
-		,	Img_thumb_str("left")
+		( "[[File:A.png|thumb|b]]"
+		, Img_thumb_str("left")
 		);
 		fxt.Wiki().Lang().Dir_ltr_(true);
 	}
 	private String Img_thumb_str(String align) {
 		return	String_.Concat_lines_nl_skip_last
-		(	"<div class=\"thumb t" + align + "\">"
-		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-		,	"    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
-		,	"    <div class=\"thumbcaption\">"
-		,	"      <div class=\"magnify\">"
-		,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-		,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-		,	"        </a>"
-		,	"      </div>"
-		,	"      b"
-		,	"    </div>"
-		,	"  </div>"
-		,	"</div>"
-		,	""
+		( "<div class=\"thumb t" + align + "\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>b"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
 		);
 	}
-	@Test  public void Img_frame() {	// PURPOSE: lnki with "frame" is same as thumb; DATE:2013-12-23
+	@Test  public void Img__frame() {	// PURPOSE: lnki with "frame" is same as thumb; DATE:2013-12-23
 		fxt.Test_parse_page_wiki_str
-			(	"[[File:A.png|frame|220x110px|b]]"
-			,	String_.Concat_lines_nl_skip_last
-			(	"<div class=\"thumb tright\">"
-			,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-			,	"    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
-			,	"    <div class=\"thumbcaption\">"
-			,	"      <div class=\"magnify\">"
-			,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-			,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-			,	"        </a>"
-			,	"      </div>"
-			,	"      b"
-			,	"    </div>"
-			,	"  </div>"
-			,	"</div>"
-			,	""
-			));
+		( "[[File:A.png|frame|220x110px|b]]"
+		, String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>b"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
+		));
 	}
-	@Test  public void Img_frame_and_thumb() {	// PURPOSE: lnki with "frame and thumb" was not showing box due to bit-adding; PAGE:en.w:History_of_Western_Civilization DATE:2015-04-16
+	@Test  public void Img__frame_and_thumb() {	// PURPOSE: lnki with "frame and thumb" was not showing box due to bit-adding; PAGE:en.w:History_of_Western_Civilization DATE:2015-04-16
 		fxt.Test_parse_page_wiki_str
-			(	"[[File:A.png|frame|thumb|220x110px|b]]"	// NOTE: frame AND thumb
-			,	String_.Concat_lines_nl_skip_last
-			(	"<div class=\"thumb tright\">"
-			,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-			,	"    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
-			,	"    <div class=\"thumbcaption\">"
-			,	"      <div class=\"magnify\">"
-			,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-			,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-			,	"        </a>"
-			,	"      </div>"
-			,	"      b"
-			,	"    </div>"
-			,	"  </div>"
-			,	"</div>"
-			,	""
-			));
+		( "[[File:A.png|frame|thumb|220x110px|b]]"	// NOTE: frame AND thumb
+		, String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>b"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
+		));
+	}
+	@Test  public void Img__link() {	// PURPOSE.FIX: link=file:/// was creating "href='/wiki/file'" handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
+		fxt.Test_parse_page_wiki_str
+		( "[[File:A.png|11px|link=file:///C:/A.ogg|b]]", String_.Concat_lines_nl_skip_last
+		( "<a href=\"file:///C:/A.ogg\" class=\"image\" xowa_title=\"A.ogg\">"
+		+ "<img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/11px.png\" width=\"11\" height=\"0\" />"
+		+ "</a>"
+		));		
+	}
+	@Test  public void Thm__alt_is_ws() {	// PURPOSE: alt with space should not output <hr>; EX:[[File:A.png|thumb|alt= ]]; en.w:Bird; DATE:2015-12-28
+		fxt.Test_parse_page_all_str
+		( "[[File:A.png|thumb|220x110px|alt= ]]"
+		, String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\" \" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
+		));
 	}
 	@Test  public void Cls_border() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|border]]"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder\" /></a>");
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder\" /></a>");
 	}
 	@Test  public void Cls_custom() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|class=abc]]"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"abc\" /></a>");
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"abc\" /></a>");
 	}
 	@Test  public void Cls_border_custom() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|border|class=abc]]"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder abc\" /></a>");
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder abc\" /></a>");
 	}
 	@Test  public void Lnki_full_svg() {
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.svg|a|alt=b]]", String_.Concat_lines_nl_skip_last
-		(	"<a href=\"/wiki/File:A.svg\" class=\"image\" xowa_title=\"A.svg\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/5/A.svg/-1px.png\" width=\"0\" height=\"0\" /></a>"	// HACK: tries to get orig_w which is not available
+		( "[[File:A.svg|a|alt=b]]", String_.Concat_lines_nl_skip_last
+		( "<a href=\"/wiki/File:A.svg\" class=\"image\" xowa_title=\"A.svg\"><img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/5/A.svg/-1px.png\" width=\"0\" height=\"0\" /></a>"	// HACK: tries to get orig_w which is not available
 		));		
 	}
 	@Test  public void Lnki_file_alt_link() {	// PURPOSE: lnki in caption should not create alt="b<a href="c">cd</a>"
 		fxt.Test_parse_page_wiki_str("[[File:A.png|thumb|alt=b [[c]] d]]", String_.Concat_lines_nl_skip_last
-		(	"<div class=\"thumb tright\">"
-		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-		,	"    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b c d\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
-		,	"    <div class=\"thumbcaption\">"
-		,	"      <div class=\"magnify\">"
-		,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-		,	"          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-		,	"        </a>"
-		,	"      </div>"
-		,	"      "
-		,	"    </div>"
-		,	"    <hr/>"
-		,	"    <div class=\"thumbcaption\">"
-		,	"b <a href=\"/wiki/C\">c</a> d"
-		,	"    </div>"
-		,	"  </div>"
-		,	"</div>"
-		,	""
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b c d\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>"
+		, "    </div>"
+		, "    <hr/>"
+		, "    <div class=\"thumbcaption\">b <a href=\"/wiki/C\">c</a> d"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
 		));
 	}
 	@Test  public void Pre_in_caption() {	// PURPOSE: ignore pre if in caption; PAGE:s.w:Virus; DATE:2015-03-31
@@ -175,14 +177,9 @@ public class Xoh_file_wtr_basic_tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
 		, "    <div class=\"thumbcaption\">"
-		, "      <div class=\"magnify\">"
-		, "        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
-		, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-		, "        </a>"
-		, "      </div>"
-		, "      a"						// no pre
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>a"						// no pre
 		, " b"
 		, "    </div>"
 		, "  </div>"
@@ -191,7 +188,7 @@ public class Xoh_file_wtr_basic_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Img_title() {
+	@Test  public void Img__title() {
 		fxt.Wtr_cfg().Lnki__title_(true);
 		Tst_img_title("[[File:A.png|frameless|a b]]", "a b");
 		Tst_img_title("[[File:A.png|thumb|a b]]", "Enlarge");	// caption should not replace text
@@ -202,7 +199,7 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Test_parse_page_wiki_str("[[A\"B]]", "<a href=\"/wiki/A%22B\" title=\"A&quot;B\">A\"B</a>");
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
-	@Test  public void Img_title__caption_has_lnki() {	// PURPOSE: caption with lnki should show in title; PAGE:en.w:Earth; DATE:2014-08-06
+	@Test  public void Img__title__caption_has_lnki() {	// PURPOSE: caption with lnki should show in title; PAGE:en.w:Earth; DATE:2014-08-06
 		fxt.Wtr_cfg().Lnki__title_(true);
 		Tst_img_title("[[File:A.png|frameless|[[A]]]]"		, "A");		// ttl only
 		Tst_img_title("[[File:A.png|frameless|[[A|B]]]]"	, "B");		// caption
@@ -212,40 +209,40 @@ public class Xoh_file_wtr_basic_tst {
 	@Test  public void Lnki_alt_is_text() {	// PURPOSE: (a) alt should default to caption; (b) alt should not show html chars (like <a src=")
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-		(	"[[File:A.png|a[[b]]c]]"
-		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"aBc\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		( "[[File:A.png|a[[b]]c]]"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"aBc\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_apos() {// PURPOSE: alt should ignore apos; EX: [[File:A.png|''A'']] should have alt of A; DATE:2013-10-25
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-			(	"[[File:A.png|''b'']]"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			( "[[File:A.png|''b'']]"
+			, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_lnke() {// PURPOSE: alt should ignore lnke
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-			(	"[[File:A.png|b[http://c.org d] e]]"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bd e\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"bd e\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			( "[[File:A.png|b[http://c.org d] e]]"
+			, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bd e\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"bd e\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_list() {// PURPOSE: alt should ignore list
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-		(	"[[File:A.png|b\n*c]]"
-		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bc\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b*c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		( "[[File:A.png|b\n*c]]"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bc\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b*c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_tblw() {// PURPOSE: alt should ignore tblw
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-			(	"[[File:A.png|\n{|\n|-\n|b\n|}\n]]"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b \" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"   b  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			( "[[File:A.png|\n{|\n|-\n|b\n|}\n]]"
+			, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b \" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"   b  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
@@ -253,10 +250,10 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str
-			(	"[[File:A.png|b\nc]]"
-			,	String_.Concat_lines_nl
-			(	"<p><a href=\"/wiki/File:A.png\" class=\"image\" title=\"b c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
-			,	"</p>"
+			( "[[File:A.png|b\nc]]"
+			, String_.Concat_lines_nl
+			( "<p><a href=\"/wiki/File:A.png\" class=\"image\" title=\"b c\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			, "</p>"
 			));
 		fxt.Init_para_n_();
 		fxt.Wtr_cfg().Lnki__title_(false);
@@ -264,8 +261,8 @@ public class Xoh_file_wtr_basic_tst {
 	@Test  public void Lnki_empty_alt_is_omitted() {// PURPOSE: empty alt should be ignored; DATE:2013-07-30
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
-		(	"[[File:A.png|a|alt=]]"
-		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"a\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		( "[[File:A.png|a|alt=]]"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"a\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
@@ -284,9 +281,9 @@ public class Xoh_file_wtr_basic_tst {
 	@Test  public void Lnki_caption_nested_file() { // PURPOSE: nested lnki in caption breaks alt with html chars; EX:de.w:Wien; DATE:2013-12-16
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str("[[File:A.png|none|[[File:B.png|20px|d]] c]]", String_.Concat_lines_nl_skip_last
-			(	"<div class=\"floatnone\">"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"d c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a></div>"
-			,	""
+			( "<div class=\"floatnone\">"
+			, "<a href=\"/wiki/File:A.png\" class=\"image\" title=\"d c\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"d c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a></div>"
+			, ""
 			));
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}

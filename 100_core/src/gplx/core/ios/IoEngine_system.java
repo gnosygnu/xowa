@@ -129,6 +129,20 @@ public class IoEngine_system extends IoEngine_base {
 	    Closeable_close(reader, url_str, false);
 		return sw.toString();
 	}
+	@SuppressWarnings("resource") public static byte[] Load_from_stream_as_bry(InputStream stream, String url_str) {
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		byte[] data = new byte[4096];
+		int read = 0;
+		try {
+			while ((read = stream.read(data, 0, data.length)) != -1) {
+			  buffer.write(data, 0, read);
+			}
+			buffer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return buffer.toByteArray();
+	}
 	@Override public boolean ExistsDir(Io_url url) {return new File(url.Xto_api()).exists();}
 	@Override public void CreateDir(Io_url url) {new File(url.Xto_api()).mkdirs();}
 	@Override public void DeleteDir(Io_url url) {

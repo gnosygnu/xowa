@@ -26,18 +26,18 @@ public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
 		Object o = hash.Get_by_bry(cmd); if (o == null) return null;
 		byte val = ((Byte_obj_val)o).Val();
 		switch (val) {
-			case Tid_xowa_root_dir:		return app_fsys_mgr.Root_dir().RawBry();
-			case Tid_bin_plat_dir:		return app_fsys_mgr.Bin_plat_dir().RawBry();
-			case Tid_user_temp_dir:		return usr_fsys_mgr.App_temp_dir().RawBry();
-			case Tid_user_cfg_dir:		return usr_fsys_mgr.App_data_cfg_dir().RawBry();
+			case Tid__xowa_root_dir:	return app_fsys_mgr.Root_dir().RawBry();
+			case Tid__bin_plat_dir:		return app_fsys_mgr.Bin_plat_dir().RawBry();
+			case Tid__user_temp_dir:	return usr_fsys_mgr.App_temp_dir().RawBry();
+			case Tid__user_cfg_dir:		return usr_fsys_mgr.App_data_cfg_dir().RawBry();
 			default:					throw Err_.new_unhandled(val);
 		}
 	}
-	private static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;
+	private static final byte Tid__bin_plat_dir = 0, Tid__user_temp_dir = 1, Tid__xowa_root_dir = 2, Tid__user_cfg_dir = 3;
 	private static final Hash_adp_bry hash = Hash_adp_bry.ci_a7()
-	.Add_str_byte("bin_plat_dir"	, Tid_bin_plat_dir)
-	.Add_str_byte("user_temp_dir"	, Tid_user_temp_dir)
-	.Add_str_byte("xowa_root_dir"	, Tid_xowa_root_dir)
-	.Add_str_byte("user_cfg_dir"	, Tid_user_cfg_dir)
+	.Add_str_byte("bin_plat_dir"	, Tid__bin_plat_dir)
+	.Add_str_byte("user_temp_dir"	, Tid__user_temp_dir)
+	.Add_str_byte("xowa_root_dir"	, Tid__xowa_root_dir)
+	.Add_str_byte("user_cfg_dir"	, Tid__user_cfg_dir)
 	;
 }

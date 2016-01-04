@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tkn_print_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Text()			{tst_Print("a ''b'' c [[d]] e");}
 	@Test  public void Prm()			{tst_Print("{{{1}}}");}
 	@Test  public void Prm_dflt()		{tst_Print("{{{1|a}}}");}

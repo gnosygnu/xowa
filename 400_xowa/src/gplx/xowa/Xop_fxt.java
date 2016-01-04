@@ -64,6 +64,7 @@ public class Xop_fxt {
 		ctx.Clear_all();
 		ctx.App().Free_mem(false);
 		ctx.Cur_page().Clear_all();
+		wiki.File_mgr().Clear_for_tests();
 		wiki.Db_mgr().Load_mgr().Clear();
 		app.Wiki_mgr().Clear();
 		Io_mgr.Instance.InitEngine_mem();	// clear created pages
@@ -221,6 +222,8 @@ public class Xop_fxt {
 	public byte[] Test_parse_tmpl_str_rv(String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
+		ctx.Cur_page().Root_(root);
+		ctx.Cur_page().Data_raw_(raw_bry);
 		return parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
 	}
 	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), name, raw);}
@@ -358,7 +361,7 @@ public class Xop_fxt {
 		wiki.Appe().Usere().Wiki().Xwiki_mgr().Add_by_atrs(domain_bry, domain_bry);
 	}
 	public static String html_img_none(String trg, String alt, String src, String ttl) {
-		return String_.Format(String_.Concat_lines_nl_skip_last("<a href=\"/wiki/{0}\" class=\"image\" xowa_title=\"{3}\"><img id=\"xowa_file_img_0\" alt=\"{1}\" src=\"{2}\" width=\"9\" height=\"8\" /></a>"), trg, alt, src, ttl);
+		return String_.Format(String_.Concat_lines_nl_skip_last("<a href=\"/wiki/{0}\" class=\"image\" xowa_title=\"{3}\"><img id=\"xoimg_0\" alt=\"{1}\" src=\"{2}\" width=\"9\" height=\"8\" /></a>"), trg, alt, src, ttl);
 	}
 	private String Exec_html_full(String raw)										{return this.Exec_parse_page_all_as_str(raw);}
 	private String Exec_html_wiki(String raw)										{return this.Exec_parse_page_wiki_as_str(raw);}
@@ -369,7 +372,7 @@ public class Xop_fxt {
 	public void Test_html_full_frag_n(String raw, String... expd_frags)		{Test_str_part_n(Exec_html_full(raw), expd_frags);}
 	public void Test__parse__wtxt_to_html(String raw, String expd) {
 		String actl = Exec_html_wiki(raw);
-		Tfds.Eq_str_lines(gplx.langs.htmls.Html_utl.Replace_apos(expd), actl, raw);
+		Tfds.Eq_str_lines(gplx.langs.htmls.Gfh_utl.Replace_apos(expd), actl, raw);
 	}
 
 	public void Test_str_full(String raw, String expd, String actl) {Tfds.Eq_str_lines(expd, actl, raw);}
@@ -436,6 +439,7 @@ public class Xop_fxt {
 		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
 		ctx.Cur_page().Redlink_lnki_list().Clear();
 		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
+            // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();
 	}
 }

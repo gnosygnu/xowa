@@ -69,6 +69,7 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 	public String XtoStr_fmt_yyyy_MM_dd_HH_mm()		{return XtoStr_fmt("yyyy-MM-dd HH:mm");}
 	public String XtoStr_fmt_yyyy_MM_dd_HH_mm_ss()	{return XtoStr_fmt("yyyy-MM-dd HH:mm:ss");}
 	public String XtoStr_fmt_iso_8561()				{return XtoStr_fmt("yyyy-MM-dd HH:mm:ss");}
+	public String XtoStr_fmt_iso_8561_w_tz()		{return XtoStr_fmt("yyyy-MM-dd'T'HH:mm:ss'Z'");}
 	public static int Timezone_offset_test = Int_.Min_value;
 		public Calendar UnderDateTime() 		{return under;} Calendar under;
 	public int Year() {return under.get(Calendar.YEAR);}

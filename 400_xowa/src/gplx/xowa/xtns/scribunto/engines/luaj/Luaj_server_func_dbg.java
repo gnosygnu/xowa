@@ -30,7 +30,7 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 		bfr.Add_str_a7("<span class='xowa_dbg' style='color:red'>");
 		for (int i = 1; i <= len; ++i) {
 			String s = args.arg(i).toString();
-			bfr.Add_str_u8(gplx.langs.htmls.Html_utl.Escape_html_as_str(s) + "&nbsp;");
+			bfr.Add_str_u8(gplx.langs.htmls.Gfh_utl.Escape_html_as_str(s) + "&nbsp;");
 		}
 		bfr.Add_str_a7("</span><br/>");
 		core.Page().Html_data().Xtn_scribunto_dbg_(bfr.To_bry_and_clear());

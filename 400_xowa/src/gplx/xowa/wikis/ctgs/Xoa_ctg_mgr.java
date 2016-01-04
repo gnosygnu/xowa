@@ -62,4 +62,6 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 	public static final byte Version_null = Byte_.Zero, Version_1 = 1, Version_2 = 2;
 	public static final byte Tid_null = Byte_.Max_value_127, Tid_subc = 0, Tid_file = 1, Tid_page = 2, Tid__max = 3;
 	public static final byte Hidden_n = Byte_.Zero, Hidden_y = (byte)1;
+	public static final String Html__cls__str = "CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory";
+	public static final byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
 }

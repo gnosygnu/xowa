@@ -20,8 +20,8 @@ import gplx.core.errs.*;
 public class Bry_rdr {
 	private final gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.neg1_();
 	public byte[] Src() {return src;} private byte[] src;
-	public int Pos() {return pos;} private int pos;
 	public int Src_end() {return src_end;} private int src_end; 
+	public int Pos() {return pos;} private int pos;
 	public Bry_rdr Dflt_dlm_(byte b) {this.dflt_dlm = b; return this;} private byte dflt_dlm;
 	public Bry_rdr Fail_throws_err_(boolean v) {err_wkr.Fail_throws_err_(v); return this;}
 	public Bry_rdr Init_by_page(byte[] page, byte[] src, int src_len)			{err_wkr.Init_by_page(String_.new_u8(page), src);	this.pos = 0; this.src = src; this.src_end = src_len; return this;}
@@ -109,12 +109,7 @@ public class Bry_rdr {
 		if (bgn == pos) {err_wkr.Fail("int is empty"); return Int_.Min_value;}
 		return rv * negative;
 	}
-	public byte Read_byte_as_a7_int() {
-		byte rv = Byte_ascii.To_a7_int(src[pos]);
-		++pos;
-		return rv;
-	}
-	public int Read_int_by_base85(int reqd) {
+	public int Read_hzip_int(int reqd) {
 		int rv = gplx.xowa.htmls.core.hzips.Xoh_hzip_int_.Decode(reqd, src, src_end, pos, pos_ref);
 		pos = pos_ref.Val();
 	 	return rv;

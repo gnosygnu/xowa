@@ -28,7 +28,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		atrs_hash.Add(Bry_prop_get, Byte_obj_val.new_(Tid_prop_get));
 		atrs_hash.Add(Bry_prop_set, Byte_obj_val.new_(Tid_prop_set));
 		html_wtr = new Prefs_html_wtr(this);
-	}	private Xoae_app app; private Hash_adp_bry atrs_hash; private Html_parser html_rdr = new Html_parser(); private Prefs_html_wtr html_wtr;
+	}	private Xoae_app app; private Hash_adp_bry atrs_hash; private Gfh_parser html_rdr = new Gfh_parser(); private Prefs_html_wtr html_wtr;
 	private Prefs_trg_mgr option_trgs_mgr = new Prefs_trg_mgr();
 	public void Html_box_mok_(Xog_html_itm v) {this.html_box_mok = v;} private Xog_html_itm html_box_mok;
 	public byte[] Props_get(byte[] src) {
@@ -39,12 +39,12 @@ public class Prefs_mgr implements GfoInvkAble {
 		Bry_bfr bfr = Bry_bfr.new_();
 		try {src = props_get_fmtr.Fmt_(src).Bld_bry_none(bfr);}
 		catch (Exception e) {src = Bry_.Add(src, Bry_.new_u8(Err_.Message_gplx_full(e)));}
-		Html_nde[] hndes = html_rdr.Parse_as_ary(src);
-		hndes = Html_selecter.Select(src, hndes, atrs_hash);
+		Gfh_nde[] hndes = html_rdr.Parse_as_ary(src);
+		hndes = Gfh_selecter.Select(src, hndes, atrs_hash);
 		int pos = 0;
 		int len = hndes.length;
 		for (int i = 0; i < len; i++) {
-			Html_nde hnde = hndes[i];
+			Gfh_nde hnde = hndes[i];
 			bfr.Add_mid(src, pos, hnde.Tag_lhs_bgn());
 			html_wtr.Write(bfr, src, hnde, i, option_trgs_mgr.Trg_type(), option_trgs_mgr.Trg_val());
 			pos = hnde.Tag_rhs_end();
@@ -63,18 +63,18 @@ public class Prefs_mgr implements GfoInvkAble {
 		src = Bry_.Replace(src, Bry_.new_a7("<xowa_cmd>"), Bry_.new_a7("&lt;xowa_cmd>"));
 		src = Bry_.Replace(src, Bry_.new_a7("</xowa_cmd>"), Bry_.new_a7("&lt;/xowa_cmd>"));
 		src = this.Parse_wikitext_to_html(src);	
-		Html_nde[] hndes = html_rdr.Parse_as_ary(src);
-		hndes = Html_selecter.Select(src, hndes, atrs_hash);
+		Gfh_nde[] hndes = html_rdr.Parse_as_ary(src);
+		hndes = Gfh_selecter.Select(src, hndes, atrs_hash);
 		int len = hndes.length;
 		boolean tidy_enabled = app.Html_mgr().Tidy_mgr().Enabled();
 		Bry_bfr cmd_bfr = Bry_bfr.reset_(255);
 		for (int i = 0; i < len; i++) {
-			Html_nde hnde = hndes[i];
+			Gfh_nde hnde = hndes[i];
 			Props_set_by_hnde(cmd_bfr, src, hnde, i, tidy_enabled);
 		}
 		app.Cfg_mgr().Db_save_txt();
 	}
-	private void Props_set_by_hnde(Bry_bfr cmd_bfr, byte[] src, Html_nde hnde, int i, boolean tidy_enabled) {
+	private void Props_set_by_hnde(Bry_bfr cmd_bfr, byte[] src, Gfh_nde hnde, int i, boolean tidy_enabled) {
 		byte[] eval_code = hnde.Atrs_val_by_key_bry(Bry_prop);
 		if 	(eval_code == null) eval_code = hnde.Atrs_val_by_key_bry(Bry_prop_set);
 		String hnde_val = null;
@@ -85,7 +85,7 @@ public class Prefs_mgr implements GfoInvkAble {
 			case Elem_tid_input_text:
 			case Elem_tid_input_xowa_io:
 			case Elem_tid_select: 			hnde_val = html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value); break;
-			case Elem_tid_textarea:			hnde_val = Html_utl.Unescape_as_str(html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value)); break;
+			case Elem_tid_textarea:			hnde_val = Gfh_utl.Unescape_as_str(html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value)); break;
 			case Elem_tid_input_checkbox:	hnde_val = html_itm.Html_elem_atr_get_bool(hnde_key, "checked") ? "y" : "n"; break;
 		}			
 		byte[] get_cmd = Props_get(eval_code); 
@@ -117,7 +117,7 @@ public class Prefs_mgr implements GfoInvkAble {
 	}	private static final String Invk_exec_get = "exec_get", Invk_save = "save";
 	private static final byte Tid_prop = 0, Tid_prop_get = 1, Tid_prop_set = 2;
 	public static final byte[] Bry_prop = Bry_.new_a7("xowa_prop"), Bry_prop_get = Bry_.new_a7("xowa_prop_get"), Bry_prop_set = Bry_.new_a7("xowa_prop_set"), Bry_id = Bry_.new_a7("id");
-	public static byte Elem_tid_tid_of(Html_nde hnde) {
+	public static byte Elem_tid_tid_of(Gfh_nde hnde) {
 		byte[] elem_name = Bry_.Mid(hnde.Src(), hnde.Name_bgn(), hnde.Name_end());
 		if		(Bry_.Eq(elem_name, Nde_textarea)) 			return Elem_tid_textarea;
 		else if	(Bry_.Eq(elem_name, Nde_select)) 			return Elem_tid_select;

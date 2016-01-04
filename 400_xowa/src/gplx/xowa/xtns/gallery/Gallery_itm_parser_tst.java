@@ -54,15 +54,15 @@ public class Gallery_itm_parser_tst {
 	@Test   public void Caption_complicated() {
 		fxt.Test_parse("File:A.png|alt=a|b[[c|d]]e ", fxt.Expd("File:A.png", "b[[c|d]]e", "a"));
 	}
-	@Test   public void Alt_magic_word_has_arg() {	// PURPOSE: img_alt magic_word is of form "alt=$1"; make sure =$1 is stripped for purpose of parser; DATE:2013-09-12
-		fxt.Init_kwd_set(Xol_kwd_grp_.Id_img_alt, "alt=$1");
-		fxt.Test_parse("File:A.png|alt=a|b", fxt.Expd("File:A.png", "b", "a"));
-	}
 	@Test   public void Link_null() {	// PURPOSE: null link causes page to fail; EX: ru.w:Гянджа; <gallery>Datei:A.png|link= |</gallery>; DATE:2014-04-11
 		fxt.Test_parse("File:A.png|link = |b", fxt.Expd("File:A.png", "b", null, null));
 	}
 	@Test   public void Caption_empty() {	// PURPOSE: check that empty ws doesn't break caption (based on Link_null); DATE:2014-04-11
 		fxt.Test_parse("File:A.png|  |  | ", fxt.Expd("File:A.png", null, null, null));
+	}
+	@Test   public void Alt__magic_word_has_arg() {	// PURPOSE: img_alt magic_word is of form "alt=$1"; make sure =$1 is stripped for purpose of parser; DATE:2013-09-12
+		fxt.Init_kwd_set(Xol_kwd_grp_.Id_img_alt, "alt=$1");
+		fxt.Test_parse("File:A.png|alt=a|b", fxt.Expd("File:A.png", "b", "a"));
 	}
 }
 class Gallery_itm_parser_fxt {

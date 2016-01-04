@@ -19,7 +19,7 @@ package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*;
 import gplx.xowa.parsers.lists.*;
 public class Xop_apos_wkr_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_wiki("''a''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn)	, fxt.tkn_txt_(2, 3), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 		fxt.Test_parse_page_wiki("'''a'''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn)	, fxt.tkn_txt_(3, 4), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));

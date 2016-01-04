@@ -28,7 +28,7 @@ public class Wmf_latest_parser_tst {
 //		@Test   public void Smoke() {
 //			Wmf_latest_parser parser = new Wmf_latest_parser();
 //			parser.Parse(Io_mgr.Instance.LoadFilBry("C:\\wmf_latest.html"));
-//			Tfds.Write(String_.Concat_lines_nl(Wmf_latest_parser_fxt.Xto_str_ary(parser.To_ary())));
+//			Tfds.Dbg(String_.Concat_lines_nl(Wmf_latest_parser_fxt.Xto_str_ary(parser.To_ary())));
 //		}
 }
 class Wmf_latest_parser_fxt {

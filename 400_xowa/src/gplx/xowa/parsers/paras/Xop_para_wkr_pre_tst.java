@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_para_wkr_pre_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test  public void Pre_ignore_bos() {			// PURPOSE: ignore pre at bgn; DATE:2013-07-09
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
@@ -68,11 +68,11 @@ public class Xop_para_wkr_pre_tst {
 		( "<p>a"
 		, "</p>"
 		, " <ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
-		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width: 155px\">"
-		, "    <div style=\"width: 155px\">"
-		, "      <div class=\"thumb\" style=\"width: 150px;\">"
+		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width:155px;\">"
+		, "    <div style=\"width:155px;\">"
+		, "      <div class=\"thumb\" style=\"width:150px;\">"
 		, "        <div style=\"margin:15px auto;\">"
-		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
+		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class=\"gallerytext\">"
@@ -94,11 +94,11 @@ public class Xop_para_wkr_pre_tst {
 			);
 		fxt.Test_parse_page_wiki_str(raw, String_.Concat_lines_nl_skip_last
 			( " <ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"	// NOTE: leading " " matches MW; DATE:2014-06-23
-			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width: 155px\">"
-			, "    <div style=\"width: 155px\">"
-			, "      <div class=\"thumb\" style=\"width: 150px;\">"
+			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width:155px;\">"
+			, "    <div style=\"width:155px;\">"
+			, "      <div class=\"thumb\" style=\"width:150px;\">"
 			, "        <div style=\"margin:15px auto;\">"
-			, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
+			, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
 			, "        </div>"
 			, "      </div>"
 			, "      <div class=\"gallerytext\"><p>b"

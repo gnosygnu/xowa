@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Xof_math_mgr_html_tst {
-	@Before public void init() {} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Escape_lt_gt_mathjax() {	// PURPOSE: escape <>&"; EX:de.w:Vergleich_(Zahlen); DATE:2014-05-10; PAGE:s.w:Matrix_(mathematics) DATE:2014-07-19
 		fxt.Test_html_full_str("<math>a<>b</math>", "<span id='xowa_math_txt_0'>a&lt;&gt;b</span>");
 	}

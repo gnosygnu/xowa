@@ -19,7 +19,13 @@ package gplx.xowa.htmls.core.wkrs.escapes; import gplx.*; import gplx.xowa.*; im
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_escape_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
-	@Test   public void Basic() {
-		fxt.Test__bicode("~u", "");
+	@Test   public void Escape() {
+		fxt.Test__bicode("!" , String_.new_a7(Bry_.New_by_byte(Xoh_pool_mgr__hzip.Hook__core)));
+	}
+	@Test   public void Html() {
+		fxt.Test__bicode("!" , String_.new_a7(Bry_.New_by_byte(Xoh_pool_mgr__hzip.Hook__html)));
+	}
+	@Test   public void Mw() {
+		fxt.Test__bicode("!", "");
 	}
 }

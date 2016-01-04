@@ -39,5 +39,6 @@ public class Xoh_img_mgr {
 			itm.To_bfr(bfr);
 		}
 	}
-	public static final byte[] Bry__html_uid = Bry_.new_a7("xoimg_");
+	public static final String Str__html_uid = "xoimg_";
+	public static final byte[] Bry__html_uid = Bry_.new_a7(Str__html_uid);
 }

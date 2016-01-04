@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*; import gplx.core.brys.*; import gplx.langs.htmls.parsers.*;
+import org.junit.*; import gplx.core.brys.*; import gplx.langs.htmls.docs.*;
 public class Xoh_anch_capt_itm_tst {
 	private final Xoh_anch_capt_itm_fxt fxt = new Xoh_anch_capt_itm_fxt();
 	@Test   public void Basic__same()			{fxt.Test__match("Abc"				, "Abc", Xoh_anch_capt_itm.Tid__same);}

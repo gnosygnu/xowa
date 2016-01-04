@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.parsers.lnkis.*;
-class Xoh_file_page__other_resolutions extends gplx.core.brys.Bfr_arg_base {
+class Xoh_file_page__other_resolutions implements gplx.core.brys.Bfr_arg {
 	private Xow_repo_mgr repo_mgr; private Xof_file_itm orig_itm; private Xoh_file_page_wtr file_page;
 	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xoh_file_page__other_resolutions Init_by_fmtr(Xow_repo_mgr repo_mgr, Xof_file_itm orig_itm, Xoh_file_page_wtr file_page) {this.repo_mgr = repo_mgr; this.orig_itm = orig_itm; this.file_page = file_page; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		Int_2_ref[] ary = file_page.Size_alts();
 		Xof_file_itm xfer_itm = new Xof_fsdb_itm();
 		int len = ary.length;

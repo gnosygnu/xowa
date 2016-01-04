@@ -54,6 +54,9 @@ public class Xob_cmd_keys {
 	, Key_wbase_pid					= "wbase.pid"				// "text.wdata.pid"
 	, Key_wbase_db					= "wbase.db"				// "wiki.wdata_db"
 	, Key_site_meta					= "util.site_meta"
+	, Key_diff_build				= "diff.build"
+	, Key_diff_merge				= "diff.merge"
+
 	, Key_tdb_text_init				= "tdb.text.init"			// "core.init"
 	, Key_tdb_make_page				= "tdb.text.page"			// "core.make_page"
 	, Key_tdb_make_id				= "core.make_id"

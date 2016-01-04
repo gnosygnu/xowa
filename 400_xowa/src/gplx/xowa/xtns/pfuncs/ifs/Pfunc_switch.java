@@ -22,7 +22,7 @@ public class Pfunc_switch extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_switch;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_switch().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW:ParserFunctions_body.php
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		int self_args_len = self.Args_len(); if (self_args_len == 0) return;	// no cases; return; effectively "empty"
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		boolean fall_thru_found = false;

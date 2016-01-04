@@ -19,7 +19,7 @@ package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.langs.htmls.*;
 class Prefs_html_wtr {
 	public Prefs_html_wtr(Prefs_mgr prefs_mgr) {this.prefs_mgr = prefs_mgr;} Prefs_mgr prefs_mgr; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public void Write(Bry_bfr bfr, byte[] src, Html_nde hnde, int prop_idx, byte[] trg_type, byte[] trg_val) {
+	public void Write(Bry_bfr bfr, byte[] src, Gfh_nde hnde, int prop_idx, byte[] trg_type, byte[] trg_val) {
 		Object prop_val = Eval_prop_get(hnde);
 		byte elem_type = Prefs_mgr.Elem_tid_tid_of(hnde);
 		bfr.Add_mid(src, hnde.Tag_lhs_bgn(), hnde.Tag_lhs_end() - 1);
@@ -32,25 +32,25 @@ class Prefs_html_wtr {
 		}
 		bfr.Add_mid(src, hnde.Tag_rhs_bgn(), hnde.Tag_rhs_end());		
 	}
-	private void Write_input(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
+	private void Write_input(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__value_atr(bfr, prop_val);				// " value='abc'"
 		Write__nde_end(bfr);							// ">"
 	}
-	private void Write_textarea(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
+	private void Write_textarea(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__nde_end(bfr);							// ">"
-		bfr.Add(Html_utl.Escape_html_as_bry(Bry_.new_u8(Object_.Xto_str_strict_or_empty(prop_val))));
+		bfr.Add(Gfh_utl.Escape_html_as_bry(Bry_.new_u8(Object_.Xto_str_strict_or_empty(prop_val))));
 														// "abcde"
 	}
-	private void Write_checkbox(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
+	private void Write_checkbox(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		boolean prop_val_is_true = String_.Eq((String)prop_val, "y");
 		if (prop_val_is_true)
 			bfr.Add(Atr_stub_checked);					// " checked='checked'"
 		Write__nde_end(bfr);							// ">"
 	}
-	private void Write_select(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
+	private void Write_select(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
 		KeyVal[] options_list = Get_select_options(hnde);
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__nde_end(bfr);							// ">"
@@ -68,14 +68,14 @@ class Prefs_html_wtr {
 			bfr.Add(Nde_stub_option_end);				// "</option>\n"
 		}
 	}
-	private void Write_io(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
+	private void Write_io(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__value_atr(bfr, prop_val);				// " value='abc'"
 		Write__nde_end(bfr);							// ">"
 		Write__tag_end(bfr, hnde);						// "</input>"
 		Write_io_btn(bfr, hnde, prop_idx);
 	}
-	private void Write_io_btn(Bry_bfr bfr, Html_nde hnde, int prop_idx) {
+	private void Write_io_btn(Bry_bfr bfr, Gfh_nde hnde, int prop_idx) {
 		bfr.Add_str_a7("<button id='xowa_prop_").Add_int_variable(prop_idx).Add_str_a7("_io").Add_byte(Byte_ascii.Apos);
 		bfr.Add_str_a7(" class='options_button' onclick='xowa_io_select(\"file\", \"");
 		bfr.Add_str_a7("xowa_prop_").Add_int_variable(prop_idx);
@@ -91,7 +91,7 @@ class Prefs_html_wtr {
 		, Nde_stub_option_bgn = Bry_.new_a7("  <option value='")
 		, Nde_stub_option_end = Bry_.new_a7("</option>\n")
 		;
-	Object Eval_prop_get(Html_nde hnde) {
+	Object Eval_prop_get(Gfh_nde hnde) {
 		byte[] cmd = hnde.Atrs_val_by_key_bry(Prefs_mgr.Bry_prop);
 		if (cmd == null) 
 			cmd = hnde.Atrs_val_by_key_bry(Prefs_mgr.Bry_prop_get);
@@ -99,7 +99,7 @@ class Prefs_html_wtr {
 		try {return prefs_mgr.Eval(tmp_bfr.To_bry_and_clear());}
 		catch (Exception e) {return Err_.Message_gplx_full(e);}
 	}
-	KeyVal[] Get_select_options(Html_nde hnde) {
+	KeyVal[] Get_select_options(Gfh_nde hnde) {
 		byte[] options_list_key = hnde.Atrs_val_by_key_bry(Atr_key_xowa_prop_list);
 		tmp_bfr.Add(options_list_key).Add_byte(Byte_ascii.Semic);
 		try {return (KeyVal[])prefs_mgr.Eval(tmp_bfr.To_bry_and_clear());}
@@ -113,11 +113,11 @@ class Prefs_html_wtr {
 	}
 	private void Write__value_atr(Bry_bfr bfr, Object prop_val) {
 		bfr.Add(Atr_stub_value);					// " value='"
-		bfr.Add(Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, Object_.Xto_str_strict_or_empty(prop_val)));	
+		bfr.Add(Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, Object_.Xto_str_strict_or_empty(prop_val)));	
 													// "abcde"
 		bfr.Add_byte(Byte_ascii.Apos);				// "'"
 	}
-	private void Write__tag_end(Bry_bfr bfr, Html_nde hnde) {
+	private void Write__tag_end(Bry_bfr bfr, Gfh_nde hnde) {
 		bfr.Add_mid(hnde.Src(), hnde.Tag_rhs_bgn(), hnde.Tag_rhs_end()); 	// "</input>"
 		// bfr.Add_byte_nl();												// "\n"; NOTE: do not write \n; will move to next line; DATE:2013-10-16
 	}

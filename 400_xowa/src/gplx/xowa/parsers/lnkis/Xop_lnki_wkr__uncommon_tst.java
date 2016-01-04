@@ -19,7 +19,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 public class Xop_lnki_wkr__uncommon_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Double_bracket() {	// PURPOSE: handle [[[[A]]]] constructions; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
 		fxt.Test_parse_page_all_str("[[[[Test_1]]]]"		, "[[<a href=\"/wiki/Test_1\">Test_1</a>]]");
 	}
@@ -32,14 +32,14 @@ public class Xop_lnki_wkr__uncommon_tst {
 	}
 	@Test  public void Triple_bracket_with_lnke_lnki() {	// PURPOSE: handle [http://a.org [[File:A.png|123px]]]; PAGE:ar.w:محمد DATE:2014-08-20
 		fxt.Test_parse_page_all_str("[http://a.org [[File:A.png|123px]]]"
-		,  "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\"><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" /></a></a>"
+		,  "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\"><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" /></a></a>"
 		);
 	}
 	@Test  public void Multiple_captions() {	// PURPOSE: multiple captions should be concatenated (used to only take first); EX:zh.d:维基词典:Unicode字符索引/0000–0FFF; DATE:2014-05-05
 		fxt.Test_parse_page_all_str("[[A|B|C|D]]"		, "<a href=\"/wiki/A\">B|C|D</a>");
 	}
 	@Test  public void Multiple_captions_file() {	// PURPOSE: multiple captions should take last; EX:none; DATE:2014-05-05
-		fxt.Test_html_wiki_frag("[[File:A|B|C|D|thumb]]"		, "</div>\n      D\n    </div>");
+		fxt.Test_html_wiki_frag("[[File:A|B|C|D|thumb]]"		, "</div>D\n    </div>");
 	}
 	@Test  public void Multiple_captions_pipe() {	// PURPOSE.fix: multiple captions caused multiple pipes; PAGE:w:Wikipedia:Administrators'_noticeboard/IncidentArchive24; DATE:2014-06-08
 		fxt.Test_parse_page_all_str("[[a|b|c d e]]", "<a href=\"/wiki/A\">b|c d e</a>");	// was b|c| |d| |e

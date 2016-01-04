@@ -20,7 +20,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.wikis.metas.*;
 public class Pfunc_wiki_stats extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr rslt_bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		boolean raw = false;			
 		if (argx.length == 1) {
@@ -41,9 +41,9 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 			default: throw Err_.new_unhandled(id);
 		}
 		if (raw)
-			rslt_bfr.Add_int_variable(v);
+			bfr.Add_int_variable(v);
 		else
-			rslt_bfr.Add(ctx.Cur_page().Lang().Num_mgr().Format_num(v));
+			bfr.Add(ctx.Cur_page().Lang().Num_mgr().Format_num(v));
 	}
 	public Pfunc_wiki_stats(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;

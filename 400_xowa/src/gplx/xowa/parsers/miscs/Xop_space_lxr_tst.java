@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_space_lxr_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@After public void term() {fxt.Init_para_n_();}
 	@Test   public void Toc_basic() {	// PURPOSE: make sure nbsp char is not converted to space; PAGE:en.w:Macedonian–Carthaginian_Treaty; DATE:2014-06-07

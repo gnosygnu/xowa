@@ -23,4 +23,5 @@ public class Xop_tkn_ {
 	,	Anchor = new byte[] {Byte_ascii.Hash}
 	;
 	public static final int Lnki_bgn_len = 2, Lnki_end_len = 2;
+	public static final byte Anchor_byte = Byte_ascii.Hash;
 }

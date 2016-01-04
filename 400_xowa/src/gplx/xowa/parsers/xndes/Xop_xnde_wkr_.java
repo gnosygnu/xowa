@@ -20,8 +20,8 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.pfuncs.strings.*;
 class Xop_xnde_wkr_ {
 	private static final Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
-	private static final int Find_xtn_end__tid__end = 0, Find_xtn_end__tid__xtag = 1;
-	private static final Int_obj_ref Find_xtn_end__key__end = Int_obj_ref.new_(Find_xtn_end__tid__end), Find_xtn_end__key__xtag = Int_obj_ref.new_(Find_xtn_end__tid__xtag);
+	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1, Find_xtn_end__tid__xtag = 2;
+	private static final Int_obj_ref Find_xtn_end__key__bgn = Int_obj_ref.new_(Find_xtn_end__tid__bgn), Find_xtn_end__key__end = Int_obj_ref.new_(Find_xtn_end__tid__end), Find_xtn_end__key__xtag = Int_obj_ref.new_(Find_xtn_end__tid__xtag);
 	private static final Bry_bfr Find_xtag_end__bfr = Bry_bfr.new_(32);
 	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
 		int subs_bgn = -1, subs_len = owner.Subs_len();
@@ -35,20 +35,34 @@ class Xop_xnde_wkr_ {
 		if (subs_bgn != -1) 
 			root.Subs_move(owner, subs_bgn, subs_len);			// move everything after "|" back to root
 	}
-	public static int Find_xtn_end(Xop_ctx ctx, byte[] src, int open_end, int src_end, byte[] close_bry) {
+	public static int Find_xtn_end(Xop_ctx ctx, byte[] src, int open_end, int src_end, byte[] open_bry, byte[] close_bry) {
 		xtn_end_tag_trie.Clear();
 		xtn_end_tag_trie.Add_obj(Pfunc_tag.Xtag_bgn_lhs, Find_xtn_end__key__xtag);
+		xtn_end_tag_trie.Add_obj(open_bry, Find_xtn_end__key__bgn);
 		xtn_end_tag_trie.Add_obj(close_bry, Find_xtn_end__key__end);
+		int depth = 0;
 		for (int i = open_end; i < src_end; ++i) {
 			Object o = xtn_end_tag_trie.Match_bgn(src, i, src_end);
 			if (o != null) {
 				int tid = ((Int_obj_ref)o).Val();
-				if (tid ==  Find_xtn_end__tid__end)		// xtn_end found; use it
-					return i;
-				else {									// xtag found; skip over it; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-03
-					int xtag_end = Find_xtag_end(ctx, src, i, src_end);
-					int angle_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, xtag_end, src_end);
-					i = angle_end;
+				switch (tid) {
+					case Find_xtn_end__tid__bgn:		// handle nested refs; PAGE:en.w:UK; DATE:2015-12-26
+						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end); if (angle_end_pos == Bry_find_.Not_found) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
+						if (src[angle_end_pos -1] == Byte_ascii.Slash) {}
+						else
+							++depth;
+						break;
+					case Find_xtn_end__tid__end:		// xtn_end found; use it
+						if (depth == 0)
+							return i;
+						else
+							--depth;
+						break;
+					case Find_xtn_end__tid__xtag:		// xtag found; skip over it; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-03
+						int xtag_end = Find_xtag_end(ctx, src, i, src_end);
+						int angle_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, xtag_end, src_end);
+						i = angle_end;
+						break;
 				}
 			}
 		}

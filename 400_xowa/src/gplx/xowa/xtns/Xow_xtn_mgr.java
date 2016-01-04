@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private Ordered_hash regy = Ordered_hash_.New_bry();
@@ -45,7 +45,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new gplx.xowa.xtns.listings.Listing_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.titleBlacklists.Blacklist_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
-		Add(app, new gplx.xowa.xtns.graphs.Graph_xtn());
+//			Add(app, new gplx.xowa.xtns.graphs.Graph_xtn());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xowe_wiki wiki) {

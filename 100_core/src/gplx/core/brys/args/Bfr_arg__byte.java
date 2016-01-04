@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
-public class Bfr_arg__byte extends gplx.core.brys.Bfr_arg_base {
+public class Bfr_arg__byte implements Bfr_arg {
 	private final byte byt;
 	public Bfr_arg__byte(byte byt) {this.byt = byt;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_byte(byt);}
+	public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_byte(byt);}
 }

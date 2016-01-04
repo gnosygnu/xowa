@@ -46,13 +46,13 @@ public class Xoh_page_wtr_wkr {
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Html().Page().View_html_generates_hdump()) {
 					Write_body(page_bfr, Xoh_wtr_ctx.Hdump, page);
-					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
 				}
 				else {
 					Write_body(page_bfr, Xoh_wtr_ctx.Basic, page);
 					Write_page_by_tid(view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
-						Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Html_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
+						Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
 			}

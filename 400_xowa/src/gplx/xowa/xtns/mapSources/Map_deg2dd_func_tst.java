@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Map_deg2dd_func_tst {
-	@Before public void init()				{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Prec_basic()			{fxt.Test_parse_tmpl_str_test("{{#deg2dd: 1.2345|2}}"									, "{{test}}"	, "1.23");}
 	@Test  public void Prec_round()			{fxt.Test_parse_tmpl_str_test("{{#deg2dd: 1.2345|3}}"									, "{{test}}"	, "1.235");}
 	@Test  public void Example()			{fxt.Test_parse_tmpl_str_test("{{#deg2dd: 14° 23' 45'' S|precision=3}}"					, "{{test}}"	, "-14.396");}

@@ -25,6 +25,10 @@ public class Bry_find_ {
 			if (src[i] == lkp) return i;
 		return Bry_find_.Not_found;
 	}
+	public static int Find_fwd_or(byte[] src, byte lkp, int cur, int end, int or) {
+		int rv = Find_fwd(src, lkp, cur, end);
+		return rv == Bry_find_.Not_found ? or : rv;
+	}
 	public static int Find_bwd(byte[] src, byte lkp)								{return Find_bwd(src, lkp, src.length, 0);}
 	public static int Find_bwd(byte[] src, byte lkp, int cur)						{return Find_bwd(src, lkp, cur		 , 0);}
 	public static int Find_bwd(byte[] src, byte lkp, int cur, int end) {
@@ -174,6 +178,16 @@ public class Bry_find_ {
 				default:
 					return i + 1;
 			}
+		}
+		return bgn;
+	}
+	public static int Find_bwd__skip(byte[] src, int end, int bgn, byte skip) {
+		int src_len = src.length; if (end == src_len) return end;
+		if (end > src_len || end < 0) return Bry_find_.Not_found;
+		int pos = end - 1;	// start from end - 1; handles situations where len is passed in
+		for (int i = pos; i >= bgn; --i) {
+			if (src[i] != skip)
+				return i + 1;
 		}
 		return bgn;
 	}

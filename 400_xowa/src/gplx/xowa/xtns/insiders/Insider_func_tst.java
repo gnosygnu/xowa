@@ -24,7 +24,7 @@ public class Insider_func_tst {
 	}
 }
 class Insider_func_fxt {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Reset() {
 		fxt.Reset();
 	}

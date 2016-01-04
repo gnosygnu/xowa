@@ -192,7 +192,7 @@ class Dpl_page_mok {
 	public static Dpl_page_mok new_(int id, String ttl) {return new Dpl_page_mok(id, ttl);}
 }
 class Dpl_xnde_fxt {	
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	private int next_id;
 	public void Clear() {
 		next_id = 100;

@@ -23,6 +23,8 @@ public class Byte_ {
 	  Zero			= 0
 	, Min_value		= Byte.MIN_VALUE		
 	, Max_value_127	= 127
+	, Val_128		= -128				
+	, Val_255		= -1				
 	; 
 	public static byte		cast(Object o)		{try {return (Byte)o;} catch (Exception e) {throw Err_.new_type_mismatch_w_exc(e, byte.class, o);}}
 	public static byte		parse(String raw)	{return Byte.parseByte(raw);}	

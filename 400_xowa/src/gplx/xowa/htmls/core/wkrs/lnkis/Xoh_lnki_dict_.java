@@ -24,6 +24,6 @@ public class Xoh_lnki_dict_ {
 		gplx.xowa.htmls.core.hzips.Xoh_hzip_int_.Encode(1, bfr, ns_id + 2);
 	}
 	public static int Ns_decode(Bry_rdr rdr) {
-		return rdr.Read_int_by_base85(1) - 2;
+		return rdr.Read_hzip_int(1) - 2;
 	}
 }

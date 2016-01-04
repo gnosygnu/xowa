@@ -106,6 +106,7 @@ public class Gfo_protocol_itm {
 	;
 	public static final String Str_file = "file:", Str_xcmd = "xowa-cmd:";
 	public static final byte[] Bry_file = Bry_.new_a7(Str_file), Bry_xcmd = Bry_.new_a7(Str_xcmd);
+	public static final byte[] Bry_file_with_slashes = Bry_.new_a7("file:///");
 	public static final int Len_xcmd = Bry_xcmd.length;
 	public static final byte[] Bry_relative = Bry_.new_a7("//");
 	public static Gfo_protocol_itm Get_or(byte tid, Gfo_protocol_itm or) {

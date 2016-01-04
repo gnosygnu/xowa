@@ -45,7 +45,7 @@ public class Xop_parser__tst {
 	}
 }
 class Xop_parser__fxt {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	public void Clear() {
 		fxt.Reset();

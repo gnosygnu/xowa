@@ -39,6 +39,11 @@ public class Bool_ implements GfoInvkAble {
 			return false;
 		throw Err_.new_parse_type(boolean.class, raw);
 	}
+	public static int Compare(boolean lhs, boolean rhs) {
+		if		( lhs ==  rhs)	return CompareAble_.Same;
+		else if (!lhs &&  rhs)	return CompareAble_.Less;
+		else	/*lhs && !rhs*/ return CompareAble_.More;
+	}
 	public static boolean		By_int(int v)			{return v == Y_int;}
 	public static int		To_int(boolean v)			{return v ? Y_int		: N_int;}
 	public static byte		To_byte(boolean v)			{return v ? Y_byte		: N_byte;}

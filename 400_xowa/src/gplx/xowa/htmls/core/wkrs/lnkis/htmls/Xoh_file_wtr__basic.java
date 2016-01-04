@@ -65,7 +65,7 @@ public class Xoh_file_wtr__basic {
 			img_orig_src = img_view_src = Bry_.Empty;				// null out src
 		}
 		if		(lnki.Ns_id() == Xow_ns_.Tid__media)				// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
-			this.Write_file_ns_media(bfr, ctx, src, lnki, img_orig_src);
+			this.Write_file_ns_media(bfr, ctx, hctx, src, lnki, img_orig_src);
 		else {
 			if	(	Xof_ext_.Id_is_video_strict(orig_ext.Id())		// id is .ogv or .webm
 					||	(	orig_ext.Id_is_ogg()					// id is ogg
@@ -87,8 +87,8 @@ public class Xoh_file_wtr__basic {
 			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__img(), xfer_itm, Xohd_img_itm__gallery_itm.Tid_basic);
 		}
 	}
-	private void Write_file_ns_media(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src) {
-		html_fmtr.Html_full_media(bfr, img_orig_src, lnki.Ttl().Page_txt(), Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
+	private void Write_file_ns_media(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src) {
+		html_fmtr.Html_full_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki.Ttl().Page_txt(), Arg_caption(ctx, src, Xoh_wtr_ctx.Basic, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
 	}
 	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
 		byte[] content = Arg_content_audio(lnki, ctx, hctx, src, uid, lnki_href, img_orig_src, alt);
@@ -120,7 +120,7 @@ public class Xoh_file_wtr__basic {
 			html_fmtr.Html_thumb_core(bfr, hctx.Mode_is_hdump(), uid, lnki_halign_bry, div_width, content);
 		}
 		else {
-			if	(	cfg_alt_defaults_to_caption 
+			if	(	cfg_alt_defaults_to_caption
 				&& 	Bry_.Len_eq_0(alt)					// NOTE: if no alt, always use caption; DATE:2013-07-22
 				&& 	!lnki.Alt_exists()					// unless blank alt exists; EX: [[File:A.png|a|alt=]] should have alt of "", not "a" 
 				) {
@@ -129,34 +129,38 @@ public class Xoh_file_wtr__basic {
 			}
 			boolean div_align_exists = false;
 			switch (lnki.Align_h()) {
-				case Xop_lnki_align_h_.Left:		bfr.Add(Div_float_left)	.Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.Left:	bfr.Add(Div_float_left)	.Add_byte_nl();	div_align_exists = true; break;
 				case Xop_lnki_align_h_.Right:	bfr.Add(Div_float_right).Add_byte_nl();	div_align_exists = true; break;
-				case Xop_lnki_align_h_.None:		bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.None:	bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
 			}
-			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 			byte img_cls_tid = lnki.Border() == Bool_.Y_byte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
 			byte[] img_cls_other = lnki.Lnki_cls(); // PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3; DATE:2014-09-06
+			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 			if (lnki_link_tkn == Arg_nde_tkn.Null)		// full
-				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, lnki_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			else {										// thumb
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
 				byte[] link_arg = Xoa_ttl.Replace_spaces(link_tkn.Dat_to_bry(src));	// replace spaces with unders, else "/wiki/File:A b.ogg" instead of "A_b.ogg"; DATE:2015-11-27
+				if (Bry_.Has_at_bgn(link_arg, Xop_tkn_.Anchor_byte)) link_arg = Bry_.Add(ctx.Cur_page().Ttl().Page_db(), link_arg);
 				byte[] link_arg_html = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_arg, lnki_href);
+				byte[] xowa_title_bry = tmp_link_parser.Html_xowa_ttl();			// NOTE: xowa_title_bry will be link arg; [[File:A.png|link=file:///A.ogg]] -> A.ogg x> A.png
+				boolean a_href_is_file = true;
+				if (xowa_title_bry == null) {xowa_title_bry = lnki_ttl; a_href_is_file = false;}
 				link_arg = link_arg_html == null ? lnki_href: link_arg_html;		// if parse fails, then assign to lnki_href; EX:link={{{1}}}
-				link_arg = Gfo_url_encoder_.Href_qarg.Encode(link_arg);			// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
+				link_arg = Gfo_url_encoder_.Href_qarg.Encode(link_arg);				// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 				// if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl(); // DELETE: not sure why this is here; breaks test; DATE:2015-11-28
-				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, link_arg, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, link_arg, a_href_is_file, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(xowa_title_bry), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			}
-			if (div_align_exists) bfr.Add(Html_tag_.Div_rhs);	// close div from above
+			if (div_align_exists) bfr.Add(Gfh_tag_.Div_rhs);	// close div from above
 		}
-		if (lnki_halign == Xop_lnki_align_h_.Center) bfr.Add(Html_tag_.Div_rhs);
+		if (lnki_halign == Xop_lnki_align_h_.Center) bfr.Add(Gfh_tag_.Div_rhs);
 		tmp_bfr.Mkr_rls();
 	}
 	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
 		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, hctx, src, lnki) : Bry_.Empty;
 		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
+		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_img_cls_.Bry__none);
 		byte[] thumb = tmp_bfr.To_bry_and_clear();
 		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
 		return tmp_bfr.To_bry_and_rls();
@@ -164,11 +168,11 @@ public class Xoh_file_wtr__basic {
 	private byte[] Arg_content_audio(Xop_lnki_tkn lnki, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, int uid, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
 		byte[] info_btn = Bry_.Empty;
 		if (lnki.Media_icon()) {
-			html_fmtr.Html_thumb_part_info(scratch_bfr, uid, lnki_href, html_mgr.Img_media_info_btn());
+			html_fmtr.Html_thumb_part_info(scratch_bfr, uid, hctx.Mode_is_hdump(), lnki_href, html_mgr.Img_media_info_btn());
 			info_btn = scratch_bfr.To_bry_and_clear();
 		}
 		int play_btn_width = lnki.W(); if (play_btn_width < 1) play_btn_width = html_mgr.Img_thumb_width();	// if no width set width to default img width
-		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, hctx, src, lnki), Arg_play_btn(uid, play_btn_width, Play_btn_max_width, img_orig_src, lnki.Ttl().Page_txt()), info_btn);
+		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, hctx, src, lnki), Arg_play_btn(hctx.Mode_is_hdump(), uid, play_btn_width, Play_btn_max_width, img_orig_src, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki.Ttl().Page_txt())), info_btn);
 		return scratch_bfr.To_bry_and_clear();
 	}
 	private byte[] Arg_content_video(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_thumb, byte[] a_href, byte[] view_src, byte[] orig_src, byte[] img_alt) {
@@ -179,7 +183,9 @@ public class Xoh_file_wtr__basic {
 			caption_html = Arg_caption_div(ctx, hctx, src, lnki, uid, orig_src, a_href);
 			alt_html = Arg_alt_html(ctx, hctx, src, lnki);
 		}
-		html_fmtr.Html_thumb_file_video(scratch_bfr, Arg_play_btn(uid, play_btn_width, play_btn_width, orig_src, lnki.Ttl().Page_txt()), html_fmtr.Html_thumb_part_img(scratch_bfr, page, xfer_itm, lnki, uid, a_href, view_src, img_alt), caption_html, alt_html);
+		html_fmtr.Html_thumb_file_video(scratch_bfr, Arg_play_btn(hctx.Mode_is_hdump(), uid, play_btn_width, play_btn_width, orig_src, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki.Ttl().Page_txt()))
+			, html_fmtr.Html_thumb_part_img(scratch_bfr, hctx, page, src, xfer_itm, uid, a_href, view_src, img_alt)
+			, caption_html, alt_html);
 		return scratch_bfr.To_bry_and_clear();
 	}
 	private byte[] Arg_caption_div(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, byte[] img_orig_src, byte[] lnki_href) {
@@ -194,24 +200,24 @@ public class Xoh_file_wtr__basic {
 		return scratch_bfr.To_bry_and_clear();				
 	}	private byte[] msg_file_enlarge;
 	private Bfr_arg Arg_caption(Xop_ctx ctx, byte[] src, Xoh_wtr_ctx hctx_for_caption, Xop_lnki_tkn lnki) {
-		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr) : Bfr_arg_.Noop;
+		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr, Bool_.N) : Bfr_arg_.Noop;
 	}
 	public byte[] Arg_alt_text(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
-		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Alt, src, lnki.Alt_tkn().Val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr);
+		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Alt, src, lnki.Alt_tkn().Val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr, Bool_.N);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 
 	}		
 	private byte[] Arg_alt_html(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] alt_src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
-		media_alt_fmtr.Set(ctx, hctx, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr());
+		media_alt_fmtr.Set(ctx, hctx, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr(), Bool_.Y);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		media_alt_fmtr.Bfr_arg__add(tmp_bfr);
 		return tmp_bfr.To_bry_and_rls(); 
 	}
-	private byte[] Arg_play_btn(int uid, int width, int max_width, byte[] a_href, byte[] a_xowa_title) {
-		html_fmtr.Html_thumb_part_play(scratch_bfr, uid, width - 2, max_width, a_href, a_xowa_title, html_mgr.Img_media_play_btn());	// NOTE: -2 is fudge factor else play btn will jut out over video thumb; see Earth and ISS video
+	private byte[] Arg_play_btn(boolean mode_is_hdump, int uid, int width, int max_width, byte[] a_href, byte[] a_xowa_title) {
+		html_fmtr.Html_thumb_part_play(scratch_bfr, uid, mode_is_hdump, width - 2, max_width, a_href, a_xowa_title, html_mgr.Img_media_play_btn());	// NOTE: -2 is fudge factor else play btn will jut out over video thumb; see Earth and ISS video
 		return scratch_bfr.To_bry_and_clear();				
 	}
 	private static byte[] Arg_anchor_title(Bry_bfr tmp_bfr, byte[] src, Xop_lnki_tkn lnki, byte[] lnki_ttl, Xoh_lnki_title_fmtr anchor_title_wkr) {

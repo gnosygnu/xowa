@@ -39,6 +39,8 @@ public class Xoa_app_fxt {
 		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
 		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
 		Xoav_app rv = new Xoav_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_gui, op_sys, root_dir, root_dir.GenSubDir("file"), root_dir.GenSubDir("css"));
+		rv.Init_by_app(user_dir);
+		rv.Wiki_mgr().Add(new Xowv_wiki(rv, Xow_domain_itm_.Bry__home, user_dir));
 		return rv;
 	}
 	public static Xoae_app app_(String op_sys, Io_url root_dir) {

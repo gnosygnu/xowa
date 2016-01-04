@@ -26,7 +26,7 @@ public class Pfunc_filepath extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public int Id() {return Xol_kwd_grp_.Id_url_filepath;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_filepath().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = wiki.Ttl_parse(Xow_ns_.Tid__file, val_ary); if (ttl == null) return; // text is not valid ttl; exit;

@@ -21,12 +21,12 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_titleparts extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {// REF.MW:ParserFunctions_body.php
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		// get argx
 		int args_len = self.Args_len();
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == null) return; // no argx; return empty
 		Xoa_ttl argx_as_ttl = Xoa_ttl.new_(ctx.Wiki(), ctx.App().Msg_log_null(), argx, 0, argx.length); // transform to title in order to upper first, replace _, etc..
-		if (argx_as_ttl == null)	{bb.Add(argx); return;}	// NOTE: argx_as_ttl will be null if invalid, such as [[a|b]]; PAGE:en.w:owl and {{taxobox/showtaxon|Dinosauria}}
+		if (argx_as_ttl == null)	{bfr.Add(argx); return;}	// NOTE: argx_as_ttl will be null if invalid, such as [[a|b]]; PAGE:en.w:owl and {{taxobox/showtaxon|Dinosauria}}
 		else						argx = argx_as_ttl.Full_txt();
 
 		// get parts_len
@@ -34,7 +34,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 		int parts_len = parts_len_ary == Bry_.Empty ? Int_.Min_value : Bry_.To_int_or(parts_len_ary, Int_.Max_value);
 		if (parts_len == Int_.Max_value) {// len is not an int; EX: "a";
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Len_is_invalid, src, caller.Src_bgn(), caller.Src_end());
-			bb.Add(argx);
+			bfr.Add(argx);
 			return;
 		}
 
@@ -46,7 +46,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 			parts_bgn = 0;	// NOTE: do not return
 		}
 		else if (parts_bgn > 0) parts_bgn -= List_adp_.Base1;	// adjust for base1
-		bb.Add(TitleParts(argx, parts_len, parts_bgn));
+		bfr.Add(TitleParts(argx, parts_len, parts_bgn));
 	}
 	private byte[] TitleParts(byte[] src, int parts_len, int parts_bgn) {
 		// find dlm positions; EX: ab/cde/f/ will have -1,2,6,8

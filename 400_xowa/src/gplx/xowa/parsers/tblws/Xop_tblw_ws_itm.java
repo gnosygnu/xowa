@@ -32,8 +32,8 @@ public class Xop_tblw_ws_itm {
 		trie_itm(rv, Type_tr, Xop_tblw_lxr_ws.Hook_tr);
 		trie_itm(rv, Type_th, Xop_tblw_lxr_ws.Hook_th);
 		trie_itm(rv, Type_tc, Xop_tblw_lxr_ws.Hook_tc);
-		trie_itm(rv, Type_td, Bry_.new_bytes(Byte_ascii.Pipe));
-		trie_itm(rv, Type_nl, Bry_.new_bytes(Byte_ascii.Nl));
+		trie_itm(rv, Type_td, Byte_ascii.Pipe_bry);
+		trie_itm(rv, Type_nl, Byte_ascii.Nl_bry);
 		trie_itm_xnde(rv, Xop_xnde_tag_.Tag_table);
 		trie_itm_xnde(rv, Xop_xnde_tag_.Tag_tr);
 		trie_itm_xnde(rv, Xop_xnde_tag_.Tag_td);

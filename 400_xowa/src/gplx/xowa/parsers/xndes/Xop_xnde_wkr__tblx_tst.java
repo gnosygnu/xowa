@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_xnde_wkr__tblx_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Table() {
 		fxt.Test_parse_page_wiki("a<table><tr><td>b</td></tr></table>c"
@@ -61,7 +61,7 @@ public class Xop_xnde_wkr__tblx_tst {
 		( "<table>"
 		, "  <tr>"
 		, "    <td>"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"B\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/150px.png\" width=\"150\" height=\"0\" /></a>"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"B\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/150px.png\" width=\"150\" height=\"0\" /></a>"
 		, "    </td>"
 		, "  </tr>"
 		, "</table>"

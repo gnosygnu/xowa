@@ -25,17 +25,17 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 		Process_adp.ini_(this, usr_dlg, app_convert_svg_to_png		, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}inkscape\\inkscape", "-z -w ~{width} -f \"~{source}\" -e \"~{target}\"", "source", "target", "width").Thread_kill_name_("inkscape.exe");	// // -z=without-gui; -w=width; -f=file -e=export-png
 		Process_adp.ini_(this, usr_dlg, app_convert_tex_to_dvi		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\latex", "-quiet -output-directory=~{temp_dir} -job-name=xowa_temp ~{tex_file}", "tex_file", "temp_dir");
 		Process_adp.ini_(this, usr_dlg, app_convert_dvi_to_png		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  2 * 60, "~{<>bin_plat_dir<>}miktex\\miktex\\bin\\dvipng", "~{dvi_file} -o ~{png_file} -q* -T tight -bg Transparent", "dvi_file", "png_file", "temp_dir");
-		Process_adp.ini_(this, usr_dlg, app_convert_djvu_to_tiff		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}djvulibre\\ddjvu", "-format=tiff -page=1 \"~{source}\" \"~{target}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_convert_djvu_to_tiff	, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}djvulibre\\ddjvu", "-format=tiff -page=1 \"~{source}\" \"~{target}\"", "source", "target");
 		Process_adp.ini_(this, usr_dlg, app_decompress_bz2			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
-		Process_adp.ini_(this, usr_dlg, app_decompress_bz2_by_stdout	, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -so \"~{src}\"", "src");	// x=extract; -so=stdout
+		Process_adp.ini_(this, usr_dlg, app_decompress_bz2_by_stdout, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -so \"~{src}\"", "src");	// x=extract; -so=stdout
 		Process_adp.ini_(this, usr_dlg, app_decompress_zip			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
 		Process_adp.ini_(this, usr_dlg, app_decompress_gz			, cmd_eval, Process_adp.Run_mode_sync_timeout	,  0	 , "~{<>bin_plat_dir<>}7-zip\\7za", "x -y \"~{src}\" -o\"~{trg_dir}\"", "src", "trg", "trg_dir");	// x=extract; -y=yes on all queries; -o=output_dir
 		Process_adp.ini_(this, usr_dlg, app_lua						, cmd_eval, Process_adp.Run_mode_async			,  0	 , "~{<>bin_plat_dir<>}lua\\lua", "", "");
-		Process_adp.ini_(this, usr_dlg, app_lilypond					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\lilypond.exe", "\"-dsafe=#t\" -dbackend=ps --png --header=texidoc -dmidi-extension=midi \"~{file}\"", "file");
+		Process_adp.ini_(this, usr_dlg, app_lilypond				, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\lilypond.exe", "\"-dsafe=#t\" -dbackend=ps --png --header=texidoc -dmidi-extension=midi \"~{file}\"", "file");
 		Process_adp.ini_(this, usr_dlg, app_abc2ly					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}lilypond\\usr\\bin\\python.exe", "abc2ly.py -s \"--output=~{target}\" \"~{source}\"", "source", "target");
-		Process_adp.ini_(this, usr_dlg, app_trim_img					, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "-trim \"~{source}\"  \"~{target}\"", "source", "target");
+		Process_adp.ini_(this, usr_dlg, app_trim_img				, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}imagemagick\\convert", "-trim \"~{source}\"  \"~{target}\"", "source", "target");
 		Process_adp.ini_(this, usr_dlg, app_convert_midi_to_ogg		, cmd_eval, Process_adp.Run_mode_sync_timeout	,  1 * 60, "~{<>bin_plat_dir<>}timidity\\timidity", "-Ov \"--output-file=~{target}\" \"~{source}\"", "source", "target");
-		Process_adp.ini_(this, usr_dlg, app_view_web					, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
+		Process_adp.ini_(this, usr_dlg, app_view_web				, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
 		Process_adp.ini_(this, usr_dlg, app_view_text				, cmd_eval, Process_adp.Run_mode_async			,  0	 , "cmd", "/c start \"~{url}\"", "url");
 		int cmds_view_file_by_ext_len = cmds_view_file_by_ext.length;
 		for (int i= 0; i < cmds_view_file_by_ext_len; i++) {
@@ -56,11 +56,11 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 	public Process_adp App_decompress_zip()				{return app_decompress_zip;}			private Process_adp app_decompress_zip = new Process_adp();
 	public Process_adp App_decompress_gz()				{return app_decompress_gz;}				private Process_adp app_decompress_gz  = new Process_adp();
 	public Process_adp App_decompress_bz2_by_stdout()	{return app_decompress_bz2_by_stdout;}	private Process_adp app_decompress_bz2_by_stdout = new Process_adp();
-	public Process_adp App_lua()							{return app_lua;}						private Process_adp app_lua = new Process_adp();
+	public Process_adp App_lua()						{return app_lua;}						private Process_adp app_lua = new Process_adp();
 	public Process_adp App_lilypond()					{return app_lilypond;}					private Process_adp app_lilypond = new Process_adp();
 	public Process_adp App_abc2ly()						{return app_abc2ly;}					private Process_adp app_abc2ly = new Process_adp();
 	public Process_adp App_trim_img()					{return app_trim_img;}					private Process_adp app_trim_img = new Process_adp();
-	public Process_adp App_convert_midi_to_ogg()			{return app_convert_midi_to_ogg;}		private Process_adp app_convert_midi_to_ogg = new Process_adp();
+	public Process_adp App_convert_midi_to_ogg()		{return app_convert_midi_to_ogg;}		private Process_adp app_convert_midi_to_ogg = new Process_adp();
 	public Process_adp App_by_ext(String ext)			{return App_by_ext_key(String_.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_query_img_size))				return app_query_img_size;

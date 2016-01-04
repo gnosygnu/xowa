@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_hr_lxr_basic_tst {
-	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic()					{fxt.Test_parse_page_wiki("----"				, fxt.tkn_hr_(0, 4));}
 	@Test   public void Basic_w_nl()			{fxt.Test_parse_page_wiki("\n----a"				, fxt.tkn_para_blank_(0), fxt.tkn_hr_(0, 5), fxt.tkn_txt_(5, 6));}
 	@Test   public void Many()					{fxt.Test_parse_page_wiki("---------"			, fxt.tkn_hr_(0, 9).Hr_len_(9));}

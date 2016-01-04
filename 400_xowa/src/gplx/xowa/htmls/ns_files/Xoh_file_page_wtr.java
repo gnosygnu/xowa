@@ -52,7 +52,7 @@ public class Xoh_file_page_wtr {
 	public Bry_fmtr	Html_main_img() {return html_main_img;} private final Bry_fmtr html_main_img = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <a href=\"~{orig_href}\" xowa_title=\"~{thumb_name}\">"
-	, "    <img id=\"xowa_file_img_~{elem_id}\" alt=\"~{thumb_alt}\" src=\"~{thumb_href}\" width=\"~{thumb_width}\" height=\"~{thumb_height}\" />"
+	, "    <img id=\"xoimg_~{elem_id}\" alt=\"~{thumb_alt}\" src=\"~{thumb_href}\" width=\"~{thumb_width}\" height=\"~{thumb_height}\" />"
 	, "  </a>"
 	, "  <div class=\"mw-filepage-resolutioninfo\">Size of this preview: "
 	, "    <a href=\"~{thumb_href}\" class=\"mw-thumbnail-link\" xowa_title=\"~{thumb_name}\">"
@@ -90,7 +90,7 @@ public class Xoh_file_page_wtr {
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <div>" 
 	, "    <a href=\"~{lnki_href}\" class=\"~{lnki_class}\" title=\"~{xowa_title}\">"
-	, "      <img id=\"xowa_file_img_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
+	, "      <img id=\"xoimg_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
 	, "    </a>"
 	, "  </div>"
 	, "  <div>" 

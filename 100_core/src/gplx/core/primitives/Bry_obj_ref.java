@@ -30,11 +30,8 @@ public class Bry_obj_ref implements gplx.core.brys.Bfr_arg {
 		Bry_obj_ref comp = (Bry_obj_ref)obj;
 		return Bry_.Match(val, val_bgn, val_end, comp.val, comp.val_bgn, comp.val_end);	
 	}	
-	public void Bfr_arg__clear() {val = null;}
-	public boolean Bfr_arg__exists() {return val != null;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (Bfr_arg__exists())
-			bfr.Add_mid(val, val_bgn, val_end);
+		bfr.Add_mid(val, val_bgn, val_end);
 	}
 	public static int CalcHashCode(byte[] ary, int bgn, int end) {
 		int rv = 0;
@@ -44,4 +41,5 @@ public class Bry_obj_ref implements gplx.core.brys.Bfr_arg {
 	}
 	public static Bry_obj_ref New_empty()		{return New(Bry_.Empty);}
         public static Bry_obj_ref New(byte[] val)	{return new Bry_obj_ref().Val_(val);}
+        public static Bry_obj_ref New(String val)	{return new Bry_obj_ref().Val_(Bry_.new_u8(val));}
 }

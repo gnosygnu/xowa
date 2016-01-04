@@ -70,7 +70,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) return;
 		Mwh_atr_itm[] atrs = Xox_xnde_.Xatr__set(wiki, this, Listing_xatrs.Key_hash, src, xnde);
 		Init_args();
-		Html_wtr hwtr = xtn_mgr.Hwtr();
+		Gfh_wtr hwtr = xtn_mgr.Hwtr();
 		if (!Bld_by_template(xnde, atrs, src)) {
 			Bld_by_args(xtn_mgr, hwtr, xnde, src);
 			html_output = hwtr.To_bry_and_clear();
@@ -106,7 +106,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
 		return true;
 	}
-	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Html_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
+	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Gfh_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
 		wtr.Nde_full(Tag_strong, xatr_name);							// <strong>name</strong>
 		if (xatr_url != null)
 			wtr.Nde_full_atrs(Tag_a, wtr.To_bry_and_clear(), false

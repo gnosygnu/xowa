@@ -21,7 +21,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.langs
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_lnki_wkr__basic_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_wiki("[[a]]", fxt.tkn_lnki_().Trg_tkn_(fxt.tkn_arg_val_txt_(2, 3)));
 	}
@@ -210,14 +210,9 @@ public class Xop_lnki_wkr__basic_tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
-		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
 		, "    <div class=\"thumbcaption\">"
-		, "      <div class=\"magnify\">"
-		, "        <a href=\"/wiki/File:A.png\" class=\"inte" +"rnal\" title=\"Enlarge\">"
-		, "          <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
-		, "        </a>"
-		, "      </div>"
-		, "      b <sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"inte" +"rnal\" title=\"Enlarge\"></a></div>b <sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
 		, "    </div>"
 		, "  </div>"
 		, "</div>"
@@ -265,24 +260,24 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Encoded_url() {	// PURPOSE.fix: url-encoded characters broke parser when embedded in link; DATE:2013-03-01
 		fxt.Init_xwiki_add_user_("commons.wikimedia.org");
 		fxt.Test_parse_page_wiki_str("[[File:A.png|link=//commons.wikimedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0?uselang=ru|b]]"
-		, "<a href=\"/site/commons.wikimedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0?uselang=ru\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>");
+		, "<a href=\"/site/commons.wikimedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0?uselang=ru\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>");
 	}
 	@Test  public void Link__invalid() {	// PURPOSE.fix: do not render invalid text; EX: link={{{1}}}; [[Fil:Randers_-_Hadsund_railway.png|120x160px|link={{{3}}}|Randers-Hadsund Jernbane]]; DATE:2013-03-04
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link={{{1}}}|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link__html_ent() {// PURPOSE:html entities should be converted to chars; EX:&nbsp; -> _; DATE:2013-12-16
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|link=b&nbsp;c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/B_c\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		( "<a href=\"/wiki/B_c\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		));
 	}
 	@Test  public void Link__encode() {// PURPOSE:spaces should become underscore; DATE:2015-11-27
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|link=File:A b ç.ogg]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/File:A_b_%C3%A7.ogg\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		( "<a href=\"/wiki/File:A_b_%C3%A7.ogg\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		));
 	}
 	@Test  public void Href_anchor_leading_space() {	// PURPOSE: ?action=edit should be encoded; DATE:2013-02-10

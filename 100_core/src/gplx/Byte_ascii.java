@@ -108,10 +108,12 @@ public class Byte_ascii {
 	, Angle_end_bry			= new byte[] {Byte_ascii.Angle_end}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
+	, Semic_bry				= new byte[] {Byte_ascii.Semic}
 	, Eq_bry				= new byte[] {Byte_ascii.Eq}
 	, Amp_bry				= new byte[] {Byte_ascii.Amp}
 	, Lt_bry				= new byte[] {Byte_ascii.Lt}
 	, Gt_bry				= new byte[] {Byte_ascii.Gt}
+	, Question_bry			= new byte[] {Byte_ascii.Question}
 	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}
 	, Brack_end_bry			= new byte[] {Byte_ascii.Brack_end}
 	, Apos_bry				= new byte[] {Byte_ascii.Apos}

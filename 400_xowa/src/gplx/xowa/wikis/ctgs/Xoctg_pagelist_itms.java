@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.users.history.*;
-public class Xoctg_pagelist_itms extends gplx.core.brys.Bfr_arg_base {
+public class Xoctg_pagelist_itms implements gplx.core.brys.Bfr_arg {
 	private Xoh_href_wtr href_wtr; private Xou_history_mgr history_mgr; private Bry_fmtr fmtr_itm;
 	public void Init_app(Xoae_app app, Bry_fmtr fmtr_itm) {
 		this.href_wtr = app.Html__href_wtr();
@@ -30,7 +30,7 @@ public class Xoctg_pagelist_itms extends gplx.core.brys.Bfr_arg_base {
 	public void Init_wiki(Xowe_wiki wiki, Xoh_wtr_ctx hctx) {this.wiki = wiki; this.hctx = hctx;} private Xowe_wiki wiki; private Xoh_wtr_ctx hctx;
 	public void Itms_clear() 				{itms.Clear();} private List_adp itms = List_adp_.new_();	
 	public void Itms_add(Xowd_page_itm page) 	{itms.Add(page);}	
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)itms.Get_at(i);

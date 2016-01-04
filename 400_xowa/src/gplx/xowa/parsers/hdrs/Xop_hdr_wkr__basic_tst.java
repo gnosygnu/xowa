@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_hdr_wkr__basic_tst {
-	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void H2()							{fxt.Test_parse_page_wiki_str("==a=="				, "<h2>a</h2>\n");}
 	@Test  public void H3()							{fxt.Test_parse_page_wiki_str("===a==="				, "<h3>a</h3>\n");}

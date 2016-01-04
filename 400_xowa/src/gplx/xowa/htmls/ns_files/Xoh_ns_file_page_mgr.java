@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-public class Xoh_ns_file_page_mgr extends gplx.core.brys.Bfr_arg_base {
+public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private Xow_repo_mgr repo_mgr;
@@ -45,7 +45,7 @@ public class Xoh_ns_file_page_mgr extends gplx.core.brys.Bfr_arg_base {
 			this.file_size_bry = Bry_.new_a7(gplx.core.ios.Io_size_.To_str(file_size));
 		}
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
-			? String_.Format(Str_commons_notice, gplx.langs.htmls.Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
+			? String_.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
 			: "";
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, commons_notice);
 	}
@@ -56,7 +56,7 @@ public class Xoh_ns_file_page_mgr extends gplx.core.brys.Bfr_arg_base {
 		this.xfer_itm = xfer_itm;  this.file_size_bry = file_size_bry;
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, "");
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		alt_wtr.Init_by_fmtr(repo_mgr, xfer_itm, html_wtr);
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
 		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt());

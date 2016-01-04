@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.geodata; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Geo_coordinates_func_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test  public void Basic()				{fxt.Test_parse_tmpl_str_test("{{#coordinates:1|2}}"									, "{{test}}"	, "");}
 }

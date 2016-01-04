@@ -51,7 +51,7 @@ public class Xop_link_parser {
 				html_anchor_rel = domain_itm.Domain_type().Tid() == Xow_domain_tid_.Int__other ? Xoh_lnki_consts.Tid_a_rel_nofollow : Xoh_lnki_consts.Tid_a_rel_none;	// rel=nofollow if not WM wiki; DATE:2015-11-19
 				break;
 			case Gfo_protocol_itm.Tid_file:		// "file:///" or "File:A.png"
-				int proto_len = tmp_url.Protocol_bry().length;
+				int proto_len = Gfo_protocol_itm.Bry_file.length;							// "file:"
 				if (proto_len + 1 < raw_len && raw[proto_len + 1] == Byte_ascii.Slash) {	// next char is slash, assume xfer_itm refers to protocol; EX: file:///C/A.png
 					int slash_pos = Bry_find_.Find_bwd(raw, Byte_ascii.Slash);
 					if (slash_pos != Bry_find_.Not_found)	// set xowa_title to file_name; TODO: call Xoa_url.build; note that this will fail sometimes when (a) xfer_itm is very long (File:ReallyLongName will be shortened to 128 chars) or (b) xfer_itm has invalid windows characters (EX:File:a"b"c.jpg)
@@ -80,14 +80,14 @@ public class Xop_link_parser {
 		boolean page_ttl_is_valid = page_ttl != null;
 		if (page_ttl_is_valid) {
 			Xow_xwiki_itm xwiki_itm = page_ttl.Wik_itm();
-			if (xwiki_itm != null) {				// is alias; set wiki, page
+			if (xwiki_itm != null) {					// is alias; set wiki, page
 				wiki_bry = xwiki_itm.Domain_bry();
 				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key_bry().length + 1, page_bry.length);	// +1 for ":"
 			}
-			else									// is regular page; use ttl.Full_db() to normalize; EX: &nbsp; -> _
-				page_bry = page_ttl.Full_db();
+			else										// is regular page; use ttl.Full_db() to normalize; EX: &nbsp; -> _
+				page_bry = page_ttl.Full_db_w_anch();	// add anch; PAGE:en.w:History_of_Nauru; DATE:2015-12-27
 		}
-		if (Bry_.Eq(wiki_bry, wiki.Domain_bry()))	// NOTE: check against wiki.Key_bry() again; EX: in en_wiki, and http://commons.wikimedia.org/wiki/w:A
+		if (Bry_.Eq(wiki_bry, wiki.Domain_bry()))		// NOTE: check against wiki.Key_bry() again; EX: in en_wiki, and http://commons.wikimedia.org/wiki/w:A
 			tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(page_bry);
 		else
 			tmp_bfr.Add(Xoh_href_.Bry__site).Add(wiki_bry).Add(Xoh_href_.Bry__wiki).Add(page_bry);

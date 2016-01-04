@@ -15,9 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-//namespace gplx.xowa.htmls.core.wkrs.xndes.styles {
-//	using gplx.langs.htmls.parsers;
-//	using gplx.xowa.htmls.core.hzips;
+package gplx.xowa.htmls.core.wkrs.xndes.styles; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+import gplx.langs.htmls.docs.*;
+import gplx.xowa.htmls.core.hzips.*;
 //	class Hz_regy_load {
 //		public void Load(byte[] src, int bgn, int end) {
 //			int pos = bgn;
@@ -70,7 +70,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		public Hz_tag_itm Tags__get_or_new(int name_id) {
 //			return null;
 //		}
-//		public Hz_atr_itm Atrs__get_or_new(byte[] key) {
+//		public Xohz_style_itm Atrs__get_or_new(byte[] key) {
 //			return null;
 //		}
 //		public void Tags__add(byte[] key) {
@@ -105,36 +105,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			*/
 //		}
 //		private void Save_tag(Bry_bfr bfr, Hz_tag_itm ztag) {
-//			Hz_atr_itm[] atrs = ztag.Atrs();
+//			Xohz_style_itm[] atrs = ztag.Atrs();
 //			int len = atrs.length;
 //			Xoh_hzip_int_.Encode(1, bfr, ztag.Id());
 //			for (int i = 0; i < len; ++i) {
-//				Hz_atr_itm atr = atrs[i];
+//				Xohz_style_itm atr = atrs[i];
 //				Save_atr(bfr, atr, Byte_ascii.Escape);
 //			}
 //			bfr.Add_byte_nl();
 //		}
-//		private void Save_atr(Bry_bfr bfr, Hz_atr_itm atr, byte dlm) {
+//		private void Save_atr(Bry_bfr bfr, Xohz_style_itm atr, byte dlm) {
 //			// Xoh_hzip_int_.Encode(1, bfr, atr.Id());
-//			Hz_val_itm[] vals = atr.Itms();
+//			Xohz_style_val[] vals = atr.Itms();
 //			int len = vals.length;
 //			for (int i = 0; i < len; ++i) {
-//				Hz_val_itm val = vals[i];
+//				Xohz_style_val val = vals[i];
 //				bfr.Add(atr.Text()).Add_byte(dlm);
 //			}
 //		}
 //	}
 //	class Hz_tag_hzip {
 //		private static final byte[] Hook_tag = Bry_.new_a7("~z");
-//		public void Encode(Bry_bfr bfr, Hz_regy regy, Html_tag htag) {
+//		public void Encode(Bry_bfr bfr, Hz_regy regy, Gfh_tag htag) {
 //			Hz_tag_itm ztag = regy.Tags__get_or_new(htag.Name_id());
 //
 //			bfr.Add(Hook_tag);
 //			Xoh_hzip_int_.Encode(1, bfr, ztag.Id());
 //			int len = htag.Atrs__len();
 //			for (int i = 0; i < len; ++i) {
-//				Html_atr hatr = htag.Atrs__get_at(i);
-//				Hz_atr_itm zatr = regy.Atrs__get_or_new(hatr.Key());
+//				Gfh_atr hatr = htag.Atrs__get_at(i);
+//				Xohz_style_itm zatr = regy.Atrs__get_or_new(hatr.Key());
 //				Xoh_hzip_int_.Encode(1, bfr, zatr.Id());
 //				byte[] hval = hatr.Val();
 //				if (zatr.Indexable())
@@ -146,44 +146,43 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //	}
 //	class Hz_tag_itm {
 //		private List_adp atr_list;
-//		public Hz_tag_itm(int id, byte[] text, boolean scope_is_doc, boolean indexable) {
-//			this.id = id; this.text = text; this.scope_is_doc = scope_is_doc; this.indexable = indexable;
+//		public Hz_tag_itm(int uid, byte[] text, boolean scope_is_doc, boolean indexable) {
+//			this.uid = uid; this.text = text; this.scope_is_doc = scope_is_doc; this.indexable = indexable;
 //		}
-//		public int Id() {return id;} private int id;
+//		public int Id() {return uid;} private int uid;
 //		public byte[] Text() {return text;} private byte[] text;
 //		public boolean Scope_is_doc() {return scope_is_doc;} private boolean scope_is_doc;
 //		public boolean Indexable() {return indexable;} private boolean indexable;
-//		public Hz_atr_itm[] Atrs() {if (atr_ary_is_dirty) atr_ary = (Hz_atr_itm[])atr_list.To_ary(typeof(Hz_atr_itm)); return atr_ary;} private Hz_atr_itm[] atr_ary; private boolean atr_ary_is_dirty = false;
+//		public Xohz_style_itm[] Atrs() {if (atr_ary_is_dirty) atr_ary = (Xohz_style_itm[])atr_list.To_ary(typeof(Xohz_style_itm)); return atr_ary;} private Xohz_style_itm[] atr_ary; private boolean atr_ary_is_dirty = false;
 //		private void Add(byte[] text) {
 //			if (atr_list == null) atr_list = List_adp_.new_();
-//			atr_list.Add(new Hz_atr_itm(atr_list.Count(), text, Bool_.Y, Bool_.Y));
+//			atr_list.Add(new Xohz_style_itm(atr_list.Count(), text, Bool_.Y, Bool_.Y));
 //		}
 //	}
-//	class Hz_atr_itm {
+//	class Xohz_style_itm {
 //		private List_adp list;
-//		public Hz_atr_itm(int id, byte[] text, boolean scope_is_doc, boolean indexable) {
-//			this.id = id; this.text = text; this.scope_is_doc = scope_is_doc; this.indexable = indexable;
+//		public Xohz_style_itm(int uid, byte[] key, boolean scope_is_doc, boolean indexable) {
+//			this.uid = uid; this.key = key; this.scope_is_doc = scope_is_doc; this.indexable = indexable;
 //		}
-//		public int Id() {return id;} private int id;
-//		public byte[] Text() {return text;} private byte[] text;
+//		public int Uid() {return uid;} private int uid;
+//		public byte[] Text() {return key;} private byte[] key;
 //		public boolean Scope_is_doc() {return scope_is_doc;} private boolean scope_is_doc;
 //		public boolean Indexable() {return indexable;} private boolean indexable;
-//		public Hz_val_itm[] Itms() {if (ary_is_dirty) ary = (Hz_val_itm[])list.To_ary(typeof(Hz_val_itm)); return ary;} private Hz_val_itm[] ary; private boolean ary_is_dirty = false;
-//		private void Itms__add(byte[] text) {
+//		public Xohz_style_val[] Itms() {if (ary_is_dirty) ary = (Xohz_style_val[])list.To_ary(typeof(Xohz_style_val)); return ary;} private Xohz_style_val[] ary; private boolean ary_is_dirty = false;
+//		private void Itms__add(byte[] key) {
 //			if (list == null) list = List_adp_.new_();
 //			ary_is_dirty = true;
-//			list.Add(new Hz_val_itm(list.Count(), text, Bool_.Y));
+//			list.Add(new Xohz_style_val(list.Count(), key, Bool_.Y));
 //		}
-//		public void Write(Bry_bfr bfr, byte[] text) {
+//		public void Write(Bry_bfr bfr, byte[] key) {
 //			Xoh_hzip_int_.Encode(1, bfr, 1);
 //		}
 //	}
-//	class Hz_val_itm {
-//		public Hz_val_itm(int id, byte[] text, boolean scope_is_doc) {
-//			this.id = id; this.text = text; this.scope_is_doc = scope_is_doc;
+//	class Xohz_style_val {
+//		public Xohz_style_val(int uid, byte[] txt, boolean scope_is_doc) {
+//			this.uid = uid; this.txt = txt; this.scope_is_doc = scope_is_doc;
 //		}
-//		public int Id() {return id;} private int id;
-//		public byte[] Text() {return text;} private byte[] text;
+//		public int Uid() {return uid;} private final int uid;
+//		public byte[] Txt() {return txt;} private final byte[] txt;
 //		public boolean Scope_is_doc() {return scope_is_doc;} private boolean scope_is_doc;
 //	}
-//}

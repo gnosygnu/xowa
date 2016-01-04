@@ -30,7 +30,7 @@ public class Xoh_anch_cls_ {
 	  Bry__image			= Bry_.new_a7(Str__image)
 	;
 	private static final byte[]
-	  Html__image			= Bry_.Add(Html_bldr_.Bry__cls__nth, Bry__image)
+	  Html__image			= Bry_.Add(Gfh_bldr_.Bry__cls__nth, Bry__image)
 	;
 	public static final Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__image	, Tid__image)

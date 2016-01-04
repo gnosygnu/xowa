@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xot_invk_wkr_basic_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Basic() {
 		fxt.Test_parse_page_tmpl("{{a}}", fxt.tkn_tmpl_invk_w_name(0, 5, 2, 3));

@@ -24,9 +24,9 @@ public class Bfr_arg__wrapper implements Bfr_arg {
 	}
 	public Bfr_arg__wrapper Set(Bfr_arg v)		{inner = v; return this;}
 	public void Bfr_arg__clear()				{this.Clear();}
-	public boolean Bfr_arg__exists()				{return inner != Bfr_arg_.Noop;}
+	public boolean Bfr_arg__missing()				{return inner == Bfr_arg_.Noop;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (!Bfr_arg__exists()) return;
+		if (Bfr_arg__missing()) return;
 		inner.Bfr_arg__add(bfr);
 	}
 }

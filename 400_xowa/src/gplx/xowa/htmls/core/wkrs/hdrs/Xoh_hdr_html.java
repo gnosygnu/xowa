@@ -42,7 +42,7 @@ public class Xoh_hdr_html {
 		if (hdr_len > 0) {													// NOTE: need to check hdr_len b/c it could be dangling
 			if (hdr.Hdr_end_manual() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Hdr_end_manual());	// '='
 			if (cfg.Toc__show())
-				bfr.Add(Html_tag_.Span_rhs);								// '</span>'
+				bfr.Add(Gfh_tag_.Span_rhs);									// '</span>'
 			bfr.Add(Bry__hdr_rhs_bgn).Add_int(hdr_len, 1, 1);				// '</h', '2'
 			bfr.Add(Bry__hdr_rhs_end);										// '>\n'
 		}

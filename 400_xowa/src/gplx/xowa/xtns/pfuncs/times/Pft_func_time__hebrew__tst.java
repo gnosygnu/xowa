@@ -29,7 +29,7 @@ public class Pft_func_time__hebrew__tst {
 	@Test   public void Numeral__empty()		{fxt.Test_parse("{{#time:xh}}"					, "");}
 	@Test   public void Numeral_many()			{fxt.Test_parse("{{#time:xhxjj xjx xhxjY|28-08-1608 + 341 days}}"	, "ד'  ה'שס\"ט");}
 	@Test   public void Numeral__year()	{
-		String s = String_.new_u8(Bry_.new_ints(215, 148, 39, 215, 170, 215, 169, 215, 153, 34, 215, 152));	// ה'תש"ך 
+		String s = String_.new_u8(Bry_.New_by_ints(215, 148, 39, 215, 170, 215, 169, 215, 153, 34, 215, 152));	// ה'תש"ך 
 		fxt.Test_parse("{{#time:xhxjY|1959}}", s); // NOTE: 1959 chosen b/c it will choose the first char from the end_trie; .Add_str_str("כ", "ך")
 	} 
 }

@@ -37,7 +37,7 @@ public class Xoh_head_wtr {
 	public void Write_css_style_bgn() {
 		reset_bgn = bfr.Len();
 		Write_nl_and_indent();
-		bfr.Add(Html_tag_.Style_lhs_w_type);
+		bfr.Add(Gfh_tag_.Style_lhs_w_type);
 		Indent_add();
 		reset_end = bfr.Len();
 	}	
@@ -45,7 +45,7 @@ public class Xoh_head_wtr {
 		Indent_del();
 		if (Reset()) return;
 		Write_nl_and_indent();
-		bfr.Add(Html_tag_.Style_rhs);
+		bfr.Add(Gfh_tag_.Style_rhs);
 	}
 	public void Write_css_style_ary(byte[][] ary) {
 		int len = ary.length;
@@ -74,7 +74,7 @@ public class Xoh_head_wtr {
 	public void Write_js_script_bgn() {
 		reset_bgn = bfr.Len();
 		Write_nl_and_indent();
-		bfr.Add(Html_tag_.Script_lhs_w_type);
+		bfr.Add(Gfh_tag_.Script_lhs_w_type);
 		Indent_add();
 		reset_end = bfr.Len();
 	}	
@@ -82,7 +82,7 @@ public class Xoh_head_wtr {
 		Indent_del();
 		if (Reset()) return;
 		Write_nl_and_indent();
-		bfr.Add(Html_tag_.Script_rhs);
+		bfr.Add(Gfh_tag_.Script_rhs);
 	}
 	public void Write_js_head_global_bgn() {
 		reset_bgn = bfr.Len();

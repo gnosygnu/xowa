@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.core.brys.fmtrs.*;
-class Xoa_sitelink_grp_wtr extends gplx.core.brys.Bfr_arg_base {
+class Xoa_sitelink_grp_wtr implements gplx.core.brys.Bfr_arg {
 	private final Xoa_sitelink_itm_wtr itm_wtr = new Xoa_sitelink_itm_wtr();
 	private Xoa_sitelink_grp_mgr mgr; 
 	public void Init_by_app(Xoa_app app) {itm_wtr.Init_by_app(app);}
 	public Xoa_sitelink_grp_wtr Fmt__init(Xoa_sitelink_grp_mgr mgr) {this.mgr = mgr; return this;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = mgr.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoa_sitelink_grp grp = mgr.Get_at(i);

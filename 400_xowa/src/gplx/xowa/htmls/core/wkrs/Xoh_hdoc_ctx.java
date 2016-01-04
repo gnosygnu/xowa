@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.apps.urls.*;
-import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
 import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;	
 public class Xoh_hdoc_ctx {
 	private byte[] fsys__file;
 	public byte[]					Fsys__root()		{return fsys__root;} private byte[] fsys__root;
@@ -32,10 +32,15 @@ public class Xoh_hdoc_ctx {
 	public boolean						Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
 	public Xoa_file_mgr				File__mgr()			{return file__mgr;} private final Xoa_file_mgr file__mgr = new Xoa_file_mgr();
 	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final Xof_url_bldr file__url_bldr = new Xof_url_bldr();
-	public Xoh_hzip_wkr_mgr			Wkr_mkr()			{return wkr_mgr;} private final Xoh_hzip_wkr_mgr wkr_mgr = new Xoh_hzip_wkr_mgr();
 	public byte[]					Page__url()			{return page__url;} private byte[] page__url;
+	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
+	public Xoh_pool_mgr__data		Pool_mgr__data()	{return pool_mgr__data;} private final Xoh_pool_mgr__data pool_mgr__data = new Xoh_pool_mgr__data();
+	public Xoh_pool_mgr__wtr		Pool_mgr__wtr()		{return pool_mgr__wtr;} private final Xoh_pool_mgr__wtr pool_mgr__wtr = new Xoh_pool_mgr__wtr();
 	public Xoh_stat_itm				Hzip__stat()		{return hzip__stat;} private final Xoh_stat_itm hzip__stat = new Xoh_stat_itm();
-	public int						Lnki__uid__nxt()	{return ++lnki__uid;} private int lnki__uid; // NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
+	public Xohz_tag_regy			Hzip__xnde__regy()	{return hzip__xnde__regy;} private final Xohz_tag_regy hzip__xnde__regy = Xohz_tag_regy_.New_dflt();
+	public Xoh_xnde_dict_reg		Hzip__xnde__dict()	{return hzip__xnde__dict;} private final Xoh_xnde_dict_reg hzip__xnde__dict = new Xoh_xnde_dict_reg();
+	public int						Uid__lnki_nxt()		{return ++uid__lnki;} private int uid__lnki;
+	public int						Uid__gly__nxt()		{return ++uid__gly;} private int uid__gly;
 	public boolean						Mode_is_diff()		{return mode_is_diff;} private boolean mode_is_diff;		public void Mode_is_diff_(boolean v) {mode_is_diff = v;}
 	public void Init_by_app(Xoa_app app) {
 		Xoa_fsys_mgr fsys_mgr = app.Fsys_mgr();
@@ -43,7 +48,7 @@ public class Xoh_hdoc_ctx {
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
-		wkr_mgr.Init();
+		pool_mgr__hzip.Init();
 	}
 	public void Init_by_page(Xow_wiki wiki, byte[] page_url) {
 		if (fsys__root == null) Init_by_app(wiki.App());	// LAZY INIT
@@ -56,7 +61,8 @@ public class Xoh_hdoc_ctx {
 	}		
 	private void Clear() {
 		hzip__stat.Clear();
-		this.lnki__uid = 1;	// NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
+		this.uid__lnki = 1;	// NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
+		this.uid__gly = -1;
 	}
 	public static final int Invalid = -1;
 }

@@ -51,9 +51,9 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean KillMarkers(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		if (Html_entity_ == null) Html_entity_ = Scrib_lib_text_html_entities.new_();
-		return rslt.Init_obj(Html_entity_);
-	}	private static KeyVal[] Html_entity_;
+		if (Gfh_entity_ == null) Gfh_entity_ = Scrib_lib_text_html_entities.new_();
+		return rslt.Init_obj(Gfh_entity_);
+	}	private static KeyVal[] Gfh_entity_;
 //		public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 //			Object itm = args.Pull_obj(0);
 //			Class<?> itm_type = itm.getClass();

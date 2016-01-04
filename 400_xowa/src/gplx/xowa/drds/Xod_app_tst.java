@@ -23,7 +23,7 @@ public class Xod_app_tst {
 	@Test  public void Get() {
 		tstr.Data_mgr().Page__insert(1, "A", "2015-10-19 00:01:02");
 		tstr.Data_mgr().Html__insert(1, "abc");
-		tstr.Test__get("A", tstr.Make_page(1, "A", "2015-10-19 00:01:02", tstr.Make_section(0, 2, "", "", "abc")));
+		tstr.Test__get("A", tstr.Make_page(1, "A", "2015-10-19T00:01:02Z", tstr.Make_section(0, 2, "", "", "abc")));
 	}
 }
 class Xod_app_tstr {
@@ -42,7 +42,8 @@ class Xod_app_tstr {
 	}
 	public void Test__get(String ttl, Xod_page_itm expd) {
 		Xow_wiki wiki = drd_provider.Get_wiki("en.wikipedia.org");
-		Xod_page_itm itm = drd_provider.Get_page(wiki, ttl);
+		Xoa_url page_url = wiki.Utl__url_parser().Parse(Bry_.new_u8(ttl));
+		Xod_page_itm itm = drd_provider.Get_page(wiki, page_url);
 		Tfds.Eq(expd.To_str(), itm.To_str());
 	}
 	public Xod_page_itm Make_page(int page_id, String ttl, String modified_on, Xoh_section_itm... section_ary) {

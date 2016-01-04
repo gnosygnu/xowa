@@ -59,7 +59,8 @@ public class Base85_ {
 		throw Err_.new_wo_type("neg number not allowed", "v", v);
 	}
 	public static final int Len_int = 5;
-	private static final int Pow85_last = 4, Radix = 85; private static final byte A7_offset = 33;
+	private static final int Pow85_last = 4, Radix = 85; 
+	public static final byte A7_offset = 33;
 	public static final int Pow85_0 = 1, Pow85_1 = 85, Pow85_2 = 7225, Pow85_3 = 614125, Pow85_4 = 52200625;
 	public static int[] Pow85 = new int[]{Pow85_0, Pow85_1, Pow85_2, Pow85_3, Pow85_4}; // NOTE: ary constructed to match index to exponent; Pow85[1] = 85^1
 }

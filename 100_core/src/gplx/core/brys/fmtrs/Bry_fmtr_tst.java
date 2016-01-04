@@ -18,17 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys.fmtrs; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bry_fmtr_tst {
-	@Test  public void Idx_text()		{tst_Format("a", "a");}
-	@Test  public void Idx_1()			{tst_Format("a", "~{0}", "a");}
-	@Test  public void Idx_3()			{tst_Format("abc", "~{0}~{1}~{2}", "a", "b", "c");}
-	@Test  public void Idx_mix()		{tst_Format("abcde", "a~{0}c~{1}e", "b", "d");}
-	@Test  public void Key_basic() 			{tst("~{key}"			, String_.Ary("key")			, ary_("a")				, "a");}
-	@Test  public void Key_mult()		 	{tst("~{key1}~{key2}"	, String_.Ary("key1", "key2")	, ary_("a", "b")		, "ab");}
-	@Test  public void Key_mix()			{tst("~{key1}~{1}"		, String_.Ary("key1", "key2")	, ary_("a", "b")		, "ab");}
-	@Test  public void Key_repeat()			{tst("~{key1}~{key1}"	, String_.Ary("key1")			, ary_("a")				, "aa");}
+	private final Bry_fmtr_fxt fxt = new Bry_fmtr_fxt();
+	@Test  public void Text()			{fxt.Clear().Fmt("a").Test("a");}
+	@Test  public void Idx__1()			{fxt.Clear().Fmt("~{0}").Args("a").Test("a");}
+	@Test  public void Idx__3()			{fxt.Clear().Fmt("~{0}~{1}~{2}").Args("a", "b", "c").Test("abc");}
+	@Test  public void Idx__mix()		{fxt.Clear().Fmt("a~{0}c~{1}e").Args("b", "d").Test("abcde");}
+	@Test  public void Idx__missing()	{fxt.Clear().Fmt("~{0}").Test("~{0}");}
+
+	@Test  public void Key__basic() 	{fxt.Clear().Fmt("~{key}").Keys("key").Args("a").Test("a");}
+	@Test  public void Key__mult()		{fxt.Clear().Fmt("~{key1}~{key2}").Keys("key1", "key2").Args("a", "b").Test("ab");}
+	@Test  public void Key__repeat()	{fxt.Clear().Fmt("~{key1}~{key1}").Keys("key1").Args("a").Test("aa");}
+
+	@Test  public void Mix()			{fxt.Clear().Fmt("~{key1}~{1}").Keys("key1", "key2").Args("a", "b").Test("ab");}
+
 	@Test  public void Simple() {
-		Bry_fmtr fmtr = Bry_fmtr.new_("0~{key1}1~{key2}2", "key1", "key2");
-		Tfds.Eq("0.1,2", fmtr.Bld_str_many(".", ","));
+		fxt.Clear().Fmt("0~{key1}1~{key2}2").Keys("key1", "key2").Args(".", ",").Test("0.1,2");
 	}
 	@Test  public void Cmd() {
 		Bry_fmtr_tst_mok mok = new Bry_fmtr_tst_mok();
@@ -37,20 +41,7 @@ public class Bry_fmtr_tst {
 		mok.Enabled_(true);
 		Tfds.Eq("01234", fmtr.Bld_str_many("1"));
 	}
-	@Test  public void Err_missing_idx()	{tst_Format("~{0}", "~{0}");}
-	String[] ary_(String... ary) {return ary;}
-	void tst(String fmt, String[] keys, String[] args, String expd) {
-		Bry_fmtr fmtr = new Bry_fmtr().Fmt_(Bry_.new_u8(fmt));
-		fmtr.Keys_(keys);
-		String actl = fmtr.Bld_str_many(args);
-		Tfds.Eq(expd, actl);
-	}
-	void tst_Format(String expd, String fmt, String... args) {
-		Bry_fmtr fmtr = new Bry_fmtr().Fmt_(fmt);
-		Tfds.Eq(expd, fmtr.Bld_str_many(args));
-	}
 	@Test  public void Bld_bfr_many_and_set_fmt() {
-		Bry_fmtr_fxt fxt = new Bry_fmtr_fxt().Clear();
 		fxt.Bld_bfr_many_and_set_fmt("a~{0}c", Object_.Ary("b"), "abc");
 	}
 	@Test  public void Escape_tilde() {
@@ -64,12 +55,17 @@ class Bry_fmtr_tst_mok implements Bry_fmtr_eval_mgr {
 	}
 }
 class Bry_fmtr_fxt {
-	public Bry_fmtr_fxt Clear() {
-		if (fmtr == null) {
-			fmtr = Bry_fmtr.new_();
-		}
-		return this;
-	}	private Bry_fmtr fmtr;
+	private final Bry_fmtr fmtr = Bry_fmtr.new_();
+	private final Bry_bfr bfr = Bry_bfr.new_();
+	private Object[] args;
+	public Bry_fmtr_fxt Clear() {fmtr.Fmt_(String_.Empty).Keys_(String_.Empty); args = Object_.Ary_empty; return this;}
+	public Bry_fmtr_fxt Fmt	(String fmt) {fmtr.Fmt_(fmt); return this;}
+	public Bry_fmtr_fxt Keys(String... args) {fmtr.Keys_(args); return this;}
+	public Bry_fmtr_fxt Args(Object... args) {this.args = args; return this;}
+	public void Test(String expd) {
+		fmtr.Bld_bfr_many(bfr, args);
+		Tfds.Eq(expd, bfr.To_str_and_clear());
+	}
 	public void Bld_bfr_many_and_set_fmt(String fmt, Object[] args, String expd) {
 		fmtr.Fmt_(fmt);
 		fmtr.Bld_bfr_many_and_set_fmt(args);

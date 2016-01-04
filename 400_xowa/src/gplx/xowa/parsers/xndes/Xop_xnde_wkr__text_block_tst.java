@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_xnde_wkr__text_block_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Source_wikitext() {	// PURPOSE.ASSERT: wikitext should be rendered literally; DATE:2014-03-11
 		fxt.Test_parse_page_wiki_str("<source>''a''</source>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">''a''</pre></div>");

@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-class Imap_pts_fmtr_arg extends gplx.core.brys.Bfr_arg_base {
+class Imap_pts_fmtr_arg implements gplx.core.brys.Bfr_arg {
 	private double scale = 1; private Double_obj_val[] pts;
 	public void Scale_(double v) {this.scale = v;}
 	public void Pts_(Double_obj_val[] v) {this.pts = v;}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int pts_len = pts.length;
 		for (int i = 0; i < pts_len; ++i) {
 			Double_obj_val pt = pts[i];

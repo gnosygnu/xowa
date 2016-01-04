@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.files.*;
 public class Xop_lnki_wkr__video_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Thumbtime() {
 		fxt.Test_parse_page_wiki("[[File:A.ogv|thumbtime=123]]"		, fxt.tkn_lnki_().Thumbtime_(123));
 		fxt.Test_parse_page_wiki("[[File:A.ogv|thumbtime=1:23]]"	, fxt.tkn_lnki_().Thumbtime_(83));

@@ -44,8 +44,8 @@ public class Xoh_hzip_fxt {
 	}
 	public void Test__bicode(String hzip, String html) {Test__bicode(hzip, html, html);}
 	public void Test__bicode(String hzip, String html_enc, String html_dec) {
-		html_enc = Html_utl.Replace_apos(html_enc);
-		html_dec = Html_utl.Replace_apos(html_dec);
+		html_enc = Gfh_utl.Replace_apos(html_enc);
+		html_dec = Gfh_utl.Replace_apos(html_dec);
 		Test__bicode_raw(hzip, html_enc, html_dec);
 	}
 	public void Test__bicode_raw(String hzip, String html_enc, String html_dec) {
@@ -54,11 +54,11 @@ public class Xoh_hzip_fxt {
 		Test__decode__raw(hzip, html_dec);
 	}
 	public void Test__encode(String hzip, String html) {
-		hzip = Html_utl.Replace_apos(Xoh_hzip_fxt.Escape(hzip)); html = Html_utl.Replace_apos(html);
+		hzip = Xoh_hzip_fxt.Escape(hzip); html = Gfh_utl.Replace_apos(html);
 		Test__encode__raw(hzip, html);
 	}
 	public void Test__decode(String hzip, String html) {
-		hzip = Html_utl.Replace_apos(Xoh_hzip_fxt.Escape(hzip)); html = Html_utl.Replace_apos(html);
+		hzip = Xoh_hzip_fxt.Escape(hzip); html = Gfh_utl.Replace_apos(html);
 		Test__decode__raw(hzip, html);
 	}
 	public void Test__encode__fail(String expd, String html) {
@@ -73,6 +73,7 @@ public class Xoh_hzip_fxt {
 	}
 	private void Test__decode__raw(String hzip, String html) {
 		Gfo_usr_dlg_.Test__show__init();
+		hpg.Section_mgr().Clear();
 		hzip_mgr.Decode(bfr, parser_fxt.Wiki(), hpg, Bry_.new_u8(hzip));
 		Gfo_usr_dlg_.Test__show__term();
 		Tfds.Eq_str_lines(html, bfr.To_str_and_clear());
@@ -94,7 +95,7 @@ public class Xoh_hzip_fxt {
 			Gfo_usr_dlg_.Test__show__term();
 			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.decode.html"), bfr.To_bry_and_clear());
 		} catch (Exception e) {
-			Tfds.Write(e);
+			Tfds.Dbg(e);
 		}
 	}
 	public static String Escape(String v) {return String_.Replace(v, "~", "");}

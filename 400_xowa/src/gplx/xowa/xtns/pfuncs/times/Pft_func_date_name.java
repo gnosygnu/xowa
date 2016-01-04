@@ -21,7 +21,7 @@ public class Pft_func_date_name extends Pf_func_base {
 	public Pft_func_date_name(int id, int date_tid, int seg_idx, int base_idx) {this.id = id; this.date_tid = date_tid; this.seg_idx = seg_idx; this.base_idx = base_idx;} private int date_tid, seg_idx, base_idx;
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pft_func_date_name(id, date_tid, seg_idx, base_idx).Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
+	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		DateAdp date = DateAdp_.MinValue;
 	    switch (date_tid) {
 	        case Pft_func_date_int.Date_tid_lcl: date = DateAdp_.Now(); break;

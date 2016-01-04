@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.btries.*
 import gplx.langs.htmls.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.vnts.*; import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.htmls.core.hzips.*;	import gplx.xowa.parsers.hdrs.*;
+import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.htmls.core.hzips.*;	import gplx.xowa.parsers.hdrs.*;
 import gplx.xowa.htmls.core.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*;
 public class Xoh_html_wtr {
@@ -114,18 +114,18 @@ public class Xoh_html_wtr {
 		if (literal_apos > 0)
 			bfr.Add_byte_repeat(Byte_ascii.Apos, literal_apos);
 		switch (apos.Apos_cmd()) {
-			case Xop_apos_tkn_.Cmd_b_bgn:			bfr.Add(Html_tag_.B_lhs); break;
-			case Xop_apos_tkn_.Cmd_b_end:			bfr.Add(Html_tag_.B_rhs); break;
-			case Xop_apos_tkn_.Cmd_i_bgn:			bfr.Add(Html_tag_.I_lhs); break;		
-			case Xop_apos_tkn_.Cmd_i_end:			bfr.Add(Html_tag_.I_rhs); break;
-			case Xop_apos_tkn_.Cmd_bi_bgn:			bfr.Add(Html_tag_.B_lhs).Add(Html_tag_.I_lhs); break;		
-			case Xop_apos_tkn_.Cmd_ib_end:			bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_rhs); break;
-			case Xop_apos_tkn_.Cmd_ib_bgn:			bfr.Add(Html_tag_.I_lhs).Add(Html_tag_.B_lhs); break;		
-			case Xop_apos_tkn_.Cmd_bi_end:			bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_rhs);; break;
-			case Xop_apos_tkn_.Cmd_bi_end__b_bgn:	bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_rhs).Add(Html_tag_.B_lhs); break;
-			case Xop_apos_tkn_.Cmd_ib_end__i_bgn:	bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_rhs).Add(Html_tag_.I_lhs); break;
-			case Xop_apos_tkn_.Cmd_b_end__i_bgn:	bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_lhs); break;		
-			case Xop_apos_tkn_.Cmd_i_end__b_bgn:	bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_lhs); break;
+			case Xop_apos_tkn_.Cmd_b_bgn:			bfr.Add(Gfh_tag_.B_lhs); break;
+			case Xop_apos_tkn_.Cmd_b_end:			bfr.Add(Gfh_tag_.B_rhs); break;
+			case Xop_apos_tkn_.Cmd_i_bgn:			bfr.Add(Gfh_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_i_end:			bfr.Add(Gfh_tag_.I_rhs); break;
+			case Xop_apos_tkn_.Cmd_bi_bgn:			bfr.Add(Gfh_tag_.B_lhs).Add(Gfh_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_ib_end:			bfr.Add(Gfh_tag_.I_rhs).Add(Gfh_tag_.B_rhs); break;
+			case Xop_apos_tkn_.Cmd_ib_bgn:			bfr.Add(Gfh_tag_.I_lhs).Add(Gfh_tag_.B_lhs); break;		
+			case Xop_apos_tkn_.Cmd_bi_end:			bfr.Add(Gfh_tag_.B_rhs).Add(Gfh_tag_.I_rhs);; break;
+			case Xop_apos_tkn_.Cmd_bi_end__b_bgn:	bfr.Add(Gfh_tag_.B_rhs).Add(Gfh_tag_.I_rhs).Add(Gfh_tag_.B_lhs); break;
+			case Xop_apos_tkn_.Cmd_ib_end__i_bgn:	bfr.Add(Gfh_tag_.I_rhs).Add(Gfh_tag_.B_rhs).Add(Gfh_tag_.I_lhs); break;
+			case Xop_apos_tkn_.Cmd_b_end__i_bgn:	bfr.Add(Gfh_tag_.B_rhs).Add(Gfh_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_i_end__b_bgn:	bfr.Add(Gfh_tag_.I_rhs).Add(Gfh_tag_.B_lhs); break;
 			case Xop_apos_tkn_.Cmd_nil:				break;
 			default: throw Err_.new_unhandled(apos.Apos_cmd());
 		}
@@ -466,9 +466,9 @@ public class Xoh_html_wtr {
 							break;
 						default:
 							byte[] tag_name = sub_xnde.Tag().Name_bry();
-							bfr.Add(Html_entity_.Lt_bry).Add(tag_name);
+							bfr.Add(Gfh_entity_.Lt_bry).Add(tag_name);
 							if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(sub_xnde.Tag().Id(), hctx, src, sub_xnde.Atrs_bgn(), sub_xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-							bfr.Add(Html_entity_.Gt_bry);
+							bfr.Add(Gfh_entity_.Gt_bry);
 							break;
 					}
 					Xnde_subs_escape(ctx, hctx, bfr, src, sub_xnde, amp_enable, false);

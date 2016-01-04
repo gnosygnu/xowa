@@ -24,7 +24,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		fxt.Wiki().Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Add_or_mod(Bry_.new_a7("test"));	// must add to xwiki_repo_mgr
 		fxt.Test_parse_page_wiki_str
 		( "[[test:File:A.png|12x10px]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 		fxt.Wiki().Cfg_parser_lnki_xwiki_repos_enabled_(false);	// disable for other tests
 	}

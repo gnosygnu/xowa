@@ -32,5 +32,5 @@ public class Xoh_img_hzip__view__tst {
 		, "<a href='/wiki/B' class='image' title='B' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' alt='A.png'></a>"
 		);
 	}
-	// link_site: [[File:A.png|link=//en.wiktionary.org/B]] -> [[File:Wiktionary-logo-en.svg|25x25px|link=//en.wiktionary.org/wiki/Special:Search/Earth|Search Wiktionary]] -> <a href="/site/en.wiktionary.org/wiki/Special:Search/Earth" rel="nofollow" title="Search Wiktionary" xowa_title="Wiktionary-logo-en.svg"><img id="xowa_file_img_88" alt="Search Wiktionary" src="file:///J:/xowa/file/commons.wikimedia.org/thumb/f/8/c/4/Wiktionary-logo-en.svg/23px.png" width="23" height="25"></a>
+	// link_site: [[File:A.png|link=//en.wiktionary.org/B]] -> [[File:Wiktionary-logo-en.svg|25x25px|link=//en.wiktionary.org/wiki/Special:Search/Earth|Search Wiktionary]] -> <a href="/site/en.wiktionary.org/wiki/Special:Search/Earth" rel="nofollow" title="Search Wiktionary" xowa_title="Wiktionary-logo-en.svg"><img id="xoimg_88" alt="Search Wiktionary" src="file:///J:/xowa/file/commons.wikimedia.org/thumb/f/8/c/4/Wiktionary-logo-en.svg/23px.png" width="23" height="25"></a>
 }

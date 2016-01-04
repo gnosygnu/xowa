@@ -29,6 +29,6 @@ public class Xoh_lnki_wtr_utl {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public byte[] Bld_title(byte[] text) {
-		return gplx.langs.htmls.Html_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
+		return gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
 	}
 }

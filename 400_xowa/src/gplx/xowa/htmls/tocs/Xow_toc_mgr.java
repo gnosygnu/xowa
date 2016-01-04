@@ -21,7 +21,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
-public class Xow_toc_mgr extends gplx.core.brys.Bfr_arg_base {
+public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 	private static final int Toc_levels = 32; // assume 6 max levels * 5 max heading (9999.); add 2 for good measure
 	private Xoae_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr.reset_(Toc_levels);
 	public Xow_toc_mgr() {
@@ -33,7 +33,7 @@ public class Xow_toc_mgr extends gplx.core.brys.Bfr_arg_base {
 		for (int i = 0; i < Toc_levels; i++)
 			path_ary[i].Lvl_idx_(0);
 	}
-	@Override public void Bfr_arg__add(Bry_bfr bfr) {
+	public void Bfr_arg__add(Bry_bfr bfr) {
 		int path_idx = 0, toc_idx = 0, lvl_idx = 1, eq_prv = 0;
 		path_bfr.Clear();
 		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();

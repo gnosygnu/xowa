@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Dpl_xnde implements Xox_xnde {
@@ -55,13 +55,13 @@ public class Dpl_xnde implements Xox_xnde {
 			switch (html_mode.Tid()) {
 			case Dpl_html_data.Tid_list_ul:
 			case Dpl_html_data.Tid_list_ol:
-				bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Xoh_consts.A_bgn);
+				bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Gfh_bldr_.Bry__a_lhs_w_href);
 				bfr.Add_str_a7("/wiki/").Add(ttl_page_txt);
-				bfr.Add(Xoh_consts.A_bgn_lnki_0).Add(ttl_page_txt).Add_byte(Byte_ascii.Quote);
+				bfr.Add(Gfh_bldr_.Bry__title__nth).Add(ttl_page_txt).Add_byte(Byte_ascii.Quote);
 				if (itm.No_follow()) bfr.Add(Bry_nofollow);
 				bfr.Add_byte(Byte_ascii.Gt);
 				bfr.Add(ttl_page_txt);
-				bfr.Add(Xoh_consts.A_end).Add(html_mode.Itm_end()).Add_byte_nl();
+				bfr.Add(Gfh_bldr_.Bry__a_rhs).Add(html_mode.Itm_end()).Add_byte_nl();
 				break;
 			default:
 				break;

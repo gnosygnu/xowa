@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_nl_tab_lxr_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test  public void Basic() {		// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
