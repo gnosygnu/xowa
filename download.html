@@ -21,31 +21,37 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_windows_64_v3.1.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_windows_64_v3.1.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_windows_v3.1.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_windows_v3.1.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_linux_64_v3.1.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_linux_64_v3.1.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_linux_v3.1.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_linux_v3.1.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_macosx_64_v3.1.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_macosx_64_v3.1.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.1.1/xowa_app_macosx_v3.1.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.3.1/xowa_app_macosx_v3.1.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  </li>
+</ul>
+
+<h2><span class='mw-headline' id='Android'> Android (beta) </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa_android/releases/download/v3.1.3.1/xowa_app_android_v3.1.3.1.apk" class="external text" rel="nofollow">Android</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.1.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.3.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -54,28 +60,17 @@
       <span class='mw-headline'>Change log</span>
     </h2>
     <h2>
-      <span class="mw-headline" id="v3.1.1.1_.282016-01-03.29">v3.1.1.1 (2016-01-03)</span>
+      <span class="mw-headline" id="v3.1.3.1_.282016-01-17.29">v3.1.3.1 (2016-01-17)</span>
     </h2>
+    <h3>
+      <span class="mw-headline" id="Desktop">Desktop</span>
+    </h3>
     <p>
-      <b>fix</b>
+      <b>add</b>
     </p>
     <ul>
       <li>
-        Search: Generate correct counts for search words (affects search results sometimes being off). [broken since:v2.4.4]
-      </li>
-      <li>
-        Url: Fix IPA audio links (affects IPA audio links would not download pronunciations when clicked); EX:[[File:A.png|link=file:///C:/A.png]] x&gt; href='/wiki/file:///C:/A.png'. See: <a href="https://en.wikipedia.org/wiki/Beethoven">https://en.wikipedia.org/wiki/Beethoven</a> [broken since:v2.8.1]
-      </li>
-    </ul>
-    <p>
-      <b>change</b>
-    </p>
-    <ul>
-      <li>
-        ParserFunctions: Handle &lt;refs&gt; inside {{#tag}} (affects incorrectly placed ref on 1 en.w page); EX:{{#tag:ref|&lt;ref&gt;a&lt;/ref&gt;b}}. See: <a href="https://en.wikipedia.org/wiki/UK">https://en.wikipedia.org/wiki/UK</a> <a href="https://en.wikisource.org/wiki/The_Canterville_Ghost">https://en.wikisource.org/wiki/The_Canterville_Ghost</a>
-      </li>
-      <li>
-        ParserFunctions: Add {{REVISIONSIZE}} (affects script error on 2 ru.w pages); EX:{{REVISIONSIZE}}. See: <a href="https://ru.wikipedia.org/wiki/%D0%AE%D1%80%D1%88%D0%BE%D1%80">https://ru.wikipedia.org/wiki/Юршор</a> <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%8F%D1%80%D1%81%D0%BA">https://ru.wikipedia.org/wiki/Красноярск</a>
+        Command-line: Expand instructions for generating HTML dumps. See: [[Help:Import/Command-line/Dumps]]
       </li>
     </ul>
     <p>
@@ -83,10 +78,10 @@
     </p>
     <ul>
       <li>
-        Url: Process first # as anchor, not last (affects script error on 1 en.w page); EX:A#B#C -&gt; "B#C" x&gt; "C" . See: <a href="https://en.wikipedia.org/wiki/Grand_Central_Terminal">https://en.wikipedia.org/wiki/Grand_Central_Terminal</a>
+        Import: Delete broken page redirects when importing wiki in dansguardian.
       </li>
       <li>
-        Html: Remove magnify.png from HTML (use CSS). See: <a href="https://en.wikipedia.org/wiki/Beethoven">https://en.wikipedia.org/wiki/Beethoven</a>
+        Html: Show info.png and play.png from css, not HTML. See: <a href="https://en.wikipedia.org/wiki/Piano">https://en.wikipedia.org/wiki/Piano</a>
       </li>
     </ul>
     <p>
@@ -94,7 +89,10 @@
     </p>
     <ul>
       <li>
-        Parser.Lnki: Handle link arguments to anchors within current page (affects links not working for images if they link to section within current page); EX:[[File:A.png|link=#B]]. See: <a href="https://en.wikipedia.org/wiki/History_of_Nauru">https://en.wikipedia.org/wiki/History_of_Nauru</a>
+        Gallery: Ignore items with invalid file titles; EX:&lt;gallery&gt;File:#A.png&lt;/gallery&gt;.
+      </li>
+      <li>
+        Url: Output "" instead of "file:///" if src is unknown.
       </li>
     </ul>
     <p>
@@ -102,16 +100,59 @@
     </p>
     <ul>
       <li>
-        Html: Remove underlines from "Redirected from" messages. See: <a href="https://en.wikipedia.org/wiki/Summer_Solstice">https://en.wikipedia.org/wiki/Summer_Solstice</a>
+        Parser.Lnki: Title-case page if link argument has xwiki alias to same wiki; EX:[[File:A.png|link=en:Help:a]] -&gt; "Help:A" x&gt; "Help:a". See: <a href="https://en.wikipedia.org/wiki/Wikipedia:Teahouse/Guest_book/Archive_5">https://en.wikipedia.org/wiki/Wikipedia:Teahouse/Guest_book/Archive_5</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Android">Android</span>
+    </h3>
+    <p>
+      <b>fix</b>
+    </p>
+    <ul>
+      <li>
+        Setup: Do not write log to SD card {detected by anonymous}.
+      </li>
+    </ul>
+    <p>
+      <b>add</b>
+    </p>
+    <ul>
+      <li>
+        Special: Implement random.
+      </li>
+    </ul>
+    <p>
+      <b>change</b>
+    </p>
+    <ul>
+      <li>
+        Html: Show video thumbs. See: <a href="https://en.wikipedia.org/wiki/Lepidoptera">https://en.wikipedia.org/wiki/Lepidoptera</a>
       </li>
       <li>
-        Html: Escape quotes in alt for gallery file_names (affects incorrect alts for gallery itm); EX:&lt;gallery&gt;File:A"b.png&lt;/gallery&gt;. See: <a href="https://en.wikipedia.org/wiki/Alexandria,_Romania">https://en.wikipedia.org/wiki/Alexandria,_Romania</a>
+        Html: Show images from imageMap (available in next English Wikipedia release). See: <a href="https://en.wikipedia.org/wiki/Australia">https://en.wikipedia.org/wiki/Australia</a>
       </li>
       <li>
-        Html: Escape quotes in title for links on Category page (affects incorrect titles for category page links). See: <a href="https://simple.wikipedia.org/wiki/Category:Solo_organ_piece">https://simple.wikipedia.org/wiki/Category:Solo_organ_piece</a>
+        Html: Show images from fake-thumb divs. See: <a href="https://en.wikipedia.org/wiki/List_of_counties_in_New_York">https://en.wikipedia.org/wiki/List_of_counties_in_New_York</a>
       </li>
       <li>
-        Html: Do not output alt in caption if alt only has whitespace (affects useless &lt;hr&gt; when alt is just blank space); EX:[[File:A.png|thumb|alt= ]]. See: <a href="https://en.wikipedia.org/wiki/Bird">https://en.wikipedia.org/wiki/Bird</a>
+        Css: Change background-color to black for infobox / wikitable in night-mode {detected by anonymous} {detected by anonymous}. See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
+      </li>
+    </ul>
+    <p>
+      <b>significant</b>
+    </p>
+    <ul>
+      <li>
+        Html: Center gallery images.
+      </li>
+    </ul>
+    <p>
+      <b>minor</b>
+    </p>
+    <ul>
+      <li>
+        Html: Change background color to transparent for Portal divs. See: <a href="https://en.wikipedia.org/wiki/Australia">https://en.wikipedia.org/wiki/Australia</a>
       </li>
     </ul>
     
