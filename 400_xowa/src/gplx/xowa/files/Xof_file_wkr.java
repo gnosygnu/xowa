@@ -51,10 +51,15 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		Exec_by_fsdb(fsdb);
 	}
 	private void Exec_by_fsdb(Xof_fsdb_itm fsdb) {
-		fsdb.Orig_exists_n_();
-		Xof_orig_itm orig = orig_mgr.Find_by_ttl_or_null(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) return;
-		Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);
-		Show_img(fsdb, usr_dlg, bin_mgr, mnt_mgr, cache_mgr, repo_mgr, js_wkr, img_size, url_bldr, hpg);
+		try {
+			if (fsdb.File_exists_in_cache()) return;
+			fsdb.Orig_exists_n_();
+			Xof_orig_itm orig = orig_mgr.Find_by_ttl_or_null(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) return;
+			Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);
+			Show_img(fsdb, usr_dlg, bin_mgr, mnt_mgr, cache_mgr, repo_mgr, js_wkr, img_size, url_bldr, hpg);
+		} catch (Exception e) {
+			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", Err_.Message_gplx_full(e));
+		}
 	}
 	public static boolean Show_img(Xof_fsdb_itm fsdb, Gfo_usr_dlg usr_dlg, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xof_img_size img_size, Xof_url_bldr url_bldr, Xoa_page page) {
 		try {

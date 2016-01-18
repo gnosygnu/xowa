@@ -148,7 +148,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xoi_dump_mgr			Import_mgr() {return import_mgr;} private Xoi_dump_mgr import_mgr = new Xoi_dump_mgr();
 	public Xow_maint_mgr		Maint_mgr() {return maint_mgr;} private Xow_maint_mgr maint_mgr;
 	public void Clear_for_tests() {	// NOTE: these are structures that cache items for PERF; need to be cleared out for multiple test runs
-		file_mgr.Meta_mgr().Clear();
+		file_mgr.Dbmeta_mgr().Clear();
 		db_mgr.Load_mgr().Clear();
 	}
 	public Xodb_mgr_sql				Db_mgr_create_as_sql() {Xodb_mgr_sql rv = new Xodb_mgr_sql(this); db_mgr = rv; return rv;}

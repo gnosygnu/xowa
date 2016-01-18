@@ -43,7 +43,7 @@ class Dg_log_mgr {
 	public void Rls()		{conn.Txn_end();}
 }
 class Dg_file_tbl {
-	private String tbl_name = "dg_file"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "dg_file"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_file_id, fld_file_path, fld_rule_count;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -52,8 +52,8 @@ class Dg_file_tbl {
 		fld_file_path		= flds.Add_str("file_path", 512);
 		fld_rule_count		= flds.Add_int("rule_count");
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "file_id", fld_file_id)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "file_id", fld_file_id)
 			);
 			conn.Ddl_create_tbl(meta);
 		}
@@ -69,7 +69,7 @@ class Dg_file_tbl {
 	}
 }
 class Dg_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "dg_rule"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_file_id, fld_rule_id, fld_rule_idx, fld_rule_score, fld_rule_text;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -80,8 +80,8 @@ class Dg_rule_tbl implements Rls_able {
 		fld_rule_score		= flds.Add_int("rule_score");
 		fld_rule_text		= flds.Add_str("rule_text", 1024);
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_rule_id)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_rule_id)
 			);
 			conn.Ddl_create_tbl(meta);
 		}
@@ -102,7 +102,7 @@ class Dg_rule_tbl implements Rls_able {
 	}
 }
 class Dg_page_score_tbl implements Rls_able {
-	private String tbl_name = "dg_page_score"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "dg_page_score"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_page_ns, fld_page_ttl, fld_page_len, fld_page_score, fld_page_rule_count, fld_clude_type;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -116,8 +116,8 @@ class Dg_page_score_tbl implements Rls_able {
 		fld_page_rule_count	= flds.Add_int("page_rule_count");
 		fld_clude_type		= flds.Add_int("page_clude_type");
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id)
 			);
 			conn.Ddl_create_tbl(meta);
 		}
@@ -142,7 +142,7 @@ class Dg_page_score_tbl implements Rls_able {
 	}
 }
 class Dg_page_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_page_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "dg_page_rule"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_rule_id, fld_rule_score_total;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -152,8 +152,8 @@ class Dg_page_rule_tbl implements Rls_able {
 		fld_rule_id				= flds.Add_int("rule_id");
 		fld_rule_score_total	= flds.Add_int("rule_score_total");
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id, fld_rule_id)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id, fld_rule_id)
 			);
 			conn.Ddl_create_tbl(meta);
 		}

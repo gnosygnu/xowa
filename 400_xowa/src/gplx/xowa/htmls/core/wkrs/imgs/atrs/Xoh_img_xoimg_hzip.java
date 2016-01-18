@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
-import gplx.core.brys.*;
+import gplx.core.brys.*; import gplx.core.encoders.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 public class Xoh_img_xoimg_hzip {
@@ -32,12 +32,12 @@ public class Xoh_img_xoimg_hzip {
 		flag_bldr.Set(Flag__height_exists		, height_exists);
 		flag_bldr.Set(Flag__width_exists		, width_exists);
 		flag_bldr.Set(Flag__lnki_type			, arg.Lnki_type());
-		Xoh_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
-		if (width_exists)		Xoh_hzip_int_.Encode(2, bfr, arg.Lnki_w());
-		if (height_exists)		Xoh_hzip_int_.Encode(2, bfr, arg.Lnki_h());
+		Gfo_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
+		if (width_exists)		Gfo_hzip_int_.Encode(2, bfr, arg.Lnki_w());
+		if (height_exists)		Gfo_hzip_int_.Encode(2, bfr, arg.Lnki_h());
 		if (upright_exists)		bfr.Add_double(arg.Lnki_upright()).Add_byte(Xoh_hzip_dict_.Escape);
 		if (time_exists)		bfr.Add_double(arg.Lnki_time()).Add_byte(Xoh_hzip_dict_.Escape);
-		if (page_exists)		Xoh_hzip_int_.Encode(2, bfr, arg.Lnki_page());
+		if (page_exists)		Gfo_hzip_int_.Encode(2, bfr, arg.Lnki_page());
 	}
 	public void Decode(Bry_bfr bfr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, Xoh_img_xoimg_data arg) {
 		int flag = rdr.Read_hzip_int(1);

@@ -81,7 +81,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
-	public Xoa_meta_mgr				Meta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
+	public Xoa_meta_mgr				Dbmeta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	public Xoa_parser_mgr			Parser_mgr()				{return parser_mgr;} private final Xoa_parser_mgr parser_mgr = new Xoa_parser_mgr();
 	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final Xoa_site_cfg_mgr site_cfg_mgr;

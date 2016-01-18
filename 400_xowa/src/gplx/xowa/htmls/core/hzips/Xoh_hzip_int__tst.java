@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.encoders.*;
 public class Xoh_hzip_int__tst {
 	private final Xoh_hzip_int__fxt fxt = new Xoh_hzip_int__fxt();
 	@Test   public void Reqd__1() {
@@ -40,9 +40,9 @@ class Xoh_hzip_int__fxt {
 	private final Bry_bfr bfr = Bry_bfr.new_();
 	private final gplx.core.primitives.Int_obj_ref count_ref = gplx.core.primitives.Int_obj_ref.neg1_();
 	public void Test__encode(int reqd, int val, String expd) {
-		Xoh_hzip_int_.Encode(reqd, bfr, val);
+		Gfo_hzip_int_.Encode(reqd, bfr, val);
 		byte[] actl = bfr.To_bry_and_clear();
             Tfds.Eq(expd, String_.new_u8(actl));
-		Tfds.Eq(val, Xoh_hzip_int_.Decode(reqd, actl, actl.length, 0, count_ref));
+		Tfds.Eq(val, Gfo_hzip_int_.Decode(reqd, actl, actl.length, 0, count_ref));
 	}
 }

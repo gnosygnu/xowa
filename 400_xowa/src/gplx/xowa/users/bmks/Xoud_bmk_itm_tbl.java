@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_itm_tbl implements Rls_able {
-	private final String tbl_name = "bmk_itm"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "bmk_itm"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
 	private Db_stmt stmt_update_sort;
 	public Xoud_bmk_itm_tbl(Db_conn conn) {
@@ -34,7 +34,7 @@ public class Xoud_bmk_itm_tbl implements Rls_able {
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int owner, int sort, byte[] name, byte[] wiki, byte[] url, byte[] comment) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

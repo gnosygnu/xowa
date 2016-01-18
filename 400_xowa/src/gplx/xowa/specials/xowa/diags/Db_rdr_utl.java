@@ -23,7 +23,7 @@ class Db_rdr_utl {
 	public static void Load_and_write(Db_conn conn, String sql, Bry_bfr bfr) {
 		Write_to_bfr(bfr, Load(conn, sql));
 	}
-	public static Mem_qry_set Load_as_qry_set(Db_conn conn, Db_meta_fld_list fld_list, String sql) {
+	public static Mem_qry_set Load_as_qry_set(Db_conn conn, Dbmeta_fld_list fld_list, String sql) {
 		Mem_qry_set qry_set = new Mem_qry_set();
 		DataRdr rdr = conn.Exec_sql_as_rdr(sql);
 		try {

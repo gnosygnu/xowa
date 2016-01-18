@@ -33,7 +33,7 @@ class Http_server_wkr__fxt {
 		this.app = Xoa_app_fxt.app_();
 	}
 	public void Init_wiki_main_page(String domain, String main_page) {
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(domain));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(domain));
 		wiki.Props().Main_page_(Bry_.new_u8(main_page));
 	}
 	public void Test_assert_main_page(String url, String expd) {

@@ -220,6 +220,14 @@ public class Xoctg_html_mgr_tst {
 		, "  (<a href=\"/wiki/Category:Ctg_1?pagefrom=A1#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 0</a>)"
 		));
 	}
+	@Test  public void Bld_rslts_lnk__encoded() {	// escape quotes and spaces; DATE:2016-01-11
+		fxt.Init_itm_page("A\" b").Init_ctg_name_("Ctg_1").Init_ctg_pages_(1, 1)
+			.Test_bld_rslts_lnk(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		( ""
+		, "  (<a href=\"/wiki/Category:Ctg_1?pageuntil=A%22+b#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 0</a>)"
+		, "  (<a href=\"/wiki/Category:Ctg_1?pagefrom=A%22+b#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 0</a>)"
+		));
+	}
 	@Test   public void Calc_col_max() {
 		Tst_calc_col_max(3, 10, 0, 4);
 		Tst_calc_col_max(3, 10, 1, 3);

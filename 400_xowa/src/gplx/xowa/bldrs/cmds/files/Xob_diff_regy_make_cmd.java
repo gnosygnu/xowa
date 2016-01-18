@@ -35,8 +35,8 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 	}
 	private void Make_join_indexes(Db_conn make_db_provider) {
 		try {
-			make_db_provider.Ddl_create_idx(Db_meta_idx.new_normal_by_name("fsdb_regy", "fsdb_regy__join", "fsdb_name", "fsdb_is_orig", "fsdb_repo", "fsdb_w", "fsdb_time", "fsdb_page"));
-			make_db_provider.Ddl_create_idx(Db_meta_idx.new_normal_by_name("xfer_regy", "xfer_regy__join", "lnki_ttl", "file_is_orig", "orig_repo", "file_w", "lnki_time", "lnki_page"));
+			make_db_provider.Ddl_create_idx(Dbmeta_idx_itm.new_normal_by_name("fsdb_regy", "fsdb_regy__join", "fsdb_name", "fsdb_is_orig", "fsdb_repo", "fsdb_w", "fsdb_time", "fsdb_page"));
+			make_db_provider.Ddl_create_idx(Dbmeta_idx_itm.new_normal_by_name("xfer_regy", "xfer_regy__join", "lnki_ttl", "file_is_orig", "orig_repo", "file_w", "lnki_time", "lnki_page"));
 		}
 		catch (Exception exc) {
 			app.Usr_dlg().Warn_many("", "", "error while making indexes: err=~{0}", Err_.Message_gplx_full(exc));

@@ -19,7 +19,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xowd_search_link_tbl {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_word_id, fld_page_id;
 	private final Db_conn conn; private Db_stmt stmt_insert; private final Xowd_search_page_tbl__in_wkr in_wkr = new Xowd_search_page_tbl__in_wkr();
 	public Xowd_search_link_tbl(Db_conn conn, boolean schema_is_1) {
@@ -34,9 +34,9 @@ public class Xowd_search_link_tbl {
 	public String Tbl_name()		{return tbl_name;}
 	public String Fld_word_id()		{return fld_word_id;}
 	public String Fld_page_id()		{return fld_page_id;}
-	public void Create_tbl()		{conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
-	public void Create_idx_unique() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
-	public void Create_idx_normal() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_normal_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
+	public void Create_tbl()		{conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_idx_unique() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
+	public void Create_idx_normal() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__search_link__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int word_id, int page_id) {
@@ -48,9 +48,9 @@ public class Xowd_search_link_tbl {
 	}
 }
 class Xowd_search_page_tbl__in_wkr extends Db_in_wkr__base {
-	private String tbl_name; private Db_meta_fld_list flds; private String fld_page_id, fld_word_id;
+	private String tbl_name; private Dbmeta_fld_list flds; private String fld_page_id, fld_word_id;
 	private List_adp words, pages;		
-	public void Ctor(String tbl_name, Db_meta_fld_list flds, String fld_page_id, String fld_word_id) {
+	public void Ctor(String tbl_name, Dbmeta_fld_list flds, String fld_page_id, String fld_word_id) {
 		this.tbl_name = tbl_name; this.flds = flds; this.fld_page_id = fld_page_id; this.fld_word_id = fld_word_id;
 	}
 	public void Init(List_adp words, List_adp pages) {this.words = words; this.pages = pages;}

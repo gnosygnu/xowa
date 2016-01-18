@@ -63,7 +63,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 				int wiki_count = app.Wiki_mgri().Count();
 				boolean rv = true;
 				for (int i = 0; i < wiki_count; i++) {
-					Xow_wiki wiki = app.Wiki_mgri().Get_at_i(i);
+					Xow_wiki wiki = app.Wiki_mgri().Get_at(i);
 					if (all || wiki.Domain_tid() == grp_tid.Wiki_tid()) {
 						if (!Eval_set(wiki, grp.Key_str(), itm.Val()))
 							rv = false;
@@ -71,7 +71,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 				}
 				return rv;
 			case Xoa_cfg_grp_tid.Tid_wiki: {
-				Xow_wiki wiki = app.Wiki_mgri().Get_by_key_or_null_i(itm.Key());
+				Xow_wiki wiki = app.Wiki_mgri().Get_by_or_null(itm.Key());
 				if (wiki == null) return true; // wiki not installed; return true (no error)
 				return Eval_set(wiki, grp.Key_str(), itm.Val());					
 			}

@@ -54,8 +54,8 @@ public interface Db_stmt extends Rls_able {
 	int Exec_update();
 	int Exec_delete();
 	DataRdr Exec_select();
-	Db_rdr Exec_select__rls_manual();
-	Db_rdr Exec_select__rls_auto();
+	Db_rdr Exec_select__rls_auto();		// stmt is automatically released
+	Db_rdr Exec_select__rls_manual();	// stmt must be released manually; for "batch" insert
 	Object Exec_select_val();
 	void Ctor_stmt(Db_engine engine, Db_qry qry);
 	Db_stmt Clear();

@@ -34,14 +34,14 @@ public class Xof_xfer_mgr {
 		this.orig_file_len = xfer_itm.Orig_file_len();
 		this.src_repo = src_repo; src_repo_is_wmf = src_repo.Wmf_fsys();
 		this.trg_repo = trg_repo;
-		this.meta_itm = xfer_itm.Meta_itm();
+		this.meta_itm = xfer_itm.Dbmeta_itm();
 		ext_rule = src_repo.Ext_rules().Get_or_null(orig_ext.Ext());
 		orig_w = 0; orig_h = 0; file_w = 0; file_h = 0;
 	}	private byte lnki_type;
 	private Xof_xfer_itm xfer_itm; private double lnki_thumbtime = Xof_lnki_time.Null; private boolean lnki_thumbable; private int lnki_w, lnki_h, file_w, file_h; private double lnki_upright;
 	private Xof_ext orig_ext; private Xof_rule_itm ext_rule; private Xof_repo_itm src_repo, trg_repo; private boolean src_repo_is_wmf; private byte[] orig_ttl, orig_ttl_md5; private int orig_w, orig_h; private long orig_file_len; 
 	private int lnki_page = Xof_lnki_page.Null;
-	public Xof_meta_itm Meta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
+	public Xof_meta_itm Dbmeta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public boolean Download_allowed_by_ext() {return orig_file_len < ext_rule.Make_max();}
 	public Xof_xfer_mgr Check_file_exists_before_xfer_n_() {check_file_exists_before_xfer = false; return this;} private boolean check_file_exists_before_xfer = true;
 	public boolean Make_file(Xowe_wiki wiki) {

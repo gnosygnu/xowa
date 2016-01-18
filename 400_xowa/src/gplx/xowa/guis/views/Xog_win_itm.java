@@ -253,7 +253,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			boolean output_html = String_.Eq(output_str, "html");
 			Xowe_wiki home_wiki = app.Usere().Wiki();
 			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
-			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
+			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
 			Xoae_page new_page = wiki.Data_mgr().Load_page_by_ttl(url, ttl);
 			if (new_page.Missing()) {return Bry_.Empty;}

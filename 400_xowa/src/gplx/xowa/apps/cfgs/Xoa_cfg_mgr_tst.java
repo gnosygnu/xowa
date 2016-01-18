@@ -54,7 +54,7 @@ class Xoa_cfg_mgr_fxt {
 		itm.Val_(val);
 	}
 	public Xowe_wiki Exec_make_wiki(String wiki_key_str) {return Exec_make_wiki(Bry_.new_a7(wiki_key_str));} 
-	public Xowe_wiki Exec_make_wiki(byte[] wiki_key_bry) {return app.Wiki_mgr().Get_by_key_or_make(wiki_key_bry);}
+	public Xowe_wiki Exec_make_wiki(byte[] wiki_key_bry) {return app.Wiki_mgr().Get_by_or_make(wiki_key_bry);}
 	public void Test_init_wiki(String wiki_key_str, String itm_key_str, String expd_val) {
 		byte[] wiki_key_bry = Bry_.new_a7(wiki_key_str);
 		Xowe_wiki wiki = Exec_make_wiki(wiki_key_bry);

@@ -72,7 +72,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_exists("A.png", 220, 200));
 	}
 	@Test   public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
-		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
+		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create(commons_wiki, "File:A.png", "text_is_blank");
@@ -112,7 +112,7 @@ public class Scrib_lib_title_tst {
 	}
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
-//			Db_meta_tbl meta = new Xowd_page_tbl().new_meta();
+//			Dbmeta_tbl_itm meta = new Xowd_page_tbl().new_meta();
 //			Db_conn_pool.Instance.Set_mem(url_str, meta);
 //			Db_conn_info url = Db_conn_info_.mem_(url_str);
 //			Xowd_page_tbl tbl = new Xowd_page_tbl(Bool_.N, url);

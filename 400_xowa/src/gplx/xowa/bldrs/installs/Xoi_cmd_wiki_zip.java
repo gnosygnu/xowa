@@ -47,7 +47,7 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 	private void Process_async() {
 		Xoae_app app = install_mgr.App();
 		Xob_bldr bldr = app.Bldr();
-		wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_a7(wiki_key));
+		wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_a7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);

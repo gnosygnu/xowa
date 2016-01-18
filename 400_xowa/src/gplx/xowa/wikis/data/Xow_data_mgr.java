@@ -102,7 +102,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 			}
 			if (vnt_missing) {
 				if (ttl.Ns().Id_is_file()) {
-					Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(wiki.Commons_wiki_key());
+					Xowe_wiki commons_wiki = (Xowe_wiki)wiki.Appe().Wiki_mgr().Get_by_or_null(wiki.Commons_wiki_key());
 					if (commons_wiki != null) {										// commons exists
 						if (!Bry_.Eq(wiki.Domain_bry(), commons_wiki.Domain_bry())) {		// !Bry_.Eq is recursion guard
 							Xoae_page rv = commons_wiki.Data_mgr().Load_page_by_ttl(url, ttl, wiki.Lang(), tab, true);

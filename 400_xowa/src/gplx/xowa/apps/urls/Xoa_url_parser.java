@@ -50,7 +50,7 @@ public class Xoa_url_parser {
 		Xow_xwiki_itm xwiki_itm = app.User().Wikii().Xwiki_mgr().Get_by_key(wiki_bry); 
 		if (xwiki_itm == null) {Xoa_url_.Invalid_warn(str); return null;}	// if wiki doesn't exist, warn and return nothing; DATE:2015-08-25
 		if (rv.Page_is_main()) {		// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
-			Xow_wiki wiki_itm = app.Wiki_mgri().Get_by_key_or_make_init_y(wiki_bry); // NOTE: must call Init to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
+			Xow_wiki wiki_itm = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry); // NOTE: must call Init to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
 			rv.Page_bry_(wiki_itm.Props().Main_page());
 		}
 		return rv;
@@ -241,10 +241,10 @@ public class Xoa_url_parser {
 		if (colon_pos == Bry_find_.Not_found) return null;									// no colon
 		Xow_wiki alias_wiki = wiki;														// default alias_wiki to cur_wiki
 		if (!tmp_wiki_is_missing)														// tmp_wiki exists; use it for alias wikis; DATE:2015-09-17
-			alias_wiki = wiki.App().Wiki_mgri().Get_by_key_or_make_init_n(tmp_wiki);
+			alias_wiki = wiki.App().Wiki_mgri().Get_by_or_make_init_n(tmp_wiki);
 		Xow_xwiki_itm alias_itm = alias_wiki.Xwiki_mgr().Get_by_mid(bry, 0, colon_pos);	// check for alias;
 		if (alias_itm == null) return null;												// colon-word is not alias; EX:A:B
-		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Meta_mgr().Ns__get_or_load(tmp_wiki);
+		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Dbmeta_mgr().Ns__get_or_load(tmp_wiki);
 		if (ns_mgr.Names_get_or_null(alias_itm.Key_bry()) != null)						// special case to handle collision between "wikipedia" alias and "Wikipedia" namespace; if alias exists as ns, ignore it; EX:sv.wikipedia.org/wiki/Wikipedia:Main_Page DATE:2015-07-31
 			return null;
 		byte[] rv = Bry_.Mid(bry, colon_pos + 1); 

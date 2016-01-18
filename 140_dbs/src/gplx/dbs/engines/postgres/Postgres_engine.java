@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.postgres; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*;
+import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*; import gplx.dbs.metas.*;
 import java.sql.*; 
 public class Postgres_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Postgres_conn_info.Tid_const;}
@@ -27,6 +27,7 @@ public class Postgres_engine extends Db_engine_sql_base {
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Db_data_rdr_.new_(rdr, commandText);}
+	@Override public Dbmeta_tbl_mgr Meta_tbl_load_all() {throw Err_.new_unimplemented();}
 		@gplx.Internal @Override protected Connection Conn_new() {
 		Postgres_conn_info conn_info_as_postgres = (Postgres_conn_info)conn_info; 
 		return Conn_make_by_url("jdbc:" + conn_info_as_postgres.Tid() + "://localhost/" + conn_info_as_postgres.Database(), conn_info_as_postgres.Uid(), conn_info_as_postgres.Pwd());

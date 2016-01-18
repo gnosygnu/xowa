@@ -24,7 +24,7 @@ public class Xoh_lnki_hzip__same__tst {
 	}
 	@Test   public void Same__encoded() {		// EX: [[A's]]
 		String html = "<a href=\"/wiki/A%27s\" title=\"A's\">A's</a>";
-		fxt.Test__bicode_raw("~$!A's~", html, html);
+		fxt.Test__bicode_raw("~${$#A%27s~A's~", html, html);
 	}
 	@Test   public void Same__encoded__anch() {	// EX: [[A#90.51]]
 		fxt.Test__bicode("~${$%A~#90.51~", "<a href='/wiki/A#90.51' title='A'>A</a>");
@@ -33,7 +33,7 @@ public class Xoh_lnki_hzip__same__tst {
 		fxt.Test__bicode("~${$#A#.C2.A0B~abc~", "<a href='/wiki/A#.C2.A0B' title='abc'>abc</a>");
 	}
 	@Test   public void Same__amp() {			// EX: [[A&b]]
-		fxt.Test__bicode("~${$#A&b~A&amp;b~", "<a href='/wiki/A%26b' title='A&amp;b'>A&amp;b</a>");
+		fxt.Test__bicode("~${$#A%26b~A&amp;b~", "<a href='/wiki/A%26b' title='A&amp;b'>A&amp;b</a>");
 	}
 	@Test   public void More__basic() {			// EX: [[A]]b
 		fxt.Test__bicode("~$#A~b~", "<a href='/wiki/A' title='A'>Ab</a>");

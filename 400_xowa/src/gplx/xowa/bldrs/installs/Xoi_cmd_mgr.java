@@ -95,7 +95,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 			if (dumpfile_cmd) {
 				if		(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_download.Key_wiki_download)) continue;	// skip download if wiki.dump_file
 				else if	(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_unzip.KEY_dump)) {
-					Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(wiki_key));
+					Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
 					if (wiki.Import_cfg().Src_fil_xml()  != null) continue;	// skip unzip if xml exists
 				}
 				else if (String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_import.KEY)) {

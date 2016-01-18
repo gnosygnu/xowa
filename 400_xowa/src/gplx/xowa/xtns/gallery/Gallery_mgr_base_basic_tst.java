@@ -133,7 +133,10 @@ public class Gallery_mgr_base_basic_tst {
 		);
 	}
 	@Test   public void Link_is_empty() {	// PURPOSE: "link=" causes null pointer exception; DATE:2014-06-15
-		fxt.Test_html_frag("<gallery>File:A.png|link=</gallery>", "href=\"/wiki/File:A.png\"");
+		fxt.Test_html_frag("<gallery>File:A.png|link=</gallery>", String_.Concat_lines_nl_skip_last
+		(  "<div style=\"margin:15px auto;\">"
+		, "          <img id=\"xoimg_0\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"
+		));
 	}
 	@Test   public void Dangling_autcloses() {	// PURPOSE: dangling gallery should auto-close, not escape; PAGE:en.w:Wikipedia:Featured_pictures_thumbs_43 DATE:2014-08-23
 		fxt.Test_html_frag("<gallery>File:A.png|b", "<ul id=\"xowa_gallery_ul_0\"");
@@ -157,6 +160,13 @@ public class Gallery_mgr_base_basic_tst {
 //			, "<li class='gallerycaption'>B</li>"
 //			);
 //		}
+	@Test   public void Invalid() {	// PURPOSE: ignore invalid file names; DATE:2016-01-12
+		fxt.Test_html_str("<gallery>File:#A.png|a</gallery>"
+		, String_.Concat_lines_nl_skip_last
+		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
+		, "</ul>"
+		));
+	}
 }
 class Gallery_mgr_base_fxt {
 	public void Reset() {

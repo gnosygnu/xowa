@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.ctgs.*; 
 public class Xowd_cat_link_tbl implements Rls_able {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_from, fld_to_id, fld_sortkey, fld_timestamp, fld_type_id;
 	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_in;
 	public Db_conn Conn() {return conn;}
@@ -32,11 +32,11 @@ public class Xowd_cat_link_tbl implements Rls_able {
 		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
 		conn.Rls_reg(this);
 	}
-	public Xowd_cat_link_tbl Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds)); return this;}
+	public Xowd_cat_link_tbl Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds)); return this;}
 	public void Create_idx() {
 		conn.Ddl_create_idx(Xoa_app_.Usr_dlg()
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "main", fld_to_id, fld_type_id, fld_sortkey, fld_from)
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "from", fld_from)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_to_id, fld_type_id, fld_sortkey, fld_from)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "from", fld_from)
 		);
 	}
 	public void Insert_bgn() {conn.Txn_bgn("schema__cat_link__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
@@ -50,7 +50,7 @@ public class Xowd_cat_link_tbl implements Rls_able {
 			.Val_int(fld_timestamp		, timestamp)
 			.Exec_insert();
 	}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 

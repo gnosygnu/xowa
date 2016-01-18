@@ -32,6 +32,9 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 	public void Clear() {
 		val_bgn = val_end = -1;
 		val_dat_exists = false;
+		lnki_type = Byte_.Zero;
+		lnki_w = lnki_h = lnki_page = 0;
+		lnki_upright = lnki_time = 0;
 	}
 	public void Set(byte tid, int w, int h, double upright, double time, int page) {
 		this.lnki_type = tid;
@@ -42,8 +45,21 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 		this.lnki_page = page;
 		this.val_dat_exists = true;
 	}
+	public Xoh_img_xoimg_data Clone() {
+		Xoh_img_xoimg_data rv = new Xoh_img_xoimg_data();
+		rv.val_bgn = this.val_bgn;
+		rv.val_end = this.val_end;
+		rv.val_dat_exists = this.val_dat_exists;
+		rv.lnki_type = this.lnki_type;
+		rv.lnki_w = this.lnki_w;
+		rv.lnki_h = this.lnki_h;
+		rv.lnki_upright = this.lnki_upright;
+		rv.lnki_time = this.lnki_time;
+		rv.lnki_page = this.lnki_page;
+		return rv;
+	}
 	public void Parse(Bry_err_wkr err_wkr, byte[] src, Gfh_tag tag) {
-		Gfh_atr atr = tag.Atrs__get_by_or_empty(Bry__name);
+		Gfh_atr atr = tag.Atrs__get_by_or_empty(Bry__data_xowa_image);
 		Parse(err_wkr, src, atr.Val_bgn(), atr.Val_end());
 	}
 	public void Parse(Bry_err_wkr err_wkr, byte[] src, int src_bgn, int src_end) {
@@ -73,7 +89,7 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 		bfr.Add_int_variable(lnki_page);
 	}
 	public static final byte[]
-	  Bry__name		= Bry_.new_a7("data-xoimg")
-	, Bry__html		= Bry_.new_a7("\" data-xoimg=\"")
+	  Bry__data_xowa_image	= Bry_.new_a7("data-xoimg")
+	, Bry__data_xowa_title	= Bry_.new_a7("data-xowa-title")
 	;
 }

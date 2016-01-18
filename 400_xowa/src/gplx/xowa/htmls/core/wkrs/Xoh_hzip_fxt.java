@@ -42,6 +42,12 @@ public class Xoh_hzip_fxt {
 		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_u8(alias), Bry_.new_u8(domain), null);
 		return rv;
 	}
+	public void Init__ns_alias__add(String alias, int ns_id) {
+		parser_fxt.Wiki().Ns_mgr().Aliases_add(ns_id, alias).Init();
+	}
+	public void Init__ns_alias__del(String alias) {
+		parser_fxt.Wiki().Ns_mgr().Aliases_del(alias);
+	}
 	public void Test__bicode(String hzip, String html) {Test__bicode(hzip, html, html);}
 	public void Test__bicode(String hzip, String html_enc, String html_dec) {
 		html_enc = Gfh_utl.Replace_apos(html_enc);

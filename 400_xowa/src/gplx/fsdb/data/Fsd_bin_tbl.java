@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.core.ios.*;
 import gplx.dbs.engines.sqlite.*;
 public class Fsd_bin_tbl implements Rls_able {
-	private final String tbl_name = "fsdb_bin"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "fsdb_bin"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_owner_id, fld_owner_tid, fld_part_id, fld_data_url, fld_data;
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select; private Bry_bfr tmp_bfr;
 	private final Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
@@ -37,7 +37,7 @@ public class Fsd_bin_tbl implements Rls_able {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
-	public void Create_tbl()	{conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl()	{conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn()	{conn.Txn_bgn("fsdb_bin__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

@@ -120,7 +120,7 @@ class Xofc_fil_mgr {
 	private void Fsys_delete(Xof_url_bldr url_bldr, Xoae_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr, Xofc_dir_mgr dir_mgr, Xofc_fil_itm itm) {
 		byte mode_id = itm.Is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
 		byte[] wiki_domain = dir_mgr.Get_by_id(itm.Dir_id()).Name();
-		Xowe_wiki wiki = wiki_mgr.Get_by_key_or_make(wiki_domain);
+		Xowe_wiki wiki = wiki_mgr.Get_by_or_make(wiki_domain);
 		wiki.Init_assert();
 		Xof_repo_itm trg_repo = repo_mgr.Get_by_primary(wiki_domain);
 		byte[] ttl = itm.Name();			

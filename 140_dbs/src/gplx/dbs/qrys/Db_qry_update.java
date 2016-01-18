@@ -37,7 +37,7 @@ public class Db_qry_update implements Db_qry_arg_owner {
 	public Db_qry_arg_owner Arg_(String k, byte[] v)		{return Arg_obj_type_(k, String_.new_u8(v), Db_val_type.Tid_varchar);}
 	public Db_qry_arg_owner Arg_obj_(String k, Object v)	{return Arg_obj_type_(k, v, Db_val_type.Tid_null);}
 	public Db_qry_arg_owner Arg_obj_type_(String key, Object val, byte val_tid) {
-		if (key == Db_meta_fld.Key_null) return this;
+		if (key == Dbmeta_fld_itm.Key_null) return this;
 		Db_arg arg = new Db_arg(key, val).Val_tid_(val_tid);
 		args.Add(arg.Key(), arg);
 		return this;

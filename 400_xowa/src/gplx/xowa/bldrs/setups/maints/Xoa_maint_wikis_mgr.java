@@ -23,7 +23,7 @@ public class Xoa_maint_wikis_mgr implements GfoInvkAble {
 	public Xowe_wiki Get_at(int i) {
 		if (init) Init();
 		byte[] domain = (byte[])hash.Get_at(i);
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(domain);
 		wiki.Init_assert();
 		return wiki;
 	}
@@ -32,7 +32,7 @@ public class Xoa_maint_wikis_mgr implements GfoInvkAble {
 		int len = this.Len();
 		for (int i = 0; i < len; i++) {
 			byte[] domain = (byte[])hash.Get_at(i);
-			Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
+			Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(domain);
 			wiki.Init_assert();
 		}
 		init = false;

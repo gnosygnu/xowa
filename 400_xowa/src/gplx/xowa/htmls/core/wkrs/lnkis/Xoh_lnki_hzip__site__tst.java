@@ -44,7 +44,7 @@ public class Xoh_lnki_hzip__site__tst {
 		fxt.Test__bicode("~$sen.wiktionary.org~/A~b~"						, "<a href='/site/en.wiktionary.org/wiki/Help:A' title='Help:A'>Ab</a>");
 	}
 	@Test   public void Ns__url_encoding() {	// EX: [[wikt:Category:A & B|]]
-		fxt.Test__bicode("~${$sen.wiktionary.org~1A & B~A &amp; B~"			, "<a href='/site/en.wiktionary.org/wiki/Category:A_%26_B' title='Category:A &amp; B'>A &amp; B</a>");
+		fxt.Test__bicode("~${$sen.wiktionary.org~1A %26 B~A &amp; B~"		, "<a href='/site/en.wiktionary.org/wiki/Category:A_%26_B' title='Category:A &amp; B'>A &amp; B</a>");
 	}
 	@Test   public void Less__eq() {			// EX: [[wikt:Ab|A]]
 		fxt.Test__bicode("~${*7en.wiktionary.org~A~b~"						, "<a href='/site/en.wiktionary.org/wiki/Ab'>A</a>");
@@ -59,7 +59,7 @@ public class Xoh_lnki_hzip__site__tst {
 		fxt.Test__bicode("~$;en.wiktionary.org~a~b~"						, "<a href='/site/en.wiktionary.org/wiki/a' title='a'>Ab</a>");
 	}
 	@Test   public void Encode__lnki() {		// EX: [[wikt:eorðe|eorðe]]
-		fxt.Test__bicode("~$1en.wiktionary.org~eorðe~"						, "<a href='/site/en.wiktionary.org/wiki/eor%C3%B0e' title='eorðe'>eorðe</a>");
+		fxt.Test__bicode("~${$3en.wiktionary.org~eor%C3%B0e~eorðe~"			, "<a href='/site/en.wiktionary.org/wiki/eor%C3%B0e' title='eorðe'>eorðe</a>");
 	}
 //		@Test   public void Encode__lnke() {		// EX: [//en.wiktionary.org/wiki/eorðe eorðe]; NOTE:MW inconsistently does not URL-encode external links (but does URL-encode @gplx.Internal protected ones)
 //			fxt.Test__bicode("~$)en.wiktionary.org~eorðe~"						, "<a href='/site/en.wiktionary.org/wiki/eorðe'>eorðe</a>");

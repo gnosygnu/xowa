@@ -23,6 +23,7 @@ public class Bry_ {
 	public static final byte[] Empty = new byte[0];
 	public static final byte[][] Ary_empty = new byte[0][];
 	public static final Class<?> Cls_ref_type = byte[].class;
+	public static byte[] cast(Object val) {return (byte[])val;}
 	public static byte[] New_by_byte(byte b) {return new byte[] {b};}
 	public static byte[] New_by_ints(int... ary) {
 		int len = ary.length;
@@ -833,13 +834,16 @@ public class Bry_ {
 			if (src[i] == find) src[i] = replace;
 		}
 	}
-	public static byte[] Replace(byte[] src, byte find, byte replace) {
+	public static byte[] Replace(byte[] src, byte find, byte replace) {return Replace(src, 0, src.length, find, replace);}
+	public static byte[] Replace(byte[] src, int bgn, int end, byte find, byte replace) {
 		int src_len = src.length;
 		byte[] rv = new byte[src_len];
-		for (int i = 0; i < src_len; i++) {
+		for (int i = bgn; i < end; ++i) {
 			byte b = src[i];
 			rv[i] = b == find ? replace : b;
 		}
+		for (int i = end; i < src_len; ++i)
+			rv[i] = src[i];
 		return rv;
 	}
 	public static byte[] Replace_safe(Bry_bfr bfr, byte[] src, byte[] find, byte[] repl) {

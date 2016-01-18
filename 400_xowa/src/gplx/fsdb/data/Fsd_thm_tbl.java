@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
 public class Fsd_thm_tbl implements Rls_able {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
 	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
@@ -34,7 +34,7 @@ public class Fsd_thm_tbl implements Rls_able {
 		}
 		else {
 			this.fld_time		= flds.Add_int		("thm_thumbtime");
-			this.fld_page		= Db_meta_fld.Key_null;
+			this.fld_page		= Dbmeta_fld_itm.Key_null;
 		}
 		this.fld_bin_db_id		= flds.Add_int		("thm_bin_db_id");
 		this.fld_size			= flds.Add_long		("thm_size");
@@ -48,8 +48,8 @@ public class Fsd_thm_tbl implements Rls_able {
 		stmt_select_by_fil_near = Db_stmt_.Rls(stmt_select_by_fil_near);
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds
-		, Db_meta_idx.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
+		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
 		));
 	}
 	public void Insert(int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size) {

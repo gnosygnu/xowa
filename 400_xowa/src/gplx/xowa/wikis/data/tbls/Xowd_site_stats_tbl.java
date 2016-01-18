@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.xowa.wikis.metas.*;
 public class Xowd_site_stats_tbl {
 	private final String tbl_name = "site_stats";
 	private final String fld_row_id, fld_good_articles, fld_total_pages, fld_images;
-	private final Db_conn conn; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final Db_conn conn; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	public Xowd_site_stats_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld_row_id			= flds.Add_int_pkey("ss_row_id");
@@ -29,7 +29,7 @@ public class Xowd_site_stats_tbl {
 		fld_images			= flds.Add_int("ss_images");
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));
+		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_row_id, Site_stats_row_id).Val_long(fld_good_articles, 0).Val_long(fld_total_pages, 0).Val_int(fld_images, 0).Exec_insert();
 	}
 	public void Update(int num_articles, int num_pages, int num_files) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import gplx.core.stores.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*;
 public interface Db_engine {
 	String			Tid();
 	Db_conn_info	Conn_info();
@@ -33,12 +33,13 @@ public interface Db_engine {
 	void			Conn_open();
 	void			Conn_term();
 	Object			Exec_as_obj(Db_qry qry);
-	void			Ddl_create_tbl(Db_meta_tbl meta);
-	void			Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary);
-	void			Ddl_append_fld(String tbl, Db_meta_fld fld);
+	void			Ddl_create_tbl(Dbmeta_tbl_itm meta);
+	void			Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
+	void			Ddl_append_fld(String tbl, Dbmeta_fld_itm fld);
 	void			Ddl_delete_tbl(String tbl);
 	void			Env_db_attach(String alias, Io_url db_url);
 	void			Env_db_detach(String alias);
 	boolean			Meta_tbl_exists(String tbl);
 	boolean			Meta_fld_exists(String tbl, String fld);
+	Dbmeta_tbl_mgr	Meta_tbl_load_all();
 }

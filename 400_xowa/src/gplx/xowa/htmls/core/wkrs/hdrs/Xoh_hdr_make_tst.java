@@ -22,10 +22,8 @@ public class Xoh_hdr_make_tst {
 	@Test   public void Basic() {
 		String html = String_.Concat_lines_nl_skip_last
 		( "z"
-		, ""
 		, "<h2><span class='mw-headline' id='A_1'>A 1</span></h2>"
 		, "a 1"
-		, ""
 		, "<h2><span class='mw-headline' id='B'>B</span></h2>"
 		, "b"
 		);
@@ -33,6 +31,19 @@ public class Xoh_hdr_make_tst {
 			.Sections__add(0, 2, ""		, ""	, "z")
 			.Sections__add(1, 2, "A_1"	, "A 1"	, "a 1")
 			.Sections__add(2, 2, "B"	, "B"	, "b")
+		);
+	}
+	@Test   public void Consecutive() {
+		String html = String_.Concat_lines_nl_skip_last
+		( "abc"
+		, "<h2><span class='mw-headline' id='A'>A</span></h2>"
+		, "<h2><span class='mw-headline' id='B'>B</span></h2>"
+		, "xyz"
+		);
+		fxt.Test__make(html, fxt.Page_chkr().Body_(html)	// make sure body is same
+			.Sections__add(0, 2, ""		, ""	, "abc")
+			.Sections__add(1, 2, "A"	, "A"	, "")
+			.Sections__add(2, 2, "B"	, "B"	, "xyz")
 		);
 	}
 }

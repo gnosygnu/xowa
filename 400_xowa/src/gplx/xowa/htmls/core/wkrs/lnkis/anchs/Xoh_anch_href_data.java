@@ -93,7 +93,10 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 			ttl_full_txt = ttl_page_db = Bry_.Empty;
 		}
 		else {
-			ttl_full_txt = Gfo_url_encoder_.Href_wo_anchor.Decode(src, ttl_bgn, ttl_end);
+			ttl_full_txt = Bry_.Mid(src, ttl_bgn, ttl_end);
+			int ttl_full_len = ttl_full_txt.length;
+			int question_pos = Bry_find_.Find_fwd(ttl_full_txt, Byte_ascii.Question, 0, ttl_full_len); if (question_pos == -1) question_pos = ttl_full_len;
+			ttl_full_txt = Xoa_ttl.Replace_unders(ttl_full_txt, 0, question_pos);	// NOTE: only replace unders up to question mark to handle category and sortkey; EX:Category:A?pageuntil=A B; PAGE:en.w:Category:Public_transit_articles_with_unsupported_infobox_fields; DATE:2016-01-14
 			switch (tid) {
 				case Xoh_anch_href_data.Tid__anch:
 				case Xoh_anch_href_data.Tid__inet:
@@ -102,7 +105,6 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 					break;
 				case Xoh_anch_href_data.Tid__wiki:
 				case Xoh_anch_href_data.Tid__site:
-					int ttl_full_len = ttl_full_txt.length;
 					int colon_pos = Bry_find_.Find_fwd(ttl_full_txt, Byte_ascii.Colon, 0, ttl_full_len);
 					ttl_page_db = ttl_full_txt;
 					if (colon_pos != Bry_find_.Not_found) {

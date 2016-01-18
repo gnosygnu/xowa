@@ -27,7 +27,7 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_bgn(Xob_bldr bldr) {
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_orig_regy_tbl.Create_table(conn);
-		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
+		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Xowe_wiki repo_0 = wiki, repo_1 = commons_wiki;
 		if (repo_0_is_remote) {	// NOTE: default is false; local_wiki will be preferred over commons_wiki
 			repo_0 = commons_wiki;

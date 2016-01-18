@@ -53,7 +53,7 @@ public class Xoh_href_parser {
 				rv.Page_bry_(cur_page);
 				break;
 			case Xoa_url_.Tid_page:
-				Xow_wiki ttl_wiki = wiki.App().Wiki_mgri().Get_by_key_or_make_init_n(rv.Wiki_bry());
+				Xow_wiki ttl_wiki = wiki.App().Wiki_mgri().Get_by_or_make_init_n(rv.Wiki_bry());
 				byte[] tmp_page = rv.Page_bry();
 				if (rv.Page_is_main())
 					tmp_page = ttl_wiki.Props().Main_page();

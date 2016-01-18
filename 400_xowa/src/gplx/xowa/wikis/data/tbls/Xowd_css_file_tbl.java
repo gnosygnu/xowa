@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
 public class Xowd_css_file_tbl implements Rls_able {
-	private final String tbl_name = "css_file"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "css_file"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_css_id, fld_path, fld_data;
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Xowd_css_file_tbl(Db_conn conn) {
@@ -31,7 +31,7 @@ public class Xowd_css_file_tbl implements Rls_able {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int css_id, String path, byte[] data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear().Val_int(fld_css_id, css_id).Val_str(fld_path, path).Val_bry(fld_data, data).Exec_insert();

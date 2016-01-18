@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Fsd_fil_tbl implements Rls_able {
-	private final String tbl_name = "fsdb_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "fsdb_fil"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
 	private final String idx_owner;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name; private int mnt_id;
@@ -33,7 +33,7 @@ public class Fsd_fil_tbl implements Rls_able {
 		this.fld_size				= flds.Add_long		("fil_size");
 		this.fld_modified			= flds.Add_str		("fil_modified", 14);	// stored as yyyyMMddHHmmss
 		this.fld_hash				= flds.Add_str		("fil_hash", 40);
-		this.idx_owner				= Db_meta_idx.Bld_idx_name(tbl_name, "owner");
+		this.idx_owner				= Dbmeta_idx_itm.Bld_idx_name(tbl_name, "owner");
 		conn.Rls_reg(this);
 	}
 	public void Rls() {
@@ -42,8 +42,8 @@ public class Fsd_fil_tbl implements Rls_able {
 		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds
-		, Db_meta_idx.new_unique_by_name(tbl_name, idx_owner, fld_owner_id, fld_name, fld_id)
+		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_name(tbl_name, idx_owner, fld_owner_id, fld_name, fld_id)
 		));
 	}
 	public void Insert(int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id) {
@@ -89,7 +89,7 @@ public class Fsd_fil_tbl implements Rls_able {
 		finally {rdr.Rls();}
 	}
 	public void Select_all(Bry_bfr key_bfr, gplx.core.caches.Gfo_cache_mgr_bry cache) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Fsd_fil_itm fil = new_(mnt_id, rdr);

@@ -65,8 +65,8 @@ public class Xoh_file_mgr {
 			case Xof_cfg_download.Redownload_none:
 				if (found) return false;
 				if (!found 
-					&& xfer.Meta_itm() != null		// null check; fsdb_call does not set meta
-					&& xfer.Meta_itm().Orig_exists() == Xof_meta_itm.Exists_n) 
+					&& xfer.Dbmeta_itm() != null		// null check; fsdb_call does not set meta
+					&& xfer.Dbmeta_itm().Orig_exists() == Xof_meta_itm.Exists_n) 
 					return false;	// not found, and orig_exists is n; do not download again (NOTE: even if current lnki is thumb, don't bother looking for thumb if orig is missing)
 				break;
 			case Xof_cfg_download.Redownload_missing:

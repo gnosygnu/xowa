@@ -44,7 +44,7 @@ public class Xoa_url_parser_fxt {
 		return this;
 	}
 	public Xow_ns_mgr Prep_get_ns_mgr_from_meta(String wiki) {
-		return app.Meta_mgr().Ns__get_or_load(Bry_.new_u8(wiki));
+		return app.Dbmeta_mgr().Ns__get_or_load(Bry_.new_u8(wiki));
 	}
 	public Xoa_url_parser_fxt Run_parse(String actl_str) {return Run_parse(cur_wiki, actl_str);}
 	public Xoa_url_parser_fxt Run_parse(Xow_wiki wiki, String actl_str) {

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*;
 public class Orig_fil_tbl implements Rls_able {
-	private String tbl_name = "orig_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "orig_fil"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select;
 	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
@@ -34,8 +34,8 @@ public class Orig_fil_tbl implements Rls_able {
 		fld_h				= flds.Add_int(fld_prefix + "h");
 		fld_dir_url			= flds.Add_str(fld_prefix + "dir_url", 1024);	// NOTE: don't put dir in separate table; note that entire root_dir_wkr is not built to scale due to need for recursively loading all files
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_name)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_name)
 			);
 			conn.Ddl_create_tbl(meta);
 		}

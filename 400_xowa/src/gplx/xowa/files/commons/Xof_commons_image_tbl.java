@@ -52,7 +52,7 @@ public class Xof_commons_image_tbl implements Rls_able {
 			);
 		}	finally {rdr.Rls();}
 	}
-	private static final String tbl_name = "image"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private static final String tbl_name = "image"; private static final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private static final String
 	  fld_img_name				= flds.Add_str("img_name", 255)			// varbinary(255)
 	, fld_img_media_type		= flds.Add_str("img_media_type", 255)	// enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"
@@ -64,9 +64,9 @@ public class Xof_commons_image_tbl implements Rls_able {
 	, fld_img_ext_id			= flds.Add_int("img_ext_id")			// xowa
 	, fld_img_timestamp			= flds.Add_str("img_timestamp", 255)	// 20140101155749
 	;
-	public static Db_meta_tbl new_meta() {
-		return Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "name", fld_img_name, fld_img_timestamp)
+	public static Dbmeta_tbl_itm new_meta() {
+		return Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "name", fld_img_name, fld_img_timestamp)
 		);
 	} 
 }

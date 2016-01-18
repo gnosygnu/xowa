@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*;
 import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 public class TdbEngine implements Db_engine {
 	public String Tid() {return Tdb_conn_info.Tid_const;}
@@ -58,14 +58,15 @@ public class TdbEngine implements Db_engine {
 	public void FlushTbl(TdbTable tbl) {
 		saveMgr.SaveFile(db, tbl.File());
 	}
-	public void	Ddl_create_tbl(Db_meta_tbl meta) {throw Err_.new_unimplemented();}
-	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Err_.new_unimplemented();}
-	public void			Ddl_append_fld(String tbl, Db_meta_fld fld) {throw Err_.new_unimplemented();}
-	public void			Ddl_delete_tbl(String tbl)						{}
-	public void			Env_db_attach(String alias, Io_url db_url)		{}
-	public void			Env_db_detach(String alias)						{}
-	public boolean			Meta_tbl_exists(String name)					{return false;}
-	public boolean			Meta_fld_exists(String tbl, String fld)			{return false;}
+	public void	Ddl_create_tbl(Dbmeta_tbl_itm meta) {throw Err_.new_unimplemented();}
+	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw Err_.new_unimplemented();}
+	public void				Ddl_append_fld(String tbl, Dbmeta_fld_itm fld) {throw Err_.new_unimplemented();}
+	public void				Ddl_delete_tbl(String tbl)						{}
+	public void				Env_db_attach(String alias, Io_url db_url)		{}
+	public void				Env_db_detach(String alias)						{}
+	public boolean				Meta_tbl_exists(String name)					{return false;}
+	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
+	public Dbmeta_tbl_mgr	Meta_tbl_load_all()								{return meta_tbl_mgr;} private final Dbmeta_tbl_mgr meta_tbl_mgr = new Dbmeta_tbl_mgr();
 
 	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final TdbEngine Instance = new TdbEngine(); 

@@ -66,7 +66,7 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 		len = app.Wiki_mgr().Count();
 		Xoa_app_.Usr_dlg().Log_many("", "", "maint.wiki_count; count=~{0}", len);
 		for (int i = 0; i < len; i++) {
-			Xowe_wiki wiki = app.Wiki_mgr().Get_at(i);
+			Xowe_wiki wiki = app.Wiki_mgr().Get_at_or_null(i);
 			Xoa_app_.Usr_dlg().Log_many("", "", "maint.wiki_itm; wiki=~{0}", wiki.Domain_str());
 			Wmf_dump_itm itm = (Wmf_dump_itm)itms_hash.Get_by_bry(wiki.Domain_bry()); if (itm == null) continue;
 			wiki.Maint_mgr().Wmf_dump_date_(itm.Dump_date()).Wmf_dump_done_(itm.Status_tid() == Wmf_dump_itm.Status_tid_complete).Wmf_dump_status_(itm.Status_msg());

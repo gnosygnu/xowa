@@ -50,9 +50,10 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public boolean					File_is_orig()				{return file_is_orig;} private boolean file_is_orig;
 	public int					File_w()					{return file_w;} private int file_w;
 	public long					File_size()					{return file_size;} private long file_size;
-	public boolean					Meta_is_new()				{return false;}
+	public boolean					Dbmeta_is_new()				{return false;}
 	public boolean					Orig_exists()				{return orig_exists;} public void Orig_exists_y_() {orig_exists = Bool_.Y;} public void Orig_exists_n_() {orig_exists = Bool_.N;} private boolean orig_exists;
 	public boolean					File_exists()				{return file_exists;} public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
+	public boolean				File_exists_in_cache()		{return file_exists_in_cache;} private boolean file_exists_in_cache;
 	public boolean					File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
 	public boolean					Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
 	public int					Xfer_idx()					{return xfer_idx;} private int xfer_idx;
@@ -116,6 +117,10 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	}
 	public void Init_at_xfer(int idx, int len) {
 		this.xfer_idx = idx; this.xfer_len = len;
+	}
+	public void Init_at_cache(boolean file_exists_in_cache, int w, int h, Io_url view_url) {
+		this.file_exists_in_cache = file_exists_in_cache;
+		this.html_w = w; this.html_h = h; this.html_view_url = view_url;
 	}
 	public void Change_repo(byte orig_repo_id, byte[] orig_repo_name) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;

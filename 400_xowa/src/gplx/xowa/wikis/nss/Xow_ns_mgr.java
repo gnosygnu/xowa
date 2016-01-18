@@ -87,6 +87,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.core.lists.ComparerAble {
 		aliases.Add_if_dupe_use_nth(name, kv);
 		return this;
 	}
+	public void	Aliases_del(String name) {aliases.Del(name);}
 	public Xow_ns_mgr Init() {
 		this.Ords_sort();
 		this.Rebuild_hashes();

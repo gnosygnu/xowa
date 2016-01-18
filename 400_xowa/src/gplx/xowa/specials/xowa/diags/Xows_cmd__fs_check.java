@@ -27,7 +27,7 @@ class Xows_cmd__fs_check {
 			return;
 		}
 		byte[] wiki_bry = arg_hash.Get_val_bry_or(Arg_wiki, null);	if (wiki_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no wiki: url=~{0}", url.Raw()); return;}
-		Xow_wiki wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(wiki_bry);
+		Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry);
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url file_dir = wiki.Fsys_mgr().File_dir();
 		Write_dir(bfr, wiki_dir);

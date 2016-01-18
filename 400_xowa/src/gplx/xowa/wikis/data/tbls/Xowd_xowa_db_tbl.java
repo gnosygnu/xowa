@@ -19,7 +19,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.data.*;
 public class Xowd_xowa_db_tbl {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
 	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
 	public Xowd_xowa_db_tbl(Db_conn conn, boolean schema_is_1) {
@@ -29,7 +29,7 @@ public class Xowd_xowa_db_tbl {
 		fld_type			= flds.Add_byte		("db_type");
 		fld_url				= flds.Add_str		("db_url", 512);
 		if (schema_is_1) {
-			fld_ns_ids = fld_part_id = fld_guid = Db_meta_fld.Key_null;
+			fld_ns_ids = fld_part_id = fld_guid = Dbmeta_fld_itm.Key_null;
 		}
 		else {
 			fld_ns_ids		= flds.Add_str		("db_ns_ids", 255);
@@ -38,7 +38,7 @@ public class Xowd_xowa_db_tbl {
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xowd_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
 		List_adp list = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();

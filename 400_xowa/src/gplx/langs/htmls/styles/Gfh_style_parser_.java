@@ -24,32 +24,45 @@ public class Gfh_style_parser_ {
 			Parse(tag.Src(), atr.Val_bgn(), atr.Val_end(), wkr);
 	}
 	public static void Parse(byte[] src, int src_bgn, int src_end, Gfh_style_wkr wkr) {
-		int atr_idx = 0, key_bgn = -1, key_end = -1, tmp_bgn = -1, tmp_end = -1;
+		int atr_idx = 0, itm_bgn = -1, itm_end = -1, key_bgn = -1, key_end = -1, tmp_bgn = -1, tmp_end = -1;
 		int pos = src_bgn;
 		while (true) {
 			boolean pos_is_last = pos == src_end;
 			byte b = pos_is_last ? Byte_ascii.Semic : src[pos];
 			switch (b) {
 				case Byte_ascii.Semic:
-					if (key_bgn != -1) { // ignore empty atrs
-						if (!wkr.On_atr(src, atr_idx, src_bgn, src_end, key_bgn, key_end, tmp_bgn, tmp_end))
+					if (tmp_bgn != -1) {		// tmp_bgn == -1 if all ws
+						if (key_bgn == -1) {	// handle malformed key-only pairs; EX: "style='center'"
+							key_bgn = tmp_bgn;
+							key_end = tmp_end;
+							tmp_bgn = tmp_end = -1;
+						}
+						if (!wkr.On_atr(src, atr_idx, src_bgn, src_end, itm_bgn, itm_end, key_bgn, key_end, tmp_bgn, tmp_end))
 							pos_is_last = true;
 					}
-					++atr_idx; key_bgn = -1; key_end = -1; tmp_bgn = -1; tmp_end = -1;
+					++atr_idx; itm_bgn = itm_end = key_bgn = key_end = tmp_bgn = tmp_end = -1;
 					break;
 				case Byte_ascii.Colon:
-					key_bgn = tmp_bgn;
-					key_end = tmp_end;
-					tmp_bgn = -1; tmp_end = -1;
+					if (key_bgn == -1) {
+						key_bgn = tmp_bgn;
+						key_end = tmp_end;
+						tmp_bgn = -1; tmp_end = -1;
+					}
 					break;
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:						
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+					if (itm_bgn == -1) itm_bgn = pos;
 					break;
 				default:
+					if (itm_bgn == -1) itm_bgn = pos;
 					if (tmp_bgn == -1) tmp_bgn = pos;
 					tmp_end = pos + 1;
 					break;
 			}
-			if (pos_is_last) break;
+			if (pos_is_last) {
+				if (key_bgn != -1) // handle "k"
+					wkr.On_atr(src, atr_idx, src_bgn, src_end, itm_bgn, itm_end, key_bgn, key_end, tmp_bgn, tmp_end);
+				break;
+			}
 			++pos;
 		}
 	}

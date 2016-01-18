@@ -41,9 +41,9 @@ class Xod_app_tstr {
 		Io_mgr.Instance.InitEngine_mem();
 	}
 	public void Test__get(String ttl, Xod_page_itm expd) {
-		Xow_wiki wiki = drd_provider.Get_wiki("en.wikipedia.org");
+		Xow_wiki wiki = drd_provider.Wikis__get_by_domain("en.wikipedia.org");
 		Xoa_url page_url = wiki.Utl__url_parser().Parse(Bry_.new_u8(ttl));
-		Xod_page_itm itm = drd_provider.Get_page(wiki, page_url);
+		Xod_page_itm itm = drd_provider.Wiki__get_by_url(wiki, page_url);
 		Tfds.Eq(expd.To_str(), itm.To_str());
 	}
 	public Xod_page_itm Make_page(int page_id, String ttl, String modified_on, Xoh_section_itm... section_ary) {

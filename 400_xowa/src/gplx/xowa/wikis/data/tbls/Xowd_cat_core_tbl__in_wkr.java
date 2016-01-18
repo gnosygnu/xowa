@@ -19,8 +19,8 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.utls.*;
 class Xowd_cat_core_tbl__in_wkr extends Db_in_wkr__base {
 	private Xowd_cat_core_tbl tbl;
-	private String tbl_name, fld_cat_id; private Db_meta_fld_list flds; private Ordered_hash hash;
-	public void Ctor(Xowd_cat_core_tbl tbl, String tbl_name, Db_meta_fld_list flds, String fld_cat_id) {
+	private String tbl_name, fld_cat_id; private Dbmeta_fld_list flds; private Ordered_hash hash;
+	public void Ctor(Xowd_cat_core_tbl tbl, String tbl_name, Dbmeta_fld_list flds, String fld_cat_id) {
 		this.tbl = tbl; this.tbl_name = tbl_name; this.flds = flds; this.fld_cat_id = fld_cat_id;
 	}
 	public void Init(Ordered_hash hash) {this.hash = hash;}

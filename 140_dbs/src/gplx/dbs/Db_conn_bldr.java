@@ -32,5 +32,11 @@ public class Db_conn_bldr {
 		Db_conn rv = wkr.Get(url);
 		return rv == null ? Db_conn_.Noop : rv;
 	}
+	public Db_conn Get_or_autocreate(boolean autocreate, Io_url url) {
+		boolean exists = wkr.Exists(url);
+		if (exists) return Get(url);
+		if (autocreate) return New(url);
+		else throw Err_.new_("dbs", "db does not exist", "url", url.Raw());
+	}
         public static final Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
 }

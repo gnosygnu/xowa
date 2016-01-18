@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xou_cache_tbl implements Rls_able {
-	private String tbl_name = "file_cache"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "file_cache"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String
 	  fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w
 	, fld_orig_repo, fld_orig_ttl, fld_orig_ext, fld_orig_w, fld_orig_h
@@ -65,10 +65,10 @@ public class Xou_cache_tbl implements Rls_able {
 		select_stmt = Db_stmt_.Rls(select_stmt);
 	}
 	public void Create_tbl() {
-		Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-		, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w)
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "size", fld_file_size)
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "date", fld_view_date)
+		Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "size", fld_file_size)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "date", fld_view_date)
 		);
 		conn.Ddl_create_tbl(meta);
 	}
@@ -90,7 +90,7 @@ public class Xou_cache_tbl implements Rls_able {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xou_cache_itm itm = new_itm(rdr);
@@ -112,7 +112,7 @@ public class Xou_cache_tbl implements Rls_able {
 			itm.Db_state_(Db_cmd_mode.Tid_ignore);
 		} catch (Exception e) {stmt_bldr.Rls(); throw Err_.new_exc(e, "xo", "db_save failed");}
 	}
-	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_manual();}
+	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_manual();}
 	private void Db_save_crt(Db_stmt stmt, Xou_cache_itm itm, boolean insert) {
 		if (insert) {
 			stmt.Val_bry_as_str		(fld_lnki_wiki_abrv		, itm.Lnki_wiki_abrv())

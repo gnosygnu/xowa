@@ -27,7 +27,7 @@ public class Xoa_wmf_mgr implements GfoInvkAble {
 		enabled = v;
 		int len = wiki_mgr.Count();
 		for (int i = 0; i < len; i++) {
-			Xowe_wiki wiki = wiki_mgr.Get_at(i);
+			Xowe_wiki wiki = wiki_mgr.Get_at_or_null(i);
 			wiki.File_mgr().Cfg_download().Enabled_(v);
 		}		
 	}

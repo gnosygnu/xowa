@@ -78,11 +78,7 @@ public class Xoh_file_page_wtr {
 	), "orig_width", "orig_height", "orig_href", "orig_file_size", "orig_mime_type", "elem_id", "thumb_width", "thumb_height", "thumb_href", "thumb_alt", "thumb_name", "section_alts");
 	public Bry_fmtr	Html_main_aud() {return html_main_aud;} private final Bry_fmtr html_main_aud = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
-	, "  <div>" 
-	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
-	, "      <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
-	, "    </a>" 
-	, "  </div>"
+	, "  <div><a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_media_play\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\" alt=\"Play sound\"></a></div>"
 	, "</div>"
 	, ""
 	), "lnki_url", "xowa_title", "play_width", "play_max_width", "play_icon");
@@ -93,11 +89,7 @@ public class Xoh_file_page_wtr {
 	, "      <img id=\"xoimg_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
 	, "    </a>"
 	, "  </div>"
-	, "  <div>" 
-	, "    <a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
-	, "      <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
-	, "    </a>" 
-	, "  </div>"
+	, "  <div><a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_media_play\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\" alt=\"Play sound\"></a></div>"
 	, "</div>"
 	, ""
 	), "elem_id", "lnki_href", "lnki_class", "xowa_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt", "lnki_url", "play_width", "play_max_width", "play_icon");

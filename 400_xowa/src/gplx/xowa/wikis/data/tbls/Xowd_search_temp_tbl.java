@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 public class Xowd_search_temp_tbl {
-	private final String tbl_name = "search_temp"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "search_temp"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_page_id, fld_word_text;
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	private final String sql_create_word, sql_create_link;
@@ -30,7 +30,7 @@ public class Xowd_search_temp_tbl {
 		fld_page_id			= flds.Add_int("page_id");
 		fld_word_text		= flds.Add_str("word_text", 255);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__search_temp__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, byte[] word) {
@@ -39,7 +39,7 @@ public class Xowd_search_temp_tbl {
 			.Exec_insert();
 	}	
 	public void Make_data(Gfo_usr_dlg usr_dlg, Xowd_search_link_tbl search_link_tbl, Xowd_search_word_tbl search_word_tbl) {
-		conn.Ddl_create_idx(usr_dlg, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_word_text, fld_page_id));
+		conn.Ddl_create_idx(usr_dlg, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_word_text, fld_page_id));
 		conn.Exec_sql_plog_txn("search_temp.create_word", sql_create_word);
 		conn.Exec_sql_plog_txn("search_temp.create_link", sql_create_link);
 		Create_idx(usr_dlg, search_link_tbl, search_word_tbl);

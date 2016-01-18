@@ -70,7 +70,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	public Xof_repo_pair[] Repos_ary() {if (repos_ary == null) repos_ary = (Xof_repo_pair[])repos.To_ary(Xof_repo_pair.class); return repos_ary;} private Xof_repo_pair[] repos_ary;
 	public boolean Xfer_by_meta(Xof_xfer_itm xfer_itm, Xof_xfer_queue queue) {
 		byte[] ttl = xfer_itm.Lnki_ttl();
-		Xof_meta_itm meta_itm = xfer_itm.Meta_itm();
+		Xof_meta_itm meta_itm = xfer_itm.Dbmeta_itm();
 		boolean chk_all = false;
 		byte[] src_wiki_key = wiki.Domain_bry();
 		if (meta_itm.State_new()) {
@@ -107,9 +107,9 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 			byte[] trg_wiki_key = Bry_.Empty;
 			if (repo_idx != Xof_meta_itm.Repo_unknown) {
 				trg_wiki_key = wiki.File_mgr().Repo_mgr().Repos_get_at(repo_idx).Wiki_domain();
-				trg_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_make(trg_wiki_key);
+				trg_wiki = wiki.Appe().Wiki_mgr().Get_by_or_make(trg_wiki_key);
 			}
-			Xof_meta_itm redirect_meta = trg_wiki.File_mgr().Meta_mgr().Get_itm_or_new(redirect, md5);
+			Xof_meta_itm redirect_meta = trg_wiki.File_mgr().Dbmeta_mgr().Get_itm_or_new(redirect, md5);
 			if (tmp_rslt.Redirect() == Xop_redirect_mgr.Redirect_null_bry) {
 				if (redirect_meta.State_new()) {
 					if (repo_idx == Xof_meta_itm.Repo_unknown) {
@@ -152,8 +152,8 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 				boolean make = xfer_mgr.Make_file(wiki);
 				if (make) {
 					xfer_itm.Trg_repo_itm_(pair.Trg());
-					if (second_chance && xfer_itm.Meta_itm().Vrtl_repo() == 0)	// second_chance and item found; change vrtl_repo from commons back to same; EX: tarball and [[Image:Rembrandt De aartsengel verlaat Tobias en zijn gezin. 1637.jpg|120px]]
-						xfer_itm.Meta_itm().Vrtl_repo_(Xof_meta_itm.Repo_same);
+					if (second_chance && xfer_itm.Dbmeta_itm().Vrtl_repo() == 0)	// second_chance and item found; change vrtl_repo from commons back to same; EX: tarball and [[Image:Rembrandt De aartsengel verlaat Tobias en zijn gezin. 1637.jpg|120px]]
+						xfer_itm.Dbmeta_itm().Vrtl_repo_(Xof_meta_itm.Repo_same);
 					return true;												// file was made; return; if not continue looking at other repos					
 				}
 			}
@@ -211,7 +211,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		for (int i = 0; i < len; i++) {
 			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (i != repo_idx) {	// try other wikis
-				file.Meta_itm().Orig_exists_(Xof_meta_itm.Exists_unknown);	// always reset orig exists; this may have been flagged to missing above and should be cleared
+				file.Dbmeta_itm().Orig_exists_(Xof_meta_itm.Exists_unknown);	// always reset orig exists; this may have been flagged to missing above and should be cleared
 				make_pass = Xfer_file_exec(file, pair, i);
 				if (make_pass) break;
 			}
@@ -220,7 +220,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	}
 	private boolean Xfer_file_exec(Xof_xfer_itm file, Xof_repo_pair pair, int repo_idx) {
 		xfer_mgr.Atrs_by_itm(file, pair.Src(), pair.Trg());
-		Xof_meta_itm meta_itm = xfer_mgr.Meta_itm();
+		Xof_meta_itm meta_itm = xfer_mgr.Dbmeta_itm();
 		boolean rv = xfer_mgr.Make_file(wiki);
 		if (rv) {
 			meta_itm.Vrtl_repo_(repo_idx);	// update repo_idx to whatever is found

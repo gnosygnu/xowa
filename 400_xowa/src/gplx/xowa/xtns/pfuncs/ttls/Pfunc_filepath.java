@@ -51,7 +51,7 @@ public class Pfunc_filepath extends Pf_func_base {
 	private static Xoae_page Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 		if (page.Missing()) {				// file not found in current wiki; try commons; 
-			Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(wiki.Commons_wiki_key());
+			Xowe_wiki commons_wiki = (Xowe_wiki)wiki.Appe().Wiki_mgr().Get_by_or_null(wiki.Commons_wiki_key());
 			if (commons_wiki != null) {		// commons_wiki not installed; exit; DATE:2013-06-08
 				if (!Env_.Mode_testing()) commons_wiki.Init_assert();// must assert load else page_zip never detected; DATE:2013-03-10
 				page = commons_wiki.Data_mgr().Get_page(ttl, false);

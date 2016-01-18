@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*;
 public class Vnt_log_tbl implements Rls_able {
-	private final String tbl_name = "log_vnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "log_vnt"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_uid, fld_page_id, fld_rule_idx
 	, fld_flag_count, fld_lang_count, fld_undi_count, fld_bidi_count
 	, fld_flag_add, fld_flag_del, fld_flag_aout, fld_flag_hide, fld_flag_raw, fld_flag_show, fld_flag_descrip, fld_flag_name, fld_flag_title, fld_flag_err
@@ -63,7 +63,7 @@ public class Vnt_log_tbl implements Rls_able {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int uid, int page_id, int rule_idx, int flag_count, int lang_count, int undi_count, int bidi_count
 		, boolean flag_add, boolean flag_del, boolean flag_aout, boolean flag_hide, boolean flag_raw, boolean flag_show, boolean flag_descrip, boolean flag_name, boolean flag_title, boolean flag_err
 		, int vnt_0, int vnt_1, int vnt_2, int vnt_3, int vnt_4, int vnt_5, int vnt_6, int vnt_7, int vnt_8, int vnt_9

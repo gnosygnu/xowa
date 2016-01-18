@@ -60,7 +60,7 @@ class Xob_diff_regy_sql_runner {
 		fsdb_db_tid = Fsdb_db_tid_.Xto_tid(parts[2]);
 	}
 	public void Run_sql(Xoae_app app) {
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(Bry_.new_u8(wiki_domain));
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_null(Bry_.new_u8(wiki_domain));
 		app.Usr_dlg().Prog_many("", "", "running sql: url=~{0}", url.NameAndExt());
 		Db_conn conn = Get_conn(wiki, fsdb_db_id, fsdb_db_tid);
 		conn.Exec_sql(Io_mgr.Instance.LoadFilStr(url));

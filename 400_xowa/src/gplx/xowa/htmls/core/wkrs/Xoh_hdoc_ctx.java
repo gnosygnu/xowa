@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.apps.urls.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
-import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;	
+import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.caches.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;		
 public class Xoh_hdoc_ctx {
 	private byte[] fsys__file;
 	public byte[]					Fsys__root()		{return fsys__root;} private byte[] fsys__root;
@@ -30,7 +30,7 @@ public class Xoh_hdoc_ctx {
 	public Xow_ttl_parser			Wiki__ttl_parser()	{return wiki__ttl_parser;} private Xow_ttl_parser wiki__ttl_parser;
 	public Xoa_url_parser			Wiki__url_parser()	{return wiki__url_parser;} private Xoa_url_parser wiki__url_parser;
 	public boolean						Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
-	public Xoa_file_mgr				File__mgr()			{return file__mgr;} private final Xoa_file_mgr file__mgr = new Xoa_file_mgr();
+	public Xou_cache_finder			File__mgr()			{return file__mgr;} private Xou_cache_finder file__mgr = Xou_cache_finder_.Noop; 
 	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final Xof_url_bldr file__url_bldr = new Xof_url_bldr();
 	public byte[]					Page__url()			{return page__url;} private byte[] page__url;
 	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
@@ -48,6 +48,8 @@ public class Xoh_hdoc_ctx {
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
+		Xou_cache_mgr cache_mgr = app.User().User_db_mgr().Cache_mgr();
+		if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
 		pool_mgr__hzip.Init();
 	}
 	public void Init_by_page(Xow_wiki wiki, byte[] page_url) {

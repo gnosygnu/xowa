@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
 public class Xowd_css_core_tbl implements Rls_able {
-	private final String tbl_name = "css_core"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "css_core"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_key, fld_updated_on;
 	public Xowd_css_core_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -29,7 +29,7 @@ public class Xowd_css_core_tbl implements Rls_able {
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_key)));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_key)));}
 	public void Rls() {}
 	public int Insert(String key, DateAdp updated_on) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);

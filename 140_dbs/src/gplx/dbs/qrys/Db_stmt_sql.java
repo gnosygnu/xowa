@@ -125,7 +125,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	}
 	public void Rls() {this.Clear();}
 	public void Add(String k, String v) {
-		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return;	// key is explicitly null; ignore; allows version_2+ type definitions
 		args.Add(v);
 	}
 	public String Xto_sql() {

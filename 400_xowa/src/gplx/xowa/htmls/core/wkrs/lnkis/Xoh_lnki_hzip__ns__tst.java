@@ -65,15 +65,18 @@ public class Xoh_lnki_hzip__ns__tst {
 		fxt.Test__bicode("~${/;)Image~A b~", "<a href='/wiki/Image:A_b' title='Image:A b'>Image:A b</a>");
 	}
 	@Test   public void Alias__url_encoding() {	// EX: [[Image:Aü.png|b]]
-		fxt.Test__bicode("~${-f)Image~Aü.png~b~", "<a href='/wiki/Image:A%C3%BC.png' title='Image:Aü.png'>b</a>");
+		fxt.Test__bicode("~${3h)Image~A%C3%BC.png~b~Image:Aü.png~", "<a href='/wiki/Image:A%C3%BC.png' title='Image:Aü.png'>b</a>");
 	}
 	@Test   public void Ctg__main() {		// links at bottom of pages in main ns; DATE:2015-12-28
-		fxt.Test__bicode("~$|&*G1A~", "<a href='/wiki/Category:A' class='inte" + "rnal' title='A'>A</a>");
+		fxt.Test__bicode("~$|$t'1A~", "<a href='/wiki/Category:A' class='inte" + "rnal' title='A'>A</a>");
 	}
 	@Test   public void Ctg__tree() {		// links on Category pages;
-		fxt.Test__bicode("~$|#q_1A~", "<a href='/wiki/Category:A' class='CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory'>A</a>");
+		fxt.Test__bicode("~$|&3J1A~", "<a href='/wiki/Category:A' class='CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory'>A</a>");
 	}
-	@Test   public void Ctg__xnav() {		// previous / next 200 links on Category pages
-		fxt.Test__bicode("~$|\"3/1A B?pageuntil=C, D#mw-pages~previous 200~Category:A_B~", "<a href='/wiki/Category:A_B?pageuntil=C, D#mw-pages' class='xowa_nav' title='Category:A_B'>previous 200</a>");
+	@Test   public void Ctg__xnav__space() {	// previous / next 200 links on Category pages
+		fxt.Test__bicode("~$|&`Z1A B?pageuntil=C, D#mw-pages~previous 200~Category:A_B~", "<a href='/wiki/Category:A_B?pageuntil=C, D#mw-pages' class='xowa_nav' title='Category:A_B'>previous 200</a>");
+	}
+	@Test   public void Ctg__xnav__under() {	// previous / next 200 links on Category pages; PAGE:en.w:Category:Public_transit_articles_with_unsupported_infobox_fields; DATE:2016-01-14
+		fxt.Test__bicode("~$|&`Z1A B?pageuntil=C,_D#mw-pages~previous 200~Category:A_B~", "<a href='/wiki/Category:A_B?pageuntil=C,_D#mw-pages' class='xowa_nav' title='Category:A_B'>previous 200</a>");
 	}
 }

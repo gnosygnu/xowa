@@ -41,7 +41,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
 	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setByte(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -50,7 +50,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setInt(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -58,7 +58,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
 	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setLong(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -66,7 +66,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
 	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setFloat(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -74,7 +74,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
 	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setDouble(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -82,7 +82,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.N, k, v);}
 	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(Bool_.N, Key_na, v);}
 	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setBigDecimal(++val_idx, v.Under_as_native());} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);}	
 		return this;
 	}
@@ -90,7 +90,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
 	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setBytes(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "byte[]", v.length, sql);}	
 		return this;
 	}
@@ -102,7 +102,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
 	private Db_stmt Add_str(boolean where, String k, String v) {
-		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setString(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v, "sql", sql);}	
 		return this;
 	}

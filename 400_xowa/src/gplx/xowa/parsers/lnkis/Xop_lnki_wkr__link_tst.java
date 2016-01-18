@@ -29,7 +29,7 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Link_blank() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" />"
 		));
 	}
 	@Test  public void Link_external() {

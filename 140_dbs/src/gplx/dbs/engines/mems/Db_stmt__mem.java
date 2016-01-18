@@ -128,7 +128,7 @@ public class Db_stmt__mem implements Db_stmt {
 	}
 	public Object Exec_select_val() {throw Err_.new_unimplemented();}
 	private void Add(String k, boolean where, Object v) {
-		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows schema_2+ type definitions
+		if (k == Dbmeta_fld_itm.Key_null) return;	// key is explicitly null; ignore; allows schema_2+ type definitions
 		val_list.Add_if_dupe_use_1st(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
 		if (where) {
 			List_adp list = (List_adp)crt_hash.Get_by(k);

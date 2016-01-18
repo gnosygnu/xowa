@@ -160,7 +160,7 @@ public class Xou_cache_mgr {
 	}
 	private Io_url Calc_url(Xou_cache_itm cache) {
 		byte[] wiki_domain = Xow_abrv_xo_.To_itm(cache.Lnki_wiki_abrv()).Domain_bry();
-		Xow_wiki wiki = wiki_mgr.Get_by_key_or_make_init_y(wiki_domain); if (wiki == null) return Io_url_.Empty;	// wiki is not available; should only happen in read-only mode; DATE:2015-05-23
+		Xow_wiki wiki = wiki_mgr.Get_by_or_make_init_y(wiki_domain); if (wiki == null) return Io_url_.Empty;	// wiki is not available; should only happen in read-only mode; DATE:2015-05-23
 		Xof_repo_itm trg_repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(cache.Orig_repo_id(), cache.Lnki_ttl(), Bry_.Empty);
 		if (trg_repo == null) return Io_url_.Empty;
 		byte[] orig_ttl = cache.Orig_ttl();

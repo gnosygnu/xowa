@@ -68,7 +68,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 	}
 	public static final byte Version_null = Byte_.Max_value_127, Version_1 = 1, Version_2 = 2;
 	public Xowe_repo_mgr Repo_mgr() {return repo_mgr;} private Xowe_repo_mgr repo_mgr;
-	public Xof_meta_mgr  Meta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
+	public Xof_meta_mgr  Dbmeta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
 		if (test_grps == null) test_grps = Hash_adp_.new_();

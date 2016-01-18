@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_bin_tbl {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_uid, fld_url, fld_bin_len, fld_bin_max;
 	private final Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
@@ -33,17 +33,17 @@ public class Fsm_bin_tbl {
 			fld_bin_max = flds.Add_long("bin_max");
 		}
 		else {
-			fld_bin_len = Db_meta_fld.Key_null;
-			fld_bin_max = Db_meta_fld.Key_null;
+			fld_bin_len = Dbmeta_fld_itm.Key_null;
+			fld_bin_max = Dbmeta_fld_itm.Key_null;
 		}
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Val_long(fld_bin_len, 0).Val_long(fld_bin_max, 0).Exec_insert();
 	}
 	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
 		List_adp rv = List_adp_.new_();
-		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Db_meta_fld.Ary_empty, fld_uid).Clear().Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty, fld_uid).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				int bin_id = rdr.Read_int(fld_uid);

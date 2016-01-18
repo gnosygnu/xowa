@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 public class Db_stmt_bldr {
 	private Db_conn conn; private Db_stmt create, update, delete;
 	private String tbl_name; private String[] flds_keys, flds_vals, flds_all;
-	public void Conn_(Db_conn v, String tbl_name, Db_meta_fld_list flds, String... flds_keys) {
+	public void Conn_(Db_conn v, String tbl_name, Dbmeta_fld_list flds, String... flds_keys) {
 		Conn_(v, tbl_name, flds.To_str_ary(), flds.To_str_ary_exclude(flds_keys), flds_keys);
 	}
 	public void Conn_(Db_conn v, String tbl_name, String[] flds_vals, String... flds_keys) {

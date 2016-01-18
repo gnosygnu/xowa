@@ -37,13 +37,13 @@ public class Pfunc_ifexist_tst {
 	}
 	@Test  public void Media_y_commons() {// DATE:2014-07-04
 		Pfunc_ifexist.Mgr.Clear();
-		Xowe_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons);
+		Xowe_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_or_make(gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons);
 		fxt.Init_page_create(commons_wiki, "File:A.png", "");
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}
 	@Test  public void Media_y_file_v1() {// DATE:2014-07-04
 		Pfunc_ifexist.Mgr.Clear();
-		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Meta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
+		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Dbmeta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
 		meta_itm.Orig_exists_(Bool_.Y_byte);
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}

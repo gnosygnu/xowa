@@ -25,7 +25,7 @@ class Xows_cmd__file_check {
 	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
 		byte[] wiki_bry = arg_hash.Get_val_bry_or(Arg_wiki, null);	if (wiki_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no wiki: url=~{0}", url.Raw()); return;}
 		byte[] file_bry = arg_hash.Get_val_bry_or(Arg_file, null);	if (file_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no file: url=~{0}", url.Raw()); return;}
-		Xow_wiki wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(wiki_bry);
+		Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry);
 		tmp_dir = wiki.Fsys_mgr().Tmp_dir();
 		boolean schema_1 = wiki.File__fsdb_core().File__schema_is_1();
 		Fsdb_db_file atr_main = null;

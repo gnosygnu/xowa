@@ -62,10 +62,10 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
-	public Xoa_meta_mgr				Meta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
+	public Xoa_meta_mgr				Dbmeta_mgr()					{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final Xoa_site_cfg_mgr site_cfg_mgr;
-	public boolean						Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_domain(domain) == null;}
+	public boolean						Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_or_null(domain) == null;}
 	public Xoa_sitelink_mgr			Xwiki_mgr__sitelink_mgr()	{return xwiki_mgr__sitelink_mgr;} private final Xoa_sitelink_mgr xwiki_mgr__sitelink_mgr = new Xoa_sitelink_mgr();
 	public Xow_xwiki_itm_parser		Xwiki_mgr__itm_parser()		{return xwiki_mgr__itm_parser;}	private final Xow_xwiki_itm_parser xwiki_mgr__itm_parser = new Xow_xwiki_itm_parser();
 

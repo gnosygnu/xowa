@@ -19,9 +19,13 @@ package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_img_html__dump__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
-	public static final String 
-	  Html__basic		= "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'/></a>"
-	;
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Basic()		{fxt.Test__html("[[File:A.png|220x110px|upright=.5|abc]]"			, Html__basic);}
+	@Test   public void Basic() {
+		fxt.Test__html
+		( "[[File:A.png|220x110px|upright=.5|abc]]"
+		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'/></a>");
+	}
+	@Test   public void Empty_link() {
+		fxt.Test__html("[[File:A.png|220x110px|link=|abc]]", "<img data-xowa-title=\"A.png\" data-xoimg='0|220|110|-1|-1|-1' src='' width='0' height='0' alt='abc'/>");
+	}
 }

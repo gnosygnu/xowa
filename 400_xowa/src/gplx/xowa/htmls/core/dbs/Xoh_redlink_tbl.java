@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*;
 public class Xoh_redlink_tbl implements Rls_able {
-	private final String tbl_name = "html_redlink"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "html_redlink"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_page_id, fld_redlink_uids;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	public Xoh_redlink_tbl(Db_conn conn) {
@@ -28,7 +28,7 @@ public class Xoh_redlink_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("html_redlink__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(int page_id, byte[] redlink_uids) {

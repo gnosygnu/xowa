@@ -36,6 +36,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return Bry_.Mid(full_txt, bgn, end);
 	}
 	public byte[] Full_txt_raw()		{return full_txt;} private byte[] full_txt = Bry_.Empty;
+	public byte[] Full_db_wo_xwiki()	{
+		byte[] rv = Bry_.Mid(full_txt, wik_bgn == -1 ? 0 : ns_bgn == -1 ? page_bgn - 1 : ns_bgn - 1, full_txt.length);
+		Bry_.Replace_reuse(rv, Byte_ascii.Space, Byte_ascii.Underline);
+		return rv;
+	}
 	public byte[] Page_txt_w_anchor()	{return Bry_.Mid(full_txt, page_bgn, qarg_bgn == -1 ? full_txt.length : qarg_bgn - 1);}
 	public byte[] Page_txt()			{return Bry_.Mid(full_txt, page_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
 	public byte[] Page_db() {
@@ -372,7 +377,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return true;
 	}		
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
-	public static byte[] Replace_unders(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Underline, Byte_ascii.Space);}
+	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}
+	public static byte[] Replace_unders(byte[] raw, int bgn, int end) {return Bry_.Replace(raw, bgn, end, Byte_ascii.Underline, Byte_ascii.Space);}
 	private int wik_bgn = -1, ns_bgn = -1, page_bgn = 0, leaf_bgn = -1, anch_bgn = -1, root_bgn = -1;
 	private byte[] tors_txt;
 	public static final int Wik_bgn_int = -1;
@@ -392,7 +398,7 @@ class Xoa_ttl_trie {
 		rv.Add(Byte_ascii.Underline			, Byte_obj_val.new_(Id_underline));
 		rv.Add(Byte_ascii.Amp				, Byte_obj_val.new_(Id_amp));
 		rv.Add(Xop_comm_lxr.Bgn_ary			, Byte_obj_val.new_(Id_comment_bgn));
-		rv.Add(Byte_ascii.Nl			, Byte_obj_val.new_(Id_newLine));
+		rv.Add(Byte_ascii.Nl				, Byte_obj_val.new_(Id_newLine));
 		rv.Add(Byte_ascii.Brack_bgn			, Byte_obj_val.new_(Id_invalid));
 		rv.Add(Byte_ascii.Curly_bgn			, Byte_obj_val.new_(Id_invalid));
 		return rv;

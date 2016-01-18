@@ -34,14 +34,14 @@ public class Gfh_tag_rdr {
 	public int Pos() {return pos;} private int pos;
 	public void Pos_(int v) {this.pos = v;}
 	public void Atrs__make(Mwh_atr_wkr atr_wkr, int head_bgn, int head_end) {atr_parser.Parse(atr_wkr, -1, -1, src, head_bgn, head_end);}
-	public Gfh_tag Tag__move_fwd_head()					{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, Gfh_tag_.Id__any);}
+	public Gfh_tag Tag__move_fwd_head()						{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, Gfh_tag_.Id__any);}
 	public Gfh_tag Tag__move_fwd_head(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
 	public Gfh_tag Tag__move_fwd_tail(int match_name_id)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, match_name_id);}
-	public Gfh_tag Tag__peek_fwd_head()					{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, Gfh_tag_.Id__any);}
+	public Gfh_tag Tag__peek_fwd_head()						{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, Gfh_tag_.Id__any);}
 	public Gfh_tag Tag__peek_fwd_head(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, pos, src_end, match_name_id);}
 	public Gfh_tag Tag__peek_fwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.Y, pos, src_end, match_name_id);}
 	public Gfh_tag Tag__peek_bwd_tail(int match_name_id)	{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, pos, src_end, match_name_id);}
-	public Gfh_tag Tag__peek_bwd_head()					{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, pos, src_end, Gfh_tag_.Id__any);}
+	public Gfh_tag Tag__peek_bwd_head()						{return Tag__find(Bool_.N, Bool_.Y, Bool_.Y, pos, src_end, Gfh_tag_.Id__any);}
 	public Gfh_tag Tag__find_fwd_head(int bgn, int end, int match_name_id)	{return Tag__find(Bool_.N, Bool_.N, Bool_.N, bgn, end, match_name_id);}
 	private Gfh_tag Tag__find(boolean move, boolean bwd, boolean tail, int rng_bgn, int rng_end, int match_name_id) {
 		int tmp = rng_bgn;

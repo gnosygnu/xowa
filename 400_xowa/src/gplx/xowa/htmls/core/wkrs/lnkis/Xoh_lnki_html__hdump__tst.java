@@ -28,4 +28,7 @@ public class Xoh_lnki_html__hdump__tst {
 		fxt.Test__html("[[wikt:a]]", "<a href='https://en.wiktionary.org/wiki/a' title='a'>wikt:a</a>");
 	}
 	@Test   public void Anch()		{fxt.Test__html("[[#a]]"			, "<a href='#a'>#a</a>");}
+	@Test   public void Alt_has_quotes() {
+		fxt.Test__html("[[File:A.png|alt=[[\"A\"]] B c]]", "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img data-xowa-title=\"A.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"&quot;A&quot; B c\"/></a>");
+	}
 }

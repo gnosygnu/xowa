@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_stat_tbl implements Rls_able {
-	private static final String tbl_name = "hdump_stats"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private static final String tbl_name = "hdump_stats"; private static final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private static final String
 	  fld_page_id = flds.Add_int_pkey("page_id"), fld_wtxt_len = flds.Add_int("wtxt_len"), fld_row_orig_len = flds.Add_int("row_orig_len"), fld_row_zip_len = flds.Add_int("row_zip_len")
 	, fld_body_len = flds.Add_int("body_len"), fld_display_ttl_len = flds.Add_int("display_ttl_len"), fld_content_sub_len = flds.Add_int("content_sub_len"), fld_sidebar_div_len = flds.Add_int("sidebar_div_len")
@@ -36,7 +36,7 @@ public class Xoh_stat_tbl implements Rls_able {
 		conn.Stmt_delete(tbl_name).Exec_delete(); // always zap table
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}

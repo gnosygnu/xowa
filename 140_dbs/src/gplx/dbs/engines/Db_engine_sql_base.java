@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
 import java.sql.*; 
 import gplx.core.stores.*;
-import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
+import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.metas.*;
 public abstract class Db_engine_sql_base implements Db_engine {
 	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
-	public abstract String Tid();
-	public Db_conn_info Conn_info() {return conn_info;} protected Db_conn_info conn_info;
-	public abstract		Db_engine New_clone(Db_conn_info conn_info);
-	public Db_rdr		New_rdr__rls_manual(Object rdr_obj, String sql)					{return New_rdr(null, rdr_obj, sql);}
-	public Db_rdr		New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
-	@gplx.Virtual public Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
-	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
+	public abstract String	Tid();
+	public Db_conn_info		Conn_info() {return conn_info;} protected Db_conn_info conn_info;
+	public abstract			Db_engine New_clone(Db_conn_info conn_info);
+	public Db_rdr			New_rdr__rls_manual(Object rdr_obj, String sql)				{return New_rdr(null, rdr_obj, sql);}
+	public Db_rdr			New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
+	@gplx.Virtual public 		Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
+	public Db_stmt			New_stmt_prep(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
 	@gplx.Virtual public void		Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
 	@gplx.Virtual public String	Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;")); return "";}
 	@gplx.Virtual public void		Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
@@ -56,16 +56,16 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Xto_api(), "sql", sql);}
 	}
-	public void Ddl_create_tbl(Db_meta_tbl tbl) {Exec_as_int(tbl.To_sql_create());}
-	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
+	public void Ddl_create_tbl(Dbmeta_tbl_itm tbl) {Exec_as_int(tbl.To_sql_create());}
+	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			Db_meta_idx idx = ary[i];
+			Dbmeta_idx_itm idx = ary[i];
 			usr_dlg.Plog_many("", "", "creating database index (please wait); db=~{0} idx=~{1}", conn_info.Database(), idx.Name());
 			Exec_as_int(idx.To_sql_create());
 		}
 	}
-	public void Ddl_append_fld(String tbl, Db_meta_fld fld)		{
+	public void Ddl_append_fld(String tbl, Dbmeta_fld_itm fld)		{
 		Gfo_usr_dlg_.Instance.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		try {
 			Exec_as_int(Db_sqlbldr__sqlite.Instance.Bld_alter_tbl_add(tbl, fld));
@@ -75,12 +75,13 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
 		}
 	}
-	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.Instance.Bld_drop_tbl(tbl));}
-	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url) {}
-	@gplx.Virtual public void	Env_db_detach(String alias) {}
+	public void Ddl_delete_tbl(String tbl)							{Exec_as_int(Db_sqlbldr__sqlite.Instance.Bld_drop_tbl(tbl));}
+	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url)	{}
+	@gplx.Virtual public void	Env_db_detach(String alias)					{}
 	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}
 	@gplx.Virtual public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
-	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.core.stores.Db_data_rdr_.new_(rdr, sql);}
+	public abstract Dbmeta_tbl_mgr Meta_tbl_load_all();
+	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql)		{return gplx.core.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
 	private Db_rdr New_rdr(Db_stmt stmt, Object rdr, String sql) {
 		Db_rdr__basic rv = (Db_rdr__basic)New_rdr_clone();	

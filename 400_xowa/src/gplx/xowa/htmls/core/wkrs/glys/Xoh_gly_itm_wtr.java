@@ -20,8 +20,8 @@ import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 public class Xoh_gly_itm_wtr implements Bfr_arg {
 	private final Bfr_arg_clearable[] arg_ary;
-	private final Bfr_arg__hatr_id li_id = Bfr_arg__hatr_id.New("xogly_li_"), img_id = Bfr_arg__hatr_id.New(gplx.xowa.htmls.Xoh_img_mgr.Bry__html_uid)
-	, div_1_id = Bfr_arg__hatr_id.New("xogly_div1_"), div_2_id = Bfr_arg__hatr_id.New("xogly_div2_"), div_3_id = Bfr_arg__hatr_id.New("xogly_div3_");
+	private final Bfr_arg__hatr_id li_id = Bfr_arg__hatr_id.New_id("xogly_li_"), img_id = Bfr_arg__hatr_id.New_id(gplx.xowa.htmls.Xoh_img_mgr.Bry__html_uid)
+	, div_1_id = Bfr_arg__hatr_id.New_id("xogly_div1_"), div_2_id = Bfr_arg__hatr_id.New_id("xogly_div2_"), div_3_id = Bfr_arg__hatr_id.New_id("xogly_div3_");
 	private final Bfr_arg__itm_caption itm_caption_fmtr = new Bfr_arg__itm_caption();
 	private int li_w, div_1_w, div_2_margin;
 	public Xoh_gly_itm_wtr() {
@@ -70,16 +70,16 @@ class Bfr_arg__itm_caption implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (Bfr_arg__missing()) return;
 		switch (capt_tid) {
-			case Xoh_gly_itm_data.Capt_tid__empty:	return;															// <div class='gallerytext'></div>
-			case Xoh_gly_itm_data.Capt_tid__p:		bfr.Add_byte_nl().Add(Gfh_tag_.P_lhs); break;					// <div class='gallerytext'><p>
-			case Xoh_gly_itm_data.Capt_tid__br:		bfr.Add(Gfh_tag_.Br_lhs).Add_byte_nl(); break;	// <div class='gallerytext'><br>
+			case Xoh_gly_itm_data.Capt_tid__empty:	return;												// <div class='gallerytext'></div>
+			case Xoh_gly_itm_data.Capt_tid__p:		bfr.Add_byte_nl().Add(Gfh_tag_.P_lhs); break;		// <div class='gallerytext'><p>
+			case Xoh_gly_itm_data.Capt_tid__br:		bfr.Add(Gfh_tag_.Br_lhs).Add_byte_nl(); break;		// <div class='gallerytext'><br>
 		}
 		bfr.Add(capt_bry);
 		int itm_caption_len = capt_bry.length;
 		if (capt_tid == Xoh_gly_itm_data.Capt_tid__p) {
 			if (itm_caption_len > 3 && Bry_.Match(capt_bry, itm_caption_len - 4, Gfh_tag_.Br_lhs)) bfr.Add_byte_nl();
 			bfr.Add(Gfh_tag_.P_rhs);
+			bfr.Add_byte_nl();
 		}
-		bfr.Add_byte_nl();
 	}
 }

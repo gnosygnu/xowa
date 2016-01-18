@@ -97,7 +97,7 @@ class Pf_msg_mgr_fxt {
 	public void Init_msg_db(Xowe_wiki wiki, String ttl, String val) {
 		fxt.Init_page_create(wiki, "MediaWiki:" + ttl, val);
 	}
-	public Xowe_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(domain));}
+	public Xowe_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(domain));}
 	public void Test_parse_en(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}

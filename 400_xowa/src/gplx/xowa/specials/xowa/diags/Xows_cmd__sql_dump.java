@@ -31,7 +31,7 @@ class Xows_cmd__sql_dump {
 		}
 		else {
 			byte[] db_type_bry = arg_hash.Get_val_bry_or(Arg_db_type, null); if (db_type_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no db_type: url=~{0}", url.Raw()); return;}
-			Xow_wiki wiki = app.Wiki_mgri().Get_by_key_or_make_init_y(wiki_bry);
+			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry);
 			Byte_obj_val db_type_val = (Byte_obj_val)db_type_hash.Get_by_bry(db_type_bry);	if (db_type_val == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; bad db_type: url=~{0}", url.Raw()); return;}
 			switch (db_type_val.Val()) {
 				case Db_type_wiki_core: conn = wiki.Data__core_mgr().Db__core().Conn(); break;

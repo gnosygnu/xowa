@@ -28,7 +28,10 @@ public class Xoh_section_mgr {
 	}
 	public void Set_content(int section_idx, byte[] src, int pos) {
 		Xoh_section_itm itm = this.Get_at(section_idx);
-		itm.Content_(Bry_.Mid(src, itm.Content_bgn(), pos));
+		if (pos > itm.Content_bgn())
+			itm.Content_(Bry_.Mid(src, itm.Content_bgn(), pos));
+		else	// TIDY:tidy will collapse "<h2>A</h2>\n\n<h2>B</h2>" to "<h2>A</h2>\n<h2>B</h2>"; this will show up as a pos < itm.Content_bgn; PAGE:en.w:Summer_solstice; DATE:2016-01-04
+			itm.Content_(Bry_.Empty);
 	}
 	public void To_bfr(Bry_bfr bfr) {
 		int len = this.Len();

@@ -71,7 +71,7 @@ public class Xoa_app_fxt {
 	public static Xowe_wiki wiki_(Xoae_app app, String key, Xol_lang_itm lang) {
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(key);
 		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(Bry_.new_u8(key)), wiki_dir);
-		rv.File_mgr().Meta_mgr().Depth_(2);					// TEST: written for 2 depth
+		rv.File_mgr().Dbmeta_mgr().Depth_(2);					// TEST: written for 2 depth
 		rv.Props().Main_page_(Xoa_page_.Main_page_bry);		// TEST: default to Main Page (nothing tests loading Main Page from wiki.gfs)			
 		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(true);
 		app.Wiki_mgr().Add(rv);

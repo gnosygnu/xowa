@@ -82,7 +82,7 @@ public abstract class Gallery_mgr_base {
 	public static byte File_found_mode = Bool_.__byte;
 	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_file_itm xfer_itm, boolean hctx_is_hdump) {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
-		Xoa_ttl ttl = itm.Ttl();
+		Xoa_ttl ttl = itm.Ttl(); if (Bry_.Len_eq_0(ttl.Page_db())) return;	// if file ttl is invalid, do not write; EX:File:#A.png; DATE:2016-01-12
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
 
 		Xop_lnki_tkn lnki = itm.Lnki_tkn();
@@ -187,14 +187,7 @@ public abstract class Gallery_mgr_base {
 		if (!hctx_is_hdump)
 			Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__id, gallery_ul_uid);
 		Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__class, cls);
-//			if (hctx_is_hdump) {
-//				bfr.Add_byte_space();
-//				bfr.Add(Xoh_make_trie_.Bry__gallery_box_max);
-//				bfr.Add_int_variable(uid);
-//				bfr.Add_byte_apos();
-//			}
-//			else
-			Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__style, style);
+		Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__style, style);
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {

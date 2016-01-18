@@ -53,6 +53,6 @@ public interface Xoa_app extends GfoInvkAble {
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Json_parser				Utl__json_parser();
 	Gfo_inet_conn			Utl__inet_conn();
-	Xoa_meta_mgr			Meta_mgr();
+	Xoa_meta_mgr			Dbmeta_mgr();
 	Xoa_site_cfg_mgr		Site_cfg_mgr();
 }	

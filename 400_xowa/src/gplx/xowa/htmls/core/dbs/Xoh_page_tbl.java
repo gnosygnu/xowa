@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*; import gplx.core.brys.*;
 public class Xoh_page_tbl implements Rls_able {
-	private final String tbl_name = "html"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "html"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	private final Int_flag_bldr body_flag_bldr = new Int_flag_bldr().Pow_ary_bld_(3, 2);	// 8 different zip types; 4 different hzip types
@@ -34,7 +34,7 @@ public class Xoh_page_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] body) {Insert(hpg.Page_id(), hpg.Head_mgr().Flag(), zip_tid, hzip_tid, hpg.Display_ttl(), hpg.Content_sub(), hpg.Sidebar_div(), body);}

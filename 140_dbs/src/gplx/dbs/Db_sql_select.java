@@ -57,7 +57,7 @@ class Db_sql_col_bldr {
 		int ord = -1;
 		for (int i = 0; i < ary.length; ++i) {
 			String fld_key = ary[i];
-			if (fld_key == Db_meta_fld.Key_null) continue;
+			if (fld_key == Dbmeta_fld_itm.Key_null) continue;
 			Db_sql_col__name fld = new Db_sql_col__name(++ord, fld_key);
 			tmp_list.Add(fld);
 		}

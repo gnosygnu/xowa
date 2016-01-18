@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
 public class Fsd_dir_tbl implements Rls_able {
-	private final String tbl_name = "fsdb_dir"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "fsdb_dir"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_name;		
 	private final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name;		
 	public Fsd_dir_tbl(Db_conn conn, boolean schema_is_1) {
@@ -35,8 +35,8 @@ public class Fsd_dir_tbl implements Rls_able {
 	}
 	public void Create_tbl() {
 		conn.Ddl_create_tbl
-		( Db_meta_tbl.new_(tbl_name, flds
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "name", fld_name, fld_owner_id, fld_id)));
+		( Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "name", fld_name, fld_owner_id, fld_id)));
 	}
 	public void Insert(int id, byte[] name, int owner_id) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);

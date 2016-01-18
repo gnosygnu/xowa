@@ -33,6 +33,12 @@ public class Gfh_style_parser__tst {
 		fxt.Test__parse("k_0:v_0;;"					, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse("k_0:v_0; ; "				, fxt.Make("k_0", "v_0"));
 	}
+	@Test   public void Invalid__no_semic() {
+		fxt.Test__parse("k_0"						, fxt.Make("k_0", ""));
+	}
+	@Test   public void Invalid__dupe_colon() {
+		fxt.Test__parse("a:b:c:d;"					, fxt.Make("a", "b:c:d"));
+	}
 }
 class Gfh_style_parser__fxt {
 	private final Gfh_style_wkr__ary wkr = Gfh_style_wkr__ary.Instance;

@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*; 
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xof_orig_tbl implements Rls_able {
-	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
 	private final Db_conn conn; private final Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();
 	public Db_conn Conn() {return conn;}
@@ -40,7 +40,7 @@ public class Xof_orig_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public void Rls() {}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
 	public void Select_by_list(Ordered_hash rv, List_adp itms) {select_in_wkr.Init(rv, itms).Select_in(Cancelable_.Never, conn, 0, itms.Count());}
 	public Xof_orig_itm Select_itm(byte[] ttl) {
 		Xof_orig_itm rv = Xof_orig_itm.Null;
@@ -87,9 +87,9 @@ public class Xof_orig_tbl implements Rls_able {
 	private static final byte Status_found = 1;
 }
 class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
-	private Xof_orig_tbl tbl; private String tbl_name; private Db_meta_fld_list flds; private String fld_ttl;
+	private Xof_orig_tbl tbl; private String tbl_name; private Dbmeta_fld_list flds; private String fld_ttl;
 	private List_adp itms; private Ordered_hash rv;		
-	public void Ctor(Xof_orig_tbl tbl, String tbl_name, Db_meta_fld_list flds, String fld_ttl) {
+	public void Ctor(Xof_orig_tbl tbl, String tbl_name, Dbmeta_fld_list flds, String fld_ttl) {
 		this.tbl = tbl; this.tbl_name = tbl_name; this.flds = flds; this.fld_ttl = fld_ttl;
 	}
 	public Xof_orig_tbl__in_wkr Init(Ordered_hash rv, List_adp itms) {this.itms = itms; this.rv = rv; return this;}

@@ -28,8 +28,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
 			byte[] wiki_key = repo_pair.Src().Wiki_domain();
 			if (repo_pair.Src().Wmf_api()) continue;
-			Xowe_wiki repo_wiki = wiki_mgr.Get_by_key_or_null(wiki_key);
-			if (repo_wiki == null) {continue;}
+			Xowe_wiki repo_wiki = (Xowe_wiki)wiki_mgr.Get_by_or_null(wiki_key); if (repo_wiki == null) {continue;}
 			Xoa_ttl ttl = Xoa_ttl.parse(repo_wiki, ttl_bry);
 			Xow_ns file_ns = repo_wiki.Ns_mgr().Ns_file();
 			boolean found = repo_wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, file_ns, ttl.Page_db());
@@ -50,8 +49,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		for (int i = 0; i < repo_pairs_len; i++) {
 			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
 			byte[] src_wiki_key = repo_pair.Src().Wiki_domain();
-			Xowe_wiki src_wiki = wiki_mgr.Get_by_key_or_null(src_wiki_key);
-			if (src_wiki == null) continue;		// src_wiki defined as repo_pair in cfg, but it has not been downloaded; continue; EX: commons set up but not downloaded
+			Xowe_wiki src_wiki = (Xowe_wiki)wiki_mgr.Get_by_or_null(src_wiki_key); if (src_wiki == null) continue;	 // src_wiki defined as repo_pair in cfg, but it has not been downloaded; continue; EX: commons set up but not downloaded
 			boolean found = src_wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, file_ns, ttl_db_key);
 			if (!found) continue;				// ttl does not exist in src_wiki; continue; EX: file does not exist in commons, but exists in en_wiki
 			byte[] redirect = Get_redirect(src_wiki, file_ns, tmp_db_page);

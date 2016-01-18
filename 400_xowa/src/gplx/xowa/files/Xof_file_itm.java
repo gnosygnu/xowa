@@ -38,6 +38,7 @@ public interface Xof_file_itm {
 	boolean				File_is_orig();
 	int					File_w();
 	boolean				File_exists();
+	boolean				File_exists_in_cache();
 	int					Html_uid();
 	byte				Html_elem_tid();
 	int					Html_w();
@@ -60,5 +61,5 @@ public interface Xof_file_itm {
 	void				Init_at_gallery_bgn(int html_w, int html_h, int file_w);
 	void				Init_at_gallery_end(int html_w, int html_h, Io_url html_view_url, Io_url html_orig_url);
 
-	boolean				Meta_is_new();
+	boolean				Dbmeta_is_new();
 }

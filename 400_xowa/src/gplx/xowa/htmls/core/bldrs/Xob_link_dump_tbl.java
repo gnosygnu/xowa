@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*;
 class Xob_link_dump_tbl implements Rls_able {
-	public static final String Tbl_name = "link_dump"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	public static final String Tbl_name = "link_dump"; private static final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	public static final String
 	  Fld_uid				= flds.Add_int_pkey_autonum("uid")
 	, Fld_src_page_id		= flds.Add_int("src_page_id")
@@ -33,16 +33,16 @@ class Xob_link_dump_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(Tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(Tbl_name, flds));}
 	public void Create_idx_1() {
 		conn.Ddl_create_idx
-		( Db_meta_idx.new_normal_by_tbl(Tbl_name, "src", Fld_src_page_id, Fld_src_html_uid)
-		, Db_meta_idx.new_normal_by_tbl(Tbl_name, "trg_temp", Fld_trg_ns, Fld_trg_ttl)
+		( Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "src", Fld_src_page_id, Fld_src_html_uid)
+		, Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "trg_temp", Fld_trg_ns, Fld_trg_ttl)
 		);
 	}
 	public void Create_idx_2() {
 		conn.Ddl_create_idx
-		( Db_meta_idx.new_normal_by_tbl(Tbl_name, "trg", Fld_trg_page_id, Fld_src_page_id, Fld_src_html_uid)
+		( Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "trg", Fld_trg_page_id, Fld_src_page_id, Fld_src_html_uid)
 		);			
 	}
 	public void Rls() {

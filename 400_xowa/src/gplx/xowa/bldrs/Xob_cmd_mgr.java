@@ -37,6 +37,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_link))				return Add(new Xob_categorylinks_sql(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_hidden))				return Add(new Xoctg_hiddencat_parser_sql(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_term))					return Add(new Xob_term_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_delete_page))			return Add(new Xob_page_delete_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_make))			return Add(new Xob_page_dump_cmd_make(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_drop))			return Add(new Xob_page_dump_cmd_drop(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_redirect))				return Add(new Xob_redirect_cmd(bldr, wiki));
@@ -142,7 +143,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 	private Xowe_wiki Wiki_get_or_make(GfoMsg m) {
 		byte[] wiki_key = m.ReadBry("v");
 		Xoae_wiki_mgr wiki_mgr = bldr.App().Wiki_mgr();
-		Xowe_wiki rv = wiki_mgr.Get_by_key_or_make(wiki_key);
+		Xowe_wiki rv = wiki_mgr.Get_by_or_make(wiki_key);
 		rv.Lang().Init_by_load();
 		return rv;
 	}

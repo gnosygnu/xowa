@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.files.*;
 class Xob_lnki_temp_tbl {
-	private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private static final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private static final String Tbl_name = "lnki_temp";
 	public static final String 
 	  Fld_lnki_id				= flds.Add_int_pkey_autonum("lnki_id");	// NOTE: insertion order index; public b/c not used and want to bypass warning
@@ -39,7 +39,7 @@ class Xob_lnki_temp_tbl {
 	private Db_stmt stmt_insert;
 	public Xob_lnki_temp_tbl(Db_conn conn) {this.conn = conn;}
 	public Db_conn Conn()		{return conn;} private final Db_conn conn;
-	public void Create_tbl()	{conn.Ddl_create_tbl(Db_meta_tbl.new_(Tbl_name, flds));}
+	public void Create_tbl()	{conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(Tbl_name, flds));}
 	public void Insert_bgn()	{conn.Txn_bgn("bldr__lnki_temp"); stmt_insert = conn.Stmt_insert(Tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

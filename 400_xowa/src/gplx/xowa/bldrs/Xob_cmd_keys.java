@@ -56,6 +56,7 @@ public class Xob_cmd_keys {
 	, Key_site_meta					= "util.site_meta"
 	, Key_diff_build				= "diff.build"
 	, Key_diff_merge				= "diff.merge"
+	, Key_text_delete_page			= "text.delete_page"
 
 	, Key_tdb_text_init				= "tdb.text.init"			// "core.init"
 	, Key_tdb_make_page				= "tdb.text.page"			// "core.make_page"

@@ -23,8 +23,8 @@ public class Xoh_gly_html__dump__tst {
 	@Test   public void Basic() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "<gallery>"
-		, "File:A.jpg|A1"
-		, "File:B.jpg|B1"
+		, "File:A.png|A1"
+		, "File:B.png|B1"
 		, "</gallery>"
 		), String_.Concat_lines_nl_skip_last
 		( "<ul class='gallery mw-gallery-traditional'>"
@@ -32,7 +32,7 @@ public class Xoh_gly_html__dump__tst {
 		, "    <div style='width:155px;'>"
 		, "      <div class='thumb' style='width:150px;'>"
 		, "        <div style='margin:15px auto;'>"
-		, "          <a href='/wiki/File:A.jpg' class='image' xowa_title='A.jpg'><img data-xoimg='0|120|120|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
+		, "          <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='0|120|120|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class='gallerytext'><p>A1"
@@ -45,7 +45,7 @@ public class Xoh_gly_html__dump__tst {
 		, "    <div style='width:155px;'>"
 		, "      <div class='thumb' style='width:150px;'>"
 		, "        <div style='margin:15px auto;'>"
-		, "          <a href='/wiki/File:B.jpg' class='image' xowa_title='B.jpg'><img data-xoimg='0|120|120|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
+		, "          <a href='/wiki/File:B.png' class='image' xowa_title='B.png'><img data-xowa-title=\"B.png\" data-xoimg='0|120|120|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class='gallerytext'><p>B1"

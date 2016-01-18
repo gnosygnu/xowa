@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 class Xofc_fil_tbl implements Rls_able {
-	private String tbl_name = "file_cache_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String tbl_name = "file_cache_fil"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private String fld_uid, fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_page, fld_ext, fld_size, fld_cache_time;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_itm_stmt, select_itm_v2_stmt;
 	public Db_conn Conn() {return conn;}
@@ -37,7 +37,7 @@ class Xofc_fil_tbl implements Rls_able {
 		fld_h				= flds.Add_int(fld_prefix + "h");
 		fld_time			= flds.Add_int(fld_prefix + "thumbtime");
 		if (schema_is_1) {
-			fld_page		= Db_meta_fld.Key_null;
+			fld_page		= Dbmeta_fld_itm.Key_null;
 		}
 		else {
 			fld_page		= flds.Add_int(fld_prefix + "page");
@@ -46,8 +46,8 @@ class Xofc_fil_tbl implements Rls_able {
 		fld_size			= flds.Add_long(fld_prefix + "size");
 		fld_cache_time		= flds.Add_long("cache_time");
 		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_normal_by_tbl(tbl_name, "fil", fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_cache_time, fld_uid)
+			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
+			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "fil", fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_cache_time, fld_uid)
 			);
 			conn.Ddl_create_tbl(meta);
 		}
@@ -122,7 +122,7 @@ class Xofc_fil_tbl implements Rls_able {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xofc_fil_itm fil_itm = new_itm(rdr);

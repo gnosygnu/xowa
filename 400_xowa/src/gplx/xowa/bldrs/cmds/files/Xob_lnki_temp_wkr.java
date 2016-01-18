@@ -57,7 +57,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Ctgs_enabled_(false);			// disable categories else progress messages written (also for PERF)
 		if (wiki.File__bin_mgr() != null)
 			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// remove wmf wkr, else will try to download images during parsing
-		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_domain_itm_.Bry__commons);
+		commons_wiki = app.Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons);
 		Xop_log_mgr log_mgr = ctx.App().Log_mgr();
 		log_mgr.Log_dir_(wiki.Fsys_mgr().Root_dir());	// put log in wiki dir, instead of user.temp
 		invoke_wkr = this.Invoke_wkr();					// set member reference

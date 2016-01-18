@@ -534,6 +534,13 @@ public class String_ implements GfoInvkAble {
 		}
 		return trg_ary;
 	}
+	public static boolean Ary_eq(String[] lhs, String[] rhs) {
+		int lhs_len = lhs.length, rhs_len = rhs.length;
+		if (lhs_len != rhs_len) return false;
+		for (int i = 0; i < lhs_len; ++i)
+			if (!String_.Eq(lhs[i], rhs[i])) return false;
+		return true;
+	}
 	public static String To_str__as_kv_ary(String... ary) {
 		int len = ary.length;
 		Bry_bfr bfr = Bry_bfr.new_();

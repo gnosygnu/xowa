@@ -23,7 +23,7 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 	@Override public String Async_key() {return KEY_dump;}
 	@Override public byte Async_init() {
 		Xoae_app app = install_mgr.App(); Gfui_kit kit = app.Gui_mgr().Kit();
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
 		Io_url wiki_dir = wiki.Import_cfg().Src_dir();
 		Io_url[] urls = Io_mgr.Instance.QueryDir_args(wiki_dir).Recur_(false).FilPath_("*.xml.bz2").ExecAsUrlAry();
 		if (urls.length == 0) {

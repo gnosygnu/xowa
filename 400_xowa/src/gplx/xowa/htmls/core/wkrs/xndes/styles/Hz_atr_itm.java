@@ -107,7 +107,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		private void Save_tag(Bry_bfr bfr, Hz_tag_itm ztag) {
 //			Xohz_style_itm[] atrs = ztag.Atrs();
 //			int len = atrs.length;
-//			Xoh_hzip_int_.Encode(1, bfr, ztag.Id());
+//			Gfo_hzip_int_.Encode(1, bfr, ztag.Id());
 //			for (int i = 0; i < len; ++i) {
 //				Xohz_style_itm atr = atrs[i];
 //				Save_atr(bfr, atr, Byte_ascii.Escape);
@@ -115,7 +115,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //			bfr.Add_byte_nl();
 //		}
 //		private void Save_atr(Bry_bfr bfr, Xohz_style_itm atr, byte dlm) {
-//			// Xoh_hzip_int_.Encode(1, bfr, atr.Id());
+//			// Gfo_hzip_int_.Encode(1, bfr, atr.Id());
 //			Xohz_style_val[] vals = atr.Itms();
 //			int len = vals.length;
 //			for (int i = 0; i < len; ++i) {
@@ -130,12 +130,12 @@ import gplx.xowa.htmls.core.hzips.*;
 //			Hz_tag_itm ztag = regy.Tags__get_or_new(htag.Name_id());
 //
 //			bfr.Add(Hook_tag);
-//			Xoh_hzip_int_.Encode(1, bfr, ztag.Id());
+//			Gfo_hzip_int_.Encode(1, bfr, ztag.Id());
 //			int len = htag.Atrs__len();
 //			for (int i = 0; i < len; ++i) {
 //				Gfh_atr hatr = htag.Atrs__get_at(i);
 //				Xohz_style_itm zatr = regy.Atrs__get_or_new(hatr.Key());
-//				Xoh_hzip_int_.Encode(1, bfr, zatr.Id());
+//				Gfo_hzip_int_.Encode(1, bfr, zatr.Id());
 //				byte[] hval = hatr.Val();
 //				if (zatr.Indexable())
 //					zatr.Write(bfr, hval);
@@ -175,7 +175,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //			list.Add(new Xohz_style_val(list.Count(), key, Bool_.Y));
 //		}
 //		public void Write(Bry_bfr bfr, byte[] key) {
-//			Xoh_hzip_int_.Encode(1, bfr, 1);
+//			Gfo_hzip_int_.Encode(1, bfr, 1);
 //		}
 //	}
 //	class Xohz_style_val {

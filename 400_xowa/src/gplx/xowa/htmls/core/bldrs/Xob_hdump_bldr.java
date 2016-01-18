@@ -42,6 +42,7 @@ public class Xob_hdump_bldr implements GfoInvkAble {
 		return true;
 	}
 	public void Insert(Xoae_page page) {
+		tmp_hpg.Clear();	// NOTE: must clear tmp_hpg or else will leak memory during mass build; DATE:2016-01-09
 		page.File_queue().Clear();																				// need to reset uid to 0, else xowa_file_# will resume from last
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);	// write to html in hdump mode
 		byte[] orig_bry = tmp_bfr.To_bry_and_clear();

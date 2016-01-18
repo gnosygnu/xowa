@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*;
 class Xoctg_fmtr_all {
 	public Xoctg_fmtr_all(byte tid) {this.Ctor(tid);}
 	public byte Tid() {return tid;} private byte tid;
@@ -131,7 +131,7 @@ class Xoctg_fmtr_all {
 			arg_sortkey = view_grp.Itms_at_first().Sort_key();
 		}
 		href_bfr.Add_byte(Byte_ascii.Question).Add(arg_idx_lbl).Add_byte(Byte_ascii.Eq);		// filefrom=
-		href_bfr.Add(arg_sortkey);																// Abc
+		Gfo_url_encoder_.Http_url.Encode(href_bfr, arg_sortkey);								// Abc
 		href_bfr.Add_byte(Byte_ascii.Hash).Add(div_id);											// #mw-subcategories
 		byte[] nav_href = href_bfr.To_bry_and_rls();
 		byte[] nav_ttl = ttl.Full_url();

@@ -72,7 +72,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		Xoae_app app = install_mgr.App();
 		app.Usr_dlg().Prog_one("", "", "preparing import: ~{0}", wiki_key);
 		Xob_bldr bldr = app.Bldr();
-		wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_a7(wiki_key));
+		wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_a7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);

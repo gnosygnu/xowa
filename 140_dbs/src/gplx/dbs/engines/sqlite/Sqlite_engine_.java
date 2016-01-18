@@ -54,10 +54,10 @@ public class Sqlite_engine_ {
 		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.To_str(val) + ";");
 		p.Exec_qry(qry);
 	}
-	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Db_meta_idx[] idx_ary) {
+	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Dbmeta_idx_itm[] idx_ary) {
 		int len = idx_ary.length;
 		for (int i = 0; i < len; ++i) {
-			Db_meta_idx idx = idx_ary[i];
+			Dbmeta_idx_itm idx = idx_ary[i];
 			String idx_sql = idx.To_sql_create();
 			usr_dlg.Plog_many("", "", "creating index: ~{0} ~{1}", tbl, idx_sql);
 			conn.Exec_qry(Db_qry_sql.ddl_(idx.To_sql_create()));

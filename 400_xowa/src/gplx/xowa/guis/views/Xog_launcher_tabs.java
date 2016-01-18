@@ -61,7 +61,7 @@ class Xog_launcher_tabs {
 	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
 		Xoae_app app = win.App();
 		Xoa_url launch_url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(launch_str); if (launch_url == null) return;
-		Xowe_wiki launch_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(launch_url.Wiki_bry());
+		Xowe_wiki launch_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(launch_url.Wiki_bry());
 		Xoa_ttl launch_ttl = Xoa_ttl.parse(launch_wiki, launch_url.Page_bry());
 		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(launch_wiki, Xoae_page.New(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);

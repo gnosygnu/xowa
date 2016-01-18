@@ -43,13 +43,13 @@ public class Xof_xfer_queue {
 		for (int i = 0; i < xfer_len; i++) {
 			if (wiki.Appe().Usr_dlg().Canceled()) break;
 			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)xfer_list.Get_at(i);
-			meta_mgr = xfer_itm.Meta_itm().Owner_fil().Owner_mgr();
+			meta_mgr = xfer_itm.Dbmeta_itm().Owner_fil().Owner_mgr();
 			byte[] meta_mgr_key = meta_mgr.Wiki().Domain_bry();
 			if (!dirty_meta_mgrs.Has(meta_mgr_key)) dirty_meta_mgrs.Add(meta_mgr_key, meta_mgr);	// only add if new
 			String queue_msg = usr_dlg.Prog_many("", "", "downloading ~{0} of ~{1}: ~{2};", i + List_adp_.Base1, xfer_len, xfer_itm.Lnki_ttl());
 			wiki.App().Wmf_mgr().Download_wkr().Download_xrg().Prog_fmt_hdr_(queue_msg);
 			wiki.File_mgr().Repo_mgr().Xfer_by_meta(xfer_itm, this);
-			xfer_itm.Set__meta(xfer_itm.Meta_itm(), xfer_itm.Meta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
+			xfer_itm.Set__meta(xfer_itm.Dbmeta_itm(), xfer_itm.Dbmeta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
 			xfer_itm.Calc_by_meta();
 			if (!xfer_itm.File_exists()) continue;	// file not found; don't call Update_img, else invalid src will be passed and caption box will be incorrectly resized; EX:ar.d:جَبَّارَة; DATE:2014-04-13
 			if (Bry_.Len_gt_0(xfer_itm.Html_view_url().To_http_file_bry())	// only update images that have been found; otherwise "Undefined" shows up in image box

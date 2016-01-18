@@ -41,17 +41,16 @@ public class Xoh_lnki_data {
 	public int			Title_tid() {return title_tid;} private int title_tid;
 	public int			Title_bgn() {return title_bgn;} private int title_bgn;
 	public int			Title_end() {return title_end;} private int title_end;
-	public boolean			Tid_is_ctg_main() {return tid_is_ctg_main;} private boolean tid_is_ctg_main;
-	public boolean			Tid_is_ctg_tree() {return tid_is_ctg_tree;} private boolean tid_is_ctg_tree;
-	public boolean			Tid_is_ctg_xnav() {return tid_is_ctg_xnav;} private boolean tid_is_ctg_xnav;
+	public byte			Cls_tid() {return cls_tid;} private byte cls_tid;
 	public Xoh_anch_href_data Href_itm() {return href_itm;} private final Xoh_anch_href_data href_itm = new Xoh_anch_href_data();
 	public Xoh_anch_capt_itm Capt_itm() {return capt_itm;} private final Xoh_anch_capt_itm capt_itm = new Xoh_anch_capt_itm();
 	private void Init(byte[] src) {
 		this.src = href_src = capt_src = src;
-		capt_has_ns = title_missing_ns = tid_is_ctg_main = tid_is_ctg_tree = tid_is_ctg_xnav = false;
+		capt_has_ns = title_missing_ns = false;
 		href_ns_id = Xow_ns_.Tid__main; href_ns_name = null; href_ns_name_len = 0;
 		href_bgn = href_end = capt_bgn = capt_end = title_bgn = title_end = -1;			
 		title_tid = Title__href;
+		this.cls_tid = Xoh_anch_cls_.Tid__none;
 		href_itm.Clear();
 	}
 	public boolean Parse1(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag anch_head) {
@@ -84,13 +83,8 @@ public class Xoh_lnki_data {
 		}
 	}
 	private void Parse_cls(Gfh_tag anch_head) {
-		byte[] cls_bry = anch_head.Atrs__get_as_bry(Gfh_atr_.Bry__class);
-		byte cls_tid = Cls__trie.Match_byte_or(cls_bry, 0, cls_bry.length, Byte_.Max_value_127);
-		switch (cls_tid) {
-			case Cls_tid__main: this.tid_is_ctg_main = true; break;
-			case Cls_tid__tree: this.tid_is_ctg_tree = true; break;
-			case Cls_tid__xnav: this.tid_is_ctg_xnav = true; break;
-		}
+		byte[] cls_bry = anch_head.Atrs__get_as_bry(Gfh_atr_.Bry__class); if (Bry_.Len_eq_0(cls_bry)) return;
+		this.cls_tid = Xoh_anch_cls_.Trie.Match_byte_or(cls_bry, 0, cls_bry.length, Xoh_anch_cls_.Tid__unknown);
 	}
 	private void Parse_capt(Gfh_tag_rdr tag_rdr, Gfh_tag anch_head) {
 		this.capt_bgn = anch_head.Src_end();										// capt starts after <a>
@@ -157,12 +151,5 @@ public class Xoh_lnki_data {
 	, Title__capt			= 1
 	, Title__diff			= 2
 	, Title__missing		= 3
-	;
-	public static final byte[] Cls_bry__main = Bry_.new_a7("internal"), Cls_bry__xnav = Bry_.new_a7("xowa_nav");
-	private static final byte Cls_tid__main = 0, Cls_tid__tree = 1, Cls_tid__xnav = 2;
-	private static final Btrie_slim_mgr Cls__trie = Btrie_slim_mgr.cs()
-	.Add_bry_byte(Cls_bry__main, Cls_tid__main)
-	.Add_bry_byte(gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Html__cls__bry, Cls_tid__tree)
-	.Add_bry_byte(Cls_bry__xnav, Cls_tid__xnav)
 	;
 }

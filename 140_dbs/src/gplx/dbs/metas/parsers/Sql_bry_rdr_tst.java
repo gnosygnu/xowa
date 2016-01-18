@@ -41,12 +41,12 @@ class Sql_bry_rdr_fxt {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	public void Clear() {}
 	public void Test_skip_ws(String src, int expd_pos) {
-		rdr.Init(Bry_.new_u8(src));
+		rdr.Init_by_src(Bry_.new_u8(src));
 		rdr.Skip_ws();
 		Tfds.Eq(expd_pos, rdr.Pos());
 	}
 	public void Test_read_sql_identifier(String src, String expd) {
-		rdr.Init(Bry_.new_u8(src));
+		rdr.Init_by_src(Bry_.new_u8(src));
 		Tfds.Eq(expd, String_.new_u8(rdr.Read_sql_identifier()));
 	}
 }

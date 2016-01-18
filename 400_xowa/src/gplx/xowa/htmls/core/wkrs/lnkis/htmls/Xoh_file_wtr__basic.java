@@ -71,7 +71,7 @@ public class Xoh_file_wtr__basic {
 					||	(	orig_ext.Id_is_ogg()					// id is ogg
 						&&	wiki.File_mgr().Version_1_y()			// version is v1 (v2 always marks ogg as aud); DATE:2014-02-01
 						&&	(	xfer_itm.File_exists()				// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
-							||	xfer_itm.Meta_is_new()				// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
+							||	xfer_itm.Dbmeta_is_new()			// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
 							)
 						)
 					) {	

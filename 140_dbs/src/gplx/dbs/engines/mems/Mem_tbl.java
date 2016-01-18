@@ -17,17 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*;
+import gplx.dbs.metas.*;
 public class Mem_tbl {
 	private final List_adp rows = List_adp_.new_(); private final List_adp where_rows = List_adp_.new_();
 	private final Hash_adp autonum_hash = Hash_adp_.new_();		
-	public Mem_tbl(Db_meta_tbl meta) {this.meta = meta;}
-	public Db_meta_tbl Meta() {return meta;} private final Db_meta_tbl meta;
+	public Mem_tbl(Dbmeta_tbl_itm meta) {this.meta = meta;}
+	public Dbmeta_tbl_itm Meta() {return meta;} private final Dbmeta_tbl_itm meta;
 	public int Insert(Db_stmt__mem stmt) {
 		Mem_row itm = new Mem_row();
-		Db_meta_fld[] flds = meta.Flds();
-		int len = flds.length;
+		Dbmeta_fld_mgr flds = meta.Flds();
+		int len = flds.Len();
 		for (int i = 0; i < len; ++i) {
-			Db_meta_fld fld = flds[i];
+			Dbmeta_fld_itm fld = flds.Get_at(i);
 			String fld_name = fld.Name();
 			Object val = fld.Autonum() ? Autonum_calc(fld_name) : stmt.Args_get_by(fld_name);
 			itm.Set_by(fld_name, val);

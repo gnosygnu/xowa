@@ -29,9 +29,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_lnki_data data = (Xoh_lnki_data)data_obj;
 		Xoh_anch_href_data href = data.Href_itm();
 		int ns_id = href.Ttl_ns_id();
-								  flag_bldr.Set_as_bool(Flag__tid_is_ctg_main	, data.Tid_is_ctg_main());
-								  flag_bldr.Set_as_bool(Flag__tid_is_ctg_tree	, data.Tid_is_ctg_tree());
-								  flag_bldr.Set_as_bool(Flag__tid_is_ctg_xnav	, data.Tid_is_ctg_xnav());
+								  flag_bldr.Set_as_byte(Flag__cls_tid			, data.Cls_tid());
 								  flag_bldr.Set_as_bool(Flag__title_missing_ns	, data.Title_missing_ns());
 								  flag_bldr.Set_as_bool(Flag__ttl_is_main_page	, href.Ttl_is_main_page());
 		boolean ns_custom_exists= flag_bldr.Set_as_bool(Flag__ns_custom_exists	, href.Ttl_ns_custom() != null);
@@ -68,9 +66,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
-		boolean tid_is_ctg_main			= flag_bldr.Get_as_bool(Flag__tid_is_ctg_main);
-		boolean tid_is_ctg_tree			= flag_bldr.Get_as_bool(Flag__tid_is_ctg_tree);
-		boolean tid_is_ctg_xnav			= flag_bldr.Get_as_bool(Flag__tid_is_ctg_xnav);
+		byte cls_tid					= flag_bldr.Get_as_byte(Flag__cls_tid);
 		boolean title_missing_ns			= flag_bldr.Get_as_bool(Flag__title_missing_ns);
 		boolean ttl_is_main_page			= flag_bldr.Get_as_bool(Flag__ttl_is_main_page);
 		boolean ns_custom_exists			= flag_bldr.Get_as_bool(Flag__ns_custom_exists);
@@ -116,12 +112,15 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 						tmp_bfr.Add(ns.Name_db()).Add_byte_colon();
 					}
 				}
-				Gfo_url_encoder encoder = href_type == Xoh_anch_href_data.Tid__wiki ? Gfo_url_encoder_.Href : Gfo_url_encoder_.Href_qarg;	// NOTE: lnki vs lnke will encode entities differently
+				// Gfo_url_encoder encoder = href_type == Xoh_anch_href_data.Tid__wiki ? Gfo_url_encoder_.Href : Gfo_url_encoder_.Href_qarg;	// NOTE: lnki vs lnke will encode entities differently
 				int href_end = href_bry.length;
-				if (tid_is_ctg_xnav)	// NOTE: for ctg_xnav, only encode title, not its query arguments; "?" x> "%3F" or "=" x> "%3D" or "sortkey=A B" -> "sortkey=A_B"; DATE:2015-12-28
-					href_end = Bry_find_.Find_fwd(href_bry, Byte_ascii.Question, 0, href_end); if (href_end == Bry_find_.Not_found) rdr.Err_wkr().Fail("encoded question not found in category xnav link", "href", href_bry);
-				encoder.Encode(tmp_bfr, href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
-				if (tid_is_ctg_xnav)
+				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav)	{ // NOTE: for ctg_xnav, only encode title, not its query arguments; "?" x> "%3F" or "=" x> "%3D" or "sortkey=A B" -> "sortkey=A_B"; DATE:2015-12-28
+					href_end = Bry_find_.Find_fwd(href_bry, Byte_ascii.Question, 0, href_end);
+				}
+				// encoder.Encode(tmp_bfr, href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
+				// tmp_bfr.Add_mid(href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
+				tmp_bfr.Add_mid_w_swap(href_bry, 0, href_end, Byte_ascii.Space, Byte_ascii.Underline);
+				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav && href_end != -1)
 					tmp_bfr.Add_mid(href_bry, href_end, href_bry.length);
 				href_bry = tmp_bfr.To_bry_and_clear();
 				break;
@@ -132,7 +131,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				case Xoh_lnki_data.Title__missing:	title_bry = null; break;
 				case Xoh_lnki_data.Title__diff:		break;
 				case Xoh_lnki_data.Title__href:
-					title_bry = tid_is_ctg_main
+					title_bry = cls_tid == Xoh_anch_cls_.Tid__ctg_main
 						? Gfo_url_encoder_.Href.Decode(capt_bry)
 						: Gfo_url_encoder_.Href.Decode(href_bry);
 					break;
@@ -158,13 +157,16 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				bfr.Add(Xoh_href_.Bry__wiki);
 				break;
 		}
-		bfr.Add(href_bry);			
-		if		(tid_is_ctg_main)
-			bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(Xoh_lnki_data.Cls_bry__main);
-		else if (tid_is_ctg_tree)
-			bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Html__cls__bry);
-		else if (tid_is_ctg_xnav)
-			bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(Xoh_lnki_data.Cls_bry__xnav);
+		bfr.Add(href_bry);
+		byte[] cls_bry = null;
+		switch (cls_tid) {
+			case Xoh_anch_cls_.Tid__ctg_main:	cls_bry = Xoh_anch_cls_.Bry__ctg_main; break;
+			case Xoh_anch_cls_.Tid__ctg_tree:	cls_bry = Xoh_anch_cls_.Bry__ctg_tree; break;
+			case Xoh_anch_cls_.Tid__ctg_xnav:	cls_bry = Xoh_anch_cls_.Bry__ctg_xnav; break;
+			case Xoh_anch_cls_.Tid__media_info: cls_bry = Xoh_anch_cls_.Bry__media_info; break;
+			case Xoh_anch_cls_.Tid__media_play: cls_bry = Xoh_anch_cls_.Bry__media_play; break;
+		}
+		if (cls_bry != null) bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(cls_bry);
 		if (!hctx.Mode_is_diff())
 			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Uid__lnki_nxt());
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;
@@ -179,20 +181,18 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_lnki_hzip rv = new Xoh_lnki_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}
-	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 1, 1, 1		, 1, 1, 2, 1	, 1, 2, 2, 2);
+	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (3, 1		, 1, 1, 2, 1	, 1, 2, 2, 2);
 	private static final int // SERIALIZED
-	  Flag__tid_is_ctg_main		=  0
-	, Flag__tid_is_ctg_tree		=  1
-	, Flag__tid_is_ctg_xnav		=  2
-	, Flag__title_missing_ns	=  3	//
-	, Flag__ttl_is_main_page	=  4	// [[c:]]			-> "/site/commons.wikimedia.org/wiki/"
-	, Flag__ns_custom_exists	=  5	// [[c:category:a]]	-> "/site/commons.wikimedia.org/wiki/category:a"
-	, Flag__title_tid			=  6	// href, capt, diff, empty; [//en.wikipedia.org] where en.w is local
-	, Flag__capt_has_ns			=  7	// "A" vs "Help:A"
-	, Flag__ns_is_not_main		=  8
-	, Flag__href_type			=  9	// "wiki", "site", "anch", "inet"
-	, Flag__capt_cs0_tid		= 10	// exact, lower, upper
-	, Flag__text_type			= 11	// "same", "diff", "more", "less"
+	  Flag__cls_tid				=  0
+	, Flag__title_missing_ns	=  1
+	, Flag__ttl_is_main_page	=  2	// [[c:]]			-> "/site/commons.wikimedia.org/wiki/"
+	, Flag__ns_custom_exists	=  3	// [[c:category:a]]	-> "/site/commons.wikimedia.org/wiki/category:a"
+	, Flag__title_tid			=  4	// href, capt, diff, empty; [//en.wikipedia.org] where en.w is local
+	, Flag__capt_has_ns			=  5	// "A" vs "Help:A"
+	, Flag__ns_is_not_main		=  6
+	, Flag__href_type			=  7	// "wiki", "site", "anch", "inet"
+	, Flag__capt_cs0_tid		=  8	// exact, lower, upper
+	, Flag__text_type			=  9	// "same", "diff", "more", "less"
 	;
 }
 class Xoh_lnki_hzip_ {

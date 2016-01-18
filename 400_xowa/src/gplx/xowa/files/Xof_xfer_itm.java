@@ -62,7 +62,8 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int					Html_gallery_mgr_h()		{return html_gallery_mgr_h;} private int html_gallery_mgr_h;
 	public Js_img_wkr			Html_img_wkr()				{return html_img_wkr;} private Js_img_wkr html_img_wkr;
 	public boolean					File_exists()				{return file_exists;} private boolean file_exists;
-	public boolean					Meta_is_new()				{return meta_itm.State_new();}
+	public boolean				File_exists_in_cache()		{return false;}
+	public boolean					Dbmeta_is_new()				{return meta_itm.State_new();}
 	public void					Html_elem_tid_(byte v)		{html_elem_tid = v;}
 	public void					Html_size_(int w, int h)	{this.html_w = w; this.html_h = h;}
 	public void					Html_gallery_mgr_h_(int v)	{html_gallery_mgr_h = v;} 
@@ -120,7 +121,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.orig_ttl_md5 = Xof_file_wkr_.Md5_fast(v);
 	}
 
-	public Xof_meta_itm			Meta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
+	public Xof_meta_itm			Dbmeta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public void					Trg_repo_itm_(Xof_repo_itm v) {
 		trg_repo_itm = v;
 		trg_repo_root = trg_repo_itm == null ? Bry_.Empty : trg_repo_itm.Root_http();

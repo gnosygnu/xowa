@@ -46,7 +46,7 @@ class Xoh_href_wtr_fxt {
 	}
 	public Xoae_app App() {return app;} private final Xoae_app app;
 	public Xoh_href_wtr_fxt Prep_wiki_cs(String domain) {
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make_init_n(Bry_.new_u8(domain));
+		Xow_wiki wiki = app.Wiki_mgr().Get_by_or_make_init_n(Bry_.new_u8(domain));
 		wiki.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Tid__all);
 		return this;
 	}

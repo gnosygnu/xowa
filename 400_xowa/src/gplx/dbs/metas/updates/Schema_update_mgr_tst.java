@@ -23,7 +23,7 @@ public class Schema_update_mgr_tst {
 		fxt.Test_exec_y(new Schema_update_cmd__mock());
 	}
 	@Test   public void Delete() {
-		fxt.Init_itm(Meta_itm_tid.Tid_table, Schema_update_cmd__mock.Tbl_name);
+		fxt.Init_itm(Dbmeta_itm_tid.Tid_table, Schema_update_cmd__mock.Tbl_name);
 		fxt.Test_exec_n(new Schema_update_cmd__mock());
 	}
 }
@@ -34,7 +34,7 @@ class Schema_update_mgr_fxt {
 		db_mgr = new Schema_db_mgr();
 	}
 	public void Init_itm(int tid, String name) {
-		db_mgr.Tbl_mgr().Add(new Meta_tbl_itm(name, "sql"));
+		db_mgr.Tbl_mgr().Add(Dbmeta_tbl_itm.New(name));
 	}
 	public void Test_exec_y(Schema_update_cmd cmd) {Test_exec(cmd, Bool_.Y);}
 	public void Test_exec_n(Schema_update_cmd cmd) {Test_exec(cmd, Bool_.N);}

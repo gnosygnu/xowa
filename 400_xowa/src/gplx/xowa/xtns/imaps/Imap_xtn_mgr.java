@@ -32,8 +32,9 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	public Btrie_slim_mgr Desc_trie() {return desc_trie;}	private Btrie_slim_mgr desc_trie;
 	public byte[] Desc_msg() {return desc_msg;} private byte[] desc_msg;
 	public byte[] Desc_icon_url() {return desc_icon_url;} private byte[] desc_icon_url;
-	public Xoh_arg_img_core Img_core_fmtr(boolean hctx_is_hdump) {return hctx_is_hdump ? img_core_hdump : img_core_basic;}
-	private final Xoh_arg_img_core img_core_basic = new Xoh_arg_img_core__basic(), img_core_hdump = new Xoh_arg_img_core__hdump();
+	public final Xoh_arg_img_core Img_core_fmtr = new Xoh_arg_img_core__basic();
+	public final Xoh_file_html_fmtr__hdump Img_html_hdump_bldr = Xoh_file_html_fmtr__hdump.Hdump;
+	public final Bry_bfr Tmp_bfr = Bry_bfr.new_(255);
 	@Override public Xox_mgr Clone_new() {return new Imap_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -43,6 +44,9 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		parser = new Imap_parser(this);
 		init = true;
 	}
-	public void Clear() {
-	}
+	public static final byte[]
+	  Bry__usemap__html		= Bry_.new_a7(" usemap=\"#imagemap_1_")
+	, Bry__usemap__name		= Bry_.new_a7("usemap")
+	, Bry__usemap__prefix	= Bry_.new_a7("#imagemap_1_")
+	;
 }

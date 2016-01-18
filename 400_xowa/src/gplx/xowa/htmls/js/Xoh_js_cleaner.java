@@ -26,7 +26,7 @@ public class Xoh_js_cleaner {
 		if (cleaned != null) {
 			bfr.Del_by(end - bgn);
 			bfr.Add(cleaned);
-			app.Usr_dlg().Warn_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_u8(ttl.Full_txt()));
+			app.Usr_dlg().Log_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_u8(ttl.Full_txt()));
 		}
 	}
 	public byte[] Clean(Xowe_wiki wiki, byte[] src, int bgn, int end) {

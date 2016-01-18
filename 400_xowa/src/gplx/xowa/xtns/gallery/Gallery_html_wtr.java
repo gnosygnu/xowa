@@ -89,7 +89,7 @@ public class Gallery_html_wtr {
 				}
 				byte[] lnki_ttl = lnki.Ttl().Page_txt();
 				Xoa_ttl lnki_link_ttl = itm_ttl;					// default href to ttl
-				if (	itm.Link_bgn() != Bry_find_.Not_found				// link is not -1; EX: "A.png" has no link specified
+				if (	itm.Link_bgn() != Bry_find_.Not_found		// link is not -1; EX: "A.png" has no link specified
 					&&	(itm.Link_end() - itm.Link_bgn()) > 0		// and link_end - link_bgn > 0; EX: "A.png|link="; DATE:2014-06-15
 					)
 					lnki_link_ttl = Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));

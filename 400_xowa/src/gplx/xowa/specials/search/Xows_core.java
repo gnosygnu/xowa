@@ -38,7 +38,7 @@ class Xows_core {
 		for (int i = 0; i < domain_ary_len; ++i) {
 			Xow_domain_itm domain = domain_ary[i];
 			try {
-				Xowe_wiki wiki = wiki_mgr.Get_by_key_or_make(domain.Domain_bry()); wiki.Init_assert();
+				Xowe_wiki wiki = wiki_mgr.Get_by_or_make(domain.Domain_bry()); wiki.Init_assert();
 				Assert_page_count(wiki);
 				Xows_ui_cmd cmd = new Xows_ui_cmd(this, qry, wiki, page, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm(), null, null);	// null b/c args are only used by drd
 				qry.Cmds__add(cmd);

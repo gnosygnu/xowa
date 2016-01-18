@@ -27,7 +27,7 @@ public abstract class Xogv_tab_base {
 	public void Ctor(Xoav_wiki_mgr wiki_mgr, Gfo_thread_pool thread_pool, Gfo_url_parser url_parser) {this.wiki_mgr = wiki_mgr; this.thread_pool = thread_pool; this.url_parser = url_parser;}
 	public Xog_history_stack History_stack()		{return history_stack;} private final Xog_history_stack history_stack = new Xog_history_stack(); 
 	public Xog_history_itm Cur_itm()				{return history_stack.Cur_itm();}
-	public Xow_wiki Get_wiki_or_null(byte[] key)	{return wiki_mgr.Get_by_domain(key);}
+	public Xow_wiki Get_wiki_or_null(byte[] key)	{return wiki_mgr.Get_by_or_null(key);}
 	public Xoh_page Go_to(byte[] page)				{return Go_to(history_stack.Cur_itm().Wiki(), page, Bry_.Empty, Bry_.Empty, false, "");}
 	public Xoh_page Go_to(byte[] wiki, byte[] page)	{return Go_to(wiki, page, Bry_.Empty, Bry_.Empty, false, "");}
 	public Xoh_page Go_to(byte[] wiki, byte[] page, byte[] anch, byte[] qarg, boolean redirect_force, String bmk_pos) {

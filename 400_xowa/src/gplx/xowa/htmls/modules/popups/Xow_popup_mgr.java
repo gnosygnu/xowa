@@ -120,7 +120,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				cur_page.Popup_mgr().Itms().Add_if_dupe_use_nth(itm.Popup_id(), itm);
 				app.Html__href_parser().Parse_as_url(tmp_url, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
 				if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return Bry_.Empty;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
-				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
+				Xowe_wiki popup_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_null(tmp_url.Wiki_bry());
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 				switch (popup_ttl.Ns().Id()) {
@@ -275,7 +275,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			cur_page.Popup_mgr().Itms().Add_if_dupe_use_nth(itm.Popup_id(), itm);
 			app.Html__href_parser().Parse_as_url(tmp_url, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
 			if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
-			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
+			Xowe_wiki popup_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_null(tmp_url.Wiki_bry());
 			popup_wiki.Init_assert();
 			Xoa_ttl popup_ttl = Xoa_ttl.parse(popup_wiki, tmp_url.To_bry_page_w_anch());
 			switch (popup_ttl.Ns().Id()) {

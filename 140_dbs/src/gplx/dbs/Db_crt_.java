@@ -44,7 +44,7 @@ public class Db_crt_ {
 		int len = ary.length;
 		int crt_idx = 0;
 		for (int i = 0; i < len; i++) {
-			String itm = ary[i]; if (itm == Db_meta_fld.Key_null) continue;
+			String itm = ary[i]; if (itm == Dbmeta_fld_itm.Key_null) continue;
 			Criteria crt = Db_crt_.eq_(itm, null);
 			rv = (crt_idx == 0) ? crt : Criteria_.And(rv, crt);
 			++crt_idx;

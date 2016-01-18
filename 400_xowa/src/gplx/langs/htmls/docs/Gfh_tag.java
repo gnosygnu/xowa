@@ -85,6 +85,10 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		byte[] rv_val = rv.Val();
 		return style_wkr.Parse(rv_val, 0, rv_val.length, key);
 	}
+	public boolean Atrs__has(byte[] key) {
+		if (atrs_null) Atrs__make();
+		return atrs_hash.Get_by(key) != null;
+	}		
 	public byte[] Atrs__get_as_bry(byte[] key) {
 		if (atrs_null) Atrs__make();
 		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key);

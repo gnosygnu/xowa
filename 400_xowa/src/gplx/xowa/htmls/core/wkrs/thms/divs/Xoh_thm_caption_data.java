@@ -20,49 +20,56 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_thm_caption_data {
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
-	public int Capt_bgn() {return capt_bgn;} private int capt_bgn;
-	public int Capt_end() {return capt_end;} private int capt_end;
-	public boolean Capt_exists() {return capt_end > capt_bgn;}
-	public boolean Capt_moved_by_tidy() {return capt_moved_by_tidy;} private boolean capt_moved_by_tidy;
-	public int Alt_div_bgn() {return alt_div_bgn;} private int alt_div_bgn;
-	public int Alt_div_end() {return alt_div_end;} private int alt_div_end;
-	public boolean Alt_div_exists() {return alt_div_end > alt_div_bgn;}
-	public Xoh_thm_magnify_data Magnify_parser() {return magnify_parser;} private final Xoh_thm_magnify_data magnify_parser = new Xoh_thm_magnify_data();
+	public int Capt_1_bgn() {return capt_1_bgn;} private int capt_1_bgn;
+	public int Capt_1_end() {return capt_1_end;} private int capt_1_end;
+	public boolean Capt_1_exists() {return capt_1_end > capt_1_bgn;}
+	public int Capt_2_bgn() {return capt_2_bgn;} private int capt_2_bgn;
+	public int Capt_2_end() {return capt_2_end;} private int capt_2_end;
+	public boolean Capt_2_exists() {return capt_2_end > capt_2_bgn;}
+	public boolean Capt_2_is_tidy() {return capt_2_is_tidy;} private boolean capt_2_is_tidy;
+	public int Capt_3_bgn() {return capt_3_bgn;} private int capt_3_bgn;
+	public int Capt_3_end() {return capt_3_end;} private int capt_3_end;
+	public boolean Capt_3_exists() {return capt_3_end > capt_3_bgn;}
+	public Xoh_thm_magnify_data Magnify_data() {return magnify_data;} private final Xoh_thm_magnify_data magnify_data = new Xoh_thm_magnify_data();
 	public void Clear() {
-		this.capt_moved_by_tidy = false;
-		this.src_bgn = src_end = capt_bgn = capt_end = alt_div_bgn = alt_div_end = -1;
-		magnify_parser.Clear();
+		this.capt_2_is_tidy = false;
+		this.src_bgn = src_end = capt_1_bgn = capt_1_end = capt_2_bgn = capt_2_end = capt_3_bgn = capt_3_end = -1;
+		magnify_data.Clear();
 	}
 	public boolean Parse1(Xoh_hdoc_wkr hdoc_wkr, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag capt_head) {
 		this.src_bgn = capt_head.Src_bgn();
-		if (!magnify_parser.Parse(hdoc_wkr, tag_rdr, src, capt_head)) return false;
-		this.capt_bgn = magnify_parser.Magnify_tail_div().Src_end();
-		if (src[capt_bgn] != Byte_ascii.Nl) tag_rdr.Err_wkr().Fail("expected newline before caption");
-		++capt_bgn;	// skip \n
-		tag_rdr.Pos_(magnify_parser.Magnify_tail_div().Src_end() + 1);	// also move tag_rdr forward one
+		if (!magnify_data.Parse(hdoc_wkr, tag_rdr, src, capt_head)) return false;
+		this.capt_1_bgn = magnify_data.Magnify_tail_div().Src_end();
+		if (src[capt_1_bgn] == Byte_ascii.Cr) ++capt_1_bgn;	// wikitext sometimes has \r\n instead of \n; PAGE:en.w:List_of_Saint_Petersburg_Metro_stations; DATE:2016-01-04
+		if (src[capt_1_bgn] != Byte_ascii.Nl) tag_rdr.Err_wkr().Fail("expected newline before caption");
+		++capt_1_bgn;	// skip \n
+		tag_rdr.Pos_(magnify_data.Magnify_tail_div().Src_end() + 1);	// also move tag_rdr forward one
 		Gfh_tag capt_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);
-		this.capt_end = capt_tail.Src_bgn();
-		Alt_div_exists(tag_rdr, src);
+		this.capt_1_end = capt_tail.Src_bgn();
+		Capt_2_chk(tag_rdr, capt_tail, src);
 		this.src_end = tag_rdr.Pos();
 		return true;
 	}
-	public void Chk_capt_moved_by_tidy(byte[] src, int div_1_tail_end, int div_0_tail_bgn) {
-		int pos = Bry_find_.Find_fwd_while_ws(src, div_1_tail_end, div_0_tail_bgn);
-		if (pos != div_0_tail_bgn) {
-			capt_moved_by_tidy = true;
-                capt_bgn = div_1_tail_end;
-			capt_end = Bry_find_.Find_bwd__skip_ws(src, div_0_tail_bgn, div_1_tail_end);
+	private void Capt_2_chk(Gfh_tag_rdr tag_rdr, Gfh_tag capt_tail, byte[] src) {
+		int capt_tail_end = capt_tail.Src_end();
+		Gfh_tag nxt_div_tail = tag_rdr.Tag__peek_fwd_tail(Gfh_tag_.Id__div); 
+		int nxt_div_tail_bgn = nxt_div_tail.Src_bgn();
+		Gfh_tag nxt_tag = tag_rdr.Tag__find_fwd_head(tag_rdr.Pos(), nxt_div_tail_bgn, Gfh_tag_.Id__hr); 
+		if (nxt_tag.Name_id() == Gfh_tag_.Id__hr) {	// "alt" text
+			tag_rdr.Tag__move_fwd_head();												// <hr>
+			nxt_tag = tag_rdr.Tag__move_fwd_head().Chk_name_or_fail(Gfh_tag_.Id__div);	// <div>
+			capt_2_bgn = nxt_tag.Src_end();	// NOTE: do not try to trim ws; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
+			nxt_tag = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);						// </div>
+			capt_2_end = nxt_tag.Src_bgn(); // NOTE: do not try to trim ws; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
+		}
+		else {
+			if (!Bry_.Match(src, capt_tail_end, capt_tail_end + 7, Bry__div_1_tail_bgn)) {	// next chars should be "\n</div>"
+				capt_2_is_tidy = true;
+				capt_2_bgn = capt_tail_end;
+				capt_2_end = nxt_div_tail_bgn;
+			}
 		}
 	}
-	private void Alt_div_exists(Gfh_tag_rdr tag_rdr, byte[] src) {
-		this.alt_div_bgn = alt_div_end = -1;
-		Gfh_tag nxt_div_tail = tag_rdr.Tag__peek_fwd_tail(Gfh_tag_.Id__div); 
-		Gfh_tag nxt_tag = tag_rdr.Tag__find_fwd_head(tag_rdr.Pos(), nxt_div_tail.Src_bgn(), Gfh_tag_.Id__hr); 
-		if (nxt_tag.Name_id() != Gfh_tag_.Id__hr) return;
-		tag_rdr.Tag__move_fwd_head();												// <hr>
-		nxt_tag = tag_rdr.Tag__move_fwd_head().Chk_name_or_fail(Gfh_tag_.Id__div);	// <div>
-		alt_div_bgn = Bry_find_.Find_fwd_while_ws(src, nxt_tag.Src_end(), src.length);
-		nxt_tag = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);					// </div>
-		alt_div_end = Bry_find_.Find_bwd_non_ws_or_not_found(src, nxt_tag.Src_bgn() - 1, -1) + 1;
-	}
+	public void Capt_3_(int bgn, int end) {this.capt_3_bgn = bgn; this.capt_3_end = end;}
+	public static final byte[] Bry__div_1_tail_bgn = Bry_.new_a7("\n</div>");
 }

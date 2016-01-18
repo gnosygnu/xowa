@@ -56,11 +56,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		.tst(String_.Concat_lines_nl_skip_last
 		( Xoh_ns_file_page_mgr_fxt.Hdr
 		, "<div class=\"fullImageLink\" id=\"file\">"
-		, "  <div>"
-		, "    <a href=\"file:///mem/file/orig.oga\" xowa_title=\"Test.oga\" class=\"xowa_anchor_button\" style=\"width:300px;max-width:300px;\">"
-		, "      <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
-		, "    </a>"
-		, "  </div>"
+		, "  <div><a href=\"file:///mem/file/orig.oga\" xowa_title=\"Test.oga\" class=\"xowa_media_play\" style=\"width:300px;max-width:300px;\" alt=\"Play sound\"></a></div>"
 		, "</div>"
 		, ""		
 		));
@@ -75,11 +71,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		,	"      <img id=\"xoimg_0\" src=\"file:///mem/file/thumb.png\" width=\"300\" height=\"200\" alt=\"\" />"
 		,	"    </a>"
 		,	"  </div>"
-		,	"  <div>"
-		,	"    <a href=\"file:///mem/file/orig.ogv\" xowa_title=\"Test.ogv\" class=\"xowa_anchor_button\" style=\"width:300px;max-width:300px;\">"
-		,	"      <img src=\"file:///mem/xowa/bin/any/xowa/file/mediawiki.file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
-		,	"    </a>"
-		,	"  </div>"
+		,	"  <div><a href=\"file:///mem/file/orig.ogv\" xowa_title=\"Test.ogv\" class=\"xowa_media_play\" style=\"width:300px;max-width:300px;\" alt=\"Play sound\"></a></div>"
 		,	"</div>"
 		,	""		
 		));

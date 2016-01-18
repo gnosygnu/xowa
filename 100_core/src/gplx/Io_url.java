@@ -21,16 +21,9 @@ public class Io_url implements CompareAble, ParseAble, GfoInvkAble {	//_20101005
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
 	public String Raw() {return raw;} final String raw;
 	public byte[] RawBry() {return Bry_.new_u8(raw);}
-//		public byte[] Http_file_bry() {
-//			try {return Bry_.new_u8(String_.Concat(http_file_str, java.net.URLEncoder.encode(raw, "UTF-8")));}	
-//			catch (Exception e) {throw Err_.err_(e, "Http_file_bry");}
-//		}
-	public String To_http_file_str() {return Http_file_str + Http_file_str_encoder.Encode_str(raw);}
-	public byte[] To_http_file_bry() {
-		return Bry_.Add(Http_file_bry, Http_file_str_encoder.Encode_bry(raw));
-	}
+	public String To_http_file_str() {return String_.Len_eq_0(raw) ? String_.Empty : String_.Concat	(Http_file_str, Http_file_str_encoder.Encode_str(raw));}
+	public byte[] To_http_file_bry() {return String_.Len_eq_0(raw) ? Bry_.Empty		: Bry_.Add		(Http_file_bry, Http_file_str_encoder.Encode_bry(raw));}
 	public static Url_encoder_interface Http_file_str_encoder = Url_encoder_interface_same.Instance;
-	
 	public static final String Http_file_str = "file:///";
 	public static final int Http_file_len = String_.Len(Http_file_str);
 	public static final byte[] Http_file_bry = Bry_.new_a7(Http_file_str);

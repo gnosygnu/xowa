@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
 public class Xoud_site_tbl implements Rls_able {
-	private final String tbl_name = "user_site"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String tbl_name = "user_site"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn;
 	private final Db_conn conn;
 	public Xoud_site_tbl(Db_conn conn) {
@@ -31,7 +31,7 @@ public class Xoud_site_tbl implements Rls_able {
 		fld_site_xtn			= flds.Add_text("site_xtn");
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Rls() {}
 	public void Insert(int site_id, int priority, String domain, String name, String path, String xtn) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);

@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements Rls_able {
 	private final String tbl_name = "page";
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id;
-	private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final Db_conn conn; private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert; private boolean hdump_enabled;
 	private final String[] flds_select_all, flds_select_idx;
 	public String Tbl_name()					{return tbl_name;}
@@ -53,7 +53,7 @@ public class Xowd_page_tbl implements Rls_able {
 		flds_select_idx	= String_.Ary(fld_ns, fld_title, fld_id, fld_len);
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		this.Insert_bgn();
 		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
@@ -82,8 +82,8 @@ public class Xowd_page_tbl implements Rls_able {
 			fld_redirect_id		= flds.Add_int_dflt("page_redirect_id", -1);	// MW:XOWA
 		}
 		else {
-			fld_html_db_id		= Db_meta_fld.Key_null;
-			fld_redirect_id		= Db_meta_fld.Key_null;
+			fld_html_db_id		= Dbmeta_fld_itm.Key_null;
+			fld_redirect_id		= Dbmeta_fld_itm.Key_null;
 		}
 	}
 	public boolean Select_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
@@ -315,8 +315,8 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	public void Create_index() {
 		conn.Ddl_create_idx(Xoa_app_.Usr_dlg()
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "title"		, fld_ns, fld_title, fld_id, fld_len, fld_is_redirect)
-		, Db_meta_idx.new_normal_by_tbl(tbl_name, "random"		, fld_ns, fld_random_int)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "title"		, fld_ns, fld_title, fld_id, fld_len, fld_is_redirect)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "random"		, fld_ns, fld_random_int)
 		);
 	}
 	public void Rls() {
@@ -330,8 +330,8 @@ public class Xowd_page_tbl implements Rls_able {
 		Xowd_page_tbl page_tbl = db_mgr.Tbl__page(); Db_conn page_conn = page_tbl.Conn();
 		boolean html_flds_exists = page_conn.Meta_fld_exists(page_tbl.Tbl_name(), page_tbl.Fld_html_db_id());
 		if (html_flds_exists) return;
-		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_html_db_id()).Default_(-1));
-		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_redirect_id()).Default_(-1));
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Dbmeta_fld_itm.new_int(page_tbl.Fld_html_db_id()).Default_(-1));
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Dbmeta_fld_itm.new_int(page_tbl.Fld_redirect_id()).Default_(-1));
 		page_tbl.Hdump_enabled_(Bool_.Y);
 	}
 }

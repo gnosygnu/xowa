@@ -37,6 +37,7 @@ public class Object_ {
 		else if (lhs == null || rhs == null)	return false;
 		else									return lhs.equals(rhs);		
 	}
+	public static String Xto_str_or(Object v, String or)		{return v == null ? or					: ToString_lang(v);}
 	public static String Xto_str_strict_or_null(Object v)		{return v == null ? null				: ToString_lang(v);}
 	public static String Xto_str_strict_or_null_mark(Object v)	{return v == null ? String_.Null_mark	: ToString_lang(v);}
 	public static String Xto_str_strict_or_empty(Object v)		{return v == null ? String_.Empty		: ToString_lang(v);}
