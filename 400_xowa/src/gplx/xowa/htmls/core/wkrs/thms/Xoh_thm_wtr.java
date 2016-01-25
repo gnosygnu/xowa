@@ -27,11 +27,12 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 	private final Bfr_arg__bry_ary		div_2_magnify = new Bfr_arg__bry_ary();
 	private final Bfr_arg__bry			capt_2 = Bfr_arg__bry.New(Bry_.Empty);
 	private final Bfr_arg__bry			capt_3 = Bfr_arg__bry.New(Bry_.Empty);
+	private final Bfr_arg__bry			enlarge = Bfr_arg__bry.New(Bry_.Empty);
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Bfr_arg div_1_img = Bfr_arg_.Noop, capt_1 = Bfr_arg_.Noop;
 	private byte[] img_is_vid_nl, trailing_space;
 	public Xoh_thm_wtr Clear() {
-		Bfr_arg_.Clear(div_0_align, div_1_id, div_2_href, capt_2, capt_3); // , div_1_width, div_2_magnify
+		Bfr_arg_.Clear(div_0_align, div_1_id, div_2_href, enlarge, capt_2, capt_3); // , div_1_width, div_2_magnify
 		div_1_img = capt_1 = Bfr_arg_.Noop;
 		img_is_vid_nl = Bry_.Empty;
 		return this;
@@ -48,6 +49,11 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 		this.div_1_img = img_wtr;
 		this.div_2_href.Set_by_bry(div_2_href);
 		div_2_magnify.Set(hctx.Fsys__root(), bry_div_2_magnify);
+		Xow_wiki wiki = (Xow_wiki)hctx.Wiki__ttl_parser();
+		if (wiki.Type_is_edit())
+			enlarge.Set_by_val(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_file_enlarge).Val());
+		else
+			enlarge.Set_by_val(Bry__enlarge);
 		this.capt_1 = capt_1;
 		if (capt_2_exists) {
 			if (capt_2_is_tidy)
@@ -66,15 +72,16 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 		this.Bfr_arg__add(bfr);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		fmtr.Bld_bfr_many(bfr, div_0_align, div_1_id, div_1_width, img_is_vid_nl, div_1_img, trailing_space, div_2_href, div_2_magnify, capt_1, capt_2, capt_3);
+		fmtr.Bld_bfr_many(bfr, div_0_align, div_1_id, div_1_width, img_is_vid_nl, div_1_img, trailing_space, div_2_href, div_2_magnify, enlarge, capt_1, capt_2, capt_3);
 	}
+	private static final byte[] Bry__enlarge = Bry_.new_a7("Enlarge");
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"thumb t~{div_0_align}\">"
 	,   "<div~{div_1_id} class=\"thumbinner\" style=\"width:~{div_1_width}px;\">~{img_is_vid_nl}~{div_1_img}~{trailing_space}"	// NOTE: trailing space is intentional; matches jtidy behavior
 	,     "<div class=\"thumbcaption\">"
-	,       "<div class=\"magnify\"><a~{div_2_href} class=\"internal\" title=\"Enlarge\"></a></div>"
+	,       "<div class=\"magnify\"><a~{div_2_href} class=\"internal\" title=\"~{enlarge}\"></a></div>"
 	,       "~{capt_1}</div>~{capt_2}</div>~{capt_3}</div>"
-	), "div_0_align", "div_1_id", "div_1_width", "img_is_vid_nl", "div_1_img", "trailing_space", "div_2_href", "div_2_magnify", "capt_1", "capt_2", "capt_3");
+	), "div_0_align", "div_1_id", "div_1_width", "img_is_vid_nl", "div_1_img", "trailing_space", "div_2_href", "div_2_magnify", "enlarge", "capt_1", "capt_2", "capt_3");
 	private static final Bry_fmtr alt_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	,     "<hr>"

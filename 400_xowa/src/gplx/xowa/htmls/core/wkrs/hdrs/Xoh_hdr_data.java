@@ -42,9 +42,10 @@ public class Xoh_hdr_data implements Xoh_data_itm {
 		Gfh_atr anch_atr = span_head.Atrs__get_by_or_fail(Gfh_atr_.Bry__id);
 		this.anch_bgn = anch_atr.Val_bgn(); this.anch_end = anch_atr.Val_end();
 		this.capt_bgn = span_head.Src_end();
-		Gfh_tag hdr_tail = tag_rdr.Tag__move_fwd_tail(hdr_level);						// find </h2> not </span_head> since <span_head> can be nested, but <h2> cannot
-		Gfh_tag span_tail = tag_rdr.Tag__peek_bwd_tail(Gfh_tag_.Id__span);				// get </span_head> before </h2>			
+		Gfh_tag hdr_tail = tag_rdr.Tag__move_fwd_tail(hdr_level);				// find </h2> not </span> since <span> can be nested, but <h2> cannot
+		Gfh_tag span_tail = tag_rdr.Tag__peek_bwd_tail(Gfh_tag_.Id__span);		// get </span> before </h2>
 		this.capt_end = span_tail.Src_bgn();
+		if (capt_end < src_bgn) return false;									// </span> is before <h#>; occurs b/c TIDY will relocate <span headline> out of <h#> if <h#> has center; PAGE:en.s:On_the_Vital_Principle/Book_2/Prelude_to_Chapter_2; DATE:2016-01-21
 		if (span_tail.Src_end() != hdr_tail.Src_bgn()) {
 			capt_rhs_bgn = span_tail.Src_end(); capt_rhs_end = hdr_tail.Src_bgn();
 		}

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.amps.*;
 public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
@@ -45,29 +45,34 @@ public class Dpl_xnde implements Xox_xnde {
 		if (itm.Count() != Int_.Min_value && itms_bgn + itm.Count() < itms_len) {
 			itms_len = itms_bgn + itm.Count();
 		}
-		boolean showns = itm.Show_ns();
-		bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
-		for (int i = itms_bgn; i < itms_len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db());
-			byte[] ttl_page_txt = showns ? ttl.Full_txt() : ttl.Page_txt();
-			if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
-			switch (html_mode.Tid()) {
-			case Dpl_html_data.Tid_list_ul:
-			case Dpl_html_data.Tid_list_ol:
-				bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Gfh_bldr_.Bry__a_lhs_w_href);
-				bfr.Add_str_a7("/wiki/").Add(ttl_page_txt);
-				bfr.Add(Gfh_bldr_.Bry__title__nth).Add(ttl_page_txt).Add_byte(Byte_ascii.Quote);
-				if (itm.No_follow()) bfr.Add(Bry_nofollow);
-				bfr.Add_byte(Byte_ascii.Gt);
-				bfr.Add(ttl_page_txt);
-				bfr.Add(Gfh_bldr_.Bry__a_rhs).Add(html_mode.Itm_end()).Add_byte_nl();
-				break;
-			default:
-				break;
+		boolean show_ns = itm.Show_ns();
+		Bry_bfr tmp_bfr = Bry_bfr_.Get();
+		Xop_amp_mgr amp_mgr = wiki.Appe().Parser_amp_mgr();
+		try {
+			bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
+			for (int i = itms_bgn; i < itms_len; i++) {
+				Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
+				Xoa_ttl ttl = Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db());
+				byte[] ttl_page_txt = show_ns ? ttl.Full_txt() : ttl.Page_txt();
+				if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
+				switch (html_mode.Tid()) {
+					case Dpl_html_data.Tid_list_ul:
+					case Dpl_html_data.Tid_list_ol:
+						bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Gfh_bldr_.Bry__a_lhs_w_href);
+						bfr.Add_str_a7("/wiki/").Add(Gfo_url_encoder_.Href.Encode(ttl.Full_db())).Add_byte_quote();	// NOTE: Full_db to encode spaces as underscores; PAGE:en.q:Wikiquote:Speedy_deletions DATE:2016-01-19
+						Gfh_atr_.Add(bfr, Gfh_atr_.Bry__title, Xoh_html_wtr_escaper.Escape(amp_mgr, tmp_bfr, ttl.Full_txt()));			// NOTE: Full_txt b/c title always includes ns, even if show_ns is off; PAGE:en.b:Wikibooks:WikiProject DATE:2016-01-20
+						if (itm.No_follow()) bfr.Add(Bry_nofollow);
+						bfr.Add_byte(Byte_ascii.Gt);
+						Xoh_html_wtr_escaper.Escape(amp_mgr, bfr, ttl_page_txt, 0, ttl_page_txt.length, false, false);
+						bfr.Add(Gfh_bldr_.Bry__a_rhs).Add(html_mode.Itm_end()).Add_byte_nl();
+						// TODO: lnki_wtr.Clear().Href_wiki_(ttl).Title_(ttl).Nofollow_().Write_head(bfr).Write_text(bfr).Write_tail(bfr)
+						break;
+					default:
+						break;
+				}
 			}
-		}
-		bfr.Add(html_mode.Grp_end()).Add_byte_nl();
+			bfr.Add(html_mode.Grp_end()).Add_byte_nl();
+		} finally {tmp_bfr.Mkr_rls();}
 	}
 	private static byte[] Bry_nofollow = Bry_.new_a7(" rel=\"nofollow\"");  
 }

@@ -24,15 +24,30 @@ public class Xof_file_wkr_ {
 		ttl = Md5_decoder.Decode(Ttl_standardize(ttl));
 		return Xof_file_wkr_.Md5_fast(ttl);					// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
 	}
-	public static byte[] Ttl_standardize(byte[] ttl) {
-		int ttl_len = ttl.length;
-		for (int i = 0; i < ttl_len; i++) {	// convert all spaces to _; NOTE: not same as lnki.Ttl().Page_url(), b/c Page_url does incompatible encoding
-			byte b = ttl[i];
-			if (b == Byte_ascii.Space) ttl[i] = Byte_ascii.Underline;
-			if (i == 0) {
-				if (b > 96 && b < 123) ttl[i] -= 32;	// NOTE: file automatically uppercases 1st letter
+	public static byte[] Ttl_standardize(byte[] src) {
+		int len = src.length; if (len == 0) return src;
+		byte[] rv = null;
+		boolean dirty = false;
+		byte b = src[0];
+		if (b > 96 && b < 123) {
+			dirty = true;
+			rv = new byte[len];
+			rv[0] = (byte)(b - 32);	// NOTE: [[File:]] automatically uppercases 1st letter for md5; EX:en.d:File:wikiquote-logo.png has md5 of "32" (W...) not "82" (w...); PAGE:en.d:freedom_of_speech DATE:2016-01-21
+		}
+		for (int i = 1; i < len; ++i) {
+			b = src[i];
+			if (b == Byte_ascii.Space) {
+				if (!dirty) {
+					dirty = true;
+					rv = new byte[len]; Bry_.Copy_by_pos(src, 0, i, rv, 0);
+				}
+				rv[i] = Byte_ascii.Underline;
+			}
+			else {
+				if (dirty)
+					rv[i] = b;
 			}
 		}
-		return ttl;
+		return dirty ? rv : src;
 	}
 }

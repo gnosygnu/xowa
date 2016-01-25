@@ -25,6 +25,14 @@ public class Xod_app_tst {
 		tstr.Data_mgr().Html__insert(1, "abc");
 		tstr.Test__get("A", tstr.Make_page(1, "A", "2015-10-19T00:01:02Z", tstr.Make_section(0, 2, "", "", "abc")));
 	}
+	@Test   public void To_page_db() {
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A"			, "A");
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A:B"		, "A:B");
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/Help:A"	, "Help:A");
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A B"		, "A_B");	// NOTE:canonical url has spaces;
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A%27B"		, "A'B");	// NOTE:canonical url has percent-encoding;
+		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A+B"		, "A_B");	// NOTE:canonical url sometimes has "+" for space
+	}
 }
 class Xod_app_tstr {
 	private final gplx.xowa.apps.Xoav_app app; private final Xowv_wiki wiki;
@@ -45,6 +53,10 @@ class Xod_app_tstr {
 		Xoa_url page_url = wiki.Utl__url_parser().Parse(Bry_.new_u8(ttl));
 		Xod_page_itm itm = drd_provider.Wiki__get_by_url(wiki, page_url);
 		Tfds.Eq(expd.To_str(), itm.To_str());
+	}
+	public void Test__to_page_url(String raw, String expd) {
+		// // canonical url has spaces as well as %-encoding; PAGE:en.w:List_of_Fire_Emblem:Shadow_Dragon_characters
+		Tfds.Eq_bry(Bry_.new_u8(expd), Xod_app.To_page_url(wiki, raw));
 	}
 	public Xod_page_itm Make_page(int page_id, String ttl, String modified_on, Xoh_section_itm... section_ary) {
 		Xod_page_itm rv = new Xod_page_itm();

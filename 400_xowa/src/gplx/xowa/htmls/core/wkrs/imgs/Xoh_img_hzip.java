@@ -218,7 +218,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(page_ttl_bry);
 			}
 			else {
-				byte[] ns_bry = anch__ns_is_custom ? ns_custom_bry : Xow_ns_.Bry__file;
+				byte[] ns_bry = anch__ns_is_custom ? ns_custom_bry : hctx.Wiki__ttl_parser().Ns_mgr().Ns_file().Name_db();
 				tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(ns_bry).Add_byte_colon();
 				tmp_bfr.Add(page_db);
 				// Gfo_url_encoder_.Href.Encode(tmp_bfr, page_db);	// encode needed for ?; PAGE:en.w:Voiceless_alveolar_affricate; DATE:2016-01-04

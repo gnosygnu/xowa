@@ -63,12 +63,12 @@ public class KeyVal_ {
 		}
 		return null;
 	}
-	public static String Ary_to_str_nested(KeyVal... ary) {
+	public static String Ary__to_str__nest(KeyVal... ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
-		Ary_to_str_nested(bfr, 0, ary);
+		Ary__to_str__nest(bfr, 0, ary);
 		return bfr.To_str_and_clear();
 	}
-	private static void Ary_to_str_nested(Bry_bfr bfr, int indent, KeyVal[] ary) {
+	private static void Ary__to_str__nest(Bry_bfr bfr, int indent, KeyVal[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			KeyVal itm = ary[i];
@@ -82,7 +82,7 @@ public class KeyVal_ {
 				Class<?> val_type = Type_adp_.ClassOf_obj(val);
 				if		(Type_adp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
 					bfr.Add_byte_nl();												// add nl		: "\n"
-					Ary_to_str_nested(bfr, indent + 1, (KeyVal[])val);
+					Ary__to_str__nest(bfr, indent + 1, (KeyVal[])val);
 					continue;														// don't add \n below
 				}
 				else if (Type_adp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean

@@ -59,28 +59,5 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 		byte[] rslt = fmt_num ? lang.Num_mgr().Format_num(num_bry) : lang.Num_mgr().Raw(num_bry);
 		bfr.Add(rslt);
 	}
-	public void Func_evaluate_old(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
-		byte[] ctg_ttl_bry = Eval_argx(ctx, src, caller, self); if (Bry_.Len_eq_0(ctg_ttl_bry)) {bfr.Add_int_digits(1, 0); return;}	// no title; return 0; EX: "{{PAGESINCATEGORY:}}"
-		ctg_ttl_bry = Xoa_ttl.Replace_spaces(ctg_ttl_bry);
-		Xowe_wiki wiki = ctx.Wiki();
-		int ctg_len = wiki.Db_mgr().Load_mgr().Load_ctg_count(ctg_ttl_bry);
-		if (ctg_len == 0) {bfr.Add_int_digits(1, 0); return;}
-		Xol_lang_itm lang = wiki.Lang();
-		Btrie_slim_mgr num_format_trie = Xol_kwd_mgr.trie_(lang.Kwd_mgr(), Xol_kwd_grp_.Id_str_rawsuffix);
-//			Btrie_slim_mgr type_page_trie = Xol_kwd_mgr.trie_(lang.Kwd_mgr(), Xol_kwd_grp_.Id_pagesincategory_pages);
-//			Btrie_slim_mgr type_subc_trie = Xol_kwd_mgr.trie_(lang.Kwd_mgr(), Xol_kwd_grp_.Id_pagesincategory_subcats);
-//			Btrie_slim_mgr type_file_trie = Xol_kwd_mgr.trie_(lang.Kwd_mgr(), Xol_kwd_grp_.Id_pagesincategory_files);
-		int self_args_len = self.Args_len();
-		boolean fmt_num = true;
-		if (self_args_len == 1) {
-			byte[] arg1 = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
-			if (arg1 != Bry_.Empty && num_format_trie.Match_exact(arg1, 0, arg1.length) != null)
-				fmt_num = false;
-		}
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
-		byte[] ctg_len_bry = tmp_bfr.Add_int_variable(ctg_len).To_bry_and_clear();			
-		byte[] rslt = fmt_num ? lang.Num_mgr().Format_num(ctg_len_bry) : lang.Num_mgr().Raw(ctg_len_bry);
-		bfr.Add(rslt);
-	}
 	public static final Pfunc_pagesincategory Instance = new Pfunc_pagesincategory(); Pfunc_pagesincategory() {}
 }

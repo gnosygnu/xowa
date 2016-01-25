@@ -128,7 +128,7 @@ public class Xoh_lnki_data {
 		title_bgn = title_atr.Val_bgn(); title_end = title_atr.Val_end();
 		if (href_ns_name != null) {	// ns_name exists
 			int title_bgn_wo_ns = title_bgn + href_ns_name_len;
-			if (Bry_.Match(src, title_bgn, title_bgn_wo_ns, href_ns_name))			// title matches ns_name;
+			if (Bry_.Match(src, title_bgn, title_bgn_wo_ns, href_ns_name))			// title matches href_ns;
 				title_bgn = title_bgn_wo_ns;										// skip ns; "Help:"
 			else
 				title_missing_ns = true;
@@ -136,7 +136,7 @@ public class Xoh_lnki_data {
 		if (title_end == -1)
 			title_tid = Title__missing;
 		else {
-			if		(Bry_.Match(src, title_bgn, title_end, href_src, href_bgn, href_end))
+			if		(Bry_.Match(src, title_bgn, title_end, href_src, href_bgn, href_end) && !title_missing_ns)	// NOTE: do not mark title=href if href omitted title; PAGE:en.b:Wikibooks:WikiProject; DATE:2016-01-20
 				title_tid = Title__href;
 			else if (Bry_.Match(src, title_bgn, title_end, src, capt_bgn, capt_end))
 				title_tid = Title__capt;

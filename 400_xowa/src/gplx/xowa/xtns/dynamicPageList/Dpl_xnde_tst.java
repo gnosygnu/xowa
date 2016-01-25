@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.strings.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.core.strings.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.nss.*; import gplx.langs.htmls.*;
 public class Dpl_xnde_tst {
 	private Dpl_xnde_fxt fxt = new Dpl_xnde_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -126,25 +126,37 @@ public class Dpl_xnde_tst {
 		,	"</DynamicPageList>"), fxt.Ul(Itm_html_null, "C"));
 	}
 	@Test  public void Ns() {
-		fxt.Ctg_create("Ctg_0", "Talk:A", "B");
+		fxt.Ctg_create("Ctg_0", "Talk:A B", "B");
 		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
 		(	"<DynamicPageList>"
 		,	"category=Ctg_0"
 		,	"namespace=Talk"
-		,	"</DynamicPageList>"), fxt.Ul(Itm_html_null, "A"));
+		,	"</DynamicPageList>"), Gfh_utl.Replace_apos_concat_lines
+		( "<ul>"
+		, "  <li><a href='/wiki/Talk:A_B' title='Talk:A B'>A B</a></li>"
+		,  "</ul>"
+		));
 	}
-	@Test  public void Showns() {
+	@Test  public void Show_ns() {
 		fxt.Ctg_create("Ctg_0", "Talk:A");
 		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
 		(	"<DynamicPageList>"
 		,	"category=Ctg_0"
 		,	"shownamespace=true"
-		,	"</DynamicPageList>"), fxt.Ul(Itm_html_null, "Talk:A"));
+		,	"</DynamicPageList>"), Gfh_utl.Replace_apos_concat_lines
+		( "<ul>"
+		, "  <li><a href='/wiki/Talk:A' title='Talk:A'>Talk:A</a></li>"
+		,  "</ul>"
+		));
 		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
 		(	"<DynamicPageList>"
 		,	"category=Ctg_0"
 		,	"shownamespace=false"
-		,	"</DynamicPageList>"), fxt.Ul(Itm_html_null, "A"));
+		,	"</DynamicPageList>"), Gfh_utl.Replace_apos_concat_lines
+		( "<ul>"
+		, "  <li><a href='/wiki/Talk:A' title='Talk:A'>A</a></li>"
+		,  "</ul>"
+		));
 	}
 	@Test  public void Comment() {	// PURPOSE: comment should be ignored; en.n:Portal:Federally_Administered_Tribal_Areas; DATE:2014-01-18
 		fxt.Ctg_create("Ctg_0", "B", "A");
@@ -172,6 +184,7 @@ public class Dpl_xnde_tst {
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached valid ns_page from previous tests
 		fxt.Fxt().Test_parse_page_wiki_str("<dynamicpagelist>category=a</dynamicpagelist>", "No pages meet these criteria.");
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached invalid ns_page for next tests
+		fxt.Wiki().Ns_mgr().Add_new(0, "").Init();	// call .Clear() to remove ns for Page / Index
 	}
 	@Test  public void Ordermethod__invalid() {	// PURPOSE: do not fail if ordermethod is invalid; PAGE:sr.d:Викиречник:Википројекат_1001_арапска_реч/Списак_уноса; DATE:2015-10-16
 		fxt.Ctg_create("Ctg_0", "A", "B", "C");
@@ -182,6 +195,30 @@ public class Dpl_xnde_tst {
 		, "ordermethod=sortkey"
 		, "</DynamicPageList>")
 		, fxt.Ul(Itm_html_null, "A", "B", "C"));
+	}
+	@Test  public void Encode_spaces() {// PURPOSE:encode spaces in href; PAGE:en.q:Wikiquote:Speedy_deletions DATE:2016-01-19
+		fxt.Ctg_create("Ctg_0", "A B");
+		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
+		(	"<DynamicPageList>"
+		,	"category=Ctg_0"
+		,	"nofollow=true"
+		,	"</DynamicPageList>"), Gfh_utl.Replace_apos_concat_lines
+		( "<ul>"
+		, "  <li><a href='/wiki/A_B' title='A B' rel='nofollow'>A B</a></li>"	// "/wiki/A_B" not "/wiki/A B"
+		,  "</ul>"
+		));
+	}
+	@Test  public void Encode_quotes() {// PURPOSE:encode quotes; PAGE:en.b:Wikibooks:Alphabetical_classification/All_Books; DATE:2016-01-21
+		fxt.Ctg_create("Ctg_0", "A\"B");
+		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
+		(	"<DynamicPageList>"
+		,	"category=Ctg_0"
+		,	"nofollow=true"
+		,	"</DynamicPageList>"), Gfh_utl.Replace_apos_concat_lines
+		( "<ul>"
+		, "  <li><a href='/wiki/A%22B' title='A&quot;B' rel='nofollow'>A&quot;B</a></li>"	// "/wiki/A_B" not "/wiki/A B"
+		,  "</ul>"
+		));
 	}
 	private static final String Itm_html_null = null;
 }

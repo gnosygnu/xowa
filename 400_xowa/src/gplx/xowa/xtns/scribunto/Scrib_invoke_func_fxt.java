@@ -124,13 +124,27 @@ public class Scrib_invoke_func_fxt {
 	}
 	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(Object_.Xto_str_strict_or_null_mark(expd), Object_.Xto_str_strict_or_null_mark(actl[0].Val()));
 	}
-	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_kv_vals(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl_ary = Test_scrib_proc_rv(lib, proc_name, args);
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps__flat(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
+		KeyVal[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(expd, Kv_ary_to_kv_vals_str(actl_ary));
+	}
+	public void Test_scrib_proc_kv_objs(Scrib_lib lib, String proc_name, KeyVal[] args, Object... expd_ary) {
+		KeyVal[] actl_kvs = Test__lib_proc__core(lib, proc_name, args);
+		Object[] actl_ary = KeyVal_to_obj_ary(actl_kvs);
+		Tfds.Eq_ary(expd_ary, actl_ary);
+	}
+	private static Object[] KeyVal_to_obj_ary(KeyVal[] kv_ary) {
+		int len = kv_ary.length;
+		Object[] rv = new Object[len];
+		for (int i = 0; i < len; ++i) {
+			KeyVal kv = kv_ary[i];
+			rv[i] = kv.Val();
+		}
+		return rv;
 	}
 	private String Kv_ary_to_kv_vals_str(KeyVal[] ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
@@ -146,29 +160,29 @@ public class Scrib_invoke_func_fxt {
 	public void Test_scrib_proc_int(Scrib_lib lib, String proc_name, Object[] args, int expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, Object[] args, Object expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, KeyVal[] args, Object expd) {
-		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(expd, actl[0].Val());
 	}
 	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, Object[] args) {Test_scrib_proc_empty(lib, proc_name, Scrib_kv_utl_.base1_many_(args));}
 	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, KeyVal[] args) {
-		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(0, actl.length);
 	}
 	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str_ary(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl_ary = Test_scrib_proc_rv(lib, proc_name, args);
-		String actl = KeyVal_.Ary_to_str_nested(actl_ary);
+		KeyVal[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
+		String actl = KeyVal_.Ary__to_str__nest(actl_ary);
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	public KeyVal[] Test_scrib_proc_rv_as_kv_ary(Scrib_lib lib, String proc_name, Object[] args) {
-		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
 		return (KeyVal[])actl[0].Val();
 	}
 	public Object Test_scrib_proc_rv_as_obj(Scrib_lib lib, String proc_name, Object[] args) {
-		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
 		return actl[0].Val();
 	}
-	private KeyVal[] Test_scrib_proc_rv(Scrib_lib lib, String proc_name, KeyVal[] args) {
+	private KeyVal[] Test__lib_proc__core(Scrib_lib lib, String proc_name, KeyVal[] args) {
 		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
 		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
 		proc.Proc_exec(new Scrib_proc_args(args), proc_rslt);

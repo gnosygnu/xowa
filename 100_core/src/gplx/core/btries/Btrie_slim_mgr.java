@@ -71,6 +71,15 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 			Add_obj(ary[i], obj);
 		return this;
 	}
+	public Btrie_slim_mgr Add_ary_byte(byte... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			byte b = ary[i];
+			Byte_obj_val bval = Byte_obj_val.new_(b);
+			Add_obj(Bry_.New_by_byte(b), bval);
+		}
+		return this;
+	}
 	public Btrie_slim_mgr Add_replace_many(String trg_str, String... src_ary) {return Add_replace_many(Bry_.new_u8(trg_str), src_ary);}
 	public Btrie_slim_mgr Add_replace_many(byte[] trg_bry, String... src_ary) {
 		int len = src_ary.length;

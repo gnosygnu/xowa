@@ -302,7 +302,7 @@ public class Xoh_thm_hzip_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Dump() {
+//		@Test   public void Dump() {
 //			Xowe_wiki en_d = fxt.Init_wiki_alias("wikt", "en.wiktionary.org");
 //			gplx.xowa.wikis.nss.Xow_ns_mgr ns_mgr = en_d.Ns_mgr();
 //			ns_mgr.Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
@@ -313,5 +313,5 @@ public class Xoh_thm_hzip_tst {
 //			fxt.Init_mode_is_b256_(Bool_.N);
 //			fxt.Exec_write_to_fsys(Io_url_.new_dir_("J:\\xowa\\dev_rls\\html\\"), "debug.html");
 //			fxt.Init_mode_is_b256_(Bool_.N);
-	}
+//		}
 }

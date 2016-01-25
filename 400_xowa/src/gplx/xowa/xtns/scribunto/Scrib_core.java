@@ -46,6 +46,7 @@ public class Scrib_core {
 	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
 	public Xoae_page Page() {return page;} private Xoae_page page;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
+	public void Engine_(Scrib_engine v) {this.engine = v;}
 	private void Engine_(byte type, boolean luaj_debug_enabled) {
 		if		(type == Scrib_engine_type.Type_lua)
 			engine = new gplx.xowa.xtns.scribunto.engines.process.Process_engine(app, this);

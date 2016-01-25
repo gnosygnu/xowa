@@ -70,4 +70,25 @@ public class Xoh_hdr_hzip_tst {
 		, "<h6><span class='mw-headline' id='AB'>A</span>B</h6>"
 		);
 	}
+	@Test   public void Tidy__no_span() {	// PURPOSE.TIDY: tidy will duplicate hdr if content has center; will fail if span/div is nearby; EX: ==<center>A</center>==\n<span><div>; PAGE:en.s:On_the_Vital_Principle/Book_2/Prelude_to_Chapter_2 DATE:2016-01-21
+		fxt.Test__encode(String_.Concat_lines_nl_skip_last
+		( "\"+A"
+		, "<center>"
+		, "<h2>A</h2>"
+		, "</center>"
+		, "<span class=\"mw-headline\" id=\"A\"></span>"
+		, "<div style=\"color:blue;\">"
+		, "<p>abc</p>"
+		, "</div>"
+		), String_.Concat_lines_nl_skip_last
+		( "<h2><span class='mw-headline' id='A'></span></h2>"
+		, "<center>"
+		, "<h2>A</h2>"
+		, "</center>"
+		, "<span class='mw-headline' id='A'></span>"
+		, "<div style='color:blue;'>"
+		, "<p>abc</p>"
+		, "</div>"
+		));
+	}
 }

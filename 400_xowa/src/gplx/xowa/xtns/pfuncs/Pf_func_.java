@@ -238,6 +238,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_pagesUsingPendingChanges
 	, Xol_kwd_grp_.Id_bang
 	, Xol_kwd_grp_.Id_rev_revisionsize
+	, Xol_kwd_grp_.Id_pagebanner
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -387,6 +388,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_lst:							return gplx.xowa.xtns.lst.Lst_pfunc_lst.Instance;
 			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx.Instance;
 			case Xol_kwd_grp_.Id_invoke:						return new gplx.xowa.xtns.scribunto.Scrib_invoke_func();
+			case Xol_kwd_grp_.Id_pagebanner:					return new gplx.xowa.xtns.pagebanners.Pgbnr_func();
 
 			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_property();
 			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_noExternalLangLinks();

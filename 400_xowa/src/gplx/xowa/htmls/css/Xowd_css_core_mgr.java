@@ -44,18 +44,27 @@ public class Xowd_css_core_mgr {
 		catch (Exception e) {conn.Txn_cxl(); throw e;}
 	}
 	public static boolean Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
-		int css_id = core_tbl.Select_id_by_key(key); if (css_id == Xowd_css_core_tbl.Id_null) return false;	// unknown key; return false (not found)
-		Xowd_css_file_itm[] file_list = file_tbl.Select_by_owner(css_id);
-		// Io_mgr.Instance.DeleteDirDeep(css_dir); // NOTE: do not delete existing files; just overwrite;
-		int len = file_list.length;
-		if (len == 0) return false;	// no css files in db
-		for (int i = 0; i < len; ++i) {
-			Xowd_css_file_itm file = file_list[i];
-			Io_url file_url = Io_url_.new_fil_(css_dir.Gen_sub_path_for_os(file.Path()));
-			if (file.Data() == null) continue;	// NOTE: sqlite will return 0 length fields as NULL; if no data, just ignore, else error below
-			Io_mgr.Instance.SaveFilBry(file_url, file.Data());
-		}
-		return true;
+		String dbg = "enter";
+		try {
+			int css_id = core_tbl.Select_id_by_key(key); 
+			dbg += ";css_id";
+			if (css_id == Xowd_css_core_tbl.Id_null) return false;	// unknown key; return false (not found)
+			dbg += ";select_by_owner";
+			Xowd_css_file_itm[] file_list = file_tbl.Select_by_owner(css_id);
+			dbg += ";file_list:" + file_list.length;
+			// Io_mgr.Instance.DeleteDirDeep(css_dir); // NOTE: do not delete existing files; just overwrite;
+			int len = file_list.length;
+			if (len == 0) return false;	// no css files in db
+			for (int i = 0; i < len; ++i) {
+				Xowd_css_file_itm file = file_list[i];
+				dbg += ";file_url:" + file.Path();
+				Io_url file_url = Io_url_.new_fil_(css_dir.Gen_sub_path_for_os(file.Path()));
+				if (file.Data() == null) continue;	// NOTE: sqlite will return 0 length fields as NULL; if no data, just ignore, else error below
+				Io_mgr.Instance.SaveFilBry(file_url, file.Data());
+				dbg += ";file_data:" + file.Data().length;
+			}
+			return true;
+		} catch (Exception e) {throw Err_.new_exc(e, "css", "Xowd_css_core_mgr.Get failed", "dbg", dbg, "err", Err_.Message_gplx_log(e));}
 	}
 	public static final String Key_default = "xowa.default", Key_mobile = "xowa.mobile";
 }

@@ -48,8 +48,8 @@ public class Xoh_hdoc_ctx {
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
-		Xou_cache_mgr cache_mgr = app.User().User_db_mgr().Cache_mgr();
-		if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
+		// Xou_cache_mgr cache_mgr = app.User().User_db_mgr().Cache_mgr();
+		// if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
 		pool_mgr__hzip.Init();
 	}
 	public void Init_by_page(Xow_wiki wiki, byte[] page_url) {

@@ -1,0 +1,97 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+import gplx.xowa.parsers.tmpls.*;
+public class Mock_scrib_fxt {		 
+	private final Mock_engine engine = new Mock_engine();
+	private final Mock_server server = new Mock_server();
+	private Xop_fxt parser_fxt; 
+	public Scrib_core Core() {return core;} private Scrib_core core;		
+	public void Clear() {Clear("en.wikipedia.org", "en");}
+	public void Clear(String domain, String lang) {
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)));
+		parser_fxt = new Xop_fxt(app, wiki); // NOTE: always new(); don't try to cache; causes errors in Language_lib
+		core = Scrib_core.Core_new_(app, wiki.Parser_mgr().Ctx());
+		core.Engine_(engine); engine.Clear();
+		core.Interpreter().Server_(server);
+		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
+		Xot_invk current_frame = Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"));
+		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
+		core.When_page_changed(parser_fxt.Page());
+	}
+	public void Init__cbk(Mock_proc_fxt... ary) {
+		for (Mock_proc_fxt proc : ary)
+			engine.RegisterLibraryForTest(proc);
+	}
+	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps(lib, proc_name, expd, Bool_.Y, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps(lib, proc_name, expd, Bool_.N, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {Test__proc__kvps(lib, proc_name, expd, Bool_.Y, args);}
+	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {Test__proc__kvps(lib, proc_name, expd, Bool_.N, args);}
+	private static void Test__proc__kvps(Scrib_lib lib, String proc_name, String expd, boolean flat, KeyVal[] args) {
+		KeyVal[] actl_ary = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
+		if (flat)
+			Tfds.Eq(expd, Mock_scrib_fxt_.Kvp_vals_to_str(actl_ary));
+		else
+			Tfds.Eq_str_lines(expd, KeyVal_.Ary__to_str__nest(actl_ary));
+	}
+	public void Test__proc__objs__empty(Scrib_lib lib, String proc_name, Object[] args) {Test__proc__kvps__empty(lib, proc_name, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__kvps__empty(Scrib_lib lib, String proc_name, KeyVal[] args) {
+		Tfds.Eq(0, Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args).length);
+	}
+	public void Test__proc__kvps__vals(Scrib_lib lib, String proc_name, KeyVal[] args, Object... expd_ary) {
+		KeyVal[] actl_kvs = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
+		Object[] actl_ary = Mock_scrib_fxt_.Kvp_vals_to_objs(actl_kvs);
+		Tfds.Eq_ary(expd_ary, actl_ary);
+	}
+}
+class Mock_scrib_fxt_ {
+	public static KeyVal[] Test__lib_proc__core(Scrib_lib lib, String proc_name, KeyVal[] args) {
+		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
+		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
+		proc.Proc_exec(new Scrib_proc_args(args), proc_rslt);
+		return proc_rslt.Ary();
+	}
+	public static Object[] Kvp_vals_to_objs(KeyVal[] kvps) {
+		int len = kvps.length;
+		Object[] rv = new Object[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = kvps[i].Val();
+		return rv;
+	}
+	public static String Kvp_vals_to_str(KeyVal[] ary) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			KeyVal kv = ary[i];
+			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
+		}
+		return bfr.To_str_and_clear();
+	}
+}
+class Mock_server implements Scrib_server {
+	public void		Init(String... process_args) {}
+	public int		Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout = 60;
+	public int		Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling = 1;
+	public int		Server_timeout_busy_wait() {return server_timeout_busy_wait;} public Scrib_server Server_timeout_busy_wait_(int v) {server_timeout_busy_wait = v; return this;} private int server_timeout_busy_wait = 1;
+	public byte[]	Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
+	public void		Server_send(byte[] cmd, Object[] cmd_objs) {}
+	public byte[]	Server_recv() {return Bry_.Empty;}
+	public void		Term() {}
+}

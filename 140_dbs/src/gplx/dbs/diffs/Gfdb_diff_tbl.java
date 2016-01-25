@@ -26,7 +26,7 @@ public class Gfdb_diff_tbl {
 	public final Dbmeta_fld_itm[] Keys;
 	public final Dbmeta_fld_itm[] Vals;
 	public Db_rdr Make_rdr(Db_conn conn) {
-		Db_stmt stmt = conn.Stmt_select(Name, Dbmeta_fld_itm.To_str_ary(Flds));
+		Db_stmt stmt = conn.Stmt_select_order(Name, Dbmeta_fld_itm.To_str_ary(Flds), Dbmeta_fld_itm.Str_ary_empty, Dbmeta_fld_itm.To_str_ary(Keys));
 		return stmt.Exec_select__rls_auto();
 	}
 

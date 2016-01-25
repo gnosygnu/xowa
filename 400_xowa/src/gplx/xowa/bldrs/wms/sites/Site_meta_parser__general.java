@@ -240,7 +240,7 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 			int atr_len = subscribers_nde.Len();
 			for (int j = 0; j < atr_len; ++j) {
 				Json_kv atr = subscribers_nde.Get_at_as_kv(j);
-				if (!Bry_.Eq(atr.Key_as_bry(), Key__scribunto)) {Warn("unknown key", atr); continue;}
+				if (!Bry_.Eq(atr.Key_as_bry(), Key__scribunto)) {Warn("unknown subscriber key", atr); continue;}
 				scribunto = atr.Val_as_bry();
 			}
 		}

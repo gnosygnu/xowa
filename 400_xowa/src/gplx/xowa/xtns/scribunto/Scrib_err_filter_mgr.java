@@ -26,7 +26,7 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 		boolean match = false;
 		for (int i = 0; i < itms_len; ++i) {
 			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.Get_at(i);
-			if (String_.Has_at_bgn(err, itm.Err())) {
+			if (String_.Has(err, itm.Err())) {
 				match = true;
 				itm.Count_actl_add_1();
 				break;

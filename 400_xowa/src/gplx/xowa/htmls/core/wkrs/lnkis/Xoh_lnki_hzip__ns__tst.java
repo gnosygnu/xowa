@@ -68,7 +68,8 @@ public class Xoh_lnki_hzip__ns__tst {
 		fxt.Test__bicode("~${3h)Image~A%C3%BC.png~b~Image:Aü.png~", "<a href='/wiki/Image:A%C3%BC.png' title='Image:Aü.png'>b</a>");
 	}
 	@Test   public void Ctg__main() {		// links at bottom of pages in main ns; DATE:2015-12-28
-		fxt.Test__bicode("~$|$t'1A~", "<a href='/wiki/Category:A' class='inte" + "rnal' title='A'>A</a>");
+		fxt.Test__bicode("~$|%\"(1A~", "<a href='/wiki/Category:A' class='inte" + "rnal' title='A'>A</a>");
+		fxt.Test__decode("~$|$t'1A~", "<a href='/wiki/Category:A' class='inte" + "rnal' title='A'>A</a>");	// NOTE:backward compatibility for en.w:2015-12; delete after 2016-01 is uploaded
 	}
 	@Test   public void Ctg__tree() {		// links on Category pages;
 		fxt.Test__bicode("~$|&3J1A~", "<a href='/wiki/Category:A' class='CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory'>A</a>");
@@ -78,5 +79,8 @@ public class Xoh_lnki_hzip__ns__tst {
 	}
 	@Test   public void Ctg__xnav__under() {	// previous / next 200 links on Category pages; PAGE:en.w:Category:Public_transit_articles_with_unsupported_infobox_fields; DATE:2016-01-14
 		fxt.Test__bicode("~$|&`Z1A B?pageuntil=C,_D#mw-pages~previous 200~Category:A_B~", "<a href='/wiki/Category:A_B?pageuntil=C,_D#mw-pages' class='xowa_nav' title='Category:A_B'>previous 200</a>");
+	}
+	@Test   public void Outlier__title_wo_ns() {// should not happen, but handle situation wherein title doesnot have ns PAGE:en.b:Wikibooks:WikiProject DATE:2016-01-20
+		fxt.Test__bicode("~${Tr/A B~", "<a href='/wiki/Help:A_B' title='A B'>A B</a>");
 	}
 }

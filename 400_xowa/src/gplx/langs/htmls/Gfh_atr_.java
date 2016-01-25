@@ -54,4 +54,7 @@ public class Gfh_atr_ {
 	public static byte[] Make(Bry_bfr bfr, byte[] key, byte[] val) {
 		return bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote().Add(val).Add_byte_quote().To_bry_and_clear();
 	}
+	public static void Add(Bry_bfr bfr, byte[] key, byte[] val) {
+		bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote().Add(val).Add_byte_quote();
+	}
 }

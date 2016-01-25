@@ -96,6 +96,16 @@ public class Xop_sanitizer {
 		}
 		return dirty;
 	}
+	public static byte[] Escape_cls(byte[] v) {
+		return v;
+	}
+//	static function escapeClass( $class ) {
+//		// Convert ugly stuff to underscores and kill underscores in ugly places
+//		return rtrim( preg_replace(
+//			array( '/(^[0-9\\-])|[\\x00-\\x20!"#$%&\'()*+,.\\/:;<=>?@[\\]^`{|}~]|\\xC2\\xA0/', '/_+/' ),
+//			'_',
+//			$class ), '_' );
+//	}
 	static final byte Tid_amp = 1, Tid_space = 2, Tid_colon = 3, Tid_percent = 4;
 }
 /*

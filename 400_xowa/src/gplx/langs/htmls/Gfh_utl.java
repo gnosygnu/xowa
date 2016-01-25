@@ -178,6 +178,18 @@ public class Gfh_utl {
 		return bfr.To_bry_and_clear();
 	}
 	public static String Replace_apos(String s) {return String_.Replace(s, "'", "\"");}
+	public static String Replace_apos_concat_lines(String... lines) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		int len = lines.length;
+		for (int i = 0; i < len; ++i) {
+			String line_str = lines[i];
+			byte[] line_bry = Bry_.new_u8(line_str);
+			Bry_.Replace_all_direct(line_bry, Byte_ascii.Apos, Byte_ascii.Quote, 0, line_bry.length);
+			if (i != 0) bfr.Add_byte_nl();
+			bfr.Add(line_bry);
+		}
+		return bfr.To_str_and_clear();
+	}
 	public static void Log(Exception e, String head, byte[] page_url, byte[] src, int pos) {
 		Err err = Err_.cast_or_make(e); if (err.Logged()) return;
 		String msg = String_.Format("{0}; page={1} err={2} mid={3} trace={4}", head, page_url, Err_.To_str(e), Bry_.Escape_ws(Bry_.Mid_by_len_safe(src, pos, 255)), err.To_str__log());

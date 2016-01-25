@@ -26,6 +26,7 @@ public class Gfdb_rdr_utl_ {
 			int tid = fld.Type().Tid_ansi();
 			switch (tid) {
 				case Dbmeta_fld_tid.Tid__bool:		comp = Bool_.Compare	(lhs_rdr.Read_bool_by_byte(fld_name), rhs_rdr.Read_bool_by_byte(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__byte:		comp = Byte_.Compare	(lhs_rdr.Read_byte(fld_name)		, rhs_rdr.Read_byte(fld_name)); break;
 				case Dbmeta_fld_tid.Tid__int:		comp = Int_.Compare		(lhs_rdr.Read_int(fld_name)			, rhs_rdr.Read_int(fld_name)); break;
 				case Dbmeta_fld_tid.Tid__long:		comp = Long_.Compare	(lhs_rdr.Read_long(fld_name)		, rhs_rdr.Read_long(fld_name)); break;
 				case Dbmeta_fld_tid.Tid__float:		comp = Float_.Compare	(lhs_rdr.Read_float(fld_name)		, rhs_rdr.Read_float(fld_name)); break;

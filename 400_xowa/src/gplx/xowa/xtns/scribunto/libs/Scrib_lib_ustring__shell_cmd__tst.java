@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-public class Scrib_lib_ustring__invoke_tst {
+public class Scrib_lib_ustring__shell_cmd__tst {
 	@Before public void init() {
 		fxt.Clear_for_invoke();
 		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");

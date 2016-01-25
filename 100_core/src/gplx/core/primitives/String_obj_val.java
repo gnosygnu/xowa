@@ -21,7 +21,7 @@ public class String_obj_val implements CompareAble {
 	@Override public String toString() {return val;}
 	public int compareTo(Object obj) {
 		String_obj_val comp = (String_obj_val)obj;
-		return String_.Compare_strict(val, comp.val);
+		return String_.Compare(val, comp.val);
 	}	
 	public static String_obj_val new_(String val) {return new String_obj_val(val);}	String_obj_val(String val) {this.val = val;}
 }

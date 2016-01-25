@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_img_hzip__dump__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void Clear() {fxt.Clear();}
@@ -59,6 +59,29 @@ public class Xoh_img_hzip__dump__tst {
 	@Test   public void Href__apos() {		// [[File:A'b.png|border|link=A'b_link|A'b_capt]]
 		String html = "<a href=\"/wiki/A%27b_link\" class=\"image\" xowa_title=\"A'b.png\"><img data-xowa-title=\"A'b.png\" data-xoimg=\"0|220|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" class=\"thumbborder\" alt=\"A'b_capt\"></a>";
 		fxt.Test__bicode_raw("~%#oA%27b_link~A'b.png~#)#SA'b_capt~", html, html);
+	}
+	@Test   public void Href__image() {	// [[Image:A.png|abc]]
+		fxt.Test__bicode
+		( "~%-%A.png~Image~)#Sabc~"
+		, "<a href='/wiki/Image:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		);
+	}
+	@Test   public void Ns__cs() {	// [[image:a.png|abc]]; PAGE:en.d:freedom_of_speech DATE:2016-01-21
+		fxt.Wiki().Ns_mgr().Ns_file().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
+		fxt.Test__bicode
+		( "~%-%a.png~image~)#Sabc~"
+		, "<a href='/wiki/image:a.png' class='image' title='abc' xowa_title='a.png'><img data-xowa-title='a.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		);
+		fxt.Wiki().Ns_mgr().Ns_file().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__1st);
+	}
+	@Test   public void Ns__foreign() {	// [[Fichier:a.png|abc]]; PAGE:fr.w: DATE:2016-01-21
+		Xow_ns_mgr ns_mgr = fxt.Wiki().Ns_mgr();
+		ns_mgr.Ns_file().Name_bry_(Bry_.new_u8("Fichier")); ns_mgr.Init_w_defaults();
+		fxt.Test__bicode
+		( "~%!!a.png~)#Sabc~"
+		, "<a href='/wiki/Fichier:a.png' class='image' title='abc' xowa_title='a.png'><img data-xowa-title='a.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		);
+		ns_mgr.Ns_file().Name_bry_(Bry_.new_u8("File")); ns_mgr.Init_w_defaults();
 	}
 	@Test   public void Link__cs() {	// [[File:A.png|link=File:a.ogg|abc]]
 		fxt.Test__bicode
@@ -121,7 +144,7 @@ public class Xoh_img_hzip__dump__tst {
 		);
 	}
 	@Test   public void Link__ns_alias() {	// [[File:A.png|link=WP:MCB]]; PAGE:en.w:Wikipedia:WikiProject_Molecular_and_Cell_Biology; DATE:2016-01-11
-		fxt.Init__ns_alias__add("WP", gplx.xowa.wikis.nss.Xow_ns_.Tid__project);
+		fxt.Init__ns_alias__add("WP", Xow_ns_.Tid__project);
 		fxt.Test__bicode
 		( "~%/+MCB~A.png~'WP~)!q"
 		, "<a href='/wiki/WP:MCB' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|80|-1|-1|-1|-1' src='' width='0' height='0' alt=''></a>"
@@ -132,12 +155,6 @@ public class Xoh_img_hzip__dump__tst {
 		fxt.Test__bicode
 		( "~%#(en.wiktionary.org|en:A~A.png~1)!q"
 		, "<a href='/site/en.wiktionary.org/wiki/Category:en:A' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|80|-1|-1|-1|-1' src='' width='0' height='0' alt=''></a>"
-		);
-	}
-	@Test   public void Href__image() {	// [[Image:A.png|abc]]
-		fxt.Test__bicode
-		( "~%-%A.png~Image~)#Sabc~"
-		, "<a href='/wiki/Image:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
 		);
 	}
 	@Test   public void Missing() { // PURPOSE: bad dump shouldn't write corrupt data

@@ -46,6 +46,9 @@ public class Scrib_regx_converter_tst {
 		fxt.Test_replace("a(2(1)2)c"			, "%b()", "b", "abc");
 		fxt.Test_replace("a(3(2(1)2)3)c"		, "%b()", "b", "a(3b3)c");
 	}
+	@Test   public void Mbcs() {	// PURPOSE: handle regex for multi-byte chars; PAGE:en.d:どう; DATE:2016-01-22; .NET.REGX:fails 
+		fxt.Test_replace("𠀀"					, "[𠀀-𯨟]"	, "a", "a");
+	}
 }
 class Scrib_regx_converter_fxt {
 	private Scrib_regx_converter under;

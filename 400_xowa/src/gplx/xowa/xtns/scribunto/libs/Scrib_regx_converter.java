@@ -190,15 +190,30 @@ public class Scrib_regx_converter {
 					break;
 				default:
 					boolean normal = true;
-					if (i + 2 < len) {
-						byte dash_1 = src[i + 1];
-						byte dash_2 = src[i + 2];
-						if (dash_1 == Byte_ascii.Dash && dash_2 != Byte_ascii.Brack_end) {
-							Regx_quote(bfr, tmp_b);
-							bfr.Add_byte(Byte_ascii.Dash);
-							Regx_quote(bfr, dash_2);
-							i += 2;
-							normal = false;
+					int lhs_pos = i;	// NOTE: following block handles MBCS; EX:[𠀀-𯨟] PAGE:en.d:どう DATE:2016-01-22
+					int lhs_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(src[lhs_pos]);
+					int dash_pos = i + lhs_len;
+					if (dash_pos < len) {
+						byte dash_char = src[dash_pos];
+						if (dash_char == Byte_ascii.Dash) {
+							int rhs_pos = dash_pos + 1;
+							if (rhs_pos < len) {
+								byte rhs_byte = src[rhs_pos];
+								if (rhs_byte != Byte_ascii.Brack_end) {// ignore dash if followed by brack_end; EX: [a-]; PAGE:en.d:frei; DATE:2016-01-23
+									int rhs_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(rhs_byte);
+									if (lhs_len == 1)
+										Regx_quote(bfr, src[i]);
+									else
+										bfr.Add_mid(src, i, i + lhs_len);								
+									bfr.Add_byte(Byte_ascii.Dash);
+									if (rhs_len == 1)
+										Regx_quote(bfr, src[rhs_pos]);
+									else
+										bfr.Add_mid(src, rhs_pos, rhs_pos + rhs_len);
+									i = rhs_pos + rhs_len - 1;	// -1 b/c for() will do ++i
+									normal = false;
+								}
+							}
 						}
 					}
 					if (normal)

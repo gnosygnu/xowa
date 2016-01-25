@@ -41,7 +41,7 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 		for (int j = 0; j < atr_len; ++j) {
 			Json_kv atr = nde.Get_at_as_kv(j);
 			Object idx_obj = hash.Get_by_bry(atr.Key_as_bry());
-			if (idx_obj == null) {Warn("unknown key", atr); continue;}
+			if (idx_obj == null) {Warn("unknown json parser key", atr); continue;}
 			int idx_int = ((Int_obj_val)idx_obj).Val();
 			atrs[idx_int] = atr;
 		}

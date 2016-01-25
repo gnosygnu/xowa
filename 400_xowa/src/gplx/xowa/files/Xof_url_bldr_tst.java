@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import org.junit.*; import gplx.xowa.files.repos.*;
 public class Xof_url_bldr_tst {
 	private Xof_url_bldr_fxt fxt = new Xof_url_bldr_fxt();
 	@Before public void init() {fxt.Clear();}

@@ -20,7 +20,7 @@ import gplx.langs.regxs.*; import gplx.core.intls.*;
 import gplx.xowa.parsers.*;
 public class Scrib_lib_ustring implements Scrib_lib {
 	private final String_surrogate_utl surrogate_utl = new String_surrogate_utl();
-	public Scrib_lib_ustring(Scrib_core core) {this.core = core; gsub_mgr = new Scrib_lib_ustring_gsub_mgr(core, regx_converter);} private Scrib_core core; Scrib_lib_ustring_gsub_mgr gsub_mgr;
+	public Scrib_lib_ustring(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public int String_len_max() {return string_len_max;} public Scrib_lib_ustring String_len_max_(int v) {string_len_max = v; return this;} private int string_len_max = Xoa_page_.Page_len_max;
 	public int Pattern_len_max() {return pattern_len_max;} public Scrib_lib_ustring Pattern_len_max_(int v) {pattern_len_max = v; return this;} private int pattern_len_max = 10000;
@@ -112,7 +112,30 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		}
 		return rslt.Init_many_list(tmp_list);
 	}
-	public boolean Gsub(Scrib_proc_args args, Scrib_proc_rslt rslt) {return gsub_mgr.Exec(args, rslt);}
+	private Scrib_lib_ustring_gsub_mgr[] gsub_mgr_ary = Scrib_lib_ustring_gsub_mgr.Ary_empty;
+	private int gsub_mgr_max = 0, gsub_mgr_len = -1;
+	private final Object gsub_mgr_lock = new Object();
+	public boolean Gsub(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		boolean rv = false;
+		synchronized (gsub_mgr_lock) {	// handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
+			int new_len = gsub_mgr_len + 1;
+			if (new_len == gsub_mgr_max) {
+				this.gsub_mgr_max = new_len == 0 ? 2 : new_len * 2;
+				Scrib_lib_ustring_gsub_mgr[] new_gsub_mgr_ary = new Scrib_lib_ustring_gsub_mgr[gsub_mgr_max];
+				Array_.Copy(gsub_mgr_ary, new_gsub_mgr_ary);
+				gsub_mgr_ary = new_gsub_mgr_ary;
+			}
+			Scrib_lib_ustring_gsub_mgr cur = gsub_mgr_ary[new_len];
+			if (cur == null) {
+				cur = new Scrib_lib_ustring_gsub_mgr(core, regx_converter);
+				gsub_mgr_ary[new_len] = cur;
+			}
+			this.gsub_mgr_len = new_len;
+			rv = cur.Exec(args, rslt);
+			--gsub_mgr_len;
+		}
+		return rv;
+	}
 	public boolean Gmatch_init(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// String text = Scrib_kv_utl_.Val_to_str(values, 0);
 		byte[] regx = args.Pull_bry(1);
@@ -143,7 +166,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				if (	j < capts_len				// bounds check	b/c null can be passed
 					&&	Bool_.cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
 					)
-					tmp_list.Add(Int_.To_str(grp.Bgn() + Scrib_lib_ustring.Base1));	// return index only for (); NOTE: always return as String; callers expect String, and may do operations like len(result), which will fail if int; DATE:2013-12-20
+					tmp_list.Add(grp.Bgn() + Scrib_lib_ustring.Base1);	// return index only for "()"; NOTE: do not return as String; callers expect int and will fail typed comparisons; DATE:2016-01-21
 				else
 					tmp_list.Add(grp.Val());		// return match
 			}
@@ -325,5 +348,6 @@ class Scrib_lib_ustring_gsub_mgr {
 			default: throw Err_.new_unhandled(repl_tid);
 		}
 	}
-	static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
+	private static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
+	public static final Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
 }
