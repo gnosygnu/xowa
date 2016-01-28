@@ -18,6 +18,24 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.1.4.2_.282016-01-28_11:00_Thu.29">Release: v3.1.4.2 (2016-01-28 11:00 Thu)</span>
+    </h2>
+    <p>
+      This is an interim release for the desktop app. It fixes script error messages in 2016-01-13 English Wikipedia
+    </p>
+    <h3>
+      <span class="mw-headline" id="Scribunto_fixes_for_2016-01-13_English_Wikipedia">Scribunto fixes for 2016-01-13 English Wikipedia</span>
+    </h3>
+    <p>
+      I accidentally had the wrong dump in place when kicking off the 2016-01-13 build. As such, I didn't spot the issue till this morning after I restarted the build started.
+    </p>
+    <p>
+      Basically, the <a href="https://dumps.wikimedia.org/enwiki/20160113/" rel="nofollow" class="external text">2016-01-13 English Wikipedia dump</a> introduced new page admininistration functions. These include {{PROTECTIONEXPIRY}} as well as a Scribunto function called getStabilitySettings. This resulted in a bold red "Script error" message at the top of every protected page. There are a lot of protected pages.
+    </p>
+    <p>
+      v3.1.4.2 resolves both issues. So far, it's stable across 35,000+ pages, but if you run across any issues, please report them. Thanks.
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_v3.1.4.1_.282016-01-24_19:30_Sun.29">Release: v3.1.4.1 (2016-01-24 19:30 Sun)</span>
     </h2>
     <p>

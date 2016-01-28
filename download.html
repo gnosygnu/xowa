@@ -21,37 +21,37 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_windows_64_v3.1.4.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_windows_64_v3.1.4.2.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_windows_v3.1.4.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_windows_v3.1.4.2.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_linux_64_v3.1.4.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_linux_64_v3.1.4.2.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_linux_v3.1.4.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_linux_v3.1.4.2.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_macosx_64_v3.1.4.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_macosx_64_v3.1.4.2.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_macosx_v3.1.4.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_macosx_v3.1.4.2.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Android'> Android </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.1/xowa_app_android_v3.1.4.1.apk" class="external text" rel="nofollow">Android</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.4.2/xowa_app_android_v3.1.4.2.apk" class="external text" rel="nofollow">Android</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.4.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.4.2.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -64,6 +64,32 @@
     <h2>
       <span class='mw-headline'>Change log</span>
     </h2>
+    <h2>
+      <span class="mw-headline" id="v3.1.4.2_.282016-01-28.29">v3.1.4.2 (2016-01-28)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Windows_.2F_Linux_.2F_Mac_OS_X">Windows / Linux / Mac OS X</span>
+    </h3>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        Scribunto: Add built-in function: {{PROTECTIONEXPIRY}} (resolves script error on many en.w pages; Script error: @/xowa/bin/any/xowa/xtns/Scribunto/engines/Luaj/MWServer.lua:59 vm error: gplx.Err: callParserFunction: function was not found: function=PROTECTIONEXPIRY). See: <a href="/site/en.wikipedia.org/wiki/Alaska">https://en.wikipedia.org/wiki/Alaska</a> <a href="/site/en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
+      </li>
+      <li>
+        Xtn.FlaggedRevs: Add scribunto function: getStabilitySettings (resolves script error on many en.w pages; Script error: =Module:Effective protection level:16 attempt to index ? (a nil value)). See: <a href="/site/en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a> <a href="/site/en.wikipedia.org/wiki/Animal_Farm">https://en.wikipedia.org/wiki/Animal_Farm</a> <a href="/site/en.wikipedia.org/wiki/Agriculture">https://en.wikipedia.org/wiki/Agriculture</a>
+      </li>
+    </ul>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Log: Do not log warnings when building category version1 (resolves numerous non-meaningful error messages in the log file).
+      </li>
+    </ul>
+
     <h2>
       <span class="mw-headline" id="v3.1.4.1_.282016-01-24.29">v3.1.4.1 (2016-01-24)</span>
     </h2>
