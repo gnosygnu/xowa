@@ -63,11 +63,11 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 			Xox_xnde_.Xatr__set(wiki, this, Gallery_xnde_atrs.Key_hash, src, xnde);
 			xtn_mgr = (Gallery_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Gallery_xtn_mgr.XTN_KEY);
 			Init_atrs(wiki);
-			gallery_mgr.Get_modules(ctx.Cur_page());
+			gallery_mgr.Get_modules(ctx.Page());
 			Gallery_itm_parser parser = xtn_mgr.Parser();
 			if (parser.Parse_in_progress()) parser = new Gallery_itm_parser().Init_by_wiki(wiki);	// handle nested galleries; EX: <gallery><ref><gallery>; PAGE:es.w:Arquitectura_medieval DATE:2015-07-10
 			parser.Parse_all(itms, gallery_mgr, this, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-			boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_gallery, src, xnde);
+			boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_gallery, src, xnde);
 			ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);			// cancel pre for <gallery>; DATE:2014-03-11
 		} catch (Exception exc) {
 			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_full(exc));
@@ -77,9 +77,9 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		Xowe_wiki wiki = ctx.Wiki();
 		try {
 			if (html_wtr_v1)
-				xtn_mgr.Html_wtr().Write_html(bfr, app, wiki, ctx, html_wtr, hctx, ctx.Cur_page(), this, src);
+				xtn_mgr.Html_wtr().Write_html(bfr, app, wiki, ctx, html_wtr, hctx, ctx.Page(), this, src);
 			else {
-				gallery_mgr.Write_html(bfr, wiki, ctx.Cur_page(), ctx, hctx, src, this);
+				gallery_mgr.Write_html(bfr, wiki, ctx.Page(), ctx, hctx, src, this);
 			}
 		} catch (Exception exc) {
 			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_full(exc));

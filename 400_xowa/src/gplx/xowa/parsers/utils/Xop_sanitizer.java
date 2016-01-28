@@ -96,9 +96,6 @@ public class Xop_sanitizer {
 		}
 		return dirty;
 	}
-	public static byte[] Escape_cls(byte[] v) {
-		return v;
-	}
 //	static function escapeClass( $class ) {
 //		// Convert ugly stuff to underscores and kill underscores in ugly places
 //		return rtrim( preg_replace(
@@ -106,15 +103,8 @@ public class Xop_sanitizer {
 //			'_',
 //			$class ), '_' );
 //	}
+	public static byte[] Escape_cls(byte[] v) {
+		return v;
+	}
 	static final byte Tid_amp = 1, Tid_space = 2, Tid_colon = 3, Tid_percent = 4;
 }
-/*
-NOTE: original escapeID does following
-1:	' ' -> _
-2:	decode_html_ent();
-3:	'%3A' -> :
-4:	% -> .
-for performance
-. combine 1,2,3,4: this will fail in cases like &#32; which will become " " instead of "_".
-. if that happens, go to 2 passes and move 2: to 1 (this should have no side-effect)
-*/

@@ -36,12 +36,12 @@ public class Scrib_invoke_func extends Pf_func_base {
 		long log_time_bgn = 0;
 		if (invoke_wkr != null) {
 			log_time_bgn = Env_.TickCount();
-			if (!invoke_wkr.Eval_bgn(ctx.Cur_page(), mod_name, fnc_name)) return;
+			if (!invoke_wkr.Eval_bgn(ctx.Page(), mod_name, fnc_name)) return;
 		}
 		Scrib_core core = Scrib_core.Core();
 		if (core == null) {
 			core = Scrib_core.Core_new_(ctx.App(), ctx).Init();
-			core.When_page_changed(ctx.Cur_page());
+			core.When_page_changed(ctx.Page());
 		}
 		byte[] mod_raw = null;
 		Scrib_lua_mod mod = core.Mods_get(mod_name);
@@ -57,7 +57,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		try {
 			core.Invoke(wiki, ctx, src, caller, self, bfr, mod_name, mod_raw, fnc_name);
 			if (invoke_wkr != null)
-				invoke_wkr.Eval_end(ctx.Cur_page(), mod_name, fnc_name, log_time_bgn);
+				invoke_wkr.Eval_end(ctx.Page(), mod_name, fnc_name, log_time_bgn);
 		}
 		catch (Throwable e) {
 			Err err = Err_.cast_or_make(e);
@@ -67,7 +67,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
 				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
 				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
-				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Cur_page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}

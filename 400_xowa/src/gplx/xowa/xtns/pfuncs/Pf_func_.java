@@ -239,6 +239,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_bang
 	, Xol_kwd_grp_.Id_rev_revisionsize
 	, Xol_kwd_grp_.Id_pagebanner
+	, Xol_kwd_grp_.Id_rev_protectionexpiry
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -323,6 +324,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_rev_pagesize:
 			case Xol_kwd_grp_.Id_rev_revisionsize:
 			case Xol_kwd_grp_.Id_rev_user:
+			case Xol_kwd_grp_.Id_rev_protectionexpiry:
 			case Xol_kwd_grp_.Id_rev_protectionlevel:			return Pfunc_rev_props.Instance;
 			case Xol_kwd_grp_.Id_page_displaytitle:				return Pfunc_displaytitle.Instance;
 			case Xol_kwd_grp_.Id_page_defaultsort:				return Pfunc_defaultsort.Instance;

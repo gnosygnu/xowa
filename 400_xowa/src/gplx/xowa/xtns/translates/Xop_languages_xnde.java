@@ -36,7 +36,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		return Xoa_ttl.parse(wiki, ttl.Ns().Id(), root_bry);
 	}
 	private List_adp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
-		this.root_ttl = Root_ttl_of(wiki, ctx.Cur_page().Ttl());
+		this.root_ttl = Root_ttl_of(wiki, ctx.Page().Ttl());
 		List_adp rslts = List_adp_.new_(); 
 		Int_obj_ref rslt_count = Int_obj_ref.new_(0);
 		Xow_ns page_ns = root_ttl.Ns();
@@ -71,7 +71,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (langs.Count() == 0) return; // no langs; don't write anything;
-		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Cur_page().Lang().Key_bry());
+		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Page().Lang().Key_bry());
 		fmtr_all.Bld_bfr_many(bfr, "Other languages", fmtr_mgr_itms);
 	}
 	private static final Xop_languages_fmtr fmtr_mgr_itms = new Xop_languages_fmtr();

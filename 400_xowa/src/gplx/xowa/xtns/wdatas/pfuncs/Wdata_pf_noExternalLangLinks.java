@@ -24,7 +24,7 @@ public class Wdata_pf_noExternalLangLinks extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_noexternallanglinks;}
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_noExternalLangLinks().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
-		ctx.Cur_page().Wdata_external_lang_links().Parse(ctx, src, caller, self, this);
+		ctx.Page().Wdata_external_lang_links().Parse(ctx, src, caller, self, this);
 	}
 	public static void Print_self(Gfo_usr_dlg usr_dlg, Bry_bfr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
 		bfr.Add_mid(src, self.Src_bgn(), self.Src_end());

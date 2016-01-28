@@ -72,7 +72,7 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 				int subst_bgn = finder.Subst_bgn(), subst_end = finder.Subst_end();
 				invk.Tmpl_subst_props_(finder_typeId, subst_bgn, subst_end);
 				if ((ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl && finder_typeId == Xot_defn_.Tid_subst)	// NOTE: if subst, but in tmpl stage, do not actually subst; PAGE:en.w:Unreferenced; DATE:2013-01-31
-					|| ctx.Cur_page().Ttl().Ns().Id_is_tmpl()) {												// also, if on tmpl page, never evaluate (questionable, but seems to be needed)
+					|| ctx.Page().Ttl().Ns().Id_is_tmpl()) {												// also, if on tmpl page, never evaluate (questionable, but seems to be needed)
 				}	
 				else {
 					key_tkn.Dat_rng_ary_(src, subst_end, txt_end);	// redo txt_rng to ignore subst

@@ -35,7 +35,7 @@ public class Scrib_core_fxt {
 		server.Clear();
 		core.Proc_mgr().Clear();
 		core.Frame_parent_(null);
-		core.When_page_changed(wiki.Parser_mgr().Ctx().Cur_page());
+		core.When_page_changed(wiki.Parser_mgr().Ctx().Page());
 		expd_server_rcvd_list.Clear();
 		return this;
 	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

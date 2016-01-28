@@ -47,7 +47,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		this.xnde = xnde;
 		code = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		code = Bry_.Replace(code, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
-		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_score, src, xnde);
+		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_score, src, xnde);
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
 	private byte[] code;
 	public String Hcmd_id() {return hcmd_id;} private String hcmd_id;
@@ -57,7 +57,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		bfr.Add(Xoh_consts.Pre_end);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
-		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Cur_page();
+		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}
 		Process_adp ly_process = app.Prog_mgr().App_lilypond();

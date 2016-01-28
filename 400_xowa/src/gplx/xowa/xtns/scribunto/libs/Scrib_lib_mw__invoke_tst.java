@@ -83,7 +83,7 @@ public class Scrib_lib_mw__invoke_tst {
 	@Test  public void CallParserFunction_displayTitle() {	// PURPOSE: DISPLAYTITLE not being set when called through CallParserFunction; DATE:2013-08-05
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.base1_many_ary_("current", "DISPLAYTITLE", "''a''"), "");
-		Tfds.Eq("<i>a</i>", String_.new_a7(fxt.Parser_fxt().Ctx().Cur_page().Html_data().Display_ttl()));
+		Tfds.Eq("<i>a</i>", String_.new_a7(fxt.Parser_fxt().Ctx().Page().Html_data().Display_ttl()));
 	}
 	@Test  public void ExpandTemplate_tmpl() {
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");

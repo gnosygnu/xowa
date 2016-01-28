@@ -57,13 +57,13 @@ public class Xop_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public Xop_parser Parser() {return parser;} private Xop_parser parser; 
-	public Xoae_page Page() {return ctx.Cur_page();}
-	public void Lang_by_id_(int id) {ctx.Cur_page().Lang_(wiki.Appe().Lang_mgr().Get_by_or_new(Xol_lang_stub_.Get_by_id(id).Key()));}
+	public Xoae_page Page() {return ctx.Page();}
+	public void Lang_by_id_(int id) {ctx.Page().Lang_(wiki.Appe().Lang_mgr().Get_by_or_new(Xol_lang_stub_.Get_by_id(id).Key()));}
 	public Xoh_html_wtr_cfg Wtr_cfg() {return hdom_wtr.Cfg();} private Xoh_html_wtr hdom_wtr;
 	public Xop_fxt Reset() {
 		ctx.Clear_all();
 		ctx.App().Free_mem(false);
-		ctx.Cur_page().Clear_all();
+		ctx.Page().Clear_all();
 		wiki.File_mgr().Clear_for_tests();
 		wiki.Db_mgr().Load_mgr().Clear();
 		app.Wiki_mgr().Clear();
@@ -80,7 +80,7 @@ public class Xop_fxt {
 	}
 	public Xoa_ttl Page_ttl_(String txt) {
 		Xoa_ttl rv = Xoa_ttl.parse(wiki, Bry_.new_u8(txt));
-		ctx.Cur_page().Ttl_(rv);
+		ctx.Page().Ttl_(rv);
 		return rv;
 	}
 
@@ -222,8 +222,8 @@ public class Xop_fxt {
 	public byte[] Test_parse_tmpl_str_rv(String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		ctx.Cur_page().Root_(root);
-		ctx.Cur_page().Data_raw_(raw_bry);
+		ctx.Page().Root_(root);
+		ctx.Page().Data_raw_(raw_bry);
 		return parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
 	}
 	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), name, raw);}
@@ -437,7 +437,7 @@ public class Xop_fxt {
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
-		ctx.Cur_page().Redlink_lnki_list().Clear();
+		ctx.Page().Redlink_lnki_list().Clear();
 		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();

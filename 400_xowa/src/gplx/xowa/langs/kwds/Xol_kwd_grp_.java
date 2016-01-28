@@ -230,8 +230,9 @@ public static final int
 , Id_pagesincategory_files = 208
 , Id_rev_revisionsize = 209
 , Id_pagebanner = 210
+, Id_rev_protectionexpiry = 211
 ;
-public static final int Id__max = 211;
+public static final int Id__max = 212;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -446,6 +447,7 @@ case Xol_kwd_grp_.Id_pagesincategory_subcats: return Bry_.new_u8("pagesincategor
 case Xol_kwd_grp_.Id_pagesincategory_files: return Bry_.new_u8("pagesincategory_files");
 case Xol_kwd_grp_.Id_rev_revisionsize: return Bry_.new_u8("revisionsize");
 case Xol_kwd_grp_.Id_pagebanner: return Bry_.new_u8("pagebanner");
+case Xol_kwd_grp_.Id_rev_protectionexpiry: return Bry_.new_u8("protectionexpiry");
 default: throw Err_.new_unhandled(id);
 		}
 	}

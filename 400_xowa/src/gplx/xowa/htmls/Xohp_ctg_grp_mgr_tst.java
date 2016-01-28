@@ -48,7 +48,7 @@ class Xoh_ctg_mgr_fxt {
 	public Xoh_ctg_mgr_fxt Init_ctgs(String... v) {init_ctgs = v; return this;} private String[] init_ctgs; 
 	public void Test_html(String expd) {		
 		byte[][] ctgs_bry_ary = Bry_.Ary(init_ctgs);
-		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		page.Category_list_(ctgs_bry_ary);
 		ctg_grp_mgr.Bld(tmp_bfr, page, ctgs_bry_ary.length);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());

@@ -41,9 +41,9 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner {
 		// if (src[itm_end - 1] 	== Byte_ascii.Nl) --itm_end;	// ignore last \n;
 		byte[] raw = Bry_.Mid(src, itm_bgn, itm_end);
 		if (pos_val == Pos_head_end)
-			ctx.Cur_page().Html_data().Custom_head_end_concat(raw);
+			ctx.Page().Html_data().Custom_head_end_concat(raw);
 		else
-			ctx.Cur_page().Html_data().Custom_html_end_concat(raw);
+			ctx.Page().Html_data().Custom_html_end_concat(raw);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
 	private static byte Pos_val(byte[] bry) {

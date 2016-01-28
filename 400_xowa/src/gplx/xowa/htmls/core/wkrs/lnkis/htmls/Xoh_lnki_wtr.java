@@ -46,7 +46,7 @@ public class Xoh_lnki_wtr {
 	public void Write(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
-			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().To_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
+			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Page().Url().To_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
 			Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
 			return;
 		}

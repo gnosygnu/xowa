@@ -63,11 +63,11 @@ public class Xow_popup_parser {
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}
 	private void Init_ctxs(byte[] tmpl_src, Xoa_ttl ttl) {
 		tmpl_ctx.Clear_all(); 
-		tmpl_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, else page-dependent templates won't work; EX: {{FULLPAGENAME}}; PAGE:en.w:June_20; DATE:2014-06-20
-		tmpl_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());	// NOTE: must set data.Html_restricted() if Special:XowaPopupHistory
-		tmpl_ctx.Page_bgn(tmpl_root, tmpl_src);	
+		tmpl_ctx.Page().Ttl_(ttl);	// NOTE: must set cur_page, else page-dependent templates won't work; EX: {{FULLPAGENAME}}; PAGE:en.w:June_20; DATE:2014-06-20
+		tmpl_ctx.Page().Html_data().Html_restricted_(data.Html_restricted());	// NOTE: must set data.Html_restricted() if Special:XowaPopupHistory
+		tmpl_ctx.Parser__page_init(tmpl_root, tmpl_src);	
 		Wtxt_ctx_init(true, tmpl_src);
-		wtxt_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
+		wtxt_ctx.Page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
 	}
 	public byte[] Parse(Xowe_wiki cur_wiki, Xoae_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
 		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_domain_itm_.Bry__wikidata)) {
@@ -125,7 +125,7 @@ public class Xow_popup_parser {
 		wtxt_root.Clear();			// now start parsing wrdx_bry from wtxt to html
 		Wtxt_ctx_init(false, wrdx_bry);
 		parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wrdx_bry, wtxt_trie, Xop_parser_.Doc_bgn_bos, wrdx_bry.length);
-		wtxt_ctx.Page_end(wtxt_root, wrdx_bry, wrdx_bry.length);
+		wtxt_ctx.Parser__page_term(wtxt_root, wrdx_bry, wrdx_bry.length);
 		wiki.Html_mgr().Html_wtr().Write_all(wrdx_bfr, wtxt_ctx, hctx, wrdx_bry, wtxt_root);
 	}
 	private void Adjust_wrdx_end(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
@@ -195,10 +195,10 @@ public class Xow_popup_parser {
 	}
 	private void Wtxt_ctx_init(boolean incremental, byte[] bry) {
 		wtxt_ctx.Clear_all();
-		wtxt_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());
+		wtxt_ctx.Page().Html_data().Html_restricted_(data.Html_restricted());
 		wtxt_ctx.Para().Enabled_(!incremental);		// NOTE: if incremental, disable para; easier to work with \n rather than <p>; also, must be enabled before Page_bgn; DATE:2014-06-18DATE:2014-06-18
 		wtxt_ctx.Lnke().Dangling_goes_on_stack_(incremental);
-		wtxt_ctx.Page_bgn(wtxt_root, bry);
+		wtxt_ctx.Parser__page_init(wtxt_root, bry);
 	}
 	private byte[] Parse_to_wtxt(byte[] src) {
 		int subs_len = tmpl_root.Subs_len();

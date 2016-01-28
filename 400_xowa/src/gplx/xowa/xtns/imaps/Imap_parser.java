@@ -41,8 +41,8 @@ class Imap_parser {
 		shapes.Clear(); pts.Clear(); errs.Clear();
 	}
 	public Imap_map Parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Imap_map rv = new Imap_map(ctx.Cur_page().Html_data().Xtn_imap_next_id());
-		Init(wiki, ctx.Cur_page(), wiki.Appe().Usr_dlg());
+		Imap_map rv = new Imap_map(ctx.Page().Html_data().Xtn_imap_next_id());
+		Init(wiki, ctx.Page(), wiki.Appe().Usr_dlg());
 		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		return rv;
 	}
@@ -197,7 +197,7 @@ class Imap_parser {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_itm_img(lnki_tkn);
 			lnki_tkn.Lnki_file_wkr_(imap);
-			wiki_ctx.Cur_page().Lnki_list().Add(lnki_tkn);
+			wiki_ctx.Page().Lnki_list().Add(lnki_tkn);
 			if (file_wkr != null) file_wkr.Wkr_exec(wiki_ctx, src, lnki_tkn, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_imageMap);
 		}
 		return img_end;

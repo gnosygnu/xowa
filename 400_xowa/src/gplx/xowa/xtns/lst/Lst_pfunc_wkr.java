@@ -40,7 +40,7 @@ public class Lst_pfunc_wkr {
 			sub_ctx = Xop_ctx.new_sub_(wiki).Ref_ignore_(true);
 			byte[] src_page_bry = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(src_ttl);
 			if (src_page_bry == null) return; // {{#lst:missing}} -> ""
-			Xoae_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Page();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;
 			defn_tmpl = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(sub_ctx, sub_ctx.Tkn_mkr(), src_ttl.Ns(), src_ttl_bry, src_page_bry);	// NOTE: parse as tmpl to ignore <noinclude>
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();

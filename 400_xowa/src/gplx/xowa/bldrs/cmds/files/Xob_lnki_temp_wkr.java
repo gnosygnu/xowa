@@ -91,7 +91,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		byte[] ttl_bry = ttl.Page_db();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
-		Xoae_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Page();
 		page.Clear_all();
 		page.Bldr__ns_ord_(ns_ord);
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
@@ -102,7 +102,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
 			if (gen_html && !page.Redirected())
-				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page().Root_(root), Xopg_page_.Tid_read);
+				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_page_.Tid_read);
 			if (gen_hdump)
 				hdump_bldr.Insert(page.Root_(root));
 			root.Clear();
@@ -134,10 +134,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		byte[] ttl_commons = Xto_commons(ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
 			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
-				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
+				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Tid__media)
 			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
-		tbl.Insert_cmd_by_batch(ctx.Cur_page().Bldr__ns_ord(), ctx.Cur_page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");

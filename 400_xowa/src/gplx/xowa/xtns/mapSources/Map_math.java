@@ -44,7 +44,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		return error == 0;
 	}
 	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, Bry_bfr bfr, byte[] pfunc_name) {
-		String page_str = ctx.Cur_page().Url().To_str();
+		String page_str = ctx.Page().Url().To_str();
 		String pfunc_name_str = String_.new_u8(pfunc_name);
 		String self_str = String_.new_u8(src, self.Src_bgn(), self.Src_end()); 
 		switch (error) {

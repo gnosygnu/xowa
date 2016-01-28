@@ -201,7 +201,7 @@ public class Xosrh_core_tst {
 //			byte[] url_raw = Bry_.new_a7("Special:Search/" + ttl_str + ((match_tid == Xows_page__search.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 //			Xoa_url url = url_parser.Parse(url_raw);
 //			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url_raw);
-//			Xoae_page page = wiki.Ctx().Cur_page();
+//			Xoae_page page = wiki.Ctx().Page();
 //			search_mgr.Special_gen(url, page, wiki, ttl);
 //			Xosrh_rslt_grp cur_grp = search_mgr.Cur_grp();
 //			bfr.Mkr_rls();

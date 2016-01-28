@@ -138,7 +138,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoae_app app = wiki.Appe(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		try {
 			if (page.Tab_data().Cancel_show()) return;	// Special:Search canceled show; NOTE: must be inside try b/c finally handles thread
-			wiki.Parser_mgr().Ctx().Cur_page_(page);
+			wiki.Parser_mgr().Ctx().Page_(page);
 			if (page.Missing()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
 					page = Xoae_page.New_edit(wiki, ttl);

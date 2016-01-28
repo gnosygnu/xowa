@@ -95,7 +95,7 @@ public class Xop_under_lxr implements Xop_lxr {
 		return rv;
 	}
 	public static void Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int kwd_id) {
-		Xoae_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Page();
 		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();
 		switch (kwd_id) {
 			case Xol_kwd_grp_.Id_toc:

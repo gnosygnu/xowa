@@ -53,7 +53,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner {
 			nested = true;					// refs nested in references don't show <a> entry in <references>
 		}
 		if (!ctx.Ref_ignore())				// sub_ctx may be marked to ignore <ref>; EX: <pages>,{{#lst}}; DATE:2014-04-24
-			ctx.Cur_page().Ref_mgr().Grps_add(group, name, follow, this);
+			ctx.Page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {

@@ -46,7 +46,7 @@ public class Xoa_sitelink_div_wtr {
 			byte[] ttl_bry = ttl.Page_txt_w_anchor();
 			boolean ttl_is_empty = false;
 			if (Bry_.Len_eq_0(ttl_bry)) {	// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
-				ttl_bry = wiki.Parser_mgr().Ctx().Cur_page().Ttl().Page_txt();
+				ttl_bry = wiki.Parser_mgr().Ctx().Page().Ttl().Page_txt();
 				ttl_is_empty = true;
 			}
 			itm.Init_by_page(slink.Domain_info(), ttl_bry, ttl_is_empty, slink.Badges());				

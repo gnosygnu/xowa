@@ -58,7 +58,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 //			if (!wiki.Xtn_mgr().Xtn_proofread().Enabled()) return;
 		if (!Init_vars(wiki, ctx, src, xnde)) return;
-		Xoae_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Page();
 		if (page.Pages_recursed()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
 		page.Pages_recursed_(true);
 		Bry_bfr full_bfr = app.Utl__bfr_mkr().Get_m001();
@@ -81,7 +81,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	}
 	private boolean Init_vars(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xop_xnde_tkn xnde) {
 		this.wiki = wiki; this.ctx = ctx; app = wiki.Appe(); usr_dlg = app.Usr_dlg();
-		this.src = src; this.xnde_tkn = xnde; cur_page_ttl = ctx.Cur_page().Ttl();
+		this.src = src; this.xnde_tkn = xnde; cur_page_ttl = ctx.Page().Ttl();
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		Xop_amp_mgr amp_mgr = wiki.Appe().Parser_amp_mgr();
 		index_ttl_bry = amp_mgr.Decode_as_bry(index_ttl_bry);
@@ -143,7 +143,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 			rv = full_bfr.To_bry_and_clear();
 		}
 		catch (Exception e) {
-			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", ctx.Cur_page().Ttl().Full_db(), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", ctx.Page().Ttl().Full_db(), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
 			rv = lnki.Ttl().Page_txt();
 		}
 		return rv;
@@ -162,12 +162,12 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 		int main_lnkis_len = main_lnkis.Count();
 		byte[] index_page_src = index_page.Src();
 		if (main_lnkis_len > 0) {
-			Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
+			Xoa_ttl page_ttl = ctx.Page().Ttl();
 			for (int i = 0; i < main_lnkis_len; i++) {
 				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.Get_at(i);
 				if (page_ttl.Eq_full_db(main_lnki.Ttl())) {
-					Xoae_page old_page = ctx.Cur_page();
-					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, ctx.Cur_page());	// HACK: should not reuse html_wtr, but should be safe to use during parse (not html_gen)
+					Xoae_page old_page = ctx.Page();
+					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, ctx.Page());	// HACK: should not reuse html_wtr, but should be safe to use during parse (not html_gen)
 					if (toc_cur == null)	// do not set if "current" is specified, even if "blank" specified; EX: current=''
 						toc_cur = Make_lnki(full_bfr, index_page_src, main_lnki);
 					if (toc_prv == null		// do not set if "prev" is specified
@@ -351,7 +351,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 				if	(end_sect_bry != null)
 					cur_sect_end = end_sect_bry;
 			}
-			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(full_bfr);
+			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(full_bfr);
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
 			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
@@ -363,7 +363,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	}
 	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
 		Xop_ctx tmp_ctx = Xop_ctx.new_sub_page_(wiki, ctx, lst_page_regy);
-		tmp_ctx.Cur_page().Ttl_(ctx.Cur_page().Ttl());	// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
+		tmp_ctx.Page().Ttl_(ctx.Page().Ttl());	// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
 		tmp_ctx.Lnki().File_wkr_(null);	// NOTE: set file_wkr to null, else items will be double-counted
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_tmpl);
 		Xop_parser tmp_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());

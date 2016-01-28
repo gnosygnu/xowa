@@ -45,7 +45,7 @@ public class Xop_lnki_wkr_ {
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl.Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
-		Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
+		Xoa_ttl page_ttl = ctx.Page().Ttl();
 		if (page_ttl.Ns().Subpages_enabled()
 			&& Pfunc_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
 			Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();

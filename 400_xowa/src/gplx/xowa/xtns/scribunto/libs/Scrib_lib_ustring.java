@@ -178,7 +178,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public static Regx_adp RegxAdp_new_(Xop_ctx ctx, String regx) {
 		Regx_adp rv = Regx_adp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
-			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1}", regx, String_.new_u8(ctx.Cur_page().Ttl().Page_db()));
+			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1}", regx, String_.new_u8(ctx.Page().Ttl().Page_db()));
 		}
 		return rv;
 	}

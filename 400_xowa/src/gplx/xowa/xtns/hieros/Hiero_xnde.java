@@ -26,9 +26,9 @@ public class Hiero_xnde implements Xox_xnde {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
 		xtn_mgr = (Hiero_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Hiero_xtn_mgr.Xtn_key_static);
 		xtn_mgr.Xtn_init_assert(wiki);
-		ctx.Cur_page().Html_data().Head_mgr().Itm__hiero().Enabled_y_();
+		ctx.Page().Html_data().Head_mgr().Itm__hiero().Enabled_y_();
 		blocks = xtn_mgr.Parser().Parse(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_hiero, src, xnde);
+		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_hiero, src, xnde);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 		switch (ctx.Cur_tkn_tid()) {
 			case Xop_tkn_itm_.Tid_list:	// NOTE: if inside list, do not reenable para mode; questionable logic; PAGE:de.d:Damascus;DATE:2014-06-06

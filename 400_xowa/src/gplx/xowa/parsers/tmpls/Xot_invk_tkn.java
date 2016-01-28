@@ -221,7 +221,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				if (ignore_hash.Get_by_bry(name_ary) == null) {
 					if (Pfunc_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
 						Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();
-						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Cur_page().Ttl().Raw());
+						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Page().Ttl().Raw());
 						tmp_bfr.Mkr_rls();
 						return SubEval(ctx, wiki, bfr, name_ary, caller, src);				
 					}
@@ -237,9 +237,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					rv = true;
 				}	catch (Exception e) {
 					if (Env_.Mode_testing()) 
-						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Cur_page().Ttl().Full_txt(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
+						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
 					else {
-						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Cur_page().Ttl().Full_txt(), defn.Name(), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt(), defn.Name(), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
 						rv = false;
 					}
 				}
@@ -256,7 +256,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					Bld_key(invk_tmpl, name_ary, rslt_bfr);
 					byte[] rslt_key = rslt_bfr.To_bry_and_clear();
 					Object o = wiki.Cache_mgr().Tmpl_result_cache().Get_by(rslt_key);
-					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(bfr);
+					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(bfr);
 					if (o != null) {
 						byte[] rslt = (byte[])o;
 						prepend_mgr.End(ctx, bfr, rslt, rslt.length, Bool_.Y);
@@ -316,7 +316,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
 			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
 		else
-			ctx.Cur_page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), Bool_.N);
+			ctx.Page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), Bool_.N);
 		bfr.Add_bfr_and_clear(bfr_func);
 	}
 	private static Hash_adp_bry ignore_hash;
@@ -345,7 +345,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (transclude_src == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 			if (	cache_itm != null
-//					&&  Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Cur_page().Page_ttl().Full_db())	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
+//					&&  Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Page_ttl().Full_db())	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 				) {
 				transclude_src = cache_itm.Wtxt();
 				page_ttl = cache_itm.Ttl();
@@ -364,7 +364,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		boolean rv = false;
 		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_tmpl.Name());
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
-		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(doc);
+		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
 		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), Bool_.Y);
 		doc.Add_bfr_and_clear(tmp_bfr);
@@ -408,7 +408,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (transclude_tmpl == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 			if (	cache_itm != null) {
-				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Cur_page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
+				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 					transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt());
 					page_ttl = cache_itm.Ttl();
 				}

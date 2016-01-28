@@ -33,7 +33,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 		byte[] val_html = tmp_bfr.To_bry_and_clear();
 		if (restrict) {	// restrict only allows displayTitles which have text similar to the pageTitle; PAGE:de.b:Kochbuch/_Druckversion; DATE:2014-08-18
-			Xoae_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Page();
 			wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 			byte[] val_html_lc = tmp_bfr.To_bry_and_clear();
 			Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
@@ -42,7 +42,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 			if (!Bry_.Eq(val_html_lc, page_ttl_lc))
 				val_html = null;
 		}
-		ctx.Cur_page().Html_data().Display_ttl_(val_html);
+		ctx.Page().Html_data().Display_ttl_(val_html);
 		tmp_bfr.Mkr_rls();
 	}
 	private static byte[] Standardize_displaytitle_text(Xol_case_mgr case_mgr, byte[] val) {

@@ -309,7 +309,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			return Make_xnde_xtn(ctx, tkn_mkr, root, src, src_len, tag, bgn_pos, gtPos + 1, name_bgn, name_end, atrs_bgn, atrs_end, atrs, inline, pre2_hack);	// find end tag and do not parse anything inbetween
 		}
 		if (tag.Restricted()) {
-			Xoae_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Page();
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Int__home) {
 				int end_pos = gtPos + 1;
@@ -557,7 +557,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		else {
 			byte[] close_bry = tag.Xtn_end_tag_tmp();			// get tmp bry (so as not to new)
 			if (tag.Langs() != null) {							// cur tag has langs; EX:<section>; DATE:2014-07-18
-				Xop_xnde_tag_lang tag_lang = tag.Langs_get(ctx.Lang().Case_mgr(), ctx.Cur_page().Lang().Lang_id(), src, name_bgn, name_end);
+				Xop_xnde_tag_lang tag_lang = tag.Langs_get(ctx.Lang().Case_mgr(), ctx.Page().Lang().Lang_id(), src, name_bgn, name_end);
 				if (tag_lang == null)							// tag does not match lang; EX:<trecho> and lang=de;
 					return ctx.Lxr_make_txt_(open_end);
 				if (tag_lang != Xop_xnde_tag_lang.Instance)		// tag matches; note Xop_xnde_tag_lang._ is a wildcard match; EX:<section>
@@ -647,8 +647,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_listing_see:
 					case Xop_xnde_tag_.Tid_listing_sleep:			xnde_xtn = tkn_mkr.Xnde_listing(tag_id); break;
 					case Xop_xnde_tag_.Tid_timeline:
-						boolean log_wkr_enabled = Timeline_log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Timeline_log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_timeline, src, xnde);
-						ctx.Cur_page().Html_data().Head_mgr().Itm__timeline().Enabled_y_();
+						boolean log_wkr_enabled = Timeline_log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Timeline_log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_timeline, src, xnde);
+						ctx.Page().Html_data().Head_mgr().Itm__timeline().Enabled_y_();
 						break;
 					case Xop_xnde_tag_.Tid_xowa_tag_bgn:
 					case Xop_xnde_tag_.Tid_xowa_tag_end:
@@ -670,7 +670,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						xnde_xtn.Xtn_parse(ctx.Wiki(), ctx, root, src, xnde);
 					}
 					catch (Exception e) {
-						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Cur_page().Ttl().Full_txt()
+						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Page().Ttl().Full_txt()
 							, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
 							, Err_.Message_gplx_log(e));
 						if (Env_.Mode_testing()) 

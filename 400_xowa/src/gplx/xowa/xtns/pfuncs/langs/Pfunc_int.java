@@ -25,7 +25,7 @@ public class Pfunc_int extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] msg_key = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki();
-		Xol_lang_itm page_lang = ctx.Cur_page().Lang();
+		Xol_lang_itm page_lang = ctx.Page().Lang();
 		byte[][] args_ary = Bry_.Ary_empty;
 		int args_len = self.Args_len();
 		if (args_len > 0) {

@@ -25,10 +25,10 @@ public class Articles_func extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Articles_func().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = this.Eval_argx(ctx, src, caller, self);
-		Articles_xtn_skin_itm xtn_itm = (Articles_xtn_skin_itm)ctx.Cur_page().Html_data().Xtn_skin_mgr().Get_or_null(Articles_xtn_skin_itm.KEY);
+		Articles_xtn_skin_itm xtn_itm = (Articles_xtn_skin_itm)ctx.Page().Html_data().Xtn_skin_mgr().Get_or_null(Articles_xtn_skin_itm.KEY);
 		if (xtn_itm == null) {
 			xtn_itm = new Articles_xtn_skin_itm();
-			ctx.Cur_page().Html_data().Xtn_skin_mgr().Add(xtn_itm);
+			ctx.Page().Html_data().Xtn_skin_mgr().Add(xtn_itm);
 		}
 		Parse(xtn_itm, argx);
 	}

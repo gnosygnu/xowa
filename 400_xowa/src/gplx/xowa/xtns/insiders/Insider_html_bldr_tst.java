@@ -47,7 +47,7 @@ class Insider_html_bldr_fxt {
 		this.xtn_mgr = wiki.Xtn_mgr().Xtn_insider();
 		xtn_mgr.Enabled_y_();
 		xtn_mgr.Xtn_init_by_wiki(wiki);
-		this.page = wiki.Parser_mgr().Ctx().Cur_page();
+		this.page = wiki.Parser_mgr().Ctx().Page();
 		skin_itm = new Insider_xtn_skin_itm(xtn_mgr.Html_bldr());
 		page.Html_data().Xtn_skin_mgr().Add(skin_itm);
 	}

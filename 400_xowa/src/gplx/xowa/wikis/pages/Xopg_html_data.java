@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.indicators.*;
+import gplx.xowa.xtns.pagebanners.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
 	public boolean					Html_restricted() {return html_restricted;} private boolean html_restricted = true;
@@ -50,6 +51,7 @@ public class Xopg_html_data {
 	public int					Xtn_imap_next_id() {return ++xtn_imap_next_id;} private int xtn_imap_next_id;	// NOTE: must keep separate imap_id b/c html_elem_id is not always set;
 	public byte[]				Xtn_search_text() {return xtn_search_txt;} public void Xtn_search_text_(byte[] v) {xtn_search_txt = v;} private byte[] xtn_search_txt = Bry_.Empty;
 	public byte[]				Xtn_scribunto_dbg() {return xtn_scribunto_dbg;} public void Xtn_scribunto_dbg_(byte[] v) {xtn_scribunto_dbg = Bry_.Add(xtn_scribunto_dbg, v);} private byte[] xtn_scribunto_dbg = Bry_.Empty;
+	public Pgbnr_itm			Xtn__pgbnr() {return xtn__pgbnr;} public void Xtn__pgbnr_(Pgbnr_itm v) {xtn__pgbnr = v;} private Pgbnr_itm xtn__pgbnr;
 	public Xoh_head_mgr			Head_mgr() {return module_mgr;} private Xoh_head_mgr module_mgr = new Xoh_head_mgr();
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;
@@ -79,6 +81,7 @@ public class Xopg_html_data {
 		xtn_imap_exists = false;
 		xtn_search_txt = Bry_.Empty;
 		xtn_scribunto_dbg = Bry_.Empty;
+		xtn__pgbnr = null;
 		module_mgr.Clear();
 		custom_html = custom_html_end = custom_head_end = custom_tab_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();

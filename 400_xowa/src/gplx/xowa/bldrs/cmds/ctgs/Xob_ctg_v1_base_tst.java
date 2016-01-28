@@ -56,6 +56,4 @@ class Xobd_parser_wkr_ctg_tstr extends Xob_ctg_v1_txt {	public List_adp Found() 
 	@Override public void Process_ctg(Xowd_page_itm page, byte[] src, int src_len, int bgn, int end) {
 		found.Add(Bry_.Mid(src, bgn, end));
 	}
-	@Override public void Log(byte err_tid, Xowd_page_itm page, byte[] src, int ctg_bgn) {
-	}
 }

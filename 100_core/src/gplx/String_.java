@@ -319,6 +319,14 @@ public class String_ implements GfoInvkAble {
 			sb.Add(val).Add("\n");
 		return sb.To_str();
 	}
+	public static String Concat_lines_nl_apos_skip_last(String... lines) {
+		Bry_bfr bfr = Bry_bfr_.Get();
+		try {
+			Bry_.New_u8_nl_apos(bfr, lines);
+			return bfr.To_str_and_clear();
+		}
+		finally {bfr.Mkr_rls();}
+	}
 	public static String Concat_lines_nl_skip_last(String... ary) {
 		String_bldr sb = String_bldr_.new_();
 		int ary_len = ary.length; int ary_end = ary_len - 1;

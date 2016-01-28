@@ -77,7 +77,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		hdr.Subs_move(root);
 		hdr.Src_end_(cur_pos);
 		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki)
-			ctx.Cur_page().Hdr_mgr().Add(ctx, hdr, src);
+			ctx.Page().Hdr_mgr().Add(ctx, hdr, src);
 		return cur_pos;
 	}
 	private void Close_open_itms(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {

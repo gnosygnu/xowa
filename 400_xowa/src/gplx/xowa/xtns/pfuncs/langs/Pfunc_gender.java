@@ -41,7 +41,7 @@ public class Pfunc_gender extends Pf_func_base {
 		}
 		if (self_args_len == 1) {bfr.Add(when_m); return;}	// per MW: EX: {{gender:name|a}} -> "a"
 		int gender = Get_gender(ctx.App().User(), user_name);
-		Xol_lang_itm lang = ctx.Cur_page().Lang();
+		Xol_lang_itm lang = ctx.Page().Lang();
 		bfr.Add(lang.Gender().Gender_eval(gender, when_m, when_f, when_u));
 	}
 	private static int Get_gender(Xou_user user, byte[] user_name) {

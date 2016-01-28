@@ -99,8 +99,8 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 	private int Parse_by_data(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag cur, Gfh_tag nxt, int tid) {
 		Xoh_data_itm data = hctx.Pool_mgr__data().Get_by_tid(tid);
 		data.Clear();
-		if (!data.Init_by_parse(hdoc_wkr, hctx, tag_rdr, src, cur, nxt)) return -1;
-		if (!hdoc_wkr.Process_parse(data)) return -1;
+		if (!data.Init_by_parse(hdoc_wkr, hctx, tag_rdr, src, cur, nxt)) {data.Pool__rls(); return -1;}
+		if (!hdoc_wkr.Process_parse(data)) {data.Pool__rls(); return -1;}
 		int rv = data.Src_end();
 		data.Pool__rls();
 		return rv;

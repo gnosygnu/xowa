@@ -16,135 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.*;
-class Pgbnr_cfg {
+public class Pgbnr_cfg {
+	private static final int[] wpb_standard_sizes = new int[] {640, 1280, 2560};
 	public byte[] Default_file() {return null;}
 	public boolean Enabled_in_ns(int ns_id) {return false;}
-}
-class Pgbnr_icon {
-	public byte[] Name;
-	public byte[] Title;
-	public byte[] Url;
-	public Pgbnr_icon(byte[] name, byte[] title, byte[] url) {
-		this.Name = name; this.Title = title; this.Url = url;
+	public boolean Get__wpb_enable_default_banner() {return false;}
+	public boolean Get__wpb_enable_heading_override() {return false;}
+	public byte[] Get__wpb_image() {return null;}
+	public int[] Get__wpb_standard_sizes() {return wpb_standard_sizes;}
+	public boolean Chk_pgbnr_allowed(Xoa_ttl ttl, Xowe_wiki wiki) {
+		return	this.Enabled_in_ns(ttl.Ns().Id())					// chk if ns allows banner
+			&&	!Bry_.Eq(ttl.Page_db(), wiki.Props().Main_page()); 	// never show on main page
 	}
-	public static final Pgbnr_icon[] Ary_empty = new Pgbnr_icon[0];
-}
-class Pgbnr_itm {
-	public byte[] Name;
-	public byte[] Tooltip;
-	public byte[] Title;
-	public boolean Bottomtoc;
-	public boolean Toc;
-	public Xoa_ttl File_ttl;
-	public Pgbnr_icon[] Icons;
-	public Pgbnr_itm(byte[] name, byte[] tooltip, byte[] title, boolean bottomtoc, boolean toc, Xoa_ttl file_ttl, Pgbnr_icon[] icons) {
-		this.Name = name;
-		this.Tooltip = tooltip; this.Title = title; this.Bottomtoc = bottomtoc; this.Toc = toc; this.File_ttl = file_ttl; this.Icons = icons;
-	}
-//		public static void Do(Bry_bfr bfr, Xop_ctx ctx, Pgbnr_cfg cfg, Pgbnr_itm itm) {
-//			if (itm != null) {
-//				byte[] name = itm.Name;
-////				if ( isset( $params['icons'] ) ){
-////					$out->enableOOUI();
-////					$params['icons'] = self::expandIconTemplateOptions( $params['icons'] );
-////				}
-//				// $banner = $wpbFunctionsClass::getBannerHtml( $bannername, $params );
-//			}
-//			else {}
-//		}
-	public static void Get_banner_html(Bry_bfr bfr, byte[] banner_name, Pgbnr_itm itm, Pgbnr_cfg cfg) {
-		byte[][] urls = Bry_.Ary(Bry_.Empty);  // $urls = static::getStandardSizeUrls( $bannername );
-		if (urls.length == 0) return;
-	}
-//	public static function getBannerHtml( $bannername, $options = array() ) {
-//			// @var int index variable
-//			$i = 0;
-//			foreach ( $urls as $url ) {
-//				$size = $config->get( 'WPBStandardSizes' );
-//				$size = $size[$i];
-//				// add url with width and a comma if not adding the last url
-//				if ( $i < count( $urls ) ) {
-//					$srcset[] = "$url {$size}w";
-//				}
-//				$i++;
-//			}
-//			// create full src set from individual urls, separated by comma
-//			$srcset = implode( ',', $srcset );
-//			// use largest image url as src attribute
-//			$bannerurl = $urls[count( $urls ) - 1];
-//			$bannerfile = Title::newFromText( "File:$bannername" );
-//			$templateParser = new TemplateParser( __DIR__ . '/../templates' );
-//			$options['bannerfile'] = $bannerfile->getLocalUrl();
-//			$options['banner'] = $bannerurl;
-//			$options['srcset'] = $srcset;
-//			$file = wfFindFile( $bannerfile );
-//			$options['maxWidth'] = $file->getWidth();
-//			$options['isHeadingOverrideEnabled'] = $config->get( 'WPBEnableHeadingOverride' );
-//			$banner = $templateParser->processTemplate(
-//					'banner',
-//					$options
-//				);
-//	}
-
-//	public static function addBanner( OutputPage $out, Skin $skin ) {
-//		$config = WikidataPageBannerFunctions::getWPBConfig();
-//		$title = $out->getTitle();
-//		$isDiff = $out->getRequest()->getVal( 'diff' );
-//		$wpbFunctionsClass = self::$wpbFunctionsClass;
-//
-//		// if banner-options are set and not a diff page, add banner anyway
-//		if ( $out->getProperty( 'wpb-banner-options' ) !== null && !$isDiff ) {
-//			$params = $out->getProperty( 'wpb-banner-options' );
-//			$bannername = $params['name'];
-//			$banner = $wpbFunctionsClass::getBannerHtml( $bannername, $params );
-//			// attempt to get WikidataBanner
-//			if ( $banner === null ) {
-//				$bannername = $wpbFunctionsClass::getWikidataBanner( $title );
-//				$banner = $wpbFunctionsClass::getBannerHtml( $bannername, $params );
-//			}
-//			// only add banner and styling if valid banner generated
-//			if ( $banner !== null ) {
-//				if ( isset( $params['toc'] ) ) {
-//					$out->addModuleStyles( 'ext.WikidataPageBanner.toc.styles' );
-//				}
-//				$wpbFunctionsClass::insertBannerIntoOutputPage( $out, $banner );
-//
-//				// FIXME: This is currently only needed to support testing
-//				$out->setProperty( 'articlebanner-name', $bannername );
-//			}
-//		}
-//		// if the page uses no 'PAGEBANNER' invocation and if article page, insert default banner
-//		elseif (
-//			$title->isKnown() &&
-//			$out->isArticle() &&
-//			$config->get( 'WPBEnableDefaultBanner' ) &&
-//			!$isDiff
-//		) {
-//			$ns = $title->getNamespace();
-//			// banner only on specified namespaces, and not Main Page of wiki
-//			if ( in_array( $ns, $config->get( 'WPBNamespaces' ) )
-//				&& !$title->isMainPage() ) {
-//				// first try to obtain bannername from Wikidata
-//				$bannername = $wpbFunctionsClass::getWikidataBanner( $title );
-//				if ( $bannername === null ) {
-//					// if Wikidata banner not found, set bannername to default banner
-//					$bannername = $config->get( 'WPBImage' );
-//				}
-//				// add title to template parameters
-//				$paramsForBannerTemplate = array( 'title' => $title );
-//				$banner = $wpbFunctionsClass::
-//					getBannerHtml( $bannername, $paramsForBannerTemplate );
-//				// only add banner and styling if valid banner generated
-//				if ( $banner !== null ) {
-//					$wpbFunctionsClass::insertBannerIntoOutputPage( $out, $banner );
-//
-//					// set articlebanner property on OutputPage
-//					// FIXME: This is currently only needed to support testing
-//					$out->setProperty( 'articlebanner-name', $bannername );
-//				}
-//			}
-//		}
-//		return true;
-//	}
 }

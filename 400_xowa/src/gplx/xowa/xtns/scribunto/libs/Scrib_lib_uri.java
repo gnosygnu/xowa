@@ -70,7 +70,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 	}
 	private boolean Init_uri_for_page(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xop_ctx ctx = core.Ctx();
-		byte[] ttl_bry = ctx.Cur_page().Ttl().Raw();
+		byte[] ttl_bry = ctx.Page().Ttl().Raw();
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		Pfunc_urlfunc.UrlString(ctx, Pfunc_urlfunc.Tid_full, false, ttl_bry, tmp_bfr, Bry_.Empty);
 		return rslt.Init_obj(tmp_bfr.To_bry_and_rls());

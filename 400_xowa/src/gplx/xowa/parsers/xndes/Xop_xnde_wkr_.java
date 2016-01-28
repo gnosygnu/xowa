@@ -47,7 +47,7 @@ class Xop_xnde_wkr_ {
 				int tid = ((Int_obj_ref)o).Val();
 				switch (tid) {
 					case Find_xtn_end__tid__bgn:		// handle nested refs; PAGE:en.w:UK; DATE:2015-12-26
-						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end); if (angle_end_pos == Bry_find_.Not_found) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
+						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end); if (angle_end_pos == Bry_find_.Not_found) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
 						if (src[angle_end_pos -1] == Byte_ascii.Slash) {}
 						else
 							++depth;
@@ -70,11 +70,11 @@ class Xop_xnde_wkr_ {
 	}
 	public static int Find_xtag_end(Xop_ctx ctx, byte[] src, int pos, int src_end) {
 		int xtag_bgn = pos + Pfunc_tag.Xtag_bgn_lhs.length;
-		int tag_id = Bry_.To_int_or(src, xtag_bgn, xtag_bgn + Pfunc_tag.Id_len, -1); if (tag_id == -1) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not extract id from xtag_bgn: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
+		int tag_id = Bry_.To_int_or(src, xtag_bgn, xtag_bgn + Pfunc_tag.Id_len, -1); if (tag_id == -1) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not extract id from xtag_bgn: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
 		Find_xtag_end__bfr.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, Pfunc_tag.Id_len, tag_id).Add(Pfunc_tag.Xtag_rhs);
 		byte[] tag_end = Find_xtag_end__bfr.To_bry_and_clear();
-		int rv = Bry_find_.Find_fwd(src, tag_end, pos + Pfunc_tag.Xtag_rhs.length); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find xtag end: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
-		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().To_str()); return Bry_find_.Not_found;}
+		int rv = Bry_find_.Find_fwd(src, tag_end, pos + Pfunc_tag.Xtag_rhs.length); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find xtag end: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
+		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
 		return rv;
 	}
 }

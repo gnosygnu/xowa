@@ -45,9 +45,9 @@ public class Xoh_html_wtr {
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_root_tkn root) {Write_all(bfr, ctx, Xoh_wtr_ctx.Basic, src, root);}
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_root_tkn root) {			
 		try {
-			indent_level = 0; this.page = ctx.Cur_page();
+			indent_level = 0; this.page = ctx.Page();
 			page.Slink_list().Clear();	// HACK: always clear langs; necessary for reload
-			lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Cur_page());				
+			lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Page());				
 			Write_tkn(bfr, ctx, hctx, src, null, -1, root);
 		}
 		finally {

@@ -104,7 +104,7 @@ public class Xot_tmpl_wtr {
 					if (Env_.Mode_testing())
 						throw Err_.new_exc(e, "xo", Err_string);
 					else
-						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_u8(ctx.Cur_page().Ttl().Page_db()), Err_string);
+						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_u8(ctx.Page().Ttl().Page_db()), Err_string);
 				}
 				break;
 		}

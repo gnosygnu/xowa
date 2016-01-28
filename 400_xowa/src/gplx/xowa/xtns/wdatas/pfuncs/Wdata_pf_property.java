@@ -30,14 +30,14 @@ public class Wdata_pf_property extends Pf_func_base {
 		long log_time_bgn = 0;
 		if (property_wkr != null) {
 			log_time_bgn = Env_.TickCount();
-			if (!property_wkr.Eval_bgn(ctx.Cur_page(), id)) return;
+			if (!property_wkr.Eval_bgn(ctx.Page(), id)) return;
 		}
 
 		Xoae_app app = ctx.App();
 		Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		if (!wdata_mgr.Enabled()) return;
 		Xowe_wiki wiki = ctx.Wiki();
-		Xoa_ttl ttl = ctx.Cur_page().Ttl();
+		Xoa_ttl ttl = ctx.Page().Ttl();
 
 		Wdata_pf_property_data data = new Wdata_pf_property_data();
 		data.Init_by_parse(ctx, src, caller, self, this, id);
@@ -47,9 +47,9 @@ public class Wdata_pf_property extends Pf_func_base {
 			pid = wdata_mgr.Pids__get_by_name(wiki.Wdata_wiki_lang(), data.Id());
 		if (pid == Wdata_wiki_mgr.Pid_null) {Print_self(app.Usr_dlg(), bfr, src, self, "prop_not_found", "prop id not found: ~{0} ~{1} ~{2}", wiki.Domain_str(), ttl.Page_db_as_str(), data.Id()); return;}
 		Wdata_claim_grp prop_grp = prop_doc.Claim_list_get(pid); if (prop_grp == null) return;// NOTE: some props may not exist; EX: {{#property:P345}} for "Unknown_movie" may have a qid, but doesn't have a defined pid
-		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, wiki.Wdata_wiki_lang()); // NOTE: was ctx.Cur_page().Lang().Key_bry(), but fails in simplewiki; DATE:2013-12-02
+		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, wiki.Wdata_wiki_lang()); // NOTE: was ctx.Page().Lang().Key_bry(), but fails in simplewiki; DATE:2013-12-02
 		if (property_wkr != null)
-			property_wkr.Eval_end(ctx.Cur_page(), id, log_time_bgn);
+			property_wkr.Eval_end(ctx.Page(), id, log_time_bgn);
 	}
 	public static int Parse_pid(Number_parser num_parser, byte[] bry) {
 		int bry_len = bry.length;

@@ -141,7 +141,7 @@ public class Xoh_file_wtr__basic {
 			else {										// thumb
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
 				byte[] link_arg = Xoa_ttl.Replace_spaces(link_tkn.Dat_to_bry(src));	// replace spaces with unders, else "/wiki/File:A b.ogg" instead of "A_b.ogg"; DATE:2015-11-27
-				if (Bry_.Has_at_bgn(link_arg, Xop_tkn_.Anchor_byte)) link_arg = Bry_.Add(ctx.Cur_page().Ttl().Page_db(), link_arg);
+				if (Bry_.Has_at_bgn(link_arg, Xop_tkn_.Anchor_byte)) link_arg = Bry_.Add(ctx.Page().Ttl().Page_db(), link_arg);
 				byte[] link_arg_html = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_arg, lnki_href);
 				byte[] xowa_title_bry = tmp_link_parser.Html_xowa_ttl();			// NOTE: xowa_title_bry will be link arg; [[File:A.png|link=file:///A.ogg]] -> A.ogg x> A.png
 				boolean a_href_is_file = true;

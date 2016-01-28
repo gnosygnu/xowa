@@ -39,7 +39,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
 		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
-		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
+		Parse_text_to_html(bfr, ctx.Page(), false, src);
 		return bfr.To_bry_and_rls();
 	}
 	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
@@ -70,7 +70,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
 	}	private Xot_compile_data tmpl_props = new Xot_compile_data();
 	public void Parse_page_all_clear(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
-		ctx.Cur_page().Clear_all(); ctx.App().Msg_log().Clear();
+		ctx.Page().Clear_all(); ctx.App().Msg_log().Clear();
 		Parse_text_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);
 	}
 	public Xop_root_tkn Parse_text_to_wdom_old_ctx(Xop_ctx old_ctx, byte[] src, boolean doc_bgn_pos) {return Parse_text_to_wdom(Xop_ctx.new_sub_(old_ctx.Wiki()), src, doc_bgn_pos);}
@@ -112,10 +112,10 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		int len = src.length; if (len == 0) return;	// nothing to parse;
 		byte parse_tid_old = ctx.Parse_tid();	// NOTE: must store parse_tid b/c ctx can be reused by other classes
 		ctx.Parse_tid_(parse_type);
-		ctx.Page_bgn(root, src);
+		ctx.Parser__page_init(root, src);
 		ctx.App().Parser_mgr().Core__uniq_mgr().Clear();
 		Parse_to_src_end(root, ctx, tkn_mkr, src, trie, doc_bgn_pos, len);
-		ctx.Page_end(root, src, len);
+		ctx.Parser__page_term(root, src, len);
 		ctx.Parse_tid_(parse_tid_old);
 	}
 	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Btrie_fast_mgr trie, int pos, int len) {

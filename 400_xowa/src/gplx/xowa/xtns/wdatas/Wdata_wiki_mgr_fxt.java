@@ -101,9 +101,9 @@ public class Wdata_wiki_mgr_fxt {
 		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
 		xdat_file.Save(file_orig);
 	}
-	public void Init_external_links_mgr_clear() {wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links().Reset();}
+	public void Init_external_links_mgr_clear() {wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links().Reset();}
 	public void Init_external_links_mgr_add(String... langs) {
-		Wdata_external_lang_links_data external_lang_links = wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links();
+		Wdata_external_lang_links_data external_lang_links = wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links();
 		external_lang_links.Enabled_(true);
 		int len = langs.length;
 		for (int i = 0; i < len; i++) {
@@ -130,7 +130,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_parse_langs(String raw, String expd) {
 		// setup langs
-		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		app.Xwiki_mgr__sitelink_mgr().Parse(Bry_.new_u8(String_.Concat_lines_nl
 		( "0|grp1"
 		, "1|en|English"
@@ -155,7 +155,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
-		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Cur_page().Wdata_external_lang_links());
+		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
 	}	List_adp tmp_langs = List_adp_.new_();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {

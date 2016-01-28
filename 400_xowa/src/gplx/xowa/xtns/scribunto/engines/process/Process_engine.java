@@ -81,7 +81,7 @@ public class Process_engine implements Scrib_engine {
 			}
 			else {
 				bfr.Mkr_rls();
-//					app.Usr_dlg().Warn_many("", "", "invalid dispatch: op=~{0} page=~{1}", op, String_.new_u8(core.Ctx().Cur_page().Page_ttl().Page_db()));
+//					app.Usr_dlg().Warn_many("", "", "invalid dispatch: op=~{0} page=~{1}", op, String_.new_u8(core.Ctx().Page().Page_ttl().Page_db()));
 				return KeyVal_.Ary_empty;
 			}
 		}

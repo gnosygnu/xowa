@@ -56,7 +56,7 @@ class Xoh_page_wtr_fxt {
 	}
 	public void Test_edit(String raw, String expd) {
 		wiki.Html_mgr().Page_wtr_mgr().Html_capable_(true);
-		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		page.Data_raw_(Bry_.new_u8(raw));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_page_.Tid_edit);
@@ -65,7 +65,7 @@ class Xoh_page_wtr_fxt {
 	}
 	public void Test_read(String page_name, String page_text, String expd) {
 		wiki.Html_mgr().Page_wtr_mgr().Html_capable_(true);
-		Xoae_page page = wiki.Parser_mgr().Ctx().Cur_page();
+		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		page.Ttl_(Xoa_ttl.parse(wiki, Bry_.new_a7(page_name)));
 		page.Data_raw_(Bry_.new_u8(page_text));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();

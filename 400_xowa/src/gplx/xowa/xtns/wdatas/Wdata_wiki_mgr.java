@@ -245,6 +245,6 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		return false;
 	}
 	public static void Log_missing_qid(Xop_ctx ctx, byte[] qid) {
-		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_u8(qid), String_.new_u8(ctx.Cur_page().Ttl().Page_db()));
+		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_u8(qid), String_.new_u8(ctx.Page().Ttl().Page_db()));
 	}
 }

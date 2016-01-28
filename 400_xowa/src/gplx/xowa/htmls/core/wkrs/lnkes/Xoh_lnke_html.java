@@ -71,7 +71,7 @@ public class Xoh_lnke_html {
 			if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)											// EX: 'http://a.org' -> 'http://a.org'
 				bfr.Add_mid(src, href_bgn, href_end);
 			else																						// EX: '[http://a.org]' -> '[1]'
-				bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(ctx.Cur_page().Html_data().Lnke_autonumber_next()).Add_byte(Byte_ascii.Brack_end);
+				bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(ctx.Page().Html_data().Lnke_autonumber_next()).Add_byte(Byte_ascii.Brack_end);
 		}
 		else {																							// EX: '[http://a.org a]' -> 'a'
 			for (int i = 0; i < subs_len; i++)

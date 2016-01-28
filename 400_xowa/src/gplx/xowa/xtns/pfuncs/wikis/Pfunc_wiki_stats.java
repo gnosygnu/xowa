@@ -43,7 +43,7 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 		if (raw)
 			bfr.Add_int_variable(v);
 		else
-			bfr.Add(ctx.Cur_page().Lang().Num_mgr().Format_num(v));
+			bfr.Add(ctx.Page().Lang().Num_mgr().Format_num(v));
 	}
 	public Pfunc_wiki_stats(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;

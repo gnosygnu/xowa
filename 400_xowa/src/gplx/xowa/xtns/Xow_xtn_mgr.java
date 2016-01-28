@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*;
+import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*; import gplx.xowa.xtns.pagebanners.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private Ordered_hash regy = Ordered_hash_.New_bry();
 	public int Count() {return regy.Count();}
@@ -29,6 +29,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	public Indicator_xtn_mgr Xtn_indicator() {return xtn_indicator;} private Indicator_xtn_mgr xtn_indicator;
 	public Pp_xtn_mgr Xtn_proofread() {return xtn_proofread;} private Pp_xtn_mgr xtn_proofread;
 	public Wdata_xtn_mgr Xtn_wikibase() {return xtn_wikibase;} private Wdata_xtn_mgr xtn_wikibase;
+	public Pgbnr_xtn_mgr Xtn_pgbnr() {return xtn_pgbnr;} private Pgbnr_xtn_mgr xtn_pgbnr;
 	public Xow_xtn_mgr Ctor_by_app(Xoae_app app) {	// NOTE: needed for options
 		Add(app, new Cite_xtn_mgr());
 		Add(app, new Imap_xtn_mgr());
@@ -37,6 +38,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new Indicator_xtn_mgr());
 		Add(app, new Pp_xtn_mgr());
 		Add(app, new Wdata_xtn_mgr());
+		Add(app, new Pgbnr_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.scribunto.Scrib_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.gallery.Gallery_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.poems.Poem_xtn_mgr());
@@ -45,7 +47,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new gplx.xowa.xtns.listings.Listing_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.titleBlacklists.Blacklist_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
-//			Add(app, new gplx.xowa.xtns.graphs.Graph_xtn());
+		Add(app, new gplx.xowa.xtns.flaggedRevs.Flagged_revs_xtn_mgr());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xowe_wiki wiki) {
@@ -95,17 +97,19 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 			case Tid_imap:			xtn_imap = (Imap_xtn_mgr)mgr; break;
 			case Tid_proofread:		xtn_proofread = (Pp_xtn_mgr)mgr; break;
 			case Tid_wikibase:		xtn_wikibase = (Wdata_xtn_mgr)mgr; break;
+			case Tid_pgbnr:			xtn_pgbnr = (Pgbnr_xtn_mgr)mgr; break;
 		}
 	}
-	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6;
+	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6, Tid_pgbnr = 7;
 	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
-	.Add_bry_byte(Cite_xtn_mgr.XTN_KEY		, Tid_cite)
-	.Add_bry_byte(Sites_xtn_mgr.XTN_KEY		, Tid_sites)
-	.Add_bry_byte(Insider_xtn_mgr.XTN_KEY	, Tid_insider)
-	.Add_bry_byte(Indicator_xtn_mgr.XTN_KEY	, Tid_indicator)
-	.Add_bry_byte(Imap_xtn_mgr.XTN_KEY		, Tid_imap)
-	.Add_bry_byte(Pp_xtn_mgr.XTN_KEY		, Tid_proofread)
-	.Add_bry_byte(Wdata_xtn_mgr.XTN_KEY		, Tid_wikibase)
+	.Add_bry_byte(Cite_xtn_mgr.XTN_KEY				, Tid_cite)
+	.Add_bry_byte(Sites_xtn_mgr.XTN_KEY				, Tid_sites)
+	.Add_bry_byte(Insider_xtn_mgr.XTN_KEY			, Tid_insider)
+	.Add_bry_byte(Indicator_xtn_mgr.XTN_KEY			, Tid_indicator)
+	.Add_bry_byte(Imap_xtn_mgr.XTN_KEY				, Tid_imap)
+	.Add_bry_byte(Pp_xtn_mgr.XTN_KEY				, Tid_proofread)
+	.Add_bry_byte(Wdata_xtn_mgr.XTN_KEY				, Tid_wikibase)
+	.Add_bry_byte(Pgbnr_xtn_mgr.Xtn_key_static		, Tid_pgbnr)
 	;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_fail(m.ReadBry("v"));

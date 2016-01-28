@@ -24,7 +24,7 @@ public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		itm.Parse(wiki, ctx, ctx.Cur_page().Ttl().Full_txt(), src, xnde);
+		itm.Parse(wiki, ctx, ctx.Page().Ttl().Full_txt(), src, xnde);
 		Dpl_page_finder.Find_pages(pages, wiki, itm);
 		if (itm.Sort_ascending() != Bool_.__byte)
 			pages.Sort_by(new Dpl_page_sorter(itm));

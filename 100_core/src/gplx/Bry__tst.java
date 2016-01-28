@@ -271,6 +271,11 @@ public class Bry__tst {
 		fxt.Test_Mid_w_trim("", "");									// handle 0 bytes
 		fxt.Test_Mid_w_trim("   ", "");									// handle all ws
 	}
+	@Test   public void New_u8_nl_apos() {
+		fxt.Test__new_u8_nl_apos(String_.Ary("a"), "a");
+		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b"), "a\nb");
+		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b'c", "d"), "a\nb\"c\nd");
+	}
 }
 class Bry__fxt {
 	public void Test_trim_end(String raw, byte trim, String expd) {
@@ -284,4 +289,7 @@ class Bry__fxt {
 	public void Test_add_w_dlm(String dlm, String[] itms, String expd)	{Tfds.Eq(expd, String_.new_u8(Bry_.Add_w_dlm(Bry_.new_u8(dlm), Bry_.Ary(itms))));}
 	public void Test_add_w_dlm(byte dlm, String[] itms, String expd)	{Tfds.Eq(expd, String_.new_u8(Bry_.Add_w_dlm(dlm, Bry_.Ary(itms))));}
 	public void Test_Mid_w_trim(String src, String expd) {byte[] bry = Bry_.new_u8(src); Tfds.Eq(expd, String_.new_u8(Bry_.Mid_w_trim(bry, 0, bry.length)));}
+	public void Test__new_u8_nl_apos(String[] ary, String expd) {
+		Tfds.Eq_str_lines(expd, String_.new_u8(Bry_.New_u8_nl_apos(ary)));
+	}
 }

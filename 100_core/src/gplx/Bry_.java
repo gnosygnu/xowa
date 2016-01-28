@@ -84,6 +84,37 @@ public class Bry_ {
 		}
 		return rv;
 	}
+	public static byte[] New_u8_nl_apos(String... lines) {
+		Bry_bfr bfr = Bry_bfr_.Get();
+		try {
+			New_u8_nl_apos(bfr, lines);
+			return bfr.To_bry_and_clear();
+		}
+		finally {bfr.Mkr_rls();}
+	}
+	public static void New_u8_nl_apos(Bry_bfr bfr, String... lines) {
+		int lines_len = lines.length;
+		for (int i = 0; i < lines_len; ++i) {
+			if (i != 0) bfr.Add_byte_nl();
+			byte[] line = Bry_.new_u8(lines[i]);
+			boolean dirty = false;
+			int prv = 0;
+			int line_len = line.length;
+			for (int j = 0; j < line_len; ++j) {
+				byte b = line[j];
+				if (b == Byte_ascii.Apos) {
+					bfr.Add_mid(line, prv, j);
+					bfr.Add_byte(Byte_ascii.Quote);
+					dirty = true;
+					prv = j + 1;
+				}
+			}
+			if (dirty)
+				bfr.Add_mid(line, prv, line_len);
+			else
+				bfr.Add(line);
+		}
+	}
 	public static void new_u8__write(String str, int str_len, byte[] bry, int bry_pos) {
 		for (int i = 0; i < str_len; ++i) {
 			char c = str.charAt(i);								

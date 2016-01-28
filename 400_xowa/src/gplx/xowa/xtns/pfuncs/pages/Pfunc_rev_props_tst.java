@@ -26,6 +26,7 @@ public class Pfunc_rev_props_tst {
 	@Test  public void Page_size()					{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:Test page}}"								, "{{test}}", "0");}
 	@Test  public void Revision_size()				{fxt.Test_parse_tmpl_str_test("{{REVISIONSIZE}}"									, "{{test}}", "8");}
 	@Test  public void Protection_level()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONLEVEL}}"									, "{{test}}", "normal");}
+	@Test  public void Protection_expiry()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONEXPIRY}}"								, "{{test}}", "infinite");}
 	@Test  public void PageSize_invalid_ttl()		{
 		fxt.Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_parse_tmpl_str_test("{{PAGESIZE:{{{100}}}|R}}"		, "{{test}}", "0");

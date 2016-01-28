@@ -53,7 +53,7 @@ class Sites_html_bldr_fxt {
 		, "0|dmoz|http://www.dmoz.org/~{0}|DMOZ"
 		)));
 		Init_regy_mgr("commons", "dmoz");
-		this.page = wiki.Parser_mgr().Ctx().Cur_page();
+		this.page = wiki.Parser_mgr().Ctx().Page();
 	}
 	private void Init_regy_mgr(String... ary) {xtn_mgr.Regy_mgr().Set_many(ary);}
 	public void Init_ttl(String lnki_ttl) {

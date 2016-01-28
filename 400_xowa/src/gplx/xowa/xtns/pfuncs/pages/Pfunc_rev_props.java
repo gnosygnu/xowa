@@ -24,14 +24,15 @@ public class Pfunc_rev_props extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_rev_props(id).Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
-		Xopg_revision_data rev_data = ctx.Cur_page().Revision_data();
+		Xopg_revision_data rev_data = ctx.Page().Revision_data();
 		switch (id) {
 			case Xol_kwd_grp_.Id_page_id:
-			case Xol_kwd_grp_.Id_rev_id:				bfr.Add_int_variable(ctx.Cur_page().Revision_data().Id()); break;	// NOTE: making rev_id and page_id interchangeable; XOWA does not store rev_id
+			case Xol_kwd_grp_.Id_rev_id:				bfr.Add_int_variable(ctx.Page().Revision_data().Id()); break;	// NOTE: making rev_id and page_id interchangeable; XOWA does not store rev_id
 			case Xol_kwd_grp_.Id_rev_user:				bfr.Add(rev_data.User()); break;
 			case Xol_kwd_grp_.Id_rev_protectionlevel:	bfr.Add(rev_data.Protection_level()); break;
+			case Xol_kwd_grp_.Id_rev_protectionexpiry:	bfr.Add(rev_data.Protection_expiry()); break;
 			case Xol_kwd_grp_.Id_rev_revisionsize:	// default revsize to pagesize; MW has additional logic for subst which should not apply to XO; https://gerrit.wikimedia.org/r/#/c/82650/
-				bfr.Add_int_variable(ctx.Cur_page().Data_raw().length);
+				bfr.Add_int_variable(ctx.Page().Data_raw().length);
 				break;
 			case Xol_kwd_grp_.Id_rev_pagesize:
 				if (argx.length > 0) {

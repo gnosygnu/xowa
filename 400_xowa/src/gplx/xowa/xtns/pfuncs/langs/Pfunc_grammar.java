@@ -25,7 +25,7 @@ public class Pfunc_grammar extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		byte[] word = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
-		Xol_lang_itm lang = ctx.Cur_page().Lang();
+		Xol_lang_itm lang = ctx.Page().Lang();
 		boolean pass = false;
 		try {pass = lang.Grammar().Grammar_eval(bfr, lang, word, argx);}
 		catch (Exception e) {Err_.Noop(e);}

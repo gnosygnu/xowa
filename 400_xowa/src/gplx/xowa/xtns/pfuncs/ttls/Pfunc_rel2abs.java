@@ -33,7 +33,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
-		if (orig.length == 0) orig = ctx.Cur_page().Ttl().Full_txt();
+		if (orig.length == 0) orig = ctx.Page().Ttl().Full_txt();
 		bfr.Add(Rel2abs(ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {

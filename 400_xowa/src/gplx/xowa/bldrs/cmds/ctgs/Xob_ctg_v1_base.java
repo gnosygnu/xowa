@@ -41,8 +41,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 		int ttl_bgn = end, ttl_end = -1;
 		int pos = end;
 		while (true) {
-			if (pos == src_len) {
-				Log(Tid_eos, page, src, bgn);
+			if (pos == src_len) {		// fail: EOS
 				return end;
 			}
 			Object o = trie.Match_bgn(src, pos, src_len);
@@ -56,11 +55,9 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 						if (ttl_end > ttl_bgn)	// NOTE: ignore examples like [[Category: ]]
 							Process_ctg(page, src, src_len, ttl_bgn, ttl_end);
 						break;
-					case Tid_brack_bgn:
-						Log(Tid_brack_bgn, page, src, bgn);
+					case Tid_brack_bgn:	// fail: [[ is invalid
 						return pos;
-					case Tid_nl:
-						Log(Tid_nl, page, src, bgn);
+					case Tid_nl:		// fail: \n is invalid
 						return pos;
 				}
 				return pos + bry.length;
@@ -68,19 +65,6 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 			++pos;
 		}
 	}
-	@gplx.Virtual public void Log(byte err_tid, Xowd_page_itm page, byte[] src, int ctg_bgn) {
-		String title = String_.new_u8(page.Ttl_full_db());
-		int ctg_end = ctg_bgn + 40; if (ctg_end > src.length) ctg_end = src.length;
-		String ctg_str = String_.Replace(String_.new_u8(src, ctg_bgn, ctg_end), "\n", "");
-		String err = "";
-		switch (err_tid) {
-			case Tid_eos:		err = "eos"; break;
-			case Tid_nl:		err = "bad \\n"; break;
-			case Tid_brack_bgn:	err = "bad [["; break;
-		}
-		bldr.Usr_dlg().Log_many(GRP_KEY, "ctg_fail", "~{0}\n>> ~{1}\n~{2}\n~{3}\n\n", LogErr_hdr, err + " " + ctg_str, "http://" + wiki.Domain_str() + "/wiki/" + title, Bry_.MidByLenToStr(src, ctg_bgn, 100));
-		log_idx++;
-	}	int log_idx = 0; final String LogErr_hdr = String_.Repeat("-", 80);
 	@gplx.Virtual public void Process_ctg(Xowd_page_itm page, byte[] src, int src_len, int bgn, int end) {
 		Process_ctg_row(fld_wtr, dump_fil_len, dump_url_gen, page.Id(), src, src_len, bgn, end);
 	}

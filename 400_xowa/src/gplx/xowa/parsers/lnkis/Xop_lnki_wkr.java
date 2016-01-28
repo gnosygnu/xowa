@@ -57,7 +57,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		switch (lnki.Ns_id()) {
 			case Xow_ns_.Tid__file:
 				if (	Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type())		// thumbs produce <div> cancels pre
-					||	lnki.Align_h() != Xop_lnki_align_h_.Null				// halign (left, right, none) also produces <div>; DATE:2014-02-17
+					||	lnki.Align_h() != Xop_lnki_align_h_.Null			// halign (left, right, none) also produces <div>; DATE:2014-02-17
 					)
 					ctx.Para().Process_block_lnki_div();
 				lnki_is_file = true;
@@ -71,14 +71,14 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 				break;
 		}
 		if (lnki_is_file) {
-			ctx.Cur_page().Lnki_list().Add(lnki);
+			ctx.Page().Lnki_list().Add(lnki);
 			if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_file);
 		}
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (	lnki_ttl.Wik_bgn() != -1		// lnki is xwiki
 			&&	sites_regy_mgr != null			// relatedSites xtn is enabled
 			) {
-			lnki.Xtn_sites_link_(sites_regy_mgr.Match(ctx.Cur_page(), lnki_ttl));
+			lnki.Xtn_sites_link_(sites_regy_mgr.Match(ctx.Page(), lnki_ttl));
 		}
 		return cur_pos;
 	}
@@ -174,7 +174,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			}
 			return true;
 		} catch (Exception e) {
-			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Cur_page().Ttl().Full_db()), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
+			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Page().Ttl().Full_db()), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
 			return false;
 		}
 	}	private static final byte[] Const_pipe = Bry_.new_a7("|");

@@ -36,7 +36,7 @@ public class Xop_ctx {
 	public Xowe_wiki			Wiki()				{return wiki;} private final Xowe_wiki wiki;
 	public Xol_lang_itm			Lang()				{return lang;} private final Xol_lang_itm lang;
 	public Xop_tkn_mkr			Tkn_mkr()			{return tkn_mkr;} private final Xop_tkn_mkr tkn_mkr;
-	public Xoae_page			Cur_page()			{return cur_page;} public void Cur_page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
+	public Xoae_page			Page()				{return cur_page;} public void Page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_.Parse_tid_null;
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_.Parse_tid_null;
 	public Xop_amp_wkr			Amp()				{return amp;}	private final Xop_amp_wkr  amp  = new Xop_amp_wkr();
@@ -88,12 +88,12 @@ public class Xop_ctx {
 		try {return cur_page.Url().To_str();}
 		catch (Exception e) {Err_.Noop(e); return "page_url shouldn't fail";}
 	}
-	public void Page_bgn(Xop_root_tkn root, byte[] src) {
+	public void Parser__page_init(Xop_root_tkn root, byte[] src) {
 		this.Msg_log().Clear(); cur_tkn_tid = Xop_tkn_itm_.Tid_null;
 		empty_ignored = false;
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Page_bgn(this, root);
 	}
-	public void Page_end(Xop_root_tkn root, byte[] src, int src_len) {
+	public void Parser__page_term(Xop_root_tkn root, byte[] src, int src_len) {
 		Stack_pop_til(root, src, 0, true, src_len, src_len, Xop_tkn_itm_.Tid_txt);
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Page_end(this, root, src, src_len);
 	}
@@ -320,7 +320,7 @@ public class Xop_ctx {
 	}
 	public static Xop_ctx New_sub_by_ctx(Xop_ctx ctx) {
 		Xowe_wiki wiki = ctx.Wiki();
-		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ctx.Cur_page().Ttl().Full_db())));
+		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ctx.Page().Ttl().Full_db())));
 		new_copy(ctx, rv);
 		return rv;
 	}

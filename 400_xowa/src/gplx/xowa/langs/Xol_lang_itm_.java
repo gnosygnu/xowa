@@ -267,6 +267,7 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_pages, "pagesincategory_pag
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_subcats, "pagesincategory_subcats", "subcats");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_files, "pagesincategory_files", "files");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_revisionsize, "REVISIONSIZE");
-kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagebanner, "PAGEBANNER");	// NOTE: must be casematch; EX:{{pagebanner}}
+kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagebanner, "PAGEBANNER");	// NOTE: must be casematch; EX: in en.v, {{pagebanner}} is actually template name which calls {{PAGEBANNER}}
+kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_protectionexpiry, "PROTECTIONEXPIRY");
 	}
 }

@@ -67,7 +67,7 @@ public class Ref_html_wtr {
 	}
 	public void Xnde_references(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		References_nde references = (References_nde)xnde.Xnde_xtn();
-		Ref_itm_lst lst = ctx.Cur_page().Ref_mgr().Lst_get(references.Group(), references.List_idx());	// get group; EX: <references group="note"/>
+		Ref_itm_lst lst = ctx.Page().Ref_mgr().Lst_get(references.Group(), references.List_idx());	// get group; EX: <references group="note"/>
 		if (lst == null) return;	// NOTE: possible to have a grouped references without references; EX: Infobox planet; <references group=note> in sidebar, but no refs 
 		if (lst.Itms_len() == 0) return;
 		bfr.Add(cfg.Grp_bgn());

@@ -31,7 +31,7 @@ public class Xoh_page_wtr_wkr {
 	public byte[] Write_page(Xoae_page page, Xop_ctx ctx, Bry_bfr bfr) {
 		synchronized (thread_lock_1) {
 			this.page = page; this.ctx = ctx; this.wiki = page.Wikie(); this.app = wiki.Appe();
-			ctx.Cur_page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
+			ctx.Page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
 			Bry_fmtr fmtr = null;
 			if (mgr.Html_capable()) {
 				wdata_lang_wtr.Page_(page);
@@ -40,7 +40,7 @@ public class Xoh_page_wtr_wkr {
 					case Xopg_page_.Tid_edit:	fmtr = mgr.Page_edit_fmtr(); break;
 					case Xopg_page_.Tid_html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_page_.Tid_read; break; // set view_mode to read, so that "read" is highlighted in HTML
 					case Xopg_page_.Tid_read:	fmtr = mgr.Page_read_fmtr(); 
-						ctx.Cur_page().Redlink_lnki_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
+						ctx.Page().Redlink_lnki_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
 						break;
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
@@ -94,7 +94,7 @@ public class Xoh_page_wtr_wkr {
 		, page_name, page_display
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
-		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), page_body_class, html_content_editable
+		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(ctx, page), page_body_class, html_content_editable
 		, page_data, wdata_lang_wtr			
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl__bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()

@@ -38,7 +38,7 @@ public class Xow_parser_mgr {
 	public void Parse(Xoae_page page, boolean clear) {
 		if (!Env_.Mode_testing()) wiki.Init_assert();
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(page);		// notify scribunto about page changed
-		ctx.Cur_page_(page);
+		ctx.Page_(page);
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Data_raw());
 		if (clear) {page.Clear_all();}
 		Xoa_ttl ttl = page.Ttl();

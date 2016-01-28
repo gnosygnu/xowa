@@ -173,8 +173,8 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Test_special_gen() {
 		init_url = app.User().Wikii().Utl__url_parser().Parse(Xows_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
-		allpages.Special_gen(wiki, wiki.Parser_mgr().Ctx().Cur_page(), init_url, init_ttl);
-		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Parser_mgr().Ctx().Cur_page().Html_data().Display_ttl()));
+		allpages.Special_gen(wiki, wiki.Parser_mgr().Ctx().Page(), init_url, init_ttl);
+		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Parser_mgr().Ctx().Page().Html_data().Display_ttl()));
 		if (expd_address_page != null) Tfds.Eq(expd_address_page, String_.new_u8(init_url.Page_bry()));
 		return this;
 	}
@@ -191,8 +191,8 @@ class Xows_page_allpages_fxt {
 	}	private Xoa_url init_url = Xoa_url.blank();
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
-		allpages.Build_html(wiki.Parser_mgr().Ctx().Cur_page());
-		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Parser_mgr().Ctx().Cur_page().Data_raw()));
+		allpages.Build_html(wiki.Parser_mgr().Ctx().Page());
+		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Parser_mgr().Ctx().Page().Data_raw()));
 		return this;
 	}
 	private void Exec_build() {
