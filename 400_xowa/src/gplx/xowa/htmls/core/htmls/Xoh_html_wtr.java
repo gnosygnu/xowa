@@ -75,7 +75,7 @@ public class Xoh_html_wtr {
 			case Xop_tkn_itm_.Tid_html_ref:			Html_ref(ctx, hctx, bfr, src, (Xop_amp_tkn_txt)tkn); break;
 			case Xop_tkn_itm_.Tid_hr:				Hr(ctx, hctx, bfr, src, (Xop_hr_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_apos:				Apos(ctx, hctx, bfr, src, (Xop_apos_tkn)tkn); break;
-			case Xop_tkn_itm_.Tid_lnki:				lnki_wtr.Write(bfr, hctx, src, (Xop_lnki_tkn)tkn); break;
+			case Xop_tkn_itm_.Tid_lnki:				lnki_wtr.Write_lnki(bfr, hctx, src, (Xop_lnki_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_list:				List(ctx, hctx, bfr, src, (Xop_list_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_xnde:				Xnde(ctx, hctx, bfr, src, (Xop_xnde_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_under:			Under(ctx, hctx, bfr, src, (Xop_under_tkn)tkn); break;
@@ -223,7 +223,7 @@ public class Xoh_html_wtr {
 		if (hctx.Mode_is_alt()) return;
 		switch (under.Under_tid()) {
 			case Xol_kwd_grp_.Id_toc:
-				wiki.Html_mgr().Toc_mgr().Html(page, hctx, src, bfr);
+				wiki.Html_mgr().Toc_mgr().Html(page, hctx, src, bfr, true);
 				break;
 			case Xol_kwd_grp_.Id_notoc:	case Xol_kwd_grp_.Id_forcetoc:	// NOTE: skip output; changes flag on page only
 				break;

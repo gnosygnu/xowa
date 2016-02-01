@@ -325,9 +325,9 @@ public class Xop_ctx {
 		return rv;
 	}
 	private static void new_copy(Xop_ctx src, Xop_ctx trg) {
-		trg.Lnki().File_wkr_(src.Lnki().File_wkr());	// always share file_wkr between sub contexts
-		trg.tmpl_output = src.tmpl_output;				// share bfr for optimization purposes
-		trg.ref_ignore = src.ref_ignore;				// copy ref_ignore; needed for refs inside poem else duplicate refs; it.s:La_Secchia_rapita/Canto_primo; DATE:2015-12-03
+		trg.Lnki().File_logger_(src.Lnki().File_logger());	// always share lnki_logger between sub contexts
+		trg.tmpl_output = src.tmpl_output;					// share bfr for optimization purposes
+		trg.ref_ignore = src.ref_ignore;					// copy ref_ignore; needed for refs inside poem else duplicate refs; it.s:La_Secchia_rapita/Canto_primo; DATE:2015-12-03
 		trg.references_group = src.references_group;
 		trg.cur_page.Ref_mgr_(src.cur_page.Ref_mgr());
 	}		

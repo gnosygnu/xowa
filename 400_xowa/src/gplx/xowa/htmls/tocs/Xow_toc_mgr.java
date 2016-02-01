@@ -190,28 +190,29 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 			}
 		}
 	}
-	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr) {
+	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr, boolean write_toc_cls) {
 		if (!page.Hdr_mgr().Toc_enabled()) return;	// REF.MW: Parser.php|formatHeadings
 		if (hctx.Mode_is_hdump()) return;
 		this.page = page;
 		byte[] bry_contents = page.Wikie().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
-		bfmtr_main.Bld_bfr_many(bfr, Bfr_arg_.New_bry(bry_contents), this);
+		bfmtr_main.Bld_bfr_many(bfr, write_toc_cls ? Bry_toc_cls : Bry_.Empty, Bfr_arg_.New_bry(bry_contents), this);
 	}
 	private static final byte[]
 	  Bry_list_bgn = Bry_.new_a7("  <ul>\n")
 	, Bry_list_end = Bry_.new_a7("  </ul>\n")
 	, Bry_item_end = Bry_.new_a7("  </li>\n")
+	, Bry_toc_cls = Bry_.new_a7(" id=\"toc\" class=\"toc\"")
 	;
 	private Bry_fmtr
 	  bfmtr_main = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<div id=\"toc\" class=\"toc\">"
+	( "<div~{toc}>"
 	, "  <div id=\"toctitle\">"
 	, "    <h2>~{contents_title}</h2>"
 	, "  </div>"
 	, "~{toc_list}</div>"
 	, ""
 	)
-	, "contents_title", "toc_list"
+	, "toc", "contents_title", "toc_list"
 	)
 	, bfmtr_line = Bry_fmtr.new_
 	( "    <li class=\"toclevel-~{level} tocsection-~{toc_idx}\"><a href=\"#~{anchor}\"><span class=\"tocnumber\">~{heading}</span> <span class=\"toctext\">~{text}</span></a>\n"

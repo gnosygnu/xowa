@@ -32,7 +32,7 @@ public class Xoh_img_bare_data implements Xoh_data_itm {
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag img_head, Gfh_tag unused) {
 		this.src_bgn = img_head.Src_bgn(); this.src_end = img_head.Src_end();
 		Gfh_atr img_src_atr = img_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__src); if (img_src_atr.Val_dat_missing()) return false;
-		byte[] root_dir_bry = hctx.Fsys__root();
+		byte[] root_dir_bry = hctx.Fsys__res();	// NOTE: Fsys_res == Fsys_root on all machines except drd;
 		int root_dir_bgn = img_src_atr.Val_bgn();
 		int root_dir_end = root_dir_bgn + root_dir_bry.length;
 		if (Bry_.Match(src, root_dir_bgn, root_dir_end, root_dir_bry)) {

@@ -26,21 +26,21 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public int						Src_end() {return src_end;} private int src_end;
 	public Xoh_anch_href_data		Anch_href() {return anch_href;} private Xoh_anch_href_data anch_href = new Xoh_anch_href_data();
 	public Xoh_anch_cls_data		Anch_cls() {return anch_cls;} private Xoh_anch_cls_data anch_cls = new Xoh_anch_cls_data();
-	public boolean						Anch_rel_nofollow_exists() {return anch_rel_is_nofollow;} private boolean anch_rel_is_nofollow;
+	public boolean					Anch_rel_nofollow_exists() {return anch_rel_is_nofollow;} private boolean anch_rel_is_nofollow;
 	public int						Anch_title_bgn() {return anch_title_bgn;} private int anch_title_bgn;
 	public int						Anch_title_end() {return anch_title_end;} private int anch_title_end;
-	public boolean						Anch_title_exists() {return anch_title_end != -1;}
+	public boolean					Anch_title_exists() {return anch_title_end != -1;}
 	public Bry_obj_ref				Anch_page() {return anch_page;} private Bry_obj_ref anch_page = Bry_obj_ref.New_empty();
 	public Xoh_img_src_data			Img_src() {return img_src;} private final Xoh_img_src_data img_src = new Xoh_img_src_data();
 	public Xoh_img_cls_data			Img_cls() {return img_cls;} private final Xoh_img_cls_data img_cls = new Xoh_img_cls_data();
 	public Xoh_img_xoimg_data		Img_xoimg() {return img_xoimg;} private Xoh_img_xoimg_data img_xoimg = new Xoh_img_xoimg_data();
 	public int						Img_alt_bgn() {return img_alt_bgn;} private int img_alt_bgn;
 	public int						Img_alt_end() {return img_alt_end;} private int img_alt_end;
-	public boolean						Img_alt__diff__anch_title() {return img_alt__diff_anch_title;} private boolean img_alt__diff_anch_title;
+	public boolean					Img_alt__diff__anch_title() {return img_alt__diff_anch_title;} private boolean img_alt__diff_anch_title;
 	public int						Img_w() {return img_w;} private int img_w;
 	public int						Img_h() {return img_h;} private int img_h;
-	public boolean						Img_w__diff__file_w() {return img_w != img_src.File_w();}
-	public boolean						Img_is_vid() {return img_is_vid;} private boolean img_is_vid;
+	public boolean					Img_w__diff__file_w() {return img_w != img_src.File_w();}
+	public boolean					Img_is_vid() {return img_is_vid;} private boolean img_is_vid;
 	public boolean						Img_wo_anch() {return img_wo_anch;} private boolean img_wo_anch;
 	public int						Img_imap_idx() {return img_imap_idx;} private int img_imap_idx;
 	public void Clear() {

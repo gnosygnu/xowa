@@ -58,6 +58,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		Init_by_decode(hpg, hctx, src, data);
 		this.Bfr_arg__add(bfr);
 	}
+	private static final byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
 	public boolean Init_by_decode(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm) {
 		Xoh_img_data data = (Xoh_img_data)data_itm;
 		this.Clear();
@@ -73,7 +74,9 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 			this.img_xowa_image.Set_by_arg(img_xowa_image.Clone());	// NOTE: must clone b/c img_xowa_image is member of Xoh_img_data which is poolable (and cleared); PAGE:en.w:Almagest; DATE:2016-01-05
 			img_w.Set_by_int(fsdb_itm.Html_w());
 			img_h.Set_by_int(fsdb_itm.Html_h());
-			this.img_src.Set_by_bry(fsdb_itm.Html_view_url().To_http_file_bry());
+			byte[] src_bry = fsdb_itm.Html_view_url().To_http_file_bry();
+			if (gplx.core.envs.Op_sys.Cur().Tid_is_drd()) src_bry = Bry_.Replace(src_bry, Byte_ascii.Question_bry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
+			this.img_src.Set_by_bry(src_bry);
 		}
 		else if (data.Img_w() != -1) {
 			img_w.Set_by_int(data.Img_w());

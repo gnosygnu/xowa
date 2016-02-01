@@ -284,7 +284,7 @@ class Xob_rate_mgr {
 	private int item_len;
 	private Bry_bfr save_bfr = Bry_bfr.reset_(255);
 	public int Reset_interval() {return reset_interval;} public Xob_rate_mgr Reset_interval_(int v) {reset_interval = v; return this;} private int reset_interval = 10000;
-	public Io_url Log_file() {return log_file;} public Xob_rate_mgr Log_file_(Io_url v) {log_file = v; return this;} private Io_url log_file;
+	public Io_url Log_file_url() {return log_file;} public Xob_rate_mgr Log_file_(Io_url v) {log_file = v; return this;} private Io_url log_file;
 	public void Init() {time_bgn = Env_.TickCount();}
 	public void Increment() {
 		++item_len;

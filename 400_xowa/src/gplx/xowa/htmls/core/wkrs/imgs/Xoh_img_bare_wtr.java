@@ -36,7 +36,7 @@ public class Xoh_img_bare_wtr implements Bfr_arg, Xoh_wtr_itm {
 		switch (data_itm.Img_tid()) {
 			case Xoh_img_bare_data.Img_tid__hiero:
 				bfr.Add_mid(src, data_itm.Src_bgn(), data_itm.Dir_bgn());
-				bfr.Add(hctx.Fsys__root()).Add(Xoh_img_bare_data.Url__hiero);
+				bfr.Add(hctx.Fsys__res()).Add(Xoh_img_bare_data.Url__hiero);	// NOTE: must use Fsys_res will be android_asset on drd; en.w:Hieroglyphics DATE:2016-01-31
 				bfr.Add_mid(src, data_itm.Dir_end(), data_itm.Src_end());
 				break;
 		}

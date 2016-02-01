@@ -33,7 +33,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	public Xoh_head_mgr() {
 		Itms_add(itm__css, itm__globals, itm__server, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery, itm__gallery_styles
 		, itm__mathjax, itm__graph, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
-		, itm__dbui
+		, itm__dbui, itm__pgbnr
 		);
 	}
 	public Xoh_head_itm__css					Itm__css() {return itm__css;} private final Xoh_head_itm__css itm__css = new Xoh_head_itm__css();
@@ -53,6 +53,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	public Xoh_head_itm__timeline				Itm__timeline() {return itm__timeline;} private final Xoh_head_itm__timeline itm__timeline = new Xoh_head_itm__timeline();
 	public Xoh_head_itm__search_suggest			Itm__search_suggest() {return itm__search_suggest;} private final Xoh_head_itm__search_suggest itm__search_suggest = new Xoh_head_itm__search_suggest();
 	public Xoh_head_itm__dbui					Itm__dbui() {return itm__dbui;} private final Xoh_head_itm__dbui itm__dbui = new Xoh_head_itm__dbui();
+	public Xoh_head_itm__pgbnr					Itm__pgbnr() {return itm__pgbnr;} private final Xoh_head_itm__pgbnr itm__pgbnr = new Xoh_head_itm__pgbnr();
 	public Xoh_head_mgr Init(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		this.app = app; this.wiki = wiki; this.page = page;
 		return this;

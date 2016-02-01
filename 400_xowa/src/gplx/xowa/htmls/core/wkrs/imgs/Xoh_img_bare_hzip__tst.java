@@ -23,7 +23,7 @@ public class Xoh_img_bare_hzip__tst {
 	@Test   public void Hiero() {
 		fxt.Test__bicode
 		( "~(!<img style=\"margin: 1px; height: 11px;\" src=\"~X1.png\" title=\"X1 [t]\" alt=\"t\">~"
-		, "<img style='margin: 1px; height: 11px;' src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_X1.png' title='X1 [t]' alt='t'>"
+		, "<img style='margin: 1px; height: 11px;' src='file:///android_asset/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_X1.png' title='X1 [t]' alt='t'>"
 		);
 	}
 }

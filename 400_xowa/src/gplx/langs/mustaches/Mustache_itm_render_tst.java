@@ -94,6 +94,17 @@ public class Mustache_itm_render_tst {
 		, "a12ab34b"
 		);
 	}
+	@Test  public void Section_bool_subs() {	// handle prop written after boolean; should not pick up inner prop
+		fxt.Init__root
+		(	fxt.Make_mock(0).Add_bool_y("bool1").Add_prop("prop2", "2").Add_subs("subs1"
+		,		fxt.Make_mock(1).Add_prop("prop1", "11")
+		,		fxt.Make_mock(2).Add_prop("prop1", "12")
+		));
+		fxt.Test__parse
+		( "a{{#bool1}}b{{#subs1}}c{{prop1}}d{{/subs1}}e{{/bool1}}f{{prop2}}g"
+		, "abc11dc12def2g"
+		);
+	}
 }
 class Mustache_itm_render_fxt {
 	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();

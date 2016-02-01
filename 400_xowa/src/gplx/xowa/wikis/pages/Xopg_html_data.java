@@ -20,7 +20,7 @@ import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wiki
 import gplx.xowa.xtns.pagebanners.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
-	public boolean					Html_restricted() {return html_restricted;} private boolean html_restricted = true;
+	public boolean				Html_restricted() {return html_restricted;} private boolean html_restricted = true;
 	public void					Html_restricted_(boolean v) {html_restricted = v;} public void Html_restricted_n_() {Html_restricted_(Bool_.N);}  public void Html_restricted_y_() {Html_restricted_(Bool_.Y);}
 	public byte[]				Display_ttl() {
 		return	(	display_ttl_vnt != null		// -{T}- was in document
@@ -33,25 +33,26 @@ public class Xopg_html_data {
 			;
 	}
 	public Xopg_html_data		Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
-	public boolean					Mode_wtxt_shown() {synchronized (this) {return mode_wtxt_shown;}} public void Mode_wtxt_shown_y_() {synchronized (this) {this.mode_wtxt_shown = true;}} private boolean mode_wtxt_shown; 
+	public boolean				Mode_wtxt_shown() {synchronized (this) {return mode_wtxt_shown;}} public void Mode_wtxt_shown_y_() {synchronized (this) {this.mode_wtxt_shown = true;}} private boolean mode_wtxt_shown; 
 	public byte[]				Display_ttl_vnt() {return display_ttl_vnt;} public void Display_ttl_vnt_(byte[] v) {display_ttl_vnt = v;} private byte[] display_ttl_vnt;
 	public byte[]				Content_sub() {return content_sub;} public void Content_sub_(byte[] v) {content_sub = v;} private byte[] content_sub;
+	public Xopg_page_heading	Page_heading() {return page_heading;} private final Xopg_page_heading page_heading = new Xopg_page_heading();
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
 	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr.reset_(255);
 	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
 	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
-	public boolean					Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
-	public boolean					Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
+	public boolean				Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
+	public boolean				Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
 	public Xopg_xtn_skin_mgr	Xtn_skin_mgr() {return xtn_skin_mgr;} private Xopg_xtn_skin_mgr xtn_skin_mgr = new Xopg_xtn_skin_mgr();
 	public Indicator_html_bldr	Indicators() {return indicators;} private final Indicator_html_bldr indicators = new Indicator_html_bldr();
 	public int					Xtn_gallery_next_id() {return ++xtn_gallery_next_id;} private int xtn_gallery_next_id = -1;
-	public boolean					Xtn_gallery_packed_exists() {return xtn_gallery_packed_exists;} public void Xtn_gallery_packed_exists_y_() {xtn_gallery_packed_exists = true;} private boolean xtn_gallery_packed_exists;
-	public boolean					Xtn_imap_exists() {return xtn_imap_exists;} public void Xtn_imap_exists_y_() {xtn_imap_exists = true;} private boolean xtn_imap_exists;
+	public boolean				Xtn_gallery_packed_exists() {return xtn_gallery_packed_exists;} public void Xtn_gallery_packed_exists_y_() {xtn_gallery_packed_exists = true;} private boolean xtn_gallery_packed_exists;
+	public boolean				Xtn_imap_exists() {return xtn_imap_exists;} public void Xtn_imap_exists_y_() {xtn_imap_exists = true;} private boolean xtn_imap_exists;
 	public int					Xtn_imap_next_id() {return ++xtn_imap_next_id;} private int xtn_imap_next_id;	// NOTE: must keep separate imap_id b/c html_elem_id is not always set;
 	public byte[]				Xtn_search_text() {return xtn_search_txt;} public void Xtn_search_text_(byte[] v) {xtn_search_txt = v;} private byte[] xtn_search_txt = Bry_.Empty;
 	public byte[]				Xtn_scribunto_dbg() {return xtn_scribunto_dbg;} public void Xtn_scribunto_dbg_(byte[] v) {xtn_scribunto_dbg = Bry_.Add(xtn_scribunto_dbg, v);} private byte[] xtn_scribunto_dbg = Bry_.Empty;
-	public Pgbnr_itm			Xtn__pgbnr() {return xtn__pgbnr;} public void Xtn__pgbnr_(Pgbnr_itm v) {xtn__pgbnr = v;} private Pgbnr_itm xtn__pgbnr;
+	public Pgbnr_itm			Xtn_pgbnr() {return xtn_pgbnr;} public void Xtn_pgbnr_(Pgbnr_itm v) {xtn_pgbnr = v;} private Pgbnr_itm xtn_pgbnr;
 	public Xoh_head_mgr			Head_mgr() {return module_mgr;} private Xoh_head_mgr module_mgr = new Xoh_head_mgr();
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;
@@ -81,7 +82,7 @@ public class Xopg_html_data {
 		xtn_imap_exists = false;
 		xtn_search_txt = Bry_.Empty;
 		xtn_scribunto_dbg = Bry_.Empty;
-		xtn__pgbnr = null;
+		xtn_pgbnr = null;
 		module_mgr.Clear();
 		custom_html = custom_html_end = custom_head_end = custom_tab_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();

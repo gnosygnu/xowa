@@ -22,6 +22,7 @@ import gplx.xowa.files.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.c
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;		
 public class Xoh_hdoc_ctx {
 	private byte[] fsys__file;
+	public byte[]					Fsys__res()			{return fsys__res;} private byte[] fsys__res;
 	public byte[]					Fsys__root()		{return fsys__root;} private byte[] fsys__root;
 	public byte[]					Fsys__file__comm()	{return fsys__file__comm;} private byte[] fsys__file__comm;
 	public byte[]					Fsys__file__wiki()	{return fsys__file__wiki;} private byte[] fsys__file__wiki;
@@ -48,8 +49,9 @@ public class Xoh_hdoc_ctx {
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
 		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
-		// Xou_cache_mgr cache_mgr = app.User().User_db_mgr().Cache_mgr();
-		// if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
+		this.fsys__res = gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? Fsys__res__drd : fsys__root;
+		Xou_cache_mgr cache_mgr = app.User().User_db_mgr().Cache_mgr();
+		if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
 		pool_mgr__hzip.Init();
 	}
 	public void Init_by_page(Xow_wiki wiki, byte[] page_url) {
@@ -67,4 +69,5 @@ public class Xoh_hdoc_ctx {
 		this.uid__gly = -1;
 	}
 	public static final int Invalid = -1;
+	private static final byte[] Fsys__res__drd = Bry_.new_a7("file:///android_asset/xowa/");
 }

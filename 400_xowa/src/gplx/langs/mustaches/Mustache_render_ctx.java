@@ -19,11 +19,11 @@ package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 public class Mustache_render_ctx {
 	private final List_adp stack = List_adp_.new_();
 	private Mustache_doc_itm cur;
-	private Mustache_doc_itm[] subs; private int subs_idx, subs_len; private boolean cur_is_bool;
+	private Mustache_doc_itm[] subs; private int subs_idx, subs_len; private byte cur_is_bool;
 	public Mustache_render_ctx Init(Mustache_doc_itm cur) {
 		this.cur = cur;
 		this.subs = null;
-		this.subs_idx = subs_len = 0; this.cur_is_bool = false;
+		this.subs_idx = subs_len = 0; this.cur_is_bool = Bool_.__byte;
 		return this;
 	}
 	public byte[] Render_variable(String key) {
@@ -32,51 +32,55 @@ public class Mustache_render_ctx {
 		while (itm != Mustache_doc_itm_.Null_itm) {
 			rv = cur.Get_prop(key);
 			if (rv != Mustache_doc_itm_.Null_val) break;
-			else break;
-			// TODO: itm = itm.Get_owner();
+			else break; // TODO: itm = itm.Get_owner();
 		}
 		return rv;
 	}
 	public void Section_bgn(String key) {
-		subs = cur.Get_subs(key); if (subs == null) subs = Mustache_doc_itm_.Ary__empty;
+		Mustache_stack_itm stack_itm = new Mustache_stack_itm(cur, subs, subs_idx, subs_len, cur_is_bool); // note that cur is "owner" since subs_idx == 0
+		stack.Add(stack_itm);
+		subs = cur.Get_subs(key); if (subs == null) subs = Mustache_doc_itm_.Ary__empty;	// subs == null if property does not exist; EX: "folder{{#files}}file{{/files}}" and folder = new Folder(File[0]);
 		subs_len = subs.length;
 		subs_idx = -1;
-		cur_is_bool = false;
 	}
 	public boolean Section_do() {
 		if (++subs_idx >= subs_len) return false;
 		Mustache_doc_itm sub = subs[subs_idx];
 		if (subs_idx == 0) {	// special logic to handle 1st item; note that there always be at least one item
-			if (subs_len == 1) {
-				if		(sub == Mustache_doc_itm_.Itm__bool__y) {cur_is_bool = true; return Bool_.Y;}
-				else if (sub == Mustache_doc_itm_.Itm__bool__n) {cur_is_bool = true; return Bool_.N;}
+			if		(sub == Mustache_doc_itm_.Itm__bool__n) {
+				cur_is_bool = Bool_.N_byte;
+				return Bool_.N;
 			}
-			Mustache_stack_itm stack_itm = new Mustache_stack_itm(cur, subs, subs_idx, subs_len); // note that cur is "owner" since subs_idx == 0
-			stack.Add(stack_itm);
+			else if	(sub == Mustache_doc_itm_.Itm__bool__y) {
+				cur_is_bool = Bool_.Y_byte;
+				return Bool_.Y;
+			}
+			else
+				cur_is_bool = Bool_.__byte;
 		}			
 		cur = sub;
 		return true;
 	}
 	public void Section_end() {
-		if (cur_is_bool) return;
-		if (stack.Count() == 0) return;
 		Mustache_stack_itm itm = (Mustache_stack_itm)List_adp_.Pop(stack);
 		subs = itm.subs;
 		subs_len = itm.subs_len;
 		subs_idx = itm.subs_idx;
 		cur = itm.cur;
-		// cur = subs_idx < subs_len ? subs[subs_idx] : null;
+		cur_is_bool = itm.cur_is_bool;
 	}
 }
 class Mustache_stack_itm {
-	public Mustache_stack_itm(Mustache_doc_itm cur, Mustache_doc_itm[] subs, int subs_idx, int subs_len) {
+	public Mustache_stack_itm(Mustache_doc_itm cur, Mustache_doc_itm[] subs, int subs_idx, int subs_len, byte cur_is_bool) {
 		this.cur = cur;
+		this.cur_is_bool = cur_is_bool;
 		this.subs = subs;
 		this.subs_idx = subs_idx;
 		this.subs_len = subs_len;
 	}
-	public Mustache_doc_itm cur;
-	public Mustache_doc_itm[] subs;
-	public int subs_idx;
-	public int subs_len;
+	public final Mustache_doc_itm cur;
+	public final byte cur_is_bool;
+	public final Mustache_doc_itm[] subs;
+	public final int subs_idx;
+	public final int subs_len;
 }

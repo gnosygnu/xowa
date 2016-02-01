@@ -80,7 +80,5 @@ public class Op_sys {
 		else											throw Err_.new_wo_type("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
 		} catch (Exception exc) {Drd.os_name = os_name; return Drd;}
 	}
-	public static void OpSysIsDroid() {
-		cur_op_sys  = Drd;
-	} 
+	public static void Cur_is_drd_() {cur_op_sys = Drd;}
 	}

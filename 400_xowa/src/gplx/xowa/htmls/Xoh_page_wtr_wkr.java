@@ -44,15 +44,18 @@ public class Xoh_page_wtr_wkr {
 						break;
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
+				Xoh_wtr_ctx hctx = null;
 				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Html().Page().View_html_generates_hdump()) {
-					Write_body(page_bfr, Xoh_wtr_ctx.Hdump, page);
-					Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+					hctx = Xoh_wtr_ctx.Hdump;
+					Write_body(page_bfr, hctx, page);
+					Write_page_by_tid(hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
 				}
 				else {
-					Write_body(page_bfr, Xoh_wtr_ctx.Basic, page);
-					Write_page_by_tid(view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
+					hctx = Xoh_wtr_ctx.Basic;
+					Write_body(page_bfr, hctx, page);
+					Write_page_by_tid(hctx, view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
-						Write_page_by_tid(page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
+						Write_page_by_tid(hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
 			}
@@ -62,7 +65,7 @@ public class Xoh_page_wtr_wkr {
 			return bfr.To_bry_and_clear();
 		}
 	}
-	private void Write_page_by_tid(byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
+	private void Write_page_by_tid(Xoh_wtr_ctx hctx, byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
 		// if custom_html, use it and exit; needed for Default_tab
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {bfr.Add(custom_html); return;}
@@ -92,9 +95,9 @@ public class Xoh_page_wtr_wkr {
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Revision_data().Id()
 		, page_name, page_display
-		, modified_on_msg
+		, modified_on_msg, page.Html_data().Page_heading().Init(page)
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
-		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(ctx, page), page_body_class, html_content_editable
+		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(ctx, page, hctx, page_data), page_body_class, html_content_editable
 		, page_data, wdata_lang_wtr			
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl__bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()

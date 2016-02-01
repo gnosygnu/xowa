@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.cmds.files; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 import gplx.core.gfo_ndes.*;
 import gplx.core.stores.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 public class Xob_xfer_temp_itm_tst {
 	private Xob_xfer_temp_itm_fxt fxt = new Xob_xfer_temp_itm_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -86,7 +86,7 @@ public class Xob_xfer_temp_itm_tst {
 	@Test   public void Media_should_be_ignored() {// ignore [[Media:]] for xfer_thumb (needed for xfer_orig)
 		fxt.Test_bgn
 		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_src_tid		, Xob_lnki_src_tid.Tid_media)
+		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_src_tid		, Xop_file_logger_.Tid__media)
 		);
 		fxt.Test_itm_chk_fail_id(Xob_xfer_temp_itm.Chk_tid_ns_is_media);
 	}
@@ -137,7 +137,7 @@ class Xob_xfer_temp_itm_fxt {
 		GfoFldList flds = GfoFldList_.str_(Flds);
 		nde = GfoNde_.vals_(flds, Object_.Ary
 		( Xof_ext_.Id_png, 1, 1, Xof_repo_itm_.Repo_remote
-		, "A.png", Xof_ext_.Id_png, "A.png", Xop_lnki_type.Id_thumb, Xob_lnki_src_tid.Tid_file
+		, "A.png", Xof_ext_.Id_png, "A.png", Xop_lnki_type.Id_thumb, Xop_file_logger_.Tid__file
 		, 220, 200, 1, 2, 440, 400, 3
 		, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null
 		, Xof_media_type.Name_bitmap, "png"

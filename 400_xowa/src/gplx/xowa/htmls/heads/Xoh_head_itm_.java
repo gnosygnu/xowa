@@ -28,6 +28,7 @@ public class Xoh_head_itm_ {
 	, Key__mathjax			= Bry_.new_a7("mathjax")
 	, Key__navframe			= Bry_.new_a7("navframe")
 	, Key__popups			= Bry_.new_a7("popups")
+	, Key__pgbnr			= Bry_.new_a7("pgbnr")
 	, Key__search_suggest	= Bry_.new_a7("xowa.search_suggest")
 	, Key__timeline			= Bry_.new_a7("xowa.timeline")
 	, Key__title_rewrite	= Bry_.new_a7("title_rewrite")

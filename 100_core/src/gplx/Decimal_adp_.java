@@ -59,7 +59,7 @@ public class Decimal_adp_ {
 	public static Decimal_adp double_thru_str_(double v) {return new Decimal_adp(BigDecimal.valueOf(v));}
 	public static Decimal_adp db_(Object v) {return new Decimal_adp((BigDecimal)v);}	public static Decimal_adp parse(String raw) {
 		try {
-	        DecimalFormat nf = (DecimalFormat)NumberFormat.getInstance(Locale.getDefault());
+	        DecimalFormat nf = (DecimalFormat)NumberFormat.getInstance(Locale.US);	// always parse as US format; EX:".9" should not be ",9" in german; DATE:2016-01-31
 	        nf.setParseBigDecimal(true);
 	        BigDecimal bd = (BigDecimal)nf.parse(raw);
 			return new Decimal_adp(bd);

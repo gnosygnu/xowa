@@ -19,7 +19,7 @@ package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
 	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
@@ -77,11 +77,10 @@ public class Gallery_itm_parser {
 			Xop_root_tkn caption_tkn = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);
 			cur_itm.Caption_tkn_(caption_tkn);
 		}
-		Xopg_redlink_logger file_wkr = ctx.Lnki().File_wkr();	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
 		ctx.Page().Lnki_list().Add(lnki_tkn);
 		mgr.Get_thumb_size(lnki_tkn, cur_itm.Ext());			// NOTE: set thumb size, so that lnki.temp parse picks it up
-		if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki_tkn, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_gallery);
-		lnki_tkn.W_(-1).H_(-1);					// NOTE: reset lnki back to defaults, else itm will show as large missing caption
+		ctx.Lnki().File_logger().Log_file(ctx, lnki_tkn, Xop_file_logger_.Tid__gallery);	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
+		lnki_tkn.W_(-1).H_(-1);									// NOTE: reset lnki back to defaults, else itm will show as large missing caption
 	}
 	private byte Parse_itm() {
 		int fld_count = 0;

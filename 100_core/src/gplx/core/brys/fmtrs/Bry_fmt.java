@@ -54,6 +54,7 @@ public class Bry_fmt {
 		this.itms_len = itms.length;
 	}
 	public static Bry_fmt New(String fmt, String... keys) {return new Bry_fmt(Bry_.new_u8(fmt), Bry_.Ary(keys), Bfr_fmt_arg.Ary_empty);}
+	public static Bry_fmt New(byte[] fmt, String... keys) {return new Bry_fmt(fmt				, Bry_.Ary(keys), Bfr_fmt_arg.Ary_empty);}
 }
 class Bry_fmt_itm {
 	public Bry_fmt_itm(int tid, int src_bgn, int src_end) {

@@ -34,7 +34,8 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 			{	Dbmeta_fld_itm.new_int("page_id").Primary_y_()
 			,	Dbmeta_fld_itm.new_int("page_text_db_id")
 			}
-			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "db_id", "page_text_db_id", "page_id")
+			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "db_id__page", "page_text_db_id", "page_id")
+			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "page_id", "page_id")
 			));
 		}
 
@@ -53,25 +54,28 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		, ";"
 		));
 
-		Xowd_db_file[] db_files = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
-		int len = db_files.length;
-		for (int i = 0; i < len; ++i) {
-			boolean db_file_is_text = Bool_.N, db_file_is_cat = Bool_.N, db_file_is_search = Bool_.N;
-			Xowd_db_file db_file = db_files[i];
-			switch (db_file.Tid()) {
-				case Xowd_db_file_.Tid_core: case Xowd_db_file_.Tid_wiki_solo: case Xowd_db_file_.Tid_text_solo:
-													db_file_is_text = db_file_is_cat = db_file_is_search = Bool_.Y; break;
-				case Xowd_db_file_.Tid_text:		db_file_is_text = Bool_.Y; break;
-				case Xowd_db_file_.Tid_cat:			db_file_is_cat = Bool_.Y; break;
-				case Xowd_db_file_.Tid_search_core:	db_file_is_search = Bool_.Y; break;
+		try {
+			Xowd_db_file[] db_files = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
+			int len = db_files.length;
+			for (int i = 0; i < len; ++i) {
+				boolean db_file_is_text = Bool_.N, db_file_is_cat = Bool_.N, db_file_is_search = Bool_.N;
+				Xowd_db_file db_file = db_files[i];
+				switch (db_file.Tid()) {
+					case Xowd_db_file_.Tid_core: case Xowd_db_file_.Tid_wiki_solo: case Xowd_db_file_.Tid_text_solo:
+						if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) continue;	// if mode is lot, then "core" db does not have text, cat, search; skip; DATE:2016-01-31
+														db_file_is_text = db_file_is_cat = db_file_is_search = Bool_.Y; break;
+					case Xowd_db_file_.Tid_text:		db_file_is_text = Bool_.Y; break;
+					case Xowd_db_file_.Tid_cat:			db_file_is_cat = Bool_.Y; break;
+					case Xowd_db_file_.Tid_search_core:	db_file_is_search = Bool_.Y; break;
+				}
+				int db_id = db_file.Id();
+				if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <attach_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");
+				if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting cat: "   + db_id, "DELETE FROM <attach_db>cat_link WHERE cl_from IN (SELECT page_id FROM page_filter);");
+				if	(db_file_is_search)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting search:" + db_id, "DELETE FROM <attach_db>search_link WHERE page_id IN (SELECT page_id FROM page_filter);");
+				if (db_file_is_text || db_file_is_cat || db_file_is_search)
+					db_file.Conn().Env_vacuum();
 			}
-			int db_id = db_file.Id();
-			if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <attach_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");
-			if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting cat: "   + db_id, "DELETE FROM <attach_db>cat_link WHERE cl_from IN (SELECT page_id FROM page_filter);");
-			if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting search:" + db_id, "DELETE FROM <attach_db>search_link WHERE page_id IN (SELECT page_id FROM page_filter);");
-			if (db_file_is_text || db_file_is_cat || db_file_is_search)
-				db_file.Conn().Env_vacuum();
-		}
+		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: err=~{0}", Err_.Message_gplx_log(e));}
 		core_db_conn.Exec_sql_plog_ntx("deleting from table: page", "DELETE FROM page WHERE page_id IN (SELECT page_id FROM page_filter);");
 		// core_db_conn.Ddl_delete_tbl("page_filter");
 		core_db_conn.Env_vacuum();

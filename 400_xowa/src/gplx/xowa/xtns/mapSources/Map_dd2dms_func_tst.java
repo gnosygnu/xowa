@@ -22,4 +22,5 @@ public class Map_dd2dms_func_tst {
 	@Test  public void Example()			{fxt.Test_parse_tmpl_str_test("{{#dd2dms: 14.58|precision=4}}"					, "{{test}}"	, "14° 34' 48&quot;");}
 	@Test  public void Plus()				{fxt.Test_parse_tmpl_str_test("{{#dd2dms: 14.58|precision=4|plus=pos}}"			, "{{test}}"	, "14° 34' 48&quot; pos");}
 	@Test  public void Ws()					{fxt.Test_parse_tmpl_str_test("{{#dd2dms: 14.58| precision = 4 | plus = pos }}"	, "{{test}}"	, "14° 34' 48&quot; pos");}
+	@Test  public void Nested_pfunc()		{fxt.Test_parse_tmpl_str_test("{{#dd2dms: 14.58|{{#if:2|precision=2}}}}"		, "{{test|3}}"	, "14° 34'");}	// handle "{{#if:2|precision=2}}" -> "precision=2"
 }

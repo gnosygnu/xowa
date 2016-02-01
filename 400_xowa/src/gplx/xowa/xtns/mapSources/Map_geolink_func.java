@@ -29,13 +29,15 @@ public class Map_geolink_func extends Pf_func_base {
 		int args_len = self.Args_len();
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		try {
+			Xop_func_arg_itm func_arg = new Xop_func_arg_itm();
 			byte[] pattern = Eval_argx(ctx, src, caller, self);
 			for (int i = 0; i < args_len; i++) {
 				Arg_nde_tkn arg = self.Args_get_by_idx(i);				
-				byte[] key = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Key_tkn());
+				func_arg.Set(tmp_bfr, ctx, src, caller, self, arg);;
+				byte[] key = func_arg.key;
 				Object key_tid_obj = Key_hash.Get_by(key);
 				if (key_tid_obj != null) {
-					byte[] val = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Val_tkn());
+					byte[] val = func_arg.val;
 					switch (((Byte_obj_val)key_tid_obj).Val()) {
 						case Key_tid_lat_val:	mer_x_val = val; break;
 						case Key_tid_long_val:	mer_y_val = val; break;

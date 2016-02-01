@@ -43,7 +43,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	}
 	public Xowe_wiki			Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_html_wtr			Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
-	public Xoh_page_wtr_mgr	Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
+	public Xoh_page_wtr_mgr		Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
 	public Xow_portal_mgr		Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
 	public Xow_toc_mgr			Toc_mgr() {return toc_mgr;} private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
 	public Xow_module_mgr		Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;

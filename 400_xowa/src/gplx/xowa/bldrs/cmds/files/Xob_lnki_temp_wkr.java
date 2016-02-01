@@ -20,11 +20,12 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; i
 import gplx.xowa.files.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.parsers.vnts.*;
-public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
+import gplx.xowa.parsers.lnkis.files.*;
+public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements gplx.xowa.parsers.lnkis.files.Xop_file_logger {
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
@@ -40,7 +41,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		property_wkr.Init_reset();
 	}
 	@Override protected Db_conn Init_db_file() {
-		ctx.Lnki().File_wkr_(this);
+		ctx.Lnki().File_logger_(this);
 		Xob_db_file make_db = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn make_conn = make_db.Conn();
 		this.tbl = new Xob_lnki_temp_tbl(make_conn); tbl.Create_tbl();
@@ -125,7 +126,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		wiki.Appe().Log_mgr().Txn_end();
 		tbl.Insert_end();
 	}
-	public void Wkr_exec(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte lnki_src_tid) {
+	public void Log_file(Xop_ctx ctx, Xop_lnki_tkn lnki, byte caller_tid) {
 		if (lnki.Ttl().ForceLiteralLink()) return; // ignore literal links which creat a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
 		byte[] ttl = lnki.Ttl().Page_db();
 		Xof_ext ext = Xof_ext_.new_by_ttl_(ttl);
@@ -136,8 +137,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Tid__media)
-			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
-		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
+			caller_tid = Xop_file_logger_.Tid__media;
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), caller_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");

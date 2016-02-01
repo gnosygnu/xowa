@@ -26,6 +26,7 @@ public class Xoh_hzip_fxt {
 	private final Xoh_page hpg = new Xoh_page();
 	private boolean mode_is_b256;
 	public Xoh_hzip_fxt() {
+		gplx.core.envs.Op_sys.Cur_is_drd_();		// force drd mode; needed for img_bare
 		this.wiki = parser_fxt.Wiki();
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
 		wiki.Html__hdump_mgr().Init_by_db(parser_fxt.Wiki());
