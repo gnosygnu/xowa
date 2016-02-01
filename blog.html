@@ -18,6 +18,118 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.1.5.1_.282016-01-31_22:00_Sun.29">Release: v3.1.5.1 (2016-01-31 22:00 Sun)</span>
+    </h2>
+    <p>
+      The desktop app is a major release. It resolves reference errors in 2016-01 English Wikipedia, fixes wide images on German Wikipedia, and adds a new PageBanner extension
+    </p>
+    <p>
+      The Android app is also a major release. It shows more tables, heiroglyphics, and images with a ? in title.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Luaj_fixes_for_references_in_2016-01-13_English_Wikipedia">Luaj fixes for references in 2016-01-13 English Wikipedia</span>
+    </h3>
+    <p>
+      The 2016-01-13 dump had many erros in the reference section due to bugs in Luaj. One of the following would be displayed:
+    </p>
+    <ul>
+      <li>
+        Check |archiveurl= value (help)
+      </li>
+      <li>
+        Specials character in |{some word}
+      </li>
+    </ul>
+    <p>
+      These were bugs in Luaj with the frontier pattern and multi-byte chars. They were both resolved in this release.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Fix_for_German_Wikipedia_and_extremely_wide_pie_charts">Fix for German Wikipedia and extremely wide pie charts</span>
+    </h3>
+    <p>
+      I'm extremely thankful for this report at <a href="https://github.com/gnosygnu/xowa/issues/38" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/38</a> There were HTML issues in German Wikipedia because all the wikis rely implicitly on American formatting rules for decimals. For example:
+    </p>
+    <ul>
+      <li>
+        The German Wikipedia page for Hausmannstätten specifies a pie chart with a width (Breite) of 0.9 . See: <a href="https://de.wikipedia.org/wiki/Hausmannst%C3%A4tten?title=Hausmannst%C3%A4tten&amp;action=edit">https://de.wikipedia.org/w/index.php?title=Hausmannst%C3%A4tten&amp;action=edit</a>
+      </li>
+      <li>
+        This value gets multiplied by various numbers in the template. For example: <code>width:{{#expr:18*{{{Breite}}} }}em;</code>. See: <a href="https://de.wikipedia.org/wiki/Vorlage:Sitzverteilung/?title=Vorlage:Sitzverteilung/&amp;action=edit">https://de.wikipedia.org/w/index.php?title=Vorlage:Sitzverteilung/&amp;action=edit</a>
+      </li>
+    </ul>
+    <p>
+      XOWA was doing this multiplication using the user's locale.
+    </p>
+    <ul>
+      <li>
+        For US users (like me), <code>18*.9</code> was calculated correctly as <code>16.2</code>
+      </li>
+      <li>
+        For German users though, <code>18*.9</code> was calculated incorrectly as <code>162</code>. 
+        <ul>
+          <li>
+            This was because Java was interpreting the <code>.9</code> using German number-format rules. Since "." is the thousands separator, and "," is the decimal separator, <code>.9</code> became <code>9</code>. For US users, imagine <code>,9</code> becoming <code>9</code>.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      v3.1.5 fixes this issue by asserting that all decimal-parsing is done in the US locale.
+    </p>
+    <h3>
+      <span class="mw-headline" id="New_PageBanner_extension_for_Wikivoyage">New PageBanner extension for Wikivoyage</span>
+    </h3>
+    <p>
+      This was an extension introduced by Wikimedia late last year to standardize the display of the image, icons and table of contents at the top of the page. This involved some considerable work on my side (including a Mustache parser), but XOWA now reproduces the same look.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Show_navboxes_and_other_tables">(Android) Show navboxes and other tables</span>
+    </h3>
+    <p>
+      The Wikipedia Mobile app deliberately hides navboxes as well as other tables. I think this is done for the following reasons:
+    </p>
+    <ul>
+      <li>
+        These tables were meant for desktop display, and often had wide widths
+      </li>
+      <li>
+        These tables clutter the page.
+      </li>
+    </ul>
+    <p>
+      In contrast, I really do like showing as much content as possible, so I decided to show these tables. I'll probably put an option to disable this later, but I'm going to wait first for some feedback from others
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Always_center_table_content">(Android) Always center table content</span>
+    </h3>
+    <p>
+      This is another deviation from the Wikipedia Mobile app style. Basically most tables are left-aligned and would end before reaching the right-hand side of the page. I changed the CSS to have these tables fill up the entire page and center the content.
+    </p>
+    <p>
+      This has one unfortunate sideback in that it breaks the "Collapse" buttons. I'll try to fix this in a future release, but if I can't, I may remove them entirely.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Show_hieroglyphics">(Android) Show hieroglyphics</span>
+    </h3>
+    <p>
+      The early versions of the XOWA Android app did not show hieroglyphics. This is now supported in this build
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Show_images_with_.3F_in_file_title">(Android) Show images with ? in file title</span>
+    </h3>
+    <p>
+      This was a bug wherein images that had a ? were not being displayed within the Android WebView. I fixed this by replacing ? with %3F.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.2.1">Next release: v3.2.1</span>
+    </h3>
+    <p>
+      I ran into several issues with the 2016-01 English Wikipedia dump that set me back a few days. I'm planning to upload English Wikipedia images and HTML this week, and then continue on with the other English wikis
+    </p>
+    <p>
+      For code, I'm going to tackle performance on the Android search again as well as a few minor UI issues on Android (collapse-table, pinch-zoom)
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_v3.1.4.2_.282016-01-28_11:00_Thu.29">Release: v3.1.4.2 (2016-01-28 11:00 Thu)</span>
     </h2>
     <p>
@@ -143,7 +255,7 @@
       The Android app is a major release. It has a Random feature, shows more images, and adds CSS-tweaks.
     </p>
     <h3>
-      <span class="mw-headline" id="Documentation_for_html-dump_script._See_Help:Import.2FCommand-line.2FDumps">Documentation for html-dump script. See <a href="/wiki/Help:Import/Command-line/Dumps" id="xolnki_11" title="Help:Import/Command-line/Dumps">Help:Import/Command-line/Dumps</a></span>
+      <span class="mw-headline" id="Documentation_for_html-dump_script._See_Help:Import.2FCommand-line.2FDumps">Documentation for html-dump script. See [[Help:Import/Command-line/Dumps]]
     </h3>
     <p>
       This item is self-explanatory. The XOWA Android app is getting more stable, so I felt it would be time to document the generation of the HTML databases.
