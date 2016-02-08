@@ -21,25 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_windows_64_v3.1.5.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_windows_64_v3.2.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_windows_v3.1.5.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_windows_v3.2.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_linux_64_v3.1.5.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_linux_64_v3.2.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_linux_v3.1.5.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_linux_v3.2.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_macosx_64_v3.1.5.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_macosx_64_v3.2.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.1.5.1/xowa_app_macosx_v3.1.5.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_macosx_v3.2.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  </li>
+</ul>
+
+<h2><span class='mw-headline' id='RaspberryPi'> Raspberry Pi </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v3.2.1.1/xowa_app_arm_v3.2.1.1.zip" class="external text" rel="nofollow">Raspberry Pi</a>
   </li>
 </ul>
 
@@ -51,7 +57,7 @@
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.1.5.1.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v3.2.1.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -62,82 +68,79 @@
 </ul>
 <br/>
     <h2>
-      <span class='mw-headline'>Change log</span>
-    </h2>
-    <h2>
-      <span class="mw-headline" id="v3.1.5.1_.282016-01-31.29">v3.1.5.1 (2016-01-31)</span>
+      <span class="mw-headline" id="v3.2.1.1_.282016-01-31.29">v3.2.1.1 (2016-01-31)</span>
     </h2>
     <h3>
       <span class="mw-headline" id="Windows_.2F_Linux_.2F_Mac_OS_X">Windows / Linux / Mac OS X</span>
     </h3>
     <p>
-      <b>major</b>
+      <b>major.fix</b>
     </p>
     <ul>
       <li>
-        Luaj: Fix frontier pattern not working. Resolves error messages for every url reference on en.w pages. EX: <code>Check |archiveurl= value (help)</code>. See: <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a> <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
-      </li>
-      <li>
-        Luaj: Handle backslash-escaped UTF8 sequences. Resolves error messages for many references on en.w pages. EX: <code>Specials character in |encyclopedia= at position 11 (help)</code>. See: <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a> <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
-      </li>
-      <li>
-        Core: Parse decimals using US locale, not user locale. Resolves extremely wide pie charts on many de.w pages. {detected by anonymous} See: <a href="https://de.wikipedia.org/wiki/Hausmannst%C3%A4tten">https://de.wikipedia.org/wiki/Hausmannstätten</a>
-      </li>
-      <li>
-        Xtn.Pgbnr: Add {{PAGEBANNER}} extension. Resolves pagebanner not showing up on top of wikivoyage pages. See: <a href="https://en.wikivoyage.org/wiki/Stonehenge" rel="nofollow" class="external free">https://en.wikivoyage.org/wiki/Stonehenge</a> <a href="https://en.wikivoyage.org/wiki/Paris" rel="nofollow" class="external free">https://en.wikivoyage.org/wiki/Paris</a> <a href="https://en.wikivoyage.org/wiki/Munich" rel="nofollow" class="external free">https://en.wikivoyage.org/wiki/Munich</a> <a href="https://en.wikivoyage.org/wiki/Cumbernauld" rel="nofollow" class="external free">https://en.wikivoyage.org/wiki/Cumbernauld</a> [[Help:Diagnostics/Xtns/Wikivoyage/All]]
+        Search: Fix search not working. [broken since: v3.1.1.1]
       </li>
     </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Assign correct word ids to search word.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="/site/en.wikipedia.org/wiki/Special:Search?search=Earth&amp;fulltext=y">https://en.wikipedia.org/wiki/Special:Search?search=Earth&amp;fulltext=y</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Html: Fix English Wiktionary sections defaulting to collapsed but showing "hide". [broken since: v3.1.5.1]
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Change mediawiki.gadget.navframe.js to explicitly set style.display.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="/site/en.wiktionary.org/wiki/green">https://en.wiktionary.org/wiki/green</a>
+      </dd>
+    </dl>
     <p>
-      <b>minor</b>
+      <b>major.add</b>
     </p>
     <ul>
       <li>
-        Css: Remove from core.css #content a:link {color: #0645ad;}. Resolves wikivoyage banner links showing in blue instead of white. See: <a href="https://en.wikipedia.org/wiki/Stonehenge">https://en.wikipedia.org/wiki/Stonehenge</a>
-      </li>
-      <li>
-        Html: Add 'class="visible"' to content-sub node and 'client-js' to html node. Resolves extra gap at bottom of content-sub on wikivoyage pages. See: <a href="https://en.wikivoyage.org/wiki/Stonehenge" rel="nofollow" class="external free">https://en.wikivoyage.org/wiki/Stonehenge</a>
+        Build: Build application package for Raspberry Pi. {contributed by yonisolo}
       </li>
     </ul>
     <p>
-      <b>trivial</b>
+      <b>package</b>
     </p>
     <ul>
       <li>
-        Xtn.Mapsources: Parse key-value pairs from nested template calls. Resolves potential incorrect values for {{#dd2dms}} .
-      </li>
-      <li>
-        Import.Dansguardian: Fix page-redirection-deletion for en.wikipedia.org.
+        Package: Release English Wikipedia (2016-01).
       </li>
     </ul>
-    <h3>
-      <span class="mw-headline" id="Android">Android</span>
-    </h3>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Package: Release English Wikis (2016-01).
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a>
+      </dd>
+    </dl>
     <p>
-      <b>major</b>
+      <b>doc</b>
     </p>
     <ul>
       <li>
-        Css: Show navbox and other tables.
-      </li>
-      <li>
-        Css: Always center table.
-      </li>
-      <li>
-        File: Replace img.src ? with %3F. Resolves images with question marks not showing. See: <a href="https://en.wikipedia.org/wiki/Cleopatra">https://en.wikipedia.org/wiki/Cleopatra</a> <a href="https://en.wikipedia.org/wiki/Cave_paintings">https://en.wikipedia.org/wiki/Cave_paintings</a>
-      </li>
-      <li>
-        Xtn.Hiero: Show hieroglyphics (available in 2016-01 English Wikipedia release). Resolves hieroglyphics not appearing. See: <a href="https://en.wikipedia.org/wiki/Cleopatra">https://en.wikipedia.org/wiki/Cleopatra</a>
-      </li>
-      <li>
-        Css: Force table content to be transparent color in night mode.
-      </li>
-      <li>
-        Log: Deactivate logging to external SD card (again). {detected by anonymous}
+        Doc: Modify "Change log" entries to be more user-oriented.
       </li>
     </ul>
-    <p>
-      <br>
-    </p>
     
 <!-- page_end -->
     </div>
