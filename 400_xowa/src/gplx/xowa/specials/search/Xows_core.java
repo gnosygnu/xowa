@@ -24,17 +24,17 @@ class Xows_core {
 	private boolean ask_for_upgrade = true; private final Hash_adp_bry upgraded_wikis = Hash_adp_bry.cs();		
 	public Xows_core(Xoae_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
 	private final Xows_html_wkr html_wkr = new Xows_html_wkr();
-	public Xows_db_cache Get_cache_or_new(byte[] key) {
-		Xows_db_cache cache = (Xows_db_cache)cache_hash.Get_by_bry(key);
+	public Srch_rslt_hash Get_cache_or_new(byte[] key) {
+		Srch_rslt_hash cache = (Srch_rslt_hash)cache_hash.Get_by_bry(key);
 		if (cache == null) {
-			cache = new Xows_db_cache();
+			cache = new Srch_rslt_hash();
 			cache_hash.Add_bry_obj(key, cache);
 		}
 		return cache;
 	}
-	public void Search(Xow_wiki search_wiki, Xoae_page page, Xows_ui_qry qry) {
+	public void Search(Xow_wiki search_wiki, Xoae_page page, Srch_qry qry) {
 		// generate 1 cmd per wiki
-		Xow_domain_itm[] domain_ary = qry.Wiki_domains(); int domain_ary_len = domain_ary.length;
+		Xow_domain_itm[] domain_ary = qry.wiki_domains; int domain_ary_len = domain_ary.length;
 		for (int i = 0; i < domain_ary_len; ++i) {
 			Xow_domain_itm domain = domain_ary[i];
 			try {
@@ -44,7 +44,7 @@ class Xows_core {
 				qry.Cmds__add(cmd);
 			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "search:wiki failed; wiki=~{0} err=~{1}", domain.Domain_str(), Err_.Message_lang(e));}	// handle bad wikis, like "en.wikipedia.org-old"; DATE:2015-04-24
 		}
-		qry.Page_max_(Int_.Max_value);
+		qry.page_max = Int_.Max_value;
 		// do search and generate html
 		html_wkr.Init_by_wiki(search_wiki, search_wiki.Lang().Num_mgr(), qry);
 		int cmds_len = qry.Cmds__len();

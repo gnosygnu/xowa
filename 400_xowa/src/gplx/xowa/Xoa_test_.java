@@ -45,6 +45,18 @@ public class Xoa_test_ {
 			Db_conn_bldr.Instance.Reg_default_sqlite();
 		}
 	}
+	public static String Db__print_tbl_as_str(Bry_bfr bfr, Db_conn conn, String tbl, String... cols) {
+		int cols_len = cols.length;
+		Db_rdr rdr = conn.Stmt_select(tbl, cols).Exec_select__rls_auto();
+		while (rdr.Move_next()) {
+			for (int i = 0; i < cols_len; ++i) {
+				bfr.Add_obj(rdr.Read_at(i));
+				bfr.Add_byte(i == cols_len - 1 ? Byte_ascii.Nl : Byte_ascii.Pipe);
+			}
+		}
+		rdr.Rls();
+		return bfr.To_str_and_clear();
+	}
 	public static void Inet__init() {
 		Gfo_inet_conn_.new_prototype_(Gfo_inet_conn_.Tid__mem__hash);
 	}

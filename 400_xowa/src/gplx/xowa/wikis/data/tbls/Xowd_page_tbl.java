@@ -31,6 +31,7 @@ public class Xowd_page_tbl implements Rls_able {
 	public String Fld_page_title()				{return fld_title;}
 	public String Fld_page_len()				{return fld_len;}
 	public String Fld_html_db_id()				{return fld_html_db_id;}
+	public String Fld_is_redirect()				{return fld_is_redirect;}
 	public String Fld_redirect_id()				{return fld_redirect_id;}
 	public String[] Flds_select_idx()			{return flds_select_idx;}
 	public String[] Flds_select_all()			{return flds_select_all;}
@@ -111,7 +112,7 @@ public class Xowd_page_tbl implements Rls_able {
 		return false;
 	}
 	public Db_rdr Select_all() {
-		Db_qry__select_cmd qry = Db_qry__select_cmd.new_().From_(tbl_name).Cols_(fld_id, fld_title).OrderBy_asc_(fld_id);
+		Db_qry__select_cmd qry = new Db_qry__select_cmd().From_(tbl_name).Cols_(fld_id, fld_title).Order_asc_(fld_id);
 		return conn.Stmt_new(qry).Exec_select__rls_auto();
 	}
 	public int Select_id(int ns_id, byte[] ttl) {
@@ -167,7 +168,7 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	public void Select_by_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
-		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, Xow_ns_.Tid__main), Db_crt_.like_(fld_title, ""));
+		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, Xow_ns_.Tid__main), Db_crt_.New_like(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
 		search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
 		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Tid__main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
@@ -207,16 +208,16 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	private Db_rdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
 		String ttl_frag_str = String_.new_u8(ttl_frag);
-		Criteria crt_ttl = fwd ? Db_crt_.mte_(fld_title, ttl_frag_str) : Db_crt_.lt_(fld_title, ttl_frag_str);
-		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, ns_id), crt_ttl, Db_crt_.mte_(fld_len, min_page_len));
+		Criteria crt_ttl = fwd ? Db_crt_.New_mte(fld_title, ttl_frag_str) : Db_crt_.New_lt(fld_title, ttl_frag_str);
+		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, ns_id), crt_ttl, Db_crt_.New_mte(fld_len, min_page_len));
 		if (!include_redirects)
-			crt = Criteria_.And(crt, Db_crt_.eq_(fld_is_redirect, Byte_.Zero));
+			crt = Criteria_.And(crt, Db_crt_.New_eq(fld_is_redirect, Byte_.Zero));
 		String[] cols = search_suggest 
 			? flds_select_idx 
 			: flds_select_all 
 			;
 		int limit = fwd ? max_results + 1 : max_results; // + 1 to get next item
-		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl_name, crt, cols).Limit_(limit).OrderBy_(fld_title, fwd);
+		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl_name, crt, cols).Limit_(limit).Order_(fld_title, fwd);
 		Db_stmt stmt = conn.Stmt_new(qry).Crt_int(fld_ns, ns_id).Crt_str(fld_title, ttl_frag_str).Crt_int(fld_len, min_page_len);
 		if (!include_redirects)
 			stmt.Crt_bool_as_byte(fld_is_redirect, include_redirects);

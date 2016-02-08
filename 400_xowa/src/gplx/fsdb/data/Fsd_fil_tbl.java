@@ -76,7 +76,7 @@ public class Fsd_fil_tbl implements Rls_able {
 	}	
 	public Fsd_fil_itm Select_or_null(int dir_id, byte[] fil_name) {
 		if (stmt_select_by_name == null) {
-			Db_qry__select_cmd qry = Db_qry__select_cmd.new_().From_(tbl_name).Cols_(flds.To_str_ary()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(idx_owner);
+			Db_qry__select_cmd qry = new Db_qry__select_cmd().From_(tbl_name).Cols_(flds.To_str_ary()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(idx_owner);
 			stmt_select_by_name = conn.Stmt_new(qry);
 		}
 		Db_rdr rdr = stmt_select_by_name.Clear()

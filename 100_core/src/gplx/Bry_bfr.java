@@ -195,6 +195,8 @@ public class Bry_bfr {
 		this.Add_byte(b);
 		return this;
 	}
+	public Bry_bfr Add_byte_variable(byte v)	{return Add_int_variable(v);}
+	public Bry_bfr Add_short_variable(short v)	{return Add_int_variable(v);}
 	public Bry_bfr Add_u8_int(int val) {
 		if (bfr_len + 4 > bfr_max) Resize((bfr_max + 4) * 2);
 		int utf8_len = gplx.core.intls.Utf16_.Encode_int(val, bfr, bfr_len);
@@ -204,6 +206,10 @@ public class Bry_bfr {
 	public Bry_bfr Add_bool(boolean v) {return Add(v ? Bool_.True_bry : Bool_.False_bry);}
 	public Bry_bfr Add_int_bool(boolean v) {return Add_int_fixed(v ? 1 : 0, 1);}
 	public Bry_bfr Add_int_variable(int val) {
+		if (val < 0) {
+			this.Add(Int_.To_bry(val));
+			return this;
+		}
 		int log10 = Int_.Log10(val);
 		int slots = val > -1 ? log10 + 1 : log10 * -1 + 2;
 		return Add_int(val, log10, slots);
@@ -304,6 +310,12 @@ public class Bry_bfr {
 			return this;
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
+	}
+	public Bry_bfr Add_str_u8_many(String... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i)
+			Add_str_u8(ary[i]);
+		return this;
 	}
 	public Bry_bfr Add_str_a7_null(String s) {return Add_str_a7(s == null ? String_.Null_mark : s);}
 	public Bry_bfr Add_str_a7_w_nl(String s) {Add_str_a7(s); return Add_byte_nl();}

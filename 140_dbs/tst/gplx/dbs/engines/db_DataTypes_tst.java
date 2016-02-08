@@ -59,7 +59,7 @@ class DataTypes_base_fxt {
 		conn.Rls_conn();
 	}
 	public void Select_hook(String floatStr) {
-		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);
+		DataRdr rdr = conn.Exec_qry_as_old_rdr(Db_qry_.select_tbl_("dbs_multiple_data_types"));
 
 		rdr.MoveNextPeer();
 		Tfds.Eq(rdr.ReadInt("unique_id"), 1);
@@ -70,9 +70,9 @@ class DataTypes_base_fxt {
 		Tfds.Eq_decimal(rdr.ReadDecimal("amount"), Decimal_adp_.parts_(12, 345));
 	}
 	public void UpdateDate_hook() {
-		conn.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.eq_("unique_id", 1)).Arg_obj_("last_update", DateAdpClassXtn.Instance.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
+		conn.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.New_eq("unique_id", 1)).Val_obj("last_update", DateAdpClassXtn.Instance.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
 
-		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);
+		DataRdr rdr = conn.Exec_qry_as_old_rdr(Db_qry_.select_tbl_("dbs_multiple_data_types"));
 		rdr.MoveNextPeer();
 		Tfds.Eq_date(rdr.ReadDate("last_update"), DateAdp_.parse_gplx("20091115 220000.000"));
 	}

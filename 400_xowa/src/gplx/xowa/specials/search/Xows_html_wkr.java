@@ -20,34 +20,34 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.langs.numbers.*;
 class Xows_html_wkr {		
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
-	private Xows_ui_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
+	private Srch_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
 	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr(); private Xows_html_row html_rows;		
-	public void Init_by_wiki(Xow_wiki wiki, Xol_num_mgr num_mgr, Xows_ui_qry qry) {
+	public void Init_by_wiki(Xow_wiki wiki, Xol_num_mgr num_mgr, Srch_qry qry) {
 		this.wiki = wiki; this.num_mgr = num_mgr; this.qry = qry;
 		this.lnki_bldr = wiki.App().Html__lnki_bldr();
 		this.html_rows = new Xows_html_row(lnki_bldr);
-		self_lnkr.Init_w_qarg(qry.Special_link_base_href());
+		self_lnkr.Init_w_qarg(qry.special_link_base_href);
 	}
 	public byte[] Gen_page(byte[] tbls) {
-		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + List_adp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
+		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.itms_bgn + List_adp_.Base1), num_mgr.Format_num(qry.itms_end), qry.search_raw);
 		byte[] option_link = lnki_bldr.Href_(Bry_.new_a7("home"), wiki.Ttl_parse(Bry_.new_a7("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
 		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Paging_link(Bool_.N), Paging_link(Bool_.Y), tbls);
 		return tmp_bfr.To_bry_and_clear();
 	}
-	public void Gen_tbl(Bry_bfr bfr, Xows_ui_rslt rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
+	public void Gen_tbl(Bry_bfr bfr, Srch_rslt_list rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
 		html_rows.Init(rslt);
 		byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Img_pos_is_left_(Bool_.Y).Bld_to_bry();
 		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async__html.Gen_insert_key(wiki_domain), html_rows);
 	}		
 	private byte[] Cancel_link(byte[] domain, byte[] cmd_key) {
 		lnki_bldr.Id_(Bry_.Add(Bry_.new_a7("xowa_cancel_"), domain));
-		lnki_bldr.Href_(wiki, self_lnkr.Add_int(Xows_arg_mgr.Arg_bry_page_index, qry.Page_idx()).Add_bry(Xows_arg_mgr.Arg_bry_cancel, cmd_key).Bld_to_bry());
+		lnki_bldr.Href_(wiki, self_lnkr.Add_int(Xows_arg_mgr.Arg_bry_page_index, qry.page_idx).Add_bry(Xows_arg_mgr.Arg_bry_cancel, cmd_key).Bld_to_bry());
 		lnki_bldr.Title_(Bry_cancel);
 		lnki_bldr.Img_16x16(Xoh_img_path.Img_cancel);
 		return lnki_bldr.Bld_to_bry();
 	}
 	public byte[] Paging_link(boolean fwd) {
-		int paging_idx = qry.Page_idx();
+		int paging_idx = qry.page_idx;
 		byte[] title = null, img_path = Bry_.Empty;
 		boolean img_pos_is_left = true;
 		if (fwd) {
@@ -92,24 +92,24 @@ class Xows_html_wkr {
 	;
 }
 class Xows_html_row implements gplx.core.brys.Bfr_arg {
-	private final Xoh_lnki_bldr lnki_bldr; private Xows_ui_rslt rslt;
+	private final Xoh_lnki_bldr lnki_bldr; private Srch_rslt_list rslt;
 	private final Object thread_lock = new Object();
 	public Xows_html_row(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
-	public Xows_html_row Init(Xows_ui_rslt rslt) {this.rslt = rslt; return this;}
+	public Xows_html_row Init(Srch_rslt_list rslt) {this.rslt = rslt; return this;}
 	public void Bfr_arg__add(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
 		int len = rslt.Len();
 		for (int i = 0; i < len; ++i) {
-			Xows_db_row row = rslt.Get_at(i);
+			Srch_rslt_itm row = rslt.Get_at(i);
 			Gen_html(bfr, row);
 		}
 	}
-	public void Gen_html(Bry_bfr bfr, Xows_db_row row) {
+	public void Gen_html(Bry_bfr bfr, Srch_rslt_itm row) {
 		synchronized (thread_lock) {
-			lnki_bldr.Href_(row.Wiki_domain(), row.Page_ttl());
-			byte[] title = row.Page_ttl().Full_txt();
+			lnki_bldr.Href_(row.wiki_bry, row.page_ttl);
+			byte[] title = row.page_ttl.Full_txt();
 			lnki_bldr.Title_(title);
 			lnki_bldr.Caption_(title);
-			fmtr.Bld_bfr_many(bfr, Gfh_utl.Encode_id_as_str(row.Key()), row.Page_len(), lnki_bldr.Bld_to_bry());
+			fmtr.Bld_bfr_many(bfr, Gfh_utl.Encode_id_as_str(row.key), row.page_len, lnki_bldr.Bld_to_bry());
 		}
 	}
 	public Bry_fmtr Fmtr() {return fmtr;} private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

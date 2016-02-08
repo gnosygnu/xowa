@@ -22,25 +22,25 @@ public class Db_crt_tst {
 		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), Object_.Ary(1, "me"));
 	}
 	@Test  public void EqualTest() {
-		crt = Db_crt_.eq_("id", 1);
+		crt = Db_crt_.New_eq("id", 1);
 		tst_Match(true, row, crt);
 	}
 	@Test  public void EqualFalseTest() {
-		crt = Db_crt_.eq_("id", 2);
+		crt = Db_crt_.New_eq("id", 2);
 		tst_Match(false, row, crt);
 	}
 	@Test  public void AndCompositeTest() {
-		crt = Criteria_.And(Db_crt_.eq_("id", 1), Db_crt_.eq_("name", "me"));
+		crt = Criteria_.And(Db_crt_.New_eq("id", 1), Db_crt_.New_eq("name", "me"));
 		tst_Match(true, row, crt);
 
-		crt = Criteria_.And(Db_crt_.eq_("id", 1), Db_crt_.eq_("name", "you"));
+		crt = Criteria_.And(Db_crt_.New_eq("id", 1), Db_crt_.New_eq("name", "you"));
 		tst_Match(false, row, crt);
 	}
 	@Test  public void OrCompositeTest() {
-		crt = Criteria_.Or(Db_crt_.eq_("id", 1), Db_crt_.eq_("name", "you"));
+		crt = Criteria_.Or(Db_crt_.New_eq("id", 1), Db_crt_.New_eq("name", "you"));
 		tst_Match(true, row, crt);
 
-		crt = Criteria_.Or(Db_crt_.eq_("id", 2), Db_crt_.eq_("name", "you"));
+		crt = Criteria_.Or(Db_crt_.New_eq("id", 2), Db_crt_.New_eq("name", "you"));
 		tst_Match(false, row, crt);
 	}
 

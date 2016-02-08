@@ -28,7 +28,7 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 		Criteria[] crt_ary = new Criteria[len];
 		String fld_ns = tbl.Fld_page_ns(); String fld_ttl = tbl.Fld_page_title();
 		for (int i = 0; i < len; i++)
-			crt_ary[i] = Criteria_.And(Db_crt_.eq_(fld_ns, 0), Db_crt_.eq_(fld_ttl, Bry_.Empty));
+			crt_ary[i] = Criteria_.And(Db_crt_.New_eq(fld_ns, 0), Db_crt_.New_eq(fld_ttl, Bry_.Empty));
 		return Criteria_.Or_many(crt_ary);
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
@@ -55,7 +55,7 @@ class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 		Criteria[] crt_ary = new Criteria[len];
 		String fld_ns = tbl.Fld_page_ns(); String fld_ttl = tbl.Fld_page_title();
 		for (int i = 0; i < len; i++)
-			crt_ary[i] = Criteria_.And(Db_crt_.eq_(fld_ns, in_ns), Db_crt_.eq_(fld_ttl, Bry_.Empty));
+			crt_ary[i] = Criteria_.And(Db_crt_.New_eq(fld_ns, in_ns), Db_crt_.New_eq(fld_ttl, Bry_.Empty));
 		return Criteria_.Or_many(crt_ary);
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
@@ -73,7 +73,7 @@ class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 	public void Init(List_adp list, Ordered_hash hash) {this.list = list; this.hash = hash; this.Fill_idx_fields_only_(true);}
 	@Override protected boolean		Show_progress() {return true;}
 	@Override protected Criteria In_filter(Object[] part_ary) {
-		return Db_crt_.in_(this.In_fld_name(), part_ary);
+		return Db_crt_.New_in(this.In_fld_name(), part_ary);
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

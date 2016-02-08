@@ -30,7 +30,7 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 		Xob_xfer_temp_tbl.Create_table(conn);
 		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
 		conn.Txn_bgn("bldr__xfer_temp");
-		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
+		DataRdr rdr = conn.Exec_sql_as_old_rdr(Sql_select_itm);
 		long[] ext_maxs = Calc_ext_max();
 		while (rdr.MoveNextPeer()) {
 			int lnki_ext = rdr.ReadByte(Xob_lnki_regy_tbl.Fld_lnki_ext);
@@ -76,7 +76,7 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	private static final String
-		Sql_select = String_.Concat_lines_nl
+		Sql_select_itm = String_.Concat_lines_nl
 	(	"SELECT  DISTINCT"
 	,   "        l.lnki_id"
 //		,	",       lnki_ttl"

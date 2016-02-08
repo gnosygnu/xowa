@@ -64,15 +64,15 @@ public class DbMaprMgr_tst {
 		disc = MockDisc.new_().Id_(1).Name_("disc");
 
 		wtr.StoreRoot(disc, "mock_discs");
-		Db_qry_fxt.tst_Select(conn, "mock_discs", DbTstRow.vals_only_(1, "disc"));
+		Db_qry_fxt.tst_Select(conn, "mock_discs", Db_mock_row.vals_only_(1, "disc"));
 	}
 	@Test  public void Save_subs() {
 		disc = MockDisc.new_().Id_(1).Name_("disc");
 		title = MockTitle.new_().Id_(2).Name_("title").Disc_(disc);
 
 		wtr.StoreRoot(disc, "mock_discs");
-		Db_qry_fxt.tst_Select(conn, "mock_discs", DbTstRow.vals_only_(1, "disc"));
-		Db_qry_fxt.tst_Select(conn, "mock_titles", DbTstRow.vals_only_(1, 2, "title"));
+		Db_qry_fxt.tst_Select(conn, "mock_discs", Db_mock_row.vals_only_(1, "disc"));
+		Db_qry_fxt.tst_Select(conn, "mock_titles", Db_mock_row.vals_only_(1, 2, "title"));
 	}
 	@Test  public void Save_deep() {
 		disc = MockDisc.new_().Id_(1).Name_("disc");
@@ -82,12 +82,12 @@ public class DbMaprMgr_tst {
 		subtitle = MockStream.new_().Id_(5).Name_("subtitle").Title_(title.Subtitles());
 
 		wtr.StoreRoot(disc, "mock_discs");
-		Db_qry_fxt.tst_Select(conn, "mock_discs", DbTstRow.vals_only_(1, "disc"));
-		Db_qry_fxt.tst_Select(conn, "mock_titles", DbTstRow.vals_only_(1, 2, "title"));
-		Db_qry_fxt.tst_Select(conn, "mock_chapters", DbTstRow.vals_only_(1, 2, 3, "chap"));
+		Db_qry_fxt.tst_Select(conn, "mock_discs", Db_mock_row.vals_only_(1, "disc"));
+		Db_qry_fxt.tst_Select(conn, "mock_titles", Db_mock_row.vals_only_(1, 2, "title"));
+		Db_qry_fxt.tst_Select(conn, "mock_chapters", Db_mock_row.vals_only_(1, 2, 3, "chap"));
 		Db_qry_fxt.tst_Select(conn, "mock_streams"
-			, DbTstRow.vals_only_(1, 2, null, 4, "audio")
-			, DbTstRow.vals_only_(1, 2, null, 5, "subtitle")
+			, Db_mock_row.vals_only_(1, 2, null, 4, "audio")
+			, Db_mock_row.vals_only_(1, 2, null, 5, "subtitle")
 			);
 	}
 	@Test  public void Load_root() {
@@ -133,7 +133,7 @@ public class DbMaprMgr_tst {
 		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().Get_at(0)).Name());
 	}
 	DbMaprRdr rdr_() {
-		DbMaprRdr rv = DbMaprRdr.new_(Db_conn_info_.Test, Db_crt_.eq_("disc_id", 1));
+		DbMaprRdr rv = DbMaprRdr.new_(Db_conn_info_.Test, Db_crt_.New_eq("disc_id", 1));
 		rv.EnvVars().Add(DbMaprWtr.Key_Mgr, mgr);
 		return rv;
 	}

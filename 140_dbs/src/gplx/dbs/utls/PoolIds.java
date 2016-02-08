@@ -20,11 +20,11 @@ import gplx.core.stores.*;
 import gplx.dbs.qrys.*;
 public class PoolIds {
 	public int FetchNext(Db_conn conn, String url) {
-		Db_qry__select_cmd cmd = Db_qry_.select_().From_(Tbl_Name).Where_(Db_crt_.eq_(Fld_id_path, url));
+		Db_qry__select_cmd cmd = Db_qry_.select_().From_(Tbl_Name).Where_(Db_crt_.New_eq(Fld_id_path, url));
 		int rv = 0;//boolean isNew = true;
 		DataRdr rdr = DataRdr_.Null;
 		try {
-			rdr = cmd.Exec_qry_as_rdr(conn);
+			rdr = conn.Exec_qry_as_old_rdr(cmd);
 			if (rdr.MoveNextPeer()) {
 				rv = rdr.ReadInt(Fld_id_next_id);
 			}
@@ -39,9 +39,9 @@ public class PoolIds {
 		return rv;
 	}
 	public void Commit(Db_conn conn, String url, int val) {
-		int rv = conn.Exec_qry(Db_qry_.update_(Tbl_Name, Db_crt_.eq_(Fld_id_path, url)).Arg_(Fld_id_path, url).Arg_(Fld_id_next_id, val));
+		int rv = conn.Exec_qry(Db_qry_.update_(Tbl_Name, Db_crt_.New_eq(Fld_id_path, url)).Val_str(Fld_id_path, url).Val_int(Fld_id_next_id, val));
 		if (rv == 0) {
-			rv = conn.Exec_qry(Db_qry_.insert_(Tbl_Name).Arg_(Fld_id_path, url).Arg_(Fld_id_next_id, val));
+			rv = conn.Exec_qry(Db_qry_.insert_(Tbl_Name).Val_str(Fld_id_path, url).Val_int(Fld_id_next_id, val));
 		}
 		if (rv != 1) throw Err_.new_wo_type("failed to update nextId", "url", url, "nextId", val);
 	}

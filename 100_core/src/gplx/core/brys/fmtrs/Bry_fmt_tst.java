@@ -46,7 +46,7 @@ class Bry_fmt_fxt {
 	public Bry_fmt_fxt Args(String key, Bfr_arg arg) {fmt.Args_(new Bfr_fmt_arg(Bry_.new_u8(key), arg)); return this;}
 	public Bry_fmt_fxt Keys(String... keys) {fmt.Keys_(Bry_.Ary(keys)); return this;}
 	public void Test(String expd) {
-		fmt.Bld_bfr_many(bfr, vals);
+		fmt.Bld_many(bfr, vals);
 		Tfds.Eq(expd, bfr.To_str_and_clear());
 	}
 }

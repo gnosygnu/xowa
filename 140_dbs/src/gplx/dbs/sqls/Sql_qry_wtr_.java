@@ -16,9 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
+import gplx.dbs.sqls.wtrs.*;
 public class Sql_qry_wtr_ {
-	public static Sql_qry_wtr	new_ansi()				{return new Sql_qry_wtr_ansi();}
-	public static Sql_qry_wtr	new_escape_backslash()	{return new Sql_qry_wtr_ansi_escape_backslash();}
-	public static final Sql_qry_wtr Instance = new Sql_qry_wtr_ansi();
-	public static String Gen_placeholder_parameters(Db_qry qry) {return Sql_qry_wtr_.Instance.Xto_str(qry, true);}	// replace arguments with ?; EX: UPDATE a SET b = ? WHERE c = ?;
+	public static final Sql_qry_wtr
+	  Basic			= new Sql_core_wtr()
+	, Mysql			= new Sql_core_wtr__mysql()
+	, Sqlite		= new Sql_core_wtr__sqlite()
+	;
+	public static String Gen_placeholder_parameters(Db_qry qry) {return Sql_qry_wtr_.Sqlite.To_sql_str(qry, true);}	// replace arguments with ?; EX: UPDATE a SET b = ? WHERE c = ?;
 }

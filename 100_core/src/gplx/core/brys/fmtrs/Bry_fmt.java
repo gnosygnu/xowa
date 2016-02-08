@@ -29,7 +29,16 @@ public class Bry_fmt {
 	public Bry_fmt Fmt_(String v)						{dirty = true; src = Bry_.new_u8(v); return this;}
 	public Bry_fmt Args_(Bfr_fmt_arg... v)		{dirty = true; args = v; return this;}
 	public Bry_fmt Keys_(byte[]... v)				{dirty = true; keys = v; return this;}
-	public void Bld_bfr_many(Bry_bfr bfr, Object... vals) {
+	public String Bld_many_to_str_auto_bfr(Object... vals) {
+		Bry_bfr bfr = Bry_bfr_.Get();
+		try {return Bld_many_to_str(bfr, vals);} 
+		finally {bfr.Mkr_rls();}
+	}
+	public String Bld_many_to_str(Bry_bfr bfr, Object... vals) {
+		Bld_many(bfr, vals);
+		return bfr.To_str_and_clear();
+	}
+	public void Bld_many(Bry_bfr bfr, Object... vals) {
 		if (dirty) Compile();
 		int vals_len = vals.length;
 		for (int i = 0; i < itms_len; ++i) {

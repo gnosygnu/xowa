@@ -26,7 +26,7 @@ class Xowd_cat_core_tbl__in_wkr extends Db_in_wkr__base {
 	public void Init(Ordered_hash hash) {this.hash = hash;}
 	@Override protected Db_qry Make_qry(int bgn, int end) {
 		Object[] part_ary = In_ary(end - bgn);			
-		return Db_qry_.select_cols_(tbl_name, Db_crt_.in_(fld_cat_id, part_ary), flds.To_str_ary());
+		return Db_qry_.select_cols_(tbl_name, Db_crt_.New_in(fld_cat_id, part_ary), flds.To_str_ary());
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

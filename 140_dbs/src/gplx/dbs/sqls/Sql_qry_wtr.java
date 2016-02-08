@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*;
+import gplx.dbs.sqls.wtrs.*;
 public interface Sql_qry_wtr {
-	String Xto_str(Db_qry qry, boolean prepare);
+	String To_sql_str(Db_qry qry, boolean mode_is_prep);
+	Sql_schema_wtr Schema_wtr();
 }

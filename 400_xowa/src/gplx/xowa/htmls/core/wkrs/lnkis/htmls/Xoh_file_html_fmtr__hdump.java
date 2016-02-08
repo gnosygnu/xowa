@@ -38,7 +38,7 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 			, Gfh_utl.Escape_html_as_bry(img_alt), data_xowa_title, data_xowa_image, arg_img_core.Init(uid, Bry_.Empty, 0, 0), Xoh_img_cls_.To_html(img_cls, img_cls_other));
 	}
 	public static void Bld_anch_n(Bry_bfr bfr, byte[] data_xowa_title, byte[] data_xowa_image, byte img_cls, byte[] img_cls_other, byte[] img_alt, byte[] img_xtra_atrs) {
-		fmtr_anch_n.Bld_bfr_many(bfr, data_xowa_title, data_xowa_image, Xoh_img_cls_.To_html(img_cls, img_cls_other), Gfh_utl.Escape_html_as_bry(img_alt), img_xtra_atrs);
+		fmtr_anch_n.Bld_many(bfr, data_xowa_title, data_xowa_image, Xoh_img_cls_.To_html(img_cls, img_cls_other), Gfh_utl.Escape_html_as_bry(img_alt), img_xtra_atrs);
 	} 
 	public static byte[] Bld_xowa_image_data(Bry_bfr tmp_bfr, byte tid, int w, int h, double upright, double time, int page) {
 		tmp_bfr.Add_byte_space().Add(Xoh_img_xoimg_data.Bry__data_xowa_image).Add_byte_eq().Add_byte_quote();

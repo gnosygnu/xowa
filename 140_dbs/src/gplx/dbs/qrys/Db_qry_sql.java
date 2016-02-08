@@ -21,7 +21,7 @@ public class Db_qry_sql implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_sql;}
 	public boolean			Exec_is_rdr() {return isReader;} private boolean isReader;
 	public String		Base_table() {throw Err_.new_unimplemented();}
-	public String		Xto_sql() {return sql;} private String sql;		
+	public String		To_sql__exec(Sql_qry_wtr wtr) {return sql;} private String sql;		
 	public int Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 	public static Db_qry_sql dml_(String sql) {return sql_(sql);}
 	public static Db_qry_sql ddl_(String sql) {return sql_(sql);}

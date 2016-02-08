@@ -99,6 +99,18 @@ public class Db_stmt__mem implements Db_stmt {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
+	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(Bool_.Y, k, v);}
+	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(Bool_.N, k, v);}
+	private Db_stmt Add_date(boolean where, String k, DateAdp v) {
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "date", "val", v);} 
+		return this;
+	}
+	public Db_stmt Crt_text(String k, String v)		{return Add_text(Bool_.Y, k, v);}
+	public Db_stmt Val_text(String k, String v)		{return Add_text(Bool_.N, k, v);}
+	private Db_stmt Add_text(boolean where, String k, String v) {
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v);} 
+		return this;
+	}
 	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();

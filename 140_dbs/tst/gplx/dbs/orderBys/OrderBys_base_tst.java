@@ -26,26 +26,26 @@ public abstract class OrderBys_base_tst {
 	@After public void teardown() {conn.Rls_conn();}
 	protected abstract Db_conn provider_(); protected Db_conn conn;		
 	protected void Basic_hook() {
-		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));
-		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Val_int("id", 1).Val_str("name", "you"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Val_int("id", 0).Val_str("name", "me"));
 
-		fx.tst_ExecRdr(2, Db_qry__select_cmd.new_().From_("dbs_crud_ops").OrderBy_("id", true));
+		fx.tst_ExecRdr(2, new Db_qry__select_cmd().From_("dbs_crud_ops").Order_("id", true));
 		fx.tst_RowAry(0, 0, "me");
 		fx.tst_RowAry(1, 1, "you");
 
-		fx.tst_ExecRdr(2, Db_qry__select_cmd.new_().From_("dbs_crud_ops").OrderBy_("id", false));
+		fx.tst_ExecRdr(2, new Db_qry__select_cmd().From_("dbs_crud_ops").Order_("id", false));
 		fx.tst_RowAry(0, 1, "you");
 		fx.tst_RowAry(1, 0, "me");
 	}
 	protected void SameVals_hook() {
-		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
-		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "you"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Val_int("id", 0).Val_str("name", "me"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Val_int("id", 0).Val_str("name", "you"));
 
-		fx.tst_ExecRdr(2, Db_qry__select_cmd.new_().From_("dbs_crud_ops").OrderBy_("id", true));
+		fx.tst_ExecRdr(2, new Db_qry__select_cmd().From_("dbs_crud_ops").Order_("id", true));
 		fx.tst_RowAry(0, 0, "me");
 		fx.tst_RowAry(1, 0, "you");
 
-		fx.tst_ExecRdr(2, Db_qry__select_cmd.new_().From_("dbs_crud_ops").OrderBy_("id", false));
+		fx.tst_ExecRdr(2, new Db_qry__select_cmd().From_("dbs_crud_ops").Order_("id", false));
 		fx.tst_RowAry(0, 0, "me");
 		fx.tst_RowAry(1, 0, "you");
 	}

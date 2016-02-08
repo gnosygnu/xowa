@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
-import gplx.core.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
+import gplx.core.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
@@ -31,11 +31,11 @@ class TdbInsertWkr implements Db_qryWkr {
 	int InsertRowsBySelect(TdbEngine engine, TdbTable tbl, Db_qry_insert insert) {
 		int count = 0;
 		DataRdr rdr = (DataRdr)TdbSelectWkr.Instance.Exec(engine, insert.Select());
-		Sql_select_fld_list insertFlds = insert.Cols(); int insertFldsCount = insertFlds.Count();
+		Sql_select_fld_list insertFlds = insert.Cols(); int insertFldsCount = insertFlds.Len();
 		GfoFldList selectFldsForNewRow = null;
-		try {selectFldsForNewRow = insertFlds.XtoGfoFldLst(tbl);}
+		try {selectFldsForNewRow = TdbSelectWkr.To_GfoFldLst(tbl, insertFlds);}
 		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to generate flds for new row");}
-		if (insertFldsCount > selectFldsForNewRow.Count()) throw Err_.new_wo_type("insert flds cannot exceed selectFlds", "insertFlds", insertFlds.To_str(), "selectFlds", selectFldsForNewRow.To_str());
+		if (insertFldsCount > selectFldsForNewRow.Count()) throw Err_.new_wo_type("insert flds cannot exceed selectFlds", "insertFlds", To_str(insertFlds), "selectFlds", selectFldsForNewRow.To_str());
 		while (rdr.MoveNextPeer()) {
 			count++;
 			GfoNde row = GfoNde_.vals_(selectFldsForNewRow, new Object[insertFldsCount]);
@@ -51,10 +51,18 @@ class TdbInsertWkr implements Db_qryWkr {
 		for (int i = 0; i < insert.Args().Count(); i++) {
 			KeyVal kv = insert.Args().Get_at(i);
 			Db_arg arg = (Db_arg)kv.Val();
-			row.Write(kv.Key(), arg.Val());
+			row.Write(kv.Key(), arg.Val);
 		}
 		tbl.Rows().Add(row);
 		return 1;
+	}
+	private String To_str(Sql_select_fld_list flds) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		for (int i = 0; i < flds.Len(); i++) {
+			Sql_select_fld fld = flds.Get_at(i);
+			bfr.Add_str_u8(String_.Format("{0},{1}|", fld.Fld, fld.Alias));
+		}
+		return bfr.To_str();
 	}
 	public static TdbInsertWkr new_() {TdbInsertWkr rv = new TdbInsertWkr(); return rv;}
 }

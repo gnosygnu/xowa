@@ -80,7 +80,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 			}
 			page.Html_data().Html_restricted_n_();
 			page.Html_data().Xtn_search_text_(search_bry);				
-			Xows_ui_qry qry = new Xows_ui_qry(search_bry, args_mgr.Paging_idx(), search_api.Results_per_page(), args_mgr.Sort_tid(), args_mgr.Ns_mgr(), search_api.Async_db(), search_domain_ary);
+			Srch_qry qry = new Srch_qry(search_bry, args_mgr.Paging_idx(), search_api.Results_per_page(), args_mgr.Ns_mgr(), search_api.Async_db(), search_domain_ary);
 			search_mgr.Search(wiki, page, qry);
 		}
 		// page found; return it;

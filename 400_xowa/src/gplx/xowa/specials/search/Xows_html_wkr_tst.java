@@ -28,7 +28,7 @@ public class Xows_html_wkr_tst {
 		fxt.Test_paging(Bool_.N, 0, "&#160;");
 	}
 	@Test   public void Rows() {
-		fxt.Test_rows(Xows_db_row.Ary(fxt.Make_row(10, "A"), fxt.Make_row(20, "B")), String_.Concat_lines_nl_skip_last
+		fxt.Test_rows(new Srch_rslt_itm[] {fxt.Make_row(10, "A"), fxt.Make_row(20, "B")}, String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <tr id='w.7CA'>"
 		, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>10"
@@ -56,14 +56,14 @@ class Xows_html_wkr_fxt {
 		return this;
 	}
 	public void Test_paging(boolean fwd, int paging_idx, String expd) {
-		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_a7("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain_itm[] {Xow_domain_itm_.parse(wiki.Domain_bry())});
-		qry.Page_max_(2);
+		Srch_qry qry = new Srch_qry(Bry_.new_a7("A"), paging_idx, 100, new Xows_ns_mgr(), true, new Xow_domain_itm[] {Xow_domain_itm_.parse(wiki.Domain_bry())});
+		qry.page_max = 2;
 		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Paging_link(fwd);
 		Tfds.Eq(expd, String_.new_a7(paging_link));
 	}
-	public void Test_rows(Xows_db_row[] rows, String expd) {
-		Xows_ui_rslt rslt = new Xows_ui_rslt();
+	public void Test_rows(Srch_rslt_itm[] rows, String expd) {
+		Srch_rslt_list rslt = new Srch_rslt_list();
 		Xows_html_row html_row = new Xows_html_row(wiki.App().Html__lnki_bldr());
 		html_row.Init(rslt);
 		for (int i = 0; i < rows.length; ++i)
@@ -71,8 +71,8 @@ class Xows_html_wkr_fxt {
 		html_row.Bfr_arg__add(tmp_bfr);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}
-	public Xows_db_row Make_row(int len, String ttl_str) {
+	public Srch_rslt_itm Make_row(int len, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		return new Xows_db_row(Bry_.new_a7("w"), wiki.Ttl_parse(ttl_bry), 1, len);
+		return new Srch_rslt_itm(Bry_.new_a7("w"), wiki.Ttl_parse(ttl_bry), 1, len);
 	}
 }

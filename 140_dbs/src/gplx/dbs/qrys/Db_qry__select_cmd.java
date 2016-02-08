@@ -16,116 +16,101 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*; import gplx.dbs.sqls.*; import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
+import gplx.core.criterias.*;
+import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*; 
 public class Db_qry__select_cmd implements Db_qry {
-	public int			Tid() {return Db_qry_.Tid_select;}
-	public boolean			Exec_is_rdr() {return true;}
-	public String		Base_table() {return from.BaseTable().TblName();}
-	public String		Xto_sql() {return Sql_qry_wtr_.Instance.Xto_str(this, false);}		
-	public String		Xto_sql_prepare() {return Sql_qry_wtr_.Instance.Xto_str(this, true);}		
-	public DataRdr		Exec_qry_as_rdr(Db_conn conn) {return conn.Exec_qry_as_rdr(this);}
-	public GfoNde ExecRdr_nde(Db_conn conn) {
-		DataRdr rdr = DataRdr_.Null;
-		try {return GfoNde_.rdr_(Exec_qry_as_rdr(conn));} finally {rdr.Rls();}
-	}
-	public Object ExecRdr_val(Db_conn conn) {
-		DataRdr rdr = Exec_qry_as_rdr(conn);
-		try {
-			Object rv = null;
-			if (rdr.MoveNextPeer()) {
-				rv = rdr.Read(cols.Flds().Get_at(0).Fld());	// NOTE: need to access from flds for tdb
-			}
-			return rv;
-		}	finally {rdr.Rls();}
-	}
-	public static Object Rdr_to_val(DataRdr rdr) {
-		try {
-			Object rv = null;
-			if (rdr.MoveNextPeer()) {
-				rv = rdr.ReadAt(0);
-			}
-			return rv;
-		}	finally {rdr.Rls();}
-	}
-
-	public Sql_from From() {return from;} Sql_from from;
-	public Db_qry__select_cmd From_(String tblName) {return From_(tblName, null);}
-	public Db_qry__select_cmd From_(String tblName, String alias) {
-		if (from != null) throw Err_.new_wo_type("super table already defined", "from", from.Tbls().Count());
-		from = Sql_from.new_(Sql_tbl_src.new_().JoinType_(Sql_join_itmType.From).TblName_(tblName).Alias_(alias));
+	public int				Tid()				{return Db_qry_.Tid_select;}
+	public boolean				Exec_is_rdr()		{return Bool_.Y;}
+	public String			Base_table()		{return from.Base_tbl.Name;}
+	public Sql_from_itm		From()				{return from;} private Sql_from_itm from;
+	public Db_qry__select_cmd From_(String tbl) {return From_(tbl, Sql_tbl_itm.Alias__null);}
+	public Db_qry__select_cmd From_(String name, String alias) {return From_(Sql_tbl_itm.Db__null, name, alias);}
+	public Db_qry__select_cmd From_(String db, String tbl, String alias) {
+		if (from != null) throw Err_.new_("sql_qry", "super table already defined", "from", from.Base_tbl.Name);
+		from = new Sql_from_itm(new Sql_tbl_itm(Sql_tbl_itm.Tid__from, db, tbl, alias, Sql_join_itm.Ary__empty));
 		return this;
 	}
-	public Db_qry__select_cmd Join_(String name, String alias, Sql_join_itm... ary) {
-		if (from == null) throw Err_.new_wo_type("super table is not defined");
-		Sql_tbl_src tbl = Sql_tbl_src.new_().JoinType_(Sql_join_itmType.Inner).TblName_(name).Alias_(alias);
-		for (Sql_join_itm itm : ary)
-			tbl.JoinLinks().Add(itm);
-		from.Tbls().Add(tbl);
+	public Db_qry__select_cmd Join_(String name, String alias, Sql_join_itm... join_flds) {return Join_(Sql_tbl_itm.Db__null, name, alias, join_flds);}
+	public Db_qry__select_cmd Join_(String db, String name, String alias, Sql_join_itm... join_flds) {
+		if (from == null) throw Err_.new_("sql_qry", "super table is not defined");
+		from.Tbls.Add(new Sql_tbl_itm(Sql_tbl_itm.Tid__inner, db, name, alias, join_flds));
 		return this;
 	}
-
-	public Sql_select Cols() {return cols;} Sql_select cols = Sql_select.All;
-	public String[] Cols_ary() {return cols.Flds().To_str_ary();}
-	public Db_qry__select_cmd Cols_all_() {return this;}
-	public Db_qry__select_cmd Cols_alias_(String expr, String alias) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
-		cols.Add(expr, alias);
-		return this;
-	}
-	public Db_qry__select_cmd Cols_(String... ary) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
+	public Sql_select_itm Cols() {return cols;} private Sql_select_itm cols = Sql_select_itm.All;
+	public Db_qry__select_cmd Distinct_() {cols.Distinct = true; return this;}
+	public Db_qry__select_cmd Cols_all_() {cols = Sql_select_itm.All; return this;}
+	public Db_qry__select_cmd Cols_(String... ary) {return Cols_w_tbl_(Sql_select_fld.Tbl_null, ary);}
+	public Db_qry__select_cmd Cols_w_tbl_(String tbl, String... ary) {
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
 		for (String itm : ary)
-			cols.Add(itm);
+			cols.Flds.Add(Sql_select_fld.New_fld(tbl, itm, itm));
+		return this;
+	}
+	public Db_qry__select_cmd Cols_w_alias_(String expr, String alias) {
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
+		cols.Flds.Add(Sql_select_fld.New_fld(Sql_select_fld.Tbl_null, expr, alias));
+		return this;
+	}
+	public Sql_where_itm Where_itm() {return where_itm;} private Sql_where_itm where_itm = Sql_where_itm.All;
+	public Db_qry__select_cmd Where_(Criteria root) {
+		if (where_itm == Sql_where_itm.All) where_itm = new Sql_where_itm();
+		where_itm.Root = root;
+		return this;
+	}
+	public Db_qry__select_cmd Where_and(Criteria crt) {
+		if (where_itm == Sql_where_itm.All) throw Err_.new_("sql_qry", "where is not defined");
+		where_itm.Root = Criteria_.And(where_itm.Root, crt);
+		return this;
+	}
+	public Sql_order_itm Order() {return order;} private Sql_order_itm order = null;
+	public Db_qry__select_cmd Order_asc_(String fld) {return Order_(fld, Bool_.Y);}
+	public Db_qry__select_cmd Order_(String fld, boolean asc) {return Order_(Sql_order_fld.Tbl__null, fld, asc);}
+	public Db_qry__select_cmd Order_(String tbl, String fld, boolean asc) {
+		Sql_order_fld item = new Sql_order_fld(tbl, fld, asc ? Sql_order_fld.Sort__nil : Sql_order_fld.Sort__dsc);
+		order = new Sql_order_itm(new Sql_order_fld[] {item});
+		return this;
+	}
+	public Db_qry__select_cmd Order_asc_many_(String... flds) {
+		int flds_len = flds.length;
+		Sql_order_fld[] ary = new Sql_order_fld[flds_len];
+		for (int i = 0; i < flds_len; ++i)
+			ary[i] = new Sql_order_fld(Sql_order_fld.Tbl__null, flds[i], Sql_order_fld.Sort__nil);
+		order = new Sql_order_itm(ary);
+		return this;
+	}
+	public int Limit() {return limit;} public Db_qry__select_cmd Limit_(int v) {this.limit = v; return this;} private int limit = Limit__disabled; public static final int Limit__disabled = Int_.Min_value;
+	public int Offset() {return offset;} public Db_qry__select_cmd Offset_(int v) {this.offset = v; return this;} private int offset = Offset__disabled; public static final int Offset__disabled = Int_.Min_value;
+	public String Indexed_by() {return indexed_by;} public Db_qry__select_cmd Indexed_by_(String v) {indexed_by = v; return this;} private String indexed_by;
+
+	public Sql_group_itm GroupBy() {return groupBy;} private Sql_group_itm groupBy = null;
+	public Db_qry__select_cmd GroupBy_(String... flds) {
+		if (groupBy != null) throw Err_.new_("sql_qry", "group by already defined", "group", groupBy);
+		groupBy = Sql_group_itm.new_(flds);
 		return this;
 	}
 	public Db_qry__select_cmd Cols_groupBy_max(String fld) {return Cols_groupBy_max(fld, fld);}
 	public Db_qry__select_cmd Cols_groupBy_max(String fld, String alias) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
-		cols.Add(Sql_select_fld_.new_max(Sql_select_fld_base.Tbl_null, fld, alias));
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
+		cols.Flds.Add(Sql_select_fld.New_max(Sql_select_fld.Tbl_null, fld, alias));
 		return this;
 	}
 	public Db_qry__select_cmd Cols_groupBy_min(String fld, String alias) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
-		cols.Add(Sql_select_fld_.new_min(Sql_select_fld_base.Tbl_null, fld, alias));
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
+		cols.Flds.Add(Sql_select_fld.New_min(Sql_select_fld.Tbl_null, fld, alias));
 		return this;
 	}
 	public Db_qry__select_cmd Cols_groupBy_count(String fld, String alias) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
-		cols.Add(Sql_select_fld_.new_count(Sql_select_fld_base.Tbl_null, fld, alias));
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
+		cols.Flds.Add(Sql_select_fld.New_count(Sql_select_fld.Tbl_null, fld, alias));
 		return this;
 	}
 	public Db_qry__select_cmd Cols_groupBy_sum(String fld) {return Cols_groupBy_sum(fld, fld);}
 	public Db_qry__select_cmd Cols_groupBy_sum(String fld, String alias) {
-		if (cols == Sql_select.All) cols = Sql_select.new_();
-		cols.Add(Sql_select_fld_.new_sum(Sql_select_fld_base.Tbl_null, fld, alias));
+		if (cols == Sql_select_itm.All) cols = new Sql_select_itm();
+		cols.Flds.Add(Sql_select_fld.New_sum(Sql_select_fld.Tbl_null, fld, alias));
 		return this;
 	}
-
-	public Criteria Where() {return where;} public Db_qry__select_cmd Where_(Criteria crt) {where = crt; return this;} Criteria where;
-	public Sql_order_by OrderBy() {return orderBy;} Sql_order_by orderBy = null;
-	public Db_qry__select_cmd OrderBy_(String fieldName, boolean ascending) {
-		Sql_order_by_itm item = Sql_order_by_itm.new_(fieldName, ascending);
-		orderBy = Sql_order_by.new_(item);
-		return this;
-	}
-	public Db_qry__select_cmd OrderBy_asc_(String fieldName) {return OrderBy_(fieldName, true);}
-	public Db_qry__select_cmd OrderBy_many_(String... fldNames) {
-		Sql_order_by_itm[] ary = new Sql_order_by_itm[fldNames.length];
-		for (int i = 0; i < fldNames.length; i++)
-			ary[i] = Sql_order_by_itm.new_(fldNames[i], true);
-		orderBy = Sql_order_by.new_(ary);
-		return this;
-	}
-	public Sql_group_by GroupBy() {return groupBy;} Sql_group_by groupBy = null;
-	public Db_qry__select_cmd GroupBy_(String... flds) {
-		if (groupBy != null) throw Err_.new_wo_type("group by already defined", "group", groupBy);
-		groupBy = Sql_group_by.new_(flds);
-		return this;
-	}
-	public String Indexed_by() {return indexed_by;} public Db_qry__select_cmd Indexed_by_(String v) {indexed_by = v; return this;} private String indexed_by;
-	public Db_qry__select_cmd Distinct_() {cols.Distinct_set(true); return this;}
-	public int Limit() {return limit;} int limit = -1; public static final int Limit_disabled = -1;
-	public Db_qry__select_cmd Limit_(int v) {this.limit = v; return this;}
-
-	public static Db_qry__select_cmd new_() {return new Db_qry__select_cmd();} Db_qry__select_cmd() {}
+	
+	public String		To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.N);}
+	public String		To_sql__prep(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.Y);}		
 }

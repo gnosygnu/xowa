@@ -28,13 +28,13 @@ public abstract class Joins_base_tst {
 		conn.Rls_conn();
 	}
 	protected void InnerJoin_hook() {
-		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
-		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));
-		conn.Exec_qry(new Db_qry_insert("dbs_join1").Arg_("join_id", 0).Arg_("join_data", "data0"));
-		conn.Exec_qry(new Db_qry_insert("dbs_join1").Arg_("join_id", 1).Arg_("join_data", "data1"));
-		Db_qry__select_cmd select = Db_qry__select_cmd.new_().From_("dbs_crud_ops").Join_("dbs_join1", "j1", Sql_join_itm.new_("join_id", "dbs_crud_ops", "id")).Cols_("id", "name", "join_data");
+		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Val_int("id", 0).Val_str("name", "me"));
+		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Val_int("id", 1).Val_str("name", "you"));
+		conn.Exec_qry(new Db_qry_insert("dbs_join1").Val_int("join_id", 0).Val_str("join_data", "data0"));
+		conn.Exec_qry(new Db_qry_insert("dbs_join1").Val_int("join_id", 1).Val_str("join_data", "data1"));
+		Db_qry__select_cmd select = new Db_qry__select_cmd().From_("dbs_crud_ops").Join_("dbs_join1", "j1", Db_qry_.New_join__join("join_id", "dbs_crud_ops", "id")).Cols_("id", "name", "join_data");
 
-		DataRdr rdr = conn.Exec_qry_as_rdr(select);
+		DataRdr rdr = conn.Exec_qry_as_old_rdr(select);
 		GfoNde table = GfoNde_.rdr_(rdr);
 		Tfds.Eq(table.Subs().Count(), 2);
 		Tfds.Eq(table.Subs().FetchAt_asGfoNde(0).Read("join_data"), "data0");

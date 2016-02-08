@@ -50,6 +50,10 @@ public interface Db_stmt extends Rls_able {
 	Db_stmt Val_bry_as_str(String k, byte[] v);
 	Db_stmt Val_bry_as_str(byte[] v);
 	Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr rdr, long rdr_len);
+	Db_stmt Crt_date(String k, DateAdp v);
+	Db_stmt Val_date(String k, DateAdp v);
+	Db_stmt Crt_text(String k, String v);
+	Db_stmt Val_text(String k, String v);
 	boolean Exec_insert();
 	int Exec_update();
 	int Exec_delete();

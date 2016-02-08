@@ -96,7 +96,7 @@ class Db_tst_qry {
 		DataRdr rdr = DataRdr_.Null;
 		Bry_bfr bfr = Bry_bfr.new_();
 		try {
-			rdr = conn.Exec_qry_as_rdr(qry);
+			rdr = conn.Exec_qry_as_old_rdr(qry);
 			int expd_row_idx = 0, expd_row_max = rows.Count();
 			while (rdr.MoveNextPeer()) {
 				if (expd_row_idx == expd_row_max) break;
@@ -127,11 +127,11 @@ class Db_tst_qry {
 		}
 		if (!pass) {
 			bfr.Add(Lbl_row_hdr).Add_int_variable(expd_row_idx).Add_byte_nl();
-			bfr.Add_str_u8(qry.Xto_sql()).Add_byte(Byte_ascii.Semic);
+			bfr.Add_str_u8(qry.To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr_.Sqlite)).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}	static final byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
-	public static Db_tst_qry tbl_(String tbl_name, String order_by) {return new_(Db_qry_.select_tbl_(tbl_name).OrderBy_asc_(order_by));}
+	public static Db_tst_qry tbl_(String tbl_name, String order_by) {return new_(Db_qry_.select_tbl_(tbl_name).Order_asc_(order_by));}
 	public static Db_tst_qry new_(Db_qry qry) {
 		Db_tst_qry rv = new Db_tst_qry();
 		rv.qry = qry;

@@ -42,14 +42,14 @@ class Xows_ui_async_fxt {
 		html_row.Fmtr().Fmt_("~{page_key}");
 		async = new Xows_ui_async__html(Cancelable_.Never, html_row, js_wkr, 5, Bry_enwiki);
 	}
-	public Xows_db_row Make_rslt(int len, String ttl) {
+	public Srch_rslt_itm Make_rslt(int len, String ttl) {
 		byte[] ttl_bry = Bry_.new_a7(ttl);
-		return new Xows_db_row(Bry_enwiki, wiki.Ttl_parse(ttl_bry), 1, len);
+		return new Srch_rslt_itm(Bry_enwiki, wiki.Ttl_parse(ttl_bry), 1, len);
 	}
 	public Object[] Make_args_append(String uid, String html)	{return Object_.Ary(Xog_js_wkr__log.Proc_append_above, uid, html);}
 	public Object[] Make_args_replace(String uid)				{return Object_.Ary(Xog_js_wkr__log.Proc_replace_html, uid, "");}
-	public void Test_add(Xows_db_row row, Object[]... expd) {
-		async.Add(row);
+	public void Test_add(Srch_rslt_itm row, Object[]... expd) {
+		async.Notify_rslt_found(row);
 		int expd_len = expd.length;
 		Tfds.Eq(expd_len, js_wkr.Log__len());
 		for (int i = 0; i < expd_len; ++i) {

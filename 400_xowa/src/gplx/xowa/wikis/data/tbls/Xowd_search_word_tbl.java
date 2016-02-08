@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*; import
 public class Xowd_search_word_tbl implements Rls_able {
 	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_id, fld_text; private String fld_page_count; private boolean page_count_exists;
-	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by, stmt_select_in;
+	public final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by, stmt_select_in;
 	public Xowd_search_word_tbl(Db_conn conn, boolean schema_is_1, boolean page_count_exists) {
 		this.conn = conn; this.page_count_exists = page_count_exists;
 		String fld_prefix = "", fld_text_name = "word_text";
@@ -31,6 +31,11 @@ public class Xowd_search_word_tbl implements Rls_able {
 		this.fld_page_count		= page_count_exists ? flds.Add_int_dflt("word_page_count", 0) : Dbmeta_fld_itm.Key_null;
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;}
+	public String Fld_id() {return fld_id;}
+	public String Fld_text() {return fld_text;}
+	public String Fld_page_count() {return fld_page_count;}
+	public String Fld_page_score_max() {return Dbmeta_fld_itm.Key_null;}
 	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_text, fld_id, fld_page_count));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__search_word__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
@@ -52,7 +57,7 @@ public class Xowd_search_word_tbl implements Rls_able {
 	}
 	public Xowd_search_word_row[] Select_in(Cancelable cxl, byte[] word) {
 		if (stmt_select_in == null) {
-			Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).OrderBy_(fld_page_count, Bool_.N).Where_(Db_crt_.like_(fld_text, ""));	// order by highest page count to look at most common words
+			Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Order_(fld_page_count, Bool_.N).Where_(Db_crt_.New_like(fld_text, ""));	// order by highest page count to look at most common words
 			stmt_select_in = conn.Stmt_new(qry);
 		}
 		List_adp list = List_adp_.new_();
@@ -74,10 +79,10 @@ public class Xowd_search_word_tbl implements Rls_able {
 		gplx.core.criterias.Criteria crt = null; 
 		if (Bry_.Has(search, Byte_ascii.Star)) {
 			search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
-			crt = Db_crt_.like_	(fld_text, String_.new_u8(search));
+			crt = Db_crt_.New_like	(fld_text, String_.new_u8(search));
 		}
 		else
-			crt = Db_crt_.eq_	(fld_text, String_.new_u8(search));
+			crt = Db_crt_.New_eq	(fld_text, String_.new_u8(search));
 		Db_qry__select_cmd qry = Db_qry_.select_().Cols_(fld_id).From_(tbl_name).Where_(crt);
 
 		List_adp words = List_adp_.new_();

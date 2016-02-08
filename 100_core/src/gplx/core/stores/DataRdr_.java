@@ -21,6 +21,12 @@ public class DataRdr_ {
 	public static final DataRdr Null = new DataRdr_null();
 	public static DataRdr as_(Object obj) {return obj instanceof DataRdr ? (DataRdr)obj : null;}
 	public static DataRdr cast(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
+
+	public static Object Read_1st_row_and_1st_fld(DataRdr rdr) {
+		try {return rdr.MoveNextPeer() ? rdr.ReadAt(0) : null;}
+		finally {rdr.Rls();}
+	}
+
 }
 class DataRdr_null implements DataRdr {
 	public String NameOfNode() {return To_str();} public String To_str() {return "<< NULL READER >>";}
@@ -34,8 +40,8 @@ class DataRdr_null implements DataRdr {
 	public KeyVal KeyValAt(int i) {return KeyVal_.new_(this.KeyAt(i), this.ReadAt(i));}
 	public Object Read(String name) {return null;}
 	public String ReadStr(String key) {return String_.Empty;}			public String ReadStrOr(String key, String or) {return or;}
-	public byte[] ReadBryByStr(String key) {return Bry_.Empty;}		public byte[] ReadBryByStrOr(String key, byte[] or) {return or;}
-	public byte[] ReadBry(String key) {return Bry_.Empty;}			public byte[] ReadBryOr(String key, byte[] or) {return or;}
+	public byte[] ReadBryByStr(String key) {return Bry_.Empty;}			public byte[] ReadBryByStrOr(String key, byte[] or) {return or;}
+	public byte[] ReadBry(String key) {return Bry_.Empty;}				public byte[] ReadBryOr(String key, byte[] or) {return or;}
 	public char ReadChar(String key) {return Char_.Null;}				public char ReadCharOr(String key, char or) {return or;}
 	public int ReadInt(String key) {return Int_.Min_value;}				public int ReadIntOr(String key, int or) {return or;}
 	public boolean ReadBool(String key) {return false;}					public boolean ReadBoolOr(String key, boolean or) {return or;}			

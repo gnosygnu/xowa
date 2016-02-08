@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
 public interface Db_engine {
 	String			Tid();
 	Db_conn_info	Conn_info();
+	Sql_qry_wtr		Sql_wtr();
 	Db_engine		New_clone(Db_conn_info url);
 	Db_rdr			New_rdr__rls_manual	(Object rdr_obj, String sql);				// Object o:ResultSet if desktop; Cursor if android
 	Db_rdr			New_rdr__rls_auto	(Db_stmt stmt, Object rdr_obj, String sql);	// Object o:ResultSet if desktop; Cursor if android

@@ -41,19 +41,19 @@ public class Xod_app {
 		Xoa_url url = wiki.Utl__url_parser().Parse(random_ttl_bry);
 		return Wiki__get_by_url(wiki, url);
 	}
-	public String[] Wiki__search(Cancelable cancelable, Xow_wiki wiki, Xows_ui_async ui_async, String search) {
-		Xows_db_wkr search_wkr = new Xows_db_wkr();
-		Xows_db_row[] rows = search_wkr.Search_by_drd(cancelable, wiki, ui_async, Bry_.new_u8(search), 50);
-		int len = rows.length;
-		String[] rv = new String[len];
-		for (int i = 0; i < len; ++i) {
-			rv[i] = String_.new_u8(rows[i].Page_ttl().Page_txt());
-		}
-		return rv;
-	}
-	public void Wiki__search(Cancelable cancelable, Xow_wiki wiki, Xows_ui_async ui_async, String search, Xod_search_cmd[] cmds) {
+//		public String[] Wiki__search(Cancelable cancelable, Srch_rslt_lnr rslt_lnr, Xow_wiki wiki, String search) {
+//			Srch_db_wkr search_wkr = new Srch_db_wkr();
+//			Srch_rslt_itm[] rows = search_wkr.Search_by_drd(cancelable, wiki, ui_async, Bry_.new_u8(search), 50);
+//			int len = rows.length;
+//			String[] rv = new String[len];
+//			for (int i = 0; i < len; ++i) {
+//				rv[i] = String_.new_u8(rows[i].page_ttl.Page_txt());
+//			}
+//			return rv;
+//		}
+	public void Wiki__search(Cancelable cancelable, Srch_rslt_lnr rslt_lnr, Xow_wiki wiki, String search, Xod_search_cmd[] cmds) {
 		for (Xod_search_cmd cmd : cmds)
-			cmd.Search(cancelable, wiki, ui_async, search);
+			cmd.Search(cancelable, rslt_lnr, wiki, search);
 	}
 	public void Page__load_files(Xow_wiki wiki, Xod_page_itm pg, Xog_js_wkr js_wkr) {
 		file_mgr.Load_files(wiki, pg, js_wkr);

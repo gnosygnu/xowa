@@ -94,7 +94,7 @@ class TdbEngineFxt {
 	}
 	public void run_InsertRow(TdbEngine engine, String tblName, int idVal) {
 		Db_qry_insert cmd = new Db_qry_insert(tblName);
-		cmd.Arg_("id", idVal);
+		cmd.Val_int("id", idVal);
 		engine.Exec_as_obj(cmd);
 	}
 

@@ -95,7 +95,7 @@ class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 	public Xof_orig_tbl__in_wkr Init(Ordered_hash rv, List_adp itms) {this.itms = itms; this.rv = rv; return this;}
 	@Override protected Db_qry Make_qry(int bgn, int end) {
 		Object[] part_ary = In_ary(end - bgn);			
-		return Db_qry_.select_cols_(tbl_name, Db_crt_.in_(fld_ttl, part_ary), flds.To_str_ary());
+		return Db_qry_.select_cols_(tbl_name, Db_crt_.New_in(fld_ttl, part_ary), flds.To_str_ary());
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

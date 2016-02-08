@@ -66,6 +66,7 @@ public class Dbmeta_fld_list {
 	public String Add_text(String name)					{return Add(Dbmeta_fld_itm.new_text(name));}
 	public String Add_bry(String name)					{return Add(Dbmeta_fld_itm.new_bry(name));}
 	public String Add_str(String name, int len)			{return Add(Dbmeta_fld_itm.new_str(name, len));}
+	public String Add_date(String name)					{return Add(Dbmeta_fld_itm.new_str(name, 32));}
 	public String Add_str_pkey(String name, int len)	{return Add(Dbmeta_fld_itm.new_str(name, len).Primary_y_());}
 	public String Add_str_null(String name, int len)	{return Add(Dbmeta_fld_itm.new_str(name, len).Nullable_y_());}
 	public String Add_str_dflt(String name, int len, String dflt)

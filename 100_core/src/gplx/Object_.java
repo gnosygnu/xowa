@@ -56,5 +56,6 @@ public class Object_ {
 		else if	(Type_adp_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}
+	public static final Object Null = null;
 	public static final byte[] Bry__null = Bry_.new_a7("null");
 }

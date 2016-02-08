@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
 public class Criteria_fld implements Criteria {
-	Criteria_fld(String key, Criteria crt) {this.key = key; this.crt = crt;}
+	Criteria_fld(String pre, String key, Criteria crt) {this.pre = pre; this.key = key; this.crt = crt;}
 	public byte			Tid() {return Criteria_.Tid_wrapper;}
+	public String		Pre() {return pre;} private final String pre;
 	public String		Key() {return key;} private final String key;
 	public Criteria		Crt() {return crt;} private final Criteria crt;
 	public void			Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
@@ -34,9 +35,11 @@ public class Criteria_fld implements Criteria {
 		return crt.Matches(comp);
 	}
 	public String		To_str() {return String_.Concat(key, " ", crt.To_str());}
-	public static final String Key_null = null;
+
+	public static final String Key_null = null, Pre_null = null;
 	public static Criteria_fld as_(Object obj) {return obj instanceof Criteria_fld ? (Criteria_fld)obj : null;}
-	public static Criteria_fld new_(String key, Criteria crt) {return new Criteria_fld(key, crt);}
+	public static Criteria_fld new_(String pre, String key, Criteria crt)	{return new Criteria_fld(pre, key, crt);}
+	public static Criteria_fld new_(String key, Criteria crt)				{return new Criteria_fld(Pre_null, key, crt);}
 	public static Object Fill_val(String key, byte tid, List_adp list) {
 		int len = list.Count();
 		switch (tid) {

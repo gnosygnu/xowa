@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
+import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
 class Db_diff_bldr {
 	private final Bry_bfr bfr = Bry_bfr.new_();
-	private final Db_sqlbldr__sqlite sql_bldr = new Db_sqlbldr__sqlite();
+	private final Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
 	public Db_diff_bldr() {sql_bldr.Bfr_(bfr);}
 	public String Compare_db(String src_str, String trg_str) {
 //			Io_url src_url = Io_url_.new_fil_(src_str);

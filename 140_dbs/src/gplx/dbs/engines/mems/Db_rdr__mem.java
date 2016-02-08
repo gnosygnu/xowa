@@ -40,5 +40,6 @@ public class Db_rdr__mem implements Db_rdr {
 	public double Read_double(String k)			{return Double_.cast(row.Get_by(k));}
 	public boolean Read_bool_by_byte(String k)		{return Byte_.cast(row.Get_by(k)) == 1;}
 	public Object Read_obj(String k)			{return row.Get_by(k);}
+	public Object Read_at(int i)				{return row.Get_at(i);}
 	public void Rls()							{}
 }

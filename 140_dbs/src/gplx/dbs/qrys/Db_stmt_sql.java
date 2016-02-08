@@ -91,6 +91,18 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		try {Add(k, Val_str_wrap(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
+	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(Bool_.Y, k, v);}
+	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(Bool_.N, k, v);}
+	private Db_stmt Add_date(boolean where, String k, DateAdp v) {
+		try {Add(k, Val_str_wrap(v.XtoStr_fmt_iso_8561()));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "date", "val", v);} 
+		return this;
+	}
+	public Db_stmt Crt_text(String k, String v)	{return Add_text(Bool_.Y, k, v);}
+	public Db_stmt Val_text(String k, String v)	{return Add_text(Bool_.N, k, v);}
+	private Db_stmt Add_text(boolean where, String k, String v) {
+		try {Add(k, Val_str_wrap(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v);} 
+		return this;
+	}
 	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
@@ -112,12 +124,12 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		try {int rv = conn.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql_orig);}
 	}
 	public DataRdr Exec_select() {
-		try {DataRdr rv = conn.Exec_qry_as_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql_orig);}
+		try {DataRdr rv = conn.Exec_qry_as_old_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql_orig);}
 	}	
 	public Db_rdr Exec_select__rls_auto()	{return Db_rdr_.Empty;}
 	public Db_rdr Exec_select__rls_manual() {return Db_rdr_.Empty;}
 	public Object Exec_select_val() {
-		try {Object rv = Db_qry__select_cmd.Rdr_to_val(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql_orig);}
+		try {Object rv = DataRdr_.Read_1st_row_and_1st_fld(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql_orig);}
 	}
 	public Db_stmt Clear() {
 		args.Clear();

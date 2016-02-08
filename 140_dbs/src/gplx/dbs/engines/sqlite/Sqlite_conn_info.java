@@ -30,18 +30,19 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 	public static Db_conn_info load_(Io_url url) {
 		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key"		, Tid_const
-		, "data source"		, url.Xto_api()
-		, "version"			, "3"
+		, Cs__data_source	, url.Xto_api()
+		, Cs__version		, Cs__version__3
 		));
 	}
 	public static Db_conn_info make_(Io_url url) {
 		Io_mgr.Instance.CreateDirIfAbsent(url.OwnerDir());
 		return Db_conn_info_.parse(Bld_raw
 		( "gplx_key"		, Tid_const
-		, "data source"		, url.Xto_api()
-		, "version"			, "3"
+		, Cs__data_source	, url.Xto_api()
+		, Cs__version		, Cs__version__3
 			
 		));
 	}
 	public static final Sqlite_conn_info Instance = new Sqlite_conn_info(); Sqlite_conn_info() {}
+	public static final String Cs__data_source = "data source", Cs__version = "version", Cs__version__3 = "3";
 }

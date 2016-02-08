@@ -31,7 +31,7 @@ class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private void Exec_main() {
 		Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
-		Db_rdr rdr = conn.Stmt_new(gplx.dbs.qrys.Db_qry_sql.rdr_(Sql_select)).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_new(gplx.dbs.qrys.Db_qry_sql.rdr_(Sql_select_itm)).Exec_select__rls_auto();
 //			html_tbl = new Xowd_html_tbl(conn, wiki.Db_mgr_as_sql().Core_data_mgr().Props().Zip_tid_text());
 		int cur_page_id = -1;
 		while (rdr.Move_next()) {
@@ -57,7 +57,7 @@ class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (page_id == -1 || data.length == 0) return;
 //			html_tbl.Insert(page_id, Xohd_img_tid.Tid_img, data);
 	}
-	private static final String Sql_select = String_.Concat_lines_nl_skip_last
+	private static final String Sql_select_itm = String_.Concat_lines_nl_skip_last
 	( "SELECT  lt.lnki_page_id"
 	, ",       lt.html_uid"
 	, ",       lt.lnki_ttl"

@@ -23,11 +23,11 @@ class Gfdb_diff_cmd {
 	public Gfdb_diff_cmd() {
 		diff_bldr.Init(diff_bldr_wkr);
 	}
-	public Gfdb_diff_job New_job(Gfdb_diff_db db, String guid, String name, String made_by, String desc) {
+	public Gfdb_diff_job New_job(Gdif_db db, String guid, String name, String made_by, String desc) {
 		return new Gfdb_diff_job(db);
 	}
 	public void Bld(Gfdb_diff_job job, Gfdb_diff_tbl_mgr lhs_mgr, Gfdb_diff_tbl_mgr rhs_mgr) {
-		diff_bldr_wkr.Init_conn(job.Db(), 1000);
+		diff_bldr_wkr.Init_conn(job.Db(), 1000);			
 		int rhs_len = rhs_mgr.Len();
 		for (int i = 0; i < rhs_len; ++i) {
 			Gfdb_diff_tbl rhs_tbl = rhs_mgr.Get_at(i);
@@ -53,6 +53,6 @@ class Gfdb_diff_cmd {
 	}
 }
 class Gfdb_diff_job {
-	public Gfdb_diff_job(Gfdb_diff_db db) {this.db = db;}
-	public Gfdb_diff_db Db() {return db;} private Gfdb_diff_db db;
+	public Gfdb_diff_job(Gdif_db db) {this.db = db;}
+	public Gdif_db Db() {return db;} private Gdif_db db;
 }

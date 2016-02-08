@@ -16,10 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.engines.*; import gplx.dbs.qrys.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sys.*;
 public class Db_conn {
 	private final List_adp rls_list = List_adp_.new_(); private final Db_engine engine;
-	public Db_conn(Db_engine engine) {this.engine = engine;}
+	public Db_conn(Db_engine engine) {
+		this.engine = engine;
+		sys_mgr = new Db_sys_mgr(this);
+	}
+	public Db_engine		Engine()				{return engine;}
 	public Db_conn_info		Conn_info()				{return engine.Conn_info();}
 	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Xto_api(), comp.Conn_info().Xto_api());}
 	public void				Txn_bgn(String name)	{engine.Txn_bgn(name);}
@@ -28,8 +32,8 @@ public class Db_conn {
 	public void				Txn_sav()				{engine.Txn_sav();}
 	public Db_stmt			Stmt_insert(String tbl, Dbmeta_fld_list flds)							{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, flds.To_str_ary_wo_autonum()));}
 	public Db_stmt			Stmt_insert(String tbl, String... cols)							{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, cols));}
-	public Db_stmt			Stmt_update(String tbl, String[] where, String... cols)			{return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, cols));}
-	public Db_stmt			Stmt_update_exclude(String tbl, Dbmeta_fld_list flds, String... where) {return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, flds.To_str_ary_exclude(where)));}
+	public Db_stmt			Stmt_update(String tbl, String[] where, String... cols)			{return engine.New_stmt_prep(Db_qry_update.New(tbl, where, cols));}
+	public Db_stmt			Stmt_update_exclude(String tbl, Dbmeta_fld_list flds, String... where) {return engine.New_stmt_prep(Db_qry_update.New(tbl, where, flds.To_str_ary_exclude(where)));}
 	public Db_stmt			Stmt_delete(String tbl, String... where)							{return engine.New_stmt_prep(Db_qry_delete.new_(tbl, where));}
 	public Db_stmt			Stmt_select(String tbl, String[] cols, String... where)			{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, cols, null));}
 	public Db_stmt			Stmt_select(String tbl, Dbmeta_fld_list flds, String... where)	{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), null));}
@@ -40,6 +44,7 @@ public class Db_conn {
 	public Db_stmt			Stmt_select_order(String tbl, Dbmeta_fld_list flds, String[] where, String... orderbys) {return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), orderbys));}
 	public Db_stmt			Stmt_select_order(String tbl, String[] flds, String[] where, String... orderbys) {return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds, orderbys));}
 	public Db_stmt			Stmt_new(Db_qry qry) {return engine.New_stmt_prep(qry);}
+	public Db_sys_mgr		Sys_mgr() {return sys_mgr;} private final Db_sys_mgr sys_mgr;
 	public void				Env_db_attach(String alias, Io_url db_url)							{engine.Env_db_attach(alias, db_url);}
 	public void				Env_db_detach(String alias)											{engine.Env_db_detach(alias);}
 	public void				Env_vacuum()														{Exec_sql_plog_ntx("vacuuming: url=" + this.Conn_info().Xto_api(), "VACUUM;");}
@@ -61,6 +66,7 @@ public class Db_conn {
 		engine.Conn_term();
 		Db_conn_pool.Instance.Del(engine.Conn_info());
 	}
+	public void				Exec_delete_all(String tbl)		{Stmt_delete(tbl).Exec_delete();}
 	public int				Exec_sql(String sql)			{return this.Exec_qry(Db_qry_sql.dml_(sql));}
 	public Db_rdr			Exec_sql_as_rdr_v2(String sql)	{return this.Stmt_new(Db_qry_sql.dml_(sql)).Exec_select__rls_auto();}
 	public int				Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
@@ -74,7 +80,7 @@ public class Db_conn {
 		return rv;
 	}
 	public int				Exec_qry(Db_qry qry)		{return Int_.cast(engine.Exec_as_obj(qry));}
-	public DataRdr			Exec_qry_as_rdr(Db_qry qry)	{return DataRdr_.cast(engine.Exec_as_obj(qry));}
 	public int				Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(String_.Format(sql, args)));}
-	public DataRdr			Exec_sql_as_rdr(String sql)						{return this.Exec_qry_as_rdr(Db_qry_sql.rdr_(sql));}
+	public DataRdr			Exec_sql_as_old_rdr(String sql)		{return DataRdr_.cast(engine.Exec_as_obj(Db_qry_sql.rdr_(sql)));}
+	public DataRdr			Exec_qry_as_old_rdr(Db_qry qry)		{return DataRdr_.cast(engine.Exec_as_obj(qry));}
 }

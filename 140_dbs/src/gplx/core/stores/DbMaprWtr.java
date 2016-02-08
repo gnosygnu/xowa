@@ -69,9 +69,9 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	void WriteDataVal(String fld, Object val) {
 		if (insertCmd == null) insertCmd = Db_qry_.insert_(curTableName);
 		if (Type_adp_.Eq_typeSafe(val, String.class))
-			insertCmd.Arg_obj_type_(fld, val, Db_val_type.Tid_varchar);
+			insertCmd.Val_obj_type(fld, val, Db_val_type.Tid_varchar);
 		else
-			insertCmd.Arg_obj_(fld, val);
+			insertCmd.Val_obj(fld, val);
 	}
 	@Override public void WriteNodeEnd() {
 		if (insertCmd != null) insertCmd.Exec_qry(conn);		// occurs for nodes and leaves; for nodes, insertCmd will be null (committed by last leaf)
@@ -100,7 +100,7 @@ class DbMaprWtrUtl {
 		Criteria rv = null;
 		for (DbMaprArg arg : objRootIdxFlds) {
 			Object argVal = GfoInvkAble_.InvkCmd((GfoInvkAble)root, arg.ObjProp());
-			Criteria cur = Db_crt_.eq_(arg.DbFld(), argVal);
+			Criteria cur = Db_crt_.New_eq(arg.DbFld(), argVal);
 			rv = (rv == null) ? cur : Criteria_.And(rv, cur);
 		}
 		return rv;

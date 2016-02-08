@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*;
+import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 import gplx.dbs.metas.*;
 public class Mem_tbl {
 	private final List_adp rows = List_adp_.new_(); private final List_adp where_rows = List_adp_.new_();
@@ -73,8 +73,8 @@ public class Mem_tbl {
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.as_(stmt.Qry());
 		if (qry == null) {
 			Db_qry__select_cmd qry2 = (Db_qry__select_cmd)stmt.Qry();
-			select = qry2.Cols_ary();
-			where = qry2.Where();
+			select = To_str_ary(qry2.Cols().Flds);
+			where = qry2.Where_itm().Root;
 		}
 		else {
 			select = qry.Select_flds();
@@ -83,6 +83,13 @@ public class Mem_tbl {
 		where.Val_from_args(stmt.Crts());
 		Select_rows_where(where_rows, stmt, where);
 		return new Db_rdr__mem(select, (Mem_row[])where_rows.To_ary_and_clear(Mem_row.class));
+	}
+	private String[] To_str_ary(Sql_select_fld_list flds) {
+		int len = flds.Len();
+		String[] rv = new String[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = flds.Get_at(i).Fld;
+		return rv;
 	}
 	private void Select_rows_where(List_adp rv, Db_stmt__mem stmt, Criteria crt) {
 		rv.Clear();

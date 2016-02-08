@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.specials.search.*;
 public interface Xod_search_cmd {
-	void Search(Cancelable cancelable, Xow_wiki wiki, Xows_ui_async ui_async, String search);
+	void Search(Cancelable cancelable, Srch_rslt_lnr rslt_lnr, Xow_wiki wiki, String search);
 }

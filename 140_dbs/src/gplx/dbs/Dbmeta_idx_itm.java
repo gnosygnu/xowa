@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.sqls.*; import gplx.dbs.metas.*;
+import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
 public class Dbmeta_idx_itm {
 	public Dbmeta_idx_itm(boolean unique, String tbl, String name, Dbmeta_idx_fld[] flds) {
 		this.tbl = tbl; this.name = name; this.unique = unique; this.Flds = flds;
@@ -25,7 +25,7 @@ public class Dbmeta_idx_itm {
 	public String Name() {return name;} private final String name;		
 	public boolean Unique() {return unique;} private final boolean unique;
 	public final Dbmeta_idx_fld[] Flds;
-	public String To_sql_create() {return Db_sqlbldr__sqlite.Instance.Bld_create_idx(this);}
+	public String To_sql_create(Sql_qry_wtr sql_wtr) {return sql_wtr.Schema_wtr().Bld_create_idx(this);}
 	public boolean Eq(Dbmeta_idx_itm comp) {
 		return String_.Eq(name, comp.name)
 			&& unique == comp.unique

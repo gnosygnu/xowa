@@ -22,12 +22,12 @@ public class Db_qry_fxt {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);
 		for (int i = 0; i < kvList.Count(); i++) {
 			KeyVal kv = kvList.GetAt(i);
-			qry.Arg_obj_(kv.Key(), kv.Val());
+			qry.Val_obj(kv.Key(), kv.Val());
 		}
 		qry.Exec_qry(conn);
 	}
 	public static GfoNde SelectAll(Db_conn conn, String tblName) {
-		return Db_qry_.select_tbl_(tblName).ExecRdr_nde(conn);
+		return Db_qry_.Exec_as_nde(conn, Db_qry_.select_tbl_(tblName));
 	}
 	public static int SelectAll_count(Db_conn conn, String tblName) {
 		GfoNde nde = Db_qry_fxt.SelectAll(conn, tblName);
@@ -37,16 +37,16 @@ public class Db_qry_fxt {
 		for (String s : ary)
 			Db_qry_.delete_tbl_(s).Exec_qry(conn);
 	}
-	public static void tst_Select(Db_conn conn, String tblName, DbTstRow... expdAry) {
+	public static void tst_Select(Db_conn conn, String tblName, Db_mock_row... expdAry) {
 		GfoNde nde = Db_qry_fxt.SelectAll(conn, tblName);
 		int len = Array_.Len(expdAry);
 		for (int i = 0; i < len; i++) {
-			DbTstRow expdRow = expdAry[i];
+			Db_mock_row expdRow = expdAry[i];
 			int actlIdx = (expdRow.Idx() == -1) ? i : expdRow.Idx();
 			GfoNde actlNde = nde.Subs().FetchAt_asGfoNde(actlIdx);
 			int fldLen = Array_.Len(expdRow.Dat());
 			for (int j = 0; j < fldLen; j++) {
-				DbTstDat expdDat = expdRow.Dat()[j];
+				Db_mock_cell expdDat = expdRow.Dat()[j];
 				Object actlVal = expdDat.Fld() == null ? actlNde.ReadAt(j) : actlNde.Read(expdDat.Fld());
 				Tfds.Eq(expdDat.Val(), actlVal);
 			}

@@ -51,7 +51,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		List_adp list = GetIdxFlds(mgr, mapr);
 		for (Object kvObj : list) {
 			KeyVal kv = (KeyVal)kvObj;
-			cur = Db_crt_.eq_(kv.Key(), kv.Val());
+			cur = Db_crt_.New_eq(kv.Key(), kv.Val());
 			rv = (rv == null) ? cur : Criteria_.And(rv, cur);
 		}
 		return rv;
@@ -80,7 +80,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		if (tblByRootCrt == null) {
 			DataRdr dbRdr = null;
 			try {
-				dbRdr = Db_qry_.select_().From_(mapr.TableName()).Where_(rootCrt).Exec_qry_as_rdr(conn);
+				dbRdr = conn.Exec_qry_as_old_rdr(Db_qry_.select_().From_(mapr.TableName()).Where_(rootCrt));
 				tblByRootCrt = GfoNde_.rdr_(dbRdr);
 			}
 			finally {dbRdr.Rls();}

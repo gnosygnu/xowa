@@ -311,7 +311,7 @@ public class Xoh_thm_hzip_tst {
 		fxt.Wiki().Ns_mgr().Init();
 
 		fxt.Init_mode_is_b256_(Bool_.N);
-		fxt.Exec_write_to_fsys(Io_url_.new_dir_("J:\\xowa\\dev_rls\\html\\"), "debug.html");
+		fxt.Exec_write_to_fsys(Io_url_.new_dir_("J:\\xowa\\research\\html\\"), "debug.html");
 		fxt.Init_mode_is_b256_(Bool_.N);
 	}
 }

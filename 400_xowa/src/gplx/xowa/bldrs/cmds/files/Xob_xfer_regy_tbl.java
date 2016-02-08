@@ -33,19 +33,19 @@ public class Xob_xfer_regy_tbl {
 		p.Exec_sql(Sql_create_data_thumb);
 	}
 	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, Xob_db_file.Name__file_make, Idx_lnki_page_id, Idx_lnki_ttl);}
-	public static DataRdr Select(Db_conn p, byte repo_id, byte[] ttl, int limit) {
+	public static DataRdr Select(Db_conn conn, byte repo_id, byte[] ttl, int limit) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
-			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.mte_(Fld_orig_repo, repo_id), Db_crt_.mt_(Fld_lnki_ttl, String_.new_u8(ttl)), Db_crt_.eq_(Fld_xfer_status, 0)))
-			.OrderBy_many_(Fld_xfer_status, Fld_orig_repo, Fld_lnki_ttl, Fld_file_w)
+			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.New_mte(Fld_orig_repo, repo_id), Db_crt_.New_mt(Fld_lnki_ttl, String_.new_u8(ttl)), Db_crt_.New_eq(Fld_xfer_status, 0)))
+			.Order_asc_many_(Fld_xfer_status, Fld_orig_repo, Fld_lnki_ttl, Fld_file_w)
 			.Limit_(limit)
 			;
-		return p.Exec_qry_as_rdr(qry);
+		return conn.Exec_qry_as_old_rdr(qry);
 	}
-	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_new(Db_qry_sql.rdr_(Sql_select));}
+	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_new(Db_qry_sql.rdr_(Sql_select_itm));}
 	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
 	private static final String
-	  Sql_select = String_.Concat_lines_nl
+	  Sql_select_itm = String_.Concat_lines_nl
 		( "SELECT   *"
 		, "FROM     xfer_regy"
 		, "WHERE    xfer_status  =  0"
@@ -59,17 +59,17 @@ public class Xob_xfer_regy_tbl {
 		, "WHERE    xfer_status  =  0"
 		)
 	;
-	public static DataRdr Select_by_tier_page(Db_conn p, int tier_id, int page_id, int select_interval) {
+	public static DataRdr Select_by_tier_page(Db_conn conn, int tier_id, int page_id, int select_interval) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
-			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_xfer_status, 0), Db_crt_.eq_(Fld_lnki_tier_id, tier_id), Db_crt_.mte_(Fld_lnki_page_id, page_id)))
-			.OrderBy_many_(Fld_lnki_tier_id, Fld_lnki_page_id, Fld_lnki_id)
+			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.New_eq(Fld_xfer_status, 0), Db_crt_.New_eq(Fld_lnki_tier_id, tier_id), Db_crt_.New_mte(Fld_lnki_page_id, page_id)))
+			.Order_asc_many_(Fld_lnki_tier_id, Fld_lnki_page_id, Fld_lnki_id)
 			.Limit_(select_interval)
 			;
-		return p.Exec_qry_as_rdr(qry);
+		return conn.Exec_qry_as_old_rdr(qry);
 	}
 	public static int Select_total_pending(Db_conn p) {
-		DataRdr rdr = p.Exec_sql_as_rdr(Sql_select_total_pending);
+		DataRdr rdr = p.Exec_sql_as_old_rdr(Sql_select_total_pending);
 		int rv = 0;
 		if (rdr.MoveNextPeer())
 			rv = rdr.ReadInt("CountAll");

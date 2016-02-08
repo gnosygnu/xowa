@@ -35,7 +35,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
 		int cur_html_db_id = -1, cur_page_id = -1;
 		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.Conn());
-		Db_rdr rdr = attach_rdr.Exec_as_rdr(Sql_select);			
+		Db_rdr rdr = attach_rdr.Exec_as_rdr(Sql_select_itm);			
 		try {
 			while (rdr.Move_next()) {
 				// switch html_db if needed
@@ -69,7 +69,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if ((commit_count % commit_interval ) == 0)
 			redlink_tbl.Conn().Txn_sav();
 	}
-	private static final String Sql_select = String_.Concat_lines_nl_skip_last
+	private static final String Sql_select_itm = String_.Concat_lines_nl_skip_last
 	( "SELECT p.page_html_db_id"
 	, ",      p.page_id"
 	, ",      ld.src_html_uid"

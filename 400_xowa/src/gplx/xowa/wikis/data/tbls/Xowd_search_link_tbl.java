@@ -21,7 +21,7 @@ import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xowd_search_link_tbl {
 	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_word_id, fld_page_id;
-	private final Db_conn conn; private Db_stmt stmt_insert; private final Xowd_search_page_tbl__in_wkr in_wkr = new Xowd_search_page_tbl__in_wkr();
+	public final Db_conn conn; private Db_stmt stmt_insert; private final Xowd_search_page_tbl__in_wkr in_wkr = new Xowd_search_page_tbl__in_wkr();
 	public Xowd_search_link_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		String fld_prefix = "";
@@ -56,7 +56,7 @@ class Xowd_search_page_tbl__in_wkr extends Db_in_wkr__base {
 	public void Init(List_adp words, List_adp pages) {this.words = words; this.pages = pages;}
 	@Override protected Db_qry Make_qry(int bgn, int end) {
 		Object[] part_ary = In_ary(end - bgn);			
-		return Db_qry_.select_cols_(tbl_name, Db_crt_.in_(fld_word_id, part_ary), flds.To_str_ary());
+		return Db_qry_.select_cols_(tbl_name, Db_crt_.New_in(fld_word_id, part_ary), flds.To_str_ary());
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

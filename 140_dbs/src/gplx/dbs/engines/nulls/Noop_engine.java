@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
  package gplx.dbs.engines.nulls; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
 public class Noop_engine implements Db_engine {
 	public String			Tid() {return Noop_conn_info.Tid_const;}
 	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}
+	public Sql_qry_wtr		Sql_wtr() {return sql_wtr;} private final Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
 	public void				Conn_open() {}
 	public void				Conn_term() {}
 	public Db_engine		New_clone(Db_conn_info url) {return this;}

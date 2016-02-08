@@ -19,7 +19,7 @@ package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_qry_select_tst {
 	@Before public void setup() {
-		cmd = Db_qry__select_cmd.new_();
+		cmd = new Db_qry__select_cmd();
 	}	Db_qry__select_cmd cmd; String expd;
 	@Test  public void Basic() {
 		cmd.Cols_("fld0", "fld1").From_("tbl0");
@@ -40,25 +40,25 @@ public class Db_qry_select_tst {
 		tst_XtoStr(cmd, expd);
 	}		
 	@Test  public void Where() {
-		cmd.From_("tbl0").Where_(Db_crt_.eq_("fld0", 0));
-		expd = "SELECT * FROM tbl0 WHERE fld0=0";
+		cmd.From_("tbl0").Where_(Db_crt_.New_eq("fld0", 0));
+		expd = "SELECT * FROM tbl0 WHERE fld0 = 0";
 
 		tst_XtoStr(cmd, expd);
 	}
 	@Test  public void Join() {
-		cmd.From_("tbl0").Join_("tbl1", "t1", Sql_join_itm.new_("fld1", "tbl0", "fld0"));
-		expd = "SELECT * FROM tbl0 INNER JOIN tbl1 t1 ON tbl0.fld0=t1.fld1";
+		cmd.From_("tbl0").Join_("tbl1", "t1", Db_qry_.New_join__join("fld1", "tbl0", "fld0"));
+		expd = "SELECT * FROM tbl0 INNER JOIN tbl1 t1 ON tbl0.fld0 = t1.fld1";
 
 		tst_XtoStr(cmd, expd);
 	}		
 	@Test  public void OrderBy() {
-		cmd.From_("tbl0").OrderBy_("fld0", true);
+		cmd.From_("tbl0").Order_("fld0", true);
 		expd = "SELECT * FROM tbl0 ORDER BY fld0";
 
 		tst_XtoStr(cmd, expd);
 	}		
 	@Test  public void OrderByMany() {
-		cmd.From_("tbl0").OrderBy_many_("fld0", "fld1");
+		cmd.From_("tbl0").Order_asc_many_("fld0", "fld1");
 		expd = "SELECT * FROM tbl0 ORDER BY fld0, fld1";
 
 		tst_XtoStr(cmd, expd);
@@ -85,5 +85,5 @@ public class Db_qry_select_tst {
 //			expd = "SELECT fld0, fld1 FROM tbl0 GROUP BY fld0, fld1 HAVING Count(fld0) > 1";
 //			Tfds.Eq(cmd.To_str(), expd);
 //		}
-	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.Xto_sql());}
+	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.To_sql__exec(Sql_qry_wtr_.Basic));}
 }

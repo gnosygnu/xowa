@@ -37,6 +37,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 		Db_conn search_conn = search_db.Conn();
 		Xowd_search_temp_tbl search_temp_tbl = new Xowd_search_temp_tbl(search_conn, db_mgr.Props().Schema_is_1());
 		search_temp_tbl.Create_tbl();
+		search_conn.Exec_delete_all(search_temp_tbl.Tbl_name());
 		search_temp_tbl.Insert_bgn();
 		Xowd_page_tbl page_tbl = db_mgr.Tbl__page();
 		Db_rdr page_rdr = page_tbl.Select_all();

@@ -52,5 +52,32 @@ class Db_conn_info_pool {
 		}
 		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
 	}
+	public Db_conn_info Parse_or_sqlite_or_fail(String raw) {// assume each pair has format of: name=val;
+		GfoMsg msg = GfoMsg_.new_parse_("db_url");
+		String[] kvps = String_.Split(raw, ";");
+		String cs_tid = null;
+		int kvps_len = kvps.length; 
+		for (int i = 0; i < kvps_len; ++i) {
+			String kvp_str = kvps[i];
+			if (String_.Len(kvp_str) == 0) continue;	// ignore empty; EX: "data source=/db.sqlite;;"
+			String[] kvp = String_.Split(kvp_str, "=");
+			String key = kvp[0], val = kvp[1];
+			if (String_.Eq(key, "gplx_key"))
+				cs_tid = val;	// NOTE: do not add to GfoMsg; will not be part of ApiStr
+			else
+				msg.Add(key, val);
+		}
+		if (cs_tid == null) {	// gplx_key not found; try url as sqlite; EX: "/db.sqlite"
+			Io_url sqlite_url = null;
+			try {sqlite_url = Io_url_.new_any_(raw);}
+			catch (Exception exc) {throw Err_.new_exc(exc, "dbs", "invalid connection String", "raw", raw);}
+			msg.Clear();
+			cs_tid = Sqlite_conn_info.Tid_const;
+			msg.Add(Sqlite_conn_info.Cs__data_source, sqlite_url.Raw());
+			msg.Add(Sqlite_conn_info.Cs__version	, Sqlite_conn_info.Cs__version__3);
+		}
+		Db_conn_info prototype = (Db_conn_info)regy.Get_by(cs_tid);
+		return prototype.New_self(raw, msg);
+	}
 	public static final Db_conn_info_pool Instance = new Db_conn_info_pool();
 }

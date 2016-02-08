@@ -26,9 +26,9 @@ public class Xows_ns_mgr {
 		ns_all = ns_main = false;
 	}
 	public boolean Has(int ns_id) {
-		return ns_all								// all flag set
+		return ns_all									// all flag set
 			|| ns_main && ns_id == Xow_ns_.Tid__main	// main flag set
-			|| ns_hash.Has(tmp_ns_id.Val_(ns_id))	// check against ns_hash
+			|| ns_hash.Has(tmp_ns_id.Val_(ns_id))		// check against ns_hash
 			;
 	}
 	public void Add_by_id(int ns_id) {
@@ -48,7 +48,7 @@ public class Xows_ns_mgr {
 		int ns_enabled = Bry_.To_int_or_neg1(val);
 		if (ns_enabled == 1) {										// make sure set to 1; EX: ignore &ns0=0
 			int key_len = key.length;
-			if (key_len == 3 && key[2] == Byte_ascii.Star)		// translate ns* as ns_all
+			if (key_len == 3 && key[2] == Byte_ascii.Star)			// translate ns* as ns_all
 				ns_all = true;
 			else {
 				int ns_id = Bry_.To_int_or(key, 2, key_len, Int_.Min_value);

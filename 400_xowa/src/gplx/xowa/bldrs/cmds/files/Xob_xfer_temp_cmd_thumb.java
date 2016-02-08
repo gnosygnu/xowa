@@ -28,7 +28,7 @@ public class Xob_xfer_temp_cmd_thumb extends Xob_itm_basic_base implements Xob_c
 		Xob_xfer_temp_tbl.Create_table(conn);
 		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
 		conn.Txn_bgn("bldr__xfer_temp_thumb");
-		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
+		DataRdr rdr = conn.Exec_sql_as_old_rdr(Sql_select_itm);
 		Xob_xfer_temp_itm temp_itm = new Xob_xfer_temp_itm();
 		Xof_img_size img_size = new Xof_img_size();
 		byte[] cur_ttl = Bry_.Empty; byte cur_repo = Byte_.Max_value_127;
@@ -52,7 +52,7 @@ public class Xob_xfer_temp_cmd_thumb extends Xob_itm_basic_base implements Xob_c
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	private static final String
-		Sql_select = String_.Concat_lines_nl
+		Sql_select_itm = String_.Concat_lines_nl
 	(	"SELECT  l.lnki_id"
 	,	",       l.lnki_tier_id"
 	,	",       l.lnki_page_id"

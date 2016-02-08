@@ -113,8 +113,10 @@ public class DateAdp_ implements GfoInvkAble {
 		return new DateAdp(c);
 	}
 		public static final int SegIdx_year = 0, SegIdx_month = 1, SegIdx_day = 2, SegIdx_hour = 3, SegIdx_minute = 4, SegIdx_second = 5, SegIdx_frac = 6, SegIdx_dayOfWeek = 7, SegIdx_weekOfYear = 8, SegIdx_dayOfYear = 9, SegIdx__max = 10;
-	public static final String Fmt_iso8561_date_time = "yyyy-MM-dd HH:mm:ss";
 	public static String Xto_str_fmt_or(DateAdp v, String fmt, String or) {
 		return v == null ? or : v.XtoStr_fmt(fmt);
 	}
+	public static final String 
+	  Fmt_iso8561_date_time = "yyyy-MM-dd HH:mm:ss"
+	, Fmt__yyyyMMdd			= "yyyyMMdd";
 }

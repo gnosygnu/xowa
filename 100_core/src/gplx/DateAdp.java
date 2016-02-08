@@ -23,11 +23,6 @@ import java.text.SimpleDateFormat;
 public class DateAdp implements CompareAble, GfoInvkAble {
 	public int compareTo(Object obj)		{DateAdp comp = (DateAdp)obj; return under.compareTo(comp.under);}
 	@Override public String toString()		{return XtoStr_gplx_long();}
-	public String XtoStr_gplx()				{return XtoStr_fmt("yyyyMMdd_HHmmss.fff");}
-	public String XtoStr_gplx_long()		{return XtoStr_fmt("yyyy-MM-dd HH:mm:ss.fff");}
-	public String XtoStr_fmt_HHmmss()		{return XtoStr_fmt("HH:mm:ss");}
-	public String XtoStr_fmt_HHmm()			{return XtoStr_fmt("HH:mm");}
-	public String XtoStr_fmt_yyyy_MM_dd()	{return XtoStr_fmt("yyyy-MM-dd");}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m)  {
 		if		(ctx.Match(k, Invk_XtoStr_fmt))		return XtoStr_fmt("yyyy-MM-dd HH:mm:ss");
 		else if (ctx.Match(k, Invk_AddDays)) {
@@ -63,6 +58,11 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 		rv[DateAdp_.SegIdx_frac]	= this.Frac();
 		return rv;
 	}
+	public String XtoStr_gplx()						{return XtoStr_fmt("yyyyMMdd_HHmmss.fff");}
+	public String XtoStr_gplx_long()				{return XtoStr_fmt("yyyy-MM-dd HH:mm:ss.fff");}
+	public String XtoStr_fmt_HHmmss()				{return XtoStr_fmt("HH:mm:ss");}
+	public String XtoStr_fmt_HHmm()					{return XtoStr_fmt("HH:mm");}
+	public String XtoStr_fmt_yyyy_MM_dd()			{return XtoStr_fmt("yyyy-MM-dd");}
 	public String XtoStr_fmt_yyyyMMdd_HHmmss()		{return XtoStr_fmt("yyyyMMdd_HHmmss");}
 	public String XtoStr_fmt_yyyyMMdd_HHmmss_fff()	{return XtoStr_fmt("yyyyMMdd_HHmmss.fff");}
 	public String XtoStr_fmt_yyyyMMdd_HHmm()		{return XtoStr_fmt("yyyyMMdd_HHmm");}

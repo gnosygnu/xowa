@@ -40,8 +40,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	public String Having_sql() {return having_sql;} private final String having_sql;
 	public String Order_by_sql() {return order_by_sql;} public Db_qry__select_in_tbl Order_by_sql_(String v) {order_by_sql = v; return this;} private String order_by_sql;
 	public String Limit_sql() {return limit_sql;} private final String limit_sql;
-	public String XtoSql() {return Xto_sql();}
-	public String Xto_sql() {
+	public String To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr) {
 		synchronized (this) {
 			String_bldr sb = String_bldr_.new_();
 			sb.Add("SELECT ");

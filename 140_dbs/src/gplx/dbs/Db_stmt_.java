@@ -24,7 +24,7 @@ public class Db_stmt_ {
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_update_(Db_conn conn, String tbl, String[] where, String... flds) {
-		Db_qry qry = Db_qry_update.new_(tbl, where, flds);
+		Db_qry qry = Db_qry_update.New(tbl, where, flds);
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_delete_(Db_conn conn, String tbl, String... where) {
@@ -36,7 +36,7 @@ public class Db_stmt_ {
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_select_in_(Db_conn conn, String tbl, String in_fld, Object[] in_vals, String... flds) {
-		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl, Db_crt_.in_(in_fld, in_vals), flds).OrderBy_asc_(in_fld);
+		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl, Db_crt_.New_in(in_fld, in_vals), flds).Order_asc_(in_fld);
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_select_all_(Db_conn conn, String tbl) {

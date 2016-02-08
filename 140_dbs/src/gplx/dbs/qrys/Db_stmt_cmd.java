@@ -26,7 +26,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt_cmd(Db_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);}
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {
 		this.engine = engine;
-		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).Xto_sql() : Sql_qry_wtr_.Instance.Xto_str(qry, true);
+		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).To_sql__exec(engine.Sql_wtr()) : engine.Sql_wtr().To_sql_str(qry, true);
 		Reset_stmt();
 	}
 	public Db_stmt Reset_stmt() {
@@ -101,9 +101,23 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
-	private Db_stmt Add_str(boolean where, String k, String v) {
+	@gplx.Virtual protected Db_stmt Add_str(boolean where, String k, String v) {
 		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {stmt.setString(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v, "sql", sql);}	
+		return this;
+	}
+	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(Bool_.Y, k, v);}
+	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(Bool_.N, k, v);}
+	@gplx.Virtual protected Db_stmt Add_date(boolean where, String k, DateAdp v) {
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		try {stmt.setTimestamp(++val_idx, new java.sql.Timestamp(v.UnderDateTime().getTime().getTime()));} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "date", "val", v, "sql", sql);}	
+		return this;
+	}
+	public Db_stmt Crt_text(String k, String v)	{return Add_text(Bool_.Y, k, v);}
+	public Db_stmt Val_text(String k, String v)	{return Add_text(Bool_.N, k, v);}
+	private Db_stmt Add_text(boolean where, String k, String v) {
+		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		try {stmt.setString(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
@@ -144,7 +158,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		try {return engine.New_rdr__rls_manual(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.new_exc(e, "db", "select failed", "sql", sql);}	
 	}
 	public Object Exec_select_val() {
-		try {Object rv = Db_qry__select_cmd.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
+		try {Object rv = DataRdr_.Read_1st_row_and_1st_fld(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
 	}
 	public Db_stmt Clear() {
 		val_idx = 0;

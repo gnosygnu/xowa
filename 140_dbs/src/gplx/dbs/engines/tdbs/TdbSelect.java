@@ -16,19 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
+import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*; 
 import gplx.core.lists.*; /*ComparerAble*/ import gplx.core.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
-		if (cmd.From().Tbls().Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.Xto_sql());
+		if (cmd.From().Tbls.Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.To_sql__exec(engineObj.Sql_wtr()));
 
-		TdbTable tbl = engine.FetchTbl(cmd.From().BaseTable().TblName());
-		GfoNdeList rv = (cmd.Where() == Db_qry_.WhereAll && cmd.Limit() == Db_qry__select_cmd.Limit_disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where(), cmd.Limit());
+		TdbTable tbl = engine.FetchTbl(cmd.From().Base_tbl.Name);
+		GfoNdeList rv = (cmd.Where_itm() == Sql_where_itm.Where__null && cmd.Limit() == Db_qry__select_cmd.Limit__disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where_itm().Root, cmd.Limit());
 		if (cmd.GroupBy() != null)
 			rv = TdbGroupByWkr.GroupByExec(cmd, rv, tbl);
-		if (cmd.OrderBy() != null) {	// don't use null pattern here; if null ORDER BY, then don't call .Sort on GfoNdeList
-			ComparerAble comparer = Sql_order_by_sorter.new_((Sql_order_by_itm[])cmd.OrderBy().Flds().To_ary(Sql_order_by_itm.class));
+		if (cmd.Order() != null) {	// don't use null pattern here; if null ORDER BY, then don't call .Sort on GfoNdeList
+			ComparerAble comparer = Sql_order_fld_sorter.new_(cmd.Order().Flds);
 			rv.Sort_by(comparer);
 		}
 		return GfoNdeRdr_.peers_(rv, false);
@@ -44,6 +44,19 @@ class TdbSelectWkr implements Db_qryWkr {
 		}
 		return rv;
 	}
+	public static GfoFldList To_GfoFldLst(TdbTable tbl, Sql_select_fld_list flds) {
+		GfoFldList rv = GfoFldList_.new_();
+		int len = flds.Len();
+		for (int i = 0; i < len; ++i) {
+			Sql_select_fld selectFld = flds.Get_at(i);
+			GfoFld fld = tbl.Flds().FetchOrNull(selectFld.Fld);
+			if (fld == null) throw Err_.new_wo_type("fld not found in tbl", "fldName", selectFld.Fld, "tblName", tbl.Name(), "tblFlds", tbl.Flds().To_str());
+			if (rv.Has(selectFld.Alias)) throw Err_.new_wo_type("alias is not unique", "fldName", selectFld.Fld, "flds", rv.To_str());
+			selectFld.GroupBy_type(fld.Type());
+			rv.Add(selectFld.Alias, selectFld.Val_type());
+		}
+		return rv;
+	}
 	public static final TdbSelectWkr Instance = new TdbSelectWkr(); TdbSelectWkr() {}
 }
 class TdbGroupByWkr {
@@ -51,15 +64,16 @@ class TdbGroupByWkr {
 		GfoNdeList rv = GfoNdeList_.new_();
 		Ordered_hash groupByHash = Ordered_hash_.New();
 		List_adp groupByFlds = select.GroupBy().Flds();
-		GfoFldList selectFldsForNewRow = select.Cols().Flds().XtoGfoFldLst(tbl);
-		Sql_select_fld_list selectFlds = select.Cols().Flds();
+		GfoFldList selectFldsForNewRow = TdbSelectWkr.To_GfoFldLst(tbl, select.Cols().Flds);
+		Sql_select_fld_list selectFlds = select.Cols().Flds;
 		for (int rowIdx = 0; rowIdx < selectRows.Count(); rowIdx++) {
 			GfoNde selectRow = selectRows.FetchAt_asGfoNde(rowIdx);
 			GfoNde groupByRow = FindOrNew(selectFldsForNewRow, groupByFlds, selectRow, groupByHash, rv);
-			for (int i = 0; i < selectFlds.Count(); i++) {
-				Sql_select_fld_base selectFld = selectFlds.Get_at(i);
-				Object val = groupByRow.Read(selectFld.Alias());	// groupByRow is keyed by Alias; EX: Count(Id) AS CountOf
-				groupByRow.WriteAt(i, selectFld.GroupBy_eval(val, selectRow.Read(selectFld.Fld()), selectFld.ValType()));
+			int len = selectFlds.Len();
+			for (int i = 0; i < len; ++i) {
+				Sql_select_fld selectFld = selectFlds.Get_at(i);
+				Object val = groupByRow.Read(selectFld.Alias);	// groupByRow is keyed by Alias; EX: Count(Id) AS CountOf
+				groupByRow.WriteAt(i, selectFld.GroupBy_eval(val, selectRow.Read(selectFld.Fld), selectFld.Val_type()));
 			}
 		}
 		return rv;

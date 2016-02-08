@@ -58,9 +58,9 @@ public class Sqlite_engine_ {
 		int len = idx_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Dbmeta_idx_itm idx = idx_ary[i];
-			String idx_sql = idx.To_sql_create();
+			String idx_sql = idx.To_sql_create(conn.Engine().Sql_wtr());
 			usr_dlg.Plog_many("", "", "creating index: ~{0} ~{1}", tbl, idx_sql);
-			conn.Exec_qry(Db_qry_sql.ddl_(idx.To_sql_create()));
+			conn.Exec_qry(Db_qry_sql.ddl_(idx.To_sql_create(conn.Engine().Sql_wtr())));
 			usr_dlg.Log_many("", "", "index created: ~{0} ~{1}", tbl, idx_sql);
 		}
 	}

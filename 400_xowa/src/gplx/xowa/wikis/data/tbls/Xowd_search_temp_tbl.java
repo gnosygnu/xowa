@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 public class Xowd_search_temp_tbl {
-	private final String tbl_name = "search_temp"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
 	private final String fld_page_id, fld_word_text;
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	private final String sql_create_word, sql_create_link;
@@ -26,10 +26,12 @@ public class Xowd_search_temp_tbl {
 		this.conn = conn;
 		if (schema_is_1)	{sql_create_word = Sql_create_word_v1; sql_create_link = Sql_create_link_v1;}
 		else				{sql_create_word = Sql_create_word_v2; sql_create_link = Sql_create_link_v2;}
+		// flds.Add_int_dflt("word_id", -1);
 		flds.Add_int_pkey_autonum("word_id");
 		fld_page_id			= flds.Add_int("page_id");
 		fld_word_text		= flds.Add_str("word_text", 255);
 	}
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "search_temp"; 
 	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__search_temp__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
@@ -40,7 +42,9 @@ public class Xowd_search_temp_tbl {
 	}	
 	public void Make_data(Gfo_usr_dlg usr_dlg, Xowd_search_link_tbl search_link_tbl, Xowd_search_word_tbl search_word_tbl) {
 		conn.Ddl_create_idx(usr_dlg, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_word_text, fld_page_id));
+		conn.Exec_delete_all(search_word_tbl.Tbl_name());
 		conn.Exec_sql_plog_txn("search_temp.create_word", sql_create_word);
+		conn.Exec_delete_all(search_link_tbl.Tbl_name());
 		conn.Exec_sql_plog_txn("search_temp.create_link", sql_create_link);
 		Create_idx(usr_dlg, search_link_tbl, search_word_tbl);
 		conn.Env_vacuum();
@@ -54,6 +58,23 @@ public class Xowd_search_temp_tbl {
 			usr_dlg.Warn_many("", "", "bldr.search_page.unique_search_failed: err=~{0}", Err_.Message_gplx_full(e));
 			search_link_tbl.Create_idx_normal();;
 		}
+	}
+	public void Update_word_id(Db_conn cur_conn, Io_url prv_url) {
+		String sql = String_.Concat_lines_nl_skip_last
+		( "REPLACE INTO search_temp (word_id, page_id, word_text)"
+		, "SELECT  Coalesce(prv.word_id, cur.word_id), cur.page_id, cur.word_text"
+		, "FROM    search_temp cur"
+		, "        LEFT JOIN <attach_db>search_word prv ON cur.word_text = prv.word_text"
+		);
+		Db_attach_cmd.new_(cur_conn, "prv_db", prv_url).Add_fmt("updating_word_ids", sql).Exec();
+		Db_stmt update_stmt = cur_conn.Stmt_update(tbl_name, String_.Ary(fld_word_text), fld_page_id);
+		Db_rdr rdr = cur_conn.Stmt_select(tbl_name, flds, String_.Ary(fld_page_id)).Crt_int(fld_page_id, -1).Exec_select__rls_auto();
+		int nxt_page_id = 1000;
+		try {
+			while (rdr.Move_next()) {
+				update_stmt.Crt_int(fld_page_id, ++nxt_page_id).Exec_update();
+			}
+		} finally {rdr.Rls();}
 	}
 	private static final String Sql_create_word_v1 = String_.Concat_lines_nl
 	(	"INSERT INTO search_title_word (stw_word_id, stw_word)"

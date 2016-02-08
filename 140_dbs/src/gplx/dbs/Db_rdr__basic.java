@@ -38,6 +38,7 @@ public class Db_rdr__basic implements Db_rdr {
 	@gplx.Virtual public byte			Read_byte(String k)			{try {return Byte_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Byte_.Cls_val_name);}} 
 	@gplx.Virtual public boolean 		Read_bool_by_byte(String k)	{try {return Byte_.cast(rdr.getObject(k)) == 1;} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Bool_.Cls_val_name);}} 
 	@gplx.Virtual public Object 		Read_obj(String k)			{try {return rdr.getObject(k);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Object_.Cls_val_name);}} 
+	@gplx.Virtual public Object 		Read_at(int i)				{try {return rdr.getObject(i);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "idx", i, "type", Object_.Cls_val_name);}} 
 	@gplx.Virtual public void			Rls() {
 		try	{rdr.close();} 
 		catch (Exception e) {throw Err_.new_exc(e, "db", "close failed");}

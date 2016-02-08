@@ -22,7 +22,7 @@ public class Pgbnr_icon implements Mustache_doc_itm {
 	private final byte[] name, title, href, html;
 	public Pgbnr_icon(Bry_bfr tmp_bfr, byte[] name, byte[] title, byte[] href) {
 		this.name = name; this.title = title; this.href = href;
-		fmt.Bld_bfr_many(tmp_bfr, name, title);
+		fmt.Bld_many(tmp_bfr, name, title);
 		this.html = tmp_bfr.To_bry_and_clear();
 	}
 	public byte[] Get_prop(String key) {

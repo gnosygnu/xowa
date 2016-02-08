@@ -49,7 +49,7 @@ class Xob_dump_src_id {
 			cur_text_db_idx = text_db_idx;
 			Xowd_db_file text_db = db_mgr.Core_data_mgr().Dbs__get_at(text_db_idx);
 			Db_conn conn = text_db.Conn();
-			String sql = String_.Format(Sql_select, New_rdr__redirect_clause(redirect));
+			String sql = String_.Format(Sql_select_itm, New_rdr__redirect_clause(redirect));
 			text_stmt = conn.Stmt_new(Db_qry_sql.rdr_(sql));
 		}
 		return text_stmt.Clear().Val_int(prv_id).Val_int(cur_ns).Exec_select();
@@ -75,7 +75,7 @@ class Xob_dump_src_id {
 			default:			throw Err_.new_unhandled(redirect);
 		}
 	}
-	private static final String Sql_select = String_.Concat_lines_nl
+	private static final String Sql_select_itm = String_.Concat_lines_nl
 	( "SELECT  p.page_id"
 	, ",       p.page_title"
 	, ",       t.text_data"

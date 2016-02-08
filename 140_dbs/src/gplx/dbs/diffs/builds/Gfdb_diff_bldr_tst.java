@@ -62,6 +62,7 @@ class Gfdb_diff_bldr_fxt {
 	private final Gfdb_diff_wkr__test wkr = new Gfdb_diff_wkr__test();
 	private final Dbmeta_fld_itm[] flds_ary;
 	private final String tbl_name = "tbl";
+	private final Gdif_bldr_ctx ctx = new Gdif_bldr_ctx();
 	public Gfdb_diff_bldr_fxt() {
 		old_conn = Db_conn_utl.Conn__new("old_db");
 		new_conn = Db_conn_utl.Conn__new("new_db");
@@ -70,13 +71,14 @@ class Gfdb_diff_bldr_fxt {
 		bldr.Init(wkr);
 	}
 	public void Clear() {
+		ctx.Clear();
 		Db_conn_utl.Tbl__delete(old_conn, "tbl");
 		Db_conn_utl.Tbl__delete(new_conn, "tbl");
 	}
 	public void Init__tbl__old(Object[]... rows) {Db_conn_utl.Tbl__new(old_conn, "tbl", flds_ary, rows);}
 	public void Init__tbl__cur(Object[]... rows) {Db_conn_utl.Tbl__new(new_conn, "tbl", flds_ary, rows);}
 	public void Test__bld(String... expd) {
-		bldr.Compare(-1, tbl, old_conn, new_conn);
+		bldr.Compare(ctx, tbl, old_conn, new_conn);
 		Tfds.Eq_ary_str(expd, wkr.To_str_ary());
 	}
 }
@@ -84,7 +86,7 @@ class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
 	private final List_adp list = List_adp_.new_();
 	private final Bry_bfr bfr = Bry_bfr.new_();
 	private Db_rdr old_rdr, new_rdr;
-	public void Init_rdrs(int txn, Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
+	public void Init_rdrs(Gdif_bldr_ctx ctx, Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;
 	}
 	public void Term_tbls() {}

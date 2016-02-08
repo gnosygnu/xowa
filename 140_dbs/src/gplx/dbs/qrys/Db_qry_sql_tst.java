@@ -28,16 +28,16 @@ public class Db_qry_sql_tst {
 	}
 	@Test  public void Update() {
 		fxt.Test_qry
-		( Db_qry_update.new_("tbl", String_.Ary("k1", "k2"), "k3", "k4")
+		( Db_qry_update.New("tbl", String_.Ary("k1", "k2"), "k3", "k4")
 		, Object_.Ary("v3", "v4", "v1", "v2")
-		, "UPDATE tbl SET k3='v3', k4='v4' WHERE (k1='v1' AND k2='v2')"
+		, "UPDATE tbl SET k3='v3', k4='v4' WHERE (k1 = 'v1' AND k2 = 'v2')"
 		);
 	}
 	@Test  public void Delete() {
 		fxt.Test_qry
 		( Db_qry_delete.new_("tbl", String_.Ary("k1", "k2"))
 		, Object_.Ary("v1", "v2")
-		, "DELETE FROM tbl WHERE (k1='v1' AND k2='v2')"
+		, "DELETE FROM tbl WHERE (k1 = 'v1' AND k2 = 'v2')"
 		);
 	}
 }

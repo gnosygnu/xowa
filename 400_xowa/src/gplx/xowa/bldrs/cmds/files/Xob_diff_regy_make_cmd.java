@@ -48,7 +48,7 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 		Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_diff_regy__load);
 	}
 	private void Make_delete_sql(Db_conn make_db_provider) {
-		DataRdr rdr = make_db_provider.Exec_sql_as_rdr(Xob_diff_regy_tbl.Make_deletes);
+		DataRdr rdr = make_db_provider.Exec_sql_as_old_rdr(Xob_diff_regy_tbl.Make_deletes);
 		int cur_db_id = -1, cur_count = 0;
 		Bry_bfr atr_bfr = Bry_bfr.new_(), bin_bfr = Bry_bfr.new_();
 		Io_url sql_tmp_dir = wiki.App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "tmp_sql");

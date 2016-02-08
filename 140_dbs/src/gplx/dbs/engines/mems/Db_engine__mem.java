@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
 public class Db_engine__mem implements Db_engine {
 	private final Hash_adp tbl_hash = Hash_adp_.new_();
 	Db_engine__mem(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public String		Tid() {return Db_conn_info__mem.Tid_const;}
 	public Db_conn_info	Conn_info() {return conn_info;} private Db_conn_info conn_info;
+	public Sql_qry_wtr	Sql_wtr() {return sql_wtr;} private final Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
 	public Db_engine	New_clone(Db_conn_info conn_info) {return new Db_engine__mem(conn_info);}
 	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt__mem(this, qry);}
 	public Mem_tbl		Tbls_get(String name) {return (Mem_tbl)tbl_hash.Get_by(name);}

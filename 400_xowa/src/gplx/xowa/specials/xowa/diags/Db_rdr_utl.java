@@ -25,7 +25,7 @@ class Db_rdr_utl {
 	}
 	public static Mem_qry_set Load_as_qry_set(Db_conn conn, Dbmeta_fld_list fld_list, String sql) {
 		Mem_qry_set qry_set = new Mem_qry_set();
-		DataRdr rdr = conn.Exec_sql_as_rdr(sql);
+		DataRdr rdr = conn.Exec_sql_as_old_rdr(sql);
 		try {
 			int fld_count = rdr.FieldCount();
 			while (rdr.MoveNextPeer()) {
@@ -42,7 +42,7 @@ class Db_rdr_utl {
 	}
 	public static Object[][] Load(Db_conn conn, String sql) {
 		List_adp list = List_adp_.new_();
-		DataRdr rdr = conn.Exec_sql_as_rdr(sql);
+		DataRdr rdr = conn.Exec_sql_as_old_rdr(sql);
 		try {
 			int fld_count = rdr.FieldCount();
 			while (rdr.MoveNextPeer()) {
