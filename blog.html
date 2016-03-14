@@ -18,6 +18,63 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.3.2.1_.28Andriod_only.29_.282016-03-13_22:00_Sun.29">Release: v3.3.2.1 (Andriod only) (2016-03-13 22:00 Sun)</span>
+    </h2>
+    <p>
+      Again, there is no new release for the desktop app. I will make one next week, and resume wiki generation then.
+    </p>
+    <p>
+      The Android app is a major release. The major change is an improved search system. To get it, do the following:
+    </p>
+    <ul>
+      <li>
+        Download the new Android apk: <a href="https://github.com/gnosygnu/xowa/releases/tag/v3.3.2.1" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases/tag/v3.3.2.1</a> 
+        <ul>
+          <li>
+            Note: I changed the application ID yet again, so make sure you remove the old XOWA app, or you will have 2 XOWA apps. If you do end up with 2 of them, remove both, and reinstall v3.3.2.1 again
+          </li>
+        </ul>
+      </li>
+      <li>
+        Download the new core English Wikipedia files (1.2 GB): <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v3.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v3.7z</a>
+      </li>
+    </ul>
+    <p>
+      Here is a list of the changes:
+    </p>
+    <ul>
+      <li>
+        "Wikipedia Alpha" updates no longer replaces XOWA: XOWA is a fork of the Wikipedia app. I haven't changed all the Wikipedia branding and IDs. In this particular case, I had left the package name the same. Whenever "Wikipedia Alpha" pushed out a new update, Android would prompt the user to install it. Installing it would remove XOWA and replace it with the "Wikipedia Alpha".
+      </li>
+      <li>
+        Better performance for multi-word searches: I had to add more columns and indexes to support faster lookup for certain types of searches. For example, "earth a". Unfortunately this required updating the core English Wikipedia files again
+      </li>
+      <li>
+        Do not scroll to top of results when adding new results: XOWA works by finding 2 - 5 results at a time and sending them incrementally to the search window. Each send would cause the search results to scroll back to the top. This was annoying when browsing through the list while search is running.
+      </li>
+      <li>
+        Return 10 results by default and scroll to retrieve more results: Previously, XOWA would only return 50 results. Now, XOWA is smart enough to search for more as needed. Also, performance is improved by returning 10 instead of 50.
+      </li>
+      <li>
+        Return search text as first result: XOWA now uses "page rank" to sort the results. However, most times, the search term may not be the highest ranking. For example, searching for "ear" would list "earth" over "ear" because "earth" has a higher rank. Now, XOWA will list "ear" first since that is the current search text
+      </li>
+      <li>
+        Identify redirect articles with "→": Wikipedia uses redirects to handle items like "page renames and "misspellings". For example, "Www" redirects to "World Wide Web". XOWA better identifies these entries by showing "Www → World Wide Web"
+      </li>
+      <li>
+        Remove redundant redirect articles from results: Ordinarily, there can be many redirects leading to the same page. For example, "World wide web" and "World-wide web" are both redirects to "World Wide Web". Previously, searching for "world wide web" would return all three pages. Now only 1 is returned.
+      </li>
+      <li>
+        Search for entire word by putting space at end of search: XOWA automatically adds a wildcard to every search. For example, searching for "earth" actually searches for "earth*" which will return "Earth" and "Earthquake". However, sometimes only "Earth" is wanted, not "Earthquake". Adding a space and searching for "earth " will automatically limit the search to "Earth"
+      </li>
+      <li>
+        Highlight search terms in search results: XOWA was previously relying on Wikipedia code to highlight search terms. This approach was rather simple: it would highlight a term only if the exact search string was found in the text. For example, "Earth History" would correctly highlight "Museum of <strong>Earth History</strong>" but not "History of Earth". This version now highlights the second as "<strong>History</strong> of <strong>Earth</strong>"
+      </li>
+    </ul>
+    <p>
+      Again, I strongly recommend you get this version. There are a few bugs to work out, but this version is much improved over previous ones. This is the last major update for Android search, and future changes will probably not have as much of a noticeable impact -- at least until I get around to full-text search.
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_v3.3.1.1_.28Andriod_only.29_.282016-03-06_22:00_Sun.29">Release: v3.3.1.1 (Andriod only) (2016-03-06 22:00 Sun)</span>
     </h2>
     <p>
