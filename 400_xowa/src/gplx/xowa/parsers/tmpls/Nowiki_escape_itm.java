@@ -54,7 +54,7 @@ public class Nowiki_escape_itm {
 		trie_new_itm(rv, Byte_ascii.Apos_bry			, Xop_amp_trie.Bry_xowa_apos);		// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
 		trie_new_itm(rv, Byte_ascii.Colon_bry			, Xop_amp_trie.Bry_xowa_colon);
 		trie_new_itm(rv, Byte_ascii.Underline_bry		, Xop_amp_trie.Bry_xowa_underline);
-		trie_new_itm(rv, Byte_ascii.Asterisk_bry		, Xop_amp_trie.Bry_xowa_asterisk);
+		trie_new_itm(rv, Byte_ascii.Star_bry			, Xop_amp_trie.Bry_xowa_asterisk);
 		trie_new_itm(rv, Byte_ascii.Dash_bry			, Xop_amp_trie.Bry_xowa_dash);		// needed to handle "|<nowiki>-</nowiki>"; PAGE:de.w:Liste_von_Vereinen_und_Vereinigungen_von_Gl�ubigen_(r�misch-katholische_Kirche) DATE:2015-01-08
 		trie_new_itm(rv, Byte_ascii.Space_bry			, Xop_amp_trie.Bry_xowa_space);
 		trie_new_itm(rv, Byte_ascii.Nl_bry				, Xop_amp_trie.Bry_xowa_nl);

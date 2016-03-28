@@ -25,7 +25,6 @@ public class Xoh_img_bare_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
 		Xoh_img_bare_data data = (Xoh_img_bare_data)data_obj;
 		int img_tid = flag_bldr.Set_as_int(Flag__img_tid		, data.Img_tid());
-
 		bfr.Add(hook);
 		Gfo_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
 		switch (img_tid) {
@@ -38,10 +37,8 @@ public class Xoh_img_bare_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		Xoh_img_bare_data data = (Xoh_img_bare_data)data_itm; data.Clear();
-
 		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
 		int dir_tid	= flag_bldr.Get_as_int(Flag__img_tid);
-
 		switch (dir_tid) {
 			case Xoh_img_bare_data.Img_tid__hiero:
 				int tag_0_bgn = rdr.Pos(), tag_0_end = rdr.Find_fwd_lr();

@@ -65,8 +65,8 @@ class Fsm_mnt_itm_ {
 		Fsm_cfg_mgr cfg_mgr = abc_mgr.Cfg_mgr();
 		int last_id = -1;
 		Fsm_atr_fil atr_fil = atr_mgr.Db__core();
-		int max_fil_id = Db_conn_.Select_fld0_as_int_or(atr_fil.Conn(), "SELECT Max(fil_id) AS MaxId FROM fsdb_fil;", -1);
-		int max_thm_id = Db_conn_.Select_fld0_as_int_or(atr_fil.Conn(), "SELECT Max(thm_id) AS MaxId FROM fsdb_xtn_thm;", -1);
+		int max_fil_id = atr_fil.Conn().Exec_select_as_int("SELECT Max(fil_id) AS MaxId FROM fsdb_fil;", -1);
+		int max_thm_id = atr_fil.Conn().Exec_select_as_int("SELECT Max(thm_id) AS MaxId FROM fsdb_xtn_thm;", -1);
 		last_id = max_fil_id > max_thm_id ? max_fil_id : max_thm_id;
 		cfg_mgr.Patch_next_id_exec(last_id);
 	}

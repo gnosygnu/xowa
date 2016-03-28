@@ -39,16 +39,3 @@ class Gfo_enum_itm {
 	public int Sort() {return sort;} private int sort;
 	public String Xtn() {return xtn;} private String xtn;
 }
-/*
-enum_grps
-grp_guid,grp_key,grp_int,grp_name,grp_sort,grp_xtn
-0-1-2-3,xowa.wiki,0,wiki,,
-
-enum_itms
-grp_int,itm_guid,itm_key,itm_int,itm_name,itm_sort,itm_xtn
-1,0-1-2-3,0,en.wikipedia.org,0,enwiki,0,''
-
-class Gfo_enum_mgr {
-//	public Gui
-}
-*/

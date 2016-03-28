@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public abstract class GfuiIoUrlSelectBox extends GfuiElemBase {
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		label = GfuiLbl_.sub_("label", this);
 		pathBox.Owner_(this, "pathBox");

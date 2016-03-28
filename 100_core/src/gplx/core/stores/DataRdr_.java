@@ -37,7 +37,7 @@ class DataRdr_null implements DataRdr {
 	public int FieldCount() {return 0;}
 	public String KeyAt(int i) {return To_str();}
 	public Object ReadAt(int i) {return null;}
-	public KeyVal KeyValAt(int i) {return KeyVal_.new_(this.KeyAt(i), this.ReadAt(i));}
+	public Keyval KeyValAt(int i) {return Keyval_.new_(this.KeyAt(i), this.ReadAt(i));}
 	public Object Read(String name) {return null;}
 	public String ReadStr(String key) {return String_.Empty;}			public String ReadStrOr(String key, String or) {return or;}
 	public byte[] ReadBryByStr(String key) {return Bry_.Empty;}			public byte[] ReadBryByStrOr(String key, byte[] or) {return or;}

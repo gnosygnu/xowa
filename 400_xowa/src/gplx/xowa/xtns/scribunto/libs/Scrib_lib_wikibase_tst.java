@@ -19,8 +19,8 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.xowa.xtns.wdatas.*;
 public class Scrib_lib_wikibase_tst {
-	private final Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
-	private final Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
+	private final    Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
+	private final    Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	@Before public void init() {
 		fxt.Clear_for_lib("en.wikipedia.org", "zh-hans");
 		lib = fxt.Core().Lib_wikibase().Init();
@@ -36,31 +36,31 @@ public class Scrib_lib_wikibase_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
 	}
 	@Test  public void GetLabel__cur() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hans", "s").Add_label("zh-hant", "t").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hans", "s").Add_label("zh-hant", "t").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "s");		// do not get fallback
 	}
 	@Test  public void GetLabel__fallback_1() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hant", "t").Add_label("zh-hk", "h").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hant", "t").Add_label("zh-hk", "h").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "t");		// get 1st fallback
 	}
 	@Test  public void GetLabel__fallback_2() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hk", "hk").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hk", "hk").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "hk");	// get 2nd fallback
 	}
 	@Test  public void GetLabel__fallback_en() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "en").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "en").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "en");	// get en
 	}
 	@Test  public void GetDescr() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_description("zh-hans", "s").Add_description("zh-hant", "t").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_description("zh-hans", "s").Add_description("zh-hant", "t").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getDescription, Object_.Ary("q2"), "s");
 	}
 	@Test  public void GetSlink() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_sitelink("enwiki", "a").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_sitelink("enwiki", "a").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getSiteLinkPageName, Object_.Ary("q2"), "a");
 	}
 	@Test  public void GetEntity() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("q2", false), String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  id=q2"
@@ -73,7 +73,7 @@ public class Scrib_lib_wikibase_tst {
 		));
 	}
 	@Test  public void GetEntity_property() {	// PURPOSE: getEntity should be able to convert "p2" to "Property:P2"; EX:es.w:Arnold_Gesell; DATE:2014-02-18
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("en", "b").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("en", "b").Xto_wdoc());
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("p2", false), String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  id=Property:p2"	// only difference from above
@@ -86,7 +86,7 @@ public class Scrib_lib_wikibase_tst {
 		));
 	}
 	@Test  public void ResolvePropertyId() {
-		wdata_fxt.Init_pages_add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("zh-hans", "prop_a").Xto_wdoc());
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("zh-hans", "prop_a").Xto_wdoc());
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary("p2"), "prop_a");
 	}
 }	

@@ -32,8 +32,8 @@ public class GfuiElem_ {
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_true_());
 		return rv;
 	}
-	public static KeyValHash init_focusAble_true_()			{return KeyValHash.new_().Add(GfuiElem_.InitKey_focusAble, true);}
-	public static KeyValHash init_focusAble_false_()		{return KeyValHash.new_().Add(GfuiElem_.InitKey_focusAble, false);}
+	public static Keyval_hash init_focusAble_true_()			{return new Keyval_hash().Add(GfuiElem_.InitKey_focusAble, true);}
+	public static Keyval_hash init_focusAble_false_()		{return new Keyval_hash().Add(GfuiElem_.InitKey_focusAble, false);}
 	public static void Y_adj(int adj, GfuiElem... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {

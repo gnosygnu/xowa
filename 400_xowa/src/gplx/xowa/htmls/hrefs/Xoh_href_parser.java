@@ -64,7 +64,7 @@ public class Xoh_href_parser {
 							if (ttl == null)	// invalid ttl; null out page;
 								tmp_page = Bry_.Empty;
 							else
-								tmp_page = ttl.Full_txt();
+								tmp_page = ttl.Full_txt_w_ttl_case();
 						}
 					}
 				}
@@ -73,7 +73,7 @@ public class Xoh_href_parser {
 		}
 	}
 	private static final byte Seg_wiki_tid = 0, Seg_site_tid = 1, Seg_xcmd_tid = 2;
-	private static final Btrie_slim_mgr btrie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
+	private static final    Btrie_slim_mgr btrie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
 	.Add_bry_tid(Xoh_href_.Bry__wiki, Seg_wiki_tid)
 	.Add_bry_tid(Xoh_href_.Bry__site, Seg_site_tid)
 	.Add_bry_tid(Xoh_href_.Bry__xcmd, Seg_xcmd_tid);

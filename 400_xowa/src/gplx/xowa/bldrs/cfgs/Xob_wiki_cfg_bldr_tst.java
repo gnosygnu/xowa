@@ -150,7 +150,7 @@ public class Xob_wiki_cfg_bldr_tst {
 class Xob_wiki_cfg_bldr_fxt {
 	public Xob_wiki_cfg_bldr_fxt Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 			wiki_cfg_bldr = app.Bldr().Wiki_cfg_bldr();
 		}
 		wiki_cfg_bldr.Clear();
@@ -162,14 +162,14 @@ class Xob_wiki_cfg_bldr_fxt {
 		return this;
 	}
 	public Xob_wiki_cfg_bldr_fxt Expd_txt(String wiki, String text) {
-		hash.Add(wiki, KeyVal_.new_(wiki, text));
+		hash.Add(wiki, Keyval_.new_(wiki, text));
 		return this;
 	}
 	public void Test() {
 		wiki_cfg_bldr.Exec();
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = (KeyVal)hash.Get_at(i);
+			Keyval kv = (Keyval)hash.Get_at(i);
 			String wiki = kv.Key();
 			String expd = (String)kv.Val();
 			String actl = Io_mgr.Instance.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));

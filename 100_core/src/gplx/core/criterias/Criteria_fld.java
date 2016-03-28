@@ -22,6 +22,7 @@ public class Criteria_fld implements Criteria {
 	public String		Pre() {return pre;} private final String pre;
 	public String		Key() {return key;} private final String key;
 	public Criteria		Crt() {return crt;} private final Criteria crt;
+	public String		Pre_w_key() {return pre == Pre_null ? key : String_.Concat(pre, ".", key);}
 	public void			Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
 	public void			Val_from_args(Hash_adp args) {
 		List_adp list = (List_adp)args.Get_by(key); if (list == null) throw Err_.new_wo_type("criteria.fld key not found", "key", key);
@@ -31,7 +32,7 @@ public class Criteria_fld implements Criteria {
 	public boolean			Matches(Object invkObj) {			
 		GfoInvkAble invk = (GfoInvkAble)invkObj;
 		if (key == Criteria_fld.Key_null) return crt.Matches(invkObj);
-		Object comp = GfoInvkAble_.InvkCmd(invk, key);			
+		Object comp = GfoInvkAble_.InvkCmd(invk, this.Pre_w_key());			
 		return crt.Matches(comp);
 	}
 	public String		To_str() {return String_.Concat(key, " ", crt.To_str());}
@@ -64,7 +65,7 @@ public class Criteria_fld implements Criteria {
 			case Criteria_.Tid_wrapper:		// not recursive
 			case Criteria_.Tid_db_obj_ary:	// unsupported
 			case Criteria_.Tid_custom:
-			default:				throw Err_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 }

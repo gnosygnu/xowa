@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.brys.fmtrs.*;
 public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);	// do not fail b/c msgs may contain excerpt of random text; EX:[[User:A|~A~]] DATE:2014-11-28
+	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);	// do not fail b/c msgs may contain excerpt of random text; EX:[[User:A|~A~]] DATE:2014-11-28
 	public Gfo_usr_dlg_base(Gfo_usr_dlg__log log_wkr, Gfo_usr_dlg__gui gui_wkr) {this.log_wkr = log_wkr; this.gui_wkr = gui_wkr;}
 	public Gfo_usr_dlg__log Log_wkr() {return log_wkr;} public void Log_wkr_(Gfo_usr_dlg__log v) {log_wkr = v;} private Gfo_usr_dlg__log log_wkr;
 	public Gfo_usr_dlg__gui Gui_wkr() {return gui_wkr;} public void Gui_wkr_(Gfo_usr_dlg__gui v) {gui_wkr = v;} private Gfo_usr_dlg__gui gui_wkr;
 	public boolean Canceled() {return canceled;} public void Canceled_y_() {canceled = true;} public void Canceled_n_() {canceled = false;} private boolean canceled;
-	public void Cancel() {canceled = true;} public void Cancel_reset() {canceled = false;}
+	public void Cancel() {canceled = true;}
 	public String Log_many(String grp_key, String msg_key, String fmt, Object... args)	{String rv = Bld_msg_many(grp_key, msg_key, fmt, args	); log_wkr.Log_to_session(rv); return rv;}
 	public String Warn_many(String grp_key, String msg_key, String fmt, Object... args)	{String rv = Bld_msg_many(grp_key, msg_key, fmt, args	); log_wkr.Log_to_err(rv); gui_wkr.Write_warn(rv); return rv;}
 	public String Prog_many(String grp_key, String msg_key, String fmt, Object... args)	{String rv = Bld_msg_many(grp_key, msg_key, fmt, args	); gui_wkr.Write_prog(rv); return rv;}
@@ -45,12 +45,16 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 		return rv;
 	}
 	private String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {
-		tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
-		return tmp_bfr.To_str_and_clear();
+		synchronized (tmp_fmtr) {
+			tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
+			return tmp_bfr.To_str_and_clear();
+		}
 	}
 	private String Bld_msg_one(String grp_key, String msg_key, String fmt, Object val) {
-		tmp_fmtr.Fmt_(fmt).Bld_bfr_one(tmp_bfr, val);
-		return tmp_bfr.To_str_and_clear();
+		synchronized (tmp_fmtr) {
+			tmp_fmtr.Fmt_(fmt).Bld_bfr_one(tmp_bfr, val);
+			return tmp_bfr.To_str_and_clear();
+		}
 	}
 	private String Bld_msg_none(String grp_key, String msg_key, String fmt) {return fmt;}
 }

@@ -30,7 +30,7 @@ public class Xoud_bmk_dir_tbl implements Rls_able {
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int owner, int sort, byte[] name) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

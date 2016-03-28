@@ -31,7 +31,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;
 	public int Page_id_next() {return page_id_next;} public void Page_id_next_(int v) {page_id_next = v;} private int page_id_next = 0;
 	public void Clear() {page_id_next = 0;}	// TEST: needed for ctg_test		
-	public void Data_create(Xoa_ttl ttl, byte[] text) {
+	public int Data_create(Xoa_ttl ttl, byte[] text) {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
@@ -59,6 +59,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_ttl);
 		ttl_hive.Create(ttl.Ns(), ttl.Page_db(), ttl_row_bry, Bry_comparer_fld_last.Instance);
 		wiki.Db_mgr().Load_mgr().Clear();	// NOTE: need to clear cached regy_ary in load_mgr
+		return page_id;
 	}
 	public void Data_update(Xoae_page page, byte[] text)		{Data_update_under(page, text, null);}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl)	{
@@ -118,5 +119,5 @@ class Bry_comparer_fld_last implements gplx.core.lists.ComparerAble {
 		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
 		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
-	public static final Bry_comparer_fld_last Instance = new Bry_comparer_fld_last(); 
+	public static final    Bry_comparer_fld_last Instance = new Bry_comparer_fld_last(); 
 }

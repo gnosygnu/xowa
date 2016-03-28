@@ -38,8 +38,10 @@ public interface Db_engine {
 	void			Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
 	void			Ddl_append_fld(String tbl, Dbmeta_fld_itm fld);
 	void			Ddl_delete_tbl(String tbl);
+	void			Env_db_attach(String alias, Db_conn conn);
 	void			Env_db_attach(String alias, Io_url db_url);
 	void			Env_db_detach(String alias);
+	void			Meta_reload();
 	boolean			Meta_tbl_exists(String tbl);
 	boolean			Meta_fld_exists(String tbl, String fld);
 	Dbmeta_tbl_mgr	Meta_tbl_load_all();

@@ -125,9 +125,9 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		this.Pos_(this.X(), PopupAnchorTop);	//this.Top - increment
 		this.Size_(SizeAdp_.new_(this.Width(), this.Height() + increment));
 	}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
 
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.fullyGrown = SizeAdp_.new_(600, 96);
 		this.Pos_(-100, -100); this.Size_(fullyGrown); super.Show(); super.Hide();// was 20,20; set to fullyGrown b/c of java
@@ -161,7 +161,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		GfuiWin_toaster rv = new GfuiWin_toaster();
 //			rv.Icon_(IconAdp.cfg_("popup"));
 		rv.ctor_GfuiBox_base
-			(KeyValHash.new_()
+			(new Keyval_hash()
 			.Add(GfuiElem_.InitKey_focusAble, false)
 			.Add(GfuiElem_.InitKey_ownerWin, owner)
 			.Add(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_toaster)

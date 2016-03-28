@@ -46,20 +46,20 @@ class Xol_convert_regy_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
+		app = Xoa_app_fxt.Make__app__edit();
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7("zh"));
 		Xol_lang_itm_.Lang_init(lang);
-		Init_cnv(app, "zh", "zh-hant", KeyVal_.new_("x0", "x1"));
-		wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org", lang);
+		Init_cnv(app, "zh", "zh-hant", Keyval_.new_("x0", "x1"));
+		wiki = Xoa_app_fxt.Make__wiki__edit(app, "zh.wikipedia.org", lang);
 		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 1, String_.Ary("zh", "zh-hans", "zh-hant"));
 		parser_fxt = new Xop_fxt(app, wiki);
 	}
-	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, KeyVal... ary) {
+	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, Keyval... ary) {
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7(lang_key));
 		Xol_convert_grp grp = lang.Vnt_mgr().Convert_mgr().Converter_regy().Get_or_make(Bry_.new_a7(vnt_key));
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
-			KeyVal itm = ary[i];
+			Keyval itm = ary[i];
 			grp.Add(Bry_.new_u8(itm.Key()), Bry_.new_u8(itm.Val_to_str_or_empty()));
 		}
 		Xol_vnt_itm vnt_itm = lang.Vnt_mgr().Regy__get_or_new(Bry_.new_a7(vnt_key));

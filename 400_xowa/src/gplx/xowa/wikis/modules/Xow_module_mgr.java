@@ -31,7 +31,7 @@ public class Xow_module_mgr implements GfoInvkAble {
 	public Xow_module_base		Itm__top_icon() {return itm__top_icon;} private Xow_module_base itm__top_icon = new Xow_module_base();
 	public Xow_module_base		Itm__navframe() {return itm__navframe;} private Xow_module_base itm__navframe = new Xow_module_base();
 	public Xow_module_base		Itm__title_rewrite() {return itm__title_rewrite;} private Xow_module_base itm__title_rewrite = new Xow_module_base();
-	public Xow_popup_mgr Popup_mgr() {return popup_mgr;} private Xow_popup_mgr popup_mgr;
+	public Xow_popup_mgr		Popup_mgr() {return popup_mgr;} private Xow_popup_mgr popup_mgr;
 	public Xow_module_base Get(byte[] key) {return (Xow_module_base)regy.Get_by_bry(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get(m.ReadBry("v"));

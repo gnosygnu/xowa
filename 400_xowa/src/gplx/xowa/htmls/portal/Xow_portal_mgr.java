@@ -138,7 +138,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	, Invk_missing_ns_cls = "missing_ns_cls", Invk_missing_ns_cls_ = "missing_ns_cls_", Invk_missing_ns_cls_list = "missing_ns_cls_list"
 	;
 	public static final String Invk_div_logo_ = "div_logo_";
-	private static KeyVal[] Options_missing_ns_cls_list = KeyVal_.Ary(KeyVal_.new_("", "Show as blue link"), KeyVal_.new_("new", "Show as red link"), KeyVal_.new_("xowa_display_none", "Hide")); 
+	private static Keyval[] Options_missing_ns_cls_list = Keyval_.Ary(Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide")); 
 	private static final byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
 	private static final Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
 	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">~{jumpto}<a href=\"#mw-navigation\">~{jumptonavigation}</a>~{comma-separator}<a href=\"#p-search\">~{jumptosearch}</a></div>"

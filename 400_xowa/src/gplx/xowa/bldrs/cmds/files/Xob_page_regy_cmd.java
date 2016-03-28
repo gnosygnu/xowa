@@ -26,7 +26,7 @@ public class Xob_page_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
-		Db_conn page_regy_provider = Xob_db_file.new__page_regy(commons_wiki.Fsys_mgr().Root_dir()).Conn();
+		Db_conn page_regy_provider = Xob_db_file.New__page_regy(commons_wiki.Fsys_mgr().Root_dir()).Conn();
 		commons_wiki.Init_assert();
 		if (build_commons) {
 			Xob_page_regy_tbl.Reset_table(page_regy_provider);

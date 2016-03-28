@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.apis.xowa.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
-	private final Xow_domain_crt_kv_itm_mgr multi_wikis_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_wikis_bry = Dflt_multi_wikis_bry;
-	private final Xow_domain_crt_kv_itm_mgr multi_sorts_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_sorts_bry = Dflt_multi_sorts_bry;
+	private final    Xow_domain_crt_kv_itm_mgr multi_wikis_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_wikis_bry = Dflt_multi_wikis_bry;
+	private final    Xow_domain_crt_kv_itm_mgr multi_sorts_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_sorts_bry = Dflt_multi_sorts_bry;
 	public Xoapi_search() {
 		this.evMgr = GfoEvMgr.new_(this);
 		multi_wikis_mgr.Parse_as_itms(multi_wikis_bry);
 		multi_sorts_mgr.Parse_as_arys(multi_sorts_bry);
 	}
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
-	public int			Results_per_page()			{return results_per_page;}		private int results_per_page = 20;
+	public int			Results_per_page()			{return results_per_page;}		private int results_per_page = 100;
 	public boolean			Async_db()					{return async_db;}				private boolean async_db = true;
 	public void Multi_wikis_bry_(byte[] v) {
 		if (!multi_wikis_mgr.Parse_as_itms(v)) return;
@@ -66,7 +66,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 	  Evt_multi_wikis_changed = "multi_wikis_changed"
 	, Evt_multi_sorts_changed = "multi_sorts_changed"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Dflt_multi_wikis_bry = Bry_.new_a7("<any>|<self>")
 	, Dflt_multi_sorts_bry = Bry_.new_a7("<any>|<self>,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews")
 	;

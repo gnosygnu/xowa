@@ -95,7 +95,7 @@ public class Prefs_converter {
 				bfr.Add_byte(Byte_ascii.Paren_bgn);
 				for (int i = 0; i < args_count; i++) {
 					if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
-					KeyVal kv = m.Args_getAt(i);
+					Keyval kv = m.Args_getAt(i);
 					bfr.Add_byte(Byte_ascii.Quote);
 					bfr.Add_str_u8(kv.Val_to_str_or_empty());
 					bfr.Add_byte(Byte_ascii.Quote);

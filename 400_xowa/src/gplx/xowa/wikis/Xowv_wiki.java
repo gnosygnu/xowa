@@ -22,14 +22,14 @@ import gplx.xowa.apps.*;
 import gplx.xowa.guis.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; 
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.specials.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.specials.*; import gplx.xowa.addons.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.css.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, GfoInvkAble {
-	private final Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
+	private final    Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
 		this.app = app;
@@ -42,37 +42,40 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, GfoInvkAble {
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
-		this.url__parser = new Xoa_url_parser(this);
+		this.url__parser = new Xow_url_parser(this);
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
+		this.stats = new Xow_site_stats_mgr(this);
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
-	public byte[]						Domain_bry() {return domain_bry;} private final byte[] domain_bry;
-	public String						Domain_str() {return domain_str;} private final String domain_str;
-	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
-	public int							Domain_tid() {return domain_tid;} private final int domain_tid;
-	public byte[]						Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
-	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
+	public byte[]						Domain_bry() {return domain_bry;} private final    byte[] domain_bry;
+	public String						Domain_str() {return domain_str;} private final    String domain_str;
+	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final    Xow_domain_itm domain_itm;
+	public int							Domain_tid() {return domain_tid;} private final    int domain_tid;
+	public byte[]						Domain_abrv() {return domain_abrv;} private final    byte[] domain_abrv;
+	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
 	public Xow_fsys_mgr					Fsys_mgr() {return fsys_mgr;} private Xow_fsys_mgr fsys_mgr;
 	public Xowd_db_mgr					Data__core_mgr() {return data_mgr__core_mgr;} private Xowd_db_mgr data_mgr__core_mgr;
 	public Xow_repo_mgr					File__repo_mgr() {return file_mgr__repo_mgr;} private Xowv_repo_mgr file_mgr__repo_mgr = new Xowv_repo_mgr();
-	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_v2_gui();
+	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final    Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 	public Fsdb_db_mgr					File__fsdb_core() {return db_core_mgr;}
-	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
+	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_bin_mgr					File__bin_mgr() {return fsdb_mgr.Bin_mgr();}
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
 	public boolean							Html__hdump_enabled() {return Bool_.Y;}
-	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final Xow_hdump_mgr html__hdump_mgr;
+	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
-	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
-	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
-	public Xow_wiki_props				Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
+	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final    Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
+	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
+	public Xow_wiki_props				Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
 	public Xol_lang_itm					Lang() {throw Err_.new_unimplemented();}
-	public Xoa_url_parser				Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;
-
+	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
+	public Xow_site_stats_mgr			Stats() {return stats;} private final    Xow_site_stats_mgr stats;
+	public Xow_url_parser				Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
+	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xosp_special_mgr Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
-	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
-	public Xoav_app Appv() {return app;} private final Xoav_app app;
+	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
+	public Xoav_app Appv() {return app;} private final    Xoav_app app;
 	public void Init_by_wiki() {
 		if (!init_needed) return;
 		init_needed = false;
@@ -89,6 +92,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, GfoInvkAble {
 		orig_mgr.Init_by_wiki(this, file_mgr__fsdb_mode, db_core_mgr.File__orig_tbl_ary(), Xof_url_bldr.new_v2());
 		fsdb_mgr.Init_by_wiki(this);
 		data_mgr__core_mgr.Db__core().Tbl__ns().Select_all(ns_mgr);
+		data_mgr__core_mgr.Db__core().Tbl__site_stats().Select(stats);
 		html__hdump_mgr.Init_by_db(this);
 	}
 	public void Init_by_make(Xowd_core_db_props props, gplx.xowa.bldrs.infos.Xob_info_session info_session) {

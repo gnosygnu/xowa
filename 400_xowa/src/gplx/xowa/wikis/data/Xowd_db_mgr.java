@@ -21,6 +21,7 @@ import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;	
 public class Xowd_db_mgr {
 	private Xowd_db_file[] dbs__ary = new Xowd_db_file[0]; private int dbs__ary_len = 0; private final Xowd_db_file_hash db_file_hash = new Xowd_db_file_hash();
+	private final Hash_adp id_hash = Hash_adp_.new_(); private final gplx.core.primitives.Int_obj_ref id_hash_ref = gplx.core.primitives.Int_obj_ref.neg1_();
 	private final Xow_wiki wiki; private final Io_url wiki_root_dir; private final Xow_domain_itm domain_itm;
 	public Xowd_db_mgr(Xow_wiki wiki, Io_url wiki_root_dir, Xow_domain_itm domain_itm) {this.wiki = wiki; this.wiki_root_dir = wiki_root_dir; this.domain_itm = domain_itm;}
 	public Xowd_core_db_props		Props()			{return props;} private Xowd_core_db_props props = Xowd_core_db_props.Test;
@@ -30,18 +31,31 @@ public class Xowd_db_mgr {
 	public Xowd_db_file				Db__text()		{return db__text;}		private Xowd_db_file db__text;
 	public Xowd_db_file				Db__html()		{return db__html;}		private Xowd_db_file db__html;
 	public Xowd_db_file				Db__cat_core()	{return db__cat_core;}	private Xowd_db_file db__cat_core;
-	public Xowd_db_file				Db__search()	{return db__search;}	private Xowd_db_file db__search;
 	public Xowd_db_file				Db__wbase()		{return db__wbase;}		private Xowd_db_file db__wbase;
 	public int						Dbs__len()		{return dbs__ary.length;}
 	public void						Db__wbase_(Xowd_db_file v) {db__wbase = v;}
+	public Ordered_hash				Dbs__get_hash_by_tid(int tid) {return db_file_hash.Get_by_tid_or_null((byte)tid);}
 	public Xowd_db_file				Dbs__get_at(int i) {return dbs__ary[i];}
+	public Xowd_db_file				Dbs__get_by_id(int id) {return (Xowd_db_file)id_hash.Get_by_or_fail(id_hash_ref.Val_(id));}
+	public Xowd_db_file				Dbs__get_by_tid_or_core(byte... tids_ary) {Xowd_db_file rv = Dbs__get_by_tid_or_null(tids_ary); return rv == null ? db__core : rv;}
+	public Xowd_db_file				Dbs__get_by_tid_or_null(byte... tids_ary) {
+		int tids_len = tids_ary.length;
+		for (int i = 0; i < tids_len; ++i) {
+			byte tid = tids_ary[i];
+			Ordered_hash tid_dbs = db_file_hash.Get_by_tid_or_null(tid); if (tid_dbs == null) continue;
+			if (tid_dbs.Len() != 1) throw Err_.new_("xowa.dbs", "expecting only 1 db for tid; tid=~{0} len=~{1} db_api=~{2}", tid, tid_dbs.Len(), db__core.Conn().Conn_info().Db_api());
+			return (Xowd_db_file)tid_dbs.Get_at(0);
+		}
+		return null;
+	}
 	public Xowd_db_file				Dbs__make_by_tid(byte tid) {
 		int tid_idx = Get_tid_idx(db_file_hash, tid);
 		return Dbs__make_by_tid(tid, Xob_info_file.Ns_ids_empty, tid_idx, Get_tid_name(db_file_hash, tid_idx, tid));
 	}
 	public Xowd_db_file				Dbs__make_by_tid(byte tid, String ns_ids, int part_id, String file_name_suffix) {
 		Io_url url = wiki_root_dir.GenSubFil(domain_itm.Domain_str() + file_name_suffix);
-		Xowd_db_file rv = Xowd_db_file.make_(db__core.Info_session(), props, dbs__ary_len, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.Instance.New(url));
+		int next_id = Dbs__get_at(dbs__ary_len - 1).Id() + 1;
+		Xowd_db_file rv = Xowd_db_file.make_(db__core.Info_session(), props, next_id, tid, url, ns_ids, part_id, db__core.Url().NameAndExt(), Db_conn_bldr.Instance.New(url));
 		Dbs__add_and_save(rv);
 		Dbs__set_by_tid(rv);
 		return rv;
@@ -60,6 +74,7 @@ public class Xowd_db_mgr {
 	}
 	public void Init_by_load(Io_url core_url) {
 		db_file_hash.Clear();
+		id_hash.Clear();
 		Db_conn core_conn = Db_conn_bldr.Instance.Get(core_url);
 		props = Xowd_core_db_props.Cfg_load(core_url, core_conn);
 		Dbs__set_by_tid(Xowd_db_file.load_(props, Xowd_db_file_.Id_core, Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
@@ -69,6 +84,7 @@ public class Xowd_db_mgr {
 			Xowd_db_file db = dbs__ary[i];
 			Dbs__set_by_tid(db);
 			db_file_hash.Add_or_new(db);
+			id_hash.Add(gplx.core.primitives.Int_obj_ref.new_(db.Id()), db);
 		}
 		wiki.Props().Init_by_load(wiki.App(), Tbl__cfg());
 	}
@@ -100,10 +116,9 @@ public class Xowd_db_mgr {
 		switch (db.Tid()) {
 			case Xowd_db_file_.Tid_wiki_solo:
 			case Xowd_db_file_.Tid_text_solo:
-			case Xowd_db_file_.Tid_core					: {db__core = db; if (props.Layout_text().Tid_is_all_or_few()) db__cat_core = db__search = db__text = db; break;}
+			case Xowd_db_file_.Tid_core					: {db__core = db; if (props.Layout_text().Tid_is_all_or_few()) db__cat_core = db__text = db; break;}
 			case Xowd_db_file_.Tid_text					: {db__text = db; break;}
 			case Xowd_db_file_.Tid_html_data			: {db__html = db; break;}
-			case Xowd_db_file_.Tid_search_core			: {if (db__search == null)		db__search = db; break;}
 			case Xowd_db_file_.Tid_wbase				: {if (db__wbase == null)		db__wbase = db; break;}
 			case Xowd_db_file_.Tid_cat_core				:
 			case Xowd_db_file_.Tid_cat					: {if (db__cat_core == null)	db__cat_core = db; break;}
@@ -116,6 +131,7 @@ public class Xowd_db_mgr {
 		rv.Info_file().Save(rv.Tbl__cfg());
 		rv.Info_session().Save(rv.Tbl__cfg());
 		db_file_hash.Add_or_new(rv);
+		id_hash.Add(gplx.core.primitives.Int_obj_ref.new_(rv.Id()), rv);
 	}
 	public void Rls() {
 		for (int i = 0; i < dbs__ary_len; i++)

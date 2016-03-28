@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.langs.htmls.*;
-import gplx.xowa.htmls.core.hzips.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hzip_fxt {
 	private final Xowe_wiki wiki;
 	private final Xop_fxt parser_fxt = new Xop_fxt();
@@ -26,7 +25,6 @@ public class Xoh_hzip_fxt {
 	private final Xoh_page hpg = new Xoh_page();
 	private boolean mode_is_b256;
 	public Xoh_hzip_fxt() {
-		gplx.core.envs.Op_sys.Cur_is_drd_();		// force drd mode; needed for img_bare
 		this.wiki = parser_fxt.Wiki();
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
 		wiki.Html__hdump_mgr().Init_by_db(parser_fxt.Wiki());
@@ -39,7 +37,7 @@ public class Xoh_hzip_fxt {
 	public void Clear() {hpg.Clear();}
 	public void Init_wiki_installed(String domain) {parser_fxt.Init_xwiki_add_user_(domain);}
 	public Xowe_wiki Init_wiki_alias(String alias, String domain) {
-		Xowe_wiki rv = Xoa_app_fxt.wiki_(parser_fxt.App(), domain);
+		Xowe_wiki rv = Xoa_app_fxt.Make__wiki__edit(parser_fxt.App(), domain);
 		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_u8(alias), Bry_.new_u8(domain), null);
 		return rv;
 	}

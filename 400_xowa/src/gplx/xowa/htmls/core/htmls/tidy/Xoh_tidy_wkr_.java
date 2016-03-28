@@ -34,7 +34,7 @@ public class Xoh_tidy_wkr_ {
 		else if	(String_.Eq(s, Key_null))			return Tid_null;
 		else										throw Err_.new_unimplemented();
 	}
-	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_tidy), KeyVal_.new_(Key_jtidy));
+	public static Keyval[] Options__list = Keyval_.Ary(Keyval_.new_(Key_tidy), Keyval_.new_(Key_jtidy));
 }
 class Xoh_tidy_wkr_null implements Xoh_tidy_wkr {
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_null;}

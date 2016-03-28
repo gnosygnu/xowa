@@ -38,7 +38,7 @@ public class Xou_user_tst {
 	}
 }
 class Xou_user_fxt {
-	public Xoae_app App() {return app;} private Xoae_app app = Xoa_app_fxt.app_();
+	public Xoae_app App() {return app;} private Xoae_app app = Xoa_app_fxt.Make__app__edit();
 	public String Make_xwiki(boolean offline, String name) {return String_.Concat_with_str("|", Yn.To_str(offline), name);}
 	public void Test_fil(Io_url url, String expd) {
 		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));

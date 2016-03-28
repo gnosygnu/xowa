@@ -40,7 +40,7 @@ public class Xof_orig_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public void Rls() {}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_ttl)));}
 	public void Select_by_list(Ordered_hash rv, List_adp itms) {select_in_wkr.Init(rv, itms).Select_in(Cancelable_.Never, conn, 0, itms.Count());}
 	public Xof_orig_itm Select_itm(byte[] ttl) {
 		Xof_orig_itm rv = Xof_orig_itm.Null;

@@ -97,7 +97,7 @@ class Xoi_wiki_props_fxt {
 class Xob_subpage_tst_fxt {
 	public Xob_subpage_tst_fxt Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 			mgr = app.Bldr().Wiki_cfg_bldr();
 		}
 		mgr.Clear();
@@ -110,7 +110,7 @@ class Xob_subpage_tst_fxt {
 		return this;
 	}
 	public Xob_subpage_tst_fxt Expd_txt(String wiki, String text) {
-//		hash.Add(wiki, KeyVal_.new_(wiki, text));
+//		hash.Add(wiki, Keyval_.new_(wiki, text));
 		return this;
 	}
 	private String_bldr sb = String_bldr_.new_();

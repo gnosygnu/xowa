@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.sqls.*; import gplx.xowa.wikis.tdbs.bldrs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
-	private final Sql_file_parser parser = new Sql_file_parser(); private boolean fail = false;
+	private final    Sql_file_parser parser = new Sql_file_parser(); protected boolean fail = false;
 	public abstract String Cmd_key();
 	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;
 	public Io_url_gen Make_url_gen() {return make_url_gen;} private Io_url_gen make_url_gen;

@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Label;
 
 class Swt_lbl implements GxwElem, Swt_control {
 	private Label lbl;
-	public Swt_lbl(Swt_control owner, KeyValHash ctorArgs) {
+	public Swt_lbl(Swt_control owner, Keyval_hash ctorArgs) {
 		lbl = new Label(owner.Under_composite(), SWT.CENTER);
 		core = new Swt_core_cmds(lbl);
 		lbl.addKeyListener(new Swt_lnr_key(this));

@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Math_ {
-	public static double Pow(double val, double exponent) {return java.lang.Math.pow(val, exponent);}
-	public static double Pi = java.lang.Math.PI; 
-	public static double E = java.lang.Math.E; 
-	public static double Ceil(double v) {return java.lang.Math.ceil(v);}
-	public static double Floor(double v) {return java.lang.Math.floor(v);}
-	public static double Round(double v, int places) {
+	public static double	Pow(double val, double exponent) {return java.lang.Math.pow(val, exponent);}
+	public static double	Pi = java.lang.Math.PI; 
+	public static double	E = java.lang.Math.E; 
+	public static int		Ceil_as_int(double v) {return (int)Ceil(v);}
+	public static double	Ceil(double v) {return java.lang.Math.ceil(v);}
+	public static double	Floor(double v) {return java.lang.Math.floor(v);}
+	public static double	Round(double v, int places) {
 				return java.math.BigDecimal.valueOf(v).setScale(places, java.math.BigDecimal.ROUND_HALF_UP).doubleValue();
 			}
 	public static int Trunc(double v) {return (int)v;}

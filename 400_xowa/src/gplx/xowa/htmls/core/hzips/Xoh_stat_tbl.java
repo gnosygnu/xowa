@@ -36,7 +36,7 @@ public class Xoh_stat_tbl implements Rls_able {
 		conn.Stmt_delete(tbl_name).Exec_delete(); // always zap table
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}

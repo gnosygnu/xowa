@@ -19,8 +19,8 @@ package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.
 import gplx.xowa.langs.*; import gplx.xowa.parsers.*;
 class Xoa_sitelink_div_wtr_fxt {
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Init_langs(wiki);
 	}
 	public static void Init_langs(Xowe_wiki wiki) {

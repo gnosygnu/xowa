@@ -460,8 +460,8 @@ class Xop_popup_parser_fxt {
 	private Xow_popup_parser parser; private Xowe_wiki wiki;
 	private int word_min = 2;
 	public void Clear() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_(app, "en.wiki");
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wiki");
 		parser = wiki.Html_mgr().Head_mgr().Popup_mgr().Parser();
 		parser.Init_by_wiki(wiki);
 		parser.Cfg().Tmpl_read_len_(4);

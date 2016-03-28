@@ -16,5 +16,5 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.lists; import gplx.*; import gplx.core.*;
-public interface ComparerAble extends java.util.Comparator {} //_20110320 
+public interface ComparerAble extends java.util.Comparator {} 
 // public int compare(Object lhsObj, Object rhsObj) {}

@@ -59,9 +59,9 @@ class Vnt_html_doc_wkr implements Mwh_doc_wkr {
 	}
 	public void On_txt_end		(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {
 		switch (nde_tid) {
-			case Xop_xnde_tag_.Tid_code:
-			case Xop_xnde_tag_.Tid_script:
-			case Xop_xnde_tag_.Tid_pre:
+			case Xop_xnde_tag_.Tid__code:
+			case Xop_xnde_tag_.Tid__script:
+			case Xop_xnde_tag_.Tid__pre:
 				bfr.Add_mid(src, itm_bgn, itm_end);
 				break;
 			default:					

@@ -129,7 +129,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "insert failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "insert failed", "url", engine.Conn_info().Db_api(), "sql", sql);
 		}
 	}
 	public int Exec_update() {
@@ -137,7 +137,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "update failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "update failed", "url", engine.Conn_info().Db_api(), "sql", sql);
 		}
 	}
 	public int Exec_delete() {
@@ -145,7 +145,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "delete failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "delete failed", "url", engine.Conn_info().Db_api(), "sql", sql);
 		}
 	}
 	public DataRdr Exec_select() {

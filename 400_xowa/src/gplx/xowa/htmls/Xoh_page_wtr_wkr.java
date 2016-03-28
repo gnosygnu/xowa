@@ -22,9 +22,9 @@ import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 public class Xoh_page_wtr_wkr {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
-	private final Xoh_page_wtr_mgr mgr; private final byte page_mode;
-	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
+	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final    Xoh_page_wtr_mgr mgr; private final    byte page_mode;
+	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx ctx; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
@@ -69,7 +69,6 @@ public class Xoh_page_wtr_wkr {
 		// if custom_html, use it and exit; needed for Default_tab
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {bfr.Add(custom_html); return;}
-
 		// temp variables
 		if (root_dir_bry == null) this.root_dir_bry = app.Fsys_mgr().Root_dir().To_http_file_bry();
 		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
@@ -121,7 +120,7 @@ public class Xoh_page_wtr_wkr {
 					case Xow_page_tid.Tid_js:
 					case Xow_page_tid.Tid_css:
 					case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
-					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Page_db(), data_raw); break;
+					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Full_db(), data_raw); break;
 					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, hctx, page, page_tid, page_ns_id); break;
 				}
 			}
@@ -138,26 +137,21 @@ public class Xoh_page_wtr_wkr {
 			bfr.Add(hdump_data);
 			return;
 		}
-
 		// dump and exit if MediaWiki message;
 		if	(ns_id == Xow_ns_.Tid__mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			bfr.Add(Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
-
 		// if [[File]], add boilerplate header; note that html is XOWA-generated so does not need to be tidied
 		if (ns_id == Xow_ns_.Tid__file) app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
-
 		// get separate bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		Bry_bfr tidy_bfr = app.Utl__bfr_mkr().Get_m001();
-
 		// write wikitext
 		if (page.Root() != null)	// NOTE: will be null if blank; occurs for one test: Logo_has_correct_main_page; DATE:2015-09-29
 			wiki.Html_mgr().Html_wtr().Write_all(tidy_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
 		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, hctx, tidy_bfr);
-
 		// tidy html
 		gplx.xowa.htmls.core.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		if (tidy_mgr.Enabled()) tidy_mgr.Run_tidy_html(page, tidy_bfr, !hctx.Mode_is_hdump());
@@ -165,7 +159,6 @@ public class Xoh_page_wtr_wkr {
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);
 		tidy_bfr.Mkr_rls();
-
 		// handle Categories at bottom of page; note that html is XOWA-generated so does not need to be tidied
 		int ctgs_len = page.Category_list().length;
 		if (	ctgs_enabled
@@ -178,7 +171,6 @@ public class Xoh_page_wtr_wkr {
 			else
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}
-
 		// translate if variants are enabled
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) bfr.Add(vnt_mgr.Convert_lang().Parse_page(vnt_mgr.Cur_itm(), page.Revision_data().Id(), bfr.To_bry_and_clear()));
@@ -201,5 +193,5 @@ public class Xoh_page_wtr_wkr {
 		if (data_raw_len > 0)		// do not add nl if empty String
 			bfr.Add_byte_nl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	private static final byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
+	private static final    byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
 }

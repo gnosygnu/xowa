@@ -38,7 +38,7 @@ public class Sqlite_schema_mgr {
 	}
 	private void Init(Db_engine engine) {
 		init = false;
-		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Xto_api());
+		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Db_api());
 		tbl_mgr.Clear(); idx_mgr.Clear();
 		Dbmeta_parser__tbl tbl_parser = new Dbmeta_parser__tbl();
 		Dbmeta_parser__idx idx_parser = new Dbmeta_parser__idx();
@@ -52,14 +52,15 @@ public class Sqlite_schema_mgr {
 				int type_int = Dbmeta_itm_tid.Xto_int(type_str);
 				switch (type_int) {
 					case Dbmeta_itm_tid.Tid_table:
-						if (String_.Eq(name, "sqlite_sequence")) continue;	// ignore b/c of non-orthodox syntax; EX: "CREATE TABLE sqlite_sequence(name, seq)";
+						if (String_.Has_at_bgn(name, "sqlite_")) continue;	// ignore b/c of non-orthodox syntax; EX: "CREATE TABLE sqlite_sequence(name, seq)"; also "CREATE TABLE sqlite_stat(tbl,idx,stat)";
 						tbl_mgr.Add(tbl_parser.Parse(Bry_.new_u8(sql)));
 						break;
 					case Dbmeta_itm_tid.Tid_index:
+						if (sql == null) continue; // ignore "autoindex"; EX: sqlite_autoindex_temp_page_len_avg_1
 						idx_mgr.Add(idx_parser.Parse(Bry_.new_u8(sql)));
 						break;
 					default:
-						Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unknown type: conn=~{0} type=~{1} name=~{2} sql=~{3}", engine.Conn_info().Xto_api(), type_str, name, sql);
+						Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unknown type: conn=~{0} type=~{1} name=~{2} sql=~{3}", engine.Conn_info().Db_api(), type_str, name, sql);
 						break;
 				}
 			}

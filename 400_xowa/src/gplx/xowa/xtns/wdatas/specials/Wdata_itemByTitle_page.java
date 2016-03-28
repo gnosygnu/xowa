@@ -21,7 +21,7 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.specials.*;
 import gplx.xowa.apps.urls.*;
 public class Wdata_itemByTitle_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
-	private static final byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
+	private static final    byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__item_by_title;}
@@ -60,7 +60,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 	if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(wiki_domain);	if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
-		Wdata_doc doc = wdata_mgr.Pages_get(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
+		Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();
 		Xoae_page qid_page = wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (qid_page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
 		return true;
@@ -80,7 +80,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	,	"</fieldset>"
 	,	"</form>"
 	,	"</div>"
-	,	"<br>To change the default site, see <a href='/site/home/wiki/Help:Options/Wikibase'>Help:Options/Wikibase</a>"
+	,	"<br>To change the default site, see <a href='/site/home/wiki/Options/Wikibase'>Options/Wikibase</a>"	// HOME
 	)
 	, 	"legend", "site_lbl", "site_val", "page_lbl", "page_val", "search_lbl");
 }

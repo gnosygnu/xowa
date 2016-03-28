@@ -52,7 +52,7 @@ class GfmlLxr_singleton implements GfmlLxr, GfoEvObj {
 		String oldRaw = singletonTkn.Raw();
 		singletonTkn = val;
 		hooks = String_.Ary(val.Raw());
-		GfoEvMgr_.PubVals(this, GfmlLxr_.CmdTknChanged_evt, KeyVal_.new_("old", oldRaw), KeyVal_.new_("new", val.Raw()), KeyVal_.new_("lxr", this));
+		GfoEvMgr_.PubVals(this, GfmlLxr_.CmdTknChanged_evt, Keyval_.new_("old", oldRaw), Keyval_.new_("new", val.Raw()), Keyval_.new_("lxr", this));
 	}
 	public String[] Hooks() {return hooks;} private String[] hooks;
 	public GfmlTkn MakeTkn(CharStream stream, int hookLength) {

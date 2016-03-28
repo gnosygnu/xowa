@@ -28,7 +28,7 @@ public class Gdif_job_tbl implements Rls_able {
 	}
 	public String Tbl_name() {return tbl_name;}
 	public String Fld_job_id() {return fld_job_id;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Gdif_job_itm Insert(int id, String name, String made_by, DateAdp made_on, String data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

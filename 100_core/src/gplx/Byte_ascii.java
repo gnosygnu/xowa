@@ -120,7 +120,7 @@ public class Byte_ascii {
 	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
 	, Underline_bry			= new byte[] {Byte_ascii.Underline}
 	, Slash_bry				= new byte[] {Byte_ascii.Slash}
-	, Asterisk_bry			= new byte[] {Byte_ascii.Star}
+	, Star_bry				= new byte[] {Byte_ascii.Star}
 	, Dash_bry				= new byte[] {Byte_ascii.Dash}
 	, Cr_lf_bry				= new byte[] {Byte_ascii.Cr, Byte_ascii.Nl}
 	;

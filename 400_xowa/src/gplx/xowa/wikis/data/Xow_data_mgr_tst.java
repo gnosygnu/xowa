@@ -127,8 +127,8 @@ class Xow_data_mgr_fxt {
 	Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Db_mgr().Save_mgr().Page_id_next_(0);
 	}
 	public Xow_data_mgr_fxt Create(String ttl_str, String data) {

@@ -32,8 +32,8 @@ public class Xob_link_dump_cmd {
 			tbl.Insert_end();
 			tbl.Create_idx_1();
 			Db_conn conn = tbl.Conn();
-			Db_attach_cmd.new_(conn, "page_db", page_db_url)
-				.Add_fmt("update trg_page_id", String_.Concat_lines_nl_skip_last
+			new Db_attach_mgr(conn,  new Db_attach_itm("page_db", page_db_url))
+				.Exec_sql_w_msg("update trg_page_id", String_.Concat_lines_nl_skip_last
 				( "REPLACE INTO link_dump"
 				, "SELECT  r.uid"
 				, ",       r.src_page_id"
@@ -42,10 +42,9 @@ public class Xob_link_dump_cmd {
 				, ",       r.trg_ns"
 				, ",       r.trg_ttl"
 				, "FROM    link_dump r"
-				, "        LEFT JOIN page_db.page p ON r.trg_ns = p.page_namespace AND r.trg_ttl = p.page_title"
+				, "        LEFT JOIN <page_db>page p ON r.trg_ns = p.page_namespace AND r.trg_ttl = p.page_title"
 				, ";"
-				))				
-				.Exec();
+				));;
 			conn.Exec_sql("UPDATE link_dump SET trg_ns = -1 AND trg_ttl = '' WHERE trg_page_id != -1;");
 			tbl.Create_idx_2();
 			conn.Env_vacuum();

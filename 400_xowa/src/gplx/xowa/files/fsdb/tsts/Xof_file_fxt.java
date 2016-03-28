@@ -30,8 +30,8 @@ class Xof_file_fxt {
 		Io_mgr.Instance.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
 		Io_url root_url = Xoa_test_.Url_root();
 		Xoa_test_.Db_init(root_url);
-		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), root_url);
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit(Op_sys.Cur().Os_name(), root_url);
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.File__fsdb_mode().Tid_v2_bld_y_();
 		this.fsdb_mgr = (Xof_fsdb_mgr__sql)wiki.File_mgr().Fsdb_mgr();
 		this.orig_mgr = wiki.File__orig_mgr();

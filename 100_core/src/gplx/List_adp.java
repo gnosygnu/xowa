@@ -17,9 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
-public interface List_adp extends EnumerAble {
+public interface List_adp extends EnumerAble, List_adp__getable {
 	int Count();
-	Object Get_at(int i);
 	Object Get_at_last();
 	void Add(Object o);
 	void Add_at(int i, Object o);
@@ -49,6 +48,7 @@ class List_adp_obj extends List_adp_base implements List_adp {
 }
 class List_adp_noop implements List_adp {
 	public int Count() {return 0;}
+	public int Len() {return 0;}
 	public Object Get_at(int i) {return null;}
 	public Object Get_at_last() {return null;}
 	public Object PopLast() {return null;}

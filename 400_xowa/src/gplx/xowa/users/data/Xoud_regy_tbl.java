@@ -35,7 +35,7 @@ public class Xoud_regy_tbl {
 		if (created) {
 			Schema_update_cmd cmd = Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core);
 			cmd.Exec(null, conn);
-//				conn.Ddl_create_tbl(meta);
+//				conn.Meta_tbl_create(meta);
 		}
 		return this;
 	} private Db_conn conn;

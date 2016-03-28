@@ -36,7 +36,7 @@ class Scrib_lua_srl_fxt {
 			srl = new Process_send_wtr(usr_dlg);
 		}
 	}	Process_send_wtr srl; Gfo_usr_dlg usr_dlg;
-	public KeyVal[] ary_(KeyVal... ary)		{return ary;}
-	public KeyVal   itm_(String key, Object val)	{return KeyVal_.new_(key, val);}
+	public Keyval[] ary_(Keyval... ary)		{return ary;}
+	public Keyval   itm_(String key, Object val)	{return Keyval_.new_(key, val);}
 	public void Test_encode(Object o, String expd) {Tfds.Eq(expd, srl.Encode(o));}
 }

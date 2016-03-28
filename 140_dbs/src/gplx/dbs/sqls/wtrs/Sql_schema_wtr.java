@@ -34,6 +34,7 @@ public class Sql_schema_wtr {
 		int flds_len = flds.length;
 		for (int i = 0; i < flds_len; ++i) {
 			Dbmeta_idx_fld fld = flds[i];
+			if (fld == null) continue; // fld will be null when tbl has Dbmetafld.Key_null (to support obsoleted schemas)
 			if (i != 0) tmp_bfr.Add_str_a7(", ");
 			tmp_bfr.Add_str_a7(fld.Name);
 		}

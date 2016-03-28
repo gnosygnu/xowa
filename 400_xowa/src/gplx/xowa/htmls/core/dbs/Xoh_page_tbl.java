@@ -34,7 +34,7 @@ public class Xoh_page_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] body) {Insert(hpg.Page_id(), hpg.Head_mgr().Flag(), zip_tid, hzip_tid, hpg.Display_ttl(), hpg.Content_sub(), hpg.Sidebar_div(), body);}

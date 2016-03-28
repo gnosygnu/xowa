@@ -34,15 +34,19 @@ public class Xoa_app_ {
 		}
 	}
 	public static final String		Name			= "xowa";
-	public static final String		Version			= "3.2.1.1";
+	public static final String		Version			= "3.3.4.1";
 	public static String	Build_date		= "2012-12-30 00:00:00";
 	public static String	Op_sys_str;
 	public static String	User_agent		= "";
-	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
+	public static final    Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
-	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
-	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
+	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final    Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 	public static Xoa_gfs_mgr		Gfs_mgr()			{return gfs_mgr;}			public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
+	public static void Plog_none(String mod, String fmt) {
+		String msg = mod + ": " + fmt;
+		Xoa_app_.Usr_dlg().Plog_many("", "", msg);
+	}
 	public static Gfo_usr_dlg usr_dlg_console_() {
 		Gfo_usr_dlg rv = new Gfo_usr_dlg_base(new Gfo_usr_dlg__log_base(), Gfo_usr_dlg__gui_.Console);
 		rv.Log_wkr().Queue_enabled_(true);

@@ -24,7 +24,6 @@ public class Xoa_sitelink_div_wtr {
 	private final Xoa_sitelink_grp_wtr grp_wtr = new Xoa_sitelink_grp_wtr();
 	public void Write(Bry_bfr bfr, Xowe_wiki wiki, Xoa_sitelink_mgr mgr, List_adp slink_list, byte[] qid) {
 		Xoa_sitelink_grp_mgr grp_mgr = mgr.Grp_mgr(); Xoa_sitelink_itm_mgr itm_mgr = mgr.Itm_mgr();
-
 		// reset grps
 		grp_wtr.Init_by_app(wiki.App());
 		int grp_len = grp_mgr.Len();
@@ -32,7 +31,6 @@ public class Xoa_sitelink_div_wtr {
 			Xoa_sitelink_grp grp = grp_mgr.Get_at(i);
 			grp.Reset();
 		}
-
 		// add itms to each grp
 		int slink_len = slink_list.Count();
 		for (int i = 0; i < slink_len; i++) {
@@ -51,7 +49,6 @@ public class Xoa_sitelink_div_wtr {
 			}
 			itm.Init_by_page(slink.Domain_info(), ttl_bry, ttl_is_empty, slink.Badges());				
 		}
-
 		// write html
 		Xoapi_toggle_itm toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("wikidata-langs");
 		toggle_itm.Init(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header));

@@ -47,10 +47,8 @@ public class Xof_img_size_tst {
 	@Test  	public void Upright() 					{fxt.Lnki_upright_(1).Lnki_(-1, -1).Orig_(440, 400).Test_html(220, 200);}	
 	@Test  	public void Upright_w_thumb() 			{fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_upright_(2).Lnki_(-1, -1).Orig_(1500, 1125).Test_html(440, 330);}
 	@Test  	public void Upright_ignored_by_w() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_upright_(3.2).Lnki_(900, -1).Orig_(4653, 854).Test_html(900, 165);}// PAGE: fr.w:Bogota; DATE:2014-05-22
-
 	@Test   public void Explicit_ratio_large()		{fxt.Lnki_(120,  40).Test_html( 80,  40);}	// see NOTE_2: lnki_ratio > orig_ratio
 	@Test   public void Explicit_ratio_small()		{fxt.Lnki_(120,  80).Test_html(120,  60);}	// see NOTE_2: lnki_ratio > orig_ratio
-
 	@Test   public void Lnki_gt_orig_null_svg_example() {	// EX:[[File:Crystal Clear app kedit.svg|50x40px]]
 		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_null).Lnki_( 50,  40).Orig_( 40,  40).Test_html( 40,  40);
 	}	

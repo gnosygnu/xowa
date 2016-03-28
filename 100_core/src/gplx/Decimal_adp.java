@@ -39,7 +39,9 @@ public class Decimal_adp implements CompareAble {
 		return tmp	.stripTrailingZeros()				// NOTE: stripTrailingZeros for exp tests; EX: 120.0 -> 120; 0.01200000000000 -> .012 
 					.toPlainString();					// NOTE: toPlainString b/c stripTrailingZeros now converts 120 to 1.2E+2 (and any other value that is a multiple of 10)
 	}
-	public String To_str(String fmt) 					{return new DecimalFormat(fmt).format(under);}
+	public String To_str(String fmt) 					{
+		return new DecimalFormat(fmt).format(under);
+	}
 	@Override public String toString() 					{return under.toString();}
 	public int To_int() 								{return (int)under.doubleValue();}
 	public long To_long() 								{return (long)under.doubleValue();}

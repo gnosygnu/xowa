@@ -23,10 +23,10 @@ public class Xoapi_cache implements GfoInvkAble {
 	private String Info() {
 		cache_mgr.Page_bgn();
 		Bry_bfr bfr = Bry_bfr.new_(255);
-		KeyVal[] ary = cache_mgr.Info();
+		Keyval[] ary = cache_mgr.Info();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			bfr.Add_str_a7(kv.Key()).Add_str_a7(": ").Add_str_u8(kv.Val_to_str_or_empty()).Add_byte_nl();
 		}
 		return bfr.To_str_and_clear();

@@ -34,7 +34,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 		cfg_tbl.Delete_all();
 	}
 	@Override protected Db_conn Init_db_file() {
-		Xob_db_file tbl_file = Xob_db_file.new_(wiki.Fsys_mgr().Root_dir(), "wdata_db.sqlite3");
+		Xob_db_file tbl_file = Xob_db_file.New(wiki.Fsys_mgr().Root_dir(), "wdata_db.sqlite3");
 		Db_conn conn = tbl_file.Conn();
 		tbl_mgr.Init(conn);
 		return conn;
@@ -127,7 +127,7 @@ class Wdata_label_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_label__main ON wdata_label (page_id, lang_key);")};}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_lang_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {Exec_insert_kvs(this.Insert_stmt(), page_id, wdoc.Label_list());}
-	private static final String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
+	private static final    String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
 }
 class Wdata_alias_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_alias";}
@@ -167,7 +167,7 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 			}
 		}
 	}
-	private static final String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
+	private static final    String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
 }
 class Wdata_description_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_description";}
@@ -183,7 +183,7 @@ class Wdata_description_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_description__main ON wdata_description (page_id, lang_key);")};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {Exec_insert_kvs(this.Insert_stmt(), page_id, wdoc.Descr_list());}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_lang_key, Fld_val};}
-	private static final String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
+	private static final    String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
 }
 class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_link";}
@@ -221,7 +221,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 			.Exec_insert();
 		}
 	}
-	private static final String Fld_page_id = "page_id", Fld_wiki_key  = "wiki_key", Fld_val = "val";
+	private static final    String Fld_page_id = "page_id", Fld_wiki_key  = "wiki_key", Fld_val = "val";
 }
 class Wdata_claim_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_claim";}
@@ -285,7 +285,7 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 		.Val_int(qual_count)
 		.Exec_insert();
 	}
-	private static final String Fld_claim_id = "claim_id", Fld_page_id = "page_id", Fld_prop_id = "prop_id", Fld_val_tid = "val_tid", Fld_entity_tid = "entity_tid", Fld_entity_id = "entity_id", Fld_val_text = "val_text"
+	private static final    String Fld_claim_id = "claim_id", Fld_page_id = "page_id", Fld_prop_id = "prop_id", Fld_val_tid = "val_tid", Fld_entity_tid = "entity_tid", Fld_entity_id = "entity_id", Fld_val_text = "val_text"
 	, Fld_guid = "guid", Fld_rank = "rank", Fld_ref_count = "ref_count", Fld_qual_count = "qual_count"
 	;
 }
@@ -321,7 +321,7 @@ class Wdata_claim_time_tbl extends Wdata_tbl_base {
 		.Val_bry_as_str(model)
 		.Exec_insert();
 	}
-	private static final String Fld_claim_id = "claim_id", Fld_time_val = "time_val", Fld_time_tz = "time_tz", Fld_time_before = "time_before", Fld_time_after = "time_after", Fld_time_precision = "time_precision", Fld_time_model = "time_model";
+	private static final    String Fld_claim_id = "claim_id", Fld_time_val = "time_val", Fld_time_tz = "time_tz", Fld_time_before = "time_before", Fld_time_after = "time_after", Fld_time_precision = "time_precision", Fld_time_model = "time_model";
 }
 class Wdata_claim_geo_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_claim_geo";}
@@ -353,7 +353,7 @@ class Wdata_claim_geo_tbl extends Wdata_tbl_base {
 		.Exec_insert();
 	}
 	@Override public String[] Fld_ary() {return new String[] {Fld_claim_id, Fld_geo_latitude, Fld_geo_longitude, Fld_geo_altitude, Fld_geo_precision, Fld_geo_globe};}
-	private static final String Fld_claim_id = "claim_id", Fld_geo_latitude = "geo_latitude", Fld_geo_longitude = "geo_longitude", Fld_geo_altitude = "geo_altitude", Fld_geo_precision = "geo_precision", Fld_geo_globe = "geo_globe";
+	private static final    String Fld_claim_id = "claim_id", Fld_geo_latitude = "geo_latitude", Fld_geo_longitude = "geo_longitude", Fld_geo_altitude = "geo_altitude", Fld_geo_precision = "geo_precision", Fld_geo_globe = "geo_globe";
 }
 class Wdata_ref_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_ref";}
@@ -376,7 +376,7 @@ class Wdata_ref_tbl extends Wdata_tbl_base {
 		};
 	}
 	@Override public String[] Fld_ary() {return new String[] {Fld_ref_id, Fld_page_id, Fld_prop_id, Fld_val_tid, Fld_entity_tid, Fld_entity_id, Fld_val_text};}
-	private static final String Fld_ref_id = "ref_id", Fld_page_id = "page_id", Fld_prop_id = "prop_id", Fld_val_tid = "val_tid", Fld_entity_tid = "entity_tid", Fld_entity_id = "entity_id", Fld_val_text = "val_ext";
+	private static final    String Fld_ref_id = "ref_id", Fld_page_id = "page_id", Fld_prop_id = "prop_id", Fld_val_tid = "val_tid", Fld_entity_tid = "entity_tid", Fld_entity_id = "entity_id", Fld_val_text = "val_ext";
 }
 class Wdata_qual_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_qual";}
@@ -402,10 +402,10 @@ class Wdata_qual_tbl extends Wdata_tbl_base {
 		.Val_bry_as_str(val_text)
 		.Exec_insert();
 	}
-	private static final String Fld_qual_id = "qual_id", Fld_page_id = "page_id", Fld_val_text = "val_text";
+	private static final    String Fld_qual_id = "qual_id", Fld_page_id = "page_id", Fld_val_text = "val_text";
 }
 class Xob_wdata_db_visitor implements Wdata_claim_visitor {
-	private final  Wdata_wiki_mgr wdata_mgr; private byte[] lang_key;
+	private final     Wdata_wiki_mgr wdata_mgr; private byte[] lang_key;
 	public Xob_wdata_db_visitor(Wdata_wiki_mgr wdata_mgr) {this.wdata_mgr = wdata_mgr;}
 	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
 	public byte[] Rv() {return rv;} private byte[] rv;
@@ -416,7 +416,7 @@ class Xob_wdata_db_visitor implements Wdata_claim_visitor {
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Comma, itm.Lat(), itm.Lng());}
 	public void Visit_system(Wdata_claim_itm_system itm)					{rv = Bry_.Empty;}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
-		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
+		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Page_ttl_db());
 		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list__get(lang_key);
 	}
 }

@@ -240,37 +240,37 @@ public class Xoh_html_wtr {
 		Xop_xnde_tag tag = xnde.Tag();
 		int tag_id = tag.Id();
 		switch (tag_id) {
-			case Xop_xnde_tag_.Tid_br:
+			case Xop_xnde_tag_.Tid__br:
 				if (xnde.Src_end() - xnde.Src_bgn() < 4
 					|| xnde.Src_bgn() == -1) 
 					bfr.Add(Tag_br); else bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end()); break;
-			case Xop_xnde_tag_.Tid_hr: bfr.Add(Tag_hr); break;
-			case Xop_xnde_tag_.Tid_includeonly:	// NOTE: do not write tags or content
+			case Xop_xnde_tag_.Tid__hr: bfr.Add(Tag_hr); break;
+			case Xop_xnde_tag_.Tid__includeonly:	// NOTE: do not write tags or content
 				break;
-			case Xop_xnde_tag_.Tid_noinclude:		// NOTE: do not write tags
-			case Xop_xnde_tag_.Tid_onlyinclude:	
+			case Xop_xnde_tag_.Tid__noinclude:		// NOTE: do not write tags
+			case Xop_xnde_tag_.Tid__onlyinclude:	
 				Xnde_subs_escape(ctx, hctx, bfr, src, xnde, false, false);
 				break;
-			case Xop_xnde_tag_.Tid_nowiki:
+			case Xop_xnde_tag_.Tid__nowiki:
 				Xnde_subs_escape(ctx, hctx, bfr, src, xnde, false, false);
 				break;
-			case Xop_xnde_tag_.Tid_b: case Xop_xnde_tag_.Tid_strong:
-			case Xop_xnde_tag_.Tid_i: case Xop_xnde_tag_.Tid_em: case Xop_xnde_tag_.Tid_cite: case Xop_xnde_tag_.Tid_dfn: case Xop_xnde_tag_.Tid_var:
-			case Xop_xnde_tag_.Tid_u: case Xop_xnde_tag_.Tid_ins: case Xop_xnde_tag_.Tid_abbr:
-			case Xop_xnde_tag_.Tid_strike: case Xop_xnde_tag_.Tid_s: case Xop_xnde_tag_.Tid_del:
-			case Xop_xnde_tag_.Tid_sub: case Xop_xnde_tag_.Tid_sup: case Xop_xnde_tag_.Tid_big: case Xop_xnde_tag_.Tid_small:
-			case Xop_xnde_tag_.Tid_code: case Xop_xnde_tag_.Tid_tt: case Xop_xnde_tag_.Tid_kbd: case Xop_xnde_tag_.Tid_samp: case Xop_xnde_tag_.Tid_blockquote:
-			case Xop_xnde_tag_.Tid_font: case Xop_xnde_tag_.Tid_center:
-			case Xop_xnde_tag_.Tid_p: case Xop_xnde_tag_.Tid_span: case Xop_xnde_tag_.Tid_div:
-			case Xop_xnde_tag_.Tid_h1: case Xop_xnde_tag_.Tid_h2: case Xop_xnde_tag_.Tid_h3: case Xop_xnde_tag_.Tid_h4: case Xop_xnde_tag_.Tid_h5: case Xop_xnde_tag_.Tid_h6:
-			case Xop_xnde_tag_.Tid_dt: case Xop_xnde_tag_.Tid_dd: case Xop_xnde_tag_.Tid_ol: case Xop_xnde_tag_.Tid_ul: case Xop_xnde_tag_.Tid_dl:
-			case Xop_xnde_tag_.Tid_table: case Xop_xnde_tag_.Tid_tr: case Xop_xnde_tag_.Tid_td: case Xop_xnde_tag_.Tid_th: case Xop_xnde_tag_.Tid_caption: case Xop_xnde_tag_.Tid_tbody:
-			case Xop_xnde_tag_.Tid_ruby: case Xop_xnde_tag_.Tid_rt: case Xop_xnde_tag_.Tid_rb: case Xop_xnde_tag_.Tid_rp: 
-			case Xop_xnde_tag_.Tid_time: case Xop_xnde_tag_.Tid_bdi: case Xop_xnde_tag_.Tid_data: case Xop_xnde_tag_.Tid_mark: case Xop_xnde_tag_.Tid_wbr: case Xop_xnde_tag_.Tid_bdo:	// HTML 5: write literally and let browser handle them
-			case Xop_xnde_tag_.Tid_q:
+			case Xop_xnde_tag_.Tid__b: case Xop_xnde_tag_.Tid__strong:
+			case Xop_xnde_tag_.Tid__i: case Xop_xnde_tag_.Tid__em: case Xop_xnde_tag_.Tid__cite: case Xop_xnde_tag_.Tid__dfn: case Xop_xnde_tag_.Tid__var:
+			case Xop_xnde_tag_.Tid__u: case Xop_xnde_tag_.Tid__ins: case Xop_xnde_tag_.Tid__abbr:
+			case Xop_xnde_tag_.Tid__strike: case Xop_xnde_tag_.Tid__s: case Xop_xnde_tag_.Tid__del:
+			case Xop_xnde_tag_.Tid__sub: case Xop_xnde_tag_.Tid__sup: case Xop_xnde_tag_.Tid__big: case Xop_xnde_tag_.Tid__small:
+			case Xop_xnde_tag_.Tid__code: case Xop_xnde_tag_.Tid__tt: case Xop_xnde_tag_.Tid__kbd: case Xop_xnde_tag_.Tid__samp: case Xop_xnde_tag_.Tid__blockquote:
+			case Xop_xnde_tag_.Tid__font: case Xop_xnde_tag_.Tid__center:
+			case Xop_xnde_tag_.Tid__p: case Xop_xnde_tag_.Tid__span: case Xop_xnde_tag_.Tid__div:
+			case Xop_xnde_tag_.Tid__h1: case Xop_xnde_tag_.Tid__h2: case Xop_xnde_tag_.Tid__h3: case Xop_xnde_tag_.Tid__h4: case Xop_xnde_tag_.Tid__h5: case Xop_xnde_tag_.Tid__h6:
+			case Xop_xnde_tag_.Tid__dt: case Xop_xnde_tag_.Tid__dd: case Xop_xnde_tag_.Tid__ol: case Xop_xnde_tag_.Tid__ul: case Xop_xnde_tag_.Tid__dl:
+			case Xop_xnde_tag_.Tid__table: case Xop_xnde_tag_.Tid__tr: case Xop_xnde_tag_.Tid__td: case Xop_xnde_tag_.Tid__th: case Xop_xnde_tag_.Tid__caption: case Xop_xnde_tag_.Tid__tbody:
+			case Xop_xnde_tag_.Tid__ruby: case Xop_xnde_tag_.Tid__rt: case Xop_xnde_tag_.Tid__rb: case Xop_xnde_tag_.Tid__rp: 
+			case Xop_xnde_tag_.Tid__time: case Xop_xnde_tag_.Tid__bdi: case Xop_xnde_tag_.Tid__data: case Xop_xnde_tag_.Tid__mark: case Xop_xnde_tag_.Tid__wbr: case Xop_xnde_tag_.Tid__bdo:	// HTML 5: write literally and let browser handle them
+			case Xop_xnde_tag_.Tid__q:
 				Write_xnde(bfr, ctx, hctx, xnde, tag, tag_id, src);
 				break;
-			case Xop_xnde_tag_.Tid_pre: {
+			case Xop_xnde_tag_.Tid__pre: {
 				if (xnde.Tag_open_end() == xnde.Tag_close_bgn()) return; // ignore empty tags, else blank pre line will be printed; DATE:2014-03-12
 				byte[] name = tag.Name_bry();
 				bfr.Add_byte(Byte_ascii.Angle_bgn).Add(name);
@@ -280,7 +280,7 @@ public class Xoh_html_wtr {
 				bfr.Add(Tag__end_bgn).Add(name).Add_byte(Byte_ascii.Angle_end);
 				break;
 			}
-			case Xop_xnde_tag_.Tid_li: {
+			case Xop_xnde_tag_.Tid__li: {
 				byte[] name = tag.Name_bry();
 				int bfr_len = bfr.Len();
 				if (bfr_len > 0 && bfr.Bfr()[bfr_len - 1] != Byte_ascii.Nl) bfr.Add_byte_nl();	// NOTE: always add nl before li else some lists will merge and force long horizontal bar; EX:w:Music
@@ -294,49 +294,52 @@ public class Xoh_html_wtr {
 					bfr.Add(Tag__end_bgn).Add(name).Add_byte(Byte_ascii.Angle_end);	// NOTE: inline is never written as <b/>; will be written as <b></b>; SEE: NOTE_1
 				break;
 			}
-			case Xop_xnde_tag_.Tid_timeline: {
+			case Xop_xnde_tag_.Tid__timeline: {
 				bfr.Add_str_a7("<pre class='xowa-timeline'>");
 				Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());	// NOTE: do not embed <timeline> tag inside pre, else timeline will render in black; EX:<pre><timeline>a</timeline></pre> will fail; DATE:2014-05-22
 				bfr.Add_str_a7("</pre>");
 				break;
 			}
-			case Xop_xnde_tag_.Tid_gallery:
-			case Xop_xnde_tag_.Tid_poem:
-			case Xop_xnde_tag_.Tid_hiero:
-			case Xop_xnde_tag_.Tid_score:
-			case Xop_xnde_tag_.Tid_ref:
-			case Xop_xnde_tag_.Tid_references:
-			case Xop_xnde_tag_.Tid_inputBox:
-			case Xop_xnde_tag_.Tid_imageMap:
-			case Xop_xnde_tag_.Tid_pages:
-			case Xop_xnde_tag_.Tid_pagequality:
-			case Xop_xnde_tag_.Tid_pagelist:
-			case Xop_xnde_tag_.Tid_section:
-			case Xop_xnde_tag_.Tid_translate:
-			case Xop_xnde_tag_.Tid_dynamicPageList:
-			case Xop_xnde_tag_.Tid_languages:
-			case Xop_xnde_tag_.Tid_templateData:
-			case Xop_xnde_tag_.Tid_source:	// DATE:2015-09-29
-			case Xop_xnde_tag_.Tid_syntaxHighlight:
-			case Xop_xnde_tag_.Tid_listing_buy:
-			case Xop_xnde_tag_.Tid_listing_do:
-			case Xop_xnde_tag_.Tid_listing_drink:
-			case Xop_xnde_tag_.Tid_listing_eat:
-			case Xop_xnde_tag_.Tid_listing_listing:
-			case Xop_xnde_tag_.Tid_listing_see:
-			case Xop_xnde_tag_.Tid_listing_sleep:
-			case Xop_xnde_tag_.Tid_xowa_cmd:
-			case Xop_xnde_tag_.Tid_rss:
-			case Xop_xnde_tag_.Tid_quiz:
-			case Xop_xnde_tag_.Tid_math:
-			case Xop_xnde_tag_.Tid_indicator:
-			case Xop_xnde_tag_.Tid_xowa_html:
-			case Xop_xnde_tag_.Tid_graph:
+			case Xop_xnde_tag_.Tid__gallery:
+			case Xop_xnde_tag_.Tid__poem:
+			case Xop_xnde_tag_.Tid__hiero:
+			case Xop_xnde_tag_.Tid__score:
+			case Xop_xnde_tag_.Tid__ref:
+			case Xop_xnde_tag_.Tid__references:
+			case Xop_xnde_tag_.Tid__inputBox:
+			case Xop_xnde_tag_.Tid__imageMap:
+			case Xop_xnde_tag_.Tid__pages:
+			case Xop_xnde_tag_.Tid__pagequality:
+			case Xop_xnde_tag_.Tid__pagelist:
+			case Xop_xnde_tag_.Tid__section:
+			case Xop_xnde_tag_.Tid__translate:
+			case Xop_xnde_tag_.Tid__dynamicPageList:
+			case Xop_xnde_tag_.Tid__languages:
+			case Xop_xnde_tag_.Tid__templateData:
+			case Xop_xnde_tag_.Tid__source:	// DATE:2015-09-29
+			case Xop_xnde_tag_.Tid__syntaxHighlight:
+			case Xop_xnde_tag_.Tid__listing_buy:
+			case Xop_xnde_tag_.Tid__listing_do:
+			case Xop_xnde_tag_.Tid__listing_drink:
+			case Xop_xnde_tag_.Tid__listing_eat:
+			case Xop_xnde_tag_.Tid__listing_listing:
+			case Xop_xnde_tag_.Tid__listing_see:
+			case Xop_xnde_tag_.Tid__listing_sleep:
+			case Xop_xnde_tag_.Tid__xowa_cmd:
+			case Xop_xnde_tag_.Tid__rss:
+			case Xop_xnde_tag_.Tid__quiz:
+			case Xop_xnde_tag_.Tid__math:
+			case Xop_xnde_tag_.Tid__indicator:
+			case Xop_xnde_tag_.Tid__xowa_html:
+			case Xop_xnde_tag_.Tid__graph:
+			case Xop_xnde_tag_.Tid__random_selection:
+			case Xop_xnde_tag_.Tid__tabber:
+			case Xop_xnde_tag_.Tid__tabview:
 				Xox_xnde xtn = xnde.Xnde_xtn();
 				xtn.Xtn_write(bfr, app, ctx, this, hctx, xnde, src);
 				break;
-			case Xop_xnde_tag_.Tid_xowa_tag_bgn:
-			case Xop_xnde_tag_.Tid_xowa_tag_end:
+			case Xop_xnde_tag_.Tid__xowa_tag_bgn:
+			case Xop_xnde_tag_.Tid__xowa_tag_end:
 				break;
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
@@ -460,9 +463,9 @@ public class Xoh_html_wtr {
 				case Xop_tkn_itm_.Tid_xnde:
 					Xop_xnde_tkn sub_xnde = (Xop_xnde_tkn)sub;
 					switch (sub_xnde.Tag().Id()) {
-						case Xop_xnde_tag_.Tid_noinclude:
-						case Xop_xnde_tag_.Tid_onlyinclude:
-						case Xop_xnde_tag_.Tid_includeonly:
+						case Xop_xnde_tag_.Tid__noinclude:
+						case Xop_xnde_tag_.Tid__onlyinclude:
+						case Xop_xnde_tag_.Tid__includeonly:
 							break;
 						default:
 							byte[] tag_name = sub_xnde.Tag().Name_bry();

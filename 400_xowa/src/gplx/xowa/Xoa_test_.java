@@ -23,12 +23,12 @@ public class Xoa_test_ {
 	public static boolean Db_skip()			{return Bool_.N;}
 	public static boolean Db_is_mem_dflt()		{return Bool_.Y;}
 	public static void Db_init(Io_url sqlite_url) {Db_init(Db_is_mem_dflt(), sqlite_url);}
-	public static void Db__init__mem(Xowe_wiki wiki) {
+	public static void Init__db__edit(Xowe_wiki wiki) {
 		Db__init__mem();
 		wiki.Db_mgr_create_as_sql();
 		wiki.Data__core_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
 	}
-	public static void Init__db__mem(gplx.xowa.wikis.Xowv_wiki wiki) {
+	public static void Init__db__view(gplx.xowa.wikis.Xowv_wiki wiki) {
 		Db__init__mem();
 		wiki.Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
 //			wiki.Data__core_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
@@ -44,18 +44,6 @@ public class Xoa_test_ {
 			Io_mgr.Instance.DeleteDirDeep(sqlite_url);
 			Db_conn_bldr.Instance.Reg_default_sqlite();
 		}
-	}
-	public static String Db__print_tbl_as_str(Bry_bfr bfr, Db_conn conn, String tbl, String... cols) {
-		int cols_len = cols.length;
-		Db_rdr rdr = conn.Stmt_select(tbl, cols).Exec_select__rls_auto();
-		while (rdr.Move_next()) {
-			for (int i = 0; i < cols_len; ++i) {
-				bfr.Add_obj(rdr.Read_at(i));
-				bfr.Add_byte(i == cols_len - 1 ? Byte_ascii.Nl : Byte_ascii.Pipe);
-			}
-		}
-		rdr.Rls();
-		return bfr.To_str_and_clear();
 	}
 	public static void Inet__init() {
 		Gfo_inet_conn_.new_prototype_(Gfo_inet_conn_.Tid__mem__hash);

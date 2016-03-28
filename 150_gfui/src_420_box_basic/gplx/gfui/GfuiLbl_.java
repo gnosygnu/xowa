@@ -23,7 +23,7 @@ public class GfuiLbl_ {
 		rv.TextMgr().AlignH_(GfuiAlign_.Mid);
 		return rv;
 	}
-	public static GfuiLbl kit_(Gfui_kit kit, String key, GxwElem elm, KeyValHash ctorArgs) {
+	public static GfuiLbl kit_(Gfui_kit kit, String key, GxwElem elm, Keyval_hash ctorArgs) {
 		GfuiLbl rv = new GfuiLbl();
 		rv.ctor_kit_GfuiElemBase(kit, key, elm, ctorArgs);
 		return rv;

@@ -61,4 +61,21 @@ public class Dbmeta_fld_itm {
 			rv[i] = ary[i].name;
 		return rv;
 	}
+
+	public static String Make_or_null(Db_conn conn, Dbmeta_fld_list flds, String tbl_name, int fld_type, Object fld_dflt, String fld_name) {
+		boolean tbl_exists = conn.Meta_tbl_exists(tbl_name);
+		boolean fld_exists = true;
+		if (tbl_exists) {
+			fld_exists = conn.Meta_fld_exists(tbl_name, fld_name);
+			if (!fld_exists) return Dbmeta_fld_itm.Key_null;
+		}
+		Dbmeta_fld_itm fld = null;
+		switch (fld_type) {
+			case Dbmeta_fld_tid.Tid__int: fld = Dbmeta_fld_itm.new_int(fld_name); break;
+		}
+		if (fld_dflt != null) fld.Default_(fld_dflt);
+		flds.Add(fld);
+		return fld.name;
+	}
+	public static String To_double_str_by_int(int v) {return Int_.To_str(v) + ".0";}
 }

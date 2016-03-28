@@ -30,7 +30,7 @@ public class GfuiBtn_ {
 		rv.Click_invk(GfoInvkAbleCmd.new_(invk, m));
 		return rv;
 	}
-	public static GfuiBtn kit_(Gfui_kit kit, String key, GxwElem elm, KeyValHash ctorArgs) {
+	public static GfuiBtn kit_(Gfui_kit kit, String key, GxwElem elm, Keyval_hash ctorArgs) {
 		GfuiBtn rv = new GfuiBtn();
 		rv.ctor_kit_GfuiElemBase(kit, key, elm, ctorArgs);
 		return rv;

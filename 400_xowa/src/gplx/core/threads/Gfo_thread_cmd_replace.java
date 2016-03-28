@@ -42,7 +42,7 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 		String raw = Io_mgr.Instance.LoadFilStr(fil);
 		int pairs_len = pairs.Count();
 		for (int i = 0; i < pairs_len; i++) {
-			KeyVal kv = (KeyVal)pairs.Get_at(i);
+			Keyval kv = (Keyval)pairs.Get_at(i);
 			raw = String_.Replace(raw, kv.Key(), kv.Val_to_str_or_null());
 		}
 		Io_mgr.Instance.SaveFilStr(fil, raw);
@@ -53,7 +53,7 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 		if		(ctx.Match(k, Invk_async_bgn))				Exec_find_replace();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_fil_))					fil = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_add))					pairs.Add(KeyVal_.new_(m.ReadStr("find"), m.ReadStr("replace")));
+		else if	(ctx.Match(k, Invk_add))					pairs.Add(Keyval_.new_(m.ReadStr("find"), m.ReadStr("replace")));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_async_bgn = "async_bgn", Invk_owner = "owner", Invk_fil_ = "fil_", Invk_add = "add";

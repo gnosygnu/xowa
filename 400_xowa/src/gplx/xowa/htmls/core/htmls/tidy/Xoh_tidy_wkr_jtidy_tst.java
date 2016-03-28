@@ -50,6 +50,16 @@ class Jtidy_fxt {
 }
 class Test_mgr {
 	public static void Eq_str(String expd, String actl) {
+//		byte[] expd_bry = Bry_.new_u8(expd);
+//		byte[] actl_bry = Bry_.new_u8(actl);
+//		int expd_len = expd_bry.length;
+//		int actl_len = actl_bry.length;
+//		if (expd_len != actl_len) throw new RuntimeException(String.format("expd != actl; expd:%s actl:%s", Int_.To_str(expd_len), Int_.To_str(actl_len)));
+//		for (int i = 0; i < expd_len; ++i) {
+//			byte expd_byte = expd_bry[i];
+//			byte actl_byte = actl_bry[i];
+//			if (expd_byte != actl_byte) throw new RuntimeException(String.format("expd != actl; %s expd:%s actl:%s", Int_.To_str(i), Byte_.To_str(expd_byte), Byte_.To_str(actl_byte)));
+//		}
 		if (!expd.equals(actl)) throw new RuntimeException(String.format("expd != actl; expd:%s actl:%s", expd, actl));
 	}
 }

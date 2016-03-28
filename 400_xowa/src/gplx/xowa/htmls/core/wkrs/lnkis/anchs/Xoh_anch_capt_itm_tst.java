@@ -36,8 +36,8 @@ class Xoh_anch_capt_itm_fxt {
 	private final Xoh_anch_capt_itm matcher = new Xoh_anch_capt_itm();
 	private final Bry_rdr rdr = new Bry_rdr();
 	public Xoh_anch_capt_itm_fxt() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public void Test__match(String page_str, String capt_str, int expd_tid) {Test__match(page_str, capt_str, expd_tid, -1);}

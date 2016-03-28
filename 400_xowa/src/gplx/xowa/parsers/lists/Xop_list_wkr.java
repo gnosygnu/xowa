@@ -30,7 +30,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		// NOTE: list_tkns can not be explicitly closed, so auto-close will happen for all items
 		MakeTkn_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, (Xop_list_tkn)tkn, Bool_.Y_byte);
 		Reset(listId + 1);
-		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_ul);
+		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__ul);
 	}
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {// REF.MW: Parser|doBlockLevels
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) bgn_pos = 0;	// do not allow -1 pos
@@ -47,7 +47,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		symByt = src[cur_pos - 1];	// NOTE: get symByt again b/c cur_pos may have changed; EX: "#*"; # may have triggered list, but last symByt should be *
 		if (SymAry_fill_overflow) return ctx.Lxr_make_txt_(cur_pos);
 		PrvItm_compare();
-		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos - 1, Xop_xnde_tag_.Tag_li);	// -1 b/c cur_pos includes sym_byte; EX: \n*; pass li; should pass correct tag, but for purposes of para_wkr, <li> doesn't matter
+		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos - 1, Xop_xnde_tag_.Tag__li);	// -1 b/c cur_pos includes sym_byte; EX: \n*; pass li; should pass correct tag, but for purposes of para_wkr, <li> doesn't matter
 		if	(prvSymMatch) {
 			PopTil(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, Bool_.N_byte);
 			posBldr.MoveNext();
@@ -101,7 +101,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		Xop_tkn_itm end_tkn = tkn_mkr.List_end(bgn_pos, bgn.List_itmTyp()).List_path_(bgn.List_path()).List_uid_(listId).List_sub_last_(sub_last);
 		ctx.Subs_add(root, end_tkn);
 		// if (empty_ignored) ctx.Empty_ignore(root, bgn.Tkn_sub_idx());	// commented; code was incorrectly deactivating "*a" when "<li>" encountered; PAGE:en.w:Bristol_Bullfinch DATE:2014-06-24
-		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_ul);
+		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__ul);
 	}
 	private Xop_list_tkn PopTil(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte subLast) {
 		int acs_pos = ctx.Stack_idx_find_but_stop_at_tbl(Xop_tkn_itm_.Tid_list);

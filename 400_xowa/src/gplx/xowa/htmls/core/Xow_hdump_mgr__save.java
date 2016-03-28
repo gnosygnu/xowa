@@ -68,7 +68,7 @@ public class Xow_hdump_mgr__save {
 			core_data_mgr.Tbl__page().Update__html_db_id(page.Revision_data().Id(), html_db_id);
 		}
 		else {
-			rv = core_data_mgr.Dbs__get_at(html_db_id);
+			rv = core_data_mgr.Dbs__get_by_id(html_db_id);
 		}
 		return rv;
 	}

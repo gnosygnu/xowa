@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*;
-import gplx.core.ios.*; import gplx.xowa.wikis.data.*;
+import gplx.core.ios.*; import gplx.xowa.wikis.data.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.page_ranks.*;
 public class Xoapi_import implements GfoInvkAble {
+	public Xoapi_page_rank Page_rank() {return page_rank;} private final Xoapi_page_rank page_rank = new Xoapi_page_rank();
 	public long		Layout_all_max()		{return layout_all_max;}		private long layout_all_max			= 0;									// disable by default; may set to 200 MB in future
 	public long		Layout_text_max()		{return layout_text_max;}		private long layout_text_max		= Io_size_.To_long_by_int_mb(1500);		// 1.5 GB
 	public long		Layout_html_max()		{return layout_html_max;}		private long layout_html_max		= Io_size_.To_long_by_int_mb(1500);		// 1.5 GB
@@ -77,10 +78,11 @@ public class Xoapi_import implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_hzip_mode_is_b256_)) 				hzip_mode_is_b256 = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_user_name)) 							return user_name;
 		else if	(ctx.Match(k, Invk_user_name_)) 						user_name = m.ReadStr("v");
+		else if	(ctx.Match(k, Invk_page_rank)) 							return page_rank;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static KeyVal[] Options_zip_tid__list = KeyVal_.Ary(KeyVal_.new_("raw", "text"), KeyVal_.new_("gzip"), KeyVal_.new_("bzip2"));
+	private static Keyval[] Options_zip_tid__list = Keyval_.Ary(Keyval_.new_("raw", "text"), Keyval_.new_("gzip"), Keyval_.new_("bzip2"));
 	private static final String
 	  Invk_layout_all_max		= "layout_all_max"		, Invk_layout_all_max_		= "layout_all_max_"
 	, Invk_layout_text_max		= "layout_text_max"		, Invk_layout_text_max_		= "layout_text_max_"
@@ -96,6 +98,7 @@ public class Xoapi_import implements GfoInvkAble {
 	, Invk_user_name			= "user_name"			, Invk_user_name_			= "user_name_"
 	, Invk_hzip_enabled			= "hzip_enabled"		, Invk_hzip_enabled_		= "hzip_enabled_"
 	, Invk_hzip_mode_is_b256	= "hzip_mode_is_b256"	, Invk_hzip_mode_is_b256_	= "hzip_mode_is_b256_"
+	, Invk_page_rank			= "page_rank"
 	;
 	public static final byte[] Ns_file_map__each = Bry_.new_a7("<each>");
 }

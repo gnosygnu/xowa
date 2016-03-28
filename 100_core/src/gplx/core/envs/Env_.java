@@ -56,7 +56,7 @@ public class Env_ {
 	public static long System_memory_max() {return Runtime.getRuntime().maxMemory();}	
 	public static long System_memory_total() {return Runtime.getRuntime().totalMemory();}	
 	public static long System_memory_free() {return Runtime.getRuntime().freeMemory();}	
-	public static final String LocalHost = "127.0.0.1";
+	public static final    String LocalHost = "127.0.0.1";
 	public static String NewLine_lang() {return mode_testing ? "\n" : "\n";}	
 	public static String GenHdr(boolean forSourceCode, String programName, String hdr_bgn, String hdr_end) {
 		String newLine = Op_sys.Lnx.Nl_str();
@@ -68,7 +68,7 @@ public class Env_ {
 			( codeBgn
 			, codeHdr
 			, hdr_bgn
-			, "Copyright (c) 2012 gnosygnu@gmail.com", newLine
+			, "Copyright (c) 2012-2016 gnosygnu@gmail.com", newLine
 			, newLine
 			, "This program is free software: you can redistribute it and/or modify", lineEnd
 			, "it under the terms of the GNU Affero General Public License as", lineEnd

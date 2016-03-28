@@ -26,7 +26,7 @@ public class Db_qry_update implements Db_arg_owner {
 	public String[]		Cols_for_update() {return cols_for_update;} private String[] cols_for_update;
 	public Criteria		Where() {return where;} public Db_qry_update Where_(Criteria crt) {where = crt; return this;} private Criteria where;
 	public Db_arg_owner From_(String tbl) {base_table = tbl; return this;}
-	public KeyValHash Args() {return args;} private final KeyValHash args = KeyValHash.new_();
+	public Keyval_hash Args() {return args;} private final Keyval_hash args = new Keyval_hash();
 	public Db_arg_owner Val_byte(String k, byte v)				{return Val_obj_type(k, v, Db_val_type.Tid_byte);}
 	public Db_arg_owner Val_int(String k, int v)				{return Val_obj_type(k, v, Db_val_type.Tid_int32);}
 	public Db_arg_owner Val_long(String k, long v)				{return Val_obj_type(k, v, Db_val_type.Tid_int64);}

@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*;
 class Scrib_lib_text__json_util {
 	private final Json_wtr wtr = new Json_wtr();
-	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, KeyVal[] kv_ary, boolean is_encoding) {
+	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, Keyval[] kv_ary, boolean is_encoding) {
 		int next = 0;
 		if (is_encoding) {
 			Array_.Sort(kv_ary, KeyVal__sorter__key_is_numeric.Instance);
@@ -28,10 +28,10 @@ class Scrib_lib_text__json_util {
 		boolean is_sequence = true;
 		int len = kv_ary.length;
 		for (int i = 0; i < len; ++i) {
-			KeyVal kv = kv_ary[i];
+			Keyval kv = kv_ary[i];
 			Object kv_val = kv.Val();
-			if (kv_val != null && Type_adp_.Eq(kv_val.getClass(), KeyVal[].class)) {
-				Reindex_arrays(rv, (KeyVal[])kv_val, is_encoding);
+			if (kv_val != null && Type_adp_.Eq(kv_val.getClass(), Keyval[].class)) {
+				Reindex_arrays(rv, (Keyval[])kv_val, is_encoding);
 				if (!rv.Rv_is_kvy())
 					kv.Val_(rv.Rv_as_ary());
 			}
@@ -62,23 +62,23 @@ class Scrib_lib_text__json_util {
 		}
 		rv.Init(Bool_.Y, kv_ary, null);
 	}
-	private static Object[] To_array_values(KeyVal[] ary) {
+	private static Object[] To_array_values(Keyval[] ary) {
 		int len = ary.length;
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; ++i) {
-			KeyVal itm = ary[i];
+			Keyval itm = ary[i];
 			rv[i] = itm.Val();
 		}
 		return rv;
 	}
-	private static void Convert_to_base1(KeyVal[] ary) {
+	private static void Convert_to_base1(Keyval[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			KeyVal itm = ary[i];
+			Keyval itm = ary[i];
 			itm.Key_(i + 1);
 		}
 	}
-	public KeyVal[] Decode_rslt_as_nde() {return decode_rslt_as_nde;} private KeyVal[] decode_rslt_as_nde;
+	public Keyval[] Decode_rslt_as_nde() {return decode_rslt_as_nde;} private Keyval[] decode_rslt_as_nde;
 	public Object	Decode_rslt_as_ary() {return decode_rslt_as_ary;} private Object   decode_rslt_as_ary;
 	public byte Decode(Json_parser parser, byte[] src, int flag) {
 		synchronized (wtr) {
@@ -90,13 +90,13 @@ class Scrib_lib_text__json_util {
 			else {
 				Json_nde root = (Json_nde)jdoc.Root_grp();
 				int len = root.Len();
-				this.decode_rslt_as_nde = new KeyVal[len];
+				this.decode_rslt_as_nde = new Keyval[len];
 				for (int i = 0; i < len; ++i) {
 					Json_kv json_kv = root.Get_at_as_kv(i);
 					String kv_str = json_kv.Key_as_str();
 					Object kv_val = Decode_obj(json_kv.Val());
 					int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
-					decode_rslt_as_nde[i] = kv_int == Int_.Min_value ? KeyVal_.new_(kv_str, kv_val) : KeyVal_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
+					decode_rslt_as_nde[i] = kv_int == Int_.Min_value ? Keyval_.new_(kv_str, kv_val) : Keyval_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 				}
 				return Bool_.Y_byte;
 			}
@@ -119,19 +119,19 @@ class Scrib_lib_text__json_util {
 		}
 		return rv;
 	}
-	private KeyVal[] Decode_nde(Json_nde nde) {
+	private Keyval[] Decode_nde(Json_nde nde) {
 		int len = nde.Len();
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; ++i) {
 			Json_kv itm = nde.Get_at_as_kv(i);
 			String kv_str = itm.Key_as_str();
 			int kv_int = Int_.parse_or(kv_str, Int_.Min_value);
 			Object kv_val = Decode_obj(itm.Val());
-			rv[i] = kv_int == Int_.Min_value ? KeyVal_.new_(kv_str, kv_val) : KeyVal_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
+			rv[i] = kv_int == Int_.Min_value ? Keyval_.new_(kv_str, kv_val) : Keyval_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 		}
 		return rv;
 	}
-	public byte[] Encode_as_nde(KeyVal[] itm, int flag, int skip) {
+	public byte[] Encode_as_nde(Keyval[] itm, int flag, int skip) {
 		synchronized (wtr ) {
 			wtr.Clear().Doc_nde_bgn();
 			Encode_kv_ary(itm);
@@ -145,19 +145,19 @@ class Scrib_lib_text__json_util {
 			return wtr.Doc_ary_end().To_bry_and_clear();
 		}
 	}
-	private void Encode_kv_ary(KeyVal[] kv_ary) {
+	private void Encode_kv_ary(Keyval[] kv_ary) {
 		int len = kv_ary.length;
 		for (int i = 0; i < len; ++i) {
-			KeyVal kv = kv_ary[i];
+			Keyval kv = kv_ary[i];
 			Encode_kv(kv);
 		}
 	}
-	private void Encode_kv(KeyVal kv) {
+	private void Encode_kv(Keyval kv) {
 		Object kv_val = kv.Val();
 		Class<?> type = Type_adp_.ClassOf_obj(kv_val);
-		if		(Type_adp_.Eq(type, KeyVal[].class)) {
+		if		(Type_adp_.Eq(type, Keyval[].class)) {
 			wtr.Nde_bgn(kv.Key());
-			Encode_kv_ary((KeyVal[])kv_val);
+			Encode_kv_ary((Keyval[])kv_val);
 			wtr.Nde_end();
 		}
 		else if (Type_adp_.Is_array(type)) {	// encode as array
@@ -194,8 +194,8 @@ class Scrib_lib_text__json_util {
 }
 class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
-		KeyVal lhs_itm = (KeyVal)lhsObj;
-		KeyVal rhs_itm = (KeyVal)rhsObj;
+		Keyval lhs_itm = (Keyval)lhsObj;
+		Keyval rhs_itm = (Keyval)rhsObj;
 		int lhs_int = Int_.parse_or(lhs_itm.Key(), Int_.Min_value);
 		int rhs_int = Int_.parse_or(rhs_itm.Key(), Int_.Min_value);
 		return CompareAble_.Compare(lhs_int, rhs_int);
@@ -204,9 +204,9 @@ class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 }
 class Scrib_lib_text__reindex_data {
 	public boolean				Rv_is_kvy() {return rv_is_kvy;} private boolean rv_is_kvy;
-	public KeyVal[]			Rv_as_kvy() {return rv_as_kvy;} private KeyVal[] rv_as_kvy;
+	public Keyval[]			Rv_as_kvy() {return rv_as_kvy;} private Keyval[] rv_as_kvy;
 	public Object		Rv_as_ary() {return rv_as_ary;} private Object rv_as_ary;	
-	public void Init(boolean rv_is_kvy, KeyVal[] rv_as_kvy, Object rv_as_ary) {
+	public void Init(boolean rv_is_kvy, Keyval[] rv_as_kvy, Object rv_as_ary) {
 		this.rv_is_kvy = rv_is_kvy;
 		this.rv_as_kvy = rv_as_kvy;
 		this.rv_as_ary = rv_as_ary;

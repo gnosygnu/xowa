@@ -51,9 +51,10 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
 	public Xoh_file_img_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_file_img_wkr v) {lnki_file_wkr = v;} private Xoh_file_img_wkr lnki_file_wkr;
+	public byte[] Target;
 	public byte[] Ttl_ary() {
 		return ttl.ForceLiteralLink() || ns_id != Xow_ns_.Tid__main		// if [[:]] or non-main (Category, Template)
-			? ttl.Full_txt()											// use full_txt (no initial colon; capitalize first)
+			? ttl.Full_txt_w_ttl_case()									// use full_txt (no initial colon; capitalize first)
 			: ttl.Raw();												// use raw (preserve case, white-spaces)
 	}
 	public boolean Caption_exists() {

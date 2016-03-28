@@ -42,10 +42,10 @@ public class Xob_xfer_regy_tbl {
 			;
 		return conn.Exec_qry_as_old_rdr(qry);
 	}
-	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_new(Db_qry_sql.rdr_(Sql_select_itm));}
+	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_sql(Sql_select_clause);}
 	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
 	private static final String
-	  Sql_select_itm = String_.Concat_lines_nl
+	  Sql_select_clause = String_.Concat_lines_nl
 		( "SELECT   *"
 		, "FROM     xfer_regy"
 		, "WHERE    xfer_status  =  0"

@@ -22,7 +22,7 @@ public class GfoMsg_tst {
 		GfsCore.Instance.AddObj(new Mok(), "Mok");
 	}
 	@Test  public void Write1() {
-		GfoMsg m = GfoMsg_.root_leafArgs_(String_.Ary("a", "b"), KeyVal_.new_("int0", 1));
+		GfoMsg m = GfoMsg_.root_leafArgs_(String_.Ary("a", "b"), Keyval_.new_("int0", 1));
 		tst_Msg(m, "a.b:int0='1';");
 	}
 	@Test  public void Write() {

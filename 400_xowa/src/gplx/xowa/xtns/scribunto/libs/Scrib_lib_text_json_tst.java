@@ -31,7 +31,7 @@ public class Scrib_lib_text_json_tst {
 		( "{"
 		, "}"
 		)
-		, KeyVal_.Ary_empty
+		, Keyval_.Ary_empty
 		);
 	}
 	@Test  public void Nde__key_obj__primitives() {	// NOTE: based on MW
@@ -50,12 +50,12 @@ public class Scrib_lib_text_json_tst {
 		, "  }"
 		, "}"
 		)
-		, KeyVal_.Ary
-		( KeyVal_.new_("int", 1)
-		, KeyVal_.new_("String", "abc")
-		, KeyVal_.new_("true", true)
-		, KeyVal_.new_("array", new int[] {1, 2, 3})
-		, KeyVal_.new_("node", KeyVal_.Ary(KeyVal_.new_("key", "val")))
+		, Keyval_.Ary
+		( Keyval_.new_("int", 1)
+		, Keyval_.new_("String", "abc")
+		, Keyval_.new_("true", true)
+		, Keyval_.new_("array", new int[] {1, 2, 3})
+		, Keyval_.new_("node", Keyval_.Ary(Keyval_.new_("key", "val")))
 		));
 	}
 	@Test  public void Nde__obj_in_obj() {
@@ -69,10 +69,10 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, KeyVal_.Ary
-		( KeyVal_.new_("x",	new Object[] 
-		{	1, 2, KeyVal_.Ary
-		(		KeyVal_.new_("y", "x")
+		, Keyval_.Ary
+		( Keyval_.new_("x",	new Object[] 
+		{	1, 2, Keyval_.Ary
+		(		Keyval_.new_("y", "x")
 		)
 		}
 		)
@@ -93,10 +93,10 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, KeyVal_.Ary
-		( KeyVal_.new_("x"
-		,	new Object[] {1, 2, KeyVal_.Ary
-		(		KeyVal_.new_("y"
+		, Keyval_.Ary
+		( Keyval_.new_("x"
+		,	new Object[] {1, 2, Keyval_.Ary
+		(		Keyval_.new_("y"
 		,			new Object[] {3, 4}
 		))}))			
 		);
@@ -109,10 +109,10 @@ public class Scrib_lib_text_json_tst {
 		, ", '2':2"
 		, "}"
 		)
-		, KeyVal_.Ary
-		( KeyVal_.new_("x", "x")
-		, KeyVal_.new_("1", 1)
-		, KeyVal_.new_("2", 2)
+		, Keyval_.Ary
+		( Keyval_.new_("x", "x")
+		, Keyval_.new_("1", 1)
+		, Keyval_.new_("2", 2)
 		));
 	}
 	@Test  public void Nde__key_int__auto() {// NOTE: based on MW
@@ -193,13 +193,13 @@ public class Scrib_lib_text_json_tst {
 	@Test   public void Nde__smoke() {
 		json_fxt.Test_json_encode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__none
-		, KeyVal_.Ary
-		( KeyVal_.new_("axes", KeyVal_.Ary
-		(	KeyVal_.int_(1, KeyVal_.Ary
-		(		KeyVal_.new_("type", "x")
+		, Keyval_.Ary
+		( Keyval_.new_("axes", Keyval_.Ary
+		(	Keyval_.int_(1, Keyval_.Ary
+		(		Keyval_.new_("type", "x")
 		))
-		,	KeyVal_.int_(2, KeyVal_.Ary
-		(		KeyVal_.new_("type", "y")
+		,	Keyval_.int_(2, Keyval_.Ary
+		(		Keyval_.new_("type", "y")
 		))
 		))
 		)
@@ -216,7 +216,7 @@ public class Scrib_lib_text_json_tst {
 		);
 	}
 	@Test   public void Decode__key__int() {
-		KeyVal[] kv_ary = (KeyVal[])json_fxt.Test_json_decode(fxt, lib
+		Keyval[] kv_ary = (Keyval[])json_fxt.Test_json_decode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__none
 		, Json_doc.Make_str_by_apos
 		( "{ '1':"
@@ -225,15 +225,15 @@ public class Scrib_lib_text_json_tst {
 		, ", '2':'b'"
 		, "}"
 		)
-		, KeyVal_.Ary
-		( KeyVal_.int_(1, KeyVal_.Ary
-		(		KeyVal_.int_(11, "aa")
+		, Keyval_.Ary
+		( Keyval_.int_(1, Keyval_.Ary
+		(		Keyval_.int_(11, "aa")
 		))
-		, KeyVal_.int_(2, "b")
+		, Keyval_.int_(2, "b")
 		)
 		);
 		Tfds.Eq(kv_ary[0].Key_as_obj(), 1);
-		Tfds.Eq(((KeyVal[])kv_ary[0].Val())[0].Key_as_obj(), 11);
+		Tfds.Eq(((Keyval[])kv_ary[0].Val())[0].Key_as_obj(), 11);
 	}
 }
 class Scrib_lib_json_fxt {
@@ -253,7 +253,7 @@ class Scrib_lib_json_fxt {
 	private String To_str(Object o) {
 		if	(o == null) return "<< NULL >>";
 		Class<?> type = o.getClass();
-		if		(Type_adp_.Eq(type, KeyVal[].class))		return Kv_ary_utl.Ary_to_str(wtr, (KeyVal[])o);
+		if		(Type_adp_.Eq(type, Keyval[].class))		return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
 		else if	(Type_adp_.Is_array(type))					return Array_.To_str_nested_obj(o);
 		else												return Object_.Xto_str_strict_or_null(o);
 	}

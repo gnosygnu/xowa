@@ -74,7 +74,6 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
-
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = Xop_amp_mgr.Instance;
 	public Xol_case_mgr Utl_case_mgr() {return utl_case_mgr;} private Xol_case_mgr utl_case_mgr = Xol_case_mgr_.U8();
 //		public Gfo_url_encoder Utl_encoder_fsys() {return utl_encoder_fsys;} private Gfo_url_encoder utl_encoder_fsys = Gfo_url_encoder.New_fsys_lnx();

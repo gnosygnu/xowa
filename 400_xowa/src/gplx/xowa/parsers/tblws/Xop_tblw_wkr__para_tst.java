@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tblw_wkr__para_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Para() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
@@ -58,7 +58,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Unnecessary_para() {	// PURPOSE: tblw causes unnecessary <p>; [[Help:Download]]; DATE:2014-02-20
+	@Test  public void Unnecessary_para() {	// PURPOSE: tblw causes unnecessary <p>; home/wiki/Dashboard/Image_databases; DATE:2014-02-20
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"|-"

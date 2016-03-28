@@ -145,7 +145,7 @@ class Xobc_utl_make_lang_fxt {
 	public Xobc_utl_make_lang Mgr() {return mgr;} private Xobc_utl_make_lang mgr;
 	public Xobc_utl_make_lang_kwds Kwd_mgr() {return mgr.Kwd_mgr();}
 	public Xobc_utl_make_lang_fxt Clear() {
-		app = Xoa_app_fxt.app_();
+		app = Xoa_app_fxt.Make__app__edit();
 		mgr = new Xobc_utl_make_lang(app.Lang_mgr(), app.Fsys_mgr(), app.Msg_log());
 		return this;
 	}	private String_bldr sb = String_bldr_.new_(); private Xoae_app app;

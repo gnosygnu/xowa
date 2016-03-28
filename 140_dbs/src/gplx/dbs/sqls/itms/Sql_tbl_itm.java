@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 public class Sql_tbl_itm {
-	public Sql_tbl_itm(int join_tid, String db, String name, String alias, Sql_join_itm[] join_flds) {
+	public Sql_tbl_itm(int join_tid, String db, String name, String alias, Sql_join_fld[] join_flds) {
 		this.Join_tid = join_tid;
 		this.Db = db;
 		this.Name = name;
@@ -28,7 +28,8 @@ public class Sql_tbl_itm {
 	public final String Db;
 	public final String Name;
 	public final String Alias;
-	public final Sql_join_itm[] Join_flds;
+	public boolean Db_enabled = true;
+	public final Sql_join_fld[] Join_flds;
 
 	public static final String Alias__null = String_.Null;
 	public static final String Db__null = String_.Null;

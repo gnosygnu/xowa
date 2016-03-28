@@ -45,7 +45,7 @@ class Gfdb_diff_cmd__idx__create implements Gfo_srl_itm {
 		rdr.Itm_end();
 	}
 	public void Exec(Db_conn conn) {
-		conn.Ddl_create_idx(cur);
+		conn.Meta_idx_create(cur);
 	}
 }
 class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {

@@ -17,7 +17,7 @@
     <target name="compile_dbs">
         <delete dir="140_dbs/bin"/>
         <mkdir dir="140_dbs/bin"/>
-        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="140_dbs" destdir="140_dbs/bin" classpath="lib/junit.jar:100_core/bin:140_dbs/lib/sqlite-jdbc-3.7.15-M1.jar">
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="140_dbs" destdir="140_dbs/bin" classpath="lib/junit.jar:100_core/bin:140_dbs/lib/sqlite-jdbc-3.8.11.2.jar">
           <include name="**/*.java"/>
         </javac>
     </target>
@@ -40,7 +40,7 @@
         <jar destfile="../xowa_${plat_name}.jar">
             <manifest>
                 <attribute name="Main-Class" value="gplx.xowa.Xowa_main"/>
-                <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.5.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.7.15-M1.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar"/>
+                <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.5.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.8.11.2.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar"/>
             </manifest>
             <fileset dir="100_core/bin"/>
             <fileset dir="110_gfml/bin"/>

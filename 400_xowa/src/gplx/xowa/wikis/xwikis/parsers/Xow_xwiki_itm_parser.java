@@ -23,8 +23,8 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.bldrs.*;
 public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 	private Xow_domain_itm owner_domain_itm;
 	private int cur_tid = -1; private byte[] cur_fld1, cur_fld2, cur_fld3;
-	private final Gfo_url_parser url_parser = new Gfo_url_parser(); private final Gfo_url url = new Gfo_url();
-	public Ordered_hash Xwiki_list() {return xwiki_list;} private final Ordered_hash xwiki_list = Ordered_hash_.New();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url url = new Gfo_url();
+	public Ordered_hash Xwiki_list() {return xwiki_list;} private final    Ordered_hash xwiki_list = Ordered_hash_.New();
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
@@ -52,10 +52,10 @@ public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 				domain_bry = cur_fld2;
 				break;
 			case Tid__wm_peer:			// EX: "2|wikt|wikipedia"
-				domain_bry = Bry_.Add(owner_domain_itm.Lang_actl_key(), Byte_ascii.Dot_bry, cur_fld2, gplx.xowa.apps.urls.Xoa_url_parser.Bry_dot_org);
+				domain_bry = Bry_.Add(owner_domain_itm.Lang_actl_key(), Byte_ascii.Dot_bry, cur_fld2, gplx.xowa.apps.urls.Xow_url_parser.Bry_dot_org);
 				break;
 			case Tid__wm_lang:			// EX: "3|en;english|en|English"
-				domain_bry = Bry_.Add(cur_fld2, Byte_ascii.Dot_bry, owner_domain_itm.Domain_type().Key_bry(), gplx.xowa.apps.urls.Xoa_url_parser.Bry_dot_org);
+				domain_bry = Bry_.Add(cur_fld2, Byte_ascii.Dot_bry, owner_domain_itm.Domain_type().Key_bry(), gplx.xowa.apps.urls.Xow_url_parser.Bry_dot_org);
 				break;
 			default:		throw Err_.new_unhandled(cur_tid);
 		}			

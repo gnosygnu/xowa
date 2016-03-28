@@ -29,7 +29,7 @@ public class GfuiStatusBar extends GfuiElemBase {
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
 	}	public static final String StatusBarFocus_cmd = "StatusBarFocus";
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		moveBtn = GfuiMoveElemBtn.new_();
 		statusBox = GfuiStatusBox_.new_("statusBox");

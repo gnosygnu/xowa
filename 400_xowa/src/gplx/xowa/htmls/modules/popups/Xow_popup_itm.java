@@ -25,7 +25,6 @@ public class Xow_popup_itm implements Cancelable {
 	}
 	public boolean Canceled() {return canceled;} private boolean canceled = false;
 	public void Cancel() {canceled = true;}
-	public void Cancel_reset() {canceled = false;}
 	public byte Mode() {return mode;} private byte mode = Mode_tid_init;
 	public Xow_popup_itm Mode_more_(int more_words) {
 		mode = Mode_tid_more;

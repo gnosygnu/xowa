@@ -70,7 +70,7 @@ public interface GfuiElem extends GfoInvkAble, GxwCbkHost, IptBndsOwner, GftItem
 
 	//% Infrastructure
 	GxwElem UnderElem();
-	GxwElem UnderElem_make(KeyValHash ctorArgs);
-	void ctor_GfuiBox_base(KeyValHash ctorArgs);
+	GxwElem UnderElem_make(Keyval_hash ctorArgs);
+	void ctor_GfuiBox_base(Keyval_hash ctorArgs);
 	void Invoke(GfoInvkAbleCmd cmd);
 }

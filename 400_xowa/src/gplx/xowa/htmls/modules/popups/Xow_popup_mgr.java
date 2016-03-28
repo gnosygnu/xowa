@@ -21,7 +21,7 @@ import gplx.core.js.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
+import gplx.xowa.specials.*;
 import gplx.xowa.apps.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();

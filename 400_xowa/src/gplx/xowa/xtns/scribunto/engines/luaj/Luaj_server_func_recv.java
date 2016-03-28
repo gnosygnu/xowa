@@ -28,5 +28,5 @@ public class Luaj_server_func_recv extends OneArgFunction {
 		if (!String_.Eq(op, "call")) throw Err_.new_wo_type("luaj_recvr only processes op calls");
 		return engine.Server_recv_call(tbl);
 	}
-	public static Luaj_server_func_recv _ = new Luaj_server_func_recv();
+	public static Luaj_server_func_recv Instance = new Luaj_server_func_recv();
 }

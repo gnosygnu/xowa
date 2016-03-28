@@ -34,7 +34,7 @@ public class Db_cfg_tbl implements Rls_able {
 		stmt_update = Db_stmt_.Rls(stmt_update);
 		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)));}
 	public void Delete_val(String grp, String key)	{conn.Stmt_delete(tbl_name, fld_grp, fld_key).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_delete();}
 	public void Delete_grp(String grp)				{conn.Stmt_delete(tbl_name, fld_grp).Crt_str(fld_grp, grp).Exec_delete();}
 	public void Delete_all()						{conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
@@ -49,7 +49,7 @@ public class Db_cfg_tbl implements Rls_able {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		try {
 			stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
-		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Xto_api());}
+		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Db_api());}
 	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
 	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.To_str(val));}

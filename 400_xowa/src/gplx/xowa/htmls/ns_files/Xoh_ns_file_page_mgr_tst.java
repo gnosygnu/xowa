@@ -89,8 +89,8 @@ class Xoh_ns_file_page_mgr_fxt {
 	public Xoh_ns_file_page_mgr_fxt Html_file_size_(int v) {this.html_file_size = v; return this;} private int html_file_size;
 	public void Reset() {
 		if (app != null) return;
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		opt = new Xoh_file_page_wtr();
 	}
 	public void tst(String expd) {

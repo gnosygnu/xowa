@@ -70,7 +70,6 @@ class Xob_url_fixer_tkn {
 	public byte[] Raw() {return raw;} private byte[] raw;
 	public int Raw_len() {return raw_len;} private int raw_len;
 	public static Xob_url_fixer_tkn new_(int tid, String raw) {return new Xob_url_fixer_tkn(tid, Bry_.new_u8(raw));}
-
 	private static void trie_add(Btrie_slim_mgr trie, int tid, String s) {trie.Add_obj(s, new_(tid, s));}
 	public static final int Tid_bgn_slash_1 = 1, Tid_bgn_slash_2 = 2, Tid_bgn_http = 3, Tid_bgn_https = 4;
 	private static Btrie_slim_mgr bgn_trie;

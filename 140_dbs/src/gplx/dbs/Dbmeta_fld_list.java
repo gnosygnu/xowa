@@ -20,9 +20,10 @@ public class Dbmeta_fld_list {
 	private final Ordered_hash flds = Ordered_hash_.New();
 	private final List_adp keys = List_adp_.new_();
 	public void Clear() {flds.Clear(); keys.Clear(); str_ary = null; fld_ary = null;}
+	public int Len() {return flds.Len();}
 	public Dbmeta_fld_itm Get_by(String name)	{return (Dbmeta_fld_itm)flds.Get_by(name);}
 	public Dbmeta_fld_itm Get_at(int idx)		{return (Dbmeta_fld_itm)flds.Get_at(idx);}
-	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.To_ary(String.class); return str_ary;} private String[] str_ary;
+	public String[] To_str_ary()				{if (str_ary == null) str_ary = (String[])keys.To_ary(String.class); return str_ary;} private String[] str_ary;
 	public Dbmeta_fld_itm[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Dbmeta_fld_itm[])flds.To_ary(Dbmeta_fld_itm.class); return fld_ary;} private Dbmeta_fld_itm[] fld_ary;
 	public String[] To_str_ary_wo_autonum()	{
 		int len = flds.Count();
@@ -72,6 +73,7 @@ public class Dbmeta_fld_list {
 	public String Add_str_dflt(String name, int len, String dflt)
 														{return Add(Dbmeta_fld_itm.new_str(name, len).Default_(dflt));}
 	public String Add(Dbmeta_fld_itm fld) {
+		fld_ary = null; str_ary = null;
 		String name = fld.Name();
 		flds.Add(name, fld);
 		keys.Add(name);

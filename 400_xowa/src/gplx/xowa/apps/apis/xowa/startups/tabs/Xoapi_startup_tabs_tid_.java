@@ -35,5 +35,5 @@ public class Xoapi_startup_tabs_tid_ {
 		else if	(String_.Eq(s, Key_custom))			return Tid_custom;
 		else										throw Err_.new_unimplemented();
 	}
-	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_blank), KeyVal_.new_(Key_xowa), KeyVal_.new_(Key_previous), KeyVal_.new_(Key_custom));
+	public static Keyval[] Options__list = Keyval_.Ary(Keyval_.new_(Key_blank), Keyval_.new_(Key_xowa), Keyval_.new_(Key_previous), Keyval_.new_(Key_custom));
 }

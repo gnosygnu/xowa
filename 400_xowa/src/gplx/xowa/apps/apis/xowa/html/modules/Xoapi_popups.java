@@ -182,7 +182,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, Evt_html_fmtr_wiki_changed		= "html_fmtr_wiki_changed"
 	, Evt_html_fmtr_next_sect_changed	= "html_fmtr_next_sect_changed"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Dflt_xnde_ignore_ids		= Bry_.new_a7("coordinates")
 	, Dflt_tmpl_keeplist		= Bry_.new_a7("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|\n")
 	, Dflt_html_fmtr_popup = Bry_.new_a7(String_.Concat_lines_nl_skip_last
@@ -204,7 +204,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, "    <span><a href='xowa-cmd:xowa.api.html.modules.popups.show_more(\"~{popup_id}\");' title='~{<>msgs.get('api-xowa.html.modules.popups.show_more-tip');<>}'><img src='~{xowa_root_dir}bin/any/xowa/html/res/src/xowa/popups/imgs/show_more.png'></a></span>"
 	, "    <span><a href='xowa-cmd:xowa.api.html.modules.popups.show_all (\"~{popup_id}\");' title='~{<>msgs.get('api-xowa.html.modules.popups.show_all-tip');<>}'> <img src='~{xowa_root_dir}bin/any/xowa/html/res/src/xowa/popups/imgs/show_all.png' ></a></span>"
 	, "    <span><a href='/wiki/Special:XowaPopupHistory' title='~{<>msgs.get('api-xowa.html.modules.popups.history-tip');<>}'><img src='~{xowa_root_dir}bin/any/xowa/file/app.menu/history/show.png'></a></span>"
-	, "    <span><a href='xowa-cmd:xowa.api.gui.browser.tabs.new_link__at_dflt__focus_y(\"home/wiki/Help:Options/Popups\");' title='~{<>msgs.get('api-xowa.nav.cfg.main-name');<>}'><img src='~{xowa_root_dir}bin/any/xowa/file/app.menu/tools/options.png'></a></span>"
+	, "    <span><a href='xowa-cmd:xowa.api.gui.browser.tabs.new_link__at_dflt__focus_y(\"home/wiki/Options/Popups\");' title='~{<>msgs.get('api-xowa.nav.cfg.main-name');<>}'><img src='~{xowa_root_dir}bin/any/xowa/file/app.menu/tools/options.png'></a></span>"	// HOME
 	, "  </div>"
 	, "</div>"
 	))
@@ -212,13 +212,13 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, Dflt_html_fmtr_wiki			= Bry_.new_a7("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.wiki-name');<>}</span><span class='data_val'>~{wiki_val}</span>")
 	, Dflt_html_fmtr_next_sect		= Bry_.new_a7("\n\n<span class='next_sect'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.next_sect-name');<>}~{next_sect_val}</span>")
 	;
-	public static final String[]
+	public static final    String[]
 	  Dflt_html_fmtr_popup_keys			= String_.Ary("content", "page_lang_ltr", "page_url", "page_title", "popup_id", "wiki_item", "page_size", "edit_time", "view_time_item", "xowa_root_dir")
 	, Dflt_html_fmtr_viewed_keys		= String_.Ary("viewed_val")
 	, Dflt_html_fmtr_wiki_keys			= String_.Ary("wiki_val")
 	, Dflt_html_fmtr_next_sect_keys		= String_.Ary("next_sect_val")
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Dflt_ns_allowed = Bry_.Empty
 	;
 	public static final int

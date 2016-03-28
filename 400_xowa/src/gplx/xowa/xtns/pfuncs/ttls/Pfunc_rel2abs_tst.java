@@ -38,7 +38,7 @@ public class Pfunc_rel2abs_tst {
 	@Test   public void Err_owner()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:..}}"						, "{{test}}"			, "");}	// PURPOSE.fix: should not fail
 	@Test   public void Err_owner_2()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/../../b|a}}"				, "{{test}}"			, "");}	// PURPOSE.fix: should not fail
 	@Test   public void Ns_should_be_included_for_cur_page()	{// PURPOSE.fix: current title was not returning ns; EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung#Funktion_rel2abs 
-		fxt.Page_ttl_("Help:A");	// set page to title with namespace
+		fxt.Page_ttl_("Help:A");	// set page to title with Srch_rslt_cbk
 		fxt.Test_parse_tmpl_str_test("{{#rel2abs:.}}"				, "{{test}}"			, "Help:A");
 	}
 	@Test   public void Owner_lvl0()	{// PURPOSE.fix: old rel2abs was producing "/c"; EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung#Funktion_rel2abs

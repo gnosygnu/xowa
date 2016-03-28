@@ -40,7 +40,7 @@ public class GfuiWin extends GfuiElemBase {
 			smallOpenSize = size;				
 		return this;
 	}	private SizeAdp smallOpenSize = SizeAdp_.Null;
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		win = (GxwWin)underElem;
 		win.OpenedCmd_set(GfoInvkAbleCmd.new_(this, Evt_Opened));
@@ -51,7 +51,7 @@ public class GfuiWin extends GfuiElemBase {
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		win = (GxwWin)this.UnderElem();
 		win.OpenedCmd_set(GfoInvkAbleCmd.new_(this, Evt_Opened));
@@ -62,8 +62,8 @@ public class GfuiWin extends GfuiElemBase {
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {
-		String type = (String)ctorArgs.FetchValOr(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_app);
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {
+		String type = (String)ctorArgs.Get_val_or(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_app);
 		if		(String_.Eq(type, GfuiWin_.InitKey_winType_tool))		return GxwElemFactory_.Instance.win_tool_(ctorArgs);
 		else if	(String_.Eq(type, GfuiWin_.InitKey_winType_toaster))	return GxwElemFactory_.Instance.win_toaster_(ctorArgs);
 		else															return GxwElemFactory_.Instance.win_app_();

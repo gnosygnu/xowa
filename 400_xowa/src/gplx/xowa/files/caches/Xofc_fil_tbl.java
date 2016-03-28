@@ -49,7 +49,7 @@ class Xofc_fil_tbl implements Rls_able {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "fil", fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_cache_time, fld_uid)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		select_itm_stmt = select_itm_v2_stmt = null;
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_uid);
@@ -135,7 +135,7 @@ class Xofc_fil_tbl implements Rls_able {
 		}
 		finally {rdr.Rls();}
 	}
-	public int Select_max_uid() {return Db_conn_.Select_fld0_as_int_or(conn, "SELECT Max(uid) AS MaxId FROM cache_fil;", -1);}
+	public int Select_max_uid() {return conn.Exec_select_as_int("SELECT Max(uid) AS MaxId FROM cache_fil;", -1);}
 	private Xofc_fil_itm new_itm(Db_rdr rdr) {
 		return new Xofc_fil_itm
 		( rdr.Read_int(fld_uid)

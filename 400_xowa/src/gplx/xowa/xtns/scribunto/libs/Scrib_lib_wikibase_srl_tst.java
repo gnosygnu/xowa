@@ -391,36 +391,36 @@ class Scrib_lib_wikibase_srl_fxt {
 	public Scrib_lib_wikibase_srl_fxt Init_prop(Wdata_claim_itm_core prop) {wdoc_bldr.Add_claims(prop); return this;}
 	public Scrib_lib_wikibase_srl_fxt Test(String... expd) {return Test(false, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, String... expd) {
-		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(wdoc_bldr.Xto_wdoc(), header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(wdoc_bldr.Xto_wdoc(), header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
 	public Scrib_lib_wikibase_srl_fxt Test(Wdata_doc wdoc, String... expd) {return Test(false, wdoc, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, Wdata_doc wdoc, String... expd) {
-		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(wdoc, header_enabled, base0);
+		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(wdoc, header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
-	private String Xto_str(KeyVal[] ary) {
+	private String Xto_str(Keyval[] ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xto_str(bfr, ary, 0);
 		return bfr.To_str_and_clear();
 	}
-	private void Xto_str(Bry_bfr bfr, KeyVal[] ary, int depth) {
+	private void Xto_str(Bry_bfr bfr, Keyval[] ary, int depth) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			Xto_str(bfr, kv, depth);
 		}
 	}
-	private void Xto_str(Bry_bfr bfr, KeyVal kv, int depth) {
+	private void Xto_str(Bry_bfr bfr, Keyval kv, int depth) {
 		bfr.Add_byte_repeat(Byte_ascii.Space, depth * 2);
 		bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
 		Object kv_val = kv.Val();
 		if		(kv_val == null) 							{bfr.Add_str_a7("null").Add_byte_nl(); return;}
 		Class<?> kv_val_cls = kv_val.getClass();
-		if 	(Type_adp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal[])kv_val, depth + 1);}
-		else if (Type_adp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal)kv_val, depth + 1);}
+		if 	(Type_adp_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval[])kv_val, depth + 1);}
+		else if (Type_adp_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval)kv_val, depth + 1);}
 		else bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
 	}
 }

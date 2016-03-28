@@ -27,8 +27,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == null) return; // no argx; return empty
 		Xoa_ttl argx_as_ttl = Xoa_ttl.new_(ctx.Wiki(), ctx.App().Msg_log_null(), argx, 0, argx.length); // transform to title in order to upper first, replace _, etc..
 		if (argx_as_ttl == null)	{bfr.Add(argx); return;}	// NOTE: argx_as_ttl will be null if invalid, such as [[a|b]]; PAGE:en.w:owl and {{taxobox/showtaxon|Dinosauria}}
-		else						argx = argx_as_ttl.Full_txt();
-
+		else						argx = argx_as_ttl.Full_txt_w_ttl_case();
 		// get parts_len
 		byte[] parts_len_ary = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
 		int parts_len = parts_len_ary == Bry_.Empty ? Int_.Min_value : Bry_.To_int_or(parts_len_ary, Int_.Max_value);
@@ -37,7 +36,6 @@ public class Pfunc_titleparts extends Pf_func_base {
 			bfr.Add(argx);
 			return;
 		}
-
 		// get parts_bgn
 		byte[] parts_bgn_arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1);
 		int parts_bgn = parts_bgn_arg == Bry_.Empty ? 0 : Bry_.To_int_or(parts_bgn_arg, Int_.Min_value);
@@ -55,12 +53,10 @@ public class Pfunc_titleparts extends Pf_func_base {
 			if (src[i] == Byte_ascii.Slash) dlms_ary[dlms_ary_len++] = i;
 		}
 		dlms_ary[dlms_ary_len] = src_len;	// put src_len into last dlms_ary; makes dlms_ary[] logic easier
-
 		// calc bgn_idx; must occur before adjust parts_len
 		int bgn_idx = parts_bgn > -1 ? parts_bgn : parts_bgn + dlms_ary_len;			// negative parts_bgn means calc from end of dlms_ary_len; EX a/b/c|1|-1 means start from 2
 		if (	bgn_idx < 0																// bgn_idx can be negative when parts_len is negative and greater than array; EX: {{#titleparts:a/b|-1|-2}} results in dlms_ary_len of 1 and parts_bgn of -2 which will be parts_bgn of -1
 			||	bgn_idx > dlms_ary_len) return Bry_.Empty;							// if bgn > len, return ""; EX: {{#titleparts:a/b|1|3}} should return ""
-
 		// adjust parts_len for negative/null
 		if		(parts_len == Int_.Min_value) parts_len = dlms_ary_len;					// no parts_len; default to dlms_ary_len
 		else if (parts_len < 0)	{														// neg parts_len; shorten parts now and default to rest of String; EX: a/b/c|-1 -> makes String a/b/c and get 2 parts
@@ -69,7 +65,6 @@ public class Pfunc_titleparts extends Pf_func_base {
 			if (parts_len < 1) return Bry_.Empty;									// NOTE: if zerod'd b/c of neg length, return empty; contrast with line below; EX: a/b/c|-4
 		}		
 		if (parts_len == 0) return src;													// if no dlms, return orig
-
 		// calc idxs for extraction
 		int bgn_pos = dlms_ary[bgn_idx] + 1; // +1 to start after slash
 		int end_idx = bgn_idx + parts_len;

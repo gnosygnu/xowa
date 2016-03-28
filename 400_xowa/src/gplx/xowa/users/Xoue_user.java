@@ -33,12 +33,12 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		this.cfg_mgr = new Xou_cfg(this);
 		this.session_mgr = new Xou_session(this);
 	}
-	public GfoEvMgr					EvMgr() {return ev_mgr;} private final GfoEvMgr ev_mgr;
+	public GfoEvMgr					EvMgr() {return ev_mgr;} private final    GfoEvMgr ev_mgr;
 	public String					Key() {return key;} private String key;
-	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final Xou_db_mgr user_db_mgr;
+	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final    Xou_db_mgr user_db_mgr;
 	public Xow_wiki					Wikii() {return this.Wiki();}
 	public int						Gender() {return Xol_gender_.Tid_unknown;}
-	public Xoae_app					Appe() {return app;} private final Xoae_app app;
+	public Xoae_app					Appe() {return app;} private final    Xoae_app app;
 	public Xol_lang_itm Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang_itm lang;		
 	public void Lang_(Xol_lang_itm v) {
 		lang = v;
@@ -109,12 +109,10 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
 			String name = dir.NameOnly();
-			if (String_.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)
-//					|| !Io_mgr.Instance.ExistsDir(dir.GenSubFil_nest("ns"))
-				) continue;
+			if (String_.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)) continue;	// ignore "#dump"
 			byte[] dir_name_as_bry = Bry_.new_u8(name);
 			Xow_xwiki_itm xwiki = Available_add(usr_wiki, dir_name_as_bry);
-			if (xwiki != null)				// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
+			if (xwiki != null)			// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
 				xwiki.Offline_(true);	// mark xwiki as offline; needed for available wikis sidebar; DATE:2014-09-21
 			app.Setup_mgr().Maint_mgr().Wiki_mgr().Add(dir_name_as_bry);
 		}

@@ -71,7 +71,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		}
 		Xog_mnu_bldr bldr = gui_mgr.Menu_mgr().Menu_bldr();
 		bldr.Build(under_mnu, this);
-		Xog_mnu_base.Update_grp_by_lang(bldr, app.Usere().Lang(), this);	// NOTE: always set lang after rebuild; else changes in Help:Options/Menus will show blank captions; DATE:2014-06-05
+		Xog_mnu_base.Update_grp_by_lang(bldr, app.Usere().Lang(), this);	// NOTE: always set lang after rebuild; else changes in home/wiki/Options/Menus will show blank captions; DATE:2014-06-05
 		if (mnu_is_popup) {
 			boolean rebind_to_win = false;
 			if		(String_.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns)) {

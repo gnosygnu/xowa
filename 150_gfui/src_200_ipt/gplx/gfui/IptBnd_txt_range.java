@@ -25,10 +25,10 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 		this.getListCmd = getListCmd; this.getCmd = getCmd; this.setCmd = setCmd; this.setEvt = setEvt;
 		return this;
 	}	String getListCmd, getCmd, setCmd, setEvt;
-	public IptBnd_txt_range PropList_(KeyVal[] list) {
+	public IptBnd_txt_range PropList_(Keyval[] list) {
 		this.list = list;
 		return this;
-	}	KeyVal[] list = null;
+	}	Keyval[] list = null;
 	public void Inject(Object owner) {
 		txtBox = GfuiTextBox_.cast(owner);
 		txtBox.TextAlignH_center_();
@@ -67,7 +67,7 @@ public class IptBnd_txt_range implements InjectAble, GfoInvkAble, GfoEvObj {
 	}
 	void ReadyEvtCmd() {
 		if (getListCmd != null)
-			list = (KeyVal[])GfoInvkAble_.InvkCmd(propInvk, getListCmd);
+			list = (Keyval[])GfoInvkAble_.InvkCmd(propInvk, getListCmd);
 		Object curId = GfoInvkAble_.InvkCmd(propInvk, getCmd);
 		WhenEvtCmd(curId);
 	}

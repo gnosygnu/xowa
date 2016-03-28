@@ -34,7 +34,7 @@ public class GfoInvkXtoStr {
 		invk.Invk(ctx, 0, k, m);
 		GfoMsg rv = GfoMsg_.new_cast_(k);
 		for (int i = 0; i < m.Args_count(); i++) {
-			KeyVal kv = m.Args_getAt(i);
+			Keyval kv = m.Args_getAt(i);
 			rv.Add(kv.Key(), ary[i]);
 		}
 		GfoMsg root = GfoMsg_.new_cast_(invkKey);

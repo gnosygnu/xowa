@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class GfoNdeRdr_ {
-	public static GfoNdeRdr kvs_(KeyValList kvList) {
+	public static GfoNdeRdr kvs_(Keyval_list kvList) {
 		GfoFldList flds = GfoFldList_.new_();
 		int pairsLen = kvList.Count();
 		Object[] vals = new Object[pairsLen];
 		for (int i = 0; i < pairsLen; i++) {
-			KeyVal pair = kvList.GetAt(i);
+			Keyval pair = kvList.Get_at(i);
 			flds.Add(pair.Key(), StringClassXtn.Instance);
 			vals[i] = pair.Val_to_str_or_empty();
 		}

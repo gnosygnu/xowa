@@ -20,24 +20,26 @@ import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements Rls_able {
-	private final String tbl_name = "page";
-	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id;
-	private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final Db_conn conn; private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert; private boolean hdump_enabled;
-	private final String[] flds_select_all, flds_select_idx;
+	private final    String tbl_name = "page";
+	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id;
+	private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert; private boolean hdump_enabled;
+	private final    String[] flds_select_all, flds_select_idx;
 	public String Tbl_name()					{return tbl_name;}
+	public Dbmeta_fld_list Flds__all()			{return flds;}
 	public String Fld_page_id()					{return fld_id;}
 	public String Fld_page_ns()					{return fld_ns;}
 	public String Fld_page_title()				{return fld_title;}
 	public String Fld_page_len()				{return fld_len;}
+	public String Fld_page_score()				{return fld_score;}				public static final String Fld__page_score__key = "page_score";
 	public String Fld_html_db_id()				{return fld_html_db_id;}
 	public String Fld_is_redirect()				{return fld_is_redirect;}
 	public String Fld_redirect_id()				{return fld_redirect_id;}
 	public String[] Flds_select_idx()			{return flds_select_idx;}
 	public String[] Flds_select_all()			{return flds_select_all;}
-	public Db_conn Conn() {return conn;}
+	public final    Db_conn conn; public final    boolean schema_is_1;
 	public Xowd_page_tbl(Db_conn conn, boolean schema_is_1) {
-		this.conn = conn;
+		this.conn = conn; this.schema_is_1 = schema_is_1;
 		String fld_text_db_id_name = "";
 		if (schema_is_1)	{fld_text_db_id_name = "page_file_idx";}
 		else				{fld_text_db_id_name = "page_text_db_id";}
@@ -50,11 +52,12 @@ public class Xowd_page_tbl implements Rls_able {
 		fld_random_int		= flds.Add_int("page_random_int");			// MW:XOWA
 		fld_text_db_id		= flds.Add_int(fld_text_db_id_name);		// MW:XOWA
 		Hdump_enabled_(!schema_is_1);
-		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_text_db_id, fld_html_db_id, fld_redirect_id);
-		flds_select_idx	= String_.Ary(fld_ns, fld_title, fld_id, fld_len);
+		fld_score			= Dbmeta_fld_itm.Make_or_null(conn, flds, tbl_name, Dbmeta_fld_tid.Tid__int, -1, Fld__page_score__key);
+		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score);
+		flds_select_idx	= String_.Ary_wo_null(fld_ns, fld_title, fld_id, fld_len, fld_score);
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		this.Insert_bgn();
 		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
@@ -74,6 +77,7 @@ public class Xowd_page_tbl implements Rls_able {
 		.Val_int(fld_text_db_id, text_db_id)
 		.Val_int(fld_html_db_id, html_db_id)
 		.Val_int(fld_redirect_id, -1)
+		.Val_int(fld_score, -1)
 		.Exec_insert();
 	}
 	public void Hdump_enabled_(boolean v) {
@@ -111,7 +115,7 @@ public class Xowd_page_tbl implements Rls_able {
 		finally {rdr.Rls();}
 		return false;
 	}
-	public Db_rdr Select_all() {
+	public Db_rdr Select_all__id__ttl() {
 		Db_qry__select_cmd qry = new Db_qry__select_cmd().From_(tbl_name).Cols_(fld_id, fld_title).Order_asc_(fld_id);
 		return conn.Stmt_new(qry).Exec_select__rls_auto();
 	}
@@ -159,12 +163,11 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	public byte[] Select_random(Xow_ns ns) {// ns should be ns_main
 		int random_int = RandomAdp_.new_().Next(ns.Count());
-		Db_rdr rdr = conn.Stmt_select(tbl_name, String_.Ary(fld_title), fld_ns, fld_random_int)
-				.Crt_int(fld_ns, ns.Id()).Crt_int(fld_random_int, random_int)
+		Db_rdr rdr = conn.Stmt_select(tbl_name, String_.Ary(fld_title), fld_random_int, fld_ns)
+				.Crt_int(fld_random_int, random_int).Crt_int(fld_ns, ns.Id())
 				.Exec_select__rls_auto();
-		try {					
-			return rdr.Move_next() ? rdr.Read_bry_by_str(fld_title) : null;
-		}	finally {rdr.Rls();}
+		try {return rdr.Move_next() ? rdr.Read_bry_by_str(fld_title) : null;}
+		finally {rdr.Rls();}
 	}
 	public void Select_by_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
@@ -275,16 +278,21 @@ public class Xowd_page_tbl implements Rls_able {
 			html_db_id = rdr.Read_int(fld_html_db_id);
 			redirected_id = rdr.Read_int(fld_redirect_id);
 		}
+		int page_len = rdr.Read_int(fld_len);
+		int page_score = page_len;
+		if (fld_score != Dbmeta_fld_itm.Key_null)
+			page_score = rdr.Read_int(fld_score);
 		page.Init_by_sql
 		( rdr.Read_int(fld_id)
 		, rdr.Read_int(fld_ns)
 		, rdr.Read_bry_by_str(fld_title)
 		, DateAdp_.parse_fmt(rdr.Read_str(fld_touched), Page_touched_fmt)
 		, rdr.Read_bool_by_byte(fld_is_redirect)
-		, rdr.Read_int(fld_len)
+		, page_len
 		, rdr.Read_int(fld_text_db_id)
 		, html_db_id
 		, redirected_id
+		, page_score
 		);
 	}
 	public void Update__html_db_id(int page_id, int html_db_id) {
@@ -315,10 +323,13 @@ public class Xowd_page_tbl implements Rls_able {
 			;
 	}
 	public void Create_index() {
-		conn.Ddl_create_idx(Xoa_app_.Usr_dlg()
-		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "title"		, fld_ns, fld_title, fld_id, fld_len, fld_is_redirect)
-		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "random"		, fld_ns, fld_random_int)
+		conn.Meta_idx_create(Xoa_app_.Usr_dlg()
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "title"		, fld_title, fld_ns)
+		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "random"		, fld_random_int)
 		);
+	}
+	public int Fld_page_score_eval(Db_rdr rdr, int page_len) {
+		return fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
 	}
 	public void Rls() {
 		stmt_select_all_by_ttl = Db_stmt_.Rls(stmt_select_all_by_ttl);
@@ -326,13 +337,11 @@ public class Xowd_page_tbl implements Rls_able {
 		stmt_select_id_by_ttl = Db_stmt_.Rls(stmt_select_id_by_ttl);
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
+	private static final    String Page_touched_fmt = "yyyyMMddHHmmss";
 	public static void Assert_col__page_html_db_id(Xowd_db_mgr db_mgr) {
-		Xowd_page_tbl page_tbl = db_mgr.Tbl__page(); Db_conn page_conn = page_tbl.Conn();
-		boolean html_flds_exists = page_conn.Meta_fld_exists(page_tbl.Tbl_name(), page_tbl.Fld_html_db_id());
-		if (html_flds_exists) return;
-		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Dbmeta_fld_itm.new_int(page_tbl.Fld_html_db_id()).Default_(-1));
-		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Dbmeta_fld_itm.new_int(page_tbl.Fld_redirect_id()).Default_(-1));
+		Xowd_page_tbl page_tbl = db_mgr.Tbl__page(); Db_conn page_conn = page_tbl.conn;
+		page_conn.Meta_fld_assert(page_tbl.Tbl_name(), page_tbl.Fld_html_db_id()	, Dbmeta_fld_tid.Itm__int, -1);
+		page_conn.Meta_fld_assert(page_tbl.Tbl_name(), page_tbl.Fld_redirect_id()	, Dbmeta_fld_tid.Itm__int, -1);
 		page_tbl.Hdump_enabled_(Bool_.Y);
 	}
 }

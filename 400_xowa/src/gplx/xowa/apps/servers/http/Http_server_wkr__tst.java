@@ -30,7 +30,7 @@ public class Http_server_wkr__tst {
 class Http_server_wkr__fxt {
 	private Xoae_app app;
 	public void Clear() {
-		this.app = Xoa_app_fxt.app_();
+		this.app = Xoa_app_fxt.Make__app__edit();
 	}
 	public void Init_wiki_main_page(String domain, String main_page) {
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(domain));

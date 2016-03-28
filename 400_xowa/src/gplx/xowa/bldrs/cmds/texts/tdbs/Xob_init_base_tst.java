@@ -33,8 +33,8 @@ public class Xob_init_base_tst {
 class Xob_init_base_fxt {		
 	public void Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		}
 		Io_mgr.Instance.InitEngine_mem();
 	}

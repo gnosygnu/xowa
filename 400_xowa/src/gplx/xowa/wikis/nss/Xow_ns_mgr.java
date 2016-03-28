@@ -83,7 +83,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.core.lists.ComparerAble {
 	}
 	public void			Aliases_clear() {aliases.Clear();}		
 	public Xow_ns_mgr	Aliases_add(int ns_id, String name) {
-		KeyVal kv = KeyVal_.new_(name, Int_obj_val.new_(ns_id));
+		Keyval kv = Keyval_.new_(name, Int_obj_val.new_(ns_id));
 		aliases.Add_if_dupe_use_nth(name, kv);
 		return this;
 	}
@@ -108,7 +108,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.core.lists.ComparerAble {
 		}
 		int aliases_len = aliases.Count();
 		for (int i = 0; i < aliases_len; i++) {
-			KeyVal kv = (KeyVal)aliases.Get_at(i);
+			Keyval kv = (Keyval)aliases.Get_at(i);
 			int ns_id = ((Int_obj_val)kv.Val()).Val();
 			Xow_ns ns = Ids_get_or_null(ns_id); if (ns == null) continue; // happens when alias exists, but not ns; EX: test has Image alias, but not File alias; should not happen "live" but don't want to fail
 			ns.Aliases_add(kv.Key());	// register alias with official ns; EX: "Image" will be placed in "File"'s .Aliases

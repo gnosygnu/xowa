@@ -21,13 +21,13 @@ import gplx.langs.jsons.*; import gplx.langs.htmls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
-	private final Xoa_app app; private final Xoud_bmk_itm_tbl tbl;
-	private final Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
-	private final Dbui_cells_fmtr cells_fmtr = new Dbui_cells_fmtr(); private final Dbui_val_fmtr edit_val_fmtr = Dbui_val_fmtr_.new_edit(); private final Dbui_val_fmtr view_val_fmtr = Dbui_val_fmtr_.new_view();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
-	private final Bridge_msg_bldr msg_bldr;
+	private final    Xoa_app app; private final    Xoud_bmk_itm_tbl tbl;
+	private final    Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
+	private final    Dbui_cells_fmtr cells_fmtr = new Dbui_cells_fmtr(); private final    Dbui_val_fmtr edit_val_fmtr = Dbui_val_fmtr_.new_edit(); private final    Dbui_val_fmtr view_val_fmtr = Dbui_val_fmtr_.new_view();
+	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private final    Bridge_msg_bldr msg_bldr;
 	public Dbui_tbl_itm__bmk(Xoa_app app, Xoud_bmk_itm_tbl tbl) {this.app = app; this.tbl = tbl; this.msg_bldr = app.Html__bridge_mgr().Msg_bldr();}
-	public byte[] Key() {return key;} private static final byte[] key = Bry_.new_a7("bmk");
+	public byte[] Key() {return key;} private static final    byte[] key = Bry_.new_a7("bmk");
 	public Dbui_btn_itm[] View_btns() {return view_btns;}
 	public Dbui_btn_itm[] Edit_btns() {return edit_btns;}
 	public Dbui_col_itm[] Cols() {return cols;}
@@ -38,10 +38,10 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	}
 	public void Select(Bry_bfr bfr, int owner) {
 		Xoud_bmk_itm_row[] db_rows = tbl.Select_grp(owner);
-		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Help:Options/Bookmarks"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();
+		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Options/Bookmarks"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();// HOME
 		byte[] delete_confirm_msg = app.Api_root().Usr().Bookmarks().Delete_confirm() ? Msg__delete_confirm : Bry_.Empty;
 		tbl_fmtr.Write(bfr, this, option_link, delete_confirm_msg, To_ui_rows(db_rows));
-	}	private static final byte[] Msg__delete_confirm = Bry_.new_a7(" data-dbui-delete_confirm_msg='Are you sure you want to delete this bookmark?'");
+	}	private static final    byte[] Msg__delete_confirm = Bry_.new_a7(" data-dbui-delete_confirm_msg='Are you sure you want to delete this bookmark?'");
 	public String Del(byte[] row_id, byte[] row_pkey) {
 		Xoud_bmk_itm_row db_row = Get_db_row(row_pkey); if (db_row == null) return Fail_missing_row(row_pkey);
 		tbl.Delete(db_row.Id());
@@ -102,20 +102,20 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private String Fail_missing_row(byte[] row_pkey) {
 		return msg_bldr.Clear().Notify_fail_(Err_msg.To_str("Item has been deleted", "key", row_pkey)).Notify_hint_("Please reload the page").To_json_str();
 	}
-	private static final Dbui_col_itm[] cols = new Dbui_col_itm[]
+	private static final    Dbui_col_itm[] cols = new Dbui_col_itm[]
 	{ new Dbui_col_itm(Dbui_col_itm.Type_id_str		, 150, "name"		, "Name")
 	, new Dbui_col_itm(Dbui_col_itm.Type_id_str		, 300, "url"		, "Url")
 	, new Dbui_col_itm(Dbui_col_itm.Type_id_text	, 300, "comment"	, "Comment")
 	};
-	private static final Dbui_btn_itm[] view_btns = new Dbui_btn_itm[]
+	private static final    Dbui_btn_itm[] view_btns = new Dbui_btn_itm[]
 	{ new Dbui_btn_itm("rows__edit"		, "edit.png"	, "edit")
 	, new Dbui_btn_itm("rows__delete"	, "delete.png"	, "delete")
 	};
-	private static final Dbui_btn_itm[] edit_btns = new Dbui_btn_itm[]
+	private static final    Dbui_btn_itm[] edit_btns = new Dbui_btn_itm[]
 	{ new Dbui_btn_itm("rows__save"		, "save.png"	, "save")
 	, new Dbui_btn_itm("rows__cancel"	, "cancel.png"	, "cancel")
 	};
-	private static final Bry_fmtr url_fmtr = Bry_fmtr.new_("<a href='/site/~{url}'>~{url}</a>", "url");
+	private static final    Bry_fmtr url_fmtr = Bry_fmtr.new_("<a href='/site/~{url}'>~{url}</a>", "url");
 	public static Dbui_tbl_itm__bmk get_or_new(Xoa_app app, Xoud_bmk_itm_tbl db_tbl) {
 		if (I == null) {
 			I = new Dbui_tbl_itm__bmk(app, db_tbl);

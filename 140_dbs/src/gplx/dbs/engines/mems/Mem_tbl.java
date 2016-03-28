@@ -19,11 +19,12 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 import gplx.dbs.metas.*;
 public class Mem_tbl {
-	private final List_adp rows = List_adp_.new_(); private final List_adp where_rows = List_adp_.new_();
+	private final List_adp where_rows = List_adp_.new_();
 	private final Hash_adp autonum_hash = Hash_adp_.new_();		
 	public Mem_tbl(Dbmeta_tbl_itm meta) {this.meta = meta;}
 	public Dbmeta_tbl_itm Meta() {return meta;} private final Dbmeta_tbl_itm meta;
-	public int Insert(Db_stmt__mem stmt) {
+	public final List_adp rows = List_adp_.new_(); 
+	public int Insert(Mem_stmt stmt) {
 		Mem_row itm = new Mem_row();
 		Dbmeta_fld_mgr flds = meta.Flds();
 		int len = flds.Len();
@@ -31,6 +32,7 @@ public class Mem_tbl {
 			Dbmeta_fld_itm fld = flds.Get_at(i);
 			String fld_name = fld.Name();
 			Object val = fld.Autonum() ? Autonum_calc(fld_name) : stmt.Args_get_by(fld_name);
+			if (val == null) continue; // NOTE: allow Bulk_insert from test to skip filds
 			itm.Set_by(fld_name, val);
 		}
 		rows.Add(itm);
@@ -44,10 +46,11 @@ public class Mem_tbl {
 		}
 		return autonum_itm.Val_add();
 	}
-	public int Update(Db_stmt__mem stmt) {
+	public int Update(Mem_stmt stmt) {
 		Db_qry_update qry = (Db_qry_update)stmt.Qry();
-		qry.Where().Val_from_args(stmt.Crts());
-		Select_rows_where(where_rows, stmt, qry.Where());
+		Criteria where_crt = qry.Where(); if (where_crt == null) where_crt = Criteria_.All;
+		Mem_stmt_args_.Fill(stmt.Stmt_args(), where_crt);
+		Select_rows_where(where_rows, stmt, where_crt);
 		int where_rows_len = where_rows.Count();
 		String[] update_cols = qry.Cols_for_update(); int update_cols_len = update_cols.length;
 		for (int i = 0; i < where_rows_len; ++i) {
@@ -57,9 +60,9 @@ public class Mem_tbl {
 		}
 		return where_rows_len;
 	}
-	public int Delete(Db_stmt__mem stmt) {
+	public int Delete(Mem_stmt stmt) {
 		Db_qry_delete qry = (Db_qry_delete)stmt.Qry();
-		qry.Where().Val_from_args(stmt.Crts());
+		Mem_stmt_args_.Fill(stmt.Stmt_args(), qry.Where());
 		Select_rows_where(where_rows, stmt, qry.Where());
 		int where_rows_len = where_rows.Count();
 		for (int i = 0; i < where_rows_len; ++i) {
@@ -68,7 +71,7 @@ public class Mem_tbl {
 		}
 		return where_rows_len;
 	}
-	public Db_rdr Select(Db_stmt__mem stmt) {
+	public Db_rdr Select(Mem_stmt stmt) {
 		String[] select = null; Criteria where = null;
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.as_(stmt.Qry());
 		if (qry == null) {
@@ -80,9 +83,9 @@ public class Mem_tbl {
 			select = qry.Select_flds();
 			where = qry.Where();
 		}
-		where.Val_from_args(stmt.Crts());
+		Mem_stmt_args_.Fill(stmt.Stmt_args(), where);
 		Select_rows_where(where_rows, stmt, where);
-		return new Db_rdr__mem(select, (Mem_row[])where_rows.To_ary_and_clear(Mem_row.class));
+		return new Mem_rdr(select, (Mem_row[])where_rows.To_ary_and_clear(Mem_row.class));
 	}
 	private String[] To_str_ary(Sql_select_fld_list flds) {
 		int len = flds.Len();
@@ -91,7 +94,7 @@ public class Mem_tbl {
 			rv[i] = flds.Get_at(i).Fld;
 		return rv;
 	}
-	private void Select_rows_where(List_adp rv, Db_stmt__mem stmt, Criteria crt) {
+	private void Select_rows_where(List_adp rv, Mem_stmt stmt, Criteria crt) {
 		rv.Clear();
 		int rows_len = rows.Count();
 		for (int i = 0; i < rows_len; ++i) {

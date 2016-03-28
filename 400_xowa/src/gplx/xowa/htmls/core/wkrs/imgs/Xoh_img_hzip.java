@@ -45,7 +45,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean					img__alt_diff_from_anch_title = data.Img_alt__diff__anch_title();
 		boolean					file__src_exists = !img_xoimg.Val_dat_exists();
 		boolean					anch_href_diff_file = !img_wo_anch && !Bry_.Match(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end(), anch_href.Ttl_page_db());
-
 		boolean	img__imap_exists = flag_bldr.Set_as_bool(Flag__img__imap_exists				, data.Img_imap_idx() != -1);
 		flag_bldr.Set(Flag__img__wo_anch					, img_wo_anch);
 		flag_bldr.Set(Flag__img__is_vid						, data.Img_is_vid());
@@ -65,7 +64,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		flag_bldr.Set(Flag__img__cls_tid					, img_cls.Cls_tid());
 		flag_bldr.Set(Flag__anch__href_tid					, anch_href.Tid());
 		// Tfds.Dbg(flag_bldr.Encode(), Array_.To_str(flag_bldr.Val_ary()));
-
 		if (wkr_is_root) bfr.Add(hook);
 		Gfo_hzip_int_.Encode(2, bfr, flag_bldr.Encode());
 		if (img_wo_anch)		bfr.Add_hzip_mid(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end());
@@ -116,7 +114,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		Xoh_img_data data = (Xoh_img_data)data_itm; data.Clear();
-
 		int flag = rdr.Read_hzip_int(2); flag_bldr.Decode(flag);
 		boolean img_imap_exists					= flag_bldr.Get_as_bool(Flag__img__imap_exists);
 		boolean img_wo_anch						= flag_bldr.Get_as_bool(Flag__img__wo_anch);
@@ -154,7 +151,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		byte[] ns_custom_bry = null;
 		if (anch__ns_is_custom) ns_custom_bry = rdr.Read_bry_to();
 		int img_w = -1, img_h = -1, file_time = -1, file_page = -1;
-
 		if (file__src_exists) {
 			img_w = rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj;
 			img_h = rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj;
@@ -181,7 +177,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			img_cls_other_end = rdr.Find_fwd_lr();
 		}
 		int img_imap_idx = img_imap_exists ? rdr.Read_hzip_int(1) : -1;
-
 		// transform values
 		boolean anch_rel_is_nofollow = false;
 		if (anch__href_tid == Xoh_anch_href_data.Tid__inet) {// external links should get rel=nofollow
@@ -225,7 +220,6 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			}
 		}
 		this.anch_href_bry = tmp_bfr.To_bry_and_clear();
-
 		// NOTE: src must go underneath ttl
 		Xof_url_bldr url_bldr = hctx.File__url_bldr();
 		url_bldr.Init_by_root(file__repo_is_local ? hctx.Fsys__file__wiki() : hctx.Fsys__file__comm(), Byte_ascii.Slash, false, false, Md5_depth);

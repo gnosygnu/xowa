@@ -256,13 +256,13 @@ class Listing_xatrs {
 	public static Xop_xnde_tag Tag_by_tid(int tid) {
 		Xop_xnde_tag rv = null;
 		switch (tid) {
-			case Xop_xnde_tag_.Tid_listing_buy:		rv = Xop_xnde_tag_.Tag_listing_buy; break;
-			case Xop_xnde_tag_.Tid_listing_do:		rv = Xop_xnde_tag_.Tag_listing_do; break;
-			case Xop_xnde_tag_.Tid_listing_drink:	rv = Xop_xnde_tag_.Tag_listing_drink; break;
-			case Xop_xnde_tag_.Tid_listing_eat:		rv = Xop_xnde_tag_.Tag_listing_eat; break;
-			case Xop_xnde_tag_.Tid_listing_listing: rv = Xop_xnde_tag_.Tag_listing_listing; break;
-			case Xop_xnde_tag_.Tid_listing_see:		rv = Xop_xnde_tag_.Tag_listing_see; break;
-			case Xop_xnde_tag_.Tid_listing_sleep:	rv = Xop_xnde_tag_.Tag_listing_sleep; break;
+			case Xop_xnde_tag_.Tid__listing_buy:		rv = Xop_xnde_tag_.Tag__listing_buy; break;
+			case Xop_xnde_tag_.Tid__listing_do:			rv = Xop_xnde_tag_.Tag__listing_do; break;
+			case Xop_xnde_tag_.Tid__listing_drink:		rv = Xop_xnde_tag_.Tag__listing_drink; break;
+			case Xop_xnde_tag_.Tid__listing_eat:		rv = Xop_xnde_tag_.Tag__listing_eat; break;
+			case Xop_xnde_tag_.Tid__listing_listing:	rv = Xop_xnde_tag_.Tag__listing_listing; break;
+			case Xop_xnde_tag_.Tid__listing_see:		rv = Xop_xnde_tag_.Tag__listing_see; break;
+			case Xop_xnde_tag_.Tid__listing_sleep:		rv = Xop_xnde_tag_.Tag__listing_sleep; break;
 			default: throw Err_.new_unhandled(tid);
 		}
 		return rv;

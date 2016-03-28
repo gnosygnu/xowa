@@ -29,7 +29,7 @@ public class Xoa_app_eval_tst {
 class Xoa_app_eval_fxt {
 	public void Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 			fmtr = Bry_fmtr.new_();
 			eval = new Xoa_app_eval();
 			fmtr.Eval_mgr_(eval);

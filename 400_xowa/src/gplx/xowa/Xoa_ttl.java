@@ -29,7 +29,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Raw() {return raw;} private byte[] raw = Bry_.Empty;
 	public byte[] Wik_txt()  {return wik_bgn == -1 ? Bry_.Empty : Bry_.Mid(full_txt, wik_bgn, ns_bgn == -1 ? page_bgn - 1 : ns_bgn - 1);}
 	public Xow_xwiki_itm Wik_itm() {return wik_itm;} private Xow_xwiki_itm wik_itm;
-	public byte[] Full_txt() {
+	public byte[] Full_txt_w_ttl_case() {return Xoa_ttl.Replace_unders(Full_db());}
+	public byte[] Full_txt_by_orig() {
 		int bgn = wik_bgn == -1  ? 0 : ns_bgn == -1 ? page_bgn : ns_bgn;
 		int end = full_txt.length;
 		if		(anch_bgn != -1) end = anch_bgn - 1;
@@ -56,10 +57,10 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public int Wik_bgn() {return wik_bgn;}
 	public int Anch_bgn() {return anch_bgn;}	// NOTE: anch_bgn is not correct when page has trailing ws; EX: [[A #b]] should have anch_bgn of 3 (1st char after #), but instead it is 2
 	public byte[] Anch_txt() {return anch_bgn == -1	? Bry_.Empty : Bry_.Mid(full_txt, anch_bgn, full_txt.length);}
-	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
-	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
+	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
+	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Full_url() {return Gfo_url_encoder_.Href.Encode(full_txt);}
-	public String Full_db_as_str() {return String_.new_u8(Full_db());}
+	public String Full_db_as_str()	{return String_.new_u8(Full_db());}
 	public byte[] Full_db()			{return ns.Gen_ttl(this.Page_db());}
 	public byte[] Full_db_w_anch()  {return Replace_spaces(full_txt);}
 	public byte[] Page_url() {return Xoa_url_encoder.Instance.Encode(this.Page_txt());}
@@ -103,11 +104,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);
 	}
 	public static Xoa_ttl parse(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
-	private static final Object thread_lock = new Object();
+	private static final    Object thread_lock = new Object();
 	// $dbkey = preg_replace( '/\xE2\x80[\x8E\x8F\xAA-\xAE]/S', '', $dbkey );
 	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
 	private static final int Char__bidi = 1, Char__ws = 2;
-	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
+	private static final    Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
 	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
 	;
@@ -386,7 +387,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public static final int Anch_bgn_anchor_only = 1;	// signifies lnki which is only anchor; EX: [[#anchor]]
 	public static final int Max_len = 2048;	// ASSUME: max len of 256 * 8 bytes
 	public static final int Null_wik_bgn = -1;
-	public static final Xoa_ttl Null = null;
+	public static final    Xoa_ttl Null = null;
 }
 class Xoa_ttl_trie {
 	public static Btrie_fast_mgr new_() {

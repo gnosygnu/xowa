@@ -27,6 +27,7 @@ class Xowd_db_file_hash {
 		tids.Del(file.Id());
 		--count_total;
 	}
+	public Ordered_hash Get_by_tid_or_null(byte tid) {return (Ordered_hash)hash.Get_by(tid);}
 	public void Add_or_new(Xowd_db_file file) {
 		byte tid = file.Tid();
 		Ordered_hash tids = (Ordered_hash)hash.Get_by(tid);

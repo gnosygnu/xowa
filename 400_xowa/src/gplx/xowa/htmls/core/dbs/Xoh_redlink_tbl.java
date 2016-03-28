@@ -28,7 +28,7 @@ public class Xoh_redlink_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("html_redlink__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(int page_id, byte[] redlink_uids) {

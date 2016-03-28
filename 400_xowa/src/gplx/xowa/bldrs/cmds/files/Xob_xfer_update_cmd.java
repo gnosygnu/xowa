@@ -24,12 +24,11 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_xfer_update;}
 	public void Cmd_run() {
 		// init vars
-		Xob_db_file cur_file = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
+		Xob_db_file cur_file = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn conn = cur_file.Conn();
 		if (prv_url == null) {
 			prv_url = wiki.Appe().Fsys_mgr().File_dir().GenSubFil_nest(wiki.Domain_str(), "bldr", Xob_db_file.Name__file_make);
 		}
-
 		// run sql
 		Sqlite_engine_.Tbl_rename(conn, "xfer_regy", "xfer_regy_old");
 		Xob_xfer_regy_tbl.Create_table(conn);
@@ -38,7 +37,6 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Sqlite_engine_.Db_detach(conn, "old_db");
 		Sqlite_engine_.Tbl_delete(conn, "xfer_regy_old");
 		Xob_xfer_regy_tbl.Create_index(usr_dlg, conn);
-
 //			// rotate db
 //			DateAdp wiki_date = wiki.Db_mgr().Dump_date_query();
 //			Io_url archive_url = prv_url.GenNewNameOnly("oimg_lnki_" + wiki_date.XtoStr_fmt("yyyyMMdd"));

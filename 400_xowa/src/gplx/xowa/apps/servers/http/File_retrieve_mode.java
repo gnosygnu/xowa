@@ -32,5 +32,5 @@ class File_retrieve_mode {
 		else										throw Err_.new_unimplemented();
 	}
 	public static final byte Mode_skip = 1, Mode_wait = 2, Mode_async_server = 3;
-	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_("wait"), KeyVal_.new_("skip"), KeyVal_.new_("async_server", "async server"));
+	public static Keyval[] Options__list = Keyval_.Ary(Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
 }

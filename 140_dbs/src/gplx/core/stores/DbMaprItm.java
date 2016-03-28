@@ -29,7 +29,7 @@ public class DbMaprItm {
 		contextFlds.Add(arg.ObjProp(), arg);
 		return this;
 	}
-	public DbMaprItm ConstantFlds_add(String dbFld, Object dbVal) {constantFlds.Add(dbFld, KeyVal_.new_(dbFld, dbVal)); return this;}
+	public DbMaprItm ConstantFlds_add(String dbFld, Object dbVal) {constantFlds.Add(dbFld, Keyval_.new_(dbFld, dbVal)); return this;}
 	public DbMaprItm Subs_add(DbMaprItm... ary) {
 		for (DbMaprItm itm : ary)
 			subs.Add(itm);

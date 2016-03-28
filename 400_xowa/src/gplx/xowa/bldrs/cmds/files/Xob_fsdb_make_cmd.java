@@ -80,7 +80,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (!trg_atr_fil.Conn().Eq(trg_cfg_mgr.Tbl().Conn()))	// need to create txn for v1; DATE:2015-07-04
 			trg_cfg_mgr.Tbl().Conn().Txn_bgn("bldr__fsdb_make__trg_cfg_fil");
 		// bldr_db
-		Xob_db_file bldr_db = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
+		Xob_db_file bldr_db = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir());
 		this.bldr_conn = bldr_db.Conn();
 		this.bldr_cfg_tbl = bldr_db.Tbl__cfg();	// NOTE: cfg and atr is in same db; use it
 		bldr_cfg_tbl.Conn().Txn_bgn("bldr__fsdb_make__bldr_cfg_tbl");

@@ -36,7 +36,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 					return Qid_null;
 			}
 			Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
-			Wdata_doc doc = wdata_mgr.Pages_get(wiki, ttl); if (doc == null) return Qid_null;	// no links
+			Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, ttl); if (doc == null) return Qid_null;	// no links
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			Ordered_hash links = doc.Slink_list();
 			Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_k004();
@@ -70,12 +70,12 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 			return doc.Qid();
 		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}
-	public static final byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
+	public static final    byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
 }
 class Xoa_ttl_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoa_ttl lhs = (Xoa_ttl)lhsObj, rhs = (Xoa_ttl)rhsObj;
 		return Bry_.Compare(lhs.Raw(), rhs.Raw());
 	}
-	public static final Xoa_ttl_sorter Instance = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
+	public static final    Xoa_ttl_sorter Instance = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
 }

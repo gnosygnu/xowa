@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.xowa.guis.cmds.*;
 class Xog_menu_mgr_src {
-	public static final String Browser_win 
+	public static final    String Browser_win 
 	= Xog_menu_bldr.Instance
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_file)
 	.	Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y)
@@ -71,6 +71,7 @@ class Xog_menu_mgr_src {
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_help)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_help)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_xowa_main)
+	.	Add_btn(Xog_cmd_itm_.Key_nav_help_xowa_blog)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_change_log)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_diagnostics)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_cfg_menu)
@@ -87,7 +88,7 @@ class Xog_menu_mgr_src {
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_about)
 	. Add_grp_end()
 	. Gen_str();
-	public static final String Html_page 
+	public static final    String Html_page 
 	= Xog_menu_bldr.Instance
 	. Add_btn(Xog_cmd_itm_.Key_nav_go_bwd)
 	. Add_btn(Xog_cmd_itm_.Key_nav_go_fwd)
@@ -150,6 +151,7 @@ class Xog_menu_mgr_src {
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_help)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_help)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_xowa_main)
+	.	Add_btn(Xog_cmd_itm_.Key_nav_help_xowa_blog)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_change_log)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_help_diagnostics)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_cfg_menu)
@@ -158,7 +160,7 @@ class Xog_menu_mgr_src {
 	. Add_grp_end()
 	. Gen_str();
 
-	public static final String Html_link
+	public static final    String Html_link
 	= Xog_menu_bldr.Instance
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n)
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_y)
@@ -166,14 +168,14 @@ class Xog_menu_mgr_src {
 	. Add_btn(Xog_cmd_itm_.Key_gui_page_selection_copy)
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_find_show_by_paste)
 	. Gen_str();
-	public static final String Html_file
+	public static final    String Html_file
 	= Xog_menu_bldr.Instance
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n)
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_y)
 	. Add_spr()
 	. Add_btn(Xog_cmd_itm_.Key_gui_page_selection_save_file_as)
 	. Gen_str();
-	public static final String Tabs_btns
+	public static final    String Tabs_btns
 	= Xog_menu_bldr.Instance
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y)
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_new_dupe__at_dflt__focus_y)
@@ -191,11 +193,11 @@ class Xog_menu_mgr_src {
 	. Add_spr()
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_close_undo)
 	. Gen_str();		
-	public static final String Prog 
+	public static final    String Prog 
 	= Xog_menu_bldr.Instance
 	. Add_btn(Xog_cmd_itm_.Key_gui_browser_prog_log_show)
 	. Gen_str();
-	public static final String Info = String_.Concat_lines_nl
+	public static final    String Info = String_.Concat_lines_nl
 	( ""
 	);
 }
@@ -235,7 +237,7 @@ class Xog_menu_bldr {
 		bfr.Add(Const_itm_btn_bgn_rhs);
 		return this;
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Const_spr				= Bry_.new_a7("add_spr;\n")
 	, Const_itm_btn_bgn_lhs	= Bry_.new_a7("add_btn_default('")
 	, Const_itm_btn_bgn_rhs	= Bry_.new_a7("');\n")
@@ -243,5 +245,5 @@ class Xog_menu_bldr {
 	, Const_itm_grp_bgn_rhs	= Bry_.new_a7("') {\n")
 	, Const_itm_grp_end		= Bry_.new_a7("}\n")
 	;
-	public static final Xog_menu_bldr Instance = new Xog_menu_bldr(); Xog_menu_bldr() {}
+	public static final    Xog_menu_bldr Instance = new Xog_menu_bldr(); Xog_menu_bldr() {}
 }

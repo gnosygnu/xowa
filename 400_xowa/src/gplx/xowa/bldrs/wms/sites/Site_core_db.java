@@ -21,24 +21,24 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.bldrs.*;
 public class Site_core_db {
 	private Db_conn conn;
-	private final Site_core_tbl tbl__core;
-	private final Site_kv_tbl tbl__general;
-	private final Site_namespace_tbl tbl__namespace;
-	private final Site_statistic_tbl tbl__statistic;
-	private final Site_interwikimap_tbl tbl__interwikimap;
-	private final Site_namespacealias_tbl tbl__namespacealias;
-	private final Site_specialpagealias_tbl tbl__specialpagealias;
-	private final Site_library_tbl tbl__library;
-	private final Site_extension_tbl tbl__extension;
-	private final Site_skin_tbl tbl__skin;
-	private final Site_magicword_tbl tbl__magicword;
-	private final Site_val_tbl tbl__functionhook;
-	private final Site_showhook_tbl tbl__showhook;
-	private final Site_val_tbl tbl__extensiontag;
-	private final Site_val_tbl tbl__protocol;
-	private final Site_kv_tbl tbl__defaultoption;
-	private final Site_language_tbl tbl__language;
-	private final Db_tbl[] tbl_ary;
+	private final    Site_core_tbl tbl__core;
+	private final    Site_kv_tbl tbl__general;
+	private final    Site_namespace_tbl tbl__namespace;
+	private final    Site_statistic_tbl tbl__statistic;
+	private final    Site_interwikimap_tbl tbl__interwikimap;
+	private final    Site_namespacealias_tbl tbl__namespacealias;
+	private final    Site_specialpagealias_tbl tbl__specialpagealias;
+	private final    Site_library_tbl tbl__library;
+	private final    Site_extension_tbl tbl__extension;
+	private final    Site_skin_tbl tbl__skin;
+	private final    Site_magicword_tbl tbl__magicword;
+	private final    Site_val_tbl tbl__functionhook;
+	private final    Site_showhook_tbl tbl__showhook;
+	private final    Site_val_tbl tbl__extensiontag;
+	private final    Site_val_tbl tbl__protocol;
+	private final    Site_kv_tbl tbl__defaultoption;
+	private final    Site_language_tbl tbl__language;
+	private final    Db_tbl[] tbl_ary;
 	public Site_core_db(Io_url db_url) {
 		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(db_url);
 		this.conn = conn_data.Conn(); boolean created = conn_data.Created();
@@ -120,7 +120,7 @@ public class Site_core_db {
 		int len = hash.Count();
 		for (int i = 0; i < len; ++i)  {
 			Site_interwikimap_itm itm = (Site_interwikimap_itm)hash.Get_at(i);
-			Xow_xwiki_itm xwiki_itm = Xow_xwiki_itm_bldr.Instance.Bld_mw(domain_itm, itm.Prefix(), itm.Url(), null);
+			Xow_xwiki_itm xwiki_itm = Xow_xwiki_itm_bldr.Instance.Bld_mw(domain_itm, itm.Prefix, itm.Url, null);
 			xwiki_mgr.Add_itm(xwiki_itm);
 		}
 	}

@@ -65,8 +65,8 @@ public class Xowd_hive_mgr_tst {
 class Xowd_hive_mgr_fxt {
 	Xoae_app app; Xowe_wiki wiki; Xowd_hive_mgr mgr;
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		mgr = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_page);
 	}
 	public Xowd_hive_mgr_fxt Tst_reg(String expd) {

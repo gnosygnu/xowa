@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.core.envs.*;
-import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.specials.search.*; import gplx.core.encoders.*;
+import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
+import gplx.xowa.addons.searchs.specials.*;
 import gplx.xowa.guis.views.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
@@ -75,14 +76,14 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public void Load_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
 		Xow_ns ns = wiki.Ns_mgr().Ns_main();
 		int search_len = search.length;
-		byte match_tid = Xows_page__search.Match_tid_all;
+		byte match_tid = Srch_special_page.Match_tid_all;
 		if (search_len > 0 && search[search_len - 1] == Byte_ascii.Star) {
 			search = Bry_.Mid(search, 0, search_len - 1);
-			match_tid = Xows_page__search.Match_tid_bgn;
+			match_tid = Srch_special_page.Match_tid_bgn;
 		}
 		int bgn_idx = this.Find_file_idx_by_ns(Xotdb_dir_info_.Tid_search_ttl, ns, search);
 		if (bgn_idx == Xow_data_mgr.File_idx_unknown) return;
-		if (match_tid == Xows_page__search.Match_tid_all) {
+		if (match_tid == Srch_special_page.Match_tid_all) {
 			if (!this.Load_xdat_file(cancelable, tmp_xdat_file, Xotdb_dir_info_.Tid_search_ttl, ns, bgn_idx)) return;			
 			tmp_xdat_file.Find(tmp_xdat_itm, search, 0, Byte_ascii.Pipe, true);
 			if (tmp_xdat_itm.Missing()) return;

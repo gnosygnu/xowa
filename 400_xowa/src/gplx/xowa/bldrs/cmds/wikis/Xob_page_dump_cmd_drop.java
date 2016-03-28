@@ -31,7 +31,7 @@ public class Xob_page_dump_cmd_drop extends Xob_itm_basic_base implements Xob_cm
 				case Xowd_db_file_.Tid_wiki_solo:
 				case Xowd_db_file_.Tid_text_solo:
 				case Xowd_db_file_.Tid_text:
-					db_file.Conn().Ddl_delete_tbl(Xobd_page_dump_tbl.Tbl_name);
+					db_file.Conn().Meta_tbl_drop(Xobd_page_dump_tbl.Tbl_name);
 					break;
 			}
 		}

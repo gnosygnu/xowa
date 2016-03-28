@@ -19,8 +19,8 @@ package gplx.xowa.bldrs.setups.upgrades; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.xowa.bldrs.installs.*;
 public class Upgrader_v00_02_01_tst {
 	@Test  public void Run() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Io_url cfg_dir = wiki.Fsys_mgr().Root_dir().GenSubDir("cfg");
 		Io_mgr.Instance.SaveFilStr(cfg_dir.GenSubFil("siteInfo.xml"), Str_siteinfo_xml);
 		Io_mgr.Instance.SaveFilStr(cfg_dir.GenSubFil("wiki.gfs"), Str_wikistats_gfs);

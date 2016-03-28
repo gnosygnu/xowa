@@ -62,7 +62,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		if (page.Hdr_mgr().Toc_enabled())									itm__toc.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__top_icon().Enabled_y())			itm__top_icon.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__title_rewrite().Enabled_y())	itm__title_rewrite.Enabled_y_();
-		if (app.Gui_mgr().Search_suggest_mgr().Enabled())					itm__search_suggest.Enabled_y_();
+		if (app.Gui_mgr().Search_cfg().Enabled())							itm__search_suggest.Enabled_y_();
 		itm__css.Enabled_y_();
 		itm__globals.Enabled_y_();	// for now, always mark this and rest as exists; DATE:2014-06-09
 		itm__collapsible.Enabled_y_();

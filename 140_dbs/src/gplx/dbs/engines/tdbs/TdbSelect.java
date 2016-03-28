@@ -24,11 +24,11 @@ class TdbSelectWkr implements Db_qryWkr {
 		if (cmd.From().Tbls.Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.To_sql__exec(engineObj.Sql_wtr()));
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().Base_tbl.Name);
-		GfoNdeList rv = (cmd.Where_itm() == Sql_where_itm.Where__null && cmd.Limit() == Db_qry__select_cmd.Limit__disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where_itm().Root, cmd.Limit());
+		GfoNdeList rv = (cmd.Where_itm() == Sql_where_clause.Where__null && cmd.Limit() == Db_qry__select_cmd.Limit__disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where_itm().Root, cmd.Limit());
 		if (cmd.GroupBy() != null)
 			rv = TdbGroupByWkr.GroupByExec(cmd, rv, tbl);
 		if (cmd.Order() != null) {	// don't use null pattern here; if null ORDER BY, then don't call .Sort on GfoNdeList
-			ComparerAble comparer = Sql_order_fld_sorter.new_(cmd.Order().Flds);
+			ComparerAble comparer = Sql_order_fld_sorter.new_(cmd.Order().Flds());
 			rv.Sort_by(comparer);
 		}
 		return GfoNdeRdr_.peers_(rv, false);

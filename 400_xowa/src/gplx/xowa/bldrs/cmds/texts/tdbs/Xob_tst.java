@@ -170,11 +170,11 @@ public class Xob_tst {
 			,	"a", "b", "c");
 	}
 	private void tst_Parse(String raw, String... expd) {
-		Xoae_app app = Xoa_app_fxt.app_();	// NOTE: resets mem file system, so must happen first
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();	// NOTE: resets mem file system, so must happen first
 		Io_url url = Io_url_.mem_fil_("mem/raw_page.csv");
 		Io_mgr.Instance.SaveFilStr(url, raw);
 		Xotdb_page_raw_parser parser = new Xotdb_page_raw_parser();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Tid__template, Xow_ns_case_.Tid__1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
 		List_adp actl = List_adp_.new_();
 		Xowd_page_itm page = new Xowd_page_itm();

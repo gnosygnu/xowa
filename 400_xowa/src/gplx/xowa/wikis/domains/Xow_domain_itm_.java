@@ -19,6 +19,7 @@ package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 public class Xow_domain_itm_ {
+	public static final Xow_domain_itm[] Ary_empty = new Xow_domain_itm[0];
 	public static Xow_domain_itm parse(byte[] raw) {
 		/*
 		~{type}.org				EX: wikimediafoundation

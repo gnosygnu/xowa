@@ -163,7 +163,7 @@ public class Xol_lang_srl {
 				bldr.Add_indent(1).Add_proc_init_one(Xol_num_mgr.Invk_separators).Add_curly_bgn_nl();							//   separators {
 				bldr.Add_indent(2).Add_proc_init_one(Xol_num_mgr.Invk_clear).Add_term_nl();										//     clear;
 				for (int i = 0; i < separators_len; i++) {
-					KeyVal kv = separators_mgr.Get_at(i);
+					Keyval kv = separators_mgr.Get_at(i);
 					String k = kv.Key(), v = kv.Val_to_str_or_empty();
 					bldr.Add_indent(2).Add_proc_init_many(Xol_transform_mgr.Invk_set).Add_parens_str_many(k, v).Add_term_nl();	//     set('k', 'v');
 				}
@@ -173,7 +173,7 @@ public class Xol_lang_srl {
 				bldr.Add_indent(1).Add_proc_init_one(Xol_num_mgr.Invk_digits).Add_curly_bgn_nl();								//   digits {
 				bldr.Add_indent(2).Add_proc_init_one(Xol_num_mgr.Invk_clear).Add_term_nl();										//     clear;
 				for (int i = 0; i < digits_len; i++) {
-					KeyVal kv = digits_mgr.Get_at(i);
+					Keyval kv = digits_mgr.Get_at(i);
 					String k = kv.Key(), v = kv.Val_to_str_or_empty();
 					bldr.Add_indent(2).Add_proc_init_many(Xol_transform_mgr.Invk_set).Add_parens_str_many(k, v).Add_term_nl();	//     set('k', 'v');
 				}

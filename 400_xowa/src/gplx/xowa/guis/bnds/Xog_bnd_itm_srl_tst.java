@@ -30,7 +30,7 @@ public class Xog_bnd_itm_srl_tst {
 class Xog_bnd_itm_srl_fxt {
 	private Xoae_app app;
 	public void Reset() {
-		app = Xoa_app_fxt.app_();
+		app = Xoa_app_fxt.Make__app__edit();
 	}
 	public Xog_bnd_itm bnd_(int box, IptArg ipt) {return new Xog_bnd_itm("test.key", true, "test.cmd", box, ipt);}
 	public void Test_src_get(Xog_bnd_itm bnd, String expd) {

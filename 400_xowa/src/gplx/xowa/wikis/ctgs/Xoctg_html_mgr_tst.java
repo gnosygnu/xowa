@@ -243,8 +243,8 @@ public class Xoctg_html_mgr_tst {
 class Xoh_ctg_page_fxt {
 	public Xoh_ctg_page_fxt Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			ctg_html = wiki.Html_mgr().Ns_ctg();
 			ctg = new Xoctg_view_ctg();
 		}

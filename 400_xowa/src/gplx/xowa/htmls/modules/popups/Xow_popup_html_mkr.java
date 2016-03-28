@@ -43,7 +43,7 @@ public class Xow_popup_html_mkr {
 		, hdom_bry
 		, wiki.Lang().Dir_ltr_bry()
 		, page_url
-		, String_.new_u8(page.Ttl().Full_txt())
+		, String_.new_u8(page.Ttl().Full_txt_w_ttl_case())
 		, popup_itm.Popup_id()
 		, Xow_popup_html_bldr_.Bld_fmtr_wiki(fmtr_wiki, wrdx_bfr, cur_wiki.Domain_bry(), page.Wiki().Domain_bry()) // NOTE: use cur_wiki, not page_wiki; DATE:2014-06-28
 		, gplx.core.ios.Io_size_.To_str(page.Data_raw().length)
@@ -62,7 +62,7 @@ class Xow_popup_html_bldr_ {
 	}
 	public static byte[] Bld_fmtr_viewed(Bry_fmtr fmtr, Xoae_app app, Xowe_wiki wiki, Bry_bfr wrdx_bfr, Xoa_ttl ttl) {
 		byte[] view_time_item = Bry_.Empty;
-		gplx.xowa.users.history.Xou_history_itm history_itm = app.Usere().History_mgr().Get_or_null(wiki.Domain_bry(), ttl.Full_txt());
+		gplx.xowa.users.history.Xou_history_itm history_itm = app.Usere().History_mgr().Get_or_null(wiki.Domain_bry(), ttl.Full_txt_w_ttl_case());
 		if (history_itm != null)
 			view_time_item = fmtr.Bld_bry_many(wrdx_bfr, history_itm.View_end().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
 		return view_time_item;

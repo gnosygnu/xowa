@@ -18,11 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.wikis.data.tbls.*;
-public class Xobd_parser implements Xobd_wkr {
+public class Xobd_parser implements Xob_page_wkr {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
 	private List_adp wkr_list = List_adp_.new_();
 	public String Wkr_key() {return KEY;} static final String KEY = "page_parser";
-	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_add(Xobd_parser_wkr wkr) {wkr_list.Add(wkr);}
 	public void Wkr_bgn(Xob_bldr app) {
 		int wkr_list_len = wkr_list.Count();
@@ -57,7 +56,6 @@ public class Xobd_parser implements Xobd_wkr {
 			wkr.Wkr_end();
 		}
 	}
-	public void Wkr_print() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		throw Err_.new_unimplemented();
 	}

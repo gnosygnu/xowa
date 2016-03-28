@@ -58,7 +58,6 @@ public class Xof_img_size {
 			}
 			html_w = Upright_calc(upright_patch, lnki_upright, html_w, lnki_w, lnki_h, lnki_type);
 			if (orig_w == Null) return;								// no orig_w; just use html_w and html_h (html_h will likely be -1 and wrong)
-
 			boolean ext_is_svg = orig_ext == Xof_ext_.Id_svg;
 			if (html_w == Xof_img_size.Null) {
 				if	(	ext_is_svg									// following strange MW logic; REF.MW:Linker.php|makeImageLink|If its a vector image, and user only specifies height, we don't want it to be limited by its "normal" width; DATE: 2013-11-26
@@ -159,16 +158,13 @@ MW calls the falling procs
 . File.php|scaleHeight
 Note that this proc is a selective culling of the w,h setting code in the above (the procs do a lot of other checks/building)
 also, MW's if branching can be combined. for now, emulating MW and not enforcing matching if/else 
-
 NOTE_2: lnki_ratio > orig_ratio
 REF.MW:media/MediaHandler.php|fitBoxWidth
 COMMENT:"Height is the relative smaller dimension, so scale width accordingly"
-
 consider file of 200,100 (2:1)
 EX_1: view is 120,40 (3:1)
 - dimensions are either (a) 120,80 or (b) 80,40
 - use (b) 80,40
-
 EX_2: view is 120,80 (1.5:1)
 - dimensions are either (a) 120,60 or (b) 160,80
 - use (a) 120,60

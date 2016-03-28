@@ -92,7 +92,7 @@ class Mock_proc__recursive extends Mock_proc_fxt {	private final Mock_scrib_fxt 
 		this.fxt = fxt; this.lib = lib; this.inner = inner;
 		this.bfr = bfr;
 	}
-	@Override public KeyVal[] Exec_by_scrib(KeyVal[] args) {
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
 		bfr.Add_int_variable(this.Id()).Add_byte_semic();
 		if (inner != null)
 			fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_("a", ".", inner.To_scrib_lua_proc(), -1), "a;1");

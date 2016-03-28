@@ -28,8 +28,8 @@ public class GfuiCheckListBox extends GfuiElemBase {
 	public List_adp Items_getChecked() {return checkListBox.Items_getChecked();}
 
 	GxwCheckListBox checkListBox;
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return new GxwCheckListBox_lang();}
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return new GxwCheckListBox_lang();}
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.checkListBox = (GxwCheckListBox)UnderElem();
 	}

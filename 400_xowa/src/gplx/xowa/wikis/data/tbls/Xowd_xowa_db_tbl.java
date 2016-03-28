@@ -38,7 +38,7 @@ public class Xowd_xowa_db_tbl {
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xowd_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
 		List_adp list = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();

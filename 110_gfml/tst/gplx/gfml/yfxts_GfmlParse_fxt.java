@@ -60,14 +60,14 @@ class GfmlParse_fxt {
 			UsrMsg_mok actlUmm = UsrMsg_mok.new_(actlUm);
 			tstr.Eq_str(expdUm.Main(), actlUmm.Main(), "main");
 			for (int j = 0; j < expdUm.Args().Count(); j++) {
-				KeyVal expdKv = (KeyVal)expdUm.Args().Get_at(j);
-				KeyVal actlKv = (KeyVal)actlUmm.Args().Get_by(expdKv.Key());
+				Keyval expdKv = (Keyval)expdUm.Args().Get_at(j);
+				Keyval actlKv = (Keyval)actlUmm.Args().Get_by(expdKv.Key());
 				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
 				tstr.Eq_str(expdKv.Val(), actlVal, expdKv.Key());
 			}
 			for (int j = 0; j < expdUm.Required().Count(); j++) {
 				String expdKv = (String)expdUm.Required().Get_at(j);
-				KeyVal actlKv = (KeyVal)actlUmm.Args().Get_by(expdKv);
+				Keyval actlKv = (Keyval)actlUmm.Args().Get_by(expdKv);
 				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
 				Object actlValV = actlKv == null ? "<<REQD>>" : actlKv.Val();
 				tstr.Eq_str(actlValV, actlVal, expdKv);

@@ -34,7 +34,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	private Composite text_host;
 	private Composite text_margin;
 	private Text text_elem;
-	public Swt_text_w_border(Swt_control owner_control, Color color, KeyValHash ctorArgs) {
+	public Swt_text_w_border(Swt_control owner_control, Color color, Keyval_hash ctorArgs) {
 		Composite owner = owner_control.Under_composite();
 		int text_elem_style = ctorArgs.Has(GfuiTextBox_.Ctor_Memo) ? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL : SWT.FLAT;
 		New_box_text_w_border(owner.getDisplay(), owner.getShell(), text_elem_style, color);
@@ -72,7 +72,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 		text_host = new Composite(shell, SWT.FLAT);
 		text_margin = new Composite(text_host, SWT.FLAT);
 		text_elem = new Text(text_margin, style);
-		text_elem .addTraverseListener(Swt_lnr_traverse_ignore_ctrl._);	// do not allow ctrl+tab to change focus when pressed in text box; allows ctrl+tab to be used by other bindings; DATE:2014-04-30  
+		text_elem .addTraverseListener(Swt_lnr_traverse_ignore_ctrl.Instance);	// do not allow ctrl+tab to change focus when pressed in text box; allows ctrl+tab to be used by other bindings; DATE:2014-04-30  
 		text_host.setSize(20, 20);
 		text_host.setBackground(color);
 		text_margin.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
@@ -85,5 +85,5 @@ class Swt_lnr_traverse_ignore_ctrl implements TraverseListener {
     public void keyTraversed(TraverseEvent e) {
   	  if (Swt_lnr_key.Has_ctrl(e.stateMask)) e.doit = false;
     }
-    public static final Swt_lnr_traverse_ignore_ctrl _ = new Swt_lnr_traverse_ignore_ctrl();	
+    public static final Swt_lnr_traverse_ignore_ctrl Instance = new Swt_lnr_traverse_ignore_ctrl();	
 }

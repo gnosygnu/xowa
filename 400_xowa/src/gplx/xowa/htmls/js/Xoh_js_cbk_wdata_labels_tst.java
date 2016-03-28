@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoh_js_cbk_wdata_labels_tst {
-	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void Basic() {
-		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
-		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());
-		fxt.Init_pages_add(fxt.Wdoc_bldr("Property:P1").Add_label("en", "en_property_p1").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("Property:P1").Add_label("en", "en_property_p1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("en", "q1", "q2", "Property:P1"), String_.Ary("en_q1", "en_q2", "en_property_p1"));
 	}
 	@Test   public void Outliers() {
-		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Add_label("de", "de_q1").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Add_label("de", "de_q1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("fr", "q1"), String_.Ary((String)null));
 		Tst_wikidata_label_get(String_.Ary("de", "q1"), String_.Ary("de_q1"));
 		Tst_wikidata_label_get(String_.Ary("xowa_title", "q1"), String_.Ary("q1"));
@@ -41,12 +41,12 @@ public class Xoh_js_cbk_wdata_labels_tst {
 		,	"  }"
 		,	"}"
 		));
-		fxt.Init_pages_add(d);
+		fxt.Init__docs__add(d);
 		Tst_wikidata_label_get(String_.Ary("en", "q1"), String_.Ary("\ta"));
 	}
 	private Wdata_doc doc_(String qid, String src) {
 		Json_doc jdoc = fxt.Make_json(src);
-		Xoae_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Wdata_doc rv = new Wdata_doc(Bry_.new_a7(qid), app.Wiki_mgr().Wdata_mgr(), jdoc);
 		return rv;
 	}

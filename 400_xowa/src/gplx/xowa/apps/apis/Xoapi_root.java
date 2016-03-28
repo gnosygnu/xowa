@@ -40,16 +40,17 @@ public class Xoapi_root implements GfoInvkAble {
 		html_api.Page().Toggle_mgr().Img_dir_(img_dir);
 		usr_api.Init_by_app(app);
 	}
-	public Xoapi_app		App()		{return app_api;} private final Xoapi_app app_api = new Xoapi_app();
-	public Xoapi_nav		Nav()		{return nav_api;} private final Xoapi_nav nav_api = new Xoapi_nav();
-	public Xoapi_gui		Gui()		{return gui_api;} private final Xoapi_gui gui_api = new Xoapi_gui();
-	public Xoapi_html		Html()		{return html_api;} private final Xoapi_html html_api = new Xoapi_html();
-	public Xoapi_bldr		Bldr()		{return bldr_api;} private final Xoapi_bldr bldr_api = new Xoapi_bldr();
-	public Xoapi_net		Net()		{return net_api;} private final Xoapi_net net_api = new Xoapi_net();
-	public Xoapi_usr		Usr()		{return usr_api;} private final Xoapi_usr usr_api = new Xoapi_usr();
-	public Xoapi_special	Special()	{return special_api;} private final Xoapi_special special_api = new Xoapi_special();
-	public Xoapi_xtns		Xtns()		{return xtns_api;} private final Xoapi_xtns xtns_api = new Xoapi_xtns();
-	public Xoapi_app_wikis	Wikis()		{return app_wikis;} private final Xoapi_app_wikis app_wikis = new Xoapi_app_wikis();
+	public Xoapi_addon		Addon()		{return addon_api;} private final    Xoapi_addon addon_api = new Xoapi_addon();
+	public Xoapi_app		App()		{return app_api;} private final    Xoapi_app app_api = new Xoapi_app();
+	public Xoapi_nav		Nav()		{return nav_api;} private final    Xoapi_nav nav_api = new Xoapi_nav();
+	public Xoapi_gui		Gui()		{return gui_api;} private final    Xoapi_gui gui_api = new Xoapi_gui();
+	public Xoapi_html		Html()		{return html_api;} private final    Xoapi_html html_api = new Xoapi_html();
+	public Xoapi_bldr		Bldr()		{return bldr_api;} private final    Xoapi_bldr bldr_api = new Xoapi_bldr();
+	public Xoapi_net		Net()		{return net_api;} private final    Xoapi_net net_api = new Xoapi_net();
+	public Xoapi_usr		Usr()		{return usr_api;} private final    Xoapi_usr usr_api = new Xoapi_usr();
+	public Xoapi_special	Special()	{return special_api;} private final    Xoapi_special special_api = new Xoapi_special();
+	public Xoapi_xtns		Xtns()		{return xtns_api;} private final    Xoapi_xtns xtns_api = new Xoapi_xtns();
+	public Xoapi_app_wikis	Wikis()		{return app_wikis;} private final    Xoapi_app_wikis app_wikis = new Xoapi_app_wikis();
 	public String			Test_str() {return test_str;} public void Test_str_(String v) {test_str = v;} private String test_str;	// TEST
 	private void Exec(String key) {
 		Xog_cmd_itm cmd_itm = app.Gui_mgr().Cmd_mgr().Get_or_null(key);
@@ -58,6 +59,7 @@ public class Xoapi_root implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_app)) 		return app_api;
+		else if	(ctx.Match(k, Invk_addon)) 		return addon_api;
 		else if	(ctx.Match(k, Invk_bldr)) 		return bldr_api;
 		else if	(ctx.Match(k, Invk_nav)) 		return nav_api;
 		else if	(ctx.Match(k, Invk_gui)) 		return gui_api;
@@ -74,7 +76,8 @@ public class Xoapi_root implements GfoInvkAble {
 	}
 	private static final String 
 	  Invk_exec = "exec"
-	, Invk_app = "app", Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_net = "net", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
+	, Invk_app = "app", Invk_addon = "addon"
+	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_net = "net", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
 	, Invk_test_str = "test_str", Invk_test_str_ = "test_str_"
 	, Invk_wikis = "wikis"
 	;

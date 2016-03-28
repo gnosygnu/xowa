@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_wiki_props_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Before	public void setup()						{fxt.Reset(); fxt.Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7).NumAdmins_(8);}
+	@Before	public void setup()						{fxt.Reset(); fxt.Wiki().Stats().Load_by_db(1, 2, 3, 4, 5, 6, 7, 8);}
 	@Test   public void NumPages()					{fxt.Test_parse_tmpl_str_test("{{NUMBEROFPAGES}}"				, "{{test}}", "1");}
 	@Test   public void NumArticles()				{fxt.Test_parse_tmpl_str_test("{{NUMBEROFARTICLES}}"			, "{{test}}", "2");}
 	@Test   public void NumFiles()					{fxt.Test_parse_tmpl_str_test("{{NUMBEROFFILES}}"				, "{{test}}", "3");}
@@ -35,5 +35,5 @@ public class Pfunc_wiki_props_tst {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_ru);
 		Init_numArticles(1234); fxt.Test_parse_tmpl_str_test("{{NUMBEROFARTICLES}}"			, "{{test}}", "1234"); Init_numArticles(2);
 	}
-	private Pfunc_wiki_props_tst Init_numArticles(int v) {fxt.Wiki().Stats().NumArticles_(v); return this;}
+	private Pfunc_wiki_props_tst Init_numArticles(int v) {fxt.Wiki().Stats().Load_by_db(1, v, 3, 4, 5, 6, 7, 8); return this;}
 }

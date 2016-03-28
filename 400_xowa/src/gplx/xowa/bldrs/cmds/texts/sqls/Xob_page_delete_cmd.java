@@ -26,10 +26,9 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Db_conn core_db_conn = core_db.Conn();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
-
 		usr_dlg.Plog_many("", "", "creating page_filter");
 		if (!core_db_conn.Meta_tbl_exists("page_filter")) {
-			core_db_conn.Ddl_create_tbl
+			core_db_conn.Meta_tbl_create
 			( Dbmeta_tbl_itm.New("page_filter", new Dbmeta_fld_itm[]
 			{	Dbmeta_fld_itm.new_int("page_id").Primary_y_()
 			,	Dbmeta_fld_itm.new_int("page_text_db_id")
@@ -38,7 +37,6 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "page_id", "page_id")
 			));
 		}
-
 		core_db_conn.Exec_sql_plog_ntx("finding missing redirects", String_.Concat_lines_nl_skip_last
 		( "INSERT INTO page_filter (page_id, page_text_db_id)"
 		, "SELECT  ptr.page_id, ptr.page_text_db_id"
@@ -53,7 +51,6 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		, "AND     ptr.page_redirect_id = -1"
 		, ";"
 		));
-
 		try {
 			Xowd_db_file[] db_files = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
 			int len = db_files.length;
@@ -69,9 +66,9 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 					case Xowd_db_file_.Tid_search_core:	db_file_is_search = Bool_.Y; break;
 				}
 				int db_id = db_file.Id();
-				if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <attach_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");
-				if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting cat: "   + db_id, "DELETE FROM <attach_db>cat_link WHERE cl_from IN (SELECT page_id FROM page_filter);");
-				if	(db_file_is_search)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting search:" + db_id, "DELETE FROM <attach_db>search_link WHERE page_id IN (SELECT page_id FROM page_filter);");
+				if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <data_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");
+				if	(db_file_is_cat)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting cat: "   + db_id, "DELETE FROM <data_db>cat_link WHERE cl_from IN (SELECT page_id FROM page_filter);");
+				if	(db_file_is_search)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting search:" + db_id, "DELETE FROM <data_db>search_link WHERE page_id IN (SELECT page_id FROM page_filter);");
 				if (db_file_is_text || db_file_is_cat || db_file_is_search)
 					db_file.Conn().Env_vacuum();
 			}
@@ -82,8 +79,7 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		usr_dlg.Plog_many("", "", "");
 	}
 	private void Run_sql(Db_conn core_db_conn, Io_url db_url, int db_id, String prog_msg, String sql) {
-		Db_attach_cmd.new_(core_db_conn, "data_db", db_url)
-			.Add_fmt(prog_msg			, sql, db_id)
-			.Exec();
+		new Db_attach_mgr(core_db_conn, new Db_attach_itm("data_db", db_url))
+			.Exec_sql_w_msg(prog_msg			, sql, db_id);
 	}
 }

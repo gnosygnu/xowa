@@ -32,6 +32,13 @@ public class Object_ {
 			rv[i] = rhs[i - lhs_len];
 		return rv;
 	}
+	public static String[] Ary__to_str_ary(Object[]... ary) {
+		int len = ary.length;
+		String[] rv = new String[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = String_.Concat_with_obj("|", (Object[])ary[i]);
+		return rv;
+	}
 	public static boolean Eq(Object lhs, Object rhs) {
 		if		(lhs == null && rhs == null)	return true;
 		else if (lhs == null || rhs == null)	return false;

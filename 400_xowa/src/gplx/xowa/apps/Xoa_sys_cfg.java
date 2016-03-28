@@ -31,7 +31,7 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 		return this;
 	}	private byte[] lang_key = Xol_lang_itm_.Key_en;
 	public int Options_version() {return options_version;} public Xoa_sys_cfg Options_version_(int v) {options_version = v; return this;} private int options_version = 1;
-	public KeyVal[] Options_lang_list() {if (options_lang_list == null) options_lang_list = Options_list_lang_.new_(); return options_lang_list;} private KeyVal[] options_lang_list;
+	public Keyval[] Options_lang_list() {if (options_lang_list == null) options_lang_list = Options_list_lang_.new_(); return options_lang_list;} private Keyval[] options_lang_list;
 	public long Free_mem_when() {return free_mem_when;} long free_mem_when;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_version))			return Xoa_app_.Version;
@@ -49,7 +49,7 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 		, Invk_lang = "lang", Invk_lang_ = "lang_", Invk_lang_list = "lang_list";
 }
 class Options_list_lang_ {
-	public static KeyVal[] new_() {
+	public static Keyval[] new_() {
 		Ordered_hash translated = Ordered_hash_.New_bry();
 		List_adp untranslated = List_adp_.new_();
 		Add_itm_many(translated, Xol_lang_stub_.Id_en, Xol_lang_stub_.Id_de, Xol_lang_stub_.Id_pl, Xol_lang_stub_.Id_zh_hans, Xol_lang_stub_.Id_zh_hant); // add langs with translations first, so they alphabetize to top of list			
@@ -61,7 +61,7 @@ class Options_list_lang_ {
 		}
 		untranslated.Sort_by(Xol_lang_stub_.Comparer_key);
 
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		int translated_max = translated.Count();
 		for (int i = 0; i < translated_max; i++)
 			rv[i] = new_itm((Xol_lang_stub)translated.Get_at(i));
@@ -70,10 +70,10 @@ class Options_list_lang_ {
 			rv[i] = new_itm((Xol_lang_stub)untranslated.Get_at(i - translated_max));
 		return rv;
 	}
-	private static KeyVal new_itm(Xol_lang_stub itm) {
+	private static Keyval new_itm(Xol_lang_stub itm) {
 		String key_str = String_.new_u8(itm.Key());
 		String name_str = String_.new_u8(itm.Canonical_name());
-		return KeyVal_.new_(key_str, name_str + " [" + key_str + "]");
+		return Keyval_.new_(key_str, name_str + " [" + key_str + "]");
 	}
 	private static void Add_itm_many(Ordered_hash translated, int... langs) {
 		int langs_len = langs.length;

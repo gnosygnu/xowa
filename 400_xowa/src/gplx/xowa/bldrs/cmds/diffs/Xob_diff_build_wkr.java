@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.*; import gplx.core.brys.fmts.*;
 import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.diffs.*; import gplx.dbs.diffs.builds.*; import gplx.dbs.diffs.itms.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 class Xob_diff_build_wkr {		
@@ -40,12 +40,10 @@ class Xob_diff_build_wkr {
 		String made_by = wiki.App().User().Key();
 		Gdif_job_itm job_itm = dif_core.New_job(name, made_by);
 		Gdif_bldr_ctx ctx = new Gdif_bldr_ctx().Init(dif_core, job_itm);
-
 		Gfdb_diff_wkr__db dif_wkr = new Gfdb_diff_wkr__db();
 		Gdif_db dif_db = dif_core.Db();
 		dif_wkr.Init_conn(dif_db, 1000);
 		dif_bldr.Init(dif_wkr);
-
 		// wiki.Data__core_mgr().Db__core().Conn().Conn_info();
 		Xowd_db_file[] db_files = wiki.Data__core_mgr().Db__core().Tbl__db().Select_all(wiki.Data__core_mgr().Props(), Io_url_.Empty);
 		int db_files_len = db_files.length;
@@ -64,8 +62,8 @@ class Xob_diff_build_wkr {
 //			}
 	}
 	private void Compare(Gdif_bldr_ctx ctx) {
-		Dbmeta_tbl_mgr old_tbl_mgr = old_conn.Meta_tbl_load_all();
-		Dbmeta_tbl_mgr new_tbl_mgr = old_conn.Meta_tbl_load_all();
+		Dbmeta_tbl_mgr old_tbl_mgr = old_conn.Meta_load_all();
+		Dbmeta_tbl_mgr new_tbl_mgr = old_conn.Meta_load_all();
 		int new_tbl_len = new_tbl_mgr.Len();
 		for (int i = 0; i < new_tbl_len; ++i) {
 			Dbmeta_tbl_itm new_tbl = new_tbl_mgr.Get_at(i);

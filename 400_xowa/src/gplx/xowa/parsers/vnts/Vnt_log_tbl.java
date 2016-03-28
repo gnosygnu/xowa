@@ -63,7 +63,7 @@ public class Vnt_log_tbl implements Rls_able {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int uid, int page_id, int rule_idx, int flag_count, int lang_count, int undi_count, int bidi_count
 		, boolean flag_add, boolean flag_del, boolean flag_aout, boolean flag_hide, boolean flag_raw, boolean flag_show, boolean flag_descrip, boolean flag_name, boolean flag_title, boolean flag_err
 		, int vnt_0, int vnt_1, int vnt_2, int vnt_3, int vnt_4, int vnt_5, int vnt_6, int vnt_7, int vnt_8, int vnt_9

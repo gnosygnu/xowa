@@ -43,7 +43,7 @@ public class Xow_xwiki_mgr_tst {
 		, "https://en.wiktionary.org/wiki/~{0}")
 		, fxt.xwiki_("s", "en.wikisource.org", "https://en.wikisource.org/wiki/~{0}"));
 	}
-	@Test   public void Add_bulk_peers_skip_self() 	{	// PURPOSE: skip "wikipedia" as alias since "Wikipedia" is namespace; needed for titles of "Wikipedia:Main page" (which would otherwise try to go to page "Main Page" in the main names of xwiki "Wikipedia"
+	@Test   public void Add_bulk_peers_skip_self() 	{	// PURPOSE: skip "wikipedia" as alias since "Wikipedia" is Srch_rslt_cbk; needed for titles of "Wikipedia:Main page" (which would otherwise try to go to page "Main Page" in the main names of xwiki "Wikipedia"
 		fxt.Init_peers();
 		fxt.Test_add_bulk_peers
 		( fxt.xwiki_null_("wikipedia")
@@ -66,8 +66,8 @@ class Xow_xwiki_mgr_fxt {
 	Xow_xwiki_mgr xwiki_mgr; Xoa_lang_mgr lang_mgr; String_bldr sb = String_bldr_.new_(); Xoae_app app; Xowe_wiki wiki;
 	public void Clear() {
 		if (xwiki_mgr == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			xwiki_mgr = wiki.Xwiki_mgr();
 			lang_mgr = app.Lang_mgr();
 		}

@@ -43,7 +43,7 @@ public class Xoa_cfg_mgr_tst {
 class Xoa_cfg_mgr_fxt {
 	public void Clear() {
 //			if (app == null) {
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 			cfg_mgr = app.Cfg_mgr();
 //			}
 	}	private Xoae_app app; Xoa_cfg_mgr cfg_mgr;

@@ -70,7 +70,7 @@ public class Xou_cache_tbl implements Rls_able {
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "size", fld_file_size)
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "date", fld_view_date)
 		);
-		conn.Ddl_create_tbl(meta);
+		conn.Meta_tbl_create(meta);
 	}
 	public Xou_cache_itm Select_one(byte[] lnki_wiki_abrv, byte[] lnki_ttl, int lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int user_thumb_w) {
 		if (select_stmt == null) select_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w));

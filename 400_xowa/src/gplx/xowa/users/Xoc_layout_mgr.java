@@ -52,7 +52,7 @@ class Enm_mgr {
 	private Int_obj_ref tmp_val_ref = Int_obj_ref.zero_(); 
 	public Enm_mgr Add(byte val, String str) {
 		Int_obj_ref val_ref = Int_obj_ref.new_(val);
-		KeyVal kv = KeyVal_.new_(str, val_ref);
+		Keyval kv = Keyval_.new_(str, val_ref);
 		str_hash.Add(str, kv);
 		val_hash.Add(val_ref, kv);
 		return this;
@@ -60,14 +60,14 @@ class Enm_mgr {
 	public String Get_str(byte val) {
 		Object o = val_hash.Get_by(tmp_val_ref.Val_(val));
 		if (o == null) return null;
-		return ((KeyVal)o).Val_to_str_or_null();
+		return ((Keyval)o).Val_to_str_or_null();
 	}
-	public KeyVal[] Get_kv_ary() {
+	public Keyval[] Get_kv_ary() {
 		int len = val_hash.Count();
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
-			KeyVal trg = (KeyVal)str_hash.Get_at(i);
-			rv[i] = KeyVal_.new_(trg.Val_to_str_or_null(), trg.Key());
+			Keyval trg = (Keyval)str_hash.Get_at(i);
+			rv[i] = Keyval_.new_(trg.Val_to_str_or_null(), trg.Key());
 		}
 		return rv;
 	}

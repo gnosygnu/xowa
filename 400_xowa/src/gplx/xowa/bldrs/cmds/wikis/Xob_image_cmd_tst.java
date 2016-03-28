@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import org.junit.*; import gplx.core.ios.*; import gplx.xowa.files.*;
-public class Xob_image_cmd_tst {		
+public class Xob_image_cmd_tst {
 	private Xob_image_cmd_fxt fxt = new Xob_image_cmd_fxt();
 	@Test  public void Basic()					{fxt.Init_("A.png"	, Xof_media_type.Name_bitmap	, Xof_ext_.Bry_png, 220, 110)		.Test(Xof_ext_.Id_png);}	// A.png -> png
 	@Test  public void Ogg_VIDEO()				{fxt.Init_("A.ogg"	, Xof_media_type.Name_video		, Xof_ext_.Bry_ogg, 220, 110)		.Test(Xof_ext_.Id_ogv);}	// A.ogg and VIDEO -> ogv

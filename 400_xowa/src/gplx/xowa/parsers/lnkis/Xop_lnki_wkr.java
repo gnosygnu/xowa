@@ -98,6 +98,10 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 				int bgn = arg.Val_tkn().Dat_bgn(), end = arg.Val_tkn().Dat_end();
 				if (arg.KeyTkn_exists()) {bgn = arg.Key_tkn().Dat_bgn(); end = arg.Key_tkn().Dat_end();}
 				arg_tid = ctx.Wiki().Lang().Lnki_arg_parser().Identify_tid(src, bgn, end, lnki);
+				if (arg_tid == Xop_lnki_arg_parser.Tid_caption && ctx.Wiki().Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__other) {
+					if (end > bgn && Bry_.Eq(src, bgn, end, Xop_lnki_arg_parser.Bry_target))
+						arg_tid = Xop_lnki_arg_parser.Tid_target;
+				}
 				switch (arg_tid) {
 					case Xop_lnki_arg_parser.Tid_none:			lnki.Align_h_(Xop_lnki_type.Id_none); break;
 					case Xop_lnki_arg_parser.Tid_border:		lnki.Border_(Bool_.Y_byte); break;
@@ -116,6 +120,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_text_bottom:	lnki.Align_v_(Xop_lnki_align_v_.TextBottom); break;
 					case Xop_lnki_arg_parser.Tid_baseline:		lnki.Align_v_(Xop_lnki_align_v_.Baseline); break;
 					case Xop_lnki_arg_parser.Tid_class:			lnki.Lnki_cls_(Xop_lnki_wkr_.Val_extract(src, arg)); break;
+					case Xop_lnki_arg_parser.Tid_target:		lnki.Target = Xop_lnki_wkr_.Val_extract(src, arg); break;
 					case Xop_lnki_arg_parser.Tid_alt:			lnki.Alt_tkn_(arg); 
 						lnki.Alt_tkn().Tkn_ini_pos(false, arg.Src_bgn(), arg.Src_end());
 						break;

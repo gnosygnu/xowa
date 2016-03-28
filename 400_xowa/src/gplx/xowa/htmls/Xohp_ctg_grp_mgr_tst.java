@@ -40,8 +40,8 @@ public class Xohp_ctg_grp_mgr_tst {
 }
 class Xoh_ctg_mgr_fxt {
 	public Xoh_ctg_mgr_fxt Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		ctg_grp_mgr = new Xohp_ctg_grp_mgr();
 		return this;
 	}	private Xohp_ctg_grp_mgr ctg_grp_mgr; Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr.new_();

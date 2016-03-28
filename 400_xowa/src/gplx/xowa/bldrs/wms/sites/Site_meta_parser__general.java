@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.core.primitives.*; import gplx.langs.jsons.*;
 class Site_meta_parser__general extends Json_parser__list_nde__base {
-	private final Site_meta_parser__general__kv parser__image = new Site_meta_parser__general__kv("imagelimits", "width", "height");
-	private final Site_meta_parser__general__lone parser__fallback = new Site_meta_parser__general__lone("fallback", "code");
-	private final Site_meta_parser__general__kv parser__variants = new Site_meta_parser__general__kv("variants", "code", "name");
+	private final    Site_meta_parser__general__kv parser__image = new Site_meta_parser__general__kv("imagelimits", "width", "height");
+	private final    Site_meta_parser__general__lone parser__fallback = new Site_meta_parser__general__lone("fallback", "code");
+	private final    Site_meta_parser__general__kv parser__variants = new Site_meta_parser__general__kv("variants", "code", "name");
 	private String cur_context;
 	public void Parse(String context, Ordered_hash list, Json_nde nde) {
 		this.cur_context = context + ".general";
@@ -38,7 +38,7 @@ class Site_meta_parser__general extends Json_parser__list_nde__base {
 		}
 	}
 	private static final int Tid__fallback = 1, Tid__variants = 2, Tid__thumblimits = 3, Tid__imagelimits = 4, Tid__imagelimits__width = 5, Tid__imagelimits__height = 6;
-	private static final Hash_adp_bry complex_props = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry complex_props = Hash_adp_bry.cs()
 	.Add_str_int("fallback"		,  Tid__fallback)
 	.Add_str_int("variants"		,  Tid__variants)
 	.Add_str_int("thumblimits"	,  Tid__thumblimits)
@@ -120,7 +120,7 @@ class Site_meta_parser__statistic extends Json_parser__list_nde__base {
 class Site_meta_parser__interwikimap extends Json_parser__list_nde__base {
 	private Ordered_hash list;
 	public Site_meta_parser__interwikimap() {
-		this.Ctor("prefix", "local", "language", "localinterwiki", "url", "protorel");
+		this.Ctor("prefix", "local", "extralanglink", "linktext", "sitename", "language", "localinterwiki", "url", "protorel");
 	}
 	public void Parse(String context, Ordered_hash list, Json_ary nde) {
 		this.list = list;
@@ -128,7 +128,10 @@ class Site_meta_parser__interwikimap extends Json_parser__list_nde__base {
 	}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
 		byte[] key = Kv__bry(atrs, 0);
-		list.Add(key, new Site_interwikimap_itm(key, Kv__mw_bool(atrs, 1), Kv__bry_or_empty(atrs, 2), Kv__mw_bool(atrs, 3), Kv__bry(atrs, 4), Kv__mw_bool(atrs, 5)));
+		list.Add(key
+		, new Site_interwikimap_itm(key
+		, Kv__mw_bool(atrs, 1), Kv__mw_bool(atrs, 2), Kv__bry_or_empty(atrs, 3), Kv__bry_or_empty(atrs, 4)
+		, Kv__bry_or_empty(atrs, 5), Kv__mw_bool(atrs, 6), Kv__bry(atrs, 7), Kv__mw_bool(atrs, 8)));
 	}
 }
 class Site_meta_parser__namespacealias extends Json_parser__list_nde__base {
@@ -246,7 +249,7 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 		}
 		list.Add(key, new Site_showhook_itm(key, scribunto, subscribers_bry_ary));
 	}
-	private final static byte[] Key__scribunto = Bry_.new_a7("scribunto");
+	private final    static byte[] Key__scribunto = Bry_.new_a7("scribunto");
 }
 class Site_meta_parser__language extends Json_parser__list_nde__base {
 	private Ordered_hash list;

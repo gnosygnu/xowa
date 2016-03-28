@@ -23,7 +23,7 @@ public class Xob_lnki_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_lnki_regy;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_lnki_regy_tbl.Create_table(conn);
 		Xob_lnki_regy_tbl.Create_data(usr_dlg, conn, Xob_lnki_temp_wkr.Ns_file_is_case_match_all(wiki));
 	}

@@ -55,6 +55,7 @@ public class Xoh_lnki_bldr {
 		this.caption = Gfh_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
 		return this;
 	}
+	public Xoh_lnki_bldr Caption_direct_(byte[] v) {this.caption = v; return this;}
 	public byte[] Bld_to_bry() {
 		Bld(tmp_bfr);
 		byte[] rv = tmp_bfr.To_bry_and_clear();

@@ -50,7 +50,7 @@ public class Xow_hdump_mgr__load {
 				hpg.Body_(page_override);
 				return true;
 			}
-			Xowd_db_file html_db = wiki.Data__core_mgr().Dbs__get_at(tmp_dbpg.Html_db_id());
+			Xowd_db_file html_db = wiki.Data__core_mgr().Dbs__get_by_id(tmp_dbpg.Html_db_id());
 			if (!html_db.Tbl__html().Select_by_page(hpg)) return Load__fail(hpg);			// nothing in "html" table
 			byte[] src = Parse(hpg, hpg.Body_zip_tid(), hpg.Body_hzip_tid(), hpg.Body());
 			hpg.Body_(src);

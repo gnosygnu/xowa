@@ -38,8 +38,8 @@ class Xoh_subpages_bldr_fxt {
 	private Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Init() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__help).Subpages_enabled_(true);
 	}
 	public void Test_bld(String ttl_str, String expd) {

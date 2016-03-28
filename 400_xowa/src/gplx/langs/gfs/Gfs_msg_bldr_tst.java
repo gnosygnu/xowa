@@ -44,12 +44,12 @@ public class Gfs_msg_bldr_tst {
 }
 class Gfs_msg_bldr_fxt {
 	public void Clear() {} String_bldr sb = String_bldr_.new_(); Gfs_msg_bldr msg_bldr = Gfs_msg_bldr.Instance;
-	public KeyVal kv_(String key, String val) {return KeyVal_.new_(key, val);}
-	public GfoMsg msg_(String key, KeyVal... args) {
+	public Keyval kv_(String key, String val) {return Keyval_.new_(key, val);}
+	public GfoMsg msg_(String key, Keyval... args) {
 		GfoMsg rv = GfoMsg_.new_parse_(key);
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = args[i];
+			Keyval kv = args[i];
 			rv.Add(kv.Key(), kv.Val());
 		}
 		return rv;

@@ -261,17 +261,17 @@ public class GfuiElemBase implements GfuiElem {
 	}
 		public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
 
-	@gplx.Virtual public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@gplx.Virtual public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		this.kit = Swing_kit.Instance;	// NOTE: assume that callers want Swing; SWT / Mem should be calling ctor_kit_GfuiElemBase
 		underElem = UnderElem_make(ctorArgs);
 		underElem.Host_set(this);
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.cast(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(Bool_.cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 		underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	@gplx.Virtual public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@gplx.Virtual public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		this.kit = kit;
 		this.keyIdf = key;
 		this.underElem = underElem;
@@ -279,10 +279,10 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.cast(ctorArgs.FetchValOr(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(Bool_.cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	@gplx.Virtual public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.control_();}
+	@gplx.Virtual public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
 	public Object SubItms_getObj(String key) {return injected.Get_by(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
 	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.New();

@@ -57,11 +57,9 @@ class Xob_orig_regy_tbl {
 		String lnki_ttl_fld = wiki_has_cs_file ? "Coalesce(o.lnki_commons_ttl, o.lnki_ttl)" : "o.lnki_ttl";	// NOTE: use lnki_commons_ttl if [[File]] is cs PAGE:en.d:water EX:[[image:wikiquote-logo.png|50px|none|alt=]]; DATE:2014-09-05
 		if (wiki_has_cs_file)
 			Sqlite_engine_.Idx_create(usr_dlg, conn, "orig_regy", Idx_ttl_remote);
-		Db_attach_cmd.new_(conn, "image_db", join)
-			.Add_fmt("orig_regy:updating page"		, Sql_update_repo_page, repo_tid, lnki_ttl_fld)
-			.Add_fmt("orig_regy:updating redirect"	, Sql_update_repo_redirect, repo_tid, lnki_ttl_fld)
-			.Exec()
-			;
+		new Db_attach_mgr(conn, new Db_attach_itm("image_db", join))
+			.Exec_sql_w_msg("orig_regy:updating page"		, Sql_update_repo_page, repo_tid, lnki_ttl_fld)
+			.Exec_sql_w_msg("orig_regy:updating redirect"	, Sql_update_repo_redirect, repo_tid, lnki_ttl_fld);
 	}
 	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_conn p, Xowe_wiki local_wiki, Io_url repo_remote_dir) {
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_mark_dupes);	// orig_regy: find dupes; see note in SQL
@@ -145,7 +143,7 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_minor_mime"
 	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
-	,	"        JOIN <attach_db>image i ON {1} = i.img_name"
+	,	"        JOIN <image_db>image i ON {1} = i.img_name"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 0 AND {1} = m.src_ttl"
 	,	"WHERE   o.orig_file_ttl IS NULL"					// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
 	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
@@ -176,7 +174,7 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 1 AND {1} = m.src_ttl"
-	,	"            JOIN <attach_db>image i ON m.trg_ttl = i.img_name"
+	,	"            JOIN <image_db>image i ON m.trg_ttl = i.img_name"
 	,	"WHERE   o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
 	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table

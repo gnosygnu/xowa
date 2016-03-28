@@ -44,11 +44,11 @@ public class Wdata_external_lang_links_data {
 		Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b128();
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = self.Args_get_by_idx(i);
-			nde.Val_tkn().Tmpl_evaluate(ctx, src, self, tmp_bfr);
+			nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);	// NOTE: changed from self to caller; DATE:2016-03-16
 			byte[] lang = tmp_bfr.To_bry_and_clear();
 			Langs_add(lang);
 		}
 		tmp_bfr.Mkr_rls();
 	}
-	public static final byte[] Key_sort = new byte[] {Byte_ascii.Star};
+	public static final    byte[] Key_sort = new byte[] {Byte_ascii.Star};
 }

@@ -65,7 +65,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl_props.OnlyInclude_exists = false; int subs_len = root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		boolean only_include_chk = Bry_find_.Find_fwd(src, Xop_xnde_tag_.Name_onlyinclude, 0, src.length) != Bry_find_.Not_found;
+		boolean only_include_chk = Bry_find_.Find_fwd(src, Xop_xnde_tag_.Bry__onlyinclude, 0, src.length) != Bry_find_.Not_found;
 		if (only_include_chk) tmpl_props.OnlyInclude_exists = true;
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
 	}	private Xot_compile_data tmpl_props = new Xot_compile_data();

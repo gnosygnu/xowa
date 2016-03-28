@@ -24,12 +24,12 @@ class Xodb_page_rdr__sql implements Xodb_page_rdr {
 	public Xodb_page_rdr__sql(Xowe_wiki wiki) {
 		this.db_mgr = wiki.Data__core_mgr();
 		this.page_tbl = db_mgr.Tbl__page();
-		this.rdr = page_tbl.Select_all();
+		this.rdr = page_tbl.Select_all__id__ttl();
 	}
 	public boolean Move_next() {return rdr.Move_next();}
 	public boolean Read(Xowd_page_itm page) {
 		page_tbl.Read_page__all(page, rdr);
-		Xowd_text_tbl text_tbl = db_mgr.Dbs__get_at(page.Text_db_id()).Tbl__text();
+		Xowd_text_tbl text_tbl = db_mgr.Dbs__get_by_id(page.Text_db_id()).Tbl__text();
 		page.Text_(text_tbl.Select(page.Id()));
 		return true;
 	}

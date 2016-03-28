@@ -62,7 +62,7 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 			Json_kv sub = nde.Get_at_as_kv(i);
 			byte[] key = sub.Key_as_bry();
 			byte[] val = Parse_to_list_as_kv__get_val(sub, key);
-			list.Add(key, KeyVal_.new_(String_.new_u8(key), String_.new_u8(val)));
+			list.Add(key, Keyval_.new_(String_.new_u8(key), String_.new_u8(val)));
 		}
 	}
 	@gplx.Virtual protected byte[] Parse_to_list_as_kv__get_val(Json_kv sub, byte[] key) {return sub.Val_as_bry();}

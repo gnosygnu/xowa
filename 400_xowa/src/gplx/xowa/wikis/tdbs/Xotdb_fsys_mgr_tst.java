@@ -27,8 +27,8 @@ public class Xotdb_fsys_mgr_tst {
 }
 class Xow_fsys_mgr_fxt {
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	Xoae_app app; Xowe_wiki wiki;
 	public Xow_fsys_mgr_fxt Zip_(byte tid, boolean v) {wiki.Tdb_fsys_mgr().Tdb_dir_regy()[tid].Ext_tid_(v ? gplx.core.ios.Io_stream_.Tid_zip : gplx.core.ios.Io_stream_.Tid_raw); return this;}

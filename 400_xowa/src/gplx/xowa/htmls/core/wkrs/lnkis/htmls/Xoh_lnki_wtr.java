@@ -88,7 +88,7 @@ public class Xoh_lnki_wtr {
 	private void Write_plain(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl, Xop_lnki_caption_wtr caption_wkr) {
 		byte[] ttl_bry = lnki.Ttl_ary();
 		if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
-		if (Bry_.Eq(lnki_ttl.Full_txt(), page.Ttl().Full_txt())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; PAGE:en.w:January 1
+		if (Bry_.Eq(lnki_ttl.Full_txt_by_orig(), page.Ttl().Full_txt_by_orig())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; PAGE:en.w:January 1
 			if (lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) {		// only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
 				bfr.Add(Gfh_tag_.B_lhs);
 				Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
@@ -109,11 +109,17 @@ public class Xoh_lnki_wtr {
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
 			if (cfg.Lnki__title()) {
-				byte[] title_bry = lnki_ttl.Full_txt();				// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
+				byte[] title_bry = lnki_ttl.Full_txt_w_ttl_case();	// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
 				int title_len = title_bry.length;
 				if (title_len > 0) {
 					bfr	.Add(Gfh_bldr_.Bry__title__nth);			// '" title=\"'
 					Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+				}
+			}
+			if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__other) {
+				if (lnki.Target != null) {
+					bfr.Add_str_a7("\" target=\"");
+					bfr.Add(lnki.Target);
 				}
 			}
 			if (!hctx.Mode_is_hdump()) {							// don't write visited for hdump
@@ -172,8 +178,8 @@ public class Xoh_lnki_wtr {
 	}
 	public static byte[] Lnki_cls_visited(gplx.xowa.users.history.Xou_history_mgr history_mgr, byte[] wiki_key, byte[] page_ttl) {
 		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;
-	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
-	private static final byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited"); 
+	}	private static final    byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
+	private static final    byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited"); 
 	public static final int Lnki_id_ignore = 0, Lnki_id_min = 1;
 }
 interface Xop_lnki_caption_wtr {

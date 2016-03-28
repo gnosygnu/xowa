@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.js; import gplx.*; import gplx.core.*;
 public class Js_wtr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(255);
+	private final Bry_bfr bfr = Bry_bfr.reset_(32);
 	private int arg_idx = 0, ary_idx = 0;
 	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Quote;
 	public void Clear()							{bfr.Clear();}

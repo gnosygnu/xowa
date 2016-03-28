@@ -21,19 +21,19 @@ public class Xop_xatr_whitelist_mgr_tst {
 	private final Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "style"			, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "xstyle"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "stylex"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "styl"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_img		, "alt"				, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_img		, "span"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "data-sort-type"	, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_data	, "value"			, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_data	, "valuex"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "style"			, true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "xstyle"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "stylex"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "styl"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__img		, "alt"				, true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__img		, "span"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "data-sort-type"	, true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__data	, "value"			, true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__data	, "valuex"			, false);
 	}
 	@Test  public void Role() {
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "role"			, "presentation", true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid_div		, "role"			, "other", false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "role"			, "presentation", true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "role"			, "other", false);
 	}
 	@Test  public void Scrub() {
 		fxt.Scrub_style_fail("expression");

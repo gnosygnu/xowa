@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
 public class Db_qry_fxt {
-	public static void Insert_kvo(Db_conn conn, String tblName, KeyValList kvList) {
+	public static void Insert_kvo(Db_conn conn, String tblName, Keyval_list kvList) {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);
 		for (int i = 0; i < kvList.Count(); i++) {
-			KeyVal kv = kvList.GetAt(i);
+			Keyval kv = kvList.Get_at(i);
 			qry.Val_obj(kv.Key(), kv.Val());
 		}
 		qry.Exec_qry(conn);
@@ -51,5 +51,17 @@ public class Db_qry_fxt {
 				Tfds.Eq(expdDat.Val(), actlVal);
 			}
 		}
+	}
+	public static String Db__print_tbl_as_str(Bry_bfr bfr, Db_conn conn, String tbl, String... cols) {
+		int cols_len = cols.length;
+		Db_rdr rdr = conn.Stmt_select(tbl, cols).Exec_select__rls_auto();
+		while (rdr.Move_next()) {
+			for (int i = 0; i < cols_len; ++i) {
+				bfr.Add_obj(rdr.Read_at(i));
+				bfr.Add_byte(i == cols_len - 1 ? Byte_ascii.Nl : Byte_ascii.Pipe);
+			}
+		}
+		rdr.Rls();
+		return bfr.To_str_and_clear();
 	}
 }

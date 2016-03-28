@@ -30,7 +30,7 @@ public class Fsm_mnt_tbl implements Rls_able {
 	}
 	public void Create_tbl() {
 		Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds);
-		conn.Ddl_create_tbl(meta);
+		conn.Meta_tbl_create(meta);
 		this.Insert(Fsm_mnt_mgr.Mnt_idx_main, Mnt_name_main, Mnt_name_main);
 		this.Insert(Fsm_mnt_mgr.Mnt_idx_user, Mnt_name_user, Mnt_name_user);
 	}

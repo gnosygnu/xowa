@@ -26,7 +26,7 @@ public class Gdif_txn_tbl implements Rls_able {
 		fld_job_id = flds.Add_int("job_id"); fld_txn_id = flds.Add_int("txn_id"); fld_cmd_id = flds.Add_int("cmd_id"); fld_owner_txn = flds.Add_int("owner_txn");
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_job_id, fld_txn_id)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_job_id, fld_txn_id)));}
 	public Gdif_txn_itm Insert(int job_id, int txn_id, int cmd_id, int owner_txn) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

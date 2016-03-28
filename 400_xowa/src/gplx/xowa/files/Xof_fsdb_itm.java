@@ -58,7 +58,6 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public boolean					Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
 	public int					Xfer_idx()					{return xfer_idx;} private int xfer_idx;
 	public int					Xfer_len()					{return xfer_len;} private int xfer_len;
-
 	public void	Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int lnki_upright_patch) {
 		this.lnki_exec_tid = exec_tid; this.lnki_wiki_abrv = wiki_abrv;
 		this.lnki_type = lnki_type; this.lnki_upright = lnki_upright; this.lnki_upright_patch = lnki_upright_patch;

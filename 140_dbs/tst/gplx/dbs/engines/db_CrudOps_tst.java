@@ -60,7 +60,7 @@ class CrudOpsFxt {
 		fx.tst_ExecDml(1, Db_qry_.insert_("dbs_crud_ops").Val_int("id", 1).Val_str("name", "John Doe"));
 		fx.tst_ExecDml(1, Db_qry_.insert_("dbs_crud_ops").Val_int("id", 2).Val_str("name", "John Doe"));
 
-		fx.tst_ExecDml(1, Db_qry_.update_common_("dbs_crud_ops", Db_crt_.New_eq("id", 2), KeyVal_.new_("name", "Jane Smith")));
+		fx.tst_ExecDml(1, Db_qry_.update_common_("dbs_crud_ops", Db_crt_.New_eq("id", 2), Keyval_.new_("name", "Jane Smith")));
 		fx.tst_ExecRdrTbl(2, "dbs_crud_ops");
 		fx.tst_RowAry(0, 1, "John Doe");
 		fx.tst_RowAry(1, 2, "Jane Smith");
@@ -70,7 +70,7 @@ class CrudOpsFxt {
 		fx.tst_ExecDml(1, Db_qry_.insert_("dbs_crud_ops").Val_int("id", 1).Val_str("name", "John Doe"));
 		fx.tst_ExecDml(1, Db_qry_.insert_("dbs_crud_ops").Val_int("id", 2).Val_str("name", "John Doe"));
 
-		fx.tst_ExecDml(2, Db_qry_.update_common_("dbs_crud_ops", Db_crt_.New_eq("name", "John Doe"), KeyVal_.new_("name", "Jane Smith")));
+		fx.tst_ExecDml(2, Db_qry_.update_common_("dbs_crud_ops", Db_crt_.New_eq("name", "John Doe"), Keyval_.new_("name", "Jane Smith")));
 		fx.tst_ExecRdrTbl(2, "dbs_crud_ops");
 		fx.tst_RowAry(0, 1, "Jane Smith");
 		fx.tst_RowAry(1, 2, "Jane Smith");

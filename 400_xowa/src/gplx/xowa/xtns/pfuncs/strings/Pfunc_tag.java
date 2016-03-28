@@ -31,7 +31,7 @@ public class Pfunc_tag extends Pf_func_base {
 		try {
 			int tag_idx = ++tag__next_id;
 			Xop_xnde_tag tag = (Xop_xnde_tag)ctx.Xnde_tag_regy().Get_trie(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);
-			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid_ref;
+			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid__ref;
 			if (tag_is_ref)	// <ref>; add <xtag_bgn> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
 				tmp.Add(Xtag_bgn_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_idx).Add(Xtag_rhs);				
 			tmp.Add_byte(Byte_ascii.Lt).Add(tag_name);

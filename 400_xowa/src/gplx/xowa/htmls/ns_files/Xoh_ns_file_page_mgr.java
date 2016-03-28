@@ -21,11 +21,11 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
-	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final    Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
+	private final    Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private Xow_repo_mgr repo_mgr;
 	private Xof_file_itm xfer_itm; private byte[] file_size_bry; private byte[] play_btn_icon;		
-	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public void Bld_html(Xowe_wiki cur_wiki, Xop_ctx ctx, Xoae_page page, Bry_bfr bfr, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, Xof_xfer_queue queue) {
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
@@ -59,7 +59,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		alt_wtr.Init_by_fmtr(repo_mgr, xfer_itm, html_wtr);
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
-		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt());
+		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt_w_ttl_case());
 		byte[] xowa_title = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Page_url());
 		if (orig_ext.Id_is_thumbable_img())
 			html_wtr.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_url().To_http_file_bry(), file_size_bry, orig_ext.Mime_type()
@@ -71,8 +71,8 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		else if (orig_ext.Id_is_audio())
 			html_wtr.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_url().To_http_file_bry(), xowa_title, xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 	}
-	private static final byte[] Atr_class_image = Bry_.new_a7("image");
-	private static final String Str_commons_notice = String_.Concat_lines_nl_skip_last
+	private static final    byte[] Atr_class_image = Bry_.new_a7("image");
+	private static final    String Str_commons_notice = String_.Concat_lines_nl_skip_last
 	( "<table class='ambox ambox-delete' style=''>"
 	, "  <tr>"
 	, "    <td class='mbox-empty-cell'>"

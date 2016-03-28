@@ -24,6 +24,7 @@ import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
 public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	private GfoInvkAble sync_cmd;
+	private Xog_url_box__selection_changed url_box__selection_changed;
 	public Xog_win_itm(Xoae_app app, Xoa_gui_mgr gui_mgr) {
 		this.app = app; this.gui_mgr = gui_mgr;
 		this.tab_mgr = new Xog_tab_mgr(this);
@@ -33,7 +34,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public GfuiWin			Win_box() {return win_box;} private GfuiWin win_box;
 	public GfuiBtn			Go_bwd_btn() {return go_bwd_btn;} private GfuiBtn go_bwd_btn;
 	public GfuiBtn			Go_fwd_btn() {return go_fwd_btn;} private GfuiBtn go_fwd_btn;
-	public GfuiTextBox		Url_box() {return url_box;} private GfuiTextBox url_box;
+	public GfuiComboBox		Url_box() {return url_box;} private GfuiComboBox url_box;
 	public GfuiBtn			Url_exec_btn() {return url_exec_btn;} private GfuiBtn url_exec_btn;
 	public GfuiTextBox		Search_box() {return search_box;} private GfuiTextBox search_box;
 	public GfuiBtn			Search_exec_btn() {return search_exec_btn;} private GfuiBtn search_exec_btn;
@@ -188,7 +189,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		if (new_page.Ttl().Ns().Id_is_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
 			new_page = new_page.Wikie().Data_mgr().Load_page_by_ttl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
-		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt(), new_page.Ttl().Full_txt());
+		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt_by_orig(), new_page.Ttl().Full_txt_by_orig());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);
 		Page__async__bgn(tab);
 	}
@@ -277,7 +278,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		FontAdp ui_font		= app.Gui_mgr().Win_cfg().Font().XtoFontAdp();
 		go_bwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_bwd_btn", "go_bwd.png"				);
 		go_fwd_btn			= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "go_fwd_btn", "go_fwd.png"				);
-		url_box				= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "url_box"								, true);
+		url_box				= Xog_win_itm_.new_cbo(app, kit, win_box, ui_font, "url_box"								, true);
 		url_exec_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "url_exec_btn", "url_exec.png"			);
 		search_box			= Xog_win_itm_.new_txt(app, kit, win_box, ui_font, "search_box"								, true);
 		search_exec_btn		= Xog_win_itm_.new_btn(app, kit, win_box, img_dir, "search_exec_btn", "search_exec.png"		);
@@ -292,10 +293,43 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 
 		GfoEvMgr_.SubSame_many(this, this, Gfui_html.Evt_location_changed, Gfui_html.Evt_location_changing, Gfui_html.Evt_link_hover);
 		GfoEvMgr_.SubSame(win_box, Gfui_html.Evt_win_resized, this);
-		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);			
+		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
+		url_box__selection_changed = new Xog_url_box__selection_changed(app, url_box);
+		GfoEvMgr_.SubSame(url_box, GfuiComboBox.Evt__selected_changed, url_box__selection_changed);
+		GfoEvMgr_.SubSame(url_box, GfuiComboBox.Evt__selected_accepted, url_box__selection_changed);
 
 		if (	!Env_.Mode_testing()
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
 			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(kit, prog_box, info_box, info_box, app.Api_root().Gui().Browser().Info()));
+	}
+	public static String Remove_redirect_if_exists(String text) {
+		// remove redirect target; EX: "A -> B" -> "A"
+		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
+		if (redirect_pos != Bry_find_.Not_found) {
+			text = String_.Mid(text, 0, redirect_pos);
+		}
+		return text;
+	}
+}
+class Xog_url_box__selection_changed implements GfoEvObj {
+	private final    GfuiComboBox url_box;
+	private final    Xoae_app app;
+	public Xog_url_box__selection_changed(Xoae_app app, GfuiComboBox url_box) {this.app = app; this.url_box = url_box; this.ev_mgr = GfoEvMgr.new_(this);}
+	public GfoEvMgr EvMgr() {return ev_mgr;} private final    GfoEvMgr ev_mgr;
+	private void On_selection_changed() {
+		String text = url_box.Text();
+		text = Xog_win_itm.Remove_redirect_if_exists(text);
+		// always move cursor to end; emulates firefox url_bar behavior
+		url_box.Text_(text);
+		url_box.Sel_(String_.Len(text), String_.Len(text));
+	}
+	private void On_selection_accepted() {
+		app.Api_root().Nav().Goto(url_box.Text());
+	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, GfuiComboBox.Evt__selected_changed))			On_selection_changed();
+		else if	(ctx.Match(k, GfuiComboBox.Evt__selected_accepted))			On_selection_accepted();
+		else																return GfoInvkAble_.Rv_unhandled;
+		return this;
 	}
 }

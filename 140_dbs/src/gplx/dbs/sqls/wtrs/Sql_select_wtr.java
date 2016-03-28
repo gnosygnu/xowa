@@ -29,7 +29,7 @@ public class Sql_select_wtr {
 		for (int i = 0; i < flds_len; i++) {
 			Sql_select_fld fld = (Sql_select_fld)flds.Get_at(i);
 			if (i > 0) bfr.Add_str_a7(", ");
-			qry_wtr.Bld_col_name(bfr, fld.To_sql());
+			qry_wtr.Bld_col_name(bfr, fld.To_fld_sql());
 		}
 		qry_wtr.From_wtr().Bld_clause_from(bfr, qry.From());
 		Bld_indexed_by(bfr, ctx, qry, qry.Indexed_by());
@@ -40,7 +40,7 @@ public class Sql_select_wtr {
 		if (qry.Offset() != Db_qry__select_cmd.Offset__disabled)
 			Bld_offset(bfr, ctx, qry, qry.Offset());
 	}
-	private void Bld_select_group_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, Sql_group_itm groupBy) {
+	private void Bld_select_group_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, Sql_group_clause groupBy) {
 		if (groupBy == null) return;
 		bfr.Add_str_a7(" GROUP BY ");
 		for (int i = 0; i < groupBy.Flds().Count(); i++) {
@@ -49,12 +49,12 @@ public class Sql_select_wtr {
 			bfr.Add_str_a7(item);
 		}
 	}
-	private void Bld_select_order_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, Sql_order_itm orderBy) {
+	private void Bld_select_order_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, Sql_order_clause orderBy) {
 		if (orderBy == null) return;
 		bfr.Add_str_a7(" ORDER BY ");
-		int len = orderBy.Flds.length;
+		int len = orderBy.Flds().length;
 		for (int i = 0; i < len; ++i) {
-			Sql_order_fld item = orderBy.Flds[i];
+			Sql_order_fld item = orderBy.Flds()[i];
 			if (i > 0) bfr.Add_str_a7(", ");
 			bfr.Add_str_a7(item.To_sql());
 		}

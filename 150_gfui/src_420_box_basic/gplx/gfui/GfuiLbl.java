@@ -27,13 +27,13 @@ public class GfuiLbl extends GfuiElemBase { // standard label does not support t
 		this.TextMgr().DrawData(args.Graphics());
 		return true;
 	}		
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 }

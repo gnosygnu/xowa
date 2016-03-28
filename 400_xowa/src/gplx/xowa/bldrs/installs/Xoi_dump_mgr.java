@@ -31,7 +31,7 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 	public boolean Css_wiki_update() {return css_wiki_update;} private boolean css_wiki_update = true;
 	public boolean Css_commons_download() {return css_commons_download;} private boolean css_commons_download = true; // changed from false to true; DATE:2014-10-19
 	public boolean Delete_xml_file() {return delete_xml_file;} private boolean delete_xml_file = true;
-	public byte Search_version() {return search_version;} private byte search_version = gplx.xowa.specials.search.Xows_page__search.Version_2;
+	public byte Search_version() {return search_version;} private byte search_version = gplx.xowa.addons.searchs.specials.Srch_special_page.Version_2;
 	public boolean Import_bz2_by_stdout() {return import_bz2_by_stdout;} private boolean import_bz2_by_stdout = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_server_urls))						return String_.Concat_with_str(",\n", server_urls);
@@ -77,9 +77,9 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 	, Invk_search_version = "search_version", Invk_search_version_ = "search_version_", Invk_search_version_list = "search_version_list"
 	, Invk_import_bz2_by_stdout = "import_bz2_by_stdout", Invk_import_bz2_by_stdout_ = "import_bz2_by_stdout_"
 	;
-	private static KeyVal[] Options_data_storage_format_list = KeyVal_.Ary(KeyVal_.new_(".xdat", "text"), KeyVal_.new_(".gz", "gzip"), KeyVal_.new_(".bz2", "bzip2"));	// removed .zip; DATE:2014-05-13; updated aliases; DATE:2014-06-20
+	private static Keyval[] Options_data_storage_format_list = Keyval_.Ary(Keyval_.new_(".xdat", "text"), Keyval_.new_(".gz", "gzip"), Keyval_.new_(".bz2", "bzip2"));	// removed .zip; DATE:2014-05-13; updated aliases; DATE:2014-06-20
 	static final byte Wiki_storage_type_xdat = 1, Wiki_storage_type_sqlite = 2;
-	private static final KeyVal[] Options_storage_type_list = KeyVal_.Ary(KeyVal_.new_("sqlite"), KeyVal_.new_("xdat"));	// DEPRECATED: KeyVal_.new_("xdat"); DATE:2015-03-30
+	private static final Keyval[] Options_storage_type_list = Keyval_.Ary(Keyval_.new_("sqlite"), Keyval_.new_("xdat"));	// DEPRECATED: Keyval_.new_("xdat"); DATE:2015-03-30
 	public static String Wiki_storage_type_str(byte v) {
 		switch (v) {
 			case Xoi_dump_mgr.Wiki_storage_type_xdat	: return "xdat";
@@ -92,7 +92,7 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 		else if	(String_.Eq(v, "sqlite"))			return Xoi_dump_mgr.Wiki_storage_type_sqlite;
 		else										throw Err_.new_unhandled(v);
 	}
-	private static final KeyVal[] Options_search_version_list = KeyVal_.Ary(KeyVal_.new_("1"), KeyVal_.new_("2")); 
+	private static final Keyval[] Options_search_version_list = Keyval_.Ary(Keyval_.new_("1"), Keyval_.new_("2")); 
 	public static String Options_search_version_str(byte v)		{return Byte_.To_str(v);}
 	public static byte Options_search_version_parse(String v)	{return Byte_.parse(v);}
 }

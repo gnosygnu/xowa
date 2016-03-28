@@ -24,7 +24,7 @@ public class Xop_xnde_tag {
 		this.name_str = name_str;
 		this.name_len = name_bry.length;
 		this.xtn_bgn_tag = Bry_.Add(Byte_ascii.Angle_bgn_bry, name_bry);
-		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Xtn_end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
+		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Bry__end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
 		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
 	public int Id() {return id;} private final int id;
@@ -36,11 +36,11 @@ public class Xop_xnde_tag {
 	public byte[] Xtn_end_tag_tmp() {return xtn_end_tag_tmp;} private final byte[] xtn_end_tag_tmp;
 	public boolean Xtn() {return xtn;} public Xop_xnde_tag Xtn_() {xtn = true; return this;} private boolean xtn;
 	public boolean Xtn_mw() {return xtn_mw;} public Xop_xnde_tag Xtn_mw_() {xtn_mw = true; xtn = true; return this;} private boolean xtn_mw;	// NOTE: Xtn_mw_() marks both xtn and xtn_mw as true
-	public int Bgn_nde_mode() {return bgn_nde_mode;} private int bgn_nde_mode = Xop_xnde_tag_.Bgn_nde_mode_normal;
-	public Xop_xnde_tag Bgn_nde_mode_inline_() {bgn_nde_mode = Xop_xnde_tag_.Bgn_nde_mode_inline; return this;}
-	public int End_nde_mode() {return end_nde_mode;} private int end_nde_mode = Xop_xnde_tag_.End_nde_mode_normal;
-	public Xop_xnde_tag End_nde_mode_inline_() {end_nde_mode = Xop_xnde_tag_.End_nde_mode_inline; return this;}
-	public Xop_xnde_tag End_nde_mode_escape_() {end_nde_mode = Xop_xnde_tag_.End_nde_mode_escape; return this;}
+	public int Bgn_mode() {return bgn_nde_mode;} private int bgn_nde_mode = Xop_xnde_tag_.Bgn_mode__normal;
+	public Xop_xnde_tag Bgn_mode__inline_() {bgn_nde_mode = Xop_xnde_tag_.Bgn_mode__inline; return this;}
+	public int End_mode() {return end_nde_mode;} private int end_nde_mode = Xop_xnde_tag_.End_mode__normal;
+	public Xop_xnde_tag End_mode__inline_() {end_nde_mode = Xop_xnde_tag_.End_mode__inline; return this;}
+	public Xop_xnde_tag End_mode__escape_() {end_nde_mode = Xop_xnde_tag_.End_mode__escape; return this;}
 	public boolean Single_only() {return single_only;} public Xop_xnde_tag Single_only_() {single_only = true; return this;} private boolean single_only;
 	public boolean Tbl_sub() {return tbl_sub;} public Xop_xnde_tag Tbl_sub_() {tbl_sub = true; return this;} private boolean tbl_sub;
 	public boolean Restricted() {return restricted;} public Xop_xnde_tag Restricted_() {restricted = true; return this;} private boolean restricted;

@@ -41,7 +41,7 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// MAINT:QUARTERLY:2015-08-23; must run C:\xowa\ and update dump status
+//		@Test  public void Update() {	// MAINT:QUARTERLY:2016-03-17; must run C:\xowa\ and update dump status
 //			Hash_adp_bry excluded_domains = Hash_adp_bry.cs().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
@@ -80,7 +80,7 @@ public class Wmf_dump_list_parser_tst {
 //					.Add_byte(Byte_ascii.Apos)
 //					.Add_byte(Byte_ascii.Paren_end)
 //					.Add_byte(Byte_ascii.Comma)
-//					.Add_str("--" + String_.new_u8(abrv))
+//					.Add_str_u8("--" + String_.new_u8(abrv))
 //					.Add_byte_nl()
 //					;
 //				bld_bfr
@@ -92,7 +92,7 @@ public class Wmf_dump_list_parser_tst {
 //					.Add_byte_nl()
 //					;
 //			}
-//			Io_url temp = Io_url_.new_fil_("C:\\import_update.txt");
+//			Io_url temp = Io_url_.new_fil_("C:\\xowa\\user\\import_update.txt");
 //			Io_mgr.Instance.SaveFilBfr(temp, sql_bfr);
 ////			Io_mgr.Instance.AppendFilBfr(temp, bld_bfr);
 //		}

@@ -41,7 +41,9 @@ public class Wmf_dump_list_parser {
 		byte[] href_bry = Bry_.Mid(src, href_bgn_pos + 1, href_end_pos);
 		int date_end = href_bry.length;
 		int date_bgn = Bry_find_.Find_bwd(href_bry, Byte_ascii.Slash); if (date_bgn == Bry_find_.Not_found) return false;
-		byte[] date_bry = Bry_.Mid(href_bry, date_bgn + 1, date_end);
+		byte[] date_bry = Bry_.Mid(href_bry, date_bgn + 1, date_end); if (date_bry.length == 0) return false;	// anchors like "/other_static_dumps" should be skipped
+		if (Bry_.Has(date_bry, Bry_.new_u8("legal.html"))) return false;
+		if (Bry_.Has(date_bry, Bry_.new_u8("Privacy_policy"))) return false;
 		DateAdp date = DateAdp_.parse_fmt(String_.new_a7(date_bry), "yyyyMMdd");
 		itm.Dump_date_(date);
 		int abrv_end = date_bgn;

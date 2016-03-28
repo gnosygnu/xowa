@@ -26,7 +26,7 @@ public interface DataRdr extends SrlMgr, Rls_able {
 	int FieldCount();
 	String KeyAt(int i);
 	Object ReadAt(int i);
-	KeyVal KeyValAt(int i);
+	Keyval KeyValAt(int i);
 
 	Object Read(String key);
 	String ReadStr(String key);				String ReadStrOr(String key, String or);

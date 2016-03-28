@@ -85,9 +85,9 @@ public class Xotdb_fsys_mgr {
 		return url;
 	}
 	public static Io_url Find_file_or_null(Io_url dir, String file_name, String file_ext_0, String file_ext_1) {
-		Io_url url = Xobd_rdr.Find_fil_by(dir, file_name + file_ext_0);
+		Io_url url = Xob_page_wkr_cmd.Find_fil_by(dir, file_name + file_ext_0);
 		if (url == null) {
-			url = Xobd_rdr.Find_fil_by(dir, file_name + file_ext_1);
+			url = Xob_page_wkr_cmd.Find_fil_by(dir, file_name + file_ext_1);
 			if (url == null) return null;
 		}
 		return url;

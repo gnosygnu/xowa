@@ -16,6 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs;
+import gplx.String_;
+
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -122,36 +124,53 @@ IDE: Eclipse 20090920-1017 (not that it should matter)
 import java.sql.*;
 
 public class Bug_Utf8 {
-  public static void main(String[] args) throws Exception {
-    Class.forName("org.sqlite.JDBC");
-    Connection conn =
-      DriverManager.getConnection("jdbc:sqlite:test.db");
-    Statement stat = conn.createStatement();
-    stat.executeUpdate("drop table if exists people;");
-    stat.executeUpdate("create table people (name, occupation);");
-    PreparedStatement prep = conn.prepareStatement(
-      "insert into people values (?, ?);");
+	public static void main(String[] args) throws Exception {
+		Like();
+	}
+	public static void Utf8() throws Exception {
+		Class.forName("org.sqlite.JDBC");
+		Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+		Statement stat = conn.createStatement();
+		stat.executeUpdate("drop table if exists people;");
+		stat.executeUpdate("create table people (name, occupation);");
+		PreparedStatement prep = conn.prepareStatement("insert into people values (?, ?);");
+		
+		prep.setString(1, "Gandhi");
+		prep.setString(2, "politics");
+		prep.addBatch();
+		prep.setString(1, "Turing");
+		prep.setString(2, "computers");
+		prep.addBatch();
+		prep.setString(1, "Wittgenstein");
+		prep.setString(2, "smartypants");
+		prep.addBatch();
+		
+		conn.setAutoCommit(false);
+		prep.executeBatch();
+		conn.setAutoCommit(true);
+		
+		ResultSet rs = stat.executeQuery("select * from people;");
+		while (rs.next()) {
+			System.out.println("name = " + rs.getString("name"));
+			System.out.println("job = " + rs.getString("occupation"));
+		}
+		rs.close();
+		conn.close();
+	}
+	private static void Like() throws Exception {
+		Class.forName("org.sqlite.JDBC");
+		Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/xowa/wiki/en.wikipedia.org/en.wikipedia.org-xtn.search.link-title-ns.000-db.001.xowa");
+		conn.createStatement().execute("ATTACH DATABASE 'C:\\xowa\\wiki\\en.wikipedia.org\\en.wikipedia.org-core.xowa' AS page_db");
+		conn.createStatement().execute("ATTACH DATABASE 'C:\\xowa\\wiki\\en.wikipedia.org\\en.wikipedia.org-xtn.search.core.xowa' AS word_db");
 
-    prep.setString(1, "Gandhi");
-    prep.setString(2, "politics");
-    prep.addBatch();
-    prep.setString(1, "Turing");
-    prep.setString(2, "computers");
-    prep.addBatch();
-    prep.setString(1, "Wittgenstein");
-    prep.setString(2, "smartypants");
-    prep.addBatch();
-
-    conn.setAutoCommit(false);
-    prep.executeBatch();
-    conn.setAutoCommit(true);
-
-    ResultSet rs = stat.executeQuery("select * from people;");
-    while (rs.next()) {
-      System.out.println("name = " + rs.getString("name"));
-      System.out.println("job = " + rs.getString("occupation"));
-    }
-    rs.close();
-    conn.close();
-  }
+		String sql = "SELECT * FROM word_db.search_word INDEXED BY temp WHERE word_text LIKE 'bug%' AND link_score_max > 0 AND link_score_min < 1000000 LIMIT 1";
+		PreparedStatement stat = conn.prepareStatement(sql);
+		
+		ResultSet rs = stat.executeQuery();
+		while (rs.next()) {
+			System.out.println(rs.getObject(1).toString());
+		}
+		rs.close();
+		conn.close();
+	}
 }

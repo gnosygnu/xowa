@@ -44,7 +44,7 @@ public class TabBox extends GfuiElemBase {
 		else return super.Invk(GfsCtx.Instance, 0, k, m);
 		return this;
 	}
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		btnBox = TabBtnAreaMgr.new_("btnBox", this);
 		pnlBox = TabPnlAreaMgr.new_("pnlBox", this);

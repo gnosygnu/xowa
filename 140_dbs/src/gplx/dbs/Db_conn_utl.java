@@ -22,11 +22,8 @@ public class Db_conn_utl {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		return Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/" + url_rel)).Conn();
 	}
-	public static void Tbl__delete(Db_conn conn, String tbl) {
-		conn.Ddl_delete_tbl(tbl);
-	}
 	public static void Tbl__new(Db_conn conn, String tbl, Dbmeta_fld_itm[] flds, Object[]... rows) {
-		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl, flds));
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl, flds));
 		int rows_len = rows.length;
 		Db_stmt stmt = conn.Stmt_insert(tbl, Dbmeta_fld_itm.To_str_ary(flds));
 		for (int i = 0; i < rows_len; ++i) {
@@ -50,5 +47,31 @@ public class Db_conn_utl {
 			}
 			stmt.Exec_insert();
 		}
+	}
+	public static void Insert(Db_conn conn, String tbl_name, String[] flds, Object[]... rows) {
+		Db_stmt stmt = Db_stmt_.new_insert_(conn, tbl_name, flds);
+		int flds_len = flds.length;
+		int rows_len = rows.length;
+		for (int i = 0; i < rows_len; ++i) {
+			Object[] row = rows[i];
+			stmt.Clear();
+			for (int j = 0; j < flds_len; ++j)
+				Db_stmt_.Val_by_obj(stmt, flds[j], row[j]);
+			stmt.Exec_insert();
+		}
+	}
+	public static Object[][] Select(Db_conn conn, Db_qry qry) {
+		List_adp rv = List_adp_.new_();
+		Db_rdr rdr = conn.Stmt_new(qry).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				int fld_len = rdr.Fld_len();
+				Object[] row = new Object[fld_len];
+				for (int i = 0; i < fld_len; ++i)
+					row[i] = rdr.Read_at(i);
+				rv.Add(row);
+			}
+		}	finally {rdr.Rls();}
+		return (Object[][])rv.To_ary_and_clear(Object[].class);
 	}
 }

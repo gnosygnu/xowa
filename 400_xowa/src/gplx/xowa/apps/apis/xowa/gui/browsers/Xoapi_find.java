@@ -40,7 +40,8 @@ public class Xoapi_find implements GfoInvkAble {
 }
 class Xog_find_box {
 	private Xoae_app app; private Xog_win_itm win; private GfuiTextBox find_box;
-	private String prv_find_text; private boolean dir_fwd = true, case_match = false, wrap_search = true;
+	private String prv_find_text = "";	// NOTE: must set to "", else will fail during Hide
+	private boolean dir_fwd = true, case_match = false, wrap_search = true;
 	public Xog_find_box(Xoae_app app) {
 		this.app = app;
 		this.win = app.Gui_mgr().Browser_win();
@@ -66,7 +67,7 @@ class Xog_find_box {
 			win.Usr_dlg().Prog_direct("Find direction changed to " + (fwd ? "forward" : "backward"));
 	}
 	public void Exec() {
-		prv_find_text = find_box.Text();
+		prv_find_text = find_box.Text(); 
 		Exec_find(prv_find_text, Bool_.Y);
 	}
 	private void Exec_find(String find, boolean highlight_matches) {

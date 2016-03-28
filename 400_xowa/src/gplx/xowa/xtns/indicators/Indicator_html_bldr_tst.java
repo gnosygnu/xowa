@@ -45,8 +45,8 @@ class Indicator_html_bldr_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page;
 	private Indicator_xtn_mgr xtn_mgr;
 	public void Clear() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		this.xtn_mgr = wiki.Xtn_mgr().Xtn_indicator();
 		xtn_mgr.Enabled_y_();
 		xtn_mgr.Xtn_init_by_wiki(wiki);

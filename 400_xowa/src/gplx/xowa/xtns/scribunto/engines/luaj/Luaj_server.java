@@ -21,14 +21,13 @@ import org.luaj.vm2.*; import org.luaj.vm2.lib.*; import org.luaj.vm2.lib.jse.*;
 import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Luaj_server implements Scrib_server {
 	private LuaTable server;
-	public Luaj_server(Scrib_core core, boolean debug_enabled) {
-	}
+	public Luaj_server(Scrib_core core, boolean debug_enabled) {}
 	public static Globals Globals_singleton;
 	public void Init(String... init_args) {
 		Globals_singleton = JsePlatform.standardGlobals();
 		Globals_singleton.load(new DebugLib());
 		Globals_singleton.load(new MWClient());
-		Globals_singleton.set("dbg", Luaj_server_func_dbg._);
+		Globals_singleton.set("dbg", Luaj_server_func_dbg.Instance);
 		String root_str = init_args[2];
 		if (Op_sys.Cur().Tid_is_wnt())
 			root_str = String_.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());
@@ -75,7 +74,7 @@ public class Luaj_server implements Scrib_server {
 		 */
 		public LuaValue call(LuaValue libname) {
 			LuaValue library = tableOf();
-			library.set("client_recv", Luaj_server_func_recv._);
+			library.set("client_recv", Luaj_server_func_recv.Instance);
 			LuaValue env = gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server.Globals_singleton; 
 			env.set( "MWClient", library );
 			return library;

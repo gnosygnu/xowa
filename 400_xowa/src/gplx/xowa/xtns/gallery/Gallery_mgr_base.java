@@ -84,7 +84,6 @@ public abstract class Gallery_mgr_base {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
 		Xoa_ttl ttl = itm.Ttl(); if (Bry_.Len_eq_0(ttl.Page_db())) return;	// if file ttl is invalid, do not write; EX:File:#A.png; DATE:2016-01-12
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
-
 		Xop_lnki_tkn lnki = itm.Lnki_tkn();
 		int lnki_w_orig = lnki.W(), lnki_h_orig = lnki.H(); // store orig lnki_w / lnki_w
 		this.Get_thumb_size(lnki, itm.Ext());	// packed=expand by 1.5;
@@ -138,7 +137,6 @@ public abstract class Gallery_mgr_base {
 			tmp_bfr.Add(itm_divs_end_bry);
 			itm_html = tmp_bfr.To_bry_and_clear();
 		}
-
 		byte[] show_filenames_link = Bry_.Empty;
 		if (xnde.Show_filename()) {
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_plain_by_bry
@@ -192,7 +190,7 @@ public abstract class Gallery_mgr_base {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {
 				Mwh_atr_itm xatr = (Mwh_atr_itm)xatr_list.Get_at(i);
-				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid_ul, src, xatr)) continue;
+				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid__ul, src, xatr)) continue;
 				byte[] key = xatr.Key_bry();
 				byte[] val = xatr.Val_as_bry();
 				Gfh_wtr.Write_atr_bry(bfr, key, val);

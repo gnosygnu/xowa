@@ -28,7 +28,7 @@ public class Scrib_lib_text_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstrip, Object_.Ary("a"), "a");
 	}
 	@Test  public void GetEntityTable() {
-		KeyVal[] actl = fxt.Test_scrib_proc_rv_as_kv_ary(lib, Scrib_lib_text.Invk_getEntityTable, Object_.Ary());
+		Keyval[] actl = fxt.Test_scrib_proc_rv_as_kv_ary(lib, Scrib_lib_text.Invk_getEntityTable, Object_.Ary());
 		Tfds.Eq(1510, actl.length);	// large result; only test # of entries
 	}
 }

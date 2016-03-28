@@ -23,7 +23,8 @@ public class Xog_resizer {
 		Xog_layout layout = app.Gui_mgr().Layout();
 		Xog_win_itm main_win = app.Gui_mgr().Browser_win();
 		GfuiBtn go_bwd_btn = main_win.Go_bwd_btn(), go_fwd_btn = main_win.Go_fwd_btn(), url_exec_btn = main_win.Url_exec_btn(), search_exec_btn = main_win.Search_exec_btn(), find_fwd_btn = main_win.Find_fwd_btn(), find_bwd_btn = main_win.Find_bwd_btn(), find_close_btn = main_win.Find_close_btn();
-		GfuiTextBox url_box = main_win.Url_box(), search_box = main_win.Search_box(), find_box = main_win.Find_box(), prog_box = main_win.Prog_box(), note_box = main_win.Info_box();
+		GfuiComboBox url_box = main_win.Url_box();
+		GfuiTextBox search_box = main_win.Search_box(), find_box = main_win.Find_box(), prog_box = main_win.Prog_box(), note_box = main_win.Info_box();
 		Gfui_tab_mgr tab_mgr = main_win.Tab_mgr().Tab_mgr();
 		int txt_dim = layout.Box_height_calc(app.Gui_mgr().Kit(), url_box);
 		int btn_dim = 25; // txt_dim  + 1;
@@ -78,6 +79,12 @@ public class Xog_resizer {
 		if (Type_adp_.Eq_typeSafe(cur_elem, GfuiTextBox.class)) {
 			try {
 				GfuiTextBox cur_box = (GfuiTextBox)cur_elem;
+				cur_box.Margins_set(0, txt_margin_v, 0, txt_margin_v);
+			}	catch (Exception e) {Err_.Noop(e);}
+		}
+		else if (Type_adp_.Eq_typeSafe(cur_elem, GfuiComboBox.class)) {
+			try {
+				GfuiComboBox cur_box = (GfuiComboBox)cur_elem;
 				cur_box.Margins_set(0, txt_margin_v, 0, txt_margin_v);
 			}	catch (Exception e) {Err_.Noop(e);}
 		}

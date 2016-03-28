@@ -69,8 +69,8 @@ class Gallery_itm_parser_fxt {
 	private Xoae_app app; private Xowe_wiki wiki;
 	private Gallery_itm_parser parser;
 	public Gallery_itm_parser_fxt Init() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		parser = new Gallery_itm_parser();
 		parser.Init_by_wiki(wiki);
 		return this;
@@ -97,7 +97,7 @@ class Gallery_itm_parser_fxt {
 			Gallery_itm itm = (Gallery_itm)list.Get_at(i);
 			String[] ary = new String[5];
 			rv[i] = ary;
-			ary[0] = String_.new_u8(itm.Ttl().Full_txt());
+			ary[0] = String_.new_u8(itm.Ttl().Full_txt_w_ttl_case());
 			ary[2] = Xto_str_ary_itm(src, itm.Alt_bgn(), itm.Alt_end());
 			ary[3] = Xto_str_ary_itm(src, itm.Link_bgn(), itm.Link_end());
 			ary[4] = Xto_str_ary_itm(src, itm.Page_bgn(), itm.Page_end());

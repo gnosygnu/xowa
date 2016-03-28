@@ -29,7 +29,7 @@ class Site_kv_tbl implements Db_tbl {
 		this.fld_val					= flds.Add_str("val", 255);
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv, fld_key)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv, fld_key)));}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
 	public void Rls() {
 		stmt_select = Db_stmt_.Rls(stmt_select);
@@ -44,7 +44,7 @@ class Site_kv_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				String key = rdr.Read_str(fld_key);
 				String val = rdr.Read_str(fld_val);
-				list.Add(key, KeyVal_.new_(key, val));
+				list.Add(key, Keyval_.new_(key, val));
 			}
 		}
 		finally {rdr.Rls();}
@@ -55,7 +55,7 @@ class Site_kv_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			KeyVal itm = (KeyVal)list.Get_at(i);
+			Keyval itm = (Keyval)list.Get_at(i);
 			Insert(site_abrv, itm.Key(), itm.Val_to_str_or_empty());
 		}
 	}

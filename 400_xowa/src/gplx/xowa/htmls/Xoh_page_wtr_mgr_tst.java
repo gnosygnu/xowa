@@ -21,8 +21,8 @@ import gplx.xowa.guis.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal
 public class Xoh_page_wtr_mgr_tst {
 	@Before public void init() {}
 	@Test  public void Logo_has_correct_main_page() {	// PURPOSE: Logo href should be "/site/en.wikipedia.org/wiki/", not "/wiki/Main_Page"
-		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr();
 		GfoInvkAble_.InvkCmd_val(portal_mgr, Xow_portal_mgr.Invk_div_logo_, Bry_.new_a7("~{portal_nav_main_href}"));
 		portal_mgr.Init_assert();

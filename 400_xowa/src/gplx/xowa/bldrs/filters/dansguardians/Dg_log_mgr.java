@@ -55,7 +55,7 @@ class Dg_file_tbl {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "file_id", fld_file_id)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		stmt_insert = null;
 	}
@@ -83,7 +83,7 @@ class Dg_rule_tbl implements Rls_able {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_rule_id)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		conn.Rls_reg(this);
 	}
@@ -119,7 +119,7 @@ class Dg_page_score_tbl implements Rls_able {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		stmt_insert = null;
 		conn.Rls_reg(this);
@@ -155,7 +155,7 @@ class Dg_page_rule_tbl implements Rls_able {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id, fld_rule_id)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		stmt_insert = null;
 		conn.Rls_reg(this);

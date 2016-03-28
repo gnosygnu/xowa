@@ -39,8 +39,8 @@ public class Imap_parser_tst {
 class Imap_fxt_base {
 	protected Xoae_app app; protected Xowe_wiki wiki;
 	@gplx.Virtual public void Reset() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Parser_mgr().Ctx().Para().Enabled_n_();
 	}
 	public Imap_itm_shape itm_rect_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_rect, link, pts_ary);}

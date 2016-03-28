@@ -40,7 +40,6 @@ class Gfs_parser_ctx {
 		cur_idf_end = end;
 	}	int cur_idf_bgn = -1, cur_idf_end = -1;
 	private void Held_word_clear() {cur_idf_bgn = -1; cur_idf_end = -1;}
-
 	public Gfs_nde Make_nde(int tkn_bgn, int tkn_end) {	// "abc."; "abc("; "abc;"; "abc{"
 		Gfs_nde nde = new Gfs_nde().Name_rng_(cur_idf_bgn, cur_idf_end);
 		this.Held_word_clear();
@@ -66,17 +65,17 @@ class Gfs_parser_ctx {
 }
 class Gfs_err_mgr {
 	public void Fail_eos(Gfs_parser_ctx ctx) {Fail(ctx, Fail_msg_eos, ctx.Src_len());}
-	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, KeyVal_.new_("char", Char_.To_str((char)c)));}
+	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, Keyval_.new_("char", Char_.To_str((char)c)));}
 	public void Fail_nde_stack_empty(Gfs_parser_ctx ctx, int pos) {Fail(ctx, Fail_msg_nde_stack_empty, pos);}
 	public void Fail_invalid_lxr(Gfs_parser_ctx ctx, int pos, int lxr_tid, byte c) {
-		Fail(ctx, Fail_msg_invalid_lxr, pos, KeyVal_.new_("char", Char_.To_str((char)c)), KeyVal_.new_("cur_lxr", Gfs_lxr_.Tid__name(lxr_tid)), KeyVal_.new_("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
+		Fail(ctx, Fail_msg_invalid_lxr, pos, Keyval_.new_("char", Char_.To_str((char)c)), Keyval_.new_("cur_lxr", Gfs_lxr_.Tid__name(lxr_tid)), Keyval_.new_("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
 	}
-	private void Fail(Gfs_parser_ctx ctx, String msg, int pos, KeyVal... args) {
+	private void Fail(Gfs_parser_ctx ctx, String msg, int pos, Keyval... args) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len(); 
 		Fail_args_standard(src, src_len, pos);
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal arg = args[i];
+			Keyval arg = args[i];
 			tmp_fail_args.Add(arg.Key(), arg.Val_to_str_or_empty());
 		}
 		throw Err_.new_wo_type(Fail_msg(msg, tmp_fail_args));
@@ -87,12 +86,12 @@ class Gfs_err_mgr {
 		tmp_fail_args.Add("pos"	, pos);		
 	}
 	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
-	String Fail_msg(String type, KeyValList fail_args) {
+	String Fail_msg(String type, Keyval_list fail_args) {
 		tmp_fail_bfr.Add_str_u8(type).Add_byte(Byte_ascii.Colon);
 		int len = fail_args.Count();
 		for (int i = 0; i < len; i++) {
 			tmp_fail_bfr.Add_byte(Byte_ascii.Space);
-			KeyVal kv = fail_args.GetAt(i);
+			Keyval kv = fail_args.Get_at(i);
 			tmp_fail_bfr.Add_str_u8(kv.Key());
 			tmp_fail_bfr.Add_byte(Byte_ascii.Eq).Add_byte(Byte_ascii.Apos);
 			tmp_fail_bfr.Add_str_u8(kv.Val_to_str_or_empty()).Add_byte(Byte_ascii.Apos);
@@ -100,7 +99,7 @@ class Gfs_err_mgr {
 		return tmp_fail_bfr.To_str_and_clear();
 	}
 	Bry_bfr tmp_fail_bfr = Bry_bfr.reset_(255);
-	KeyValList tmp_fail_args = new KeyValList();
+	Keyval_list tmp_fail_args = new Keyval_list();
 	private static int excerpt_len = 50;
 	String Fail_excerpt_bgn(byte[] src, int src_len, int pos) {
 		int bgn = pos - excerpt_len; if (bgn < 0) bgn = 0;

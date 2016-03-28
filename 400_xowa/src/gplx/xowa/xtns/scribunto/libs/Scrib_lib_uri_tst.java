@@ -31,7 +31,7 @@ public class Scrib_lib_uri_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_localUrl		, Object_.Ary("[bad]"						), Scrib_invoke_func_fxt.Null_rslt);	// handle invalid titles; EX:it.w:Billy_the_Kid; DATE:2014-01-20
 	}
 	@Test  public void Url__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; it.w:Astronomie; DATE:2014-01-18
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl, Object_.Ary("A", KeyVal_.Ary(KeyVal_.new_("action", "edit"))), "//en.wikipedia.org/wiki/A?action=edit");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl, Object_.Ary("A", Keyval_.Ary(Keyval_.new_("action", "edit"))), "//en.wikipedia.org/wiki/A?action=edit");
 	}
 	@Test  public void AnchorEncode() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_anchorEncode	, Object_.Ary("[irc://a b c]"				), "b_c");

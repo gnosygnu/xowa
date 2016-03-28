@@ -74,15 +74,6 @@ public class Sqlite_engine_ {
 			usr_dlg.Log_many("", "", "index created: ~{0} ~{1}", file_id, index);
 		}
 	}
-	public static Db_conn Conn_load_or_make_(Io_url url, Bool_obj_ref created) {
-		boolean exists = Io_mgr.Instance.ExistsFil(url);
-		created.Val_(!exists);
-		Db_conn_info connect = exists ? Sqlite_conn_info.load_(url) : Sqlite_conn_info.make_(url); 
-		Db_conn p = Db_conn_pool.Instance.Get_or_new(connect);
-		if (!exists)
-			Pragma_page_size(p, 4096);
-		return p;
-	}
 	public static final int Stmt_arg_max = 999;					// 999 is max number of variables allowed by sqlite
 	public static final boolean Supports_read_binary_stream = false;	
 	public static final boolean Supports_indexed_by = true;			

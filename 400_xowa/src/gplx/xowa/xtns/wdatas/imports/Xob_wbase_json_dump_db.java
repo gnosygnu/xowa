@@ -47,13 +47,11 @@ class Xob_wbase_json_dump_db {
 		wiki.Ns_mgr().Add_defaults();
 		wiki.Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, Wdata_wiki_mgr.Ns_property_name);
 		wiki.Ns_mgr().Init();
-
 		Xoapi_import import_cfg = app.Api_root().Bldr().Wiki().Import();
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
 		this.text_zip_mgr = Xoa_app_.Utl__zip_mgr(); text_zip_tid = import_cfg.Zip_tid_text();
 		byte[] ns_file_map = import_cfg.New_ns_file_map(src_fil_len);
 		Xob_ns_file_itm.Init_ns_bldr_data(Xowd_db_file_.Tid_text, wiki.Ns_mgr(), ns_file_map);
-
 		this.page_modified_on = DateAdp_.Now();
 		this.page_core_tbl = db_mgr.Tbl__page();
 		page_tbl.Insert_bgn();

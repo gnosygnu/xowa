@@ -37,11 +37,11 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	private Swt_html_lnr_location lnr_location; private Swt_html_lnr_status lnr_status;
-	public Swt_html(Swt_kit kit, Swt_control owner_control, KeyValHash ctorArgs) {
+	public Swt_html(Swt_kit kit, Swt_control owner_control, Keyval_hash ctorArgs) {
 		this.kit = kit;
 		lnr_location = new Swt_html_lnr_location(this);
 		lnr_status = new Swt_html_lnr_status(this);
-		Object browser_tid_obj = ctorArgs.FetchValOr(Swt_kit.Cfg_Html_BrowserType, null);
+		Object browser_tid_obj = ctorArgs.Get_val_or(Swt_kit.Cfg_Html_BrowserType, null);
 		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.cast(browser_tid_obj);
 		browser = new Browser(owner_control.Under_composite(), browser_tid);
 		core = new Swt_core_cmds_html(this, browser);
@@ -52,6 +52,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		browser.addStatusTextListener(lnr_status);
 		browser.addFocusListener(this);
 		browser.addTitleListener(new Swt_html_lnr_title(this));
+		// browser.addOpenWindowListener(new Swt_open_window_listener(this));	// handle target='blank'
 		// browser.addTraverseListener(new Swt_html_lnr_Traverse(this));
 	}
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
@@ -251,6 +252,13 @@ class Swt_html_lnr_mouse implements MouseListener {
 		return IptEvtDataMouse.new_(btn, IptMouseWheel_.None, ev.x, ev.y);		
 	}
 }
+//class Swt_open_window_listener implements OpenWindowListener {
+//	private final Swt_html html_box;
+//	public Swt_open_window_listener(Swt_html html_box) {this.html_box = html_box;}
+//	@Override public void open(WindowEvent arg0) {
+//		Tfds.Write();
+//	}	
+//}
 /*
 NOTE_1:browser scrollbar and click
 a click in the scrollbar area will raise a mouse-down/mouse-up event in content-editable mode

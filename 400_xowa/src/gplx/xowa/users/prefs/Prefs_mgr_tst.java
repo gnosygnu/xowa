@@ -135,7 +135,7 @@ class Prefs_mgr_fxt {
 		if (app == null) {
 			GfsCore.Instance.Clear();	// NOTE: clear GfsCore, else Props test will fail for mass run
 			Xoa_gfs_mgr.Msg_parser_init();
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 			prefs_mgr = new Prefs_mgr(app);	
 			html_box = new Gfui_html_mok();
 			prefs_mgr.Html_box_mok_(html_box);

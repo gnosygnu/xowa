@@ -68,13 +68,13 @@ public class Sql_core_wtr implements Sql_qry_wtr {
 		int last = arg_count - 1;
 		bfr.Add_str_u8_many("INSERT INTO ", qry.Base_table(), " (");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = qry.Args().Get_at(i);
+			Keyval pair = qry.Args().Get_at(i);
 			this.Bld_col_name(bfr, pair.Key());
 			bfr.Add_str_a7(i == last ? ")" : ", ");
 		}
 		bfr.Add_str_a7(" VALUES (");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = qry.Args().Get_at(i);
+			Keyval pair = qry.Args().Get_at(i);
 			Db_arg arg = (Db_arg)pair.Val();
 			val_wtr.Bld_val(bfr, ctx, arg.Val);
 			bfr.Add_str_a7(i == last ? ")" : ", ");
@@ -85,7 +85,7 @@ public class Sql_core_wtr implements Sql_qry_wtr {
 		int arg_count = qry.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_update has no columns", "base_table", qry.Base_table());
 		bfr.Add_str_u8_many("UPDATE ", qry.Base_table(), " SET ");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = qry.Args().Get_at(i);
+			Keyval pair = qry.Args().Get_at(i);
 			if (i > 0) bfr.Add_str_a7(", ");
 			this.Bld_col_name(bfr, pair.Key());
 			bfr.Add_str_a7("=");

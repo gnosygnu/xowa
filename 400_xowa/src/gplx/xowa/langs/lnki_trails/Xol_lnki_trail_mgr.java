@@ -51,7 +51,7 @@ public class Xol_lnki_trail_mgr implements GfoInvkAble {
 	private void Add_many(GfoMsg m) {
 		int len = m.Args_count();
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = m.Args_getAt(i);
+			Keyval kv = m.Args_getAt(i);
 			Add(kv.Val_to_str_or_empty());
 		}
 	}

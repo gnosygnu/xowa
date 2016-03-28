@@ -29,7 +29,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Init();
 		core.RegisterInterface(this, script_dir.GenSubFil("mwInit.lua"));	// DATE:2014-07-12
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.lua")
-			, KeyVal_.new_("allowEnvFuncs", allow_env_funcs));
+			, Keyval_.new_("allowEnvFuncs", allow_env_funcs));
 		return mod;
 	}
 	public void Invoke_bgn(Xowe_wiki wiki, Xop_ctx ctx, byte[] new_src) {
@@ -81,7 +81,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
 	, Invk_parentFrameExists = "parentFrameExists"
 	;
-	private static final String[] Proc_names = String_.Ary
+	private static final    String[] Proc_names = String_.Ary
 	( Invk_loadPackage, Invk_loadPHPLibrary
 	, Invk_frameExists, Invk_newChildFrame
 	, Invk_getExpandedArgument, Invk_getAllExpandedArguments
@@ -164,7 +164,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk parent_frame = Scrib_frame_.Get_parent(core, frame_tid);
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - frame_arg_adj;
-		if (args_len < 1) return rslt.Init_obj(KeyVal_.Ary_empty);		// occurs when "frame:getParent().args" but no parent frame
+		if (args_len < 1) return rslt.Init_obj(Keyval_.Ary_empty);		// occurs when "frame:getParent().args" but no parent frame
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();		// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
 		List_adp rv = List_adp_.new_();
 		int arg_idx = 0;
@@ -202,11 +202,11 @@ public class Scrib_lib_mw implements Scrib_lib {
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);
 //				ctx.Scribunto = Bool_.N;
 			String val = key_missing ? tmp_bfr.To_str_and_clear() : tmp_bfr.To_str_and_clear_and_trim(); // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
-			KeyVal kv = key_is_str ? KeyVal_.new_(key_as_str, val) : KeyVal_.int_(key_as_int, val);
+			Keyval kv = key_is_str ? Keyval_.new_(key_as_str, val) : Keyval_.int_(key_as_int, val);
 			rv.Add(kv);
 		}
 		tmp_bfr.Mkr_rls();
-		return rslt.Init_obj((KeyVal[])rv.To_ary(KeyVal.class));
+		return rslt.Init_obj((Keyval[])rv.To_ary(Keyval.class));
 	}
 	public boolean FrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
@@ -227,7 +227,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xop_ctx tmp_ctx = Xop_ctx.new_sub_(cur_wiki);
 		int args_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - args_adj;
-		KeyVal[] kv_args = new KeyVal[args_len];
+		Keyval[] kv_args = new Keyval[args_len];
 		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn arg = frame.Args_get_by_idx(i + args_adj);
@@ -236,7 +236,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (String_.Eq(key, "")) key = Int_.To_str(i);
 			arg.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);	// NOTE: must evaluate against parent_frame; evaluating against current frame may cause stack-overflow; DATE:2013-04-04
 			String val = tmp_bfr.To_str_and_clear();
-			kv_args[i] = KeyVal_.new_(key, val);
+			kv_args[i] = Keyval_.new_(key, val);
 		}
 		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_u8(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
@@ -252,7 +252,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int fnc_name_len = fnc_name.length;
 		Bry_obj_ref argx_ref = Bry_obj_ref.New_empty();
 		Bry_obj_ref fnc_name_ref = Bry_obj_ref.New(fnc_name);
-		KeyVal[] parser_func_args = CallParserFunction_parse_args(cur_wiki.Appe().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
+		Keyval[] parser_func_args = CallParserFunction_parse_args(cur_wiki.Appe().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
 		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
 		Xol_func_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);
 		Xot_defn defn = finder.Func();
@@ -264,17 +264,17 @@ public class Scrib_lib_mw implements Scrib_lib {
 		bfr.Mkr_rls();
 		return rslt.Init_obj(bfr.To_str_and_clear());
 	}
-	private KeyVal[] CallParserFunction_parse_args(Number_parser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, KeyVal[] args) {
+	private Keyval[] CallParserFunction_parse_args(Number_parser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, Keyval[] args) {
 		List_adp rv = List_adp_.new_();
 		// flatten args
 		int args_len = args.length;
 		for (int i = 2; i < args_len; i++) {
-			KeyVal arg = args[i];
+			Keyval arg = args[i];
 			if (Is_kv_ary(arg)) {
-				KeyVal[] arg_kv_ary = (KeyVal[])arg.Val();
+				Keyval[] arg_kv_ary = (Keyval[])arg.Val();
 				int arg_kv_ary_len = arg_kv_ary.length;
 				for (int j = 0; j < arg_kv_ary_len; j++) {
-					KeyVal sub_arg = arg_kv_ary[j];
+					Keyval sub_arg = arg_kv_ary[j];
 					rv.Add(sub_arg);
 				}
 			}
@@ -287,7 +287,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int fnc_name_len = fnc_name.length;
 		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
 		if (fnc_name_colon_pos == Bry_find_.Not_found) {
-			KeyVal arg_argx = (KeyVal)rv.Get_at(0);
+			Keyval arg_argx = (Keyval)rv.Get_at(0);
 			argx_ref.Val_(arg_argx.Val_to_bry());
 			rv.Del_at(0);
 		}
@@ -296,9 +296,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 			fnc_name = Bry_.Mid(fnc_name, 0, fnc_name_colon_pos);
 			fnc_name_ref.Val_(fnc_name);
 		}
-		return (KeyVal[])rv.To_ary(KeyVal.class);
+		return (Keyval[])rv.To_ary(Keyval.class);
 	}
-	private static boolean Is_kv_ary(KeyVal kv) {return Type_adp_.Eq_typeSafe(kv.Val(), KeyVal[].class);}
+	private static boolean Is_kv_ary(Keyval kv) {return Type_adp_.Eq_typeSafe(kv.Val(), Keyval[].class);}
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
@@ -306,7 +306,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
-		KeyVal[] args_ary = args.Pull_kv_ary(2);
+		Keyval[] args_ary = args.Pull_kv_ary(2);
 		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
 		byte[] sub_src = null;
 		if (ttl.Ns().Id_is_tmpl()) {				// ttl is template; check tmpl_regy first before going to data_mgr
@@ -316,7 +316,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (sub_src == null)						// ttl is not in template cache, or is a ttl in non-Template ns; load title
 			sub_src = core.Wiki().Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
 		if (sub_src !=  null) {
-			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
+			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 			Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
@@ -330,7 +330,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		// BLOCK.end:Xot_invk_tkn.Transclude
 	}
 
-	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(KeyVal_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
+	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(Keyval_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
 	public boolean IsSubsting(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		boolean is_substing = false;
 		Xot_invk current_frame = core.Frame_current();
@@ -359,8 +359,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 			ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8((String)ttl_obj));
 			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
-		KeyVal[] args_ary = args.Pull_kv_ary(2);
-		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
+		Keyval[] args_ary = args.Pull_kv_ary(2);
+		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
 		String new_frame_id = "frame" + Int_.To_str(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);
 		return rslt.Init_obj(new_frame_id);
@@ -379,8 +379,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 }
 class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
-		KeyVal lhs = (KeyVal)lhsObj;
-		KeyVal rhs = (KeyVal)rhsObj;
+		Keyval lhs = (Keyval)lhsObj;
+		Keyval rhs = (Keyval)rhsObj;
 		Object lhs_key = lhs.Key_as_obj();
 		Object rhs_key = rhs.Key_as_obj();
 		boolean lhs_is_int = Int_.TypeMatch(lhs_key.getClass());
@@ -392,5 +392,5 @@ class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.Comparer
 		else															// both are strings
 			return String_.Compare(String_.cast(lhs_key), String_.cast(rhs_key));
 	}
-	public static final Scrib_lib_mw_callParserFunction_sorter Instance = new Scrib_lib_mw_callParserFunction_sorter(); Scrib_lib_mw_callParserFunction_sorter() {}
+	public static final    Scrib_lib_mw_callParserFunction_sorter Instance = new Scrib_lib_mw_callParserFunction_sorter(); Scrib_lib_mw_callParserFunction_sorter() {}
 }

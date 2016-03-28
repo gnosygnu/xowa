@@ -20,9 +20,9 @@ import java.lang.*;
 import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.ios.*;
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
-	public static final byte[] Empty = new byte[0];
-	public static final byte[][] Ary_empty = new byte[0][];
-	public static final Class<?> Cls_ref_type = byte[].class;
+	public static final    byte[] Empty = new byte[0];
+	public static final    byte[][] Ary_empty = new byte[0][];
+	public static final    Class<?> Cls_ref_type = byte[].class;
 	public static byte[] cast(Object val) {return (byte[])val;}
 	public static byte[] New_by_byte(byte b) {return new byte[] {b};}
 	public static byte[] New_by_ints(int... ary) {
@@ -403,7 +403,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static final byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
+	public static final    byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
 	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws);}
 	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws);}
 	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary) {
@@ -766,8 +766,8 @@ public class Bry_ {
 			if (!Bry_.Eq(lhs[i], rhs[i])) return false;
 		return true;
 	}
-	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
-	public static final String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
+	public static final    byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
+	public static final    String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
 	public static DateAdp ReadCsvDte(byte[] ary, Int_obj_ref posRef, byte lkp) {// ASSUME: fmt = yyyyMMdd HHmmss.fff
 		int y = 0, M = 0, d = 0, H = 0, m = 0, s = 0, f = 0;
 		int bgn = posRef.Val();
@@ -1016,6 +1016,29 @@ public class Bry_ {
 			}
 		}
 		return dirty ? bfr.To_bry_and_clear() : src;
+	}
+	public static byte[] Resolve_escape(Bry_bfr bfr, byte escape, byte[] raw, int bgn, int end) {
+		int pos = bgn;
+		boolean dirty = false;
+		while (pos < end) {
+			byte b = raw[pos];
+			if (b == escape) {
+				if (!dirty) {
+					dirty = true;
+					bfr.Add_mid(raw, bgn, pos);
+				}
+				++pos;
+				if (pos < end) {	// check for eos; note that this ignores trailing "\"; EX: "a\" -> "a"
+					bfr.Add_byte(raw[pos]);
+					++pos;
+				}
+			}
+			else {
+				if (dirty) bfr.Add_byte(b);
+				++pos;
+			}
+		}
+		return dirty ? bfr.To_bry_and_clear() : raw;
 	}
 	public static void Clear(byte[] bry) {
 		int len = bry.length;

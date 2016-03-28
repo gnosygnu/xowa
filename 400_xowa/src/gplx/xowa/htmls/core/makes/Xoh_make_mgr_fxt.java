@@ -22,8 +22,8 @@ class Xoh_make_mgr_fxt {
 	private final Xoh_page hpg = new Xoh_page();
 	private Xoh_make_mgr hswap_mgr; private Xowe_wiki wiki;
 	public void Clear() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		this.wiki.Init_by_wiki();
 		this.hswap_mgr = wiki.Html__hdump_mgr().Load_mgr().Make_mgr();
 	}

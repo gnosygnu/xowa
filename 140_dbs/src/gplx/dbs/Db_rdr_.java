@@ -32,6 +32,7 @@ class Db_rdr__empty implements Db_rdr {
 	public float		Read_float(String k)			{return Float_.NaN;}
 	public double		Read_double(String k)			{return Double_.NaN;}
 	public boolean			Read_bool_by_byte(String k)		{return false;}
+	public int			Fld_len()						{return 0;}
 	public Object 		Read_obj(String k)				{return null;}
 	public Object 		Read_at(int i)					{return null;}
 	public void			Rls() {}

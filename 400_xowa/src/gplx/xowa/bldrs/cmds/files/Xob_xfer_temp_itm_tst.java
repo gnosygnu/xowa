@@ -24,78 +24,75 @@ public class Xob_xfer_temp_itm_tst {
 	private Xob_xfer_temp_itm_fxt fxt = new Xob_xfer_temp_itm_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test   public void Pass()				{fxt.Test_pass().Test_itm_chk_fail_id_none();}
-	@Test   public void Missing_orig()		{fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_page_id_is_null		, KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_page_id, null));}
-	@Test   public void File_is_audio()		{fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_media_type_is_audio	, KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_media_type, Xof_media_type.Name_audio));}
+	@Test   public void Missing_orig()		{fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_page_id_is_null		, Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_page_id, null));}
+	@Test   public void File_is_audio()		{fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_media_type_is_audio	, Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_media_type, Xof_media_type.Name_audio));}
 	@Test   public void File_is_mid()		{
-		fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_media_type_is_audio	, KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext, Xof_ext_.Id_mid));
+		fxt.Test_fail(Xob_xfer_temp_itm.Chk_tid_orig_media_type_is_audio	, Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext, Xof_ext_.Id_mid));
 	}
 	@Test   public void Redirect_src_is_empty() {	// orig_cmd sets all direct files to have "orig_join" == "lnki_ttl"
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "A.png")
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "A.png")
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
 		);
 		fxt.Test_lnki_redirect_src("");								// confirm redirect_src set to ""
 	}
 	@Test   public void Redirect_src_has_val() {	// orig_cmd sets all redirect files to have "orig_join" = redirect and "lnki_ttl" as orig; EX: A.png redirects to B.png; orig_join will be B.png (the actual image) and redirect_src will be A.png (the original lnki)
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "B.png")
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "B.png")
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
 		);
 		fxt.Test_lnki_redirect_src("A.png");							// confirm redirect_src set to ""
 	}
 	@Test   public void Redirect_should_take_trg_ext() {// if "A.png" redirects to "B.jpg", ext_id should be ".jpg" (the actual file) not ".png (lnki_ext_id)
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "B.jpg")
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)	// .png b/c B.jpg
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ttl	, "B.jpg")
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)	// .png b/c B.jpg
 		);
 		fxt.Test_lnki_ext_id(Xof_ext_.Id_jpg);						// confirm ext changed to .jpg
 	}
 	@Test   public void Thumbtime_check() {// PURPOSE: one image actually had a thumbtime defined; EX: General_Dynamics_F-16_Fighting_Falcon; [[File:Crash.arp.600pix.jpg|thumb|thumbtime=2]]
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_time		, (double)3)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_time		, (double)3)
 		);
 		fxt.Test_lnki_thumbtime(Xof_lnki_time.Null);
-
 		fxt.Reset().Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_time		, (double)3)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_time		, (double)3)
 		);
 		fxt.Test_lnki_thumbtime(3);
 	}
 	@Test   public void Page_check() {
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
 		);
 		fxt.Test_lnki_page(Xof_lnki_page.Null);
-
 		fxt.Reset().Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_pdf)
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_pdf)
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
 		);
 		fxt.Test_lnki_page(3);
-
 		fxt.Reset().Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_djvu)
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_djvu)
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
 		);
 		fxt.Test_lnki_page(3);
 	}
 	@Test   public void Media_should_be_ignored() {// ignore [[Media:]] for xfer_thumb (needed for xfer_orig)
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
-		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_src_tid		, Xop_file_logger_.Tid__media)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.png")
+		,	Keyval_.new_(Xob_lnki_regy_tbl.Fld_lnki_src_tid		, Xop_file_logger_.Tid__media)
 		);
 		fxt.Test_itm_chk_fail_id(Xob_xfer_temp_itm.Chk_tid_ns_is_media);
 	}
 	@Test   public void Orig_width_is_0() {// PURPOSE: ignore files with an orig width of 0; note that ogg files that are sometimes flagged as VIDEO; EX:2009_10_08_Marc_Randazza_interview.ogg; DATE:2014-08-20
 		fxt.Test_bgn
-		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.ogg")
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)	// VIDEO
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_w			, 0)							// no width defined in image table
-		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_h			, 0)
+		(	Keyval_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.ogg")
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)	// VIDEO
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_w			, 0)							// no width defined in image table
+		,	Keyval_.new_(Xob_orig_regy_tbl.Fld_orig_h			, 0)
 		);
 		fxt.Test_itm_chk_fail_id(Xob_xfer_temp_itm.Chk_tid_orig_w_is_0);
 	}
@@ -154,16 +151,16 @@ class Xob_xfer_temp_itm_fxt {
 		return this;
 	}
 	public Xob_xfer_temp_itm_fxt Test_pass() {return Test_bgn();}
-	public Xob_xfer_temp_itm_fxt Test_fail(byte fail_tid, KeyVal... kvs) {
+	public Xob_xfer_temp_itm_fxt Test_fail(byte fail_tid, Keyval... kvs) {
 		Test_bgn(kvs);
 		this.Test_itm_chk_fail_id(fail_tid);
 		return this;
 	}
-	public Xob_xfer_temp_itm_fxt Test_bgn(KeyVal... kvs) {
+	public Xob_xfer_temp_itm_fxt Test_bgn(Keyval... kvs) {
 		Init_rdr_image();
 		int len = kvs.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = kvs[i];
+			Keyval kv = kvs[i];
 			Init_rdr(kv.Key(), kv.Val());
 		}
 		this.Exec_load();

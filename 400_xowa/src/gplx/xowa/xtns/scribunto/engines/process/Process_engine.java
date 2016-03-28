@@ -31,22 +31,22 @@ public class Process_engine implements Scrib_engine {
 	public boolean Dbg_print() {return dbg_print;} public void Dbg_print_(boolean v) {dbg_print = v;} private boolean dbg_print;
 	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {server = v;} Scrib_server server;
 	public Scrib_lua_proc LoadString(String name, String text) {
-		KeyVal[] rslt = this.Dispatch("op", "loadString", "text", text, "chunkName", name);
+		Keyval[] rslt = this.Dispatch("op", "loadString", "text", text, "chunkName", name);
 		return new Scrib_lua_proc(name, Int_.cast(rslt[0].Val()));
 	}
-	public KeyVal[] CallFunction(int id, KeyVal[] args) {
+	public Keyval[] CallFunction(int id, Keyval[] args) {
 		return this.Dispatch("op", "call", "id", id, "nargs", args.length, "args", args);
 	}
-	public void RegisterLibrary(KeyVal[] functions_ary) {
+	public void RegisterLibrary(Keyval[] functions_ary) {
 		this.Dispatch("op", "registerLibrary", "name", Scrib_core.Key_mw_interface, "functions", functions_ary);
 	}
-	public void CleanupChunks(KeyVal[] ids) {
+	public void CleanupChunks(Keyval[] ids) {
 		this.Dispatch("op", "cleanupChunks", "ids", ids);
 	}
-	public KeyVal[] ExecuteModule(int mod_id) {
+	public Keyval[] ExecuteModule(int mod_id) {
 		return this.CallFunction(core.Lib_mw().Mod().Fncs_get_id("executeModule"), Scrib_kv_utl_.base1_obj_(new Scrib_lua_proc("", mod_id)));
 	}
-	private KeyVal[] Dispatch(Object... ary) {
+	private Keyval[] Dispatch(Object... ary) {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_k004().Clear();
 		while (true) {
 			Dispatch_bld_send(bfr, ary);
@@ -61,18 +61,18 @@ public class Process_engine implements Scrib_engine {
 			}
 			else if	(String_.Eq(op, "error")) {
 				core.Handle_error(rsp.Rslt_ary()[0].Val_to_str_or_empty(), "");
-				return KeyVal_.Ary_empty;
+				return Keyval_.Ary_empty;
 			}
 			else if (String_.Eq(op, "call")) {
 				String id = rsp.Call_id();
-				KeyVal[] args = rsp.Call_args();
+				Keyval[] args = rsp.Call_args();
 				Scrib_proc proc = proc_mgr.Get_by_key(id); if (proc == null) throw Scrib_xtn_mgr.err_("could not find proc with id of {0}", id);
 				Scrib_proc_args proc_args = new Scrib_proc_args(args);
 				Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
 				proc.Proc_exec(proc_args, proc_rslt);
 				String fail_msg = proc_rslt.Fail_msg();
 				if (fail_msg == null) {
-					KeyVal[] cbk_rslts = proc_rslt.Ary();
+					Keyval[] cbk_rslts = proc_rslt.Ary();
 					ary = Object_.Ary("op", "return", "nvalues", cbk_rslts.length, "values", cbk_rslts);
 				}
 				else {
@@ -82,7 +82,7 @@ public class Process_engine implements Scrib_engine {
 			else {
 				bfr.Mkr_rls();
 //					app.Usr_dlg().Warn_many("", "", "invalid dispatch: op=~{0} page=~{1}", op, String_.new_u8(core.Ctx().Page().Page_ttl().Page_db()));
-				return KeyVal_.Ary_empty;
+				return Keyval_.Ary_empty;
 			}
 		}
 	}	private static final byte[] Dispatch_hdr = Bry_.new_a7("0000000000000000");	// itm_len + itm_chk in 8-len HexDec

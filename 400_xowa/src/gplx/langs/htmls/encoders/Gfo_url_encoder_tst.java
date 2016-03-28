@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import org.junit.*;
 public class Gfo_url_encoder_tst {
-	private final Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
+	private final    Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
 	@Test  public void Id__nums() 			{fxt.Encoder_id().Test__bicode("0123456789"					, "0123456789");}
 	@Test  public void Id__ltrs_lower() 	{fxt.Encoder_id().Test__bicode("abcdefghijklmnopqrstuvwxyz"	, "abcdefghijklmnopqrstuvwxyz");}
 	@Test  public void Id__ltrs_upper() 	{fxt.Encoder_id().Test__bicode("ABCDEFGHIJKLMNOPQRSTUVWXYZ"	, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");}
@@ -46,7 +46,7 @@ public class Gfo_url_encoder_tst {
 		fxt.Encoder_href().Test__encode("%GC", "%25GC");
 	}
 	@Test  public void Fsys__wnt() 		{
-		fxt.Encoder_fsys_safe().Test__encode("Help:Options/HTML", "Help%3AOptions%2FHTML");
+		fxt.Encoder_fsys_safe().Test__encode("Options/HTML", "Options%2FHTML");
 	}
 }
 class Gfo_url_encoder_fxt {

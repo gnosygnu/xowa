@@ -91,7 +91,7 @@ public class Xowm_dump_file {
 		int dump_type_int = Xowm_dump_type_.parse_by_file(dump_type_bry);
 		byte[] dump_file_ext = Xowm_dump_file_.Ext_xml_bz2;
 		switch (dump_type_int) {
-			case Xowm_dump_type_.Int__page_props: case Xowm_dump_type_.Int__categorylinks: case Xowm_dump_type_.Int__image:
+			case Xowm_dump_type_.Int__page_props: case Xowm_dump_type_.Int__categorylinks: case Xowm_dump_type_.Int__image: case Xowm_dump_type_.Int__pagelinks:
 				dump_file_ext = Xowm_dump_file_.Ext_sql_gz;
 				break;
 		}

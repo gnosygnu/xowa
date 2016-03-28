@@ -20,7 +20,7 @@ import gplx.core.brys.*; import gplx.langs.mustaches.*; import gplx.xowa.parsers
 import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
 	@Override public Xox_mgr Clone_new() {return new Pgbnr_xtn_mgr();}
 	public Pgbnr_cfg Cfg() {return cfg;} private Pgbnr_cfg cfg;
 	public Mustache_tkn_itm Template_root() {return template_root;} private Mustache_tkn_itm template_root;
@@ -34,7 +34,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		switch (wiki.Domain_tid()) {
 			case Xow_domain_tid_.Int__home:
 				enabled = true;
-				ns_ary = Int_.Ary(Xow_ns_.Tid__help);
+				ns_ary = Int_.Ary(Xow_ns_.Tid__main);
 				break;
 			case Xow_domain_tid_.Int__wikivoyage:
 				switch (wiki.Lang().Lang_id()) {
@@ -83,7 +83,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		if (itm == null) return;
 		Pgbnr_func.Add_banner(bfr, pctx, hctx, src);
 	}
-	private static final byte[] Template_dflt = Bry_.New_u8_nl_apos
+	private static final    byte[] Template_dflt = Bry_.New_u8_nl_apos
 	( "<div class='ext-wpb-pagebanner noprint pre-content'>"
 	, "	<div class='wpb-topbanner'>"
 	, "		{{#isHeadingOverrideEnabled}}<h1 class='wpb-name'>{{title}}</h1>{{/isHeadingOverrideEnabled}}"

@@ -86,7 +86,6 @@ public class Gfh_tag_rdr {
 			else
 				return false;
 		}
-
 		int depth = depth_obj.Val();
 		boolean tag_is_tail = tag.Tag_is_tail();
 		if (tail == tag_is_tail) {

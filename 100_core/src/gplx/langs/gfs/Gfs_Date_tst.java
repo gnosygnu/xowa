@@ -27,12 +27,12 @@ public class Gfs_Date_tst {
 		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now")), DateAdp_.parse_gplx("2001-01-01 00:00:00.000"));
 	}
 	@Test  public void Add_day() {
-		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now", "Add_day"), KeyVal_.new_("days", 1)), DateAdp_.parse_gplx("2001-01-02 00:00:00.000"));
+		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now", "Add_day"), Keyval_.new_("days", 1)), DateAdp_.parse_gplx("2001-01-02 00:00:00.000"));
 	}
 }
 class GfsCoreFxt {
 	public GfsCore Core() {return core;} GfsCore core = GfsCore.new_();
-	public GfoMsg msg_(String[] ary, KeyVal... kvAry) {return GfoMsg_.root_leafArgs_(ary, kvAry);}
+	public GfoMsg msg_(String[] ary, Keyval... kvAry) {return GfoMsg_.root_leafArgs_(ary, kvAry);}
 	public void AddObj(GfoInvkAble invk, String s) {core.AddObj(invk, s);}
 	public void tst_MsgStr(GfoMsg msg, Object expd) {
 		GfsCtx ctx = GfsCtx.new_();

@@ -39,8 +39,8 @@ public class Xoapi_orig_base_tst {
 class Xoapi_orig_base_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoapi_orig_rslts rv = new Xoapi_orig_rslts();
 	public void Clear() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public void Bld_api_url_tst(String ttl_str, int w, int h, String expd) {
 		String actl = Xoapi_orig_wmf.Bld_api_url(wiki.Domain_bry(), Bry_.new_u8(ttl_str), w, h);

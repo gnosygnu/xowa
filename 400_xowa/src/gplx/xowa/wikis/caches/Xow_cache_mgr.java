@@ -29,17 +29,17 @@ public class Xow_cache_mgr {
 	public Xow_page_cache Page_cache() {return page_cache;} private Xow_page_cache page_cache;
 	public Xow_defn_cache Defn_cache() {return defn_cache;} private Xow_defn_cache defn_cache;
 	public Xow_defn_cache Lst_cache() {return lst_cache;} private Xow_defn_cache lst_cache;
-	public KeyVal[] Scrib_lang_names() {
+	public Keyval[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
 			List_adp list = List_adp_.new_();
 			Xoa_sitelink_itm_mgr itm_mgr = wiki.App().Xwiki_mgr__sitelink_mgr().Itm_mgr();
 			int len = itm_mgr.Len();
 			for (int i = 0; i < len; ++i) {
 				Xoa_sitelink_itm itm = itm_mgr.Get_at(i);
-				KeyVal kv = KeyVal_.new_(String_.new_u8(itm.Key()), String_.new_u8(itm.Name()));
+				Keyval kv = Keyval_.new_(String_.new_u8(itm.Key()), String_.new_u8(itm.Name()));
 				list.Add(kv);
 			}
-			scrib_lang_names = (KeyVal[])list.To_ary(KeyVal.class);
+			scrib_lang_names = (Keyval[])list.To_ary(Keyval.class);
 		}
 		return scrib_lang_names;
 	}
@@ -50,5 +50,5 @@ public class Xow_cache_mgr {
 		lst_cache.Free_mem_all();
 		scrib_lang_names = null;
 	}
-	private static KeyVal[] scrib_lang_names;
+	private static Keyval[] scrib_lang_names;
 }

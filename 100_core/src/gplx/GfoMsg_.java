@@ -28,7 +28,7 @@ public class GfoMsg_ {
 		return rv;
 	}
 	public static GfoMsg root_(String... ary) {return root_leafArgs_(ary);}
-	public static GfoMsg root_leafArgs_(String[] ary, KeyVal... kvAry) {
+	public static GfoMsg root_leafArgs_(String[] ary, Keyval... kvAry) {
 		int len = Array_.Len(ary); if (len == 0) throw Err_.new_invalid_arg("== 0", "@len", len);
 		GfoMsg root = new GfoMsg_base().ctor_(ary[0], false);
 		GfoMsg owner = root;
@@ -39,7 +39,7 @@ public class GfoMsg_ {
 			owner = cur;
 		}
 		for (int i = 0; i < kvAry.length; i++) {
-			KeyVal kv = kvAry[i];
+			Keyval kv = kvAry[i];
 			owner.Add(kv.Key(), kv.Val());
 		}
 		return root;
@@ -78,14 +78,14 @@ public class GfoMsg_ {
 class GfoMsg_wtr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
 		if (args == null) args = List_adp_.new_();
-		args.Add(KeyVal_.new_(k, null));
+		args.Add(Keyval_.new_(k, null));
 		return defaultOr;
 	}
 }
 class GfoMsg_rdr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
 		if (args == null) args = List_adp_.new_();
-		args.Add(KeyVal_.new_(k, defaultOr));
+		args.Add(Keyval_.new_(k, defaultOr));
 		return defaultOr;
 	}
 }
@@ -113,23 +113,23 @@ class GfoMsg_base implements GfoMsg {
 			sub.Args_reset();
 		}
 	}
-	public KeyVal Args_getAt(int i) {return args == null ? null : (KeyVal)args.Get_at(i);}
+	public Keyval Args_getAt(int i) {return args == null ? null : (Keyval)args.Get_at(i);}
 	public GfoMsg Args_ovr(String k, Object v) {
 		if (args == null) args = List_adp_.new_();
 		for (int i = 0; i < args.Count(); i++) {
-			KeyVal kv = (KeyVal)args.Get_at(i);
+			Keyval kv = (Keyval)args.Get_at(i);
 			if (String_.Eq(k, kv.Key())) {
 				kv.Val_(v);
 				return this;
 			}
 		}
-		args.Add(KeyVal_.new_(k, v));
+		args.Add(Keyval_.new_(k, v));
 		return this;
 	}
 	public GfoMsg Parse_(boolean v) {parse = v; return this;}
 	public GfoMsg	Add(String k, Object v) {
 		if (args == null) args = List_adp_.new_();
-		args.Add(KeyVal_.new_(k, v));
+		args.Add(Keyval_.new_(k, v));
 		return this;
 	}
 	public boolean		ReadBool(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Yn.parse_or((String)rv, false) : Bool_.cast(rv);}
@@ -177,13 +177,13 @@ class GfoMsg_base implements GfoMsg {
 		if (args == null) return Nil; // WORKAROUND.gfui: args null for DataBndr_whenEvt_execCmd
 		if (!String_.Eq(k, "")) {
 			for (int i = 0; i < args.Count(); i++) {
-				KeyVal kv = (KeyVal)args.Get_at(i);
+				Keyval kv = (Keyval)args.Get_at(i);
 				if (String_.Eq(k, kv.Key())) return kv.Val();
 			}
 		}
 		if (counter >= args.Count()) return Nil;
 		for (int i = 0; i < args.Count(); i++) {
-			KeyVal kv = (KeyVal)args.Get_at(i);
+			Keyval kv = (Keyval)args.Get_at(i);
 			if (String_.Eq(kv.Key(), "") && i >= counter) {
 				counter++;
 				return kv.Val();
@@ -196,7 +196,7 @@ class GfoMsg_base implements GfoMsg {
 		if (this.Args_count() == 0) return "<<EMPTY>>";
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < this.Args_count(); i++) {
-			KeyVal rv = (KeyVal)this.Args_getAt(i);
+			Keyval rv = (Keyval)this.Args_getAt(i);
 			sb.Add_fmt("{0};", rv.Key());
 		}
 		return sb.To_str();
@@ -231,7 +231,7 @@ class GfoMsg_base implements GfoMsg {
 			sb.Add(":");
 			boolean first = true;
 			for (int i = 0; i < m.Args_count(); i++) {
-				KeyVal kv = m.Args_getAt(i);
+				Keyval kv = m.Args_getAt(i);
 				if (kv.Val() == null) continue;
 				if (!first) sb.Add(" ");
 				sb.Add(kv.Key());

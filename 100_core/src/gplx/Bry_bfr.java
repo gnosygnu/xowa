@@ -317,6 +317,10 @@ public class Bry_bfr {
 			Add_str_u8(ary[i]);
 		return this;
 	}
+	public Bry_bfr Add_str_u8_fmt(String fmt, Object... args) {
+		Add_str_u8(String_.Format(fmt, args));
+		return this;
+	}
 	public Bry_bfr Add_str_a7_null(String s) {return Add_str_a7(s == null ? String_.Null_mark : s);}
 	public Bry_bfr Add_str_a7_w_nl(String s) {Add_str_a7(s); return Add_byte_nl();}
 	public Bry_bfr Add_str_a7(String str) {

@@ -107,10 +107,15 @@ public class Scrib_core {
 		lib_uri.Notify_page_changed();
 		lib_title.Notify_page_changed();
 		lib_wikibase.Notify_page_changed();
+		expensive_function_count = 0;
 	}	
 	public byte[] Cur_wiki() {return cur_wiki;} private byte[] cur_wiki = Bry_.Empty; 
 	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = Bry_.Empty;
-	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, KeyVal... args) {
+	public void Increment_expensive_function_count() {
+		++expensive_function_count;
+		if (expensive_function_count > 255) {}
+	}	private int expensive_function_count;
+	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, Keyval... args) {
 		this.RegisterLibrary(lib.Procs());
 		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.Instance.LoadFilStr(url));
 		Scrib_lua_proc setupInterface_func = rv.Fncs_get_by_key("setupInterface");
@@ -120,24 +125,24 @@ public class Scrib_core {
 	}
 	public void RegisterLibrary(Scrib_proc_mgr lib_proc_mgr) {
 		int len = lib_proc_mgr.Len();
-		KeyVal[] functions_ary = new KeyVal[len];
+		Keyval[] functions_ary = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			Scrib_proc lib_proc = lib_proc_mgr.Get_at(i);
 			String lib_proc_key = lib_proc.Proc_key();
 			this.proc_mgr.Set(lib_proc_key, lib_proc);
-			functions_ary[i] = KeyVal_.new_(lib_proc.Proc_name(), lib_proc_key);
+			functions_ary[i] = Keyval_.new_(lib_proc.Proc_name(), lib_proc_key);
 		}
 		engine.RegisterLibrary(functions_ary);
 	}
 	@gplx.Internal protected Scrib_lua_mod LoadLibraryFromFile(String name, String text) {
 		int lib_id = engine.LoadString("@" + name, text).Id();	// NOTE: 'Prepending an "@" to the chunk name makes Lua think it is a filename'
-		KeyVal[] values = engine.CallFunction(lib_id, KeyVal_.Ary_empty);
+		Keyval[] values = engine.CallFunction(lib_id, Keyval_.Ary_empty);
 		Scrib_lua_mod rv = new Scrib_lua_mod(this, name);
 		if (values.length > 0) {	// NOTE: values.length == 0 for "package.lua" (no fnc_ids returned);
-			KeyVal[] fncs = Scrib_kv_utl_.Val_to_KeyVal_ary(values, 0);
+			Keyval[] fncs = Scrib_kv_utl_.Val_to_KeyVal_ary(values, 0);
 			int len = fncs.length;
 			for (int i = 0; i < len; i++) {
-				KeyVal itm = fncs[i];
+				Keyval itm = fncs[i];
 				Scrib_lua_proc fnc = Scrib_lua_proc.cast_or_null_(itm.Val());
 				if (fnc != null) rv.Fncs_add(fnc);	// NOTE: some lua funcs will return INF; EX: stringLengthLimit
 			}
@@ -164,8 +169,8 @@ public class Scrib_core {
 		parent_frame.Frame_tid_(Scrib_frame_.Tid_parent); current_frame.Frame_tid_(Scrib_frame_.Tid_current);
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
-			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_u8(fnc_name));
-			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
+			Keyval[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_u8(fnc_name));
+			Keyval[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
 			if (func_rslt == null || func_rslt.length < 2) throw Err_.new_wo_type("lua.error:function did not return a value", "fnc_name", String_.new_u8(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
 			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
 			func_args = Scrib_kv_utl_.base1_many_(proc);
@@ -176,7 +181,7 @@ public class Scrib_core {
 //				gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
 //				bfr.Add(rslt_bry);
 			if (!Env_.Mode_testing())
-				engine.CleanupChunks(KeyVal_.Ary(KeyVal_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
+				engine.CleanupChunks(Keyval_.Ary(Keyval_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
 		}
 		finally {
 			lib_mw.Invoke_end();

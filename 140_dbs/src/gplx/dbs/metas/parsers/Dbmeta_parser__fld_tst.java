@@ -27,13 +27,13 @@ public class Dbmeta_parser__fld_tst {
 		fxt.Test_parse_type(" decimal ( 12 , 10 )"	, fxt.Make_type(Dbmeta_fld_tid.Tid__decimal, 12, 10));
 	}
 	@Test  public void Parse_fld() {
-		fxt.Test_parse_fld("name_1 int"							, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_unknown));
-		fxt.Test_parse_fld("name_1 int null"					, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_null));
-		fxt.Test_parse_fld("name_1 int not null"				, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null));
-		fxt.Test_parse_fld("name_1 int not null autoincrement"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.N, Bool_.Y));
-		fxt.Test_parse_fld("name_1 int not null primary key"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N));
-		fxt.Test_parse_fld("name_1 int not null default -1"		, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, -1));
-		fxt.Test_parse_fld("name_1 int not null default 'abc'"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, "abc"));
+		fxt.Test_parse_fld("name_1 int"									, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_unknown));
+		fxt.Test_parse_fld("name_1 int null"							, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_null));
+		fxt.Test_parse_fld("name_1 int not null"						, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null));
+		fxt.Test_parse_fld("name_1 int not null autoincrement"			, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.N, Bool_.Y));
+		fxt.Test_parse_fld("name_1 int not null primary key"			, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N));
+		fxt.Test_parse_fld("name_1 int not null default -1"				, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, -1));
+		fxt.Test_parse_fld("name_1 varchar(3) not null default 'abc'"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__str, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, "abc"));
 	}
 }
 class Dbmeta_parser__fld_fxt {

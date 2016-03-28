@@ -48,7 +48,7 @@ public class Fsd_thm_tbl implements Rls_able {
 		stmt_select_by_fil_near = Db_stmt_.Rls(stmt_select_by_fil_near);
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
 		));
 	}

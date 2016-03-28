@@ -68,8 +68,8 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("de", 1234), "1.234");		// german spr
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", 1234), "1,234");		// english spr
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234"), "1,234");		// String passed (not int)
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", KeyVal_.Ary(KeyVal_.new_("noCommafy", true)))		, "1234");		// noCommafy.y
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", KeyVal_.Ary(KeyVal_.new_("noCommafy", false)))	, "1,234");		// noCommafy.n
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", true)))		, "1234");		// noCommafy.y
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", false)))	, "1,234");		// noCommafy.n
 	}
 	@Test  public void FormatDate() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "2013-03-17", false), "2013-03-17");
@@ -84,7 +84,7 @@ public class Scrib_lib_language_tst {
 	@Test  public void FormatDate_date_omitted() {	// PURPOSE: some calls skip the date; retrieve arg_4 by int; EX: pl.w:L._Frank_Baum
 		Tfds.Now_enabled_y_();
 		Tfds.Now_set(DateAdp_.new_(2013, 12, 19, 1, 2, 3, 4));
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, KeyVal_.Ary(KeyVal_.int_(1, "en"), KeyVal_.int_(2, "Y-m-d"), KeyVal_.int_(4, false)), "2013-12-19");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Keyval_.Ary(Keyval_.int_(1, "en"), Keyval_.int_(2, "Y-m-d"), Keyval_.int_(4, false)), "2013-12-19");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", ""), "2013-12-19");// PURPOSE: '' should return today, not fail; EX: th.w:สถานีรถไฟตรัง
 		Tfds.Now_enabled_n_();
 	}
@@ -135,11 +135,11 @@ public class Scrib_lib_language_tst {
 		, "  seconds=3"
 		));
 	}
-	public static KeyVal[] Kv_ary_(String... ary) {
+	public static Keyval[] Kv_ary_(String... ary) {
 		int ary_len = ary.length;
-		KeyVal[] rv = new KeyVal[ary_len];
+		Keyval[] rv = new Keyval[ary_len];
 		for (int i = 0; i < ary_len; i++) {
-			rv[i] = KeyVal_.int_(i, ary[i]);
+			rv[i] = Keyval_.int_(i, ary[i]);
 		}
 		return rv;
 	}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_calc_stats_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
@@ -41,14 +41,14 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		int count_file = Calc_count_articles(wiki.Ns_mgr().Ns_file());
 		Bry_bfr bfr = Bry_bfr.new_();
 		Gen_call(Bool_.Y, bfr, Xowe_wiki.Invk_stats);
-		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_, count_main);
-		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_files_, count_file);
-		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_pages_, total);
+		Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_articles_, count_main);
+		Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_files_, count_file);
+		Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_pages_, total);
 		for (int i = 0; i < ns_len; i++) {
 			Xow_ns ns = wiki.Ns_mgr().Ords_ary()[i];
 			if (ns.Id() < 0) continue;
 			bfr.Add_byte_nl();
-			Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.To_str_pad_bgn_zero(ns.Count(), 10));
+			Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.To_str_pad_bgn_zero(ns.Count(), 10));
 		}
 		bfr.Add_byte_nl().Add_byte(Byte_ascii.Semic).Add_byte_nl();
 		Io_url wiki_gfs = Wiki_gfs_url(wiki);

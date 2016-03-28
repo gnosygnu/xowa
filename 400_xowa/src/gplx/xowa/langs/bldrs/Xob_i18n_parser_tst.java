@@ -52,8 +52,8 @@ class Xob_i18n_parser_fxt {
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test_load_msgs_dir(String dir_str) {
-		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Io_url dir_url = Io_url_.new_dir_(dir_str);
 		Io_url[] fil_urls = Io_mgr.Instance.QueryDir_fils(dir_url);
 		int len = fil_urls.length;

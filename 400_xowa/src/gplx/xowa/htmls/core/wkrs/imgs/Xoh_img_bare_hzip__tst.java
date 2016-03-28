@@ -16,10 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
+import org.junit.*; import gplx.core.envs.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_bare_hzip__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-	@Before public void Clear() {fxt.Clear();}
+	private int prv_os_tid = -1;
+	@Before public void init() {
+		fxt.Clear();
+		prv_os_tid = Op_sys.Cur().Tid();
+		Op_sys.Cur_(Op_sys.Drd.Tid());		// force drd mode; needed for img_bare
+	}
+	@After  public void term() {
+		Op_sys.Cur_(prv_os_tid);				// revert back to previous mode; otherwise global Op_sys is set to Drd which will cause other tests to fail (notably tidy)
+	}
 	@Test   public void Hiero() {
 		fxt.Test__bicode
 		( "~(!<img style=\"margin: 1px; height: 11px;\" src=\"~X1.png\" title=\"X1 [t]\" alt=\"t\">~"

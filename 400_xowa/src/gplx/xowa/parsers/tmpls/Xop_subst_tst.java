@@ -70,11 +70,9 @@ public class Xop_subst_tst {
 		fxt.Init_defn_add("ds", "<includeonly>{{subst:</includeonly><includeonly>ET|<nowiki>{{subst:ds}}</nowiki>}}</includeonly>");
 		fxt.Test_parse_page_tmpl_str("{{subst:ds}}", "");	// {{subst:ds}} causes stack overflow; {{ds}} does not
 	}
-
 	// NOTE: these are actually not good tests; MW does subst just before save; it doesn't do subst on load; in this case, the tests are testing load (which will noop); they need to test save (which xowa doesn't do)
 	// @Test  public void Tmpl_txt_subst()				{fxt.Test_parse_tmpl_str_test("{{subst:xo_print|a}}"				, "{{test}}"					, "a");}
 	// @Test  public void Tmpl_txt_subst_prm()			{fxt.Test_parse_tmpl_str_test("{{subst:xo_print|{{{1}}}}}"			, "{{test|a}}"					, "a");}
-
 	//@Test  public void Tmpl_txt_safesubst_prm()		{fxt.Test_parse_tmpl_str_test("{{{{{|safesubst:}}}ns:Category}}"	, "{{test}}"					, "Category");}
 	//@Test  public void Tmpl_txt_subst_immed()		{fxt.Test_parse_tmpl_str_test("{{xo_print{{subst:!}}a}}"			, "{{test}}"					, "a");}
 }

@@ -28,8 +28,8 @@ public class Xoh_js_cleaner_tst {
 class Xoh_js_cleaner_fxt {
 	public void Init() {
 		if (mgr == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			mgr = app.Html_mgr().Js_cleaner();
 		}
 	}	private Xoae_app app; Xowe_wiki wiki; Xoh_js_cleaner mgr;

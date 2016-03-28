@@ -293,7 +293,7 @@ public class Xoh_file_wtr__image__tst {
 		( "<img id=\"xoimg_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/11px.png\" width=\"11\" height=\"0\" />"
 		));		
 	}
-	@Test  public void Link__lc() {	// links to items in same namespace should automatically title-case words; DATE:2016-01-11
+	@Test  public void Link__lc() {	// links to items in same Srch_rslt_cbk should automatically title-case words; DATE:2016-01-11
 		fxt.Init_xwiki_add_wiki_and_user_("en", "en.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|11px|link=en:Help:a?b=c#d|abc]]", String_.Concat_lines_nl_skip_last

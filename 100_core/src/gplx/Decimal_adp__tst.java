@@ -59,6 +59,7 @@ public class Decimal_adp__tst {
 		fxt.Test_to_str_fmt(1, 2, "0.0", "0.5");
 		fxt.Test_to_str_fmt(1, 3, "0.0", "0.3");
 		fxt.Test_to_str_fmt(10000, 7, "0,000.000", "1,428.571");
+		fxt.Test_to_str_fmt(1, 2, "00.00", "00.50");
 	}
 	@Test  public void Round() {
 		fxt.Test_round("123.456",  3, "123.456");

@@ -26,7 +26,7 @@ public class Db_qry_insert implements Db_arg_owner {
 	public String		Base_table()			{return base_table;} private String base_table;
 	public String[]		Cols_for_insert() {return cols_for_insert;} private String[] cols_for_insert;
 	public Db_arg_owner From_(String tbl) {base_table = tbl; return this;}
-	public KeyValHash	Args() {return args;} private final KeyValHash args = KeyValHash.new_();
+	public Keyval_hash	Args() {return args;} private final Keyval_hash args = new Keyval_hash();
 	public Db_arg_owner Val_byte(String k, byte v)				{return Val_obj_type(k, v, Db_val_type.Tid_byte);}
 	public Db_arg_owner Val_int(String k, int v)				{return Val_obj_type(k, v, Db_val_type.Tid_int32);}
 	public Db_arg_owner Val_long(String k, long v)				{return Val_obj_type(k, v, Db_val_type.Tid_int64);}
@@ -48,7 +48,7 @@ public class Db_qry_insert implements Db_arg_owner {
 	public Db_qry_insert Cols_(String... ary) {
 		if (cols == null) cols = new Sql_select_fld_list();
 		for (String fld : ary)
-			cols.Add(Sql_select_fld.New_fld(Sql_select_fld.Tbl_null, fld, fld));
+			cols.Add(Sql_select_fld.New_fld(Sql_select_fld.Tbl__null, fld, fld));
 		return this;
 	}
 	public Sql_select_fld_list Cols() {return cols;} private Sql_select_fld_list cols;

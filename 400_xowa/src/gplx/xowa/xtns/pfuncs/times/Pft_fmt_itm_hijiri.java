@@ -28,7 +28,6 @@ class Pft_fmt_itm_hijiri {
 		int hiji_d = greg_d;
 		int hiji_m = greg_m;
 		int hiji_y = greg_y;
-
 		int tmp_jd = 0;
 		if (
 			(hiji_y > 1582) || ((hiji_y == 1582) && (hiji_m > 10)) ||
@@ -43,7 +42,6 @@ class Pft_fmt_itm_hijiri {
 			tmp_jd = 367 * hiji_y - (int)((7 * (hiji_y + 5001 + (int)((hiji_m - 9) / 7))) / 4) +
 						(int)((275 * hiji_m) / 9) + hiji_d + 1729777;
 		}
-
 		int tmp_l = tmp_jd -1948440 + 10632;
 		int tmp_n = (int)((tmp_l - 1) / 10631);
 		tmp_l = tmp_l - 10631 * tmp_n + 354;
@@ -52,7 +50,6 @@ class Pft_fmt_itm_hijiri {
 		hiji_m = (int)((24 * tmp_l) / 709);
 		hiji_d = tmp_l - (int)((709 * hiji_m) / 24);
 		hiji_y = 30 * tmp_n + tmp_j - 30;
-
 		rv[0] = hiji_y;
 		rv[1] = hiji_m;
 		rv[2] = hiji_d;

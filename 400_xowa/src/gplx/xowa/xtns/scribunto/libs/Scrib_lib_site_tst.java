@@ -16,30 +16,45 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_site_tst {
+	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
-		fxt.Clear_for_lib();
+		fxt.Clear();
 		lib = fxt.Core().Lib_site().Init();
-	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
-	@Test   public void GetNsIndex() {
-		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), 12);
 	}
-	@Test   public void GetNsIndex_invalid() {
-		fxt.Test_scrib_proc_empty(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"));	// unknown ns; return empty String
+	@Test   public void GetNsIndex__valid() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), 12);
+	}
+	@Test   public void GetNsIndex__invalid() {
+		fxt.Test__proc__objs__empty(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"));	// unknown ns; return empty String
 	}
 	@Test   public void UsersInGroup() {
-		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), 0); // SELECT * FROM user_groups;
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), 0); // SELECT * FROM user_groups;
 	}
-	@Test   public void PagesInCategory() {
-		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A"), 0);
+	@Test   public void PagesInCategory__invalid() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A|"), 0);
+	}
+	@Test   public void PagesInCategory__exists() {
+		gplx.xowa.addons.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "pages")	, 3);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "subcats")	, 2);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "files")	, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "all")		, 6);
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "*")	, String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  all=6"
+		, "  pages=3"
+		, "  subcats=2"
+		, "  files=1"
+		));
 	}
 	@Test   public void PagesInNs() {
-		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
 	@Test   public void Init_lib_site() {
-		Xowe_wiki wiki = fxt.Parser_fxt().Wiki();
-		fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7).NumAdmins_(8);
+		Xowe_wiki wiki = fxt.Core().Wiki();
+		wiki.Stats().Load_by_db(1, 2, 3, 4, 5, 6, 7, 8);
 		wiki.Ns_mgr()
 			.Clear()
 			.Add_new(Xow_ns_.Tid__module		, Xow_ns_.Key__module)
@@ -49,7 +64,7 @@ public class Scrib_lib_site_tst {
 			.Add_new(Xow_ns_.Tid__talk			, Xow_ns_.Key__talk)
 			.Init_w_defaults()
 			;
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  siteName=Wikipedia"
 		, "  server=http://en.wikipedia.org"

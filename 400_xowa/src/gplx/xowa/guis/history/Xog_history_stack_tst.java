@@ -42,8 +42,8 @@ class Xog_history_stack_fxt {
 	public Xog_history_stack_fxt Clear() {
 		stack.Clear();
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		}
 		return this;
 	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack();

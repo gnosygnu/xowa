@@ -29,10 +29,8 @@ public class Bit_heap_rdr_tst {
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  3, 6, 0);
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  1, 7, 0);
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  0, 0, 1);
-
 		fxt.Load(0);
 		fxt.Test__get_bool(Bool_.N).Test__cur(  0, 1, 0);
-
 		fxt.Load(6);
 		fxt.Test__get_bool(Bool_.N).Test__cur(  3, 1, 0);
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  1, 2, 0);
@@ -40,11 +38,9 @@ public class Bit_heap_rdr_tst {
 	}
 	@Test   public void Get_byte() {
 		fxt.Load(255).Test__get_byte(2, 3).Test__cur(63, 2, 0);
-
 		fxt.Load(255, 3);
 		fxt.Test__get_byte(7, 127);
 		fxt.Test__get_byte(3,   7);
-
 		fxt.Load(10);
 		fxt.Test__get_bool(false);
 		fxt.Test__get_byte(3, 5);

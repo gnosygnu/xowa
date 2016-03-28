@@ -25,7 +25,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
 	private Xop_root_tkn root = new Xop_root_tkn();
-	private final Bry_bfr bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr bfr = Bry_bfr.reset_(255);
 	public Xoh_js_cbk(Xog_html_itm html_itm) {this.html_itm = html_itm; this.app = html_itm.Owner_tab().Tab_mgr().Win().App();}
 	private String Xowa_exec_test(GfoMsg m) {	// concat args with pipe; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc|arg0|arg1
 		bfr.Clear();
@@ -91,7 +91,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
 		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.To_str(tmp_page.Id()), Int_.To_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.To_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.To_str(tmp_page.Text_len()));
-	}	private static final Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
+	}	private static final    Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
@@ -125,7 +125,9 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		byte[] search_str = Bry_.new_u8((String)m.ReadValAt(0));
 		byte[] cbk_func = Bry_.new_u8((String)m.ReadValAt(1));
-		app.Gui_mgr().Search_suggest_mgr().Search(wiki, search_str, cbk_func);
+
+
+		app.Gui_mgr().Search_cfg().Search(wiki, search_str, cbk_func);
 		return "";
 	}
 	private String[] Wikidata_get_label(GfoMsg m) {
@@ -141,7 +143,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 			for (int i = 1; i < len; i++) {
 				try {
 					byte[] ttl_bry = m.Args_getAt(i).Val_to_bry();
-					gplx.xowa.xtns.wdatas.Wdata_doc page = wdata_mgr.Pages_get(ttl_bry); if (page == null) continue;
+					gplx.xowa.xtns.wdatas.Wdata_doc page = wdata_mgr.Doc_mgr.Get_by_xid_or_null(ttl_bry); if (page == null) continue;
 					for (int j = 0; j < langs_len; j++) {
 						byte[] lang_key = langs[j];
 						if		(Bry_.Eq(lang_key, Wikidata_get_label_xowa_ui_lang))
@@ -170,7 +172,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		catch (Exception e) {Err_.Noop(e); return null;}
 		return Object_.Xto_str_strict_or_empty(rv);
 	}
-	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_a7("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_a7("xowa_title");
+	private static final    byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_a7("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_a7("xowa_title");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_parse_to_html))						return Parse_to_html(m);
 		else if	(ctx.Match(k, Invk_wikidata_get_label))					return Wikidata_get_label(m);
@@ -188,7 +190,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__bridge_mgr().Cmd_mgr().Exec(m);
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
-	public static final String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
+	public static final    String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
 	, Invk_get_search_suggestions = "get_search_suggestions", Invk_get_titles_meta = "get_titles_meta", Invk_get_titles_exists = "get_titles_exists", Invk_get_current_url = "get_current_url"
 	, Invk_xowa_exec_test = "xowa_exec_test", Invk_xowa_exec_test_as_array = "xowa_exec_test_as_array"
 	, Invk_popups_get_async_bgn = "popups_get_async_bgn"

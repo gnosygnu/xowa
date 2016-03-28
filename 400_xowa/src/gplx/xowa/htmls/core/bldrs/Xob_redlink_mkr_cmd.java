@@ -29,20 +29,21 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		wiki.Init_assert();
 		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
-		Xob_db_file link_dump_db = Xob_db_file.new__redlink(wiki.Fsys_mgr().Root_dir());
-		Db_attach_rdr attach_rdr = new Db_attach_rdr(link_dump_db.Conn(), "page_db", core_db.Url());
-		attach_rdr.Attach();
+		Xob_db_file link_dump_db = Xob_db_file.New__redlink(wiki.Fsys_mgr().Root_dir());
+		Db_attach_mgr attach_mgr = new Db_attach_mgr(link_dump_db.Conn(), new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
+		String attach_sql = attach_mgr.Resolve_sql(Sql_select_clause);
+		attach_mgr.Attach();
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
 		int cur_html_db_id = -1, cur_page_id = -1;
-		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.Conn());
-		Db_rdr rdr = attach_rdr.Exec_as_rdr(Sql_select_itm);			
+		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.conn);
+		Db_rdr rdr = link_dump_db.Conn().Exec_rdr(attach_sql);
 		try {
 			while (rdr.Move_next()) {
 				// switch html_db if needed
 				int html_db_id = rdr.Read_int(page_tbl.Fld_html_db_id());
 				if (html_db_id != cur_html_db_id) {
 					if (redlink_tbl != null) redlink_tbl.Conn().Txn_end();
-					// redlink_tbl = wiki.Data__core_mgr().Dbs__get_at(html_db_id).Tbl__html_redlink();
+					// redlink_tbl = wiki.Data__core_mgr().Dbs__get_by_id(html_db_id).Tbl__html_redlink();
 					redlink_tbl.Conn().Txn_bgn("bldr__redlink");
 					cur_html_db_id = html_db_id;
 				}
@@ -61,7 +62,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		finally {rdr.Rls();}
 		Commit(redlink_tbl, cur_page_id, bfr);	// commit cur page
 		redlink_tbl.Conn().Txn_end();				// close cur tbl
-		attach_rdr.Detach();
+		attach_mgr.Detach();
 	}
 	private void Commit(Xoh_redlink_tbl redlink_tbl, int cur_page_id, Bry_bfr bfr) {
 		redlink_tbl.Insert(cur_page_id, bfr.To_bry_and_clear());
@@ -69,12 +70,12 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if ((commit_count % commit_interval ) == 0)
 			redlink_tbl.Conn().Txn_sav();
 	}
-	private static final String Sql_select_itm = String_.Concat_lines_nl_skip_last
+	private static final String Sql_select_clause = String_.Concat_lines_nl_skip_last
 	( "SELECT p.page_html_db_id"
 	, ",      p.page_id"
 	, ",      ld.src_html_uid"
 	, "FROM   link_dump ld"
-	, "	   JOIN <attach_db>page p ON p.page_id = ld.src_page_id "
+	, "	   JOIN <page_db>page p ON p.page_id = ld.src_page_id "
 	, "WHERE  ld.trg_page_id = -1"
 	, "ORDER BY p.page_html_db_id, p.page_id"
 	, ";"

@@ -26,7 +26,7 @@ public class Gdif_cmd_tbl implements Rls_able {
 		fld_grp_id = flds.Add_int("grp_id"); fld_cmd_id = flds.Add_int("cmd_id"); fld_tid = flds.Add_int("tid"); fld_data = flds.Add_text("data");
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_grp_id, fld_cmd_id)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_grp_id, fld_cmd_id)));}
 	public Gdif_cmd_itm Insert(int grp_id, int cmd_id, int tid, String data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

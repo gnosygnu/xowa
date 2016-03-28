@@ -102,7 +102,6 @@ public class Gfh_utl {
 		else
 			return dirty ? bfr.To_bry_and_clear() : bry;
 	}
-
 	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Gfh_entity_.Lt_bry		, Byte_ascii.Lt)
 	.Add_bry_byte(Gfh_entity_.Gt_bry		, Byte_ascii.Gt)

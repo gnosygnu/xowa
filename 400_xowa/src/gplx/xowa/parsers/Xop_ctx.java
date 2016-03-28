@@ -164,7 +164,7 @@ public class Xop_ctx {
 				case Xop_tkn_itm_.Tid_xnde:
 					Xop_xnde_tkn xnde_tkn = (Xop_xnde_tkn)tkn;
 					switch (xnde_tkn.Tag().Id()) {
-						case Xop_xnde_tag_.Tid_table:
+						case Xop_xnde_tag_.Tid__table:
 							return (Xop_tblw_tkn)tkn;
 					}
 					break;
@@ -185,11 +185,11 @@ public class Xop_ctx {
 				case Xop_tkn_itm_.Tid_xnde:
 					Xop_xnde_tkn xnde_tkn = (Xop_xnde_tkn)tkn;
 					switch (xnde_tkn.Tag().Id()) {
-						case Xop_xnde_tag_.Tid_table:
-						case Xop_xnde_tag_.Tid_tr:
-						case Xop_xnde_tag_.Tid_td:
-						case Xop_xnde_tag_.Tid_th:
-						case Xop_xnde_tag_.Tid_caption:
+						case Xop_xnde_tag_.Tid__table:
+						case Xop_xnde_tag_.Tid__tr:
+						case Xop_xnde_tag_.Tid__td:
+						case Xop_xnde_tag_.Tid__th:
+						case Xop_xnde_tag_.Tid__caption:
 							return (Xop_tblw_tkn)tkn;
 					}
 					break;

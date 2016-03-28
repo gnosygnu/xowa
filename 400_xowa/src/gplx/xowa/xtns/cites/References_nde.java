@@ -33,7 +33,7 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner {
 		if (ctx.Tid_is_popup()) return;
 		Ref_itm_mgr ref_mgr = ctx.Page().Ref_mgr();
 		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
-		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
+		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();

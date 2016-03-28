@@ -29,7 +29,7 @@ public class Fsm_atr_tbl {
 		this.fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
 		this.fld_url				= flds.Add_str		(fld_prefix + "url", 255);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Fsm_atr_fil Select_1st_or_fail(Fsm_mnt_itm mnt_itm, Fsdb_db_mgr core_mgr, int mnt_id, boolean schema_thm_page) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		boolean schema_is_1 = core_mgr.File__schema_is_1();
@@ -47,7 +47,7 @@ public class Fsm_atr_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		throw Err_.new_wo_type("missing atr db", "conn", conn.Conn_info().Xto_api());
+		throw Err_.new_wo_type("missing atr db", "conn", conn.Conn_info().Db_api());
 	}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();

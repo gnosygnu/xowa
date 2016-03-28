@@ -36,7 +36,7 @@ public class Wdata_doc_wtr {
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = (KeyVal)list.Get_at(i);
+			Keyval kv = (Keyval)list.Get_at(i);
 			wtr.Kv(i != 0, Bry_.new_u8(kv.Key()), Bry_.new_u8(kv.Val_to_str_or_empty()));
 		}
 		wtr.Nde_end();
@@ -49,7 +49,7 @@ public class Wdata_doc_wtr {
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
 			if (i != 0) wtr.Comma();
-			KeyVal kv = (KeyVal)list.Get_at(i);
+			Keyval kv = (Keyval)list.Get_at(i);
 			wtr.Key(false, Bry_.new_u8(kv.Key()));												// write key;	EX: enwiki:
 			wtr.Nde_bgn();																			// bgn nde;		EX: {
 			wtr.Kv(false, Wdata_doc_parser_v1.Bry_name, Bry_.new_u8(kv.Val_to_str_or_empty()));	// write name;	EX:   name=Earth

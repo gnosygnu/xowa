@@ -28,8 +28,8 @@ public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.title.lua")
-			, KeyVal_.new_("thisTitle", "")					// NOTE: pass blank; will be updated by GetCurrentTitle
-			, KeyVal_.new_("NS_MEDIA", Xow_ns_.Tid__media)	// NOTE: MW passes down NS_MEDIA; this should be -2 on all wikis...
+			, Keyval_.new_("thisTitle", "")					// NOTE: pass blank; will be updated by GetCurrentTitle
+			, Keyval_.new_("NS_MEDIA", Xow_ns_.Tid__media)	// NOTE: MW passes down NS_MEDIA; this should be -2 on all wikis...
 			);
 		notify_page_changed_fnc = mod.Fncs_get_by_key("notify_page_changed");
 		return mod;
@@ -73,7 +73,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit; matches MW logic
 		return rslt.Init_obj(GetInexpensiveTitleData(ttl));
 	}
-	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), KeyVal_.Ary_empty);}
+	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetUrl(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ttl_bry = args.Pull_bry(0);
@@ -141,11 +141,11 @@ public class Scrib_lib_title implements Scrib_lib {
 			ttl_redirect = tmp_db_page.Redirected();
 			ttl_id = tmp_db_page.Id();
 		}
-		KeyVal[] rv = new KeyVal[4];
-		rv[ 0] = KeyVal_.new_("isRedirect"			, ttl_redirect);						// title.isRedirect
-		rv[ 1] = KeyVal_.new_("id"					, ttl_id);								// $title->getArticleID(),
-		rv[ 2] = KeyVal_.new_("contentModel"		, Key_wikitexet);						// $title->getContentModel(); see Defines.php and CONTENT_MODEL_
-		rv[ 3] = KeyVal_.new_("exists"				, ttl_exists);							// $ret['id'] > 0; TODO: if Special: check regy of implemented pages
+		Keyval[] rv = new Keyval[4];
+		rv[ 0] = Keyval_.new_("isRedirect"			, ttl_redirect);						// title.isRedirect
+		rv[ 1] = Keyval_.new_("id"					, ttl_id);								// $title->getArticleID(),
+		rv[ 2] = Keyval_.new_("contentModel"		, Key_wikitexet);						// $title->getContentModel(); see Defines.php and CONTENT_MODEL_
+		rv[ 3] = Keyval_.new_("exists"				, ttl_exists);							// $ret['id'] > 0; TODO: if Special: check regy of implemented pages
 		return rslt.Init_obj(rv);
 	}
 	public boolean GetFileInfo(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -158,20 +158,20 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (ttl.Ns().Id_is_media()) ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
 		// Xoae_page file_page = Pfunc_filepath.Load_page(wiki, ttl);	// EXPENSIVE
 		// boolean exists = !file_page.Missing();
-		// if (!exists) return rslt.Init_obj(KeyVal_.Ary(KeyVal_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
+		// if (!exists) return rslt.Init_obj(Keyval_.Ary(Keyval_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
 		// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 		Xof_orig_itm itm = wiki.File__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
 		if (itm == Xof_orig_itm.Null) return rslt.Init_obj(GetFileInfo_absent);
-		KeyVal[] rv = KeyVal_.Ary
-		( KeyVal_.new_("exists"		, true)
-		, KeyVal_.new_("width"		, itm.W())
-		, KeyVal_.new_("height"		, itm.H())
-		, KeyVal_.new_("pages"		, null)	// TODO: get pages info
+		Keyval[] rv = Keyval_.Ary
+		( Keyval_.new_("exists"		, true)
+		, Keyval_.new_("width"		, itm.W())
+		, Keyval_.new_("height"		, itm.H())
+		, Keyval_.new_("pages"		, null)	// TODO: get pages info
 		);
 		return rslt.Init_obj(rv);
 	}
-	private static final KeyVal[] GetFileInfo_absent = KeyVal_.Ary(KeyVal_.new_("exists", false));
+	private static final Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false));
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
@@ -204,8 +204,8 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_obj(CascadingProtection_rv);
 	}
-	public static final KeyVal[] CascadingProtection_rv = KeyVal_.Ary(KeyVal_.new_("sources", Bool_.N), KeyVal_.new_("restrictions", KeyVal_.Ary_empty));
-	private KeyVal[] GetInexpensiveTitleData(Xoa_ttl ttl) {
+	public static final Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Bool_.N), Keyval_.new_("restrictions", Keyval_.Ary_empty));
+	private Keyval[] GetInexpensiveTitleData(Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		boolean ns_file_or_media = ns.Id_is_file_or_media(), ns_special = ns.Id_is_special();
 		int rv_len = 7, rv_idx = 7;
@@ -213,18 +213,18 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (!ns_file_or_media) ++rv_len;
 		Xow_xwiki_itm xwiki_itm = ttl.Wik_itm();
 		String xwiki_str = xwiki_itm == null ? "" : xwiki_itm.Key_str();
-		KeyVal[] rv = new KeyVal[rv_len];
-		rv[ 0] = KeyVal_.new_("isLocal"				, true);										// title.isLocal; NOTE: always true; passing "http:" also returns true; not sure how to handle "Interwiki::fetch( $this->mInterwiki )->isLocal()"
-		rv[ 1] = KeyVal_.new_("interwiki"			, xwiki_str);									// $title->getInterwiki(),
-		rv[ 2] = KeyVal_.new_("namespace"		, ns.Id());										// $ns,
-		rv[ 3] = KeyVal_.new_("nsText"				, Xow_ns_canonical_.To_canonical_or_local_as_str(ns)); // $title->getNsText(), NOTE: needed b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
-		rv[ 4] = KeyVal_.new_("text"				, ttl.Page_txt());								// $title->getText(),
-		rv[ 5] = KeyVal_.new_("fragment"			, ttl.Anch_txt());								// $title->getFragment(),
-		rv[ 6] = KeyVal_.new_("thePartialUrl"		, ttl.Page_db());								// $title->getPartialUrl(),
+		Keyval[] rv = new Keyval[rv_len];
+		rv[ 0] = Keyval_.new_("isLocal"				, true);										// title.isLocal; NOTE: always true; passing "http:" also returns true; not sure how to handle "Interwiki::fetch( $this->mInterwiki )->isLocal()"
+		rv[ 1] = Keyval_.new_("interwiki"			, xwiki_str);									// $title->getInterwiki(),
+		rv[ 2] = Keyval_.new_("namespace"		, ns.Id());										// $ns,
+		rv[ 3] = Keyval_.new_("nsText"				, Xow_ns_canonical_.To_canonical_or_local_as_str(ns)); // $title->getNsText(), NOTE: needed b/c some modules expect English "Template"; PAGE:sh.w:Koprno DATE:2015-11-08
+		rv[ 4] = Keyval_.new_("text"				, ttl.Page_txt());								// $title->getText(),
+		rv[ 5] = Keyval_.new_("fragment"			, ttl.Anch_txt());								// $title->getFragment(),
+		rv[ 6] = Keyval_.new_("thePartialUrl"		, ttl.Page_db());								// $title->getPartialUrl(),
 		if (ns_special)
-			rv[rv_idx++] = KeyVal_.new_("exists"	, false);										// TODO: lookup specials
+			rv[rv_idx++] = Keyval_.new_("exists"	, false);										// TODO: lookup specials
 		if (!ns_file_or_media)
-			rv[rv_idx++] = KeyVal_.new_("file"		, false);										// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
+			rv[rv_idx++] = Keyval_.new_("file"		, false);										// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
 	}	private static final Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
 	public static final String Key_wikitexet = "wikitext";

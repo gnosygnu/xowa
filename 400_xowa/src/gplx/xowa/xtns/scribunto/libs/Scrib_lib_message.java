@@ -42,20 +42,20 @@ public class Scrib_lib_message implements Scrib_lib {
 	private static final int Proc_plain = 0, Proc_check = 1, Proc_init_message_for_lang = 2;
 	public static final String Invk_plain = "plain", Invk_check = "check", Invk_init_message_for_lang = "init_message_for_lang";
 	private static final String[] Proc_names = String_.Ary(Invk_plain, Invk_check, Invk_init_message_for_lang);
-	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), KeyVal_.Ary_empty);}
+	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean Plain(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte fmt_tid = Scrib_lib_message_data.Fmt_tid_plain;
-		KeyVal[] data_kvary = args.Pull_kv_ary(0);
+		Keyval[] data_kvary = args.Pull_kv_ary(0);
 		Scrib_lib_message_data msg_data = new Scrib_lib_message_data().Parse(data_kvary); 
 		return rslt.Init_obj(String_.new_u8(msg_data.Make_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), true, fmt_tid)));
 	}
 	public boolean Check(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte chk_tid = Scrib_lib_message_data.parse_chk_(args.Pull_bry(0));
-		KeyVal[] data_kvary = args.Pull_kv_ary(1);
+		Keyval[] data_kvary = args.Pull_kv_ary(1);
 		Scrib_lib_message_data msg_data = new Scrib_lib_message_data().Parse(data_kvary);
 		return rslt.Init_obj(msg_data.Chk_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), false, chk_tid));
 	}
-	public boolean Init_message_for_lang(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(KeyVal_.new_("lang", core.Wiki().Lang().Key_str()));}
+	public boolean Init_message_for_lang(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(Keyval_.new_("lang", core.Wiki().Lang().Key_str()));}
 }
 class Scrib_lib_message_data {
 	public boolean Use_db() {return use_db;} private boolean use_db;
@@ -65,16 +65,16 @@ class Scrib_lib_message_data {
 	public byte[] Raw_msg_key() {return raw_msg_key;} private byte[] raw_msg_key;
 	public Object[] Args() {return args;} Object[] args;
 	public Xoa_ttl Ttl() {return ttl;} public Scrib_lib_message_data Ttl_(Xoa_ttl v) {ttl = v; return this;}  Xoa_ttl ttl;
-	public Scrib_lib_message_data Parse(KeyVal[] ary) {
+	public Scrib_lib_message_data Parse(Keyval[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			byte[] kv_key = Bry_.new_a7(kv.Key());
 			Object key_obj = key_hash.Get_by(kv_key); if (key_obj == null) throw Err_.new_wo_type("msg_key is invalid", "key", kv_key);
 			byte key_tid = ((Byte_obj_val)key_obj).Val();
 			switch (key_tid) {
 				case Key_tid_keys:
-					KeyVal[] keys_ary = (KeyVal[])kv.Val();
+					Keyval[] keys_ary = (Keyval[])kv.Val();
 					msg_key = keys_ary[0].Val_to_bry();
 					break; 
 				case Key_tid_rawMessage:	raw_msg_key = kv.Val_to_bry(); break;
@@ -82,7 +82,7 @@ class Scrib_lib_message_data {
 				case Key_tid_useDB:			use_db = Bool_.cast(kv.Val()); break;
 				case Key_tid_title:			title_bry = kv.Val_to_bry(); break;
 				case Key_tid_params:
-					KeyVal[] args_ary = (KeyVal[])kv.Val();
+					Keyval[] args_ary = (Keyval[])kv.Val();
 					int args_ary_len = args_ary.length;
 					args = new String[args_ary_len];
 					for (int j = 0; j < args_ary_len; j++)

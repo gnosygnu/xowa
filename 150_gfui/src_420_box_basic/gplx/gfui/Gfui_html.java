@@ -33,7 +33,7 @@ public class Gfui_html extends GfuiElemBase {
 		this.Html_doc_html_load_by_mem(v);
 		return this;
 	}
-	public static Gfui_html kit_(Gfui_kit kit, String key, Gxw_html under, KeyValHash ctorArgs) {
+	public static Gfui_html kit_(Gfui_kit kit, String key, Gxw_html under, Keyval_hash ctorArgs) {
 		Gfui_html rv = new Gfui_html();
 		rv.ctor_kit_GfuiElemBase(kit, key, (GxwElem)under, ctorArgs);
 		rv.under = under;

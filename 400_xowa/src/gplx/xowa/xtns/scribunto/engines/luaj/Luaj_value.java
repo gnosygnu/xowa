@@ -24,11 +24,11 @@ class Luaj_value_ {
 	public static LuaTable Get_val_as_lua_table(LuaTable owner, String key) {
 		return (LuaTable)owner.get(key);
 	}
-	public static KeyVal[] Get_val_as_kv_ary(Luaj_server server, LuaTable owner, String key) {
+	public static Keyval[] Get_val_as_kv_ary(Luaj_server server, LuaTable owner, String key) {
 		LuaTable table = (LuaTable)owner.get(key);
 		return Luaj_value_.X_tbl_to_kv_ary(server, table);
 	}
-	public static KeyVal[] X_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
+	public static Keyval[] X_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
 		List_adp temp = List_adp_.new_();
 		LuaValue cur = LuaValue.NIL;
 		int len = 0;
@@ -38,23 +38,23 @@ class Luaj_value_ {
 			LuaValue itm_val = itm.arg(2);						// val is itm 2
 			Object itm_val_obj = X_val_to_obj(server, itm_val);
 			LuaValue itm_key = itm.arg(1);
-			KeyVal kv = null;
+			Keyval kv = null;
 			if (itm_val.type() == LuaValue.TFUNCTION) {			// function is converted to Scrib_lua_proc
 				String func_key = itm_key.tojstring();
 				int func_id = Int_.cast(itm_val_obj);
 				Scrib_lua_proc lua_func = new Scrib_lua_proc(func_key, func_id);
 				if (itm_key.type() == LuaValue.TSTRING)			// most functions are named
-					kv = KeyVal_.new_(func_key, lua_func);
+					kv = Keyval_.new_(func_key, lua_func);
 				else											// some are not; particularly "anonymous" functions in Module for gsub_function; these will have a kv of int,int; note that key must be int; if string, lua will not be able to match it back to int later
-					kv = KeyVal_.int_(((LuaInteger)itm_key).v, lua_func);
+					kv = Keyval_.int_(((LuaInteger)itm_key).v, lua_func);
 			}
 			else {
 				switch (itm_key.type()) {
 					case LuaValue.TNUMBER:
-						kv = KeyVal_.int_(((LuaNumber)itm_key).toint(), itm_val_obj);
+						kv = Keyval_.int_(((LuaNumber)itm_key).toint(), itm_val_obj);
 						break;
 					case LuaValue.TSTRING:
-						kv = KeyVal_.new_(((LuaString)itm_key).tojstring(), itm_val_obj);
+						kv = Keyval_.new_(((LuaString)itm_key).tojstring(), itm_val_obj);
 						break;
 					default:
 						throw Err_.new_unhandled(itm_key.type());
@@ -64,8 +64,8 @@ class Luaj_value_ {
 			cur = itm_key;
 			++len;
 		}
-		if (len == 0) return KeyVal_.Ary_empty;
-		return (KeyVal[])temp.To_ary(KeyVal.class);
+		if (len == 0) return Keyval_.Ary_empty;
+		return (Keyval[])temp.To_ary(Keyval.class);
 	}
 	private static Object X_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {
@@ -91,16 +91,16 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);
 		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_u8((byte[])o));
-		else if	(Object_.Eq(c, KeyVal.class))				return X_kv_ary_to_tbl(server, (KeyVal)o);
-		else if	(Object_.Eq(c, KeyVal[].class))				return X_kv_ary_to_tbl(server, (KeyVal[])o);
+		else if	(Object_.Eq(c, Keyval.class))				return X_kv_ary_to_tbl(server, (Keyval)o);
+		else if	(Object_.Eq(c, Keyval[].class))				return X_kv_ary_to_tbl(server, (Keyval[])o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());
 		else return LuaValue.NIL; 
 	}
-	private static LuaTable X_kv_ary_to_tbl(Luaj_server server, KeyVal... ary) {
+	private static LuaTable X_kv_ary_to_tbl(Luaj_server server, Keyval... ary) {
 		LuaTable rv = LuaValue.tableOf();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal itm = ary[i];
+			Keyval itm = ary[i];
 			LuaValue itm_val = X_obj_to_val(server, itm.Val());
 			switch (itm.Key_tid()) {
 				case Type_adp_.Tid__int:

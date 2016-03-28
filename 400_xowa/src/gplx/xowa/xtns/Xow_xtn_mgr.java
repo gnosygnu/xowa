@@ -90,14 +90,14 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		byte[] xtn_key = mgr.Xtn_key();
 		Object o = xtn_tid_trie.Match_exact(xtn_key, 0, xtn_key.length); if (o == null) return;
 		switch (((Byte_obj_val)o).Val()) {
-			case Tid_cite:			xtn_cite = (Cite_xtn_mgr)mgr; break;
-			case Tid_sites:			xtn_sites = (Sites_xtn_mgr)mgr; break;
-			case Tid_insider:		xtn_insider = (Insider_xtn_mgr)mgr; break;
-			case Tid_indicator:		xtn_indicator= (Indicator_xtn_mgr)mgr; break;
-			case Tid_imap:			xtn_imap = (Imap_xtn_mgr)mgr; break;
-			case Tid_proofread:		xtn_proofread = (Pp_xtn_mgr)mgr; break;
-			case Tid_wikibase:		xtn_wikibase = (Wdata_xtn_mgr)mgr; break;
-			case Tid_pgbnr:			xtn_pgbnr = (Pgbnr_xtn_mgr)mgr; break;
+			case Tid_cite:			xtn_cite		= (Cite_xtn_mgr)mgr; break;
+			case Tid_sites:			xtn_sites		= (Sites_xtn_mgr)mgr; break;
+			case Tid_insider:		xtn_insider		= (Insider_xtn_mgr)mgr; break;
+			case Tid_indicator:		xtn_indicator	= (Indicator_xtn_mgr)mgr; break;
+			case Tid_imap:			xtn_imap		= (Imap_xtn_mgr)mgr; break;
+			case Tid_proofread:		xtn_proofread	= (Pp_xtn_mgr)mgr; break;
+			case Tid_wikibase:		xtn_wikibase	= (Wdata_xtn_mgr)mgr; break;
+			case Tid_pgbnr:			xtn_pgbnr		= (Pgbnr_xtn_mgr)mgr; break;
 		}
 	}
 	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6, Tid_pgbnr = 7;

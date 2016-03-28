@@ -18,15 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.drds.pages.*; import gplx.xowa.drds.files.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.specials.search.*; import gplx.xowa.specials.randoms.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.addons.searchs.searchers.rslts.*; import gplx.xowa.specials.randoms.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.addons.searchs.*; import gplx.xowa.addons.searchs.searchers.*;
+import gplx.xowa.langs.cases.*;
 public class Xod_app {
-	private final Xoav_app app;
-	private final Xod_page_mgr page_mgr = new Xod_page_mgr();
-	private final Xod_file_mgr file_mgr = new Xod_file_mgr();
+	private final    Xoav_app app;
+	private final    Xod_page_mgr page_mgr = new Xod_page_mgr();
+	private final    Xod_file_mgr file_mgr = new Xod_file_mgr();
+	private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr();
 	public Xod_app(Xoav_app app) {
 		this.app = app;
+		ns_mgr.Add_main_if_empty();
 	}
 	public Xow_wiki Wikis__get_by_domain(String wiki_domain) {
 		Xow_wiki rv = app.Wiki_mgri().Get_by_or_make_init_y(Bry_.new_u8(wiki_domain));
@@ -41,19 +45,10 @@ public class Xod_app {
 		Xoa_url url = wiki.Utl__url_parser().Parse(random_ttl_bry);
 		return Wiki__get_by_url(wiki, url);
 	}
-//		public String[] Wiki__search(Cancelable cancelable, Srch_rslt_lnr rslt_lnr, Xow_wiki wiki, String search) {
-//			Srch_db_wkr search_wkr = new Srch_db_wkr();
-//			Srch_rslt_itm[] rows = search_wkr.Search_by_drd(cancelable, wiki, ui_async, Bry_.new_u8(search), 50);
-//			int len = rows.length;
-//			String[] rv = new String[len];
-//			for (int i = 0; i < len; ++i) {
-//				rv[i] = String_.new_u8(rows[i].page_ttl.Page_txt());
-//			}
-//			return rv;
-//		}
-	public void Wiki__search(Cancelable cancelable, Srch_rslt_lnr rslt_lnr, Xow_wiki wiki, String search, Xod_search_cmd[] cmds) {
-		for (Xod_search_cmd cmd : cmds)
-			cmd.Search(cancelable, rslt_lnr, wiki, search);
+	public void Wiki__search(Cancelable cxl, Srch_rslt_cbk cbk, Xow_wiki wiki, String search, int bgn, int end) {
+		Srch_search_addon addon = Get_addon(wiki);
+		Srch_search_qry qry = Srch_search_qry.New__drd(wiki, ns_mgr, Bry_.new_u8(search), bgn, end);
+		addon.Search(qry, cbk);
 	}
 	public void Page__load_files(Xow_wiki wiki, Xod_page_itm pg, Xog_js_wkr js_wkr) {
 		file_mgr.Load_files(wiki, pg, js_wkr);
@@ -67,4 +62,5 @@ public class Xod_app {
 		page_bry = Xoa_ttl.Replace_spaces(page_bry);								// convert spaces to unders; canonical-url has spaces
 		return page_bry;
 	}
+	private Srch_search_addon Get_addon(Xow_wiki wiki) {return Srch_search_addon.Get(wiki);}
 }

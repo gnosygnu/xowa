@@ -36,7 +36,6 @@ public class Db_cfg_itm {
 	public String		To_str()						{Fail_if_null(); return val;}
 	private void		Fail_if_null()					{if (val == null) throw Err_.new_wo_type("cfg.val is empty", "grp", grp, "key", key); }
 	private Err			err_parse(Exception e, String type) {return Err_.new_wo_type("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type).Trace_ignore_add_1_();}
-
 	private static final String Grp_none = "";
 	public static		Db_cfg_itm new_str		(String key, String val)						{return new Db_cfg_itm(Grp_none	, key, val);}
 	public static		Db_cfg_itm new_str		(String grp, String key, String val)			{return new Db_cfg_itm(grp		, key, val);}
@@ -54,6 +53,5 @@ public class Db_cfg_itm {
 	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}
 	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.To_str());}
-
 	public static final Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
 }

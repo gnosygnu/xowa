@@ -51,13 +51,13 @@ class Prefs_html_wtr {
 		Write__nde_end(bfr);							// ">"
 	}
 	private void Write_select(Bry_bfr bfr, Gfh_nde hnde, int prop_idx, Object prop_val) {
-		KeyVal[] options_list = Get_select_options(hnde);
+		Keyval[] options_list = Get_select_options(hnde);
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__nde_end(bfr);							// ">"
 		bfr.Add_byte_nl();								// "\n"
 		int len = options_list.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal option = options_list[i];
+			Keyval option = options_list[i];
 			bfr.Add(Nde_stub_option_bgn);				// "  <option value='"
 			bfr.Add_str_u8(option.Key());				// "option_key"
 			bfr.Add_byte(Byte_ascii.Apos);				// "'"
@@ -99,11 +99,11 @@ class Prefs_html_wtr {
 		try {return prefs_mgr.Eval(tmp_bfr.To_bry_and_clear());}
 		catch (Exception e) {return Err_.Message_gplx_full(e);}
 	}
-	KeyVal[] Get_select_options(Gfh_nde hnde) {
+	Keyval[] Get_select_options(Gfh_nde hnde) {
 		byte[] options_list_key = hnde.Atrs_val_by_key_bry(Atr_key_xowa_prop_list);
 		tmp_bfr.Add(options_list_key).Add_byte(Byte_ascii.Semic);
-		try {return (KeyVal[])prefs_mgr.Eval(tmp_bfr.To_bry_and_clear());}
-		catch (Exception e) {Err_.Noop(e); return KeyVal_.Ary_empty;}
+		try {return (Keyval[])prefs_mgr.Eval(tmp_bfr.To_bry_and_clear());}
+		catch (Exception e) {Err_.Noop(e); return Keyval_.Ary_empty;}
 	}
 	private void Write__nde_end(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Gt);}
 	private void Write__id(Bry_bfr bfr, int prop_idx) {

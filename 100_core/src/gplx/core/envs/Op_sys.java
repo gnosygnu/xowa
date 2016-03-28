@@ -43,7 +43,7 @@ public class Op_sys {
 	public static final char Dir_spr_char_lnx = '\n';
 	public static final Op_sys Lnx = new_unx_flavor_(Tid_lnx, "linux", Bitness_32);
 	public static final Op_sys Osx = new_unx_flavor_(Tid_osx, "macosx", Bitness_32);
-	public static final Op_sys Drd = new_unx_flavor_(Tid_drd, "windows", Bitness_32);
+	public static final Op_sys Drd = new_unx_flavor_(Tid_drd, "android", Bitness_32);
 	public static final Op_sys Wnt = new_wnt_(Sub_tid_unknown, Bitness_32);
 	public static Op_sys Cur() {return cur_op_sys;} static Op_sys cur_op_sys = new_auto_identify_();
 	public static String Fsys_path_to_lnx(String v) {
@@ -54,6 +54,15 @@ public class Op_sys {
 	}
 	private static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Byte_ascii.Backslash	, Bool_.N);}
 	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Byte_ascii.Slash		, Bool_.Y);}
+	public static void Cur_(int tid) {
+		switch (tid) {
+			case Tid_wnt: cur_op_sys = Wnt; break;
+			case Tid_lnx: cur_op_sys = Lnx; break;
+			case Tid_osx: cur_op_sys = Osx; break;
+			case Tid_drd: cur_op_sys = Drd; break;
+			default: throw Err_.new_unhandled_default(tid);
+		}
+	} 
 		static final String GRP_KEY = "gplx.op_sys";
 //	public static Op_sys Cur_() {cur_op_sys = new_auto_identify_(); return cur_op_sys;}
 	static Op_sys new_auto_identify_() {

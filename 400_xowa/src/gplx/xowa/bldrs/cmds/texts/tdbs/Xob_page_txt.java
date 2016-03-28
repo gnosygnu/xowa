@@ -21,10 +21,9 @@ import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*; import gplx.xowa.wikis.tdbs.stats.*;
-public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
+public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
 	public Xob_page_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return Xob_cmd_keys.Key_tdb_make_page;}
-	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {
 		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.Appe().Setup_mgr().Dump_mgr().Data_storage_format();
 		fsys_mgr = wiki.Tdb_fsys_mgr();			
@@ -62,7 +61,6 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		ttl_wtr_mgr.Rls_all();
 		if (delete_temp) Io_mgr.Instance.DeleteDirDeep(temp_dir);
 	}
-	public void Wkr_print() {bldr.Usr_dlg().Note_many(GRP_KEY, "print", "~{0}", stat_mgr.Print(wiki.Ns_mgr()));}
 	Xob_xdat_file_wtr Page_wtr_get(Xow_ns ns) {
 		Xob_xdat_file_wtr rv = page_wtr_regy[ns.Ord()];
 		if (rv == null) {

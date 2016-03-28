@@ -202,7 +202,7 @@ public class Xol_lang_srl_tst {
 }
 class Xol_lang_srl_fxt {
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
+		app = Xoa_app_fxt.Make__app__edit();
 		lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
 	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

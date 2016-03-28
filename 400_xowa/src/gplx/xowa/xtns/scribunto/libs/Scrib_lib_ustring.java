@@ -29,8 +29,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.ustring.lua")
-			, KeyVal_.new_("stringLengthLimit", string_len_max)
-			, KeyVal_.new_("patternLengthLimit", pattern_len_max)
+			, Keyval_.new_("stringLengthLimit", string_len_max)
+			, Keyval_.new_("patternLengthLimit", pattern_len_max)
 			);
 		return mod;
 	}
@@ -145,18 +145,18 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text = args.Xstr_str_or_null(0); // NOTE: UstringLibrary.php!ustringGmatchCallback calls preg_match directly; $s can be any type, and php casts automatically; 
 		String regx = args.Pull_str(1);
-		KeyVal[] capt = args.Cast_kv_ary_or_null(2);
+		Keyval[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
 		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 		Regx_match[] regx_rslts = regx_adp.Match_all(text, pos);
 		int len = regx_rslts.length;
-		if (len == 0) return rslt.Init_many_objs(pos, KeyVal_.Ary_empty);
+		if (len == 0) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
 		Regx_match match = regx_rslts[0];	// NOTE: take only 1st result
 		List_adp tmp_list = List_adp_.new_();
 		AddCapturesFromMatch(tmp_list, match, text, capt, true);	// NOTE: was incorrectly set as false; DATE:2014-04-23
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
 	}
-	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, KeyVal[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
+	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, Keyval[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
 		Regx_group[] grps = rslt.Groups();
 		int grps_len = grps.length;
 		int capts_len = capts == null ? 0 : capts.length;
@@ -215,16 +215,16 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_string;
 			tmp_repl_bry = Bry_.new_u8(Int_.To_str(Int_.cast(repl_obj)));
 		}
-		else if	(Object_.Eq(repl_type, KeyVal[].class)) {
+		else if	(Object_.Eq(repl_type, Keyval[].class)) {
 			tmp_repl_tid = Repl_tid_table;
-			KeyVal[] repl_tbl = (KeyVal[])repl_obj;
+			Keyval[] repl_tbl = (Keyval[])repl_obj;
 			if (repl_hash == null) 
 				repl_hash = Hash_adp_.new_();
 			else
 				repl_hash.Clear();
 			int repl_tbl_len = repl_tbl.length;
 			for (int i = 0; i < repl_tbl_len; i++) {
-				KeyVal repl_itm = repl_tbl[i];
+				Keyval repl_itm = repl_tbl[i];
 				String repl_itm_val = repl_itm.Val_to_str_or_empty();
 				repl_hash.Add(repl_itm.Key(), Bry_.new_u8(repl_itm_val));
 			}
@@ -326,7 +326,7 @@ class Scrib_lib_ustring_gsub_mgr {
 				break;
 			}
 			case Repl_tid_luacbk: {
-				KeyVal[] luacbk_args = null;
+				Keyval[] luacbk_args = null;
 				Regx_group[] grps = match.Groups();
 				int grps_len = grps.length;
 				if (grps_len == 0) {	// no match; use original String
@@ -334,14 +334,14 @@ class Scrib_lib_ustring_gsub_mgr {
 					luacbk_args = Scrib_kv_utl_.base1_obj_(find_str);
 				}
 				else {					// match; build ary of matches; (see UStringLibrary.php)
-					luacbk_args = new KeyVal[grps_len];
+					luacbk_args = new Keyval[grps_len];
 					for (int i = 0; i < grps_len; i++) {
 						Regx_group grp = grps[i];
 						String find_str = String_.Mid(text, grp.Bgn(), grp.End());
-						luacbk_args[i] = KeyVal_.int_(i + Scrib_core.Base_1, find_str);
+						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, find_str);
 					}
 				}
-				KeyVal[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
+				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
 				tmp_bfr.Add_str_u8(Scrib_kv_utl_.Val_to_str(rslts, 0));
 				break;
 			}

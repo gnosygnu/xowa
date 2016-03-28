@@ -23,7 +23,7 @@ public class Scrib_regx_converter {
 	public Scrib_regx_converter() {Init();}
 	public String Regx() {return regx;} private String regx;
 	public List_adp Capt_list() {return capt_list;}
-	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.To_ary(KeyVal.class);}
+	public Keyval[] Capt_ary() {return capt_list.Count() == 0 ? null : (Keyval[])capt_list.To_ary(Keyval.class);}
 	private Bry_fmtr fmtr_balanced; private Bry_bfr bfr_balanced;
 	public String Parse(byte[] src, byte[] anchor) {
 		int len = src.length;
@@ -48,7 +48,7 @@ public class Scrib_regx_converter {
 					if (i + 1 >= len) throw Err_.new_wo_type("Unmatched open-paren at pattern character " + Int_.To_str(i));
 					boolean capt_itm = src[i + 1] == Byte_ascii.Paren_end;	// current is "()" 						
 					++grps_len;
-					capt_list.Add(KeyVal_.int_(grps_len, capt_itm));
+					capt_list.Add(Keyval_.int_(grps_len, capt_itm));
 					bfr.Add_byte(Byte_ascii.Paren_bgn);
 					grps_open.Add(grps_len);
 					grps_parens.Add(i + 1);
@@ -99,7 +99,6 @@ public class Scrib_regx_converter {
 							case Byte_ascii.Ltr_f: {	// EX: lua frontier pattern; "%f[%a]"; DATE:2015-07-21
 								++i;
 								if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
-
 								// %f always followed by bracketed term; convert lua bracketed term to regex
 								Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 								i = bracketedCharSetToRegex(tmp_bfr, src, i, len);

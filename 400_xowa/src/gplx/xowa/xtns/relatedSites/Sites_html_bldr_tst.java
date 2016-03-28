@@ -41,8 +41,8 @@ class Sites_html_bldr_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page;
 	private Sites_xtn_mgr xtn_mgr;
 	public void Clear() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xop_fxt.Init_msg(wiki, "relatedsites-title", "Related sites");
 		this.xtn_mgr = wiki.Xtn_mgr().Xtn_sites();
 		xtn_mgr.Enabled_y_();

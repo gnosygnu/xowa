@@ -21,9 +21,9 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.
 import gplx.xowa.wikis.nss.*;
 public class Xoctg_html_mgr implements GfoInvkAble {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
-	private final Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
-	private final Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
-	private final Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
+	private final    Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
+	private final    Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
+	private final    Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
 	public Xoctg_data_cache Data_cache() {return data_cache;} private Xoctg_data_cache data_cache = new Xoctg_data_cache(); 
 	public void Bld_html(Xowe_wiki wiki, Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
@@ -36,7 +36,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
 			tmp_bfr.Mkr_rls();
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt()), Err_.Message_gplx_full(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt_w_ttl_case()), Err_.Message_gplx_full(e));
 		}
 	}	private Xoctg_url url_ctg = new Xoctg_url();
 	private void Bld_html_v2(Xowe_wiki wiki, Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr) {
@@ -72,7 +72,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			}
 			itm.Set__ttl__sortkey(itm_ttl, itm.Sort_key());
 		}
-	}	List_adp title_list = List_adp_.new_(); static final byte[] Bry_missing = Bry_.new_a7("missing");
+	}	List_adp title_list = List_adp_.new_(); static final    byte[] Bry_missing = Bry_.new_a7("missing");
 	private void Add_titles(List_adp title_list, Xoctg_view_grp grp) {
 		int len = grp.Itms().length;
 		for (int i = 0; i < len; i++) {
@@ -124,7 +124,7 @@ class Xoctg_view_itm_sorter_id implements gplx.core.lists.ComparerAble {
 		Xoctg_view_itm rhs = (Xoctg_view_itm)rhsObj;
 		return Int_.Compare(lhs.Page_id(), rhs.Page_id());
 	}
-	public static final Xoctg_view_itm_sorter_id Instance = new Xoctg_view_itm_sorter_id(); 
+	public static final    Xoctg_view_itm_sorter_id Instance = new Xoctg_view_itm_sorter_id(); 
 }
 class Xoctg_view_itm_sorter_sortkey implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -132,5 +132,5 @@ class Xoctg_view_itm_sorter_sortkey implements gplx.core.lists.ComparerAble {
 		Xoctg_view_itm rhs = (Xoctg_view_itm)rhsObj;
 		return Bry_.Compare(lhs.Sort_key(), rhs.Sort_key());
 	}
-	public static final Xoctg_view_itm_sorter_sortkey Instance = new Xoctg_view_itm_sorter_sortkey(); 
+	public static final    Xoctg_view_itm_sorter_sortkey Instance = new Xoctg_view_itm_sorter_sortkey(); 
 }

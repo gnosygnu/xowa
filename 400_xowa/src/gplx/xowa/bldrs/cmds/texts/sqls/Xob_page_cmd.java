@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.dbs.*; 
 import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.parsers.utils.*;
-public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInvkAble {
+public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, GfoInvkAble {
 	private Xowd_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;
 	private DateAdp modified_latest = DateAdp_.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k				
@@ -72,7 +72,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		++page_count_all;
 		if (ns.Id_is_main() && !page.Redirected()) ++page_count_main;
 		if (page_count_all % commit_interval == 0) {
-			page_core_tbl.Conn().Txn_sav(); text_db.Conn().Txn_sav();
+			page_core_tbl.conn.Txn_sav(); text_db.Conn().Txn_sav();
 			if (redirect_id_enabled) redirect_tbl.Conn().Txn_sav();
 			if (dg_match_mgr != null) dg_match_mgr.Commit();
 		}
@@ -91,7 +91,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		if (redirect_id_enabled) {
 			redirect_tbl.Conn().Txn_end();
 			redirect_tbl.Update_trg_redirect_id(db_core.Url(), 1);
-			redirect_tbl.Update_src_redirect_id(db_core.Url(), page_core_tbl.Conn());
+			redirect_tbl.Update_src_redirect_id(db_core.Url(), page_core_tbl.conn);
 		}
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -102,6 +102,4 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		return this;
 	}
 	private static final String Invk_commit_interval_ = "commit_interval_", Invk_idx_mode_ = "idx_mode_", Invk_redirect_id_enabled_ = "redirect_id_enabled_";
-	public void Wkr_ini(Xob_bldr bldr) {}
-	public void Wkr_print() {}
 }

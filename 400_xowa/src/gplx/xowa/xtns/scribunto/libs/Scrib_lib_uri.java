@@ -29,7 +29,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		notify_page_changed_fnc = mod.Fncs_get_by_key("notify_page_changed");
 		return mod;
 	}	private Scrib_lua_proc notify_page_changed_fnc;
-	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), KeyVal_.Ary_empty);}
+	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {

@@ -21,8 +21,8 @@ public class Sql_where_wtr {
 	private final Sql_core_wtr qry_wtr;
 	private final Sql_val_wtr val_wtr;
 	public Sql_where_wtr(Sql_core_wtr qry_wtr, Sql_val_wtr val_wtr) {this.qry_wtr = qry_wtr; this.val_wtr = val_wtr;}
-	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Sql_where_itm where_itm) {
-		if (where_itm == Sql_where_itm.Where__null) return;
+	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Sql_where_clause where_itm) {
+		if (where_itm == Sql_where_clause.Where__null) return;
 		Bld_where(bfr, ctx, where_itm.Root);
 	}
 	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria crt) {

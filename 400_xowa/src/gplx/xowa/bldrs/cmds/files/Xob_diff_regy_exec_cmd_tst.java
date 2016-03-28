@@ -25,8 +25,8 @@ public class Xob_diff_regy_exec_cmd_tst {
 		fxt.Test_parse_url("/file/enwiki-001-atr.sql", "enwiki", 1, Fsdb_db_tid_.Tid_atr);
 	}
 //		@Test  public void Smoke() {
-//			Xoae_app app = Xoa_app_fxt.app_(Io_url_.new_dir_("C:\\xowa\\"), "wnt");
-//			Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+//			Xoae_app app = Xoa_app_fxt.Make__app__edit(Io_url_.new_dir_("C:\\xowa\\"), "wnt");
+//			Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 //			Xob_diff_regy_make_cmd cmd = new Xob_diff_regy_make_cmd(app.Bldr(), wiki);
 //			cmd.Cmd_run();
 //		}

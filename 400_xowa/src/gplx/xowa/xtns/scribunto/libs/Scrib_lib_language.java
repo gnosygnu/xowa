@@ -78,7 +78,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	, Invk_formatNum, Invk_formatDate, Invk_formatDuration, Invk_getDurationIntervals, Invk_parseFormattedNumber
 	, Invk_convertPlural, Invk_convertGrammar, Invk_gender, Invk_isRTL
 	);
-	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), KeyVal_.Ary_empty);}
+	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetContLangCode(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(core.Ctx().Lang().Key_str());}
 	public boolean IsSupportedLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return IsKnownLanguageTag(args, rslt);}// NOTE: checks if "MessagesXX.php" exists; note that xowa has all "MessagesXX.php"; for now, assume same functionality as IsKnownLanguageTag (worst case is that a small wiki depends on a lang not being there; will need to put in a "wiki.Langs()" then)
 	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/Names.php
@@ -166,9 +166,9 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] num = args.Xstr_bry_or_null(1);
 		boolean skip_commafy = false;
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
-			KeyVal[] kv_ary = args.Cast_kv_ary_or_null(2);
+			Keyval[] kv_ary = args.Cast_kv_ary_or_null(2);
 			if (kv_ary != null) {
-				Object skip_commafy_obj = KeyVal_.Ary_get_by_key_or_null(kv_ary, "noCommafy");
+				Object skip_commafy_obj = Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy");
 				if (skip_commafy_obj != null)
 					skip_commafy = Bool_.cast(skip_commafy_obj);
 			}
@@ -212,7 +212,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean FormatDuration(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
-		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
+		Keyval[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		byte[] rv = lang.Duration_mgr().Format_durations(core.Ctx(), seconds, intervals);
 		return rslt.Init_obj(rv);
@@ -220,7 +220,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean GetDurationIntervals(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
-		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
+		Keyval[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		Xol_interval_itm[] rv = lang.Duration_mgr().Get_duration_intervals(seconds, intervals);
 		return rslt.Init_obj(Xol_interval_itm.Xto_kv_ary(rv));

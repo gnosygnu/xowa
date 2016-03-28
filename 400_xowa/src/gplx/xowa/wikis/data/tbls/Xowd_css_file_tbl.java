@@ -31,7 +31,7 @@ public class Xowd_css_file_tbl implements Rls_able {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int css_id, String path, byte[] data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear().Val_int(fld_css_id, css_id).Val_str(fld_path, path).Val_bry(fld_data, data).Exec_insert();

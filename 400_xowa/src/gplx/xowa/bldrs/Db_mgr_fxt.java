@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.wikis.ctgs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 public class Db_mgr_fxt {
@@ -32,7 +32,7 @@ public class Db_mgr_fxt {
 	public Xowd_page_itm doc_ttl_(int id, String title) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, "IGNORE");}
 	public Db_mgr_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
 	public Db_mgr_fxt Init_fil(Io_url url, String raw) {Io_mgr.Instance.SaveFilStr(url, raw); return this;}
-	public Db_mgr_fxt Exec_run(Xobd_wkr wkr)		{bldr_fxt.Run(wkr); return this;}
+	public Db_mgr_fxt Exec_run(Xob_page_wkr wkr)		{bldr_fxt.Run(wkr); return this;}
 	public Db_mgr_fxt Exec_run(Xob_cmd cmd)			{bldr_fxt.Run_cmds(cmd); return this;}
 	public Db_mgr_fxt Exec_run(Xobd_parser_wkr wkr) {bldr_fxt.Run(wkr); return this;}
 	public void Init_page_insert(Int_obj_ref page_id_next, int ns_id, String[] ttls) {
@@ -64,13 +64,6 @@ public class Db_mgr_fxt {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		wiki.Db_mgr_as_sql().Load_mgr().Load_page(actl.Id_(page_id), ns, false);
 		Tfds.Eq(expd, String_.new_a7(actl.Text()));
-	}
-	public void Test_search(String search_word_str, int... expd) {
-		Xowe_wiki wiki = bldr_fxt.Wiki();
-		List_adp rv = List_adp_.new_();
-		byte[] search_word_bry = Bry_.new_a7(search_word_str);
-		wiki.Db_mgr_as_sql().Load_mgr().Load_search(Cancelable_.Never, rv, search_word_bry, 100);
-		Tfds.Eq_ary(expd, Xto_int_ary(rv));
 	}
 	int[] Xto_int_ary(List_adp rslts) {
 		int len = rslts.Count();

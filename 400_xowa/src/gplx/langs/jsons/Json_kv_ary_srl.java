@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 public class Json_kv_ary_srl {
-	public static KeyVal Kv_by_itm(Json_itm itm) {
+	public static Keyval Kv_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
 			case Json_itm_.Tid__kv:
 				Json_kv kv = (Json_kv)itm;
-				return KeyVal_.new_(kv.Key_as_str(), Val_by_itm(kv.Val()));
+				return Keyval_.new_(kv.Key_as_str(), Val_by_itm(kv.Val()));
 			default:
 				throw Err_.new_unhandled(itm.Tid());
 		}
@@ -39,19 +39,19 @@ public class Json_kv_ary_srl {
 			default:						throw Err_.new_unhandled(itm.Tid());
 		}
 	}
-	private static KeyVal[] Val_by_itm_ary(Json_ary itm) {
+	private static Keyval[] Val_by_itm_ary(Json_ary itm) {
 		int subs_len = itm.Len();
-		KeyVal[] rv = new KeyVal[subs_len];
+		Keyval[] rv = new Keyval[subs_len];
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm sub = itm.Get_at(i);
-			KeyVal kv = KeyVal_.new_(Int_.To_str(i + Int_.Base1), Val_by_itm(sub));
+			Keyval kv = Keyval_.new_(Int_.To_str(i + Int_.Base1), Val_by_itm(sub));
 			rv[i] = kv;
 		}
 		return rv;
 	}
-	public static KeyVal[] Val_by_itm_nde(Json_nde itm) {
+	public static Keyval[] Val_by_itm_nde(Json_nde itm) {
 		int subs_len = itm.Len();
-		KeyVal[] rv = new KeyVal[subs_len];
+		Keyval[] rv = new Keyval[subs_len];
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm sub = itm.Get_at(i);
 			rv[i] = Kv_by_itm(sub);

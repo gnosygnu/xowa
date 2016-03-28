@@ -96,7 +96,6 @@ class Xodb_load_mgr_sql_fxt {
 		}
 		return bfr.To_str_and_clear();
 	}
-
 	public Xoctg_url_mok ctg_url_() {return new Xoctg_url_mok();}
 	public Xodb_load_mgr_sql_fxt Init_limit_(int v) {limit = v; return this;} private int limit = 3;
 	public void Test_select(Xoctg_url ctg_url, Xoctg_mok_ctg expd) {

@@ -44,7 +44,7 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 	private static final byte Missing_ctg_cls_normal_tid = 0, Missing_ctg_cls_hide_tid = 1, Missing_ctg_cls_red_tid = 2;
 	private static final String Missing_ctg_cls_normal_str = "normal", Missing_ctg_cls_hide_str = "hide", Missing_ctg_cls_red_str = "red_link";
 	private static final byte[] Missing_ctg_cls_normal_css = Bry_.new_a7(".xowa-missing-category-entry {}"), Missing_ctg_cls_hide_css = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Missing_ctg_cls_red_css = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
-	private static KeyVal[] Options_missing_ctg_cls_list = KeyVal_.Ary(KeyVal_.new_(Missing_ctg_cls_normal_str), KeyVal_.new_(Missing_ctg_cls_hide_str), KeyVal_.new_(Missing_ctg_cls_red_str)); 
+	private static Keyval[] Options_missing_ctg_cls_list = Keyval_.Ary(Keyval_.new_(Missing_ctg_cls_normal_str), Keyval_.new_(Missing_ctg_cls_hide_str), Keyval_.new_(Missing_ctg_cls_red_str)); 
 	private static byte Missing_ctg_cls_tid_parse(String v) {
 		if		(String_.Eq(v, Missing_ctg_cls_normal_str))		return Missing_ctg_cls_normal_tid;
 		else if	(String_.Eq(v, Missing_ctg_cls_hide_str))		return Missing_ctg_cls_hide_tid;

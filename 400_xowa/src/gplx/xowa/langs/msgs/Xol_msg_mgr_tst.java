@@ -34,8 +34,8 @@ public class Xol_msg_mgr_tst {
 class Xol_msg_mgr_fxt {
 	public Xol_msg_mgr_fxt Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			mgr = wiki.Msg_mgr();
 		}
 		mgr.Clear();

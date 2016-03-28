@@ -71,7 +71,7 @@ public class Xow_xwiki_mgr {
 	}
 	public void Add_itm(Xow_xwiki_itm itm) {
 		byte[] key_bry = itm.Key_bry();
-		if (wiki.Ns_mgr().Names_get_or_null(key_bry) != null) return;// NOTE: do not add xwiki if key matches namespace; EX: en.wiktionary.org has ns of "Wiktionary"; do not add key of "wiktionary"; note that wikipedia does have an key to wiktionary
+		if (wiki.Ns_mgr().Names_get_or_null(key_bry) != null) return;// NOTE: do not add xwiki if key matches Srch_rslt_cbk; EX: en.wiktionary.org has ns of "Wiktionary"; do not add key of "wiktionary"; note that wikipedia does have an key to wiktionary
 		list.Add_if_dupe_use_nth(key_bry, itm);		// NOTE: some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
 		hash.Add_if_dupe_use_nth(key_bry, itm);
 	}

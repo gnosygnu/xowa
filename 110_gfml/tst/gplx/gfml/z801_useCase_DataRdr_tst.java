@@ -58,7 +58,7 @@ public class z801_useCase_DataRdr_tst {
 		subRdr = rdr.Subs_byName_moveFirst("point");
 		fx_rdr.tst_Atrs(subRdr, kv_("x", "1"), kv_("y", "2"));
 	}
-	KeyVal kv_(String key, Object val) {return KeyVal_.new_(key, val);}
+	Keyval kv_(String key, Object val) {return Keyval_.new_(key, val);}
 	DataRdr_Fxt fx_rdr = DataRdr_Fxt.Instance;
 	DataRdr rdr, subRdr;
 }
@@ -71,8 +71,8 @@ class DataRdr_Fxt {
 		}
 		return rv;
 	}
-	@gplx.Internal protected void tst_Atrs(DataRdr rdr, KeyVal... expdAry) {
-		KeyVal[] actlAry = new KeyVal[rdr.FieldCount()];
+	@gplx.Internal protected void tst_Atrs(DataRdr rdr, Keyval... expdAry) {
+		Keyval[] actlAry = new Keyval[rdr.FieldCount()];
 		for (int i = 0; i < actlAry.length; i++)
 			actlAry[i] = rdr.KeyValAt(i);
 		Tfds.Eq_ary_str(expdAry, actlAry);

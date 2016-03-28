@@ -42,7 +42,7 @@ public class Fsd_fil_tbl implements Rls_able {
 		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds
+		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_name(tbl_name, idx_owner, fld_owner_id, fld_name, fld_id)
 		));
 	}

@@ -19,7 +19,7 @@ package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sq
 import gplx.core.type_xtns.*;
 abstract class Sql_select_fld_func extends Sql_select_fld {		public Sql_select_fld_func(String tbl, String fld, String alias) {super(tbl, fld, alias);}
 	public abstract String XtoSql_functionName();
-	@Override public String To_sql() {
+	@Override public String To_fld_sql() {
 		return String_.Format("{0}({1}) AS {2}", XtoSql_functionName(), Fld, Alias);
 	}
 }

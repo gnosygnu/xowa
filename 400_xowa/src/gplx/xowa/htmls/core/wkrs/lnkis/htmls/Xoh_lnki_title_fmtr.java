@@ -48,7 +48,7 @@ public class Xoh_lnki_title_fmtr implements gplx.core.brys.Bfr_arg {
 			default:	// all other tkns, just iterate over subs for txt tkns
 				if (tkn.Tkn_tid() == Xop_tkn_itm_.Tid_xnde) {
 					Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn; 
-					if (xnde.Tag().Id() == Xop_xnde_tag_.Tid_ref) {	// if ref, disable tkn
+					if (xnde.Tag().Id() == Xop_xnde_tag_.Tid__ref) {	// if ref, disable tkn
 						gplx.xowa.xtns.cites.Ref_nde ref_xnde = (gplx.xowa.xtns.cites.Ref_nde)xnde.Xnde_xtn();
 						ref_xnde.Exists_in_lnki_title_(true);	// ref found during html_title_wkr's generation; mark ref; will be ignored by references_html_wtr later; DATE:2014-03-05
 					}

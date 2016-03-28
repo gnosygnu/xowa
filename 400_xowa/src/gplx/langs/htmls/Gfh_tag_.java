@@ -105,8 +105,9 @@ public class Gfh_tag_ {
 	, Script_rhs				= Bry_.new_a7("</script>")
 	, Span_lhs					= Bry_.new_a7("<span")
 	, Span_rhs					= Bry_.new_a7("</span>")
+	, Strong_lhs				= Bry_.new_a7("<strong>")
+	, Strong_rhs				= Bry_.new_a7("</strong>")
 	;
-
 	public static final String 
 	  Comm_bgn_str				= "<!--"
 	, Comm_end_str				= "-->"

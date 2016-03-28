@@ -26,7 +26,7 @@ public class Xol_lnki_trail_mgr_tst {
 class Xol_lnki_trail_mgr_fxt {
 	Xol_lang_itm lang; Xol_lnki_trail_mgr lnki_trail_mgr;
 	public void Clear() {
-		Xoae_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fr"));
 		lnki_trail_mgr = lang.Lnki_trail_mgr();
 	}

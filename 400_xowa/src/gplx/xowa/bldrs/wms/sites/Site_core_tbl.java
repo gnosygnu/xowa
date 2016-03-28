@@ -32,7 +32,7 @@ public class Site_core_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv)));}
 	public void Rls() {
 		stmt_select = Db_stmt_.Rls(stmt_select);
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

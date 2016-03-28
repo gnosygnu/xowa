@@ -21,7 +21,7 @@ import gplx.core.primitives.*; import gplx.core.stores.*; import gplx.core.bits.
 public class IptKey_ {
 	private static EnmMgr enm_mgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
-	public static final IptKey[] Ary_empty = new IptKey[0];
+	public static final    IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
 	public static IptKey cast(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
 	public static IptKey add_(IptKey... ary) {
@@ -68,7 +68,7 @@ public class IptKey_ {
 		return rv;
 	}
 	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144;
-	public static final IptKey 
+	public static final    IptKey 
 	  None = new_(0, "none")
 	, Back = new_(8, "back"), Tab = new_(9, "tab"), Clear = new_(12, "clear"), Enter = new_(KeyEvent.VK_ENTER, "enter")	
 	, ShiftKey = new_(16, "shiftKey"), CtrlKey = new_(17, "ctrlKey"), AltKey = new_(18, "altKey")

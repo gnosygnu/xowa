@@ -37,7 +37,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	}
 	private static final int Proc_getGlobalSiteId = 0, Proc_formatPropertyValues = 1;
 	public static final String Invk_getGlobalSiteId = "getGlobalSiteId", Invk_formatPropertyValues = "formatPropertyValues";
-	private static final String[] Proc_names = String_.Ary(Invk_getGlobalSiteId, Invk_formatPropertyValues);
+	private static final    String[] Proc_names = String_.Ary(Invk_getGlobalSiteId, Invk_formatPropertyValues);
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
@@ -47,9 +47,9 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		Xoae_app app = core.App(); Xowe_wiki wiki = core.Wiki();
 		Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		byte[] lang = wiki.Wdata_wiki_lang();
-		Wdata_doc wdoc = wdata_mgr.Pages_get(qid); if (wdoc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid); return rslt.Init_str_empty();}	// NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
-		int pid_int = wdata_mgr.Pids__parse_as_int_or_null(pid);										// parse as num; EX: p123 -> 123; PAGE:hr.w:Hepatitis DATE:2015-11-08
-		if (pid_int == Wdata_wiki_mgr.Pid_null) pid_int = wdata_mgr.Pids__get_by_name(lang, pid);		// parse as name; EX: name > 123
+		Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_bry_or_null(qid); if (wdoc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid); return rslt.Init_str_empty();}	// NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
+		int pid_int = Wbase_pid_mgr.To_int_or_null(pid);										// parse as num; EX: p123 -> 123; PAGE:hr.w:Hepatitis DATE:2015-11-08
+		if (pid_int == Wdata_wiki_mgr.Pid_null) pid_int = wdata_mgr.Pid_mgr.Get_or_null(lang, pid);		// parse as name; EX: name > 123
 		if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
 		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();

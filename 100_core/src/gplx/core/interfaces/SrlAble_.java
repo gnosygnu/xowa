@@ -36,7 +36,7 @@ public class SrlAble_ {
 		sb.Add(owner.Key()).Add(":");
 		for (int i = 0; i < owner.Args_count(); i++) {
 			if (i != 0) sb.Add(" ");
-			KeyVal kv = owner.Args_getAt(i);
+			Keyval kv = owner.Args_getAt(i);
 			sb.Add(kv.Key()).Add("=").Add("'").Add(Object_.Xto_str_strict_or_null_mark(kv.Val())).Add("'");
 		}
 		int subsCount = owner.Subs_count();

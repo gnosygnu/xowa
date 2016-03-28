@@ -23,11 +23,9 @@ public class Cancelable_ {
 class Cancelable_never implements Cancelable {
 	public boolean Canceled() {return false;}
 	public void Cancel() {}
-	public void Cancel_reset() {}
 }
 class Cancelable_proxy implements Cancelable {
 	private boolean canceled = false;
 	public boolean Canceled()		{return canceled;}
 	public void Cancel()		{canceled = true;}
-	public void Cancel_reset()	{canceled = false;}
 }

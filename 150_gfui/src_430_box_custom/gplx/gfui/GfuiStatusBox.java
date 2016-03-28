@@ -68,14 +68,14 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 		return this;
 	}	static final String Invk_HideWindow = "HideWindow", Invk_WriteText = "WriteText", Invk_Text_empty = "Text_empty";
 	TimerAdp timer;
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);
 		this.Visible_set(false);
 		timer = TimerAdp.new_(this, Invk_HideWindow, 2000, false);
 	}
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);
@@ -83,7 +83,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 		timerCmd = kit.New_cmd_sync(this);
 		timer = TimerAdp.new_(timerCmd, GfuiInvkCmd_.Invk_sync, 2000, false);
 	}	GfuiInvkCmd timerCmd;
-	public void ctor_kit_GfuiElemBase_drd(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	public void ctor_kit_GfuiElemBase_drd(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);

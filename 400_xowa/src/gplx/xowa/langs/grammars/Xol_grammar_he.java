@@ -26,11 +26,9 @@ public class Xol_grammar_he implements Xol_grammar {
 				&&	!Bry_.Match(word, 0, 4, Bry__waw__1)		// "וו"
 				)
 				word = Bry_.Add(Bry__waw__0, word);
-
 			// Remove the "He" article if prefixed
 			if  (	 Bry_.Match(word, 0, 2, Bry__he__0))		// "ה"
 				word = Bry_.Mid(word, 2);
-
 			// Add a hyphen (maqaf) before non-Hebrew letters.
 			if	(	 Bry_.Match(word, 0, 2, Bry__maqaf__0)			// "א"
 				||	 Bry_.Compare(word, 0, 2, Bry__maqaf__1, 0, 2) == CompareAble_.More		// "ת"

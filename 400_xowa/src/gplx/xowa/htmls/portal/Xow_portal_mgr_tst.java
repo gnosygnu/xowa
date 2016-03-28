@@ -33,8 +33,8 @@ public class Xow_portal_mgr_tst {
 class Xowh_portal_mgr_fxt {
 	public void Init() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			wiki.Ns_mgr().Ns_main().Exists_(true);	// needed for ns
 			wiki.Html_mgr().Portal_mgr().Init_assert();	// needed for personal
 		}

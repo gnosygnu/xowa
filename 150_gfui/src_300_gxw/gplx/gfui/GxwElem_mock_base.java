@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class GxwElem_mock_base implements GxwElem {
-	public GxwCore_base Core() {return ctrlMgr;} final GxwCore_mock ctrlMgr = new GxwCore_mock();
+	public GxwCore_base Core() {return ctrlMgr;} final    GxwCore_mock ctrlMgr = new GxwCore_mock();
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
 	public String TextVal() {return text;} public void TextVal_set(String v) {text = v;} private String text = "";
 			public void SendKeyDown(IptKey key) {}
@@ -38,7 +38,7 @@ class MockTextBox extends GxwElem_mock_base implements GxwTextFld {
 	public void CreateControlIfNeeded() {}
 	public void Margins_set(int left, int top, int right, int bot) {}
 }
-class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {		public KeyVal[] Html_sel_atrs() {return KeyVal_.Ary_empty;}
+class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {		public Keyval[] Html_sel_atrs() {return Keyval_.Ary_empty;}
 	public void Html_enabled(boolean v) {}
 	public String Html_doc_html() {return "";}
 	public void Html_css_set(String s) {}
@@ -62,7 +62,19 @@ class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {
 	public void ScrollTillCaretIsVisible() {}
 }
 class MockComboBox extends GxwElem_mock_base implements GxwComboBox {
+	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
+	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
+	public void Sel_(int bgn, int end) {}
+	public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
 	public void DataSource_set(Object... ary) {}
+	public String Text_fallback() {return "";} public void Text_fallback_(String v) {}
+	public int List_sel_idx() {return -1;} public void List_sel_idx_(int v) {}
+	public boolean List_visible() {return false;} public void List_visible_(boolean v) {}
+	public void Items__update(String[] ary) {}
+	public void Items__size_to_fit(int count) {}
+	public void Items__visible_rows_(int v) {}
+	public void Items__jump_len_(int v) {}
+	public void Margins_set(int left, int top, int right, int bot) {}
 	public Object SelectedItm() {return selectedItm;} public void SelectedItm_set(Object v) {this.selectedItm = v;} Object selectedItm;
 }
 class MockListBox extends GxwElem_mock_base implements GxwListBox {

@@ -237,9 +237,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					rv = true;
 				}	catch (Exception e) {
 					if (Env_.Mode_testing()) 
-						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
+						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt_w_ttl_case(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
 					else {
-						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt(), defn.Name(), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt_w_ttl_case(), defn.Name(), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
 						rv = false;
 					}
 				}
@@ -284,7 +284,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				break;
 		}
 		return rv;
-	}	private static final byte[] Ary_unknown_bgn = Bry_.new_a7("(? [["), Ary_unknown_end = Bry_.new_a7("]] ?)"), Ary_dynamic_is_blank = Bry_.new_a7("dynamic is blank");
+	}	private static final    byte[] Ary_unknown_bgn = Bry_.new_a7("(? [["), Ary_unknown_end = Bry_.new_a7("]] ?)"), Ary_dynamic_is_blank = Bry_.new_a7("dynamic is blank");
 	private boolean Popup_skip(Xop_ctx ctx, byte[] ttl, Bry_bfr bfr) {
 		boolean skip = false;
 		skip = this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max();
@@ -356,7 +356,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			return Eval_sub(ctx, transclude_tmpl, caller, src, bfr);
 		}
 		else {				
-			Print_not_found(bfr, wiki.Ns_mgr(), page_ttl.Full_txt());
+			Print_not_found(bfr, wiki.Ns_mgr(), page_ttl.Full_txt_w_ttl_case());
 			return false;
 		}
 	}

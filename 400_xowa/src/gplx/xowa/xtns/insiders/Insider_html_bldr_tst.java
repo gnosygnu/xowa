@@ -39,8 +39,8 @@ class Insider_html_bldr_fxt {
 	private Insider_xtn_mgr xtn_mgr;
 	private Insider_xtn_skin_itm skin_itm;
 	public void Clear() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xop_fxt.Init_msg(wiki, "insider-title", "Docent");
 		Xop_fxt.Init_msg(wiki, "insider-about", "About Docents");
 		Xop_fxt.Init_msg(wiki, "insider-about-page", "Docent_page");

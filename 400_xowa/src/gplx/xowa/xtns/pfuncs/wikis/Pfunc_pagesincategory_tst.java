@@ -39,9 +39,9 @@ class Pfunc_pagesincategory_tstr {
 	private final Xowd_page_tbl page_tbl; private final Xowd_cat_core_tbl cat_core_tbl;
 	public Pfunc_pagesincategory_tstr() {
 		Xoa_test_.Inet__init();
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
-		Xoa_test_.Db__init__mem(wiki);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
+		Xoa_test_.Init__db__edit(wiki);
 		this.parser_tstr = new Xop_fxt(app, wiki);
 		this.core_data_mgr = wiki.Data__core_mgr();
 		this.page_tbl = core_data_mgr.Tbl__page();

@@ -34,7 +34,6 @@ public class Xoh_page implements Xoa_page {
 	public byte[]					Sidebar_div()		{return sidebar_div;} private byte[] sidebar_div;
 	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final Xoh_section_mgr section_mgr = new Xoh_section_mgr();
 	public Xoh_img_mgr				Img_mgr()			{return img_mgr;} private Xoh_img_mgr img_mgr = new Xoh_img_mgr();
-
 	public Ordered_hash				Redlink_uids()		{return redlink_uids;} private final Ordered_hash redlink_uids = Ordered_hash_.New();
 	public Xohd_img_itm__base[]		Img_itms()			{return img_itms;} public void Img_itms_(Xohd_img_itm__base[] v) {this.img_itms = v;} private Xohd_img_itm__base[] img_itms = Xohd_img_itm__base.Ary_empty;
 	public Ordered_hash				Gallery_itms()		{return gallery_itms;} private Ordered_hash gallery_itms = Ordered_hash_.New();

@@ -26,8 +26,8 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.hives.*;
 public class Xop_fxt {
 	public Xop_fxt() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		ctor(app, wiki);
 	}
 	public Xop_fxt(Xoae_app app, Xowe_wiki wiki) {
@@ -106,7 +106,7 @@ public class Xop_fxt {
 	public Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_level_(hdr_len).Src_rng_(bgn, end);}
-	public Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid_br);}
+	public Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid__br);}
 	public Xop_xnde_tkn_chkr tkn_xnde_()							{return tkn_xnde_(String_.Pos_neg1, String_.Pos_neg1);}
 	public Xop_xnde_tkn_chkr tkn_xnde_(int bgn, int end)			{return (Xop_xnde_tkn_chkr)new Xop_xnde_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tkn_chkr_base tkn_curly_bgn_(int bgn)				{return new Xop_tkn_chkr_base().TypeId_dynamic(Xop_tkn_itm_.Tid_tmpl_curly_bgn).Src_rng_(bgn, bgn + 2);}
@@ -370,6 +370,7 @@ public class Xop_fxt {
 	public void Test_html_wiki_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_wiki(raw), expd_frags);}
 	public void Test_html_full_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_full(raw), expd_frags);}
 	public void Test_html_full_frag_n(String raw, String... expd_frags)		{Test_str_part_n(Exec_html_full(raw), expd_frags);}
+	public void Test__parse__tmpl_to_html(String raw, String expd) {Test_str_full(raw, gplx.langs.htmls.Gfh_utl.Replace_apos(expd), Exec_html_full(raw));}
 	public void Test__parse__wtxt_to_html(String raw, String expd) {
 		String actl = Exec_html_wiki(raw);
 		Tfds.Eq_str_lines(gplx.langs.htmls.Gfh_utl.Replace_apos(expd), actl, raw);
@@ -427,8 +428,8 @@ public class Xop_fxt {
 	}
 	public void Clear_ref_mgr() {this.Page().Ref_mgr().Grps_clear();}			// clear to reset count
 	public static Xop_fxt new_nonwmf() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		return new Xop_fxt(app, Xoa_app_fxt.wiki_nonwmf(app, "nethackwiki"));
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		return new Xop_fxt(app, Xoa_app_fxt.Make__wiki__edit__nonwmf(app, "nethackwiki"));
 	}
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	public String Exec__parse_to_hdump(String src_str) {

@@ -21,7 +21,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_parser_tst {
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
-		Xoae_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		bldr = new Xob_bldr(app);
 	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.A7());
 	@Test  public void Basic_docs_1() {

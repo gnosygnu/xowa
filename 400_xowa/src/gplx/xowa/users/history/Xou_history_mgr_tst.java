@@ -48,8 +48,8 @@ class Xou_history_mgr_fxt {
 	Xou_history_mgr under;
 	public void Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			under = app.Usere().History_mgr();
 		}
 		Io_mgr.Instance.DeleteDirDeep(Io_url_.new_dir_("mem/xowa/user/test_user/app/data/history/"));

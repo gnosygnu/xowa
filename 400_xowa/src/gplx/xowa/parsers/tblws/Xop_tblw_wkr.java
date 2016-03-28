@@ -211,8 +211,8 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						}
 						else {
 							if (!tbl_is_xml)					// only for "\n|" not <td>
-								ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; DATE:2014-02-20; ru.w:;[[Help:Download]]; DATE:2014-02-20
-							ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_td);		// <td>
+								ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; DATE:2014-02-20; ru.w:;home/wiki/Dashboard/Image_databases; DATE:2014-02-20
+							ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__td);		// <td>
 							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						}
 						break;
@@ -311,11 +311,11 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		switch (wlxr_type) {
 			case Tblw_type_tb:
 			case Tblw_type_tr:
-				ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_tr);
+				ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__tr);
 				break;
 			case Tblw_type_td:
 			case Tblw_type_th:
-				ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_td);
+				ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__td);
 				break;
 		}
 		return cur_pos;
@@ -383,7 +383,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			Xop_tblw_tb_tkn tb = (Xop_tblw_tb_tkn)ctx.Stack_pop_til(root, src, tb_idx, false, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);	// NOTE: need to pop manually in order to set all intermediate node ends to bgn_pos, but tb ent to cur_pos; EX: for stack of "tb,tr,td" tr and td get End_() of bgn_pos but tb gets End_() of cur_pos
 			tb.Subs_move(root);
 			tb.Src_end_(cur_pos);
-			ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_table);	// NOTE: must clear block state that was started by <tr>; code implicitly relies on td clearing block state, but no td was created
+			ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__table);	// NOTE: must clear block state that was started by <tr>; code implicitly relies on td clearing block state, but no td was created
 			return cur_pos;
 		}
 		int acs_typeId = typeId;
@@ -418,11 +418,11 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			Xop_tblw_tkn bgn_tkn = (Xop_tblw_tkn)ctx.Stack_pop_til(root, src, acs_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_tblw_td);
 			switch (wlxr_type) {
 				case Tblw_type_tb:
-					ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_table);
+					ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__table);
 					break;
 				case Tblw_type_td:
 				case Tblw_type_th:
-					ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_td);
+					ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__td);
 					break;
 			}
 			bgn_tkn.Subs_move(root);
@@ -538,7 +538,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 					break;
 				case Xop_tkn_itm_.Tid_xnde:
 					if (ws_tkn.Src_bgn() == ws_tkn.Src_end()							// NOTE: para_wkr inserts <br/>. these should be disabled in Ignore_ws_rng; they are identified as having bgn == end; normal <br/>s will have bgn < end
-						&& ((Xop_xnde_tkn)ws_tkn).Tag().Id() == Xop_xnde_tag_.Tid_br)
+						&& ((Xop_xnde_tkn)ws_tkn).Tag().Id() == Xop_xnde_tag_.Tid__br)
 						ws_tkn.Ignore_y_grp_(ctx, root, cur);
 					break;
 				default:

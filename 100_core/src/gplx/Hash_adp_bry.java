@@ -37,6 +37,7 @@ public class Hash_adp_bry extends gplx.core.lists.Hash_adp_base implements Hash_
 		Object o = Get_by_mid(key, bgn, end); 
 		return (o == null) ? or : ((Int_obj_val)o).Val();
 	}
+	public byte Get_as_byte_or(byte[] key, byte or) {return Get_as_byte_or(key, 0, key.length, or);}
 	public byte Get_as_byte_or(byte[] key, int bgn, int end, byte or) {
 		Object o = Get_by_mid(key, bgn, end); 
 		return o == null ? or : ((Byte_obj_val)o).Val();

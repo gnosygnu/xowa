@@ -97,7 +97,7 @@ public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 		this.setBorder(null);
 		return this;
 	}
-	public KeyVal[] Html_sel_atrs() {return editor.Html_sel_atrs();}
+	public Keyval[] Html_sel_atrs() {return editor.Html_sel_atrs();}
 	public String Html_doc_html() {return editor.Html_doc_html();}
 	public void Html_css_set(String s) {editor.Html_css_set(s);}
 	@Override public void Margins_set(int left, int top, int right, int bot) {}
@@ -162,9 +162,9 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 		sb.Add("selBgn=").Add(Int_.To_str(Html_sel_bgn())).Add_char_crlf();
 		sb.Add("selEnd=").Add(Int_.To_str(Html_sel_end())).Add_char_crlf();
 		sb.Add("selTxt=").Add(Html_sel_text()).Add_char_crlf();
-		KeyVal[] atrs = Html_sel_atrs();
+		Keyval[] atrs = Html_sel_atrs();
 		for (int i = 0; i < atrs.length; i++) {
-			KeyVal atr = atrs[i];
+			Keyval atr = atrs[i];
 			sb.Add(atr.Key() + "=").Add(atr.Val_to_str_or_null()).Add_char_crlf();
 		}
 		return sb.To_str();
@@ -208,15 +208,15 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 			if (atr_val instanceof javax.swing.text.AttributeSet)
 				Html_sel_atrs((AttributeSet)atr_val, list, itm_key, dlm);
 			else
-				list.Add(KeyVal_.new_(itm_key, atr_val));
+				list.Add(Keyval_.new_(itm_key, atr_val));
 		}
 	}
-	public KeyVal[] Html_sel_atrs() {
-		if (String_.Eq(this.getContentType(), "text/plain")) return KeyVal_.Ary_empty;
-		Element elm = Html_sel_elm(); if (elm == null) return KeyVal_.Ary_empty;
+	public Keyval[] Html_sel_atrs() {
+		if (String_.Eq(this.getContentType(), "text/plain")) return Keyval_.Ary_empty;
+		Element elm = Html_sel_elm(); if (elm == null) return Keyval_.Ary_empty;
 		List_adp sel_atrs_list = List_adp_.new_();
 		Html_sel_atrs(elm.getAttributes(), sel_atrs_list, null, ".");
-		return (KeyVal[])sel_atrs_list.To_ary(KeyVal.class);
+		return (Keyval[])sel_atrs_list.To_ary(Keyval.class);
 	}
 
 	@Override public void processKeyEvent(KeyEvent e) 					{

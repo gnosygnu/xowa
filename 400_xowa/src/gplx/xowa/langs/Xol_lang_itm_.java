@@ -269,5 +269,7 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_files, "pagesincategory_fil
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_revisionsize, "REVISIONSIZE");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagebanner, "PAGEBANNER");	// NOTE: must be casematch; EX: in en.v, {{pagebanner}} is actually template name which calls {{PAGEBANNER}}
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_protectionexpiry, "PROTECTIONEXPIRY");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_new_window_link, "#NewWindowLink"
+);
 	}
 }

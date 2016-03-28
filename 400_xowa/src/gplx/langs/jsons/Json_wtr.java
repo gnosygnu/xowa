@@ -211,10 +211,10 @@ public class Json_wtr {
 		else {
 			Handle_nde_as_ary_itm_0();
 			Write_grp_bgn(Sym_nde_bgn, Bool_.N);
-			KeyVal[] kvy = (KeyVal[])obj;
+			Keyval[] kvy = (Keyval[])obj;
 			int kvy_len = kvy.length;
 			for (int i = 0; i < kvy_len; ++i) {
-				KeyVal kv = kvy[i];
+				Keyval kv = kvy[i];
 				Object kv_val = kv.Val();
 				Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_adp_.To_tid_obj(kv_val));
 			}
@@ -287,7 +287,7 @@ public class Json_wtr {
 	private static final int Grp_type__json_nde = 1, Grp_type__kv_ary = 2, Grp_type__json_ary = 3, Grp_type__obj_ary = 4;
 	private static int Grp_type__get(Object obj) {
 		Class<?> type = obj.getClass();
-		if		(Type_adp_.Eq(type, KeyVal[].class))		return Grp_type__kv_ary;
+		if		(Type_adp_.Eq(type, Keyval[].class))		return Grp_type__kv_ary;
 		else if (Type_adp_.Is_array(type))					return Grp_type__obj_ary;
 		else if (Type_adp_.Eq(type, Json_nde.class))		return Grp_type__json_nde;
 		else if (Type_adp_.Eq(type, Json_ary.class))		return Grp_type__json_ary;

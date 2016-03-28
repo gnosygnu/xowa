@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*;
 class Scrib_lib_text_html_entities {
-	public static KeyVal[] new_() {
-		KeyVal[] rv = new KeyVal[1510];
+	public static Keyval[] new_() {
+		Keyval[] rv = new Keyval[1510];
 		Int_obj_ref idx = Int_obj_ref.zero_();			
 new_itm_(rv, idx, Bry_.New_by_ints(9), "&Tab;");
 new_itm_(rv, idx, Bry_.New_by_ints(10), "&NewLine;");
@@ -1533,7 +1533,7 @@ new_itm_(rv, idx, Bry_.New_by_ints(240, 157, 149, 170), "&yopf;");
 new_itm_(rv, idx, Bry_.New_by_ints(240, 157, 149, 171), "&zopf;");
 		return rv;
 	}
-	private static void new_itm_(KeyVal[] ary, Int_obj_ref idx, byte[] key, String val) {
-		ary[idx.Val_add_post()] = KeyVal_.new_(String_.new_u8(key), val);
+	private static void new_itm_(Keyval[] ary, Int_obj_ref idx, byte[] key, String val) {
+		ary[idx.Val_add_post()] = Keyval_.new_(String_.new_u8(key), val);
 	}
 }

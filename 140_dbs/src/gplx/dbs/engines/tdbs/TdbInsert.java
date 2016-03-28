@@ -49,7 +49,7 @@ class TdbInsertWkr implements Db_qryWkr {
 	int InsertRowsByVals(TdbEngine engine, TdbTable tbl, Db_qry_insert insert) {
 		GfoNde row = GfoNde_.vals_(tbl.Flds(), new Object[tbl.Flds().Count()]);
 		for (int i = 0; i < insert.Args().Count(); i++) {
-			KeyVal kv = insert.Args().Get_at(i);
+			Keyval kv = insert.Args().Get_at(i);
 			Db_arg arg = (Db_arg)kv.Val();
 			row.Write(kv.Key(), arg.Val);
 		}

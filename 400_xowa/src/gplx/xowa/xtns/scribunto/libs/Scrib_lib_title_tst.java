@@ -44,7 +44,7 @@ public class Scrib_lib_title_tst {
 		// fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "", "http")			, "http://en.wikipedia.org/wiki/Main_Page");	// TODO
 	}
 	@Test  public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikip�dia:Image_du_jour/Date; DATE:2013-12-24
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", KeyVal_.Ary(KeyVal_.new_("action", "edit"), KeyVal_.new_("preload", "b"))), "http://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", Keyval_.Ary(Keyval_.new_("action", "edit"), Keyval_.new_("preload", "b"))), "http://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
 	}
 	@Test   public void MakeTitle() {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Module", "A")									, ttl_fast(828, "Module", "A"));
@@ -110,14 +110,6 @@ public class Scrib_lib_title_tst {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		wiki.File__orig_mgr().Insert(Xof_repo_itm_.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}
-//		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
-//			String url_str = "test/en.wikipedia.org/wiki_page_regy";
-//			Dbmeta_tbl_itm meta = new Xowd_page_tbl().new_meta();
-//			Db_conn_pool.Instance.Set_mem(url_str, meta);
-//			Db_conn_info url = Db_conn_info_.mem_(url_str);
-//			Xowd_page_tbl tbl = new Xowd_page_tbl(Bool_.N, url);
-//			tbl.Insert(id, ns_id, Bry_.new_u8(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
-//		}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor) {return ttl_fast(ns_id, ns_str, ttl, anchor, "", ttl);}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor, String xwiki) {return ttl_fast(ns_id, ns_str, ttl, anchor, xwiki, ttl);}

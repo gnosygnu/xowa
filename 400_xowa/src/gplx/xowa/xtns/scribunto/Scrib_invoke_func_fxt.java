@@ -52,7 +52,7 @@ public class Scrib_invoke_func_fxt {
 	public Scrib_invoke_func_fxt Init_server_print_key_y_() {server.Print_key_(true); return this;}
 	public Scrib_invoke_func_fxt Init_server_print_key_n_() {server.Print_key_(false); return this;}
 	public Scrib_invoke_func_fxt Init_lua_rcvd_raw(String raw) {server.Prep_add(raw); return this;}
-	public Scrib_invoke_func_fxt Init_lua_rcvd(String cbk_name, KeyVal... ary) {
+	public Scrib_invoke_func_fxt Init_lua_rcvd(String cbk_name, Keyval... ary) {
 		server.Prep_add(rsp_bldr.Bld_mw_cbk(cbk_name, ary));
 		return this;
 	}
@@ -69,8 +69,8 @@ public class Scrib_invoke_func_fxt {
 		this.Init_lua_rcvd_rv();
 		return this;
 	}
-	public Scrib_invoke_func_fxt Init_lua_rcvd_expandTemplate(String frame, String tmpl_ttl, KeyVal... ary) {
-		ary = new KeyVal[] {KeyVal_.int_(1, "current"), KeyVal_.int_(2, tmpl_ttl), KeyVal_.int_(3, ary)};
+	public Scrib_invoke_func_fxt Init_lua_rcvd_expandTemplate(String frame, String tmpl_ttl, Keyval... ary) {
+		ary = new Keyval[] {Keyval_.int_(1, "current"), Keyval_.int_(2, tmpl_ttl), Keyval_.int_(3, ary)};
 		server.Prep_add(rsp_bldr.Bld_mw_cbk("expandTemplate", ary));
 		this.Init_lua_rcvd_rv();
 		return this;
@@ -92,11 +92,11 @@ public class Scrib_invoke_func_fxt {
 		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "error");
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test_lib_proc_kv(Scrib_lib lib, String func_name, KeyVal[] args, String expd) {
+	public void Test_lib_proc_kv(Scrib_lib lib, String func_name, Keyval[] args, String expd) {
 		Test_lib_proc_internal(lib, func_name, args);
 		this.Test_invoke(expd);
 	}
-	private void Test_lib_proc_internal(Scrib_lib lib, String func_name, KeyVal[] args) {
+	private void Test_lib_proc_internal(Scrib_lib lib, String func_name, Keyval[] args) {
 		Init_lua_module();
 		this.Init_cbk(Scrib_core.Key_mw_interface, lib, func_name);
 		this.Init_lua_rcvd(func_name, args);
@@ -105,16 +105,16 @@ public class Scrib_invoke_func_fxt {
 	public void Test_log_rcvd(int i, String expd) {
 		Tfds.Eq(expd, (String)server.Log_rcvd().Get_at(i));
 	}
-	public void Init_frame_parent(String ttl, KeyVal... ary) {
+	public void Init_frame_parent(String ttl, Keyval... ary) {
 		core.Frame_parent_(Xot_invk_mock.test_(Bry_.new_u8(ttl), ary));
 	}
-	public void Init_frame_current(KeyVal... ary) {
+	public void Init_frame_current(Keyval... ary) {
 		core.Frame_current_(Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"), ary));
 	}
 	public void Clear_for_lib() {Clear_for_lib("en.wikipedia.org", "en");}
 	public void Clear_for_lib(String domain, String lang) {
-		Xoae_app app = Xoa_app_fxt.app_();
-		fxt = new Xop_fxt(app, Xoa_app_fxt.wiki_(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		fxt = new Xop_fxt(app, Xoa_app_fxt.Make__wiki__edit(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
 		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
@@ -123,35 +123,35 @@ public class Scrib_invoke_func_fxt {
 		core.When_page_changed(fxt.Page());
 	}
 	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
+	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {
+		Keyval[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(Object_.Xto_str_strict_or_null_mark(expd), Object_.Xto_str_strict_or_null_mark(actl[0].Val()));
 	}
 	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps__flat(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {
+		Keyval[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(expd, Kv_ary_to_kv_vals_str(actl_ary));
 	}
-	public void Test_scrib_proc_kv_objs(Scrib_lib lib, String proc_name, KeyVal[] args, Object... expd_ary) {
-		KeyVal[] actl_kvs = Test__lib_proc__core(lib, proc_name, args);
+	public void Test_scrib_proc_kv_objs(Scrib_lib lib, String proc_name, Keyval[] args, Object... expd_ary) {
+		Keyval[] actl_kvs = Test__lib_proc__core(lib, proc_name, args);
 		Object[] actl_ary = KeyVal_to_obj_ary(actl_kvs);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}
-	private static Object[] KeyVal_to_obj_ary(KeyVal[] kv_ary) {
+	private static Object[] KeyVal_to_obj_ary(Keyval[] kv_ary) {
 		int len = kv_ary.length;
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; ++i) {
-			KeyVal kv = kv_ary[i];
+			Keyval kv = kv_ary[i];
 			rv[i] = kv.Val();
 		}
 		return rv;
 	}
-	private String Kv_ary_to_kv_vals_str(KeyVal[] ary) {
+	private String Kv_ary_to_kv_vals_str(Keyval[] ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
 		return bfr.To_str_and_clear();
@@ -159,30 +159,30 @@ public class Scrib_invoke_func_fxt {
 	public void Test_scrib_proc_bool(Scrib_lib lib, String proc_name, Object[] args, boolean expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_int(Scrib_lib lib, String proc_name, Object[] args, int expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, Object[] args, Object expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, KeyVal[] args, Object expd) {
-		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
+	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, Keyval[] args, Object expd) {
+		Keyval[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(expd, actl[0].Val());
 	}
 	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, Object[] args) {Test_scrib_proc_empty(lib, proc_name, Scrib_kv_utl_.base1_many_(args));}
-	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, KeyVal[] args) {
-		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, args);
+	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, Keyval[] args) {
+		Keyval[] actl = Test__lib_proc__core(lib, proc_name, args);
 		Tfds.Eq(0, actl.length);
 	}
 	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str_ary(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
-	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
-		KeyVal[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
-		String actl = KeyVal_.Ary__to_str__nest(actl_ary);
+	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {
+		Keyval[] actl_ary = Test__lib_proc__core(lib, proc_name, args);
+		String actl = Keyval_.Ary__to_str__nest(actl_ary);
 		Tfds.Eq_str_lines(expd, actl);
 	}
-	public KeyVal[] Test_scrib_proc_rv_as_kv_ary(Scrib_lib lib, String proc_name, Object[] args) {
-		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
-		return (KeyVal[])actl[0].Val();
+	public Keyval[] Test_scrib_proc_rv_as_kv_ary(Scrib_lib lib, String proc_name, Object[] args) {
+		Keyval[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		return (Keyval[])actl[0].Val();
 	}
 	public Object Test_scrib_proc_rv_as_obj(Scrib_lib lib, String proc_name, Object[] args) {
-		KeyVal[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		Keyval[] actl = Test__lib_proc__core(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
 		return actl[0].Val();
 	}
-	private KeyVal[] Test__lib_proc__core(Scrib_lib lib, String proc_name, KeyVal[] args) {
+	private Keyval[] Test__lib_proc__core(Scrib_lib lib, String proc_name, Keyval[] args) {
 		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
 		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
 		proc.Proc_exec(new Scrib_proc_args(args), proc_rslt);
@@ -193,7 +193,7 @@ public class Scrib_invoke_func_fxt {
 }
 class Scrib_lua_rsp_bldr {
 	Bry_bfr bfr = Bry_bfr.reset_(255);
-	public String Bld_mw_cbk(String cbk_name, KeyVal... ary) {
+	public String Bld_mw_cbk(String cbk_name, Keyval... ary) {
 		cbk_name = "mw_interface-" + cbk_name;
 		bfr.Add_str_a7("a:4:{s:2:\"id\";");
 		Bld_str(bfr, cbk_name);
@@ -208,7 +208,7 @@ class Scrib_lua_rsp_bldr {
 		else if	(Object_.Eq(v_type, String_.Cls_ref_type))			Bld_str(bfr, String_.cast(v));
 		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))				Bld_bool(bfr, Bool_.cast(v));
 		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))			Bld_double(bfr, Double_.cast(v));
-		else if	(Object_.Eq(v_type, KeyVal[].class))			Bld_kv_ary(bfr, (KeyVal[])v);
+		else if	(Object_.Eq(v_type, Keyval[].class))			Bld_kv_ary(bfr, (Keyval[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
 		else													throw Err_.new_unhandled(Type_adp_.NameOf_obj(v));
 	}
@@ -217,11 +217,11 @@ class Scrib_lua_rsp_bldr {
 	private void Bld_double(Bry_bfr bfr, double v)	{bfr.Add_str_a7("d:").Add_double(v).Add_byte(Byte_ascii.Semic);}
 	private void Bld_str(Bry_bfr bfr, String v)		{bfr.Add_str_a7("s:").Add_int_variable(Bry_.new_u8(v).length).Add_str_a7(":\"").Add_str_a7(v).Add_str_a7("\";");}	// NOTE: must use Bry_.new_u8(v).length to calculate full bry len
 	private void Bld_fnc(Bry_bfr bfr, Scrib_lua_proc v)	{bfr.Add_str_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:").Add_int_variable(v.Id()).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.Curly_end);}
-	private void Bld_kv_ary(Bry_bfr bfr, KeyVal[] ary) {
+	private void Bld_kv_ary(Bry_bfr bfr, Keyval[] ary) {
 		int len = ary.length;
 		bfr.Add_str_a7("a:").Add_int_variable(len).Add_str_a7(":{");
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			Bld_obj(bfr, kv.Key_as_obj());
 			Bld_obj(bfr, kv.Val());
 		}

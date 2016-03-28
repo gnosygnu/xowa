@@ -55,34 +55,34 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 	public Process_server_mock_rcvd_val(boolean print_key) {this.print_key = print_key;} private boolean print_key;
 	public String Bld(Object[] cmd_objs) {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
-		Bld_recursive(tmp_bfr, 0, (KeyVal[])cmd_objs[5]);
+		Bld_recursive(tmp_bfr, 0, (Keyval[])cmd_objs[5]);
 		byte[] values_str = tmp_bfr.To_bry_and_clear();
 		tmp_bfr.Add(Bry_rv_bgn).Add_int_variable(values_str.length).Add(Bry_rv_mid).Add(values_str).Add(Bry_rv_end);
 		return tmp_bfr.To_str_and_clear();
 	}
-	private void Bld_recursive(Bry_bfr bfr, int depth, KeyVal[] ary) {
+	private void Bld_recursive(Bry_bfr bfr, int depth, Keyval[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
-			KeyVal kv = ary[i];
+			Keyval kv = ary[i];
 			Object kv_val = kv.Val();
 			if (kv_val == null) {
 				bfr.Add(gplx.langs.jsons.Json_itm_.Bry__null);
 				continue;
 			}
 			Class<?> kv_val_type = kv_val.getClass();
-			boolean kv_val_is_array = Type_adp_.Eq(kv_val_type, KeyVal[].class);
+			boolean kv_val_is_array = Type_adp_.Eq(kv_val_type, Keyval[].class);
 			if (print_key && !kv_val_is_array)
 				bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
 			if		(Type_adp_.Eq(kv_val_type, Bool_.Cls_ref_type))
 				bfr.Add(Bool_.cast(kv_val) ? gplx.langs.jsons.Json_itm_.Bry__true : gplx.langs.jsons.Json_itm_.Bry__false);
 			else if	(kv_val_is_array) {
-				KeyVal[] sub = (KeyVal[])kv_val;
+				Keyval[] sub = (Keyval[])kv_val;
 				if (sub.length == 0) {bfr.Add_byte(Byte_ascii.Curly_bgn).Add_byte(Byte_ascii.Curly_end);}
 				else {
 					bfr.Add_byte_nl();
 					bfr.Add_byte_repeat(Byte_ascii.Space, (depth + 1) * 2);
-					Bld_recursive(bfr, depth + 1, (KeyVal[])kv_val);
+					Bld_recursive(bfr, depth + 1, (Keyval[])kv_val);
 				}
 			}
 			else

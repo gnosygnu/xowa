@@ -38,7 +38,7 @@ public class GfuiTextBox_ {
 		rv.Key_of_GfuiElem_(key).Owner_(owner);
 		return rv;
 	}
-	public static GfuiTextBox kit_(Gfui_kit kit, String key, GxwTextFld wk_textBox, KeyValHash ctorArgs) {
+	public static GfuiTextBox kit_(Gfui_kit kit, String key, GxwTextFld wk_textBox, Keyval_hash ctorArgs) {
 		GfuiTextBox rv = new GfuiTextBox();
 		rv.ctor_kit_GfuiElemBase(kit, key, wk_textBox, ctorArgs);
 		return rv;

@@ -23,7 +23,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.core_data_mgr = new Xowd_db_mgr(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Domain_itm());
-		this.load_mgr = new Xodb_load_mgr_sql(this, core_data_mgr);
+		this.load_mgr = new Xodb_load_mgr_sql(wiki, this, core_data_mgr);
 		this.save_mgr = new Xodb_save_mgr_sql(this);
 	}
 	public byte Tid() {return Tid_sql;} public String Tid_name() {return "sqlite3";} public static final byte Tid_sql = 1;		
@@ -32,7 +32,6 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private final Xodb_load_mgr_sql load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private final Xodb_save_mgr_sql save_mgr;
 	public byte Category_version() {return category_version;} private byte category_version = Xoa_ctg_mgr.Version_null;
-	public byte Search_version() {return load_mgr.Search_version();} public void Search_version_refresh() {load_mgr.Search_version_refresh();}
 	public DateAdp Dump_date_query() {
 		DateAdp rv = wiki.Props().Modified_latest(); if (rv != null) return rv;
 		Io_url url = core_data_mgr.Db__core().Url();
@@ -50,7 +49,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_data_storage_format_))				{}	// SERIALIZED:000.sqlite3|xowa_cfg; ignore; read from Xow_db_props
 		else if	(ctx.Match(k, Invk_category_version))					return category_version;
 		else if	(ctx.Match(k, Invk_category_version_))					category_version = m.ReadByte("v");
-		else if	(ctx.Match(k, Invk_search_version))						return this.Search_version();
+		else if	(ctx.Match(k, Invk_search_version))						{return 1;} // return this.Search_version(); // REMOVED: DATE:2016-02-26
 		else if	(ctx.Match(k, Invk_tid_name))							return this.Tid_name();
 		return this;
 	}

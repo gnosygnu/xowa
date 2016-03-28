@@ -27,7 +27,7 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 		int len = queue.Count();
 		for (int i = 0; i < len; ++i) {
 			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.Get_at(i);
-			Wdata_doc wdoc = wdata_mgr.Pages_get(itm.Ttl());
+			Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Ttl());
 			if (wdoc == null) {
 				Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.lbl_wkr:page does not exists; page=~{0}", itm.Ttl());
 				continue; // handle incomplete wikidata dumps; DATE:2015-06-11

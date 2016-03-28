@@ -27,11 +27,11 @@ class Pfunc_i18n_fxt {
 	public Xop_fxt Fxt() {return fxt;}
 	public Pfunc_i18n_fxt lang_(String v) {lang_key = v; return this;} private String lang_key;
 	public Pfunc_i18n_fxt Ini() {
-		if (app == null) app = Xoa_app_fxt.app_();
+		if (app == null) app = Xoa_app_fxt.Make__app__edit();
 		app.Lang_mgr().Clear();	// else lang values retained from last run
 		app.Free_mem(false); // else tmpl_result_cache will get reused from last run for {{test}}
 		lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7(lang_key));
-		wiki = Xoa_app_fxt.wiki_(app, lang_key + ".wikipedia.org", lang);
+		wiki = Xoa_app_fxt.Make__wiki__edit(app, lang_key + ".wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 		return this;
 	}	private Xoae_app app; private Xop_fxt fxt; Xol_lang_itm lang; Xowe_wiki wiki;

@@ -23,7 +23,6 @@ public class Xob_lnki_temp_wkr_tst {
 		fxt.Init_Xto_commons(true);
 		fxt.Test_Xto_commons("a", "A");
 		fxt.Test_Xto_commons("A", null);
-
 		fxt.Init_Xto_commons(false);
 		fxt.Test_Xto_commons("a", null);
 		fxt.Test_Xto_commons("A", null);
@@ -33,12 +32,11 @@ class Xob_lnki_temp_wkr_fxt {
 	private boolean wiki_ns_file_is_case_match_all;
 	private Xowe_wiki commons_wiki;
 	public Xob_lnki_temp_wkr_fxt Init_Xto_commons(boolean wiki_ns_file_is_case_match_all) {
-		Xoae_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		this.wiki_ns_file_is_case_match_all = wiki_ns_file_is_case_match_all;
-		this.commons_wiki = Xoa_app_fxt.wiki_tst_(app);	// commons_wiki will default to Xow_ns.Id_file of case_match_1st
+		this.commons_wiki = Xoa_app_fxt.Make__wiki__edit(app);	// commons_wiki will default to Xow_ns.Id_file of case_match_1st
 		return this;
 	}
-
 	public void Test_Xto_commons(String ttl, String expd) {
 		Tfds.Eq(expd, String_.new_u8(Xob_lnki_temp_wkr.Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_u8(ttl))));
 	}

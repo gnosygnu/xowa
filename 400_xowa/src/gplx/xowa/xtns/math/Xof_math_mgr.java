@@ -102,6 +102,6 @@ public class Xof_math_mgr implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_renderer = "renderer", Invk_renderer_ = "renderer_", Invk_renderer_list = "renderer_list";
-	private static KeyVal[] Options_renderer_list = KeyVal_.Ary(KeyVal_.new_("mathjax", "MathJax"), KeyVal_.new_("latex", "LaTeX")); 
+	private static Keyval[] Options_renderer_list = Keyval_.Ary(Keyval_.new_("mathjax", "MathJax"), Keyval_.new_("latex", "LaTeX")); 
 	private static final String GRP_KEY = "xowa.math.mgr";
 }

@@ -18,11 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wkrs.*;
-public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
+public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
 	public Xob_parse_dump_templates_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "parse.dump_templates";
 	public static final int FixedLen_page = 1 + 5 + 1 + 5 + 1 + 1 + 1;	// \tid|date|title|text\n
-	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {
 		Init_dump(KEY);
 	}
@@ -33,5 +32,4 @@ public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements X
 		Xotdb_page_itm_.Txt_page_save(dump_bfr, id, page.Modified_on(), title, text, true);
 	}
 	public void Wkr_end() {super.Flush_dump();}
-	public void Wkr_print() {}
 }

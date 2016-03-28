@@ -31,5 +31,5 @@ public class Gxw_html_load_tid_ {
 		else if	(String_.Eq(s, Key_url))			return Tid_url;
 		else										throw Err_.new_unimplemented();
 	}
-	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_mem), KeyVal_.new_(Key_url));
+	public static Keyval[] Options__list = Keyval_.Ary(Keyval_.new_(Key_mem), Keyval_.new_(Key_url));
 }

@@ -35,8 +35,8 @@ public class GfuiBtn extends GfuiElemBase {
 		Object o = GfoInvkAble_.InvkCmd(UnderElem(), Invk_btn_img);
 		return o == UnderElem() ? null : (ImageAdp)o;	// NOTE: lgc guard
 	}	public GfuiBtn Btn_img_(ImageAdp v) {GfoInvkAble_.InvkCmd_val(UnderElem(), Invk_btn_img_, v); return this;}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.control_();}
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		focusBorder = GfuiBorderMgr.new_().All_(PenAdp_.new_(ColorAdp_.Gray, 1));
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.TextMgr().AlignH_(GfuiAlign_.Mid);
@@ -46,7 +46,7 @@ public class GfuiBtn extends GfuiElemBase {
 		Inject_(GfuiFocusXferBnd.Instance);
 		this.CustomDraw_set(true);
 	}
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		this.kit = kit;
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		focusBorder = GfuiBorderMgr.new_().All_(PenAdp_.new_(ColorAdp_.Gray, 1));

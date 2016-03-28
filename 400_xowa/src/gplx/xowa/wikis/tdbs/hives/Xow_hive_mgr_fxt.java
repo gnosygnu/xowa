@@ -21,8 +21,8 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xo
 public class Xow_hive_mgr_fxt {
 	public void Clear() {
 		if (hive_mgr == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			hive_mgr = new Xob_hive_mgr(wiki);
 		}
 		hive_mgr.Clear();

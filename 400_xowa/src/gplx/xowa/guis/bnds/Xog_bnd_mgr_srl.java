@@ -52,7 +52,6 @@ public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 		if (uid		== -1)		throw parser.Err_row_bgn("bnd missing uid", pos);
 		if (box_bry	== null)	throw parser.Err_row_bgn("bnd missing box", pos);
 		if (ipt_bry	== null)	throw parser.Err_row_bgn("bnd missing ipt", pos);
-
 		if (uids == null) Init();
 		Xog_bnd_itm bnd = (Xog_bnd_itm)uids.Get_by(Int_obj_val.new_(uid));
 		int box = Xog_bnd_box_.Xby_gui_str(String_.new_u8(box_bry));

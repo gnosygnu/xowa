@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
 public class Site_json_parser_tst {
-	private final Site_json_parser_fxt fxt = new Site_json_parser_fxt();
+	private final    Site_json_parser_fxt fxt = new Site_json_parser_fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test  public void General() {
@@ -44,7 +44,7 @@ public class Site_json_parser_tst {
 		, "  }"
 		, "}"
 		));
-		fxt.Test_general(KeyVal_.new_("mainpage", "Main Page"), KeyVal_.new_("imagewhitelistenabled", ""), KeyVal_.new_("timeoffset", "0"), KeyVal_.new_("thumblimits", "120|150"), KeyVal_.new_("imagelimits", "320=240|640=480"));
+		fxt.Test_general(Keyval_.new_("mainpage", "Main Page"), Keyval_.new_("imagewhitelistenabled", ""), Keyval_.new_("timeoffset", "0"), Keyval_.new_("thumblimits", "120|150"), Keyval_.new_("imagelimits", "320=240|640=480"));
 	}
 	@Test  public void Namespace() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
@@ -114,6 +114,9 @@ public class Site_json_parser_tst {
 		, "    }"
 		, "  , { 'prefix': 'ar'"
 		, "    , 'local': ''"
+		, "    , 'extralanglink': ''"
+		, "    , 'linktext': 'More languages'"
+		, "    , 'sitename': 'Multilingual Wikisource'"
 		, "    , 'language': '\u0627\u0644\u0639\u0631\u0628\u064a\u0629'"
 		, "    , 'url': 'https://ar.wikipedia.org/wiki/$1'"
 		, "    , 'protorel': ''"
@@ -122,8 +125,8 @@ public class Site_json_parser_tst {
 		, "}"
 		));
 		fxt.Test_interwikimap
-		( fxt.Make_interwikimap("aquariumwiki"	, Bool_.N, null			, Bool_.N, "http://www.theaquariumwiki.com/$1"	, Bool_.N)
-		, fxt.Make_interwikimap("ar"			, Bool_.Y, "العربية"	, Bool_.N, "https://ar.wikipedia.org/wiki/$1"	, Bool_.Y)
+		( fxt.Make_interwikimap("aquariumwiki"	, Bool_.N, Bool_.N, null			, null						, null			, Bool_.N, "http://www.theaquariumwiki.com/$1"	, Bool_.N)
+		, fxt.Make_interwikimap("ar"			, Bool_.Y, Bool_.Y, "More languages", "Multilingual Wikisource"	, "العربية"		, Bool_.N, "https://ar.wikipedia.org/wiki/$1"	, Bool_.Y)
 		);
 	}
 	@Test  public void Namespacealias() {
@@ -343,7 +346,7 @@ public class Site_json_parser_tst {
 		, "  }"
 		, "}"
 		));
-		fxt.Test_defaultoption(KeyVal_.new_("globaluserpage", "true"), KeyVal_.new_("cols", "80"), KeyVal_.new_("echo-email-format", "html"));
+		fxt.Test_defaultoption(Keyval_.new_("globaluserpage", "true"), Keyval_.new_("cols", "80"), Keyval_.new_("echo-email-format", "html"));
 	}
 	@Test  public void Language() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
@@ -376,8 +379,8 @@ public class Site_json_parser_tst {
 //		}
 }
 class Site_json_parser_fxt {
-	private final Json_parser json_parser = new Json_parser();
-	private final Site_json_parser site_meta_parser;
+	private final    Json_parser json_parser = new Json_parser();
+	private final    Site_json_parser site_meta_parser;
 	private Site_meta_itm site_meta;
 	public Site_json_parser_fxt() {
 		this.site_meta_parser = new Site_json_parser(json_parser);
@@ -391,7 +394,9 @@ class Site_json_parser_fxt {
 		return new Site_namespace_itm(id, case_tid_is_cs ? Xow_ns_case_.Bry__all : Xow_ns_case_.Bry__1st, Bry_.new_u8_safe(canonical), Bry_.new_u8_safe(localized), subpages, content, Bry_.new_u8_safe(defaultcontentmodel));
 	}
 	public Site_statistic_itm Make_statistic(long pages, long articles, long edits, long images, long users, long activeusers, long admins, long jobs, long queued_massmessages) {return new Site_statistic_itm().Ctor(pages, articles, edits, images, users, activeusers, admins, jobs, queued_massmessages);}
-	public Site_interwikimap_itm Make_interwikimap(String prefix, boolean local, String language, boolean localinterwiki, String url, boolean protorel) {return new Site_interwikimap_itm(Bry_.new_u8_safe(prefix), local, Bry_.new_u8_safe(language), localinterwiki, Bry_.new_u8_safe(url), protorel);}
+	public Site_interwikimap_itm Make_interwikimap(String prefix, boolean local, boolean extralanglink, String linktext, String sitename, String language, boolean localinterwiki, String url, boolean protorel) {
+		return new Site_interwikimap_itm(Bry_.new_u8_safe(prefix), local, extralanglink, Bry_.new_u8_safe(linktext), Bry_.new_u8_safe(sitename), Bry_.new_u8_safe(language), localinterwiki, Bry_.new_u8_safe(url), protorel);
+	}
 	public Site_namespacealias_itm Make_namespacealias(int id, String alias) {return new Site_namespacealias_itm(id, Bry_.new_u8_safe(alias));}
 	public Site_specialpagealias_itm Make_specialpagealias(String realname, String... aliases) {return new Site_specialpagealias_itm(Bry_.new_u8_safe(realname), Bry_.Ary(aliases));}
 	public Site_library_itm Make_library(String name, String version) {return new Site_library_itm(Bry_.new_u8_safe(name), Bry_.new_u8_safe(version));}
@@ -407,7 +412,7 @@ class Site_json_parser_fxt {
 	public Site_magicword_itm Make_magicword(String name, boolean case_match, String... aliases) {return new Site_magicword_itm(Bry_.new_u8_safe(name), case_match, Bry_.Ary(aliases));}
 	public Site_showhook_itm Make_showhook(String name, String scribunto, String... subscribers) {return new Site_showhook_itm(Bry_.new_u8_safe(name), Bry_.new_u8_safe(scribunto), Bry_.Ary(subscribers));}
 	public Site_language_itm Make_language(String code, String name) {return new Site_language_itm(Bry_.new_u8_safe(code), Bry_.new_u8_safe(name));}
-	public void Test_general(KeyVal... expd) {Tfds.Eq_ary_str(expd, (KeyVal[])site_meta.General_list().To_ary(KeyVal.class));}
+	public void Test_general(Keyval... expd) {Tfds.Eq_ary_str(expd, (Keyval[])site_meta.General_list().To_ary(Keyval.class));}
 	public void Test_namespace(Site_namespace_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespace_itm[])site_meta.Namespace_list().To_ary(Site_namespace_itm.class));}
 	public void Test_statistic(Site_statistic_itm expd) {Tfds.Eq_str_intf(expd, site_meta.Statistic_itm());}
 	public void Test_interwikimap(Site_interwikimap_itm... expd) {Tfds.Eq_ary_str(expd, (Site_interwikimap_itm[])site_meta.Interwikimap_list().To_ary(Site_interwikimap_itm.class));}
@@ -421,6 +426,6 @@ class Site_json_parser_fxt {
 	public void Test_showhook(Site_showhook_itm... expd) {Tfds.Eq_ary_str(expd, (Site_showhook_itm[])site_meta.Showhook_list().To_ary(Site_showhook_itm.class));}
 	public void Test_extensiontag(String... expd) {Tfds.Eq_ary_str(expd, String_.Ary((byte[][])site_meta.Extensiontag_list().To_ary(byte[].class)));}
 	public void Test_protocol(String... expd) {Tfds.Eq_ary_str(expd, String_.Ary((byte[][])site_meta.Protocol_list().To_ary(byte[].class)));}
-	public void Test_defaultoption(KeyVal... expd) {Tfds.Eq_ary_str(expd, (KeyVal[])site_meta.Defaultoption_list().To_ary(KeyVal.class));}
+	public void Test_defaultoption(Keyval... expd) {Tfds.Eq_ary_str(expd, (Keyval[])site_meta.Defaultoption_list().To_ary(Keyval.class));}
 	public void Test_language(Site_language_itm... expd) {Tfds.Eq_ary_str(expd, (Site_language_itm[])site_meta.Language_list().To_ary(Site_language_itm.class));}
 }

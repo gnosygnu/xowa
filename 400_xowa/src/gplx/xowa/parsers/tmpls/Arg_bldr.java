@@ -121,7 +121,7 @@ public class Arg_bldr {
 				case Xop_tkn_itm_.Tid_xnde:
 					Xop_xnde_tkn sub_as_xnde = (Xop_xnde_tkn)sub;
 					switch (sub_as_xnde.Tag().Id()) {
-						case Xop_xnde_tag_.Tid_noinclude: case Xop_xnde_tag_.Tid_includeonly: case Xop_xnde_tag_.Tid_onlyinclude:
+						case Xop_xnde_tag_.Tid__noinclude: case Xop_xnde_tag_.Tid__includeonly: case Xop_xnde_tag_.Tid__onlyinclude:
 							itm_is_static = false;
 							break;
 					}

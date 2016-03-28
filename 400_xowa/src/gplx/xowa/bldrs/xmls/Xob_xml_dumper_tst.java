@@ -82,8 +82,8 @@ class Xob_xml_dumper_fxt {
 	private Xowe_wiki wiki;
 	private final Xob_xml_dumper export_wtr = new Xob_xml_dumper();
 	public void Clear() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_(app, "enwiki");
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app, "enwiki");
 	}
 	public Xowd_page_itm[] Make_ary(Xowd_page_itm... ary) {return ary;}
 	public Xowd_page_itm Make_page(int id, int ns_id, String ttl_str, String text) {

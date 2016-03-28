@@ -49,17 +49,17 @@ public class Xop_xnde_tag_regy {
 			Add_itm(trie, xnde);
 		}
 		if (is_tmpl) {								// is_tmpl also has <nowiki>, <includeonly>, <noinclude>, <onlyinclude>
-			Add_itm(trie, Xop_xnde_tag_.Tag_nowiki);
-			Add_itm(trie, Xop_xnde_tag_.Tag_includeonly);
-			Add_itm(trie, Xop_xnde_tag_.Tag_noinclude);
-			Add_itm(trie, Xop_xnde_tag_.Tag_onlyinclude);
+			Add_itm(trie, Xop_xnde_tag_.Tag__nowiki);
+			Add_itm(trie, Xop_xnde_tag_.Tag__includeonly);
+			Add_itm(trie, Xop_xnde_tag_.Tag__noinclude);
+			Add_itm(trie, Xop_xnde_tag_.Tag__onlyinclude);
 		}
 	}
 	private boolean Ignore_xnde(Hash_adp_bry xtn_hash, Xop_xnde_tag xnde) {
 		return 	xtn_hash != null					// xtn_hash is null during tests or when wiki is not in site_meta_db
 			&&	xnde.Xtn_mw()						// only apply filter to xtn_xnde, not basic_xnde; EX: <dynamicpagelist> not <table>
 			&&	!xtn_hash.Has(xnde.Name_bry())		// xtn_xnde is not in xtn_hash
-			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid_translate, Xop_xnde_tag_.Tid_languages)	// always include <translate> and <languages>; TODO:filter out when extensions supported in site_cfg; DATE:2015-10-13
+			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid__translate, Xop_xnde_tag_.Tid__languages)	// always include <translate> and <languages>; TODO:filter out when extensions supported in site_cfg; DATE:2015-10-13
 			;										// skip; xtn is not defined in site_meta_db
 	}
 	private void Add_itm(Btrie_slim_mgr trie, Xop_xnde_tag xnde) {

@@ -41,6 +41,10 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 			cur = nxt;
 		}
 	}
+	public byte Match_byte_or(byte b, byte[] src, int bgn, int end, byte or) {
+		Object rv_obj = Match_bgn_w_byte(b, src, bgn, end);
+		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
+	}
 	public byte Match_byte_or(byte[] src, int bgn, int end, byte or) {
 		Object rv_obj = Match_bgn(src, bgn, end);
 		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();

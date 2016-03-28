@@ -36,8 +36,13 @@ public class Xog_win_itm_ {
 		rv.Btn_img_(kit.New_img_load(img_dir.GenSubFil(file)));
 		return rv;
 	}
+	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
+		GfuiComboBox rv = kit.New_combo(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
+		rv.TextMgr().Font_(ui_font);
+		return rv;
+	}
 	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
-		GfuiTextBox rv = kit.New_text_box(id, win, KeyVal_.new_(GfuiTextBox.CFG_border_on_, border_on));
+		GfuiTextBox rv = kit.New_text_box(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;
 	}

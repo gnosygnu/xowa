@@ -25,10 +25,20 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_app_fxt {
-	public static Xoae_app app_() {
+	public static Xoae_app Make__app__edit() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
-		return app_("linux", Io_url_.mem_dir_("mem/xowa/"));
+		return Make__app__edit("linux", Io_url_.mem_dir_("mem/xowa/"));
+	}
+	public static Xoae_app Make__app__edit(String op_sys, Io_url root_dir) {
+		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
+		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
+		Xoae_app app = new Xoae_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_cmd, root_dir, root_dir.GenSubDir("wiki"), root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), op_sys);
+		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.core.ios.Io_stream_.Tid_raw);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
+		GfsCore.Instance.Clear();							// NOTE: must clear
+		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_app);	// NOTE: must add app to GfsCore; app.Gfs_mgr() always adds current app to GfsCore; note this causes old test to leave behind GfsCore for new test
+		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_xowa);	// add alias for app; DATE:2014-06-09
+		return app;
 	}
 	public static Xoav_app Make__app__view() {
 		Io_mgr.Instance.InitEngine_mem();
@@ -43,16 +53,6 @@ public class Xoa_app_fxt {
 		rv.Wiki_mgr().Add(new Xowv_wiki(rv, Xow_domain_itm_.Bry__home, user_dir));
 		return rv;
 	}
-	public static Xoae_app app_(String op_sys, Io_url root_dir) {
-		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
-		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
-		Xoae_app app = new Xoae_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_cmd, root_dir, root_dir.GenSubDir("wiki"), root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), op_sys);
-		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.core.ios.Io_stream_.Tid_raw);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
-		GfsCore.Instance.Clear();							// NOTE: must clear
-		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_app);	// NOTE: must add app to GfsCore; app.Gfs_mgr() always adds current app to GfsCore; note this causes old test to leave behind GfsCore for new test
-		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_xowa);	// add alias for app; DATE:2014-06-09
-		return app;
-	}
 	public static Xowv_wiki Make__wiki__view(Xoa_app app) {return Make__wiki__view(app, "en.wikipedia.org");}
 	public static Xowv_wiki Make__wiki__view(Xoa_app app, String domain_str) {
 		byte[] domain_bry = Bry_.new_u8(domain_str);
@@ -61,14 +61,14 @@ public class Xoa_app_fxt {
 		((Xoav_wiki_mgr)app.Wiki_mgri()).Add(rv);
 		return rv;
 	}
-	public static Xowe_wiki wiki_nonwmf(Xoae_app app, String key) {
+	public static Xowe_wiki Make__wiki__edit__nonwmf(Xoae_app app, String key) {
 		Xol_lang_itm lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);
 		Xol_lang_itm_.Lang_init(lang);
-		return wiki_(app, key, lang);
+		return Make__wiki__edit(app, key, lang);
 	}
-	public static Xowe_wiki wiki_tst_(Xoae_app app) {return wiki_(app, "en.wikipedia.org");}
-	public static Xowe_wiki wiki_(Xoae_app app, String key) {return wiki_(app, key, app.Lang_mgr().Lang_en());}
-	public static Xowe_wiki wiki_(Xoae_app app, String key, Xol_lang_itm lang) {
+	public static Xowe_wiki Make__wiki__edit(Xoae_app app) {return Make__wiki__edit(app, "en.wikipedia.org");}
+	public static Xowe_wiki Make__wiki__edit(Xoae_app app, String key) {return Make__wiki__edit(app, key, app.Lang_mgr().Lang_en());}
+	public static Xowe_wiki Make__wiki__edit(Xoae_app app, String key, Xol_lang_itm lang) {
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(key);
 		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(Bry_.new_u8(key)), wiki_dir);
 		rv.File_mgr().Dbmeta_mgr().Depth_(2);					// TEST: written for 2 depth

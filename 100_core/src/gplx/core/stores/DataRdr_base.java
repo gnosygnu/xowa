@@ -27,7 +27,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	public abstract int FieldCount();
 	public abstract String KeyAt(int i);
 	public abstract Object ReadAt(int i);
-	@gplx.Virtual public KeyVal KeyValAt(int idx)	{return KeyVal_.new_(this.KeyAt(idx), ReadAt(idx));}
+	@gplx.Virtual public Keyval KeyValAt(int idx)	{return Keyval_.new_(this.KeyAt(idx), ReadAt(idx));}
 	public String ReadStr(String key) {
 		Object val = Read(key);
 		try {return (String)val;} 
@@ -192,7 +192,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	public void XtoStr_gfml(String_bldr sb) {
 		sb.Add(this.NameOfNode()).Add(":");
 		for (int i = 0; i < this.FieldCount(); i++) {
-			KeyVal kv = this.KeyValAt(i);
+			Keyval kv = this.KeyValAt(i);
 			if (i != 0) sb.Add(" ");
 			sb.Add_fmt("{0}='{1}'", kv.Key(), String_.Replace(kv.Val_to_str_or_empty(), "'", "\""));
 		}

@@ -24,19 +24,24 @@ public class Db_conn_info_ {
 	public static Db_conn_info parse(String raw)		{return Db_conn_info_pool.Instance.Parse(raw);}
 	public static Db_conn_info sqlite_(Io_url url)		{return Sqlite_conn_info.load_(url);}
 	public static Db_conn_info tdb_(Io_url url)			{return Tdb_conn_info.new_(url);}
-	public static Db_conn_info mem_(String db)			{return Db_conn_info__mem.new_(db);}
+	public static Db_conn_info mem_(String db)			{return Mem_conn_info.new_(db);}
 	public static final String Key_tdb = Tdb_conn_info.Tid_const;
+	public static Io_url To_url(Db_conn_info cs) {
+		if		(String_.Eq(cs.Key(), Sqlite_conn_info.Key_const))		return ((Sqlite_conn_info)cs).Url();
+		else if (String_.Eq(cs.Key(), Mem_conn_info.Instance.Key()))	return Io_url_.mem_fil_("mem/" + ((Mem_conn_info)cs).Database());
+		else throw Err_.new_unhandled_default(cs.Key());
+	}
 }
 class Db_conn_info_pool {
-	private Ordered_hash regy = Ordered_hash_.New();
+	private final Ordered_hash regy = Ordered_hash_.New();
 	public Db_conn_info_pool() {
 		this.Add(Noop_conn_info.Instance).Add(Tdb_conn_info.Instance).Add(Mysql_conn_info.Instance).Add(Postgres_conn_info.Instance).Add(Sqlite_conn_info.Instance);
-		this.Add(Db_conn_info__mem.Instance);
+		this.Add(Mem_conn_info.Instance);
 	}
-	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Tid(), itm); return this;}
+	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Key(), itm); return this;}
 	public Db_conn_info Parse(String raw) {// assume each pair has format of: name=val;
 		try {
-			GfoMsg m = GfoMsg_.new_parse_("db_url");
+			Keyval_hash hash = new Keyval_hash();
 			String[] terms = String_.Split(raw, ";");
 			String url_tid = "";
 			for (String term : terms) {
@@ -45,15 +50,15 @@ class Db_conn_info_pool {
 				if (String_.Eq(kv[0], "gplx_key"))
 					url_tid = kv[1]; // NOTE: do not add to GfoMsg; will not be part of ApiStr
 				else
-					m.Add(kv[0], kv[1]);
+					hash.Add(kv[0], kv[1]);
 			}
 			Db_conn_info prototype = (Db_conn_info)regy.Get_by(url_tid);
-			return prototype.New_self(raw, m);
+			return prototype.New_self(raw, hash);
 		}
 		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
 	}
 	public Db_conn_info Parse_or_sqlite_or_fail(String raw) {// assume each pair has format of: name=val;
-		GfoMsg msg = GfoMsg_.new_parse_("db_url");
+		Keyval_hash hash = new Keyval_hash();
 		String[] kvps = String_.Split(raw, ";");
 		String cs_tid = null;
 		int kvps_len = kvps.length; 
@@ -65,19 +70,19 @@ class Db_conn_info_pool {
 			if (String_.Eq(key, "gplx_key"))
 				cs_tid = val;	// NOTE: do not add to GfoMsg; will not be part of ApiStr
 			else
-				msg.Add(key, val);
+				hash.Add(key, val);
 		}
 		if (cs_tid == null) {	// gplx_key not found; try url as sqlite; EX: "/db.sqlite"
 			Io_url sqlite_url = null;
 			try {sqlite_url = Io_url_.new_any_(raw);}
 			catch (Exception exc) {throw Err_.new_exc(exc, "dbs", "invalid connection String", "raw", raw);}
-			msg.Clear();
-			cs_tid = Sqlite_conn_info.Tid_const;
-			msg.Add(Sqlite_conn_info.Cs__data_source, sqlite_url.Raw());
-			msg.Add(Sqlite_conn_info.Cs__version	, Sqlite_conn_info.Cs__version__3);
+			hash.Clear();
+			cs_tid = Sqlite_conn_info.Key_const;
+			hash.Add(Sqlite_conn_info.Cs__data_source, sqlite_url.Raw());
+			hash.Add(Sqlite_conn_info.Cs__version	, Sqlite_conn_info.Cs__version__3);
 		}
 		Db_conn_info prototype = (Db_conn_info)regy.Get_by(cs_tid);
-		return prototype.New_self(raw, msg);
+		return prototype.New_self(raw, hash);
 	}
 	public static final Db_conn_info_pool Instance = new Db_conn_info_pool();
 }

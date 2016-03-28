@@ -21,7 +21,7 @@ import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.sites.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.site_cfgs.*;
 public class Xob_site_meta_cmd implements Xob_cmd {
-	private final Xob_bldr bldr;
+	private final    Xob_bldr bldr;
 	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
 	public Xob_site_meta_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_site_meta;}

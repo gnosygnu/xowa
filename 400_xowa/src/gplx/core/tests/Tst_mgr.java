@@ -20,10 +20,10 @@ import gplx.core.strings.*;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
 	public List_adp Results() {return results;} List_adp results = List_adp_.new_();
-	public KeyValHash Vars() {return vars;} KeyValHash vars = KeyValHash.new_();
-	public Object Vars_get_by_key(String key) {return vars.FetchValOr(key, null);}
+	public Keyval_hash Vars() {return vars;} Keyval_hash vars = new Keyval_hash();
+	public Object Vars_get_by_key(String key) {return vars.Get_val_or(key, null);}
 	public String Vars_get_bry_as_str(String key, int bgn, int end) {
-		byte[] bry = (byte[])vars.FetchValOr(key, null); if (bry == null) return String_.Empty;
+		byte[] bry = (byte[])vars.Get_val_or(key, null); if (bry == null) return String_.Empty;
 		if (bgn < 0 || end > bry.length || end < bgn || end < 0) return "<<OUT OF BOUNDS>>";
 		return String_.new_u8(Bry_.Mid(bry, bgn, end));
 	}

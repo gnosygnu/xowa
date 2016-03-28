@@ -186,7 +186,6 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		byte val_tid = Wdata_dict_val_tid.Xto_tid(src, val_tid_itm.Src_bgn(), val_tid_itm.Src_end());
 		return Make_itm(pid, snak_tid, val_tid, ary);
 	}
-
 	private Wdata_claim_itm_core Make_itm(int pid, byte snak_tid, byte val_tid, Json_ary ary) {
 		switch (val_tid) {
 			case Wdata_dict_val_tid.Tid_string:

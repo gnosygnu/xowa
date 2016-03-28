@@ -34,7 +34,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) bgn_pos = 0;	// do not allow -1 pos
 		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);
 		Close_open_itms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
-		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos, Xop_xnde_tag_.Tag_h2);	// pass h2; should pass h# where # is correct #, but for purpose of Para_wkr, <h2> tag does not matter
+		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos, Xop_xnde_tag_.Tag__h2);	// pass h2; should pass h# where # is correct #, but for purpose of Para_wkr, <h2> tag does not matter
 		int new_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
 		int hdr_len = new_pos - cur_pos + 1;														// +1 b/c Hook has 1 eq: "\n="
 		switch (hdr_len) {
@@ -73,7 +73,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		if (dirty)
 			hdr.Hdr_bgn_manual_(bgn_manual).Hdr_end_manual_(end_manual).Hdr_level_(hdr_len);			
 		cur_pos = Find_fwd_while_ws_hdr_version(src, cur_pos, src_len); // NOTE: hdr gobbles up trailing ws; EX: "==a== \n\t \n \nb" gobbles up all 3 "\n"s; otherwise para_wkr will process <br/> 
-		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_h2);
+		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__h2);
 		hdr.Subs_move(root);
 		hdr.Src_end_(cur_pos);
 		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki)

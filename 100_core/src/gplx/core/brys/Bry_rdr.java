@@ -22,6 +22,7 @@ public class Bry_rdr {
 	public byte[] Src() {return src;} protected byte[] src;
 	public int Src_end() {return src_end;} protected int src_end; 
 	public int Pos() {return pos;} protected int pos;
+	public boolean Pos_is_eos() {return pos == src_end;}
 	public Bry_rdr Dflt_dlm_(byte b) {this.dflt_dlm = b; return this;} private byte dflt_dlm;
 	public Bry_rdr Fail_throws_err_(boolean v) {err_wkr.Fail_throws_err_(v); return this;}
 	public Bry_rdr Init_by_src(byte[] src)										{err_wkr.Init_by_page("", src);						this.pos = 0; this.src = src; this.src_end = src.length; return this;}
@@ -68,7 +69,7 @@ public class Bry_rdr {
 		}
 		return rv;
 	}
-	public double Read_double_to() {return Read_double_to(dflt_dlm);}
+	public double Read_double_to()			{return Read_double_to(dflt_dlm);}
 	public double Read_double_to(byte to_char) {
 		byte[] bry = Read_bry_to(to_char);
 		return Double_.parse(String_.new_a7(bry));

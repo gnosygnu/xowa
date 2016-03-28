@@ -33,7 +33,7 @@ public class Scrib_lib_ustring__gmatch__tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_ustring.Invk_gmatch_callback, Object_.Ary("abcabc", "a(b)", Scrib_kv_utl_.base1_many_(false), 8)	, "1=8\n2=");
 	}
 	@Test  public void Callback__nomatch() {// PURPOSE.fix: was originally returning "" instead of original String; EX:vi.d:trở_thành; DATE:2014-04-23
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_ustring.Invk_gmatch_callback, Object_.Ary("a", "a"			, KeyVal_.Ary_empty, 0)	, "1=1\n2=\n  1=a");
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_ustring.Invk_gmatch_callback, Object_.Ary("a", "a"			, Keyval_.Ary_empty, 0)	, "1=1\n2=\n  1=a");
 	}
 	@Test  public void Callback__anypos() {// PURPOSE.fix: was not handling $capt argument; EX:vi.d:trở_thành; DATE:2014-04-23
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_ustring.Invk_gmatch_callback, Object_.Ary("a bcd e", "()(b)"	, Scrib_kv_utl_.base1_many_(true, false), 0), String_.Concat_lines_nl_skip_last

@@ -74,9 +74,9 @@ class Xoa_site_cfg_mgr_fxt {
 	public Xoa_site_cfg_mgr_fxt() {
 		// Xoa_app_.Usr_dlg_(Xoa_app_.usr_dlg_console_());
 		Xoa_test_.Inet__init();
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
-		Xoa_test_.Db__init__mem(wiki);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
+		Xoa_test_.Init__db__edit(wiki);
 		this.cfg_tbl = wiki.Data__core_mgr().Tbl__cfg();
 		this.site_cfg_mgr = app.Site_cfg_mgr();
 	}

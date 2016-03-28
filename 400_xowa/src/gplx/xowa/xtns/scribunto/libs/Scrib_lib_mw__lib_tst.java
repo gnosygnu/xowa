@@ -30,15 +30,15 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_parentFrameExists, Object_.Ary_empty, false);
 	}
 	@Test  public void GetAllExpandedArguments() {
-		fxt.Init_frame_current(KeyVal_.new_("k1", "v1"));
+		fxt.Init_frame_current(Keyval_.new_("k1", "v1"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("current"), "1=\n  k1=v1");
 	}
 	@Test  public void GetAllExpandedArguments_parent() {
-		fxt.Init_frame_parent("test", KeyVal_.new_("1", "a1"), KeyVal_.new_("2", "a2"));
+		fxt.Init_frame_parent("test", Keyval_.new_("1", "a1"), Keyval_.new_("2", "a2"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_mw.Invk_getAllExpandedArguments, Object_.Ary("parent"), "1=\n  1=a1\n  2=a2");
 	}
 	@Test  public void GetExpandedArgument() {
-		fxt.Init_frame_current(KeyVal_.int_(1, "val_1"), KeyVal_.new_("key_2", "val_2"), KeyVal_.int_(3, "val_3"));
+		fxt.Init_frame_current(Keyval_.int_(1, "val_1"), Keyval_.new_("key_2", "val_2"), Keyval_.int_(3, "val_3"));
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1")		, "val_1");		// get 1st by idx
 		fxt.Test_scrib_proc_str		(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "2")		, "val_3");		// get 2nd by idx (which is "3", not "key_2)
 		fxt.Test_scrib_proc_empty	(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "3"));						// get 3rd by idx (which is n/a, not "val_3")
@@ -46,17 +46,17 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Test_scrib_proc_empty	(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "key_3"));					// key_3 n/a
 	}
 	@Test  public void GetExpandedArgument_parent() {
-		fxt.Init_frame_parent ("test", KeyVal_.new_("1", "a1"), KeyVal_.new_("2", "a2"));
-		fxt.Init_frame_current(KeyVal_.new_("2", "b2"));
+		fxt.Init_frame_parent ("test", Keyval_.new_("1", "a1"), Keyval_.new_("2", "a2"));
+		fxt.Init_frame_current(Keyval_.new_("2", "b2"));
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "1"), "a1");
 	}
 	@Test  public void GetExpandedArgument_numeric_key() {		// PURPOSE.FIX: frame.args[1] was ignoring "1=val_1" b/c it was looking for 1st unnamed arg (and 1 is the name for "1=val_1")
-		fxt.Init_frame_current(KeyVal_.new_("1", "val_1"));
+		fxt.Init_frame_current(Keyval_.new_("1", "val_1"));
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("current", "1"), "val_1");			// get 1st by idx, even though idx is String
 	}
 	@Test  public void GetExpandedArgument_numeric_key_2() {	// PURPOSE.FIX: same as above, but for parent context; DATE:2013-09-23
-		fxt.Init_frame_parent ("test", KeyVal_.new_("2", "a1"));
-		fxt.Init_frame_current(KeyVal_.new_("2", "a2"));
+		fxt.Init_frame_parent ("test", Keyval_.new_("2", "a1"));
+		fxt.Init_frame_current(Keyval_.new_("2", "a2"));
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getExpandedArgument, Object_.Ary("parent", "2"), "a1");				// get 1st by idx, even though idx is String
 	}
 	@Test  public void GetExpandedArgument_out_of_bounds() {

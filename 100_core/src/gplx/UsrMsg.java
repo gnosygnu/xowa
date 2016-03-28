@@ -22,11 +22,11 @@ public class UsrMsg {
 	public String Hdr() {return hdr;} public UsrMsg Hdr_(String val) {hdr = val; return this;} private String hdr;
 	public Ordered_hash Args() {return args;} Ordered_hash args = Ordered_hash_.New();
 	public UsrMsg Add(String k, Object v) {
-		args.Add(k, KeyVal_.new_(k, v));
+		args.Add(k, Keyval_.new_(k, v));
 		return this;
 	}
 	public UsrMsg Add_if_dupe_use_nth(String k, Object v) {
-		args.Add_if_dupe_use_nth(k, KeyVal_.new_(k, v));
+		args.Add_if_dupe_use_nth(k, Keyval_.new_(k, v));
 		return this;
 	}
 	public String XtoStrSingleLine()	{return To_str(" ");}
@@ -35,7 +35,7 @@ public class UsrMsg {
 		if (hdr == null) {
 			GfoMsg m = GfoMsg_.new_cast_(cmd);
 			for (int i = 0; i < args.Count(); i++) {
-				KeyVal kv = (KeyVal)args.Get_at(i);
+				Keyval kv = (Keyval)args.Get_at(i);
 				m.Add(kv.Key(), kv.Val());
 			}
 			return Object_.Xto_str_strict_or_null_mark(invk.Invk(GfsCtx.Instance, 0, cmd, m));
@@ -43,7 +43,7 @@ public class UsrMsg {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add(hdr).Add(spr);
 		for (int i = 0; i < args.Count(); i++) {
-			KeyVal kv = (KeyVal)args.Get_at(i);
+			Keyval kv = (Keyval)args.Get_at(i);
 			sb.Add_spr_unless_first("", " ", i);
 			sb.Add_fmt("{0}={1}", kv.Key(), kv.Val(), spr);
 		}

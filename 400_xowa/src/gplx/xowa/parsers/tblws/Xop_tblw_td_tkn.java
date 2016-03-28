@@ -19,7 +19,7 @@ package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_tblw_td_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_td;}
-	public int Tblw_tid() {return Xop_xnde_tag_.Tid_td;}
+	public int Tblw_tid() {return Xop_xnde_tag_.Tid__td;}
 	public int Atrs_bgn() {return atrs_bgn;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null;
 	public int Atrs_end() {return atrs_end;} private int atrs_end = -1;
 	public void Atrs_rng_set(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end;}

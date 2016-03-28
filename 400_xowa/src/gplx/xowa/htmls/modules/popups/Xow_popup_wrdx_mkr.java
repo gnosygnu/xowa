@@ -53,20 +53,20 @@ public class Xow_popup_wrdx_mkr {
 			case Xop_tkn_itm_.Tid_xnde:
 				xnde = (Xop_xnde_tkn)tkn;
 				switch (xnde.Tag().Id()) {
-					case Xop_xnde_tag_.Tid_div:
-					case Xop_xnde_tag_.Tid_table: case Xop_xnde_tag_.Tid_tr: case Xop_xnde_tag_.Tid_td: case Xop_xnde_tag_.Tid_th: 
-					case Xop_xnde_tag_.Tid_caption: case Xop_xnde_tag_.Tid_thead: case Xop_xnde_tag_.Tid_tfoot: case Xop_xnde_tag_.Tid_tbody:
-					case Xop_xnde_tag_.Tid_ref: case Xop_xnde_tag_.Tid_gallery: case Xop_xnde_tag_.Tid_imageMap: case Xop_xnde_tag_.Tid_timeline:
-					case Xop_xnde_tag_.Tid_xowa_html:	// needed for Help:Options, else \n at top of doc; DATE:2014-06-22
+					case Xop_xnde_tag_.Tid__div:
+					case Xop_xnde_tag_.Tid__table: case Xop_xnde_tag_.Tid__tr: case Xop_xnde_tag_.Tid__td: case Xop_xnde_tag_.Tid__th: 
+					case Xop_xnde_tag_.Tid__caption: case Xop_xnde_tag_.Tid__thead: case Xop_xnde_tag_.Tid__tfoot: case Xop_xnde_tag_.Tid__tbody:
+					case Xop_xnde_tag_.Tid__ref: case Xop_xnde_tag_.Tid__gallery: case Xop_xnde_tag_.Tid__imageMap: case Xop_xnde_tag_.Tid__timeline:
+					case Xop_xnde_tag_.Tid__xowa_html:	// needed for Help:Options, else \n at top of doc; DATE:2014-06-22
 						add_tkn = add_subs = false;		// skip tblxs
 						xnde = null;
 						break;
-					case Xop_xnde_tag_.Tid_math:		// add <math> as one unit; PAGE:en.w:System_of_polynomial_equations DATE:2014-07-01
+					case Xop_xnde_tag_.Tid__math:		// add <math> as one unit; PAGE:en.w:System_of_polynomial_equations DATE:2014-07-01
 						add_subs = false;				// never recur
 						xnde = null;
 						data.Words_found_add(tkn);		// treat it as one word
 						break;
-					case Xop_xnde_tag_.Tid_br:
+					case Xop_xnde_tag_.Tid__br:
 						add_tkn = false;				// never add_tkn Src_bgn / Src_end; note add_subs should still be true; PAGE:en.q:Earth; DATE:2014-06-30
 						if (wrdx_bfr.Len_eq_0())		// don't add <br/> to start of document; needed for Help:Options, but good to have everywhere; DATE:2014-06-22
 							add_subs = false;

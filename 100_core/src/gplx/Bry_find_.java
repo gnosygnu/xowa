@@ -182,12 +182,23 @@ public class Bry_find_ {
 		return bgn;
 	}
 	public static int Find_bwd__skip(byte[] src, int end, int bgn, byte skip) {
-		int src_len = src.length; if (end == src_len) return end;
+		int src_len = src.length; // if (end == src_len) return end;
 		if (end > src_len || end < 0) return Bry_find_.Not_found;
 		int pos = end - 1;	// start from end - 1; handles situations where len is passed in
 		for (int i = pos; i >= bgn; --i) {
 			if (src[i] != skip)
 				return i + 1;
+		}
+		return bgn;
+	}
+	public static int Find_bwd__skip(byte[] src, int end, int bgn, byte[] skip) {
+		int src_len = src.length;
+		if (end > src_len || end < 0) return Bry_find_.Not_found;
+		int skip_len = skip.length;
+		int pos = end - skip_len;	// start from end - 1; handles situations where len is passed in
+		for (int i = pos; i >= bgn; --i) {
+			if (!Bry_.Eq(src, i, i + skip_len, skip))
+				return i + skip_len;
 		}
 		return bgn;
 	}

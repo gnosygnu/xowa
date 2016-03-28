@@ -24,7 +24,7 @@ public class Xop_tblw_tb_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 			atrs_bgn = atrs_end = bgn;
 	}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_tb;}
-	public int Tblw_tid() {return Xop_xnde_tag_.Tid_table;}
+	public int Tblw_tid() {return Xop_xnde_tag_.Tid__table;}
 	public int Atrs_bgn() {return atrs_bgn;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null;
 	public int Atrs_end() {return atrs_end;} private int atrs_end = -1;
 	public void Atrs_rng_set(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end;}

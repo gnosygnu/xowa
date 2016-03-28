@@ -74,7 +74,6 @@ public class Gfo_url_parser {
 		protocol_bry = anch = null;
 		path_bgn = qarg_key_bgn = qarg_val_bgn = anch_bgn = anch_nth_bgn = -1;
 		segs_ary.Clear(); qargs.Clear();
-
 		int pos = src_bgn;
 		Object protocol_obj = protocols.Match_bgn(src, src_bgn, src_end);
 		pos = protocols.Match_pos();
@@ -86,7 +85,6 @@ public class Gfo_url_parser {
 			this.protocol_tid = ((Byte_obj_val)protocol_obj).Val();
 			this.protocol_bry = Make_bry(src_bgn, pos);
 		}
-
 		area = Area__path;
 		path_bgn = pos;
 		while (true) {

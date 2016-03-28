@@ -29,7 +29,7 @@ public class Rndm_core_tbl implements Rls_able {
 		fld_interval 	= flds.Add_int("rndm_interval");
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, "core", fld_uid)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, "core", fld_uid)));}
 	public void Upsert(int uid, String where_sql, int total, int interval) {
 		conn.Stmt_delete(tbl_name, fld_uid).Crt_int(fld_uid, uid).Exec_delete();
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_uid, uid).Val_str(fld_where_sql, where_sql).Val_int(fld_total, total).Val_int(fld_interval, interval).Exec_insert();

@@ -63,10 +63,10 @@ class Xou_cache_mgr_fxt {
 		Tfds.Now_set(DateAdp_.new_(1970, 1, 1, 0, 0, 0, 0));
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
-		Xoae_app app = Xoa_app_fxt.app_();			
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();			
 		app.User().User_db_mgr().Init_by_app(Bool_.N, app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
-		Xoa_app_fxt.repo_(app, Xoa_app_fxt.wiki_(app, "en.wikipedia.org"));
-		Xoa_app_fxt.repo_(app, Xoa_app_fxt.wiki_(app, "fr.wikipedia.org"));
+		Xoa_app_fxt.repo_(app, Xoa_app_fxt.Make__wiki__edit(app, "en.wikipedia.org"));
+		Xoa_app_fxt.repo_(app, Xoa_app_fxt.Make__wiki__edit(app, "fr.wikipedia.org"));
 		this.mgr = new Xou_cache_mgr(app.Wiki_mgr(), app.Fsys_mgr().File_dir(), app.User().User_db_mgr().Db_file());
 	}
 	public void Init_delete(long min, long max) {

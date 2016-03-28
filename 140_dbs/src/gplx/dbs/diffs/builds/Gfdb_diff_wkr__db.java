@@ -31,7 +31,7 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 		this.uid = 0; this.prog_count = 0;
 
 		String dif_tbl = tbl.Name; Dbmeta_fld_itm[] dif_flds = Gfdb_diff_wkr__db_.New_dif_flds(tbl.Flds);
-		if (!dif_conn.Meta_tbl_exists(dif_tbl)) dif_conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(dif_tbl, dif_flds));
+		if (!dif_conn.Meta_tbl_exists(dif_tbl)) dif_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(dif_tbl, dif_flds));
 		this.stmt = dif_conn.Stmt_insert(dif_tbl, Gfdb_diff_wkr__db_.To_str_ary(dif_flds));
 		dif_conn.Txn_bgn("dif_db_tbl_" + dif_tbl);
 		cmd_create = true;

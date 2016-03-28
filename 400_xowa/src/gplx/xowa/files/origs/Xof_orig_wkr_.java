@@ -30,7 +30,6 @@ public class Xof_orig_wkr_ {
 			rv.Add(fsdb_ttl, orig);
 		}
 	}
-
 	public static final byte
 	  Tid_xowa_db			= 1
 	, Tid_wmf_api			= 2

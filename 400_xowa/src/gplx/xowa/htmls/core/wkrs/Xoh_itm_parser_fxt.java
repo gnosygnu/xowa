@@ -25,8 +25,8 @@ public abstract class Xoh_itm_parser_fxt {
 	protected byte[] src; protected int src_len;
 	protected final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	public Xoh_itm_parser_fxt() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		hctx.Init_by_app(app);
 	}
 	private Xoh_itm_parser Parser() {return Parser_get();}

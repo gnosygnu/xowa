@@ -35,16 +35,16 @@ class Json_kv_ary_srl_fxt {
 			parser = new Json_parser();
 		}
 	}	private Json_parser parser;
-	public void Test_parse(String raw_str, KeyVal[] expd) {
+	public void Test_parse(String raw_str, Keyval[] expd) {
 		byte[] raw_bry = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw_bry);
-		KeyVal[] actl = Json_kv_ary_srl.Val_by_itm_nde(doc.Root_nde());
-		Tfds.Eq_str_lines(KeyVal_.Ary_to_str(expd), KeyVal_.Ary_to_str(actl));
+		Keyval[] actl = Json_kv_ary_srl.Val_by_itm_nde(doc.Root_nde());
+		Tfds.Eq_str_lines(Keyval_.Ary_to_str(expd), Keyval_.Ary_to_str(actl));
 	}
-	public KeyVal[] ary_(KeyVal... ary) {return ary;}
-	public KeyVal kv_obj_(String key, Object val)		{return KeyVal_.new_(key, val);}
-	public KeyVal kv_str_(String key, String val)		{return KeyVal_.new_(key, val);}
-	public KeyVal kv_int_(String key, int val)			{return KeyVal_.new_(key, val);}
-	public KeyVal kv_bool_(String key, boolean val)		{return KeyVal_.new_(key, Bool_.To_str_lower(val));}
-	public KeyVal kv_dec_(String key, Decimal_adp val)	{return KeyVal_.new_(key, val.To_str());}
+	public Keyval[] ary_(Keyval... ary) {return ary;}
+	public Keyval kv_obj_(String key, Object val)		{return Keyval_.new_(key, val);}
+	public Keyval kv_str_(String key, String val)		{return Keyval_.new_(key, val);}
+	public Keyval kv_int_(String key, int val)			{return Keyval_.new_(key, val);}
+	public Keyval kv_bool_(String key, boolean val)		{return Keyval_.new_(key, Bool_.To_str_lower(val));}
+	public Keyval kv_dec_(String key, Decimal_adp val)	{return Keyval_.new_(key, val.To_str());}
 }

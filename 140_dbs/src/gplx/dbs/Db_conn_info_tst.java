@@ -26,21 +26,23 @@ public class Db_conn_info_tst {
 		tst_Parse("gplx_key=mock;id=1;name=me;", kv_("id", "1"), kv_("name", "me")); // many
 		tst_Parse("gplx_key=mock;id=1;name=me" , kv_("id", "1"), kv_("name", "me")); // no semi-colon at end
 	}
-	private KeyVal kv_(String key, Object val) {return KeyVal_.new_(key, val);}
-	private void tst_Parse(String raw, KeyVal... expd) {
+	private Keyval kv_(String key, Object val) {return Keyval_.new_(key, val);}
+	private void tst_Parse(String raw, Keyval... expd) {
 		Db_conn_info_mock mock = (Db_conn_info_mock)regy.Parse(raw);
 		Tfds.Eq_ary_str(expd, mock.Kvs());
 	}
 }
 class Db_conn_info_mock extends Db_conn_info__base {
-	public KeyVal[] Kvs() {return kvs;} KeyVal[] kvs;
-	@Override public String Tid() {return Tid_const;} public static final String Tid_const = "mock";
-	@Override public Db_conn_info New_self(String raw, GfoMsg m) {
-		Db_conn_info_mock rv = new Db_conn_info_mock();
-		rv.kvs = new KeyVal[m.Args_count()];
-		for (int i = 0; i < m.Args_count(); i++)
-			rv.kvs[i] = m.Args_getAt(i);
+	public Db_conn_info_mock(String raw, String db_api, String database) {super(raw, db_api, database);}
+	public Keyval[] Kvs() {return kvs;} Keyval[] kvs;
+	@Override public String Key() {return Tid_const;} public static final String Tid_const = "mock";
+	@Override public Db_conn_info New_self(String raw, Keyval_hash hash) {
+		Db_conn_info_mock rv = new Db_conn_info_mock("", "", "");
+		int len = hash.Count();
+		rv.kvs = new Keyval[len];
+		for (int i = 0; i < len; ++i)
+			rv.kvs[i] = hash.Get_at(i);
 		return rv;
 	}
-        public static final Db_conn_info_mock Instance = new Db_conn_info_mock(); Db_conn_info_mock() {}
+        public static final Db_conn_info_mock Instance = new Db_conn_info_mock("", "", "");
 }

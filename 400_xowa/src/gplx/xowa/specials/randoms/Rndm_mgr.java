@@ -30,7 +30,7 @@ public class Rndm_mgr implements Rls_able {
 	}
 	public void Rebuild(int uid, String where_sql, int interval) {
 		int total_count = 0; List_adp rng_list = List_adp_.new_();
-		Db_conn conn = page_tbl.Conn();
+		Db_conn conn = page_tbl.conn;
 		Db_stmt stmt = conn.Stmt_select_order(page_tbl.Tbl_name(), String_.Ary(page_tbl.Fld_page_id()), String_.Ary_empty, page_tbl.Fld_page_id());
 		Db_rdr rdr = stmt.Exec_select__rls_auto();
 		try {
@@ -69,7 +69,7 @@ public class Rndm_mgr implements Rls_able {
 		String sql = fmt_sql.Bld_many_to_str(bfr, page_tbl.Tbl_name(), page_tbl.Fld_page_id(), where_sql, page_id_bgn, offset);
 		Db_rdr rdr = Db_rdr_.Empty;
 		try {
-			rdr = page_tbl.Conn().Exec_sql_as_rdr_v2(sql);
+			rdr = page_tbl.conn.Exec_rdr(sql);
 			return rdr.Move_next() ? rdr.Read_int(page_tbl.Fld_page_id()) : -1;
 		}
 		finally {rdr.Rls();}

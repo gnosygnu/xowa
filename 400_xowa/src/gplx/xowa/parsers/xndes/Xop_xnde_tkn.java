@@ -45,10 +45,10 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	public Xox_xnde Xnde_xtn() {return xnde_xtn;} public Xop_xnde_tkn Xnde_xtn_(Xox_xnde v) {xnde_xtn = v; return this;} private Xox_xnde xnde_xtn;
 	@Override public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {
 		switch (tag.Id()) {
-			case Xop_xnde_tag_.Tid_noinclude:	// NOTE: prep_mode is false to force recompile; see Ex_Tmpl_noinclude and {{{1<ni>|a</ni>}}}
-			case Xop_xnde_tag_.Tid_includeonly:	// NOTE: changed to always ignore <includeonly>; DATE:2014-05-10
+			case Xop_xnde_tag_.Tid__noinclude:	// NOTE: prep_mode is false to force recompile; see Ex_Tmpl_noinclude and {{{1<ni>|a</ni>}}}
+			case Xop_xnde_tag_.Tid__includeonly:	// NOTE: changed to always ignore <includeonly>; DATE:2014-05-10
 				break;	
-			case Xop_xnde_tag_.Tid_nowiki: {
+			case Xop_xnde_tag_.Tid__nowiki: {
 				int subs_len = this.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm sub = this.Subs_get(i);
@@ -56,7 +56,7 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 				}
 				break;
 			}
-			case Xop_xnde_tag_.Tid_onlyinclude: {
+			case Xop_xnde_tag_.Tid__onlyinclude: {
 				int subs_len = this.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm sub = this.Subs_get(i);
@@ -84,21 +84,21 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 //			}
 		int subs_len = this.Subs_len();
 		switch (tag.Id()) {
-			case Xop_xnde_tag_.Tid_noinclude:		// do not evaluate subs
+			case Xop_xnde_tag_.Tid__noinclude:		// do not evaluate subs
 				break;
-			case Xop_xnde_tag_.Tid_includeonly:		// evaluate subs
+			case Xop_xnde_tag_.Tid__includeonly:		// evaluate subs
 				if (!ctx.Only_include_evaluate()) {
 					for (int i = 0; i < subs_len; i++)
 						this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
 				}
 				break;
-			case Xop_xnde_tag_.Tid_nowiki:			// evaluate subs; add tags
-				bfr.Add_byte(Byte_ascii.Lt).Add(Xop_xnde_tag_.Tag_nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
+			case Xop_xnde_tag_.Tid__nowiki:			// evaluate subs; add tags
+				bfr.Add_byte(Byte_ascii.Lt).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
 				for (int i = 0; i < subs_len; i++)
 					this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
-				bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(Xop_xnde_tag_.Tag_nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
+				bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
 				break;
-			case Xop_xnde_tag_.Tid_onlyinclude:		// evaluate subs but toggle onlyinclude flag on/off
+			case Xop_xnde_tag_.Tid__onlyinclude:		// evaluate subs but toggle onlyinclude flag on/off
 //					boolean prv_val = ctx.Onlyinclude_enabled;
 //					ctx.Onlyinclude_enabled = false;
 				for (int i = 0; i < subs_len; i++)

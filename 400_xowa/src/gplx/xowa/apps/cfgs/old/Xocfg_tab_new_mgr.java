@@ -46,5 +46,5 @@ class Xocfg_new_tab_pos {
 			default:			throw Err_.new_unhandled(v);
 		}
 	}
-	public static KeyVal[] Options__all = KeyVal_.Ary(KeyVal_.new_(Key_all_bgn), KeyVal_.new_(Key_all_end), KeyVal_.new_(Key_cur_prv), KeyVal_.new_(Key_cur_nxt));
+	public static Keyval[] Options__all = Keyval_.Ary(Keyval_.new_(Key_all_bgn), Keyval_.new_(Key_all_end), Keyval_.new_(Key_cur_prv), Keyval_.new_(Key_cur_nxt));
 }

@@ -21,6 +21,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem, ActionListener {
+	public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
 	public void DataSource_set(Object... ary) {
 		for (Object o : ary)
 			this.insertItemAt(o, this.getItemCount());
@@ -33,9 +34,20 @@ public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem,
 			obj = cb.getSelectedItem();  
  		 */
 	}
+	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
+	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
+	public void Sel_(int bgn, int end) {}
 	public Object SelectedItm() {return this.getEditor().getItem();} public void SelectedItm_set(Object v) {
 		this.getEditor().setItem(v);
 	}
+	@Override public String Text_fallback() {return "";} @Override public void Text_fallback_(String v) {}
+	@Override public int List_sel_idx() {return -1;} @Override public void List_sel_idx_(int v) {}
+	public boolean List_visible() {return false;} public void List_visible_(boolean v) {}	
+	public void Items__update(String[] ary) {}
+	public void Items__size_to_fit(int count) {}
+	public void Items__visible_rows_(int v) {}
+	public void Items__jump_len_(int v) {}
+	public void Margins_set(int left, int top, int right, int bot) {}
 	void ctor_() {
 		ctrlMgr = GxwCore_lang.new_(this);
 		this.enableEvents(AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK | AWTEvent.MOUSE_WHEEL_EVENT_MASK);

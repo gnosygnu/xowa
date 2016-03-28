@@ -26,9 +26,9 @@ public class Xof_xfer_queue_base_fxt {
 	@gplx.Virtual public void Clear(boolean src_repo_is_wmf) {
 		Io_mgr.Instance.InitEngine_mem();
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			en_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__enwiki);
-			commons = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__commons);
+			app = Xoa_app_fxt.Make__app__edit();
+			en_wiki = Xoa_app_fxt.Make__wiki__edit(app, Xow_domain_itm_.Str__enwiki);
+			commons = Xoa_app_fxt.Make__wiki__edit(app, Xow_domain_itm_.Str__commons);
 			app.Wiki_mgr().Add(commons);
 			app.Wiki_mgr().Add(en_wiki);
 			

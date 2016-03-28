@@ -33,7 +33,7 @@ public class Xop_log_mgr implements GfoInvkAble {
 	private Db_conn Conn() {
 		if (conn == null) {
 			if (log_dir == null) log_dir = app.Usere().Fsys_mgr().App_temp_dir();
-			Xob_db_file db_file = Xob_db_file.new__temp_log(log_dir);
+			Xob_db_file db_file = Xob_db_file.New__temp_log(log_dir);
 			conn = db_file.Conn();
 		}
 		return conn;

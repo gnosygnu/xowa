@@ -47,8 +47,8 @@ class Xof_bin_wkr__http_wmf__fxt {
 	private Io_stream_rdr get_as_rdr__rdr;
 	public Xof_fsdb_itm_fxt Fsdb_itm_mkr() {return fsdb_itm_mkr;} private final Xof_fsdb_itm_fxt fsdb_itm_mkr = new Xof_fsdb_itm_fxt();
 	public Xof_bin_wkr__http_wmf__fxt() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xoa_app_fxt.repo2_(app, wiki);
 		this.download_mgr = Io_download_mgr_.new_memory();
 		this.wkr = Xof_bin_wkr__http_wmf.new_(wiki, download_mgr);

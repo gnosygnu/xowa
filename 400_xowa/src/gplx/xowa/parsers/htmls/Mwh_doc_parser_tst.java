@@ -41,9 +41,9 @@ public class Mwh_doc_parser_tst {
 	@Test   public void Node__single_only()	{
 		fxt.Test_parse("<b>a<br>b</b>c"
 		, fxt.Make_nde_head("<b>")
-		, fxt.Make_txt("a", Xop_xnde_tag_.Tid_b)
+		, fxt.Make_txt("a", Xop_xnde_tag_.Tid__b)
 		, fxt.Make_nde_head("<br>")
-		, fxt.Make_txt("b", Xop_xnde_tag_.Tid_b)	// <b> not <br>
+		, fxt.Make_txt("b", Xop_xnde_tag_.Tid__b)	// <b> not <br>
 		, fxt.Make_nde_tail("</b>")
 		, fxt.Make_txt("c", Xop_xnde_tag_.Tid__null)
 		);
@@ -51,9 +51,9 @@ public class Mwh_doc_parser_tst {
 	@Test   public void Node__pre()	{
 		fxt.Test_parse("<pre>a<div>b</pre>c"
 		, fxt.Make_nde_head("<pre>")
-		, fxt.Make_txt("a", Xop_xnde_tag_.Tid_pre)
+		, fxt.Make_txt("a", Xop_xnde_tag_.Tid__pre)
 		, fxt.Make_nde_head("<div>")
-		, fxt.Make_txt("b", Xop_xnde_tag_.Tid_pre)	// <pre> not <div>
+		, fxt.Make_txt("b", Xop_xnde_tag_.Tid__pre)	// <pre> not <div>
 		, fxt.Make_nde_tail("</pre>")
 		, fxt.Make_txt("c", Xop_xnde_tag_.Tid__null)
 		);

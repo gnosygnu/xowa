@@ -37,7 +37,7 @@ public class Fsm_bin_tbl {
 			fld_bin_max = Dbmeta_fld_itm.Key_null;
 		}
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Val_long(fld_bin_len, 0).Val_long(fld_bin_max, 0).Exec_insert();
 	}

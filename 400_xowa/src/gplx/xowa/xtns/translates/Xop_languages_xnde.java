@@ -74,8 +74,8 @@ public class Xop_languages_xnde implements Xox_xnde {
 		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Page().Lang().Key_bry());
 		fmtr_all.Bld_bfr_many(bfr, "Other languages", fmtr_mgr_itms);
 	}
-	private static final Xop_languages_fmtr fmtr_mgr_itms = new Xop_languages_fmtr();
-	public static final Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl
+	private static final    Xop_languages_fmtr fmtr_mgr_itms = new Xop_languages_fmtr();
+	public static final    Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl
 	(	"<table>"
 	,	"  <tbody>"
 	,	"    <tr valign=\"top\">"
@@ -120,7 +120,7 @@ class Xop_languages_fmtr implements gplx.core.brys.Bfr_arg {
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
 			Xoa_ttl lang_ttl = Xoa_ttl.parse(wiki, ns_id, lang_ttl_bry);
 			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
-			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt());
+			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt_w_ttl_case());
 			Bry_fmtr fmtr = null;
 			if		(Bry_.Eq(lang_key, Xol_lang_itm_.Key_en)) 	fmtr = Xop_languages_xnde.fmtr_itm_english;
 			else if	(Bry_.Eq(lang_key, cur_lang))			fmtr = Xop_languages_xnde.fmtr_itm_selected;

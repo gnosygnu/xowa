@@ -19,13 +19,14 @@ package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.d
 import java.sql.*; 
 import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
 import gplx.dbs.qrys.*; 
+import org.sqlite.SQLiteConnection;
 public class Sqlite_engine extends Db_engine_sql_base {
-	private final Sqlite_txn_mgr txn_mgr; private final Sqlite_schema_mgr schema_mgr;
+	private final    Sqlite_txn_mgr txn_mgr; private final    Sqlite_schema_mgr schema_mgr;
 	Sqlite_engine() {
 		this.txn_mgr = new Sqlite_txn_mgr(this);
 		this.schema_mgr = new Sqlite_schema_mgr(this);
 	}
-	@Override public String Tid() {return Sqlite_conn_info.Tid_const;}
+	@Override public String Tid() {return Sqlite_conn_info.Key_const;}
 	@Override public gplx.dbs.sqls.Sql_qry_wtr Sql_wtr() {return Sql_qry_wtr_.Sqlite;}
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
@@ -34,12 +35,18 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
 	@Override public Db_rdr	New_rdr_clone() {return new Db_rdr__sqlite();}
+	@Override public void	Env_db_attach(String alias, Db_conn conn)	{
+		Db_conn_info cs_obj = conn.Conn_info(); if (!String_.Eq(cs_obj.Key(), Sqlite_conn_info.Key_const)) throw Err_.new_("dbs", "must attach to sqlite databases", "conn", cs_obj.Raw());
+		Sqlite_conn_info cs = (Sqlite_conn_info)cs_obj;
+		Env_db_attach(alias, cs.Url());
+	}
 	@Override public void	Env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
 	@Override public void	Env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
 	@Override public void	Txn_bgn(String name)	{txn_mgr.Txn_bgn(name);}
 	@Override public String	Txn_end()				{return txn_mgr.Txn_end();}
 	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
 	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
+	@Override public void	Meta_reload()							{schema_mgr.Tbl_load_all();}
 	@Override public boolean	Meta_tbl_exists(String tbl)				{return schema_mgr.Tbl_exists(tbl);}
 	@Override public boolean	Meta_fld_exists(String tbl, String fld) {return schema_mgr.Fld_exists(tbl, fld);}
 	@Override public Dbmeta_tbl_mgr Meta_tbl_load_all() {return schema_mgr.Tbl_load_all();}
@@ -56,9 +63,12 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		}
 		Sqlite_conn_info conn_info_as_sqlite = (Sqlite_conn_info)conn_info;
 		Connection rv = Conn_make_by_url("jdbc:sqlite://" + String_.Replace(conn_info_as_sqlite.Url().Raw(), "\\", "/"), "", "");
+		SQLiteConnection rv_as_sqlite = (org.sqlite.SQLiteConnection)rv;
+		try {rv_as_sqlite.setBusyTimeout(10000);}
+		catch (SQLException e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set busy timeout; err=~{0}", Err_.Message_gplx_log(e));}
 		return rv;
 	}
-		public static final Sqlite_engine Instance = new Sqlite_engine();
+		public static final    Sqlite_engine Instance = new Sqlite_engine();
 }
 class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {

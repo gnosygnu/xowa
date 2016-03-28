@@ -38,8 +38,10 @@ public class Noop_engine implements Db_engine {
 	public void				Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}
 	public void				Ddl_append_fld(String tbl, Dbmeta_fld_itm fld)	{}
 	public void				Ddl_delete_tbl(String tbl)						{}
+	public void				Env_db_attach(String alias, Db_conn conn)		{}
 	public void				Env_db_attach(String alias, Io_url db_url)		{}
 	public void				Env_db_detach(String alias)						{}
+	public void				Meta_reload()									{}
 	public boolean				Meta_tbl_exists(String tbl)						{return false;}
 	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
 	public Dbmeta_tbl_mgr	Meta_tbl_load_all()								{return meta_tbl_mgr;} private final Dbmeta_tbl_mgr meta_tbl_mgr = new Dbmeta_tbl_mgr();

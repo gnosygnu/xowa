@@ -56,12 +56,12 @@ public class Xol_duration_itm_ {
 	, Itm_minutes
 	, Itm_seconds
 	};
-	public static Xol_duration_itm[] Xto_itm_ary(KeyVal[] kv_ary) {
+	public static Xol_duration_itm[] Xto_itm_ary(Keyval[] kv_ary) {
 		if (kv_ary == null) return Xol_duration_itm_.Ary_default;
 		List_adp rv = List_adp_.new_();
 		int len = kv_ary.length;
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = kv_ary[i];
+			Keyval kv = kv_ary[i];
 			String name = kv.Val_to_str_or_empty();
 			Xol_duration_itm itm = (Xol_duration_itm)regy.Get_by(Bry_.new_u8(name));
 			if (itm != null)

@@ -20,8 +20,8 @@ import gplx.core.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.data.tb
 public class Xob_base_fxt {
 	public Xob_base_fxt Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			bldr = Xoa_app_fxt.bldr_(app);
 		}
 		this.Init_(bldr, wiki);
@@ -66,7 +66,7 @@ public class Xob_base_fxt {
 		cmd.Cmd_run();
 		cmd.Cmd_end();
 	}
-	public static void Run_wkr(Xob_bldr bldr, Xobd_wkr wkr, Xowd_page_itm[] page_ary) {
+	public static void Run_wkr(Xob_bldr bldr, Xob_page_wkr wkr, Xowd_page_itm[] page_ary) {
 		wkr.Wkr_bgn(bldr);
 		int page_ary_len = page_ary.length;
 		for (int i = 0; i < page_ary_len; i++) {

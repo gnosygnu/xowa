@@ -33,7 +33,7 @@ public class Xoh_page_wtr_wkr_ {
 			return tmp_bfr.To_bry_and_clear();
 		}
 		else
-			return ttl.Full_txt();						// NOTE: include ns with ttl as per defect d88a87b3
+			return ttl.Full_txt_w_ttl_case();				// NOTE: include ns with ttl as per defect d88a87b3
 	}
 	public static void Bld_head_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] head_end = page.Html_data().Custom_head_end();

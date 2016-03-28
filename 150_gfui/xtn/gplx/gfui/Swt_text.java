@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 class Swt_text implements GxwTextFld, Swt_control {
 	private Text text_box;
-	public Swt_text(Swt_control owner_control, KeyValHash ctorArgs) {
+	public Swt_text(Swt_control owner_control, Keyval_hash ctorArgs) {
 		int text_box_args = ctorArgs.Has(GfuiTextBox_.Ctor_Memo)
 			? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
 			: SWT.NONE

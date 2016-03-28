@@ -38,7 +38,7 @@ public class Scrib_lib_ustring__match__tst {
 		Exec_match(""		, "a?"				, 1, "");							// no results with ? should return "" not nil; PAGE:en.d:民; DATE:2015-01-30
 	}
 	@Test  public void Args_out_of_order() {
-		fxt.Test__proc__kvps__empty(lib, Scrib_lib_ustring.Invk_match, KeyVal_.Ary(KeyVal_.int_(2, "[a]")));
+		fxt.Test__proc__kvps__empty(lib, Scrib_lib_ustring.Invk_match, Keyval_.Ary(Keyval_.int_(2, "[a]")));
 	}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);

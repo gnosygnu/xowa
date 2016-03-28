@@ -117,7 +117,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		rslt_prv = rslt_prv2;
 		return true;
 	}	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
-	private static final byte[] Bry_arg_from = Bry_.new_a7("from"), Bry_arg_ns = Bry_.new_a7("namespace"), Bry_arg_hideredirects = Bry_.new_a7("hideredirects");
+	private static final    byte[] Bry_arg_from = Bry_.new_a7("from"), Bry_arg_ns = Bry_.new_a7("namespace"), Bry_arg_hideredirects = Bry_.new_a7("hideredirects");
 	public Xow_ns Init_ns() {return init_ns;} private Xow_ns init_ns;
 	public void Build_html(Xoae_page page) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
@@ -133,7 +133,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		int msg_id = fwd ? Xol_msg_itm_.Id_sp_allpages_fwd : Xol_msg_itm_.Id_sp_allpages_bwd;
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(msg_id);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512().Mkr_rls();
-		byte[] lbl_text = msg_itm.Fmt(tmp_bfr, ttl.Full_txt());
+		byte[] lbl_text = msg_itm.Fmt(tmp_bfr, ttl.Full_txt_w_ttl_case());
 		byte[] args__rest = arg_hash.Concat(tmp_bfr, Bry_arg_ns, Bry_arg_hideredirects);
 		byte[] arg_from = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(ttl.Page_txt_wo_qargs());
 		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
@@ -165,7 +165,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 	}
 	public static final String Invk_html_all_ = "html_all_", Invk_html_list_grp_ = "html_list_grp_", Invk_html_list_itm_normal_ = "html_list_itm_normal_", Invk_html_list_itm_redirect_ = "html_list_itm_redirect_"
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
-	public static final String GRP_KEY = "xowa.special.allpages";
+	public static final    String GRP_KEY = "xowa.special.allpages";
 }
 class Xos_pagelist_html_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	public Xos_pagelist_html_itm_fmtr(Xows_page_allpages mgr, Xowe_wiki wiki) {
@@ -190,10 +190,10 @@ class Xos_pagelist_html_itm_fmtr implements gplx.core.brys.Bfr_arg {
 			if (ttl_itm == null) break; // ttl_itm can be null at bgn or end of title list; EX: list=A-Z; count=5; key=Z; itms=X,Y,Z,null,null
 			Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, ttl_itm);
 			byte[] href = href_wtr.Build_to_bry(wiki, ttl);
-			byte[] title = Xoh_html_wtr.Ttl_to_title(ttl.Full_txt());
+			byte[] title = Xoh_html_wtr.Ttl_to_title(ttl.Full_txt_w_ttl_case());
 			byte[] cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki_key, ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			Bry_fmtr fmtr = ttl_itm.Redirected() ? itm_redirect : itm_normal;
-			fmtr.Bld_bfr_many(bfr, itm_pct, href, title, ttl.Full_txt(), cls);
+			fmtr.Bld_bfr_many(bfr, itm_pct, href, title, ttl.Full_txt_w_ttl_case(), cls);
 		}
 	}
 }

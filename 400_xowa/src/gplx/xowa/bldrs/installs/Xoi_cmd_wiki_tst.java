@@ -33,7 +33,7 @@ public class Xoi_cmd_wiki_tst {
 		Bfr_arg__time time_fmtr = new Bfr_arg__time();
 		for (int i = 0; i < ary_len; i++)
 			Bld_import_list_itm2(bfr, parser, time_fmtr, ary, i);
-		Io_mgr.Instance.SaveFilStr("C:\\temp.txt", bfr.To_str());
+		Io_mgr.Instance.SaveFilStr("C:\\xowa\\user\\temp.txt", bfr.To_str());
 	}
 	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Bfr_arg__time time_fmtr, String[] ary, int i) {
 		String domain_str = ary[i];
@@ -124,6 +124,6 @@ public class Xoi_cmd_wiki_tst {
 			}
 		}
 		bfr.Add_str_a7("app.bldr.wiki_cfg_bldr.run;").Add_byte_nl();
-		Io_mgr.Instance.SaveFilStr("C:\\xowa_build_cfg.gfs", bfr.To_str());
+		Io_mgr.Instance.SaveFilStr("C:\\user\\xowa_build_cfg.gfs", bfr.To_str());
 	}
 }

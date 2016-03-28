@@ -40,7 +40,7 @@ public class Xoapi_font implements GfoInvkAble {
 		app.Gui_mgr().Win_cfg().Font().Size_(gui_font_size);
 		app.Cfg_mgr().Set_by_app("app.gui.win_opts.font.size", Float_.To_str(gui_font_size));
 		app.Cfg_mgr().Db_save_txt();
-		app.Gui_mgr().Browser_win().Page__reload();	// NOTE: force reload; needed if viewing Help:Options/HTML, else Font size won't update
+		app.Gui_mgr().Browser_win().Page__reload();	// NOTE: force reload; needed if viewing home/wiki/Options/HTML, else Font size won't update
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_increase))	 		this.Increase();

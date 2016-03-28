@@ -49,7 +49,6 @@ class Pft_fmt_itm_hebrew_ {
 	public static boolean Calc_hebrew_date(int[] rv, int year, int month, int day) {	// REF.MW:Language.php|tsToHebrew
 		// Calculate Hebrew year
 		int hebrewYear = year + 3760;
-
 		// Month number when September = 1, August = 12
 		month += 4;
 		if (month > 12) {
@@ -58,7 +57,6 @@ class Pft_fmt_itm_hebrew_ {
 			year++;
 			hebrewYear++;
 		}
-
 		// Calculate day of year from 1 September
 		int dayOfYear = day;
 		for (int i = 1; i < month; i++) {
@@ -75,10 +73,8 @@ class Pft_fmt_itm_hebrew_ {
 				dayOfYear += 31;
 			}
 		}
-
 		// Calculate the start of the Hebrew year
 		int start = Calc_hebrew_year_num_start(hebrewYear);
-
 		// Calculate next year's start
 		int nextStart = 0;
 		if (dayOfYear <= start) {
@@ -100,10 +96,8 @@ class Pft_fmt_itm_hebrew_ {
 			// Next year's start
 			nextStart = Calc_hebrew_year_num_start(hebrewYear + 1);
 		}
-
 		// Calculate Hebrew day of year
 		int hebrewDayOfYear = dayOfYear - start;
-
 		// Difference between year's days
 		int diff = nextStart - start;
 		// Add 12 (or 13 for leap years) days to ignore the difference between
@@ -114,7 +108,6 @@ class Pft_fmt_itm_hebrew_ {
 		} else {
 			diff += 12;
 		}
-
 		// Check the year pattern, and is leap year
 		// 0 means an incomplete year, 1 means a regular year, 2 means a complete year
 		// This is mod 30, to work on both leap years (which add 30 days of Adar I)
@@ -122,14 +115,12 @@ class Pft_fmt_itm_hebrew_ {
 		int yearPattern = diff % 30;
 		// Check if leap year
 		boolean isLeap = diff >= 30;
-
 		// Calculate day in the month from number of day in the Hebrew year
 		// Don't check Adar - if the day is not in Adar, we will stop before;
 		// if it is in Adar, we will use it to check if it is Adar I or Adar II
 		int hebrewDay = hebrewDayOfYear;
 		int hebrewMonth = 1;
 		int days = 0;
-
 		while (hebrewMonth <= 12) {
 			// Calculate days in this month
 			if (isLeap && hebrewMonth == 6) {
@@ -205,7 +196,6 @@ class Pft_fmt_itm_hebrew_ {
 	, Rslt_day_num				= 2
 	, Rslt_month_days_count		= 3
 	;
-
 	private static final byte[][][] Numeral_tbls = new byte[][][]
 	{ new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
 	, new byte[][] {Bry_.Empty, Bry_.new_u8("י"), Bry_.new_u8("כ"), Bry_.new_u8("ל"), Bry_.new_u8("מ"), Bry_.new_u8("נ")	, Bry_.new_u8("ס")	, Bry_.new_u8("ע")	, Bry_.new_u8("פ")	, Bry_.new_u8("צ")	, Bry_.new_u8("ק")}

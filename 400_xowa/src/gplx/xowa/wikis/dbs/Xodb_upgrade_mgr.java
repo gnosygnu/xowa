@@ -30,16 +30,16 @@ class Xodb_upgrade_mgr {
 	}
 }
 //	class Xodb_upgrade_mgr_v0_6_2_0 {
-//		public static void Upgrade(Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {
+//		public static void Upgrade(Xodb_mgr_sql db_mgr, Keyval[] kv_ary) {
 //			Db_conn p = db_mgr.Fsys_mgr().Core_provider();
 //			Fix_storage_format(p, db_mgr, kv_ary);
 //			Fix_category_version(p, db_mgr);
 //		}
-//		private static void Fix_storage_format(Db_conn p, Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {	// storage_format saved incorrectly as int
+//		private static void Fix_storage_format(Db_conn p, Xodb_mgr_sql db_mgr, Keyval[] kv_ary) {	// storage_format saved incorrectly as int
 //			int len = kv_ary.length;
 //			String gfs_data_storage_format = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format);
 //			for (int i = 0; i < len; i++) {
-//				KeyVal kv = kv_ary[i];
+//				Keyval kv = kv_ary[i];
 //				String kv_key = kv.Key();
 //				if (String_.Eq(kv_key, gfs_data_storage_format)) {
 //					byte data_storage_format_byte = Byte_.parse(kv.Val_to_str_or_empty());

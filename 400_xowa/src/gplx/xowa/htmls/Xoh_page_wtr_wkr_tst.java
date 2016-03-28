@@ -43,8 +43,8 @@ public class Xoh_page_wtr_wkr_tst {
 class Xoh_page_wtr_fxt {
 	public void Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		}
 	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Xowe_wiki wiki;
 	public Xoae_app App() {return app;} private Xoae_app app; 

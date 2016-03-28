@@ -29,6 +29,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			return new Iterator_objAry(list, count);
 	}
 	public void Add_many(Object... ary) {for (Object o : ary) Add_base(o);}
+	public int Len() {return count;}
 	public int Count() {return count;}
 	public int Idx_last() {return count - 1;}
 	protected Object Get_at_base(int index) {if (index >= count || index < 0) throw Err_.new_missing_idx(index, count);

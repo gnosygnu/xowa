@@ -25,15 +25,15 @@ public class GfuiWin_ {
 		;
 	public static GfuiWin as_(Object obj) {return obj instanceof GfuiWin ? (GfuiWin)obj : null;}
 	public static GfuiWin cast(Object obj) {try {return (GfuiWin)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiWin.class, obj);}}
-	public static GfuiWin app_(String key)							{return bld_(key, InitKey_winType_app, KeyValHash.new_());}
-	public static GfuiWin tool_(String key)							{return bld_(key, InitKey_winType_tool, KeyValHash.new_()).TaskbarVisible_(false);}
+	public static GfuiWin app_(String key)							{return bld_(key, InitKey_winType_app, new Keyval_hash());}
+	public static GfuiWin tool_(String key)							{return bld_(key, InitKey_winType_tool, new Keyval_hash()).TaskbarVisible_(false);}
 	public static GfuiWin sub_(String key, GfuiWin ownerWin)		{
-		KeyValHash ctorArgs = KeyValHash.new_();
+		Keyval_hash ctorArgs = new Keyval_hash();
 		if (ownerWin != null) ctorArgs.Add(GfuiElem_.InitKey_ownerWin, ownerWin);	// WORKAROUND/JAVA: null ownerWin will fail when adding to hash
 		return bld_(key, InitKey_winType_tool, ctorArgs);
 	}
-	public static GfuiWin toaster_(String key, GfuiWin ownerWin)	{return bld_(key, InitKey_winType_toaster, KeyValHash.new_().Add(GfuiElem_.InitKey_ownerWin, ownerWin));}
-	static GfuiWin bld_(String key, String winType, KeyValHash ctorArgs) {
+	public static GfuiWin toaster_(String key, GfuiWin ownerWin)	{return bld_(key, InitKey_winType_toaster, new Keyval_hash().Add(GfuiElem_.InitKey_ownerWin, ownerWin));}
+	static GfuiWin bld_(String key, String winType, Keyval_hash ctorArgs) {
 		GfuiWin rv = new GfuiWin();
 		rv.Key_of_GfuiElem_(key);
 		ctorArgs.Add(InitKey_winType, winType)
@@ -41,7 +41,7 @@ public class GfuiWin_ {
 		rv.ctor_GfuiBox_base(ctorArgs);
 		return rv;
 	}
-	public static GfuiWin kit_(Gfui_kit kit, String key, GxwWin under, KeyValHash ctorArgs) {
+	public static GfuiWin kit_(Gfui_kit kit, String key, GxwWin under, Keyval_hash ctorArgs) {
 		GfuiWin rv = new GfuiWin();
 		rv.ctor_kit_GfuiElemBase(kit, key, under, ctorArgs);
 		return rv;

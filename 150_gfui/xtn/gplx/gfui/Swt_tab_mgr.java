@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.*;
 public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, GfoEvMgrOwner {
 	private GfuiInvkCmd cmd_sync;
 //	private GfuiInvkCmd cmd_async;	// NOTE: async needed for some actions like responding to key_down and calling .setSelection; else app hangs; DATE:2014-04-30 
-	public Swt_tab_mgr(Swt_kit kit, Swt_control owner_control, KeyValHash ctorArgs) {
+	public Swt_tab_mgr(Swt_kit kit, Swt_control owner_control, Keyval_hash ctorArgs) {
 		this.kit = kit;
 		tab_folder = new CTabFolder(owner_control.Under_composite(), SWT.BORDER);
 		tab_folder.setBorderVisible(false);
@@ -113,7 +113,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		Gfui_tab_itm_data trg_tab_data = Get_tab_data(trg_tab_itm);
 		int src_tab_idx = src_tab_data.Idx(), trg_tab_idx = trg_tab_data.Idx();
 		tab_folder.setSelection(trg_tab_itm);
-		GfoEvMgr_.PubVals(this, Gfui_tab_mgr.Evt_tab_switched, KeyVal_.new_("src", src_tab_data.Key()), KeyVal_.new_("trg", trg_tab_data.Key()));
+		GfoEvMgr_.PubVals(this, Gfui_tab_mgr.Evt_tab_switched, Keyval_.new_("src", src_tab_data.Key()), Keyval_.new_("trg", trg_tab_data.Key()));
 		return src_tab_idx < trg_tab_idx;
 	}
 	public void Tabs_select_by_itm(CTabItem itm) {

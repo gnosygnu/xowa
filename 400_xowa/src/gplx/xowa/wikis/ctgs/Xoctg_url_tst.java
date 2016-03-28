@@ -30,13 +30,13 @@ class Xoctg_url_fxt {
 	public Xoctg_url_chkr url() {return expd.Clear();} private Xoctg_url_chkr expd;
 	public void Clear() {
 		if (parser == null) {
-			Xoa_app app = Xoa_app_fxt.app_();
+			Xoa_app app = Xoa_app_fxt.Make__app__edit();
 			parser = app.User().Wikii().Utl__url_parser();
 			page_url = Xoa_url.blank();
 			ctg_url = new Xoctg_url();
 			expd = new Xoctg_url_chkr();
 		}
-	}	private Xoa_url_parser parser; Xoa_url page_url; Xoctg_url ctg_url;
+	}	private Xow_url_parser parser; Xoa_url page_url; Xoctg_url ctg_url;
 	public void Test_parse(String url_str, Xoctg_url_chkr expd) {
 		page_url = parser.Parse(Bry_.new_u8(url_str));
 		ctg_url.Parse(Gfo_usr_dlg_.Test(), page_url);

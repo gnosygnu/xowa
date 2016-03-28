@@ -20,18 +20,18 @@ import gplx.core.texts.*;
 public class Php_srl_parser {
 	@gplx.Internal protected Php_srl_factory Factory() {return factory;} Php_srl_factory factory = new Php_srl_factory();
 	byte[] raw; int raw_len, pos;
-	public KeyVal[] Parse_as_kvs(byte[] raw) {
+	public Keyval[] Parse_as_kvs(byte[] raw) {
 		Php_srl_itm_ary root = Parse(raw);
 		return Xto_kv_ary(root);
 	}
-	KeyVal[] Xto_kv_ary(Php_srl_itm_ary ary) {
+	Keyval[] Xto_kv_ary(Php_srl_itm_ary ary) {
 		int len = ary.Subs_len();
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = Xto_kv(ary.Subs_get_at(i));
 		return rv;
 	}
-	KeyVal Xto_kv(Php_srl_itm_kv itm) {
+	Keyval Xto_kv(Php_srl_itm_kv itm) {
 		Php_srl_itm itm_key = itm.Key();
 		Object key = itm_key == null ? null : itm_key.Val();
 		Php_srl_itm itm_val = itm.Val();
@@ -48,7 +48,7 @@ public class Php_srl_parser {
 				val = itm_val.Val();
 				break;
 		}
-		return KeyVal_.obj_(key, val);
+		return Keyval_.obj_(key, val);
 	}
 	@gplx.Internal protected Php_srl_itm_ary Parse(byte[] raw) {
 		this.raw = raw; this.raw_len = raw.length; pos = 0;

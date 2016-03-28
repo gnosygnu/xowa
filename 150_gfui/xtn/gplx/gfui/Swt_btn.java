@@ -41,7 +41,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 class Swt_btn implements GxwElem, Swt_control {
 	private Button btn;
-	public Swt_btn(Swt_control owner, KeyValHash ctorArgs) {
+	public Swt_btn(Swt_control owner, Keyval_hash ctorArgs) {
 		btn = new Button(owner.Under_composite(), SWT.FLAT | SWT.PUSH);
 		core = new Swt_core_cmds(btn);
 		btn.addKeyListener(new Swt_lnr_key(this));
@@ -58,7 +58,7 @@ class Swt_btn implements GxwElem, Swt_control {
 }
 class Swt_btn_no_border implements GxwElem, Swt_control {
 	private ImageAdp btn_img; private Composite box_grp; private Label box_btn;
-	public Swt_btn_no_border(Swt_control owner_control, KeyValHash ctorArgs) {
+	public Swt_btn_no_border(Swt_control owner_control, Keyval_hash ctorArgs) {
 		Composite owner = owner_control.Under_composite();
 		Make_btn_no_border(owner.getDisplay(), owner.getShell(), owner);
 		this.core = new Swt_core_cmds(box_btn);

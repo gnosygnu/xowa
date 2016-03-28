@@ -19,7 +19,7 @@ package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoa_url__to_str__tst {
-	private final Xoa_url__to_str__fxt fxt = new Xoa_url__to_str__fxt();
+	private final    Xoa_url__to_str__fxt fxt = new Xoa_url__to_str__fxt();
 	@Test   public void Http()				{fxt.Chk_to_str_href(Bool_.N, "http://a.org/b"						, "http://a.org/b");}
 	@Test   public void File()				{fxt.Chk_to_str_href(Bool_.N, "file:///C/xowa/file/a.png"			, "file:///C/xowa/file/a.png");}
 	@Test   public void Abrv__page()		{fxt.Chk_to_str_href(Bool_.N, "/wiki/A"								, "A");}
@@ -46,11 +46,11 @@ public class Xoa_url__to_str__tst {
 	}
 	@Test   public void Unknown()			{fxt.Chk_to_str_href(Bool_.N, "/wiki/{{{extlink}}}"					, "");}	// {{{extlink}}} not a valid title; return empty
 }
-class Xoa_url__to_str__fxt extends Xoa_url_parser_fxt { 	private final Xoh_href_parser href_parser = new Xoh_href_parser();
+class Xoa_url__to_str__fxt extends Xow_url_parser_fxt { 	private final    Xoh_href_parser href_parser = new Xoh_href_parser();
 	public void Chk_to_str_href(boolean full, String raw, String expd) {Chk_to_str_href(cur_wiki, full, raw, expd);}
 	public void Chk_to_str_href(Xowe_wiki wiki, boolean full, String raw, String expd) {
 		href_parser.Parse_as_url(actl_url, Bry_.new_u8(raw), wiki, Bry__page);
 		this.Chk_to_str(full, expd);
 	}
-	private static final byte[] Bry__page = Bry_.new_a7("Page_1");
+	private static final    byte[] Bry__page = Bry_.new_a7("Page_1");
 }

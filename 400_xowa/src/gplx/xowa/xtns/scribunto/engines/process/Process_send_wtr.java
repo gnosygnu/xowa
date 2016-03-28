@@ -54,19 +54,19 @@ public class Process_send_wtr {
 		bfr.Add_byte(Byte_ascii.Brack_end);
 		return true;		
 	}	static final byte[] Prc_bgn = Bry_.new_a7("chunks[");
-	private boolean Encode_ary(Bry_bfr bfr, KeyVal[] ary) {
+	private boolean Encode_ary(Bry_bfr bfr, Keyval[] ary) {
 		int len = ary.length;
 		bfr.Add_byte(Byte_ascii.Curly_bgn);
 		for (int i = 0; i < len; i++) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
-			KeyVal itm = ary[i];
+			Keyval itm = ary[i];
 			Encode_key(bfr, itm.Key_as_obj());
 			Encode_obj(bfr, itm.Val());
 		}
 		bfr.Add_byte(Byte_ascii.Curly_end);
 		return true;
 	}
-	private boolean Encode_kv(Bry_bfr bfr, KeyVal kv) {
+	private boolean Encode_kv(Bry_bfr bfr, Keyval kv) {
 		bfr.Add_byte(Byte_ascii.Curly_bgn);
 		Encode_key(bfr, kv.Key_as_obj());
 		Encode_obj(bfr, kv.Val());
@@ -88,8 +88,8 @@ public class Process_send_wtr {
 		else if	(Object_.Eq(c, String.class))				{if (!Encode_str(bfr, (String)o)) return false;}
 		else if	(Object_.Eq(c, byte[].class))				{if (!Encode_str(bfr, (byte[])o)) return false;}	// NOTE: not in Scribunto; added here for PERF of not re-creating a String Object
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		{if (!Encode_prc(bfr, (Scrib_lua_proc)o)) return false;}
-		else if	(Object_.Eq(c, KeyVal.class))				{if (!Encode_kv(bfr, (KeyVal)o)) return false;}
-		else if	(Object_.Eq(c, KeyVal[].class))			{if (!Encode_ary(bfr, (KeyVal[])o)) return false;}
+		else if	(Object_.Eq(c, Keyval.class))				{if (!Encode_kv(bfr, (Keyval)o)) return false;}
+		else if	(Object_.Eq(c, Keyval[].class))			{if (!Encode_ary(bfr, (Keyval[])o)) return false;}
 		else												{throw Scrib_xtn_mgr.err_("Object cannot be serialized: {0}", Type_adp_.NameOf_obj(o));}
 		return true;
 	}

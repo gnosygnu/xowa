@@ -30,7 +30,7 @@ public class Xoh_html_wtr_escaper {
 			switch (b) {
 				case Byte_ascii.Lt:
 					if (nowiki_skip) {
-						byte[] nowiki_name = Xop_xnde_tag_.Tag_nowiki.Name_bry();
+						byte[] nowiki_name = Xop_xnde_tag_.Tag__nowiki.Name_bry();
 						int nowiki_name_len = nowiki_name.length;
 						if (Bry_.Eq(src, i + 1, i + 1 + nowiki_name_len, nowiki_name)) {	// <nowiki found;
 							int end_gt = Escape_nowiki_skip(bfr, src, i, end, nowiki_name, nowiki_name_len);

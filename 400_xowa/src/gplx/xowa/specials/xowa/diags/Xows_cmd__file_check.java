@@ -39,7 +39,7 @@ class Xows_cmd__file_check {
 			atr_main = wiki.File__fsdb_core().File__atr_file__at(Fsm_mnt_mgr.Mnt_idx_main);
 			Write_kv(bfr, "fsdb.atr_file", atr_main.Url());
 		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
-		try {Write_kv(bfr, "fsdb.orig", wiki.File__fsdb_core().File__orig_tbl_ary()[0].Conn().Conn_info().Xto_raw());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "fsdb.orig", wiki.File__fsdb_core().File__orig_tbl_ary()[0].Conn().Conn_info().Raw());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		Fsdb_sql_mkr sql_mkr = schema_1 ? Fsdb_sql_mkr__v1.Instance : Fsdb_sql_mkr__v2.Instance;
 		String sql = "";
 		try {

@@ -31,7 +31,7 @@ public class Xoud_site_tbl implements Rls_able {
 		fld_site_xtn			= flds.Add_text("site_xtn");
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Rls() {}
 	public void Insert(int site_id, int priority, String domain, String name, String path, String xtn) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);

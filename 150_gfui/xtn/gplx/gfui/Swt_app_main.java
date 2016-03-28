@@ -16,6 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
+import gplx.Byte_ascii;
+import gplx.String_;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.custom.*;
@@ -23,6 +26,8 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
@@ -30,8 +35,10 @@ public class Swt_app_main {
 	public static void main(String[] args) {
 //		Drag_drop();
 //		List_fonts();
-//		keystrokes(args);
-		Permission_denied();
+		keystrokes(args);
+//		Permission_denied();
+//		Combo_default();
+//		Combo_composite();
 	}
 	static void Drag_drop() {
 		final Display display = new Display();
@@ -196,5 +203,227 @@ public class Swt_app_main {
 				display.sleep();
 		}
 		display.dispose();
+	}
+	public static void Combo_dflt() {
+	    Display display = new Display();
+	    Shell shell = new Shell(display);
+	    shell.setLayout(new FillLayout());
+	
+	    String[] ITEMS = { "A", "B", "C", "D" };
+	
+	    final Combo combo = new Combo(shell, SWT.DROP_DOWN);
+	    combo.setItems(ITEMS);
+	    combo.select(2);
+	    
+	    combo.addSelectionListener(new SelectionListener() {
+	      public void widgetSelected(SelectionEvent e) {
+	        System.out.println(combo.getText());
+	      }
+	
+	      public void widgetDefaultSelected(SelectionEvent e) {
+	        System.out.println(combo.getText());
+	      }
+	    });
+	    combo.addKeyListener(new KeyListener() {				
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub					
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				System.out.println(combo.getText());					
+				if (arg0.keyCode == Byte_ascii.Ltr_a) {
+					combo.setItem(0, "a");
+					combo.setListVisible(true);
+				}
+				else if (arg0.keyCode == Byte_ascii.Ltr_b) {
+					combo.setItem(0, "b");
+					combo.setListVisible(true);
+				}
+				// System.out.println(combo.getText());
+			}
+		});
+	
+	    shell.open();
+	    combo.setListVisible(true);
+	    while (!shell.isDisposed()) {
+	      if (!display.readAndDispatch()) {
+	        display.sleep();
+	      }
+	    }
+	    display.dispose();
+	}
+	public static void Combo_composite() {
+		final Display display = new Display();
+		final Shell shell = new Shell(display);
+		GridLayout gridLayout = new GridLayout();
+	    gridLayout.numColumns = 2;
+	    gridLayout.makeColumnsEqualWidth = true;		
+		shell.setLayout(gridLayout);
+		final Text text = new Text(shell, SWT.BORDER);
+		text.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
+		Text text2 = new Text(shell, SWT.BORDER);
+		text2.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_END));
+		shell.pack();
+		shell.open();
+		
+		final Shell combo_shell = new Shell(display, SWT.ON_TOP);
+		combo_shell.setLayout(new FillLayout());
+		final Table combo_table = new Table(combo_shell, SWT.SINGLE);
+		for (int i = 0; i < 5; i++) {
+			new TableItem(combo_table, SWT.NONE);
+		}
+
+		text.addListener(SWT.KeyDown, new Listener() {			
+			@Override public void handleEvent(Event event) {
+				int index = -1;
+				switch (event.keyCode) {
+					case SWT.ARROW_DOWN:
+						if (event.stateMask == SWT.ALT) {
+							Rectangle text_bounds = display.map(shell, null, text.getBounds());
+							combo_shell.setBounds(text_bounds.x, text_bounds.y + text_bounds.height, text_bounds.width, (text_bounds.height - 1) * combo_table.getItems().length);
+							combo_shell.setVisible(true);
+						} else {
+							index = (combo_table.getSelectionIndex() + 1) % combo_table.getItemCount();
+							combo_table.setSelection(index);
+							event.doit = false;
+						}
+						break;
+					case SWT.ARROW_UP:
+						if (event.stateMask == SWT.ALT) {
+							combo_shell.setVisible(false);
+						} else {
+							index = combo_table.getSelectionIndex() - 1;
+							if (index < 0) index = combo_table.getItemCount() - 1;
+							combo_table.setSelection(index);
+							event.doit = false;
+						}
+						break;
+					case SWT.CR:
+						if (combo_shell.isVisible() && combo_table.getSelectionIndex() != -1) {
+							text.setText(combo_table.getSelection()[0].getText());
+							combo_shell.setVisible(false);
+						}
+						break;
+					case SWT.ESC:
+						combo_shell.setVisible(false);
+						break;
+				}			
+			}
+		});
+
+		text.addListener(SWT.Modify, new Listener() {
+			@Override public void handleEvent(Event event)  {
+				String string = text.getText();
+				if (string.length() == 0) {
+					combo_shell.setVisible(false);
+				} else {
+					TableItem[] items = combo_table.getItems();
+					for (int i = 0; i < items.length; i++) {
+						items[i].setText(string + '-' + i);
+					}
+					
+					Rectangle text_bounds = display.map(shell, null, text.getBounds());
+					combo_shell.setBounds(text_bounds.x, text_bounds.y + text_bounds.height, text_bounds.width, (text_bounds.height - 1) * items.length);
+					combo_shell.setVisible(true);
+				}
+			}
+		});
+
+		combo_table.addListener(SWT.DefaultSelection, new Listener() {
+			@Override public void handleEvent(Event arg0) {
+				text.setText(combo_table.getSelection()[0].getText());
+				combo_shell.setVisible(false);			
+			}
+		});
+
+		combo_table.addListener(SWT.KeyDown, new Listener() {
+			@Override public void handleEvent(Event event) {
+				if (event.keyCode == SWT.ESC) {
+					combo_shell.setVisible(false);
+				}
+			}
+		});
+
+		final Swt_shell_hider shell_hider = new Swt_shell_hider(combo_shell);
+		Listener focus_out_listener = new Listener() {
+			@Override public void handleEvent(Event arg0) {
+				if (display.isDisposed()) return;
+				Control control = display.getFocusControl();
+//				if (control == null || (control != text && control != combo_table)) {
+//					combo_shell.setVisible(false);
+//				}
+				if (control == null || (control == text || control == combo_table)) {
+					// combo_shell.setVisible(false);
+					shell_hider.Active = true;
+					display.asyncExec(shell_hider);
+					//Thread t = new Thread(shell_hider); t.start();
+					//Swt_shell_hider
+				}
+				
+//				boolean combo_is_focus = combo_table.isFocusControl();
+//				boolean text_is_focus = text.isFocusControl();
+//				if (control == null || (control == text)) {
+//					combo_shell.setVisible(false);
+//				}
+//				if (control == null || (control == combo_table)) {
+//					combo_shell.setVisible(true);
+//				}
+			}
+		};
+		
+		combo_table.addListener(SWT.FocusOut, focus_out_listener);
+		text.addListener(SWT.FocusOut, focus_out_listener);
+
+		Listener focus_in_listener = new Listener() {
+			@Override public void handleEvent(Event arg0) {
+				if (display.isDisposed()) return;
+				Control control = display.getFocusControl();
+				if (control == combo_table) {
+					// combo_shell.setVisible(false);
+					//display.asyncExec(shell_hider);
+					shell_hider.Active = false;
+					//Swt_shell_hider
+				}
+//				boolean combo_is_focus = combo_table.isFocusControl();
+//				boolean text_is_focus = text.isFocusControl();
+//				if (control == null || (control == text)) {
+//					combo_shell.setVisible(false);
+//				}
+//				if (control == null || (control == combo_table)) {
+//					combo_shell.setVisible(true);
+//				}
+			}
+		};
+		combo_table.addListener(SWT.FocusIn, focus_in_listener);
+	
+		shell.addListener(SWT.Move, new Listener() {
+			@Override public void handleEvent(Event arg0) {
+				combo_shell.setVisible(false);
+			}
+		}); 
+	
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) display.sleep();
+		}
+		display.dispose();
+	}
+}
+class Swt_shell_hider implements Runnable {
+	public boolean Active = true;
+
+	private Shell combo_shell;
+	public Swt_shell_hider(Shell combo_shell) {this.combo_shell = combo_shell;}
+	@Override public void run() {
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		if (Active) {
+			combo_shell.setVisible(false);
+		}
 	}
 }

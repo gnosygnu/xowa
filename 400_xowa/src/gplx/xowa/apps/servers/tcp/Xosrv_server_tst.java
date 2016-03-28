@@ -29,7 +29,7 @@ public class Xosrv_server_tst {
 }
 class Xosrv_server_fxt {
 	public Xosrv_server_fxt Clear() {
-		app = Xoa_app_fxt.app_();
+		app = Xoa_app_fxt.Make__app__edit();
 		Xoa_app_fxt.Init_gui(app, null);	// NOTE: null wiki does not matter for test
 		return this;
 	} 	private Xoae_app app;

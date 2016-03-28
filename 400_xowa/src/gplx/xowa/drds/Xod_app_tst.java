@@ -41,7 +41,7 @@ class Xod_app_tstr {
 		this.app = Xoa_app_fxt.Make__app__view();
 		this.wiki = Xoa_app_fxt.Make__wiki__view(app);
 		data_mgr.Wiki_(wiki);
-		Xoa_test_.Init__db__mem(wiki);
+		Xoa_test_.Init__db__view(wiki);
 		drd_provider = new Xod_app(app);
 	}
 	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final Xowd_data_tstr data_mgr = new Xowd_data_tstr();

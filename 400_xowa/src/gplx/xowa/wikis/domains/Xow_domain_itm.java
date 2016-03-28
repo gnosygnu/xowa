@@ -30,7 +30,7 @@ public class Xow_domain_itm {
 	public int				Domain_type_id() {return domain_type.Tid();}
 	public byte[]			Abrv_wm() {return abrv_wm;} private final byte[] abrv_wm;							// EX: enwiki
 	public byte[]			Abrv_xo() {return abrv_xo;} private final byte[] abrv_xo;							// EX: en.w
-	public Xol_lang_stub		Lang_actl_itm() {return lang_actl_itm;} private final Xol_lang_stub lang_actl_itm;	// EX: zh
+	public Xol_lang_stub	Lang_actl_itm() {return lang_actl_itm;} private final Xol_lang_stub lang_actl_itm;	// EX: zh
 	public int				Lang_actl_uid() {return lang_actl_itm.Id();}
 	public byte[]			Lang_actl_key() {return lang_actl_itm.Key();}
 	public byte[]			Lang_orig_key() {return lang_orig_key;} private final byte[] lang_orig_key;			// EX: lzh

@@ -40,7 +40,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 								  flag_bldr.Set_as_int(Flag__capt_cs0_tid		, data.Capt_itm().Cs0_tid());
 		byte text_type			= flag_bldr.Set_as_byte(Flag__text_type			, data.Text_tid());
 		// Tfds.Dbg(flag_bldr.Encode(), Array_.To_str(flag_bldr.Val_ary()), text_type);
-
 		int bfr_bgn = bfr.Len();
 		int flag = flag_bldr.Encode();
 		bfr.Add(hook);
@@ -60,7 +59,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				break;
 		}
 		if (title_tid == Xoh_lnki_data.Title__diff)	bfr.Add_hzip_mid(src, data.Title_bgn(), data.Title_end());
-
 		hctx.Hzip__stat().Lnki_add(data.Src_end() - data.Src_bgn(), bfr.Len() - bfr_bgn, flag);
 		return this;
 	}
@@ -77,7 +75,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int capt_cs0_tid				= flag_bldr.Get_as_int(Flag__capt_cs0_tid);
 		byte text_type					= flag_bldr.Get_as_byte(Flag__text_type);
 		// Tfds.Dbg(cls_tid, title_missing_ns, ttl_is_main_page, ns_custom_exists, title_tid, capt_has_ns, ns_is_not_main, href_type, capt_cs0_tid, text_type);
-
 		int site_bgn = -1, site_end = -1; if (href_type == Xoh_anch_href_data.Tid__site) {site_bgn = rdr.Pos(); site_end = rdr.Find_fwd_lr();}
 		int ns_id = ns_is_not_main ? Xoh_lnki_dict_.Ns_decode(rdr) : Xow_ns_.Tid__main;
 		byte[] ns_custom_bry = ns_custom_exists ? rdr.Read_bry_to() : null;
@@ -143,7 +140,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					break;
 			}
 		}
-
 		// gen html
 		bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 		switch (href_type) {

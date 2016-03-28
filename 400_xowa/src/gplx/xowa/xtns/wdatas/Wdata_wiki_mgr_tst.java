@@ -54,9 +54,4 @@ public class Wdata_wiki_mgr_tst {
 		,	"</span>"
 		));
 	}
-	@Test  public void Get_low_qid() {
-		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
-		fxt.Test_get_low_qid("q1"	, "q1");	// return self
-		fxt.Test_get_low_qid("q2|q1", "q1");	// return lowest
-	}
 }

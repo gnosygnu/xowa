@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Wdata_wiki_mgr_fxt {
-	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
+	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
 	public Wdata_wiki_mgr_fxt Init(Xop_fxt parser_fxt, boolean reset) {
@@ -81,10 +81,10 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
 		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();
-		wdata_mgr.Qids_add(tmp_bfr, Bry_.new_a7(lang_key), wiki_tid, Bry_.new_a7("000"), Bry_.new_a7(ttl), Bry_.new_a7(qid));
+		wdata_mgr.Qid_mgr.Add(tmp_bfr, Bry_.new_a7(lang_key), wiki_tid, Bry_.new_a7("000"), Bry_.new_a7(ttl), Bry_.new_a7(qid));
 		tmp_bfr.Mkr_rls();
 	}
-	public void Init_pids_add(String lang_key, String pid_name, int pid) {wdata_mgr.Pids_add(Bry_.new_u8(lang_key + "|" + pid_name), pid);}
+	public void Init_pids_add(String lang_key, String pid_name, int pid) {wdata_mgr.Pid_mgr.Add(Bry_.new_u8(lang_key + "|" + pid_name), pid);}
 	public void Init_links_add(String wiki, String ttl, String qid) {Init_links_add(wiki, "000", ttl, qid);}
 	public void Init_links_add(String wiki, String ns_num, String ttl, String qid) {
 		byte[] ttl_bry = Bry_.new_u8(ttl);
@@ -114,17 +114,14 @@ public class Wdata_wiki_mgr_fxt {
 				external_lang_links.Langs_add(Bry_.new_a7(lang));
 		}
 	}
-	public void Test_get_low_qid(String qid, String expd) {
-		Tfds.Eq(expd, String_.new_a7(Wdata_wiki_mgr.Get_low_qid(Bry_.new_a7(qid))));
-	}
 	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, Bry_.new_u8(ttl_str)), expd);}
 	public void Test_link(Xoa_ttl ttl, String expd) {
-		byte[] qid_ttl = wdata_mgr.Qids_get(wiki, ttl);
+		byte[] qid_ttl = wdata_mgr.Qid_mgr.Get_or_null(wiki, ttl);
 		Tfds.Eq(expd, String_.new_u8(qid_ttl));
 	}
 	public void Test_parse_pid_null(String val)			{Test_parse_pid(val, Wdata_wiki_mgr.Pid_null);}
 	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wdata_pf_property.Parse_pid(num_parser, Bry_.new_a7(val)));} private Number_parser num_parser = new Number_parser();
-	public void Init_pages_add(Wdata_doc page) {wdata_mgr.Pages_add(page.Qid(), page);}
+	public void Init__docs__add(Wdata_doc page)			{wdata_mgr.Doc_mgr.Add(page.Qid(), page);}
 	public void Test_parse(String raw, String expd) {
 		parser_fxt.Test_parse_page_tmpl_str(raw, expd);
 	}

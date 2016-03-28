@@ -39,8 +39,8 @@ class Xoh_href_wtr_fxt {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();
 	public Xoh_href_wtr_fxt() {
-		this.app = Xoa_app_fxt.app_();
-		this.wiki = Xoa_app_fxt.wiki_tst_(app);
+		this.app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Xwiki_mgr().Add_by_csv(Bry_.new_a7("1|wikt|en.wiktionary.org"));
 		app.Usere().Wiki().Xwiki_mgr().Add_by_csv(Bry_.new_a7("1|en.wiktionary.org|en.wiktionary.org"));
 	}

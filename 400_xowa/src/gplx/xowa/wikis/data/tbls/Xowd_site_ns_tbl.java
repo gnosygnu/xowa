@@ -31,7 +31,7 @@ public class Xowd_site_ns_tbl {
 		fld_is_alias		= flds.Add_bool		("ns_is_alias");
 		fld_count			= flds.Add_int		("ns_count");
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(Xow_ns_mgr ns_mgr) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
 		int len = ns_mgr.Ids_len();

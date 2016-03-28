@@ -24,21 +24,30 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.par
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 import gplx.xowa.parsers.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
-	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
-	private final Wdata_prop_val_visitor prop_val_visitor;
-	private final Hash_adp_bry qids_cache = Hash_adp_bry.cs(), pids_cache = Hash_adp_bry.cs();
-	private Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_();
+	private final    Xoae_app app;
+	private final    Wdata_prop_val_visitor prop_val_visitor;
+	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
 	private Wdata_hwtr_mgr hwtr_mgr;
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.evMgr = GfoEvMgr.new_(this);
-		wdoc_parser_v1 = new Wdata_doc_parser_v1();
-		wdoc_parser_v2 = new Wdata_doc_parser_v2();
-		doc_cache = app.Cache_mgr().Doc_cache();
-		prop_val_visitor = new Wdata_prop_val_visitor(app, this);
-	}	private Xoae_app app; gplx.xowa.apps.caches.Wdata_doc_cache doc_cache;
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
-	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
+		this.Qid_mgr = new Wbase_qid_mgr(this);
+		this.Pid_mgr = new Wbase_pid_mgr(this);
+		this.Doc_mgr = new Wbase_doc_mgr(app, this, this.Qid_mgr);
+		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
+		this.Enabled_(true);
+	}
+	public GfoEvMgr EvMgr() {return evMgr;} private final    GfoEvMgr evMgr;
+	public final    Wbase_qid_mgr		Qid_mgr;
+	public final    Wbase_pid_mgr		Pid_mgr;
+	public final    Wbase_doc_mgr		Doc_mgr;
+	public boolean Enabled() {return enabled;} private boolean enabled;
+	public void Enabled_(boolean v) {
+		this.enabled = v;
+		Qid_mgr.Enabled_(v);
+		Pid_mgr.Enabled_(v);
+		Doc_mgr.Enabled_(v);
+	}
 	public byte[] Domain() {return domain;} public void Domain_(byte[] v) {domain = v;} private byte[] domain = Bry_.new_a7("www.wikidata.org");
 	public Xowe_wiki Wdata_wiki() {if (wdata_wiki == null) wdata_wiki = app.Wiki_mgr().Get_by_or_make(domain).Init_assert(); return wdata_wiki;} private Xowe_wiki wdata_wiki;
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
@@ -50,107 +59,20 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 			? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
 	}
 	public Xop_log_property_wkr Property_wkr() {return property_wkr;} private Xop_log_property_wkr property_wkr;
-	public Int_obj_ref Tmp_prop_ref() {return tmp_prop_ref;} Int_obj_ref tmp_prop_ref = Int_obj_ref.zero_();
 	public void Clear() {
-		qids_cache.Clear();
-		pids_cache.Clear();
-		doc_cache.Clear();
-	}
-	public void Qids_add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
-		Xow_abrv_wm_.To_abrv(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
-		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).To_bry();
-		qids_cache.Add(qids_key, qid);
-	}
-	public byte[] Qids_get(Xowe_wiki wiki, Xoa_ttl ttl) {return Qids_get(wiki.Wdata_wiki_abrv(), ttl);}
-	private byte[] Qids_get(byte[] wiki_abrv, Xoa_ttl ttl) {
-		if (!enabled) return null;
-		if (Bry_.Len_eq_0(wiki_abrv)) return null;	// "other" wikis will never call wikidata
-		byte[] cache_key = Bry_.Add(wiki_abrv, Byte_ascii.Pipe_bry, ttl.Ns().Num_bry(), Byte_ascii.Pipe_bry, ttl.Page_db());	// EX:enwiki|014|Earth
-		byte[] rv = (byte[])qids_cache.Get_by(cache_key);
-		if (rv == null) {	// not in cache; load from db
-			rv = this.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(wiki_abrv, ttl.Ns().Num_bry(), ttl.Page_db()); 
-			byte[] add_val = rv == null ? Bry_.Empty : rv;	// JAVA: hashtable does not accept null as value; use Bry_.Empty
-			qids_cache.Add(cache_key, add_val);				// NOTE: if not in db, will insert a null value for cache_key; DATE:2014-07-23
-		}
-		return Bry_.Len_eq_0(rv) ? null : rv;				// JAVA: convert Bry_.Empty to null
-	}
-	public Int_obj_val Pids_add(byte[] pids_key, int pid_id) {Int_obj_val rv = Int_obj_val.new_(pid_id); pids_cache.Add(pids_key, rv); return rv;}
-	public int Pids__parse_as_int_or_null(byte[] pid_ttl) {	// EX: "p123" -> "123"
-		int len = pid_ttl.length; if (len == 0) return Wdata_wiki_mgr.Pid_null;
-		byte ltr_p = pid_ttl[0];	// make sure 1st char is "P" or "p"
-		switch (ltr_p) {
-			case Byte_ascii.Ltr_P:
-			case Byte_ascii.Ltr_p: break;
-			default: return Wdata_wiki_mgr.Pid_null;
-		}
-		return Bry_.To_int_or(pid_ttl, 1, len, Wdata_wiki_mgr.Pid_null);
-	}
-	public int Pids__get_by_name(byte[] lang_key, byte[] pid_name) {
-		if (!enabled) return Pid_null;
-		byte[] pids_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);		// EX: "en|name"
-		Int_obj_val rv = (Int_obj_val)pids_cache.Get_by(pids_key);
-		if (rv == null) {
-			int pid_id = this.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name); if (pid_id == Pid_null) return Pid_null;
-			rv = Pids_add(pids_key, pid_id);
-		}
-		return rv.Val();
-	}
-	public void Pages_add(byte[] qid, Wdata_doc page) {
-		doc_cache.Add(qid, page);
-	}
-	public Wdata_doc Pages_get(Xowe_wiki wiki, Xoa_ttl ttl, Wdata_pf_property_data data) {
-		if		(data.Q()	!= null)	return Pages_get(data.Q());
-		else if (data.Of()	!= null) {
-			Xoa_ttl of_ttl = Xoa_ttl.parse(wiki, data.Of()); if (of_ttl == null) return null;
-			byte[] qid = Qids_get(wiki, of_ttl); if (qid == null) return null;	// NOTE: for now, use wiki.Lang_key(), not page.Lang()
-			return Pages_get(qid);
-		}
-		else							return Pages_get(wiki, ttl);
-	}
-	public Wdata_doc Pages_get(Xowe_wiki wiki, Xoa_ttl ttl) {byte[] qid_bry = Qids_get(wiki, ttl); return qid_bry == null? null : Pages_get(qid_bry);}
-	public Wdata_doc Pages_get_by_ttl_name(byte[] ttl_bry) {
-		if (Byte_ascii.Case_lower(ttl_bry[0]) == Byte_ascii.Ltr_p)	// if ttl starts with "p", change title to "Property:" ns; DATE:2014-02-18
-			ttl_bry = Bry_.Add_w_dlm(Byte_ascii.Colon, Wdata_wiki_mgr.Ns_property_name_bry, ttl_bry);
-		return Pages_get(ttl_bry);
-	}
-	public Wdata_doc Pages_get(byte[] qid_bry) {
-		qid_bry = Get_low_qid(qid_bry);
-		Wdata_doc rv = doc_cache.Get_or_null(qid_bry);
-		if (rv == null) {
-			Json_doc jdoc = Get_json(qid_bry); if (jdoc == null) return null;	// page not found
-			rv = new Wdata_doc(qid_bry, this, jdoc);
-			doc_cache.Add(qid_bry, rv);
-		}
-		return rv;
-	}
-	public static byte[] Get_low_qid(byte[] bry) {	// HACK: wdata currently does not differentiate between "Vandalism" and "Wikipedia:Vandalism", combining both into "Vandalism:q4664011|q6160"; get lowest qid
-		int bry_len = bry.length;
-		int pipe_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe, 0, bry_len);
-		if (pipe_pos == Bry_find_.Not_found) return bry;
-		byte[][] qids = Bry_split_.Split(bry, Byte_ascii.Pipe);
-		int qids_len = qids.length;
-		int qid_min = Int_.Max_value;
-		int qid_idx = 0;
-		for (int i = 0; i < qids_len; i++) {
-			byte[] qid = qids[i];
-			int qid_len = qid.length;
-			int qid_val = Bry_.To_int_or(qid, 1, qid_len, Int_.Max_value);
-			if (qid_val < qid_min) {
-				qid_min = qid_val;
-				qid_idx = i;
-			}
-		}
-		return qids[qid_idx];
+		Qid_mgr.Clear();
+		Pid_mgr.Clear();
+		Doc_mgr.Clear();
 	}
 	public byte[] Get_claim_or(Xow_domain_itm domain, Xoa_ttl page_ttl, int pid, byte[] or) {
-		byte[] qid = this.Qids_get(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
-		Wdata_doc wdoc = this.Pages_get(qid); if (wdoc == null) return or;
+		byte[] qid = this.Qid_mgr.Get_or_null(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
+		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(qid); if (wdoc == null) return or;
 		Wdata_claim_grp claim_grp = wdoc.Claim_list_get(pid); if (claim_grp == null || claim_grp.Len() == 0) return or;
 		Wdata_claim_itm_core claim_itm = claim_grp.Get_at(0);
 		prop_val_visitor.Init(tmp_bfr, hwtr_mgr.Msgs(), domain.Lang_orig_key());
 		claim_itm.Welcome(prop_val_visitor);
 		return tmp_bfr.To_bry_and_clear();
-	}	private final Bry_bfr tmp_bfr = Bry_bfr.new_(32);
+	}	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(32);
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
 		Hwtr_mgr_assert();
 		int len = prop_grp.Len();
@@ -173,15 +95,14 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 			}
 		}
 	}
-	public static final byte[] Bry_q = Bry_.new_a7("q");
 	public byte[] Popup_text(Xoae_page page) {
 		Hwtr_mgr_assert();
-		Wdata_doc wdoc = this.Pages_get_by_ttl_name(page.Ttl().Page_db());			 
+		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(page.Ttl().Full_db());			 
 		return hwtr_mgr.Popup(wdoc);
 	}
-	public void Write_json_as_html(Bry_bfr bfr, byte[] ttl_bry, byte[] data_raw) {
+	public void Write_json_as_html(Bry_bfr bfr, byte[] page_full_db, byte[] data_raw) {
 		Hwtr_mgr_assert();
-		Wdata_doc wdoc = this.Pages_get_by_ttl_name(ttl_bry);
+		Wdata_doc wdoc = Doc_mgr.Get_by_bry_or_null(page_full_db);
 		hwtr_mgr.Init_by_wdoc(wdoc);
 		bfr.Add(hwtr_mgr.Write(wdoc));
 	}
@@ -208,13 +129,6 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		json.Root_nde().Print_as_json(bfr, 0);
 		bfr.Add(Xoh_consts.Span_end);
 	}
-	private Json_doc Get_json(byte[] qid_bry) {
-		if (!enabled) return null;
-		Xoa_ttl qid_ttl = Xoa_ttl.parse(this.Wdata_wiki(), qid_bry); if (qid_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", String_.new_u8(qid_bry)); return null;}
-		Xoae_page qid_page = this.Wdata_wiki().Data_mgr().Get_page(qid_ttl, false); if (qid_page.Missing()) return null;
-		byte[] src = qid_page.Data_raw();
-		return jdoc_parser.Parse(src);
-	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))					return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))					enabled = m.ReadYn("v");
@@ -232,14 +146,15 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	public static final int Ns_property = 120;
 	public static final String Ns_property_name = "Property";
-	public static final byte[] Ns_property_name_bry = Bry_.new_a7(Ns_property_name);
-	public static final byte[]
+	public static final    byte[] Ns_property_name_bry = Bry_.new_a7(Ns_property_name);
+	public static final    byte[] Bry_q = Bry_.new_a7("q");
+	public static final    byte[]
 	  Ttl_prefix_qid_bry_db		= Bry_.new_a7("q")	// NOTE: for historical reasons this is standardized as lowercase q not Q; DATE:2015-06-12
 	, Ttl_prefix_qid_bry_gui	= Bry_.new_a7("Q")	// NOTE: use uppercase Q for writing html; DATE:2015-06-12
 	, Ttl_prefix_pid_bry		= Bry_.new_a7("Property:P")
 	;
 	public static final int Pid_null = -1;
-	public static final byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
+	public static final    byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
 			case Xow_domain_tid_.Int__wikidata:

@@ -25,7 +25,7 @@ public interface GfoMsg {
 	GfoMsg  Parse_(boolean v);
 
 	int		Args_count();
-	KeyVal	Args_getAt(int i);
+	Keyval	Args_getAt(int i);
 	GfoMsg	Args_ovr(String k, Object v);
 	void	Args_reset();
 	GfoMsg	Add(String k, Object v);

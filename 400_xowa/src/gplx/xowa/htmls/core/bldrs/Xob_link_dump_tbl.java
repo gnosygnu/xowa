@@ -33,15 +33,15 @@ class Xob_link_dump_tbl implements Rls_able {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(Tbl_name, flds));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(Tbl_name, flds));}
 	public void Create_idx_1() {
-		conn.Ddl_create_idx
+		conn.Meta_idx_create
 		( Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "src", Fld_src_page_id, Fld_src_html_uid)
 		, Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "trg_temp", Fld_trg_ns, Fld_trg_ttl)
 		);
 	}
 	public void Create_idx_2() {
-		conn.Ddl_create_idx
+		conn.Meta_idx_create
 		( Dbmeta_idx_itm.new_normal_by_tbl(Tbl_name, "trg", Fld_trg_page_id, Fld_src_page_id, Fld_src_html_uid)
 		);			
 	}

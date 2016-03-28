@@ -22,7 +22,7 @@ public class TabBoxEvt_orderChanged {
 
 	public static final String OrderChanged_evt = "OrderChanged_evt";
 	public static void Publish(TabBox tabBox, int curIdx, int newIdx) {
-		GfoEvMgr_.PubVals(tabBox, OrderChanged_evt, KeyVal_.new_("curIdx", curIdx), KeyVal_.new_("newIdx", newIdx));
+		GfoEvMgr_.PubVals(tabBox, OrderChanged_evt, Keyval_.new_("curIdx", curIdx), Keyval_.new_("newIdx", newIdx));
 	}
 	public static TabBoxEvt_orderChanged Handle(GfsCtx ctx, GfoMsg m) {
 		TabBoxEvt_orderChanged rv = new TabBoxEvt_orderChanged();

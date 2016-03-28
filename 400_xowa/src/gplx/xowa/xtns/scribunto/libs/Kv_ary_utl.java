@@ -18,32 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.langs.jsons.*;
 class Kv_ary_utl {
-	public static KeyVal[] new_(boolean base_1, Object... vals) {
+	public static Keyval[] new_(boolean base_1, Object... vals) {
 		int len = vals.length;
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; ++i)
-			rv[i] = KeyVal_.int_(i + (base_1 ? 1 : 0), vals[i]);
+			rv[i] = Keyval_.int_(i + (base_1 ? 1 : 0), vals[i]);
 		return rv;
 	}
-	public static KeyVal[] new_kvs(KeyVal... vals) {return vals;}
-	public static String Ary_to_str(Json_wtr wtr, KeyVal[] ary) {
+	public static Keyval[] new_kvs(Keyval... vals) {return vals;}
+	public static String Ary_to_str(Json_wtr wtr, Keyval[] ary) {
 		wtr.Doc_nde_bgn();
 		Ary_to_str(wtr, 0, ary);
 		return wtr.Doc_nde_end().To_str_and_clear();
 	}
-	private static void Ary_to_str(Json_wtr wtr, int indent, KeyVal[] ary) {
+	private static void Ary_to_str(Json_wtr wtr, int indent, Keyval[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Ary_to_str__itm(wtr, indent, ary[i]);
 		}
 	}
-	private static void Ary_to_str__itm(Json_wtr wtr, int indent, KeyVal itm) {
+	private static void Ary_to_str__itm(Json_wtr wtr, int indent, Keyval itm) {
 		Object val = itm.Val();
 		Class<?> val_type = val.getClass();
 		int type_tid = Type_adp_.To_tid_type(val_type);
 		if (type_tid == Type_adp_.Tid__obj) {
-			if (Type_adp_.Eq(val_type, KeyVal[].class))
-				Ary_to_str__nde(wtr, indent, itm.Key(), (KeyVal[])itm.Val());
+			if (Type_adp_.Eq(val_type, Keyval[].class))
+				Ary_to_str__nde(wtr, indent, itm.Key(), (Keyval[])itm.Val());
 			else if (Type_adp_.Is_array(val_type))
 				Ary_to_str__ary(wtr, indent, itm.Key(), Array_.cast(val));
 			else
@@ -57,7 +57,7 @@ class Kv_ary_utl {
 		Ary_to_str__ary_itms(wtr, indent + 1, array);
 		wtr.Ary_end();
 	}
-	private static void Ary_to_str__nde(Json_wtr wtr, int indent, String key, KeyVal[] kv) {
+	private static void Ary_to_str__nde(Json_wtr wtr, int indent, String key, Keyval[] kv) {
 		wtr.Nde_bgn(key);
 		Ary_to_str(wtr, indent + 1, kv);
 		wtr.Nde_end();
@@ -69,8 +69,8 @@ class Kv_ary_utl {
 			Class<?> itm_type = itm.getClass();
 			int itm_type_tid = Type_adp_.To_tid_type(itm_type);
 			if (itm_type_tid == Type_adp_.Tid__obj) {
-				if (Type_adp_.Eq(itm_type, KeyVal.class))
-					Ary_to_str__itm(wtr, indent + 1, (KeyVal)itm);
+				if (Type_adp_.Eq(itm_type, Keyval.class))
+					Ary_to_str__itm(wtr, indent + 1, (Keyval)itm);
 				else if (Type_adp_.Is_array(itm_type))
 					Ary_to_str__ary_itms(wtr, indent + 1, Array_.cast(itm));
 				else

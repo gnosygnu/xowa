@@ -22,7 +22,7 @@ public abstract class Mock_proc_fxt {
 	public int Id() {return id;} private final int id;
 	public String Key() {return key;} private final String key;
 	public Scrib_lua_proc To_scrib_lua_proc() {return new Scrib_lua_proc(key, id);}
-	public abstract KeyVal[] Exec_by_scrib(KeyVal[] args);
+	public abstract Keyval[] Exec_by_scrib(Keyval[] args);
 }
 class Mock_engine implements Scrib_engine {
 	private final Hash_adp hash = Hash_adp_.new_();
@@ -30,13 +30,13 @@ class Mock_engine implements Scrib_engine {
 	public boolean				Dbg_print() {return false;}	public void Dbg_print_(boolean v) {}
 	public Scrib_server		Server() {return server;} public void Server_(Scrib_server v) {} private final Mock_server server = new Mock_server();
 	public Scrib_lua_proc	LoadString(String name, String text) {return null;}
-	public KeyVal[]			CallFunction(int id, KeyVal[] args) {
+	public Keyval[]			CallFunction(int id, Keyval[] args) {
 		Mock_proc_fxt proc = (Mock_proc_fxt)hash.Get_by_or_fail(tmp_hash_id.Val_(id));
 		return proc.Exec_by_scrib(args);
 	}
-	public void				RegisterLibrary(KeyVal[] functions_ary) {}
-	public KeyVal[]			ExecuteModule(int mod_id) {return null;}
-	public void				CleanupChunks(KeyVal[] ids) {}
+	public void				RegisterLibrary(Keyval[] functions_ary) {}
+	public Keyval[]			ExecuteModule(int mod_id) {return null;}
+	public void				CleanupChunks(Keyval[] ids) {}
 	public void				Clear() {}
 	public void				RegisterLibraryForTest(Mock_proc_fxt proc) {
 		hash.Add(Int_obj_ref.new_(proc.Id()), proc);

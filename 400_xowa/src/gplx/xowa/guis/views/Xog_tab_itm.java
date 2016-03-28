@@ -86,8 +86,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 		tab_box.Tab_tip_text_(page.Url().To_str());
 	}
 	public void Tab_name_() {
-		byte[] tab_name = page.Html_data().Custom_tab_name();		// Custom_tab_name set by Special:Default_tab or variants; DATE:2015-10-05
-		if (tab_name == null) tab_name = page.Ttl().Full_txt();		// no custom_tab_name; use ttl's text
+		byte[] tab_name = page.Html_data().Custom_tab_name();				// Custom_tab_name set by Special:Default_tab or variants; DATE:2015-10-05
+		if (tab_name == null) tab_name = page.Ttl().Full_txt_w_ttl_case();	// no custom_tab_name; use ttl's text
 		Tab_name_(String_.new_u8(tab_name));
 	}
 	public void Tab_name_(String tab_name) {
@@ -104,12 +104,12 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		if (	url.Anch_str() != null							// url has anchor
 			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
-			&&	url.Qargs_ary().length == 0) {						// url has no args; needed for Category:A?from=b#mw-pages
+			&&	url.Qargs_ary().length == 0) {					// url has no args; needed for Category:A?from=b#mw-pages
 			html_itm.Scroll_page_by_id_gui(url.Anch_str());		// skip page_load and jump to anchor
 			return;
 		}
 		if (win.Page__async__working(url)) return;
-		app.Gui_mgr().Search_suggest_mgr().Cancel();			// cancel pending search_suggest calls
+		app.Gui_mgr().Search_cfg().Cancel();					// cancel pending search_suggest calls
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();
@@ -118,7 +118,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
-		Tab_name_(String_.new_u8(ttl.Full_txt()));
+		Tab_name_(String_.new_u8(ttl.Full_txt_w_ttl_case()));
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
@@ -152,7 +152,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), String_.new_u8((byte[])page.Redirected_ttls().Get_at(0)));
 					else {
 						if (ttl.Ns().Id_is_file())
-							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[Help:Wikis/Commons]]: ~{0}", String_.new_u8(url.Raw()));
+							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", String_.new_u8(url.Raw()));// HOME
 						else
 							usr_dlg.Prog_one("", "", "could not find: ~{0}", String_.new_u8(url.Raw()));
 					}

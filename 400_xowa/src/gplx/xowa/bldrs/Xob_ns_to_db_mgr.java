@@ -46,7 +46,7 @@ public class Xob_ns_to_db_mgr {
 			if (db_id == Xob_ns_file_itm.Nth_db_id_null)	// ns not assigned yet to db
 				rv = Init_db(ns_file_itm);
 			else
-				rv = db_mgr.Dbs__get_at(db_id);
+				rv = db_mgr.Dbs__get_by_id(db_id);
 			long file_len = rv.File_len();
 			if (file_len + data_len > db_max) {				// file is "full"
 				Term_tbl(rv);

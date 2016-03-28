@@ -16,24 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.core.stores.*;
-import gplx.dbs.qrys.*;
 public class Db_conn_ {
 	public static final Db_conn Noop = Db_conn_pool.Instance.Get_or_new(Db_conn_info_.Null);
-	public static int Select_fld0_as_int_or(Db_conn conn, String sql, int or) {
-		DataRdr rdr = DataRdr_.Null;
-		try {
-			rdr = conn.Exec_qry_as_old_rdr(Db_qry_sql.rdr_(sql));
-			int rv = or;
-			if (rdr.MoveNextPeer()) {
-				Object rv_obj = rdr.ReadAt(0);
-				if (rv_obj != null)		// Max(fil_id) will be NULL if tbl is empty
-					rv = Int_.cast_or(rv_obj, or);
-			}
-			return rv;
-		}
-		finally {
-			rdr.Rls();
-		}
-	}
 }

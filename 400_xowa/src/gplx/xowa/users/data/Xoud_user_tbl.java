@@ -41,7 +41,7 @@ class Xoud_user_tbl {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "name", fld_name)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 	}
 	public void Insert(int id, String name) {

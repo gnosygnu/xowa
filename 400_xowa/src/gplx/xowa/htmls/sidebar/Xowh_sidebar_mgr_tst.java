@@ -187,8 +187,8 @@ class Xowh_sidebar_mgr_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Xowh_sidebar_mgr sidebar_mgr; private Bry_bfr bfr, comment_bfr;
 	public Xowh_sidebar_mgr_fxt Clear() {
 //			if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			sidebar_mgr = wiki.Html_mgr().Portal_mgr().Sidebar_mgr();
 			bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 			comment_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);

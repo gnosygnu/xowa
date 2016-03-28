@@ -22,7 +22,7 @@ public class Gallery_xnde_tst {
 	@Before public void init() {fxt.Reset(); fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());}
 	@Test   public void Lnki_no_caption() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")
 			)
@@ -30,7 +30,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void Lnki_1() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|b</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")
 			)
@@ -38,7 +38,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void Lnki_3() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|a\nFile:B.png|b\nFile:C.png|c</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")
 			,	new_chkr_gallery_itm().Expd_lnki_("File:B.png")
@@ -48,7 +48,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void Ignore_newLines() {
 		fxt.Test_parse_page_wiki("<gallery>\n\n\nFile:A.png|a\n\n\nFile:B.png|b\n\n\n</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")
 			,	new_chkr_gallery_itm().Expd_lnki_("File:B.png")
@@ -57,7 +57,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void Only_first_pipe() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|File:B.png|cc</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")
 			)
@@ -65,7 +65,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void Invalid_lnki() {
 		fxt.Test_parse_page_wiki("<gallery>A.png|cc</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png")	// NOTE: MW converts "A.png" to "File:A.png"
 			)
@@ -73,7 +73,7 @@ public class Gallery_xnde_tst {
 	}
 	@Test   public void File_only_trailing_nl() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png\n</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png").Expd_caption_(null)
 			)
@@ -82,7 +82,7 @@ public class Gallery_xnde_tst {
 	@Test   public void Invalid_curly() {
 		raw_src = "a\n";			
 		fxt.Init_log_(Xop_ttl_log.Invalid_char).Test_parse_page_wiki("<gallery>File:A.png|" + raw_src + "}}</gallery>"	// NOTE: }} is ignored since it is not a valid title
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png").Expd_caption_("a")
 			)
@@ -91,7 +91,7 @@ public class Gallery_xnde_tst {
 	@Test   public void Caption() {
 		raw_src = "a<br/>c";
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|" + raw_src + "</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png").Expd_caption_(raw_src)
 			)
@@ -103,7 +103,7 @@ public class Gallery_xnde_tst {
 		(	"<gallery perrow=3>"
 		,	"File:A.jpg|" + raw_src
 		,	"</gallery>"
-		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 			(	new_chkr_gallery_mgr().Expd_subs_
 				(	new_chkr_gallery_itm().Expd_lnki_("File:A.jpg").Expd_caption_(raw_src)
 				)
@@ -115,7 +115,7 @@ public class Gallery_xnde_tst {
 		(	"<gallery>"
 		,	"File:A.jpg|" + raw_src
 		,	"</gallery>"
-		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 			(	new_chkr_gallery_mgr().Expd_subs_
 				(	new_chkr_gallery_itm().Expd_lnki_("File:A.jpg").Expd_caption_("<center>a</center>")
 				)
@@ -127,7 +127,7 @@ public class Gallery_xnde_tst {
 		(	"<gallery>"
 		,	"<!-- deleted A.jpg|" + raw_src
 		,	"</gallery>"
-		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		) ,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 			(	new_chkr_gallery_mgr().Expd_subs_()
 			)
 		);
@@ -135,7 +135,7 @@ public class Gallery_xnde_tst {
 	@Test   public void Misc_atr() {		// make sure misc attribute doesn't fail
 		raw_src = "b";
 		fxt.Test_parse_page_wiki("<gallery id=a>File:A.png|" + raw_src + "</gallery>"
-		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid_gallery).Xnde_xtn_
+		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
 			(	new_chkr_gallery_itm().Expd_lnki_("File:A.png").Expd_caption_(raw_src)
 			)

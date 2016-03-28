@@ -37,7 +37,7 @@ public class Orig_fil_tbl implements Rls_able {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_name)
 			);
-			conn.Ddl_create_tbl(meta);
+			conn.Meta_tbl_create(meta);
 		}
 		stmt_insert = stmt_select = null;
 		conn.Rls_reg(this);

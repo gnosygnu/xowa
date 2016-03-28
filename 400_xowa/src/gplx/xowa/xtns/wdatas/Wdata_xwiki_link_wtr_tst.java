@@ -19,17 +19,17 @@ package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*; import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Wdata_xwiki_link_wtr_tst {
-	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test  public void Skip_xwiki_lang_for_self() {	// PURPOSE: list of language links should not include self
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Int__wikipedia, "Q1_en", "Q1");
-		fxt.Init_pages_add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
 		fxt.Test_xwiki_links("Q1_en", "Q1_fr", "Q1_de");
 	}
 	@Test   public void No_external_lang_links__de() {
 		fxt.Init_xwikis_add("fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Int__wikipedia, "Q1_en", "Q1");
-		fxt.Init_pages_add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
+		fxt.Init__docs__add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
 		fxt.Init_external_links_mgr_add("de");
 		fxt.Test_xwiki_links("Q1_en", "Q1_de");
 		fxt.Init_external_links_mgr_clear();
@@ -61,7 +61,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "}"
 		));
 		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_a7("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
-		fxt.Init_pages_add(wdata_doc);
+		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
 	@Test   public void Same_lang_but_different_domains() {	// PURPOSE: if two entries for same lang, but one is in different domain, use the one for the current wiki  DATE:2014-06-21
@@ -77,13 +77,13 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "}"
 		));
 		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_a7("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
-		fxt.Init_pages_add(wdata_doc);
+		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
 	@Test   public void Badges() {
 		fxt.Init_xwikis_add("de", "fr", "pl");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Int__wikipedia, "Q1_en", "Q1");
-		fxt.Init_pages_add
+		fxt.Init__docs__add
 		( fxt.Wdoc_bldr("Q1")
 		.Add_sitelink("enwiki", "Q1_en")
 		.Add_sitelink("dewiki", "Q1_de", "Q17437796")
@@ -106,7 +106,6 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "</div>"
 		));
 	}
-
 //		@Test   public void No_wikidata_link() {
 //			fxt.Init_xwikis_add("fr", "de");
 //			fxt.Test_parse_langs("[[fr:A]]", String_.Concat_lines_nl
@@ -120,11 +119,10 @@ public class Wdata_xwiki_link_wtr_tst {
 //			, "</div>"
 //			));
 //		}
-
 //		@Test   public void No_external_lang_links__sort() {
 //			fxt.Init_xwikis_add("de", "fr");
 //			fxt.Init_qids_add("en", Xow_domain_tid_.Int__wikipedia, "Q1_en", "Q1");
-//			fxt.Init_pages_add("Q1", fxt.page_bldr_("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_page_doc());
+//			fxt.Init__docs__add("Q1", fxt.page_bldr_("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_page_doc());
 //			fxt.Init_external_links_mgr_add("*");
 //			fxt.Test_xwiki_links("Q1_en", "Q1_de", "Q1_fr");
 //			fxt.Init_external_links_mgr_clear();

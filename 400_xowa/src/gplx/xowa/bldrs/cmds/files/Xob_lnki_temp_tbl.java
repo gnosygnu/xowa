@@ -39,7 +39,7 @@ class Xob_lnki_temp_tbl {
 	private Db_stmt stmt_insert;
 	public Xob_lnki_temp_tbl(Db_conn conn) {this.conn = conn;}
 	public Db_conn Conn()		{return conn;} private final Db_conn conn;
-	public void Create_tbl()	{conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(Tbl_name, flds));}
+	public void Create_tbl()	{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(Tbl_name, flds));}
 	public void Insert_bgn()	{conn.Txn_bgn("bldr__lnki_temp"); stmt_insert = conn.Stmt_insert(Tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

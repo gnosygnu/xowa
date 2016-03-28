@@ -31,7 +31,7 @@ public class Pfunc_filepath_tst {
 		Xoae_app app = fxt.App();
 		en_wiki = fxt.Wiki();
 		// Init_orig_mgr(en_wiki);
-		commons_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_itm_.Str__commons);
+		commons_wiki = Xoa_app_fxt.Make__wiki__edit(app, Xow_domain_itm_.Str__commons);
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
 		en_wiki.File_mgr().Repo_mgr().Page_finder_(mock_wkr);
 		commons_wiki.Db_mgr().Load_mgr().Clear();

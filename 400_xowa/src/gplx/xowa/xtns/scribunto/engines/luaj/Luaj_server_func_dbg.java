@@ -36,5 +36,5 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 		core.Page().Html_data().Xtn_scribunto_dbg_(bfr.To_bry_and_clear());
 		return NONE;
 	}
-	public static Luaj_server_func_dbg _ = new Luaj_server_func_dbg();
+	public static Luaj_server_func_dbg Instance = new Luaj_server_func_dbg();
 }

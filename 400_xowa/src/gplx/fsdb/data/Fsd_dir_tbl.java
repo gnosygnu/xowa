@@ -34,7 +34,7 @@ public class Fsd_dir_tbl implements Rls_able {
 		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
 	}
 	public void Create_tbl() {
-		conn.Ddl_create_tbl
+		conn.Meta_tbl_create
 		( Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "name", fld_name, fld_owner_id, fld_id)));
 	}

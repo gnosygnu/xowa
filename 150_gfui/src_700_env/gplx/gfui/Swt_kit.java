@@ -46,7 +46,7 @@ import org.omg.PortableServer.THREAD_POLICY_ID;
 
 import gplx.core.threads.*;
 public class Swt_kit implements Gfui_kit {
-	private final KeyValHash ctor_args = KeyValHash.new_(); private final KeyValHash ctor_args_null = KeyValHash.new_();
+	private final Keyval_hash ctor_args = new Keyval_hash(); private final Keyval_hash ctor_args_null = new Keyval_hash();
 	private final Hash_adp kit_args = Hash_adp_.new_(); private Swt_msg_wkr_stop msg_wkr_stop;
 	private Gfo_usr_dlg gui_wtr; private String xul_runner_path = null;
 	private final Bry_fmtr ask_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); private final Bry_bfr ask_bfr = Bry_bfr.new_();
@@ -80,7 +80,14 @@ public class Swt_kit implements Gfui_kit {
 		shell.open();
 		Cursor cursor = new Cursor(display, SWT.CURSOR_ARROW);
 		shell.setCursor(cursor);	// set cursor to hand else cursor defaults to Hourglass until mouse is moved; DATE: 2014-01-31
+		boolean first = true;
 		while (!shell.isDisposed()) {
+			if (first) {
+				first = false;
+//				shell.setMinimized(true);
+				shell.setActive();
+				shell.forceFocus();				
+			}
 			if (!display.readAndDispatch())
 				display.sleep();
 		}
@@ -98,9 +105,9 @@ public class Swt_kit implements Gfui_kit {
 			return;
 		}
 		// add kv to widget_cfg_hash; new controls will get properties from cfg_hash
-		KeyValHash widget_cfg_hash = (KeyValHash)kit_args.Get_by(type);
+		Keyval_hash widget_cfg_hash = (Keyval_hash)kit_args.Get_by(type);
 		if (widget_cfg_hash == null) {
-			widget_cfg_hash = KeyValHash.new_();
+			widget_cfg_hash = new Keyval_hash();
 			kit_args.Add(type, widget_cfg_hash);
 		}
 		widget_cfg_hash.Add_if_dupe_use_nth(key, val);
@@ -126,31 +133,31 @@ public class Swt_kit implements Gfui_kit {
 	}
 	public GfuiInvkCmd New_cmd_sync	(GfoInvkAble invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.N);}
 	public GfuiInvkCmd New_cmd_async(GfoInvkAble invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.Y);}
-	public GfuiWin New_win_utl(String key, GfuiWin owner, KeyVal... args) {
+	public GfuiWin New_win_utl(String key, GfuiWin owner, Keyval... args) {
 		return GfuiWin_.kit_(this, key, new Swt_win(shell), ctor_args_null);
 		}
-	public GfuiWin New_win_app(String key, KeyVal... args) {
+	public GfuiWin New_win_app(String key, Keyval... args) {
 		Swt_win win = new Swt_win(display);
 		this.shell = win.UnderShell();
 		shell.setLayout(null);
 		return GfuiWin_.kit_(this, key, win, ctor_args_null);
 	}
-	public GfuiBtn New_btn(String key, GfuiElem owner, KeyVal... args) {
+	public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, new Swt_btn_no_border(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiLbl New_lbl(String key, GfuiElem owner, KeyVal... args) {
+	public GfuiLbl New_lbl(String key, GfuiElem owner, Keyval... args) {
 		GfuiLbl rv = GfuiLbl_.kit_(this, key, new Swt_lbl(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public Gfui_html New_html(String key, GfuiElem owner, KeyVal... args) {
+	public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
 		ctor_args.Clear();
 		// check cfg for browser type
-		KeyValHash html_cfg_args = (KeyValHash)kit_args.Get_by(Gfui_kit_.Cfg_HtmlBox);
+		Keyval_hash html_cfg_args = (Keyval_hash)kit_args.Get_by(Gfui_kit_.Cfg_HtmlBox);
 		if (html_cfg_args != null) {
-			KeyVal browser_type = html_cfg_args.FetchOrNull(Cfg_Html_BrowserType);
+			Keyval browser_type = html_cfg_args.Get_kvp_or_null(Cfg_Html_BrowserType);
 			if (browser_type != null) ctor_args.Add(browser_type);
 		}
 		Swt_html swt_html = new Swt_html(this, Swt_control_.cast_or_fail(owner), ctor_args);
@@ -160,7 +167,7 @@ public class Swt_kit implements Gfui_kit {
 		swt_html.Delete_elems_(owner, gfui_html);
 		return gfui_html;
 	}
-	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, KeyVal... args) {
+	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, Keyval... args) {
 		ctor_args.Clear();
 		Swt_tab_mgr rv_swt = new Swt_tab_mgr(this, Swt_control_.cast_or_fail(owner), ctor_args);
 		Gfui_tab_mgr rv = Gfui_tab_mgr.kit_(this, key, rv_swt, ctor_args);
@@ -168,19 +175,26 @@ public class Swt_kit implements Gfui_kit {
 		rv_swt.EvMgr_(rv.EvMgr());
 		return rv;
 	}
-	public GfuiTextBox New_text_box(String key, GfuiElem owner, KeyVal... args) {
+	public GfuiTextBox New_text_box(String key, GfuiElem owner, Keyval... args) {
 		ctor_args.Clear();
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
-		boolean border_on = Bool_.cast(ctor_args.FetchValOr(GfuiTextBox.CFG_border_on_, true));
+		boolean border_on = Bool_.cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
 		GxwTextFld under = new Swt_text_w_border(Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
 		ctor_args.Clear();
 		return rv;
 	}
-	public GfuiStatusBox New_status_box(String key, GfuiElem owner, KeyVal... args) {
+	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
+		Swt_combo_ctrl rv_swt = new Swt_combo_ctrl(Swt_control_.cast_or_fail(owner), this.New_color(ColorAdp_.LightGray), ctor_args);
+		GfuiComboBox rv = GfuiComboBox.kit_(this, key, rv_swt, ctor_args);
+		rv.Owner_(owner);
+		rv_swt.EvMgr_(rv.EvMgr());
+		return rv;
+	}
+	public GfuiStatusBox New_status_box(String key, GfuiElem owner, Keyval... args) {
 		ctor_args.Clear();
 		GfuiStatusBox rv = GfuiStatusBox_.kit_(this, key, new Swt_text(Swt_control_.cast_or_fail(owner), ctor_args));
 		rv.Owner_(owner);

@@ -242,11 +242,11 @@ class Xol_mw_lang_parser_fxt {
 	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Clear() {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
+			app = Xoa_app_fxt.Make__app__edit();
 		}
 		app.Lang_mgr().Clear();// NOTE: always clear the lang
 		lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7("fr"));
-		wiki = Xoa_app_fxt.wiki_(app, "en.wikipedia.org", lang);
+		wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 		lang.Kwd_mgr().Clear(); lang.Msg_mgr().Clear();	// NOTE: clear kwds and msgs else they will be printed to file; this line must go last b/c various xtns will fill in kwds dynamically
 	}

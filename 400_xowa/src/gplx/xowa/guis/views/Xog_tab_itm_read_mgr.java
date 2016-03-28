@@ -63,12 +63,12 @@ public class Xog_tab_itm_read_mgr {
 		String url_str = "", win_str = Win_text_blank;
 		if (url != null && ttl != null) {
 			url_str = url.To_str();
-			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
+			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt_w_ttl_case(), Win_text_suffix_page));
 		}
 		win.Url_box().Text_(url_str);
 		win.Win_box().Text_(win_str);
 	}
-	private static final byte[] Win_text_suffix_page = Bry_.new_a7(" - XOWA"); private static final String Win_text_blank = "XOWA";
+	private static final    byte[] Win_text_suffix_page = Bry_.new_a7(" - XOWA"); private static final String Win_text_blank = "XOWA";
 	public static void Show_page_err(Xog_win_itm win, Xog_tab_itm tab, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl, Exception e) {
 		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
 		win.Usr_dlg().Warn_many("", "", err_msg);

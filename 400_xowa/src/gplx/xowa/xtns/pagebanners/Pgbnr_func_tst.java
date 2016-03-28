@@ -37,8 +37,8 @@ public class Pgbnr_func_tst {
 class Pgbnr_func_fxt {
 	private final Xop_fxt fxt;
 	public Pgbnr_func_fxt() {
-		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "en.wikivoyage.org");
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikivoyage.org");
 		fxt = new Xop_fxt(app, wiki);
 	}
 	public void Test__parse__eq(String raw, String expd) {

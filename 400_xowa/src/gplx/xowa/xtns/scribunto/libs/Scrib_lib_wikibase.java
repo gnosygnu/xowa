@@ -47,8 +47,8 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	private static final int Proc_getLabel = 0, Proc_getEntity = 1, Proc_getSetting = 2, Proc_renderSnak = 3, Proc_renderSnaks = 4, Proc_getEntityId = 5, Proc_getUserLang = 6, Proc_getDescription = 7, Proc_resolvePropertyId = 8, Proc_getSiteLinkPageName = 9, Proc_incrementExpensiveFunctionCount = 10;
 	public static final String Invk_getLabel = "getLabel", Invk_getEntity = "getEntity", Invk_getSetting = "getSetting", Invk_renderSnak = "renderSnak", Invk_renderSnaks = "renderSnaks", Invk_getEntityId = "getEntityId", Invk_getUserLang = "getUserLang", Invk_getDescription = "getDescription", Invk_resolvePropertyId = "resolvePropertyId", Invk_getSiteLinkPageName = "getSiteLinkPageName", Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount";
-	private static final String[] Proc_names = String_.Ary(Invk_getLabel, Invk_getEntity, Invk_getSetting, Invk_renderSnak, Invk_renderSnaks, Invk_getEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount);
-	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), KeyVal_.Ary_empty);}
+	private static final    String[] Proc_names = String_.Ary(Invk_getLabel, Invk_getEntity, Invk_getSetting, Invk_renderSnak, Invk_renderSnaks, Invk_getEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount);
+	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		byte[] ttl_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(ttl_bry)) return rslt.Init_ary_empty();
 		Wdata_doc wdoc = Get_wdoc(ttl_bry); if (wdoc == null) return rslt.Init_ary_empty();			
@@ -66,7 +66,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
-		byte[] rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qids_get(wiki, ttl); if (rv == null) rv = Bry_.Empty;
+		byte[] rv = wiki.Appe().Wiki_mgr().Wdata_mgr().Qid_mgr.Get_or_null(wiki, ttl); if (rv == null) rv = Bry_.Empty;
 		return rslt.Init_obj(rv);
 	}
 	public boolean GetUserLang(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -88,13 +88,13 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
 		return rslt.Init_obj(wdoc.Slink_list__get_or_fallback(domain_itm.Abrv_wm()));
 	}
-	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(KeyVal_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
+	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(Keyval_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
-	private Wdata_doc Get_wdoc(byte[] ttl_bry) {
-		Wdata_doc wdoc = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Pages_get_by_ttl_name(ttl_bry); 
-		if (wdoc == null) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), ttl_bry);
+	private Wdata_doc Get_wdoc(byte[] xid_bry) {
+		Wdata_doc wdoc = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+		if (wdoc == null) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), xid_bry);
 		return wdoc;
 	}
 }

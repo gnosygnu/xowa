@@ -25,8 +25,8 @@ public class Xob_fxt {
 	}
 	public Xob_fxt Ctor(Io_url root_dir) {
 		Db_conn_bldr.Instance.Reg_default_sqlite();
-		app = Xoa_app_fxt.app_("linux", root_dir);
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit("linux", root_dir);
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		bldr = Xoa_app_fxt.bldr_(app);
 		return this;
 	}
@@ -73,7 +73,7 @@ public class Xob_fxt {
 		Run(wkr);
 		return this;
 	}
-	private void Run_wkr(Xobd_wkr wkr) {
+	private void Run_wkr(Xob_page_wkr wkr) {
 		wkr.Wkr_bgn(bldr);
 		for (int i = 0; i < doc_ary.length; i++) {
 			Xowd_page_itm page = doc_ary[i];
@@ -111,10 +111,10 @@ public class Xob_fxt {
 		Run(parser_wkr);
 		return this;
 	}
-	public Xob_fxt Run(Xobd_wkr... wkrs) {
+	public Xob_fxt Run(Xob_page_wkr... wkrs) {
 		int doc_ary_len = doc_ary.length;
 		for (int j = 0; j < wkrs.length; j++) {
-			Xobd_wkr wkr = wkrs[j];
+			Xob_page_wkr wkr = wkrs[j];
 			wkr.Wkr_bgn(bldr);
 			for (int i = 0; i < doc_ary_len; i++) {
 				Xowd_page_itm page = doc_ary[i];

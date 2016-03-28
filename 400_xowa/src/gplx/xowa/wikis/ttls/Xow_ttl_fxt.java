@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.log_msgs.*;
 class Xow_ttl_fxt {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	public Xow_ttl_fxt Init_ttl(String raw) {test_raw = raw; return this;} private String test_raw = "";
 	public Xow_ttl_fxt Expd_ns_id(int v) {expd_ns_id = v; return this;} private int expd_ns_id = Int_.Min_value;
 	public Xow_ttl_fxt Expd_page_txt(String v) {expd_page_txt = v; return this;} private String expd_page_txt;
@@ -64,7 +64,7 @@ class Xow_ttl_fxt {
 			if (expd_page_txt != null) Tfds.Eq(expd_page_txt, String_.new_u8(actl.Page_txt()), "Page_txt");
 			if (expd_page_url != null) Tfds.Eq(expd_page_url, String_.new_u8(actl.Page_url()), "Page_url");
 			if (expd_page_db  != null) Tfds.Eq(expd_page_db , String_.new_u8(actl.Page_db()) , "Page_db");
-			if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt()), "Full_txt");
+			if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt_w_ttl_case()), "Full_txt");
 			if (expd_full_url != null) Tfds.Eq(expd_full_url, String_.new_u8(actl.Full_url()), "Full_url");
 			if (expd_leaf_txt != null) Tfds.Eq(expd_leaf_txt, String_.new_u8(actl.Leaf_txt()), "Leaf_txt");
 			if (expd_leaf_url != null) Tfds.Eq(expd_leaf_url, String_.new_u8(actl.Leaf_url()), "Leaf_url");

@@ -83,13 +83,13 @@ public class Xow_ns implements GfoInvkAble {
 		if (aliases == null) aliases = Ordered_hash_.New();
 		aliases.Add_if_dupe_use_1st(alias, alias);
 	}	private Ordered_hash aliases;
-	public KeyVal[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
-		if (aliases == null) return KeyVal_.Ary_empty;
+	public Keyval[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
+		if (aliases == null) return Keyval_.Ary_empty;
 		int len = aliases.Count();
-		KeyVal[] rv = new KeyVal[len];
+		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			String alias = (String)aliases.Get_at(i);
-			rv[i] = KeyVal_.int_(i + List_adp_.Base1, alias);
+			rv[i] = Keyval_.int_(i + List_adp_.Base1, alias);
 		}
 		return rv;
 	}

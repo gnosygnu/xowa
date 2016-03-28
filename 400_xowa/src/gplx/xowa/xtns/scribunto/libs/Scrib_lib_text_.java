@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.core.net.*;
 class Scrib_lib_text_ {
-	public static KeyVal[] Init_nowiki_protocols(Xowe_wiki wiki) {
+	public static Keyval[] Init_nowiki_protocols(Xowe_wiki wiki) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		Ordered_hash protocols = Gfo_protocol_itm.Regy;
 		int len = protocols.Count();
@@ -26,14 +26,14 @@ class Scrib_lib_text_ {
 		for (int i = 0; i < len; i++) {
 			Gfo_protocol_itm itm = (Gfo_protocol_itm)protocols.Get_at(i);
 			if (itm.Text_ends_w_colon()) {	// To convert the protocol into a case-insensitive Lua pattern, we need to replace letters with a character class like [Xx] and insert a '%' before various punctuation.
-				KeyVal kv = Init_nowiki_protocols_itm(bfr, itm);
+				Keyval kv = Init_nowiki_protocols_itm(bfr, itm);
 				rv.Add(kv);
 			}
 		}
 		bfr.Mkr_rls();
-		return (KeyVal[])rv.To_ary(KeyVal.class);
+		return (Keyval[])rv.To_ary(Keyval.class);
 	}
-	private static KeyVal Init_nowiki_protocols_itm(Bry_bfr bfr, Gfo_protocol_itm itm) {
+	private static Keyval Init_nowiki_protocols_itm(Bry_bfr bfr, Gfo_protocol_itm itm) {
 		byte[] key = itm.Key_wo_colon_bry();
 		int end = key.length - 1;	// -1 to ignore final colon
 		for (int i = 0; i < end; i++) {
@@ -62,6 +62,6 @@ class Scrib_lib_text_ {
 			}
 		}
 		bfr.Add(Colon_encoded);
-		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.To_str_and_clear());
+		return Keyval_.new_(itm.Key_wo_colon_str(), bfr.To_str_and_clear());
 	}	private static final byte[] Colon_encoded = Bry_.new_a7("&#58;");
 }

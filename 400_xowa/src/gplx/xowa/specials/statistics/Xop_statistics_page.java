@@ -52,7 +52,7 @@ class Xop_statistics_stats_page_grp implements gplx.core.brys.Bfr_arg {
 		byte[] lbl_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages);
 		byte[] lbl_pages_desc = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages_desc);
 		Xol_num_mgr num_mgr = wiki.Lang().Num_mgr();
-		fmtr_page.Bld_bfr_many(bfr, lbl_header_pages, lbl_articles, lbl_pages, lbl_pages_desc , num_mgr.Format_num(wiki.Stats().NumArticles()), num_mgr.Format_num(wiki.Stats().NumPages()));
+		fmtr_page.Bld_bfr_many(bfr, lbl_header_pages, lbl_articles, lbl_pages, lbl_pages_desc , num_mgr.Format_num_by_long(wiki.Stats().Num_articles()), num_mgr.Format_num_by_long(wiki.Stats().Num_pages()));
 	}
 	private Bry_fmtr fmtr_page = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	""

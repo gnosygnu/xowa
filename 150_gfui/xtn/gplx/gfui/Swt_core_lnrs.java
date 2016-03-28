@@ -82,6 +82,17 @@ class Swt_lnr_key implements KeyListener {
 			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				val -= 32;	// lowercase keys are transmitted as ascii value, instead of key value; EX: "a" is 97 instead of 65 
 				break;
+			case 39:		val = IptKey_.Quote.Val(); break;
+			case 44:		val = IptKey_.Comma.Val(); break;
+			case 45:		val = IptKey_.Minus.Val(); break;
+			case 46:		val = IptKey_.Period.Val(); break;
+			case 47:		val = IptKey_.Slash.Val(); break;
+			case 59:		val = IptKey_.Semicolon.Val(); break;
+			case 61:		val = IptKey_.Equal.Val(); break;
+			case 91:		val = IptKey_.OpenBracket.Val(); break;
+			case 93:		val = IptKey_.CloseBracket.Val(); break;
+			case 96:		val = IptKey_.Tick.Val(); break;
+			case 127:		val = IptKey_.Delete.Val(); break;
 			case 16777217:	val = IptKey_.Up.Val(); break;				
 			case 16777218:	val = IptKey_.Down.Val(); break;				
 			case 16777219:	val = IptKey_.Left.Val(); break;
@@ -90,6 +101,7 @@ class Swt_lnr_key implements KeyListener {
 			case 16777222:	val = IptKey_.PageDown.Val(); break;
 			case 16777223:	val = IptKey_.Home.Val(); break;
 			case 16777224:	val = IptKey_.End.Val(); break;
+			case 16777225:	val = IptKey_.Insert.Val(); break;
 			case 16777226:	val = IptKey_.F1.Val(); break;
 			case 16777227:	val = IptKey_.F2.Val(); break;
 			case 16777228:	val = IptKey_.F3.Val(); break;
@@ -104,11 +116,15 @@ class Swt_lnr_key implements KeyListener {
 			case 16777237:	val = IptKey_.F12.Val(); break;
 			case 16777259:  val = IptKey_.Equal.Val(); break;
 			case 16777261:  val = IptKey_.Minus.Val(); break;
+			case 16777298:  val = IptKey_.CapsLock.Val(); break;
+			case 16777299:	val = IptKey_.NumLock.Val(); break;
 			case 16777300:	val = IptKey_.ScrollLock.Val(); break;
 			case 16777301:	val = IptKey_.Pause.Val(); break;
+			case 16777303:  val = IptKey_.PrintScreen.Val(); break;
 			case 327680: 	val = IptKey_.Insert.Val(); break;
 		}
-		if (Has_ctrl(ev.stateMask)) 							val |= IptKey_.KeyCode_Ctrl;
+		
+		if (Has_ctrl(ev.stateMask)) 								val |= IptKey_.KeyCode_Ctrl;
 		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Shift))	val |= IptKey_.KeyCode_Alt;
 		if (Bitmask_.Has_int(ev.stateMask, IptKey_.KeyCode_Ctrl))	val |= IptKey_.KeyCode_Shift;
 //		Tfds.Write(String_.Format("val={4} keyCode={0} stateMask={1} keyLocation={2} character={3}", ev.keyCode, ev.stateMask, ev.keyLocation, ev.character, val));

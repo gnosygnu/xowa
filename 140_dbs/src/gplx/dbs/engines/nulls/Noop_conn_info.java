@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.nulls; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Noop_conn_info extends Db_conn_info__base {
-	@Override public String Tid() {return Tid_const;} public static final String Tid_const = "null_db";
-	@Override public Db_conn_info New_self(String raw, GfoMsg m) {return this;}
-	public static final Noop_conn_info Instance = new Noop_conn_info(); Noop_conn_info() {this.Ctor("", "", "gplx_key=null_db", "");}
+	public Noop_conn_info(String raw, String db_api, String database) {super(raw, db_api, database);}
+	@Override public String Key() {return Tid_const;} public static final String Tid_const = "null_db";
+	@Override public Db_conn_info New_self(String raw, Keyval_hash hash) {return this;}
+	public static final Noop_conn_info Instance = new Noop_conn_info("gplx_key=null_db", "", "");
 }

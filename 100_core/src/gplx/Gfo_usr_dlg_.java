@@ -53,7 +53,7 @@ public class Gfo_usr_dlg_ {
 }
 class Gfo_usr_dlg_noop implements Gfo_usr_dlg {
 	public boolean Canceled() {return false;} public void Canceled_y_() {} public void Canceled_n_() {}
-	public void Cancel() {} public void Cancel_reset() {}
+	public void Cancel() {}
 	public void Clear() {}
 	public Gfo_usr_dlg__log Log_wkr() {return Gfo_usr_dlg__log_.Noop;} public void Log_wkr_(Gfo_usr_dlg__log v) {}
 	public Gfo_usr_dlg__gui Gui_wkr() {return Gfo_usr_dlg__gui_.Noop;} public void Gui_wkr_(Gfo_usr_dlg__gui v) {}

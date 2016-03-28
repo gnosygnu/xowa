@@ -43,8 +43,8 @@ class Xoh_page_body_cls_fxt {
 	}
 	public void Test_calc(byte page_tid, String ttl_str, String expd) {
 		if (app == null) {
-			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
+			app = Xoa_app_fxt.Make__app__edit();
+			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			tmp_bfr = Bry_bfr.reset_(255);
 			wiki.Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, Wdata_wiki_mgr.Ns_property_name);
 		}

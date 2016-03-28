@@ -25,7 +25,6 @@ public class Xoctg_view_itm implements gplx.CompareAble {
 	public byte[]			Sort_key() {return sort_key;} private byte[] sort_key;
 	public int				Sort_idx() {return sort_idx;} private int sort_idx;
 	public boolean				Missing() {return missing;} private boolean missing;				public void				Missing_y_() {missing = true;}
-
 	public Xoctg_view_itm	Set__page(byte tid, int page_id) {this.tid = tid; this.page_id = page_id; return this;}
 	public Xoctg_view_itm	Set__ttl__sortkey(Xoa_ttl ttl, byte[] sort_key) {
 		this.ttl = ttl;

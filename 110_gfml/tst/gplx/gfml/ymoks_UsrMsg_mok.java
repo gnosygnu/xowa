@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 class UsrMsg_mok {
 	public String Main() {return main;} public UsrMsg_mok Main_(String v) {main = v; return this;} private String main;
-	public UsrMsg_mok Add_(String k, Object o) {hash.Add(k, KeyVal_.new_(k, o)); return this;}
+	public UsrMsg_mok Add_(String k, Object o) {hash.Add(k, Keyval_.new_(k, o)); return this;}
 	public UsrMsg_mok Require_(String k) {required.Add(k, k); return this;}
 	public Ordered_hash Args() {return hash;} Ordered_hash hash = Ordered_hash_.New();
 	public Ordered_hash Required() {return required;} Ordered_hash required = Ordered_hash_.New();
@@ -27,7 +27,7 @@ class UsrMsg_mok {
 		if (um != null) {
 			rv.main = um.Hdr();
 			for (int i = 0; i < um.Args().Count(); i++) {
-				KeyVal kv = (KeyVal)um.Args().Get_at(i);
+				Keyval kv = (Keyval)um.Args().Get_at(i);
 				rv.Add_(kv.Key(), kv.Val());
 			}
 		}

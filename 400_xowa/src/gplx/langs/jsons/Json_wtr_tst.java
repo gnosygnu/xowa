@@ -84,9 +84,9 @@ public class Json_wtr_tst {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 			.Ary_bgn("a0")
-				.Ary_itm_obj(KeyVal_.Ary
-				(	KeyVal_.new_("k1", "v1")
-				,	KeyVal_.new_("k2", "v2")
+				.Ary_itm_obj(Keyval_.Ary
+				(	Keyval_.new_("k1", "v1")
+				,	Keyval_.new_("k2", "v2")
 				))
 			.Ary_end()
 			.Doc_nde_end();

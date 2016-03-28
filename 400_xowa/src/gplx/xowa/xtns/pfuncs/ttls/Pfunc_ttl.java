@@ -27,7 +27,7 @@ public class Pfunc_ttl extends Pf_func_base {
 	    switch (id) {
 			case Xol_kwd_grp_.Id_ttl_page_txt: bfr.Add(ttl.Page_txt()); break;
 			case Xol_kwd_grp_.Id_ttl_page_url: bfr.Add(ttl.Page_url()); break;
-			case Xol_kwd_grp_.Id_ttl_full_txt: bfr.Add(ttl.Full_txt()); break;
+			case Xol_kwd_grp_.Id_ttl_full_txt: bfr.Add(ttl.Full_txt_w_ttl_case()); break;
 			case Xol_kwd_grp_.Id_ttl_full_url: bfr.Add(ttl.Full_url()); break;
 			case Xol_kwd_grp_.Id_ttl_leaf_txt: bfr.Add(ttl.Leaf_txt()); break;
 			case Xol_kwd_grp_.Id_ttl_leaf_url: bfr.Add(ttl.Leaf_url()); break;
@@ -49,5 +49,5 @@ public class Pfunc_ttl extends Pf_func_base {
 	public Pfunc_ttl(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_ttl(id).Name_(name);}
-	public static final Pfunc_ttl Instance = new Pfunc_ttl(-1);
+	public static final    Pfunc_ttl Instance = new Pfunc_ttl(-1);
 }

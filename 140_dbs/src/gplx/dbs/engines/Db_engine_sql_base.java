@@ -46,7 +46,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Statement cmd = New_stmt_exec(sql);	
 			return cmd.executeUpdate(sql);			
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:exec failed", "url", conn_info.Xto_api(), "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:exec failed", "url", conn_info.Db_api(), "sql", sql);}
 	}
 	private DataRdr Exec_as_rdr(String sql) {
 		try {
@@ -55,16 +55,17 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			ResultSet rdr = cmd.getResultSet();	
 			return New_rdr(rdr, sql);
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Xto_api(), "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Db_api(), "sql", sql);}
 	}
-	public void Ddl_create_tbl(Dbmeta_tbl_itm tbl) {Exec_as_int(tbl.To_sql_create(this.Sql_wtr()));}
+	public void Ddl_create_tbl(Dbmeta_tbl_itm tbl) {Exec_as_int(tbl.To_sql_create(this.Sql_wtr())); this.Meta_reload();}
 	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Dbmeta_idx_itm idx = ary[i];
-			usr_dlg.Plog_many("", "", "creating database index (please wait); db=~{0} idx=~{1}", conn_info.Database(), idx.Name());
+			usr_dlg.Plog_many("", "", "creating db index (please wait); db=~{0} idx=~{1}", conn_info.Database(), idx.Name());
 			Exec_as_int(idx.To_sql_create(Sql_wtr()));
 		}
+		this.Meta_reload();
 	}
 	public void Ddl_append_fld(String tbl, Dbmeta_fld_itm fld)		{
 		Gfo_usr_dlg_.Instance.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
@@ -75,10 +76,13 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		catch (Exception e) {	// catch error if column already added to table
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
 		}
+		this.Meta_reload();
 	}
-	public void Ddl_delete_tbl(String tbl)							{Exec_as_int(this.Sql_wtr().Schema_wtr().Bld_drop_tbl(tbl));}
+	public void Ddl_delete_tbl(String tbl)							{Exec_as_int(this.Sql_wtr().Schema_wtr().Bld_drop_tbl(tbl)); this.Meta_reload();}
 	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url)	{}
+	@gplx.Virtual public void Env_db_attach(String alias, Db_conn db_url)	{}
 	@gplx.Virtual public void	Env_db_detach(String alias)					{}
+	@gplx.Virtual public void	Meta_reload()								{}
 	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}
 	@gplx.Virtual public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
 	public abstract Dbmeta_tbl_mgr Meta_tbl_load_all();
@@ -94,7 +98,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public void Conn_term() {
 		if (connection == null) return;	// connection never opened; just exit
 		try 	{connection.close();}
-		catch 	(Exception e) {throw Err_.new_exc(e, "db", "Conn_term failed", "url", conn_info.Xto_raw());}
+		catch 	(Exception e) {throw Err_.new_exc(e, "db", "Conn_term failed", "url", conn_info.Raw());}
 		connection = null;
 	}
 	public Object New_stmt_prep_as_obj(String sql) {
@@ -109,6 +113,6 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	}
 	protected Connection Conn_make_by_url(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Xto_raw());}
+		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Raw());}
 	}
 	}

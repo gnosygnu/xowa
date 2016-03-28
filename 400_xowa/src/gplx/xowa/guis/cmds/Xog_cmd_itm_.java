@@ -17,30 +17,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_cmd_itm_ {
-	private static final Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
-	public static final String 
+	private static final    Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
+	public static final    String 
 	  Key_app_exit												= new_dflt_(Xog_ctg_itm_.Tid_app			, "xowa.app.exit")
 
 	, Key_nav_go_bwd											= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.go_bwd")
 	, Key_nav_go_fwd											= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.go_fwd")
 
-	, Key_nav_cfg_main											= new_page_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.cfg.main"								, "home/wiki/Help:Options")
-	, Key_nav_cfg_menu											= new_page_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.cfg.menus"								, "home/wiki/Help:Options/Menus")
+	, Key_nav_cfg_main											= new_page_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.cfg.main"								, "home/wiki/Options")				// HOME
+	, Key_nav_cfg_menu											= new_page_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.cfg.menus"								, "home/wiki/Options/Menus")		// HOME
 
 	, Key_nav_wiki_main_page									= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.main_page")
 	, Key_nav_wiki_sandbox										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.sandbox")
 	, Key_nav_wiki_random										= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.wiki.random")
 
-	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help:Contents")
-	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help:About")
-	, Key_nav_help_change_log									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.change_log"						, "home/wiki/Help:Change_log")
-	, Key_nav_help_diagnostics									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.diagnostics"						, "home/wiki/Help:Diagnostics")
-	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")
+	, Key_nav_help_help											= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.help"								, "home/wiki/Help/Contents")		// HOME
+	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help/About")			// HOME
+	, Key_nav_help_change_log									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.change_log"						, "home/wiki/Change_log")			// HOME
+	, Key_nav_help_diagnostics									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.diagnostics"						, "home/wiki/Diagnostics")			// HOME
+	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")			// HOME
+	, Key_nav_help_xowa_blog									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_blog"							, "home/wiki/Blog")					// HOME
 
-	, Key_nav_setup_import_from_list							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_list"					, "home/wiki/Help:Import/List")
-	, Key_nav_setup_import_from_script							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_script"				, "home/wiki/Help:Import/Script")
-	, Key_nav_setup_maintenance									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.maintenance"						, "home/wiki/Help:Wiki_maintenance")
-	, Key_nav_setup_download									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.download"							, "home/wiki/Help:Download")
+	, Key_nav_setup_import_from_list							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_list"					, "home/wiki/Dashboard/Import/Online")		// HOME
+	, Key_nav_setup_import_from_script							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_script"				, "home/wiki/Dashboard/Import/Offline")		// HOME
+	, Key_nav_setup_maintenance									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.maintenance"						, "home/wiki/Dashboard/Wiki_maintenance")	// HOME
+	, Key_nav_setup_download									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.download"							, "home/wiki/Dashboard/Image_databases")	// HOME
 
 	, Key_nav_system_data_log_session							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.log_session"				, "Special:XowaSystemData?type=log_session")
 	, Key_nav_system_data_cfg_app								= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.system_data.cfg_app"					, "Special:XowaSystemData?type=cfg_app")
@@ -78,6 +79,8 @@ public class Xog_cmd_itm_ {
 	, Key_gui_browser_url_exec_by_paste							= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.exec_by_paste")
 	, Key_gui_browser_url_exec_new_tab_by_paste					= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.exec_new_tab_by_paste")
 	, Key_gui_browser_url_restore								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.restore")
+	, Key_gui_browser_url_type									= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.type")
+
 	, Key_gui_browser_search_focus								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.focus")
 	, Key_gui_browser_search_exec								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.exec")
 	, Key_gui_browser_tabs_new_dflt__at_dflt__focus_y			= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y")
@@ -160,7 +163,7 @@ public class Xog_cmd_itm_ {
 	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.Get_at(i);}
 	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.Get_by(key);}
 	public static void Regy_add(Xog_cmd_itm itm) {regy.Add(itm.Key(), itm);}
-	public static final byte[]
+	public static final    byte[]
 	  Msg_pre_api		= Bry_.new_a7("api-")
 	, Msg_pre_ctg		= Bry_.new_a7("api.ctg-")
 	, Msg_suf_name		= Bry_.new_a7("-name")

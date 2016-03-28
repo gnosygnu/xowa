@@ -36,7 +36,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			else if (String_.Eq(bz2_cmd, "move"))
 				Io_mgr.Instance.MoveFil(bz2_fil, bz2_fil.OwnerDir().OwnerDir().GenSubFil_nest("done", bz2_fil.NameAndExt()));
 		}
-		if (delete_xml)						Io_mgr.Instance.DeleteFil(Xobd_rdr.Find_fil_by(wiki_root_dir, "*.xml"));
+		if (delete_xml)						Io_mgr.Instance.DeleteFil(Xob_page_wkr_cmd.Find_fil_by(wiki_root_dir, "*.xml"));
 		if (delete_tdb) {
 			usr_dlg.Note_many("", "", "bldr.wiki:deleting tdb wiki");
 			Delete_tdb(wiki_root_dir);

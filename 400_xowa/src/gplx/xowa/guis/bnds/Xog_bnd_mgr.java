@@ -88,39 +88,32 @@ public class Xog_bnd_mgr {
 	public void Init() {
 		regy.Clear();	// clear regy, else 1 test will fail
 		Init_itm(Xog_cmd_itm_.Key_app_exit										, Xog_bnd_box_.Tid_browser				, "mod.c+key.q");
-
 		Init_itm(Xog_cmd_itm_.Key_nav_go_bwd									, Xog_bnd_box_.Tid_browser				, "mod.a+key.left");
 		Init_itm(Xog_cmd_itm_.Key_nav_go_fwd									, Xog_bnd_box_.Tid_browser				, "mod.a+key.right");
-
 		Init_itm(Xog_cmd_itm_.Key_nav_cfg_main									, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_cfg_menu									, Xog_bnd_box_.Tid_browser				, "");
-
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_main_page							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_random								, Xog_bnd_box_.Tid_browser				, "mod.cs+key.r");
 		Init_itm(Xog_cmd_itm_.Key_nav_wiki_sandbox								, Xog_bnd_box_.Tid_browser				, "mod.cs+key.g,mod.cs+key.s", "mod.c+key.f1");
-
 		Init_itm(Xog_cmd_itm_.Key_nav_help_help									, Xog_bnd_box_.Tid_browser				, "key.f1");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_change_log							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_diagnostics							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_about								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_main							, Xog_bnd_box_.Tid_browser				, "");
-
+		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_blog							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_list					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_script					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_maintenance							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_download							, Xog_bnd_box_.Tid_browser				, "");
-
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_log_session					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_app						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_lang						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_user						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_cfg_custom					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_system_data_usr_history					, Xog_bnd_box_.Tid_browser				, "");
-
 		Init_itm(Xog_cmd_itm_.Key_gui_font_increase								, Xog_bnd_box_.Tid_browser				, "mod.c+key.equal");
 		Init_itm(Xog_cmd_itm_.Key_gui_font_decrease								, Xog_bnd_box_.Tid_browser				, "mod.c+key.minus");
 		Init_itm(Xog_cmd_itm_.Key_gui_font_reset								, Xog_bnd_box_.Tid_browser				, "mod.c+key.d0");
-
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_read						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.r");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_edit						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.e");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_html						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.h", "mod.c+key.u");
@@ -128,11 +121,9 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_save_as							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_print							, Xog_bnd_box_.Tid_browser				, "");
-
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_select_all					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_copy						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_save_file_as				, Xog_bnd_box_.Tid_browser				, "");
-
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_save									, Xog_bnd_box_.Tid_browser				, "mod.as+key.s");
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_save_draft							, Xog_bnd_box_.Tid_browser				, "mod.c+key.s");
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_focus_edit_box						, Xog_bnd_box_.Tid_browser				, "mod.as+key.comma");
@@ -140,7 +131,6 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_dbg_tmpl								, Xog_bnd_box_.Tid_browser				, "mod.c+key.e,mod.c+key.e", "mod.as+key.d,mod.as+key.d");
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_dbg_html								, Xog_bnd_box_.Tid_browser				, "mod.c+key.e,mod.c+key.h");
 		Init_itm(Xog_cmd_itm_.Key_gui_edit_exec									, Xog_bnd_box_.Tid_browser				, "mod.c+key.e,mod.c+key.g");
-
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_focus							, Xog_bnd_box_.Tid_browser				, "mod.a+key.d", "mod.c+key.l");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec							, Xog_bnd_box_.Tid_browser_url			, "key.enter", "key.keypad_enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_url_exec_new_tab_by_paste			, Xog_bnd_box_.Tid_browser_url			, "mod.c+key.enter", "mod.c+key.keypad_enter");
@@ -187,15 +177,11 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_info_focus						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.i");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_info_clear						, Xog_bnd_box_.Tid_browser				, "mod.ca+key.c");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_prog_log_show						, Xog_bnd_box_.Tid_browser_prog			, "mouse.middle", "mod.cs+key.p");
-
 		Init_itm(Xog_cmd_itm_.Key_html_tidy_toggle								, Xog_bnd_box_.Tid_browser				, "key.f7");
-
 		Init_itm(Xog_cmd_itm_.Key_usr_bookmarks_add								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_usr_bookmarks_show							, Xog_bnd_box_.Tid_browser				, "key.f3");
-
 		Init_itm(Xog_cmd_itm_.Key_usr_history_goto_recent						, Xog_bnd_box_.Tid_browser				, "mod.cs+key.l");
 		Init_itm(Xog_cmd_itm_.Key_usr_history_show								, Xog_bnd_box_.Tid_browser				, "mod.cs+key.h");
-
 		Init_itm(Xog_cmd_itm_.Key_net_enabled_n_								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_net_enabled_y_								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_net_enabled_x_								, Xog_bnd_box_.Tid_browser				, "");
@@ -216,14 +202,15 @@ public class Xog_bnd_mgr {
 	}
 	private void Add_system_bnds() {
 		IptCfg null_cfg = IptCfg_.Null; IptEventType btn_event_type = IptEventType_.add_(IptEventType_.MouseUp, IptEventType_.KeyDown); IptArg[] btn_args = IptArg_.Ary(IptMouseBtn_.Left, IptKey_.Enter, IptKey_.Space);
-		IptBnd_.ipt_to_(null_cfg		, win.Go_bwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_bwd					, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Go_fwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_fwd					, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Go_bwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_bwd						, btn_event_type, btn_args);
+		IptBnd_.ipt_to_(null_cfg		, win.Go_fwd_btn()		, invk_mgr, Xog_cmd_itm_.Key_nav_go_fwd						, btn_event_type, btn_args);
 		IptBnd_.ipt_to_(null_cfg		, win.Url_exec_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_exec			, btn_event_type, btn_args);
 		IptBnd_.ipt_to_(null_cfg		, win.Search_exec_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_search_exec		, btn_event_type, btn_args);
 		IptBnd_.ipt_to_(null_cfg		, win.Find_close_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_hide			, btn_event_type, btn_args);
 		IptBnd_.ipt_to_(null_cfg		, win.Find_fwd_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_fwd		, btn_event_type, btn_args);
 		IptBnd_.ipt_to_(null_cfg		, win.Find_bwd_btn()	, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_find_bwd		, btn_event_type, btn_args);
-		IptBnd_.ipt_to_(null_cfg		, win.Find_box()		, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape), IptKey_.Ary()));
+		IptBnd_.ipt_to_(null_cfg		, win.Find_box()		, invk_mgr, Xog_cmd_itm_.Key_gui_browser_find_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
+		IptBnd_.ipt_to_(null_cfg		, win.Url_box()			, invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.Ctrl.Add(IptKey_.X), IptKey_.Ctrl.Add(IptKey_.V)), IptKey_.Ary()));
 	}
 	private void Add_custom_bnds() {	// NOTE: custom bnds are stored in cfg; cfg executes before Init_by_kit when all windows elements are null; run cfg now, while Init_by_kit is called and elems are now created
 		int len = startup_itms.Count();

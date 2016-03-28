@@ -37,7 +37,6 @@ public class Fsd_thm_itm {
 	public int		Req_w() {return req_w;} private int req_w;
 	public double	Req_time() {return req_time;} private double req_time;
 	public int		Req_page() {return req_page;} private int req_page;
-
 	public void Init_by_req(int w, double time, int page) {this.w = w; this.time = time; this.page = page;}
 	public void Init_by_match(Fsd_thm_itm comp) {
 		this.req_w = w; this.req_time = time; this.req_page = page;

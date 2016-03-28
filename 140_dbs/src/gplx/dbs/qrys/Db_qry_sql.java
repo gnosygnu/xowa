@@ -26,7 +26,7 @@ public class Db_qry_sql implements Db_qry {
 	public static Db_qry_sql dml_(String sql) {return sql_(sql);}
 	public static Db_qry_sql ddl_(String sql) {return sql_(sql);}
 	public static Db_qry_sql xtn_(String sql) {return sql_(sql);}
-	static Db_qry_sql sql_(String sql) {
+	public static Db_qry_sql sql_(String sql) {
 		Db_qry_sql rv = new Db_qry_sql();
 		rv.sql = sql; rv.isReader = false;
 		return rv;

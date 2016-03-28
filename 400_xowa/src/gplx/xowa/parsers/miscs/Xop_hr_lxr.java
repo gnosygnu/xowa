@@ -35,10 +35,10 @@ public class Xop_hr_lxr implements Xop_lxr {
 		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Hook_byt);	// gobble consecutive dashes
 		if (!bos)
 			ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos);	// simulate \n in front of ----
-		ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_hr);	// para=n; block=y
+		ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__hr);	// para=n; block=y
 		int hr_len = cur_pos - bgn_pos + nl_adj;						// TODO: syntax_check if > 4
 		ctx.Subs_add(root, tkn_mkr.Hr(bgn_pos, cur_pos, hr_len));
-		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_hr);	// block=n; para=y;
+		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__hr);	// block=n; para=y;
 		return cur_pos;
 	}	private static final byte Hook_byt = Byte_ascii.Dash;
 	public static final int Hr_len = 4;

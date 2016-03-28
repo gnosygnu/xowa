@@ -30,7 +30,7 @@ public class Xop_link_parser {
 		switch (tmp_url.Protocol_tid()) {
 			case Gfo_protocol_itm.Tid_http: case Gfo_protocol_itm.Tid_https:	// "http:" or "https:"; check if to offline wiki and redirect 
 				byte[] wiki_bry = tmp_url.Wiki_bry(), page_bry = tmp_url.Page_bry();
-				if (	!tmp_url.Wiki_is_missing()							// https://www.a.org and others will be marked "missing" by Xoa_url_parser
+				if (	!tmp_url.Wiki_is_missing()							// https://www.a.org and others will be marked "missing" by Xow_url_parser
 						&&(	Bry_.Eq(wiki_bry, wiki.Domain_bry())			// link is to this wiki; check if alias
 						||	app.Xwiki_mgr__exists(wiki_bry)					// link is to an xwiki
 						)

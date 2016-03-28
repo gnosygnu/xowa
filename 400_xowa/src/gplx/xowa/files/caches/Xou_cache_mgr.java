@@ -32,7 +32,7 @@ public class Xou_cache_mgr {
 	public long Fsys_size_cur() {return fsys_size_cur;} private long fsys_size_cur = 0;
 	public long Fsys_size_min() {return fsys_size_min;} public void Fsys_size_min_(long v) {fsys_size_min = v;} private long fsys_size_min = Io_mgr.Len_mb * 75;
 	public long Fsys_size_max() {return fsys_size_max;} public void Fsys_size_max_(long v) {fsys_size_max = v;} private long fsys_size_max = Io_mgr.Len_mb * 100;
-	public KeyVal[] Info() {
+	public Keyval[] Info() {
 		long view_date = Long_.Max_value;
 		long fsys_size = 0;
 		int len = hash.Count();
@@ -41,11 +41,11 @@ public class Xou_cache_mgr {
 			fsys_size += itm.File_size();
 			if (itm.View_date() < view_date) view_date = itm.View_date();
 		}
-		return KeyVal_.Ary
-		( KeyVal_.new_("cache folder", cache_dir.Xto_api())
-		, KeyVal_.new_("space used", gplx.core.ios.Io_size_.To_str(fsys_size))
-		, KeyVal_.new_("file count", len)
-		, KeyVal_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
+		return Keyval_.Ary
+		( Keyval_.new_("cache folder", cache_dir.Xto_api())
+		, Keyval_.new_("space used", gplx.core.ios.Io_size_.To_str(fsys_size))
+		, Keyval_.new_("file count", len)
+		, Keyval_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
 		);
 	}
 	public Xou_cache_itm Get_or_null(Xof_fsdb_itm fsdb) {return Get_or_null(fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w());}

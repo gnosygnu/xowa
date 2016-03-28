@@ -84,8 +84,8 @@ class Xow_cfg_wiki_core_fxt {
 	Xoae_app app; Xowe_wiki wiki;
 	public Xowe_wiki Wiki() {return wiki;}
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		wiki = Xoa_app_fxt.wiki_tst_(app);
+		app = Xoa_app_fxt.Make__app__edit();
+		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public void Save_tst(String bldr_version, String main_page, String siteinfo_misc, int ns_user_case_match, String ns_user_name, String expd) {
 		wiki.Props().Bldr_version_(Bry_.new_a7(bldr_version)).Main_page_(Bry_.new_a7(main_page)).Siteinfo_misc_(Bry_.new_a7(siteinfo_misc));

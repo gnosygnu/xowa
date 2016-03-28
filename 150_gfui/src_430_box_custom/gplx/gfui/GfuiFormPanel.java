@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class GfuiFormPanel extends GfuiElemBase {
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Width_(60);	// default to 60; do not force callers to always set width
-		GfuiWin ownerForm = (GfuiWin)ctorArgs.FetchValOr(GfuiElem_.InitKey_ownerWin, null);
+		GfuiWin ownerForm = (GfuiWin)ctorArgs.Get_val_or(GfuiElem_.InitKey_ownerWin, null);
 
 		GfoFactory_gfui.Btn_MoveBox(this, ownerForm);
 		GfoFactory_gfui.Btn_MinWin2(this);

@@ -54,12 +54,12 @@ public class GfuiTextBox extends GfuiElemBase {
 
 	@gplx.Internal protected void SetTextBox(GxwTextFld textBox) {this.textBox = textBox;}
 	@gplx.Internal protected void CreateControlIfNeeded() {textBox.CreateControlIfNeeded();}
-	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.text_fld_();}
-	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
+	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.text_fld_();}
+	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		textBox = (GxwTextFld)this.UnderElem();
 	}	GxwTextFld textBox;
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		textBox = (GxwTextFld)underElem;
 	}

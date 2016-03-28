@@ -29,6 +29,7 @@ public interface Db_rdr {
 	double		Read_double(String k);
 	DateAdp		Read_date_by_str(String k);
 	boolean		Read_bool_by_byte(String k);
+	int			Fld_len();
 	Object 		Read_obj(String k);
 	Object 		Read_at(int i);
 	void		Rls();

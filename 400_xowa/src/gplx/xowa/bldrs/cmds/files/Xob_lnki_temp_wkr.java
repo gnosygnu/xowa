@@ -42,7 +42,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements gplx.xowa.pa
 	}
 	@Override protected Db_conn Init_db_file() {
 		ctx.Lnki().File_logger_(this);
-		Xob_db_file make_db = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
+		Xob_db_file make_db = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn make_conn = make_db.Conn();
 		this.tbl = new Xob_lnki_temp_tbl(make_conn); tbl.Create_tbl();
 		this.gen_hdump = hdump_bldr.Init(wiki, make_conn);

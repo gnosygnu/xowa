@@ -94,24 +94,53 @@ class Dbmeta_fld_wkr__default extends Dbmeta_fld_wkr__base {
 		Object default_val = null;
 		rdr.Skip_ws();
 		byte[] src = rdr.Src();
-		byte b = src[rdr.Pos()];
-		switch (b) {
-			case Byte_ascii.Quote:
-			case Byte_ascii.Apos:
+		switch (fld.Type().Tid_ansi()) {
+			case Dbmeta_fld_tid.Tid__bool:
+			case Dbmeta_fld_tid.Tid__byte:
+			case Dbmeta_fld_tid.Tid__short:
+			case Dbmeta_fld_tid.Tid__int:		default_val = Int_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__long:		default_val = Long_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__float:		default_val = Float_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__double:	default_val = Double_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__decimal:	default_val = Decimal_adp_.parse(Read_str_to_end_of_num(rdr)); break;
+			case Dbmeta_fld_tid.Tid__str:
+			case Dbmeta_fld_tid.Tid__text:
+			case Dbmeta_fld_tid.Tid__bry:
+				byte b = src[rdr.Pos()];
 				int bgn_pos = rdr.Pos() + 1;
 				int end_pos = Bry_find_.Find_fwd(src, b, bgn_pos); if (end_pos == Bry_find_.Not_found) rdr.Err_wkr().Fail("unclosed quote");
 				default_val = Bry_.Mid(src, bgn_pos, end_pos);
 				rdr.Move_to(end_pos + 1);
 				break;
-			case Byte_ascii.Dash:
-			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				default_val = rdr.Read_int_to_non_num();
-				break;
-			default:
-				rdr.Err_wkr().Fail("invalid field_default"); break;
+			case Dbmeta_fld_tid.Tid__date:		throw Err_.new_unhandled_default(fld.Type().Tid_ansi());
 		}
 		fld.Default_(default_val);
+	}
+	public String Read_str_to_end_of_num(Bry_rdr rdr) {
+		int bgn = rdr.Pos();
+		int pos = bgn, end = bgn;
+		int src_end = rdr.Src_end();
+		byte[] src = rdr.Src();
+		boolean loop = true;
+		while (loop) {
+			if (pos >= src_end) {
+				end = src_end;
+				break;
+			}
+			byte b = src[pos]; ++pos;
+			switch (b) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case Byte_ascii.Paren_end:
+				case Byte_ascii.Comma:
+					end = pos - 1;
+					loop = false;
+					break;
+				default:
+					break;
+			}
+		}
+		rdr.Move_to(end);
+		return String_.new_a7(src, bgn, end);
 	}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {}
 	private static final byte[] Hook = Bry_.new_a7("default");

@@ -33,16 +33,18 @@ public class Xowd_page_itm {
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;
 	public DateAdp		Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on;
 	public boolean			Exists() {return exists;} public Xowd_page_itm Exists_(boolean v) {exists = v; return this;} private boolean exists;
+	public int			Page_score;
 	public Xow_ns		Ns() {return ns;} private Xow_ns ns;
 	public Object		Xtn() {return xtn;} public Xowd_page_itm Xtn_(Object v) {this.xtn = v; return this;} private Object xtn;
 	public int			Tdb_row_idx() {return tdb_row_idx;} public void Tdb_row_idx_(int v) {tdb_row_idx = v;} private int tdb_row_idx;
+	public int			Rank() {return text_len;}
 	public Xowd_page_itm	Init(int id, byte[] ttl_page_db, boolean redirected, int text_len, int text_db_id, int tdb_row_idx) {
 		this.id = id; this.ttl_page_db = ttl_page_db; this.redirected = redirected;
 		this.text_len = text_len; this.text_db_id = text_db_id; this.tdb_row_idx = tdb_row_idx; 
 		id_val = null;
 		return this;
 	}
-	public void	Init_by_sql(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int text_db_id, int html_db_id, int redirect_id) {
+	public void	Init_by_sql(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int text_db_id, int html_db_id, int redirect_id, int page_score) {
 		this.id = id;
 		this.ns_id = ns_id;
 		this.ttl_page_db = ttl_page_db;
@@ -52,6 +54,7 @@ public class Xowd_page_itm {
 		this.text_db_id = text_db_id;
 		this.html_db_id = html_db_id;
 		this.redirect_id = redirect_id;
+		this.Page_score = page_score;
 	}
 	public void	Init_by_tdb(int id, int text_db_id, int tdb_row_idx, boolean redirected, int text_len, int ns_id, byte[] ttl_page_db) {
 		this.id = id;
@@ -70,7 +73,7 @@ public class Xowd_page_itm {
 		return this;
 	}
 	public Xowd_page_itm Ttl_(Xoa_ttl ttl) {
-		ttl_full_db = ttl.Full_txt();
+		ttl_full_db = ttl.Full_txt_w_ttl_case();
 		ttl_page_db = ttl.Page_db();
 		ns = ttl.Ns();
 		ns_id = ns.Id();
@@ -120,9 +123,9 @@ public class Xowd_page_itm {
 		this.html_db_id = orig.html_db_id;
 	}
 	public void Srl_save(Bry_bfr bfr) {gplx.xowa.wikis.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
-	public static final int Id_null = -1, Modified_on_null_int = 0;
-	public static final Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
-	public static final Xowd_page_itm Null = null;
+	public static final int Id_null = -1, Modified_on_null_int = 0, Redirect_id_null = -1;
+	public static final    Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
+	public static final    Xowd_page_itm Null = null;
 	public static Xowd_page_itm new_tmp()							{return new Xowd_page_itm();}
 	public static Xowd_page_itm new_srch(int id, int text_len)		{return new Xowd_page_itm().Id_(id).Text_len_(text_len);}
 }

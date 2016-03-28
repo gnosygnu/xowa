@@ -30,7 +30,7 @@ public abstract class Criteria_bool_base implements Criteria {
 }
 class Criteria_and extends Criteria_bool_base {
 	public Criteria_and(Criteria lhs, Criteria rhs) {this.Ctor("AND", lhs, rhs);}
-	@Override public byte	Tid() {return Criteria_.Tid_not;}
+	@Override public byte	Tid() {return Criteria_.Tid_and;}
 	@Override public boolean	Matches(Object curVal) {return this.Lhs().Matches(curVal) && this.Rhs().Matches(curVal);}
 }
 class Criteria_or extends Criteria_bool_base {
@@ -45,13 +45,4 @@ class Criteria_const implements Criteria {
 	public void				Val_from_args(Hash_adp args) {;}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
 	public String			To_str() {return String_.Concat(" IS ", Bool_.To_str_lower(val));}
-}
-class Criteria_not implements Criteria {
-	private final Criteria criteria;
-	public Criteria_not(Criteria v) {this.criteria = v;}
-	public byte				Tid() {return Criteria_.Tid_not;}
-	public boolean				Matches(Object obj) {return !criteria.Matches(obj);}
-	public void				Val_from_args(Hash_adp args) {criteria.Val_from_args(args);}
-	public void				Val_as_obj_(Object v) {criteria.Val_as_obj_(v);}
-	public String			To_str() {return String_.Concat_any(" NOT ", criteria.To_str());}
 }

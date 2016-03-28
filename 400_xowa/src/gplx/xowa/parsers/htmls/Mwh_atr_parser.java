@@ -472,10 +472,10 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		return Bry_find_.Not_found;
 	}
 	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_a7()
-	.Add_bry_bry(Xop_xnde_tag_.Tag_nowiki.Name_bry())
-	.Add_bry_bry(Xop_xnde_tag_.Tag_noinclude.Name_bry())
-	.Add_bry_bry(Xop_xnde_tag_.Tag_includeonly.Name_bry())
-	.Add_bry_bry(Xop_xnde_tag_.Tag_onlyinclude.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag__nowiki.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag__noinclude.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag__includeonly.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag__onlyinclude.Name_bry())
 	;
 	public static final int Key_tid__unknown = -1;
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.apps.urls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_href_parser_tst {
-	private final Xoh_href_parser_fxt fxt = new Xoh_href_parser_fxt();
+	private final    Xoh_href_parser_fxt fxt = new Xoh_href_parser_fxt();
 	@Test   public void Wiki__basic() {
 		fxt.Run_parse_by_href("/wiki/A").Chk_tid(Xoa_url_.Tid_page).Chk_to_str("en.wikipedia.org/wiki/A").Chk_wiki("en.wikipedia.org").Chk_page("A");
 	}
@@ -115,10 +115,10 @@ public class Xoh_href_parser_tst {
 //				;
 //		}
 }
-class Xoh_href_parser_fxt extends Xoa_url_parser_fxt {	private final Xoh_href_parser href_parser = new Xoh_href_parser();
+class Xoh_href_parser_fxt extends Xow_url_parser_fxt {	private final    Xoh_href_parser href_parser = new Xoh_href_parser();
 	public Xoh_href_parser_fxt Run_parse_by_href(String raw) {
 		href_parser.Parse_as_url(actl_url, Bry_.new_u8(raw), cur_wiki, Bry__page_1);
 		return this;
 	}
-	private static final byte[] Bry__page_1 = Bry_.new_a7("Page 1");
+	private static final    byte[] Bry__page_1 = Bry_.new_a7("Page 1");
 }

@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
-public interface Ordered_hash extends Hash_adp {
-	Object Get_at(int i);
+public interface Ordered_hash extends Hash_adp, List_adp__getable {
 	void Add_at(int i, Object o);
 	int Idx_of(Object item);
 	void Sort();

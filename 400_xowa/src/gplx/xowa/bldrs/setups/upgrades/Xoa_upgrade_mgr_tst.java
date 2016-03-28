@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.setups.upgrades; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*;
 public class Xoa_upgrade_mgr_tst {
 	@Test  public void Run() {
-		Xoae_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Io_url old_history_dir = app.Usere().Fsys_mgr().App_data_dir();
 		Io_url new_history_dir = app.Usere().Fsys_mgr().App_data_dir().GenSubDir("history");
 		Io_mgr.Instance.SaveFilStr(old_history_dir.GenSubFil("page_history.csv"), "test");

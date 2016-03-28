@@ -53,7 +53,7 @@ public class Xot_tmpl_wtr {
 				Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn;
 				int xnde_tag_id = xnde.Tag().Id();
 				switch (xnde_tag_id) {
-					case Xop_xnde_tag_.Tid_onlyinclude: {
+					case Xop_xnde_tag_.Tid__onlyinclude: {
 						// NOTE: originally "if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_tmpl) {" but if not needed; Xot_tmpl_wtr should not be called for tmpls and <oi> should not make it to page_wiki
 						Bry_bfr tmp_bfr = Bry_bfr.new_();
 						ctx.Only_include_evaluate_(true);
@@ -62,9 +62,9 @@ public class Xot_tmpl_wtr {
 						rslt_bfr.Add_bfr_and_preserve(tmp_bfr);
 						break;
 					}
-					case Xop_xnde_tag_.Tid_includeonly:	// noop; DATE:2014-02-12
+					case Xop_xnde_tag_.Tid__includeonly:	// noop; DATE:2014-02-12
 						break;
-					case Xop_xnde_tag_.Tid_nowiki: {
+					case Xop_xnde_tag_.Tid__nowiki: {
 						if (xnde.Tag_close_bgn() == Int_.Min_value)
 							rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end());	// write src from bgn/end
 						else {												// NOTE: if nowiki then "deactivate" all xndes by swapping out < for &lt; nowiki_xnde_frag; DATE:2013-01-27
@@ -76,7 +76,7 @@ public class Xot_tmpl_wtr {
 						}
 						break;
 					}
-					case Xop_xnde_tag_.Tid_xowa_cmd:
+					case Xop_xnde_tag_.Tid__xowa_cmd:
 						gplx.xowa.xtns.xowa_cmds.Xop_xowa_cmd xowa_cmd = (gplx.xowa.xtns.xowa_cmds.Xop_xowa_cmd)xnde.Xnde_xtn();					
 						rslt_bfr.Add(xowa_cmd.Xtn_html());
 						break;

@@ -72,8 +72,8 @@ class Gfdb_diff_bldr_fxt {
 	}
 	public void Clear() {
 		ctx.Clear();
-		Db_conn_utl.Tbl__delete(old_conn, "tbl");
-		Db_conn_utl.Tbl__delete(new_conn, "tbl");
+		old_conn.Meta_tbl_drop("tbl");
+		new_conn.Meta_tbl_drop("tbl");
 	}
 	public void Init__tbl__old(Object[]... rows) {Db_conn_utl.Tbl__new(old_conn, "tbl", flds_ary, rows);}
 	public void Init__tbl__cur(Object[]... rows) {Db_conn_utl.Tbl__new(new_conn, "tbl", flds_ary, rows);}

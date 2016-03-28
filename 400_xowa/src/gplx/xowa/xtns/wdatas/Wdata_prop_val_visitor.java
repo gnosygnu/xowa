@@ -21,7 +21,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr; private byte[] lang_key;
-	private final Bry_bfr tmp_time_bfr = Bry_bfr.reset_(255); private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
+	private final    Bry_bfr tmp_time_bfr = Bry_bfr.reset_(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
 	private Wdata_hwtr_msgs msgs;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
 	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {this.bfr = bfr; ; this.msgs = msgs; this.lang_key = lang_key;}
@@ -31,7 +31,7 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	}
 	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm)	{bfr.Add(itm.Text());}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
-		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
+		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Page_ttl_db());
 		if (entity_doc == null) return;	// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
 		byte[] label = entity_doc.Label_list__get(lang_key);
 		if (label == null && !Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))	// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
@@ -55,6 +55,6 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 		bfr.Add(itm.Lng());
 	}
 	public void Visit_system(Wdata_claim_itm_system itm) {}
-	private static final byte[] Ignore_comma = new byte[]{Byte_ascii.Comma};
-	private static final byte[] Bry_quantity_margin_of_error = Bry_.new_u8("±");
+	private static final    byte[] Ignore_comma = new byte[]{Byte_ascii.Comma};
+	private static final    byte[] Bry_quantity_margin_of_error = Bry_.new_u8("±");
 }

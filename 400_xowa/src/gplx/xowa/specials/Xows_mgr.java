@@ -19,21 +19,22 @@ package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
-import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
+import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
 import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.diags.*;
 import gplx.xowa.xtns.wdatas.specials.*;
+import gplx.xowa.addons.searchs.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 public class Xows_mgr {
 	private final Hash_adp_bry hash;
 	public Xows_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		hash = Hash_adp_bry.ci_u8(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
-		page_search = new Xows_page__search(wiki);
+		page_search = new Srch_special_page(wiki);
 		page_random = new Xows_page_random(wiki);
 		Evt_lang_changed(wiki.Lang());
 	}
 	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final Xows_page_allpages page_allpages;
-	public Xows_page__search			Page_search() {return page_search;} private final Xows_page__search page_search;
+	public Srch_special_page				Page_search() {return page_search;} private final Srch_special_page page_search;
 	public Xows_page_random				Page_random() {return page_random;} private final Xows_page_random page_random;
 	public Xop_randomRootPage_page		Page_randomRootPage() {return page_randomRootPage;} private final Xop_randomRootPage_page page_randomRootPage = new Xop_randomRootPage_page();
 	public Xou_history_html				Page_history() {return page_history;} private final Xou_history_html page_history = new Xou_history_html();

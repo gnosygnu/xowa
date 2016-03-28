@@ -33,11 +33,11 @@ public class Scrib_lib_message_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_lang("sun", "fr"))				, "dim");
 	}
 	@Test  public void Plain_rawMessage() {
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "abc");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", Keyval_.Ary(Keyval_.int_(1, "abc")))), "abc");
 	}
 	@Test  public void Plain_rawMessage_empty() {// PURPOSE:rawMessage would throw null ref if rawMessage called template that returns empty value; PAGE:it.w:L'Internazionale DATE:2015-02-25
 		fxt.Parser_fxt().Init_page_create("Template:Msg", "");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "{{Msg}}", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "{{Msg}}", "params", Keyval_.Ary(Keyval_.int_(1, "abc")))), "");
 	}
 	@Test   public void Check() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sun"))							, true);
@@ -58,19 +58,19 @@ public class Scrib_lib_message_tst {
 	private void Init_msg(Xol_lang_itm lang, String key, String val) {
 		lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_a7(key)).Atrs_set(Bry_.new_a7(val), false, false);
 	}
-	KeyVal[] keys_ary(String msg_key) {return keys_ary(msg_key, null, null);}
-	KeyVal[] keys_ary_arg(String msg_key, String arg) {return keys_ary(msg_key, null, arg);}
-	KeyVal[] keys_ary_lang(String msg_key, String lang) {return keys_ary(msg_key, lang, null);}
-	KeyVal[] keys_ary(String msg_key, String lang, String arg) {
+	Keyval[] keys_ary(String msg_key) {return keys_ary(msg_key, null, null);}
+	Keyval[] keys_ary_arg(String msg_key, String arg) {return keys_ary(msg_key, null, arg);}
+	Keyval[] keys_ary_lang(String msg_key, String lang) {return keys_ary(msg_key, lang, null);}
+	Keyval[] keys_ary(String msg_key, String lang, String arg) {
 		boolean arg_exists = arg != null;
 		boolean lang_exists = lang != null;
 		int idx = 0;
-		KeyVal[] rv = new KeyVal[1 + (arg_exists ? 1 : 0) + (lang_exists ? 1 : 0)];
-		rv[0] = KeyVal_.new_("keys", KeyVal_.Ary(KeyVal_.int_(1, msg_key)));
+		Keyval[] rv = new Keyval[1 + (arg_exists ? 1 : 0) + (lang_exists ? 1 : 0)];
+		rv[0] = Keyval_.new_("keys", Keyval_.Ary(Keyval_.int_(1, msg_key)));
 		if (arg_exists)
-			rv[++idx] = KeyVal_.new_("params", KeyVal_.Ary(KeyVal_.int_(1, arg)));
+			rv[++idx] = Keyval_.new_("params", Keyval_.Ary(Keyval_.int_(1, arg)));
 		if (lang_exists)
-			rv[++idx] = KeyVal_.new_("lang", lang);
+			rv[++idx] = Keyval_.new_("lang", lang);
 		return rv;
 	}
 }	

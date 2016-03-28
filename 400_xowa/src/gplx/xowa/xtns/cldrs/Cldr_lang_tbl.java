@@ -28,7 +28,7 @@ class Cldr_lang_tbl implements Rls_able {
 		this.fld_lang_name			= flds.Add_str("lang_name", 2048);
 		conn.Rls_reg(this);
 	}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_cldr_code, fld_lang_code)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_cldr_code, fld_lang_code)));}
 	public void Insert_bgn() {conn.Txn_bgn("cldr_lang__inser"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(byte[] cldr_code, byte[] lang_code, byte[] lang_name) {

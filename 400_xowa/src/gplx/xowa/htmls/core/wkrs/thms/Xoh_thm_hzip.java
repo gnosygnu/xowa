@@ -61,7 +61,6 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		capt_1.Mid_(src, capt_1_bgn, capt_1_end);
 		byte[] capt_2_bry = capt_2_exists ? rdr.Read_bry_to() : Bry_.Empty;
 		byte[] capt_3_bry = capt_3_exists ? rdr.Read_bry_to() : Bry_.Empty;
-
 		Xoh_img_data img_data = (Xoh_img_data)hctx.Pool_mgr__data().Get_by_tid(Xoh_hzip_dict_.Tid__img);
 		img_hzip.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, rdr.Pos(), src_end, img_data);
 		img_hzip.Wtr().Init_by_decode(hpg, hctx, src, img_data);

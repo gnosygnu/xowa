@@ -25,7 +25,7 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_orig_regy;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_orig_regy_tbl.Create_table(conn);
 		Xowe_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons).Init_assert();
 		Xowe_wiki repo_0 = wiki, repo_1 = commons_wiki;
@@ -34,7 +34,7 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			repo_1 = wiki;
 		}
 		repo_0.Init_assert(); repo_1.Init_assert();
-		Xob_db_file file_registry_db = Xob_db_file.new__page_regy(commons_wiki.Fsys_mgr().Root_dir());
+		Xob_db_file file_registry_db = Xob_db_file.New__page_regy(commons_wiki.Fsys_mgr().Root_dir());
 		Xob_orig_regy_tbl.Create_data(bldr.Usr_dlg(), conn, file_registry_db, repo_0_is_remote, repo_0, repo_1, Xob_lnki_temp_wkr.Ns_file_is_case_match_all(wiki));
 	}
 	public void Cmd_run() {}

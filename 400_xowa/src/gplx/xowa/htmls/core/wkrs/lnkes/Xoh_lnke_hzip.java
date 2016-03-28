@@ -27,13 +27,11 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean auto_exists		= flag_bldr.Set_as_bool(Flag__auto_exists		, data.Auto_exists());
 		boolean capt_exists		= flag_bldr.Set_as_bool(Flag__capt_exists		, data.Capt_exists());
 		byte    lnke_tid		= flag_bldr.Set_as_byte(Flag__lnke_tid			, data.Lnke_tid());
-
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag_bldr.Encode());									// add flag
 		bfr.Add_hzip_mid(src, data.Href_bgn(), data.Href_end());					// add href
 		if (auto_exists) bfr.Add_hzip_int(1, data.Auto_id());						// add autonumber
 		if (capt_exists) bfr.Add_hzip_mid(src, data.Capt_bgn(), data.Capt_end());	// add caption
-
 		hctx.Hzip__stat().Lnke_add(lnke_tid);
 		return this;
 	}
@@ -42,12 +40,10 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean   auto_exists		= flag_bldr.Get_as_bool(Flag__auto_exists);
 		boolean   capt_exists		= flag_bldr.Get_as_bool(Flag__capt_exists);
 		byte   lnke_tid			= flag_bldr.Get_as_byte(Flag__lnke_tid);
-
 		int href_bgn = rdr.Pos(); int href_end = rdr.Find_fwd_lr();
 		int auto_id = -1, capt_bgn = -1, capt_end = -1;
 		if (auto_exists) auto_id = rdr.Read_hzip_int(1);
 		if (capt_exists) {capt_bgn = rdr.Pos(); capt_end = rdr.Find_fwd_lr();}
-
 		Xoh_lnke_data data = (Xoh_lnke_data)data_itm;
 		data.Init_by_decode(lnke_tid, auto_id, href_bgn, href_end, capt_bgn, capt_end, capt_exists);
 	}

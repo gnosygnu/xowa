@@ -36,7 +36,6 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean xtra_style		= flag_bldr.Set_as_bool(Flag__ul__xtra_style	, data.Xtra_style_exists());
 		flag_bldr.Set(Flag__gly_tid, data.Gly_tid());
 		int itms_len = data.Itms__len();
-
 		bfr.Add(hook);
 		Gfo_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
 		Gfo_hzip_int_.Encode(1, bfr, ul_style_max_w);

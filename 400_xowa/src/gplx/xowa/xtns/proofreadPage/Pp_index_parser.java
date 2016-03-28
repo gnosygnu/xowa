@@ -73,7 +73,7 @@ class Pp_index_parser {
 				}
 				case Xop_tkn_itm_.Tid_xnde: {
 					Xop_xnde_tkn xnde = (Xop_xnde_tkn)sub;
-					if (xnde.Tag().Id() == Xop_xnde_tag_.Tid_pagelist)
+					if (xnde.Tag().Id() == Xop_xnde_tag_.Tid__pagelist)
 						rv.Pagelist_xndes().Add(xnde);
 					break;
 				}

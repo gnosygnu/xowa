@@ -30,5 +30,5 @@ public class Scrib_engine_type {
 		else										throw Err_.new_unimplemented();
 	}
 	public static final byte Type_lua = 0, Type_luaj = 1;
-	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_("luaj"), KeyVal_.new_("lua"));
+	public static Keyval[] Options__list = Keyval_.Ary(Keyval_.new_("luaj"), Keyval_.new_("lua"));
 }

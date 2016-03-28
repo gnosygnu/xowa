@@ -59,7 +59,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	public void Process_block_lnki_div() {	// bgn_lhs is pos of [[; end_lhs is pos of ]]
 		if (prv_ws_bgn > 0)	 // if pre at start of line; ignore it b/c of div; EX: "\n\s[[File:A.png|thumb]]" should not produce thumb; also [[File:A.png|right]]; DATE:2014-02-17
 			prv_ws_bgn = 0;
-		this.Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);
+		this.Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__div);
 	}
 	private void Process_block(Xop_xnde_tag tag, boolean bgn, boolean end) {
 		if (prv_ws_bgn > 0) {
@@ -69,7 +69,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 		block_is_bgn_xnde = bgn;
 		block_is_end_xnde = end;
 		switch (tag.Id()) {
-			case Xop_xnde_tag_.Tid_blockquote:
+			case Xop_xnde_tag_.Tid__blockquote:
 				if (bgn) block_is_bgn_blockquote = true;
 				if (end) block_is_end_blockquote = true;
 				break;
@@ -268,7 +268,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 		}
 	}
 	private void Add_br(Xop_ctx ctx, Xop_root_tkn root, int bgn_pos) {
-		ctx.Subs_add(root, ctx.Tkn_mkr().Xnde(bgn_pos, bgn_pos).Tag_(Xop_xnde_tag_.Tag_br)); 
+		ctx.Subs_add(root, ctx.Tkn_mkr().Xnde(bgn_pos, bgn_pos).Tag_(Xop_xnde_tag_.Tag__br)); 
 	}
 	private boolean Line_is_ws(byte[] src, int pos) {
 		if (prv_nl_pos == -1) return false;

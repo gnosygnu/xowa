@@ -29,7 +29,7 @@ public class Xowd_css_core_tbl implements Rls_able {
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
-	public void Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_key)));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_key)));}
 	public void Rls() {}
 	public int Insert(String key, DateAdp updated_on) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);

@@ -51,11 +51,11 @@ public class Flagged_revs_lib implements Scrib_lib {
 		// if ( !FlaggedRevs::inReviewNamespace( $title ) ) return rslt.Init_null();
 		return rslt.Init_obj(getDefaultVisibilitySettings());
 	}
-	private static KeyVal[] getDefaultVisibilitySettings() {
-		KeyVal[] rv = new KeyVal[3];
-		rv[0] = KeyVal_.new_("over"+"ride", 0);	// FlaggedRevs::isStableShownByDefault() ? 1 : 0,
-		rv[1] = KeyVal_.new_("autoreview", "");
-		rv[2] = KeyVal_.new_("expiry", "infinity");
+	private static Keyval[] getDefaultVisibilitySettings() {
+		Keyval[] rv = new Keyval[3];
+		rv[0] = Keyval_.new_("over"+"ride", 0);	// FlaggedRevs::isStableShownByDefault() ? 1 : 0,
+		rv[1] = Keyval_.new_("autoreview", "");
+		rv[2] = Keyval_.new_("expiry", "infinity");
 		return rv;
 	}
 }

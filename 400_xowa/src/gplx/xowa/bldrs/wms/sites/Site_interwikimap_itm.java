@@ -17,19 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 class Site_interwikimap_itm implements To_str_able {
-	public Site_interwikimap_itm(byte[] prefix, boolean local, byte[] language, boolean localinterwiki, byte[] url, boolean protorel) {
-		this.prefix = prefix;
-		this.local = local;
-		this.language = language;
-		this.localinterwiki = localinterwiki;
-		this.url = url;
-		this.protorel = protorel;
+	public Site_interwikimap_itm(byte[] prefix, boolean local
+		, boolean extralanglink, byte[] linktext, byte[] sitename
+		, byte[] language, boolean localinterwiki, byte[] url, boolean protorel) {
+		this.Prefix = prefix;
+		this.Local = local;
+		this.Extralanglink = extralanglink;
+		this.Linktext = linktext;
+		this.Sitename = sitename;
+		this.Language = language;
+		this.Localinterwiki = localinterwiki;
+		this.Url = url;
+		this.Protorel = protorel;
 	}
-	public byte[] Prefix() {return prefix;} private final byte[] prefix;
-	public boolean Local() {return local;} private final boolean local;
-	public byte[] Language() {return language;} private final byte[] language;
-	public boolean Localinterwiki() {return localinterwiki;} private final boolean localinterwiki;
-	public byte[] Url() {return url;} private final byte[] url;
-	public boolean Protorel() {return protorel;} private final boolean protorel;
-	public String To_str() {return String_.Concat_with_obj("|", prefix, local, language, url, protorel);}
+	public final    byte[]		Prefix;
+	public final    boolean		Local;
+	public final    boolean		Extralanglink;
+	public final    byte[]		Linktext;
+	public final    byte[]		Sitename;
+	public final    byte[]		Language;
+	public final    boolean		Localinterwiki;
+	public final    byte[]		Url;
+	public final    boolean		Protorel;
+	public String To_str() {return String_.Concat_with_obj("|", Prefix, Local, Extralanglink, Linktext, Sitename, Language, Localinterwiki, Url, Protorel);}
 }

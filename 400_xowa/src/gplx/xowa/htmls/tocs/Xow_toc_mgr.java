@@ -150,19 +150,19 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 				case Xop_tkn_itm_.Tid_xnde:
 					Xop_xnde_tkn xnde = (Xop_xnde_tkn)sub;
 					switch (xnde.Tag().Id()) {
-						case Xop_xnde_tag_.Tid_br:	// always ignore in TOC text; EX: en.wikipedia.org/wiki/Magnetic_resonance_imaging; ====''T''<span style="display:inline-block; margin-bottom:-0.3em; vertical-align:-0.4em; line-height:1.2em;  font-size:85%; text-align:left;">*<br />2</span>-weighted MRI====
-						case Xop_xnde_tag_.Tid_hr:	// assumed, based on above
-						case Xop_xnde_tag_.Tid_h1: case Xop_xnde_tag_.Tid_h2: case Xop_xnde_tag_.Tid_h3: case Xop_xnde_tag_.Tid_h4: case Xop_xnde_tag_.Tid_h5: case Xop_xnde_tag_.Tid_h6:
-						case Xop_xnde_tag_.Tid_ul: case Xop_xnde_tag_.Tid_ol: case Xop_xnde_tag_.Tid_dd: case Xop_xnde_tag_.Tid_dt: case Xop_xnde_tag_.Tid_li:
-						case Xop_xnde_tag_.Tid_table: case Xop_xnde_tag_.Tid_tr: case Xop_xnde_tag_.Tid_td: case Xop_xnde_tag_.Tid_th: case Xop_xnde_tag_.Tid_thead: case Xop_xnde_tag_.Tid_tbody: case Xop_xnde_tag_.Tid_caption:
-						case Xop_xnde_tag_.Tid_ref:	// NOTE: don't bother printing references
-//							case Xop_xnde_tag_.Tid_pre: case Xop_xnde_tag_.Tid_blockquote:
+						case Xop_xnde_tag_.Tid__br:	// always ignore in TOC text; EX: en.wikipedia.org/wiki/Magnetic_resonance_imaging; ====''T''<span style="display:inline-block; margin-bottom:-0.3em; vertical-align:-0.4em; line-height:1.2em;  font-size:85%; text-align:left;">*<br />2</span>-weighted MRI====
+						case Xop_xnde_tag_.Tid__hr:	// assumed, based on above
+						case Xop_xnde_tag_.Tid__h1: case Xop_xnde_tag_.Tid__h2: case Xop_xnde_tag_.Tid__h3: case Xop_xnde_tag_.Tid__h4: case Xop_xnde_tag_.Tid__h5: case Xop_xnde_tag_.Tid__h6:
+						case Xop_xnde_tag_.Tid__ul: case Xop_xnde_tag_.Tid__ol: case Xop_xnde_tag_.Tid__dd: case Xop_xnde_tag_.Tid__dt: case Xop_xnde_tag_.Tid__li:
+						case Xop_xnde_tag_.Tid__table: case Xop_xnde_tag_.Tid__tr: case Xop_xnde_tag_.Tid__td: case Xop_xnde_tag_.Tid__th: case Xop_xnde_tag_.Tid__thead: case Xop_xnde_tag_.Tid__tbody: case Xop_xnde_tag_.Tid__caption:
+						case Xop_xnde_tag_.Tid__ref:	// NOTE: don't bother printing references
+//							case Xop_xnde_tag_.Tid__pre: case Xop_xnde_tag_.Tid__blockquote:
 							break;
-						case Xop_xnde_tag_.Tid_b:
-						case Xop_xnde_tag_.Tid_i:
+						case Xop_xnde_tag_.Tid__b:
+						case Xop_xnde_tag_.Tid__i:
 							html_wtr.Write_tkn(bfr, ctx, html_wtr_opts, src, tkn, Xoh_html_wtr.Sub_idx_null, sub);
 							break;
-						case Xop_xnde_tag_.Tid_translate:
+						case Xop_xnde_tag_.Tid__translate:
 							gplx.xowa.xtns.translates.Xop_translate_xnde translate_xnde = (gplx.xowa.xtns.translates.Xop_translate_xnde)xnde.Xnde_xtn();
 							html_wtr.Write_tkn(bfr, ctx, html_wtr_opts, translate_xnde.Xtn_root().Data_mid(), tkn, Xoh_html_wtr.Sub_idx_null, translate_xnde.Xtn_root());
 							break;

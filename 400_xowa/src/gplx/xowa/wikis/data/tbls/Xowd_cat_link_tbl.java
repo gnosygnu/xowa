@@ -32,9 +32,9 @@ public class Xowd_cat_link_tbl implements Rls_able {
 		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
 		conn.Rls_reg(this);
 	}
-	public Xowd_cat_link_tbl Create_tbl() {conn.Ddl_create_tbl(Dbmeta_tbl_itm.New(tbl_name, flds)); return this;}
+	public Xowd_cat_link_tbl Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds)); return this;}
 	public void Create_idx() {
-		conn.Ddl_create_idx(Xoa_app_.Usr_dlg()
+		conn.Meta_idx_create(Xoa_app_.Usr_dlg()
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_to_id, fld_type_id, fld_sortkey, fld_from)
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "from", fld_from)
 		);

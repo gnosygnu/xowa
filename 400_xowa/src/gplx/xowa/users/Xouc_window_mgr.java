@@ -39,7 +39,7 @@ public class Xouc_window_mgr implements GfoInvkAble {
 	}
 	public static final String Invk_mode = "mode", Invk_mode_ = "mode_", Invk_mode_list = "mode_list"
 		, Invk_rect = "rect", Invk_rect_ = "rect_", Invk_safe_mode = "safe_mode", Invk_safe_mode_ = "safe_mode_", Invk_previous_adj = "previous_adj", Invk_previous_adj_ = "previous_adj_";
-	private static KeyVal[] Options_mode_list = KeyVal_.Ary(KeyVal_.new_("previous"), KeyVal_.new_("maximized"), KeyVal_.new_("absolute"), KeyVal_.new_("relative"), KeyVal_.new_("default")); 
+	private static Keyval[] Options_mode_list = Keyval_.Ary(Keyval_.new_("previous"), Keyval_.new_("maximized"), Keyval_.new_("absolute"), Keyval_.new_("relative"), Keyval_.new_("default")); 
 	public void Init_window(GfuiWin win) {
 		boolean init_is_maximized = false;
 		switch (mode_tid) {
