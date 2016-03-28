@@ -18,6 +18,140 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.3.4.1_.282016-03-27_19:30_Sun.29">Release: v3.3.4.1 (2016-03-27 19:30 Sun)</span>
+    </h2>
+    <p>
+      The desktop app is a major release. It has a new autocomplete address bar, a new search system as well as minor parser fixes.
+    </p>
+    <p>
+      The Android app is a major release. It has more updates for the new search system.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_New_autocomplete_address_bar">(Desktop) New autocomplete address bar</span>
+    </h3>
+    <p>
+      The address bar now supports autocompletion. For example, open up English Wikipedia, and start typing <code>earth</code>. The autocomplete is very fast and supports a lot of advanced functionality. For example you can do a search like <code>earth + (history, future) -middle</code> directly in the address bar. See [[App/Search/Overview]] as well as [[Options/Search suggest]].
+    </p>
+    <p>
+      Unfortunately, the autocomplete uses the new search system, so old wikis need to upgrade the search databases. You can upgrade by any of the following:
+    </p>
+    <ul>
+      <li>
+        Use the search suggest box 
+        <ul>
+          <li>
+            Open any page in the wiki
+          </li>
+          <li>
+            Click the search suggest box (the box between "View HTML" and the magnifying glass)
+          </li>
+          <li>
+            Start typing. XOWA will prompt you to upgrade the wiki.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Use the [[Dashboard/Wiki_maintenance]] page 
+        <ul>
+          <li>
+            Go to [[Dashboard/Wiki_maintenance]]
+          </li>
+          <li>
+            Find your wiki in the list
+          </li>
+          <li>
+            Click the <code>Search</code> button in the same row
+          </li>
+          <li>
+            Click <code>Run Script</code>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Download a copy (only for users with 2016-03 English Wikipedia) 
+        <ul>
+          <li>
+            Download <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z</a>
+          </li>
+          <li>
+            Download <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_New_search_system">(Desktop) New search system</span>
+    </h3>
+    <p>
+      I completely rewrote the search system over the past several weeks. Most of these changes were meant for Android to handle fast searches with a slower processor. This new engine is now part of the desktop app, so desktop users get the same benefits as well. To summarize, here are the main benefits:
+    </p>
+    <ul>
+      <li>
+        <b>Faster searches</b>: Searches are now dramatically faster for single-words (<code>earth</code>), wildcards (<code>e*</code>), multiple words (<code>earth history</code>) and multiple wildcards (<code>earth* history*</code>)
+      </li>
+      <li>
+        <b>PageRank score</b>: Searches now use <a href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> to order results. These provide better quality results than using page length. The old system would show "List of" pages at the top of the page
+      </li>
+      <li>
+        <b>Punctuation friendly</b>: Searches can be done for <code>U.S.A.</code> or <code>USA</code>; <code>dont't</code> or <code>dont</code>; <code>half-life</code> or <code>half</code> or <code>life</code>.
+      </li>
+      <li>
+        <b>Boolean searches</b>: Searches can use boolean operators like <code>-</code>, <code>,</code>, <code>+</code>, <code>()</code>, and <code>*</code>. In addition, there's even an escape operator: <code>\</code>. See [[App/Search/Overview]]
+      </li>
+      <li>
+        <b>Home wiki</b>: The home wiki is now searchable. Try entering in <code>search</code> or any other word
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Minor_fixes_for_Category_pages_and_taxonomy_url_links">(Desktop) Minor fixes for Category pages and taxonomy url links</span>
+    </h3>
+    <p>
+      There are basically two fixes:
+    </p>
+    <ul>
+      <li>
+        <b>Category pages had script error</b>: 2016-03 English Wikipedia Category pages would have script errors in the top right corner of the page. For example, <a href="https://en.wikipedia.org/wiki/Category:Articles_lacking_sources_from_February_2009">https://en.wikipedia.org/wiki/Category:Articles_lacking_sources_from_February_2009</a>
+      </li>
+      <li>
+        <b>Taxonomy boxes would have non-clickable links</b>: 2016-03 English Wikipedia pages on biological species have a taxonomy box at the bottom of the page. It has external links which should be clickable, but were not. For example, <a href="https://en.wikipedia.org/wiki/Golden_eagle">https://en.wikipedia.org/wiki/Golden_eagle</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Improvements_for_search_system">(Android) Improvements for search system</span>
+    </h3>
+    <p>
+      The Android search system received more performance and accuracy improvements. Also, the Android version supports boolean searches as well. If you're using the new search system, you should definitely update your copy:
+    </p>
+    <ul>
+      <li>
+        Download the new apk: <a href="https://github.com/gnosygnu/xowa/releases" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases</a>
+      </li>
+      <li>
+        Download the new wiki databases: <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_html_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_html_core.7z</a>
+      </li>
+    </ul>
+    <p>
+      If you haven't tried XOWA on Android, please give it a try. See <a href="https://github.com/gnosygnu/xowa/wiki/Android" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/wiki/Android</a>.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.4.1">Next release: v3.4.1</span>
+    </h3>
+    <p>
+      I've spent a lot of time on the search system for the past several weeks. I'm going to take a break and work on the following items for next week's release:
+    </p>
+    <ul>
+      <li>
+        <b>Shrink the image databases for English Wikipedia</b> : English Wikipedia is getting close to 128 GB but there are about 25 GB of unused image files. I'm planning on adding a feature that allows users to delete these old images. I'll also upload a brand new set.
+      </li>
+      <li>
+        <b>Resume image dumps</b>: I'm going to upload a new French Wikipedia.
+      </li>
+      <li>
+        <b>Make minor Android changes</b>: There are still some minor changes I need to make for the upcoming Google Play release in April.
+      </li>
+    </ul>
+
+    <h2>
       <span class="mw-headline" id="Release:_NONE_.282016-03-20_22:00_Sun.29">Release: NONE (2016-03-20 22:00 Sun)</span>
     </h2>
     <p>
@@ -116,7 +250,7 @@
         Better performance: Search is much quicker. One word searches should come back subsecond and multiple words should come back in a few, with initial results coming back in the first second
       </li>
       <li>
-        Better ranking: Search now ranks results by <a href="/site/en.wikipedia.org/wiki/PageRank">page rank</a>. Previously, XOWA ranks by page length, which resulted in long "List of" articles appearing near the top.
+        Better ranking: Search now ranks results by <a href="https://en.wikipedia.org/wiki/PageRank">page rank</a>. Previously, XOWA ranks by page length, which resulted in long "List of" articles appearing near the top.
       </li>
       <li>
         Better search terms: Search now handles punctuation better. Searches can be done for "U.S.A." or "USA"; "dont't" or "dont"; "half-life" or "half" or "life".
