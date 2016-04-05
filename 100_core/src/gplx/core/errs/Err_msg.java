@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.errs; import gplx.*; import gplx.core.*;
 public class Err_msg {
-	private final String msg; private Object[] args;
+	private final    String msg; private Object[] args;
 	public Err_msg(String type, String msg, Object[] args) {
 		this.type = type;
 		this.msg = msg;
 		this.args = args;
 	}
-	public String Type() {return type;} private final String type;
+	public String Type() {return type;} private final    String type;
 	public void Args_add(Object[] add) {
 		this.args = (Object[])Array_.Resize_add(args, add);
 	}
@@ -39,7 +39,7 @@ public class Err_msg {
 			rv += ":";
 			for (int i = 0; i < len; i += 2) {
 				Object key = args[i];
-				Object val = i < len ? args[i + 1] : "MISSING_VAL";
+				Object val = i + 1 < len ? args[i + 1] : "MISSING_VAL";
 				rv += " " + Object_.Xto_str_strict_or_null_mark(key) + "=" + Object_.Xto_str_strict_or_null_mark(val);
 			}
 		}

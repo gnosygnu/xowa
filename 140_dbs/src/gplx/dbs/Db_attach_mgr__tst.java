@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import org.junit.*; import gplx.dbs.qrys.*;
 public class Db_attach_mgr__tst {
-	private final Db_attach_mgr__fxt fxt = new Db_attach_mgr__fxt();
+	private final    Db_attach_mgr__fxt fxt = new Db_attach_mgr__fxt();
 	@Test  public void Basic() {
 		Db_qry__select_cmd qry = Db_qry_.select_()
 			.Cols_w_tbl_("t1", "fld_1")
@@ -42,8 +42,11 @@ public class Db_attach_mgr__tst {
 }
 class Db_attach_mgr__fxt {
 	private Db_attach_mgr mgr;
+	public Db_attach_mgr__fxt() {
+		Db_conn_bldr.Instance.Reg_default_mem();
+	}
 	public Db_attach_itm Make__itm(String key) {return new Db_attach_itm(key, Io_url_.mem_fil_("mem/" + key));}
-	public Db_conn Make__conn(String key) {return Db_conn_pool.Instance.Get_or_new__mem(key);}
+	public Db_conn Make__conn(String key) {return Db_conn_bldr.Instance.New(Io_url_.mem_fil_(key));}
 	public void Init(String conn_key, Db_attach_itm... ary) {
 		Db_conn conn = Make__conn(conn_key);
 		mgr = new Db_attach_mgr(conn, ary);

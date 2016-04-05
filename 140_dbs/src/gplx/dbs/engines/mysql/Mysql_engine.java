@@ -27,13 +27,13 @@ public class Mysql_engine extends Db_engine_sql_base {
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
-	@Override public Dbmeta_tbl_mgr Meta_tbl_load_all() {throw Err_.new_unimplemented();}
-		@gplx.Internal @Override protected Connection Conn_new() {
+	@Override public Dbmeta_tbl_mgr Meta_mgr() {throw Err_.new_unimplemented();}
+		@gplx.Internal @Override protected Connection Conn_make() {
 		Mysql_conn_info conn_info_as_mysql = (Mysql_conn_info)conn_info; 
 		Connection rv = Conn_make_by_url("jdbc:mysql://localhost/" + conn_info_as_mysql.Database() + "?characterEncoding=UTF8&useSSL=false", conn_info_as_mysql.Uid(), conn_info_as_mysql.Pwd());
 		return rv;
 	}
-		public static final Mysql_engine Instance = new Mysql_engine(); Mysql_engine() {}
+		public static final    Mysql_engine Instance = new Mysql_engine(); Mysql_engine() {}
 }
 class Mysql_rdr extends Db_data_rdr {
 		//PATCH:MYSQL:byte actually returned as int by Jdbc ResultSet (or MYSQL impmentation); convert to byte 

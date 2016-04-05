@@ -18,21 +18,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*;
-import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*; import gplx.xowa.bldrs.cmds.wikis.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.addons.builds.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.bldrs.cmds.diffs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
-import gplx.xowa.addons.searchs.dbs.bldrs.*;
+import gplx.xowa.addons.apps.searchs.bldrs.*; import gplx.xowa.addons.builds.files.cmds.*;
 public class Xob_cmd_mgr implements GfoInvkAble {
-	public Xob_cmd_mgr(Xob_bldr bldr) {this.bldr = bldr;} private Xob_bldr bldr;
+	private final    Xob_bldr bldr;
+	public final    Xob_cmd_regy cmd_regy;
+	public Xob_cmd_mgr(Xob_bldr bldr, Xob_cmd_regy cmd_regy) {this.bldr = bldr; this.cmd_regy = cmd_regy;}
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
-	public int Len() {return list.Count();} List_adp list = List_adp_.new_();
+	public int Len() {return list.Count();} private final    List_adp list = List_adp_.new_();
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.Get_at(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
 	public GfoInvkAble Add_cmd(Xowe_wiki wiki, String cmd_key) {
+		Xob_cmd prototype = cmd_regy.Get_or_null(cmd_key);
+		if (prototype != null) {
+			Xob_cmd clone = prototype.Cmd_new(bldr, wiki);
+			Add(clone);
+			return clone;
+		}
 		if		(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_init))					return Add(new Xob_init_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_page))					return Xml_rdr_direct_add(wiki, new Xob_page_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_css))					return Add(new Xob_css_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_wkr))				return Xml_rdr_direct_add(wiki, new gplx.xowa.addons.searchs.dbs.bldrs.Srch_bldr_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_wkr))				return Xml_rdr_direct_add(wiki, new gplx.xowa.addons.apps.searchs.bldrs.Srch_bldr_wkr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_cmd))				return Add(new Srch_bldr_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core_v1))			return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core))				return Add(new Xob_category_registry_sql(bldr, wiki));
@@ -40,22 +48,6 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_hidden))				return Add(new Xoctg_hiddencat_parser_sql(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_term))					return Add(new Xob_term_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_delete_page))			return Add(new Xob_page_delete_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_make))			return Add(new Xob_page_dump_cmd_make(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_drop))			return Add(new Xob_page_dump_cmd_drop(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_redirect))				return Add(new Xob_redirect_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_image))					return Add(new Xob_image_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_link))				return Add(new gplx.xowa.addons.pagelinks.bldrs.Pglnk_bldr_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_lnki_temp))				return Add(new Xob_lnki_temp_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_lnki_regy))				return Add(new Xob_lnki_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_page_regy))				return Add(new Xob_page_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_orig_regy))				return Add(new Xob_orig_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_temp_thumb))		return Add(new Xob_xfer_temp_cmd_thumb(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_temp_orig))			return Add(new Xob_xfer_temp_cmd_orig(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_regy))				return Add(new Xob_xfer_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_regy_update))		return Add(new Xob_xfer_regy_update_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_fsdb_make))				return Add(new Xob_fsdb_make_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_orig_reg))				return Add(new Xob_orig_tbl_bldr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_update))			return Add(new Xob_xfer_update_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_html_redlinks))				return Add(new Xob_redlink_mkr_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_cleanup))				return Add(new Xob_cleanup_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_delete))					return Add(new Xob_delete_cmd(bldr, wiki));
@@ -66,10 +58,6 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_db))					return Add(new Xob_wdata_db_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_site_meta))					return Add(new Xob_site_meta_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_search__page__page_score))	return Add(new gplx.xowa.addons.searchs.dbs.bldrs.cmds.Srch__page__page_score(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_search__link__link_score))	return Add(new gplx.xowa.addons.searchs.dbs.bldrs.cmds.Srch__link__link_score(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_search__word__link_count))	return Add(new gplx.xowa.addons.searchs.dbs.bldrs.cmds.Srch__word__link_count(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_sqlite_normalize))		return Add(new gplx.xowa.addons.sqlite_utils.bldrs.Sqlite_percentile_cmd(bldr, wiki));
 
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_init))				return Add(new Xob_init_tdb(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_page))				return Xml_rdr_direct_add(wiki, new Xob_page_txt(bldr, wiki));
@@ -85,8 +73,6 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_wdata_qid))			return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_txt().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_wdata_pid))			return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_txt().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_diff_build))					return Add(new Xob_diff_build_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_diff_regy_exec))				return Add(new Xob_diff_regy_exec_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_diff_regy_make))				return Add(new Xob_diff_regy_make_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_exec_sql))					return Add(new Xob_exec_sql_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_decompress_bz2))				return Add(new Xob_decompress_bz2_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_deploy_zip))					return Add(new Xob_deploy_zip_cmd(bldr, wiki));

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_bin_tbl {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_uid, fld_url, fld_bin_len, fld_bin_max;
-	private final Db_conn conn; private int mnt_id;
+	private final    String tbl_name; private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final    String fld_uid, fld_url, fld_bin_len, fld_bin_max;
+	private final    Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
 		this.conn = conn; this.mnt_id = mnt_id;
 		String fld_prefix = "";

@@ -22,8 +22,8 @@ public class Dbmeta_fld_itm {
 		this.name = name; this.type = type;
 		this.primary = false; this.autonum = false; this.default_val = Default_value_null;
 	}
-	public String			Name()			{return name;} private final String name;
-	public Dbmeta_fld_tid	Type()			{return type;} private final Dbmeta_fld_tid type;
+	public String			Name()			{return name;} private final    String name;
+	public Dbmeta_fld_tid	Type()			{return type;} private final    Dbmeta_fld_tid type;
 	public int				Nullable_tid()	{return nullable_tid;} public Dbmeta_fld_itm Nullable_tid_(int v) {nullable_tid = v; return this;} private int nullable_tid;
 	public Dbmeta_fld_itm	Nullable_y_()	{return Nullable_tid_(Nullable_null);} 
 	public boolean				Primary()		{return primary;} public Dbmeta_fld_itm Primary_y_() {primary = true; return this;} private boolean primary;
@@ -39,10 +39,10 @@ public class Dbmeta_fld_itm {
 	}
 
 	public static final int Nullable_unknown = 0, Nullable_null = 1, Nullable_not_null = 2;
-	public static final Object Default_value_null = null;
+	public static final    Object Default_value_null = null;
 	public static final String Key_null = null;
-	public static final String[] Str_ary_empty = String_.Ary_empty;
-	public static final Dbmeta_fld_itm[] Ary_empty = new Dbmeta_fld_itm[0];
+	public static final    String[] Str_ary_empty = String_.Ary_empty;
+	public static final    Dbmeta_fld_itm[] Ary_empty = new Dbmeta_fld_itm[0];
 
 	public static Dbmeta_fld_itm new_bool(String name)			{return new Dbmeta_fld_itm(name, Dbmeta_fld_tid.Itm__bool);}
 	public static Dbmeta_fld_itm new_byte(String name)			{return new Dbmeta_fld_itm(name, Dbmeta_fld_tid.Itm__byte);}

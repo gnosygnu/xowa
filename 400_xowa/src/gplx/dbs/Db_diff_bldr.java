@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
 class Db_diff_bldr {
-	private final Bry_bfr bfr = Bry_bfr.new_();
-	private final Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
+	private final    Bry_bfr bfr = Bry_bfr.new_();
+	private final    Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
 	public Db_diff_bldr() {sql_bldr.Bfr_(bfr);}
 	public String Compare_db(String src_str, String trg_str) {
 //			Io_url src_url = Io_url_.new_fil_(src_str);
 //			Io_url trg_url = Io_url_.new_fil_(trg_str);
 //			Db_conn src_conn = Db_conn_bldr.Instance.Get_or_new(src_url).Conn();
 //			Db_conn trg_conn = Db_conn_bldr.Instance.Get_or_new(trg_url).Conn();
-		Dbmeta_tbl_mgr src_tbls = new Dbmeta_tbl_mgr();
-		Dbmeta_tbl_mgr trg_tbls = new Dbmeta_tbl_mgr();
+		Dbmeta_tbl_mgr src_tbls = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
+		Dbmeta_tbl_mgr trg_tbls = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 		return Compare_tbls(src_tbls, trg_tbls);
 	}
 	public String Compare_tbls(Dbmeta_tbl_mgr src_tbls, Dbmeta_tbl_mgr trg_tbls) {

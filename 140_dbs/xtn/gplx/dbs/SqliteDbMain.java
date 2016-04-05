@@ -50,7 +50,7 @@ public class SqliteDbMain {
 //	}
 	private void CreateMany(int number, int base_val) {
 		long time_bgn = Env_.TickCount();
-		Db_conn provider = Db_conn_pool.Instance.Get_or_new__sqlite(Io_url_.new_fil_("E:\\test.sqlite3"));		
+		Db_conn provider = Db_conn_pool.Instance.Get_or_new(Db_conn_info_.sqlite_(Io_url_.new_fil_("E:\\test.sqlite3")));		
 		String tbl_sql = String_.Concat_lines_nl
 		( "CREATE TABLE fsdb_xtn_thm"
 		, "( thm_id            integer             NOT NULL    PRIMARY KEY"

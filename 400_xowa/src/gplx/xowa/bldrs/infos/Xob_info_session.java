@@ -21,12 +21,12 @@ public class Xob_info_session {
 	Xob_info_session(String user, String version, String wiki_domain, String dump_name, DateAdp time, Guid_adp guid) {
 		this.user = user; this.version = version; this.wiki_domain = wiki_domain; this.dump_name = dump_name; this.time = time; this.guid = guid;
 	}
-	public String User() {return user;} private final String user;
-	public String Version() {return version;} private final String version;
-	public String Wiki_domain() {return wiki_domain;} private final String wiki_domain;
-	public String Dump_name() {return dump_name;} private final String dump_name;
-	public DateAdp Time() {return time;} private final DateAdp time;
-	public Guid_adp Uuid() {return guid;} private final Guid_adp guid;
+	public String User() {return user;} private final    String user;
+	public String Version() {return version;} private final    String version;
+	public String Wiki_domain() {return wiki_domain;} private final    String wiki_domain;
+	public String Dump_name() {return dump_name;} private final    String dump_name;
+	public DateAdp Time() {return time;} private final    DateAdp time;
+	public Guid_adp Uuid() {return guid;} private final    Guid_adp guid;
 	public void Save(Db_cfg_tbl tbl) {
 		tbl.Conn().Txn_bgn("make__info__session");
 		tbl.Insert_str		(Cfg_grp, Cfg_key__user			, user);
@@ -57,5 +57,5 @@ public class Xob_info_session {
 	, Cfg_key__guid				= "guid"			// EX: 00000000-0000-0000-0000-000000000000
 	;
 	public static Xob_info_session new_(String user, String wiki_domain, String dump_name) {return new Xob_info_session(user, Xoa_app_.Version, wiki_domain, dump_name, DateAdp_.Now(), Guid_adp_.new_());}
-	public static final Xob_info_session Test = new_("anonymous", "en.wikipedia.org", "enwiki-latest-pages-articles");
+	public static final    Xob_info_session Test = new_("anonymous", "en.wikipedia.org", "enwiki-latest-pages-articles");
 }

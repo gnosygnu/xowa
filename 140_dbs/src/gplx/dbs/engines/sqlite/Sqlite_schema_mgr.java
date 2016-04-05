@@ -18,11 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*;
 import gplx.dbs.metas.*; import gplx.dbs.metas.parsers.*;
-public class Sqlite_schema_mgr {
-	private final Db_engine engine; private boolean init = true;
-	private final Dbmeta_idx_mgr idx_mgr = new Dbmeta_idx_mgr();
-	private final Dbmeta_tbl_mgr tbl_mgr = new Dbmeta_tbl_mgr();
-	public Sqlite_schema_mgr(Db_engine engine) {this.engine = engine;}
+public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
+	private final    Db_engine engine; private boolean init = true;
+	private final    Dbmeta_idx_mgr idx_mgr = new Dbmeta_idx_mgr();		
+	public Sqlite_schema_mgr(Db_engine engine) {
+		this.engine = engine;
+		this.tbl_mgr = new Dbmeta_tbl_mgr(this);
+	}
+	public Dbmeta_tbl_mgr Tbl_mgr() {
+		if (init) Init(engine);
+		return tbl_mgr;
+	}	private final    Dbmeta_tbl_mgr tbl_mgr;
 	public boolean Tbl_exists(String name) {
 		if (init) Init(engine);
 		return tbl_mgr.Has(name);
@@ -32,19 +38,22 @@ public class Sqlite_schema_mgr {
 		Dbmeta_tbl_itm tbl_itm = tbl_mgr.Get_by(tbl);
 		return tbl_itm == null ? false : tbl_itm.Flds().Has(fld);
 	}
-	public Dbmeta_tbl_mgr Tbl_load_all() {
+	public boolean Idx_exists(String idx) {
+		if (init) Init(engine);
+		return idx_mgr.Has(idx);
+	}
+	public void Load_all() {
 		Init(engine);
-		return tbl_mgr;
 	}
 	private void Init(Db_engine engine) {
 		init = false;
-		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Db_api());
 		tbl_mgr.Clear(); idx_mgr.Clear();
 		Dbmeta_parser__tbl tbl_parser = new Dbmeta_parser__tbl();
 		Dbmeta_parser__idx idx_parser = new Dbmeta_parser__idx();
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
-		Db_rdr rdr = engine.New_stmt_prep(qry).Exec_select__rls_auto();	
+		Db_rdr rdr = engine.Stmt_by_qry(qry).Exec_select__rls_auto();	
 		try {
+			Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Db_api());
 			while (rdr.Move_next()) {
 				String type_str = rdr.Read_str("type");
 				String name = rdr.Read_str("name");
@@ -65,6 +74,5 @@ public class Sqlite_schema_mgr {
 				}
 			}
 		}	finally {rdr.Rls();}
-		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.end");
 	}
 }

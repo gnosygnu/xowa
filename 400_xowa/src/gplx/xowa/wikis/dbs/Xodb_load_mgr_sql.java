@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.addons.searchs.*;
+import gplx.xowa.addons.apps.searchs.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private Xodb_mgr_sql db_mgr; Xowd_db_mgr fsys_mgr;
 	public Xodb_load_mgr_sql(Xow_wiki wiki, Xodb_mgr_sql db_mgr, Xowd_db_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;}

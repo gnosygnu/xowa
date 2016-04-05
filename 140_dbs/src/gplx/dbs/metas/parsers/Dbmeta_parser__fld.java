@@ -30,6 +30,16 @@ public class Dbmeta_parser__fld {
 			switch (src[rdr.Pos()]) {
 				case Byte_ascii.Comma:		return fld;
 				case Byte_ascii.Paren_end:	return fld;
+				case Byte_ascii.Dash:
+					int nxt_pos = rdr.Pos() + 1;
+					if (src[nxt_pos] == Byte_ascii.Dash) {
+						nxt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl, nxt_pos);
+						rdr.Move_to(nxt_pos + 1);
+					}
+					else {
+						throw Err_.new_("sqls.dbs", "expected double dash for comment");
+					}
+					return fld;
 			}
 			Dbmeta_fld_wkr__base type_wkr = (Dbmeta_fld_wkr__base)rdr.Chk_trie_as_obj(fld_trie);
 			switch (type_wkr.Tid()) {
@@ -59,7 +69,7 @@ public class Dbmeta_parser__fld {
 		}
 		return new Dbmeta_fld_tid(type_itm.Tid_ansi(), type_itm.Tid_sqlite(), type_itm.Word(), len_1, len_2);
 	}
-	private static final Btrie_slim_mgr fld_trie = fld_trie_init
+	private static final    Btrie_slim_mgr fld_trie = fld_trie_init
 	( Dbmeta_fld_wkr__nullable_null.Instance
 	, Dbmeta_fld_wkr__nullable_not.Instance
 	, Dbmeta_fld_wkr__autonumber.Instance
@@ -72,7 +82,7 @@ public class Dbmeta_parser__fld {
 			wkr.Reg(rv);
 		return rv;
 	}
-	private static final Btrie_slim_mgr type_trie = type_trie_init();
+	private static final    Btrie_slim_mgr type_trie = type_trie_init();
 	private static Btrie_slim_mgr type_trie_init() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__byte		, Sqlite_tid.Tid_int		, 0, "tinyint", "int2");
@@ -81,7 +91,7 @@ public class Dbmeta_parser__fld {
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__long		, Sqlite_tid.Tid_int		, 0, "bigint", "int8");	// "UNSIGNED BIG INT"
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__str			, Sqlite_tid.Tid_text		, 1, "character", "varchar", "nchar");	// "varying character", "native character"
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__text		, Sqlite_tid.Tid_text		, 0, "text", "clob");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__bry			, Sqlite_tid.Tid_none		, 0, "blob");
+		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__bry			, Sqlite_tid.Tid_none		, 0, "blob", "mediumblob");
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__float		, Sqlite_tid.Tid_real		, 0, "float");
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__double		, Sqlite_tid.Tid_real		, 0, "real", "double");	// "double precision"
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__decimal		, Sqlite_tid.Tid_numeric	, 0, "numeric");
@@ -97,10 +107,10 @@ class Dbmeta_parser__fld_itm {
 		this.tid_ansi = tid_ansi; this.tid_sqlite = tid_sqlite;
 		this.word = word; this.paren_itms_count = paren_itms_count;
 	}
-	public int Tid_ansi() {return tid_ansi;} private final int tid_ansi;
-	public int Tid_sqlite() {return tid_sqlite;} private final int tid_sqlite;
-	public byte[] Word() {return word;} private final byte[] word;
-	public int Paren_itms_count() {return paren_itms_count;} private final int paren_itms_count;
+	public int Tid_ansi() {return tid_ansi;} private final    int tid_ansi;
+	public int Tid_sqlite() {return tid_sqlite;} private final    int tid_sqlite;
+	public byte[] Word() {return word;} private final    byte[] word;
+	public int Paren_itms_count() {return paren_itms_count;} private final    int paren_itms_count;
 	public static void reg_many(Btrie_slim_mgr trie, int tid_ansi, int tid_sqlite, int paren_itms_count, String... names_str) {
 		int len = names_str.length;
 		for (int i = 0; i < len; ++i) {

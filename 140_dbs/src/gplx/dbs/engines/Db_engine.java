@@ -16,33 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
 public interface Db_engine {
-	String			Tid();
-	Db_conn_info	Conn_info();
-	Sql_qry_wtr		Sql_wtr();
-	Db_engine		New_clone(Db_conn_info url);
-	Db_rdr			New_rdr__rls_manual	(Object rdr_obj, String sql);				// Object o:ResultSet if desktop; Cursor if android
-	Db_rdr			New_rdr__rls_auto	(Db_stmt stmt, Object rdr_obj, String sql);	// Object o:ResultSet if desktop; Cursor if android
-	Db_stmt			New_stmt_prep(Db_qry qry);
-	Object			New_stmt_prep_as_obj(String sql);
-	DataRdr			New_rdr(java.sql.ResultSet rdr, String sql); 
-	void			Txn_bgn(String name);
-	String			Txn_end();
-	void			Txn_cxl();
-	void			Txn_sav();
-	void			Conn_open();
-	void			Conn_term();
-	Object			Exec_as_obj(Db_qry qry);
-	void			Ddl_create_tbl(Dbmeta_tbl_itm meta);
-	void			Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
-	void			Ddl_append_fld(String tbl, Dbmeta_fld_itm fld);
-	void			Ddl_delete_tbl(String tbl);
-	void			Env_db_attach(String alias, Db_conn conn);
-	void			Env_db_attach(String alias, Io_url db_url);
-	void			Env_db_detach(String alias);
-	void			Meta_reload();
-	boolean			Meta_tbl_exists(String tbl);
-	boolean			Meta_fld_exists(String tbl, String fld);
-	Dbmeta_tbl_mgr	Meta_tbl_load_all();
+	String				Tid();
+	Db_conn_info		Conn_info();
+	Db_conn_props_mgr	Props();
+	Db_batch_mgr		Batch_mgr();
+	Sql_qry_wtr			Sql_wtr();
+	Db_engine			New_clone(Db_conn_info conn_info);
+	void				Conn_open();
+	void				Conn_term();
+	void				Txn_bgn(String name);		// NOTE: sqlite has different transaction semantics with SAVEPOINT
+	String				Txn_end();
+	void				Txn_cxl();
+	void				Txn_sav();
+	void				Meta_tbl_create(Dbmeta_tbl_itm meta);
+	void				Meta_tbl_delete(String tbl);
+	void				Meta_fld_append(String tbl, Dbmeta_fld_itm fld);
+	void				Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
+	Dbmeta_tbl_mgr		Meta_mgr();
+	boolean				Meta_tbl_exists(String tbl);
+	boolean				Meta_fld_exists(String tbl, String fld);
+	boolean				Meta_idx_exists(String idx);
+	Object				Exec_as_obj(Db_qry qry);
+	Db_rdr				Exec_as_rdr__rls_manual	(Object rdr_obj, String sql);				// Object o:ResultSet if desktop; Cursor if android
+	Db_rdr				Exec_as_rdr__rls_auto	(Db_stmt stmt, Object rdr_obj, String sql);	// Object o:ResultSet if desktop; Cursor if android
+	Db_stmt				Stmt_by_qry(Db_qry qry);
+	Object				Stmt_by_sql(String sql);
+	void				Env_db_attach(String alias, Db_conn conn);
+	void				Env_db_attach(String alias, Io_url db_url);
+	void				Env_db_detach(String alias);
+	DataRdr				New_rdr(java.sql.ResultSet rdr, String sql); 
 }

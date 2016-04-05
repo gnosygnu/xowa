@@ -109,7 +109,6 @@ public class Xog_tab_itm implements GfoInvkAble {
 			return;
 		}
 		if (win.Page__async__working(url)) return;
-		app.Gui_mgr().Search_cfg().Cancel();					// cancel pending search_suggest calls
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();

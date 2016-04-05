@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_site_tst {
-	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_site().Init();
@@ -36,7 +36,7 @@ public class Scrib_lib_site_tst {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A|"), 0);
 	}
 	@Test   public void PagesInCategory__exists() {
-		gplx.xowa.addons.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
+		gplx.xowa.addons.apps.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "pages")	, 3);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "subcats")	, 2);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "files")	, 1);

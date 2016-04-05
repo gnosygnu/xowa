@@ -19,7 +19,7 @@ package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import org.junit.*;
 import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.engines.mems.*;
 public class Gfdb_diff_bldr_tst {
-	private final Gfdb_diff_bldr_fxt fxt = new Gfdb_diff_bldr_fxt();
+	private final    Gfdb_diff_bldr_fxt fxt = new Gfdb_diff_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test   public void Same() {
 		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
@@ -56,13 +56,13 @@ public class Gfdb_diff_bldr_tst {
 	}
 }
 class Gfdb_diff_bldr_fxt {
-	private final Gfdb_diff_bldr bldr = new Gfdb_diff_bldr();
-	private final Db_conn old_conn, new_conn;
-	private final Gfdb_diff_tbl tbl;
-	private final Gfdb_diff_wkr__test wkr = new Gfdb_diff_wkr__test();
-	private final Dbmeta_fld_itm[] flds_ary;
-	private final String tbl_name = "tbl";
-	private final Gdif_bldr_ctx ctx = new Gdif_bldr_ctx();
+	private final    Gfdb_diff_bldr bldr = new Gfdb_diff_bldr();
+	private final    Db_conn old_conn, new_conn;
+	private final    Gfdb_diff_tbl tbl;
+	private final    Gfdb_diff_wkr__test wkr = new Gfdb_diff_wkr__test();
+	private final    Dbmeta_fld_itm[] flds_ary;
+	private final    String tbl_name = "tbl";
+	private final    Gdif_bldr_ctx ctx = new Gdif_bldr_ctx();
 	public Gfdb_diff_bldr_fxt() {
 		old_conn = Db_conn_utl.Conn__new("old_db");
 		new_conn = Db_conn_utl.Conn__new("new_db");
@@ -72,8 +72,8 @@ class Gfdb_diff_bldr_fxt {
 	}
 	public void Clear() {
 		ctx.Clear();
-		old_conn.Meta_tbl_drop("tbl");
-		new_conn.Meta_tbl_drop("tbl");
+		old_conn.Meta_tbl_delete("tbl");
+		new_conn.Meta_tbl_delete("tbl");
 	}
 	public void Init__tbl__old(Object[]... rows) {Db_conn_utl.Tbl__new(old_conn, "tbl", flds_ary, rows);}
 	public void Init__tbl__cur(Object[]... rows) {Db_conn_utl.Tbl__new(new_conn, "tbl", flds_ary, rows);}
@@ -83,8 +83,8 @@ class Gfdb_diff_bldr_fxt {
 	}
 }
 class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
-	private final List_adp list = List_adp_.new_();
-	private final Bry_bfr bfr = Bry_bfr.new_();
+	private final    List_adp list = List_adp_.new_();
+	private final    Bry_bfr bfr = Bry_bfr.new_();
 	private Db_rdr old_rdr, new_rdr;
 	public void Init_rdrs(Gdif_bldr_ctx ctx, Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;

@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.files.origs.*;
+import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.addons.builds.files.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.addons.builds.files.utls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
 	private Xob_dump_src_id page_src;
@@ -209,7 +210,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private void Notify_restoring(String itm, int val) {
 		usr_dlg.Note_many("", "", "restoring: itm=~{0} val=~{1}", itm, val);
 	}
-	public static final String 
+	public static final    String 
 	  Invk_progress_interval_ = "progress_interval_", Invk_commit_interval_ = "commit_interval_", Invk_cleanup_interval_ = "cleanup_interval_", Invk_rate_interval_ = "rate_interval_"
 	, Invk_select_size_ = "select_size_"
 	, Invk_ns_bgn_ = "ns_bgn_", Invk_db_bgn_ = "db_bgn_", Invk_pg_bgn_ = "pg_bgn_"

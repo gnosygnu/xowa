@@ -58,6 +58,6 @@ public class Db_qry_ {
 	}
 
 	public static Db_qry as_(Object obj) {return obj instanceof Db_qry ? (Db_qry)obj : null;}
-        public static final Db_qry Noop = new Db_qry__noop();
-	public static final int Tid_insert = 0, Tid_delete = 1, Tid_update = 2, Tid_select = 3, Tid_sql = 4, Tid_select_in_tbl = 5, Tid_flush = 6, Tid_noop = 7;
+        public static final    Db_qry Noop = new Db_qry__noop();
+	public static final int Tid_insert = 0, Tid_delete = 1, Tid_update = 2, Tid_select = 3, Tid_sql = 4, Tid_select_in_tbl = 5, Tid_flush = 6, Tid_noop = 7, Tid_pragma = 8;
 }

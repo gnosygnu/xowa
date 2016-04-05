@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.bldrs.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xob_wbase_json_dump_cmd implements Xob_cmd {
-	private final Xob_wbase_json_dump_parser json_dump_parser;
+	private final    Xob_wbase_json_dump_parser json_dump_parser;
 	private Io_url src_fil;
 	public Xob_wbase_json_dump_cmd(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.json_dump_parser = new Xob_wbase_json_dump_parser(bldr, wiki);
 	}
 	public String Cmd_key() {return Xob_cmd_keys.Key_wbase_json_dump;}
+	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_run() {json_dump_parser.Parse(src_fil);}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

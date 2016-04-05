@@ -40,20 +40,20 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		Sqlite_conn_info cs = (Sqlite_conn_info)cs_obj;
 		Env_db_attach(alias, cs.Url());
 	}
-	@Override public void	Env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
-	@Override public void	Env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
-	@Override public void	Txn_bgn(String name)	{txn_mgr.Txn_bgn(name);}
-	@Override public String	Txn_end()				{return txn_mgr.Txn_end();}
-	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
-	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
-	@Override public void	Meta_reload()							{schema_mgr.Tbl_load_all();}
-	@Override public boolean	Meta_tbl_exists(String tbl)				{return schema_mgr.Tbl_exists(tbl);}
-	@Override public boolean	Meta_fld_exists(String tbl, String fld) {return schema_mgr.Fld_exists(tbl, fld);}
-	@Override public Dbmeta_tbl_mgr Meta_tbl_load_all() {return schema_mgr.Tbl_load_all();}
-	@Override public Db_stmt New_stmt_prep(Db_qry qry) {return new Sqlite_stmt(this, qry);}
+	@Override public void			Env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
+	@Override public void			Env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
+	@Override public void			Txn_bgn(String name)						{txn_mgr.Txn_bgn(name);}
+	@Override public String			Txn_end()									{return txn_mgr.Txn_end();}
+	@Override public void			Txn_cxl()									{txn_mgr.Txn_cxl();}
+	@Override public void			Txn_sav()									{txn_mgr.Txn_sav();}
+	@Override public Dbmeta_tbl_mgr	Meta_mgr()									{return schema_mgr.Tbl_mgr();}
+	@Override public boolean			Meta_tbl_exists(String tbl)					{return schema_mgr.Tbl_exists(tbl);}
+	@Override public boolean			Meta_fld_exists(String tbl, String fld)		{return schema_mgr.Fld_exists(tbl, fld);}
+	@Override public boolean			Meta_idx_exists(String idx)					{return schema_mgr.Idx_exists(idx);}
+	@Override public Db_stmt Stmt_by_qry(Db_qry qry) {return new Sqlite_stmt(this, qry);}
 		private static boolean loaded = false;
 	protected void Meta_tbl_gather_hook() {throw Err_.new_unimplemented();}
-	@gplx.Internal @Override protected Connection Conn_new() {
+	@gplx.Internal @Override protected Connection Conn_make() {
 		if (!loaded) {
 			try {
 				Class.forName("org.sqlite.JDBC");

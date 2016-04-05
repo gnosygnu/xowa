@@ -21,14 +21,14 @@ import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 public class Xow_hdump_mgr__load {
-	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
-	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
+	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
+	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
 		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx, wiki.Domain_bry());			
 	}
-	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final Xoh_make_mgr make_mgr;
+	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
 	public void Load(Xoae_page wpg) {
 		Load(tmp_hpg, wpg.Ttl());
 		wpg.Hdump_data().Body_(tmp_hpg.Body());
@@ -91,7 +91,7 @@ public class Xow_hdump_mgr__load {
 	}
 	private static void Load__dbpg__redirects(Xow_wiki wiki, Xowd_page_itm dbpg) {
 		int redirect_count = 0;
-		while (redirect_count < 5) {
+		while (++redirect_count < 5) {
 			int redirect_id = dbpg.Redirect_id();
 			wiki.Data__core_mgr().Tbl__page().Select_by_id(dbpg, redirect_id);
 			if (redirect_id == -1) break;
@@ -99,8 +99,8 @@ public class Xow_hdump_mgr__load {
 	}
 }
 class Xow_override_mgr {
-	private final Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final Io_url root_dir;
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final    Io_url root_dir;
 	private boolean init = true;
 	public Xow_override_mgr(Io_url root_dir) {this.root_dir = root_dir;} 
 	public void Clear() {hash.Clear();}

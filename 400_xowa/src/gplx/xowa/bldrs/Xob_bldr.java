@@ -18,15 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.langs.bldrs.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.langs.jsons.*;
 public class Xob_bldr implements GfoInvkAble {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
 	public Xob_bldr(Xoae_app app) {
 		this.app = app;
-		this.cmd_mgr = new Xob_cmd_mgr(this);
+		this.cmd_mgr = new Xob_cmd_mgr(this, cmd_regy);
 		this.import_marker = new Xob_import_marker();
 		this.wiki_cfg_bldr = new Xob_wiki_cfg_bldr(this);
 	}
 	public Xoae_app				App() {return app;} private final    Xoae_app app;
+	public Xob_cmd_regy			Cmd_regy() {return cmd_regy;} private final    Xob_cmd_regy cmd_regy = new Xob_cmd_regy();
 	public Xob_cmd_mgr			Cmd_mgr() {return cmd_mgr;} private final    Xob_cmd_mgr cmd_mgr;
 	public Gfo_usr_dlg			Usr_dlg() {return app.Usr_dlg();}
 	public int					Sort_mem_len() {return sort_mem_len;} public Xob_bldr Sort_mem_len_(int v) {sort_mem_len = v; return this;} private int sort_mem_len = 16 * Io_mgr.Len_mb;
@@ -41,6 +44,46 @@ public class Xob_bldr implements GfoInvkAble {
 		this.prv_prog_time = now;
 		if (pct_idx > -1) ary[pct_idx] = Decimal_adp_.CalcPctStr(cur, end, "00.00");
 		app.Usr_dlg().Prog_many("", "", fmt, ary);
+	}
+	public Xob_bldr Exec_json(String script) {
+		try {
+			this.cmd_mgr.Clear();
+			Json_parser jdoc_parser = new Json_parser();
+			Json_doc jdoc = jdoc_parser.Parse(script);
+			Json_ary cmds = jdoc.Root_ary();
+			int cmds_len = cmds.Len();
+			for (int i = 0; i < cmds_len; ++i) {
+				Json_nde cmd = cmds.Get_at_as_nde(i);
+				byte[] key = cmd.Get_bry_or_null("key");
+				Xob_cmd prime = cmd_regy.Get_or_null(String_.new_u8(key));
+				if (prime == null) throw Err_.new_("bldr", "bldr.cmd does not exists: cmd={0}", key);
+				byte[] wiki_key = cmd.Get_bry_or_null("wiki");
+				Xowe_wiki wiki = wiki_key == null ? app.Usere().Wiki() : app.Wiki_mgr().Get_by_or_make(wiki_key);
+				Xob_cmd clone = prime.Cmd_new(this, wiki);
+				int atrs_len = cmd.Len();
+				for (int j = 0; j < atrs_len; ++j) {
+					Json_kv atr_kv = cmd.Get_at_as_kv(j);
+					String atr_key = atr_kv.Key_as_str();
+					if	(	String_.Eq(atr_key, "key")
+						||	String_.Eq(atr_key, "wiki"))	continue;
+					byte[] atr_val = atr_kv.Val_as_bry();
+					GfoInvkAble_.InvkCmd_val(clone, atr_key + GfoInvkAble_.Mutator_suffix, String_.new_u8(atr_val));
+				}
+				cmd_mgr.Add(clone);
+			}
+			gplx.core.threads.Thread_adp_.invk_("bldr_by_json", this, Invk_run_by_kit).Start();
+		} catch (Exception e) {
+			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", Err_.Message_gplx_log(e));
+		}
+		return this;
+	}
+	private void Run_by_kit() {	// same as Run, but shows exception; don't want to change backward compatibility on Run
+		try {this.Run();}
+		catch (Exception e) {
+			String log_msg = Err_.Message_gplx_log(e);
+			Xoa_app_.Usr_dlg().Log_many("", "", log_msg);
+			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", Err_.Message_gplx_full(e));
+		}
 	}
 	public void Run() {
 		try {
@@ -57,9 +100,13 @@ public class Xob_bldr implements GfoInvkAble {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
 				app.Usr_dlg().Note_many("", "", "cmd bgn: ~{0}", cmd.Cmd_key());
 				long time_cur = Env_.TickCount();
-				cmd.Cmd_bgn(this);
-				cmd.Cmd_run();
-				cmd.Cmd_end();
+				try {
+					cmd.Cmd_bgn(this);
+					cmd.Cmd_run();
+					cmd.Cmd_end();
+				} catch (Exception e) {
+					throw Err_.new_exc(e, "bldr", "unknown error", "key", cmd.Cmd_key());
+				}
 				Env_.GarbageCollect();
 				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), TimeSpanAdp_.from_(time_cur).XtoStrUiAbbrv());
 			}
@@ -91,6 +138,7 @@ public class Xob_bldr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_dump_fil_len_)) 			dump_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
 		else if	(ctx.Match(k, Invk_make_fil_len_)) 			make_fil_len = gplx.core.ios.Io_size_.Load_int_(m);
 		else if	(ctx.Match(k, Invk_run)) 					Run();
+		else if	(ctx.Match(k, Invk_run_by_kit)) 			Run_by_kit();
 		else if	(ctx.Match(k, Invk_cancel)) 				Cancel();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -99,6 +147,7 @@ public class Xob_bldr implements GfoInvkAble {
 	  Invk_cmds = "cmds", Invk_wiki_cfg_bldr = "wiki_cfg_bldr"
 	, Invk_pause_at_end_ = "pause_at_end_", Invk_sort_mem_len_ = "sort_mem_len_", Invk_dump_fil_len_ = "dump_fil_len_", Invk_make_fil_len_ = "make_fil_len_"
 	, Invk_cancel = "cancel"
+	, Invk_run_by_kit = "run_by_kit"
 	;
 	public static final String Invk_run = "run";
 }

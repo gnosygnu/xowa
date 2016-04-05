@@ -19,7 +19,8 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.infos.*;
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 
 	public Db_mgr_fxt Ctor_mem()	{bldr_fxt = new Xob_fxt().Ctor_mem(); return this;} private Xob_fxt bldr_fxt;
@@ -120,7 +121,7 @@ public class Db_mgr_fxt {
 	}
 	public void Init_db_sqlite() {
 		Xowe_wiki wiki = this.Wiki();
-		Db_conn_pool.Instance.Clear();
+		Db_conn_pool.Instance.Rls_all();
 		Db_conn_bldr.Instance.Reg_default_sqlite();
 		Io_mgr.Instance.DeleteDir_cmd(wiki.Fsys_mgr().Root_dir()).MissingIgnored_().Exec();
 		wiki.Db_mgr_create_as_sql().Core_data_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);

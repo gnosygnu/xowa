@@ -50,10 +50,6 @@ public class Sqlite_engine_ {
 		Db_qry qry = Db_qry_sql.ddl_(String_.Format("ALTER TABLE {0} RENAME TO {1};", src, trg));
 		p.Exec_qry(qry);
 	}
-	public static void Pragma_page_size(Db_conn p, int val) {
-		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.To_str(val) + ";");
-		p.Exec_qry(qry);
-	}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Dbmeta_idx_itm[] idx_ary) {
 		int len = idx_ary.length;
 		for (int i = 0; i < len; ++i) {
@@ -78,6 +74,6 @@ public class Sqlite_engine_ {
 	public static final boolean Supports_read_binary_stream = false;	
 	public static final boolean Supports_indexed_by = true;			
 	public static String X_date_to_str(DateAdp v) {return v == Date_null ? "" : v.XtoStr_fmt_iso_8561();}
-	public static final DateAdp Date_null = null;
+	public static final    DateAdp Date_null = null;
 	public static final byte Wildcard_byte = Byte_ascii.Hash;
 }

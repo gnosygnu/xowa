@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
-import gplx.xowa.addons.searchs.dbs.bldrs.*;
+import gplx.xowa.addons.apps.searchs.bldrs.*;
 public class Xob_search_base_tst {
 	@Test  public void Split() {
 		tst_Split("a", "a");

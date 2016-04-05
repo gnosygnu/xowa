@@ -35,10 +35,13 @@ public class Dbmeta_parser__fld_tst {
 		fxt.Test_parse_fld("name_1 int not null default -1"				, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, -1));
 		fxt.Test_parse_fld("name_1 varchar(3) not null default 'abc'"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__str, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, "abc"));
 	}
+	@Test  public void Comment() {
+		fxt.Test_parse_fld("name_1 int --a\n"							, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_unknown));
+	}
 }
 class Dbmeta_parser__fld_fxt {
-	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
-	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
+	private final    Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
+	private final    Sql_bry_rdr rdr = new Sql_bry_rdr();
 	public void Clear() {}
 	public Dbmeta_fld_tid Make_type(int tid_ansi) {return new Dbmeta_fld_tid(tid_ansi, -1, null, Int_.Min_value, Int_.Min_value);}
 	public Dbmeta_fld_tid Make_type(int tid_ansi, int len_1) {return new Dbmeta_fld_tid(tid_ansi, -1, null, len_1, Int_.Min_value);}

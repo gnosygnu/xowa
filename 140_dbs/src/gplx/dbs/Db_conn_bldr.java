@@ -21,11 +21,6 @@ public class Db_conn_bldr {
 	public void Reg_default_sqlite()	{wkr = Db_conn_bldr_wkr__sqlite.Instance; wkr.Clear_for_tests();}
 	public void Reg_default_mem()		{wkr = Db_conn_bldr_wkr__mem.Instance; wkr.Clear_for_tests();}
 	public boolean Exists(Io_url url) {return wkr.Exists(url);}
-//		public Db_conn Parse(String s) {
-//			Db_conn_info conn_info = Db_conn_info_.parse(s);
-//			Db_conn conn = Db_conn_pool.Instance.Get_or_new(conn_info);
-//			return conn;
-//		}
 	public Db_conn Get(Io_url url) {return wkr.Get(url);}
 	public Db_conn New(Io_url url) {return wkr.New(url);}
 	public Db_conn_bldr_data Get_or_new(Io_url url) {
@@ -43,5 +38,5 @@ public class Db_conn_bldr {
 		if (autocreate) return New(url);
 		else throw Err_.new_("dbs", "db does not exist", "url", url.Raw());
 	}
-        public static final Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
+        public static final    Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
 }

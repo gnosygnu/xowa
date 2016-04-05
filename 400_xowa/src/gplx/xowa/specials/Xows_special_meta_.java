@@ -54,7 +54,7 @@ public class Xows_special_meta_ {
 	, Key__bookmarks			= "XowaBookmarks"
 	, Key__diag					= "XowaDiag"
 	;
-	public static final Xows_special_meta
+	public static final    Xows_special_meta
 	  Itm__all_pages			= new Xows_special_meta(Src__mw		, Uid__all_pages			, Key__all_pages)
 	, Itm__random				= new Xows_special_meta(Src__mw		, Uid__random				, Key__random)
 	, Itm__random_root_page		= new Xows_special_meta(Src__mw		, Uid__random_root_page		, Key__random_root_page)

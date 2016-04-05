@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*;
-import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
+import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.qrys.bats.*;
 public class TdbEngine implements Db_engine {
 	public String Tid() {return Tdb_conn_info.Tid_const;}
-	public Db_conn_info Conn_info() {return conn_info;} private Db_conn_info conn_info;
-	public Sql_qry_wtr Sql_wtr() {return sql_wtr;} private final Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
+	public Db_conn_info			Conn_info() {return conn_info;} private Db_conn_info conn_info;
+	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
+	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
+	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
 	public TdbDatabase Db() {return db;} TdbDatabase db;
 	public void Conn_open() {
 		Tdb_conn_info tdb_url = (Tdb_conn_info)conn_info;
@@ -43,10 +44,10 @@ public class TdbEngine implements Db_engine {
 		Db_qryWkr wkr = (Db_qryWkr)wkrs.Get_by_or_fail(qry.Tid());
 		return wkr.Exec(this, qry);
 	}
-	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.Basic.To_sql_str(qry, true));}
-	public Object	New_stmt_prep_as_obj(String sql) {throw Err_.new_unimplemented();}
-	public Db_rdr	New_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
-	public Db_rdr	New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
+	public Db_stmt	Stmt_by_qry(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.Basic.To_sql_str(qry, true));}
+	public Object	Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
+	public Db_rdr	Exec_as_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
+	public Db_rdr	Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public DataRdr	New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public TdbTable FetchTbl(String name) {
 		TdbTable tbl = db.Tables().Get_by_or_fail(name);
@@ -59,20 +60,20 @@ public class TdbEngine implements Db_engine {
 	public void FlushTbl(TdbTable tbl) {
 		saveMgr.SaveFile(db, tbl.File());
 	}
-	public void	Ddl_create_tbl(Dbmeta_tbl_itm meta) {throw Err_.new_unimplemented();}
-	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw Err_.new_unimplemented();}
-	public void				Ddl_append_fld(String tbl, Dbmeta_fld_itm fld) {throw Err_.new_unimplemented();}
-	public void				Ddl_delete_tbl(String tbl)						{}
+	public void	Meta_tbl_create(Dbmeta_tbl_itm meta) {throw Err_.new_unimplemented();}
+	public void Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw Err_.new_unimplemented();}
+	public void				Meta_fld_append(String tbl, Dbmeta_fld_itm fld) {throw Err_.new_unimplemented();}
+	public void				Meta_tbl_delete(String tbl)						{}
+	public boolean				Meta_tbl_exists(String name)					{return false;}
+	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
+	public boolean				Meta_idx_exists(String idx)						{return false;}
 	public void				Env_db_attach(String alias, Db_conn conn)		{}
 	public void				Env_db_attach(String alias, Io_url db_url)		{}
 	public void				Env_db_detach(String alias)						{}
-	public void				Meta_reload()									{}
-	public boolean				Meta_tbl_exists(String name)					{return false;}
-	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
-	public Dbmeta_tbl_mgr	Meta_tbl_load_all()								{return meta_tbl_mgr;} private final Dbmeta_tbl_mgr meta_tbl_mgr = new Dbmeta_tbl_mgr();
+	public Dbmeta_tbl_mgr	Meta_mgr()										{return meta_mgr;} private final    Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 
 	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
-	public static final TdbEngine Instance = new TdbEngine(); 
+	public static final    TdbEngine Instance = new TdbEngine(); 
 	void CtorTdbEngine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;
 		wkrs.Add(Db_qry_.Tid_select, TdbSelectWkr.Instance);
@@ -88,7 +89,7 @@ interface Db_qryWkr {
 	Object Exec(Db_engine engine, Db_qry cmd);
 }
 class Db_qryWkr_ {
-	public static final Db_qryWkr Null = new Db_qryWrk_null();
+	public static final    Db_qryWkr Null = new Db_qryWrk_null();
 }
 class Db_qryWrk_null implements Db_qryWkr {
 	public Object Exec(Db_engine engine, Db_qry cmd) {return null;}

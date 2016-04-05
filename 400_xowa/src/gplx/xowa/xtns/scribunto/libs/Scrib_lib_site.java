@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.addons.ctgs.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.addons.apps.ctgs.*;
 import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.xwikis.*;
 public class Scrib_lib_site implements Scrib_lib {
-	public Scrib_lib_site(Scrib_core core) {this.core = core;} private final Scrib_core core;
+	public Scrib_lib_site(Scrib_core core) {this.core = core;} private final    Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
@@ -29,7 +29,7 @@ public class Scrib_lib_site implements Scrib_lib {
 		notify_wiki_changed_fnc = mod.Fncs_get_by_key("notify_wiki_changed");
 		return mod;
 	}	private Scrib_lua_proc notify_wiki_changed_fnc;
-	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_getNsIndex:						return GetNsIndex(args, rslt);
@@ -43,7 +43,7 @@ public class Scrib_lib_site implements Scrib_lib {
 	}
 	private static final int Proc_getNsIndex = 0, Proc_pagesInCategory = 1, Proc_pagesInNs = 2, Proc_usersInGroup = 3, Proc_interwikiMap = 4, Proc_init_site_for_wiki = 5;
 	public static final String Invk_getNsIndex = "getNsIndex", Invk_pagesInCategory = "pagesInCategory", Invk_pagesInNs = "pagesInName"+"space", Invk_usersInGroup = "usersInGroup", Invk_interwikiMap = "interwikiMap", Invk_init_site_for_wiki = "init_site_for_wiki";
-	private static final String[] Proc_names = String_.Ary(Invk_getNsIndex, Invk_pagesInCategory, Invk_pagesInNs, Invk_usersInGroup, Invk_interwikiMap, Invk_init_site_for_wiki);
+	private static final    String[] Proc_names = String_.Ary(Invk_getNsIndex, Invk_pagesInCategory, Invk_pagesInNs, Invk_usersInGroup, Invk_interwikiMap, Invk_init_site_for_wiki);
 	public boolean GetNsIndex(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ns_name = args.Pull_bry(0);
 		Object ns_obj = core.Wiki().Ns_mgr().Names_get_or_null(ns_name, 0, ns_name.length);

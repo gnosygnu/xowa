@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.addons.searchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
-import gplx.xowa.addons.searchs.searchers.*; import gplx.xowa.addons.searchs.searchers.crts.*;
+import gplx.xowa.addons.apps.searchs.searchers.*; import gplx.xowa.addons.apps.searchs.searchers.crts.*;
 public class Xoapi_url_bar implements GfoInvkAble, GfoEvMgrOwner {
 	public Xoapi_url_bar() {
 		this.evMgr = GfoEvMgr.new_(this);

@@ -304,7 +304,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"
-		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
+		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.apps.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
 		if (redirect_pos != Bry_find_.Not_found) {
 			text = String_.Mid(text, 0, redirect_pos);
 		}

@@ -103,7 +103,7 @@ class Xoi_cmd_search2_build extends Xoi_cmd_base {
 	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
 			wiki.Db_mgr_as_sql().Category_version_update(false);
-			gplx.xowa.addons.searchs.dbs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+			gplx.xowa.addons.apps.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		}
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {

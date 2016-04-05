@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.drds.pages.*; import gplx.xowa.wikis.*; import gplx.xowa.htmls.sections.*;
 public class Xod_app_tst {
-	private final Xod_app_tstr tstr = new Xod_app_tstr();
+	private final    Xod_app_tstr tstr = new Xod_app_tstr();
 	@Before		public void init() {tstr.Init_mem();}
 	@Test  public void Get() {
 		tstr.Data_mgr().Page__insert(1, "A", "2015-10-19 00:01:02");
@@ -35,8 +35,8 @@ public class Xod_app_tst {
 	}
 }
 class Xod_app_tstr {
-	private final gplx.xowa.apps.Xoav_app app; private final Xowv_wiki wiki;
-	private final Xod_app drd_provider;
+	private final    gplx.xowa.apps.Xoav_app app; private final    Xowv_wiki wiki;
+	private final    Xod_app drd_provider;
 	public Xod_app_tstr() {
 		this.app = Xoa_app_fxt.Make__app__view();
 		this.wiki = Xoa_app_fxt.Make__wiki__view(app);
@@ -44,7 +44,7 @@ class Xod_app_tstr {
 		Xoa_test_.Init__db__view(wiki);
 		drd_provider = new Xod_app(app);
 	}
-	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final Xowd_data_tstr data_mgr = new Xowd_data_tstr();
+	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final    Xowd_data_tstr data_mgr = new Xowd_data_tstr();
 	public void Init_mem() {
 		Io_mgr.Instance.InitEngine_mem();
 	}

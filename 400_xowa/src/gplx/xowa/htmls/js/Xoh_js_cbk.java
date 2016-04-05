@@ -188,6 +188,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_xowa_exec_test))						return Xowa_exec_test(m);
 		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
 		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__bridge_mgr().Cmd_mgr().Exec(m);
+		else if	(ctx.Match(k, Invk_bldr_exec))							return app.Bldr().Exec_json((String)m.ReadValAt(0));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
 	public static final    String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
@@ -196,5 +197,6 @@ public class Xoh_js_cbk implements GfoInvkAble {
 	, Invk_popups_get_async_bgn = "popups_get_async_bgn"
 	, Invk_popups_get_html = "popups_get_html"
 	, Invk_exec_json = "exec_json"
+	, Invk_bldr_exec = "bldr_exec"
 	;
 }

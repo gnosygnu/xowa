@@ -45,8 +45,8 @@ public class PoolIds {
 		}
 		if (rv != 1) throw Err_.new_wo_type("failed to update nextId", "url", url, "nextId", val);
 	}
-	public static final String Tbl_Name					= "pool_ids";
-	@gplx.Internal protected static final String Fld_id_path				= "id_path";
-	@gplx.Internal protected static final String Fld_id_next_id			= "id_next_id";
-	public static final PoolIds Instance = new PoolIds(); PoolIds() {}
+	public static final    String Tbl_Name					= "pool_ids";
+	@gplx.Internal protected static final    String Fld_id_path				= "id_path";
+	@gplx.Internal protected static final    String Fld_id_next_id			= "id_next_id";
+	public static final    PoolIds Instance = new PoolIds(); PoolIds() {}
 }

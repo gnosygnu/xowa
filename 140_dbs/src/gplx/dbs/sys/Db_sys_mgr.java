@@ -16,10 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
-import gplx.core.primitives.*;
 public class Db_sys_mgr {
-	private final Db_conn conn;
-	private final Db_sys_tbl sys_tbl;
+	private final    Db_conn conn;
+	private final    Db_sys_tbl sys_tbl;
 	private boolean assert_exists = true;
 	public Db_sys_mgr(Db_conn conn) {
 		this.conn = conn;

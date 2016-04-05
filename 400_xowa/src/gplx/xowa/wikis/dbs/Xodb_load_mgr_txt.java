@@ -21,12 +21,12 @@ import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.c
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
-import gplx.xowa.addons.searchs.specials.*;
+import gplx.xowa.addons.apps.searchs.specials.*;
 import gplx.xowa.guis.views.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
-	private final Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
-	private final Xowd_page_itm tmp_page = new Xowd_page_itm();
-	private final Object thread_lock = new Object();
+	private final    Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final    Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
+	private final    Xowd_page_itm tmp_page = new Xowd_page_itm();
+	private final    Object thread_lock = new Object();
 	private Xowe_wiki wiki; private Xotdb_fsys_mgr fsys_mgr;
 	public Xodb_load_mgr_txt(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -211,7 +211,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		// find itm by key
 		tmp_xdat_file.Find(xdat_itm, key, parse_bgn, parse_dlm, exact);
 		return !xdat_itm.Missing();
-	}	private final Int_obj_ref tmp_len = Int_obj_ref.zero_();
+	}	private final    Int_obj_ref tmp_len = Int_obj_ref.zero_();
 	public boolean Load_xdat_file(Cancelable cancelable, Xob_xdat_file xdat_file, byte regy_tid, int fil_idx) {return Load_xdat_file(cancelable, xdat_file, regy_tid, null, fil_idx);}
 	boolean Load_xdat_file(Cancelable cancelable, Xob_xdat_file xdat_file, byte regy_tid, Xow_ns ns, int fil_idx) {
 		Io_url fil = ns == null ? fsys_mgr.Url_site_fil(regy_tid, fil_idx) : fsys_mgr.Url_ns_fil(regy_tid, ns.Id(), fil_idx);
@@ -565,5 +565,5 @@ class Xob_random_itm_comparer implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		return Int_.Compare(((Xob_random_itm)lhsObj).End(), ((Xob_random_itm)rhsObj).End());
 	}
-	public static final Xob_random_itm_comparer Instance = new Xob_random_itm_comparer(); Xob_random_itm_comparer() {}
+	public static final    Xob_random_itm_comparer Instance = new Xob_random_itm_comparer(); Xob_random_itm_comparer() {}
 }

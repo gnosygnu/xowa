@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.css.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.css.*;
 public class Xob_css_cmd implements Xob_cmd {
-	private final Xob_bldr bldr; private final Xowe_wiki wiki; private final Gfo_usr_dlg usr_dlg;
+	private final    Xob_bldr bldr; private final    Xowe_wiki wiki; private final    Gfo_usr_dlg usr_dlg;
 	private Io_url css_dir; private String css_key;
 	public Xob_css_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg();}
 	public String Cmd_key() {return Xob_cmd_keys.Key_text_css;}
+	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_init(Xob_bldr bldr) {
 		if (css_dir == null) css_dir = wiki.App().Fsys_mgr().Wiki_css_dir(wiki.Domain_str());	// EX: /xowa/user/anonymous/wiki/en.wikipedia.org
 		if (css_key == null) css_key = Xowd_css_core_mgr.Key_default;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.xowa.addons.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
+import gplx.gfui.*; import gplx.xowa.addons.apps.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*;
 import gplx.xowa.guis.views.boots.*;	
@@ -34,7 +34,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public Xoae_app App() {return app;} private Xoae_app app;
-	public Xog_win_itm Browser_win() {return browser_win;} private final Xog_win_itm browser_win;
+	public Xog_win_itm Browser_win() {return browser_win;} private final    Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
 	public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();

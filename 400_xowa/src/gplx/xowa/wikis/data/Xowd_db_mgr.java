@@ -20,9 +20,9 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.infos.*;	
 public class Xowd_db_mgr {
-	private Xowd_db_file[] dbs__ary = new Xowd_db_file[0]; private int dbs__ary_len = 0; private final Xowd_db_file_hash db_file_hash = new Xowd_db_file_hash();
-	private final Hash_adp id_hash = Hash_adp_.new_(); private final gplx.core.primitives.Int_obj_ref id_hash_ref = gplx.core.primitives.Int_obj_ref.neg1_();
-	private final Xow_wiki wiki; private final Io_url wiki_root_dir; private final Xow_domain_itm domain_itm;
+	private Xowd_db_file[] dbs__ary = new Xowd_db_file[0]; private int dbs__ary_len = 0; private final    Xowd_db_file_hash db_file_hash = new Xowd_db_file_hash();
+	private final    Hash_adp id_hash = Hash_adp_.new_(); private final    gplx.core.primitives.Int_obj_ref id_hash_ref = gplx.core.primitives.Int_obj_ref.neg1_();
+	private final    Xow_wiki wiki; private final    Io_url wiki_root_dir; private final    Xow_domain_itm domain_itm;
 	public Xowd_db_mgr(Xow_wiki wiki, Io_url wiki_root_dir, Xow_domain_itm domain_itm) {this.wiki = wiki; this.wiki_root_dir = wiki_root_dir; this.domain_itm = domain_itm;}
 	public Xowd_core_db_props		Props()			{return props;} private Xowd_core_db_props props = Xowd_core_db_props.Test;
 	public Db_cfg_tbl				Tbl__cfg()		{return db__core.Tbl__cfg();}
@@ -43,8 +43,11 @@ public class Xowd_db_mgr {
 		for (int i = 0; i < tids_len; ++i) {
 			byte tid = tids_ary[i];
 			Ordered_hash tid_dbs = db_file_hash.Get_by_tid_or_null(tid); if (tid_dbs == null) continue;
-			if (tid_dbs.Len() != 1) throw Err_.new_("xowa.dbs", "expecting only 1 db for tid; tid=~{0} len=~{1} db_api=~{2}", tid, tid_dbs.Len(), db__core.Conn().Conn_info().Db_api());
-			return (Xowd_db_file)tid_dbs.Get_at(0);
+			int tid_dbs_len = tid_dbs.Len();
+			if (tid_dbs_len != 1) {	// NOTE: occurs when multiple search imports fail; DATE:2016-04-04
+				Xoa_app_.Usr_dlg().Warn_many("", "", "expecting only 1 db for tid; tid=~{0} len=~{1} db_api=~{2}", tid, tid_dbs.Len(), db__core.Conn().Conn_info().Db_api());
+			}
+			return (Xowd_db_file)tid_dbs.Get_at(tid_dbs_len - 1);	// get last idx;
 		}
 		return null;
 	}

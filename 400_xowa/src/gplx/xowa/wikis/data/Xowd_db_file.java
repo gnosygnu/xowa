@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.searchs.dbs.*;
+import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.apps.searchs.dbs.*;
 public class Xowd_db_file {
 	Xowd_db_file(Db_cfg_tbl cfg_tbl, Xob_info_session info_session, Xob_info_file info_file, Xowd_core_db_props props, Xowd_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
 		this.id = id; this.tid = tid; this.url = url; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid; this.db_props = props; this.schema_props = schema_props;
@@ -41,38 +41,38 @@ public class Xowd_db_file {
 		this.info_session = info_session;
 		this.info_file = info_file;
 	}
-	public int							Id()				{return id;}				private final int id;		// unique id in xowa_db
-	public byte							Tid()				{return tid;}				private final byte tid;
-	public Db_conn						Conn()				{return conn;}				private final Db_conn conn;
-	public Io_url						Url()				{return url;}				private final Io_url url;
-	public String						Url_rel()			{return url_rel;}			private final String url_rel;
-	public Xowd_core_db_props			Db_props()			{return db_props;}			private final Xowd_core_db_props db_props;
-	public Xowd_db_file_schema_props	Schema_props()		{return schema_props;}		private final Xowd_db_file_schema_props schema_props;
-	public String						Ns_ids()			{return ns_ids;}			private final String ns_ids;
-	public int							Part_id()			{return part_id;}			private final int part_id;
-	public Guid_adp						Guid()				{return guid;}				private final Guid_adp guid;
+	public int							Id()				{return id;}				private final    int id;		// unique id in xowa_db
+	public byte							Tid()				{return tid;}				private final    byte tid;
+	public Db_conn						Conn()				{return conn;}				private final    Db_conn conn;
+	public Io_url						Url()				{return url;}				private final    Io_url url;
+	public String						Url_rel()			{return url_rel;}			private final    String url_rel;
+	public Xowd_core_db_props			Db_props()			{return db_props;}			private final    Xowd_core_db_props db_props;
+	public Xowd_db_file_schema_props	Schema_props()		{return schema_props;}		private final    Xowd_db_file_schema_props schema_props;
+	public String						Ns_ids()			{return ns_ids;}			private final    String ns_ids;
+	public int							Part_id()			{return part_id;}			private final    int part_id;
+	public Guid_adp						Guid()				{return guid;}				private final    Guid_adp guid;
 	public byte							Cmd_mode()			{return cmd_mode;}			public Xowd_db_file Cmd_mode_(byte v) {cmd_mode = v; return this;}		private byte cmd_mode;
 	public long							File_len()			{return file_len;}			public Xowd_db_file File_len_add(int v) {file_len += v; return this;}	private long file_len;
 	public long							File_max()			{return file_max;}			public Xowd_db_file File_max_(long v) {file_max = v; return this;}		private long file_max;
-	public Xob_info_session				Info_session()		{return info_session;}		private final Xob_info_session info_session;
-	public Xob_info_file				Info_file()			{return info_file;}			private final Xob_info_file info_file;
-	public Db_cfg_tbl					Tbl__cfg()			{return tbl__cfg;}			private final Db_cfg_tbl	tbl__cfg;
-	public Xowd_xowa_db_tbl				Tbl__db()			{return tbl__db;}			private final Xowd_xowa_db_tbl tbl__db;
-	public Xowd_site_ns_tbl				Tbl__ns()			{return tbl__ns;}			private final Xowd_site_ns_tbl tbl__ns;
+	public Xob_info_session				Info_session()		{return info_session;}		private final    Xob_info_session info_session;
+	public Xob_info_file				Info_file()			{return info_file;}			private final    Xob_info_file info_file;
+	public Db_cfg_tbl					Tbl__cfg()			{return tbl__cfg;}			private final    Db_cfg_tbl	tbl__cfg;
+	public Xowd_xowa_db_tbl				Tbl__db()			{return tbl__db;}			private final    Xowd_xowa_db_tbl tbl__db;
+	public Xowd_site_ns_tbl				Tbl__ns()			{return tbl__ns;}			private final    Xowd_site_ns_tbl tbl__ns;
 	public Xowd_page_tbl				Tbl__page()			{return tbl__page;}			private Xowd_page_tbl tbl__page;
-	public Xowd_text_tbl				Tbl__text()			{return tbl__text;}			private final Xowd_text_tbl tbl__text;
-	public Xoh_page_tbl					Tbl__html()			{return tbl__html;}			private final Xoh_page_tbl tbl__html;
-	public Xowd_css_core_tbl			Tbl__css_core()		{return tbl__css_core;}		private final Xowd_css_core_tbl tbl__css_core;
-	public Xowd_css_file_tbl			Tbl__css_file()		{return tbl__css_file;}		private final Xowd_css_file_tbl tbl__css_file;
-	public Xowd_cat_core_tbl			Tbl__cat_core()		{return tbl__cat_core;}		private final Xowd_cat_core_tbl tbl__cat_core;
-	public Xowd_cat_link_tbl			Tbl__cat_link()		{return tbl__cat_link;}		private final Xowd_cat_link_tbl tbl__cat_link;
-	public Xow_site_stats_tbl			Tbl__site_stats()	{return tbl__site_stats;}	private final Xow_site_stats_tbl tbl__site_stats;
-	public Xowd_wbase_qid_tbl			Tbl__wbase_qid()	{return tbl__wbase_qid;}	private final Xowd_wbase_qid_tbl tbl__wbase_qid;
-	public Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final Xowd_wbase_pid_tbl tbl__wbase_pid;
+	public Xowd_text_tbl				Tbl__text()			{return tbl__text;}			private final    Xowd_text_tbl tbl__text;
+	public Xoh_page_tbl					Tbl__html()			{return tbl__html;}			private final    Xoh_page_tbl tbl__html;
+	public Xowd_css_core_tbl			Tbl__css_core()		{return tbl__css_core;}		private final    Xowd_css_core_tbl tbl__css_core;
+	public Xowd_css_file_tbl			Tbl__css_file()		{return tbl__css_file;}		private final    Xowd_css_file_tbl tbl__css_file;
+	public Xowd_cat_core_tbl			Tbl__cat_core()		{return tbl__cat_core;}		private final    Xowd_cat_core_tbl tbl__cat_core;
+	public Xowd_cat_link_tbl			Tbl__cat_link()		{return tbl__cat_link;}		private final    Xowd_cat_link_tbl tbl__cat_link;
+	public Xow_site_stats_tbl			Tbl__site_stats()	{return tbl__site_stats;}	private final    Xow_site_stats_tbl tbl__site_stats;
+	public Xowd_wbase_qid_tbl			Tbl__wbase_qid()	{return tbl__wbase_qid;}	private final    Xowd_wbase_qid_tbl tbl__wbase_qid;
+	public Xowd_wbase_pid_tbl			Tbl__wbase_pid()	{return tbl__wbase_pid;}	private final    Xowd_wbase_pid_tbl tbl__wbase_pid;
 	public void							Rls()				{conn.Rls_conn();}
 	public Xowd_page_tbl Tbl__page__rebind() {this.tbl__page = new Xowd_page_tbl(tbl__page.conn, tbl__page.schema_is_1); return tbl__page;}
 
-	public static final Xowd_db_file Null = null;
+	public static final    Xowd_db_file Null = null;
 	public static Xowd_db_file make_(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
 		Guid_adp guid = Guid_adp_.new_();
 		Xob_info_file info_file = new Xob_info_file(id, Xowd_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());

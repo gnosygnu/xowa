@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.wtrs.*; import gplx.dbs.sqls.itms.*;
 public class Sql_core_wtr implements Sql_qry_wtr {
-	private final Bry_bfr bfr = Bry_bfr.new_(64);
+	private final    Bry_bfr bfr = Bry_bfr.new_(64);
 	public byte[] Seq__nl = Byte_ascii.Space_bry;
 	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
 	public Sql_core_wtr() {
@@ -28,11 +28,11 @@ public class Sql_core_wtr implements Sql_qry_wtr {
 		this.select_wtr = Make__select_wtr(this);
 		this.schema_wtr = Make__schema_wtr();
 	}
-	public Sql_schema_wtr	Schema_wtr()	{return schema_wtr;} private final Sql_schema_wtr schema_wtr;
-	public Sql_val_wtr		Val_wtr()		{return val_wtr;} private final Sql_val_wtr val_wtr;
-	public Sql_from_wtr		From_wtr()		{return from_wtr;} private final Sql_from_wtr from_wtr;
-	public Sql_where_wtr	Where_wtr()		{return where_wtr;} private final Sql_where_wtr where_wtr;
-	public Sql_select_wtr	Select_wtr()	{return select_wtr;} private final Sql_select_wtr select_wtr;
+	public Sql_schema_wtr	Schema_wtr()	{return schema_wtr;} private final    Sql_schema_wtr schema_wtr;
+	public Sql_val_wtr		Val_wtr()		{return val_wtr;} private final    Sql_val_wtr val_wtr;
+	public Sql_from_wtr		From_wtr()		{return from_wtr;} private final    Sql_from_wtr from_wtr;
+	public Sql_where_wtr	Where_wtr()		{return where_wtr;} private final    Sql_where_wtr where_wtr;
+	public Sql_select_wtr	Select_wtr()	{return select_wtr;} private final    Sql_select_wtr select_wtr;
 	public String To_sql_str(Db_qry qry, boolean mode_is_prep) {
 		synchronized (bfr) {
 			Sql_wtr_ctx ctx = new Sql_wtr_ctx(mode_is_prep);
@@ -42,6 +42,7 @@ public class Sql_core_wtr implements Sql_qry_wtr {
 				case Db_qry_.Tid_update:		return Bld_qry_update(ctx, (Db_qry_update)qry);
 				case Db_qry_.Tid_select_in_tbl:
 				case Db_qry_.Tid_select:		select_wtr.Bld_qry_select(bfr, ctx, (Db_qry__select_cmd)qry); return bfr.To_str_and_clear();
+				case Db_qry_.Tid_pragma:		return ((gplx.dbs.engines.sqlite.Sqlite_pragma)qry).To_sql__exec(this);
 				case Db_qry_.Tid_sql:			return ((Db_qry_sql)qry).To_sql__exec(this);
 				default:						throw Err_.new_unhandled(qry.Tid());
 			}

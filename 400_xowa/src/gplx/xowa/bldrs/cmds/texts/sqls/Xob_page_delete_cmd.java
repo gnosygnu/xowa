@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_page_delete_cmd extends Xob_cmd_base {
-	private final Xow_wiki wiki;
+	private final    Xow_wiki wiki;
 	public Xob_page_delete_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.wiki = wiki;}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_text_delete_page;}
 	@Override public void Cmd_run() {
@@ -74,7 +75,7 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 			}
 		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: err=~{0}", Err_.Message_gplx_log(e));}
 		core_db_conn.Exec_sql_plog_ntx("deleting from table: page", "DELETE FROM page WHERE page_id IN (SELECT page_id FROM page_filter);");
-		// core_db_conn.Ddl_delete_tbl("page_filter");
+		// core_db_conn.Meta_tbl_delete("page_filter");
 		core_db_conn.Env_vacuum();
 		usr_dlg.Plog_many("", "", "");
 	}

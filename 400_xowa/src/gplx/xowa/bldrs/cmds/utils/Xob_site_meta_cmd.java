@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.net.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.sites.*;
+import gplx.dbs.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.sites.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.site_cfgs.*;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final    Xob_bldr bldr;
 	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
 	public Xob_site_meta_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}
+	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_site_meta;}
 	public void Cmd_run() {
 		Xoa_app app = bldr.App();

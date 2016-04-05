@@ -67,6 +67,7 @@ public class Xoa_boot_mgr {
 			, arg_mgr.Fsys__user_dir()
 			, root_dir.GenSubDir_nest("user", "anonymous", "wiki")
 			, Xoa_app_.Op_sys_str);
+			app.Addon_mgr().Add_dflts_by_app(app).Run_by_app(app);
 			usr_dlg.Log_wkr().Queue_enabled_(false); log_wtr.Log_to_session_fmt("app.init");
 			try {
 				app.Sys_cfg().Lang_(System_lang());
