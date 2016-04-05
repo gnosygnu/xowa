@@ -18,6 +18,65 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.4.1.1_.282016-04-04_20:00_Sun.29">Release: v3.4.1.1 (2016-04-04 20:00 Sun)</span>
+    </h2>
+    <p>
+      The desktop app is a minor release. It has a few fixes related to old .sqlite3 wikis and offline imports.
+    </p>
+    <p>
+      The Android app has not been changed.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Fixes_for_old_.sqlite3_wikis">(Desktop) Fixes for old .sqlite3 wikis</span>
+    </h3>
+    <p>
+      As reported in <a href="https://sourceforge.net/p/xowa/discussion/defects/thread/f142ca23/" rel="nofollow" class="external free">https://sourceforge.net/p/xowa/discussion/defects/thread/f142ca23/</a> v3.3.4 did not work for old .sqlite3 wikis. These wikis were phased out last year (in 2015-04), but I didn't want to drop support for them entirely.
+    </p>
+    <p>
+      v3.4.1 has 2 fixes for the following:
+    </p>
+    <ul>
+      <li>
+        <b>Open old .sqlite3 wikis</b>: Previously, XOWA would just show a blank page
+      </li>
+      <li>
+        <b>Allow old .sqlite3 wikis to upgrade to the new search system</b>: Previously, XOWA would keep prompting to upgrade
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Fix_for_offline_import_of_large_wikis">(Desktop) Fix for offline import of large wikis</span>
+    </h3>
+    <p>
+      This was reported in a separate ticket: <a href="https://github.com/gnosygnu/xowa/issues/51" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/51</a> Basically, the new search system caused offline imports to fail for large wikis. A large wiki is defined as one with a dump file of 1.5 GB.
+    </p>
+    <p>
+      v3.4.1 fixes this issue. I tested with English Wikisource 2016-03: <a href="http://dumps.wikimedia.org/enwikisource/20160305/" rel="nofollow" class="external free">http://dumps.wikimedia.org/enwikisource/20160305/</a>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Command_to_shrink_English_Wikipedia_images_by_8_GB">(Desktop) Command to shrink English Wikipedia images by 8 GB</span>
+    </h3>
+    <p>
+      The total size of English Wikipedia is about 90 GB. 8 GB is from old images: images removed from articles during the day-to-day editing churn.
+    </p>
+    <p>
+      If you have English Wikipedia and have been following along with the updates, go to [[Dashboard/Files/Deletion]] and follow the instructions therein.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Package.29_Release_of_French_Wikipedia_2016-03">(Package) Release of French Wikipedia 2016-03</span>
+    </h3>
+    <p>
+      I had a request to update French Wikipedia, but have been delaying it for several weeks. I updated French Wiki and uploaded it here: <a href="https://archive.org/details/Xowa_frwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_frwiki_latest</a>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.4.2">Next release: v3.4.2</span>
+    </h3>
+    <p>
+      I'm planning to work on Android-only matters and release a "beta" app on Google play. For wikis, I'll update German Wikipedia.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_NONE_.282016-04-03_22:00_Sun.29">Release: NONE (2016-04-03 22:00 Sun)</span>
     </h2>
     <p>
