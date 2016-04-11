@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.brys.*;
 public class Bry_split_ {
-	private static final Object thread_lock = new Object();
+	private static final    Object thread_lock = new Object();
 	public static byte[][] Split(byte[] src, byte dlm) {return Split(src, dlm, false);}
 	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
 		synchronized (thread_lock) {
@@ -70,19 +70,22 @@ public class Bry_split_ {
 		}
 		return count;
 	}
-	public static byte[][] Split(byte[] src, byte[] dlm) {
-		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
-		int cur_pos = 0, src_len = src.length, dlm_len = dlm.length;
+	public static byte[][] Split(byte[] src, byte[] dlm) {return Split(src, 0, src.length, dlm);}
+	public static byte[][] Split(byte[] src, int src_bgn, int src_end, byte[] dlm) {
+		if (src == null) return Bry_.Ary_empty;
+		int src_len = src.length;
+		if (src_len == 0) return Bry_.Ary_empty;
+		int cur_pos = src_bgn, dlm_len = dlm.length;
 		List_adp rv = List_adp_.new_();
 		while (true) {
 			int find_pos = Bry_find_.Find_fwd(src, dlm, cur_pos);
 			if (find_pos == Bry_find_.Not_found) {
-				if (cur_pos == src_len) break;	// dlm is last sequence in src; do not create empty itm
-				find_pos = src_len;			
+				if (cur_pos >= src_end) break;	// dlm is last sequence in src; do not create empty itm
+				find_pos = src_end;			
 			}
 			rv.Add(Bry_.Mid(src, cur_pos, find_pos));
-			if (find_pos == src_len) break;
 			cur_pos = find_pos + dlm_len;
+			if (cur_pos >= src_end) break;
 		}
 		return (byte[][])rv.To_ary(byte[].class);
 	}
@@ -115,7 +118,7 @@ public class Bry_split_ {
 	public static final int Rv__ok = 0, Rv__extend = 1, Rv__cancel = 2;
 }
 class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
-	private final List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.new_();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
 		synchronized (list) {
 			byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
@@ -128,5 +131,5 @@ class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
 			return (byte[][])list.To_ary_and_clear(byte[].class);
 		}
 	}
-        public static final Bry_split_wkr__to_ary Instance = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}
+        public static final    Bry_split_wkr__to_ary Instance = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}
 }

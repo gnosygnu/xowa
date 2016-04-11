@@ -50,7 +50,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		props.SiteName_(domain_tid).ServerName_(domain_bry);
 		props.ContentLanguage_(lang.Key_bry());
 		stats = new Xow_site_stats_mgr(this);
-		Pf_func_.Reg(lang.Func_regy(), lang);
+		Pf_func_.Reg(domain_itm, lang.Func_regy(), lang);
 		special_mgr = new Xows_mgr(this, lang);
 		sys_cfg = new Xow_sys_cfg(this);
 		hive_mgr = new Xob_hive_mgr(this);

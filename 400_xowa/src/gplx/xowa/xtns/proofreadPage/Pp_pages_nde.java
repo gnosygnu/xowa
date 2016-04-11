@@ -23,7 +23,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.parsers.lnkis.files.*;
-public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
+public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;
 	private byte[] index_ttl_bry, bgn_page_bry, end_page_bry, bgn_sect_bry, end_sect_bry;		
@@ -123,7 +123,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 		if (header != null)
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
 		return rv;
-	}	private static final byte[] Toc_bry = Bry_.new_a7("toc");
+	}	private static final    byte[] Toc_bry = Bry_.new_a7("toc");
 	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] caption = Get_caption(full_bfr, index_page_src, lnki);
 		full_bfr.Add(Xop_tkn_.Lnki_bgn);
@@ -149,7 +149,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 		}
 		return rv;
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
 	, Bry_value			= Bry_.new_a7("|value=")
 	, Bry_toc_cur		= Bry_.new_a7("|current=")
@@ -402,8 +402,8 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	, Xatr_toc_prv		= 11
 	, Xatr_toc_nxt		= 12
 	;
-	public static final Xoa_ttl[] Ttls_null = null;
-	private static final Number_parser num_parser = new Number_parser().Ignore_space_at_end_y_();	// ignore space at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
+	public static final    Xoa_ttl[] Ttls_null = null;
+	private static final    Number_parser num_parser = new Number_parser().Ignore_space_at_end_y_();	// ignore space at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
 	private String Fail_msg_suffix() {
 		String excerpt = Bry_fmtr.Escape_tilde(String_.new_u8(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
 		return String_.Format(" ttl={0} src={1}", String_.new_u8(cur_page_ttl.Full_db()), excerpt);

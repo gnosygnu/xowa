@@ -34,6 +34,7 @@ public interface Db_engine {
 	void				Meta_tbl_delete(String tbl);
 	void				Meta_fld_append(String tbl, Dbmeta_fld_itm fld);
 	void				Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
+	void				Meta_idx_delete(String idx);
 	Dbmeta_tbl_mgr		Meta_mgr();
 	boolean				Meta_tbl_exists(String tbl);
 	boolean				Meta_fld_exists(String tbl, String fld);

@@ -27,6 +27,8 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wiki
 import gplx.xowa.langs.*; 
 import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.users.*;
+import gplx.xowa.bldrs.*;
+import gplx.xowa.addons.*; import gplx.xowa.addons.apps.specials.*;
 public interface Xoa_app extends GfoInvkAble {
 	boolean					Tid_is_edit();
 	Xoa_app_mode			Mode();
@@ -55,4 +57,7 @@ public interface Xoa_app extends GfoInvkAble {
 	Gfo_inet_conn			Utl__inet_conn();
 	Xoa_meta_mgr			Dbmeta_mgr();
 	Xoa_site_cfg_mgr		Site_cfg_mgr();
+	Xoax_addon_mgr			Addon_mgr();
+	Xob_bldr				Bldr();
+	Xoa_special_regy		Special_regy();
 }	

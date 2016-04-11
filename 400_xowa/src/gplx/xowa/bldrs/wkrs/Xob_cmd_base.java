@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public abstract class Xob_cmd_base implements Xob_cmd {
 	public abstract String Cmd_key();
-	@gplx.Virtual public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	@gplx.Virtual public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	@gplx.Virtual public void Cmd_init(Xob_bldr bldr) {}
 	@gplx.Virtual public void Cmd_bgn(Xob_bldr bldr) {}
 	@gplx.Virtual public void Cmd_run() {}

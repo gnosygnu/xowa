@@ -109,5 +109,5 @@ public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {
 	public static final String BLDR_CMD_KEY = "search.page__page_score";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__page__page_score(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__page__page_score(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__page__page_score(bldr, wiki);}
 }

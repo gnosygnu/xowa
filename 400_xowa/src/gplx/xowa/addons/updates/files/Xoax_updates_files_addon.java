@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.updates.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.updates.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.addons.builds.utils_rankings.bldrs.*;
-public class Xoax_updates_files_addon implements Xoax_addon_itm, Xoax_addon_bldr {
+public class Xoax_updates_files_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr {
 	public Xob_cmd[] Cmds_ary() {
 		return new Xob_cmd[] 
 		{ Xobldr__deletion_db__make.Prototype

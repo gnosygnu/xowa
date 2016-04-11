@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.searchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.addons.apps.searchs.bldrs.cmds.*;
-public class Xoax_builds_search_addon implements Xoax_addon_itm, Xoax_addon_bldr {
+public class Xoax_builds_search_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr {
 	public Xob_cmd[] Cmds_ary() {
 		return new Xob_cmd[]
 		{ Xobldr__link__link_score.Prototype

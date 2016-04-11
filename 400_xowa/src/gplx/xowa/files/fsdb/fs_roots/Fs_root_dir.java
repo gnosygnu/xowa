@@ -85,7 +85,7 @@ class Fs_root_dir {
 			conn = Db_conn_bldr.Instance.New(db_url);
 			created = true;
 		}
-		cfg_tbl = new Db_cfg_tbl(conn, schema_is_1 ? "fsdb_cfg" : "xowa_cfg");
+		cfg_tbl = new Db_cfg_tbl(conn, schema_is_1 ? "fsdb_cfg" : gplx.xowa.wikis.data.Xowd_cfg_tbl_.Tbl_name);
 		fil_tbl.Conn_(conn, created, schema_is_1);
 		if (created) {
 			cfg_tbl.Create_tbl();

@@ -21,15 +21,17 @@ public class Xoh_head_wtr {
 	private int indent; private int reset_bgn, reset_end;
 	private boolean js_tail_inited = false;
 	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr;
-	public void Init(Bry_bfr bfr)	{this.bfr = bfr;}
+	public Xoh_head_wtr Init(Bry_bfr bfr)	{this.bfr = bfr; return this;}
 	public void Term() {
 		this.bfr = null;
 		js_tail_inited = true;
 	}
+	public void Write_css_include(Io_url url) {Write_css_include(url.To_http_file_bry());}
 	public void Write_css_include(byte[] url) {
 		Write_nl_and_indent();
 		bfr.Add(Css_include_bgn).Add(url).Add(Css_include_end);
 	}
+	public void Write_js_include(Io_url url) {Write_js_include(url.To_http_file_bry());}
 	public void Write_js_include(byte[] url) {
 		Write_nl_and_indent();
 		bfr.Add(Js_include_bgn).Add(url).Add(Js_include_end);
@@ -110,7 +112,8 @@ public class Xoh_head_wtr {
 		bfr.Add(url);
 		bfr.Add(Js_line_2_end);
 	}
-	private static final byte[]
+	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
+	private static final    byte[]
 	  Js_line_1						= Bry_.new_a7("xowa.js.jquery.init();")
 	, Js_line_2_bgn					= Bry_.new_a7("xowa.js.load_lib('")
 	, Js_line_2_end					= Bry_.new_a7("');")
@@ -151,7 +154,7 @@ public class Xoh_head_wtr {
 	public void Write_js_ary_itm(byte[] val) {
 		if (++js_ary_idx != 1) bfr.Add(js_ary_dlm);
 		Write_js_quote(Byte_ascii.Apos, val);
-	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_a7(", ");
+	}	private int js_ary_idx = 0; private static final    byte[] js_ary_dlm = Bry_.new_a7(", ");
 	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_end);}
 	public void Write_js_init_global(byte[] key) {	// EX: xowa.client = {};
 		Write_nl_and_indent();
@@ -214,7 +217,7 @@ public class Xoh_head_wtr {
 	private void Indent() {bfr.Add_byte_repeat(Byte_ascii.Space, indent);}
 	public Xoh_head_wtr Indent_add() {indent += 2; return this;}
 	public Xoh_head_wtr Indent_del() {indent -= 2; return this;}
-	private static final byte[]
+	private static final    byte[]
 	  Css_include_bgn			= Bry_.new_a7("<link rel=\"stylesheet\" href=\"")
 	, Css_include_end			= Bry_.new_a7("\" type='text/css'>")
 	, Js_include_bgn			= Bry_.new_a7("<script src=\"")

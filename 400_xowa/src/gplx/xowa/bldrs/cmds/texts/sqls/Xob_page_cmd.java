@@ -86,7 +86,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		Xowd_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_count_all, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);															// save ns
-		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 		if (idx_mode.Tid_is_end()) page_core_tbl.Create_index();
 		if (redirect_id_enabled) {
 			redirect_tbl.Conn().Txn_end();

@@ -111,10 +111,11 @@ public class Db_attach_mgr {
 		Exec_sql(sql, args);
 		return this;
 	}
-	public void Exec_sql(String sql, Object... args) {
+	public Db_attach_mgr Exec_sql(String sql, Object... args) {
 		String attach_sql = String_.Format(Resolve_sql(sql), args);
 		this.Attach();
 		try {main_conn.Exec_sql(attach_sql);}
 		finally {this.Detach();}
+		return this;
 	}
 }

@@ -23,7 +23,7 @@ public class Xob_diff_build_cmd implements Xob_cmd {
 	private int[] db_ids = Int_.Ary_empty; private String bld_name = "all";
 	public Xob_diff_build_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki;}
 	public String Cmd_key()		{return Xob_cmd_keys.Key_diff_build;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_run() {
 		new Xob_diff_build_wkr(bldr, wiki, prev_url, curr_url, diff_url, commit_interval, new Xowd_tbl_mapr(bld_name, db_ids)).Exec();
 	}

@@ -32,15 +32,18 @@ public class Xoh_page implements Xoa_page {
 	public byte[]					Display_ttl()		{return display_ttl;} private byte[] display_ttl;
 	public byte[]					Content_sub()		{return content_sub;} private byte[] content_sub;
 	public byte[]					Sidebar_div()		{return sidebar_div;} private byte[] sidebar_div;
-	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final Xoh_section_mgr section_mgr = new Xoh_section_mgr();
+	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final    Xoh_section_mgr section_mgr = new Xoh_section_mgr();
 	public Xoh_img_mgr				Img_mgr()			{return img_mgr;} private Xoh_img_mgr img_mgr = new Xoh_img_mgr();
-	public Ordered_hash				Redlink_uids()		{return redlink_uids;} private final Ordered_hash redlink_uids = Ordered_hash_.New();
+	public Ordered_hash				Redlink_uids()		{return redlink_uids;} private final    Ordered_hash redlink_uids = Ordered_hash_.New();
 	public Xohd_img_itm__base[]		Img_itms()			{return img_itms;} public void Img_itms_(Xohd_img_itm__base[] v) {this.img_itms = v;} private Xohd_img_itm__base[] img_itms = Xohd_img_itm__base.Ary_empty;
 	public Ordered_hash				Gallery_itms()		{return gallery_itms;} private Ordered_hash gallery_itms = Ordered_hash_.New();
 	public Xopg_module_mgr			Head_mgr()			{return head_mgr;} private Xopg_module_mgr head_mgr = new Xopg_module_mgr();
 	public void						Xtn_gallery_packed_exists_y_() {}
+	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
+	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
+
 	// util
-	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
+	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
 	public byte[]					Url_bry_safe()		{return page_url == null ? Bry_.Empty : page_url.To_bry(Bool_.Y, Bool_.Y);}

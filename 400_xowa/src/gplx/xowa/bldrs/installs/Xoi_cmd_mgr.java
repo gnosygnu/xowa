@@ -119,8 +119,8 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 	}
 	public static final    String[] Wiki_cmds_valid = new String[] {Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY, Xoi_cmd_wiki_zip.KEY, Xoi_cmd_category2_build.KEY, Xoi_cmd_category2_page_props.KEY_category2, Xoi_cmd_category2_categorylinks.KEY_category2};
 	public static final    String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
-	public Gfo_thread_cmd Cmd_add(GfoMsg m) {Gfo_thread_cmd rv = Cmd_new(m); cmds.Add(rv); return rv;}
-	Gfo_thread_cmd Cmd_new(GfoMsg m) {
+	public Gfo_thread_cmd Cmd_add(GfoMsg m) {Gfo_thread_cmd rv = Cmd_clone(m); cmds.Add(rv); return rv;}
+	Gfo_thread_cmd Cmd_clone(GfoMsg m) {
 		String cmd_key = m.ReadStr("v");
 		if		(String_.Eq(cmd_key, Gfo_thread_cmd_download.KEY))						return new Gfo_thread_cmd_download().Init("downloading", m.ReadStr("src"), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Ctor(app.Usr_dlg(), app.Gui_mgr().Kit());
 		else if	(String_.Eq(cmd_key, Gfo_thread_cmd_unzip.KEY))							return new Gfo_thread_cmd_unzip().Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("src")), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg")));

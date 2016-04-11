@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Io_size_ {
-	public static String To_str(long val) {
+	public static String To_str(long val) {return To_str(val, "#,##0.000");}
+	public static String To_str(long val, String val_fmt) {
 		long cur = val; int pow = 0;
 		while (cur >= 1024) {
 			cur /= 1024;
@@ -27,7 +28,7 @@ public class Io_size_ {
 		long div = (long)Math_.Pow((long)1024, (long)pow);
 		Decimal_adp valDecimal = Decimal_adp_.divide_(val, div);
 		String[] unit = Io_size_.Units[pow];
-		return valDecimal.To_str("#,##0.000") + " " + String_.PadBgn(unit[0], 2, " ");
+		return valDecimal.To_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, " ");
 	}
 	public static String To_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1) {
 		long exp_val = (long)Math_.Pow(1024, exp_1024);
@@ -68,7 +69,7 @@ public class Io_size_ {
 		}
 		return unitPow;
 	}
-	private static final String[][] Units = new String[][]
+	private static final    String[][] Units = new String[][]
 	{	String_.Ary("B", "BYTE")
 	,	String_.Ary("KB", "KILOBYTE")
 	,	String_.Ary("MB", "MEGABYTE")
@@ -77,7 +78,7 @@ public class Io_size_ {
 	,	String_.Ary("PB", "PETABYTE")
 	,	String_.Ary("EB", "EXABYTE")
 	};
-	public static final byte[][] Units_bry = new byte[][] 
+	public static final    byte[][] Units_bry = new byte[][] 
 	{	Bry_.new_a7("B")
 	,	Bry_.new_a7("KB")
 	,	Bry_.new_a7("MB")

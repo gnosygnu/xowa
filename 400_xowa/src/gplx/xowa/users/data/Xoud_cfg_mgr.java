@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
-public class Xoud_cfg_mgr {		
+public class Xoud_cfg_mgr {
 	public Db_cfg_tbl Tbl() {return tbl;} private Db_cfg_tbl tbl;
+	public static final String Tbl_name = "user_opt";
 	public void Conn_(Db_conn new_conn, boolean created) {
-		tbl = new Db_cfg_tbl(new_conn, "user_opt");
+		tbl = new Db_cfg_tbl(new_conn, Tbl_name);
 		if (created) tbl.Create_tbl();
 	}
 	public int		Select_int_or(String grp, String key, int or)		{

@@ -36,7 +36,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
 	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_.Ary(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
 		invoke_wkr.Init_reset();
 		property_wkr.Init_reset();
@@ -160,7 +160,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	public static final String BLDR_CMD_KEY = "file.lnki_temp";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__lnki_temp__create(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__lnki_temp__create(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__lnki_temp__create(bldr, wiki);}
 
 	private Xop_log_invoke_wkr Invoke_wkr() {
 		if (invoke_wkr == null) invoke_wkr = ((Scrib_xtn_mgr)bldr.App().Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY)).Invoke_wkr_or_new();

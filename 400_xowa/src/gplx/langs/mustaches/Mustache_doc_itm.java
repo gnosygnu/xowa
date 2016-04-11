@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 import gplx.langs.jsons.*;
 public interface Mustache_doc_itm {
-	byte[]				Get_prop(String key);
-	Mustache_doc_itm[]	Get_subs(String key);
+	boolean				Mustache__write(String key, Mustache_bfr bfr);
+	Mustache_doc_itm[]	Mustache__subs(String key);
 }

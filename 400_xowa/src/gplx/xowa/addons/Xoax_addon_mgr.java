@@ -30,7 +30,7 @@ public class Xoax_addon_mgr {
 			hash.Add(itm.Addon__key(), itm);
 		}
 	}
-	public Xoax_addon_mgr Add_dflts_by_app(Xoae_app app) {
+	public Xoax_addon_mgr Add_dflts_by_app(Xoa_app app) {
 		app.Bldr().Cmd_regy().Add_many
 		( gplx.xowa.bldrs.cmds.utils.Xob_alert_cmd.Prototype
 		);
@@ -39,19 +39,23 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.builds.pagelinks			.Xoax_builds_pagelinks_addon()
 		, new gplx.xowa.addons.builds.utils_rankings	.Xoax_builds_utils_rankings_addon()
 		, new gplx.xowa.addons.apps.searchs				.Xoax_builds_search_addon()
+		, new gplx.xowa.addons.apps.file_browsers		.Fbrow_addon()
 		, new gplx.xowa.addons.updates.files			.Xoax_updates_files_addon()
 		);
 		return this;
 	}
-	public void Run_by_app(Xoae_app app) {
+	public void Run_by_app(Xoa_app app) {
 		int len = hash.Len();
-		gplx.xowa.bldrs.Xob_bldr bldr = app.Bldr();
 		for (int i = 0; i < len; ++i) {
 			Xoax_addon_itm addon = (Xoax_addon_itm)hash.Get_at(i);
-			if (!Type_adp_.Implements_intf_obj(addon, Xoax_addon_bldr.class)) continue;
-
-			Xoax_addon_bldr addon_bldr = (Xoax_addon_bldr)addon;
-			bldr.Cmd_regy().Add_many(addon_bldr.Cmds_ary());
+			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__bldr.class)) {
+				Xoax_addon_itm__bldr addon_bldr = (Xoax_addon_itm__bldr)addon;
+				app.Bldr().Cmd_regy().Add_many(addon_bldr.Cmds_ary());
+			}
+			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__sp.class)) {
+				Xoax_addon_itm__sp addon_sp = (Xoax_addon_itm__sp)addon;
+				app.Special_regy().Add_many(addon_sp.Pages_ary());
+			}
 		}
 	}
 }

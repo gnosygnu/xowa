@@ -74,5 +74,5 @@ public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Sql_file_parser
 	public static final String BLDR_CMD_KEY = "wiki.page_link";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
 	public static final    Xob_cmd Prototype = new Pglnk_bldr_cmd(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Pglnk_bldr_cmd(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Pglnk_bldr_cmd(bldr, wiki);}
 }

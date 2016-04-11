@@ -269,7 +269,7 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	public void Read_page__all(Xowd_page_itm page, Db_rdr rdr) {
 		int html_db_id = rdr.Read_int(fld_html_db_id);
-		int redirected_id = rdr.Read_int(fld_html_db_id);
+		int redirected_id = rdr.Read_int(fld_redirect_id);
 		int page_len = rdr.Read_int(fld_len);
 		int page_score = page_len;
 		if (fld_score != Dbmeta_fld_itm.Key_null)
@@ -329,5 +329,5 @@ public class Xowd_page_tbl implements Rls_able {
 		stmt_select_id_by_ttl = Db_stmt_.Rls(stmt_select_id_by_ttl);
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	private static final    String Page_touched_fmt = "yyyyMMddHHmmss";
+	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
 }

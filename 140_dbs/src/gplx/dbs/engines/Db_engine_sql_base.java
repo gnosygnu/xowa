@@ -70,6 +70,9 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 		this.Meta_mgr().Load_all();
 	}
+	@gplx.Virtual public void Meta_idx_delete(String idx) {
+		if (Meta_idx_exists(idx)) Exec_as_int("DROP INDEX " + idx);
+	}
 	public void Meta_fld_append(String tbl, Dbmeta_fld_itm fld) {
 		Gfo_usr_dlg_.Instance.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		try {

@@ -118,7 +118,7 @@ class Xoctg_fmtr_all {
 	private void Html_nav_bry(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp, boolean fill_at_bgn) {
 		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xoae_app app = wiki.Appe();
-		app.Html__href_wtr().Build_to_bfr(href_bfr, app, Xoh_wtr_ctx.Mode_basic, wiki.Domain_bry(), ttl);
+		app.Html__href_wtr().Build_to_bfr(href_bfr, app, Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
 		byte[] arg_idx_lbl = null; byte[] arg_sortkey = null;
 		if (fill_at_bgn) {
 			arg_idx_lbl = url_arg_bgn;
@@ -139,7 +139,7 @@ class Xoctg_fmtr_all {
 		byte[] nav_text = wiki.Msg_mgr().Val_by_id_args(nav_text_id, grp_max);					// fill_at_bgn 200 / previous 200
 		html_nav.Bld_bfr(bfr, nav_href, nav_ttl, nav_text);
 	}
-	public static final byte[]
+	public static final    byte[]
 		Url_arg_from		= Bry_.new_a7("from")
 	,	Url_arg_until 		= Bry_.new_a7("until")
 	,	Url_arg_subc_bgn 	= Bry_.new_a7("subcatfrom")

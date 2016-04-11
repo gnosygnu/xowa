@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner {
+public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public String Name() {return name;} private String name;
 	public byte[] Html() {return html;} private byte[] html;
 	public void Init_for_test(String name, byte[] html) {this.name = name; this.html = html;}	// TEST
@@ -39,6 +39,6 @@ public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		if (this.name == null) bfr.Add_str_a7("Error: Page status indicators' name attribute must not be empty.");	
 	}
 	private static final byte Xatr_name = 0;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Xatr_name));
 }

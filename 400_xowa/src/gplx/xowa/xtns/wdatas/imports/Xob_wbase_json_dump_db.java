@@ -24,9 +24,9 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.
 import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 class Xob_wbase_json_dump_db {
-	private final Gfo_usr_dlg usr_dlg; private final Xoae_app app; private final Xowe_wiki wiki; private final Xob_bldr bldr;
-	private final Json_parser json_parser;
-	private final Xob_wdata_pid_sql pid_cmd = new Xob_wdata_pid_sql(); private final Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
+	private final    Gfo_usr_dlg usr_dlg; private final    Xoae_app app; private final    Xowe_wiki wiki; private final    Xob_bldr bldr;
+	private final    Json_parser json_parser;
+	private final    Xob_wdata_pid_sql pid_cmd = new Xob_wdata_pid_sql(); private final    Xob_wdata_qid_sql qid_cmd = new Xob_wdata_qid_sql();
 	private Xowd_page_tbl page_tbl;
 	private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private DateAdp page_modified_on;
@@ -86,7 +86,7 @@ class Xob_wbase_json_dump_db {
 		Xowd_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_id, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);															// save ns
-		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, "props.modified_latest", page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 	}
-	private static final byte[] id_key = Bry_.new_a7("id");
+	private static final    byte[] id_key = Bry_.new_a7("id");
 }

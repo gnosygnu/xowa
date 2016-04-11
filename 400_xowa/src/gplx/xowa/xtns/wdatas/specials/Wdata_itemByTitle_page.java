@@ -24,8 +24,9 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	private static final    byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__item_by_title;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__item_by_title;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.Appe().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
 		// Special:ItemByTitle/enwiki/Earth -> www.wikidata.org/wiki/Q2
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
@@ -83,4 +84,6 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	,	"<br>To change the default site, see <a href='/site/home/wiki/Options/Wikibase'>Options/Wikibase</a>"	// HOME
 	)
 	, 	"legend", "site_lbl", "site_val", "page_lbl", "page_val", "search_lbl");
+
+	public Xows_page Special__clone() {return this;}
 }

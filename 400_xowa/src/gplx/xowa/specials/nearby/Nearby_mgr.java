@@ -29,8 +29,9 @@ public class Nearby_mgr implements Xows_page {
 //		int pages_count = 0;
 	Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__nearby;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__nearby;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		page.Data_raw_(Bld_html(wiki));
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 //			wiki.Parser_mgr().Parse(page, false);	// do not clear else previous Search_text will be lost		
@@ -169,6 +170,8 @@ public class Nearby_mgr implements Xows_page {
 			}
 		}
 	}
+
+	public Xows_page Special__clone() {return this;}
 }
 class Nearby_rslt {
 	public Nearby_rslt(List_adp trail, Xoa_ttl trg_ttl) {

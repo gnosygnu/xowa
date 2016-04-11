@@ -28,8 +28,8 @@ public class Xobldr__deletion_db__exec extends Xob_cmd__base {
 		Db_conn conn = Db_conn_bldr.Instance.Get_or_noop(deletion_db_url);
 		if (conn == Db_conn_.Noop) throw Err_.new_("bldr", "file does not exist", "file", deletion_db_url.Raw());
 
-		if (!conn.Meta_tbl_exists("xowa_cfg")) throw Err_.new_("bldr", "xowa_cfg tbl does not exist", "file", deletion_db_url.Raw());
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.Get_or_null(conn);
+		if (cfg_tbl == null) throw Err_.new_("bldr", "xowa_cfg tbl does not exist", "file", deletion_db_url.Raw());
 		byte[] domain_bry = cfg_tbl.Select_bry_or("", Xobldr__deletion_db__make.Cfg__deletion_db__domain, null);
 		if (domain_bry == null) throw Err_.new_("bldr", "no domain found in deletion db", "file", deletion_db_url.Raw());
 		this.wiki = bldr.App().Wiki_mgr().Get_by_or_make(domain_bry);
@@ -127,7 +127,7 @@ public class Xobldr__deletion_db__exec extends Xob_cmd__base {
 	public static final String BLDR_CMD_KEY = "fsdb.deletion_db.exec";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__deletion_db__exec(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__exec(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__exec(bldr, wiki);}
 }
 class Xob_img_prune_itm {
 	public Xob_img_prune_itm(int item_id, boolean item_is_orig) {

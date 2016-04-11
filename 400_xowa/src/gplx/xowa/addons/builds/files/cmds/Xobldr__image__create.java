@@ -119,5 +119,5 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 	public static final String BLDR_CMD_KEY = "wiki.image";
 	public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__image__create(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__image__create(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__image__create(bldr, wiki);}
 }

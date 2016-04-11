@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Mustache_tkn_parser_tst {
-	private final Mustache_tkn_parser_fxt fxt = new Mustache_tkn_parser_fxt();
+	private final    Mustache_tkn_parser_fxt fxt = new Mustache_tkn_parser_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse("a{{b}}c", "ac");
 	}
@@ -27,13 +27,13 @@ public class Mustache_tkn_parser_tst {
 	}
 }
 class Mustache_tkn_parser_fxt {
-	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();
-	private final Mustache_render_ctx ctx = new Mustache_render_ctx();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Mustache_tkn_parser parser = new Mustache_tkn_parser();
+	private final    Mustache_render_ctx ctx = new Mustache_render_ctx();
+	private final    Mustache_bfr bfr = Mustache_bfr.New();
 	public void Test_parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_a7(src_str);
 		Mustache_tkn_itm actl_itm = parser.Parse(src_bry, 0, src_bry.length);
-		actl_itm.Render(tmp_bfr, ctx);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		actl_itm.Render(bfr, ctx);
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

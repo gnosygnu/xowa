@@ -43,6 +43,9 @@ public class Db_rdr__basic implements Db_rdr {
 	@gplx.Virtual public void			Rls() {
 		try	{rdr.close();} 
 		catch (Exception e) {throw Err_.new_exc(e, "db", "close failed");}
-		if (stmt != null) stmt.Rls();
+		if (stmt != null) {
+			stmt.Rls();
+			stmt = null;	// NOTE: must null reference else will throw SQLException during statements DATE:2016-04-10
+		}
 	}
 }

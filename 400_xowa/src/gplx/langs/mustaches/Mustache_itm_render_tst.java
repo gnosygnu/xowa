@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.primitives.*;
 public class Mustache_itm_render_tst {
-	private final Mustache_itm_render_fxt fxt = new Mustache_itm_render_fxt();
+	private final    Mustache_itm_render_fxt fxt = new Mustache_itm_render_fxt();
 	@Test  public void Text() {
 		fxt.Test__parse("a b c", "a b c");
 	}
@@ -37,6 +37,12 @@ public class Mustache_itm_render_tst {
 		fxt.Test__parse("a{{#bool_y}}b{{/bool_y}}c", "abc");
 		fxt.Test__parse("a{{#bool_n}}b{{/bool_n}}c", "ac");
 		fxt.Test__parse("a{{#bool_y}}b{{/bool_y}}c{{#bool_n}}d{{/bool_n}}e", "abce");
+	}
+	@Test  public void Section_not() {
+		fxt.Init__root(fxt.Make_mock(0).Add_bool_y("bool_y").Add_bool_n("bool_n"));
+		fxt.Test__parse("a{{^bool_y}}b{{/bool_y}}c", "ac");
+		fxt.Test__parse("a{{^bool_n}}b{{/bool_n}}c", "abc");
+		fxt.Test__parse("a{{^bool_y}}b{{/bool_y}}c{{^bool_n}}d{{/bool_n}}e", "acde");
 	}
 	@Test   public void Section_ws() {
 		fxt.Init__root(fxt.Make_mock(0).Add_bool_y("bool_y"));
@@ -107,9 +113,9 @@ public class Mustache_itm_render_tst {
 	}
 }
 class Mustache_itm_render_fxt {
-	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();
-	private final Mustache_render_ctx ctx = new Mustache_render_ctx();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Mustache_tkn_parser parser = new Mustache_tkn_parser();
+	private final    Mustache_render_ctx ctx = new Mustache_render_ctx();
+	private final    Mustache_bfr bfr = Mustache_bfr.New();
 	private Mustache_doc_itm__mock root;
 	public Mustache_doc_itm__mock Make_mock(int id) {return new Mustache_doc_itm__mock(id);}
 	public void Init__root(Mustache_doc_itm__mock v) {this.root = v;}
@@ -117,23 +123,25 @@ class Mustache_itm_render_fxt {
 		byte[] src_bry = Bry_.new_a7(src_str);
 		Mustache_tkn_itm actl_itm = parser.Parse(src_bry, 0, src_bry.length);
 		ctx.Init(root);
-		actl_itm.Render(tmp_bfr, ctx);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		actl_itm.Render(bfr, ctx);
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }
 class Mustache_doc_itm__mock implements Mustache_doc_itm {
-	private final Hash_adp hash_prop = Hash_adp_.new_(), hash_bool = Hash_adp_.new_(), hash_subs = Hash_adp_.new_();
+	private final    Hash_adp hash_prop = Hash_adp_.new_(), hash_bool = Hash_adp_.new_(), hash_subs = Hash_adp_.new_();
 	public Mustache_doc_itm__mock(int id) {this.id = id;}
 	public int id;
 	public Mustache_doc_itm__mock Add_prop(String key, String val)	{hash_prop.Add(key, Bry_.new_u8(val)); return this;}
 	public Mustache_doc_itm__mock Add_bool_y(String key)			{hash_bool.Add(key, Bool_obj_ref.y_()); return this;}
 	public Mustache_doc_itm__mock Add_bool_n(String key)			{hash_bool.Add(key, Bool_obj_ref.n_()); return this;}
 	public Mustache_doc_itm__mock Add_subs(String key, Mustache_doc_itm__mock... ary)	{hash_subs.Add(key, ary); return this;}
-	public byte[] Get_prop(String key) {
+	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		byte[] rv = (byte[])hash_prop.Get_by(key);
-		return rv == null ? Mustache_doc_itm_.Null_val : rv;
+		if (rv == null) return false;
+		bfr.Add_bry(rv);
+		return true;
 	}
-	public Mustache_doc_itm[] Get_subs(String key) {
+	public Mustache_doc_itm[] Mustache__subs(String key) {
 		Object rv = hash_bool.Get_by(key);
 		if (rv != null) {
 			boolean bool_val = ((Bool_obj_ref)rv).Val();

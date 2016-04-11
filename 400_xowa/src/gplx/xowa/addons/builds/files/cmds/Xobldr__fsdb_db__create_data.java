@@ -339,7 +339,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	public static final String BLDR_CMD_KEY = "file.fsdb_make";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__fsdb_db__create_data(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__fsdb_db__create_data(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__fsdb_db__create_data(bldr, wiki);}
 
 	public static Fsdb_db_mgr new_src_bin_db_mgr(Xow_wiki wiki, String version) {
 		String domain_str = wiki.Domain_str();

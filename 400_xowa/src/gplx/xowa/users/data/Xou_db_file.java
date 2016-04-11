@@ -23,7 +23,7 @@ public class Xou_db_file {
 	private final    Db_conn conn;
 	public Xou_db_file(Db_conn conn) {
 		this.conn = conn;
-		this.tbl__cfg		= new Db_cfg_tbl(conn, "xowa_cfg");
+		this.tbl__cfg		= gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		this.tbl__site		= new Xoud_site_tbl(conn);
 		this.tbl__history	= new Xoud_history_tbl(conn);
 		this.tbl__cache		= new Xou_cache_tbl(conn);

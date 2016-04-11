@@ -23,7 +23,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 	private final    Xob_xml_dumper xml_dumper = new Xob_xml_dumper(); private int commit_interval = 1000;
 	private Io_url dump_url;
 	public Xob_xml_dumper_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg();}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_util_xml_dump;}
 	public void Cmd_init(Xob_bldr bldr) {
 		dump_url = wiki.Fsys_mgr().Root_dir().GenSubFil(wiki.Domain_str() + "-dump.xml");

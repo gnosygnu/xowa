@@ -95,8 +95,8 @@ public class Byte_ascii {
 			? (byte)(b + 32)
 			: b;
 	}
-	public static final byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
-	public static final byte[]
+	public static final    byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
+	public static final    byte[]
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, Nl_bry				= new byte[] {Byte_ascii.Nl}
 	, Space_bry				= new byte[] {Byte_ascii.Space}
@@ -123,5 +123,7 @@ public class Byte_ascii {
 	, Star_bry				= new byte[] {Byte_ascii.Star}
 	, Dash_bry				= new byte[] {Byte_ascii.Dash}
 	, Cr_lf_bry				= new byte[] {Byte_ascii.Cr, Byte_ascii.Nl}
+	, Num_0_bry				= new byte[] {Byte_ascii.Num_0}
+	, Num_1_bry				= new byte[] {Byte_ascii.Num_1}
 	;
 }

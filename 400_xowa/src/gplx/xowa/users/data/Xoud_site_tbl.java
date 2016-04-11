@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
 public class Xoud_site_tbl implements Rls_able {
-	private final String tbl_name = "user_site"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn;
-	private final Db_conn conn;
+	public static final String Tbl_name = "user_site";
+	private final    String tbl_name = Tbl_name; private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final    String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn;
+	private final    Db_conn conn;
 	public Xoud_site_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_site_id				= flds.Add_int_pkey("site_id");

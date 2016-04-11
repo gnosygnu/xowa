@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import org.junit.*;
 public class Gfh_tag_rdr_tst {
-	private final Gfh_tag_rdr_fxt fxt = new Gfh_tag_rdr_fxt();
+	private final    Gfh_tag_rdr_fxt fxt = new Gfh_tag_rdr_fxt();
 	@Test   public void Basic() {
 		fxt.Init("1<div id='1'>2</div>3<div id='2'>4</div>5<div id='3'>6</div>7");
 		fxt.Test__move_fwd_head("<div id='1'>"); fxt.Test__pos("2");
@@ -47,7 +47,7 @@ public class Gfh_tag_rdr_tst {
 	}
 }
 class Gfh_tag_rdr_fxt {
-	private final Gfh_tag_rdr rdr = new Gfh_tag_rdr();
+	private final    Gfh_tag_rdr rdr = Gfh_tag_rdr.New__html();
 	public void Init(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		rdr.Init(Bry_.Empty, src_bry, 0, src_bry.length);

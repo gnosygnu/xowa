@@ -15,24 +15,24 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.addons.apps.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
 import gplx.core.net.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
-import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.file_browsers.*;
 import gplx.xowa.htmls.*;
+import gplx.xowa.wikis.*;
+import gplx.xowa.langs.specials.*;
 public class Xosp_special_mgr {
-	private final Xowv_wiki wiki;
-	private final Hash_adp_bry hash;
+//		private final    Xowv_wiki wiki;
+	private final    Hash_adp_bry hash;
 	public Xosp_special_mgr(Xowv_wiki wiki) {
-		this.wiki = wiki;
-		// hash.Add_str_obj(Xows_special_meta_.Key__statistics				, page_statistics);
+//			this.wiki = wiki;
+		// hash.Add_str_obj(Xows_special_meta_.Ttl__statistics				, page_statistics);
 		this.hash = Hash_adp_bry.cs();
 	}
 	public void Get_by_ttl(Xoh_page rv, Gfo_url url, Xoa_ttl ttl) {
-		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Qargs(), wiki.Appv().Wiki_mgr());
-		rv.Init(wiki, null, ttl, -1);
-		rv.Body_(rslt.Html_body());
-		rv.Html_head_xtn_(rslt.Html_head());
+//			Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Qargs(), wiki.Appv().Wiki_mgr());
+//			rv.Init(wiki, null, ttl, -1);
+//			rv.Body_(rslt.Html_body());
+//			rv.Html_head_xtn_(rslt.Html_head());
 	}
 	public void Get_by_url(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
@@ -48,7 +48,7 @@ public class Xosp_special_mgr {
 		if (o != null) {
 			// Xows_page special = (Xows_page)o;
 			// page.Revision_data().Modified_on_(DateAdp_.Now());
-			// special.Special_gen(wiki, page, url, ttl);
+			// special.Special__gen(wiki, page, url, ttl);
 		}
 	}
 }

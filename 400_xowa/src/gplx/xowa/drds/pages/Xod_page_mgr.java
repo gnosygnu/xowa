@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
-import gplx.core.net.*; import gplx.xowa.specials.xowa.file_browsers.*;
+import gplx.core.net.*; import gplx.xowa.addons.apps.file_browsers.*;
 public class Xod_page_mgr {
 	public Xod_page_itm Get_page(Xow_wiki wiki, Xoa_url page_url) {
 		Xod_page_itm rv = new Xod_page_itm();
 
 		// load meta info like page_id, modified, etc
 		Xoa_ttl ttl = wiki.Ttl_parse(page_url.Page_bry());
-		if (ttl.Ns().Id_is_special()) return Load_special(rv, wiki, ttl, page_url.Qargs_ary());
+		if (ttl.Ns().Id_is_special()) return Load_special(rv, wiki, page_url, ttl);
 		Xowd_page_itm dbpg = new Xowd_page_itm();
 		wiki.Data__core_mgr().Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());
 		rv.Init_by_dbpg(ttl, dbpg);
@@ -46,13 +46,19 @@ public class Xod_page_mgr {
 			rv.Section_list().Add(itm);
 		}
 	}
-	private Xod_page_itm Load_special(Xod_page_itm rv, Xow_wiki wiki, Xoa_ttl ttl, Gfo_qarg_itm[] qargs) {
-		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(qargs, wiki.App().Wiki_mgri());
+	private Xod_page_itm Load_special(Xod_page_itm rv, Xow_wiki wiki, Xoa_url url, Xoa_ttl ttl) {
+		gplx.xowa.specials.Xows_page prime = wiki.App().Special_regy().Get_by_or_null(ttl.Page_txt());
+		if (prime == null) return rv;
+		Xoh_page page = new Xoh_page();
+		prime.Special__clone().Special__gen(wiki, page, url, ttl);
 		rv.Init(-1, -1, String_.new_u8(ttl.Page_txt()), String_.new_u8(ttl.Page_db()), null, null, DateAdp_.Now().XtoStr_fmt_iso_8561(), false, false, false, 0, "", "", "");
-		rv.Init_by_hpg(new Xoh_page());
+		rv.Init_by_hpg(page);
 		Xoh_section_itm section = new Xoh_section_itm(1, 1, Bry_.Empty, Bry_.Empty);
-		section.Content_(rslt.Html_body());
+		section.Content_(page.Html_data().Custom_body());
 		rv.Section_list().Add(section);
+		rv.Ttl_special_(String_.new_u8(page.Html_data().Display_ttl()));
+		rv.Head_tags().Copy(page.Html_data().Custom_head_tags());
+		rv.Tail_tags().Copy(page.Html_data().Custom_tail_tags());
 		return rv;
 	}
 }

@@ -23,7 +23,7 @@ import gplx.xowa.bldrs.wtrs.*;
 public class Xob_category_registry_sql implements Xob_cmd {
 	public Xob_category_registry_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public String Cmd_key() {return Xob_cmd_keys.Key_text_cat_core;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_end() {	// NOTE: placing in end, b/c must run *after* page_sql
 		// setup
 		wiki.Html_mgr().Importing_ctgs_(Bool_.Y);

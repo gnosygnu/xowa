@@ -121,6 +121,8 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		Srch_db_mgr search_db_mgr = Srch_search_addon.Get(wiki).Db_mgr();
 		Srch_word_tbl word_tbl = search_db_mgr.Tbl__word();
 		if (!page_tbl.conn.Eq(word_tbl.conn)) page_tbl.conn.Env_vacuum();	// don't vacuum if single-db
+		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, Bool_.Y);
+		word_tbl.conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("link_score_mnx", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("mnx_val")));
 		int link_tbls_len = search_db_mgr.Tbl__link__len();
 		for (int i = 0; i < link_tbls_len; ++i) {
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__get_at(i);
@@ -134,43 +136,53 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 				( "UPDATE  search_link"
 				, "SET     link_score = Coalesce((SELECT page_score FROM <page_db>page p WHERE p.page_id = search_link.page_id), 0)"
 				));
-
-			// update word_tbl.page_score_max
-			new Db_attach_mgr(word_tbl.conn
-				, new Db_attach_itm("link_db", link_tbl.conn)
-				)
-				.Exec_sql_w_msg
-				( Bry_fmt.Make_str("updating link_score_min: ~{idx} of ~{total}", i + 1, link_tbls_len)
-				, String_.Concat_lines_nl_skip_last
-				( "REPLACE INTO search_word (word_id, word_text, link_count, link_score_min, link_score_max)"
-				, "SELECT  sw.word_id, sw.word_text, sw.link_count, Min(sl.link_score), sw.link_score_max"
-				, "FROM    search_word sw"
-				, "        JOIN <link_db>search_link sl ON sl.word_id = sw.word_id"
-				, "GROUP BY sw.word_id, sw.word_text, sw.link_count, sw.link_score_max"
-				, "HAVING  sw.link_score_min > Min(sl.link_score)"
-				))
-				.Exec_sql_w_msg
-				( Bry_fmt.Make_str("updating link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
-				, String_.Concat_lines_nl_skip_last
-				( "REPLACE INTO search_word (word_id, word_text, link_count, link_score_min, link_score_max)"
-				, "SELECT  sw.word_id, sw.word_text, sw.link_count, sw.link_score_min, Max(sl.link_score)"
-				, "FROM    search_word sw"
-				, "        JOIN <link_db>search_link sl ON sl.word_id = sw.word_id"
-				, "GROUP BY sw.word_id, sw.word_text, sw.link_count, sw.link_score_min"
-				, "HAVING  sw.link_score_max < Max(sl.link_score)"
-				))
-				;
+			Calc_min_max(Bool_.Y, word_tbl, link_tbl, i, link_tbls_len);
+			Calc_min_max(Bool_.N, word_tbl, link_tbl, i, link_tbls_len);
 			link_tbl.Create_idx__link_score();
 			if (!link_tbl.conn.Eq(word_tbl.conn)) link_tbl.conn.Env_vacuum();	// don't vacuum if single-db
 			word_tbl.Create_idx();
 		}
+		word_tbl.conn.Meta_tbl_delete("link_score_mnx");
 		Srch_db_cfg_.Update__bldr__link(search_db_mgr.Tbl__cfg(), search_db_mgr.Cfg(), link_score_max);
+		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, Bool_.N);
 
 		if (delete_plink_db) {
 			Xob_db_file plink_db = Xob_db_file.New__page_link(wiki);
 			plink_db.Conn().Rls_conn();
 			Io_mgr.Instance.DeleteFil(plink_db.Url());
 		}
+	}
+	private void Calc_min_max(boolean min, Srch_word_tbl word_tbl, Srch_link_tbl link_tbl, int i, int link_tbls_len) {
+		word_tbl.conn.Meta_idx_delete("link_score_mnx__main");
+		word_tbl.conn.Exec_sql_concat("DELETE FROM link_score_mnx");
+		String prc_name = "Max";
+		String fld_name = "link_score_max";
+		if (min) {
+			prc_name = "Min";
+			fld_name = "link_score_min";
+		}
+		new Db_attach_mgr(word_tbl.conn, new Db_attach_itm("link_db", link_tbl.conn))
+			.Exec_sql_w_msg
+			( Bry_fmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
+			, String_.Concat_lines_nl_skip_last
+			( "INSERT INTO link_score_mnx (word_id, mnx_val)"
+			, "SELECT  sw.word_id, " + prc_name + "(sl.link_score)"
+			, "FROM    search_word sw"
+			, "        JOIN <link_db>search_link sl ON sl.word_id = sw.word_id"
+			, "GROUP BY sw.word_id"
+			))
+			;
+		word_tbl.conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("link_score_mnx", "main", "word_id", "mnx_val"));
+		word_tbl.conn.Exec_sql_concat_w_msg
+			( Bry_fmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
+			, "UPDATE  search_word"
+			, "SET     " + fld_name + " = "
+			, "                       Coalesce(("
+			, "                         SELECT  mnx_val"
+			, "                         FROM    link_score_mnx lsm"
+			, "                         WHERE   lsm.word_id = search_word.word_id"
+			, "                       ), " + fld_name + ")"
+			);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__page_rank_enabled_))		page_rank_enabled = m.ReadYn("v");
@@ -182,5 +194,5 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 	public static final String BLDR_CMD_KEY = "search.link__link_score";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__link__link_score(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__link__link_score(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__link__link_score(bldr, wiki);}
 }

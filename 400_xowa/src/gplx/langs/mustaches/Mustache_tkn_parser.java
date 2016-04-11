@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 public class Mustache_tkn_parser {
 	private byte[] src; private int src_end;
-	private final Mustache_tkn_def tkn_def = new Mustache_tkn_def();
+	private final    Mustache_tkn_def tkn_def = new Mustache_tkn_def();
+	public Mustache_tkn_itm Parse(byte[] src) {return Parse(src, 0, src.length);}
 	public Mustache_tkn_itm Parse(byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.src_end = src_end;
 		Mustache_tkn_root root = new Mustache_tkn_root();

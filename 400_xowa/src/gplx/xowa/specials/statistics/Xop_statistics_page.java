@@ -23,8 +23,9 @@ public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
 //		private Xop_statistics_stats_wiki_grp stats_wiki = new Xop_statistics_stats_wiki_grp();
 	private Xop_statistics_stats_ns_grp stats_ns = new Xop_statistics_stats_ns_grp();
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__statistics;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__statistics;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		byte[] html = Build_html(wiki);
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);
@@ -43,6 +44,8 @@ public class Xop_statistics_page implements Xows_page {
 	,	"</table>"
 	,	"</div>"
 	), "page_stats", "ns_stats");
+
+	public Xows_page Special__clone() {return this;}
 }
 class Xop_statistics_stats_page_grp implements gplx.core.brys.Bfr_arg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;

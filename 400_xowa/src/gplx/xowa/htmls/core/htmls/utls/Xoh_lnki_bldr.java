@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.htmls.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*;
 public class Xoh_lnki_bldr {
-	private final Xoa_app app; private final Xoh_href_wtr href_wtr; private final byte[] img_root_dir;
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final    Xoa_app app; private final    Xoh_href_wtr href_wtr; private final    byte[] img_root_dir;
+	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private byte[] href, title, id, caption;
 	private byte[] img_rel_path; private int img_w, img_h; private boolean img_pos_is_left;
 	public Xoh_lnki_bldr(Xoa_app app, Xoh_href_wtr href_wtr) {
@@ -35,7 +35,7 @@ public class Xoh_lnki_bldr {
 	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, v); return this;}
 	public Xoh_lnki_bldr Href_(Xow_wiki wiki, byte[] bry) {return Href_(wiki.Domain_bry(), wiki.Ttl_parse(bry));}
 	public Xoh_lnki_bldr Href_(byte[] domain_bry, Xoa_ttl ttl) {
-		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Mode_popup, domain_bry, ttl);
+		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Popup, domain_bry, ttl);
 		this.href = tmp_bfr.To_bry_and_clear();
 		return this;
 	}

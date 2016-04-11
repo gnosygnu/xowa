@@ -27,7 +27,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		this.wiki = wiki;
 		html_itm_fmtr = new Xos_pagelist_html_itm_fmtr(this, wiki);
 	}	private Xos_pagelist_html_itm_fmtr html_itm_fmtr;
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__all_pages;}
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__all_pages;}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Bry_fmtr Html_all() {return html_all;} Bry_fmtr html_all = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -72,7 +72,8 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 	public Xowd_page_itm Rslt_nxt() {return rslt_nxt;} public void Rslt_nxt_(Xowd_page_itm v) {rslt_nxt = v;} private Xowd_page_itm rslt_nxt;
 	public int Rslt_list_len() {return rslt_list_len;} public void Rslt_list_len_(int v) {rslt_list_len = v;} private int rslt_list_len;
 	public Xowd_page_itm[] Rslt_list_ttls() {return rslt_list_ttls;} private Xowd_page_itm[] rslt_list_ttls;
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		wiki.Parser_mgr().Ctx().Page().Html_data().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
 		url.Page_bry_(Bry_.Add(Bry_.new_a7("Special:"), ttl.Page_txt_wo_qargs()));	// HACK: need to re-set Page b/c href_wtr does not eliminate qargs; DATE:2013-02-08
 		if (wiki.Domain_tid() == Xow_domain_tid_.Int__home) {wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
@@ -166,6 +167,8 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 	public static final String Invk_html_all_ = "html_all_", Invk_html_list_grp_ = "html_list_grp_", Invk_html_list_itm_normal_ = "html_list_itm_normal_", Invk_html_list_itm_redirect_ = "html_list_itm_redirect_"
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
 	public static final    String GRP_KEY = "xowa.special.allpages";
+
+	public Xows_page Special__clone() {return this;}
 }
 class Xos_pagelist_html_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	public Xos_pagelist_html_itm_fmtr(Xows_page_allpages mgr, Xowe_wiki wiki) {

@@ -69,7 +69,7 @@ public class Xobldr__deletion_db__make extends Xob_cmd__base implements Xob_cmd 
 	public static final String BLDR_CMD_KEY = "file.deletion_db.make";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__deletion_db__make(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__make(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__make(bldr, wiki);}
 }
 class Xob_delete_regy {
 	public final    String tbl_name = "delete_regy";

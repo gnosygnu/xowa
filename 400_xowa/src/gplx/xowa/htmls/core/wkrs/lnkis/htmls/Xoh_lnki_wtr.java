@@ -101,7 +101,7 @@ public class Xoh_lnki_wtr {
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
 			bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);					// '<a href="'
-			app.Html__href_wtr().Build_to_bfr(bfr, app, hctx.Mode(), wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
+			app.Html__href_wtr().Build_to_bfr(bfr, app, hctx, wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner {
+public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private byte pos_val = Pos_head_end;
 	public Xop_root_tkn Xtn_root() {throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_root should not be called");}
 	public byte[] Xtn_html() {throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_html should not be called");}
@@ -52,15 +52,15 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner {
 		return ((Byte_obj_val)o).Val();
 	}
 	private static final byte Pos_head_end = 1, Pos_html_end = 2;
-	private static final byte[] 
+	private static final    byte[] 
 	  Xatr_pos_key				= Bry_.new_a7("pos")
 	, Xatr_pos_val__head_end	= Bry_.new_a7("head.end")
 	, Xatr_pos_val__html_end	= Bry_.new_a7("html.end")
 	;
-	private static final Hash_adp_bry pos_val_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry pos_val_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Xatr_pos_val__head_end, Pos_head_end)
 	.Add_bry_byte(Xatr_pos_val__html_end, Pos_html_end)
 	;
 	private static final byte Xatr_pos_id = 1;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
 }

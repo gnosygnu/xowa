@@ -26,15 +26,15 @@ public class Xowd_core_db_props {
 		this.zip_tid_text = zip_tid_text; this.zip_tid_html = zip_tid_html;
 		this.hzip_enabled = hzip_enabled; this.hzip_mode_is_b256 = hzip_mode_is_b256;
 	}
-	public int				Schema()				{return schema;}			private final int schema;
+	public int				Schema()				{return schema;}			private final    int schema;
 	public boolean    		Schema_is_1()			{return schema == 1;}
-	public Xowd_db_layout	Layout_text()			{return layout_text;}		private final Xowd_db_layout layout_text;
-	public Xowd_db_layout	Layout_html()			{return layout_html;}		private final Xowd_db_layout layout_html;
-	public Xowd_db_layout	Layout_file()			{return layout_file;}		private final Xowd_db_layout layout_file;
-	public byte				Zip_tid_text()			{return zip_tid_text;}		private final byte zip_tid_text;
-	public byte				Zip_tid_html()			{return zip_tid_html;}		private final byte zip_tid_html;
-	public boolean				Hzip_enabled()			{return hzip_enabled;}		private final boolean hzip_enabled;
-	public boolean				Hzip_mode_is_b256()		{return hzip_mode_is_b256;}	private final boolean hzip_mode_is_b256;
+	public Xowd_db_layout	Layout_text()			{return layout_text;}		private final    Xowd_db_layout layout_text;
+	public Xowd_db_layout	Layout_html()			{return layout_html;}		private final    Xowd_db_layout layout_html;
+	public Xowd_db_layout	Layout_file()			{return layout_file;}		private final    Xowd_db_layout layout_file;
+	public byte				Zip_tid_text()			{return zip_tid_text;}		private final    byte zip_tid_text;
+	public byte				Zip_tid_html()			{return zip_tid_html;}		private final    byte zip_tid_html;
+	public boolean				Hzip_enabled()			{return hzip_enabled;}		private final    boolean hzip_enabled;
+	public boolean				Hzip_mode_is_b256()		{return hzip_mode_is_b256;}	private final    boolean hzip_mode_is_b256;
 	public void Cfg_save(Db_cfg_tbl tbl) {
 		tbl.Conn().Txn_bgn("make__core__cfg__save");
 		tbl.Insert_int		(Cfg_grp, Cfg_key__schema_version		, schema);
@@ -48,7 +48,7 @@ public class Xowd_core_db_props {
 		tbl.Conn().Txn_end();
 	}
 	public static Xowd_core_db_props Cfg_load(Io_url url, Db_conn conn) {
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		return cfg_tbl.Select_int_or(Cfg_grp, Cfg_key__schema_version, 1) == 1
 			? new Xowd_core_db_props
 			( 1, Xowd_db_layout.Itm_lot, Xowd_db_layout.Itm_lot, Xowd_db_layout.Itm_lot, cfg_tbl.Select_byte_or(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format
@@ -78,5 +78,5 @@ public class Xowd_core_db_props {
 	, Cfg_key__hzip_enabled			= "hzip_enabled"
 	, Cfg_key__hzip_mode_is_b256	= "hzip_mode_is_b256"
 	;
-	public static final Xowd_core_db_props Test = new Xowd_core_db_props(2, Xowd_db_layout.Itm_few, Xowd_db_layout.Itm_few, Xowd_db_layout.Itm_few, Io_stream_.Tid_raw, Io_stream_.Tid_raw, Bool_.Y, Bool_.Y);
+	public static final    Xowd_core_db_props Test = new Xowd_core_db_props(2, Xowd_db_layout.Itm_few, Xowd_db_layout.Itm_few, Xowd_db_layout.Itm_few, Io_stream_.Tid_raw, Io_stream_.Tid_raw, Bool_.Y, Bool_.Y);
 }

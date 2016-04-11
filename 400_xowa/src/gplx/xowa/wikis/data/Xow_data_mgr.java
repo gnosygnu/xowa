@@ -40,7 +40,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		Xow_ns ns = ttl.Ns();
 		switch (ns.Id()) {
 			case Xow_ns_.Tid__special:
-				wiki.Special_mgr().Special_gen(wiki, rv, url, ttl);
+				wiki.Special_mgr().Special__gen(wiki.App(), wiki, rv, url, ttl);
 				return rv;
 			case Xow_ns_.Tid__mediawiki:
 				if (	!called_from_msg	// if called from msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09

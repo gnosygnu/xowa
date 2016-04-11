@@ -25,8 +25,9 @@ public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();
 	private Xoa_ttl src_ttl;
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__move_page;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__move_page;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		args.Parse(url);
 		byte[] src_ttl_bry = args.Src_ttl();
 		src_ttl = Xoa_ttl.parse(wiki, src_ttl_bry);
@@ -119,6 +120,8 @@ public class Move_page implements Xows_page {
 	, "  </fieldset>"
 	, "</form>"
 	), "move-page-legend", "src_href", "src_title", "src_text", "newtitle", "trg_ns_list", "trg_title", "move-leave-redirect", "movepagebtn");
+
+	public Xows_page Special__clone() {return this;}
 }
 class Move_trg_ns_list_fmtr implements gplx.core.brys.Bfr_arg {
 	private Xowe_wiki wiki; private Xoa_ttl ttl;

@@ -59,7 +59,7 @@ public class Xobldr__deletion_db__small_files extends Xob_cmd__base {
 	public static final String BLDR_CMD_KEY = "file.deletion_db.small_files";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
 	public static final    Xob_cmd Prototype = new Xobldr__deletion_db__small_files(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__small_files(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__deletion_db__small_files(bldr, wiki);}
 }
 class Xobldr__fsdb_db__delete_small_files_ {
 	public static int[] New_ext_max_ary() {

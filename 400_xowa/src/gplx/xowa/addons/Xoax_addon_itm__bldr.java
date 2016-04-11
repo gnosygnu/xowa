@@ -15,7 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-public interface Mwh_atr_itm_owner {
-	void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj);
+package gplx.xowa.addons; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.bldrs.wkrs.*;
+public interface Xoax_addon_itm__bldr {
+	Xob_cmd[] Cmds_ary();
 }

@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Gfh_tag_ {
 	public static final int 
-	  Id__eos		= -2
+	  Id__comment	= -3
+	, Id__eos		= -2
 	, Id__any		= -1
 	, Id__unknown	=  0
-	, Id__comment	=  1
 	, Id__h2		=  2
 	, Id__h3		=  3
 	, Id__h4		=  4
@@ -38,13 +38,13 @@ public class Gfh_tag_ {
 	, Id__hr		= 15
 	, Id__td		= 16
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
 	, Bry__ul			= Bry_.new_a7("ul")
 	, Bry__td			= Bry_.new_a7("td")
 	, Bry__th			= Bry_.new_a7("th")
 	;
-	public static final Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
+	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)
 	.Add_str_int("h2"			, Id__h2)
 	.Add_str_int("h3"			, Id__h3)
@@ -85,7 +85,7 @@ public class Gfh_tag_ {
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}
-	public static final byte[]
+	public static final    byte[]
 	  Br_inl					= Bry_.new_a7("<br/>")
 	, Br_lhs					= Bry_.new_a7("<br>")
 	, Hr_inl					= Bry_.new_a7("<hr/>")
@@ -113,10 +113,10 @@ public class Gfh_tag_ {
 	, Comm_end_str				= "-->"
 	, Anchor_str				= "#"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Comm_bgn = Bry_.new_a7(Comm_bgn_str), Comm_end = Bry_.new_a7(Comm_end_str)
 	;
-	public static final int
+	public static final    int
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
 	;

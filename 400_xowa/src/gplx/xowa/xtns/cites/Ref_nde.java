@@ -19,7 +19,7 @@ package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.primitives.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner {
+public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = Bry_.Empty;
 	public byte[] Group() {return group;} private byte[] group = Bry_.Empty;
 	public byte[] Follow() {return follow;} private byte[] follow = Bry_.Empty;
@@ -59,7 +59,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_ref(hctx, bfr, src, xnde);
 	}
-	private static final Ref_nde[] Ary_empty = new Ref_nde[0];
+	private static final    Ref_nde[] Ary_empty = new Ref_nde[0];
 	public Ref_nde[] Related() {return related;} Ref_nde[] related = Ary_empty;
 	public int Related_len() {return related_len;} private int related_len;
 	public Ref_nde Related_get(int i) {return related[i];}
@@ -74,9 +74,8 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	}
 	public static final int Idx_minor_follow = -2;
 	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name))
 	.Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group))
 	.Add_str_obj("follow", Byte_obj_val.new_(Ref_nde.Xatr_id_follow));
-
 }

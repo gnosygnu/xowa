@@ -59,7 +59,7 @@ public class Xob_bldr implements GfoInvkAble {
 				if (prime == null) throw Err_.new_("bldr", "bldr.cmd does not exists: cmd={0}", key);
 				byte[] wiki_key = cmd.Get_bry_or_null("wiki");
 				Xowe_wiki wiki = wiki_key == null ? app.Usere().Wiki() : app.Wiki_mgr().Get_by_or_make(wiki_key);
-				Xob_cmd clone = prime.Cmd_new(this, wiki);
+				Xob_cmd clone = prime.Cmd_clone(this, wiki);
 				int atrs_len = cmd.Len();
 				for (int j = 0; j < atrs_len; ++j) {
 					Json_kv atr_kv = cmd.Get_at_as_kv(j);

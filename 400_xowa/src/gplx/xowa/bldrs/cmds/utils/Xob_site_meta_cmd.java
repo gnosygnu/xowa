@@ -24,7 +24,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 	private final    Xob_bldr bldr;
 	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
 	public Xob_site_meta_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_site_meta;}
 	public void Cmd_run() {
 		Xoa_app app = bldr.App();

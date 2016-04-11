@@ -24,7 +24,7 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	private byte wbase_enabled = Bool_.__byte;
 	public Xob_init_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg(); return this;}
 	public abstract String Cmd_key();
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public abstract void Cmd_ini_wdata(Xob_bldr bldr, Xowe_wiki wiki);
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
 	@gplx.Virtual public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata

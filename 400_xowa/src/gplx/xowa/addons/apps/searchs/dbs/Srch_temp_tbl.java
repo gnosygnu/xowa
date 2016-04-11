@@ -40,6 +40,9 @@ public class Srch_temp_tbl {
 	public void Insert_end() {
 		conn.Txn_end();
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
-		conn.Meta_idx_create(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_word_text, fld_page_id));
+		Srch_db_mgr.Optimize_unsafe_(conn, Bool_.Y);
+		conn.Meta_idx_create(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "word_text__word_id", fld_word_text, fld_word_id));
+		// conn.Meta_idx_create(Xoa_app_.Usr_dlg(), Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "page_id", fld_page_id));
+		Srch_db_mgr.Optimize_unsafe_(conn, Bool_.N);
 	}
 }

@@ -76,7 +76,7 @@ public class Xowd_db_file {
 	public static Xowd_db_file make_(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
 		Guid_adp guid = Guid_adp_.new_();
 		Xob_info_file info_file = new Xob_info_file(id, Xowd_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		Xowd_db_file rv = new Xowd_db_file(cfg_tbl, info_session, info_file, props, Xowd_db_file_schema_props.make_(), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_create);
 		cfg_tbl.Create_tbl();	// always create cfg in each db
 		return rv;
@@ -87,7 +87,7 @@ public class Xowd_db_file {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xowd_db_file_.To_key(tid), url.Raw());
 			conn = Db_conn_.Noop;
 		}
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");	// NOTE: this loads the cfg tbl for the current db, not the core db
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn); // NOTE: this loads the cfg tbl for the current db, not the core db
 		Xob_info_session info_session = Xob_info_session.Load(cfg_tbl);
 		Xob_info_file info_file = Xob_info_file.Load(cfg_tbl);
 		return new Xowd_db_file(cfg_tbl, info_session, info_file, props, Xowd_db_file_schema_props.load_(cfg_tbl, tid, info_session.Version()), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_ignore);

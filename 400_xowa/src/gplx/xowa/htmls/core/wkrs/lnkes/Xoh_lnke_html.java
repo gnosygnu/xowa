@@ -39,7 +39,10 @@ public class Xoh_lnke_html {
 	}
 	public boolean Write_href(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int href_bgn, int href_end, boolean proto_is_xowa) {
 		byte[] lnke_xwiki_wiki = lnke.Lnke_xwiki_wiki();
-		if (lnke_xwiki_wiki == null || hctx.Mode_is_hdump()) {	// if hdump, never write xwiki format (/site/); always write in url format (https:); note that xwiki is set when wiki is installed locally
+		if (	lnke_xwiki_wiki == null 
+			||	hctx.Mode_is_hdump()	// if hdump, never write xwiki format (/site/); always write in url format (https:); note that xwiki is set when wiki is installed locally
+			||	hctx.Mode() == Xoh_wtr_ctx.Mode_file_dump
+			) {
 			if (lnke.Lnke_relative()) {		// relative; EX: //a.org
 				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, href_bgn, href_end);
 				return true;

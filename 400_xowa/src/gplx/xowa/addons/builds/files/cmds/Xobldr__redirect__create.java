@@ -29,7 +29,7 @@ public class Xobldr__redirect__create extends Xob_dump_mgr_base {
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__file);}	// restrict to file ns
 	@Override public byte Init_redirect() {return Bool_.Y_byte;}					// restrict to redirects
 	@Override protected void Init_reset(Db_conn conn) {
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
 		conn.Exec_sql("DELETE FROM " + Xob_redirect_tbl.Tbl_name);
 	}
@@ -61,5 +61,5 @@ public class Xobldr__redirect__create extends Xob_dump_mgr_base {
 	public static final String BLDR_CMD_KEY = "wiki.redirect";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__redirect__create(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__redirect__create(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__redirect__create(bldr, wiki);}
 }

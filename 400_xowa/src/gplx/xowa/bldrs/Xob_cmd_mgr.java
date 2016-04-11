@@ -31,9 +31,9 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.Get_at(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
 	public GfoInvkAble Add_cmd(Xowe_wiki wiki, String cmd_key) {
-		Xob_cmd prototype = cmd_regy.Get_or_null(cmd_key);
-		if (prototype != null) {
-			Xob_cmd clone = prototype.Cmd_new(bldr, wiki);
+		Xob_cmd prime = cmd_regy.Get_or_null(cmd_key);
+		if (prime != null) {
+			Xob_cmd clone = prime.Cmd_clone(bldr, wiki);
 			Add(clone);
 			return clone;
 		}

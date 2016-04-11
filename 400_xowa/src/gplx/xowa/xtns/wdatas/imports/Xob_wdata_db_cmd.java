@@ -30,8 +30,8 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
 	@Override public byte Init_redirect() {return Bool_.N_byte;}	// json will never be found in a redirect
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Tid__main, Wdata_wiki_mgr.Ns_property);}
-	@Override protected void Init_reset(Db_conn p) {
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(p, "xowa_cfg");
+	@Override protected void Init_reset(Db_conn conn) {
+		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
 	}
 	@Override protected Db_conn Init_db_file() {

@@ -21,7 +21,7 @@ import gplx.fsdb.meta.*;
 import gplx.xowa.parsers.logs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner {
+public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private Gallery_xtn_mgr xtn_mgr;
 	public byte Mode()						{return mode;} private byte mode;
 	public int Itm_w()						{return itm_w;} private int itm_w = Null;

@@ -35,15 +35,15 @@ public class Xoae_page implements Xoa_page {
 	public byte[]					Url_bry_safe() {return url == null ? Bry_.Empty : url.Raw();}
 	public boolean						Exists() {return !Missing();}
 	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_gallery_packed_exists_y_();}
-
-	public Xoa_page__commons_mgr	Commons_mgr() {return commons_mgr;} private final Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
+	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
+
+	public Xoa_page__commons_mgr	Commons_mgr() {return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xopg_redlink_lnki_list	Redlink_lnki_list() {return redlink_lnki_list;} private Xopg_redlink_lnki_list redlink_lnki_list;
 	public Xol_lang_itm				Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;
-	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
-	public Xopg_tab_data			Tab_data() {return tab_data;} private final Xopg_tab_data tab_data = new Xopg_tab_data();
-	public Xopg_hdump_data			Hdump_data() {return hdump_data;} private final Xopg_hdump_data hdump_data = new Xopg_hdump_data();
+	public Xopg_tab_data			Tab_data() {return tab_data;} private final    Xopg_tab_data tab_data = new Xopg_tab_data();
+	public Xopg_hdump_data			Hdump_data() {return hdump_data;} private final    Xopg_hdump_data hdump_data = new Xopg_hdump_data();
 	public boolean						Missing() {return missing;} public Xoae_page Missing_() {return Missing_(true);} public Xoae_page Missing_(boolean v) {missing = v; return this;}  private boolean missing;
 	public boolean						Redirected() {return redirected;} public Xoae_page Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
 	public List_adp					Redirected_ttls() {return redirected_ttls;} private List_adp redirected_ttls = List_adp_.new_();
@@ -102,7 +102,7 @@ public class Xoae_page implements Xoa_page {
 		commons_mgr.Clear();
 	}
 	private Xoae_page Edit_mode_create_() {edit_mode = Xoa_page_.Edit_mode_create; return this;}
-	public static final Xoae_page Empty = new Xoae_page().Missing_();
+	public static final    Xoae_page Empty = new Xoae_page().Missing_();
 	public static Xoae_page New(Xowe_wiki wiki, Xoa_ttl ttl)		{return new Xoae_page(wiki, ttl);}
 	public static Xoae_page New_test(Xowe_wiki wiki, Xoa_ttl ttl)	{return new Xoae_page(wiki, ttl);}
 	public static Xoae_page New_edit(Xowe_wiki wiki, Xoa_ttl ttl)	{return new Xoae_page(wiki, ttl).Edit_mode_create_();}

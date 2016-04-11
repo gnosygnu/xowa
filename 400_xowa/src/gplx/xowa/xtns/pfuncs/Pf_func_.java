@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.wikis.domains.*;
 public class Pf_func_ {
 	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
 	public static final byte Name_dlm = Byte_ascii.Colon;
@@ -42,7 +43,7 @@ public class Pf_func_ {
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
 		return bfr.To_bry_and_clear_and_trim();
 	}
-	private static final Number_parser lhs_parser = new Number_parser().Hex_enabled_(true), rhs_parser = new Number_parser().Hex_enabled_(true);
+	private static final    Number_parser lhs_parser = new Number_parser().Hex_enabled_(true), rhs_parser = new Number_parser().Hex_enabled_(true);
 	public static boolean Eq_(byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
 		int lhs_len = lhs.length, rhs_len = rhs.length;
 		boolean rv = true;
@@ -63,17 +64,17 @@ public class Pf_func_ {
 		if (rhs_parser.Has_err()) return false;
 		return lhs_parser.Has_frac() || rhs_parser.Has_frac() ? lhs_parser.Rv_as_dec().Eq(rhs_parser.Rv_as_dec()) : lhs_parser.Rv_as_int() == rhs_parser.Rv_as_int();
 	}
-	public static void Reg(gplx.xowa.langs.funcs.Xol_func_regy func_regy, Xol_lang_itm lang) {
+	public static void Reg(Xow_domain_itm domain_itm, gplx.xowa.langs.funcs.Xol_func_regy func_regy, Xol_lang_itm lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
-		int[] kwd_ary = Ary_get(!lang.Kwd_mgr__strx());
+		int[] kwd_ary = Ary_get(domain_itm, !lang.Kwd_mgr__strx());
 		int len = kwd_ary.length;
 		for (int i = 0; i < len; i++) {
 			int id = kwd_ary[i];
 			func_regy.Reg_defn(kwd_mgr, id, Get_prototype(id));
 		}
 	}
-	public static int[] Ary_get(boolean wmf) {
-		if (wmf) return Ary_wmf;
+	public static int[] Ary_get(Xow_domain_itm domain_itm, boolean wmf) {
+		if (wmf && domain_itm != null && domain_itm.Domain_type().Tid() != Xow_domain_tid_.Int__home) return Ary_wmf;
 		if (Ary_nonwmf == null) {
 			List_adp list = List_adp_.new_();
 			int len = Ary_wmf.length;
@@ -96,7 +97,7 @@ public class Pf_func_ {
 		return Ary_nonwmf;
 	}
 	private static int[] Ary_nonwmf = null;
-	private static final int[] Ary_wmf = new int[]
+	private static final    int[] Ary_wmf = new int[]
 	{ Xol_kwd_grp_.Id_utc_year
 	, Xol_kwd_grp_.Id_utc_month_int_len2
 	, Xol_kwd_grp_.Id_utc_month_int
@@ -428,6 +429,6 @@ class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
-	public static final Pf_func_bang Instance = new Pf_func_bang();
+	public static final    Pf_func_bang Instance = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}
 }

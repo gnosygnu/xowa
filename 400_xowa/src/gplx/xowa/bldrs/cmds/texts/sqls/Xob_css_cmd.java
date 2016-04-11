@@ -22,7 +22,7 @@ public class Xob_css_cmd implements Xob_cmd {
 	private Io_url css_dir; private String css_key;
 	public Xob_css_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg();}
 	public String Cmd_key() {return Xob_cmd_keys.Key_text_css;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_init(Xob_bldr bldr) {
 		if (css_dir == null) css_dir = wiki.App().Fsys_mgr().Wiki_css_dir(wiki.Domain_str());	// EX: /xowa/user/anonymous/wiki/en.wikipedia.org
 		if (css_key == null) css_key = Xowd_css_core_mgr.Key_default;

@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Xob_db_file {
 	Xob_db_file(Io_url url, Db_conn conn) {
 		this.url = url; this.conn = conn;
-		this.tbl__cfg = new Db_cfg_tbl(conn, "xowa_cfg");
+		this.tbl__cfg = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 	}
 	public Io_url			Url()		{return url;} private final    Io_url url;
 	public Db_conn			Conn()		{return conn;} private final    Db_conn conn;

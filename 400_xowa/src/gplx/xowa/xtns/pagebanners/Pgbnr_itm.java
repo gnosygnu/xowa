@@ -44,21 +44,22 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		this.isHeadingOverrideEnabled = isHeadingOverrideEnabled;
 		this.toc = toc;
 	}
-	public byte[] Get_prop(String key) {
-		if		(String_.Eq(key, "title"))							return banner_hdr_text;
-		else if	(String_.Eq(key, "tooltip"))						return banner_anch_title;
-		else if	(String_.Eq(key, "bannerfile"))						return banner_anch_href;
-		else if	(String_.Eq(key, "banner"))							return banner_img_src;
-		else if	(String_.Eq(key, "html_uid"))						return Bry_.new_u8(gplx.xowa.htmls.Xoh_img_mgr.Str__html_uid + Int_.To_str(html_uid));
-		else if	(String_.Eq(key, "srcset"))							return srcset == null ? Bry_.Empty : Bry_.Empty;
-		else if	(String_.Eq(key, "originx"))						return originx;
-		else if	(String_.Eq(key, "data-pos-x"))						return Bry_.new_a7(Double_.To_str(data_pos_x));
-		else if	(String_.Eq(key, "data-pos-y"))						return Bry_.new_a7(Double_.To_str(data_pos_y));
-		else if	(String_.Eq(key, "maxWidth"))						return Int_.To_bry(maxWidth);
-		else if	(String_.Eq(key, "toc"))							return toc;
-		return Mustache_doc_itm_.Null_val;
+	public boolean Mustache__write(String key, Mustache_bfr bfr) {
+		if		(String_.Eq(key, "title"))							bfr.Add_bry(banner_hdr_text);
+		else if	(String_.Eq(key, "tooltip"))						bfr.Add_bry(banner_anch_title);
+		else if	(String_.Eq(key, "bannerfile"))						bfr.Add_bry(banner_anch_href);
+		else if	(String_.Eq(key, "banner"))							bfr.Add_bry(banner_img_src);
+		else if	(String_.Eq(key, "html_uid"))						bfr.Add_bry(Bry_.new_u8(gplx.xowa.htmls.Xoh_img_mgr.Str__html_uid + Int_.To_str(html_uid)));
+		else if	(String_.Eq(key, "srcset"))							bfr.Add_bry(srcset == null ? Bry_.Empty : Bry_.Empty);
+		else if	(String_.Eq(key, "originx"))						bfr.Add_bry(originx);
+		else if	(String_.Eq(key, "data-pos-x"))						bfr.Add_double(data_pos_x);
+		else if	(String_.Eq(key, "data-pos-y"))						bfr.Add_double(data_pos_y);
+		else if	(String_.Eq(key, "maxWidth"))						bfr.Add_int(maxWidth);
+		else if	(String_.Eq(key, "toc"))							bfr.Add_bry(toc);
+		else														return false;
+		return true;
 	}
-	public Mustache_doc_itm[] Get_subs(String key) {
+	public Mustache_doc_itm[] Mustache__subs(String key) {
 		if		(String_.Eq(key, "icons"))							return icons;
 		else if	(String_.Eq(key, "hasIcons"))						return Mustache_doc_itm_.Ary__bool(icons.length > 0);
 		else if	(String_.Eq(key, "bottomtoc"))						return Mustache_doc_itm_.Ary__bool(bottomtoc);

@@ -21,7 +21,7 @@ import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*;
 public class Xob_exec_sql_cmd implements Xob_cmd {
 	private Xowe_wiki wiki; private int file_idx = -1; private String sql;
 	public Xob_exec_sql_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_exec_sql;}
 	public void Cmd_run() {
 		Xoae_app app = wiki.Appe();

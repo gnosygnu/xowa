@@ -19,8 +19,9 @@ package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.specials.*;
 public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xows_page {
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__page_history;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__page_history;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 
@@ -53,4 +54,6 @@ public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xows_page {
 		,	"    <td>~{itm_last}</td>"
 		,	"  </tr>"
 		), "itm_wiki", "itm_page", "itm_count", "itm_last");
+
+	public Xows_page Special__clone() {return this;}
 }

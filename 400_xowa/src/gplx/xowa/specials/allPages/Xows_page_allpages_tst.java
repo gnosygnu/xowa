@@ -173,7 +173,7 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Test_special_gen() {
 		init_url = app.User().Wikii().Utl__url_parser().Parse(Xows_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
-		allpages.Special_gen(wiki, wiki.Parser_mgr().Ctx().Page(), init_url, init_ttl);
+		allpages.Special__gen(wiki, wiki.Parser_mgr().Ctx().Page(), init_url, init_ttl);
 		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Parser_mgr().Ctx().Page().Html_data().Display_ttl()));
 		if (expd_address_page != null) Tfds.Eq(expd_address_page, String_.new_u8(init_url.Page_bry()));
 		return this;

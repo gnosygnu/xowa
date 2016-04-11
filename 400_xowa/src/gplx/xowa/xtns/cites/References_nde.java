@@ -19,7 +19,7 @@ package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.primitives.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class References_nde implements Xox_xnde, Mwh_atr_itm_owner {
+public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Group() {return group;} public References_nde Group_(byte[] v) {group = v; return this;} private byte[] group = Bry_.Empty;
 	public int List_idx() {return list_idx;} public References_nde List_idx_(int v) {list_idx = v; return this;} private int list_idx;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
@@ -54,6 +54,6 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner {
 	}
 	private static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("group", Byte_obj_val.new_(References_nde.Xatr_id_group));
 }

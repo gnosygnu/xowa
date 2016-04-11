@@ -18,11 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
 import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.pages.*;
 public class Xod_page_itm {
 	public int Page_id() {return page_id;} private int page_id;
 	public long Rev_id() {return rev_id;} private long rev_id;
 	public String Ttl_text() {return ttl_text;} private String ttl_text;
 	public String Ttl_db() {return ttl_db;} private String ttl_db;
+	public String Ttl_special() {return ttl_special;} public void Ttl_special_(String v) {ttl_special = v;} private String ttl_special;
 	public String Redirected() {return redirected;} private String redirected;
 	public String Description() {return description;} private String description;
 	public String Modified_on() {return modified_on;} private String modified_on;
@@ -35,6 +37,8 @@ public class Xod_page_itm {
 	public String First_allowed_editor_role() {return first_allowed_editor_role;} private String first_allowed_editor_role;
 	public List_adp Section_list() {return section_list;} private List_adp section_list = List_adp_.new_();
 	public Xoh_page Hpg() {return hpg;} private Xoh_page hpg;
+	public Xopg_tag_mgr Head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr();
+	public Xopg_tag_mgr Tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr();
 	public void Init(int page_id, int rev_id
 		, String ttl_text, String ttl_db, String redirected, String description, String modified_on
 		, boolean is_editable, boolean is_main_page, boolean is_disambiguation, int lang_count

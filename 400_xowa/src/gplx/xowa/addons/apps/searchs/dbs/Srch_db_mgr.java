@@ -39,7 +39,7 @@ public class Srch_db_mgr {
 			||	db_props.Layout_text().Tid_is_all_or_few()) {
 			// single_db; core_db has search_word and search_link
 			word_db = db_mgr.Db__core();
-			tbl__cfg = new Db_cfg_tbl(word_db.Conn(), "xowa_cfg");
+			tbl__cfg = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(word_db.Conn());
 			tbl__word = new Srch_word_tbl(word_db.Conn());
 			tbl__link__ary = new Srch_link_tbl[1];
 			Tbl__link__ary__set(tbl__link__ary, 0, word_db);
@@ -47,7 +47,7 @@ public class Srch_db_mgr {
 			// many_db; figure out link_dbs
 			word_db = db_mgr.Dbs__get_by_tid_or_null(Srch_db_mgr_.Dbtid__search_core);
 			if (word_db == null) return this;	// HACK: called during db build; skip;
-			tbl__cfg = new Db_cfg_tbl(word_db.Conn(), "xowa_cfg");
+			tbl__cfg = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(word_db.Conn());
 			tbl__word = new Srch_word_tbl(word_db.Conn());
 			Ordered_hash hash = db_mgr.Dbs__get_hash_by_tid(Srch_db_mgr_.Dbtid__search_link);
 			if (hash == null) {	// v2 file layout where search_word and search_link is in 1 search_db
@@ -116,5 +116,15 @@ public class Srch_db_mgr {
 		Srch_link_tbl tbl = Tbl__link__ary__set(ary, idx, db);
 		tbl.Create_tbl();
 		lreg_tbl.Insert(idx, db.Id(), Srch_link_reg_tbl.Db_type__title, ns_ids_is_main ? Srch_link_reg_tbl.Ns_type__main : Srch_link_reg_tbl.Ns_type__rest, 0, -1, -1);
+	}
+	public static void Optimize_unsafe_(gplx.dbs.Db_conn conn, boolean v) {
+		if (v) {
+			conn.Exec_qry(gplx.dbs.engines.sqlite.Sqlite_pragma.New__journal__off());
+			conn.Exec_qry(gplx.dbs.engines.sqlite.Sqlite_pragma.New__synchronous__off());
+		}
+		else {
+			conn.Exec_qry(gplx.dbs.engines.sqlite.Sqlite_pragma.New__journal__delete());
+			conn.Exec_qry(gplx.dbs.engines.sqlite.Sqlite_pragma.New__synchronous__full());
+		}
 	}
 }

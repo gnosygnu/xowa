@@ -41,6 +41,7 @@ public class Db_conn {
 	public void					Meta_tbl_delete(String tbl)														{engine.Meta_tbl_delete(tbl);}
 	public void					Meta_tbl_remake(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_delete(meta.Name()); engine.Meta_tbl_create(meta);}
 	public void					Meta_idx_create(Dbmeta_idx_itm... idxs)									{engine.Meta_idx_create(Gfo_usr_dlg_.Instance, idxs);}
+	public void					Meta_idx_delete(String idx)														{engine.Meta_idx_delete(idx);}
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... idxs)				{engine.Meta_idx_create(usr_dlg, idxs);}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)									{engine.Meta_fld_append(tbl, fld);}
 	public void					Meta_fld_assert(String tbl, String fld, Dbmeta_fld_tid tid, Object dflt)		{if (!Meta_fld_exists(tbl, fld)) this.Meta_fld_append(tbl, new Dbmeta_fld_itm(fld, tid).Default_(dflt));}

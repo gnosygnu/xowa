@@ -23,12 +23,12 @@ import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_tag_parser implements Gfh_doc_wkr {
-	private final Xoh_hdoc_wkr hdoc_wkr;
-	private final Gfh_tag_rdr tag_rdr = new Gfh_tag_rdr();
+	private final    Xoh_hdoc_wkr hdoc_wkr;
+	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
 	private Xoh_hdoc_ctx hctx;
-	private final Xoh_lnki_data		wkr__lnki = new Xoh_lnki_data();
-	private final Xoh_thm_data		wkr__thm = new Xoh_thm_data();
-	private final Xoh_gly_grp_data	wkr__gly = new Xoh_gly_grp_data();
+	private final    Xoh_lnki_data		wkr__lnki = new Xoh_lnki_data();
+	private final    Xoh_thm_data		wkr__thm = new Xoh_thm_data();
+	private final    Xoh_gly_grp_data	wkr__gly = new Xoh_gly_grp_data();
 	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
 	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {this.hdoc_wkr = hdoc_wkr;}
 	public void Init(Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {

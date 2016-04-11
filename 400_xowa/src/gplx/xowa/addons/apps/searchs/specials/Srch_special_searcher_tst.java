@@ -192,7 +192,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			Xoae_page page = Xoae_page.New_test(wiki, ttl);
 //			byte[] url_bry = Bry_.new_a7("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
 //			Xoa_url url = wiki.Appe().Url_parser().Parse(url_bry);
-//			search_mgr.Special_gen(url, page, wiki, ttl);
+//			search_mgr.Special__gen(url, page, wiki, ttl);
 //			Tfds.Eq_str_lines(expd_html, String_.new_u8(page.Root().Data_htm()));
 //		}
 //		public void Test_search2(byte match_tid, String ttl_str, int page_idx, byte sort_tid, params String[] expd_ary) {
@@ -202,7 +202,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			Xoa_url url = url_parser.Parse(url_raw);
 //			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url_raw);
 //			Xoae_page page = wiki.Ctx().Page();
-//			search_mgr.Special_gen(url, page, wiki, ttl);
+//			search_mgr.Special__gen(url, page, wiki, ttl);
 //			Xosrh_rslt_grp cur_grp = search_mgr.Cur_grp();
 //			bfr.Mkr_rls();
 //			Tfds.Eq_ary(expd_ary, Search_itms_to_int_ary(cur_grp));

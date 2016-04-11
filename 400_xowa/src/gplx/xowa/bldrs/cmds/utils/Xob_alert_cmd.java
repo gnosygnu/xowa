@@ -36,5 +36,5 @@ public class Xob_alert_cmd extends Xob_cmd__base implements Xob_cmd {
 	public static final String BLDR_CMD_KEY = "ui.alert";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xob_alert_cmd(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xob_alert_cmd(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xob_alert_cmd(bldr, wiki);}
 }

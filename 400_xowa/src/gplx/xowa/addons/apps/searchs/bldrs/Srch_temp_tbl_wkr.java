@@ -44,37 +44,80 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 	public void Term() {
 		// end inserts
 		search_temp_tbl.Insert_end();
+
 		// init
 		Srch_db_mgr search_db_mgr = search_addon.Db_mgr().Init();	// NOTE: must call .Init for import-offline else Cfg_tbl will be null; note that .Init will bind to newly created search_word / search_link tbl; DATE:2016-04-04
 		Db_conn word_conn = search_temp_tbl.conn;
-		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().conn;
-		// update search_word ids if they exist
-		Update_word_id(word_conn, wiki);
 
-		word_conn.Exec_sql("filling search_word (please wait)", Sql__create_word);
+		// update search_word ids if they exist
+		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
+		Update_word_id(word_conn, wiki);
+		Search_word__insert(word_conn);
+		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
 
 		// create search_link
+		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().conn;
 		if (search_db_mgr.Tbl__link__len() == 1) {
 			// single_db; just run sql;
+			Xoa_app_.Usr_dlg().Plog_many("", "", "creating search_link");
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[0];
 			new Db_attach_mgr(word_conn, new Db_attach_itm("link_db", link_tbl.conn))
-				.Exec_sql(Sql__create_link__one);
+				.Exec_sql(String_.Concat_lines_nl_skip_last
+				( "INSERT INTO <link_db>search_link (word_id, page_id)"
+				, "SELECT  w.word_id"
+				, ",       t.page_id"
+				, "FROM    search_temp t"
+				, "        JOIN search_word w ON t.word_text = w.word_text"
+				));
 			link_tbl.Create_idx__page_id();
 		} else {
-			// many_db; split into main links and non-main; ASSUME:link_dbs_is_2
-			int len = search_db_mgr.Tbl__link__len();
-			Db_attach_mgr attach_mgr = new Db_attach_mgr();
-			for (int i = 0; i < len; ++i) {
-				Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[i];
-				attach_mgr.Main_conn_(word_conn).Init
-				( new Db_attach_itm("page_db", page_conn)
-				, new Db_attach_itm("link_db", link_tbl.conn));
-				attach_mgr.Exec_sql(Sql__create_link__many, i == 0 ? " = 0" : " != 0");
-				link_tbl.Create_idx__page_id();
-			}
+			Search_link__insert(search_db_mgr, word_conn, page_conn);
 		}
+
 		// remove search_temp
 		word_conn.Meta_tbl_delete(search_temp_tbl.tbl_name);
+	}
+	private static void Search_link__insert(Srch_db_mgr search_db_mgr, Db_conn word_conn, Db_conn page_conn) {
+		// many_db; split into main links and non-main; ASSUME:link_dbs_is_2
+		Db_attach_mgr attach_mgr = new Db_attach_mgr();
+
+		// dump everything into a temp table in order to index it
+		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("page", "page_ns__page_id", "page_namespace", "page_id"));
+		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
+		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("page_id"), Dbmeta_fld_itm.new_int("page_namespace")));
+		attach_mgr.Main_conn_(word_conn).Init(new Db_attach_itm("page_db", page_conn));
+		attach_mgr.Exec_sql_w_msg
+		( "filling search_link_temp (please wait)", String_.Concat_lines_nl_skip_last
+		( "INSERT INTO search_link_temp (word_id, page_id, page_namespace)"
+		, "SELECT  w.word_id"
+		, ",       t.page_id"
+		, ",       p.page_namespace"
+		, "FROM    search_temp t"
+		, "        JOIN search_word w ON t.word_text = w.word_text"
+		, "        JOIN <page_db>page p ON t.page_id = p.page_id"
+		));
+		word_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("search_link_temp", "main", "page_namespace", "word_id", "page_id"));
+		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
+		page_conn.Meta_idx_delete("page__page_ns__page_id");
+
+		int len = search_db_mgr.Tbl__link__len();
+		for (int i = 0; i < len; ++i) {
+			Xoa_app_.Usr_dlg().Plog_many("", "", "creating search_link_temp: ~{0}", i);
+			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[i];
+			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, Bool_.Y);
+			attach_mgr.Main_conn_(link_tbl.conn).Init(new Db_attach_itm("word_db", word_conn));
+			attach_mgr.Exec_sql_w_msg
+			( Bry_fmt.Make_str("filling search_link: ~{idx} of ~{len}", i, len), String_.Concat_lines_nl_skip_last
+			( "INSERT INTO search_link (word_id, page_id)"
+			, "SELECT  t.word_id"
+			, ",       t.page_id"
+			, "FROM    <word_db>search_link_temp t"
+			, "WHERE   t.page_namespace" + (i == 0 ? " = 0" : " != 0")
+			));
+			link_tbl.Create_idx__page_id();
+			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, Bool_.N);
+		}
+		word_conn.Meta_tbl_delete("search_link_temp");
 	}
 	public void Exec_by_wkr(int page_id, byte[] page_ttl) {
 		this.page_id = page_id;
@@ -141,34 +184,36 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 			}
 		}
 	}
-	private static final    String 
-	  Sql__create_word = String_.Concat_lines_nl
-	( "INSERT INTO search_word (word_id, word_text, link_count)"
-	, "SELECT  word_id"
-	, ",       word_text"
-	, ",       Count(DISTINCT page_id)"
-	, "FROM    search_temp"
-	, "GROUP BY "
-	, "        word_text"
-	, ";"
-	)
-	, Sql__create_link__one = String_.Concat_lines_nl
-	( "INSERT INTO <link_db>search_link (word_id, page_id)"
-	, "SELECT  w.word_id"
-	, ",       t.page_id"
-	, "FROM    search_temp t"
-	, "        JOIN search_word w ON t.word_text = w.word_text"
-	, ";"
-	)
-	, Sql__create_link__many = String_.Concat_lines_nl
-	( "INSERT INTO <link_db>search_link (word_id, page_id)"
-	, "SELECT  w.word_id"
-	, ",       t.page_id"
-	, "FROM    search_temp t"
-	, "        JOIN search_word w ON t.word_text = w.word_text"
-	, "        JOIN <page_db>page p ON t.page_id = p.page_id"
-	, "WHERE   p.page_namespace {0}"
-	, ";"
-	)
-	;
+	private static void Search_word__insert(Db_conn word_conn) {
+		// fill search_word; need to insert into temp first b/c PRIMARY KEY on search_word will dramatically slow down insertion
+		word_conn.Meta_tbl_create(Dbmeta_tbl_itm.New("search_word_temp"
+		, Dbmeta_fld_itm.new_int("word_id")
+		, Dbmeta_fld_itm.new_str("word_text", 255)
+		, Dbmeta_fld_itm.new_int("link_count")
+		));
+		word_conn.Exec_sql_concat_w_msg
+		( "filling search_word_temp (please wait)"
+		, "INSERT INTO search_word_temp (word_id, word_text, link_count)"
+		, "SELECT  Min(word_id)"
+		, ",       word_text"
+		, ",       Count(word_id)"	// NOTE: no need to be Count(DISTINCT page_id); each search_temp row will only insert one word per page
+		, "FROM    search_temp"
+		, "GROUP BY "
+		, "        word_text"
+		, ";"
+		);
+		word_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("search_word_temp", "main", "word_id"));
+		word_conn.Exec_sql_concat_w_msg
+		( "filling search_word (please wait)"
+		, "INSERT INTO search_word (word_id, word_text, link_count)"
+		, "SELECT  word_id"
+		, ",       word_text"
+		, ",       link_count"
+		, "FROM    search_word_temp"
+		, "ORDER BY "
+		, "        word_id"
+		, ";"
+		);
+		word_conn.Meta_tbl_delete("search_word_temp");
+	}
 }

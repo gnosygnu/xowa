@@ -25,7 +25,7 @@ public abstract class Xob_cmd__base implements Xob_cmd, GfoInvkAble {
 		this.usr_dlg = bldr == null ? null : bldr.Usr_dlg();
 	}
 	public abstract String	Cmd_key();
-	@gplx.Virtual public Xob_cmd	Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	@gplx.Virtual public Xob_cmd	Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public abstract void	Cmd_run();
 	@gplx.Virtual public void		Cmd_init(Xob_bldr bldr) {}
 	@gplx.Virtual public void		Cmd_bgn(Xob_bldr bldr) {}

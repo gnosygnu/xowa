@@ -159,6 +159,17 @@ public class Xowd_db_mgr {
 			default: 							throw Err_.new_unimplemented();
 		}
 	}
+	public static boolean Maybe_core(String domain_name, String fil_name) {
+		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(Bry_.new_u8(domain_name));
+		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Int__other) {
+			return String_.Has_at_end(fil_name, ".xowa");
+		}
+		String domain_str = domain_itm.Domain_str();
+		return	(	String_.Eq(fil_name, domain_str + "-text.xowa")
+				||	String_.Eq(fil_name, domain_str + "-core.xowa")
+				||	String_.Eq(fil_name, domain_str + ".xowa")
+				);
+	}
 	private static byte Core_db_tid(Xowd_db_layout layout) {
 		switch (layout.Tid()) {
 			case Xowd_db_layout.Const_all:		return Xowd_db_file_.Tid_wiki_solo;

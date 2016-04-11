@@ -28,7 +28,7 @@ import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtn
 import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.servers.tcp.*; import gplx.xowa.apps.servers.http.*;
 import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.addons.*;
+import gplx.xowa.addons.*; import gplx.xowa.addons.apps.specials.*;
 public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
@@ -91,6 +91,8 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public boolean						Xwiki_mgr__exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
 	public Xow_xwiki_itm_parser		Xwiki_mgr__itm_parser()		{return xwiki_mgr__itm_parser;}	private final    Xow_xwiki_itm_parser xwiki_mgr__itm_parser = new Xow_xwiki_itm_parser();
 	public Xoax_addon_mgr			Addon_mgr()					{return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
+	public Xoa_special_regy			Special_regy()				{return special_regy;} private final    Xoa_special_regy special_regy = new Xoa_special_regy();
+	public Xob_bldr					Bldr()						{return bldr;} private Xob_bldr bldr;
 
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
@@ -101,7 +103,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_gui_mgr			Gui_mgr() {return gui_mgr;} private Xoa_gui_mgr gui_mgr;
 	public Xou_user				User() {return user;}
 	public Xoue_user			Usere() {return user;} private Xoue_user user;
-	public Xob_bldr				Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xow_xtn_mgr			Xtn_mgr() {return xtn_mgr;} private Xow_xtn_mgr xtn_mgr;
 	public Xoapi_root			Api_root() {return api_root;} private Xoapi_root api_root;
 	public Gfo_usr_dlg			Usr_dlg() {return Xoa_app_.Usr_dlg();}

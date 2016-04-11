@@ -20,14 +20,14 @@ import gplx.core.btries.*; import gplx.core.intls.*; import gplx.core.envs.*; im
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.kwds.*;
 public class Xol_func_regy {
-	private final Xoa_lang_mgr lang_mgr; private final Xol_lang_itm lang;
-	private final Xol_func_itm finder = new Xol_func_itm();
-	private final Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs(), ci_trie = Btrie_slim_mgr.ci_u8();
+	private final    Xoa_lang_mgr lang_mgr; private final    Xol_lang_itm lang;
+	private final    Xol_func_itm finder = new Xol_func_itm();
+	private final    Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs(), ci_trie = Btrie_slim_mgr.ci_u8();
 	public Xol_func_regy(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang) {this.lang_mgr = lang_mgr; this.lang = lang;}
 	public void Evt_lang_changed(Xol_lang_itm lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		ci_trie.Clear(); cs_trie.Clear();
-		int[] kwd_ary = Pf_func_.Ary_get(!lang.Kwd_mgr__strx());
+		int[] kwd_ary = Pf_func_.Ary_get(null, !lang.Kwd_mgr__strx());
 		int len = kwd_ary.length;
 		for (int i = 0; i < len; i++) {
 			int id = kwd_ary[i];

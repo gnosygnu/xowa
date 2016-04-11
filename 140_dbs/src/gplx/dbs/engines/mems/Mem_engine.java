@@ -56,6 +56,7 @@ public class Mem_engine implements Db_engine {
 		if (tbl != null) tbl.rows.Clear();
 	}
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}	// TODO: implement unique index
+	public void					Meta_idx_delete(String idx) {}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)	{}
 	public Dbmeta_tbl_mgr		Meta_mgr() {return meta_mgr;} private final    Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 	public boolean					Meta_tbl_exists(String tbl)						{return tbl_hash.Has(tbl);}

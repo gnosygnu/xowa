@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
-public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
+public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 	public boolean Lang_is_abc() {return lang_is_abc;} private boolean lang_is_abc;
 	public boolean Code_is_raw() {return code_is_raw;} private boolean code_is_raw;
 	public boolean Output_midi() {return output_midi;} private boolean output_midi;
@@ -187,7 +187,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}
 	public static final byte Xatr_id_lang_is_abc = 0, Xatr_id_code_is_raw = 1, Xatr_id_output_midi = 2, Xatr_id_output_ogg = 3, Xatr_id_file_midi = 4, Xatr_id_file_ogg = 5;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("lang", Xatr_id_lang_is_abc)
 	.Add_str_byte("raw", Xatr_id_code_is_raw)
 	.Add_str_byte("midi", Xatr_id_output_midi)
@@ -195,7 +195,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner, Xoh_cmd_itm {
 	.Add_str_byte("over"+"ride_midi", Xatr_id_file_midi)
 	.Add_str_byte("over"+"ride_ogg", Xatr_id_file_ogg)
 	;
-	private static final byte[] 
+	private static final    byte[] 
 	  Lang_abc = Bry_.new_a7("ABC")
 	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {Byte_ascii.Nl}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
 	, Version_unknown = Bry_.new_a7("unknown"), Version_find_bgn = Bry_.new_a7("GNU LilyPond")

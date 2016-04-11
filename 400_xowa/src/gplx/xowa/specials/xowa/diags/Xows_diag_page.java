@@ -20,8 +20,9 @@ import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.apps.urls.*;
 public class Xows_diag_page implements Xows_page {
 	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__diag;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__diag;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		arg_hash.Load(url.Qargs_ary());
 		byte[] cmd_type_bry = arg_hash.Get_val_bry_or(Arg_type, null);					if (cmd_type_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no type: url=~{0}", url.Raw()); return;}
 		Byte_obj_val cmd_type_val = (Byte_obj_val)type_hash.Get_by_bry(cmd_type_bry);	if (cmd_type_val == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; bad type: url=~{0}", url.Raw()); return;}
@@ -35,11 +36,13 @@ public class Xows_diag_page implements Xows_page {
 		bfr.Add_str_a7("</pre>\n");
 		page.Data_raw_(bfr.To_bry_and_clear());
 	}
-	private static final byte[] Arg_type = Bry_.new_a7("type");
+	private static final    byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_file_check = 1, Type_fs_check = 2, Type_sql_dump = 3;
-	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("file.check"		, Type_file_check)
 	.Add_str_byte("fs.check"		, Type_fs_check)
 	.Add_str_byte("sql.dump"		, Type_sql_dump)
 	;
+
+	public Xows_page Special__clone() {return this;}
 }

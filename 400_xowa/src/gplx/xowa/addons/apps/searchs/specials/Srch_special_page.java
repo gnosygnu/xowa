@@ -33,8 +33,9 @@ public class Srch_special_page implements Xows_page, GfoInvkAble, GfoEvObj {
 		GfoEvMgr_.SubSame_many(search_api, this, Xoapi_search.Evt_multi_wikis_changed, Xoapi_search.Evt_multi_wikis_changed);
 	}
 	public GfoEvMgr					EvMgr()					{return ev_mgr;} private final    GfoEvMgr ev_mgr;
-	public Xows_special_meta		Special_meta()			{return Xows_special_meta_.Itm__search;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta		Special__meta()			{return Xows_special_meta_.Itm__search;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		if (search_domain_ary == null) Multi_wikis_changed();
 
 		// get args from urls while applying defaults from search_cfg
@@ -120,4 +121,6 @@ public class Srch_special_page implements Xows_page, GfoInvkAble, GfoEvObj {
 		}
 		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
 	}
+
+	public Xows_page Special__clone() {return this;}
 }

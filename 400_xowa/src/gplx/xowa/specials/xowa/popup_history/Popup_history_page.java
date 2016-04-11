@@ -19,8 +19,9 @@ package gplx.xowa.specials.xowa.popup_history; import gplx.*; import gplx.xowa.*
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.modules.popups.*;
 public class Popup_history_page implements Xows_page {
-	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__popup_history;}
-	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__popup_history;}
+	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
+		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		Xoae_page cur_page = wiki.Appe().Gui_mgr().Browser_win().Active_page(); if (cur_page == null) return;
 		Ordered_hash hash = cur_page.Popup_mgr().Itms();
 		int len = hash.Count();
@@ -38,4 +39,6 @@ public class Popup_history_page implements Xows_page {
 		return	ttl.Ns().Id_is_special()
 			&&	Bry_.Eq(ttl.Page_db(), Xows_special_meta_.Itm__popup_history.Key_bry());
 	}
+
+	public Xows_page Special__clone() {return this;}
 }

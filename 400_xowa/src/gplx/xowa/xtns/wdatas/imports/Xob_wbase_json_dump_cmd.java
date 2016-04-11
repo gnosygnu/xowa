@@ -24,7 +24,7 @@ public class Xob_wbase_json_dump_cmd implements Xob_cmd {
 		this.json_dump_parser = new Xob_wbase_json_dump_parser(bldr, wiki);
 	}
 	public String Cmd_key() {return Xob_cmd_keys.Key_wbase_json_dump;}
-	public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_run() {json_dump_parser.Parse(src_fil);}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

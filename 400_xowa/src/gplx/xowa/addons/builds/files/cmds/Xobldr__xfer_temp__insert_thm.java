@@ -77,5 +77,5 @@ public class Xobldr__xfer_temp__insert_thm extends Xob_cmd__base {
 	public static final String BLDR_CMD_KEY = "file.xfer_temp.thumb";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
 	public static final    Xob_cmd Prototype = new Xobldr__xfer_temp__insert_thm(null, null);
-	@Override public Xob_cmd Cmd_new(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__xfer_temp__insert_thm(bldr, wiki);}
+	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__xfer_temp__insert_thm(bldr, wiki);}
 }

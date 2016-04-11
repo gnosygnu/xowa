@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
+public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
 	private int xatr_lat = Xatr_meridian_null, xatr_long = Xatr_meridian_null;
@@ -209,7 +209,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 		return position_text.Fmt(tmp_bfr, rv);
 	}
 	private static final int Xatr_meridian_null = 361;
-	public static final byte[]
+	public static final    byte[]
 	  Tag_strong					= Bry_.new_a7("strong")
 	, Tag_a							= Bry_.new_a7("a")
 	, Tag_em						= Bry_.new_a7("em")
@@ -227,7 +227,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner {
 	, Txt_dot_space					= Bry_.new_a7(". ")
 	, Txt_mailto					= Bry_.new_a7("mailto:")
 	;
-	private static final byte[]
+	private static final    byte[]
 	  Bry__invk_bgn					= gplx.xowa.parsers.tmpls.Xop_curly_bgn_lxr.Hook
 	, Bry__invk_end					= gplx.xowa.parsers.tmpls.Xop_curly_end_lxr.Hook
 	;
