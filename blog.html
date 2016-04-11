@@ -18,6 +18,125 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Release:_v3.4.2.1_.282016-04-10_21:00_Sun.29">Release: v3.4.2.1 (2016-04-10 21:00 Sun)</span>
+    </h2>
+    <p>
+      The desktop app is a minor release. It has a fix for slow search database builds and some better Wikia support
+    </p>
+    <p>
+      The Android app is a major release. It has new pages for importing a wiki. It is the release candidate for XOWA beta on Google Play later this week.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Faster_search_database_build">(Desktop) Faster search database build</span>
+    </h3>
+    <p>
+      As per <a href="https://github.com/gnosygnu/xowa/issues/53" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/53</a> William was unable to build the new search databases on his machine. I tried it on an older dev machine, and found that it could take upwards of 5 hours to complete.
+    </p>
+    <p>
+      I optimized some of the SQL code and reduced it to about 2 hours. That said, note the following:
+    </p>
+    <ul>
+      <li>
+        <b>Fails on my 32-bit Windows XP dev machine</b>: I don't know why. The same build works on 2 Windows 7 64-bit machines, 1 openSUSE Linux 64-bit machine, and 1 Mac OS X 64-bit machine. It also works on the 32-bit JVM on the Windows 7 64-bit machine. However, the lone 32-bit Windows machine fails, and fails in a very strange way (it fails silently in release mode, and hangs in debug mode). I'm going to hope this is the non-dominant behavior, and reinvestigate at a later point in time.
+      </li>
+      <li>
+        <b>Really benefits from an SSD</b>: SQLite really does better with an SSD. I tried some tricks like changing PRAGMA synchronous to OFF, but this only shaves off a dozen or so minutes. In contrast, an SSD will easily knock off an hour if not more (from 2 hours to about 40 min)
+      </li>
+      <li>
+        <b>If you want the new search, downloading from archive.org is the easiest way</b>: There are other complexities with the search database rebuild (PageRank algorithm and the 10 GB pagelinks dump: See [[App/Search/Overview]]). As such, the easiest way is to download prebuilt copies from archive.org: 
+        <ul>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_New_English_Wikipedia_images_update_.282016-03.29">(Desktop) New English Wikipedia images update (2016-03)</span>
+    </h3>
+    <p>
+      I uploaded new consolidated versions of English Wikipedia images (2016-03) to archive.org. See <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a>.
+    </p>
+    <p>
+      In terms of usage, pick one of the following:
+    </p>
+    <ul>
+      <li>
+        <b>New user</b>: Download the new 2016-03 version. Previously you would have to download 2015-06 set, and then download separate updates for every month between 2015-07 and 2016-03. This was just too cumbersome.
+      </li>
+      <li>
+        <b>Existing user (2015-06)</b>: Ignore the 2016-03 version. You downloaded the 2015-06 set and presumably have been keeping up with the monthly updates. The 2016-03 set is the same as your set, except it is smaller (it no longer has deleted images). If you want to remove about 8 GB of deleted images, see [[Dashboard/Files/Deletion]]. Once you remove the deleted images, you will have a set that is exactly the same as the 2016-03 version.
+      </li>
+      <li>
+        <b>Existing user (2013-11 or something else)</b>: Download the 2016-03 version. You have an old set of XOWA image databases that I really can't support any longer (they have an extension of .sqlite3). I know downloading 80 GB is painful, but I'm not planning to change database formats again in the future.
+      </li>
+    </ul>
+    <p>
+      Finally, after I release XOWA Beta for Android, I'm going to work on a new update feature that will more gracefully handle monthly updates. In the meantime, please bear with the manual process.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Desktop.29_Minor_Wikia_parser_tags">(Desktop) Minor Wikia parser tags</span>
+    </h3>
+    <p>
+      A user requested some parser functionality for Wikia wikis (see <a href="https://en.wikipedia.org/wiki/User_talk:Gnosygnu">https://en.wikipedia.org/wiki/User_talk:Gnosygnu</a> . This release now supports the &lt;choose&gt; and &lt;tabber&gt; extensions.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_New_pages_for_.22Import_new_wiki.22_and_.22XOWA_Wikis.22">(Android) New pages for "Import new wiki" and "XOWA Wikis"</span>
+    </h3>
+    <p>
+      The last major piece for XOWA Beta was more usable screens for importing wikis and managing wikis. Both these pages are now part of the latest release:
+    </p>
+    <ul>
+      <li>
+        <b>XOWA Wikis</b>: The "XOWA" button in the left-nav now opens a page that lists all wikis. It also allows you to import a new one by pressing the "+" icon.
+      </li>
+      <li>
+        <b>Import new wikis</b>: The "Import" screen got a new design overhaul to make it much prettier and more intuitive. A lot of thanks goes to anonymous4 for helping with layout and feedback.
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28Android.29_Minor_fixes_for_crashes_.2F_obsoleted_items">(Android) Minor fixes for crashes / obsoleted items</span>
+    </h3>
+    <p>
+      There were two minor crashes that would occur when using the left-nav button. The main one was pressing "Random" when on the "Import" screen
+    </p>
+    <p>
+      I also removed two features: "Nearby" and "Log in to Wikipedia". Neither of these seem useful for offline XOWA, and I didn't want them taking up screen real-estate.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.4.3">Next release: v3.4.3</span>
+    </h3>
+    <p>
+      I'm planning on releasing XOWA Android Beta on Google Play mid-week. I'm sure that there will be spillover work that leads to another Android app update next week.
+    </p>
+    <p>
+      For wikis, the Wikimedia dump server is stalled again. I'm going to wait for it to resume before continuing with German Wikipedia.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
       <span class="mw-headline" id="Release:_v3.4.1.1_.282016-04-04_20:00_Sun.29">Release: v3.4.1.1 (2016-04-04 20:00 Sun)</span>
     </h2>
     <p>
