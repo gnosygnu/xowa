@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Command-line/Overview - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Command-line/Overview</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can import a wiki using a plain text file and a command-line.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Import_simple.wikipedia.org_through_the_command-line"><span class="tocnumber">1</span> <span class="toctext">Import simple.wikipedia.org through the command-line</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Import_a_different_wiki_by_editing_the_build_script"><span class="tocnumber">2</span> <span class="toctext">Import a different wiki by editing the build script</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Import_a_wiki_with_a_manual_download"><span class="tocnumber">3</span> <span class="toctext">Import a wiki with a manual download</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Download_the_wiki_dump"><span class="tocnumber">3.1</span> <span class="toctext">Download the wiki dump</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Specify_location_of_the_wiki_dump"><span class="tocnumber">3.2</span> <span class="toctext">Specify location of the wiki dump</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Script"><span class="tocnumber">4</span> <span class="toctext">Script</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Import_simple.wikipedia.org_through_the_command-line">Import simple.wikipedia.org through the command-line</span>
+    </h2>
+    <ul>
+      <li>
+        Open up a command-line. For example, on Windows, run <span class='bold'>cmd</span>
+      </li>
+      <li>
+        Run the following: <span class='console'>java -jar C:\000\200_dev\110_java\400_xowa\bin\ --cmd_file C:\xowa\xowa_build.gfs --app_mode cmd</span>
+      </li>
+      <li>
+        Wait about 10 minutes for the script to complete
+      </li>
+      <li>
+        Launch XOWA and enter <span class='url'>simple.wikipedia.org</span> in the URL bar
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Import_a_different_wiki_by_editing_the_build_script">Import a different wiki by editing the build script</span>
+    </h2>
+    <ul>
+      <li>
+        Open the following file in a <a href="/xowa/wiki/home/page/Dev/Environment/Text_editor.html" id="xolnki_2" title="Dev/Environment/Text editor">text editor</a>: <span class='path'>C:\xowa\xowa_build.gfs</span>. See Script below for the full text.
+      </li>
+      <li>
+        Replace all instances of <span class='bold'>simple.wikipedia.org</span> with the domain name. For example, for English Wikipedia, use <span class='bold'>en.wikipedia.org</span>
+      </li>
+      <li>
+        Run the command-line import again.
+      </li>
+      <li>
+        Launch XOWA and enter in the domain name in the the URL bar.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Import_a_wiki_with_a_manual_download">Import a wiki with a manual download</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Download_the_wiki_dump">Download the wiki dump</span>
+    </h3>
+    <ul>
+      <li>
+        Navigate to <a href="https://dumps.wikimedia.org/enwiki" rel="nofollow" class="external free">https://dumps.wikimedia.org/enwiki</a>
+      </li>
+      <li>
+        Click on the <b>latest</b> directory
+      </li>
+      <li>
+        Download the file just under "<b>Articles, templates, media/file descriptions, and primary meta-pages.</b>". It should read <b>enwiki-latest-pages-articles.xml.bz2</b>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        The download is 11+ GB and may take anywhere between 2 and 5 hours to complete.
+      </dd>
+      <dd>
+        If you also want talk pages, you should download the "<b>Recombine all pages, current versions only.</b>" version. It should read <b>enwiki-latest-pages-meta-current.xml.bz2</b>. Note that this dump is twice the size of the regular dump.
+      </dd>
+    </dl>
+    <h3>
+      <span class="mw-headline" id="Specify_location_of_the_wiki_dump">Specify location of the wiki dump</span>
+    </h3>
+    <ul>
+      <li>
+        In the build script, replace the following line:
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span class='code'>add ('simple.wikipedia.org', 'text.init') {src_bz2_fil = '/your_directory/simplewiki-20130103-pages-articles.xml.bz2';}</span>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="Script">Script</span>
+    </h2>
+<pre class='code'>
+// do not show a "Press enter to continue" at the end of the script
+app.bldr.pause_at_end = 'n';
+
+// run xowa.gfs
+app.scripts.run_file_by_type('xowa_cfg_app');
+
+// import wiki; for more info see [[Dev/Command-line]]
+app.bldr.cmds {
+  // delete all files in directory; note that subdirectories and file databases ("-file.xowa") will not be deleted
+  add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_all = 'y';}
+  
+  // download main dump file; contains all articles
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'pages-articles';}
+
+  // download categorylinks file; contains links from category to pages
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'categorylinks';}
+  
+  // download page_props file; contains information on hidden categories
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
+
+  // start wiki import
+  add     ('simple.wikipedia.org' , 'text.init');
+  
+  // import articles
+  add     ('simple.wikipedia.org' , 'text.page');
+  
+  // generate search data
+  add     ('simple.wikipedia.org' , 'text.search');
+
+  // generate main category data
+  add     ('simple.wikipedia.org' , 'text.cat.core');
+  
+  // import category links
+  add     ('simple.wikipedia.org' , 'text.cat.link');
+  
+  // apply hidden categories
+  add     ('simple.wikipedia.org' , 'text.cat.hidden');
+  
+  // end import
+  add     ('simple.wikipedia.org' , 'text.term');
+  
+  // import css into wiki
+  add     ('simple.wikipedia.org' , 'text.css');
+  
+  // cleanup temp files; delete xml and bz2
+  add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+}
+
+// run cmds
+app.bldr.run;
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Browser/TCP Server - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Browser/TCP Server</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can function as a basic TCP server. The primary purpose of the server is to support a Firefox addon. However, the functionality may be expanded in future releases.
+    </p>
+    <p>
+      Note that XOWA uses two ports for communications: an inbound port (defaults to 55000) and an outbound port (defaults to 55001). This may change in later implementations.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Test_setup">Test setup</span>
+    </h2>
+    <ul>
+      <li>
+        Run xowa in server mode
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>java -jar /xowa/xowa_linux.jar --root_dir /xowa/ --app_mode server --server_port_recv 55000 --server_port_send 55001</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Run xowa_tcp_console located in /xowa/bin/any/java/xowa/tcp_console/
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>java -jar /xowa/bin/any/java/xowa/tcp_console/xowa_tcp_console.jar 55000 55001 simple.wikipedia.org 1000</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Enter "Earth". The 1st 1000 characters of the wikitext for Earth will display on the console.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Server_notes">Server notes</span>
+    </h2>
+    <p>
+      There are three arguments related to server mode
+    </p>
+    <ul>
+      <li>
+        <code>--app_mode server</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This will launch XOWA in server mode. It will continue to run until either 
+        <dl>
+          <dd>
+            Control-C is pressed
+          </dd>
+          <dd>
+            It receives a command of "app.server.stop;"
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>--server_port_recv 55000</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies port 55000 as the port where XOWA will listen for messages. Clients will send messages to this port
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>--server_port_send 55001</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies port 55001 as the port where XOWA will send messages. Clients will listen for responses on this port
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="Console_notes">Console notes</span>
+    </h2>
+    <p>
+      There are four arguments related to the console app
+    </p>
+    <ul>
+      <li>
+        <code>55000</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies port 55000 as the port where the client will send its messages
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>55001</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies port 55001 as the port where the client will listen for responses
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>simple.wikipedia.org</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies the wiki that will be used for page lookup
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>1000</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This specifies the maximum number of characters to be returned
+      </dd>
+    </dl>
+    <p>
+      After starting, the console takes 4 possible inputs:
+    </p>
+    <ul>
+      <li>
+        &lt;any page name&gt;
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            the page name is sent to the XOWA server
+          </dd>
+          <dd>
+            the XOWA server will return the wikitext for that page
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>|server_exit</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        stops the server
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <code>|exit</code>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        stops the console
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Ctrl+C
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        stops the console
+      </dd>
+    </dl>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Search/Overview - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Search/Overview</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can search for a page by title
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Search_by_page_title"><span class="tocnumber">1</span> <span class="toctext">Search by page title</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Usage"><span class="tocnumber">2</span> <span class="toctext">Usage</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Syntax"><span class="tocnumber">3</span> <span class="toctext">Syntax</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#General"><span class="tocnumber">3.1</span> <span class="toctext">General</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Wildcard"><span class="tocnumber">3.2</span> <span class="toctext">Wildcard</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Not"><span class="tocnumber">3.3</span> <span class="toctext">Not</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Quote"><span class="tocnumber">3.4</span> <span class="toctext">Quote</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Sorting"><span class="tocnumber">4</span> <span class="toctext">Sorting</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Background_database_search"><span class="tocnumber">5</span> <span class="toctext">Background database search</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Database_update"><span class="tocnumber">6</span> <span class="toctext">Database update</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#Options"><span class="tocnumber">7</span> <span class="toctext">Options</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Search_by_page_title">Search by page title</span>
+    </h2>
+    <p>
+      XOWA can find a page by words in its title. For example, typing <code>earth</code> will pull up all titles with the word, including <span class='page-inc'>Earth</span> and <span class='page-inc'>History of Earth</span>. More complicated searches can be performed, such as <code>earth + (history, future) -middle</code>
+    </p>
+    <p>
+      XOWA currently cannot search by text within a page (full-text search). This will be added in a future version.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Usage">Usage</span>
+    </h2>
+    <p>
+      There are two ways to use search:
+    </p>
+    <ul>
+      <li>
+        Type into the address bar. A list of suggestions appear underneath.
+      </li>
+      <li>
+        Type into the suggest box. A list of suggestions appear underneath. Note that this box is near the top-right hand corner of the page between "View HTML" and the magnifying glass icon.
+      </li>
+      <li>
+        Type "?:some word" into the address bar. For example, enter <code>?:earth</code> in the address bar when in Simple Wikipedia
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Syntax">Syntax</span>
+    </h2>
+    <p>
+      The following syntax is supported for search text:
+    </p>
+    <table class='wikitable' style='background: white;'>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          symbol
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          example
+        </th>
+        <th>
+          finds
+        </th>
+        <th>
+          skips
+        </th>
+      </tr>
+      <tr>
+        <td>
+          single word
+        </td>
+        <td>
+          finds pages which start with this word<br>
+          (automatic wildcard at the end)
+        </td>
+        <td>
+        </td>
+        <td>
+          <code>earth</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth</b></span><br>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b>quake</span>
+          </p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          single word with space
+        </td>
+        <td>
+          finds pages which have this word exactly<br>
+           (no automatic wildcard)
+        </td>
+        <td>
+        </td>
+        <td>
+          <code>earth&nbsp;</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth</b></span><br>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span>
+          </p>
+        </td>
+        <td>
+          <span class='page-exc'>Earthquake</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          multiple words
+        </td>
+        <td>
+          finds pages which have all these words
+        </td>
+        <td>
+        </td>
+        <td>
+          <code>earth history</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b> <b>history</b></span>
+          </p>
+        </td>
+        <td>
+          <span class='page-exc'>Earth</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          wildcard
+        </td>
+        <td>
+          finds pages which start with these letters
+        </td>
+        <td class='symbol-col'>
+          <code>*</code>
+        </td>
+        <td>
+          <code>earth*</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth</b></span><br>
+            <span class='page-inc'>History of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b>quake</span>
+          </p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+          finds pages which end with these letters
+        </td>
+        <td class='symbol-col'>
+          <code>*</code>
+        </td>
+        <td>
+          <code>*earth</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth</b></span><br>
+            <span class='page-inc'>History of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b>quake</span><br>
+            <span class='page-inc'>H<b>earth</b></span>
+          </p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+          finds pages which start / end with these letters
+        </td>
+        <td class='symbol-col'>
+          <code>*</code>
+        </td>
+        <td>
+          <code>e*h</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth</b></span><br>
+            <span class='page-inc'>History of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b>quake</span><br>
+            <span class='page-inc'><b>E</b>nglis<b>h</b> language</span>
+          </p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          not
+        </td>
+        <td>
+          skips pages which have this word
+        </td>
+        <td class='symbol-col'>
+          <code>-</code>
+        </td>
+        <td>
+          <code>earth -history</code>
+        </td>
+        <td>
+          <span class='page-inc'><b>Earth</b></span>
+        </td>
+        <td>
+          <span class='page-exc'>History of Earth</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          or
+        </td>
+        <td>
+          includes pages which have this word
+        </td>
+        <td class='symbol-col'>
+          <code>,</code>
+        </td>
+        <td>
+          <code>earth, history</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b> <b>history</b></span><br>
+            <span class='page-inc'><b>History</b></span><br>
+            <span class='page-inc'><b>Earth</b></span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          and
+        </td>
+        <td>
+          requires pages to have this word
+        </td>
+        <td class='symbol-col'>
+          <code>+</code>
+        </td>
+        <td>
+          <code>earth + history</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Earth</b> <b>history</b></span>
+          </p>
+        </td>
+        <td>
+          <span class='page-exc'>History</span><br>
+           
+          <p>
+            <span class='page-exc'>Earth</span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          quote
+        </td>
+        <td>
+          requires pages to have this exact text
+        </td>
+        <td class='symbol-col'>
+          <code>"</code>
+        </td>
+        <td>
+          <code>"earth history"</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>Earth history</b></span>
+          </p>
+        </td>
+        <td>
+          <p>
+            <span class='page-exc'>History of Earth</span><br>
+            <span class='page-exc'>History</span><br>
+            <span class='page-exc'>Earth</span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          parentheses
+        </td>
+        <td>
+          allows complicated and / or grouping
+        </td>
+        <td class='symbol-col'>
+          <code>(</code> <code>)</code>
+        </td>
+        <td>
+          <code>earth + (history, future)</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>History</b> of <b>Earth</b></span><br>
+            <span class='page-inc'><b>Future</b> of <b>Earth</b></span>
+          </p>
+        </td>
+        <td>
+          <span class='page-exc'>Earth</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          escape
+        </td>
+        <td>
+          allows searching for any symbols above
+        </td>
+        <td class='symbol-col'>
+          <code>\</code>
+        </td>
+        <td>
+          <code>c\+\+</code>
+        </td>
+        <td>
+          <p>
+            <span class='page-inc'><b>C++</b></span>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <h3>
+      <span class="mw-headline" id="General">General</span>
+    </h3>
+    <ul>
+      <li>
+        Spaces are ignored 
+        <ul>
+          <li>
+            <code>earth, history</code> is the same as <code>earth , history</code> or <code>earth ,history</code>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Incorrect terms are auto-corrected as per the following: 
+        <ul>
+          <li>
+            <code>earth - history</code> is the same as <code>earth history</code>
+          </li>
+          <li>
+            <code>earth +</code> is the same as <code>earth</code>
+          </li>
+          <li>
+            <code>earth,</code> is the same as <code>earth</code>
+          </li>
+          <li>
+            <code>"earth</code> is the same as <code>"earth"</code>. Note that <code>"earth history</code> becomes <code>"earth" history</code>.
+          </li>
+          <li>
+            <code>(earth</code> is the same as <code>earth</code>
+          </li>
+          <li>
+            <code>c\</code> is the same as <code>c</code>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Wildcard">Wildcard</span>
+    </h3>
+    <ul>
+      <li>
+        Wildcards are automatically added to the last word. For example, <code>earth histor</code> is the same as <code>earth histor*</code>.
+      </li>
+      <li>
+        Wildcards will be slower than non-wildcarded versions. In terms of performance, they are ranked as following: 
+        <ul>
+          <li>
+            <b>end of word</b> 
+            <ul>
+              <li>
+                faster, especially when word is longer. EX: <code>abcdefghi*</code> vs <code>a*</code>
+              </li>
+              <li>
+                may be slow for certain multi-word queries. EX: <code>page meg*</code>
+              </li>
+              <li>
+                uses the <code>&gt;=</code> <code>&lt;</code> operators: <code>word_text &gt;= ? AND word_text &lt; ?</code>
+              </li>
+              <li>
+                uses an INDEX scan
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>beginning of word</b> / <b>middle of word</b> 
+            <ul>
+              <li>
+                may be fast if matching a common string. EX: <code>*a</code>, <code>*arth</code>
+              </li>
+              <li>
+                will be slow for queries that don't match results. EX: <code>ea*rh</code>
+              </li>
+              <li>
+                uses the LIKE operator: <code>word_text LIKE ? ESCAPE '|'</code>
+              </li>
+              <li>
+                uses a TABLE scan
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Not">Not</span>
+    </h3>
+    <ul>
+      <li>
+        <code>-</code> only works at the start of the word 
+        <ul>
+          <li>
+            <code>earth hi-story</code> is the same as <code>earth "hi-story"</code>. In other words, the <code>-</code> is literal
+          </li>
+        </ul>
+      </li>
+      <li>
+        <code>-</code> must be used with a word. Entering just <code>-QXZ</code> will return 0 results
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Quote">Quote</span>
+    </h3>
+    <ul>
+      <li>
+        Quotes can also be used for escaping. For example <code>"c++"</code> is the same as <code>c\+\+</code>
+      </li>
+      <li>
+        Quotes must be doubled up inside quotes. For example <code>"a""b"</code> means search for a word with <code>a"b</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Sorting">Sorting</span>
+    </h2>
+    <p>
+      By default, XOWA returns results sorted by "page length descending". In other words, the largest page would be the first in the list and the smallest page would be the last.
+    </p>
+    <p>
+      If a wiki is built with PageRank, or if a wiki is downloaded from archive.org, then the results will be sorted by "PageRank descending". See <a href="/xowa/wiki/home/page/Options/Search.html" id="xolnki_2" title="Options/Search" class="xowa-visited">Options/Search</a> for enabling PageRank.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Background_database_search">Background database search</span>
+    </h2>
+    <p>
+      By default, XOWA runs database searches in the background. This will return results to the screen quickly for complicated searches. For example, consider a search for <code>Earth*</code>:
+    </p>
+    <ul>
+      <li>
+        When the search runs in the background, the first result shows up in 2 seconds, and more results show up every second afterwards. The search will complete in 5 seconds.
+      </li>
+      <li>
+        When the search does not run in the background, all the results show up at the 5 second mark.
+      </li>
+    </ul>
+    <p>
+      While a search is running in the background, there will be a link called <code>Stop searching</code>. Clicking on the link will stop the background search, though the current results may be incomplete.
+    </p>
+    <p>
+      Finally, all search results are cached. The first time you search for <code>Earth*</code>, XOWA will search the database. Every time afterwards, it will pull the results up from memory. If you restart XOWA, it will search the database again.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Database_update">Database update</span>
+    </h2>
+    <p>
+      XOWA wikis created before v3.3.4.1 will need to be upgraded. XOWA will detect if an upgrade is needed, and show a message box for confirmation. The upgrade process will take a few minutes.
+    </p>
+    <p>
+      Note that new wikis created after v3.3.4.1 will automatically be in the new format.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Options">Options</span>
+    </h2>
+    <p>
+      There are 2 pages for configuring Search
+    </p>
+    <ul>
+      <li>
+        <b>Configure PageRank</b>: See <a href="/xowa/wiki/home/page/Options/Search.html" id="xolnki_3" title="Options/Search" class="xowa-visited">Options/Search</a>
+      </li>
+      <li>
+        <b>Configure Address bar autocomplete</b>: See <a href="/xowa/wiki/home/page/Options/Search_suggest.html" id="xolnki_4" title="Options/Search suggest" class="xowa-visited">Options/Search_suggest</a>
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

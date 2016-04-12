@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Options/Scribunto - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Options/Scribunto</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div>
+      <table>
+        <tr>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
+          </td>
+          <td class='optionsButton active'>
+            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="tabs">
+      <div>
+        <ul class='tab-links' style='margin-left:0px;'>
+          <li class=''>
+            <a href='/wiki/Options/Math'>Math</a>
+          </li>
+          <li class='active'>
+            <a href='/wiki/Options/Scribunto'>Scribunto</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Score'>Score</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Wikibase'>Wikibase</a>
+          </li>
+        </ul>
+      </div><br>
+      <div class='tab-content'>
+        <div id="toc" class="toc">
+          <div id="toctitle">
+            <h2>
+              Contents
+            </h2>
+          </div>
+          <ul>
+            <li class="toclevel-1 tocsection-1">
+              <a href="#General"><span class="tocnumber">1</span> <span class="toctext">General</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-2">
+              <a href="#Lua_options"><span class="tocnumber">2</span> <span class="toctext">Lua options</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-3">
+              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
+            </li>
+          </ul>
+        </div>
+        <div style='float:right; margin-right:10px; margin-top:5px;'>
+          <p>
+            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+          </p>
+        </div><br>
+         
+        <h2>
+          <span class="mw-headline" id="General">General</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.xtns.get('scribunto').enabled" type="checkbox" class='options_checkbox' id='xowa_prop_0' checked='checked'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Lua engine: <sup id="cite_ref-engine_type_1-0" class="reference"><a href="#cite_note-engine_type-1">[2]</a></sup>
+            </td>
+            <td>
+              <select xowa_prop="app.xtns.get('scribunto').engine_type" xowa_prop_list="app.xtns.get('scribunto').engine_type_list" class="options_textbox" size='2' id='xowa_prop_1'>
+                <option value='luaj' selected='selected'>
+                  luaj
+                </option>
+                <option value='lua'>
+                  lua
+                </option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Lua_options">Lua options</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Lua path: <sup id="cite_ref-lua_path_2-0" class="reference"><a href="#cite_note-lua_path-2">[3]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.fsys.apps.lua.cmd" class="options_textbox" style="width: 380px;" type='xowa_io' id='xowa_prop_2' value='C:\xowa\bin\windows_64\lua\lua5.1.exe'><button id='xowa_prop_2_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_2", "Please select a file.");'>...</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style='text-align:center;'>
+              <b>The options below are for developer usage only.</b>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Lua log enabled: <sup id="cite_ref-lua_log_enabled_3-0" class="reference"><a href="#cite_note-lua_log_enabled-3">[4]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.xtns.get('scribunto').lua_log_enabled" type="checkbox" class='options_checkbox' id='xowa_prop_3'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Lua timeout: <sup id="cite_ref-lua_timeout_4-0" class="reference"><a href="#cite_note-lua_timeout-4">[5]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.xtns.get('scribunto').lua_timeout" class="options_textbox" style="width: 120px;" id='xowa_prop_4' value='4000'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Lua timeout polling: <sup id="cite_ref-lua_timeout_polling_5-0" class="reference"><a href="#cite_note-lua_timeout_polling-5">[6]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.xtns.get('scribunto').lua_timeout_polling" class="options_textbox" style="width: 120px;" id='xowa_prop_5' value='1'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Lua timeout busy wait: <sup id="cite_ref-lua_timeout_busy_wait_6-0" class="reference"><a href="#cite_note-lua_timeout_busy_wait-6">[7]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.xtns.get('scribunto').lua_timeout_busy_wait" class="options_textbox" style="width: 120px;" id='xowa_prop_6' value='250'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Notes">Notes</span>
+        </h2>
+        <ol class="references">
+          <li id="cite_note-enabled-0">
+            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Handles {{#invoke:Module:Module_name|Function_name|Arguments}} (default is <code>checked</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>checked</b> to process #invoke statements</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>unchecked</b> to render #invoke as text only</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-engine_type-1">
+            <span class="mw-cite-backlink"><a href="#cite_ref-engine_type_1-0">^</a></span> <span class="reference-text">Select lua engine. See <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Scribunto/Overview.html#Engines" id="xolnki_2" title="App/Xtn/Mediawiki/Scribunto/Overview">App/Xtn/Mediawiki/Scribunto/Overview#Engines</a> (default is <code>luaj</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>luaj</b>: lua code will be processed through the <a href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text">luaj</a> jar at /bin/any/java/luaj/.</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>lua</b> : lua code will be processed through the <a href="http://lua.org/about" rel="nofollow" class="external text">lua</a> binary at /bin/os_name/lua/.</span>
+              </li>
+            </ul><span class="reference-text"><b>Note for Lua engine users:</b></span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>executable permissions</b>: Linux / Mac OS X users may need to grant execute permission to the Lua binary. To ensure proper setup, please do the following:</span>
+                <ul>
+                  <li>
+                    <span class="reference-text">Open <a href="/xowa/wiki/home/page/Diagnostics/Scribunto/All.html" id="xolnki_3" title="Diagnostics/Scribunto/All" class="xowa-visited">Diagnostics/Scribunto/All</a></span>
+                  </li>
+                  <li>
+                    <span class="reference-text">If the page fails, then see <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Scribunto.html#Permissions" id="xolnki_4" title="App/Xtn/Mediawiki/Scribunto">App/Xtn/Mediawiki/Scribunto#Permissions</a></span>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span class="reference-text"><b>NTFS partitions</b>: Linux users with NTFS partitions will need to run a command like the following:</span>
+              </li>
+            </ul>
+            <dl>
+              <dd>
+                <span class="reference-text"><code>sudo mount -t ntfs -o rw,auto,user,fmask=0022,dmask=0000 /dev/whatever /mnt/whatever</code></span>
+              </dd>
+              <dd>
+                <span class="reference-text">See <a href="http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition" rel="nofollow" class="external free">http://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition</a> (Thanks to Anselm)</span>
+              </dd>
+            </dl>
+          </li>
+          <li id="cite_note-lua_path-2">
+            <span class="mw-cite-backlink"><a href="#cite_ref-lua_path_2-0">^</a></span> <span class="reference-text">Path to Lua binary. Only applies to the <code>lua</code>engine.</span>
+          </li>
+          <li id="cite_note-lua_log_enabled-3">
+            <span class="mw-cite-backlink"><a href="#cite_ref-lua_log_enabled_3-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>unchecked</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>checked</b> to output Lua send / recv statements to a log file (/xowa/user/anonymous/app/tmp/log)</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>unchecked</b> to output nothing</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-lua_timeout-4">
+            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_4-0">^</a></span> <span class="reference-text"># of milliseconds before canceling Lua call (default is <code>4000</code>)</span>
+          </li>
+          <li id="cite_note-lua_timeout_polling-5">
+            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_polling_5-0">^</a></span> <span class="reference-text"># of milliseconds before checking for timeout. (default is <code>1</code>) For example, with a timeout of 4000:</span>
+            <dl>
+              <dd>
+                <span class="reference-text">A timeout polling of 1 will check roughly 4000 times before timing out.</span>
+              </dd>
+              <dd>
+                <span class="reference-text">A timeout polling of 1000 will check roughly 4 times before timing out.</span>
+              </dd>
+            </dl><span class="reference-text">This setting should be left at 1. It is meant to "tweak" certain outlier situations should they arise.</span>
+          </li>
+          <li id="cite_note-lua_timeout_busy_wait-6">
+            <span class="mw-cite-backlink"><a href="#cite_ref-lua_timeout_busy_wait_6-0">^</a></span> <span class="reference-text"># of milliseconds before entering timeout poll (default is <code>250</code>) This setting should be left at 250 (or higher). It is also meant to "tweak" certain outlier situations.<br>
+             Background:</span>
+            <ul>
+              <li>
+                <span class="reference-text">On Windows, a sleep call can take 15 ms. This could potentially cause each Lua call to take 15 ms.</span>
+              </li>
+              <li>
+                <span class="reference-text">Some pages / templates will call Lua hundreds of times. (For example: the Weather Box on <a href="http://en.wikipedia.org/wiki/Aruba" rel="nofollow" class="external free">http://en.wikipedia.org/wiki/Aruba</a> or the Citations on <a href="http://en.wikipedia.org/wiki/Earth" rel="nofollow" class="external free">http://en.wikipedia.org/wiki/Earth</a> )</span>
+              </li>
+              <li>
+                <span class="reference-text">The busy wait is a primitive way to limit a wait to 1 ms (or less) before entering a more expensive sleep</span>
+              </li>
+              <li>
+                <span class="reference-text">A higher timeout busy wait value is more performant, but the disadvantage is that the UI will be locked up for longer</span>
+              </li>
+            </ul>
+            <dl>
+              <dd>
+                <span class="reference-text">For example, a busy wait of 250 means that the code will loop for 250 milliseconds before entering a sleep.</span>
+              </dd>
+              <dd>
+                <span class="reference-text">For sub-second values, this freezing will be unnoticeable</span>
+              </dd>
+            </dl><span class="reference-text">For reference, here is the corresponding code</span>
+<pre style="overflow:auto;">
+<span class="reference-text">long time_bgn = System.currentTimeMillis();
+long time_woke = time_bgn;
+while (true) {
+  byte[] rv = stream_read.Data();
+  if (rv != null) return rv;
+  long time_now = System.currentTimeMillis();
+  if (time_now &gt; time_woke + server_timeout_busy_wait) {
+    if (time_now &gt; time_bgn + server_timeout) throw Xoa_xtn_scribunto.err_("lua_timeout: timeout={0} cmd={1}", server_timeout, String_.new_utf8_(cmd_last));
+    ThreadAdp_.Sleep(server_timeout_polling);
+    time_woke = System.currentTimeMillis();
+  }
+}
+</span>
+</pre>
+          </li>
+        </ol>
+      </div>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

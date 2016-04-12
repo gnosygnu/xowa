@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dashboard/Wiki maintenance - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dashboard/Wiki maintenance</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Instructions">Instructions</span>
+    </h2>
+    <ul>
+      <li>
+        Click <code>Update dump status</code> to download the latest dump status from the dump servers
+      </li>
+      <li>
+        Click <code>Import</code> to generate a script to import the latest wiki
+      </li>
+      <li>
+        Click <code>Category</code> to generate a script to upgrade the category
+      </li>
+      <li>
+        Click <code>Search</code> to generate a script to upgrade the category
+      </li>
+      <li>
+        Go to the <a href="#Script" id="xolnki_2">Script</a> section and click <code>Run script</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="XOWA_App">XOWA App</span>
+    </h2>
+    <p>
+      <a href="https://github.com/gnosygnu/xowa/releases/" rel="nofollow" class="external text">Check online for the latest version</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Wikis">Wikis</span>
+    </h2><button class='options_button' accesskey='u' id='xowa_update_dump_status' onclick='return update_dump_status();'>Update Dump Status</button><sup id="cite_ref-update_dump_status_0-0" class="reference"><a href="#cite_note-update_dump_status-0">[1]</a></sup> <a href="http://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external text">Dump server wiki status</a> 
+    <table class='wikitable sortable'>
+      <tr>
+        <th>
+          Domain
+        </th>
+        <th>
+          Update?<sup id="cite_ref-wiki_update_needed_1-0" class="reference"><a href="#cite_note-wiki_update_needed-1">[2]</a></sup>
+        </th>
+        <th>
+          Wiki<br>
+          date<sup id="cite_ref-wiki_dump_date_2-0" class="reference"><a href="#cite_note-wiki_dump_date-2">[3]</a></sup>
+        </th>
+        <th>
+          Latest<br>
+          date<sup id="cite_ref-wmf_dump_date_3-0" class="reference"><a href="#cite_note-wmf_dump_date-3">[4]</a></sup>
+        </th>
+        <th>
+          Latest<br>
+          status<sup id="cite_ref-wmf_dump_status_4-0" class="reference"><a href="#cite_note-wmf_dump_status-4">[5]</a></sup>
+        </th>
+        <th>
+          Type<sup id="cite_ref-wiki_type_5-0" class="reference"><a href="#cite_note-wiki_type-5">[6]</a></sup>
+        </th>
+        <th>
+          Ctg<sup id="cite_ref-category_version_6-0" class="reference"><a href="#cite_note-category_version-6">[7]</a></sup>
+        </th>
+        <th>
+          Search<sup id="cite_ref-search_version_7-0" class="reference"><a href="#cite_note-search_version-7">[8]</a></sup>
+        </th>
+        <th>
+          Import<sup id="cite_ref-import_wiki_8-0" class="reference"><a href="#cite_note-import_wiki-8">[9]</a></sup>
+        </th>
+        <th>
+          Category<sup id="cite_ref-upgrade_category_9-0" class="reference"><a href="#cite_note-upgrade_category-9">[10]</a></sup>
+        </th>
+        <th>
+          Search<sup id="cite_ref-upgrade_search_10-0" class="reference"><a href="#cite_note-upgrade_search-10">[11]</a></sup>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          commons.wikimedia.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("commons.wikimedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("commons.wikimedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("commons.wikimedia.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wikibooks.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-04-07
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump in progress
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wikibooks.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wikibooks.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wikibooks.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wikisource.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Partial dump
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wikisource.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wikisource.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wikisource.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wikivoyage.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2016-01-12
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump in progress
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wikivoyage.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wikivoyage.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wikivoyage.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          en.wiktionary.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2016-01-12
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Partial dump
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("en.wiktionary.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("en.wiktionary.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("en.wiktionary.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fr.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("fr.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("fr.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("fr.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          home
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2015-08-09
+        </td>
+        <td class='cell_center'>
+        </td>
+        <td class='cell_center'>
+          &lt;&lt;NULL&gt;&gt;
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("home")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("home")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("home")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          la.wikibooks.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2014-06-15
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("la.wikibooks.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("la.wikibooks.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("la.wikibooks.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          la.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2014-06-22
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("la.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("la.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("la.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          la.wikiquote.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2014-06-01
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("la.wikiquote.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("la.wikiquote.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("la.wikiquote.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          la.wikisource.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2014-06-15
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("la.wikisource.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("la.wikisource.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("la.wikisource.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          la.wiktionary.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2014-06-17
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("la.wiktionary.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("la.wiktionary.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("la.wiktionary.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          simple.wikibooks.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2015-10-02
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Partial dump
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple.wikibooks.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("simple.wikibooks.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("simple.wikibooks.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          simple.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-04-07
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump in progress
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("simple.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("simple.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          simple.wikiquote.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2016-01-30
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple.wikiquote.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("simple.wikiquote.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("simple.wikiquote.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          simple.wiktionary.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("simple.wiktionary.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("simple.wiktionary.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("simple.wiktionary.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          sonako.wikia.com
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-04-06
+        </td>
+        <td class='cell_center'>
+        </td>
+        <td class='cell_center'>
+          &lt;&lt;NULL&gt;&gt;
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("sonako.wikia.com")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("sonako.wikia.com")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("sonako.wikia.com")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          www.wikidata.org
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2016-03-06
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("www.wikidata.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("www.wikidata.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("www.wikidata.org")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          yugioh.wikia.com
+        </td>
+        <td class='cell_center'>
+          n
+        </td>
+        <td class='cell_center'>
+          2015-09-08
+        </td>
+        <td class='cell_center'>
+        </td>
+        <td class='cell_center'>
+          &lt;&lt;NULL&gt;&gt;
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("yugioh.wikia.com")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("yugioh.wikia.com")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("yugioh.wikia.com")'>Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          zh.wikipedia.org
+        </td>
+        <td class='cell_center'>
+          y
+        </td>
+        <td class='cell_center'>
+          2015-10-03
+        </td>
+        <td class='cell_center'>
+          2016-03-05
+        </td>
+        <td class='cell_center'>
+          Dump complete
+        </td>
+        <td class='cell_center'>
+          sqlite3
+        </td>
+        <td class='cell_center'>
+          v2
+        </td>
+        <td class='cell_center'>
+          v1
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_wiki_import' onclick='import_wiki("zh.wikipedia.org")'>Import</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_ctg_upgrade' onclick='upgrade_category("zh.wikipedia.org")'>Category</button>
+        </td>
+        <td class='cell_center'>
+          <button class='options_button' id='xowa_srh_upgrade' onclick='upgrade_search("zh.wikipedia.org")'>Search</button>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Script">Script</span>
+    </h2>
+    <p>
+      <button class='options_button' accesskey='r' id='xowa_run_script' onclick='return run_script();'>Run Script</button> 
+<textarea id='xowa_script_code' accesskey=',' cols='75' rows='20' class='options_textarea'>
+</textarea>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Usage_notes">Usage notes</span>
+    </h2>
+    <ol class="references">
+      <li id="cite_note-update_dump_status-0">
+        <span class="mw-cite-backlink"><a href="#cite_ref-update_dump_status_0-0">^</a></span> <span class="reference-text">Downloads latest dump status from <a href="http://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external free">http://dumps.wikimedia.org/backup-index.html</a> Note that the dump file is saved to /xowa/bin/any/html/xowa/maint/backup-index.html</span>
+      </li>
+      <li id="cite_note-wiki_update_needed-1">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wiki_update_needed_1-0">^</a></span> <span class="reference-text">y if wiki dump date is more than 1 day older than wmf_dump_date</span>
+      </li>
+      <li id="cite_note-wiki_dump_date-2">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wiki_dump_date_2-0">^</a></span> <span class="reference-text">Approximate date of current wiki. The dump xml files do not have a dump date in &lt;siteinfo&gt; so any date must be approximated. It can be either of the following</span>
+        <ul>
+          <li>
+            <span class="reference-text"><code>latest modified for any page</code>: The most recent "modified_on" date of all pages in a wiki. (Only available for sqlite wikis imported in v0.8.2.0+)</span>
+          </li>
+        </ul>
+        <dl>
+          <dd>
+            <span class="reference-text">Note that this value may be 1 day before the actual wmf dump date. For example, for dewikibooks, the WMF dump is 2013-08-14, but the latest "modified_on" is 2013-08-13.</span>
+          </dd>
+        </dl>
+        <ul>
+          <li>
+            <span class="reference-text"><code>file modified timestamp of first sqlite database</code> The modified timestamp for the first sqlite database (".000.")</span>
+          </li>
+        </ul>
+        <dl>
+          <dd>
+            <span class="reference-text">Note that this database's modified timestamp will change if any pages are ever updated. For example:</span>
+            <dl>
+              <dd>
+                <span class="reference-text">simplewiki is imported on 2013-08-01 02:03:04</span>
+              </dd>
+              <dd>
+                <span class="reference-text">File modified timestamp of simple.wikipedia.org.000.sqlite3 is "2013-08-01 02:03:04"</span>
+              </dd>
+              <dd>
+                <span class="reference-text">The Earth page in simplewiki is edited to correct an error on "2013-08-05". The file_modified now reads "2013-08-05", even though the import date was "2013-08-01 02:03:04"</span>
+              </dd>
+            </dl>
+          </dd>
+        </dl>
+      </li>
+      <li id="cite_note-wmf_dump_date-3">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wmf_dump_date_3-0">^</a></span> <span class="reference-text">Latest available dump according to the dump server.</span>
+      </li>
+      <li id="cite_note-wmf_dump_status-4">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wmf_dump_status_4-0">^</a></span> <span class="reference-text">Latest available dump status according to the dump server.</span>
+      </li>
+      <li id="cite_note-wiki_type-5">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wiki_type_5-0">^</a></span> <span class="reference-text">Data storage for wiki. Can be either xdat or sqlite.</span>
+      </li>
+      <li id="cite_note-category_version-6">
+        <span class="mw-cite-backlink"><a href="#cite_ref-category_version_6-0">^</a></span> <span class="reference-text">Current category level of wiki. Can be either 1 or 2. See <a href="/xowa/wiki/home/page/App/Category.html" id="xolnki_3" title="App/Category">App/Category</a> for more info</span>
+      </li>
+      <li id="cite_note-search_version-7">
+        <span class="mw-cite-backlink"><a href="#cite_ref-search_version_7-0">^</a></span> <span class="reference-text">Current search level of wiki. Can be either 1 or 2. See <a href="/xowa/wiki/home/page/App/Search.html" id="xolnki_4" title="App/Search" class="xowa-visited">App/Search</a> for more info</span>
+      </li>
+      <li id="cite_note-import_wiki-8">
+        <span class="mw-cite-backlink"><a href="#cite_ref-import_wiki_8-0">^</a></span> <span class="reference-text">Generate script to import latest wiki</span>
+      </li>
+      <li id="cite_note-upgrade_category-9">
+        <span class="mw-cite-backlink"><a href="#cite_ref-upgrade_category_9-0">^</a></span> <span class="reference-text">Generate script to upgrade category for wiki</span>
+      </li>
+      <li id="cite_note-upgrade_search-10">
+        <span class="mw-cite-backlink"><a href="#cite_ref-upgrade_search_10-0">^</a></span> <span class="reference-text">Generate script to upgrade title search for wiki</span>
+      </li>
+    </ol>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

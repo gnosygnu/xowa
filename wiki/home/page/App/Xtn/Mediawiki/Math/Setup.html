@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Mediawiki/Math/Setup - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Mediawiki/Math/Setup</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      Math formulas (of the form <code>&lt;math&gt;a^2 + b^2 = c^2&lt;/math&gt;</code>) will need LaT<sub>E</sub>X support.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#MathJax"><span class="tocnumber">1</span> <span class="toctext">MathJax</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#LaTEX"><span class="tocnumber">2</span> <span class="toctext">LaTEX</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#MathJax_compared_to_XOWA_LaTEX"><span class="tocnumber">3</span> <span class="toctext">MathJax compared to XOWA LaTEX</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#MathJax_developer_notes"><span class="tocnumber">4</span> <span class="toctext">MathJax developer notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Test"><span class="tocnumber">5</span> <span class="toctext">Test</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Notes"><span class="tocnumber">6</span> <span class="toctext">Notes</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="MathJax">MathJax</span>
+    </h2>
+    <p>
+      XOWA uses MathJax<sup id="cite_ref-mathjax_0-0" class="reference"><a href="#cite_note-mathjax-0">[1]</a></sup> as the default method for LaT<sub>E</sub>X support. No additional setup is required, and performance will often be quicker than a standard LaT<sub>E</sub>X application.
+    </p>
+    <h2>
+      <span class="mw-headline" id="LaTEX">LaT<sub>E</sub>X</span>
+    </h2>
+    <p>
+      XOWA also supports LaT<sub>E</sub>X for those users who prefer to work directly with the application.
+    </p>
+    <p>
+      If you wish to set up LaT<sub>E</sub>X, then please click one of these links:
+    </p>
+    <dl>
+      <dd>
+        <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Math/Latex/Windows.html" id="xolnki_2" title="App/Xtn/Mediawiki/Math/Latex/Windows">Set up math (Windows)</a>
+      </dd>
+      <dd>
+        <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Math/Latex/Linux.html" id="xolnki_3" title="App/Xtn/Mediawiki/Math/Latex/Linux" class="xowa-visited">Set up math (Linux)</a>
+      </dd>
+      <dd>
+        <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Math/Latex/Mac_OS_X.html" id="xolnki_4" title="App/Xtn/Mediawiki/Math/Latex/Mac OS X">Set up math (Mac OS X)</a>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="MathJax_compared_to_XOWA_LaTEX">MathJax compared to XOWA LaT<sub>E</sub>X</span>
+    </h2>
+    <p>
+      Here is a quick summary of the differences between MathJax vs XOWA LaT<sub>E</sub>X:
+    </p>
+    <ul>
+      <li>
+        MathJax is a javascript approach that will work cross-platform. LaT<sub>E</sub>X relies on platform specific binaries, which take up several hundred MBs.
+      </li>
+      <li>
+        MathJax will be faster in generating multiple images for the first time view. As a rough comparison, a page with 100 formulas will take MathJax &lt; 5 seconds, whereas LaT<sub>E</sub>X may take as long as a minute. (the latter is because XOWA generates a png for each formula)
+      </li>
+      <li>
+        MathJax has more dynamic rendering options, including "zoom" and different renderers (HTML-CSS, MathML, SVG). XOWA's LaT<sub>E</sub>X support is basic.
+      </li>
+      <li>
+        XOWA LaT<sub>E</sub>X will be faster in generating multiple images for successive views (second, third, fourth, etc). XOWA's LaT<sub>E</sub>X will cache the images on the hard drive and display them more quickly than Mathjax can generate them.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="MathJax_developer_notes">MathJax developer notes</span>
+    </h2>
+    <p>
+      For more info on how Mathjax was integrated into XOWA, please see <a href="/xowa/wiki/home/page/Help:Component/MathJax.html" id="xolnki_5" title="Help:Component/MathJax">Help:Component/MathJax</a>.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Test">Test</span>
+    </h2>
+    <ul>
+      <li>
+        Visit <a href="/xowa/wiki/home/page/Diagnostics/Math.html" id="xolnki_6" title="Diagnostics/Math" class="xowa-visited">Diagnostics/Math</a>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Notes">Notes</span>
+    </h2>
+    <ol class="references">
+      <li id="cite_note-mathjax-0">
+        <span class="mw-cite-backlink"><a href="#cite_ref-mathjax_0-0">^</a></span> <span class="reference-text">For more info on MathJax, please visit <a href="http://www.mathjax.org/" rel="nofollow" class="external free">http://www.mathjax.org/</a></span>
+      </li>
+    </ol>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

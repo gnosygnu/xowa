@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Basics/Files - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Basics/Files</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can display images for a page by either downloading them directly from the Wikimedia servers or retrieving them from XOWA image databases
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Images"><span class="tocnumber">2</span> <span class="toctext">Images</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Left-click"><span class="tocnumber">2.1</span> <span class="toctext">Left-click</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Right-click"><span class="tocnumber">2.2</span> <span class="toctext">Right-click</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#.5B.5BFile.5D.5D_page"><span class="tocnumber">3</span> <span class="toctext">[[File]] page</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Cache"><span class="tocnumber">4</span> <span class="toctext">Cache</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#ImageMagick_and_Inkscape"><span class="tocnumber">5</span> <span class="toctext">ImageMagick and Inkscape</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#File_databases:_v1.2C_v2a_and_v2b"><span class="tocnumber">6</span> <span class="toctext">File databases: v1, v2a and v2b</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      XOWA displays images for a page by using images from one of two sources: Wikimedia servers or XOWA image databases.
+    </p>
+    <p>
+      The process is as follows (assuming simple.wikipedia.org):
+    </p>
+    <ul>
+      <li>
+        XOWA sees a [[File]] link on a page.
+      </li>
+      <li>
+        If image dbs are available, XOWA checks them to see if the image exists. To download an image db, see <a href="/xowa/wiki/home/page/Dashboard/Image_databases.html" id="xolnki_2" title="Dashboard/Image databases" class="xowa-visited">Dashboard/Image_databases</a>
+      </li>
+      <li>
+        If image dbs are not available, or if the image is not in the image dbs, XOWA checks the Wikimedia servers
+      </li>
+      <li>
+        If an image is found, XOWA downloads a temporary version of the file to <code>C:\xowa\file\simple.wikipedia.org\...</code>
+      </li>
+      <li>
+        As of v2.5.4.1, XOWA also saves Wikimedia files to <code>C:\xowa\wiki\simple.wikipedia.org\simple.wikipedia.org-file-user.xowa</code>. This ensures that the file is still available even if the temporary version is deleted. Note that the cache on <a href="/xowa/wiki/home/page/Options/Files.html" id="xolnki_3" title="Options/Files" class="xowa-visited">Options/Files</a> will periodically delete temporary versions
+      </li>
+      <li>
+        The HTML is updated to use the temporary version of the file.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Images">Images</span>
+    </h2>
+    <p>
+      An image on a page can either be left-clicked or right-clicked
+    </p>
+    <h3>
+      <span class="mw-headline" id="Left-click">Left-click</span>
+    </h3>
+    <p>
+      If left-clicked, XOWA will open up a [[File]] page for the link
+    </p>
+    <ul>
+      <li>
+        If you have the disk space (20 GB), you should download commons.wikimedia.org. This will allow XOWA to generate an accurate version of the [[File]] page just like the online version. Note that most files reside in commons.wikimedia.org.
+      </li>
+      <li>
+        As of v2.5.4.1, XOWA still opens up a [[File]] page even if commons.wikimedia.org is not available. This allows the user to download a larger resolution of the file, or to download the original
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Right-click">Right-click</span>
+    </h3>
+    <p>
+      If right-clicked, XOWA offers a "Save File As" to allow the user to save the file to another location.
+    </p>
+    <p>
+      Note that you can also click "View HTML" and get the file location directly from the HTML (in the appropriate &lt;img&gt;'s src value)
+    </p>
+    <h2>
+      <span class="mw-headline" id=".5B.5BFile.5D.5D_page">[[File]] page</span>
+    </h2>
+    <p>
+      The [[File]] page offers three functions:
+    </p>
+    <ul>
+      <li>
+        Shows a larger view of the image (something closest to 800 pixels wide and 600 pixels high)
+      </li>
+      <li>
+        Download the original file by either clicking on the file, or by clicking "Original resolution"
+      </li>
+      <li>
+        Shows more metadata on the file. Note that commons.wikimedia.org must be set up.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Cache">Cache</span>
+    </h2>
+    <p>
+      The cache periodically goes through the temporary files and deletes them once they reach a certain threshold (currently 100 MB).
+    </p>
+    <ul>
+      <li>
+        You can configure the cache at <a href="/xowa/wiki/home/page/Options/Files.html" id="xolnki_4" title="Options/Files" class="xowa-visited">Options/Files</a>
+      </li>
+      <li>
+        You can view the cache in <code>C:\xowa\user\xowa.user.anonymous.sqlite3</code>. The table name is <code>file_cache</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="ImageMagick_and_Inkscape">ImageMagick and Inkscape</span>
+    </h2>
+    <p>
+      As of v2.5.4 ImageMagick and Inkscape are no longer needed for online image downloads.
+    </p>
+    <p>
+      ImageMagick and Inkscape are still used for some functions, such as building image databases. If you want to setup these programs, see the following links:
+    </p>
+    <ul>
+      <li>
+        <a href="/xowa/wiki/home/page/Dev/File/Setup/Windows.html" id="xolnki_5" title="Dev/File/Setup/Windows" class="xowa-visited">Set up images (Windows)</a>
+      </li>
+      <li>
+        <a href="/xowa/wiki/home/page/Dev/File/Setup/Linux.html" id="xolnki_6" title="Dev/File/Setup/Linux" class="xowa-visited">Set up images (Linux)</a>
+      </li>
+      <li>
+        <a href="/xowa/wiki/home/page/Dev/File/Setup/Mac_OS_X.html" id="xolnki_7" title="Dev/File/Setup/Mac OS X">Set up images (Mac OS X)</a>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="File_databases:_v1.2C_v2a_and_v2b">File databases: v1, v2a and v2b</span>
+    </h2>
+    <p>
+      XOWA has 3 different types of database sets for English Wikipedia. These are named v1, v2a and v2b. All 3 sets work with the latest version of XOWA, but they have notable differences. See the table below for details.
+    </p>
+    <p>
+      Currently, v2b is the recommended set. These files were uploaded in 2015-07 and are the current listed files at <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a> . v2b is the only set that will work on Android.
+    </p>
+    <p>
+      If you downloaded an image set before 2015-07, I strongly recommend that you download v2b. I'll continue to release monthly updates for v1 and v2a for a year or so, but they are obsolete.
+    </p>
+    <table class='wikitable'>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Release date
+        </th>
+        <th>
+          File extension
+        </th>
+        <th>
+          File size
+        </th>
+        <th>
+          Location
+        </th>
+        <th>
+          Works on Android
+        </th>
+      </tr>
+      <tr>
+        <td>
+          v1
+        </td>
+        <td>
+          2013-11 and 2014-07
+        </td>
+        <td>
+          .sqlite3
+        </td>
+        <td>
+          1 GB
+        </td>
+        <td>
+          C:\xowa\file\en.wikipedia.org
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          v2a
+        </td>
+        <td>
+          2015-04
+        </td>
+        <td>
+          .xowa
+        </td>
+        <td>
+          3 GB
+        </td>
+        <td>
+          C:\xowa\wiki\en.wikipedia.org
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          v2b
+        </td>
+        <td>
+          2015-06
+        </td>
+        <td>
+          .xowa
+        </td>
+        <td>
+          1.5 GB
+        </td>
+        <td>
+          C:\xowa\wiki\en.wikipedia.org
+        </td>
+        <td>
+          Yes
+        </td>
+      </tr>
+    </table>
+    <p>
+      <sup id="cite_ref-images_are_thumbnails_0-0" class="reference"><a href="#cite_note-images_are_thumbnails-0">[1]</a></sup>
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

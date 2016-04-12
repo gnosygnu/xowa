@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Diagnostics/Scribunto/All - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Scribunto/All</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <ul>
+      <li>
+        Note: This is not a comprehensive testing of all functions. (i.e.: there are some working functions that are not listed below)
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Basic">Basic</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/Basic.html" id="xolnki_2" title="Module:Diagnostics/Basic">Module:Diagnostics/Basic</a>
+      </li>
+      <li>
+        Tests basic Scribunto functionality
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Init; Load; executeFunctionChunk
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Basic|print}}
+        </td>
+        <td>
+          print
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          new line behavior
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Basic|new_line}}
+        </td>
+        <td>
+          a 
+          <p>
+            b
+          </p>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Lua_Common">Lua Common</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in 
+        <ul>
+          <li>
+            <a href="/xowa/wiki/home/page/Module:Diagnostics/LuaCommon.html" id="xolnki_3" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
+          </li>
+          <li>
+            <a href="/xowa/wiki/home/page/Template:Diagnostics/LuaCommon/getFrameTitle_parent.html" id="xolnki_4" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
+          </li>
+          <li>
+            <a href="/xowa/wiki/home/page/Template:Diagnostics/LuaCommon/preprocess_args_parent.html" id="xolnki_5" title="Template:Diagnostics/LuaCommon/preprocess args parent">Template:Diagnostics/LuaCommon/preprocess args parent</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Tests compatibility for <b>LuaCommon.php</b> and <b>mw.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          getExpandedArgument
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_number_2 |val_1|val_2}}
+        </td>
+        <td>
+          arg_1 is 'val_1'; arg_2 is 'val_2'
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getExpandedArgument_byOrdinal
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_by_ordinal |key_1=val_1|val_2}}
+        </td>
+        <td>
+          [1] is 'val_2'
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getAllExpandedArguments
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments |val_1|val_2|val_3}}
+        </td>
+        <td>
+          1:val_1;2:val_2;3:val_3;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getAllExpandedArgs;key_is_int
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments_int_key|1=a}}
+        </td>
+        <td>
+          a
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          preprocess;redundant_keys
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|preprocess_ifeq_as_yn |val_1|val_1|when_true_val=y1|when_false_val=n1|when_true_val=y2}}
+        </td>
+        <td>
+          y2
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          expandTemplate
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|expandTemplate|val_1|val_2}}
+        </td>
+        <td>
+          arg_1 is val_1; arg_2 is val_2
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          expandTemplate; PHP bool
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|expandTemplate_bool}}
+        </td>
+        <td>
+          bool_true is '1'; bool_false is 'missing'; 
+          <p>
+            <br>
+          </p>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          callParserFunction
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|callParserFunction|urlencode|abc}}
+        </td>
+        <td>
+          abc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isSubsting;false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|isSubsting}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isSubsting;true
+        </td>
+        <td>
+          {{safesubst:#invoke:Diagnostics/LuaCommon|isSubsting}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getFrameTitle_current
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|getFrameTitle_current}}
+        </td>
+        <td>
+          Module:Diagnostics/LuaCommon
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getFrameTitle_parent
+        </td>
+        <td>
+          {{Diagnostics/LuaCommon/getFrameTitle_parent}}
+        </td>
+        <td>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getFrameTitle_parent.upper
+        </td>
+        <td>
+          {{diagnostics/LuaCommon/getFrameTitle_parent}}
+        </td>
+        <td>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          newChildFrame.title
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|newChildFrame_titled}}
+        </td>
+        <td>
+          title:Title0; arg1:v1
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          newChildFrame.title
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|newChildFrame_untitled}}
+        </td>
+        <td>
+          title:Module:Diagnostics/LuaCommon; arg1:v1
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          preprocess_args;frame is current
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LuaCommon|preprocess_args_current|match|y|n}}
+        </td>
+        <td>
+          y
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          preprocess_args;frame is parent
+        </td>
+        <td>
+          {{Diagnostics/LuaCommon/preprocess_args_parent|match|y|n}}
+        </td>
+        <td>
+          y
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Ustring_Library">Ustring Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/UstringLibrary.html" id="xolnki_6" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          match (via trim)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|match| a b c |^%s*(.-)%s*$}}
+        </td>
+        <td>
+          a b c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          match error; only regx passed
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|match_error__regx_only}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;replacement is string
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_string|abcabc|[a]|A}}
+        </td>
+        <td>
+          AbcAbc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;replacement is table
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_table}}
+        </td>
+        <td>
+          AbCAbC
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;replacement is function (lua); basic
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_basic}}
+        </td>
+        <td>
+          AbcAbc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;replacement is function (lua); grouping
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_grouping}}
+        </td>
+        <td>
+          AbcAbc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;balanced group;<br>
+          (will fail on Java 1.6, but not on Java 1.7+)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_string |(a)|%b()|c}}
+        </td>
+        <td>
+          c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub;regex with %W;<br>
+          (will fail on Java 1.6, but not on Java 1.7+)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_string|[a]|[%W]|-}}
+        </td>
+        <td>
+          -a-
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gmatch_init and gmatch_callback (via gmatch)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gmatch|abcabc|a(b)}}
+        </td>
+        <td>
+          b,;b,;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Uri_Library">Uri Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/UriLibrary.html" id="xolnki_7" title="Module:Diagnostics/UriLibrary">Module:Diagnostics/UriLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>UriLibrary.php</b> and <b>mw.uri.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          anchorEncode
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UriLibrary|anchorEncode|[irc://a b c]}}
+        </td>
+        <td>
+          b_c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          localUrl
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UriLibrary|localUrl|a&amp;b! c}}
+        </td>
+        <td>
+          /wiki/A%26b!_c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fullUrl
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UriLibrary|fullUrl|a&amp;b! c}}
+        </td>
+        <td>
+          //home/wiki/A%26b!_c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          defaultUrl
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UriLibrary|defaultUrl}}
+        </td>
+        <td>
+          //home/wiki/Diagnostics/Scribunto/All
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Language_Library">Language Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/LanguageLibrary.html" id="xolnki_8" title="Module:Diagnostics/LanguageLibrary">Module:Diagnostics/LanguageLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>LanguageLibrary.php</b> and <b>mw.language.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          getContLangCode (by getContentLanguage)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|getContLangCode}}
+        </td>
+        <td>
+          en
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isKnownLanguageTag; true
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|en}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isKnownLanguageTag; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|xyz}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isValidCode; true
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isValidCode|en}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isValidCode; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isValidCode|a[b}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isValidBuiltInCode; true
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|en}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isValidBuiltInCode; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|a#b}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fetchLanguageName; code only
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageName|en|en}}
+        </td>
+        <td>
+          English
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fetchLanguageNames_get
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageNames_get|fr}}
+        </td>
+        <td>
+          French
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          new
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|new_lang_code|fr}}
+        </td>
+        <td>
+          fr
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          formatNum; en
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|formatNum|1234}}
+        </td>
+        <td>
+          1,234
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          parseFormatteNum; en
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|parseFormattedNum|1,234}}
+        </td>
+        <td>
+          1,234
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          formatDate via pcall; y;
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|2014-03-25}}
+        </td>
+        <td>
+          y
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          formatDate via pcall; n;
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|fail}}
+        </td>
+        <td>
+          n
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          convertGrammar
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|convertGrammar|fi|talo|elative}}
+        </td>
+        <td>
+          talosta
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isRTL; en
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isRTL|en}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isRTL; ar
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|isRTL|ar}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          format_durations_hms
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|format_durations_hms|123}}
+        </td>
+        <td>
+          2 minutes and 3 seconds
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          get_duration_intervals_hms
+        </td>
+        <td>
+          {{#invoke:Diagnostics/LanguageLibrary|get_duration_intervals_hms|123}}
+        </td>
+        <td>
+          ,2,3
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Site_Library">Site Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/SiteLibrary.html" id="xolnki_9" title="Module:Diagnostics/SiteLibrary">Module:Diagnostics/SiteLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>SiteLibrary.php</b> and <b>mw.site.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          siteName
+        </td>
+        <td>
+          {{#invoke:Diagnostics/SiteLibrary|siteName}}
+        </td>
+        <td>
+          home
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          ns_name
+        </td>
+        <td>
+          {{#invoke:Diagnostics/SiteLibrary|ns_associated|Help}}
+        </td>
+        <td>
+          Help talk
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Title_Library">Title Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/TitleLibrary.html" id="xolnki_10" title="Module:Diagnostics/TitleLibrary" class="xowa-visited">Module:Diagnostics/TitleLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>TitleLibrary.php</b> and <b>mw.title.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          newTitle
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleLibrary|newTitle|Main_Page}}
+        </td>
+        <td>
+          Main Page
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          newTitle; namespace arg
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleLibrary|newTitle|Contents|Help}}
+        </td>
+        <td>
+          Help:Contents
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          makeTitle
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleLibrary|makeTitle|Help|Contents|Overview|home}}
+        </td>
+        <td>
+          home:Help:Contents#Overview
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fullUrl
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleLibrary|fullUrl|Help|Contents}}
+        </td>
+        <td>
+          //home/wiki/Help:Contents
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getCurrentTitle
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleLibrary|getCurrentTitle}}
+        </td>
+        <td>
+          Diagnostics/Scribunto/All
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Text_Library">Text Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/TextLibrary.html" id="xolnki_11" title="Module:Diagnostics/TextLibrary">Module:Diagnostics/TextLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>TextLibrary.php</b> and <b>mw.text.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          init_text_for_wiki (via listToText)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TextLibrary|listToText|a|b|c}}
+        </td>
+        <td>
+          a, b and c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          unstrip
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TextLibrary|unstrip|abc}}
+        </td>
+        <td>
+          abc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          getEntityTable (via decode)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TextLibrary|decode|gt;}}
+        </td>
+        <td>
+          &gt;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="HTML_Library">HTML Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/HtmlLibrary.html" id="xolnki_12" title="Module:Diagnostics/HtmlLibrary">Module:Diagnostics/HtmlLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>mw.html.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          create
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HtmlLibrary|create_span}}
+        </td>
+        <td>
+          span
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Message_Library">Message Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/MessageLibrary.html" id="xolnki_13" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>MessageLibrary.php</b> and <b>mw.message.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          init_message_for_lang (via getDefaultLanguage)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|getDefaultLanguage}}
+        </td>
+        <td>
+          en
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          plain
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|plain|mainpage}}
+        </td>
+        <td>
+          Main Page
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          plain; params
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|plain|redirectedfrom|A}}
+        </td>
+        <td>
+          (Redirected from A)
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          exists; true
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|check|exists|sun}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          exists; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|check|exists|sunx}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isBlank; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|check|isBlank|sun}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          isDisabled; false
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|check|isDisabled|sun}}
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          inLanguage
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|plain_inLanguage|fr|sun}}
+        </td>
+        <td>
+          Dim.
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          rawMessage_toString
+        </td>
+        <td>
+          {{#invoke:Diagnostics/MessageLibrary|plain_rawMessage|a$1c|b}}
+        </td>
+        <td>
+          abc
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="Wikibase_Library">Wikibase Library</span>
+    </h2>
+    <ul>
+      <li>
+        Wikidata needs to be installed for these tests to work
+      </li>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/WikibaseLibrary.html" id="xolnki_14" title="Module:Diagnostics/WikibaseLibrary">Module:Diagnostics/WikibaseLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>WikibaseLibrary.php</b> and <b>mw.wikibase.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          getEntity
+        </td>
+        <td>
+          {{#invoke:Diagnostics/WikibaseLibrary|label|q2}}
+        </td>
+        <td>
+          Earth
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Luaj">Luaj</span>
+    </h2>
+    <ul>
+      <li>
+        Applies to the Luaj engine (as opposed to the Lua engine)
+      </li>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj">Module:Diagnostics/Luaj</a>
+      </li>
+      <li>
+        Tests changes to the luaj_xowa.jar
+      </li>
+      <li>
+        Further notes available at <a href="/xowa/wiki/home/page/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="2.0.3_errors_fixed_in_3.0">2.0.3 errors fixed in 3.0</span>
+    </h3>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          string.format fails for bad format; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format_2|%d:%02.f|3|4}}
+        </td>
+        <td>
+          3:04
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          os.time does not handle dates before 1970 on Windows; fails with false on Windows<br>
+          NOTE: always fails on Windows with the lua engine
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|os_time|1234|05|06}}
+        </td>
+        <td>
+          true
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          pairs.next fails when setting val to null; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|pairs_next}}
+        </td>
+        <td>
+          ok
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h3>
+      <span class="mw-headline" id="2.0.3_features_removed_from_3.0">2.0.3 features removed from 3.0</span>
+    </h3>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          string.gfind deprecated; should be alias to gmatch; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gfind|ab cd|%w+}}
+        </td>
+        <td>
+          ab
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          tonumber returns original value if value has decimal and base is 10; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|tonumber|12.34|10}}
+        </td>
+        <td>
+          12.34
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          math.log10 deprecated; now calls Math.log10; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|math_log10|100}}
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          math.mod deprecated; now aliased to math.fmod; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|math_mod|3|2}}
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.maxn deprecated; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_maxn}}
+        </td>
+        <td>
+          3
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.getn deprecated -- key_is_num; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_getn__key_is_num}}
+        </td>
+        <td>
+          3
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.getn deprecated -- key_is_str; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_getn__key_is_str}}
+        </td>
+        <td>
+          0
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          automatic arg variable in varargs function deprecated; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|varargs_arg}}
+        </td>
+        <td>
+          a
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h3>
+      <span class="mw-headline" id="3.0_defects">3.0 defects</span>
+    </h3>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          tonumber should trim all white space, not just \s; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|value_tonumber_trim}}
+        </td>
+        <td>
+          123
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.rep fails if negative repetition; return ""; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_rep_test|a|-1}}
+        </td>
+        <td>
+          pass:
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gsub fails with ArrayIndexOutOfBoundsException; check for OutOfBounds; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gsub|a#b|#|}}
+        </td>
+        <td>
+          ab
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gsub fails if src is empty string; exit early if empty; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gsub||%b&lt;&gt;|}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gmatch: non-match
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gmatch|a|[^,]*}}
+        </td>
+        <td>
+          a;;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gmatch: match
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gmatch|a,b|[^,]*}}
+        </td>
+        <td>
+          a;;b;;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gmatch: convert example; plain text
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gmatch_convert|a}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.gmatch: convert example; lnki
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gmatch_convert|[[a]]}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.format does not use format args for double; call java.lang.String.format; fails with 1.234
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format|%.1f|1.234}}
+        </td>
+        <td>
+          1.2
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.format fails for bad format; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format|(%0.1f%%)|1.234}}
+        </td>
+        <td>
+          (1.2%)
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.format fails if no number after "."; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format|%02.f|3}}
+        </td>
+        <td>
+          03
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.format fails for char; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format|%c|97}}
+        </td>
+        <td>
+          a
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          string.format fails for multibyte chars; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_format|âbç%f|1}}
+        </td>
+        <td>
+          âbç1.0
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          multibyte strings not supported; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_multibyte_2}}
+        </td>
+        <td>
+          â
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          multibyte strings not supported; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_multibyte_3}}
+        </td>
+        <td>
+          อา
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          multibyte chars in lua variables; used to return "?"
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|ustring_match_multibyte|𠀀}}
+        </td>
+        <td>
+          𠀀
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          handle backslash-escaped sequences like \239\191\185; used to return "11"
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|multibyte__backslash_escaped}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          surrogate pair chars not supported; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_surrogate_pair}}
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.concat fails if end is nil; convert nil to list len; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_concat|.|1||a|b|c}}
+        </td>
+        <td>
+          a.b.c
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          table.concat fails if sep is nil; convert nil to ""; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|table_concat_nil_sep}}
+        </td>
+        <td>
+          ab
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          os_date does not accept utc argument; fails with ""<br>
+          NOTE: test assumes EST / EDT; if ! is not applied, then date would be 1969-12-31
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|os_date|!*t|3600}}
+        </td>
+        <td>
+          1970-01-01
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          os_date non-utc check;
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|os_date|*t|0}}
+        </td>
+        <td>
+          1969-12-31
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          os_date format: %e; fails with ""; NOTE: test assumes time zone within 11 hours of UTC
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|os_date_format|%e|2014|07|15|1|2|3}}
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          os_date format: %R; fails with ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|os_date_format|%R|2014|07|15|13|2|3}}
+        </td>
+        <td>
+          13:02
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          match.balanced: fails with out of bounds;
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_match|a|%b()}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          match.balanced: fails with out of bounds; ^ at beginning
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_match|a|^(.) ?%b()}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          match.frontier:error
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|string_gmatch|a|%f[%a]b}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          match.frontier:bad-implementation; used to return ""
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|lua_match|bz|%f[%a][%a]z$}}
+        </td>
+        <td>
+          bz
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          tonumber hex fails if incomplete
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|tonumber_hex|0x}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          tonumber hex check
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|tonumber_hex|0xFF}}
+        </td>
+        <td>
+          255
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <span class="mw-headline" id="TitleBlacklist">TitleBlacklist</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="/xowa/wiki/home/page/Module:Diagnostics/TitleBlacklist.html" id="xolnki_17" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
+      </li>
+      <li>
+        Tests functionality for mw.ext.TitleBlacklist.lua
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          basic test; note that TitleBlacklists are not implemented in XOWA
+        </td>
+        <td>
+          {{#invoke:Diagnostics/TitleBlacklist|test|Title_to_check_for_blacklist}}
+        </td>
+        <td>
+          pass
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

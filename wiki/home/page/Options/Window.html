@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Options/Window - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Options/Window</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div>
+      <table>
+        <tr>
+          <td class='optionsButton active'>
+            <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/HTML'>HTML</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Content_apps'>External apps</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Search_suggest'>Modules</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Math'>Extensions</a>
+          </td>
+          <td class='optionsButton'>
+            <a class='optionsLink' href='/wiki/Options/Dev'>Misc</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="tabs">
+      <div>
+        <ul class='tab-links' style='margin-left:0px;'>
+          <li class='active'>
+            <a href='/wiki/Options/Window'>Window</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Language'>Language</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Tabs'>Tabs</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Startup'>Startup</a>
+          </li>
+        </ul>
+      </div><br>
+      <div class='tab-content'>
+        <div id="toc" class="toc">
+          <div id="toctitle">
+            <h2>
+              Contents
+            </h2>
+          </div>
+          <ul>
+            <li class="toclevel-1 tocsection-1">
+              <a href="#Font"><span class="tocnumber">1</span> <span class="toctext">Font</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-2">
+              <a href="#HTML_Box_"><span class="tocnumber">2</span> <span class="toctext">HTML Box</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-3">
+              <a href="#Status_Box"><span class="tocnumber">3</span> <span class="toctext">Status Box</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-4">
+              <a href="#Startup"><span class="tocnumber">4</span> <span class="toctext">Startup</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-5">
+              <a href="#Notes"><span class="tocnumber">5</span> <span class="toctext">Notes</span></a>
+            </li>
+          </ul>
+        </div>
+        <div style='float:right; margin-right:10px; margin-top:5px;'>
+          <p>
+            <a href="xowa-cmd:app.user.prefs.save();" accesskey='s'><img src='file:///C:/xowa/bin/any/xowa/file/app.window/save.png' width="16" height="16">Save</a>
+          </p>
+        </div><br>
+         
+        <h2>
+          <span class="mw-headline" id="Font">Font</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Font name: <sup id="cite_ref-font_name_0-0" class="reference"><a href="#cite_note-font_name-0">[1]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.gui.win_opts.font.name" class="options_textbox" style="width: 100px;" id='xowa_prop_0' value='Arial'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Font size: <sup id="cite_ref-font_size_1-0" class="reference"><a href="#cite_note-font_size-1">[2]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.gui.win_opts.font.size" class="options_textbox" style="width: 100px;" id='xowa_prop_1' value='8.0'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="HTML_Box_">HTML Box <sup id="cite_ref-html_box_2-0" class="reference"><a href="#cite_note-html_box-2">[3]</a></sup></span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Adjustment type: <sup id="cite_ref-html_box_adj_type_3-0" class="reference"><a href="#cite_note-html_box_adj_type-3">[4]</a></sup>
+            </td>
+            <td>
+              <select xowa_prop="app.user.cfg.layout.html_box_adj_type" xowa_prop_list="app.user.cfg.layout.html_box_adj_type_list" class="options_select" style="width: 100px;" size='3' id='xowa_prop_2'>
+                <option value='0' selected='selected'>
+                  none
+                </option>
+                <option value='1'>
+                  relative
+                </option>
+                <option value='2'>
+                  absolute
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Adjustment rect: <sup id="cite_ref-html_box_adj_rect_4-0" class="reference"><a href="#cite_note-html_box_adj_rect-4">[5]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.user.cfg.layout.html_box_adj_rect" class="options_textbox" style="width: 100px;" id='xowa_prop_3' value='0,0,0,0'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Status_Box">Status Box</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Show short urls: <sup id="cite_ref-show_short_urls_5-0" class="reference"><a href="#cite_note-show_short_urls-5">[6]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="xowa.api.gui.browser.prog.show_short_url" type="checkbox" class="options_checkbox" id='xowa_prop_4'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Startup">Startup</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Startup Rect Mode: <sup id="cite_ref-startup_rect_mode_6-0" class="reference"><a href="#cite_note-startup_rect_mode-6">[7]</a></sup>
+            </td>
+            <td>
+              <select xowa_prop="app.user.cfg.startup.window.mode" xowa_prop_list="app.user.cfg.startup.window.mode_list" class="options_select" style="width: 100px;" size='5' id='xowa_prop_5'>
+                <option value='previous' selected='selected'>
+                  previous
+                </option>
+                <option value='maximized'>
+                  maximized
+                </option>
+                <option value='absolute'>
+                  absolute
+                </option>
+                <option value='relative'>
+                  relative
+                </option>
+                <option value='default'>
+                  default
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Rect: <sup id="cite_ref-rect_7-0" class="reference"><a href="#cite_note-rect-7">[8]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.user.cfg.startup.window.rect" class="options_textbox" style="width: 100px;" id='xowa_prop_6' value='0,0,800,640'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Safe mode: <sup id="cite_ref-safe_mode_8-0" class="reference"><a href="#cite_note-safe_mode-8">[9]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="app.user.cfg.startup.window.safe_mode" type="checkbox" class="options_checkbox" id='xowa_prop_7' checked='checked'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Notes">Notes</span>
+        </h2>
+        <ol class="references">
+          <li id="cite_note-font_name-0">
+            <span class="mw-cite-backlink"><a href="#cite_ref-font_name_0-0">^</a></span> <span class="reference-text">Enter a font name (default is <code>Arial</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text">The font name must be installed on your machine, such as "Arial", "Courier New", "Liberation Sans"</span>
+              </li>
+              <li>
+                <span class="reference-text">The font name applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages</span>
+              </li>
+              <li>
+                <span class="reference-text">To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a></span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-font_size-1">
+            <span class="mw-cite-backlink"><a href="#cite_ref-font_size_1-0">^</a></span> <span class="reference-text">Enter a font size in points (default is <code>8</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text">The font size must be a numeric value (typically between 6 and 30)</span>
+              </li>
+              <li>
+                <span class="reference-text">The font size applies to the Address Bar, Tab Buttons, Search Bar, Find Box, and Progress Text messages</span>
+              </li>
+              <li>
+                <span class="reference-text">To change the fonts for the menu, you will need to do it through your Operating System. SWT does not support customizable fonts for menus: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=29899</a></span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-html_box-2">
+            <span class="mw-cite-backlink"><a href="#cite_ref-html_box_2-0">^</a></span> <span class="reference-text">Handles Windows displays with "Large fonts" or "Extra large fonts":</span>
+            <ul>
+              <li>
+                <span class="reference-text">For large fonts, use "relative" and a rect of "0,0,-2,-12"</span>
+              </li>
+              <li>
+                <span class="reference-text">For extra large fonts, use "relative" and a rect of "0,0,-6,-28"</span>
+              </li>
+              <li>
+                <span class="reference-text">For other unanticipated GUI layouts, experiment as necessary.</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-html_box_adj_type-3">
+            <span class="mw-cite-backlink"><a href="#cite_ref-html_box_adj_type_3-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>none</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>none</b>: no action</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>absolute</b>: absolute coordinates of html box rectangle</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>relative</b>: relative adjustment to html box rectangle</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-html_box_adj_rect-4">
+            <span class="mw-cite-backlink"><a href="#cite_ref-html_box_adj_rect_4-0">^</a></span> <span class="reference-text">Enter 'x,y,w,h' numbers separated by commas (default is )</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>none</b>: blank; EX: ''</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>absolute</b>: absolute rect of HTML box; EX: '0,40,1280,900' will place the html box at x=0,y=40,w=1280,h=900</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>relative</b>: relative adjustment to xowa calc; EX: '1,2,-3,-4' will add x=1,y=2,w=-3,h=-4</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-show_short_urls-5">
+            <span class="mw-cite-backlink"><a href="#cite_ref-show_short_urls_5-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>unchecked</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>checked</b>: Link shown at the bottom is wiki_name/name. EX: <code>simple.wikipedia.org/Main_Page</code></span>
+              </li>
+              <li>
+                <span class="reference-text"><b>unchecked</b>: Link shown at the bottom is wiki_name/wiki/name. EX: <code>simple.wikipedia.org/wiki/Main_Page</code></span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-startup_rect_mode-6">
+            <span class="mw-cite-backlink"><a href="#cite_ref-startup_rect_mode_6-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>previous</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>previous</b>: window starts at same rect as previous session (default)</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>maximized</b>: window always starts maximized</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>absolute</b>: window bounds are set to rect below</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>relative</b>: window starts at full screen, and then adjusted by rect below</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>default</b>: window starts at default rect (determined by operating system)</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-rect-7">
+            <span class="mw-cite-backlink"><a href="#cite_ref-rect_7-0">^</a></span> <span class="reference-text">Enter 'x,y,w,h' numbers separated by commas (default is <code>0,0,1280,1024</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>absolute</b>: absolute rect of window; EX: 0,0,1280,1024 means x=0 y=0 w=1280 h=1024</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>relative</b>: relative adjustment to full screen size; EX: 20,20,-20,-20 on an 1280,1024 screen will yield a rect of x=20 y=20 w=1260 h=1004</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>previous</b>, <b>maximized</b>, <b>default</b>: does nothing</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-safe_mode-8">
+            <span class="mw-cite-backlink"><a href="#cite_ref-safe_mode_8-0">^</a></span> <span class="reference-text">Choose one of the following (default is <code>checked</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>checked</b>: prevents window that would be located off screen; EX: x=-9999 or w=9999</span>
+              </li>
+              <li>
+                <span class="reference-text"><b>unchecked</b>: allows off-screen rect.<br>
+                </span>
+              </li>
+            </ul><span class="reference-text">NOTE: if you create an unviewable rect you will need to edit the options file</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

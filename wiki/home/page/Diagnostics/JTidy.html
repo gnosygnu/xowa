@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Diagnostics/JTidy - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/JTidy</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id=".3Cspan.3E_inside_.3Cpre.3E_should_not_be_line_wrapped">&lt;span&gt; inside &lt;pre&gt; should not be line wrapped</span>
+    </h2>
+    <p>
+      <code>fails if "1" is not on same line as "number one should be on same line"</code><br>
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>number one should be on same line</span>
+</pre>
+    </div>
+    <h2>
+      <span class="mw-headline" id="duplicate_.22style.22_text_in_anchor_caption_triggers_null_exception">duplicate "style" text in anchor caption triggers null exception</span>
+    </h2>
+    <p>
+      <code>fails if "style style should not fail during merge" is not visible</code><br>
+    </p>
+    <p>
+      <a href="/xowa/wiki/home/page/%22_style_style_should_not_fail_during_merge.html" id="xolnki_2" title="&quot; style style should not fail during merge">" style style should not fail during merge</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id=".3Chr.3E_should_show">&lt;hr&gt; should show</span>
+    </h2>
+    <p>
+      <code>fails if "text above hr" is not above &lt;hr/&gt; or "text below hr" is not below</code><br>
+    </p>
+    <p>
+      text above hr
+    </p>
+    <hr>
+    <p>
+      text below hr
+    </p> 
+    <h2>
+      <span class="mw-headline" id=".3C.2Fbr.2F.3E_should_not_show_.2F.3E">&lt;/br/&gt; should not show /&gt;</span>
+    </h2>
+    <p>
+      <code>fails if "before br" is on same line as "after br"</code><br>
+    </p>
+    <p>
+      before br<br>
+       after br
+    </p>
+    <h2>
+      <span class="mw-headline" id="show_surrogate_characters">show surrogate characters</span>
+    </h2>
+    <p>
+      <code>fails if foreign character is rendered as replacement character</code><br>
+    </p>
+    <p>
+      following should not show as unknown replacement character: 𡼾
+    </p>
+    <h2>
+      <span class="mw-headline" id="show_surrogate_characters_.28attribute_value.29_.28DATE:_2014-09-08.29">show surrogate characters (attribute value) (DATE: 2014-09-08)</span>
+    </h2>
+    <p>
+      <code>fails if link is red</code><br>
+    </p>
+    <p>
+      following link should be blue (not red) and clickable: <a href="/xowa/wiki/home/page/Diagnostics/JTidy/%F0%90%8E%8D%F0%90%8E%81_%F0%90%8E%9C.html" id="xolnki_3" title="Diagnostics/JTidy/𐎍𐎁 𐎜" class="xowa-visited">Diagnostics/JTidy/𐎍𐎁_𐎜</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="encloseBodyText_enabled_.28_https:.2F.2Fhr.wiktionary.org.2Fwiki.2Fbrod_.29_.28DATE:_2015-11-08.29">encloseBodyText enabled ( <a href="https://hr.wiktionary.org/wiki/brod" rel="nofollow" class="external free">https://hr.wiktionary.org/wiki/brod</a> ) (DATE: 2015-11-08)</span>
+    </h2>
+    <p>
+      <code>fails if "b1" is after a1</code><br>
+    </p>
+    <div class="floatleft">
+      a
+    </div>
+    <p>
+      a1
+    </p>
+    <div class="floatleft">
+      b
+    </div>
+    <p>
+      b1
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

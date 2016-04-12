@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Mediawiki/Math/Latex/Windows - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Mediawiki/Math/Latex/Windows</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      LaT<sub>E</sub>X is not natively available to Windows. Fortunately, <a href="http://miktex.org/" rel="nofollow" class="external text">MiKT<sub>E</sub>X</a> is open-source and distributed under <a href="http://miktex.org/copying" rel="nofollow" class="external text">Free Software Guidelines</a>.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Manual:_download">Manual: download</span>
+    </h2>
+    <ul>
+      <li>
+        Navigate to <a href="http://mirror.unl.edu/ctan/systems/win32/miktex/setup/" rel="nofollow" class="external free">http://mirror.unl.edu/ctan/systems/win32/miktex/setup/</a>
+      </li>
+      <li>
+        Download <b>miktex-portable.exe</b>
+      </li>
+      <li>
+        Launch the exe. Choose an installation directory of <b>C:\xowa\bin\windows\miktex\</b>. When you are done, you should have a file called <b>C:\xowa\bin\windows\miktex\miktex\bin\latex.exe</b>
+      </li>
+    </ul>
+    <p>
+      Note that you may receive some prompts along the way
+    </p>
+    <ul>
+      <li>
+        Paper size should be left to a4, else some images may wrap.
+      </li>
+      <li>
+        Under MiKTeX Settings, choose Refresh FNDB, else errors when generating other dvi
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Manual:_options">Manual: options</span>
+    </h2>
+    <p>
+      The math module uses MathJax by default. You can change it to LaT<sub>E</sub>X by navigating to <a href="/xowa/wiki/home/page/Options/Math.html" id="xolnki_2" title="Options/Math">Options/Math</a> and choosing LaTeX
+    </p>
+    <h2>
+      <span class="mw-headline" id="Testing">Testing</span>
+    </h2>
+    <ul>
+      <li>
+        Visit <a href="/xowa/wiki/home/page/Diagnostics/Math.html" id="xolnki_3" title="Diagnostics/Math" class="xowa-visited">Diagnostics/Math</a>
+      </li>
+      <li>
+        Wait a few seconds. You will get a MikTeX prompt to download another repository. Specifically:
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            <code>The package will be installed from: &lt;Random package repository&gt;</code>
+          </dd>
+          <dd>
+            <code>The package will be installed for: &lt;your_user_name&gt;</code>
+          </dd>
+        </dl>
+      </dd>
+      <dd>
+        Accept the defaults and press Install
+      </dd>
+      <dd>
+        This should be the only other download request when using MikTeX.
+      </dd>
+      <dd>
+        Note that the first request may take a full minute to process and there will be no progress indicator.
+      </dd>
+      <dd>
+        Note also that this message box may disrupt dynamic math updates. You will need to manually refresh the page in order to see the math image. This manual refresh is only needed for the first page; future pages will automatically update images dynamically.
+      </dd>
+    </dl>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

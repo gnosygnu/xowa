@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Mediawiki/Math/MathJax - XOWA</title>
+  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
+  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Mediawiki/Math/MathJax</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Credits">Credits</span>
+    </h2>
+    <p>
+      Considerable thanks goes to Schnark for proposing and implementing the <a href="http://www.mathjax.org/" rel="nofollow" class="external text">MathJax</a> integration.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Setup_notes">Setup notes</span>
+    </h2>
+    <p>
+      The following is a list of setup notes for MathJax:
+    </p>
+    <ul>
+      <li>
+        Get latest of Math Extension: <a href="http://www.mediawiki.org/wiki/Extension:Math" rel="nofollow" class="external free">http://www.mediawiki.org/wiki/Extension:Math</a> or <a href="https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Math.git;a=snapshot;h=refs/heads/master;sf=tgz" rel="nofollow" class="external free">https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Math.git;a=snapshot;h=refs/heads/master;sf=tgz</a>
+      </li>
+      <li>
+        Unzip to <b>/xowa/bin/any/javascript/xowa/mathjax_temp/</b>. When you are done you should have <b>/xowa/bin/any/javascript/xowa/mathjax_temp/Math.php</b> and many other files
+      </li>
+      <li>
+        Move <b>/xowa/bin/any/javascript/xowa/mathjax_temp/modules/Mathjax</b> to <b>/xowa/bin/any/javascript/xowa/mathjax/</b>. When you are done you will have a file called <b>/xowa/bin/any/javascript/xowa/mathjax/Mathjax.js</b> as well as many others. (We basically want to ignore everything except for the inner modules/Mathjax directory)
+      </li>
+      <li>
+        Edit the following file: <b>/xowa/bin/any/javascript/xowa/mathjax/extensions/wiki2jax.js</b>
+      </li>
+    </ul>
+    <p>
+      replace this:
+    </p>
+<pre>
+    $('span.tex, img.tex', element || document).each(function(i, span) {
+        that.ConvertMath(span);
+    });
+</pre>
+    <p>
+      with this:
+    </p>
+<pre>
+    var math = document.querySelectorAll('[id^="xowa_math_txt"]');
+    for (var i = 0; i &lt; math.length; i++) {
+       that.ConvertMath(math[i]);
+    }
+</pre>
+    <ul>
+      <li>
+        In the same file:
+      </li>
+    </ul>
+    <p>
+      replace this:
+    </p>
+<pre>
+tex = $(node).text().replace(/^\$/,"").replace(/\$$/,"");
+</pre>
+    <p>
+      with this:
+    </p>
+<pre>
+tex = node.textContent.replace(/^\$/,"").replace(/\$$/,""); //patched for XOWA
+</pre>
+    <ul>
+      <li>
+        Create a text file at <b>/xowa/bin/any/javascript/xowa/mathjax/xowa_mathjax.js</b> and add the following
+      </li>
+    </ul>
+<pre>
+  document.addEventListener( "DOMContentLoaded", function(){
+  var math = document.querySelectorAll('[id^="xowa_math_txt"]');
+  if (math.length) {
+  window.mathJax_Config = function () {
+    MathJax.Hub.Config({
+    root: window.xowa_root_dir + 'bin/any/javascript/xowa/mathjax',
+    config: ["TeX-AMS-texvc_HTML.js"],
+    "v1.0-compatible": false,
+    styles: { ".mtext": { "font-family": "sans-serif ! important", "font-size": "80%" } },
+    displayAlign: "left",
+    menuSettings: { zoom: "Click" },
+    "HTML-CSS": { imageFont: null, availableFonts: ["TeX"] }
+    });
+    MathJax.OutputJax.fontDir = window.xowa_root_dir + 'bin/any/javascript/xowa/mathjax/fonts';
+  }
+  
+    var config = 'mathJax_Config();',
+      script1 = document.createElement( 'script' ),
+      script2 = document.createElement( 'script' );
+    script1.setAttribute( 'type', 'text/x-mathjax-config' );
+    script1.text = config;
+    document.getElementsByTagName('head')[0].appendChild( script1 );
+  
+    script2.setAttribute( 'src', window.xowa_root_dir + 'bin/any/javascript/xowa/math/mathjax/MathJax.js?config=default' );
+    document.getElementsByTagName('head')[0].appendChild( script2 );  
+  }
+  }, false );
+</pre>
+    <ul>
+      <li>
+        Change "menuSettings:" in <b>/xowa/bin/javascript/xowa/math/mathjax/config/default.js</b> 
+        <ul>
+          <li>
+            add 'renderer: "SVG"'
+          </li>
+          <li>
+            change 'texHints: false'
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Example
+    </p>
+<pre>
+  menuSettings: {
+    renderer: "SVG", //  XOWA: manually specify SVG b/c HTML/CSS fails with "Can't Load Web Font TeX/Math/Italic"
+    texHints: false  //  XOWA: include class names for TeXAtom elements; changed from true to false, b/c it sometimes crashes XOWA
+  },
+</pre>
+    <dl>
+      <dd>
+        Note that xowa_mathjax.js will use the config since it calls '/MathJax.js?config=default'
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Change "blacker" from 10 to 1 b/c 1 looks closer to the HTML/CSS renderer and 10 looks too "blocky"
+      </li>
+    </ul>
+<pre>
+    blacker: 1, // XOWA: changed from 10 to 1 b/c 1 looks closer to the HTML/CSS renderer and 10 looks too "blocky"
+</pre>
+    <ul>
+      <li>
+        Embed this in the xowa.gfs file (XOWA does this through ~{math_mathjax_script})
+      </li>
+    </ul>
+<pre>
+   &lt;script src="file:///xowa/bin/any/javascript/xowa/mathjax/xowa_mathjax.js"&gt;&lt;/script&gt;
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
