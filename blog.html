@@ -18,6 +18,39 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class="mw-headline" id="Patch:_Missing_wikis_in_sidebar_.282016-04-13_21:34_Wed.29">Patch: Missing wikis in sidebar (2016-04-13 21:34 Wed)</span>
+    </h2>
+    <p>
+      This is a patch for a defect in v3.4.2.1.
+    </p>
+    <p>
+      v3.4.2.1 updated the CSS for the home wiki to fix a narrow search box. See <a href="https://github.com/gnosygnu/xowa/issues/54" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/54</a>
+    </p>
+    <p>
+      Unfortunately, this CSS also removed the wiki sidebar in the home wiki. I didn't notice this until yesterday.
+    </p>
+    <p>
+      The patch updates one file: /xowa/bin/any/xowa/cfg/app/xowa.gfs . Just replace your version with it.
+    </p>
+    <p>
+      You can also change this manually by finding the div_logo snippet and updating with the snippet below.
+    </p>
+    <p>
+      This will be part of the next release. I didn't want to release an entire new version for a one-line text-file fix.
+    </p>
+    <p>
+      Thanks.
+    </p>
+<pre>
+  div_logo =
+&lt;:["
+  &lt;div id='p-logo'&gt;
+    &lt;a style="background-image: url(~{portal_logo_url});" href="~{portal_nav_main_href}" class='xowa-hover-off'~{&lt;&gt;msgs.get_html_accesskey_and_title('p-logo');&lt;&gt;}&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="portal"&gt;&lt;h3&gt;&lt;/h3&gt;&lt;/div&gt;&lt;!-- empty heading else wikipedia css will hide next &lt;h3&gt; after &lt;div id='p-logo'&gt;; DATE:2016-04-12--&gt;
+"]:&gt;
+</pre>
+    <h2>
       <span class="mw-headline" id="Release:_v3.4.2.1_.282016-04-10_21:00_Sun.29">Release: v3.4.2.1 (2016-04-10 21:00 Sun)</span>
     </h2>
     <p>
