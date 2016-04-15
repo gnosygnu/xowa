@@ -1,22 +1,104 @@
 <!DOCTYPE html>
 <html dir="ltr">
 <head>
-  <title>XOWA: Blog</title>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <link rel="shortcut icon" href="xowa-logo.png" />
-  <link rel="stylesheet" href="xowa.css" type="text/css">
+  <title>Blog - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Blog: Items and events from XOWA's development</span></h1>
-  <div id="bodyContent">
-    <div id="siteSub">From XOWA: a free, open-source, offline wiki application</div>
+  <h1 id="firstHeading" class="firstHeading"><span>Blog</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
-
-<!-- page_bgn -->
+    
+    <div class='infobox plainlinks' style='width:70px;'>
+      <p>
+        <span style='font-size:15px;font-weight:bold;'>Blog links</span><br>
+        <br>
+        2016<br>
+      </p>
+      <ul>
+        <li>
+          <b>2016-04</b>
+        </li>
+        <li>
+          <a href="http://xowa.org/wiki/home/page/Blog/2016-03.html" id="xolnki_3" title="Blog/2016-03" class="xowa-visited">2016-03</a>
+        </li>
+        <li>
+          <a href="http://xowa.org/wiki/home/page/Blog/2016-02.html" id="xolnki_4" title="Blog/2016-02" class="xowa-visited">2016-02</a>
+        </li>
+        <li>
+          <a href="http://xowa.org/wiki/home/page/Blog/2016-01.html" id="xolnki_5" title="Blog/2016-01" class="xowa-visited">2016-01</a>
+        </li>
+      </ul>
+      <p>
+        <a href="http://xowa.org/wiki/home/page/Blog/Archives.html" id="xolnki_6" title="Blog/Archives">Archives</a>
+      </p>
+    </div>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Patch:_Missing_wikis_in_sidebar_.282016-04-13_21:34_Wed.29"><span class="tocnumber">1</span> <span class="toctext">Patch: Missing wikis in sidebar (2016-04-13 21:34 Wed)</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Release:_v3.4.2.1_.282016-04-10_21:00_Sun.29"><span class="tocnumber">2</span> <span class="toctext">Release: v3.4.2.1 (2016-04-10 21:00 Sun)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#.28Desktop.29_Faster_search_database_build"><span class="tocnumber">2.1</span> <span class="toctext">(Desktop) Faster search database build</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#.28Desktop.29_New_English_Wikipedia_images_update_.282016-03.29"><span class="tocnumber">2.2</span> <span class="toctext">(Desktop) New English Wikipedia images update (2016-03)</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#.28Desktop.29_Minor_Wikia_parser_tags"><span class="tocnumber">2.3</span> <span class="toctext">(Desktop) Minor Wikia parser tags</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#.28Android.29_New_pages_for_.22Import_new_wiki.22_and_.22XOWA_Wikis.22"><span class="tocnumber">2.4</span> <span class="toctext">(Android) New pages for "Import new wiki" and "XOWA Wikis"</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#.28Android.29_Minor_fixes_for_crashes_.2F_obsoleted_items"><span class="tocnumber">2.5</span> <span class="toctext">(Android) Minor fixes for crashes / obsoleted items</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Next_release:_v3.4.3"><span class="tocnumber">2.6</span> <span class="toctext">Next release: v3.4.3</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Release:_v3.4.1.1_.282016-04-04_20:00_Sun.29"><span class="tocnumber">3</span> <span class="toctext">Release: v3.4.1.1 (2016-04-04 20:00 Sun)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#.28Desktop.29_Fixes_for_old_.sqlite3_wikis"><span class="tocnumber">3.1</span> <span class="toctext">(Desktop) Fixes for old .sqlite3 wikis</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#.28Desktop.29_Fix_for_offline_import_of_large_wikis"><span class="tocnumber">3.2</span> <span class="toctext">(Desktop) Fix for offline import of large wikis</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#.28Desktop.29_Command_to_shrink_English_Wikipedia_images_by_8_GB"><span class="tocnumber">3.3</span> <span class="toctext">(Desktop) Command to shrink English Wikipedia images by 8 GB</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#.28Package.29_Release_of_French_Wikipedia_2016-03"><span class="tocnumber">3.4</span> <span class="toctext">(Package) Release of French Wikipedia 2016-03</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-14">
+              <a href="#Next_release:_v3.4.2"><span class="tocnumber">3.5</span> <span class="toctext">Next release: v3.4.2</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-15">
+          <a href="#Release:_NONE_.282016-04-03_22:00_Sun.29"><span class="tocnumber">4</span> <span class="toctext">Release: NONE (2016-04-03 22:00 Sun)</span></a>
+        </li>
+      </ul>
+    </div>
     <h2>
       <span class="mw-headline" id="Patch:_Missing_wikis_in_sidebar_.282016-04-13_21:34_Wed.29">Patch: Missing wikis in sidebar (2016-04-13 21:34 Wed)</span>
     </h2>
@@ -59,9 +141,6 @@
     <p>
       The Android app is a major release. It has new pages for importing a wiki. It is the release candidate for XOWA beta on Google Play later this week.
     </p>
-    <p>
-      <br>
-    </p>
     <h3>
       <span class="mw-headline" id=".28Desktop.29_Faster_search_database_build">(Desktop) Faster search database build</span>
     </h3>
@@ -79,7 +158,7 @@
         <b>Really benefits from an SSD</b>: SQLite really does better with an SSD. I tried some tricks like changing PRAGMA synchronous to OFF, but this only shaves off a dozen or so minutes. In contrast, an SSD will easily knock off an hour if not more (from 2 hours to about 40 min)
       </li>
       <li>
-        <b>If you want the new search, downloading from archive.org is the easiest way</b>: There are other complexities with the search database rebuild (PageRank algorithm and the 10 GB pagelinks dump: See [[App/Search/Overview]]). As such, the easiest way is to download prebuilt copies from archive.org: 
+        <b>If you want the new search, downloading from archive.org is the easiest way</b>: There are other complexities with the search database rebuild (PageRank algorithm and the 10 GB pagelinks dump: See <a href="http://xowa.org/wiki/home/page/App/Search/Overview.html" id="xolnki_7" title="App/Search/Overview" class="xowa-visited">App/Search/Overview</a>). As such, the easiest way is to download prebuilt copies from archive.org: 
         <ul>
           <li>
             <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z</a>
@@ -90,9 +169,6 @@
         </ul>
       </li>
     </ul>
-    <p>
-      <br>
-    </p>
     <h3>
       <span class="mw-headline" id=".28Desktop.29_New_English_Wikipedia_images_update_.282016-03.29">(Desktop) New English Wikipedia images update (2016-03)</span>
     </h3>
@@ -107,7 +183,7 @@
         <b>New user</b>: Download the new 2016-03 version. Previously you would have to download 2015-06 set, and then download separate updates for every month between 2015-07 and 2016-03. This was just too cumbersome.
       </li>
       <li>
-        <b>Existing user (2015-06)</b>: Ignore the 2016-03 version. You downloaded the 2015-06 set and presumably have been keeping up with the monthly updates. The 2016-03 set is the same as your set, except it is smaller (it no longer has deleted images). If you want to remove about 8 GB of deleted images, see [[Dashboard/Files/Deletion]]. Once you remove the deleted images, you will have a set that is exactly the same as the 2016-03 version.
+        <b>Existing user (2015-06)</b>: Ignore the 2016-03 version. You downloaded the 2015-06 set and presumably have been keeping up with the monthly updates. The 2016-03 set is the same as your set, except it is smaller (it no longer has deleted images). If you want to remove about 8 GB of deleted images, see <a href="http://xowa.org/wiki/home/page/Dashboard/Files/Deletion.html" id="xolnki_8" title="Dashboard/Files/Deletion" class="xowa-visited">Dashboard/Files/Deletion</a>. Once you remove the deleted images, you will have a set that is exactly the same as the 2016-03 version.
       </li>
       <li>
         <b>Existing user (2013-11 or something else)</b>: Download the 2016-03 version. You have an old set of XOWA image databases that I really can't support any longer (they have an extension of .sqlite3). I know downloading 80 GB is painful, but I'm not planning to change database formats again in the future.
@@ -116,17 +192,11 @@
     <p>
       Finally, after I release XOWA Beta for Android, I'm going to work on a new update feature that will more gracefully handle monthly updates. In the meantime, please bear with the manual process.
     </p>
-    <p>
-      <br>
-    </p>
     <h3>
       <span class="mw-headline" id=".28Desktop.29_Minor_Wikia_parser_tags">(Desktop) Minor Wikia parser tags</span>
     </h3>
     <p>
-      A user requested some parser functionality for Wikia wikis (see <a href="https://en.wikipedia.org/wiki/User_talk:Gnosygnu">https://en.wikipedia.org/wiki/User_talk:Gnosygnu</a> . This release now supports the &lt;choose&gt; and &lt;tabber&gt; extensions.
-    </p>
-    <p>
-      <br>
+      A user requested some parser functionality for Wikia wikis (see <a href="https://en.wikipedia.org/wiki/User_talk:Gnosygnu" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/User_talk:Gnosygnu</a> . This release now supports the &lt;choose&gt; and &lt;tabber&gt; extensions.
     </p>
     <h3>
       <span class="mw-headline" id=".28Android.29_New_pages_for_.22Import_new_wiki.22_and_.22XOWA_Wikis.22">(Android) New pages for "Import new wiki" and "XOWA Wikis"</span>
@@ -142,9 +212,6 @@
         <b>Import new wikis</b>: The "Import" screen got a new design overhaul to make it much prettier and more intuitive. A lot of thanks goes to anonymous4 for helping with layout and feedback.
       </li>
     </ul>
-    <p>
-      <br>
-    </p>
     <h3>
       <span class="mw-headline" id=".28Android.29_Minor_fixes_for_crashes_.2F_obsoleted_items">(Android) Minor fixes for crashes / obsoleted items</span>
     </h3>
@@ -153,9 +220,6 @@
     </p>
     <p>
       I also removed two features: "Nearby" and "Log in to Wikipedia". Neither of these seem useful for offline XOWA, and I didn't want them taking up screen real-estate.
-    </p>
-    <p>
-      <br>
     </p>
     <h3>
       <span class="mw-headline" id="Next_release:_v3.4.3">Next release: v3.4.3</span>
@@ -211,7 +275,7 @@
       The total size of English Wikipedia is about 90 GB. 8 GB is from old images: images removed from articles during the day-to-day editing churn.
     </p>
     <p>
-      If you have English Wikipedia and have been following along with the updates, go to [[Dashboard/Files/Deletion]] and follow the instructions therein.
+      If you have English Wikipedia and have been following along with the updates, go to <a href="http://xowa.org/wiki/home/page/Dashboard/Files/Deletion.html" id="xolnki_9" title="Dashboard/Files/Deletion" class="xowa-visited">Dashboard/Files/Deletion</a> and follow the instructions therein.
     </p>
     <h3>
       <span class="mw-headline" id=".28Package.29_Release_of_French_Wikipedia_2016-03">(Package) Release of French Wikipedia 2016-03</span>
@@ -234,1252 +298,10 @@
     <p>
       Sory all. I'm postponing the release for tomorrow night. I'll post again tomorrow evening. Thanks.
     </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.3.4.1_.282016-03-27_19:30_Sun.29">Release: v3.3.4.1 (2016-03-27 19:30 Sun)</span>
-    </h2>
-    <p>
-      The desktop app is a major release. It has a new autocomplete address bar, a new search system as well as minor parser fixes.
-    </p>
-    <p>
-      The Android app is a major release. It has more updates for the new search system.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Desktop.29_New_autocomplete_address_bar">(Desktop) New autocomplete address bar</span>
-    </h3>
-    <p>
-      The address bar now supports autocompletion. For example, open up English Wikipedia, and start typing <code>earth</code>. The autocomplete is very fast and supports a lot of advanced functionality. For example you can do a search like <code>earth + (history, future) -middle</code> directly in the address bar. See [[App/Search/Overview]] as well as [[Options/Search suggest]].
-    </p>
-    <p>
-      Unfortunately, the autocomplete uses the new search system, so old wikis need to upgrade the search databases. You can upgrade by any of the following:
-    </p>
-    <ul>
-      <li>
-        Use the search suggest box 
-        <ul>
-          <li>
-            Open any page in the wiki
-          </li>
-          <li>
-            Click the search suggest box (the box between "View HTML" and the magnifying glass)
-          </li>
-          <li>
-            Start typing. XOWA will prompt you to upgrade the wiki.
-          </li>
-        </ul>
-      </li>
-      <li>
-        Use the [[Dashboard/Wiki_maintenance]] page 
-        <ul>
-          <li>
-            Go to [[Dashboard/Wiki_maintenance]]
-          </li>
-          <li>
-            Find your wiki in the list
-          </li>
-          <li>
-            Click the <code>Search</code> button in the same row
-          </li>
-          <li>
-            Click <code>Run Script</code>
-          </li>
-        </ul>
-      </li>
-      <li>
-        Download a copy (only for users with 2016-03 English Wikipedia) 
-        <ul>
-          <li>
-            Download <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_core.7z</a>
-          </li>
-          <li>
-            Download <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_wiki_xtn_search.7z</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id=".28Desktop.29_New_search_system">(Desktop) New search system</span>
-    </h3>
-    <p>
-      I completely rewrote the search system over the past several weeks. Most of these changes were meant for Android to handle fast searches with a slower processor. This new engine is now part of the desktop app, so desktop users get the same benefits as well. To summarize, here are the main benefits:
-    </p>
-    <ul>
-      <li>
-        <b>Faster searches</b>: Searches are now dramatically faster for single-words (<code>earth</code>), wildcards (<code>e*</code>), multiple words (<code>earth history</code>) and multiple wildcards (<code>earth* history*</code>)
-      </li>
-      <li>
-        <b>PageRank score</b>: Searches now use <a href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> to order results. These provide better quality results than using page length. The old system would show "List of" pages at the top of the page
-      </li>
-      <li>
-        <b>Punctuation friendly</b>: Searches can be done for <code>U.S.A.</code> or <code>USA</code>; <code>dont't</code> or <code>dont</code>; <code>half-life</code> or <code>half</code> or <code>life</code>.
-      </li>
-      <li>
-        <b>Boolean searches</b>: Searches can use boolean operators like <code>-</code>, <code>,</code>, <code>+</code>, <code>()</code>, and <code>*</code>. In addition, there's even an escape operator: <code>\</code>. See [[App/Search/Overview]]
-      </li>
-      <li>
-        <b>Home wiki</b>: The home wiki is now searchable. Try entering in <code>search</code> or any other word
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id=".28Desktop.29_Minor_fixes_for_Category_pages_and_taxonomy_url_links">(Desktop) Minor fixes for Category pages and taxonomy url links</span>
-    </h3>
-    <p>
-      There are basically two fixes:
-    </p>
-    <ul>
-      <li>
-        <b>Category pages had script error</b>: 2016-03 English Wikipedia Category pages would have script errors in the top right corner of the page. For example, <a href="https://en.wikipedia.org/wiki/Category:Articles_lacking_sources_from_February_2009">https://en.wikipedia.org/wiki/Category:Articles_lacking_sources_from_February_2009</a>
-      </li>
-      <li>
-        <b>Taxonomy boxes would have non-clickable links</b>: 2016-03 English Wikipedia pages on biological species have a taxonomy box at the bottom of the page. It has external links which should be clickable, but were not. For example, <a href="https://en.wikipedia.org/wiki/Golden_eagle">https://en.wikipedia.org/wiki/Golden_eagle</a>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Improvements_for_search_system">(Android) Improvements for search system</span>
-    </h3>
-    <p>
-      The Android search system received more performance and accuracy improvements. Also, the Android version supports boolean searches as well. If you're using the new search system, you should definitely update your copy:
-    </p>
-    <ul>
-      <li>
-        Download the new apk: <a href="https://github.com/gnosygnu/xowa/releases" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases</a>
-      </li>
-      <li>
-        Download the new wiki databases: <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_html_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_html_core.7z</a>
-      </li>
-    </ul>
-    <p>
-      If you haven't tried XOWA on Android, please give it a try. See <a href="https://github.com/gnosygnu/xowa/wiki/Android" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/wiki/Android</a>.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.4.1">Next release: v3.4.1</span>
-    </h3>
-    <p>
-      I've spent a lot of time on the search system for the past several weeks. I'm going to take a break and work on the following items for next week's release:
-    </p>
-    <ul>
-      <li>
-        <b>Shrink the image databases for English Wikipedia</b> : English Wikipedia is getting close to 128 GB but there are about 25 GB of unused image files. I'm planning on adding a feature that allows users to delete these old images. I'll also upload a brand new set.
-      </li>
-      <li>
-        <b>Resume image dumps</b>: I'm going to upload a new French Wikipedia.
-      </li>
-      <li>
-        <b>Make minor Android changes</b>: There are still some minor changes I need to make for the upcoming Google Play release in April.
-      </li>
-    </ul>
-
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-03-20_22:00_Sun.29">Release: NONE (2016-03-20 22:00 Sun)</span>
-    </h2>
-    <p>
-      I'm postponing this week's release. I'm almost done with the desktop integration of the new search system, but I still want to make a few more changes and feel that a few more days would help.
-    </p>
-    <p>
-      I did upload new updates for English Wikipedia this week. See <a href="https://archive.org/download/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest</a> and the 2016-03-05 files. I'll update the links later to point to them.
-    </p>
-    <p>
-      I'll try to upload a new Android release later this week. This will mostly have small tweaks for the new search system.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.3.2.1_.28Andriod_only.29_.282016-03-13_22:00_Sun.29">Release: v3.3.2.1 (Andriod only) (2016-03-13 22:00 Sun)</span>
-    </h2>
-    <p>
-      Again, there is no new release for the desktop app. I will make one next week, and resume wiki generation then.
-    </p>
-    <p>
-      The Android app is a major release. The major change is an improved search system. To get it, do the following:
-    </p>
-    <ul>
-      <li>
-        Download the new Android apk: <a href="https://github.com/gnosygnu/xowa/releases/tag/v3.3.2.1" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases/tag/v3.3.2.1</a> 
-        <ul>
-          <li>
-            Note: I changed the application ID yet again, so make sure you remove the old XOWA app, or you will have 2 XOWA apps. If you do end up with 2 of them, remove both, and reinstall v3.3.2.1 again
-          </li>
-        </ul>
-      </li>
-      <li>
-        Download the new core English Wikipedia files (1.2 GB): <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v3.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v3.7z</a>
-      </li>
-    </ul>
-    <p>
-      Here is a list of the changes:
-    </p>
-    <ul>
-      <li>
-        "Wikipedia Alpha" updates no longer replaces XOWA: XOWA is a fork of the Wikipedia app. I haven't changed all the Wikipedia branding and IDs. In this particular case, I had left the package name the same. Whenever "Wikipedia Alpha" pushed out a new update, Android would prompt the user to install it. Installing it would remove XOWA and replace it with the "Wikipedia Alpha".
-      </li>
-      <li>
-        Better performance for multi-word searches: I had to add more columns and indexes to support faster lookup for certain types of searches. For example, "earth a". Unfortunately this required updating the core English Wikipedia files again
-      </li>
-      <li>
-        Do not scroll to top of results when adding new results: XOWA works by finding 2 - 5 results at a time and sending them incrementally to the search window. Each send would cause the search results to scroll back to the top. This was annoying when browsing through the list while search is running.
-      </li>
-      <li>
-        Return 10 results by default and scroll to retrieve more results: Previously, XOWA would only return 50 results. Now, XOWA is smart enough to search for more as needed. Also, performance is improved by returning 10 instead of 50.
-      </li>
-      <li>
-        Return search text as first result: XOWA now uses "page rank" to sort the results. However, most times, the search term may not be the highest ranking. For example, searching for "ear" would list "earth" over "ear" because "earth" has a higher rank. Now, XOWA will list "ear" first since that is the current search text
-      </li>
-      <li>
-        Identify redirect articles with "→": Wikipedia uses redirects to handle items like "page renames and "misspellings". For example, "Www" redirects to "World Wide Web". XOWA better identifies these entries by showing "Www → World Wide Web"
-      </li>
-      <li>
-        Remove redundant redirect articles from results: Ordinarily, there can be many redirects leading to the same page. For example, "World wide web" and "World-wide web" are both redirects to "World Wide Web". Previously, searching for "world wide web" would return all three pages. Now only 1 is returned.
-      </li>
-      <li>
-        Search for entire word by putting space at end of search: XOWA automatically adds a wildcard to every search. For example, searching for "earth" actually searches for "earth*" which will return "Earth" and "Earthquake". However, sometimes only "Earth" is wanted, not "Earthquake". Adding a space and searching for "earth " will automatically limit the search to "Earth"
-      </li>
-      <li>
-        Highlight search terms in search results: XOWA was previously relying on Wikipedia code to highlight search terms. This approach was rather simple: it would highlight a term only if the exact search string was found in the text. For example, "Earth History" would correctly highlight "Museum of <strong>Earth History</strong>" but not "History of Earth". This version now highlights the second as "<strong>History</strong> of <strong>Earth</strong>"
-      </li>
-    </ul>
-    <p>
-      Again, I strongly recommend you get this version. There are a few bugs to work out, but this version is much improved over previous ones. This is the last major update for Android search, and future changes will probably not have as much of a noticeable impact -- at least until I get around to full-text search.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.3.1.1_.28Andriod_only.29_.282016-03-06_22:00_Sun.29">Release: v3.3.1.1 (Andriod only) (2016-03-06 22:00 Sun)</span>
-    </h2>
-    <p>
-      There is no new release for the desktop app. I'm still making major changes to the Search system and need more time for review.
-    </p>
-    <p>
-      The Android app is a major release. The major change is a faster search system. To get it, do the following:
-    </p>
-    <ul>
-      <li>
-        Download the new Android apk: <a href="https://github.com/gnosygnu/xowa/releases/tag/v3.3.1.1" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases/tag/v3.3.1.1</a> 
-        <ul>
-          <li>
-            Note: I changed the application ID, so make sure you remove the old XOWA app, or you will have 2 XOWA apps. If you do end up with 2 of them, remove both, and reinstall v3.3.1.1 again
-          </li>
-        </ul>
-      </li>
-      <li>
-        Download the new core English Wikipedia files (1.6 GB): <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v2.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-04_html_core_v2.7z</a>
-      </li>
-    </ul>
-    <p>
-      Here is a brief summary of the advantages:
-    </p>
-    <ul>
-      <li>
-        Better performance: Search is much quicker. One word searches should come back subsecond and multiple words should come back in a few, with initial results coming back in the first second
-      </li>
-      <li>
-        Better ranking: Search now ranks results by <a href="https://en.wikipedia.org/wiki/PageRank">page rank</a>. Previously, XOWA ranks by page length, which resulted in long "List of" articles appearing near the top.
-      </li>
-      <li>
-        Better search terms: Search now handles punctuation better. Searches can be done for "U.S.A." or "USA"; "dont't" or "dont"; "half-life" or "half" or "life".
-      </li>
-    </ul>
-    <p>
-      I'll explain these in greater detail in the next desktop release.
-    </p>
-    <p>
-      If you are using the Android beta, I strongly recommend you get this version. The new search is dramatically improved and well worth the effort.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-02-28_20:30_Sun.29">Release: NONE (2016-02-28 20:30 Sun)</span>
-    </h2>
-    <p>
-      Another week, another postponement. My apologies, but I'm usually very cautious when making database changes -- especially since it's pretty important to get things right the first time. I'm going to try for a Thursday release, but may fall back on next Sunday.
-    </p>
-    <p>
-      I did upload the new Android English Wikipedia for 2016-02 this week. The new urls are at <a href="https://github.com/gnosygnu/xowa/issues/36#issuecomment-172428070" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/36#issuecomment-172428070</a> .
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-02-21_19:15_Sun.29">Release: NONE (2016-02-21 19:15 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week also. I've made some good progress with search, and have a prototype that is significantly faster than the existing version. However, it'll take me another week before I add it to Android and probably two weeks before the desktop.
-    </p>
-    <p>
-      I uploaded the image update for English Wikipedia 2016-02 this week. You can grab the latest at <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-03_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-03_file_v2b.7z</a> My next task is to make these updates easier, but I'm afraid it'll have to wait until I'm done with major Android features. I'm also postponing other image dumps as I just want to focus solely on search and related matters. I'm hoping to resume next week.
-    </p>
-    <p>
-      I am going to upload the HTML for English Wikipedia 2016-02 this week. If you want to try the new search, you should start downloading this version. Once I'm done with search, you'll have to download these two files to have the new upgraded search for Android:
-    </p>
-    <ul>
-      <li>
-        en.wikipedia.org-core.xowa
-      </li>
-      <li>
-        en.wikipedia.org-xtn.search.core.xowa
-      </li>
-    </ul>
-    <p>
-      Until then, if you're using the Android beta, please bear with the slow search. Thanks.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-02-14_19:30_Sun.29">Release: NONE (2016-02-14 19:30 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I'm trying to make a lot of performance-related changes to Search that will affect the desktop and Android version. There's a chance I may skip next week also.
-    </p>
-    <p>
-      Also, I'm building English Wiki 2016-02 now. I'm still a little behind in wiki dumps and I'll resume this week.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.2.1.1_.282016-02-06_20:45_Sun.29">Release: v3.2.1.1 (2016-02-06 20:45 Sun)</span>
-    </h2>
-    <h3>
-      <span class="mw-headline" id="Release_new_image_update_for_English_Wikipedia_.282016-01.29">Release new image update for English Wikipedia (2016-01)</span>
-    </h3>
-    <p>
-      I was a little late this month due to build issues. The direct link is <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-01-13_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-01-13_file_v2b.7z</a>
-    </p>
-    <h3>
-      <span class="mw-headline" id="Release_new_wikis_for_English_Wikis_.282016-01.29">Release new wikis for English Wikis (2016-01)</span>
-    </h3>
-    <p>
-      I've also updated all English Wikis. I generated Android versions of each as well, and will upload during the week if they proof well. The links are at <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a> and they are listed by domain (EX: <a href="https://en.wiktionary.org" rel="nofollow" class="external free">https://en.wiktionary.org</a>)
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_search_not_working">Fix for search not working</span>
-    </h3>
-    <p>
-      This was a bug that I introduced back in 3.1.1. Title search doesn't work. For example: <a href="https://en.wikipedia.org/wiki/Special:Search?search=Earth&amp;fulltext=y">https://en.wikipedia.org/wiki/Special:Search?search=Earth&amp;fulltext=y</a> .
-    </p>
-    <p>
-      If you've built a wiki with any 3.1.* version, you will have to rebuild it. You can do this with the following:
-    </p>
-    <ul>
-      <li>
-        Go to [[Help:Wiki maintenance]]
-      </li>
-      <li>
-        Find your wiki and click the "Search" button
-      </li>
-      <li>
-        Scroll down to the bottom of the page and click "Run script"
-      </li>
-    </ul>
-    <p>
-      You can also rebuild the entire wiki.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_English_Wiktionary_sections_not_expanding_correctly">Fix for English Wiktionary sections not expanding correctly</span>
-    </h3>
-    <p>
-      This bug occurs when opening up any English Wiktionary page. Each page will have Translation tables with a "Hide" / "Show" button. The following occurred when viewing these pages (for example: <a href="https://en.wiktionary.org/wiki/green">https://en.wiktionary.org/wiki/green</a>)
-    </p>
-    <ul>
-      <li>
-        Table shows up collapsed, but button says "Hide"
-      </li>
-      <li>
-        Clicking on "Hide" only changes the button to "Show"
-      </li>
-      <li>
-        Clicking on "Show" finally expands the table
-      </li>
-    </ul>
-    <p>
-      v3.2.1 now expands these tables by default. Note that you can control the default behavior at [[Help:Options/Wiki HTML]] under Collapsible
-    </p>
-    <h3>
-      <span class="mw-headline" id="New_Raspberry_Pi_build">New Raspberry Pi build</span>
-    </h3>
-    <p>
-      This build was made possible by yonisolo. Many thanks to him for taking the initiative to get this to work. As a result of his efforts, you can now use your Raspberry Pi to run XOWA as an HTTP server.
-    </p>
-    <p>
-      Note that the GUI does not work due to SWT issues with ARM. I don't know if anyone is interested in having this work, but if so, let me know, and I'll revisit.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Android_.28No_release.29">Android (No release)</span>
-    </h3>
-    <p>
-      I'm skipping an Android release this week. I added only one-change (pinch-zoom and bottom panels), and it didn't seem worth a release.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.2.2">Next release: v3.2.2</span>
-    </h3>
-    <p>
-      I was planning to improve the Android search version this week, but ended up spending some time on the English Wiki builds as well as underlying database code.
-    </p>
-    <p>
-      I'm still going to work on this database code this week. My aims are the following:
-    </p>
-    <ul>
-      <li>
-        Add a feature to auto-sync the current English Wikipedia images set (they're around 90 GB)
-      </li>
-      <li>
-        Add some indices to improve performance on the Android search.
-      </li>
-    </ul>
-    <p>
-      For wikis, I'm going to work on French Wiki.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.1.5.1_.282016-01-31_22:00_Sun.29">Release: v3.1.5.1 (2016-01-31 22:00 Sun)</span>
-    </h2>
-    <p>
-      The desktop app is a major release. It resolves reference errors in 2016-01 English Wikipedia, fixes wide images on German Wikipedia, and adds a new PageBanner extension
-    </p>
-    <p>
-      The Android app is also a major release. It shows more tables, heiroglyphics, and images with a ? in title.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Luaj_fixes_for_references_in_2016-01-13_English_Wikipedia">Luaj fixes for references in 2016-01-13 English Wikipedia</span>
-    </h3>
-    <p>
-      The 2016-01-13 dump had many erros in the reference section due to bugs in Luaj. One of the following would be displayed:
-    </p>
-    <ul>
-      <li>
-        Check |archiveurl= value (help)
-      </li>
-      <li>
-        Specials character in |{some word}
-      </li>
-    </ul>
-    <p>
-      These were bugs in Luaj with the frontier pattern and multi-byte chars. They were both resolved in this release.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_German_Wikipedia_and_extremely_wide_pie_charts">Fix for German Wikipedia and extremely wide pie charts</span>
-    </h3>
-    <p>
-      I'm extremely thankful for this report at <a href="https://github.com/gnosygnu/xowa/issues/38" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/38</a> There were HTML issues in German Wikipedia because all the wikis rely implicitly on American formatting rules for decimals. For example:
-    </p>
-    <ul>
-      <li>
-        The German Wikipedia page for Hausmannstätten specifies a pie chart with a width (Breite) of 0.9 . See: <a href="https://de.wikipedia.org/wiki/Hausmannst%C3%A4tten?title=Hausmannst%C3%A4tten&amp;action=edit">https://de.wikipedia.org/w/index.php?title=Hausmannst%C3%A4tten&amp;action=edit</a>
-      </li>
-      <li>
-        This value gets multiplied by various numbers in the template. For example: <code>width:{{#expr:18*{{{Breite}}} }}em;</code>. See: <a href="https://de.wikipedia.org/wiki/Vorlage:Sitzverteilung/?title=Vorlage:Sitzverteilung/&amp;action=edit">https://de.wikipedia.org/w/index.php?title=Vorlage:Sitzverteilung/&amp;action=edit</a>
-      </li>
-    </ul>
-    <p>
-      XOWA was doing this multiplication using the user's locale.
-    </p>
-    <ul>
-      <li>
-        For US users (like me), <code>18*.9</code> was calculated correctly as <code>16.2</code>
-      </li>
-      <li>
-        For German users though, <code>18*.9</code> was calculated incorrectly as <code>162</code>. 
-        <ul>
-          <li>
-            This was because Java was interpreting the <code>.9</code> using German number-format rules. Since "." is the thousands separator, and "," is the decimal separator, <code>.9</code> became <code>9</code>. For US users, imagine <code>,9</code> becoming <code>9</code>.
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <p>
-      v3.1.5 fixes this issue by asserting that all decimal-parsing is done in the US locale.
-    </p>
-    <h3>
-      <span class="mw-headline" id="New_PageBanner_extension_for_Wikivoyage">New PageBanner extension for Wikivoyage</span>
-    </h3>
-    <p>
-      This was an extension introduced by Wikimedia late last year to standardize the display of the image, icons and table of contents at the top of the page. This involved some considerable work on my side (including a Mustache parser), but XOWA now reproduces the same look.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Show_navboxes_and_other_tables">(Android) Show navboxes and other tables</span>
-    </h3>
-    <p>
-      The Wikipedia Mobile app deliberately hides navboxes as well as other tables. I think this is done for the following reasons:
-    </p>
-    <ul>
-      <li>
-        These tables were meant for desktop display, and often had wide widths
-      </li>
-      <li>
-        These tables clutter the page.
-      </li>
-    </ul>
-    <p>
-      In contrast, I really do like showing as much content as possible, so I decided to show these tables. I'll probably put an option to disable this later, but I'm going to wait first for some feedback from others
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Always_center_table_content">(Android) Always center table content</span>
-    </h3>
-    <p>
-      This is another deviation from the Wikipedia Mobile app style. Basically most tables are left-aligned and would end before reaching the right-hand side of the page. I changed the CSS to have these tables fill up the entire page and center the content.
-    </p>
-    <p>
-      This has one unfortunate sideback in that it breaks the "Collapse" buttons. I'll try to fix this in a future release, but if I can't, I may remove them entirely.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Show_hieroglyphics">(Android) Show hieroglyphics</span>
-    </h3>
-    <p>
-      The early versions of the XOWA Android app did not show hieroglyphics. This is now supported in this build
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Show_images_with_.3F_in_file_title">(Android) Show images with ? in file title</span>
-    </h3>
-    <p>
-      This was a bug wherein images that had a ? were not being displayed within the Android WebView. I fixed this by replacing ? with %3F.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.2.1">Next release: v3.2.1</span>
-    </h3>
-    <p>
-      I ran into several issues with the 2016-01 English Wikipedia dump that set me back a few days. I'm planning to upload English Wikipedia images and HTML this week, and then continue on with the other English wikis
-    </p>
-    <p>
-      For code, I'm going to tackle performance on the Android search again as well as a few minor UI issues on Android (collapse-table, pinch-zoom)
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.1.4.2_.282016-01-28_11:00_Thu.29">Release: v3.1.4.2 (2016-01-28 11:00 Thu)</span>
-    </h2>
-    <p>
-      This is an interim release for the desktop app. It fixes script error messages in 2016-01-13 English Wikipedia
-    </p>
-    <h3>
-      <span class="mw-headline" id="Scribunto_fixes_for_2016-01-13_English_Wikipedia">Scribunto fixes for 2016-01-13 English Wikipedia</span>
-    </h3>
-    <p>
-      I accidentally had the wrong dump in place when kicking off the 2016-01-13 build. As such, I didn't spot the issue till this morning after I restarted the build.
-    </p>
-    <p>
-      Basically, the <a href="https://dumps.wikimedia.org/enwiki/20160113/" rel="nofollow" class="external text">2016-01-13 English Wikipedia dump</a> introduced new page admininistration functions. These include {{PROTECTIONEXPIRY}} as well as a Scribunto function called getStabilitySettings. This resulted in a bold red "Script error" message at the top of every protected page. There are a lot of protected pages.
-    </p>
-    <p>
-      v3.1.4.2 resolves both issues. So far, it's stable across 35,000+ pages, but if you run across any issues, please report them. Thanks.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.1.4.1_.282016-01-24_19:30_Sun.29">Release: v3.1.4.1 (2016-01-24 19:30 Sun)</span>
-    </h2>
-    <p>
-      The desktop app is a major release. It resolves several wiktionary errors on non-English pages and has better HTML dump generation for other wikis.
-    </p>
-    <p>
-      The Android app is a major release. It has a more responsive search, instant image loading when reloading page, and a fix for pages failing to load if they have spaces and colons in the title.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Scribunto_.2F_Luaj_fixes_for_English_Wiktionary">Scribunto / Luaj fixes for English Wiktionary</span>
-    </h3>
-    <p>
-      There were several dozen pages with script errors in English Wiktionary. They basically fell into these categories:
-    </p>
-    <ul>
-      <li>
-        Luaj / Scribunto errors with MCBS entities in Asian languages (1 glyph; 2 char).
-      </li>
-      <li>
-        Programmatic errors for minor cases 
-        <ul>
-          <li>
-            Recursive gsub calls with lua function
-          </li>
-          <li>
-            Search position returned as int not string
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <p>
-      The build log for English Wiktionary looks a lot cleaner now, though I still have to add some support for the {{categorytree}} function.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Better_HTML_dump_generation_for_English_Wiktionary.2C_Wikisource.2C_Wikiquote.2C_etc._Also.2C_French_Wikipedia">Better HTML dump generation for English Wiktionary, Wikisource, Wikiquote, etc. Also, French Wikipedia</span>
-    </h3>
-    <p>
-      I ran the HTML dump generator through all the English wikis, as well as French Wikipedia. The results looked good, but there were a lot of log errors that were addressed with this release.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_More_responsive_search">(Android) More responsive search</span>
-    </h3>
-    <p>
-      Search is still slow on Android. I'll fix this in a future relase, but I'll have to change the format of the search databases.
-    </p>
-    <p>
-      In the interim, I hacked in the following approach. Assume a search term of "Earth":
-    </p>
-    <ul>
-      <li>
-        Search for titles that match the term. For example, "Earth". This is fast and usually comes back in 0 - 3 seconds.
-      </li>
-      <li>
-        Search for titles that have the term in any word within the title. For example, "History of Earth". This is moderate and usually comes back in 5 - 10 seconds.
-      </li>
-      <li>
-        Search for titles that have the term starting in any word within the title. For example, "Earthquake". This is slow and usually takes 15 seconds and sometimes more.
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Instant_image_loading_when_reloading_page">(Android) Instant image loading when reloading page</span>
-    </h3>
-    <p>
-      First, some background. XOWA loads pages in two stages:
-    </p>
-    <ul>
-      <li>
-        Show the HTML
-      </li>
-      <li>
-        Fill in the images one by one
-      </li>
-    </ul>
-    <p>
-      The 2nd stage is necessary because it takes a few tenths of a second to retrieve an image from the database. For large pages (20+ images), this would delay page load by a few seconds (for example: 20 images * .2 second = 4 seconds).
-    </p>
-    <p>
-      However, once a page is viewed, reloading a page shouldn't have to re-retrieve the image from the database. The previous releases were actually re-retrieving the image. This release just uses the image if it's already there.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Android.29_Fix_for_pages_failing_to_load_if_they_have_spaces_and_colons_in_the_title">(Android) Fix for pages failing to load if they have spaces and colons in the title</span>
-    </h3>
-    <p>
-      This only affects a small minority of items that have a colon and spaces in the title. For example, "List of A:B items". XOWA didn't load this page because the underlying Wikipedia Mobile App was encoding the spaces as +.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.1.5">Next release: v3.1.5</span>
-    </h3>
-    <p>
-      I haven't uploaded wikis this week, because I'm working on a blocking item in Wikivoyage (Pagebanner). I'm going to delay another week and focus on updating 2016-01-13 English Wikipedia. This means a new HTML dump which should be available by next Sunday. I'm also hoping to upload the other English wikis, and then continue on to French, etc.
-    </p>
-    <p>
-      Meanwhile, I'm going to delay the Google Play Store a few weeks. If anyone thinks I should go to Google Play Store earlier, please let me know. From my side, there are a number of items that still need polish. If you have any feedback, please do post in <a href="https://github.com/gnosygnu/xowa/issues/36" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/36</a> I'd appreciate anything: from "Works fine" to "This feature needs some more work".
-    </p>
-    <p>
-      Finally, if you have an Android device and want a wiki for your device, let me know which, and I'll bump it up in priority. The next items in queue are French, German, Chinese and Arabic Wikipedia. I'll get to all the wikis but it may take a few months unless I hear requests otherwise.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.1.3.1_.282016-01-17_21:45_Sun.29">Release: v3.1.3.1 (2016-01-17 21:45 Sun)</span>
-    </h2>
-    <p>
-      The desktop app is a trivial release. Its main feature is a help page for generating HTML-dumps
-    </p>
-    <p>
-      The Android app is a major release. It has a Random feature, shows more images, and adds CSS-tweaks.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Documentation_for_html-dump_script._See_Help:Import.2FCommand-line.2FDumps">Documentation for html-dump script. See [[Help:Import/Command-line/Dumps]]
-    </h3>
-    <p>
-      This item is self-explanatory. The XOWA Android app is getting more stable, so I felt it would be time to document the generation of the HTML databases.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Improved_Android_beta.2C_including_Random.2C_more_image_display_and_CSS-tweaks._See_https:.2F.2Fgithub.com.2Fgnosygnu.2Fxowa.2Fissues.2F36">Improved Android beta, including Random, more image display and CSS-tweaks. See <a href="https://github.com/gnosygnu/xowa/issues/36" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/36</a></span>
-    </h3>
-    <p>
-      This build has a number of new features.
-    </p>
-    <ul>
-      <li>
-        Random now works in offline mode.
-      </li>
-      <li>
-        All thumb and gallery images should now show up. (approximately 5% of them weren't before)
-      </li>
-      <li>
-        CSS tweaks were added to center the images as well as standardize some background colors
-      </li>
-    </ul>
-    <p>
-      You can get the latest release here: <a href="https://github.com/gnosygnu/xowa/releases/" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases/</a>
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.1.4">Next release: v3.1.4</span>
-    </h3>
-    <p>
-      The Wikimedia dump service resumed, but I'd like to delay French, Polish and Latin for another week. I'm planning to generate HTML dumps for the rest of the English wikis including Wiktionary, Wikisource, Wikivoyage, etc. This will be a good stress test for the new XOWA html-dump format before I continue on to other wikis.
-    </p>
-    <p>
-      I'm also going to continue tweaking the XOWA Android app. If you have a moment to help out with testing, please set it up and give me some feedback: <a href="https://github.com/gnosygnu/xowa/issues/36" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/36</a>
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_XOWA_.28None.29.3B_XOWA_Android_.28v0.1.2.0.29_.282016-01-10_20:30_Sun.29">Release: XOWA (None); XOWA Android (v0.1.2.0) (2016-01-10 20:30 Sun)</span>
-    </h2>
-    <p>
-      There's no release for the XOWA app tonight. I've spent the week mostly on the Android app, and there were no real changes for the main desktop app.
-    </p>
-    <p>
-      I have released an Alpha of the XOWA Android App. You should check the following links:
-    </p>
-    <ul>
-      <li>
-        Android progress thread: <a href="https://github.com/gnosygnu/xowa/issues/36" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/36</a>
-      </li>
-      <li>
-        Main Github repo (source): <a href="https://github.com/gnosygnu/xowa_android" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa_android</a>
-      </li>
-      <li>
-        Releases page (apk): <a href="https://github.com/gnosygnu/xowa_android/releases/tag/v0.1.2.0" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa_android/releases/tag/v0.1.2.0</a>
-      </li>
-      <li>
-        Simple Wikipedia Android dump: <a href="https://archive.org/details/Xowa_simplewiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_simplewiki_latest</a>
-      </li>
-    </ul>
-    <p>
-      If you have Android KitKat or higher and would like to run XOWA on it, I'd be greatly interested in feedback. See the Android progress thread for more details.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.1.3">Next release: v3.1.3</span>
-    </h3>
-    <p>
-      I still have some tasks for XOWA Android that I'd like to work on this week. I am going to try to release the main app next week, but if there are no new changes it may slip again in favor of an update of the XOWA Android release
-    </p>
-    <p>
-      I haven't generated any wikis this week as the dump service seems to have come to a halt. Whenever it resumes, I'll pick up again with the promised updates of French, Polish and Greek
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.1.1.1_.282016-01-03_20:00_Sun.29">Release: v3.1.1.1 (2016-01-03 20:00 Sun)</span>
-    </h2>
-    <p>
-      v3.1.1 is a minor release. It has a few fixes for some English Wikipedia pages, and many trivial HTML changes.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Handle_refs_inside_.7B.7B.23tag.7D.7D">Handle refs inside {{#tag}}</span>
-    </h3>
-    <p>
-      I only saw this issue on one page in English Wikipedia (United Kingdom), but it has potential for more effects. Basically, XOWA did not handle &lt;ref&gt; inside a {{#tag}}. For example: {{#tag:ref|&lt;ref&gt;a&lt;/ref&gt;}}. For the United Kingdom page, this threw off the format, and made the Infobox as wide as the entire page.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_incorrect_search_word_counts_and_IPA_links">Fix for incorrect search word counts and IPA links</span>
-    </h3>
-    <p>
-      There was a minor issue with incorrect search counts for words. I don't think this affects anything for desktop searches, but it did throw off the Android search.
-    </p>
-    <p>
-      Meanwhile, due to incorrect URL generation, IPA links would not download from the web after being clicked.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Trivial_HTML_changes">Trivial HTML changes</span>
-    </h3>
-    <p>
-      v3.1.1 has a bunch of HTML changes to make it slightly closer to MediaWiki's HTML.
-    </p>
-    <ul>
-      <li>
-        The most significant one is the removal of the magnify icon, which is now being handled in CSS as opposed to a separate &lt;img&gt; tag.
-      </li>
-      <li>
-        There are a few other ones affecting incorrect escaping of quotes. This would cause incomplete titles when hovering over images or links.
-      </li>
-      <li>
-        Finally there are minor whitespace / attribute generation issues. None of these should be noticeable; they were made to handle log messages during bulk HTML generation
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.1.2">Next release: v3.1.2</span>
-    </h3>
-    <p>
-      I was on track to release the new Android version tonight, but ran into a last minute issue with thumbs and English Wikipedia. I'm pushing this out another week.
-    </p>
-    <p>
-      For wikis, I'll work on the French Wikipedia refresh, and try to add on Polish and Greek.
-    </p>
-    <p>
-      Finally, an apology to those I've promised minor changes. I've spent a lot of time on Android recently, and there's been a backlog of items. I'm hoping to be done with the Android version in the next few weeks and will work on these items as I get time.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282015-12-27_22:00_Sun.29">Release: NONE (2015-12-27 22:00 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release again. There were two minor changes, but neither seem to be enough to warrant another version. As always, if anyone notices any serious issues, please do let me know at either <a href="https://github.com/gnosygnu/xowa/issues" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues</a> or gnosygnu at gmail.com .
-    </p>
-    <p>
-      I did release Russian wikis this week. See: <a href="https://archive.org/details/Xowa_ruwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_ruwiki_latest</a>
-    </p>
-    <p>
-      I've spent a lot of time this week on the new Android version. I've actually reached a point this weekend wherein it is working with English Wikipedia.
-    </p>
-    <p>
-      For 3.1.1, I'm going to try to release this new Alpha with for Simple Wikipedia. My aim is to get a release of English Wikipedia shortly afterwards.
-    </p>
-    <p>
-      For wikis, I'll try to do a refresh of French Wikipedia.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282015-12-20_22:00_Sun.29">Release: NONE (2015-12-20 22:00 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week as well. I've spent the week working on the new Android dump format for gallery, as well as a new database merge feature. I haven't found anything worth a release.
-    </p>
-    <p>
-      I posted the English image updates at <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a> I'm working on Russian now, and they'll be ready next week.
-    </p>
-    <p>
-      For 2.12.4, I'm still working on the new Android version for Simple Wikipedia.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282015-12-13_19:30_Sun.29">Release: NONE (2015-12-13 19:30 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I've been working on Android-related changes, so there really aren't any significant changes.
-    </p>
-    <p>
-      I posted Arabic wikis at <a href="https://archive.org/details/Xowa_arwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_arwiki_latest</a> I ran into an issue with English Wikipedia though, and am rebuilding the dump. It should be ready by the middle of the week.
-    </p>
-    <p>
-      For 2.12.3, I'm continuing work on the Android version for Simple Wikipedia. For wikis, I'll try to do Russian
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282015-12-13_19:30_Sun.29">Release: NONE (2015-12-13 19:30 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I've been working on Android-related changes, so there really aren't any significant changes.
-    </p>
-    <p>
-      I posted Arabic wikis at <a href="https://archive.org/details/Xowa_arwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_arwiki_latest</a> I ran into an issue with English Wikipedia though, and am rebuilding the dump. It should be ready by the middle of the week.
-    </p>
-    <p>
-      For 2.12.3, I'm continuing work on the Android version for Simple Wikipedia. For wikis, I'll try to do Russian
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v2.12.1.1_.282015-12-06_21:30_Sun.29">Release: v2.12.1.1 (2015-12-06 21:30 Sun)</span>
-    </h2>
-    <p>
-      v2.12.1 is a minor release. It has several fixes directly affecting Italian Wikisource pages, and a few minor parser fixes for other wikis
-    </p>
-    <h3>
-      <span class="mw-headline" id="Wiki_bundles_for_Italian_wikis">Wiki bundles for Italian wikis</span>
-    </h3>
-    <p>
-      The Italian wikis have been posted to archive.org
-    </p>
-    <ul>
-      <li>
-        <a href="https://archive.org/details/Xowa_itwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_itwiki_latest</a>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Minor_fixes_for_Italian_Wikisource">Minor fixes for Italian Wikisource</span>
-    </h3>
-    <p>
-      These fixes addressed the following:
-    </p>
-    <ul>
-      <li>
-        Poems with references would show duplicate references at the bottom of the page. In addition, the text of the references may be incorrectly placed in the body of the poem.
-      </li>
-      <li>
-        Image maps with scribunto code relying on the page title generated script errors.
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Minor_parser_fixes_including_mapsource_extension">Minor parser fixes including mapsource extension</span>
-    </h3>
-    <p>
-      These fixes are several, but the following are notable:
-    </p>
-    <ul>
-      <li>
-        Scribunto code calling json-decode was failing if the code was relying on integer keys. For example, {"1"="a"} needs to parse <code>1</code> as an integer, not a string. Otherwise, code calling <code>ipairs</code> would later fail
-      </li>
-      <li>
-        Mapsource functions such as {{#deg2dd}} would not handle non-ASCII double apostrophes. For example, <code>’’</code> needs to go to <code>''</code> and then to <code>"</code>. XOWA was doing the 1st part (<code>''</code>) but not the second (<code>"</code>)
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v2.12.2">Next release: v2.12.2</span>
-    </h3>
-    <p>
-      I spent a good deal of time working on most of these minor fixes, so my progress on Android was limited. However, I did get a text version of Simple Wikipedia working with the new dump and the new UI. I'm planning to work on images this week, and hope to have a new beta for v2.12.2
-    </p>
-    <p>
-      For wikis, I'm generating English now. I'll try to add Arabic this week as well.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282015-11-29_19:30_Sun.29">Release: NONE (2015-11-29 19:30 Sun)</span>
-    </h2>
-    <p>
-      This week will be another skipped release. I've only made very minor changes this week, so it didn't seem worth it to make a new release.
-    </p>
-    <p>
-      I did post wikis for Dutch and Latin at <a href="https://archive.org/details/Xowa_nlwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_nlwiki_latest</a> and <a href="https://archive.org/details/Xowa_lawiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_lawiki_latest</a>
-    </p>
-    <p>
-      For 2.12.1 I'm going to finish up the dump and try to get another Android version for Simple Wikipedia. For wikis, I'll work on Italian.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v2.11.4.1_.282015-11-22_20:00_Sun.29">Release: v2.11.4.1 (2015-11-22 20:00 Sun)</span>
-    </h2>
-    <p>
-      v2.11.4 is a minor release. It has one fix affecting French Wikipedia pages, and another for the simple-mode Category system.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_.22long-vertical_scrolling.22_on_French_Wikipedia">Fix for "long-vertical scrolling" on French Wikipedia</span>
-    </h3>
-    <p>
-      In v2.11.2, I added a fix to handle extraneous pre sections: see <a href="#Fix_for_extraneous_pre-sections_in_References" id="xolnki_10" title="">#Fix for extraneous pre-sections in References</a>. It turned out this fix was not correct, and caused pages in French Wikipedia to have large scrolling sections.
-    </p>
-    <p>
-      I reverted the fix for v2.11.4. As it turned out, the issue with extraneous pre sections was handled by the underlying templates themselves.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_simple-mode_Category_pages_not_loading">Fix for simple-mode Category pages not loading</span>
-    </h3>
-    <p>
-      XOWA generates a simple Category system when it builds a wiki (this is called v1). If you want an authentic version of the Category system (this is called v2), you can always import it separately under [[Import offline]].
-    </p>
-    <p>
-      The simple Category system looks like it broke some time ago during the general database redesign from .sqlite3 to .xowa. I fixed it for this release.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Wiki_bundles_for_French.2C_Lithuanian.2C_Limburgish.2C_Estonian.2C_Latvian.2C_Nynorsk.2C_and_Cebuano_wikis">Wiki bundles for French, Lithuanian, Limburgish, Estonian, Latvian, Nynorsk, and Cebuano wikis</span>
-    </h3>
-    <p>
-      There were a lot of wikis this week, but they were mostly small. These have been uploaded to archive.org:
-    </p>
-    <ul>
-      <li>
-        <a href="https://archive.org/details/Xowa_frwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_frwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_ltwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_ltwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_liwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_liwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_etwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_etwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_lvwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_lvwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_nnwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_nnwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_cebwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_cebwiki_latest</a>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v2.11.5">Next release: v2.11.5</span>
-    </h3>
-    <p>
-      I was able to do a basic HTML dump for simple wiki, but there are still a number of issues. These should be fixed this week, and hopefully I can try the new HTML dump system on English Wikipedia.
-    </p>
-    <p>
-      For wikis, I'm going to work through the last of the old .sqlite3 wikis and go through Dutch (nl.*) and Latin wikis.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v2.11.3.1_.282015-11-15_20:00_Sun.29">Release: v2.11.3.1 (2015-11-15 20:00 Sun)</span>
-    </h2>
-    <p>
-      v2.11.3 is a fairly minor release. It addresses one minor bug with "1. REDIRECT" showing up on pages.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_.221._REDIRECT.22_showing_up_on_some_pages">Fix for "1. REDIRECT" showing up on some pages</span>
-    </h3>
-    <p>
-      This was a bug I introduced while fixing another issue in v2.11.2. Some pages would now show "1. REDIRECT", most notably en.w:Earth
-    </p>
-    <h3>
-      <span class="mw-headline" id="Wiki_bundles_for_Slovak.2C_Slovenian.2C_Galician.2C_and_Waray-Waray_wikis">Wiki bundles for Slovak, Slovenian, Galician, and Waray-Waray wikis</span>
-    </h3>
-    <p>
-      These have been uploaded to archive.org:
-    </p>
-    <ul>
-      <li>
-        <a href="https://archive.org/details/Xowa_skwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_skwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_slwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_slwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_glwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_glwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_warwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_warwiki_latest</a>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v2.11.4">Next release: v2.11.4</span>
-    </h3>
-    <p>
-      I fixed the one minor Wikibase issue, but am deferring a few other possible issues till later. I'm still chugging away on the HTML dump. My aim is to get a simple wiki dump for the next release.
-    </p>
-    <p>
-      I generated the English Wiki dump but there were only about 3 thousand new images, and I didn't feel that it merited an update. For wikis, I'm going to update French, and then go through as many as I can of Lithuanian, Limburgish, Estonian, Latvian and Nynorsk.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v2.11.2.1_.282015-11-08_22:00_Sun.29">Release: v2.11.2.1 (2015-11-08 22:00 Sun)</span>
-    </h2>
-    <p>
-      v2.11.2 is a significant release. It addresses minor, but noticeable issues with gallery sections, location maps, and references. It also has some Wikibase fixes.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_Gallery_rendering_vertically_instead_of_horizontally">Fix for Gallery rendering vertically instead of horizontally</span>
-    </h3>
-    <p>
-      Wikimedia added a change a few weeks ago to force &lt;gallery&gt; tags to use a css. See <a href="https://phabricator.wikimedia.org/T110709" rel="nofollow" class="external free">https://phabricator.wikimedia.org/T110709</a> This resulted in galleries being shown vertically, instead of horizontally.
-    </p>
-    <p>
-      v2.11.2 now includes this css.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_Location_maps_not_working_on_non-English_wikis">Fix for Location maps not working on non-English wikis</span>
-    </h3>
-    <p>
-      This has been a bug for a few months, but I had misdiagnosed it as bad Module code. Basically, non-English wikis would copy-paste the same Module:Location_map code in to their wikis. This failed to work in XOWA, because:
-    </p>
-    <ul>
-      <li>
-        The Module code has a hard-coded reference to <code>Template</code>
-      </li>
-      <li>
-        XOWA actually generates the non-English name for Template for the wiki. For Croatian Wikipedia, this is <code>Šablon</code> not <code>Template</code>
-      </li>
-    </ul>
-    <p>
-      This basically broke location maps in non-English wikis. I should have caught this earlier, but the first few I looked at were all bad usages (no location coordinates passed).
-    </p>
-    <p>
-      v2.11.2 now uses the canonical name just like MediaWiki.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Fix_for_extraneous_pre-sections_in_References">Fix for extraneous pre-sections in References</span>
-    </h3>
-    <p>
-      I think this is also a recent bug, but I can't track down the actual cause. MediaWiki has inconsistent logic for trimming whitespace around template and link arguments. The one at issue was a piece of code like <code>{{TemplateName| B\n }}</code>. On my local version of MediaWiki (1.25.2), it doesn't trim the <code>"\n "</code> after the B and creates a &lt;pre&gt; section. However, on Wikipedia, it does trim the whitespace and does not create a &lt;pre&gt; section.
-    </p>
-    <p>
-      I think this behavior changed recently, but couldn't find the actual line of code in MediaWiki. For now, XOWA will automatically trim end whitespace for all template arguments. In my opinion this is more intuitive behavior anyway.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Minor_Wikibase_fixes">Minor Wikibase fixes</span>
-    </h3>
-    <p>
-      These are a handful of signficant fixes that only affect some several dozen pages. They are in brief:
-    </p>
-    <ul>
-      <li>
-        in Lua code, entity.formatPropertyValues('P123') would not work. Note that entity.formatPropertyValues('property_name') did work
-      </li>
-      <li>
-        Lua code expects a "datatype" property on entity and a value of "globe-coordinate".
-      </li>
-      <li>
-        Lua code required actual numbers for quantity ("99"), not the literal Wikidata value ("+99")
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Minor_fixes_for_Redirect">Minor fixes for Redirect</span>
-    </h3>
-    <p>
-      These are two minor items worth more explanation:
-    </p>
-    <ul>
-      <li>
-        Redirects would not work if they had an argument. For example, #REDIRECT [[Target_page|link=collapsed]]
-      </li>
-      <li>
-        Clicking on "Redirected from" links at the top of the page would not work. For example, try <a href="https://en.wikipedia.org/wiki/UK">https://en.wikipedia.org/wiki/UK</a> and click on "Redirected from UK"
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Minor_JTidy_fix_to_always_enclose_body_text">Minor JTidy fix to always enclose body text</span>
-    </h3>
-    <p>
-      This was actually not working from the start. Basically tidy needs to take something like ...
-    </p>
-<pre>
-&lt;div class="floatleft"&gt;a&lt;/div&gt;a1&lt;div class="floatleft"&gt;b&lt;/div&gt;b1
-</pre>
-    <p>
-      ... and add some &lt;p&gt; tags to produce ...
-    </p>
-<pre>
-&lt;div class="floatleft"&gt;a&lt;/div&gt;&lt;p&gt;a1&lt;/p&gt;&lt;div class="floatleft"&gt;b&lt;/div&gt;&lt;p&gt;b1&lt;/p&gt;
-</pre>
-    <p>
-      This has a noticeable visual effect for some wikis (Croatian Wiktionary) which have HTML like the above.
-    </p>
-    <p>
-      I modified the jtidy_xowa.jar to handle this behavior.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Wiki_bundles_for_Danish.2C_Serbo-Croatian.2C_Croatian.2C_and_Estonian_wikis">Wiki bundles for Danish, Serbo-Croatian, Croatian, and Estonian wikis</span>
-    </h3>
-    <p>
-      These have been uploaded to archive.org
-    </p>
-    <ul>
-      <li>
-        <a href="https://archive.org/details/Xowa_dawiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_dawiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_shwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_shwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_hrwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_hrwiki_latest</a>
-      </li>
-      <li>
-        <a href="https://archive.org/details/Xowa_eowiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_eowiki_latest</a>
-      </li>
-    </ul>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v2.11.3">Next release: v2.11.3</span>
-    </h3>
-    <p>
-      I made some good progress with the rewritten HTML dump feature this week, but am still not done. I'm hoping to get ready for v2.11.3 but I need to work on a few other minor issues that have spilled over from this week. (namely in Wikibase).
-    </p>
-    <p>
-      For wikis, I'm generating 2015-11 English Wikipedia. I'm also going to continue through the minor wikis and try to do Slovak, Waray-Waray, Slovanian and Galician
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.11.1.1_.282015-11-01_19:30_Sun.29'>Release: v2.11.1.1 (2015-11-01 19:30 Sun)</span>
-    </h2>
-    <p>
-      v2.11.1 is a minor release. There are a few minor fixes for Hebrew wikis.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes_for_Hebrew_wikis'>Minor fixes for Hebrew wikis</span>
-    </h3>
-    <p>
-      v2.11.1 now supports Hebrew dates for the time function like <code>{{#time:xhxjj xjx xhxjY|28-08-1608 + 341 days}}</code> generating <code>ד' ה'שס\"ט"</code>. In addition there is basic support for Hebrew grammar like <code>{{grammar:prefixed|וabc}}</code> generating <code>ווabc</code>.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_packages_for_English_Wikipedia.2C_Hebrew.2C_Norwegian_and_Vietnamese_wikis'>Image packages for English Wikipedia, Hebrew, Norwegian and Vietnamese wikis</span>
-    </h3>
-    <p>
-      The English Wikipedia update for 2015-10 is finally up. The rest of the wikis are up at archive.org
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.11.2'>Next release: v2.11.2</span>
-    </h3>
-    <p>
-      I've been working on a new UI for the Android alpha. I've also spent time rewriting the HTML dump. For the next few weeks, I don't expect to do anything with the desktop app outside of bug fixing.
-    </p>
-    <p>
-      For wikis, I'll move on to Danish, Serbo-Croatian, Hungarian and Esperanto wikis
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_NONE_.282015-10-25_20:00_Sun.29'>Release: NONE (2015-10-25 20:00 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I spent most of the time this week on the HTML dump as well as Android. I'm looking at doing the regular monthly release next week but don't expect any major issues.
-    </p>
-    <p>
-      I'm also working on the wikis below and will post during the week.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.10.3.1_.282015-10-18_20:15_Sun.29'>Release: v2.10.3.1 (2015-10-18 20:15 Sun)</span>
-    </h2>
-    <p>
-      v2.10.3 is a minor release. There are a few minor fixes for issues related to v2.10.2.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Minor_fixes'>Minor fixes</span>
-    </h3>
-    <p>
-      There are two worth mentioning:
-    </p>
-    <ul>
-      <li>
-        Commons wiki would not download files
-      </li>
-      <li>
-        Mediawiki would not handle the translate function
-      </li>
-    </ul>
-    <p>
-      The rest are more trivial in comparison. You can check the [[Help:Change log]] for more detail.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Image_packages_for_Serbian.2C_Malay_and_Bulgarian_wikis'>Image packages for Serbian, Malay and Bulgarian wikis</span>
-    </h3>
-    <p>
-      I'm uploading Bulgarian now, but the rest should be ready at archive.org. See: <a href="https://archive.org/details/Xowa_srwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_srwiki_latest</a> <a href="https://archive.org/details/Xowa_mswiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_mswiki_latest</a> and <a href="https://archive.org/details/Xowa_bgwiki_latest" class="external text" rel="nofollow">https://archive.org/details/Xowa_bgwiki_latest</a>
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.10.4'>Next release: v2.10.4</span>
-    </h3>
-    <p>
-      I'm still waiting on commons / wikidata before doing an English Wikipedia update. I'll work on Hebrew this week and Norwegian / Vietnamese as well.
-    </p>
-    <p>
-      For code, I'm going to change tack again and table the article update function. I'm working on a different XOWA Android UI with hopes of updating the alpha in the next few weeks.
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_v2.10.2.1_.282015-10-11_22:45_Sun.29'>Release: v2.10.2.1 (2015-10-11 22:45 Sun)</span>
-    </h2>
-    <p>
-      v2.10.2 is a major release. It has a critical fix for the 2015-10 English Wikipedia dump. It also features better functionality for Chinese / Serbian language wikis. Finally, it also has some significant under-the-hood changes
-    </p>
-    <h3>
-      <span class='mw-headline' id='Fix_for_broken_references_in_2015-10_English_Wikipedia_dump'>Fix for broken references in 2015-10 English Wikipedia dump</span>
-    </h3>
-    <p>
-      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="https://en.wikipedia.org/wiki/Module:Citation/CS1">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
-    </p>
-    <p>
-      I recompiled a new version of luaj_xowa.jar to fix this issue.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Language_support_for_Chinese_.2F_Serbian_languages'>Language support for Chinese / Serbian languages</span>
-    </h3>
-    <p>
-      This item basically involves the following changes:
-    </p>
-    <ul>
-      <li>
-        Serbian languages now have language dropdowns. For example, sr.wikipedia.org now allows you to switch between Cyrillic and Latin variants
-      </li>
-      <li>
-        Chinese and Serbian wikis now fully implement the "-{}-" syntax. This includes some significant functions like recursive conversion, word-interchangeability, and adhoc rule-definition. See: <a href="https://www.mediawiki.org/wiki/Writing_systems/Syntax">https://www.mediawiki.org/wiki/Writing_systems/Syntax</a>
-      </li>
-    </ul>
-    <p>
-      I'm really hoping that the new functionality matches MediaWiki. If you're a Chinese / Serbian user, please take a moment to spot-check a few pages and let me know if there is anything amiss.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Better_support_for_.3Csource.3E_and_.3Csyntaxhighlight.3E'>Better support for &lt;source&gt; and &lt;syntaxhighlight&gt;</span>
-    </h3>
-    <p>
-      MediaWiki recently changed the &lt;syntaxhighlight&gt; extension away from geshi to Pygments. In the process, it looks like they changed a few of the general parsing rules as well. v2.10.4 has better support for these blocks, though actual syntax coloring is still some time away.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Full_support_for_interwiki_links'>Full support for interwiki links</span>
-    </h3>
-    <p>
-      v2.10.2 now incorporates online calls to Wikimedia APIs. The first use was to download a full list of interwiki aliases for each wiki. For those users in offline mode, you can manually generate the list. For more info, see [[Help:Site config]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='Support_for_Dansguardian_import_filter'>Support for Dansguardian import filter</span>
-    </h3>
-    <p>
-      XOWA supports custom creation of wikis by matching articles against words. For example, you can create an English Wikipedia that doesn't have any Pokemon articles. Or you can create an English Wikipedia that just has Pokemon articles. The system is intricate but should be quite powerful. For more info, see [[Help:Import/Dansguardian]]
-    </p>
-    <h3>
-      <span class='mw-headline' id='More_source_code_cleanup'>More source code cleanup</span>
-    </h3>
-    <p>
-      There was a lot of source code cleanup. The process is still ongoing as I'm working on removing old code, as well as rewriting some knottier sections.
-    </p>
-    <h3>
-      <span class='mw-headline' id='Next_release:_v2.10.3'>Next release: v2.10.3</span>
-    </h3>
-    <p>
-      I didn't have time to generate any wikis this week. I'm going to do English, Serbian and one of Malay, Hebrew, Bulgarian for v2.10.2
-    </p>
-    <p>
-      For code, I'm going to start working on an article update function (update the offline article with the latest version from online Wikipedia).
-    </p>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class='mw-headline' id='Release:_NONE_.282015-10-04_22:00_Sun.29'>Release: NONE (2015-10-04 22:00 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week. I ran into some issues with Chinese / Serbian translations, though I think I'm pretty close to being done. In addition, I have some other significant changes in queue which I didn't want to introduce for a "first-week-of-the-month" release.
-    </p>
-    <p>
-      If you want a recent stable release, use <a href="https://github.com/gnosygnu/xowa/releases/tag/v2.9.4.1" class="external text" rel="nofollow">v2.9.4.1</a>. I'll keep that release up for a month.
-    </p>
-    <p>
-      Otherwise, next week's v2.10.2 will have more changes. I'll also resume generating wikis from the list below.
-    </p>
-<!-- page_end -->    
+  
     </div>
   </div>
 </div>
-
 
 
 <div id="mw-head" class="noprint">
@@ -1495,19 +317,29 @@
 
 <div id='mw-panel' class='noprint'>
   <div id='p-logo'>
-    <a style="background-image: url(xowa-logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
   </div>
   <div class="portal" id='xowa-portal-home'>
     <h3>XOWA</h3>
     <div class="body">
       <ul>
-        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
-        <li><a href="blog.html" title='Follow XOWA''s development process'>Blog</a></li>
-        <li><a href="screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
-        <li><a href="download.html" title='Download the XOWA application'>Download XOWA</a></li>
-        <li><a href="image_dbs.html" title='Download offline wikis and image databases'>Download wikis</a></li>
-        <li><a href="reviews.html" title='Read what others have written about XOWA'>Media</a></li>
-        <li><a href="about.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
       </ul>
     </div>
   </div>
@@ -1516,16 +348,23 @@
     <h3>Help</h3>
     <div class="body">
       <ul>
-        <li><a href="requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
-        <li><a href="installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
-        <li><a href="setup_simplewiki.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
-        <li><a href="setup_enwiki.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
-        <li><a href="setup_other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
-        <li><a href="contact.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
       </ul>
     </div>
   </div>
   
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="portal" id='xowa-portal-links'>
     <h3>Links</h3>
     <div class="body">
