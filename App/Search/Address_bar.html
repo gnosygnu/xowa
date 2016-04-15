@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Search/Address bar - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Search/Address bar</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can search for a page using the url-bar.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Auto-complete"><span class="tocnumber">1</span> <span class="toctext">Auto-complete</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Basic_details"><span class="tocnumber">2</span> <span class="toctext">Basic details</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#UI"><span class="tocnumber">2.1</span> <span class="toctext">UI</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#General"><span class="tocnumber">2.2</span> <span class="toctext">General</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Wildcard"><span class="tocnumber">2.3</span> <span class="toctext">Wildcard</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Punctuation"><span class="tocnumber">2.4</span> <span class="toctext">Punctuation</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Redirects"><span class="tocnumber">2.5</span> <span class="toctext">Redirects</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Performance"><span class="tocnumber">3</span> <span class="toctext">Performance</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#Very_fast"><span class="tocnumber">3.1</span> <span class="toctext">Very fast</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#Fast"><span class="tocnumber">3.2</span> <span class="toctext">Fast</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#Slow"><span class="tocnumber">3.3</span> <span class="toctext">Slow</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Auto-complete">Auto-complete</span>
+    </h2>
+    <p>
+      As of v3.3.4.1, the address bar supports auto-completion. This function can only be used with a wiki built in v3.3.4.1 or later. If the address bar is not working, you should rebuild the search-databases. See <a href="http://xowa.org/wiki/home/page/App/Search/Build.html" id="xolnki_2" title="App/Search/Build" class="xowa-visited">App/Search/Build</a> for more information.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Basic_details">Basic details</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="UI">UI</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Searches return 10 results</b>: To change the number, see <a href="http://xowa.org/wiki/home/page/Options/Search_suggest.html" id="xolnki_3" title="Options/Search suggest" class="xowa-visited">Options/Search_suggest</a>
+      </li>
+      <li>
+        <b>The keys "up" / "down" / "page-up" / "page-down" works like Firefox</b>: The url-bar is meant to emulate Firefox's behavior. This includes: 
+        <ul>
+          <li>
+            Pressing "up" in the first row transfers focus to the url bar.
+          </li>
+          <li>
+            Pressing "up" in the url bar goes goes to the last row.
+          </li>
+          <li>
+            Pressing "page-up" jumps up by 5 rows. This number can be changed at <a href="http://xowa.org/wiki/home/page/Options/Search_suggest.html" id="xolnki_4" title="Options/Search suggest" class="xowa-visited">Options/Search_suggest</a>.
+          </li>
+          <li>
+            Pressing "page-up" when there is less than 5 rows will jump to the first row.
+          </li>
+          <li>
+            Pressing "page-up" in the first row transfers focus to the url bar.
+          </li>
+          <li>
+            Pressing "page-up" in the url bar goes to the last row.
+          </li>
+          <li>
+            For "down" and "page-down" the reverse is true.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="General">General</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Searches sort by page score</b>: By convention, XOWA scores every page with percentile ranking ("graded curve") from 0 to 1,000,000. Page score is based on <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/PageRank</a> . In short, a page has a high page score if there are many pages linking to it. For more info, see <a href="http://xowa.org/wiki/home/page/App/Search/Score.html" id="xolnki_5" title="App/Search/Score" class="xowa-visited">App/Search/Score</a>
+      </li>
+      <li>
+        <b>Searches find a page that matches the text and list it as the first result</b>: For example, searching for "earth" will automatically find the page "Earth" and list it as the first result, regardless of its score. (Technically, this entry is assigned a temporary score of 3,000,000)
+      </li>
+      <li>
+        <b>Searches are case-insensitive</b>: There is no difference between searching for "earth" or "Earth" or "EARTH" or "earTH".
+      </li>
+      <li>
+        <b>Searches match any word in the page title.</b>: For example, searching for "earth" not only matches "Earth" and "Earth Day", but also "History of Earth" and "Future of Earth"
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Wildcard">Wildcard</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Searches automatically have a wildcard at the end</b>: For example, searching for "earth" is actually a search for "earth*" and will return "Earth" as well as "Earthquake", "Earthworm", "Earthenware", etc.. Similarly, "earth h" will find "History of Earth", "Earth hour", "High Earth Orbit", etc..
+      </li>
+      <li>
+        <b>Searches can have an explicit wildcard</b>: For example, searching for "ear* hist" can return "History of Earth" as well as "Early Modern History".
+      </li>
+      <li>
+        <b>Searches can be unwildcarded with a space</b>: For example, searching for "earth " (earth and a single space) will return "Earth" and "History of Earth" but not "Earthquake", "Earthworm", "Earthenware", etc..
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Punctuation">Punctuation</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Searches can use punctuation</b>: For example, searches can be for punctuated items like "c++" or "o'clock" or "role-playing". However, the following symbols are reserved: double-quotes, parentheses, dash, plus, comma, backslash and asterisk.
+      </li>
+      <li>
+        <b>Searches can filter out words using a dash</b>: For example, searching for "earth -middle" will return "Earth", but not "Middle-Earth"
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Redirects">Redirects</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Redirects are identified with a "-&gt;" as well as the name of the redirect destination.</b> For example, "Near-Earth asteroid" shows as "Near-Earth asteroid -&gt; Near-Earth object". This can be interpreted as the "Near-Earth asteroid" redirect which leads to the "Near-Earth object" page.
+      </li>
+      <li>
+        <b>Searches remove redundant redirects</b>: Wikis may have multiple redirects to the same page. For example, "The Earth", "EartH", and "Earth (Planet)" all lead to "Earth". When searching for "earth", at most, "The Earth" would be listed. "EartH", and "Earth (Planet)" would not show because they point to the same target page ("Earth") which "The Earth" already points to. (In reality, "The Earth" would not even be listed, because "earth" would automatically pull up "Earth", and "The Earth" would be considered redundant.)
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Performance">Performance</span>
+    </h2>
+    <p>
+      As a brief guide, the following illustrates which search terms will be faster than others.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Very_fast">Very fast</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Exact title match</b>: For example, "earth" will be fast as it matches the page "Earth" exactly. (Technically, it searches the page table using the page_title index)
+      </li>
+      <li>
+        <b>One word with no wildcards</b>: For example, "earth " will be fast as it matches the "earth" word exactly. (Technically, it searches the search_link table using word_id)
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Fast">Fast</span>
+    </h3>
+    <ul>
+      <li>
+        <b>One word with a wildcard</b>: For example, "earth*" will be moderate as it matches all words that start with earth. (Technically, it searches the search_link table using word_text for a range of words)
+      </li>
+      <li>
+        <b>Many words with a wildcard</b>: For example, "earth h*" will pick the word which the fewest results and search for it. In this case, "earth" has fewer pages than "h*", so it will search for "earth"
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Slow">Slow</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Many words with each word being linked to many pages but resulting in low-scored pages</b>: For example, "page meg*" will only match one page in English Wikipedia: "Megan Page".
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Category/Internals - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Category/Internals</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      This page will document some of the internals of V2
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Builder_commands"><span class="tocnumber">1</span> <span class="toctext">Builder commands</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#ctg.hiddencat_sql"><span class="tocnumber">1.1</span> <span class="toctext">ctg.hiddencat_sql</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#ctg.hiddencat_ttl"><span class="tocnumber">1.2</span> <span class="toctext">ctg.hiddencat_ttl</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#ctg.link_sql"><span class="tocnumber">1.3</span> <span class="toctext">ctg.link_sql</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#ctg.link_idx"><span class="tocnumber">1.4</span> <span class="toctext">ctg.link_idx</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#.2Fcategory2.2F"><span class="tocnumber">2</span> <span class="toctext">/category2/</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#.2Fmain.2F"><span class="tocnumber">2.1</span> <span class="toctext">/main/</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#.2Flink.2F"><span class="tocnumber">2.2</span> <span class="toctext">/link/</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Builder_commands">Builder commands</span>
+    </h2>
+    <p>
+      For reference, this is the current script to set up the V2 Category system
+    </p>
+<pre>
+app.bldr.pause_at_end_('n');
+app.bldr.cmds
+.add_many('simple.wikipedia.org', 'ctg.hiddencat_sql', 'ctg.hiddencat_ttl', 'ctg.link_sql', 'ctg.link_idx').owner
+;
+app.bldr.run;
+</pre>
+    <p>
+      Note that 'ctg.link_sql' and 'ctg.link_idx' are required.
+    </p>
+    <p>
+      Note that 'ctg.hiddencat_sql' and 'ctg.hiddencat_ttl' can be omitted. However, it is recommended that they be run (for English Wikipedia, it adds less than 5 minutes to the entire process).
+    </p>
+    <h3>
+      <span class="mw-headline" id="ctg.hiddencat_sql">ctg.hiddencat_sql</span>
+    </h3>
+    <ul>
+      <li>
+        This command will look for a file matching *page_props.sql in the wiki directory
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        For example: /xowa/wiki/simple.wikipedia.org/simplewiki-latest-page_props.sql. Note this sql will have a format of (page_id, prop_name, prop_val)
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        It will then parse the .sql file and look for entries having a prop_name of "hiddencat". For example (1, 'hiddencat', '')
+      </li>
+    </ul>
+    <ul>
+      <li>
+        When it's done, it will generate a Base85 encoded list of all page_ids
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        The output directory will be /xowa/wiki/simple.wikipedia.org/tmp/ctg.hiddencat_sql/make/
+      </dd>
+      <dd>
+        An example of a file would be:
+      </dd>
+    </dl>
+<pre>
+!!!!#
+!!!!$
+</pre>
+    <h3>
+      <span class="mw-headline" id="ctg.hiddencat_ttl">ctg.hiddencat_ttl</span>
+    </h3>
+    <ul>
+      <li>
+        This command will look at the output of ctg.hiddencat_sql and find the appropriate title for the given id
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        This step is necessary as the category indexes are sorted by title, not by id.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        When it's done, it will generate a sorted list of title|id.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        The output directory will be /xowa/wiki/simple.wikipedia.org/tmp/ctg.hiddencat_ttl/make/
+      </dd>
+      <dd>
+        An example of a file would be:
+      </dd>
+    </dl>
+<pre>
+A|!!!!#
+B|!!!!$
+</pre>
+    <h3>
+      <span class="mw-headline" id="ctg.link_sql">ctg.link_sql</span>
+    </h3>
+    <ul>
+      <li>
+        This command will look for a file matching *categorylinks.sql in the wiki directory
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        For example: /xowa/wiki/simple.wikipedia.org/simplewiki-latest-categorylinks.sql.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        It will then parse the .sql file and extract the following data: category_name, page_id, page_member_type, page_sortkey, page_member_add_date
+      </li>
+    </ul>
+    <ul>
+      <li>
+        When it's done, it will generate a sorted list of category|type|sortkey|id|date.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        The output directory will be /xowa/wiki/simple.wikipedia.org/tmp/ctg.link_sql/make/
+      </dd>
+      <dd>
+        An example of a file would be:
+      </dd>
+    </dl>
+<pre>
+A|p|Page_1_sortkey|!!!!%|!!!@!|
+B|p|Page_2_sortkey|!!!!^|!!!@@|
+</pre>
+    <h3>
+      <span class="mw-headline" id="ctg.link_idx">ctg.link_idx</span>
+    </h3>
+    <ul>
+      <li>
+        This command will generate the /category2/ hive based on the output of the above commands. It uses the following: 
+        <ul>
+          <li>
+            Category link data as built in /xowa/wiki/simple.wikipedia.org/tmp/ctg.link_sql/make/.
+          </li>
+          <li>
+            Category hidden data as built in /xowa/wiki/simple.wikipedia.org/tmp/ctg.hiddencat_ttl/make/.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        It will then merge the output of the above data and generate the /main/ and /link/ sudirectories in /category2/
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id=".2Fcategory2.2F">/category2/</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id=".2Fmain.2F">/main/</span>
+    </h3>
+    <p>
+      The main files are located at /xowa/wiki/simple.wikipedia.org/site/category2/main/. They follow the same hive structure as the other directories (a main reg.csv and subdirectories of the format of /00/00/00/00/0123456789.xdat)
+    </p>
+    <p>
+      Each file contains header information for a category. Presently, this includes the following:
+    </p>
+    <ul>
+      <li>
+        Category name
+      </li>
+      <li>
+        Hidden: "y" means hidden; "n" means not hidden
+      </li>
+      <li>
+        Number of subcategories (Base85 encoded)
+      </li>
+      <li>
+        Number of files (Base85 encoded)
+      </li>
+      <li>
+        Number of pages (Base85 encoded)
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        EX: <code>A|y|!!!!!|!!!!!|!!!!!|</code>
+      </dd>
+    </dl>
+    <h3>
+      <span class="mw-headline" id=".2Flink.2F">/link/</span>
+    </h3>
+    <p>
+      The link files are located at /xowa/wiki/simple.wikipedia.org/site/category2/link/. They also follow the same hive structure as the other directories.
+    </p>
+    <p>
+      Each file contains members of a category. Presently, this includes the following:
+    </p>
+    <ul>
+      <li>
+        Category name
+      </li>
+      <li>
+        Length of subcategories data
+      </li>
+      <li>
+        Length of files data
+      </li>
+      <li>
+        Length of pages data
+      </li>
+      <li>
+        A series of entries listing category members 
+        <ul>
+          <li>
+            Note that these entries are broken into subgroups (subcategories / files / pages) depending on the preceding lengths.
+          </li>
+          <li>
+            Each entry is in a semi-colon delimited format 
+            <ul>
+              <li>
+                page_id (Base85 encoded)
+              </li>
+              <li>
+                page_member_add_date (Base85 encoded)
+              </li>
+              <li>
+                page_sortkey
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <dl>
+          <dd>
+            EX (for entry): <code>|!!!!%;!!!@!;Page_1_sortkey|</code>
+          </dd>
+        </dl>
+      </dd>
+      <dd>
+        EX (for all): <code>A|!!!!!|!!!!!|!!!!X|!!!!%;!!!@!;Page_1_sortkey|!!!!^;!!!@@;Page_2_sortkey|</code>
+      </dd>
+    </dl>
+    <p>
+      <br>
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

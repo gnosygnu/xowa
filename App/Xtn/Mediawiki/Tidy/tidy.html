@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Mediawiki/Tidy/tidy - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Mediawiki/Tidy/tidy</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <table class="metadata plainlinks ambox ambox-delete" style="">
+      <tr>
+        <td class="mbox-empty-cell">
+        </td>
+        <td class="mbox-text" style="">
+          <p>
+            <span class="mbox-text-span">Note: This page is obsolete. It is preserved for historical reference only.</span>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      MediaWiki often uses <a href="http://www.w3.org/People/Raggett/tidy/" rel="nofollow" class="external text">HTML tidy</a> to clean up "dirty" HTML.
+    </p>
+    <p>
+      For example, HTML tidy will take the sequence "&lt;sup&gt;a&lt;/sub&gt;" and transform it to "&lt;sup&gt;a&lt;/su<span style="color:red;">p</span>&gt;".
+    </p>
+    <p>
+      XOWA integrates some of this functionality within its parser. However, it only implements a very small subset of the HTML tidy binary.
+    </p>
+    <p>
+      If you notice pages that are rendering incorrectly, you may want to enable HTML tidy. The following steps will need to be taken:
+    </p>
+    <ul>
+      <li>
+        In the <b>xowa.gfs</b> file, change 'n' to 'y' for html.tidy_enabled_('n');
+      </li>
+      <li>
+        In the <b>xowa.gfs</b> file, point '.tidy_html' to the location of the binary (/usr/bin/tidy on Linux).
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        If you're on Windows, you should download HTML tidy and place it in <b>/xowa/bin/windows/tidy</b>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Restart XOWA
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

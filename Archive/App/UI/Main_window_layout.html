@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Archive/App/UI/Main window layout - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Archive/App/UI/Main window layout</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      <b>This section is obsolete. Future versions will change the layout mechanism considerably.</b>
+    </p>
+    <p>
+      All sections are designed to be copied and pasted directly to xowa.gfs.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Increase_font_size_to_10">Increase font size to 10</span>
+    </h2>
+    <p>
+      This section increases the font size to 10 and adjusts the sizes/positions accordingly
+    </p>
+    <p>
+      The notes below provide rationale for the numbers if you want to increase to another size
+    </p>
+<pre style='overflow: auto;'>
+app.gui.layout
+// each "btn" gets +1 width and +1 height
+.go_bwd_btn .size_rel_('    +1,     +1').font_name_('Arial').font_size_(10).text_('&lt;').owner
+.go_fwd_btn .size_rel_('    +1,     +1').font_name_('Arial').font_size_(10).text_('&gt;').owner
+// the url_box loses -2 width because both buttons gained +1 width; it still gets +1 height for the increased font size
+.url_box    .size_rel_('    -2,     +1').font_name_('Arial').font_size_(10).owner
+// start with -22 for Windows XP Classic; decrease height by 2 to handle the +1 height to the top row and the +1 height to the bottom row
+.html_box   .size_rel_('    -8,    -24').pos_rel_(' 0,  0').owner
+// the heights are increased by +1
+.find_box   .size_rel_('     0,     +1').pos_rel_(' 0,  0').font_name_('Arial').font_size_(10).owner
+.prog_box   .size_rel_('     0,     +1').pos_rel_(' 0,  0').font_name_('Arial').font_size_(10).owner
+.note_box   .size_rel_('     0,     +1').pos_rel_(' 0,  0').font_name_('Arial').font_size_(10).owner
+;
+</pre>
+    <h2>
+      <span class="mw-headline" id="Increase_font_size_to_30">Increase font size to 30</span>
+    </h2>
+    <p>
+      A more extreme example: font gets changed to 30, so
+    </p>
+    <ul>
+      <li>
+        height must go to +26
+      </li>
+      <li>
+        the buttons widths must go to +26
+      </li>
+    </ul>
+<pre>
+app.gui.layout
+.go_bwd_btn .size_rel_('   +26,    +26').font_name_('Arial').font_size_(30).text_('&lt;').owner
+.go_fwd_btn .size_rel_('   +26,    +26').font_name_('Arial').font_size_(30).text_('&gt;').owner
+.url_box    .size_rel_('    -2,    +26').font_name_('Arial').font_size_(30).owner
+.html_box   .size_rel_('    -8,    -76').owner
+.find_box   .size_rel_('     0,    +26').font_name_('Arial').font_size_(30).owner
+.prog_box   .size_rel_('     0,    +26').font_name_('Arial').font_size_(30).owner
+.note_box   .size_rel_('     0,    +26').font_name_('Arial').font_size_(30).owner
+;
+</pre>
+    <h2>
+      <span class="mw-headline" id="Use_absolute_positions">Use absolute positions</span>
+    </h2>
+    <p>
+      Note that this will cause window resizing to have no effect (EX: shrink the window to 800, but the html_box will remain 1000)
+    </p>
+<pre>
+app.gui.layout
+.html_box   .mode_('abs').rect_abs_('  1000,   1000,    0,    0').owner
+.go_bwd_btn .mode_('abs').rect_abs_('    20,     20,    0, 1000').owner
+.go_fwd_btn .mode_('abs').rect_abs_('    20,     20,   20, 1000').owner
+.url_box    .mode_('abs').rect_abs_('    20,    960,   40, 1000').owner
+.find_box   .mode_('abs').rect_abs_('   200,     20,    0, 1020').owner
+.prog_box   .mode_('abs').rect_abs_('   600,     20,  200, 1020').owner
+.note_box   .mode_('abs').rect_abs_('   200,     20,  800, 1020').owner
+;
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

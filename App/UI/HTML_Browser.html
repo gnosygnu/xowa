@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/UI/HTML Browser - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/UI/HTML Browser</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      The HTML Browser is a core part of the XOWA application.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#HTTP_Server"><span class="tocnumber">2</span> <span class="toctext">HTTP Server</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Android"><span class="tocnumber">3</span> <span class="toctext">Android</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#SWT"><span class="tocnumber">4</span> <span class="toctext">SWT</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Mozilla_.28XULRunner.29"><span class="tocnumber">4.1</span> <span class="toctext">Mozilla (XULRunner)</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-6">
+                  <a href="#Background"><span class="tocnumber">4.1.1</span> <span class="toctext">Background</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-7">
+                  <a href="#ESR_limitation"><span class="tocnumber">4.1.2</span> <span class="toctext">ESR limitation</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#WebKit"><span class="tocnumber">4.2</span> <span class="toctext">WebKit</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#None"><span class="tocnumber">4.3</span> <span class="toctext">None</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Current_state_of_the_SWT_HTML_Browser_by_operating_systems"><span class="tocnumber">5</span> <span class="toctext">Current state of the SWT HTML Browser by operating systems</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#Windows"><span class="tocnumber">5.1</span> <span class="toctext">Windows</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#Mac_OS_X"><span class="tocnumber">5.2</span> <span class="toctext">Mac OS X</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#Linux"><span class="tocnumber">5.3</span> <span class="toctext">Linux</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      The XOWA GUI application embeds a web browser to show the wiki pages.
+    </p>
+    <h2>
+      <span class="mw-headline" id="HTTP_Server">HTTP Server</span>
+    </h2>
+    <p>
+      XOWA HTTP Server does not use the embedded XOWA web browser.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Android">Android</span>
+    </h2>
+    <p>
+      XOWA droid uses the built in WebView that comes with Android.
+    </p>
+    <h2>
+      <span class="mw-headline" id="SWT">SWT</span>
+    </h2>
+    <p>
+      XOWA uses SWT for its Web Browser across all 3 major operating systems: Windows, Linux, Mac OS X.
+    </p>
+    <p>
+      SWT provides 3 different modes for its Web Browser: mozilla, webkit and none. These can be configured through /xowa/bin/operating_system_name/xowa/cfg/xowa_cfg_os.gfs with the following snippet:
+    </p>
+<pre>
+app.gui {
+  browser_type = 'mozilla';
+}
+</pre>
+    <p>
+      More information on the 3 modes are below
+    </p>
+    <h3>
+      <span class="mw-headline" id="Mozilla_.28XULRunner.29">Mozilla (XULRunner)</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="Background">Background</span>
+    </h4>
+    <p>
+      <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/XULRunner" rel="nofollow" class="external text">XULRunner</a> is a runtime package provided by Mozilla that can be used to build Firefox-like applications. It can be deployed in a standalone package that does not interfere with any installed versions of Firefox.
+    </p>
+    <p>
+      The download location for xulrunner is <a href="http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/" rel="nofollow" class="external free">http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/</a>
+    </p>
+    <p>
+      XOWA includes xulrunner at /xowa/operating_system_name/xulrunner . For example, on Linux 64-bit, this folder is at /xowa/linux_64/xulrunner/
+    </p>
+    <p>
+      XOWA can use different versions of xulrunner with something like the following snippet:
+    </p>
+<pre>
+app.gui {
+  browser_type = 'mozilla';
+  xul_runner_path = '~{&lt;&gt;bin_plat_dir&lt;&gt;}xulrunner_v24';
+}
+</pre>
+    <h4>
+      <span class="mw-headline" id="ESR_limitation">ESR limitation</span>
+    </h4>
+    <p>
+      Mozilla Firefox has Extended Support Releases (ESRs). These start at version 10 and occur at 7-step intervals: 10, 17, 24, 31, 38.
+    </p>
+    <p>
+      Each version of SWT limits compatibility to a specific XULRunner ESR. For SWT version 4.5, the highest XULRunner is 31. Also, non-ESR versions are not allowed. For example, SWT will fail if using XULRunner v30.
+    </p>
+    <h3>
+      <span class="mw-headline" id="WebKit">WebKit</span>
+    </h3>
+    <p>
+      SWT can also be configured to use the system's default WebKit browser. In most cases, this relates directly to Safari and is easiest done on a Mac OS X system. It can be done for Linux / Windows, but further steps need to be taken. See <a href="https://www.eclipse.org/swt/faq.php#howusewebkit" rel="nofollow" class="external free">https://www.eclipse.org/swt/faq.php#howusewebkit</a>
+    </p>
+    <p>
+      XOWA may support WebKit on Linux / Windows at a future date, but for now, it is not a backlog item. If you are interested, please contact me and I will reevaluate.
+    </p>
+    <h3>
+      <span class="mw-headline" id="None">None</span>
+    </h3>
+    <p>
+      SWT can also be configured to use the system's browser through the keyword "none". For all intents and purposes, this basically applies to using Internet Explorer on Windows machines.
+    </p>
+    <p>
+      XOWA does not support Internet Explorer. It may do so in the future, but it would be dependent on the ease of the Javascript / CSS integration.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Current_state_of_the_SWT_HTML_Browser_by_operating_systems">Current state of the SWT HTML Browser by operating systems</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Windows">Windows</span>
+    </h3>
+    <p>
+      As of v2.6.5, XOWA uses XUL Runner 24 for both Windows 32 bit and Windows 64.
+    </p>
+    <p>
+      XULRunner 31 does work with Windows XP and Windows 7, but there have been reports of failure on Windows 8. As a result, 24 is the official package.
+    </p>
+    <p>
+      There is one known issue wherein an error message appears in the console: <code>1435372844657 addons.manager ERROR startup failed: [Exception... "Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIPrefBranch.setCharPref]" nsresult: "0x80070057 (NS_ERROR_ILLEGAL_VALUE)" location: "JS frame :: resource://gre/modules/AddonManager.jsm :: AMI_startup :: line 645" data: no] Stack trace: AMI_startup()@resource://gre/modules/AddonManager.jsm:645 &lt; AMP_startup()@resource://gre/modules/AddonManager.jsm:2318 &lt; AMC_observe()@resource://gre/components/addonManager.js:55 &lt; &lt;file:unknown&gt;</code>
+    </p>
+    <p>
+      However this appears to be benign. There is also currently an open bug on it. <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=466391" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=466391</a>
+    </p>
+    <p>
+      Neither WebKit nor None are supported on Windows.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Mac_OS_X">Mac OS X</span>
+    </h3>
+    <p>
+      As of v2.6.3, XOWA uses WebKit for Mac OS X.
+    </p>
+    <p>
+      The app package also includes XULRunner 31, but this is not enabled by default. The main issue is that mouse events are not relayed from XULrunner to SWT: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=246830" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=246830</a> . As a result, mouse hover does not work, and XOWA popups will not show.
+    </p>
+    <p>
+      WebKit appears to be mostly functional, but it doesn't handle cursor changes. Hovering over a link won't change the cursor to a hand cursor. This appears to be an SWT issue, though the only known ticket is closed: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=237562" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=237562</a>
+    </p>
+    <p>
+      The None mode is not supported on Mac OS X
+    </p>
+    <h3>
+      <span class="mw-headline" id="Linux">Linux</span>
+    </h3>
+    <p>
+      As of v2.6.5, XOWA uses XULRunner 24 with Linux.
+    </p>
+    <p>
+      Unfortunately, XULRunner 31 is not yet implemented by SWT. See: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=437700" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=437700</a>
+    </p>
+    <p>
+      Furthermore, XULRunner 24 requires GTK3 to be disabled since XULRunner is not yet ported to GTK3. See: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=423870" rel="nofollow" class="external free">https://bugs.eclipse.org/bugs/show_bug.cgi?id=423870</a>
+    </p>
+    <p>
+      XOWA accomplishes this by running the following in the xowa_linux_64.sh file "export SWT_GTK3=0 &amp;&amp; java -jar xowa_linux_64.jar"
+    </p>
+    <p>
+      Neither WebKit nor None are supported on Linux.
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

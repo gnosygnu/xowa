@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Code - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Code</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#License"><span class="tocnumber">2</span> <span class="toctext">License</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Operating_Systems"><span class="tocnumber">3</span> <span class="toctext">Operating Systems</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Software_Requirements"><span class="tocnumber">4</span> <span class="toctext">Software Requirements</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Compilation_instructions_.28ANT_command-line.29"><span class="tocnumber">5</span> <span class="toctext">Compilation instructions (ANT command-line)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Setup_the_XOWA_app"><span class="tocnumber">5.1</span> <span class="toctext">Setup the XOWA app</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Setup_the_XOWA_source"><span class="tocnumber">5.2</span> <span class="toctext">Setup the XOWA source</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Run_the_ant_file"><span class="tocnumber">5.3</span> <span class="toctext">Run the ant file</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#IDE_instructions_.28Eclipse.29"><span class="tocnumber">6</span> <span class="toctext">IDE instructions (Eclipse)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#Environment"><span class="tocnumber">6.1</span> <span class="toctext">Environment</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#Setup"><span class="tocnumber">6.2</span> <span class="toctext">Setup</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#Eclipse-specific_settings"><span class="tocnumber">6.3</span> <span class="toctext">Eclipse-specific settings</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-13">
+                  <a href="#Project_properties"><span class="tocnumber">6.3.1</span> <span class="toctext">Project properties</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-14">
+                  <a href="#Preferences"><span class="tocnumber">6.3.2</span> <span class="toctext">Preferences</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-15">
+                  <a href="#Configuration_arguments"><span class="tocnumber">6.3.3</span> <span class="toctext">Configuration arguments</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-16">
+          <a href="#Coding_style"><span class="tocnumber">7</span> <span class="toctext">Coding style</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      XOWA is an offline Wikipedia application. It can run an offline copy of Wikipedia on your computer by using any of the dumps at <a href="https://dumps.wikimedia.org" rel="nofollow" class="external free">https://dumps.wikimedia.org</a> It can run as a standalone GUI application, as a Firefox addon, or as a HTTP server.
+    </p>
+    <h2>
+      <span class="mw-headline" id="License">License</span>
+    </h2>
+    <p>
+      XOWA is released under the AGPLv3 license. See LICENSE.txt for more information.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Operating_Systems">Operating Systems</span>
+    </h2>
+    <p>
+      XOWA runs on Linux, Windows, and Mac OS X. These instructions will assume the user is on a 64-bit Linux system. However, if you're on a different system, the same instructions still apply. Simply substitute "linux_64" with the appropriate XOWA operating system name from below:
+    </p>
+    <ul>
+      <li>
+        Linux 64-bit : "linux_64"
+      </li>
+      <li>
+        Linux 32-bit : "linux"
+      </li>
+      <li>
+        Windows 64-bit : "windows_64"
+      </li>
+      <li>
+        Windows 32-bit : "windows"
+      </li>
+      <li>
+        Mac OS X 64-bit : "macosx_64"
+      </li>
+      <li>
+        Mac OS X 32-bit : "macosx"
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Software_Requirements">Software Requirements</span>
+    </h2>
+    <p>
+      XOWA is written in Java and requires 1.6 or above. It has seven dependencies:
+    </p>
+    <ol>
+      <li>
+        JUnit 4.8.2 (default version with Eclipse)
+      </li>
+      <li>
+        <a href="https://download.eclipse.org/eclipse/downloads/drops4/R-4.2.1-201209141800/#SWT" rel="nofollow" class="external text">SWT 4.2.1</a>: GUI library
+      </li>
+      <li>
+        <a href="https://github.com/gnosygnu/luaj_xowa" rel="nofollow" class="external text">luaj_xowa.jar</a>: Lua library
+      </li>
+      <li>
+        <a href="https://github.com/gnosygnu/jtidy_xowa" rel="nofollow" class="external text">jtidy_xowa.jar</a>: HTML tidy library
+      </li>
+      <li>
+        <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" rel="nofollow" class="external text">sqlite-jdbc-3.7.15-SNAPSHOT-2.jar</a>: Database library
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/j/" rel="nofollow" class="external text">mysql-connector-java-5.1.12-bin.jar</a>: Database library
+      </li>
+      <li>
+        <a href="https://jdbc.postgresql.org/download.html" rel="nofollow" class="external text">postgresql-8.4-701.jdbc4.jar</a>: Database library
+      </li>
+    </ol>
+    <p>
+      Note that the last two libraries are not currently used in XOWA.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Compilation_instructions_.28ANT_command-line.29">Compilation instructions (ANT command-line)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Setup_the_XOWA_app">Setup the XOWA app</span>
+    </h3>
+    <ul>
+      <li>
+        Download the latest XOWA app package for your operating system. For example, if you're on a 64-bit Linux system, "xowa_app_linux_64_v1.9.5.1.zip".
+      </li>
+      <li>
+        Unzip the XOWA app package to a directory. For the sake of simplicity, these instructions assume this directory is "/xowa/"
+      </li>
+      <li>
+        Review your directories. You should have the following: 
+        <ul>
+          <li>
+            An XOWA jar: "/xowa/xowa_linux_64.jar"
+          </li>
+          <li>
+            An XOWA "/bin/any/" directory with several jar files. For example, "/xowa/bin/any/java/apache/commons-compress-1.5.jar"
+          </li>
+          <li>
+            An XOWA "/bin/linux_64/" directory with an SWT jar: "/xowa/bin/linux_64/swt/swt.jar"
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Setup_the_XOWA_source">Setup the XOWA source</span>
+    </h3>
+    <ul>
+      <li>
+        Download the latest XOWA source archive. For example: "xowa_source_v1.9.5.1.7z"
+      </li>
+      <li>
+        Unzip the source to "/xowa/dev". When you're done, you'll have a file called "/xowa/dev/build.xml" as well as others
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        NOTE: if you're not on a Linux 64-bit system, overwrite the swt jar at "/xowa/dev/150_gfui/lib/swt.jar" with the copy from your "/bin/OS" directory. For example, if you're on a 64 bit Windows system, replace "/xowa/dev/150_gfui/lib/swt.jar" with "/bin/windows_64/swt/swt/jar"
+      </dd>
+    </dl>
+    <h3>
+      <span class="mw-headline" id="Run_the_ant_file">Run the ant file</span>
+    </h3>
+    <ul>
+      <li>
+        Open up a console, and run "ant -buildfile build.xml -Dplat_name=linux_64"
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="IDE_instructions_.28Eclipse.29">IDE instructions (Eclipse)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Environment">Environment</span>
+    </h3>
+    <p>
+      The <b>xowa_source.7z</b> was built with Eclipse Indigo. There are no OS dependencies, nor are there dependencies on Eclipse.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Setup">Setup</span>
+    </h3>
+    <ul>
+      <li>
+        Follow the steps in these two sections from above: 
+        <ul>
+          <li>
+            Setup the XOWA app
+          </li>
+          <li>
+            Setup the XOWA source
+          </li>
+        </ul>
+      </li>
+      <li>
+        Launch Eclipse. Choose a workbench folder of "/xowa/dev"
+      </li>
+      <li>
+        If the projects don't load, do File -&gt; Import -&gt; Existing Projects Into Workspace
+      </li>
+      <li>
+        Select all projects. Do File -&gt; Refresh.
+      </li>
+      <li>
+        Right-click on 400_xowa in the Package Explorer. Select Debug As -&gt; Java Application. Select Xowa_main. XOWA should launch.
+      </li>
+      <li>
+        Right-click on 400_xowa in the Package Explorer. Select Debug As -&gt; JUnit Test. All tests should pass.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Eclipse-specific_settings">Eclipse-specific settings</span>
+    </h3>
+    <p>
+      This section documents specific project customizations that differ from the standard Eclipse defaults.
+    </p>
+    <h4>
+      <span class="mw-headline" id="Project_properties">Project properties</span>
+    </h4>
+    <p>
+      Resource -&gt; Text file encoding -&gt; Other -&gt; UTF-8
+    </p>
+    <h4>
+      <span class="mw-headline" id="Preferences">Preferences</span>
+    </h4>
+    <p>
+      These settings are available under Window -&gt; Preferences
+    </p>
+    <ul>
+      <li>
+        Disable Spelling
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        General -&gt; Editors -&gt; Text Editors -&gt; Spelling
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Ignore Warnings
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Java -&gt; Compiler -&gt; Errors/Warnings 
+        <dl>
+          <dd>
+            Annotations -&gt; Unhandled token in '@SuppressWarnings'
+          </dd>
+          <dd>
+            Potential programming problems -&gt; Serializable class without serialVersionUID
+          </dd>
+          <dd>
+            Generic Types -&gt; Unnecessary generic type operation (In Eclipse Luna: "Unchecked generic type operation")
+          </dd>
+          <dd>
+            Generic Types -&gt; Usage of a raw type
+          </dd>
+          <dd>
+            Unnecessary Code -&gt; Unused import
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <h4>
+      <span class="mw-headline" id="Configuration_arguments">Configuration arguments</span>
+    </h4>
+    <ul>
+      <li>
+        Configuration arguments
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Run -&gt; Debug Configurations -&gt; Arguments 
+        <dl>
+          <dd>
+            <code>--root_dir /xowa/ --show_license n --show_args n</code>
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="Coding_style">Coding style</span>
+    </h2>
+    <p>
+      For many Java programmers my style will appear idiosyncratic if not downright strange.
+    </p>
+    <p>
+      Some background may help explain the current condition:
+    </p>
+    <ul>
+      <li>
+        Most of the lower libraries originated in C#. They were ported to Java about two to three years ago. As such, many of the idioms are not in Java. This includes exceptions (no checked exceptions), events (no anonymous inner classes) and properties (no getProperty/setProperty pattern).
+      </li>
+      <li>
+        As a corollary to the above, much of the code takes a language-agnostic approach. For example, during the migration, the gui library needed a way to invoke similar methods in .NET Winforms and Java Swing without directly binding to either. Event handling, IO calls, reflection and many other functions fall into this same category as there are a number of differences between the .NET and Java libraries.
+      </li>
+      <li>
+        Even with the above, the style is admittedly eccentric. For this, I will try to standardize it wherever it is inconsistent or whenever it becomes a point of contention.
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

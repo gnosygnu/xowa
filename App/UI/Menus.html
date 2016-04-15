@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/UI/Menus - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/UI/Menus</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA provides a menu for the main window as well as a popup menu for the HTML browser.
+    </p>
+    <ul>
+      <li>
+        The main menu can be activated by pressing and releasing Alt and then using the arrow keys (or the shortcuts)
+      </li>
+      <li>
+        The popup menu can be activated by right-clicking anywhere in the HTML area.
+      </li>
+    </ul>
+    <p>
+      These menus can also be customized using the source at <a href="http://xowa.org/wiki/home/page/Options/Menus.html" id="xolnki_2" title="Options/Menus" class="xowa-visited">Options/Menus</a>
+    </p>
+    <p>
+      Note that internationalization (translation by language) is only supported for German. Other languages can be supported, but translations are needed! See <a href="http://xowa.org/wiki/home/page/Help/Feedback.html" id="xolnki_3" title="Help/Feedback" class="xowa-visited">Help/Feedback</a>.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Reordering_items"><span class="tocnumber">1</span> <span class="toctext">Reordering items</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Removing_buttons"><span class="tocnumber">2</span> <span class="toctext">Removing buttons</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Removing_groups"><span class="tocnumber">3</span> <span class="toctext">Removing groups</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Modifying_buttons"><span class="tocnumber">4</span> <span class="toctext">Modifying buttons</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Modifying_groups"><span class="tocnumber">5</span> <span class="toctext">Modifying groups</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Adding_buttons"><span class="tocnumber">6</span> <span class="toctext">Adding buttons</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Adding_groups"><span class="tocnumber">7</span> <span class="toctext">Adding groups</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Reordering_items">Reordering items</span>
+    </h2>
+    <p>
+      To reorder buttons / groups, simply move the corresponding line / lines
+    </p>
+    <p>
+      For example, to move the <code>about</code> item
+    </p>
+    <ul>
+      <li>
+        Cut line 7
+      </li>
+      <li>
+        Paste at line 3
+      </li>
+    </ul>
+    <p>
+      <b>Before</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">4</span> <span> add_btn_default('xowa.help.diagnostics');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">6</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">7</span> <span style="background-color: #FFFFCC;"> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <p>
+      <b>After</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span style="background-color: #FFFFCC;"> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">4</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.diagnostics');</span>
+<span style="-moz-user-select:none;">6</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">7</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Removing_buttons">Removing buttons</span>
+    </h2>
+    <p>
+      To remove a button, remove the entire line.
+    </p>
+    <p>
+      For example, to remove the <code>diagnostics</code> item, remove the line <code>add_btn_default('xowa.help.diagnostics');</code>
+    </p>
+    <p>
+      <b>Before</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">4</span> <span style="background-color: #FFFFCC;"> add_btn_default('xowa.help.diagnostics');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">6</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">7</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <p>
+      <b>After</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">4</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">6</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">7</span> <span>}</span>
+</pre>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Removing_groups">Removing groups</span>
+    </h2>
+    <p>
+      To remove a group, remove the entire group starting at the line with the <code>{</code> and ending at the line with the <code>}</code>.
+    </p>
+    <p>
+      For example, to remove the <code>wikis</code> group, remove lines 4 - 7.
+    </p>
+    <p>
+      <b>Before</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.tools') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.tools.options');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_spr;</span>
+<span style="-moz-user-select:none;">4</span> <span style="background-color: #FFFFCC;"> add_grp_default('xowa.tools.wikis') {</span>
+<span style="-moz-user-select:none;">5</span> <span style="background-color: #FFFFCC;">   add_btn_default('xowa.tools.wikis.import_from_list');</span>
+<span style="-moz-user-select:none;">6</span> <span style="background-color: #FFFFCC;">   add_btn_default('xowa.tools.wikis.import_from_script');</span>
+<span style="-moz-user-select:none;">7</span> <span style="background-color: #FFFFCC;"> }</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <p>
+      <b>After</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.tools') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.tools.options');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_spr;</span>
+<span style="-moz-user-select:none;">4</span> <span>}</span>
+</pre>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Modifying_buttons">Modifying buttons</span>
+    </h2>
+    <p>
+      To modify a button, change the properties for the button.
+    </p>
+    <p>
+      For example, to change the properties of the <code>diagnostics</code> item, do the following:
+    </p>
+    <p>
+      <b>Before</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">4</span> <span style="background-color: #FFFFCC;"> add_btn_default('xowa.help.diagnostics');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">6</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">7</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <p>
+      <b>After</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span>add_grp_default('xowa.help') {</span>
+ <span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+ <span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+ <span style="-moz-user-select:none;">4</span> <span style="background-color: #FFFFCC;"> add_btn_default('xowa.help.diagnostics') {</span>
+ <span style="-moz-user-select:none;">5</span> <span style="background-color: #FFFFCC;">   text      = 'Diagnostics for Scribunto';</span>
+ <span style="-moz-user-select:none;">6</span> <span style="background-color: #FFFFCC;">   shortcut  = 's';</span>
+ <span style="-moz-user-select:none;">7</span> <span style="background-color: #FFFFCC;">   img       = 'help/about.png';</span>
+ <span style="-moz-user-select:none;">8</span> <span style="background-color: #FFFFCC;">   cmd       = 'app.api.nav.goto("home/wiki/Help:Diagnostics/Scribunto/All");';</span>
+ <span style="-moz-user-select:none;">9</span> <span style="background-color: #FFFFCC;"> }</span>
+<span style="-moz-user-select:none;">10</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">11</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">12</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">13</span> <span>}</span>
+</pre>
+    </div>
+    <ul>
+      <li>
+        To leave text, shortcut, img, or cmd unchanged, omit the line.
+      </li>
+      <li>
+        To leave an image or a shortcut blank, use <code>''</code>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Modifying_groups">Modifying groups</span>
+    </h2>
+    <p>
+      To modify a group, change the properties for the group.
+    </p>
+    <p>
+      For example, to change the properties of the <code>help</code> item, do the following:
+    </p>
+    <p>
+      <b>Before</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span style="background-color: #FFFFCC;">add_grp_default('xowa.help') {</span>
+<span style="-moz-user-select:none;">2</span> <span> add_btn_default('xowa.help.help');</span>
+<span style="-moz-user-select:none;">3</span> <span> add_btn_default('xowa.help.change_log');</span>
+<span style="-moz-user-select:none;">4</span> <span> add_btn_default('xowa.help.diagnostics');</span>
+<span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.context_menu');</span>
+<span style="-moz-user-select:none;">6</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">7</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">8</span> <span>}</span>
+</pre>
+    </div>
+    <p>
+      <b>After</b>:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+<span style="-moz-user-select:none;">1</span> <span style="background-color: #FFFFCC;">add_grp_default('xowa.help') {</span>
+ <span style="-moz-user-select:none;">2</span> <span style="background-color: #FFFFCC;"> text      = 'my help';</span>
+ <span style="-moz-user-select:none;">3</span> <span style="background-color: #FFFFCC;"> shortcut  = 'y';</span>
+ <span style="-moz-user-select:none;">4</span> <span style="background-color: #FFFFCC;"> img       = 'help/about.png';</span>
+ <span style="-moz-user-select:none;">5</span> <span> add_btn_default('xowa.help.help');</span>
+ <span style="-moz-user-select:none;">6</span> <span> add_btn_default('xowa.help.change_log');</span>
+ <span style="-moz-user-select:none;">7</span> <span> add_btn_default('xowa.help.diagnostics');</span>
+ <span style="-moz-user-select:none;">8</span> <span> add_btn_default('xowa.help.context_menu');</span>
+ <span style="-moz-user-select:none;">9</span> <span> add_spr();</span>
+<span style="-moz-user-select:none;">10</span> <span> add_btn_default('xowa.help.about');</span>
+<span style="-moz-user-select:none;">11</span> <span>}</span>
+</pre>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Adding_buttons">Adding buttons</span>
+    </h2>
+    <p>
+      To add a button, add a new line for <code>add_btn</code>
+    </p>
+    <p>
+      For example, to add a new button to go to simplewiki/Earth, do the following:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+add_btn('my_custom_namespace.my_custom_button_key', 'Goto Earth', 'e', 'help/about.png', 'app.api.nav.goto("simple.wikipedia.org/wiki/Earth");');
+</pre>
+    </div>
+    <ul>
+      <li>
+        To leave an image or a shortcut blank, use <code>''</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Adding_groups">Adding groups</span>
+    </h2>
+    <p>
+      To add a group, add a new section for <code>add_grp</code>
+    </p>
+    <p>
+      For example, to add a new group called pages, do the following:
+    </p>
+    <div class="mw-highlight">
+<pre style="overflow:auto">
+add_grp('my_custom_namespace.my_custom_group_key', 'Pages', 'p', 'help/about.png') {
+}
+</pre>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

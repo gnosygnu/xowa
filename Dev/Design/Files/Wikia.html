@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Design/Files/Wikia - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Design/Files/Wikia</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Background"><span class="tocnumber">2</span> <span class="toctext">Background</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Instructions"><span class="tocnumber">3</span> <span class="toctext">Instructions</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Image_Magic_and_Inkscape"><span class="tocnumber">4</span> <span class="toctext">Image Magic and Inkscape</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#.5Eorig_regy.sqlite3"><span class="tocnumber">5</span> <span class="toctext">^orig_regy.sqlite3</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Urls"><span class="tocnumber">6</span> <span class="toctext">Urls</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Orig_directory"><span class="tocnumber">7</span> <span class="toctext">Orig directory</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Thumb_directory"><span class="tocnumber">8</span> <span class="toctext">Thumb directory</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      Some wikis are not Wikimedia Foundation wikis, and may not have their images / files arranged in a WMF filesystem layout
+    </p>
+    <p>
+      XOWA supports using files from a single directory.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Background">Background</span>
+    </h2>
+    <p>
+      Wikimedia Foundation wikis place their images in a precisely defined filesystem layout.
+    </p>
+    <p>
+      For example, a file in a WMF tarball may have the following path /wmf_tarball/wikipedia/commons/7/70/A.png
+    </p>
+    <p>
+      Note that this path embeds the MD5 hash of the title in the path. In this case "70" are the first two characters of the MD5 hash for "A.png" which is "701ccaf6ec1641a9ff778fd0b862e5a2"
+    </p>
+    <p>
+      Because an MD5 hash is a non-trivial function, non-WMF wikis may find it difficult to arrange their files in the same filesystem layout.
+    </p>
+    <p>
+      XOWA allows these wikis to use an alternate method, where the files need only be placed inside a single directory.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Instructions">Instructions</span>
+    </h2>
+    <ul>
+      <li>
+        Go to home/wiki/Help:Options/Config script
+      </li>
+      <li>
+        Enter in the following:
+      </li>
+    </ul>
+<pre>
+app.wikis.get('my_wiki').files.wkrs.get('fs.dir') {
+  orig_dir      = '~{&lt;&gt;xowa_root_dir&lt;&gt;}wiki/my_wiki/orig/';
+  thumb_dir     = '~{&lt;&gt;xowa_root_dir&lt;&gt;}wiki/my_wiki/thumb/';
+}
+</pre>
+    <ul>
+      <li>
+        Place a file called "A.png" in "~{&lt;&gt;xowa_root_dir&lt;&gt;}wiki/my_wiki/orig/". For example, if XOWA is setup on a Windows machine at C:\xowa\ and your wiki is my_wiki, then your file should be at C:\xowa\wiki\my_wiki\orig\A.png.
+      </li>
+      <li>
+        Restart XOWA
+      </li>
+      <li>
+        Go to any page in my_wiki
+      </li>
+      <li>
+        Enter in [[File:A.png]]
+      </li>
+      <li>
+        Preview the page. The file should show
+      </li>
+      <li>
+        Enter in [[File:A.png|200px]]
+      </li>
+      <li>
+        Preview the page. The thumb should show
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Image_Magic_and_Inkscape">Image Magic and Inkscape</span>
+    </h2>
+    <ul>
+      <li>
+        You must have ImageMagick and Inkscape installed on your machine. They are needed because: 
+        <ul>
+          <li>
+            MediaWiki has a lot of logic that depends on the image's size. ImageMagick is used to get the size.
+          </li>
+          <li>
+            Thumbs are resized from the original. ImageMagick and Inkscape does the resizing.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id=".5Eorig_regy.sqlite3">^orig_regy.sqlite3</span>
+    </h2>
+    <ul>
+      <li>
+        A file called "^orig_regy.sqlite3" will be in the orig directory. 
+        <ul>
+          <li>
+            This db caches the sizes of the original files (so ImageMagick doesn't need to be continually run).
+          </li>
+          <li>
+            Note that if this file is deleted, it will be automatically regenerated
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Urls">Urls</span>
+    </h2>
+    <ul>
+      <li>
+        XOWA takes the following type of urls 
+        <ul>
+          <li>
+            Absolute urls: C:\xowa\wiki\my_wiki\images\
+          </li>
+          <li>
+            XOWA relative urls: ~{&lt;&gt;xowa_root_dir&lt;&gt;}wiki/my_wiki/images/ 
+            <ul>
+              <li>
+                Note that relative urls can use the "\" instead of the "/". However, it is recommended to use "/" for sharing across different machines (for example, the same USB drive can be used on both a Windows or Linux machine if a "/" path is used)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        File names need to comply with valid MediaWiki titles. For example, certain characters are invalid, such as [].
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Orig_directory">Orig directory</span>
+    </h2>
+    <ul>
+      <li>
+        All original files should go into the orig directory
+      </li>
+      <li>
+        The orig directory can be nested. 
+        <ul>
+          <li>
+            For example, /xowa/wiki/my_wiki/orig/ can have a subfile in /xowa/wiki/my_wiki/orig/level_0/level_00/A.png.
+          </li>
+          <li>
+            [[File:A.png]] will pick up this file
+          </li>
+          <li>
+            Note that file names should be unique with a given folder. If there are two files called A.png in two different subfolders, then XOWA will only use one, and ignore the other.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Thumb_directory">Thumb directory</span>
+    </h2>
+    <ul>
+      <li>
+        All thumbs will go into the thumb directory
+      </li>
+      <li>
+        Thumbs can be deleted, and they will be recreated.
+      </li>
+      <li>
+        For nested files, thumbs will be created in a parallel directory 
+        <ul>
+          <li>
+            For example, the original file is in /xowa/wiki/my_wiki/orig/level_0/level_00/A.png.
+          </li>
+          <li>
+            The thumb file will be created in /xowa/wiki/my_wiki/thumb/level_0/level_00/A.png/30px.png
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Sqlite/Tips - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Sqlite/Tips</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Avoid_LIKE"><span class="tocnumber">1</span> <span class="toctext">Avoid LIKE</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Alternative:_Use_comparison"><span class="tocnumber">2</span> <span class="toctext">Alternative: Use comparison</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Avoid_ORDER_BY"><span class="tocnumber">3</span> <span class="toctext">Avoid ORDER BY</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Alternative:_denormalize_the_table"><span class="tocnumber">3.1</span> <span class="toctext">Alternative: denormalize the table</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Alternative:_multiple_where_clauses"><span class="tocnumber">3.2</span> <span class="toctext">Alternative: multiple where clauses</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY"><span class="tocnumber">4</span> <span class="toctext">Beware bulk INSERTs into a table with a PRIMARY KEY</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#ATTACH"><span class="tocnumber">5</span> <span class="toctext">ATTACH</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Get_a_Solid_State_Drive"><span class="tocnumber">6</span> <span class="toctext">Get a Solid State Drive</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs"><span class="tocnumber">7</span> <span class="toctext">Use an INDEX for your SELECTs, especially JOINs</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE"><span class="tocnumber">8</span> <span class="toctext">Use TRANSACTIONs for multiple INSERT / UPDATE / DELETE</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#Use_PRAGMA_page_size_4096"><span class="tocnumber">9</span> <span class="toctext">Use PRAGMA page_size 4096</span></a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="Avoid_LIKE">Avoid LIKE</span>
+    </h3>
+    <ul>
+      <li>
+        Like is not performant, as it will search both lowercase and uppercase. You can get around this with PRAGMA case_sensitive_like=OFF;
+      </li>
+      <li>
+        Like does not use an index.
+      </li>
+    </ul>
+    <p>
+      Consider the following table:
+    </p>
+<pre>
+CREATE TABLE tbl1
+( id    integer      NOT NULL    PRIMARY KEY
+, name  varchar(255) NOT NULL
+);
+CREATE INDEX tbl1__name ON tbl1 (name);
+</pre>
+    <p>
+      Now, consider the following query:
+    </p>
+<pre>
+SELECT  id
+FROM    tbl1
+WHERE   name LIKE 'a%';
+</pre>
+    <p>
+      The clause <code>name LIKE 'a%'</code> does not use the index <code>tbl1__name</code>.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Alternative:_Use_comparison">= Alternative: Use comparison</span>
+    </h3>
+    <p>
+      If the like has a wildcard at the end, and the data is standardized to one case (all lowercase or all uppercase), use an equality instead:
+    </p>
+<pre>
+SELECT  id
+FROM    tbl1
+WHERE   name &gt;= 'a' AND name &lt; 'b';
+</pre>
+    <p>
+      This uses the index <code>tbl1__name</code> and returns the same data.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Avoid_ORDER_BY">Avoid ORDER BY</span>
+    </h3>
+    <p>
+      ORDER BY will do an expensive sort operation which may not use an index. This will come into play with multiple-table joins
+    </p>
+<pre>
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN tbl2 t2 ON t1.id = t2.id
+ORDER BY t2.age
+;
+</pre>
+    <p>
+      In most cases, SQLite will only apply one index. In this example, it will be the index for the JOIN. No index gets applied for the score column, even if one is available In some cases, SQLite will actually sort the result-set by the ORDER BY first, before it applies the WHERE.
+    </p>
+    <h4>
+      <span class="mw-headline" id="Alternative:_denormalize_the_table">Alternative: denormalize the table</span>
+    </h4>
+    <p>
+      Putting all the columns in one table and building an index across them.
+    </p>
+    <h4>
+      <span class="mw-headline" id="Alternative:_multiple_where_clauses">Alternative: multiple where clauses</span>
+    </h4>
+<pre>
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN tbl2 t2 ON t1.id = t2.id
+WHERE   t2.age &gt; 100 AND t2.age &lt;= 130
+;
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN tbl2 t2 ON t1.id = t2.id
+WHERE   t2.age &gt;  70 AND t2.age &lt;= 100
+;
+</pre>
+    <h3>
+      <span class="mw-headline" id="Beware_bulk_INSERTs_into_a_table_with_a_PRIMARY_KEY">Beware bulk INSERTs into a table with a PRIMARY KEY</span>
+    </h3>
+<pre>
+INSERT INTO 
+
+INSERT INTO tbl2 (id, key)
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN tbl2 t2 ON t1.id = t2.id
+WHERE   t2.age &gt; 100 AND t2.age &lt;= 130
+;
+</pre>
+    <p>
+      Instead, insert into the table with an ORDER BY
+    </p>
+    <h3>
+      <span class="mw-headline" id="ATTACH">ATTACH</span>
+    </h3>
+    <p>
+      ATTACH database does not affect performance. There is no difference between the following
+    </p>
+<pre>
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN tbl2 t2 ON t1.id = t2.id
+;
+</pre>
+<pre>
+ATTACH  'db2.sqlite3' AS 'db2';
+SELECT  t1.id
+FROM    tbl1 t1
+        JOIN db2.tbl2 t2 ON t1.id = t2.id
+;
+</pre>
+    <h2>
+      <span class="mw-headline" id="Get_a_Solid_State_Drive">Get a Solid State Drive</span>
+    </h2>
+    <p>
+      SQLite does a lot of disk reading and writing
+    </p>
+    <h2>
+      <span class="mw-headline" id="Use_an_INDEX_for_your_SELECTs.2C_especially_JOINs">Use an INDEX for your SELECTs, especially JOINs</span>
+    </h2>
+    <h2>
+      <span class="mw-headline" id="Use_TRANSACTIONs_for_multiple_INSERT_.2F_UPDATE_.2F_DELETE">Use TRANSACTIONs for multiple INSERT / UPDATE / DELETE</span>
+    </h2>
+    <h2>
+      <span class="mw-headline" id="Use_PRAGMA_page_size_4096">Use PRAGMA page_size 4096</span>
+    </h2>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Basics/Editing - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Basics/Editing</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      Editing articles is an important part of any wiki -- even offline ones.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Basic_usage"><span class="tocnumber">1</span> <span class="toctext">Basic usage</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Wiki_text_and_syntax"><span class="tocnumber">2</span> <span class="toctext">Wiki text and syntax</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Corrections_.2F_fixes_are_encouraged"><span class="tocnumber">3</span> <span class="toctext">Corrections / fixes are encouraged</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Free-form_edits_are_at_your_own_risk"><span class="tocnumber">4</span> <span class="toctext">Free-form edits are at your own risk</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Past_versions_are_not_archived"><span class="tocnumber">5</span> <span class="toctext">Past versions are not archived</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Sandbox"><span class="tocnumber">6</span> <span class="toctext">Sandbox</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Keyboard_shortcuts"><span class="tocnumber">7</span> <span class="toctext">Keyboard shortcuts</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Basic_usage">Basic usage</span>
+    </h2>
+    <p>
+      You can activate the edit feature for any page by clicking the <b>Edit</b> button in the top right-hand corner.
+    </p>
+    <p>
+      The page will change to a large text area with two buttons: <b>Save page</b> and <b>Show preview</b>.
+    </p>
+    <p>
+      You can make your changes and press <b>Show preview</b>. The text will be rendered in HTML above, but the text area will remain on the bottom for continued editing.
+    </p>
+    <p>
+      When you are satisfied with your changes, press <b>Save page</b>.
+    </p>
+    <p>
+      If you need to cancel changes you can simply click on either the <b>Read</b> or <b>Edit</b> button. As long as <b>Save page</b> is not invoked, the changes will not be saved.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Wiki_text_and_syntax">Wiki text and syntax</span>
+    </h2>
+    <p>
+      XOWA should support all forms of wiki syntax. Note that there may be outlier quirks due to discrepancies between XOWA's parsing approach and MediaWiki's.
+    </p>
+    <p>
+      If you need information on wiki syntax, you should consult the Wikipedia <a href="http://en.wikipedia.org/wiki/Help:Wiki_markup" rel="nofollow" class="external text">Wiki markup page</a>.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Corrections_.2F_fixes_are_encouraged">Corrections / fixes are encouraged</span>
+    </h2>
+    <p>
+      The Edit article feature should be used to correct articles that were broken or vandalized at the time of the data dump.
+    </p>
+    <p>
+      To correct an article, navigate to the online version of the article and copy the text to the offline one.
+    </p>
+    <p>
+      For example, let's say the Earth article was vandalized prior to being memorialized in the data-dump. The current version has since fixed the vandalism.
+    </p>
+    <p>
+      To incorporate the correct online version into the offline one:
+    </p>
+    <ul>
+      <li>
+        Navigate to <code>http://en.wikipedia.org/w/index.php?title=Earth&amp;action=edit</code>
+      </li>
+      <li>
+        Select and copy the wiki text.
+      </li>
+      <li>
+        Go to the offline version of the article: <a href="https://en.wikipedia.org/wiki/Earth.html" id="xolnki_2" title="Earth">en.wikipedia.org:Earth</a>
+      </li>
+      <li>
+        Click on <b>Edit</b>
+      </li>
+      <li>
+        Press Ctrl+V to paste the wiki text into the text area.
+      </li>
+      <li>
+        Click on <b>Save Page</b>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Free-form_edits_are_at_your_own_risk">Free-form edits are at your own risk</span>
+    </h2>
+    <p>
+      Article editing should not be used for your own personal free-form edits. Note that each wiki dump is considered "disposable". The official source is the online Wikimedia version. Any changes made in to the offline version will be lost upon updating the dump.
+    </p>
+    <p>
+      For example, you can make extensive notes to the Earth page for your offline 2012-12-11 Simple Wikipedia data dump. Whenever you update to the data dump for 2013-01-11, you will need to manually copy and paste your edited page to the new wiki dump. XOWA has no provision for automatically carrying over any changes from the 2012-12-11 version to the 2013-01-11 one.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Past_versions_are_not_archived">Past versions are not archived</span>
+    </h2>
+    <p>
+      XOWA currently does not archive edits. Once you save a page, the old version is lost. If you need to maintain history, you should either use the <b>View History</b> function on the online wikis, or manually track your own changes in a separate document.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Sandbox">Sandbox</span>
+    </h2>
+    <p>
+      Because past changes are not archived, there is a risk that you may accidentally overwrite changes while editing a page. It is encouraged that you test new changes in the sandbox for any given wiki. You can enter the sandbox by typing in <b>Project:Sandbox</b> in the Address bar, or by pressing Ctrl+F1.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Keyboard_shortcuts">Keyboard shortcuts</span>
+    </h2>
+    <ul>
+      <li>
+        Alt+Shift+P: Previews the page.
+      </li>
+      <li>
+        Alt+Shift+S: Saves the page and returns to read mode.
+      </li>
+      <li>
+        Ctrl+S: Saves the page but keeps the page in edit mode.
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

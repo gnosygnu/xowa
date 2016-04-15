@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Diagnostics/Javascript/Timeline - XOWA</title>
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Javascript/Timeline</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <h2>
+      <span class="mw-headline" id="Timeline">Timeline</span>
+    </h2>
+    <p>
+      From <a href="http://www.mediawiki.org/wiki/Template:Wikimedia_Growth" rel="nofollow" class="external free">http://www.mediawiki.org/wiki/Template:Wikimedia_Growth</a>
+    </p>
+<pre class='xowa-timeline'>
+ImageSize  = width:903 height:660
+PlotArea   = left:73 right:130 top:30 bottom:140
+Legend     = top:110 columnwidth:250 orientation:vertical left:120
+AlignBars  = late
+
+#&gt;
+multi-line comment 1. test that multiple multi-line comments don't break timeline code; DATE:2014-05-10
+&lt;#
+
+DateFormat = dd/mm/yyyy
+Period     = from:01/01/2001 till:01/01/2007
+
+Colors =
+ id:canvas  value:gray(0.95)        # background for whole image
+ id:bars    value:white             # background for bars
+ id:grid1   value:gray(0.6)         # major grid
+ id:grid2   value:gray(0.85)        # minor grid
+ id:gray    value:gray(0.5)         # for colophon
+ id:gray2   value:gray(0.8)         # for colophon
+ id:darkred value:rgb(0.5,0,0)      # for colophon
+
+ id:A10       value:rgb(0.3,0,0)     legend:10+_articles_(*) 
+ id:A100      value:rgb(0.5,0,0)     legend:100+_articles
+ id:A1000     value:rgb(0.8,0.2,0)   legend:1000+_articles 
+ id:A10000    value:rgb(1,0.5,0)     legend:10,000+_articles 
+ id:A100000   value:rgb(1,0.8,0)     legend:100,000+_articles 
+ id:A1000000  value:rgb(1,1,0)       legend:1,000,000+_articles
+
+#id:U10       value:rgb(0.85,0.85,1) legend:10+_editors
+ id:U100      value:rgb(0.8,0.8,1)   legend:100+_editors
+ id:U1000     value:rgb(0.6,0.6,1)   legend:1000+_editors
+ id:U10000    value:rgb(0.35,0.35,1) legend:10,000+_editors
+ id:U100000   value:rgb(0,0,1)       legend:100,000+_editors
+
+ id:D0        value:rgb(0.95,0.95,0.95) legend:. # dummy
+ id:D1        value:gray(0.95)       legend:. # dummy 
+
+ id:L100      value:rgb(0.8,0.35,0)    legend:languages_with_100+_articles
+ id:L1000     value:rgb(0.8,0,0.6)   legend:languages_with_1000+_articles
+ id:L10000    value:rgb(0,0,0.8)     legend:languages_with_10,000+_articles
+ id:L100000   value:rgb(0,0.6,0)     legend:languages_with_100,000+_articles
+ 
+ScaleMajor  = grid:grid1 unit:year  increment:1 start:01/01/2001
+ScaleMinor  = grid:grid2 unit:month increment:3 start:01/01/2001
+BackgroundColors = canvas:canvas
+TimeAxis   = orientation:horizontal format:yyyy
+
+BarData =
+  bar:Wikipedias    text:[http://stats.wikimedia.org/EN/TablesWikipediaZZ.htm|Wikipedia]
+  bar:Meta          text:[http://stats.wikimedia.org/wikispecial/EN/TablesWikipediaMETA.htm|Meta]
+  bar:Wiktionaries  text:[http://stats.wikimedia.org/wiktionary/EN/TablesWikipediaZZ.htm|Wiktionary]
+
+#&gt;
+multi-line comment 2. test that multiple multi-line comments don't break timeline code; DATE:2014-05-10
+&lt;#
+
+  bar:Wikiquotes    text:[http://stats.wikimedia.org/wikiquote/EN/TablesWikipediaZZ.htm|Wikiquote]
+  bar:Wikibooks     text:[http://stats.wikimedia.org/wikibooks/EN/TablesWikipediaZZ.htm|Wikibooks]
+  bar:Wikisources   text:[http://stats.wikimedia.org/wikisource/EN/TablesWikipediaZZ.htm|Wikisources]
+  bar:Commons       text:[http://stats.wikimedia.org/wikispecial/EN/TablesWikipediaCOMMONS.htm|Commons]
+  bar:Wikinews      text:[http://stats.wikimedia.org/wikinews/EN/TablesWikipediaZZ.htm|Wikinews]
+  bar:Wikiversity   text:[http://stats.wikimedia.org/wikiversity/EN/TablesWikipediaZZ.htm|Wikiversity]
+
+Define $A10      = color:A10      width:0.1in
+Define $A100     = color:A100     width:0.15in
+Define $A1000    = color:A1000    width:0.2in
+Define $A10000   = color:A10000   width:0.3in
+Define $A100000  = color:A100000  width:0.4in
+Define $A1000000 = color:A1000000 width:0.5in
+
+Define $U10      = color:U10      width:0.02in
+Define $U100     = color:U100     width:0.06in
+Define $U1000    = color:U1000    width:0.10in
+Define $U10000   = color:U10000   width:0.15in
+Define $U100000  = color:U100000  width:0.20in
+
+Define $L100     = textcolor:L100    align:left  fontsize:9
+Define $L1000    = textcolor:L1000   align:right fontsize:9
+Define $L10000   = textcolor:L10000  align:right fontsize:9
+Define $L10000c  = textcolor:L10000  align:right fontsize:9
+Define $L100000  = textcolor:L100000 align:right fontsize:9
+
+# make numbers fit exactly below 1,000,000+ bar
+Define $S00a1    = shift:(  3,-35)
+Define $S000a1   = shift:( -1,-35)
+Define $S0000a1  = shift:(-12,-35)
+Define $S00000a1 = shift:(-26,-35)
+
+Define $S0000a2  = shift:(-17,-35)
+Define $S00000a2 = shift:(-34,-35)
+
+Define $S0000a3  = shift:(-21,-35)
+Define $S00000a3 = shift:(-39,-35)
+
+# make numbers fit exactly below 100,000+ bar
+Define $S00b1    = shift:(  3,-30)
+Define $S000b1   = shift:( -1,-30)
+Define $S0000b1  = shift:(-12,-30)
+Define $S00000b1 = shift:(-26,-30)
+
+Define $S0000b2  = shift:(-17,-30)
+Define $S00000b2 = shift:(-34,-30)
+
+Define $S00000b3 = shift:(-39,-30)
+
+# make numbers fit exactly below 10,000+ bar
+Define $S00c1    = shift:(  3,-25)
+Define $S000c1   = shift:( -1,-25)
+Define $S0000c1  = shift:(-12,-25)
+Define $S00000c1 = shift:(-26,-25)
+
+Define $S0000c2  = shift:(-17,-25)
+Define $S00000c2 = shift:(-34,-25)
+
+Define $S00000c3 = shift:(-39,-25)
+
+# make numbers fit exactly below 1,000+ bar
+Define $S00d1    = shift:(  3,-20)
+Define $S000d1   = shift:( -1,-20)
+Define $S0000d1  = shift:(-12,-20)
+Define $S00000d1 = shift:(-26,-20)
+
+Define $S0000d2  = shift:(-17,-20)
+Define $S00000d2 = shift:(-34,-20)
+
+Define $S00000d3 = shift:(-39,-20)
+
+Define $TTt = textcolor:black  shift:(78, 30)  align:center # Title
+Define $TAn = textcolor:black  shift:(75, 10)  align:right  # Articles count
+Define $TUn = textcolor:black  shift:(75, -4)  align:right  # Users count   
+Define $TEn = textcolor:black  shift:(75,-18)  align:right  # Edits count
+Define $TAt = textcolor:black  shift:(82, 10)  align:left   # Articles label
+Define $TUt = textcolor:black  shift:(82, -4)  align:left   # Users label
+Define $TEt = textcolor:black  shift:(82,-18)  align:left   # Edits label
+
+# Define $Figures = textcolor:white align:right shift:(0,-4) fontsize:S # experiment with figures centered in bars
+
+PlotData=
+  bar:Wikipedias   from:01/01/2001 till:01/02/2001 $A10     
+  bar:Wikipedias   from:01/02/2001 till:01/04/2001 $A100    
+  bar:Wikipedias   from:01/04/2001 till:01/10/2001 $A1000
+  bar:Wikipedias   from:01/10/2001 till:01/10/2002 $A10000
+  bar:Wikipedias   from:01/10/2002 till:01/09/2004 $A100000
+  bar:Wikipedias   from:01/09/2004 till:end        $A1000000
+
+# bar:Wikipedias   from:01/01/2001 till:01/07/2001 $U10     
+  bar:Wikipedias   from:01/07/2001 till:01/08/2002 $U100    
+  bar:Wikipedias   from:01/08/2002 till:01/01/2004 $U1000
+  bar:Wikipedias   from:01/01/2004 till:01/10/2005 $U10000
+  bar:Wikipedias   from:01/10/2005 till:end        $U100000
+
+# experiment with figures centered in bars
+# bar:Wikipedias     at:01/01/2002 text:"1, 1, 7"          $L100   $Figures 
+# bar:Wikipedias     at:01/01/2003 text:"1, 8, 14"         $L100   $Figures 
+# bar:Wikipedias     at:01/01/2004 text:"1, 9, 22, 29"     $L100   $Figures 
+# bar:Wikipedias     at:01/01/2005 text:"2, 20, 52, 81"    $L100   $Figures 
+# bar:Wikipedias     at:01/01/2006 text:"8, 37, 84, 120"   $L100   $Figures 
+# bar:Wikipedias     at:01/01/2007 text:"12, 55, 124, 179" $L100   $Figures 
+
+  bar:Wikipedias     at:01/01/2002 text:7          $L100     $S00a1
+  bar:Wikipedias     at:01/01/2002 text:1          $L1000    $S000a1
+  bar:Wikipedias     at:01/01/2002 text:1          $L10000   $S0000a1
+ 
+  bar:Wikipedias     at:01/01/2003 text:14         $L100     $S00a1
+  bar:Wikipedias     at:01/01/2003 text:_8         $L1000    $S000a1 
+  bar:Wikipedias     at:01/01/2003 text:1          $L10000   $S0000a1 
+
+# 100K for Dec 2002 in wikistats is rounded figure, actually 99939
+# bar:Wikipedias     at:01/01/2003 text:1          $L100000b $S00000a1 
+
+  bar:Wikipedias     at:01/01/2004 text:39         $L100     $S00a1
+  bar:Wikipedias     at:01/01/2004 text:22         $L1000    $S000a1 
+  bar:Wikipedias     at:01/01/2004 text:9_         $L10000   $S0000a2 
+  bar:Wikipedias     at:01/01/2004 text:1          $L100000  $S00000a2 
+
+  bar:Wikipedias     at:01/01/2005 text:81         $L100     $S00a1
+  bar:Wikipedias     at:01/01/2005 text:52         $L1000    $S000a1 
+  bar:Wikipedias     at:01/01/2005 text:20         $L10000   $S0000a2 
+  bar:Wikipedias     at:01/01/2005 text:2_         $L100000  $S00000a2 
+
+  bar:Wikipedias     at:01/01/2006 text:120        $L100     $S00a1
+  bar:Wikipedias     at:01/01/2006 text:84         $L1000    $S000a1 
+  bar:Wikipedias     at:01/01/2006 text:37         $L10000   $S0000a2 
+  bar:Wikipedias     at:01/01/2006 text:8_         $L100000  $S00000a2 
+
+  bar:Wikipedias     at:01/01/2007 text:179        $L100     $S00a1 
+  bar:Wikipedias     at:01/01/2007 text:124        $L1000    $S000a1 
+  bar:Wikipedias     at:01/01/2007 text:55_        $L10000   $S0000a3 
+  bar:Wikipedias     at:01/01/2007 text:12         $L100000  $S00000a3 
+
+  bar:Wikipedias     at:end  $TTt  text:"January 1, 2007" 
+
+  bar:Wikipedias     at:end  $TAn  text:? # "3,100,000"  textcolor:darkred
+  bar:Wikipedias     at:end  $TUn  text:? # "124,580"    textcolor:darkred
+  bar:Wikipedias     at:end  $TEn  text:? # "53,940,000" textcolor:darkred
+  bar:Wikipedias     at:end  $TAt  text:"articles"      textcolor:darkred
+  bar:Wikipedias     at:end  $TUt  text:"editors"       textcolor:darkred
+  bar:Wikipedias     at:end  $TEt  text:"edits"         textcolor:darkred
+  textcolor:black
+
+  bar:Meta         from:01/11/2001 till:01/02/2002 $A10
+  bar:Meta         from:01/02/2002 till:01/03/2004 $A100
+  bar:Meta         from:01/03/2004 till:end        $A1000
+
+# bar:Meta         from:01/11/2001 till:01/06/2003 $U10
+  bar:Meta         from:01/06/2003 till:30/04/2005 $U100
+  bar:Meta         from:01/05/2005 till:end        $U1000
+
+  bar:Meta           at:01/01/2007 text:n.a.      $L100     $S00d1 
+
+  bar:Meta           at:end  $TAn  text:"8,600" 
+  bar:Meta           at:end  $TUn  text:"2,084" 
+  bar:Meta           at:end  $TEn  text:"244,000" # 8.6K articles * 28.4 mean edits per article
+  bar:Meta           at:end  $TAt  text:"articles" 
+  bar:Meta           at:end  $TUt  text:"editors" 
+  bar:Meta           at:end  $TEt  text:"edits" 
+
+  bar:Wiktionaries from:01/12/2002 till:01/02/2003 $A100     
+  bar:Wiktionaries from:01/02/2003 till:01/09/2003 $A1000
+  bar:Wiktionaries from:01/09/2003 till:01/11/2004 $A10000
+  bar:Wiktionaries from:01/11/2004 till:01/07/2006 $A100000
+  bar:Wiktionaries from:01/07/2006 till:end        $A1000000
+
+# bar:Wiktionaries from:01/12/2002 till:01/09/2003 $U10
+  bar:Wiktionaries from:01/09/2003 till:01/02/2005 $U100
+  bar:Wiktionaries from:01/02/2005 till:end        $U1000
+
+  bar:Wiktionaries   at:01/01/2003 text:1          $L100     $S00a1
+
+  bar:Wiktionaries   at:01/01/2004 text:1          $L100     $S00a1
+  bar:Wiktionaries   at:01/01/2004 text:1          $L1000    $S000a1
+  bar:Wiktionaries   at:01/01/2004 text:1          $L10000   $S0000a1
+
+  bar:Wiktionaries   at:01/01/2005 text:27         $L100     $S00a1
+  bar:Wiktionaries   at:01/01/2005 text:12         $L1000    $S000a1
+  bar:Wiktionaries   at:01/01/2005 text:3          $L10000   $S0000a2
+
+  bar:Wiktionaries   at:01/01/2006 text:53         $L100     $S00a1
+  bar:Wiktionaries   at:01/01/2006 text:32         $L1000    $S000a1
+  bar:Wiktionaries   at:01/01/2006 text:10         $L10000   $S0000a2
+  bar:Wiktionaries   at:01/01/2006 text:1          $L100000  $S00000a2
+
+  bar:Wiktionaries   at:01/01/2007 text:79         $L100     $S00a1
+  bar:Wiktionaries   at:01/01/2007 text:49         $L1000    $S000a1
+  bar:Wiktionaries   at:01/01/2007 text:25         $L10000   $S0000a2
+  bar:Wiktionaries   at:01/01/2007 text:4          $L100000  $S00000a2 
+
+  bar:Wiktionaries   at:end  $TAn  text:"1,700,000" 
+  bar:Wiktionaries   at:end  $TUn  text:"4,398" 
+  bar:Wiktionaries   at:end  $TEn  text:"7,480,000" # 1.7M articles * 4.4 mean edits per article
+  bar:Wiktionaries   at:end  $TAt  text:"lemmas" 
+  bar:Wiktionaries   at:end  $TUt  text:"editors" 
+  bar:Wiktionaries   at:end  $TEt  text:"edits" 
+
+  bar:Wikiquotes   from:01/07/2003 till:01/05/2004 $A100    
+  bar:Wikiquotes   from:01/05/2004 till:31/03/2005 $A1000   
+  bar:Wikiquotes   from:01/04/2005 till:end        $A10000  
+
+# bar:Wikiquotes   from:01/07/2003 till:01/07/2004 $U10
+  bar:Wikiquotes   from:01/07/2004 till:30/09/2005 $U100
+  bar:Wikiquotes   from:01/10/2005 till:end        $U1000
+
+  bar:Wikiquotes     at:01/01/2004 text:1          $L100    $S00c1
+  bar:Wikiquotes     at:01/01/2005 text:7          $L100    $S00c1
+  bar:Wikiquotes     at:01/01/2006 text:23         $L100    $S00c1
+  bar:Wikiquotes     at:01/01/2007 text:32         $L100    $S00c1
+
+  bar:Wikiquotes     at:01/01/2005 text:2          $L1000   $S000c1
+  bar:Wikiquotes     at:01/01/2006 text:7          $L1000   $S000c1
+  bar:Wikiquotes     at:01/01/2007 text:13         $L1000   $S000c1
+
+  bar:Wikiquotes   at:end  $TAn  text:"55,000" 
+  bar:Wikiquotes   at:end  $TUn  text:"2,472" 
+  bar:Wikiquotes   at:end  $TEn  text:"748,000"  # 55K articles * 13.6 mean edits per article
+  bar:Wikiquotes   at:end  $TAt  text:"articles" 
+  bar:Wikiquotes   at:end  $TUt  text:"editors" 
+  bar:Wikiquotes   at:end  $TEt  text:"edits" 
+
+  bar:Wikibooks    from:01/07/2003 till:01/08/2003 $A10      
+  bar:Wikibooks    from:01/08/2003 till:01/12/2003 $A100
+  bar:Wikibooks    from:01/12/2003 till:31/03/2005 $A1000
+  bar:Wikibooks    from:01/04/2005 till:end        $A10000
+
+# bar:Wikibooks    from:01/07/2003 till:01/03/2004 $U10
+  bar:Wikibooks    from:01/03/2004 till:01/03/2005 $U100
+  bar:Wikibooks    from:01/03/2005 till:end        $U1000
+
+  bar:Wikibooks      at:01/01/2004 text:1          $L100    $S00c1
+
+  bar:Wikibooks      at:01/01/2005 text:8          $L100    $S00c1
+  bar:Wikibooks      at:01/01/2005 text:1          $L1000   $S000c1
+
+  bar:Wikibooks      at:01/01/2006 text:25         $L100    $S00c1
+  bar:Wikibooks      at:01/01/2006 text:3          $L1000   $S000c1
+
+  bar:Wikibooks      at:01/01/2007 text:37         $L100    $S00c1
+  bar:Wikibooks      at:01/01/2007 text:11         $L1000   $S000c1
+  bar:Wikibooks      at:01/01/2007 text:1          $L10000  $S0000c2
+
+  bar:Wikibooks      at:end  $TAn  text:"55,000" 
+  bar:Wikibooks      at:end  $TUn  text:"5,475" 
+  bar:Wikibooks      at:end  $TEn  text:"841,000"   # 55K articles * 15.3 mean edits per article
+  bar:Wikibooks      at:end  $TAt  text:"chapters" 
+  bar:Wikibooks      at:end  $TUt  text:"authors" 
+  bar:Wikibooks      at:end  $TEt  text:"edits" 
+
+  bar:Wikisources  from:01/11/2003 till:01/12/2003 $A10
+  bar:Wikisources  from:01/12/2003 till:01/04/2004 $A100
+  bar:Wikisources  from:01/04/2004 till:28/02/2005 $A1000
+  bar:Wikisources  from:01/03/2005 till:01/07/2006 $A10000
+  bar:Wikisources  from:01/07/2006 till:end        $A100000
+
+# bar:Wikisources  from:01/11/2003 till:01/07/2004 $U10
+  bar:Wikisources  from:01/07/2004 till:01/03/2006 $U100
+  bar:Wikisources  from:01/03/2006 till:end        $U1000
+
+  bar:Wikisources    at:01/01/2005 text:6          $L100    $S00b1
+  bar:Wikisources    at:01/01/2005 text:1          $L1000   $S000b1
+
+  bar:Wikisources    at:01/01/2006 text:20         $L100    $S00b1
+  bar:Wikisources    at:01/01/2006 text:8          $L1000   $S000b1
+  bar:Wikisources    at:01/01/2006 text:1          $L10000  $S0000b2
+
+  bar:Wikisources    at:01/01/2007 text:35         $L100    $S00b1
+  bar:Wikisources    at:01/01/2007 text:22         $L1000   $S000b1
+  bar:Wikisources    at:01/01/2007 text:3          $L10000  $S0000b2
+
+  bar:Wikisources    at:end  $TAn  text:"144,000" 
+  bar:Wikisources    at:end  $TUn  text:"1,838" 
+  bar:Wikisources    at:end  $TEn  text:"705,000"   # 144K articles * 4.9 mean edits per article
+  bar:Wikisources    at:end  $TAt  text:"sources" 
+  bar:Wikisources    at:end  $TUt  text:"editors" 
+  bar:Wikisources    at:end  $TEt  text:"edits" 
+
+  bar:Commons      from:01/09/2004 till:01/10/2004 $A1000
+  bar:Commons      from:01/10/2004 till:01/05/2005 $A10000
+  bar:Commons      from:01/05/2005 till:01/12/2006 $A100000
+  bar:Commons      from:01/12/2006 till:end        $A1000000
+
+# bar:Commons      from:01/09/2004 till:01/11/2004 $U10
+  bar:Commons      from:01/11/2004 till:31/05/2005 $U100
+  bar:Commons      from:01/06/2005 till:end        $U1000
+
+  bar:Commons        at:01/01/2007 text:n.a.      $L100     $S00a1 
+
+  bar:Commons        at:end  $TAn  text:"1,046,000" 
+  bar:Commons        at:end  $TUn  text:"3,315" 
+
+  bar:Commons        at:end  $TAt  text:"binaries" 
+  bar:Commons        at:end  $TUt  text:"editors" 
+
+  bar:Wikinews     from:01/11/2004 till:01/12/2004 $A10
+  bar:Wikinews     from:01/12/2004 till:01/02/2005 $A100
+  bar:Wikinews     from:01/02/2005 till:01/09/2005 $A1000
+  bar:Wikinews     from:01/09/2005 till:end        $A10000
+
+# bar:Wikinews     from:01/11/2004 till:01/12/2004 $U10
+  bar:Wikinews     from:01/12/2004 till:01/02/2006 $U100
+  bar:Wikinews     from:01/02/2006 till:end        $U1000
+
+  bar:Wikinews       at:01/01/2005 text:2          $L100    $S00c1
+
+  bar:Wikinews       at:01/01/2006 text:13         $L100    $S00c1
+  bar:Wikinews       at:01/01/2006 text:5          $L1000   $S000c1
+
+  bar:Wikinews       at:01/01/2007 text:19         $L100    $S00c1
+  bar:Wikinews       at:01/01/2007 text:9          $L1000   $S000c1
+
+  bar:Wikinews       at:end  $TAn  text:"32,000" 
+  bar:Wikinews       at:end  $TUn  text:"1,572" 
+  bar:Wikinews       at:end  $TEn  text:"358,000" # 32K articles * 11.2 mean edits per article
+  bar:Wikinews       at:end  $TAt  text:"reports" 
+  bar:Wikinews       at:end  $TUt  text:"reporters" 
+  bar:Wikinews       at:end  $TEt  text:"edits" 
+
+# bar:Wikiversity  from:01/10/2004 till:01/07/2005 $A10   # start at offical wikiversity launch date
+# bar:Wikiversity  from:01/07/2005 till:01/10/2006 $A100  # start at offical wikiversity launch date
+  bar:Wikiversity  from:01/08/2006 till:01/10/2006 $A100
+  bar:Wikiversity  from:01/10/2006 till:end        $A1000
+  
+  bar:Wikiversity  from:01/08/2006 till:end        $U100
+
+# bar:Wikiversity    at:01/01/2006 text:2          $L100   $S00d1 # start at offical wikiversity launch date
+
+  bar:Wikiversity    at:01/01/2007 text:5          $L100   $S00d1
+  bar:Wikiversity    at:01/01/2007 text:2          $L1000  $S000d1
+
+  bar:Wikiversity    at:end  $TAn  text:"1,800" 
+  bar:Wikiversity    at:end  $TUn  text:"337" 
+  bar:Wikiversity    at:end  $TEn  text:"27,000" # 1.8K articles * 15.4 mean edits per article
+  bar:Wikiversity    at:end  $TAt  text:"articles" 
+  bar:Wikiversity    at:end  $TUt  text:"editors" 
+  bar:Wikiversity    at:end  $TEt  text:"edits" 
+
+TextData =
+   pos:(300,673)
+   fontsize:XL
+   textcolor:black
+   text:"Wikimedia Projects Growth"
+
+   fontsize:S
+   textcolor:gray
+   pos:(8,52)
+   text:"Plot _generated"
+   pos:(8,37)
+   text:"by"
+   pos:(23,37)
+   text:"[http://en.wikipedia.org/wiki/User:Erik%5FZachte|Erik_Zachte]"
+   pos:(8,23)
+   text:"with"
+   pos:(31,23)
+   text:"[http://www.mediawiki.org/wiki/Extension:EasyTimeline|EasyTimeline]"
+
+   textcolor:black
+   pos:(300,24)
+   text:(*) for Commons bars show binaries, not articles
+
+   textcolor:darkred
+   pos:(780,110)
+   text:? = English Wikipedia
+   text:statistics after Aug 2006
+   text:are still not available 
+
+   textcolor:gray
+   pos:(845,58)
+   text:"editors="
+   text:"registered"
+   text:"users with"
+   text:"10+ edits" 
+
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
