@@ -3,9 +3,229 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Options - XOWA</title>
-  <link rel="shortcut icon" href="/xowa/wiki/home/page/xowa_logo.png" />
-  <link rel="stylesheet" href="/xowa/wiki/home/page/xowa_common.css" type="text/css">
-  
+  <link rel="shortcut icon" href="http://xowa.org/xowa_logo.png" />
+  <link rel="stylesheet" href="http://xowa.org/xowa_common.css" type="text/css">
+  <style>
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
+  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
+  .options_textbox     {padding: 2px; border: 1px solid black;}
+  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
+  .options_textarea    {padding: 2px; border: 1px solid black;}
+  .options_select      {padding: 2px; border: 1px solid black;}
+  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
+  .options_checkbox    {padding: 2px; border: 1px solid black;}
+  .options_readonly    {background-color:#F9F9F9;}
+</style>
+<style>
+.optionsButton
+{
+    width: 100px;
+    height: 40px;
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: lightgray;
+    text-align: center;
+}
+
+.optionsLink
+{
+    color: black !important;
+    text-decoration: none;
+}
+
+.optionsButton.active
+{
+    width: 100px;
+    height: 40px;
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: dimgray;
+    color: white !important;
+    border: solid 1px dimgray;
+}
+.optionsButton.active a
+{
+    color: white !important;
+}
+
+.tabs
+{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.tab-links ul
+{
+    margin-left: -40px;
+}
+.tab-links li
+{
+    margin: 0px 0px 0px 0px;
+    float: left;
+    list-style: none;
+}
+
+.tab-links a
+{
+    padding: 9px 15px 9px 15px;
+    border-radius: 3px 3px 0px 0px;
+    background: #f0f0f0;
+    font-family: 'Segoe UI';
+    font-size: 13px;
+    color: black !important;
+    text-decoration: none;
+    border-radius: 3px;
+    border-top: solid 1px gray;
+    border-left: solid 1px gray;
+    border-right: solid 1px gray;
+}
+
+.tab-links a:hover
+{
+    background: #B0B0B0;
+    text-decoration: none;
+}
+
+li.active a, li.active a:hover
+{
+    background: #fff;
+    color: #4c4c4c;
+    font-weight: bold;
+}
+
+.tab-content
+{
+    padding: 15px;
+    border-radius: 3px;
+    background: #fff;
+    border-top: solid 1px gray;
+    margin-top: 5px;
+    min-height: 300px;
+}
+</style>
+<style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style>
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
+  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
+  .options_textbox     {padding: 2px; border: 1px solid black;}
+  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
+  .options_textarea    {padding: 2px; border: 1px solid black;}
+  .options_select      {padding: 2px; border: 1px solid black;}
+  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
+  .options_checkbox    {padding: 2px; border: 1px solid black;}
+  .options_readonly    {background-color:#F9F9F9;}
+</style>
+<style>
+.optionsButton
+{
+    width: 100px;
+    height: 40px;
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: lightgray;
+    text-align: center;
+}
+
+.optionsLink
+{
+    color: black !important;
+    text-decoration: none;
+}
+
+.optionsButton.active
+{
+    width: 100px;
+    height: 40px;
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color: dimgray;
+    color: white !important;
+    border: solid 1px dimgray;
+}
+.optionsButton.active a
+{
+    color: white !important;
+}
+
+.tabs
+{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.tab-links ul
+{
+    margin-left: -40px;
+}
+.tab-links li
+{
+    margin: 0px 0px 0px 0px;
+    float: left;
+    list-style: none;
+}
+
+.tab-links a
+{
+    padding: 9px 15px 9px 15px;
+    border-radius: 3px 3px 0px 0px;
+    background: #f0f0f0;
+    font-family: 'Segoe UI';
+    font-size: 13px;
+    color: black !important;
+    text-decoration: none;
+    border-radius: 3px;
+    border-top: solid 1px gray;
+    border-left: solid 1px gray;
+    border-right: solid 1px gray;
+}
+
+.tab-links a:hover
+{
+    background: #B0B0B0;
+    text-decoration: none;
+}
+
+li.active a, li.active a:hover
+{
+    background: #fff;
+    color: #4c4c4c;
+    font-weight: bold;
+}
+
+.tab-content
+{
+    padding: 15px;
+    border-radius: 3px;
+    background: #fff;
+    border-top: solid 1px gray;
+    margin-top: 5px;
+    min-height: 300px;
+}
+</style>
+<style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
 </head>
 <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
 <div id="mw-page-base" class="noprint"></div>
@@ -102,7 +322,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Window.html" id="xolnki_2" title="Options/Window" class="xowa-visited">Window</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Window.html" id="xolnki_2" title="Options/Window" class="xowa-visited">Window</a>
             </td>
             <td>
               Window Font and Startup position
@@ -110,7 +330,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Language.html" id="xolnki_3" title="Options/Language">Language</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Language.html" id="xolnki_3" title="Options/Language">Language</a>
             </td>
             <td>
               UI Language
@@ -118,7 +338,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Tabs.html" id="xolnki_4" title="Options/Tabs">Tabs</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Tabs.html" id="xolnki_4" title="Options/Tabs">Tabs</a>
             </td>
             <td>
               Tab appearance and behavior
@@ -126,7 +346,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Startup.html" id="xolnki_5" title="Options/Startup">Startup</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Startup.html" id="xolnki_5" title="Options/Startup">Startup</a>
             </td>
             <td>
               Application startup options
@@ -139,7 +359,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Security.html" id="xolnki_6" title="Options/Security" class="xowa-visited">Security</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Security.html" id="xolnki_6" title="Options/Security" class="xowa-visited">Security</a>
             </td>
             <td>
               Disable Javascript or internet access
@@ -147,7 +367,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Shortcuts.html" id="xolnki_7" title="Options/Shortcuts" class="xowa-visited">Shortcuts</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Shortcuts.html" id="xolnki_7" title="Options/Shortcuts" class="xowa-visited">Shortcuts</a>
             </td>
             <td>
               Keyboard shortcuts
@@ -155,7 +375,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Menus.html" id="xolnki_8" title="Options/Menus" class="xowa-visited">Menus</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Menus.html" id="xolnki_8" title="Options/Menus" class="xowa-visited">Menus</a>
             </td>
             <td>
               Change the menu bar or right-click menu
@@ -163,7 +383,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Config_script.html" id="xolnki_9" title="Options/Config script">Config script</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Config_script.html" id="xolnki_9" title="Options/Config script">Config script</a>
             </td>
             <td>
               Change the startup configuration script
@@ -176,7 +396,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Import.html" id="xolnki_10" title="Options/Import" class="xowa-visited">Import</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Import.html" id="xolnki_10" title="Options/Import" class="xowa-visited">Import</a>
             </td>
             <td>
               Import options
@@ -184,7 +404,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Files.html" id="xolnki_11" title="Options/Files" class="xowa-visited">Files</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Files.html" id="xolnki_11" title="Options/Files" class="xowa-visited">Files</a>
             </td>
             <td>
               File / image options
@@ -192,7 +412,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Category.html" id="xolnki_12" title="Options/Category" class="xowa-visited">Category</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Category.html" id="xolnki_12" title="Options/Category" class="xowa-visited">Category</a>
             </td>
             <td>
               Category options
@@ -205,7 +425,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/HTML.html" id="xolnki_13" title="Options/HTML" class="xowa-visited">Appearance</a>
+              <a href="http://xowa.org/wiki/home/page/Options/HTML.html" id="xolnki_13" title="Options/HTML" class="xowa-visited">Appearance</a>
             </td>
             <td>
               HTML page font and custom CSS
@@ -213,7 +433,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Wiki_HTML.html" id="xolnki_14" title="Options/Wiki HTML" class="xowa-visited">Wiki</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Wiki_HTML.html" id="xolnki_14" title="Options/Wiki HTML" class="xowa-visited">Wiki</a>
             </td>
             <td>
               Miscellaneous wiki HTML options
@@ -221,7 +441,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/HTML_Tidy.html" id="xolnki_15" title="Options/HTML Tidy">Tidy</a>
+              <a href="http://xowa.org/wiki/home/page/Options/HTML_Tidy.html" id="xolnki_15" title="Options/HTML Tidy">Tidy</a>
             </td>
             <td>
               HTML Tidy options
@@ -234,7 +454,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Content_apps.html" id="xolnki_16" title="Options/Content apps" class="xowa-visited">Content Apps</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Content_apps.html" id="xolnki_16" title="Options/Content apps" class="xowa-visited">Content Apps</a>
             </td>
             <td>
               Content applications (web browser, image viewer, media player)
@@ -242,7 +462,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Firefox_addon.html" id="xolnki_17" title="Options/Firefox addon">Firefox Add-on</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Firefox_addon.html" id="xolnki_17" title="Options/Firefox addon">Firefox Add-on</a>
             </td>
             <td>
               Firefox Add-on: Run XOWA inside Firefox
@@ -250,7 +470,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/HTTP_server.html" id="xolnki_18" title="Options/HTTP server">HTTP Server</a>
+              <a href="http://xowa.org/wiki/home/page/Options/HTTP_server.html" id="xolnki_18" title="Options/HTTP server" class="xowa-visited">HTTP Server</a>
             </td>
             <td>
               HTTP Server: Run XOWA as an HTTP Server
@@ -263,7 +483,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Search_suggest.html" id="xolnki_19" title="Options/Search suggest" class="xowa-visited">Search suggest</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Search_suggest.html" id="xolnki_19" title="Options/Search suggest" class="xowa-visited">Search suggest</a>
             </td>
             <td>
               Search suggest options (controls behavior in the search box)
@@ -271,7 +491,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Search.html" id="xolnki_20" title="Options/Search" class="xowa-visited">Search</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Search.html" id="xolnki_20" title="Options/Search" class="xowa-visited">Search</a>
             </td>
             <td>
               Search options (controls behavior for Special:Search)
@@ -279,7 +499,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Popups.html" id="xolnki_21" title="Options/Popups">Popups</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Popups.html" id="xolnki_21" title="Options/Popups">Popups</a>
             </td>
             <td>
               Popups that appear when hovering over a link
@@ -292,7 +512,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Math.html" id="xolnki_22" title="Options/Math">Math</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Math.html" id="xolnki_22" title="Options/Math">Math</a>
             </td>
             <td>
               Math options (text called in an {{#math}} statement)
@@ -300,7 +520,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Scribunto.html" id="xolnki_23" title="Options/Scribunto">Scribunto</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Scribunto.html" id="xolnki_23" title="Options/Scribunto">Scribunto</a>
             </td>
             <td>
               Scribunto/Lua options (text called in an {{#invoke}} statement)
@@ -308,7 +528,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Score.html" id="xolnki_24" title="Options/Score">Score</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Score.html" id="xolnki_24" title="Options/Score">Score</a>
             </td>
             <td>
               Score options (text called in a &lt;score&gt; statement; used to render musical scores)
@@ -316,7 +536,7 @@
           </tr>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Wikibase.html" id="xolnki_25" title="Options/Wikibase">Wikibase</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Wikibase.html" id="xolnki_25" title="Options/Wikibase">Wikibase</a>
             </td>
             <td>
               Wikidata options
@@ -329,7 +549,7 @@
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              <a href="/xowa/wiki/home/page/Options/Dev.html" id="xolnki_26" title="Options/Dev" class="xowa-visited">Dev</a>
+              <a href="http://xowa.org/wiki/home/page/Options/Dev.html" id="xolnki_26" title="Options/Dev" class="xowa-visited">Dev</a>
             </td>
             <td>
               Developer options
@@ -368,19 +588,29 @@
 
 <div id='mw-panel' class='noprint'>
   <div id='p-logo'>
-    <a style="background-image: url(/xowa/wiki/home/page/xowa_logo.png);" href="https://gnosygnu.github.io/xowa/" title="Visit the main page"></a>
+    <a style="background-image: url(http://xowa.org/xowa_logo.png);" href="index.html" title="Visit the main page"></a>
   </div>
   <div class="portal" id='xowa-portal-home'>
     <h3>XOWA</h3>
     <div class="body">
       <ul>
-        <li><a href="https://gnosygnu.github.io/xowa/" title='Visit the main page'>Main page</a></li>
-        <li><a href="https://gnosygnu.github.io/xowa/blog.html" title='Follow XOWA''s development process'>Blog</a></li>
-        <li><a href="https://gnosygnu.github.io/xowa/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
-        <li><a href="https://gnosygnu.github.io/xowa/download.html" title='Download the XOWA application'>Download XOWA</a></li>
-        <li><a href="/xowa/wiki/home/page/Dashboard/Image_databases" title='Download offline wikis and image databases'>Download wikis</a></li>
-        <li><a href="https://gnosygnu.github.io/xowa/reviews.html" title='Read what others have written about XOWA'>Media</a></li>
-        <li><a href="/xowa/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-stargin'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
       </ul>
     </div>
   </div>
@@ -389,17 +619,23 @@
     <h3>Help</h3>
     <div class="body">
       <ul>
-        <li><a href="/xowa/wiki/home/page/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
-        <li><a href="/xowa/wiki/home/page/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
-        <li><a href="/xowa/wiki/home/page/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
-        <li><a href="/xowa/wiki/home/page/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
-        <li><a href="/xowa/wiki/home/page/App/Import/Other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
-        <li><a href="/xowa/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
-        <li><a href="/xowa/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/wiki/home/page/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
       </ul>
     </div>
   </div>
   
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/wiki/home/page/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="portal" id='xowa-portal-links'>
     <h3>Links</h3>
     <div class="body">
