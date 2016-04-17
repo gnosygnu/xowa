@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Command-line/Dumps - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Command-line/Dumps</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can generate two types of dumps: file-dumps and html-dumps
+    </p>
+    <table class="metadata plainlinks ambox ambox-delete" style="">
+      <tr>
+        <td class="mbox-empty-cell">
+        </td>
+        <td class="mbox-text" style="">
+          <p>
+            <span class="mbox-text-span">Please note that this script is for power users. It is not meant for casual users.</span>
+          </p>
+          <p>
+            <span class="mbox-text-span">Please read through these instructions carefully. If you fail to follow these instructions, you may end up downloading millions of images by accident, and have your IP address banned by Wikimedia.</span>
+          </p>
+          <p>
+            <span class="mbox-text-span">Also, the script will change in the future, and without any warning. There is no backward compatibility. Although the XOWA databases have a fixed format, the scripts do not. If you discover that your script breaks, please refer to this page, contact me for assistance, or go through the code.</span>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Requirements"><span class="tocnumber">2</span> <span class="toctext">Requirements</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#commons.wikimedia.org_.28thum"><span class="tocnumber">2.1</span> <span class="toctext">commons.wikimedia.org (thum</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#www.wikidata.org"><span class="tocnumber">2.2</span> <span class="toctext">www.wikidata.org</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Hardware"><span class="tocnumber">2.3</span> <span class="toctext">Hardware</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Internet-connectivity_.28optional.29"><span class="tocnumber">2.4</span> <span class="toctext">Internet-connectivity (optional)</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Pre-existing_image_databases_for_your_wiki_.28optional.29"><span class="tocnumber">2.5</span> <span class="toctext">Pre-existing image databases for your wiki (optional)</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#gfs"><span class="tocnumber">3</span> <span class="toctext">gfs</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Terms"><span class="tocnumber">4</span> <span class="toctext">Terms</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#lnki"><span class="tocnumber">4.1</span> <span class="toctext">lnki</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-11">
+              <a href="#orig"><span class="tocnumber">4.2</span> <span class="toctext">orig</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#xfer"><span class="tocnumber">4.3</span> <span class="toctext">xfer</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#fsdb"><span class="tocnumber">4.4</span> <span class="toctext">fsdb</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-14">
+          <a href="#Script"><span class="tocnumber">5</span> <span class="toctext">Script</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      The download-thumbs script downloads all thumbs for pages in a specific wiki. It works in the following way:
+    </p>
+    <ul>
+      <li>
+        It loads a page.
+      </li>
+      <li>
+        It converts the wikitext to HTML 
+        <ul>
+          <li>
+            If thumb mode is enabled, it compiles a list of [[File]] links.
+          </li>
+          <li>
+            If HTML-dump mode is enabled, it saves the HTML into XOWA html databases
+          </li>
+        </ul>
+      </li>
+      <li>
+        It repeats until there are no more pages
+      </li>
+      <li>
+        If thumb mode, it does the following additional steps 
+        <ul>
+          <li>
+            It analyzes the list of [[File]] links to come up with a unique list of thumbs.
+          </li>
+          <li>
+            It downloads the thumbs and creates the XOWA file databases.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      The script for simple wikipedia is listed below.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Requirements">Requirements</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="commons.wikimedia.org_.28thum">commons.wikimedia.org (thum</span>
+    </h3>
+    <p>
+      You will need the latest version of commons.wikimedia.org. Note that if you have an older version, you will have missing images or wrong size information.
+    </p>
+    <p>
+      For example, if you have a commons.wikimedia.org from 2015-04-22 and are trying to import a 2015-05-17 English Wikipedia, then any new images added after 2015-04-22 will not be picked up.
+    </p>
+    <h3>
+      <span class="mw-headline" id="www.wikidata.org">www.wikidata.org</span>
+    </h3>
+    <p>
+      You also need to have the latest version of www.wikidata.org. Note that English Wikipedia and other wikis uses Wikidata through the {{#property}} call or Module code. If you have an earlier version, then data will be missing or out of date.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Hardware">Hardware</span>
+    </h3>
+    <p>
+      You should have a recent-generation machine with relatively high-performance hardware, especially if you're planning to generate images for English Wikipedia.
+    </p>
+    <p>
+      For context, here is my current machine setup for generating the image dumps:
+    </p>
+    <ul>
+      <li>
+        Processor: Intel Core i7-4770K; 3.5 GHz with 8 MB L3 cache
+      </li>
+      <li>
+        Memory: 16 GB DDR3 SDRAM DDR3 1600 (PC3 12800)
+      </li>
+      <li>
+        Hard Drive: 1TB 10,000 RPM 64MB Cache SATA 6.0Gb/s
+      </li>
+      <li>
+        Operating System: openSUSE 13.2
+      </li>
+    </ul>
+    <p>
+      (Note: The hardware was assembled in late 2013.)
+    </p>
+    <p>
+      For English Wikipedia, it still takes about 50 hours for the entire process.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Internet-connectivity_.28optional.29">Internet-connectivity (optional)</span>
+    </h3>
+    <p>
+      You should have a broadband connection to the internet. The script will need to download dump files from Wikimedia and some dump files (like English Wikipedia) will be in the 10s of GB.
+    </p>
+    <p>
+      You can opt to download these files separately and place them in the appropriate location beforehand. However, the script below assumes that the machine is always online. If you are offline, you will need to comment the "util.download" lines yourself.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Pre-existing_image_databases_for_your_wiki_.28optional.29">Pre-existing image databases for your wiki (optional)</span>
+    </h3>
+    <p>
+      XOWA will automatically re-use the images from existing image databases so that you do not have to redownload them. This is particularly useful for large wikis where redownloading millions of images would be unwanted.
+    </p>
+    <p>
+      It is strongly advised that you download the image database for your wiki. You can find a full list here: <a href="http://xowa.sourceforge.net/image_dbs.html" rel="nofollow" class="external free">http://xowa.sourceforge.net/image_dbs.html</a> Note that if an image database does not exist for your wiki, you can still proceed to use the script
+    </p>
+    <ul>
+      <li>
+        If you have v1 image databases, they should be placed in <code>/xowa/file/wiki_domain-prv</code>. For example, English Wikipedia should have <code>/xowa/file/en.wikipedia.org-prv/fsdb.main/fsdb.bin.0000.sqlite3</code>
+      </li>
+      <li>
+        If you have v2 image databases, they should be placed in <code>/xowa/wiki/wiki_domain/prv</code>. For example, English Wikipedia should have <code>/xowa/wiki/en.wikipedia.org/prv/en.wikipedia.org-file-ns.000-db.001.xowa</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="gfs">gfs</span>
+    </h2>
+    <p>
+      The script is written in the <code>gfs</code> format. This is a custom scripting format specific to XOWA. It is similar to JSON, but also supports commenting.
+    </p>
+    <p>
+      Unfortunately the error-handling for gfs is quite minimal. When making changes, please do them in small steps and be prepared to go to backups.
+    </p>
+    <p>
+      The following is a brief list of rules:
+    </p>
+    <ul>
+      <li>
+        Comments are made with either "//","\n" or "/*","*/". For example: <code>// single-line comment</code> or <code>/* multi-line comment*/</code>
+      </li>
+      <li>
+        Booleans are "y" and "n" (yes / no or true / false). For example: <code>enabled = 'y';</code>
+      </li>
+      <li>
+        Numbers are 32-bit integers and are not enclosed in quotes. For example, <code>count = 10000;</code>
+      </li>
+      <li>
+        Strings are surrounded by apostrophes (') or quotes ("). For example: <code>key = 'val';</code>
+      </li>
+      <li>
+        Statements are terminated by a semi-colon (;). For example: <code>procedure1;</code>
+      </li>
+      <li>
+        Statements can take arguments in parentheses. For example: <code>procedure1('argument1', 'argument2', 'argument3');</code>
+      </li>
+      <li>
+        Statements are grouped with curly braces. ({}). For example: <code>group {procedure1; procedure2; procedure3;}</code>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Terms">Terms</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="lnki">lnki</span>
+    </h3>
+    <p>
+      A <code>lnki</code> is short for "<b>l</b>i<b>nk</b> <b>i</b>nternal". It refers to all wikitext with the double bracket syntax: [[A]]. A more elaborate example for files would be [[File:A.png|thumb|200x300px|upright=.80]]. Note that the abbreviation was chosen to differentiate it from <code>lnke</code> which is short for "<b>l</b>i<b>nk</b> <b>e</b>nternal". For the purposes of the script, all lnki data comes from the current wiki's data dump
+    </p>
+    <h3>
+      <span class="mw-headline" id="orig">orig</span>
+    </h3>
+    <ul>
+      <li>
+        An <code>orig</code> is short for "<b>orig</b>inal file". It refers to the original file metadata. For the purposes of this script, all orig data comes from commons.wikimedia.org
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="xfer">xfer</span>
+    </h3>
+    <ul>
+      <li>
+        An <code>xfer</code> is short for "transfer file". It refers to the actual file to be downloaded.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="fsdb">fsdb</span>
+    </h3>
+    <ul>
+      <li>
+        The <code>fsdb</code> is short for "<b>f</b>ile <b>s</b>ystem <b>d</b>ata<b>b</b>ase". It refers to the internal table format of the XOWA image databases.
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Script">Script</span>
+    </h2>
+<pre class='code'>
+app.bldr.pause_at_end_('n');
+app.scripts.run_file_by_type('xowa_cfg_app');
+app.bldr.cmds {
+  // build commons database; this only needs to be done once, whenever commons is updated
+  add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_all = 'y';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'image';}
+  add     ('commons.wikimedia.org' , 'text.init');
+  add     ('commons.wikimedia.org' , 'text.page');
+  add     ('commons.wikimedia.org' , 'text.cat.core');
+  add     ('commons.wikimedia.org' , 'text.cat.link');
+  add     ('commons.wikimedia.org' , 'text.cat.hidden');
+  add     ('commons.wikimedia.org' , 'text.term');
+  add     ('commons.wikimedia.org' , 'text.css');
+  add     ('commons.wikimedia.org' , 'wiki.image');
+  add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
+  add     ('commons.wikimedia.org' , 'wiki.page_dump.make');
+  add     ('commons.wikimedia.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
+  add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+
+  // build wikidata database; this only needs to be done once, whenever wikidata is updated
+  add     ('www.wikidata.org' , 'util.cleanup')          {delete_all = 'y';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'image';}
+  add     ('www.wikidata.org' , 'text.init');
+  add     ('www.wikidata.org' , 'text.page');
+  add     ('www.wikidata.org' , 'text.cat.core');
+  add     ('www.wikidata.org' , 'text.cat.link');
+  add     ('www.wikidata.org' , 'text.cat.hidden');
+  add     ('www.wikidata.org' , 'text.term');
+  add     ('www.wikidata.org' , 'text.css');
+  add     ('www.wikidata.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+
+  // build simple.wikipedia.org
+  add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_all = 'y';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'image';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
+  add     ('simple.wikipedia.org' , 'text.init');
+  add     ('simple.wikipedia.org' , 'text.page') {
+    // calculate redirect_id for #REDIRECT pages. needed for html databases
+    redirect_id_enabled = 'y';
+  }
+  add     ('simple.wikipedia.org' , 'text.search');
+
+  // upload desktop css
+  add     ('simple.wikipedia.org' , 'text.css');
+
+  // upload mobile css
+  add     ('simple.wikipedia.org' , 'text.css') {css_key = 'xowa.mobile'; /* css_dir = 'C:\xowa\user\anonymous\wiki\simple.wikipedia.org-mobile\html\'; */}
+
+  add     ('simple.wikipedia.org' , 'text.cat.core');
+  add     ('simple.wikipedia.org' , 'text.cat.link');
+  add     ('simple.wikipedia.org' , 'text.cat.hidden');
+  add     ('simple.wikipedia.org' , 'text.term');
+  
+  // create local "page" tables in each "text" database for "lnki_temp"
+  add     ('simple.wikipedia.org' , 'wiki.page_dump.make');
+  
+  // create a redirect table for pages in the File namespace
+  add     ('simple.wikipedia.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
+  
+  // create an "image" table to get the metadata for all files in the current wiki
+  add     ('simple.wikipedia.org' , 'wiki.image');
+
+  // parse all page-to-page links
+  add     ('simple.wikipedia.org' , 'wiki.page_link');
+
+  // calculate a score for each page using the page-to-page links
+  add     ('simple.wikipedia.org' , 'search.page__page_score') {iteration_max = 100;}
+
+  // update link score statistics for the search tables
+  add     ('simple.wikipedia.org' , 'search.link__link_score') {page_rank_enabled = 'y';}
+
+  // update word count statistics for the search_word table
+  add     ('simple.wikipedia.org' , 'search.word__link_count')
+
+  // cleanup all downloaded files as well as temporary files
+  add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+  
+  // parse every page in the listed namespace and gather data on their lnkis.
+  // this step will take the longest amount of time.
+  add     ('simple.wikipedia.org' , 'file.lnki_temp') {
+    // save data every # of pages
+    commit_interval = 10000; 
+
+    // update progress every # of pages
+    progress_interval = 50;
+
+    // free memory by flushing internal caches every # of pages
+    cleanup_interval = 50;
+
+    // specify # of pages to read into memory at a time, where # is in MB. For example, 25 means read approximately 25 MB of page text into memory
+    select_size = 25;
+
+    // namespaces to parse. See en.wikipedia.org/wiki/Help:Namespaces
+    ns_ids = '0|4|14';
+
+    // enable generation of ".html" databases. This is experimental and will increase processing time by 20% - 25%
+    // gen_hdump = 'y';
+  }
+  
+  // aggregate the lnkis
+  add     ('simple.wikipedia.org' , 'file.lnki_regy');
+  
+  // generate orig metadata for files in the current wiki (for example, for pages in en.wikipedia.org/wiki/File:*)
+  add     ('simple.wikipedia.org' , 'file.page_regy')        {build_commons = 'n';}
+  
+  // generate all orig metadata for all lnkis
+  add     ('simple.wikipedia.org' , 'file.orig_regy');
+  
+  // generate list of files to download based on "orig_regy" and XOWA image code
+  add     ('simple.wikipedia.org' , 'file.xfer_temp.thumb');
+  
+  // aggregate list one more time
+  add     ('simple.wikipedia.org' , 'file.xfer_regy');
+
+  // identify images that have already been downloaded
+  add     ('simple.wikipedia.org' , 'file.xfer_regy_update');
+  
+  // download images. This step may also take a long time, depending on how many images are needed
+  add     ('simple.wikipedia.org' , 'file.fsdb_make') {
+    commit_interval = 1000; progress_interval = 200; select_interval = 10000;
+    ns_ids = '0|4|14';
+    
+    // specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
+    src_bin_mgr__fsdb_version = 'v1';
+    
+    // always redownload certain files
+    src_bin_mgr__fsdb_skip_wkrs = 'page_gt_1|small_size';
+    
+    // allow downloads from wikimedia
+    src_bin_mgr__wmf_enabled = 'y';
+  }
+  
+  // generate registry of original metadata by file title
+  add     ('simple.wikipedia.org' , 'file.orig_reg');
+  
+  // drop page_dump tables
+  add     ('simple.wikipedia.org' , 'wiki.page_dump.drop');
+}
+app.bldr.run;
+</pre>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

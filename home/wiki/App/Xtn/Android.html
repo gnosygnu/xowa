@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Android - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Android</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA is also available as an Android application.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Requirements"><span class="tocnumber">2</span> <span class="toctext">Requirements</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Installation"><span class="tocnumber">3</span> <span class="toctext">Installation</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Set_up_Simple_Wikipedia_on_your_microSD_card"><span class="tocnumber">3.1</span> <span class="toctext">Set up Simple Wikipedia on your microSD card</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Install_XOWA.apk"><span class="tocnumber">3.2</span> <span class="toctext">Install XOWA.apk</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Import_Simple_Wikipedia"><span class="tocnumber">3.3</span> <span class="toctext">Import Simple Wikipedia</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Set_up_English_Wikipedia_on_your_microSD_card"><span class="tocnumber">3.4</span> <span class="toctext">Set up English Wikipedia on your microSD card</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Requested_feedback"><span class="tocnumber">3.5</span> <span class="toctext">Requested feedback</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Features"><span class="tocnumber">4</span> <span class="toctext">Features</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#To-do_list"><span class="tocnumber">5</span> <span class="toctext">To-do list</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      The XOWA Android application is in an alpha state. Please note the following details:
+    </p>
+    <ul>
+      <li>
+        The apk works on the following devices: <sup id="cite_ref-anselm_android_testing_0-0" class="reference"><a href="#cite_note-anselm_android_testing-0">[1]</a></sup> 
+        <ul>
+          <li>
+            Samsung Galaxy S (Froyo)
+          </li>
+          <li>
+            Samsung Galaxy Note 2 (KitKat)
+          </li>
+          <li>
+            Samsung Galaxy Tab 4 (KitKat)
+          </li>
+          <li>
+            Samsung Galaxy S4 Mini (GT-I9195) dual core (v4.2.2 Jelly Bean) (by Anselm)
+          </li>
+          <li>
+            Andy - (Android Version 4.2.2; GT-P5200) ** (by Anselm on emulator)
+          </li>
+          <li>
+            blue stack - (Android Version 4.4.2; Model GT-N7100) ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 10 - 5.1.0 - API 22 - 2560x1600 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 4 - 4.1.1 - API 16 - 768x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 4 - 4.4.4 - API 19 - 768x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 7 2013 - 4.4.4 - API 19 - 1200x1920 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - HTC Evo - 4.3 - API 18 - 720x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - HTC One XL - 4.1.1 - API 16 - 720x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - LG Optimus L3 II - 4.1.1 - API 16 - 240x320 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Motorola Droid Razr - 4.1.1 - API 16 - 540x960 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Motorola Moto X - 4.2.2 - API 17 - 720x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Samsung Galaxy Note 2 - 4.3 - API 18 - 720x1280 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Samsung Galaxy Note 3 - 4.4.4 - API 19 - 1080x1920 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Samsung Galaxy S4 - 4.4.4 - API 19 - 1080x1920 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Sony Xperia Tablet Z - 4.1.1 - API 16 - 1920x1200 ** (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Sony Xperia Z - 4.3 - API 18 - 1080x1920 ** (by Anselm on emulator)
+          </li>
+        </ul>
+      </li>
+      <li>
+        The apk works after shutting down and starting the virtual device 
+        <ul>
+          <li>
+            Genymotion - Google Nexus 9 - 5.1.0 - API 22 - 2048x1536 (by Anselm on emulator)
+          </li>
+        </ul>
+      </li>
+      <li>
+        The apk hangs on these devices 
+        <ul>
+          <li>
+            Genymotion - Google Nexus 4 - 5.0.0 - API 21 - 768x1280 (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 5 - 5.1.0 - API 22 - 1080x1920 (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Google Nexus 7 - 5.1.0 - API 22 - 800x1280 (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - HTC Evo - 4.1.1 - API 16 - 720x1280 (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - HTC Evo - 4.2.2 - API 17 - 720x1280 (by Anselm on emulator)
+          </li>
+          <li>
+            Genymotion - Motorola Moto X - 4.4.4 - API 19 - 720x1280 (by Anselm on emulator)
+          </li>
+        </ul>
+      </li>
+      <li>
+        The apk does not work on these devices: 
+        <ul>
+          <li>
+            Genymotion - Motorola Moto X - 4.3 - API 18 - 720x1280 (by Anselm on emulator)
+          </li>
+        </ul>
+      </li>
+      <li>
+        Currently, only the following wikis are available: 
+        <ul>
+          <li>
+            Simple Wikipedia (text and images)
+          </li>
+          <li>
+            English Wikipedia (text)
+          </li>
+        </ul>
+      </li>
+      <li>
+        Functionality is limited to browsing pages in the Main namespace only
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Requirements">Requirements</span>
+    </h2>
+    <ul>
+      <li>
+        Android 2.2 (Froyo) and up
+      </li>
+      <li>
+        External microSD card 
+        <ul>
+          <li>
+            Simple Wikipedia (text and images): 3 GB of space
+          </li>
+          <li>
+            English Wikipedia (text): 28 GB
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Installation">Installation</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Set_up_Simple_Wikipedia_on_your_microSD_card">Set up Simple Wikipedia on your microSD card</span>
+    </h3>
+    <ul>
+      <li>
+        Create a folder on your microsSD card called <code>Z:\xowa\wiki\simple.wikipedia.org</code>. Substitute "Z:" with whatever letter your microSD card is.
+      </li>
+      <li>
+        Download the simple wikibundle from <a href="https://archive.org/details/Xowa_simplewiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_simplewiki_latest</a>
+      </li>
+      <li>
+        Copy simple.wikipedia.org-file.xowa to the simple.wikipedia.org folder on your card.
+      </li>
+      <li>
+        Download and copy the following files from <a href="http://sourceforge.net/projects/xowa/files/support/alphas/" rel="nofollow" class="external free">http://sourceforge.net/projects/xowa/files/support/alphas/</a> 
+        <ul>
+          <li>
+            simple.wikipedia.org-text.xowa
+          </li>
+          <li>
+            simple.wikipedia.org-html.xowa
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Install_XOWA.apk">Install XOWA.apk</span>
+    </h3>
+    <ul>
+      <li>
+        Download the apk from <a href="https://github.com/gnosygnu/xowa/releases/download/v0.1/xowa_v0.1.apk" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/releases/download/v0.1/xowa_v0.1.apk</a>
+      </li>
+      <li>
+        Copy it on your microSD card. For example, place it at <code>Z:\xowa_v0.apk</code>
+      </li>
+      <li>
+        Navigate to it using the "My Files" application, or any similar "File explorer" application
+      </li>
+      <li>
+        Select it and install it 
+        <ul>
+          <li>
+            Note that it requests two permissions 
+            <ul>
+              <li>
+                Read to External Storage (android.permission.READ_EXTERNAL_STORAGE)
+              </li>
+              <li>
+                Write to External Storage (android.permission.WRITE_EXTERNAL_STORAGE)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Import_Simple_Wikipedia">Import Simple Wikipedia</span>
+    </h3>
+    <ul>
+      <li>
+        XOWA opens up to its own file browser
+      </li>
+      <li>
+        Navigate to the folder for simple.wikipedia.org
+      </li>
+      <li>
+        Check the box for simple.wikipedia.org-text.xowa
+      </li>
+      <li>
+        Click the "import" link in the upper-right hand corner. You may have to scroll to the right to find the link.
+      </li>
+      <li>
+        Click the "simple.wikipedia.org" link. It will take you to the Earth page.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Set_up_English_Wikipedia_on_your_microSD_card">Set up English Wikipedia on your microSD card</span>
+    </h3>
+    <ul>
+      <li>
+        Create a folder on your microsSD card called <code>Z:\xowa\wiki\en.wikipedia.org</code>. Substitute "Z:" with whatever letter your microSD card is.
+      </li>
+      <li>
+        Download the English Wikipedia HTML databases from <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a> . You'll need 30 GB of space 
+        <ul>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_core.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-1.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-1.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-2.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-2.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-3.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_wiki_html_ns-000_part-3.7z</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Download the English Wikipedia files from <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a> . You'll need another 70 GB of space. 
+        <ul>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_core.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_core.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-1.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-1.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-2.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-2.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-3.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-3.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-4.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-4.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-5.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-5.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-6.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-6.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-7.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-7.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-8.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-8.7z</a>
+          </li>
+          <li>
+            <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-100.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-100.7z</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Requested_feedback">Requested feedback</span>
+    </h3>
+    <p>
+      If you want to help out, please post any of the following to <a href="https://github.com/gnosygnu/xowa/wiki/Android" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/wiki/Android</a>
+    </p>
+    <ul>
+      <li>
+        What device are you using?
+      </li>
+      <li>
+        How much space is on your SD card?
+      </li>
+      <li>
+        How fast / slow is navigation between pages?
+      </li>
+      <li>
+        Do images load?
+      </li>
+      <li>
+        What essential features do you think are missing?
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Features">Features</span>
+    </h2>
+    <ul>
+      <li>
+        Shows all mainspace articles with HTML.
+      </li>
+      <li>
+        Displays images from the XOWA database.
+      </li>
+      <li>
+        Renders Math formulas through MathJax.
+      </li>
+      <li>
+        Shows missing links as regular text (black color, not red color)
+      </li>
+      <li>
+        Uses a CSS similar to the Mobile Wikipedia version
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="To-do_list">To-do list</span>
+    </h2>
+    <ul>
+      <li>
+        HTML databases for English Wikipedia and other wikis
+      </li>
+      <li>
+        Page history
+      </li>
+      <li>
+        Bookmarks
+      </li>
+      <li>
+        Multiple wiki support
+      </li>
+      <li>
+        Find word
+      </li>
+      <li>
+        Search
+      </li>
+      <li>
+        Switch to desktop CSS
+      </li>
+    </ul>
+    <ol class="references">
+      <li id="cite_note-anselm_android_testing-0">
+        <span class="mw-cite-backlink"><a href="#cite_ref-anselm_android_testing_0-0">^</a></span> <span class="reference-text">See: <a href="https://sourceforge.net/p/xowa/discussion/general/thread/cd3d55ee/" rel="nofollow" class="external free">https://sourceforge.net/p/xowa/discussion/general/thread/cd3d55ee/</a></span>
+      </li>
+    </ol>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

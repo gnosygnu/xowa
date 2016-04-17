@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Mediawiki/Scribunto/Overview - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Mediawiki/Scribunto/Overview</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Background"><span class="tocnumber">1</span> <span class="toctext">Background</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Status"><span class="tocnumber">2</span> <span class="toctext">Status</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Engines"><span class="tocnumber">3</span> <span class="toctext">Engines</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Lua"><span class="tocnumber">4</span> <span class="toctext">Lua</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#Binaries"><span class="tocnumber">4.1</span> <span class="toctext">Binaries</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Permissions"><span class="tocnumber">4.2</span> <span class="toctext">Permissions</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Luaj"><span class="tocnumber">5</span> <span class="toctext">Luaj</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Scribunto_files"><span class="tocnumber">6</span> <span class="toctext">Scribunto files</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Links"><span class="tocnumber">7</span> <span class="toctext">Links</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Background">Background</span>
+    </h2>
+    <p>
+      Scribunto is a MediaWiki extension for embedding Lua code in wiki pages. Lua is used for programming constructs (conditional logic; loops) that were previously attempted by Templates.
+    </p>
+    <p>
+      For more information on Scribunto, see <a href="http://www.mediawiki.org/wiki/Extension:Scribunto" rel="nofollow" class="external free">http://www.mediawiki.org/wiki/Extension:Scribunto</a>
+    </p>
+    <p>
+      For the source code, see <a href="https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Scribunto.git;a=summary" rel="nofollow" class="external free">https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Scribunto.git;a=summary</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Status">Status</span>
+    </h2>
+    <p>
+      The Wikimedia Foundation began rolling out Scribunto/Lua to its sites on 2013-02-15 and finished on 2013-03-13 (<a href="http://blog.wikimedia.org/2013/03/14/what-lua-scripting-means-wikimedia-open-source/" rel="nofollow" class="external free">http://blog.wikimedia.org/2013/03/14/what-lua-scripting-means-wikimedia-open-source/</a> . Data dumps after 2013-02-15 will probably have {{#invoke}} in their wikitext, which requires a lua processor.
+    </p>
+    <p>
+      Beginning with v0.3.2, XOWA included preliminary support for Scribunto. As of v1.3.1, the functionality level is approximately 95%+.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Engines">Engines</span>
+    </h2>
+    <p>
+      XOWA provides two engines for processing Lua statements:
+    </p>
+    <ul>
+      <li>
+        <a href="http://lua.org/about" rel="nofollow" class="external text">lua</a>: the standard lua binary that is distributed with Scribunto. For MediaWiki developers, it is the <i>LuaStandalone</i> approach.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='text-decoration:underline'><b>advantages</b></span> 
+        <ul>
+          <li>
+            <b>standard</b>: lua is the official reference standard
+          </li>
+          <li>
+            <b>performance</b>: lua is written in C which is highly performant. However...
+          </li>
+        </ul>
+      </dd>
+      <dd>
+        <span style='text-decoration:underline'><b>disadvantages</b></span> 
+        <ul>
+          <li>
+            <b>performance</b>: lua needs every message to be serialized when communicating back and forth between the binary and Java (the same behavior as LuaStandalone). This can result in performance issues.
+          </li>
+          <li>
+            <b>limited platform support</b>: lua needs a binary compiled specifically for its OS. Although the major OSs are provided, some other OSs will require additional steps: See openSUSE 11.0 and <a href="#Binaries" id="xolnki_2">Binaries</a> below.
+          </li>
+          <li>
+            <b>permission setup</b>: lua needs to be granted execute permissions on Linux and Mac OS X. Although XOWA does this automatically, there may be complications. See <a href="#Permissions" id="xolnki_3">Permissions</a> below.
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        <a href="http://luaj.org/luaj/README.html" rel="nofollow" class="external text">luaj</a>: an open-source Java implementation of lua.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='text-decoration:underline'><b>advantages</b></span> 
+        <ul>
+          <li>
+            <b>universal platform support</b>: luaj is written in Java and will automatically run on any platform that XOWA runs on
+          </li>
+          <li>
+            <b>consistent behavior</b>: luaj will run the same on all platforms. In contrast, lua will run differently on Windows versus Linux / Mac OS X (see os.time and mktime)
+          </li>
+          <li>
+            <b>easier customization</b>: luaj can be easily customized. In contrast, lua requires experience with C, and recompiling the source for each platform
+          </li>
+          <li>
+            <b>performance</b>: luaj runs in the same memory space as XOWA, and doesn't require message serializations for every call. In addition, the lua binary may not perform consistently on every OS. For some OSs, this makes a considerable difference. For example, it is reported that luaj runs dramatically faster than lua on Windows Vista (seconds versus minutes). However...
+          </li>
+        </ul>
+      </dd>
+      <dd>
+        <span style='text-decoration:underline'><b>disadvantages</b></span> 
+        <ul>
+          <li>
+            <b>performance</b>: luaj is written in Java which is not as performant as C
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    <p>
+      Luaj is the official Lua processor for XOWA.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Lua">Lua</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Binaries">Binaries</span>
+    </h3>
+    <p>
+      XOWA packages the same Lua binaries (v5.1) that come with Scribunto. Note the following:
+    </p>
+    <ul>
+      <li>
+        The Windows, Linux, Linux 64, Mac OS X and Mac OS X 64 binaries have all been tested.
+      </li>
+      <li>
+        The Linux binaries may not work on older distributions. For example, the Linux 64 binary does not work on openSUSE 11.0. In these cases, you will need to get a lua binary for your distribution, or compile it manually.
+      </li>
+      <li>
+        XOWA/Lua has been tested on a Windows 7 64-bit machine. Note that the Windows 32-bit Lua binary is included, not the 64-bit one.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Permissions">Permissions</span>
+    </h3>
+    <p>
+      Linux / Mac OS X users will need to grant Execute permission to the Lua binary. Note that XOWA tries to do this automatically. If it fails, you will need to handle it manually by doing any one of the following (note you will need to replace &lt;OS&gt; with your system):
+    </p>
+    <ul>
+      <li>
+        Run the setup shell script
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Run <code>sh /xowa/setup_&lt;OS&gt;.sh script</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Manually setup lua
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Run <code>mv -f /xowa/bin/&lt;OS&gt;/lua/lua_install /xowa/bin/&lt;OS&gt;/lua/lua</code>
+      </dd>
+      <dd>
+        Run <code>chmod 774 /xowa/bin/&lt;OS&gt;/lua/lua</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Use a pre-existing lua
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Change the "Lua path" binary to one on your machine (which presumably has the correct permissions) (EX: /usr/bin/lua)
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="Luaj">Luaj</span>
+    </h2>
+    <p>
+      XOWA packages a modified version of the luaj-jse-3.0 jar. Note that 3.0 was selected as it is the latest code branch and it fixes errors in 2.0.3.
+    </p>
+    <p>
+      Several changes were made to the default 3.0 version to accomodate issues. These changes are itemized at /xowa/bin/any/java/luaj/readme.txt as well as <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_4" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>. The modified source is available at <a href="https://github.com/gnosygnu/luaj_xowa" rel="nofollow" class="external free">https://github.com/gnosygnu/luaj_xowa</a>
+    </p>
+    <p>
+      Additional files are also at <code>/xowa/bin/any/php/mediawiki/extensions/Scribunto/engines/Luaj/</code>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Scribunto_files">Scribunto files</span>
+    </h2>
+    <p>
+      XOWA used the following files from Scribunto:
+    </p>
+    <ul>
+      <li>
+        The main Lua libraries: mw_main.lua, MWServer.lua
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>source: /mediawiki-1.21.11/extensions/Scribunto/engines/LuaStandalone/</code>
+      </dd>
+      <dd>
+        <code>target: /xowa/bin/any/php/mediawiki/extensions/Scribunto/engines/LuaStandalone/</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        The lualib directory hive
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>source: /mediawiki-1.21.11/extensions/Scribunto/engines/LuaCommon/lualib/</code>
+      </dd>
+      <dd>
+        <code>target: /xowa/bin/any/php/mediawiki/extensions/Scribunto/engines/LuaCommon/lualib/</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        The Lua binary for the appropriate OS
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>source: /mediawiki-1.21.11/extensions/Scribunto/engines/LuaStandalone/binaries/&lt;OS&gt;/</code>
+      </dd>
+      <dd>
+        <code>target: /xowa/bin/&lt;OS&gt;/lua</code>
+      </dd>
+    </dl>
+    <p>
+      XOWA modifies many of the lua files in order to cache library data across multiple page loads (Scribunto reloads the libraries for every page)
+    </p>
+    <h2>
+      <span class="mw-headline" id="Links">Links</span>
+    </h2>
+    <ul>
+      <li>
+        For Options see <a href="http://xowa.org/home/wiki/Options/Scribunto.html" id="xolnki_5" title="Options/Scribunto" class="xowa-visited">Options/Scribunto</a>
+      </li>
+      <li>
+        For Diagnostics see <a href="http://xowa.org/home/wiki/Diagnostics.html#Scribunto" id="xolnki_6" title="Diagnostics">Diagnostics#Scribunto</a>
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

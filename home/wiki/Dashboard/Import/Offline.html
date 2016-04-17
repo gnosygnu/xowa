@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dashboard/Import/Offline - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style>
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
+  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
+  .options_textbox     {padding: 2px; border: 1px solid black;}
+  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
+  .options_textarea    {padding: 2px; border: 1px solid black;}
+  .options_select      {padding: 2px; border: 1px solid black;}
+  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
+  .options_checkbox    {padding: 2px; border: 1px solid black;}
+  .options_readonly    {background-color:#F9F9F9;}
+</style>
+<style>
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+  .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
+  .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
+  .options_textbox     {padding: 2px; border: 1px solid black;}
+  .options_textbox_num {padding: 2px; border: 1px solid black; text-align:right;}
+  .options_textarea    {padding: 2px; border: 1px solid black;}
+  .options_select      {padding: 2px; border: 1px solid black;}
+  .options_button      {padding: 2px; border: 1px solid black; background: white; height: 22px; margin-left: 1px; vertical-align: top;}
+  .options_checkbox    {padding: 2px; border: 1px solid black;}
+  .options_readonly    {background-color:#F9F9F9;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dashboard/Import/Offline</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      Use this form to import a wiki. See the <a href="#Instructions" id="xolnki_2">instructions</a> below.
+    </p>
+    <table>
+      <tr>
+        <th>
+          <p>
+            Wiki:
+          </p>
+        </th>
+        <td>
+          <p>
+            <select id='xowa_types_list' class='options_select'>
+              <option value="wikipedia">
+                Wikipedia
+              </option>
+              <option value="wiktionary">
+                Wiktionary
+              </option>
+              <option value="wikisource">
+                Wikisource
+              </option>
+              <option value="wikibooks">
+                Wikibooks
+              </option>
+              <option value="wikiversity">
+                Wikiversity
+              </option>
+              <option value="wikiquote">
+                Wikiquote
+              </option>
+              <option value="wikinews">
+                Wikinews
+              </option>
+              <option value="wikivoyage">
+                Wikivoyage
+              </option>
+              <option value="commons">
+                Commons
+              </option>
+              <option value="species">
+                Wikispecies
+              </option>
+              <option value="meta">
+                Meta
+              </option>
+              <option value="incubator">
+                Incubator
+              </option>
+              <option value="wikidata">
+                Wikidata
+              </option>
+              <option value="mediawiki">
+                MediaWiki
+              </option>
+              <option value="wikimediafoundation">
+                Wikimedia Foundation
+              </option>
+              <option value="other">
+                Other wiki
+              </option>
+            </select> <select id='xowa_langs_list' class='options_select'>
+              <option value="simple">
+                Simple English
+              </option>
+              <option value="ab">
+                Abkhaz
+              </option>
+              <option value="ace">
+                Aceh
+              </option>
+              <option value="aa">
+                Afar
+              </option>
+              <option value="af">
+                Afrikaans
+              </option>
+              <option value="ak">
+                Akan
+              </option>
+              <option value="sq">
+                Albanian
+              </option>
+              <option value="als">
+                Alemannic
+              </option>
+              <option value="am">
+                Amharic
+              </option>
+              <option value="ar">
+                Arabic
+              </option>
+              <option value="an">
+                Aragonese
+              </option>
+              <option value="arc">
+                Aramaic
+              </option>
+              <option value="hy">
+                Armenian
+              </option>
+              <option value="roa-rup">
+                Aromanian
+              </option>
+              <option value="frp">
+                Arpitan
+              </option>
+              <option value="as">
+                Assamese
+              </option>
+              <option value="ast">
+                Asturian
+              </option>
+              <option value="av">
+                Avar
+              </option>
+              <option value="ay">
+                Aymara
+              </option>
+              <option value="az">
+                Azerbaijani
+              </option>
+              <option value="bm">
+                Bambara
+              </option>
+              <option value="map-bms">
+                Banyumasan
+              </option>
+              <option value="ba">
+                Bashkir
+              </option>
+              <option value="eu">
+                Basque
+              </option>
+              <option value="bar">
+                Bavarian
+              </option>
+              <option value="be">
+                Belarusian (norm...)
+              </option>
+              <option value="be-x-old">
+                Belarusian (Tara orth...)
+              </option>
+              <option value="bn">
+                Bengali
+              </option>
+              <option value="bh">
+                Bhojpuri
+              </option>
+              <option value="dz">
+                Bhutani
+              </option>
+              <option value="bcl">
+                Bikol
+              </option>
+              <option value="bpy">
+                Bishnupriya Manipuri
+              </option>
+              <option value="bi">
+                Bislama
+              </option>
+              <option value="bs">
+                Bosnian
+              </option>
+              <option value="br">
+                Breton
+              </option>
+              <option value="bug">
+                Bugis
+              </option>
+              <option value="bg">
+                Bulgarian
+              </option>
+              <option value="my">
+                Burmese
+              </option>
+              <option value="bxr">
+                Buryat
+              </option>
+              <option value="csb">
+                Cassubian
+              </option>
+              <option value="ca">
+                Catalan
+              </option>
+              <option value="ceb">
+                Cebuano
+              </option>
+              <option value="ch">
+                Chamorro
+              </option>
+              <option value="ce">
+                Chechen
+              </option>
+              <option value="chr">
+                Cherokee
+              </option>
+              <option value="chy">
+                Cheyenne
+              </option>
+              <option value="ny">
+                Chichewa
+              </option>
+              <option value="zh">
+                Chinese (Zhōng Wén)
+              </option>
+              <option value="zh-classical">
+                Chinese (Classical)
+              </option>
+              <option value="zh-min-nan">
+                Chinese (Min Nan)
+              </option>
+              <option value="cv">
+                Chuvash
+              </option>
+              <option value="kw">
+                Cornish
+              </option>
+              <option value="co">
+                Corsican
+              </option>
+              <option value="cr">
+                Cree
+              </option>
+              <option value="hr">
+                Croatian
+              </option>
+              <option value="cs">
+                Czech
+              </option>
+              <option value="da">
+                Danish
+              </option>
+              <option value="dv">
+                Dhivehi
+              </option>
+              <option value="nl">
+                Dutch
+              </option>
+              <option value="pa">
+                Eastern Punjabi
+              </option>
+              <option value="en">
+                English
+              </option>
+              <option value="eo">
+                Esperanto
+              </option>
+              <option value="et">
+                Estonian
+              </option>
+              <option value="ext">
+                Extremaduran
+              </option>
+              <option value="fo">
+                Faroese
+              </option>
+              <option value="fj">
+                Fijian
+              </option>
+              <option value="fi">
+                Finnish
+              </option>
+              <option value="fr">
+                French
+              </option>
+              <option value="fy">
+                Frisian
+              </option>
+              <option value="fur">
+                Friulian
+              </option>
+              <option value="ff">
+                Fulfulde
+              </option>
+              <option value="gl">
+                Galician
+              </option>
+              <option value="lg">
+                Ganda
+              </option>
+              <option value="ka">
+                Georgian
+              </option>
+              <option value="de">
+                German
+              </option>
+              <option value="ki">
+                Gikuyu
+              </option>
+              <option value="got">
+                Gothic
+              </option>
+              <option value="el">
+                Greek
+              </option>
+              <option value="gn">
+                Guaraní
+              </option>
+              <option value="gu">
+                Gujarati
+              </option>
+              <option value="ht">
+                Haitian Creole
+              </option>
+              <option value="hak">
+                Hakka
+              </option>
+              <option value="mn">
+                Halh Mongolian (Cyrillic)
+              </option>
+              <option value="ha">
+                Hausa
+              </option>
+              <option value="haw">
+                Hawaiian
+              </option>
+              <option value="he">
+                Hebrew
+              </option>
+              <option value="hi">
+                Hindi
+              </option>
+              <option value="hu">
+                Hungarian
+              </option>
+              <option value="is">
+                Icelandic
+              </option>
+              <option value="io">
+                Ido
+              </option>
+              <option value="ig">
+                Igbo
+              </option>
+              <option value="ilo">
+                Ilokano
+              </option>
+              <option value="id">
+                Indonesian
+              </option>
+              <option value="ia">
+                Interlingua (IALA)
+              </option>
+              <option value="ie">
+                Interlingue (Occidental)
+              </option>
+              <option value="kl">
+                Inuktitut, Greenlandic
+              </option>
+              <option value="iu">
+                Inuktitut
+              </option>
+              <option value="ik">
+                Inupiak
+              </option>
+              <option value="ga">
+                Irish
+              </option>
+              <option value="it">
+                Italian
+              </option>
+              <option value="ja">
+                Japanese
+              </option>
+              <option value="jv">
+                Javanese
+              </option>
+              <option value="xal">
+                Kalmyk-Oirat
+              </option>
+              <option value="kn">
+                Kannada
+              </option>
+              <option value="ks">
+                Kashmiri
+              </option>
+              <option value="kk">
+                Kazakh
+              </option>
+              <option value="km">
+                Khmer, Central
+              </option>
+              <option value="rw">
+                Kinyarwanda
+              </option>
+              <option value="ky">
+                Kirghiz
+              </option>
+              <option value="rn">
+                Kirundi
+              </option>
+              <option value="kv">
+                Komi-Zyrian (Cyrillic)
+              </option>
+              <option value="kg">
+                Kongo
+              </option>
+              <option value="ko">
+                Korean
+              </option>
+              <option value="ku">
+                Kurdish
+              </option>
+              <option value="lad">
+                Ladino
+              </option>
+              <option value="lo">
+                Laotian
+              </option>
+              <option value="la">
+                Latin
+              </option>
+              <option value="lv">
+                Latvian
+              </option>
+              <option value="lij">
+                Ligurian
+              </option>
+              <option value="li">
+                Limburgian
+              </option>
+              <option value="ln">
+                Lingala
+              </option>
+              <option value="lt">
+                Lithuanian
+              </option>
+              <option value="jbo">
+                Lojban
+              </option>
+              <option value="lmo">
+                Lombard
+              </option>
+              <option value="nds">
+                Low German
+              </option>
+              <option value="lb">
+                Luxemburguish
+              </option>
+              <option value="mk">
+                Macedonian
+              </option>
+              <option value="mg">
+                Malagasy
+              </option>
+              <option value="ms">
+                Malay
+              </option>
+              <option value="ml">
+                Malayalam
+              </option>
+              <option value="mt">
+                Maltese
+              </option>
+              <option value="gv">
+                Manx
+              </option>
+              <option value="mi">
+                Maori
+              </option>
+              <option value="mr">
+                Marathi
+              </option>
+              <option value="mh">
+                Marshallese
+              </option>
+              <option value="cdo">
+                Min Dong
+              </option>
+              <option value="mo">
+                Moldovan
+              </option>
+              <option value="nah">
+                Nahuatl
+              </option>
+              <option value="na">
+                Nauruan
+              </option>
+              <option value="nv">
+                Navajo
+              </option>
+              <option value="nap">
+                Neapolitan
+              </option>
+              <option value="ne">
+                Nepali
+              </option>
+              <option value="new">
+                Newar / Nepal Bhasa
+              </option>
+              <option value="pih">
+                Norfuk/Pitcairn
+              </option>
+              <option value="nrm">
+                Norman
+              </option>
+              <option value="frr">
+                North Frisian
+              </option>
+              <option value="se">
+                Northern Sami
+              </option>
+              <option value="nn">
+                Norwegian (Nynorsk)
+              </option>
+              <option value="no">
+                Norwegian
+              </option>
+              <option value="oc">
+                Occitan
+              </option>
+              <option value="cu">
+                Old Church Slavonic
+              </option>
+              <option value="ang">
+                Old English
+              </option>
+              <option value="or">
+                Oriya
+              </option>
+              <option value="om">
+                Oromo
+              </option>
+              <option value="os">
+                Ossetic
+              </option>
+              <option value="pi">
+                Pali
+              </option>
+              <option value="pam">
+                Pampanga
+              </option>
+              <option value="pag">
+                Pangasinan
+              </option>
+              <option value="pap">
+                Papiamentu
+              </option>
+              <option value="ps">
+                Pashto
+              </option>
+              <option value="pdc">
+                Pennsylvania German
+              </option>
+              <option value="fa">
+                Persian
+              </option>
+              <option value="pms">
+                Piedmontese
+              </option>
+              <option value="pl">
+                Polish
+              </option>
+              <option value="pt">
+                Portuguese
+              </option>
+              <option value="qu">
+                Quechua
+              </option>
+              <option value="rm">
+                Raeto-Romance
+              </option>
+              <option value="ksh">
+                Ripuarian
+              </option>
+              <option value="ro">
+                Romanian
+              </option>
+              <option value="ru">
+                Russian
+              </option>
+              <option value="sm">
+                Samoan
+              </option>
+              <option value="bat-smg">
+                Samogitian
+              </option>
+              <option value="sg">
+                Sango/Sangho
+              </option>
+              <option value="sa">
+                Sanskrit
+              </option>
+              <option value="sc">
+                Sardinian
+              </option>
+              <option value="gd">
+                Scots Gaelic
+              </option>
+              <option value="sco">
+                Scots
+              </option>
+              <option value="sr">
+                Serbian
+              </option>
+              <option value="sh">
+                Serbocroatian
+              </option>
+              <option value="tn">
+                Setswana
+              </option>
+              <option value="sn">
+                Shona
+              </option>
+              <option value="scn">
+                Sicilian
+              </option>
+              <option value="sd">
+                Sindhi
+              </option>
+              <option value="si">
+                Sinhalese
+              </option>
+              <option value="sk">
+                Slovak
+              </option>
+              <option value="sl">
+                Slovenian
+              </option>
+              <option value="so">
+                Somali
+              </option>
+              <option value="st">
+                Southern Sotho
+              </option>
+              <option value="es">
+                Spanish
+              </option>
+              <option value="su">
+                Sundanese
+              </option>
+              <option value="sw">
+                Swahili
+              </option>
+              <option value="ss">
+                Swati
+              </option>
+              <option value="sv">
+                Swedish
+              </option>
+              <option value="tl">
+                Tagalog
+              </option>
+              <option value="ty">
+                Tahitian
+              </option>
+              <option value="tg">
+                Tajiki
+              </option>
+              <option value="ta">
+                Tamil
+              </option>
+              <option value="tt">
+                Tatar
+              </option>
+              <option value="te">
+                Telugu
+              </option>
+              <option value="tet">
+                Tetun
+              </option>
+              <option value="th">
+                Thai
+              </option>
+              <option value="bo">
+                Tibetan
+              </option>
+              <option value="ti">
+                Tigrinya
+              </option>
+              <option value="tpi">
+                Tok Pisin
+              </option>
+              <option value="to">
+                Tonga
+              </option>
+              <option value="ts">
+                Tsonga
+              </option>
+              <option value="tum">
+                Tumbuka
+              </option>
+              <option value="tr">
+                Turkish
+              </option>
+              <option value="tk">
+                Turkmen
+              </option>
+              <option value="tw">
+                Twi
+              </option>
+              <option value="udm">
+                Udmurt
+              </option>
+              <option value="uk">
+                Ukrainian
+              </option>
+              <option value="hsb">
+                Upper Sorbian
+              </option>
+              <option value="ur">
+                Urdu
+              </option>
+              <option value="ug">
+                Uyghur
+              </option>
+              <option value="uz">
+                Uzbek
+              </option>
+              <option value="ve">
+                Venda
+              </option>
+              <option value="vec">
+                Venetian
+              </option>
+              <option value="vi">
+                Vietnamese
+              </option>
+              <option value="rmy">
+                Vlax Romany
+              </option>
+              <option value="vo">
+                Volapük
+              </option>
+              <option value="fiu-vro">
+                Võro
+              </option>
+              <option value="wa">
+                Walloon
+              </option>
+              <option value="war">
+                Waray-Waray
+              </option>
+              <option value="cy">
+                Welsh
+              </option>
+              <option value="vls">
+                West Flemish
+              </option>
+              <option value="wo">
+                Wolof
+              </option>
+              <option value="wuu">
+                Wu Chinese
+              </option>
+              <option value="xh">
+                Xhosan
+              </option>
+              <option value="yi">
+                Yiddish
+              </option>
+              <option value="yo">
+                Yoruba
+              </option>
+              <option value="cbk-zam">
+                Zamboanga Chavacano
+              </option>
+              <option value="zea">
+                Zeeuws/Zeaws
+              </option>
+              <option value="za">
+                Zhuang
+              </option>
+              <option value="zu">
+                Zulu
+              </option>
+            </select>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>
+            Where to get the dump:
+          </p>
+        </th>
+        <td>
+          <p>
+            <select id='xowa_import_method' class='options_select'>
+              <option value="download">
+                download
+              </option>
+              <option value="file">
+                read from file
+              </option>
+            </select> <input id='xowa_dump_file' style='width:400px' class='options_textbox'> <button id='xowa_dump_file_button' class='options_button'>...</button>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>
+            Uncompress:
+          </p>
+        </th>
+        <td>
+          <p>
+            <select id='xowa_unzip' class='options_select'>
+              <option value="nounzip">
+                read from compressed dump
+              </option>
+              <option value="unzip">
+                uncompress first
+              </option>
+            </select>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>
+            Category system:<sup id="cite_ref-category_0-0" class="reference"><a href="#cite_note-category-0">[1]</a></sup>
+          </p>
+        </th>
+        <td>
+          <p>
+            <select id='xowa_category_list' class='options_select'>
+              <option value="create_version1">
+                version 1
+              </option>
+              <option value="create_version2">
+                version 2
+              </option>
+              <option value="update_version2">
+                only update to version 2
+              </option>
+            </select>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>
+            Search system:
+          </p>
+        </th>
+        <td>
+          <p>
+            <select id='xowa_search_list' class='options_select'>
+              <option value="default_version">
+                use default version specified on Help:Options/Import
+              </option>
+              <option value="update_version2">
+                only update to version 2 (for old wikis imported pre-v0.9.3)
+              </option>
+            </select>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <p>
+            Import:
+          </p>
+        </th>
+        <td>
+          <div>
+            <p>
+              <sup id="cite_ref-import_now_1-0" class="reference"><a href="#cite_note-import_now-1">[2]</a></sup> <button id='xowa_exec_direct' class='options_button' accesskey='i'>Import now</button>
+            </p>
+          </div>
+          <div>
+            <p>
+              <sup id="cite_ref-generate_and_run_2-0" class="reference"><a href="#cite_note-generate_and_run-2">[3]</a></sup> <button id='xowa_exec_generate' class='options_button' accesskey='g'>Generate script</button> <button id='xowa_exec_generated' class='options_button' accesskey='r'>Run script</button>
+            </p>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <p>
+<textarea id='xowa_script_code' accesskey=',' cols='75' rows='20' class='options_textarea'>
+</textarea>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Instructions">Instructions</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="With_internet_connection">With internet connection</span>
+    </h3>
+    <div class="mw-collapsible mw-collapsed">
+      <p>
+        Follow these instructions if you have an internet connection. This process will automatically download and import your selected wiki.
+      </p>
+      <ul>
+        <li>
+          Review the storage format options at <a href="http://xowa.org/home/wiki/Options/Import.html" id="xolnki_3" title="Options/Import" class="xowa-visited">Options/Import</a>
+        </li>
+        <li>
+          Choose the wiki you wish to install.
+        </li>
+        <li>
+          Choose if XOWA should decompress the dump file (this will need additional disk space) or if XOWA should read from the compressed dump (this will be slower).
+        </li>
+        <li>
+          Choose a version of the category system: 
+          <ul>
+            <li>
+              version 1: imports faster; uses less disk space; has less functionality than MediaWiki
+            </li>
+            <li>
+              version 2: imports slower; uses more disk space; has same functionality as MediaWiki.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Click "Import now". A message box will pop up when the wiki is installed.
+        </li>
+      </ul>
+      <p>
+        Other notes:
+      </p>
+      <ul>
+        <li>
+          If you choose to decompress the dump file: 
+          <ul>
+            <li>
+              The uncompressed file will be stored in the wiki directory. For example, if you've chosen simple.wikipedia.org, the path will be /xowa/wiki/simple.wikipedia.org/simplewiki-latest-pages-articles.xml
+            </li>
+            <li>
+              The uncompressed dump file will be automatically deleted when the process completes
+            </li>
+          </ul>
+        </li>
+        <li>
+          The dump file (.bz2) will not be deleted 
+          <ul>
+            <li>
+              If you are downloading the dump file, it will be automatically moved to /xowa/wiki/#dump/done/ when completed
+            </li>
+            <li>
+              If you are importing from a dump file, the dump file will remain in the same location
+            </li>
+          </ul>
+        </li>
+        <li>
+          If you want to remove a wiki, see <a href="http://xowa.org/home/wiki/App/Import/Removal.html" id="xolnki_4" title="App/Import/Removal" class="xowa-visited">App/Import/Removal</a>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="Without_internet_connection">Without internet connection</span>
+    </h3>
+    <div class="mw-collapsible mw-collapsed">
+      <p>
+        Follow these instructions if you don't have an internet connection or if you have other reasons not to use the automatic import.
+      </p>
+      <h4>
+        <span class="mw-headline" id="Getting_the_files">Getting the files</span>
+      </h4>
+      <ul>
+        <li>
+          Go to <a href="http://dumps.wikimedia.org/" rel="nofollow" class="external free">http://dumps.wikimedia.org/</a> and search for your wiki's directory. For example, Simple Wikipedia is <a href="http://dumps.wikimedia.org/simplewiki/" rel="nofollow" class="external free">http://dumps.wikimedia.org/simplewiki/</a> 
+          <ul>
+            <li>
+              Download the file named <code><i>wiki</i>-<i>date</i>-pages-articles.xml.bz2</code>.
+            </li>
+            <li>
+              (version 2 category system) Download two additional files 
+              <ul>
+                <li>
+                  <code><i>wiki</i>-<i>date</i>-categorylinks.sql.gz</code>
+                </li>
+                <li>
+                  <code><i>wiki</i>-<i>date</i>-page_props.sql.gz</code>.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Place these files in either of these locations: 
+          <ul>
+            <li>
+              <code>/xowa/wiki/<i>wiki_domain</i>/</code> where <i>wiki_domain</i> should be replaced with the name of the wiki. For example, if you're using Simple Wikipedia then the files should be placed in <code>/xowa/wiki/<i>simple.wikipedia.org</i>/</code> 
+              <ul>
+                <li>
+                  This is the recommended location. XOWA will automatically detect all files placed in the wiki directory.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>/anywhere_else_on_your_system/</code> 
+              <ul>
+                <li>
+                  If you don't have enough disk space on the disk where XOWA is installed, you can place the dump file in a directory on any other disk. You will need to select the file during the import process.
+                </li>
+                <li>
+                  Note that only the wiki dump file can be placed anywhere. The category files must be in <code>/xowa/wiki/<i>wiki_domain</i>/</code>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Decompress the dump files manually if you want to (it may be slightly faster than having XOWA do it)
+        </li>
+      </ul>
+      <h4>
+        <span class="mw-headline" id="Running_the_import">Running the import</span>
+      </h4>
+      <ul>
+        <li>
+          Review the storage format options at <a href="http://xowa.org/home/wiki/Options/Import.html" id="xolnki_5" title="Options/Import" class="xowa-visited">Options/Import</a>
+        </li>
+        <li>
+          Choose the wiki you wish to install. 
+          <ul>
+            <li>
+              If you've placed the wiki dump file in another location, you will need to select "read from file" and enter the location of that file.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Choose if XOWA should decompress the dump file (this will need additional disk space) or if XOWA should read from the compressed dump (this will be slower). 
+          <ul>
+            <li>
+              Note that this option will be ignored when you already decompressed the files manually.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Choose a version of the category system: 
+          <ul>
+            <li>
+              version 1: imports faster; uses less disk space; has less functionality than MediaWiki
+            </li>
+            <li>
+              version 2: imports slower; uses more disk space; has same functionality as MediaWiki.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Click "Import now". A message box will pop up when the wiki is installed.
+        </li>
+        <li>
+          Download the logo for the wiki whenever you are next online. The logo should be placed in <code>xowa/user/anonymous/wiki/<i>wiki</i>/html/logo.png</code>.
+        </li>
+      </ul>
+      <p>
+        Other notes:
+      </p>
+      <ul>
+        <li>
+          If you choose to automatically decompress the dump file: 
+          <ul>
+            <li>
+              The uncompressed file will be stored in the wiki directory. For example, if you've chosen simple.wikipedia.org, the path will be /xowa/wiki/simple.wikipedia.org/simplewiki-latest-pages-articles.xml
+            </li>
+            <li>
+              The uncompressed dump file will be automatically deleted when the process completes
+            </li>
+          </ul>
+        </li>
+        <li>
+          The dump file (.bz2) will not be deleted 
+          <ul>
+            <li>
+              If you are downloading the dump file, it will be automatically moved to /xowa/wiki/#dump/done/ when completed
+            </li>
+            <li>
+              If you are importing from a dump file, the dump file will remain in the same location
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="Upgrade_category_system">Upgrade category system</span>
+    </h3>
+    <div class="mw-collapsible mw-collapsed">
+      <p>
+        Follow these instructions to upgrade the category system to version 2 for a wiki you already imported.
+      </p>
+      <ul>
+        <li>
+          If you don't have an internet connection, do the following 
+          <ul>
+            <li>
+              Go to <a href="http://dumps.wikimedia.org/" rel="nofollow" class="external free">http://dumps.wikimedia.org/</a>.
+            </li>
+            <li>
+              Download the following two files 
+              <ul>
+                <li>
+                  <code><i>wiki</i>-<i>date</i>-categorylinks.sql.gz</code>
+                </li>
+                <li>
+                  <code><i>wiki</i>-<i>date</i>-page_props.sql.gz</code>.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Choose the wiki that you've already imported.
+        </li>
+        <li>
+          Change "Where to get the dump" from "download to "read from file".
+        </li>
+        <li>
+          Select "update to version 2".
+        </li>
+        <li>
+          Click "Import now".
+        </li>
+        <li>
+          Wait for the process to complete. A message box will pop up when the version 2 system is installed.
+        </li>
+      </ul>
+      <dl>
+        <dd>
+          For more info, see <a href="http://xowa.org/home/wiki/Help:Core/Category.html" id="xolnki_6" title="Help:Core/Category">Help:Core/Category</a>
+        </dd>
+      </dl>
+    </div>
+    <h3>
+      <span class="mw-headline" id="Script-based_import">Script-based import</span>
+    </h3>
+    <div class="mw-collapsible mw-collapsed">
+      <p>
+        Instead of running the import now, you can choose to generate a script and run it manually later. If you are interested in a script-based import, do the following:
+      </p>
+      <ul>
+        <li>
+          Make the same choices as you did above for "With internet connection" or "Without internet connection"
+        </li>
+        <li>
+          Click "Generate script" instead of "Import now". The script will now appear in the text box.
+        </li>
+        <li>
+          Repeat as necessary to combine other wikis / commands into the script
+        </li>
+        <li>
+          Run the script by clicking "Run script" 
+          <ul>
+            <li>
+              Alternatively, you can also copy it to <code>/xowa/xowa_build.gfs</code> and execute <code>java -Xmx256m -jar xowa_windows.jar --cmd_file xowa_build.gfs --app_mode cmd</code>. (Note that xowa_windows.jar is listed as the example. Linux users should substitute xowa_linux.jar while Mac users should substitute xowa_macosx.jar)
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h3>
+      <span class="mw-headline" id="Usage_notes">Usage notes</span>
+    </h3>
+    <div class="mw-collapsible mw-collapsed">
+      <ol class="references">
+        <li id="cite_note-category-0">
+          <span class="mw-cite-backlink"><a href="#cite_ref-category_0-0">^</a></span> 
+          <ul>
+            <li>
+              <span class="reference-text">V1 is a category system from using just the wikitext in "pages-articles". It is quick and does not take up much space, but it will be incomplete</span>
+            </li>
+            <li>
+              <span class="reference-text">V2 is a category system that reproduces the exact category system in Wikipedia. However it requires additional files ("categorylinks") and takes up more space (as much as 10 GB for English Wikipedia)</span>
+            </li>
+          </ul><span class="reference-text">For more info, see <a href="http://xowa.org/home/wiki/App/Category.html" id="xolnki_7" title="App/Category">App/Category</a></span>
+        </li>
+        <li id="cite_note-import_now-1">
+          <span class="mw-cite-backlink"><a href="#cite_ref-import_now_1-0">^</a></span> <span class="reference-text">Use this button to import the selected wiki now.</span>
+        </li>
+        <li id="cite_note-generate_and_run-2">
+          <span class="mw-cite-backlink"><a href="#cite_ref-generate_and_run_2-0">^</a></span> <span class="reference-text">Use these buttons to...</span>
+          <ul>
+            <li>
+              <span class="reference-text">Generate the script</span>
+            </li>
+            <li>
+              <span class="reference-text">Edit it by hand, or copy for later reference</span>
+            </li>
+            <li>
+              <span class="reference-text">Run the script when ready</span>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

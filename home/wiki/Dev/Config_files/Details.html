@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Dev/Config files/Details - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Config files/Details</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#General_characteristics"><span class="tocnumber">1</span> <span class="toctext">General characteristics</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Comments"><span class="tocnumber">2</span> <span class="toctext">Comments</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Whitespace"><span class="tocnumber">3</span> <span class="toctext">Whitespace</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Quotes"><span class="tocnumber">4</span> <span class="toctext">Quotes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Booleans"><span class="tocnumber">5</span> <span class="toctext">Booleans</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Integers"><span class="tocnumber">6</span> <span class="toctext">Integers</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="General_characteristics">General characteristics</span>
+    </h2>
+    <p>
+      A gfs file has the following general characteristics:
+    </p>
+    <ul>
+      <li>
+        Encoding is UTF-8 (without Byte Order Mark)
+      </li>
+      <li>
+        Line-endings should be <code>\n</code> not <code>\r\n</code>.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        There is support for <code>\r\n</code>, but for safety's sake, please use <code>\n</code>.
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Text is case-sensitive. There is a difference between <code>app</code> and <code>APP</code>.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Comments">Comments</span>
+    </h2>
+    <p>
+      Comments can be indicated by the conventional C comments of <code>//</code> or <code>/**/</code>. For example, any text between <code>/*</code> and <code>*/</code> is ignored.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Whitespace">Whitespace</span>
+    </h2>
+    <p>
+      Whitespace is not significant. There is no difference between the following commands.
+    </p>
+    <ul>
+      <li>
+        no whitespace
+      </li>
+    </ul>
+<pre>
+app.wikis.get('en.wikipedia.org');
+</pre>
+    <ul>
+      <li>
+        multiple spaces (ASCII 32)
+      </li>
+    </ul>
+<pre>
+app . wikis . get ( 'en.wikipedia.org' ) ;
+</pre>
+    <ul>
+      <li>
+        spaces and new lines (ASCII 32 and ASCII 10)
+      </li>
+    </ul>
+<pre>
+app
+. wikis
+. get ( 'en.wikipedia.org' )
+;
+</pre>
+    <p>
+      Note that tabs (ASCII 9) and carriage returns (ASCII 13) are permitted but not recommended.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Quotes">Quotes</span>
+    </h2>
+    <ul>
+      <li>
+        Strings should be quoted. Quote characters are the apostrophe (<code>'</code>) or the quote (<code>"</code>). Note that <code>'</code> is often used.
+      </li>
+      <li>
+        A special quote sequence of <code>&amp;lt:['\n</code> and <code>\n}':]&gt;</code> is used to handle text with significant delimiters
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        For example, the following is identical to <code>app.wikis.get('en.wikipedia.org');</code>
+      </dd>
+    </dl>
+<pre>
+app.wikis.get(
+&lt;:['
+en.wikipedia.org
+']:&gt;
+);
+</pre>
+    <dl>
+      <dd>
+        Note that this quote sequence allows processing a mixture of various syntax forms without escaping. This is especially useful for wiki text which can have elements of HTML and significant other symbols.
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="Booleans">Booleans</span>
+    </h2>
+    <p>
+      Booleans can be indicated in different forms as per the following table:
+    </p>
+    <table>
+      <tr>
+        <td>
+          Value
+        </td>
+        <td>
+          <b>true</b>
+        </td>
+        <td>
+          <b>false</b>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Text (uppercase)
+        </td>
+        <td>
+          <code>'TRUE'</code>
+        </td>
+        <td>
+          <code>'FALSE'</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Text (lowercase)
+        </td>
+        <td>
+          <code>'true'</code>
+        </td>
+        <td>
+          <code>'false'</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Text (simple)
+        </td>
+        <td>
+          <code>'y'</code>
+        </td>
+        <td>
+          <code>'n'</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Number
+        </td>
+        <td>
+          <code>1</code>
+        </td>
+        <td>
+          <code>0</code>
+        </td>
+      </tr>
+    </table>
+    <p>
+      Note that for brevity's sake, <code>'y'</code> and <code>'n'</code> will be used.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Integers">Integers</span>
+    </h2>
+    <p>
+      Integers can be indicated with or without quotes. Note that without quotes is recommended.
+    </p>
+    <p>
+      Integers can not include commas or decimal places. For example, <code>1,234</code> is not valid. Use <code>1234</code> instead.
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
