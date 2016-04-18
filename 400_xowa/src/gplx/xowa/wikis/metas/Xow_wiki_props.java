@@ -26,11 +26,11 @@ public class Xow_wiki_props implements GfoInvkAble {
 		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake
 		main_page = Xow_mainpage_finder.Find_or(wiki, siteinfo_mainpage);	// get new main_page from mainpage_finder
 	}
-	public byte Protocol_tid() {return protocol_tid;} private final byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
+	public byte Protocol_tid() {return protocol_tid;} private final    byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
 
 	public byte[] Site_name() {return site_name;} private byte[] site_name = Bry_.Empty;
-	public byte[] ServerName() {return serverName;} public Xow_wiki_props ServerName_(byte[] v) {serverName = v; server = Bry_.Add(bry_http, v); return this;} private byte[] serverName = Bry_.new_a7("localhost");
-	public byte[] Server() {return server;} private byte[] server = Bry_.new_a7("http://localhost"); static final byte[] bry_http = Bry_.new_a7("http://");
+	public byte[] Server_name() {return server_name;} private byte[] server_name = Bry_.new_a7("localhost");
+	public byte[] Server() {return server;} private byte[] server = Bry_.new_a7("http://localhost");
 	public byte[] ArticlePath() {return articlePath;} public Xow_wiki_props ArticlePath_(byte[] v) {articlePath = v; return this;} private byte[] articlePath = Xoh_href_.Bry__wiki;
 	public byte[] ScriptPath() {return scriptPath;} public Xow_wiki_props ScriptPath_(byte[] v) {scriptPath = v; return this;} private byte[] scriptPath = Bry_.new_a7("/wiki");
 	public byte[] StylePath() {return stylePath;} public Xow_wiki_props StylePath_(byte[] v) {stylePath = v; return this;} private byte[] stylePath = Bry_.new_a7("/wiki/skins");
@@ -42,7 +42,12 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Siteinfo_misc() {return siteinfo_misc;}
 	public byte[] Siteinfo_mainpage() {return siteinfo_mainpage;} private byte[] siteinfo_mainpage = Bry_.Empty;
 	public DateAdp Modified_latest() {return modified_latest;} private DateAdp modified_latest;
-	public Xow_wiki_props SiteName_(int v) {site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_tid_.Get_type_as_bry(v)))); return this;} 
+	public Xow_wiki_props Init_props(int domain_tid, byte[] domain_bry) {
+		this.site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_tid_.Get_type_as_bry(domain_tid))));	// EX: "Wikipedia"
+		this.server_name = domain_bry;																	// EX: "en.wikipedia.org"
+		this.server = Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry);		// EX: "https://en.wikipedia.org"
+		return this;
+	}
 	public Xow_wiki_props Siteinfo_misc_(byte[] v) {
 		siteinfo_misc = v;
 		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);
@@ -73,5 +78,5 @@ public class Xow_wiki_props implements GfoInvkAble {
 	, Invk_css_version_ = "css_version_"
 	, Invk_modified_latest_ = "modified_latest_"
 	;
-	private static final byte[] Current_version_const = Bry_.new_a7("1.21wmf11");	// approximate level of compatibility
+	private static final    byte[] Current_version_const = Bry_.new_a7("1.21wmf11");	// approximate level of compatibility
 }

@@ -265,6 +265,12 @@ public class Bry_ {
 		}
 		return true;
 	}
+	public static boolean Has_at_end(byte[] src, byte lkp) {
+		if (src == null) return false;
+		int src_len = src.length;
+		if (src_len == 0) return false;
+		return src[src_len - 1] == lkp;
+	}
 	public static boolean Has_at_end(byte[] src, byte[] lkp) {int src_len = src.length; return Has_at_end(src, lkp, src_len - lkp.length, src_len);}
 	public static boolean Has_at_end(byte[] src, byte[] lkp, int src_bgn, int src_end) {
 		int lkp_len = lkp.length;
@@ -584,6 +590,9 @@ public class Bry_ {
 		else if	(b1 != 0)	return new byte[] {b1, b2, b3};
 		else if	(b2 != 0)	return new byte[] {b2, b3};
 		else				return new byte[] {b3};
+	}
+	public static boolean To_bool_or(byte[] raw, boolean or) {
+		return Bry_.Eq(raw, Bool_.True_bry) ? true : or;
 	}
 	public static boolean To_bool_by_int(byte[] ary) {
 		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, Bool_.Y, null);

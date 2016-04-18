@@ -32,17 +32,17 @@ class Xowd_page_wkr_ctg_fxt {
 	byte[] src;
 	public Xowd_page_wkr_ctg_fxt ini_(String s) {src = Bry_.new_u8(s); return this;}
 	public Xowd_page_wkr_ctg_fxt tst_(String... expd) {
-		Xobd_parser mgr = new Xobd_parser();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xob_bldr bldr = Xoa_app_fxt.bldr_(app);
+		Xobd_parser mgr = new Xobd_parser(bldr);
 		Xobd_parser_wkr_ctg_tstr wkr = (Xobd_parser_wkr_ctg_tstr)new Xobd_parser_wkr_ctg_tstr().Ctor(bldr, wiki);
 		byte[] bry = Bry_.new_a7("[[Category:");
 		wkr.Wkr_hooks().Add(bry, bry);
 		mgr.Wkr_add(wkr);
 		Xowd_page_itm page = new Xowd_page_itm().Text_(src);//.Ttl_(Bry_.new_a7("Test"), new Xow_ns_mgr());
-		mgr.Wkr_bgn(bldr);
-		mgr.Wkr_run(page);
+		mgr.Page_wkr__bgn();
+		mgr.Page_wkr__run(page);
 		byte[][] ttl = (byte[][])wkr.Found().To_ary(byte[].class);
 		String[] actl = new String[ttl.length];
 		for (int i = 0; i < actl.length; i++) {

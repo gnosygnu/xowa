@@ -145,7 +145,7 @@ public class Scrib_lib_site implements Scrib_lib {
 	private void Bld_info(Keyval[] rv) {
 		Xow_wiki_props props = core.Wiki().Props();
 		rv[0] = Keyval_.new_("siteName"			, props.Site_name());
-		rv[1] = Keyval_.new_("server"			, props.Server());
+		rv[1] = Keyval_.new_("server"			, Bry_.Add(gplx.core.net.Gfo_protocol_itm.Bry_relative, props.Server_name()));	// NOTE: should generate "//en.wikipedia.org", not "de.wikipedia.org"; PAGE:de.w:Giro_d�Italia_1996 DATE:2016-04-17
 		rv[2] = Keyval_.new_("scriptPath"		, props.ScriptPath());
 		rv[3] = Keyval_.new_("stylePath"		, props.StylePath());
 		rv[4] = Keyval_.new_("currentVersion"	, props.Current_version());

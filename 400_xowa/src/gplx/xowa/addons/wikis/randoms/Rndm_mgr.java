@@ -15,11 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.addons.wikis.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.addons.wikis.randoms.dbs.*;
 public class Rndm_mgr implements Rls_able {
-	private Rndm_core_tbl core_tbl; private final Rndm_core_row core_row = new Rndm_core_row(); 
+	private Rndm_core_tbl core_tbl; private final    Rndm_core_row core_row = new Rndm_core_row(); 
 	private Rndm_range_tbl rng_tbl;
 	private Xowd_page_tbl page_tbl; private Db_stmt stmt__page__random;
 	public void Init(Db_conn conn, Xowd_page_tbl page_tbl) {
@@ -77,7 +78,7 @@ public class Rndm_mgr implements Rls_able {
 	public void Rls() {
 		stmt__page__random = Db_stmt_.Rls(stmt__page__random);
 	}
-	private static final Bry_fmt fmt_sql = Bry_fmt.New(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmt fmt_sql = Bry_fmt.New(String_.Concat_lines_nl_skip_last
 	( "SELECT  p.~{page_id}"
 	, "FROM    ~{page} p"
 	, "WHERE   p.~{~page_id} > ~{page_id_bgn}"
@@ -86,5 +87,5 @@ public class Rndm_mgr implements Rls_able {
 	, "LIMIT 1"
 	, "OFFSET  ~{offset};"
 	), "page", "page_id", "where_sql", "page_id_bgn", "offset");
-	private static final Bry_fmt fmt_where = Bry_fmt.New("", "page_namespace", "page_is_redirect");
+	private static final    Bry_fmt fmt_where = Bry_fmt.New("", "page_namespace", "page_is_redirect");
 }

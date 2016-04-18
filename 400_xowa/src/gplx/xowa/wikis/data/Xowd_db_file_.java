@@ -24,7 +24,7 @@ public class Xowd_db_file_ {
 	, Tid_wiki_solo	=  8, Tid_text_solo =  9
 	, Tid_html_solo = 10, Tid_html_data = 11
 	, Tid_file_solo = 12, Tid_file_core = 13, Tid_file_data = 14, Tid_file_user = 15
-	, Tid_search_link = 16
+	, Tid_search_link = 16, Tid_random = 17
 	;
 	private static final String
 	  Key_core = "core", Key_text = "text", Key_cat = "xtn.category", Key_search_core = "xtn.search.core", Key_wbase = "core.wbase"
@@ -32,7 +32,7 @@ public class Xowd_db_file_ {
 	, Key_text_solo = "text.solo", Key_wiki_solo = "wiki.solo"
 	, Key_html_solo = "html.solo", Key_html_data = "html"
 	, Key_file_solo = "file.solo", Key_file_core = "file.core", Key_file_data = "file.data", Key_file_user = "file.user"
-	, Key_search_link = "xtn.search.link"
+	, Key_search_link = "xtn.search.link", Key_random = "xtn.random"
 	;
 	public static String To_key(byte v) {
 		switch (v) {
@@ -52,6 +52,7 @@ public class Xowd_db_file_ {
 			case Tid_file_data:		return Key_file_data;
 			case Tid_file_user:		return Key_file_user;
 			case Tid_search_link:	return Key_search_link;
+			case Tid_random:		return Key_random;
 			default:				throw Err_.new_unhandled(v);
 		}
 	}

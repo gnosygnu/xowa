@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xob_wdata_pid_txt extends Xob_wdata_pid_base {
-	@Override public String Wkr_key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_tdb_text_wdata_pid;}
+	@Override public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_tdb_text_wdata_pid;}
 	@Override public void Pid_bgn() {
 		pid_bldr = new Wdata_idx_bldr_pid(this, bldr, wiki, dump_fil_len);
 	}	Wdata_idx_bldr_pid pid_bldr;

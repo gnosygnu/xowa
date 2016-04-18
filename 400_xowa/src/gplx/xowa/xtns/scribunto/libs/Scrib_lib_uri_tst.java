@@ -25,7 +25,7 @@ public class Scrib_lib_uri_tst {
 	@Test  public void Url() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_localUrl		, Object_.Ary("a&b! c"						), "/wiki/A%26b!_c");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl			, Object_.Ary("a&b! c"						), "//en.wikipedia.org/wiki/A%26b!_c");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_canonicalUrl	, Object_.Ary("a&b! c"						), "http://en.wikipedia.org/wiki/A%26b!_c");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_canonicalUrl	, Object_.Ary("a&b! c"						), "https://en.wikipedia.org/wiki/A%26b!_c");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_localUrl		, Object_.Ary("a&b! c"		, "action=edit"	), "/wiki/A%26b!_c?action=edit");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_localUrl		, Object_.Ary("Media:A.png"					), "/wiki/File:A.png");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_localUrl		, Object_.Ary("[bad]"						), Scrib_invoke_func_fxt.Null_rslt);	// handle invalid titles; EX:it.w:Billy_the_Kid; DATE:2014-01-20

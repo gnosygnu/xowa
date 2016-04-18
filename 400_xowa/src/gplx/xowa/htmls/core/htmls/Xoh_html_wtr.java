@@ -38,7 +38,7 @@ public class Xoh_html_wtr {
 	public Xow_html_mgr Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
 	public Xoh_html_wtr_cfg Cfg() {return cfg;} private Xoh_html_wtr_cfg cfg = new Xoh_html_wtr_cfg();
 	public Xoh_lnke_html		Wkr__lnke() {return wkr__lnke;} private Xoh_lnke_html wkr__lnke = new Xoh_lnke_html();
-	public Xoh_hdr_html			Wkr__hdr()	{return wkr__hdr;}	private final Xoh_hdr_html wkr__hdr = new Xoh_hdr_html();
+	public Xoh_hdr_html			Wkr__hdr()	{return wkr__hdr;}	private final    Xoh_hdr_html wkr__hdr = new Xoh_hdr_html();
 	public Xoh_lnki_wtr Lnki_wtr() {return lnki_wtr;} private Xoh_lnki_wtr lnki_wtr;
 	public Ref_html_wtr Ref_wtr() {return ref_wtr;} private Ref_html_wtr ref_wtr; 
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {this.page = page; lnki_wtr.Init_by_page(ctx, hctx, src, page);}
@@ -515,7 +515,7 @@ public class Xoh_html_wtr {
 			bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 		}
 	}
-	public static final byte[] Tag__end_quote = Bry_.new_a7("\">"), Tag__end_bgn = Bry_.new_a7("</")
+	public static final    byte[] Tag__end_quote = Bry_.new_a7("\">"), Tag__end_bgn = Bry_.new_a7("</")
 	, Tag_hr = Bry_.new_a7("<hr/>"), Tag_br = Bry_.new_a7("<br/>")
 	, Tag_list_grp_ul_bgn = Bry_.new_a7("<ul>"), Tag_list_grp_ul_end = Bry_.new_a7("</ul>")
 	, Tag_list_grp_ol_bgn = Bry_.new_a7("<ol>"), Tag_list_grp_ol_end = Bry_.new_a7("</ol>")
@@ -536,7 +536,7 @@ public class Xoh_html_wtr {
 	public static final int Sub_idx_null = -1;	// nonsense placeholder
 }
 class Xoh_display_ttl_wtr {
-	private static final byte[] 
+	private static final    byte[] 
 	  Atr_key_style = Bry_.new_a7("style")
 	, Msg_style_restricted = Bry_.new_a7(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
@@ -561,7 +561,7 @@ class Xoh_display_ttl_wtr {
 		}
 		return false;
 	}
-	public static final Xoh_display_ttl_wtr Instance = new Xoh_display_ttl_wtr(); Xoh_display_ttl_wtr() {}
+	public static final    Xoh_display_ttl_wtr Instance = new Xoh_display_ttl_wtr(); Xoh_display_ttl_wtr() {}
 }
 /*
 NOTE_1:inline always written as <tag></tag>, not <tag/>

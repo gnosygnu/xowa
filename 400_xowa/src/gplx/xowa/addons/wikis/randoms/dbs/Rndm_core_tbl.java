@@ -15,12 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.addons.wikis.randoms.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.randoms.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Rndm_core_tbl implements Rls_able {
-	private final String tbl_name = "rndm_core"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_uid, fld_where_sql, fld_total, fld_interval;
-	private final Db_conn conn; private Db_stmt stmt_select;
+	private final    String tbl_name = "rndm_core"; private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final    String fld_uid, fld_where_sql, fld_total, fld_interval;
+	private final    Db_conn conn; private Db_stmt stmt_select;
 	public Rndm_core_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_uid			= flds.Add_int_pkey("rndm_uid");

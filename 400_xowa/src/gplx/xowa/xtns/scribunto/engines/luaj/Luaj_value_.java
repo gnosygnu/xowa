@@ -87,13 +87,18 @@ class Luaj_value_ {
 		if (o == null) return LuaValue.NIL;
 		Class<?> c = Type_adp_.ClassOf_obj(o);
 		if		(Object_.Eq(c, Bool_.Cls_ref_type))			return LuaValue.valueOf((Boolean)o);
+		else if	(Object_.Eq(c, Byte_.Cls_ref_type))			return LuaValue.valueOf((Byte)o);
 		else if	(Object_.Eq(c, Int_.Cls_ref_type))			return LuaValue.valueOf((Integer)o);
-		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);
+		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_u8((byte[])o));
 		else if	(Object_.Eq(c, Keyval.class))				return X_kv_ary_to_tbl(server, (Keyval)o);
 		else if	(Object_.Eq(c, Keyval[].class))				return X_kv_ary_to_tbl(server, (Keyval[])o);
+		else if	(Object_.Eq(c, Long_.Cls_ref_type))			return LuaValue.valueOf((Long)o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());
+		else if	(Object_.Eq(c, Float_.Cls_ref_type))		return LuaValue.valueOf((Float)o);
+		else if	(Object_.Eq(c, Char_.Cls_ref_type))			return LuaValue.valueOf((char)o);
+		else if	(Object_.Eq(c, Short_.Cls_ref_type))		return LuaValue.valueOf((Short)o);
 		else return LuaValue.NIL; 
 	}
 	private static LuaTable X_kv_ary_to_tbl(Luaj_server server, Keyval... ary) {

@@ -20,7 +20,7 @@ import gplx.core.net.*; import gplx.xowa.bldrs.wms.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
-	private final Gfo_inet_conn inet_conn; private final Json_parser json_parser;
+	private final    Gfo_inet_conn inet_conn; private final    Json_parser json_parser;
 	private String api_url; private boolean call_api = true; private Json_doc jdoc;		
 	public Xoa_site_cfg_loader__inet(Gfo_inet_conn inet_conn, Json_parser json_parser) {this.inet_conn = inet_conn; this.json_parser = json_parser;}
 	public int Tid() {return Xoa_site_cfg_loader_.Tid__inet;}
@@ -47,17 +47,16 @@ public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
 		int len = itm_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoa_site_cfg_itm__base itm = itm_ary[i];
-			byte[] itm_key = itm.Key_bry();
-			if (db_hash.Has(itm_key)) continue;
+			// if (db_hash.Has(itm_key)) continue;	// TOMBSTONE: always add itm to url, even if in db; note that fallback gets saved to db; DATE:2016-04-13
 			if (first)
 				first = false;
 			else
 				bfr.Add_byte_pipe();
 			bfr.Add(itm.Key_bry());
-		}
-		return Xowm_api_mgr.Bld_api_url(domain_str, Qarg__bgn + bfr.To_str_and_rls());
+		}			
+		return first ? null : Xowm_api_mgr.Bld_api_url(domain_str, Qarg__bgn + bfr.To_str_and_rls());
 	}
-	private static final byte[] Bry__query = Bry_.new_a7("query");
+	private static final    byte[] Bry__query = Bry_.new_a7("query");
 	public static final String
 	  Qarg__all							= "action=query&format=json&rawcontinue=&meta=siteinfo&siprop=general|namespaces|statistics|interwikimap|namespacealiases|specialpagealiases|libraries|extensions|skins|magicwords|functionhooks|showhooks|extensiontags|protocols|defaultoptions|languages"
 	, Qarg__bgn							= "action=query&format=json&rawcontinue=&meta=siteinfo&siprop="

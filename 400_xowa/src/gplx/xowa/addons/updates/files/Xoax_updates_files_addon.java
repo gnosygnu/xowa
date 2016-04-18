@@ -24,7 +24,6 @@ public class Xoax_updates_files_addon implements Xoax_addon_itm, Xoax_addon_itm_
 		{ Xobldr__deletion_db__make.Prototype
 		, Xobldr__deletion_db__exec.Prototype
 		, Xobldr__deletion_db__small_files.Prototype
-		, Xobldr__deletion_db__temp.Prototype
 		};
 	}
 

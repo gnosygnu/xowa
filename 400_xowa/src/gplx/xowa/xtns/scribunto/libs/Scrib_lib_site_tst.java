@@ -67,7 +67,7 @@ public class Scrib_lib_site_tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  siteName=Wikipedia"
-		, "  server=http://en.wikipedia.org"
+		, "  server=//en.wikipedia.org"
 		, "  scriptPath=/wiki"
 		, "  stylePath=/wiki/skins"
 		, "  currentVersion=1.21wmf11"

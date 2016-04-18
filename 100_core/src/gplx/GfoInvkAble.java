@@ -21,8 +21,8 @@ public interface GfoInvkAble {
 }
 /*
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_set)) {}
+		if		(ctx.Match(k, Invk__set)) {}
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
-	}	private static final String Invk_set = "set";
+	}	private static final String Invk__set = "set";
 */

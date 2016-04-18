@@ -43,6 +43,10 @@ public class Gfh_tag_ {
 	, Bry__ul			= Bry_.new_a7("ul")
 	, Bry__td			= Bry_.new_a7("td")
 	, Bry__th			= Bry_.new_a7("th")
+	, Bry__div			= Bry_.new_a7("div")
+	, Bry__link			= Bry_.new_a7("link")
+	, Bry__style		= Bry_.new_a7("style")
+	, Bry__script		= Bry_.new_a7("script")
 	;
 	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)

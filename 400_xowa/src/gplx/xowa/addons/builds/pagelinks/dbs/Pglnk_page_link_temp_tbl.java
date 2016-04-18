@@ -33,7 +33,7 @@ public class Pglnk_page_link_temp_tbl implements Rls_able {
 	public String Tbl_name()	{return tbl_name;}
 	public void Create_tbl()	{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx()	{conn.Meta_idx_create(Gfo_usr_dlg_.Instance, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_src_id, fld_trg_ns, fld_trg_ttl));}
-	public void Insert_bgn()	{conn.Txn_bgn("schema__page_link__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn()	{conn.Txn_bgn("page_link__insert_bulk"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(int src_id, int trg_ns, byte[] trg_ttl) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);

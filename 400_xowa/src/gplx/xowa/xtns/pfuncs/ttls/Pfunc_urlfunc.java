@@ -45,7 +45,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 			Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls();
 			switch (tid) {
 				case Tid_local:		tmp_bfr.Add(ctx.Wiki().Props().ArticlePath());break;
-				case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().ServerName()).Add(ctx.Wiki().Props().ArticlePath()); break;
+				case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().Server_name()).Add(ctx.Wiki().Props().ArticlePath()); break;
 				case Tid_canonical:	tmp_bfr.Add(ctx.Wiki().Props().Server()).Add(ctx.Wiki().Props().ArticlePath()); break;
 				default:			throw Err_.new_unhandled(tid);
 			}
@@ -58,7 +58,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_urlfunc(id, tid, encode).Name_(name);}
 	public static final byte Tid_local = 0, Tid_full = 1, Tid_canonical = 2;
-	public static final byte[] Bry_relative_url = Bry_.new_a7("//");
+	public static final    byte[] Bry_relative_url = Bry_.new_a7("//");
 }	
 /*
 NOTE: Both fullurle: and localurle: performed additional character escaping on the resulting link, but no example is known where that still has any additional effect.

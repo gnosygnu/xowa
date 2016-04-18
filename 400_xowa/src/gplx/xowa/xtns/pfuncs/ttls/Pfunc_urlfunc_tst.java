@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_urlfunc_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test   public void Localurl()			{fxt.Test_parse_tmpl_str_test("{{localurl:a&b! c}}"							, "{{test}}", "/wiki/A%26b!_c");}
 	@Test   public void Fullurl()			{fxt.Test_parse_tmpl_str_test("{{fullurl:a&b! c}}"							, "{{test}}", "//en.wikipedia.org/wiki/A%26b!_c");}
-	@Test   public void Canonicalurl()		{fxt.Test_parse_tmpl_str_test("{{canonicalurl:a&b! c}}"						, "{{test}}", "http://en.wikipedia.org/wiki/A%26b!_c");}
-	@Test   public void Canonicalurl_case()	{fxt.Test_parse_tmpl_str_test("{{CANONICALURL:a&b! c}}"						, "{{test}}", "http://en.wikipedia.org/wiki/A%26b!_c");}
-	@Test   public void Localurle()			{fxt.Test_parse_tmpl_str_test("{{localurle:a&b! c}}"							, "{{test}}", "/wiki/A%26b!_c");}
+	@Test   public void Canonicalurl()		{fxt.Test_parse_tmpl_str_test("{{canonicalurl:a&b! c}}"						, "{{test}}", "https://en.wikipedia.org/wiki/A%26b!_c");}
+	@Test   public void Canonicalurl_case()	{fxt.Test_parse_tmpl_str_test("{{CANONICALURL:a&b! c}}"						, "{{test}}", "https://en.wikipedia.org/wiki/A%26b!_c");}
+	@Test   public void Localurle()			{fxt.Test_parse_tmpl_str_test("{{localurle:a&b! c}}"						, "{{test}}", "/wiki/A%26b!_c");}
 	@Test   public void Fullurle()			{fxt.Test_parse_tmpl_str_test("{{fullurle:a&b! c}}"							, "{{test}}", "//en.wikipedia.org/wiki/A%26b!_c");}
-	@Test   public void Canonicalurle()		{fxt.Test_parse_tmpl_str_test("{{canonicalurle:a&b! c}}"						, "{{test}}", "http://en.wikipedia.org/wiki/A%26b!_c");}
+	@Test   public void Canonicalurle()		{fxt.Test_parse_tmpl_str_test("{{canonicalurle:a&b! c}}"					, "{{test}}", "https://en.wikipedia.org/wiki/A%26b!_c");}
 	@Test   public void Fullurl_arg()		{fxt.Test_parse_tmpl_str_test("{{fullurle:a&b! c|action=edit}}"				, "{{test}}", "//en.wikipedia.org/wiki/A%26b!_c?action=edit");}
 	@Test   public void Random()			{fxt.Test_parse_tmpl_str_test("{{fullurle:a&b! c|action=edit}}"				, "{{test|a|b|c}}", "//en.wikipedia.org/wiki/A%26b!_c?action=edit");}
 	@Test   public void Xwiki()	{

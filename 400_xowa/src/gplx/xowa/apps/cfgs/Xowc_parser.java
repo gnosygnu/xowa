@@ -20,6 +20,8 @@ import gplx.xowa.parsers.lnkis.cfgs.*;
 public class Xowc_parser implements GfoInvkAble {
 	public Xowc_parser(Xowe_wiki wiki) {
 		lnki_cfg = new Xoc_lnki_cfg(wiki);
+		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__home)
+			display_title_restrict = false;
 	}
 	public Xoc_lnki_cfg Lnki_cfg() {return lnki_cfg;} private Xoc_lnki_cfg lnki_cfg;
 	public Xowc_xtns Xtns() {return xtns;} private Xowc_xtns xtns = new Xowc_xtns();

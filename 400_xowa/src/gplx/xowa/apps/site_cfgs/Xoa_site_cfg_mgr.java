@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public class Xoa_site_cfg_mgr {
-	private final Xoa_site_cfg_loader__db loader__db = new Xoa_site_cfg_loader__db();		
+	private final    Xoa_site_cfg_loader__db loader__db = new Xoa_site_cfg_loader__db();		
 	public Xoa_site_cfg_mgr(Xoa_app app) {
 		this.itm_ary = new Xoa_site_cfg_itm__base[]
 		{ new Xoa_site_cfg_itm__extensiontags()
@@ -31,9 +31,9 @@ public class Xoa_site_cfg_mgr {
 		, new Xoa_site_cfg_loader__fallback()
 		};
 	}
-	public Xoa_site_cfg_loader[]		Loader_ary() {return loader_ary;} private final Xoa_site_cfg_loader[] loader_ary;
-	public Xoa_site_cfg_itm__base[]		Itm_ary() {return itm_ary;} private final Xoa_site_cfg_itm__base[] itm_ary;
-	public Hash_adp_bry					Data_hash() {return data_hash;} private final Hash_adp_bry data_hash = Hash_adp_bry.cs();
+	public Xoa_site_cfg_loader[]		Loader_ary() {return loader_ary;} private final    Xoa_site_cfg_loader[] loader_ary;
+	public Xoa_site_cfg_itm__base[]		Itm_ary() {return itm_ary;} private final    Xoa_site_cfg_itm__base[] itm_ary;
+	public Hash_adp_bry					Data_hash() {return data_hash;} private final    Hash_adp_bry data_hash = Hash_adp_bry.cs();
 	public void Init_loader_bgn(Xow_wiki wiki) {
 		data_hash.Clear();	
 		int loader_len = loader_ary.length;

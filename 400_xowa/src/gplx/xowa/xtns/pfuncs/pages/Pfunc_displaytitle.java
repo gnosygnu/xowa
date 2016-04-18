@@ -49,5 +49,5 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		byte[] rv = case_mgr.Case_build_lower(val);							// lower-case
 		return Bry_.Replace(rv, Byte_ascii.Space, Byte_ascii.Underline);	// force underline; PAGE:de.w:Mod_qos DATE:2014-11-06
 	}
-	public static final Pfunc_displaytitle Instance = new Pfunc_displaytitle(); Pfunc_displaytitle() {}
+	public static final    Pfunc_displaytitle Instance = new Pfunc_displaytitle(); Pfunc_displaytitle() {}
 }	

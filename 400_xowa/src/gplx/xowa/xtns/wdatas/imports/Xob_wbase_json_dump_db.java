@@ -55,7 +55,7 @@ class Xob_wbase_json_dump_db {
 		this.page_modified_on = DateAdp_.Now();
 		this.page_core_tbl = db_mgr.Tbl__page();
 		page_tbl.Insert_bgn();
-		qid_cmd.Wkr_bgn(bldr);
+		qid_cmd.Page_wkr__bgn();
 		pid_cmd.Pid_bgn();
 	}
 	private int page_id = 0, page_count_main = 0;

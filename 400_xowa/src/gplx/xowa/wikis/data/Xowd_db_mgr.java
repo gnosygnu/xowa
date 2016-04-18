@@ -63,6 +63,10 @@ public class Xowd_db_mgr {
 		Dbs__set_by_tid(rv);
 		return rv;
 	}
+	public Xowd_db_file				Dbs__remake_by_tid(byte tid) {
+		Dbs__delete_by_tid(tid);
+		return Dbs__make_by_tid(tid);
+	}
 	public void						Dbs__delete_by_tid(byte... tids) {
 		int len = dbs__ary_len;
 		for (int i = 0; i < len; ++i) {

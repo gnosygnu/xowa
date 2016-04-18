@@ -28,7 +28,7 @@ public class Db_conn {
 	public Db_batch_mgr			Batch_mgr()				{return engine.Batch_mgr();}
 	public Db_engine			Engine()				{return engine;} private final    Db_engine engine;
 	public Db_sys_mgr			Sys_mgr()				{return sys_mgr;} private final    Db_sys_mgr sys_mgr;	// autonum and other functions
-	public boolean					Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Db_api(), comp.Conn_info().Db_api());}
+	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Db_api(), comp.Conn_info().Db_api());}
 	public void					Txn_bgn(String name)	{engine.Txn_bgn(name);}
 	public void					Txn_end()				{engine.Txn_end();}
 	public void					Txn_cxl()				{engine.Txn_cxl();}
@@ -45,9 +45,9 @@ public class Db_conn {
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... idxs)				{engine.Meta_idx_create(usr_dlg, idxs);}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)									{engine.Meta_fld_append(tbl, fld);}
 	public void					Meta_fld_assert(String tbl, String fld, Dbmeta_fld_tid tid, Object dflt)		{if (!Meta_fld_exists(tbl, fld)) this.Meta_fld_append(tbl, new Dbmeta_fld_itm(fld, tid).Default_(dflt));}
-	public boolean					Meta_tbl_exists(String tbl)														{return engine.Meta_tbl_exists(tbl);}
-	public boolean					Meta_fld_exists(String tbl, String fld)											{return engine.Meta_fld_exists(tbl, fld);}
-	public boolean					Meta_idx_exists(String idx)														{return engine.Meta_idx_exists(idx);}
+	public boolean				Meta_tbl_exists(String tbl)														{return engine.Meta_tbl_exists(tbl);}
+	public boolean				Meta_fld_exists(String tbl, String fld)											{return engine.Meta_fld_exists(tbl, fld);}
+	public boolean				Meta_idx_exists(String idx)														{return engine.Meta_idx_exists(idx);}
 	public Dbmeta_tbl_mgr		Meta_mgr()																		{return engine.Meta_mgr();}
 	public Db_stmt				Stmt_insert(String tbl, Dbmeta_fld_list flds)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, flds.To_str_ary_wo_autonum()));}
 	public Db_stmt				Stmt_insert(String tbl, String... cols)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, cols));}

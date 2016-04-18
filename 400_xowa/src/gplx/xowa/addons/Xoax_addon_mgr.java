@@ -41,6 +41,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.apps.searchs				.Xoax_builds_search_addon()
 		, new gplx.xowa.addons.apps.file_browsers		.Fbrow_addon()
 		, new gplx.xowa.addons.updates.files			.Xoax_updates_files_addon()
+		, new gplx.xowa.addons.builds.htmls				.Html__dump_to_fsys__addon()
 		);
 		return this;
 	}

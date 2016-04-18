@@ -78,9 +78,9 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		int options_len = options_ary.length;
 		for (int i = 0; i < options_len; ++i) {
 			Rndsel_option_itm option = options_ary[i];
-			rnd -= option.Weight();
+			rnd -= option.Weight;
 			if (rnd <= 0) {
-				option_bry = option.Text();
+				option_bry = option.Text;
 				break;
 			}
 		}
@@ -105,7 +105,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public static int Rnd_test = -1;
 }
 class Rndsel_option_itm {
-	public Rndsel_option_itm(int weight, byte[] text) {this.weight = weight; this.text = text;}
-	public int Weight() {return weight;} private final    int weight;
-	public byte[] Text() {return text;} private final    byte[] text;
+	public Rndsel_option_itm(int weight, byte[] text) {this.Weight = weight; this.Text = text;}
+	public final    int Weight;
+	public final    byte[] Text;
 }

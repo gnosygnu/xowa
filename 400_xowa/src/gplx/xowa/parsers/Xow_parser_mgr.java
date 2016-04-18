@@ -42,9 +42,15 @@ public class Xow_parser_mgr {
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Data_raw());
 		if (clear) {page.Clear_all();}
 		Xoa_ttl ttl = page.Ttl();
-		if (	Xow_page_tid.Identify(wiki.Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext)	// only parse page if wikitext; skip .js, .css, Module; DATE:2013-11-10
-			main.Parse_text_to_wdom(root, ctx, tkn_mkr, page.Data_raw(), Xop_parser_.Doc_bgn_bos);
+		if (	Xow_page_tid.Identify(wiki.Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext) {	// only parse page if wikitext; skip .js, .css, Module; DATE:2013-11-10
+			byte[] data_raw = page.Data_raw();
+//				if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__home) {
+//					data_raw = Bry_.Add(Temp__page_title, data_raw);
+//				}
+			main.Parse_text_to_wdom(root, ctx, tkn_mkr, data_raw , Xop_parser_.Doc_bgn_bos);
+		}
 		page.Root_(root);
 		root.Data_htm_(root.Root_src());
 	}
+//		private static final    byte[] Temp__page_title = Bry_.new_a7("{{PageTitle}}");
 }

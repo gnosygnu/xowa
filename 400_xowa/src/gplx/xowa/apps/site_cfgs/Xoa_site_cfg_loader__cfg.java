@@ -35,7 +35,7 @@ class Xoa_site_cfg_loader__db implements Xoa_site_cfg_loader {
 	public void Save_bry(int loader_tid, String db_key, byte[] val) {
 		byte[] meta = Bry_.new_a7(Bld_meta(loader_tid));
 		byte[] data = Bry_.Len_eq_0(val) ? meta : Bry_.Add(meta, Byte_ascii.Nl_bry, val);
-		cfg_tbl.Assert_bry(Grp__xowa_wm_api, db_key, data);
+		cfg_tbl.Upsert_bry(Grp__xowa_wm_api, db_key, data);
 	}
 	public static String Bld_meta(int loader_tid) {
 		return String_.Format("//#xowa|{0}|{1}|{2}", Xoa_app_.Version, Xoa_site_cfg_loader_.Get_key(loader_tid), DateAdp_.Now().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss());

@@ -47,7 +47,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		file_mgr = new Xow_file_mgr(this);
 		parser_mgr = new Xow_parser_mgr(this);
 		cfg_parser = new Xowc_parser(this);
-		props.SiteName_(domain_tid).ServerName_(domain_bry);
+		props.Init_props(domain_tid, domain_bry);
 		props.ContentLanguage_(lang.Key_bry());
 		stats = new Xow_site_stats_mgr(this);
 		Pf_func_.Reg(domain_itm, lang.Func_regy(), lang);

@@ -23,20 +23,20 @@ public class Xox_xowa_html_cmd_tst {
 	@Before public void init() {fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
 	@Test  public void Head_end() {
 		fxt.Test_parse_w_skin
-		( "<xowa_html pos='head.end'>test</xowa_html>"
-		, "<html><head>test</head><body></body></html>"
+		( "<xowa_html pos='head_end'>test</xowa_html>"
+		, "<html><head><style>\ntest\n</style>\n</head><body></body></html>"
 		);
 	}
-	@Test  public void Html_end() {
+	@Test  public void Tail() {
 		fxt.Test_parse_w_skin
-		( "<xowa_html pos='html.end'>test</xowa_html>"
-		, "<html><head></head><body></body>test</html>"
+		( "<xowa_html pos='tail'>test</xowa_html>"
+		, "<html><head></head><body></body><style>\ntest\n</style>\n</html>"
 		);
 	}
 }
 class Xox_xowa_html_cmd_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(16);
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	private Xowe_wiki wiki; private Xow_html_mgr html_mgr;
 	public void Clear() {
 		this.wiki = fxt.Wiki();

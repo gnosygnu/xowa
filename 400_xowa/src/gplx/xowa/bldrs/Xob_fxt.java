@@ -62,7 +62,7 @@ public class Xob_fxt {
 		return rv;
 	}
 	public Xob_fxt Run_ctg() {
-		Xobd_parser parser = new Xobd_parser();
+		Xobd_parser parser = new Xobd_parser(bldr);
 		gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_base ctg_wkr = new gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_txt().Ctor(bldr, wiki);
 		byte[] bry = Bry_.new_a7("[[Category:");
 		ctg_wkr.Wkr_hooks().Add(bry, bry);
@@ -75,12 +75,12 @@ public class Xob_fxt {
 		return this;
 	}
 	private void Run_wkr(Xob_page_wkr wkr) {
-		wkr.Wkr_bgn(bldr);
+		wkr.Page_wkr__bgn();
 		for (int i = 0; i < doc_ary.length; i++) {
 			Xowd_page_itm page = doc_ary[i];
-			wkr.Wkr_run(page);
+			wkr.Page_wkr__run(page);
 		}
-		wkr.Wkr_end();		
+		wkr.Page_wkr__end();		
 	}
 	private void tst_fils(Io_url[] ary) {
 		Io_fil[] actls = Get_actl(ary);
@@ -105,7 +105,7 @@ public class Xob_fxt {
 	}
 	public Xob_fxt Run_page_title() {return Run(new gplx.xowa.bldrs.cmds.texts.tdbs.Xob_page_txt(bldr, wiki));}
 	public Xob_fxt Run(Xobd_parser_wkr... wkrs) {
-		Xobd_parser parser_wkr = new Xobd_parser();
+		Xobd_parser parser_wkr = new Xobd_parser(bldr);
 		int len = wkrs.length;
 		for (int i = 0; i < len; i++)
 			parser_wkr.Wkr_add(wkrs[i]);
@@ -116,12 +116,12 @@ public class Xob_fxt {
 		int doc_ary_len = doc_ary.length;
 		for (int j = 0; j < wkrs.length; j++) {
 			Xob_page_wkr wkr = wkrs[j];
-			wkr.Wkr_bgn(bldr);
+			wkr.Page_wkr__bgn();
 			for (int i = 0; i < doc_ary_len; i++) {
 				Xowd_page_itm page = doc_ary[i];
-				wkr.Wkr_run(page);
+				wkr.Page_wkr__run(page);
 			}
-			wkr.Wkr_end();
+			wkr.Page_wkr__end();
 		}
 		Test_expd_files();
 		return this;

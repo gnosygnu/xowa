@@ -36,7 +36,7 @@ public class Pfunc_ifexist_mgr {
 		boolean rv = false;
 		switch (ttl_ns.Id()) {
 			case Xow_ns_.Tid__special:	rv = true; break; // NOTE: some pages call for [[Special]]; always return true for now; DATE:2014-07-17
-			case Xow_ns_.Tid__media:		rv = Find_ttl_for_media_ns(exists_itm, wiki, ttl_ns, ttl_bry); break;
+			case Xow_ns_.Tid__media:	rv = Find_ttl_for_media_ns(exists_itm, wiki, ttl_ns, ttl_bry); break;
 			default:					rv = Find_ttl_in_db(exists_itm, wiki, ttl_ns, ttl_bry); break;
 		}
 		exists_itm.Exists_(rv);

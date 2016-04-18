@@ -39,7 +39,7 @@ public class Fbrow_special_page implements Xows_page {
 
 		// write head
 		Xopage_html_data rv = new Xopage_html_data(Display_ttl, body);
-		rv.Head_tags().Add(Xopg_tag_itm.New_css(addon_dir.GenSubFil_nest("bin", "file_browser.css")));
+		rv.Head_tags().Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "file_browser.css")));
 		return rv;
 	}
 

@@ -19,7 +19,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_page_wtr_mgr implements GfoInvkAble {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
 	public Xoh_page_wtr_mgr(boolean html_capable) {
 		this.html_capable = html_capable;
@@ -79,9 +79,9 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	,	"  </a>"
 	),	"src_full_db");
 	public static final String Invk_page_read_ = "page_read_", Invk_page_edit_ = "page_edit_", Invk_page_html_ = "page_html_", Invk_xowa_div_edit_rename_ = "xowa_div_edit_rename_";
-	private static final String[] Fmtr_keys = new String[] 
+	private static final    String[] Fmtr_keys = new String[] 
 	{ "app_root_dir", "app_version", "app_build_date", "xowa_mode_is_server"
-	, "page_id", "page_name", "page_title", "page_modified_on_msg", "page_heading"
+	, "page_id", "page_name", "page_heading", "page_modified_on_msg"
 	, "html_css_common_path", "html_css_wiki_path", "xowa_head"
 	, "page_lang_ltr", "page_indicators", "page_content_sub", "page_jumpto", "page_pgbnr", "page_body_cls", "html_content_editable"
 	, "page_data", "page_langs"

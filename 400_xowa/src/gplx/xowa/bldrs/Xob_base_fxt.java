@@ -68,12 +68,12 @@ public class Xob_base_fxt {
 		cmd.Cmd_end();
 	}
 	public static void Run_wkr(Xob_bldr bldr, Xob_page_wkr wkr, Xowd_page_itm[] page_ary) {
-		wkr.Wkr_bgn(bldr);
+		wkr.Page_wkr__bgn();
 		int page_ary_len = page_ary.length;
 		for (int i = 0; i < page_ary_len; i++) {
 			Xowd_page_itm page = page_ary[i];
-			wkr.Wkr_run(page);
+			wkr.Page_wkr__run(page);
 		}
-		wkr.Wkr_end();		
+		wkr.Page_wkr__end();		
 	}
 }

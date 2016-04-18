@@ -35,4 +35,17 @@ public class Xopg_tag_mgr {
 		}
 		return bfr.To_bry_and_clear();
 	}
+	public byte[] To_html__style(Bry_bfr bfr) {
+		int len = this.Len();
+		for (int i = 0; i < len; ++i) {
+			Xopg_tag_itm tag = this.Get_at(i);
+			if (	Bry_.Eq(tag.Name, gplx.langs.htmls.Gfh_tag_.Bry__style)
+				&&	tag.Text != null
+				) {
+				tag.To_html(bfr);
+				bfr.Add_byte_nl();
+			}
+		}
+		return bfr.To_bry_and_clear();
+	}
 }

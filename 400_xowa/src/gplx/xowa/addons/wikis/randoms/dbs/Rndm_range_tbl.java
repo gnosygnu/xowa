@@ -15,12 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.addons.wikis.randoms.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.randoms.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Rndm_range_tbl implements Rls_able {
-	private final String tbl_name = "rng_range"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_rng_uid, fld_rng_idx, fld_rng_page_id;
-	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;		
+	private final    String tbl_name = "rndm_range"; private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final    String fld_rng_uid, fld_rng_idx, fld_rng_page_id;
+	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;		
 	public Rndm_range_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_rng_uid			= flds.Add_int("rng_uid");

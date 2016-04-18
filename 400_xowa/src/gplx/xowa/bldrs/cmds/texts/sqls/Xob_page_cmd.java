@@ -28,8 +28,8 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 	private DateAdp modified_latest = DateAdp_.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k				
 	private Dg_match_mgr dg_match_mgr; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	public Xob_page_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	public String Wkr_key() {return Xob_cmd_keys.Key_text_page;}
-	public void Wkr_bgn(Xob_bldr bldr) {
+	public String Page_wkr__key() {return Xob_cmd_keys.Key_text_page;}
+	public void Page_wkr__bgn() {
 		Xoae_app app = wiki.Appe();
 		Xoapi_import import_cfg = app.Api_root().Bldr().Wiki().Import();
 		this.redirect_mgr = wiki.Redirect_mgr(); 
@@ -50,7 +50,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		page_core_tbl.Insert_bgn();
 		usr_dlg.Prog_many("", "", "import.page.bgn");
 	}
-	public void Wkr_run(Xowd_page_itm page) {
+	public void Page_wkr__run(Xowd_page_itm page) {
 		int id = page.Id();
 		DateAdp modified = page.Modified_on(); if (modified.compareTo(modified_latest) == CompareAble_.More) modified_latest = modified;
 		byte[] text_raw = page.Text(); int text_raw_len = page.Text_len();
@@ -77,9 +77,12 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 			if (dg_match_mgr != null) dg_match_mgr.Commit();
 		}
 	}
-	public void Wkr_end() {
+	public void Page_wkr__run_cleanup() {
 		usr_dlg.Log_many("", "", "import.page: insert done; committing pages; pages=~{0}", page_count_all);
-		page_core_tbl.Insert_end(); ns_to_db_mgr.Rls_all();
+		ns_to_db_mgr.Rls_all();
+		page_core_tbl.Insert_end();
+	}
+	public void Page_wkr__end() {
 		if (dg_match_mgr != null) dg_match_mgr.Rls();
 		usr_dlg.Log_many("", "", "import.page: updating core stats");
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();

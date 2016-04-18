@@ -66,6 +66,7 @@ public class Db_cfg_tbl implements Rls_able {
 	public void Upsert_int		(String grp, String key, int val)			{Upsert_str(grp, key, Int_.To_str(val));}
 	public void Upsert_date		(String grp, String key, DateAdp val)		{Upsert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public void Upsert_guid		(String grp, String key, Guid_adp val)		{Upsert_str(grp, key, val.To_str());}
+	public void Upsert_bry		(String grp, String key, byte[] val)		{Upsert_str(grp, key, String_.new_u8(val));}
 	public void Upsert_str		(String grp, String key, String val) {
 		String cur_val = this.Select_str_or(grp, key, null);
 		if (cur_val == null)	this.Insert_str(grp, key, val);

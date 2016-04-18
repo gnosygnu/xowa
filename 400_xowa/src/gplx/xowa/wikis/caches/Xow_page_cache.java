@@ -22,7 +22,7 @@ public class Xow_page_cache {
 	public Xow_page_cache(Xowe_wiki wiki) {this.wiki = wiki;}
 	public byte[] Get_or_load_as_src(Xoa_ttl ttl) {
 		Xow_page_cache_itm rv = Get_or_load_as_itm(ttl);
-		return rv == null ? null : rv.Wtxt();
+		return rv == null ? null : rv.Wtxt__direct();
 	}
 	public Xow_page_cache_itm Get_or_load_as_itm(Xoa_ttl ttl) {
 		byte[] ttl_full_db = ttl.Full_db();

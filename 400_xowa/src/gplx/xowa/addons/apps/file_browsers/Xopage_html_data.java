@@ -30,9 +30,6 @@ public class Xopage_html_data {
 	public void Apply(Xoa_page page) {
 		page.Html_data().Html_restricted_n_();
 		page.Html_data().Skip_parse_(Bool_.Y);
-		Bry_bfr bfr = Bry_bfr.new_();
-		page.Html_data().Custom_head_end_concat(head_tags.To_html(bfr));
-		page.Html_data().Custom_html_end_concat(tail_tags.To_html(bfr));
 		page.Html_data().Display_ttl_(display_ttl);
 		page.Html_data().Custom_body_(this.Body());
 		page.Html_data().Custom_head_tags().Copy(head_tags);

@@ -22,7 +22,7 @@ import gplx.dbs.cfgs.*;
 import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.bldrs.wms.*;
 public class Xoa_site_cfg_mgr_tst {
-	private final Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
+	private final    Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
 	@Before		public void init() {fxt.Init();}
 	@After  public void term() {fxt.Term();}
 	@Test  public void Extensiontags__cfg() {
@@ -56,21 +56,16 @@ public class Xoa_site_cfg_mgr_tst {
 		fxt.Exec_load();
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__interwikimap, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 2, "w", "https://en.wikipedia.org", "c", "https://commons.wikimedia.org"));
 	}
-	@Test  public void Inet__once() {
-		fxt.Init_db(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 1, "math", "source"));
-		fxt.Exec_load();
-		fxt.Test_inet_qarg("interwikimap");	// should not have extensiontags
-	}
 //		@Test   public void Print() {
 //			String s = fxt.Make_api(fxt.Make_api_interwikimap("k1", "v1", "k2", "v2"), fxt.Make_api_extensiontags2("k3", "v3", "k4", "v4"));
 //            Tfds.Dbg(s);
 //		}
 }
 class Xoa_site_cfg_mgr_fxt {
-	private final Xoae_app app; private final Xowe_wiki wiki;
-	private final Xoa_site_cfg_mgr site_cfg_mgr;
-	private final Db_cfg_tbl cfg_tbl;
-	private final Json_printer printer = new Json_printer();
+	private final    Xoae_app app; private final    Xowe_wiki wiki;
+	private final    Xoa_site_cfg_mgr site_cfg_mgr;
+	private final    Db_cfg_tbl cfg_tbl;
+	private final    Json_printer printer = new Json_printer();
 	public Xoa_site_cfg_mgr_fxt() {
 		// Xoa_app_.Usr_dlg_(Xoa_app_.usr_dlg_console_());
 		Xoa_test_.Inet__init();

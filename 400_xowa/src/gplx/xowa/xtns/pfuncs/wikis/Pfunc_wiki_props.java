@@ -27,7 +27,7 @@ public class Pfunc_wiki_props extends Pf_func_base {
 	    switch (id) {
 			case Xol_kwd_grp_.Id_site_sitename:			bfr.Add(props.Site_name()); break;
 			case Xol_kwd_grp_.Id_site_server:			bfr.Add(props.Server()); break;
-			case Xol_kwd_grp_.Id_site_servername:		bfr.Add(props.ServerName()); break;
+			case Xol_kwd_grp_.Id_site_servername:		bfr.Add(props.Server_name()); break;
 			case Xol_kwd_grp_.Id_site_articlepath:		bfr.Add(props.ArticlePath()); break;
 			case Xol_kwd_grp_.Id_site_scriptpath:		bfr.Add(props.ScriptPath()); break;
 			case Xol_kwd_grp_.Id_site_stylepath:		bfr.Add(props.StylePath()); break;
@@ -38,5 +38,5 @@ public class Pfunc_wiki_props extends Pf_func_base {
 		}
 	}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_props(id).Name_(name);}
-	public static final Pfunc_wiki_props Instance = new Pfunc_wiki_props(-1);
+	public static final    Pfunc_wiki_props Instance = new Pfunc_wiki_props(-1);
 }

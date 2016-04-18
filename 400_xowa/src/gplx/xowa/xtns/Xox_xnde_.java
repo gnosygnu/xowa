@@ -43,4 +43,9 @@ public class Xox_xnde_ {
 		rv.Init(ctx.Page().Url_bry_safe(), src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		return rv;
 	}
+	public static byte[] Extract_body_or_null(byte[] src, Xop_xnde_tkn xnde) {
+		int body_bgn = xnde.Tag_open_end();
+		int body_end = xnde.Tag_close_bgn();
+		return body_bgn != -1 && body_end > body_bgn ? Bry_.Mid(src, body_bgn, body_end) : null;
+	}
 }

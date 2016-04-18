@@ -42,7 +42,7 @@ class Wikis_list_wtr {
 
 		// write to html
 		Xopage_html_data rv = new Xopage_html_data(Wikis_list_page.Display_ttl, body);
-		rv.Head_tags().Add(Xopg_tag_itm.New_css(addon_dir.GenSubFil_nest("bin", "wiki_list.css")));
+		rv.Head_tags().Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "wiki_list.css")));
 		return rv;
 	}
 	private static byte[] Get_root_url() {

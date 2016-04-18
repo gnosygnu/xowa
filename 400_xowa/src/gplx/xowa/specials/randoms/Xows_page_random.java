@@ -19,7 +19,7 @@ package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gp
 import gplx.xowa.wikis.nss.*;
 public class Xows_page_random implements Xows_page {
 	public Xows_page_random(Xowe_wiki wiki) {}
-	public Rndm_mgr Mgr() {return mgr;} private final    Rndm_mgr mgr = new Rndm_mgr();
+	// public Rndm_mgr Mgr() {return mgr;} private final    Rndm_mgr mgr = new Rndm_mgr();
 	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__random;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;

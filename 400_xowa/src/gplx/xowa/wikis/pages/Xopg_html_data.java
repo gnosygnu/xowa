@@ -60,20 +60,6 @@ public class Xopg_html_data {
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_body() {return custom_body;} public Xopg_html_data Custom_body_(byte[] v) {custom_body = v; return this;} private byte[] custom_body;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;
-	public byte[]				Custom_head_end() {return custom_head_end;}
-	public byte[]				Custom_html_end() {return custom_html_end;}
-	public void Custom_head_end_concat(byte[] v) {
-		if (v == null)
-			custom_head_end = v;
-		else
-			custom_head_end = Bry_.Add(custom_head_end, v);
-	}	private byte[] custom_head_end;
-	public void Custom_html_end_concat(byte[] v) {
-		if (v == null)
-			custom_html_end = v;
-		else
-			custom_html_end = Bry_.Add(custom_html_end, v);
-	}	private byte[] custom_html_end;
 	public void Clear() {
 		html_restricted = true;
 		display_ttl = content_sub = display_ttl_vnt = null;
@@ -88,7 +74,7 @@ public class Xopg_html_data {
 		xtn_scribunto_dbg = Bry_.Empty;
 		xtn_pgbnr = null;
 		module_mgr.Clear();
-		custom_html = custom_html_end = custom_head_end = custom_tab_name = null;
+		custom_html = custom_tab_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();
 		indicators.Clear();
 		this.mode_wtxt_shown = false;

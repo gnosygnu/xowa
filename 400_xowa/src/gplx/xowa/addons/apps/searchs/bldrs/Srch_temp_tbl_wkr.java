@@ -50,10 +50,10 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		Db_conn word_conn = search_temp_tbl.conn;
 
 		// update search_word ids if they exist
-		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
+		// Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);	// NOTE: fails in multi-db due to transaction
 		Update_word_id(word_conn, wiki);
 		Search_word__insert(word_conn);
-		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
+		// Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
 
 		// create search_link
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().conn;

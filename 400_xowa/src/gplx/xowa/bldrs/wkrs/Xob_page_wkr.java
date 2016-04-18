@@ -15,10 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public interface Xob_page_wkr extends GfoInvkAble {
-	String Wkr_key();
-	void Wkr_bgn(Xob_bldr bldr);
-	void Wkr_run(gplx.xowa.wikis.data.tbls.Xowd_page_itm page);
-	void Wkr_end();
+	String	Page_wkr__key();
+	void	Page_wkr__bgn();
+	void	Page_wkr__run(gplx.xowa.wikis.data.tbls.Xowd_page_itm page);
+	void	Page_wkr__run_cleanup();	// close txns opened during Page_wkr__run
+	void	Page_wkr__end();
 }

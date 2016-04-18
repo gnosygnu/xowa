@@ -23,8 +23,8 @@ import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*; import gplx.xowa.wikis.tdbs.stats.*;
 public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
 	public Xob_page_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	public String Wkr_key() {return Xob_cmd_keys.Key_tdb_make_page;}
-	public void Wkr_bgn(Xob_bldr bldr) {
+	public String Page_wkr__key() {return Xob_cmd_keys.Key_tdb_make_page;}
+	public void Page_wkr__bgn() {
 		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.Appe().Setup_mgr().Dump_mgr().Data_storage_format();
 		fsys_mgr = wiki.Tdb_fsys_mgr();			
 		make_dir = fsys_mgr.Ns_dir();
@@ -36,7 +36,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, Gfo
 	int page_file_len = 512 * Io_mgr.Len_kb, title_file_len = 64 * Io_mgr.Len_kb; Xob_tmp_wtr_mgr ttl_wtr_mgr;
 	Xob_xdat_file_wtr[] page_wtr_regy = new Xob_xdat_file_wtr[Ns_ordinal_max]; static final int Ns_ordinal_max = Xow_ns_mgr_.Ordinal_max;	// ASSUME: no more than 128 ns in a wiki
 	Xob_stat_type data_rpt_typ; Xob_stat_mgr stat_mgr = new Xob_stat_mgr(); byte page_storage_type;		
-	public void Wkr_run(Xowd_page_itm page) {
+	public void Page_wkr__run(Xowd_page_itm page) {
 		int id = page.Id(); byte[] ttl_wo_ns = page.Ttl_page_db(), text = page.Text(); int ttl_len = ttl_wo_ns.length, text_len = text.length; Xow_ns ns = page.Ns();
 		boolean redirect = redirect_mgr.Is_redirect(text, text_len);
 		page.Redirected_(redirect);
@@ -54,7 +54,8 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, Gfo
 		if (ttl_wtr.FlushNeeded(Xotdb_page_itm_.Txt_ttl_len__fixed + ttl_len)) ttl_wtr.Flush(bldr.Usr_dlg());
 		Xotdb_page_itm_.Txt_ttl_save(ttl_wtr.Bfr(), id, file_idx, row_idx, redirect, text_len, ttl_wo_ns);
 	}
-	public void Wkr_end() {
+	public void Page_wkr__run_cleanup() {}
+	public void Page_wkr__end() {
 		Flush_page(page_wtr_regy);
 		ttl_wtr_mgr.Flush_all(bldr.Usr_dlg());
 		Xobdc_merger.Ns(bldr.Usr_dlg(), ttl_wtr_mgr.Regy(), Xotdb_dir_info_.Name_title, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_cmd_ns(bldr.Usr_dlg()));

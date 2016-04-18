@@ -27,7 +27,7 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 	public void Cmd_run() {
 		Xob_page_wkr[] wkr_ary = (Xob_page_wkr[])wkrs.To_ary(Xob_page_wkr.class); int wkr_ary_len = wkr_ary.length;
 		for (int i = 0; i < wkr_ary_len; i++)
-			wkr_ary[i].Wkr_bgn(bldr);
+			wkr_ary[i].Page_wkr__bgn();
 		Io_buffer_rdr fil = Io_buffer_rdr.Null; Xowd_page_itm page = new Xowd_page_itm(); Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		Xob_xml_parser parser = bldr.Dump_parser().Data_bfr_len_(Io_mgr.Len_mb); 
 		long fil_len = 0;
@@ -46,7 +46,7 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 				prv_pos = cur_pos;
 				try {
 					for (int i = 0; i < wkr_ary_len; i++)
-						wkr_ary[i].Wkr_run(page);
+						wkr_ary[i].Page_wkr__run(page);
 				}
 				catch (Exception e) {
 					Err_.Noop(e);
@@ -57,6 +57,8 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 					Console_adp__sys.Instance.Write_str_w_nl(msg);
 				}
 			}
+			for (int i = wkr_ary_len - 1; i > -1; --i)	// NOTE: release in reverse order; needed to make sure txns are released correctly
+				wkr_ary[i].Page_wkr__run_cleanup();
 		}
 		catch (Exception e) {
 			String msg = Err_.Message_lang(e);
@@ -67,17 +69,17 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 		finally {fil.Rls();}
 		bldr.Usr_dlg().Prog_none("", "", "reading completed: performing post-processing clean-up");
 		for (int i = wkr_ary_len - 1; i > -1; --i)	// NOTE: release in reverse order; needed to make sure txns are released correctly
-			wkr_ary[i].Wkr_end();
+			wkr_ary[i].Page_wkr__end();
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_end() {}
 	public void Cmd_term() {}
-	public void Wkr_add(Xob_page_wkr wkr) {wkrs.Add(wkr.Wkr_key(), wkr);} private Ordered_hash wkrs = Ordered_hash_.New();
+	public void Wkr_add(Xob_page_wkr wkr) {wkrs.Add(wkr.Page_wkr__key(), wkr);} private Ordered_hash wkrs = Ordered_hash_.New();
 	public Xob_page_wkr Wkr_get(String key) {return (Xob_page_wkr)wkrs.Get_by(key);}
 	public Xobd_parser Page_parser_assert() {
 		if (page_parser == null) {
-			page_parser = new Xobd_parser();
+			page_parser = new Xobd_parser(bldr);
 			this.Wkr_add(page_parser);
 		}
 		return page_parser;

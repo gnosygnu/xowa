@@ -99,7 +99,9 @@ public class Xoh_href_wtr {
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, page_end);			// add page
 			if (hctx.Mode() == Xoh_wtr_ctx.Mode_file_dump) {
 				byte[] href_end = hctx.Anch__href__end();
-				if (href_end != null) encoder_bfr.Add(href_end);
+				if (	href_end != null
+					&&	page_end - page_bgn > 0)								// handle [[#A]] which will have no page; else will dump "home/page/.html#A"; DATE:2016-04-12
+					encoder_bfr.Add(href_end);
 			}
 			encoder.Encode(encoder_bfr, ttl_full, anch_bgn, ttl_full.length);	// add anchor
 		}

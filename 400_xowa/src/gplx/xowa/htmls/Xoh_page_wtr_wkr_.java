@@ -35,9 +35,9 @@ public class Xoh_page_wtr_wkr_ {
 		else
 			return ttl.Full_txt_w_ttl_case();				// NOTE: include ns with ttl as per defect d88a87b3
 	}
-	public static void Bld_head_end(Bry_bfr html_bfr, Xoae_page page) {
-		byte[] head_end = page.Html_data().Custom_head_end();
-		if (head_end == null) return;
+	public static void Bld_head_end(Bry_bfr html_bfr, Bry_bfr tmp_bfr, Xoae_page page) {
+		byte[] head_end = page.Html_data().Custom_head_tags().To_html(tmp_bfr);
+		if (Bry_.Len_eq_0(head_end)) return;
 		int insert_pos = Bry_find_.Find_fwd(html_bfr.Bfr(), Gfh_tag_.Head_rhs);
 		if (insert_pos == Bry_find_.Not_found) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find </head>");
@@ -45,8 +45,8 @@ public class Xoh_page_wtr_wkr_ {
 		}
 		html_bfr.Insert_at(insert_pos, head_end);
 	}
-	public static void Bld_html_end(Bry_bfr html_bfr, Xoae_page page) {
-		byte[] html_end = page.Html_data().Custom_html_end();
+	public static void Bld_html_end(Bry_bfr html_bfr, Bry_bfr tmp_bfr, Xoae_page page) {
+		byte[] html_end = page.Html_data().Custom_tail_tags().To_html(tmp_bfr);
 		if (html_end == null) return;
 		int insert_pos = Bry_find_.Find_bwd(html_bfr.Bfr(), Gfh_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_find_.Not_found) {
