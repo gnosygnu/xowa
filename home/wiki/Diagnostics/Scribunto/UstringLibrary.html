@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_2" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_2" title="Module:Diagnostics/UstringLibrary" class="xowa-visited">Module:Diagnostics/UstringLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
@@ -165,6 +165,21 @@
         </td>
         <td>
           b,;b,;
+        </td>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          gsub; non-ASCII<br>
+          (will print unrecognizable character)
+        </td>
+        <td>
+          {{#invoke:Diagnostics/UstringLibrary|gsub_string|bß|[a]ß|c}}
+        </td>
+        <td>
+          cß
         </td>
         <td>
           <span style='color: green;'>pass</span>
