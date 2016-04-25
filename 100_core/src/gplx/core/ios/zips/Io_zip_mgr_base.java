@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
 import java.io.*;
 import java.util.zip.*;
 import gplx.core.envs.*;
@@ -116,5 +116,5 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 		} 	catch(IOException e) {throw Err_.new_exc(e, "io", "error duing unzip", "src", src_fil.Raw(), "trg", trg_dir.Raw());}
 			}
 		byte[] tmp = new byte[4096]; int tmpLen = 4096;
-		public static final Io_zip_mgr Instance = new Io_zip_mgr_base();
+		public static final    Io_zip_mgr Instance = new Io_zip_mgr_base();
 }

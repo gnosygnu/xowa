@@ -18,11 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
-	private static Bry_bfr bfr = Bry_bfr.new_();
+	private static final    Bry_bfr bfr = Bry_bfr.new_();
+	public static void Eq__ary(String[] expd, byte[][] actl, String msg_fmt, Object... msg_args) {Eq__ary(Bry_.Ary(expd), actl, msg_fmt, msg_args);}
 	public static void Eq__ary(Bry_bfr_able[] expd_ary, Bry_bfr_able[] actl_ary) {Eq__ary(expd_ary, actl_ary, null);}
 	public static void Eq__ary(Bry_bfr_able[] expd_ary, Bry_bfr_able[] actl_ary, String msg_fmt, Object... msg_args) {
-		byte[][] expd_bry_ary = Bry_bfr_able_.To_bry_ary(bfr, expd_ary);
-		byte[][] actl_bry_ary = Bry_bfr_able_.To_bry_ary(bfr, actl_ary);
+		Eq__ary(Bry_bfr_able_.To_bry_ary(bfr, expd_ary), Bry_bfr_able_.To_bry_ary(bfr, actl_ary), msg_fmt, msg_args);
+	}
+	public static void Eq__ary(byte[][] expd_bry_ary, byte[][] actl_bry_ary, String msg_fmt, Object... msg_args) {
 		boolean[] failures = Calc__failures(Type_adp_.Tid__bry, expd_bry_ary, actl_bry_ary);
 		if (failures != null) {
 			bfr.Add(Bry__line_bgn);
@@ -40,10 +42,11 @@ public class Gftest {
 		int actl_len = Array_.Len(actl_ary);
 		for (int i = 0; i < len; ++i) {
 			boolean failure = failures[i];
-			bfr.Add_int_pad_bgn(Byte_ascii.Num_0, 5 - Int_.DigitCount(i), i).Add_byte_colon().Add_byte_space();
+			int pad_len = 5 - Int_.DigitCount(i);
+			bfr.Add_int_pad_bgn(Byte_ascii.Num_0, pad_len, i).Add_byte_colon().Add_byte_space();
 			Write__itm(bfr, type_id, expd_ary, expd_len, i);
 			if (failure) {
-				bfr.Add(Bry__item__eq_n).Add_byte_repeat(Byte_ascii.Space, 3);
+				bfr.Add(Bry__item__eq_n).Add_byte_repeat(Byte_ascii.Space, pad_len - 1);
 				Write__itm(bfr, type_id, actl_ary, actl_len, i);
 			}
 		}

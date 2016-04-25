@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.apps.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.xowa.specials.*; import gplx.core.ios.*; import gplx.core.net.*;
+import gplx.xowa.specials.*; import gplx.core.net.*; import gplx.xowa.wikis.pages.*;
 public class Wikis_list_page implements Xows_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoa_url_arg_mgr arg_mgr = new Xoa_url_arg_mgr(null).Init(url.Qargs_ary());

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip_tst {
-	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
+	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Free() {
 		fxt.Test__bicode("~#!http://a.org~", Xoh_lnke_html__hdump__tst.Html__free);
 	}
@@ -40,6 +40,11 @@ public class Xoh_lnke_hzip_tst {
 	}
 	@Test   public void Text() {
 		fxt.Test__bicode("~#'http://a.org~a~", Xoh_lnke_html__hdump__tst.Html__text);
+	}
+	@Test   public void Wikivoyage__sleep() {
+		fxt.Test__bicode
+		( "~#7http://a.org~c~b~"
+		, "<a href='http://a.org' rel='nofollow' class='external text' title='b'>c</a>");
 	}
 //		@Test   public void Xwiki__exists() {
 //			String hzip			= "~#'https://en.wiktionary.org/wiki/A~A~";

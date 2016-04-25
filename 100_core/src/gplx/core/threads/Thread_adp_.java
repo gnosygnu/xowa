@@ -32,5 +32,12 @@ public class Thread_adp_ {
 	public static void Run_invk_msg(String name, GfoInvkAble invk, GfoMsg m) {
 		Thread_adp_.invk_msg_(name, invk, m).Start();
 	}
-	public static final String Name_null = null;
+	public static void Run_cmd(boolean async, String thread_name, GfoInvkAble invk, String cmd) {
+		GfoMsg msg = GfoMsg_.new_cast_(cmd);
+		if (async)
+			Thread_adp_.invk_msg_(thread_name, invk, msg).Start();
+		else
+			GfoInvkAble_.InvkCmd_msg(invk, cmd, msg);
+	}
+	public static final    String Name_null = null;
 }

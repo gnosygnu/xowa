@@ -76,7 +76,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File__fsdb_mode().Tid_v2_bld_y_();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make

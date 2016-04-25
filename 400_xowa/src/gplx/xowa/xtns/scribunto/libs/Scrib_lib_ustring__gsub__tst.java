@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.langs.regxs.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_ustring__gsub__tst {
-	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_ustring().Init();
@@ -36,6 +36,9 @@ public class Scrib_lib_ustring__gsub__tst {
 	}
 	@Test  public void Replace__int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, 1		, "abcd;0");
+	}
+	@Test  public void Replace__double() {	// PURPOSE: do not fail if double is passed in for @replace; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2 DATE:2016-04-21
+		Exec_gsub("abcd", 1	 , -1, 1.23d	, "abcd;0");
 	}
 	@Test  public void Replace__table() {
 		Exec_gsub("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
@@ -86,8 +89,8 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
 	}
 }
-class Mock_proc__recursive extends Mock_proc_fxt {	private final Mock_scrib_fxt fxt; private final Scrib_lib lib; private final Mock_proc__recursive inner;
-	private final Bry_bfr bfr;
+class Mock_proc__recursive extends Mock_proc_fxt {	private final    Mock_scrib_fxt fxt; private final    Scrib_lib lib; private final    Mock_proc__recursive inner;
+	private final    Bry_bfr bfr;
 	public Mock_proc__recursive(Mock_scrib_fxt fxt, Scrib_lib lib, Bry_bfr bfr, int id, Mock_proc__recursive inner) {super(id, "recur");
 		this.fxt = fxt; this.lib = lib; this.inner = inner;
 		this.bfr = bfr;

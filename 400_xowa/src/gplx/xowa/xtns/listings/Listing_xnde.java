@@ -163,8 +163,8 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				.Txt(Txt_colon_space)
 				;
 			wtr	.Nde_full_atrs(Tag_a, xatr_email, true
+			, Atr_a_href	, Bry_.Add(Txt_mailto, xatr_email)	// NOTE: switched from "class,href" to "href,class" for hzip; PAGE:de.v:Bansin; DATE:2016-04-21
 			, Atr_a_class	, Atr_a_class_email
-			, Atr_a_href	, Bry_.Add(Txt_mailto, xatr_email)
 			);
 		}
 		wtr.Txt(Txt_dot_space);

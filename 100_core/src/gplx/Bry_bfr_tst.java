@@ -208,9 +208,15 @@ public class Bry_bfr_tst {
 	@Test  public void Delete_rng_to_end() {
 		fxt.Test_Delete_rng_to_end("abcd", 2					, "ab");
 	}
+	@Test   public void To_bry_ary_and_clear() {
+		fxt.Test__to_bry_ary_and_clear(""			);						// empty
+		fxt.Test__to_bry_ary_and_clear("a"			, "a");					// lines=1
+		fxt.Test__to_bry_ary_and_clear("a\nb\nc"	, "a", "b", "c");		// lines=n
+		fxt.Test__to_bry_ary_and_clear("a\n"		, "a");					// nl at end
+	}
 }
 class ByteAryBfr_fxt {
-	private Bry_bfr bfr = Bry_bfr.reset_(16);
+	private final    Bry_bfr bfr = Bry_bfr.reset_(16);
 	public void Clear() {
 		bfr.ClearAndReset();
 	}
@@ -224,4 +230,7 @@ class ByteAryBfr_fxt {
 	public void Test_Delete_rng(String init, int bgn, int end, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng(bgn, end).To_str_and_clear());}
 	public void Test_Delete_rng_to_bgn(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng_to_bgn(pos).To_str_and_clear());}
 	public void Test_Delete_rng_to_end(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str_u8(init).Delete_rng_to_end(pos).To_str_and_clear());}
+	public void Test__to_bry_ary_and_clear(String bfr_str, String... expd) {
+		Tfds.Eq_ary(expd, String_.Ary(bfr.Add_str_u8(bfr_str).To_bry_ary_and_clear()));
+	}
 }

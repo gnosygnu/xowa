@@ -24,7 +24,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.lnkis.*;
 class Xof_file_fxt {		
 	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
-	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();
+	private final    Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final    Fsd_img_itm tmp_img = new Fsd_img_itm();
 	public void Rls() {}
 	public void Reset() {
 		Io_mgr.Instance.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
@@ -38,7 +38,7 @@ class Xof_file_fxt {
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
 		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
@@ -107,11 +107,11 @@ class Xof_repo_fxt {
 }
 class Xof_orig_arg {
 	Xof_orig_arg(byte repo, byte[] page, int w, int h, byte[] redirect) {this.repo = repo; this.page = page; this.w = w; this.h = h; this.redirect = redirect;}
-	public byte			Repo() {return repo;} private final byte repo;
-	public byte[]		Page() {return page;} private final byte[] page;
-	public int			W() {return w;} private final int w;
-	public int			H() {return h;} private final int h;
-	public byte[]		Redirect() {return redirect;} private final byte[] redirect;
+	public byte			Repo() {return repo;} private final    byte repo;
+	public byte[]		Page() {return page;} private final    byte[] page;
+	public int			W() {return w;} private final    int w;
+	public int			H() {return h;} private final    int h;
+	public byte[]		Redirect() {return redirect;} private final    byte[] redirect;
 	public static Xof_orig_arg new_comm_file(String page)								{return new_(Bool_.Y, page, Xof_img_size.Size_null, Xof_img_size.Size_null);}
 	public static Xof_orig_arg new_comm(String page, int w, int h)						{return new_(Bool_.Y, page, w, h);}
 	public static Xof_orig_arg new_wiki(String page, int w, int h)						{return new_(Bool_.N, page, w, h);}
@@ -128,17 +128,17 @@ class Xof_fsdb_arg {
 	Xof_fsdb_arg(byte[] wiki, byte[] ttl, boolean is_thumb, int ext, int w, int h, int time, byte[] bin) {
 		this.wiki = wiki; this.ttl = ttl; this.is_thumb = is_thumb; this.w = w; this.h = h; this.time = time; this.ext = ext; this.bin = bin;
 	}
-	public byte[] Wiki() {return wiki;} private final byte[] wiki;
-	public byte[] Ttl() {return ttl;} private final byte[] ttl;
-	public int Ext() {return ext;} private final int ext;
-	public boolean Is_thumb() {return is_thumb;} private final boolean is_thumb;
-	public int W() {return w;} private final int w;
-	public int H() {return h;} private final int h;
-	public double Time() {return time;} private final double time;
-	public int Page() {return page;} private final int page = Xof_lnki_page.Null;
-	public byte[] Bin() {return bin;} private final byte[] bin;
-	public DateAdp Modified() {return modified;} private final DateAdp modified = Fsd_thm_tbl.Modified_null;
-	public String Hash() {return hash;} private final String hash = Fsd_thm_tbl.Hash_null;
+	public byte[] Wiki() {return wiki;} private final    byte[] wiki;
+	public byte[] Ttl() {return ttl;} private final    byte[] ttl;
+	public int Ext() {return ext;} private final    int ext;
+	public boolean Is_thumb() {return is_thumb;} private final    boolean is_thumb;
+	public int W() {return w;} private final    int w;
+	public int H() {return h;} private final    int h;
+	public double Time() {return time;} private final    double time;
+	public int Page() {return page;} private final    int page = Xof_lnki_page.Null;
+	public byte[] Bin() {return bin;} private final    byte[] bin;
+	public DateAdp Modified() {return modified;} private final    DateAdp modified = Fsd_thm_tbl.Modified_null;
+	public String Hash() {return hash;} private final    String hash = Fsd_thm_tbl.Hash_null;
 	public static Xof_fsdb_arg new_comm_file(String ttl)						{return new_(Xow_domain_itm_.Bry__commons, Bool_.N, ttl, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_comm_thumb(String ttl)						{return new_(Xow_domain_itm_.Bry__commons, Bool_.Y, ttl, W_default, H_default, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h)			{return new_(Xow_domain_itm_.Bry__commons, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}

@@ -58,7 +58,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	private static final    String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (args.Len() == 0) return rslt.Init_obj(null);	// invalid title, return null; EX:{{#invoke:Message box|fmbox}} DATE:2015-03-04
-		byte[] ttl_bry = args.Pull_bry(0);
+		byte[] ttl_bry = args.Xstr_bry_or_null(0);			// NOTE: Pull_bry fails if caller passes int; PAGE:de.w:Wikipedia:Lua/Modul/Pinging/Test/recipients; DATE:2016-04-21
 		Object ns_obj = args.Cast_obj_or_null(1);
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ns_bry = null;

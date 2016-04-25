@@ -41,7 +41,7 @@ class Dpl_itm {
 	public byte Quality_pages() {return quality_pages;} private byte quality_pages;
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
-	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvs in node; EX:<dpl>category=abc\nredirects=y\n</dpl>
+	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
 		sub_ctx = Xop_ctx.new_sub_(wiki);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
 		sub_root = sub_tkn_mkr.Root(Bry_.Empty);
@@ -54,20 +54,25 @@ class Dpl_itm {
 		boolean loop = true;
 		while (loop) {										// iterate over content
 			boolean done = pos >= content_end;
-			byte b = done ? Dlm_row : src[pos];				// get cur byte
+			byte b = done ? Byte_ascii.Nl : src[pos];		// get cur byte
 			switch (b) {
 				case Byte_ascii.Space: case Byte_ascii.Tab:
 					if	(ws_bgn_chk) ws_bgn_idx = pos;										// definite ws at bgn; set ws_bgn_idx, and keep setting until text reached; handles mixed sequence of \s\n\t where last tkn should be ws_bgn_idx
 					else			{if (ws_end_idx == -1) ws_end_idx = pos;};				// possible ws at end; may be overriden later; see AdjustWsForTxtTkn
 					break;
-				case Dlm_fld: {								// dlm is fld; EX: "=" in "category="
+				case Byte_ascii.Eq: {						// =; make key; EX: "=" in "category="
 					if (ws_bgn_idx != -1) fld_bgn = ws_bgn_idx + 1;	// +1 to position after last known ws
 					int fld_end = ws_end_idx == -1 ? pos : ws_end_idx;
 					key_id = Dpl_itm_keys.Parse(src, fld_bgn, fld_end, Dpl_itm_keys.Key_null);
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
 						fld_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
-						if (fld_bgn == Bry_find_.Not_found) loop = false;
+						if (fld_bgn == Bry_find_.Not_found)
+							loop = false;
+						else {
+							pos = fld_bgn;	// set pos after \n else bounds error if multiple bad keys on same line; NOTE: ++pos below; EX: \nbad1=a bad2=b\n; PAGE:de.n:Brandenburg DATE:2016-04-21
+							++fld_bgn;		// set fld_bgn after \n;
+						}
 					}
 					else {									// known key; set pos to val_bgn
 						fld_bgn = pos + Int_.Const_dlm_len;
@@ -75,7 +80,7 @@ class Dpl_itm {
 					ws_bgn_chk = true; ws_bgn_idx = ws_end_idx = -1;
 					break;
 				}
-				case Dlm_row: {								// dlm is nl; EX: "\n" in "category=abc\n"
+				case Byte_ascii.Nl: {						// dlm is nl; EX: "\n" in "category=abc\n"
 					if (fld_bgn != pos) {					// ignores blank lines
 						if (ws_bgn_idx != -1) fld_bgn = ws_bgn_idx + 1;	// +1 to position after last known ws
 						int fld_end = ws_end_idx == -1 ? pos : ws_end_idx;
@@ -94,7 +99,6 @@ class Dpl_itm {
 			++pos;
 		}
 	}
-	private static final byte Dlm_fld = Byte_ascii.Eq, Dlm_row = Byte_ascii.Nl;
 	public void Parse_cmd(Xowe_wiki wiki, byte key_id, byte[] val) {
 		sub_root.Clear();
 		val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
@@ -150,7 +154,7 @@ class Dpl_itm {
 		else
 			usr_dlg.Warn_many("", "", err_msg);
 	}
-	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_a7()
 	.Add_str_obj("orcer"						, Bool_obj_val.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
 	.Add_str_obj("addcategorydatefirst"			, Bool_obj_val.True)
 	.Add_str_obj("mainspace"					, Bool_obj_val.True)

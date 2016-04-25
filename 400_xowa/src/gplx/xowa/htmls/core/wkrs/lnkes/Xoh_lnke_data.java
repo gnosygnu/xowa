@@ -31,22 +31,28 @@ public class Xoh_lnke_data implements Xoh_data_itm {
 	public int Capt_bgn() {return capt_bgn;} private int capt_bgn;
 	public int Capt_end() {return capt_end;} private int capt_end;
 	public boolean Capt_exists() {return capt_exists;} private boolean capt_exists;
+	public int Title_bgn() {return title_bgn;} private int title_bgn;
+	public int Title_end() {return title_end;} private int title_end;
+	public boolean Title_exists() {return title_end > title_bgn;}
 	public void Clear() {
 		capt_exists = false;
 		lnke_tid = Byte_ascii.Max_7_bit;
-		src_bgn = src_end = href_bgn = href_end = capt_bgn = capt_end = auto_id = -1;
+		src_bgn = src_end = href_bgn = href_end = capt_bgn = capt_end = auto_id = title_bgn = title_end = -1;
 	}
-	public void Init_by_decode(byte lnke_tid, int auto_id, int href_bgn, int href_end, int capt_bgn, int capt_end, boolean capt_exists) {
+	public void Init_by_decode(byte lnke_tid, int auto_id, int href_bgn, int href_end, int capt_bgn, int capt_end, boolean capt_exists, int title_bgn, int title_end) {
 		this.lnke_tid = lnke_tid; this.auto_id = auto_id; this.href_bgn = href_bgn; this.href_end = href_end;
 		this.capt_bgn = capt_bgn; this.capt_end = capt_end; this.capt_exists = capt_exists;
+		this.title_bgn = title_bgn; this.title_end = title_end;
 	}
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag anch_head, Gfh_tag unused) {
 		this.src_bgn = anch_head.Src_bgn();
-		Gfh_atr href_atr = anch_head.Atrs__get_by_or_fail(Gfh_atr_.Bry__href);				// get href; "EX: href='http://a.org'"
+		Gfh_atr href_atr = anch_head.Atrs__get_by_or_fail(Gfh_atr_.Bry__href);					// get href; "EX: href='http://a.org'"
 		this.href_bgn = href_atr.Val_bgn(); this.href_end = href_atr.Val_end();
 		this.lnke_tid = anch_head.Atrs__cls_find_or_fail(Xoh_lnke_dict_.Hash);					// get type by class; EX: "class='external free'"
 		this.capt_bgn = anch_head.Src_end();
-		Gfh_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__a);						// find '</a>'
+		Gfh_atr title_atr = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);
+		this.title_bgn = title_atr.Val_bgn(); this.title_end = title_atr.Val_end();
+		Gfh_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__a);							// find '</a>'
 		this.capt_end = anch_tail.Src_bgn();
 		switch (lnke_tid) {
 			case Xoh_lnke_dict_.Type__free:

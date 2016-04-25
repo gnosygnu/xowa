@@ -19,7 +19,7 @@ package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
 public class Fsdb_db_mgr__v2_bldr {
-	public Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
+	public static Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
 		Xowd_db_layout layout = wiki.Data__core_mgr().Props().Layout_file();
 		String domain_str = wiki.Domain_str();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
@@ -37,8 +37,8 @@ public class Fsdb_db_mgr__v2_bldr {
 		Fsdb_db_file user_core_file = Io_mgr.Instance.ExistsFil(user_core_url) ? Load_core_file(user_core_url) : Make_core_file_user(wiki, user_core_url, user_core_name, main_core_name);
 		return new Fsdb_db_mgr__v2(layout, wiki_dir, main_core_file, user_core_file);
 	}
-	private Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.Instance.Get(url));}
-	private Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
+	private static Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.Instance.Get(url));}
+	private static Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
 		Db_conn conn = layout.Tid_is_all() ? Db_conn_bldr.Instance.Get(main_core_url) : Db_conn_bldr.Instance.New(main_core_url);	// if all, use existing (assumes same file name); else, create new
 		conn.Txn_bgn("fsdb__core_file");
 		Fsdb_db_file rv = Make_core_file(main_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_main);
@@ -48,7 +48,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		conn.Txn_end();
 		return rv;
 	}
-	public Fsdb_db_file Make_core_file_user(Xow_wiki wiki, Io_url user_core_url, String user_file_name, String main_core_name) { // always create file; do not create mnt_tbl;
+	public static Fsdb_db_file Make_core_file_user(Xow_wiki wiki, Io_url user_core_url, String user_file_name, String main_core_name) { // always create file; do not create mnt_tbl;
 		Db_conn conn = Db_conn_bldr.Instance.New(user_core_url);
 		conn.Txn_bgn("fsdb__core_user");
 		Fsdb_db_file rv = Make_core_file(user_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_user);
@@ -58,7 +58,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		conn.Txn_end();
 		return rv;
 	}
-	private Fsdb_db_file Make_core_file(Io_url core_url, Db_conn core_conn, boolean schema_is_1, int mnt_id) {
+	private static Fsdb_db_file Make_core_file(Io_url core_url, Db_conn core_conn, boolean schema_is_1, int mnt_id) {
 		Fsdb_db_file rv = new Fsdb_db_file(core_url, core_conn);
 		Db_cfg_tbl cfg_tbl = rv.Tbl__cfg();
 		cfg_tbl.Create_tbl();
@@ -109,5 +109,4 @@ public class Fsdb_db_mgr__v2_bldr {
 	private static String	Main_core_name_lot(String wiki_domain)	{return wiki_domain + "-file-core.xowa";}		// EX: en.wikipedia.org-file-core.xowa
 	public static String	Make_user_name(String wiki_domain)		{return wiki_domain + "-file-user.xowa";}		// EX: en.wikipedia.org-file-user.xowa
 	private static final boolean schema_is_1 = false;
-        public static final Fsdb_db_mgr__v2_bldr Instance = new Fsdb_db_mgr__v2_bldr(); Fsdb_db_mgr__v2_bldr() {}
-}
+ 	}

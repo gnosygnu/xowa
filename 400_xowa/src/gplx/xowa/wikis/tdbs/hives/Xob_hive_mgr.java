@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.ios.*;
+import gplx.core.ios.zips.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.nss.*;

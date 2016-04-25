@@ -15,8 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.addons; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.bldrs.wkrs.*;
-public interface Xoax_addon_itm__sp {
-	gplx.xowa.specials.Xows_page[]	Pages_ary();
+package gplx.core.progs; import gplx.*; import gplx.core.*;
+public interface Gfo_prog_task {
+	Gfo_prog_task Prog__owner();
+	long Prog__all();
+	long Prog__cur();
+	void Prog__start();
+	void Prog__cancel();
+	void Prog__pause();
+	void Prog__resume();
 }

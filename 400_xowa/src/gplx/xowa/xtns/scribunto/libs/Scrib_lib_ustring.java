@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.regxs.*; import gplx.core.intls.*;
 import gplx.xowa.parsers.*;
 public class Scrib_lib_ustring implements Scrib_lib {
-	private final String_surrogate_utl surrogate_utl = new String_surrogate_utl();
+	private final    String_surrogate_utl surrogate_utl = new String_surrogate_utl();
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public int String_len_max() {return string_len_max;} public Scrib_lib_ustring String_len_max_(int v) {string_len_max = v; return this;} private int string_len_max = Xoa_page_.Page_len_max;
@@ -47,7 +47,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	}
 	private static final int Proc_find = 0, Proc_match = 1, Proc_gmatch_init = 2, Proc_gmatch_callback = 3, Proc_gsub = 4;
 	public static final String Invk_find = "find", Invk_match = "match", Invk_gmatch_init = "gmatch_init", Invk_gmatch_callback = "gmatch_callback", Invk_gsub = "gsub";
-	private static final String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
+	private static final    String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
 	public boolean Find(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text_str		= args.Xstr_str_or_null(0);
 		String regx			= args.Pull_str(1);
@@ -114,7 +114,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	}
 	private Scrib_lib_ustring_gsub_mgr[] gsub_mgr_ary = Scrib_lib_ustring_gsub_mgr.Ary_empty;
 	private int gsub_mgr_max = 0, gsub_mgr_len = -1;
-	private final Object gsub_mgr_lock = new Object();
+	private final    Object gsub_mgr_lock = new Object();
 	public boolean Gsub(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		boolean rv = false;
 		synchronized (gsub_mgr_lock) {	// handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
@@ -233,6 +233,10 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
 		}
+		else if	(Object_.Eq(repl_type, Double_.Cls_ref_type)) {	// NOTE:@replace sometimes double; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2; DATE:2016-04-21
+			tmp_repl_tid = Repl_tid_string;
+			tmp_repl_bry = Bry_.new_u8(Double_.To_str(Double_.cast(repl_obj)));
+		}
 		else throw Err_.new_unhandled(Type_adp_.NameOf_type(repl_type));
 	}
 	private String Exec_repl(byte repl_tid, byte[] repl_bry, String text, String regx, int limit) {
@@ -349,5 +353,5 @@ class Scrib_lib_ustring_gsub_mgr {
 		}
 	}
 	private static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
-	public static final Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
+	public static final    Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
 }

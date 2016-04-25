@@ -23,6 +23,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public int Match_pos() {return match_pos;} private int match_pos;
 	public Object Match_exact(byte[] src) {return src == null ? null : Match_exact(src, 0, src.length);}
 	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
+		if (bgn_pos == end_pos) return null;	// NOTE:handle empty String; DATE:2016-04-21
 		Object rv = Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}

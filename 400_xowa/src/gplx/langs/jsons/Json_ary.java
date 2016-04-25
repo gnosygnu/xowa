@@ -28,6 +28,7 @@ public class Json_ary extends Json_itm_base implements Json_grp {
 		return (Json_nde)rv;
 	}
 	public Json_itm Get_at(int i) {return subs[i];}
+	public Json_nde Get_as_nde(int i) {return Json_nde.cast(subs[i]);}
 	public Json_ary Add_many(Json_itm... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)

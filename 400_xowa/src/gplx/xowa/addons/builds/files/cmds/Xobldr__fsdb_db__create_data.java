@@ -69,7 +69,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
 		Io_url trg_file_dir_v1 = String_.Eq(trg_bin_mgr__fsdb_version, "v1") ? wiki.Fsys_mgr().File_dir().GenNewNameOnly(wiki.Domain_str() + "-prv") : wiki.Fsys_mgr().File_dir();	// NOTE: convoluted way of setting trg to -prv if trg_bin_mgr__fsdb_version_v1 is set; otherwise set to "en.wikipedia.org" which will noop; DATE:2015-12-02
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), trg_file_dir_v1);
-		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, Bool_.Y);
+		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
 		this.trg_mnt_itm = trg_mnt_mgr.Mnts__get_insert();

@@ -21,6 +21,7 @@ import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.sit
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.guis.cbks.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
@@ -93,6 +94,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoax_addon_mgr			Addon_mgr()					{return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xoa_special_regy			Special_regy()				{return special_regy;} private final    Xoa_special_regy special_regy = new Xoa_special_regy();
 	public Xob_bldr					Bldr()						{return bldr;} private Xob_bldr bldr;
+	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;

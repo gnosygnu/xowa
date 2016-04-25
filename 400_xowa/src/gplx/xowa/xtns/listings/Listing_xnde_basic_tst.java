@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Listing_xnde_basic_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	private Listing_xtn_mgr listings_xtn_mgr;
 	@Before public void init() {
 		fxt.Reset_for_msgs();
@@ -60,7 +60,7 @@ public class Listing_xnde_basic_tst {
 	@Test  public void Email() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' email='email_0'/>"
-		,	"<strong>name_0</strong>, email: <a class=\"email\" href=\"mailto:email_0\">email_0</a>. "
+		,	"<strong>name_0</strong>, email: <a href=\"mailto:email_0\" class=\"email\">email_0</a>. "
 		);
 	}
 	@Test  public void Hours() {

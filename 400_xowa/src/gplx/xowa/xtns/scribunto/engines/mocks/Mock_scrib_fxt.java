@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Mock_scrib_fxt {		 
-	private final Mock_engine engine = new Mock_engine();
-	private final Mock_server server = new Mock_server();
-	private Xop_fxt parser_fxt; 
+	private final    Mock_engine engine = new Mock_engine();
+	private final    Mock_server server = new Mock_server();		
 	public Scrib_core Core() {return core;} private Scrib_core core;
+	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt; 
 	public void Clear() {Clear("en.wikipedia.org", "en");}
 	public void Clear(String domain, String lang) {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
@@ -40,9 +40,10 @@ public class Mock_scrib_fxt {
 			engine.RegisterLibraryForTest(proc);
 	}
 	public void Init__page(String ttl, String txt) {parser_fxt.Init_page_create(ttl, txt);}
-	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)    {Test__proc__kvps(lib, proc_name, Bool_.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.Y, expd, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.N, expd, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, Bool_.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, Bool_.Y, expd, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, Keyval[] expd)	{Test__proc__kvps(lib, proc_name, Bool_.N, Keyval_.Ary__to_str__nest(new Keyval[] {Keyval_.int_(Scrib_core.Base_1, expd)}), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, Bool_.N, expd, Scrib_kv_utl_.base1_many_(args));}
 	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.Y, expd, args);}
 	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.N, expd, args);}
 	private static void Test__proc__kvps(Scrib_lib lib, String proc_name, boolean flat, String expd, Keyval[] args) {

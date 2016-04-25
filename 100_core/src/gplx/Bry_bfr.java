@@ -572,6 +572,55 @@ public class Bry_bfr {
 		bfr = null;
 		this.Mkr_rls();
 	}
+	public byte[][] To_bry_ary_and_clear() {
+		if (bfr_len == 0) return Bry_.Ary_empty;
+		Int_list line_ends = Find_all(Byte_ascii.Nl);
+
+		// create lines
+		int lines_len = line_ends.Len();
+		byte[][] rv = new byte[lines_len][];
+		int line_bgn = 0;
+		for (int i = 0; i < lines_len; ++i) {
+			int line_end = line_ends.Get_at(i);
+			rv[i] = Bry_.Mid(bfr, line_bgn, line_end);
+			line_bgn = line_end + 1;
+		}
+		this.ClearAndReset();
+		return rv;
+	}
+	public String[] To_str_ary_and_clear() {
+		if (bfr_len == 0) return String_.Ary_empty;
+		Int_list line_ends = Find_all(Byte_ascii.Nl);
+
+		// create lines
+		int lines_len = line_ends.Len();
+		String[] rv = new String[lines_len];
+		int line_bgn = 0;
+		for (int i = 0; i < lines_len; ++i) {
+			int line_end = line_ends.Get_at(i);
+			rv[i] = String_.new_u8(bfr, line_bgn, line_end);
+			line_bgn = line_end + 1;
+		}
+		this.ClearAndReset();
+		return rv;
+	}
+	private Int_list Find_all(byte find) {
+		Int_list rv = new Int_list();
+		// scan bfr for nl
+		int line_bgn = 0, line_end = 0;
+		while (line_bgn < bfr_len) {
+			line_end = Bry_find_.Find_fwd(bfr, find, line_bgn, bfr_len);
+			if (line_end == Bry_find_.Not_found) {	// no more \n; add bfr_end 
+				rv.Add(bfr_len);
+				break;
+			}
+			else {									// \n found; add it
+				rv.Add(line_end);
+				line_bgn = line_end + 1;
+			}
+		}
+		return rv;
+	}
 	@Override public int hashCode() {return Bry_obj_ref.CalcHashCode(bfr, 0, bfr_len);}
 	@Override public boolean equals(Object obj) {
 		if (obj == null) return false;	// NOTE: strange, but null check needed; throws null error; EX.WP: File:Eug�ne Delacroix - La libert� guidant le peuple.jpg

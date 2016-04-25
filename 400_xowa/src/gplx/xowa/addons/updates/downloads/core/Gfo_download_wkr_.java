@@ -15,17 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*;
-public class Io_zip_mgr_tst {
-	@Test  public void Zip_unzip() {
-		Zip_unzip_tst("abcdefghijklmnopqrstuvwxyz"); 
-	}
-	private void Zip_unzip_tst(String s) {
-		Io_zip_mgr zip_mgr = Io_zip_mgr_base.Instance;
-		byte[] src = Bry_.new_a7(s);
-		byte[] zip = zip_mgr.Zip_bry(src, 0, src.length);
-		byte[] unz = zip_mgr.Unzip_bry(zip, 0, zip.length);
-		Tfds.Eq_ary(src, unz);
-	}
+package gplx.xowa.addons.updates.downloads.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.updates.*; import gplx.xowa.addons.updates.downloads.*;
+public class Gfo_download_wkr_ {
+	public static final    Gfo_download_wkr Noop = new Gfo_download_wkr__noop();
+}
+class Gfo_download_wkr__noop implements Gfo_download_wkr {
+	public void Download__bgn(Gfo_download_cbk cbk, Gfo_download_itm[] itms) {cbk.Download__end_all(itms);}
 }

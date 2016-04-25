@@ -31,5 +31,6 @@ class Http_client_rdr__mem implements Http_client_rdr {
 		return idx == ary_len ? null : ary[idx++];
 	}
 	public byte[] Read_line_as_bry() {return Bry_.new_u8(Read_line());}
+	public int Read_char_ary(char[] ary, int bgn, int len) {throw Err_.new_unimplemented();}
 	public void Rls() {}
 }

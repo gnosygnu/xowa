@@ -26,7 +26,7 @@ import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.ctgs.*;
-import gplx.xowa.guis.views.*;
+import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.pfuncs.*; 
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
 public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
@@ -107,6 +107,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xow_site_stats_mgr		Stats() {return stats;} private final    Xow_site_stats_mgr stats;
 	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final    Xow_parser_mgr parser_mgr;
 	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
+	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;

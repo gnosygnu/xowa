@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_thm_hzip_tst {
-	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
 	@Test   public void Image() {
 		fxt.Test__bicode("~&3abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
@@ -311,7 +311,7 @@ public class Xoh_thm_hzip_tst {
 //			fxt.Wiki().Ns_mgr().Init();
 //
 //			fxt.Init_mode_is_b256_(Bool_.N);
-//			fxt.Exec_write_to_fsys(Io_url_.new_dir_("J:\\xowa\\research\\html\\"), "debug.html");
+//			fxt.Exec_write_to_fsys(Io_url_.new_dir_("C:\\xowa\\debug\\html\\"), "hzip.html");
 //			fxt.Init_mode_is_b256_(Bool_.N);
 //		}
 }

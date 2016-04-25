@@ -21,12 +21,12 @@ import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
 import gplx.xowa.bldrs.wms.*;
 public class Xof_bin_mgr {		
-	private final Fsm_mnt_mgr mnt_mgr;
-	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final    Fsm_mnt_mgr mnt_mgr;
+	private final    Gfo_usr_dlg usr_dlg; private final    Xow_repo_mgr repo_mgr; private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private Xof_bin_wkr[] wkrs = Xof_bin_wkr_.Ary_empty; private int wkrs_len;
-	private final String_obj_ref resize_warning = String_obj_ref.null_(); private final Xof_img_size tmp_size = new Xof_img_size();
-	private final Io_download_fmt download_fmt;
-	private final Io_stream_rdr_wrapper rdr_wrapper = new Io_stream_rdr_wrapper();
+	private final    String_obj_ref resize_warning = String_obj_ref.null_(); private final    Xof_img_size tmp_size = new Xof_img_size();
+	private final    Io_download_fmt download_fmt;
+	private final    Io_stream_rdr_wrapper rdr_wrapper = new Io_stream_rdr_wrapper();
 	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_img_wkr_resize_img resize_wkr, Io_download_fmt download_fmt) {
 		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.download_fmt = download_fmt;
 		this.usr_dlg = Gfo_usr_dlg_.Instance;

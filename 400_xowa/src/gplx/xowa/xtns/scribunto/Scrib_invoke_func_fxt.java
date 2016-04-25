@@ -204,16 +204,16 @@ class Scrib_lua_rsp_bldr {
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();
-		if		(Object_.Eq(v_type, Int_.Cls_ref_type))				Bld_int(bfr, Int_.cast(v));
-		else if	(Object_.Eq(v_type, String_.Cls_ref_type))			Bld_str(bfr, String_.cast(v));
-		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))				Bld_bool(bfr, Bool_.cast(v));
-		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))			Bld_double(bfr, Double_.cast(v));
+		if		(Object_.Eq(v_type, Int_.Cls_ref_type))			Bld_int(bfr, Int_.cast(v));
+		else if	(Object_.Eq(v_type, String_.Cls_ref_type))		Bld_str(bfr, String_.cast(v));
+		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))		Bld_bool(bfr, Bool_.cast(v));
+		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))		Bld_double(bfr, Double_.cast(v));
 		else if	(Object_.Eq(v_type, Keyval[].class))			Bld_kv_ary(bfr, (Keyval[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
 		else													throw Err_.new_unhandled(Type_adp_.NameOf_obj(v));
 	}
 	private void Bld_bool(Bry_bfr bfr, boolean v)		{bfr.Add_str_a7("b:").Add_int_fixed(v ? 1 : 0, 1).Add_byte(Byte_ascii.Semic);}
-	private void Bld_int(Bry_bfr bfr, int v)			{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(Byte_ascii.Semic);}
+	private void Bld_int(Bry_bfr bfr, int v)		{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(Byte_ascii.Semic);}
 	private void Bld_double(Bry_bfr bfr, double v)	{bfr.Add_str_a7("d:").Add_double(v).Add_byte(Byte_ascii.Semic);}
 	private void Bld_str(Bry_bfr bfr, String v)		{bfr.Add_str_a7("s:").Add_int_variable(Bry_.new_u8(v).length).Add_str_a7(":\"").Add_str_a7(v).Add_str_a7("\";");}	// NOTE: must use Bry_.new_u8(v).length to calculate full bry len
 	private void Bld_fnc(Bry_bfr bfr, Scrib_lua_proc v)	{bfr.Add_str_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:").Add_int_variable(v.Id()).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.Curly_end);}

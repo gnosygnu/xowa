@@ -44,12 +44,25 @@ public class Fsdb_db_mgr_ {
 		if (!Db_conn_bldr.Instance.Exists(main_core_url)) return null;
 		usr_dlg.Log_many("", "", "fsdb.db_core.v2: type=~{0} url=~{1}", layout.Name(), main_core_url.Raw());
 		Db_conn main_core_conn = Db_conn_bldr.Instance.Get(main_core_url);
-		if (wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()) 
+		if (wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()) {
 			return new Fsdb_db_mgr__v2(Fsdb_db_mgr__v2.Cfg__layout_file__get(main_core_conn), wiki_dir, new Fsdb_db_file(main_core_url, main_core_conn), new Fsdb_db_file(main_core_url, main_core_conn));
+		}
 		Io_url user_core_url = wiki_dir.GenSubFil(Fsdb_db_mgr__v2_bldr.Make_user_name(domain_str));
-		if (!Db_conn_bldr.Instance.Exists(user_core_url))	// if user file does not exist, create it; needed b/c offline packages don't include file; DATE:2015-04-19
-			Fsdb_db_mgr__v2_bldr.Instance.Make_core_file_user(wiki, user_core_url, user_core_url.NameAndExt(), main_core_url.NameAndExt());
-		Db_conn user_core_conn = Db_conn_bldr.Instance.Get(user_core_url);
+		if (!Db_conn_bldr.Instance.Exists(user_core_url)) {	// if user file does not exist, create it; needed b/c offline packages don't include file; DATE:2015-04-19
+			try {Fsdb_db_mgr__v2_bldr.Make_core_file_user(wiki, user_core_url, user_core_url.NameAndExt(), main_core_url.NameAndExt());}
+			catch (Exception e) {	// do not fail if read-only permissions
+				usr_dlg.Warn_many("", "", "failed to create user db: url=~{0} err=~{1}", user_core_url.Raw(), Err_.Message_gplx_log(e));
+				user_core_url = null;		// null out for conditional below
+			}
+		}
+		Db_conn user_core_conn = null;
+		if (user_core_url == null) {		// null when write permissions do not exist; for example, on Andriod; DATE:2016-04-22
+			user_core_url = main_core_url;	// default to main_core; note that downloading will still fail, but at least app won't crash; DATE:2016-04-22
+			user_core_conn = main_core_conn;
+		}
+		else {
+			user_core_conn = Db_conn_bldr.Instance.Get(user_core_url);
+		}
 		return new Fsdb_db_mgr__v2(Fsdb_db_mgr__v2.Cfg__layout_file__get(main_core_conn), wiki_dir, new Fsdb_db_file(main_core_url, main_core_conn), new Fsdb_db_file(user_core_url, user_core_conn));
 	}
 }

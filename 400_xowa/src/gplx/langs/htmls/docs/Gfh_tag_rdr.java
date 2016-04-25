@@ -70,7 +70,7 @@ public class Gfh_tag_rdr {
 		}
 		if (rv == null) {
 			if (move && tail && !bwd)
-				err_wkr.Fail("move failed", "tag_name", Gfh_tag_.To_str(match_name_id));
+				err_wkr.Fail("move tag fwd failed", "tag_name", Gfh_tag_.To_str(match_name_id));
 			else
 				return Tag__eos(rng_bgn);
 		}

@@ -29,7 +29,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 		wkr_mgr = new Xof_wkr_mgr(this);
 	}
 	public Fsdb_db_mgr		Db_core() {return db_core;} private Fsdb_db_mgr db_core;
-	public Xof_orig_mgr		Orig_mgr() {return orig_mgr;} private final Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
+	public Xof_orig_mgr		Orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_fsdb_mode	Fsdb_mode() {
 		if (fsdb_mode == null) {
 			Version();
@@ -125,7 +125,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 		if (	db_core == null			// "-file-core.xowa" not found
 			&&	!wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()	// DATE:2015-08-10
 			)
-			db_core = Fsdb_db_mgr__v2_bldr.Instance.Get_or_make(wiki, false);	// make it
+			db_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, false);	// make it
 		this.version = Version_2;
 		this.fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 		orig_mgr.Init_by_wiki(wiki, fsdb_mode, db_core.File__orig_tbl_ary(), Xof_url_bldr.new_v2());

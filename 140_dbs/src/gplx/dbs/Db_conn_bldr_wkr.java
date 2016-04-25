@@ -55,7 +55,7 @@ class Db_conn_bldr_wkr__mem implements Db_conn_bldr_wkr {
 	}
 	public Db_conn New(Io_url url) {
 		String io_url_str = url.Xto_api();
-		hash.Add(io_url_str, io_url_str);
+		hash.Add_if_dupe_use_nth(io_url_str, io_url_str);	// NOTE: tests can call New multiple times; don't fail if exists; just overwrite existing entry; DATE:2016-04-21
 		return Get_or_new(url);
 	}
 	private Db_conn Get_or_new(Io_url url) {

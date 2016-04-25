@@ -23,7 +23,7 @@ public class Xoh_lnki_data {
 	private byte[] src;
 	private int href_ns_id; private byte[] href_ns_name; private int href_ns_name_len;
 	private byte[] capt_src; private int capt_bgn, capt_end;
-	private final Bry_rdr rdr = new Bry_rdr();
+	private final    Bry_rdr rdr = new Bry_rdr();
 	public int			Src_bgn() {return src_bgn;} private int src_bgn;
 	public int			Src_end() {return src_end;} private int src_end;
 	public boolean			Capt_has_ns() {return capt_has_ns;} private boolean capt_has_ns;
@@ -42,8 +42,8 @@ public class Xoh_lnki_data {
 	public int			Title_bgn() {return title_bgn;} private int title_bgn;
 	public int			Title_end() {return title_end;} private int title_end;
 	public byte			Cls_tid() {return cls_tid;} private byte cls_tid;
-	public Xoh_anch_href_data Href_itm() {return href_itm;} private final Xoh_anch_href_data href_itm = new Xoh_anch_href_data();
-	public Xoh_anch_capt_itm Capt_itm() {return capt_itm;} private final Xoh_anch_capt_itm capt_itm = new Xoh_anch_capt_itm();
+	public Xoh_anch_href_data Href_itm() {return href_itm;} private final    Xoh_anch_href_data href_itm = new Xoh_anch_href_data();
+	public Xoh_anch_capt_itm Capt_itm() {return capt_itm;} private final    Xoh_anch_capt_itm capt_itm = new Xoh_anch_capt_itm();
 	private void Init(byte[] src) {
 		this.src = href_src = capt_src = src;
 		capt_has_ns = title_missing_ns = false;

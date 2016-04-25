@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*;
 public class Json_wtr {
-	private final Bry_bfr bfr = Bry_bfr.new_(255);
-	private final Int_ary idx_stack = new Int_ary(4);
+	private final    Bry_bfr bfr = Bry_bfr.new_(255);
+	private final    Int_ary idx_stack = new Int_ary(4);
 	private int idx = 0;		
 	public Bry_bfr Bfr() {return bfr;}
 	public void Indent_(int v) {this.indent = v;} private int indent;
@@ -38,10 +38,16 @@ public class Json_wtr {
 	public Json_wtr Doc_nde_end() {Write_grp_end(Bool_.Y, Sym_nde_end); return Write_nl();}
 	public Json_wtr Doc_ary_bgn() {return Write_grp_bgn(Sym_ary_bgn);}
 	public Json_wtr Doc_ary_end() {Write_grp_end(Bool_.N, Sym_ary_end); return Write_nl();}
+	public Json_wtr Nde_bgn_ary() {return Nde_bgn(Bry_.Empty);}
 	public Json_wtr Nde_bgn(String key) {return Nde_bgn(Bry_.new_u8(key));}
 	public Json_wtr Nde_bgn(byte[] key) {
 		Write_indent_itm();
-		Write_key(key);
+		if (key == Bry_.Empty) {
+			bfr.Del_by_1();	// remove trailing space from Write_indent_itm
+			++idx;
+		}
+		else
+			Write_key(key);
 		Write_nl();
 		return Write_grp_bgn(Sym_nde_bgn);
 	}
@@ -277,7 +283,7 @@ public class Json_wtr {
 		if (opt_ws) bfr.Add_byte_nl();
 		return this;
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Sym_nde_bgn	= Bry_.new_a7("{")
 	, Sym_nde_end	= Bry_.new_a7("}")
 	, Sym_ary_bgn	= Bry_.new_a7("[")

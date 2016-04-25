@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.langs.jsons.*;
 public class Bridge_cmd_mgr {
-	private final Json_parser parser;
-	private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
+	private final    Json_parser parser;
+	private final    Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
 	public Bridge_cmd_mgr(Json_parser parser) {this.parser = parser;}
 	public void Add(Bridge_cmd_itm cmd) {cmd_hash.Add_bry_obj(cmd.Key(), cmd);}
 	public String Exec(GfoMsg m) {
@@ -36,5 +36,5 @@ public class Bridge_cmd_mgr {
 		try		{return cmd.Exec(msg.Get(Key_data));} 
 		catch	(Exception e) {throw Err_.new_exc(e, "bridge.cmds", "exec json failed", "json", jdoc_bry);}
 	}
-	private static final byte[] Key_cmd = Bry_.new_a7("cmd"), Key_data = Bry_.new_a7("data");
+	private static final    byte[] Key_cmd = Bry_.new_a7("cmd"), Key_data = Bry_.new_a7("data");
 }

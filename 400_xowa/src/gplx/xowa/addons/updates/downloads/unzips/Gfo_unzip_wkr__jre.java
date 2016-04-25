@@ -15,11 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-public interface Io_zip_mgr {
-	void Zip_fil(Io_url src_fil, Io_url trg_fil);
-	byte[] Zip_bry(byte[] src, int bgn, int len);
-	byte[] Unzip_bry(byte[] src, int bgn, int len);
-	void Unzip_to_dir(Io_url src_fil, Io_url trg_dir);
-	void Zip_dir(Io_url src_dir, Io_url trg_fil);
+package gplx.xowa.addons.updates.downloads.unzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.updates.*; import gplx.xowa.addons.updates.downloads.*;
+import gplx.core.ios.zips.*;
+
+class Gfo_unzip_wkr__jre implements Gfo_unzip_wkr {
+	public void Unzip__bgn(Gfo_unzip_cbk cbk, Gfo_unzip_itm itm) {			
+		Io_zip_mgr_base.Instance.Unzip_to_dir(itm.Unzip__src_fil(), itm.Unzip__trg_dir());
+		cbk.Unzip__end_itm(itm);
+	}
+	public static final    Gfo_unzip_wkr__jre Instance = new Gfo_unzip_wkr__jre(); Gfo_unzip_wkr__jre() {}
 }

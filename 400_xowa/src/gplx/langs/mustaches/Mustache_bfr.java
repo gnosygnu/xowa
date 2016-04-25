@@ -22,6 +22,7 @@ public class Mustache_bfr {
 	public Bry_bfr Bfr() {return bfr;}
 	public Mustache_bfr Escape_(boolean v) {escape = v; return this;} private boolean escape;
 	public void Add_int			(int v)		{bfr.Add_int_variable(v);}
+	public void Add_long		(long v)	{bfr.Add_long_variable(v);}
 	public void Add_double		(double v)	{bfr.Add_double(v);}
 	public void Add_str_u8		(String v)	{bfr.Add_str_u8(v);}
 	public void Add_mid			(byte[] src, int bgn, int end) {bfr.Add_mid(src, bgn, end);}
