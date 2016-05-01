@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Dev/Config files/Index - XOWA</title>
+  <title>Dev/Config files - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,32 +11,72 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Dev/Config files/Index</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Dev/Config files</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <h2>
+      <span class="mw-headline" id="Overview_.28and_disclaimer.29">Overview (and disclaimer)</span>
+    </h2>
     <p>
-      This is a list of pages relating to XOWA config files (.gfs)
+      XOWA uses a custom text format called gfs (an acronym for the gfs flexible script). It is a plain-text config file with a Java-like syntax.
+    </p>
+    <p>
+      Please note that gfs was an early personal project, dating back over five years ago. Although there are considerable flaws in the project, it was incorporated into XOWA for reasons of expedience.
+    </p>
+    <p>
+      Unfortunately, although the script is flexible for my purposes, the format is very easy to break and the resulting error messages can be cryptic and indecipherable.
+    </p>
+    <p>
+      As such, please follow these guidelines when working with a gfs file.
     </p>
     <ul>
       <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files.html" id="xolnki_2" title="Dev/Config files">Overview</a>
+        Always have a backup.
       </li>
       <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Examples.html" id="xolnki_3" title="Dev/Config files/Examples" class="xowa-visited">Examples</a>
+        Add changes in small steps.
       </li>
       <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Files.html" id="xolnki_4" title="Dev/Config files/Files">Files</a>
+        Do not stray far from the provided file.
       </li>
       <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Details.html" id="xolnki_5" title="Dev/Config files/Details">Details and format</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Syntax.html" id="xolnki_6" title="Dev/Config files/Syntax">Syntax and object model</a>
+        Do not be clever. You will outsmart the library.
       </li>
     </ul>
+    <h2>
+      <span class="mw-headline" id="Recommended_procedure_for_changes">Recommended procedure for changes</span>
+    </h2>
+    <p>
+      Please follow the steps below when changing config files. Windows instructions are provided in parentheses.
+    </p>
+    <p>
+      Note that you can keep XOWA open while making changes to the .gfs file. (for example, while reading this help page). However, in order for the changes to take effect, you must restart XOWA.
+    </p>
+    <ul>
+      <li>
+        Open up the config file in a text editor. (launch jEdit or Notepad++).
+      </li>
+      <li>
+        Make the desired change. (see <a href="http://xowa.org/home/wiki/Dev/Config_files/Examples.html" id="xolnki_2" title="Dev/Config files/Examples" class="xowa-visited">Dev/Config_files/Examples</a> for examples.)
+      </li>
+      <li>
+        Save and close the file.
+      </li>
+      <li>
+        Run XOWA (<code>java -jar xowa_windows.jar</code>)
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        If it works, then XOWA will launch normally.
+      </dd>
+      <dd>
+        If it fails, then a message box will display an error. Note that the log will also have the same information: <b>/xowa/user/anonymous/app/tmp/log/current</b>.
+      </dd>
+    </dl>
   
     </div>
   </div>

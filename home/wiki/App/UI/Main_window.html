@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/UI/Main window - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style>
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/UI/Main window</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      The XOWA Window is meant to be a minimalistic representation of a web browser.
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Back_button"><span class="tocnumber">1</span> <span class="toctext">Back button</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Forward_button"><span class="tocnumber">2</span> <span class="toctext">Forward button</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Address_bar"><span class="tocnumber">3</span> <span class="toctext">Address bar</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-4">
+          <a href="#Address_bar_go_button"><span class="tocnumber">4</span> <span class="toctext">Address bar go button</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Search_box"><span class="tocnumber">5</span> <span class="toctext">Search box</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Search_activate_button"><span class="tocnumber">6</span> <span class="toctext">Search activate button</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Browser_box"><span class="tocnumber">7</span> <span class="toctext">Browser box</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Find_box"><span class="tocnumber">8</span> <span class="toctext">Find box</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Progress_box"><span class="tocnumber">9</span> <span class="toctext">Progress box</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Note_box"><span class="tocnumber">10</span> <span class="toctext">Note box</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#Common_behavior"><span class="tocnumber">11</span> <span class="toctext">Common behavior</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Back_button">Back button</span>
+    </h2>
+    <ul>
+      <li>
+        This button is located in the top left hand corner of the screen. It is denoted by a green arrow pointing left.
+      </li>
+      <li>
+        It has the same functionality as a web browser's back button. It navigates you back to a page you left.
+      </li>
+      <li>
+        To move back, click the back button or press Alt+Left.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Forward_button">Forward button</span>
+    </h2>
+    <ul>
+      <li>
+        This button is located in the top left hand corner of the screen. It is denoted by a green arrow pointing right.
+      </li>
+      <li>
+        It has the same functionality as a web browser's forward button. It navigates you to a page you left with the back button.
+      </li>
+      <li>
+        To move forward, click the forward button or press Alt+Right.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Address_bar">Address bar</span>
+    </h2>
+    <ul>
+      <li>
+        The address bar is located at the top of the screen.
+      </li>
+      <li>
+        It can be used to navigate to other pages in the wiki. 
+        <ul>
+          <li>
+            For example, type "Help/Contents" into the bar and press Enter. It will take you to the main Help page.
+          </li>
+          <li>
+            You can also use it to navigate to other wikis. If you type <span class='url'>simple.wikipedia.org</span> into the address bar, it will take you to the "Main Page" for Simple Wikipedia
+          </li>
+        </ul>
+      </li>
+      <li>
+        Note that you can also press the Go button instead of Enter to select the address.
+      </li>
+      <li>
+        There are other formats that can be entered into the address bar. For more information, see <a href="http://xowa.org/home/wiki/App/UI/Address_bar/Shortcuts.html" id="xolnki_2" title="App/UI/Address bar/Shortcuts">App/UI/Address_bar/Shortcuts</a>
+      </li>
+      <li>
+        To select the address bar, press Alt+D.
+      </li>
+      <li>
+        The address bar also has auto-completion. Try typing in "a", "b" in the address bar
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Address_bar_go_button">Address bar go button</span>
+    </h2>
+    <ul>
+      <li>
+        The go button is located right of the address bar. It is denoted by the downward pointing green arrow.
+      </li>
+      <li>
+        It can be pressed to activate the address in the address bar. Note that you can also press Enter in the address bar.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Search_box">Search box</span>
+    </h2>
+    <ul>
+      <li>
+        The search box allows you to find all pages in a wiki starting with the term. This is the same as the Special:AllPages search feature 
+        <ul>
+          <li>
+            For example, typing in "Earth" will find all pages in the wiki that start with the word "Earth".
+          </li>
+        </ul>
+      </li>
+      <li>
+        Note that you can also press the magnifying glass button instead of Enter to activate the search.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Search_activate_button">Search activate button</span>
+    </h2>
+    <ul>
+      <li>
+        The search button is located right of the search box. It is denoted by the magnifying glass icon.
+      </li>
+      <li>
+        It can be pressed to navigate to activate the search in the search bar.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Browser_box">Browser box</span>
+    </h2>
+    <ul>
+      <li>
+        The browser box takes up most of the screen.
+      </li>
+      <li>
+        Its main purpose is to render all content, such as the text you're reading now.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Find_box">Find box</span>
+    </h2>
+    <ul>
+      <li>
+        The find box is located in the bottom left hand corner of the screen.
+      </li>
+      <li>
+        It can be used to search for text on the page. If you type a word in the box, it will automatically find and highlight it in the browser box.
+      </li>
+      <li>
+        The find box defaults to a hidden state. To activate it, do one of the following: 
+        <ul>
+          <li>
+            Press Ctrl+F
+          </li>
+          <li>
+            Choose the following from the Main Menu: Edit -&gt; Find
+          </li>
+          <li>
+            Right click in the browser box. Select Find from the popup menu.
+          </li>
+        </ul>
+      </li>
+      <li>
+        To use it, do the following: 
+        <ul>
+          <li>
+            Type the word "box" in the find box. It will highlight the "box" in Browser box.
+          </li>
+          <li>
+            Press Enter. It will now highlight the next "box" word
+          </li>
+        </ul>
+      </li>
+      <li>
+        For more information, see <a href="http://xowa.org/home/wiki/App/UI/Find_box.html" id="xolnki_3" title="App/UI/Find box" class="xowa-visited">App/UI/Find_box</a>.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Progress_box">Progress box</span>
+    </h2>
+    <ul>
+      <li>
+        The progress box is located at the bottom of the screen.
+      </li>
+      <li>
+        It displays transient messages from the application.
+      </li>
+      <li>
+        To view the info box, do one of the following 
+        <ul>
+          <li>
+            Press Ctrl+Alt+P
+          </li>
+          <li>
+            Choose the following from the Main Menu: View -&gt; Show Progress Messages
+          </li>
+          <li>
+            Middle-click the progress box
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Note_box">Note box</span>
+    </h2>
+    <ul>
+      <li>
+        The info box is located in the bottom-right hand corner of the screen.
+      </li>
+      <li>
+        It displays warnings from the application. It is disabled by default, but can be enabled through <a href="http://xowa.org/home/wiki/Options/Dev.html" id="xolnki_4" title="Options/Dev" class="xowa-visited">Options/Dev</a>
+      </li>
+      <li>
+        To select the info box, press Ctrl+Alt+N.
+      </li>
+      <li>
+        To clear messages, press Ctrl+Alt+C.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Common_behavior">Common behavior</span>
+    </h2>
+    <ul>
+      <li>
+        The "Address bar", "Find box", "Progress box", and "Note box" are standard text boxes. As such, the following behavior will work: 
+        <ul>
+          <li>
+            Right clicking in the box will bring up the standard context menu of Cut, Copy, Paste, Undo, Select All
+          </li>
+          <li>
+            The standard keyboard shortcuts will work 
+            <ul>
+              <li>
+                Ctrl+X: Cut
+              </li>
+              <li>
+                Ctrl+C: Copy
+              </li>
+              <li>
+                Ctrl+V: Paste
+              </li>
+              <li>
+                Ctrl+A: Select All
+              </li>
+              <li>
+                Ctrl+Z: Undo
+              </li>
+              <li>
+                Ctrl+Shift+Z: Redo
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        The "Browser box" has a right-click context menu. It also responds to the same keyboard shortcuts listed above.
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

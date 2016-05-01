@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Dev/Config files/Index - XOWA</title>
+  <title>App/Category - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,32 +11,114 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Dev/Config files/Index</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>App/Category</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <p>
-      This is a list of pages relating to XOWA config files (.gfs)
+      XOWA currently has two category systems. This page will explain the rationale / details behind both.
+    </p>
+    <p>
+      An overview follows below.
+    </p>
+    <p>
+      For more information about V2 setup see <a href="http://xowa.org/home/wiki/App/Category/Building.html" id="xolnki_2" title="App/Category/Building" class="xowa-visited">App/Category/Building</a>
+    </p>
+    <p>
+      For more information about V2 internals see <a href="http://xowa.org/home/wiki/App/Category/Internals.html" id="xolnki_3" title="App/Category/Internals">App/Category/Internals</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Version_1">Version 1</span>
+    </h2>
+    <p>
+      Version 1 is a simplistic category system.
     </p>
     <ul>
       <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files.html" id="xolnki_2" title="Dev/Config files">Overview</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Examples.html" id="xolnki_3" title="Dev/Config files/Examples" class="xowa-visited">Examples</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Files.html" id="xolnki_4" title="Dev/Config files/Files">Files</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Details.html" id="xolnki_5" title="Dev/Config files/Details">Details and format</a>
-      </li>
-      <li>
-        <a href="http://xowa.org/home/wiki/Dev/Config_files/Syntax.html" id="xolnki_6" title="Dev/Config files/Syntax">Syntax and object model</a>
+        It relies only on page content inside the xml file. It does not use any of the category*.sql dumps.
       </li>
     </ul>
+    <p>
+      Note the following limitations:
+    </p>
+    <ul>
+      <li>
+        Does not work with large categories. It gets linearly worse with more members (do not use it to load a category with over 10,000 members)
+      </li>
+      <li>
+        Does not support paging. If a category has 1,000 members, it will load title information on all 1,000 (instead of just the first 200)
+      </li>
+      <li>
+        Does not use sortkey. For example, Jimmy Wales will alphabetize under J (for Jimmy Wales) instead of W (for Wales, Jimmy)
+      </li>
+      <li>
+        Does not accurately reflect page membership in categories.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        For example, most hidden categories are added to a template which is then included in a page.
+      </dd>
+      <dd>
+        Specifically, a page called "File:GNU.png" may belong to "All free media". However, the "File:GNU.png" page doesn't have the [[Category:All_free_media]] but instead embeds a template {{All_non_free_media}} which has the [[Category:All_free_media]]
+      </dd>
+      <dd>
+        Since a full parse (with templates) of the entire xml file would take many hours, this membership data is omitted.
+      </dd>
+    </dl>
+    <p>
+      V1 should be considered obsolete. No signficant changes will be made to it, as V2 is the official category system.
+    </p>
+    <p>
+      However, because V1 is faster to setup than V2, it still remains the default (with a strong recommendation to upgrade to V2 when time permits)
+    </p>
+    <h2>
+      <span class="mw-headline" id="Version_2">Version 2</span>
+    </h2>
+    <p>
+      Version 2 is an accurate category system.
+    </p>
+    <ul>
+      <li>
+        It uses the Wikimedia dump files: categorylinks.sql, page_props.sql
+      </li>
+    </ul>
+    <p>
+      It addresses each of the limitations of version 1, including
+    </p>
+    <ul>
+      <li>
+        Works with large categories
+      </li>
+      <li>
+        Supports paging
+      </li>
+      <li>
+        Uses sortkey
+      </li>
+      <li>
+        Accurately includes all members of a category
+      </li>
+    </ul>
+    <p>
+      It has a few limitations:
+    </p>
+    <ul>
+      <li>
+        It requires additional dump files (as mentioned above).
+      </li>
+      <li>
+        It takes longer to setup. A separate .sql file must be parsed. For English Wikipedia this process takes about another hour.
+      </li>
+      <li>
+        It takes more disk space. The v2 system stores sortkeys individually per entry (just like Wikipedia). However this text data greatly increases the overall file size. English Wikipedia will have about 10.0 GB of extra data.
+      </li>
+    </ul>
+    <p>
+      V2 is the official category system and should generate Category pages just like Wikipedia.
+    </p>
   
     </div>
   </div>
