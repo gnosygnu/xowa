@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.threads.*;
-import gplx.core.texts.HexDecUtl;
+import gplx.core.encoders.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.core.threads.Thread_adp_;
 import java.io.*;

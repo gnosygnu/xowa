@@ -144,7 +144,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Keyval[] rv = new Keyval[4];
 		rv[ 0] = Keyval_.new_("isRedirect"			, ttl_redirect);						// title.isRedirect
 		rv[ 1] = Keyval_.new_("id"					, ttl_id);								// $title->getArticleID(),
-		rv[ 2] = Keyval_.new_("contentModel"		, Key_wikitexet);						// $title->getContentModel(); see Defines.php and CONTENT_MODEL_
+		rv[ 2] = Keyval_.new_("contentModel"		, Key_wikitext);						// $title->getContentModel(); see Defines.php and CONTENT_MODEL_
 		rv[ 3] = Keyval_.new_("exists"				, ttl_exists);							// $ret['id'] > 0; TODO: if Special: check regy of implemented pages
 		return rslt.Init_obj(rv);
 	}
@@ -227,5 +227,5 @@ public class Scrib_lib_title implements Scrib_lib {
 			rv[rv_idx++] = Keyval_.new_("file"		, false);										// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
 	}	private static final    Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
-	public static final String Key_wikitexet = "wikitext";
+	public static final String Key_wikitext = "wikitext";
 }

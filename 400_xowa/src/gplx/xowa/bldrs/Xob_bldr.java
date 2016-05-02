@@ -108,13 +108,13 @@ public class Xob_bldr implements GfoInvkAble {
 					throw Err_.new_exc(e, "bldr", "unknown error", "key", cmd.Cmd_key());
 				}
 				Env_.GarbageCollect();
-				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), TimeSpanAdp_.from_(time_cur).XtoStrUiAbbrv());
+				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), Time_span_.from_(time_cur).XtoStrUiAbbrv());
 			}
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
 				cmd.Cmd_term();
 			}
-			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", TimeSpanAdp_.from_(time_bgn).XtoStrUiAbbrv());
+			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", Time_span_.from_(time_bgn).XtoStrUiAbbrv());
 			cmd_mgr.Clear();
 			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.Instance.Read_line("press enter to continue");}
 		}

@@ -132,7 +132,7 @@ public class Scrib_lib_title_tst {
 		( "1="
 		, "  isRedirect=" + Bool_.To_str_lower(redirect)
 		, "  id=" + Int_.To_str(ttl_id)
-		, "  contentModel=" + Scrib_lib_title.Key_wikitexet
+		, "  contentModel=" + Scrib_lib_title.Key_wikitext
 		, "  exists=" + Bool_.To_str_lower(exists)
 		);
 	}

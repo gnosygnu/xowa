@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.bldrs.runners; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*;
 public class Xoapi_runner implements GfoInvkAble {
-	private Xoa_app app;
-	public void Ctor_by_app(Xoa_app app) {this.app = app;}
+	// private Xoa_app app;
+	public void Ctor_by_app(Xoa_app app) {}//this.app = app;}
 	private void Exec(GfoMsg msg) {
 //			int len = msg.Args_count();
 //			String cmd = (String)msg.Args_getAt(0).Val();
@@ -32,7 +32,7 @@ public class Xoapi_runner implements GfoInvkAble {
 //			}
 //			gplx.core.ios.zips.Io_zip_decompress_task task = new gplx.core.ios.zips.Io_zip_decompress_task();
 		// task.Init(true, Gfo
-		app.Gui__cbk_mgr().Send_prog("test", "key_0", "val_0");
+		// app.Gui__cbk_mgr().Send_prog("test", "key_0", "val_0");
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_exec)) 						Exec(m);
@@ -41,7 +41,7 @@ public class Xoapi_runner implements GfoInvkAble {
 	}
 	private static final String Invk_exec = "exec";
 }
-class Xodl_prog_ui implements gplx.core.progs.Gfo_prog_ui {
-	public void Prog__update_val(long cur, long max) {}
-	public void Prog__end() {}
-}
+//	class Xodl_prog_ui : gplx.core.progs.Gfo_prog_ui {
+//		public void Prog__update_val(long cur, long max) {}
+//		public void Prog__end() {}
+//	}

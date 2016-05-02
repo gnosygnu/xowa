@@ -306,7 +306,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
-		Keyval[] args_ary = args.Pull_kv_ary(2);
+		Keyval[] args_ary = args.Pull_kv_ary_safe(2);
 		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
 		byte[] sub_src = null;
 		if (ttl.Ns().Id_is_tmpl()) {				// ttl is template; check tmpl_regy first before going to data_mgr
@@ -359,7 +359,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8((String)ttl_obj));
 			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
-		Keyval[] args_ary = args.Pull_kv_ary(2);
+		Keyval[] args_ary = args.Pull_kv_ary_safe(2);
 		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
 		String new_frame_id = "frame" + Int_.To_str(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);

@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.cbks; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+import gplx.core.gfobjs.*;
 public interface Xog_cbk_wkr {
-	void Send_prog(String head);
+	Object Send_json(String func, Gfobj_nde data);
 }
 class Xog_cbk_wkr_ {
 	public static final    Xog_cbk_wkr[] Ary_empty = new Xog_cbk_wkr[0];

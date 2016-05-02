@@ -32,7 +32,7 @@ public class Xopage_html_data {
 		page.Html_data().Display_ttl_(display_ttl);
 		page.Html_data().Custom_body_(this.Body());
 		page.Html_data().Custom_head_tags().Copy(head_tags);
-		page.Html_data().Custom_tail_tags().Copy(head_tags);
+		page.Html_data().Custom_tail_tags().Copy(tail_tags);
 	}
 
 	public static Xopage_html_data err_(String msg) {return new Xopage_html_data(Bry_.Empty, Bry_.new_u8(msg));}

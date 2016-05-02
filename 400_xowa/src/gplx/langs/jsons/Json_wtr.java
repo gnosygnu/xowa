@@ -43,7 +43,7 @@ public class Json_wtr {
 	public Json_wtr Nde_bgn(byte[] key) {
 		Write_indent_itm();
 		if (key == Bry_.Empty) {
-			bfr.Del_by_1();	// remove trailing space from Write_indent_itm
+			if (opt_ws) bfr.Del_by_1();	// remove trailing space from Write_indent_itm
 			++idx;
 		}
 		else
@@ -55,9 +55,15 @@ public class Json_wtr {
 		Write_grp_end(Bool_.Y, Sym_nde_end);
 		return Write_nl();
 	}
+	public Json_wtr Ary_bgn_ary() {return Ary_bgn(String_.Empty);}
 	public Json_wtr Ary_bgn(String nde) {
 		Write_indent_itm();
-		Write_key(Bry_.new_u8(nde));
+		if (nde == String_.Empty) {
+			if (opt_ws) bfr.Del_by_1();	// remove trailing space from Write_indent_itm
+			++idx;
+		}
+		else
+			Write_key(Bry_.new_u8(nde));
 		return Ary_bgn_keyless();
 	}
 	private Json_wtr Ary_bgn_keyless() {
@@ -203,9 +209,7 @@ public class Json_wtr {
 					}
 				}
 			}
-//				else {
-				bfr.Add_byte_nl();
-//				}
+			bfr.Add_byte_nl();
 			Write_grp_bgn(Sym_nde_bgn, Bool_.Y);
 			Json_nde sub_nde = (Json_nde)obj;
 			int sub_nde_len = sub_nde.Len();

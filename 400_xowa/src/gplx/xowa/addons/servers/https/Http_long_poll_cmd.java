@@ -22,6 +22,7 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 	public int Sleep_interval = 100;
 	public int Send_interval = 1000;
 
+	public void Init_by_app(Xoa_app app) {}
 	public void Send_msg(String msg) {
 		msgs.Add(msg);
 	}

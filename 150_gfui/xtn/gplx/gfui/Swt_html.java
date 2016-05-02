@@ -79,6 +79,10 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
 	public boolean 	Html_js_eval_proc_as_bool(String proc, Object... args) {return Bool_.cast(Html_js_eval_proc_as_obj(proc, args));}
 	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
+	public String Html_js_send_json(String name, String data) {
+		String script = String_.Format("return {0}('{1}');", name, String_.Replace(data, "\n", "") );
+		return (String)Eval_script(script);
+	}
 	private Object Html_js_eval_proc_as_obj(String proc, Object... args) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		bfr.Add_str_a7("return ").Add_str_u8(proc).Add_byte(Byte_ascii.Paren_bgn);

@@ -56,6 +56,11 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("ab", ".", -1, proc_root.To_scrib_lua_proc(), "ab;2");	// fails if "ab;4"
 		Tfds.Eq_str("0;1;2;0;1;2;", bfr.To_str_and_clear());				// fails if "0;1;1;1"
 	}
+	@Test  public void Replace__proc__number() {	// PURPOSE:handle replace-as-number in gproc; PAGE:en.d:seven; DATE:2016-04-27
+		Mock_proc__number proc = new Mock_proc__number(0);
+		fxt.Init__cbk(proc);
+		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "12;2");	// fails if "ab;4"
+	}
 	@Test  public void Regx__int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, "A"		, "abcd;0");
 	}
@@ -99,6 +104,13 @@ class Mock_proc__recursive extends Mock_proc_fxt {	private final    Mock_scrib_f
 		bfr.Add_int_variable(this.Id()).Add_byte_semic();
 		if (inner != null)
 			fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_("a", ".", inner.To_scrib_lua_proc(), -1), "a;1");
+		return args;
+	}
+}
+class Mock_proc__number extends Mock_proc_fxt {	private int counter = 0;
+	public Mock_proc__number(int id) {super(id, "number");}
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		args[0].Val_(++counter);	// set replace-val to int
 		return args;
 	}
 }

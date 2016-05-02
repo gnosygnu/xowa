@@ -18,16 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
 import gplx.core.threads.*; import gplx.core.progs.*;
 public class Io_zip_decompress_task implements GfoInvkAble {
-	private Gfo_prog_ui prog_ui;
+//		private Gfo_prog_ui prog_ui;
 	private Io_url src_fil, trg_dir;		
 	private boolean async;
 	private boolean canceled, paused;
-	private long src_fil_len = 0;
-	private long prog__cur = 0;
+//		private long src_fil_len = 0;
+//		private long prog__cur = 0;
 	private Io_zip_decompress_cmd cmd;
-	public Gfo_prog_task Prog__owner() {return Gfo_prog_task_.Null;}
-	public void Init(boolean async, Gfo_prog_ui prog_ui, Io_zip_decompress_cmd cmd, Io_url src_fil, Io_url trg_dir) {
-		this.async = async; this.cmd = cmd; this.prog_ui = prog_ui;
+	public void Init(boolean async, Io_zip_decompress_cmd cmd, Io_url src_fil, Io_url trg_dir) {
+		this.async = async; this.cmd = cmd; // this.prog_ui = prog_ui;
 		this.src_fil = src_fil; this.trg_dir = trg_dir;
 	}
 	public String Resume__entry() {return resume__entry;} private String resume__entry;
@@ -35,7 +34,7 @@ public class Io_zip_decompress_task implements GfoInvkAble {
 	public boolean Canceled() {return canceled;}
 	public boolean Paused() {return paused;}
 	public void Prog__start() {
-		this.src_fil_len = Io_mgr.Instance.QueryFil(src_fil).Size();
+//			this.src_fil_len = Io_mgr.Instance.QueryFil(src_fil).Size();
 		this.resume__entry = null;
 		this.resume__bytes = 0;
 		// load resume
@@ -43,8 +42,8 @@ public class Io_zip_decompress_task implements GfoInvkAble {
 		Thread_adp_.Run_cmd(async, "zip.decompress:" + src_fil.Raw(), this, Invk__unzip);
 	}
 	public byte Prog__update(long v) {
-		prog__cur += v;
-		prog_ui.Prog__update_val(prog__cur, src_fil_len);
+//			prog__cur += v;
+		// prog_ui.Prog__update_val(prog__cur, src_fil_len);
 		if		(paused)		return Status__paused;
 		else if (canceled)		return Status__canceled;
 		else					return Status__ok;
@@ -66,7 +65,7 @@ public class Io_zip_decompress_task implements GfoInvkAble {
 	}
 	public void Unzip() {
 		cmd.Decompress__exec(this, src_fil, trg_dir);
-		prog_ui.Prog__end();
+//			prog_ui.Prog__end();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__unzip))		this.Unzip();

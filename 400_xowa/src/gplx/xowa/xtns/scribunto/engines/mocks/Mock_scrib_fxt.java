@@ -36,6 +36,7 @@ public class Mock_scrib_fxt {
 		core.When_page_changed(parser_fxt.Page());
 	}
 	public void Init__cbk(Mock_proc_fxt... ary) {
+		engine.Clear();
 		for (Mock_proc_fxt proc : ary)
 			engine.RegisterLibraryForTest(proc);
 	}

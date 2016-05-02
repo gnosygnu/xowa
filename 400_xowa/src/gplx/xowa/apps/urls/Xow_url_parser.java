@@ -53,7 +53,10 @@ public class Xow_url_parser {
 			Xow_wiki wiki_itm = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry); // NOTE: must call Init to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
 			rv.Page_bry_(wiki_itm.Props().Main_page());
 		}
-		Xoa_ttl ttl = wiki.Ttl_parse(rv.Page_bry());	// parse to ttl to get proper casing; EX: "earth" -> "Earth" x> "earth"; DATE:2016-03-25
+		Xow_wiki parse_wiki = wiki;
+		if (!Bry_.Eq(wiki_bry, wiki.Domain_bry()))							// NOTE: url's wiki is different than current wiki
+			parse_wiki = app.Wiki_mgr().Get_by_or_make_init_y(wiki_bry);	// NOTE: change parse_wiki to url's wiki; needed to handle transition from home to en.d or other case-sensitivity wiki; EX: "d:earth" -> "earth" x> "Earth"; DATE:2016-04-28
+		Xoa_ttl ttl = parse_wiki .Ttl_parse(rv.Page_bry());					// NOTE: parse to ttl to get proper casing; EX: "earth" -> "Earth" x> "earth"; DATE:2016-03-25
 		rv.Page_bry_(ttl.Full_db());
 		return rv;
 	}

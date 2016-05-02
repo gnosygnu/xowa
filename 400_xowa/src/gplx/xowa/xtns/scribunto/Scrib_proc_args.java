@@ -24,7 +24,34 @@ public class Scrib_proc_args {
 	public boolean		Pull_bool(int i)				{return Bool_.cast(Get_or_fail(i));}
 	public String	Pull_str(int i)					{return String_.cast(Get_or_fail(i));}
 	public byte[]	Pull_bry(int i)					{return Bry_.new_u8(String_.cast(Get_or_fail(i)));}
-	public Keyval[] Pull_kv_ary(int i)				{return (Keyval[])Get_or_fail(i);}
+	public Keyval[] Pull_kv_ary_safe(int idx)	{	// NOTE: must check for null array items; EX:[2:v2] -> [1:null,2:v2]; PAGE:en.d:Category:Nouns_by_language DATE:2016-04-29
+		Keyval[] rv = (Keyval[])Get_or_fail(idx);
+		List_adp list = null;
+		int rv_len = rv.length;
+		for (int i = 0; i < rv_len; ++i) {
+			Keyval kv = rv[i];
+			if (	kv.Key_tid() == Type_adp_.Tid__int		// luaj will be int
+				|| 	kv.Key_tid() == Type_adp_.Tid__obj) {	// lua will be obj; note that luaj will also have other non-key objects
+				Object key_obj = kv.Key_as_obj();
+				if (key_obj.getClass() == Int_.Cls_ref_type) {  // key is int; cast it
+					int key_int = Int_.cast(kv.Key_as_obj());
+					if (key_int != i + 1) {					// key_int should match i; if not, then gaps exist; EX:[2:v2] should be 2nd element, not 1st
+						if (list == null) {
+							list = List_adp_.new_();
+							rv = null;
+						}
+						for (int j = 0; j < key_int - 1; ++j)	// add everything up to key_int as null; EX: [2:v2] -> [1:null]
+							list.Add(Keyval_.int_(j + List_adp_.Base1, null));
+					}
+				}
+			}
+			if (rv == null)
+				list.Add(kv);
+		}
+		if (rv == null)
+			rv = (Keyval[])list.To_ary(Keyval.class);
+		return rv;
+	}
 	public int		Pull_int(int i)					{Object rv = Get_or_fail(i);
 		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {

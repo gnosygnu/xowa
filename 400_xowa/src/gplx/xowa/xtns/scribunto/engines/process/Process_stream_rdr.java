@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.ios.*; import gplx.core.texts.*;
+import gplx.core.ios.*; import gplx.core.encoders.*;
 public class Process_stream_rdr {
 	public Process_stream_rdr(byte[] bry_header, byte[] bry_body) {this.bry_header = bry_header; this.bry_body = bry_body;} private byte[] bry_header, bry_body;
 	public IoStream_stream_rdr Rdr() {return rdr;} IoStream_stream_rdr rdr = new IoStream_stream_rdr();
@@ -26,8 +26,8 @@ public class Process_stream_rdr {
 			if (bytes_read == -1) return null;	// stream closed; should only occur when shutting down
 			else throw Err_.new_wo_type("failed to read header");
 		}
-		int body_len = HexDecUtl.parse_or(bry_header, 0,8, -1); 	if (body_len == -1) throw Err_.new_wo_type("failed to read body_len");
-		int chk_len= HexDecUtl.parse_or(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw Err_.new_wo_type("failed to read chk_len");
+		int body_len = Hex_utl_.Parse_or(bry_header, 0,8, -1); 	if (body_len == -1) throw Err_.new_wo_type("failed to read body_len");
+		int chk_len= Hex_utl_.Parse_or(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw Err_.new_wo_type("failed to read chk_len");
 		byte[] trg_bry = (body_len > bry_body.length) ? new byte[body_len] : bry_body;
 		return Read_body(trg_bry, body_len, rdr);
 	}

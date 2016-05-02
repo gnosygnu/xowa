@@ -45,7 +45,7 @@ public class Luaj_engine implements Scrib_engine {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", Val_registerLibrary);
 		msg.set("name", "mw_interface");
-		msg.set("functions", Luaj_value_.X_obj_to_val(server, functions));
+		msg.set("functions", Luaj_value_.Obj_to_lua_val(server, functions));
 		server.Dispatch(msg);
 	}
 	public Keyval[] CallFunction(int id, Keyval[] args) {
@@ -54,7 +54,7 @@ public class Luaj_engine implements Scrib_engine {
 		msg.set("op", Val_callFunction);
 		msg.set("id", LuaValue.valueOf(id));
 		msg.set("nargs", LuaValue.valueOf(args_len));
-		msg.set("args", Luaj_value_.X_obj_to_val(server, args));
+		msg.set("args", Luaj_value_.Obj_to_lua_val(server, args));
 		return this.Dispatch_as_kv_ary(msg);
 	}
 	public Keyval[] ExecuteModule(int mod_id) {
@@ -63,7 +63,7 @@ public class Luaj_engine implements Scrib_engine {
 	public void CleanupChunks(Keyval[] ids) {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", "cleanupChunks");
-		msg.set("ids", Luaj_value_.X_obj_to_val(server, ids));
+		msg.set("ids", Luaj_value_.Obj_to_lua_val(server, ids));
 		this.Dispatch_as_kv_ary(msg);		
 	}
 	public Keyval[] Dispatch_as_kv_ary(LuaTable msg) {
@@ -103,7 +103,7 @@ public class Luaj_engine implements Scrib_engine {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", Val_returnMessage);
 		msg.set("nvalues", LuaValue.valueOf(values.length));
-		msg.set("values", Luaj_value_.X_obj_to_val(server, values));
+		msg.set("values", Luaj_value_.Obj_to_lua_val(server, values));
 		return msg;
 	}
 	private LuaTable ReturnFail(String fail_msg) {

@@ -31,6 +31,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public void Html_
 	public byte Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
 	public void Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
 	public String Html_js_eval_script(String script) {return "";}
+	public String Html_js_send_json(String name, String data) {return "";}
 	String ExtractAtr(String key, String txt, int pos) {
 		int key_pos = String_.FindBwd(txt, key, pos);	if (key_pos == String_.Find_none) return null;
 		int q0 = String_.FindFwd(txt, "\"", key_pos);	if (q0 == String_.Find_none) return null;

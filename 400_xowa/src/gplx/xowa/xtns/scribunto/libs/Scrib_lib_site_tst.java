@@ -52,6 +52,19 @@ public class Scrib_lib_site_tst {
 	@Test   public void PagesInNs() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
+	@Test   public void InterwikiMap() {
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_interwikiMap, Object_.Ary("!local"), String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  en.wikipedia.org="
+		, "    prefix=en.wikipedia.org"
+		, "    url=en.wikipedia.org"
+		, "    isProtocolRelative=false"
+		, "    isLocal=false"
+		, "    isTranscludable=false"
+		, "    isCurrentWiki=false"
+		, "    isExtraLanguageLink=false"
+		));
+	}
 	@Test   public void Init_lib_site() {
 		Xowe_wiki wiki = fxt.Core().Wiki();
 		wiki.Stats().Load_by_db(1, 2, 3, 4, 5, 6, 7, 8);

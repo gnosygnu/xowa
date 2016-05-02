@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.strings.*; import gplx.core.texts.*;
+import gplx.core.strings.*; import gplx.core.encoders.*;
 public class ColorAdp {
 	public int Value()	{return val;} int val;
 	public int Alpha()	{return (255 & val >> 24);}
@@ -26,10 +26,10 @@ public class ColorAdp {
 	public String XtoHexStr() {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add("#");
-		sb.Add(HexDecUtl.To_str(Alpha(), 2));
-		sb.Add(HexDecUtl.To_str(Red(), 2));
-		sb.Add(HexDecUtl.To_str(Green(), 2));
-		sb.Add(HexDecUtl.To_str(Blue(), 2));
+		sb.Add(Hex_utl_.To_str(Alpha(), 2));
+		sb.Add(Hex_utl_.To_str(Red(), 2));
+		sb.Add(Hex_utl_.To_str(Green(), 2));
+		sb.Add(Hex_utl_.To_str(Blue(), 2));
 		return sb.To_str();
 	}
 	public boolean Eq(Object obj) {
@@ -52,5 +52,5 @@ class ColorAdpCache {
 		return (java.awt.Color)rv;
 	}
 	Hash_adp hash = Hash_adp_.new_();
-	public static final ColorAdpCache Instance = new ColorAdpCache(); ColorAdpCache() {}
+	public static final    ColorAdpCache Instance = new ColorAdpCache(); ColorAdpCache() {}
 }

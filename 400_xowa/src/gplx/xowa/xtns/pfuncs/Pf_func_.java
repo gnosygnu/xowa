@@ -241,6 +241,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_rev_revisionsize
 	, Xol_kwd_grp_.Id_pagebanner
 	, Xol_kwd_grp_.Id_rev_protectionexpiry
+	, Xol_kwd_grp_.Id_categorytree
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -408,6 +409,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_insider:						return gplx.xowa.xtns.insiders.Insider_func.Instance;
 
 			case Xol_kwd_grp_.Id_massMessage_target:			return gplx.xowa.xtns.massMessage.Message_target_func.Instance;
+			case Xol_kwd_grp_.Id_categorytree:					return gplx.xowa.xtns.categorytrees.Categorytree_func.Instance;
 
 			case Xol_kwd_grp_.Id_pendingChangeLevel:			return gplx.xowa.xtns.flaggedRevs.Pending_change_level_func.Instance;
 			case Xol_kwd_grp_.Id_pagesUsingPendingChanges:		return gplx.xowa.xtns.flaggedRevs.Pages_using_pending_changes_func.Instance;

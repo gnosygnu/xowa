@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+import java.util.*;
 import org.luaj.vm2.*;
 class Luaj_value_ {
 	public static String Get_val_as_str(LuaTable owner, String key) {
@@ -26,9 +27,9 @@ class Luaj_value_ {
 	}
 	public static Keyval[] Get_val_as_kv_ary(Luaj_server server, LuaTable owner, String key) {
 		LuaTable table = (LuaTable)owner.get(key);
-		return Luaj_value_.X_tbl_to_kv_ary(server, table);
+		return Luaj_value_.Lua_tbl_to_kv_ary(server, table);
 	}
-	public static Keyval[] X_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
+	public static Keyval[] Lua_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
 		List_adp temp = List_adp_.new_();
 		LuaValue cur = LuaValue.NIL;
 		int len = 0;
@@ -36,7 +37,7 @@ class Luaj_value_ {
 			Varargs itm = tbl.next(cur);
 			if (itm == LuaValue.NIL) break;						// no more pairs; stop
 			LuaValue itm_val = itm.arg(2);						// val is itm 2
-			Object itm_val_obj = X_val_to_obj(server, itm_val);
+			Object itm_val_obj = Lua_val_to_obj(server, itm_val);
 			LuaValue itm_key = itm.arg(1);
 			Keyval kv = null;
 			if (itm_val.type() == LuaValue.TFUNCTION) {			// function is converted to Scrib_lua_proc
@@ -51,7 +52,8 @@ class Luaj_value_ {
 			else {
 				switch (itm_key.type()) {
 					case LuaValue.TNUMBER:
-						kv = Keyval_.int_(((LuaNumber)itm_key).toint(), itm_val_obj);
+						int key_int = ((LuaNumber)itm_key).toint();
+						kv = Keyval_.int_(key_int, itm_val_obj);
 						break;
 					case LuaValue.TSTRING:
 						kv = Keyval_.new_(((LuaString)itm_key).tojstring(), itm_val_obj);
@@ -67,7 +69,7 @@ class Luaj_value_ {
 		if (len == 0) return Keyval_.Ary_empty;
 		return (Keyval[])temp.To_ary(Keyval.class);
 	}
-	private static Object X_val_to_obj(Luaj_server server, LuaValue v) {
+	private static Object Lua_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {
 			case LuaValue.TNIL: 				return null;
 			case LuaValue.TBOOLEAN:				return ((LuaBoolean)v).toboolean();
@@ -78,12 +80,12 @@ class Luaj_value_ {
 					return v_num.toint();
 				else
 					return v_num.todouble();
-			case LuaValue.TTABLE:				return X_tbl_to_kv_ary(server, (LuaTable)v);
+			case LuaValue.TTABLE:				return Lua_tbl_to_kv_ary(server, (LuaTable)v);
 			case LuaValue.TFUNCTION:			return server.Get_id_by_closure(v);
 			default:							throw Err_.new_unhandled(v.type());
 		}		
 	}
-	public static LuaValue X_obj_to_val(Luaj_server server, Object o) {
+	public static LuaValue Obj_to_lua_val(Luaj_server server, Object o) {
 		if (o == null) return LuaValue.NIL;
 		Class<?> c = Type_adp_.ClassOf_obj(o);
 		if		(Object_.Eq(c, Bool_.Cls_ref_type))			return LuaValue.valueOf((Boolean)o);
@@ -92,8 +94,8 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_u8((byte[])o));
-		else if	(Object_.Eq(c, Keyval.class))				return X_kv_ary_to_tbl(server, (Keyval)o);
-		else if	(Object_.Eq(c, Keyval[].class))				return X_kv_ary_to_tbl(server, (Keyval[])o);
+		else if	(Object_.Eq(c, Keyval.class))				return Kv_ary_to_lua_tbl(server, (Keyval)o);
+		else if	(Object_.Eq(c, Keyval[].class))				return Kv_ary_to_lua_tbl(server, (Keyval[])o);
 		else if	(Object_.Eq(c, Long_.Cls_ref_type))			return LuaValue.valueOf((Long)o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());
 		else if	(Object_.Eq(c, Float_.Cls_ref_type))		return LuaValue.valueOf((Float)o);
@@ -101,12 +103,12 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, Short_.Cls_ref_type))		return LuaValue.valueOf((Short)o);
 		else return LuaValue.NIL; 
 	}
-	private static LuaTable X_kv_ary_to_tbl(Luaj_server server, Keyval... ary) {
+	private static LuaTable Kv_ary_to_lua_tbl(Luaj_server server, Keyval... ary) {
 		LuaTable rv = LuaValue.tableOf();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			Keyval itm = ary[i];
-			LuaValue itm_val = X_obj_to_val(server, itm.Val());
+			LuaValue itm_val = Obj_to_lua_val(server, itm.Val());
 			switch (itm.Key_tid()) {
 				case Type_adp_.Tid__int:
 					rv.set(Int_.cast(itm.Key_as_obj()), itm_val);

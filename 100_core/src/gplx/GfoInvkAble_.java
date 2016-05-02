@@ -31,6 +31,8 @@ public class GfoInvkAble_ {
 		return rv;
 	}
 	public static final    GfoInvkAble Null = new GfoInvkAble_null();
+	public static Object Invk(GfoInvkAble itm)				{return itm.Invk(null, -1, null, null);}
+	public static Object Invk(GfoInvkAble itm, String key)	{return itm.Invk(null, -1, key	, null);}			
 	public static final String Mutator_suffix = "_";
 }
 class GfoInvkAble_null implements GfoInvkAble {

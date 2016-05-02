@@ -18,10 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
 public class Scrib_lib_mw__lib_tst {
+	private final    Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_mw().Init();
-	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
+	}
 	@Test  public void ParentFrameExists() {
 		fxt.Init_frame_parent("test");
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_mw.Invk_parentFrameExists, Object_.Ary_empty, true);
@@ -78,6 +79,11 @@ public class Scrib_lib_mw__lib_tst {
 	}
 	@Test  public void NewChildFrame() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_newChildFrame, Object_.Ary("current", "Page_0", Scrib_kv_utl_.flat_many_("key1", "val1")), "frame0");
+	}
+	@Test  public void ExpandTemplate__null_arg() {
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
+		fxt.Parser_fxt().Data_create("Template:A", "b{{{1}}}c");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(2, "v2")), "bc");	// list: args is ary
 	}
 	@Test  public void SetTTL() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_mw.Invk_setTTL, Object_.Ary(123));

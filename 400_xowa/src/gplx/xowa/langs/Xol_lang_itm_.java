@@ -45,7 +45,7 @@ public class Xol_lang_itm_ {
 				return Char_tid_misc;
 		}
 	}
-	public static final byte[] Key_en = Bry_.new_a7("en");
+	public static final    byte[] Key_en = Bry_.new_a7("en");
 	public static Xol_lang_itm Lang_en_make(Xoa_lang_mgr lang_mgr) {
 		Xol_lang_itm rv = new Xol_lang_itm(lang_mgr, Xol_lang_itm_.Key_en);
 		Xol_lang_itm_.Lang_init(rv);
@@ -269,7 +269,7 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesincategory_files, "pagesincategory_fil
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_revisionsize, "REVISIONSIZE");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagebanner, "PAGEBANNER");	// NOTE: must be casematch; EX: in en.v, {{pagebanner}} is actually template name which calls {{PAGEBANNER}}
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_rev_protectionexpiry, "PROTECTIONEXPIRY");
-kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_new_window_link, "#NewWindowLink"
-);
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_new_window_link, "#NewWindowLink");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_categorytree, "#categorytree");
 	}
 }

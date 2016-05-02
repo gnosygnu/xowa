@@ -17,6 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.progs; import gplx.*; import gplx.core.*;
 public interface Gfo_prog_ui {
-	void Prog__update_val(long cur, long max);
-	void Prog__end();
+	boolean			Prog__started();
+	boolean			Prog__paused();
+	boolean			Prog__finished();
+	boolean			Prog__canceled();
+	long			Prog__cur();
+	long			Prog__end();
+	void			Prog__start();
+	void			Prog__pause();
+	void			Prog__resume();
+	void			Prog__cancel();
+	byte			Prog__notify__working(long cur, long max);
+	void			Prog__notify__finished();
 }

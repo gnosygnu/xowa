@@ -56,6 +56,18 @@ public class Io_size__tst {
 		fxt.Test_Equals("1024 kb", "1 mb");
 		fxt.Test_Equals("1.5 kb", "1536 b");
 	}
+	@Test    public void To_str_new___b___0()			{fxt.Test__to_str_new(           0, 2,    "0 B");}
+	@Test    public void To_str_new___b___1()			{fxt.Test__to_str_new(           1, 2,    "1 B");}
+	@Test    public void To_str_new__kb___1_501__1()	{fxt.Test__to_str_new(        1538, 1,    "1.5 KB");}
+	@Test    public void To_str_new__kb___1_501__2()	{fxt.Test__to_str_new(        1538, 2,    "1.50 KB");}
+	@Test    public void To_str_new__kb___1_501__3()	{fxt.Test__to_str_new(        1538, 3,    "1.501 KB");}
+	@Test    public void To_str_new__kb___1_512__1()	{fxt.Test__to_str_new(        1549, 1,    "1.5 KB");}
+	@Test    public void To_str_new__kb___1_512__2()	{fxt.Test__to_str_new(        1549, 2,    "1.51 KB");}
+	@Test    public void To_str_new__kb___1_512__3()	{fxt.Test__to_str_new(        1549, 3,    "1.512 KB");}
+	@Test    public void To_str_new__mb___1_512__1()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 1,    "1.5 MB");}
+	@Test    public void To_str_new__mb___1_512__2()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 2,    "1.51 MB");}
+	@Test    public void To_str_new__mb___1_512__3()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 3,    "1.512 MB");}
+	@Test    public void To_str_new__gb___1()			{fxt.Test__to_str_new(1819264175, 2,    "1.69 GB");}
 }
 class Io_size__fxt {
 	public void Test_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or(raw, Long_.Min_value));}
@@ -66,4 +78,8 @@ class Io_size__fxt {
 	public void Test_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or(lhs, Long_.Min_value), Io_size_.parse_or(rhs, Long_.Min_value));}
 	public void Test_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.To_str(val));}
 	public void Test_Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1, String expd) {Tfds.Eq(expd, Io_size_.To_str(val, exp_1024, val_fmt, unit_pad, round_0_to_1));}
+	public void Test__to_str_new(long val, int decimal_places, String expd) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		Tfds.Eq_str(expd, Io_size_.To_str_new(bfr, val, decimal_places));
+	}
 }

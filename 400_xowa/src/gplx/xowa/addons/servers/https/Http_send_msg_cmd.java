@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.servers.*;
 public class Http_send_msg_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
+	public void Init_by_app(Xoa_app app) {}
 	public String Exec(gplx.langs.jsons.Json_nde data) {
 		gplx.langs.jsons.Json_nde jnde = (gplx.langs.jsons.Json_nde)data.Get_as_itm_or_null(Bry_.new_a7("msg"));
 		Http_long_poll_cmd.Instance.Send_msg(jnde.Print_as_json());

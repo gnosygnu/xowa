@@ -31,7 +31,7 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 			return this.Add_day(days);
 		}
 		else										return GfoInvkAble_.Rv_unhandled;			
-	}	public static final String Invk_XtoStr_fmt = "XtoStr_fmt", Invk_AddDays = "Add_day";
+	}	public static final    String Invk_XtoStr_fmt = "XtoStr_fmt", Invk_AddDays = "Add_day";
 	public int Segment(int segmentIdx) {
 		switch (segmentIdx) {
 			case DateAdp_.SegIdx_year:			return this.Year();
@@ -140,9 +140,9 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 		long diff = this.under.getTimeInMillis() - prev.under.getTimeInMillis();
 		return (int)(diff / (1000 * 60 * 60 * 24));
 	}
-	public TimeSpanAdp Diff(DateAdp earlier) {
+	public Time_span Diff(DateAdp earlier) {
 		long diff = this.under.getTimeInMillis() - earlier.under.getTimeInMillis();
-		return TimeSpanAdp_.fracs_(diff);
+		return Time_span_.fracs_(diff);
 	}
 	protected DateAdp(Calendar under) {this.under = under;}
 	protected DateAdp(int year, int month, int day, int hour, int minute, int second, int frac) {

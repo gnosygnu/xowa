@@ -346,7 +346,10 @@ class Scrib_lib_ustring_gsub_mgr {
 					}
 				}
 				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
-				tmp_bfr.Add_str_u8(Scrib_kv_utl_.Val_to_str(rslts, 0));
+				if (rslts.length > 0) {					// ArrayIndex check
+					Object rslt_obj = rslts[0].Val();	// 0th idx has result
+					tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_empty(rslt_obj));	// NOTE: always convert to String; rslt_obj can be int; PAGE:en.d:seven DATE:2016-04-27
+				}
 				break;
 			}
 			default: throw Err_.new_unhandled(repl_tid);

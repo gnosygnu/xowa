@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.bridges.dbuis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.bridges.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_cmd_mgr {
-	private final Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
 	private boolean init;
 	public void Init_by_bridge(Bridge_cmd_mgr cmd_mgr) {
 		if (init) return;
@@ -54,34 +54,38 @@ public class Dbui_cmd_mgr {
 		}
 		return rv;
 	}
-        public static final Dbui_cmd_mgr Instance = new Dbui_cmd_mgr(); Dbui_cmd_mgr() {}
-	private static final byte[] 
+        public static final    Dbui_cmd_mgr Instance = new Dbui_cmd_mgr(); Dbui_cmd_mgr() {}
+	private static final    byte[] 
 	  Arg_tbl_key = Bry_.new_a7("tbl_key"), Arg_row_pkey = Bry_.new_a7("row_pkey"), Arg_row_id = Bry_.new_a7("row_id")
 	, Arg_vals = Bry_.new_a7("vals"), Arg_key = Bry_.new_a7("key"), Arg_val = Bry_.new_a7("val")
 	, Arg_pkeys = Bry_.new_a7("pkeys")
 	;
 }
 class Dbui_cmd_row_del implements Bridge_cmd_itm {
-	private final Dbui_cmd_mgr mgr;
+	private final    Dbui_cmd_mgr mgr;
 	public Dbui_cmd_row_del(String key, Dbui_cmd_mgr mgr) {this.key = Bry_.new_u8(key); this.mgr = mgr;}
-	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Key() {return key;} private final    byte[] key;
+	public void Init_by_app(Xoa_app app) {}
 	public String Exec(Json_nde data) {return mgr.Del(data);}
 }
 class Dbui_cmd_row_edit implements Bridge_cmd_itm {
-	private final Dbui_cmd_mgr mgr;
+	private final    Dbui_cmd_mgr mgr;
 	public Dbui_cmd_row_edit(String key, Dbui_cmd_mgr mgr) {this.key = Bry_.new_u8(key); this.mgr = mgr;}
-	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Key() {return key;} private final    byte[] key;
+	public void Init_by_app(Xoa_app app) {}
 	public String Exec(Json_nde data) {return mgr.Edit(data);}
 }
 class Dbui_cmd_row_save implements Bridge_cmd_itm {
-	private final Dbui_cmd_mgr mgr;
+	private final    Dbui_cmd_mgr mgr;
 	public Dbui_cmd_row_save(String key, Dbui_cmd_mgr mgr) {this.key = Bry_.new_u8(key); this.mgr = mgr;}
-	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Key() {return key;} private final    byte[] key;
+	public void Init_by_app(Xoa_app app) {}
 	public String Exec(Json_nde data) {return mgr.Save(data);}
 }
 class Dbui_cmd_row_reorder implements Bridge_cmd_itm {
-	private final Dbui_cmd_mgr mgr;
+	private final    Dbui_cmd_mgr mgr;
 	public Dbui_cmd_row_reorder(String key, Dbui_cmd_mgr mgr) {this.key = Bry_.new_u8(key); this.mgr = mgr;}
-	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Key() {return key;} private final    byte[] key;
+	public void Init_by_app(Xoa_app app) {}
 	public String Exec(Json_nde data) {return mgr.Reorder(data);}
 }

@@ -45,7 +45,7 @@ public class Xoax_addon_mgr {
 
 		// specials
 		, new gplx.xowa.addons.apps.file_browsers		.Fbrow_addon()
-		, new gplx.xowa.addons.updates.downloads		.Xoax_downloads_addon()
+		, new gplx.xowa.addons.builds.centrals		.Xoax_downloads_addon()
 
 		// jsons
 		, new gplx.xowa.addons.servers.https			.Xoax_long_poll_addon()
@@ -67,8 +67,10 @@ public class Xoax_addon_mgr {
 			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__json.class)) {
 				Xoax_addon_itm__json addon_json = (Xoax_addon_itm__json)addon;
 				gplx.xowa.htmls.bridges.Bridge_cmd_itm[] json_cmds = addon_json.Json__cmds();
-				for (gplx.xowa.htmls.bridges.Bridge_cmd_itm json_cmd : json_cmds)
+				for (gplx.xowa.htmls.bridges.Bridge_cmd_itm json_cmd : json_cmds) {
+					json_cmd.Init_by_app(app);
 					app.Html__bridge_mgr().Cmd_mgr().Add(json_cmd);
+				}
 			}
 		}
 		app.Gui__cbk_mgr().Reg(gplx.xowa.addons.servers.https.Xog_cbk_wkr__http.Instance);

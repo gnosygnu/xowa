@@ -19,6 +19,7 @@ package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.progs.*;
 public class Xof_math_mgr implements GfoInvkAble {
+	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
 	private Xoae_app app;
 	public Process_adp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private Process_adp cmd_convert_tex_to_dvi = new Process_adp();
 	public Process_adp Cmd_convert_dvi_to_png() {return cmd_convert_dvi_to_png;} private Process_adp cmd_convert_dvi_to_png = new Process_adp();
@@ -29,11 +30,11 @@ public class Xof_math_mgr implements GfoInvkAble {
 		cmd_convert_dvi_to_png = app_mgr.App_convert_dvi_to_png();
 	}
 	private Io_url Make_math_dir(String wiki_key) {return app.Fsys_mgr().Root_dir().GenSubDir_nest("file", wiki_key, "math");}
-	public Xof_math_html_wtr Html_wtr() {return html_wtr;} private final Xof_math_html_wtr html_wtr = new Xof_math_html_wtr();
+	public Xof_math_html_wtr Html_wtr() {return html_wtr;} private final    Xof_math_html_wtr html_wtr = new Xof_math_html_wtr();
 	public void Make_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Io_url math_dir = Make_math_dir(wiki_key);
 		math_bry = app.Math_subst_regy().Subst(math_bry);
-		String md5 = gplx.core.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.core.ios.IoStream_.ary_(math_bry));
+		String md5 = md5_hash.Hash_bry_as_str(math_bry);
 		Io_url png_fil = Make_png_fil(math_dir, md5);
 		rv.Ctor(math_bry, md5, png_fil);
 	}

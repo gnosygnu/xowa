@@ -39,8 +39,9 @@ public class ImageAdp_tst {
 		DateAdp afterModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
 		Tfds.Eq_true(CompareAble_.Is_more(afterModifiedTime, beforeModifiedTime));
 
-		String loadHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(load));
-		String saveHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(save));
+		Hash_algo algo = Hash_algo_.New__md5();
+		String loadHash = algo.Hash_stream_as_str(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(load));
+		String saveHash = algo.Hash_stream_as_str(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(save));
 		Tfds.Eq(loadHash, saveHash);
 	}
 }

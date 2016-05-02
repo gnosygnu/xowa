@@ -23,7 +23,7 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
-//			Bld_import_list(Xow_domain_regy.All);
+			Bld_import_list(Xow_domain_regy.All);
 //			Bld_cfg_files(Xow_domain_regy.All);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
 	}
 	public void Bld_import_list(String... ary) {
@@ -46,15 +46,16 @@ public class Xoi_cmd_wiki_tst {
 		for (int j = 0; j < 5; ++j) {
 			latest_html = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty).Exec_as_bry(url);
 			if (latest_html != null) break;
-			Tfds.Dbg("fail|" + url);
+			Tfds.Dbg("fail|" + domain_str + "|" + url);
 			if (j == 4) return;
 		}
-		Tfds.Dbg("pass|" + url);
 		parser.Parse(latest_html);
 		Xowm_dump_file dump_file = new Xowm_dump_file(domain_str, "latest", Xowm_dump_type_.Str__pages_articles);
 		dump_file.Server_url_(Xowm_dump_file_.Server_wmf_https);
 		byte[] pages_articles_key = Bry_.new_a7(wmf_key + "-latest-pages-articles.xml.bz2");
 		Wmf_latest_itm latest_itm = parser.Get_by(pages_articles_key);
+		if (latest_itm == null) {Tfds.Dbg("missing|" + domain_str + "|" + url); return;} // NOTE: commonswiki missing entry for commonswiki-latest-pages-articles.xml.bz2  DATE:2016-05-01
+		Tfds.Dbg("pass|" + url);
 		bfr.Add(domain_bry).Add_byte_pipe();
 		bfr.Add_str_u8(dump_file.File_url()).Add_byte_pipe();
 		bfr.Add(Xow_domain_tid_.Get_type_as_bry(domain_itm.Domain_type_id())).Add_byte_pipe();

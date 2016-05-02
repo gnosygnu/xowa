@@ -63,4 +63,8 @@ public class Xopg_tag_itm {
 	public static Xopg_tag_itm New_js_code(byte[] code) {
 		return new Xopg_tag_itm(Gfh_tag_.Bry__script	, code, Keyval_.new_("type", "text/javascript"));
 	}
+	public static Xopg_tag_itm New_html_code(Io_url url, String tmpl) {
+		byte[] html = Io_mgr.Instance.LoadFilBry(url);
+		return new Xopg_tag_itm(Gfh_tag_.Bry__script	, html, Keyval_.new_("type", "text/html"), Keyval_.new_("id", tmpl));
+	}
 }

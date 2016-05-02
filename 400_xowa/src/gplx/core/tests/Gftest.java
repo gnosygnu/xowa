@@ -27,16 +27,37 @@ public class Gftest {
 	public static void Eq__ary(byte[][] expd_bry_ary, byte[][] actl_bry_ary, String msg_fmt, Object... msg_args) {
 		boolean[] failures = Calc__failures(Type_adp_.Tid__bry, expd_bry_ary, actl_bry_ary);
 		if (failures != null) {
-			bfr.Add(Bry__line_bgn);
-			if (msg_fmt != null) {
-				bfr.Add_str_u8(String_.Format(msg_fmt, msg_args));
-				bfr.Add(Bry__line_mid);
-			}
-			Write__failures(bfr, failures, Type_adp_.Tid__bry, expd_bry_ary, actl_bry_ary);
+			Write_fail_head(bfr, msg_fmt, msg_args);
+			Write_fail_ary(bfr, failures, Type_adp_.Tid__bry, expd_bry_ary, actl_bry_ary);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}
-	private static void Write__failures(Bry_bfr bfr, boolean[] failures, int type_id, Object expd_ary, Object actl_ary) {	
+	public static void Eq__str(String expd, String actl) {Eq__str(expd, actl, null);}
+	public static void Eq__str(String expd, String actl, String msg_fmt, Object... msg_args) {
+		if (String_.Eq(expd, actl)) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		bfr.Add_str_a7("expd: ").Add_str_u8(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_str_u8(actl).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	public static void Eq__bry(byte[] expd, byte[] actl) {Eq__bry(expd, actl, null);}
+	public static void Eq__bry(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args) {
+		if (Bry_.Eq(expd, actl)) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		bfr.Add_str_a7("expd: ").Add(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add(actl).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	private static void Write_fail_head(Bry_bfr bfr, String msg_fmt, Object[] msg_args) {
+		bfr.Add(Bry__line_bgn);
+		if (msg_fmt != null) {
+			bfr.Add_str_u8(String_.Format(msg_fmt, msg_args));
+			bfr.Add(Bry__line_mid);
+		}
+	}
+	private static void Write_fail_ary(Bry_bfr bfr, boolean[] failures, int type_id, Object expd_ary, Object actl_ary) {	
 		int len = failures.length;
 		int expd_len = Array_.Len(expd_ary);
 		int actl_len = Array_.Len(actl_ary);

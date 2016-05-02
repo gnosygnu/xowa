@@ -26,6 +26,7 @@ public class Gfui_html extends GfuiElemBase {
 	@gplx.Virtual public String		Html_js_eval_proc_as_str(String name, Object... args) {return under.Html_js_eval_proc_as_str(name, args);}
 	@gplx.Virtual public boolean			Html_js_eval_proc_as_bool(String name, Object... args) {return under.Html_js_eval_proc_as_bool(name, args);}
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
+	public String				Html_js_send_json(String name, String data) {return under.Html_js_send_json(name, data);}
 	public void					Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {under.Html_js_cbks_add(js_func_name, invk);}
 	public void					Html_invk_src_(GfoEvObj v) {under.Html_invk_src_(v);}
 	public void					Html_dispose() {under.Html_dispose();}

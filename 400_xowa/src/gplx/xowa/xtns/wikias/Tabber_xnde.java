@@ -21,6 +21,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.p
 public class Tabber_xnde implements Xox_xnde {
 	private byte[] id;
 	private Tabber_tab_itm[] tab_itms_ary;
+	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
@@ -28,7 +29,7 @@ public class Tabber_xnde implements Xox_xnde {
 		// split on "|-|"; EX: "A|-|B" -> tab_1='A'; tab_2='B'
 		List_adp tab_itms_list = List_adp_.new_();
 		byte[] xnde_body = Xox_xnde_.Extract_body_or_null(src, xnde); if (xnde_body == null) return;
-		this.id = Id_test == null ? gplx.core.security.HashAlgo_.Md5.Calc_hash_bry(xnde_body) : Id_test;
+		this.id = Id_test == null ? md5_hash.Hash_bry_as_bry(xnde_body) : Id_test;
 		byte[][] tab_itms = Bry_split_.Split(xnde_body, Spr__tab_itms);
 		for (int i = 0; i < tab_itms.length; ++i) {
 			byte[] tab_itm = tab_itms[i];

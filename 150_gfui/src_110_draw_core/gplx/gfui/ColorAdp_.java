@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.core.texts.*; import gplx.core.interfaces.*;
+import gplx.core.encoders.*; import gplx.core.interfaces.*;
 public class ColorAdp_ implements ParseAble {
 	public static ColorAdp as_(Object obj) {return obj instanceof ColorAdp ? (ColorAdp)obj : null;}
 	public static ColorAdp cast(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
 	public static ColorAdp new_(int a, int r, int g, int b) {return ColorAdp.new_((int)a, (int)r, (int)g, (int)b);}
-	public static final ColorAdp_ Parser = new ColorAdp_();
+	public static final    ColorAdp_ Parser = new ColorAdp_();
 	public Object ParseAsObj(String raw) {return ColorAdp_.parse(raw);}
 	public static ColorAdp parseOr_(String raw, ColorAdp or) {
 		ColorAdp rv = parse_internal_(raw); if (rv == null) return or;
@@ -63,7 +63,7 @@ public class ColorAdp_ implements ParseAble {
 			int rawLen = String_.Len(raw);
 			for (int i = 1; i < rawLen; i += 2) {		// fill ARGB ary by parsing raw 2 at a time; EX: #FFFFFFFF -> 255,255,255,255; NOTE: start at 1 to ignore leading #
 				String hexStr = String_.MidByLen(raw, i, 2);
-				ary[idx++] = HexDecUtl.parse(hexStr);
+				ary[idx++] = Hex_utl_.Parse(hexStr);
 			}
 			return ColorAdp.new_(ary[0], ary[1], ary[2], ary[3]);
 		}	catch (Exception exc) {throw Err_.new_parse_exc(exc, ColorAdp.class, raw);}
@@ -95,7 +95,7 @@ public class ColorAdp_ implements ParseAble {
 		return ColorAdp.new_(a, r, g, b);
 	}
 	public static ColorAdp read_(Object o) {String s = String_.as_(o); return s != null ? ColorAdp_.parse(s) : ColorAdp_.cast(o);}
-	public static final ColorAdp 
+	public static final    ColorAdp 
 		  Null			= new_(  0,   0,   0,   0)
 		, Black			= new_(255,   0,   0,   0)
 		, White			= new_(255, 255, 255, 255)

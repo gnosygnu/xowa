@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xop_lnki_wkr_ {
-	private static final Int_obj_ref rel2abs_tid = Int_obj_ref.zero_();
+	private static final    Int_obj_ref rel2abs_tid = Int_obj_ref.zero_();
 	public static final int Invalidate_lnki_len = 128;
 	public static int Invalidate_lnki(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_lnki_tkn lnki, int cur_pos) {
 		lnki.Tkn_tid_to_txt();						// convert initial "[[" to text; note that this lnki has no pipes as pipe_lxr does similar check; EX: [[<invalid>]]; DATE:2014-03-26
@@ -108,12 +108,12 @@ public class Xop_lnki_wkr_ {
 	}
 	public static void Thumbtime_parse(Xop_ctx ctx, byte[] src, Number_parser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
 		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
-		long fracs = TimeSpanAdp_.parse_to_fracs(src, val_tkn_bgn, val_tkn_end, false);
-		if (fracs == TimeSpanAdp_.parse_null) {
+		long fracs = Time_span_.parse_to_fracs(src, val_tkn_bgn, val_tkn_end, false);
+		if (fracs == Time_span_.parse_null) {
 			ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 		}
 		else
-			lnki.Time_(fracs / TimeSpanAdp_.Ratio_f_to_s);
+			lnki.Time_(fracs / Time_span_.Ratio_f_to_s);
 	}
 	public static boolean Adjust_for_brack_end_len_of_3(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, Xop_lnki_tkn lnki) {
 		if (	cur_pos < src_len										// bounds check
@@ -137,5 +137,11 @@ public class Xop_lnki_wkr_ {
 			}
 		}
 		return false;
+	}
+	public static void Write_lnki(Bry_bfr bfr, Xoa_ttl ttl, boolean literal) {
+		bfr.Add(Xop_tkn_.Lnki_bgn);
+		if (literal) bfr.Add_byte(Byte_ascii.Colon);
+		bfr.Add(ttl.Full_db());
+		bfr.Add(Xop_tkn_.Lnki_end);
 	}
 }

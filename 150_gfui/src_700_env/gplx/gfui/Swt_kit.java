@@ -318,6 +318,7 @@ class Swt_kit_mode {
 class Swt_gui_cmd implements GfuiInvkCmd, Runnable {
 	private final Swt_kit kit; private final Gfo_usr_dlg usr_dlg; private final Display display; private final GfoInvkAble target; private final boolean async;	
 	private GfsCtx invk_ctx; private int invk_ikey; private String invk_key; private GfoMsg invk_msg;
+	private Object rv_obj;
 	public Swt_gui_cmd(Swt_kit kit, Gfo_usr_dlg usr_dlg, Display display, GfoInvkAble target, boolean async) {
 		this.kit = kit; this.usr_dlg = usr_dlg; this.display = display; this.target = target; this.async = async;
 	}
@@ -330,11 +331,11 @@ class Swt_gui_cmd implements GfuiInvkCmd, Runnable {
 			try 	{display.syncExec(this);}
 			finally {kit.Kit_sync_cmd_del(this);}
 		}
-		return this;
+		return rv_obj;
 	}	
 	@Override public void run() {
 		synchronized (this) {// needed for Special:Search and async; DATE:2015-04-23
-			try {target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
+			try {rv_obj = target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
 			catch (Exception e) {
 				if (kit.Kit_mode__term()) return;	// NOTE: if shutting down, don't warn; warn will try to write to status.bar, which will fail b/c SWT is shutting down; failures will try to write to status.bar again, causing StackOverflow exception; DATE:2014-05-04
 				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_full(e));

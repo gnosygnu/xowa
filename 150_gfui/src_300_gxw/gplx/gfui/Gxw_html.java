@@ -25,6 +25,7 @@ public interface Gxw_html extends GxwElem {
 	boolean		Html_js_eval_proc_as_bool	(String name, Object... args);
 	String		Html_js_eval_script			(String script);
 	void		Html_js_cbks_add			(String js_func_name, GfoInvkAble invk);
+	String		Html_js_send_json			(String name, String data);
 	void		Html_invk_src_(GfoEvObj v);
 	void		Html_dispose();
 }

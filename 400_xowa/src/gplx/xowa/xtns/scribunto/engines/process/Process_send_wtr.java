@@ -53,7 +53,7 @@ public class Process_send_wtr {
 		bfr.Add_int_variable(prc.Id());
 		bfr.Add_byte(Byte_ascii.Brack_end);
 		return true;		
-	}	static final byte[] Prc_bgn = Bry_.new_a7("chunks[");
+	}	static final    byte[] Prc_bgn = Bry_.new_a7("chunks[");
 	private boolean Encode_ary(Bry_bfr bfr, Keyval[] ary) {
 		int len = ary.length;
 		bfr.Add_byte(Byte_ascii.Curly_bgn);
@@ -82,17 +82,18 @@ public class Process_send_wtr {
 	public boolean Encode_obj(Bry_bfr bfr, Object o) {
 		if (o == null) {bfr.Add(CONST_nil); return true;}
 		Class<?> c = Type_adp_.ClassOf_obj(o);
-		if		(Object_.Eq(c, Bool_.Cls_ref_type))				Encode_bool(bfr, Bool_.cast(o));
-		else if	(Object_.Eq(c, Int_.Cls_ref_type))				Encode_int(bfr, Int_.cast(o));
-		else if	(Object_.Eq(c, Double_.Cls_ref_type))			{if (!Encode_double(bfr, Double_.cast(o))) return false;}	
+		if		(Object_.Eq(c, Bool_.Cls_ref_type))			Encode_bool(bfr, Bool_.cast(o));
+		else if	(Object_.Eq(c, Int_.Cls_ref_type))			Encode_int(bfr, Int_.cast(o));
+		else if	(Object_.Eq(c, Long_.Cls_ref_type))			bfr.Add_long_variable(Long_.cast(o));
+		else if	(Object_.Eq(c, Double_.Cls_ref_type))		{if (!Encode_double(bfr, Double_.cast(o))) return false;}	
 		else if	(Object_.Eq(c, String.class))				{if (!Encode_str(bfr, (String)o)) return false;}
 		else if	(Object_.Eq(c, byte[].class))				{if (!Encode_str(bfr, (byte[])o)) return false;}	// NOTE: not in Scribunto; added here for PERF of not re-creating a String Object
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		{if (!Encode_prc(bfr, (Scrib_lua_proc)o)) return false;}
 		else if	(Object_.Eq(c, Keyval.class))				{if (!Encode_kv(bfr, (Keyval)o)) return false;}
 		else if	(Object_.Eq(c, Keyval[].class))			{if (!Encode_ary(bfr, (Keyval[])o)) return false;}
-		else												{throw Scrib_xtn_mgr.err_("Object cannot be serialized: {0}", Type_adp_.NameOf_obj(o));}
+		else												{throw Scrib_xtn_mgr.err_("Object cannot be serialized: ~{0}", Type_adp_.NameOf_obj(o));}
 		return true;
 	}
-	private static final byte[] CONST_nil = Bry_.new_a7("nil"), CONST_bool_true = Bry_.new_a7("true"), CONST_bool_false = Bry_.new_a7("false"), CONST_escape_000 = Bry_.new_a7("\\000");
+	private static final    byte[] CONST_nil = Bry_.new_a7("nil"), CONST_bool_true = Bry_.new_a7("true"), CONST_bool_false = Bry_.new_a7("false"), CONST_escape_000 = Bry_.new_a7("\\000");
 	private static final String GRP_KEY = "xowa-scribunto-lua-srl";
 }

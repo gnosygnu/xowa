@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.texts.*;
+import gplx.core.encoders.*;
 import gplx.xowa.xtns.scribunto.libs.*;
 public class Process_engine implements Scrib_engine {
 	private Scrib_core core; private Xoae_app app; private Scrib_xtn_mgr scrib_opts;
@@ -85,7 +85,7 @@ public class Process_engine implements Scrib_engine {
 				return Keyval_.Ary_empty;
 			}
 		}
-	}	private static final byte[] Dispatch_hdr = Bry_.new_a7("0000000000000000");	// itm_len + itm_chk in 8-len HexDec
+	}	private static final    byte[] Dispatch_hdr = Bry_.new_a7("0000000000000000");	// itm_len + itm_chk in 8-len HexDec
 	private void Dispatch_bld_send(Bry_bfr bfr, Object[] ary) {
 		int len = ary.length; if (len % 2 != 0) throw Err_.new_wo_type("arguments must be factor of 2", "len", len);
 		bfr.Add(Dispatch_hdr);
@@ -102,7 +102,7 @@ public class Process_engine implements Scrib_engine {
 		bfr.Add_byte(Byte_ascii.Curly_end);
 		int msg_len = bfr.Len() - 16;		// 16 for Dispatch_hdr_len
 		int chk_len = (msg_len * 2) -1;		// defined by Scribunto
-		HexDecUtl.Write(bfr.Bfr(), 0,  8, msg_len);
-		HexDecUtl.Write(bfr.Bfr(), 9, 16, chk_len);
+		Hex_utl_.Write(bfr.Bfr(), 0,  8, msg_len);
+		Hex_utl_.Write(bfr.Bfr(), 9, 16, chk_len);
 	}
 }

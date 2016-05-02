@@ -22,7 +22,7 @@ import gplx.xowa.apps.servers.tcp.*;
 import gplx.xowa.apps.servers.http.*; import gplx.xowa.guis.views.*;
 public class Gxw_html_server implements Gxw_html {
 	private Xosrv_socket_wtr wtr; private Gfo_usr_dlg usr_dlg;
-	private final Js_wtr js_wtr = new Js_wtr();
+	private final    Js_wtr js_wtr = new Js_wtr();
 	public Gxw_html_server(Gfo_usr_dlg usr_dlg, Xosrv_socket_wtr wtr) {
 		this.usr_dlg = usr_dlg; this.wtr = wtr;			
 	} 
@@ -36,6 +36,7 @@ public class Gxw_html_server implements Gxw_html {
 	public boolean			Html_js_eval_proc_as_bool(String name, Object... args)	{return Exec_as_bool(js_wtr.Write_statement_return_func(name, args).To_str_and_clear());}
 	public String		Html_js_eval_script(String script) {return Exec_as_str(script);}
 	public void			Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {}
+	public String		Html_js_send_json(String name, String data) {throw Err_.new_unimplemented();}
 	public void			Html_invk_src_(GfoEvObj v) {}
 	public GxwCore_base	Core() {throw Err_.new_unimplemented();}
 	public GxwCbkHost	Host() {throw Err_.new_unimplemented();} public void Host_set(GxwCbkHost host) {throw Err_.new_unimplemented();}

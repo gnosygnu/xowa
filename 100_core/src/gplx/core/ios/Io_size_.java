@@ -37,6 +37,60 @@ public class Io_size_ {
 		String[] unit = Io_size_.Units[exp_1024];
 		return val_as_decimal.To_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, unit_pad);
 	}
+	public static String To_str_new(Bry_bfr bfr, long val, int decimal_places) {To_bfr_new(bfr, val, decimal_places); return bfr.To_str_and_clear();}
+	public static void To_bfr_new(Bry_bfr bfr, long val, int decimal_places) {
+		// init
+		int unit_idx = 0;
+		int mult = 1024;
+		long cur_val = val;
+		long cur_exp = 1;
+		long nxt_exp = mult;
+
+		// get 1024 mult; EX: 1549 -> 1024
+		for (unit_idx = 0; unit_idx < 6; ++unit_idx) {
+			if (cur_val < nxt_exp) break;
+			cur_exp = nxt_exp;
+			nxt_exp *= mult;
+		}
+
+		// calc integer / decimal values
+		int int_val = (int)(val / cur_exp);
+		int dec_val = (int)(val % cur_exp);
+		if (decimal_places == 0) {	// if 0 decimal places, round up
+			if (dec_val >= .5) ++int_val;
+			dec_val = 0;
+		}
+		else {// else, calculate decimal value as integer; EX: 549 -> .512 -> 512
+			long dec_factor = 0;
+			switch (decimal_places) {
+				case 1: dec_factor =   10; break;
+				case 2: dec_factor =  100; break;
+				default:
+				case 3: dec_factor = 1000; break;
+			}
+			dec_val = (int)((dec_val * dec_factor) / cur_exp);
+		}
+
+		// calc unit_str
+		String unit_str = "";
+		switch (unit_idx) {
+			case 0:		unit_str = " B";  break;
+			case 1:		unit_str = " KB"; break;
+			case 2:		unit_str = " MB"; break;
+			case 3:		unit_str = " GB"; break;
+			case 4:		unit_str = " PB"; break;
+			case 5: 
+			default:	unit_str = " EB"; break;
+		}
+
+		// build String
+		bfr.Add_long_variable(int_val);
+		if (decimal_places > 0 && unit_idx != 0) {
+			bfr.Add_byte_dot();
+			bfr.Add_long_variable(dec_val);
+		}
+		bfr.Add_str_a7(unit_str);
+	}
 	public static long parse_or(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
 		String[] terms = String_.Split(raw, " ");
