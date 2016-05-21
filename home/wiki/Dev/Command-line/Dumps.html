@@ -400,8 +400,21 @@ app.bldr.cmds {
     // namespaces to parse. See en.wikipedia.org/wiki/Help:Namespaces
     ns_ids = '0|4|14';
 
-    // enable generation of ".html" databases. This is experimental and will increase processing time by 20% - 25%
-    // gen_hdump = 'y';
+
+    // enable generation of ".html" databases. This will increase processing time by 20% - 25%
+    hdump_bldr {
+      // generate html databases
+      enabled = 'y';
+
+      // compression method for html: 1=none; 2=zip; 3=gz; 4=bz2
+      zip_tid = 3;
+
+      // enable additional custom compression
+      hzip_enabled = 'y';
+
+      // perform extra validation step of custom compression
+      hzip_diff = 'y';
+    }
   }
   
   // aggregate the lnkis
