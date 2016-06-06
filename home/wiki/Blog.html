@@ -25,23 +25,26 @@
       </p>
       <ul>
         <li>
-          <b>2016-05</b>
+          <b>2016-06</b>
         </li>
         <li>
-          <a href="http://xowa.org/home/wiki/Blog/2016-04.html" id="xolnki_3" title="Blog/2016-04" class="xowa-visited">2016-04</a>
+          <a href="http://xowa.org/home/wiki/Blog/2016-05.html" id="xolnki_3" title="Blog/2016-05" class="xowa-visited">2016-05</a>
         </li>
         <li>
-          <a href="http://xowa.org/home/wiki/Blog/2016-03.html" id="xolnki_4" title="Blog/2016-03" class="xowa-visited">2016-03</a>
+          <a href="http://xowa.org/home/wiki/Blog/2016-04.html" id="xolnki_4" title="Blog/2016-04">2016-04</a>
         </li>
         <li>
-          <a href="http://xowa.org/home/wiki/Blog/2016-02.html" id="xolnki_5" title="Blog/2016-02" class="xowa-visited">2016-02</a>
+          <a href="http://xowa.org/home/wiki/Blog/2016-03.html" id="xolnki_5" title="Blog/2016-03">2016-03</a>
         </li>
         <li>
-          <a href="http://xowa.org/home/wiki/Blog/2016-01.html" id="xolnki_6" title="Blog/2016-01" class="xowa-visited">2016-01</a>
+          <a href="http://xowa.org/home/wiki/Blog/2016-02.html" id="xolnki_6" title="Blog/2016-02">2016-02</a>
+        </li>
+        <li>
+          <a href="http://xowa.org/home/wiki/Blog/2016-01.html" id="xolnki_7" title="Blog/2016-01">2016-01</a>
         </li>
       </ul>
       <p>
-        <a href="http://xowa.org/home/wiki/Blog/Archives.html" id="xolnki_7" title="Blog/Archives">Archives</a>
+        <a href="http://xowa.org/home/wiki/Blog/Archives.html" id="xolnki_8" title="Blog/Archives">Archives</a>
       </p>
     </div>
     <div id="toc" class="toc">
@@ -52,251 +55,18 @@
       </div>
       <ul>
         <li class="toclevel-1 tocsection-1">
-          <a href="#Dev:_Handling_the_1_MB_limit_for_SQLite_on_Android_.282016-05-30_21:15_Mon.29"><span class="tocnumber">1</span> <span class="toctext">Dev: Handling the 1 MB limit for SQLite on Android (2016-05-30 21:15 Mon)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#Release:_NONE_.282016-05-29_20:00_Sun.29"><span class="tocnumber">2</span> <span class="toctext">Release: NONE (2016-05-29 20:00 Sun)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-3">
-          <a href="#Release:_NONE_.282016-05-24_11:00_Tue.29"><span class="tocnumber">3</span> <span class="toctext">Release: NONE (2016-05-24 11:00 Tue)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-4">
-          <a href="#Release:_NONE_.282016-05-22_20:00_Sun.29"><span class="tocnumber">4</span> <span class="toctext">Release: NONE (2016-05-22 20:00 Sun)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-5">
-          <a href="#Release:_NONE_.282016-05-15_19:45_Sun.29"><span class="tocnumber">5</span> <span class="toctext">Release: NONE (2016-05-15 19:45 Sun)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-6">
-          <a href="#Release:_NONE_.282016-05-08_19:45_Sun.29"><span class="tocnumber">6</span> <span class="toctext">Release: NONE (2016-05-08 19:45 Sun)</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-7">
-          <a href="#Release:_v3.5.1.1_.282016-05-01_20:25_Sun.29"><span class="tocnumber">7</span> <span class="toctext">Release: v3.5.1.1 (2016-05-01 20:25 Sun)</span></a> 
-          <ul>
-            <li class="toclevel-2 tocsection-8">
-              <a href="#.28Desktop.29_Minor_parser_fixes_for_English_Wiktionary"><span class="tocnumber">7.1</span> <span class="toctext">(Desktop) Minor parser fixes for English Wiktionary</span></a>
-            </li>
-            <li class="toclevel-2 tocsection-9">
-              <a href="#Next_release:_v3.5.2"><span class="tocnumber">7.2</span> <span class="toctext">Next release: v3.5.2</span></a>
-            </li>
-          </ul>
+          <a href="#Release:_NONE_.282016-06-05_22:00_Sun.29"><span class="tocnumber">1</span> <span class="toctext">Release: NONE (2016-06-05 22:00 Sun)</span></a>
         </li>
       </ul>
     </div>
     <h2>
-      <span class="mw-headline" id="Dev:_Handling_the_1_MB_limit_for_SQLite_on_Android_.282016-05-30_21:15_Mon.29">Dev: Handling the 1 MB limit for SQLite on Android (2016-05-30 21:15 Mon)</span>
+      <span class="mw-headline" id="Release:_NONE_.282016-06-05_22:00_Sun.29">Release: NONE (2016-06-05 22:00 Sun)</span>
     </h2>
     <p>
-      I rediscovered an unintuitive bug today, and decided to take some time to document it.
+      There's no release again this week. I've been bogged down in Android SQLite optimizations for the wiki downloader. I'm going to release something next week as I'd like to get back to regular releases.
     </p>
     <p>
-      XOWA stores all its data in SQLite databases, including images and html. Image sizes can range from a few KB to hundreds of MB. Note that storing these large images in the database works with SQLite on all three major desktop platforms: Linux, Windows, and Mac OS X.
-    </p>
-    <p>
-      However, SQLite on Android has a 1 MB limit for row data in a SELECT. If a row has more than 1 MB, then reading from the cursor will fail with an error like <code>IllegalStateException: Couldn't read row 0, col 0 from CursorWindow. Make sure the Cursor is initialize before accessing data from it.</code>
-    </p>
-    <p>
-      For example, consider the following setup:
-    </p>
-    <ul>
-      <li>
-        You have a database with a table defined like this:
-      </li>
-    </ul>
-    <div class="mw-highlight">
-<pre style="overflow:auto">
-CREATE TABLE blob_table
-( blob_id      INTEGER
-, blob_column  BLOB
-)
-</pre>
-    </div>
-    <ul>
-      <li>
-        You insert two rows: the first with 2 bytes of data and the second with 2 MB of data.
-      </li>
-    </ul>
-    <div class="mw-highlight">
-<pre style="overflow:auto">
-INSERT INTO blob_table (blob_id, blob_column) VALUES (0, '01');
-INSERT INTO blob_table (blob_id, blob_column) VALUES (1, '0123456789...'); -- ... represents remaining 2 MB of data
-</pre>
-    </div>
-    <ul>
-      <li>
-        You then run code to retrieve both rows
-      </li>
-    </ul>
-    <div class="mw-highlight">
-<pre style="overflow:auto">
-  SQLiteDatabase db = SQLiteDatabase.openDatabase("/Android/data/org.xowa/files/blob_database.sqlite", null, SQLiteDatabase.OPEN_READONLY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-  Cursor cursor = db.query("blob_table", new String[] {"blob_id", "blob_column"}, null, null, null, null, null, null);
-  cursor.moveToFirst();
-
-  // this line succeeds as blob_id + blob_column has a length of 6 bytes
-  int row_0_id = cursor.getInt(0);
-
-  cursor.moveToNext();
-
-  // this line fails b/c blob_id + blob_column has a total length &gt; 1 MB; note that it fails, even though just the INTEGER is being requested, not the BLOB.
-  int row_1_id = cursor.getInt(0);
-</pre>
-    </div>
-    <p>
-      I believe this is because the transaction buffer is limited to 1 MB.<sup id="cite_ref-blob__android_docs_0-0" class="reference"><a href="#cite_note-blob__android_docs-0">[1]</a></sup> The official recommendation is not to store 1 MB BLOBs in the database. Instead, the BLOB should be stored on the filesystem, and only the BLOB's url should be stored in the database. This appears to be the recommendation of SQLite<sup id="cite_ref-blob__sqlite_guidelines_1-0" class="reference"><a href="#cite_note-blob__sqlite_guidelines-1">[2]</a></sup> as well as the general sentiment of most commenters on stackoverflow<sup id="cite_ref-blob__stackoverflow_sentiment_2-0" class="reference"><a href="#cite_note-blob__stackoverflow_sentiment-2">[3]</a></sup>. Note that SQLite defines the threshold for large BLOB as 100 KB.
-    </p>
-    <p>
-      To a certain extent, I understand why this is the recommendation:
-    </p>
-    <ul>
-      <li>
-        <b>Resource constraints</b>: An Android device may have limited memory, and there is a risk in devouring untold MB.
-      </li>
-      <li>
-        <b>BLOBs are not relational data</b>: Databases are for storing and querying relational data. You can't do any type of meaningful queries with BLOBs except for SELECTs
-      </li>
-      <li>
-        <b>Efficiency</b>: Filesystem storage will be more efficient for storing these large BLOBs. Databases pages will just intervene another layer on top of filesystem pages.
-      </li>
-    </ul>
-    <p>
-      Personally though, I disagree with this recommendation:
-    </p>
-    <ul>
-      <li>
-        <b>Unnecessary restriction</b>: There is no restriction to allocating a byte array of 2 MB (<code>byte[] array = new byte[2000000]</code>). Or adding 2 million objects to a list. Why should there be a similar one for retrieving SQLite data?
-      </li>
-      <li>
-        <b>BLOBs are data</b>: A good deal of database code is just "get me the data for this ID". It shouldn't matter if the data is less than 1 MB or greater than 1 MB. Especially in the SQLite world, where there isn't even a concept of field lengths for strings (<code>varchar(1)</code> is the same as <code>varchar(10000)</code>)
-      </li>
-      <li>
-        <b>Distribution complication</b>: XOWA distributes English Wikipedia as 80 database files. Storing these images as separate files would balloon the distribution to several thousand files.
-      </li>
-    </ul>
-    <p>
-      At this point, there seem to be three options to work around the 1 MB limit:
-    </p>
-    <ol>
-      <li>
-        <b>Access SQLite directly via C language</b>: This is complicated and not really something I want to try now.
-      </li>
-      <li>
-        <b>Use <a href="https://bitbucket.org/almworks/sqlite4java" rel="nofollow" class="external text">sqlite4java</a> which supports large BLOBs</b>: This is the same as number (1), but the work has already been done by another. Although this is promising, I'm not prepared to replace the existing SQlite bridge in XOWA: <a href="https://github.com/xerial/sqlite-jdbc" rel="nofollow" class="external text">Xerial SQLite JDBC</a>
-      </li>
-      <li>
-        <b>Get the length of the blob data and read the BLOB in 1 MB increments</b>: This basically requires 3+ SELECTs. 
-        <ol>
-          <li>
-            <b>SELECT length of the blob</b>: <code>SELECT blob_id, length(blob_column) FROM blob_table WHERE blob_id = 0</code>
-          </li>
-          <li>
-            <b>SELECT the 1st MB of the blob</b>: <code>SELECT substr(blob_column, 1, 1000000) FROM blob_table WHERE blob_id = 0</code>
-          </li>
-          <li>
-            <b>SELECT the 2nd MB of the blob</b>: <code>SELECT substr(blob_column, 1000001, 1000000) FROM blob_table WHERE blob_id = 0</code>
-          </li>
-          <li>
-            <b>Keep SELECTing until all data is read</b>: Note that the last SELECT needs to <code>substr</code> the exact remainder of the blob. For example, a BLOB of 2.3 MB should have a final select of 300 KB: <code>SELECT substr(blob_column, 2000001, 300000) FROM blob_table WHERE blob_id = 0</code>
-          </li>
-        </ol>
-      </li>
-    </ol>
-    <p>
-      For now, I went with option #3, as it is the easiest to implement. It is slower, but fortunately BLOBs &gt; 1 MB are far and few between.
-    </p>
-    <hr>
-    <p>
-      <b>References</b>
-    </p>
-    <ol class="references">
-      <li id="cite_note-blob__android_docs-0">
-        <span class="mw-cite-backlink"><a href="#cite_ref-blob__android_docs_0-0">^</a></span> <span class="reference-text"><a href="https://developer.android.com/reference/android/os/TransactionTooLargeException.html" rel="nofollow" class="external free">https://developer.android.com/reference/android/os/TransactionTooLargeException.html</a></span>
-<pre>
-<span class="reference-text">The Binder transaction buffer has a limited fixed size, currently 1Mb, which is shared by all transactions in progress for the process.</span>
-</pre>
-      </li>
-      <li id="cite_note-blob__sqlite_guidelines-1">
-        <span class="mw-cite-backlink"><a href="#cite_ref-blob__sqlite_guidelines_1-0">^</a></span> <span class="reference-text"><a href="http://www.sqlite.org/intern-v-extern-blob.html" rel="nofollow" class="external free">http://www.sqlite.org/intern-v-extern-blob.html</a></span>
-<pre>
-<span class="reference-text">For BLOBs smaller than 100KB, reads are faster when the BLOBs are stored directly in the database file. For BLOBs larger than 100KB, reads from a separate file are faster. </span>
-</pre>
-      </li>
-      <li id="cite_note-blob__stackoverflow_sentiment-2">
-        <span class="mw-cite-backlink"><a href="#cite_ref-blob__stackoverflow_sentiment_2-0">^</a></span> 
-        <ul>
-          <li>
-            <span class="reference-text"><a href="http://stackoverflow.com/questions/5406429/cursor-size-limit-in-android-sqlitedatabase" rel="nofollow" class="external free">http://stackoverflow.com/questions/5406429/cursor-size-limit-in-android-sqlitedatabase</a></span>
-          </li>
-          <li>
-            <span class="reference-text"><a href="http://stackoverflow.com/questions/12716859/retrieve-large-blob-from-android-sqlite-database" rel="nofollow" class="external free">http://stackoverflow.com/questions/12716859/retrieve-large-blob-from-android-sqlite-database</a></span>
-          </li>
-          <li>
-            <span class="reference-text"><a href="http://stackoverflow.com/questions/17300407/access-large-blob-in-android-sqlite-without-cursor" rel="nofollow" class="external free">http://stackoverflow.com/questions/17300407/access-large-blob-in-android-sqlite-without-cursor</a></span>
-          </li>
-        </ul>
-      </li>
-    </ol>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-05-29_20:00_Sun.29">Release: NONE (2016-05-29 20:00 Sun)</span>
-    </h2>
-    <p>
-      This week is also a no show for releases. I'm planning to make a release next week to handle a few parser issues. I'm also going to try to have the desktop app start reading the HTML databases.
-    </p>
-    <p>
-      As I'm still working on the wiki downloader, image dumps outside of English Wikipedia will be on hold for a while. If you want a copy, please drop me an email, or post an issue.
-    </p>
-    <p>
-      Thanks.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-05-24_11:00_Tue.29">Release: NONE (2016-05-24 11:00 Tue)</span>
-    </h2>
-    <p>
-      The 2016-05 English Wikipedia HTML dumps for Android are up. See <a href="https://archive.org/details/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/details/Xowa_enwiki_latest</a>
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-05-22_20:00_Sun.29">Release: NONE (2016-05-22 20:00 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release again. I had to overhaul some of the internals of the downloader which cost me a couple of days. I'm not sure if I can get it ready for next week, so it may be a June release.
-    </p>
-    <p>
-      I did upload the images for English Wikipedia: <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-05-01_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-05-01_file_v2b.7z</a> . I started uploading the Android html version, but ran into an issue with archive.org. You can start downloading the 2016-05 html files now: <a href="https://archive.org/download/Xowa_enwiki_latest" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest</a> . I'll upload the rest during the week.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-05-15_19:45_Sun.29">Release: NONE (2016-05-15 19:45 Sun)</span>
-    </h2>
-    <p>
-      This week is another skipped release, as the work continues on the wiki download page. In the meantime, I'm generating 2016-May English Wikipedia and will have them uploaded this week.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_NONE_.282016-05-08_19:45_Sun.29">Release: NONE (2016-05-08 19:45 Sun)</span>
-    </h2>
-    <p>
-      I'm skipping the release this week as I'm still working on the wiki download tool. Hopefully it will make it into the beta next weekend.
-    </p>
-    <h2>
-      <span class="mw-headline" id="Release:_v3.5.1.1_.282016-05-01_20:25_Sun.29">Release: v3.5.1.1 (2016-05-01 20:25 Sun)</span>
-    </h2>
-    <p>
-      The desktop app is a trivial release. It has a few minor parser fixes, primarily for English Wiktionary.
-    </p>
-    <p>
-      The Android app has no release.
-    </p>
-    <h3>
-      <span class="mw-headline" id=".28Desktop.29_Minor_parser_fixes_for_English_Wiktionary">(Desktop) Minor parser fixes for English Wiktionary</span>
-    </h3>
-    <p>
-      There are several minor parser fixes for English Wiktionary. The most major item is a simple implementation for {{categorytree}} which will show a link to the Category page, but not do the Javascript tree expansion.
-    </p>
-    <h3>
-      <span class="mw-headline" id="Next_release:_v3.5.2">Next release: v3.5.2</span>
-    </h3>
-    <p>
-      I'm still working on the wiki update tool. My goal is to have it for Android v3.5.2. Once that is done, I'll upload the next batch of wikis after it (English / French).
-    </p>
-    <p>
-      Also, on a related note, the English Wikipedia dumps for 2016-04-07 are done. Many thanks to Ariel Glenn for fixing the issue: <a href="https://lists.wikimedia.org/pipermail/xmldatadumps-l/2016-April/001301.html" rel="nofollow" class="external free">https://lists.wikimedia.org/pipermail/xmldatadumps-l/2016-April/001301.html</a> . I'm processing them now, and will try to post them this week.
+      English Wikipedia is building now, so hopefully I'll have that ready for next week.
     </p>
   
     </div>
