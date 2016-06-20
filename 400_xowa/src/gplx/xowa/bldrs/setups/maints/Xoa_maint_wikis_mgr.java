@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-public class Xoa_maint_wikis_mgr implements GfoInvkAble {
+public class Xoa_maint_wikis_mgr implements Gfo_invk {
 	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_maint_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public int Len() {return hash.Count();}
@@ -41,7 +41,7 @@ public class Xoa_maint_wikis_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_len))		return this.Len();
 		else if	(ctx.Match(k, Invk_get_at))		return this.Get_at(m.ReadInt("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 //			return this;
 	}	private static final String Invk_len = "len", Invk_get_at = "get_at";
 }

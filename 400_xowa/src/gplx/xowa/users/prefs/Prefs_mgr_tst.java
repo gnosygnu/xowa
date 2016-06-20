@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import org.junit.*;
-import gplx.gfui.*; import gplx.xowa.apps.gfs.*; import gplx.langs.gfs.*;
+import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.apps.gfs.*; import gplx.langs.gfs.*;
 import gplx.xowa.guis.views.*;
 public class Prefs_mgr_tst {
 	private Prefs_mgr_fxt fxt = new Prefs_mgr_fxt();
@@ -143,7 +143,7 @@ class Prefs_mgr_fxt {
 	}
 	public Xop_fxt Parser_fxt() {return new Xop_fxt(app, app.Usere().Wiki());}
 	public Prefs_mgr_fxt Init_elem_atr_val(String elem_id, String atr_val) {
-		html_box.Html_elem_atr_add(elem_id, gplx.gfui.Gfui_html.Atr_value, atr_val);
+		html_box.Html_elem_atr_add(elem_id, Gfui_html.Atr_value, atr_val);
 		return this;
 	}
 	public Prefs_mgr_fxt Init_elem_atr_checked(String elem_id, String v) {
@@ -151,7 +151,7 @@ class Prefs_mgr_fxt {
 		return this;
 	}
 	public Prefs_mgr_fxt Init_elem_atr_innerHtml(String elem_id, String v) {
-		html_box.Html_elem_atr_add(elem_id, gplx.gfui.Gfui_html.Atr_innerHTML, v);
+		html_box.Html_elem_atr_add(elem_id, Gfui_html.Atr_innerHTML, v);
 		return this;
 	}
 	public Prefs_mgr_fxt Exec_get(String src_str, String expd) {
@@ -173,7 +173,7 @@ class Prefs_mgr_fxt {
 		Tfds.Eq(expd, actl);
 	}
 }
-class Gfui_html_mok extends Xog_html_itm {	private Hash_adp elem_atrs = Hash_adp_.new_();
+class Gfui_html_mok extends Xog_html_itm {	private Hash_adp elem_atrs = Hash_adp_.New();
 	public void Html_elem_atr_add(String elem_id, String atr_key, Object atr_val) {elem_atrs.Add_if_dupe_use_nth(elem_id + "." + atr_key, atr_val);}
 	@Override public String	Html_elem_atr_get_str(String id, String atr_key) {
 		return (String)elem_atrs.Get_by(id + "." + atr_key);

@@ -48,7 +48,7 @@ class Io_sort_fxt {
 		Tfds.Eq_ary_str(String_.SplitLines_nl(sorted), String_.SplitLines_nl(actl));
 	}
 	public String GenRandom(int rows, int pad) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < rows; i++)
 			list.Add(Int_.To_str_pad_bgn_zero(i, pad) + "|");
 		list.Shuffle();

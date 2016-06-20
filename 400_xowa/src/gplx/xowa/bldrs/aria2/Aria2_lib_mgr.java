@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.aria2; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.envs.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.bldrs.wms.dumps.*;
-public class Aria2_lib_mgr implements GfoInvkAble {
+public class Aria2_lib_mgr implements Gfo_invk {
 	public Process_adp Lib() {return lib;} private Process_adp lib = new Process_adp();
 	public void Init_by_app(Xoae_app app) {
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
@@ -27,7 +27,7 @@ public class Aria2_lib_mgr implements GfoInvkAble {
 		, Lib_args_fmt
 		, "wiki_abrv", "wiki_date", "wiki_type");
 	}
-	// private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	// private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Exec(Xowm_dump_file dump_file) {			
 		// byte[] args_bry = lib.Args_fmtr().Bld_bry_many(tmp_bfr, dump_file.Wiki_alias(), dump_file.Dump_date(), dump_file.Dump_file_type());
 		// Process_adp process = new Process_adp().Exe_url_(lib.Exe_url()).Args_str_(String_.new_u8(args_bry));
@@ -35,10 +35,10 @@ public class Aria2_lib_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_lib))				return lib;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
-	private static final String Invk_lib = "lib";
-	private static final String Lib_args_fmt = String_.Concat
+	private static final    String Invk_lib = "lib";
+	private static final    String Lib_args_fmt = String_.Concat
 	( "--max-connection-per-server=2"
 	, " --max-concurrent-downloads=20"
 	, " --split=4"

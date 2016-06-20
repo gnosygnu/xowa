@@ -16,15 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.caches.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.caches.*; import gplx.xowa.files.fsdb.*;
 import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
-	private final Xof_bin_wkr_ids tmp_ids = new Xof_bin_wkr_ids();
+	private final    Xof_bin_wkr_ids tmp_ids = new Xof_bin_wkr_ids();
 	private Xof_bin_skip_mgr skip_mgr;
 	Xof_bin_wkr__fsdb_sql(Fsm_mnt_mgr mnt_mgr) {this.mnt_mgr = mnt_mgr;}
 	public byte Tid() {return Xof_bin_wkr_.Tid_fsdb_xowa;}
 	public String Key() {return Xof_bin_wkr_.Key_fsdb_wiki;}
-	public Fsm_mnt_mgr Mnt_mgr() {return mnt_mgr;} private final Fsm_mnt_mgr mnt_mgr;
+	public Fsm_mnt_mgr Mnt_mgr() {return mnt_mgr;} private final    Fsm_mnt_mgr mnt_mgr;
 	public boolean Resize_allowed() {return bin_wkr_resize;} public void Resize_allowed_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = false;		
 	public Xof_bin_skip_mgr Skip_mgr() {return skip_mgr;}
 	public void Skip_mgr_init(Fsm_cfg_mgr cfg_mgr, String[] wkrs) {this.skip_mgr = new Xof_bin_skip_mgr(cfg_mgr, wkrs);}

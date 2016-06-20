@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
-public interface Gfo_thread_cmd extends GfoInvkAble {
+public interface Gfo_thread_cmd extends Gfo_invk {
 	void Cmd_ctor();
 	String Async_key();
 	int Async_sleep_interval();

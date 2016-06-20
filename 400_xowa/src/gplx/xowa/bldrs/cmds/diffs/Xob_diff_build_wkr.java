@@ -28,7 +28,7 @@ class Xob_diff_build_wkr {
 		this.wiki = wiki;
 		wiki.Init_by_wiki();
 		Bry_fmt url_fmt = Bry_fmt.New("").Args_(New_url_args(wiki, tbl_mapr.Name));
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		old_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.N, old_url);
 		new_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.N, new_url);
 		dif_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.Y, dif_url);
@@ -45,10 +45,10 @@ class Xob_diff_build_wkr {
 		dif_wkr.Init_conn(dif_db, 1000);
 		dif_bldr.Init(dif_wkr);
 		// wiki.Data__core_mgr().Db__core().Conn().Conn_info();
-		Xowd_db_file[] db_files = wiki.Data__core_mgr().Db__core().Tbl__db().Select_all(wiki.Data__core_mgr().Props(), Io_url_.Empty);
-		int db_files_len = db_files.length;
+		Xow_db_file[] db_file_ary = wiki.Data__core_mgr().Db__core().Tbl__db().Select_all(wiki.Data__core_mgr().Props(), Io_url_.Empty);
+		int db_files_len = db_file_ary.length;
 		for (int i = 0; i < db_files_len; ++i) {
-			Xowd_db_file db_file = db_files[i];
+			Xow_db_file db_file = db_file_ary[i];
 			if (tbl_mapr.Db_ids__has(db_file.Tid()))
 				Compare(ctx);
 		}

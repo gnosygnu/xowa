@@ -17,21 +17,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
-public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
+public class Xoapi_search implements Gfo_invk, Gfo_evt_mgr_owner {
 	private final    Xow_domain_crt_kv_itm_mgr multi_wikis_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_wikis_bry = Dflt_multi_wikis_bry;
 	private final    Xow_domain_crt_kv_itm_mgr multi_sorts_mgr = new Xow_domain_crt_kv_itm_mgr(); private byte[] multi_sorts_bry = Dflt_multi_sorts_bry;
 	public Xoapi_search() {
-		this.evMgr = GfoEvMgr.new_(this);
+		this.evt_mgr = new Gfo_evt_mgr(this);
 		multi_wikis_mgr.Parse_as_itms(multi_wikis_bry);
 		multi_sorts_mgr.Parse_as_arys(multi_sorts_bry);
 	}
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public int			Results_per_page()			{return results_per_page;}		private int results_per_page = 100;
 	public boolean			Async_db()					{return async_db;}				private boolean async_db = true;
 	public void Multi_wikis_bry_(byte[] v) {
 		if (!multi_wikis_mgr.Parse_as_itms(v)) return;
 		this.multi_wikis_bry = v;
-		GfoEvMgr_.PubVal(this, Evt_multi_wikis_changed, v);
+		Gfo_evt_mgr_.Pub_val(this, Evt_multi_wikis_changed, v);
 	}
 	public Xow_domain_crt_itm Multi_wikis_crt(Xow_domain_itm cur_domain) {
 		return multi_wikis_mgr.Find_itm(cur_domain, cur_domain);
@@ -39,7 +39,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 	public void Multi_sorts_bry_(byte[] v) {
 		if (!multi_sorts_mgr.Parse_as_arys(v)) return;
 		this.multi_sorts_bry = v;
-		GfoEvMgr_.PubVal(this, Evt_multi_sorts_changed, v);
+		Gfo_evt_mgr_.Pub_val(this, Evt_multi_sorts_changed, v);
 	}
 	public Xow_domain_crt_itm[] Multi_sorts_crt(Xow_domain_itm cur_domain) {
 		return multi_sorts_mgr.Find_ary(cur_domain, cur_domain);
@@ -53,7 +53,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_multi_wikis_)) 							Multi_wikis_bry_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_multi_sorts)) 							return String_.new_u8(multi_sorts_bry);
 		else if	(ctx.Match(k, Invk_multi_sorts_)) 							Multi_sorts_bry_(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

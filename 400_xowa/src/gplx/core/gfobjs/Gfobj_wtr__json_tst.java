@@ -58,7 +58,7 @@ public class Gfobj_wtr__json_tst {
 		fxt.Test__write
 		( fxt.Make__nde
 		(   fxt.Make__fld_str		("k1", "v1")
-		,   fxt.Make__fld_ary_str	("k2", "a1", "a2", "a3")
+		,   fxt.Make__fld_ary		("k2", "a1", "a2", "a3")
 		,   fxt.Make__fld_int		("k3", 3)
 		)
 		, "{ 'k1':'v1'"
@@ -76,7 +76,7 @@ public class Gfobj_wtr__json_tst {
 		fxt.Test__write
 		( fxt.Make__nde
 		(   fxt.Make__fld_str		("k1", "v1")
-		,   fxt.Make__fld_ary_int	("k2", 1, 2, 3)
+		,   fxt.Make__fld_ary		("k2", 1, 2, 3)
 		,   fxt.Make__fld_int		("k3", 3)
 		)
 		, "{ 'k1':'v1'"
@@ -94,7 +94,7 @@ public class Gfobj_wtr__json_tst {
 		fxt.Test__write
 		( fxt.Make__nde
 		(   fxt.Make__fld_str		("k1", "v1")
-		,   fxt.Make__fld_ary_nde	("k2"
+		,   fxt.Make__fld_ary		("k2"
 		,     fxt.Make__nde			(fxt.Make__fld_str("k21", "v21"))
 		,     fxt.Make__nde			(fxt.Make__fld_str("k22", "v22"))
 		)
@@ -118,9 +118,9 @@ public class Gfobj_wtr__json_tst {
 		fxt.Test__write
 		( fxt.Make__nde
 		(   fxt.Make__fld_str		("k1", "v1")
-		,   fxt.Make__fld_ary_ary	("k2"
-		,     fxt.Make__ary_int		(1, 2, 3)
-		,     fxt.Make__ary_int		(4, 5, 6)
+		,   fxt.Make__fld_ary		("k2"
+		,     fxt.Make__ary			(1, 2, 3)
+		,     fxt.Make__ary			(4, 5, 6)
 		)
 		,   fxt.Make__fld_int		("k3", 3)
 		)
@@ -144,7 +144,7 @@ public class Gfobj_wtr__json_tst {
 	}
 	@Test 	public void Root_ary() {
 		fxt.Test__write
-		( fxt.Make__ary_int(1, 2, 3)			
+		( fxt.Make__ary(1, 2, 3)
 		, "[ 1"
 		, ", 2"
 		, ", 3"

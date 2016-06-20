@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.files.fsdb.*;
 public interface Xof_bin_wkr {
 	byte			Tid();

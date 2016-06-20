@@ -131,7 +131,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean FetchLanguageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);
-		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages;
+		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO_OLD: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages;
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code);
 		return rslt.Init_obj(lang_itm == null ? String_.Empty : String_.new_u8(lang_itm.Canonical_name()));
 	}

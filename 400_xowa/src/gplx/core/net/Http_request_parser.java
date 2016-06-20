@@ -22,7 +22,7 @@ public class Http_request_parser {
 	private int type, content_length;
 	private byte[] url, protocol, host, user_agent, accept, accept_language, accept_encoding, x_requested_with, cookie, referer, content_type, content_type_boundary, connection, pragma, cache_control, origin;
 	private Http_post_data_hash post_data_hash;
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private final    Http_server_wtr server_wtr; private final    boolean log;
 	public Http_request_parser(Http_server_wtr server_wtr, boolean log) {this.server_wtr = server_wtr; this.log = log;}
 	public void Clear() {

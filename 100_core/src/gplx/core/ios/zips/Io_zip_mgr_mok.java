@@ -31,7 +31,6 @@ public class Io_zip_mgr_mok implements Io_zip_mgr {
 		return Bry_.Mid(section, Bry_zipped.length, section.length);
 	}
 	public void Unzip_to_dir(Io_url src_fil, Io_url trg_dir) {}
-	public void Unzip_to_dir_prog(Io_zip_decompress_task task, Io_url src_fil, Io_url trg_dir) {}
 	private static final    byte[] Bry_zipped = Bry_.new_a7("zipped:");
 	public static final    Io_zip_mgr_mok Instance = new Io_zip_mgr_mok(); Io_zip_mgr_mok() {}
 }

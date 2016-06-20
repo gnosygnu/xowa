@@ -25,7 +25,7 @@ public abstract class Xogv_tab_base {
 	private Xoav_wiki_mgr wiki_mgr;
 	private Gfo_thread_pool thread_pool;
 	public void Ctor(Xoav_wiki_mgr wiki_mgr, Gfo_thread_pool thread_pool, Gfo_url_parser url_parser) {this.wiki_mgr = wiki_mgr; this.thread_pool = thread_pool; this.url_parser = url_parser;}
-	public Xog_history_stack History_stack()		{return history_stack;} private final Xog_history_stack history_stack = new Xog_history_stack(); 
+	public Xog_history_stack History_stack()		{return history_stack;} private final    Xog_history_stack history_stack = new Xog_history_stack(); 
 	public Xog_history_itm Cur_itm()				{return history_stack.Cur_itm();}
 	public Xow_wiki Get_wiki_or_null(byte[] key)	{return wiki_mgr.Get_by_or_null(key);}
 	public Xoh_page Go_to(byte[] page)				{return Go_to(history_stack.Cur_itm().Wiki(), page, Bry_.Empty, Bry_.Empty, false, "");}
@@ -50,7 +50,7 @@ public abstract class Xogv_tab_base {
 		if (new_itm == Xog_history_itm.Null) return new Xoh_page().Exists_n_();
 		Fetch_page__bgn(new_itm.Wiki(), new_itm.Page(), new_itm.Qarg());
 		Xoh_page new_hpg = new Xoh_page();
-		// Thread_adp_.invk_(Xogv_page_load_wkr.Thread_name, new Xogv_page_load_wkr(wiki_mgr, url_parser, this, old_itm, new_itm), Xogv_page_load_wkr.Invk_exec).Start();
+		// Thread_adp_.Start_by_key(Xogv_page_load_wkr.Thread_name, new Xogv_page_load_wkr(wiki_mgr, url_parser, this, old_itm, new_itm), Xogv_page_load_wkr.Invk_exec);
 		thread_pool.Add_at_end(new Xogv_page_load_wkr(wiki_mgr, url_parser, this, old_itm, new_itm));
 		thread_pool.Run();
 		return new_hpg;

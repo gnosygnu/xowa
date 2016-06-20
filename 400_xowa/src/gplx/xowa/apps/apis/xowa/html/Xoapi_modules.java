@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.apps.apis.xowa.html.modules.*;
-public class Xoapi_modules implements GfoInvkAble {
+public class Xoapi_modules implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 		popups.Init_by_app(app);
 	}
@@ -30,7 +30,7 @@ public class Xoapi_modules implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_navframe))	 			return navframe;
 		else if	(ctx.Match(k, Invk_toc))	 				return toc;
 		else if	(ctx.Match(k, Invk_popups))	 				return popups;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_collapsible = "collapsible", Invk_navframe = "navframe", Invk_toc = "toc", Invk_popups = "popups";
 }

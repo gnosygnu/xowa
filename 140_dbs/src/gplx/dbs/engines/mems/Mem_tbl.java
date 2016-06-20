@@ -19,11 +19,11 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 import gplx.dbs.metas.*;
 public class Mem_tbl {
-	private final List_adp where_rows = List_adp_.new_();
-	private final Hash_adp autonum_hash = Hash_adp_.new_();		
+	private final    List_adp where_rows = List_adp_.New();
+	private final    Hash_adp autonum_hash = Hash_adp_.New();		
 	public Mem_tbl(Dbmeta_tbl_itm meta) {this.meta = meta;}
-	public Dbmeta_tbl_itm Meta() {return meta;} private final Dbmeta_tbl_itm meta;
-	public final List_adp rows = List_adp_.new_(); 
+	public Dbmeta_tbl_itm Meta() {return meta;} private final    Dbmeta_tbl_itm meta;
+	public final    List_adp rows = List_adp_.New(); 
 	public int Insert(Mem_stmt stmt) {
 		Mem_row itm = new Mem_row();
 		Dbmeta_fld_mgr flds = meta.Flds();
@@ -41,7 +41,7 @@ public class Mem_tbl {
 	private int Autonum_calc(String name) {
 		Int_obj_ref autonum_itm = (Int_obj_ref)autonum_hash.Get_by(name);
 		if (autonum_itm == null) {
-			autonum_itm = Int_obj_ref.new_(0);
+			autonum_itm = Int_obj_ref.New(0);
 			autonum_hash.Add(name, autonum_itm);
 		}
 		return autonum_itm.Val_add();

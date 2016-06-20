@@ -21,7 +21,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;
 	private Ordered_hash queued_list = Ordered_hash_.New();
-	private Bry_fmtr fmtr = Bry_fmtr.tmp_(); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Bry_fmtr fmtr = Bry_fmtr.tmp_(); private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public boolean Queue_enabled() {return queue_enabled;} public void Queue_enabled_(boolean v) {queue_enabled = v; if (!v) this.Flush();} private boolean queue_enabled;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public Io_url Session_dir() {return session_dir;} private Io_url session_dir;
@@ -101,11 +101,11 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 		if		(ctx.Match(k, Invk_enabled_))				enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_archive_dirs_max_))		archive_dirs_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_log_dir_))				log_dir = m.ReadIoUrl("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_enabled_ = "enabled_", Invk_archive_dirs_max_ = "archive_dirs_max_", Invk_log_dir_ = "log_dir_";
 	static final String Dir_name_log = "log", Dir_name_current = "current";
-	public static final Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
+	public static final    Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
 }
 class Usr_log_fil {
 	public Usr_log_fil(Io_url url) {this.url = url;}

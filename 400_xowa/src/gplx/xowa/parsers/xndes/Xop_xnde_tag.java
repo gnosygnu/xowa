@@ -27,13 +27,13 @@ public class Xop_xnde_tag {
 		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Bry__end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
 		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
-	public int Id() {return id;} private final int id;
-	public byte[] Name_bry() {return name_bry;} private final byte[] name_bry;
-	public String Name_str() {return name_str;} private final String name_str;
-	public int Name_len() {return name_len;} private final int name_len;
-	public byte[] Xtn_bgn_tag() {return xtn_bgn_tag;} private final byte[] xtn_bgn_tag;
-	public byte[] Xtn_end_tag() {return xtn_end_tag;} private final byte[] xtn_end_tag;
-	public byte[] Xtn_end_tag_tmp() {return xtn_end_tag_tmp;} private final byte[] xtn_end_tag_tmp;
+	public int Id() {return id;} private final    int id;
+	public byte[] Name_bry() {return name_bry;} private final    byte[] name_bry;
+	public String Name_str() {return name_str;} private final    String name_str;
+	public int Name_len() {return name_len;} private final    int name_len;
+	public byte[] Xtn_bgn_tag() {return xtn_bgn_tag;} private final    byte[] xtn_bgn_tag;
+	public byte[] Xtn_end_tag() {return xtn_end_tag;} private final    byte[] xtn_end_tag;
+	public byte[] Xtn_end_tag_tmp() {return xtn_end_tag_tmp;} private final    byte[] xtn_end_tag_tmp;
 	public boolean Xtn() {return xtn;} public Xop_xnde_tag Xtn_() {xtn = true; return this;} private boolean xtn;
 	public boolean Xtn_mw() {return xtn_mw;} public Xop_xnde_tag Xtn_mw_() {xtn_mw = true; xtn = true; return this;} private boolean xtn_mw;	// NOTE: Xtn_mw_() marks both xtn and xtn_mw as true
 	public int Bgn_mode() {return bgn_nde_mode;} private int bgn_nde_mode = Xop_xnde_tag_.Bgn_mode__normal;
@@ -64,7 +64,7 @@ public class Xop_xnde_tag {
 	public Xop_xnde_tag Langs_(int lang_code, String name) {
 		if (langs == null) {
 			langs = Ordered_hash_.New();
-			langs_key = Int_obj_ref.neg1_();
+			langs_key = Int_obj_ref.New_neg1();
 		}
 		Xop_xnde_tag_lang lang_tag = new Xop_xnde_tag_lang(lang_code, name);
 		langs.Add(lang_tag.Lang_code(), lang_tag);

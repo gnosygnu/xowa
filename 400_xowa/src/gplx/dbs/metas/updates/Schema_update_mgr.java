@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 public class Schema_update_mgr {		
-	private List_adp cmds = List_adp_.new_();
+	private List_adp cmds = List_adp_.New();
 	public void Add(Schema_update_cmd cmd) {cmds.Add(cmd);}
 	public void Update(Schema_db_mgr schema_mgr, Db_conn conn) {
 		int cmds_len = cmds.Count();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.texts.*;/*EncodingAdp_*/
+import org.junit.*; import gplx.core.texts.*;/*EncodingAdp_*/ import gplx.core.ios.streams.*;
 public abstract class IoEngine_fil_basic_base {
 	@Before public void setup() {
 		engine = engine_();

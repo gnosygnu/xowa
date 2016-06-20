@@ -22,7 +22,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final    Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xow_repo_mgr repo_mgr;
 	private Xof_file_itm xfer_itm; private byte[] file_size_bry; private byte[] play_btn_icon;		
 	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();

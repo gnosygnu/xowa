@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
-import gplx.xowa.guis.cmds.*; import gplx.xowa.guis.menus.dom.*;
+import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
+import gplx.xowa.guis.views.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.guis.menus.dom.*;
 public class Xog_bnd_mgr {
 	private Xog_win_itm win; private Xog_cmd_mgr_invk invk_mgr;
 	private Xog_bnd_box[] boxs = Xog_bnd_box_.Ary();
-	private List_adp startup_itms = List_adp_.new_();
+	private List_adp startup_itms = List_adp_.New();
 	private Ordered_hash regy = Ordered_hash_.New();
 	public Xog_bnd_mgr(Xog_win_itm win) {this.win = win; invk_mgr = win.Gui_mgr().Cmd_mgr().Invk_mgr();}
 	public Gfui_bnd_parser Bnd_parser() {if (bnd_parser == null) bnd_parser = Gfui_bnd_parser.new_en_(); return bnd_parser;} private Gfui_bnd_parser bnd_parser;
@@ -47,7 +47,7 @@ public class Xog_bnd_mgr {
 	}
 	public void Del(Xog_bnd_itm itm, IptArg new_ipt) {
 		boolean itm_has_ipt = !IptArg_.Is_null_or_none(new_ipt);
-		List_adp deleted = List_adp_.new_();
+		List_adp deleted = List_adp_.New();
 		for (int i = 0; i < Xog_bnd_box_.Ary_len; i++) {
 			Xog_bnd_box old_box = boxs[i];
 			int old_itms_len = old_box.Len();
@@ -101,6 +101,7 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_nav_help_about								, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_main							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_help_xowa_blog							, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_nav_setup_download_central					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_list					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_import_from_script					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_nav_setup_maintenance							, Xog_bnd_box_.Tid_browser				, "");

@@ -36,7 +36,7 @@ public class Scrib_lib_site_tst {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A|"), 0);
 	}
 	@Test   public void PagesInCategory__exists() {
-		gplx.xowa.addons.apps.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
+		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "pages")	, 3);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "subcats")	, 2);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "files")	, 1);

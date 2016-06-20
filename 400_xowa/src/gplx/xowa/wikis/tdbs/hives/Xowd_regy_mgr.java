@@ -64,7 +64,7 @@ public class Xowd_regy_mgr {
 		throw Err_.new_unimplemented();	// FUTURE: note that deletes are harder; rng ends could be deleted, so would need to open file and get new rng end
 	}
 	public void Save() {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = files_ary.length;
 		for (int i = 0; i < len; i++) {
 			Xowd_hive_regy_itm itm = files_ary[i];

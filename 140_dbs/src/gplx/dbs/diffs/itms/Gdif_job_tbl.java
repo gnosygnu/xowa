@@ -19,8 +19,8 @@ package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.d
 public class Gdif_job_tbl implements Rls_able {
 	private String tbl_name = "gdif_job";
 	private String fld_job_id, fld_name, fld_made_by, fld_made_on, fld_data;
-	private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final Db_conn conn; private Db_stmt stmt_insert;
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    Db_conn conn; private Db_stmt stmt_insert;
 	public Gdif_job_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_job_id = flds.Add_int_pkey("job_id"); fld_name = flds.Add_str("name", 255); fld_made_by = flds.Add_str("made_by", 255); fld_made_on = flds.Add_date("made_on"); fld_data = flds.Add_text("data");

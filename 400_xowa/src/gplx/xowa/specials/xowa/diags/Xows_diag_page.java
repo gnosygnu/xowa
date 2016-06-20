@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*;
 import gplx.xowa.apps.urls.*;
-public class Xows_diag_page implements Xows_page {
-	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__diag;}
+public class Xows_diag_page implements Xow_special_page {
+	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__diag;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		arg_hash.Load(url.Qargs_ary());
@@ -44,5 +44,5 @@ public class Xows_diag_page implements Xows_page {
 	.Add_str_byte("sql.dump"		, Type_sql_dump)
 	;
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

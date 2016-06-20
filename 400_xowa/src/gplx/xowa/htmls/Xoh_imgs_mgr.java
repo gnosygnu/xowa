@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.domains.*;
-public class Xoh_imgs_mgr implements GfoInvkAble {
+public class Xoh_imgs_mgr implements Gfo_invk {
 	public Xoh_imgs_mgr(Xow_html_mgr html_mgr) {wiki_is_default = html_mgr.Wiki().Domain_tid() == Xow_domain_tid_.Int__home;} private boolean wiki_is_default;
 	public Bool_obj_ref Alt_in_caption() {return alt_in_caption;} Bool_obj_ref alt_in_caption = Bool_obj_ref.y_();
 	public Bool_obj_ref Alt_defaults_to_caption() {return alt_defaults_to_caption;} Bool_obj_ref alt_defaults_to_caption = Bool_obj_ref.y_();
@@ -28,7 +28,7 @@ public class Xoh_imgs_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_alt_in_caption_))				alt_in_caption = Modify(wiki_is_default, alt_in_caption, m.ReadYn("v"));
 		else if	(ctx.Match(k, Invk_alt_defaults_to_caption))		return Yn.To_str(alt_defaults_to_caption.Val());
 		else if	(ctx.Match(k, Invk_alt_defaults_to_caption_))		alt_defaults_to_caption = Modify(wiki_is_default, alt_defaults_to_caption, m.ReadYn("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_alt_in_caption = "alt_in_caption", Invk_alt_in_caption_ = "alt_in_caption_", Invk_alt_defaults_to_caption = "alt_defaults_to_caption", Invk_alt_defaults_to_caption_ = "alt_defaults_to_caption_";

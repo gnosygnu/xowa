@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*; import gplx.langs.gfs.*;
-public class IoUrlTypeRegy implements GfoInvkAble {
+public class IoUrlTypeRegy implements Gfo_invk {
 	public String[] FetchAryOr(String key, String... or) {
 		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
 		return itm == null ? or : itm.AsAry();
@@ -33,13 +33,13 @@ public class IoUrlTypeRegy implements GfoInvkAble {
 			}
 			return itm;
 		}
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 //			return this;
-	}	public static final String Invk_Get = "Get";
+	}	public static final    String Invk_Get = "Get";
 	Ordered_hash hash = Ordered_hash_.New();
-        public static final IoUrlTypeRegy Instance = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
+        public static final    IoUrlTypeRegy Instance = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
 }
-class IoUrlTypeGrp implements GfoInvkAble {
+class IoUrlTypeGrp implements Gfo_invk {
 	public String[] AsAry() {
 		String[] rv = new String[list.Count()];
 		for (int i = 0; i < list.Count(); i++)
@@ -70,7 +70,7 @@ class IoUrlTypeGrp implements GfoInvkAble {
 			return sb.To_str();
 		}
 		else if	(ctx.Match(k, Invk_Clear)) {if (ctx.Deny()) return this; list.Clear();}
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final String Invk_AddMany = "Add_many", Invk_Clear = "Clear", Invk_Print = "Print";
+	}	public static final    String Invk_AddMany = "Add_many", Invk_Clear = "Clear", Invk_Print = "Print";
 }

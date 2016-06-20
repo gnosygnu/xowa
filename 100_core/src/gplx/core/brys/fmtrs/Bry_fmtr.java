@@ -23,7 +23,7 @@ public class Bry_fmtr {
 	public Bry_fmtr_eval_mgr Eval_mgr() {return eval_mgr;} public Bry_fmtr Eval_mgr_(Bry_fmtr_eval_mgr v) {eval_mgr = v; return this;} Bry_fmtr_eval_mgr eval_mgr = Bry_fmtr_eval_mgr_gfs.Instance;
 	public Bry_fmtr Fmt_(byte[] v) {fmt = v; dirty = true; return this;} public Bry_fmtr Fmt_(String v) {return Fmt_(Bry_.new_u8(v));}
 	public Bry_fmtr Keys_(String... ary) {
-		if (keys == null)	keys = Hash_adp_.new_();
+		if (keys == null)	keys = Hash_adp_.New();
 		else				keys.Clear();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)
@@ -121,12 +121,12 @@ public class Bry_fmtr {
 	public boolean Fail_when_invalid_escapes() {return fail_when_invalid_escapes;} public Bry_fmtr Fail_when_invalid_escapes_(boolean v) {fail_when_invalid_escapes = v; return this;} private boolean fail_when_invalid_escapes = true;
 	public Bry_fmtr Compile() {
 		synchronized (this) {	// THREAD: DATE:2015-04-29
-			Bry_bfr lkp_bfr = Bry_bfr.new_(16);
+			Bry_bfr lkp_bfr = Bry_bfr_.New_w_size(16);
 			int fmt_len = fmt.length; int fmt_end = fmt_len - 1; int fmt_pos = 0;
 			byte[] trg_bry = new byte[fmt_len]; int trg_pos = 0;
 			boolean lkp_is_active = false, lkp_is_numeric = true;
 			byte nxt_byte, tmp_byte;
-			List_adp list = List_adp_.new_();
+			List_adp list = List_adp_.New();
 			fmt_args_exist = false;
 			while (true) {
 				if (fmt_pos > fmt_end) break;
@@ -230,8 +230,8 @@ public class Bry_fmtr {
 	public boolean Fmt_args_exist() {return fmt_args_exist;} private boolean fmt_args_exist;
 	boolean dirty = true;
 	int baseInt = 0;
-	public static final byte char_escape = Byte_ascii.Tilde, char_arg_bgn = Byte_ascii.Curly_bgn, char_arg_end = Byte_ascii.Curly_end, char_escape_nl = Byte_ascii.Ltr_n, char_escape_tab = Byte_ascii.Ltr_t, char_eval_bgn = Byte_ascii.Lt, char_eval_end = Byte_ascii.Gt;
-	public static final Bry_fmtr Null = new Bry_fmtr().Fmt_("");
+	public static final    byte char_escape = Byte_ascii.Tilde, char_arg_bgn = Byte_ascii.Curly_bgn, char_arg_end = Byte_ascii.Curly_end, char_escape_nl = Byte_ascii.Ltr_n, char_escape_tab = Byte_ascii.Ltr_t, char_eval_bgn = Byte_ascii.Lt, char_eval_end = Byte_ascii.Gt;
+	public static final    Bry_fmtr Null = new Bry_fmtr().Fmt_("");
 	public static Bry_fmtr tmp_() {return new Bry_fmtr().Fmt_("").Keys_();}
 	public static Bry_fmtr new_(String fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
 	public static Bry_fmtr new_(byte[] fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
@@ -255,9 +255,9 @@ public class Bry_fmtr {
 			tmp_bfr.Add_byte(Byte_ascii.Apos);
 		}
 		return tmp_bfr.To_str_and_clear();
-	}	static Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
+	}	static Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
 	public void Bld_bfr_many_and_set_fmt(Object... args) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		this.Bld_bfr_many(bfr, args);
 		byte[] bry = bfr.To_bry_and_clear();
 		this.Fmt_(bry).Compile();

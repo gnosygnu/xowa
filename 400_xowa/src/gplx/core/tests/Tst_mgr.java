@@ -19,7 +19,7 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
-	public List_adp Results() {return results;} List_adp results = List_adp_.new_();
+	public List_adp Results() {return results;} List_adp results = List_adp_.New();
 	public Keyval_hash Vars() {return vars;} Keyval_hash vars = new Keyval_hash();
 	public Object Vars_get_by_key(String key) {return vars.Get_val_or(key, null);}
 	public String Vars_get_bry_as_str(String key, int bgn, int end) {
@@ -107,7 +107,7 @@ public class Tst_mgr {
 		return sb.To_str_and_clear();
 	}
 	int Max(int max, String s) {int len = String_.Len(s); return len > max ? len : max;}
-	public static final Tst_chkr Null_chkr = new Tst_chkr_null();
+	public static final    Tst_chkr Null_chkr = new Tst_chkr_null();
 }
 class Tst_itm {
 	public boolean Pass() {return pass;} private boolean pass;

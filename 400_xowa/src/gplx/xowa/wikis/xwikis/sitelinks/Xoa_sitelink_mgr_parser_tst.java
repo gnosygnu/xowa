@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 import org.junit.*;
 public class Xoa_sitelink_mgr_parser_tst {
-	private final Xoa_sitelink_mgr_parser_fxt fxt = new Xoa_sitelink_mgr_parser_fxt();
+	private final    Xoa_sitelink_mgr_parser_fxt fxt = new Xoa_sitelink_mgr_parser_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test   public void Basic() {
 		String raw = String_.Concat_lines_nl_skip_last
@@ -51,9 +51,9 @@ public class Xoa_sitelink_mgr_parser_tst {
 	}
 }
 class Xoa_sitelink_mgr_parser_fxt {
-	private final Xoa_sitelink_mgr mgr = new Xoa_sitelink_mgr();
-	private final Xoa_sitelink_mgr_parser parser;
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Xoa_sitelink_mgr mgr = new Xoa_sitelink_mgr();
+	private final    Xoa_sitelink_mgr_parser parser;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Clear() {mgr.Grp_mgr().Clear();}
 	public Xoa_sitelink_mgr_parser_fxt() {
 		this.parser = new Xoa_sitelink_mgr_parser(mgr);

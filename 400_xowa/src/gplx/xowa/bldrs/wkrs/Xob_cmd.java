@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-public interface Xob_cmd extends GfoInvkAble {
+public interface Xob_cmd extends Gfo_invk {
 	String		Cmd_key();
 	Xob_cmd		Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki);
 	void		Cmd_init(Xob_bldr bldr);

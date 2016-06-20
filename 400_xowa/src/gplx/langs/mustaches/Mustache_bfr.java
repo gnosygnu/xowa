@@ -35,6 +35,6 @@ public class Mustache_bfr {
 	}
 	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
 	public String To_str_and_clear() {return bfr.To_str_and_clear();}
-	public static Mustache_bfr New()				{return new Mustache_bfr(Bry_bfr.new_());}
+	public static Mustache_bfr New()				{return new Mustache_bfr(Bry_bfr_.New());}
 	public static Mustache_bfr New_bfr(Bry_bfr v)	{return new Mustache_bfr(v);}
 }

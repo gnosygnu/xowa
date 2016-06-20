@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.cmds.*;
+import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.imgs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.cmds.*;
 import gplx.xowa.guis.langs.*;
 public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {

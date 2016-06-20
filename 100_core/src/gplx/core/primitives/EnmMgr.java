@@ -67,6 +67,6 @@ public class EnmMgr {
 		if (prefix != null) sb.Add(prefix);
 		sb.Add(raw);
 	}
-	Hash_adp rawRegy = Hash_adp_.new_(), valRegy = Hash_adp_.new_(), objRegy = Hash_adp_.new_();
+	Hash_adp rawRegy = Hash_adp_.New(), valRegy = Hash_adp_.New(), objRegy = Hash_adp_.New();
 	public static EnmMgr new_() {return new EnmMgr();} EnmMgr() {}
 }

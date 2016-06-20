@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.strings.*; import gplx.core.lists.*;
-public abstract class List_adp_base implements List_adp, GfoInvkAble {
+public abstract class List_adp_base implements List_adp, Gfo_invk {
 	private Object[] list; private int count;
 	public List_adp_base(int capacity) {
 		this.list = new Object[capacity];
@@ -41,7 +41,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		count++;
 	}
 	protected int Del_base(Object o) {
-		int index = IndexOf_base(o); if (index == List_adp_.NotFound) return List_adp_.NotFound;
+		int index = IndexOf_base(o); if (index == List_adp_.Not_found) return List_adp_.Not_found;
 		this.Del_at(index);
 		return index;
 	}
@@ -64,7 +64,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	protected int IndexOf_base(Object o) {
 		for (int i = 0; i < count; i++)
 			if (Object_.Eq(list[i], o)) return i;
-		return List_adp_.NotFound;
+		return List_adp_.Not_found;
 	}
 	@gplx.Virtual public void Clear() {
 		for (int i = 0; i < count; i++)
@@ -120,8 +120,9 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public void Del(Object item) {Del_base(item);}
 	public int Idx_of(Object o) {return IndexOf_base(o);}
 	public List_adp_base() {
-		list = new Object[List_adp_.Capacity_initial];
+		list = new Object[Len_initial];
 	}
+	private static final int Len_initial = 8;
 	public Object To_ary_and_clear(Class<?> memberType) {Object rv = To_ary(memberType); this.Clear(); return rv;}
 	public Object To_ary(Class<?> memberType) {
 		Object rv = Array_.Create(memberType, count);
@@ -138,7 +139,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 		return rv;
 	}
 	public String To_str() {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		for (int i = 0; i < count; ++i)
 			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(list[i])).Add_byte_nl();
 		return bfr.To_str_and_clear();
@@ -168,7 +169,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_len))			return count;
 		else if	(ctx.Match(k, Invk_get_at))			return Get_at(m.ReadInt("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 //			return this;
 	}	private static final String Invk_len = "len", Invk_get_at = "get_at";
 }

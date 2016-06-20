@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xol_convert_mgr {
-	private final Ordered_hash tmp_page_list = Ordered_hash_.New_bry();		
-	public Xol_convert_regy			Converter_regy() {return converter_regy;} private final Xol_convert_regy converter_regy = new Xol_convert_regy();
+	private final    Ordered_hash tmp_page_list = Ordered_hash_.New_bry();		
+	public Xol_convert_regy			Converter_regy() {return converter_regy;} private final    Xol_convert_regy converter_regy = new Xol_convert_regy();
 	public Xol_convert_wkr[]		Converter_ary() {return wkr_ary;} private Xol_convert_wkr[] wkr_ary;  private int wkr_ary_len;
 	public void Init(Xol_vnt_regy regy) {
 		int len = regy.Len();
@@ -48,7 +48,7 @@ public class Xol_convert_mgr {
 		synchronized (tmp_page_list) {	// THREAD:
 			int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
 			if (converted == 0) return Xowd_page_itm.Null;								// ttl_bry has no conversions; exit;
-			// wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(Cancelable_.Never, tmp_page_list, wiki.Ns_mgr(), true, 0, converted);	// TODO: use this call; when defaulting test to use db_mgr, not txt_mgr
+			// wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(Cancelable_.Never, tmp_page_list, wiki.Ns_mgr(), true, 0, converted);	// TODO_OLD: use this call; when defaulting test to use db_mgr, not txt_mgr
 			wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, Bool_.Y, 0, converted);
 			for (int i = 0; i < converted; i++) {
 				Xowd_page_itm page = (Xowd_page_itm)tmp_page_list.Get_at(i);

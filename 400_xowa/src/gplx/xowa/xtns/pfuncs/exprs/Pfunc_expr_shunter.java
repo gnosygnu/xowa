@@ -23,8 +23,8 @@ public class Pfunc_expr_shunter {
 	Btrie_fast_mgr trie = expression_();
 	Val_stack val_stack = new Val_stack();
 	Func_tkn_stack prc_stack = new Func_tkn_stack();
-	public static final Decimal_adp Null_rslt = null;
-	public Bry_bfr Err() {return err_bfr;} Bry_bfr err_bfr = Bry_bfr.new_();
+	public static final    Decimal_adp Null_rslt = null;
+	public Bry_bfr Err() {return err_bfr;} Bry_bfr err_bfr = Bry_bfr_.New();
 	public Decimal_adp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
 	public Decimal_adp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
 		byte[] msg_val = ctx.Wiki().Msg_mgr().Val_by_id(msg_id);
@@ -32,7 +32,7 @@ public class Pfunc_expr_shunter {
 		tmp_fmtr.Fmt_(msg_val).Bld_bfr_one(err_bfr, arg);
 		err_bfr.Add(Err_end_ary);
 		return Null_rslt;
-	}	static final byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>"); Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
+	}	static final    byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>"); Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
 	public void Rslt_set(byte[] bry) {
 		err_bfr.Add(bry);
 	}
@@ -218,5 +218,5 @@ public class Pfunc_expr_shunter {
 		return rv;
 	}
 	private static void Trie_add(Btrie_fast_mgr trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
-	public static final Pfunc_expr_shunter Instance = new Pfunc_expr_shunter(); Pfunc_expr_shunter() {}
+	public static final    Pfunc_expr_shunter Instance = new Pfunc_expr_shunter(); Pfunc_expr_shunter() {}
 }

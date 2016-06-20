@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.langs.htmls.*; import gplx.gfui.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.*;
+import gplx.gfui.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.apps.urls.*;
 import gplx.xowa.parsers.*;
-public class Prefs_mgr implements GfoInvkAble {
+public class Prefs_mgr implements Gfo_invk {
 	public Prefs_mgr(Xoae_app app) {
 		this.app = app;
 		atrs_hash = Hash_adp_bry.cs();
@@ -36,7 +37,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		if (props_get_fmtr == null) props_get_fmtr = Bry_fmtr.keys_().Eval_mgr_(app.Gfs_mgr().Eval_mgr());
 		src = this.Parse_wikitext_to_html(src);
 		props_get_fmtr.Fmt_(src);
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		try {src = props_get_fmtr.Fmt_(src).Bld_bry_none(bfr);}
 		catch (Exception e) {src = Bry_.Add(src, Bry_.new_u8(Err_.Message_gplx_full(e)));}
 		Gfh_nde[] hndes = html_rdr.Parse_as_ary(src);
@@ -67,7 +68,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		hndes = Gfh_selecter.Select(src, hndes, atrs_hash);
 		int len = hndes.length;
 		boolean tidy_enabled = app.Html_mgr().Tidy_mgr().Enabled();
-		Bry_bfr cmd_bfr = Bry_bfr.reset_(255);
+		Bry_bfr cmd_bfr = Bry_bfr_.Reset(255);
 		for (int i = 0; i < len; i++) {
 			Gfh_nde hnde = hndes[i];
 			Props_set_by_hnde(cmd_bfr, src, hnde, i, tidy_enabled);
@@ -84,8 +85,8 @@ public class Prefs_mgr implements GfoInvkAble {
 		switch (elem_tid) {
 			case Elem_tid_input_text:
 			case Elem_tid_input_xowa_io:
-			case Elem_tid_select: 			hnde_val = html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value); break;
-			case Elem_tid_textarea:			hnde_val = Gfh_utl.Unescape_as_str(html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value)); break;
+			case Elem_tid_select: 			hnde_val = html_itm.Html_elem_atr_get_str(hnde_key, Gfui_html.Atr_value); break;
+			case Elem_tid_textarea:			hnde_val = Gfh_utl.Unescape_as_str(html_itm.Html_elem_atr_get_str(hnde_key, Gfui_html.Atr_value)); break;
 			case Elem_tid_input_checkbox:	hnde_val = html_itm.Html_elem_atr_get_bool(hnde_key, "checked") ? "y" : "n"; break;
 		}			
 		byte[] get_cmd = Props_get(eval_code); 
@@ -112,11 +113,11 @@ public class Prefs_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_exec_get))		return Props_get(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_save))			Props_set_and_reload();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_exec_get = "exec_get", Invk_save = "save";
 	private static final byte Tid_prop = 0, Tid_prop_get = 1, Tid_prop_set = 2;
-	public static final byte[] Bry_prop = Bry_.new_a7("xowa_prop"), Bry_prop_get = Bry_.new_a7("xowa_prop_get"), Bry_prop_set = Bry_.new_a7("xowa_prop_set"), Bry_id = Bry_.new_a7("id");
+	public static final    byte[] Bry_prop = Bry_.new_a7("xowa_prop"), Bry_prop_get = Bry_.new_a7("xowa_prop_get"), Bry_prop_set = Bry_.new_a7("xowa_prop_set"), Bry_id = Bry_.new_a7("id");
 	public static byte Elem_tid_tid_of(Gfh_nde hnde) {
 		byte[] elem_name = Bry_.Mid(hnde.Src(), hnde.Name_bgn(), hnde.Name_end());
 		if		(Bry_.Eq(elem_name, Nde_textarea)) 			return Elem_tid_textarea;
@@ -131,7 +132,7 @@ public class Prefs_mgr implements GfoInvkAble {
 			else 												return Elem_tid_null;
 		}
 		else													return Elem_tid_null;
-	}	static final byte[] Input_type = Bry_.new_a7("type"), Nde_input = Bry_.new_a7("input"), Nde_textarea = Bry_.new_a7("textarea"), Nde_select = Bry_.new_a7("select"), Type_text = Bry_.new_a7("text"), Type_checkbox = Bry_.new_a7("checkbox"), Type_combo = Bry_.new_a7("xowa_combo"), Type_xowa_io = Bry_.new_a7("xowa_io");
+	}	static final    byte[] Input_type = Bry_.new_a7("type"), Nde_input = Bry_.new_a7("input"), Nde_textarea = Bry_.new_a7("textarea"), Nde_select = Bry_.new_a7("select"), Type_text = Bry_.new_a7("text"), Type_checkbox = Bry_.new_a7("checkbox"), Type_combo = Bry_.new_a7("xowa_combo"), Type_xowa_io = Bry_.new_a7("xowa_io");
 	public static String Scrub_tidy_trailing_nl_in_textarea(boolean tidy_enabled, byte elem_tid, String val) {
 		return	// if tidy_enabled and text_area and ends with \n, then remove \n; DATE:2014-06-21
 			(	tidy_enabled
@@ -145,7 +146,7 @@ public class Prefs_mgr implements GfoInvkAble {
 	public static final byte Elem_tid_null = 0, Elem_tid_input_text = 1, Elem_tid_textarea = 2, Elem_tid_input_checkbox = 3, Elem_tid_select = 4, Elem_tid_input_combo = 5, Elem_tid_input_xowa_io = 6;	
 }
 class Prefs_trg_mgr {
-	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
+	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
 	public byte[] Trg_type() {return trg_type;} private byte[] trg_type;
 	public byte[] Trg_val() {return trg_val;} private byte[] trg_val;
 	public void Init(Xoa_url url) {
@@ -153,5 +154,5 @@ class Prefs_trg_mgr {
 		trg_type = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_type_bry, null);
 		trg_val = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_val_bry, null);
 	}
-	public static final byte[] Arg_option_trg_type_bry = Bry_.new_a7("option_trg_type"), Arg_option_trg_val_bry = Bry_.new_a7("option_trg_val");
+	public static final    byte[] Arg_option_trg_type_bry = Bry_.new_a7("option_trg_type"), Arg_option_trg_val_bry = Bry_.new_a7("option_trg_val");
 }

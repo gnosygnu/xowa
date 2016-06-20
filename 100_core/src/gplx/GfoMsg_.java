@@ -19,7 +19,7 @@ package gplx;
 import gplx.core.primitives.*; import gplx.core.strings.*; import gplx.core.brys.*; import gplx.core.interfaces.*;
 public class GfoMsg_ {
 	public static GfoMsg as_(Object obj) {return obj instanceof GfoMsg ? (GfoMsg)obj : null;}
-	public static final GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
+	public static final    GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
 	public static GfoMsg new_parse_(String key)	{return new GfoMsg_base().ctor_(key, true);}
 	public static GfoMsg new_cast_(String key)	{return new GfoMsg_base().ctor_(key, false);}
 	public static GfoMsg srl_(GfoMsg owner, String key)	{
@@ -46,7 +46,7 @@ public class GfoMsg_ {
 	}
 	public static GfoMsg chain_(GfoMsg owner, String key) {
 		GfoMsg sub = owner;
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list.Add(sub.Key());
 		while (sub != null) {
 			if (sub.Subs_count() == 0) break;
@@ -77,14 +77,14 @@ public class GfoMsg_ {
 }
 class GfoMsg_wtr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
-		if (args == null) args = List_adp_.new_();
+		if (args == null) args = List_adp_.New();
 		args.Add(Keyval_.new_(k, null));
 		return defaultOr;
 	}
 }
 class GfoMsg_rdr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
-		if (args == null) args = List_adp_.new_();
+		if (args == null) args = List_adp_.New();
 		args.Add(Keyval_.new_(k, defaultOr));
 		return defaultOr;
 	}
@@ -93,7 +93,7 @@ class GfoMsg_base implements GfoMsg {
 	public String Key() {return key;} private String key; 
 	public int Subs_count() {return subs == null ? 0 : subs.Count();}
 	public GfoMsg Subs_getAt(int i) {return subs == null ? null : (GfoMsg)subs.Get_at(i);}
-	public GfoMsg Subs_add(GfoMsg m) {if (subs == null) subs = List_adp_.new_(); subs.Add(m); return this;}
+	public GfoMsg Subs_add(GfoMsg m) {if (subs == null) subs = List_adp_.New(); subs.Add(m); return this;}
 	public GfoMsg Subs_(GfoMsg... ary) {for (GfoMsg m : ary) Subs_add(m); return this;}
 	public int Args_count() {return args == null ? 0 : args.Count();}
 	public void Args_reset() {
@@ -115,7 +115,7 @@ class GfoMsg_base implements GfoMsg {
 	}
 	public Keyval Args_getAt(int i) {return args == null ? null : (Keyval)args.Get_at(i);}
 	public GfoMsg Args_ovr(String k, Object v) {
-		if (args == null) args = List_adp_.new_();
+		if (args == null) args = List_adp_.New();
 		for (int i = 0; i < args.Count(); i++) {
 			Keyval kv = (Keyval)args.Get_at(i);
 			if (String_.Eq(k, kv.Key())) {
@@ -128,7 +128,7 @@ class GfoMsg_base implements GfoMsg {
 	}
 	public GfoMsg Parse_(boolean v) {parse = v; return this;}
 	public GfoMsg	Add(String k, Object v) {
-		if (args == null) args = List_adp_.new_();
+		if (args == null) args = List_adp_.New();
 		args.Add(Keyval_.new_(k, v));
 		return this;
 	}
@@ -204,12 +204,12 @@ class GfoMsg_base implements GfoMsg {
 	public GfoMsg CloneNew() {
 		GfoMsg_base rv = new GfoMsg_base().ctor_(key, parse);
 		if (args != null) {
-			rv.args = List_adp_.new_();
+			rv.args = List_adp_.New();
 			for (int i = 0; i < args.Count(); i++)
 				rv.args.Add(args.Get_at(i));
 		}
 		if (subs != null) {
-			rv.subs = List_adp_.new_();
+			rv.subs = List_adp_.New();
 			for (int i = 0; i < args.Count(); i++) {
 				GfoMsg sub = (GfoMsg)args.Get_at(i);
 				rv.subs.Add(sub.CloneNew());	// NOTE: recursion
@@ -250,7 +250,7 @@ class GfoMsg_base implements GfoMsg {
 
 	public GfoMsg_base ctor_(String key, boolean parse)  {this.key = key; this.parse = parse; return this;} private boolean parse;
 	@gplx.Internal protected GfoMsg_base(){}
-	static final String_obj_val Nil = String_obj_val.new_("<<NOT FOUND>>");
+	static final    String_obj_val Nil = String_obj_val.new_("<<NOT FOUND>>");
 }
 interface XtoStrWkr {
 	String To_str(Object o);

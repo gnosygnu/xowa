@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xodb_page_rdr__tdb implements Xodb_page_rdr {
-	private final Xow_ns_mgr ns_mgr; private final Xotdb_fsys_mgr fsys_mgr;
+	private final    Xow_ns_mgr ns_mgr; private final    Xotdb_fsys_mgr fsys_mgr;
 	private int cur_ns_ord = -1; private Xow_ns cur_ns; private Io_url[] cur_file_ary; private Io_url cur_file; private int cur_file_idx = -1;
-	private final Xob_xdat_file cur_xdat_file = new Xob_xdat_file(); private int cur_xdat_len, cur_xdat_idx; private final Xob_xdat_itm cur_xdat_itm = new Xob_xdat_itm();
+	private final    Xob_xdat_file cur_xdat_file = new Xob_xdat_file(); private int cur_xdat_len, cur_xdat_idx; private final    Xob_xdat_itm cur_xdat_itm = new Xob_xdat_itm();
 	private int page_id = 0;
 	public Xodb_page_rdr__tdb(Xowe_wiki wiki) {
 		this.ns_mgr = wiki.Ns_mgr(); this.fsys_mgr = wiki.Tdb_fsys_mgr();

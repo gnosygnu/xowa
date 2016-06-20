@@ -21,7 +21,7 @@ import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.tbls.*;
-public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, GfoInvkAble {
+public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, Gfo_invk {
 	protected Xob_ctg_v1_base() {}	// TEST:needed for fxt
 	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
@@ -83,7 +83,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	private Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	Btrie_fast_mgr trie = Btrie_fast_mgr.cs().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
 	static final int row_fixed_len = 5 + 1 + 1;	// 5=rowId; 1=|; 1=\n
-	List_adp category_list = List_adp_.new_(); Int_obj_ref cur_pos = Int_obj_ref.zero_();
+	List_adp category_list = List_adp_.New(); Int_obj_ref cur_pos = Int_obj_ref.New_zero();
 	static final byte Tid_eos = 0, Tid_brack_end = 1, Tid_pipe = 2, Tid_nl = 3, Tid_brack_bgn = 4;
 	private static int Move_fwd_while_space(byte[] src, int src_len, int pos) {
 		while (true) {

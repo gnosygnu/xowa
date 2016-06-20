@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.langs.dsvs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
-	private byte[] ns_ids_bry; private String name; private final List_adp rslts = List_adp_.new_();
+	private byte[] ns_ids_bry; private String name; private final    List_adp rslts = List_adp_.New();
 	private Xow_ns_mgr ns_mgr; private byte db_file_tid; private boolean mode_each = false;
 	public void Ctor(byte db_file_tid, Xow_ns_mgr ns_mgr) {
 		this.db_file_tid = db_file_tid; this.ns_mgr = ns_mgr;
@@ -36,7 +36,9 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	@Override public void Commit_itm(Dsv_tbl_parser parser, int pos) {
 		if (ns_ids_bry == null)		throw parser.Err_row_bgn("ns_itm missing ns_ids", pos);
 		if (mode_each) return;
-		if (Bry_.Eq(ns_ids_bry, ns_ids_bry_each)) {
+
+		// mode is <each>; create map with each ns in separate file 
+		if	(Bry_.Eq(ns_ids_bry, Ns_file_map__each)) {
 			mode_each = true;
 			int len = ns_mgr.Ords_len();
 			for (int i = 0; i < len; ++i) {
@@ -46,6 +48,17 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 			}
 			return;
 		}
+		// mode is <few>; create map with each ns in one file; // DB.FEW: DATE:2016-06-07
+		else if	(Bry_.Eq(ns_ids_bry, Ns_file_map__few)) {
+			int len = ns_mgr.Ords_len();
+			int[] ns_ary_for_few = new int[len];
+			for (int i = 0; i < len; ++i) {
+				ns_ary_for_few[i] = ns_mgr.Ords_get_at(i).Id();
+			}
+			rslts.Add(new Xob_ns_file_itm(db_file_tid, String_.Empty, ns_ary_for_few));
+			return;
+		}
+
 		int[] ns_ids = null;
 		if (ns_ids_bry.length == 1 && ns_ids_bry[0] == Byte_ascii.Star) {	// "*"
 			int len = ns_mgr.Ords_len();
@@ -69,7 +82,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 		this.Load_by_bry(bry);
 		return (Xob_ns_file_itm[])rslts.To_ary(Xob_ns_file_itm.class);
 	}
-	private static final byte[] ns_ids_bry_each = Bry_.new_a7("<each>");
+	public static final    byte[] Ns_file_map__few = Bry_.new_a7("few"), Ns_file_map__each = Bry_.new_a7("<each>");
 	/*
 "" -> no rules; return "default"; generates "text-001" and lumps all ns into it
 "*|<id>|3700|2" -> auto-generate per ns

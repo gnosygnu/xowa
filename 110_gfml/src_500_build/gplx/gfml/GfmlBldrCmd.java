@@ -21,7 +21,7 @@ public interface GfmlBldrCmd {
 	void Exec(GfmlBldr bldr, GfmlTkn tkn);
 }
 class GfmlBldrCmd_ {
-	public static final GfmlBldrCmd Null = new GfmlBldrCmd_null();
+	public static final    GfmlBldrCmd Null = new GfmlBldrCmd_null();
 }
 class GfmlBldrCmd_null implements GfmlBldrCmd {
 	public String Key() {return "gfml.nullCmd";}
@@ -30,7 +30,7 @@ class GfmlBldrCmd_null implements GfmlBldrCmd {
 class GfmlBldrCmdRegy {
 	public void Add(GfmlBldrCmd cmd) {hash.Add(cmd.Key(), cmd);}
 	public GfmlBldrCmd GetOrFail(String key) {return (GfmlBldrCmd)hash.Get_by_or_fail(key);}
-	Hash_adp hash = Hash_adp_.new_();
+	Hash_adp hash = Hash_adp_.New();
 	public static GfmlBldrCmdRegy new_() {
 		GfmlBldrCmdRegy rv = new GfmlBldrCmdRegy();
 		rv.Add(GfmlBldrCmd_elemKey_set.Instance);

@@ -19,9 +19,9 @@ package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.divs.*; 
 public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final Xoh_img_hzip img_hzip = new Xoh_img_hzip();
-	private final Xoh_thm_wtr wtr = new Xoh_thm_wtr();
-	private final Bry_obj_ref capt_1 = Bry_obj_ref.New_empty();
+	private final    Xoh_img_hzip img_hzip = new Xoh_img_hzip();
+	private final    Xoh_thm_wtr wtr = new Xoh_thm_wtr();
+	private final    Bry_obj_ref capt_1 = Bry_obj_ref.New_empty();
 	public int Tid() {return Xoh_hzip_dict_.Tid__thm;}
 	public String Key() {return Xoh_hzip_dict_.Key__thm;}
 	public byte[] Hook() {return hook;} private byte[] hook;
@@ -64,12 +64,15 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_img_data img_data = (Xoh_img_data)hctx.Pool_mgr__data().Get_by_tid(Xoh_hzip_dict_.Tid__img);
 		img_hzip.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, rdr.Pos(), src_end, img_data);
 		img_hzip.Wtr().Init_by_decode(hpg, hctx, src, img_data);
+		int fsdb_w = img_hzip.Wtr().Fsdb_itm().Html_w();
+		if (fsdb_w > 0)				// fsdb_w has value; this occurs when itm is found in user's file_cache; NOTE: do not do !div_1_width_exists b/c all thms have div_1_w; PAGE:en.w:Paris; DATE:2016-06-18
+			div_1_width = fsdb_w;	// override div_1_width, else widths will default to wrong value and not be auto-corrected by post-processing; DATE:2016-06-18
 		wtr.Write(bfr, hpg, hctx, src, img_data.Img_is_vid(), div_0_align, div_1_width, img_hzip.Wtr(), img_hzip.Anch_href_bry(), capt_1, capt_2_exists, capt_2_is_tidy, capt_2_bry, capt_3_exists, capt_3_bry);
 		img_data.Pool__rls();
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_thm_hzip rv = new Xoh_thm_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}
-	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1, 1, 1, 3);	
+	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1, 1, 1, 3);	
 	private static final int // SERIALIZED
 	  Flag__capt_3_exists				=  0
 	, Flag__capt_2_is_tidy				=  1

@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.wikis.tdbs.metas.*;
-public class Xow_file_mgr implements GfoInvkAble {
+public class Xow_file_mgr implements Gfo_invk {
 	private Xof_wkr_mgr wkr_mgr;
 	public Xow_file_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -71,7 +71,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public Xof_meta_mgr  Dbmeta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
-		if (test_grps == null) test_grps = Hash_adp_.new_();
+		if (test_grps == null) test_grps = Hash_adp_.New();
 		Db_cfg_hash grp_itm = (Db_cfg_hash)test_grps.Get_by(grp);
 		if (grp_itm == null) {
 			grp_itm = new Db_cfg_hash(grp);
@@ -138,6 +138,6 @@ public class Xow_file_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_cfg_download))			return cfg_download;	// NOTE: documented for Schnark; https://sourceforge.net/p/xowa/tickets/344/
 		else if	(ctx.Match(k, Invk_fsdb))					return fsdb_mgr;
 		else if	(ctx.Match(k, Invk_wkrs))					return wkr_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_repos = "repos", Invk_metas = "metas", Invk_cfg_download = "cfg_download", Invk_fsdb = "fsdb", Invk_wkrs = "wkrs";
 }

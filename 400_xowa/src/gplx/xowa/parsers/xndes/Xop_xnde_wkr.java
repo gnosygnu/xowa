@@ -76,7 +76,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					++tag_end_pos;
 					break;
 				case Byte_ascii.Dollar:		// handles <br$2>;
-				default:					// allow all other symbols by defaults; TODO: need to filter out some like <br@>
+				default:					// allow all other symbols by defaults; TODO_OLD: need to filter out some like <br@>
 					break;
 				// letters / numbers after tag; tag is invalid; EX: "<spanA"
 				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:

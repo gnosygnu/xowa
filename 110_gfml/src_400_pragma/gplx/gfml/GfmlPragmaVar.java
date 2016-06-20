@@ -24,7 +24,7 @@ class GfmlPragmaVar implements GfmlPragma {
 		bldr.Doc().PragmaMgr().EndCmds_add(bldr.CurNdeFrame().CurDocPos().NewUp(), GfmlPragmaVar_scopeEndCmd.new_(list));
 	}
 	@gplx.Internal protected List_adp Compile(GfmlNde pragmaNde) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().Get_at(i);
 			GfmlVarItm itm = CompileItmNde(subNde);

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_history_stack {
-	private final List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public int Len() {return list.Count();}
 	public void Clear() {list.Clear(); cur_pos = 0;}
 	public Xog_history_itm Get_at(int i) {return (Xog_history_itm)list.Get_at(i);}

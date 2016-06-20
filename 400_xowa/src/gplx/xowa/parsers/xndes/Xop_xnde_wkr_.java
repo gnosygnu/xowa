@@ -19,10 +19,10 @@ package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.pfuncs.strings.*;
 class Xop_xnde_wkr_ {
-	private static final Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
+	private static final    Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
 	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1, Find_xtn_end__tid__xtag = 2;
-	private static final Int_obj_ref Find_xtn_end__key__bgn = Int_obj_ref.new_(Find_xtn_end__tid__bgn), Find_xtn_end__key__end = Int_obj_ref.new_(Find_xtn_end__tid__end), Find_xtn_end__key__xtag = Int_obj_ref.new_(Find_xtn_end__tid__xtag);
-	private static final Bry_bfr Find_xtag_end__bfr = Bry_bfr.new_(32);
+	private static final    Int_obj_ref Find_xtn_end__key__bgn = Int_obj_ref.New(Find_xtn_end__tid__bgn), Find_xtn_end__key__end = Int_obj_ref.New(Find_xtn_end__tid__end), Find_xtn_end__key__xtag = Int_obj_ref.New(Find_xtn_end__tid__xtag);
+	private static final    Bry_bfr Find_xtag_end__bfr = Bry_bfr_.New_w_size(32);
 	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
 		int subs_bgn = -1, subs_len = owner.Subs_len();
 		for (int i = 0; i < subs_len; i++) {

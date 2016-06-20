@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.wikis.nss.*;
-public class Xowc_xtn_pages implements GfoInvkAble {
+public class Xowc_xtn_pages implements Gfo_invk {
 	public boolean Init_needed()		{return init_needed;}			private boolean init_needed = true;
 	public int Ns_page_id()			{return ns_page_id;}			private int ns_page_id = Int_.Min_value;
 	public int Ns_page_talk_id()	{return ns_page_talk_id;}		private int ns_page_talk_id = Int_.Min_value;
@@ -69,13 +69,13 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_ns_names_))				Ns_names_(m.ReadBry("page"), m.ReadBry("page_talk"), m.ReadBry("index"), m.ReadBry("index_talk"));
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_ns_names_ = "ns_names_";
-	public static final byte[] Xtn_key = Bry_.new_a7("pages");
+	public static final    byte[] Xtn_key = Bry_.new_a7("pages");
 	public static final int Ns_index_id_default = 102, Ns_page_id_default = 104;
 
-	private static final byte[]
+	private static final    byte[]
 	  Default_ns_page_name			= Bry_.new_a7("Page")
 	, Default_ns_page_talk_name		= Bry_.new_a7("Page_talk")
 	, Default_ns_index_name			= Bry_.new_a7("Index")

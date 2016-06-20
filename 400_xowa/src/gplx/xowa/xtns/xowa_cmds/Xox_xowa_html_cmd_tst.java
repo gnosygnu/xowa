@@ -17,25 +17,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-import gplx.xowa.htmls.*; import gplx.xowa.guis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.htmls.*; import gplx.xowa.guis.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.parsers.*;
 public class Xox_xowa_html_cmd_tst {
-	@Before public void init() {fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
+	@Before public void init() {Xopg_tag_wtr.Loader_as_script_static = Bool_.N; fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
+	@Test   public void term() {Xopg_tag_wtr.Loader_as_script_static = Bool_.Y;}
 	@Test  public void Head_end() {
 		fxt.Test_parse_w_skin
 		( "<xowa_html pos='head_end'>test</xowa_html>"
-		, "<html><head><style>\ntest\n</style>\n</head><body></body></html>"
+		, "<html><head><style data-source=\"xowa\" type=\"text/css\">\ntest\n</style>\n</head><body></body></html>"
 		);
 	}
 	@Test  public void Tail() {
 		fxt.Test_parse_w_skin
 		( "<xowa_html pos='tail'>test</xowa_html>"
-		, "<html><head></head><body></body><style>\ntest\n</style>\n</html>"
+		, "<html><head></head><body></body><style data-source=\"xowa\" type=\"text/css\">\ntest\n</style>\n</html>"
 		);
 	}
 }
 class Xox_xowa_html_cmd_fxt {
-	private Bry_bfr bfr = Bry_bfr.reset_(16);
+	private Bry_bfr bfr = Bry_bfr_.Reset(16);
 	private final    Xop_fxt fxt = new Xop_fxt();
 	private Xowe_wiki wiki; private Xow_html_mgr html_mgr;
 	public void Clear() {

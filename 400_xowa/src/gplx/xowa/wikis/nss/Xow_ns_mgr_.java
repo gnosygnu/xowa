@@ -37,6 +37,7 @@ public class Xow_ns_mgr_ {
 			Xow_ns ns_name = ns_names.Get_at(i);
 			int ns_id = ns_name.Id();
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);
+			if (ns == null) continue; // ns_id of -2 will not be found in site_ns
 			ns.Name_bry_(ns_name.Name_db());
 		}
 		ns_names = lang.Ns_aliases();

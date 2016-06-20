@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
 import gplx.xowa.guis.views.*;
-public class Xoapi_tabs implements GfoInvkAble {
+public class Xoapi_tabs implements Gfo_invk {
 	private Xog_tab_mgr tab_mgr;
 	public void Init_by_kit(Xoae_app app) {
 		this.tab_mgr = app.Gui_mgr().Browser_win().Tab_mgr();
@@ -70,7 +70,7 @@ public class Xoapi_tabs implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_select_by_idx_7)) 					this.Select_by_idx(7);
 		else if	(ctx.Match(k, Invk_select_by_idx_8)) 					this.Select_by_idx(8);
 		else if	(ctx.Match(k, Invk_select_by_idx_9)) 					this.Select_by_idx(9);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 

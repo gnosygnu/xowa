@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255), ttl_bfr = Bry_bfr_.Reset(255);
 	private byte[][] segs;
 	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
@@ -53,8 +53,8 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 		}
 		ttl_bfr.Clear();
 	}
-	private static final byte[] Dlm_1st = Bry_.new_a7("&lt; "), Dlm_nth = Bry_.new_a7("&lrm; | ");
-	private static final Bry_fmtr
+	private static final    byte[] Dlm_1st = Bry_.new_a7("&lt; "), Dlm_nth = Bry_.new_a7("&lrm; | ");
+	private static final    Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<span class=\"subpages\">~{itms}"
 	, "</span>"

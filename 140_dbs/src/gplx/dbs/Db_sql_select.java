@@ -22,7 +22,7 @@ interface Db_sql_qry {
 }
 class Db_sql_qry__select {
 	public Db_sql_qry__select(String from) {this.from = from;}
-	public String			From() {return from;} private final String from;
+	public String			From() {return from;} private final    String from;
 	public Db_sql_col[]		Select() {return select;} private Db_sql_col[] select;
 //		public Criteria			Where() {return where;} private Criteria where;
 //		public Db_sql_col[]		Group_bys() {return group_bys;} private Db_sql_col[] group_bys;
@@ -51,7 +51,7 @@ class Db_sql_col_ {
 	public static Db_sql_col[] Ary(Db_sql_col... v) {return v;}
 }
 class Db_sql_col_bldr {
-	private final List_adp tmp_list = List_adp_.new_();
+	private final    List_adp tmp_list = List_adp_.New();
 	public Db_sql_col[] new_fld_many(String[] ary) {
 		tmp_list.Clear();
 		int ord = -1;
@@ -63,16 +63,16 @@ class Db_sql_col_bldr {
 		}
 		return (Db_sql_col[])tmp_list.To_ary_and_clear(Db_sql_col.class);
 	}
-        public static final Db_sql_col_bldr Instance = new Db_sql_col_bldr(); Db_sql_col_bldr() {}
+        public static final    Db_sql_col_bldr Instance = new Db_sql_col_bldr(); Db_sql_col_bldr() {}
 }
 class Db_sql_col__name {
 	public Db_sql_col__name(int ord, String key) {this.ord = ord; this.key = key;}
-	public int Ord() {return ord;} private final int ord;
-	public String Key() {return key;} private final String key;
+	public int Ord() {return ord;} private final    int ord;
+	public String Key() {return key;} private final    String key;
 }
 class Db_sql_col__all implements Db_sql_col {
 	public Db_sql_col__all(int ord, String tbl) {this.ord = ord; this.tbl = tbl;}
-	public int Ord() {return ord;} private final int ord;
-        public String Tbl() {return tbl;} private final String tbl;
+	public int Ord() {return ord;} private final    int ord;
+        public String Tbl() {return tbl;} private final    String tbl;
 	public String Alias() {return "*";}
 }

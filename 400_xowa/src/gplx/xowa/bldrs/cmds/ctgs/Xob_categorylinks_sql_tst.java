@@ -23,7 +23,7 @@ public class Xob_categorylinks_sql_tst {
 	@Test   public void Basic() {
 		if (Xoa_test_.Db_skip()) return;
 		fxt.Init_db_sqlite();
-		fxt.Init_page_insert(Int_obj_ref.new_(1), Xow_ns_.Tid__category, String_.Ary("Ctg_1", "Ctg_2"));
+		fxt.Init_page_insert(Int_obj_ref.New(1), Xow_ns_.Tid__category, String_.Ary("Ctg_1", "Ctg_2"));
 		fxt.Init_fil(Xoa_test_.Url_wiki_enwiki().GenSubFil("xowa_categorylinks.sql"), String_.Concat
 		(	Xob_categorylinks_sql.Sql_categorylinks
 		,	"INSERT INTO `categorylinks` VALUES"
@@ -54,7 +54,7 @@ class Db_tst_val {
 	public String Key() {return key;} public Db_tst_val Key_(String v) {this.key = v; return this;} private String key;
 	public Object Val() {return val;} public Db_tst_val Val_(Object v) {this.val = v; return this;} Object val;
 	public static final int Idx_null = -1;
-	public static final String Key_null = null;
+	public static final    String Key_null = null;
 }
 class Db_tst_row {
 	public int Idx() {return idx;} public Db_tst_row Idx_(int val) {idx = val; return this;} private int idx = -1;
@@ -86,7 +86,7 @@ class Db_tst_row {
 class Db_tst_qry {
 	public Db_qry Qry() {return qry;} Db_qry qry;
 	public String[] Cols() {return cols;} public Db_tst_qry Cols_(String... v) {this.cols = v; return this;} private String[] cols;
-	public List_adp Rows() {return rows;} List_adp rows = List_adp_.new_();
+	public List_adp Rows() {return rows;} List_adp rows = List_adp_.New();
 	public Db_tst_qry Rows_add_vals(Object... ary) {
 		Db_tst_row row = Db_tst_row.kvs_(cols, ary);
 		rows.Add(row);
@@ -94,7 +94,7 @@ class Db_tst_qry {
 	}
 	public void Test(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		try {
 			rdr = conn.Exec_qry_as_old_rdr(qry);
 			int expd_row_idx = 0, expd_row_max = rows.Count();
@@ -130,7 +130,7 @@ class Db_tst_qry {
 			bfr.Add_str_u8(qry.To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr_.Sqlite)).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
-	}	static final byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
+	}	static final    byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
 	public static Db_tst_qry tbl_(String tbl_name, String order_by) {return new_(Db_qry_.select_tbl_(tbl_name).Order_asc_(order_by));}
 	public static Db_tst_qry new_(Db_qry qry) {
 		Db_tst_qry rv = new Db_tst_qry();

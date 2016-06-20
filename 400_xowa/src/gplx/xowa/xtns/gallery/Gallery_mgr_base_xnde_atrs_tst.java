@@ -57,7 +57,7 @@ public class Gallery_mgr_base_xnde_atrs_tst {
 		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 		);
 	}
-//		@Test  public void Ttl_caption() {	// TODO: PURPOSE: category entries get rendered with name only (no ns)
+//		@Test  public void Ttl_caption() {	// TODO_OLD: PURPOSE: category entries get rendered with name only (no ns)
 //			fxt.Test_html_frag
 //			( "<gallery>Category:A</gallery>"
 //			, "<li class='gallerycaption'>B</li>"

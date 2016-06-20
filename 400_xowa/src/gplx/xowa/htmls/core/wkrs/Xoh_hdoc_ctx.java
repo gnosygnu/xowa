@@ -30,7 +30,7 @@ public class Xoh_hdoc_ctx {
 	public byte[]					Wiki__domain_bry()	{return wiki__domain_bry;} private byte[] wiki__domain_bry;
 	public Xow_ttl_parser			Wiki__ttl_parser()	{return wiki__ttl_parser;} private Xow_ttl_parser wiki__ttl_parser;
 	public Xow_url_parser			Wiki__url_parser()	{return wiki__url_parser;} private Xow_url_parser wiki__url_parser;
-	public boolean						Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
+	public boolean					Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
 	public Xou_cache_finder			File__mgr()			{return file__mgr;} private Xou_cache_finder file__mgr = Xou_cache_finder_.Noop; 
 	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final    Xof_url_bldr file__url_bldr = new Xof_url_bldr();
 	public byte[]					Page__url()			{return page__url;} private byte[] page__url;
@@ -68,6 +68,8 @@ public class Xoh_hdoc_ctx {
 		this.uid__lnki = 1;	// NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 		this.uid__gly = -1;
 	}
+
+	public void Test__file__mgr_(Xou_cache_finder v) {this.file__mgr = v;}
 	public static final int Invalid = -1;
 	private static final    byte[] Fsys__res__drd = Bry_.new_a7("file:///android_asset/xowa/");
 }

@@ -43,7 +43,7 @@ class GfmlFld_mok {
 class GfmlTyp_mok {
 	public String Name() {return name;} public GfmlTyp_mok Name_(String v) {name = v; return this;} private String name;
 	public String Key() {return key;} public GfmlTyp_mok Key_(String v) {key = v; return this;} private String key;
-	public List_adp Subs() {return subFlds;} List_adp subFlds = List_adp_.new_();
+	public List_adp Subs() {return subFlds;} List_adp subFlds = List_adp_.New();
 	public GfmlTyp_mok Atrs_(String... ary) {
 		for (String itm : ary)
 			subFlds.Add(GfmlFld_mok.new_().ini_atr_(itm));

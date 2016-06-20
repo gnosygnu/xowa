@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.ios.streams.*;
 public class Io_stream_zip_mgr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(256);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(256);
 	private Io_stream_wtr wtr_gzip, wtr_zip, wtr_bzip2;
 	private Io_stream_rdr rdr_gzip, rdr_zip, rdr_bzip2;
 	public byte[] Zip(byte type, byte[] val) {

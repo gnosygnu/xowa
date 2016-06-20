@@ -21,7 +21,7 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.amps.*;
 public class Dpl_xnde implements Xox_xnde {
-	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
+	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.New();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		itm.Parse(wiki, ctx, ctx.Page().Ttl().Full_txt_w_ttl_case(), src, xnde);
@@ -65,7 +65,7 @@ public class Dpl_xnde implements Xox_xnde {
 						bfr.Add_byte(Byte_ascii.Gt);
 						Xoh_html_wtr_escaper.Escape(amp_mgr, bfr, ttl_page_txt, 0, ttl_page_txt.length, false, false);
 						bfr.Add(Gfh_bldr_.Bry__a_rhs).Add(html_mode.Itm_end()).Add_byte_nl();
-						// TODO: lnki_wtr.Clear().Href_wiki_(ttl).Title_(ttl).Nofollow_().Write_head(bfr).Write_text(bfr).Write_tail(bfr)
+						// TODO_OLD: lnki_wtr.Clear().Href_wiki_(ttl).Title_(ttl).Nofollow_().Write_head(bfr).Write_text(bfr).Write_tail(bfr)
 						break;
 					default:
 						break;
@@ -84,8 +84,8 @@ class Dpl_page_finder {
 		Ordered_hash old_regy = Ordered_hash_.New(), new_regy = Ordered_hash_.New(), cur_regy = Ordered_hash_.New();
 		Xodb_load_mgr load_mgr = wiki.Db_mgr().Load_mgr();
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
-		Int_obj_ref tmp_id = Int_obj_ref.zero_();
-		List_adp del_list = List_adp_.new_();
+		Int_obj_ref tmp_id = Int_obj_ref.New_zero();
+		List_adp del_list = List_adp_.New();
 		int ns_filter = itm.Ns_filter();
 		Ordered_hash exclude_pages = Ordered_hash_.New();
 		Find_excludes(exclude_pages, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
@@ -126,7 +126,7 @@ class Dpl_page_finder {
 				Xoctg_view_itm ctg_itm = ctg_mgr.Itms()[i];					
 				int ctg_itm_id = ctg_itm.Page_id();
 				if (list.Has(tmp_id.Val_(ctg_itm_id))) continue;
-				list.Add(Int_obj_ref.new_(ctg_itm_id), ctg_itm);
+				list.Add(Int_obj_ref.New(ctg_itm_id), ctg_itm);
 //					if (ctg_tid == Xoa_ctg_mgr.Tid_subc) {	// recurse subcategories
 //						load_mgr.Load_by_id(tmp_page, ctg_itm_id);
 //						Find_pages_in_ctg(list, load_mgr, tmp_page, tmp_id, tmp_page.Ttl_wo_ns());
@@ -158,7 +158,7 @@ class Dpl_page_finder {
 			if (i != 0) {								// skip logic for first ctg (which doesn't have a predecessor)
 				if (!old_regy.Has(tmp_id)) continue;	// cur_itm not in old_regy; ignore
 			}
-			new_regy.Add_as_key_and_val(Int_obj_ref.new_(cur_itm.Page_id()));
+			new_regy.Add_as_key_and_val(Int_obj_ref.New(cur_itm.Page_id()));
 		}
 	}
 }

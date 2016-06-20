@@ -24,7 +24,7 @@ public class Xol_lang_srl {
 	public static Xow_ns[] Load_ns_grps(byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
 		int cur_id = -1;
-		List_adp rv = List_adp_.new_(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
+		List_adp rv = List_adp_.New(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
 			byte b = last ? Byte_ascii.Nl : src[pos];
@@ -53,7 +53,7 @@ public class Xol_lang_srl {
 	public static void Load_keywords(Xol_kwd_mgr keyword_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0, fld_idx = 0;
 		boolean cur_cs = false; byte[] cur_key = Bry_.Empty;
-		List_adp cur_words = List_adp_.new_();
+		List_adp cur_words = List_adp_.New();
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
@@ -199,7 +199,7 @@ public class Xol_lang_srl {
 		bldr.Add_paren_end().Add_proc_cont_one(Invk_lang).Add_nl();							// ).lang\n
 	}
 	public static void Save_specials(Xoa_gfs_bldr bldr, Xol_specials_mgr specials_mgr) {
-		int specials_len = specials_mgr.Count(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
+		int specials_len = specials_mgr.Len(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		if (specials_len == 0) return;
 		Bry_bfr bfr = bldr.Bfr();
 		bldr.Add_proc_cont_one(Xol_lang_itm.Invk_specials).Add_nl();

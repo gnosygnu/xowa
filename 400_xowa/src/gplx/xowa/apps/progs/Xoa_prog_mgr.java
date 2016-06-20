@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.progs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*; import gplx.core.envs.*;
-public class Xoa_prog_mgr implements GfoInvkAble {
+public class Xoa_prog_mgr implements Gfo_invk {
 	public void Init_by_app(Xoa_fsys_eval cmd_eval) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
 		Process_adp.ini_(this, usr_dlg, app_query_img_size			, cmd_eval, Process_adp.Run_mode_sync_timeout	, 10 * 60, "~{<>bin_plat_dir<>}imagemagick\\identify", "-ping -format \"<{%w,%h}>\" \"~{file}\"", "file");
@@ -87,7 +87,7 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_pdf))						return Init_by_exts("pdf");
 		else if	(ctx.Match(k, Invk_djvu))						return Init_by_exts("djvu");
 		else if	(ctx.Match(k, Invk_view_by_ext))				Exec_view_by_ext(m.ReadStr("exts"), m.ReadStr("cmd"), m.ReadStr("args"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public void Exec_view_web(byte[] url) {
@@ -95,7 +95,7 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 		String url_str = String_.new_u8(url);
 		url_str = Process_adp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_view_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
 		app_view_web.Run(url_str);
-	}	private static final byte[] Quote_normal = new byte[] {Byte_ascii.Quote}, Quote_escape = new byte[] {Byte_ascii.Quote, Byte_ascii.Quote};
+	}	private static final    byte[] Quote_normal = new byte[] {Byte_ascii.Quote}, Quote_escape = new byte[] {Byte_ascii.Quote, Byte_ascii.Quote};
 	private Process_adp App_by_ext_key(String ext) {return cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
 	public void Exec_view_by_ext(String exts_raw, String cmd, String args) {
 		String[] exts_ary = String_.Split(exts_raw, '|');

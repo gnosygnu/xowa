@@ -39,5 +39,5 @@ class Sql_file_parser_cmd_max_len implements Sql_file_parser_cmd {
 		}
 		file_bfr.Add_mid(src, fld_bgn, fld_end).Add_byte(Byte_ascii.Pipe);
 	}
-	List_adp log = List_adp_.new_();
+	List_adp log = List_adp_.New();
 }

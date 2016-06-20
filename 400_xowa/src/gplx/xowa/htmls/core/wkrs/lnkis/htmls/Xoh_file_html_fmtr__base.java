@@ -22,9 +22,9 @@ import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
-	protected final Xoh_arg_img_core arg_img_core;
-	private Bry_bfr scratch_bfr = Bry_bfr.reset_(128);
-	private final Bfr_arg__hatr_id thm_file_id = Bfr_arg__hatr_id.New_id("xowa_file_div_"), thm_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_");
+	protected final    Xoh_arg_img_core arg_img_core;
+	private Bry_bfr scratch_bfr = Bry_bfr_.Reset(128);
+	private final    Bfr_arg__hatr_id thm_file_id = Bfr_arg__hatr_id.New_id("xowa_file_div_"), thm_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_");
 	public Xoh_file_html_fmtr__base() {
 		arg_img_core = New_arg_img_core();
 	}
@@ -33,7 +33,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 		if (mode_is_hdump) a_href = Bry_.Empty;
 		fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 	}
-	private final Bry_fmtr fmtr_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}"
 	, "</a>"
 	), "a_href", "a_xowa_title", "html"
@@ -75,7 +75,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 			thm_file_id.Set(uid);
 		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, thm_file_id, div1_halign, scratch_bfr.To_bry_and_clear(), div2_content);
 	}
-	private static final byte[] Bry_style_bgn = Bry_.new_a7("style=\"width:"), Bry_style_end = Bry_.new_a7("px;\"");
+	private static final    byte[] Bry_style_bgn = Bry_.new_a7("style=\"width:"), Bry_style_end = Bry_.new_a7("px;\"");
 	protected Bry_fmtr fmtr_thumb_core = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
 	( "<div class=\"thumb t~{div1_halign}\">"
 	, "  <div~{div_id} class=\"thumbinner\" ~{style}>"
@@ -93,7 +93,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	), "magnify_btn", "caption");
 
 	public void Html_thumb_file_image(Bry_bfr tmp_bfr, byte[] thumb_image, byte[] caption, byte[] alt) {fmtr_thumb_file_image.Bld_bfr_many(tmp_bfr, thumb_image, caption, alt);}
-	private final Bry_fmtr fmtr_thumb_file_image = Bry_fmtr.new_("    ~{thumb_image}~{caption}~{alt}", "thumb_image", "caption", "alt");
+	private final    Bry_fmtr fmtr_thumb_file_image = Bry_fmtr.new_("    ~{thumb_image}~{caption}~{alt}", "thumb_image", "caption", "alt");
 
 	public void Html_thumb_file_audio(Bry_bfr tmp_bfr, byte[] caption, byte[] alt, byte[] play_btn, byte[] audio_info) {fmtr_thumb_file_audio.Bld_bfr_many(tmp_bfr, caption, alt, play_btn, audio_info);}
 	private Bry_fmtr fmtr_thumb_file_audio = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
@@ -102,7 +102,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	), "caption", "alt", "play_btn", "audio_info");
 
 	public void Html_thumb_file_video(Bry_bfr tmp_bfr, byte[] play_btn, byte[] video_thumb, byte[] caption, byte[] alt) {fmtr_thumb_file_video.Bld_bfr_many(tmp_bfr, caption, alt, play_btn, video_thumb);}
-	private final Bry_fmtr fmtr_thumb_file_video = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr_thumb_file_video = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "    <div class=\"xowa_media_div\">"
 	, "      <div>~{video_thumb}"
 	, "      </div>~{play_btn}"
@@ -121,7 +121,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	@gplx.Virtual public void Html_thumb_part_magnify(Bry_bfr tmp_bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src) {
 		fmtr_thumb_part_magnify.Bld_bfr_many(tmp_bfr, a_href, a_title);
 	}
-	private final Bry_fmtr fmtr_thumb_part_magnify = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr_thumb_part_magnify = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "<div class=\"magnify\"><a href=\"~{a_href}\" class=\"internal\" title=\"~{a_title}\"></a></div>"
 	), "a_href", "a_title");
@@ -131,7 +131,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 			img_src = Bry_.Empty;
 		fmtr_thumb_part_info.Bld_bfr_many(tmp_bfr, a_href, img_src);
 	}
-	private final Bry_fmtr fmtr_thumb_part_info = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr_thumb_part_info = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	,       "<div><a href=\"~{a_href}\" class=\"xowa_media_info\" title=\"About this file\"></a></div>" 
 	), "a_href", "img_src");
@@ -146,12 +146,12 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 			thm_play_id.Set(uid);
 		fmtr_thumb_part_play.Bld_bfr_many(tmp_bfr, thm_play_id, a_width, a_max_width, a_href, a_xowa_title);
 	}
-	private final Bry_fmtr fmtr_thumb_part_play = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr_thumb_part_play = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	,       "<div><a~{id} href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\" class=\"xowa_media_play\" style=\"width:~{a_width}px;max-width:~{a_max_width}px;\" alt=\"Play sound\"></a></div>"
 	), "id", "a_width", "a_max_width", "a_href", "a_xowa_title");
 
-	public static final Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
+	public static final    Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
 	public static byte[] Escape_xowa_title(byte[] lnki_ttl) {
 		return Xoa_ttl.Replace_spaces(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes.Encode(lnki_ttl)); // must encode xowa_title, particularly quotes; EX: xowa_title="A"b.png"; PAGE:en.w:Earth DATE:2015-11-27
 	}

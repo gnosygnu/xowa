@@ -16,19 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
-class Test_api implements GfoInvkAble {
+class Test_api implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_meta))	return meta_mgr.Get_or_null(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 //			return this;
 	}	private static final String Invk_meta = "meta";
-	private static final String Invk_prop_1 = "prop_1", Invk_prop_2 = "prop_2", Invk_prop_3 = "prop_3", Invk_prop_bry = "bry", Invk_prop_enm = "enm";
-	private static final boolean Dflt_prop_1 = false;
-	private static final int Dflt_prop_2 = 2;
-	private static final String Dflt_prop_3 = "3"; 
-	private static final byte[] Dflt_prop_bry = Bry_.new_a7("bry"); 
-	private static final int Dflt_prop_enm = 5;
-	private static final Xocfg_meta_mgr meta_mgr = new Xocfg_meta_mgr().Add
+	private static final    String Invk_prop_1 = "prop_1", Invk_prop_2 = "prop_2", Invk_prop_3 = "prop_3", Invk_prop_bry = "bry", Invk_prop_enm = "enm";
+	private static final    boolean Dflt_prop_1 = false;
+	private static final    int Dflt_prop_2 = 2;
+	private static final    String Dflt_prop_3 = "3"; 
+	private static final    byte[] Dflt_prop_bry = Bry_.new_a7("bry"); 
+	private static final    int Dflt_prop_enm = 5;
+	private static final    Xocfg_meta_mgr meta_mgr = new Xocfg_meta_mgr().Add
 	( Xocfg_meta_itm_.bool_	(Invk_prop_1, Dflt_prop_1)
 	, Xocfg_meta_itm_.int_	(Invk_prop_2, Dflt_prop_2).Rng_bgn_(-1)
 	, Xocfg_meta_itm_.str_	(Invk_prop_3, Dflt_prop_3)
@@ -52,7 +52,7 @@ class Xocfg_gui_itm_memo implements Xocfg_gui_itm {
 	public int Box_h() {return box_h;} private int box_h;
 }
 class Xocfg_meta_mgr {
-	private Hash_adp hash = Hash_adp_.new_();
+	private Hash_adp hash = Hash_adp_.New();
 	public Xocfg_meta_mgr Add(Xocfg_meta_itm_base... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {

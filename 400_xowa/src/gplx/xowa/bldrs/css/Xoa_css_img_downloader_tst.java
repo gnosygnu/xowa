@@ -166,7 +166,7 @@ class Xoa_css_img_downloader_fxt {
 		downloader.Ctor(Gfo_usr_dlg_.Test(), new Xof_download_wkr_test(), Bry_.Empty);
 	}
 	public void Test_css_convert(String raw, String expd, String... expd_img_ary) {
-		List_adp actl_img_list = List_adp_.new_();
+		List_adp actl_img_list = List_adp_.New();
 		byte[] actl_bry = downloader.Convert_to_local_urls(Bry_.new_a7("mem/en.wikipedia.org"), Bry_.new_u8(raw), actl_img_list);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl_bry));
 		Tfds.Eq_ary_str(expd_img_ary, actl_img_list.To_str_ary());

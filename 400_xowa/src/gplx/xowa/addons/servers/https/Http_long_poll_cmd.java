@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.servers.*;
 public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
-	private final    List_adp msgs = List_adp_.new_();
+	private final    List_adp msgs = List_adp_.New();
 	private long send_time_prv = 0;
 	public int Sleep_interval = 100;
 	public int Send_interval = 1000;

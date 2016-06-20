@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
-public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
+import gplx.gfui.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+public class Xoapi_html_box implements Gfo_invk, Gfo_evt_mgr_owner {
 	private Xog_win_itm win;
 	public Xoapi_html_box() {
-		evMgr = GfoEvMgr.new_(this);
+		evt_mgr = new Gfo_evt_mgr(this);
 	}
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
 	public byte Load_tid() {return load_tid;} private byte load_tid;
 	public void Focus() {
@@ -41,9 +42,9 @@ public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 		if		(ctx.Match(k, Invk_focus)) 							this.Focus();
 		else if	(ctx.Match(k, Invk_selection_focus_toggle)) 		this.Selection_focus();
 		else if	(ctx.Match(k, Invk_load_tid)) 						return Gxw_html_load_tid_.Xto_key(load_tid);
-		else if	(ctx.Match(k, Invk_load_tid_)) 						{load_tid = Gxw_html_load_tid_.Xto_tid(m.ReadStr("v")); GfoEvMgr_.PubVal(this, Evt_load_tid_changed, load_tid);}
+		else if	(ctx.Match(k, Invk_load_tid_)) 						{load_tid = Gxw_html_load_tid_.Xto_tid(m.ReadStr("v")); Gfo_evt_mgr_.Pub_val(this, Evt_load_tid_changed, load_tid);}
 		else if	(ctx.Match(k, Invk_load_tid_list))					return Gxw_html_load_tid_.Options__list;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_focus = "focus", Invk_selection_focus_toggle = "selection_focus_toggle"

@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.core.ios.*; import gplx.core.net.*;
+import gplx.core.ios.*; import gplx.core.net.*; import gplx.core.net.qargs.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.apps.urls.*;
 class Xows_cmd__fs_check {
-	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
+	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr_old arg_hash) {
 		byte[] dir_bry  = arg_hash.Get_val_bry_or(Arg_dir, null);
 		if (dir_bry != null) {
 			Write_dir(bfr, Io_url_.new_dir_(String_.new_u8(dir_bry)));
@@ -55,6 +55,6 @@ class Xows_cmd__fs_check {
 			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		}
 	}
-        public static final Xows_cmd__fs_check Instance = new Xows_cmd__fs_check(); Xows_cmd__fs_check() {}
-	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_dir = Bry_.new_a7("dir");
+        public static final    Xows_cmd__fs_check Instance = new Xows_cmd__fs_check(); Xows_cmd__fs_check() {}
+	private static final    byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_dir = Bry_.new_a7("dir");
 }

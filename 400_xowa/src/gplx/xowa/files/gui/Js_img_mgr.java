@@ -30,7 +30,7 @@ public class Js_img_mgr {
 		if (!page.Wiki().App().Mode().Tid_supports_js()) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
 		switch (elem_tid) {
 			case Xof_html_elem.Tid_gallery_v2:
-				img_wkr.Html_update(page, js_wkr, uid, html_w, html_h, html_view_url, orig_w, orig_h, html_orig_url, lnki_ttl);
+				img_wkr.Js_wkr__update_hdoc(page, js_wkr, uid, html_w, html_h, html_view_url, orig_w, orig_h, html_orig_url, lnki_ttl);
 				return;
 		}
 		String html_id = To_doc_uid(uid);
@@ -44,7 +44,7 @@ public class Js_img_mgr {
 				js_wkr.Html_atr_set("xowa_gallery_div3_" + uid, "style", "margin:" + Gallery_html_wtr_utl.Calc_vpad(gallery_mgr_h, html_h) + "px auto;");					
 				break;
 			case Xof_html_elem.Tid_imap:
-				img_wkr.Html_update(page, js_wkr, uid, html_w, html_h, html_view_url, orig_w, orig_h, html_orig_url, lnki_ttl);
+				img_wkr.Js_wkr__update_hdoc(page, js_wkr, uid, html_w, html_h, html_view_url, orig_w, orig_h, html_orig_url, lnki_ttl);
 				break;
 			case Xof_html_elem.Tid_vid:
 				String html_id_vid = "xowa_file_play_" + uid;

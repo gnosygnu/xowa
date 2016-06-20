@@ -16,8 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.primitives.*; import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/
-public class Io_mgr {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.core.ios whenever copying/deleting file
+import gplx.core.primitives.*; import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/ import gplx.core.ios.streams.*; import gplx.core.ios.loaders.*;
+public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.core.ios whenever copying/deleting file
+	public Io_mgr() {evt_mgr = new Gfo_evt_mgr(this);}
+	public Gfo_evt_mgr					Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
 	public boolean							Exists(Io_url url) {return url.Type_dir() ? ExistsDir(url) : ExistsFil(url);}
 	public boolean							ExistsFil(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).ExistsFil_api(url);}
 	public void							ExistsFilOrFail(Io_url url) {if (!ExistsFil(url)) throw Err_.new_wo_type("could not find file", "url", url);}
@@ -32,7 +34,8 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public IoEngine_xrg_xferFil			MoveFil_args(Io_url src, Io_url trg, boolean overwrite) {return IoEngine_xrg_xferFil.move_(src, trg).Overwrite_(overwrite);}
 	public void							CopyFil(Io_url src, Io_url trg, boolean overwrite) {IoEngine_xrg_xferFil.copy_(src, trg).Overwrite_(overwrite).Exec();}
 	public IoEngine_xrg_xferFil			CopyFil_args(Io_url src, Io_url trg, boolean overwrite) {return IoEngine_xrg_xferFil.copy_(src, trg).Overwrite_(overwrite);}
-	public IoRecycleBin RecycleBin()	{return recycleBin;} IoRecycleBin recycleBin = IoRecycleBin.Instance; 
+	public IoRecycleBin					RecycleBin()	{return recycleBin;} private IoRecycleBin recycleBin = IoRecycleBin.Instance; 
+	public Io_loader					Loader() {return loader;} public void Loader_(Io_loader v) {this.loader = v;} private Io_loader loader;
 
 	public IoStream						OpenStreamWrite(Io_url url)		{return OpenStreamWrite_args(url).Exec();}
 	public IoEngine_xrg_openWrite		OpenStreamWrite_args(Io_url url) {return IoEngine_xrg_openWrite.new_(url);}
@@ -61,6 +64,7 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public void							DeleteDirDeep(Io_url url) {IoEngine_xrg_deleteDir.new_(url).Recur_().Exec();}
 	public void							DeleteDirDeep_ary(Io_url... urls) {for (Io_url url : urls) IoEngine_xrg_deleteDir.new_(url).Recur_().Exec();}
 	public int							Delete_dir_empty(Io_url url) {return Io_mgr_.Delete_dir_empty(url);}
+	public boolean						Truncate_fil(Io_url url, long size) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).Truncate_fil(url, size);}
 	public void							MoveDirDeep(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.move_(src, trg).Recur_().Exec();}
 	public IoEngine_xrg_xferDir			CopyDir_cmd(Io_url src, Io_url trg) {return IoEngine_xrg_xferDir.copy_(src, trg);}
 	public void							CopyDirSubs(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.copy_(src, trg).Exec();}
@@ -71,30 +75,37 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	}
 	public void AliasDir_sysEngine(String srcRoot, String trgRoot)			{AliasDir(srcRoot, trgRoot, IoEngine_.SysKey);}
 	public void AliasDir(String srcRoot, String trgRoot, String engineKey)	{IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.alias_(srcRoot, trgRoot, engineKey));}
-	public IoStream						OpenStreamRead(Io_url url)		{return OpenStreamRead_args(url).ExecAsIoStreamOrFail();}
-	public IoEngine_xrg_openRead		OpenStreamRead_args(Io_url url)	{return IoEngine_xrg_openRead.new_(url);}
-	public String						LoadFilStr(String url) {return LoadFilStr_args(Io_url_.new_fil_(url)).Exec();}
-	public String						LoadFilStr(Io_url url) {return LoadFilStr_args(url).Exec();}
-	public IoEngine_xrg_loadFilStr		LoadFilStr_args(Io_url url) {return IoEngine_xrg_loadFilStr.new_(url);}
+	public IoStream						OpenStreamRead(Io_url url)			{return OpenStreamRead_args(url).ExecAsIoStreamOrFail();}
+	public IoEngine_xrg_openRead		OpenStreamRead_args(Io_url url)		{return IoEngine_xrg_openRead.new_(url);}
+	public String						LoadFilStr(String url)				{return LoadFilStr_args(Io_url_.new_fil_(url)).Exec();}
+	public String						LoadFilStr(Io_url url)				{return LoadFilStr_args(url).Exec();}
+	public IoEngine_xrg_loadFilStr		LoadFilStr_args(Io_url url)			{return IoEngine_xrg_loadFilStr.new_(url);}
 	public byte[]						LoadFilBryOrNull(Io_url url)		{return LoadFilBryOr(url, null);}
 	public byte[]						LoadFilBryOr(Io_url url, byte[] or) {return ExistsFil(url) ? LoadFilBry(url) : or;}
-	public byte[]						LoadFilBry(String url) {return LoadFilBry_reuse(Io_url_.new_fil_(url), Bry_.Empty, Int_obj_ref.zero_());}
-	public byte[]						LoadFilBry(Io_url url) {return LoadFilBry_reuse(url, Bry_.Empty, Int_obj_ref.zero_());}
+	public byte[]						LoadFilBry(String url)				{return LoadFilBry_reuse(Io_url_.new_fil_(url), Bry_.Empty, Int_obj_ref.New_zero());}
+	public byte[]						LoadFilBry(Io_url url)				{return LoadFilBry_reuse(url, Bry_.Empty, Int_obj_ref.New_zero());}
 	public void							LoadFilBryByBfr(Io_url url, Bry_bfr bfr) {
-		Int_obj_ref len = Int_obj_ref.zero_();
+		Int_obj_ref len = Int_obj_ref.New_zero();
 		byte[] bry = LoadFilBry_reuse(url, Bry_.Empty, len);
 		bfr.Bfr_init(bry, len.Val());
 	}
-	public static final byte[] LoadFilBry_fail = Bry_.Empty;
-	public byte[]						LoadFilBry_reuse(Io_url url, byte[] ary, Int_obj_ref aryLen) {
-		if (!ExistsFil(url)) {aryLen.Val_(0); return LoadFilBry_fail;}
+	public static final    byte[] LoadFilBry_fail = Bry_.Empty;
+	public byte[]						LoadFilBry_reuse(Io_url url, byte[] ary, Int_obj_ref ary_len) {
+		if (loader != null) {
+			byte[] rv = loader.Load_fil_as_bry(url);
+			if (rv != null) return rv;
+		}
+		if (!ExistsFil(url)) {
+			ary_len.Val_(0);
+			return LoadFilBry_fail;
+		}
 		IoStream stream = IoStream_.Null;
 		try {
 			stream = OpenStreamRead(url);
-			int streamLen = (int)stream.Len();
-			aryLen.Val_(streamLen);
-			if (streamLen > ary.length)
-				ary = new byte[streamLen];
+			int stream_len = (int)stream.Len();
+			ary_len.Val_(stream_len);
+			if (stream_len > ary.length)
+				ary = new byte[stream_len];
 			stream.ReadAry(ary);
 			return ary;
 		}
@@ -138,10 +149,11 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	}
 	public boolean DownloadFil(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg).Exec();}
 	public IoEngine_xrg_downloadFil DownloadFil_args(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg);}
-	public static final Io_mgr Instance = new Io_mgr(); public Io_mgr() {}
+	public static final    Io_mgr Instance = new Io_mgr();
 	public static final int Len_kb = 1024, Len_mb = 1048576, Len_gb = 1073741824, Len_gb_2 = 2147483647;
 	public static final long Len_mb_long = Len_mb;
 	public static final long Len_null = -1;
+	public static final    String Evt__fil_created = "fil_created";
 }
 class Io_mgr_ {
 	public static int Delete_dir_empty(Io_url url) {

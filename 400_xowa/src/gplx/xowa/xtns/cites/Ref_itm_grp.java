@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_grp {
-	private List_adp lsts = List_adp_.new_();
+	private List_adp lsts = List_adp_.New();
 	public Ref_itm_grp(byte[] grp_name) {this.grp_name = grp_name;}
 	public byte[] Grp_name() {return grp_name;} private byte[] grp_name;
 	public int Grp_seal() {

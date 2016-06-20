@@ -44,7 +44,7 @@ class Xoh_ctg_mgr_fxt {
 		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		ctg_grp_mgr = new Xohp_ctg_grp_mgr();
 		return this;
-	}	private Xohp_ctg_grp_mgr ctg_grp_mgr; Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr.new_();
+	}	private Xohp_ctg_grp_mgr ctg_grp_mgr; Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoh_ctg_mgr_fxt Init_ctgs(String... v) {init_ctgs = v; return this;} private String[] init_ctgs; 
 	public void Test_html(String expd) {		
 		byte[][] ctgs_bry_ary = Bry_.Ary(init_ctgs);

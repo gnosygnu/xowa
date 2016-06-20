@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*;
 public class Xoctg_url {
 	public byte[][]		Grp_idxs() {return grp_idxs;} private byte[][] grp_idxs = new byte[3][];
 	public byte[]		Grp_fwds() {return grp_fwds;} private byte[] grp_fwds = new byte[3];
@@ -59,7 +59,7 @@ public class Xoctg_url {
 		}
 	}
 	public static final byte Tid_all_bgn = 0, Tid_subc_bgn = 1, Tid_subc_end = 2, Tid_file_bgn = 3, Tid_file_end = 4, Tid_page_bgn = 5, Tid_page_end = 6, Tid_all_end = 8;
-	public static final Hash_adp_bry Arg_keys = Hash_adp_bry.ci_a7()
+	public static final    Hash_adp_bry Arg_keys = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_from, Tid_all_bgn)
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_until, Tid_all_end)
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_subc_bgn, Tid_subc_bgn)

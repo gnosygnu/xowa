@@ -23,10 +23,10 @@ public class Xog_cbk_mgr {	// INSTANCE:app
 		this.wkrs = (Xog_cbk_wkr[])Array_.Resize_add_one(wkrs, wkrs_len, wkr);
 		++wkrs_len;
 	}
-	public void Send_json(String func, Gfobj_nde data) {
+	public void Send_json(Xog_cbk_trg trg, String func, Gfobj_nde data) {
 		for (int i = 0; i < wkrs_len; ++i) {
 			Xog_cbk_wkr wkr = wkrs[i];
-			wkr.Send_json(func, data);
+			wkr.Send_json(trg, func, data);
 		}
 	}
 }

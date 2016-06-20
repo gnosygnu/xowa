@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 public class Xoh_rtl_utl {		
-	private static final int[] tmp_ary = new int[32];	// support no more than 16 items
-	private static Bry_bfr bfr = Bry_bfr.reset_(32);
+	private static final    int[] tmp_ary = new int[32];	// support no more than 16 items
+	private static Bry_bfr bfr = Bry_bfr_.Reset(32);
 	public static byte[] Reverse_li(byte[] src) {
 		int src_len = src.length;
 		int pos = 0;
@@ -64,7 +64,7 @@ public class Xoh_rtl_utl {
 		}
 		bfr.Add_mid(src, li_n_end, ul_end);				// add from nth "</li>" -> "</ul>"
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Ul_bgn = Bry_.new_a7("<ul")
 	, Ul_end = Bry_.new_a7("</ul>")
 	, Li_bgn = Bry_.new_a7("<li")

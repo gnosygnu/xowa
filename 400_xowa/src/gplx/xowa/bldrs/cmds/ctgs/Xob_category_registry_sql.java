@@ -34,7 +34,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		wiki.Init_db_mgr();
 		Xowd_page_tbl page_core_tbl = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
-		Db_rdr rdr = page_core_tbl.conn.Stmt_select_order(page_core_tbl.Tbl_name(), String_.Ary(page_core_tbl.Fld_page_title(), page_core_tbl.Fld_page_id()), String_.Ary(page_core_tbl.Fld_page_ns()), page_core_tbl.Fld_page_title())
+		Db_rdr rdr = page_core_tbl.Conn().Stmt_select_order(page_core_tbl.Tbl_name(), String_.Ary(page_core_tbl.Fld_page_title(), page_core_tbl.Fld_page_id()), String_.Ary(page_core_tbl.Fld_page_ns()), page_core_tbl.Fld_page_title())
 			.Crt_int(page_core_tbl.Fld_page_ns(), Xow_ns_.Tid__category)
 			.Exec_select__rls_auto();
 		try {
@@ -53,6 +53,6 @@ public class Xob_category_registry_sql implements Xob_cmd {
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run()	{}
 	public void Cmd_term()	{}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
 	public static Io_url Tmp_dir(Xowe_wiki wiki) {return wiki.Fsys_mgr().Tmp_dir().GenSubDir(Xob_cmd_keys.Key_text_cat_core);}
 }

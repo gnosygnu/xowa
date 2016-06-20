@@ -76,7 +76,7 @@ public class Xol_csv_parser {
 			}
 		}
 	}
-	private static final byte[] Bry_pipe = Bry_.new_a7("\\u007C");
-	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public static final Xol_csv_parser Instance = new Xol_csv_parser(); Xol_csv_parser() {}
+	private static final    byte[] Bry_pipe = Bry_.new_a7("\\u007C");
+	private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	public static final    Xol_csv_parser Instance = new Xol_csv_parser(); Xol_csv_parser() {}
 }

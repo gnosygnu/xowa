@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.htmls.*;
-public class Xoapi_font implements GfoInvkAble {
+public class Xoapi_font implements Gfo_invk {
 	private Xoae_app app;
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
@@ -46,7 +46,7 @@ public class Xoapi_font implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_increase))	 		this.Increase();
 		else if	(ctx.Match(k, Invk_decrease))	 		this.Decrease();
 		else if	(ctx.Match(k, Invk_reset))	 			this.Reset();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

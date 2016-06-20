@@ -190,8 +190,8 @@ class Xowh_sidebar_mgr_fxt {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			sidebar_mgr = wiki.Html_mgr().Portal_mgr().Sidebar_mgr();
-			bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
-			comment_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
+			bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
+			comment_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
 			Init_popups_enabled_(false);
 //			}
 		return this;

@@ -32,7 +32,7 @@ public class Xob_wbase_json_dump_cmd implements Xob_cmd {
 	public void Cmd_term() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_fil_))		this.src_fil = m.ReadIoUrl("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_src_fil_ = "src_fil_";
 }

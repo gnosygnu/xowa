@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.modules.popups.*;
-public class Xow_module_mgr implements GfoInvkAble {
+public class Xow_module_mgr implements Gfo_invk {
 	private Hash_adp_bry regy = Hash_adp_bry.cs();
 	public Xow_module_mgr(Xowe_wiki wiki) {
 		this.popup_mgr = new Xow_popup_mgr(wiki);
@@ -35,6 +35,6 @@ public class Xow_module_mgr implements GfoInvkAble {
 	public Xow_module_base Get(byte[] key) {return (Xow_module_base)regy.Get_by_bry(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get";
 }

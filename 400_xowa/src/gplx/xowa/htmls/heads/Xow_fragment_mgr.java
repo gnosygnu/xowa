@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
-public class Xow_fragment_mgr implements GfoInvkAble {
+public class Xow_fragment_mgr implements Gfo_invk {
 	public Xow_fragment_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public byte[] Html_js_edit_toolbar() {return html_js_edit_toolbar;} private byte[] html_js_edit_toolbar;
 	private Bry_fmtr html_js_edit_toolbar_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
@@ -40,7 +40,7 @@ public class Xow_fragment_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_js_edit_toolbar_fmt_))	html_js_edit_toolbar_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_html_js_edit_toolbar))		return html_js_edit_toolbar;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_html_js_edit_toolbar_fmt_ = "html_js_edit_toolbar_fmt_", Invk_html_js_edit_toolbar = "html_js_edit_toolbar";

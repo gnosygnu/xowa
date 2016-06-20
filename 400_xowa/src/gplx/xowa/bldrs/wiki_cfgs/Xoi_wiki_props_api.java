@@ -61,7 +61,7 @@ public class Xoi_wiki_props_api {
 	}
 	private Xoi_wiki_props_alias[] Parse_alias_ary(XmlNde xnde) {
 		int xndes_len = xnde.SubNdes().Count();
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < xndes_len; i++) {
 			XmlNde sub_nde = xnde.SubNdes().Get_at(i);
 			if (!String_.Eq(sub_nde.Name(), "ns")) continue;
@@ -73,7 +73,7 @@ public class Xoi_wiki_props_api {
 	}
 	private Xoi_wiki_props_ns[] Parse_ns_ary(XmlNde xnde) {
 		int xndes_len = xnde.SubNdes().Count();
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < xndes_len; i++) {
 			XmlNde sub_nde = xnde.SubNdes().Get_at(i);
 			if (!String_.Eq(sub_nde.Name(), "ns")) continue;

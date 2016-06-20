@@ -19,13 +19,13 @@ package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.files.xfers.*;
-public class Xoa_available_wikis_mgr implements GfoInvkAble {
+public class Xoa_available_wikis_mgr implements Gfo_invk {
 	private Bry_fmtr itms_as_html_fmtr = Bry_fmtr.new_("\n        <li><a href=\"/site/~{domain}/\"~{itm_cls}>~{domain}</a></li>", "domain", "itm_cls");
 	public Xoa_available_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Itms_as_html() {
 		if (itms_as_html == null) {
 			String itm_cls = app.Api_root().Html().Modules().Popups().Enabled() ? " class='xowa-hover-off'" : "";
-			Bry_bfr tmp_bfr = Bry_bfr.new_(); // NOTE: do not use app.Utl__bfr_mkr().Get_k004() as it is being used simultaneously by another caller; TODO: find call
+			Bry_bfr tmp_bfr = Bry_bfr_.New(); // NOTE: do not use app.Utl__bfr_mkr().Get_k004() as it is being used simultaneously by another caller; TODO_OLD: find call
 			Xow_xwiki_mgr xwiki_mgr = app.Usere().Wiki().Xwiki_mgr();
 			xwiki_mgr.Sort_by_key();
 			int len = xwiki_mgr.Len();
@@ -48,7 +48,7 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_visible_))			visible = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_visible_toggle))		{visible = !visible; app.Gui_mgr().Browser_win().Active_html_box().Html_js_eval_proc_as_str("xowa-portal-wikis-visible-toggle", Bool_.To_str_lower(visible));}
 		else if	(ctx.Match(k, Invk_itms_as_html_fmtr_))	itms_as_html_fmtr.Fmt_(m.ReadBry("v"));
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_visible = "visible", Invk_visible_ = "visible_", Invk_visible_toggle = "visible_toggle", Invk_itms_as_html = "itms_as_html", Invk_itms_as_html_fmtr_ = "itms_as_html_fmtr_", Invk_itms_refresh = "itms_refresh";
 }

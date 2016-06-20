@@ -20,13 +20,13 @@ import gplx.core.primitives.*;
 import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_lbl_mgr {
 	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_a7();
-	private Hash_adp qid_hash = Hash_adp_.new_(), pid_hash = Hash_adp_.new_(); private Int_obj_ref int_hash_key = Int_obj_ref.neg1_();
+	private Hash_adp qid_hash = Hash_adp_.New(), pid_hash = Hash_adp_.New(); private Int_obj_ref int_hash_key = Int_obj_ref.New_neg1();
 	private Wdata_visitor__lbl_gatherer lbl_gatherer;
 	public Wdata_lbl_mgr() {
 		lbl_gatherer = new Wdata_visitor__lbl_gatherer(this);
 	}
 	public void Clear() {ttl_hash.Clear(); qid_hash.Clear(); pid_hash.Clear(); queue.Clear();}
-	public List_adp Queue() {return queue;} private List_adp queue = List_adp_.new_();
+	public List_adp Queue() {return queue;} private List_adp queue = List_adp_.New();
 	@gplx.Internal protected void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
 	public Wdata_lbl_itm Get_itm__ttl(byte[] ttl) {
 		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.Get_by(ttl);
@@ -61,7 +61,7 @@ public class Wdata_lbl_mgr {
 	}
 	private void Queue_add(Hash_adp hash, boolean is_pid, int id, boolean get_en) {
 		Wdata_lbl_itm itm = new Wdata_lbl_itm(is_pid, id, get_en);
-		hash.Add(Int_obj_ref.new_(id), itm);
+		hash.Add(Int_obj_ref.New(id), itm);
 		ttl_hash.Add(itm.Ttl(), itm);
 		queue.Add(itm);
 	}

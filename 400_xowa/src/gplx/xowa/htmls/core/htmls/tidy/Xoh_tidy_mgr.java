@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; impo
 import gplx.core.envs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.apps.fsys.*;
-public class Xoh_tidy_mgr implements GfoInvkAble {
+public class Xoh_tidy_mgr implements Gfo_invk {
 	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	private Xoh_tidy_wkr_tidy wkr_tidy = new Xoh_tidy_wkr_tidy(); private Xoh_tidy_wkr_jtidy wkr_jtidy = new Xoh_tidy_wkr_jtidy();
 	public void Init_by_app(Xoae_app app) {
@@ -52,7 +52,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_engine_type_))			Wkr_tid_(Xoh_tidy_wkr_.Xto_tid(m.ReadStr("v")));
 		else if	(ctx.Match(k, Invk_engine_type_list))		return Xoh_tidy_wkr_.Options__list;
 		else if	(ctx.Match(k, Invk_lib))					return wkr_tidy;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String
@@ -71,7 +71,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 		bfr.Delete_rng_to_end(find);
 		return true;
 	}
-	private static final byte[]	// MW:includes/parser/Tidy.php|getWrapped
+	private static final    byte[]	// MW:includes/parser/Tidy.php|getWrapped
 	  Wrap_bgn = Bry_.new_a7
 	( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 	+ "<html>"

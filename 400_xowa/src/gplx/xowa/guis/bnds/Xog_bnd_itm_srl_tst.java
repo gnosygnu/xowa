@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import org.junit.*; import gplx.gfui.*; import gplx.xowa.apps.cfgs.old.*;
+import org.junit.*; import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.xowa.apps.cfgs.old.*;
 public class Xog_bnd_itm_srl_tst {
 	@Before public void init() {fxt.Reset();} private Xog_bnd_itm_srl_fxt fxt = new Xog_bnd_itm_srl_fxt();
 	@Test  public void Src_get() {

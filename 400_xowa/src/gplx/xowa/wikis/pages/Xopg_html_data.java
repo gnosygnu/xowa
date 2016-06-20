@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.indicators.*;
-import gplx.xowa.xtns.pagebanners.*;
+import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.wikis.pages.tags.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
 	public boolean				Html_restricted() {return html_restricted;} private boolean html_restricted = true;
@@ -31,17 +31,20 @@ public class Xopg_html_data {
 			? display_ttl_vnt					// return variant title; DATE:2014-08-29
 			: display_ttl						// return normal title
 			;
-	}
+	}		
 	public Xopg_html_data		Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
 	public boolean				Mode_wtxt_shown() {synchronized (this) {return mode_wtxt_shown;}} public void Mode_wtxt_shown_y_() {synchronized (this) {this.mode_wtxt_shown = true;}} private boolean mode_wtxt_shown; 
 	public byte[]				Display_ttl_vnt() {return display_ttl_vnt;} public void Display_ttl_vnt_(byte[] v) {display_ttl_vnt = v;} private byte[] display_ttl_vnt;
 	public byte[]				Content_sub() {return content_sub;} public void Content_sub_(byte[] v) {content_sub = v;} private byte[] content_sub;
 	public Xopg_page_heading	Page_heading() {return page_heading;} private final    Xopg_page_heading page_heading = new Xopg_page_heading();
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
-	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr.reset_(255);
+	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr_.Reset(255);
 	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
 	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
+	public boolean					Cbk_enabled() {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
+	public boolean				Hdump_exists() {return hdump_exists;} private boolean hdump_exists; public void Hdump_exists_(boolean v) {this.hdump_exists = v;}
+
 	public boolean				Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
 	public boolean				Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
 	public Xopg_xtn_skin_mgr	Xtn_skin_mgr() {return xtn_skin_mgr;} private Xopg_xtn_skin_mgr xtn_skin_mgr = new Xopg_xtn_skin_mgr();
@@ -55,8 +58,8 @@ public class Xopg_html_data {
 	public Pgbnr_itm			Xtn_pgbnr() {return xtn_pgbnr;} public void Xtn_pgbnr_(Pgbnr_itm v) {xtn_pgbnr = v;} private Pgbnr_itm xtn_pgbnr;
 	public Xoh_head_mgr			Head_mgr() {return module_mgr;} private Xoh_head_mgr module_mgr = new Xoh_head_mgr();
 	public boolean					Skip_parse() {return skip_parse;} public void Skip_parse_(boolean v) {skip_parse = v;} private boolean skip_parse;
-	public Xopg_tag_mgr			Custom_head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr();
-	public Xopg_tag_mgr			Custom_tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr();
+	public Xopg_tag_mgr			Custom_head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
+	public Xopg_tag_mgr			Custom_tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_body() {return custom_body;} public Xopg_html_data Custom_body_(byte[] v) {custom_body = v; return this;} private byte[] custom_body;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;

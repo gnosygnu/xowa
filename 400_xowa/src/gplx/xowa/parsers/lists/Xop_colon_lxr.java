@@ -28,7 +28,7 @@ public class Xop_colon_lxr implements Xop_lxr {
 			int prv_pos = cur_pos -1 ;
 			if (	ctx.Cur_tkn_tid() != Xop_tkn_itm_.Tid_lnki	// ignore if inside link
 				&&	prv_pos > 0
-				&&	src[prv_pos] != Byte_ascii.Nl			// only consider ":" which are not preceded by \n; DATE:2014-07-11 TODO: emulate Parser.php|findColonNoLinks which does much more logic to see if ";a:b" construct should apply
+				&&	src[prv_pos] != Byte_ascii.Nl			// only consider ":" which are not preceded by \n; DATE:2014-07-11 TODO_OLD: emulate Parser.php|findColonNoLinks which does much more logic to see if ";a:b" construct should apply
 				) {	
 				listCtx.Dd_chk_(false);
 				return listCtx.MakeTkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
@@ -37,5 +37,5 @@ public class Xop_colon_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.Colon(bgn_pos, cur_pos));
 		return cur_pos;
 	}
-	public static final Xop_colon_lxr Instance = new Xop_colon_lxr();
+	public static final    Xop_colon_lxr Instance = new Xop_colon_lxr();
 }

@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //	using gplx.xowa.wikis.dbs; using gplx.xowa.wikis.pages; using gplx.xowa.htmls.core.makes.imgs; using gplx.xowa.wikis.pages.skins;
 //	using gplx.xowa.wikis.data; using gplx.xowa.wikis.data.tbls; using gplx.xowa.guis;
 //	public class Xohd_page_html_mgr__load {
-//		private final Bry_rdr_old rdr = new Bry_rdr_old(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();
+//		private final    Bry_rdr_old rdr = new Bry_rdr_old(); private final    List_adp rows = List_adp_.New(), imgs = List_adp_.New();
 //		public void Load_page(Xow_wiki wiki, Xoh_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 //			Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.text: ttl=~{0}", page_ttl.Full_db_as_str());
 //			tbl.Select_by_page(rows, page_id);
@@ -73,14 +73,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		private void Load_data_redlink(Xoh_page hpg) {
 //			Ordered_hash redlink_hash = hpg.Redlink_uids();
 //			while (!rdr.Pos_is_eos()) {
-//				Int_obj_ref redlink_uid = Int_obj_ref.new_(rdr.Read_int_to_pipe());
+//				Int_obj_ref redlink_uid = Int_obj_ref.New(rdr.Read_int_to_pipe());
 //				redlink_hash.Add(redlink_uid, redlink_uid);
 //			}
 //		}
 //		private void Load_data_gallery(Xoh_page hpg) {
 //			int uid = rdr.Read_int_to_pipe();
 //			int box_max = rdr.Read_int_to_pipe();
-//			hpg.Gallery_itms().Add_if_dupe_use_nth(uid, new Xohd_img_itm__gallery_mgr(uid, box_max));	// TODO: temporarily added b/c last build did not add gallery uid correctly
+//			hpg.Gallery_itms().Add_if_dupe_use_nth(uid, new Xohd_img_itm__gallery_mgr(uid, box_max));	// TODO_OLD: temporarily added b/c last build did not add gallery uid correctly
 //		}
 //	}
 //}

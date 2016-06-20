@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Gfh_wtr {
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
-	private List_adp nde_stack = List_adp_.new_();
+	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private List_adp nde_stack = List_adp_.New();
 	public byte Atr_quote() {return atr_quote;} public Gfh_wtr Atr_quote_(byte v) {atr_quote = v; return this;} private byte atr_quote = Byte_ascii.Quote;
 	public Gfh_wtr Nde_full_atrs(byte[] tag, byte[] text, boolean text_escape, byte[]... atrs) {
 		Nde_bgn(tag);

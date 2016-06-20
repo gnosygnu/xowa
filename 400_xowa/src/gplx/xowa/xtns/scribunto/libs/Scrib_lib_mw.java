@@ -36,7 +36,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (src != null)	// src exists; indicates that Invoke being called recursively; push existing src onto stack
 			src_stack.Add(src);
 		this.cur_wiki = wiki; this.ctx = ctx; this.src = new_src;
-	}	private Xowe_wiki cur_wiki; private byte[] src; private Xop_ctx ctx; private List_adp src_stack = List_adp_.new_();
+	}	private Xowe_wiki cur_wiki; private byte[] src; private Xop_ctx ctx; private List_adp src_stack = List_adp_.New();
 	public void Invoke_end() {
 		if (src_stack.Count() > 0)	// src_stack item exists; pop
 			src = (byte[])List_adp_.Pop(src_stack);
@@ -97,7 +97,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
 		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
 		if (ttl == null) return rslt.Init_ary_empty();
-		Xoae_page page = cur_wiki.Data_mgr().Get_page(ttl, false);
+		Xoae_page page = cur_wiki.Data_mgr().Load_page_by_ttl(ttl);
 		if (page.Missing()) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
 		return rslt.Init_obj(mod.LoadString(String_.new_u8(page.Data_raw())));
@@ -111,7 +111,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame.Frame_tid());
 		String idx_str = args.Pull_str(1);
 		int idx_int = Int_.parse_or(idx_str, Int_.Min_value);	// NOTE: should not receive int value < -1; idx >= 0
-		Bry_bfr tmp_bfr = Bry_bfr.new_();	// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
+		Bry_bfr tmp_bfr = Bry_bfr_.New();	// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
 		if (idx_int != Int_.Min_value) {	// idx is integer
 			Arg_nde_tkn nde = Get_arg(frame, idx_int, frame_arg_adj);
 			//frame.Args_eval_by_idx(core.Ctx().Src(), idx_int); // NOTE: arg[0] is always MW function name; EX: {{#invoke:Mod_0|Func_0|Arg_1}}; arg_x = "Mod_0"; args[0] = "Func_0"; args[1] = "Arg_1"
@@ -166,7 +166,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int args_len = frame.Args_len() - frame_arg_adj;
 		if (args_len < 1) return rslt.Init_obj(Keyval_.Ary_empty);		// occurs when "frame:getParent().args" but no parent frame
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();		// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int arg_idx = 0;
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = frame.Args_get_by_idx(i + frame_arg_adj);
@@ -265,7 +265,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return rslt.Init_obj(bfr.To_str_and_clear());
 	}
 	private Keyval[] CallParserFunction_parse_args(Number_parser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, Keyval[] args) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		// flatten args
 		int args_len = args.length;
 		for (int i = 2; i < args_len; i++) {
@@ -323,9 +323,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			return rslt.Init_obj(sub_bfr.To_str_and_rls());
 		}
 		else {
-//				String err_msg = "expand_template failed; ttl=" + ttl_str;
-//				cur_wiki.App().Usr_dlg().Warn_many("", "", err_msg);
-			return rslt.Init_ary_empty();
+			return rslt.Init_fail("expandTemplate: template \"" + ttl_str + "\" does not exist");	// NOTE: must return error if template is missing; PAGE:en.w:Flag_of_Greenland DATE:2016-05-02
 		}
 		// BLOCK.end:Xot_invk_tkn.Transclude
 	}

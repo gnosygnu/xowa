@@ -47,7 +47,7 @@ class Nearby_mgr_fxt {
 			fxt = new Xop_fxt();
 			nearby_mgr = new Nearby_mgr();
 			excluded = Hash_adp_bry.ci_a7();
-			tmp_bfr = Bry_bfr.new_();
+			tmp_bfr = Bry_bfr_.New();
 		}
 		fxt.Reset();
 		Io_mgr.Instance.InitEngine_mem();

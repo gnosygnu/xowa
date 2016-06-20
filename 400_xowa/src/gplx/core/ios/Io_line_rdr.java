@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.ios.streams.*;
 public class Io_line_rdr {
 	public Io_line_rdr (Gfo_usr_dlg usr_dlg, Io_url... urls) {this.usr_dlg = usr_dlg; this.urls = urls; if (urls.length == 0) bfr_state = Bfr_state_end;} Gfo_usr_dlg usr_dlg;
 	public int Url_idx() {return url_idx;} private int url_idx;
@@ -141,7 +142,7 @@ public class Io_line_rdr {
 				stream_bry = Bry_.Empty;
 			else
 				stream_bry = Bry_.Mid(stream_bry, nl_pos + 1, stream_bry_len);
-			stream = gplx.core.ios.IoStream_.ary_(stream_bry);
+			stream = gplx.core.ios.streams.IoStream_.ary_(stream_bry);
 		}
 		else {
 			stream = Io_mgr.Instance.OpenStreamRead(url);

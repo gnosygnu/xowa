@@ -19,8 +19,8 @@ package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.primitives.*;
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.specials.*;
-public class Xows_bmk_page implements Xows_page {
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__bookmarks;}
+public class Xows_bmk_page implements Xow_special_page {
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__bookmarks;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		Xoa_app app = wiki.App();
@@ -31,5 +31,5 @@ public class Xows_bmk_page implements Xows_page {
 		page.Hdump_data().Body_(bfr.To_bry_and_rls());
 	}
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

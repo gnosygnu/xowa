@@ -37,13 +37,13 @@ public class Xop_languages_xnde implements Xox_xnde {
 	}
 	private List_adp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
 		this.root_ttl = Root_ttl_of(wiki, ctx.Page().Ttl());
-		List_adp rslts = List_adp_.new_(); 
-		Int_obj_ref rslt_count = Int_obj_ref.new_(0);
+		List_adp rslts = List_adp_.New(); 
+		Int_obj_ref rslt_count = Int_obj_ref.New(0);
 		Xow_ns page_ns = root_ttl.Ns();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslts, null, null, rslt_count, page_ns, root_ttl.Page_db(), Int_.Max_value, 0, Int_.Max_value, true, false);
 		int len = rslt_count.Val();
 		if (len == 0) return List_adp_.Noop;				// no lang pages; return;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		byte[] root_ttl_bry = root_ttl.Page_db();		// get root_ttl_bry; do not use ns
 		int lang_bgn = root_ttl_bry.length + 1;			// lang starts after /; EX: "Page" will have subpage of "Page/fr" and lang_bgn of 5
 		boolean english_needed = true;

@@ -306,7 +306,7 @@ class Wdata_hwtr_mgr_fxt {
 	}
 	public void Test_claim_val(Wdata_claim_itm_core claim, String expd) {			
 		doc_hwtr.Init_by_wdoc(wdoc_bldr.Add_claims(claim).Xto_wdoc());
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(Bry_.Empty, tmp_bfr, doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr());
 		claim.Welcome(html_wtr);
 		byte[] actl = tmp_bfr.To_bry_and_clear();
@@ -315,7 +315,7 @@ class Wdata_hwtr_mgr_fxt {
 	public void Test_json(Wdata_doc wdoc, String expd) {
 		Wdata_fmtr__json fmtr_json = doc_hwtr.Fmtr_json();
 		fmtr_json.Init_by_wdoc(wdoc.Jdoc());
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		fmtr_json.Bfr_arg__add(tmp_bfr);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}

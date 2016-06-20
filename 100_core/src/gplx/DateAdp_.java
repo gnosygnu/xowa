@@ -25,15 +25,15 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import gplx.core.times.*;
-public class DateAdp_ implements GfoInvkAble {
+public class DateAdp_ implements Gfo_invk {
 	public static final String Cls_ref_name = "Date";
-	public static final Class<?> Cls_ref_type = DateAdp.class;
+	public static final    Class<?> Cls_ref_type = DateAdp.class;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Now))		return Now();
-		else									return GfoInvkAble_.Rv_unhandled;			
-	}	public static final String Invk_Now = "Now";
-	public static final DateAdp MinValue		= new DateAdp(   1,  1,  1,  0,  0,  0,   0); 
-	public static final DateAdp MaxValue		= new DateAdp(9999, 12, 31, 23, 59, 59, 999); 
+		else									return Gfo_invk_.Rv_unhandled;			
+	}	public static final    String Invk_Now = "Now";
+	public static final    DateAdp MinValue		= new DateAdp(   1,  1,  1,  0,  0,  0,   0); 
+	public static final    DateAdp MaxValue		= new DateAdp(9999, 12, 31, 23, 59, 59, 999); 
 	public static DateAdp Now() {return Tfds.Now_enabled() ? Tfds.Now() : new DateAdp(new GregorianCalendar());}
 	public static DateAdp new_(int year, int month, int day, int hour, int minute, int second, int frac) {return new DateAdp(year, month, day, hour, minute, second, frac);}
 	public static DateAdp seg_(int[] ary) {
@@ -66,7 +66,7 @@ public class DateAdp_ implements GfoInvkAble {
 	}	static DateAdp_parser date_parser = DateAdp_parser.new_();
 	public static DateAdp dateTime_(GregorianCalendar v) {return new DateAdp(v);}
 	public static DateAdp dateTime_obj_(Object v) {return new DateAdp((GregorianCalendar)v);}
-	public static final DateAdp_ Gfs = new DateAdp_();
+	public static final    DateAdp_ Gfs = new DateAdp_();
 
 	public static int DaysInMonth(DateAdp date) {			
 		int rv = DaysInMonth_ary[date.Month() - Int_.Base1];
@@ -80,6 +80,10 @@ public class DateAdp_ implements GfoInvkAble {
 		else						return true;
 	}
 	public static DateAdp unixtime_utc_seconds_(long v) {return unixtime_utc_ms_(v * 1000);}
+	public static DateAdp parse_fmt_or(String raw, String fmt, DateAdp or) {
+		try {return parse_fmt(raw, fmt);}
+		catch (Exception e) {Err_.Noop(e); return or;}
+	}
 		public static DateAdp db_(Object v) {
 		Timestamp ts = (Timestamp)v;		
 		Calendar gc = Calendar.getInstance();

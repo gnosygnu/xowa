@@ -27,7 +27,7 @@ public class Dg_match_mgr_tst {
 }
 class Dg_match_mgr_fxt {
 	private Dg_match_mgr match_mgr;
-	private final List_adp rule_list = List_adp_.new_();
+	private final    List_adp rule_list = List_adp_.New();
 	public void Clear() {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Io_url root_dir = Io_url_.mem_dir_("mem/dg/");

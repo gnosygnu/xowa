@@ -21,8 +21,8 @@ import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.
 import gplx.xowa.files.gui.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
-	private final List_adp xfer_list = List_adp_.new_(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
-	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.neg1_();
+	private final    List_adp xfer_list = List_adp_.New(); private final    Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
+	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.New_neg1();
 	public int Count() {return xfer_list.Count();}
 	public void Clear() {
 		dirty_meta_mgrs.Clear();
@@ -70,7 +70,7 @@ public class Xof_xfer_queue {
 		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(Xfer_itms_to_fsdb_itms(wiki, page, xfer_list, wiki.File_mgr().Patch_upright()), wiki, page, js_wkr);
 	}
 	private List_adp Xfer_itms_to_fsdb_itms(Xowe_wiki cur_wiki, Xoae_page page, List_adp xfer_list, int upright_patch) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int list_len = xfer_list.Count();
 		for (int i = 0; i < list_len; i++) {
 			Xof_file_itm xfer = (Xof_file_itm)xfer_list.Get_at(i);

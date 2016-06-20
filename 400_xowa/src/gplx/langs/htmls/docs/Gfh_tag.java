@@ -78,7 +78,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		byte rv = Gfh_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) return or;
 		return rv;
 	}
-	private static final Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
+	private static final    Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
 	public int Atrs__style_get_as_int(byte[] key) {
 		if (atrs_null) Atrs__make();
 		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__style); if (rv == null) return -1;
@@ -117,7 +117,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	}
 	public String Atrs__print() {
 		if (atrs_null) Atrs__make();
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = atrs_hash.Count();
 		for (int i = 0; i < len; ++i) {
 			Gfh_atr atr = (Gfh_atr)atrs_hash.Get_at(i);

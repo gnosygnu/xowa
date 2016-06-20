@@ -35,7 +35,7 @@ public class Gfo_cache_mgr_base {
 	public void Compress() {
 		hash.Sort_by(Gfo_cache_itm_comparer.Touched_asc);
 		int del_len = hash.Count() - compress_to;
-		List_adp del_list = List_adp_.new_();
+		List_adp del_list = List_adp_.New();
 		for (int i = 0; i < del_len; i++) {
 			Gfo_cache_itm itm = (Gfo_cache_itm)hash.Get_at(i);
 			del_list.Add(itm);

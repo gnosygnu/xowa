@@ -113,7 +113,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
 			Json_ary list_nde = Json_ary.cast_or_null(doc.Get_grp(Bry_claims)); if (list_nde == null) return Empty_ordered_hash_generic;
-			List_adp temp_list = List_adp_.new_();
+			List_adp temp_list = List_adp_.New();
 			byte[] src = doc.Src();
 			int len = list_nde.Len();
 			for (int i = 0; i < len; i++) {
@@ -127,7 +127,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {throw Err_.new_unimplemented();}
 	public static Ordered_hash Claims_list_to_hash(List_adp full_list) {
 		full_list.Sort();
-		Ordered_hash rv = Ordered_hash_.New(); List_adp temp_itms = List_adp_.new_();
+		Ordered_hash rv = Ordered_hash_.New(); List_adp temp_itms = List_adp_.New();
 		int prv_pid = -1;
 		int len = full_list.Count();
 		for (int i = 0; i < len; ++i) {
@@ -143,7 +143,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	private static void Claims_list_to_hash__add(Ordered_hash rv, int pid, List_adp temp_itms) {
 		if (temp_itms.Count() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
-		Int_obj_ref claim_grp_key = Int_obj_ref.new_(pid);
+		Int_obj_ref claim_grp_key = Int_obj_ref.New(pid);
 		Wdata_claim_grp claim_grp = new Wdata_claim_grp(claim_grp_key, (Wdata_claim_itm_core[])temp_itms.To_ary_and_clear(Wdata_claim_itm_core.class));
 		rv.Add(claim_grp_key, claim_grp);
 	}
@@ -219,9 +219,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return kv.Val().Data_bry();
 	}
 	private void Warn(String fmt, Object... args) {usr_dlg.Warn_many("", "", fmt, args);}
-	public static final Ordered_hash Empty_ordered_hash_bry = Ordered_hash_.New_bry(), Empty_ordered_hash_generic = Ordered_hash_.New();
+	public static final    Ordered_hash Empty_ordered_hash_bry = Ordered_hash_.New_bry(), Empty_ordered_hash_generic = Ordered_hash_.New();
 	private static final byte Prop_tid_m = 0, Prop_tid_q = 1, Prop_tid_g = 2, Prop_tid_rank = 3, Prop_tid_refs = 4;
-	private static final Hash_adp_bry Prop_key_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry Prop_key_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_m		, Prop_tid_m)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_q		, Prop_tid_q)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_g		, Prop_tid_g)
@@ -251,7 +251,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	, Str_description							= "description"
 	, Str_name									= "name"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Bry_entity								= Bry_.new_a7(Str_entity)
 	, Bry_id									= Bry_.new_a7(Str_id)
 	, Bry_links									= Bry_.new_a7(Str_links)

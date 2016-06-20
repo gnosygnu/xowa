@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*;
 public class Vnt_log_tbl implements Rls_able {
-	private final String tbl_name = "log_vnt"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_uid, fld_page_id, fld_rule_idx
+	private final    String tbl_name = "log_vnt"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_uid, fld_page_id, fld_rule_idx
 	, fld_flag_count, fld_lang_count, fld_undi_count, fld_bidi_count
 	, fld_flag_add, fld_flag_del, fld_flag_aout, fld_flag_hide, fld_flag_raw, fld_flag_show, fld_flag_descrip, fld_flag_name, fld_flag_title, fld_flag_err
 	, fld_vnt_0, fld_vnt_1, fld_vnt_2, fld_vnt_3, fld_vnt_4, fld_vnt_5, fld_vnt_6, fld_vnt_7, fld_vnt_8, fld_vnt_9
@@ -59,7 +59,7 @@ public class Vnt_log_tbl implements Rls_able {
 		this.fld_src_txt = flds.Add_text("src_txt");
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final Db_conn conn; 
+	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}

@@ -78,7 +78,7 @@ class Xoctg_make_link_mgr {
 		subc_grp = new Xoctg_make_link_grp(Xoa_ctg_mgr.Tid_subc, make_fil_max);
 		file_grp = new Xoctg_make_link_grp(Xoa_ctg_mgr.Tid_file, make_fil_max);
 		page_grp = new Xoctg_make_link_grp(Xoa_ctg_mgr.Tid_page, make_fil_max);
-		make_fil_bfr = Bry_bfr.reset_(make_fil_max);
+		make_fil_bfr = Bry_bfr_.Reset(make_fil_max);
 		make_fld_wtr = Gfo_fld_wtr.xowa_().Bfr_(make_fil_bfr); 
 		make_dir = fsys_mgr.Url_site_dir(Xotdb_dir_info_.Tid_category2_link);
 		make_cmd = new Xob_make_cmd_site(usr_dlg, make_dir, make_fil_max);
@@ -126,7 +126,7 @@ class Xoctg_make_link_mgr {
 		;
 }
 class Xoctg_make_link_grp {
-	public Xoctg_make_link_grp(byte tid, int bfr_max) {this.tid = tid; bfr = Bry_bfr.reset_(bfr_max);} Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
+	public Xoctg_make_link_grp(byte tid, int bfr_max) {this.tid = tid; bfr = Bry_bfr_.Reset(bfr_max);} Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	public byte Tid() {return tid;} private byte tid;
 	public int Bfr_len() {return bfr.Len();}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
@@ -157,7 +157,7 @@ class Xoctg_idx_data_link {
 class Xoctg_make_main_mgr {
 	public Xoctg_make_main_mgr(Gfo_usr_dlg usr_dlg, int make_fil_max, Xotdb_fsys_mgr fsys_mgr) {
 		this.make_fil_max = make_fil_max;
-		make_fil_bfr = Bry_bfr.reset_(make_fil_max);
+		make_fil_bfr = Bry_bfr_.Reset(make_fil_max);
 		make_fld_wtr = Gfo_fld_wtr.xowa_().Bfr_(make_fil_bfr); 
 		make_dir = fsys_mgr.Url_site_dir(Xotdb_dir_info_.Tid_category2_main);
 		make_cmd = new Xob_make_cmd_site(usr_dlg, make_dir, make_fil_max);

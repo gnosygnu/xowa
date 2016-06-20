@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
-public class Xog_popup_mnu_mgr implements GfoInvkAble {
+public class Xog_popup_mnu_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New();
 	private Xoa_gui_mgr gui_mgr;
 	private Xog_mnu_grp[] mnus = new Xog_mnu_grp[6];
@@ -55,7 +55,7 @@ public class Xog_popup_mnu_mgr implements GfoInvkAble {
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		return Get_or_new(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get";		
 	public static final String Root_key_tabs_btns = "browser.tabs.btns"
 	, Root_key_html_page = "html_box", Root_key_html_link = "browser.html.link", Root_key_html_file = "browser.html.file"

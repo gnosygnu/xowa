@@ -43,7 +43,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 			GfoNde subRow = tbl.Subs().FetchAt_asGfoNde(i);
 			mgr.EnvStack_add(subMapr, sub); rowStack.Add(subRow);
 			sub.SrlObj_Srl(this); list.Add(sub);
-			mgr.EnvStack_del(subMapr, sub); List_adp_.DelAt_last(rowStack);
+			mgr.EnvStack_del(subMapr, sub); List_adp_.Del_at_last(rowStack);
 		}
 	}
 	Criteria MakeCrt(DbMaprMgr mgr, DbMaprItm mapr) {
@@ -57,14 +57,14 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		return rv;
 	}
 	List_adp GetIdxFlds(DbMaprMgr mgr, DbMaprItm curMapr) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int maprStackCount = mgr.MaprStack().Count() - 0; // -1 b/c current is added to stack
 		for (int i = 0; i < maprStackCount; i ++) {
 			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().Get_at(i);
 			SrlObj gobj = (SrlObj)mgr.OwnerStack().Get_at(i);
 			for (Object argObj : mapr.ContextFlds()) {
 				DbMaprArg arg = (DbMaprArg)argObj;
-				Object propVal = GfoInvkAble_.InvkCmd((GfoInvkAble)gobj, arg.ObjProp());
+				Object propVal = Gfo_invk_.Invk_by_key((Gfo_invk)gobj, arg.ObjProp());
 				rv.Add(Keyval_.new_(arg.DbFld(), propVal));
 			}					
 		}
@@ -111,9 +111,9 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 	@Override public Object ReadAt(int i) {throw Err_.new_unimplemented();}
 	@Override public Keyval KeyValAt(int i) {throw Err_.new_unimplemented();}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprRdr();}
-	Hash_adp tables = Hash_adp_.new_();
+	Hash_adp tables = Hash_adp_.New();
 	Db_conn conn; Criteria rootCrt;
-	DbMaprMgr mgr; List_adp rowStack = List_adp_.new_();
+	DbMaprMgr mgr; List_adp rowStack = List_adp_.New();
 	public static DbMaprRdr new_(Db_conn_info dbInfo, Criteria rootCrt) {
 		DbMaprRdr rv = new DbMaprRdr();
 		rv.conn = Db_conn_pool.Instance.Get_or_new(dbInfo); rv.rootCrt = rootCrt;

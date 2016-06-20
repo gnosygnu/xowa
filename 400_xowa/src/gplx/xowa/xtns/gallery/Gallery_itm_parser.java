@@ -28,7 +28,7 @@ public class Gallery_itm_parser {
 	private int cur_pos; private byte cur_byte;
 	private byte cur_fld;
 	private int itm_bgn;
-	private Bry_bfr caption_bfr = Bry_bfr.reset_(255); private int caption_bgn;
+	private Bry_bfr caption_bfr = Bry_bfr_.Reset(255); private int caption_bgn;
 	private Xop_ctx ctx;
 	public Gallery_itm_parser Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; Xol_lang_itm lang = wiki.Lang();

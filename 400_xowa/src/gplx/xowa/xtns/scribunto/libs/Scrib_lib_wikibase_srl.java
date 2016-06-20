@@ -20,7 +20,7 @@ import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx
 class Scrib_lib_wikibase_srl {
 	public static Keyval[] Srl(Wdata_doc wdoc, boolean header_enabled, boolean legacy_style) {// REF.MW:/Wikibase/lib/includes/serializers/EntitySerializer.php!getSerialized; http://www.mediawiki.org/wiki/Extension:Wikibase_Client/Lua
 		int base_adj = legacy_style ? 0 : 1;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		if (header_enabled) {
 			rv.Add(Keyval_.new_("id", wdoc.Qid()));
 			rv.Add(Keyval_.new_("type", Wdata_dict_value_entity_tid.Str_item));
@@ -112,7 +112,7 @@ class Scrib_lib_wikibase_srl {
 		return rv;
 	}
 	private static Keyval[] Srl_claims_prop_itm(String pid, Wdata_claim_itm_core itm, int base_adj) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list.Add(Keyval_.new_("id", pid));
 		list.Add(Keyval_.new_("mainsnak", Srl_claims_prop_itm_core(pid, itm)));
 		list.Add(Keyval_.new_(Wdata_dict_claim_v1.Str_rank, Wdata_dict_rank.Xto_str(itm.Rank_tid())));
@@ -123,8 +123,8 @@ class Scrib_lib_wikibase_srl {
 	private static Keyval[] Srl_qualifiers(Wdata_claim_grp_list list, int base_adj) {
 		if (list == null) return null;
 		int list_len = list.Len(); if (list_len == 0) return Keyval_.Ary_empty;
-		List_adp rv = List_adp_.new_();
-		List_adp pid_list = List_adp_.new_();
+		List_adp rv = List_adp_.New();
+		List_adp pid_list = List_adp_.New();
 		for (int i = 0; i < list_len; ++i) {
 			Wdata_claim_grp grp = list.Get_at(i);
 			int grp_len = grp.Len();
@@ -149,17 +149,17 @@ class Scrib_lib_wikibase_srl {
 		rv[2 + snak_is_valued_adj] = Keyval_.new_("datatype", Wdata_dict_val_tid.To_str__srl(itm.Val_tid()));	// NOTE: datatype needed for Modules; PAGE:eo.w:WikidataKoord; DATE:2015-11-08
 		return rv;
 	}
-	private static final Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
+	private static final    Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
 	private static Keyval[] Srl_claims_prop_itm_core_val(Wdata_claim_itm_core itm) {
 		switch (itm.Snak_tid()) {
 			case Wdata_dict_snak_tid.Tid_somevalue:		return Datavalue_somevalue;
-			case Wdata_dict_snak_tid.Tid_novalue:		return Datavalue_novalue;	// TODO: throw exc
+			case Wdata_dict_snak_tid.Tid_novalue:		return Datavalue_novalue;	// TODO_OLD: throw exc
 			default:
 				itm.Welcome(visitor);
 				return visitor.Rv();
 			}
 	}
 	public static final String Key_type = "type", Key_value = "value";
-	private static final Keyval[] Datavalue_somevalue = Keyval_.Ary_empty;	// changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // new Keyval[] {Keyval_.new_(Key_type, ""), Keyval_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
-	private static final Keyval[] Datavalue_novalue = Keyval_.Ary_empty;
+	private static final    Keyval[] Datavalue_somevalue = Keyval_.Ary_empty;	// changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // new Keyval[] {Keyval_.new_(Key_type, ""), Keyval_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
+	private static final    Keyval[] Datavalue_novalue = Keyval_.Ary_empty;
 }

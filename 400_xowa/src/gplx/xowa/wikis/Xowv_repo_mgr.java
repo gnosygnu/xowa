@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.files.repos.*;
 public class Xowv_repo_mgr implements Xow_repo_mgr {
-	private final List_adp repos = List_adp_.new_();
+	private final    List_adp repos = List_adp_.New();
 	public Xof_repo_pair[]		Repos_ary() {return (Xof_repo_pair[])repos.To_ary(Xof_repo_pair.class);}
 	public Xof_repo_pair		Repos_get_by_wiki(byte[] wiki) {
 		int len = repos.Count();

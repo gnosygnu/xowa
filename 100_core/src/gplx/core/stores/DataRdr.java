@@ -41,7 +41,7 @@ public interface DataRdr extends SrlMgr, Rls_able {
 	byte ReadByte(String key);				byte ReadByteOr(String key, byte or);
 	Decimal_adp ReadDecimal(String key);	Decimal_adp ReadDecimalOr(String key, Decimal_adp or);
 	DateAdp ReadDate(String key);			DateAdp ReadDateOr(String key, DateAdp or);
-	gplx.core.ios.Io_stream_rdr ReadRdr(String key);
+	gplx.core.ios.streams.Io_stream_rdr ReadRdr(String key);
 
 	boolean MoveNextPeer();
 	DataRdr Subs();

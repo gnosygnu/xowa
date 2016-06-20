@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.wtrs.*; import gplx.dbs.sqls.itms.*;
 public class Sql_core_wtr implements Sql_qry_wtr {
-	private final    Bry_bfr bfr = Bry_bfr.new_(64);
+	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(64);
 	public byte[] Seq__nl = Byte_ascii.Space_bry;
 	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
 	public Sql_core_wtr() {

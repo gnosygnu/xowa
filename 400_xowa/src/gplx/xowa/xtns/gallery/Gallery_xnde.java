@@ -34,7 +34,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public List_adp Atrs_other()				{return atrs_other;} private List_adp atrs_other;
 	public int Itm_w_or_default()			{return itm_w == Null ? Default : itm_w;}
 	public int Itm_h_or_default()			{return itm_h == Null ? Default : itm_h;}
-	public int Itms_len()					{return itms.Count();} private List_adp itms = List_adp_.new_();
+	public int Itms_len()					{return itms.Count();} private List_adp itms = List_adp_.New();
 	public Gallery_itm Itms_get_at(int i)	{return (Gallery_itm)itms.Get_at(i);}
 	public Gallery_mgr_base Gallery_mgr()	{return gallery_mgr;} private Gallery_mgr_base gallery_mgr;
 	private boolean html_wtr_v1 = false;
@@ -53,7 +53,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			}
 		}
 		else {
-			if (atrs_other == null) atrs_other = List_adp_.new_();
+			if (atrs_other == null) atrs_other = List_adp_.New();
 			atrs_other.Add(xatr);
 		}
 	}

@@ -32,14 +32,14 @@ public class Gfo_inet_conn_ {
 	public static void new_prototype_(int v) {new_prototype = v;} private static int new_prototype = Tid__http;
 }
 class Gfo_inet_conn__mem__hash implements Gfo_inet_conn {
-	private final Hash_adp hash = Hash_adp_.new_();
+	private final    Hash_adp hash = Hash_adp_.New();
 	public int				Tid() {return Gfo_inet_conn_.Tid__mem__hash;}
 	public void				Clear() {hash.Clear();}
 	public void				Upload_by_bytes(String url, byte[] data) {hash.Add(url, data);}
 	public byte[]			Download_as_bytes_or_null(String url) {return (byte[])hash.Get_by(url);}
 }
 class Gfo_inet_conn__mem__pile implements Gfo_inet_conn {
-	private final List_adp pile = List_adp_.new_();
+	private final    List_adp pile = List_adp_.New();
 	public int				Tid() {return Gfo_inet_conn_.Tid__mem__hash;}
 	public void				Clear() {pile.Clear();}
 	public void				Upload_by_bytes(String url, byte[] data) {pile.Add(data);}

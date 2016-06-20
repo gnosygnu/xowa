@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.btries.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.urls.*;
+import gplx.core.btries.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.urls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*;	
 import gplx.xowa.htmls.core.htmls.*;
@@ -72,7 +72,7 @@ public class Xoh_lnke_html {
 			bfr.Add(Xoh_href_.Bry__site).Add(lnke_xwiki_wiki).Add(Xoh_href_.Bry__wiki)
 				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));					// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)
-				Gfo_qarg_mgr.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
+				Gfo_qarg_mgr_old.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
 			return ctx.Wiki().App().Xwiki_mgr__missing(lnke_xwiki_wiki);	// write "external" if hdump or xwiki is missing
 		}
 	}

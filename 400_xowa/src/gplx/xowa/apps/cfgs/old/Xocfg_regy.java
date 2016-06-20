@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs.old; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
-public class Xocfg_regy implements GfoInvkAble {
+public class Xocfg_regy implements Gfo_invk {
 	public Xocfg_regy(Xoae_app app) {
 		app_cfg = new Xocfg_root(app, Xocfg_root_.Tid_app);
 	}
@@ -27,7 +27,7 @@ public class Xocfg_regy implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_null(m.ReadStrOr("v", Key_app));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_get = "get";
 	public static final String Key_app = null;

@@ -27,7 +27,7 @@ public class Xob_delete_cmd extends Xob_cmd__base implements Xob_cmd {
 		int len = patterns_ary.length; if (len == 0) return;
 
 		// build filter EX: '*.xml|*.txt'
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		for (int i = 0; i < len; ++i) {
 			String pattern = patterns_ary[i];
 			if (i != 0) bfr.Add_byte_pipe();
@@ -45,5 +45,5 @@ public class Xob_delete_cmd extends Xob_cmd__base implements Xob_cmd {
 			Io_mgr.Instance.DeleteFil(file);
 		}
 	}
-	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Null;}
+	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Noop;}
 }

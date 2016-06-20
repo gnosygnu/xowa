@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class GfoTreeBldr_fxt {
-	public List_adp Atrs() {return atrs;}  List_adp atrs = List_adp_.new_();
-	public List_adp Subs() {return subs;}  List_adp subs = List_adp_.new_();
+	public List_adp Atrs() {return atrs;}  List_adp atrs = List_adp_.New();
+	public List_adp Subs() {return subs;}  List_adp subs = List_adp_.New();
 	public GfoTreeBldr_fxt atr_(Object key, Object val) {
 		atrs.Add(new Object[] {key, val});
 		return this;

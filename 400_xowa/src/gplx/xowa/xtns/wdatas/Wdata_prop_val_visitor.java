@@ -21,7 +21,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr; private byte[] lang_key;
-	private final    Bry_bfr tmp_time_bfr = Bry_bfr.reset_(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
+	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
 	private Wdata_hwtr_msgs msgs;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
 	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {this.bfr = bfr; ; this.msgs = msgs; this.lang_key = lang_key;}

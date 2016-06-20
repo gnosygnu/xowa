@@ -28,7 +28,7 @@ public class Xob_category_registry_sql_tst {
 	}
 }
 class Xob_category_registry_sql_fxt {
-	Db_mgr_fxt fxt; Xowe_wiki wiki; Xoae_app app; Int_obj_ref page_id_next = Int_obj_ref.new_(1);
+	Db_mgr_fxt fxt; Xowe_wiki wiki; Xoae_app app; Int_obj_ref page_id_next = Int_obj_ref.New(1);
 	public void Clear() {
 		if (fxt == null) {
 			fxt = new Db_mgr_fxt().Ctor_fsys();
@@ -53,7 +53,7 @@ class Xob_category_registry_sql_fxt {
 	}
 	int[] Parse_rslts_txt(String rslts_txt) {
 		String[] lines = String_.SplitLines_nl(rslts_txt);
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int len = lines.length;
 		for (int i = 0; i < len; i++) {
 			String line = lines[i];

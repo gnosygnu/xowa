@@ -16,24 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*;
-import gplx.xowa.addons.apps.searchs.*; import gplx.xowa.addons.apps.searchs.searchers.*; import gplx.xowa.addons.apps.searchs.searchers.cbks.*; 
+import gplx.gfui.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.cbks.*; 
 import gplx.xowa.apps.apis.xowa.addons.searchs.*;
 import gplx.xowa.guis.views.*;
-class Xoapi_url_searcher implements GfoEvObj {
+class Xoapi_url_searcher implements Gfo_evt_itm {
 	private final    Xoae_app app;
 	private final    Xoapi_url_bar url_bar_api; private Srch_search_addon addon;
 	private final    GfuiComboBox url_bar;
 	public Xoapi_url_searcher(Xoae_app app) {	// called by Init_by_kit
 		this.app = app;
-		this.evMgr = GfoEvMgr.new_(this);
+		this.evt_mgr = new Gfo_evt_mgr(this);
 		this.url_bar = app.Gui_mgr().Browser_win().Url_box();
 		this.url_bar_api = app.Api_root().Addon().Search().Url_bar();
-		GfoEvMgr_.SubSame_many(url_bar_api, this, Xoapi_url_bar.Evt__jump_len_changed, Xoapi_url_bar.Evt__visible_rows_changed, Xoapi_url_bar.Evt__ns_ids_changed);
+		Gfo_evt_mgr_.Sub_same_many(url_bar_api, this, Xoapi_url_bar.Evt__jump_len_changed, Xoapi_url_bar.Evt__visible_rows_changed, Xoapi_url_bar.Evt__ns_ids_changed);
 		url_bar.Items__jump_len_(url_bar_api.Jump_len());
 		url_bar.Items__visible_rows_(url_bar_api.Visible_rows());
 	}
-	public GfoEvMgr		EvMgr()					{return evMgr;}				private final    GfoEvMgr evMgr;
+	public Gfo_evt_mgr		Evt_mgr()					{return evt_mgr;}				private final    Gfo_evt_mgr evt_mgr;
 	public void Search() {
 		if (!url_bar_api.Enabled()) return;
 		Xog_tab_itm active_tab = app.Gui_mgr().Browser_win().Tab_mgr().Active_tab(); if (active_tab == null) return;

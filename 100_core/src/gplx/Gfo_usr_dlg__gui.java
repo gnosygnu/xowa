@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.strings.*;
+import gplx.core.lists.rings.*;
 public interface Gfo_usr_dlg__gui {
 	void Clear();
-	String_ring Prog_msgs();
+	Ring__string Prog_msgs();
 	void Write_prog(String text);
 	void Write_note(String text);
 	void Write_warn(String text);

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-public class Xoh_skin_mgr implements GfoInvkAble {
-	private final Xoh_skin_regy regy = new Xoh_skin_regy();
+public class Xoh_skin_mgr implements Gfo_invk {
+	private final    Xoh_skin_regy regy = new Xoh_skin_regy();
 	public Xoh_skin_mgr() {
 		read = make_and_add(regy, "read");
 		edit = make_and_add(regy, "edit");
@@ -34,7 +34,7 @@ public class Xoh_skin_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_html))		return html;
 		else if	(ctx.Match(k, Invk_html_))		html = regy.Get_by_key(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_set))		regy.Set(m.ReadStr("key"), m.ReadStr("fmt"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

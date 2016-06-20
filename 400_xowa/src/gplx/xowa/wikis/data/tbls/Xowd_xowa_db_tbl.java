@@ -19,15 +19,16 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.data.*;
 public class Xowd_xowa_db_tbl {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
-	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
+	public static final    String Tbl_name = "xowa_db", Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
+	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
+	private final    Db_conn conn; private final    Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
 	public Xowd_xowa_db_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
-		this.tbl_name = "xowa_db";
-		fld_id				= flds.Add_int_pkey	("db_id");
-		fld_type			= flds.Add_byte		("db_type");
-		fld_url				= flds.Add_str		("db_url", 512);
+		this.tbl_name = Tbl_name;
+		fld_id				= flds.Add_int_pkey	(Fld_id);
+		fld_type			= flds.Add_byte		(Fld_type);
+		fld_url				= flds.Add_str		(Fld_url, 512);
 		if (schema_is_1) {
 			fld_ns_ids = fld_part_id = fld_guid = Dbmeta_fld_itm.Key_null;
 		}
@@ -39,8 +40,8 @@ public class Xowd_xowa_db_tbl {
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
-	public Xowd_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
-		List_adp list = List_adp_.new_();
+	public Xow_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
+		List_adp list = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -48,15 +49,17 @@ public class Xowd_xowa_db_tbl {
 				if (!schema_is_1) {
 					ns_ids = rdr.Read_str(fld_ns_ids);
 					part_id = rdr.Read_int(fld_part_id);
-					guid = Guid_adp_.parse(rdr.Read_str(fld_guid));
+					guid = Guid_adp_.Parse(rdr.Read_str(fld_guid));
 				}
-				list.Add(Xowd_db_file.load_(props, rdr.Read_int(fld_id), rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid));
+				int db_id = rdr.Read_int(fld_id);
+				Xow_db_file db_file = Xow_db_file.load_(props, db_id, rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid);
+				list.Add(db_file);
 			}
 		}	finally {rdr.Rls();}
-		list.Sort_by(Xowd_db_file_sorter__id.Instance);
-		return (Xowd_db_file[])list.To_ary(Xowd_db_file.class);
+		list.Sort_by(Xow_db_file_sorter__id.Instance);
+		return (Xow_db_file[])list.To_ary_and_clear(Xow_db_file.class);
 	}
-	public void Commit_all(Xowd_db_mgr core_data_mgr) {
+	public void Commit_all(Xow_db_mgr core_data_mgr) {
 		stmt_bldr.Batch_bgn();
 		try {
 			int len = core_data_mgr.Dbs__len();
@@ -64,7 +67,7 @@ public class Xowd_xowa_db_tbl {
 				Commit_itm(core_data_mgr.Dbs__get_at(i));
 		}	finally {stmt_bldr.Batch_end();}
 	}
-	private void Commit_itm(Xowd_db_file itm) {
+	private void Commit_itm(Xow_db_file itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 		switch (itm.Cmd_mode()) {
 			case Db_cmd_mode.Tid_create:	stmt.Clear().Val_int(fld_id, itm.Id());		Commit_itm_vals(stmt, itm); stmt.Exec_insert(); break;
@@ -75,15 +78,15 @@ public class Xowd_xowa_db_tbl {
 		}
 		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}
-	private void Commit_itm_vals(Db_stmt stmt, Xowd_db_file itm) {
+	private void Commit_itm_vals(Db_stmt stmt, Xow_db_file itm) {
 		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().To_str());
 	}
 }
-class Xowd_db_file_sorter__id implements gplx.core.lists.ComparerAble {
+class Xow_db_file_sorter__id implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
-		Xowd_db_file lhs = (Xowd_db_file)lhsObj;
-		Xowd_db_file rhs = (Xowd_db_file)rhsObj;
+		Xow_db_file lhs = (Xow_db_file)lhsObj;
+		Xow_db_file rhs = (Xow_db_file)rhsObj;
 		return Int_.Compare(lhs.Id(), rhs.Id());
 	}
-	public static final Xowd_db_file_sorter__id Instance = new Xowd_db_file_sorter__id(); Xowd_db_file_sorter__id() {}
+	public static final    Xow_db_file_sorter__id Instance = new Xow_db_file_sorter__id(); Xow_db_file_sorter__id() {}
 }

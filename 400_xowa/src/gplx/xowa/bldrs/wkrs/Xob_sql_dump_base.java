@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.sqls.*; import gplx.xowa.wikis.tdbs.bldrs.*;
-public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
+public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk {
 	private final    Sql_file_parser parser = new Sql_file_parser(); protected boolean fail = false;
 	public abstract String Cmd_key();
 	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;

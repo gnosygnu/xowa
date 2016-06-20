@@ -61,7 +61,7 @@ class Sites_html_bldr_fxt {
 		xtn_mgr.Regy_mgr().Match(page, ttl);
 	}
 	public void Test_bld(String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 		Sites_xtn_skin_itm skin_itm = (Sites_xtn_skin_itm)page.Html_data().Xtn_skin_mgr().Get_or_null(Sites_xtn_skin_itm.KEY);
 		skin_itm.Write(tmp_bfr, page);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-public abstract class Xob_cmd__base implements Xob_cmd, GfoInvkAble {
+public abstract class Xob_cmd__base implements Xob_cmd, Gfo_invk {
 	protected final    Xoae_app app; protected final    Xob_bldr bldr; protected Xowe_wiki wiki; protected final    Gfo_usr_dlg usr_dlg;
 	public Xob_cmd__base(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.bldr = bldr;
@@ -31,5 +31,5 @@ public abstract class Xob_cmd__base implements Xob_cmd, GfoInvkAble {
 	@gplx.Virtual public void		Cmd_bgn(Xob_bldr bldr) {}
 	@gplx.Virtual public void		Cmd_end() {}
 	@gplx.Virtual public void		Cmd_term() {}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}
+	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
 }

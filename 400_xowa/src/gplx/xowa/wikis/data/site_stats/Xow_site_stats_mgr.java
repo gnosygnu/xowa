@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.site_stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.wikis.nss.*;
-public class Xow_site_stats_mgr implements GfoInvkAble {	// REF.MW:https://www.mediawiki.org/wiki/Manual:Site_stats_table
-	private final Xow_wiki wiki;
+public class Xow_site_stats_mgr implements Gfo_invk {	// REF.MW:https://www.mediawiki.org/wiki/Manual:Site_stats_table
+	private final    Xow_wiki wiki;
 	public Xow_site_stats_mgr(Xow_wiki wiki) {this.wiki = wiki;}
 	public long		Num_pages()		{return num_pages;}				private long num_pages;		// ss_total_pages; pages in entire wiki: 16,299,475
 	public long		Num_articles()	{return num_articles;}			private long num_articles;	// ss_good_articles; pages in main ns w/o redirect: 5,072,469
@@ -50,7 +50,7 @@ public class Xow_site_stats_mgr implements GfoInvkAble {	// REF.MW:https://www.m
 		else if	(ctx.Match(k, Invk_number_of_articles_))				num_articles = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_number_of_files_))					num_files = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_number_of_articles_in_ns_))			return Number_of_articles_in_ns_(m);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_number_of_pages_ = "number_of_pages_", Invk_number_of_articles_ = "number_of_articles_", Invk_number_of_files_ = "number_of_files_", Invk_number_of_articles_in_ns_ = "number_of_articles_in_ns_";
 }

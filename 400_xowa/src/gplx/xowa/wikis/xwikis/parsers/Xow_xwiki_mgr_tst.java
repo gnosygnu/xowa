@@ -123,7 +123,7 @@ class Xow_xwiki_mgr_fxt {
 	public Xow_xwiki_mgr_fxt Test_len(int expd)			{Tfds.Eq(expd, xwiki_mgr.Len()); return this;}
 	Xow_xwiki_itm[] To_ary(Xow_xwiki_itm[] itms) {
 		int len = itms.length;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			byte[] alias = itms[i].Key_bry();
 			Xow_xwiki_itm itm = xwiki_mgr.Get_by_key(alias);

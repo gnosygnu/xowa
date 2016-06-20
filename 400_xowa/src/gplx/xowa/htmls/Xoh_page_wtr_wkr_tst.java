@@ -46,7 +46,7 @@ class Xoh_page_wtr_fxt {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		}
-	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Xowe_wiki wiki;
+	}	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); private Xowe_wiki wiki;
 	public Xoae_app App() {return app;} private Xoae_app app; 
 	public void Test_page_name_by_display(String ttl, String display, String expd) {
 		Tfds.Eq(expd, String_.new_a7(Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, Xoa_ttl.parse(wiki, Bry_.new_a7(ttl)), Bry_.new_a7(display))));
@@ -60,7 +60,7 @@ class Xoh_page_wtr_fxt {
 		page.Data_raw_(Bry_.new_u8(raw));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_page_.Tid_edit);
-		wkr.Write_body(tmp_bfr, Xoh_wtr_ctx.Basic, page);
+		wkr.Write_body(tmp_bfr, wiki.Parser_mgr().Ctx(), Xoh_wtr_ctx.Basic, page);
 		Tfds.Eq(expd, tmp_bfr.To_str_and_clear());
 	}
 	public void Test_read(String page_name, String page_text, String expd) {
@@ -70,7 +70,7 @@ class Xoh_page_wtr_fxt {
 		page.Data_raw_(Bry_.new_u8(page_text));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_page_.Tid_read);
-		wkr.Write_body(tmp_bfr, Xoh_wtr_ctx.Basic, page);
+		wkr.Write_body(tmp_bfr, wiki.Parser_mgr().Ctx(), Xoh_wtr_ctx.Basic, page);
 		Tfds.Eq(expd, tmp_bfr.To_str_and_clear());
 	}
 }

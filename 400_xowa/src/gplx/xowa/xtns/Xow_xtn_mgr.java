@@ -19,7 +19,7 @@ package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*; import gplx.xowa.xtns.pagebanners.*;
-public class Xow_xtn_mgr implements GfoInvkAble {
+public class Xow_xtn_mgr implements Gfo_invk {
 	private Ordered_hash regy = Ordered_hash_.New_bry();
 	public int Count() {return regy.Count();}
 	public Cite_xtn_mgr Xtn_cite() {return xtn_cite;} private Cite_xtn_mgr xtn_cite;
@@ -56,7 +56,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		int regy_len = app_xtn_mgr.Count();
 		for (int i = 0; i < regy_len; i++) {
 			Xox_mgr proto = (Xox_mgr)app_xtn_mgr.Get_at(i);
-			Xox_mgr mgr = proto.Clone_new();
+			Xox_mgr mgr = proto.Xtn_clone_new();
 			mgr.Xtn_ctor_by_wiki(wiki);
 			regy.Add(mgr.Xtn_key(), mgr);
 			Set_members(mgr);
@@ -101,7 +101,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		}
 	}
 	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6, Tid_pgbnr = 7;
-	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
+	private static final    Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Cite_xtn_mgr.XTN_KEY				, Tid_cite)
 	.Add_bry_byte(Sites_xtn_mgr.XTN_KEY				, Tid_sites)
 	.Add_bry_byte(Insider_xtn_mgr.XTN_KEY			, Tid_insider)
@@ -113,6 +113,6 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_fail(m.ReadBry("v"));
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get";
 }

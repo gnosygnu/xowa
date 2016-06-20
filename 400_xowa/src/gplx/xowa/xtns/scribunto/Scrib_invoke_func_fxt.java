@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.process.*;
 import gplx.xowa.parsers.tmpls.*;
 public class Scrib_invoke_func_fxt {
-	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr.reset_(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
+	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
 	public Xop_fxt Parser_fxt() {return fxt;}
 	public Scrib_core_fxt Core_fxt() {return core_fxt;} Scrib_core_fxt core_fxt;
 	public Scrib_core Core() {return core;}
@@ -137,6 +137,14 @@ public class Scrib_invoke_func_fxt {
 		Object[] actl_ary = KeyVal_to_obj_ary(actl_kvs);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}
+	public void Test_scrib_proc_err(Scrib_lib lib, String proc_name, Object[] args, String expd) {
+		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
+		Scrib_proc_rslt rslt = new Scrib_proc_rslt();
+		boolean exec_rslt = proc.Proc_exec(new Scrib_proc_args(Scrib_kv_utl_.base1_many_(args)), rslt);
+		Tfds.Eq(Bool_.N, exec_rslt);
+		Tfds.Eq(null, rslt.Ary());
+		Tfds.Eq(expd, rslt.Fail_msg());
+	}
 	private static Object[] KeyVal_to_obj_ary(Keyval[] kv_ary) {
 		int len = kv_ary.length;
 		Object[] rv = new Object[len];
@@ -147,7 +155,7 @@ public class Scrib_invoke_func_fxt {
 		return rv;
 	}
 	private String Kv_ary_to_kv_vals_str(Keyval[] ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
@@ -192,7 +200,7 @@ public class Scrib_invoke_func_fxt {
 	public static final String Null_rslt_ary	= "1=<<NULL>>";
 }
 class Scrib_lua_rsp_bldr {
-	Bry_bfr bfr = Bry_bfr.reset_(255);
+	Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public String Bld_mw_cbk(String cbk_name, Keyval... ary) {
 		cbk_name = "mw_interface-" + cbk_name;
 		bfr.Add_str_a7("a:4:{s:2:\"id\";");

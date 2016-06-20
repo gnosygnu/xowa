@@ -30,7 +30,7 @@ class Luaj_value_ {
 		return Luaj_value_.Lua_tbl_to_kv_ary(server, table);
 	}
 	public static Keyval[] Lua_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
-		List_adp temp = List_adp_.new_();
+		List_adp temp = List_adp_.New();
 		LuaValue cur = LuaValue.NIL;
 		int len = 0;
 		while (true) {											// iterate over pairs in tbl; no direct way to get kvs

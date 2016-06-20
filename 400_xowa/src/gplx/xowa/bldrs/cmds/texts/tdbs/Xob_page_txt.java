@@ -21,7 +21,7 @@ import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wtrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*; import gplx.xowa.wikis.tdbs.stats.*;
-public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
+public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	public Xob_page_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Page_wkr__key() {return Xob_cmd_keys.Key_tdb_make_page;}
 	public void Page_wkr__bgn() {
@@ -49,7 +49,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xob_page_wkr, Gfo
 		
 		// idx: EX: 00100|aB64|Ttl;
 		Xob_tmp_wtr ttl_wtr = ttl_wtr_mgr.Get_or_new(ns);
-		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - List_adp_.LastIdxOffset;
+		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - 1;	// 1=Last_idx_offset
 		page.Text_db_id_(file_idx).Tdb_row_idx_(row_idx);
 		if (ttl_wtr.FlushNeeded(Xotdb_page_itm_.Txt_ttl_len__fixed + ttl_len)) ttl_wtr.Flush(bldr.Usr_dlg());
 		Xotdb_page_itm_.Txt_ttl_save(ttl_wtr.Bfr(), id, file_idx, row_idx, redirect, text_len, ttl_wo_ns);

@@ -88,7 +88,7 @@ class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__qual_tbl fmtr_qual = new Wdata_fmtr__qual_tbl();
 	private Wdata_fmtr__ref_tbl fmtr_ref = new Wdata_fmtr__ref_tbl();
 	private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
-	private Wdata_claim_grp claim_grp; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Wdata_claim_grp claim_grp; private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {
 		this.lbl_mgr = lbl_mgr;
 		fmtr_qual.Init_by_ctor(lbl_mgr);
@@ -169,7 +169,7 @@ class Wdata_fmtr__qual_tbl implements gplx.core.brys.Bfr_arg {
 class Wdata_fmtr__qual_row implements gplx.core.brys.Bfr_arg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
-	private Wdata_claim_grp_list quals; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Wdata_claim_grp_list quals; private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wdata_claim_grp_list quals) {this.ttl = ttl; this.quals = quals;}
@@ -243,7 +243,7 @@ class Wdata_fmtr__ref_tbl implements gplx.core.brys.Bfr_arg {
 class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private Wdata_references_grp[] ref_grps;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {this.msgs = msgs;}

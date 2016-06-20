@@ -34,7 +34,7 @@ public class Xob_diff_build_cmd implements Xob_cmd {
 		else if	(ctx.Match(k, Invk__commit_interval_))		commit_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__db_ids_))				db_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk__bld_name_))				bld_name = m.ReadStr("v");
-		else												return GfoInvkAble_.Rv_unhandled;
+		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public void Cmd_init(Xob_bldr bldr) {}

@@ -20,7 +20,7 @@ import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.langs.jsons.*;
-public class Xob_bldr implements GfoInvkAble {
+public class Xob_bldr implements Gfo_invk {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
 	public Xob_bldr(Xoae_app app) {
 		this.app = app;
@@ -67,11 +67,11 @@ public class Xob_bldr implements GfoInvkAble {
 					if	(	String_.Eq(atr_key, "key")
 						||	String_.Eq(atr_key, "wiki"))	continue;
 					byte[] atr_val = atr_kv.Val_as_bry();
-					GfoInvkAble_.InvkCmd_val(clone, atr_key + GfoInvkAble_.Mutator_suffix, String_.new_u8(atr_val));
+					Gfo_invk_.Invk_by_val(clone, atr_key + Gfo_invk_.Mutator_suffix, String_.new_u8(atr_val));
 				}
 				cmd_mgr.Add(clone);
 			}
-			gplx.core.threads.Thread_adp_.invk_("bldr_by_json", this, Invk_run_by_kit).Start();
+			gplx.core.threads.Thread_adp_.Start_by_key("bldr_by_json", this, Invk_run_by_kit);
 		} catch (Exception e) {
 			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", Err_.Message_gplx_log(e));
 		}
@@ -140,7 +140,7 @@ public class Xob_bldr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_run)) 					Run();
 		else if	(ctx.Match(k, Invk_run_by_kit)) 			Run_by_kit();
 		else if	(ctx.Match(k, Invk_cancel)) 				Cancel();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 
@@ -155,7 +155,7 @@ public class Xob_bldr implements GfoInvkAble {
 . make_fil_len: max size of made file; EX: /id/..../0000000001.csv will have max len of 64 KB
 . dump_fil_len: max size of temp file; EX: /tmp/.../0000000001.csv will have max len of 1 MB
 . sort_mem_len: max size of memory for external merge process; note the following
-.. a continguous range of memory of that size will be needed: "Bry_bfr.new_(sort_mem_len)" will be called
+.. a continguous range of memory of that size will be needed: "Bry_bfr_.New(sort_mem_len)" will be called
 .. large sort_mem_len will result in smaller number of merge files
 ... EX: 16 MB will take en.wikipedia.org's 640 MB title files and generate 40 temp files of 8 MB each
 .. number of merge files is number of open file channels during merge process

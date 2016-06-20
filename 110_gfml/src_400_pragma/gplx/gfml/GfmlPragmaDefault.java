@@ -24,7 +24,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 //			bldr.PragmaMgr.EndCmds_add(GfmlDocPos_.up_(bldr.CurNdeFrame.DocPos), GfmlDefaultPragma_endCmd.new_(list));
 	}
 	@gplx.Internal protected List_adp Compile(GfmlNde pragmaNde) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().Get_at(i);
 			CompileSubNde(subNde, list);
@@ -51,7 +51,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 		return makr.Xto_bry();
 	}
 	public static GfmlPragmaDefault new_() {return new GfmlPragmaDefault();} GfmlPragmaDefault() {}
-	public static final GfmlTkn Default_none = GfmlTkn_.raw_("DEFAULT NONE");
+	public static final    GfmlTkn Default_none = GfmlTkn_.raw_("DEFAULT NONE");
 }
 class GfmlDefaultItem {
 	public String TypeKey() {return typeKey;} private String typeKey;

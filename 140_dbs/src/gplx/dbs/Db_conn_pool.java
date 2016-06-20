@@ -34,6 +34,9 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 		}
 		return rv;
 	}
+	public void Add_existing(Db_conn conn) {
+		hash.Add(conn.Conn_info().Db_api(), conn);
+	}
 	public void Rls_all() {
 		int len = hash.Len();
 		Db_conn[] rls_ary = new Db_conn[len];
@@ -44,7 +47,7 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 		hash.Clear();
 	}
 
-	private final    Hash_adp prime_hash = Hash_adp_.new_();
+	private final    Hash_adp prime_hash = Hash_adp_.New();
         public static final    Db_conn_pool Instance = new Db_conn_pool(); Db_conn_pool() {this.Init();}
 	public void Primes__add(Db_engine... ary) {	// PUBLIC.DRD:
 		for (Db_engine itm : ary)

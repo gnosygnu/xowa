@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.strings.*; import gplx.core.envs.*;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
-public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, GfoInvkAble {
-	private final List_adp ordered = List_adp_.new_();
+public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gfo_invk {
+	private final    List_adp ordered = List_adp_.New();
 	@Override protected void Add_base(Object key, Object val) {
 		super.Add_base(key, val);
 		ordered.Add(val);
@@ -86,9 +86,9 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 			if (ctx.Deny()) return this;
 			return To_str_ui();
 		}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	static final String Invk_SetKeyOnly = "SetKeyOnly", Invk_Print = "Print";
+	}	static final    String Invk_SetKeyOnly = "SetKeyOnly", Invk_Print = "Print";
 	public int Len() {return ordered.Count();}
 	@Override public int Count() {return ordered.Count();}
 	public Ordered_hash_base() {}

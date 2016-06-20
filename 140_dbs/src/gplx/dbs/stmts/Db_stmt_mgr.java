@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.stmts; import gplx.*; import gplx.dbs.*;
 public class Db_stmt_mgr {
-	private final    List_adp fmt_list = List_adp_.new_();
+	private final    List_adp fmt_list = List_adp_.New();
 	private final    Db_stmt_arg_list arg_list = new Db_stmt_arg_list();
 	public boolean Mode_is_stmt() {return mode_is_stmt;} public Db_stmt_mgr Mode_is_stmt_(boolean v) {mode_is_stmt = v; return this;} private boolean mode_is_stmt = true;
 	public void Clear() {arg_list.Clear(); fmt_list.Clear(); bfr.Clear();}
-	public Bry_bfr Bfr() {return bfr;} private final    Bry_bfr bfr = Bry_bfr.new_();
+	public Bry_bfr Bfr() {return bfr;} private final    Bry_bfr bfr = Bry_bfr_.New();
 	public void Add_var_many(Object... ary) {
 		for (Object o : ary)
 			fmt_list.Add(o);

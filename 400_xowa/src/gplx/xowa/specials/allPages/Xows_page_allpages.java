@@ -16,18 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.apps.urls.*;
-public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, Xows_page {
+public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, Gfo_invk, Xow_special_page {
 	public Xows_page_allpages(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		html_itm_fmtr = new Xos_pagelist_html_itm_fmtr(this, wiki);
 	}	private Xos_pagelist_html_itm_fmtr html_itm_fmtr;
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__all_pages;}
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__all_pages;}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Bry_fmtr Html_all() {return html_all;} Bry_fmtr html_all = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -81,7 +81,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		boolean found = Build_data(url, ttl); if (!found) return;
 		Build_html(page);
 	}
-	private static byte[] Get_from(Gfo_qarg_mgr arg_hash, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl) {
+	private static byte[] Get_from(Gfo_qarg_mgr_old arg_hash, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl) {
 		return ttl.Leaf_bgn() == -1
 			? arg_hash.Get_val_bry_or(Bry_arg_from, null)
 			: ttl.Leaf_url()
@@ -105,11 +105,11 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 			arg_hash.Set_val_by_bry(Bry_arg_from, from_ttl.Page_db());
 			url.Qargs_ary_(arg_hash.To_ary());
 		}
-		Int_obj_ref rslt_len = Int_obj_ref.new_(rslt_list_len);
+		Int_obj_ref rslt_len = Int_obj_ref.New(rslt_list_len);
 		Xowd_page_itm rslt_nxt2 = new Xowd_page_itm();
 		Xowd_page_itm rslt_prv2 = new Xowd_page_itm();
 		int all_pages_min = 0;// no minimum for all pages
-		List_adp rslt_list = List_adp_.new_();
+		List_adp rslt_list = List_adp_.New();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt_list, rslt_nxt2, rslt_prv2, rslt_len, init_ns, from_ttl.Page_db(), itms_per_page, all_pages_min, itms_per_page, !hide_redirects_val, true);
 		rslt_list_len = rslt_len.Val();
 		for (int i = 0; i < rslt_list_len; i++)
@@ -117,7 +117,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		rslt_nxt = rslt_nxt2;
 		rslt_prv = rslt_prv2;
 		return true;
-	}	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
+	}	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
 	private static final    byte[] Bry_arg_from = Bry_.new_a7("from"), Bry_arg_ns = Bry_.new_a7("namespace"), Bry_arg_hideredirects = Bry_.new_a7("hideredirects");
 	public Xow_ns Init_ns() {return init_ns;} private Xow_ns init_ns;
 	public void Build_html(Xoae_page page) {
@@ -161,14 +161,14 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, GfoInvkAble, 
 		else if	(ctx.Match(k, Invk_itms_per_page_)) 			Itms_per_page_(m.ReadInt("v"));
 		else if	(ctx.Match(k, Invk_itms_per_grp_)) 				itms_per_grp = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_show_redirects_)) 			show_redirects = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_html_all_ = "html_all_", Invk_html_list_grp_ = "html_list_grp_", Invk_html_list_itm_normal_ = "html_list_itm_normal_", Invk_html_list_itm_redirect_ = "html_list_itm_redirect_"
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
 	public static final    String GRP_KEY = "xowa.special.allpages";
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }
 class Xos_pagelist_html_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	public Xos_pagelist_html_itm_fmtr(Xows_page_allpages mgr, Xowe_wiki wiki) {

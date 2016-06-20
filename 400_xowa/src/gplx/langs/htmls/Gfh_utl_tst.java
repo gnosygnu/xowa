@@ -38,7 +38,7 @@ public class Gfh_utl_tst {
 	}
 }
 class Gfh_class_fxt {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Clear() {
 		tmp_bfr.Clear();
 	}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Gfh_selecter {
 	public static Gfh_nde[] Select(byte[] src, Gfh_nde[] ary, Hash_adp_bry hash) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int xndes_len = ary.length;
 		for (int i = 0; i < xndes_len; i++) {
 			Gfh_nde hnde = ary[i];

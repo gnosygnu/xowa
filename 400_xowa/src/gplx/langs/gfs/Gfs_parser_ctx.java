@@ -26,7 +26,7 @@ class Gfs_parser_ctx {
 	public Gfs_nde Cur_nde() {return cur_nde;} Gfs_nde cur_nde;
 	public int Nxt_pos() {return nxt_pos;} private int nxt_pos;
 	public Gfs_lxr Nxt_lxr() {return nxt_lxr;} Gfs_lxr nxt_lxr;
-	public Bry_bfr Tmp_bfr() {return tmp_bfr;} private Bry_bfr tmp_bfr = Bry_bfr.new_();
+	public Bry_bfr Tmp_bfr() {return tmp_bfr;} private Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Process_eos() {}
 	public void Process_lxr(int nxt_pos, Gfs_lxr nxt_lxr)	{this.nxt_pos = nxt_pos; this.nxt_lxr = nxt_lxr;}
 	public void Process_null(int cur_pos)					{this.nxt_pos = cur_pos; this.nxt_lxr = null;}
@@ -55,10 +55,10 @@ class Gfs_parser_ctx {
 		return nde;
 	}
 	public void Cur_nde_from_stack() {cur_nde = (Gfs_nde)nodes.Get_at_last();}
-	public void Stack_add() {nodes.Add(cur_nde);} List_adp nodes = List_adp_.new_();
+	public void Stack_add() {nodes.Add(cur_nde);} List_adp nodes = List_adp_.New();
 	public void Stack_pop(int pos) {
 		if (nodes.Count() < 2) err_mgr.Fail_nde_stack_empty(this, pos);	// NOTE: need at least 2 items; 1 to pop and 1 to set as current
-		List_adp_.DelAt_last(nodes);
+		List_adp_.Del_at_last(nodes);
 		Cur_nde_from_stack();
 	}
 	public Gfs_err_mgr Err_mgr() {return err_mgr;} Gfs_err_mgr err_mgr = new Gfs_err_mgr();
@@ -85,7 +85,7 @@ class Gfs_err_mgr {
 		tmp_fail_args.Add("excerpt_end", Fail_excerpt_end(src, src_len, pos));		
 		tmp_fail_args.Add("pos"	, pos);		
 	}
-	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
+	public static final    String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
 	String Fail_msg(String type, Keyval_list fail_args) {
 		tmp_fail_bfr.Add_str_u8(type).Add_byte(Byte_ascii.Colon);
 		int len = fail_args.Count();
@@ -98,7 +98,7 @@ class Gfs_err_mgr {
 		}
 		return tmp_fail_bfr.To_str_and_clear();
 	}
-	Bry_bfr tmp_fail_bfr = Bry_bfr.reset_(255);
+	Bry_bfr tmp_fail_bfr = Bry_bfr_.Reset(255);
 	Keyval_list tmp_fail_args = new Keyval_list();
 	private static int excerpt_len = 50;
 	String Fail_excerpt_bgn(byte[] src, int src_len, int pos) {
@@ -121,5 +121,5 @@ class Gfs_err_mgr {
 				default:						bfr.Add_byte(b); break;
 			}
 		}
-	}	static final byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
+	}	static final    byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
 }

@@ -26,5 +26,5 @@ public class Xog_tab_itm_ {
 		return max == Tab_name_max_disabled || name_len <= max ? name : String_.Mid(name, 0, max) + "...";
 	}
 	public static final int Tab_name_min_disabled = -1, Tab_name_max_disabled = -1;
-	public static final Xog_tab_itm Null = null;
+	public static final    Xog_tab_itm Null = null;
 }

@@ -39,7 +39,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		int count_main = Calc_count_articles(wiki.Ns_mgr().Ns_main());
 		int count_file = Calc_count_articles(wiki.Ns_mgr().Ns_file());
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Gen_call(Bool_.Y, bfr, Xowe_wiki.Invk_stats);
 		Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_articles_, count_main);
 		Gen_call(Bool_.N, bfr, Xow_site_stats_mgr.Invk_number_of_files_, count_file);

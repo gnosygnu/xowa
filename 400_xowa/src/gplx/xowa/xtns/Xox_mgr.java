@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-public interface Xox_mgr extends GfoInvkAble {
-	byte[] Xtn_key();
-	void Xtn_ctor_by_app(Xoae_app app);
-	void Xtn_ctor_by_wiki(Xowe_wiki wiki);
-	void Xtn_init_by_app(Xoae_app app);
-	void Xtn_init_by_wiki(Xowe_wiki wiki);
-	Xox_mgr Clone_new();
+public interface Xox_mgr extends Gfo_invk {
+	byte[]		Xtn_key();
+	void		Xtn_ctor_by_app(Xoae_app app);
+	void		Xtn_ctor_by_wiki(Xowe_wiki wiki);
+	void		Xtn_init_by_app(Xoae_app app);
+	void		Xtn_init_by_wiki(Xowe_wiki wiki);
+	Xox_mgr		Xtn_clone_new();
 }

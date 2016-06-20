@@ -26,7 +26,7 @@ public class Xoa_css_img_downloader {
 	public Xoa_css_img_downloader Stylesheet_prefix_(byte[] v) {stylesheet_prefix = v; return this;} private byte[] stylesheet_prefix;	// TEST: setter exposed b/c tests can handle "mem/" but not "//mem"
 	public void Chk(byte[] wiki_domain, Io_url css_fil) {
 		this.wiki_domain = wiki_domain;
-		List_adp img_list = List_adp_.new_();
+		List_adp img_list = List_adp_.New();
 		byte[] old_bry = Io_mgr.Instance.LoadFilBry(css_fil);
 		byte[] rel_url_prefix = Bry_.Add(Bry_fwd_slashes, wiki_domain);
 		byte[] new_bry = Convert_to_local_urls(rel_url_prefix, old_bry, img_list);
@@ -38,7 +38,7 @@ public class Xoa_css_img_downloader {
 		try {
 			int src_len = src.length;
 			int prv_pos = 0;
-			Bry_bfr bfr = Bry_bfr.new_(src_len);
+			Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
 			Hash_adp img_hash = Hash_adp_bry.cs();
 			while (true) {
 				int url_pos = Bry_find_.Find_fwd(src, Bry_url, prv_pos);
@@ -134,7 +134,7 @@ public class Xoa_css_img_downloader {
 		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
 		return semic_pos + Int_.Const_dlm_len;
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Wikisource_dynimg_ttl		= Bry_.new_a7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
 	, Wikisource_dynimg_find	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
 	, Wikisource_dynimg_repl	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
@@ -179,13 +179,13 @@ public class Xoa_css_img_downloader {
 		}
 		return raw_bry;
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Bry_url = Bry_.new_a7("url("), Bry_data_image = Bry_.new_a7("data:image/")
 	, Bry_http = Bry_.new_a7("http://"), Bry_fwd_slashes = Bry_.new_a7("//"), Bry_import = Bry_.new_a7("@import ")
 	, Bry_http_protocol = Bry_.new_a7("http")
 	;
-	public static final byte[] 
+	public static final    byte[] 
 		  Bry_comment_bgn = Bry_.new_a7("/*XOWA:"), Bry_comment_end = Bry_.new_a7("*/");
-	private static final int Bry_url_len = Bry_url.length, Bry_import_len = Bry_import.length;
+	private static final    int Bry_url_len = Bry_url.length, Bry_import_len = Bry_import.length;
 	static final String GRP_KEY = "xowa.wikis.init.css";
 }

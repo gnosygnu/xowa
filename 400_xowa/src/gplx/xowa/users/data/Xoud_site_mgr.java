@@ -25,21 +25,17 @@ public class Xoud_site_mgr {
 		tbl = new Xoud_site_tbl(conn);
 		if (created) tbl.Create_tbl();
 	}
-	public Xoud_site_row[] Get_all() {return tbl.Select_all();}
-	public void Import(String domain, String name, String path, String xtn) {	// insert or update wiki
-		Xoud_site_row[] ary = tbl.Select_by_domain(domain);
-		int len = ary.length, update_id = -1, priority = 0;
-		for (int i = 0; i < len; ++i) {
-			Xoud_site_row itm = ary[i];
-			if (priority <= itm.Priority()) priority = itm.Priority() + 1;
-			if (String_.Eq(path, itm.Path())) {	// same domain and same path; change insert to update;
-				update_id = itm.Id();
-				break;
-			}
-		}
-		if (update_id == -1)
-			tbl.Insert(id_mgr.Get_next_and_save("xowa.user.site"), priority, domain, name, path, xtn);
+	public Xoud_site_row[]	Get_all() {return tbl.Select_all();}
+	public Xoud_site_row	Select_by_domain(byte[] domain) {return tbl.Select_by_domain(domain);}
+	public void				Delete_by_domain(byte[] domain) {tbl.Delete_by_domain(domain);}
+	public void Import(String domain, String name, String path, String date, String xtn) {	// insert or update wiki
+		Xoud_site_row itm = tbl.Select_by_domain(Bry_.new_u8(domain));
+		if (itm == null)
+			tbl.Insert(id_mgr.Get_next_and_save("xowa.user.site"), 0, domain, name, path, date, xtn);
 		else
-			tbl.Update(update_id, priority, domain, name, path, xtn);			
+			tbl.Update(itm.Id(), 0, domain, name, path, date, xtn);
+	}
+	public void Update(Xoud_site_row row) {
+		tbl.Update(row.Id(), row.Priority(), row.Domain(), row.Name(), row.Path(), row.Date(), row.Xtn());
 	}
 }

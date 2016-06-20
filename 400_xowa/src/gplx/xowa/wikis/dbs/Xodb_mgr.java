@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.core.*;
-public interface Xodb_mgr extends GfoInvkAble {
+public interface Xodb_mgr extends Gfo_invk {
 	byte Tid();
 	String Tid_name();
 	byte Category_version();

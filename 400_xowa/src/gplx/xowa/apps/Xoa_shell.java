@@ -19,14 +19,14 @@ package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.htmls.hrefs.*;
-public class Xoa_shell implements GfoInvkAble {
+public class Xoa_shell implements Gfo_invk {
 	public Xoa_shell(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public boolean Fetch_page_exec_async() {return fetch_page_exec_async;} private boolean fetch_page_exec_async = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fetch_page))				return Fetch_page(m);
 		else if	(ctx.Match(k, Invk_chars_per_line_max_))	Console_adp__sys.Instance.Chars_per_line_max_(m.ReadInt("v"));
 		else if	(ctx.Match(k, Invk_backspace_by_bytes_))	Console_adp__sys.Instance.Backspace_by_bytes_(m.ReadYn("v"));
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private String Fetch_page(GfoMsg m) {

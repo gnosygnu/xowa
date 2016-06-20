@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import org.junit.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public class Xosrv_msg_rdr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrv_msg_rdr_fxt fxt = new Xosrv_msg_rdr_fxt();
 	@Test  public void Parse() {
@@ -58,7 +58,7 @@ class Xosrv_msg_rdr_fxt {
 		Tfds.Eq_true(String_.Has_at_bgn(msg_text, expd_err), msg_text);
 	}
 	public void Test_print(Xosrv_msg msg, String expd) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		msg.Print(bfr);
 		Tfds.Eq(expd, bfr.To_str_and_clear());
 	}

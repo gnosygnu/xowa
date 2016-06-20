@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.net.*; import gplx.core.threads.*; import gplx.core.primitives.*;
-class Http_server_socket implements GfoInvkAble {
-	private final Http_server_mgr server_mgr;
+class Http_server_socket implements Gfo_invk {
+	private final    Http_server_mgr server_mgr;
 	private Server_socket_adp server_socket;
 	public Http_server_socket(Http_server_mgr server_mgr) {this.server_mgr = server_mgr;}
 	public boolean Canceled() {return canceled;}
@@ -53,12 +53,12 @@ class Http_server_socket implements GfoInvkAble {
 			}
 			Http_server_wkr_v2 wkr = new Http_server_wkr_v2(server_mgr, wkr_uid);
 			wkr.Init_by_thread(client_socket);
-			Thread_adp_.invk_("thread:xowa.http_server.client", wkr, Http_server_wkr_v2.Invk_run).Start();
+			Thread_adp_.Start_by_key("thread:xowa.http_server.client", wkr, Http_server_wkr_v2.Invk_run);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) this.Run();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_run = "run";
 }

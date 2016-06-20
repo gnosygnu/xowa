@@ -16,39 +16,27 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.threads.*; import gplx.core.ios.*;
+import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
 import gplx.xowa.htmls.core.makes.imgs.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
-	private final Xof_orig_mgr orig_mgr; private final Xof_bin_mgr bin_mgr; private final Fsm_mnt_mgr mnt_mgr; private final Xou_cache_mgr cache_mgr;
-	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xog_js_wkr js_wkr;
-	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Xof_img_size img_size = new Xof_img_size(); 	
-	private final Xoa_page hpg; private final List_adp imgs;
+	private final    Xof_orig_mgr orig_mgr; private final    Xof_bin_mgr bin_mgr; private final    Fsm_mnt_mgr mnt_mgr; private final    Xou_cache_mgr cache_mgr;
+	private final    Gfo_usr_dlg usr_dlg; private final    Xow_repo_mgr repo_mgr; private final    Xog_js_wkr js_wkr;
+	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Xof_img_size img_size = new Xof_img_size(); 	
+	private final    Xoa_page hpg; private final    List_adp imgs;
 	public Xof_file_wkr(Xof_orig_mgr orig_mgr, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xoa_page hpg, List_adp imgs) {
 		this.orig_mgr = orig_mgr; this.bin_mgr = bin_mgr; this.mnt_mgr = mnt_mgr; this.cache_mgr = cache_mgr;
 		this.usr_dlg = Gfo_usr_dlg_.Instance; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
 		this.hpg = hpg; this.imgs = imgs;
 	}
-	public String Name() {return "xowa.load_imgs";}
-	public boolean Resume() {return true;}
-	public void Exec() {
+	public String			Thread__name() {return "xowa.load_imgs";}
+	public boolean			Thread__resume() {return true;}
+	public void Thread__exec() {
 		int len = imgs.Count();
 		for (int i = 0; i < len; ++i)
 			Exec_by_fsdb((Xof_fsdb_itm)imgs.Get_at(i));
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");
-	}
-	public void Exec_old() {
-		int len = imgs.Count();
-		for (int i = 0; i < len; ++i)
-			Ctor_by_hdump(hpg, (Xohd_img_itm__base)imgs.Get_at(i));
-		Xoa_app_.Usr_dlg().Prog_none("", "", "");
-	}
-	private void Ctor_by_hdump(Xoa_page hpg, Xohd_img_itm__base hdump) {
-		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
-		fsdb.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), hdump.Lnki_ttl(), hdump.Lnki_type(), hdump.Lnki_upright(), hdump.Lnki_w(), hdump.Lnki_h(), hdump.Lnki_time(), hdump.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
-		fsdb.Init_at_hdoc(hdump.Html_uid(), hdump.Html_elem_tid());
-		Exec_by_fsdb(fsdb);
 	}
 	private void Exec_by_fsdb(Xof_fsdb_itm fsdb) {
 		try {
@@ -85,7 +73,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 					if (!pass) {
 						usr_dlg.Warn_many("", "", "file.missing.bin: file=~{0} width=~{1} page=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), page.Ttl().Full_db());
 						fsdb.File_exists_n_();
-						// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, fsdb.Html_uid());	// TODO: update caption with "" if image is missing
+						// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, fsdb.Html_uid());	// TODO_OLD: update caption with "" if image is missing
 						return false;
 					}
 				}
@@ -132,7 +120,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	public static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr, Io_url html_url) {
 		long rdr_len = Io_mgr.Instance.QueryFil(html_url).Size();
-		Io_stream_rdr rdr = gplx.core.ios.Io_stream_rdr_.file_(html_url);
+		Io_stream_rdr rdr = gplx.core.ios.streams.Io_stream_rdr_.file_(html_url);
 		try {
 			rdr.Open();
 			Fsm_mnt_itm mnt_itm = mnt_mgr.Mnts__get_insert();

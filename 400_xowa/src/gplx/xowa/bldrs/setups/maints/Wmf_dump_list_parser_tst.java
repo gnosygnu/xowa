@@ -51,8 +51,8 @@ public class Wmf_dump_list_parser_tst {
 //			);
 //			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr.Instance.LoadFilBry("C:\\xowa\\bin\\any\\xowa\\xtns\\xowa\\maintenance\\backup-index.html"));
 //			Array_.Sort(itms);
-//			Bry_bfr sql_bfr = Bry_bfr.new_();
-//			Bry_bfr bld_bfr = Bry_bfr.new_();
+//			Bry_bfr sql_bfr = Bry_bfr_.New();
+//			Bry_bfr bld_bfr = Bry_bfr_.New();
 //			int itms_len = itms.length;
 //			int counter = 1;
 //			for (int i = 0; i < itms_len; i++) {

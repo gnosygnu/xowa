@@ -19,9 +19,9 @@ package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.drds.pages.*; import gplx.xowa.drds.files.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.addons.apps.searchs.searchers.rslts.*; import gplx.xowa.specials.randoms.*;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.addons.apps.searchs.*; import gplx.xowa.addons.apps.searchs.searchers.*;
+import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.xowa.langs.cases.*;
 public class Xod_app {
 	private final    Xoav_app app;

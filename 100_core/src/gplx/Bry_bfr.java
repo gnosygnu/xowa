@@ -53,7 +53,7 @@ public class Bry_bfr {
 			rv = To_bry();
 			this.Clear();
 			if (reset > 0) Reset_if_gt(reset);
-			synchronized (mkr_mgr) {
+			synchronized (mkr_mgr) {	// SAME: Mkr_rls()
 				mkr_mgr.Rls(mkr_idx);
 			}
 			mkr_mgr = null;
@@ -61,7 +61,7 @@ public class Bry_bfr {
 		}
 		return rv;
 	}
-	private Bry_bfr Reset_(int v) {reset = v; return this;}
+	public Bry_bfr Reset_(int v) {reset = v; return this;}
 	public Bry_bfr Reset_if_gt(int limit) {
 		if (bfr_max > limit) {
 			this.bfr_max = limit;
@@ -640,11 +640,8 @@ public class Bry_bfr {
 		}
 		return this;
 	} 
-        public static Bry_bfr new_()			{return new Bry_bfr(16);}
-        public static Bry_bfr new_(int v)		{return new Bry_bfr(v);}
-        public static Bry_bfr reset_(int v)		{return new Bry_bfr(16).Reset_(v);}	// PERF: set initial size to 16, not reset val; allows for faster "startup"; DATE:2014-06-14
 	protected Bry_bfr() {}
-	Bry_bfr(int bfr_max) {
+	public Bry_bfr(int bfr_max) {
 		Init(bfr_max);
 	}
 	protected void Init(int bfr_max) {

@@ -50,12 +50,12 @@ class Xoa_sitelink_div_wtr_fxt {
 		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		ctx.Page().Ttl_(Xoa_ttl.parse(wiki, Bry_.new_a7("test_page")));
 		byte[] raw_bry = Bry_.new_u8(raw);
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(raw_bry);
 		wiki.Parser_mgr().Main().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), raw_bry);
 		wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, raw_bry, root);
 
-		Bry_bfr html_bfr = Bry_bfr.new_();
+		Bry_bfr html_bfr = Bry_bfr_.New();
 		wiki.App().Xwiki_mgr__sitelink_mgr().Write_html(html_bfr, wiki, ctx.Page().Slink_list(), gplx.xowa.xtns.wdatas.Wdata_xwiki_link_wtr.Qid_null);
 	    Tfds.Eq_str_lines(expd, html_bfr.To_str_and_clear());
 	}

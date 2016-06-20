@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-public class Scrib_err_filter_mgr implements GfoInvkAble {
-	private final Ordered_hash hash_by_mod = Ordered_hash_.New();
+public class Scrib_err_filter_mgr implements Gfo_invk {
+	private final    Ordered_hash hash_by_mod = Ordered_hash_.New();
 	public void Clear() {hash_by_mod.Clear();}
 	public boolean Count_eq_0() {return hash_by_mod.Count() == 0;}
 	public boolean Match(String mod, String fnc, String err) {
@@ -40,7 +40,7 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 		itms.Add(new Scrib_err_filter_itm(count_expd, mod, fnc, err, comment));
 	}
 	public String Print() {
-		Bry_bfr bfr = Bry_bfr.new_(8);
+		Bry_bfr bfr = Bry_bfr_.New_w_size(8);
 		int i_len = hash_by_mod.Count();
 		for (int i = 0; i < i_len; ++i) {
 			Ordered_hash fncs = (Ordered_hash)hash_by_mod.Get_at(i);
@@ -71,24 +71,24 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 		}
 		List_adp list_of_err = (List_adp)hash_by_fnc.Get_by(fnc);
 		if (list_of_err == null) {
-			list_of_err = List_adp_.new_();
+			list_of_err = List_adp_.New();
 			hash_by_fnc.Add(fnc, list_of_err);
 		}
 		return list_of_err;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add))	Add(m.ReadInt("count_expd"), m.ReadStr("mod"), m.ReadStr("fnc"), m.ReadStr("err"), m.ReadStr("comment"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add = "add";
 }
 class Scrib_err_filter_itm {
 	public Scrib_err_filter_itm(int count_expd, String mod, String fnc, String err, String comment) {this.count_expd = count_expd; this.mod = mod; this.err = err; this.fnc = fnc; this.comment = comment;}
-	public String Mod() {return mod;} private final String mod;
-	public String Fnc() {return fnc;} private final String fnc;
-	public String Err() {return err;} private final String err;
-	public String Comment() {return comment;} private final String comment;
-	public int Count_expd() {return count_expd;} private final int count_expd;
+	public String Mod() {return mod;} private final    String mod;
+	public String Fnc() {return fnc;} private final    String fnc;
+	public String Err() {return err;} private final    String err;
+	public String Comment() {return comment;} private final    String comment;
+	public int Count_expd() {return count_expd;} private final    int count_expd;
 	public int Count_actl() {return count_actl;} private int count_actl;
 	public void Count_actl_add_1() {++count_actl;}
 }

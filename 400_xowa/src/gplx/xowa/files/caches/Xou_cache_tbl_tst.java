@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.dbs.*;
 public class Xou_cache_tbl_tst {
-	@Before public void init() {fxt.Clear();} private final Xou_cache_tbl_fxt fxt = new Xou_cache_tbl_fxt();
+	@Before public void init() {fxt.Clear();} private final    Xou_cache_tbl_fxt fxt = new Xou_cache_tbl_fxt();
 	@Test  public void Orig_ttl__same()			{fxt.Test_save_orig_ttl("A.png", "A.png", "");}
 	@Test  public void Orig_ttl__redirect()		{fxt.Test_save_orig_ttl("A.png", "B.png", "B.png");}
 }
 class Xou_cache_tbl_fxt {
-	private final Bry_bfr lnki_key_bfr = Bry_bfr.new_(255);
+	private final    Bry_bfr lnki_key_bfr = Bry_bfr_.New_w_size(255);
 	private Xou_cache_tbl tbl;
 	public void Clear() {
 		Io_mgr.Instance.InitEngine_mem();

@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
-public class Move_page implements Xows_page {
+public class Move_page implements Xow_special_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();
 	private Xoa_ttl src_ttl;
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__move_page;}
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__move_page;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		args.Parse(url);
@@ -121,7 +121,7 @@ public class Move_page implements Xows_page {
 	, "</form>"
 	), "move-page-legend", "src_href", "src_title", "src_text", "newtitle", "trg_ns_list", "trg_title", "move-leave-redirect", "movepagebtn");
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }
 class Move_trg_ns_list_fmtr implements gplx.core.brys.Bfr_arg {
 	private Xowe_wiki wiki; private Xoa_ttl ttl;

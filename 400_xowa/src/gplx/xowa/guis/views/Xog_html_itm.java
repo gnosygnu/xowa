@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.gfui.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.files.gui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.files.gui.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
-public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
-	private Xoae_app app; private final Object thread_lock = new Object();
-	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
+	private Xoae_app app; private final    Object thread_lock = new Object();
+	private final    String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
 	protected Xog_html_itm() {}	// TEST: for prefs_mgr
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
@@ -30,14 +31,14 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		Gfui_kit kit = owner_tab.Tab_mgr().Win().Kit();
 		cmd_sync = kit.New_cmd_sync(this);	// NOTE: always use sync; async will cause some images to be "lost" in update;
 		cmd_async = kit.New_cmd_async(this);
-		ev_mgr = GfoEvMgr.new_(this);
+		ev_mgr = new Gfo_evt_mgr(this);
 	}
-	public GfoEvMgr			EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+	public Gfo_evt_mgr			Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xog_tab_itm		Owner_tab() {return owner_tab;} private Xog_tab_itm owner_tab;
 	public Gfui_html		Html_box() {return html_box;} private Gfui_html html_box;
 	public Xoh_js_cbk		Js_cbk() {return js_cbk;} private Xoh_js_cbk js_cbk;
-	public GfoInvkAble		Cmd_sync() {return cmd_sync;} private GfoInvkAble cmd_sync;
-	public GfoInvkAble		Cmd_async() {return cmd_async;} private GfoInvkAble cmd_async; 
+	public Gfo_invk		Cmd_sync() {return cmd_sync;} private Gfo_invk cmd_sync;
+	public Gfo_invk		Cmd_async() {return cmd_async;} private Gfo_invk cmd_async; 
 	public void Switch_mem(Xog_html_itm comp) {
 		Xog_tab_itm temp_owner_tab = owner_tab;		// NOTE: reparent owner_tab, since owner_tab will be switching its html_itm
 		this.owner_tab = comp.owner_tab;
@@ -96,11 +97,11 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public String Get_elem_value(String elem_id)		{return Html_elem_atr_get_str(elem_id, Gfui_html.Atr_value);}
 	public void Html_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_img_update).Add("elem_id", elem_id).Add("elem_src", elem_src).Add("elem_width", elem_width).Add("elem_height", elem_height);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_img_update, m);
+		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_img_update, m);
 	}
 	public void Html_elem_delete(String elem_id) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_delete).Add("elem_id", elem_id);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_delete, m);
+		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_elem_delete, m);
 	}
 	@gplx.Virtual public String	Html_elem_atr_get_str(String id, String atr_key)		{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_as_obj, id, atr_key);}
 	@gplx.Virtual public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return Bool_.parse(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
@@ -109,36 +110,36 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public void Html_atr_set(String elem_id, String atr_key, String atr_val) {
 		synchronized (thread_lock) {	// needed for Special:Search and async cancel; DATE:2015-05-02
 			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
-			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set, m);
+			Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_elem_atr_set, m);
 		}
 	}
 	public void Html_redlink(String html_uid) {Html_doc_atr_append_or_set(html_uid, "class", gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_redlink_utl.New_str);}
 	private void Html_doc_atr_append_or_set(String elem_id, String atr_key, String atr_val) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_doc_atr_append_or_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_doc_atr_append_or_set, m);
+		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_doc_atr_append_or_set, m);
 	}
 	public void Html_elem_replace_html(String id, String html) {
 		synchronized (thread_lock) {	// needed for Special:Search and async; DATE:2015-04-23
 			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_replace_html).Add("id", id).Add("html", html);
-			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_replace_html, m);
+			Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_elem_replace_html, m);
 		}
 	}
 	public void Html_elem_append_above(String id, String html) {
 		synchronized (thread_lock) {	// needed for Special:Search and async; DATE:2015-04-23
 			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_append_above).Add("id", id).Add("html", html);
-			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_append_above, m);
+			Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_elem_append_above, m);
 		}
 	}
 	public void Html_gallery_packed_exec() {
 		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_gallery_packed_exec);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
+		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
 		module_packed_done = true;
 	}
 	public void Html_popups_bind_hover_to_doc() {
 		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_popups_bind_hover_to_doc);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
+		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
 		module_popups_done = true;
 	}
 	private boolean module_packed_done = false, module_popups_done = false;
@@ -149,7 +150,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		if (module_mgr.Itm__popups().Enabled() && !module_popups_done)
 			this.Html_popups_bind_hover_to_doc();
 	}
-	public void Scroll_page_by_bmk_gui()	{GfoInvkAble_.InvkCmd(cmd_async, Invk_scroll_page_by_bmk);}
+	public void Scroll_page_by_bmk_gui()	{Gfo_invk_.Invk_by_key(cmd_async, Invk_scroll_page_by_bmk);}
 	private void Scroll_page_by_bmk() {
 		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return; // only set html page position on active tab; otherwise, page "scrolls down" mysteriously on unseen tab; DATE:2014-05-02
 		String html_doc_pos = owner_tab.Page().Html_data().Bmk_pos();
@@ -168,7 +169,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_set, node_path.Val(), scroll_top.Val());
 		}
 	}
-	public void Scroll_page_by_id_gui(String id)	{GfoInvkAble_.InvkCmd_val(cmd_async, Invk_scroll_page_by_id, id);}
+	public void Scroll_page_by_id_gui(String id)	{Gfo_invk_.Invk_by_val(cmd_async, Invk_scroll_page_by_id, id);}
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
@@ -200,7 +201,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		else if (ctx.Match(k, Invk_scroll_page_by_id))					Scroll_page_by_id(m.ReadStr("v"));
 		else if (ctx.Match(k, Invk_html_elem_focus))					html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, m.ReadStr("v"));
 		else if (ctx.Match(k, GfuiElemKeys.Evt_menu_detected))			When_menu_detected();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 

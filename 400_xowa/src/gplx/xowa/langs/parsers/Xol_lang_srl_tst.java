@@ -205,7 +205,7 @@ class Xol_lang_srl_fxt {
 		app = Xoa_app_fxt.Make__app__edit();
 		lang = new Xol_lang_itm(app.Lang_mgr(), Bry_.new_a7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
-	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
 	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_u8(s), false);}
@@ -281,7 +281,7 @@ class Xol_lang_srl_fxt {
 		return sb.To_str_and_clear();
 	}
 	private Xol_specials_itm[] To_ary(Xol_specials_mgr specials_mgr) {
-		int len = specials_mgr.Count();
+		int len = specials_mgr.Len();
 		Xol_specials_itm[] rv = new Xol_specials_itm[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = specials_mgr.Get_at(i);
@@ -304,7 +304,7 @@ class Xol_lang_srl_fxt {
 	}
 	Xol_kwd_grp[] To_ary(Xol_kwd_mgr kwd_mgr) {
 		int len = kwd_mgr.Len();
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Xol_kwd_grp kwd_grp = kwd_mgr.Get_at(i);
 			if (kwd_grp == null) continue;
@@ -328,7 +328,7 @@ class Xol_lang_srl_fxt {
 	}
 	Xol_msg_itm[] To_ary(Xol_msg_mgr msg_mgr) {
 		int len = msg_mgr.Itms_max();
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(i);
 			if (itm == null || !itm.Dirty()) continue;

@@ -23,7 +23,7 @@ public class Bry_fmt_parser_ {
 		int txt_bgn = -1;
 		int key_idx = -1;
 		Hash_adp_bry keys_hash = Hash_adp_bry.cs(); 
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		while (true) {
 			boolean is_last = pos == src_len;
 			byte b = is_last ? escape : src[pos];
@@ -89,5 +89,5 @@ public class Bry_fmt_parser_ {
 			pos = rhs_pos + 1;
 		}
 		return (byte[][])list.To_ary(byte[].class);
-	}	private static final byte[] Bry_arg_lhs = Bry_.new_a7("~{");
+	}	private static final    byte[] Bry_arg_lhs = Bry_.new_a7("~{");
 }

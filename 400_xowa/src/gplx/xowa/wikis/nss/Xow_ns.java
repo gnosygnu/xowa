@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.urls.*;
-public class Xow_ns implements GfoInvkAble {
+public class Xow_ns implements Gfo_invk {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
 		this.id = id; this.case_match = case_match; this.is_alias = is_alias;
 		Name_bry_(name);
@@ -99,7 +99,7 @@ public class Xow_ns implements GfoInvkAble {
 		else if (ctx.Match(k, Invk_id))					return id;
 		else if (ctx.Match(k, Invk_name_txt))			return name_ui;
 		else if (ctx.Match(k, Invk_name_ui))			return Name_combo();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_subpages_enabled_ = "subpages_enabled_", Invk_id = "id", Invk_name_txt = "name_txt", Invk_name_ui = "name_ui";
 }

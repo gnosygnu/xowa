@@ -20,8 +20,8 @@ import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.encoders.*; im
 import gplx.xowa.bldrs.sqls.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
-	private Gfo_usr_dlg usr_dlg; private final Xowe_wiki wiki; private final Db_idx_mode idx_mode; private Xowd_db_mgr core_db_mgr;
-	private final Sql_file_parser sql_parser; private final Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_(); private Io_line_rdr name_id_rdr;
+	private Gfo_usr_dlg usr_dlg; private final    Xowe_wiki wiki; private final    Db_idx_mode idx_mode; private Xow_db_mgr core_db_mgr;
+	private final    Sql_file_parser sql_parser; private final    Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_(); private Io_line_rdr name_id_rdr;
 	private Xowd_cat_core_tbl cat_core_tbl; private Xowd_cat_link_tbl cat_link_tbl;
 	private long cat_db_size, cat_db_max; private int cur_row_count;
 	private int[] cur_cat_counts = new int[Xoa_ctg_mgr.Tid__max]; private byte[] cur_cat_ttl = Ttl_first; private int cur_cat_id; private int cur_cat_file_idx;
@@ -34,7 +34,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		this.cat_db_max		= wiki.Appe().Api_root().Bldr().Wiki().Import().Cat_link_db_max();
 		boolean one_file		= core_db_mgr.Props().Layout_text().Tid_is_all_or_few();
 		if (!one_file)		// cat is in its own dbs: delete dbs
-			core_db_mgr.Dbs__delete_by_tid(Xowd_db_file_.Tid_cat, Xowd_db_file_.Tid_cat_core, Xowd_db_file_.Tid_cat_link);	// delete existing category files else upgrade won't work
+			core_db_mgr.Dbs__delete_by_tid(Xow_db_file_.Tid__cat, Xow_db_file_.Tid__cat_core, Xow_db_file_.Tid__cat_link);	// delete existing category files else upgrade won't work
 		Db_make(Bool_.Y);
 		if (one_file) {		// cat is in single db; delete tbls;
 			cat_core_tbl.Delete_all();
@@ -86,10 +86,10 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	private void Db_make(boolean first) {
 		boolean one_file = core_db_mgr.Props().Layout_text().Tid_is_all_or_few();
 		if (first) {	// create cat_core
-			Xowd_db_file cat_core_db = one_file ? core_db_mgr.Db__cat_core() : core_db_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_cat_core);
+			Xow_db_file cat_core_db = one_file ? core_db_mgr.Db__cat_core() : core_db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__cat_core);
 			this.cat_core_tbl = cat_core_db.Tbl__cat_core().Create_tbl();
 		}
-		Xowd_db_file cat_link_db = one_file ? core_db_mgr.Db__core() : core_db_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_cat_link);
+		Xow_db_file cat_link_db = one_file ? core_db_mgr.Db__core() : core_db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__cat_link);
 		this.cat_link_tbl = cat_link_db.Tbl__cat_link();
 		if (	(one_file && first)
 			||	!one_file)
@@ -134,7 +134,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		Io_url[] urls = Io_mgr.Instance.QueryDir_args(make_dir).ExecAsUrlAry();
 		return new Io_line_rdr(usr_dlg, urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	}
-	private static final byte[] Ttl_last = null, Ttl_first = Bry_.Empty;
+	private static final    byte[] Ttl_last = null, Ttl_first = Bry_.Empty;
 }
 /*
 NOTE_1: categorylinks row size: 34 + 20 + 12 + (cat_sortkey.length * 2)

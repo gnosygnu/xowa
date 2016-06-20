@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.htmls.sidebar.*;
-public class Xow_msg_mgr implements GfoInvkAble {
-	private final Xowe_wiki wiki; private Xol_lang_itm lang; private final Xol_msg_mgr msg_mgr;
+public class Xow_msg_mgr implements Gfo_invk {
+	private final    Xowe_wiki wiki; private Xol_lang_itm lang; private final    Xol_msg_mgr msg_mgr;
 	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
@@ -104,10 +104,10 @@ public class Xow_msg_mgr implements GfoInvkAble {
 			itm.Accesskey_(accesskey_val).Title_(tooltip_val).Atr_accesskey_and_title_(rv);
 			return null;
 		}
-	}	static final byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
+	}	static final    byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))							return this.Val_by_key_obj(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_get_html_accesskey_and_title))	return this.Val_html_accesskey_and_title(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_get_html_accesskey_and_title = "get_html_accesskey_and_title";
 }

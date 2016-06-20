@@ -29,7 +29,7 @@ public class Ordered_hash_tst {
 		hash.Add("key2", "val2");
 		hash.Add("key1", "val1");
 
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (Object val : hash)
 			list.Add(val);
 		Tfds.Eq("val2", list.Get_at(0));

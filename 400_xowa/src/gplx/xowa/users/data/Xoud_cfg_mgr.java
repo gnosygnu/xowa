@@ -54,9 +54,18 @@ public class Xoud_cfg_mgr {
 		else
 			Update_int(grp, key, val);
 	}
+	public void Upsert_str(String grp, String key, String val) {
+		String exists = Select_str_or(grp, key, null);
+		if (exists == null)
+			Insert_str(grp, key, val);
+		else
+			Update_str(grp, key, val);
+	}
+	public void Update_str(String grp, String key, String val)	{Update_bry(grp, key, Bry_.new_u8(val));}
 	public void Update_bry(String key, byte[] val)				{Update_bry("", key, val);}
 	public void Update_bry(String grp, String key, byte[] val)	{tbl.Update_bry(grp, key, val);}
 	public void Update_int(String grp, String key, int val)		{tbl.Update_int(grp, key, val);}
+	public void Insert_str(String grp, String key, String val)	{Insert_bry(grp, key, Bry_.new_u8(val));}
 	public void Insert_bry(String key, byte[] val)				{Insert_bry("", key, val);}
 	public void Insert_bry(String grp, String key, byte[] val)	{tbl.Insert_bry(grp, key, val);}
 	public void Insert_int(String grp, String key, int val)		{tbl.Insert_int(grp, key, val);}

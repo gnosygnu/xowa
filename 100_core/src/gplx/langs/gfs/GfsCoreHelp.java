@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.strings.*;
-class GfsCoreHelp implements GfoInvkAble {
+class GfsCoreHelp implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		String path = m.ReadStrOr("path", "");
 		if (String_.Eq(path, "")) {
@@ -37,16 +37,16 @@ class GfsCoreHelp implements GfoInvkAble {
 			sb.Add_spr_unless_first(itmAry[j], ".", j);
 		return Err_Unhandled(sb.To_str(), itmAry[i]);
 	}
-	static Object Exec(GfsCtx rootCtx, GfoInvkAble rootInvk, String path) {
+	static Object Exec(GfsCtx rootCtx, Gfo_invk rootInvk, String path) {
 		String[] itmAry = String_.Split(path, ".");
-		GfoInvkAble invk = rootInvk;
+		Gfo_invk invk = rootInvk;
 		GfsCtx ctx = GfsCtx.new_();
 		Object curRv = null;
 		for (int i = 0; i < itmAry.length; i++) {
 			String itm = itmAry[i];
 			curRv = invk.Invk(ctx, 0, itm, GfoMsg_.Null);
-			if (curRv == GfoInvkAble_.Rv_unhandled) throw Err_Unhandled(itmAry, i);
-			invk = GfoInvkAble_.as_(curRv);
+			if (curRv == Gfo_invk_.Rv_unhandled) throw Err_Unhandled(itmAry, i);
+			invk = (Gfo_invk)curRv;
 		}
 		GfsCoreHelp helpData = GfsCoreHelp.as_(curRv);
 		if (helpData != null) { // last itm is actually Method

@@ -20,10 +20,10 @@ import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_lxr_mgr {
-	private final Xop_lxr[] ary;
-	private final List_adp page_lxr_list = List_adp_.new_();
+	private final    Xop_lxr[] ary;
+	private final    List_adp page_lxr_list = List_adp_.New();
 	public Xop_lxr_mgr(Xop_lxr[] ary) {this.ary = ary;}
-	public Btrie_fast_mgr Trie() {return trie;} private final Btrie_fast_mgr trie = Btrie_fast_mgr.cs();
+	public Btrie_fast_mgr Trie() {return trie;} private final    Btrie_fast_mgr trie = Btrie_fast_mgr.cs();
 	public void Page__add(Xowe_wiki wiki, Xop_lxr... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
@@ -92,7 +92,7 @@ public class Xop_lxr_mgr {
 		, Xop_xnde_lxr.Instance
 		});
 	}
-	public static final Xop_lxr_mgr Popup_lxr_mgr	// same as orig_page, except apos_lxr added
+	public static final    Xop_lxr_mgr Popup_lxr_mgr	// same as orig_page, except apos_lxr added
 		= new Xop_lxr_mgr(new Xop_lxr[] 
 		{ Xop_pipe_lxr.Instance, new Xop_eq_lxr(true), Xop_colon_lxr.Instance, Xop_space_lxr.Instance, Xop_tab_lxr.Instance, Xop_nl_lxr.Instance
 		, Xop_curly_bgn_lxr.Instance, Xop_curly_end_lxr.Instance

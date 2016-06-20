@@ -22,15 +22,15 @@ import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.sit
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;	
-import gplx.xowa.guis.cbks.*;
+import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.langs.*; 
 import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.users.*;
 import gplx.xowa.bldrs.*;
-import gplx.xowa.addons.*; import gplx.xowa.addons.apps.specials.*;
-public interface Xoa_app extends GfoInvkAble {
+import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
+public interface Xoa_app extends Gfo_invk {
 	boolean					Tid_is_edit();
 	Xoa_app_mode			Mode();
 	Xoapi_root				Api_root();
@@ -47,6 +47,7 @@ public interface Xoa_app extends GfoInvkAble {
 	Xoa_css_extractor		Html__css_installer();
 	Xoh_bridge_mgr			Html__bridge_mgr();
 	Xog_cbk_mgr				Gui__cbk_mgr();
+	Xog_tab_mgr				Gui__tab_mgr();
 	Xou_user				User();
 	Xowmf_mgr				Wmf_mgr();
 	boolean					Xwiki_mgr__missing(byte[] domain);

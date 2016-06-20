@@ -267,7 +267,7 @@ class Pxd_itm_int_ {
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
 				case Pxd_itm_.Tid_dash:
-					dash_itm = itm;	// TODO: throw error if "--"; {{#time:U|@--1}}
+					dash_itm = itm;	// TODO_OLD: throw error if "--"; {{#time:U|@--1}}
 					break;
 				case Pxd_itm_.Tid_int:
 				case Pxd_itm_.Tid_int_dmy_14:

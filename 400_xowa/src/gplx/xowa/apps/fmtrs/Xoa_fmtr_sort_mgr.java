@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
+public class Xoa_fmtr_sort_mgr implements Gfo_invk {
 	private Ordered_hash itms = Ordered_hash_.New();
 	private Xoa_fmtr_sort_wkr wkr = new Xoa_fmtr_sort_wkr();
 	private Gfo_sort_able sort_able;
@@ -37,7 +37,7 @@ public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_clear))					this.Clear();
 		else if	(ctx.Match(k, Invk_add_many)) 				this.Add_many(m.ReadStrAry("k", "|"));
 		else if	(ctx.Match(k, Invk_exec)) 					this.Exec();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_clear = "clear", Invk_add_many = "add_many", Invk_exec = "exec";
@@ -50,13 +50,13 @@ class Xoa_fmtr_sort_itm {
 class Xoa_fmtr_sort_wkr implements gplx.core.lists.ComparerAble {
 	public Xoa_fmtr_sort_itm[] Itms() {return itms;} public void Itms_(Xoa_fmtr_sort_itm[] v) {itms = v; itms_len = v.length;} private Xoa_fmtr_sort_itm[] itms; private int itms_len;
 	public int compare(Object lhsObj, Object rhsObj) {
-		GfoInvkAble lhs_invk = (GfoInvkAble)lhsObj;
-		GfoInvkAble rhs_invk = (GfoInvkAble)rhsObj;
+		Gfo_invk lhs_invk = (Gfo_invk)lhsObj;
+		Gfo_invk rhs_invk = (Gfo_invk)rhsObj;
 		for (int i = 0; i < itms_len; i++) {
 			Xoa_fmtr_sort_itm itm = itms[i];
 			String itm_key = itm.Key();
-			Object lhs_val = GfoInvkAble_.InvkCmd(lhs_invk, itm_key);
-			Object rhs_val = GfoInvkAble_.InvkCmd(rhs_invk, itm_key);
+			Object lhs_val = Gfo_invk_.Invk_by_key(lhs_invk, itm_key);
+			Object rhs_val = Gfo_invk_.Invk_by_key(rhs_invk, itm_key);
 			int compare = CompareAble_.Compare_obj(lhs_val, rhs_val) * itm.Comp_mult();
 			if (compare != CompareAble_.Same)
 				return compare;

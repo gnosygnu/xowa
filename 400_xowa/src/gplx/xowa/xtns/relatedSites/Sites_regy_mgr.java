@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
-public class Sites_regy_mgr implements GfoInvkAble {
+public class Sites_regy_mgr implements Gfo_invk {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	private Xow_xwiki_mgr xwiki_mgr;
 	public Sites_regy_mgr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
@@ -46,7 +46,7 @@ public class Sites_regy_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_set_many))		Set_many(m.ReadStrAry("v", "|"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_set_many = "set_many";
 }

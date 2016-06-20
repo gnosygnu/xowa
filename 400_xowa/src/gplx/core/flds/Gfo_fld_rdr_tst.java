@@ -52,5 +52,5 @@ class Gfo_fld_rdr_fxt {
 		wtr.Write_bry_escape_fld(bry);
 		Tfds.Eq(expd, bfr.To_str());
 		return this;
-	}	private Bry_bfr bfr = Bry_bfr.new_();
+	}	private Bry_bfr bfr = Bry_bfr_.New();
 }

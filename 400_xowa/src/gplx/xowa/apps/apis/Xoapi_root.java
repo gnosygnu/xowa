@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.guis.cmds.*;
-public class Xoapi_root implements GfoInvkAble {
+public class Xoapi_root implements Gfo_invk {
 	private Xoae_app app;
 	public Xoapi_root(Xoae_app app) {
 		app_api.Ctor_by_app(app);
@@ -50,6 +50,7 @@ public class Xoapi_root implements GfoInvkAble {
 	public Xoapi_usr		Usr()		{return usr_api;} private final    Xoapi_usr usr_api = new Xoapi_usr();
 	public Xoapi_special	Special()	{return special_api;} private final    Xoapi_special special_api = new Xoapi_special();
 	public Xoapi_xtns		Xtns()		{return xtns_api;} private final    Xoapi_xtns xtns_api = new Xoapi_xtns();
+	public Xoapi_wiki		Wiki()		{return wiki;} private final    Xoapi_wiki wiki = new Xoapi_wiki();
 	public Xoapi_app_wikis	Wikis()		{return app_wikis;} private final    Xoapi_app_wikis app_wikis = new Xoapi_app_wikis();
 	public String			Test_str() {return test_str;} public void Test_str_(String v) {test_str = v;} private String test_str;	// TEST
 	private void Exec(String key) {
@@ -69,6 +70,7 @@ public class Xoapi_root implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_special)) 	return special_api;
 		else if	(ctx.Match(k, Invk_xtns)) 		return xtns_api;
 		else if	(ctx.Match(k, Invk_exec)) 		Exec(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_wiki)) 		return wiki;
 		else if	(ctx.Match(k, Invk_wikis)) 		return app_wikis;
 		else if	(ctx.Match(k, Invk_test_str)) 	return test_str;
 		else if	(ctx.Match(k, Invk_test_str_)) 	test_str = m.ReadStr("v");
@@ -79,6 +81,6 @@ public class Xoapi_root implements GfoInvkAble {
 	, Invk_app = "app", Invk_addon = "addon"
 	, Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_net = "net", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
 	, Invk_test_str = "test_str", Invk_test_str_ = "test_str_"
-	, Invk_wikis = "wikis"
+	, Invk_wiki = "wiki", Invk_wikis = "wikis"
 	;
 }

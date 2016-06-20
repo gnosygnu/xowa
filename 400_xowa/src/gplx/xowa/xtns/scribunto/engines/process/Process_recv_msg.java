@@ -24,7 +24,7 @@ public class Process_recv_msg {
 		arg_keys.Add("values"		, Byte_obj_val.new_(Arg_values));
 		arg_keys.Add("id"			, Byte_obj_val.new_(Arg_id));
 		arg_keys.Add("args"			, Byte_obj_val.new_(Arg_args));
-	}	private Hash_adp arg_keys = Hash_adp_.new_(); private static final byte Arg_op = 0, Arg_values = 1, Arg_id = 2, Arg_args = 3;
+	}	private Hash_adp arg_keys = Hash_adp_.New(); private static final byte Arg_op = 0, Arg_values = 1, Arg_id = 2, Arg_args = 3;
 	public String Op() {return op;} private String op;
 	public String Call_id() {return call_id;} private String call_id;
 	public Keyval[] Rslt_ary() {return rslt_ary;} private Keyval[] rslt_ary;

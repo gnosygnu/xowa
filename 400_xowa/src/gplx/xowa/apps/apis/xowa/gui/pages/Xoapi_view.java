@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*;
-public class Xoapi_view implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*;
+public class Xoapi_view implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app; this.win = app.Gui_mgr().Browser_win();
@@ -50,7 +50,7 @@ public class Xoapi_view implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_refresh)) 				this.Refresh();
 		else if	(ctx.Match(k, Invk_print)) 					this.Print();
 		else if	(ctx.Match(k, Invk_save_as)) 				this.Save_as();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 public class Hash_adp_list extends Hash_adp_base {
-	@gplx.New public List_adp Get_by(Object key) {return List_adp_.as_(Fetch_base(key));}
+	@gplx.New public List_adp Get_by(Object key) {return ((List_adp)Fetch_base(key));}
 	public List_adp Get_by_or_new(Object key) {
 		List_adp rv = Get_by(key);
 		if (rv == null) {
-			rv = List_adp_.new_();
+			rv = List_adp_.New();
 			Add_base(key, rv);
 		}
 		return rv;

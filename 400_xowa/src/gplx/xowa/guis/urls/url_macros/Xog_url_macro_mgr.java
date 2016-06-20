@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.urls.url_macros; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.urls.*;
 public class Xog_url_macro_mgr {
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
+	private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public Xog_url_macro_mgr() {
 		this.Init();
 	}
@@ -84,9 +84,9 @@ public class Xog_url_macro_mgr {
 		else if	(ctx.Match(k, Invk_lang_default_))					lang_default = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_types))							return types_mgr;
 		else if	(ctx.Match(k, Invk_custom))							return custom_mgr;
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_lang_default = "lang_default", Invk_lang_default_ = "lang_default_", Invk_types = "types", Invk_custom = "custom";
-	public static final byte[] Unhandled = null;
+	public static final    byte[] Unhandled = null;
 }

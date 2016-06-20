@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.stmts; import gplx.*; import gplx.dbs.*;
 public class Db_stmt_arg_list {
-	private final    List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public void Clear() {list.Clear();}
 	public int Len() {return list.Len();}
 	public Db_stmt_arg Get_at(int i) {return (Db_stmt_arg)list.Get_at(i);}
@@ -49,7 +49,7 @@ public class Db_stmt_arg_list {
 			default:								throw Err_.new_unhandled_default(tid);
 		}
 	}
-	private static void Fill_val(Db_stmt stmt, int tid, String key, Object val) {
+	public static void Fill_val(Db_stmt stmt, int tid, String key, Object val) {
 		switch (tid) {
 			case Dbmeta_fld_tid.Tid__bool:			stmt.Val_bool_as_byte	(key, Bool_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__byte:			stmt.Val_byte			(key, Byte_.cast(val)); break;

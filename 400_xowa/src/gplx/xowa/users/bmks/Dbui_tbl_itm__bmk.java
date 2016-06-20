@@ -24,7 +24,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private final    Xoa_app app; private final    Xoud_bmk_itm_tbl tbl;
 	private final    Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
 	private final    Dbui_cells_fmtr cells_fmtr = new Dbui_cells_fmtr(); private final    Dbui_val_fmtr edit_val_fmtr = Dbui_val_fmtr_.new_edit(); private final    Dbui_val_fmtr view_val_fmtr = Dbui_val_fmtr_.new_view();
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private final    Bridge_msg_bldr msg_bldr;
 	public Dbui_tbl_itm__bmk(Xoa_app app, Xoud_bmk_itm_tbl tbl) {this.app = app; this.tbl = tbl; this.msg_bldr = app.Html__bridge_mgr().Msg_bldr();}
 	public byte[] Key() {return key;} private static final    byte[] key = Bry_.new_a7("bmk");

@@ -45,7 +45,7 @@ public class Gallery_itm implements Js_img_wkr {
 		this.xnde = xnde; this.xfer_itm = xfer_itm;
 		this.wiki = wiki; this.ctx = ctx; this.src = src; this.gallery_li_id_bry = gallery_li_id_bry; this.gallery_itm_idx = gallery_itm_idx;
 	}
-	public void Html_update(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
+	public void Js_wkr__update_hdoc(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
 		Gallery_mgr_base gallery_mgr = xnde.Gallery_mgr();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		try {

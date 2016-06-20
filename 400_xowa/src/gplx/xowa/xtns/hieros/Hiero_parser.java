@@ -19,9 +19,9 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_parser {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private List_adp blocks = List_adp_.new_();
+	private List_adp blocks = List_adp_.New();
 	private Hiero_block cur_block;
-	private Bry_bfr cur_tkn = Bry_bfr.reset_(16);
+	private Bry_bfr cur_tkn = Bry_bfr_.Reset(16);
 	public Hiero_block[] Parse(byte[] src, int bgn, int end) {
 		blocks.Clear();
 		this.cur_block = new Hiero_block();
@@ -125,7 +125,7 @@ class Hiero_parser_itm {
 	public static final byte Tid_block_spr = 1, Tid_tkn_spr = 2, Tid_single_char = 3, Tid_dot = 4, Tid_comment = 5;
 }
 class Hiero_block {
-	private List_adp list = List_adp_.new_();
+	private List_adp list = List_adp_.New();
 	public int Len() {return list.Count();}
 	public byte[] Get_at(int i) {return (byte[])list.Get_at(i);}
 	public void Add(byte[] v) {list.Add(v);}

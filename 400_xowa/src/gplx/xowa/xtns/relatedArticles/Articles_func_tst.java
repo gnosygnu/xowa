@@ -35,7 +35,7 @@ public class Articles_func_tst {
 	}
 }
 class Articles_func_fxt {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	public void Reset() {
 		fxt.Wiki().Lang().Msg_mgr().Itm_by_key_or_new("relatedarticles-title", "Related articles");
 		fxt.Reset();
@@ -43,7 +43,7 @@ class Articles_func_fxt {
 	public void Test_parse(String raw, String expd) {
 		fxt.Test_parse_page_all_str(raw, "");
 		Xopg_xtn_skin_fmtr_arg fmtr_arg = new Xopg_xtn_skin_fmtr_arg(fxt.Page(), Xopg_xtn_skin_itm_tid.Tid_sidebar);
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		fmtr_arg.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}

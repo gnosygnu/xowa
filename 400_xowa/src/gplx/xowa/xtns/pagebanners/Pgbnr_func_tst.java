@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.pages.skins.*;
 public class Pgbnr_func_tst {
-	private final Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
+	private final    Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
 	@Test  public void Basic() {			
 		fxt.Test__parse__eq("{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
@@ -35,7 +35,7 @@ public class Pgbnr_func_tst {
 	}
 }
 class Pgbnr_func_fxt {
-	private final Xop_fxt fxt;
+	private final    Xop_fxt fxt;
 	public Pgbnr_func_fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikivoyage.org");
@@ -44,7 +44,7 @@ class Pgbnr_func_fxt {
 	public void Test__parse__eq(String raw, String expd) {
 		fxt.Exec_parse_page_all_as_str(raw);
 		Bfr_arg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Ctx(), fxt.Page(), null, null);
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		arg.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}

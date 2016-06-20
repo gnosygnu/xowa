@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
-public class Xop_log_property_wkr implements GfoInvkAble {
+public class Xop_log_property_wkr implements Gfo_invk {
 	private Xop_log_mgr log_mgr; private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private boolean include_all = true;
@@ -51,7 +51,7 @@ public class Xop_log_property_wkr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_include_props_add))		Include_props_add(m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_log_enabled_))			log_enabled = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_include_props_add = "include_props_add", Invk_log_enabled_ = "log_enabled_";
 }
@@ -67,7 +67,7 @@ class Xob_log_property_temp_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_property_temp", Fld_prop_page_ttl = "prop_page_ttl", Fld_prop_prop_name = "prop_prop_name", Fld_prop_eval_time = "prop_eval_time";
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final    String Tbl_sql = String_.Concat_lines_nl
 		(	"CREATE TABLE IF NOT EXISTS log_property_temp"
 		,	"( prop_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", prop_page_ttl            varchar(255)        NOT NULL"

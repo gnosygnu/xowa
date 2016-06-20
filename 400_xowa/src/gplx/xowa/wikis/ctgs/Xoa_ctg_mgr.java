@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-public class Xoa_ctg_mgr implements GfoInvkAble {
+public class Xoa_ctg_mgr implements Gfo_invk {
 	public void Init_by_app(Xoae_app app) {
 		pagectgs_wtr = new Xoctg_pagelist_wtr().Init_by_app(app);
 	}
@@ -37,13 +37,13 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_missing_ctg_cls_list))			return Options_missing_ctg_cls_list;
 		else if	(ctx.Match(k, Invk_pagecats_grouping_enabled))		return Yn.To_str(pagecats_grouping_enabled);
 		else if	(ctx.Match(k, Invk_pagecats_grouping_enabled_))		pagecats_grouping_enabled = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_missing_ctg_cls = "missing_ctg_cls", Invk_missing_ctg_cls_ = "missing_ctg_cls_", Invk_missing_ctg_cls_list = "missing_ctg_cls_list", Invk_pagecats_grouping_enabled = "pagecats_grouping_enabled", Invk_pagecats_grouping_enabled_ = "pagecats_grouping_enabled_";
 	private static final byte Missing_ctg_cls_normal_tid = 0, Missing_ctg_cls_hide_tid = 1, Missing_ctg_cls_red_tid = 2;
 	private static final String Missing_ctg_cls_normal_str = "normal", Missing_ctg_cls_hide_str = "hide", Missing_ctg_cls_red_str = "red_link";
-	private static final byte[] Missing_ctg_cls_normal_css = Bry_.new_a7(".xowa-missing-category-entry {}"), Missing_ctg_cls_hide_css = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Missing_ctg_cls_red_css = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
+	private static final    byte[] Missing_ctg_cls_normal_css = Bry_.new_a7(".xowa-missing-category-entry {}"), Missing_ctg_cls_hide_css = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Missing_ctg_cls_red_css = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
 	private static Keyval[] Options_missing_ctg_cls_list = Keyval_.Ary(Keyval_.new_(Missing_ctg_cls_normal_str), Keyval_.new_(Missing_ctg_cls_hide_str), Keyval_.new_(Missing_ctg_cls_red_str)); 
 	private static byte Missing_ctg_cls_tid_parse(String v) {
 		if		(String_.Eq(v, Missing_ctg_cls_normal_str))		return Missing_ctg_cls_normal_tid;
@@ -63,5 +63,5 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 	public static final byte Tid_null = Byte_.Max_value_127, Tid_subc = 0, Tid_file = 1, Tid_page = 2, Tid__max = 3;
 	public static final byte Hidden_n = Byte_.Zero, Hidden_y = (byte)1;
 	public static final String Html__cls__str = "CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory";
-	public static final byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
+	public static final    byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
 }

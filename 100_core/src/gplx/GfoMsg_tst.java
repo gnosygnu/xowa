@@ -27,14 +27,14 @@ public class GfoMsg_tst {
 	}
 	@Test  public void Write() {
 		Mok mok = new Mok();
-		tst_Msg(GfoInvkXtoStr.WriteMsg(mok, Mok.Invk_Cmd0, true, 1, "a"), "Mok.Cmd0:bool0='y' int0='1' str0='a';");
+		tst_Msg(Gfo_invk_to_str.WriteMsg(mok, Mok.Invk_Cmd0, true, 1, "a"), "Mok.Cmd0:bool0='y' int0='1' str0='a';");
 		mok.Int0 = 2;
 		mok.Bool0 = true;
 		mok.Str0 = "b";
-		tst_Msg(GfoInvkXtoStr.ReadMsg(mok, Mok.Invk_Cmd0), "Mok.Cmd0:bool0='y' int0='2' str0='b';");
+		tst_Msg(Gfo_invk_to_str.ReadMsg(mok, Mok.Invk_Cmd0), "Mok.Cmd0:bool0='y' int0='2' str0='b';");
 	}
 	void tst_Msg(GfoMsg m, String expd) {Tfds.Eq(expd, m.To_str());}
-	class Mok implements GfoInvkAble {
+	class Mok implements Gfo_invk {
 		public boolean Bool0;
 		public int Int0;
 		public String Str0;
@@ -46,6 +46,6 @@ public class GfoMsg_tst {
 				if (ctx.Deny()) return this;
 			}
 			return this;
-		}	public static final String Invk_Cmd0 = "Cmd0";
+		}	public static final    String Invk_Cmd0 = "Cmd0";
 	}
 }

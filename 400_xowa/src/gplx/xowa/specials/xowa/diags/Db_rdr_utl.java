@@ -41,7 +41,7 @@ class Db_rdr_utl {
 		return qry_set;
 	}
 	public static Object[][] Load(Db_conn conn, String sql) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		DataRdr rdr = conn.Exec_sql_as_old_rdr(sql);
 		try {
 			int fld_count = rdr.FieldCount();

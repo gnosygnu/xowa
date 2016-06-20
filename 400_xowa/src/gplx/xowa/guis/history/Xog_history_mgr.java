@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_history_mgr {
-	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xog_history_stack stack = new Xog_history_stack();
+	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xog_history_stack stack = new Xog_history_stack();
 	public int Count() {return hash.Count();}
 	public Xoae_page Cur_page(Xowe_wiki wiki) {return Get_or_fetch(wiki, stack.Cur_itm());}
 	public Xoae_page Go_bwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.N);}
@@ -60,7 +60,7 @@ public class Xog_history_mgr {
 		Xoae_page rv = (Xoae_page)hash.Get_by(page_key);
 		if (rv != null) return rv;
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, itm.Page());
-		return wiki.Data_mgr().Get_page(ttl, false);
+		return wiki.Data_mgr().Load_page_by_ttl(ttl);
 	}
 	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Qargs_mgr().To_bry());}
 	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return Bry_.Add_w_dlm(Byte_ascii.Pipe, wiki_key, page_key, args_key);}

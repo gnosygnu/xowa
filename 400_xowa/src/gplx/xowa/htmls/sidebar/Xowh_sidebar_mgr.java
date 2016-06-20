@@ -19,9 +19,9 @@ package gplx.xowa.htmls.sidebar; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.lnkis.*;
-public class Xowh_sidebar_mgr implements GfoInvkAble {
+public class Xowh_sidebar_mgr implements Gfo_invk {
 	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
-	public int Grps_len() {return grps.Count();} List_adp grps = List_adp_.new_();
+	public int Grps_len() {return grps.Count();} List_adp grps = List_adp_.New();
 	public Xowh_sidebar_itm Grps_get_at(int i) {return (Xowh_sidebar_itm)grps.Get_at(i);}
 	public byte[] Html_bry() {return html_bry;} private byte[] html_bry;
 	public void Init() {
@@ -122,17 +122,17 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_grp_fmt_))		html_grp_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_html_itm_fmt_))		html_itm_fmtr.Fmt_(m.ReadBry("v"));
-		else											return GfoInvkAble_.Rv_unhandled;
+		else											return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_html_grp_fmt_ = "html_grp_fmt_", Invk_html_itm_fmt_ = "html_itm_fmt_";
-	private static final byte[] CONST_id_prefix = Bry_.new_a7("n-");
+	private static final    byte[] CONST_id_prefix = Bry_.new_a7("n-");
 	private static final byte Ignore_tid_search = 1, Ignore_tid_toolbox = 2, Ignore_tid_toolbox_end = 3, Ignore_tid_languages = 4;
-	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
+	private static final    Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("SEARCH", Ignore_tid_search)
 	.Add_str_byte("TOOLBOX", Ignore_tid_toolbox)
 	.Add_str_byte("TOOLBOXEND", Ignore_tid_toolbox_end)
 	.Add_str_byte("LANGUAGES", Ignore_tid_languages)
 	;
-	private static final String GRP_KEY = "xowa.wiki.gui.skin.mgr";
-	private static final byte[] CONST_sidebar_ttl = Bry_.new_a7("Sidebar");
+	private static final    String GRP_KEY = "xowa.wiki.gui.skin.mgr";
+	private static final    byte[] CONST_sidebar_ttl = Bry_.new_a7("Sidebar");
 }

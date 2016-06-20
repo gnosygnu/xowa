@@ -46,7 +46,7 @@ class GfmlScopeRegy {
 		}
 		return rv;
 	}
-	Hash_adp hash = Hash_adp_.new_();
+	Hash_adp hash = Hash_adp_.New();
 	public static GfmlScopeRegy new_() {return new GfmlScopeRegy();}
 }
 class GfmlScopeList {
@@ -66,7 +66,7 @@ class GfmlScopeList {
 		}
 		return rv;
 	}
-	List_adp list = List_adp_.new_();
+	List_adp list = List_adp_.New();
 	public static GfmlScopeList new_(String key) {
 		GfmlScopeList rv = new GfmlScopeList(); rv.key = key; return rv;
 	}	GfmlScopeList() {}

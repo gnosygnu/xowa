@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 class Hiero_html_mgr {		
-	private Bry_bfr html_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), content_bfr = Bry_bfr.reset_(255), tbl_content_bfr = Bry_bfr.reset_(Io_mgr.Len_kb), temp_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr html_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), content_bfr = Bry_bfr_.Reset(255), tbl_content_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), temp_bfr = Bry_bfr_.Reset(255);
 	private boolean cartouche_opened = false;
 	public static int scale = 100;
 	private Hiero_prefab_mgr prefab_mgr; private Hiero_file_mgr file_mgr; private Hiero_phoneme_mgr phoneme_mgr;
@@ -227,8 +227,8 @@ class Hiero_html_mgr {
 	public static final int Image_margin = 1;
 	public static final int Cartouche_width = 2;
 	public static final int Max_height = 44;
-	private static final byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
-	private static final byte[]
+	private static final    byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
+	private static final    byte[]
 	  Tkn_lt		= new byte[] {Byte_ascii.Lt}
 	, Tkn_gt		= new byte[] {Byte_ascii.Gt}
 	, Tkn_dot		= new byte[] {Byte_ascii.Dot}

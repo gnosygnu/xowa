@@ -85,7 +85,7 @@ class Gallery_itm_parser_fxt {
 		parser.Init_by_wiki(wiki);
 	}
 	public void Test_parse(String raw, String[]... expd) {
-		List_adp actl = List_adp_.new_();
+		List_adp actl = List_adp_.New();
 		byte[] src = Bry_.new_a7(raw);
 		parser.Parse_all(actl, Gallery_mgr_base_.New_by_mode(Gallery_mgr_base_.Traditional_tid), new Gallery_xnde(), src, 0, src.length);
 		Tfds.Eq_ary(String_.Ary_flatten(expd), String_.Ary_flatten(Xto_str_ary(src, actl)));

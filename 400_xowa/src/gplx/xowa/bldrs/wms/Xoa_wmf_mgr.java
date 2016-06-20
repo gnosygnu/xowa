@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.wikis.*;	
-public class Xoa_wmf_mgr implements GfoInvkAble {
-	private final Xoae_wiki_mgr wiki_mgr;
+public class Xoa_wmf_mgr implements Gfo_invk {
+	private final    Xoae_wiki_mgr wiki_mgr;
 	public Xoa_wmf_mgr(Gfo_usr_dlg usr_dlg, Xoae_wiki_mgr wiki_mgr) {
 		this.wiki_mgr = wiki_mgr;
 	}
@@ -34,7 +34,7 @@ public class Xoa_wmf_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))			return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			Enabled_(m.ReadYn("v"));
-		else											return GfoInvkAble_.Rv_unhandled;
+		else											return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_";
+	}	private static final    String Invk_enabled = "enabled", Invk_enabled_ = "enabled_";
 }

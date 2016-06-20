@@ -62,7 +62,7 @@ public class Xow_data_mgr_tst {
 			;
 	}
 	@Test  public void Update_zip() {
-//			fxt.Wiki().Fsys_mgr().Dir_regy()[Xow_ns_.Tid__main].Ext_tid_(gplx.core.ios.Io_stream_.Tid_zip);
+//			fxt.Wiki().Fsys_mgr().Dir_regy()[Xow_ns_.Tid__main].Ext_tid_(gplx.core.ios.streams.Io_stream_.Tid_zip);
 //			fxt.Wiki().Data_mgr().Zip_mgr_(new Io_zip_mgr_mok());
 //			fxt	.Create("A1", "A1 data")
 //				.Create("B12", "B12 data")

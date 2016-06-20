@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.gfui.*;
-public class Xoc_layout_mgr implements GfoInvkAble {
+public class Xoc_layout_mgr implements Gfo_invk {
 	public Xoc_layout_mgr(Xoae_app app) {
 		this.app = app;
 		Ctor_by_os();
@@ -35,11 +35,11 @@ public class Xoc_layout_mgr implements GfoInvkAble {
 	private void Refresh_window() {
 		app.Gui_mgr().Browser_win().Refresh_win_size();
 	}
-	public static final String 
+	public static final    String 
 	  Invk_html_box_adj_type = "html_box_adj_type", Invk_html_box_adj_type_ = "html_box_adj_type_", Invk_html_box_adj_type_list = "html_box_adj_type_list"
 	, Invk_html_box_adj_rect = "html_box_adj_rect", Invk_html_box_adj_rect_ = "html_box_adj_rect_";
 	public static final byte Html_box_adj_type_none_byte = 0, Html_box_adj_type_rel_byte = 1, Html_box_adj_type_abs_byte = 2;
-	private static final Enm_mgr html_box_adj_type_enm = new Enm_mgr().Add(Html_box_adj_type_none_byte, "none").Add(Html_box_adj_type_rel_byte, "relative").Add(Html_box_adj_type_abs_byte, "absolute");
+	private static final    Enm_mgr html_box_adj_type_enm = new Enm_mgr().Add(Html_box_adj_type_none_byte, "none").Add(Html_box_adj_type_rel_byte, "relative").Add(Html_box_adj_type_abs_byte, "absolute");
 	private void Ctor_by_os() {
 		if (Op_sys.Cur().Tid_is_osx()) {
 			html_box_adj_type = Html_box_adj_type_rel_byte;
@@ -48,10 +48,10 @@ public class Xoc_layout_mgr implements GfoInvkAble {
 	}
 }
 class Enm_mgr {
-	private Ordered_hash str_hash = Ordered_hash_.New(); private Hash_adp val_hash = Hash_adp_.new_();
-	private Int_obj_ref tmp_val_ref = Int_obj_ref.zero_(); 
+	private Ordered_hash str_hash = Ordered_hash_.New(); private Hash_adp val_hash = Hash_adp_.New();
+	private Int_obj_ref tmp_val_ref = Int_obj_ref.New_zero(); 
 	public Enm_mgr Add(byte val, String str) {
-		Int_obj_ref val_ref = Int_obj_ref.new_(val);
+		Int_obj_ref val_ref = Int_obj_ref.New(val);
 		Keyval kv = Keyval_.new_(str, val_ref);
 		str_hash.Add(str, kv);
 		val_hash.Add(val_ref, kv);

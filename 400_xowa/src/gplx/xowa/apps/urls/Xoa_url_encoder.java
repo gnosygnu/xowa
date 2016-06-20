@@ -33,10 +33,10 @@ public class Xoa_url_encoder {
 		}
 		return bb.To_bry_and_clear();
 	}
-	private static final byte[] Bry_amp = Bry_.new_a7("%26"), Bry_eq = Bry_.new_a7("%3D")
+	private static final    byte[] Bry_amp = Bry_.new_a7("%26"), Bry_eq = Bry_.new_a7("%3D")
 		, Bry_plus = Bry_.new_a7("%2B"), Bry_apos = Bry_.new_a7("%27")
 		, Bry_underline = new byte[] {Byte_ascii.Underline}
 		;
-	Bry_bfr bb = Bry_bfr.new_();
-	public static final Xoa_url_encoder Instance = new Xoa_url_encoder(); Xoa_url_encoder() {}
+	Bry_bfr bb = Bry_bfr_.New();
+	public static final    Xoa_url_encoder Instance = new Xoa_url_encoder(); Xoa_url_encoder() {}
 }

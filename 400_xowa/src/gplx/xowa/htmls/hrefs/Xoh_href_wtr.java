@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.xwikis.*;
 public class Xoh_href_wtr {
-	private final    Bry_bfr encoder_bfr = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Gfo_url_encoder encoder = Gfo_url_encoder_.Href;
 	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
 		synchronized (tmp_bfr) {

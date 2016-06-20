@@ -20,7 +20,7 @@ public class Xoi_mirror_parser {
 	public String[] Parse(String raw_str) {
 		if (String_.Len_eq_0(raw_str)) return String_.Ary_empty;
 		byte[] raw = Bry_.new_u8(raw_str);
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int pos = 0;
 		while (true) {
 			int bgn = Bry_find_.Find_fwd(raw, CONST_href_bgn, pos); if (bgn == Bry_find_.Not_found) break;
@@ -35,7 +35,7 @@ public class Xoi_mirror_parser {
 			rv.Add(String_.new_u8(date));
 		}
 		return rv.To_str_ary();
-	}	static final byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
+	}	static final    byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
 	public static String Find_last_lte(String[] ary, String comp) {	// assuming sorted ary, find last entry that is lte comp
 		int len = ary.length;
 		for (int i = len - 1; i > -1; i--) {

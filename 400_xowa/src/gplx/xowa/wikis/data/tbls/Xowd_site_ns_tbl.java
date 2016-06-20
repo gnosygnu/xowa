@@ -19,9 +19,9 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_site_ns_tbl {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_name, fld_case, fld_count, fld_is_alias;		
-	private final Db_conn conn;
+	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_id, fld_name, fld_case, fld_count, fld_is_alias;		
+	private final    Db_conn conn;
 	public Xowd_site_ns_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "xowa_ns" : "site_ns";

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
-public class Xop_log_mgr implements GfoInvkAble {
+public class Xop_log_mgr implements Gfo_invk {
 	private Db_conn conn;
 	private Xoae_app app; private Xop_log_basic_tbl log_tbl;
 	private int exec_count = 0, commit_interval = 1000;
@@ -61,7 +61,7 @@ public class Xop_log_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_commit_interval_ = "commit_interval_";

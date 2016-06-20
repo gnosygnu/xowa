@@ -19,7 +19,7 @@ package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.btries.*;
 public class Xop_xnde_tag_regy {
 	private boolean init_needed = true;
-	private final Btrie_slim_mgr		// NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
+	private final    Btrie_slim_mgr		// NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
 	  trie_tmpl			= Btrie_slim_mgr.ci_u8()
 	, trie_wtxt_main	= Btrie_slim_mgr.ci_u8()
 	, trie_wtxt_tmpl	= Btrie_slim_mgr.ci_u8();
@@ -29,7 +29,7 @@ public class Xop_xnde_tag_regy {
 			case Xop_parser_.Parse_tid_tmpl:			return trie_tmpl;
 			case Xop_parser_.Parse_tid_page_tmpl:		return trie_wtxt_tmpl;
 			case Xop_parser_.Parse_tid_page_wiki:		return trie_wtxt_main;
-			case Xop_parser_.Parse_tid_null: default: 	return trie_wtxt_tmpl; // TODO: should throw Err_.new_unhandled(i);
+			case Xop_parser_.Parse_tid_null: default: 	return trie_wtxt_tmpl; // TODO_OLD: should throw Err_.new_unhandled(i);
 		}
 	}
 	public void Init_by_meta(Hash_adp_bry xtn_hash) {Init_by_hash(xtn_hash);}
@@ -59,7 +59,7 @@ public class Xop_xnde_tag_regy {
 		return 	xtn_hash != null					// xtn_hash is null during tests or when wiki is not in site_meta_db
 			&&	xnde.Xtn_mw()						// only apply filter to xtn_xnde, not basic_xnde; EX: <dynamicpagelist> not <table>
 			&&	!xtn_hash.Has(xnde.Name_bry())		// xtn_xnde is not in xtn_hash
-			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid__translate, Xop_xnde_tag_.Tid__languages)	// always include <translate> and <languages>; TODO:filter out when extensions supported in site_cfg; DATE:2015-10-13
+			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid__translate, Xop_xnde_tag_.Tid__languages)	// always include <translate> and <languages>; TODO_OLD:filter out when extensions supported in site_cfg; DATE:2015-10-13
 			;										// skip; xtn is not defined in site_meta_db
 	}
 	private void Add_itm(Btrie_slim_mgr trie, Xop_xnde_tag xnde) {

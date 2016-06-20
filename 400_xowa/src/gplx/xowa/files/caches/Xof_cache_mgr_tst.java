@@ -42,7 +42,7 @@ public class Xof_cache_mgr_tst {
 //		private int lnki_site; private byte[] lnki_ttl; private int lnki_type; private double lnki_upright; private int lnki_w; private int lnki_h; private double lnki_time; private int lnki_page;
 //		private int orig_wiki; private byte[] orig_ttl; private int orig_ext; private int file_w; private int file_h; private double file_time; private int file_page;
 //		private long temp_file_size; private int temp_view_count; private long temp_view_date; private int temp_w;
-//		private Bry_bfr key_bfr = Bry_bfr.new_();
+//		private Bry_bfr key_bfr = Bry_bfr_.New();
 //		public Xof_cache_itm_mkr() {this.Reset();}
 //		private void Reset() {
 //			db_state = Db_cmd_mode.Tid_ignore;

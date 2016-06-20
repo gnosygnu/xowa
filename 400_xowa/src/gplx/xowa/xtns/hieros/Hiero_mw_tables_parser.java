@@ -69,7 +69,7 @@ public class Hiero_mw_tables_parser {
 		}		
 	}
 	private void Parse_phonemes(Hiero_phoneme_mgr mgr, Php_line_assign line) {	// $wh_phonemes = array(k => v, k => v ...);
-		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_rslt = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
+		List_adp tmp_list = List_adp_.New(); Byte_obj_ref tmp_rslt = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr_.New();
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
 		for (int i = 0; i < subs_len; i++) {

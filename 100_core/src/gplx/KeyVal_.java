@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.strings.*;
 public class Keyval_ {
-	public static final Keyval[] Ary_empty = new Keyval[0];
+	public static final    Keyval[] Ary_empty = new Keyval[0];
 	public static Keyval[] Ary(Keyval... ary) {return ary;}
 	public static Keyval[] Ary_cast_(Object o) {
 		try {return (Keyval[])o;}
@@ -64,7 +64,7 @@ public class Keyval_ {
 		return null;
 	}
 	public static String Ary__to_str__nest(Keyval... ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Ary__to_str__nest(bfr, 0, ary);
 		return bfr.To_str_and_clear();
 	}

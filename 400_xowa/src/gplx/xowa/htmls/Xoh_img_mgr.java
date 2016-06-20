@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.files.*;
 public class Xoh_img_mgr {
-	private final List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	private int uid_nxt = -1;
 	public void Clear() {
 		this.uid_nxt = -1;
@@ -40,5 +40,5 @@ public class Xoh_img_mgr {
 		}
 	}
 	public static final String Str__html_uid = "xoimg_";
-	public static final byte[] Bry__html_uid = Bry_.new_a7(Str__html_uid);
+	public static final    byte[] Bry__html_uid = Bry_.new_a7(Str__html_uid);
 }

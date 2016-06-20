@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-public class Fsm_mnt_mgr implements GfoInvkAble {
+public class Fsm_mnt_mgr implements Gfo_invk {
 	private Db_cfg_tbl cfg_tbl; private Fsm_mnt_tbl mnt_tbl;
 	private Fsm_mnt_itm[] mnt_ary; private int mnt_ary_len = 0;
 	public void Ctor_by_load(Fsdb_db_mgr db_core) {
@@ -39,9 +39,9 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 	public Fsm_mnt_itm	Mnts__get_at(int i)				{return mnt_ary[i];}
 	public Fsm_mnt_itm	Mnts__get_main()				{return mnt_ary[Mnt_idx_main];}
 	public Fsm_mnt_itm	Mnts__get_insert()				{return mnt_ary[insert_idx];} public void Mnts__get_insert_idx_(int v) {insert_idx = v;} private int insert_idx = Mnt_idx_user;
-	public Fsm_bin_fil	Bins__at(int mnt_id, int bin_db_id) {return mnt_ary[mnt_id].Bin_mgr().Dbs__get_at(bin_db_id);}
+	public Fsm_bin_fil	Bins__at(int mnt_id, int bin_db_id) {return mnt_ary[mnt_id].Bin_mgr().Dbs__get_by_or_null(bin_db_id);}
 	public int			Patch_upright()					{return patch_upright_tid;} private int patch_upright_tid = Xof_patch_upright_tid_.Tid_all;
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}	
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}	
 	public static final int Mnt_idx_main = 0, Mnt_idx_user = 1, Insert_to_bin_null = -1;
 	public static void Patch(Db_cfg_tbl cfg_tbl) {
 		cfg_tbl.Upsert_str(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults		, "y");

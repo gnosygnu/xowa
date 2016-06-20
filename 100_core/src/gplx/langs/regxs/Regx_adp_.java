@@ -21,7 +21,7 @@ public class Regx_adp_ {
 	public static List_adp Find_all(String input, String find) {
 		Regx_adp regx = Regx_adp_.new_(find);
 		int idx = 0;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		while (true)  {
 			Regx_match match = regx.Match(input, idx);
 			if (match.Rslt_none()) break;

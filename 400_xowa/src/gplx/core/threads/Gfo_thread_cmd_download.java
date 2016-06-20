@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*;
 public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Ctor(Gfo_usr_dlg usr_dlg, Gfui_kit kit) {this.usr_dlg = usr_dlg; this.kit = kit; xrg.Prog_dlg_(usr_dlg); return this;}
 	public Gfo_thread_cmd_download Init(String prog_fmt_hdr, String src, Io_url trg) {
@@ -25,7 +25,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 		xrg.Prog_fmt_hdr_(prog_fmt_hdr).Init(src, trg);
 		return this;
 	}	String src; protected Gfui_kit kit; Gfo_usr_dlg usr_dlg; Io_url trg;
-	public GfoInvkAble Owner() {return owner;} public Gfo_thread_cmd_download Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Gfo_thread_cmd_download Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Bry_fmtr_eval_mgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_download Url_eval_mgr_(Bry_fmtr_eval_mgr v) {url_eval_mgr = v; return this;} Bry_fmtr_eval_mgr url_eval_mgr;
 	public void Cmd_ctor() {}
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
@@ -51,7 +51,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	}
 	public void Async_prog_run(int async_sleep_sum) {}
 	public boolean Async_running() {return xrg.Prog_running();} 
-	public void Async_run() {Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_bldr_download, this, Invk_async_bgn).Start();}
+	public void Async_run() {Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_bldr_download, this, Invk_async_bgn);}
 	private void Download() {
 		download_pass = true;
 		if (!xrg.Exec()) {
@@ -66,7 +66,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_src_))					src = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_trg_))					trg = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_async_bgn = "async_bgn", Invk_owner = "owner", Invk_src_ = "src_", Invk_trg_ = "trg_";
 	static final String GRP_KEY = "gfo.thread.file.download";

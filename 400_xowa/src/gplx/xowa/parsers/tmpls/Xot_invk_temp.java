@@ -19,7 +19,7 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
-	private List_adp			list = List_adp_.new_();
+	private List_adp			list = List_adp_.New();
 	private Hash_adp_bry	arg_key_hash;
 	private Hash_adp			arg_idx_hash; private Int_obj_ref arg_idx_ref;
 	Xot_invk_temp() {}
@@ -59,12 +59,12 @@ public class Xot_invk_temp implements Xot_invk {
 	public void Args_add_by_idx(Arg_nde_tkn arg) {Arg_idx_hash_add(++args_add_by_idx, arg);} private int args_add_by_idx = -1;	// NOTE: args_add_by_idx needs to be a separate variable; keeps track of args which don't have a key;
 	private void Arg_idx_hash_add(int int_key, Arg_nde_tkn arg) {
 		if (arg_idx_hash == null) {
-			arg_idx_hash = Hash_adp_.new_();
-			arg_idx_ref = Int_obj_ref.neg1_();
+			arg_idx_hash = Hash_adp_.New();
+			arg_idx_ref = Int_obj_ref.New_neg1();
 		}
-		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.new_(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
+		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
-	public static final Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
+	public static final    Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
 }
 /*
 NOTE_1:

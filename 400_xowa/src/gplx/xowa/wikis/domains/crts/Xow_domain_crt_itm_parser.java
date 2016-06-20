@@ -27,7 +27,7 @@ class Xow_domain_crt_itm_parser {
 		return rv == null ? null : (Xow_domain_crt_kv_ary[])rv.To_ary_and_clear(Xow_domain_crt_kv_ary.class);
 	}
 	public List_adp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		byte[][] line_ary = Bry_split_.Split_lines(raw);
 		int line_len = line_ary.length;
 		for (int i = 0; i < line_len; ++i) {
@@ -80,12 +80,12 @@ class Xow_domain_crt_itm_parser {
 		else
 			return new Xow_domain_crt_itm__wiki(raw);	// EX: en.wikipedia.org
 	}
-	private static final Hash_adp_bry itm_hash = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry itm_hash = Hash_adp_bry.cs()
 	.Add_str_obj("<self>"		, Xow_domain_crt_itm__self.Instance)
 	.Add_str_obj("<same_type>"	, Xow_domain_crt_itm__same_type.Instance)
 	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.Instance)
 	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.Instance)
 	;
-	private static final byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
-        public static final Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
+	private static final    byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
+        public static final    Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
 }

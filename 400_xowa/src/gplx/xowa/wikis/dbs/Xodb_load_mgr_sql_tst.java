@@ -40,7 +40,7 @@ class Xoctg_url_mok extends Xoctg_url {	public Xoctg_url_mok Page_bgn_(String v)
 	}	
 }
 class Xodb_load_mgr_sql_fxt {
-	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.new_(1); Xoae_app app; Xowe_wiki wiki;
+	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.New(1); Xoae_app app; Xowe_wiki wiki;
 	public void Clear() {
 		if (fxt == null) {
 			fxt = new Db_mgr_fxt();
@@ -85,7 +85,7 @@ class Xodb_load_mgr_sql_fxt {
 		Tfds.Eq_str_lines(Xto_str(ary), Xto_str(actl));
 	}
 	private static String Xto_str(Xowd_page_itm[] ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = ary[i];
@@ -136,7 +136,7 @@ class Xodb_load_mgr_sql_fxt {
 class Xoctg_mok_grp {
 	public byte Tid() {return tid;} public Xoctg_mok_grp Tid_(byte v) {this.tid = v; return this;} private byte tid;
 	public byte[] Last_plus_one_sortkey() {return last_plus_one_sortkey;} public Xoctg_mok_grp Last_plus_one_sortkey_(byte[] v) {this.last_plus_one_sortkey = v; return this;} private byte[] last_plus_one_sortkey;
-	public List_adp Itms() {return itms;} List_adp itms = List_adp_.new_();
+	public List_adp Itms() {return itms;} List_adp itms = List_adp_.New();
 }
 class Xoctg_mok_ctg {
 	public Xoctg_mok_ctg(Int_obj_ref next_id) {this.next_id = next_id;} Int_obj_ref next_id;

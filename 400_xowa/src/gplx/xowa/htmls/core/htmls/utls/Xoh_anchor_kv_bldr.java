@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.htmls.utls; import gplx.*; import gplx.xowa.*; impo
 import gplx.langs.htmls.*;
 public class Xoh_anchor_kv_bldr {
 	private byte[] base_url; private boolean has_qarg;
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_(16), apos_bfr = Bry_bfr.new_(16);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(16), apos_bfr = Bry_bfr_.New_w_size(16);
 	public Xoh_anchor_kv_bldr Init_w_qarg(byte[] base_url) {return Init(Bool_.Y, base_url);}
 	public Xoh_anchor_kv_bldr Init(boolean has_qarg, byte[] base_url) {
 		this.has_qarg = has_qarg; this.base_url = base_url;

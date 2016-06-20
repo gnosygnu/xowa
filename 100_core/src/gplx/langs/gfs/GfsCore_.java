@@ -17,19 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 public class GfsCore_ {
-	public static final String Arg_primitive = "v";
-	public static Object Exec(GfsCtx ctx, GfoInvkAble owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
-		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_.Instance.Warn("empty msg"); return GfoInvkAble_.Rv_unhandled;}
+	public static final    String Arg_primitive = "v";
+	public static Object Exec(GfsCtx ctx, Gfo_invk owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
+		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_.Instance.Warn("empty msg"); return Gfo_invk_.Rv_unhandled;}
 		if (owner_primitive != null) owner_msg.Parse_(false).Add(GfsCore_.Arg_primitive, owner_primitive);
 		Object rv = owner_invk.Invk(ctx, 0, owner_msg.Key(), owner_msg);
-		if		(rv == GfoInvkAble_.Rv_cancel)		return rv;
-		else if (rv == GfoInvkAble_.Rv_unhandled)	{
+		if		(rv == Gfo_invk_.Rv_cancel)		return rv;
+		else if (rv == Gfo_invk_.Rv_unhandled)	{
 			if (ctx.Fail_if_unhandled())
 				throw Err_.new_wo_type("Object does not support key", "key", owner_msg.Key(), "ownerType", Type_adp_.FullNameOf_obj(owner_invk));
 			else {
 				Gfo_usr_dlg usr_dlg = ctx.Usr_dlg();
 				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), Type_adp_.FullNameOf_obj(owner_invk));
-				return GfoInvkAble_.Null;
+				return Gfo_invk_.Noop;
 			}
 		}
 		if (owner_msg.Subs_count() == 0) {					// msg is leaf
@@ -41,7 +41,7 @@ public class GfsCore_ {
 				return regyItm.InvkAble();
 		}
 		else {												// intermediate; cast to invk and call Exec
-			GfoInvkAble invk = GfoInvkAble_.as_(rv);
+			Gfo_invk invk = Gfo_invk_.as_(rv);
 			Object primitive = null;
 			if (invk == null) {								// rv is primitive; find appropriate mgr
 				Class<?> type = rv.getClass();
@@ -60,7 +60,7 @@ public class GfsCore_ {
 	}
 	static final String GRP_KEY = "gplx.gfs_core";
 }
-//	class GfsRegyMgr : GfoInvkAble {
+//	class GfsRegyMgr : Gfo_invk {
 //		public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 //			if		(ctx.Match(k, Invk_Add)) {
 //				String libKey = m.ReadStr("libKey"), regKey = m.ReadStr("regKey");
@@ -84,9 +84,9 @@ public class GfsCore_ {
 //				GfoMsg loadMsg = core.MsgParser().ParseToMsg(loadText);
 //				return core.Exec(ctx, loadMsg);
 //			}
-//			else return GfoInvkAble_.Rv_unhandled;
+//			else return Gfo_invk_.Rv_unhandled;
 //			return this;
-//		}	public static final String Invk_Add = "Add", Invk_Del = "Del", Invk_Load = "Load";
+//		}	public static final    String Invk_Add = "Add", Invk_Del = "Del", Invk_Load = "Load";
 //		GfsCore core; GfsRegy regy;
 //        public static GfsRegyMgr new_(GfsCore core, GfsRegy regy) {
 //			GfsRegyMgr rv = new GfsRegyMgr();

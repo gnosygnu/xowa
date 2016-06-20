@@ -19,7 +19,7 @@ package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
-public class Xow_wiki_props implements GfoInvkAble {
+public class Xow_wiki_props implements Gfo_invk {
 	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse() which will not work with ""; DATE:2014-02-16
 	public Xow_wiki_props Main_page_(byte[] v) {main_page = v; return this;}
 	public void Main_page_update(Xowe_wiki wiki) {
@@ -42,6 +42,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Siteinfo_misc() {return siteinfo_misc;}
 	public byte[] Siteinfo_mainpage() {return siteinfo_mainpage;} private byte[] siteinfo_mainpage = Bry_.Empty;
 	public DateAdp Modified_latest() {return modified_latest;} private DateAdp modified_latest;
+	public String Modified_latest__yyyy_MM_dd() {return modified_latest == null ? "" : modified_latest.XtoStr_fmt_yyyy_MM_dd();}
 	public Xow_wiki_props Init_props(int domain_tid, byte[] domain_bry) {
 		this.site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_tid_.Get_type_as_bry(domain_tid))));	// EX: "Wikipedia"
 		this.server_name = domain_bry;																	// EX: "en.wikipedia.org"
@@ -58,6 +59,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public void Init_by_load(Xoa_app app, gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
 		if (app.Bldr__running()) return;	// never load main_page during bldr; note that Init_by_load is called by bldr cmds like css; DATE:2015-07-24
 		this.main_page = cfg_tbl.Select_bry_or(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, null);
+		this.modified_latest = cfg_tbl.Select_date_or(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, null);
 		if	(main_page == null) {			// main_page not found
 			Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Db_api());
 			this.main_page = Xoa_page_.Main_page_bry;
@@ -70,7 +72,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_siteinfo_mainpage_))				siteinfo_mainpage = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_css_version_))					css_version = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_modified_latest_))				modified_latest = m.ReadDate("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_main_page_ = "main_page_"

@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.core.net.*; import gplx.core.envs.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.envs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.files.origs.*;
 import gplx.xowa.apps.urls.*;
 class Xows_cmd__file_check {
 	private Io_url tmp_dir;
-	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
+	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr_old arg_hash) {
 		byte[] wiki_bry = arg_hash.Get_val_bry_or(Arg_wiki, null);	if (wiki_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no wiki: url=~{0}", url.Raw()); return;}
 		byte[] file_bry = arg_hash.Get_val_bry_or(Arg_file, null);	if (file_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no file: url=~{0}", url.Raw()); return;}
 		Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry);
@@ -89,7 +89,7 @@ class Xows_cmd__file_check {
 	}
 	private void Export_bins(Bry_bfr bfr, byte[] file_bry, Object[][] rows, int owner_id_ordinal, int bin_data_ordinal) {
 		int rows_len = rows.length;
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = rows[i];
 			int owner_id = Int_.cast(row[owner_id_ordinal]);
@@ -114,8 +114,8 @@ class Xows_cmd__file_check {
 		bfr.Add_str_u8(key).Add_str_a7(": ").Add_obj(val).Add_byte_nl();
 		bfr.Add_str_u8("------------------------------------------------------").Add_byte_nl();
 	}
-	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_file = Bry_.new_a7("file");
-        public static final Xows_cmd__file_check Instance = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
+	private static final    byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_file = Bry_.new_a7("file");
+        public static final    Xows_cmd__file_check Instance = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
 }
 interface Fsdb_sql_mkr {
 	String Orig_by_ttl(byte[] ttl);
@@ -130,10 +130,10 @@ abstract class Fsdb_sql_mkr__base {
 class Fsdb_sql_mkr__v1 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM wiki_orig WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_xtn_thm WHERE thm_owner_id = {0};", id);}
-        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
+        public static final    Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
 }
 class Fsdb_sql_mkr__v2 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM orig_reg WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_thm WHERE thm_owner_id = {0};", id);}
-        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
+        public static final    Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
 }

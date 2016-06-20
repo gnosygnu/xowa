@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.bldrs.filters.titles; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*; import gplx.xowa.apps.apis.xowa.bldrs.filters.*;
-public class Xoapi_title implements GfoInvkAble {
+public class Xoapi_title implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 //			wordlist_dir = app.Fsys_mgr().Bin_xtns_dir().GenSubDir_nest("xowa", "DansGuardian");
 	}
@@ -36,7 +36,7 @@ public class Xoapi_title implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_score_pass_)) 						score_pass = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_log_enabled)) 						return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_log_enabled_)) 						log_enabled = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

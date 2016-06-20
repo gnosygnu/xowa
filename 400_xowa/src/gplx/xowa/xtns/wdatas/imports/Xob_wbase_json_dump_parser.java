@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
 class Xob_wbase_json_dump_parser {
-	private final Gfo_usr_dlg usr_dlg; private final Xoae_app app; private final Xob_bldr bldr; private final Xowe_wiki wiki;
-	private final Xob_wbase_json_dump_db dump_db;
-	private final Io_stream_unzip_mgr unzip_mgr;
+	private final    Gfo_usr_dlg usr_dlg; private final    Xoae_app app; private final    Xob_bldr bldr; private final    Xowe_wiki wiki;
+	private final    Xob_wbase_json_dump_db dump_db;
+	private final    Io_stream_unzip_mgr unzip_mgr;
 	public Xob_wbase_json_dump_parser(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.bldr = bldr; this.wiki = wiki;
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg();

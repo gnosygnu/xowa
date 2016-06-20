@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-public class Xol_num_mgr implements GfoInvkAble {
+public class Xol_num_mgr implements Gfo_invk {
 	private boolean digits_translate;
-	protected Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	private static final byte[] Comma_bry = Bry_.new_a7(",");
+	protected Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	private static final    byte[] Comma_bry = Bry_.new_a7(",");
 	public Xol_num_grp_fmtr Num_grp_fmtr() {return num_grp_fmtr;} private Xol_num_grp_fmtr num_grp_fmtr = new Xol_num_grp_fmtr();
 	public Xol_transform_mgr Separators_mgr() {return separators_mgr;} private Xol_transform_mgr separators_mgr = new Xol_transform_mgr();
 	public Xol_transform_mgr Digits_mgr() {return digits_mgr;} private Xol_transform_mgr digits_mgr = new Xol_transform_mgr();		
@@ -62,12 +62,12 @@ public class Xol_num_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_digits))						{digits_translate = true; return digits_mgr;}	// NOTE: only langes with a digit_transform_table will call digits; DATE:2014-05-28
 		else if	(ctx.Match(k, Invk_digit_grouping_pattern))		return String_.new_u8(num_grp_fmtr.Digit_grouping_pattern());
 		else if	(ctx.Match(k, Invk_digit_grouping_pattern_))	num_grp_fmtr.Digit_grouping_pattern_(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_clear = "clear", Invk_separators = "separators"
 	, Invk_digits = "digits", Invk_digit_grouping_pattern = "digit_grouping_pattern", Invk_digit_grouping_pattern_ = "digit_grouping_pattern_";
-	public static final byte[]
+	public static final    byte[]
 	  Separators_key__grp = new byte[]{Byte_ascii.Comma}
 	, Separators_key__dec = new byte[]{Byte_ascii.Dot}
 	;

@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.langs.jsons.*; import gplx.core.net.*;
 class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
-	private final Json_parser json_parser = new Json_parser();
-	private final Xowm_json_parser__page json_page_parser = new Xowm_json_parser__page();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
-	private final Wmapi_itm__pge tmp_pge = new Wmapi_itm__pge();
+	private final    Json_parser json_parser = new Json_parser();
+	private final    Xowm_json_parser__page json_page_parser = new Xowm_json_parser__page();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final    Wmapi_itm__pge tmp_pge = new Wmapi_itm__pge();
 	public Xowm_rev_wkr__meta__wm() {
 		tmp_pge.Rvn_ary_(new Wmapi_itm__rvn());
 	}
@@ -51,5 +51,5 @@ class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 		hash_itm.Rvn_ary_(new Wmapi_itm__rvn());
 		hash_itm.Rvn_itm_last().Init(tmp_rvn.Rvn_id(), tmp_rvn.Rvn_len(), tmp_rvn.Rvn_time(), tmp_rvn.Rvn_user(), tmp_rvn.Rvn_note());
 	}
-	private static final byte[][] Jpath__query_pages = Bry_.Ary("query", "pages");
+	private static final    byte[][] Jpath__query_pages = Bry_.Ary("query", "pages");
 }

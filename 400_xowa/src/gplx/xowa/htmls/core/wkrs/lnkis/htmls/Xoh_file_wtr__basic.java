@@ -22,9 +22,9 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.files.*; 	
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_file_wtr__basic {		
-	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
-	private final Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;
-	private final Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank(); private final Xoh_lnki_title_fmtr anchor_title_wkr = new Xoh_lnki_title_fmtr();
+	private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xoh_html_wtr html_wtr; private final    Bry_bfr_mkr bfr_mkr; private final    Bry_bfr scratch_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
+	private final    Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;
+	private final    Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank(); private final    Xoh_lnki_title_fmtr anchor_title_wkr = new Xoh_lnki_title_fmtr();
 	private Xoh_file_html_fmtr__base html_fmtr = Xoh_file_html_fmtr__base.Base;
 	private Xoae_page page; private boolean cfg_alt_defaults_to_caption;
 	public Xoh_file_wtr__basic(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
@@ -43,7 +43,7 @@ public class Xoh_file_wtr__basic {
 		int div_width = xfer_itm.Html_w();
 		if (div_width < 1 && wiki.File_mgr().Version_2_y()) // NOTE: html_w is -1 for v2 and missing files; use lnki_w if available; primarily affects audio files with specified width; [[File:A.oga|30px]]; DATE:2014-05-03
 			div_width = xfer_itm.Lnki_w();	
-		if (div_width < 1)
+		if (div_width < 1)	// && hctx.Mode_is_hdump()	// TODO: should manually insert?
 			div_width = wiki.Html_mgr().Img_thumb_width();
 		int lnki_halign = lnki.Align_h();
 		if (lnki_halign == Xop_lnki_align_h_.Null)
@@ -55,7 +55,10 @@ public class Xoh_file_wtr__basic {
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
 		boolean lnki_is_thumbable = Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type());
-		if (lnki_is_thumbable && !xfer_itm.File_exists())			// "non-found" thumbs should default to 220; otherwise large "non-found" thumbs will create large boxes; PAGE:en.w:Wikipedia:Featured_picture_candidates/September_Morn "|1000000x260px"; DATE:2014-09-24
+		if (	lnki_is_thumbable 
+			&&	(	!xfer_itm.File_exists()	// "non-found" thumbs should default to 220; otherwise large "non-found" thumbs will create large boxes; PAGE:en.w:Wikipedia:Featured_picture_candidates/September_Morn "|1000000x260px"; DATE:2014-09-24
+				&&	!hctx.Mode_is_hdump())	// ignore for hdump mode b/c all images are "non-found"; DATE:2016-05-30
+			)
 			div_width = Xof_img_size.Thumb_width_img;
 		if (	html_mgr.Img_suppress_missing_src()					// option to suppress src when file is missing
 			&&	!xfer_itm.File_exists()								// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
@@ -235,7 +238,7 @@ public class Xoh_file_wtr__basic {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public static final int Play_btn_max_width = 1024;
-	private static final byte[]
+	private static final    byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")
 	, Div_float_none			= Bry_.new_a7("<div class=\"floatnone\">")
 	, Div_float_left			= Bry_.new_a7("<div class=\"floatleft\">")

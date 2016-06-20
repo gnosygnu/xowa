@@ -52,7 +52,7 @@ class Xowd_page_wkr_ctg_fxt {
 		return this;
 	}
 }
-class Xobd_parser_wkr_ctg_tstr extends Xob_ctg_v1_txt {	public List_adp Found() {return found;} List_adp found = List_adp_.new_();
+class Xobd_parser_wkr_ctg_tstr extends Xob_ctg_v1_txt {	public List_adp Found() {return found;} List_adp found = List_adp_.New();
 	@Override public void Process_ctg(Xowd_page_itm page, byte[] src, int src_len, int bgn, int end) {
 		found.Add(Bry_.Mid(src, bgn, end));
 	}

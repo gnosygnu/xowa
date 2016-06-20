@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.security; import gplx.*; import gplx.core.*;
-import gplx.core.consoles.*; import gplx.core.ios.*; /*IoStream*/
+import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
 import gplx.core.progs.*;
 public class Hash_algo__tth_192 implements Hash_algo {
 	public String Key() {return KEY;} public static final    String KEY = "tth192";
 	public int BlockSize() {return blockSize;} public void BlockSize_set(int v) {blockSize = v;} int blockSize = 1024;
 	public String Hash_bry_as_str(byte[] src) {return String_.new_a7(Hash_bry_as_bry(src));}
-	public byte[] Hash_bry_as_bry(byte[] v) {return Bry_.new_a7(Hash_stream_as_str(Console_adp_.Noop, gplx.core.ios.IoStream_.ary_(v)));}
+	public byte[] Hash_bry_as_bry(byte[] v) {return Bry_.new_a7(Hash_stream_as_str(Console_adp_.Noop, gplx.core.ios.streams.IoStream_.ary_(v)));}
 	public byte[] Hash_stream_as_bry(Gfo_prog_ui prog_ui, IoStream stream) {return Bry_.new_a7(Hash_stream_as_str(Console_adp_.Noop, stream));}
 	public String Hash_stream_as_str(Console_adp dialog, IoStream stream) {
 		int leafCount = (int)(stream.Len() / blockSize);
@@ -43,7 +43,7 @@ public class Hash_algo__tth_192 implements Hash_algo {
 		if (blockA == null || blockA.length != blockSize) blockA = new byte[blockSize];
 		if (blockB == null || blockB.length != blockSize) blockB = new byte[blockSize];
 
-		int dataSize = stream.Read(blockA, 0, blockSize); // if (dataSize < BlockSize) return (CalcHash_leaf(ShrinkArray(blockA, dataSize))); // TODO: reinstate?
+		int dataSize = stream.Read(blockA, 0, blockSize); // if (dataSize < BlockSize) return (CalcHash_leaf(ShrinkArray(blockA, dataSize))); // TODO_OLD: reinstate?
 		dataSize = stream.Read(blockB, 0, blockSize);
 		if (dataSize < blockSize) blockB = ShrinkArray(blockB, dataSize);	// shrink array to match data size (occurs at end of stream, when lastBytesCount < BlockSize)
 		return CalcHash_branch(CalcHash_leaf(blockA, 0), CalcHash_leaf(blockB, 1));

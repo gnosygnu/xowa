@@ -57,7 +57,7 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 			.Val_int	(Gdif_db_.Fld__dif_type		, dif_type)
 			.Val_int	(Gdif_db_.Fld__dif_db_src	, -1)
 			.Val_int	(Gdif_db_.Fld__dif_db_trg	, -1);
-		Gfdb_rdr_utl_.Stmt_args(stmt, flds, flds.length, rdr);
+		Gfdb_rdr_utl_.Stmt_args(stmt, flds, 0, flds.length, rdr);
 		stmt.Exec_insert();
 		if ((++prog_count % prog_interval) == 0) dif_conn.Txn_sav();
 	}

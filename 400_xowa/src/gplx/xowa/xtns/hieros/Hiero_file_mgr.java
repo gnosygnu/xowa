@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.dsvs.*;
-class Hiero_file_mgr implements GfoInvkAble {
+class Hiero_file_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Hiero_file_srl srl;
 	public Hiero_file_mgr() {srl = new Hiero_file_srl(this);}
@@ -28,7 +28,7 @@ class Hiero_file_mgr implements GfoInvkAble {
 	public Hiero_file_itm Get_by_key(byte[] key) {return (Hiero_file_itm)hash.Get_by(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_srl))			return srl;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_srl = "srl";
 }
 class Hiero_file_itm {

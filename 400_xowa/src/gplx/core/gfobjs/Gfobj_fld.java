@@ -25,9 +25,11 @@ class Gfobj_fld_ {
 	public static final byte
 	  Fld_tid__ary		= 0
 	, Fld_tid__nde		= 1
-	, Fld_tid__int		= 2
-	, Fld_tid__long		= 3
-	, Fld_tid__str		= 4
+	, Fld_tid__bool		= 2
+	, Fld_tid__int		= 3
+	, Fld_tid__long		= 4
+	, Fld_tid__double	= 5
+	, Fld_tid__str		= 6
 	;
 }
 class Gfobj_fld_str implements Gfobj_fld {
@@ -36,6 +38,13 @@ class Gfobj_fld_str implements Gfobj_fld {
 	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__str;}
 	public Object		As_obj() {return val;}
 	public String		As_str() {return val;} private String val;
+}
+class Gfobj_fld_bool implements Gfobj_fld {
+	public Gfobj_fld_bool(String key, boolean val) {this.key = key; this.val = val;}
+	public String		Key() {return key;} private final    String key;
+	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__bool;}
+	public Object		As_obj() {return val;}
+	public boolean		As_bool() {return val;} private boolean val;
 }
 class Gfobj_fld_int implements Gfobj_fld {
 	public Gfobj_fld_int(String key, int val) {this.key = key; this.val = val;}
@@ -50,6 +59,13 @@ class Gfobj_fld_long implements Gfobj_fld {
 	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__long;}
 	public Object		As_obj() {return val;}
 	public long			As_long() {return val;} private long val;
+}
+class Gfobj_fld_double implements Gfobj_fld {
+	public Gfobj_fld_double(String key, double val) {this.key = key; this.val = val;}
+	public String		Key() {return key;} private final    String key;
+	public byte			Fld_tid() {return Gfobj_fld_.Fld_tid__double;}
+	public Object		As_obj() {return val;}
+	public double		As_double() {return val;} private double val;
 }
 class Gfobj_fld_nde implements Gfobj_fld {
 	public Gfobj_fld_nde(String key, Gfobj_nde val) {this.key = key; this.val = val;}

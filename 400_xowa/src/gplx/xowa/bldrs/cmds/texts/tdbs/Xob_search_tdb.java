@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.xowa.addons.apps.searchs.bldrs.*;
+import gplx.xowa.addons.wikis.searchs.bldrs.*;
 public class Xob_search_tdb extends Srch_bldr_wkr_base {
 	public Xob_search_tdb(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Page_wkr__key() {return Xob_cmd_keys.Key_tdb_make_search_title;}

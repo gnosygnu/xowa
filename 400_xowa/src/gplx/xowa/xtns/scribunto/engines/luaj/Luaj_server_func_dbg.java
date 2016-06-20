@@ -26,7 +26,7 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 	public void Core_(Scrib_core v) {this.core = v;}	
 	public Varargs invoke(Varargs args) {
 		int len = args.narg();
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		bfr.Add_str_a7("<span class='xowa_dbg' style='color:red'>");
 		for (int i = 1; i <= len; ++i) {
 			String s = args.arg(i).toString();

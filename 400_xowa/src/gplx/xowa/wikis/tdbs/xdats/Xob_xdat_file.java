@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.ios.*; import gplx.core.encoders.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
+import gplx.core.encoders.*;
 public class Xob_xdat_file {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} public Xob_xdat_file Src_len_(int v) {src_len = v; return this;} private int src_len;	// NOTE: src_len can be different than src.length (occurs when reusing brys)
@@ -98,9 +99,9 @@ public class Xob_xdat_file {
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
 		src = bfr.To_bry_and_clear(); 
-	}	static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;		
+	}	static final    byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;		
 	public void Save(Io_url url) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Srl_save_bry(bfr);
 		Io_stream_wtr wtr = Io_stream_wtr_.new_by_url_(url);
 		try {
@@ -179,7 +180,7 @@ public class Xob_xdat_file {
 	public static byte[] Rebuid_header(byte[] orig, byte[] dlm) {
 		byte[][] rows = Bry_split_.Split(orig, dlm);
 		int rows_len = rows.length;
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int dlm_len = dlm.length;
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];

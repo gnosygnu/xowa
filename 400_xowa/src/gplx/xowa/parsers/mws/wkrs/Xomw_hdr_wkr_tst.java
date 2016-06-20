@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.mws.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.mws.*;
 import org.junit.*;
 public class Xomw_hdr_wkr_tst {
-	private final Xomw_hdr_wkr_fxt fxt = new Xomw_hdr_wkr_fxt();
+	private final    Xomw_hdr_wkr_fxt fxt = new Xomw_hdr_wkr_fxt();
 	@Test  public void Basic()		{
 		fxt.Test__parse("==A=="					, "<h2>A</h2>");
 		fxt.Test__parse("abc\n==A==\ndef"		, "abc\n<h2>A</h2>\ndef");
@@ -29,8 +29,8 @@ public class Xomw_hdr_wkr_tst {
 	}
 }
 class Xomw_hdr_wkr_fxt {
-	private final Xomw_hdr_wkr wkr = new Xomw_hdr_wkr();
-	private final Bry_bfr bfr = Bry_bfr.new_(); private final Xomw_parser_ctx pctx = new Xomw_parser_ctx();
+	private final    Xomw_hdr_wkr wkr = new Xomw_hdr_wkr();
+	private final    Bry_bfr bfr = Bry_bfr_.New(); private final    Xomw_parser_ctx pctx = new Xomw_parser_ctx();
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		wkr.Parse(bfr, pctx, src_bry, -1, src_bry.length);

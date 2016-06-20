@@ -16,10 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.*;
 public class Xow_wiki_ {
-	public static void Rls_mem(Xowe_wiki wiki, boolean clear_ctx) {
-		wiki.Appe().Free_mem(clear_ctx);
-		wiki.Cache_mgr().Free_mem_all();
-		gplx.xowa.xtns.scribunto.Scrib_core.Core_invalidate();
+	public static void Create_sql_backend(Xow_wiki wiki, gplx.xowa.wikis.data.Xowd_core_db_props core_db_props, gplx.xowa.bldrs.infos.Xob_info_session session) {
+		if (wiki.Type_is_edit()) {
+			Xowe_wiki wikie = (Xowe_wiki)wiki;
+			wikie.Db_mgr_create_as_sql();	// edit-wikis are created with text-backend; convert to sql
+			wiki.Data__core_mgr().Init_by_make(core_db_props, session);	// make core_db			
+		}
+		else {
+			Xowv_wiki wikiv = (Xowv_wiki)wiki;
+			wikiv.Init_by_make(core_db_props, session);	// make core_db			
+		}
 	}
 }

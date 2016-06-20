@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.threads.*;
-public class Xoi_cmd_mgr implements GfoInvkAble {
-	List_adp cmds = List_adp_.new_();
+public class Xoi_cmd_mgr implements Gfo_invk {
+	List_adp cmds = List_adp_.New();
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;
 	public Xoae_app App() {return app;}
 	public void Canceled_y_() {canceled = true;} private boolean canceled = false;
@@ -47,7 +47,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		else
 			this.Working_(Bool_.N);
 	}
-	private void Run_async(Gfo_thread_cmd cmd) {Thread_adp_.invk_msg_(cmd.Async_key(), this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
+	private void Run_async(Gfo_thread_cmd cmd) {Thread_adp_.Start_by_val(cmd.Async_key(), this, Invk_process_async, cmd);}
 	private void Cmds_run() {
 		if (working) {
 			app.Gui_mgr().Kit().Ask_ok("", "", "An import is in progress. Please wait for it to complete. If you want to do multiple imports at once, see Dashboard/Import/Offline.");	// HOME
@@ -142,7 +142,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_dump_add_many))				return Dump_add_many(m);
 		else if	(ctx.Match(k, Invk_cmd_add))					return Cmd_add(m);
 		else if	(ctx.Match(k, Invk_run))						Cmds_run();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_process_async = "process_async", Invk_dump_add_many = "dump_add_many", Invk_run = "run", Invk_cmd_add = "cmd_add";
 	static final String GRP_KEY = "xowa.install_mgr.cmd_mgr";

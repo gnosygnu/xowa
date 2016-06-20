@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
+public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	private Json_parser parser;
 	public Xob_wdata_pid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Page_wkr__key();

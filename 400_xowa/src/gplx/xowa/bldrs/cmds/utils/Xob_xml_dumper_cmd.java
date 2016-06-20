@@ -33,7 +33,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 		usr_dlg.Plog_many("", "", Cmd_key() + ":bgn;");
 		String wiki_abrv = "";
 		String main_page = String_.Format("https://{0}/wiki/{1}", wiki.Domain_str(), String_.new_u8(wiki.Props().Main_page()));
-		String ns_case = "first-letter";	// TODO:
+		String ns_case = "first-letter";	// TODO_OLD:
 		xml_dumper.Write_root_bgn(wiki.Ns_mgr(), wiki.Domain_itm(), wiki_abrv, main_page, ns_case, "XOWA " + Xoa_app_.Version);
 		Xodb_page_rdr page_rdr = wiki.Db_mgr().Load_mgr().Get_page_rdr(wiki);
 		Xowd_page_itm page = new Xowd_page_itm();
@@ -60,7 +60,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 	public void Cmd_term() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_commit_interval_ = "commit_interval_";
 }

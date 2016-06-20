@@ -36,7 +36,7 @@ public class Utf16__tst {
 	}
 }
 class Utf16__fxt {
-	private Int_obj_ref hi_ref = Int_obj_ref.neg1_(), lo_ref = Int_obj_ref.neg1_();
+	private Int_obj_ref hi_ref = Int_obj_ref.New_neg1(), lo_ref = Int_obj_ref.New_neg1();
 	public void Test_encode_decode(int expd_c_int, int... expd_int) {
 		byte[] expd = Bry_.New_by_ints(expd_int);
 		byte[] bfr = new byte[10];

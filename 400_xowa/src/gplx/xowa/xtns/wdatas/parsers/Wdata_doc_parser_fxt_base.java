@@ -19,7 +19,7 @@ package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
 abstract class Wdata_doc_parser_fxt_base {
 	protected Wdata_doc_parser wdoc_parser;
-	private final Json_parser json_parser = new Json_parser();
+	private final    Json_parser json_parser = new Json_parser();
 	public void Init() {
 		if (wdoc_parser == null) wdoc_parser = Make_parser();
 	}
@@ -81,7 +81,7 @@ abstract class Wdata_doc_parser_fxt_base {
 		Tfds.Eq_ary(expd, actl);
 	}
 	Wdata_claim_itm_base[] To_ary(Wdata_claim_grp_list list) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; ++i) {
 			Wdata_claim_grp grp = list.Get_at(i);
@@ -93,7 +93,7 @@ abstract class Wdata_doc_parser_fxt_base {
 		}
 		return (Wdata_claim_itm_base[])rv.To_ary_and_clear(Wdata_claim_itm_base.class);
 	}
-	private static final byte[] Q1_bry = Bry_.new_a7("Q1");
+	private static final    byte[] Q1_bry = Bry_.new_a7("Q1");
 }
 class Wdata_doc_parser_v2_fxt extends Wdata_doc_parser_fxt_base {
 	@Override public Wdata_doc_parser Make_parser() {return new Wdata_doc_parser_v2();}

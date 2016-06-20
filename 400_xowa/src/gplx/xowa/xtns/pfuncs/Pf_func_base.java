@@ -34,7 +34,7 @@ public abstract class Pf_func_base implements Pf_func {
 			Arg_itm_tkn name_val_tkn = self.Name_tkn().Val_tkn();
 			int subs_len = name_val_tkn.Subs_len();
 			if (subs_len > 0) {
-				Bry_bfr tmp = Bry_bfr.new_();
+				Bry_bfr tmp = Bry_bfr_.New();
 				for (int i = 0; i < subs_len; i++)
 					name_val_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, tmp);
 				argx_dat = tmp.To_bry_and_clear_and_trim();
@@ -60,7 +60,7 @@ public abstract class Pf_func_base implements Pf_func {
 				}
 			}
 			else {
-				Bry_bfr tmp = Bry_bfr.new_();
+				Bry_bfr tmp = Bry_bfr_.New();
 				for (int i = 0; i < subs_len; i++)
 					name_val_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, tmp);
 				argx_dat = tmp.To_bry_and_clear_and_trim();
@@ -68,5 +68,5 @@ public abstract class Pf_func_base implements Pf_func {
 		}
 		return argx_dat;
 	}
-	public static final byte[] Eval_arg_or_null_is_null = null, Eval_arg_or_null_is_empty = Bry_.Empty;
+	public static final    byte[] Eval_arg_or_null_is_null = null, Eval_arg_or_null_is_empty = Bry_.Empty;
 }

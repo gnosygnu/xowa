@@ -57,7 +57,7 @@ class Bry_split__fxt {
 	}
 }
 class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {
-	private final    List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
 		byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
 		if		(Bry_.Eq(bry, Bry_.new_a7("extend"))) return Bry_split_.Rv__extend;

@@ -20,8 +20,12 @@ import gplx.langs.jsons.*;
 public class Gfobj_wtr__json {
 	private final    Json_wtr wtr = new Json_wtr();
 	public Gfobj_wtr__json Opt_ws_(boolean v) {wtr.Opt_ws_(v); return this;}
+	public Gfobj_wtr__json Opt_backslash_2x_(boolean v) {wtr.Opt_backslash_2x_(v); return this;}
 	public Bry_bfr Bfr() {return wtr.Bfr();}
 	public String To_str() {return wtr.To_str_and_clear();}
+	public void Save(Io_url url) {
+		Io_mgr.Instance.SaveFilBry(url, wtr.To_bry_and_clear());
+	}
 	public Gfobj_wtr__json Write(Gfobj_grp root) {
 		switch (root.Grp_tid()) {
 			case Gfobj_grp_.Grp_tid__nde:
@@ -51,6 +55,8 @@ public class Gfobj_wtr__json {
 			case Gfobj_fld_.Fld_tid__str:		wtr.Kv_str(itm.Key()	, ((Gfobj_fld_str)itm).As_str()); break;
 			case Gfobj_fld_.Fld_tid__int:		wtr.Kv_int(itm.Key()	, ((Gfobj_fld_int)itm).As_int()); break;
 			case Gfobj_fld_.Fld_tid__long:		wtr.Kv_long(itm.Key()	, ((Gfobj_fld_long)itm).As_long()); break;
+			case Gfobj_fld_.Fld_tid__bool:		wtr.Kv_bool(itm.Key()	, ((Gfobj_fld_bool)itm).As_bool()); break;
+			case Gfobj_fld_.Fld_tid__double:	wtr.Kv_double(itm.Key()	, ((Gfobj_fld_double)itm).As_double()); break;
 			case Gfobj_fld_.Fld_tid__nde:		wtr.Nde_bgn(itm.Key()); Write_nde(((Gfobj_fld_nde)itm).As_nde()); wtr.Nde_end();break;
 			case Gfobj_fld_.Fld_tid__ary:		wtr.Ary_bgn(itm.Key()); Write_ary(((Gfobj_fld_ary)itm).As_ary()); wtr.Ary_end();break;
 			default: throw Err_.new_unhandled_default(itm.Fld_tid());
@@ -58,35 +64,22 @@ public class Gfobj_wtr__json {
 	}
 	private void Write_ary(Gfobj_ary ary) {
 		int len = ary.Len();
-		byte ary_tid = ary.Ary_tid();
-		switch (ary_tid) {
-			case Gfobj_ary_.Ary_tid__str:
-				String[] ary_str = ((Gfo_ary_str)ary).Ary_str();
-				for (int i = 0; i < len; ++i)
-					wtr.Ary_itm_str(ary_str[i]);
-				break;
-			case Gfobj_ary_.Ary_tid__int:
-				int[] ary_int = ((Gfo_ary_int)ary).Ary_int();
-				for (int i = 0; i < len; ++i)
-					wtr.Ary_itm_obj(ary_int[i]);
-				break;
-			case Gfobj_ary_.Ary_tid__nde:
-				Gfobj_nde[] ary_nde = ((Gfobj_ary_nde)ary).Ary_nde();
-				for (int i = 0; i < len; ++i) {
-					wtr.Nde_bgn_ary();
-					Write_nde(ary_nde[i]);
-					wtr.Nde_end();
-				}
-				break;
-			case Gfobj_ary_.Ary_tid__ary:
-				Gfobj_ary[] ary_ary = ((Gfo_ary_ary)ary).Ary_ary();
-				for (int i = 0; i < len; ++i) {
-					wtr.Ary_bgn_ary();
-					Write_ary(ary_ary[i]);
-					wtr.Ary_end();
-				}
-				break;
-			default: throw Err_.new_unhandled_default(ary_tid);
+		Object[] ary_obj = ((Gfobj_ary)ary).Ary_obj();
+		for (int i = 0; i < len; ++i) {
+			Object sub_itm = ary_obj[i];
+			Class<?> sub_itm_type = Type_adp_.ClassOf_obj(sub_itm);
+			if		(Type_adp_.Eq(sub_itm_type, Gfobj_ary.class)) {
+				wtr.Ary_bgn_ary();
+				Write_ary((Gfobj_ary)sub_itm);
+				wtr.Ary_end();
+			}
+			else if (Type_adp_.Eq(sub_itm_type, Gfobj_nde.class)) {
+				wtr.Nde_bgn_ary();
+				Write_nde((Gfobj_nde)sub_itm);
+				wtr.Nde_end();
+			}
+			else
+				wtr.Ary_itm_obj(sub_itm);
 		}
 	}
 }

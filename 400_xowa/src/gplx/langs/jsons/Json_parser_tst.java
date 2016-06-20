@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Json_parser_tst {
-	private final Json_parser_fxt fxt = new Json_parser_fxt();
+	private final    Json_parser_fxt fxt = new Json_parser_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test   public void Null()					{fxt.Test_parse_val0("{'k0':null}"			, null);}
 	@Test   public void Bool_n()				{fxt.Test_parse_val0("{'k0':false}"			, false);}
@@ -50,7 +50,7 @@ class Json_parser_fxt {
 			parser = new Json_parser();
 			factory = parser.Factory();
 		}
-	}	Json_parser parser; Json_factory factory; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	}	Json_parser parser; Json_factory factory; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Json_itm itm_int_(int v)						{return Json_itm_tmp.new_int_(v);}
 	Json_itm itm_str_(String v)							{return Json_itm_tmp.new_str_(v);}
 	public Json_ary itm_ary_()							{return factory.Ary(-1, -1);}

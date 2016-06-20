@@ -27,7 +27,7 @@ public class Pf_func_ {
 	public static byte[] Eval_arg_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Eval_arg_or(bfr, ctx, src, caller, self, nde, or);
 		return bfr.To_bry_and_clear_and_trim();
 	}
@@ -38,7 +38,7 @@ public class Pf_func_ {
 	}
 	public static byte[] Eval_val_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
 		return bfr.To_bry_and_clear_and_trim();
@@ -76,7 +76,7 @@ public class Pf_func_ {
 	public static int[] Ary_get(Xow_domain_itm domain_itm, boolean wmf) {
 		if (wmf && domain_itm != null && domain_itm.Domain_type().Tid() != Xow_domain_tid_.Int__home) return Ary_wmf;
 		if (Ary_nonwmf == null) {
-			List_adp list = List_adp_.new_();
+			List_adp list = List_adp_.New();
 			int len = Ary_wmf.length;
 			for (int i = 0; i < len; ++i) {
 				list.Add(Ary_wmf[i]);

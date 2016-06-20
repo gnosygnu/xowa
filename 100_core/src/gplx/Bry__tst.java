@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*; import gplx.core.primitives.*; import gplx.core.brys.*;
 public class Bry__tst {
-	private final Bry__fxt fxt = new Bry__fxt();
+	private final    Bry__fxt fxt = new Bry__fxt();
 	@Test  public void new_ascii_() {
 		fxt.Test_new_a7("a"		, Bry_.New_by_ints(97));				// one
 		fxt.Test_new_a7("abc"	, Bry_.New_by_ints(97, 98, 99));		// many
@@ -107,7 +107,7 @@ public class Bry__tst {
 	@Test  public void ReadCsvStr() {
 		tst_ReadCsvStr("a|"	   , "a");
 		tst_ReadCsvStr("|a|", 1 , "a");
-		Int_obj_ref bgn = Int_obj_ref.zero_(); tst_ReadCsvStr("a|b|c|", bgn, "a"); tst_ReadCsvStr("a|b|c|", bgn, "b"); tst_ReadCsvStr("a|b|c|", bgn, "c");
+		Int_obj_ref bgn = Int_obj_ref.New_zero(); tst_ReadCsvStr("a|b|c|", bgn, "a"); tst_ReadCsvStr("a|b|c|", bgn, "b"); tst_ReadCsvStr("a|b|c|", bgn, "c");
 		tst_ReadCsvStr("|", "");
 		tst_ReadCsvStr_err("a");
 
@@ -140,8 +140,8 @@ public class Bry__tst {
 	void tst_XtoInt(String val, int expd)					{tst_XtoInt(val, -1, expd);}
 	void tst_XtoInt(String val, int or, int expd)			{Tfds.Eq(expd, Bry_.To_int_or(Bry_.new_u8(val), or));}
 	void tst_XtoIntBy4Bytes(int expd, byte... ary)	{Tfds.Eq(expd, Bry_.To_int_by_a7(ary), "XtoInt"); Tfds.Eq_ary(ary, Bry_.new_by_int(expd), "XbyInt");}
-	void tst_ReadCsvStr(String raw, String expd)			{tst_ReadCsvStr(raw, Int_obj_ref.zero_()  , expd);}
-	void tst_ReadCsvStr(String raw, int bgn, String expd)	{tst_ReadCsvStr(raw, Int_obj_ref.new_(bgn), expd);}
+	void tst_ReadCsvStr(String raw, String expd)			{tst_ReadCsvStr(raw, Int_obj_ref.New_zero()  , expd);}
+	void tst_ReadCsvStr(String raw, int bgn, String expd)	{tst_ReadCsvStr(raw, Int_obj_ref.New(bgn), expd);}
 	void tst_ReadCsvStr(String raw, Int_obj_ref bgnRef, String expd) {
 		int bgn = bgnRef.Val();
 		boolean rawHasQuotes = String_.CharAt(raw, bgn) == '\'';
@@ -155,16 +155,16 @@ public class Bry__tst {
 			Tfds.Eq(bgn + 1 + String_.Len(actl), bgnRef.Val(), "pos");	// +1=lkp.Len
 	}
 	void tst_ReadCsvStr_err(String raw) {
-		try {Bry_.ReadCsvStr(Bry_.new_u8(String_.Replace(raw, "'", "\"")), Int_obj_ref.zero_(), (byte)'|');}
+		try {Bry_.ReadCsvStr(Bry_.new_u8(String_.Replace(raw, "'", "\"")), Int_obj_ref.New_zero(), (byte)'|');}
 		catch (Exception e) {Err_.Noop(e); return;}
 		Tfds.Fail_expdError();
 	}
 	@Test  public void ReadCsvDte() {
 		tst_ReadCsvDte("20110801 221435.987");
-	}	void tst_ReadCsvDte(String raw) {Tfds.Eq_date(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte), Bry_.ReadCsvDte(Bry_.new_u8(raw + "|"), Int_obj_ref.zero_(), (byte)'|'));}
+	}	void tst_ReadCsvDte(String raw) {Tfds.Eq_date(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte), Bry_.ReadCsvDte(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
 	@Test  public void ReadCsvInt() {
 		tst_ReadCsvInt("1234567890");
-	}	void tst_ReadCsvInt(String raw) {Tfds.Eq(Int_.parse(raw), Bry_.ReadCsvInt(Bry_.new_u8(raw + "|"), Int_obj_ref.zero_(), (byte)'|'));}
+	}	void tst_ReadCsvInt(String raw) {Tfds.Eq(Int_.parse(raw), Bry_.ReadCsvInt(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
 	@Test  public void Trim() {
 		Trim_tst("a b c", 1, 4, "b");
 		Trim_tst("a  c", 1, 3, "");
@@ -211,7 +211,7 @@ public class Bry__tst {
 		tst_Replace_between("a[0b"					, "[", "]", "0", "a[0b");
 	}	public void tst_Replace_between(String src, String bgn, String end, String repl, String expd) {Tfds.Eq(expd, String_.new_a7(Bry_.Replace_between(Bry_.new_a7(src), Bry_.new_a7(bgn), Bry_.new_a7(end), Bry_.new_a7(repl))));}
 	@Test    public void Replace() {
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		tst_Replace(tmp_bfr, "a0b"					,    "0", "00", "a00b");		// 1 -> 1
 		tst_Replace(tmp_bfr, "a0b0c"				,    "0", "00", "a00b00c");		// 1 -> 2
 		tst_Replace(tmp_bfr, "a00b00c"				,   "00",  "0", "a0b0c");		// 2 -> 1

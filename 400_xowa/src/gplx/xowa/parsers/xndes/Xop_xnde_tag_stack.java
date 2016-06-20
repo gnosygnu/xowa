@@ -30,6 +30,6 @@ public class Xop_xnde_tag_stack {
 			xmlTags[i] = 0;
 		xmlTagsStack.Clear();
 	}
-	List_adp xmlTagsStack = List_adp_.new_();
+	List_adp xmlTagsStack = List_adp_.New();
 	int[] xmlTags = new int[Xop_xnde_tag_.Tid__len];
 }

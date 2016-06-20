@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-public class Xoa_cfg_itm implements GfoInvkAble {
+public class Xoa_cfg_itm implements Gfo_invk {
 	public Xoa_cfg_itm(Xoa_cfg_grp grp, byte[] key) {this.grp = grp; this.key = key;}
-	public Xoa_cfg_grp Grp() {return grp;} private final Xoa_cfg_grp grp;
-	public byte[] Key() {return key;} private final byte[] key;
+	public Xoa_cfg_grp Grp() {return grp;} private final    Xoa_cfg_grp grp;
+	public byte[] Key() {return key;} private final    byte[] key;
 	public String Val() {return val;} private String val;
 	public boolean Val_is_dirty() {return val_is_dirty;} private boolean val_is_dirty;
 	public boolean Val_is_customized() {return val_is_customized;} private boolean val_is_customized;	// false if value is system default; true if changed by user
@@ -37,7 +37,7 @@ public class Xoa_cfg_itm implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_val)) 		return val;
 		else if	(ctx.Match(k, Invk_val_)) 		Val_(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_val = "val", Invk_val_ = "val_";
 }

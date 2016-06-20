@@ -46,7 +46,7 @@ class Xof_orig_tbl_fxt {
 	}
 	public void Test_select_in(String[] itms, Xof_orig_itm... expd) {
 		Ordered_hash rv = Ordered_hash_.New();
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int itms_len = itms.length;
 		for (int i = 0; i < itms_len; ++i) {
 			String itm = itms[i];
@@ -58,7 +58,7 @@ class Xof_orig_tbl_fxt {
 		Tfds.Eq_str_lines(To_str_ary(expd), To_str_ary((Xof_orig_itm[])rv.To_ary(Xof_orig_itm.class)));
 	}
 	private static String To_str_ary(Xof_orig_itm... ary) {
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xof_orig_itm itm = ary[i];

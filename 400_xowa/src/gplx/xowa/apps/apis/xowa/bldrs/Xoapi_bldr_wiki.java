@@ -19,7 +19,7 @@ package gplx.xowa.apps.apis.xowa.bldrs; import gplx.*; import gplx.xowa.*; impor
 import gplx.xowa.apps.apis.xowa.bldrs.filters.*;
 import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.apps.apis.xowa.bldrs.runners.*;
-public class Xoapi_bldr_wiki implements GfoInvkAble {
+public class Xoapi_bldr_wiki implements Gfo_invk {
 	public void Ctor_by_app(Xoa_app app) {
 		filter.Ctor_by_app(app);
 		runner.Ctor_by_app(app);
@@ -31,7 +31,7 @@ public class Xoapi_bldr_wiki implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_filter)) 						return filter;
 		else if	(ctx.Match(k, Invk_import)) 						return import_api;
 		else if	(ctx.Match(k, Invk_runner)) 						return runner;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_filter = "filter", Invk_import = "import", Invk_runner = "runner";
 }

@@ -31,7 +31,7 @@ class GfmlStringHighlighter {
 	}
 	public String[] Gen() {
 		String_bldr posBfr = String_bldr_.new_(), rawBfr = String_bldr_.new_(), symBfr = String_bldr_.new_();
-		List_adp symList = List_adp_.new_();
+		List_adp symList = List_adp_.New();
 		int bgnPos = 0, endPos = 0;
 		int rawLen = String_.Len(raw); int rawLenDigits = Int_.DigitCount(rawLen);
 		int rawBfrBgn = -1, marksLastIdx = marks.Idx_last();
@@ -79,7 +79,7 @@ class GfmlStringHighlighter {
 			rawBfr.Add_at(0, " ");
 			symBfr.Add_at(0, " ");
 		}
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		rv.Add(posBfr.To_str());
 		rv.Add(rawBfr.To_str());
 		rv.Add(symBfr.To_str());
@@ -89,7 +89,7 @@ class GfmlStringHighlighter {
 			rv.Add((String)symList.Get_at(i));
 		return rv.To_str_ary();
 	}
-	List_adp marks = List_adp_.new_();
+	List_adp marks = List_adp_.New();
         public static GfmlStringHighlighter new_() {
 		GfmlStringHighlighter rv = new GfmlStringHighlighter();
 		return rv;
@@ -99,5 +99,5 @@ class GfmlStringHighlighterMarker {
 	public int Pos() {return pos;} public GfmlStringHighlighterMarker Pos_(int v) {pos = v; return this;} int pos;
 	public char Sym() {return sym;} public GfmlStringHighlighterMarker Sym_(char v) {sym = v; return this;} char sym;
 	public String Msg() {return msg;} public GfmlStringHighlighterMarker Msg_(String v) {msg = v; return this;} private String msg;
-	public static final GfmlStringHighlighterMarker Null = new GfmlStringHighlighterMarker().Pos_(-1);
+	public static final    GfmlStringHighlighterMarker Null = new GfmlStringHighlighterMarker().Pos_(-1);
 }

@@ -19,15 +19,15 @@ package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.htmls.core.dbs.*;
 class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
-	private final    Xowd_db_file page_db;
-	public Xob_ns_to_db_wkr__html(Xowd_db_file page_db) {this.page_db = page_db;}
-	public byte Db_tid() {return Xowd_db_file_.Tid_html_data;}
-	public void Tbl_init(Xowd_db_file db) {			
+	private final    Xow_db_file page_db;
+	public Xob_ns_to_db_wkr__html(Xow_db_file page_db) {this.page_db = page_db;}
+	public byte Db_tid() {return Xow_db_file_.Tid__html_data;}
+	public void Tbl_init(Xow_db_file db) {			
 		Xoh_page_tbl tbl = db.Tbl__html();
 		tbl.Create_tbl();
 		tbl.Insert_bgn(); 
 	}
-	public void Tbl_term(Xowd_db_file db) {
+	public void Tbl_term(Xow_db_file db) {
 		db.Tbl__text().Insert_end(); 
 		Db_conn db_conn = db.Conn();
 		new Db_attach_mgr(page_db.Conn(), new Db_attach_itm("html_db", db.Url()))

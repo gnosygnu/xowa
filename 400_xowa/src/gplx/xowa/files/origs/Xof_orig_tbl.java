@@ -20,9 +20,9 @@ import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*; 
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xof_orig_tbl implements Rls_able {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
-	private final Db_conn conn; private final Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();
+	public final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final    String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
+	public final    Db_conn conn; private final    Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();
 	public Db_conn Conn() {return conn;}
 	public Xof_orig_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
@@ -47,7 +47,7 @@ public class Xof_orig_tbl implements Rls_able {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_ttl).Clear().Crt_bry_as_str(fld_ttl, ttl).Exec_select__rls_auto();
 		try {
 			if (rdr.Move_next())
-				rv = Make_itm(rdr);
+				rv = Load_by_rdr(rdr);
 		}
 		finally {rdr.Rls();}
 		return rv;
@@ -59,6 +59,9 @@ public class Xof_orig_tbl implements Rls_able {
 	}
 	public void Insert(byte repo, byte[] ttl, int ext, int w, int h, byte[] redirect) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
+		this.Insert(stmt, repo, ttl, ext, w, h, redirect);
+	}
+	public void Insert(Db_stmt stmt, byte repo, byte[] ttl, int ext, int w, int h, byte[] redirect) {
 		stmt.Clear()
 			.Val_bry_as_str(fld_ttl, ttl).Val_byte(fld_repo, repo).Val_byte(fld_status, Status_found)
 			.Val_int(fld_ext, ext).Val_int(fld_w, w).Val_int(fld_h, h).Val_bry_as_str(fld_redirect, redirect)
@@ -72,7 +75,7 @@ public class Xof_orig_tbl implements Rls_able {
 			.Crt_byte(fld_repo, repo).Crt_bry_as_str(fld_ttl, ttl)
 		.Exec_update();
 	}
-	public Xof_orig_itm Make_itm(Db_rdr rdr) {
+	public Xof_orig_itm Load_by_rdr(Db_rdr rdr) {
 		byte repo = rdr.Read_byte(fld_repo);
 		Xof_orig_itm rv = new Xof_orig_itm().Init
 		( repo
@@ -106,7 +109,7 @@ class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 	@Override protected void Read_data(Cancelable cancelable, Db_rdr rdr) {
 		while (rdr.Move_next()) {
 			if (cancelable.Canceled()) return;
-			Xof_orig_itm itm = tbl.Make_itm(rdr);
+			Xof_orig_itm itm = tbl.Load_by_rdr(rdr);
 			if (itm == Xof_orig_itm.Null) continue;
 			byte[] itm_ttl = itm.Ttl();
 			rv.Add_if_dupe_use_1st(itm_ttl, itm);	// guard against dupes; fails on en.w:Paris; DATE:2015-03-08

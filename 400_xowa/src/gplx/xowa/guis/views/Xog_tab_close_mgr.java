@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_tab_close_mgr {
-	private List_adp list = List_adp_.new_();
+	private List_adp list = List_adp_.New();
 	public void Clear() {list.Clear();}
 	public void Add(Xog_tab_close_lnr lnr) {list.Add(lnr);} 
 	public int Len() {return list.Count();} 

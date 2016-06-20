@@ -34,5 +34,5 @@ public class UsrMsgWkr_test implements UsrMsgWkr {
 		dlg.Reg(UsrMsgWkr_.Type_Warn, wkr);
 		return wkr;
 	}
-	List_adp msgs = List_adp_.new_();
+	List_adp msgs = List_adp_.New();
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.html.*;
-public class Xoapi_skin_app_base implements GfoInvkAble {
+public class Xoapi_skin_app_base implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 	}
 	public boolean Sidebar_home_enabled() {return sidebar_home_enabled;} public void Sidebar_home_enabled_(boolean v) {sidebar_home_enabled = v;} private boolean sidebar_home_enabled;

@@ -19,8 +19,8 @@ package gplx.core.stores; import gplx.*; import gplx.core.*;
 public class DbMaprItm {
 	public String TableName() {return tableName;} public DbMaprItm TableName_(String val) {tableName = val; return this;} private String tableName;
 	public Ordered_hash Flds() {return flds;} Ordered_hash flds = Ordered_hash_.New();
-	public Hash_adp ContextFlds() {return contextFlds;} Hash_adp contextFlds = Hash_adp_.new_();
-	public Hash_adp ConstantFlds() {return constantFlds;} Hash_adp constantFlds = Hash_adp_.new_();
+	public Hash_adp ContextFlds() {return contextFlds;} Hash_adp contextFlds = Hash_adp_.New();
+	public Hash_adp ConstantFlds() {return constantFlds;} Hash_adp constantFlds = Hash_adp_.New();
 	public List_adp Subs() {return subs;}
 
 	public DbMaprItm Flds_add(String objProp, String dbFld) {flds.Add(objProp, DbMaprArg.new_(objProp, dbFld)); return this;}
@@ -43,7 +43,7 @@ public class DbMaprItm {
 		throw Err_.new_missing_key(find);
 	}
 	public DbMaprArg Flds_get(String key) {return (DbMaprArg)flds.Get_by(key);}
-	SrlObj proto; String key; List_adp subs = List_adp_.new_();
+	SrlObj proto; String key; List_adp subs = List_adp_.New();
 	public static DbMaprItm proto_(SrlObj proto, String key, String tableName) {
 		DbMaprItm rv = new DbMaprItm();
 		rv.proto = proto; rv.key = key; rv.tableName = tableName;

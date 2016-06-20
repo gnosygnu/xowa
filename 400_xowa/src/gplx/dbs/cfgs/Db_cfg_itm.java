@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
 public class Db_cfg_itm {
 	public Db_cfg_itm(String grp, String key, String val) {this.grp = grp; this.key = key; this.val = val;}
-	public String		Grp() {return grp;} private final String grp;
-	public String		Key() {return key;} private final String key;
+	public String		Grp() {return grp;} private final    String grp;
+	public String		Key() {return key;} private final    String key;
 	public String		Val() {return val;} public Db_cfg_itm Val_(String v) {val = v; return this;} private String val;
 	public String		To_str_or(String or)			{return val == null ? or : val;}
 	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_u8(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
@@ -29,7 +29,7 @@ public class Db_cfg_itm {
 	public boolean		To_yn_or_n()					{return To_yn_or(Bool_.N);}
 	public boolean		To_yn_or(boolean or)			{try {return val == null ? or : Yn.parse_by_char_or(val, or);} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
 	public DateAdp		To_date_or(DateAdp or)			{try {return val == null ? or : DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, DateAdp_.Cls_ref_name);}}
-	public Guid_adp		To_guid_or(Guid_adp or)			{try {return val == null ? or : Guid_adp_.parse(val)		;} catch (Exception e) {throw err_parse(e, Guid_adp_.Cls_ref_name);}}
+	public Guid_adp		To_guid_or(Guid_adp or)			{try {return val == null ? or : Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, Guid_adp_.Cls_ref_name);}}
 	public boolean  	To_bool()						{Fail_if_null(); try {return Yn.parse(val)					;} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
 	public byte			To_byte()						{Fail_if_null(); try {return Byte_.parse(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
 	public int     		To_int()						{Fail_if_null(); try {return Int_.parse(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
@@ -53,5 +53,5 @@ public class Db_cfg_itm {
 	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}
 	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.To_str());}
-	public static final Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
+	public static final    Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
 }

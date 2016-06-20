@@ -46,15 +46,15 @@ public class Pfunc_filepath extends Pf_func_base {
 		byte[] url = url_bldr.Init_for_trg_html(Xof_repo_itm_.Mode_orig, trg_repo, ttl_bry, xfer_itm.Orig_ttl_md5(), xfer_itm.Orig_ext(), Xof_img_size.Size__neg1, Xof_lnki_time.Null, Xof_lnki_page.Null).Xto_bry();
 		bfr.Add(url);
 	}
-	private static final Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
-	private static final Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private static final    Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
+	private static final    Xof_url_bldr url_bldr = new Xof_url_bldr();
 	private static Xoae_page Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {
-		Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
+		Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
 		if (page.Missing()) {				// file not found in current wiki; try commons; 
 			Xowe_wiki commons_wiki = (Xowe_wiki)wiki.Appe().Wiki_mgr().Get_by_or_null(wiki.Commons_wiki_key());
 			if (commons_wiki != null) {		// commons_wiki not installed; exit; DATE:2013-06-08
 				if (!Env_.Mode_testing()) commons_wiki.Init_assert();// must assert load else page_zip never detected; DATE:2013-03-10
-				page = commons_wiki.Data_mgr().Get_page(ttl, false);
+				page = commons_wiki.Data_mgr().Load_page_by_ttl(ttl);
 			}
 		}
 		return page;

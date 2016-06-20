@@ -20,8 +20,8 @@ import gplx.core.flds.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
-	private final Io_url wiki_meta_dir; private final byte dir_spr_byte;  private final Bry_bfr url_bfr = Bry_bfr.new_(255);
-	private final Gfo_fld_rdr meta_rdr = Gfo_fld_rdr.xowa_(); private final Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
+	private final    Io_url wiki_meta_dir; private final    byte dir_spr_byte;  private final    Bry_bfr url_bfr = Bry_bfr_.New_w_size(255);
+	private final    Gfo_fld_rdr meta_rdr = Gfo_fld_rdr.xowa_(); private final    Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
 	public Xof_orig_wkr__xo_meta(Io_url wiki_meta_dir) {this.wiki_meta_dir = wiki_meta_dir; this.dir_spr_byte = wiki_meta_dir.Info().DirSpr_byte();}
 	public byte				Tid() {return Xof_orig_wkr_.Tid_xowa_meta;}
 	public void				Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}

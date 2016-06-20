@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*;
 public class Xoh_redlink_tbl implements Rls_able {
-	private final String tbl_name = "html_redlink"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_page_id, fld_redlink_uids;
-	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
+	private final    String tbl_name = "html_redlink"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_page_id, fld_redlink_uids;
+	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	public Xoh_redlink_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_page_id			= flds.Add_int_pkey("page_id");

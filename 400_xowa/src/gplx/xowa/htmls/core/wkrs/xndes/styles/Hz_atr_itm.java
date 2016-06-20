@@ -66,7 +66,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		}
 //	}
 //	class Hz_regy {
-//		private final Ordered_hash tag_hash = Ordered_hash_.New();
+//		private final    Ordered_hash tag_hash = Ordered_hash_.New();
 //		public Hz_tag_itm Tags__get_or_new(int name_id) {
 //			return null;
 //		}
@@ -125,7 +125,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		}
 //	}
 //	class Hz_tag_hzip {
-//		private static final byte[] Hook_tag = Bry_.new_a7("~z");
+//		private static final    byte[] Hook_tag = Bry_.new_a7("~z");
 //		public void Encode(Bry_bfr bfr, Hz_regy regy, Gfh_tag htag) {
 //			Hz_tag_itm ztag = regy.Tags__get_or_new(htag.Name_id());
 //
@@ -155,7 +155,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		public boolean Indexable() {return indexable;} private boolean indexable;
 //		public Xohz_style_itm[] Atrs() {if (atr_ary_is_dirty) atr_ary = (Xohz_style_itm[])atr_list.To_ary(typeof(Xohz_style_itm)); return atr_ary;} private Xohz_style_itm[] atr_ary; private boolean atr_ary_is_dirty = false;
 //		private void Add(byte[] text) {
-//			if (atr_list == null) atr_list = List_adp_.new_();
+//			if (atr_list == null) atr_list = List_adp_.New();
 //			atr_list.Add(new Xohz_style_itm(atr_list.Count(), text, Bool_.Y, Bool_.Y));
 //		}
 //	}
@@ -170,7 +170,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		public boolean Indexable() {return indexable;} private boolean indexable;
 //		public Xohz_style_val[] Itms() {if (ary_is_dirty) ary = (Xohz_style_val[])list.To_ary(typeof(Xohz_style_val)); return ary;} private Xohz_style_val[] ary; private boolean ary_is_dirty = false;
 //		private void Itms__add(byte[] key) {
-//			if (list == null) list = List_adp_.new_();
+//			if (list == null) list = List_adp_.New();
 //			ary_is_dirty = true;
 //			list.Add(new Xohz_style_val(list.Count(), key, Bool_.Y));
 //		}
@@ -182,7 +182,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		public Xohz_style_val(int uid, byte[] txt, boolean scope_is_doc) {
 //			this.uid = uid; this.txt = txt; this.scope_is_doc = scope_is_doc;
 //		}
-//		public int Uid() {return uid;} private final int uid;
-//		public byte[] Txt() {return txt;} private final byte[] txt;
+//		public int Uid() {return uid;} private final    int uid;
+//		public byte[] Txt() {return txt;} private final    byte[] txt;
 //		public boolean Scope_is_doc() {return scope_is_doc;} private boolean scope_is_doc;
 //	}

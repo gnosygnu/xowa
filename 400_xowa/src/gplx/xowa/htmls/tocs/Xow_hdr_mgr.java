@@ -20,8 +20,8 @@ import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.langs.htmls.
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_hdr_mgr {
-	private final Xoae_page page;
-	private final Hash_adp hdrs_hash = Hash_adp_.new_(); private final Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private final Bry_obj_ref hdrs_ref = Bry_obj_ref.New_empty();
+	private final    Xoae_page page;
+	private final    Hash_adp hdrs_hash = Hash_adp_.New(); private final    Bry_bfr hdrs_bfr = Bry_bfr_.Reset(255); private final    Bry_obj_ref hdrs_ref = Bry_obj_ref.New_empty();
 	private Xop_hdr_tkn[] hdrs_ary = new Xop_hdr_tkn[0]; private int hdrs_max, hdrs_len;
 	public Xow_hdr_mgr(Xoae_page page) {this.page = page;}
 	public boolean Toc_enabled() {

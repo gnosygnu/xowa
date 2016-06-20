@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xop_lnki_wkr_ {
-	private static final    Int_obj_ref rel2abs_tid = Int_obj_ref.zero_();
+	private static final    Int_obj_ref rel2abs_tid = Int_obj_ref.New_zero();
 	public static final int Invalidate_lnki_len = 128;
 	public static int Invalidate_lnki(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_lnki_tkn lnki, int cur_pos) {
 		lnki.Tkn_tid_to_txt();						// convert initial "[[" to text; note that this lnki has no pipes as pipe_lxr does similar check; EX: [[<invalid>]]; DATE:2014-03-26

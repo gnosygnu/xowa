@@ -24,7 +24,7 @@ class GfmlVarCtx {
 		GfmlVarItm itm = (GfmlVarItm)hash.Get_by(key); if (itm == null) return null;
 		return itm.TknVal();
 	}
-	Hash_adp hash = Hash_adp_.new_();
+	Hash_adp hash = Hash_adp_.New();
 	public static GfmlVarCtx new_(String key) {
 		GfmlVarCtx rv = new GfmlVarCtx();
 		rv.key = key;
@@ -53,10 +53,10 @@ class GfmlVarCtx_ {
 		String key = "gfml.cacheKeys.ctxRegy";
 		Hash_adp rv = (Hash_adp)cache.Get_by(key);
 		if (rv == null) {
-			rv = Hash_adp_.new_();
+			rv = Hash_adp_.New();
 			cache.Add(key, rv);
 		}
 		return rv;
 	}
-	public static final String DefaultKey = "gfml.varKeys.default";
+	public static final    String DefaultKey = "gfml.varKeys.default";
 }

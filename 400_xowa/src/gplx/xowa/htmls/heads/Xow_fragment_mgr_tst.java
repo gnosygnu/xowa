@@ -51,7 +51,7 @@ class Xow_fragment_mgr_fxt {
 	public void Test_fragment(String key, String expd) {Test_fragment(wiki.Lang(), key, expd);}
 	public void Test_fragment(Xol_lang_itm lang, String key, String expd) {
 		wiki.Fragment_mgr().Evt_lang_changed(lang);
-		byte[] actl = (byte[])GfoInvkAble_.InvkCmd(wiki.Fragment_mgr(), key);
+		byte[] actl = (byte[])Gfo_invk_.Invk_by_key(wiki.Fragment_mgr(), key);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.gfo_ndes.*;
 public class DataWtr_ {
-	public static final DataWtr Null = new DataWtr_null();
+	public static final    DataWtr Null = new DataWtr_null();
 }
 class DataWtr_null implements DataWtr {
 	public boolean Type_rdr() {return false;}
-	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
 	public void InitWtr(String key, Object val) {}
 	public void WriteTableBgn(String name, GfoFldList fields) {}
 	public void WriteNodeBgn(String nodeName) {}

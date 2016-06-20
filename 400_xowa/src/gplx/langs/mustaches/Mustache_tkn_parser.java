@@ -27,7 +27,7 @@ public class Mustache_tkn_parser {
 		return root;
 	}
 	private int Parse_grp(Mustache_tkn_itm owner, int src_bgn) {
-		List_adp subs_list = List_adp_.new_();
+		List_adp subs_list = List_adp_.New();
 		int txt_bgn = src_bgn;
 		boolean end_grp = false;
 		while (true) {// loop for "{{"
@@ -83,7 +83,7 @@ public class Mustache_tkn_parser {
 			case Mustache_tkn_def.Variable:			tkn = new Mustache_tkn_variable(val_bry);	break;
 			case Mustache_tkn_def.Comment:			tkn = new Mustache_tkn_comment();			break;
 			case Mustache_tkn_def.Partial:			tkn = new Mustache_tkn_partial(val_bry);	break;
-			case Mustache_tkn_def.Delimiter_bgn:	tkn = new Mustache_tkn_delimiter(val_bry);	break;	// TODO: implement delimiter; EX: {{=<% %>=}}
+			case Mustache_tkn_def.Delimiter_bgn:	tkn = new Mustache_tkn_delimiter(val_bry);	break;	// TODO_OLD: implement delimiter; EX: {{=<% %>=}}
 			case Mustache_tkn_def.Escape_bgn:		tkn = new Mustache_tkn_escape(val_bry);		break;
 			case Mustache_tkn_def.Section:			tkn = new Mustache_tkn_section(val_bry);	break;
 			case Mustache_tkn_def.Inverted:			tkn = new Mustache_tkn_inverted(val_bry);	break;
@@ -145,7 +145,7 @@ class Mustache_tkn_data {
 			case Mustache_tkn_def.Comment:
 			case Mustache_tkn_def.Partial:
 			case Mustache_tkn_def.Grp_end:			ws_ignore = true; break;
-			case Mustache_tkn_def.Delimiter_bgn:	rhs_bgn_chk = Mustache_tkn_def.Delimiter_end; break;	// check for "=}}"; TODO: implement delimiter; EX: {{=<% %>=}}
+			case Mustache_tkn_def.Delimiter_bgn:	rhs_bgn_chk = Mustache_tkn_def.Delimiter_end; break;	// check for "=}}"; TODO_OLD: implement delimiter; EX: {{=<% %>=}}
 			case Mustache_tkn_def.Escape_bgn:		rhs_bgn_chk = Mustache_tkn_def.Escape_end; break;		// check for ""
 			case Mustache_tkn_def.Section:
 			case Mustache_tkn_def.Inverted:			ws_ignore = true; parse_grp = true; break;

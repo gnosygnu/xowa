@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys.fmts; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bry_fmt_tst {
-	private final Bry_fmt_fxt fxt = new Bry_fmt_fxt();
+	private final    Bry_fmt_fxt fxt = new Bry_fmt_fxt();
 	@Test  public void Text()			{fxt.Clear().Fmt("a").Test("a");}
 	@Test  public void Key__basic() 	{fxt.Clear().Fmt("~{key}").Vals("a").Test("a");}
 	@Test  public void Key__mult()		{fxt.Clear().Fmt("~{key1}~{key2}").Vals("a", "b").Test("ab");}
@@ -37,8 +37,8 @@ class Bfr_fmt_arg_mok implements Bfr_arg {
 	}
 }
 class Bry_fmt_fxt {
-	private final Bry_fmt fmt = new Bry_fmt(Bry_.Empty, Bry_.Ary_empty, Bfr_fmt_arg.Ary_empty);
-	private final Bry_bfr bfr = Bry_bfr.new_();
+	private final    Bry_fmt fmt = new Bry_fmt(Bry_.Empty, Bry_.Ary_empty, Bfr_fmt_arg.Ary_empty);
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private Object[] vals;
 	public Bry_fmt_fxt Clear() {vals = Object_.Ary_empty; return this;}
 	public Bry_fmt_fxt Fmt(String s) {fmt.Fmt_(s); return this;}

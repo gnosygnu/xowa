@@ -27,7 +27,7 @@ public class Xol_csv_parser_tst {
 	@Test  public void Utf()			{fxt.Tst_load(" ", "\\u00c2\\u00a0");}	// NOTE: 1st String is nbsp;
 }
 class Xol_csv_parser_fxt {
-	Xol_csv_parser parser = Xol_csv_parser.Instance; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	Xol_csv_parser parser = Xol_csv_parser.Instance; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Clear() {}
 	public void Tst_save(String raw, String expd) {		
 		parser.Save(tmp_bfr, Bry_.new_u8(raw));

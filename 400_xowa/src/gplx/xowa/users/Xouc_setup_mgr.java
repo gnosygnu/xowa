@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
-public class Xouc_setup_mgr implements GfoInvkAble {
+public class Xouc_setup_mgr implements Gfo_invk {
 	public Xouc_setup_mgr(Xoue_user user) {this.user = user;}
 	public Xoue_user User() {return user;} private Xoue_user user;
 	private String setup_completed = "";

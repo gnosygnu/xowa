@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
-public class DateAdp implements CompareAble, GfoInvkAble {
+public class DateAdp implements CompareAble, Gfo_invk {
 	public int compareTo(Object obj)		{DateAdp comp = (DateAdp)obj; return under.compareTo(comp.under);}
 	@Override public String toString()		{return XtoStr_gplx_long();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m)  {
@@ -30,7 +30,7 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 			if (ctx.Deny()) return this;
 			return this.Add_day(days);
 		}
-		else										return GfoInvkAble_.Rv_unhandled;			
+		else										return Gfo_invk_.Rv_unhandled;			
 	}	public static final    String Invk_XtoStr_fmt = "XtoStr_fmt", Invk_AddDays = "Add_day";
 	public int Segment(int segmentIdx) {
 		switch (segmentIdx) {

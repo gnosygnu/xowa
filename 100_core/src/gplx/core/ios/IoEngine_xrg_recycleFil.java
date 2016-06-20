@@ -49,11 +49,11 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;
 		time = DateAdp_.Now();
-		uuid = Guid_adp_.new_();
-		rootDirNames = List_adp_.new_(); rootDirNames.Add("z_trash");
+		uuid = Guid_adp_.New();
+		rootDirNames = List_adp_.New(); rootDirNames.Add("z_trash");
 	}
 	public static IoEngine_xrg_recycleFil sysm_(Io_url url) {return new IoEngine_xrg_recycleFil(SysmConst);}
 	public static IoEngine_xrg_recycleFil gplx_(Io_url url) {IoEngine_xrg_recycleFil rv = new IoEngine_xrg_recycleFil(GplxConst); rv.Url_set(url); return rv;}
         public static IoEngine_xrg_recycleFil proto_() {return gplx_(Io_url_.Empty);}
-	public static final int GplxConst = 0, SysmConst = 1;
+	public static final    int GplxConst = 0, SysmConst = 1;
 }

@@ -32,25 +32,25 @@ public class Xop_ctx {
 		this.xnde_tag_regy = wiki.Mw_parser_mgr().Xnde_tag_regy();
 	}
 //		public boolean Scribunto; // CHART
-	public Xoae_app				App()				{return app;} private final Xoae_app app;
-	public Xowe_wiki			Wiki()				{return wiki;} private final Xowe_wiki wiki;
-	public Xol_lang_itm			Lang()				{return lang;} private final Xol_lang_itm lang;
-	public Xop_tkn_mkr			Tkn_mkr()			{return tkn_mkr;} private final Xop_tkn_mkr tkn_mkr;
+	public Xoae_app				App()				{return app;} private final    Xoae_app app;
+	public Xowe_wiki			Wiki()				{return wiki;} private final    Xowe_wiki wiki;
+	public Xol_lang_itm			Lang()				{return lang;} private final    Xol_lang_itm lang;
+	public Xop_tkn_mkr			Tkn_mkr()			{return tkn_mkr;} private final    Xop_tkn_mkr tkn_mkr;
 	public Xoae_page			Page()				{return cur_page;} public void Page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_.Parse_tid_null;
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_.Parse_tid_null;
-	public Xop_amp_wkr			Amp()				{return amp;}	private final Xop_amp_wkr  amp  = new Xop_amp_wkr();
-	public Xop_apos_wkr			Apos()				{return apos;}	private final Xop_apos_wkr apos = new Xop_apos_wkr();
-	public Xop_lnke_wkr			Lnke()				{return lnke;}	private final Xop_lnke_wkr lnke = new Xop_lnke_wkr();
-	public Xop_lnki_wkr			Lnki()				{return lnki;}	private final Xop_lnki_wkr lnki = new Xop_lnki_wkr();
-	public Xop_hdr_wkr			Hdr()				{return hdr;}	private final Xop_hdr_wkr  hdr  = new Xop_hdr_wkr();
-	public Xop_para_wkr			Para()				{return para;}	private final Xop_para_wkr para = new Xop_para_wkr();
-	public Xop_list_wkr			List()				{return list;}	private final Xop_list_wkr list = new Xop_list_wkr();
-	public Xop_tblw_wkr			Tblw()				{return tblw;}	private final Xop_tblw_wkr tblw = new Xop_tblw_wkr();
-	public Xop_xnde_wkr			Xnde()				{return xnde;}	private final Xop_xnde_wkr xnde = new Xop_xnde_wkr();
-	public Xot_invk_wkr			Invk()				{return invk;}	private final Xot_invk_wkr invk = new Xot_invk_wkr();
-	public Xop_curly_wkr		Curly() 			{return curly;} private final Xop_curly_wkr curly = new Xop_curly_wkr();
-	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
+	public Xop_amp_wkr			Amp()				{return amp;}	private final    Xop_amp_wkr  amp  = new Xop_amp_wkr();
+	public Xop_apos_wkr			Apos()				{return apos;}	private final    Xop_apos_wkr apos = new Xop_apos_wkr();
+	public Xop_lnke_wkr			Lnke()				{return lnke;}	private final    Xop_lnke_wkr lnke = new Xop_lnke_wkr();
+	public Xop_lnki_wkr			Lnki()				{return lnki;}	private final    Xop_lnki_wkr lnki = new Xop_lnki_wkr();
+	public Xop_hdr_wkr			Hdr()				{return hdr;}	private final    Xop_hdr_wkr  hdr  = new Xop_hdr_wkr();
+	public Xop_para_wkr			Para()				{return para;}	private final    Xop_para_wkr para = new Xop_para_wkr();
+	public Xop_list_wkr			List()				{return list;}	private final    Xop_list_wkr list = new Xop_list_wkr();
+	public Xop_tblw_wkr			Tblw()				{return tblw;}	private final    Xop_tblw_wkr tblw = new Xop_tblw_wkr();
+	public Xop_xnde_wkr			Xnde()				{return xnde;}	private final    Xop_xnde_wkr xnde = new Xop_xnde_wkr();
+	public Xot_invk_wkr			Invk()				{return invk;}	private final    Xot_invk_wkr invk = new Xot_invk_wkr();
+	public Xop_curly_wkr		Curly() 			{return curly;} private final    Xop_curly_wkr curly = new Xop_curly_wkr();
+	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final    Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
 
 	public boolean					Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
 	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.Max_value;
@@ -307,7 +307,7 @@ public class Xop_ctx {
 	public static Xop_ctx new_main_page(Xowe_wiki wiki)			{return new_(wiki, Xoa_page_.Main_page_bry);}	// HACK: use "Main_Page" to put in valid page title
 	public static Xop_ctx new_(Xowe_wiki wiki, byte[] ttl_bry)	{return new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ttl_bry)));}
 	public static Xop_ctx new_sub_(Xowe_wiki wiki)				{return new_sub_(wiki, wiki.Parser_mgr().Ctx().cur_page);}
-	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
+	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO_OLD: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
 		Xop_ctx rv = new Xop_ctx(wiki, page);
 		new_copy(wiki.Parser_mgr().Ctx(), rv);
 		return rv;

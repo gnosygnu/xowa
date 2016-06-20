@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sys.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
 public class Db_conn {
-	private final    List_adp rls_list = List_adp_.new_();
+	private final    List_adp rls_list = List_adp_.New();
 	public Db_conn(Db_engine engine) {
 		this.engine = engine;
-		sys_mgr = new Db_sys_mgr(this);
+		this.sys_mgr = new Db_sys_mgr(this);
 	}
 	public Db_conn_info			Conn_info()				{return engine.Conn_info();}
 	public Db_conn_props_mgr	Props()					{return engine.Props();}
@@ -40,20 +40,51 @@ public class Db_conn {
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_create(meta); engine.Meta_idx_create(Gfo_usr_dlg_.Noop, meta.Idxs().To_ary());}
 	public void					Meta_tbl_delete(String tbl)														{engine.Meta_tbl_delete(tbl);}
 	public void					Meta_tbl_remake(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_delete(meta.Name()); engine.Meta_tbl_create(meta);}
+	public void					Meta_idx_assert(String tbl, String suffix, String... flds)				{if (engine.Meta_idx_exists(tbl + "__" + suffix)) return; this.Meta_idx_create(tbl, suffix, flds);}
+	public void					Meta_idx_assert(String tbl, String suffix, Dbmeta_idx_fld... flds)		{if (engine.Meta_idx_exists(tbl + "__" + suffix)) return; this.Meta_idx_create(tbl, suffix, flds);}
+	public void					Meta_idx_create(String tbl, String suffix, String... flds)				{engine.Meta_idx_create(Gfo_usr_dlg_.Instance, Dbmeta_idx_itm.new_normal_by_tbl(tbl, suffix, flds));}
+	public void					Meta_idx_create(String tbl, String suffix, Dbmeta_idx_fld... flds)		{engine.Meta_idx_create(Gfo_usr_dlg_.Instance, Dbmeta_idx_itm.new_normal_by_tbl(tbl, suffix, flds));}
 	public void					Meta_idx_create(Dbmeta_idx_itm... idxs)									{engine.Meta_idx_create(Gfo_usr_dlg_.Instance, idxs);}
-	public void					Meta_idx_delete(String idx)														{engine.Meta_idx_delete(idx);}
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... idxs)				{engine.Meta_idx_create(usr_dlg, idxs);}
+	public void					Meta_idx_delete(String idx)														{engine.Meta_idx_delete(idx);}
+	public void					Meta_idx_delete(String tbl, String suffix)										{engine.Meta_idx_delete(tbl + "__" + suffix);}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)									{engine.Meta_fld_append(tbl, fld);}
 	public void					Meta_fld_assert(String tbl, String fld, Dbmeta_fld_tid tid, Object dflt)		{if (!Meta_fld_exists(tbl, fld)) this.Meta_fld_append(tbl, new Dbmeta_fld_itm(fld, tid).Default_(dflt));}
 	public boolean				Meta_tbl_exists(String tbl)														{return engine.Meta_tbl_exists(tbl);}
 	public boolean				Meta_fld_exists(String tbl, String fld)											{return engine.Meta_fld_exists(tbl, fld);}
 	public boolean				Meta_idx_exists(String idx)														{return engine.Meta_idx_exists(idx);}
+	public boolean				Meta_idx_exists(String tbl, String suffix)										{return engine.Meta_idx_exists(tbl + "__" + suffix);}
+	public void					Meta_tbl_assert(Db_tbl... tbls) {
+		boolean dirty = false;
+		for (Db_tbl tbl : tbls) {
+			if (!Meta_tbl_exists(tbl.Tbl_name())) {
+				tbl.Create_tbl();
+				dirty = true;
+			}
+		}
+		if (dirty) this.Meta_mgr().Load_all();
+	}
+	public String Meta_fld_append_if_missing(String tbl_name, Dbmeta_fld_list flds, Dbmeta_fld_itm fld) {
+		String fld_name = fld.Name();
+		if (	this.Meta_tbl_exists(tbl_name)
+			&& !this.Meta_fld_exists(tbl_name, fld_name)) {
+			try {this.Meta_fld_append(tbl_name, fld);}
+			catch (Exception e) {
+				Gfo_log_.Instance.Warn("failed to append fld", "conn", this.Conn_info().Db_api(), "tbl", tbl_name, "fld", fld_name, "err", Err_.Message_gplx_log(e));
+				fld_name = Dbmeta_fld_itm.Key_null;
+			}
+		}
+		else
+			fld_name = flds.Add(fld);
+		return fld_name;
+	}
 	public Dbmeta_tbl_mgr		Meta_mgr()																		{return engine.Meta_mgr();}
 	public Db_stmt				Stmt_insert(String tbl, Dbmeta_fld_list flds)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, flds.To_str_ary_wo_autonum()));}
 	public Db_stmt				Stmt_insert(String tbl, String... cols)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, cols));}
 	public Db_stmt				Stmt_update(String tbl, String[] where, String... cols)					{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, cols));}
 	public Db_stmt				Stmt_update_exclude(String tbl, Dbmeta_fld_list flds, String... where)	{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, flds.To_str_ary_exclude(where)));}
 	public Db_stmt				Stmt_delete(String tbl, String... where)									{return engine.Stmt_by_qry(Db_qry_delete.new_(tbl, where));}
+	public Db_stmt				Stmt_select_all(String tbl, Dbmeta_fld_list flds)								{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, String_.Ary_empty, flds.To_str_ary(), null));}
 	public Db_stmt				Stmt_select(String tbl, String[] cols, String... where)					{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, cols, null));}
 	public Db_stmt				Stmt_select(String tbl, Dbmeta_fld_list flds, String... where)			{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), null));}
 	public Db_stmt				Stmt_select_order(String tbl, Dbmeta_fld_list flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), orderbys));}
@@ -85,7 +116,10 @@ public class Db_conn {
 		try {return rdr.Move_next() ? rdr.Read_at(0) : null;}
 		finally {rdr.Rls();}
 	}
-	public void					Rls_reg(Rls_able rls) {rls_list.Add(rls);}
+	public void					Rls_reg(Rls_able rls) {
+		if (this == Db_conn_.Noop) return;	// ignore Db_conn_.Noop, else memory leak
+		rls_list.Add(rls);
+	}
 	public void					Rls_conn() {
 		int len = rls_list.Count();
 		for (int i = 0; i < len; ++i) {
@@ -96,7 +130,10 @@ public class Db_conn {
 		engine.Conn_term();
 		Db_conn_pool.Instance.Del(engine.Conn_info());
 	}
-
+	public void Reopen_conn() {
+		engine.Conn_open();
+		Db_conn_pool.Instance.Add_existing(this);
+	}
 	public Db_stmt				Stmt_select_max(String tbl, String col, String... where) {
 		Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl, String_.Ary(String_.Format("Max({0}) AS {0}", col)), where, null, null, null, null);
 		return engine.Stmt_by_qry(qry);

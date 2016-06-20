@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.xowa.addons.apps.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
+import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*;
 import gplx.xowa.guis.views.boots.*;	
-public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
+public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xoa_gui_mgr(Xoae_app app) {
-		this.ev_mgr = GfoEvMgr.new_(this);
+		this.ev_mgr = new Gfo_evt_mgr(this);
 		this.app = app;
 		this.browser_win = new Xog_win_itm(app, this);
 		bnd_mgr = new Xog_bnd_mgr(browser_win);
@@ -32,7 +33,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		menu_mgr = new Xog_menu_mgr(this);
 		search_cfg = new Srch_search_cfg(app);
 	}
-	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xog_win_itm Browser_win() {return browser_win;} private final    Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
@@ -59,11 +60,17 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		layout_Init();
 		bnd_mgr.Init();
 		menu_mgr.Init_by_app(app);
+		if (app.Mode().Tid_is_gui()) {
+			app.Gui__cbk_mgr().Reg(new gplx.xowa.guis.cbks.swts.Xog_cbk_wkr__swt(this));
+			Gfo_log_.Instance__set(new gplx.xowa.guis.cbks.swts.Gfo_log__swt(app.Gui__cbk_mgr()
+				, Gfo_log_.New_url(app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "app", "tmp", "xolog"))
+				, new gplx.core.logs.Gfo_log_itm_wtr__csv()));
+		}
 	}
 	public void Kit_(Gfui_kit kit) {
 		this.kit = kit;
 		kit.Kit_init(browser_win.Usr_dlg());
-		kit.Kit_term_cbk_(GfoInvkAbleCmd.new_(app, Xoae_app.Invk_term_cbk));
+		kit.Kit_term_cbk_(Gfo_invk_cmd.New_by_key(app, Xoae_app.Invk_term_cbk));
 		browser_win.Init_by_kit(kit);
 		layout.Init(browser_win);
 		cmd_mgr.Init_by_kit(app);
@@ -71,7 +78,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
-		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
+		Gfo_evt_mgr_.Sub_same_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 		app.Sys_cfg().Lang_(app.Sys_cfg().Lang());	// NOTE: force refresh of lang. must occur after after gui_mgr init, else menu lbls will break
 	}
 	public void Lang_changed(Xol_lang_itm lang) {
@@ -82,7 +89,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		if		(ctx.Match(k, Invk_kit))							return kit;
 		else if	(ctx.Match(k, Invk_kit_))							this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
 		else if	(ctx.Match(k, Invk_run))							Run(Rls_able_.Null);
-		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", gplx.gfui.Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
 		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
 		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
 		else if	(ctx.Match(k, Invk_bindings))						return ipt_cfgs;

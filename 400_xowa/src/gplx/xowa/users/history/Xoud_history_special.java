@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.xowa.specials.*;
-public class Xoud_history_special implements Xows_page {
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__page_history;}
+public class Xoud_history_special implements Xow_special_page {
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__page_history;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		Xoa_app app = wiki.App();
@@ -29,5 +29,5 @@ public class Xoud_history_special implements Xows_page {
 		page.Hdump_data().Body_(bfr.To_bry_and_rls());
 	}
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

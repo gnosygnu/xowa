@@ -31,5 +31,5 @@ NOTE_1:tabs
 .. note that they all need to be ws in order to be trimmed out
 .. note that shrinking the src[] would be (a) memory-expensive (b) complexity-expensive (many functions assume a static src size)
 .. note that "\t\t\t\t\t" was the 1st attempt, but this resulted in exponential growth of "\t"s with each save (1 -> 5 -> 25 -> 125). "\t\s\s\s\s" is less worse with its linear growth (1 -> 5 -> 10)
-. TODO: swap out the "&#09;" at point of file-read;
+. TODO_OLD: swap out the "&#09;" at point of file-read;
 */

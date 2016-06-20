@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*;
 import gplx.core.threads.*;
 class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd {	public static final String KEY_dump = "wiki.unzip";
 	public Xoi_cmd_wiki_unzip(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.dump_date = dump_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, dump_date, dump_type;

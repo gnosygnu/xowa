@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
 public class Fsd_thm_tbl implements Rls_able {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
-	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
+	public final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final    String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
+	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
 		this.conn = conn; this.mnt_id = mnt_id; this.schema_thm_page = schema_thm_page;
 		this.tbl_name = schema_is_1 ? "fsdb_xtn_thm" : "fsdb_thm";
@@ -54,22 +54,25 @@ public class Fsd_thm_tbl implements Rls_able {
 	}
 	public void Insert(int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear()
+		this.Insert(stmt_insert, id, thm_owner_id, width, height, thumbtime, page, bin_db_id, size, Modified_null_str, Hash_null);
+	}
+	public void Insert(Db_stmt stmt, int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size, String modified, String hash_md5) {
+		stmt.Clear()
 		.Val_int(fld_id, id)
 		.Val_int(fld_owner_id, thm_owner_id)
 		.Val_int(fld_w, width)
 		.Val_int(fld_h, height);
 		if (schema_thm_page) {
-			stmt_insert.Val_double	(fld_time, Xof_lnki_time.Db_save_double(thumbtime));
-			stmt_insert.Val_int		(fld_page, Xof_lnki_page.Db_save_int(page));
+			stmt.Val_double		(fld_time, Xof_lnki_time.Db_save_double(thumbtime));
+			stmt.Val_int		(fld_page, Xof_lnki_page.Db_save_int(page));
 		}
 		else
-			stmt_insert.Val_int		(fld_time, Xof_lnki_time.Db_save_int(thumbtime));
-		stmt_insert
+			stmt.Val_int		(fld_time, Xof_lnki_time.Db_save_int(thumbtime));
+		stmt
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_long(fld_size, size)
-		.Val_str(fld_modified, Modified_null_str)
-		.Val_str(fld_hash, Hash_null)
+		.Val_str(fld_modified, modified)
+		.Val_str(fld_hash, hash_md5)
 		.Exec_insert();
 	}
 	public boolean Select_itm_by_w_exact(int dir_id, int fil_id, Fsd_thm_itm thm) {
@@ -92,7 +95,7 @@ public class Fsd_thm_tbl implements Rls_able {
 	}
 	public boolean Select_itm_by_w_near(int dir_id, int fil_id, Fsd_thm_itm thm) {
 		if (stmt_select_by_fil_near == null) stmt_select_by_fil_near = conn.Stmt_select(tbl_name, flds, fld_owner_id);
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Db_rdr rdr = stmt_select_by_fil_near.Clear().Crt_int(fld_owner_id, fil_id).Exec_select__rls_manual();
 		try {
 			while (rdr.Move_next()) {
@@ -104,7 +107,7 @@ public class Fsd_thm_tbl implements Rls_able {
 		}
 		finally {rdr.Rls();}
 	}
-	private boolean Ctor_by_load(Fsd_thm_itm itm, Db_rdr rdr, int dir_id) {
+	public boolean Ctor_by_load(Fsd_thm_itm itm, Db_rdr rdr, int dir_id) {
 		int thm_id = rdr.Read_int(fld_id);
 		int fil_id = rdr.Read_int(fld_owner_id);
 		int w = rdr.Read_int(fld_w);
@@ -126,7 +129,7 @@ public class Fsd_thm_tbl implements Rls_able {
 		itm.Ctor(mnt_id, dir_id, fil_id, thm_id, bin_db_id, w, h, time, page, size, modified, hash);
 		return true;
 	}
-	public static final DateAdp Modified_null = null;
+	public static final    DateAdp Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Count(); if (len == 0) return Bool_.N;

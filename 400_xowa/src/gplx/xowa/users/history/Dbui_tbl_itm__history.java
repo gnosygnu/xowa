@@ -23,7 +23,7 @@ import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import
 public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	private final    Xoa_app app; private final    Xoud_history_tbl tbl;
 	private final    Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private final    Bridge_msg_bldr msg_bldr;
 	public Dbui_tbl_itm__history(Xoa_app app, Xoud_history_tbl tbl) {this.app = app; this.tbl = tbl; this.msg_bldr = app.Html__bridge_mgr().Msg_bldr();}
 	public byte[] Key() {return key;} private static final    byte[] key = Bry_.new_a7("history");
@@ -35,7 +35,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 		dbui_mgr.Init_by_bridge(bridge_mgr);
 		dbui_mgr.Add(this);
 	}
-	private final    List_adp select_list = List_adp_.new_();
+	private final    List_adp select_list = List_adp_.New();
 	public void Select(Bry_bfr bfr, int top) {
 		tbl.Select_by_top(select_list, 100);
 		Xoud_history_row[] db_rows = (Xoud_history_row[])select_list.To_ary_and_clear(Xoud_history_row.class);

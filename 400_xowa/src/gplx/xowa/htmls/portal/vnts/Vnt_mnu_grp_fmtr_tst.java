@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal.*;
 import org.junit.*; import gplx.xowa.langs.vnts.*;
 public class Vnt_mnu_grp_fmtr_tst {		
-	@Before public void init() {fxt.Clear();} private final Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
+	@Before public void init() {fxt.Clear();} private final    Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
 	@Test  public void Basic() {
 //			fxt.Test_to_str("Earth", "zh-hk", String_.Concat_lines_nl_skip_last
 //			( ""
@@ -40,7 +40,7 @@ public class Vnt_mnu_grp_fmtr_tst {
 	}
 }
 class Vnt_mnu_grp_fmtr_fxt {
-	private final Xol_vnt_regy mgr = new Xol_vnt_regy();
+	private final    Xol_vnt_regy mgr = new Xol_vnt_regy();
 	public void Clear() {
 		this.Init_grp("Choose lang", "zh-hans", "Simplified", "zh-hant", "Traditional", "zh-cn", "China", "zh-hk", "Hong Kong", "zh-mo", "Macau", "zh-sg", "Singapore", "zh-tw", "Taiwan");
 	}
@@ -59,7 +59,7 @@ class Vnt_mnu_grp_fmtr_fxt {
 	}
 	public void Test_to_str(String page_href, String selected_vnt, String expd) {
 		Vnt_mnu_grp_fmtr vnt_grp_fmtr = new Vnt_mnu_grp_fmtr();
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		vnt_grp_fmtr.Init(mgr, Bry_.new_u8(page_href), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_u8(selected_vnt));
 		vnt_grp_fmtr.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());

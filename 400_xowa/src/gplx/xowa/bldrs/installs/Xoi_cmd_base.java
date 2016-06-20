@@ -34,12 +34,12 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 //			install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.end", "import.end ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
 		return true;
 	}
-	public GfoInvkAble Owner() {return owner;} public Xoi_cmd_base Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Xoi_cmd_base Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public void Async_run() {
 		running = true;
 //			install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
+		Thread_adp_.Start_by_key(this.Async_key(), this, Invk_process_async);
 	}
 	public boolean Async_running() {return running;} private boolean running;
 	public void Process_async() {
@@ -66,7 +66,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_process_async))			Process_async();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_process_async = "run_async", Invk_owner = "owner";
 }
@@ -103,7 +103,7 @@ class Xoi_cmd_search2_build extends Xoi_cmd_base {
 	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
 			wiki.Db_mgr_as_sql().Category_version_update(false);
-			gplx.xowa.addons.apps.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		}
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {

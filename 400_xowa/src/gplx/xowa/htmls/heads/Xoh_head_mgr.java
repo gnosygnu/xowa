@@ -172,7 +172,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	}
 }
 class Xoh_head_wkr {
-	private final    List_adp list = List_adp_.size_(Xoh_head_itm__base.Idx__max);
+	private final    List_adp list = List_adp_.New_w_size(Xoh_head_itm__base.Idx__max);
 	public int Len() {return list.Count();}
 	public void Clear() {list.Clear();}
 	public void Add(Xoh_head_itm__base itm) {list.Add(itm);}

@@ -90,8 +90,8 @@ class Mok_str_mgr extends Mok_mgr_base {
 		this.flds_len = flds_len;
 	}
 	public void Clear() {itms.Clear();}
-	@Override public To_str_able[] Itms() {return (To_str_able[])itms.To_ary(To_str_able.class);} private List_adp itms = List_adp_.new_();
-	private List_adp flds = List_adp_.new_();
+	@Override public To_str_able[] Itms() {return (To_str_able[])itms.To_ary(To_str_able.class);} private List_adp itms = List_adp_.New();
+	private List_adp flds = List_adp_.New();
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		flds.Add(String_.new_u8(src, bgn, end));
 		return true;

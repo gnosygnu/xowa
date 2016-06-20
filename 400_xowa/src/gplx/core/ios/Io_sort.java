@@ -23,9 +23,9 @@ public class Io_sort {
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter.Instance, key_gen);}
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, ComparerAble row_comparer, Io_line_rdr_key_gen key_gen) {
 		Io_line_rdr rdr = new Io_line_rdr(usr_dlg, src_fil_gen.Prv_urls()).Load_len_(4 * Io_mgr.Len_kb).Key_gen_(key_gen);	// NOTE: do not set load_len to memory_max; only want to load in increments
-		List_adp rv = List_adp_.new_();
-		Bry_bfr bfr = Bry_bfr.reset_(Const_bfr_max); int size_cur = 0;
-		List_adp row_list = List_adp_.new_();
+		List_adp rv = List_adp_.New();
+		Bry_bfr bfr = Bry_bfr_.Reset(Const_bfr_max); int size_cur = 0;
+		List_adp row_list = List_adp_.New();
 		while (true) {
 			boolean reading = rdr.Read_next(); 
 			int size_row = rdr.Itm_pos_end() - rdr.Itm_pos_bgn();

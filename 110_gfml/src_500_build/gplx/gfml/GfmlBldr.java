@@ -23,7 +23,7 @@ public class GfmlBldr {
 	@gplx.Internal protected GfmlFrame_nde		CurNdeFrame() {return curNdeFrame;} GfmlFrame_nde curNdeFrame;
 	@gplx.Internal protected GfmlNde			CurNde() {return curNdeFrame.CurNde();}
 	@gplx.Internal protected GfmlTypeMgr		TypeMgr() {return typeMgr;} GfmlTypeMgr typeMgr = GfmlTypeMgr.new_();
-	@gplx.Internal protected Hash_adp				Vars() {return vars;} Hash_adp vars = Hash_adp_.new_();
+	@gplx.Internal protected Hash_adp				Vars() {return vars;} Hash_adp vars = Hash_adp_.New();
 	@gplx.Internal protected int				StreamPos()	{return streamPos;} int streamPos;
 	@gplx.Internal protected void				ThrowErrors_set(boolean v) {throwErrors = v;} private boolean throwErrors = true;
 	@gplx.Internal protected int PrvSymType() {return prvSymType;} @gplx.Internal protected void PrvSymType_set(int v) {prvSymType = v;} int prvSymType = GfmlNdeSymType.Null;

@@ -39,9 +39,27 @@ public class Gfdb_rdr_utl_ {
 		}
 		return CompareAble_.Same;
 	}
-	public static void Stmt_args(Db_stmt stmt, Dbmeta_fld_itm[] flds, int len, Db_rdr rdr) {
-		for (int i = 0; i < len; ++i) {
+	public static void Stmt_args(Db_stmt stmt, Dbmeta_fld_itm[] flds, int bgn, int end, Db_rdr rdr) {
+		for (int i = bgn; i < end; ++i) {
 			Dbmeta_fld_itm fld = flds[i];
+			String fld_name = fld.Name();
+			int tid = fld.Type().Tid_ansi();
+			switch (tid) {
+				case Dbmeta_fld_tid.Tid__bool:		stmt.Val_bool_as_byte	(fld_name, rdr.Read_bool_by_byte(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__byte:		stmt.Val_byte			(fld_name, rdr.Read_byte(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__int:		stmt.Val_int			(fld_name, rdr.Read_int(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__long:		stmt.Val_long			(fld_name, rdr.Read_long(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__float:		stmt.Val_float			(fld_name, rdr.Read_float(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__double:	stmt.Val_double			(fld_name, rdr.Read_double(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__str:		stmt.Val_str			(fld_name, rdr.Read_str(fld_name)); break;
+				case Dbmeta_fld_tid.Tid__bry:		stmt.Val_bry			(fld_name, rdr.Read_bry(fld_name)); break;
+				default:							throw Err_.new_unhandled(tid);
+			}
+		}
+	}
+	public static void Stmt_args(Db_stmt stmt, Dbmeta_fld_list flds, int bgn, int end, Db_rdr rdr) {
+		for (int i = bgn; i < end; ++i) {
+			Dbmeta_fld_itm fld = flds.Get_at(i);
 			String fld_name = fld.Name();
 			int tid = fld.Type().Tid_ansi();
 			switch (tid) {

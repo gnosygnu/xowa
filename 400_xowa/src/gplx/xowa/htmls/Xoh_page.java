@@ -23,6 +23,7 @@ public class Xoh_page implements Xoa_page {
 	public Xow_wiki					Wiki()				{return wiki;} private Xow_wiki wiki;
 	public Xoa_url					Url()				{return page_url;} private Xoa_url page_url;
 	public Xoa_ttl					Ttl()				{return page_ttl;} private Xoa_ttl page_ttl;
+
 	// props
 	public boolean						Exists()			{return exists;} public Xoh_page Exists_n_() {exists = false; return this;} private boolean exists = true;
 	public int						Page_id()			{return page_id;} private int page_id;
@@ -41,6 +42,8 @@ public class Xoh_page implements Xoa_page {
 	public void						Xtn_gallery_packed_exists_y_() {}
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
+	public byte[]					Redirect_to_ttl() {return redirect_to_ttl;} private byte[] redirect_to_ttl; public void Redirect_to_ttl_(byte[] v) {this.redirect_to_ttl = v;}
+
 
 	// util
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();

@@ -43,8 +43,8 @@ public interface List_adp extends EnumerAble, List_adp__getable {
 	void Shuffle();
 }
 class List_adp_obj extends List_adp_base implements List_adp {
-	public List_adp_obj() {super();}		
-	public List_adp_obj(int v) {super(v);}	
+	public List_adp_obj() {super();}
+	public List_adp_obj(int v) {super(v);}
 }
 class List_adp_noop implements List_adp {
 	public int Count() {return 0;}
@@ -60,7 +60,7 @@ class List_adp_noop implements List_adp {
 	public void Del_range(int bgn, int end) {}
 	public void Clear() {}
 	public int Idx_last() {return -1;}
-	public int Idx_of(Object o) {return List_adp_.NotFound;}
+	public int Idx_of(Object o) {return List_adp_.Not_found;}
 	public void Move_to(int elemPos, int newPos) {}
 	public void Resize_bounds(int i) {}
 	public Object To_ary(Class<?> memberType) {return Object_.Ary_empty;}

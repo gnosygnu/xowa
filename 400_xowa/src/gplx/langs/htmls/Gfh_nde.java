@@ -51,7 +51,7 @@ public class Gfh_nde {
 		return null;
 	}
 	byte[] Atrs_vals_by_pos(byte[] src, int quote_byte, int bgn, int end) {
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.core.envs.*;
-public class Xoapi_selection implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.core.envs.*;
+public class Xoapi_selection implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
@@ -25,7 +25,7 @@ public class Xoapi_selection implements GfoInvkAble {
 	}
 	private boolean Active_tab_is_null() {return win.Tab_mgr().Active_tab_is_null();}
 	public void Copy()			{if (Active_tab_is_null()) return; win.Kit().Clipboard().Copy(win.Active_html_itm().Html_selected_get_text_or_href());}
-	public void Select_all()	{if (Active_tab_is_null()) return; GfoInvkAble_.InvkCmd(win.Win_box().Kit().Clipboard(), gplx.gfui.Gfui_clipboard_.Invk_select_all);}
+	public void Select_all()	{if (Active_tab_is_null()) return; Gfo_invk_.Invk_by_key(win.Win_box().Kit().Clipboard(), Gfui_clipboard_.Invk_select_all);}
 	public void Save_file_as() {
 		if (this.Active_tab_is_null()) return;
 		Xog_html_itm html_itm = win.Tab_mgr().Active_tab().Html_itm();
@@ -43,7 +43,7 @@ public class Xoapi_selection implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_copy)) 					this.Copy();
 		else if	(ctx.Match(k, Invk_select_all)) 			this.Select_all();
 		else if	(ctx.Match(k, Invk_save_file_as)) 			this.Save_file_as();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

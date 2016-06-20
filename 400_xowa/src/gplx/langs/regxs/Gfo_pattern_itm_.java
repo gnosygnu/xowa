@@ -19,7 +19,7 @@ package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
 public class Gfo_pattern_itm_ {
 	public static final byte Tid_text = 0, Tid_wild = 1;
 	public static Gfo_pattern_itm[] Compile(byte[] raw) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int raw_len = raw.length;
 		int itm_bgn = -1;
 		Gfo_pattern_itm itm = null;

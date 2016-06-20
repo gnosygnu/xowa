@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import java.io.InputStream;
+import gplx.core.ios.streams.*;
 public class Io_stream_rdr_process implements Io_stream_rdr {
 	    private Process process;
     private InputStream stream_read;

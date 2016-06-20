@@ -22,11 +22,11 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wiki
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
-	private List_adp itms = List_adp_.new_();
+	private List_adp itms = List_adp_.New();
 	private Insider_html_bldr html_bldr;
 	public Insider_xtn_skin_itm(Insider_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("Insider");
+	public byte[] Key() {return KEY;} public static final    byte[] KEY = Bry_.new_a7("Insider");
 	public List_adp Itms() {return itms;}
 	public void Add(byte[] itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
@@ -35,7 +35,7 @@ class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 }
 public class Insider_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Insider_xtn_mgr xtn_mgr;
-	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_ttl = Bry_bfr_.Reset(255);
 	private List_adp list; private int list_len;
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Insider_html_bldr(Insider_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
@@ -59,7 +59,7 @@ public class Insider_html_bldr implements gplx.core.brys.Bfr_arg {
 			fmtr_itm.Bld_bfr(bfr, user_ttl_bry, user_ttl.Page_txt());
 		}
 	}
-	private static final Bry_fmtr
+	private static final    Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id='p-insiders' class='portal' role='navigation'>"
 	, "  <h3>~{hdr}</h3>"

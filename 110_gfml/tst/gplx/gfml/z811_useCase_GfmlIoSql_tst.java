@@ -39,7 +39,7 @@ public class z811_useCase_GfmlIoSql_tst {
 		Tfds.Eq_ary_str(To_str(expd.Nde()), To_str(actl));
 	}
 	String[] To_str(GfmlNde nde) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < nde.SubObjs_Count(); i++) {
 			GfmlAtr atr = (GfmlAtr)nde.SubObjs_GetAt(i);
 			list.Add(atr.Key() +  "=" + atr.DatTkn().Raw());

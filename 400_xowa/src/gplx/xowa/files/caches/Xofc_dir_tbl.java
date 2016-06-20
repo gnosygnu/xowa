@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 class Xofc_dir_tbl implements Rls_able {
-	private String tbl_name = "file_cache_dir"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private String tbl_name = "file_cache_dir"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_id, fld_name;
-	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
+	private Db_conn conn; private final    Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
 	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";

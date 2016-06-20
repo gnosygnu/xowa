@@ -19,7 +19,7 @@ package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.nss.*;
-public class Xoctg_html_mgr implements GfoInvkAble {
+public class Xoctg_html_mgr implements Gfo_invk {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
 	private final    Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
 	private final    Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
@@ -72,7 +72,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			}
 			itm.Set__ttl__sortkey(itm_ttl, itm.Sort_key());
 		}
-	}	List_adp title_list = List_adp_.new_(); static final    byte[] Bry_missing = Bry_.new_a7("missing");
+	}	List_adp title_list = List_adp_.New(); static final    byte[] Bry_missing = Bry_.new_a7("missing");
 	private void Add_titles(List_adp title_list, Xoctg_view_grp grp) {
 		int len = grp.Itms().length;
 		for (int i = 0; i < len; i++) {
@@ -114,7 +114,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_grp_max))		return mgr_subcs.Grp_max();
 		else if	(ctx.Match(k, Invk_grp_max_))		{int grp_max = m.ReadInt("v"); mgr_subcs.Grp_max_(grp_max); mgr_files.Grp_max_(grp_max); mgr_pages.Grp_max_(grp_max);}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_grp_max = "grp_max", Invk_grp_max_ = "grp_max_";
 }

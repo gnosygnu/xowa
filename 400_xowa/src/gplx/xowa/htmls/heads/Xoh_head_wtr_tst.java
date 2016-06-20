@@ -44,7 +44,7 @@ public class Xoh_head_wtr_tst {
 	}
 }
 class Xoh_head_wtr_fxt {		
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
+	private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public Xoh_head_wtr Wtr() {return wtr;} private Xoh_head_wtr wtr = new Xoh_head_wtr();
 	public void Clear() {
 		wtr.Init(bfr);

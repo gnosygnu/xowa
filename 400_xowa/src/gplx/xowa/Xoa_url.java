@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.net.*; import gplx.xowa.apps.urls.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.apps.urls.*;
 import gplx.xowa.htmls.hrefs.*;
 public class Xoa_url {
 	public int				Tid() {return tid;} private int tid;
@@ -27,7 +27,7 @@ public class Xoa_url {
 	public String			Anch_str() {return anch_bry == null ? null : String_.new_u8(anch_bry);}
 	public byte[][]			Segs_ary() {return segs_ary;} private byte[][] segs_ary;
 	public Gfo_qarg_itm[]	Qargs_ary() {return qargs_ary;} public Xoa_url Qargs_ary_(Gfo_qarg_itm[] v) {qargs_ary = v; return this;} private Gfo_qarg_itm[] qargs_ary = Gfo_qarg_itm.Ary_empty;
-	public Gfo_qarg_mgr		Qargs_mgr() {if (qargs_mgr == null) qargs_mgr = new Gfo_qarg_mgr().Load(qargs_ary); return qargs_mgr;} private Gfo_qarg_mgr qargs_mgr;
+	public Gfo_qarg_mgr_old	Qargs_mgr() {if (qargs_mgr == null) qargs_mgr = new Gfo_qarg_mgr_old().Load(qargs_ary); return qargs_mgr;} private Gfo_qarg_mgr_old qargs_mgr;
 	public byte				Protocol_tid() {return protocol_tid;} private byte protocol_tid;
 	public byte[]			Protocol_bry() {return protocol_bry;} private byte[] protocol_bry;
 	public boolean				Protocol_is_relative() {return protocol_is_relative;} private boolean protocol_is_relative;
@@ -100,13 +100,13 @@ public class Xoa_url {
 		if (show_qargs || qargs_ary.length > 0) {
 			Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 			bfr.Add(rv);
-			Gfo_qarg_mgr.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
+			Gfo_qarg_mgr_old.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
 			return bfr.To_bry_and_rls();
 		}
 		else
 			return rv;
 	}
-	public static final Xoa_url Null = null;
+	public static final    Xoa_url Null = null;
 	public static Xoa_url blank() {return new Xoa_url();}
 	public static Xoa_url new_(byte[] wiki, byte[] page) {
 		Xoa_url rv = new Xoa_url();

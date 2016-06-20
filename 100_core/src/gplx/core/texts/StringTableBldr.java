@@ -52,6 +52,6 @@ public class StringTableBldr {
 	
 	public static StringTableBldr new_() {return new StringTableBldr();} StringTableBldr() {}
 	Ordered_hash cols = Ordered_hash_.New();
-	List_adp rows = List_adp_.new_();
+	List_adp rows = List_adp_.New();
 	String_bldr sb = String_bldr_.new_();
 }

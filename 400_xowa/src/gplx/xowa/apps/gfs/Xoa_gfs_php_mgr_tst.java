@@ -35,7 +35,7 @@ public class Xoa_gfs_php_mgr_tst {
 	}
 }
 class Xoa_gfs_php_mgr_fxt {
-	private Bry_bfr bfr = Bry_bfr.new_();
+	private Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {}
 	public void Test_Xto_gfs(String raw, String expd) {
 		byte[] actl = Xoa_gfs_php_mgr.Xto_gfs(bfr, Bry_.new_u8(raw));

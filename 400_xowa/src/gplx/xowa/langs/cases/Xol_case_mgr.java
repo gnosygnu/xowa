@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*; import gplx.core.intls.*;
-public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
-	private Bry_bfr tmp_bfr = Bry_bfr.new_(); private Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
+public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
+	private Bry_bfr tmp_bfr = Bry_bfr_.New(); private Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
 	public Xol_case_mgr(byte tid) {this.tid = tid;}
 	public byte Tid() {return tid;} private byte tid;
 	public Gfo_case_itm Get_or_null(byte bgn_byte, byte[] src, int bgn, int end) {
@@ -130,7 +130,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add_bulk))				Add_bulk(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_clear))					throw Err_.new_unimplemented();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_clear = "clear", Invk_add_bulk = "add_bulk";
 }

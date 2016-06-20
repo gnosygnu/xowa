@@ -79,7 +79,7 @@ class Mock_scrib_fxt_ {
 		return rv;
 	}
 	public static String Kvp_vals_to_str(Keyval[] ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);

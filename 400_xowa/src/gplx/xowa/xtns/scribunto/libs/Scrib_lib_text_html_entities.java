@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 class Scrib_lib_text_html_entities {
 	public static Keyval[] new_() {
 		Keyval[] rv = new Keyval[1510];
-		Int_obj_ref idx = Int_obj_ref.zero_();			
+		Int_obj_ref idx = Int_obj_ref.New_zero();			
 new_itm_(rv, idx, Bry_.New_by_ints(9), "&Tab;");
 new_itm_(rv, idx, Bry_.New_by_ints(10), "&NewLine;");
 new_itm_(rv, idx, Bry_.New_by_ints(33), "&excl;");

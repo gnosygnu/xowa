@@ -21,8 +21,8 @@ import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_filepath_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
-	private final Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
+	private final    Xop_fxt fxt = new Xop_fxt();
+	private final    Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
 	private Xowe_wiki en_wiki, commons_wiki;
 	@Before public void init() {
 		fxt.Reset();
@@ -49,7 +49,7 @@ public class Pfunc_filepath_tst {
 	}
 	@Test  public void Wiki_is_commons() {
 		fxt.Init_page_create(commons_wiki, "File:A.png", "");
-		commons_wiki.Tdb_fsys_mgr().Tdb_dir_regy()[Xotdb_dir_info_.Tid_page].Ext_tid_(gplx.core.ios.Io_stream_.Tid_raw);	
+		commons_wiki.Tdb_fsys_mgr().Tdb_dir_regy()[Xotdb_dir_info_.Tid_page].Ext_tid_(gplx.core.ios.streams.Io_stream_.Tid_raw);	
 		mock_wkr.Redirect_("A.png", "A.png").Repo_idx_(1);
 		fxt.Test_parse_tmpl_str_test("{{filepath:A.png}}", "{{test}}", "file:///mem/xowa/file/commons/trg/orig/7/0/1/c/A.png");
 	}

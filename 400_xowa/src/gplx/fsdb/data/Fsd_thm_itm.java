@@ -44,8 +44,16 @@ public class Fsd_thm_itm {
 		this.w = comp.w; this.h = comp.h; this.time = comp.time; this.page = comp.page;
 		this.size = comp.size; this.modified = comp.modified; this.hash = comp.hash;			
 	}
-	public static final Fsd_thm_itm Null = null;
-	public static final Fsd_thm_itm[] Ary_empty = new Fsd_thm_itm[0];
+	public int Db_row_size() {return Db_row_size_fixed;}
+	private static final int Db_row_size_fixed = 
+		  (7 * 4)	// 7 ints
+		+ (2 * 8)	// 1 long; 1 double
+		+ 32		// hash_md5
+		+ 14		// modified_on
+	;
+
+	public static final    Fsd_thm_itm Null = null;
+	public static final    Fsd_thm_itm[] Ary_empty = new Fsd_thm_itm[0];
 	public static Fsd_thm_itm new_() {return new Fsd_thm_itm();} Fsd_thm_itm() {}
 }
 class Fsdb_thm_itm_sorter implements gplx.core.lists.ComparerAble {
@@ -56,5 +64,5 @@ class Fsdb_thm_itm_sorter implements gplx.core.lists.ComparerAble {
 			comp =	Double_.Compare	(lhs.Time()	, rhs.Time());	if (comp != CompareAble_.Same) return  comp;	// sort by increasing time
 		return		Int_.Compare	(lhs.Page()	, rhs.Page());													// sort by increasing page
 	}
-	public static final Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
+	public static final    Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
 }

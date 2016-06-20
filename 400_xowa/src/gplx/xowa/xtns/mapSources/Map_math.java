@@ -112,7 +112,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		}
 		step = 2;
 	}
-	private static final byte[] Bry_deg = Bry_.new_u8("°"), Bry_quot = Bry_.new_a7("&quot;");
+	private static final    byte[] Bry_deg = Bry_.new_u8("°"), Bry_quot = Bry_.new_a7("&quot;");
 	public byte[] Get_dms(byte[] plus, byte[] minus) { // REF.MW: getDMSString
 		if (step < 2) Set_coord();
 		double deg = coord_deg;
@@ -244,7 +244,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		else if	(val == -1)					return 9;
 		else								return 4;
 	}
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
 	public static byte[] Parse_input_normalize(Bry_bfr bfr, byte[] src) {
 		/*
 		$w = str_replace( array( '‘', '’', '′' ), "'", $input );
@@ -260,23 +260,23 @@ class Map_math {// REF.MW:MapSources_math.php
 		return Bry_.Trim(src);
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
-	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
-	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW_const.en
+	public static final    byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
+	private static final    Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW_const.en
 	.Add_bry_byte(Dir_lat_bry			, Dir_lat_id)
 	.Add_bry_byte(Dir_long_bry			, Dir_long_id)
 	;
-	private static final byte[] 
+	private static final    byte[] 
 	  Compass_N = new byte[] {Byte_ascii.Ltr_N}
 	, Compass_E = new byte[] {Byte_ascii.Ltr_E}
 	, Compass_S = new byte[] {Byte_ascii.Ltr_S}
 	, Compass_W = new byte[] {Byte_ascii.Ltr_W}
 	;
 	private static final byte Input_byte_degree = Byte_ascii.Slash;	// NOTE: ugly cheat to avoid using multi-byte char; note that all "/" are swapped out to " ", so any remaining "/" was added by the normalizer; EX:  "123° 4/5" -> "123/ 4 5"
-	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
-	private static final int Input_units_len = Input_units.length;
-	private static final Btrie_slim_mgr Trie__normalize__apos = Btrie_slim_mgr.cs()
+	private static final    byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
+	private static final    int Input_units_len = Input_units.length;
+	private static final    Btrie_slim_mgr Trie__normalize__apos = Btrie_slim_mgr.cs()
 	.Add_replace_many	(Byte_ascii.Apos_bry	, "‘", "’", "′");
-	private static final Btrie_slim_mgr Trie__normalize__rest = Btrie_slim_mgr.cs()
+	private static final    Btrie_slim_mgr Trie__normalize__rest = Btrie_slim_mgr.cs()
 	.Add_replace_many	("' "					, "'")
 	.Add_replace_many	("\" "					, "\"", "''", "“", "”", "″")
 	.Add_replace_many	(Byte_ascii.Dash_bry	, "-", "−")							// NOTE: emdash and endash
@@ -286,5 +286,5 @@ class Map_math {// REF.MW:MapSources_math.php
 	.Add_replace_many	(" S"					, "S", "s")
 	.Add_replace_many	(" E"					, "E", "e")
 	.Add_replace_many	(" W"					, "W", "w");
-	public static final Map_math Instance = new Map_math();
+	public static final    Map_math Instance = new Map_math();
 }

@@ -73,7 +73,7 @@ public class TdbEngine implements Db_engine {
 	public void				Env_db_detach(String alias)						{}
 	public Dbmeta_tbl_mgr	Meta_mgr()										{return meta_mgr;} private final    Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 
-	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
+	Hash_adp wkrs = Hash_adp_.New(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final    TdbEngine Instance = new TdbEngine(); 
 	void CtorTdbEngine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;

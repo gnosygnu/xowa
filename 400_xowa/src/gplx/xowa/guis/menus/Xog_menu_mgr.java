@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
-public class Xog_menu_mgr implements GfoInvkAble {
+public class Xog_menu_mgr implements Gfo_invk {
 	private Xoae_app app;
 	public Xog_menu_mgr(Xoa_gui_mgr gui_mgr) {
 		menu_bldr = new Xog_mnu_bldr();
@@ -52,6 +52,6 @@ public class Xog_menu_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_contexts))			return popup_mnu_mgr;
 		else if	(ctx.Match(k, Invk_windows))			return window_mnu_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_contexts = "contexts", Invk_windows = "windows";
 }

@@ -19,10 +19,10 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.wikis.*;
-public class Xof_cache_mgr implements GfoInvkAble {
-	private final Gfo_usr_dlg usr_dlg; private final Xoae_wiki_mgr wiki_mgr; private final Xoa_repo_mgr repo_mgr;
-	private final Xofc_cfg_mgr cfg_mgr = new Xofc_cfg_mgr(); private final Xofc_dir_mgr dir_mgr; private final Xofc_fil_mgr fil_mgr;
-	private final Bool_obj_ref fil_created = Bool_obj_ref.n_();
+public class Xof_cache_mgr implements Gfo_invk {
+	private final    Gfo_usr_dlg usr_dlg; private final    Xoae_wiki_mgr wiki_mgr; private final    Xoa_repo_mgr repo_mgr;
+	private final    Xofc_cfg_mgr cfg_mgr = new Xofc_cfg_mgr(); private final    Xofc_dir_mgr dir_mgr; private final    Xofc_fil_mgr fil_mgr;
+	private final    Bool_obj_ref fil_created = Bool_obj_ref.n_();
 	public Xof_cache_mgr(Gfo_usr_dlg usr_dlg, Xoae_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr) {
 		this.usr_dlg = usr_dlg; this.wiki_mgr = wiki_mgr; this.repo_mgr = repo_mgr;
 		this.dir_mgr = new Xofc_dir_mgr(this);
@@ -75,7 +75,7 @@ public class Xof_cache_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_cache_max))		return cfg_mgr.Cache_max() / Io_mgr.Len_mb;
 		else if	(ctx.Match(k, Invk_cache_max_))		cfg_mgr.Cache_max_(m.ReadLong("v") * Io_mgr.Len_mb);
 		else if	(ctx.Match(k, Invk_cache_compress))	fil_mgr.Compress(usr_dlg, wiki_mgr, repo_mgr, dir_mgr, cfg_mgr);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_cache_min = "cache_min", Invk_cache_min_ = "cache_min_", Invk_cache_max = "cache_max", Invk_cache_max_ = "cache_max_", Invk_cache_compress = "cache_compress";
 }

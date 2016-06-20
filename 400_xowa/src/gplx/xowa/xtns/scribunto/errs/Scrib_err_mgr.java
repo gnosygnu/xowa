@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-class Scrib_err_mgr implements GfoInvkAble {
+class Scrib_err_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private int key_id = 0;
-	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
+	private static final    byte[] Key_prefix = Bry_.new_a7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {
 		if (key == null) Bry_.Add(Key_prefix, Bry_.new_by_int(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);
@@ -46,7 +46,7 @@ class Scrib_err_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_set))	return Set(m.ReadBryOr("v", null));
 		else if (ctx.Match(k, Invk_clear))	Clear();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_set = "set", Invk_clear = "clear";
 }
@@ -57,7 +57,7 @@ class Scrib_err_data {
 	public byte[] Err() {return err;} private byte[] err;
 	public byte[] Src() {return src;} private byte[] src;
 }
-class Scrib_err_cmd implements GfoInvkAble {
+class Scrib_err_cmd implements Gfo_invk {
 	public Scrib_err_cmd(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private byte[] key;
 	public int Fail_after() {return fail_after;} private int fail_after = Int_.Max_value;
@@ -78,7 +78,7 @@ class Scrib_err_cmd implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_fail_after_))				fail_after = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_warn_every_))				fail_after = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_summary_ttls_len_))			summary_ttls_len = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

@@ -17,16 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.langs.parsers.*;
-public class Xol_convert_grp implements GfoInvkAble {// group of convert_itm by vnt; EX:  zh-hant {A -> A1; B -> B1}
-	private final Ordered_hash hash = Ordered_hash_.New_bry();
+public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt; EX:  zh-hant {A -> A1; B -> B1}
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xol_convert_grp(byte[] key) {this.key = key;}
-	public byte[]				Key()							{return key;} private final byte[] key;
+	public byte[]				Key()							{return key;} private final    byte[] key;
 	public int					Len()							{return hash.Count();}
 	public Xol_convert_itm		Get_at(int i)					{return (Xol_convert_itm)hash.Get_at(i);}
 	public void					Add(byte[] src, byte[] trg)		{hash.Add_if_dupe_use_nth(src, new Xol_convert_itm(src, trg));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add_bulk))			Add_bulk(this, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add_bulk = "add_bulk";
 	private static void Add_bulk(Xol_convert_grp grp, byte[] raw) {

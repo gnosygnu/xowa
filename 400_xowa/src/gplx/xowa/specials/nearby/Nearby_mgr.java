@@ -18,18 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-public class Nearby_mgr implements Xows_page {
+public class Nearby_mgr implements Xow_special_page {
 	Xowe_wiki wiki; byte[] trg;
 	private Hash_adp_bry excluded = Hash_adp_bry.ci_a7();
 	private Hash_adp_bry visited = Hash_adp_bry.ci_a7();
-	List_adp trail = List_adp_.new_();
-	List_adp results = List_adp_.new_();	
+	List_adp trail = List_adp_.New();
+	List_adp results = List_adp_.New();	
 	int results_cur = 0;
 //		int depth_max = 5;
 //		int pages_count = 0;
-	Bry_bfr tmp_bfr = Bry_bfr.new_();
+	Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__nearby;}
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__nearby;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		page.Data_raw_(Bld_html(wiki));
@@ -94,7 +94,7 @@ public class Nearby_mgr implements Xows_page {
 			if (excluded.Has(ttl_bry)) continue;
 			if (visited.Has(ttl_bry)) continue;
 			visited.Add_bry_bry(ttl_bry);
-			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
+			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
 			if (page.Missing()) continue;
 			wiki.Parser_mgr().Parse(page, true);
 			Ordered_hash lnkis = Ordered_hash_.New_bry();
@@ -124,7 +124,7 @@ public class Nearby_mgr implements Xows_page {
 //				if (Bry_.Eq(lnki_ttl.Page_db(), trg)) continue;	// skip trg page 
 //				trail.Add(lnki_ttl);
 //				Examine_page(wiki, lnki_ttl, trail);
-//				List_adp_.DelAt_last(trail);
+//				List_adp_.Del_at_last(trail);
 //				if (results_cur == results_max) return;
 //			}
 	}
@@ -151,7 +151,7 @@ public class Nearby_mgr implements Xows_page {
 //				if (Bry_.Eq(lnki_ttl.Page_db(), trg)) continue;	// skip trg page 
 //				trail.Add(lnki_ttl);
 //				Examine_page(wiki, lnki_ttl, trail);
-//				List_adp_.DelAt_last(trail);
+//				List_adp_.Del_at_last(trail);
 //				if (results_cur == results_max) return;
 //			}
 //		}
@@ -171,7 +171,7 @@ public class Nearby_mgr implements Xows_page {
 		}
 	}
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }
 class Nearby_rslt {
 	public Nearby_rslt(List_adp trail, Xoa_ttl trg_ttl) {
@@ -184,7 +184,7 @@ class Nearby_rslt {
 	}
 	public int Len() {return list.Count();}
 	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.Get_at(i);}
-	List_adp list = List_adp_.new_();	
+	List_adp list = List_adp_.New();	
 }
 class Nearby_itmx {
 	public Nearby_itmx(List_adp v, Xoa_ttl ttl) {
@@ -197,5 +197,5 @@ class Nearby_itmx {
 		this.ttl = ttl;
 	}
 	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
-	public List_adp Trail() {return trail;} List_adp trail = List_adp_.new_();	
+	public List_adp Trail() {return trail;} List_adp trail = List_adp_.New();	
 }

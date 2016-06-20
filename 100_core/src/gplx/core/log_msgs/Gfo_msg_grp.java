@@ -42,5 +42,5 @@ public class Gfo_msg_grp implements Gfo_msg_obj {
 		return null;
 	}
 	public void Subs_add(Gfo_msg_itm item) {subs.Add(item);}
-	List_adp subs = List_adp_.new_();
+	List_adp subs = List_adp_.New();
 }

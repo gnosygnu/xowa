@@ -33,7 +33,7 @@ public class Utf8__tst {
 		fxt.Test_Increment_char_at_last_pos("€", "₭");	// len=3
 	}
 //		@Test  public void Increment_char_at_last_pos_exhaustive_check() {	// check all values; commented for perf
-//			Bry_bfr bfr = Bry_bfr.new_();
+//			Bry_bfr bfr = Bry_bfr_.New();
 //			int bgn = 32;
 //			while (true) {
 //				byte[] bgn_bry = Utf16_.Encode_int_to_bry(bgn);

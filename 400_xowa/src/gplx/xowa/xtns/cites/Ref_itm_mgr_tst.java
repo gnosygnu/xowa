@@ -52,7 +52,7 @@ class Ref_itm_mgr_fxt {
 			actl[i] = lst.Itms_get_at(i);
 		tst_mgr.Tst_ary("", chkr_ary, actl);
 		return this;
-	}	List_adp actl_list = List_adp_.new_();
+	}	List_adp actl_list = List_adp_.New();
 }
 class Xtn_ref_nde_chkr implements Tst_chkr {
 	public Class<?> TypeOf() {return Ref_nde.class;}

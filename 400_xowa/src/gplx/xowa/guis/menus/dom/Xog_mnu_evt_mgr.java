@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.xowa.guis.cmds.*;
-public class Xog_mnu_evt_mgr implements GfoEvObj {
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.cmds.*;
+public class Xog_mnu_evt_mgr implements Gfo_evt_itm {
 	private Ordered_hash itms = Ordered_hash_.New();
-	public Xog_mnu_evt_mgr(Xog_mnu_base owner) {this.ev_mgr = GfoEvMgr.new_(this);}
-	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+	public Xog_mnu_evt_mgr(Xog_mnu_base owner) {this.ev_mgr = new Gfo_evt_mgr(this);}
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public void Sub(Gfui_mnu_itm mnu_itm) {
 		itms.Add(mnu_itm.Uid(), mnu_itm);
 	}

@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xow_url_parser {
 	private final    Gfo_url_encoder encoder;
-	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url gfo_url = new Gfo_url();
 	private final    Xoa_app app; private final    Xow_wiki wiki; private final    byte[] domain_bry;
 	private byte tmp_protocol_tid;

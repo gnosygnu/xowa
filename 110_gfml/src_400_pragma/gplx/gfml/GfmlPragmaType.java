@@ -20,7 +20,7 @@ import gplx.core.lists.*;
 class GfmlPragmaType implements GfmlPragma {
 	public String KeyOfPragma() {return pragmaKey;} private String pragmaKey = "_type";
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
-		Ordered_hash list = Ordered_hash_.New(); List_adp replaced = List_adp_.new_();
+		Ordered_hash list = Ordered_hash_.New(); List_adp replaced = List_adp_.New();
 		for (int i = 0 ; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde typNde = pragmaNde.SubHnds().Get_at(i);
 			GfmlType type = GfmlTypeCompiler.Compile(typNde, GfmlType_.Root, bldr.TypeMgr().TypeRegy(), list);
@@ -47,7 +47,7 @@ class GfmlPragmaType implements GfmlPragma {
 		makr.AddSubFld(GfmlFld.new_(false,						"fld", "_type/type/fld"));
 		return makr.Xto_bry();
 	}
-	public static final String CacheLog_key = "log:type";
+	public static final    String CacheLog_key = "log:type";
 	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;

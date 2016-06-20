@@ -402,7 +402,7 @@ class Scrib_lib_wikibase_srl_fxt {
 		return this;
 	}
 	private String Xto_str(Keyval[] ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Xto_str(bfr, ary, 0);
 		return bfr.To_str_and_clear();
 	}

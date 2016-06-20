@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
 public class Fsm_mnt_tbl implements Rls_able {
-	private final String tbl_name = "fsdb_mnt"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_name, fld_url;		
-	private final Db_conn conn;
+	private final    String tbl_name = "fsdb_mnt"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_id, fld_name, fld_url;		
+	private final    Db_conn conn;
 	public Fsm_mnt_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld_id				= flds.Add_int_pkey	("mnt_id");
@@ -44,7 +44,7 @@ public class Fsm_mnt_tbl implements Rls_able {
 		stmt.Clear().Val_str(fld_name, name).Val_str(fld_url, url).Crt_int(fld_id, id).Exec_update();
 	}	
 	public Fsm_mnt_itm[] Select_all() {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

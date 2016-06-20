@@ -176,7 +176,7 @@ public class Xob_tst {
 		Xotdb_page_raw_parser parser = new Xotdb_page_raw_parser();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		parser.Load(Gfo_usr_dlg_.Test(), wiki, new Xow_ns(Xow_ns_.Tid__template, Xow_ns_case_.Tid__1st, Bry_.new_a7("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
-		List_adp actl = List_adp_.new_();
+		List_adp actl = List_adp_.New();
 		Xowd_page_itm page = new Xowd_page_itm();
 		while (parser.Read(page)) {
 			actl.Add(String_.new_u8(page.Text()));

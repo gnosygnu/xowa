@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import org.junit.*;
 public class Gfh_class_parser__tst {
-	private final Gfh_class_parser__fxt fxt = new Gfh_class_parser__fxt();
+	private final    Gfh_class_parser__fxt fxt = new Gfh_class_parser__fxt();
 	@Test   public void Basic()		{fxt.Test__parse("v1"						, "v1");}
 	@Test   public void Many()		{fxt.Test__parse("v1 v2"					, "v1", "v2");}
 }
 class Gfh_class_parser__fxt {
-	private final Gfh_class_wkr__list wkr = new Gfh_class_wkr__list();
+	private final    Gfh_class_wkr__list wkr = new Gfh_class_wkr__list();
 	public void Test__parse(String src_str, String... expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		String[] actl = wkr.Parse(src_bry, 0, src_bry.length);
@@ -31,7 +31,7 @@ class Gfh_class_parser__fxt {
 	}
 }
 class Gfh_class_wkr__list implements Gfh_class_parser_wkr {	
-	private final List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public boolean On_cls(byte[] src, int atr_idx, int atr_bgn, int atr_end, int val_bgn, int val_end) {
 		String s = String_.new_u8(src, val_bgn, val_end);
 		list.Add(s); // 

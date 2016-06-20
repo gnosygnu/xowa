@@ -21,7 +21,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 public interface Xodb_load_mgr {
 	void Load_init					(Xowe_wiki wiki);
-	void Load_page					(Xowd_page_itm rv, Xow_ns ns, boolean timestamp_enabled);
+	void Load_page					(Xowd_page_itm rv, Xow_ns ns);
 	boolean Load_by_id					(Xowd_page_itm rv, int id);
 	void Load_by_ids				(Cancelable cancelable, List_adp rv, int bgn, int end);
 	boolean Load_by_ttl				(Xowd_page_itm rv, Xow_ns ns, byte[] ttl);

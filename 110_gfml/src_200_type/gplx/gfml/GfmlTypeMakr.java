@@ -62,6 +62,6 @@ class GfmlTypeMakr {
 	void AddSubFld_imp(GfmlType ownerType, GfmlFld subFld) {ownerType.SubFlds().Add(subFld);}
 
 	GfmlType owner;
-	List_adp list = List_adp_.new_();
+	List_adp list = List_adp_.New();
 	public static GfmlTypeMakr new_() {return new GfmlTypeMakr();}
 }

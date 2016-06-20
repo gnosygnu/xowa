@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.net.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*;
 public class Xop_lnke_tkn extends Xop_tkn_itm_base {//20111222
 	public static final byte Lnke_typ_null = 0, Lnke_typ_brack = 1, Lnke_typ_text = 2, Lnke_typ_brack_dangling = 3;
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_lnke;}

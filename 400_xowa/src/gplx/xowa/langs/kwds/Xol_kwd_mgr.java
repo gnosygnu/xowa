@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.kwds; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.parsers.*;
-public class Xol_kwd_mgr implements GfoInvkAble {
-	private final Xol_lang_itm lang; private final Xol_kwd_grp[] grps = new Xol_kwd_grp[Xol_kwd_grp_.Id__max];
+public class Xol_kwd_mgr implements Gfo_invk {
+	private final    Xol_lang_itm lang; private final    Xol_kwd_grp[] grps = new Xol_kwd_grp[Xol_kwd_grp_.Id__max];
 	private Btrie_slim_mgr kwd_default_trie; private byte[] kwd_default_key; private boolean kwd_default_init_needed = true;
 	public Xol_kwd_mgr(Xol_lang_itm lang) {this.lang = lang;}
 	public int Len() {return grps.length;}
@@ -71,7 +71,7 @@ public class Xol_kwd_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_lang))					return lang;
 		else if	(ctx.Match(k, Invk_load_text))				Xol_lang_srl.Load_keywords(this, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_lang = Xol_lang_srl.Invk_lang, Invk_load_text = Xol_lang_srl.Invk_load_text;
 	public static Btrie_slim_mgr trie_(Xol_kwd_mgr mgr, int id) {

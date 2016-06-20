@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.xowa.apps.cfgs.*;
-public class Xoapi_toggle_mgr implements GfoInvkAble {
+public class Xoapi_toggle_mgr implements Gfo_invk {
 	private Xoae_app app;
-	private final Ordered_hash hash = Ordered_hash_.New_bry();
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
 	public Xoapi_toggle_itm Get_or_new(String key_str) {
 		byte[] key_bry = Bry_.new_u8(key_str);
@@ -46,7 +46,7 @@ public class Xoapi_toggle_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get)) 			return this.Get_or_new(m.ReadStr("key"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_get = "get";
 }

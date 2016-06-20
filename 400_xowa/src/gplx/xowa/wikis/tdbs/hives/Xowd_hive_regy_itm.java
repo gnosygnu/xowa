@@ -27,7 +27,7 @@ public class Xowd_hive_regy_itm {// csv file with the format of "idx|bgn|end|cou
 		List_adp rv = utl.Itms();
 		byte[] ary = utl.Raw_bry();
 		int ary_len = utl.Raw_len(); if (ary_len == 0) return Xowd_hive_regy_itm.Ary_empty; //throw Err_mgr.Instance.fmt_("xowa.wiki.data", "title_registry_file_not_found", "title_registry file not found: ~{0}", utl.Fil().Xto_api());
-		Int_obj_ref pos = Int_obj_ref.zero_();
+		Int_obj_ref pos = Int_obj_ref.New_zero();
 		while (pos.Val() < ary_len) {
 			Xowd_hive_regy_itm file = new Xowd_hive_regy_itm();
 			file.idx	= Bry_.ReadCsvInt(ary, pos, Bry_.Dlm_fld);
@@ -49,5 +49,5 @@ public class Xowd_hive_regy_itm {// csv file with the format of "idx|bgn|end|cou
 			.Add_int_variable(count).Add_byte_nl();
 	} 
 	public static Xowd_hive_regy_itm tmp_()	{return new Xowd_hive_regy_itm();}
-	public static final Xowd_hive_regy_itm[] Ary_empty = new Xowd_hive_regy_itm[0]; 
+	public static final    Xowd_hive_regy_itm[] Ary_empty = new Xowd_hive_regy_itm[0]; 
 }

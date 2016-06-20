@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.lnki_trails; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
-public class Xol_lnki_trail_mgr implements GfoInvkAble {
+public class Xol_lnki_trail_mgr implements Gfo_invk {
 	public Xol_lnki_trail_mgr(Xol_lang_itm lang) {}
 	public void Clear() {trie.Clear();}
 	public int Count() {return trie.Count();}
@@ -35,7 +35,7 @@ public class Xol_lnki_trail_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_add_many)) 	Add_many(m);
 		else if	(ctx.Match(k, Invk_add_bulk)) 	Add_bulk(m);
 		else if	(ctx.Match(k, Invk_clear)) 		Clear();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add_many = "add_many", Invk_add_range = "add_range", Invk_add_bulk = "add_bulk", Invk_clear = "clear";
 	private void Add_bulk(GfoMsg m) {byte[] src = m.ReadBry("bulk"); Add_bulk(src);}

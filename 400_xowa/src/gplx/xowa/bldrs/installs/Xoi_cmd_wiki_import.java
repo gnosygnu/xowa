@@ -31,12 +31,12 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.end", "import.end ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
 		return true;
 	}
-	public GfoInvkAble Owner() {return owner;} public Xoi_cmd_wiki_import Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Xoi_cmd_wiki_import Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
+		Thread_adp_.Start_by_key(this.Async_key(), this, Invk_process_async);
 	}
 	public boolean Async_running() {
 		return running;
@@ -64,8 +64,8 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core);
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_link);
 		}
-		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.apps.searchs.specials.Srch_special_page.Version_2)
-			gplx.xowa.addons.apps.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
+		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2)
+			gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_mgr_.Setup(wiki);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
 	}	
 	private void Process_async() {
@@ -110,7 +110,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		if		(ctx.Match(k, Invk_process_async))			Process_async();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_open_wiki))				Open_wiki(wiki_key);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_process_async = "run_async", Invk_owner = "owner", Invk_open_wiki = "open_wiki";
 	static final String GRP_KEY = "xowa.thread.op.build";

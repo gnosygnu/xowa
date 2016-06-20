@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.*;
-public class Xoa_sys_cfg implements GfoInvkAble {
+public class Xoa_sys_cfg implements Gfo_invk {
 	private Xoae_app app;
 	public Xoa_sys_cfg(Xoae_app app) {this.app = app;}
 	public byte[] Lang() {return lang_key;}
@@ -42,7 +42,7 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_lang_list))			return Options_lang_list();
 		else if	(ctx.Match(k, Invk_options_version))	return options_version;
 		else if	(ctx.Match(k, Invk_options_version_))	options_version = m.ReadInt("v");
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_version = "version", Invk_build_date = "build_date", Invk_free_mem_when_ = "free_mem_when_", Invk_options_version = "options_version", Invk_options_version_ = "options_version_"
@@ -51,7 +51,7 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 class Options_list_lang_ {
 	public static Keyval[] new_() {
 		Ordered_hash translated = Ordered_hash_.New_bry();
-		List_adp untranslated = List_adp_.new_();
+		List_adp untranslated = List_adp_.New();
 		Add_itm_many(translated, Xol_lang_stub_.Id_en, Xol_lang_stub_.Id_de, Xol_lang_stub_.Id_pl, Xol_lang_stub_.Id_zh_hans, Xol_lang_stub_.Id_zh_hant); // add langs with translations first, so they alphabetize to top of list			
 		int len = Xol_lang_stub_.Id__max;
 		for (int i = 0; i < len; i++) {	// add rest of langs, but sort by code

@@ -19,13 +19,13 @@ package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.dumps.*;
-public class Xob_core_batch_utl implements GfoInvkAble {
-	private final Xob_bldr bldr;
-	private final Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
+public class Xob_core_batch_utl implements Gfo_invk {
+	private final    Xob_bldr bldr;
+	private final    Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
 	public Xob_core_batch_utl(Xob_bldr bldr, byte[] raw) {this.bldr = bldr; fmtr.Fmt_(raw);}
 	private void Run() {
 		Io_url[] bz2_fils = Io_mgr.Instance.QueryDir_fils(bldr.App().Fsys_mgr().Wiki_dir().GenSubDir_nest(Dir_dump, "todo"));
-		Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
+		Bry_bfr bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
 		int bz2_fils_len = bz2_fils.length;
 		for (int i = 0; i < bz2_fils_len; i++) {
 			Io_url bz2_fil_url = bz2_fils[i];

@@ -21,12 +21,12 @@ import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wik
 import gplx.xowa.htmls.core.htmls.*;
 public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
-	@Override public Xox_mgr Clone_new() {return new Pgbnr_xtn_mgr();}
+	@Override public Xox_mgr Xtn_clone_new() {return new Pgbnr_xtn_mgr();}
 	public Pgbnr_cfg Cfg() {return cfg;} private Pgbnr_cfg cfg;
 	public Mustache_tkn_itm Template_root() {return template_root;} private Mustache_tkn_itm template_root;
 	@Override public void Xtn_init_by_app(Xoae_app app) {}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
-		// load config; TODO: load by file
+		// load config; TODO_OLD: load by file
 		boolean enabled = false, enable_heading_override = true, enable_default_banner = false;
 		int[] ns_ary = Int_.Ary(Xow_ns_.Tid__main, Xow_ns_.Tid__user);
 		int[] standard_sizes = new int[] {640, 1280, 2560};

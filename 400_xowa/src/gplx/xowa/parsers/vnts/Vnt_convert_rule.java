@@ -19,10 +19,10 @@ package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.langs.vnts.*;
 class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRule
-	private final Vnt_flag_parser flag_parser = new Vnt_flag_parser(); private final Vnt_flag_code_mgr flag_codes = new Vnt_flag_code_mgr(); private final Vnt_flag_lang_mgr flag_langs = new Vnt_flag_lang_mgr();
-	private final Vnt_rule_parser rule_parser = new Vnt_rule_parser(); private final Vnt_rule_undi_mgr rule_undis = new Vnt_rule_undi_mgr(); private final Vnt_rule_bidi_mgr rule_bidis = new Vnt_rule_bidi_mgr();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();		
-	private final Ordered_hash cnv_marked_hash = Ordered_hash_.New_bry();
+	private final    Vnt_flag_parser flag_parser = new Vnt_flag_parser(); private final    Vnt_flag_code_mgr flag_codes = new Vnt_flag_code_mgr(); private final    Vnt_flag_lang_mgr flag_langs = new Vnt_flag_lang_mgr();
+	private final    Vnt_rule_parser rule_parser = new Vnt_rule_parser(); private final    Vnt_rule_undi_mgr rule_undis = new Vnt_rule_undi_mgr(); private final    Vnt_rule_bidi_mgr rule_bidis = new Vnt_rule_bidi_mgr();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();		
+	private final    Ordered_hash cnv_marked_hash = Ordered_hash_.New_bry();
 	private Vnt_convert_lang converter;
 	private Xol_vnt_regy vnt_regy; private byte[] vnt_key;
 	private Vnt_log_mgr log_mgr;
@@ -30,7 +30,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 	public byte[] Display() {return display;} private byte[] display;
 	public byte[] Title() {return title;} private byte[] title;
 	public byte Action() {return action;} private byte action;
-	public Vnt_rule_undi_mgr Cnv_tbl() {return cnv_tbl;} private final Vnt_rule_undi_mgr cnv_tbl = new Vnt_rule_undi_mgr();
+	public Vnt_rule_undi_mgr Cnv_tbl() {return cnv_tbl;} private final    Vnt_rule_undi_mgr cnv_tbl = new Vnt_rule_undi_mgr();
 	public Vnt_convert_rule(Vnt_convert_lang converter, Xol_vnt_regy vnt_regy, Vnt_log_mgr log_mgr) {
 		this.converter = converter; this.log_mgr = log_mgr;
 		this.vnt_regy = vnt_regy;
@@ -181,7 +181,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		}
 		return rv;
 	}
-	private final static byte[] 
+	private final    static byte[] 
 	  Bry__error_bgn = Bry_.new_a7("<span class=\"error\">vnt error")
 	, Bry__error_end = Bry_.new_a7("</span>")
 	, Bry__undi_spr = Bry_.new_u8("⇒")

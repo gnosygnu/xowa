@@ -239,7 +239,7 @@ public class Xol_mw_lang_parser_tst {
 }
 class Xol_mw_lang_parser_fxt {
 	Xoae_app app; Xowe_wiki wiki; private Xop_fxt fxt;
-	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Clear() {
 		if (app == null) {
 			app = Xoa_app_fxt.Make__app__edit();

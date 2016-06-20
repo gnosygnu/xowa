@@ -37,7 +37,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		Xox_xnde_.Parse_xatrs(wiki, this, xatrs_hash, src, xnde);
 
 		// parse <choose>
-		List_adp option_list = List_adp_.new_();
+		List_adp option_list = List_adp_.New();
 		Gfh_tag_rdr tag_rdr = Xox_xnde_.New_tag_rdr(ctx, src, xnde).Reg("option", Tag__option).Reg("choicetemplate", Tag__choicetemplate);
 		while (true) {
 			Gfh_tag head_tag = tag_rdr.Tag__move_fwd_head(Gfh_tag_.Id__any);

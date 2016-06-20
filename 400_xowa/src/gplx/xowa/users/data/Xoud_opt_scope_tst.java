@@ -30,7 +30,7 @@ public class Xoud_opt_scope_tst {
 	}
 }
 class Xoud_opt_scope_fxt {
-	private final Xoud_opt_scope_parser parser = new Xoud_opt_scope_parser();
+	private final    Xoud_opt_scope_parser parser = new Xoud_opt_scope_parser();
 	public void Clear() {
 		// Gfo_usr_dlg_.I = Xoa_app_.usr_dlg_console_();
 	}
@@ -40,7 +40,7 @@ class Xoud_opt_scope_fxt {
 		Tfds.Eq(To_str(expd), To_str(actl));
 	}
 	private static String To_str(Xoud_opt_scope[] ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoud_opt_scope itm = ary[i];

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import gplx.dbs.metas.*;
 public class Sql_schema_wtr {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Sql_schema_wtr Bfr_(Bry_bfr bfr) {this.tmp_bfr = bfr; return this;}
 	public String Bld_create_idx(Dbmeta_idx_itm idx) {
 		tmp_bfr.Add_str_a7("CREATE ");
@@ -101,5 +101,5 @@ public class Sql_schema_wtr {
 			default:							throw Err_.new_unhandled(tid);
 		}
 	}
-//        public static final Sql_schema_wtr Instance = new Sql_schema_wtr();
+//        public static final    Sql_schema_wtr Instance = new Sql_schema_wtr();
 }

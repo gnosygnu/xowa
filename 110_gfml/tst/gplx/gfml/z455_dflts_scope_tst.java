@@ -30,7 +30,7 @@ public class z455_dflts_scope_tst {
 		tst_FetchOrNullByPos(regy, "point", rootPos, "point", "x", "y");
 		tst_FetchOrNullByPos(regy, "point", currPos, "point", "x", "y");
 
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list.Add(GfmlDefaultItem.new_("point", "z", GfmlTkn_.raw_("0")));
 		GfmlDefaultPragma_bgnCmd.ExecList(regy, currPos, list);
 

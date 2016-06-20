@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_statistic_tbl implements Db_tbl {
-	private static final String tbl_name = "site_statistic"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final String fld_site_abrv, fld_pages, fld_articles, fld_edits, fld_images, fld_users, fld_activeusers, fld_admins, fld_jobs, fld_queued_massmessages;
-	private final Db_conn conn;
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_site_abrv, fld_pages, fld_articles, fld_edits, fld_images, fld_users, fld_activeusers, fld_admins, fld_jobs, fld_queued_massmessages;
+	private final    Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_statistic_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -36,6 +36,7 @@ class Site_statistic_tbl implements Db_tbl {
 		this.fld_queued_massmessages	= flds.Add_long("queued_massmessages");
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;} private static final String tbl_name = "site_statistic";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv)));}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
 	public void Rls() {

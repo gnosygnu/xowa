@@ -61,7 +61,7 @@ public class Db_conn_utl {
 		}
 	}
 	public static Object[][] Select(Db_conn conn, Db_qry qry) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_new(qry).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

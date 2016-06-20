@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.strings.*;
-public class Xob_wiki_cfg_bldr implements GfoInvkAble {
+public class Xob_wiki_cfg_bldr implements Gfo_invk {
 	public Xob_wiki_cfg_bldr(Xob_bldr bldr) {this.app = bldr.App();} private Xoae_app app;
 	public void Exec() {
 		int len = hash.Count();
@@ -41,7 +41,7 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		 		return Itms_get_or_new(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_run))		 		Exec();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_get = "get", Invk_run = "run";
 	public void Clear() {hash.Clear();}

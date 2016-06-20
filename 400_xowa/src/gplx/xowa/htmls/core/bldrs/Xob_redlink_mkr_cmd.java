@@ -26,16 +26,16 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_html_redlinks;}
 	public void Cmd_run() {Read_data();}
 	private void Read_data() {
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		wiki.Init_assert();
-		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
+		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Xob_db_file link_dump_db = Xob_db_file.New__redlink(wiki.Fsys_mgr().Root_dir());
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(link_dump_db.Conn(), new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
 		String attach_sql = attach_mgr.Resolve_sql(Sql_select_clause);
 		attach_mgr.Attach();
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
 		int cur_html_db_id = -1, cur_page_id = -1;
-		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.conn);
+		Xoh_redlink_tbl redlink_tbl = new Xoh_redlink_tbl(page_tbl.Conn());
 		Db_rdr rdr = link_dump_db.Conn().Exec_rdr(attach_sql);
 		try {
 			while (rdr.Move_next()) {
@@ -70,7 +70,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if ((commit_count % commit_interval ) == 0)
 			redlink_tbl.Conn().Txn_sav();
 	}
-	private static final String Sql_select_clause = String_.Concat_lines_nl_skip_last
+	private static final    String Sql_select_clause = String_.Concat_lines_nl_skip_last
 	( "SELECT p.page_html_db_id"
 	, ",      p.page_id"
 	, ",      ld.src_html_uid"
@@ -86,7 +86,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_term() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_commit_interval_ = "commit_interval_";			
 }

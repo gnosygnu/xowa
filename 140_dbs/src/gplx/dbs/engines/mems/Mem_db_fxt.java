@@ -23,7 +23,7 @@ class Mem_db_fxt {
 	}
 	public Db_conn			Make_conn(String url) {return Db_conn_bldr.Instance.Get_or_autocreate(Bool_.Y, Io_url_.mem_fil_(url));}
 	public Dbmeta_tbl_itm	Exec__create_tbl(Db_conn conn, String tbl, String... fld_names) {
-		Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+		Dbmeta_fld_list flds = new Dbmeta_fld_list();
 		int len = fld_names.length;
 		for (int i = 0; i < len; ++i)
 			flds.Add_str(fld_names[i], 255);
@@ -49,8 +49,8 @@ class Mem_db_fxt {
 	public void Test__select(Db_conn conn, Db_qry qry, String[]... expd) {
 		Db_stmt stmt = conn.Stmt_new(qry);
 		Db_rdr rdr = new Mem_exec_select((Mem_engine)conn.Engine()).Select((Mem_stmt)stmt);
-		List_adp actl_list = List_adp_.new_();
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		List_adp actl_list = List_adp_.New();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int expd_len = expd.length;
 		String[] expd_rows = new String[expd_len];
 		for (int i = 0; i < expd_len; ++i) {

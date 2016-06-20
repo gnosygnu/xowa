@@ -19,7 +19,7 @@ package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
-	private final List_adp itms = List_adp_.new_(); private final  Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
+	private final    List_adp itms = List_adp_.New(); private final     Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
 	private byte[] tbl_hdr; 
 	public void Init_by_lang(Wdata_hwtr_msgs msgs)	{this.tbl_hdr = msgs.Toc_tbl_hdr();}
 	public void Init_by_wdoc(Wdata_doc wdoc)		{itms.Clear();}
@@ -30,7 +30,7 @@ class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
 		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.To_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}
-	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div id='toc' class='toc wb-toc'>"
 	, "    <div id='toctitle'>"
@@ -51,7 +51,7 @@ class Wdata_fmtr__toc_itm implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, i + List_adp_.Base1, itm.Href(), itm.Text());
 		}
 	}
-	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <li class='toclevel-1 tocsection-~{idx}'>"
 	, "        <a href='#~{href}'>"
@@ -61,10 +61,10 @@ class Wdata_fmtr__toc_itm implements gplx.core.brys.Bfr_arg {
 	), "idx", "href", "text");
 }
 class Wdata_toc_data {
-	private final Wdata_fmtr__toc_div fmtr_toc;
-	private final Gfo_url_encoder href_encoder;
-	private final Bry_fmtr text_fmtr = Bry_fmtr.new_("~{orig} <sup><small>(~{len})</small></sup>", "orig", "len");
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_(8);
+	private final    Wdata_fmtr__toc_div fmtr_toc;
+	private final    Gfo_url_encoder href_encoder;
+	private final    Bry_fmtr text_fmtr = Bry_fmtr.new_("~{orig} <sup><small>(~{len})</small></sup>", "orig", "len");
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(8);
 	public Wdata_toc_data(Wdata_fmtr__toc_div fmtr_toc, Gfo_url_encoder href_encoder) {this.fmtr_toc = fmtr_toc; this.href_encoder = href_encoder;}
 	public Wdata_toc_data Make(int itms_len) {
 		this.text = itms_len_enable ? text_fmtr.Bld_bry_many(tmp_bfr, orig, itms_len) : orig;

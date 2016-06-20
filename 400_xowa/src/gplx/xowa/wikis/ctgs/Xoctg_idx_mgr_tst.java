@@ -74,7 +74,7 @@ class Xoctg_idx_mgr_fxt {
 			idx_mgr = new Xoctg_idx_mgr();
 		}
 		return this;
-	}	private Xoae_app app; Xowe_wiki wiki; Xoctg_idx_mgr idx_mgr; static final byte[] Ctg_name = Bry_.new_a7("Ctg_test");
+	}	private Xoae_app app; Xowe_wiki wiki; Xoctg_idx_mgr idx_mgr; static final    byte[] Ctg_name = Bry_.new_a7("Ctg_test");
 	public byte[] Make_src(int len) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004().Mkr_rls();
 		bfr.Add_byte_pipe(); // always have leading pipe
@@ -108,7 +108,7 @@ class Xoctg_idx_mgr_fxt {
 		Tfds.Eq(expd, String_.new_a7(rslt.Sortkey()));
 		Tfds.Eq(expd_comp, comp_rslt.Val());
 		return this;		
-	}	Int_obj_ref comp_rslt = Int_obj_ref.zero_();
+	}	Int_obj_ref comp_rslt = Int_obj_ref.New_zero();
 	public Xoctg_idx_mgr_fxt Test_find_itm_near_bmk(int idx_bgn, String find, int bmk_comp, boolean find_dir, String expd) {
 		int idx_pos = (idx_bgn * Xoctg_idx_mgr_tst.Itm_len) + (bmk_comp == CompareAble_.Less ? 1 : 0);
 		Xoctg_idx_itm rslt = idx_mgr.Find_itm_near_bmk(src, src_len, Bry_.new_a7(find), find_dir, bmk_comp, idx_pos);
@@ -117,7 +117,7 @@ class Xoctg_idx_mgr_fxt {
 		return this;		
 	}
 	public Xoctg_idx_mgr_fxt Test_find(String find, boolean fill_at_bgn, String[] expd_ary, String last_plus_one) {
-		if (tmp_list == null) tmp_list = List_adp_.new_();
+		if (tmp_list == null) tmp_list = List_adp_.New();
 		idx_mgr.Index(Gfo_usr_dlg_.Test(), Bry_.Empty, src);
 		tmp_list.Clear();
 		idx_mgr.Find(tmp_list, src, fill_at_bgn, Bry_.new_a7(find), 3, tmp_last_plus_one);

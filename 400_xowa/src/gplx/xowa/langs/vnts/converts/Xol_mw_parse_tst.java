@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
-	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
+	private final    Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
 //		@Test   public void Basic() {
 //			fxt.Test_convert("$zh2Hant = array('a' => 'A', 'b' => 'B',);", String_.Concat_lines_nl
 //			( "// zh_zh-hant"
@@ -80,12 +80,12 @@ class Xol_mw_parse_itm {
 class Xol_mw_parse_fxt {
 	public void Test_convert(String mw, String expd) {
 		Xol_mw_parse_grp[] actl_ary = Parse(Bry_.new_u8(mw));
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		actl_ary[0].Write_as_gfs(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str());
 	}
 	public void Test_run(Io_url src_dir, Io_url trg_dir) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(src_dir);
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
@@ -103,7 +103,7 @@ class Xol_mw_parse_fxt {
 		}
 	}
 	public Xol_mw_parse_grp[] Parse(byte[] src) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Php_parser parser = new Php_parser();
 		Gfo_msg_log msg_log = new Gfo_msg_log("xowa");
 		Php_evaluator evaluator = new Php_evaluator(msg_log);
@@ -117,7 +117,7 @@ class Xol_mw_parse_fxt {
 		}
 		return (Xol_mw_parse_grp[])list.To_ary(Xol_mw_parse_grp.class);
 	}
-	private List_adp tmp_itm_list = List_adp_.new_();
+	private List_adp tmp_itm_list = List_adp_.New();
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
 		Xol_mw_parse_grp grp = new Xol_mw_parse_grp();
 		byte[] key =  line.Key().Val_obj_bry();				// EX: "zh2Hant"

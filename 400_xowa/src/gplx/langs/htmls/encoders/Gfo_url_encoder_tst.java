@@ -28,7 +28,7 @@ public class Gfo_url_encoder_tst {
 	@Test  public void Id__space() 			{fxt.Encoder_id().Test__bicode("a b", "a_b");}
 	@Test  public void Id__err()  {
 		byte[] raw = Bry_.new_a7("0%.jpg");
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		fxt.Encoder_id().Encoder().Decode(tmp_bfr, Bool_.N, raw, 0, raw.length);
 		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
 	}

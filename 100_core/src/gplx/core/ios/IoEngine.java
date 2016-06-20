@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.consoles.*; import gplx.core.criterias.*;
+import gplx.core.ios.streams.*;
 public interface IoEngine {
 	String		Key();
 	boolean		ExistsFil_api(Io_url url);
@@ -32,6 +33,7 @@ public interface IoEngine {
 	IoStream	OpenStreamWrite(IoEngine_xrg_openWrite args);
 	void		XferFil(IoEngine_xrg_xferFil args);
 	void		RecycleFil(IoEngine_xrg_recycleFil xrg);
+	boolean		Truncate_fil(Io_url url, long size);
 
 	boolean		ExistsDir(Io_url url);
 	void		CreateDir(Io_url url); // creates all folder levels (EX: C:\a\b\c\ will create C:\a\ and C:\a\b\). will not fail if called on already existing folders.

@@ -61,7 +61,7 @@ public class Xol_mw_lang_parser {
 		if (itm != null) bldr.Bfr().Add(itm[1]);
 	}
 	public void Parse_mediawiki(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Xol_lang_transform lang_transform) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Parse_file_core_php(lang_mgr, mediawiki_root, bfr, lang_transform);
 		Parse_file_xtns_php(lang_mgr, mediawiki_root, bfr, lang_transform);
 		Parse_file_json(lang_mgr, bfr, lang_transform, mediawiki_root.GenSubDir("core_json"));
@@ -116,7 +116,7 @@ public class Xol_mw_lang_parser {
 		parser.Parse_tkns(text, evaluator);
 		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
-		List_adp bry_list = List_adp_.new_();
+		List_adp bry_list = List_adp_.New();
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
 			byte[] key = line.Key().Val_obj_bry();
@@ -172,7 +172,7 @@ public class Xol_mw_lang_parser {
 	public void Parse_xtn(String text, Io_url url, Xoa_lang_mgr lang_mgr, Bry_bfr bfr, boolean prepend_hash, Xol_lang_transform lang_transform) {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
-		List_adp bry_list = List_adp_.new_();
+		List_adp bry_list = List_adp_.New();
 		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
@@ -235,7 +235,7 @@ public class Xol_mw_lang_parser {
 		byte[][] brys = (byte[][])rv.To_ary(byte[].class);
 		int brys_len = brys.length;
 		Xol_msg_mgr mgr = lang.Msg_mgr();
-		List_adp quote_itm_list = List_adp_.new_(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 
+		List_adp quote_itm_list = List_adp_.New(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 
 		for (int i = 0; i < brys_len; i+=2) {
 			byte[] kv_key = brys[i];
 			Xol_msg_itm itm = mgr.Itm_by_key_or_new(kv_key);
@@ -302,7 +302,7 @@ public class Xol_mw_lang_parser {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $separatorTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
-		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
+		List_adp tmp_list = List_adp_.New(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr_.Reset(16); 
 		for (int i = 0; i < subs_len; i++) {
 			Php_itm_kv kv = (Php_itm_kv)ary.Subs_get(i);
 			byte[] key_bry = Php_itm_.Parse_bry(kv.Key()), val_bry = Php_itm_.Parse_bry(kv.Val());
@@ -315,12 +315,12 @@ public class Xol_mw_lang_parser {
 				num_mgr.Separators_mgr().Set(key_bry, val_bry);
 			else throw Err_.new_unhandled(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
 		}
-	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
+	}	private static final    byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
 	private void Parse_digitTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $digitTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
-		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
+		List_adp tmp_list = List_adp_.New(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr_.Reset(16); 
 		for (int i = 0; i < subs_len; i++) {
 			Php_itm_kv kv = (Php_itm_kv)ary.Subs_get(i);
 			byte[] key_bry = Php_itm_.Parse_bry(kv.Key()), val_bry = Php_itm_.Parse_bry(kv.Val());

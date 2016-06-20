@@ -54,7 +54,7 @@ public class z091_GfmlLxr_basic_tst {
 	}
 	GfmlTkn tst_Fetch(String raw, String... expd) {
 		CharStream stream = CharStream.pos0_(raw);
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		GfmlTkn tkn = null;
 		while (true) {
 			tkn = rootLxr.MakeTkn(stream, 0);

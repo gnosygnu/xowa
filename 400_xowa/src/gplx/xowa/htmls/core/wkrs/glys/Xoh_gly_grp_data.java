@@ -21,7 +21,7 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htm
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {
-	private final List_adp itms_list = List_adp_.new_();
+	private final    List_adp itms_list = List_adp_.New();
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
 	public int Gly_tid() {return gly_tid;} private int gly_tid;
@@ -129,8 +129,8 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {
 		}
 		return true;
 	}
-	public static final byte[] Atr__cls__gallery = Bry_.new_a7("gallery");
-	private static final byte[] Atr__cls__mw_gallery = Bry_.new_a7("mw-gallery-"), Atr__cls__gallerybox = Bry_.new_a7("gallerybox")
+	public static final    byte[] Atr__cls__gallery = Bry_.new_a7("gallery");
+	private static final    byte[] Atr__cls__mw_gallery = Bry_.new_a7("mw-gallery-"), Atr__cls__gallerybox = Bry_.new_a7("gallerybox")
 	, Style__max_width = Bry_.new_a7("max-width"), Style___width = Bry_.new_a7("_width")
 	;
 }

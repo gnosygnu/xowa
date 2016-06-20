@@ -73,7 +73,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 		Tfds.Eq_ary_str(expd, To_ary(rslts));
 	}
 	String[] To_ary(Regx_match[] ary) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			Regx_match itm = ary[i];

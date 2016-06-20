@@ -48,7 +48,7 @@ public class Xol_case_mgr_tst {
 	}
 //		@Test  public void Hack() {
 //			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
-//			Bry_bfr bfr = Bry_bfr.new_();
+//			Bry_bfr bfr = Bry_bfr_.New();
 //			for (int i = 0; i < ary.length; i++) {
 //				Xol_case_itm itm = ary[i];
 //				bfr.Add_str_a7("xo|");
@@ -119,7 +119,7 @@ class Xol_case_mgr_fxt {
 			}
 		}
 		return raw_str_(uppers_list.To_str_ary(), lowers_list.To_str_ary());
-	}	List_adp uppers_list = List_adp_.new_(), lowers_list = List_adp_.new_();
+	}	List_adp uppers_list = List_adp_.New(), lowers_list = List_adp_.New();
 	String raw_str_(String[] uppers, String[] lowers) {
 		sb.Add("a:2:{s:14:\"wikiUpperChars\";a:1046:{");
 		raw_ary(sb, uppers);

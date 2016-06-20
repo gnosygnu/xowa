@@ -77,7 +77,7 @@ public class Gfo_cache_mgr {
 		Console_adp__sys.Instance.Write_str_w_nl("compacting:");			
 //			hash.Sort();
 //			int len = hash.Count();
-//			List_adp deleted = List_adp_.new_();
+//			List_adp deleted = List_adp_.New();
 //			int deleted_size = 0, deleted_count = 0;
 //			for (int i = 0; i < len; i++) {
 //				Gfo_cache_data itm = (Gfo_cache_data)hash.Get_at(i);

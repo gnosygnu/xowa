@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.ios.*; /*IoStream_mem*/ import gplx.core.texts.*; /*Encoding_*/
+import gplx.core.ios.streams.*; /*IoStream_mem*/ import gplx.core.texts.*; /*Encoding_*/
 class IoItmFil_mem extends IoItmFil {		public static IoItmFil_mem as_(Object obj) {return obj instanceof IoItmFil_mem ? (IoItmFil_mem)obj : null;}
 	@gplx.Internal protected IoStream_mem Stream() {return stream;} IoStream_mem stream;	// NOTE: using stream instead of Text, b/c no events for IoStream.Dispose; ex: stream.OpenStreamWrite; stream.Write("hi"); stream.Dispose(); "hi" would not be saved if Text is member variable
 	@Override public long Size() {return (int)stream.Len();}
@@ -35,5 +35,5 @@ class IoItmFil_mem extends IoItmFil {		public static IoItmFil_mem as_(Object obj
 		rv.stream = IoStream_mem.rdr_txt_(filPath, text);
 		return rv;
 	}
-	public static final IoItmFil_mem Null = new_(Io_url_.Empty, -1, DateAdp_.MinValue, "");	// NOTE: size must be -1 for .Exists to be false; DATE:2015-05-16
+	public static final    IoItmFil_mem Null = new_(Io_url_.Empty, -1, DateAdp_.MinValue, "");	// NOTE: size must be -1 for .Exists to be false; DATE:2015-05-16
 }

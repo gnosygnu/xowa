@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.htmls.portal.*;
-public class Xog_html_mgr implements GfoInvkAble {
+public class Xog_html_mgr implements Gfo_invk {
 	public Xog_html_mgr(Xoae_app app) {this.app = app; portal_mgr = new Xoa_portal_mgr(app);} private Xoae_app app;
 	public Xoa_portal_mgr Portal_mgr() {return portal_mgr;} private Xoa_portal_mgr portal_mgr;
 	public boolean Javascript_enabled() {return javascript_enabled;} private boolean javascript_enabled = true;
@@ -34,7 +34,7 @@ public class Xog_html_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_css_xtn))					return css_xtn;
 		else if	(ctx.Match(k, Invk_css_xtn_))					css_xtn = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_portal))						return portal_mgr;
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_javascript_enabled = "javascript_enabled", Invk_javascript_enabled_ = "javascript_enabled_", Invk_auto_focus_id_ = "auto_focus_id_", Invk_css_xtn = "css_xtn", Invk_css_xtn_ = "css_xtn_", Invk_portal = "portal";
 }

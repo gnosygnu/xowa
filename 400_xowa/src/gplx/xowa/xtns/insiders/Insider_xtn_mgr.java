@@ -22,8 +22,8 @@ public class Insider_xtn_mgr extends Xox_mgr_base {
 		html_bldr = new Insider_html_bldr(this);
 	}
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("Insider");
-	@Override public Xox_mgr Clone_new() {return new Insider_xtn_mgr();}
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("Insider");
+	@Override public Xox_mgr Xtn_clone_new() {return new Insider_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		if (!Enabled()) return;

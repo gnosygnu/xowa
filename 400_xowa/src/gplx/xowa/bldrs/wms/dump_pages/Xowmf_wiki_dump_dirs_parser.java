@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.dump_pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 public class Xowmf_wiki_dump_dirs_parser {
 	public static String[] Parse(byte[] wiki, byte[] src) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int pos = 0;
 		while (true) {
 			int href_bgn = Bry_find_.Move_fwd(src, Tkn_href		, pos);			if (href_bgn == Bry_find_.Not_found) break;
@@ -31,5 +31,5 @@ public class Xowmf_wiki_dump_dirs_parser {
 		}
 		return (String[])rv.To_ary_and_clear(String.class);
 	}
-	private static final byte[] Tkn_href = Bry_.new_a7(" href=\""), Tkn_owner = Bry_.new_a7("..");
+	private static final    byte[] Tkn_href = Bry_.new_a7(" href=\""), Tkn_owner = Bry_.new_a7("..");
 }

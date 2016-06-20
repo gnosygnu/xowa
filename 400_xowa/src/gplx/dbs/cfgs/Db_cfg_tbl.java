@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
 import gplx.core.primitives.*;
 public class Db_cfg_tbl implements Rls_able {
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
+	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_grp, fld_key, fld_val;
 	private Db_stmt stmt_insert, stmt_update, stmt_select;
 	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
@@ -72,14 +72,14 @@ public class Db_cfg_tbl implements Rls_able {
 		if (cur_val == null)	this.Insert_str(grp, key, val);
 		else					this.Update_str(grp, key, val);
 	}
-	public boolean			Select_yn		(String grp, String key)				{String val = Select_str(grp, key); return Parse_yn		(grp, key, val);}
+	public boolean		Select_yn		(String grp, String key)				{String val = Select_str(grp, key); return Parse_yn		(grp, key, val);}
 	public byte			Select_byte		(String grp, String key)				{String val = Select_str(grp, key); return Parse_byte	(grp, key, val);}
 	public int			Select_int		(String grp, String key)				{String val = Select_str(grp, key); return Parse_int	(grp, key, val);}
 	public long			Select_long		(String grp, String key)				{String val = Select_str(grp, key); return Parse_long	(grp, key, val);}
 	public byte[]		Select_bry		(String grp, String key)				{String val = Select_str(grp, key); return Parse_bry	(grp, key, val);}
 	public DateAdp		Select_date		(String grp, String key)				{String val = Select_str(grp, key); return Parse_date	(grp, key, val);}
 	public Guid_adp		Select_guid		(String grp, String key)				{String val = Select_str(grp, key); return Parse_guid	(grp, key, val);}
-	public boolean			Select_yn_or	(String grp, String key, boolean  or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_yn	(grp, key, val);}
+	public boolean		Select_yn_or	(String grp, String key, boolean  or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_yn	(grp, key, val);}
 	public byte			Select_byte_or	(String grp, String key, byte or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_byte	(grp, key, val);}
 	public int			Select_int_or	(String grp, String key, int or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_int	(grp, key, val);}
 	public long			Select_long_or	(String grp, String key, long or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_long	(grp, key, val);}
@@ -131,6 +131,6 @@ public class Db_cfg_tbl implements Rls_able {
 	private long		Parse_long		(String grp, String key, String val)	{try {return Long_.parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Long_.Cls_val_name);}}
 	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_u8(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
 	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}
-	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.parse(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
+	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
 	private Err			err_parse(Exception e, String grp, String key, String val, String type) {return Err_.new_exc(e, "db", "cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type);}
 }

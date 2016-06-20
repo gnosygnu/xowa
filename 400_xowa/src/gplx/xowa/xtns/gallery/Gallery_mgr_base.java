@@ -33,6 +33,7 @@ public abstract class Gallery_mgr_base {
 	@gplx.Virtual public int Get_gb_borders() {return 8;}	// REF.MW: getGBBorders; Get how much extra space the borders around the image takes up. For this mode, it is 2px borders on each side + 2px implied padding on each side from the stylesheet, giving us 2*2+2*2 = 8.
 	@gplx.Virtual public int Get_all_padding() {return this.Get_thumb_padding() + this.Get_gb_padding() + this.Get_gb_borders();} // REF.MW: getAllPadding; How many pixels of whitespace surround the thumbnail.
 	@gplx.Virtual public int Get_vpad(int itm_h, int thm_h) {	// REF.MW: getVPad; Get vertical padding for a thumbnail; Generally this is the total height minus how high the thumb is.
+		if (thm_h == -1) thm_h = itm_h; // NOTE: thm_h will be -1 on 1st pass; set to dflt_h, else will end up with 115px for hdump; PAGE:en.w:National_Gallery_of_Art  DATE:2016-06-19
 		return (this.Get_thumb_padding() + itm_h - thm_h) / 2;
 	}
 	@gplx.Virtual public int Get_thumb_div_width(int thm_w) {	// REF.MW: getThumbDivWidth; Get the width of the inner div that contains the thumbnail in question. This is the div with the class of "thumb".
@@ -157,7 +158,7 @@ public abstract class Gallery_mgr_base {
 		if (hctx_is_hdump)
 			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__gallery_itm().Data_init_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_img_itm__gallery_itm.Tid_gallery);
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Wrap_gallery_text_bgn = Bry_.new_a7("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
 	, Wrap_gallery_text_end = Bry_.new_a7("\n      </div>")	// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
 	;
@@ -166,7 +167,7 @@ public abstract class Gallery_mgr_base {
 		lnki.H_(itm_default_h);
 	}
 	@gplx.Virtual public void Adjust_image_parameters(Xof_file_itm xfer_itm) {}	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.		
-	private static final byte[] 
+	private static final    byte[] 
 	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"
 											  + "\n  </li>")
 	, box_html_end_bry	= Bry_.new_a7		  ( "\n</ul>")

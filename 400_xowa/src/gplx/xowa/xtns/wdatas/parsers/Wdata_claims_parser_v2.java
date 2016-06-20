@@ -102,14 +102,14 @@ class Wdata_claims_parser_v2 {
 		return rv;
 	}
 	private Wdata_claim_grp Parse_props_grp(byte[] qid, int pid, Json_ary props_ary) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int len = props_ary.Len();
 		for (int i = 0; i < len; ++i) {
 			Json_nde qualifier_nde = Json_nde.cast(props_ary.Get_at(i));
 			Wdata_claim_itm_core qualifier_itm = Parse_mainsnak(qid, qualifier_nde, pid);
 			list.Add(qualifier_itm);
 		}
-		return new Wdata_claim_grp(Int_obj_ref.new_(pid), (Wdata_claim_itm_core[])list.To_ary_and_clear(Wdata_claim_itm_core.class));
+		return new Wdata_claim_grp(Int_obj_ref.New(pid), (Wdata_claim_itm_core[])list.To_ary_and_clear(Wdata_claim_itm_core.class));
 	}
 	public Wdata_claim_itm_core Parse_mainsnak(byte[] qid, Json_nde nde, int pid) {
 		int len = nde.Len();

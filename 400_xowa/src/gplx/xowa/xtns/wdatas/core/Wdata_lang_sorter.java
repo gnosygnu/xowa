@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.apis.xowa.xtns.*;
-public class Wdata_lang_sorter implements GfoEvObj, gplx.core.lists.ComparerAble {
+public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
-	public Wdata_lang_sorter() {evMgr = GfoEvMgr.new_(this);}
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
+	public Wdata_lang_sorter() {evt_mgr = new Gfo_evt_mgr(this);}
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public byte[][] Langs() {return langs;} private byte[][] langs;
 	public void Langs_(byte[][] langs) {
 		this.langs = langs;
@@ -70,7 +70,7 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.core.lists.ComparerAble
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Xoapi_wikibase.Evt_sort_langs_changed))	Langs_((byte[][])m.ReadObj("v", null));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final int Sort_null = Int_.Min_value;
@@ -78,6 +78,6 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.core.lists.ComparerAble
 }
 class Wdata_lang_sorter_itm {
 	public Wdata_lang_sorter_itm(int sort, byte[] lang) {this.sort = sort; this.lang = lang;}
-	public int Sort() {return sort;} private final  int sort;
-	public byte[] Lang() {return lang;} private final byte[] lang;
+	public int Sort() {return sort;} private final     int sort;
+	public byte[] Lang() {return lang;} private final    byte[] lang;
 }

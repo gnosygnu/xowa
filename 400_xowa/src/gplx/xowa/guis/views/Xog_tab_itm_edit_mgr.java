@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
+import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xog_tab_itm_edit_mgr {
@@ -61,7 +61,7 @@ public class Xog_tab_itm_edit_mgr {
 
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read);
-		wkr.Write_body(tmp_bfr, Xoh_wtr_ctx.Basic, new_page);
+		wkr.Write_body(tmp_bfr, wiki.Parser_mgr().Ctx(), Xoh_wtr_ctx.Basic, new_page);
 		byte[] new_html = tmp_bfr.To_bry_and_rls();
 		new_page.Html_data().Edit_preview_(new_html);
 
@@ -100,7 +100,7 @@ public class Xog_tab_itm_edit_mgr {
 	public static void Debug(Xog_win_itm win, byte view_tid) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); Xoae_page page = tab.Page();
 		Xowe_wiki wiki = tab.Wiki(); Xop_ctx ctx = wiki.Parser_mgr().Ctx();
-		ctx.Defn_trace().Clear(); // TODO: move_me
+		ctx.Defn_trace().Clear(); // TODO_OLD: move_me
 		ctx.Defn_trace_(Xot_defn_trace_dbg.Instance);
 		Xoa_ttl ttl = page.Ttl();
 		Xoae_page new_page = Xoae_page.New(wiki, ttl);

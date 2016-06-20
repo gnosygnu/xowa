@@ -30,7 +30,7 @@ public class Xow_hive_mgr_fxt {
 	}	private Xob_hive_mgr hive_mgr; Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Find_nearby(String key, int count, boolean include_redirects, String... expd) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		wiki.Hive_mgr().Find_bgn(list, wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), count, include_redirects);
 		int actl_len = list.Count();
 		String[] actl = new String[actl_len];
@@ -47,7 +47,7 @@ public class Xow_hive_mgr_fxt {
 		int id = 0;
 		int ttl_bry_len = Int_.DigitCount(ttls_per_file);
 		Xob_xdat_file_wtr xdat_wtr = Xob_xdat_file_wtr.new_file_(ttls_per_file * 8, wiki.Tdb_fsys_mgr().Url_ns_dir(ns.Num_str(), Xotdb_dir_info_.Tid_ttl));
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		byte ltr = Byte_ascii.Ltr_A; byte[] ttl_0 = Bry_.Empty, ttl_n = Bry_.Empty;
 		for (int fil_idx = 0; fil_idx < files; fil_idx++) {
 			for (int ttl_idx = 0; ttl_idx < ttls_per_file; ttl_idx++) {
@@ -98,7 +98,7 @@ public class Xow_hive_mgr_fxt {
 	}
 }
 class Xob_reg_wtr {
-	Bry_bfr bfr = Bry_bfr.new_(); int fil_count = 0;
+	Bry_bfr bfr = Bry_bfr_.New(); int fil_count = 0;
 	public void Add(byte[] bgn, byte[] end, int itm_count) {
 		bfr
 		.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)

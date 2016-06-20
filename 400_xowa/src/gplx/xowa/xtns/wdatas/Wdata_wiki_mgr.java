@@ -23,21 +23,21 @@ import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.apis.xowa.xtns.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 import gplx.xowa.parsers.*;
-public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
+public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
 	private final    Wdata_prop_val_visitor prop_val_visitor;
 	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
 	private Wdata_hwtr_mgr hwtr_mgr;
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
-		this.evMgr = GfoEvMgr.new_(this);
+		this.evt_mgr = new Gfo_evt_mgr(this);
 		this.Qid_mgr = new Wbase_qid_mgr(this);
 		this.Pid_mgr = new Wbase_pid_mgr(this);
 		this.Doc_mgr = new Wbase_doc_mgr(app, this, this.Qid_mgr);
 		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
 		this.Enabled_(true);
 	}
-	public GfoEvMgr EvMgr() {return evMgr;} private final    GfoEvMgr evMgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
 	public final    Wbase_qid_mgr		Qid_mgr;
 	public final    Wbase_pid_mgr		Pid_mgr;
 	public final    Wbase_doc_mgr		Doc_mgr;
@@ -72,7 +72,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		prop_val_visitor.Init(tmp_bfr, hwtr_mgr.Msgs(), domain.Lang_orig_key());
 		claim_itm.Welcome(prop_val_visitor);
 		return tmp_bfr.To_bry_and_clear();
-	}	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(32);
+	}	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
 		Hwtr_mgr_assert();
 		int len = prop_grp.Len();
@@ -113,7 +113,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		hwtr_mgr = new Wdata_hwtr_mgr();
 		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, toggle_mgr, app.Usere().Wiki().Xwiki_mgr());
 		this.Hwtr_msgs_make();
-		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
+		Gfo_evt_mgr_.Sub_same_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 	}
 	private void Hwtr_msgs_make() {
 		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return;
@@ -134,9 +134,9 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_enabled_))					enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_domain))						return String_.new_u8(domain);
 		else if	(ctx.Match(k, Invk_domain_))					domain = m.ReadBry("v");
-		else if	(ctx.Match(k, Invk_property_wkr))				return m.ReadYnOrY("v") ? Property_wkr_or_new() : GfoInvkAble_.Null;
+		else if	(ctx.Match(k, Invk_property_wkr))				return m.ReadYnOrY("v") ? Property_wkr_or_new() : Gfo_invk_.Noop;
 		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))		Hwtr_msgs_make();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_domain = "domain", Invk_domain_ = "domain_", Invk_property_wkr = "property_wkr";

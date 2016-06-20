@@ -23,8 +23,8 @@ public class Xopg_redlink_lnki_list {
 	public Xopg_redlink_lnki_list(boolean ttl_is_module) {			// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		this.disabled = ttl_is_module;
 	}
-	public boolean		Disabled() {return disabled;} private final boolean disabled;
-	public List_adp	Lnki_list() {return lnki_list;} private final List_adp lnki_list = List_adp_.new_();
+	public boolean		Disabled() {return disabled;} private final    boolean disabled;
+	public List_adp	Lnki_list() {return lnki_list;} private final    List_adp lnki_list = List_adp_.New();
 	public int		Thread_id() {return thread_id;} private int thread_id = 1;
 	public void		Clear() {
 		if (disabled) return;
@@ -47,5 +47,5 @@ public class Xopg_redlink_lnki_list {
 		lnki_list.Add(lnki);
 	}
 	public static final String Lnki_id_prefix = "xolnki_";
-	public static final int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);
+	public static final    int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);
 }

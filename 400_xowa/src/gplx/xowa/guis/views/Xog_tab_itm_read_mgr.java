@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.threads.*;
-import gplx.gfui.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.history.*;
+import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.history.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.wikis.pages.*;
 public class Xog_tab_itm_read_mgr {
-	public static void Async(Xog_tab_itm tab) {tab.Async();}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
 		if (reset_to_read) tab.View_mode_(Xopg_page_.Tid_read);
@@ -36,7 +35,7 @@ public class Xog_tab_itm_read_mgr {
 		try	{tab.Html_itm().Show(new_page);}
 		catch (Exception e) {
 			if (String_.Eq(Err_.Message_lang(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
-			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
+			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO_OLD:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().To_str(), Err_.Message_gplx_full(e));
 				return;
 			}
@@ -56,7 +55,7 @@ public class Xog_tab_itm_read_mgr {
 		if (tab.View_mode() == Xopg_page_.Tid_read)
 			html_itm.Scroll_page_by_bmk_gui();
 		else
-			GfoInvkAble_.InvkCmd_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
+			Gfo_invk_.Invk_by_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
 	}
 	public static void Update_selected_tab_blank(Xog_win_itm win) {Update_selected_tab(win, null, null);} // called when all tabs are null
 	public static void Update_selected_tab(Xog_win_itm win, Xoa_url url, Xoa_ttl ttl) {
@@ -73,7 +72,7 @@ public class Xog_tab_itm_read_mgr {
 		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
-		Xoae_page fail_page = wiki.Data_mgr().Get_page(ttl, false);
+		Xoae_page fail_page = wiki.Data_mgr().Load_page_by_ttl(ttl);
 		tab.View_mode_(Xopg_page_.Tid_edit);
 		Update_selected_tab(win, url, ttl);
 		Show_page(tab, fail_page, false, false, true, Xog_history_stack.Nav_fwd);

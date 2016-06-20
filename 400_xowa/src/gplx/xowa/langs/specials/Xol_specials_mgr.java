@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.parsers.*;
-public class Xol_specials_mgr implements GfoInvkAble {
-	private Ordered_hash hash_by_special = Ordered_hash_.New_bry(), hash_by_aliases = Ordered_hash_.New_bry();
-	public Xol_specials_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
+public class Xol_specials_mgr implements Gfo_invk {
+	private final    Ordered_hash hash_by_special = Ordered_hash_.New_bry(), hash_by_aliases = Ordered_hash_.New_bry();
+	private final    Xol_lang_itm lang;
+	public Xol_specials_mgr(Xol_lang_itm lang) {this.lang = lang;}
 	public void Clear() {hash_by_special.Clear();}
-	public int Count() {return hash_by_special.Count();}
+	public int Len() {return hash_by_special.Len();}
 	public Xol_specials_itm Get_at(int i) {return (Xol_specials_itm)hash_by_special.Get_at(i);}
 	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.Get_by(alias);}
 	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.Get_by(special);}
@@ -39,7 +40,7 @@ public class Xol_specials_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_lang))			return lang;
 		else if	(ctx.Match(k, Invk_clear))			this.Clear();
 		else if	(ctx.Match(k, Invk_load_text))		Xol_lang_srl.Load_specials(this, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_lang = "lang", Invk_clear = "clear", Invk_load_text = "load_text";

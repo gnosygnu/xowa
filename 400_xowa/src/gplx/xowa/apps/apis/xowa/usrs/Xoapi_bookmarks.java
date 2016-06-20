@@ -19,7 +19,7 @@ package gplx.xowa.apps.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.guis.history.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.users.bmks.*;
 import gplx.xowa.wikis.*;
-public class Xoapi_bookmarks implements GfoInvkAble {
+public class Xoapi_bookmarks implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
 	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
@@ -49,7 +49,7 @@ public class Xoapi_bookmarks implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_delete_confirm_)) 					delete_confirm = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_add)) 								return this.Add(m.ReadStrOr("v", null));
 		else if	(ctx.Match(k, Invk_show)) 								this.Show();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.fsdb.data.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; import gplx.fsdb.data.*;
 public class Fsm_mnt_itm {
 	public Fsm_mnt_itm(int id, String name, String url_rel) {this.id = id; this.name = name; this.url_rel = url_rel;}
-	public int				Id() {return id;} private final int id;
-	public String			Name() {return name;} private final String name;
-	public String			Url_rel() {return url_rel;} private final String url_rel;
+	public int				Id() {return id;} private final    int id;
+	public String			Name() {return name;} private final    String name;
+	public String			Url_rel() {return url_rel;} private final    String url_rel;
 	public Fsm_atr_mgr		Atr_mgr() {return atr_mgr;} private Fsm_atr_mgr atr_mgr;
 	public Fsm_bin_mgr		Bin_mgr() {return bin_mgr;} private Fsm_bin_mgr bin_mgr;
 	public Fsm_cfg_mgr		Cfg_mgr() {return cfg_mgr;} private Fsm_cfg_mgr cfg_mgr;
@@ -47,7 +47,7 @@ public class Fsm_mnt_itm {
 		int fil_id = atr_fil.Insert_img(rv, dir, fil, ext_id, img_w, img_h, bin_fil.Id(), bin_len, bin_rdr);
 		bin_fil.Insert(fil_id, Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
 	}
-	public void				Insert_fil(Fsd_fil_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, long bin_len, gplx.core.ios.Io_stream_rdr bin_rdr) {
+	public void				Insert_fil(Fsd_fil_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, long bin_len, gplx.core.ios.streams.Io_stream_rdr bin_rdr) {
 		int fil_id = atr_fil.Insert_fil(rv, dir, fil, ext_id, bin_fil.Id(), bin_len, bin_rdr);
 		bin_fil.Insert(fil_id, Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
 	}

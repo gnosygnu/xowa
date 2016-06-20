@@ -19,9 +19,9 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.envs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
-	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
-	private final Bry_bfr int_bfr = Bry_bfr.reset_(16);
-	private final Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
+	private final    Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
+	private final    Bry_bfr int_bfr = Bry_bfr_.Reset(16);
+	private final    Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final    Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
 	private int lnki_w, lnki_h;
 	public void Evt_lang_changed(Xol_lang_itm lang) {
 		Bry_bfr tmp_bfr = int_bfr;
@@ -144,7 +144,7 @@ public class Xop_lnki_arg_parser {
 			px_trie.Add(word_bry, Byte_obj_val.new_(Tid_dim));
 		}
 	}	
-	public static final byte[] Bry_upright = Bry_.new_a7("upright"), Bry_thumbtime = Bry_.new_a7("thumbtime"), Bry_target = Bry_.new_a7("target");
+	public static final    byte[] Bry_upright = Bry_.new_a7("upright"), Bry_thumbtime = Bry_.new_a7("thumbtime"), Bry_target = Bry_.new_a7("target");
 	public static final byte
 	  Tid_unknown = 0, Tid_thumb = 1, Tid_left = 2, Tid_right = 3, Tid_none = 4, Tid_center = 5, Tid_frame = 6, Tid_frameless = 7, Tid_upright = 8, Tid_border = 9
 	, Tid_alt = 10, Tid_link = 11, Tid_baseline = 12, Tid_sub = 13, Tid_super = 14, Tid_top = 15, Tid_text_top = 16, Tid_middle = 17, Tid_bottom = 18, Tid_text_bottom = 19
@@ -155,13 +155,13 @@ public class Xop_lnki_arg_parser {
 	, Tid_class = 27
 	, Tid_target = 28
 	;
-	private static final byte[] X_bry = Bry_.new_a7("x");
+	private static final    byte[] X_bry = Bry_.new_a7("x");
 	private static final byte	// NOTE: d0 - d9 must match 0 - 9; DATE:2015-07-18
 	  Key_dim_d0 = 0, Key_dim_d1 = 1, Key_dim_d2 = 2, Key_dim_d3 = 3, Key_dim_d4 = 4
 	, Key_dim_d5 = 5, Key_dim_d6 = 6, Key_dim_d7 = 7, Key_dim_d8 = 8, Key_dim_d9 = 9
 	, Key_dim_num = 10, Key_dim_x = 11, Key_dim_px = 12, Key_space = 13
 	;
-	private static final int[][] Keys_ids = new int[][] 
+	private static final    int[][] Keys_ids = new int[][] 
 	{ new int[] {Xol_kwd_grp_.Id_img_thumbnail		, Tid_thumb}
 	, new int[] {Xol_kwd_grp_.Id_img_manualthumb	, Tid_thumb}	// RESEARCH: what is manualthumb? 'thumb=$1' vs 'thumb'
 	, new int[] {Xol_kwd_grp_.Id_img_right			, Tid_right}

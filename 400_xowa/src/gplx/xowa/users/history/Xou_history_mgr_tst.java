@@ -85,7 +85,7 @@ class Xou_history_mgr_fxt {
 		Tfds.Eq_ary_str(expd, actl);
 		return this;
 	}
-	public Xou_history_mgr_fxt Invk(String key, Object v) {GfoInvkAble_.InvkCmd_val(under, key, v); return this;}
+	public Xou_history_mgr_fxt Invk(String key, Object v) {Gfo_invk_.Invk_by_val(under, key, v); return this;}
 	public Xou_history_mgr_fxt Save() {under.Save(app); return this;}
 	public Xou_history_mgr_fxt Fil_tst(String expd_url, String expd) {
 		String actl = Io_mgr.Instance.LoadFilStr(expd_url);

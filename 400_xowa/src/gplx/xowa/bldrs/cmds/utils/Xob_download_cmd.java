@@ -57,7 +57,7 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 		else if	(String_.Eq(k, Invk_dump_trg_zip_))			dump_trg_zip = m.ReadIoUrl("v");
 		else if	(String_.Eq(k, Invk_dump_trg_bin_))			dump_trg_bin = m.ReadIoUrl("v");
 		else if	(String_.Eq(k, Invk_unzip_))				unzip = m.ReadYn("v");
-		else												return GfoInvkAble_.Rv_unhandled;
+		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

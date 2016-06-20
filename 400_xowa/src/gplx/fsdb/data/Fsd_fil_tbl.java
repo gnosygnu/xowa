@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Fsd_fil_tbl implements Rls_able {
-	private final String tbl_name = "fsdb_fil"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
-	private final String idx_owner;		
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name; private int mnt_id;
+	public final    String tbl_name = "fsdb_fil"; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final    String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
+	private final    String idx_owner;		
+	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name; private int mnt_id;
 	public Fsd_fil_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
 		this.conn = conn; this.mnt_id = mnt_id;
 		this.fld_id					= flds.Add_int_pkey	("fil_id");
@@ -48,7 +48,10 @@ public class Fsd_fil_tbl implements Rls_able {
 	}
 	public void Insert(int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear()
+		Insert(stmt_insert, id, owner_id, name, xtn_id, ext_id, size, bin_db_id, String_.Empty, String_.Empty);
+	}
+	public void Insert(Db_stmt stmt, int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id, String modified_on, String hash_md5) {
+		stmt.Clear()
 		.Val_int(fld_id, id)
 		.Val_int(fld_owner_id, owner_id)
 		.Val_int(fld_xtn_id, xtn_id)
@@ -56,8 +59,8 @@ public class Fsd_fil_tbl implements Rls_able {
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_bry_as_str(fld_name, name)
 		.Val_long(fld_size, size)
-		.Val_str(fld_modified, String_.Empty)
-		.Val_str(fld_hash, String_.Empty)
+		.Val_str(fld_modified, modified_on)
+		.Val_str(fld_hash, hash_md5)
 		.Exec_insert();
 	}	
 	public void Update(int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id) {
@@ -84,7 +87,7 @@ public class Fsd_fil_tbl implements Rls_able {
 				.Crt_bry_as_str(fld_name, fil_name)
 				.Exec_select__rls_manual();
 		try {
-			return rdr.Move_next() ? new_(mnt_id, rdr) : Fsd_fil_itm.Null;
+			return rdr.Move_next() ? Load_by_rdr(mnt_id, rdr) : Fsd_fil_itm.Null;
 		}
 		finally {rdr.Rls();}
 	}
@@ -92,14 +95,28 @@ public class Fsd_fil_tbl implements Rls_able {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
-				Fsd_fil_itm fil = new_(mnt_id, rdr);
+				Fsd_fil_itm fil = Load_by_rdr(mnt_id, rdr);
 				byte[] cache_key = Fsd_fil_itm.Gen_cache_key(key_bfr, fil.Dir_id(), fil.Name());
 				cache.Add(cache_key, fil);
 			}
 		}
 		finally {rdr.Rls();}
 	}
-	private Fsd_fil_itm new_(int mnt_id, Db_rdr rdr) {
+	public Fsd_fil_itm Load_by_rdr(int mnt_id, Db_rdr rdr) {
 		return new Fsd_fil_itm().Ctor(mnt_id, rdr.Read_int(fld_owner_id), rdr.Read_int(fld_id), rdr.Read_int(fld_bin_db_id), rdr.Read_bry_by_str(fld_name), rdr.Read_int(fld_ext_id));
+	}
+	public Fsd_fil_itm Load_by_rdr__full(int mnt_id, Db_rdr rdr) {
+		return new Fsd_fil_itm()
+			.Load_by_rdr__full(mnt_id
+			, rdr.Read_int(fld_owner_id)
+			, rdr.Read_int(fld_id)
+			, rdr.Read_int(fld_xtn_id)
+			, rdr.Read_int(fld_ext_id)
+			, rdr.Read_bry_by_str(fld_name)
+			, rdr.Read_long(fld_size)
+			, rdr.Read_str(fld_modified)
+			, rdr.Read_str(fld_hash)
+			, rdr.Read_int(fld_bin_db_id)
+			);
 	}
 }

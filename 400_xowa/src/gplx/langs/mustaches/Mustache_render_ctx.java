@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 public class Mustache_render_ctx {
-	private final    List_adp stack = List_adp_.new_();
+	private final    List_adp stack = List_adp_.New();
 	private Mustache_doc_itm cur;
 	private Mustache_doc_itm[] subs; private int subs_idx, subs_len; private byte cur_is_bool;
 	public Mustache_render_ctx Init(Mustache_doc_itm cur) {
@@ -32,7 +32,7 @@ public class Mustache_render_ctx {
 		while (itm != Mustache_doc_itm_.Null_itm) {
 			boolean resolved = cur.Mustache__write(key, bfr);
 			if (resolved) {rv = true; break;}
-			else break; // TODO: itm = itm.Get_owner();
+			else break; // TODO_OLD: itm = itm.Get_owner();
 		}
 		return rv;
 	}

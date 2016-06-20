@@ -23,7 +23,7 @@ class GfmlTypeHash {
 		if (hash.Has(type.Key())) throw Err_.new_wo_type("type key already exists", "key", type.Key());
 		hash.Add(type.Key(), type);
 	}
-	Hash_adp hash = Hash_adp_.new_();
+	Hash_adp hash = Hash_adp_.New();
 	public static GfmlTypeHash new_() {return new GfmlTypeHash();} GfmlTypeHash() {}
 }
 class GfmlTypRegy {

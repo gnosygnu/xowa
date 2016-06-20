@@ -52,7 +52,7 @@ public class Xop_lnki_type {
 			return true;
 		else if (	Bitmask_.Has_int(id, Id_frame)		// [[File:A.png|frame]]     -> 400,200 (frame is always default size)
 				||	id == Id_null						// [[File:A.png]]           -> 400,200 (default to original size)
-				||	Bitmask_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: still used by one test; DATE:2015-08-03
+				||	Bitmask_.Has_int(id, Id_none)		// TODO_OLD: deprecate; NOTE: still used by one test; DATE:2015-08-03
 				)
 			return false;
 		else											// should not happen
@@ -65,7 +65,7 @@ public class Xop_lnki_type {
 				)
 			return true;
 		else if (	id == Id_null						// [[File:A.png|600px]]            -> 600,400; uses orig file of 400,200, but <img> tag src_width / src_height set to 600,400
-				||	Bitmask_.Has_int(id, Id_none)		// TODO: deprecate; NOTE: leaving in b/c of above failed-deprecate; DATE:2015-08-03
+				||	Bitmask_.Has_int(id, Id_none)		// TODO_OLD: deprecate; NOTE: leaving in b/c of above failed-deprecate; DATE:2015-08-03
 				)
 			return false;
 		else											// should not happen;

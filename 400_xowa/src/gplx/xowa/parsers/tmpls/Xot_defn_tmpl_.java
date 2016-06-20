@@ -46,7 +46,7 @@ public class Xot_defn_tmpl_ {
 	}
 	private static Arg_itm_tkn Make_itm(boolean val_tkn, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Arg_itm_tkn orig, Xot_invk caller, Arg_nde_tkn orig_arg) {
 		int subs_len = orig.Subs_len();
-		Bry_bfr arg_bfr = Bry_bfr.new_();
+		Bry_bfr arg_bfr = Bry_bfr_.New();
 		for (int i = 0; i < subs_len; i++)
 			orig.Subs_get(i).Tmpl_evaluate(ctx, src, caller, arg_bfr);
 		Arg_itm_tkn rv = tkn_mkr.ArgItm(-1, -1);	// NOTE: was -1, 0; DATE:2013-04-10

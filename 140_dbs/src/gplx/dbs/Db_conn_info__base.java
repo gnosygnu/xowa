@@ -19,13 +19,13 @@ package gplx.dbs; import gplx.*;
 public abstract class Db_conn_info__base implements Db_conn_info {
 	public Db_conn_info__base(String raw, String db_api, String database) {this.raw = raw; this.db_api = db_api; this.database = database;}
 	public abstract String Key();
-	public String Raw()				{return raw;} private final String raw;
-	public String Db_api()			{return db_api;} private final String db_api;
-	public String Database()		{return database;} protected final String database;
+	public String Raw()				{return raw;} private final    String raw;
+	public String Db_api()			{return db_api;} private final    String db_api;
+	public String Database()		{return database;} protected final    String database;
 	public abstract Db_conn_info New_self(String raw, Keyval_hash hash);
 
 	protected static String Bld_raw(String... ary) {// "a", "b" -> "a=b;"
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String itm = ary[i];
@@ -35,7 +35,7 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 		return bfr.To_str_and_clear();
 	}
 	protected static String Bld_api(Keyval_hash hash, Keyval... xtn_ary) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = hash.Count();
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = hash.Get_at(i);

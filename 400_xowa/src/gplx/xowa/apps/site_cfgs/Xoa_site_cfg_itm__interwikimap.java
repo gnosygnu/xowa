@@ -20,8 +20,8 @@ import gplx.core.net.*; import gplx.langs.jsons.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
-	private final Gfo_url_parser url_parser = new Gfo_url_parser(); private final Gfo_url url = new Gfo_url();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url url = new Gfo_url();
 	public Xoa_site_cfg_itm__interwikimap() {this.Ctor(Xoa_site_cfg_loader__inet.Qarg__interwikimap);}
 	@Override public void Parse_json_ary_itm(Bry_bfr bfr, Xow_wiki wiki, int i, Json_itm itm) {
 		Json_nde nde = Json_nde.cast(itm);
@@ -75,7 +75,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 		if	(Bry_.Eq(wiki.Domain_bry(), Xow_domain_itm_.Bry__simplewiki))	
 			xwiki_mgr.Add_by_csv(Csv__enwiki);
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Csv__manual = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "1|commons;c|commons.wikimedia.org|Commons"
 	, "1|m;metawikipedia|meta.wikipedia.org"

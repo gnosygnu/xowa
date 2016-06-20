@@ -17,16 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.addons.builds.files.*; import gplx.xowa.files.origs.*;
+import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.builds.files.utls.*;
+import gplx.xowa.addons.bldrs.files.utls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
-public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
+public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, Gfo_invk {
 	private Xob_dump_src_id page_src;
-	private Xowd_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
-	private int[] ns_ary; private Xowd_db_file[] db_ary;
+	private Xow_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
+	private int[] ns_ary; private Xow_db_file[] db_ary;
 	private int ns_bgn = -1, db_bgn = -1, pg_bgn = -1;
 	private int ns_end = -1, db_end = -1, pg_end = Int_.Max_value;
 	private int commit_interval = 1000, progress_interval = 250, cleanup_interval = 2500, select_size = 10 * Io_mgr.Len_mb;
@@ -45,7 +45,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		ctx = wiki.Parser_mgr().Ctx();
 		root = ctx.Tkn_mkr().Root(Bry_.Empty);
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
-		wiki.Db_mgr_as_sql().Core_data_mgr().Init_by_load(gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(wiki));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)
+		wiki.Db_mgr_as_sql().Core_data_mgr().Init_by_load(gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil(wiki));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)
 		wiki.File__orig_mgr().Wkrs_del(Xof_orig_wkr_.Tid_wmf_api);
 		db_fsys_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		db_ary = Xob_dump_mgr_base_.Init_text_files_ary(db_fsys_mgr);
@@ -110,7 +110,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		}
 	}
 	private void Exec_db_itm(Xob_dump_bmk dump_bmk, int ns_ord, int ns_id, int db_id) {
-		List_adp pages = List_adp_.new_();
+		List_adp pages = List_adp_.New();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		int pg_id = pg_bgn;
 		while (true) {
@@ -183,7 +183,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 	}
 	private void Free() {
-		Xow_wiki_.Rls_mem(wiki, true);
+		Xowe_wiki_.Rls_mem(wiki, true);
 	}
 	protected void Reset_db_y_() {this.reset_db = true;}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -204,7 +204,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		else if	(ctx.Match(k, Invk_exec_count_max_))		exec_count_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_exit_now_))				exit_now = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_exit_after_commit_))		exit_after_commit = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private void Notify_restoring(String itm, int val) {
@@ -222,7 +222,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 }
 class Xob_dump_mgr_base_ {
 	public static void Load_all_tmpls(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, Xob_dump_src_id page_src) {
-		List_adp pages = List_adp_.new_();
+		List_adp pages = List_adp_.New();
 		Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 		Xow_defn_cache defn_cache = wiki.Cache_mgr().Defn_cache();
 		int cur_page_id = -1;
@@ -245,24 +245,24 @@ class Xob_dump_mgr_base_ {
 		}
 		usr_dlg.Note_many("", "", "tmpl_load done: ~{0}", load_count);
 	}
-	public static Xowd_db_file[] Init_text_files_ary(Xowd_db_mgr core_data_mgr) {
-		List_adp text_files_list = List_adp_.new_();
+	public static Xow_db_file[] Init_text_files_ary(Xow_db_mgr core_data_mgr) {
+		List_adp text_files_list = List_adp_.New();
 		int len = core_data_mgr.Dbs__len();
-		if (len == 1) return new Xowd_db_file[] {core_data_mgr.Dbs__get_at(0)};	// single file: return core; note that there are no Tid = Text
+		if (len == 1) return new Xow_db_file[] {core_data_mgr.Dbs__get_at(0)};	// single file: return core; note that there are no Tid = Text
 		for (int i = 0; i < len; i++) {
-			Xowd_db_file file = core_data_mgr.Dbs__get_at(i);
+			Xow_db_file file = core_data_mgr.Dbs__get_at(i);
 			switch (file.Tid()) {
-				case Xowd_db_file_.Tid_text:
-				case Xowd_db_file_.Tid_text_solo:
+				case Xow_db_file_.Tid__text:
+				case Xow_db_file_.Tid__text_solo:
 					text_files_list.Add(file);
 					break;
 			}
 		}
-		return (Xowd_db_file[])text_files_list.To_ary_and_clear(Xowd_db_file.class);
+		return (Xow_db_file[])text_files_list.To_ary_and_clear(Xow_db_file.class);
 	}
 }
 class Xob_dump_bmk_mgr {
-	private Bry_bfr save_bfr = Bry_bfr.reset_(1024);
+	private Bry_bfr save_bfr = Bry_bfr_.Reset(1024);
 	public Io_url Cfg_url() {return cfg_url;} public Xob_dump_bmk_mgr Cfg_url_(Io_url v) {cfg_url = v; return this;} private Io_url cfg_url;
 	public void Reset() {Io_mgr.Instance.DeleteFil(cfg_url);}
 	public void Load(Xoae_app app, Xob_dump_mgr_base dump_mgr) {
@@ -283,7 +283,7 @@ class Xob_dump_bmk_mgr {
 class Xob_rate_mgr {
 	private long time_bgn;
 	private int item_len;
-	private Bry_bfr save_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr save_bfr = Bry_bfr_.Reset(255);
 	public int Reset_interval() {return reset_interval;} public Xob_rate_mgr Reset_interval_(int v) {reset_interval = v; return this;} private int reset_interval = 10000;
 	public Io_url Log_file_url() {return log_file;} public Xob_rate_mgr Log_file_(Io_url v) {log_file = v; return this;} private Io_url log_file;
 	public void Init() {time_bgn = Env_.TickCount();}

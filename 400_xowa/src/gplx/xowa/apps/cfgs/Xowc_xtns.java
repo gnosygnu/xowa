@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-public class Xowc_xtns implements GfoInvkAble {
+public class Xowc_xtns implements Gfo_invk {
 	private Hash_adp_bry hash = Hash_adp_bry.ci_a7();
 	public Xowc_xtns() {hash.Add(Xowc_xtn_pages.Xtn_key, itm_pages);}
 	public Xowc_xtn_pages Itm_pages() {return itm_pages;} private Xowc_xtn_pages itm_pages = new Xowc_xtn_pages();
 	public Object Get_by_key(byte[] key) {return hash.Get_by_bry(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_get))					return (GfoInvkAble)hash.Get_by_bry(m.ReadBry("v"));
-		else return GfoInvkAble_.Rv_unhandled;
+		if		(ctx.Match(k, Invk_get))					return (Gfo_invk)hash.Get_by_bry(m.ReadBry("v"));
+		else return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get";
 }

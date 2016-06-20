@@ -38,13 +38,16 @@ public class Xof_orig_itm {
 		this.w = w; this.h = h;  this.redirect = redirect;
 		return this;
 	}
+
+	public int Db_row_size() {return Db_row_size_fixed + redirect.length + ttl.length;}
+	private static final int Db_row_size_fixed = (5 * 4);	// 3 ints; 2 bytes
 	public static final byte Repo_comm = 0, Repo_wiki = 1, Repo_null = Byte_.Max_value_127;	// SERIALIZED: "wiki_orig.orig_repo"
-	public static final Xof_orig_itm Null = null;
+	public static final    Xof_orig_itm Null = null;
 	public static final int File_len_null = -1;	// file_len used for filters (EX: don't download ogg > 1 MB)
 	public static String dump(Xof_orig_itm itm) {
 		if (itm == null)
 			return "NULL";
-		Bry_bfr bfr = Bry_bfr.new_(255);
+		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
 		bfr.Add_str_a7("repo").Add_byte_eq().Add_int_variable((int)itm.repo).Add_byte_semic();
 		bfr.Add_str_a7("ttl").Add_byte_eq().Add(itm.ttl).Add_byte_semic();
 		bfr.Add_str_a7("ext_id").Add_byte_eq().Add_int_variable(itm.ext_id).Add_byte_semic();

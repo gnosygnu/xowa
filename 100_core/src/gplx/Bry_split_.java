@@ -19,11 +19,12 @@ package gplx;
 import gplx.core.brys.*;
 public class Bry_split_ {
 	private static final    Object thread_lock = new Object();
-	public static byte[][] Split(byte[] src, byte dlm) {return Split(src, dlm, false);}
-	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
+	public static byte[][] Split(byte[] src, byte dlm)				{return Split(src, dlm, false);}
+	public static byte[][] Split(byte[] src, byte dlm, boolean trim)	{return src == null ? Bry_.Ary_empty : Split(src, 0, src.length, dlm, trim);}
+	public static byte[][] Split(byte[] src, int bgn, int end, byte dlm, boolean trim) {
 		synchronized (thread_lock) {
 			Bry_split_wkr__to_ary wkr = Bry_split_wkr__to_ary.Instance;
-			Split(src, 0, src == null ? 0 : src.length, dlm, trim, wkr);
+			Split(src, bgn, end, dlm, trim, wkr);
 			return wkr.To_ary();
 		}
 	}
@@ -76,7 +77,7 @@ public class Bry_split_ {
 		int src_len = src.length;
 		if (src_len == 0) return Bry_.Ary_empty;
 		int cur_pos = src_bgn, dlm_len = dlm.length;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		while (true) {
 			int find_pos = Bry_find_.Find_fwd(src, dlm, cur_pos);
 			if (find_pos == Bry_find_.Not_found) {
@@ -92,7 +93,7 @@ public class Bry_split_ {
 	public static byte[][] Split_lines(byte[] src) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
 		int src_len = src.length, src_pos = 0, fld_bgn = 0;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		while (true) {
 			boolean last = src_pos == src_len;
 			byte b = last ? Byte_ascii.Nl : src[src_pos];
@@ -118,7 +119,7 @@ public class Bry_split_ {
 	public static final int Rv__ok = 0, Rv__extend = 1, Rv__cancel = 2;
 }
 class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
-	private final    List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
 		synchronized (list) {
 			byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);

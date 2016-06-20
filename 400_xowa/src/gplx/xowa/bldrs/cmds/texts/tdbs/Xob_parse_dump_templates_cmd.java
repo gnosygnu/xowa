@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wkrs.*;
-public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
+public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	public Xob_parse_dump_templates_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Page_wkr__key() {return KEY;} public static final    String KEY = "parse.dump_templates";
 	public static final int FixedLen_page = 1 + 5 + 1 + 5 + 1 + 1 + 1;	// \tid|date|title|text\n

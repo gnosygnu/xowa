@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import org.junit.*;
 public class Xoh_hzip_int_tst {
-	private final Xoh_hzip_int_fxt fxt = new Xoh_hzip_int_fxt();
+	private final    Xoh_hzip_int_fxt fxt = new Xoh_hzip_int_fxt();
 	@Test   public void B256__reqd__1() {
 		fxt.Init__b256();
 		fxt.Test__b256(1,          0		,   0);
@@ -65,9 +65,9 @@ public class Xoh_hzip_int_tst {
 	}
 }
 class Xoh_hzip_int_fxt {
-	private final Bry_bfr bfr = Bry_bfr.new_();
-	private final gplx.core.primitives.Int_obj_ref count_ref = gplx.core.primitives.Int_obj_ref.neg1_();
-	private final Xoh_hzip_int hzint = new Xoh_hzip_int();
+	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final    gplx.core.primitives.Int_obj_ref count_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
+	private final    Xoh_hzip_int hzint = new Xoh_hzip_int();
 	public void Init__b256() {hzint.Mode_is_b256_(Bool_.Y);}
 	public void Init__b085() {hzint.Mode_is_b256_(Bool_.N);}
 	public void Test__b256(int reqd, int val, int... expd_ints) {

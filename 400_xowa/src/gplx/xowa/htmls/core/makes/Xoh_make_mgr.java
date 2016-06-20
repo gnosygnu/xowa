@@ -23,12 +23,12 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xow
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_make_mgr {
-	private final Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(255); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
-	private Xoh_cfg_file cfg_file; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
-	private final byte[] root_dir, file_dir; private byte[] file_dir_comm, file_dir_wiki, hiero_img_dir; private final byte[] wiki_domain;
-	private final Bry_rdr parser = new Bry_rdr();
-	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
-	private final Xoh_hdoc_parser make_parser = new Xoh_hdoc_parser(new Xoh_hdoc_wkr__make());
+	private final    Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(255); private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); private final    Bry_rdr_old bry_rdr = new Bry_rdr_old(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
+	private Xoh_cfg_file cfg_file; private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
+	private final    byte[] root_dir, file_dir; private byte[] file_dir_comm, file_dir_wiki, hiero_img_dir; private final    byte[] wiki_domain;
+	private final    Bry_rdr parser = new Bry_rdr();
+	private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	private final    Xoh_hdoc_parser make_parser = new Xoh_hdoc_parser(new Xoh_hdoc_wkr__make());
 	public Xoh_make_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Gfo_url_encoder fsys_encoder, byte[] wiki_domain) {
 		this.usr_dlg = usr_dlg;
 		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
@@ -139,6 +139,6 @@ public class Xoh_make_mgr {
 		} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "abrv.read: page=~{0} itm=~{1} err=~{2}", hpg.Url_bry_safe(), img == null ? "<NULL>" : img.Data_print(), Err_.Message_gplx_full(e));}
 		return rv;
 	}
-	public static final Bry_fmtr fmtr_img = Bry_fmtr.new_("src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
-	private static final Btrie_slim_mgr trie = Xoh_make_trie_.new_trie();
+	public static final    Bry_fmtr fmtr_img = Bry_fmtr.new_("src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
+	private static final    Btrie_slim_mgr trie = Xoh_make_trie_.new_trie();
 }

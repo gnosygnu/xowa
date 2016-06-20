@@ -19,12 +19,12 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.xtns.scribunto.*;
-public class Xop_log_invoke_wkr implements GfoInvkAble {
+public class Xop_log_invoke_wkr implements Gfo_invk {
 	private Xop_log_mgr log_mgr;
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs();
-	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
+	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final    Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
 	public Xop_log_invoke_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
 		this.log_mgr = log_mgr;
 		this.conn = conn;
@@ -53,7 +53,7 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_exclude_mod_names_add))	Exclude_mod_names_add(m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_log_enabled_))			log_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_err_filter))				return err_filter_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_exclude_mod_names_add = "exclude_mod_names_add", Invk_log_enabled_ = "log_enabled_", Invk_err_filter = "err_filter";
@@ -71,7 +71,7 @@ class Xop_log_invoke_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_invoke_temp", Fld_invk_page_ttl = "invk_page_ttl", Fld_invk_mod_name = "invk_mod_name", Fld_invk_fnc_name = "invk_fnc_name", Fld_invk_eval_time = "invk_eval_time";
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final    String Tbl_sql = String_.Concat_lines_nl
 		(	"CREATE TABLE IF NOT EXISTS log_invoke_temp"
 		,	"( invk_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", invk_page_ttl            varchar(255)        NOT NULL"

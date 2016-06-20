@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys; import gplx.*; import gplx.core.*;
 import gplx.core.errs.*; import gplx.core.btries.*;
 public class Bry_rdr {
-	private final gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.neg1_();
+	private final    gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
 	public byte[] Src() {return src;} protected byte[] src;
 	public int Src_end() {return src_end;} protected int src_end; 
 	public int Pos() {return pos;} protected int pos;

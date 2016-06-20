@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
 public class Gfo_xml_wtr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(255), txt_bfr = Bry_bfr.reset_(32);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(255), txt_bfr = Bry_bfr_.Reset(32);
 	private byte quote_byte = Byte_ascii.Apos;
 	private byte[] quote_escape = Bry_quote_1_escape;
-	private List_adp nde_stack = List_adp_.new_();
+	private List_adp nde_stack = List_adp_.New();
 	private Gfo_xml_nde nde_cur = null;
 	private int indent = 0;
 	public void Quote_(boolean apos) {
@@ -134,7 +134,7 @@ public class Gfo_xml_wtr {
 	}
 	public Gfo_xml_wtr Txt_str_u8(String txt)	{return Txt_bry(Bry_.new_u8(txt));}
 	public String Bld_str() {return bfr.To_str_and_clear();}
-	private static final byte[]
+	private static final    byte[]
 	  Bry_nde_rhs_bgn		= Bry_.new_a7("</")
 //		, Bry_nde_inline		= Bry_.new_a7("/>")
 	, Bry_quote_1_escape	= Bry_.new_a7("&apos;")
@@ -146,6 +146,6 @@ public class Gfo_xml_wtr {
 }
 class Gfo_xml_nde {
 	public Gfo_xml_nde(boolean grp, String name) {this.grp = grp; this.name = name;}
-	public boolean Grp() {return grp;} private final boolean grp;
-	public String Name() {return name;} private final String name;
+	public boolean Grp() {return grp;} private final    boolean grp;
+	public String Name() {return name;} private final    String name;
 }

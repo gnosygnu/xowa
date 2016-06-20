@@ -23,14 +23,14 @@ public class Xob_ns_file_itm {
 		this.db_file_tid = db_file_tid; this.file_name = file_name; this.ns_ids = ns_ids;
 		this.nth_db_id = Nth_db_id_null; this.nth_db_idx = 1;			
 	}
-	public byte		Db_file_tid() {return db_file_tid;} private final byte db_file_tid;
-	public String	File_name() {return file_name;} private final String file_name;
-	public int[]	Ns_ids() {return ns_ids;} private final int[] ns_ids;
+	public byte		Db_file_tid() {return db_file_tid;} private final    byte db_file_tid;
+	public String	File_name() {return file_name;} private final    String file_name;
+	public int[]	Ns_ids() {return ns_ids;} private final    int[] ns_ids;
 	public int		Nth_db_id() {return nth_db_id;} public void Nth_db_id_(int v) {nth_db_id = v;} private int nth_db_id;
 	public int		Nth_db_idx() {return nth_db_idx;} private int nth_db_idx;
 	public String Make_file_name() {								// EX: en.wikipedia.org-text-ns.000-001.xowa
 		String rv = String_.Format("-{0}{1}{2}.xowa"				// EX: -text-ns.000-db.001.xowa
-			, Xowd_db_file_.To_key(db_file_tid)						// text
+			, Xow_db_file_.To_key(db_file_tid)						// text
 			, String_.Len_eq_0(file_name) ? "" : "-" + file_name	// if empty, don't add "ns.000" segment; produces en.wikipedia.org-text-001.xowa
 			, nth_db_idx == 1 ? "" : "-db." + Int_.To_str_pad_bgn_zero(nth_db_idx, 3)			// "-db.001"
 			);

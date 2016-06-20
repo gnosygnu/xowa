@@ -28,6 +28,8 @@ import java.util.Date;
 import javax.print.FlavorException;
 import javax.tools.JavaCompiler;
 import gplx.core.criterias.*; import gplx.core.bits.*; import gplx.core.envs.*;
+import gplx.core.ios.streams.*;
+import gplx.core.progs.*;
 public class IoEngine_system extends IoEngine_base {
 	@Override public String Key() {return IoEngine_.SysKey;}
 	@Override public void DeleteDirDeep(IoEngine_xrg_deleteDir args) {utl.DeleteDirDeep(this, args.Url(), args);}
@@ -248,8 +250,7 @@ public class IoEngine_system extends IoEngine_base {
 			MarkFileWritable(trgFil, trgUrl, args.ReadOnlyFails(), "copy");
 		}		
 		else {						// trgFil doesn't exist; must create file first else fileNotFound exception thrown
-//			if (overwrite) throw Err_
-			boolean rv = true; //Exception exc = null;
+			boolean rv = true;
 			if (!ExistsDir(trgUrl.OwnerDir())) CreateDir(trgUrl.OwnerDir());
 			try 	{
 				trgFil.createNewFile();
@@ -257,7 +258,6 @@ public class IoEngine_system extends IoEngine_base {
 					IoEngine_system_xtn.SetExecutable(trgFil, true);
 			}
 			catch 	(IOException e) {
-//				exc = e;
 				rv = false;
 			}
 			if (!rv)
@@ -309,6 +309,75 @@ public class IoEngine_system extends IoEngine_base {
 			Closeable_close(trgStream, srcUrl, false);
 		}
 		UpdateFilModifiedTime(trgUrl, QueryFil(srcUrl).ModifiedTime());	// must happen after file is closed
+	}
+	public void CopyFil(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url src_url, Io_url trg_url, boolean overwrite, boolean readonly_fails) {
+		// TODO:JAVA6 hidden property ignored; 1.6 does not allow OS-independent way of setting isHidden (wnt only possible through jni)
+		File src_fil = new File(src_url.Xto_api()), trg_fil = new File(trg_url.Xto_api());
+		if (trg_fil.isFile()) {		// trg_fil exists; check if overwrite set and trg_fil is writable
+			Chk_TrgFil_Overwrite(overwrite, trg_url);
+			MarkFileWritable(trg_fil, trg_url, readonly_fails, "copy");
+		}		
+		else {						// trg_fil doesn't exist; must create file first else fileNotFound exception thrown
+			boolean rv = true;
+			if (!ExistsDir(trg_url.OwnerDir())) CreateDir(trg_url.OwnerDir());
+			try 	{
+				trg_fil.createNewFile();
+				if (!Op_sys.Cur().Tid_is_drd())
+					IoEngine_system_xtn.SetExecutable(trg_fil, true);
+			}
+			catch 	(IOException e) {
+				rv = false;
+			}
+			if (!rv)
+				throw Err_.new_wo_type("create file failed", "trg", trg_url.Xto_api());
+		}
+		FileInputStream src_stream = null; FileOutputStream trg_stream = null;
+		FileChannel src_channel = null, trg_channel = null;
+		try {
+			// make objects
+			try 	{src_stream = new FileInputStream(src_fil);}
+			catch 	(FileNotFoundException e) {throw IoErr.FileNotFound("copy", src_url);}
+			try 	{trg_stream = new FileOutputStream(trg_fil);}
+			catch 	(FileNotFoundException e) {
+				trg_stream = TryToUnHideFile(trg_fil, trg_url);
+				if (trg_stream == null)
+					throw IoErr.FileNotFound("copy", trg_url);
+//				else
+//					wasHidden = true;
+			}		
+			src_channel = src_stream.getChannel();		
+			trg_channel = trg_stream.getChannel();
+			
+			// transfer data
+			long pos = 0, count = 0, read = 0;
+			try 	{count = src_channel.size();}
+			catch 	(IOException e) {throw Err_.new_exc(e, "io", "size failed", "src", src_url.Xto_api());}
+			int buffer_size = IoEngineArgs.Instance.LoadFilStr_BufferSize;
+			long transfer_size = (count > buffer_size) ? buffer_size : count;	// transfer as much as fileSize, but limit to LoadFilStr_BufferSize 
+			while 	(pos < count) {
+				try 	{read = trg_channel.transferFrom(src_channel, pos, transfer_size);}
+				catch 	(IOException e) {
+					Closeable_close(src_channel, src_url, false);
+					Closeable_close(trg_channel, trg_url, false);
+					Closeable_close(src_stream, src_url, false);
+					Closeable_close(trg_stream, src_url, false);
+					throw Err_.new_exc(e, "io", "transfer data failed", "src", src_url.Xto_api(), "trg", trg_url.Xto_api());
+				}
+			    if (read == -1) break;
+				if (prog_ui.Prog_notify_and_chk_if_suspended(pos, count)) return;
+			    pos += read;
+			}
+//			if (wasHidden)
+//				
+		}
+		finally {
+			// cleanup
+			Closeable_close(src_channel, src_url, false);
+			Closeable_close(trg_channel, trg_url, false);
+			Closeable_close(src_stream, src_url, false);
+			Closeable_close(trg_stream, src_url, false);
+		}
+		UpdateFilModifiedTime(trg_url, QueryFil(src_url).ModifiedTime());	// must happen after file is closed
 	}
 	FileOutputStream TryToUnHideFile(File trgFil, Io_url trgUrl) {
 		FileOutputStream trgStream = null;
@@ -373,8 +442,8 @@ public class IoEngine_system extends IoEngine_base {
 			XferDir(IoEngine_xrg_xferDir.copy_(src, trg));
 		}
 	}
-	protected static void Closeable_close(Closeable closeable, Io_url url, boolean throwErr) {Closeable_close(closeable, url.Xto_api(), throwErr);}
-	protected static void Closeable_close(Closeable closeable, String url_str, boolean throwErr) {
+	public static void Closeable_close(Closeable closeable, Io_url url, boolean throwErr) {Closeable_close(closeable, url.Xto_api(), throwErr);}
+	public static void Closeable_close(Closeable closeable, String url_str, boolean throwErr) {
 		if 		(closeable == null) return;
 		try 	{closeable.close();}
 		catch 	(IOException e) {
@@ -484,6 +553,21 @@ public class IoEngine_system extends IoEngine_base {
     		if (trg_stream != null) trg_stream.Rls();
     	}
 	}	Io_url session_fil; Bry_bfr prog_fmt_bfr;
+	@Override public boolean Truncate_fil(Io_url url, long size) {
+		FileOutputStream stream = null;
+		FileChannel channel = null;
+        try     {stream = new FileOutputStream(url.Xto_api(), true);}
+        catch   (FileNotFoundException e) {throw Err_.new_("io", "truncate: open failed", "url", url.Xto_api(), "err", Err_.Message_gplx_log(e));}
+        channel = stream.getChannel();
+	    try 	{channel.truncate(size); return true;}
+	    catch 	(IOException e) {return false;}
+	    finally {
+	    	try {
+		    	if (stream != null) stream.close();
+		    	if (channel != null) channel.close();
+	    	} catch 	(IOException e) {return false;}
+	    }
+	}
 		byte[] download_bfr; static final int Download_bfr_len = Io_mgr.Len_kb * 128;
 	public static Err Err_Fil_NotFound(Io_url url) {
 		return Err_.new_(IoEngineArgs.Instance.Err_FileNotFound, "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();

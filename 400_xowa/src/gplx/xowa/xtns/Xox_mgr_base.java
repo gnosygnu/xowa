@@ -22,24 +22,26 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	public Xox_mgr_base() {
 		this.enabled = Enabled_default();
 	}
-	public abstract byte[] Xtn_key();
-	public abstract Xox_mgr Clone_new();
-	public boolean Enabled() {return enabled;} private boolean enabled;
-	@gplx.Virtual public boolean Enabled_default() {return true;}
-	public void Enabled_y_() {enabled = true; enabled_manually = true;} public void Enabled_n_() {enabled = false; enabled_manually = true;}	// TEST:
-	public void Enabled_(boolean v) {enabled = v;}
-	public boolean Enabled_manually() {return enabled_manually;} private boolean enabled_manually;
-	@gplx.Virtual public void Xtn_ctor_by_app(Xoae_app app) {}
-	@gplx.Virtual public void Xtn_ctor_by_wiki(Xowe_wiki wiki) {}
-	@gplx.Virtual public void Xtn_init_by_app(Xoae_app app) {}
-	@gplx.Virtual public void Xtn_init_by_wiki(Xowe_wiki wiki) {}
+	public abstract	byte[]		Xtn_key();
+	public			boolean		Enabled() {return enabled;} private boolean enabled;
+	@gplx.Virtual public boolean		Enabled_default() {return true;}
+	public void					Enabled_y_() {enabled = true; enabled_manually = true;} public void Enabled_n_() {enabled = false; enabled_manually = true;}	// TEST:
+	public void					Enabled_(boolean v) {enabled = v;}
+	public boolean					Enabled_manually() {return enabled_manually;} private boolean enabled_manually;
+	public abstract	Xox_mgr		Xtn_clone_new();
+	@gplx.Virtual public void			Xtn_ctor_by_app(Xoae_app app) {}
+	@gplx.Virtual public void			Xtn_ctor_by_wiki(Xowe_wiki wiki) {}
+	@gplx.Virtual public void			Xtn_init_by_app(Xoae_app app) {}
+	@gplx.Virtual public void			Xtn_init_by_wiki(Xowe_wiki wiki) {}
+
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))			return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			{enabled = m.ReadYn("v"); enabled_manually = true;}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_";
+
 	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde)	{Xtn_write_escape(app, bfr, src, xnde.Src_bgn(), xnde.Src_end());}
 	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src)						{Xtn_write_escape(app, bfr, src, 0, src.length);}
 	public static void Xtn_write_escape(Xoae_app app, Bry_bfr bfr, byte[] src, int bgn, int end)	{Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, bgn, end, true, false);}
@@ -65,6 +67,6 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 		Io_url url = app.Fsys_mgr().Bin_xtns_dir().GenSubFil_nest(String_.new_u8(xtn_key), "i18n", wiki.Lang().Key_str() + ".json");
 		Xob_i18n_parser.Load_msgs(false, wiki.Lang(), url);
 	}
-	private static final byte[] Xowa_not_implemented = Bry_.new_a7("XOWA does not support this extension: ");
+	private static final    byte[] Xowa_not_implemented = Bry_.new_a7("XOWA does not support this extension: ");
 	public static final byte Parse_content_tid_none = 0, Parse_content_tid_escape = 1, Parse_content_tid_html = 2;
 }

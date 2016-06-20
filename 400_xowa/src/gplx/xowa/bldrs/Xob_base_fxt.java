@@ -34,7 +34,7 @@ public class Xob_base_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
-	public GfoInvkAble Bldr_itm() {return bldr_itm;} GfoInvkAble bldr_itm;
+	public Gfo_invk Bldr_itm() {return bldr_itm;} Gfo_invk bldr_itm;
 	public Xowd_page_itm page_(String ttl) {return page_(ttl, "");}
 	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(Bry_.new_u8(ttl), wiki.Ns_mgr()).Text_(Bry_.new_u8(text));}
 	public Io_fil_chkr meta_(String url, String data) {return new Io_fil_chkr(Io_url_.mem_fil_(url), data);}

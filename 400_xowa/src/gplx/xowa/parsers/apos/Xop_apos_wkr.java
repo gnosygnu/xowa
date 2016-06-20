@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public class Xop_apos_wkr implements Xop_ctx_wkr {
 	public Xop_apos_dat Dat() {return dat;} private Xop_apos_dat dat = new Xop_apos_dat();
-	private List_adp stack = List_adp_.new_(); private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
+	private List_adp stack = List_adp_.New(); private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
 		Reset();

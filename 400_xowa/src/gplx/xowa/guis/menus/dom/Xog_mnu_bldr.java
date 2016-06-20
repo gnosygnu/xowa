@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.gfs.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.imgs.*;
+import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.gfs.*;
 public class Xog_mnu_bldr {
 	private Xoae_app app; private Gfui_kit kit; private Io_url img_dir;
 	public void Init_by_kit(Xoae_app app, Gfui_kit kit, Io_url img_dir) {
@@ -73,8 +74,8 @@ public class Xog_mnu_bldr {
 //		private void Add_chk(String key, String text, String shortcut, String img) {
 //			Xog_mnu_itm rv = Add_itm(Xog_mnu_itm.Tid_chk, key, text, shortcut, img);
 //			Xog_cmd_itm cmd = gui_mgr.Cmd_mgr().Regy().Get_or_null(key); if (cmd == null) throw Err_.new_wo_type("unknown cmd; key={0}", key);
-//			GfoEvObj pub = gui_mgr.App().Gfs_mgr().Get_owner_as_event_obj(cmd.Cmd());
-//			GfoEvMgr_.SubSame(pub, Xog_mnu_evt_mgr.Evt_selected_changed, rv.Evt_mgr());
+//			Gfo_evt_itm pub = gui_mgr.App().Gfs_mgr().Get_owner_as_event_obj(cmd.Cmd());
+//			Gfo_evt_mgr_.Sub_same(pub, Xog_mnu_evt_mgr.Evt_selected_changed, rv.Evt_mgr());
 //		}
 	private Gfui_mnu_itm Add_rdo(Gfui_mnu_grp owner_gui, Xog_mnu_itm sub, String sub_text, String sub_shortcut) {
 		ImageAdp img = Get_img(sub.Img_nest());

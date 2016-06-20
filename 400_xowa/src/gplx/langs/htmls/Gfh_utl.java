@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 public class Gfh_utl {
-	private static final Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id; private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private static final    Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id; private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
 		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
@@ -102,7 +102,7 @@ public class Gfh_utl {
 		else
 			return dirty ? bfr.To_bry_and_clear() : bry;
 	}
-	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
+	private static final    Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Gfh_entity_.Lt_bry		, Byte_ascii.Lt)
 	.Add_bry_byte(Gfh_entity_.Gt_bry		, Byte_ascii.Gt)
 	.Add_bry_byte(Gfh_entity_.Amp_bry		, Byte_ascii.Amp)
@@ -110,7 +110,7 @@ public class Gfh_utl {
 	.Add_bry_byte(Gfh_entity_.Apos_num_bry	, Byte_ascii.Apos)
 	;
 	public static String Unescape_as_str(String src) {
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		byte[] bry = Bry_.new_u8(src);
 		Unescape(Bool_.Y, bfr, bry, 0, bry.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
 		return bfr.To_str_and_clear();
@@ -178,7 +178,7 @@ public class Gfh_utl {
 	}
 	public static String Replace_apos(String s) {return String_.Replace(s, "'", "\"");}
 	public static String Replace_apos_concat_lines(String... lines) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = lines.length;
 		for (int i = 0; i < len; ++i) {
 			String line_str = lines[i];

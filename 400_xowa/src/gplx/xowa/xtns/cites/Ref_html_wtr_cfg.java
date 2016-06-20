@@ -40,8 +40,8 @@ public class Ref_html_wtr_cfg {
 		backlabels		= v;
 		backlabels_len	= v.length;
 	}
-	public static final byte[] Msg_backlabels_err = Bry_.new_a7("cite_error_no_link_label_group");
-	private static final byte[] Msg_backlabels = Bry_.new_a7("cite_references_link_many_format_backlink_labels");
+	public static final    byte[] Msg_backlabels_err = Bry_.new_a7("cite_error_no_link_label_group");
+	private static final    byte[] Msg_backlabels = Bry_.new_a7("cite_references_link_many_format_backlink_labels");
 	public static Ref_html_wtr_cfg new_() {
 		Ref_html_wtr_cfg rv = new Ref_html_wtr_cfg();
 		rv.Itm_html_		("<sup id=\"cite_ref-~{itm_id}\" class=\"reference\"><a href=\"#cite_note-~{grp_id}\">[~{grp_key}]</a></sup>");
@@ -59,7 +59,7 @@ public class Ref_html_wtr_cfg {
 		rv.Backlabels_		(Ref_backlabels_default);
 		return rv;
 	}	Ref_html_wtr_cfg() {}
-	private static final byte[][] Ref_backlabels_default = Ref_backlabels_xby_str_ary(String_.Ary	// TEST:default backlabels for test only; actual backlabels will be overrriden by MediaWiki:Cite_references_link_many_format_backlink_labels; DATE:2014-06-07
+	private static final    byte[][] Ref_backlabels_default = Ref_backlabels_xby_str_ary(String_.Ary	// TEST:default backlabels for test only; actual backlabels will be overrriden by MediaWiki:Cite_references_link_many_format_backlink_labels; DATE:2014-06-07
 	(  "a",  "b",  "c",  "d",  "e",  "f",  "g",  "h",  "i",  "j",  "k",  "l",  "m",  "n",  "o",  "p",  "q",  "r",  "s",  "t",  "u",  "v",  "w",  "x",  "y",  "z"
 	, "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as", "at", "au", "av", "aw", "ax", "ay", "az"
 	, "ba", "bb", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bv", "bw", "bx", "by", "bz"
@@ -97,7 +97,7 @@ public class Ref_html_wtr_cfg {
 	}
 	public static byte[][] Ref_backlabels_xby_bry(byte[] raw) {
 		if (raw == null) return Ref_backlabels_default;
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int len = raw.length, pos = 0, bgn = -1;
 		while (true) {
 			boolean last = pos == len;

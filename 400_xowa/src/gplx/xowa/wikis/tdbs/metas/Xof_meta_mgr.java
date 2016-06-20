@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.flds.*;
-public class Xof_meta_mgr implements GfoInvkAble {
-	private Object[] root = new Object[16]; private final Ordered_hash dirty_fils = Ordered_hash_.New_bry();
-	private final Gfo_fld_rdr rdr = Gfo_fld_rdr.xowa_(); private final Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
+public class Xof_meta_mgr implements Gfo_invk {
+	private Object[] root = new Object[16]; private final    Ordered_hash dirty_fils = Ordered_hash_.New_bry();
+	private final    Gfo_fld_rdr rdr = Gfo_fld_rdr.xowa_(); private final    Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
 	public Xof_meta_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.root_dir = wiki.Appe().Fsys_mgr().File_dir().GenSubDir_nest("#meta", wiki.Domain_str());}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Io_url Root_dir() {return root_dir;} Io_url root_dir;
@@ -51,7 +51,7 @@ public class Xof_meta_mgr implements GfoInvkAble {
 	public void Save() {Save(false);}
 	public void Save(boolean clear) {
 		int dirty_len = dirty_fils.Count();
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		wtr.Bfr_(tmp_bfr);
 		for (int i = 0; i < dirty_len; i++) {
 			Xof_meta_fil fil = (Xof_meta_fil)dirty_fils.Get_at(i);
@@ -75,7 +75,7 @@ public class Xof_meta_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_regy_depth_))		depth = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_regy_depth_ = "depth_";
 	static final String GRP_KEY = "xowa.file_regy.";

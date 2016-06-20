@@ -37,7 +37,7 @@ class Xof_file_fxt {
 		this.orig_mgr = wiki.File__orig_mgr();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
-		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
+		Xow_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__text); text_db.Tbl__text().Create_tbl();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
 		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
@@ -59,15 +59,15 @@ class Xof_file_fxt {
 		Fsm_atr_fil atr_fil = mnt_itm.Atr_mgr().Db__core();
 		Fsm_bin_fil bin_fil = mnt_itm.Bin_mgr().Dbs__get_nth();
 		if (arg.Is_thumb())
-			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.core.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.core.ios.streams.Io_stream_rdr_.mem_(arg.Bin()));
 		else
-			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.core.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.core.ios.streams.Io_stream_rdr_.mem_(arg.Bin()));
 	}
 	public void Exec_get(Xof_exec_arg arg) {
 		byte[] ttl_bry = arg.Ttl();
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Init_at_lnki(arg.Exec_tid(), wiki.Domain_itm().Abrv_xo(), ttl_bry, arg.Lnki_type(), arg.Lnki_upright(), arg.Lnki_w(), arg.Lnki_h(), arg.Lnki_time(), Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
-		List_adp itms_list = List_adp_.new_(); itms_list.Add(itm);
+		List_adp itms_list = List_adp_.New(); itms_list.Add(itm);
 		orig_mgr.Find_by_list(Ordered_hash_.New_bry(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, ttl_bry);
 		Xoae_page page = Xoae_page.New(wiki, ttl);

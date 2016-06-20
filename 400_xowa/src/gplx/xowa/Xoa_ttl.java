@@ -290,7 +290,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					if (anch_bgn != -1) {
 						if (anchor_encoder == null) {
 							anchor_encoder = Gfo_url_encoder_.Id;
-							anchor_encoder_bfr = Bry_bfr.reset_(32);
+							anchor_encoder_bfr = Bry_bfr_.Reset(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
 						b_ary = anchor_encoder_bfr.To_bry_and_clear();
@@ -303,7 +303,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					if (anch_bgn != -1) {
 						if (anchor_encoder == null) {
 							anchor_encoder = Gfo_url_encoder_.Id;
-							anchor_encoder_bfr = Bry_bfr.reset_(32);
+							anchor_encoder_bfr = Bry_bfr_.Reset(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
 						b_ary = anchor_encoder_bfr.To_bry_and_clear();
@@ -375,6 +375,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		}
 		Xow_ns tors_ns = ns.Id_is_talk() ? ns_mgr.Ords_get_at(ns.Ord_subj_id()) : ns_mgr.Ords_get_at(ns.Ord_talk_id());
 		tors_txt = tors_ns.Name_ui_w_colon();
+		// tors_txt = tors_ns == null ? Bry_.Empty : tors_ns.Name_ui_w_colon();
 		return true;
 	}		
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}

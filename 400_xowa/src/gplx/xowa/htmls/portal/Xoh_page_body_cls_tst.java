@@ -45,7 +45,7 @@ class Xoh_page_body_cls_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
-			tmp_bfr = Bry_bfr.reset_(255);
+			tmp_bfr = Bry_bfr_.Reset(255);
 			wiki.Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, Wdata_wiki_mgr.Ns_property_name);
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));

@@ -44,7 +44,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
 		if (!find_tkn_static) {
 			int subs_len = find_tkn.Subs_len();
-			Bry_bfr find_bfr = Bry_bfr.new_();
+			Bry_bfr find_bfr = Bry_bfr_.New();
 			for (int i = 0; i < subs_len; i++)
 				find_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, find_bfr);
 			prm_idx = Bry_.To_int_or__trim_ws(find_bfr.Bfr(), 0, find_bfr.Len(), -1);	// parse as number first; NOTE: trim needed to transform "{{{ 1 }}}" to "1"; it.w:Portale:Giochi_da_tavolo; DATE:2014-02-09
@@ -67,7 +67,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 		if (arg_val.Itm_static() == Bool_.Y_byte)
 			bfr.Add_mid(src, arg_val.Dat_bgn(), arg_val.Dat_end());
 		else {// compile arg if dynamic; EX: [[MESSENGER]] "{{About|the NASA space mission||Messenger (disambiguation){{!}}Messenger}}"; {{!}} causes {{{2}}} to be dynamic and its dat_ary will be an empty-String ("")
-			Bry_bfr arg_val_bfr = Bry_bfr.new_();
+			Bry_bfr arg_val_bfr = Bry_bfr_.New();
 			arg_val.Tmpl_evaluate(ctx, src, caller, arg_val_bfr);
 			bfr.Add_bfr_and_clear(arg_val_bfr);
 		}

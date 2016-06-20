@@ -22,10 +22,10 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.users.data.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
 import gplx.xowa.langs.genders.*;
-public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
+public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xoue_user(Xoae_app app, Io_url user_dir) {
 		this.app = app; this.key = user_dir.NameOnly();
-		this.ev_mgr = GfoEvMgr.new_(this);
+		this.ev_mgr = new Gfo_evt_mgr(this);
 		this.fsys_mgr = new Xou_fsys_mgr(app, this, user_dir);
 		this.user_db_mgr = new Xou_db_mgr(app);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
@@ -33,7 +33,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		this.cfg_mgr = new Xou_cfg(this);
 		this.session_mgr = new Xou_session(this);
 	}
-	public GfoEvMgr					EvMgr() {return ev_mgr;} private final    GfoEvMgr ev_mgr;
+	public Gfo_evt_mgr					Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public String					Key() {return key;} private String key;
 	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final    Xou_db_mgr user_db_mgr;
 	public Xow_wiki					Wikii() {return this.Wiki();}
@@ -44,7 +44,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		lang = v;
 		this.Msg_mgr().Lang_(v);
 		wiki.Msg_mgr().Clear();	// clear home wiki msgs whenever lang changes; else messages cached from old lang will not be replaced; EX:Read/Edit; DATE:2014-05-26
-		GfoEvMgr_.PubVal(this, Evt_lang_changed, lang);
+		Gfo_evt_mgr_.Pub_val(this, Evt_lang_changed, lang);
 	}
 	public Xou_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xou_fsys_mgr fsys_mgr;
 	public Xowe_wiki Wiki() {if (wiki == null) wiki = Xou_user_.new_or_create_(this, app); return wiki;} private Xowe_wiki wiki;
@@ -78,7 +78,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
 		byte[] new_entry = tmp_bfr.To_bry_and_rls();
 		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse(wiki, Bry_data_bookmarks);
-		Xoae_page bookmarks_page = wiki.Data_mgr().Get_page(bookmarks_ttl, false);
+		Xoae_page bookmarks_page = wiki.Data_mgr().Load_page_by_ttl(bookmarks_ttl);
 		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);
 		wiki.Db_mgr().Save_mgr().Data_update(bookmarks_page, new_data);
 	}	private Bry_fmtr bookmarks_add_fmtr = Bry_fmtr.new_("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = Bry_.new_a7("Data:Bookmarks");
@@ -95,7 +95,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_cfg))						return cfg_mgr;
 		else if	(ctx.Match(k, Invk_session))					return session_mgr;
 		else if	(ctx.Match(k, "name"))							return key; //throw Err_.new_unhandled(k);	// OBSOLETE: used to return key
-		else return GfoInvkAble_.Rv_unhandled;
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_available_from_fsys = "available_from_fsys", Invk_available_from_bulk = "available_from_bulk", Invk_bookmarks_add_fmt_ = "bookmarks_add_fmt_"

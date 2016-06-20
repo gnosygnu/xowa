@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import java.lang.*;
 import gplx.core.strings.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
-public class String_ implements GfoInvkAble {
-	public static final Class<?> Cls_ref_type = String.class;
+public class String_ implements Gfo_invk {
+	public static final    Class<?> Cls_ref_type = String.class;
 	public static final String Cls_val_name = "str" + "ing";
 	public static final int Find_none = -1, Pos_neg1 = -1;
 	public static final String Null = null, Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";
@@ -339,7 +339,7 @@ public class String_ implements GfoInvkAble {
 
 	public static String[] Ary(String... ary) {return ary;}
 	public static String[] Ary_wo_null(String... ary) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String itm = ary[i];
@@ -354,10 +354,10 @@ public class String_ implements GfoInvkAble {
 			sb.Add(s).Add(";");
 		return sb.To_str();
 	}
-	public static final String[] Ary_empty = new String[0];
+	public static final    String[] Ary_empty = new String[0];
 	public static String[] Split(String raw, char dlm) {return Split(raw, dlm, false);}
 	public static String[] Split(String raw, char dlm, boolean addEmptyIfDlmIsLast) {
-		List_adp list = List_adp_.new_(); String_bldr sb = String_bldr_.new_();
+		List_adp list = List_adp_.New(); String_bldr sb = String_bldr_.new_();
 		int rawLen = String_.Len(raw); char c = '\0';
 		for (int i = 0; i < rawLen; i++) {
 			c = String_.CharAt(raw, i);
@@ -433,7 +433,7 @@ public class String_ implements GfoInvkAble {
 		if (String_.Eq(s, "")			// "".Split('a') return array with one member: ""
 			|| String_.Eq(spr, ""))		// "a".Split('\0') returns array with one member: "a"
 			return new String[] {s};
-		List_adp list = List_adp_.new_(); String_bldr sb = String_bldr_.new_();
+		List_adp list = List_adp_.New(); String_bldr sb = String_bldr_.new_();
 		int i = 0, sprPos = 0; boolean sprMatched = false; char spr0 = CharAt(spr, 0);
 		int textLength = Len(s); int sprLength = Len(spr);
 		while (true) {
@@ -485,9 +485,9 @@ public class String_ implements GfoInvkAble {
 			if (ctx.Deny()) return this;
 			return PadBgn(s, totalLen, pad);
 		}
-		else return GfoInvkAble_.Rv_unhandled;
-	}	public static final String Invk_Replace = "Replace", Invk_Len = "Len", Invk_PadBgn = "PadBgn";
-        public static final String_ Gfs = new String_();
+		else return Gfo_invk_.Rv_unhandled;
+	}	public static final    String Invk_Replace = "Replace", Invk_Len = "Len", Invk_PadBgn = "PadBgn";
+        public static final    String_ Gfs = new String_();
 	public static String Extract_after_bwd(String src, String dlm) {
 		int dlm_pos = String_.FindBwd(src, dlm); if (dlm_pos == String_.Find_none) return String_.Empty;
 		int src_len = String_.Len(src); if (dlm_pos == src_len - 1) return String_.Empty;
@@ -510,13 +510,13 @@ public class String_ implements GfoInvkAble {
 		return rv;
 	}
 	public static String [] Ary_filter(String[] src, String[] filter) {
-		Hash_adp hash = Hash_adp_.new_();
+		Hash_adp hash = Hash_adp_.New();
 		int len = filter.length;
 		for (int i = 0; i < len; i++) {
 			String itm = filter[i];
 			hash.Add_if_dupe_use_nth(itm, itm);				
 		}
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		len = src.length;
 		for (int i = 0; i < len; i++) {
 			String itm = src[i];
@@ -551,7 +551,7 @@ public class String_ implements GfoInvkAble {
 	}
 	public static String To_str__as_kv_ary(String... ary) {
 		int len = ary.length;
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		for (int i = 0; i < len; i+=2) {
 			bfr.Add_str_u8(ary[i]).Add_byte_eq();
 			String val = i + 1 < len ? ary[i + 1] : null;

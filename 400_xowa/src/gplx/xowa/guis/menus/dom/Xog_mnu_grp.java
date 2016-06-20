@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.guis.views.*;
 public class Xog_mnu_grp extends Xog_mnu_base {
@@ -40,19 +40,19 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		else 
 			this.Clear();
 		if (!mnu_is_popup && app.Gui_mgr().Browser_win().Win_box() != null)
-			GfoInvkAble_.InvkCmd(app.Gui_mgr().Browser_win(), gplx.gfui.Gfui_html.Evt_win_resized);
+			Gfo_invk_.Invk_by_key(app.Gui_mgr().Browser_win(), Gfui_html.Evt_win_resized);
 	}
 	public String Source() {return source;} private String source;
 	public String Source_default() {return source_default;} public Xog_mnu_grp Source_default_(String v) {source_default = source = v; return this;} private String source_default;
 	private Xog_mnu_grp Source_(Xoa_gfs_mgr gfs_mgr, String v) {
 		Object rslt = Source_exec(gfs_mgr, v);
-		if (rslt != GfoInvkAble_.Rv_error)
+		if (rslt != Gfo_invk_.Rv_error)
 			source = v;
 		return this;
 	} 
 	public Object Source_exec(Xoa_gfs_mgr gfs_mgr) {return Source_exec(gfs_mgr, source);}
 	private Object Source_exec(Xoa_gfs_mgr gfs_mgr, String v) {
-		if (!enabled) return GfoInvkAble_.Rv_handled;
+		if (!enabled) return Gfo_invk_.Rv_handled;
 		String script = "clear;\n" + v + "build;";
 		return gfs_mgr.Run_str_for(this, script);
 	}

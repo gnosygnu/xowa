@@ -30,6 +30,6 @@ class XmlNdeList_cls_list implements XmlNdeList {
 	public int Count() {return list.Count();}
 	public XmlNde Get_at(int i) {return (XmlNde)list.Get_at(i);}
 	public void Add(XmlNde xnde) {list.Add(xnde);}
-	@gplx.Internal protected XmlNdeList_cls_list(int count) {list = List_adp_.new_(); list.Resize_bounds(count);} List_adp list;
+	@gplx.Internal protected XmlNdeList_cls_list(int count) {list = List_adp_.New(); list.Resize_bounds(count);} List_adp list;
 }
 //#}

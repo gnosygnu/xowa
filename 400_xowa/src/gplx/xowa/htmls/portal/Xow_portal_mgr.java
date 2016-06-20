@@ -24,9 +24,9 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.apps.apis.xowa.html.skins.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.portal.vnts.*;
-public class Xow_portal_mgr implements GfoInvkAble {
+public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
-	private final Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
+	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xowh_sidebar_mgr(wiki);
@@ -102,7 +102,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		}
 		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text);
 		return tmp_bfr.To_bry_and_rls();
-	}	public static final byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
+	}	public static final    byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
@@ -113,11 +113,11 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		return tmp_bfr.To_bry_and_rls();
 	}
 	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
-	private final Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");
-	private final Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts");
-	private final Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
-	private final Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
-	private final Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
+	private final    Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");
+	private final    Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts");
+	private final    Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
+	private final    Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
+	private final    Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
 	private byte[] Reverse_li(byte[] bry) {
 		return lang_is_rtl ? Xoh_rtl_utl.Reverse_li(bry) : bry;
 	}
@@ -131,7 +131,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_missing_ns_cls))					return String_.new_u8(missing_ns_cls);
 		else if	(ctx.Match(k, Invk_missing_ns_cls_))				missing_ns_cls = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_missing_ns_cls_list))			return Options_missing_ns_cls_list;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_div_personal_ = "div_personal_", Invk_div_view_ = "div_view_", Invk_div_ns_ = "div_ns_", Invk_div_home_ = "div_home_", Invk_div_wikis_ = "div_wikis_"
@@ -139,8 +139,8 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	;
 	public static final String Invk_div_logo_ = "div_logo_";
 	private static Keyval[] Options_missing_ns_cls_list = Keyval_.Ary(Keyval_.new_("", "Show as blue link"), Keyval_.new_("new", "Show as red link"), Keyval_.new_("xowa_display_none", "Hide")); 
-	private static final byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
-	private static final Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
+	private static final    byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
+	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
 	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">~{jumpto}<a href=\"#mw-navigation\">~{jumptonavigation}</a>~{comma-separator}<a href=\"#p-search\">~{jumptosearch}</a></div>"
 	, "jumpto", "jumptonavigation", "comma-separator", "jumptosearch");
 }

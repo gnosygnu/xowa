@@ -72,6 +72,7 @@ public class Gallery_mgr_base_basic_tst {
 	@Test   public void Height_fix() {
 		fxt.Fxt().Wiki().File_mgr().Cfg_set(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "y");
 		fxt.Test_html_frag("<gallery heights=250>File:A.png|a<br/>c</gallery>", " width=\"120\" height=\"250\"");
+		fxt.Test_html_frag("<div style=\"margin:15px auto;\">");
 		fxt.Fxt().Wiki().File_mgr().Cfg_set(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "n");
 	}
 	@Test   public void Alt() {
@@ -154,7 +155,7 @@ public class Gallery_mgr_base_basic_tst {
 	@Test   public void Alt__quotes() {	// PURPOSE: file name with quotes will cause broken alt; PAGE:en.w:en.w:Alexandria,_Romania; DATE:2015-12-27
 		fxt.Test_html_frag("<gallery>File:A\"b.png", "alt=\"A&quot;b.png\"");	// NOTE: not 'alt="A"b.png"'
 	}
-//		@Test  public void Ttl_caption() {	// TODO: category entries get rendered with name only (no ns)
+//		@Test  public void Ttl_caption() {	// TODO_OLD: category entries get rendered with name only (no ns)
 //			fxt.Test_html_frag
 //			( "<gallery>Category:A</gallery>"
 //			, "<li class='gallerycaption'>B</li>"
@@ -167,18 +168,23 @@ public class Gallery_mgr_base_basic_tst {
 		, "</ul>"
 		));
 	}
+	@Test   public void Hdump__div_1_w() {// PURPOSE: handle hdump and div_1_width == 115 instead of 15; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-19
+		fxt.Fxt().Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
+		fxt.Fxt().Wiki().File__fsdb_mode().Tid_v2_bld_y_();	// NOTE: must set to v2 mode; dflt will call old v1 img code which "guesses" at html_h;
+		fxt.Test_html_frag("<gallery widths=200px heights=200px perrow=5>File:A.png|a</gallery>", "<div style=\"margin:15px auto;\">");
+	}
 }
 class Gallery_mgr_base_fxt {
 	public void Reset() {
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
 		Gallery_mgr_base.File_found_mode = Bool_.Y_byte;
 	}
-	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
+	public Xop_fxt Fxt() {return fxt;} private final    Xop_fxt fxt = new Xop_fxt();
 	public void Init_files_missing_y_() {
 		Gallery_mgr_base.File_found_mode = Bool_.N_byte;
 	}
 	public void Test_html_str(String raw, String expd)						{fxt.Test_html_full_str(raw, expd);}
-	public void Test_html_frag(String raw, String... expd_frags)		{fxt.Test_html_full_frag(raw, expd_frags);}	// TODO: change to wiki_str; currently uids do not get reset if wiki
+	public void Test_html_frag(String raw, String... expd_frags)		{fxt.Test_html_full_frag(raw, expd_frags);}	// TODO_OLD: change to wiki_str; currently uids do not get reset if wiki
 	public void Test_html_frag_n(String raw, String... expd_frags)	{fxt.Test_html_full_frag_n(raw, expd_frags);}
 	public void Test_html_modules_js(String expd)							{
 		fxt.Page().Html_data().Head_mgr().Itm__globals().Enabled_n_();

@@ -33,16 +33,16 @@ public class Fsdb_db_mgr_ {
 		}
 		String domain_str = wiki.Domain_str();
 		Fsdb_db_mgr rv = null;
-		rv = load_or_null(Xowd_db_layout.Itm_few, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
-		rv = load_or_null(Xowd_db_layout.Itm_lot, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
-		rv = load_or_null(Xowd_db_layout.Itm_all, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
+		rv = load_or_null(Xow_db_layout.Itm_few, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
+		rv = load_or_null(Xow_db_layout.Itm_lot, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
+		rv = load_or_null(Xow_db_layout.Itm_all, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
 		usr_dlg.Log_many("", "", "fsdb.db_core.none: wiki_dir=~{0} file_dir=~{1}", wiki_dir.Raw(), file_dir.Raw());
 		return null;
 	}
-	private static Fsdb_db_mgr load_or_null(Xowd_db_layout layout, Gfo_usr_dlg usr_dlg, Io_url wiki_dir, Xow_wiki wiki, String domain_str) {
+	private static Fsdb_db_mgr load_or_null(Xow_db_layout layout, Gfo_usr_dlg usr_dlg, Io_url wiki_dir, Xow_wiki wiki, String domain_str) {
 		Io_url main_core_url = wiki_dir.GenSubFil(Fsdb_db_mgr__v2_bldr.Main_core_name(layout, domain_str));
 		if (!Db_conn_bldr.Instance.Exists(main_core_url)) return null;
-		usr_dlg.Log_many("", "", "fsdb.db_core.v2: type=~{0} url=~{1}", layout.Name(), main_core_url.Raw());
+		usr_dlg.Log_many("", "", "fsdb.db_core.v2: type=~{0} url=~{1}", layout.Key(), main_core_url.Raw());
 		Db_conn main_core_conn = Db_conn_bldr.Instance.Get(main_core_url);
 		if (wiki.Data__core_mgr().Props().Layout_file().Tid_is_all()) {
 			return new Fsdb_db_mgr__v2(Fsdb_db_mgr__v2.Cfg__layout_file__get(main_core_conn), wiki_dir, new Fsdb_db_file(main_core_url, main_core_conn), new Fsdb_db_file(main_core_url, main_core_conn));

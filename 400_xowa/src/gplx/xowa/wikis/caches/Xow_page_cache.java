@@ -28,8 +28,21 @@ public class Xow_page_cache {
 		byte[] ttl_full_db = ttl.Full_db();
 		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by_bry(ttl_full_db);
 		if (rv == null) {
-			Xoae_page page = wiki.Data_mgr().Get_page(ttl, true);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
+			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
 			if (!page.Missing()) {
+				rv = new Xow_page_cache_itm(page.Ttl(), page.Data_raw(), page.Redirected_src());
+				cache.Add_bry_obj(ttl_full_db, rv);
+			}
+		}
+		return rv;
+	}
+	public Xow_page_cache_itm Get_or_load_as_itm_2(Xoa_ttl ttl) {	// NOTE: same as Get_or_load_as_itm, but handles redirects to missing pages; DATE:2016-05-02
+		byte[] ttl_full_db = ttl.Full_db();
+		Xow_page_cache_itm rv = (Xow_page_cache_itm)cache.Get_by_bry(ttl_full_db);
+		if (rv == null) {
+			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
+			if (	!page.Missing()						// page exists
+				||	page.Redirected_src() != null) {	// page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
 				rv = new Xow_page_cache_itm(page.Ttl(), page.Data_raw(), page.Redirected_src());
 				cache.Add_bry_obj(ttl_full_db, rv);
 			}

@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 	private byte[] ttl; private Bry_bfr tmp_bfr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
-	private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final Bry_bfr tmp_time_bfr = Bry_bfr.new_(32);
+	private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New_w_size(32);
 	public Wdata_visitor__html_wtr Init(byte[] ttl, Bry_bfr tmp_bfr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr) {
 		this.ttl = ttl; this.tmp_bfr = tmp_bfr; this.msgs = msgs; this.lbl_mgr = lbl_mgr;
 		return this;
@@ -69,7 +69,7 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 		} catch (Exception e) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write quantity; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
 		}
-	}	private static final byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
+	}	private static final    byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
 	public void Visit_time(Wdata_claim_itm_time itm) {itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);}
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm) {
 		try {

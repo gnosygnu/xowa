@@ -27,7 +27,7 @@ public class Tabber_xnde implements Xox_xnde {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
 
 		// split on "|-|"; EX: "A|-|B" -> tab_1='A'; tab_2='B'
-		List_adp tab_itms_list = List_adp_.new_();
+		List_adp tab_itms_list = List_adp_.New();
 		byte[] xnde_body = Xox_xnde_.Extract_body_or_null(src, xnde); if (xnde_body == null) return;
 		this.id = Id_test == null ? md5_hash.Hash_bry_as_bry(xnde_body) : Id_test;
 		byte[][] tab_itms = Bry_split_.Split(xnde_body, Spr__tab_itms);

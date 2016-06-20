@@ -20,9 +20,9 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr {
-	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final Bry_bfr key_bfr = Bry_bfr.reset_(512);
-	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Object thread_lock = new Object();
-	private final Io_url cache_dir; private boolean db_load_needed = true;
+	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr key_bfr = Bry_bfr_.Reset(512);
+	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Object thread_lock = new Object();
+	private final    Io_url cache_dir; private boolean db_load_needed = true;
 	public Xou_cache_mgr(Xoa_wiki_mgr wiki_mgr, Io_url cache_dir, Xou_db_file db_file) {
 		this.wiki_mgr = wiki_mgr; this.cache_dir = cache_dir;
 		this.cfg_tbl = db_file.Tbl__cfg();
@@ -132,7 +132,7 @@ public class Xou_cache_mgr {
 				grp_hash.Sort_by(Xou_cache_grp_sorter.Instance);				// sorts by cache_time desc
 				len = grp_hash.Count();
 				long fsys_size_calc = 0, fsys_size_temp = 0;
-				List_adp deleted = List_adp_.new_();
+				List_adp deleted = List_adp_.New();
 				for (int i = 0; i < len; ++i) {							// iterate and find items to delete
 					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.Get_at(i);
 					fsys_size_temp = fsys_size_calc + grp.File_size();
@@ -175,11 +175,11 @@ public class Xou_cache_mgr {
 	}
 }
 class Xou_cache_grp {
-	private final List_adp list = List_adp_.new_();
+	private final    List_adp list = List_adp_.New();
 	public Xou_cache_grp(Io_url file_url) {this.file_url = file_url;}
 	public long View_date() {return view_date;} private long view_date;
 	public long File_size() {return file_size;} private long file_size;
-	public Io_url File_url() {return file_url;} private final Io_url file_url;
+	public Io_url File_url() {return file_url;} private final    Io_url file_url;
 	public int Len() {return list.Count();}
 	public void Add(Xou_cache_itm itm) {
 		if (itm.View_date() > view_date) view_date = itm.View_date();
@@ -213,5 +213,5 @@ class Xou_cache_grp_sorter implements gplx.core.lists.ComparerAble {
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;
 		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
-	public static final Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
+	public static final    Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
 }

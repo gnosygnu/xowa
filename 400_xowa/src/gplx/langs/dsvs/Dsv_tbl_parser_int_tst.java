@@ -38,7 +38,7 @@ class Mok_int_itm implements To_str_able {
 }
 class Mok_int_mgr extends Mok_mgr_base {
 	public void Clear() {itms.Clear();}
-	@Override public To_str_able[] Itms() {return (To_str_able[])itms.To_ary(To_str_able.class);} private List_adp itms = List_adp_.new_();
+	@Override public To_str_able[] Itms() {return (To_str_able[])itms.To_ary(To_str_able.class);} private List_adp itms = List_adp_.New();
 	private String fld_0;
 	private int fld_1, fld_2;
 	@Override public Dsv_fld_parser[] Fld_parsers() {

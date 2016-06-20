@@ -44,7 +44,7 @@ public class Pfunc_tag extends Pf_func_base {
 				}
 			}
 			tmp.Add_byte(Byte_ascii.Gt);
-			if (args_len > 0)	// TODO: trim should not be called on content; WHEN: adding src[] back to tmpl_eval  
+			if (args_len > 0)	// TODO_OLD: trim should not be called on content; WHEN: adding src[] back to tmpl_eval  
 				tmp.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0));
 			tmp.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(tag_name).Add_byte(Byte_ascii.Gt);
 			if (tag_is_ref)	// <ref>; add <xtag_end> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
@@ -58,7 +58,7 @@ public class Pfunc_tag extends Pf_func_base {
 	, Xtag_bgn = 14 // <xtag_bgn id='
 	, Id_len = 10
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Xtag_bgn_lhs = Bry_.new_a7("<xtag_bgn id='")
 	, Xtag_end_lhs = Bry_.new_a7("<xtag_end id='")
 	, Xtag_rhs = Bry_.new_a7("'/>")

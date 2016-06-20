@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.core.brys.fmtrs.*;
-public class Xoapi_toggle_itm implements GfoInvkAble {
-	private final Xoae_app app;	// NOTE: needed to get "img_dir" below
+public class Xoapi_toggle_itm implements Gfo_invk {
+	private final    Xoae_app app;	// NOTE: needed to get "img_dir" below
 	private byte[] img_title_val_y, img_title_val_n;
 	public Xoapi_toggle_itm(Xoae_app app, byte[] key_bry) {
 		this.app = app; this.key_bry = key_bry;
 	}
-	public byte[] Key_bry() {return key_bry;} private final byte[] key_bry;
+	public byte[] Key_bry() {return key_bry;} private final    byte[] key_bry;
 	public byte[] Heading_bry() {return heading_bry;} private byte[] heading_bry;
 	public byte[] Icon_src() {return icon_src;} private byte[] icon_src = Bry_.Empty;
 	public byte[] Icon_title() {return icon_title;} private byte[] icon_title = Bry_.Empty;
@@ -69,7 +69,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 			icon_title = img_title_val_n;
 			elem_display = Img_display_n;
 		}
-		Bry_fmtr fmtr = Bry_fmtr.new_(); Bry_bfr bfr = Bry_bfr.new_(8); 
+		Bry_fmtr fmtr = Bry_fmtr.new_(); Bry_bfr bfr = Bry_bfr_.New_w_size(8); 
 		html_toggle_btn
 			= fmtr.Fmt_("<a href='javascript:xowa_toggle_visible(\"~{key}\");' style='text-decoration: none !important;'>~{heading}<img id='~{key}-toggle-icon' src='~{src}' title='~{title}' /></a>")
 			.Keys_("key", "src", "title", "heading").Bld_bry_many(bfr, key_bry, icon_src, icon_title, heading_bry)
@@ -82,12 +82,12 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_visible)) 			return Yn.To_str(visible);
 		else if	(ctx.Match(k, Invk_visible_))			this.visible = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_visible = "visible", Invk_visible_ = "visible_";
 	private static byte[] Img_src_y, Img_src_n;	// assume these are the same for all itms
-	private static final byte[] 
+	private static final    byte[] 
 	  Img_title_msg_y = Bry_.new_a7("hide"), Img_title_msg_n = Bry_.new_a7("show")
 	, Img_display_y = Bry_.new_a7("display:;"), Img_display_n = Bry_.new_a7("display:none;")
 	;

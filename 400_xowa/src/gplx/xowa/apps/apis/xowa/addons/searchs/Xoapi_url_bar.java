@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.addons.searchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
-import gplx.xowa.addons.apps.searchs.searchers.*; import gplx.xowa.addons.apps.searchs.searchers.crts.*;
-public class Xoapi_url_bar implements GfoInvkAble, GfoEvMgrOwner {
+import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
+public class Xoapi_url_bar implements Gfo_invk, Gfo_evt_mgr_owner {
 	public Xoapi_url_bar() {
-		this.evMgr = GfoEvMgr.new_(this);
+		this.evt_mgr = new Gfo_evt_mgr(this);
 	}
-	public GfoEvMgr		EvMgr()					{return evMgr;}				private final    GfoEvMgr evMgr;
+	public Gfo_evt_mgr		Evt_mgr()					{return evt_mgr;}				private final    Gfo_evt_mgr evt_mgr;
 	public boolean		Enabled()				{return enabled;}			private boolean enabled = true;
 	public int			Search_mode()			{return search_mode;}		private int search_mode = Xoapi_search_mode_.Tid__title_word;
 	public int			Max_results()			{return max_results;}		private int max_results = 10;
@@ -38,7 +38,7 @@ public class Xoapi_url_bar implements GfoInvkAble, GfoEvMgrOwner {
 			ns_ids = Int_.Ary_parse(s, ",");
 		}
 		ns_mgr.Add_by_int_ids(ns_ids);
-		GfoEvMgr_.Pub(this, Evt__ns_ids_changed);
+		Gfo_evt_mgr_.Pub(this, Evt__ns_ids_changed);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__enabled)) 						return Yn.To_str(enabled);
@@ -54,10 +54,10 @@ public class Xoapi_url_bar implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk__symbols)) 						return String_.new_u8(syms.To_bry());
 		else if	(ctx.Match(k, Invk__symbols_)) 						syms.Parse(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk__visible_rows)) 					return Int_.To_str(visible_rows);
-		else if	(ctx.Match(k, Invk__visible_rows_)) 				{visible_rows = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt__visible_rows_changed, visible_rows);}
+		else if	(ctx.Match(k, Invk__visible_rows_)) 				{visible_rows = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt__visible_rows_changed, visible_rows);}
 		else if	(ctx.Match(k, Invk__jump_len)) 						return Int_.To_str(jump_len);
-		else if	(ctx.Match(k, Invk__jump_len_)) 					{jump_len = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt__jump_len_changed, jump_len);}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else if	(ctx.Match(k, Invk__jump_len_)) 					{jump_len = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt__jump_len_changed, jump_len);}
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

@@ -28,7 +28,7 @@ public class Xoctg_pagelist_itms implements gplx.core.brys.Bfr_arg {
 		this.fmtr_itm = fmtr_itm;
 	} 
 	public void Init_wiki(Xowe_wiki wiki, Xoh_wtr_ctx hctx) {this.wiki = wiki; this.hctx = hctx;} private Xowe_wiki wiki; private Xoh_wtr_ctx hctx;
-	public void Itms_clear() 				{itms.Clear();} private List_adp itms = List_adp_.new_();	
+	public void Itms_clear() 				{itms.Clear();} private List_adp itms = List_adp_.New();	
 	public void Itms_add(Xowd_page_itm page) 	{itms.Add(page);}	
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = itms.Count();

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Number_parser_tst {
-	private final Number_parser_fxt fxt = new Number_parser_fxt();
+	private final    Number_parser_fxt fxt = new Number_parser_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Integer() {
 		fxt.Test_int("1", 1);
@@ -27,6 +27,9 @@ public class Number_parser_tst {
 		fxt.Test_int("-1234", -1234);
 		fxt.Test_int("+1", 1);
 		fxt.Test_int("00001", 1);
+	}
+	@Test  public void Long() {
+		fxt.Test_long("9876543210", 9876543210L);
 	}
 	@Test  public void Decimal() {
 		fxt.Test_dec("1.23", Decimal_adp_.parse("1.23"));
@@ -69,13 +72,17 @@ public class Number_parser_tst {
 	}
 }
 class Number_parser_fxt {
-	private final Number_parser parser = new Number_parser();
+	private final    Number_parser parser = new Number_parser();
 	public void Clear() {parser.Clear();}
 	public void Init_ignore(String chars) {parser.Ignore_chars_(Bry_.new_a7(chars));}
 	public void Test_int(String raw, int expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int(); 
 		Tfds.Eq(expd, actl, raw);
+	}
+	public void Test_long(String raw, long expd) {
+		byte[] raw_bry = Bry_.new_a7(raw);
+		Tfds.Eq(expd, parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_long(), raw);
 	}
 	public void Test_dec(String raw, Decimal_adp expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);

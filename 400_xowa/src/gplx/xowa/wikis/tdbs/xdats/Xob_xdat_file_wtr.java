@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.ios.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*;
 public class Xob_xdat_file_wtr {
 	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_.Tid_raw);}
 	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xotdb_dir_info_.Tid_name(dir_tid) + Xotdb_dir_info.Wtr_dir(tid)), tid);}
@@ -24,7 +24,7 @@ public class Xob_xdat_file_wtr {
 		this.fil_max = fil_max; 
 		this.root_dir = root_dir;
 		fil_ext = Xotdb_dir_info.Wtr_ext(wtr_tid);
-		bfr = Bry_bfr.new_(fil_max);
+		bfr = Bry_bfr_.New_w_size(fil_max);
 		idx = new int[fil_max / 8];	// ASSUME: any given row must at least be 8 bytes long
 		Url_gen(fil_idx);	// set 1st url
 		wtr = Io_stream_wtr_.new_by_tid_(wtr_tid);
@@ -143,6 +143,6 @@ class SortAlgo_quick {// quicksort
 		if (lo < j) Sort_recurse(lo, j);
 		if (i < hi) Sort_recurse(i, hi);
 	}
-	public static final SortAlgo_quick Instance = new SortAlgo_quick(); SortAlgo_quick() {}
+	public static final    SortAlgo_quick Instance = new SortAlgo_quick(); SortAlgo_quick() {}
 }
 

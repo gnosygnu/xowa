@@ -72,7 +72,7 @@ public class Xoh_tidy_mgr_tst {
 	}
 }
 class Xoh_tidy_mgr_fxt {
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
+	private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public void Clear() {
 		bfr.Clear();
 	}

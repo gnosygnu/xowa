@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.primitives.*;
 public class Http_server_wkr_pool {
-	private final Ordered_hash hash = Ordered_hash_.New(); private final Int_obj_ref hash_key = Int_obj_ref.neg1_();
+	private final    Ordered_hash hash = Ordered_hash_.New(); private final    Int_obj_ref hash_key = Int_obj_ref.New_neg1();
 	public boolean Enabled() {return max != 0;}
 	public int Max() {return max;} private int max;
 	public int Timeout() {return timeout;} private int timeout;
@@ -28,7 +28,7 @@ public class Http_server_wkr_pool {
 	public void Add(int uid) {
 		if (max == 0) return;	// disabled
 		synchronized (hash) {
-			Int_obj_ref wkr_key = Int_obj_ref.new_(uid);
+			Int_obj_ref wkr_key = Int_obj_ref.New(uid);
 			hash.Add(wkr_key, wkr_key);
 			++len;
 		}

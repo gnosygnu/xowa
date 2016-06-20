@@ -24,7 +24,7 @@ class Wdata_idx_wtr {
 		this.dump_fil_max = dump_fil_max;
 		dump_url_gen = Io_url_gen_.dir_(dump_dir);
 		this.make_dir = make_dir;
-	}	private Bry_bfr dump_bfr = Bry_bfr.reset_(2 * Io_mgr.Len_kb); int dump_fil_max; Io_url dump_dir, make_dir; Io_url_gen dump_url_gen;
+	}	private Bry_bfr dump_bfr = Bry_bfr_.Reset(2 * Io_mgr.Len_kb); int dump_fil_max; Io_url dump_dir, make_dir; Io_url_gen dump_url_gen;
 	public void Write(byte[] ttl, byte[] qid) {
 		if (dump_bfr.Len() + ttl.length + qid.length + 2 > dump_fil_max) Flush();	// 2 = "|" + "\n"; NOTE: all items have format of "data|qid\n"
 		dump_bfr.Add(ttl).Add_byte_pipe().Add(qid).Add_byte_nl();

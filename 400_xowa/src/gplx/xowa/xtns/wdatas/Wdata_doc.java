@@ -36,7 +36,7 @@ public class Wdata_doc {
 	public Ordered_hash Alias_list()	{if (alias_list == null) alias_list = mgr.Wdoc_parser(jdoc).Parse_aliases(qid, jdoc);			return alias_list;} private Ordered_hash alias_list;
 	public Ordered_hash Claim_list()	{if (claim_list == null) claim_list = mgr.Wdoc_parser(jdoc).Parse_claims(qid, jdoc);			return claim_list;} private Ordered_hash claim_list;
 	public Wdata_claim_grp Claim_list_get(int pid) {
-		if (tmp_key == null) tmp_key = Int_obj_ref.neg1_();			
+		if (tmp_key == null) tmp_key = Int_obj_ref.New_neg1();			
 		Object o = this.Claim_list().Get_by(tmp_key.Val_(pid));
 		return (Wdata_claim_grp)o;
 	}	

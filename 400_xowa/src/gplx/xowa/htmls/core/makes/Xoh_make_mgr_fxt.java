@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.primitives.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 class Xoh_make_mgr_fxt {
-	private final List_adp img_list = List_adp_.new_();
-	private final Xoh_page hpg = new Xoh_page();
+	private final    List_adp img_list = List_adp_.New();
+	private final    Xoh_page hpg = new Xoh_page();
 	private Xoh_make_mgr hswap_mgr; private Xowe_wiki wiki;
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
@@ -54,7 +54,7 @@ class Xoh_make_mgr_fxt {
 	public Xoh_make_mgr_fxt Init_data_redlink(int... uids) {
 		int uids_len = uids.length;
 		for (int i = 0; i < uids_len; ++i) {
-			Int_obj_ref redlink_uid = Int_obj_ref.new_(uids[i]);
+			Int_obj_ref redlink_uid = Int_obj_ref.New(uids[i]);
 			hpg.Redlink_uids().Add(redlink_uid, redlink_uid);
 		}
 		return this;

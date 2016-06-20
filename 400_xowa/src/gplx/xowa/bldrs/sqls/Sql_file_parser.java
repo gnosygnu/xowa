@@ -54,8 +54,8 @@ public class Sql_file_parser {
 	public void Parse(Gfo_usr_dlg usr_dlg) {
 		Io_buffer_rdr rdr = Io_buffer_rdr.Null;
 		try {
-			rdr = Io_buffer_rdr.new_(gplx.core.ios.Io_stream_rdr_.new_by_url_(src_fil), src_len);
-			Bry_bfr fil_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_();
+			rdr = Io_buffer_rdr.new_(gplx.core.ios.streams.Io_stream_rdr_.new_by_url_(src_fil), src_len);
+			Bry_bfr fil_bfr = Bry_bfr_.New(), val_bfr = Bry_bfr_.New();
 			byte[] bfr = rdr.Bfr(); int bfr_len = rdr.Bfr_len(), fld_idx = 0, cur_pos = 0;
 			if (flds_req != null) Identify_flds(bfr);
 			byte mode = Mode_sql_bgn; byte[] decode_regy = sql_parser.Escape_decode();
@@ -157,6 +157,6 @@ public class Sql_file_parser {
 		}
 		val_bfr.Clear();
 	}
-	private static final byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
-	private static final String GRP_KEY = "xowa.bldr.sql";
+	private static final    byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
+	private static final    String GRP_KEY = "xowa.bldr.sql";
 }

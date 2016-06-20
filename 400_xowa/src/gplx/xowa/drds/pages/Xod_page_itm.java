@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.pages.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 public class Xod_page_itm {
 	public int Page_id() {return page_id;} private int page_id;
 	public long Rev_id() {return rev_id;} private long rev_id;
@@ -35,10 +35,10 @@ public class Xod_page_itm {
 	public String Head_url() {return head_url;} private String head_url;
 	public String Head_name() {return head_ttl;} private String head_ttl;
 	public String First_allowed_editor_role() {return first_allowed_editor_role;} private String first_allowed_editor_role;
-	public List_adp Section_list() {return section_list;} private List_adp section_list = List_adp_.new_();
+	public List_adp Section_list() {return section_list;} private List_adp section_list = List_adp_.New();
 	public Xoh_page Hpg() {return hpg;} private Xoh_page hpg;
-	public Xopg_tag_mgr Head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr();
-	public Xopg_tag_mgr Tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr();
+	public Xopg_tag_mgr Head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
+	public Xopg_tag_mgr Tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
 	public void Init(int page_id, int rev_id
 		, String ttl_text, String ttl_db, String redirected, String description, String modified_on
 		, boolean is_editable, boolean is_main_page, boolean is_disambiguation, int lang_count
@@ -70,7 +70,7 @@ public class Xod_page_itm {
 		this.hpg = hpg;
 	}
 	public String To_str() {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		bfr	.Add_int_variable(page_id).Add_byte_pipe()
 			.Add_long_variable(rev_id).Add_byte_pipe()
 			.Add_str_u8(ttl_text).Add_byte_pipe()

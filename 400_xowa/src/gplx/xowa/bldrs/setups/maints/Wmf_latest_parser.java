@@ -25,7 +25,7 @@ public class Wmf_latest_parser {
 	public Wmf_latest_itm[] To_ary()		{return (Wmf_latest_itm[])hash.To_ary(Wmf_latest_itm.class);}
 	public void Parse(byte[] src) {
 		hash.Clear();
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 		byte[] name_bgn_bry = Bry_.new_a7("\n<a href=\"");
 		byte[] date_bgn_bry = Bry_.new_a7("</a>");
 		byte[] date_end_bry = Bry_.new_a7("  ");

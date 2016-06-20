@@ -22,6 +22,8 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
 import gplx.core.net.*;
+import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+import gplx.xowa.wikis.data.fetchers.*;
 public class Xoa_css_extractor {	
 	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
@@ -36,7 +38,7 @@ public class Xoa_css_extractor {
 	public Xoa_css_extractor Url_encoder_(Gfo_url_encoder v) {url_encoder = v; return this;} private Gfo_url_encoder url_encoder;
 	public Xoa_css_extractor Wiki_code_(byte[] v) {this.wiki_code = v; return this;} private byte[] wiki_code = null;
 	private byte[] mainpage_html; private boolean lang_is_ltr = true;
-	private final Gfo_url_parser url_parser = new Gfo_url_parser();
+	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
 	public void Init_by_app(Xoae_app app) {
 		this.usr_dlg = app.Usr_dlg();
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
@@ -85,17 +87,17 @@ public class Xoa_css_extractor {
 		Logo_setup();
 	}
 	private boolean Install_by_db(Xow_wiki wiki, Io_url wiki_html_dir, String css_key) {
-		Xowd_db_mgr core_db_mgr = wiki.Data__core_mgr();
+		Xow_db_mgr core_db_mgr = wiki.Data__core_mgr();
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() == null
 			||	core_db_mgr.Props().Schema_is_1()
-			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__tbl_css_core, Bool_.N)
+			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.N)
 			) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "css.db not found; wiki=~{0} css_dir=~{1}", wiki.Domain_str(), wiki_html_dir.Raw());
 			return false;
 		}
-		Xowd_db_file core_db = core_db_mgr.Db__core();
-		return gplx.xowa.htmls.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
+		Xow_db_file core_db = core_db_mgr.Db__core();
+		return Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
 	}
 	public void Css_common_setup() {
 		if (opt_download_css_common)
@@ -133,14 +135,14 @@ public class Xoa_css_extractor {
 			css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private boolean Css_wiki_generate(Io_url trg_fil) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Css_wiki_generate_section(bfr, Ttl_common_css);
 		Css_wiki_generate_section(bfr, Ttl_vector_css);
 		byte[] bry = bfr.To_bry_and_clear();
 		bry = Bry_.Replace(bry, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
 		Io_mgr.Instance.SaveFilBry(trg_fil, bry);
 		return true;
-	}	private static final byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
+	}	private static final    byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
 	private boolean Css_wiki_generate_section(Bry_bfr bfr, byte[] ttl) {
 		byte[] page = page_fetcher.Get_by(Xow_ns_.Tid__mediawiki, ttl);
 		if (page == null) return false;
@@ -148,7 +150,7 @@ public class Xoa_css_extractor {
 		Css_wiki_section_hdr.Bld_bfr_many(bfr, ttl);			// add "/*XOWA:MediaWiki:Common.css*/\n"
 		bfr.Add(page);											// add page
 		return true;
-	}	static final Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
+	}	static final    Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
 	public void Logo_setup() {
 		boolean logo_missing = true;
 		Io_url logo_url = wiki_html_dir.GenSubFil("logo.png");
@@ -183,7 +185,7 @@ public class Xoa_css_extractor {
 		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_u8(src_bry));
 		Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);
 		return true;
-	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
+	}	private static final    byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
 	private String Logo_find_src() {
 		if (mainpage_html == null) return null;
 		int main_page_html_len = mainpage_html.length;
@@ -195,7 +197,7 @@ public class Xoa_css_extractor {
 		byte[] logo_bry = Bry_.Mid(mainpage_html, logo_bgn, logo_end);
 		return protocol_prefix + String_.new_u8(logo_bry);
 	}
-	private static final byte[] Logo_find_bgn = Bry_.new_a7("<div id=\"p-logo\""), Logo_find_end = Bry_.new_a7("background-image: url(");
+	private static final    byte[] Logo_find_bgn = Bry_.new_a7("<div id=\"p-logo\""), Logo_find_end = Bry_.new_a7("background-image: url(");
 	public boolean Mainpage_download() {
 		mainpage_html = Mainpage_download_html();
 		return mainpage_html != null;
@@ -233,7 +235,7 @@ public class Xoa_css_extractor {
 		return Css_scrape_download(css_urls);
 	}
 	private String[] Css_scrape_urls(byte[] raw) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int raw_len = raw.length;
 		int prv_pos = 0; 
 		int css_find_bgn_len = Css_find_bgn.length;
@@ -255,10 +257,10 @@ public class Xoa_css_extractor {
 			prv_pos = url_end;
 		}
 		return rv.To_str_ary();
-	}	private static final byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
+	}	private static final    byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
 	private byte[] Css_scrape_download(String[] css_urls) {
 		int css_urls_len = css_urls.length;
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		for (int i = 0; i < css_urls_len; i++) {
 			String css_url = css_urls[i];
 			usr_dlg.Prog_many("", "main_page.css_download", "downloading css for '~{0}'", css_url);

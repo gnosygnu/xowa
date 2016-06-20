@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.progs.*;
-public class Xof_math_mgr implements GfoInvkAble {
+public class Xof_math_mgr implements Gfo_invk {
 	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
 	private Xoae_app app;
 	public Process_adp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private Process_adp cmd_convert_tex_to_dvi = new Process_adp();
@@ -100,7 +100,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_renderer))		return renderer_is_mathjax ? "mathjax" : "latex";
 		else if	(ctx.Match(k, Invk_renderer_))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");
 		else if	(ctx.Match(k, Invk_renderer_list))	return Options_renderer_list;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_renderer = "renderer", Invk_renderer_ = "renderer_", Invk_renderer_list = "renderer_list";
 	private static Keyval[] Options_renderer_list = Keyval_.Ary(Keyval_.new_("mathjax", "MathJax"), Keyval_.new_("latex", "LaTeX")); 

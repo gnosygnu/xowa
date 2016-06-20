@@ -21,7 +21,7 @@ import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_parser implements Xob_page_wkr {
 	private final    Xob_bldr bldr;
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
-	private final    List_adp wkr_list = List_adp_.new_();
+	private final    List_adp wkr_list = List_adp_.New();
 	public String Page_wkr__key() {return KEY;} static final String KEY = "page_parser";
 	public Xobd_parser(Xob_bldr bldr) {this.bldr = bldr;}
 	public void Wkr_add(Xobd_parser_wkr wkr) {wkr_list.Add(wkr);}

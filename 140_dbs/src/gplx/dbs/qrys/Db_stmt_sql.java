@@ -20,9 +20,9 @@ import gplx.core.brys.fmtrs.*; import gplx.core.stores.*;
 import gplx.dbs.engines.*;
 public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statements; not used for actual insert into database
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final List_adp args = List_adp_.new_();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
+	private final    List_adp args = List_adp_.New();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {}
 	public Db_conn Conn() {return conn;} public void Conn_(Db_conn v) {this.conn = v;} Db_conn conn;
 	public Db_stmt Reset_stmt() {return this;}
@@ -103,10 +103,10 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		try {Add(k, Val_str_wrap(v));} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v);} 
 		return this;
 	}
-	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
+	public Db_stmt Val_rdr_(gplx.core.ios.streams.Io_stream_rdr v, long rdr_len) {
 		try {
-			Bry_bfr bfr = Bry_bfr.new_();
-			gplx.core.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
+			Bry_bfr bfr = Bry_bfr_.New();
+			gplx.core.ios.streams.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
 			Add(Key_na, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;

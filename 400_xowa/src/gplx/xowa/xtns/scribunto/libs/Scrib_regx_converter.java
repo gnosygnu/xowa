@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.regxs.*;
 public class Scrib_regx_converter {
-	private List_adp capt_list = List_adp_.new_(), grps_parens = List_adp_.new_(); private List_adp grps_open = List_adp_.new_();
+	private List_adp capt_list = List_adp_.New(), grps_parens = List_adp_.New(); private List_adp grps_open = List_adp_.New();
 	public Scrib_regx_converter() {Init();}
 	public String Regx() {return regx;} private String regx;
 	public List_adp Capt_list() {return capt_list;}
@@ -57,7 +57,7 @@ public class Scrib_regx_converter {
 				case Byte_ascii.Paren_end:
 					if (grps_open.Count() == 0)
 						throw Err_.new_wo_type("Unmatched close-paren at pattern character " + Int_.To_str(i));
-					List_adp_.DelAt_last(grps_open);
+					List_adp_.Del_at_last(grps_open);
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
 				case Byte_ascii.Percent:
@@ -87,7 +87,7 @@ public class Scrib_regx_converter {
 								else {						// diff char: harder regex; REF.MW: $bfr .= "(?<b$bct>$d1(?:(?>[^$d1$d2]+)|(?P>b$bct))*$d2)";
 									if (fmtr_balanced == null) {
 										fmtr_balanced = Bry_fmtr.new_("(?<b~{0}>\\~{1}(?:(?>[^\\~{1}\\~{2}]*)|\\~{1}[^\\~{1}\\~{2}]*\\~{2})*\\~{2})", "0", "1", "2");	// NOTE: complicated regex; represents 3 level depth of balanced parens; 4+ won't work; EX:(3(2(1)2)3) PAGE:en.w:Electricity_sector_in_Switzerland DATE:2015-01-23
-										bfr_balanced = Bry_bfr.reset_(255);
+										bfr_balanced = Bry_bfr_.Reset(255);
 									}
 									synchronized (fmtr_balanced) {
 										++bct;
@@ -160,7 +160,7 @@ public class Scrib_regx_converter {
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
 		regx = bfr.To_str_and_clear();
 		return regx;
-	}	private Bry_bfr bfr = Bry_bfr.new_();
+	}	private Bry_bfr bfr = Bry_bfr_.New();
 	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] src, int i, int len) {
 		bfr.Add_byte(Byte_ascii.Brack_bgn);
 		++i;
@@ -250,13 +250,13 @@ public class Scrib_regx_converter {
 				return false;
 		}
 	}
-	private static final byte[] Bry_pow_escaped = Bry_.new_a7("\\^")
+	private static final    byte[] Bry_pow_escaped = Bry_.new_a7("\\^")
 	, Bry_dollar_literal = Bry_.new_a7("$"), Bry_dollar_escaped = Bry_.new_a7("\\$")
 	, Bry_bf0_seg_0 = Bry_.new_a7("{"), Bry_bf0_seg_1 = Bry_.new_a7("}[^"), Bry_bf0_seg_2 = Bry_.new_a7("]*")
 	, Bry_bf2_seg_0 = Bry_.new_a7("\\")//, Bry_bf2_seg_1 = Bry_.new_a7("")
 	, Bry_regx_dash = Bry_.new_a7("*?")	// was *?
 	;
-	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
+	public static final    byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
 	private void Init() {
 		String regx_w = "\\w"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
 		String regx_W = "\\W"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
@@ -297,5 +297,5 @@ public class Scrib_regx_converter {
 			brack_hash.Add_if_dupe_use_nth(lua_bry, php_bry);	// replace percent_hash definitions
 		}
 	}
-	private final Hash_adp_bry percent_hash = Hash_adp_bry.cs(), brack_hash = Hash_adp_bry.cs();
+	private final    Hash_adp_bry percent_hash = Hash_adp_bry.cs(), brack_hash = Hash_adp_bry.cs();
 }

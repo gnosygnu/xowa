@@ -22,7 +22,7 @@ public class Guid_adp__tst {
 		tst_parse_("467ffb41-cdfe-402f-b22b-be855425784b");
 	}
 	void tst_parse_(String s) {
-		Guid_adp uuid = Guid_adp_.parse(s);
+		Guid_adp uuid = Guid_adp_.Parse(s);
 		Tfds.Eq(uuid.To_str(), s);
 	}
 }

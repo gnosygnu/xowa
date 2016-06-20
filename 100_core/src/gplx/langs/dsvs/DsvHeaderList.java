@@ -26,7 +26,7 @@ public class DsvHeaderList {
 	public DsvHeaderList Add_Comment(String comment) {this.Add(new DsvHeaderItm(DsvHeaderItm.Id_Comment, comment)); return this;}
 	void Add(DsvHeaderItm data) {list.Add(data);}
 
-	List_adp list = List_adp_.new_();
+	List_adp list = List_adp_.New();
 	public static DsvHeaderList new_() {return new DsvHeaderList();} DsvHeaderList() {}
 }
 class DsvHeaderItm {
@@ -34,7 +34,7 @@ class DsvHeaderItm {
 	public Object Val() {return val;} Object val;
 	@gplx.Internal protected DsvHeaderItm(int id, Object val) {this.id = id; this.val = val;}
 
-	public static final int
+	public static final    int
 		  Id_Comment	= 1
 		, Id_TableName	= 2
 		, Id_BlankLine	= 3

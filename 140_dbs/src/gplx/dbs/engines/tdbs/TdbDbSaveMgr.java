@@ -52,7 +52,7 @@ class TdbDbSaveMgr {
 		Io_mgr.Instance.SaveFilStr(fil.Path(), wtr.To_str());
 	}
 	List_adp FetchTablesWithSamePath(TdbDatabase db, Io_url filPath) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (Object tblObj : db.Tables()) {
 			TdbTable tbl = (TdbTable)tblObj;
 			if (tbl.File().Path().Eq (filPath))

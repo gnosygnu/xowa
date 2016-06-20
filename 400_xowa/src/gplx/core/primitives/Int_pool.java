@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Int_pool {
-	private final List_adp available_list = List_adp_.new_(); private int available_len;
-	// private final Bry_bfr dbg_bfr = Bry_bfr.new_();
+	private final    List_adp available_list = List_adp_.New(); private int available_len;
+	// private final    Bry_bfr dbg_bfr = Bry_bfr_.New();
 	private int uid_max = -1;
 	public void Clear() {
 		synchronized (available_list) {

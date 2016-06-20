@@ -20,7 +20,7 @@ import gplx.core.threads.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
 class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 	public Xoi_cmd_wiki_zip(Xoi_setup_mgr install_mgr, String wiki_key, String wiki_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.wiki_date = wiki_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, wiki_date, dump_type;
-	public static final String KEY = "wiki.zip";
+	public static final    String KEY = "wiki.zip";
 	public void Cmd_ctor() {}
 	public String Async_key() {return KEY;}
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
@@ -33,12 +33,12 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 		install_mgr.App().Usr_dlg().Prog_many(GRP_KEY, "zip.done", "zip done");
 		return true;
 	}
-	public GfoInvkAble Owner() {return owner;} public Xoi_cmd_wiki_zip Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Xoi_cmd_wiki_zip Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "zip.bgn", "zip.bgn ~{0}", wiki_key);
-		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();
+		Thread_adp_.Start_by_key(this.Async_key(), this, Invk_process_async);
 	}
 	public boolean Async_running() {
 		return running;
@@ -62,8 +62,8 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_delete_dirs_page_))		delete_dirs_page = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_notify_done_))			notify_done = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_process_async = "run_async", Invk_owner = "owner", Invk_delete_dirs_page_ = "delete_dirs_page_", Invk_notify_done_ = "notify_done_";
-	private static final String GRP_KEY = "xowa.thread.op.wiki.zip";
+	private static final    String GRP_KEY = "xowa.thread.op.wiki.zip";
 }

@@ -57,7 +57,7 @@ public class Xoh_js_cbk_wdata_labels_tst {
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			msg.Add("v", args[i]);
-		String[] actl = (String[])GfoInvkAble_.InvkCmd_msg(exec, Xoh_js_cbk.Invk_wikidata_get_label, msg);
+		String[] actl = (String[])Gfo_invk_.Invk_by_msg(exec, Xoh_js_cbk.Invk_wikidata_get_label, msg);
 		Tfds.Eq_ary_str(expd, actl);
 	}
 }

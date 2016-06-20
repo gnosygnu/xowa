@@ -29,6 +29,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public Json_itm Get_at(int i) {return subs[i];}
 	public Json_itm Get_as_itm_or_null(byte[] key) {if (subs_hash == null) subs_hash = subs_hash_init(); return (Json_itm)subs_hash.Get_by_bry(key);}
 	public Json_ary Get_as_ary(int idx)		{return Json_ary.cast(Get_at(idx));}
+	public Json_nde Get_as_nde(String key)	{return Json_nde.cast(Get_as_itm_or_null(Bry_.new_u8(key)));}
 	public Json_nde Get_as_nde(int idx)		{return Json_nde.cast(Get_at(idx));}
 	public Json_ary Get_as_ary(String key)	{return Get_as_ary(Bry_.new_u8(key));}
 	public Json_ary Get_as_ary(byte[] key) {
@@ -65,6 +66,11 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public long Get_as_long_or(byte[] key, long or) {
 		byte[] rv = Get_as_bry_or(key, null);
 		return rv == null ? or : Bry_.To_long_or(rv, or);
+	}
+	public boolean Get_as_bool_or(String key, boolean or) {return Get_as_bool_or(Bry_.new_u8(key), or);}
+	public boolean Get_as_bool_or(byte[] key, boolean or) {
+		byte[] rv = Get_as_bry_or(key, null);
+		return rv == null ? or : Bry_.Eq(rv, Bool_.True_bry);
 	}
 
 	// to convert

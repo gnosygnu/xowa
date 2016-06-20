@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.threads.*; import gplx.dbs.*;
 import gplx.xowa.specials.*;
-public class Xoud_history_mgr implements GfoInvkAble {
+public class Xoud_history_mgr implements Gfo_invk {
 	private Xoud_history_tbl history_tbl;
 	public void Conn_(Db_conn conn, boolean created) {
 		this.history_tbl = new Xoud_history_tbl(conn);
@@ -41,16 +41,16 @@ public class Xoud_history_mgr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_update))		Update(m.ReadStr("wiki"), m.ReadStr("page"), m.ReadStr("qarg"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_update = "update";
 	public static boolean Skip_history(Xoa_ttl ttl) {
 		byte[] page_db = ttl.Page_db();
 		return	(	ttl.Ns().Id_is_special()
 				&&	(	Bry_.Eq(page_db, gplx.xowa.users.history.Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
-					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__popup_history.Key_bry())
-					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__default_tab.Key_bry())
-					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__page_history.Key_bry())
+					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__popup_history.Key_bry())
+					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__default_tab.Key_bry())
+					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__page_history.Key_bry())
 					)
 				);
 	}

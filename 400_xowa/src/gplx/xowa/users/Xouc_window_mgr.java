@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
-public class Xouc_window_mgr implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*;
+import gplx.xowa.guis.views.*;
+public class Xouc_window_mgr implements Gfo_invk {
 	public Xouc_window_mgr(Xoue_user user) {this.user = user;} private Xoue_user user;
 	public byte Mode_tid() {return mode_tid;} private byte mode_tid = Mode_tid_previous;
 	public String Mode_str() {return mode_str;} private String mode_str = "previous";

@@ -23,7 +23,7 @@ public class Xob_tmp_wtr {
 		this.ns_itm = ns_itm;
 		this.url_gen = url_gen;
 		this.fil_max = fil_max; 
-		bfr = Bry_bfr.reset_(fil_max);
+		bfr = Bry_bfr_.Reset(fil_max);
 	}	int fil_max;
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
 	public Io_url_gen Url_gen() {return url_gen;} Io_url_gen url_gen;

@@ -33,7 +33,7 @@ class Uca_trie_fxt {
 	public void Clear() {
 		if (trie == null) {
 			trie = new Uca_trie();
-			bfr = Bry_bfr.new_();
+			bfr = Bry_bfr_.New();
 		}
 		trie.Clear();
 	}	Uca_trie trie; Bry_bfr bfr;

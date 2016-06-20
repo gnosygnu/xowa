@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.wkrs.*;
-public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
+public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk {
 	public Xoctg_hiddencat_ttl_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;} private Xob_sql_join_wkr_ctg_hidden join_wkr;
 	public String Cmd_key() {return Xob_cmd_keys.Key_tdb_cat_hidden_ttl;}
 	public void Cmd_init(Xob_bldr bldr) {}
@@ -62,7 +62,7 @@ class Xob_sql_join_wkr_ctg_hidden implements Xob_sql_join_wkr {
 		if (pipe_pos == Bry_find_.Not_found) throw Err_.new_wo_type("failed to find pipe for name", "excerpt", String_.new_u8(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
 		file_bfr.Add_mid(src, pipe_pos + 1, itm_end - 1).Add_byte_pipe();
 		file_bfr.Add(key_bry).Add_byte_nl();
-	}	private Bry_bfr file_bfr = Bry_bfr.new_();
+	}	private Bry_bfr file_bfr = Bry_bfr_.New();
 	public void Flush() {
 		Io_mgr.Instance.SaveFilBfr(dump_url_gen.Nxt_url(), file_bfr);
 	}

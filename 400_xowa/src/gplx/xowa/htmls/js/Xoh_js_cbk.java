@@ -21,11 +21,11 @@ import gplx.langs.jsons.*;
 import gplx.xowa.htmls.js.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*;
-public class Xoh_js_cbk implements GfoInvkAble {
+public class Xoh_js_cbk implements Gfo_invk {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
 	private Xop_root_tkn root = new Xop_root_tkn();
-	private final    Bry_bfr bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public Xoh_js_cbk(Xog_html_itm html_itm) {this.html_itm = html_itm; this.app = html_itm.Owner_tab().Tab_mgr().Win().App();}
 	private String Xowa_exec_test(GfoMsg m) {	// concat args with pipe; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc|arg0|arg1
 		bfr.Clear();
@@ -65,7 +65,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, m.Args_getAt(0).Val_to_bry());
-			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
+			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
 			return String_.new_u8(page.Data_raw());
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
@@ -187,7 +187,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
 		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__bridge_mgr().Cmd_mgr().Exec(m);
 		else if	(ctx.Match(k, Invk_bldr_exec))							return app.Bldr().Exec_json((String)m.ReadValAt(0));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	public static final    String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
 	, Invk_get_search_suggestions = "get_search_suggestions", Invk_get_titles_meta = "get_titles_meta", Invk_get_titles_exists = "get_titles_exists", Invk_get_current_url = "get_current_url"

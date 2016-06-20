@@ -44,11 +44,11 @@ public class Xow_domain_uid_ {
 	public static int To_int(Xow_domain_itm domain) {
 		int domain_tid = 0;
 		switch (domain.Domain_type_id()) {
-			case Xow_domain_tid_.Int__home:				return Tid_xowa;
+			case Xow_domain_tid_.Int__home:					return Tid_xowa;
 			case Xow_domain_tid_.Int__commons:				return Tid_commons;
-			case Xow_domain_tid_.Int__wikidata:			return Tid_wikidata;
+			case Xow_domain_tid_.Int__wikidata:				return Tid_wikidata;
 			case Xow_domain_tid_.Int__mediawiki:			return Tid_mediawiki;
-			case Xow_domain_tid_.Int__meta:				return Tid_meta;
+			case Xow_domain_tid_.Int__meta:					return Tid_meta;
 			case Xow_domain_tid_.Int__incubator:			return Tid_incubator;
 			case Xow_domain_tid_.Int__wmfblog:				return Tid_wmfblog;
 			case Xow_domain_tid_.Int__species:				return Tid_species;
@@ -59,7 +59,7 @@ public class Xow_domain_uid_ {
 			case Xow_domain_tid_.Int__wikiquote:			domain_tid = Tid_sub_wikiquote; break;
 			case Xow_domain_tid_.Int__wikibooks:			domain_tid = Tid_sub_wikibooks; break;
 			case Xow_domain_tid_.Int__wikiversity:			domain_tid = Tid_sub_wikiversity; break;
-			case Xow_domain_tid_.Int__wikinews:			domain_tid = Tid_sub_wikinews; break;
+			case Xow_domain_tid_.Int__wikinews:				domain_tid = Tid_sub_wikinews; break;
 			case Xow_domain_tid_.Int__wikimedia:			domain_tid = Tid_sub_wikimedia; break;
 			default:										throw Err_.new_unhandled(domain.Domain_type_id());
 		}

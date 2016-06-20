@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*;
 public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Io_url fil) {
 		this.usr_dlg = usr_dlg; this.kit = kit; this.fil = fil;
 		return this;
 	}	Gfui_kit kit; Gfo_usr_dlg usr_dlg; Io_url fil;
-	public GfoInvkAble Owner() {return owner;} public Gfo_thread_cmd_replace Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Gfo_thread_cmd_replace Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Bry_fmtr_eval_mgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_replace Url_eval_mgr_(Bry_fmtr_eval_mgr v) {url_eval_mgr = v; return this;} Bry_fmtr_eval_mgr url_eval_mgr;
 	public String Async_key() {return KEY;}
 	public void Cmd_ctor() {}
@@ -48,13 +48,13 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 		Io_mgr.Instance.SaveFilStr(fil, raw);
 		usr_dlg.Prog_many(GRP_KEY, "done", "replace completed: ~{0} ~{1}", fil.Raw(), pairs_len);
 	}
-	public List_adp pairs = List_adp_.new_();
+	public List_adp pairs = List_adp_.New();
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_async_bgn))				Exec_find_replace();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_fil_))					fil = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_add))					pairs.Add(Keyval_.new_(m.ReadStr("find"), m.ReadStr("replace")));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_async_bgn = "async_bgn", Invk_owner = "owner", Invk_fil_ = "fil_", Invk_add = "add";
 	static final String GRP_KEY = "gfo.thread.file.download";

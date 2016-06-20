@@ -26,7 +26,7 @@ public class Dbmeta_fld_itm {
 	public Dbmeta_fld_tid	Type()			{return type;} private final    Dbmeta_fld_tid type;
 	public int				Nullable_tid()	{return nullable_tid;} public Dbmeta_fld_itm Nullable_tid_(int v) {nullable_tid = v; return this;} private int nullable_tid;
 	public Dbmeta_fld_itm	Nullable_y_()	{return Nullable_tid_(Nullable_null);} 
-	public boolean				Primary()		{return primary;} public Dbmeta_fld_itm Primary_y_() {primary = true; return this;} private boolean primary;
+	public boolean				Primary()		{return primary;} public Dbmeta_fld_itm Primary_y_() {primary = true; return this;} private boolean primary; public Dbmeta_fld_itm Primary_n_() {primary = false; return this;}
 	public boolean				Autonum()		{return autonum;} public Dbmeta_fld_itm Autonum_y_() {autonum = true; return this;} private boolean autonum;
 	public Object			Default()		{return default_val;} public Dbmeta_fld_itm Default_(Object v) {default_val = v; return this;} private Object default_val;
 	public boolean Eq(Dbmeta_fld_itm comp) {

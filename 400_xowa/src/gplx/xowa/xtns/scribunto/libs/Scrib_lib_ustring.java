@@ -74,7 +74,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			Regx_match[] regx_rslts = regx_adp.Match_all(text_str, bgn_codepoint_idx);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 			int len = regx_rslts.length;
 			if (len == 0) return rslt.Init_ary_empty();
-			List_adp tmp_list = List_adp_.new_();
+			List_adp tmp_list = List_adp_.New();
 			Regx_match match = regx_rslts[0];					// NOTE: take only 1st result; DATE:2014-08-27
 			int match_find_bgn_codepoint = match.Find_bgn();	// NOTE: java regex returns results in codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
 			int match_find_bgn_adj = -surrogate_utl.Count_surrogates__codepoint_idx1(text_bry, text_bry_len, bgn_byte_pos, match_find_bgn_codepoint - bgn_codepoint_idx); // NOTE: convert from java regex codepoint to lua / php char_idx; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
@@ -105,7 +105,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		Regx_match[] regx_rslts = regx_adp.Match_all(text, bgn);
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
-		List_adp tmp_list = List_adp_.new_();
+		List_adp tmp_list = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Regx_match match = regx_rslts[i];
 			AddCapturesFromMatch(tmp_list, match, text, regx_converter.Capt_ary(), true);
@@ -152,7 +152,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
 		Regx_match match = regx_rslts[0];	// NOTE: take only 1st result
-		List_adp tmp_list = List_adp_.new_();
+		List_adp tmp_list = List_adp_.New();
 		AddCapturesFromMatch(tmp_list, match, text, capt, true);	// NOTE: was incorrectly set as false; DATE:2014-04-23
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
 	}
@@ -219,7 +219,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_table;
 			Keyval[] repl_tbl = (Keyval[])repl_obj;
 			if (repl_hash == null) 
-				repl_hash = Hash_adp_.new_();
+				repl_hash = Hash_adp_.New();
 			else
 				repl_hash.Clear();
 			int repl_tbl_len = repl_tbl.length;
@@ -245,7 +245,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		if (	rslts.length == 0				// PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
 			||	regx_mgr.Pattern_is_invalid()	// NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02
 			) return text;	
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int len = rslts.length;
 		int pos = 0;
 		for (int i = 0; i < len; i++) {
@@ -282,7 +282,7 @@ class Scrib_lib_ustring_gsub_mgr {
 											tmp_bfr.Add_str_u8(String_.Mid(text, match.Find_bgn(), match.Find_end()));											
 										else {			// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 											idx -= List_adp_.Base1;
-											if (idx < match.Groups().length) {	// retrieve numbered capture; TODO: support more than 9 captures
+											if (idx < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
 												Regx_group grp = match.Groups()[idx];
 												tmp_bfr.Add_str_u8(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 											}

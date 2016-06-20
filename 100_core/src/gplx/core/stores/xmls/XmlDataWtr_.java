@@ -105,9 +105,9 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 	@Override public SrlMgr SrlMgr_new(Object o) {return new XmlDataWtr();}
 	boolean ndeOpened = false;
 //		int atrCount = 0;
-//		int ndeState = -1; static final int NdeState0_Opened = 0, NdeState0_H = 1;
+//		int ndeState = -1; static final    int NdeState0_Opened = 0, NdeState0_H = 1;
 //		XmlDocument doc = new XmlDocument(); XmlNode nde;
-	List_adp names = List_adp_.new_();
+	List_adp names = List_adp_.New();
 	String_bldr sb = String_bldr_.new_();
 	public static XmlDataWtr new_() {return new XmlDataWtr();} XmlDataWtr() {}
 }

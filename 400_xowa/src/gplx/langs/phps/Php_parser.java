@@ -24,7 +24,7 @@ public class Php_parser {
 	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
 	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
 	public Php_parser() {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Init_lxr(list, new Php_lxr_declaration());
 		Init_lxr(list, new Php_lxr_ws(Php_tkn_ws.Tid_space));
 		Init_lxr(list, new Php_lxr_ws(Php_tkn_ws.Tid_nl));
@@ -117,5 +117,5 @@ public class Php_parser {
 		return end;
 	}
 	public static final int NotFound = -1;
-	public static final Gfo_msg_grp Log_nde = Gfo_msg_grp_.new_(Gfo_msg_grp_.Root_gplx, "php_parser");
+	public static final    Gfo_msg_grp Log_nde = Gfo_msg_grp_.new_(Gfo_msg_grp_.Root_gplx, "php_parser");
 }

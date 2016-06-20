@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.parsers.amps.*; import gplx.core.log
 public class Xop_sanitizer {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs(), amp_trie;
 	private Xop_amp_mgr amp_mgr;
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Xop_sanitizer(Xop_amp_mgr amp_mgr, Gfo_msg_log msg_log) {
 		this.amp_mgr = amp_mgr; this.amp_trie = amp_mgr.Amp_trie();
 		trie_add("&"	, Tid_amp);

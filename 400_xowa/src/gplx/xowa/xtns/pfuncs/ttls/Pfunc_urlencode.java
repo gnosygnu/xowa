@@ -27,5 +27,5 @@ public class Pfunc_urlencode extends Pf_func_base {	// EX: {{urlencode:a b}} -> 
 		gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(urlEncodeBfr, argx);
 		bfr.Add_bfr_and_preserve(urlEncodeBfr);
 		urlEncodeBfr.Clear();
-	}	private Bry_bfr urlEncodeBfr = Bry_bfr.new_(128);
+	}	private Bry_bfr urlEncodeBfr = Bry_bfr_.New_w_size(128);
 }

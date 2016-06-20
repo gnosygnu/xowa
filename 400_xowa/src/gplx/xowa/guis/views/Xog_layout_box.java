@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*;
-public class Xog_layout_box implements GfoInvkAble {
-	public GfoInvkAble Owner() {return owner;} public Xog_layout_box Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.controls.elems.*;
+public class Xog_layout_box implements Gfo_invk {
+	public Gfo_invk Owner() {return owner;} public Xog_layout_box Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public int X_abs() {return x_abs;} public Xog_layout_box X_abs_(int v) {x_abs = v; return this;} private int x_abs = Int_.Min_value;
 	public int Y_abs() {return y_abs;} public Xog_layout_box Y_abs_(int v) {y_abs = v; return this;} private int y_abs = Int_.Min_value;
 	public int W_abs() {return w_abs;} public Xog_layout_box W_abs_(int v) {w_abs = v; return this;} private int w_abs = Int_.Min_value;
@@ -66,7 +66,7 @@ public class Xog_layout_box implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_font_style_))			font_style = FontStyleAdp_.parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_mode_))					mode = String_.Eq(m.ReadStr("v"), "abs") ? Mode_abs : Mode_rel;
 		else if	(ctx.Match(k, Invk_owner))					return owner;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final byte Mode_abs = 0, Mode_rel = 1;

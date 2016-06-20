@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
-public class Xoapi_search implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.views.*;
+public class Xoapi_search implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {this.app = app;} private Xoae_app app;
 	private GfuiTextBox Search_box() {return app.Gui_mgr().Browser_win().Search_box();}
 	private Xog_win_itm Win() {return app.Gui_mgr().Browser_win();}
@@ -26,7 +26,7 @@ public class Xoapi_search implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_focus)) 					this.Focus();
 		else if	(ctx.Match(k, Invk_exec)) 					this.Exec();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_focus = "focus";

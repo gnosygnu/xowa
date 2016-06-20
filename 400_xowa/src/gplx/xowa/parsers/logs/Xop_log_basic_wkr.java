@@ -19,7 +19,7 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-public class Xop_log_basic_wkr implements GfoInvkAble {
+public class Xop_log_basic_wkr implements Gfo_invk {
 	private Xop_log_mgr log_mgr; private Xop_log_basic_tbl log_tbl;
 	private boolean save_page_ttl, save_log_time, save_args_len, save_args_str;
 	public boolean Save_src_str() {return save_src_str;} public Xop_log_basic_wkr Save_src_str_(boolean v) {save_src_str = v; return this;} private boolean save_src_str;
@@ -53,17 +53,17 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_save_args_len_))			save_args_len = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_save_args_str_))			save_args_str = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_save_src_str_))			save_src_str = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 
 	  Invk_save_page_ttl_ = "save_page_ttl_", Invk_save_log_time_ = "save_log_time_"
 	, Invk_save_args_len_ = "save_args_len_", Invk_save_args_str_ = "save_args_str_", Invk_save_src_str_ = "save_src_str_"
 	;
-	public static final Xop_log_basic_wkr Null = null;
+	public static final    Xop_log_basic_wkr Null = null;
 	public static final int Null_page_id = -1, Null_log_bgn = -1, Null_log_time = -1, Null_args_len = -1, Null_src_len = -1;
 	public static final String Null_page_ttl = "", Null_args_str = "", Null_src_str = "";
-	public static final byte[] Null_log_msg = null;
+	public static final    byte[] Null_log_msg = null;
 	public static final int
 	  Tid_gallery		= 1
 	, Tid_imageMap		= 2

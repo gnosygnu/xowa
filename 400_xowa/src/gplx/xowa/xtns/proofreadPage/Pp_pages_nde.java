@@ -109,7 +109,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				)												// NOTE: this simulates MW's if (empty($links)); REF.MW:ProofreadPageRenderer.php|renderPages
 				ttls = Get_ttls_from_xnde_args();
 			else {
-				Int_obj_ref bgn_page_ref = Int_obj_ref.neg1_(), end_page_ref = Int_obj_ref.neg1_();
+				Int_obj_ref bgn_page_ref = Int_obj_ref.New_neg1(), end_page_ref = Int_obj_ref.New_neg1();
 				ttls = index_page.Get_ttls_rng(wiki, ns_page_id, bgn_page_bry, end_page_bry, bgn_page_ref, end_page_ref);
 				bgn_page_int = bgn_page_ref.Val();
 				end_page_int = end_page_ref.Val();
@@ -212,7 +212,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	private Xoa_ttl[] Get_ttls_from_xnde_args() {
 		if (!Chk_step()) return Ttls_null;
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list = Get_ttls_from_xnde_args__include(list);	if (list == null) return Ttls_null;
 		list = Get_ttls_from_xnde_args__rng(list);		if (list == null) return Ttls_null;
 		list = Get_ttls_from_xnde_args__exclude(list);	if (list == null) return Ttls_null;
@@ -262,8 +262,8 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return list;
 	}
 	private int Get_max_page_idx(Xowe_wiki wiki, Xoa_ttl index_ttl) {
-		List_adp rslt = List_adp_.new_();
-		Int_obj_ref rslt_count = Int_obj_ref.zero_();
+		List_adp rslt = List_adp_.New();
+		Int_obj_ref rslt_count = Int_obj_ref.New_zero();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), Int_.Max_value, 0, Int_.Max_value, false, false);
 		int len = rslt_count.Val();
 		int page_leaf_max = 0;
@@ -280,14 +280,14 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (Bry_.Len_eq_0(exclude)) return list;	// exclude is blank; exit early;
 		int[] exclude_pages = Int_ary_.Parse_list_or(exclude, null);
 		if (exclude_pages == null) return list;	// ignore invalid exclude; DATE:2014-02-22
-		Hash_adp exclude_pages_hash = Hash_adp_.new_();
+		Hash_adp exclude_pages_hash = Hash_adp_.New();
 		int exclude_pages_len = exclude_pages.length;
 		for (int i = 0; i < exclude_pages_len; i++) {
 			Int_obj_val exclude_page = Int_obj_val.new_(exclude_pages[i]);
 			if (!exclude_pages_hash.Has(exclude_page))
 				exclude_pages_hash.Add(exclude_page, exclude_page);
 		}
-		List_adp new_list = List_adp_.new_();
+		List_adp new_list = List_adp_.New();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
 			Int_obj_val page = (Int_obj_val)list.Get_at(i);

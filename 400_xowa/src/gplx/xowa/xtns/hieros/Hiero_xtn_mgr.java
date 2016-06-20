@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.apps.fsys.*;
-public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
+public class Hiero_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 	@Override public boolean Enabled_default() {return true;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("hiero");
-	@Override public Xox_mgr Clone_new() {return new Hiero_xtn_mgr();}
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("hiero");
+	@Override public Xox_mgr Xtn_clone_new() {return new Hiero_xtn_mgr();}
 	public static byte[] Img_src_dir;
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {}
 	private static boolean xtn_init_done = false;
@@ -35,10 +35,10 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		parser.Init();
 		xtn_init_done = true;
 	}
-	@gplx.Internal protected Hiero_parser Parser() {return parser;} private static final Hiero_parser parser = new Hiero_parser();
-	@gplx.Internal protected Hiero_prefab_mgr Prefab_mgr() {return prefab_mgr;} private static final Hiero_prefab_mgr prefab_mgr = new Hiero_prefab_mgr();
-	@gplx.Internal protected Hiero_file_mgr File_mgr() {return file_mgr;} private static final Hiero_file_mgr file_mgr = new Hiero_file_mgr();
-	@gplx.Internal protected Hiero_phoneme_mgr Phoneme_mgr() {return phoneme_mgr;} private static final Hiero_phoneme_mgr phoneme_mgr = new Hiero_phoneme_mgr();
+	@gplx.Internal protected Hiero_parser Parser() {return parser;} private static final    Hiero_parser parser = new Hiero_parser();
+	@gplx.Internal protected Hiero_prefab_mgr Prefab_mgr() {return prefab_mgr;} private static final    Hiero_prefab_mgr prefab_mgr = new Hiero_prefab_mgr();
+	@gplx.Internal protected Hiero_file_mgr File_mgr() {return file_mgr;} private static final    Hiero_file_mgr file_mgr = new Hiero_file_mgr();
+	@gplx.Internal protected Hiero_phoneme_mgr Phoneme_mgr() {return phoneme_mgr;} private static final    Hiero_phoneme_mgr phoneme_mgr = new Hiero_phoneme_mgr();
 	@gplx.Internal protected Hiero_html_mgr Html_wtr() {return html_wtr;} private static Hiero_html_mgr html_wtr;
 	public void Clear() {
 		prefab_mgr.Clear();

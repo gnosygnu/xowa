@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
 public class Xof_bin_skip_mgr {
 	private Xof_bin_skip_wkr[] wkrs = new Xof_bin_skip_wkr[0]; private int wkrs_len;
 	public Xof_bin_skip_mgr(Fsm_cfg_mgr cfg_mgr, String[] wkr_keys) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (int i = 0; i < wkrs_len; ++i) {
 			Xof_bin_skip_wkr wkr = New_wkr(cfg_mgr, wkr_keys[i]);
 			if (wkr != null) list.Add(wkr);
@@ -69,7 +69,7 @@ class Xof_bin_skip_wkr__page_gt_1 implements Xof_bin_skip_wkr {	// prior to v2.4
 	public void Skip_term(Fsm_cfg_mgr cfg_mgr) {
 		cfg_mgr.Patch__save(Fsm_cfg_mgr.Key_patch__page_gt_1);
 	}
-        public static final Xof_bin_skip_wkr__page_gt_1 Instance = new Xof_bin_skip_wkr__page_gt_1(); Xof_bin_skip_wkr__page_gt_1() {}
+        public static final    Xof_bin_skip_wkr__page_gt_1 Instance = new Xof_bin_skip_wkr__page_gt_1(); Xof_bin_skip_wkr__page_gt_1() {}
 }
 class Xof_bin_skip_wkr__small_size implements Xof_bin_skip_wkr {// downloads can randomly be broken; assume that anything with a small size is broken and redownload again; DATE:2015-04-21
 	public String Key() {return Xof_bin_skip_wkr_.Key__small_size;}
@@ -85,5 +85,5 @@ class Xof_bin_skip_wkr__small_size implements Xof_bin_skip_wkr {// downloads can
 		return rv;
 	}
 	public void Skip_term(Fsm_cfg_mgr cfg_mgr) {}
-        public static final Xof_bin_skip_wkr__small_size Instance = new Xof_bin_skip_wkr__small_size(); Xof_bin_skip_wkr__small_size() {}
+        public static final    Xof_bin_skip_wkr__small_size Instance = new Xof_bin_skip_wkr__small_size(); Xof_bin_skip_wkr__small_size() {}
 }

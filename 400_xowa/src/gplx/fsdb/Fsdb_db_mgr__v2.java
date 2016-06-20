@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.origs.*; import gplx.xowa.wikis.data.*;
 public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
-	private final    Xowd_db_layout layout; private final    Io_url wiki_dir;
+	private final    Xow_db_layout layout; private final    Io_url wiki_dir;
 	private final    Fsdb_db_file file_main_core, file_user_core;
 	private final    Xof_orig_tbl[] orig_tbl_ary;
-	public Fsdb_db_mgr__v2(Xowd_db_layout layout, Io_url wiki_dir, Fsdb_db_file file_main_core, Fsdb_db_file file_user_core) {
+	public Fsdb_db_mgr__v2(Xow_db_layout layout, Io_url wiki_dir, Fsdb_db_file file_main_core, Fsdb_db_file file_user_core) {
 		this.layout = layout; this.wiki_dir = wiki_dir;
 		this.file_main_core = file_main_core; this.file_user_core = file_user_core;
 		this.orig_tbl_ary	= new Xof_orig_tbl[] 
@@ -55,12 +55,12 @@ public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 		gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn).Create_tbl();
 		return Fsdb_db_mgr__v2_bldr.Make_bin_tbl(new Fsdb_db_file(url, conn));
 	}
-	public static Xowd_db_layout Cfg__layout_file__get(Db_conn main_core_conn) {
+	public static Xow_db_layout Cfg__layout_file__get(Db_conn main_core_conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(main_core_conn);
-		return Xowd_db_layout.get_(cfg_tbl.Select_str_or(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, Xowd_db_layout.Name_few));
+		return Xow_db_layout.Get_by_name(cfg_tbl.Select_str_or(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, Xow_db_layout.Key__few));
 	}
-	public static void Cfg__layout_file__set(Db_cfg_tbl cfg_tbl, Xowd_db_layout v) {
-		cfg_tbl.Insert_str(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, v.Name());
+	public static void Cfg__layout_file__set(Db_cfg_tbl cfg_tbl, Xow_db_layout v) {
+		cfg_tbl.Insert_str(gplx.xowa.wikis.Xow_cfg_consts.Grp__bldr_fsdb, Cfg_key__layout_file, v.Key());
 	}
 	private static final String Cfg_key__layout_file = "layout_file";
 }

@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.langs.msgs.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*;
+import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.langs.msgs.*;
 public class Xog_mnu_itm extends Xog_mnu_base {
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_mnu_itm(Xoa_gui_mgr gui_mgr, String key) {
@@ -79,9 +80,9 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
 	}
-	private static final String Invk_text = "text", Invk_text_ = "text_", Invk_shortcut = "shortcut", Invk_shortcut_ = "shortcut_", Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_img = "img", Invk_img_ = "img_"
+	private static final    String Invk_text = "text", Invk_text_ = "text_", Invk_shortcut = "shortcut", Invk_shortcut_ = "shortcut_", Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_img = "img", Invk_img_ = "img_"
 	;
 	public static final byte Tid_nil = 0, Tid_grp = 1, Tid_spr = 2, Tid_btn = 3, Tid_chk = 4, Tid_rdo = 5;
 	private static String[] Img_nest_of(String img) {return String_.Len_eq_0(img) ? String_.Ary_empty : String_.Split(img, "/");}
-	public static final Xog_mnu_itm Null = new Xog_mnu_itm(null, "null");
+	public static final    Xog_mnu_itm Null = new Xog_mnu_itm(null, "null");
 }

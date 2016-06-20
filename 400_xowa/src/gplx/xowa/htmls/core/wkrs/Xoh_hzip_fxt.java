@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.files.caches.*;
 public class Xoh_hzip_fxt {
-	private final Xowe_wiki wiki;
-	private final Xop_fxt parser_fxt = new Xop_fxt();
-	private final Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(32);
-	private final Xoh_hzip_mgr hzip_mgr;
-	private final Xoh_page hpg = new Xoh_page();
+	private final    Xowe_wiki wiki;
+	private final    Xop_fxt parser_fxt = new Xop_fxt();
+	private final    Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(32);
+	private final    Xoh_hzip_mgr hzip_mgr;
+	private final    Xoh_page hpg = new Xoh_page();
 	private boolean mode_is_b256;
 	public Xoh_hzip_fxt() {
 		this.wiki = parser_fxt.Wiki();
@@ -36,6 +37,14 @@ public class Xoh_hzip_fxt {
 	public Xoh_hzip_fxt Init_mode_diff_y_() {hzip_mgr.Hctx().Mode_is_diff_(Bool_.Y); return this;}
 	public void Clear() {hpg.Clear();}
 	public void Init_wiki_installed(String domain) {parser_fxt.Init_xwiki_add_user_(domain);}
+	public Xou_cache_finder_mem Init_file_mgr__mem() {
+		Xou_cache_finder_mem rv = Xou_cache_finder_.New_mem();
+		hzip_mgr.Hctx().Test__file__mgr_(rv);
+		return rv;
+	}
+	public void Init_file_mgr__noop() {
+		hzip_mgr.Hctx().Test__file__mgr_(Xou_cache_finder_.Noop);
+	}
 	public Xowe_wiki Init_wiki_alias(String alias, String domain) {
 		Xowe_wiki rv = Xoa_app_fxt.Make__wiki__edit(parser_fxt.App(), domain);
 		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_u8(alias), Bry_.new_u8(domain), null);

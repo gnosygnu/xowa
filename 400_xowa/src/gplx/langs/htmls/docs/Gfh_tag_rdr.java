@@ -22,7 +22,7 @@ public class Gfh_tag_rdr {
 	private final    Hash_adp_bry name_hash;
 	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
 	private final    Gfh_tag tag__tmp__move = new Gfh_tag(), tag__tmp__peek = new Gfh_tag(), tag__eos = new Gfh_tag(), tag__comment = new Gfh_tag();
-	private final    Int_obj_ref tmp_depth = Int_obj_ref.zero_();
+	private final    Int_obj_ref tmp_depth = Int_obj_ref.New_zero();
 	Gfh_tag_rdr(Hash_adp_bry name_hash) {this.name_hash = name_hash;}
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;

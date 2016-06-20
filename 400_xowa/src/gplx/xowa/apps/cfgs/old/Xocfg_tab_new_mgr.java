@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs.old; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
-public class Xocfg_tab_new_mgr implements GfoInvkAble {
+public class Xocfg_tab_new_mgr implements Gfo_invk {
 	public byte Insert_pos() {return insert_pos;} private byte insert_pos = Xocfg_new_tab_pos.Tid_cur_nxt;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_insert_pos))				return Xocfg_new_tab_pos.Xto_str(insert_pos);
 		else if	(ctx.Match(k, Invk_insert_pos_))			insert_pos = Xocfg_new_tab_pos.Xto_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_insert_pos_list))		return Xocfg_new_tab_pos.Options__all;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_insert_pos = "insert_pos", Invk_insert_pos_ = "insert_pos_", Invk_insert_pos_list = "insert_pos_list";

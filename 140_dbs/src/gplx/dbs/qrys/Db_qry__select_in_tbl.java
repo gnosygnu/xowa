@@ -23,10 +23,10 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	}
 	public int			Tid() {return Db_qry_.Tid_select_in_tbl;}
 	public boolean			Exec_is_rdr() {return true;}
-	public String		Base_table() {return base_table;} private final String base_table;
+	public String		Base_table() {return base_table;} private final    String base_table;
 	public Criteria		Where() {return where;} private Criteria where;
-	public String[]		Select_flds() {return select_flds;} private final String[] select_flds;
-	private final String[] where_flds;
+	public String[]		Select_flds() {return select_flds;} private final    String[] select_flds;
+	private final    String[] where_flds;
 	public void Where_sql(String_bldr sb) {
 		if (where_flds == null) return;
 		int where_flds_len = where_flds.length;
@@ -36,10 +36,10 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			sb.Add(where_flds[i]).Add(" = ? ");
 		}
 	}
-	public String Group_by_sql() {return group_by_sql;} private final String group_by_sql;
-	public String Having_sql() {return having_sql;} private final String having_sql;
+	public String Group_by_sql() {return group_by_sql;} private final    String group_by_sql;
+	public String Having_sql() {return having_sql;} private final    String having_sql;
 	public String Order_by_sql() {return order_by_sql;} public Db_qry__select_in_tbl Order_by_sql_(String v) {order_by_sql = v; return this;} private String order_by_sql;
-	public String Limit_sql() {return limit_sql;} private final String limit_sql;
+	public String Limit_sql() {return limit_sql;} private final    String limit_sql;
 	public String To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr) {
 		synchronized (this) {
 			String_bldr sb = String_bldr_.new_();
@@ -66,7 +66,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 				case 0: break;
 				case 1: order_by_sql = order_flds[0]; break;
 				default:
-					Bry_bfr bfr = Bry_bfr.new_();
+					Bry_bfr bfr = Bry_bfr_.New();
 					for (int i = 0; i < len; ++i) {
 						String order_fld = order_flds[i];
 						if (i != 0) bfr.Add_byte_comma();
@@ -81,6 +81,6 @@ public class Db_qry__select_in_tbl implements Db_qry {
 		return rv;
 	}
 	public static Db_qry__select_in_tbl as_(Object obj) {return obj instanceof Db_qry__select_in_tbl ? (Db_qry__select_in_tbl)obj : null;}
-	public static final String[] Where_flds__all = String_.Ary_empty;
-	public static final String[] Order_by_null = null;
+	public static final    String[] Where_flds__all = String_.Ary_empty;
+	public static final    String[] Order_by_null = null;
 }

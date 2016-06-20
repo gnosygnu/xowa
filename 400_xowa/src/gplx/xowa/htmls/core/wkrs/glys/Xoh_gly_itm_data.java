@@ -99,9 +99,9 @@ public class Xoh_gly_itm_data {
 		tag_rdr.Pos_(capt_tail_end);
 		return true;
 	}
-	private static final byte[] Atr__cls__gallerytext = Bry_.new_a7("gallerytext"), Bry__p__rhs = Bry_.new_a7("</p>\n");
+	private static final    byte[] Atr__cls__gallerytext = Bry_.new_a7("gallerytext"), Bry__p__rhs = Bry_.new_a7("</p>\n");
 	public static final byte Capt_tid__p = 0, Capt_tid__br = 1, Capt_tid__empty = 2, Capt_tid__null = 3;
-	private static final Btrie_slim_mgr Capt_tid__trie = Btrie_slim_mgr.ci_a7()
+	private static final    Btrie_slim_mgr Capt_tid__trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Gfh_tag_.P_lhs	, Capt_tid__p)
 	.Add_bry_byte(Gfh_tag_.Br_lhs	, Capt_tid__br)
 	;

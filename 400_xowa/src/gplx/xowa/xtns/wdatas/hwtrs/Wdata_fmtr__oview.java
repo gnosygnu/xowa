@@ -23,7 +23,7 @@ class Wdata_fmtr__oview_tbl implements gplx.core.brys.Bfr_arg {
 	private Xoapi_wikibase wikibase_api; private Gfo_url_encoder href_encoder;
 	private Wdata_fmtr__oview_alias_itm fmtr_aliases = new Wdata_fmtr__oview_alias_itm();
 	private Bry_fmtr slink_fmtr = Bry_fmtr.new_("<a href='/site/~{domain_bry}/wiki/~{page_href}'>~{page_text}</a>", "domain_bry", "page_href", "page_text");
-	private Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private Wdata_doc wdoc;
 	private byte[] hdr_alias_y, hdr_alias_n;
 	public void Init_by_ctor(Xoapi_wikibase wikibase_api, Gfo_url_encoder href_encoder) {this.wikibase_api = wikibase_api; this.href_encoder = href_encoder;}

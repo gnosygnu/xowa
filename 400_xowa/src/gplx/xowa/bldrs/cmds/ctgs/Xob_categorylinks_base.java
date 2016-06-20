@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.times.*;
 import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sqls.*;
 public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
-	private DateAdp_parser date_parser = DateAdp_parser.new_(); private Sql_file_parser sql_parser; Uca_trie trie; private Bry_bfr uca_bfr = Bry_bfr.reset_(255);		
+	private DateAdp_parser date_parser = DateAdp_parser.new_(); private Sql_file_parser sql_parser; Uca_trie trie; private Bry_bfr uca_bfr = Bry_bfr_.Reset(255);		
 	public abstract Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser);
 	@Override public String Sql_file_name() {return "categorylinks";}
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
@@ -70,8 +70,8 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter.Instance, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
 	}		
-	private static final byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
-	private static final byte[] Collation_uca = Bry_.new_a7("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
+	private static final    byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
+	private static final    byte[] Collation_uca = Bry_.new_a7("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
 }
 class Xoctg_link_sql_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -86,5 +86,5 @@ class Xoctg_link_sql_sorter implements gplx.core.lists.ComparerAble {
 		}
 		return CompareAble_.Same;
 	}
-	public static final Xoctg_link_sql_sorter Instance = new Xoctg_link_sql_sorter(); Xoctg_link_sql_sorter() {}
+	public static final    Xoctg_link_sql_sorter Instance = new Xoctg_link_sql_sorter(); Xoctg_link_sql_sorter() {}
 }

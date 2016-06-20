@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.core.ios.*;
+import gplx.core.primitives.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
 import gplx.xowa.bldrs.wms.*;
@@ -34,7 +34,7 @@ public class Xof_bin_mgr {
 	}
 	public void Resizer_(Xof_img_wkr_resize_img v) {resizer = v;} private Xof_img_wkr_resize_img resizer;
 	public void Wkrs__del(String key) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (Xof_bin_wkr wkr : wkrs) {
 			if (String_.Eq(key, wkr.Key())) continue;
 			list.Add(wkr);

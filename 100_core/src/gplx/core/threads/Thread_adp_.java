@@ -20,24 +20,15 @@ public class Thread_adp_ {
 		public static void Sleep(int milliseconds) {
 		try {Thread.sleep(milliseconds);} catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted", "milliseconds", milliseconds);}
 	}
-	public static void Notify_all(Object o) {o.notifyAll();}
-	public static void Wait(Object o) {
-		try {o.wait();}
-		catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread wait");}
-	}
-		public static Thread_adp invk_(GfoInvkAble invk, String cmd)					{return invk_(Name_null, invk, cmd);}
-	public static Thread_adp invk_(String name, GfoInvkAble invk, String cmd)		{return new Thread_adp(name, invk, cmd, GfoMsg_.Null);}
-	public static Thread_adp invk_msg_(GfoInvkAble invk, GfoMsg msg)				{return invk_msg_(Name_null, invk, msg);}
-	public static Thread_adp invk_msg_(String name, GfoInvkAble invk, GfoMsg msg)	{return new Thread_adp(name, invk, msg.Key(), msg);}
-	public static void Run_invk_msg(String name, GfoInvkAble invk, GfoMsg m) {
-		Thread_adp_.invk_msg_(name, invk, m).Start();
-	}
-	public static void Run_cmd(boolean async, String thread_name, GfoInvkAble invk, String cmd) {
-		GfoMsg msg = GfoMsg_.new_cast_(cmd);
-		if (async)
-			Thread_adp_.invk_msg_(thread_name, invk, msg).Start();
-		else
-			GfoInvkAble_.InvkCmd_msg(invk, cmd, msg);
+		public static Thread_adp Start_by_key(String thread_name, Gfo_invk invk_itm, String invk_cmd)					{return Start(thread_name, Cancelable_.Never, invk_itm, invk_cmd		, GfoMsg_.new_cast_(invk_cmd));}
+	public static Thread_adp Start_by_val(String thread_name, Gfo_invk invk_itm, String invk_cmd, Object val)		{return Start(thread_name, Cancelable_.Never, invk_itm, invk_cmd		, GfoMsg_.new_cast_(invk_cmd).Add("v", val));}
+	public static Thread_adp Start_by_msg(String thread_name, Gfo_invk invk_itm, GfoMsg invk_msg)					{return Start(thread_name, Cancelable_.Never, invk_itm, invk_msg.Key()	, invk_msg);}
+	public static Thread_adp Start_by_key(String thread_name, Cancelable cxl, Gfo_invk invk_itm, String invk_cmd)				{return Start(thread_name, cxl, invk_itm, invk_cmd		, GfoMsg_.new_cast_(invk_cmd));}
+	public static Thread_adp Start_by_val(String thread_name, Cancelable cxl, Gfo_invk invk_itm, String invk_cmd, Object val)	{return Start(thread_name, cxl, invk_itm, invk_cmd		, GfoMsg_.new_cast_(invk_cmd).Add("v", val));}
+	private static Thread_adp Start(String thread_name, Cancelable cxl, Gfo_invk invk_itm, String invk_key, GfoMsg invk_msg) {
+		Thread_adp rv = new Thread_adp(thread_name, cxl, invk_itm, invk_key, invk_msg);
+		rv.Thread__start();
+		return rv;
 	}
 	public static final    String Name_null = null;
 }

@@ -17,42 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Dbmeta_fld_list {
-	private final Ordered_hash flds = Ordered_hash_.New();
-	private final List_adp keys = List_adp_.new_();
-	public void Clear() {flds.Clear(); keys.Clear(); str_ary = null; fld_ary = null;}
-	public int Len() {return flds.Len();}
-	public Dbmeta_fld_itm Get_by(String name)	{return (Dbmeta_fld_itm)flds.Get_by(name);}
-	public Dbmeta_fld_itm Get_at(int idx)		{return (Dbmeta_fld_itm)flds.Get_at(idx);}
-	public String[] To_str_ary()				{if (str_ary == null) str_ary = (String[])keys.To_ary(String.class); return str_ary;} private String[] str_ary;
-	public Dbmeta_fld_itm[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Dbmeta_fld_itm[])flds.To_ary(Dbmeta_fld_itm.class); return fld_ary;} private Dbmeta_fld_itm[] fld_ary;
-	public String[] To_str_ary_wo_autonum()	{
-		int len = flds.Count();
-		List_adp rv = List_adp_.new_();
-		for (int i = 0; i < len; ++i) {
-			Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
-			if (fld.Autonum()) continue;
-			rv.Add(fld.Name());
-		}
-		return (String[])rv.To_ary(String.class);
-	} 
-	public String[] To_str_ary_exclude(String[] ary) {
-		Hash_adp ary_hash = Hash_adp_.new_();
-		List_adp rv = List_adp_.new_();
-		int ary_len = ary.length;
-		for (int i = 0; i < ary_len; ++i) {
-			String ary_itm = ary[i];
-			ary_hash.Add(ary_itm, ary_itm);
-		}
-		int fld_len = flds.Count();
-		for (int i = 0; i < fld_len; ++i) {
-			Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
-			String fld_key = fld.Name();
-			if (ary_hash.Has(fld_key)) continue;
-			rv.Add(fld_key);
-		}
-		return rv.To_str_ary();
-	}
+	private final    Ordered_hash flds = Ordered_hash_.New();
+	public void Clear()									{flds.Clear(); str_ary = null; fld_ary = null;}
+	public int Len()									{return flds.Len();}
 	public boolean Has(String key)							{return flds.Has(key);}
+	public Dbmeta_fld_itm Get_by(String name)			{return (Dbmeta_fld_itm)flds.Get_by(name);}
+	public Dbmeta_fld_itm Get_at(int idx)				{return (Dbmeta_fld_itm)flds.Get_at(idx);}
 	public String Add_bool(String name)					{return Add(Dbmeta_fld_itm.new_bool(name));}
 	public String Add_byte(String name)					{return Add(Dbmeta_fld_itm.new_byte(name));}
 	public String Add_short(String name)				{return Add(Dbmeta_fld_itm.new_short(name));}
@@ -76,8 +46,63 @@ public class Dbmeta_fld_list {
 		fld_ary = null; str_ary = null;
 		String name = fld.Name();
 		flds.Add(name, fld);
-		keys.Add(name);
 		return name;
 	}
-	public static Dbmeta_fld_list new_() {return new Dbmeta_fld_list();}
+	public void Del(String key) {
+		fld_ary = null; str_ary = null;
+		flds.Del(key);
+	}
+	public void Insert(int pos, Dbmeta_fld_itm fld) {
+		fld_ary = null; str_ary = null;
+		flds.Add_at(pos, fld);
+	}
+
+	public Dbmeta_fld_list New_int(String name)			{Add(Dbmeta_fld_itm.new_int(name)); return this;}
+	public Dbmeta_fld_list New_fld(Dbmeta_fld_itm fld)	{Add(fld); return this;}
+	public Dbmeta_fld_list Clone() {
+		Dbmeta_fld_list rv = new Dbmeta_fld_list();
+		int len = this.Len();
+		for (int i = 0; i < len; ++i)
+			rv.Add(this.Get_at(i));
+		return rv;
+	}
+	public Dbmeta_fld_itm[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Dbmeta_fld_itm[])flds.To_ary(Dbmeta_fld_itm.class); return fld_ary;} private Dbmeta_fld_itm[] fld_ary;
+	public String[] To_str_ary() {
+		if (str_ary == null) {
+			int len = flds.Len();
+			this.str_ary = new String[len];
+			for (int i = 0; i < len; ++i) {
+				Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
+				str_ary[i] = fld.Name();
+			}
+		}
+		return str_ary;
+	}	private String[] str_ary;
+	public String[] To_str_ary_wo_autonum()	{
+		int len = flds.Count();
+		List_adp rv = List_adp_.New();
+		for (int i = 0; i < len; ++i) {
+			Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
+			if (fld.Autonum()) continue;
+			rv.Add(fld.Name());
+		}
+		return (String[])rv.To_ary(String.class);
+	} 
+	public String[] To_str_ary_exclude(String[] ary) {
+		Hash_adp ary_hash = Hash_adp_.New();
+		List_adp rv = List_adp_.New();
+		int ary_len = ary.length;
+		for (int i = 0; i < ary_len; ++i) {
+			String ary_itm = ary[i];
+			ary_hash.Add(ary_itm, ary_itm);
+		}
+		int fld_len = flds.Count();
+		for (int i = 0; i < fld_len; ++i) {
+			Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
+			String fld_key = fld.Name();
+			if (ary_hash.Has(fld_key)) continue;
+			rv.Add(fld_key);
+		}
+		return rv.To_str_ary();
+	}
 }

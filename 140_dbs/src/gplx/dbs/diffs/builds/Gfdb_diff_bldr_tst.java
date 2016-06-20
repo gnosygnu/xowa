@@ -83,8 +83,8 @@ class Gfdb_diff_bldr_fxt {
 	}
 }
 class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
-	private final    List_adp list = List_adp_.new_();
-	private final    Bry_bfr bfr = Bry_bfr.new_();
+	private final    List_adp list = List_adp_.New();
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private Db_rdr old_rdr, new_rdr;
 	public void Init_rdrs(Gdif_bldr_ctx ctx, Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;

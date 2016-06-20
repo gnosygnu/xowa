@@ -22,7 +22,7 @@ class Scrib_lib_text_ {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		Ordered_hash protocols = Gfo_protocol_itm.Regy;
 		int len = protocols.Count();
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Gfo_protocol_itm itm = (Gfo_protocol_itm)protocols.Get_at(i);
 			if (itm.Text_ends_w_colon()) {	// To convert the protocol into a case-insensitive Lua pattern, we need to replace letters with a character class like [Xx] and insert a '%' before various punctuation.
@@ -63,5 +63,5 @@ class Scrib_lib_text_ {
 		}
 		bfr.Add(Colon_encoded);
 		return Keyval_.new_(itm.Key_wo_colon_str(), bfr.To_str_and_clear());
-	}	private static final byte[] Colon_encoded = Bry_.new_a7("&#58;");
+	}	private static final    byte[] Colon_encoded = Bry_.new_a7("&#58;");
 }

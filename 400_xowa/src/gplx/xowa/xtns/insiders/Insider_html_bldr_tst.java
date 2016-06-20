@@ -55,7 +55,7 @@ class Insider_html_bldr_fxt {
 		skin_itm.Add(Bry_.new_u8(lnki_ttl));
 	}
 	public void Test_bld(String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 		skin_itm.Write(tmp_bfr, page);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}

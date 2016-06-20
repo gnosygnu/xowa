@@ -24,7 +24,7 @@ class Gfo_async_cmd_mkr {
 //			used = (Gfo_async_cmd_itm[])Array_.Resize(used, v);
 //			ary_len = v;
 //		}
-	public Gfo_async_cmd_itm Get(GfoInvkAble invk, String invk_key, Object... args) {
+	public Gfo_async_cmd_itm Get(Gfo_invk invk, String invk_key, Object... args) {
 		Gfo_async_cmd_itm rv = new Gfo_async_cmd_itm();
 		rv.Init(invk, invk_key, args);
 		return rv;

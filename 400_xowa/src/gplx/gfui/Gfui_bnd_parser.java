@@ -18,19 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import gplx.core.bits.*;
 public class Gfui_bnd_parser {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
+	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
 	private Hash_adp_bry
 	  gfui_regy = Hash_adp_bry.ci_a7()
 	, norm_regy = Hash_adp_bry.ci_a7()
 	;
-	private static final Gfui_bnd_tkn
+	private static final    Gfui_bnd_tkn
 	  Itm_sym_plus		= new_sym_(Gfui_bnd_tkn.Tid_sym_plus	, new byte[] {Byte_ascii.Plus})
 	, Itm_sym_pipe		= new_sym_(Gfui_bnd_tkn.Tid_sym_pipe	, new byte[] {Byte_ascii.Pipe})
 	, Itm_sym_comma		= new_sym_(Gfui_bnd_tkn.Tid_sym_comma	, new byte[] {Byte_ascii.Comma})
 //		, Itm_sym_ws		= new_sym_(Gfui_bnd_tkn.Tid_sym_ws		, Bry_.Empty)
 	, Itm_sym_eos		= new_sym_(Gfui_bnd_tkn.Tid_sym_eos		, Bry_.Empty)
 	;
-	private static final Gfui_bnd_tkn[] Mod_ary = new Gfui_bnd_tkn[] 
+	private static final    Gfui_bnd_tkn[] Mod_ary = new Gfui_bnd_tkn[] 
 	{ null
 	, new_mod_(Gfui_bnd_tkn.Tid_mod_c		, "mod.c"	, "Ctrl")
 	, new_mod_(Gfui_bnd_tkn.Tid_mod_a		, "mod.a"	, "Alt")
@@ -41,7 +41,7 @@ public class Gfui_bnd_parser {
 	, new_mod_(Gfui_bnd_tkn.Tid_mod_cas		, "mod.cas"	, "Ctrl + Alt + Shift")
 	};
 	private byte[] src; private int src_len;
-	private List_adp tkns = List_adp_.new_(); private int mod_val = Mod_val_null;
+	private List_adp tkns = List_adp_.New(); private int mod_val = Mod_val_null;
 	public String Xto_norm(String src_str) {return Convert(Bool_.Y, src_str);}
 	public String Xto_gfui(String src_str) {return Convert(Bool_.N, src_str);}
 	private String Convert(boolean src_is_gfui, String src_str) {			
@@ -265,10 +265,10 @@ class Gfui_bnd_tkn {
 	public Gfui_bnd_tkn(byte tid, int keycode, byte[] gfui, byte[] norm) {
 		this.tid = tid; this.keycode = keycode; ; this.bry_gfui = gfui; this.bry_norm = norm;
 	}
-	public byte Tid() {return tid;} private final byte tid;
-	public int Keycode() {return keycode;} private final int keycode;
-	public byte[] Bry_gfui() {return bry_gfui;} private final byte[] bry_gfui;
-	public byte[] Bry_norm() {return bry_norm;} private final byte[] bry_norm;
+	public byte Tid() {return tid;} private final    byte tid;
+	public int Keycode() {return keycode;} private final    int keycode;
+	public byte[] Bry_gfui() {return bry_gfui;} private final    byte[] bry_gfui;
+	public byte[] Bry_norm() {return bry_norm;} private final    byte[] bry_norm;
 	public void Write(Bry_bfr bfr, boolean src_is_gfui) {
 		if (keycode != Gfui_bnd_tkn.Keycode_null) {
 			if (src_is_gfui)
@@ -313,5 +313,5 @@ class Gfui_bnd_tkn {
 	, Tid_key		= 12
 	;
 	public static final int Keycode_null = 0;
-	private static final byte[] Bry_key_prefix = Bry_.new_a7("key.");
+	private static final    byte[] Bry_key_prefix = Bry_.new_a7("key.");
 }

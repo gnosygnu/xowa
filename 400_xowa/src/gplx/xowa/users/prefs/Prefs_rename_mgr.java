@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 public class Prefs_rename_mgr {
-	private List_adp list = List_adp_.new_();
+	private List_adp list = List_adp_.New();
 	public Prefs_rename_mgr() {
 		List_add(list, "app.cfgs.get('app.gui.html.portal.wikis.visible', 'app').val", "app.cfgs.get('xowa.api.html.page.toggles.get(''offline-wikis'').visible', 'app').val");
 	}
@@ -38,7 +38,7 @@ public class Prefs_rename_mgr {
 		return cur_str_changed;
 	}
 	private static void List_add(List_adp list, String src, String trg) {list.Add(new Prefs_rename_itm(src, trg));}
-	public static final Prefs_rename_mgr Instance = new Prefs_rename_mgr();
+	public static final    Prefs_rename_mgr Instance = new Prefs_rename_mgr();
 }
 class Prefs_rename_itm {
 	public Prefs_rename_itm(String src, String trg) {this.src = src; this.trg = trg;}

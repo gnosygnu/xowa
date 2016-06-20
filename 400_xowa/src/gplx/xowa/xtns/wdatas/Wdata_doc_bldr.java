@@ -25,7 +25,7 @@ public class Wdata_doc_bldr {
 	public Wdata_doc_bldr Add_claims(Wdata_claim_itm_core... ary) {
 		if (ary.length == 0) throw Err_.new_wo_type("claims must be greater than 0");
 		Wdata_claim_itm_core itm = ary[0];
-		Wdata_claim_grp grp = new Wdata_claim_grp(Int_obj_ref.new_(itm.Pid()), ary);
+		Wdata_claim_grp grp = new Wdata_claim_grp(Int_obj_ref.New(itm.Pid()), ary);
 		claim_list.Add(grp.Id_ref(), grp);
 		return this;
 	}		

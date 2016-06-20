@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
+import gplx.core.ios.streams.*;
 public class IoEngine_memory extends IoEngine_base {
 	@Override public String Key() {return key;} private String key = IoEngine_.MemKey;
 	@Override public boolean ExistsFil_api(Io_url url) {return FetchFil(url) != IoItmFil_mem.Null;}
@@ -62,6 +63,7 @@ public class IoEngine_memory extends IoEngine_base {
 		else
 			SaveFilStr(args.Url(), args.Text());
 	}
+	@Override public boolean Truncate_fil(Io_url url, long size) {throw Err_.new_unimplemented();}
 	@Override public String LoadFilStr(IoEngine_xrg_loadFilStr args) {
 		return FetchFil(args.Url()).Text();
 	}
@@ -190,6 +192,7 @@ public class IoEngine_memory extends IoEngine_base {
 		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
 		return Io_stream_rdr_.mem_(bry);
 	}
+
 	IoItmHash dirs = IoItmHash.new_();
 	IoEngineUtl utl = IoEngineUtl.new_();
 	@gplx.Internal protected static IoEngine_memory new_(String key) {

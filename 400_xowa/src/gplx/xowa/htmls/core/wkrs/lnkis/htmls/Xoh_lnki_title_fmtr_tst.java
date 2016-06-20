@@ -31,8 +31,8 @@ public class Xoh_lnki_title_fmtr_tst {
 	}
 }
 class Xoh_lnki_title_fmtr_fxt {
-	private final Xop_fxt fxt = new Xop_fxt();
-	Bry_bfr bfr = Bry_bfr.new_();
+	private final    Xop_fxt fxt = new Xop_fxt();
+	Bry_bfr bfr = Bry_bfr_.New();
 	Xoh_lnki_title_fmtr title_wkr = new Xoh_lnki_title_fmtr();
 	public Xoh_lnki_title_fmtr_fxt Clear() {return this;}
 	public void Test_parse(String raw, String expd) {

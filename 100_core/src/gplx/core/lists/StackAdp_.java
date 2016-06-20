@@ -24,13 +24,13 @@ class StackAdp_base implements StackAdp {
 	public Object Pop() {return Pop_base();}
 	public void Push(Object obj) {Push_base(obj);}
 	public List_adp XtoList() {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		for (Object obj : stack)
 			list.Add(obj);
 		// NOTE: dotnet traverses last to first; java: first to last 
 		return list;
 	}
-	final java.util.Stack stack = new java.util.Stack();
+	final    java.util.Stack stack = new java.util.Stack();
 	public StackAdp_base() {}
 	public int Count() {return stack.size();}
 	public void Clear() {stack.clear();}

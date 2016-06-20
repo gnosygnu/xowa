@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
-public class Dsv_tbl_parser implements GfoInvkAble, Rls_able {
+public class Dsv_tbl_parser implements Gfo_invk, Rls_able {
 	private Dsv_wkr_base mgr;
 	private Dsv_fld_parser[] fld_parsers = new Dsv_fld_parser[2]; private int fld_parsers_len = 2;
 	public byte[] Src() {return src;} private byte[] src;
@@ -77,7 +77,7 @@ public class Dsv_tbl_parser implements GfoInvkAble, Rls_able {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_load_by_str))		Parse(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_load_by_str = "load_by_str";
 }

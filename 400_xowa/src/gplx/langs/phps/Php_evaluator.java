@@ -26,10 +26,10 @@ NOTE: naive implementation of PHP evaluator. intended only for parsing Messages*
 public class Php_evaluator implements Php_tkn_wkr {
 	byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
 	Php_line_assign cur_line; Php_itm_ary cur_ary; Php_key cur_kv_key;
-	List_adp frame_stack = List_adp_.new_();
+	List_adp frame_stack = List_adp_.New();
 	public Php_evaluator(Gfo_msg_log msg_log) {this.msg_log = msg_log;} Gfo_msg_log msg_log;
 	public void Init(Php_ctx ctx) {src = ctx.Src(); frame_stack.Clear();} private byte[] src;
-	public List_adp List() {return lines;} List_adp lines = List_adp_.new_();
+	public List_adp List() {return lines;} List_adp lines = List_adp_.New();
 	public Gfo_msg_log Msg_log() {return msg_log;}
 	public void Clear() {
 		lines.Clear(); msg_log.Clear();
@@ -249,7 +249,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 	public void Msg_many(byte[] src, int bgn, int end, Gfo_msg_itm itm, Object... args) {
 		msg_log.Add_itm_many(itm, src, bgn, end, args);
 	}
-	public static final Gfo_msg_itm Expecting_itm_failed = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "expecting_itm_failed", "expecting_itm ~{0} but got ~{1} instead");
+	public static final    Gfo_msg_itm Expecting_itm_failed = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "expecting_itm_failed", "expecting_itm ~{0} but got ~{1} instead");
 	private static final byte Mode_key_bgn = 1, Mode_key_end = 2, Mode_expect = 3, Mode_suspend = 4, Mode_val = 5, Mode_ary_subs = 6, Mode_ary_dlm = 7, Mode_ary_term = 8, Mode_brack_itm = 9;		
 }
 class Php_scanner_frame {
@@ -258,6 +258,6 @@ class Php_scanner_frame {
 	public void Rls() {ary = null;}
 }
 class Php_parser_interrupt {
-	public static final Php_parser_interrupt Char = new Php_parser_interrupt(); 
+	public static final    Php_parser_interrupt Char = new Php_parser_interrupt(); 
 }
 

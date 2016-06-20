@@ -56,7 +56,7 @@ public class Pft_fmt_itm_ {
 	, Tid_hijiri_month_name				= 33
 	;
 
-	public static final Pft_fmt_itm 
+	public static final    Pft_fmt_itm 
 	  Year_len4					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 4, Bool_.Y)
 	, Year_len2					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 2, Bool_.Y)
 	, Month_int_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_month			, 2, Bool_.Y)
@@ -110,7 +110,7 @@ public class Pft_fmt_itm_ {
 	, Hijiri_day_idx			= new Pft_fmt_itm_hijiri_day_idx()
 	, Hijiri_month_name			= new Pft_fmt_itm_hijiri_month_name()
 	;
-	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs()
+	public static final    Btrie_fast_mgr Regy = Btrie_fast_mgr.cs()
 	.Add(Byte_ascii.Ltr_Y		, Pft_fmt_itm_.Year_len4)				// 2012
 	.Add(Byte_ascii.Ltr_y		, Pft_fmt_itm_.Year_len2)				// 12
 	.Add(Byte_ascii.Ltr_L		, Pft_fmt_itm_.Year_isLeap)				// 1,0
@@ -161,7 +161,7 @@ public class Pft_fmt_itm_ {
 	.Add("xmF"					, Pft_fmt_itm_.Hijiri_month_name)
 	.Add("xmn"					, Pft_fmt_itm_.Hijiri_month_idx)
 	.Add("xmY"					, Pft_fmt_itm_.Hijiri_year_idx)
-	// TODO: space; "
+	// TODO_OLD: space; "
 	;
 	public static Pft_fmt_itm[] Parse(Xop_ctx ctx, byte[] fmt) {
 		Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;
@@ -211,5 +211,5 @@ public class Pft_fmt_itm_ {
 		}
 		if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = String_.Pos_neg1;}
 		return (Pft_fmt_itm[])fmt_itms.To_ary(Pft_fmt_itm.class);
-	}	private static List_adp fmt_itms = List_adp_.new_();
+	}	private static List_adp fmt_itms = List_adp_.New();
 }

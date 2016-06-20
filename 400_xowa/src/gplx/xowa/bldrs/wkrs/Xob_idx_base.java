@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.flds.*; import gplx.core.ios.*;
-public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
+public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd, Gfo_invk {
 	public abstract String Cmd_key();
 	public Gfo_fld_wtr Fld_wtr() {return fld_wtr;} Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	public Gfo_fld_rdr Fld_rdr() {return fld_rdr;} Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_();

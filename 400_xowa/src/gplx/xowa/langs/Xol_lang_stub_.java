@@ -814,7 +814,7 @@ Regy_add(stub_hash, Id_sh, "sh", "Srpskohrvatski / Српскохрватски"
 Regy_add(stub_hash, Id_shi, "shi", "Tašlḥiyt");
 Regy_add(stub_hash, Id_shn, "shn", "Shan");
 Regy_add(stub_hash, Id_si, "si", "Sinhalese");
-Regy_add(stub_hash, Id_simple, "simple", "Simple English");
+Regy_add(stub_hash, Id_simple, "simple", "Simple");	// NOTE: changed from "Simple English"; DATE:2016-06-11
 Regy_add(stub_hash, Id_sk, "sk", "Slovenčina");
 Regy_add(stub_hash, Id_sl, "sl", "Slovenščina");
 Regy_add(stub_hash, Id_sli, "sli", "Schläsch");

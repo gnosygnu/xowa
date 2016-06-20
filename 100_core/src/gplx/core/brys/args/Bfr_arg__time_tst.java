@@ -34,7 +34,7 @@ class Time_fmtr_arg_fxt {
 		return this;
 	}	Bfr_arg__time arg;
 	public void XferAry(int seconds, String expd) {
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		arg.Seconds_(seconds);
 		arg.Bfr_arg__add(bfr);
 		Tfds.Eq(expd, bfr.To_str());

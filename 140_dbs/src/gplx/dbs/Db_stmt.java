@@ -49,19 +49,19 @@ public interface Db_stmt extends Rls_able {
 	Db_stmt Crt_bry_as_str(String k, byte[] v);
 	Db_stmt Val_bry_as_str(String k, byte[] v);
 	Db_stmt Val_bry_as_str(byte[] v);
-	Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr rdr, long rdr_len);
+	Db_stmt Val_rdr_(gplx.core.ios.streams.Io_stream_rdr rdr, long rdr_len);
 	Db_stmt Crt_date(String k, DateAdp v);
 	Db_stmt Val_date(String k, DateAdp v);
 	Db_stmt Crt_text(String k, String v);
 	Db_stmt Val_text(String k, String v);
-	boolean Exec_insert();
-	int Exec_update();
-	int Exec_delete();
-	DataRdr Exec_select();
-	Db_rdr Exec_select__rls_auto();		// stmt is automatically released
-	Db_rdr Exec_select__rls_manual();	// stmt must be released manually; for "batch" insert
-	Object Exec_select_val();
-	void Ctor_stmt(Db_engine engine, Db_qry qry);
-	Db_stmt Clear();
-	Db_stmt Reset_stmt();
+	boolean		Exec_insert();
+	int			Exec_update();
+	int			Exec_delete();
+	DataRdr		Exec_select();
+	Db_rdr		Exec_select__rls_auto();		// stmt is automatically released
+	Db_rdr		Exec_select__rls_manual();		// stmt must be released manually; for "batch" insert
+	Object		Exec_select_val();
+	void		Ctor_stmt(Db_engine engine, Db_qry qry);
+	Db_stmt		Clear();
+	Db_stmt		Reset_stmt();
 }

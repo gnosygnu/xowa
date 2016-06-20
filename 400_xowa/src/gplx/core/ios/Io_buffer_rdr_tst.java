@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.ios.*;
+import org.junit.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public class Io_buffer_rdr_tst {
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();

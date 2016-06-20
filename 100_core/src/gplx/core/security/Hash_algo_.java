@@ -19,13 +19,22 @@ package gplx.core.security; import gplx.*; import gplx.core.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import gplx.core.consoles.*; import gplx.core.ios.*; /*IoStream*/
+import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
 import gplx.core.texts.*; /*Base32Converter*/ import gplx.core.progs.*;
 public class Hash_algo_ {
 	public static Hash_algo New__md5()		{return new Hash_algo__md5();}
 	public static Hash_algo New__sha1()		{return new Hash_algo__sha1();}
 	public static Hash_algo New__sha2_256()	{return new Hash_algo__sha2_256();}
 	public static Hash_algo New__tth_192()	{return new Hash_algo__tth_192();}
+	public static Hash_algo New_by_tid(byte tid) {
+		switch (tid) {
+			case Tid__md5:			return New__md5();
+			case Tid__sha1:			return New__sha1();
+			case Tid__sha2_256:		return New__sha2_256();
+			case Tid__tth_192:		return New__tth_192();
+			default:				throw Err_.new_unhandled_default(tid);
+		}
+	}
 	public static Hash_algo New(String key) {
 		if		(key == Hash_algo__md5.KEY)			return New__md5();
 		else if (key == Hash_algo__sha1.KEY)		return New__sha1();
@@ -33,6 +42,7 @@ public class Hash_algo_ {
 		else if (key == Hash_algo__tth_192.KEY)		return New__tth_192();
 		else										throw Err_.new_unhandled(key);
 	}
+	public static final byte Tid__md5 = 0, Tid__sha1 = 1, Tid__sha2_256 = 2, Tid__tth_192 = 3;
 }
 abstract class Hash_algo_base implements Hash_algo {
 	private final MessageDigest md;
@@ -97,10 +107,12 @@ class Hash_algo_utl_ {
 		int pos = 0;
 		while (true) {
 			if (pos == src_len) break;
-			int end = pos + 4096;
-			if (end > src_len) end = src_len;
-			md.update(src_bry, pos, end);
-			pos = end;
+			int len = 4096;
+			if (pos + len > src_len) { 
+				len = src_len - pos;
+			}
+			md.update(src_bry, pos, len);
+			pos += len;
 		}
 		byte[] md_bry = md.digest();
 		gplx.core.encoders.Hex_utl_.Encode_bry(md_bry, trg_bry);
@@ -117,22 +129,17 @@ class Hash_algo_utl_ {
 		gplx.core.encoders.Hex_utl_.Encode_bry(md_bry , trg_bry);
 	}
 	public static void Hash_stream(Gfo_prog_ui prog_ui, IoStream stream, MessageDigest md, byte[] tmp_bfr, int tmp_bfr_len, byte[] trg_bry) {
-		long pos = 0, len = stream.Len();						// pos and len must be long, else will not hash files > 2 GB
+		long pos = prog_ui.Prog_data_cur(), len = prog_ui.Prog_data_end();					// pos and len must be long, else will not hash files > 2 GB
 		try {
 			while (true) {
 				int read = stream.Read(tmp_bfr, 0, tmp_bfr_len);	// read stream into tmp_bfr
 				if (read < 1) break;
-				md.update(tmp_bfr, 0, read);			
-				switch (prog_ui.Prog__notify__working(pos, len)) {
-					case Gfo_prog_ui_.State__started: 		break;
-					case Gfo_prog_ui_.State__canceled:		return;
-					case Gfo_prog_ui_.State__paused:		if (!Gfo_prog_ui_.Sleep_while_paused(prog_ui)) return; break;
-				}
+				md.update(tmp_bfr, 0, read);
+				if (prog_ui.Prog_notify_and_chk_if_suspended(pos, len)) return;
 				pos += read;
 			}
 		}
 		finally {stream.Rls();}
-		prog_ui.Prog__notify__finished();
 		byte[] md_bry = md.digest();
 		gplx.core.encoders.Hex_utl_.Encode_bry(md_bry , trg_bry);
 	}

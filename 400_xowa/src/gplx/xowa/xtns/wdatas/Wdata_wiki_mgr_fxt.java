@@ -62,7 +62,7 @@ public class Wdata_wiki_mgr_fxt {
 	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat, String prc, String alt, String glb) {
 		return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_a7(lat), Bry_.new_a7(lon), Bry_.new_a7(alt), Bry_.new_a7(prc), Bry_.new_a7(glb));
 	}
-	public Wdata_claim_grp Make_qualifiers_grp(int pid, Wdata_claim_itm_core... ary) {return new Wdata_claim_grp(Int_obj_ref.new_(pid), ary);}
+	public Wdata_claim_grp Make_qualifiers_grp(int pid, Wdata_claim_itm_core... ary) {return new Wdata_claim_grp(Int_obj_ref.New(pid), ary);}
 	public Wdata_claim_grp_list Make_qualifiers(Wdata_claim_grp... ary) {
 		Wdata_claim_grp_list rv = new Wdata_claim_grp_list();
 		int len = ary.length;
@@ -154,7 +154,7 @@ public class Wdata_wiki_mgr_fxt {
 		tmp_langs.Clear();
 		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
-	}	List_adp tmp_langs = List_adp_.new_();
+	}	List_adp tmp_langs = List_adp_.New();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {
 		int len = list.Count();
 		String[] rv = new String[len];

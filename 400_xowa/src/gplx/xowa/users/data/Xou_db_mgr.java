@@ -21,13 +21,13 @@ import gplx.xowa.files.caches.*;
 import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_mgr {
 	private final    Xoa_app app;
-	private final    Xoud_id_mgr id_mgr;
-	private Db_conn conn;
+	private final    Xoud_id_mgr id_mgr;		
 	public Xou_db_mgr(Xoa_app app) {
 		this.app = app;
 		this.id_mgr = new Xoud_id_mgr(cfg_mgr);
 		this.site_mgr = new Xoud_site_mgr(id_mgr);
 	}
+	public Db_conn				Conn()		{return conn;} private Db_conn conn;
 	public Xou_db_file			Db_file() {return db_file;} private Xou_db_file db_file;
 	public Xoud_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private final    Xoud_cfg_mgr cfg_mgr = new Xoud_cfg_mgr();
 	public Xoud_site_mgr		Site_mgr() {return site_mgr;} private final    Xoud_site_mgr site_mgr;

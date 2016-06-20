@@ -37,8 +37,8 @@ class Xol_plural__default implements Xol_plural {
 		switch (forms_len) {
 			case 0:		return Bry_.Empty;		// forms is empty; do nothing
 			case 1:		return forms[0];			// only one word specified; use it;	REF.MW:$pluralForm = min( $pluralForm, count( $forms ) - 1 );
-			default:	return count == 1 ? forms[0] : forms[1]; // TODO: incorporate plurals.xml logic
+			default:	return count == 1 ? forms[0] : forms[1]; // TODO_OLD: incorporate plurals.xml logic
 		}
 	}
-	public static final Xol_plural__default Instance = new Xol_plural__default(); Xol_plural__default() {}
+	public static final    Xol_plural__default Instance = new Xol_plural__default(); Xol_plural__default() {}
 }

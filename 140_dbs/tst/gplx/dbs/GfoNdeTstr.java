@@ -19,11 +19,11 @@ package gplx.dbs; import gplx.*;
 import gplx.core.gfo_ndes.*;
 public class GfoNdeTstr {
 	public static void tst_ValsByCol(GfoNde nde, String fld, Object... expdAry) {
-		List_adp expd = List_adp_.new_();
+		List_adp expd = List_adp_.New();
 		for (int i = 0; i < expdAry.length; i++) {
 			expd.Add(Object_.Xto_str_strict_or_empty(expdAry[i]));
 		}
-		List_adp actl = List_adp_.new_();
+		List_adp actl = List_adp_.New();
 		for (int i = 0; i < nde.Subs().Count(); i++) {
 			GfoNde sub = nde.Subs().FetchAt_asGfoNde(i);
 			actl.Add(Object_.Xto_str_strict_or_empty(sub.Read(fld)));

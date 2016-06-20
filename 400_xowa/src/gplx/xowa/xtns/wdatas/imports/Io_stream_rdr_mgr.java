@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.ios.*; import gplx.core.criterias.*; import gplx.core.envs.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.criterias.*; import gplx.core.envs.*;
 class Io_stream_rdr_mgr {
 	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {			
 		IoItmFil src_itm = null;
@@ -58,8 +58,8 @@ class Io_stream_rdr_mgr {
 	}
 }
 class Io_stream_unzip_mgr {		
-	private final String[] zip_exts;
-	private final boolean stdout_enabled; private final Process_adp stdout_process;
+	private final    String[] zip_exts;
+	private final    boolean stdout_enabled; private final    Process_adp stdout_process;
 	public Io_stream_unzip_mgr(boolean stdout_enabled, Process_adp stdout_process, String[] zip_exts) {
 		this.stdout_enabled = stdout_enabled; this.stdout_process = stdout_process; this.zip_exts = zip_exts;
 	}

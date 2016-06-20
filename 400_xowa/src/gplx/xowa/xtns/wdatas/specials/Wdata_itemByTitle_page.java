@@ -16,15 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.core.net.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.specials.*;
 import gplx.xowa.apps.urls.*;
-public class Wdata_itemByTitle_page implements Xows_page {
-	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
+public class Wdata_itemByTitle_page implements Xow_special_page {
+	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
 	private static final    byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__item_by_title;}
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__item_by_title;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.Appe().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
@@ -63,7 +63,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
 		Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();
-		Xoae_page qid_page = wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (qid_page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
+		wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
 		return true;
 	}
 	private static Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
@@ -85,5 +85,5 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	)
 	, 	"legend", "site_lbl", "site_val", "page_lbl", "page_val", "search_lbl");
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

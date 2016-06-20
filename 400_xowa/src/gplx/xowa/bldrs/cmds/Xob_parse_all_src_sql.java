@@ -47,7 +47,7 @@ class Xob_dump_src_id {
 	private DataRdr New_rdr(Xodb_mgr_sql db_mgr, String page_db_url, int text_db_idx, int cur_ns, int prv_id, byte redirect) {
 		if (cur_text_db_idx != text_db_idx) {
 			cur_text_db_idx = text_db_idx;
-			Xowd_db_file text_db = db_mgr.Core_data_mgr().Dbs__get_by_id(text_db_idx);
+			Xow_db_file text_db = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(text_db_idx);
 			Db_conn conn = text_db.Conn();
 			String sql = String_.Format(Sql_select_clause, New_rdr__redirect_clause(redirect));
 			text_stmt = conn.Stmt_sql(sql);
@@ -75,7 +75,7 @@ class Xob_dump_src_id {
 			default:			throw Err_.new_unhandled(redirect);
 		}
 	}
-	private static final String Sql_select_clause = String_.Concat_lines_nl
+	private static final    String Sql_select_clause = String_.Concat_lines_nl
 	( "SELECT  p.page_id"
 	, ",       p.page_title"
 	, ",       t.text_data"

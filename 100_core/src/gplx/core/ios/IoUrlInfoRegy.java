@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.envs.*;
 import gplx.langs.gfs.*;
-public class IoUrlInfoRegy implements GfoInvkAble {
+public class IoUrlInfoRegy implements Gfo_invk {
 	public void Reg(IoUrlInfo info) {hash.Add_if_dupe_use_nth(info.Key(), info);}
 	public IoUrlInfo Match(String raw) {
 		if (String_.Len(raw) == 0) return IoUrlInfo_.Nil;
@@ -45,9 +45,9 @@ public class IoUrlInfoRegy implements GfoInvkAble {
 			IoUrlInfoRegy.Instance.Reg(alias);
 		}
 		return this;
-	}	public static final String Invk_Add = "Add";
+	}	public static final    String Invk_Add = "Add";
 	Ordered_hash hash = Ordered_hash_.New();
-        public static final IoUrlInfoRegy Instance = new IoUrlInfoRegy();
+        public static final    IoUrlInfoRegy Instance = new IoUrlInfoRegy();
 	IoUrlInfoRegy() {
 		this.Reset();
 	}

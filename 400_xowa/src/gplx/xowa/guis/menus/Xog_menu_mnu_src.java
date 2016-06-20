@@ -62,6 +62,8 @@ class Xog_menu_mgr_src {
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_tools)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_cfg_main)
 	.	Add_spr()
+	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_download_central)
+	.	Add_spr()
 	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_import_from_list)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_import_from_script)
 	.	Add_spr()
@@ -142,6 +144,8 @@ class Xog_menu_mgr_src {
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_tools)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_cfg_main)
 	.	Add_spr()
+	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_download_central)
+	.	Add_spr()
 	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_import_from_list)
 	.	Add_btn(Xog_cmd_itm_.Key_nav_setup_import_from_script)
 	.	Add_spr()
@@ -203,7 +207,7 @@ class Xog_menu_mgr_src {
 }
 class Xog_menu_bldr {
 	private int indent = 0;
-	private Bry_bfr bfr = Bry_bfr.reset_(0);
+	private Bry_bfr bfr = Bry_bfr_.Reset(0);
 	public String Gen_str() {return bfr.To_str_and_clear();}
 	private Xog_menu_bldr Indent_add() {indent += 2; return this;}
 	private Xog_menu_bldr Indent_del() {indent -= 2; return this;}

@@ -19,9 +19,9 @@ package gplx.core.criterias; import gplx.*; import gplx.core.*;
 public class Criteria_fld implements Criteria {
 	Criteria_fld(String pre, String key, Criteria crt) {this.pre = pre; this.key = key; this.crt = crt;}
 	public byte			Tid() {return Criteria_.Tid_wrapper;}
-	public String		Pre() {return pre;} private final String pre;
-	public String		Key() {return key;} private final String key;
-	public Criteria		Crt() {return crt;} private final Criteria crt;
+	public String		Pre() {return pre;} private final    String pre;
+	public String		Key() {return key;} private final    String key;
+	public Criteria		Crt() {return crt;} private final    Criteria crt;
 	public String		Pre_w_key() {return pre == Pre_null ? key : String_.Concat(pre, ".", key);}
 	public void			Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
 	public void			Val_from_args(Hash_adp args) {
@@ -30,9 +30,9 @@ public class Criteria_fld implements Criteria {
 		crt.Val_as_obj_(o);
 	}
 	public boolean			Matches(Object invkObj) {			
-		GfoInvkAble invk = (GfoInvkAble)invkObj;
+		Gfo_invk invk = (Gfo_invk)invkObj;
 		if (key == Criteria_fld.Key_null) return crt.Matches(invkObj);
-		Object comp = GfoInvkAble_.InvkCmd(invk, this.Pre_w_key());			
+		Object comp = Gfo_invk_.Invk_by_key(invk, this.Pre_w_key());			
 		return crt.Matches(comp);
 	}
 	public String		To_str() {return String_.Concat(key, " ", crt.To_str());}

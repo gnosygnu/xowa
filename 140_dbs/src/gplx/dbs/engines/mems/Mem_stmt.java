@@ -19,10 +19,10 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.stores.*;
 public class Mem_stmt implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final Ordered_hash val_list = Ordered_hash_.New();
+	private final    Ordered_hash val_list = Ordered_hash_.New();
 	public Mem_stmt(Mem_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);} private Mem_engine engine;
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {this.engine = (Mem_engine)engine; this.qry = qry;}
-	public Mem_stmt_args Stmt_args() {return stmt_args;} private final Mem_stmt_args stmt_args = new Mem_stmt_args();
+	public Mem_stmt_args Stmt_args() {return stmt_args;} private final    Mem_stmt_args stmt_args = new Mem_stmt_args();
 	public int Args_len() {return val_list.Count();}
 	public Object Args_get_at(int i)	{return val_list.Get_at(i);}
 	public Object Args_get_by(String k) {return val_list.Get_by(k);}
@@ -111,10 +111,10 @@ public class Mem_stmt implements Db_stmt {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v);} 
 		return this;
 	}
-	public Db_stmt Val_rdr_(gplx.core.ios.Io_stream_rdr v, long rdr_len) {
+	public Db_stmt Val_rdr_(gplx.core.ios.streams.Io_stream_rdr v, long rdr_len) {
 		try {
-			Bry_bfr bfr = Bry_bfr.new_();
-			gplx.core.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
+			Bry_bfr bfr = Bry_bfr_.New();
+			gplx.core.ios.streams.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
 			Add("", Bool_.N, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;

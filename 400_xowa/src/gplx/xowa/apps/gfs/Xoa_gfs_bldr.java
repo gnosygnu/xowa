@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_gfs_bldr {		
-	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr = Bry_bfr.new_();
+	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Xto_bry() {return bfr.To_bry_and_clear();}
 	public Xoa_gfs_bldr Add_byte(byte b)		{bfr.Add_byte(b); return this;}
 	public Xoa_gfs_bldr Add_blob(byte[] bry)	{bfr.Add(bry); return this;}
@@ -71,7 +71,7 @@ public class Xoa_gfs_bldr {
 		bfr.Add(Bry_semic_nl);
 		return this;
 	}
-	private static final byte[] Bry_eq = Bry_.new_a7(" = "), Bry_semic_nl = Bry_.new_a7(";\n");
+	private static final    byte[] Bry_eq = Bry_.new_a7(" = "), Bry_semic_nl = Bry_.new_a7(";\n");
 	private void Add_str_escape_apos(Bry_bfr bfr, byte[] src) {
 		int len = src.length;
 		for (int i = 0; i < len; i++) {
@@ -82,7 +82,7 @@ public class Xoa_gfs_bldr {
 				bfr.Add_byte(b);
 		}
 	}
-	public static final byte[]
+	public static final    byte[]
 		Bry_xquote_bgn			= Bry_.new_a7("<:['\n")
 	,	Bry_xquote_end			= Bry_.new_a7("']:>\n")
 	;

@@ -30,7 +30,7 @@ public class Xob_css_parser__url_tst {
 	@Test   public void Warn_site()			{fxt.Test_parse_warn(" url('//site')"				, " url('//site')"	, "invalid");}
 }
 class Xob_css_parser__url_fxt {
-	protected Xob_css_parser__url url_parser; private final Bry_bfr bfr = Bry_bfr.new_(32);
+	protected Xob_css_parser__url url_parser; private final    Bry_bfr bfr = Bry_bfr_.New_w_size(32);
 	protected Xob_css_tkn__base cur_frag; protected byte[] src_bry;
 	@gplx.Virtual public void Clear() {
 		url_parser = new Xob_css_parser__url(Bry_.new_a7("site"));

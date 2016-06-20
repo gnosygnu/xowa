@@ -22,7 +22,7 @@ public class Xof_url_bldr_tst {
 	@Before public void init() {fxt.Clear();}
 	@Test 	public void Ogv() 			{fxt.Dir_spr_http_().Root_("http://test/").Md5_("d0").Ttl_("A.ogv").W_(220).Expd_src_("http://test/thumb/d/d0/A.ogv/220px--A.ogv.jpg").Test();}
 	@Test 	public void Ogv__seek() 	{fxt.Dir_spr_http_().Root_("http://test/").Md5_("d0").Ttl_("A.ogv").W_(220).Expd_src_("http://test/thumb/d/d0/A.ogv/220px-seek%3D5-A.ogv.jpg").Seek_(5).Test();}
-	@Test 	public void Ogv__no_w() 	{fxt.Dir_spr_http_().Root_("http://test/").Md5_("d0").Ttl_("A.ogv").W_( -1).Expd_src_("http://test/thumb/d/d0/A.ogv/-1px--A.ogv.jpg").Test();}	// TODO: use orig_w, not -1
+	@Test 	public void Ogv__no_w() 	{fxt.Dir_spr_http_().Root_("http://test/").Md5_("d0").Ttl_("A.ogv").W_( -1).Expd_src_("http://test/thumb/d/d0/A.ogv/-1px--A.ogv.jpg").Test();}	// TODO_OLD: use orig_w, not -1
 	@Test 	public void Xcf() 			{fxt.Dir_spr_http_().Root_("http://test/").Md5_("44").Ttl_("A.xcf").W_(220).Expd_src_("http://test/thumb/4/44/A.xcf/220px-A.xcf.png").Test();}
 	@Test 	public void Bmp() 			{fxt.Dir_spr_http_().Root_("http://test/").Md5_("70").Ttl_("A.bmp").W_(220).Expd_src_("http://test/thumb/7/70/A.bmp/220px-A.bmp.png").Test();}
 	@Test 	public void Pdf() 			{fxt.Dir_spr_http_().Root_("http://test/").Md5_("ef").Ttl_("A.pdf").W_(220).Expd_src_("http://test/thumb/e/ef/A.pdf/page1-220px-A.pdf.jpg").Test();}
@@ -36,7 +36,7 @@ public class Xof_url_bldr_tst {
 	}
 }
 class Xof_url_bldr_fxt {
-	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private final    Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_url_bldr_fxt Clear() {
 		dir_spr = Byte_.Zero; ext = null; root = md5 = ttl = expd_src = null;
 		seek = Xof_lnki_time.Null;

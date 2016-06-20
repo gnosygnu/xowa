@@ -76,7 +76,7 @@ class Xop_redirect_mgr_fxt {
 		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
 	}
 	public void Test__redirected_html(String page_str, String expd_str) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list.Add(Bry_.new_u8(page_str));
 		byte[] actl_bry = Xop_redirect_mgr.Bld_redirect_msg(fxt.App(), fxt.Wiki(), list);
 		Tfds.Eq_str(expd_str, String_.new_u8(actl_bry));

@@ -114,8 +114,8 @@ public class Xob_xml_parser_tst {
 		fil = page_bldr.XtoByteStreamRdr();
 		tst_parse(fil, doc, 0);
 	}
-	private static final String Date_1 = "2012-01-01T01:01:01Z", Date_2 = "2012-02-02T02:02:02Z"; DateAdp_parser dateParser = DateAdp_parser.new_();
-	Bry_bfr bfr = Bry_bfr.new_();
+	private static final    String Date_1 = "2012-01-01T01:01:01Z", Date_2 = "2012-02-02T02:02:02Z"; DateAdp_parser dateParser = DateAdp_parser.new_();
+	Bry_bfr bfr = Bry_bfr_.New();
 	Xob_xml_page_bldr page_bldr = new Xob_xml_page_bldr(); Io_buffer_rdr fil; Xob_xml_parser page_parser = new Xob_xml_parser(); Xob_bldr bldr;
 	Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Test();
 	int tst_parse(Io_buffer_rdr fil, Xowd_page_itm expd, int cur_pos) {

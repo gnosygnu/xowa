@@ -58,7 +58,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		boolean name_had_subst = false;
 		if (defn == Xot_defn_.Null) {								// tmpl_name is not exact match; may be dynamic, subst, transclusion, etc..
 			if (name_key_tkn.Itm_static() == Bool_.N_byte) {		// tmpl is dynamic; EX:{{{{{1}}}|a}}
-				Bry_bfr name_tkn_bfr = Bry_bfr.new_(name_tkn.Src_end() - name_tkn.Src_bgn());
+				Bry_bfr name_tkn_bfr = Bry_bfr_.New_w_size(name_tkn.Src_end() - name_tkn.Src_bgn());
 				if (defn_tid == Xot_defn_.Tid_subst)
 					name_tkn_bfr.Add(Get_first_subst_itm(lang.Kwd_mgr()));
 				name_tkn.Tmpl_evaluate(ctx, src, caller, name_tkn_bfr);
@@ -311,7 +311,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		defn_func.Eval_argx(ctx, src, caller, invk);
 		if (defn_func_id == Xol_kwd_grp_.Id_invoke)	// NOTE: if #invoke, set frame_ttl to argx, not name; EX:{{#invoke:A}}
 			invk.Frame_ttl_(Bry_.Add(Xow_ns_.Bry__module_w_colon, Xoa_ttl.Replace_unders(defn_func.Argx_dat())));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14; always use canonical English "Module"; DATE:2015-11-09
-		Bry_bfr bfr_func = Bry_bfr.new_();
+		Bry_bfr bfr_func = Bry_bfr_.New();
 		defn_func.Func_evaluate(bfr_func, ctx, caller, invk, src);
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
 			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
@@ -363,7 +363,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	private boolean Eval_sub(Xop_ctx ctx, Xot_defn_tmpl transclude_tmpl, Xot_invk caller, byte[] src, Bry_bfr doc) {
 		boolean rv = false;
 		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_tmpl.Name());
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
 		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), Bool_.Y);

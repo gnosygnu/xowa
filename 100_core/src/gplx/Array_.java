@@ -22,15 +22,15 @@ public class Array_ {
 	public static Object cast(Object o) {return (Object)o;}
 	public static void Sort(Object[] obj) {List_adp_sorter.new_().Sort(obj, obj.length);}
 	public static void Sort(Object[] obj, gplx.core.lists.ComparerAble comparer) {List_adp_sorter.new_().Sort(obj, obj.length, true, comparer);}
-	public static Object[] Insert(Object[] cur, Object[] add, int addPos) {
-		int curLen = cur.length, addLen = add.length;
-		Object[] rv = (Object[])Array_.Create(Array_.Component_type(cur), curLen + addLen);
-		for (int i = 0; i < addPos; i++)			// copy old up to addPos
+	public static Object[] Insert(Object[] cur, Object[] add, int add_pos) {
+		int cur_len = cur.length, add_len = add.length;
+		Object[] rv = (Object[])Array_.Create(Array_.Component_type(cur), cur_len + add_len);
+		for (int i = 0; i < add_pos; i++)			// copy old up to add_pos
 			rv[i] = cur[i];
-		for (int i = 0; i < addLen; i++)			// insert add
-			rv[i + addPos] = add[i];
-		for (int i = addPos; i < curLen; i++)		// copy old after addPos
-			rv[i + addLen] = cur[i];
+		for (int i = 0; i < add_len; i++)			// insert add
+			rv[i + add_pos] = add[i];
+		for (int i = add_pos; i < cur_len; i++)		// copy old after add_pos
+			rv[i + add_len] = cur[i];
 		return rv;
 	}
 	public static Object[] Replace_insert(Object[] cur, Object[] add, int curReplacePos, int addInsertPos) {
@@ -58,13 +58,13 @@ public class Array_ {
 	}
 	public static List_adp To_list(Object ary) {	
 		int aryLen = Array_.Len(ary);
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		for (int i = 0; i < aryLen; i++)
 			rv.Add(Array_.Get_at(ary, i));
 		return rv;
 	}
 	public static String To_str_nested_obj(Object o) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		To_str_nested_ary(bfr, (Object)o, 0);	
 		return bfr.To_str_and_clear();
 	}

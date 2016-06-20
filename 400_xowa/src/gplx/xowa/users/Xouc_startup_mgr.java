@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-public class Xouc_startup_mgr implements GfoInvkAble {
+public class Xouc_startup_mgr implements Gfo_invk {
 	public Xouc_startup_mgr(Xou_cfg config) {this.config = config; window_mgr = new Xouc_window_mgr(config.User());} private Xou_cfg config;
 	public Xouc_window_mgr Window_mgr() {return window_mgr;} private Xouc_window_mgr window_mgr;
 	public String Page() {return page;} public Xouc_startup_mgr Page_(String v) {page = v; return this;} private String page = "xowa";
@@ -54,7 +54,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 	private void Custom_config_(String v) {
 		Xoae_app app = config.User().Appe();
 		Object rslt = app.Gfs_mgr().Run_str(v);
-		if (rslt == GfoInvkAble_.Rv_error) {
+		if (rslt == Gfo_invk_.Rv_error) {
 			app.Usr_dlg().Warn_many("", "", "custom script failed: ~{0}", v);
 			return;
 		}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.core.ios.*; import gplx.langs.xmls.*; // NOTE: gplx.langs.xmls does not support Android; DATE:2013-01-17
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.langs.xmls.*; // NOTE: gplx.langs.xmls does not support Android; DATE:2013-01-17
 import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser_ {
 	public static byte[] Extract(Io_stream_rdr src_rdr) {
@@ -34,7 +34,7 @@ public class Xob_siteinfo_parser_ {
 		Xob_siteinfo_nde nde = Parse(String_.new_u8(siteinfo_bry), wiki.Ns_mgr());
 		wiki.Props().Bldr_version_(Bry_.new_a7(Xoa_app_.Version));
 		wiki.Props().Main_page_(nde.Main_page());
-		Bry_bfr bfr = Bry_bfr.new_().Add_str_u8(nde.Site_name()).Add_byte_pipe().Add_str_u8(nde.Generator()).Add_byte_pipe().Add_str_u8(nde.Case_dflt()).Add_byte_pipe();
+		Bry_bfr bfr = Bry_bfr_.New().Add_str_u8(nde.Site_name()).Add_byte_pipe().Add_str_u8(nde.Generator()).Add_byte_pipe().Add_str_u8(nde.Case_dflt()).Add_byte_pipe();
 		wiki.Props().Siteinfo_misc_(bfr.To_bry_and_clear());
 	}
 	public static Xob_siteinfo_nde Parse(String xdoc_src, Xow_ns_mgr ns_mgr) {
@@ -76,5 +76,5 @@ public class Xob_siteinfo_parser_ {
 		}
 		ns_mgr.Init_w_defaults();
 	}
-	private static final byte[] Bry_siteinfo_bgn = Bry_.new_a7("<siteinfo>"), Bry_siteinfo_end = Bry_.new_a7("</siteinfo>");
+	private static final    byte[] Bry_siteinfo_bgn = Bry_.new_a7("<siteinfo>"), Bry_siteinfo_end = Bry_.new_a7("</siteinfo>");
 }

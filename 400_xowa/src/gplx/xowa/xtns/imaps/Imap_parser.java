@@ -18,13 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
-class Imap_parser {
+import gplx.xowa.xtns.imaps.itms.*;
+public class Imap_parser {
 	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private byte[] imap_img_src;
-	private Imap_itm_img imap_img;
-	private Imap_itm_dflt imap_dflt;
-	private Imap_itm_desc imap_desc;
-	private List_adp shapes = List_adp_.new_(), pts = List_adp_.new_(), errs = List_adp_.new_();
+	private Imap_part_img imap_img;
+	private Imap_part_dflt imap_dflt;
+	private Imap_part_desc imap_desc;
+	private List_adp shapes = List_adp_.New(), pts = List_adp_.New(), errs = List_adp_.New();
 	private byte[] src;
 	private int itm_idx; private int itm_bgn, itm_end;
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
@@ -68,43 +69,42 @@ class Imap_parser {
 					itm_end = Parse_img(rv, itm_bgn, itm_end, src_end);
 				else {
 					Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, itm_bgn, itm_end);
-					byte tid_val = tid_obj == null ? Imap_itm_.Tid_invalid : ((Byte_obj_val)tid_obj).Val();
+					byte tid_val = tid_obj == null ? Imap_part_.Tid_invalid : ((Byte_obj_val)tid_obj).Val();
 					int tid_end_pos = tid_trie.Match_pos();
 					switch (tid_val) {
-						case Imap_itm_.Tid_desc:			Parse_desc(tid_end_pos, itm_end); break;
-						case Imap_itm_.Tid_dflt:			Parse_dflt(tid_end_pos, itm_end); break;
-						case Imap_itm_.Tid_shape_rect:		Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, 4); break;
-						case Imap_itm_.Tid_shape_poly:		Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, Reqd_poly); break;
-						case Imap_itm_.Tid_shape_circle:	Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, 3); break;
+						case Imap_part_.Tid_desc:			Parse_desc(tid_end_pos, itm_end); break;
+						case Imap_part_.Tid_dflt:			Parse_dflt(tid_end_pos, itm_end); break;
+						case Imap_part_.Tid_shape_rect:		Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, 4); break;
+						case Imap_part_.Tid_shape_poly:		Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, Reqd_poly); break;
+						case Imap_part_.Tid_shape_circle:	Parse_shape(tid_val, tid_end_pos, itm_bgn, itm_end, 3); break;
 						default:
-						case Imap_itm_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
+						case Imap_part_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
 					}
 				}
 			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.To_str(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_log(e));}
 			++itm_idx;
 		}
-		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.To_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));
+		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_part_shape[])shapes.To_ary_and_clear(Imap_part_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
 	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, itm_bgn, itm_end));}
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
-		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
-		byte tid_desc = Imap_desc_tid.parse(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn));
+		byte tid_desc = Imap_desc_tid.Parse_to_tid(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn));
 		switch (tid_desc) {
 			case Imap_desc_tid.Tid_null: return Add_err(Bool_.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;
 		}
 		if (imap_img == null || imap_img.Img_link().Lnki_type() == Xop_lnki_type.Id_thumb) return true;	// thumbs don't get desc
-		imap_desc = new Imap_itm_desc(tid_desc);
+		imap_desc = new Imap_part_desc(tid_desc);
 		return true;
 	}
 	private void Parse_dflt(int itm_bgn, int itm_end) {
-		imap_dflt = new Imap_itm_dflt();
+		imap_dflt = new Imap_part_dflt();
 		Init_link_owner(imap_dflt, src, itm_bgn, itm_end);
 	}
 	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {
-		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
+		boolean shape_is_poly = shape_tid == Imap_part_.Tid_shape_poly;
 		int pos = Bry_find_.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
 		int grp_end = Bry_find_.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
 		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap_No valid link was found");}
@@ -149,7 +149,7 @@ class Imap_parser {
 			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
 		pos = Bry_find_.Trim_fwd_space_tab(src, pos, itm_end);
-		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.To_ary_and_clear(Double_obj_val.class));
+		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (Double_obj_val[])pts.To_ary_and_clear(Double_obj_val.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
 		return true;
@@ -194,7 +194,7 @@ class Imap_parser {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
 		else {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
-			imap_img = new Imap_itm_img(lnki_tkn);
+			imap_img = new Imap_part_img(lnki_tkn);
 			lnki_tkn.Lnki_file_wkr_(imap);
 			wiki_ctx.Page().Lnki_list().Add(lnki_tkn);
 			wiki_ctx.Lnki().File_logger().Log_file(wiki_ctx, lnki_tkn, Xop_file_logger_.Tid__imap);	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
@@ -226,12 +226,12 @@ class Imap_parser {
 		return rv;
 	}
 	private static Btrie_slim_mgr tid_trie = Btrie_slim_mgr.ci_a7()	// names are not i18n'd; // NOTE:ci.ascii:MW_const.en
-	.Add_str_byte("desc"						, Imap_itm_.Tid_desc)
-	.Add_str_byte("#"							, Imap_itm_.Tid_comment)
-	.Add_bry_byte(Imap_itm_.Key_dflt			, Imap_itm_.Tid_dflt)
-	.Add_bry_byte(Imap_itm_.Key_shape_rect		, Imap_itm_.Tid_shape_rect)
-	.Add_bry_byte(Imap_itm_.Key_shape_circle	, Imap_itm_.Tid_shape_circle)
-	.Add_bry_byte(Imap_itm_.Key_shape_poly		, Imap_itm_.Tid_shape_poly)
+	.Add_str_byte("desc"						, Imap_part_.Tid_desc)
+	.Add_str_byte("#"							, Imap_part_.Tid_comment)
+	.Add_bry_byte(Imap_part_.Key_dflt			, Imap_part_.Tid_dflt)
+	.Add_bry_byte(Imap_part_.Key_shape_rect		, Imap_part_.Tid_shape_rect)
+	.Add_bry_byte(Imap_part_.Key_shape_circle	, Imap_part_.Tid_shape_circle)
+	.Add_bry_byte(Imap_part_.Key_shape_poly		, Imap_part_.Tid_shape_poly)
 	; 
 	private static final int Reqd_poly = -1;
 }

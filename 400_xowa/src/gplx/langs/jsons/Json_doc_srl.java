@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 public class Json_doc_srl {
 	private int indent = -1;
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
+	private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public boolean Ws_enabled() {return ws_enabled;} public void Ws_enabled_(boolean v) {ws_enabled = v;} private boolean ws_enabled = false;
 	public byte[] Bld() {return bfr.To_bry_and_clear();}
 	public String Bld_as_str() {return bfr.To_str_and_clear();}

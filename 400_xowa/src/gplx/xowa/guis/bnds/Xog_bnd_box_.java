@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.cmds.*;
+import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
+import gplx.xowa.guis.views.*; import gplx.xowa.guis.cmds.*;
 public class Xog_bnd_box_ {
-	public static final String Key_browser = "browser", Key_browser_url = "browser.url", Key_browser_search = "browser.search", Key_browser_html = "browser.html", Key_browser_find = "browser.find", Key_browser_prog = "browser.prog", Key_browser_info = "browser.info";
-	public static final String Gui_browser = "Window", Gui_browser_url = "Url bar", Gui_browser_search = "Search box", Gui_browser_html = "HTML browser", Gui_browser_find = "Find box", Gui_browser_prog = "Status bar", Gui_browser_info = "System Messages box";
+	public static final    String Key_browser = "browser", Key_browser_url = "browser.url", Key_browser_search = "browser.search", Key_browser_html = "browser.html", Key_browser_find = "browser.find", Key_browser_prog = "browser.prog", Key_browser_info = "browser.info";
+	public static final    String Gui_browser = "Window", Gui_browser_url = "Url bar", Gui_browser_search = "Search box", Gui_browser_html = "HTML browser", Gui_browser_find = "Find box", Gui_browser_prog = "Status bar", Gui_browser_info = "System Messages box";
 	public static final int Tid__max = 7, Tid_browser = 0, Tid_browser_url = 1, Tid_browser_search = 2, Tid_browser_html = 3, Tid_browser_find = 4, Tid_browser_prog = 5, Tid_browser_info = 6;
 	public static final int Ary_len = Tid__max;
 	public static Xog_bnd_box[] Ary() {

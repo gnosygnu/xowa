@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class DataRdr_ {
-	public static final DataRdr Null = new DataRdr_null();
+	public static final    DataRdr Null = new DataRdr_null();
 	public static DataRdr as_(Object obj) {return obj instanceof DataRdr ? (DataRdr)obj : null;}
 	public static DataRdr cast(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
 
@@ -51,7 +51,7 @@ class DataRdr_null implements DataRdr {
 	public byte ReadByte(String key) {return Byte_.Min_value;}			public byte ReadByteOr(String key, byte or) {return or;}
 	public Decimal_adp ReadDecimal(String key) {return Decimal_adp_.Zero;}public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {return or;}
 	public DateAdp ReadDate(String key) {return DateAdp_.MinValue;}		public DateAdp ReadDateOr(String key, DateAdp or) {return or;}
-	public gplx.core.ios.Io_stream_rdr ReadRdr(String key) {return gplx.core.ios.Io_stream_rdr_.Noop;}
+	public gplx.core.ios.streams.Io_stream_rdr ReadRdr(String key) {return gplx.core.ios.streams.Io_stream_rdr_.Noop;}
 	public boolean MoveNextPeer() {return false;}
 	public DataRdr Subs() {return this;}
 	public DataRdr Subs_byName(String name) {return this;}

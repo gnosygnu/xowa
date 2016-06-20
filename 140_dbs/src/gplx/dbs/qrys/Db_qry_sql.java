@@ -42,7 +42,7 @@ public class Db_qry_sql implements Db_qry {
 		byte[] src = Bry_.new_u8(Sql_qry_wtr_.Gen_placeholder_parameters(qry));
 		int src_len = src.length;
 		int args_idx = 0, args_len = args.length, pos = 0;
-		Bry_bfr bfr = Bry_bfr.new_(src_len);
+		Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
 		while (pos < src_len) {
 			int question_pos = Bry_find_.Find_fwd(src, Byte_ascii.Question, pos);
 			if (question_pos == Bry_find_.Not_found)
@@ -78,5 +78,5 @@ public class Db_qry_sql implements Db_qry {
 			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);
 			bfr.Add_byte_apos().Add(val_bry).Add_byte_apos();
 		}
-	}	private static final byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");
+	}	private static final    byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");
 }

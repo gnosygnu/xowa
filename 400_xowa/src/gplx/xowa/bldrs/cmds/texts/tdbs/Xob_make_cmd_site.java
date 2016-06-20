@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_make_cmd_site implements Io_make_cmd {
-	Xob_xdat_file_wtr fil_wtr; Bry_bfr cur_bfr = Bry_bfr.new_(), reg_bfr = Bry_bfr.new_(), reg_key_0 = Bry_bfr.new_(512), reg_key_n = Bry_bfr.new_(512);
+	Xob_xdat_file_wtr fil_wtr; Bry_bfr cur_bfr = Bry_bfr_.New(), reg_bfr = Bry_bfr_.New(), reg_key_0 = Bry_bfr_.New_w_size(512), reg_key_n = Bry_bfr_.New_w_size(512);
 	int make_fil_max = 65 * Io_mgr.Len_kb, fil_count = 0, itm_count = 0, itm_key_end = 0; Io_url reg_url;
 	public Xob_make_cmd_site(Gfo_usr_dlg usr_dlg, Io_url make_dir, int make_fil_max) {this.usr_dlg = usr_dlg; this.make_dir = make_dir; this.make_fil_max = make_fil_max;} Gfo_usr_dlg usr_dlg;
 	public Io_sort_cmd Make_dir_(Io_url v) {make_dir = v; return this;} Io_url make_dir;

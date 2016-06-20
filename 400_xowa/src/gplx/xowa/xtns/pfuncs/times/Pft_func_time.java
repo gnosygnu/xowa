@@ -28,7 +28,7 @@ public class Pft_func_time extends Pf_func_base {
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(ctx, arg_fmt);
 		byte[] arg_date = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
 		byte[] arg_lang = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 1);
-		Bry_bfr error_bfr = Bry_bfr.new_();
+		Bry_bfr error_bfr = Bry_bfr_.New();
 		DateAdp date = ParseDate(arg_date, utc, error_bfr);
 		if (date == null || error_bfr.Len() > 0)
 			bfr.Add_str_a7("<strong class=\"error\">").Add_bfr_and_clear(error_bfr).Add_str_a7("</strong>");
@@ -56,7 +56,7 @@ public class Pft_func_time extends Pf_func_base {
 			return null;
 		}
 	}
-	public static final Pft_func_time _Lcl = new Pft_func_time(false), _Utc = new Pft_func_time(true);
+	public static final    Pft_func_time _Lcl = new Pft_func_time(false), _Utc = new Pft_func_time(true);
 }
 class DateAdpTranslator_xapp {
 	public static void Translate(Xowe_wiki wiki, Xol_lang_itm lang, int type, int val, Bry_bfr bb) {

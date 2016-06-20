@@ -25,16 +25,16 @@ import gplx.xowa.apps.gfs.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.users.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
-import gplx.xowa.guis.cbks.*;
+import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.wms.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.bldrs.*;
-import gplx.xowa.addons.*; import gplx.xowa.addons.apps.specials.*;
-public class Xoav_app implements Xoa_app, GfoInvkAble {
-	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir) {
+import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
+public class Xoav_app implements Xoa_app, Gfo_invk {
+	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Xog_tab_mgr tab_mgr, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir, Io_url http_root) {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
-		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), file_dir, css_dir);
+		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), file_dir, css_dir, http_root);
 		this.lang_mgr = new Xoa_lang_mgr(this);
 		this.meta_mgr = new Xoa_meta_mgr(this);
 		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, null);
@@ -44,6 +44,7 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 		this.utl_msg_log = Gfo_msg_log.Test();
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
+		this.gui__tab_mgr = tab_mgr;
 		this.user = new Xouv_user("anonymous");
 		this.api_root = null;
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
@@ -66,7 +67,7 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final    Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
-	public Xoa_meta_mgr				Dbmeta_mgr()					{return meta_mgr;} private final    Xoa_meta_mgr meta_mgr;
+	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final    Xoa_meta_mgr meta_mgr;
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final    Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final    Xoa_site_cfg_mgr site_cfg_mgr;
 	public boolean						Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_or_null(domain) == null;}
@@ -75,7 +76,8 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public Xoax_addon_mgr			Addon_mgr()					{return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xob_bldr					Bldr()						{return bldr;} private final    Xob_bldr bldr;
 	public Xoa_special_regy			Special_regy()				{return special_regy;} private final    Xoa_special_regy special_regy = new Xoa_special_regy();
-	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
+	public Xog_cbk_mgr				Gui__cbk_mgr()				{return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
+	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
 
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
@@ -92,5 +94,13 @@ public class Xoav_app implements Xoa_app, GfoInvkAble {
 	public void Init_by_app(Io_url user_db_url) {
 		user.Init_db(this, wiki_mgr, user_db_url);
 		this.Addon_mgr().Add_dflts_by_app(this).Run_by_app(this);
+	}
+	public static Xoav_app New_by_drd(gplx.xowa.drds.files.Xod_fsys_mgr fsys_mgr, Xog_tab_mgr tab_mgr) {
+		// create log
+		Gfo_usr_dlg__log_base log = new Gfo_usr_dlg__log_base(); log.Log_dir_(Io_url_.mem_dir_("mem/tmp"));
+		Gfo_usr_dlg usr_dlg = new Gfo_usr_dlg_base(log, Gfo_usr_dlg__gui_.Console);
+		Xoa_app_.Usr_dlg_(usr_dlg);
+
+		return new Xoav_app(usr_dlg, Xoa_app_mode.Itm_gui, tab_mgr, "drd", fsys_mgr.App_root_dir(), fsys_mgr.Usr_data_dir(), fsys_mgr.Usr_data_dir().GenSubDir("temp"), Io_url_.new_any_("/android_asset/xowa/"));
 	}
 }

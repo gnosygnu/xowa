@@ -18,19 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*;
-import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.addons.builds.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.bldrs.cmds.diffs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
-import gplx.xowa.addons.apps.searchs.bldrs.*; import gplx.xowa.addons.builds.files.cmds.*;
-public class Xob_cmd_mgr implements GfoInvkAble {
+import gplx.xowa.addons.wikis.searchs.bldrs.*;
+import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.wikis.htmls.css.bldrs.*;
+public class Xob_cmd_mgr implements Gfo_invk {
 	private final    Xob_bldr bldr;
 	public final    Xob_cmd_regy cmd_regy;
 	public Xob_cmd_mgr(Xob_bldr bldr, Xob_cmd_regy cmd_regy) {this.bldr = bldr; this.cmd_regy = cmd_regy;}
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
-	public int Len() {return list.Count();} private final    List_adp list = List_adp_.new_();
+	public int Len() {return list.Count();} private final    List_adp list = List_adp_.New();
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.Get_at(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
-	public GfoInvkAble Add_cmd(Xowe_wiki wiki, String cmd_key) {
+	public Gfo_invk Add_cmd(Xowe_wiki wiki, String cmd_key) {
 		Xob_cmd prime = cmd_regy.Get_or_null(cmd_key);
 		if (prime != null) {
 			Xob_cmd clone = prime.Cmd_clone(bldr, wiki);
@@ -40,7 +41,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		if		(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_init))					return Add(new Xob_init_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_page))					return Xml_rdr_direct_add(wiki, new Xob_page_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_css))					return Add(new Xob_css_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_wkr))				return Xml_rdr_direct_add(wiki, new gplx.xowa.addons.apps.searchs.bldrs.Srch_bldr_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_wkr))				return Xml_rdr_direct_add(wiki, new gplx.xowa.addons.wikis.searchs.bldrs.Srch_bldr_wkr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_cmd))				return Add(new Srch_bldr_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core_v1))			return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core))				return Add(new Xob_category_registry_sql(bldr, wiki));
@@ -99,13 +100,13 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		}
 		return rv;
 	}
-	private Hash_adp dump_rdrs = Hash_adp_.new_(); private Bry_obj_ref dump_rdrs_ref = Bry_obj_ref.New_empty();
+	private Hash_adp dump_rdrs = Hash_adp_.New(); private Bry_obj_ref dump_rdrs_ref = Bry_obj_ref.New_empty();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if			(ctx.Match(k, Invk_add))				return Add_cmd(Wiki_get_or_make(m), m.ReadStr("v"));
 		else if		(ctx.Match(k, Invk_add_many))			return Add_many(m);
 		else if		(ctx.Match(k, Invk_get_first))			return Get_first(m);
 		else if		(ctx.Match(k, Invk_new_batch))			return new Xob_core_batch_utl(bldr, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_add = "add", Invk_add_many = "add_many", Invk_new_batch = "new_batch", Invk_get_first = "get_first";
 	private Object Get_first(GfoMsg m) {

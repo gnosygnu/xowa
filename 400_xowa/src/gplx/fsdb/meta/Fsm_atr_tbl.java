@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_atr_tbl {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_uid, fld_url;
-	private final Db_conn conn;
+	public final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_uid, fld_url;
+	private final    Db_conn conn;
 	public Fsm_atr_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		String fld_prefix = "";

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*;
-public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
+public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	private final    Xoae_app app;
-	private final    List_adp list = List_adp_.new_(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
+	private final    List_adp list = List_adp_.New(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
 	public Xoae_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.wiki_regy = new Xoa_wiki_regy(app);
@@ -94,12 +94,13 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_get))					return Get_by_or_make(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_scripts))				return scripts;
-		else if	(ctx.Match(k, Invk_wdata))					return wdata_mgr;
-		else if	(ctx.Match(k, Invk_len))					return this.Count();
-		else if	(ctx.Match(k, Invk_get_at))					return this.Get_at_or_null(m.ReadInt("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		if		(ctx.Match(k, Invk_get))							return Get_by_or_make(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_scripts))						return scripts;
+		else if	(ctx.Match(k, Invk_wdata))							return wdata_mgr;
+		else if	(ctx.Match(k, Invk_len))							return this.Count();
+		else if	(ctx.Match(k, Invk_get_at))							return this.Get_at_or_null(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoa_wiki_mgr_.Invk__import_by_url))	return this.Import_by_url(m.ReadIoUrl("v"));
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_scripts = "scripts", Invk_wdata = "wdata";
 	private static final    String Invk_len = "len", Invk_get_at = "get_at";
 }

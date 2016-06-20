@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.flds.*;
 public class Xof_meta_fil {
-	private final Ordered_hash itms = Ordered_hash_.New_bry();
+	private final    Ordered_hash itms = Ordered_hash_.New_bry();
 	public Xof_meta_fil(Xof_meta_mgr meta_mgr, byte[] md5) {this.meta_mgr = meta_mgr; this.md5 = md5;}
-	public Xof_meta_mgr Owner_mgr() {return meta_mgr;} private final Xof_meta_mgr meta_mgr;
-	public byte[] Md5() {return md5;} private final byte[] md5;
+	public Xof_meta_mgr Owner_mgr() {return meta_mgr;} private final    Xof_meta_mgr meta_mgr;
+	public byte[] Md5() {return md5;} private final    byte[] md5;
 	public void Dirty_() {meta_mgr.Dirty_(this);}
 	public Xof_meta_itm Get_or_new(byte[] ttl) {
 		Xof_meta_itm rv = Get_or_null(ttl);
@@ -57,5 +57,5 @@ public class Xof_meta_fil {
 			Bld_url_bfr.Add_byte(md5[i]);
 		Bld_url_bfr.Add(Bry_url_ext);
 		return Io_url_.new_fil_(Bld_url_bfr.To_str_and_clear());
-	}	static final byte[] Bry_url_ext = Bry_.new_a7(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr.new_(260);	// 260 is max path of url
+	}	static final    byte[] Bry_url_ext = Bry_.new_a7(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr_.New_w_size(260);	// 260 is max path of url
 }

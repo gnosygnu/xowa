@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.*;
-public class Xog_layout implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.views.*;
+public class Xog_layout implements Gfo_invk {
 	public Xog_layout() {
 		go_bwd_btn.Owner_(this);
 		go_fwd_btn.Owner_(this);
@@ -102,7 +102,7 @@ public class Xog_layout implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_prog_box))				return prog_box;
 		else if	(ctx.Match(k, Invk_note_box))				return note_box;
 		else if	(ctx.Match(k, Invk_main_win))				return main_win;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	static final String Invk_coord_mode_ = "coord_mode_", Invk_go_fwd_btn = "go_fwd_btn", Invk_go_bwd_btn = "go_bwd_btn", Invk_url_box = "url_box", Invk_search_box = "search_box", Invk_html_box = "html_box", Invk_find_box = "find_box", Invk_prog_box = "prog_box", Invk_note_box = "note_box"
 		, Invk_main_win = "main_win", Invk_find_fwd_btn = "find_fwd_btn", Invk_find_bwd_btn = "find_bwd_btn", Invk_url_exec_btn = "url_exec_btn", Invk_search_exec_btn = "search_exec_btn", Invk_find_close_btn = "find_close_btn";

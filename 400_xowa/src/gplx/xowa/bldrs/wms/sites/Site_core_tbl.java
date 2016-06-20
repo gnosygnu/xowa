@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 public class Site_core_tbl implements Db_tbl {
-	private static final String tbl_name = "site_core"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
-	private final Db_conn conn;
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
+	private final    Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	public Site_core_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -32,6 +32,7 @@ public class Site_core_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
+	public String Tbl_name() {return tbl_name;} private static final String tbl_name = "site_core";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv)));}
 	public void Rls() {
 		stmt_select = Db_stmt_.Rls(stmt_select);
@@ -69,7 +70,7 @@ public class Site_core_tbl implements Db_tbl {
 		finally {rdr.Rls();}
 	}
 	public Site_core_itm[] Select_all_downloaded(DateAdp cutoff) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

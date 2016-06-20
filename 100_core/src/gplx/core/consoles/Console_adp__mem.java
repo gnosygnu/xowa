@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
 public class Console_adp__mem implements Console_adp {
-	private final List_adp written = List_adp_.new_();
-	private final Hash_adp ignored = Hash_adp_.new_();
+	private final    List_adp written = List_adp_.New();
+	private final    Hash_adp ignored = Hash_adp_.New();
 	public boolean Enabled() {return true;}
 	public boolean Canceled_chk() {return false;}
 	public int Chars_per_line_max() {return 80;} public void Chars_per_line_max_(int v) {}

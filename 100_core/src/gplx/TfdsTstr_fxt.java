@@ -66,7 +66,7 @@ public class TfdsTstr_fxt {
 		sb.Add(String_.Repeat("_", 80));
 		throw Err_.new_wo_type(sb.To_str());
 	}
-	List_adp list = List_adp_.new_(); 
+	List_adp list = List_adp_.New(); 
         public static TfdsTstr_fxt new_() {return new TfdsTstr_fxt();} TfdsTstr_fxt() {}
 }
 class TfdsTstrItm {
@@ -95,5 +95,5 @@ class TfdsTstrItm {
 		return compareResult == 1 ? "==" : "!=";
 	}
         public static TfdsTstrItm new_() {return new TfdsTstrItm();} TfdsTstrItm() {}
-	public static final int CompareResult_none = 0, CompareResult_eq = 1, CompareResult_eqn = 2;
+	public static final    int CompareResult_none = 0, CompareResult_eq = 1, CompareResult_eqn = 2;
 }

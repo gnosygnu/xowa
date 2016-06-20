@@ -20,19 +20,19 @@ import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.utils.*;
 public class Xotdb_fsys_mgr {
-	private final Io_url root_dir; private final Xow_ns_mgr ns_mgr;
+	private final    Io_url root_dir; private final    Xow_ns_mgr ns_mgr;
 	public Xotdb_fsys_mgr(Io_url root_dir, Xow_ns_mgr ns_mgr) {
 		this.root_dir = root_dir; this.ns_mgr = ns_mgr;
 		this.tmp_dir		= root_dir.GenSubDir("tmp");			
 		this.ns_dir			= root_dir.GenSubDir(Xotdb_dir_info_.Name_ns);
 		this.site_dir		= root_dir.GenSubDir(Xotdb_dir_info_.Name_site);
 	}
-	public Io_url Tmp_dir()				{return tmp_dir;}	private final Io_url tmp_dir;		
-	public Io_url Ns_dir()				{return ns_dir;}	private final Io_url ns_dir;
-	public Io_url Site_dir()			{return site_dir;}	private final Io_url site_dir;
+	public Io_url Tmp_dir()				{return tmp_dir;}	private final    Io_url tmp_dir;		
+	public Io_url Ns_dir()				{return ns_dir;}	private final    Io_url ns_dir;
+	public Io_url Site_dir()			{return site_dir;}	private final    Io_url site_dir;
 	public Io_url Cfg_wiki_core_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_core.gfs");}
 	public Io_url Cfg_wiki_stats_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_stats.gfs");}
-	public Xotdb_dir_info[] Tdb_dir_regy()	{return dir_regy;} private final Xotdb_dir_info[] dir_regy = Xotdb_dir_info_.regy_();
+	public Xotdb_dir_info[] Tdb_dir_regy()	{return dir_regy;} private final    Xotdb_dir_info[] dir_regy = Xotdb_dir_info_.regy_();
 	public Io_url Url_ns_dir(String ns_num, byte tid)	{return ns_dir.GenSubDir_nest(ns_num, Xotdb_dir_info_.Tid_name(tid));}
 	public Io_url Url_ns_reg(String ns_num, byte tid)	{return ns_dir.GenSubFil_nest(ns_num, Xotdb_dir_info_.Tid_name(tid), Xotdb_dir_info_.Name_reg_fil);}
 	public Io_url Url_ns_fil(byte tid, int ns_id, int fil_idx) {
@@ -56,21 +56,21 @@ public class Xotdb_fsys_mgr {
 	private static void Scan_dirs_zip(Xotdb_fsys_mgr fsys_mgr, byte id) {
 		Io_url[] dirs = Io_mgr.Instance.QueryDir_args(fsys_mgr.Ns_dir().GenSubDir_nest("000")).FilPath_("*page*").DirOnly_().Recur_(false).ExecAsUrlAry();
 		int len = dirs.length;
-		byte tid = gplx.core.ios.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
+		byte tid = gplx.core.ios.streams.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
 		for (int i = 0; i < len; i++) {
 			Io_url dir = dirs[i];
 			String dir_name = dir.NameOnly();
-			if		(String_.Eq(dir_name, "page"))			{tid = gplx.core.ios.Io_stream_.Tid_raw; break;} 
-			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.core.ios.Io_stream_.Tid_zip;
-			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.core.ios.Io_stream_.Tid_gzip;
-			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.core.ios.Io_stream_.Tid_bzip2;
+			if		(String_.Eq(dir_name, "page"))			{tid = gplx.core.ios.streams.Io_stream_.Tid_raw; break;} 
+			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.core.ios.streams.Io_stream_.Tid_zip;
+			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.core.ios.streams.Io_stream_.Tid_gzip;
+			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.core.ios.streams.Io_stream_.Tid_bzip2;
 		}
 		fsys_mgr.Tdb_dir_regy()[id].Ext_tid_(tid);
 	}
 	private static Hash_adp Scan_dirs_ns(Io_url ns_dir, Xow_ns_mgr ns_mgr) {
 		Io_url[] ns_dirs = Io_mgr.Instance.QueryDir_args(ns_dir).Recur_(false).DirOnly_().ExecAsUrlAry();
 		int len = ns_dirs.length;
-		Hash_adp rv = Hash_adp_.new_();
+		Hash_adp rv = Hash_adp_.New();
 		for (int i = 0; i < len; i++) {
 			int ns_int = Int_.parse_or(ns_dirs[i].NameOnly(), Int_.Min_value); if (ns_int == Int_.Min_value) continue; 
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_int); if (ns == null) continue;

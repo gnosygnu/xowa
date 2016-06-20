@@ -50,7 +50,7 @@ class GfmlParse_fxt {
 	public void tst_Err(String raw, UsrMsg_mok... expdErrs) {
 		bldr.ThrowErrors_set(false);
 		GfmlDoc actlDoc = bldr.XtoGfmlDoc(raw);
-		List_adp expd = List_adp_.new_(), actl = actlDoc.UsrMsgs();
+		List_adp expd = List_adp_.New(), actl = actlDoc.UsrMsgs();
 		expd.Add_many((Object[])expdErrs);
 		TfdsTstr_fxt tstr = TfdsTstr_fxt.new_();
 		int max = tstr.List_Max(expd, actl);

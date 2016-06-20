@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.cfgs.old; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
 import gplx.gfui.*; import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.cmds.*;
 import gplx.langs.gfs.*; import gplx.xowa.apps.*;
-public class Xocfg_bnd_itm implements GfoInvkAble {
+public class Xocfg_bnd_itm implements Gfo_invk {
 	private Xocfg_bnd_mgr mgr;
 	public Xocfg_bnd_itm(Xocfg_bnd_mgr mgr, Xog_cmd_itm cmd, Xog_bnd_itm bnd) {
 		this.mgr = mgr; this.cmd = cmd; this.bnd = bnd;	
@@ -39,7 +39,7 @@ public class Xocfg_bnd_itm implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_bnd_box))		return Xog_bnd_box_.Xto_gui_str(bnd.Box());
 		else if	(ctx.Match(k, Invk_bnd_box_idx))	return bnd.Box();
 		else if	(ctx.Match(k, Invk_bnd_ipt))		return mgr.Bnd_mgr().Bnd_parser().Xto_norm(bnd.Ipt().Key());
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 

@@ -48,7 +48,7 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("a%b%c", "%%(%w+)%%"	, -1, Scrib_kv_utl_.flat_many_("b", "B")			, "aBc;1");
 	}
 	@Test  public void Replace__proc__recursive() {	// PURPOSE:handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Mock_proc__recursive proc_lvl2 = new Mock_proc__recursive(fxt, lib, bfr, 2, null);
 		Mock_proc__recursive proc_lvl1 = new Mock_proc__recursive(fxt, lib, bfr, 1, proc_lvl2);
 		Mock_proc__recursive proc_root = new Mock_proc__recursive(fxt, lib, bfr, 0, proc_lvl1);

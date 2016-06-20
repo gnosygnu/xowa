@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_extension_tbl implements Db_tbl {
-	private static final String tbl_name = "site_extension"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final String fld_site_abrv, fld_type, fld_name, fld_namemsg, fld_description, fld_descriptionmsg, fld_author, fld_url, fld_version
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_site_abrv, fld_type, fld_name, fld_namemsg, fld_description, fld_descriptionmsg, fld_author, fld_url, fld_version
 	, fld_vcs_system, fld_vcs_version, fld_vcs_url, fld_vcs_date, fld_license_name, fld_license, fld_credits;
-	private final Db_conn conn;
+	private final    Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_extension_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -43,6 +43,7 @@ class Site_extension_tbl implements Db_tbl {
 		this.fld_credits				= flds.Add_str("credits", 255);
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;} private static final String tbl_name = "site_extension";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv, fld_type, fld_name)));}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
 	public void Rls() {

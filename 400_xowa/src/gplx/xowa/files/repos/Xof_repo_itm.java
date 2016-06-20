@@ -19,13 +19,13 @@ package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*; import gplx.core.consoles.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;	
 import gplx.xowa.wikis.domains.*;
-public class Xof_repo_itm implements GfoInvkAble {
-	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr; private final Bry_bfr tmp_bfr = Bry_bfr.reset_(300);
+public class Xof_repo_itm implements Gfo_invk {
+	private final    Xoa_fsys_mgr app_fsys; private final    Xof_rule_mgr ext_rule_mgr; private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(300);
 	public Xof_repo_itm(byte[] key, Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr, byte[] wiki_domain) {
 		this.key = key; this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;
 		Wiki_domain_(wiki_domain);
 	}
-	public byte[]	Key()				{return key;} private final byte[] key;
+	public byte[]	Key()				{return key;} private final    byte[] key;
 	public byte[]	Wiki_domain()		{return wiki_domain;} private byte[] wiki_domain;
 	public byte[]	Wiki_abrv_xo()		{return wiki_abrv_xo;} private byte[] wiki_abrv_xo;
 	public byte[]	Root_bry()			{return root_bry;} private byte[] root_bry;
@@ -80,7 +80,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_ext_rules_))			Ext_rules_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_wmf_api_))			wmf_api = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_tarball_))			tarball = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_owner = "owner", Invk_fsys_ = "fsys_", Invk_ext_rules_ = "ext_rules_", Invk_primary_ = "primary_", Invk_wmf_api_ = "wmf_api_", Invk_tarball_ = "tarball_";

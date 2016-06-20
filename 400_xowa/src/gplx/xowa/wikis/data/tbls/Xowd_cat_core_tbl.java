@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
 public class Xowd_cat_core_tbl implements Rls_able {
-	private final String tbl_name; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_pages, fld_subcats, fld_files, fld_hidden, fld_link_db_id;
-	private final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
-	private final Xowd_cat_core_tbl__in_wkr in_wkr = new Xowd_cat_core_tbl__in_wkr();
+	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_id, fld_pages, fld_subcats, fld_files, fld_hidden, fld_link_db_id;
+	private final    Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
+	private final    Xowd_cat_core_tbl__in_wkr in_wkr = new Xowd_cat_core_tbl__in_wkr();
 	public Db_conn Conn() {return conn;}
 	public Xowd_cat_core_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;

@@ -42,7 +42,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "action=edit")			, "//en.wikipedia.org/wiki/Main_Page?action=edit");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "localUrl")						, "/wiki/Main_Page");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl")					, "https://en.wikipedia.org/wiki/Main_Page");
-		// fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "", "http")			, "http://en.wikipedia.org/wiki/Main_Page");	// TODO
+		// fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "", "http")			, "http://en.wikipedia.org/wiki/Main_Page");	// TODO_OLD
 	}
 	@Test  public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikip�dia:Image_du_jour/Date; DATE:2013-12-24
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", Keyval_.Ary(Keyval_.new_("action", "edit"), Keyval_.new_("preload", "b"))), "https://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
@@ -95,6 +95,10 @@ public class Scrib_lib_title_tst {
 		fxt.Parser_fxt().Init_page_create("B", "C");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "#REDIRECT [[B]]");	// should not be "C"
 	}
+	@Test   public void GetContent__redirect_missing() {// PURPOSE: // page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
+		fxt.Parser_fxt().Init_page_create("A", "#REDIRECT [[B]]");
+		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "#REDIRECT [[B]]");	// fails with null
+	}
 	@Test   public void ProtectionLevels() {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_protectionLevels, Object_.Ary("A")									, "");
 	}
@@ -103,7 +107,7 @@ public class Scrib_lib_title_tst {
 	}
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
-		gplx.xowa.wikis.data.Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(gplx.xowa.wikis.data.Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
+		gplx.xowa.wikis.data.Xow_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(gplx.xowa.wikis.data.Xow_db_file_.Tid__text); text_db.Tbl__text().Create_tbl();
 		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}

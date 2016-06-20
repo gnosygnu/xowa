@@ -19,8 +19,8 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_stat_tbl implements Rls_able {
-	private static final String tbl_name = "hdump_stats"; private static final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private static final String
+	private static final String tbl_name = "hdump_stats"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final    String
 	  fld_page_id = flds.Add_int_pkey("page_id"), fld_wtxt_len = flds.Add_int("wtxt_len"), fld_row_orig_len = flds.Add_int("row_orig_len"), fld_row_zip_len = flds.Add_int("row_zip_len")
 	, fld_body_len = flds.Add_int("body_len"), fld_display_ttl_len = flds.Add_int("display_ttl_len"), fld_content_sub_len = flds.Add_int("content_sub_len"), fld_sidebar_div_len = flds.Add_int("sidebar_div_len")
 	, fld_js_math = flds.Add_int("js_math"), fld_js_imap = flds.Add_int("js_imap"), fld_js_packed = flds.Add_int("js_packed"), fld_js_hiero = flds.Add_int("js_hiero")
@@ -29,7 +29,7 @@ public class Xoh_stat_tbl implements Rls_able {
 	, fld_hdr_1 = flds.Add_int("hdr_1"), fld_hdr_2 = flds.Add_int("hdr_2"), fld_hdr_3 = flds.Add_int("hdr_3"), fld_hdr_4 = flds.Add_int("hdr_4"), fld_hdr_5 = flds.Add_int("hdr_5"), fld_hdr_6 = flds.Add_int("hdr_6")
 	, fld_img_full = flds.Add_int("img_full")
 	;		
-	private final Db_conn conn; private Db_stmt stmt_insert;
+	private final    Db_conn conn; private Db_stmt stmt_insert;
 	public Xoh_stat_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.Create_tbl();

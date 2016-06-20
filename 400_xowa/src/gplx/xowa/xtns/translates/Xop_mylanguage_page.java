@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.specials.*;
-public class Xop_mylanguage_page implements Xows_page {
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__my_language;}
+public class Xop_mylanguage_page implements Xow_special_page {
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__my_language;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		// Special:MyLanguage/Help:A -> Help:A/fr
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
@@ -29,10 +29,10 @@ public class Xop_mylanguage_page implements Xows_page {
 		boolean lang_is_english = Bry_.Eq(lang_key, Xol_lang_itm_.Key_en); 
 		if (!lang_is_english)
 			trg_bry = Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, page_bry, lang_key);
-		Xoae_page found_page = wiki.Data_mgr().Redirect(page, trg_bry);
-		if (found_page.Missing() && !lang_is_english)	// foreign lang does not exist; default to english
+		wiki.Data_mgr().Redirect(page, trg_bry);
+		if (page.Missing() && !lang_is_english)	// foreign lang does not exist; default to english
 			wiki.Data_mgr().Redirect(page, page_bry);
 	}
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

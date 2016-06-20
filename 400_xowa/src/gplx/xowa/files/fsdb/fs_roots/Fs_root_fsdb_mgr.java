@@ -19,7 +19,7 @@ package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import
 import gplx.core.ios.*; import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;	
 import gplx.xowa.files.gui.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*;
-public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {	// read images from file-system dir
+public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, Gfo_invk {	// read images from file-system dir
 	private Xowe_wiki wiki; private Fs_root_wkr_fsdb fsdb_wkr;
 	public Fs_root_fsdb_mgr(Xowe_wiki wiki) {this.Init_by_wiki(wiki); fsdb_wkr = new Fs_root_wkr_fsdb(wiki);}		
 	public void Init_by_wiki(Xow_wiki wiki) {this.wiki = (Xowe_wiki)wiki;}
@@ -44,7 +44,7 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {	// read ima
 		if		(ctx.Match(k, Invk_root_dir_))		fsdb_wkr.Root_dir_(Xto_url(m.ReadBry("v")));
 		else if	(ctx.Match(k, Invk_orig_dir_))		fsdb_wkr.Orig_dir_(Xto_url(m.ReadBry("v")));
 		else if	(ctx.Match(k, Invk_thumb_dir_))		fsdb_wkr.Thumb_dir_(Xto_url(m.ReadBry("v")));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_root_dir_ = "root_dir_", Invk_orig_dir_ = "orig_dir_", Invk_thumb_dir_ = "thumb_dir_";
 	public Xof_bin_mgr Bin_mgr() {throw Err_.new_unimplemented();}

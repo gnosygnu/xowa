@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.startups.tabs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.startups.*;
 import gplx.xowa.specials.*;
-public class Xoapi_startup_tabs implements GfoInvkAble {
+public class Xoapi_startup_tabs implements Gfo_invk {
 	public String Custom() {return custom;} private String custom;
 	public boolean Custom_is_expr() {return custom_is_expr;} private boolean custom_is_expr;
 	public String Previous() {return previous;} private String previous;
@@ -33,7 +33,7 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_custom_)) 							custom = m.ReadStr("v");
 		else if (ctx.Match(k, Invk_custom_is_expr))						return Yn.To_str(custom_is_expr);
 		else if (ctx.Match(k, Invk_custom_is_expr_))					custom_is_expr = m.ReadYn("v");
-		else 															return GfoInvkAble_.Rv_unhandled;
+		else 															return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String
@@ -43,11 +43,11 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 	, Invk_custom_is_expr = "custom_is_expr", Invk_custom_is_expr_ = "custom_is_expr_"
 	;
 	public String[] Calc_startup_strs(Xoae_app app) {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		String xowa_home = gplx.xowa.users.Xouc_pages_mgr.Page_xowa;
 		if (manual == null) {
 			switch (type) {
-				case Xoapi_startup_tabs_tid_.Tid_blank:			rv.Add(Xows_special_meta_.Itm__default_tab.Ttl_str()); break;
+				case Xoapi_startup_tabs_tid_.Tid_blank:			rv.Add(Xow_special_meta_.Itm__default_tab.Ttl_str()); break;
 				case Xoapi_startup_tabs_tid_.Tid_xowa:			rv.Add(xowa_home); break;
 				case Xoapi_startup_tabs_tid_.Tid_custom:		Add_ary(rv, custom); break;
 				case Xoapi_startup_tabs_tid_.Tid_previous:		Add_ary(rv, previous); break;

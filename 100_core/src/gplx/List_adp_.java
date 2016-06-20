@@ -16,23 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
+import gplx.core.lists.*;
 public class List_adp_ {
-	public static final List_adp Noop = new List_adp_noop();
-	public static List_adp as_(Object obj) {return obj instanceof List_adp ? (List_adp)obj : null;}
-	public static List_adp new_() {return new List_adp_obj();}
-	public static List_adp size_(int v) {return new List_adp_obj(v);}
-	public static List_adp many_(Object... ary) {
+	public static final    List_adp Noop = new List_adp_noop();
+	public static List_adp New()					{return new List_adp_obj();}
+	public static List_adp New_w_size(int v)		{return new List_adp_obj(v);}
+	public static List_adp New_by_many(Object... ary) {
 		List_adp rv = new List_adp_obj();
 		rv.Add_many(ary);
 		return rv;
 	}
-	public static void Add_list(List_adp rv, List_adp add) {
-		int len = add.Count();
-		for (int i = 0; i < len; ++i)
-			rv.Add(add.Get_at(i));
-	}
-	public static void DelAt_last(List_adp list) {list.Del_at(list.Count() - 1);}
+	public static void Del_at_last(List_adp list) {list.Del_at(list.Count() - 1);}
 	public static Object Pop(List_adp list) {
 		int lastIdx = list.Count() - 1;
 		Object rv = list.Get_at(lastIdx);
@@ -57,17 +51,5 @@ public class List_adp_ {
 		list.Del_at(last_idx);
 		return rv;
 	}
-	public static void DisposeAll(List_adp list) {
-		for (int i = 0; i < list.Count(); i++)
-			((Rls_able)list.Get_at(i)).Rls();
-	}
-	public static List_adp new_ary_(Object ary) {	
-		int ary_len = Array_.Len(ary);
-		List_adp rv = size_(ary_len);
-		for (int i = 0; i < ary_len; i++)
-			rv.Add(Array_.Get_at(ary, i));
-		return rv;
-	}
-	public static final int Capacity_initial = 8;
-	public static final int NotFound = -1, Base1 = 1, LastIdxOffset = 1, CountToPos = 1;
+	public static final    int Not_found = -1, Base1 = 1;
 }

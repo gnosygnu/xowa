@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import gplx.core.criterias.*;
 class Sql_core_wtr_fxt {
-	private final Sql_core_wtr__sqlite wtr = new Sql_core_wtr__sqlite();
-	private final Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
-	private final Bry_bfr bfr = Bry_bfr.new_();
+	private final    Sql_core_wtr__sqlite wtr = new Sql_core_wtr__sqlite();
+	private final    Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	public Sql_core_wtr_fxt Sql_wtr_(Sql_qry_wtr v) {sql_wtr = v; return this;} private Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Sqlite;
 	public void Test__val(Object val, String expd) {
 		wtr.Val_wtr().Bld_val(bfr, ctx, val);

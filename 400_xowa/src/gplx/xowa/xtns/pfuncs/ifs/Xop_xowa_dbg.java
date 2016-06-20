@@ -24,7 +24,7 @@ public class Xop_xowa_dbg extends Pf_func_base {
 		bfr.Add(argx);
 		Argx_list.Add(argx);
 	}
-	public static final List_adp Argx_list = List_adp_.new_();
+	public static final    List_adp Argx_list = List_adp_.New();
 	@Override public int Id() {return Xol_kwd_grp_.Id_xowa_dbg;}
 	@Override public Pf_func New(int id, byte[] name) {return new Xop_xowa_dbg().Name_(name);}
 }

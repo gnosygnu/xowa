@@ -130,7 +130,7 @@ class DsvParser {
 		nextValType = ValType_Data;
 		lineMode = LineType_Data;
 	}
-	String_bldr sb = String_bldr_.new_(); List_adp tkns = List_adp_.new_(); DsvTblBldr bldr = DsvTblBldr.new_();
+	String_bldr sb = String_bldr_.new_(); List_adp tkns = List_adp_.New(); DsvTblBldr bldr = DsvTblBldr.new_();
 	boolean cmdSeqOn = false, qteOn = false, csvOn = false;
 	int nextValType = ValType_Data, lineMode = LineType_Data;		
 	@gplx.Internal protected static DsvParser dsv_() {return new DsvParser();}
@@ -138,7 +138,7 @@ class DsvParser {
 		DsvParser rv = new DsvParser();
 		rv.csvOn = true;
 		rv.lineMode = hasHdr ? LineType_FldNames : LineType_Data;
-		List_adp names = List_adp_.new_(), types = List_adp_.new_();
+		List_adp names = List_adp_.New(), types = List_adp_.New();
 		for (int i = 0; i < flds.Count(); i++) {
 			GfoFld fld = flds.Get_at(i);
 			names.Add(fld.Key()); types.Add(fld.Type().Key());
@@ -146,8 +146,8 @@ class DsvParser {
 		rv.bldr.MakeFldNames(names); rv.bldr.MakeFldTypes(types);
 		return rv;
 	}
-	static final int ValType_Data = 0, ValType_CmdName = 1;
-	static final int LineType_Data = 0, LineType_Comment = 1, LineType_TblBgn = 2, LineType_FldNames = 3, LineType_FldTypes = 4, LineType_BlankLine = 5;
+	static final    int ValType_Data = 0, ValType_CmdName = 1;
+	static final    int LineType_Data = 0, LineType_Comment = 1, LineType_TblBgn = 2, LineType_FldNames = 3, LineType_FldTypes = 4, LineType_BlankLine = 5;
 }
 class DsvTblBldr {
 	public void Init() {
@@ -240,9 +240,9 @@ class DsvTblBldr {
 		}
 	}
 	GfoNde root; GfoNde tbl; DsvStoreLayout layout = DsvStoreLayout.dsv_brief_();
-	List_adp fldNames = List_adp_.new_(); List_adp fldTypes = List_adp_.new_(); 
+	List_adp fldNames = List_adp_.New(); List_adp fldTypes = List_adp_.New(); 
 	int stage = Stage_Init;
 	public static DsvTblBldr new_() {return new DsvTblBldr();} DsvTblBldr() {this.Init();}
-	@gplx.Internal protected static final String NullTblName = "";
-	static final int Stage_Init = 0, Stage_Hdr = 1, Stage_Row = 2;
+	@gplx.Internal protected static final    String NullTblName = "";
+	static final    int Stage_Init = 0, Stage_Hdr = 1, Stage_Row = 2;
 }

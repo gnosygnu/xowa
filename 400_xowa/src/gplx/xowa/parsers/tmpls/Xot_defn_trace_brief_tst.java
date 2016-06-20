@@ -30,7 +30,7 @@ public class Xot_defn_trace_brief_tst {
 	@Test  public void Basic_a_b()				{fxt.tst_("{{leaf_a}} {{leaf_b}}"			, "0001 leaf_a", "0001 leaf_b");}
 }
 class Xot_defn_trace_fxt {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	public Xop_ctx Ctx() {return fxt.Ctx();}
 	public void Init_defn_clear() {fxt.Init_defn_clear();}
 	public void Init_defn_add(String name, String raw) {fxt.Init_defn_add(name, raw);}
@@ -44,7 +44,7 @@ class Xot_defn_trace_fxt {
 		ctx.Defn_trace().Print(src, tmp);
 		String[] actl_ary = String_.Split(tmp.To_str_and_clear(), (char)Byte_ascii.Nl);
 		Tfds.Eq_ary(expd_ary, actl_ary);
-	}	private Bry_bfr tmp = Bry_bfr.new_();
+	}	private Bry_bfr tmp = Bry_bfr_.New();
 	String[] To_str(Xot_defn_trace_itm_brief[] ary) {
 		String[] rv = new String[ary.length];
 		for (int i = 0; i < rv.length; i++) {

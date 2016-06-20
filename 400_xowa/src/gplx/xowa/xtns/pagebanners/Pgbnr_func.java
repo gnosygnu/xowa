@@ -32,7 +32,7 @@ public class Pgbnr_func extends Pf_func_base {
 		boolean bottomtoc = false;;
 		double data_pos_x = 0, data_pos_y = 0;
 		List_adp icons_list = null;
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int args_len = self.Args_len();
 		Xop_func_arg_itm func_arg = new Xop_func_arg_itm();
 		for (int i = 0; i < args_len; ++i) {
@@ -56,7 +56,7 @@ public class Pgbnr_func extends Pf_func_base {
 				&&	Bry_.Len_gt_0(val)					// if ( !isset( $$value ) ) 
 				) {										// REF.MW:addIcons
 				tid = Arg__icon;
-				if (icons_list == null) icons_list = List_adp_.new_();
+				if (icons_list == null) icons_list = List_adp_.New();
 				byte[] icon_key = Bry_.Mid(key, 5);
 				byte[] icon_name = Xop_sanitizer.Escape_cls(icon_key);
 				byte[] icon_title = icon_name;
@@ -128,7 +128,7 @@ public class Pgbnr_func extends Pf_func_base {
 	}
 	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {
 		byte[][] urls = Get_standard_size_urls(wiki, cfg, banner_ttl); if (urls == null) return null;
-		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int urls_len = urls.length;
 		int[] sizes = cfg.standard_sizes;
 		for (int i = 0; i < urls_len; ++i) {

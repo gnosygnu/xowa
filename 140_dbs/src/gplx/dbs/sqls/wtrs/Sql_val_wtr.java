@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 public class Sql_val_wtr {
-//		private final Bry_bfr tmp_bfr = Bry_bfr.new_(32);
+//		private final    Bry_bfr tmp_bfr = Bry_bfr_.New(32);
 	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
 	public void Bld_val(Bry_bfr bfr, Sql_wtr_ctx ctx, Object val) {
 		if (ctx.Mode_is_prep) {

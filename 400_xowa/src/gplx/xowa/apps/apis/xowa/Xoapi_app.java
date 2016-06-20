@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.apps.apis.xowa.apps.*; import gplx.xowa.apps.apis.xowa.envs.*; import gplx.xowa.apps.apis.xowa.startups.*;
-public class Xoapi_app implements GfoInvkAble {
+public class Xoapi_app implements Gfo_invk {
 	private Xog_win_itm win;
 	public void Ctor_by_app(Xoae_app app) {
 		fsys.Ctor_by_app(app);
@@ -35,7 +35,7 @@ public class Xoapi_app implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_fsys)) 								return fsys;
 		else if	(ctx.Match(k, Invk_startup)) 							return startup;
 		else if	(ctx.Match(k, Invk_env)) 								return env;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_exit = "exit", Invk_startup = "startup", Invk_env = "env", Invk_fsys = "fsys";

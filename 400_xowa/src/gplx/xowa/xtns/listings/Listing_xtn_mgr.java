@@ -22,8 +22,8 @@ import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.*;
 public class Listing_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("Listings");
-	@Override public Xox_mgr Clone_new() {return new Listing_xtn_mgr();}
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("Listings");
+	@Override public Xox_mgr Xtn_clone_new() {return new Listing_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!Enabled()) return;
 		this.Reset(wiki);

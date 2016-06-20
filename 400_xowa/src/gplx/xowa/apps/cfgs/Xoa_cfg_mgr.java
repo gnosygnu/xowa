@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.wikis.domains.*;
-public class Xoa_cfg_mgr implements GfoInvkAble {
-	private final Ordered_hash hash = Ordered_hash_.New_bry();
+public class Xoa_cfg_mgr implements Gfo_invk {
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_cfg_mgr(Xoa_app app) {this.app = app;}
-	public Xoa_app App() {return app;} private final Xoa_app app;
+	public Xoa_app App() {return app;} private final    Xoa_app app;
 	public Xoa_cfg_itm Get_itm_or_null(byte[] grp_key, byte[] itm_key) {
 		Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_by(grp_key); 
 		return grp == null ? null : grp.Get_by_or_null(itm_key);
@@ -95,7 +95,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 			grp.Db_load_end();
 		}
 	}
-	public void Db_save_txt() {Db_save(db_txt);} private final Xoa_cfg_db_txt db_txt = new Xoa_cfg_db_txt();
+	public void Db_save_txt() {Db_save(db_txt);} private final    Xoa_cfg_db_txt db_txt = new Xoa_cfg_db_txt();
 	public void Db_save(Xoa_cfg_db db) {
 		int len = hash.Count();
 		db.Cfg_save_bgn(this);
@@ -105,19 +105,19 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 		}
 		db.Cfg_save_end(this);
 	}
-	private boolean Eval_set(GfoInvkAble invk, String key, String val) {
+	private boolean Eval_set(Gfo_invk invk, String key, String val) {
 		String msg_str = key + "_(<:['\n" + val + "\n']:>);";
 		Object rslt = app.Gfs_mgr().Run_str_for(invk, msg_str);
-		return rslt != GfoInvkAble_.Rv_error;
+		return rslt != Gfo_invk_.Rv_error;
 	}
-	public Object Eval_get(GfoInvkAble invk, String key) {
+	public Object Eval_get(Gfo_invk invk, String key) {
 		String msg_str = key + ";";
 		return app.Gfs_mgr().Run_str_for(invk, msg_str);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get)) 		return Get_itm_or_make(m.ReadBry("itm_key"), m.ReadBry("grp_key"));
 		else if	(ctx.Match(k, Invk_reset_all)) 	Reset_all();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_get = "get", Invk_reset_all = "reset_all";
 }

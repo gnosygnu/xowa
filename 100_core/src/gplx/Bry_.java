@@ -808,7 +808,7 @@ public class Bry_ {
 		Bry_bfr bb = null;
 		if (aryLen > 0 && ary[0] == Dlm_quote) {
 			int pos = bgn + 1;	// +1 to skip quote
-			if (make) bb = Bry_bfr.new_(16);
+			if (make) bb = Bry_bfr_.New();
 			while (true) {
 				if (pos == aryLen) throw Err_.new_wo_type("endOfAry reached, but no quote found", "txt", String_.new_u8__by_len(ary, bgn, pos));
 				byte b = ary[pos];
@@ -915,7 +915,7 @@ public class Bry_ {
 	}
 	public static byte[] Replace(byte[] src, byte[] find, byte[] replace) {return Replace_between(src, find, null, replace);}
 	public static byte[] Replace_between(byte[] src, byte[] bgn, byte[] end, byte[] replace) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		boolean replace_all = end == null;
 		int src_len = src.length, bgn_len = bgn.length, end_len = replace_all ? 0 : end.length;
 		int pos = 0;

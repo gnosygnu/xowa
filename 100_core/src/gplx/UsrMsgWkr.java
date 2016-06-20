@@ -25,7 +25,7 @@ class UsrMsgWkrList {
 			wkr = v;
 		else {
 			if (list == null) {
-				list = List_adp_.new_();
+				list = List_adp_.New();
 				list.Add(wkr);
 				wkr = null;
 			}

@@ -31,7 +31,7 @@ public abstract class Xob_itm_dump_base extends Xob_itm_basic_base {
 		if (sort_mem_len == Int_.Neg1) sort_mem_len = bldr.Sort_mem_len();
 		if (dump_fil_len == Int_.Neg1) dump_fil_len = bldr.Dump_fil_len();
 		if (make_fil_len == Int_.Neg1) make_fil_len = bldr.Make_fil_len();
-		dump_bfr = Bry_bfr.new_(dump_fil_len);
+		dump_bfr = Bry_bfr_.New_w_size(dump_fil_len);
 		temp_dir = wiki.Fsys_mgr().Tmp_dir().GenSubDir(tmp_dir_key);
 		if (make_dir_val == null)	make_dir = temp_dir.GenSubDir("make");
 		else						make_dir = make_dir_val;

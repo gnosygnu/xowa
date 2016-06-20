@@ -36,7 +36,7 @@ public class Xol_func_regy {
 				if (Env_.Mode_testing())
 					continue;		// TEST: allows partial parsing of $magicWords
 				else
-					 list = lang_mgr.Lang_en().Kwd_mgr().Get_at(id);	// get from fallback language; TODO: allow other fallback langs besides "English"
+					 list = lang_mgr.Lang_en().Kwd_mgr().Get_at(id);	// get from fallback language; TODO_OLD: allow other fallback langs besides "English"
 			}
 			Reg_defn(kwd_mgr, id, Pf_func_.Get_prototype(id));
 		}

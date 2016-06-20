@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public Gfo_thread_cmd_unzip Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Process_adp bzip2_process, Process_adp zip_process, Process_adp gz_process, Io_url src, Io_url trg) {
 		this.src = src; this.trg = trg; this.kit = kit; this.usr_dlg = usr_dlg;
 		unzip_wkr = new Xob_unzip_wkr().Init(bzip2_process, zip_process, gz_process).Process_run_mode_(Process_adp.Run_mode_async);
 		return this;
 	}	private Io_url src, trg; private Gfui_kit kit; private Gfo_usr_dlg usr_dlg; private Xob_unzip_wkr unzip_wkr;
-	public GfoInvkAble Owner() {return owner;} public Gfo_thread_cmd_unzip Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
+	public Gfo_invk Owner() {return owner;} public Gfo_thread_cmd_unzip Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public void Cmd_ctor() {}
 	@gplx.Virtual public String Async_key() {return KEY;}
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
@@ -102,7 +102,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 		else if	(ctx.Match(k, Invk_rename_dir_))			rename_dir = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_delete_trg_if_exists_))	delete_trg_if_exists = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_term_cmd_for_src_))		term_cmd_for_src = Term_cmd_for_src_parse_(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_owner = "owner", Invk_src_ = "src_", Invk_trg_ = "trg_", Invk_rename_dir_ = "rename_dir_", Invk_delete_trg_if_exists_ = "delete_trg_if_exists_", Invk_term_cmd_for_src_ = "term_cmd_for_src_";
 	private static byte Term_cmd_for_src_parse_(String s) {

@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.core.primitives.*; import gplx.core.caches.*; import gplx.core.ios.*;
+import gplx.core.primitives.*; import gplx.core.caches.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.fsdb.data.*;
 public class Fsm_atr_fil {
-	private final Fsm_mnt_itm mnt_itm; private final int mnt_id;
+	private final    Fsm_mnt_itm mnt_itm; private final    int mnt_id;
 	private Fsd_dir_tbl tbl_dir; private Fsd_fil_tbl tbl_fil; private Fsd_thm_tbl tbl_thm;
-	private final Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry(); private Gfo_cache_mgr_bry fil_cache; private Bry_bfr fil_cache_key_bfr;
+	private final    Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry(); private Gfo_cache_mgr_bry fil_cache; private Bry_bfr fil_cache_key_bfr;
 	public Fsm_atr_fil(Fsm_mnt_itm mnt_itm, int id, String url_rel, Db_conn conn, boolean schema_is_1, boolean schema_thm_page) {
 		this.mnt_itm = mnt_itm; this.mnt_id = mnt_itm.Id();
 		this.id = id; this.url_rel = url_rel; this.conn = conn;
@@ -29,9 +29,9 @@ public class Fsm_atr_fil {
 		this.tbl_fil = new Fsd_fil_tbl(conn, schema_is_1, mnt_id);
 		this.tbl_thm = new Fsd_thm_tbl(conn, schema_is_1, mnt_id, schema_thm_page);
 	}
-	public int				Id() {return id;} private final int id;
-	public String			Url_rel() {return url_rel;} private final String url_rel;
-	public Db_conn			Conn() {return conn;} private final Db_conn conn;
+	public int				Id() {return id;} private final    int id;
+	public String			Url_rel() {return url_rel;} private final    String url_rel;
+	public Db_conn			Conn() {return conn;} private final    Db_conn conn;
 	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil) {
 		int dir_id = Get_dir_id_or_neg1(dir); 
 		return dir_id == Int_.Neg1 ? Fsd_fil_itm.Null : tbl_fil.Select_or_null(dir_id, fil);
@@ -61,7 +61,7 @@ public class Fsm_atr_fil {
 	}
 	public void Fil_cache_enabled_y_() {
 		fil_cache = new Gfo_cache_mgr_bry();
-		fil_cache_key_bfr = Bry_bfr.reset_(255);
+		fil_cache_key_bfr = Bry_bfr_.Reset(255);
 		tbl_fil.Select_all(fil_cache_key_bfr, fil_cache);
 	}
 	private int Get_dir_id_or_neg1(byte[] dir_bry) {
@@ -70,7 +70,7 @@ public class Fsm_atr_fil {
 			Fsd_dir_itm itm = tbl_dir.Select_or_null(dir_bry);		// try db
 			if (itm == Fsd_dir_itm.Null) return -1;					// not in db
 			int dir_id = itm.Dir_id();
-			dir_cache.Add(dir_bry, Int_obj_ref.new_(dir_id));		// add to mem
+			dir_cache.Add(dir_bry, Int_obj_ref.New(dir_id));		// add to mem
 			return dir_id;
 		}
 		else
@@ -81,7 +81,7 @@ public class Fsm_atr_fil {
 		if (rv == -1) {
 			rv = mnt_itm.Next_id();
 			tbl_dir.Insert(rv, dir_bry, Fsd_dir_itm.Owner_root);
-			dir_cache.Add(dir_bry, Int_obj_ref.new_(rv));
+			dir_cache.Add(dir_bry, Int_obj_ref.New(rv));
 		}
 		return rv;
 	}

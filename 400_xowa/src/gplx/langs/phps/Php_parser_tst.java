@@ -197,7 +197,7 @@ abstract class Php_tkn_chkr_base implements Tst_chkr {
 class Php_tkn_declaration_chkr extends Php_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Php_tkn_declaration.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_declaration;}
-	public static final Php_tkn_declaration_chkr Instance = new Php_tkn_declaration_chkr(); 
+	public static final    Php_tkn_declaration_chkr Instance = new Php_tkn_declaration_chkr(); 
 }
 class Php_tkn_txt_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_txt_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
@@ -295,7 +295,7 @@ abstract class Php_itm_chkr_base implements Tst_chkr {
 		return rv;
 	}
 	@gplx.Virtual public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {return 0;}
-	public static final Php_itm_chkr_base[] Ary_empty = new Php_itm_chkr_base[0];
+	public static final    Php_itm_chkr_base[] Ary_empty = new Php_itm_chkr_base[0];
 }
 class Php_itm_generic_chkr extends Php_itm_chkr_base {
 	public Php_itm_generic_chkr(byte itm_tid) {this.itm_tid = itm_tid;} private byte itm_tid;	
@@ -365,7 +365,7 @@ class Php_itm_kv_chkr extends Php_itm_chkr_base {
 	}
 }
 class Gfo_msg_log_chkr implements Tst_chkr {
-	List_adp itms = List_adp_.new_(); 
+	List_adp itms = List_adp_.New(); 
 	public Class<?> TypeOf() {return Gfo_msg_log.class;}
 	public void Clear() {itms.Clear();}
 	public void Add_itm(Gfo_msg_itm itm, int bgn, int end) {

@@ -25,7 +25,7 @@ public class Io_sort_misc_tst {
 	}
 	private void tst_Io_url_gen_dir(String dir_str, String fmt, int digits, int calls, String... expd) {
 		Io_url dir = Io_url_.mem_dir_(dir_str);
-		List_adp actl_list = List_adp_.new_();
+		List_adp actl_list = List_adp_.New();
 		Io_url_gen wkr = Io_url_gen_.dir_(dir, fmt, digits);
 		for (int i = 0; i < calls; i++)
 			actl_list.Add(wkr.Nxt_url().Raw());

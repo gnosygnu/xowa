@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-public class Xof_cfg_download implements GfoInvkAble {
+public class Xof_cfg_download implements Gfo_invk {
 	public Xof_cfg_download() {
 		this.enabled = true;					// CFG: set to false b/c some tests only do parsing [[File:A.png]] and repos are not set up
 		this.redownload = Redownload_none;		// CFG: set to none to be as conservative as possible
@@ -29,7 +29,7 @@ public class Xof_cfg_download implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_redownload))			return Redownload_to_str_(redownload);
 		else if	(ctx.Match(k, Invk_redownload_))		redownload = Redownload_parse_(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_redownload_toggle))	redownload = redownload == Redownload_none ? Redownload_missing : Redownload_none;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_enabled_ = "enabled_", Invk_redownload = "redownload", Invk_redownload_ = "redownload_", Invk_redownload_toggle = "redownload_toggle";
 	byte Redownload_parse_(String s) {

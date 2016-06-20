@@ -19,7 +19,7 @@ package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gp
 public class Xosrv_socket_wtr {
 	public String Host() {return host;} private String host = "localhost";
 	public int Port() {return port;} private int port;
-	private Socket_wtr wtr; private Bry_bfr msg_bfr = Bry_bfr.reset_(4 * Io_mgr.Len_kb);
+	private Socket_wtr wtr; private Bry_bfr msg_bfr = Bry_bfr_.Reset(4 * Io_mgr.Len_kb);
 	public void Init(String host, int port) {this.host = host; this.port = port; wtr = new Socket_wtr().Ctor(host, port);}
 	public void Write(Xosrv_msg msg) {
 		wtr.Open();

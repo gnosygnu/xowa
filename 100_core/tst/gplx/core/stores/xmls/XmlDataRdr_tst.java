@@ -91,7 +91,7 @@ class XmlDataRdr_fxt {
 	public DataRdr rdr_(String... ary) {return XmlDataRdr_.text_(String_.Concat(ary));}
 	public void tst_Subs_ByName(DataRdr rdr, String xpath, String key, String... expdAry) {
 		DataRdr subRdr = rdr.Subs_byName(xpath);
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		while (subRdr.MoveNextPeer())
 			list.Add(subRdr.Read(key));
 

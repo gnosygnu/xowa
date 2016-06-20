@@ -36,7 +36,7 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	}
 	public void Flush(Io_url fil) {
 		Io_mgr.Instance.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
-	}	private Bry_bfr bfr = Bry_bfr.new_(); int fil_idx = 0; int itm_count = 0;
+	}	private Bry_bfr bfr = Bry_bfr_.New(); int fil_idx = 0; int itm_count = 0;
 }
 class Io_url_gen_nest implements gplx.core.ios.Io_url_gen {
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;

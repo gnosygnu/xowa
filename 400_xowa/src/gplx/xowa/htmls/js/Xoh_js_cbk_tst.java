@@ -40,7 +40,7 @@ class Xoh_js_cbk_fxt {
 		tab.Page_(page);
 		Xoh_js_cbk exec = tab.Html_itm().Js_cbk();
 		GfoMsg msg = GfoMsg_.new_cast_(Xoh_js_cbk.Invk_get_titles_meta).Add("ttl", ttl);
-		String[][] actl = (String[][])GfoInvkAble_.InvkCmd_msg(exec, Xoh_js_cbk.Invk_get_titles_meta, msg);
+		String[][] actl = (String[][])Gfo_invk_.Invk_by_msg(exec, Xoh_js_cbk.Invk_get_titles_meta, msg);
 		Tfds.Eq_ary_str(expd, actl[0]);
 	}
 }

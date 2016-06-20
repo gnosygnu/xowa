@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Number_parser {
-	public int				Rv_as_int() {return (int)int_val;} private long int_val = 0;
-	public Decimal_adp		Rv_as_dec() {return dec_val == null ? Decimal_adp_.long_(int_val) : dec_val;} private Decimal_adp dec_val = null;
-	public boolean				Has_err()  {return has_err;} private boolean has_err;
-	public boolean				Has_frac() {return has_frac;} private boolean has_frac;
+	public int				Rv_as_int() {return (int)num_val;} private long num_val = 0;
+	public long				Rv_as_long() {return num_val;}
+	public Decimal_adp		Rv_as_dec() {return dec_val == null ? Decimal_adp_.long_(num_val) : dec_val;} private Decimal_adp dec_val = null;
+	public boolean				Is_int()	{return dec_val == null && (num_val >= Int_.Min_value && num_val <= Int_.Max_value);}
+	public boolean				Has_err()	{return has_err;} private boolean has_err;
+	public boolean				Has_frac()	{return has_frac;} private boolean has_frac;
 	public boolean				Hex_enabled() {return hex_enabled;} public Number_parser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
 	public Number_parser	Ignore_chars_(byte[] v) {this.ignore_chars = v; return this;} private byte[] ignore_chars;
 	public Number_parser	Ignore_space_at_end_y_() {this.ignore_space_at_end = true; return this;} private boolean ignore_space_at_end;
@@ -31,7 +33,7 @@ public class Number_parser {
 	public Number_parser Parse(byte[] ary, int bgn, int end) {
 		int loop_bgn = end - 1, loop_end = bgn - 1, exp_multiplier = 1, factor = 10;
 		long multiplier = 1, frc_multiplier = 1;
-		int_val = 0; dec_val = null; boolean comma_nil = true;
+		num_val = 0; dec_val = null; boolean comma_nil = true;
 		long frc_int = 0;
 		has_err = false; has_frac = false; boolean has_exp = false, has_neg = false, exp_neg = false, has_plus = false, has_num = false;
 		boolean input_is_hex = false;
@@ -64,14 +66,14 @@ public class Number_parser {
 				case Byte_ascii.Num_7:
 				case Byte_ascii.Num_8:
 				case Byte_ascii.Num_9:
-					int_val += (cur - Byte_ascii.Num_0) * multiplier;
+					num_val += (cur - Byte_ascii.Num_0) * multiplier;
 					multiplier *= factor;
 					has_num = true;
 					break;
 				case Byte_ascii.Dot:
 					if (has_frac) return Has_err_y_();
-					frc_int = int_val;
-					int_val = 0;
+					frc_int = num_val;
+					num_val = 0;
 					frc_multiplier = multiplier;
 					multiplier = 1;
 					has_frac = true;
@@ -99,15 +101,15 @@ public class Number_parser {
 				case Byte_ascii.Ltr_e:
 				case Byte_ascii.Ltr_E:
 					if (input_is_hex) {
-						int_val += 14 * multiplier;	// NOTE: 14=value of e/E
+						num_val += 14 * multiplier;	// NOTE: 14=value of e/E
 						multiplier *= factor;
 						has_num = true;						
 					}
 					else {
 						if (has_exp) return Has_err_y_();
 						exp_neg = has_neg;
-						exp_multiplier = (int)Math_.Pow(10, int_val);
-						int_val = 0;
+						exp_multiplier = (int)Math_.Pow(10, num_val);
+						num_val = 0;
 						multiplier = 1;
 						has_exp = true;
 						has_neg = false;
@@ -120,7 +122,7 @@ public class Number_parser {
 				case Byte_ascii.Ltr_D:
 				case Byte_ascii.Ltr_F:
 					if (input_is_hex) {
-						int_val += (cur - Byte_ascii.Ltr_A + 10) * multiplier;
+						num_val += (cur - Byte_ascii.Ltr_A + 10) * multiplier;
 						multiplier *= factor;
 						has_num = true;
 					}
@@ -133,7 +135,7 @@ public class Number_parser {
 				case Byte_ascii.Ltr_d:
 				case Byte_ascii.Ltr_f:
 					if (input_is_hex) {
-						int_val += (cur - Byte_ascii.Ltr_a + 10) * multiplier;
+						num_val += (cur - Byte_ascii.Ltr_a + 10) * multiplier;
 						multiplier *= factor;
 						has_num = true;
 					}
@@ -163,7 +165,7 @@ public class Number_parser {
 		}			
 		if (!has_num) return Has_err_y_();	// handles situations wherein just symbols; EX: "+", ".", "-.", " ,  " etc.
 		if (has_frac) {
-			long full_val = (((int_val * frc_multiplier) + frc_int));
+			long full_val = (((num_val * frc_multiplier) + frc_int));
 			if (has_neg) full_val *= -1;
 			if (has_exp) {
 				if (exp_neg)	frc_multiplier	*= exp_multiplier;	// divide, so apply to frc
@@ -172,8 +174,12 @@ public class Number_parser {
 			dec_val = Decimal_adp_.divide_(full_val, frc_multiplier);
 		}
 		else {
-			if (has_neg) int_val *= -1;
-			if (has_exp) int_val = exp_neg ? int_val / exp_multiplier : int_val * exp_multiplier;
+			if (has_neg) num_val *= -1;
+			if (has_exp) {
+				num_val = exp_neg 
+					? num_val / exp_multiplier 
+					: num_val * exp_multiplier;
+			}
 		}
 		return this;
 	}

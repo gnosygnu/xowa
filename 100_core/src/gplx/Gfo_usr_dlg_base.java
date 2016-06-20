@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.brys.fmtrs.*;
 public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
-	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);	// do not fail b/c msgs may contain excerpt of random text; EX:[[User:A|~A~]] DATE:2014-11-28
 	public Gfo_usr_dlg_base(Gfo_usr_dlg__log log_wkr, Gfo_usr_dlg__gui gui_wkr) {this.log_wkr = log_wkr; this.gui_wkr = gui_wkr;}
 	public Gfo_usr_dlg__log Log_wkr() {return log_wkr;} public void Log_wkr_(Gfo_usr_dlg__log v) {log_wkr = v;} private Gfo_usr_dlg__log log_wkr;

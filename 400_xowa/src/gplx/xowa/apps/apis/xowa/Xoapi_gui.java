@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*;
 import gplx.xowa.apps.apis.xowa.gui.*;
-public class Xoapi_gui implements GfoInvkAble {
+public class Xoapi_gui implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 		browser.Init_by_kit(app);
 		font.Init_by_kit(app);

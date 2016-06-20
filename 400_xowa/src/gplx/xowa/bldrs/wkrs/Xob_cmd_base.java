@@ -24,5 +24,5 @@ public abstract class Xob_cmd_base implements Xob_cmd {
 	@gplx.Virtual public void Cmd_run() {}
 	@gplx.Virtual public void Cmd_end() {}
 	@gplx.Virtual public void Cmd_term() {}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}
+	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
 }

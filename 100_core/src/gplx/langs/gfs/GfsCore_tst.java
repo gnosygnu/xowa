@@ -51,7 +51,7 @@ public class GfsCore_tst {
 	@Test  public void EmptyMsg() {
 		tst_Msg
 			(	msg_("")
-			,	GfoInvkAble_.Rv_unhandled);
+			,	Gfo_invk_.Rv_unhandled);
 	}
 //		@Test  public void Fail_argMissing() {			// String_.Len()
 //			tst_String__Len_Err(msg_("Len"), GfsCtx.Err_KeyNotFound("v", "<<EMPTY>>"));
@@ -93,14 +93,14 @@ public class GfsCore_tst {
 		Tfds.Eq(expd, actl);
 	}
 }
-class GfsCore_tst_nest implements GfoInvkAble, GfoInvkCmdMgrOwner {
-	public GfoInvkCmdMgr InvkMgr() {return invkMgr;} GfoInvkCmdMgr invkMgr = GfoInvkCmdMgr.new_();
+class GfsCore_tst_nest implements Gfo_invk, Gfo_invk_cmd_mgr_owner {
+	public Gfo_invk_cmd_mgr InvkMgr() {return invkMgr;} Gfo_invk_cmd_mgr invkMgr = Gfo_invk_cmd_mgr.new_();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Prop1)) {return prop1;}
 		else if	(ctx.Match(k, Prop2)) {return prop2;}
 		else if	(ctx.Match(k, prop1)) {return this;}
 		else	return invkMgr.Invk(ctx, ikey, k, m, this);
-	}	public static final String Prop1 = "Prop1", Prop2 = "Prop2";
+	}	public static final    String Prop1 = "Prop1", Prop2 = "Prop2";
 	String prop1, prop2;
         public static GfsCore_tst_nest new_(String prop1, String prop2) {
 		GfsCore_tst_nest rv = new GfsCore_tst_nest();
@@ -108,6 +108,6 @@ class GfsCore_tst_nest implements GfoInvkAble, GfoInvkCmdMgrOwner {
 		return rv;
 	}	GfsCore_tst_nest() {}
 }
-class GfsTest_cmd implements GfoInvkAble {
+class GfsTest_cmd implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return m.ReadStr("s");}
 }

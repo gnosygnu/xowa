@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
-public class Gfo_thread_pool implements GfoInvkAble {
+public class Gfo_thread_pool implements Gfo_invk {
 	private Object thread_lock = new Object();
-	private List_adp queue = List_adp_.new_();
+	private List_adp queue = List_adp_.New();
 	private GfoMsg run_msg = GfoMsg_.new_cast_(Invk_run_wkr);
 	private boolean running = false;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public Gfo_thread_pool Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
@@ -41,21 +41,21 @@ public class Gfo_thread_pool implements GfoInvkAble {
 			running = true;
 			wkr = (Gfo_thread_wkr)List_adp_.Pop_first(queue);
 		}			
-		Thread_adp_.Run_invk_msg(wkr.Name(), this, run_msg.Clear().Add("v", wkr));
+		Thread_adp_.Start_by_msg(wkr.Thread__name(), this, run_msg.Clear().Add("v", wkr));
 	}
 	private void Run_wkr(Gfo_thread_wkr wkr) {
-		try {wkr.Exec();}
+		try {wkr.Thread__exec();}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Name(), Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Thread__name(), Err_.Message_gplx_full(e));
 		}
 		finally {
-			if (wkr.Resume())
+			if (wkr.Thread__resume())
 				this.Resume();
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run_wkr))		Run_wkr((Gfo_thread_wkr)m.ReadObj("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_run_wkr = "run_wkr";

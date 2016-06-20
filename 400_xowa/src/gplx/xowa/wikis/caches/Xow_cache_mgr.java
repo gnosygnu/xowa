@@ -29,10 +29,10 @@ public class Xow_cache_mgr {
 	public Xow_page_cache Page_cache() {return page_cache;} private Xow_page_cache page_cache;
 	public Xow_defn_cache Defn_cache() {return defn_cache;} private Xow_defn_cache defn_cache;
 	public Xow_defn_cache Lst_cache() {return lst_cache;} private Xow_defn_cache lst_cache;
-	public Hash_adp Misc_cache() {return misc_cache;} private final    Hash_adp misc_cache = Hash_adp_.new_();
+	public Hash_adp Misc_cache() {return misc_cache;} private final    Hash_adp misc_cache = Hash_adp_.New();
 	public Keyval[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
-			List_adp list = List_adp_.new_();
+			List_adp list = List_adp_.New();
 			Xoa_sitelink_itm_mgr itm_mgr = wiki.App().Xwiki_mgr__sitelink_mgr().Itm_mgr();
 			int len = itm_mgr.Len();
 			for (int i = 0; i < len; ++i) {

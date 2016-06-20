@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-class Json_itm_str extends Json_itm_base {
+public class Json_itm_str extends Json_itm_base {
 	private final    boolean exact; private final    Json_doc doc;
 	private String data_str; private byte[] data_bry = null;
 	public Json_itm_str(Json_doc doc, int src_bgn, int src_end, boolean exact) {this.Ctor(src_bgn + 1, src_end - 1); this.doc = doc; this.exact = exact;}
@@ -26,7 +26,8 @@ class Json_itm_str extends Json_itm_base {
 		gplx.langs.htmls.Gfh_utl.Escape_html_to_bfr(bfr, doc.Src(), this.Src_bgn(), this.Src_end(), true, true, true, true, false);	// false to apos for backwards compatibility
 		bfr.Add_byte(Byte_ascii.Quote);
 	}
-	@Override public Object Data() {
+	@Override public Object Data() {return this.Data_as_str();}
+	public String Data_as_str() {
 		if (data_str == null) {
 			if (data_bry == null)
 				data_bry = Data_make_bry();

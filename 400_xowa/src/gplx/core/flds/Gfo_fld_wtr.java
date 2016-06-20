@@ -19,7 +19,7 @@ package gplx.core.flds; import gplx.*; import gplx.core.*;
 import gplx.core.ios.*; import gplx.core.encoders.*;
 public class Gfo_fld_wtr extends Gfo_fld_base {
 	public Bry_bfr Bfr() {return bfr;} public Gfo_fld_wtr Bfr_(Bry_bfr v) {bfr = v; return this;} Bry_bfr bfr;
-	public Gfo_fld_wtr() {this.bfr = Bry_bfr.new_();}
+	public Gfo_fld_wtr() {this.bfr = Bry_bfr_.New();}
 	public Gfo_fld_wtr Write_int_base85_len5_fld(int v)						{bfr.Add_base85(v, Base85_.Len_int);			bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_base85_lenN_fld(int v, int len)			{bfr.Add_base85(v, len);						bfr.Add_byte(fld_dlm); return this;}
 	public Gfo_fld_wtr Write_int_variable_fld(int v)						{bfr.Add_int_variable(v);						bfr.Add_byte(fld_dlm); return this;}

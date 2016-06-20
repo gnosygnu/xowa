@@ -20,11 +20,11 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.htmls.hrefs.*;
 class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
-	private List_adp itms = List_adp_.new_();
+	private List_adp itms = List_adp_.New();
 	private Sites_html_bldr html_bldr;
 	public Sites_xtn_skin_itm(Sites_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("RelatedSites");
+	public byte[] Key() {return KEY;} public static final    byte[] KEY = Bry_.new_a7("RelatedSites");
 	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);
@@ -32,7 +32,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 }
 public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Sites_xtn_mgr xtn_mgr;
-	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_ttl = Bry_bfr_.Reset(255);
 	private List_adp list; private int list_len;
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
@@ -61,7 +61,7 @@ public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}
-	private static final Bry_fmtr
+	private static final    Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id='p-relatedsites' class='portal'>"
 	, "  <h3>~{related_sites_hdr}</h3>"

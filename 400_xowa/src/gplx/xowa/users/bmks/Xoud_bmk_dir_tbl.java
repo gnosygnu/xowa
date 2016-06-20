@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_dir_tbl implements Rls_able {
-	private final String tbl_name = "bmk_dir"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_id, fld_owner, fld_sort, fld_name;
+	private final    String tbl_name = "bmk_dir"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_id, fld_owner, fld_sort, fld_name;
 	public Xoud_bmk_dir_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_id						= flds.Add_int_pkey_autonum("dir_id");
@@ -28,7 +28,7 @@ public class Xoud_bmk_dir_tbl implements Rls_able {
 		fld_name					= flds.Add_str("dir_name", 255);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public Db_conn Conn() {return conn;} private final    Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int owner, int sort, byte[] name) {

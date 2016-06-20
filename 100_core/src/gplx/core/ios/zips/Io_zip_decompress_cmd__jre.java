@@ -18,86 +18,80 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
 import java.io.*;
 import java.util.zip.*;
-import gplx.core.envs.*; import gplx.core.threads.*;
-class Io_zip_decompress_cmd__jre implements Io_zip_decompress_cmd {
-	public void Decompress__exec(Io_zip_decompress_task task, Io_url src_fil, Io_url trg_dir) {
-				// init
-		byte[] buffer = new byte[4096];
-		String resume_entry_name = task.Resume__entry();
-		long resume_bytes = task.Resume__bytes();
-		
-		// assert that trg_dir exists and can be written
-		Io_mgr.Instance.CreateDirIfAbsent(trg_dir);
-		
-		// open src_fil_stream
+import gplx.core.envs.*; import gplx.core.threads.*; import gplx.core.progs.*;
+class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
+	@Override public Io_zip_decompress_cmd Make_new() {return new Io_zip_decompress_cmd__jre();}
+	@Override protected byte Exec_hook(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url src_fil, Io_url trg_dir, List_adp trg_fils, String resume_name, long resume_file, long resume_item) {
+				// open src_zip_stream
 		FileInputStream src_fil_stream = null;
 		try 	{src_fil_stream = new FileInputStream(src_fil.Raw());}
 		catch 	(FileNotFoundException e) {throw Err_.new_("ios.zip", "file not found", "path", src_fil.Raw());}
+		ZipInputStream src_zip_stream = new ZipInputStream(src_fil_stream);	
+
+		// init variables for entry loop
+		boolean resumed = resume_name != null;
+		long file_cur_in_raw = resumed ? resume_file : 0;
+		long file_max_in_raw = prog_ui.Prog_data_end();
+		ZipEntry entry = null;
+		byte[] buffer = new byte[4096];		
+		Io_mgr.Instance.CreateDirIfAbsent(trg_dir); // NOTE: assert that trg_dir exists
 		
-		ZipInputStream src_zip_stream = new ZipInputStream(src_fil_stream);
 		try {
-			ZipEntry entry = null;
-			boolean loop_entries = true;
-			while (loop_entries) {
-				
-				// read next entry
-				entry = src_zip_stream.getNextEntry();				
-				if (	entry == null									// no more entries
-					||	resume_entry_name == null						// resume_entry_name will be null in most cases 
-					||	String_.Eq(resume_entry_name, entry.getName())	// if resume_entry_name is not null, keep reading until match
-					)
-					break;
-				if (resume_bytes > 0) {
-					src_zip_stream.skip(resume_bytes);
-					resume_bytes = 0;
+			while (true) {	// loop over entries
+				entry = src_zip_stream.getNextEntry();
+				if (entry == null) break;							// no more entries
+				if (resume_name != null) {							// resume_entry_name will be null in most cases
+					if (String_.Eq(resume_name, entry.getName()))	// if resume_entry_name is not null, keep reading until match
+						resume_name = null;
+					else
+						continue;
 				}
 				
 				// get entry name; also convert / to \ for wnt
 				String entry_name = entry.getName();
-				task.Prog__update_name(entry_name);
 				if (Op_sys.Cur().Tid_is_wnt()) entry_name = String_.Replace(entry_name, "/", "\\");
 				
 				// create file
 				Io_url trg_fil_url = Io_url_.new_any_(trg_dir.GenSubFil(entry_name).Raw());
-				Io_mgr.Instance.CreateDirIfAbsent(trg_fil_url.OwnerDir());	// make sure owner dir exists
-				if (trg_fil_url.Type_fil()) {
-					// write file
-					Io_mgr.Instance.SaveFilStr_args(trg_fil_url, "").Exec();	// need to write to create dirs; permissions;
-					FileOutputStream trg_fil_stream = new FileOutputStream(new File(trg_fil_url.Raw()));
-					boolean loop_bytes = true;
-					while (loop_bytes) {
-						int len = src_zip_stream.read(buffer); if (len < 1) break;
-						trg_fil_stream.write(buffer, 0, len);
-						switch (task.Prog__update(len)) {
-							case Io_zip_decompress_task.Status__canceled:
-								loop_entries = false;
-								loop_bytes = false;
-								break;
-							case Io_zip_decompress_task.Status__paused:
-								while (true) {
-									Thread_adp_.Sleep(1000);
-									if (!task.Paused()) break;
-									if (task.Canceled()) {
-										loop_entries = false;
-										loop_bytes = false;
-										break;
-									}
-								}
-								break;
-							case Io_zip_decompress_task.Status__ok:
-								break;
+				Io_url trg_tmp_url = trg_fil_url.GenNewNameAndExt(trg_fil_url.NameAndExt() + ".tmp");
+				if (trg_tmp_url.Type_fil()) {
+					// handle resume
+					long item_in_raw = 0;					
+					if (resume_item > 0) {
+						src_zip_stream.skip(resume_item);
+						Io_mgr.Instance.Truncate_fil(trg_tmp_url, resume_item);
+						item_in_raw = resume_item;
+						resume_item = 0;
+					}
+					FileOutputStream trg_fil_stream = new FileOutputStream(new File(trg_tmp_url.Raw()), resumed);
+					if (resumed) resumed = false;
+					boolean loop = true;
+					while (loop) {	// loop over bytes
+						int read_in_raw = src_zip_stream.read(buffer); if (read_in_raw < 1) break;
+						trg_fil_stream.write(buffer, 0, read_in_raw);
+						item_in_raw += read_in_raw;
+						file_cur_in_raw += read_in_raw;
+						Checkpoint__save(entry_name, file_cur_in_raw, item_in_raw);
+						if (prog_ui.Prog_notify_and_chk_if_suspended(file_cur_in_raw, file_max_in_raw)) {
+							loop = false;
+							break;
 						}
 					}
-					trg_fil_stream.close();	 
+					trg_fil_stream.close();
+					if (!loop) return Gfo_prog_ui_.Status__suspended;	// manually canceled
 				}
+				Io_mgr.Instance.MoveFil_args(trg_tmp_url, trg_fil_url, true).Exec();
+				trg_fils.Add(trg_fil_url);
 			}
+			Gfo_evt_mgr_.Pub_val(Io_mgr.Instance, Io_mgr.Evt__fil_created, trg_fils.To_ary(Io_url.class));
 		}
 		catch(IOException e) {throw Err_.new_exc(e, "ios.zip", "error duing unzip", "src", src_fil.Raw(), "trg", trg_dir.Raw());}
 		finally {
 			try {
-				src_zip_stream.closeEntry();
+				// src_zip_stream.closeEntry(); // TOMBSTONE: takes a long time to close; does not seem to be necessary
 				src_zip_stream.close();
 			} catch (Exception e) {}
 		}
+		return Gfo_prog_ui_.Status__done;
 			}
 }

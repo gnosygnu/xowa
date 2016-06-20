@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*; import gplx.xowa.apps.apis.xowa.bldrs.filters.*;
 import gplx.core.ios.*; import gplx.xowa.bldrs.filters.dansguardians.*;
-public class Xoapi_dansguardian implements GfoInvkAble {
+public class Xoapi_dansguardian implements Gfo_invk {
 	public void Ctor_by_app(Xoa_app app) {
 		root_dir = app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("cfg", "bldr", "filter");
 	}
@@ -58,7 +58,7 @@ public class Xoapi_dansguardian implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_target_tid_)) 						target_tid = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_log_enabled)) 						return Yn.To_str(log_enabled);
 		else if	(ctx.Match(k, Invk_log_enabled_)) 						log_enabled = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

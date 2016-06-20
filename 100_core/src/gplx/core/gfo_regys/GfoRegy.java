@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfo_regys; import gplx.*; import gplx.core.*;
 import gplx.langs.gfs.*; import gplx.core.type_xtns.*; import gplx.core.interfaces.*;
-public class GfoRegy implements GfoInvkAble {
+public class GfoRegy implements Gfo_invk {
 	public int Count() {return hash.Count();}
-	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.new_();
+	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.New();
 	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.Get_by(key);}
 	public Object FetchValOrFail(String key) {
 		GfoRegyItm rv = (GfoRegyItm)hash.Get_by(key); if (rv == null) throw Err_.new_wo_type("regy does not have key", "key", key);
@@ -82,14 +82,14 @@ public class GfoRegy implements GfoInvkAble {
 			if (ctx.Deny()) return this;
 			RegObjByType(key, val, type);
 		}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
+	}	public static final    String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
 	void RegItm(String key, Object val, int valType, Io_url url) {
 		hash.Add_if_dupe_use_nth(key, new GfoRegyItm(key, val, valType, url));
 	}
-	Hash_adp hash = Hash_adp_.new_();
-	public static final String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
-        public static final GfoRegy Instance = new GfoRegy(); GfoRegy() {}
+	Hash_adp hash = Hash_adp_.New();
+	public static final    String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
+        public static final    GfoRegy Instance = new GfoRegy(); GfoRegy() {}
         @gplx.Internal protected static GfoRegy new_() {return new GfoRegy();}
 }

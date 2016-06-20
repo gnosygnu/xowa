@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.parsers.lnkis.cfgs.*;
-public class Xowc_parser implements GfoInvkAble {
+public class Xowc_parser implements Gfo_invk {
 	public Xowc_parser(Xowe_wiki wiki) {
 		lnki_cfg = new Xoc_lnki_cfg(wiki);
 		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__home)
@@ -31,7 +31,7 @@ public class Xowc_parser implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_lnki))						return lnki_cfg;
 		else if	(ctx.Match(k, Invk_display_title_restrict))		return display_title_restrict;
 		else if	(ctx.Match(k, Invk_display_title_restrict_))	display_title_restrict = m.ReadYn("v");
-		else													return GfoInvkAble_.Rv_unhandled;
+		else													return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_xtns = "xtns", Invk_lnki = "lnki", Invk_display_title_restrict = "display_title_restrict", Invk_display_title_restrict_ = "display_title_restrict_";

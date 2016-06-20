@@ -55,21 +55,19 @@ class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {
 	// *_sdif_ddl_idx_fld : idx_uid,fld_order,fld_name,fld_asc
 	public void Save(Gfo_srl_ctx ctx, Gfo_srl_itm owner, Gfo_srl_mgr_wtr wtr) {
 		wtr.Itm_bgn("idx_fld");
-		wtr.Set_int		("fld_order"	, cur.Order);
 		wtr.Set_str		("fld_name"		, cur.Name);
 		wtr.Set_int		("fld_asc"		, cur.Sort_tid);
 		wtr.Itm_end();
 	}
 	public void Load(Gfo_srl_ctx ctx, Gfo_srl_itm owner, Gfo_srl_mgr_rdr rdr) {
 		rdr.Itm_bgn("idx_fld");
-		int order		= rdr.Get_int		("fld_order");
 		String name		= rdr.Get_str		("fld_name");
 		int sort_tid	= rdr.Get_int		("fld_sort");
-		cur = new Dbmeta_idx_fld(order, name, sort_tid);
+		cur = new Dbmeta_idx_fld(name, sort_tid);
 		rdr.Itm_end();
 	}
 
-        public static final Gfdb_diff_cmd__idx__fld Instance = new Gfdb_diff_cmd__idx__fld();
+        public static final    Gfdb_diff_cmd__idx__fld Instance = new Gfdb_diff_cmd__idx__fld();
 }
 //	class Gfdb_diff_cmd__tbl__fld : Gfo_srl_itm {
 //		public Gfdb_diff_cmd__tbl__fld(Dbmeta_fld_itm cur) {this.cur = cur;}
@@ -115,5 +113,5 @@ class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {
 ////			Dbmeta_fld_tid tid = tbl.Flds().Get_by(name).Type();
 //		}
 //
-//        public static final Gfdb_diff_cmd__tbl__fld Instance = new Gfdb_diff_cmd__tbl__fld();
+//        public static final    Gfdb_diff_cmd__tbl__fld Instance = new Gfdb_diff_cmd__tbl__fld();
 //	}

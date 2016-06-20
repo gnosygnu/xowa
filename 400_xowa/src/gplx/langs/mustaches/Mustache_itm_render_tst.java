@@ -128,7 +128,7 @@ class Mustache_itm_render_fxt {
 	}
 }
 class Mustache_doc_itm__mock implements Mustache_doc_itm {
-	private final    Hash_adp hash_prop = Hash_adp_.new_(), hash_bool = Hash_adp_.new_(), hash_subs = Hash_adp_.new_();
+	private final    Hash_adp hash_prop = Hash_adp_.New(), hash_bool = Hash_adp_.New(), hash_subs = Hash_adp_.New();
 	public Mustache_doc_itm__mock(int id) {this.id = id;}
 	public int id;
 	public Mustache_doc_itm__mock Add_prop(String key, String val)	{hash_prop.Add(key, Bry_.new_u8(val)); return this;}

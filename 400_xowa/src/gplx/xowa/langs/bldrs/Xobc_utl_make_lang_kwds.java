@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.parsers.*;
-public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform {
-	private final Xoa_lang_mgr lang_mgr;
+public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
+	private final    Xoa_lang_mgr lang_mgr;
 	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_keep_trailing_colon))	Parse_keep_trailing_colon(m.ReadBry("langs"), m.ReadBry("text"));
 		else if	(ctx.Match(k, Invk_prepend_hash))			Parse_prepend_hash(m.ReadBry("langs"), m.ReadBry("text"));
 		else if	(ctx.Match(k, Invk_add_words))				Parse_add_words(m.ReadBry("langs"), m.ReadBry("text"));
-		else												return GfoInvkAble_.Rv_unhandled;
+		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_keep_trailing_colon = "keep_trailing_colon", Invk_prepend_hash = "prepend_hash", Invk_add_words = "add_words";
 
@@ -103,7 +103,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		int src_len = src.length, pos = 0, fld_bgn = 0;
 		byte[] cur_key = Bry_.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
-		List_adp rv = List_adp_.new_(); int fld_idx = 0;
+		List_adp rv = List_adp_.New(); int fld_idx = 0;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
 			byte b = last ? Byte_ascii.Nl : src[pos];

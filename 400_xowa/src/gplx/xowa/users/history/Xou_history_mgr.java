@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.htmls.hrefs.*; 
-public class Xou_history_mgr implements GfoInvkAble {
-	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
-	private final Io_url history_fil;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.htmls.hrefs.*; 
+public class Xou_history_mgr implements Gfo_invk {
+	private final    Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
+	private final    Io_url history_fil;
 	private Ordered_hash itms = Ordered_hash_.New_bry();
 	private boolean load_chk = false;
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xou_history_mgr(Io_url history_fil) {this.history_fil = history_fil;}
 	public int Len() {return itms.Count();}
 	public void Clear() {itms.Clear();}
@@ -71,7 +71,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 	private byte[] To_full_db_w_qargs(Xoa_url url, Xoa_ttl ttl) {
 		byte[] page = Xoa_ttl.Replace_spaces(ttl.Full_txt_wo_qarg());
 		tmp_bfr.Add(page);
-		Gfo_qarg_mgr qarg_mgr = url.Qargs_mgr();
+		Gfo_qarg_mgr_old qarg_mgr = url.Qargs_mgr();
 		qarg_mgr.To_bry(tmp_bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, Bool_.N);
 		return tmp_bfr.To_bry_and_clear();
 	}
@@ -114,12 +114,12 @@ public class Xou_history_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_html_itm_))				html_mgr.Html_itm().Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_current_itms_max_))		current_itms_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_current_itms_reset_))	current_itms_reset = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_html_grp = "html_grp", Invk_html_grp_ = "html_grp_", Invk_html_itm = "html_itm", Invk_html_itm_ = "html_itm_", Invk_current_itms_max_ = "current_itms_max_", Invk_current_itms_reset_ = "current_itms_reset_";
-	public static final byte[] Ttl_name = Bry_.new_a7("XowaPageHistory");
-	public static final byte[] Ttl_full = Bry_.new_a7("Special:XowaPageHistory");
+	public static final    byte[] Ttl_name = Bry_.new_a7("XowaPageHistory");
+	public static final    byte[] Ttl_full = Bry_.new_a7("Special:XowaPageHistory");
 }	
 class Xou_history_itm_srl {
 	public static void Load(byte[] ary, Ordered_hash list) {
@@ -127,7 +127,7 @@ class Xou_history_itm_srl {
 		list.Clear();
 		int aryLen = ary.length;
 		if (aryLen == 0) return; // no file
-		Int_obj_ref pos = Int_obj_ref.zero_();
+		Int_obj_ref pos = Int_obj_ref.New_zero();
 		while (true) {
 			if (pos.Val() == aryLen) break;
 			Xou_history_itm itm = Xou_history_itm.csv_(ary, pos);
@@ -142,7 +142,7 @@ class Xou_history_itm_srl {
 	catch (Exception e) {throw Err_.new_parse_exc(e, Xou_history_itm.class, String_.new_u8(ary));}
 	}
 	public static byte[] Save(Ordered_hash list) {
-		Bry_bfr bb = Bry_bfr.new_();
+		Bry_bfr bb = Bry_bfr_.New();
 		int listLen = list.Count();
 		for (int i = 0; i < listLen; i++)
 			((Xou_history_itm)list.Get_at(i)).Save(bb);

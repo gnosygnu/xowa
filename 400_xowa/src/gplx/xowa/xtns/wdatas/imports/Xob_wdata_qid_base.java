@@ -20,7 +20,7 @@ import gplx.langs.jsons.*; import gplx.core.ios.*; import gplx.xowa.xtns.wdatas.
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.bldrs.wms.sites.*;
-public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xob_page_wkr, GfoInvkAble {
+public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	private Json_parser parser; private Xob_wbase_ns_parser ns_parser; private final    Xob_wbase_ns_parser_rslt ns_parser_rslt = new Xob_wbase_ns_parser_rslt();
 	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Page_wkr__key();
@@ -43,7 +43,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	public void Parse_jdoc(Json_doc jdoc) {
 		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
 		byte[] qid = wdoc_parser.Parse_qid(jdoc);
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 		Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
 		int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
 		for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks

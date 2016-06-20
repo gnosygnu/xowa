@@ -48,12 +48,12 @@ public class Pfunc_gender extends Pf_func_base {
 		int user_name_len = user_name.length;
 		switch (user_name_len) {
 			case 0:		return Xol_gender_.Tid_unknown;												// EX: {{gender:|m|f}}
-			case 1:		if (user_name[0] == Byte_ascii.Dot) return Xol_gender_.Tid_unknown; break;	// EX: {{gender:.|m|f}}; TODO: should define default gender for wiki
+			case 1:		if (user_name[0] == Byte_ascii.Dot) return Xol_gender_.Tid_unknown; break;	// EX: {{gender:.|m|f}}; TODO_OLD: should define default gender for wiki
 		}
 		Object o = gender_cache.Get_by_bry(user_name);
 		return o == null ? user.Gender() : ((Int_obj_val)o).Val();
 	}
-	private static final Hash_adp_bry gender_cache = Hash_adp_bry.cs()	// for tests
+	private static final    Hash_adp_bry gender_cache = Hash_adp_bry.cs()	// for tests
 	.Add_str_int("xowa_male"	, Xol_gender_.Tid_male)
 	.Add_str_int("xowa_female"	, Xol_gender_.Tid_female)
 	;

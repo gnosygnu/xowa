@@ -23,7 +23,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
-public interface Xow_wiki extends Xow_ttl_parser, GfoInvkAble {
+public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	boolean						Type_is_edit();
 	Xoa_app						App();
 	Xol_lang_itm				Lang();
@@ -34,7 +34,7 @@ public interface Xow_wiki extends Xow_ttl_parser, GfoInvkAble {
 	byte[]						Domain_abrv();			// enwiki
 	Xow_domain_itm				Domain_itm();
 	Xow_fsys_mgr				Fsys_mgr();
-	Xowd_db_mgr					Data__core_mgr();
+	Xow_db_mgr					Data__core_mgr();
 	Xof_fsdb_mode				File__fsdb_mode();
 	Fsdb_db_mgr					File__fsdb_core();
 	Xow_repo_mgr				File__repo_mgr();
@@ -50,6 +50,8 @@ public interface Xow_wiki extends Xow_ttl_parser, GfoInvkAble {
 	Xow_wiki_props				Props();
 	Xow_site_stats_mgr			Stats();
 	void						Init_by_wiki();
+	void						Init_by_wiki__force();	// HACK: force init for drd wiki
 	Xow_url_parser				Utl__url_parser();
 	Xoax_addon_mgr				Addon_mgr();
+	void						Init_needed_y_();
 }

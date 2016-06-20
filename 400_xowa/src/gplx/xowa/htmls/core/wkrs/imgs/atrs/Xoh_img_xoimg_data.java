@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; 
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Pipe);
+	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Pipe);
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
 	public int Val_end() {return val_end;} private int val_end;
 	public boolean Val_dat_exists() {return val_dat_exists;} private boolean val_dat_exists;
@@ -88,7 +88,7 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 		bfr.Add_double(lnki_time).Add_byte_pipe();
 		bfr.Add_int_variable(lnki_page);
 	}
-	public static final byte[]
+	public static final    byte[]
 	  Bry__data_xowa_image	= Bry_.new_a7("data-xoimg")
 	, Bry__data_xowa_title	= Bry_.new_a7("data-xowa-title")
 	;

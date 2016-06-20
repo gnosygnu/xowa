@@ -22,7 +22,7 @@ public class Db_sys_mgr {
 	private boolean assert_exists = true;
 	public Db_sys_mgr(Db_conn conn) {
 		this.conn = conn;
-		sys_tbl = new Db_sys_tbl(conn);
+		this.sys_tbl = new Db_sys_tbl(conn);
 	}
 	public int Autonum_next(String tbl, String fld) {return Autonum_next(String_.Concat(tbl, ".", fld));}
 	public int Autonum_next(String key) {

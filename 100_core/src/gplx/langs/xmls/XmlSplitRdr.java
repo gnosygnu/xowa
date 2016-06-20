@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
-import gplx.core.ios.*;
+import gplx.core.ios.streams.*;
 public class XmlSplitRdr {
 	public byte[] CurAry() {return curAry;} private byte[] curAry;
 	public long CurSum() {return curSum;} long curSum;

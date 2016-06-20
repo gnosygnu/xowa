@@ -59,7 +59,7 @@ class Indicator_html_bldr_fxt {
 		indicators.Add(xnde);
 	}
 	public void Test_bld(String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 		page.Html_data().Indicators().Bfr_arg__add(tmp_bfr);
 		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
 	}

@@ -19,7 +19,7 @@ package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 import gplx.core.net.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_href_wtr_tst {		
-	private final Xoh_href_wtr_fxt fxt = new Xoh_href_wtr_fxt();
+	private final    Xoh_href_wtr_fxt fxt = new Xoh_href_wtr_fxt();
 	@Test   public void Xwiki_enc()					{fxt.Test_build("wikt:abc?d"				, "/site/en.wiktionary.org/wiki/abc%3Fd");}	
 	@Test   public void Page_quote()				{fxt.Test_build("a\"b\"c"					, "/wiki/A%22b%22c");}
 	@Test   public void Page()						{fxt.Test_build("abc"						, "/wiki/Abc");}
@@ -35,16 +35,16 @@ public class Xoh_href_wtr_tst {
 	}
 }
 class Xoh_href_wtr_fxt {
-	private final Xowe_wiki wiki;
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();
+	private final    Xowe_wiki wiki;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
 	public Xoh_href_wtr_fxt() {
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Xwiki_mgr().Add_by_csv(Bry_.new_a7("1|wikt|en.wiktionary.org"));
 		app.Usere().Wiki().Xwiki_mgr().Add_by_csv(Bry_.new_a7("1|en.wiktionary.org|en.wiktionary.org"));
 	}
-	public Xoae_app App() {return app;} private final Xoae_app app;
+	public Xoae_app App() {return app;} private final    Xoae_app app;
 	public Xoh_href_wtr_fxt Prep_wiki_cs(String domain) {
 		Xow_wiki wiki = app.Wiki_mgr().Get_by_or_make_init_n(Bry_.new_u8(domain));
 		wiki.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Tid__all);

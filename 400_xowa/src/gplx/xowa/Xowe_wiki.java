@@ -19,20 +19,21 @@ package gplx.xowa; import gplx.*;
 import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.apps.cfgs.gui.*; import gplx.xowa.apps.urls.*; 
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.addons.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.users.*; import gplx.xowa.htmls.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.wikis.dbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.exts.*;		
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.css.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.ctgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.pfuncs.*; 
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
-public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
+import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	private boolean init_in_process = false;
 	public Xowe_wiki(Xoae_app app, Xol_lang_itm lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
-		this.ev_mgr = GfoEvMgr.new_(this);
+		this.ev_mgr = new Gfo_evt_mgr(this);
 		this.app = app; this.lang = lang; this.ns_mgr = ns_mgr;
 		this.domain_itm = domain_itm; this.domain_str = domain_itm.Domain_str(); this.domain_bry = domain_itm.Domain_bry(); this.domain_tid = domain_itm.Domain_type_id(); this.domain_abrv = Xow_abrv_wm_.To_abrv(domain_itm);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
@@ -40,10 +41,11 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.html_mgr = new Xow_html_mgr(this);
+		this.page_mgr = new Xowe_page_mgr(this);
 
 		tdb_fsys_mgr = new Xotdb_fsys_mgr(wiki_dir, ns_mgr);
 		redirect_mgr = new Xop_redirect_mgr(this);
-		data_mgr = new Xow_data_mgr(this);
+		data_mgr = new Xow_page_mgr(this);
 		file_mgr = new Xow_file_mgr(this);
 		parser_mgr = new Xow_parser_mgr(this);
 		cfg_parser = new Xowc_parser(this);
@@ -51,7 +53,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		props.ContentLanguage_(lang.Key_bry());
 		stats = new Xow_site_stats_mgr(this);
 		Pf_func_.Reg(domain_itm, lang.Func_regy(), lang);
-		special_mgr = new Xows_mgr(this, lang);
+		special_mgr = new Xow_special_mgr(this, lang);
 		sys_cfg = new Xow_sys_cfg(this);
 		hive_mgr = new Xob_hive_mgr(this);
 		util = new Xow_html_util(this);
@@ -75,7 +77,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		cache_mgr = new Xow_cache_mgr(this);
 		/*if (Bry_.Eq(domain_bry, Xow_domain_itm_.Bry__home))*/ xwiki_mgr.Add_by_atrs(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[home:Help/Contents]]
 	}
-	public GfoEvMgr					EvMgr() {return ev_mgr;} private final    GfoEvMgr ev_mgr;
+	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
 	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.parse(this, ttl);}
 	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.new_(this, app.Msg_log(), src, src_bgn, src_end);}
@@ -90,7 +92,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public byte[]					Domain_abrv() {return domain_abrv;} private final    byte[] domain_abrv;
 	public Xow_domain_itm			Domain_itm() {return domain_itm;} private final    Xow_domain_itm domain_itm;
 	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final    Xow_fsys_mgr fsys_mgr;
-	public Xowd_db_mgr				Data__core_mgr() {if (db_mgr == null) return null; return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
+	public Xow_db_mgr				Data__core_mgr() {if (db_mgr == null) return null; return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
 	public Fsdb_db_mgr				File__fsdb_core() {return file_mgr.Db_core();}
 	public Xow_repo_mgr				File__repo_mgr() {return file_mgr.Repo_mgr();}
@@ -108,15 +110,16 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final    Xow_parser_mgr parser_mgr;
 	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
+	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final    Xowe_page_mgr page_mgr;
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;
 	public Xow_gui_mgr				Gui_mgr() {return gui_mgr;} private final    Xow_gui_mgr gui_mgr = new Xow_gui_mgr();
 	public Xow_user					User() {return user;} private Xow_user user = new Xow_user();
-	public Xow_data_mgr				Data_mgr() {return data_mgr;} private Xow_data_mgr data_mgr;
+	public Xow_page_mgr				Data_mgr() {return data_mgr;} private Xow_page_mgr data_mgr;
 	public Xodb_mgr					Db_mgr() {return db_mgr;} private Xodb_mgr db_mgr;
 	public Xodb_mgr_sql				Db_mgr_as_sql() {return (Xodb_mgr_sql)db_mgr;}
-	public Xows_mgr					Special_mgr() {return special_mgr;} private Xows_mgr special_mgr;
+	public Xow_special_mgr			Special_mgr() {return special_mgr;} private Xow_special_mgr special_mgr;
 	public Xow_html_mgr				Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
 	public Xow_xtn_mgr				Xtn_mgr() {return xtn_mgr;} private Xow_xtn_mgr xtn_mgr;
 	public Xow_cache_mgr			Cache_mgr() {return cache_mgr;} private Xow_cache_mgr cache_mgr;
@@ -132,13 +135,13 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	public byte[]					Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private int wdata_wiki_tid;
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b128();
-		Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.new_(wdata_wiki_tid));
+		Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.New(wdata_wiki_tid));
 		wdata_wiki_abrv = bfr.To_bry_and_rls();
 	}
 	private Xow_html_util util;
 	public boolean Init_needed() {return init_needed;} public Xowe_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;
 	public Xop_redirect_mgr Redirect_mgr() {return redirect_mgr;} private Xop_redirect_mgr redirect_mgr;
-	public List_adp Rls_list() {if (rls_list == null) rls_list = List_adp_.new_(); return rls_list;} private List_adp rls_list;
+	public List_adp Rls_list() {if (rls_list == null) rls_list = List_adp_.New(); return rls_list;} private List_adp rls_list;
 	public Xow_file_mgr			File_mgr() {return file_mgr;} private Xow_file_mgr file_mgr;
 	public Xow_cfg_wiki_core	Cfg_wiki_core() {return cfg_wiki_core;} private Xow_cfg_wiki_core cfg_wiki_core;
 	public Xob_import_cfg		Import_cfg() {return import_cfg;} private Xob_import_cfg import_cfg;
@@ -156,10 +159,11 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		db_mgr.Load_mgr().Clear();
 	}
 	public Xodb_mgr_sql				Db_mgr_create_as_sql() {Xodb_mgr_sql rv = new Xodb_mgr_sql(this); db_mgr = rv; return rv;}
+	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
 	public void Init_by_wiki()		{Init_assert();}
 	public Xowe_wiki Init_assert()	{if (init_needed) Init_wiki(app.Usere()); return this;}
 	public void Init_db_mgr() {
-		Io_url core_db_url = gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(this);
+		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil(this);
 		if (core_db_url == null) {
 			tdb_fsys_mgr.Scan_dirs();
 		}
@@ -173,7 +177,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 	private void Init_wiki(Xoue_user user) {	// NOTE: (a) one-time initialization for all wikis; (b) not called by tests
 		if (init_in_process) {
 			app.Usr_dlg().Log_many("", "", "wiki.init: circular call canceled: ~{0}", domain_str);
-			return;	// NOTE: may be called multiple times due to "if (app.Stage() == Xoa_stage_.Tid_launch) init_needed = false;"; TODO: call this only once; DATE:2014-06-07
+			return;	// NOTE: may be called multiple times due to "if (app.Stage() == Xoa_stage_.Tid_launch) init_needed = false;"; TODO_OLD: call this only once; DATE:2014-06-07
 		}
 		init_in_process = true;
 		if (app.Stage() == Xoa_stage_.Tid_launch) init_needed = false;	// NOTE: only mark inited if app fully launched; otherwise statements in xowa.gfs can fire and prematurely set home to inited; DATE:2013-03-24
@@ -190,6 +194,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		if (lang.Init_by_load()) {
 			if (domain_tid == Xow_domain_tid_.Int__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
 				ns_mgr.Aliases_add(Xow_ns_.Tid__project, Xow_ns_.Alias__wikipedia);
+			special_mgr.Evt_lang_changed(lang);
 		}
 		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// NOTE: must be run after lang.Init_by_load b/c lang will reload ns_mgr; DATE:2015-04-17run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		cfg_parser.Xtns().Itm_pages().Init(ns_mgr);	// init ns_mgr for Page / Index ns just before rebuild; usually set by #cfg file
@@ -220,6 +225,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 			rls.Rls();
 		}
 	}
+	public void Init_needed_y_() {this.init_needed = true;}
 	private void Copy_cfg(Xowe_wiki wiki) {html_mgr.Copy_cfg(wiki.Html_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_files))				return file_mgr;
@@ -249,7 +255,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_xtns))				return xtn_mgr;
 		else if	(ctx.Match(k, Invk_hdump_enabled_))		this.html_mgr__hdump_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, gplx.xowa.apps.apis.xowa.wikis.langs.Xoap_lang_variants.Evt_current_changed))	lang.Vnt_mgr().Cur_itm_(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String

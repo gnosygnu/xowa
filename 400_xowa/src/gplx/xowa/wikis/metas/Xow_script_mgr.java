@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.xowa.wikis.domains.*;
-public class Xow_script_mgr implements GfoInvkAble {
+public class Xow_script_mgr implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_set))		Set(m.ReadBry("key"), m.ReadBry("wiki_type"), m.ReadBry("script"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_set = "set";
 	public void Exec(Xowe_wiki wiki) {

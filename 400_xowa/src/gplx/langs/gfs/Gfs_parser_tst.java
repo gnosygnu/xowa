@@ -140,7 +140,7 @@ class Gfs_parser_fxt {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Gfs_nde root = parser.Parse(src_bry);
 		Tfds.Eq_str_lines(To_str(null, expd), To_str(src_bry, root.Subs_to_ary()));
-	}	private Bry_bfr tmp_bfr = Bry_bfr.new_(), path_bfr = Bry_bfr.new_(); Gfs_parser parser = new Gfs_parser();
+	}	private Bry_bfr tmp_bfr = Bry_bfr_.New(), path_bfr = Bry_bfr_.New(); Gfs_parser parser = new Gfs_parser();
 	public void Test_parse_fail(String src_str, String expd_err) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		try {parser.Parse(src_bry);}
@@ -192,5 +192,5 @@ class Gfs_parser_fxt {
 			bfr.Add(val);
 		bfr.Add_byte_nl();		
 	}
-	private static final byte[] Atr_name = Bry_.new_a7("name=");
+	private static final    byte[] Atr_name = Bry_.new_a7("name=");
 }

@@ -103,8 +103,8 @@ class Dpl_itm {
 		sub_root.Clear();
 		val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
 		switch (key_id) {
-			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = List_adp_.new_(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
-			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = List_adp_.new_(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;
+			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = List_adp_.New(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
+			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = List_adp_.New(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;
 			case Dpl_itm_keys.Key_ns:		 			{Xow_ns ns = (Xow_ns)wiki.Ns_mgr().Names_get_or_null(val, 0, val.length); ns_filter = ns == null ? Xow_ns_.Tid__main : ns.Id(); break;}
 			case Dpl_itm_keys.Key_order:				sort_ascending = Dpl_sort.Parse_as_bool_byte(val); break;
 			case Dpl_itm_keys.Key_suppresserrors:		suppress_errors = Dpl_itm_keys.Parse_as_bool(val, false); break;

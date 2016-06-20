@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.primitives.*;
-import gplx.core.ios.*; import gplx.core.texts.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.texts.*;
 public class Xosrv_msg_rdr {
 	public Xosrv_msg_rdr(byte[] default_body_bry, IoStream rdr) {this.default_body_bry = default_body_bry; default_body_bry_len = default_body_bry.length; this.rdr = rdr;} private byte[] header_bry = new byte[24], default_body_bry; int default_body_bry_len;
 	public IoStream Rdr() {return rdr;} private IoStream rdr;
@@ -34,7 +34,7 @@ public class Xosrv_msg_rdr {
 		if (cksum != (body_len * 2) + 1) return Xosrv_msg.fail_("checksum failed; body_len:{0} chksum:{1}", body_len, cksum);
 		byte[] body_bry = body_len > default_body_bry_len ? new byte[body_len] : default_body_bry;
 		rdr.Read(body_bry, 0, body_len);
-		Int_obj_ref fld_bgn = Int_obj_ref.zero_(); Bool_obj_ref fail_ref = Bool_obj_ref.n_(); String_obj_ref fld_ref = String_obj_ref.null_();
+		Int_obj_ref fld_bgn = Int_obj_ref.New_zero(); Bool_obj_ref fail_ref = Bool_obj_ref.n_(); String_obj_ref fld_ref = String_obj_ref.null_();
 		byte[] cmd_name		= Read_fld(body_bry, body_len, fld_bgn, fail_ref, fld_ref.Val_("cmd_name"));	if (fail_ref.Val()) return Read_fld_fail(fld_ref, body_bry);
 		byte[] msg_id		= Read_fld(body_bry, body_len, fld_bgn, fail_ref, fld_ref.Val_("msg_id"));		if (fail_ref.Val()) return Read_fld_fail(fld_ref, body_bry);
 		byte[] sender		= Read_fld(body_bry, body_len, fld_bgn, fail_ref, fld_ref.Val_("sender"));		if (fail_ref.Val()) return Read_fld_fail(fld_ref, body_bry);

@@ -24,7 +24,7 @@ public class Regx_adp {
 	public boolean Pattern_is_invalid() {return pattern_is_invalid;} private boolean pattern_is_invalid = false;
 	public Regx_match[] Match_all(String text, int bgn) {
 		int idx = bgn;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int len = String_.Len(text);
 		while (idx <= len) {				// NOTE: must be <= not < else "a?" will return null instead of ""; PAGE:en.d:民; DATE:2015-01-30
 			Regx_match match = this.Match(text, idx);

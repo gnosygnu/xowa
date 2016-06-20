@@ -21,7 +21,7 @@ import gplx.langs.phps.*; import gplx.xowa.langs.bldrs.*;
 class Xob_subpage_parser {
 	public Xob_subpage_wiki[] Parse(byte[] src) {
 		src = Bry_.Add(Bry_.new_a7("$a = array("), src, Bry_.new_a7(");"));
-		List_adp wikis_list = List_adp_.new_();
+		List_adp wikis_list = List_adp_.New();
 		try {
 			Php_parser php_parser = new Php_parser();
 			Php_evaluator eval = new Php_evaluator(new Gfo_msg_log("test"));
@@ -85,5 +85,5 @@ class Xob_subpage_ns {
 }
 class Xob_subpage_wiki {
 	public byte[] Name() {return name;} public Xob_subpage_wiki Name_(byte[] v) {this.name = v; return this;} private byte[] name;
-	public List_adp Ns_list() {return ns_list;} private List_adp ns_list = List_adp_.new_();
+	public List_adp Ns_list() {return ns_list;} private List_adp ns_list = List_adp_.New();
 }

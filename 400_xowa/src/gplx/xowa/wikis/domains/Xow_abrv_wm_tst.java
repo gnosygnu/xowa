@@ -81,8 +81,8 @@ class Xow_abrv_wm_fxt {
 		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 	public void Test_to_abrv_by_lang(String lang_key, int wiki_tid, String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-		Xow_abrv_wm_.To_abrv(tmp_bfr, Bry_.new_a7(lang_key), gplx.core.primitives.Int_obj_ref.new_(wiki_tid));
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+		Xow_abrv_wm_.To_abrv(tmp_bfr, Bry_.new_a7(lang_key), gplx.core.primitives.Int_obj_ref.New(wiki_tid));
 		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "to_abrv");
 	}
 	public void Test_to_domain_bry(String wmf_key, String expd_domain) {

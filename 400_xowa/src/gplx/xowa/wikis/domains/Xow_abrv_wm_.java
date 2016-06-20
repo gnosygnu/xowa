@@ -95,7 +95,7 @@ public class Xow_abrv_wm_ {
 	}
 	public static byte[] To_abrv(Xow_domain_itm domain_itm) {
 		int tid = domain_itm.Domain_type_id();
-		byte[] suffix = (byte[])int_hash.Get_by(Int_obj_ref.new_(tid)); if (suffix == null) return null;	
+		byte[] suffix = (byte[])int_hash.Get_by(Int_obj_ref.New(tid)); if (suffix == null) return null;	
 		switch (tid) {
 			case Xow_domain_tid_.Int__commons:
 			case Xow_domain_tid_.Int__species:
@@ -116,10 +116,10 @@ public class Xow_abrv_wm_ {
 			default:								throw Err_.new_unhandled(tid);
 		}
 	}
-	private static final Btrie_bwd_mgr bry_trie = Init_trie();
+	private static final    Btrie_bwd_mgr bry_trie = Init_trie();
 	private static Hash_adp int_hash;
 	private static Btrie_bwd_mgr Init_trie() {
-		int_hash = Hash_adp_.new_();
+		int_hash = Hash_adp_.New();
 		Btrie_bwd_mgr rv = new Btrie_bwd_mgr(false);
 		Init_trie_itm(rv, int_hash, "wiki"					, Xow_domain_tid_.Int__wikipedia);
 		Init_trie_itm(rv, int_hash, "wiktionary"			, Xow_domain_tid_.Int__wiktionary);
@@ -140,7 +140,7 @@ public class Xow_abrv_wm_ {
 		return rv;
 	}
 	private static void Init_trie_itm(Btrie_bwd_mgr trie, Hash_adp hash, String str, int tid) {
-		Int_obj_ref itm = Int_obj_ref.new_(tid);
+		Int_obj_ref itm = Int_obj_ref.New(tid);
 		trie.Add(str, itm);
 		hash.Add(itm, Bry_.new_u8(str));
 	}
@@ -154,7 +154,7 @@ class Xow_abrv_wm_override {
 		Object o = lang_hash.Get_by_bry(domain_bry);
 		return o == null ? null : (byte[])o;
 	}
-	private static final Hash_adp_bry itm_hash = itm_hash__make();
+	private static final    Hash_adp_bry itm_hash = itm_hash__make();
 	private static Hash_adp_bry lang_hash;
 	private static Hash_adp_bry itm_hash__make() {
 		Hash_adp_bry rv = Hash_adp_bry.cs();

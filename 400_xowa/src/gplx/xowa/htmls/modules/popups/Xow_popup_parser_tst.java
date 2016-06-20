@@ -493,8 +493,15 @@ class Xop_popup_parser_fxt {
 	public Xop_popup_parser_fxt Expd_tmpl_loop_count(int expd) {Tfds.Eq(expd, parser.Data().Tmpl_loop_count()); return this;}
 	public Xop_popup_parser_fxt Test_ns_allowed(String raw, int... expd) {
 		Int_obj_ref[] ids = Xow_popup_mgr.Ns_allowed_parse(wiki, Bry_.new_u8(raw));
-		Tfds.Eq_ary(expd, Int_obj_ref.Ary_xto_int_ary(ids));
+		Tfds.Eq_ary(expd, To_int_ary(ids));
 		return this;
+	}
+	private static int[] To_int_ary(Int_obj_ref[] ary) {
+		int len = ary.length;
+		int[] rv = new int[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = ary[i].Val();
+		return rv;
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
 	public void Test_parse(String raw, String ttl, String expd)	{
@@ -506,7 +513,7 @@ class Xop_popup_parser_fxt {
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test_Assert_at_end(String raw, String expd) {
-		if (test_bfr == null) test_bfr = Bry_bfr.new_();
+		if (test_bfr == null) test_bfr = Bry_bfr_.New();
 		test_bfr.Clear().Add_str_u8(raw);
 		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.Nl);
 		Tfds.Eq(expd, test_bfr.To_str_and_clear());

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.cfgs.old; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.cfgs.*;
 import gplx.gfui.*; import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.cmds.*;
 import gplx.xowa.apps.fmtrs.*;
-public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
+public class Xocfg_bnd_mgr implements Gfo_invk, Gfo_sort_able {
 	private Xog_bnd_mgr_srl bnd_mgr_srl; private Xog_cmd_mgr cmd_mgr;
 	private Xoa_fmtr_sort_mgr sorter;
 	public Xocfg_bnd_mgr(Xoae_app app) {
@@ -65,7 +65,7 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 		else if	(ctx.Match(k, Invk_set_bulk))						Set_bulk(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_init))							return Init(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_show_shortcut_win))				Show_shortcut_win(m.ReadStr("uid"), m.ReadStr("name"), m.ReadStr("binding"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_set_bulk = "set_bulk", Invk_init = "init", Invk_show_shortcut_win = "show_shortcut_win";

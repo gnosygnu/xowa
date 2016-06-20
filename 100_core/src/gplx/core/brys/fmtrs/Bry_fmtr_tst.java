@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys.fmtrs; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bry_fmtr_tst {
-	private final Bry_fmtr_fxt fxt = new Bry_fmtr_fxt();
+	private final    Bry_fmtr_fxt fxt = new Bry_fmtr_fxt();
 	@Test  public void Text()			{fxt.Clear().Fmt("a").Test("a");}
 	@Test  public void Idx__1()			{fxt.Clear().Fmt("~{0}").Args("a").Test("a");}
 	@Test  public void Idx__3()			{fxt.Clear().Fmt("~{0}~{1}~{2}").Args("a", "b", "c").Test("abc");}
@@ -55,8 +55,8 @@ class Bry_fmtr_tst_mok implements Bry_fmtr_eval_mgr {
 	}
 }
 class Bry_fmtr_fxt {
-	private final Bry_fmtr fmtr = Bry_fmtr.new_();
-	private final Bry_bfr bfr = Bry_bfr.new_();
+	private final    Bry_fmtr fmtr = Bry_fmtr.new_();
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private Object[] args;
 	public Bry_fmtr_fxt Clear() {fmtr.Fmt_(String_.Empty).Keys_(String_.Empty); args = Object_.Ary_empty; return this;}
 	public Bry_fmtr_fxt Fmt	(String fmt) {fmtr.Fmt_(fmt); return this;}

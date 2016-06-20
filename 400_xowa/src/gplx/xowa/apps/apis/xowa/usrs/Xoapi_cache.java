@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.core.ios.*; import gplx.xowa.files.caches.*;
-public class Xoapi_cache implements GfoInvkAble {
+public class Xoapi_cache implements Gfo_invk {
 	private Xou_cache_mgr cache_mgr;
 	public void Init_by_app(Xoa_app app) {this.cache_mgr = app.User().User_db_mgr().Cache_mgr();}
 	private String Info() {
 		cache_mgr.Page_bgn();
-		Bry_bfr bfr = Bry_bfr.new_(255);
+		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
 		Keyval[] ary = cache_mgr.Info();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
@@ -39,7 +39,7 @@ public class Xoapi_cache implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_info)) 								return Info();
 		else if	(ctx.Match(k, Invk_reduce_to_min)) 						cache_mgr.Reduce(cache_mgr.Fsys_size_min());
 		else if	(ctx.Match(k, Invk_reduce_to_zero)) 					cache_mgr.Reduce(0);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 

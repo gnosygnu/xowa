@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_amp_mgr {
-	private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final Btrie_slim_mgr amp_trie = Xop_amp_trie.Instance;
+	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final    Btrie_slim_mgr amp_trie = Xop_amp_trie.Instance;
 	public int Rslt_pos() {return rslt_pos;} private int rslt_pos;
 	public int Rslt_val() {return rslt_val;} private int rslt_val;
 	public Xop_tkn_itm Parse_as_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int cur_pos) {
@@ -125,5 +125,5 @@ public class Xop_amp_mgr {
 			return dirty ? tmp_bfr.To_bry_and_clear() : src;
 		}
 	}
-        public static final Xop_amp_mgr Instance = new Xop_amp_mgr(); Xop_amp_mgr() {}
+        public static final    Xop_amp_mgr Instance = new Xop_amp_mgr(); Xop_amp_mgr() {}
 }

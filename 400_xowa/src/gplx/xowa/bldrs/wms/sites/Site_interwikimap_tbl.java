@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_interwikimap_tbl implements Db_tbl {
-	private static final String tbl_name = "site_interwikimap"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_site_abrv, fld_prefix, fld_local, fld_extralanglink, fld_linktext, fld_sitename, fld_language, fld_localinterwiki, fld_url, fld_protorel;
 	private final    Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
@@ -36,6 +36,7 @@ class Site_interwikimap_tbl implements Db_tbl {
 		this.fld_protorel				= flds.Add_bool("protorel");
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;} private static final String tbl_name = "site_interwikimap";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv, fld_prefix)));}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
 	public void Rls() {

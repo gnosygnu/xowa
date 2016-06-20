@@ -59,10 +59,10 @@ public class UsrMsg {
 		rv.hdr = hdr;
 		return rv;
 	}
-        public static UsrMsg invk_(GfoInvkAble invk, String cmd) {
+        public static UsrMsg invk_(Gfo_invk invk, String cmd) {
 		UsrMsg rv = new UsrMsg();
 		rv.invk = invk;
 		rv.cmd = cmd;
 		return rv;
-	}	GfoInvkAble invk; String cmd;
+	}	Gfo_invk invk; String cmd;
 }

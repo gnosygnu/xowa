@@ -21,7 +21,7 @@ class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
 		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
-		List_adp deleted = List_adp_.new_();
+		List_adp deleted = List_adp_.New();
 		int rv = 0;
 		if (cmd.Where() == Db_qry_delete.Where__null) {
 			rv = tbl.Rows().Count();

@@ -19,7 +19,7 @@ package gplx.dbs.diffs.cmds; import gplx.*; import gplx.dbs.*; import gplx.dbs.d
 import org.junit.*;
 import gplx.dbs.*; import gplx.dbs.engines.mems.*;
 public class Gfdb_diff_cmd_sql_bldr_tst {
-	private final Gfdb_diff_cmd_sql_bldr_fxt fxt = new Gfdb_diff_cmd_sql_bldr_fxt();
+	private final    Gfdb_diff_cmd_sql_bldr_fxt fxt = new Gfdb_diff_cmd_sql_bldr_fxt();
 	@Test   public void Insert() {
 		fxt.Test__insert("tbl1", String_.Ary("key1", "key2"), String_.Ary("fld1", "fld2"), 0, 99, String_.Concat_lines_nl_skip_last
 		( "INSERT  INTO db_curr.tbl1"
@@ -55,7 +55,7 @@ public class Gfdb_diff_cmd_sql_bldr_tst {
 }
 class Gfdb_diff_cmd_sql_bldr_fxt {
 	private Gfdb_diff_cmd_sql_bldr bldr = new Gfdb_diff_cmd_sql_bldr();
-	private final Bry_bfr bfr = Bry_bfr.new_();
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	public void Test__insert(String tbl_name, String[] keys, String[] flds, int rng_bgn, int rng_end, String expd) {
 		bldr.Bld_insert(bfr, tbl_name, keys, flds, 0, 99);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());

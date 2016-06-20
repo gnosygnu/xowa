@@ -107,7 +107,7 @@ public class Xow_hdump_mgr__load_tst {
 //		}
 }
 class Xodb_hdump_mgr__base_fxt {
-	protected Bry_bfr bfr = Bry_bfr.reset_(255);
+	protected Bry_bfr bfr = Bry_bfr_.Reset(255);
 	protected Xowe_wiki wiki; protected Xoae_page page;
 	private Xow_hdump_mgr hdump_mgr;
 	public Xop_fxt Fxt() {return fxt;} protected Xop_fxt fxt;
@@ -117,7 +117,7 @@ class Xodb_hdump_mgr__base_fxt {
 			wiki = fxt.Wiki();
 			page = wiki.Parser_mgr().Ctx().Page();
 			hdump_mgr = wiki.Html__hdump_mgr();
-			hdump_mgr.Init_by_db(gplx.core.ios.Io_stream_.Tid_raw, false, false);
+			hdump_mgr.Init_by_db(gplx.core.ios.streams.Io_stream_.Tid_raw, false, false);
 		}
 		fxt.Reset();
 		page.Revision_data().Id_(0);
@@ -135,7 +135,7 @@ class Xodb_hdump_mgr__base_fxt {
 	}
 }
 class Xohd_hdump_wtr_fxt extends Xodb_hdump_mgr__base_fxt {
-	private List_adp expd_itms_xfers = List_adp_.new_();
+	private List_adp expd_itms_xfers = List_adp_.New();
 	@Override public void Clear_end() {expd_itms_xfers.Clear();}
 	public void Expd_itms_xfers(Xohd_img_itm__base... itms) {expd_itms_xfers.Add_many((Object[])itms);}
 	public void Test_write_all (String raw, String expd_html) {Test_write(Bool_.N, raw, expd_html);}

@@ -37,7 +37,7 @@ public class Scrib_proc_args {
 					int key_int = Int_.cast(kv.Key_as_obj());
 					if (key_int != i + 1) {					// key_int should match i; if not, then gaps exist; EX:[2:v2] should be 2nd element, not 1st
 						if (list == null) {
-							list = List_adp_.new_();
+							list = List_adp_.New();
 							rv = null;
 						}
 						for (int j = 0; j < key_int - 1; ++j)	// add everything up to key_int as null; EX: [2:v2] -> [1:null]

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*;
-public abstract class Xog_mnu_base implements GfoInvkAble {
-	private List_adp list = List_adp_.new_();
+import gplx.gfui.*; import gplx.gfui.imgs.*;
+import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*;
+public abstract class Xog_mnu_base implements Gfo_invk {
+	private List_adp list = List_adp_.New();
 	public Xog_mnu_base() {evt_mgr = new Xog_mnu_evt_mgr(this);}
 	public Xog_mnu_evt_mgr Evt_mgr() {return evt_mgr;} private Xog_mnu_evt_mgr evt_mgr;
 	public void Evt_mgr_(Xog_mnu_evt_mgr v) {this.evt_mgr = v;}
@@ -86,7 +87,7 @@ public abstract class Xog_mnu_base implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_add_chk))			return Add_chk(m.ReadStr("key"), m.ReadStr("text"), m.ReadStr("shortcut"), m.ReadStr("img"), m.ReadStr("cmd"));
 		else if	(ctx.Match(k, Invk_add_rdo_default))	return Add_rdo_default(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_add_rdo))			return Add_rdo(m.ReadStr("key"), m.ReadStr("text"), m.ReadStr("shortcut"), m.ReadStr("img"), m.ReadStr("cmd"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String 

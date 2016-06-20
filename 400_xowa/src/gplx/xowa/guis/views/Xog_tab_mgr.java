@@ -16,15 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.xowa.apps.cfgs.old.*; import gplx.xowa.apps.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.tabs.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.apps.cfgs.old.*; import gplx.xowa.apps.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
 import gplx.xowa.apps.urls.*;
-public class Xog_tab_mgr implements GfoEvObj {
+public class Xog_tab_mgr implements Gfo_evt_itm {
 	private Ordered_hash tab_regy = Ordered_hash_.New(); private int tab_uid = 0;
 	public Xog_tab_mgr(Xog_win_itm win) {
 		this.win = win;
-		ev_mgr = GfoEvMgr.new_(this);
+		ev_mgr = new Gfo_evt_mgr(this);
 	}
-	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xog_win_itm Win() {return win;} private Xog_win_itm win;
 	public Gfui_tab_mgr Tab_mgr() {return tab_mgr;} private Gfui_tab_mgr tab_mgr;
 	public byte Html_load_tid() {return html_load_tid;} private byte html_load_tid;
@@ -34,21 +35,21 @@ public class Xog_tab_mgr implements GfoEvObj {
 		active_tab = Xog_tab_itm_.Null;
 		tab_mgr.Btns_selected_color_(ColorAdp_.White);
 		tab_mgr.Btns_unselected_color_(ColorAdp_.LightGray);
-		GfoEvMgr_.SubSame_many(tab_mgr, this, Gfui_tab_mgr.Evt_tab_selected, Gfui_tab_mgr.Evt_tab_closed, Gfui_tab_mgr.Evt_tab_switched);
+		Gfo_evt_mgr_.Sub_same_many(tab_mgr, this, Gfui_tab_mgr.Evt_tab_selected, Gfui_tab_mgr.Evt_tab_closed, Gfui_tab_mgr.Evt_tab_switched);
 		Xocfg_tab_btn_mgr btn_mgr = win.App().Cfg_regy().App().Gui_mgr().Tab_mgr().Btn_mgr();
 		Btns_place_on_top_(btn_mgr.Place_on_top());
 		Btns_curved_(btn_mgr.Curved());
 		Btns_close_visible_(btn_mgr.Close_visible());
 		Btns_unselected_close_visible_(btn_mgr.Unselected_close_visible());
 		Btns_height_(btn_mgr.Height());
-		GfoEvMgr_.SubSame_many(btn_mgr, this
+		Gfo_evt_mgr_.Sub_same_many(btn_mgr, this
 		, Xocfg_tab_btn_mgr.Evt_place_on_top_changed, Xocfg_tab_btn_mgr.Evt_height_changed, Xocfg_tab_btn_mgr.Evt_curved_changed
 		, Xocfg_tab_btn_mgr.Evt_close_visible_changed, Xocfg_tab_btn_mgr.Evt_unselected_close_visible_changed
 		, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed
 		, Xocfg_tab_btn_mgr.Evt_hide_if_one_changed
 		);
 		html_load_tid = win.App().Api_root().Gui().Browser().Html().Load_tid();
-		GfoEvMgr_.SubSame_many(win.App().Api_root().Gui().Browser().Html(), this
+		Gfo_evt_mgr_.Sub_same_many(win.App().Api_root().Gui().Browser().Html(), this
 		, Xoapi_html_box.Evt_load_tid_changed
 		);
 	}
@@ -77,7 +78,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Xows_special_meta_.Itm__default_tab.Ttl_bry());
+		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Xow_special_meta_.Itm__default_tab.Ttl_bry());
 		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar_or_null(ttl.Full_db_as_str()); if (url == null) throw Err_.new_("url", "invalid url", "url", url);
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.New(cur_wiki, ttl));
 		rv.Page_update_ui();
@@ -158,7 +159,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		Tabs_new_dflt(true);
 		win.Page__navigate_by_url_bar(url);
 	}
-	private List_adp closed_undo_list = List_adp_.new_();
+	private List_adp closed_undo_list = List_adp_.New();
 	private void Tabs_closed(String key) {
 		Xog_tab_itm itm = Tabs_get_by_key_or_warn(key); if (itm == null) return;
 		itm.Html_box().Html_dispose();
@@ -208,7 +209,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		src_itm.Switch_mem(trg_itm);
 		active_tab = trg_itm;	// NOTE: src_itm initiated switch, but trg_itm is now active b/c everything in src_itm has now been reparented to trg_itm; DATE:2014-05-12
 	}
-	public void Tabs_new_link(boolean focus, String link) {
+	public void Tabs_new_link(boolean focus, String link) {	// handle empty link
 		if (String_.Len_eq_0(link)) {
 			if (this.Active_tab_is_null()) return;
 			link = active_tab.Html_itm().Html_selected_get_active_or_selection();
@@ -256,7 +257,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed))				Btns_text_recalc();
 		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed))				Btns_text_recalc();
 		else if	(ctx.Match(k, Xoapi_html_box.Evt_load_tid_changed))							html_load_tid = m.ReadByte("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String

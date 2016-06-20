@@ -27,7 +27,7 @@ public class Xol_case_itm_ {
 			return new Xol_case_itm_bry(tid, src, trg);
 	}
 	public static Xol_case_itm[] parse_xo_(byte[] src) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		int src_len = src.length, src_pos = 0, fld_bgn = 0, fld_idx = 0;
 		byte cur_cmd = Byte_.Zero;
 		byte[] cur_lhs = null;
@@ -144,6 +144,6 @@ public class Xol_case_itm_ {
 			++pos;
 		}
 		return pos;
-	}	private static final byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
+	}	private static final    byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
 	static final String GRP_KEY = "xowa.langs.case_parser";
 }

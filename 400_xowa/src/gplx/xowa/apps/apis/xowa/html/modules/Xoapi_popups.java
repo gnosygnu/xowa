@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.html.*;
 import gplx.xowa.htmls.modules.popups.*;
-public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
+public class Xoapi_popups implements Gfo_invk, Gfo_evt_mgr_owner {
 	private Xoae_app app;
 	public Xoapi_popups() {
-		evMgr = GfoEvMgr.new_(this);
+		evt_mgr = new Gfo_evt_mgr(this);
 	}
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public void Init_by_app(Xoae_app app) {this.app = app;}
 	public boolean  Enabled() {return enabled;}			public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public int		Show_init_word_count()				{return show_init_word_count;}			private int show_init_word_count				= Dflt_show_init_word_count;
@@ -83,51 +83,51 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_win_bind_focus_blur))		 	return Yn.To_str(win_bind_focus_blur);
 		else if	(ctx.Match(k, Invk_win_bind_focus_blur_))	 		win_bind_focus_blur = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_xnde_ignore_ids))	 			return String_.new_u8(xnde_ignore_ids);
-		else if	(ctx.Match(k, Invk_xnde_ignore_ids_))	 			{xnde_ignore_ids = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_xnde_ignore_ids_changed, xnde_ignore_ids);}
+		else if	(ctx.Match(k, Invk_xnde_ignore_ids_))	 			{xnde_ignore_ids = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_xnde_ignore_ids_changed, xnde_ignore_ids);}
 		else if	(ctx.Match(k, Invk_scan_len))	 					return scan_len;
 		else if	(ctx.Match(k, Invk_scan_len_))	 					{scan_len = Set_int_gt_0(m, scan_len, Evt_scan_len_changed);}
 		else if	(ctx.Match(k, Invk_scan_max))	 					return scan_max;
 		else if	(ctx.Match(k, Invk_scan_max_))	 					{scan_max = Set_int_gt_0(m, scan_max, Evt_scan_max_changed);}
 		else if	(ctx.Match(k, Invk_read_til_stop_fwd))	 			return read_til_stop_fwd;
-		else if	(ctx.Match(k, Invk_read_til_stop_fwd_))	 			{read_til_stop_fwd = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_read_til_stop_fwd_changed, read_til_stop_fwd);}
+		else if	(ctx.Match(k, Invk_read_til_stop_fwd_))	 			{read_til_stop_fwd = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt_read_til_stop_fwd_changed, read_til_stop_fwd);}
 		else if	(ctx.Match(k, Invk_read_til_stop_bwd))	 			return read_til_stop_bwd;
-		else if	(ctx.Match(k, Invk_read_til_stop_bwd_))	 			{read_til_stop_bwd = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_read_til_stop_bwd_changed, read_til_stop_bwd);}
+		else if	(ctx.Match(k, Invk_read_til_stop_bwd_))	 			{read_til_stop_bwd = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt_read_til_stop_bwd_changed, read_til_stop_bwd);}
 		else if	(ctx.Match(k, Invk_stop_if_hdr_after))	 			return stop_if_hdr_after;
-		else if	(ctx.Match(k, Invk_stop_if_hdr_after_))	 			{stop_if_hdr_after = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_stop_if_hdr_after_changed, stop_if_hdr_after);}
+		else if	(ctx.Match(k, Invk_stop_if_hdr_after_))	 			{stop_if_hdr_after = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt_stop_if_hdr_after_changed, stop_if_hdr_after);}
 		else if	(ctx.Match(k, Invk_ns_allowed))	 					return String_.new_u8(ns_allowed);
-		else if	(ctx.Match(k, Invk_ns_allowed_))	 				{ns_allowed = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_ns_allowed_changed, ns_allowed);}
+		else if	(ctx.Match(k, Invk_ns_allowed_))	 				{ns_allowed = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_ns_allowed_changed, ns_allowed);}
 		else if	(ctx.Match(k, Invk_tmpl_tkn_max))	 				return tmpl_tkn_max;
-		else if	(ctx.Match(k, Invk_tmpl_tkn_max_))	 				{tmpl_tkn_max = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_tmpl_tkn_max_changed, tmpl_tkn_max);}
+		else if	(ctx.Match(k, Invk_tmpl_tkn_max_))	 				{tmpl_tkn_max = m.ReadInt("v"); Gfo_evt_mgr_.Pub_val(this, Evt_tmpl_tkn_max_changed, tmpl_tkn_max);}
 		else if	(ctx.Match(k, Invk_tmpl_keeplist))	 				return String_.new_u8(tmpl_keeplist);
-		else if	(ctx.Match(k, Invk_tmpl_keeplist_))	 				{tmpl_keeplist = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_tmpl_keeplist_changed, tmpl_keeplist);}
+		else if	(ctx.Match(k, Invk_tmpl_keeplist_))	 				{tmpl_keeplist = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_tmpl_keeplist_changed, tmpl_keeplist);}
 		else if	(ctx.Match(k, Invk_html_fmtr_popup))	 			return String_.new_u8(html_fmtr_popup);
-		else if	(ctx.Match(k, Invk_html_fmtr_popup_))	 			{html_fmtr_popup = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_popup_changed, html_fmtr_popup);}
+		else if	(ctx.Match(k, Invk_html_fmtr_popup_))	 			{html_fmtr_popup = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_html_fmtr_popup_changed, html_fmtr_popup);}
 		else if	(ctx.Match(k, Invk_html_fmtr_popup_dflt))	 		return String_.new_u8(html_fmtr_popup_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_popup_dflt_))	 		{html_fmtr_popup_dflt = m.ReadBry("v");}
 		else if	(ctx.Match(k, Invk_html_fmtr_viewed))				return String_.new_u8(html_fmtr_viewed);
-		else if	(ctx.Match(k, Invk_html_fmtr_viewed_))			 	{html_fmtr_viewed = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_viewed_changed, html_fmtr_viewed);}
+		else if	(ctx.Match(k, Invk_html_fmtr_viewed_))			 	{html_fmtr_viewed = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_html_fmtr_viewed_changed, html_fmtr_viewed);}
 		else if	(ctx.Match(k, Invk_html_fmtr_viewed_dflt))			return String_.new_u8(html_fmtr_viewed_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_viewed_dflt_))			{html_fmtr_viewed_dflt = m.ReadBry("v");}
 		else if	(ctx.Match(k, Invk_html_fmtr_wiki))	 				return String_.new_u8(html_fmtr_wiki);
-		else if	(ctx.Match(k, Invk_html_fmtr_wiki_))			 	{html_fmtr_wiki = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_wiki_changed, html_fmtr_wiki);}
+		else if	(ctx.Match(k, Invk_html_fmtr_wiki_))			 	{html_fmtr_wiki = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_html_fmtr_wiki_changed, html_fmtr_wiki);}
 		else if	(ctx.Match(k, Invk_html_fmtr_wiki_dflt))			return String_.new_u8(html_fmtr_wiki_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_wiki_dflt_))			{html_fmtr_wiki_dflt = m.ReadBry("v");}
 		else if	(ctx.Match(k, Invk_html_fmtr_next_sect))	 		return String_.new_u8(html_fmtr_next_sect);
-		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_))			{html_fmtr_next_sect = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_next_sect_changed, html_fmtr_next_sect);}
+		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_))			{html_fmtr_next_sect = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_html_fmtr_next_sect_changed, html_fmtr_next_sect);}
 		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_dflt))		return String_.new_u8(html_fmtr_next_sect_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_dflt_))		{html_fmtr_next_sect_dflt = m.ReadBry("v");}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private int Set_int_gt_0(GfoMsg m, int cur_val, String evt) {
 		int tmp = m.ReadInt("v");
 		if (tmp < 1) return cur_val;
-		GfoEvMgr_.PubVal(this, evt, tmp);
+		Gfo_evt_mgr_.Pub_val(this, evt, tmp);
 		return tmp;
 	}
 	private int Set_int(GfoMsg m, int cur_val, String evt) {
 		int tmp = m.ReadInt("v");
-		GfoEvMgr_.PubVal(this, evt, tmp);
+		Gfo_evt_mgr_.Pub_val(this, evt, tmp);
 		return tmp;
 	}
 	private static final String

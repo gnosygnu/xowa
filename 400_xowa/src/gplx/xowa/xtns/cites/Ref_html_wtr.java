@@ -74,7 +74,7 @@ public class Ref_html_wtr {
 		int itms_len = lst.Itms_len();
 		for (int j = 0; j < itms_len; j++) {	// iterate over itms in grp
 			Ref_nde head_itm = lst.Itms_get_at(j);
-			Bry_bfr tmp = Bry_bfr.new_();
+			Bry_bfr tmp = Bry_bfr_.New();
 			int list_len = List_len(head_itm);
 			grp_list_fmtr.Init(ctx.Wiki(), cfg, head_itm);
 			Ref_nde text_itm = grp_list_fmtr.IdentifyTxt();	// find the item that has the text (there should only be 0 or 1)
@@ -121,7 +121,7 @@ class Xoh_ref_list_fmtr implements gplx.core.brys.Bfr_arg {
 			Ref_nde rel = itm.Related_get(i);
 			if (HasTxt(rel)) return rel;
 		}
-		return itm; // no itm has text; TODO:WARN
+		return itm; // no itm has text; TODO_OLD:WARN
 	}
 	private boolean HasTxt(Ref_nde v) {return v.Body() != null && v.Body().Root_src().length > 0;}
 	public void Bfr_arg__add(Bry_bfr bfr) {

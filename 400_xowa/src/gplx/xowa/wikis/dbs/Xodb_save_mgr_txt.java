@@ -43,7 +43,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		int ns_id = ttl.Ns().Id();
 		Xotdb_page_itm_.Txt_page_save(tmp, page_id, DateAdp_.Now(), ttl_bry, text, true);
 		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, fil_idx);
-		byte[] page_rdr_bry = gplx.core.ios.Io_stream_rdr_.Load_all(page_rdr_url);
+		byte[] page_rdr_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(page_rdr_url);
 		Xob_xdat_file page_rdr = new Xob_xdat_file();
 		if (Bry_.Len_gt_0(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
 		int row_idx = page_rdr.Count();

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Mwh_atr_parser_fxt {
-	private final Bry_bfr expd_bfr = Bry_bfr.new_(), actl_bfr = Bry_bfr.new_();
-	private final Mwh_atr_parser parser = new Mwh_atr_parser();
-	private final Mwh_doc_wkr__atr_bldr wkr = new Mwh_doc_wkr__atr_bldr();
+	private final    Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
+	private final    Mwh_atr_parser parser = new Mwh_atr_parser();
+	private final    Mwh_doc_wkr__atr_bldr wkr = new Mwh_doc_wkr__atr_bldr();
 	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.Y,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(val)	, -1, -1);}
 	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(key)	, -1, -1);}
 	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(Bry_.Empty, Bool_.N, Bool_.N, Bool_.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}

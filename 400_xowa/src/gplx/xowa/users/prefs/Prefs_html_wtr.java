@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.langs.htmls.*;
 class Prefs_html_wtr {
-	public Prefs_html_wtr(Prefs_mgr prefs_mgr) {this.prefs_mgr = prefs_mgr;} Prefs_mgr prefs_mgr; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	public Prefs_html_wtr(Prefs_mgr prefs_mgr) {this.prefs_mgr = prefs_mgr;} Prefs_mgr prefs_mgr; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public void Write(Bry_bfr bfr, byte[] src, Gfh_nde hnde, int prop_idx, byte[] trg_type, byte[] trg_val) {
 		Object prop_val = Eval_prop_get(hnde);
 		byte elem_type = Prefs_mgr.Elem_tid_tid_of(hnde);
@@ -84,7 +84,7 @@ class Prefs_html_wtr {
 		bfr.Add_str_a7("\", \"").Add(xowa_io_msg).Add_str_a7("\");'>");
 		bfr.Add_str_a7("...</button>").Add_byte_nl();		
 	}
-	private static final byte[] Atr_key_xowa_prop_list = Bry_.new_a7("xowa_prop_list")
+	private static final    byte[] Atr_key_xowa_prop_list = Bry_.new_a7("xowa_prop_list")
 		, Atr_stub_id = Bry_.new_a7(" id='xowa_prop_")
 		, Atr_stub_value = Bry_.new_a7(" value='")
 		, Atr_stub_checked = Bry_.new_a7(" checked='checked'")

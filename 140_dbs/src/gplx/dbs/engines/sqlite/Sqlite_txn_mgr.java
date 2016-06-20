@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*;
 public class Sqlite_txn_mgr {
-	private final    List_adp txn_list = List_adp_.new_();
+	private final    List_adp txn_list = List_adp_.New();
 	public Sqlite_txn_mgr(Db_engine engine) {this.engine = engine;} private final    Db_engine engine;
 	private boolean pragma_needed = Bool_.Y, txn_started = Bool_.N; // NOTE: txns only support 1 level; SQLite fails when nesting transactions; DATE:2015-03-11
 	public void	Txn_bgn(String name) {

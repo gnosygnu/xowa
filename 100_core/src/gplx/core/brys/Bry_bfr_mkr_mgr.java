@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.brys; import gplx.*; import gplx.core.*;
 public class Bry_bfr_mkr_mgr {
-	private final Object thread_lock = new Object();
+	private final    Object thread_lock = new Object();
 	private Bry_bfr[] used = Bry_bfr_.Ary_empty; private int used_len = 0, used_max = 0;
 	private int[] free; private int free_len; private int reset;
 	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
@@ -39,7 +39,7 @@ public class Bry_bfr_mkr_mgr {
 				rv_idx = used_len++;
 				rv = used[rv_idx];
 				if (rv == null) {
-					rv = Bry_bfr.reset_(reset);
+					rv = Bry_bfr_.Reset(reset);
 					used[rv_idx] = rv;
 				}
 			}

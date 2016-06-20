@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.brys.args.*; import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 public class Io_download_fmt {
-	private final Io_size_fmtr_arg size_fmtr_arg = new Io_size_fmtr_arg(), rate_fmtr_arg = new Io_size_fmtr_arg().Suffix_(Bry_.new_a7("ps"));
-	private final Bfr_arg__time prog_left_fmtr_arg = new Bfr_arg__time(); private final Bfr_arg__decimal_int prog_pct_fmtr_arg = new Bfr_arg__decimal_int().Places_(2);
+	private final    Io_size_fmtr_arg size_fmtr_arg = new Io_size_fmtr_arg(), rate_fmtr_arg = new Io_size_fmtr_arg().Suffix_(Bry_.new_a7("ps"));
+	private final    Bfr_arg__time prog_left_fmtr_arg = new Bfr_arg__time(); private final    Bfr_arg__decimal_int prog_pct_fmtr_arg = new Bfr_arg__decimal_int().Places_(2);
 	private long time_checkpoint_interval = 250;
 	private long time_checkpoint = 0;
 	private long time_prv = 0;
 	public Io_download_fmt() {
 		this.src_name = prog_msg_hdr = "";	// NOTE: set to "" else prog_mgr will fail with null ref
 	}
-	private final Bry_bfr prog_bfr = Bry_bfr.new_(); Bry_fmtr prog_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); // NOTE: prog_fmtr can be passed file_names with ~ which are not easy to escape; DATE:2013-02-19
+	private final    Bry_bfr prog_bfr = Bry_bfr_.New(); Bry_fmtr prog_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); // NOTE: prog_fmtr can be passed file_names with ~ which are not easy to escape; DATE:2013-02-19
 	public long Time_bgn() {return time_bgn;} private long time_bgn;
 	public long Time_now() {return time_now;} private long time_now;
 	public long Time_dif() {return time_dif;} private long time_dif;
@@ -90,5 +90,5 @@ public class Io_download_fmt {
 //			prog_left = (1000 * (src_len - prog_done)) / prog_rate;
 //			if (usr_dlg != null) usr_dlg.Prog_none(GRP_KEY, "clear", "");
 	}
-	public static final Io_download_fmt Null = null;
+	public static final    Io_download_fmt Null = null;
 }

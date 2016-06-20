@@ -23,7 +23,7 @@ import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 	private static final int Toc_levels = 32; // assume 6 max levels * 5 max heading (9999.); add 2 for good measure
-	private Xoae_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr.reset_(Toc_levels);
+	private Xoae_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr_.Reset(Toc_levels);
 	public Xow_toc_mgr() {
 		path_ary = new Xop_toc_itm[Toc_levels];
 		for (int i = 0; i < Toc_levels; i++)
@@ -197,7 +197,7 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 		byte[] bry_contents = page.Wikie().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
 		bfmtr_main.Bld_bfr_many(bfr, write_toc_cls ? Bry_toc_cls : Bry_.Empty, Bfr_arg_.New_bry(bry_contents), this);
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Bry_list_bgn = Bry_.new_a7("  <ul>\n")
 	, Bry_list_end = Bry_.new_a7("  </ul>\n")
 	, Bry_item_end = Bry_.new_a7("  </li>\n")

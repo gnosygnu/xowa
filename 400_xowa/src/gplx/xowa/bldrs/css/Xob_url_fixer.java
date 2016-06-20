@@ -48,10 +48,10 @@ class Xob_url_fixer {
 					case Xob_url_fixer_tkn.Tid_mid_question:			end = pos; pos = src_len; break;
 					case Xob_url_fixer_tkn.Tid_mid_rel_1:
 					case Xob_url_fixer_tkn.Tid_mid_rel_2:
-						Bry_bfr tmp_bfr = Bry_bfr.new_(src_len);
+						Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(src_len);
 						byte[] to_rel_root = Bry_.Mid(src, bgn, pos);
 						byte[] to_rel_qry  = Bry_.Mid(src, pos, src_len);
-						src = gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs.Rel2abs(tmp_bfr, to_rel_qry, to_rel_root, Int_obj_ref.neg1_());
+						src = gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs.Rel2abs(tmp_bfr, to_rel_qry, to_rel_root, Int_obj_ref.New_neg1());
 						bgn = pos = 0;
 						end = src_len = src.length;
 						no_slashes = true;

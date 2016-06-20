@@ -21,11 +21,11 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htm
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.imaps.*;
 public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
-	private final Bfr_arg_clearable[] arg_ary;
-	private final Bfr_arg__hatr_arg img_xowa_image = new Bfr_arg__hatr_arg(Xoh_img_xoimg_data.Bry__data_xowa_image); 
-	private final Bfr_arg__hatr_id img_id = Bfr_arg__hatr_id.New_id(Xoh_img_mgr.Bry__html_uid), vid_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_"), img_imap_usemap = new Bfr_arg__hatr_id(Imap_xtn_mgr.Bry__usemap__name, Imap_xtn_mgr.Bry__usemap__prefix);
-	private final Bfr_arg__hatr_int img_w = new Bfr_arg__hatr_int(Gfh_atr_.Bry__width), img_h = new Bfr_arg__hatr_int(Gfh_atr_.Bry__height);
-	private final Bfr_arg__hatr_bry
+	private final    Bfr_arg_clearable[] arg_ary;
+	private final    Bfr_arg__hatr_arg img_xowa_image = new Bfr_arg__hatr_arg(Xoh_img_xoimg_data.Bry__data_xowa_image); 
+	private final    Bfr_arg__hatr_id img_id = Bfr_arg__hatr_id.New_id(Xoh_img_mgr.Bry__html_uid), vid_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_"), img_imap_usemap = new Bfr_arg__hatr_id(Imap_xtn_mgr.Bry__usemap__name, Imap_xtn_mgr.Bry__usemap__prefix);
+	private final    Bfr_arg__hatr_int img_w = new Bfr_arg__hatr_int(Gfh_atr_.Bry__width), img_h = new Bfr_arg__hatr_int(Gfh_atr_.Bry__height);
+	private final    Bfr_arg__hatr_bry
 	  anch_href = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__href)
 	, anch_rel = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__rel)
 	, anch_xowa_title = new Bfr_arg__hatr_bry(Xoh_img_data.Bry__atr__xowa_title)
@@ -58,7 +58,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		Init_by_decode(hpg, hctx, src, data);
 		this.Bfr_arg__add(bfr);
 	}
-	private static final byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
+	private static final    byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
 	public boolean Init_by_decode(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm) {
 		Xoh_img_data data = (Xoh_img_data)data_itm;
 		this.Clear();
@@ -113,13 +113,13 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 			if (img_is_vid) bfr.Add(Vid__bry__bgn);
 			img_fmtr.Bld_bfr_many(bfr, (Object[])arg_ary);
 			if (img_is_vid)
-				vid_fmtr.Bld_bfr_many(bfr, vid_play_id, anch_xowa_title, xowa_root_dir, 218, 220);	// TODO: hardcode widths; need to update via js from fsdb
+				vid_fmtr.Bld_bfr_many(bfr, vid_play_id, anch_xowa_title, xowa_root_dir, 218, 220);	// TODO_OLD: hardcode widths; need to update via js from fsdb
 		}
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_wtr rv = new Xoh_img_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	private static final byte[] Vid__bry__bgn = Bry_.new_a7("<div class=\"xowa_media_div\">\n<div>");
-	private static final Bry_fmtr 
+	private static final    byte[] Vid__bry__bgn = Bry_.new_a7("<div class=\"xowa_media_div\">\n<div>");
+	private static final    Bry_fmtr 
 	  img_fmtr = Bry_fmtr.new_
 	( "<a~{anch_href}~{anch_rel}~{anch_cls}~{anch_title}~{anch_xowa_title}><img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}></a>"
 	, "anch_href", "anch_rel", "anch_cls", "anch_title", "anch_xowa_title", "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt")

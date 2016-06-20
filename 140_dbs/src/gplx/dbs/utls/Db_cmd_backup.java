@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import gplx.core.envs.*;
-public class Db_cmd_backup implements GfoInvkAble {
+public class Db_cmd_backup implements Gfo_invk {
 	public String DbName() {return dbName;} public Db_cmd_backup DbName_(String val) {dbName = val; return this;} private String dbName = "db";
 	public Io_url ExeUrl() {return exeUrl;} public Db_cmd_backup ExeUrl_(Io_url val) {exeUrl = val; return this;} Io_url exeUrl;
 	public Io_url BkpDir() {return bkpDir;} public Db_cmd_backup BkpDir_(Io_url val) {bkpDir = val; return this;} Io_url bkpDir;
@@ -41,9 +41,9 @@ public class Db_cmd_backup implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_Pwd_))				pwd = GfoMsgUtl.SetStr(ctx, m, pwd);
 		else if	(ctx.Match(k, Invk_DteFmt_))			dteFmt = GfoMsgUtl.SetStr(ctx, m, dteFmt);
 		else if	(ctx.Match(k, Invk_BkpFilNameFmt_))		bkpFilNameFmt = GfoMsgUtl.SetStr(ctx, m, bkpFilNameFmt);
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final String
+	}	public static final    String
 			  Invk_ExeUrl = "ExeUrl", Invk_BkpDir = "BkpDir", Invk_Usr = "Usr", Invk_Pwd = "Pwd", Invk_DteFmt = "DteFmt", Invk_BkpFilNameFmt = "BkpFilNameFmt"
 			, Invk_ExeUrl_ = "ExeUrl_", Invk_BkpDir_ = "BkpDir_", Invk_Usr_ = "Usr_", Invk_Pwd_ = "Pwd_", Invk_DteFmt_ = "DteFmt_", Invk_BkpFilNameFmt_ = "BkpFilNameFmt_"
 			;

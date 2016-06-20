@@ -52,7 +52,7 @@ class Xop_rule_mgr implements TstRuleMgr {
 	}
 	public String Reg() {return typeKey;}
 	Ordered_hash hash = Ordered_hash_.New();
-	public static final Xop_rule_mgr Instance = new Xop_rule_mgr();
+	public static final    Xop_rule_mgr Instance = new Xop_rule_mgr();
 }
 class Xop_rule_dat {
 	public String AtrKey() {return atrKey;} private String atrKey;
@@ -78,7 +78,7 @@ public class TstObj_tst {
 	}
 	private static int Add(int[] ary) {int rv = 0; for (int i = 0; i < ary.length; i++) rv += ary[i]; return rv;}
 	@gplx.Internal protected static void Eval(String raw, TstObj expdChk, TstObj actlChk, TstRuleMgr ruleMgr) {
-		List_adp rslts = List_adp_.new_();
+		List_adp rslts = List_adp_.New();
 		Eval(rslts, ruleMgr, Ordered_hash_.New(), "", expdChk, actlChk);
 
 		String_bldr sb = String_bldr_.new_();
@@ -204,13 +204,13 @@ class TstObj implements SrlMgr {
 	public List_adp Subs() {return subs;} List_adp subs = List_adp_.Noop;
 	public SrlMgr SrlMgr_new(Object o) {return Subs_new();}
 	public TstObj Subs_new() {
-		if (subs == List_adp_.Noop) subs = List_adp_.new_();
+		if (subs == List_adp_.Noop) subs = List_adp_.New();
 		TstObj rv = TstObj.new_();
 		subs.Add(rv);
 		return rv;
 	}
 	public static TstObj new_() {return new TstObj();} TstObj() {}
-	public static final TstObj Null = new TstObj();
+	public static final    TstObj Null = new TstObj();
 }
 class TstAtr {
 	public String TypeKey() {return typeKey;} public TstAtr TypeKey_(String v) {typeKey = v; return this;} private String typeKey;
@@ -229,5 +229,5 @@ class TstRslt {
 	public String Key() {return key;} public TstRslt Key_(String v) {key = v; return this;} private String key;
 	public String ActlStr() {return actlStr;} public TstRslt ActlStr_(String v) {actlStr = v; return this;} private String actlStr;
 	public String ExpdStr() {return expdStr;} public TstRslt ExpdStr_(String v) {expdStr = v; return this;} private String expdStr;
-	public static final Object Ignore_null = new Object();
+	public static final    Object Ignore_null = new Object();
 }

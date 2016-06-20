@@ -24,7 +24,7 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_text_delete_page;}
 	@Override public void Cmd_run() {
 		wiki.Init_by_wiki();
-		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
+		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Db_conn core_db_conn = core_db.Conn();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		usr_dlg.Plog_many("", "", "creating page_filter");
@@ -53,18 +53,18 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		, ";"
 		));
 		try {
-			Xowd_db_file[] db_files = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
-			int len = db_files.length;
+			Xow_db_file[] db_file_ary = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
+			int len = db_file_ary.length;
 			for (int i = 0; i < len; ++i) {
 				boolean db_file_is_text = Bool_.N, db_file_is_cat = Bool_.N, db_file_is_search = Bool_.N;
-				Xowd_db_file db_file = db_files[i];
+				Xow_db_file db_file = db_file_ary[i];
 				switch (db_file.Tid()) {
-					case Xowd_db_file_.Tid_core: case Xowd_db_file_.Tid_wiki_solo: case Xowd_db_file_.Tid_text_solo:
+					case Xow_db_file_.Tid__core: case Xow_db_file_.Tid__wiki_solo: case Xow_db_file_.Tid__text_solo:
 						if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) continue;	// if mode is lot, then "core" db does not have text, cat, search; skip; DATE:2016-01-31
 														db_file_is_text = db_file_is_cat = db_file_is_search = Bool_.Y; break;
-					case Xowd_db_file_.Tid_text:		db_file_is_text = Bool_.Y; break;
-					case Xowd_db_file_.Tid_cat:			db_file_is_cat = Bool_.Y; break;
-					case Xowd_db_file_.Tid_search_core:	db_file_is_search = Bool_.Y; break;
+					case Xow_db_file_.Tid__text:		db_file_is_text = Bool_.Y; break;
+					case Xow_db_file_.Tid__cat:			db_file_is_cat = Bool_.Y; break;
+					case Xow_db_file_.Tid__search_core:	db_file_is_search = Bool_.Y; break;
 				}
 				int db_id = db_file.Id();
 				if	(db_file_is_text)	Run_sql(core_db_conn, db_file.Url(), db_id, "deleting text: "  + db_id, "DELETE FROM <data_db>text WHERE page_id IN (SELECT page_id FROM page_filter WHERE page_text_db_id = {0});");

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*;
-public class Xog_bnd_win implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+public class Xog_bnd_win implements Gfo_invk {
 	private GfuiWin win;
 	private GfuiTextBox shortcut_txt, binding_txt, keycode_txt;
 	private GfuiBtn ok_btn, cxl_btn;
@@ -81,7 +81,7 @@ public class Xog_bnd_win implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_when_key_up))		When_key_up(m);
 		else if	(ctx.Match(k, Invk_when_ok))			{win.Close();}
 		else if	(ctx.Match(k, Invk_when_cxl))			{win.Close();}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_when_key_down = "when_key_down", Invk_when_key_press = "when_key_press", Invk_when_key_up = "when_key_up"

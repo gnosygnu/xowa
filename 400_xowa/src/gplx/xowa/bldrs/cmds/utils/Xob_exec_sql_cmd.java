@@ -27,8 +27,8 @@ public class Xob_exec_sql_cmd implements Xob_cmd {
 		Xoae_app app = wiki.Appe();
 		wiki.Init_assert();	// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Xowd_db_mgr fsys_mgr = db_mgr.Core_data_mgr();
-		Xowd_db_file file = fsys_mgr.Dbs__get_by_id(file_idx);
+		Xow_db_mgr fsys_mgr = db_mgr.Core_data_mgr();
+		Xow_db_file file = fsys_mgr.Dbs__get_by_id_or_fail(file_idx);
 		app.Usr_dlg().Plog_many("", "", "exec_sql: running sql; file_idx=~{0} sql=~{1}", file_idx, sql);
 		file.Conn().Exec_sql(sql);
 	}

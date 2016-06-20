@@ -24,7 +24,7 @@ public class DataRdr_mem extends DataRdr_base implements GfoNdeRdr {
 	@Override public String KeyAt(int i) {return flds.Get_at(i).Key();}
 	@Override public Object ReadAt(int i) {return cur.ReadAt(i);}
 	@Override public Object Read(String key) {
-		int i = flds.Idx_of(key); if (i == List_adp_.NotFound) return null;
+		int i = flds.Idx_of(key); if (i == List_adp_.Not_found) return null;
 		return cur.ReadAt(i);
 	}
 	public boolean MoveNextPeer() {

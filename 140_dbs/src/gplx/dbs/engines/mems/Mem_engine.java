@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
 public class Mem_engine implements Db_engine {
-	private final    Hash_adp tbl_hash = Hash_adp_.new_();
+	private final    Hash_adp tbl_hash = Hash_adp_.New();
 	Mem_engine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;
 		this.qry_runner = new Mem_exec_select(this);
@@ -55,7 +55,7 @@ public class Mem_engine implements Db_engine {
 		Mem_tbl tbl = (Mem_tbl)tbl_hash.Get_by(tbl_key);
 		if (tbl != null) tbl.rows.Clear();
 	}
-	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}	// TODO: implement unique index
+	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}	// TODO_OLD: implement unique index
 	public void					Meta_idx_delete(String idx) {}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)	{}
 	public Dbmeta_tbl_mgr		Meta_mgr() {return meta_mgr;} private final    Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);

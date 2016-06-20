@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tblw_wkr__basic_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Td() {					// Tb_tr_td_te
 		fxt.Test_parse_page_wiki("{|\n|-\n|a\n|}"
 			, fxt.tkn_tblw_tb_(0, 11).Subs_
@@ -725,7 +725,7 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 }
-//		@Test  public void Tb_under_tr_is_ignored() {	// PURPOSE: table directly under tr is ignored; PAGE:en.w:Category:Dessert stubs; TODO: complicated, especially to handle 2nd |}
+//		@Test  public void Tb_under_tr_is_ignored() {	// PURPOSE: table directly under tr is ignored; PAGE:en.w:Category:Dessert stubs; TODO_OLD: complicated, especially to handle 2nd |}
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 //				(	"{|"
 //				,	"|-id='a'"

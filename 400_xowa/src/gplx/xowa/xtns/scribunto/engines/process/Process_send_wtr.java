@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xow
 public class Process_send_wtr {
 	public Process_send_wtr(Gfo_usr_dlg usr_dlg) {this.usr_dlg = usr_dlg;} private Gfo_usr_dlg usr_dlg;
 	public String Encode(Object o) {
-		Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
+		Bry_bfr tmp_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
 		Encode_obj(tmp_bfr, o);
 		return tmp_bfr.To_str_and_clear();
 	}

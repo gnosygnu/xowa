@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_thm_hzip_tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
@@ -301,6 +302,27 @@ public class Xoh_thm_hzip_tst {
 		, "</div>"
 		, "</div>"
 		));
+	}
+	@Test   public void Div_width_uses_img_width() {
+		Xof_fsdb_itm itm = new Xof_fsdb_itm();
+		itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), Bry_.new_a7("A.png"), Xop_lnki_type.Id_null, -1, 220, -1, -1, -1, 0);
+		itm.Init_at_cache(true, 400, 440, Io_url_.mem_fil_("mem/A.png"));
+		Xou_cache_finder_mem finder = fxt.Init_file_mgr__mem();
+		finder.Add(itm);
+
+		fxt.Test__decode("~&3abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
+		( "<div class='thumb tleft'>"
+		,   "<div class='thumbinner' style='width:400px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='file:///mem/A.png' width='400' height='440' class='thumbimage' alt='abc'></a> "
+		,     "<div class='thumbcaption'>"
+		,       "<div class='magnify'><a href='/wiki/File:A.png' class='internal' title='Enlarge'></a></div>"
+		,       "abc</div>"
+		,     "<hr>"
+		,     "<div class='thumbcaption'>abc</div>"
+		,   "</div>"
+		, "</div>"
+		));
+
+		fxt.Init_file_mgr__noop();
 	}
 //		@Test   public void Dump() {
 //			Xowe_wiki en_d = fxt.Init_wiki_alias("wikt", "en.wiktionary.org");

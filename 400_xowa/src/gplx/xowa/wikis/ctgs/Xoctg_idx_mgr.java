@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*; import gplx.core.flds.*;
-public class Xoctg_idx_mgr implements GfoInvkAble {
-	List_adp itms = List_adp_.new_();
+public class Xoctg_idx_mgr implements Gfo_invk {
+	List_adp itms = List_adp_.New();
 	public int Block_len() {return block_len;} public Xoctg_idx_mgr Block_len_(int v) {this.block_len = v; return this;} private int block_len = Io_mgr.Len_mb;
 	public int Itms_len() {return itms.Count();}
 	public Xoctg_idx_itm Itms_get_at(int i) {return (Xoctg_idx_itm)itms.Get_at(i);}
@@ -147,11 +147,11 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 				last_plus_one.Parse(fld_rdr.Pos_(tmp_pos), tmp_pos);
 			}
 		}
-	}	Int_obj_ref find_rslt = Int_obj_ref.zero_();
+	}	Int_obj_ref find_rslt = Int_obj_ref.New_zero();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_block_len)) 		return block_len;
 		else if	(ctx.Match(k, Invk_block_len_)) 	block_len = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_block_len = "block_len", Invk_block_len_ = "block_len_";
 }

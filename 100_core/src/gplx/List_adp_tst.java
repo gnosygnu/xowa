@@ -19,7 +19,7 @@ package gplx;
 import org.junit.*;
 public class List_adp_tst {
 	@Before public void setup() {
-		list = List_adp_.new_();
+		list = List_adp_.New();
 		listBase = (List_adp_base)list;
 	}	List_adp list; List_adp_base listBase;
 	@Test  public void Add() {
@@ -29,7 +29,7 @@ public class List_adp_tst {
 		Tfds.Eq(1, list.Count());
 	}
 	@Test  public void Add_changeCapacity() {
-		int capacity = List_adp_.Capacity_initial;
+		int capacity = 8;
 		for (int i = 0; i < capacity; i++)
 			list.Add("0");
 		Tfds.Eq(capacity, list.Count());
@@ -116,7 +116,7 @@ public class List_adp_tst {
 		}
 	}
 	@Test  public void Clear() {
-		int capacity = List_adp_.Capacity_initial;
+		int capacity = 8;
 		for (int i = 0; i < capacity + 1; i++)
 			list.Add("0");
 		Tfds.Eq(capacity * 2, listBase.Capacity());

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
 public class Gfo_cmd_arg_mgr_printer {
-	private final Gfo_cmd_arg_mgr arg_mgr;
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Gfo_cmd_arg_mgr arg_mgr;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Gfo_cmd_arg_mgr_printer(Gfo_cmd_arg_mgr arg_mgr) {this.arg_mgr = arg_mgr;}
 	public boolean Print(Gfo_usr_dlg usr_dlg, String header, String app_name, String key__print_help, String key__print_header, String key__print_args) {
 		if (arg_mgr.Get_by_as_bool(key__print_header))

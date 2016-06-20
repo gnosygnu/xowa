@@ -67,7 +67,7 @@ class Xoa_cfg_mgr_fxt {
 		Xowe_wiki wiki = Exec_make_wiki(wiki_key_bry);
 		Test_cfg_get(wiki, prop_key, expd_val);
 	}
-	private void Test_cfg_get(GfoInvkAble invk, String prop, String expd) {
+	private void Test_cfg_get(Gfo_invk invk, String prop, String expd) {
 		Tfds.Eq(expd, Object_.Xto_str_strict_or_null_mark(app.Cfg_mgr().Eval_get(invk, prop)));		
 	}
 	public void Test_cfg_itm(String wiki, String prop, boolean expd_customized, boolean expd_dirty) {

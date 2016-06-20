@@ -19,7 +19,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 public class Xoh_cmd_mgr {
 	public int Count() {return cmds.Count();}
 	public void Clear() {cmds.Clear();}
-	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} List_adp cmds = List_adp_.new_();
+	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} List_adp cmds = List_adp_.New();
 	public void Exec(Xoae_app app, Xoae_page page) {
 		int len = cmds.Count();
 		if (len == 0) return;

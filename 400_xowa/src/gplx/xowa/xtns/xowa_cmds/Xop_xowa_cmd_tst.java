@@ -23,7 +23,7 @@ public class Xop_xowa_cmd_tst {
 	@Before public void init() {
 		Xoa_gfs_mgr.Msg_parser_init();
 		fxt.Reset();
-	} private final Xop_fxt fxt = new Xop_fxt();
+	} private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		GfsCore.Instance.AddCmd(fxt.App(), Xoae_app.Invk_app);
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(false);
@@ -62,7 +62,7 @@ public class Xop_xowa_cmd_tst {
 		, ""
 		));
 	}
-//		@Test  public void Wiki_list_fmtrs() {
+//		@Test  public void Xow_list_fmtrs() {
 //			fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(true);
 //			fxt.App().Setup_mgr().Maint_mgr().Wiki_mgr().Add(Bry_.new_a7("en.wikipedia.org"));
 //			fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.percentiles; import gplx.*; import gplx.dbs.*;
 class Log_tbl_fmtr {
-	private final Bry_bfr bfr = Bry_bfr.new_();
-	private final List_adp itms = List_adp_.new_();
+	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final    List_adp itms = List_adp_.New();
 	private Log_fld_itm[] ary;
 	public Log_tbl_fmtr Add_str(String key, int len)			{ary = null; itms.Add(new Log_fld_itm__bry(Type_adp_.Tid__bry, key, len)); return this;}
 	public Log_tbl_fmtr Add_int(String key, int bgn, int end)	{ary = null; itms.Add(new Log_fld_itm__int(Type_adp_.Tid__int, key, bgn, end)); return this;}
@@ -43,8 +43,8 @@ abstract class Log_fld_itm__base implements Log_fld_itm {
 	public Log_fld_itm__base(int tid, String key, int len) {
 		this.tid = tid; this.key = key; this.len = len;
 	}
-	public int Tid() {return tid;} private final int tid;
-	public String Key() {return key;} private final String key;
+	public int Tid() {return tid;} private final    int tid;
+	public String Key() {return key;} private final    String key;
 	public int Len() {return len;} protected int len;
 	public abstract void Fmt(Bry_bfr bfr, Object val);
 }
@@ -64,8 +64,8 @@ class Log_fld_itm__int extends Log_fld_itm__base {
 		this.bgn = bgn; this.end = end;
 		this.len = Int_.DigitCount(end);
 	}
-	public int Bgn() {return bgn;} private final int bgn;
-	public int End() {return end;} private final int end;
+	public int Bgn() {return bgn;} private final    int bgn;
+	public int End() {return end;} private final    int end;
 	@Override public void Fmt(Bry_bfr bfr, Object val) {
 		int val_int = Int_.cast(val);
 		String val_str = String_.PadBgn(Int_.To_str(val_int), this.Len(), " ");

@@ -41,7 +41,7 @@ class Pxd_parser {
 		if (itm == null) return;
 		Bry_fmtr fmtr = itm.Fmtr();
 		fmtr.Bld_bfr(error_bfr, args);
-	}	private Bry_bfr error_bfr = Bry_bfr.new_(32);
+	}	private Bry_bfr error_bfr = Bry_bfr_.New_w_size(32);
 	public DateAdp Parse(byte[] src, Bry_bfr error_bfr) {
 		Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
 		return Evaluate(src, error_bfr);
@@ -171,15 +171,15 @@ class Pxd_parser_ {
 		}
 		return trie;
 	}	static Btrie_slim_mgr trie;
-	private static final    String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
-	private static final    String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
-	private static final    String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
-	private static final    String[] Names_day_suffix		= {"st", "nd", "rd", "th"};
-	private static final    String[] Names_day_full			= {"sunday", "monday", "tuesday", "wednesday" , "thursday", "friday", "saturday"};
-	private static final    String[] Names_day_abrv			= {"sun", "mon", "tue", "wed" , "thu", "fri", "sat"};
-	//TODO:
-	//private static final    String[] Names_day_text		= {"weekday", "weekdays"};
-	//private static final    String[] Names_ordinal_num		= {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"};
+	private static final       String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+	private static final       String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+	private static final       String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
+	private static final       String[] Names_day_suffix		= {"st", "nd", "rd", "th"};
+	private static final       String[] Names_day_full			= {"sunday", "monday", "tuesday", "wednesday" , "thursday", "friday", "saturday"};
+	private static final       String[] Names_day_abrv			= {"sun", "mon", "tue", "wed" , "thu", "fri", "sat"};
+	//TODO_OLD:
+	//private static final       String[] Names_day_text		= {"weekday", "weekdays"};
+	//private static final       String[] Names_ordinal_num		= {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"};
 	
 	private static void Init_unit(int seg_idx, String... name_ary) {Init_unit(seg_idx, 1, name_ary);}
 	private static void Init_unit(int seg_idx, int seg_val, String... name_ary) {
@@ -189,7 +189,7 @@ class Pxd_parser_ {
 			trie.Add_obj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
 		}
 	}
-	public static final byte[] 
+	public static final    byte[] 
 	  Unit_name_month		= Bry_.new_a7("month")
 	, Unit_name_day			= Bry_.new_a7("day")
 	, Unit_name_hour		= Bry_.new_a7("hour")

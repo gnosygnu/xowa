@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 public class GfmlDoc {
 	public GfmlNde				RootNde() {return rootNde;} GfmlNde rootNde;
-	@gplx.Internal protected List_adp			UsrMsgs() {return usrMsgs;} List_adp usrMsgs = List_adp_.new_();
+	@gplx.Internal protected List_adp			UsrMsgs() {return usrMsgs;} List_adp usrMsgs = List_adp_.New();
 	@gplx.Internal protected GfmlLxrRegy		LxrRegy() {return lxrRegy;} GfmlLxrRegy lxrRegy = new GfmlLxrRegy();
 	@gplx.Internal protected GfmlBldrCmdRegy	CmdRegy() {return cmdRegy;} GfmlBldrCmdRegy cmdRegy = GfmlBldrCmdRegy.new_();
 	@gplx.Internal protected GfmlPragmaMgr		PragmaMgr() {return pragmaMgr;} GfmlPragmaMgr pragmaMgr = GfmlPragmaMgr.new_();
@@ -41,5 +41,5 @@ public class GfmlDoc {
 //		public GfmlTkn BgnBrace() {return bgnBrace;} public GfmlDocEditor BgnBrace_(GfmlTkn v) {bgnBrace = v; return this;} GfmlTkn bgnBrace = GfmlTkn_.new_("{", "");
 //		public GfmlTkn EndBrace() {return endBrace;} public GfmlDocEditor EndBrace_(GfmlTkn v) {endBrace = v; return this;} GfmlTkn endBrace = GfmlTkn_.new_("}", "");
 //		public GfmlTkn Hnd() {return hnd;} public GfmlDocEditor Hnd_(GfmlTkn v) {hnd = v; return this;} GfmlTkn hnd = GfmlTkn_.new_(":", "");
-//        public static final GfmlDocEditor Instance = new GfmlDocEditor(); GfmlDocEditor() {}
+//        public static final    GfmlDocEditor Instance = new GfmlDocEditor(); GfmlDocEditor() {}
 //	}

@@ -16,15 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.gfui.kits.core.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.ctgs.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.htmls.portal.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.wikis.modules.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-public class Xow_html_mgr implements GfoInvkAble {
+public class Xow_html_mgr implements Gfo_invk {
 	public Xow_html_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		html_wtr = new Xoh_html_wtr(wiki, this);
 		Xoae_app app = wiki.Appe();
-		page_wtr_mgr = new Xoh_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != gplx.gfui.Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
+		page_wtr_mgr = new Xoh_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
 		Io_url file_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("mediawiki.file");
 		img_media_play_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(file_dir.GenSubFil("play.png"));
 		img_media_info_btn = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(file_dir.GenSubFil("info.png"));
@@ -64,7 +65,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_imgs))								return imgs_mgr;
 		else if	(ctx.Match(k, Invk_ns_ctg))								return ns_ctg;
 		else if	(ctx.Match(k, Invk_modules))							return module_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	public static final String 
 	  Invk_article = "article"

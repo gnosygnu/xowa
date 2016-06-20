@@ -42,7 +42,7 @@ class Db_conn_bldr_wkr__sqlite implements Db_conn_bldr_wkr {
         public static final    Db_conn_bldr_wkr__sqlite Instance = new Db_conn_bldr_wkr__sqlite(); Db_conn_bldr_wkr__sqlite() {}
 }
 class Db_conn_bldr_wkr__mem implements Db_conn_bldr_wkr {
-	private final    Hash_adp hash = Hash_adp_.new_();
+	private final    Hash_adp hash = Hash_adp_.New();
 	public void Clear_for_tests() {hash.Clear(); Db_conn_pool.Instance.Rls_all();}
 	public boolean Exists(Io_url url) {
 		String io_url_str = url.Xto_api();

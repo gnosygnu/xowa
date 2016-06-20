@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.security; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.consoles.*; import gplx.core.ios.*; /*IoStream*/
+import org.junit.*; import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
 public class Hash_console_wtr_tst {
 	@Before public void setup() {
 		Hash_algo__tth_192 algo = new Hash_algo__tth_192();

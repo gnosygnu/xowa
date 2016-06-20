@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.
 import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
 public class Fsdb_db_mgr__v2_bldr {
 	public static Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
-		Xowd_db_layout layout = wiki.Data__core_mgr().Props().Layout_file();
+		Xow_db_layout layout = wiki.Data__core_mgr().Props().Layout_file();
 		String domain_str = wiki.Domain_str();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		String main_core_name = Main_core_name(layout, domain_str);
@@ -38,7 +38,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		return new Fsdb_db_mgr__v2(layout, wiki_dir, main_core_file, user_core_file);
 	}
 	private static Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.Instance.Get(url));}
-	private static Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
+	private static Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xow_db_layout layout) {
 		Db_conn conn = layout.Tid_is_all() ? Db_conn_bldr.Instance.Get(main_core_url) : Db_conn_bldr.Instance.New(main_core_url);	// if all, use existing (assumes same file name); else, create new
 		conn.Txn_bgn("fsdb__core_file");
 		Fsdb_db_file rv = Make_core_file(main_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_main);
@@ -54,7 +54,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		Fsdb_db_file rv = Make_core_file(user_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_user);
 		Fsm_bin_tbl dbb_tbl = new Fsm_bin_tbl(conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_user); dbb_tbl.Insert(0, user_file_name);
 		Make_bin_tbl(rv);
-		Make_cfg_data(wiki, main_core_name, rv, Xowd_db_file_.Tid_file_user, -1);
+		Make_cfg_data(wiki, main_core_name, rv, Xow_db_file_.Tid__file_user, -1);
 		conn.Txn_end();
 		return rv;
 	}
@@ -81,27 +81,27 @@ public class Fsdb_db_mgr__v2_bldr {
 		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(file.Conn(), schema_is_1); bin_tbl.Create_tbl();
 		return file;
 	}
-	public static String Main_core_name(Xowd_db_layout layout, String wiki_domain) {
+	public static String Main_core_name(Xow_db_layout layout, String wiki_domain) {
 		switch (layout.Tid()) {
-			case Xowd_db_layout.Const_all:	return Main_core_name_all(wiki_domain);
-			case Xowd_db_layout.Const_few:	return Main_core_name_few(wiki_domain);
-			case Xowd_db_layout.Const_lot:  return Main_core_name_lot(wiki_domain);
+			case Xow_db_layout.Tid__all:	return Main_core_name_all(wiki_domain);
+			case Xow_db_layout.Tid__few:	return Main_core_name_few(wiki_domain);
+			case Xow_db_layout.Tid__lot:  return Main_core_name_lot(wiki_domain);
 			default:						throw Err_.new_unimplemented();
 		}
 	}
-	private static byte Main_core_tid(Xowd_db_layout layout) {
+	private static byte Main_core_tid(Xow_db_layout layout) {
 		switch (layout.Tid()) {
-			case Xowd_db_layout.Const_all:	return Xowd_db_file_.Tid_core;
-			case Xowd_db_layout.Const_few:	return Xowd_db_file_.Tid_file_solo;
-			case Xowd_db_layout.Const_lot:  return Xowd_db_file_.Tid_file_core;
+			case Xow_db_layout.Tid__all:	return Xow_db_file_.Tid__core;
+			case Xow_db_layout.Tid__few:	return Xow_db_file_.Tid__file_solo;
+			case Xow_db_layout.Tid__lot:  return Xow_db_file_.Tid__file_core;
 			default:						throw Err_.new_unimplemented();
 		}
 	}
 	public static void Make_cfg_data(Xow_wiki wiki, String file_core_name, Fsdb_db_file file, byte file_tid, int part_id) {
 		Db_cfg_tbl cfg_tbl = file.Tbl__cfg();
-		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
+		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		core_db.Info_session().Save(cfg_tbl);
-		Xob_info_file info_file = new Xob_info_file(-1, Xowd_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.new_(), 2, file_core_name, file.Url().NameAndExt());
+		Xob_info_file info_file = new Xob_info_file(-1, Xow_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.New(), 2, file_core_name, file.Url().NameAndExt());
 		info_file.Save(cfg_tbl);
 	}
 	private static String	Main_core_name_all(String wiki_domain)	{return wiki_domain + ".xowa";}					// EX: en.wikipedia.org.xowa

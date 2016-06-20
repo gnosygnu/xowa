@@ -19,10 +19,11 @@ package gplx.core.envs; import gplx.*; import gplx.core.*;
 import gplx.Bool_;
 import gplx.Bry_;
 import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
 import gplx.Err_;
-import gplx.GfoInvkAble;
-import gplx.GfoInvkAbleCmd;
-import gplx.GfoInvkAble_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_invk_;
 import gplx.GfoMsg;
 import gplx.Gfo_usr_dlg;
 import gplx.Gfo_usr_dlg_;
@@ -45,7 +46,7 @@ import java.io.InputStreamReader;
 import javax.management.RuntimeErrorException;
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*;
 import gplx.langs.gfs.*;
-public class Process_adp implements GfoInvkAble, Rls_able {
+public class Process_adp implements Gfo_invk, Rls_able {
 	public boolean Enabled() {return enabled;} public Process_adp Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public byte Exe_exists() {return exe_exists;} public Process_adp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = Bool_.__byte;
 	public Io_url Exe_url() {return exe_url;} public Process_adp Exe_url_(Io_url val) {exe_url = val; exe_exists = Bool_.__byte; return this;} Io_url exe_url;
@@ -58,28 +59,28 @@ public class Process_adp implements GfoInvkAble, Rls_able {
 	public String Rslt_out() {return rslt_out;} private String rslt_out;
 	public Io_url Working_dir() {return working_dir;} public Process_adp Working_dir_(Io_url v) {working_dir = v; return this;} Io_url working_dir;
 	public Process_adp Cmd_args(String cmd, String args) {this.Exe_url_(Io_url_.new_fil_(cmd)); this.args_fmtr.Fmt_(args); return this;}
-	public Process_adp WhenBgn_add(GfoInvkAbleCmd cmd) {whenBgnList.Add(cmd); return this;}
-	public Process_adp WhenBgn_del(GfoInvkAbleCmd cmd) {whenBgnList.Del(cmd); return this;}
+	public Process_adp WhenBgn_add(Gfo_invk_cmd cmd) {whenBgnList.Add(cmd); return this;}
+	public Process_adp WhenBgn_del(Gfo_invk_cmd cmd) {whenBgnList.Del(cmd); return this;}
 	public int Thread_timeout() {return thread_timeout;} public Process_adp Thread_timeout_seconds_(int v) {thread_timeout = v * 1000; return this;} int thread_timeout = 0;
 	public int Thread_interval() {return thread_interval;} public Process_adp Thread_interval_(int v) {thread_interval = v; return this;} int thread_interval = 20;
 	public String Thread_kill_name() {return thread_kill_name;} public Process_adp Thread_kill_name_(String v) {thread_kill_name = v; return this;} private String thread_kill_name = "";
 	public Io_url Tmp_dir() {return tmp_dir;} @gplx.Virtual public Process_adp Tmp_dir_(Io_url v) {tmp_dir = v; return this;} Io_url tmp_dir;
-	private Process_adp WhenBgn_run() {return Invk_cmds(whenBgnList);} List_adp whenBgnList = List_adp_.new_();
-	public Process_adp WhenEnd_add(GfoInvkAbleCmd cmd) {whenEndList.Add(cmd); return this;}
-	public Process_adp WhenEnd_del(GfoInvkAbleCmd cmd) {whenEndList.Del(cmd); return this;}
+	private Process_adp WhenBgn_run() {return Invk_cmds(whenBgnList);} List_adp whenBgnList = List_adp_.New();
+	public Process_adp WhenEnd_add(Gfo_invk_cmd cmd) {whenEndList.Add(cmd); return this;}
+	public Process_adp WhenEnd_del(Gfo_invk_cmd cmd) {whenEndList.Del(cmd); return this;}
 	public Gfo_usr_dlg Prog_dlg() {return prog_dlg;} public Process_adp Prog_dlg_(Gfo_usr_dlg v) {prog_dlg = v; return this;} Gfo_usr_dlg prog_dlg;
 	public String Prog_fmt() {return prog_fmt;} public Process_adp Prog_fmt_(String v) {prog_fmt = v; return this;} private String prog_fmt = "";	// NOTE: set to "", else cmds that do not set prog_fmt will fail on fmtr.Fmt(null)
-	private GfoInvkAble owner;
-	private Process_adp WhenEnd_run() {return Invk_cmds(whenEndList);} List_adp whenEndList = List_adp_.new_();
+	private Gfo_invk owner;
+	private Process_adp WhenEnd_run() {return Invk_cmds(whenEndList);} List_adp whenEndList = List_adp_.New();
 	private Process_adp Invk_cmds(List_adp list) {
 		for (Object o : list)
-			((GfoInvkAbleCmd)o).Invk();
+			((Gfo_invk_cmd)o).Exec();
 		return this;
 	}
 	public Process_adp Run(Object... args) {
 		if (String_.Len_eq_0(exe_url.Raw())) return this;	// noop if exe_url is "";
 		if (!args_fmtr.Fmt_null()) {
-			Bry_bfr tmp_bfr = Bry_bfr.new_();
+			Bry_bfr tmp_bfr = Bry_bfr_.New();
 			args_fmtr.Bld_bfr_many(tmp_bfr, args);
 			args_str = tmp_bfr.To_str_and_clear();
 		}
@@ -108,12 +109,12 @@ public class Process_adp implements GfoInvkAble, Rls_able {
 		else if	(ctx.Match(k, Invk_timeout_))					thread_timeout = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_tmp_dir_))					tmp_dir = m.ReadIoUrl("v");
 		else if	(ctx.Match(k, Invk_owner))						return owner;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	static final String Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_args = "args", Invk_args_ = "args_", Invk_cmd_args_ = "cmd_args_", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_mode_ = "mode_", Invk_timeout_ = "timeout_", Invk_tmp_dir_ = "tmp_dir_", Invk_owner = "owner";
+	static final    String Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_args = "args", Invk_args_ = "args_", Invk_cmd_args_ = "cmd_args_", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_mode_ = "mode_", Invk_timeout_ = "timeout_", Invk_tmp_dir_ = "tmp_dir_", Invk_owner = "owner";
 	Bry_fmtr_eval_mgr cmd_url_eval;
-	public static Process_adp ini_(GfoInvkAble owner, Gfo_usr_dlg usr_dlg, Process_adp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
+	public static Process_adp ini_(Gfo_invk owner, Gfo_usr_dlg usr_dlg, Process_adp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
 		process.Run_mode_(run_mode).Thread_timeout_seconds_(timeout);
 		process.cmd_url_eval = cmd_url_eval;
 		Io_url cmd_url = Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, Bry_.new_u8(cmd_url_fmt));
@@ -130,7 +131,7 @@ public class Process_adp implements GfoInvkAble, Rls_able {
 			: exe_args
 			;
 	}
-		private Bry_fmtr notify_fmtr = Bry_fmtr.new_("", "process_exe_name", "process_exe_args", "process_seconds"); Bry_bfr notify_bfr = Bry_bfr.reset_(255);
+		private Bry_fmtr notify_fmtr = Bry_fmtr.new_("", "process_exe_name", "process_exe_args", "process_seconds"); Bry_bfr notify_bfr = Bry_bfr_.Reset(255);
 	public Process UnderProcess() {return process;} Process process;
 	public void Rls() {if (process != null) process.destroy();}
 	public Process_adp Run_wait_sync() {
@@ -276,7 +277,7 @@ public class Process_adp implements GfoInvkAble, Rls_able {
 		process.Process_run_and_end();
 		return;
 	}
-		public static final List_adp Test_runs = List_adp_.new_();
+		public static final    List_adp Test_runs = List_adp_.New();
 	private Process_adp Test_runs_add() {Test_runs.Add(exe_url.Raw() + " " + args_str); exit_code = Exit_pass; return this;}
 	public static int run_wait_arg_(Io_url url, String arg) {
 		Process_adp process = new Process_adp();
@@ -286,7 +287,7 @@ public class Process_adp implements GfoInvkAble, Rls_able {
 	private static final String GRP_KEY = "gplx.process";
 	public static final int Exit_pass = 0, Exit_init = -1;
 	public static String[] Xto_process_bldr_args_utl(Io_url exe_url, String args_str) {		
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		list.Add(exe_url.Xto_api());
 		String_bldr sb = String_bldr_.new_();
 		int len = String_.Len(args_str);

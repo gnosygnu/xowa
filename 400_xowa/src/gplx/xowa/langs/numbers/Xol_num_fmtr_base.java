@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-public class Xol_num_fmtr_base implements GfoInvkAble {
+public class Xol_num_fmtr_base implements Gfo_invk {
 	private Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); 
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
-	private Bry_bfr tmp = Bry_bfr.new_();
+	private Bry_bfr tmp = Bry_bfr_.New();
 	public boolean Standard() {return standard;} private boolean standard = true;
 	public byte[] Dec_dlm() {return dec_dlm;} public Xol_num_fmtr_base Dec_dlm_(byte[] v) {this.dec_dlm = v; dlm_trie.Add_bry_byte(v, Raw_tid_dec); return this;} private byte[] dec_dlm = Dec_dlm_default;
 	private byte[] grp_dlm;
@@ -136,13 +136,13 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_dec_dlm_))		this.Dec_dlm_(m.ReadBry("v"));	// NOTE: must call mutator
 		else if	(ctx.Match(k, Invk_clear))			this.Clear();
 		else if	(ctx.Match(k, Invk_grps_add))		this.Grps_add(new Xol_num_grp(m.ReadBry("dlm"), m.ReadInt("digits"), m.ReadYn("repeat")));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_dec_dlm_ = "dec_dlm_", Invk_clear = "clear", Invk_grps_add = "grps_add";
 	private static final byte Raw_tid_dec = 0, Raw_tid_grp = 1;
-	private static final byte[] Dec_dlm_default = new byte[] {Byte_ascii.Dot};
-	public static final byte[] Grp_dlm_default = new byte[] {Byte_ascii.Comma};
+	private static final    byte[] Dec_dlm_default = new byte[] {Byte_ascii.Dot};
+	public static final    byte[] Grp_dlm_default = new byte[] {Byte_ascii.Comma};
 	public static final byte Tid_format = 0, Tid_raw = 1, Tid_nosep = 2;
 }
 class Gfo_num_fmt_wkr {

@@ -20,8 +20,8 @@ import gplx.xowa.files.xfers.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.metas.*;
-public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
-	private Xowe_wiki wiki; private final List_adp repos = List_adp_.new_();
+public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
+	private Xowe_wiki wiki; private final    List_adp repos = List_adp_.New();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		Xoae_app app = wiki.Appe();
@@ -187,7 +187,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add))			return Add_repo(m.ReadBry("src"), m.ReadBry("trg"));
 		else if	(ctx.Match(k, Invk_clear))			{repos.Clear(); repos_ary = null;}	// reset repos_ary variable
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add = "add", Invk_clear = "clear";
 	public Xof_repo_pair Add_repo(byte[] src_repo_key, byte[] trg_repo_key) {

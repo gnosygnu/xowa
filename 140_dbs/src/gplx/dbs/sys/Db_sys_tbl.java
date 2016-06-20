@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
 class Db_sys_tbl implements Rls_able {
-	private final String tbl_name = "gfdb_sys";
+	private final    String tbl_name = "gfdb_sys";
 	private String fld_key, fld_val;
-	private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
 	public Db_sys_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_key = flds.Add_str_pkey("sys_key", 255); fld_val = flds.Add_text("sys_val");

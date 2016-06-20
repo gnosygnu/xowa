@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_gly_itm_wtr_tst {
-	private final Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
+	private final    Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
 	@Test   public void Basic() {
 		fxt.Init__gly(0, 155, 150, 5, "caption");
 		fxt.Init__img("/wiki/File:A.png", "A.png", "0|120|120|-1|-1|-1");
@@ -38,8 +38,8 @@ public class Xoh_gly_itm_wtr_tst {
 	}
 }
 class Xoh_gly_itm_wtr_fxt {
-	private final Xoh_gly_itm_wtr wtr = new Xoh_gly_itm_wtr();
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final    Xoh_gly_itm_wtr wtr = new Xoh_gly_itm_wtr();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Init__gly(int id, int itm_w, int file_div_w, int file_div_margin, String caption) {
 		wtr.Init(Bool_.N, id, itm_w, file_div_w, file_div_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
 	}

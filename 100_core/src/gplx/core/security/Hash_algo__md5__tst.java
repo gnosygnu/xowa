@@ -36,6 +36,6 @@ class Hash_algo__fxt {
 	public Hash_algo__fxt(Hash_algo algo) {this.algo = algo;}
 	public void Test__hash(String expd, String raw) {
 		Tfds.Eq(expd, algo.Hash_bry_as_str(Bry_.new_u8(raw)));
-		Tfds.Eq(expd, algo.Hash_stream_as_str(gplx.core.consoles.Console_adp_.Noop, gplx.core.ios.IoStream_.mem_txt_(Io_url_.Empty, raw)));
+		Tfds.Eq(expd, algo.Hash_stream_as_str(gplx.core.consoles.Console_adp_.Noop, gplx.core.ios.streams.IoStream_.mem_txt_(Io_url_.Empty, raw)));
 	}
 }

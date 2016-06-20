@@ -38,6 +38,7 @@ public class Xog_cmd_itm_ {
 	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")			// HOME
 	, Key_nav_help_xowa_blog									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_blog"							, "home/wiki/Blog")					// HOME
 
+	, Key_nav_setup_download_central							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.download_central"					, "home/wiki/Special:XowaDownloadCentral")	// HOME
 	, Key_nav_setup_import_from_list							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_list"					, "home/wiki/Dashboard/Import/Online")		// HOME
 	, Key_nav_setup_import_from_script							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_script"				, "home/wiki/Dashboard/Import/Offline")		// HOME
 	, Key_nav_setup_maintenance									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.maintenance"						, "home/wiki/Dashboard/Wiki_maintenance")	// HOME

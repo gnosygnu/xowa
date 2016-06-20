@@ -281,7 +281,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			case Tblw_type_tc:								// <caption>
 				switch (prv_tid) {
 					case Xop_tkn_itm_.Tid_tblw_tb: break;	// noop; <table><caption>
-					case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr><caption>      -> <tr></tr><caption>  TODO: caption should be ignored and placed in quarantine
+					case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr><caption>      -> <tr></tr><caption>  TODO_OLD: caption should be ignored and placed in quarantine
 						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><caption>      -> <td></td><caption>

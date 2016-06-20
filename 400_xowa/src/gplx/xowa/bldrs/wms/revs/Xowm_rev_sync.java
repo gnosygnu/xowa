@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.bldrs.wms.*;
 class Xowm_rev_sync {
-	private final Ordered_hash cur_hash = Ordered_hash_.New_bry(), new_hash = Ordered_hash_.New_bry();
-	private final List_adp del_list = List_adp_.new_();
+	private final    Ordered_hash cur_hash = Ordered_hash_.New_bry(), new_hash = Ordered_hash_.New_bry();
+	private final    List_adp del_list = List_adp_.New();
 	public int Batch_size() {return batch_size;} public void Batch_size_(int v) {batch_size = v;} private int batch_size = 50;
 	public Xowm_rev_wkr__meta Wkr__cur_meta() {return wkr__cur_meta;} private Xowm_rev_wkr__meta wkr__cur_meta;
 	public Xowm_rev_wkr__meta Wkr__new_meta() {return wkr__new_meta;} private Xowm_rev_wkr__meta wkr__new_meta;

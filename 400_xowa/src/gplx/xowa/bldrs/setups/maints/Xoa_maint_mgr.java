@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import
 import gplx.core.ios.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.downloads.*;
-public class Xoa_maint_mgr implements GfoInvkAble {
+public class Xoa_maint_mgr implements Gfo_invk {
 	public Xoa_maint_mgr(Xoae_app app) {
 		this.app = app;
 		wmf_dump_status_url = Wmf_dump_status_url(app);
@@ -76,7 +76,7 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wmf_status_update))		Wmf_status_update();
 		else if (ctx.Match(k, Invk_wikis))					return wiki_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_wmf_status_update = "wmf_status_update", Invk_wikis = "wikis";
 	public static Io_url Wmf_dump_status_url(Xoae_app app) {return app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("xtns", "xowa", "maintenance", "backup-index.html");}

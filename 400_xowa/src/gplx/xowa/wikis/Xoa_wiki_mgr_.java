@@ -26,8 +26,12 @@ public class Xoa_wiki_mgr_ {
 		Io_url wiki_root_dir = url.OwnerDir();
 		Xow_wiki rv = wiki_mgr.Make(wiki_domain, wiki_root_dir);
 		wiki_mgr.Add(rv);
-		// byte[] modified_last	= cfg_tbl.Select_bry(Xow_cfg_consts.Grp__wiki_init, "props.modified_latest");
-		app.User().User_db_mgr().Site_mgr().Import(rv.Domain_str(), rv.Domain_str(), wiki_root_dir.Raw(), "");
+		rv.Init_by_wiki();	// must init for Modified_latest
+		String wiki_date = rv.Props().Modified_latest__yyyy_MM_dd();
+		app.User().User_db_mgr().Site_mgr().Import(rv.Domain_str(), rv.Domain_str(), wiki_root_dir.Raw(), wiki_date, "");
+		conn.Rls_conn();
+		rv.Init_needed_y_();	// rls wiki else noop connection will hang around
 		return rv;
 	}
+	public static final String Invk__import_by_url = "import_by_url";
 }

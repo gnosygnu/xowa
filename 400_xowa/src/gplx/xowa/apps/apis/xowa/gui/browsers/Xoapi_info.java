@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.guis.views.*;
-public class Xoapi_info implements Gfo_usr_dlg__gui__opt, GfoInvkAble {
+public class Xoapi_info implements Gfo_usr_dlg__gui__opt, Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {this.app = app;} private Xoae_app app;
 	private Xog_win_itm Win() {return app.Gui_mgr().Browser_win();}
 	public void Focus()				{this.Win().Info_box().Focus();}
@@ -36,7 +36,7 @@ public class Xoapi_info implements Gfo_usr_dlg__gui__opt, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_warn_enabled_)) 			warn_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_note_enabled)) 			return Yn.To_str(note_enabled);
 		else if	(ctx.Match(k, Invk_note_enabled_)) 			note_enabled = m.ReadYn("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_focus = "focus", Invk_clear = "clear", Invk_launch = "launch"

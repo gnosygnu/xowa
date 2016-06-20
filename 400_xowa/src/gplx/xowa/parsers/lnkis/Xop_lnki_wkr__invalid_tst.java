@@ -19,7 +19,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_lnki_wkr__invalid_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Ignore_invalid_url_encodings() { // PURPOSE: if url encoding is invalid, still render lnki as <a>; EX: fr.w:Bordetella; 
 		fxt.Test_parse_page_all_str("[[%GC]]", "<a href=\"/wiki/%25GC\">%GC</a>");
 	}
@@ -59,7 +59,7 @@ public class Xop_lnki_wkr__invalid_tst {
 	@Test  public void Nl_with_apos_shouldnt_fail() {	// PURPOSE: apos, lnki and nl will cause parser to fail; DATE:2013-10-31
 		fxt.Test_parse_page_all_str("''[[\n]]", "<i>[[</i>\n]]");
 	}
-//		@Test  public void Brack_end_invalid() {	// PURPOSE: invalidate if ]; DATE:2014-04-03; // TODO: backout apos changes
+//		@Test  public void Brack_end_invalid() {	// PURPOSE: invalidate if ]; DATE:2014-04-03; // TODO_OLD: backout apos changes
 //			fxt.Test_parse_page_all_str_and_chk("[[A] ]", "[[A] ]", Xop_lnki_log.Invalid_ttl);
 //		}
 	@Test  public void Module() {	// PURPOSE: handle lnki_wkr parsing Module text (shouldn't happen); apos, tblw, lnki, and nl will cause parser to fail; also handles scan-bwd; EX:Module:Taxobox; DATE:2013-11-10

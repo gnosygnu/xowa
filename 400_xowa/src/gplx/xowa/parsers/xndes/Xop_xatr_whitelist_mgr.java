@@ -133,7 +133,7 @@ public class Xop_xatr_whitelist_mgr {
 		grp_hash.Add_bry_obj(key, itms);
 	}
 	private void Ini_nde(int tag_tid, String... key_strs) {
-		List_adp keys = List_adp_.new_();
+		List_adp keys = List_adp_.New();
 		int len = key_strs.length;
 		for (int i = 0; i < len; i++) {
 			byte[] key = Bry_.new_a7(key_strs[i]);
@@ -253,7 +253,7 @@ public class Xop_xatr_whitelist_mgr {
 	.Add_str_byte("image-set"	, Style_image_set)
 	.Add_str_byte("/*"			, Style_comment)
 	;
-	private static final byte[] Val_role_presentation = Bry_.new_a7("presentation");
+	private static final    byte[] Val_role_presentation = Bry_.new_a7("presentation");
 }
 class Xop_xatr_whitelist_itm {
 	public Xop_xatr_whitelist_itm(byte[] key, byte key_tid, boolean exact) {this.key = key; this.key_tid = key_tid; this.exact = exact;}

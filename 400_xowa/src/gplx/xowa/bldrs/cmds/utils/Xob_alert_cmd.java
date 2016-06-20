@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.xowa.bldrs.wkrs.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*;
 public class Xob_alert_cmd extends Xob_cmd__base implements Xob_cmd {
 	public Xob_alert_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	public Xob_alert_cmd Msg_(String v) {this.msg = v; return this;} private String msg = "no message specified";
@@ -29,7 +29,7 @@ public class Xob_alert_cmd extends Xob_cmd__base implements Xob_cmd {
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__text_))		this.msg = m.ReadStr("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk__text_ = "text_";
 

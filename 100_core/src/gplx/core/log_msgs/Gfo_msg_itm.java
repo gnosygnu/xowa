@@ -54,5 +54,5 @@ public class Gfo_msg_itm implements Gfo_msg_obj {
 			return String_.new_u8(fmt);
 	}
 	public String Gen_str_none() {return key_str;}
-	static Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	static Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 }

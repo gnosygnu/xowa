@@ -23,9 +23,9 @@ class Xof_redlink_wkr implements Gfo_thread_wkr {
 	public Xof_redlink_wkr(Xog_js_wkr js_wkr, int[] uids) {
 		this.js_wkr = js_wkr; this.uids = uids;
 	}
-	public String Name() {return "xowa.redlinks";}
-	public boolean Resume() {return true;}
-	public void Exec() {
+	public String			Thread__name() {return "xowa.redlinks";}
+	public boolean			Thread__resume() {return true;}
+	public void Thread__exec() {
 		int len = uids.length;
 		for (int i = 0; i < len; ++i) {
 			int uid = uids[i];

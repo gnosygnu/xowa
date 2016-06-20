@@ -36,7 +36,7 @@ public class Pfunc_pagesincategory_tst {
 class Pfunc_pagesincategory_tstr {
 	private final    Xop_fxt parser_tstr;
 	private final    Xoae_app app; private final    Xowe_wiki wiki;
-	private final    Xowd_db_mgr core_data_mgr;
+	private final    Xow_db_mgr core_data_mgr;
 	private final    Xowd_page_tbl page_tbl; private final    Xowd_cat_core_tbl cat_core_tbl;
 	public Pfunc_pagesincategory_tstr() {
 		Xoa_test_.Inet__init();

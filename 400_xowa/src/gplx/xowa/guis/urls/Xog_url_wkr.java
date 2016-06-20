@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.net.*; import gplx.core.envs.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.envs.*;
+import gplx.gfui.controls.standards.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.doms.*;
 import gplx.xowa.guis.views.*;
 public class Xog_url_wkr {
-	private final Xoa_url tmp_url = Xoa_url.blank();
+	private final    Xoa_url tmp_url = Xoa_url.blank();
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
-	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xog_url_wkr Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return this;	// text is not link; return;
 		byte[] href_bry = Bry_.new_u8(href_str);
@@ -61,7 +62,7 @@ public class Xog_url_wkr {
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
 		Io_url href_url = Io_url_.http_any_(String_.new_u8(Gfo_url_encoder_.Http_url.Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
-		gplx.gfui.Gfui_html html_box = win.Active_html_box();
+		Gfui_html html_box = win.Active_html_box();
 		byte[] href_bry_encoded = Gfo_url_encoder_.Fsys_lnx.Encode(href_bry);	// encode to href_bry; note must encode to same href_bry as Xof_url_bldr, which uses Gfo_url_encoder_.Fsys_lnx; PAGE:en.w:File:Volc�n_Chimborazo,_"El_Taita_Chimborazo".jpg DATE:2015-12-06
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
 			? html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, gplx.xowa.htmls.Xoh_consts.Atr_xowa_title_str, null)

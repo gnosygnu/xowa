@@ -86,7 +86,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		if		(ctx.Match(k, Invk_db_url_))		this.db_url = m.ReadIoUrl("v");
 		else if	(ctx.Match(k, Invk_wikis_))			this.wikis = m.ReadStrAry("v", "\n");
 		else if	(ctx.Match(k, Invk_cutoff_time_))	this.cutoff_time = m.ReadDate("v");
-		else										return GfoInvkAble_.Rv_unhandled;
+		else										return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static String Invk_db_url_ = "db_url_", Invk_wikis_ = "wikis_", Invk_cutoff_time_ = "cutoff_time_";

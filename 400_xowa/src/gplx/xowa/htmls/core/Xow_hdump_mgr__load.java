@@ -29,10 +29,11 @@ public class Xow_hdump_mgr__load {
 		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx, wiki.Domain_bry());			
 	}
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
-	public void Load(Xoae_page wpg) {
+	public void Load_by_edit(Xoae_page wpg) {
+		tmp_hpg.Init(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Revision_data().Id());
 		Load(tmp_hpg, wpg.Ttl());
 		wpg.Hdump_data().Body_(tmp_hpg.Body());
-		// wpg.Root_(new Xop_root_tkn());
+		wpg.Root_(new gplx.xowa.parsers.Xop_root_tkn());	// HACK: set root, else load page will fail
 		Fill_page(wpg, tmp_hpg);
 	}
 	public boolean Load(Xoh_page hpg, Xoa_ttl ttl) {
@@ -50,7 +51,7 @@ public class Xow_hdump_mgr__load {
 				hpg.Body_(page_override);
 				return true;
 			}
-			Xowd_db_file html_db = wiki.Data__core_mgr().Dbs__get_by_id(tmp_dbpg.Html_db_id());
+			Xow_db_file html_db = wiki.Data__core_mgr().Dbs__get_by_id_or_fail(tmp_dbpg.Html_db_id());
 			if (!html_db.Tbl__html().Select_by_page(hpg)) return Load__fail(hpg);			// nothing in "html" table
 			byte[] src = Parse(hpg, hpg.Body_zip_tid(), hpg.Body_hzip_tid(), hpg.Body());
 			hpg.Body_(src);
@@ -59,7 +60,7 @@ public class Xow_hdump_mgr__load {
 	}
 	public byte[] Decode_as_bry(Bry_bfr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
 	private byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
-		if (zip_tid > gplx.core.ios.Io_stream_.Tid_raw)
+		if (zip_tid > gplx.core.ios.streams.Io_stream_.Tid_raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1) {
 			src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
@@ -82,6 +83,15 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__popups().Bind_hover_area_	(hpg_head.Imap_exists());
 		wpg_head.Itm__gallery().Enabled_		(hpg_head.Gallery_packed_exists());
 		wpg_head.Itm__hiero().Enabled_			(hpg_head.Hiero_exists());
+
+		// transfer images from Xoh_page to Xoae_page 
+		Xoh_img_mgr src_imgs = hpg.Img_mgr();
+		int len = src_imgs.Len();
+		for (int i = 0; i < len; ++i) {
+			gplx.xowa.files.Xof_fsdb_itm itm = src_imgs.Get_at(i);
+			wpg.Hdump_data().Imgs().Add(itm);
+			wpg.File_queue().Add(itm);	// add to file_queue for http_server
+		}
 	}
 	private static boolean Load__fail(Xoh_page hpg) {hpg.Exists_n_(); return false;}
 	private static boolean Load__dbpg(Xow_wiki wiki, Xowd_page_itm dbpg, Xoh_page hpg, Xoa_ttl ttl) {

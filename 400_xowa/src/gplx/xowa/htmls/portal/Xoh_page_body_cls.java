@@ -78,7 +78,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					break;
 				case Byte_ascii.Underline: 
 					if (trg_bfr == null) {
-						trg_bfr = Bry_bfr.new_(src_len);
+						trg_bfr = Bry_bfr_.New_w_size(src_len);
 						trg_bfr.Add_mid(src, 0, i);
 					}
 					if (bgn != -1) {
@@ -99,7 +99,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					int next = i + 1;
 					if (next < src_len && src[next] == -96) {	
 						if (trg_bfr == null) {
-							trg_bfr = Bry_bfr.new_(src_len);
+							trg_bfr = Bry_bfr_.New_w_size(src_len);
 							trg_bfr.Add_mid(src, 0, i);
 						}
 						trg_bfr.Add_byte(Byte_ascii.Underline);
@@ -118,7 +118,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		if (bgn != -1) trg_bfr.Add_mid(src, bgn, src_len);
 		return trg_bfr == null ? src : trg_bfr.To_bry_and_clear();
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Bry_id_prefix			= Bry_.new_a7("ns-")
 	, Bry_type_special		= Bry_.new_a7("ns-special")
 	, Bry_type_talk			= Bry_.new_a7("ns-talk")

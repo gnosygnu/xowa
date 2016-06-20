@@ -34,7 +34,7 @@ public class Xpath_ {
 		return list;
 	}
 	static XmlNdeList Select(XmlNde owner, String xpath, Xpath_Args args) {
-		XmlNdeList_cls_list rv = new XmlNdeList_cls_list(List_adp_.Capacity_initial);
+		XmlNdeList_cls_list rv = new XmlNdeList_cls_list(8);
 		String[] parts = String_.Split(xpath, "/");
 		TraverseSubs(owner, parts, 0, rv, args);
 		return rv;
@@ -56,7 +56,7 @@ public class Xpath_ {
 				TraverseSubs(sub, parts, depth + 1, results, args);
 		}
 	}
-	public static final String InnetTextKey = "&innerText";
+	public static final    String InnetTextKey = "&innerText";
 	public static Keyval_hash ExtractKeyVals(String xml, Int_obj_ref posRef, String nodeName) {
 		int pos = posRef.Val();
 		Err xmlErr = Err_.new_wo_type("error parsing xml", "xml", xml, "pos", pos);

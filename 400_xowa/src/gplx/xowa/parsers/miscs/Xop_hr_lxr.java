@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.xndes.*;
 public class Xop_hr_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_hr;}
-	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr parse_trie) {parse_trie.Add(Hook_ary, this);} static final byte[] Hook_ary = new byte[] {Byte_ascii.Nl, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr parse_trie) {parse_trie.Add(Hook_ary, this);} static final    byte[] Hook_ary = new byte[] {Byte_ascii.Nl, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
@@ -36,11 +36,11 @@ public class Xop_hr_lxr implements Xop_lxr {
 		if (!bos)
 			ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos);	// simulate \n in front of ----
 		ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__hr);	// para=n; block=y
-		int hr_len = cur_pos - bgn_pos + nl_adj;						// TODO: syntax_check if > 4
+		int hr_len = cur_pos - bgn_pos + nl_adj;						// TODO_OLD: syntax_check if > 4
 		ctx.Subs_add(root, tkn_mkr.Hr(bgn_pos, cur_pos, hr_len));
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__hr);	// block=n; para=y;
 		return cur_pos;
 	}	private static final byte Hook_byt = Byte_ascii.Dash;
 	public static final int Hr_len = 4;
-	public static final Xop_hr_lxr Instance = new Xop_hr_lxr(); Xop_hr_lxr() {}
+	public static final    Xop_hr_lxr Instance = new Xop_hr_lxr(); Xop_hr_lxr() {}
 }

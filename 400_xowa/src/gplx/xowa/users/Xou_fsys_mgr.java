@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.wikis.*;
-public class Xou_fsys_mgr implements GfoInvkAble {
+public class Xou_fsys_mgr implements Gfo_invk {
 	private Io_url app_root_dir; private Io_url wiki_root_dir; private Io_url cur_root;
 	public Xou_fsys_mgr(Xoae_app app, Xoue_user usr, Io_url user_dir) {
 		this.cur_root = user_dir;
@@ -40,6 +40,6 @@ public class Xou_fsys_mgr implements GfoInvkAble {
 	public static final String Name_user_system_cfg = "user_system_cfg.gfs";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_root_dir))		return cur_root;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_root_dir = "root_dir";
 }

@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.threads.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.xowa.guis.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.urls.*; import gplx.xowa.guis.views.*; 
+import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.guis.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.urls.*; import gplx.xowa.guis.views.*; 
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
-public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
-	private GfoInvkAble sync_cmd;
+public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
+	private Gfo_invk sync_cmd;
 	private Xog_url_box__selection_changed url_box__selection_changed;
 	public Xog_win_itm(Xoae_app app, Xoa_gui_mgr gui_mgr) {
 		this.app = app; this.gui_mgr = gui_mgr;
@@ -44,7 +45,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public GfuiBtn			Find_bwd_btn() {return find_bwd_btn;} private GfuiBtn find_bwd_btn;
 	public GfuiTextBox		Prog_box() {return prog_box;} private GfuiTextBox prog_box;
 	public GfuiTextBox		Info_box() {return info_box;} private GfuiTextBox info_box;
-	public GfoEvMgr			EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} private GfoEvMgr evMgr;
+	public Gfo_evt_mgr		Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} private Gfo_evt_mgr evt_mgr;
 	public Xoae_app			App()				{return app;} private Xoae_app app;
 	public Xog_tab_mgr		Tab_mgr()			{return tab_mgr;} private Xog_tab_mgr tab_mgr;
 	public Xog_tab_itm		Active_tab()		{return tab_mgr.Active_tab();}
@@ -66,7 +67,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
-		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_tab_itm_read_mgr.Async((Xog_tab_itm)m.ReadObj("v"));
+		else if	(ctx.Match(k, Invk_page_async_exec))						((Xog_tab_itm)m.ReadObj("v")).Async();
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
 		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xopg_page_.Tid_edit);
 		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_page_.Tid_html);
@@ -91,7 +92,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_page))									return this.Active_page();
 		else if	(ctx.Match(k, Invk_wiki))									return this.Active_tab().Wiki();
 		else if	(ctx.Match(k, Invk_exit))									App__exit();
-		else																return GfoInvkAble_.Rv_unhandled;
+		else																return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String
@@ -187,7 +188,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
 		if (new_page.Missing()) return;
 		if (new_page.Ttl().Ns().Id_is_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
-			new_page = new_page.Wikie().Data_mgr().Load_page_by_ttl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+			new_page = new_page.Wikie().Data_mgr().Load_page_and_parse(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt_by_orig(), new_page.Ttl().Full_txt_by_orig());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);
@@ -211,25 +212,26 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Page__async__bgn(tab);
 	}
 	public void Page__async__bgn(Xog_tab_itm tab) {
-		page__async__thread = Thread_adp_.invk_msg_(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, GfoMsg_.new_cast_(Invk_page_async_exec).Add("v", tab)).Start();
-	}	private Thread_adp page__async__thread = Thread_adp.Null;
+		page__async__thread = Thread_adp_.Start_by_val(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, Invk_page_async_exec, tab);
+		page__async__thread.Thread__start();
+	}	private Thread_adp page__async__thread = Thread_adp.Noop;
 	public boolean Page__async__working(Xoa_url url) {
-		if (page__async__thread.IsAlive()) {				// cancel pending image downloads
+		if (page__async__thread.Thread__is_alive()) {				// cancel pending image downloads
 			page__async__restart_url = url;
 			this.Usr_dlg().Canceled_y_();
 			app.Wmf_mgr().Download_wkr().Download_xrg().Prog_cancel_y_();
-			Thread_adp_.invk_(this, Invk_page_async_cancel_wait).Start();
+			Thread_adp_.Start_by_key(Invk_page_async_cancel_wait, this, Invk_page_async_cancel_wait);
 			return true;
 		}
 		return false;
 	}
 	private void Page__async__cancel__wait() {
-		while (page__async__thread.IsAlive()) {
+		while (page__async__thread.Thread__is_alive()) {
 			Thread_adp_.Sleep(10);
 		}
 		this.Active_page().File_queue().Clear();
 		this.Usr_dlg().Canceled_n_();	// NOTE: must mark "uncanceled", else one cancelation will stop all future downloads; DATE:2014-05-04
-		GfoInvkAble_.InvkCmd(sync_cmd, Invk_page_async_restart);
+		Gfo_invk_.Invk_by_key(sync_cmd, Invk_page_async_restart);
 	}
 	private void Page__async__restart() {
 		tab_mgr.Active_tab().Show_url_bgn(page__async__restart_url);
@@ -256,7 +258,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
 			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
-			Xoae_page new_page = wiki.Data_mgr().Load_page_by_ttl(url, ttl);
+			Xoae_page new_page = wiki.Data_mgr().Load_page_and_parse(url, ttl);
 			if (new_page.Missing()) {return Bry_.Empty;}
 			gplx.xowa.apps.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
 			Xog_tab_itm tab = tab_mgr.Active_tab();
@@ -291,12 +293,12 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		tab_mgr.Init_by_kit(kit);
 		this.Lang_changed(app.Usere().Lang());
 
-		GfoEvMgr_.SubSame_many(this, this, Gfui_html.Evt_location_changed, Gfui_html.Evt_location_changing, Gfui_html.Evt_link_hover);
-		GfoEvMgr_.SubSame(win_box, Gfui_html.Evt_win_resized, this);
-		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
+		Gfo_evt_mgr_.Sub_same_many(this, this, Gfui_html.Evt_location_changed, Gfui_html.Evt_location_changing, Gfui_html.Evt_link_hover);
+		Gfo_evt_mgr_.Sub_same(win_box, Gfui_html.Evt_win_resized, this);
+		Gfo_evt_mgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
 		url_box__selection_changed = new Xog_url_box__selection_changed(app, url_box);
-		GfoEvMgr_.SubSame(url_box, GfuiComboBox.Evt__selected_changed, url_box__selection_changed);
-		GfoEvMgr_.SubSame(url_box, GfuiComboBox.Evt__selected_accepted, url_box__selection_changed);
+		Gfo_evt_mgr_.Sub_same(url_box, GfuiComboBox.Evt__selected_changed, url_box__selection_changed);
+		Gfo_evt_mgr_.Sub_same(url_box, GfuiComboBox.Evt__selected_accepted, url_box__selection_changed);
 
 		if (	!Env_.Mode_testing()
 			&&	app.Mode().Tid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
@@ -304,18 +306,18 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"
-		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.apps.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
+		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
 		if (redirect_pos != Bry_find_.Not_found) {
 			text = String_.Mid(text, 0, redirect_pos);
 		}
 		return text;
 	}
 }
-class Xog_url_box__selection_changed implements GfoEvObj {
+class Xog_url_box__selection_changed implements Gfo_evt_itm {
 	private final    GfuiComboBox url_box;
 	private final    Xoae_app app;
-	public Xog_url_box__selection_changed(Xoae_app app, GfuiComboBox url_box) {this.app = app; this.url_box = url_box; this.ev_mgr = GfoEvMgr.new_(this);}
-	public GfoEvMgr EvMgr() {return ev_mgr;} private final    GfoEvMgr ev_mgr;
+	public Xog_url_box__selection_changed(Xoae_app app, GfuiComboBox url_box) {this.app = app; this.url_box = url_box; this.ev_mgr = new Gfo_evt_mgr(this);}
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	private void On_selection_changed() {
 		String text = url_box.Text();
 		text = Xog_win_itm.Remove_redirect_if_exists(text);
@@ -329,7 +331,7 @@ class Xog_url_box__selection_changed implements GfoEvObj {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, GfuiComboBox.Evt__selected_changed))			On_selection_changed();
 		else if	(ctx.Match(k, GfuiComboBox.Evt__selected_accepted))			On_selection_accepted();
-		else																return GfoInvkAble_.Rv_unhandled;
+		else																return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 }

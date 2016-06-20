@@ -21,9 +21,9 @@ import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.dbs.*; 
 import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
-import gplx.xowa.parsers.utils.*; import gplx.xowa.addons.builds.files.cmds.*; import gplx.xowa.addons.builds.files.dbs.*;
-public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, GfoInvkAble {
-	private Xowd_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
+import gplx.xowa.parsers.utils.*; import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.bldrs.files.dbs.*;
+public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gfo_invk {
+	private Xow_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;
 	private DateAdp modified_latest = DateAdp_.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k				
 	private Dg_match_mgr dg_match_mgr; private Xob_ns_to_db_mgr ns_to_db_mgr; 
@@ -45,8 +45,8 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		}
 		app.Bldr().Dump_parser().Trie_tab_del_();	// disable swapping &#09; for \t
 		byte[] ns_file_map = import_cfg.New_ns_file_map(wiki.Import_cfg().Src_rdr_len());
-		Xob_ns_file_itm.Init_ns_bldr_data(Xowd_db_file_.Tid_text, wiki.Ns_mgr(), ns_file_map);
-		if (idx_mode.Tid_is_bgn()) page_core_tbl.Create_index();
+		Xob_ns_file_itm.Init_ns_bldr_data(Xow_db_file_.Tid__text, wiki.Ns_mgr(), ns_file_map);
+		if (idx_mode.Tid_is_bgn()) page_core_tbl.Create_idx();
 		page_core_tbl.Insert_bgn();
 		usr_dlg.Prog_many("", "", "import.page.bgn");
 	}
@@ -62,7 +62,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 			if (dg_match_mgr.Match(1, id, ns.Id(), page.Ttl_page_db(), page.Ttl_full_db(), wiki.Lang(), text_raw)) return;
 		}
 		byte[] text_zip = text_zip_mgr.Zip(text_zip_tid, text_raw);
-		Xowd_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), text_zip.length);
+		Xow_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), text_zip.length);
 		try {db_mgr.Create_page(page_core_tbl, text_db.Tbl__text(), id, page.Ns_id(), page.Ttl_page_db(), redirect, modified, text_zip, text_raw_len, random_int, text_db.Id(), -1);}
 		catch (Exception e) {
 			throw Err_.new_exc(e, "bldr", "create page in db failed; skipping page", "id", id, "ns", page.Ns_id(), "name", page.Ttl_page_db(), "redirect", redirect, "modified", modified, "text_len", text_raw_len, "text_db_id", text_db.Id());
@@ -72,7 +72,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		++page_count_all;
 		if (ns.Id_is_main() && !page.Redirected()) ++page_count_main;
 		if (page_count_all % commit_interval == 0) {
-			page_core_tbl.conn.Txn_sav(); text_db.Conn().Txn_sav();
+			page_core_tbl.Conn().Txn_sav(); text_db.Conn().Txn_sav();
 			if (redirect_id_enabled) redirect_tbl.Conn().Txn_sav();
 			if (dg_match_mgr != null) dg_match_mgr.Commit();
 		}
@@ -86,15 +86,15 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		if (dg_match_mgr != null) dg_match_mgr.Rls();
 		usr_dlg.Log_many("", "", "import.page: updating core stats");
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
-		Xowd_db_file db_core = db_mgr.Db__core();
+		Xow_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_count_all, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);															// save ns
 		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__modified_latest, modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
-		if (idx_mode.Tid_is_end()) page_core_tbl.Create_index();
+		if (idx_mode.Tid_is_end()) page_core_tbl.Create_idx();
 		if (redirect_id_enabled) {
 			redirect_tbl.Conn().Txn_end();
 			redirect_tbl.Update_trg_redirect_id(db_core.Url(), 1);
-			redirect_tbl.Update_src_redirect_id(db_core.Url(), page_core_tbl.conn);
+			redirect_tbl.Update_src_redirect_id(db_core.Url(), page_core_tbl.Conn());
 		}
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

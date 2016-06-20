@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class Bry_bfr_tst {
-	private Bry_bfr bb = Bry_bfr.new_(16);
+	private Bry_bfr bb = Bry_bfr_.New();
 	@Before public void setup() {bb.Clear();} private ByteAryBfr_fxt fxt = new ByteAryBfr_fxt();
 	@Test  public void AddByte() {
-		bb = Bry_bfr.new_(2);	// NOTE: make sure auto-expands
+		bb = Bry_bfr_.New_w_size(2);	// NOTE: make sure auto-expands
 		tst_AddByte("a", "a", 2);
 		tst_AddByte("b", "ab", 2);
 		tst_AddByte("c", "abc", 4);
 	}
 	@Test  public void AddAry() {	// NOTE: make sure auto-expands
-		bb = Bry_bfr.new_(2);
+		bb = Bry_bfr_.New_w_size(2);
 		tst_AddByte("abcd", "abcd", 12);
 	}
 	@Test  public void Add_byte_repeat() {	// NOTE: make sure auto-expands
-		bb = Bry_bfr.new_(2);
+		bb = Bry_bfr_.New_w_size(2);
 		tst_Add_byte_repeat(Byte_ascii.Space, 12, String_.Repeat(" ", 12));
 	}	void tst_Add_byte_repeat(byte b, int len, String expd) {Tfds.Eq(expd, bb.Add_byte_repeat(b, len).To_str_and_clear());}
 	void tst_AddByte(String s, String expdStr, int expdLen) {
@@ -119,7 +119,7 @@ public class Bry_bfr_tst {
 //			tst_InsertAt_str("ab", 0, "cdefghij", "cdefghijab");
 //		}
 //		void tst_InsertAt_str(String orig, int insertAt, String insertStr, String expd) {
-//			bb = Bry_bfr.new_(16);
+//			bb = Bry_bfr_.New(16);
 //			bb.Add_str(orig);
 //			bb.InsertAt_str(insertAt, insertStr);
 //			String actl = bb.To_str_and_clear();
@@ -166,7 +166,7 @@ public class Bry_bfr_tst {
 		tst_Add_bfr_trimEnd_and_clear("a ", "a");
 	}
 	void tst_Add_bfr_trimEnd_and_clear(String raw, String expd) {
-		Bry_bfr tmp = Bry_bfr.new_().Add_str_u8(raw);
+		Bry_bfr tmp = Bry_bfr_.New().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, false, true).To_str_and_clear());
 	}
 	@Test  public void Add_bfr_trimAll_and_clear() {
@@ -176,7 +176,7 @@ public class Bry_bfr_tst {
 		tst_Add_bfr_trimAll_and_clear("", "");
 	}
 	void tst_Add_bfr_trimAll_and_clear(String raw, String expd) {
-		Bry_bfr tmp = Bry_bfr.new_().Add_str_u8(raw);
+		Bry_bfr tmp = Bry_bfr_.New().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, true, true).To_str_and_clear());
 	}
 	@Test  public void Add_int_pad_bgn() {
@@ -216,7 +216,7 @@ public class Bry_bfr_tst {
 	}
 }
 class ByteAryBfr_fxt {
-	private final    Bry_bfr bfr = Bry_bfr.reset_(16);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(16);
 	public void Clear() {
 		bfr.ClearAndReset();
 	}

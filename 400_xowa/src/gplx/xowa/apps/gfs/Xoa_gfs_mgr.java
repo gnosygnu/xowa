@@ -18,28 +18,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.langs.gfs.*;
 import gplx.xowa.users.*; import gplx.xowa.apps.fsys.*;
-public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
-	private final Xou_fsys_mgr usr_fsys_mgr;
-	public Xoa_gfs_mgr(GfoInvkAble root_invk, Xoa_fsys_mgr app_fsys_mgr, Xou_fsys_mgr usr_fsys_mgr) {
+public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
+	private final    Xou_fsys_mgr usr_fsys_mgr;
+	public Xoa_gfs_mgr(Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr, Xou_fsys_mgr usr_fsys_mgr) {
 		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr; this.usr_fsys_mgr = usr_fsys_mgr;
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_app);
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_xowa);
 	}
-	public GfoInvkAble Root_invk() {return root_invk;} private final GfoInvkAble root_invk; 
-	public Xoa_fsys_mgr App_fsys_mgr() {return app_fsys_mgr;} private final Xoa_fsys_mgr app_fsys_mgr; 
-	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private final Xoa_app_eval eval_mgr = new Xoa_app_eval();
-	public Gfs_wtr Wtr() {return wtr;} private final Gfs_wtr wtr = new Gfs_wtr();
+	public Gfo_invk Root_invk() {return root_invk;} private final    Gfo_invk root_invk; 
+	public Xoa_fsys_mgr App_fsys_mgr() {return app_fsys_mgr;} private final    Xoa_fsys_mgr app_fsys_mgr; 
+	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private final    Xoa_app_eval eval_mgr = new Xoa_app_eval();
+	public Gfs_wtr Wtr() {return wtr;} private final    Gfs_wtr wtr = new Gfs_wtr();
 	public void Run_url(Io_url url) {
 		Run_url_for(GfsCore.Instance.Root(), url);
 		Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("gfs.done: ~{0}", url.Raw());
 	}
-	public void Run_url_for(GfoInvkAble invk, Io_url url) {
+	public void Run_url_for(Gfo_invk invk, Io_url url) {
 		String raw = Io_mgr.Instance.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
 		Run_str_for(invk, raw);
 	}
 	public Object Run_str(String raw) {return Run_str_for(GfsCore.Instance.Root(), raw);}
-	public Object Run_str_for(GfoInvkAble invk, String raw) {return Run_str_for(invk, Xoa_gfs_mgr_.Parse_to_msg(raw));}
-	public Object Run_str_for(GfoInvkAble invk, GfoMsg root_msg) {
+	public Object Run_str_for(Gfo_invk invk, String raw) {return Run_str_for(invk, Xoa_gfs_mgr_.Parse_to_msg(raw));}
+	public Object Run_str_for(Gfo_invk invk, GfoMsg root_msg) {
 		try {
 			Object rv = null;
 			GfsCtx ctx = GfsCtx.new_().Fail_if_unhandled_(Fail_if_unhandled).Usr_dlg_(Gfo_usr_dlg_.Instance);
@@ -49,7 +49,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			return rv;	// return rv from last call
 		} catch (Exception e) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx_full(e));
-			return GfoInvkAble_.Rv_error;
+			return Gfo_invk_.Rv_error;
 		}
 	}
 	private void Run_url_by_type(String type) {
@@ -71,8 +71,8 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run_file_by_type))		Run_url_by_type(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_fail_if_unhandled_))		{Fail_if_unhandled = m.ReadYn("v"); ctx.Fail_if_unhandled_(Fail_if_unhandled);}
-		else if	(ctx.Match(k, Invk_txns))					{return GfoInvkAble_.Null;}	// FUTURE: handle version for upgrades
-		else return GfoInvkAble_.Rv_unhandled;
+		else if	(ctx.Match(k, Invk_txns))					{return Gfo_invk_.Noop;}	// FUTURE: handle version for upgrades
+		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_run_file_by_type = "run_file_by_type", Invk_fail_if_unhandled_ = "fail_if_unhandled_", Invk_txns = "txns";
 	public static void Msg_parser_init() {GfsCore.Instance.MsgParser_(gplx.langs.gfs.Gfs_msg_bldr.Instance);}

@@ -17,24 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.gfo_regys.*;
-public class GfsCore implements GfoInvkAble {
-	public GfoInvkAble Root() {return root;}
+public class GfsCore implements Gfo_invk {
+	public Gfo_invk Root() {return root;}
 	@gplx.Internal protected GfsRegy Root_as_regy() {return root;} GfsRegy root = GfsRegy.new_();
 	public void Clear() {root.Clear();}
 	public GfoMsgParser MsgParser() {return msgParser;} public GfsCore MsgParser_(GfoMsgParser v) {msgParser = v; return this;} GfoMsgParser msgParser;
 	public void Del(String key) {root.Del(key);}
 	public void AddLib(GfsLibIni... ary) {for (GfsLibIni itm : ary) itm.Ini(this);}
-	public void AddCmd(GfoInvkAble invk, String key) {root.AddCmd(invk, key);}
-	public void AddObj(GfoInvkAble invk, String key) {root.AddObj(invk, key);}
-	public void AddDeep(GfoInvkAble invk, String... ary) {
-		GfoInvkCmdMgrOwner cur = (GfoInvkCmdMgrOwner)((GfsRegyItm)root.Get_by(ary[0])).InvkAble();
+	public void AddCmd(Gfo_invk invk, String key) {root.AddCmd(invk, key);}
+	public void AddObj(Gfo_invk invk, String key) {root.AddObj(invk, key);}
+	public void AddDeep(Gfo_invk invk, String... ary) {
+		Gfo_invk_cmd_mgr_owner cur = (Gfo_invk_cmd_mgr_owner)((GfsRegyItm)root.Get_by(ary[0])).InvkAble();
 		for (int i = 1; i < ary.length - 1; i++)
-			cur = (GfoInvkCmdMgrOwner)cur.InvkMgr().Invk(GfsCtx.Instance, 0, ary[i], GfoMsg_.Null, cur);
+			cur = (Gfo_invk_cmd_mgr_owner)cur.InvkMgr().Invk(GfsCtx.Instance, 0, ary[i], GfoMsg_.Null, cur);
 		cur.InvkMgr().Add_cmd(ary[ary.length - 1], invk);
 	}
-	public String FetchKey(GfoInvkAble invk) {return root.FetchByType(invk).Key();}
+	public String FetchKey(Gfo_invk invk) {return root.FetchByType(invk).Key();}
 	public Object ExecOne(GfsCtx ctx, GfoMsg msg) {return GfsCore_.Exec(ctx, root, msg, null, 0);}
-	public Object ExecOne_to(GfsCtx ctx, GfoInvkAble invk, GfoMsg msg) {return GfsCore_.Exec(ctx, invk, msg, null, 0);}
+	public Object ExecOne_to(GfsCtx ctx, Gfo_invk invk, GfoMsg msg) {return GfsCore_.Exec(ctx, invk, msg, null, 0);}
 	public Object ExecMany(GfsCtx ctx, GfoMsg rootMsg) {
 		Object rv = null;
 		for (int i = 0; i < rootMsg.Subs_count(); i++) {
@@ -55,13 +55,13 @@ public class GfsCore implements GfoInvkAble {
 	}
 	public Object ExecFile_ignoreMissing(Io_url url) {if (!Io_mgr.Instance.ExistsFil(url)) return null; return ExecText(Io_mgr.Instance.LoadFilStr(url));}
 	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.Instance.LoadFilStr(url));}
-	public Object ExecFile_ignoreMissing(GfoInvkAble root, Io_url url) {
+	public Object ExecFile_ignoreMissing(Gfo_invk root, Io_url url) {
 		if (!Io_mgr.Instance.ExistsFil(url)) return null; 
 		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
 		return Exec_bry(Io_mgr.Instance.LoadFilBry(url), root);
 	}
 	public Object Exec_bry(byte[] bry) {return Exec_bry(bry, root);}
-	public Object Exec_bry(byte[] bry, GfoInvkAble root) {
+	public Object Exec_bry(byte[] bry, Gfo_invk root) {
 		GfoMsg rootMsg = msgParser.ParseToMsg(String_.new_u8(bry));
 		Object rv = null;
 		GfsCtx ctx = GfsCtx.new_();
@@ -82,9 +82,9 @@ public class GfsCore implements GfoInvkAble {
 			if (ctx.Deny()) return this;
 			return ExecFile(url);
 		}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 //			return this;
-	}	public static final String Invk_ExecFil = "ExecFil";
-        public static final GfsCore Instance = new GfsCore();
+	}	public static final    String Invk_ExecFil = "ExecFil";
+        public static final    GfsCore Instance = new GfsCore();
         @gplx.Internal protected static GfsCore new_() {return new GfsCore();}
 }

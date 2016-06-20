@@ -38,7 +38,7 @@ public class Scrib_core_fxt {
 		core.When_page_changed(wiki.Parser_mgr().Ctx().Page());
 		expd_server_rcvd_list.Clear();
 		return this;
-	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Scrib_core Core() {return core;} private Scrib_core core;
 	public Process_server_mock Server() {return server;} Process_server_mock server;
 	public Keyval kv_(Object key, Object val) {return Keyval_.obj_(key, val);}
@@ -63,7 +63,7 @@ public class Scrib_core_fxt {
 		core.Proc_mgr().Set(core.Lib_mw(), func, idx);
 		return this;
 	}
-	public Scrib_core_fxt Expd_server_rcvd_add(String v) {expd_server_rcvd_list.Add(v); return this;} List_adp expd_server_rcvd_list = List_adp_.new_();
+	public Scrib_core_fxt Expd_server_rcvd_add(String v) {expd_server_rcvd_list.Add(v); return this;} List_adp expd_server_rcvd_list = List_adp_.New();
 	public Scrib_core_fxt Test_LoadString(String name, String text, int expd_id) {
 		int actl_id = core.Interpreter().LoadString(name, text).Id();
 		Test_server_logs();
@@ -135,7 +135,7 @@ public class Scrib_core_fxt {
 		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(Frame_ttl_test, args), tmp_bfr, Bry_.new_u8(mod_name), Bry_.new_u8(mod_code), Bry_.new_u8(prc_name));
 		Test_server_logs();
 		return this;
-	}	private static final byte[] Frame_ttl_test = Bry_.new_a7("test");
+	}	private static final    byte[] Frame_ttl_test = Bry_.new_a7("test");
 	private void Test_server_logs() {
 		if (expd_server_rcvd_list.Count() > 0) {
 			Tfds.Eq_ary_str(expd_server_rcvd_list.To_str_ary(), server.Log_rcvd().To_str_ary());

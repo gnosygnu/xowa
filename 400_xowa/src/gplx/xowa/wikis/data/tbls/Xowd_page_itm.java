@@ -29,11 +29,12 @@ public class Xowd_page_itm {
 	public int			Text_len() {return text_len;} public Xowd_page_itm Text_len_(int v) {text_len = v; return this;} private int text_len;
 	public int			Text_db_id() {return text_db_id;} public Xowd_page_itm Text_db_id_(int v) {text_db_id = v; return this;} private int text_db_id;
 	public byte[]		Text() {return text;} public Xowd_page_itm Text_(byte[] v) {text = v; if (v != null) text_len = v.length; return this;} private byte[] text;
+	public int			Random_int() {return random_int;} private int random_int;
 	public int			Html_db_id() {return html_db_id;} private int html_db_id;
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;
 	public DateAdp		Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on;
 	public boolean			Exists() {return exists;} public Xowd_page_itm Exists_(boolean v) {exists = v; return this;} private boolean exists;
-	public int			Page_score;
+	public int			Score() {return score;} private int score;
 	public Xow_ns		Ns() {return ns;} private Xow_ns ns;
 	public Object		Xtn() {return xtn;} public Xowd_page_itm Xtn_(Object v) {this.xtn = v; return this;} private Object xtn;
 	public int			Tdb_row_idx() {return tdb_row_idx;} public void Tdb_row_idx_(int v) {tdb_row_idx = v;} private int tdb_row_idx;
@@ -44,17 +45,18 @@ public class Xowd_page_itm {
 		id_val = null;
 		return this;
 	}
-	public void	Init_by_sql(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int text_db_id, int html_db_id, int redirect_id, int page_score) {
+	public void	Init_by_sql(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score) {
 		this.id = id;
 		this.ns_id = ns_id;
 		this.ttl_page_db = ttl_page_db;
 		this.modified_on = modified_on;
 		this.redirected = redirected;
 		this.text_len = text_len;
+		this.random_int = random_int;
 		this.text_db_id = text_db_id;
 		this.html_db_id = html_db_id;
 		this.redirect_id = redirect_id;
-		this.Page_score = page_score;
+		this.score = score;
 	}
 	public void	Init_by_tdb(int id, int text_db_id, int tdb_row_idx, boolean redirected, int text_len, int ns_id, byte[] ttl_page_db) {
 		this.id = id;
@@ -128,4 +130,9 @@ public class Xowd_page_itm {
 	public static final    Xowd_page_itm Null = null;
 	public static Xowd_page_itm new_tmp()							{return new Xowd_page_itm();}
 	public static Xowd_page_itm new_srch(int id, int text_len)		{return new Xowd_page_itm().Id_(id).Text_len_(text_len);}
+
+	public static final int Db_row_size_fixed = 
+		  (8 * 4)	// page_id, page_namespace, page_random_int, page_text_db_id, page_html_db_id, page_redirect_id, page_score, page_is_redirect (assume byte saved as int in SQLITE)
+		+ 14		// page_touched
+	;
 }

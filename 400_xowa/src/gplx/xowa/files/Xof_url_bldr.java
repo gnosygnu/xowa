@@ -20,7 +20,7 @@ import gplx.core.envs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*;
 public class Xof_url_bldr {
-	private final Bry_bfr bfr = Bry_bfr.reset_(400);
+	private final    Bry_bfr bfr = Bry_bfr_.Reset(400);
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
 	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = Byte_ascii.At;
 	private byte[] root; private byte dir_spr; private boolean fsys_tid_is_wnt; private boolean wmf_dir_hive; private boolean wmf_protocol_is_file; private int md5_dir_depth; private byte[] area;
@@ -195,17 +195,17 @@ public class Xof_url_bldr {
 		bfr.Clear();
 		return this;
 	}
-	public static final byte[]
+	public static final    byte[]
 	  Bry_reg = Bry_.new_a7("reg.csv")
 	, Bry_px = Bry_.new_a7("px"), Bry_px_dash = Bry_.new_a7("px-")
 	, Bry_thumb = Bry_.new_a7("thumb")
 	, Bry_thumnbail_w_dot = Bry_.new_a7("thumbnail.")
 	;
-	private static final byte[]
+	private static final    byte[]
 	  Bry_lossy_page  = Bry_.new_a7("lossy-page"), Bry_page = Bry_.new_a7("page")
 	, Bry_lossy_page1 = Bry_.new_a7("lossy-page1-"), Bry_page1 = Bry_.new_a7("page1-"), Bry_seek = Bry_.new_a7("seek%3D");
-	public static final Xof_url_bldr Temp = new Xof_url_bldr();
-	private static final Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.Http_url; // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
+	public static final    Xof_url_bldr Temp = new Xof_url_bldr();
+	private static final    Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.Http_url; // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
 	public static Xof_url_bldr new_v2() {
 		Xof_url_bldr rv = new Xof_url_bldr();
 		rv.time_dlm = Byte_ascii.Dash;

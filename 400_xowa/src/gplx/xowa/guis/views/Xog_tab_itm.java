@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*; import gplx.core.envs.*; import gplx.gfui.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.bnds.*;
+import gplx.core.threads.*; import gplx.core.envs.*;
+import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.guis.history.*; import gplx.xowa.guis.bnds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.langs.vnts.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
-public class Xog_tab_itm implements GfoInvkAble {
+public class Xog_tab_itm implements Gfo_invk {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
 		this.tab_mgr = tab_mgr; this.tab_data = tab_data; this.wiki = wiki; this.page = page;
@@ -30,7 +32,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		cmd_sync = win.Kit().New_cmd_sync(this);
 	}
 	public Xowe_wiki Wiki() {return wiki;} public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public GfoInvkAble Cmd_sync() {return cmd_sync;} private GfoInvkAble cmd_sync;
+	public Gfo_invk Cmd_sync() {return cmd_sync;} private Gfo_invk cmd_sync;
 	public void Make_html_box(int uid, Gfui_tab_itm tab_box, Xog_win_itm win, GfuiElem owner) {
 		this.tab_box = tab_box;
 		Xoae_app app = win.App(); Xoa_gui_mgr gui_mgr = win.Gui_mgr(); Gfui_kit kit = win.Kit();
@@ -42,7 +44,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
 			IptBnd_.cmd_to_(IptCfg_.Null, html_box, win, Xog_win_itm.Invk_exit, IptKey_.add_(IptKey_.Alt, IptKey_.F4));	// WORKAROUND:SWT: xulrunner_v24 no longer sends Alt+F4 to SwtShell; must manually subscribe it to quit; DATE:2015-07-31
-			GfoEvMgr_.SubSame(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);
+			Gfo_evt_mgr_.Sub_same(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);
 			gui_mgr.Bnd_mgr().Bind(Xog_bnd_box_.Tid_browser_html, html_box);
 			if (!Env_.Mode_testing())
 				kit.Set_mnu_popup(html_box, gui_mgr.Menu_mgr().Popup().Html_page().Under_mnu());
@@ -76,9 +78,12 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public Xog_html_itm			Html_itm() {return html_itm;} private Xog_html_itm html_itm;
 	public Gfui_html			Html_box() {return html_itm.Html_box();}
 	public Xoae_page			Page() {return page;}
-	public void Page_(Xoae_page page) {
-		this.page = page;
+	public void Page_ref_(Xoae_page v) {
+		this.page = v;
 		this.wiki = page.Wikie();	// NOTE: must update wiki else back doesn't work; DATE:2015-03-05
+	}
+	public void Page_(Xoae_page page) {
+		Page_ref_(page);
 		this.Page_update_ui();	// force tab button to update when page changes
 	}	private Xoae_page page;		
 	public void Page_update_ui() {
@@ -171,7 +176,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			// html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // COMMENTED: causes clicks on macosx to be off by 4 px; NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
 			//	win.Page__async__bgn(this);
 			Gfo_thread_wkr async_wkr = null;
-			if (wkr.Hdump_enabled()) {
+			if (page.Html_data().Hdump_exists()) {
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
 				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
@@ -257,8 +262,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 		}
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
-				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.Usere().Cfg_mgr().Log_mgr().Log_redlinks());
-				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
+				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(page);
+				Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run);
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
@@ -270,7 +275,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_show_url_loaded_swt))	this.Show_url_loaded((Load_page_wkr)m.ReadObj("v"));
 		else if	(ctx.Match(k, Invk_show_url_failed_swt))	this.Show_url_failed((Load_page_wkr)m.ReadObj("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	public static final String Invk_show_url_loaded_swt = "show_url_loaded_swt", Invk_show_url_failed_swt = "show_url_failed_swt";
@@ -278,9 +283,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 class Load_files_wkr implements Gfo_thread_wkr {
 	private Xog_tab_itm tab;
 	public Load_files_wkr(Xog_tab_itm tab) {this.tab = tab;}
-	public String Name() {return "xowa.load_files_wkr";}
-	public boolean Resume() {return true;}
-	public void Exec() {
+	public String			Thread__name() {return "xowa.load_files_wkr";}
+	public boolean			Thread__resume() {return true;}
+	public void Thread__exec() {
 		try {tab.Async();}
 		catch (Exception e) {
 			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));

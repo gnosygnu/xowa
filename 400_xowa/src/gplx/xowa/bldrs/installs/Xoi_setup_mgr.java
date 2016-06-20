@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.gfui.*; import gplx.xowa.bldrs.setups.addons.*;
 import gplx.xowa.bldrs.setups.maints.*;
-public class Xoi_setup_mgr implements GfoInvkAble {
+public class Xoi_setup_mgr implements Gfo_invk {
 	public Xoi_setup_mgr(Xoae_app app) {
 		this.app = app;
 		cmd_mgr = new Xoi_cmd_mgr(this);
@@ -37,7 +37,7 @@ public class Xoi_setup_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_dumps))								return dump_mgr;
 		else if	(ctx.Match(k, Invk_addons))								return addon_mgr;
 		else if	(ctx.Match(k, Invk_maint))								return maint_mgr;
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	static final String Invk_cmds = "cmds", Invk_dumps = "dumps", Invk_addons = "addons", Invk_maint = "maint";
 	static final String GRP_KEY = "xowa.setup";

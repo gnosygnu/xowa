@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
-import gplx.xowa.addons.apps.searchs.bldrs.*;
+import gplx.xowa.addons.wikis.searchs.bldrs.*;
 public class Xob_search_base_tst {
 	@Test  public void Split() {
 		tst_Split("a", "a");
@@ -47,7 +47,7 @@ public class Xob_search_base_tst {
 		;
 	}	private Xob_fxt fxt = new Xob_fxt().Ctor_mem();
 	private void tst_Split(String raw, String... expd) {
-		Ordered_hash list = Ordered_hash_.New(); Bry_bfr bfr = Bry_bfr.new_();
+		Ordered_hash list = Ordered_hash_.New(); Bry_bfr bfr = Bry_bfr_.New();
 		byte[][] actl_bry = Srch_bldr_wkr_base.Split_ttl_into_words(fxt.App().Lang_mgr().Lang_en(), list, bfr, Bry_.new_u8(raw));
 		String[] actl = new String[actl_bry.length];
 		for (int i = 0; i < actl_bry.length; i++)

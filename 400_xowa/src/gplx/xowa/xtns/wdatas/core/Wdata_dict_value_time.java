@@ -41,7 +41,7 @@ public class Wdata_dict_value_time {
 	, Bry_precision								= Bry_.new_a7(Str_precision)
 	, Bry_calendarmodel							= Bry_.new_a7(Str_calendarmodel)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
+	public static final    Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_time						, Tid_time)
 	.Add_bry_byte(Bry_timezone					, Tid_timezone)
 	.Add_bry_byte(Bry_before					, Tid_before)
@@ -62,7 +62,7 @@ public class Wdata_dict_value_time {
 	, Val_timezone_str							= "0"
 	, Val_calendarmodel_str						= "http://www.wikidata.org/entity/Q1985727"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Val_precision_bry							= Bry_.new_a7(Val_precision_str)
 	, Val_before_bry							= Bry_.new_a7(Val_before_str)
 	, Val_after_bry								= Bry_.new_a7(Val_after_str)
@@ -89,5 +89,5 @@ public class Wdata_dict_value_time {
 		;
 		return tmp_bfr.To_bry_and_clear();
 	}
-	private static Bry_bfr tmp_bfr = Bry_bfr.new_(); private static byte[] Bry_year_prefix = Bry_.new_a7("+0000000");
+	private static Bry_bfr tmp_bfr = Bry_bfr_.New(); private static byte[] Bry_year_prefix = Bry_.new_a7("+0000000");
 }

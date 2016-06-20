@@ -82,7 +82,7 @@ class Php_srl_parser_fxt {
 	public void Clear() {
 		parser = new Php_srl_parser();
 		factory = parser.Factory();				
-	}	Php_srl_parser parser; Php_srl_factory factory; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	}	Php_srl_parser parser; Php_srl_factory factory; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Php_srl_itm itm_nil_()						{return factory.Nil();}
 	public Php_srl_itm itm_bool_n_()					{return factory.Bool_n();}
 	public Php_srl_itm itm_bool_y_()					{return factory.Bool_y();}

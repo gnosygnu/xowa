@@ -24,7 +24,7 @@ public class Xoh_page_wtr_mgr_tst {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr();
-		GfoInvkAble_.InvkCmd_val(portal_mgr, Xow_portal_mgr.Invk_div_logo_, Bry_.new_a7("~{portal_nav_main_href}"));
+		Gfo_invk_.Invk_by_val(portal_mgr, Xow_portal_mgr.Invk_div_logo_, Bry_.new_a7("~{portal_nav_main_href}"));
 		portal_mgr.Init_assert();
 		Xoh_page_wtr_mgr page_wtr_mgr = new Xoh_page_wtr_mgr(true);
 		page_wtr_mgr.Gen(wiki.Parser_mgr().Ctx().Page(), Xopg_page_.Tid_read);

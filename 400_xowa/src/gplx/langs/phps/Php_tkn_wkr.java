@@ -24,7 +24,7 @@ public interface Php_tkn_wkr {
 }
 class Php_tkn_wkr_tkn implements Php_tkn_wkr {
 	public void Init(Php_ctx ctx) {}
-	public List_adp List() {return lines;} List_adp lines = List_adp_.new_();
+	public List_adp List() {return lines;} List_adp lines = List_adp_.New();
 	public Gfo_msg_log Msg_log() {return msg_log;} Gfo_msg_log msg_log = new Gfo_msg_log("gplx.langs.phps");
 	public void Clear() {lines.Clear(); msg_log.Clear();}
 	public void Process(Php_tkn tkn) {

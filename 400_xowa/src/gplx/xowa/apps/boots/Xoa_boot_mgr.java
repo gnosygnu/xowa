@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.core.consoles.*;  import gplx.core.envs.*;
 import gplx.dbs.*;
-import gplx.gfui.*; import gplx.xowa.guis.views.boots.*;
+import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.views.boots.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.users.*;	
 public class Xoa_boot_mgr {
@@ -39,6 +39,7 @@ public class Xoa_boot_mgr {
 	}
 	private void Init_env(String[] args) {
 		Gfo_usr_dlg_.Instance = usr_dlg = Xoa_app_.usr_dlg_console_();
+		Gfo_log_.Instance__set(new gplx.xowa.apps.shells.Gfo_log__console());
 		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();

@@ -19,8 +19,8 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.criterias.*;
 import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 public class Mem_exec_select {
-	private final Mem_engine engine;
-	private final List_adp tmp_where_rows = List_adp_.new_();
+	private final    Mem_engine engine;
+	private final    List_adp tmp_where_rows = List_adp_.New();
 	public Mem_exec_select(Mem_engine engine) {this.engine = engine;}
 	public Db_rdr Select(Mem_stmt stmt) {
 		Db_qry stmt_qry = stmt.Qry();
@@ -73,7 +73,7 @@ public class Mem_exec_select {
 	}
 }
 class Mem_sorter implements gplx.core.lists.ComparerAble {
-	private final Sql_order_fld[] flds;
+	private final    Sql_order_fld[] flds;
 	public Mem_sorter(Sql_order_fld[] flds) {
 		this.flds = flds;
 	}
@@ -94,7 +94,7 @@ class Mem_sorter implements gplx.core.lists.ComparerAble {
 class Mem_exec_ {
 	public static Mem_row[] Rows__join(int join_tid, Mem_row[] lhs_rows, Mem_row[] rhs_rows, String tbl_alias, Sql_join_fld[] join_flds) {
 		int join_flds_len = join_flds.length;
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		Hash_adp_bry rhs_hash = Hash_adp_bry.cs();
 		int rhs_rows_len = rhs_rows.length;
 		for (int i = 0; i < rhs_rows_len; ++i) {
@@ -102,12 +102,12 @@ class Mem_exec_ {
 			byte[] rhs_key = Rows__bld_key(bfr, Bool_.N, tbl_alias, rhs_row, join_flds, join_flds_len);
 			List_adp rhs_list = (List_adp)rhs_hash.Get_by_bry(rhs_key);
 			if (rhs_list == null) {
-				rhs_list = List_adp_.new_();
+				rhs_list = List_adp_.New();
 				rhs_hash.Add(rhs_key, rhs_list);
 			}
 			rhs_list.Add(rhs_row);
 		}
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int lhs_len = lhs_rows.length;
 		for (int i = 0; i < lhs_len; ++i) {
 			Mem_row lhs_row = lhs_rows[i];

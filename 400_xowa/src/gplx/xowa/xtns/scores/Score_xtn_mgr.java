@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
 public class Score_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("score");
-	@Override public Xox_mgr Clone_new() {return new Score_xtn_mgr();}
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("score");
+	@Override public Xox_mgr Xtn_clone_new() {return new Score_xtn_mgr();}
 	public Bry_fmtr Html_img() {return html_img;} private Bry_fmtr html_img = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	""
 		,	"<p>"

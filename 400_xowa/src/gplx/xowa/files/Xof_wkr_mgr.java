@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.files.fsdb.*;
-class Xof_wkr_mgr implements GfoInvkAble {
+class Xof_wkr_mgr implements Gfo_invk {
 	private Xow_file_mgr file_mgr;
 	public Xof_wkr_mgr(Xow_file_mgr file_mgr) {this.file_mgr = file_mgr;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		return Get_or_new(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_get = "get";
 	private Xof_fsdb_mgr Get_or_new(String key) {

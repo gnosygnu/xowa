@@ -22,15 +22,15 @@ import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 public class Xoh_page_wtr_wkr {
-	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final    Xoh_page_wtr_mgr mgr; private final    byte page_mode;
 	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
-	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx ctx; private Xoae_page page; private byte[] root_dir_bry;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
 	public byte[] Write_page(Xoae_page page, Xop_ctx ctx, Bry_bfr bfr) {
 		synchronized (thread_lock_1) {
-			this.page = page; this.ctx = ctx; this.wiki = page.Wikie(); this.app = wiki.Appe();
+			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			ctx.Page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
 			Bry_fmtr fmtr = null;
 			if (mgr.Html_capable()) {
@@ -45,27 +45,27 @@ public class Xoh_page_wtr_wkr {
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
-				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Html().Page().View_html_generates_hdump()) {
+				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Wiki().Hdump().Html_mode().Tid_is_hdump_save()) {
 					hctx = Xoh_wtr_ctx.Hdump;
-					Write_body(page_bfr, hctx, page);
-					Write_page_by_tid(hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+					Write_body(page_bfr, ctx, hctx, page);
+					Write_page_by_tid(ctx, hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
 				}
 				else {
 					hctx = Xoh_wtr_ctx.Basic;
-					Write_body(page_bfr, hctx, page);
-					Write_page_by_tid(hctx, view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
+					Write_body(page_bfr, ctx, hctx, page);
+					Write_page_by_tid(ctx, hctx, view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
-						Write_page_by_tid(hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
+						Write_page_by_tid(ctx, hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
 			}
 			else
-				Write_body(bfr, Xoh_wtr_ctx.Basic, page);
+				Write_body(bfr, ctx, Xoh_wtr_ctx.Basic, page);
 			this.page = null;
 			return bfr.To_bry_and_clear();
 		}
 	}
-	private void Write_page_by_tid(Xoh_wtr_ctx hctx, byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
+	private void Write_page_by_tid(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
 		// if custom_html, use it and exit; needed for Default_tab
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {bfr.Add(custom_html); return;}
@@ -105,7 +105,7 @@ public class Xoh_page_wtr_wkr {
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, tmp_bfr, page);	// add after </head>
 		Xoh_page_wtr_wkr_.Bld_html_end(bfr, tmp_bfr, page);	// add after </html>
 	}
-	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page) {
+	public void Write_body(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page) {
 		synchronized (thread_lock_2) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
@@ -121,7 +121,7 @@ public class Xoh_page_wtr_wkr {
 					case Xow_page_tid.Tid_css:
 					case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
 					case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Full_db(), data_raw); break;
-					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, hctx, page, page_tid, page_ns_id); break;
+					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, ctx, hctx, page, page_tid, page_ns_id); break;
 				}
 			}
 			if (	wiki.Domain_tid() != Xow_domain_tid_.Int__home	// allow home wiki to use javascript
@@ -130,7 +130,7 @@ public class Xoh_page_wtr_wkr {
 			}
 		}
 	}
-	private void Write_body_wikitext(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoae_page page, byte page_tid, int ns_id) {
+	private void Write_body_wikitext(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page, byte page_tid, int ns_id) {
 		// dump and exit if pre-generated html from html dumps
 		byte[] hdump_data = page.Hdump_data().Body();
 		if (Bry_.Len_gt_0(hdump_data)) {

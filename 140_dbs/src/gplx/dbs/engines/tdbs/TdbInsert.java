@@ -57,7 +57,7 @@ class TdbInsertWkr implements Db_qryWkr {
 		return 1;
 	}
 	private String To_str(Sql_select_fld_list flds) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		for (int i = 0; i < flds.Len(); i++) {
 			Sql_select_fld fld = flds.Get_at(i);
 			bfr.Add_str_u8(String_.Format("{0},{1}|", fld.Fld, fld.Alias));

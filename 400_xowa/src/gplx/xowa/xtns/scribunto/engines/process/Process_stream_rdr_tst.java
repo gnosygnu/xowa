@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import org.junit.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public class Process_stream_rdr_tst {
 	@Before public void init() {fxt.Clear();} Scrib_lua_srl_fxt fxt = new Scrib_lua_srl_fxt();
 	@Test  public void Body_basic() {
@@ -67,7 +67,7 @@ class Process_stream_rdr_fxt {
 		}
 		expd_str = bfr.To_str_and_clear();
 		return this;
-	} 	Bry_bfr bfr = Bry_bfr.reset_(128);
+	} 	Bry_bfr bfr = Bry_bfr_.Reset(128);
 	public void Test_read_body() {
 		rdr.Data_bry_(src_bry);
 		byte[] bry_body = new byte[src_len];

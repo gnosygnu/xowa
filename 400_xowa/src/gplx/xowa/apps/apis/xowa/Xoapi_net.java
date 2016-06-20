@@ -16,23 +16,23 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*;
-public class Xoapi_net implements GfoInvkAble, GfoEvObj {
-	public Xoapi_net() {this.ev_mgr = GfoEvMgr.new_(this);}
-	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+public class Xoapi_net implements Gfo_invk, Gfo_evt_itm {
+	public Xoapi_net() {this.ev_mgr = new Gfo_evt_mgr(this);}
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public void Init_by_kit(Xoae_app app) {
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {
 		this.enabled = v;
 		gplx.core.ios.IoEngine_system.Web_access_enabled = v;
-		GfoEvMgr_.PubVal(this, gplx.xowa.guis.menus.dom.Xog_mnu_evt_mgr.Evt_selected_changed, v);
+		Gfo_evt_mgr_.Pub_val(this, gplx.xowa.guis.menus.dom.Xog_mnu_evt_mgr.Evt_selected_changed, v);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))	 			return this.Enabled();
 		else if	(ctx.Match(k, Invk_enabled_n_))	 			this.Enabled_(Bool_.N);
 		else if	(ctx.Match(k, Invk_enabled_y_))	 			this.Enabled_(Bool_.Y);
 		else if	(ctx.Match(k, Invk_enabled_x_)) 			this.Enabled_(this.Enabled());
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String

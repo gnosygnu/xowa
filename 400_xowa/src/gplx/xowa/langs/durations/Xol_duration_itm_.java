@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xol_duration_itm_ {
-	private static final Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
+	private static final    Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
 	public static final byte
 	  Tid_millenia		= 0
 	, Tid_centuries		= 1
@@ -29,7 +29,7 @@ public class Xol_duration_itm_ {
 	, Tid_minutes		= 7
 	, Tid_seconds		= 8
 	;
-	public static final Xol_duration_itm
+	public static final    Xol_duration_itm
 	  Itm_millenia		= new_(Tid_millenia		, "millenia"		, 31556952000L)
 	, Itm_centuries		= new_(Tid_centuries	, "centuries"		,  3155695200L)
 	, Itm_decades		= new_(Tid_decades		, "decades"			,   315569520L)
@@ -45,7 +45,7 @@ public class Xol_duration_itm_ {
 		regy.Add(rv.Name_bry(), rv);
 		return rv;
 	}
-	public static final Xol_duration_itm[] Ary_default = new Xol_duration_itm[]
+	public static final    Xol_duration_itm[] Ary_default = new Xol_duration_itm[]
 	{ Itm_millenia
 	, Itm_centuries
 	, Itm_decades
@@ -58,7 +58,7 @@ public class Xol_duration_itm_ {
 	};
 	public static Xol_duration_itm[] Xto_itm_ary(Keyval[] kv_ary) {
 		if (kv_ary == null) return Xol_duration_itm_.Ary_default;
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		int len = kv_ary.length;
 		for (int i = 0; i < len; i++) {
 			Keyval kv = kv_ary[i];
@@ -76,5 +76,5 @@ class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;
 		return -Long_.Compare(lhs.Seconds(), rhs.Seconds());	// - to sort from largest to smallest
 	}
-	public static final Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}
+	public static final    Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}
 }

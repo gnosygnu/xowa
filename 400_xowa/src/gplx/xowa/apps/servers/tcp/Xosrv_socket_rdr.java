@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.ios.*;
-public class Xosrv_socket_rdr implements GfoInvkAble {
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
+public class Xosrv_socket_rdr implements Gfo_invk {
 	private Socket_rdr rdr = new Socket_rdr();
 	public int Port() {return port;} private int port;
 	public void Init(Xosrv_server server, int port) {this.server = server; this.port = port;} private Xosrv_server server;
@@ -42,7 +42,7 @@ public class Xosrv_socket_rdr implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_start))	this.Start();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final String Invk_start = "start";
+	}	public static final    String Invk_start = "start";
 }

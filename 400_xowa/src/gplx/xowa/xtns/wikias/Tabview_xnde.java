@@ -38,7 +38,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		byte[] tabs_src = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		tabs_src = Bry_.Trim(tabs_src);	// if(isset($tabs[0]) && $tabs[0] == "") {unset($tabs[0]);} if($tabs[count($tabs)] == "") {unset($tabs[count($tabs)]);}
 		byte[][] tabs_ary = Bry_split_.Split_lines(tabs_src);
-		List_adp tabs_list = List_adp_.new_();
+		List_adp tabs_list = List_adp_.New();
 		int tabs_len = tabs_ary.length;
 		for (int i = 0; i < tabs_len; ++i) {
 			Tabview_tab_itm itm = Tabview_tab_itm.Parse(wiki, ctx, tabs_ary[i]);
@@ -55,7 +55,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (tab_itms_ary != null) Tabber_tab_itm.Write(bfr, id, tab_itms_ary);
 		// write html
-		//Bry_bfr bfr = Bry_bfr.new_();
+		//Bry_bfr bfr = Bry_bfr_.New();
 		//bfr.Add_str_a7("<div id=\"flytabs_");
 		//bfr.Add(id);
 		//bfr.Add_str_a7("\">\n<ul>\n");
@@ -86,7 +86,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 			}
 			else {	// not alphanum;
 				if (bfr == null) {	// 1st occurrence; create bfr and add initial to it
-					bfr = Bry_bfr.new_();
+					bfr = Bry_bfr_.New();
 					bfr.Add_mid(src, 0, i);
 				}
 			}

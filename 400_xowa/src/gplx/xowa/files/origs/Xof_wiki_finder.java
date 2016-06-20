@@ -33,7 +33,7 @@ class Xof_wiki_finder {	// UNUSED
 	private Xoae_page Get_page__by_wiki(Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ns_id, ttl_bry) ;
 		Xoa_url url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
-		return wiki.Data_mgr().Load_page_by_ttl(url, ttl);
+		return wiki.Data_mgr().Load_page_and_parse(url, ttl);
 	}
 	private int qry_count, qry_count_max = 1000;
 	public boolean Find_page(Xof_wiki_finder_itm itm, int ns_id, byte[] ttl_bry) {
@@ -65,7 +65,7 @@ class Xof_wiki_finder {	// UNUSED
 	}
 	private boolean Find_page__by_wiki(Xowd_page_itm db_page, Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
-		wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, false);
+		wiki.Db_mgr().Load_mgr().Load_page(db_page, ns);
 		return db_page.Exists();
 	}	
 }

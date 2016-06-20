@@ -63,7 +63,7 @@ public class Xoi_wiki_props_api_tst {
 }
 class Xoi_wiki_props_fxt {
 	private Xoi_wiki_props_api api = new Xoi_wiki_props_api();
-	private Bry_bfr bfr = Bry_bfr.new_();
+	private Bry_bfr bfr = Bry_bfr_.New();
 	public Xoi_wiki_props_wiki wiki_() {return wiki_("domain_doesnt_matter");}
 	public Xoi_wiki_props_wiki wiki_(String wiki_domain) {return new Xoi_wiki_props_wiki().Wiki_domain_(Bry_.new_a7(wiki_domain));}
 	public Xoi_wiki_props_alias alias_(int id, String alias) {return new Xoi_wiki_props_alias().Init_by_ctor(id, alias);}

@@ -80,10 +80,14 @@ public class Scrib_lib_mw__lib_tst {
 	@Test  public void NewChildFrame() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_newChildFrame, Object_.Ary("current", "Page_0", Scrib_kv_utl_.flat_many_("key1", "val1")), "frame0");
 	}
-	@Test  public void ExpandTemplate__null_arg() {
+	@Test  public void ExpandTemplate__null_arg() {	// PURPOSE: auto-fill in arg "1" b/c "2" is specified; PAGE:en.w:Category:Nouns_by_language DATE:2016-04-29
 		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Parser_fxt().Data_create("Template:A", "b{{{1}}}c");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(2, "v2")), "bc");	// list: args is ary
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(2, "x")), "bc");	// fails if "bxc"; note that "2" is passed, but should not be read as "1"
+	}
+	@Test  public void ExpandTemplate__missing_template() {// PURPOSE: return error if template is missing; PAGE:en.w:Flag_of_Greenland DATE:2016-05-02
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
+		fxt.Test_scrib_proc_err(lib, Scrib_lib_mw.Invk_expandTemplate, Object_.Ary("current", "A", Scrib_kv_utl_.flat_many_(1, "a")),  "expandTemplate: template \"A\" does not exist");
 	}
 	@Test  public void SetTTL() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_mw.Invk_setTTL, Object_.Ary(123));

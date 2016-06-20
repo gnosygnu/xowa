@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.pages.*;
-public class Xoh_page_wtr_mgr implements GfoInvkAble {
-	private final    Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+public class Xoh_page_wtr_mgr implements Gfo_invk {
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
 	public Xoh_page_wtr_mgr(boolean html_capable) {
 		this.html_capable = html_capable;
@@ -66,7 +66,7 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_page_edit_))						page_edit_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_page_html_))						page_html_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_xowa_div_edit_rename_))			div_edit_rename_fmtr.Fmt_(m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private Bry_fmtr div_edit_rename_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl

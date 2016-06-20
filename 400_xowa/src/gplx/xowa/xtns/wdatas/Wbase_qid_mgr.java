@@ -20,7 +20,7 @@ import gplx.xowa.wikis.domains.*;
 public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 	private final    Wdata_wiki_mgr wbase_mgr;
 	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final    gplx.core.primitives.Int_obj_ref tmp_wiki_tid = gplx.core.primitives.Int_obj_ref.zero_();
+	private final    gplx.core.primitives.Int_obj_ref tmp_wiki_tid = gplx.core.primitives.Int_obj_ref.New_zero();
 	public Wbase_qid_mgr(Wdata_wiki_mgr wbase_mgr) {
 		this.wbase_mgr = wbase_mgr;
 	}

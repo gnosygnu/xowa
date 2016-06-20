@@ -25,6 +25,9 @@ public class Time_span implements CompareAble {	// NOTE: gplx.Time_span b/c Syst
 	public Decimal_adp Total_days() {
 		return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]  * 24);
 	}
+	public Decimal_adp Total_hours() {
+		return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]);
+	}
 	public int[] Units() {return Time_span_.Split_long(fracs, Time_span_.Divisors);}
 	public int Units_fracs() {
 		int[] ary = Time_span_.Split_long(fracs, Time_span_.Divisors);

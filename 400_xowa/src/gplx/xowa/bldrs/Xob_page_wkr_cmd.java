@@ -33,10 +33,10 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 		long fil_len = 0;
 		Gfo_usr_dlg usr_dlg = bldr.App().Usr_dlg();
 		try {
-			gplx.core.ios.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr();
+			gplx.core.ios.streams.Io_stream_rdr src_rdr = wiki.Import_cfg().Src_rdr();
 			fil = Io_buffer_rdr.new_(src_rdr, optRdrBfrSize);
 			fil_len = fil.Fil_len();
-			if (src_rdr.Tid() == gplx.core.ios.Io_stream_.Tid_bzip2) fil_len = (fil_len * 100) / 18;	// HACK: no way to get actual file progress; assume 18% compression
+			if (src_rdr.Tid() == gplx.core.ios.streams.Io_stream_.Tid_bzip2) fil_len = (fil_len * 100) / 18;	// HACK: no way to get actual file progress; assume 18% compression
 			// fil.Seek(bldr.Opts().ResumeAt());
 			int prv_pos = 0;
 			while (true) {

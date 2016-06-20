@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.specials.*;
-public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xows_page {
-	public Xows_special_meta Special__meta() {return Xows_special_meta_.Itm__page_history;}
+public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xow_special_page {
+	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__page_history;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
@@ -55,5 +55,5 @@ public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xows_page {
 		,	"  </tr>"
 		), "itm_wiki", "itm_page", "itm_count", "itm_last");
 
-	public Xows_page Special__clone() {return this;}
+	public Xow_special_page Special__clone() {return this;}
 }

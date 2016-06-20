@@ -33,7 +33,7 @@ public class Gfs_Date_tst {
 class GfsCoreFxt {
 	public GfsCore Core() {return core;} GfsCore core = GfsCore.new_();
 	public GfoMsg msg_(String[] ary, Keyval... kvAry) {return GfoMsg_.root_leafArgs_(ary, kvAry);}
-	public void AddObj(GfoInvkAble invk, String s) {core.AddObj(invk, s);}
+	public void AddObj(Gfo_invk invk, String s) {core.AddObj(invk, s);}
 	public void tst_MsgStr(GfoMsg msg, Object expd) {
 		GfsCtx ctx = GfsCtx.new_();
 		Object actl = core.ExecOne(ctx, msg);

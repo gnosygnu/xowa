@@ -39,10 +39,10 @@ class Php_text_itm_fxt {
 	public Php_text_itm_fxt Init_q1() {parser.Quote_is_single_(Bool_.Y); return this;}
 	public Php_text_itm_fxt Init_q2() {parser.Quote_is_single_(Bool_.N); return this;}
 	public void Test_parse(String raw_str, String expd) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		byte[] raw = Bry_.new_u8(raw_str);
 		parser.Parse(list, raw);
-		Bry_bfr bfr = Bry_bfr.reset_(255);
+		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
 			Php_text_itm itm = (Php_text_itm)list.Get_at(i);

@@ -117,7 +117,7 @@ public class Scrib_lib_language_tst {
 	@Test  public void IsRTL() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isRTL, Object_.Ary("en"), false);
 		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("ar"));
-		GfoInvkAble_.InvkCmd_val(other_lang, Xol_lang_itm.Invk_dir_rtl_, true);
+		Gfo_invk_.Invk_by_val(other_lang, Xol_lang_itm.Invk_dir_rtl_, true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isRTL, Object_.Ary("ar"), true);
 	}
 	@Test  public void Format_duration() {

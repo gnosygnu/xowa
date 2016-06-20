@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 class GfmlTkn_mok {
 	public String Raw() {return raw;} public GfmlTkn_mok Raw_(String v) {raw = v; return this;} private String raw;
-	public List_adp Subs() {return list;} List_adp list = List_adp_.new_();
+	public List_adp Subs() {return list;} List_adp list = List_adp_.New();
 	public GfmlTkn_mok Subs_(GfmlTkn_mok... ary) {
 		for (GfmlTkn_mok itm : ary)
 			list.Add(itm);

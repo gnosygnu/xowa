@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*; import gplx.core.ios.*; import gplx.core.times.*;
 import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Xob_xml_parser {
-	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
+	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr_.New(); DateAdp_parser date_parser = DateAdp_parser.new_();
 	public Xob_xml_parser Tag_len_max_(int v) {tag_len_max = v; return this;} private int tag_len_max = 255; // max size of any (a) xml tag, (b) int or (c) date; everything else goes into a data_bfr
 	public Xob_xml_parser Data_bfr_len_(int v) {data_bfr.Resize(v); return this;} // PERF: resize data_bfr once to large size, rather than grow incremently to it
 	public Xob_xml_parser Trie_tab_del_() {trie.Del(Xob_xml_parser_.Bry_tab); return this;}

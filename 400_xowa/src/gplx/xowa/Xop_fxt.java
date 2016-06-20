@@ -166,7 +166,7 @@ public class Xop_fxt {
 	}
 	public Xop_fxt	Init_para_y_() {ctx.Para().Enabled_y_(); return this;}
 	public Xop_fxt	Init_para_n_() {ctx.Para().Enabled_n_(); return this;}
-	public Xop_fxt	Init_log_(Gfo_msg_itm... itms) {for (Gfo_msg_itm itm : itms) log_itms.Add(itm); return this;} List_adp log_itms = List_adp_.new_();
+	public Xop_fxt	Init_log_(Gfo_msg_itm... itms) {for (Gfo_msg_itm itm : itms) log_itms.Add(itm); return this;} List_adp log_itms = List_adp_.New();
 	public void		Init_defn_add(String name, String text) {Init_defn_add(name, text, Xow_ns_case_.Tid__all);}
 	public void		Init_defn_add(String name, String text, byte case_match) {
 		Xot_defn_tmpl itm = run_Parse_tmpl(Bry_.new_a7(name), Bry_.new_u8(text));
@@ -190,7 +190,7 @@ public class Xop_fxt {
 	public Xop_fxt	Init_page_update(Xowe_wiki wiki, String ttl, String txt) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl));
 		byte[] page_raw = Bry_.new_u8(txt);
-		Xoae_page page = wiki.Data_mgr().Get_page(page_ttl, false);
+		Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(page_ttl);
 		wiki.Db_mgr().Save_mgr().Data_update(page, page_raw);
 		return this;
 	}
@@ -285,8 +285,8 @@ public class Xop_fxt {
 	}
 	public String Exec_parse_page_all_as_str(String raw) {
 		Xop_root_tkn root = Exec_parse_page_all_as_root(Bry_.new_u8(raw));
-		Bry_bfr actl_bfr = Bry_bfr.new_();
-		hdom_wtr.Write_all(actl_bfr, ctx, root.Root_src(), root);
+		Bry_bfr actl_bfr = Bry_bfr_.New();
+		hdom_wtr.Write_all(actl_bfr, ctx, hctx, root.Root_src(), root);
 		return actl_bfr.To_str_and_clear();
 	}
 	public void Hctx_(Xoh_wtr_ctx v) {hctx = v;} private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
@@ -294,7 +294,7 @@ public class Xop_fxt {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, raw_bry, Xop_parser_.Doc_bgn_bos);
-		Bry_bfr actl_bfr = Bry_bfr.new_();
+		Bry_bfr actl_bfr = Bry_bfr_.New();
 		hdom_wtr.Write_all(actl_bfr, ctx, hctx, raw_bry, root);
 		return actl_bfr.To_str_and_clear();
 	}
@@ -316,7 +316,7 @@ public class Xop_fxt {
 	public String[] Log_xtoAry() {
 		Gfo_msg_log msg_log = app.Msg_log();
 		int len = msg_log.Ary_len();
-		List_adp actl_list = List_adp_.new_();
+		List_adp actl_list = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Gfo_msg_data eny = msg_log.Ary_get(i);
 			if (eny.Item().Cmd() > Gfo_msg_itm_.Cmd_note) {
@@ -353,7 +353,7 @@ public class Xop_fxt {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_url page_url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
-		return wiki.Data_mgr().Load_page_by_ttl(page_url, ttl).Data_raw();
+		return wiki.Data_mgr().Load_page_and_parse(page_url, ttl).Data_raw();
 	}
 	public static void Reg_xwiki_alias(Xowe_wiki wiki, String alias, String domain) {
 		byte[] domain_bry = Bry_.new_a7(domain);
@@ -431,7 +431,7 @@ public class Xop_fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		return new Xop_fxt(app, Xoa_app_fxt.Make__wiki__edit__nonwmf(app, "nethackwiki"));
 	}
-	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	public String Exec__parse_to_hdump(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);

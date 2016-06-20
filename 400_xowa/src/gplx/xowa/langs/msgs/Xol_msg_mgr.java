@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.parsers.*;
-public class Xol_msg_mgr implements GfoInvkAble {
-	private final GfoInvkAble owner; private final boolean owner_is_lang;
-	public Xol_msg_mgr(GfoInvkAble owner, boolean owner_is_lang) {
+public class Xol_msg_mgr implements Gfo_invk {
+	private final    Gfo_invk owner; private final    boolean owner_is_lang;
+	public Xol_msg_mgr(Gfo_invk owner, boolean owner_is_lang) {
 		this.owner = owner; this.owner_is_lang = owner_is_lang;
 		this.Clear();
 	}
@@ -76,7 +76,7 @@ public class Xol_msg_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_lang))					return owner;
 		else if	(ctx.Match(k, Invk_load_text))				Xol_lang_srl.Load_messages(this, m.ReadBry("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_lang = Xol_lang_srl.Invk_lang, Invk_load_text = Xol_lang_srl.Invk_load_text;
 	private void Itms_reg(Xol_msg_itm itm) {

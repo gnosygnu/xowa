@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*;
 public class Xof_math_subst_regy {
-	Bry_bfr bfr = Bry_bfr.new_();
+	Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Subst(byte[] src) {
 		if (!init) Init();
 		int src_len = src.length;

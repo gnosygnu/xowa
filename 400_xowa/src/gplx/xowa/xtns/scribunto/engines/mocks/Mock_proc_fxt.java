@@ -25,8 +25,8 @@ public abstract class Mock_proc_fxt {
 	public abstract Keyval[] Exec_by_scrib(Keyval[] args);
 }
 class Mock_engine implements Scrib_engine {
-	private final    Hash_adp hash = Hash_adp_.new_();
-	private final    Int_obj_ref tmp_hash_id = Int_obj_ref.neg1_();
+	private final    Hash_adp hash = Hash_adp_.New();
+	private final    Int_obj_ref tmp_hash_id = Int_obj_ref.New_neg1();
 	public boolean				Dbg_print() {return false;}	public void Dbg_print_(boolean v) {}
 	public Scrib_server		Server() {return server;} public void Server_(Scrib_server v) {} private final    Mock_server server = new Mock_server();
 	public Scrib_lua_proc	LoadString(String name, String text) {return null;}
@@ -39,6 +39,6 @@ class Mock_engine implements Scrib_engine {
 	public void				CleanupChunks(Keyval[] ids) {}
 	public void				Clear() {hash.Clear();}
 	public void				RegisterLibraryForTest(Mock_proc_fxt proc) {
-		hash.Add(Int_obj_ref.new_(proc.Id()), proc);
+		hash.Add(Int_obj_ref.New(proc.Id()), proc);
 	}
 }

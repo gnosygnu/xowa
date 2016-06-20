@@ -46,12 +46,12 @@ public class Xob_fxt {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));
 		return this;
-	} List_adp expd_list = List_adp_.new_();
+	} List_adp expd_list = List_adp_.New();
 	public Xob_fxt Fil_skip(Io_url... urls) {
 		for (int i = 0; i < urls.length; i++)
 			skip_list.Add(urls[i]);
 		return this;
-	} 	List_adp skip_list = List_adp_.new_();
+	} 	List_adp skip_list = List_adp_.New();
 	public Xob_fxt doc_ary_(Xowd_page_itm... v) {doc_ary = v; return this;} private Xowd_page_itm[] doc_ary;
 	public Xowd_page_itm doc_wo_date_(int id, String title, String text) {return doc_(id, "2012-01-02 13:14", title, text);}
 	public Xowd_page_itm doc_(int id, String date, String title, String text) {
@@ -144,7 +144,7 @@ public class Xob_fxt {
 		}
 	}
 	Io_fil[] wiki_() {
-		List_adp rv = List_adp_.new_();
+		List_adp rv = List_adp_.New();
 		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Ns_dir());
 		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Site_dir());
 		rv.Sort();

@@ -63,7 +63,7 @@ public class Db_mgr_fxt {
 	public void Test_load_page(int ns_id, int page_id, String expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
-		wiki.Db_mgr_as_sql().Load_mgr().Load_page(actl.Id_(page_id), ns, false);
+		wiki.Db_mgr_as_sql().Load_mgr().Load_page(actl.Id_(page_id), ns);
 		Tfds.Eq(expd, String_.new_a7(actl.Text()));
 	}
 	int[] Xto_int_ary(List_adp rslts) {
@@ -83,7 +83,7 @@ public class Db_mgr_fxt {
 		Tfds.Eq_ary(expd, Xto_int_ary(ctg));
 	}
 	int[] Xto_int_ary(Xoctg_view_ctg ctg) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		byte tid_max = Xoa_ctg_mgr.Tid__max;
 		for (byte tid = 0; tid < tid_max; tid++) {
 			Xoctg_view_grp grp = ctg.Grp_by_tid(tid); if (grp == null) continue;
@@ -107,7 +107,7 @@ public class Db_mgr_fxt {
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	int[] Xto_int_ary(Xoctg_data_ctg ctg) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		byte tid_max = Xoa_ctg_mgr.Tid__max;
 		for (byte tid = 0; tid < tid_max; tid++) {
 			Xoctg_idx_mgr grp = ctg.Grp_by_tid(tid); if (grp == null) continue;

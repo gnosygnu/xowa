@@ -19,8 +19,8 @@ package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.heads.*;
 import gplx.core.ios.*; import gplx.core.primitives.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.pages.*;
 public class Xow_hdump_mgr__save {
-	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
-	private final Xoh_page tmp_hpg; private final Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
+	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
+	private final    Xoh_page tmp_hpg; private final    Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
 	private int dflt_zip_tid, dflt_hzip_tid;
 	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg;
@@ -33,11 +33,11 @@ public class Xow_hdump_mgr__save {
 		synchronized (tmp_hpg) {
 			Bld_hdump(page);
 			tmp_hpg.Ctor_by_page(tmp_bfr, page);
-			Xowd_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_());
+			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_());
 			return Save(tmp_hpg, html_db, html_db_is_new.Val());
 		}
 	}
-	public int Save(Xoh_page hpg, Xowd_db_file html_db, boolean insert) {
+	public int Save(Xoh_page hpg, Xow_db_file html_db, boolean insert) {
 		byte[] db_body = Write(tmp_bfr, wiki, hpg, hzip_mgr, zip_mgr, dflt_zip_tid, dflt_hzip_tid, hpg.Body());
 		if (insert)		html_db.Tbl__html().Insert(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
 		else			html_db.Tbl__html().Update(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
@@ -45,30 +45,30 @@ public class Xow_hdump_mgr__save {
 	}
 	public void Bld_hdump(Xoae_page page) {
 		page.File_queue().Clear();																	// need to reset uid to 0, else xowa_file_# will keep incrementing upwards
-		wiki.Html__wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page); // save as hdump_fmt
+		wiki.Html__wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_body(tmp_bfr, page.Wikie().Parser_mgr().Ctx(), Xoh_wtr_ctx.Hdump, page); // save as hdump_fmt
 		page.Hdump_data().Body_(tmp_bfr.To_bry_and_clear());
 	}
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		if (hzip_tid != Xoh_hzip_dict_.Hzip__none) src = hzip_mgr.Encode_as_bry((Xoh_hzip_bfr)bfr.Clear(), wiki, hpg, src);
 		src_as_hzip = src;
-		if (zip_tid > gplx.core.ios.Io_stream_.Tid_raw)
+		if (zip_tid > gplx.core.ios.streams.Io_stream_.Tid_raw)
 			src = zip_mgr.Zip((byte)zip_tid, src);
 		return src;
 	}
-	private static Xowd_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, Bool_obj_ref html_db_is_new) {
-		Xowd_db_file rv = Xowd_db_file.Null;
-		Xowd_db_mgr core_data_mgr = wiki.Data__core_mgr();
+	private static Xow_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, Bool_obj_ref html_db_is_new) {
+		Xow_db_file rv = Xow_db_file.Null;
+		Xow_db_mgr core_data_mgr = wiki.Data__core_mgr();
 		int html_db_id = page.Revision_data().Html_db_id();
 		if (html_db_id == -1) {
 			html_db_is_new.Val_y_();
 			rv = core_data_mgr.Db__html();
-			if (rv == null) rv = core_data_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_html_data);
+			if (rv == null) rv = core_data_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__html_data);
 			html_db_id = rv.Id();
 			page.Revision_data().Html_db_id_(html_db_id);
 			core_data_mgr.Tbl__page().Update__html_db_id(page.Revision_data().Id(), html_db_id);
 		}
 		else {
-			rv = core_data_mgr.Dbs__get_by_id(html_db_id);
+			rv = core_data_mgr.Dbs__get_by_id_or_fail(html_db_id);
 		}
 		return rv;
 	}

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.xowa.apps.cfgs.*;
 public class Prefs_converter {
-	private Bry_bfr bfr = Bry_bfr.new_();
-	private List_adp list = List_adp_.new_();
+	private Bry_bfr bfr = Bry_bfr_.New();
+	private List_adp list = List_adp_.New();
 	public void Check(Xoae_app app) {
 		int options_version = app.Sys_cfg().Options_version();
 		if (options_version == 1) {
@@ -105,7 +105,7 @@ public class Prefs_converter {
 			Convert_msg(m.Subs_getAt(0), depth + 1);
 		}
 	}
-	public static final Prefs_converter Instance = new Prefs_converter(); Prefs_converter() {}
+	public static final    Prefs_converter Instance = new Prefs_converter(); Prefs_converter() {}
 }
 class Prefs_converter_itm {
 	public String Key() {return key;} public void Key_(String v) {this.key = v;} private String key; 

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_parser_tst {
-	private final Texvc_parser_fxt fxt = new Texvc_parser_fxt();
+	private final    Texvc_parser_fxt fxt = new Texvc_parser_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Text() {
 		fxt.Test_parse("abc"
@@ -78,8 +78,8 @@ public class Texvc_parser_tst {
 	}
 }
 class Texvc_tkn_mkr_fxt {
-	private final Texvc_ctx ctx;
-	private final Texvc_root root;
+	private final    Texvc_ctx ctx;
+	private final    Texvc_root root;
 	public Texvc_tkn_mkr_fxt(Texvc_ctx ctx) {
 		this.ctx = ctx;
 		this.root = new Texvc_root();
@@ -115,16 +115,16 @@ class Texvc_tkn_mkr_fxt {
 	}
 }
 class Texvc_parser_fxt {
-	protected final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	private final Texvc_parser parser = new Texvc_parser();
-	private final Texvc_root actl_root;
-	private final Texvc_ctx ctx;
+	protected final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final    Texvc_parser parser = new Texvc_parser();
+	private final    Texvc_root actl_root;
+	private final    Texvc_ctx ctx;
 	public Texvc_parser_fxt() {
 		this.actl_root = new Texvc_root();
 		this.ctx = new Texvc_ctx();
 		this.mkr_fxt = new Texvc_tkn_mkr_fxt(ctx);
 	}
-	public Texvc_tkn_mkr_fxt Mkr() {return mkr_fxt;} private final Texvc_tkn_mkr_fxt mkr_fxt;
+	public Texvc_tkn_mkr_fxt Mkr() {return mkr_fxt;} private final    Texvc_tkn_mkr_fxt mkr_fxt;
 	public void Clear() {
 		mkr_fxt.Clear();
 		actl_root.Init_as_root(ctx.Tkn_mkr(), Bry_.Empty, 0, 8);

@@ -22,14 +22,14 @@ import gplx.xowa.files.*;
 import gplx.xowa.guis.*;
 class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_hdump_img_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	public String Cmd_key() {return Key_const;} public static final String Key_const = "hdump.make.imgs";
+	public String Cmd_key() {return Key_const;} public static final    String Key_const = "hdump.make.imgs";
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {Exec_main();}
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	private void Exec_main() {
-		Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
+		Bry_bfr bfr = Bry_bfr_.Reset(Io_mgr.Len_mb);
 		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Db_rdr rdr = conn.Stmt_sql(Sql_select_clause).Exec_select__rls_auto();
 //			html_tbl = new Xowd_html_tbl(conn, wiki.Db_mgr_as_sql().Core_data_mgr().Props().Zip_tid_text());
@@ -57,7 +57,7 @@ class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (page_id == -1 || data.length == 0) return;
 //			html_tbl.Insert(page_id, Xohd_img_tid.Tid_img, data);
 	}
-	private static final String Sql_select_clause = String_.Concat_lines_nl_skip_last
+	private static final    String Sql_select_clause = String_.Concat_lines_nl_skip_last
 	( "SELECT  lt.lnki_page_id"
 	, ",       lt.html_uid"
 	, ",       lt.lnki_ttl"
@@ -83,7 +83,7 @@ interface Page_async_cmd {
 }
 //	class Page_async_cmd__img : Page_async_cmd {
 //		private Xoh_page hpg;
-//		private List_adp missing = List_adp_.new_();
+//		private List_adp missing = List_adp_.New();
 //		public Page_async_cmd__img(Xoh_page hpg) {this.hpg = hpg;}
 //		public void Prep() {
 ////			int len = hpg.Img_count();

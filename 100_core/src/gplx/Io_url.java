@@ -17,16 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.core.strings.*; import gplx.core.ios.*; /*IoUrlInfo*/ import gplx.core.envs.*; import gplx.langs.htmls.*; import gplx.core.interfaces.*;
-public class Io_url implements CompareAble, ParseAble, GfoInvkAble {	//_20101005 URL:doc/Io_url.txt
+public class Io_url implements CompareAble, ParseAble, Gfo_invk {	//_20101005 URL:doc/Io_url.txt
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
-	public String Raw() {return raw;} final String raw;
+	public String Raw() {return raw;} final    String raw;
 	public byte[] RawBry() {return Bry_.new_u8(raw);}
 	public String To_http_file_str() {return String_.Len_eq_0(raw) ? String_.Empty : String_.Concat	(Http_file_str, Http_file_str_encoder.Encode_str(raw));}
 	public byte[] To_http_file_bry() {return String_.Len_eq_0(raw) ? Bry_.Empty		: Bry_.Add		(Http_file_bry, Http_file_str_encoder.Encode_bry(raw));}
 	public static Url_encoder_interface Http_file_str_encoder = Url_encoder_interface_same.Instance;
-	public static final String Http_file_str = "file:///";
-	public static final int Http_file_len = String_.Len(Http_file_str);
-	public static final byte[] Http_file_bry = Bry_.new_a7(Http_file_str);
+	public static final    String Http_file_str = "file:///";
+	public static final    int Http_file_len = String_.Len(Http_file_str);
+	public static final    byte[] Http_file_bry = Bry_.new_a7(Http_file_str);
 	public boolean Type_dir() {return info.IsDir(raw);} public boolean Type_fil() {return !info.IsDir(raw);}
 	public Io_url OwnerDir() {return Io_url_.new_inf_(info.OwnerDir(raw), info);}
 	public Io_url OwnerRoot() {return Io_url_.new_inf_(info.OwnerRoot(raw), info);}
@@ -55,7 +55,7 @@ public class Io_url implements CompareAble, ParseAble, GfoInvkAble {	//_20101005
 			: String_.Empty;
 	}
 	public List_adp XtoNames() {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Io_url cur = this;
 		while (!cur.EqNull()) {
 			list.Add(cur.NameAndExt_noDirSpr());
@@ -86,6 +86,6 @@ public class Io_url implements CompareAble, ParseAble, GfoInvkAble {	//_20101005
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_to_http_file))			return To_http_file_str();
 		else if	(ctx.Match(k, Invk_gen_sub_path_for_os))	return Gen_sub_path_for_os(m.ReadStr("v"));
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 	}	static final String Invk_to_http_file = "to_http_file", Invk_gen_sub_path_for_os = "gen_sub_path_for_os";
 }

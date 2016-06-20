@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*; import gplx.core.threads.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.threads.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.domains.*;
 public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
-	private final Xow_repo_mgr repo_mgr; private final IoEngine_xrg_downloadFil download_wkr; 
-	private final Io_download_mgr download_mgr;
-	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private final    Xow_repo_mgr repo_mgr; private final    IoEngine_xrg_downloadFil download_wkr; 
+	private final    Io_download_mgr download_mgr;
+	private final    Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_bin_wkr__http_wmf(Xow_repo_mgr repo_mgr, Io_download_mgr download_mgr, IoEngine_xrg_downloadFil download_wkr) {
 		this.repo_mgr = repo_mgr; this.download_mgr = download_mgr; this.download_wkr = download_wkr;
 	}
@@ -78,7 +78,7 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fail_timeout_))		fail_timeout = m.ReadInt("v");
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_fail_timeout_ = "fail_timeout_";
 	public static Xof_bin_wkr__http_wmf new_(Xow_wiki wiki)										{return new_(wiki, Io_download_mgr_.new_system());}

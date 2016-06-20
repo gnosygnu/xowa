@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*; import gplx.core.type_xtns.*;
+import gplx.core.ios.streams.*;
 public abstract class DataRdr_base implements SrlMgr {
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
 	public Io_url Uri() {return uri;} public void Uri_set(Io_url s) {uri = s;} Io_url uri = Io_url_.Empty;
 	public abstract String NameOfNode();
 	public boolean Type_rdr() {return true;}
-	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
 	public abstract Object Read(String key);
 	public abstract int FieldCount();
 	public abstract String KeyAt(int i);
@@ -179,7 +180,7 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (byte[])val;} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte[].class, key, val, or); return or;}
 	}
-	public gplx.core.ios.Io_stream_rdr ReadRdr(String key) {return gplx.core.ios.Io_stream_rdr_.Noop;}
+	public gplx.core.ios.streams.Io_stream_rdr ReadRdr(String key) {return gplx.core.ios.streams.Io_stream_rdr_.Noop;}
 	public boolean SrlBoolOr(String key, boolean or) {return ReadBoolOr(key, or);}
 	public byte SrlByteOr(String key, byte or) {return ReadByteOr(key, or);}
 	public int SrlIntOr(String key, int or) {return ReadIntOr(key, or);}

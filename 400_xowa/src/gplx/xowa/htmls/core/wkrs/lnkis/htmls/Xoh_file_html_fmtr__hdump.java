@@ -22,7 +22,7 @@ import gplx.xowa.files.*; import gplx.xowa.htmls.core.makes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(128);
 	@Override public void Html_full_img(Bry_bfr bfr, gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm
 		, int uid, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
@@ -58,12 +58,12 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	, "a_href", "a_class", "a_rel", "a_title", "a_xowa_title", "img_alt", "img_xoimg", "data_xowa_title", "data_xowa_image", "img_class"
 	)
 	;
-	private static final Bry_fmt fmtr_anch_n = Bry_fmt.New
+	private static final    Bry_fmt fmtr_anch_n = Bry_fmt.New
 	( "<img~{data_xowa_title}~{data_xowa_image} src=\"\" width=\"0\" height=\"0\"~{img_class} alt=\"~{img_alt}\"~{img_xtra_atrs}/>"
 	, "data_xowa_title", "data_xowa_image", "img_class", "img_alt", "img_xtra_atrs"
 	);
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bfr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
-	public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
+	public static final    Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

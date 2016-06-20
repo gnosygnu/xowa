@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
-public class Xoapi_find implements GfoInvkAble {
+import gplx.gfui.*; import gplx.gfui.controls.standards.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+public class Xoapi_find implements Gfo_invk {
 	private Xog_find_box find_box;
 	public void Init_by_kit(Xoae_app app) {
 		find_box = new Xog_find_box(app);
@@ -32,7 +33,7 @@ public class Xoapi_find implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_case_toggle)) 				find_box.Case_toggle();
 		else if	(ctx.Match(k, Invk_wrap_toggle)) 				find_box.Wrap_toggle();
 		else if	(ctx.Match(k, Invk_hide)) 						find_box.Hide();
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
 	private static final String Invk_show = "show", Invk_show_by_paste = "show_by_paste", Invk_hide = "hide", Invk_exec = "exec", Invk_type = "type"

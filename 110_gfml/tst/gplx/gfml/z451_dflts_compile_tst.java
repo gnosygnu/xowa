@@ -36,7 +36,7 @@ public class z451_dflts_compile_tst {
 			(		fx_typ.nde_().Atrs_("x", "10")
 			,		fx_typ.nde_().Atrs_("y", "20")
 			));
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		pragma.CompileSubNde(gnde, list);
 		fx.tst_List(list
 			, fx.make_("point", "x", "10")

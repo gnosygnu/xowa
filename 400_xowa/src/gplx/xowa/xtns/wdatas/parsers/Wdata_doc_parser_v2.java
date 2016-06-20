@@ -112,7 +112,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_claims)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_generic;
-			List_adp temp_list = List_adp_.new_();
+			List_adp temp_list = List_adp_.New();
 			byte[] src = doc.Src();
 			int len = list_nde.Len();
 			for (int i = 0; i < len; i++) {
@@ -135,7 +135,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	, Str_claims								= "claims"
 	, Str_type									= "type"
 	;
-	public static final byte[] 
+	public static final    byte[] 
 	  Bry_id									= Bry_.new_a7(Str_id)
 	, Bry_sitelinks								= Bry_.new_a7(Str_sitelinks)
 	, Bry_labels								= Bry_.new_a7(Str_labels)

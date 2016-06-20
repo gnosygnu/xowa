@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;
-class Http_server_wkr_v2 implements GfoInvkAble {
+class Http_server_wkr_v2 implements Gfo_invk {
 	private final    int uid;
 	private final    Http_server_mgr server_mgr;
 	private final    Http_server_wtr server_wtr;
@@ -31,7 +31,7 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	private final    Xoae_app app;
 	private final    String root_dir_http;
 	private final    byte[] root_dir_fsys;
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(64);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
 	public Http_server_wkr_v2(Http_server_mgr server_mgr, int uid){
@@ -149,7 +149,7 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) {this.Run();}
-		else	return GfoInvkAble_.Rv_unhandled;
+		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_run = "run";
 	private static final    byte[] 
@@ -163,7 +163,7 @@ class Xosrv_http_wkr_ {
 	public static void Write_response_as_html(Http_client_wtr client_wtr, boolean cross_domain, byte[] html) {
 		try{
 			client_wtr.Write_bry(Rsp__http_ok);
-			// TODO: add command-line argument to allow testing from local file
+			// TODO_OLD: add command-line argument to allow testing from local file
 			// if (cross_domain)
 			//	client_wtr.Write_str("Access-Control-Allow-Origin: *\n");	// No 'Access-Control-Allow-Origin' header is present on the requested resource.
 			client_wtr.Write_bry(Rsp__content_type_html);

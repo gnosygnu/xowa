@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
 public interface Gfobj_grp {
-	byte				Grp_tid();
+	byte Grp_tid();
 }

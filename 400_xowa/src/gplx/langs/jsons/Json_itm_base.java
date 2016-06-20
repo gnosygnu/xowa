@@ -23,7 +23,7 @@ public abstract class Json_itm_base implements Json_itm {
 	public int Src_end() {return src_end;} protected int src_end;
 	public abstract Object Data();
 	public abstract byte[] Data_bry();
-	public String Print_as_json() {Bry_bfr bfr = Bry_bfr.new_(); Print_as_json(bfr, 0); return bfr.To_str_and_clear();}
+	public String Print_as_json() {Bry_bfr bfr = Bry_bfr_.New(); Print_as_json(bfr, 0); return bfr.To_str_and_clear();}
 	public abstract void Print_as_json(Bry_bfr bfr, int depth);
 	@gplx.Virtual public boolean Data_eq(byte[] comp) {return false;}
 }

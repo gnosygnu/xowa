@@ -21,7 +21,7 @@ import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.lnkis.anch
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final    Bry_bfr tmp_bfr = Bry_bfr.new_(32);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnki;}
 	public String Key() {return Xoh_hzip_dict_.Key__lnki;}
 	public byte[] Hook() {return hook;} private byte[] hook;

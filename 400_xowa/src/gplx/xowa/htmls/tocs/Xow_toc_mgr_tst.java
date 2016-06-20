@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xow_toc_mgr_tst {		
-	@Before public void init() {fxt.Clear();} private final Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final    Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
 		( "==a=="
@@ -502,8 +502,8 @@ public class Xow_toc_mgr_tst {
 }
 class Xow_toc_mgr_fxt {		
 	private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
-	private Bry_bfr tmp = Bry_bfr.new_();
-	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
+	private Bry_bfr tmp = Bry_bfr_.New();
+	public Xop_fxt Fxt() {return fxt;} private final    Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 		toc_mgr.Clear();

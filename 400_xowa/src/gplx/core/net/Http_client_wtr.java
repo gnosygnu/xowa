@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.core.ios.*;
+import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public interface Http_client_wtr {
 	void Stream_(Object o);
 	void Write_bry(byte[] bry);

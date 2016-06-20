@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.xndes.dicts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.core.brys.*;
 public class Xoh_xnde_dict_grp {
-	private final int id_len;
+	private final    int id_len;
 	private int id_next = -1;
-	private final Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final List_adp list = List_adp_.new_();
+	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final    List_adp list = List_adp_.New();
 	public Xoh_xnde_dict_grp(int id_len) {this.id_len = id_len;}
 	public void Clear() {
 		id_next = -1;
@@ -68,5 +68,5 @@ public class Xoh_xnde_dict_grp {
 		list.Add(rv);
 		return rv;
 	}
-	public static final byte[] Bry__stop = Bry_.New_by_ints(255, 0);
+	public static final    byte[] Bry__stop = Bry_.New_by_ints(255, 0);
 }

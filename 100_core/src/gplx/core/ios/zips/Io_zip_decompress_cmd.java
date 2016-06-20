@@ -16,6 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
+import gplx.core.progs.*;
 public interface Io_zip_decompress_cmd {
-	void Decompress__exec(Io_zip_decompress_task task, Io_url src_fil, Io_url trg_dir);
+	String Fail_msg();
+	Io_zip_decompress_cmd Make_new();
+	long Checkpoint__load_by_src_fil(Io_url src_fil);
+	byte Exec(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url src_fil, Io_url trg_dir, List_adp trg_fils);
+	void Exec_cleanup();
 }

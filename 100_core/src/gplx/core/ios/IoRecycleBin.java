@@ -35,7 +35,7 @@ public class IoRecycleBin {
 		IoEngine_xrg_saveFilStr.new_(regyUrl, text).Append_().Exec();
 	}
 	public List_adp Regy_search(Io_url url, String_bldr sb) {
-		List_adp list = List_adp_.new_();
+		List_adp list = List_adp_.New();
 		Io_url regyUrl = FetchRegistryUrl(url);
 		String[] lines = IoEngine_xrg_loadFilStr.new_(regyUrl).ExecAsStrAry();
 		int linesLen = Array_.Len(lines); 
@@ -56,5 +56,5 @@ public class IoRecycleBin {
 		String sourceApp = String_.GetStrBefore(url.NameAndExt_noDirSpr(), ";");
 		return url.OwnerDir().GenSubFil_ary(sourceApp, ".recycle.csv");
 	}
-	public static final IoRecycleBin Instance = new IoRecycleBin(); IoRecycleBin() {}
+	public static final    IoRecycleBin Instance = new IoRecycleBin(); IoRecycleBin() {}
 }

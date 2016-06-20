@@ -80,7 +80,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_ary_wkr(Object lhsAry, Object rhsAry, boolean compareUsingEquals, String customMsg) {
-		List_adp list = List_adp_.new_(); boolean pass = true;
+		List_adp list = List_adp_.New(); boolean pass = true;
 		int lhsLen = Array_.Len(lhsAry), rhsLen = Array_.Len(rhsAry);
 		for (int i = 0; i < lhsLen; i++) {
 			Object lhs = Array_.Get_at(lhsAry, i);
@@ -103,7 +103,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_list_wkr(List_adp lhsList, List_adp rhsList, TfdsEqListItmStr xtoStr, String customMsg) {
-		List_adp list = List_adp_.new_(); boolean pass = true;
+		List_adp list = List_adp_.New(); boolean pass = true;
 		int lhsLen = lhsList.Count(), rhsLen = rhsList.Count();
 		for (int i = 0; i < lhsLen; i++) {
 			Object lhs = lhsList.Get_at(i);

@@ -16,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.bldrs.wkrs.*;
 public interface Xoax_addon_itm__special {
-	gplx.xowa.specials.Xows_page[]	Pages_ary();
+	gplx.xowa.specials.Xow_special_page[] Special_pages();
 }

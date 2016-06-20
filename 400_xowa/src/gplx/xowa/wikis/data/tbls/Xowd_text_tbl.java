@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xowd_text_tbl implements Rls_able {
-	private final String tbl_name = "text"; private final Dbmeta_fld_list flds = Dbmeta_fld_list.new_();
-	private final String fld_page_id, fld_text_data;
-	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
-	private final Io_stream_zip_mgr zip_mgr = Xoa_app_.Utl__zip_mgr(); private final byte zip_tid;
+	private final    String tbl_name = "text"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final    String fld_page_id, fld_text_data;
+	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
+	private final    Io_stream_zip_mgr zip_mgr = Xoa_app_.Utl__zip_mgr(); private final    byte zip_tid;
 	public String Fld_text_data() {return fld_text_data;}
 	public Xowd_text_tbl(Db_conn conn, boolean schema_is_1, byte zip_tid) {
 		this.conn = conn; this.zip_tid = zip_tid;
@@ -46,9 +46,12 @@ public class Xowd_text_tbl implements Rls_able {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
 		Db_rdr rdr = stmt_select.Clear().Val_int(fld_page_id, page_id).Exec_select__rls_manual();
 		try {
-			byte[] rv = (byte[])rdr.Read_bry(fld_text_data);
-			if (rv == null) rv = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert nul to empty String; DATE:2015-11-08
-			rv = zip_mgr.Unzip(zip_tid, rv);
+			byte[] rv = Bry_.Empty;
+			if (rdr.Move_next()) {
+				rv = rdr.Read_bry(fld_text_data);
+				if (rv == null) rv = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert null to empty String; DATE:2015-11-08
+				rv = zip_mgr.Unzip(zip_tid, rv);
+			}
 			return rv;
 		}	finally {rdr.Rls();}
 	}

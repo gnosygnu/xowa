@@ -16,16 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
+import gplx.gfui.controls.windows.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.apps.apis.xowa.startups.tabs.*;
-public class Xous_window_mgr implements GfoInvkAble {
+public class Xous_window_mgr implements Gfo_invk {
 	public Xous_window_mgr(Xoue_user user) {
 		this.user = user;
 	}
 	public Xoue_user User() {return user;} private Xoue_user user;
 	public Rect_ref Rect() {if (rect == null) rect = Rect_new(); return rect;} Rect_ref rect;
 	public boolean Maximized() {return maximized;} private boolean maximized = false;
-	public void Save_window(gplx.gfui.GfuiWin win) {
+	public void Save_window(GfuiWin win) {
 		Xoae_app app = user.Appe();
 		gplx.xowa.apps.cfgs.Xoa_cfg_mgr cfg_mgr = app.Cfg_mgr();
 		if (user.Cfg_mgr().Startup_mgr().Window_mgr().Mode_tid() == Xouc_window_mgr.Mode_tid_previous) {
@@ -41,7 +42,7 @@ public class Xous_window_mgr implements GfoInvkAble {
 		cfg_mgr.Db_save_txt();
 	}
 	private String Calc_previous_tabs(Xog_tab_mgr tab_mgr) {
-		Bry_bfr bfr = Bry_bfr.new_();
+		Bry_bfr bfr = Bry_bfr_.New();
 		int len = tab_mgr.Tabs_len();
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte_nl();

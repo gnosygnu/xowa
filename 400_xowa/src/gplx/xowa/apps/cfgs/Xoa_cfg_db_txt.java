@@ -33,7 +33,7 @@ public class Xoa_cfg_db_txt implements Xoa_cfg_db {
 	}
 	public void Cfg_save_bgn(Xoa_cfg_mgr cfg_mgr) {
 		bfr.ClearAndReset();
-	} 	private Bry_bfr bfr = Bry_bfr.new_();
+	} 	private Bry_bfr bfr = Bry_bfr_.New();
 	public void Cfg_save_end(Xoa_cfg_mgr cfg_mgr) {
 		Xoa_app_.Usr_dlg().Log_many("", "", "shutting down app; saving cfg: len=~{0}", bfr.Len());
 		Io_mgr.Instance.SaveFilBfr(Cfg_url(cfg_mgr), bfr);

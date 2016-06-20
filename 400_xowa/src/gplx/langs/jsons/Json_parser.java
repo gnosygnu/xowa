@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*;
 public class Json_parser {
-	private byte[] src; private int src_len, pos; private final Number_parser num_parser = new Number_parser();
-	public Json_factory Factory() {return factory;} private final Json_factory factory = new Json_factory();
+	private byte[] src; private int src_len, pos; private final    Number_parser num_parser = new Number_parser();
+	public Json_factory Factory() {return factory;} private final    Json_factory factory = new Json_factory();
 	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(String_.Concat_lines_nl(ary));}
 	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), Byte_ascii.Apos, Byte_ascii.Quote));}
 	public Json_doc Parse(String src) {return Parse(Bry_.new_u8(src));}
@@ -140,9 +140,14 @@ public class Json_parser {
 			}
 		}
 		num_parser.Parse(src, num_bgn, pos);
-		return num_parser.Has_frac() 
-			? factory.Decimal(doc, num_bgn, pos)
-			: factory.Int(doc, num_bgn, pos);
+		if (num_parser.Has_frac())
+			return factory.Decimal(doc, num_bgn, pos);
+		else {
+			if (num_parser.Is_int())
+				return factory.Int(doc, num_bgn, pos);
+			else
+				return factory.Long(doc, num_bgn, pos);
+		}
 	}
 	private Json_ary Make_ary(Json_doc doc) {
 		Json_ary rv = factory.Ary(pos++, pos);	// brack_bgn
@@ -177,5 +182,5 @@ public class Json_parser {
 		String msg = String_.Format(fmt, args) + " " + Int_.To_str(bgn) + " " + String_.new_u8__by_len(src, bgn, 20);
 		return Err_.new_wo_type(msg);
 	}
-	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
+	private static final    byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
 }

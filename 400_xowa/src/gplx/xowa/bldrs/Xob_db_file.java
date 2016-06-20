@@ -32,6 +32,7 @@ public class Xob_db_file {
 	public static Xob_db_file New__temp_log(Io_url dir)				{return New(dir, Name__temp_log);}
 	public static Xob_db_file New__redlink(Io_url dir)				{return New(dir, Name__redlink);}
 	public static Xob_db_file New__page_link(Xow_wiki wiki)			{return New(wiki.Fsys_mgr().Root_dir(), Name__page_link);}
+	public static Xob_db_file New__page_file_map(Xow_wiki wiki)		{return New(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str() + "-file-page_map.xowa");}
 	public static Xob_db_file New__deletion_db(Xow_wiki wiki)		{
 		String name = String_.Format("{0}-file-core-deletion_db-{1}.xowa", wiki.Domain_str(), DateAdp_.Now().XtoStr_fmt("yyyy.MM"));
 		return New(wiki.Fsys_mgr().Root_dir(), name);
