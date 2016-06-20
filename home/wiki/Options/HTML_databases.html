@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Options/Config script - XOWA</title>
+  <title>Options/HTML databases - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   <style data-source="xowa" type="text/css">
@@ -217,7 +217,7 @@ li.active a, li.active a:hover
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Options/Config script</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Options/HTML databases</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
@@ -229,10 +229,10 @@ li.active a, li.active a:hover
           <td class='optionsButton'>
             <a class='optionsLink' href='/wiki/Options/Window'>Apps (basic)</a>
           </td>
-          <td class='optionsButton active'>
+          <td class='optionsButton'>
             <a class='optionsLink' href='/wiki/Options/Security'>Apps (advanced)</a>
           </td>
-          <td class='optionsButton'>
+          <td class='optionsButton active'>
             <a class='optionsLink' href='/wiki/Options/Import'>Wiki</a>
           </td>
           <td class='optionsButton'>
@@ -257,16 +257,19 @@ li.active a, li.active a:hover
       <div>
         <ul class='tab-links' style='margin-left:0px;'>
           <li class=''>
-            <a href='/wiki/Options/Security'>Security</a>
+            <a href='/wiki/Options/Import'>Import</a>
           </li>
           <li class=''>
-            <a href='/wiki/Options/Shortcuts'>Shortcuts</a>
-          </li>
-          <li class=''>
-            <a href='/wiki/Options/Menus'>Menus</a>
+            <a href='/wiki/Options/Files'>Files</a>
           </li>
           <li class='active'>
-            <a href='/wiki/Options/Config_script'>Config script</a>
+            <a href='/wiki/Options/HTML_databases'>HTML databases</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Category'>Category</a>
+          </li>
+          <li class=''>
+            <a href='/wiki/Options/Import_Dansguardian'>Import Dansguardian</a>
           </li>
         </ul>
       </div><br>
@@ -279,7 +282,7 @@ li.active a, li.active a:hover
           </div>
           <ul>
             <li class="toclevel-1 tocsection-1">
-              <a href="#Script"><span class="tocnumber">1</span> <span class="toctext">Script</span></a>
+              <a href="#Basic"><span class="tocnumber">1</span> <span class="toctext">Basic</span></a>
             </li>
             <li class="toclevel-1 tocsection-2">
               <a href="#Notes"><span class="tocnumber">2</span> <span class="toctext">Notes</span></a>
@@ -293,35 +296,60 @@ li.active a, li.active a:hover
         </div><br>
          
         <h2>
-          <span class="mw-headline" id="Script">Script</span>
+          <span class="mw-headline" id="Basic">Basic</span>
         </h2>
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              Config script: <sup id="cite_ref-config_script_0-0" class="reference"><a href="#cite_note-config_script-0">[1]</a></sup>
+              Prefer HTML database<br>
+              for Read tab: <sup id="cite_ref-read_preferred_0-0" class="reference"><a href="#cite_note-read_preferred-0">[1]</a></sup>
             </td>
             <td>
-<textarea xowa_prop="app.user.cfg.startup.custom_config" class="options_textarea" style="width: 600px; height: 500px;" accesskey=',' id='xowa_prop_0'>
-</textarea>
+              <input xowa_prop="xowa.api.wiki.hdump.read_preferred" type="checkbox" class="options_checkbox" id='xowa_prop_0'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              HTML tab mode: <sup id="cite_ref-html_mode_1-0" class="reference"><a href="#cite_note-html_mode-1">[2]</a></sup>
+            </td>
+            <td>
+              <select xowa_prop="xowa.api.wiki.hdump.html_mode" xowa_prop_list="xowa.api.wiki.hdump.html_mode_list" size="2" class='options_select' id='xowa_prop_1'>
+                <option value='shown'>
+                  Shown
+                </option>
+                <option value='hdump_save' selected='selected'>
+                  Saved for HTML DB
+                </option>
+              </select>
             </td>
           </tr>
         </table>
+        <p>
+          <br>
+        </p>
         <h2>
           <span class="mw-headline" id="Notes">Notes</span>
         </h2>
         <ol class="references">
-          <li id="cite_note-config_script-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-config_script_0-0">^</a></span> <span class="reference-text">Enter custom configuration. (default is <code>&nbsp;</code>)<br>
-             Note the following:</span>
+          <li id="cite_note-read_preferred-0">
+            <span class="mw-cite-backlink"><a href="#cite_ref-read_preferred_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>checked</code>)</span>
             <ul>
               <li>
-                <span class="reference-text">These scripts will run after the application starts up. They will also run whenever you click Save on this page.</span>
+                <span class="reference-text"><b>checked</b>: (default) Read tab uses HTML databases. Note that this will be faster, but there may be some inaccuracies. (These inaccuracies are being worked on)</span>
               </li>
               <li>
-                <span class="reference-text">These scripts are intended for advanced users. They are in the format of .gfs statements (for examples, see /xowa/xowa.gfs). Please do not enter scripts unless instructed, or else XOWA may fail to start up.</span>
+                <span class="reference-text"><b>unchecked</b>: Read tab uses Wikitext. Note that this will be slower, but more accurate.</span>
+              </li>
+            </ul>
+          </li>
+          <li id="cite_note-html_mode-1">
+            <span class="mw-cite-backlink"><a href="#cite_ref-html_mode_1-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>Shown</code>)</span>
+            <ul>
+              <li>
+                <span class="reference-text"><b>Shown</b>: (default) HTML tab shows actual HTML.</span>
               </li>
               <li>
-                <span class="reference-text">These scripts are saved to /xowa/user/anonymous/data/cfg/user_custom_cfg.gfs. If XOWA fails to start up, simply delete the file.</span>
+                <span class="reference-text"><b>Saved for HTML DB</b>: HTML tab shows HTML as it will be saved for the HTML database. Note that this is for developer purposes only.</span>
               </li>
             </ul>
           </li>

@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
   .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
   .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
   .options_textbox     {padding: 2px; border: 1px solid black;}
@@ -18,7 +18,7 @@
   .options_readonly    {background-color:#F9F9F9;}
 </style>
 <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
   .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
   .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
   .options_textbox     {padding: 2px; border: 1px solid black;}
@@ -933,7 +933,15 @@
           Choose the wiki you wish to install.
         </li>
         <li>
-          Choose if XOWA should decompress the dump file (this will need additional disk space) or if XOWA should read from the compressed dump (this will be slower).
+          Choose if XOWA should decompress the dump file or if XOWA should read from the compressed dump (this will be slower). 
+          <ul>
+            <li>
+              <b>decompress the dump file</b>: This will be faster, but it will need additional disk space. For example, a 10 GB .bz2 file will create another 25 GB .xml file. Note that the additional .xml file is deleted when the import completes.
+            </li>
+            <li>
+              <b>read from compressed dump</b>: This will be slower, but it will not use additional disk space. For example, a 2 hour import for "decompress first" may take 2.5 hours for "read from compressed dump". Note that this slowness only affects import; the generated wiki will perform the same as a "decompress first" import
+            </li>
+          </ul>
         </li>
         <li>
           Choose a version of the category system: 

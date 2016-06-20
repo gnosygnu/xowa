@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Import/Download Central - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Import/Download Central</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      Download Central is a simple way to download wikis for XOWA
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Technical_details"><span class="tocnumber">2</span> <span class="toctext">Technical details</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Get_list_of_wikis_and_files"><span class="tocnumber">2.1</span> <span class="toctext">Get list of wikis and files</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Download_the_files"><span class="tocnumber">2.2</span> <span class="toctext">Download the files</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-5">
+          <a href="#Manual_setup"><span class="tocnumber">3</span> <span class="toctext">Manual setup</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#Existing_monthly_update_users_of_the_English_Wikipedia_v2b_images"><span class="tocnumber">4</span> <span class="toctext">Existing monthly update users of the English Wikipedia v2b images</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#No_need_to_redownload_the_images_in_Download_Central"><span class="tocnumber">4.1</span> <span class="toctext">No need to redownload the images in Download Central</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Download_Central_should_be_used_for_2016-07_and_future_monthly_updates"><span class="tocnumber">4.2</span> <span class="toctext">Download Central should be used for 2016-07 and future monthly updates</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview">Overview</span>
+    </h2>
+    <p>
+      As of v3.6.3, the <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_2" title="Special:XowaDownloadCentral" class="xowa-visited">Download Central</a> page lists available wikis for download.
+    </p>
+    <p>
+      The advantages are as follows
+    </p>
+    <ul>
+      <li>
+        <b>Simple</b>: Find a wiki, click on it, and it will imported.
+      </li>
+      <li>
+        <b>Android and desktop</b>: Listed wikis will work directly on Android as well as the desktop. These wikis are HTML dumps of XOWA pages.
+      </li>
+      <li>
+        <b>Images included</b>: Listed wikis will also include image databases. Previously, users would need to download image databases separately from archive.org.
+      </li>
+      <li>
+        <b>Suspend and resume</b>: Long tasks can be paused and resumed at a later point in time.
+      </li>
+    </ul>
+    <p>
+      More wikis and functionality will be added to this page throughout 2016.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Technical_details">Technical details</span>
+    </h2>
+    <p>
+      Download Central works in the following manner:
+    </p>
+    <h3>
+      <span class="mw-headline" id="Get_list_of_wikis_and_files">Get list of wikis and files</span>
+    </h3>
+    <ul>
+      <li>
+        Loads a list of wikis from <span class='path'>C:\xowa\bin\any\xowa\addon\bldr\central\bldr_central.data_db.xowa</span>
+      </li>
+      <li>
+        Loads a list of files for that wiki. For example, Simple Wikipedia will have 3 files 
+        <ul>
+          <li>
+            Xowa_simplewiki_2016-06_core.zip
+          </li>
+          <li>
+            Xowa_simplewiki_2016-06_file.zip
+          </li>
+          <li>
+            Xowa_simplewiki_2016-06_html.zip
+          </li>
+        </ul>
+      </li>
+      <li>
+        Generates a "task" for each group of files and lists them in the "Available" table.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Download_the_files">Download the files</span>
+    </h3>
+    <p>
+      Available tasks can be added to the Queue. When the Queue is run, Download Central will do the following:
+    </p>
+    <ul>
+      <li>
+        Download the file from archive.org 
+        <ul>
+          <li>
+            <b>source url</b>: The location of the file will be of a form like <a href="https://archive.org/download/Xowa_simplewiki_latest/" rel="nofollow" class="external free">https://archive.org/download/Xowa_simplewiki_latest/</a>
+          </li>
+          <li>
+            <b>target path</b>: The file will be downloaded to <span class='path'>C:\xowa\wiki\simple.wikipedia.org\tmp\bldr\</span>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Verify the download with an MD5
+      </li>
+      <li>
+        Unzip the download
+      </li>
+      <li>
+        Verify the unzip with an MD5
+      </li>
+      <li>
+        Move the file to the wiki directory. For example, simple.wikipedia.org-core.xowa will be moved to <span class='path'>C:\xowa\wiki\simple.wikipedia.org\simple.wikipedia.org-core.xowa</span>
+      </li>
+      <li>
+        Register the file in the user's list of wikis (for "core" wiki file only)
+      </li>
+      <li>
+        Repeat again with each file until done.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Manual_setup">Manual setup</span>
+    </h2>
+    <p>
+      Some users may not want to use Download Central. For example, users may have an alternate download manager which they prefer. Or they are using the HTTP Server, which currently does not support Download Central.
+    </p>
+    <p>
+      In these cases, manual setup is still possible in the following way:
+    </p>
+    <ul>
+      <li>
+        Find the archive.org URL for your wiki. These will generally follow the form of <a href="https://archive.org/download/Xowa_(wiki)_latest/" rel="nofollow" class="external free">https://archive.org/download/Xowa_(wiki)_latest/</a> For a list of possible wiki names, see the archive.org links on the <a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" id="xolnki_3" title="Dashboard/Image databases" class="xowa-visited">Image databases</a> page.
+      </li>
+      <li>
+        Download the files for your wiki. These will generally follow the form of "Xowa_(wiki)_(date)_(type).zip". For example, see above for Simple Wikipedia file names.
+      </li>
+      <li>
+        Unzip the files to <span class='path'>C:\xowa\wiki\simple.wikipedia.org\</span>
+      </li>
+      <li>
+        For the desktop, just run XOWA. XOWA will automatically pick up the new wiki
+      </li>
+      <li>
+        For Android, copy the files to your SD Card. See <a href="http://xowa.org/home/wiki/Android/Setup.html" id="xolnki_4" title="Android/Setup" class="xowa-visited">Android Setup</a> for a list of paths.
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Existing_monthly_update_users_of_the_English_Wikipedia_v2b_images">Existing monthly update users of the English Wikipedia v2b images</span>
+    </h2>
+    <p>
+      This section only applies to users who have been manually downloading the monthly updates for English Wikipedia
+    </p>
+    <h3>
+      <span class="mw-headline" id="No_need_to_redownload_the_images_in_Download_Central">No need to redownload the images in Download Central</span>
+    </h3>
+    <p>
+      The Download Central image databases are the same as the existing ones on archive.org. They only differ in the following ways:
+    </p>
+    <ul>
+      <li>
+        They are broken up into 1 file per zip instead of 3 or 4 files per zip
+      </li>
+      <li>
+        They have an md5 file.
+      </li>
+    </ul>
+    <p>
+      If you are up-to-date with your monthly updates, all you need to do is download the update for 2016-06. For example, let's say you downloaded the initial v2b batch:
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-1.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-1.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-2.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-2.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-3.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-3.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-4.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-4.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-5.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-5.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-6.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-6.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-7.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-7.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-8.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_ns-000_part-8.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_wiki_file_ns-100.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-06-02_file_v2b_wiki_file_ns-100.7z</a>
+      </li>
+    </ul>
+    <p>
+      You then downloaded all the monthly updates until now:
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-08-05_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-08-05_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-09-01_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-09-01_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-10-06_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-10-06_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-12-06_file_v1.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-12-06_file_v1.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-12-06_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2015-12-06_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-01-13_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-01-13_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-03_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-02-03_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-03-05_file_v2b.7z</a>
+      </li>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-05-01_file_v2b.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-05-01_file_v2b.7z</a>
+      </li>
+    </ul>
+    <p>
+      All you have to download is the 2016-06 update:
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-06-01_file_update.7z" rel="nofollow" class="external free">https://archive.org/download/Xowa_enwiki_latest/Xowa_enwiki_2016-06-01_file_update.7z</a>
+      </li>
+    </ul>
+    <p>
+      At this point you will have exactly the same files as those in Download Central
+    </p>
+    <h3>
+      <span class="mw-headline" id="Download_Central_should_be_used_for_2016-07_and_future_monthly_updates">Download Central should be used for 2016-07 and future monthly updates</span>
+    </h3>
+    <p>
+      For next month (and future months), you should download the monthly update through Download Central. There will be a new task called "English Wikipedia - Image Update (2016-07)". You will just need to download this item, and you'll be up-to-date.
+    </p>
+    <p>
+      Of course, you will still be able to download them manually from archive.org. But as shown by the section above, this can be quite complicated.
+    </p>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

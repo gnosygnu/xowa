@@ -31,26 +31,32 @@
           <a href="#What_permissions_does_XOWA_require.3F"><span class="tocnumber">2</span> <span class="toctext">What permissions does XOWA require?</span></a> 
           <ul>
             <li class="toclevel-2 tocsection-3">
-              <a href="#Read_External_Storage"><span class="tocnumber">2.1</span> <span class="toctext">Read External Storage</span></a>
+              <a href="#Read_External_Storage_.28as_of_2016-04-17.29"><span class="tocnumber">2.1</span> <span class="toctext">Read External Storage (as of 2016-04-17)</span></a>
             </li>
             <li class="toclevel-2 tocsection-4">
-              <a href="#Internet"><span class="tocnumber">2.2</span> <span class="toctext">Internet</span></a>
+              <a href="#Internet_.28as_of_2016-04-17.29"><span class="tocnumber">2.2</span> <span class="toctext">Internet (as of 2016-04-17)</span></a>
             </li>
             <li class="toclevel-2 tocsection-5">
-              <a href="#Access_Network_State"><span class="tocnumber">2.3</span> <span class="toctext">Access Network State</span></a>
+              <a href="#Access_Network_State_.28as_of_2016-04-17.29"><span class="tocnumber">2.3</span> <span class="toctext">Access Network State (as of 2016-04-17)</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Write_External_Storage_.28as_of_2016-06-19.29"><span class="tocnumber">2.4</span> <span class="toctext">Write External Storage (as of 2016-06-19)</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Wake_Lock_.28as_of_2016-06-19.29"><span class="tocnumber">2.5</span> <span class="toctext">Wake Lock (as of 2016-06-19)</span></a>
             </li>
           </ul>
         </li>
-        <li class="toclevel-1 tocsection-6">
+        <li class="toclevel-1 tocsection-8">
           <a href="#What_information_is_stored_in_XOWA.3F"><span class="tocnumber">3</span> <span class="toctext">What information is stored in XOWA?</span></a>
         </li>
-        <li class="toclevel-1 tocsection-7">
+        <li class="toclevel-1 tocsection-9">
           <a href="#When_does_XOWA_share_this_information.3F"><span class="tocnumber">4</span> <span class="toctext">When does XOWA share this information?</span></a>
         </li>
-        <li class="toclevel-1 tocsection-8">
+        <li class="toclevel-1 tocsection-10">
           <a href="#How_does_XOWA_store_this_information.3F"><span class="tocnumber">5</span> <span class="toctext">How does XOWA store this information?</span></a>
         </li>
-        <li class="toclevel-1 tocsection-9">
+        <li class="toclevel-1 tocsection-11">
           <a href="#Contact"><span class="tocnumber">6</span> <span class="toctext">Contact</span></a>
         </li>
       </ul>
@@ -79,21 +85,21 @@
       <span class="mw-headline" id="What_permissions_does_XOWA_require.3F">What permissions does XOWA require?</span>
     </h2>
     <p>
-      XOWA requires 3 permissions:
+      XOWA requires 5 permissions:
     </p>
     <h3>
-      <span class="mw-headline" id="Read_External_Storage">Read External Storage</span>
+      <span class="mw-headline" id="Read_External_Storage_.28as_of_2016-04-17.29">Read External Storage (as of 2016-04-17)</span>
     </h3>
     <ul>
       <li>
-        This permission is needed to read XOWA databases on the external SD card.
+        This permission is needed to read XOWA databases on the micro-SD card.
       </li>
       <li>
-        No other directory is read aside from the chosen XOWA directory. In other words, XOWA does not use this permission to read through all your folders on the SD card.
+        No other directory is read aside from the chosen XOWA directory. In other words, XOWA does not use this permission to read through all your folders on the micro-SD card.
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="Internet">Internet</span>
+      <span class="mw-headline" id="Internet_.28as_of_2016-04-17.29">Internet (as of 2016-04-17)</span>
     </h3>
     <ul>
       <li>
@@ -104,11 +110,30 @@
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="Access_Network_State">Access Network State</span>
+      <span class="mw-headline" id="Access_Network_State_.28as_of_2016-04-17.29">Access Network State (as of 2016-04-17)</span>
     </h3>
     <ul>
       <li>
         This permission is used in tandem with the Internet permission to retrieve full-scale images from the Wikipedia website. It is always paired with the Internet permission. See <a href="http://developer.android.com/training/basics/network-ops/connecting.html" rel="nofollow" class="external free">http://developer.android.com/training/basics/network-ops/connecting.html</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Write_External_Storage_.28as_of_2016-06-19.29">Write External Storage (as of 2016-06-19)</span>
+    </h3>
+    <ul>
+      <li>
+        This permission is used to download wikis from the internet and store them on the external micro-SD.
+      </li>
+      <li>
+        Only files and folder within the following folder will be changed: <code>/Android/data/org.xowa</code>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Wake_Lock_.28as_of_2016-06-19.29">Wake Lock (as of 2016-06-19)</span>
+    </h3>
+    <ul>
+      <li>
+        This permission is used to prevent the device from sleeping. It is necessary for Download Central wherein it may take many hours to download English Wikipedia.
       </li>
     </ul>
     <h2>
@@ -130,15 +155,32 @@
       <li>
         Pages with images will save temporary files to the applications cache.
       </li>
+      <li>
+        Logging data is saved in temporary data.
+      </li>
     </ul>
     <p>
-      XOWA collects no other data in the background. This includes application logging data. However, logs will be added in a future release. When that happens, this section will then be updated to reflect new details on that function.
+      XOWA collects no other data in the background.
     </p>
     <h2>
       <span class="mw-headline" id="When_does_XOWA_share_this_information.3F">When does XOWA share this information?</span>
     </h2>
     <p>
-      XOWA never shares user data. XOWA never uploads data. All data remains on your device unless you choose to do something with it. The only thing you will see is a button that allows you to send crash reports to the developer.
+      XOWA never shares user data. XOWA never uploads data. All data remains on your device unless you choose to do something with it.
+    </p>
+    <p>
+      XOWA does allow the user to manually send email in 2 places:
+    </p>
+    <ul>
+      <li>
+        <b>Application crash reports</b>: After the application crashes, the user can send the crash report to the developer
+      </li>
+      <li>
+        <b>Application logs</b>: The Log screen allows the user to email the selected log to the developer.
+      </li>
+    </ul>
+    <p>
+      No automatic emails are ever sent.
     </p>
     <h2>
       <span class="mw-headline" id="How_does_XOWA_store_this_information.3F">How does XOWA store this information?</span>
@@ -156,10 +198,21 @@
         XOWA saves all images to temporary cache. To clear this cache, please do the following: 
         <ul>
           <li>
-            Go to Settings -&gt; Apps -&gt; XOWA -&gt; Storage
+            On Android, go to Settings -&gt; Apps -&gt; XOWA -&gt; Storage
           </li>
           <li>
             Press "Clear Cache"
+          </li>
+        </ul>
+      </li>
+      <li>
+        XOWA saves all logging data to a temporary folder. To clear this data, please do the following: 
+        <ul>
+          <li>
+            In XOWA, go to Settings -&gt; Logs
+          </li>
+          <li>
+            Press the "Delete Current" or the "Delete All" icon
           </li>
         </ul>
       </li>

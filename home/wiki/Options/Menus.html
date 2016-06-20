@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
   .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
   .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
   .options_textbox     {padding: 2px; border: 1px solid black;}
@@ -109,7 +109,7 @@ li.active a, li.active a:hover
 }
 </style>
 <style data-source="xowa" type="text/css">
-.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:150px;}
+.options_row_label   {font-weight:bold; vertical-align:text-top; text-align:right; width:200px;}
   .options_table       {border: 1px solid #AAAAAA; border-collapse: collapse; color: black; margin: 1em 0; background-color: #F9F9F9;}
   .options_table td    {border: 1px solid #AAAAAA; padding: 0.2em;}
   .options_textbox     {padding: 2px; border: 1px solid black;}
@@ -372,6 +372,8 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
   add_spr;
+  add_btn_default('xowa.nav.setup.download_central');
+  add_spr;
   add_btn_default('xowa.nav.setup.import_from_list');
   add_btn_default('xowa.nav.setup.import_from_script');
   add_spr;
@@ -447,6 +449,8 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
 }
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
+  add_spr;
+  add_btn_default('xowa.nav.setup.download_central');
   add_spr;
   add_btn_default('xowa.nav.setup.import_from_list');
   add_btn_default('xowa.nav.setup.import_from_script');
@@ -594,6 +598,8 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
   add_spr;
+  add_btn_default('xowa.nav.setup.download_central');
+  add_spr;
   add_btn_default('xowa.nav.setup.import_from_list');
   add_btn_default('xowa.nav.setup.import_from_script');
   add_spr;
@@ -669,6 +675,8 @@ add_grp_default('xowa.gui.menus.group.bookmarks') {
 }
 add_grp_default('xowa.gui.menus.group.tools') {
   add_btn_default('xowa.nav.cfg.main');
+  add_spr;
+  add_btn_default('xowa.nav.setup.download_central');
   add_spr;
   add_btn_default('xowa.nav.setup.import_from_list');
   add_btn_default('xowa.nav.setup.import_from_script');
