@@ -40,7 +40,7 @@ public class Xoh_page_wtr_wkr {
 					case Xopg_page_.Tid_edit:	fmtr = mgr.Page_edit_fmtr(); break;
 					case Xopg_page_.Tid_html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_page_.Tid_read; break; // set view_mode to read, so that "read" is highlighted in HTML
 					case Xopg_page_.Tid_read:	fmtr = mgr.Page_read_fmtr(); 
-						ctx.Page().Redlink_lnki_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
+						ctx.Page().Redlink_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
 						break;
 				}
 				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do

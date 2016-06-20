@@ -97,7 +97,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		page.Clear_all();
 		page.Bldr__ns_ord_(ns_ord);
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
-		page.Redlink_lnki_list().Clear();
+		page.Redlink_list().Clear();
 		page.Url_(Xoa_url.new_(wiki.Domain_bry(), ttl.Full_db()));
 		if (ns.Id_is_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);

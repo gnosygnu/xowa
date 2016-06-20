@@ -20,14 +20,14 @@ import gplx.langs.htmls.*; import gplx.xowa.files.*; import gplx.xowa.users.hist
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.wikis.pages.lnkis.*;
 public class Xoh_lnki_wtr {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
 	private Xou_history_mgr history_mgr;
 	private Xop_lnki_caption_wtr_tkn caption_tkn_wtr;
 	private Xop_lnki_caption_wtr_bry caption_bry_wtr;
-	private Xopg_redlink_lnki_list redlinks_mgr;
+	private Xopg_lnki_list redlinks_mgr;
 	public Xoh_lnki_wtr(Xoh_html_wtr html_wtr, Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr_cfg cfg) {
 		caption_tkn_wtr = new Xop_lnki_caption_wtr_tkn(html_wtr);
 		caption_bry_wtr = new Xop_lnki_caption_wtr_bry();
@@ -38,7 +38,7 @@ public class Xoh_lnki_wtr {
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {
 		this.ctx = ctx; this.page = page;			// NOTE: must set ctx for file.v2; DATE:2014-06-22
 		this.wiki = ctx.Wiki();
-		redlinks_mgr = page.Redlink_lnki_list();		// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
+		redlinks_mgr = page.Redlink_list();			// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
 		file_wtr.Init_by_page(hctx, page);
 		this.history_mgr = app.Usere().History_mgr();
 		if (hctx.Mode_is_hdump()) cfg.Lnki__id_(false);
@@ -61,7 +61,7 @@ public class Xoh_lnki_wtr {
 			return;
 		}
 		boolean literal_link = lnki_ttl.ForceLiteralLink();	// NOTE: if literal link, then override ns behavior; for File, do not show image; for Ctg, do not display at bottom of page
-		redlinks_mgr.Lnki_add(lnki);
+		redlinks_mgr.Add(lnki);
 		boolean stage_is_alt = hctx.Mode_is_alt();
 		switch (lnki.Ns_id()) {
 			case Xow_ns_.Tid__media:	if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]

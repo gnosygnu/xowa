@@ -37,19 +37,19 @@ public class Xol_convert_mgr {
 		converter.Convert_text(tmp_bfr, src, bgn, end);
 		return tmp_bfr.To_bry_and_rls();
 	}
-	public Xowd_page_itm Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
-	public Xowd_page_itm Convert_ttl(Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
+	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		Xowd_page_itm rv = Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}
-	private Xowd_page_itm Convert_ttl(Xowe_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
+	private Xowd_page_itm Convert_ttl(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
 		synchronized (tmp_page_list) {	// THREAD:
 			int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
 			if (converted == 0) return Xowd_page_itm.Null;								// ttl_bry has no conversions; exit;
 			// wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(Cancelable_.Never, tmp_page_list, wiki.Ns_mgr(), true, 0, converted);	// TODO_OLD: use this call; when defaulting test to use db_mgr, not txt_mgr
-			wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, Bool_.Y, 0, converted);
+			((Xowe_wiki)wiki).Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, Bool_.Y, 0, converted);
 			for (int i = 0; i < converted; i++) {
 				Xowd_page_itm page = (Xowd_page_itm)tmp_page_list.Get_at(i);
 				if (page.Exists()) return page;											// return 1st found page

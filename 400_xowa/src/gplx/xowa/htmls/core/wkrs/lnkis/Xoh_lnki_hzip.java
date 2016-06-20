@@ -140,6 +140,11 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					break;
 			}
 		}
+
+		// generate stub for redlink
+//			Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(null);
+//			hpg.Redlink_list().Add(lnki_itm);
+
 		// gen html
 		bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 		switch (href_type) {
@@ -166,7 +171,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		if (cls_bry != null) bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(cls_bry);
 		if (!hctx.Mode_is_diff())
-			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Uid__lnki_nxt());
+			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Uid__lnki_nxt());
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;
 			if (title_bry != null) {
 				bfr.Add(Gfh_bldr_.Bry__title__nth);

@@ -21,7 +21,7 @@ import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; impor
 import gplx.xowa.guis.history.*; import gplx.xowa.guis.bnds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.langs.vnts.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.apps.cfgs.old.*;
+import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.apps.cfgs.old.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 public class Xog_tab_itm implements Gfo_invk {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
@@ -262,8 +262,8 @@ public class Xog_tab_itm implements Gfo_invk {
 		}
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
-				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(page);
-				Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run);
+				Xopg_redlink_mgr redlinks_wkr = new Xopg_redlink_mgr(page, html_itm);
+				Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
@@ -286,6 +286,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public String			Thread__name() {return "xowa.load_files_wkr";}
 	public boolean			Thread__resume() {return true;}
 	public void Thread__exec() {
+//			try {Xog_async_wkr.Async(tab);}
 		try {tab.Async();}
 		catch (Exception e) {
 			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));

@@ -1,0 +1,87 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.files.gui.*;
+import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.langs.vnts.*;
+public class Xopg_redlink_mgr implements Gfo_invk {
+	private final    Xoa_page page; private final    Xog_js_wkr js_wkr;
+	public Xopg_redlink_mgr(Xoa_page page, Xog_js_wkr js_wkr) {this.page = page; this.js_wkr = js_wkr;	}
+	private void Redlink() {
+		Xopg_lnki_list lnki_list = page.Redlink_list(); if (lnki_list.Disabled()) return;
+		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
+		Xow_wiki wiki = page.Wiki();
+		Ordered_hash lnki_hash = Ordered_hash_.New_bry();
+
+		// create unique list of page_rows
+		int len = lnki_list.Len();
+		usr_dlg.Log_many("", "", "redlink.redlink_bgn: page=~{0} total_links=~{1}", page.Ttl().Raw(), len);
+		for (int i = 0; i < len; ++i) {
+			if (usr_dlg.Canceled()) return;
+			Xoa_ttl ttl = lnki_list.Get_at(i).Ttl();
+			Xowd_page_itm page_row = new Xowd_page_itm().Ttl_(ttl);
+			byte[] full_db = ttl.Full_db();
+			if (!lnki_hash.Has(full_db))	// only search page_table once for multiple identical redlinks; EX: "[[Missing]] [[Missing]]"
+				lnki_hash.Add(full_db, page_row);
+		}
+
+		// load page_rows from page_tbl
+		int page_len = lnki_hash.Len();
+		for (int i = 0; i < page_len; i += Batch_size) {
+			if (usr_dlg.Canceled()) return;
+			int end = i + Batch_size; if (end > page_len) end = page_len;
+			wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(usr_dlg, lnki_hash, wiki.Ns_mgr(), Bool_.Y, i, end);
+			// wiki.Db_mgr().Load_mgr().Load_by_ttls(usr_dlg, lnki_hash, Bool_.Y, i, end);
+		}
+
+		// cross-check page_rows against lnki_list; redlink if missing;
+		boolean vnt_enabled = wiki.Lang().Vnt_mgr().Enabled();
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		int redlink_count = 0;
+		for (int i = 0; i < len; ++i) {
+			Xopg_lnki_itm lnki = lnki_list.Get_at(i);
+			byte[] full_db = lnki.Ttl().Full_db();
+			Xowd_page_itm page_row = (Xowd_page_itm)lnki_hash.Get_by(full_db);
+			if (page_row.Exists()) continue;	// page exists; nothing to do;
+
+			// for vnt languages, convert missing ttl to vnt and check again; EX: [[zh_cn]] will check for page_ttl for [[zh_tw]]
+			String html_uid = Xopg_lnki_list.Lnki_id_prefix + Int_.To_str(lnki.Html_uid());
+			if (vnt_enabled) {
+				Xowd_page_itm vnt_page = vnt_mgr.Convert_mgr().Convert_ttl(wiki, lnki.Ttl());	// check db
+				if (vnt_page != null) {	// vnt found; update href to point to vnt
+					Xoa_ttl vnt_ttl = wiki.Ttl_parse(lnki.Ttl().Ns().Id(), vnt_page.Ttl_page_db());
+					js_wkr.Html_atr_set(html_uid, "href", "/wiki/" + String_.new_u8(vnt_ttl.Full_url()));
+					if (!String_.Eq(vnt_mgr.Html__lnki_style(), "")) js_wkr.Html_atr_set(html_uid, "style", vnt_mgr.Html__lnki_style());	// colorize for debugging
+					continue;
+				}
+			}
+
+			// lnki is missing; redlink it
+			if (usr_dlg.Canceled()) return;
+			Js_img_mgr.Update_link_missing(js_wkr, html_uid);
+			++redlink_count;
+		}
+		usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0}", redlink_count);
+	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_run)) {synchronized (this) {Redlink();}}	// NOTE: attempt to eliminate random IndexBounds errors; DATE:2014-09-02
+		else	return Gfo_invk_.Rv_unhandled;
+		return this;
+	}	public static final String Invk_run = "run";
+	private static final int Batch_size = 32;
+}

@@ -15,19 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.core.primitives.*;
-public class Xopg_redlink_idx_list {
-	private final Int_list list = new Int_list();
-	public int Len() {return list.Len();}
-	public int Max() {return max;} private int max;
-	public int Get_at(int i) {return list.Get_at(i);}
-	public void Clear() {
-		list.Clear();
-		max = 0;
-	}
-	public void Add(int i) {
-		list.Add(i);
-		if (i > max) max = i;
-	}
+package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+import gplx.xowa.wikis.pages.lnkis.*;
+class Xopg_lnki_itm__hdump implements Xopg_lnki_itm {
+	public Xopg_lnki_itm__hdump(Xoa_ttl ttl) {this.ttl = ttl;}
+	public Xoa_ttl	Ttl() {return ttl;} private final    Xoa_ttl ttl;
+	public int		Html_uid() {return html_uid;} private int html_uid; public void Html_uid_(int v) {html_uid = v;}
 }

@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.parsers.tmpls.*; import gplx.xowa.wikis.pages.lnkis.*;
 public class Xop_lnki_wkr_ {
 	private static final    Int_obj_ref rel2abs_tid = Int_obj_ref.New_zero();
 	public static final int Invalidate_lnki_len = 128;

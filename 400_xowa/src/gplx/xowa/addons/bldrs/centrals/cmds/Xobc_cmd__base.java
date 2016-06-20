@@ -83,7 +83,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 		long data_cur = this.Load_checkpoint_hook();
 		this.Prog_data_cur_(data_cur);
 		if (data_cur > 0)
-			this.Prog_status_(Gfo_prog_ui_.Status__working);	// set status to working, else js won't warn about accidental removal
+			this.Prog_status_(Gfo_prog_ui_.Status__suspended);	// set status to suspended, else js won't warn about accidental removal
 	}
 	@gplx.Virtual protected long	Load_checkpoint_hook() {return 0;}
 
@@ -101,7 +101,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 				rate_cur = rate_now;			// update it now
 			else {
 				double rate_new = ((rate_now - rate_cur) * .05) + rate_cur;	// calc new rate as 5% of difference
-                    Tfds.Dbg(delta, rate_now, rate_cur, rate_new);
+                    // Tfds.Dbg(delta, rate_now, rate_cur, rate_new);
 				rate_cur = rate_new;
 			}
 		}

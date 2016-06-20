@@ -22,7 +22,7 @@ import gplx.xowa.guis.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
+import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
 public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	private Gfo_invk sync_cmd;
 	private Xog_url_box__selection_changed url_box__selection_changed;
@@ -67,6 +67,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
+		// else if	(ctx.Match(k, Invk_page_async_exec))						Xog_async_wkr.Async(((Xog_tab_itm)m.ReadObj("v")));
 		else if	(ctx.Match(k, Invk_page_async_exec))						((Xog_tab_itm)m.ReadObj("v")).Async();
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
 		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xopg_page_.Tid_edit);

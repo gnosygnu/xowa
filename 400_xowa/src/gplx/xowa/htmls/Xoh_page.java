@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.files.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.makes.imgs.*;
 public class Xoh_page implements Xoa_page {
 	// core
@@ -44,8 +44,8 @@ public class Xoh_page implements Xoa_page {
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public byte[]					Redirect_to_ttl() {return redirect_to_ttl;} private byte[] redirect_to_ttl; public void Redirect_to_ttl_(byte[] v) {this.redirect_to_ttl = v;}
 
-
 	// util
+	public Xopg_lnki_list			Redlink_list()		{return redlink_list;} private Xopg_lnki_list redlink_list;
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
@@ -53,6 +53,7 @@ public class Xoh_page implements Xoa_page {
 	public void Init(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
+		this.redlink_list = new Xopg_lnki_list(page_ttl.Ns().Id_is_module());
 	}
 	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {
 		head_mgr.Flag_(head_flag);

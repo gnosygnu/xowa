@@ -19,7 +19,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.tmpls.*;
-public class Xop_lnki_tkn extends Xop_tkn_itm_base {
+public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pages.lnkis.Xopg_lnki_itm {
 	@Override public byte	Tkn_tid() {return tkn_tid;} private byte tkn_tid = Xop_tkn_itm_.Tid_lnki;
 	public void				Tkn_tid_to_txt() {tkn_tid = Xop_tkn_itm_.Tid_txt;}
 	public int				Ns_id() {return ns_id;} public Xop_lnki_tkn Ns_id_(int v) {ns_id = v; return this;} private int ns_id;
@@ -46,7 +46,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public boolean				Alt_exists() {return alt_tkn != Arg_nde_tkn.Null;}
 	public int				Subpage_tid() {return subpage_tid;} public Xop_lnki_tkn Subpage_tid_(int v) {subpage_tid = v; return this;} private int subpage_tid = Pfunc_rel2abs.Id_null;
 	public boolean				Subpage_slash_at_end() {return subpage_slash_at_end;} public Xop_lnki_tkn Subpage_slash_at_end_(boolean v) {subpage_slash_at_end = v; return this;} private boolean subpage_slash_at_end;
-	public int				Html_uid() {return html_uid;} public Xop_lnki_tkn Html_uid_(int v) {html_uid = v; return this;} private int html_uid;
+	public int				Html_uid() {return html_uid;} public void Html_uid_(int v) {html_uid = v;} private int html_uid;
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;

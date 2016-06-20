@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.threads.*;
-import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.wikis.pages.lnkis.*;
 import gplx.xowa.files.gui.*;
 public class Xog_async_wkr {
+	public static void Async(Xog_tab_itm tab) {Xog_async_wkr.Async(tab.Page(), tab.Html_itm());}
 	public static void Async(Xoae_page page, Xog_html_itm js_wkr) {
 		if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
 
@@ -94,8 +95,8 @@ public class Xog_async_wkr {
 	private static void Async_redlinks(Gfo_usr_dlg usr_dlg, Xoae_app app, Xoae_page page, Xog_js_wkr js_wkr) {
 		if (page.Tab_data().Tab() == null) return;	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
 		try {			
-			Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(page);
-			Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run);
+			Xopg_redlink_mgr redlinks_wkr = new Xopg_redlink_mgr(page, js_wkr);
+			Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
 	}
 }

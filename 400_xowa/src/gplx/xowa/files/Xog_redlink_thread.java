@@ -25,7 +25,7 @@ public class Xog_redlink_thread implements Gfo_thread_wkr {
 	public void Thread__exec() {
 		int len = redlink_ary.length;
 		for (int i = 0; i < len; ++i) {
-			js_wkr.Html_redlink(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.To_str(redlink_ary[i]));
+			js_wkr.Html_redlink(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix + Int_.To_str(redlink_ary[i]));
 		}
 	}
 }

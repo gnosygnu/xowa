@@ -15,26 +15,21 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.users.*;
-public class Xopg_redlink_lnki_list {
-	private int lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: default to 1, not 0, b/c 0 is ignored by wtr; DATE:2014-10-09		
-	public Xopg_redlink_lnki_list(boolean ttl_is_module) {			// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
+package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
+public class Xopg_lnki_list {
+	private final    List_adp list = List_adp_.New();
+	private int lnki_idx;
+	public Xopg_lnki_list(boolean ttl_is_module) {			// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		this.disabled = ttl_is_module;
+		this.Clear();
 	}
-	public boolean		Disabled() {return disabled;} private final    boolean disabled;
-	public List_adp	Lnki_list() {return lnki_list;} private final    List_adp lnki_list = List_adp_.New();
-	public int		Thread_id() {return thread_id;} private int thread_id = 1;
-	public void		Clear() {
+	public boolean			Disabled() {return disabled;} private final    boolean disabled;
+	public int				Len() {return list.Len();}
+	public Xopg_lnki_itm	Get_at(int i) {return (Xop_lnki_tkn)list.Get_at(i);}
+	public void	Add(Xopg_lnki_itm lnki) {
 		if (disabled) return;
-		lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;			// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0
-		lnki_list.Clear();
-		thread_id++;
-	}
-	public void Lnki_add(Xop_lnki_tkn lnki) {
-		if (disabled) return;
-		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// occurs for invalid links
+		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// ttl is null for invalid links
 		Xow_ns ns = ttl.Ns();
 		lnki.Html_uid_(++lnki_idx);								// NOTE: set html_id in order html to print out "id='xowa_lnki_1'; want to print out id for consistency's sake, even if these links won't be check for redlinks; DATE:2015-05-07
 		if (	ns.Id_is_file_or_media()						// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
@@ -44,8 +39,12 @@ public class Xopg_redlink_lnki_list {
 			||	ttl.Wik_itm() != null							// xwiki lnki; EX: simplewiki links in homewiki; [[simplewiki:Earth]]
 			)
 			return;				
-		lnki_list.Add(lnki);
+		list.Add(lnki);
 	}
+	public void	Clear() {
+		lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;			// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0; DATE:2014-10-09
+		list.Clear();
+	}
+
 	public static final String Lnki_id_prefix = "xolnki_";
-	public static final    int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);
 }

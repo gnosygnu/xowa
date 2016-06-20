@@ -438,7 +438,7 @@ public class Xop_fxt {
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
-		ctx.Page().Redlink_lnki_list().Clear();
+		ctx.Page().Redlink_list().Clear();
 		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();

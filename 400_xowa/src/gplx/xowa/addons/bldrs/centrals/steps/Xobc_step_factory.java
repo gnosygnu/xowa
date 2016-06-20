@@ -47,7 +47,7 @@ public class Xobc_step_factory {
 		step.Step_name_(String_.Format("{0}&nbsp;&middot;({1}/{2})", step_name.Val(), step_seqn + List_adp_.Base1, task.Step_count()));
 		task.Step_(step);
 		step.Cmd().Load_checkpoint();
-		if (step.Cmd().Prog_status() == gplx.core.progs.Gfo_prog_ui_.Status__working)
+		if (step.Cmd().Prog_status() == gplx.core.progs.Gfo_prog_ui_.Status__suspended)
 			task.Task_status_(step.Cmd().Prog_status());
 	}
 	private Xobc_cmd_itm[] Make_wiki_import_cmds(Xobc_import_step_itm import_itm, int task_id, int step_id, String_obj_ref step_name, int step_seqn) {

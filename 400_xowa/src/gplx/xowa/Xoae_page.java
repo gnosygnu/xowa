@@ -19,14 +19,14 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;	
 public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
 		hdr_mgr = new Xow_hdr_mgr(this);
-		redlink_lnki_list = new Xopg_redlink_lnki_list(ttl.Ns().Id_is_module());
+		redlink_list = new Xopg_lnki_list(ttl.Ns().Id_is_module());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Empty
 	public Xow_wiki					Wiki() {return wiki;}
@@ -38,10 +38,10 @@ public class Xoae_page implements Xoa_page {
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public byte[]					Redirect_to_ttl() {return redirect_to_ttl;} private byte[] redirect_to_ttl; public void Redirect_to_ttl_(byte[] v) {this.redirect_to_ttl = v;}
+	public Xopg_lnki_list			Redlink_list() {return redlink_list;} private Xopg_lnki_list redlink_list;
 
 	public Xoa_page__commons_mgr	Commons_mgr() {return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
-	public Xopg_redlink_lnki_list	Redlink_lnki_list() {return redlink_lnki_list;} private Xopg_redlink_lnki_list redlink_lnki_list;
 	public Xol_lang_itm				Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;
 	public Xopg_tab_data			Tab_data() {return tab_data;} private final    Xopg_tab_data tab_data = new Xopg_tab_data();
 	public Xopg_hdump_data			Hdump_data() {return hdump_data;} private final    Xopg_hdump_data hdump_data = new Xopg_hdump_data();
