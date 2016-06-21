@@ -23,6 +23,7 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 	private final    Xoa_page page; private final    Xog_js_wkr js_wkr;
 	public Xopg_redlink_mgr(Xoa_page page, Xog_js_wkr js_wkr) {this.page = page; this.js_wkr = js_wkr;	}
 	private void Redlink() {
+		// init; exit if redlink disabled (on Module pages)
 		Xopg_lnki_list lnki_list = page.Redlink_list(); if (lnki_list.Disabled()) return;
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		Xow_wiki wiki = page.Wiki();
@@ -84,4 +85,11 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 		return this;
 	}	public static final String Invk_run = "run";
 	private static final int Batch_size = 32;
+
+	public static void Run_async(Xoa_page pg, Xog_js_wkr js_wkr) {
+		try {			
+			Xopg_redlink_mgr mgr = new Xopg_redlink_mgr(pg, js_wkr);
+			gplx.core.threads.Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, mgr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
+		}	catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", pg.Ttl().Raw(), Err_.Message_gplx_full(e));}
+	}
 }

@@ -15,8 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.core.net.emails; import gplx.*; import gplx.core.*; import gplx.core.net.*;
-public class Gfo_email_mgr_ {
-	public static Gfo_email_mgr Instance = new Gfo_email_mgr__noop();
-	public static Gfo_email_mgr New_jre() {return new Gfo_email_mgr__jre();}
+package gplx.core.threads; import gplx.*; import gplx.core.*;
+public interface Gfo_thread_itm {
+	String		Thread__name();
+	void		Thread__exec();
+	void		Thread__stop();
+	boolean		Thread__can_delete(String key);
 }

@@ -33,6 +33,7 @@ public class Xobc_cmd__download extends Xobc_cmd__base {
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {
 		if (wkr.Exec(this, src_url, trg_url, expd_size) == Gfo_prog_ui_.Status__fail)
 			this.Cmd_exec_err_(wkr.Fail_msg());
+		Gfo_log_.Instance.Info("xobc_cmd task download", "task_id", this.Task_id(), "step_id", this.Step_id(), "trg_url", trg_url, "trg_len", Io_mgr.Instance.QueryFil(trg_url).Size());
 	}
 	@Override public void Cmd_cleanup() {
 		wkr.Exec_cleanup();

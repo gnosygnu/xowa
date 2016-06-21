@@ -26,8 +26,17 @@ public class Gfo_log__file extends Gfo_log__base {
 	@Override public List_adp Itms() {return itms;} @Override public Gfo_log Itms_(List_adp v) {this.itms = v; return this;} private List_adp itms;
 	@Override public void Exec(byte type, long time, long elapsed, String msg, Object[] args) {
 		if (type == Gfo_log_itm.Type__prog) return;
+
+		// add itm
 		Gfo_log_itm itm = new Gfo_log_itm(type, time, elapsed, msg, args);
 		itms.Add(itm);
+
+		// flush if warning or failure; needed for download central
+		switch (type) {
+			case Gfo_log_itm.Type__note:
+			case Gfo_log_itm.Type__warn:
+			case Gfo_log_itm.Type__fail: this.Flush(); break;
+		}
 	}
 	@Override public void Flush() {
 		int len = itms.Len();

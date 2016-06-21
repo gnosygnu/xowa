@@ -298,7 +298,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			Rslt_(null);
 		}
 		finally {
-			app.Thread_mgr().Page_load_mgr().Resume();
+			app.Thread_mgr_old().Page_load_mgr().Resume();
 		}
 	}
 }

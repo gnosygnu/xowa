@@ -193,6 +193,7 @@ class Http_file_utl {
 	, Mime_jpg				= Bry_.new_a7("image/jpeg")
 	, Mime_png				= Bry_.new_a7("image/png")
 	, Mime_gif				= Bry_.new_a7("image/gif")
+	, Mime_svg				= Bry_.new_a7("image/svg+xml")
 	, Mime_css				= Bry_.new_a7("text/css")
 	, Mime_js				= Bry_.new_a7("application/javascript")
 	, Mime_octet_stream		= Bry_.new_a7("application/octet-stream")
@@ -203,6 +204,7 @@ class Http_file_utl {
 	.Add_str_obj(".jpg"		, Mime_jpg)
 	.Add_str_obj(".png"		, Mime_png)
 	.Add_str_obj(".gif"		, Mime_gif)
+	.Add_str_obj(".svg"		, Mime_svg)
 	.Add_str_obj(".css"		, Mime_css)
 	.Add_str_obj(".js"		, Mime_js)
 	;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.net.*;
+import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.net.*; import gplx.core.threads.*;
 import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apps.apis.*;
 import gplx.xowa.apps.gfs.*;
@@ -63,4 +63,5 @@ public interface Xoa_app extends Gfo_invk {
 	Xoax_addon_mgr			Addon_mgr();
 	Xob_bldr				Bldr();
 	Xoa_special_regy		Special_regy();
+	Gfo_thread_mgr			Thread_mgr();
 }	

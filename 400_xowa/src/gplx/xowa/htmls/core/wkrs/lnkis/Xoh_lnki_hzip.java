@@ -89,6 +89,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		byte[] href_bry = text_type == Xoh_anch_capt_itm.Tid__less 
 						? tmp_bfr.Add_mid(src, text_0_bgn, text_0_end).Add_mid(src, text_1_bgn, text_1_end).To_bry_and_clear()
 						: Bry_.Mid(src, text_0_bgn, text_0_end);
+		int html_uid = -1;
 		byte[] ns_bry = null;
 		switch (href_type) {
 			case Xoh_anch_href_data.Tid__anch: break;
@@ -121,6 +122,14 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav && href_end != -1)
 					tmp_bfr.Add_mid(href_bry, href_end, href_bry.length);
 				href_bry = tmp_bfr.To_bry_and_clear();
+
+				// generate stub for redlink
+				try {
+					Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));
+					Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);
+					hpg.Redlink_list().Add(lnki_itm);
+					html_uid = lnki_itm.Html_uid();
+				}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}
 				break;
 		}
 		byte[] capt_bry = Xoh_lnki_hzip_.Bld_capt(tmp_bfr, href_type, text_type, capt_has_ns, capt_cs0_tid, ns_bry, src, text_0_bgn, text_0_end, src, text_1_bgn, text_1_end);
@@ -140,10 +149,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					break;
 			}
 		}
-
-		// generate stub for redlink
-//			Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(null);
-//			hpg.Redlink_list().Add(lnki_itm);
 
 		// gen html
 		bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
@@ -170,8 +175,10 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			case Xoh_anch_cls_.Tid__voyage__email:	cls_bry = Xoh_anch_cls_.Bry__voyage_email; break;
 		}
 		if (cls_bry != null) bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(cls_bry);
-		if (!hctx.Mode_is_diff())
-			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).Add_int_variable(hctx.Uid__lnki_nxt());
+		if (!hctx.Mode_is_diff()) {
+			if (html_uid == -1) html_uid = hctx.Uid__lnki_nxt();	// html_uid == -1 for non-lnkis
+			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).Add_int_variable(html_uid);
+		}
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;
 			if (title_bry != null) {
 				bfr.Add(Gfh_bldr_.Bry__title__nth);

@@ -44,7 +44,7 @@ public class Xowd_text_tbl implements Rls_able {
 	}
 	public byte[] Select(int page_id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
-		Db_rdr rdr = stmt_select.Clear().Val_int(fld_page_id, page_id).Exec_select__rls_manual();
+		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_manual();
 		try {
 			byte[] rv = Bry_.Empty;
 			if (rdr.Move_next()) {

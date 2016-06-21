@@ -50,9 +50,10 @@ public class Xod_app {
 		Srch_search_qry qry = Srch_search_qry.New__drd(wiki, ns_mgr, Bry_.new_u8(search), bgn, end);
 		addon.Search(qry, cbk);
 	}
-	public void Page__load_files(Xow_wiki wiki, Xod_page_itm pg, Xog_js_wkr js_wkr) {
+	public void Page__on_load_end(Xow_wiki wiki, Xod_page_itm pg, Xog_js_wkr js_wkr) {
 		file_mgr.Load_files(wiki, pg, js_wkr);
 		app.User().User_db_mgr().Cache_mgr().Db_save();
+		gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Run_async(pg.Hpg(), js_wkr);
 	}
 	public static byte[] To_page_url(Xow_wiki wiki, String canonical_str) {// NOTE: need canonical_url to handle "A:B" where "A:" is not a ns, even though PageTitle treats "A:" as a namespace
 		byte[] canonical_bry = Bry_.new_u8(canonical_str);

@@ -48,22 +48,34 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	}	
 
 	public void Cmd_exec(Xobc_cmd_ctx ctx) {
-		// rate_list.Clear();
-		// this.rate_cur = 0;
-		this.time_prv = gplx.core.envs.Env_.TickCount();
-		this.status = Gfo_prog_ui_.Status__working;
-		this.Cmd_exec_hook(ctx);
-		switch (status) {
-			case Gfo_prog_ui_.Status__suspended:	task_mgr.Work_mgr().On_suspended(this); break;
-			case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, cmd_exec_err); break;
-			case Gfo_prog_ui_.Status__working:
-				this.Prog_notify_and_chk_if_suspended(data_end, data_end);	// fire one more time for 100%; note that 100% may not fire due to timer logic below
-				task_mgr.Work_mgr().On_done(this); 
-				break;
+		// rate_list.Clear(); this.rate_cur = 0;	// TOMBSTONE: do not reset rate else pause and resume will show different numbers
+		try {
+			Gfo_log_.Instance.Info("xobc_cmd task bgn", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
+			this.time_prv = gplx.core.envs.Env_.TickCount();
+			this.status = Gfo_prog_ui_.Status__working;
+			this.Cmd_exec_hook(ctx);
+			Gfo_log_.Instance.Info("xobc_cmd task end", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
+			switch (status) {
+				case Gfo_prog_ui_.Status__suspended:	task_mgr.Work_mgr().On_suspended(this); break;
+				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, cmd_exec_err); break;
+				case Gfo_prog_ui_.Status__working:
+					this.Prog_notify_and_chk_if_suspended(data_end, data_end);	// fire one more time for 100%; note that 100% may not fire due to timer logic below
+					task_mgr.Work_mgr().On_done(this); 
+					break;
+			}
+		} catch (Exception e) {
+			Gfo_log_.Instance.Warn("xobc_cmd task fail", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", Err_.Message_gplx_log(e));
+		}
+		finally {
+			Gfo_log_.Instance.Flush();
 		}
 	}
 	protected abstract void Cmd_exec_hook(Xobc_cmd_ctx ctx);
-	protected void Cmd_exec_err_(String v) {this.status = Gfo_prog_ui_.Status__fail; this.cmd_exec_err = v;} private String cmd_exec_err;
+	protected void Cmd_exec_err_(String v) {
+		Gfo_log_.Instance.Warn("xobc_cmd task err", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", v);
+		this.status = Gfo_prog_ui_.Status__fail;
+		this.cmd_exec_err = v;
+	}	private String cmd_exec_err;
 	@gplx.Virtual public void Cmd_cleanup() {}
 
 	public Gfobj_nde Save_to(Gfobj_nde nde) {

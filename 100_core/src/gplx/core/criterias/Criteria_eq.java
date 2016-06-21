@@ -19,7 +19,7 @@ package gplx.core.criterias; import gplx.*; import gplx.core.*;
 public class Criteria_eq implements Criteria {
 	@gplx.Internal protected Criteria_eq(boolean neg, Object val) {this.neg = neg; this.val = val;}
 	public byte			Tid()		{return Criteria_.Tid_eq;}
-	public boolean			Neg()		{return neg;} private final boolean neg;
+	public boolean			Neg()		{return neg;} private final    boolean neg;
 	public Object		Val()		{return val;} private Object val;
 	public void			Val_as_obj_(Object v) {this.val = v;}
 	public void			Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}

@@ -97,6 +97,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xob_bldr					Bldr()						{return bldr;} private Xob_bldr bldr;
 	public Xog_cbk_mgr				Gui__cbk_mgr()				{return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
+	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final    Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
 
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
@@ -116,7 +117,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoh_html_mgr			Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
 	public Xop_log_mgr			Log_mgr() {return log_mgr;} private Xop_log_mgr log_mgr;
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
-	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
+	public Xoa_thread_mgr		Thread_mgr_old() {return thread_mgr_old;} private Xoa_thread_mgr thread_mgr_old = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
@@ -158,10 +159,11 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
 		ctg_mgr.Init_by_app(this);
 		setup_mgr.Init_by_app(this);
-		thread_mgr.Usr_dlg_(Xoa_app_.Usr_dlg());
+		thread_mgr_old.Usr_dlg_(Xoa_app_.Usr_dlg());
 		html_mgr.Init_by_app(this);
 		api_root.Init_by_app(this);
 		wmf_mgr.Init_by_app(this);
+		gplx.core.net.emails.Gfo_email_mgr_.Instance = gplx.core.net.emails.Gfo_email_mgr_.New_jre();
 	}
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {

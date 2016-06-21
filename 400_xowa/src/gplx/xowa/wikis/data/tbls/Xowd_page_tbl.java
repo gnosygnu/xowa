@@ -150,7 +150,7 @@ public class Xowd_page_tbl implements Rls_able {
 		Xowd_page_tbl__ttl_ns wkr = new Xowd_page_tbl__ttl_ns();
 		wkr.Fill_idx_fields_only_(fill_idx_fields_only);
 		wkr.Ctor(this, tbl_name, fld_title);
-		wkr.Init(ns_mgr, rv);
+		wkr.Init(this, ns_mgr, rv);
 		wkr.Select_in(cancelable, conn, bgn, end);
 	}
 	public boolean Select_in__id(Cancelable cancelable, List_adp rv)						{return Select_in__id(cancelable, false, rv, 0, rv.Count());}

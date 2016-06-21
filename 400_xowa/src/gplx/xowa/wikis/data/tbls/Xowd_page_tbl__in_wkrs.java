@@ -20,9 +20,13 @@ import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.xowa.wikis.nss.*;
 class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
+	private Xowd_page_tbl page_tbl;
 	private Xow_ns_mgr ns_mgr; private Ordered_hash hash;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; PAGE:en.w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(Xow_ns_mgr ns_mgr, Ordered_hash hash) {this.ns_mgr = ns_mgr; this.hash = hash;}
+	public void Init(Xowd_page_tbl page_tbl, Xow_ns_mgr ns_mgr, Ordered_hash hash) {
+		this.page_tbl = page_tbl;
+		this.ns_mgr = ns_mgr; this.hash = hash;
+	}
 	@Override protected Criteria In_filter(Object[] part_ary) {
 		int len = part_ary.length;
 		Criteria[] crt_ary = new Criteria[len];
@@ -34,8 +38,8 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);
-			stmt.Val_int(page.Ns_id());
-			stmt.Val_bry_as_str(page.Ttl_page_db());
+			stmt.Crt_int(page_tbl.Fld_page_ns(), page.Ns_id());
+			stmt.Crt_bry_as_str(page_tbl.Fld_page_title(), page.Ttl_page_db());
 		}
 	}
 	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {

@@ -37,4 +37,16 @@ public class Xowd_data_tstr {
 		byte[] data = html_bry;
 		html_db.Tbl__html().Insert(page_id, 0, gplx.core.ios.streams.Io_stream_.Tid_raw, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Hzip__none, Bry_.Empty, Bry_.Empty, Bry_.Empty, data);
 	}
+	public void Text__insert(int page_id, String text) {
+		Xow_db_file db = wiki.Data__core_mgr().Db__text();
+		if (db == null) {
+			db = wiki.Data__core_mgr().Db__core();
+			db.Tbl__text().Create_tbl();
+		}
+			db.Tbl__text().Create_tbl();
+		byte[] text_bry = Bry_.new_u8(text);
+		db.Tbl__text().Insert_bgn();
+		db.Tbl__text().Insert_cmd_by_batch(page_id, text_bry);
+		db.Tbl__text().Insert_end();
+	}
 }

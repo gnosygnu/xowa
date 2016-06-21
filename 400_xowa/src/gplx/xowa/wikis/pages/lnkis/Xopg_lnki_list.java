@@ -26,7 +26,8 @@ public class Xopg_lnki_list {
 	}
 	public boolean			Disabled() {return disabled;} private final    boolean disabled;
 	public int				Len() {return list.Len();}
-	public Xopg_lnki_itm	Get_at(int i) {return (Xop_lnki_tkn)list.Get_at(i);}
+	public Xopg_lnki_itm	Get_at(int i) {return (Xopg_lnki_itm)list.Get_at(i);}
+	public void Add_direct(Xopg_lnki_itm lnki) {list.Add(lnki);}	// add lnki directly to list without changing html_uid; needed for hdumps which call "Fill_page" to transfer from Xoh_page to Xoae_page
 	public void	Add(Xopg_lnki_itm lnki) {
 		if (disabled) return;
 		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// ttl is null for invalid links

@@ -94,9 +94,6 @@ public class Xog_async_wkr {
 	}
 	private static void Async_redlinks(Gfo_usr_dlg usr_dlg, Xoae_app app, Xoae_page page, Xog_js_wkr js_wkr) {
 		if (page.Tab_data().Tab() == null) return;	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
-		try {			
-			Xopg_redlink_mgr redlinks_wkr = new Xopg_redlink_mgr(page, js_wkr);
-			Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+		Xopg_redlink_mgr.Run_async(page, js_wkr);
 	}
 }

@@ -43,9 +43,12 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 			Wait_for_popups();
 
 			// load page text
-			if (hdump_exists)
+			boolean parse = true;
+			if (hdump_exists) {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
-			else
+				parse = Bry_.Len_eq_0(page.Hdump_data().Body()); // NOTE: need to check if actually empty
+			}
+			if (parse)
 				wiki.Parser_mgr().Parse(page, false);
 
 			// launch thread to show page

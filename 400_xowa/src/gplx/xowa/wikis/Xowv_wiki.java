@@ -40,6 +40,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.domain_tid = domain_itm.Domain_type_id();
 		this.domain_abrv = Xow_abrv_wm_.To_abrv(Xow_domain_itm_.parse(domain_bry));
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
+		this.lang = app.Lang_mgr().Get_by(domain_itm.Lang_actl_key());
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
@@ -70,14 +71,14 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final    Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
 	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_wiki_props				Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
-	public Xol_lang_itm					Lang() {throw Err_.new_unimplemented();}
+	public Xol_lang_itm					Lang() {return lang;} private final    Xol_lang_itm lang;
 	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
 	public Xow_site_stats_mgr			Stats() {return stats;} private final    Xow_site_stats_mgr stats;
 	public Xow_url_parser				Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
 	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xosp_special_mgr				Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
-	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
-	public Xoav_app Appv() {return app;} private final    Xoav_app app;
+	public Xow_xwiki_mgr				Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
+	public Xoav_app						Appv() {return app;} private final    Xoav_app app;
 	public void Init_by_wiki() {
 		if (!init_needed) return;
 		init_needed = false;

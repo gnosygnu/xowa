@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.ios.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*;
 public class Xow_hdump_mgr__load {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
@@ -91,6 +91,14 @@ public class Xow_hdump_mgr__load {
 			gplx.xowa.files.Xof_fsdb_itm itm = src_imgs.Get_at(i);
 			wpg.Hdump_data().Imgs().Add(itm);
 			wpg.File_queue().Add(itm);	// add to file_queue for http_server
+		}
+
+		// transfer redlinks
+		Xopg_lnki_list src_list = hpg.Redlink_list();
+		Xopg_lnki_list trg_list = wpg.Redlink_list();
+		len = src_list.Len();
+		for (int i = 0; i < len; ++i) {
+			trg_list.Add_direct(src_list.Get_at(i));
 		}
 	}
 	private static boolean Load__fail(Xoh_page hpg) {hpg.Exists_n_(); return false;}

@@ -126,7 +126,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
-		app.Thread_mgr().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
+		app.Thread_mgr_old().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
 	}
 	private void Cur_vnt_(Xowe_wiki wiki, byte[] vnt) {
 		Xoae_app app = wiki.Appe();
@@ -177,20 +177,23 @@ public class Xog_tab_itm implements Gfo_invk {
 			//	win.Page__async__bgn(this);
 			Gfo_thread_wkr async_wkr = null;
 			if (page.Html_data().Hdump_exists()) {
-				wiki.File_mgr().Init_file_mgr_by_load(wiki);
-				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
+//					wiki.File_mgr().Init_file_mgr_by_load(wiki);
+//					Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
+//					async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
+				async_wkr = new Load_files_wkr(this);
 				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
 					wiki.Html__hdump_mgr().Save_mgr().Save(page);
 				}
 			}
 			else
 				async_wkr = new Load_files_wkr(this);
+
 			page.Html_data().Mode_wtxt_shown_y_();
-			app.Thread_mgr().File_load_mgr().Add_at_end(async_wkr).Run();
+			app.Thread_mgr_old().File_load_mgr().Add_at_end(async_wkr).Run();
+			// app.Thread_mgr().Get_by_or_new("on_page_load").Add(new Xopg_img_thread(), new Xopg_rl_thread());
 		}
 		finally {
-			app.Thread_mgr().Page_load_mgr().Resume();
+			app.Thread_mgr_old().Page_load_mgr().Resume();
 			this.tab_is_loading = false;
 		}
 	}
@@ -214,64 +217,64 @@ public class Xog_tab_itm implements Gfo_invk {
 		try {
 			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Exec_err());
 		} finally {
-			wkr.Wiki().Appe().Thread_mgr().Page_load_mgr().Resume();
+			wkr.Wiki().Appe().Thread_mgr_old().Page_load_mgr().Resume();
 		}
 	}
-	public void Async() {
-		if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
-		Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe(); Xog_win_itm win_itm = tab_mgr.Win(); Gfo_usr_dlg usr_dlg = win_itm.Usr_dlg();
-		app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().To_str());
-		if (page.Url().Anch_str() != null) html_itm.Scroll_page_by_id_gui(page.Url().Anch_str());
-		if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
-		int xfer_len = 0;
-		xfer_len = page.File_queue().Count();
-		String page_ttl_str = String_.new_u8(page.Ttl().Raw());
-		if (xfer_len > 0){
-			usr_dlg.Prog_one("", "", "downloading images: ~{0}", xfer_len);
-			try {
-				page.File_queue().Exec(wiki, page);
-				if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
-					html_itm.Html_gallery_packed_exec();
-				if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
-					&&	page.Html_data().Head_mgr().Itm__popups().Enabled()
-					)
-					html_itm.Html_popups_bind_hover_to_doc();		// rebind all elements to popup
-			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
-		}
-		xfer_len = page.File_math().Count();
-		if (xfer_len > 0){
-			try {
-				usr_dlg.Prog_one("", "", "generating math: ~{0}", xfer_len);
-				for (int i = 0; i < xfer_len; i++) {
-					if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
-					gplx.xowa.xtns.math.Xof_math_itm itm = (gplx.xowa.xtns.math.Xof_math_itm)page.File_math().Get_at(i);
-					String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + List_adp_.Base1, xfer_len, String_.new_u8(itm.Math()));
-					app.File_mgr().Math_mgr().MakePng(itm.Math(), itm.Hash(), itm.Png_url(), queue_msg);
-					gplx.gfui.SizeAdp size = app.File_mgr().Img_mgr().Wkr_query_img_size().Exec(itm.Png_url());
-					html_itm.Html_img_update("xowa_math_img_" + itm.Id(), itm.Png_url().To_http_file_str(), size.Width(), size.Height());
-					html_itm.Html_elem_delete("xowa_math_txt_" + itm.Id());
-				}
-				page.File_math().Clear();
-			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.math: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
-		}
-		if (page.Html_cmd_mgr().Count() > 0) {
-			try {page.Html_cmd_mgr().Exec(app, page);}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
-		}
-		try {
-			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
-				Xopg_redlink_mgr redlinks_wkr = new Xopg_redlink_mgr(page, html_itm);
-				Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
-				usr_dlg.Prog_none("", "imgs.done", "");
-			}
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
-		try {app.File_mgr().Cache_mgr().Compress_check();}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
-		app.Usere().User_db_mgr().Cache_mgr().Page_end(app.Wiki_mgr());
-		app.Log_wtr().Queue_enabled_(false);
-	}
+//		public void Async() {
+//			if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
+//			Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe(); Xog_win_itm win_itm = tab_mgr.Win(); Gfo_usr_dlg usr_dlg = win_itm.Usr_dlg();
+//			app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().To_str());
+//			if (page.Url().Anch_str() != null) html_itm.Scroll_page_by_id_gui(page.Url().Anch_str());
+//			if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
+//			int xfer_len = 0;
+//			xfer_len = page.File_queue().Count();
+//			String page_ttl_str = String_.new_u8(page.Ttl().Raw());
+//			if (xfer_len > 0){
+//				usr_dlg.Prog_one("", "", "downloading images: ~{0}", xfer_len);
+//				try {
+//					page.File_queue().Exec(wiki, page);
+//					if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
+//						html_itm.Html_gallery_packed_exec();
+//					if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
+//						&&	page.Html_data().Head_mgr().Itm__popups().Enabled()
+//						)
+//						html_itm.Html_popups_bind_hover_to_doc();		// rebind all elements to popup
+//				}
+//				catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
+//			}
+//			xfer_len = page.File_math().Count();
+//			if (xfer_len > 0){
+//				try {
+//					usr_dlg.Prog_one("", "", "generating math: ~{0}", xfer_len);
+//					for (int i = 0; i < xfer_len; i++) {
+//						if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
+//						gplx.xowa.xtns.math.Xof_math_itm itm = (gplx.xowa.xtns.math.Xof_math_itm)page.File_math().Get_at(i);
+//						String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + List_adp_.Base1, xfer_len, String_.new_u8(itm.Math()));
+//						app.File_mgr().Math_mgr().MakePng(itm.Math(), itm.Hash(), itm.Png_url(), queue_msg);
+//						gplx.gfui.SizeAdp size = app.File_mgr().Img_mgr().Wkr_query_img_size().Exec(itm.Png_url());
+//						html_itm.Html_img_update("xowa_math_img_" + itm.Id(), itm.Png_url().To_http_file_str(), size.Width(), size.Height());
+//						html_itm.Html_elem_delete("xowa_math_txt_" + itm.Id());
+//					}
+//					page.File_math().Clear();
+//				}
+//				catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.math: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
+//			}
+//			if (page.Html_cmd_mgr().Count() > 0) {
+//				try {page.Html_cmd_mgr().Exec(app, page);}
+//				catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
+//			}
+//			try {
+//				if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
+//					Xopg_redlink_mgr redlinks_wkr = new Xopg_redlink_mgr(page, html_itm);
+//					Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
+//					usr_dlg.Prog_none("", "imgs.done", "");
+//				}
+//			}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
+//			try {app.File_mgr().Cache_mgr().Compress_check();}
+//			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
+//			app.Usere().User_db_mgr().Cache_mgr().Page_end(app.Wiki_mgr());
+//			app.Log_wtr().Queue_enabled_(false);
+//		}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_show_url_loaded_swt))	this.Show_url_loaded((Load_page_wkr)m.ReadObj("v"));
 		else if	(ctx.Match(k, Invk_show_url_failed_swt))	this.Show_url_failed((Load_page_wkr)m.ReadObj("v"));
@@ -286,8 +289,8 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public String			Thread__name() {return "xowa.load_files_wkr";}
 	public boolean			Thread__resume() {return true;}
 	public void Thread__exec() {
-//			try {Xog_async_wkr.Async(tab);}
-		try {tab.Async();}
+		try {Xog_async_wkr.Async(tab);}
+//			try {tab.Async();}
 		catch (Exception e) {
 			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));
 		}

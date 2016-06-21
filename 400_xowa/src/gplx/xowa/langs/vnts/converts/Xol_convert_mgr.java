@@ -48,8 +48,7 @@ public class Xol_convert_mgr {
 		synchronized (tmp_page_list) {	// THREAD:
 			int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
 			if (converted == 0) return Xowd_page_itm.Null;								// ttl_bry has no conversions; exit;
-			// wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(Cancelable_.Never, tmp_page_list, wiki.Ns_mgr(), true, 0, converted);	// TODO_OLD: use this call; when defaulting test to use db_mgr, not txt_mgr
-			((Xowe_wiki)wiki).Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, Bool_.Y, 0, converted);
+			wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(Cancelable_.Never, tmp_page_list, wiki.Ns_mgr(), true, 0, converted);	// TODO_OLD: use this call; when defaulting test to use db_mgr, not txt_mgr
 			for (int i = 0; i < converted; i++) {
 				Xowd_page_itm page = (Xowd_page_itm)tmp_page_list.Get_at(i);
 				if (page.Exists()) return page;											// return 1st found page
