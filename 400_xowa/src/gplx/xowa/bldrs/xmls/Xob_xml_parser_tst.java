@@ -135,3 +135,14 @@ public class Xob_xml_parser_tst {
 		return rv;
 	}
 }
+class Xob_xml_parser_fxt {
+//		private final    Xob_xml_parser page_parser = new Xob_xml_parser();
+//		public void Test__parse(Io_buffer_rdr fil, Xowd_page_itm expd, int cur_pos) {
+//			Xowd_page_itm actl = new Xowd_page_itm();
+//			int rv = page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), cur_pos, ns_mgr);
+//			Tfds.Eq(expd.Id(), actl.Id(), "id");
+//			Tfds.Eq(String_.new_u8(expd.Ttl_full_db()), String_.new_u8(actl.Ttl_full_db()), "title");
+//			Tfds.Eq(String_.new_u8(expd.Text()), String_.new_u8(actl.Text()), "text");
+//			Tfds.Eq_date(expd.Modified_on(), actl.Modified_on(), "timestamp");
+//		}
+}

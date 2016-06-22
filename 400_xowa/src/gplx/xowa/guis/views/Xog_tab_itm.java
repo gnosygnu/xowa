@@ -220,6 +220,7 @@ public class Xog_tab_itm implements Gfo_invk {
 			wkr.Wiki().Appe().Thread_mgr_old().Page_load_mgr().Resume();
 		}
 	}
+	// DELETE:v3.6.4
 //		public void Async() {
 //			if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
 //			Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe(); Xog_win_itm win_itm = tab_mgr.Win(); Gfo_usr_dlg usr_dlg = win_itm.Usr_dlg();
@@ -290,7 +291,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public boolean			Thread__resume() {return true;}
 	public void Thread__exec() {
 		try {Xog_async_wkr.Async(tab);}
-//			try {tab.Async();}
+//			try {tab.Async();}	// DELETE:v3.6.4
 		catch (Exception e) {
 			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));
 		}

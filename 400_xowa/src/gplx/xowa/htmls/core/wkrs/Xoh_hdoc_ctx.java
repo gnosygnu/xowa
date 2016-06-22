@@ -40,7 +40,6 @@ public class Xoh_hdoc_ctx {
 	public Xoh_stat_itm				Hzip__stat()		{return hzip__stat;} private final    Xoh_stat_itm hzip__stat = new Xoh_stat_itm();
 	public Xohz_tag_regy			Hzip__xnde__regy()	{return hzip__xnde__regy;} private final    Xohz_tag_regy hzip__xnde__regy = Xohz_tag_regy_.New_dflt();
 	public Xoh_xnde_dict_reg		Hzip__xnde__dict()	{return hzip__xnde__dict;} private final    Xoh_xnde_dict_reg hzip__xnde__dict = new Xoh_xnde_dict_reg();
-	public int						Uid__lnki_nxt()		{return ++uid__lnki;} private int uid__lnki;
 	public int						Uid__gly__nxt()		{return ++uid__gly;} private int uid__gly;
 	public boolean						Mode_is_diff()		{return mode_is_diff;} private boolean mode_is_diff;		public void Mode_is_diff_(boolean v) {mode_is_diff = v;}
 	public void Init_by_app(Xoa_app app) {
@@ -65,7 +64,6 @@ public class Xoh_hdoc_ctx {
 	}		
 	private void Clear() {
 		hzip__stat.Clear();
-		this.uid__lnki = 1;	// NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 		this.uid__gly = -1;
 	}
 

@@ -22,7 +22,9 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 	public int Sleep_interval = 100;
 	public int Send_interval = 1000;
 
-	public void Init_by_app(Xoa_app app) {}
+	public void Init_by_app(Xoa_app app) {
+		app.Gui__cbk_mgr().Reg(Xog_cbk_wkr__http.Instance);
+	}
 	public void Send_msg(String msg) {
 		msgs.Add(msg);
 	}
@@ -42,7 +44,6 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		return String_.Concat_lines_nl(msgs.To_str_ary_and_clear());
 	}
 
-	public byte[] Key() {return BRIDGE_KEY;}
-	public static final    byte[] BRIDGE_KEY = Bry_.new_a7("long_poll");
+	public byte[] Key() {return BRIDGE_KEY;} private static final    byte[] BRIDGE_KEY = Bry_.new_a7("long_poll");
         public static final    Http_long_poll_cmd Instance = new Http_long_poll_cmd(); Http_long_poll_cmd() {}
 }

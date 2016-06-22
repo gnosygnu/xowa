@@ -40,21 +40,23 @@ public class Xoax_addon_mgr {
 		( new gplx.xowa.addons.bldrs.files				.Xoax_builds_files_addon()
 		, new gplx.xowa.addons.bldrs.pagelinks			.Xoax_builds_pagelinks_addon()
 		, new gplx.xowa.addons.bldrs.utils_rankings		.Xoax_builds_utils_rankings_addon()
-		, new gplx.xowa.addons.wikis.searchs				.Xoax_builds_search_addon()
+		, new gplx.xowa.addons.wikis.searchs			.Xoax_builds_search_addon()
 		, new gplx.xowa.addons.bldrs.updates.files		.Xoax_updates_files_addon()
 		, new gplx.xowa.addons.bldrs.htmls				.Html__dump_to_fsys__addon()
 		, new gplx.xowa.addons.bldrs.exports			.Export_addon()
 		, new gplx.xowa.addons.wikis.pages.randoms		.Rndm_addon()
 
 		// specials
-		, new gplx.xowa.addons.wikis.registrys		.Wiki_registry_addon()
-		, new gplx.xowa.addons.wikis.imports		.Xow_import_addon()
+		, new gplx.xowa.addons.wikis.registrys			.Wiki_registry_addon()
+		, new gplx.xowa.addons.wikis.imports			.Xow_import_addon()
 		, new gplx.xowa.addons.bldrs.centrals			.Xobc_task_addon()
 		, new gplx.xowa.addons.apps.helps.logs			.Xolog_addon()
 
 		// jsons
-		, new gplx.xowa.addons.servers.https			.Xoax_long_poll_addon()
 		);
+		if (app.Mode().Tid_is_http()) {
+			app.Addon_mgr().Itms__add_many(new gplx.xowa.addons.servers.https.Xoax_long_poll_addon());
+		}
 		return this;
 	}
 	public void Run_by_app(Xoa_app app) {
@@ -83,6 +85,5 @@ public class Xoax_addon_mgr {
 				}
 			}
 		}
-		// app.Gui__cbk_mgr().Reg(gplx.xowa.addons.servers.https.Xog_cbk_wkr__http.Instance);
 	}
 }

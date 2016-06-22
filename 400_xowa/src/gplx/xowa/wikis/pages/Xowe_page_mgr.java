@@ -32,9 +32,12 @@ public class Xowe_page_mgr {
 		Wait_for_popups();
 
 		// load page text
-		if (hdump_exists)
+		boolean parse = true;
+		if (hdump_exists) {
 			wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
-		else
+			parse = Bry_.Len_eq_0(page.Hdump_data().Body());		// NOTE: need to check if actually empty for archive.org wikis which included html_db_id without html_dbs; DATE:2016-06-22
+		}
+		if (parse)
 			wiki.Parser_mgr().Parse(page, false);
 		return page;
 	}

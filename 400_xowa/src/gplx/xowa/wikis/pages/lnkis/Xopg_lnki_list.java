@@ -43,7 +43,7 @@ public class Xopg_lnki_list {
 		list.Add(lnki);
 	}
 	public void	Clear() {
-		lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;			// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0; DATE:2014-10-09
+		lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0; DATE:2014-10-09; OLD_COMMENT: NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 		list.Clear();
 	}
 

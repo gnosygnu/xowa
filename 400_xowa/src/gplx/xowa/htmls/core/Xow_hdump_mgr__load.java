@@ -83,6 +83,7 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__popups().Bind_hover_area_	(hpg_head.Imap_exists());
 		wpg_head.Itm__gallery().Enabled_		(hpg_head.Gallery_packed_exists());
 		wpg_head.Itm__hiero().Enabled_			(hpg_head.Hiero_exists());
+		wpg_head.Itm__timeline().Enabled_		(true);
 
 		// transfer images from Xoh_page to Xoae_page 
 		Xoh_img_mgr src_imgs = hpg.Img_mgr();

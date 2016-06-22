@@ -176,13 +176,29 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; PAGE:en.w:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
 						Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 						if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
-							byte[] missing_ttl 
-								= subst_found || template_prefix_found // if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
-								? name_ary_orig 
-								: name_ary
-								;
-							bfr.Add(Xop_curly_bgn_lxr.Hook).Add(missing_ttl).Add(Xop_curly_end_lxr.Hook);
-							return false;
+							if (subst_found || template_prefix_found) {	// if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
+								bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary_orig).Add(Xop_curly_end_lxr.Hook);
+								return false;
+							}
+							else {	// output entire tmpl_src WITH args; used to output name only which broke pages; PAGE:en.w:Flag_of_Greenland; DATE:2016-06-21
+								bfr.Add(Xop_curly_bgn_lxr.Hook);
+								bfr.Add(name_ary);
+								for (int i = 0; i < args_len; ++i) {
+									Arg_nde_tkn nde = this.Args_get_by_idx(i);
+									bfr.Add_byte(Byte_ascii.Pipe);
+									bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());
+								}
+								bfr.Add(Xop_curly_end_lxr.Hook);
+								return false;
+							}
+							// DELETE:v3.6.4
+//								byte[] missing_ttl 
+//									= subst_found || template_prefix_found // if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
+//									? name_ary_orig 
+//									: name_ary
+//									;
+//								bfr.Add(Xop_curly_bgn_lxr.Hook).Add(missing_ttl).Add(Xop_curly_end_lxr.Hook);
+//								return false;
 						}
 						else {	// some templates produce null ttls; EX: "Citation needed{{subst"
 							defn = wiki.Cache_mgr().Defn_cache().Get_by_key(ttl.Page_db());

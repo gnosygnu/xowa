@@ -20,7 +20,7 @@ import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;
-class Http_server_wkr_v2 implements Gfo_invk {
+class Http_server_wkr implements Gfo_invk {
 	private final    int uid;
 	private final    Http_server_mgr server_mgr;
 	private final    Http_server_wtr server_wtr;
@@ -34,7 +34,7 @@ class Http_server_wkr_v2 implements Gfo_invk {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
-	public Http_server_wkr_v2(Http_server_mgr server_mgr, int uid){
+	public Http_server_wkr(Http_server_mgr server_mgr, int uid){
 		this.server_mgr = server_mgr; this.uid = uid;
 		this.app = server_mgr.App(); this.server_wtr = server_mgr.Server_wtr(); this.url_encoder = server_mgr.Encoder();
 		this.root_dir_http = app.Fsys_mgr().Root_dir().To_http_file_str();
@@ -84,6 +84,7 @@ class Http_server_wkr_v2 implements Gfo_invk {
 		int url_end = question_pos == Bry_find_.Not_found ? url.length : question_pos;	// ignore files with query params; EX: /file/A.png?key=val
 		url_encoder.Decode(tmp_bfr, Bool_.N, url, url_bgn, url_end);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
 		byte[] path = tmp_bfr.To_bry_and_clear();
+		if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) path = Bry_.Replace(path, Byte_ascii.Backslash, Byte_ascii.Slash);
 		client_wtr.Write_bry(Xosrv_http_wkr_.Rsp__http_ok);
 		// 	client_wtr.Write_str("Expires: Sun, 17-Jan-2038 19:14:07 GMT\n");
 		String mime_type = String_.new_u8(Http_file_utl.To_mime_type_by_path_as_bry(path));
@@ -177,35 +178,5 @@ class Xosrv_http_wkr_ {
 	public static final    byte[]
 	  Rsp__http_ok				= Bry_.new_a7("HTTP/1.1 200 OK:\n")
 	, Rsp__content_type_html	= Bry_.new_a7("Content-Type: text/html; charset=utf-8\n")
-	;
-}
-class Http_file_utl {
-	public static byte[] To_mime_type_by_path_as_bry(byte[] path_bry) {
-		int dot_pos = Bry_find_.Find_bwd(path_bry, Byte_ascii.Dot);
-		return dot_pos == Bry_find_.Not_found ? Mime_octet_stream : To_mime_type_by_ext_as_bry(path_bry, dot_pos, path_bry.length);
-	}
-	public static byte[] To_mime_type_by_ext_as_bry(byte[] ext_bry, int bgn, int end) {
-		Object o = mime_hash.Get_by_mid(ext_bry, bgn, end);
-		return o == null ? Mime_octet_stream : (byte[])o;
-	}
-	private static final    byte[] 
-	  Mime_html				= Bry_.new_a7("text/html")
-	, Mime_jpg				= Bry_.new_a7("image/jpeg")
-	, Mime_png				= Bry_.new_a7("image/png")
-	, Mime_gif				= Bry_.new_a7("image/gif")
-	, Mime_svg				= Bry_.new_a7("image/svg+xml")
-	, Mime_css				= Bry_.new_a7("text/css")
-	, Mime_js				= Bry_.new_a7("application/javascript")
-	, Mime_octet_stream		= Bry_.new_a7("application/octet-stream")
-	;
-	private static final    Hash_adp_bry mime_hash = Hash_adp_bry.ci_a7()
-	.Add_str_obj(".htm"		, Mime_html)
-	.Add_str_obj(".html"	, Mime_html)
-	.Add_str_obj(".jpg"		, Mime_jpg)
-	.Add_str_obj(".png"		, Mime_png)
-	.Add_str_obj(".gif"		, Mime_gif)
-	.Add_str_obj(".svg"		, Mime_svg)
-	.Add_str_obj(".css"		, Mime_css)
-	.Add_str_obj(".js"		, Mime_js)
 	;
 }

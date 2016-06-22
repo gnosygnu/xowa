@@ -51,9 +51,9 @@ class Http_server_socket implements Gfo_invk {
 				wkr_pool.Add(wkr_uid);
 				// server_wtr.Write_str_w_nl("added new worker; uid=" + wkr_uid);
 			}
-			Http_server_wkr_v2 wkr = new Http_server_wkr_v2(server_mgr, wkr_uid);
+			Http_server_wkr wkr = new Http_server_wkr(server_mgr, wkr_uid);
 			wkr.Init_by_thread(client_socket);
-			Thread_adp_.Start_by_key("thread:xowa.http_server.client", wkr, Http_server_wkr_v2.Invk_run);
+			Thread_adp_.Start_by_key("thread:xowa.http_server.client", wkr, Http_server_wkr.Invk_run);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -38,12 +38,16 @@ class Xobc_task_html extends Xow_special_wtr__base {
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.log.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.ajax.listener.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.app.js")));
-		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.app." + (gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? "drd" : "swt") + ".js")));
+		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", Get_app_js_file(app))));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.elem.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.tmpl.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.notify.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xo.server.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xobc.util.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(addon_dir.GenSubFil_nest("js", "xobc.js")));
+	}
+	private static String Get_app_js_file(Xoa_app app) {
+		if (app.Mode().Tid_is_http()) return "xo.app.http_server.js";
+		return gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? "xo.app.drd.js" : "xo.app.swt.js";
 	}
 }

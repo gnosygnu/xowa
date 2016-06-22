@@ -175,8 +175,8 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			case Xoh_anch_cls_.Tid__voyage__email:	cls_bry = Xoh_anch_cls_.Bry__voyage_email; break;
 		}
 		if (cls_bry != null) bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(cls_bry);
-		if (!hctx.Mode_is_diff()) {
-			if (html_uid == -1) html_uid = hctx.Uid__lnki_nxt();	// html_uid == -1 for non-lnkis
+		if (	!hctx.Mode_is_diff()										// do not add id during hzip_diff
+			&&	href_type != Xoh_anch_href_data.Tid__inet) {				// lnke should not get id
 			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).Add_int_variable(html_uid);
 		}
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;

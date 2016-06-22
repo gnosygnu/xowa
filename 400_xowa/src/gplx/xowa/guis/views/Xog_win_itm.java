@@ -68,7 +68,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_async_wkr.Async(((Xog_tab_itm)m.ReadObj("v")));
-		// else if	(ctx.Match(k, Invk_page_async_exec))						((Xog_tab_itm)m.ReadObj("v")).Async();
+		// else if	(ctx.Match(k, Invk_page_async_exec))						((Xog_tab_itm)m.ReadObj("v")).Async();	// DELETE:v3.6.4
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
 		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xopg_page_.Tid_edit);
 		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_page_.Tid_html);
