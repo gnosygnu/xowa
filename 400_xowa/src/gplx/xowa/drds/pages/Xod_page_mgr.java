@@ -56,6 +56,7 @@ public class Xod_page_mgr {
 
 		// generate special
 		Xoh_page page = new Xoh_page();
+		page.Init(wiki, Xoa_url.new_(wiki.Domain_bry(), ttl.Page_db()), ttl, 1);	// NOTE: init page to set url, ttl; DATE:2016-06-23
 		try {proto.Special__clone().Special__gen(wiki, page, url, ttl);}
 		catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e)); return rv;}
 

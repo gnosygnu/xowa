@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
 public class Xoh_head_itm__globals extends Xoh_head_itm__base {
-	private final Xoh_head_wtr tmp_wtr = new Xoh_head_wtr();
+	private final    Xoh_head_wtr tmp_wtr = new Xoh_head_wtr();
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__globals;}
 	@Override public int Flags() {return Flag__css_include | Flag__js_include | Flag__js_head_script | Flag__js_tail_script | Flag__js_head_global;}
 	@Override public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
@@ -45,7 +45,7 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		wtr.Write_js_alias_var	(Page__alias, Page__key);
 		wtr.Write_js_alias_kv	(Page__alias, Key__wiki		, page.Wiki().Domain_bry());
 		wtr.Write_js_alias_kv	(Page__alias, Key__ttl		, page.Ttl().Page_db());
-	}	private static final byte[] Key__app_mode = Bry_.new_a7("xowa.app.mode"), Page__alias = Bry_.new_a7("x_p"), Page__key = Bry_.new_a7("xowa.page"), Key__wiki = Bry_.new_a7("wiki"), Key__ttl = Bry_.new_a7("ttl");
+	}	private static final    byte[] Key__app_mode = Bry_.new_a7("xowa.app.mode"), Page__alias = Bry_.new_a7("x_p"), Page__key = Bry_.new_a7("xowa.page"), Key__wiki = Bry_.new_a7("wiki"), Key__ttl = Bry_.new_a7("ttl");
 	@Override public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_gui			, app.Mode().Tid_is_gui());
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_http		, app.Mode().Tid_is_http());
@@ -66,7 +66,7 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNames				, months_long);
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNamesShort			, months_short);
 	}
-	public static final byte[]	// NOTE: most of these are for the table-sorter
+	public static final    byte[]	// NOTE: most of these are for the table-sorter
 	  Key_mode_is_gui					= Bry_.new_a7("mode_is_gui")
 	, Key_mode_is_http					= Bry_.new_a7("mode_is_http")
 	, Key_http_port						= Bry_.new_a7("http-port")
@@ -96,7 +96,7 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		tmp_wtr.Write_js_ary_end();
 		return tmp_wtr.Bfr().To_bry_and_clear();
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Date_format_default			= Bry_.new_a7("dmy")
 	, Num_format_digits				= Bry_.new_a7("['', '']")
 	, Var_xowa_root_dir				= Bry_.new_a7("xowa_root_dir")

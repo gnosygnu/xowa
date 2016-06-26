@@ -54,14 +54,4 @@ public class Xobc_data_db {
 			tbl__import_step.Delete(step_id);
 		}
 	}
-	private final    gplx.core.lists.hashs.Hash_adp__int host_hash = new gplx.core.lists.hashs.Hash_adp__int();
-	public String Bld_src_http_url(gplx.core.brys.evals.Bry_eval_mgr eval_mgr, int host_id, String file_name) {
-		Xobc_host_regy_itm host_itm = (Xobc_host_regy_itm)host_hash.Get_by_or_null(host_id);
-		if (host_itm == null) {
-			host_itm = tbl__host_regy.Select(host_id);
-			host_hash.Add(host_id, host_itm);
-		}
-		String host_dir = String_.new_u8(eval_mgr.Eval(Bry_.new_u8(host_itm.Host_data_dir())));
-		return String_.Format("http://{0}/{1}/{2}", host_itm.Host_domain(), host_dir, file_name);
-	}
 }

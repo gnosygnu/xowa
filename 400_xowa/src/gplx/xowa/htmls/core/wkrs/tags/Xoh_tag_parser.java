@@ -80,13 +80,10 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 					break;
 				case Gfh_tag_.Id__ul:
 					if		(cur.Atrs__cls_has(Xoh_gly_grp_data.Atr__cls__gallery)) {
-//							rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__gly);
+						// rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__gly);	// COMMENTED: wrote gallery hzip code, but doesn't seem worth enabling for low number of galleries
 						if (wkr__gly.Parse1(hdoc_wkr, hctx, src, tag_rdr, cur)) return wkr__gly.Src_end();
 					}
 					break;
-//					case Gfh_tag_.Id__td:
-//						if		(wkr__xnde.Parse(hdoc_wkr, hctx, tag_rdr, src, cur)) return wkr__xnde.Src_end();
-//						break;
 			}
 			if (rv == -1) {
 				rv = cur_end;

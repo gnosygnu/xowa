@@ -25,7 +25,7 @@ public class Xoh_page implements Xoa_page {
 	public Xoa_ttl					Ttl()				{return page_ttl;} private Xoa_ttl page_ttl;
 
 	// props
-	public boolean						Exists()			{return exists;} public Xoh_page Exists_n_() {exists = false; return this;} private boolean exists = true;
+	public boolean					Exists()			{return exists;} public Xoh_page Exists_n_() {exists = false; return this;} private boolean exists = true;
 	public int						Page_id()			{return page_id;} private int page_id;
 	public byte[]					Body()				{return body;} public void Body_(byte[] v) {this.body = v;} private byte[] body;
 	public int						Body_zip_tid()		{return body_zip_tid;}	private int body_zip_tid;
@@ -40,12 +40,14 @@ public class Xoh_page implements Xoa_page {
 	public Ordered_hash				Gallery_itms()		{return gallery_itms;} private Ordered_hash gallery_itms = Ordered_hash_.New();
 	public Xopg_module_mgr			Head_mgr()			{return head_mgr;} private Xopg_module_mgr head_mgr = new Xopg_module_mgr();
 	public void						Xtn_gallery_packed_exists_y_() {}
+	public boolean					Xtn__timeline_exists() {return xtn__timeline_exists;} private boolean xtn__timeline_exists; public void Xtn__timeline_exists_y_() {xtn__timeline_exists = true;}
+	public boolean					Xtn__gallery_exists() {return xtn__gallery_exists;} private boolean xtn__gallery_exists; public void Xtn__gallery_exists_y_() {xtn__gallery_exists = true;}
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public byte[]					Redirect_to_ttl() {return redirect_to_ttl;} private byte[] redirect_to_ttl; public void Redirect_to_ttl_(byte[] v) {this.redirect_to_ttl = v;}
 
 	// util
-	public Xopg_lnki_list			Redlink_list()		{return redlink_list;} private Xopg_lnki_list redlink_list;
+	public Xopg_lnki_list			Redlink_list()		{return redlink_list;} private Xopg_lnki_list redlink_list = new Xopg_lnki_list();
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
@@ -53,7 +55,7 @@ public class Xoh_page implements Xoa_page {
 	public void Init(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
-		this.redlink_list = new Xopg_lnki_list(page_ttl.Ns().Id_is_module());
+		redlink_list.Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 	}
 	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {
 		head_mgr.Flag_(head_flag);
@@ -78,5 +80,6 @@ public class Xoh_page implements Xoa_page {
 		img_itms = Xohd_img_itm__base.Ary_empty;
 		head_mgr.Clear(); gallery_itms.Clear(); redlink_uids.Clear(); commons_mgr.Clear();
 		section_mgr.Clear(); img_mgr.Clear();
+		redlink_list.Clear();
 	}
 }

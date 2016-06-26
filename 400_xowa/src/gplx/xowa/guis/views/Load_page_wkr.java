@@ -33,25 +33,6 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 
 			// wait_for_popups; free mem check;
 			this.page = wiki.Page_mgr().Load_page(url, ttl, tab);
-			// DELETE:v3.6.4
-//				Xoa_app_.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());
-//				Wait_for_popups();
-//				Xowe_wiki_.Rls_mem_if_needed(wiki);
-//
-//				// load page meta; wait_for_popups
-//				this.page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
-//				boolean hdump_exists = page.Revision_data().Html_db_id() != -1 && wiki.Appe().Api_root().Wiki().Hdump().Read_preferred();
-//				page.Html_data().Hdump_exists_(hdump_exists);
-//				Wait_for_popups();
-//
-//				// load page text
-//				boolean parse = true;
-//				if (hdump_exists) {
-//					wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
-//					parse = Bry_.Len_eq_0(page.Hdump_data().Body()); // NOTE: need to check if actually empty
-//				}
-//				if (parse)
-//					wiki.Parser_mgr().Parse(page, false);
 
 			// launch thread to show page
 			Gfo_invk_.Invk_by_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);
@@ -64,12 +45,6 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 			Running_(false);
 		}
 	}
-	// DELETE:v3.6.4
-//		private static void Wait_for_popups() {// HACK: wait for popups to finish, else thread errors due to popups and loader mutating cached items
-//			int wait_count = 0;
-//			while (gplx.xowa.htmls.modules.popups.Xow_popup_mgr.Running() && ++wait_count < 100)
-//				Thread_adp_.Sleep(10);
-//		}
 	private static final    Object thread_lock = new Object(); private static boolean running = false;
 	public static boolean Running() {
 		boolean rv = false;

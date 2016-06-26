@@ -84,13 +84,15 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			Xoh_data_itm img_data = hctx.Pool_mgr__data().Get_by_tid(Xoh_hzip_dict_.Tid__img);
 			Xoh_hzip_wkr img_hzip = hctx.Pool_mgr__hzip().Mw__img();
 			img_hzip.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, src_bgn, src_end, img_data);
-			itm_wtr.Init(true, uid, li_w, div_1_w, div_2_margin, capt_tid, capt_bry);
+			((gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data)img_data).Img_is_gallery_(true);
 			itm_wtr.Img_wtr().Init_by_decode(hpg, hctx, src, img_data);
+			itm_wtr.Init(hctx.Mode_is_diff(), itm_wtr.Img_wtr().Fsdb_itm().Html_uid(), li_w, div_1_w, div_2_margin, capt_tid, capt_bry);
 			img_data.Pool__rls();
 			img_hzip.Pool__rls();
 		}			
 		grp_wtr.Init(hctx.Mode_is_diff(), uid, cls_bry, ul_style_max_w, ul_style_w, xtra_cls_bry, xtra_style_bry, xtra_atr_bry, itm_ary);
 		grp_wtr.Bfr_arg__add(bfr);
+		hpg.Xtn__gallery_exists_y_();
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_gly_hzip rv = new Xoh_gly_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}

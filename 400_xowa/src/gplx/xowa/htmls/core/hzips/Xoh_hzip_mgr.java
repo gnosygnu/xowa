@@ -20,26 +20,25 @@ import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
-	private final Xoh_hdoc_wkr hdoc_wkr = new Xoh_hdoc_wkr__hzip();
-	private final Xoh_hdoc_parser hdoc_parser;
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
+	private final    Xoh_hdoc_wkr hdoc_wkr = new Xoh_hdoc_wkr__hzip();
+	private final    Xoh_hdoc_parser hdoc_parser;
+	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
 	public Xoh_hzip_mgr() {this.hdoc_parser = new Xoh_hdoc_parser(hdoc_wkr);}
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
 	public String Key() {return "root";}
 	public byte[] Hook() {return hook;} private byte[] hook;
-	public Xoh_hdoc_ctx Hctx() {return hctx;} private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	public Xoh_hdoc_ctx Hctx() {return hctx;} private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	public void Init_by_app(Xoa_app app) {hctx.Init_by_app(app);}
 	public byte[] Encode_as_bry(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {Encode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
 	public Gfo_poolable_itm	Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {throw Err_.new_unimplemented();}
 	public void Encode(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {
-		hctx.Init_by_page(wiki, hpg.Url_bry_safe());
+		hctx.Init_by_page(wiki, hpg);
 		hdoc_parser.Parse(bfr, hpg, hctx, src);
 	}
 	public void Decode(Bry_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {
-		byte[] page_url = hpg.Url_bry_safe(); int src_len = src.length;
-		hctx.Init_by_page(wiki, page_url);
-		rdr.Init_by_page(page_url, src, src_len);
-		Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, 0, src_len, null);
+		hctx.Init_by_page(wiki, hpg);
+		rdr.Init_by_page(hpg.Url_bry_safe(), src, src.length);
+		Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, 0, src.length, null);
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int pos = src_bgn, txt_bgn = -1;

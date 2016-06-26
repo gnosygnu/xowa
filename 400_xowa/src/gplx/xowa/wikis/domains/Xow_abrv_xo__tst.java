@@ -18,11 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*;
 public class Xow_abrv_xo__tst {
-	@Before public void init() {fxt.Clear();} private final Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
+	@Before public void init() {fxt.Clear();} private final    Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
 	@Test  public void Basic() {
 		fxt.Test("en.wikipedia.org"			, "en.w");			// multi.enwiki
 		fxt.Test("fr.wiktionary.org"		, "fr.d");			// multi.frwiktionary
 		fxt.Test("commons.wikimedia.org"	, "c");				// important.unique.commons
+		fxt.Test("species.wikimedia.org"	, "species");		// important.unique.species
 		fxt.Test("www.wikidata.org"			, "wd");			// important.unique.wikidata
 		fxt.Test("home"						, "home");			// important.unique.xowa
 		fxt.Test("meta.wikimedia.org"		, "meta");			// wikimedia.unique

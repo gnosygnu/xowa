@@ -83,7 +83,8 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__popups().Bind_hover_area_	(hpg_head.Imap_exists());
 		wpg_head.Itm__gallery().Enabled_		(hpg_head.Gallery_packed_exists());
 		wpg_head.Itm__hiero().Enabled_			(hpg_head.Hiero_exists());
-		wpg_head.Itm__timeline().Enabled_		(true);
+		wpg_head.Itm__timeline().Enabled_		(hpg.Xtn__timeline_exists());
+		wpg_head.Itm__gallery_styles().Enabled_	(hpg.Xtn__gallery_exists());
 
 		// transfer images from Xoh_page to Xoae_page 
 		Xoh_img_mgr src_imgs = hpg.Img_mgr();

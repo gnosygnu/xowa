@@ -20,7 +20,7 @@ import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.xtns.gallery.*;
-public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {
+public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	// FUTURE:add gallerycaption
 	private final    List_adp itms_list = List_adp_.New();
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
@@ -54,6 +54,11 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {
 		while (true) {
 			li_head = tag_rdr.Tag__peek_fwd_head();
 			if (li_head.Name_id() != Gfh_tag_.Id__li) break;	// no more <li>; break;
+			// FUTURE: galleries with gallerycaption will cause gallery to write raw; instate code below, but would need to then serialize "gallerycaption"; PAGE:en.d:A DATE:2016-06-24
+			// if (li_head.Atrs__cls_has(Atr__cls__gallerycaption)) {// skip <li class='gallerycaption'>A</li>
+			//	li_head = tag_rdr.Tag__move_fwd_head();
+			//	li_head = tag_rdr.Tag__peek_fwd_head();	
+			// }
 			if (!li_head.Atrs__cls_has(Atr__cls__gallerybox)) return false;
 			tag_rdr.Pos_(li_head.Src_end());
 			Xoh_gly_itm_data itm_parser = new Xoh_gly_itm_data();
@@ -131,6 +136,7 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {
 	}
 	public static final    byte[] Atr__cls__gallery = Bry_.new_a7("gallery");
 	private static final    byte[] Atr__cls__mw_gallery = Bry_.new_a7("mw-gallery-"), Atr__cls__gallerybox = Bry_.new_a7("gallerybox")
+	// , Atr__cls__gallerycaption = Bry_.new_a7("gallerycaption")
 	, Style__max_width = Bry_.new_a7("max-width"), Style___width = Bry_.new_a7("_width")
 	;
 }

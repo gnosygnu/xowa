@@ -39,7 +39,7 @@ public class Xow_domain_tid_ {
 	, Int__other				= 18
 	, Int___len					= 19
 	;
-	public static final String	// SERIALIZED:xowa.gfs
+	public static final    String	// SERIALIZED:xowa.gfs
 	  Str__wikipedia			= "wikipedia"
 	, Str__wiktionary			= "wiktionary"
 	, Str__wikisource			= "wikisource"
@@ -59,7 +59,7 @@ public class Xow_domain_tid_ {
 	, Str__home					= "home"
 	, Str__other				= "other"
 	;
-	public static final byte[] 
+	public static final    byte[] 
 	  Bry__wikipedia			= Bry_.new_a7(Str__wikipedia)
 	, Bry__wiktionary			= Bry_.new_a7(Str__wiktionary)
 	, Bry__wikisource			= Bry_.new_a7(Str__wikisource)
@@ -79,10 +79,10 @@ public class Xow_domain_tid_ {
 	, Bry__home					= Bry_.new_a7(Str__home)
 	, Bry__other				= Bry_.new_a7(Str__other)
 	;
-	private static final Xow_domain_tid[] ary = new Xow_domain_tid[Int___len];
-	private static final Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
-	private static final Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
-	public static final Xow_domain_tid 
+	private static final    Xow_domain_tid[] ary = new Xow_domain_tid[Int___len];
+	private static final    Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
+	private static final    Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
+	public static final    Xow_domain_tid 
 	  Itm__wikipedia			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikipedia		, Bry__wikipedia		, "w"			, ".wikipedia.org")
 	, Itm__wiktionary			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wiktionary		, Bry__wiktionary		, "d"			, ".wiktionary.org")
 	, Itm__wikisource			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikisource		, Bry__wikisource		, "s"			, ".wikisource.org")
@@ -92,7 +92,7 @@ public class Xow_domain_tid_ {
 	, Itm__wikiversity			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikiversity		, Bry__wikiversity		, "u"			, ".wikiversity.org")
 	, Itm__wikinews				= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikinews			, Bry__wikinews			, "n"			, ".wikinews.org")
 	, Itm__wikimedia			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikimedia		, Bry__wikimedia		, "m"			, ".wikimedia.org")
-	, Itm__species				= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__species			, Bry__species			, "species"		, Xow_domain_itm_.Str__species)
+	, Itm__species				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__species			, Bry__species			, "species"		, Xow_domain_itm_.Str__species)
 	, Itm__commons				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__commons			, Bry__commons			, "c"			, Xow_domain_itm_.Str__commons)
 	, Itm__wikidata				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__wikidata			, Bry__wikidata			, "wd"			, Xow_domain_itm_.Str__wikidata)
 	, Itm__mediawiki			= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__mediawiki		, Bry__mediawiki		, "mw"			, Xow_domain_itm_.Str__mediawiki)

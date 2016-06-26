@@ -42,6 +42,7 @@ public class Ref_html_wtr_cfg {
 	}
 	public static final    byte[] Msg_backlabels_err = Bry_.new_a7("cite_error_no_link_label_group");
 	private static final    byte[] Msg_backlabels = Bry_.new_a7("cite_references_link_many_format_backlink_labels");
+	public static final    byte[] Note_href_bgn = Bry_.new_a7("#cite_note-");	// for TOC
 	public static Ref_html_wtr_cfg new_() {
 		Ref_html_wtr_cfg rv = new Ref_html_wtr_cfg();
 		rv.Itm_html_		("<sup id=\"cite_ref-~{itm_id}\" class=\"reference\"><a href=\"#cite_note-~{grp_id}\">[~{grp_key}]</a></sup>");

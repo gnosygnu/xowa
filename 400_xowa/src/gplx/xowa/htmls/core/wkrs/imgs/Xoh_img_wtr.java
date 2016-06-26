@@ -64,7 +64,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		this.Clear();
 		this.img_is_vid = data.Img_is_vid();
 		this.img_wo_anch = data.Img_wo_anch();
-		this.fsdb_itm = hpg.Img_mgr().Make_img();
+		this.fsdb_itm = hpg.Img_mgr().Make_img(data.Img_is_gallery());
 		byte[] file_ttl_bry = data.Img_src().File_ttl_bry();
 		byte[] lnki_ttl = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(file_ttl_bry));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
 		if (data.Img_xoimg().Val_dat_exists()) {

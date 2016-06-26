@@ -58,9 +58,11 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	( "<img id=\"xoimg_~{uid}\" alt=\"~{img_alt}\"~{img_core}~{img_class} />"
 	, "uid", "img_core", "img_alt", "img_class"
 	);
-	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
+	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid, byte[] lnki_ttl, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		byte[] a_title_atr = Gfh_atr_.Make(tmp_bfr, Gfh_atr_.Bry__title, xfer_itm.Lnki_ttl());
-		Html_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, a_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, a_title_atr, Xoh_file_html_fmtr__base.Escape_xowa_title(xfer_itm.Lnki_ttl())
+		Html_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, a_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image
+			, Xoh_lnki_consts.Tid_a_rel_none, a_title_atr
+			, Xoh_file_html_fmtr__base.Escape_xowa_title(lnki_ttl)	// NOTE: must use lnki_ttl, not xfer_itm.Lnki_ttl(); 1st observes case-sensitivity; EX:"a.ogv"; PAGE:de.d:fappieren DATE:2016-06-23
 			, xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt, Xoh_img_cls_.Tid__none, null);
 		return tmp_bfr.To_bry_and_clear();
 	}

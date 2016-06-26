@@ -20,11 +20,10 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
 public class Xopg_lnki_list {
 	private final    List_adp list = List_adp_.New();
 	private int lnki_idx;
-	public Xopg_lnki_list(boolean ttl_is_module) {			// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
-		this.disabled = ttl_is_module;
+	public Xopg_lnki_list() {
 		this.Clear();
 	}
-	public boolean			Disabled() {return disabled;} private final    boolean disabled;
+	public boolean			Disabled() {return disabled;} private boolean disabled; public Xopg_lnki_list Disabled_(boolean v) {this.disabled = v; return this;} 
 	public int				Len() {return list.Len();}
 	public Xopg_lnki_itm	Get_at(int i) {return (Xopg_lnki_itm)list.Get_at(i);}
 	public void Add_direct(Xopg_lnki_itm lnki) {list.Add(lnki);}	// add lnki directly to list without changing html_uid; needed for hdumps which call "Fill_page" to transfer from Xoh_page to Xoae_page

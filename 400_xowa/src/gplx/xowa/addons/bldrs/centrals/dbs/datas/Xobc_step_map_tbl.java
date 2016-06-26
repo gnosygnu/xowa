@@ -68,6 +68,16 @@ public class Xobc_step_map_tbl implements Db_tbl {
 		} finally {rdr.Rls();}
 		throw Err_.new_("", "xobc:could not find next sort", "task_id", task_id);
 	}
+	public List_adp Select_all(int task_id) {
+		List_adp rv = List_adp_.New();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_task_id).Crt_int(fld_task_id, task_id).Exec_select__rls_auto();
+		try {
+			while (rdr.Move_next()) {
+				rv.Add(rdr.Read_int("step_id"));
+			}
+		} finally {rdr.Rls();}
+		return rv;
+	}
 	public void Insert(int sm_id, int task_id, int step_id, int step_seqn) {
 		if (insert_stmt == null) insert_stmt = conn.Stmt_insert(tbl_name, flds);
 		insert_stmt.Clear().Val_int(fld_sm_id, sm_id).Val_int(fld_task_id, task_id).Val_int(fld_step_id, step_id).Val_int(fld_step_seqn, step_seqn)

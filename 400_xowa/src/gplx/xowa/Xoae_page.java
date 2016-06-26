@@ -26,7 +26,7 @@ public class Xoae_page implements Xoa_page {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
 		hdr_mgr = new Xow_hdr_mgr(this);
-		redlink_list = new Xopg_lnki_list(ttl.Ns().Id_is_module());
+		redlink_list = new Xopg_lnki_list().Disabled_(ttl.Ns().Id_is_module());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Empty
 	public Xow_wiki					Wiki() {return wiki;}
@@ -35,6 +35,8 @@ public class Xoae_page implements Xoa_page {
 	public byte[]					Url_bry_safe() {return url == null ? Bry_.Empty : url.Raw();}
 	public boolean						Exists() {return !Missing();}
 	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_gallery_packed_exists_y_();}
+	public boolean						Xtn__timeline_exists() {return false;}	// drd always sets timeline
+	public boolean					Xtn__gallery_exists() {return false;}	// drd does not need to set gallery.style.css
 	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public byte[]					Redirect_to_ttl() {return redirect_to_ttl;} private byte[] redirect_to_ttl; public void Redirect_to_ttl_(byte[] v) {this.redirect_to_ttl = v;}

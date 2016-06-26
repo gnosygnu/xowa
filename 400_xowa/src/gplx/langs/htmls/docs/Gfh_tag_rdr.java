@@ -33,6 +33,9 @@ public class Gfh_tag_rdr {
 		tag__eos.Init(this, src, Bool_.N, Bool_.N, src_end, src_end, src_end, src_end, Gfh_tag_.Id__eos, Bry_.Empty);
 		err_wkr.Init_by_page(String_.new_u8(ctx_name), src);
 	}
+	public void Src_rng_(int src_bgn, int src_end) {
+		this.pos = src_bgn; this.src_end = src_end;
+	}
 	public int Pos() {return pos;} private int pos;
 	public void Pos_(int v) {this.pos = v;}
 	public void Atrs__make(Mwh_atr_wkr atr_wkr, int head_bgn, int head_end) {atr_parser.Parse(atr_wkr, -1, -1, src, head_bgn, head_end);}
@@ -58,6 +61,11 @@ public class Gfh_tag_rdr {
 		while (tmp != stop_pos) {
 			if (src[tmp] == Byte_ascii.Angle_bgn) {
 				rv = Tag__extract(move, tail, match_name_id, tmp);
+				if (rv.Name_id() == Gfh_tag_.Id__comment) {	// ignore comments DATE:2016-06-25
+					tmp = rv.Src_end();
+					rv = null;	// null rv, else rv will still be comment and may get returned to caller
+					continue;
+				}
 				if (Tag__match(move, bwd, tail, match_name_id, tmp_depth, rv))
 					break;
 				else {
@@ -82,12 +90,7 @@ public class Gfh_tag_rdr {
 		if (	tag_name_id != match_name_id												// tag doesn't match requested
 			&&	match_name_id != Gfh_tag_.Id__any											// requested is not wildcard
 			)	return false;
-		if (tag_name_id == Gfh_tag_.Id__comment) {
-			if (match_name_id == Gfh_tag_.Id__comment)
-				return true;
-			else
-				return false;
-		}
+		if (tag_name_id == Gfh_tag_.Id__comment) return true;	// ignore comments
 		int depth = depth_obj.Val();
 		boolean tag_is_tail = tag.Tag_is_tail();
 		if (tail == tag_is_tail) {
@@ -141,6 +144,7 @@ public class Gfh_tag_rdr {
 						atrs_end = name_end;
 						inline = true;
 						loop = false;
+						++tag_end;	// move tag_end after >
 					}
 					else {
 						name_end = tag_end = -1;

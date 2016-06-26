@@ -68,7 +68,10 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		itm__globals.Enabled_y_();	// for now, always mark this and rest as exists; DATE:2014-06-09
 		itm__collapsible.Enabled_y_();
 		itm__navframe.Enabled_y_();
-		itm__popups.Enabled_(app.Api_root().Html().Modules().Popups().Enabled());
+		boolean popups_enabled 
+			=	!app.Mode().Tid_is_http()		// do not enable if http_server, else js errors when calling xowa_exec; DATE:2016-06-22
+			&&	app.Api_root().Html().Modules().Popups().Enabled();	// check user_cfg
+		itm__popups.Enabled_(popups_enabled);
 		return this;
 	}
 	public void Clear() {

@@ -33,6 +33,7 @@ public class Xoh_hdoc_ctx {
 	public boolean					Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
 	public Xou_cache_finder			File__mgr()			{return file__mgr;} private Xou_cache_finder file__mgr = Xou_cache_finder_.Noop; 
 	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final    Xof_url_bldr file__url_bldr = new Xof_url_bldr();
+	public Xoa_page					Page()				{return page;} private Xoa_page page;
 	public byte[]					Page__url()			{return page__url;} private byte[] page__url;
 	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final    Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
 	public Xoh_pool_mgr__data		Pool_mgr__data()	{return pool_mgr__data;} private final    Xoh_pool_mgr__data pool_mgr__data = new Xoh_pool_mgr__data();
@@ -53,13 +54,14 @@ public class Xoh_hdoc_ctx {
 		if (cache_mgr != null) file__mgr = Xou_cache_finder_.New_db(cache_mgr);	// NOTE: this effectively only loads the cache db in app mode (and not in test mode)
 		pool_mgr__hzip.Init();
 	}
-	public void Init_by_page(Xow_wiki wiki, byte[] page_url) {
+	public void Init_by_page(Xow_wiki wiki, Xoa_page page) {
 		if (fsys__root == null) Init_by_app(wiki.App());	// LAZY INIT
 		this.wiki__url_parser = wiki.Utl__url_parser();
 		this.wiki__ttl_parser = wiki;
 		this.wiki__domain_bry = wiki.Domain_bry();
 		this.fsys__file__wiki = Bry_.Add(fsys__file, wiki__domain_bry, Byte_ascii.Slash_bry);
-		this.page__url = page_url;
+		this.page = page;
+		this.page__url = page.Url_bry_safe();
 		this.Clear();
 	}		
 	private void Clear() {

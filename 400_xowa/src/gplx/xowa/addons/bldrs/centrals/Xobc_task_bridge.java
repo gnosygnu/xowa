@@ -19,9 +19,10 @@ package gplx.xowa.addons.bldrs.centrals; import gplx.*; import gplx.xowa.*; impo
 import gplx.langs.jsons.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*;
 public class Xobc_task_bridge implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
-	public void Init_by_app(Xoa_app app) {}
+	private Xoa_app app;
+	public void Init_by_app(Xoa_app app) {this.app = app;}
 	public String Exec(Json_nde data) {
-		Xobc_task_mgr task_mgr = Xobc_task_special.Task_mgr;
+		Xobc_task_mgr task_mgr = Xobc_task_special.Task_mgr(app);
 		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Msg__proc, null), Byte_ascii.Max_7_bit);
 		Json_nde args = data.Get_kv(Msg__args).Val_as_nde();
 		switch (proc_id) {

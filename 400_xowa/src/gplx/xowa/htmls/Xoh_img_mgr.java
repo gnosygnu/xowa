@@ -26,9 +26,11 @@ public class Xoh_img_mgr {
 	}
 	public int Len() {return list.Count();}
 	public Xof_fsdb_itm Get_at(int i) {return (Xof_fsdb_itm)list.Get_at(i);}
-	public Xof_fsdb_itm Make_img() {
+	public Xof_fsdb_itm Make_img(boolean img_is_gallery) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Init_at_hdoc(++uid_nxt, Xof_html_elem.Tid_img);
+		itm.Init_at_hdoc(++uid_nxt, img_is_gallery ? Xof_html_elem.Tid_gallery : Xof_html_elem.Tid_img);
+		if (img_is_gallery)
+			itm.Html_gallery_mgr_h_(gplx.xowa.xtns.gallery.Gallery_xnde.Default);	// TODO:set to <gallery heights=val>; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-25
 		list.Add(itm);
 		return itm;
 	}

@@ -206,7 +206,8 @@ public class Xoh_head_wtr {
 		bfr.Add_byte(quote_byte);
 		for (int i = 0; i < val_len; i++) {
 			byte b = val[i];
-			if (b == quote_byte) bfr.Add_byte_backslash();	// escape quote
+			if		(b == quote_byte)			bfr.Add_byte_backslash();	// escape quote
+			else if (b == Byte_ascii.Backslash) bfr.Add_byte_backslash();	// escape backslash
 			bfr.Add_byte(b);
 		}
 		bfr.Add_byte(quote_byte);

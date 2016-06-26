@@ -18,19 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.bldrs.centrals.steps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.brys.evals.*; import gplx.core.primitives.*;
 import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.utils.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 import gplx.xowa.addons.bldrs.exports.merges.*;
 import gplx.xowa.wikis.domains.*;
 public class Xobc_step_factory {
 	private final    Xobc_task_mgr task_mgr;
 	private final    Xobc_data_db data_db;
-	private final    Bry_eval_mgr eval_mgr = Bry_eval_mgr.Dflt(), eval_mgr__host_regy = Bry_eval_mgr.Dflt(); 
-	private final    Bry_eval_wkr__host_regy eval_wkr__host_regy = new Bry_eval_wkr__host_regy();
+	private final    Bry_eval_mgr eval_mgr = Bry_eval_mgr.Dflt(); private final    Host_eval_itm host_eval = new Host_eval_itm();
+	private final    Host_eval_wkr eval_wkr__host_regy = new Host_eval_wkr();
 	public Xobc_step_factory(Xobc_task_mgr task_mgr, Xobc_data_db data_db, Io_url wiki_dir) {
 		this.task_mgr = task_mgr;
 		this.data_db = data_db;
 		eval_mgr.Add_many(new Bry_eval_wkr__builder_central(wiki_dir));
-		eval_mgr__host_regy.Add_many(eval_wkr__host_regy);
 	}
 	public void Load(Xobc_task_itm task, int step_id, int cmd_idx) {
 		int step_type = data_db.Tbl__step_regy().Select_type(step_id);
@@ -57,7 +56,7 @@ public class Xobc_step_factory {
 		String file_name = import_itm.Import_name;
 		step_name.Val_(file_name);
 		eval_wkr__host_regy.Domain_itm_(domain_itm);
-		String src_http_url = data_db.Bld_src_http_url(eval_mgr__host_regy, import_itm.Host_id, file_name);
+		String src_http_url = host_eval.Eval_src_fil(data_db, import_itm.Host_id, domain_itm, file_name);
 		Io_url zip_file_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__download_fil, wiki_domain, file_name));
 		Io_url unzip_dir_url = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__unzip_dir, wiki_domain, file_name));
 		Io_url wiki_dir_url  = Eval_url(Bry_eval_wkr__builder_central.Make_str(Bry_eval_wkr__builder_central.Type__wiki_dir, wiki_domain, file_name));

@@ -88,9 +88,10 @@ public class Xoh_lnki_data {
 	}
 	private void Parse_capt(Gfh_tag_rdr tag_rdr, Gfh_tag anch_head) {
 		this.capt_bgn = anch_head.Src_end();										// capt starts after <a>
-		Gfh_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__a);			// </a>
+		Gfh_tag anch_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__a);				// </a>
 		this.capt_end = anch_tail.Src_bgn();										// get capt between "<a>" and "</a>
 		this.src_end = anch_tail.Src_end();
+
 		// skip ns in href / capt
 		if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
 			int capt_bgn_wo_ns = capt_bgn + href_ns_name_len;
@@ -100,6 +101,7 @@ public class Xoh_lnki_data {
 				capt_has_ns = true;
 			}
 		}
+
 		// get text splits
 		this.text_tid	= href_itm.Tid() == Xoh_anch_href_data.Tid__anch 
 						? Xoh_anch_capt_itm.Tid__diff

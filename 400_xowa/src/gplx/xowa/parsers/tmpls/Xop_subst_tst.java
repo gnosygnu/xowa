@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_subst_tst {
-	private final Xop_fxt fxt = new Xop_fxt(); 
+	private final    Xop_fxt fxt = new Xop_fxt(); 
 	@Before public void init() {
 		fxt.Reset();
 		fxt.Init_defn_clear();
@@ -51,7 +51,7 @@ public class Xop_subst_tst {
 	@Test  public void Urlencode_missing_ttl() {	// PURPOSE: handle missing ttl inside {{does-template-exist}}; EX: en.d:Kazakhstan; DATE:2014-03-25
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test", "{{safesubst:urlencode:{{safesubst:Template:{{{1}}}}}}}");
-		fxt.Test_parse_page_tmpl_str("{{test|xyz}}", "%5B%5B%3ATemplate%3AXyz%5D%5D");	// url-encoded version of [[:Template:xyz]]
+		fxt.Test_parse_page_tmpl_str("{{test|xyz}}", "%5B%5BTemplate%3Axyz%5D%5D");	// url-encoded version of [[:Template:xyz]]; NOTE: removed leading ":" from ":Template:" DATE:2016-06-24
 	}
 	@Test  public void Urlencode_invalid_ttl() {	// PURPOSE: handle invalid ttl inside does-template-exist; EX: en.d:peace; DATE:2014-03-31
 		fxt.Init_defn_clear();

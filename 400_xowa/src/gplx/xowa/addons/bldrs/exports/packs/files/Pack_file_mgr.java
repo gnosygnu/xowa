@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.*; import gplx.fsdb.meta.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 class Pack_file_mgr {
-	public void Exec(Xowe_wiki wiki) {
+	public void Exec(Xowe_wiki wiki, Io_url deploy_dir) {
 		// init
 		wiki.Init_assert();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
@@ -53,6 +53,24 @@ class Pack_file_mgr {
 		Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "html", Xobc_import_type.Tid__wiki__core, Xobc_import_type.Tid__wiki__srch, Xobc_import_type.Tid__wiki__html);
 		Make_task(tmp_bfr, wiki, wiki_date, bc_db, hash, "file", Xobc_import_type.Tid__file__core, Xobc_import_type.Tid__file__data);
 		bc_conn.Txn_end();
+
+		// deploy
+		if (deploy_dir != null) {
+			Host_eval_itm host_eval = new Host_eval_itm();
+			int len = hash.Len();
+			for (int i = 0; i < len; ++i) {
+				Pack_list list = (Pack_list)hash.Get_at(i);
+				int list_len = list.Len();
+				for (int j = 0; j < list_len; ++j) {
+					Pack_itm itm = (Pack_itm)list.Get_at(j);
+					byte[] owner_dir = host_eval.Eval_dir_name(wiki.Domain_itm());
+					Io_url src_url = itm.Zip_url();
+					Io_url trg_url = deploy_dir.GenSubFil_nest(String_.new_u8(owner_dir), src_url.NameAndExt());
+					Io_mgr.Instance.MoveFil_args(src_url, trg_url, true).Exec();
+				}
+			}
+			Io_mgr.Instance.Delete_dir_empty(pack_dir);
+		}
 	}
 	private static void Make_task(Bry_bfr tmp_bfr, Xow_wiki wiki, String wiki_date, Xobc_data_db bc_db, Pack_hash hash, String task_type, int... list_tids) {
 		// get packs
@@ -86,12 +104,15 @@ class Pack_file_mgr {
 		}
 	}
 	public static String Build_task_name(Bry_bfr tmp_bfr, Xow_wiki wiki, String wiki_date, String task_type, long raw_len) {// Simple Wikipedia - Articles (2016-06) [420.31 MB]
-		byte[] lang_name = gplx.xowa.langs.Xol_lang_stub_.Get_by_key_or_null(wiki.Domain_itm().Lang_orig_key()).Canonical_name();	// EX: Deutsch
-		byte[] wiki_name = wiki.Domain_itm().Domain_type().Display_bry();															// EX: Wikipedia
+		byte[] lang_key = wiki.Domain_itm().Lang_orig_key();
+		byte[] lang_name = Bry_.Len_eq_0(lang_key)	// species.wikimedia.org and other wikimedia wikis have no lang;
+			? Bry_.Empty
+			: Bry_.Add(gplx.xowa.langs.Xol_lang_stub_.Get_by_key_or_null(lang_key).Canonical_name(), Byte_ascii.Space);		// EX: "Deutsch "
+		byte[] wiki_name = wiki.Domain_itm().Domain_type().Display_bry();													// EX: Wikipedia
 		String type_name = String_.Eq(task_type, "html") ? "Articles" : "Images";
 		wiki_date = String_.Replace(wiki_date, ".", "-");
 		String file_size = gplx.core.ios.Io_size_.To_str_new(tmp_bfr, raw_len, 2);
-		return String_.Format("{0} {1} - {2} ({3}) [{4}]", lang_name, wiki_name, type_name, wiki_date, file_size);
+		return String_.Format("{0}{1} - {2} ({3}) [{4}]", lang_name, wiki_name, type_name, wiki_date, file_size);
 	}
 	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, Bry_bfr tmp_bfr, Pack_itm itm, int task_id) {
 		// hash raws			

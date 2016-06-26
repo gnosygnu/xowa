@@ -18,17 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_tag_tst {		
-	@Before public void init()			{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
-	@Test   public void Basic()			{fxt.Test_html_full_str("{{#tag:pre|a|id=b|style=c}}"				, "<pre id=\"b\" style=\"c\">a</pre>");}
+	@Before public void init()				{fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Test   public void Basic()				{fxt.Test_html_full_str("{{#tag:pre|a|id=b|style=c}}"				, "<pre id=\"b\" style=\"c\">a</pre>");}
+	@Test   public void Atr2_empty()		{fxt.Test_html_full_str("{{#tag:pre|a|id=b|}}"						, "<pre id=\"b\">a</pre>");}		// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=a|}} -> "<references group=a/>"
+	@Test   public void Val_apos()			{fxt.Test_html_full_str("{{#tag:pre|a|id='b'}}"						, "<pre id=\"b\">a</pre>");}
+	@Test   public void Val_quote()			{fxt.Test_html_full_str("{{#tag:pre|a|id=\"b\"}}"					, "<pre id=\"b\">a</pre>");}
+	@Test   public void Val_empty()			{fxt.Test_html_full_str("{{#tag:pre|a|id=}}"						, "<pre>a</pre>");}					// PURPOSE: ignore atrs with no val; EX:{{#ref||group=}} PAGE:ru.w:Колчак,_Александр_Васильевич; DATE:2014-07-03
+	@Test   public void Val_quote_w_apos()	{fxt.Test_html_full_str("{{#tag:pre|c|id=\"a'b\"}}"					, "<pre id=\"a.27b\">c</pre>");}	// PURPOSE.fix: tag was not handling apos within quotes; PAGE:en.s:The_formative_period_in_Colby%27s_history DATE:2016-06-23
+	@Test   public void Tmpl()				{fxt.Test_html_full_str("{{#tag:pre|a|{{#switch:a|a=id}}=c}}"		, "<pre id=\"c\">a</pre>");}		// PURPOSE: args must be evaluated
+	@Test   public void Ws_all()		    {fxt.Test_html_full_str("{{#tag:pre|a|   id   =   b   }}"			, "<pre id=\"b\">a</pre>");}
+	@Test   public void Ws_quoted()			{fxt.Test_html_full_str("{{#tag:pre|a|   id   = ' b ' }}"			, "<pre id=\"_b_\">a</pre>");}
+	@Test   public void Err_bad_key()		{fxt.Test_html_full_str("{{#tag:pre|a|id=val|b}}"					, "<pre id=\"val\">a</pre>");}		// PURPOSE: b was failing b/c id was larger and key_end set to 4 (whereas b was len=1)
 //		@Test   public void Missing_val()	{fxt.ini_Msg(Mwl_tag_rsc.Instance.Invalid).Test_parse_tmpl_str_test("{{#tag:pre|a|id=}}"	, "{{test}}"	, "");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=}} -> ""
-	@Test   public void Atr2_empty()	{fxt.Test_html_full_str("{{#tag:pre|a|id=b|}}"						, "<pre id=\"b\">a</pre>");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=a|}} -> "<references group=a/>"
-	@Test   public void Val_apos()		{fxt.Test_html_full_str("{{#tag:pre|a|id='b'}}"						, "<pre id=\"b\">a</pre>");}
-	@Test   public void Val_quote()		{fxt.Test_html_full_str("{{#tag:pre|a|id=\"b\"}}"					, "<pre id=\"b\">a</pre>");}
-	@Test   public void Val_empty()		{fxt.Test_html_full_str("{{#tag:pre|a|id=}}"						, "<pre>a</pre>");}				// PURPOSE: ignore atrs with no val; EX:{{#ref||group=}} PAGE:ru.w:Колчак,_Александр_Васильевич; DATE:2014-07-03
-	@Test   public void Tmpl()			{fxt.Test_html_full_str("{{#tag:pre|a|{{#switch:a|a=id}}=c}}"		, "<pre id=\"c\">a</pre>");}	// PURPOSE: args must be evaluated
-	@Test   public void Ws_all()	    {fxt.Test_html_full_str("{{#tag:pre|a|   id   =   b   }}"			, "<pre id=\"b\">a</pre>");}
-	@Test   public void Ws_quoted()		{fxt.Test_html_full_str("{{#tag:pre|a|   id   = ' b ' }}"			, "<pre id=\"_b_\">a</pre>");}
-	@Test   public void Err_bad_key()	{fxt.Test_html_full_str("{{#tag:pre|a|id=val|b}}"					, "<pre id=\"val\">a</pre>");}	// PURPOSE: b was failing b/c id was larger and key_end set to 4 (whereas b was len=1)
 //		@Test   public void Err()		{
 //			fxt.Test_parse_tmpl_str_test("{{#tag:ref|George Robertson announced in January 2003 that he would be stepping down in December.<ref> {{cite news|title =NATO Secretary General to Leave His Post in December After 4 Years |first = Craig | last = Smith | work = The New York Times | date = January 23, 2003| url = http://www.nytimes.com/2003/01/23/world/nato-secretary-general-to-leave-his-post-in-december-after-4-years.html?scp=2&sq=lord+robertson&st=nyt|accessdate = 2009-03-29}}</ref> Jaap de Hoop Scheffer was selected as his successor, but could not assume the office until January 2004 because of his commitment in the Dutch Parliament.<ref> {{cite news|title = Jaap de Hoop Scheffer | work = Newsmakers | issue = 1 | publisher = Thomson Gale | date = January 1, 2005}}</ref> Robertson was asked to extend his term until Scheffer was ready, but declined, so Minuto-Rizzo, the Deputy Secretary General, took over in the interim.<ref name =\"ncsd\" />  |group=N|}}"
 //				, "{{test}}"	, "<pre id=\" b \">a</pre>");}

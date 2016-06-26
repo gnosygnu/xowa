@@ -20,7 +20,7 @@ import java.io.*;
 import java.net.*;
 import gplx.core.progs.*;
 public class Http_download_wkr__jre extends Http_download_wkr__base {
-		public Http_download_wkr Make_new() {return this;}
+		public Http_download_wkr Make_new() {return new Http_download_wkr__jre();}
     @Override public byte Exec_hook(Gfo_prog_ui prog_ui, String src_url, Io_url trg_url, long downloaded) {
         long prog_data_cur = downloaded;
         boolean prog_resumed = prog_data_cur > 0;

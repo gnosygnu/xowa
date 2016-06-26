@@ -56,6 +56,11 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 		try		{return rdr.Move_next() ? rdr.Read_int(fld_task_id) : -1;}
 		finally {rdr.Rls();}
 	}
+	public String Select_key_by_id_or_null(int id) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_task_id).Crt_int(fld_task_id, id).Exec_select__rls_auto();
+		try		{return rdr.Move_next() ? rdr.Read_str(fld_task_key) : null;}
+		finally {rdr.Rls();}
+	}
 	public void Insert(int task_id, int task_seqn, int step_count, String task_key, String task_name) {
 		if (insert_stmt == null) insert_stmt = conn.Stmt_insert(tbl_name, flds);
 		insert_stmt.Clear().Val_int(fld_task_id, task_id).Val_int(fld_task_seqn, task_seqn).Val_int(fld_step_count, step_count)

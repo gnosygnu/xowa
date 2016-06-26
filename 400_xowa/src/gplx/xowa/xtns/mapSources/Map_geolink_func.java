@@ -65,7 +65,7 @@ public class Map_geolink_func extends Pf_func_base {
 			bfr.Add(Xol_msg_itm_.eval_(tmp_bfr, tmp_msg_itm, pattern, args));
 		} finally {tmp_bfr.Mkr_rls();}
 	}
-	private static final Xol_msg_itm tmp_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
+	private static final    Xol_msg_itm tmp_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
 	private static byte[] Xto_coord(Bry_bfr bfr, Map_math math, boolean pass, byte[] dir, byte[] or) {
 		return pass
 			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).To_bry_and_clear()
@@ -84,7 +84,7 @@ public class Map_geolink_func extends Pf_func_base {
 			: Bry_arg_5_fail
 			;
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Bry_arg_0_fail = Bry_.new_a7("0_N")
 	, Bry_arg_1_fail = Bry_.new_a7("0_E")
 	, Bry_arg_5_fail = Bry_.new_a7("0")
@@ -92,9 +92,9 @@ public class Map_geolink_func extends Pf_func_base {
 /*
 	return wfMsgReplaceArgs( $pattern, $args );
 */
-	public static final Map_geolink_func Instance = new Map_geolink_func(); Map_geolink_func() {}
+	public static final    Map_geolink_func Instance = new Map_geolink_func(); Map_geolink_func() {}
 	private static final byte Key_tid_lat_val = 1, Key_tid_long_val = 2, Key_tid_lat_pos = 3, Key_tid_lat_neg = 4, Key_tid_long_pos = 5, Key_tid_long_min = 6, Key_tid_prec = 7;
-	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("lat"			, Key_tid_lat_val)
 	.Add_str_byte("long"		, Key_tid_long_val)
 	.Add_str_byte("plusLat"		, Key_tid_lat_pos)

@@ -115,21 +115,21 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		Xoh_img_data data = (Xoh_img_data)data_itm; data.Clear();
 		int flag = rdr.Read_hzip_int(2); flag_bldr.Decode(flag);
-		boolean img_imap_exists					= flag_bldr.Get_as_bool(Flag__img__imap_exists);
-		boolean img_wo_anch						= flag_bldr.Get_as_bool(Flag__img__wo_anch);
-		boolean file__is_orig						= flag_bldr.Get_as_bool(Flag__file__is_orig);
-		boolean file__repo_is_local				= flag_bldr.Get_as_bool(Flag__file__repo_is_local);
-		boolean file__src_exists					= flag_bldr.Get_as_bool(Flag__file__src_exists);
-		boolean img__cls_other_exists				= flag_bldr.Get_as_bool(Flag__img__cls_other_exists);
-		boolean anch__ns_is_custom					= flag_bldr.Get_as_bool(Flag__anch__ns_is_custom);
-		boolean anch__ns_id_needs_saving			= flag_bldr.Get_as_bool(Flag__anch__ns_id_needs_saving);
-		int anch__cls_tid						= flag_bldr.Get_as_int(Flag__anch__cls_tid);
-		boolean img__alt_diff_from_anch_title		= flag_bldr.Get_as_bool(Flag__img__alt_diff_from_anch_title);
-		boolean anch_href_diff_file				= flag_bldr.Get_as_bool(Flag__anch__href_diff_file);
-		boolean anch__title_missing				= flag_bldr.Get_as_bool(Flag__anch__title_missing);
-		boolean img_is_vid							= flag_bldr.Get_as_bool(Flag__img__is_vid);
-		int img_cls								= flag_bldr.Get_as_int(Flag__img__cls_tid);
-		int anch__href_tid						= flag_bldr.Get_as_int(Flag__anch__href_tid);
+		boolean	img_imap_exists					= flag_bldr.Get_as_bool(Flag__img__imap_exists);
+		boolean	img_wo_anch						= flag_bldr.Get_as_bool(Flag__img__wo_anch);
+		boolean	file__is_orig					= flag_bldr.Get_as_bool(Flag__file__is_orig);
+		boolean	file__repo_is_local				= flag_bldr.Get_as_bool(Flag__file__repo_is_local);
+		boolean	file__src_exists				= flag_bldr.Get_as_bool(Flag__file__src_exists);
+		boolean	img__cls_other_exists			= flag_bldr.Get_as_bool(Flag__img__cls_other_exists);
+		boolean	anch__ns_is_custom				= flag_bldr.Get_as_bool(Flag__anch__ns_is_custom);
+		boolean	anch__ns_id_needs_saving		= flag_bldr.Get_as_bool(Flag__anch__ns_id_needs_saving);
+		int		anch__cls_tid					= flag_bldr.Get_as_int(Flag__anch__cls_tid);
+		boolean	img__alt_diff_from_anch_title	= flag_bldr.Get_as_bool(Flag__img__alt_diff_from_anch_title);
+		boolean	anch_href_diff_file				= flag_bldr.Get_as_bool(Flag__anch__href_diff_file);
+		boolean	anch__title_missing				= flag_bldr.Get_as_bool(Flag__anch__title_missing);
+		boolean	img_is_vid						= flag_bldr.Get_as_bool(Flag__img__is_vid);
+		int		img_cls							= flag_bldr.Get_as_int(Flag__img__cls_tid);
+		int		anch__href_tid					= flag_bldr.Get_as_int(Flag__anch__href_tid);
 		byte[] page_db = rdr.Read_bry_to();
 		byte[] site_bry = null;
             switch (anch__href_tid) {
@@ -149,7 +149,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (anch__ns_id_needs_saving)
 			anch_href_ns = Xoh_lnki_dict_.Ns_decode(rdr);
 		byte[] ns_custom_bry = null;
-		if (anch__ns_is_custom) ns_custom_bry = rdr.Read_bry_to();
+		if (anch__ns_is_custom) ns_custom_bry = Xoa_ttl.Replace_spaces(rdr.Read_bry_to());	// NOTE: use unders not spaces; will be used directly below to generate href; else href="User talk:A"; PAGE:de.b:Wikibooks:Benutzersperrung/_InselFahrer DATE:2016-06-25
 		int img_w = -1, img_h = -1, file_time = -1, file_page = -1;
 		if (file__src_exists) {
 			img_w = rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj;

@@ -295,7 +295,7 @@ public class Xoh_html_wtr {
 				break;
 			}
 			case Xop_xnde_tag_.Tid__timeline: {
-				bfr.Add_str_a7("<pre class='xowa-timeline'>");
+				bfr.Add(gplx.xowa.htmls.core.wkrs.addons.timelines.Xoh_timeline_data.Hook_bry);
 				Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());	// NOTE: do not embed <timeline> tag inside pre, else timeline will render in black; EX:<pre><timeline>a</timeline></pre> will fail; DATE:2014-05-22
 				bfr.Add_str_a7("</pre>");
 				break;

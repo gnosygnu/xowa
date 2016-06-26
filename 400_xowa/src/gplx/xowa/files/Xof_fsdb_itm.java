@@ -47,15 +47,15 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public Io_url				Html_orig_url()				{return html_orig_url;} private Io_url html_orig_url = Io_url_.Empty;
 	public int					Html_gallery_mgr_h()		{return html_gallery_mgr_h;} private int html_gallery_mgr_h = Int_.Neg1;
 	public Js_img_wkr			Html_img_wkr()				{return html_img_wkr;} private Js_img_wkr html_img_wkr;
-	public boolean					File_is_orig()				{return file_is_orig;} private boolean file_is_orig;
+	public boolean				File_is_orig()				{return file_is_orig;} private boolean file_is_orig;
 	public int					File_w()					{return file_w;} private int file_w;
 	public long					File_size()					{return file_size;} private long file_size;
-	public boolean					Dbmeta_is_new()				{return false;}
-	public boolean					Orig_exists()				{return orig_exists;} public void Orig_exists_y_() {orig_exists = Bool_.Y;} public void Orig_exists_n_() {orig_exists = Bool_.N;} private boolean orig_exists;
-	public boolean					File_exists()				{return file_exists;} public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
-	public boolean				File_exists_in_cache()		{return file_exists_in_cache;} private boolean file_exists_in_cache;
-	public boolean					File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
-	public boolean					Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
+	public boolean				Dbmeta_is_new()				{return false;}
+	public boolean				Orig_exists()				{return orig_exists;} public void Orig_exists_y_() {orig_exists = Bool_.Y;} public void Orig_exists_n_() {orig_exists = Bool_.N;} private boolean orig_exists;
+	public boolean				File_exists()				{return file_exists;} public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
+	public boolean 				File_exists_in_cache()		{return file_exists_in_cache;} private boolean file_exists_in_cache;
+	public boolean				File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
+	public boolean				Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
 	public int					Xfer_idx()					{return xfer_idx;} private int xfer_idx;
 	public int					Xfer_len()					{return xfer_len;} private int xfer_len;
 	public void	Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int lnki_upright_patch) {

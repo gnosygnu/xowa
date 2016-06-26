@@ -19,15 +19,15 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 public class Xoh_gly_itm_wtr implements Bfr_arg {
-	private final Bfr_arg_clearable[] arg_ary;
-	private final Bfr_arg__hatr_id li_id = Bfr_arg__hatr_id.New_id("xogly_li_"), img_id = Bfr_arg__hatr_id.New_id(gplx.xowa.htmls.Xoh_img_mgr.Bry__html_uid)
-	, div_1_id = Bfr_arg__hatr_id.New_id("xogly_div1_"), div_2_id = Bfr_arg__hatr_id.New_id("xogly_div2_"), div_3_id = Bfr_arg__hatr_id.New_id("xogly_div3_");
-	private final Bfr_arg__itm_caption itm_caption_fmtr = new Bfr_arg__itm_caption();
+	private final    Bfr_arg_clearable[] arg_ary;
+	private final    Bfr_arg__hatr_id li_id = Bfr_arg__hatr_id.New_id("xogly_li_"), img_id = Bfr_arg__hatr_id.New_id(gplx.xowa.htmls.Xoh_img_mgr.Bry__html_uid)
+	, div_1_id = Bfr_arg__hatr_id.New_id("xowa_gallery_div1_"), div_2_id = Bfr_arg__hatr_id.New_id("xowa_gallery_div2_"), div_3_id = Bfr_arg__hatr_id.New_id("xowa_gallery_div3_");
+	private final    Bfr_arg__itm_caption itm_caption_fmtr = new Bfr_arg__itm_caption();
 	private int li_w, div_1_w, div_2_margin;
 	public Xoh_gly_itm_wtr() {
 		arg_ary = new Bfr_arg_clearable[] {li_id, div_1_id, div_2_id, div_3_id, img_id};
 	}
-	public Xoh_img_wtr Img_wtr() {return img_wtr;} private final Xoh_img_wtr img_wtr = new Xoh_img_wtr();
+	public Xoh_img_wtr Img_wtr() {return img_wtr;} private final    Xoh_img_wtr img_wtr = new Xoh_img_wtr();
 	public void Init(boolean mode_is_diff, int img_id, int li_w, int div_1_w, int div_2_margin, byte capt_tid, byte[] itm_caption) {
 		this.Clear();
 		this.li_w = li_w; this.div_1_w = div_1_w; this.div_2_margin = div_2_margin;
@@ -48,8 +48,8 @@ public class Xoh_gly_itm_wtr implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr.Bld_bfr_many(bfr, li_id, div_1_id, div_2_id, div_3_id, li_w, div_1_w, div_2_margin, img_wtr, itm_caption_fmtr);
 	}
-	public static final Xoh_gly_itm_wtr[] Ary_empty = new Xoh_gly_itm_wtr[0];
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	public static final    Xoh_gly_itm_wtr[] Ary_empty = new Xoh_gly_itm_wtr[0];
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "<li~{li_id} class=\"gallerybox\" style=\"width:~{li_w}px;\">"
 	,   "<div~{div_1_id} style=\"width:~{li_w}px;\">"
@@ -70,9 +70,10 @@ class Bfr_arg__itm_caption implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (Bfr_arg__missing()) return;
 		switch (capt_tid) {
-			case Xoh_gly_itm_data.Capt_tid__empty:	return;												// <div class='gallerytext'></div>
-			case Xoh_gly_itm_data.Capt_tid__p:		bfr.Add_byte_nl().Add(Gfh_tag_.P_lhs); break;		// <div class='gallerytext'><p>
-			case Xoh_gly_itm_data.Capt_tid__br:		bfr.Add(Gfh_tag_.Br_lhs).Add_byte_nl(); break;		// <div class='gallerytext'><br>
+			case Xoh_gly_itm_data.Capt_tid__empty:		return;												// <div class='gallerytext'></div>
+			case Xoh_gly_itm_data.Capt_tid__p:			bfr.Add_byte_nl().Add(Gfh_tag_.P_lhs); break;		// <div class='gallerytext'><p>
+			case Xoh_gly_itm_data.Capt_tid__br:			bfr.Add(Gfh_tag_.Br_lhs).Add_byte_nl(); break;		// <div class='gallerytext'><br>
+			case Xoh_gly_itm_data.Capt_tid__p_wo_rhs:	bfr.Add_byte_nl().Add(Gfh_tag_.P_lhs); break;		// <div class='gallerytext'><br>
 		}
 		bfr.Add(capt_bry);
 		int itm_caption_len = capt_bry.length;

@@ -31,7 +31,7 @@ public class Xoh_page_chkr {
 		return this;
 	}
 	public Xoh_page_chkr Imgs__add(String wiki_abrv, String lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page) {
-		Xof_fsdb_itm fsdb_itm = expd_img_mgr.Make_img();
+		Xof_fsdb_itm fsdb_itm = expd_img_mgr.Make_img(false);
 		fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_u8(wiki_abrv), Bry_.new_u8(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, Xof_patch_upright_tid_.Tid_all);
 		return this;
 	}

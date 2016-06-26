@@ -19,11 +19,11 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 class Xoh_gly_grp_wtr implements Bfr_arg {
-	private final Bfr_arg_clearable[] arg_ary;
-	private final Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_li_");
-	private final Bfr_arg__hatr_gly_style ul_style = new Bfr_arg__hatr_gly_style(Gfh_atr_.Bry__style);
+	private final    Bfr_arg_clearable[] arg_ary;
+	private final    Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_li_");
+	private final    Bfr_arg__hatr_gly_style ul_style = new Bfr_arg__hatr_gly_style(Gfh_atr_.Bry__style);
 	private byte[] ul_cls, xtra_cls, xtra_atr_bry, ul_nl;
-	private final Xoh_gly_itm_list_wtr itm_list_wtr = new Xoh_gly_itm_list_wtr();
+	private final    Xoh_gly_itm_list_wtr itm_list_wtr = new Xoh_gly_itm_list_wtr();
 	public Xoh_gly_grp_wtr() {
 		arg_ary = new Bfr_arg_clearable[] {ul_id};
 	}
@@ -36,7 +36,7 @@ class Xoh_gly_grp_wtr implements Bfr_arg {
 		this.xtra_atr_bry = xtra_atr_bry;
 		this.ul_nl = ary.length == 0 ? Bry_.Empty : Byte_ascii.Nl_bry;	// TIDY: <ul></ul> should be on same line if 0 items
 		itm_list_wtr.Init(ary);
-		ul_style.Set_args(ul_style_max_w, ul_style_w, xtra_style_bry);
+		ul_style.Set_args(ul_style_max_w, ul_style_w, xtra_style_bry);			
 	}
 	public void Clear() {
 		for (Bfr_arg_clearable arg : arg_ary)
@@ -50,7 +50,7 @@ class Xoh_gly_grp_wtr implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr.Bld_bfr_many(bfr, ul_id, ul_cls, xtra_cls, ul_style, xtra_atr_bry, itm_list_wtr, ul_nl);
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<ul~{id} class=\"gallery mw-gallery-~{cls}~{xtra_cls}\"~{style}~{xtra_atr}>~{itms}~{ul_nl}</ul>"
 	), "id", "cls", "xtra_cls", "style", "xtra_atr", "itms", "ul_nl");
 }
@@ -58,10 +58,12 @@ class Xoh_gly_itm_list_wtr implements Bfr_arg {
 	private Xoh_gly_itm_wtr[] ary; private int ary_len;
 	public void Init(Xoh_gly_itm_wtr[] ary) {
 		this.ary = ary; this.ary_len = ary.length;
+	}
+	public void Bfr_arg__clear() {
 		for (int i = 0; i < ary_len; ++i)
 			ary[i].Clear();
+		ary = null;
 	}
-	public void Bfr_arg__clear() {ary = null;}
 	public boolean Bfr_arg__missing() {return ary == null;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		for (int i = 0; i < ary_len; ++i) {
@@ -71,7 +73,7 @@ class Xoh_gly_itm_list_wtr implements Bfr_arg {
 	}
 }
 class Bfr_arg__hatr_gly_style implements Bfr_arg {
-	private final byte[] atr_bgn;
+	private final    byte[] atr_bgn;
 	private int max_w, w;
 	private byte[] xtra_cls;
 	public Bfr_arg__hatr_gly_style(byte[] key) {
@@ -101,7 +103,7 @@ class Bfr_arg__hatr_gly_style implements Bfr_arg {
 		}
 		bfr.Add_byte_quote();
 	}
-	private static final byte[]
+	private static final    byte[]
 	  Style__frag_1 = Bry_.new_a7("max-width:")
 	, Style__frag_2 = Bry_.new_a7("_width:")
 	, Style__frag_3 = Bry_.new_a7("px;")

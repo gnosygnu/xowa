@@ -39,7 +39,7 @@ public class Xoh_make_mgr {
 		this.wiki_domain = wiki_domain;
 	}
 	public byte[] Parse(byte[] src, Xoh_page hpg, Xow_wiki wiki) {
-		hctx.Init_by_page(wiki, hpg.Url_bry_safe());
+		hctx.Init_by_page(wiki, hpg);
 		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
 		make_parser.Parse(bfr, hpg, hctx, src);
 		hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);

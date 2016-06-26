@@ -33,6 +33,7 @@ public class Xoh_hzip_fxt {
 		hpg.Init(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 	}
 	public Xow_wiki Wiki() {return wiki;}
+	public Xoa_page Page() {return hpg;}
 	public Xoh_hzip_fxt Init_mode_is_b256_(boolean v) {bfr.Mode_is_b256_(v); mode_is_b256 = v; return this;}
 	public Xoh_hzip_fxt Init_mode_diff_y_() {hzip_mgr.Hctx().Mode_is_diff_(Bool_.Y); return this;}
 	public void Clear() {hpg.Clear();}
@@ -85,7 +86,7 @@ public class Xoh_hzip_fxt {
 		Gfo_usr_dlg_.Test__show__term();
 		Tfds.Eq_str_lines(hzip, bfr.To_str_and_clear());
 	}
-	private void Test__decode__raw(String hzip, String html) {
+	public void Test__decode__raw(String hzip, String html) {
 		Gfo_usr_dlg_.Test__show__init();
 		hpg.Section_mgr().Clear();
 		hzip_mgr.Decode(bfr, parser_fxt.Wiki(), hpg, Bry_.new_u8(hzip));

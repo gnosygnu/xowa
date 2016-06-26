@@ -31,8 +31,8 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public int						Anch_title_end() {return anch_title_end;} private int anch_title_end;
 	public boolean					Anch_title_exists() {return anch_title_end != -1;}
 	public Bry_obj_ref				Anch_page() {return anch_page;} private Bry_obj_ref anch_page = Bry_obj_ref.New_empty();
-	public Xoh_img_src_data			Img_src() {return img_src;} private final Xoh_img_src_data img_src = new Xoh_img_src_data();
-	public Xoh_img_cls_data			Img_cls() {return img_cls;} private final Xoh_img_cls_data img_cls = new Xoh_img_cls_data();
+	public Xoh_img_src_data			Img_src() {return img_src;} private final    Xoh_img_src_data img_src = new Xoh_img_src_data();
+	public Xoh_img_cls_data			Img_cls() {return img_cls;} private final    Xoh_img_cls_data img_cls = new Xoh_img_cls_data();
 	public Xoh_img_xoimg_data		Img_xoimg() {return img_xoimg;} private Xoh_img_xoimg_data img_xoimg = new Xoh_img_xoimg_data();
 	public int						Img_alt_bgn() {return img_alt_bgn;} private int img_alt_bgn;
 	public int						Img_alt_end() {return img_alt_end;} private int img_alt_end;
@@ -43,8 +43,9 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public boolean					Img_is_vid() {return img_is_vid;} private boolean img_is_vid;
 	public boolean						Img_wo_anch() {return img_wo_anch;} private boolean img_wo_anch;
 	public int						Img_imap_idx() {return img_imap_idx;} private int img_imap_idx;
+	public boolean						Img_is_gallery() {return img_is_gallery;} private boolean img_is_gallery; public void Img_is_gallery_(boolean v) {this.img_is_gallery = v;}
 	public void Clear() {
-		this.img_alt__diff_anch_title = anch_rel_is_nofollow = img_is_vid = img_wo_anch = false;
+		this.img_alt__diff_anch_title = anch_rel_is_nofollow = img_is_vid = img_wo_anch = img_is_gallery = false;
 		this.src_bgn = src_end = anch_title_bgn = anch_title_end = img_w = img_h = img_alt_bgn = img_alt_end = -1;
 		this.img_imap_idx = -1;
 		anch_href.Clear(); anch_cls.Clear();
@@ -125,7 +126,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 		}
 		return rv;
 	}
-	public static final byte[]
+	public static final    byte[]
 	  Bry__cls__anch__image			= Bry_.new_a7("image")
 	, Bry__cls__img__thumbimage		= Bry_.new_a7("thumbimage")
 	, Bry__atr__xowa_title			= Bry_.new_a7("xowa_title")

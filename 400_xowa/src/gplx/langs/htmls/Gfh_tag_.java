@@ -37,6 +37,11 @@ public class Gfh_tag_ {
 	, Id__br		= 14
 	, Id__hr		= 15
 	, Id__td		= 16
+	, Id__pre		= 17
+	, Id__small		= 18
+	, Id__i			= 19
+	, Id__b			= 20
+	, Id__sup		= 21
 	;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -64,6 +69,11 @@ public class Gfh_tag_ {
 	.Add_str_int("li"			, Id__li)
 	.Add_str_int("td"			, Id__td)
 	.Add_str_int("p"			, Id__p)
+	.Add_str_int("pre"			, Id__pre)
+	.Add_str_int("small"		, Id__small)
+	.Add_str_int("i"			, Id__i)
+	.Add_str_int("b"			, Id__b)
+	.Add_str_int("sup"			, Id__sup)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -86,6 +96,11 @@ public class Gfh_tag_ {
 			case Id__td:			return "td";
 			case Id__ul:			return "ul";
 			case Id__li:			return "li";
+			case Id__pre:			return "pre";
+			case Id__small:			return "small";
+			case Id__i:				return "i";
+			case Id__b:				return "b";
+			case Id__sup:			return "sup";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

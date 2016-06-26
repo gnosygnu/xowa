@@ -20,7 +20,7 @@ import gplx.xowa.htmls.core.wkrs.lnkes.*;
 public class Xoh_stat_itm {
 	public void Clear() {
 		a_rhs = lnki_text_n = lnki_text_y = lnke__free = lnke__auto = lnke__text = 0;
-		hdr_1 = hdr_2 = hdr_3 = hdr_4 = hdr_5 = hdr_6 = 0;
+		hdr_1 = hdr_2 = hdr_3 = hdr_4 = hdr_5 = hdr_6 = timeline = gallery = 0;
 		img_full = 0;
 		space = 0;
 		Bry_.Clear(escape_bry);
@@ -32,6 +32,8 @@ public class Xoh_stat_itm {
 	public int Lnke__auto() {return lnke__auto;} public void Lnke__auto__add() {++lnke__auto;} private int lnke__auto;
 	public int Lnke__text() {return lnke__text;} public void Lnke__text__add() {++lnke__text;} private int lnke__text;
 	public int Img_full() {return img_full;} public void Img_full_add() {++img_full;} private int img_full;
+	public int Timeline() {return timeline;} public void Timeline_add() {++timeline;} private int timeline;
+	public int Gallery() {return gallery;} public void Gallery_add() {++gallery;} private int gallery;
 	public int Hdr_1() {return hdr_1;} private int hdr_1;
 	public int Hdr_2() {return hdr_2;} private int hdr_2;
 	public int Hdr_3() {return hdr_3;} private int hdr_3;
@@ -39,7 +41,7 @@ public class Xoh_stat_itm {
 	public int Hdr_5() {return hdr_5;} private int hdr_5;
 	public int Hdr_6() {return hdr_6;} private int hdr_6;
 	public int Space() {return space;} public void Space_add(int v) {space += v;} private int space;
-	public byte[] Escape_bry() {return escape_bry;} public void Escape_add(byte v) {escape_bry[v] += 1;} private final byte[] escape_bry = new byte[256];
+	public byte[] Escape_bry() {return escape_bry;} public void Escape_add(byte v) {escape_bry[v] += 1;} private final    byte[] escape_bry = new byte[256];
 	public void Hdr_add(int hdr_num) {
 		switch (hdr_num) {
 			case 1:		++hdr_1; break;

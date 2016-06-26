@@ -20,7 +20,7 @@ import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_anch_href_data implements Xoh_itm_parser {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
 	public Gfh_atr Atr() {return atr;} private Gfh_atr atr;
 	public byte Tid() {return tid;} private byte tid;
@@ -115,8 +115,8 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 							if (ns.Id() != Xow_ns_.Tid__main) {
 								ttl_ns_id = ns.Id();
 								ttl_page_db = Bry_.Mid(ttl_full_txt, colon_pos + 1, ttl_full_len);
-								if (!Bry_.Match(ttl_full_txt, 0, colon_pos, ns.Name_ui()))
-									ttl_ns_custom = Bry_.Mid(ttl_full_txt, 0, colon_pos);
+								if (!Bry_.Match(ttl_full_txt, 0, colon_pos, ns.Name_ui()))			// ns does not match expd name
+									ttl_ns_custom = Bry_.Mid(ttl_full_txt, 0, colon_pos);			// mark as custom; NOTE: not using ttl_full_txt, b/c need to preserve underscores, else href="User_talk" -> "User talk"; PAGE:de.b:Wikibooks:Benutzersperrung/_InselFahrer DATE:2016-06-24
 							}
 						}
 					}
@@ -135,8 +135,8 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 	, Tid__anch = 2		// EX: href="#A"
 	, Tid__inet = 3		// EX: href="https://a.org/A"
 	;
-	private static final byte[] Bry__site = Bry_.new_a7("site/"), Bry__wiki = Bry_.new_a7("wiki/");
-	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
+	private static final    byte[] Bry__site = Bry_.new_a7("site/"), Bry__wiki = Bry_.new_a7("wiki/");
+	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Bry__wiki, Tid__wiki)
 	.Add_bry_byte(Bry__site, Tid__site)
 	;

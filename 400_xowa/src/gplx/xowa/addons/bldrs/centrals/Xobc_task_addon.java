@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.centrals; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import gplx.xowa.specials.*; import gplx.xowa.htmls.bridges.*;
+import gplx.xowa.addons.bldrs.infos.*;
 public class Xobc_task_addon implements Xoax_addon_itm, Xoax_addon_itm__special, Xoax_addon_itm__json {
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
 		{ Xobc_task_special.Prototype
+		, Xobc_info_special.Prototype
 		};
 	}
 	public Bridge_cmd_itm[] Json_cmds() {

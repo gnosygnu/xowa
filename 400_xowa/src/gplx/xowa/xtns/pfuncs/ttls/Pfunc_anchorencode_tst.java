@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_anchorencode_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test  public void Lnke()				{fxt.Test_parse_tmpl_str_test("{{anchorencode:[irc://a b c]}}"					, "{{test}}"	, "b_c");}
 	@Test  public void Apos_bold()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a ''b'' c}}"						, "{{test}}"	, "a_b_c");}
@@ -30,6 +30,6 @@ public class Pfunc_anchorencode_tst {
 	@Test  public void Html_ncr()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a &#34; b}}"						, "{{test}}"	, "a_.22_b");}
 	@Test  public void Html_ref()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a &quot; b}}"						, "{{test}}"	, "a_.22_b");}
 	@Test  public void Tmpl_missing_basic() {fxt.Test_parse_tmpl_str_test("{{anchorencode:{{a}}}}"							, "{{test}}"	, "Template:a");}
-	@Test  public void Tmpl_missing_colon() {fxt.Test_parse_tmpl_str_test("{{anchorencode:{{:a}}}}"							, "{{test}}"	, "Template:A");}
+	@Test  public void Tmpl_missing_colon() {fxt.Test_parse_tmpl_str_test("{{anchorencode:{{:a}}}}"							, "{{test}}"	, "a");}	// NOTE: changed from "Template:A" to "a"; DATE:2016-06-24
 	@Test  public void Lnki_literal()		{fxt.Test_parse_tmpl_str_test("{{anchorencode:[[:a]]}}"							, "{{test}}"	, "a");}
 }

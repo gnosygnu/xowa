@@ -106,7 +106,9 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 							href_bry = Bry_.Empty;
 					}
 					else {
-						Xow_ns ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(ns_id); if (ns == null) rdr.Err_wkr().Fail("invalid ns_id", "ns_id", ns_id);
+						Xow_ns ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(ns_id);
+						if (ns == null)
+							rdr.Err_wkr().Fail("invalid ns_id", "ns_id", ns_id, "href_bry", href_bry);	// add more args to troubleshoot random failure; DATE:2016-06-23
 						ns_bry = ns.Name_ui();
 						tmp_bfr.Add(ns.Name_db()).Add_byte_colon();
 					}
@@ -124,12 +126,14 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				href_bry = tmp_bfr.To_bry_and_clear();
 
 				// generate stub for redlink
-				try {
-					Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));
-					Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);
-					hpg.Redlink_list().Add(lnki_itm);
-					html_uid = lnki_itm.Html_uid();
-				}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}
+				if (	!hctx.Mode_is_diff()) {	// PERF: don't do redlinks during hzip_diff
+					try {
+						Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));
+						Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);
+						hpg.Redlink_list().Add(lnki_itm);
+						html_uid = lnki_itm.Html_uid();
+					}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}
+				}
 				break;
 		}
 		byte[] capt_bry = Xoh_lnki_hzip_.Bld_capt(tmp_bfr, href_type, text_type, capt_has_ns, capt_cs0_tid, ns_bry, src, text_0_bgn, text_0_end, src, text_1_bgn, text_1_end);

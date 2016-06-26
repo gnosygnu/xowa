@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
-public class Xot_invk_wkr_transclude_tst {		
-	@Before		public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
+public class Xot_invk_wkr__transclude__tst {		
+	@Before		public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After	public void term() {fxt.Init_defn_clear();}
-	@Test  public void Template() {	// PURPOSE: {{:Template:Test}} is same as {{Template:Test}}; EX.WIKT:android; japanese and {{:Template:ja/script}}			
+	@Test  public void Basic() {	// PURPOSE: {{:Template:Test}} is same as {{Template:Test}}; EX.WIKT:android; japanese and {{:Template:ja/script}}			
 		fxt.Init_defn_add("Test_1", "{{#if:|y|n}}");	// NOTE: must be of form "Test 1"; test_1 will fail
 		fxt.Test_parse_tmpl_str("{{:Template:Test 1}}", "n");
 	}
@@ -33,8 +33,19 @@ public class Xot_invk_wkr_transclude_tst {
 		fxt.Init_page_create("Root", "<gallery>A.png|a{{/Leaf}}b</gallery>");		// NOTE: gallery neeeded for XOWA to fail; MW fails if just {{/Leaf}}
 		fxt.Test_parse_page("Root", "<gallery>A.png|a{{/Leaf}}b</gallery>");
 	}
-	@Test  public void Missing() {	// PURPOSE: transclusion of a missing page should create a link, not print an empty String; EX: it.u:Dipartimento:Design; DATE:2014-02-12
+	@Test  public void Missing__sub_page() {	// PURPOSE: transclusion of a missing page should create a link, not print an empty String; EX: it.u:Dipartimento:Design; DATE:2014-02-12
 		fxt.Page_ttl_("Test_Page");
 		fxt.Test_parse_tmpl_str("{{/Sub}}", "[[Test_Page/Sub]]");
+	}
+	@Test  public void Missing__colon_prefix() {// PURPOSE: page with colon_prefix should not add Template: PAGE:en.d:a; DATE:2016-06-24
+		fxt.Test_parse_tmpl_str("{{:a}}", "[[:a]]");	// ":a", not "Template:A" or "A"
+	}
+	@Test  public void Colon_by_safesubst() {	// SUPPORT: page with colon_prefix should not add Template: PAGE:en.d:a; DATE:2016-06-24
+		fxt.Init_defn_add("Test_2", "{{safesubst:Template:{{{1}}}}}");
+		fxt.Test_parse_tmpl_str("{{Test 2|b}}", "[[Template:b]]");
+	}
+	@Test  public void Colon_w_template() {		// SUPPORT: page with colon_prefix should not add Template: PAGE:en.d:a; DATE:2016-06-24
+		fxt.Init_defn_add("Test_3", "{{:Template:{{{1}}}}}");
+		fxt.Test_parse_tmpl_str("{{Test 3|b}}", "[[:Template:b]]");
 	}
 }

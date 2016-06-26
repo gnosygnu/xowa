@@ -37,6 +37,7 @@ public class Gftest {
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}
+	public static void Eq__str(String expd, byte[] actl) {Eq__str(expd, String_.new_u8(actl), null);}
 	public static void Eq__str(String expd, String actl) {Eq__str(expd, actl, null);}
 	public static void Eq__str(String expd, String actl, String msg_fmt, Object... msg_args) {
 		if (String_.Eq(expd, actl)) return;
@@ -61,6 +62,16 @@ public class Gftest {
 		Write_fail_head(bfr, msg_fmt, msg_args);
 		bfr.Add_str_a7("expd: ").Add_long_variable(expd).Add_byte_nl();
 		bfr.Add_str_a7("actl: ").Add_long_variable(actl).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	public static void Eq__bool_y(boolean actl)			{Eq__bool(Bool_.Y, actl, null);}
+	public static void Eq__bool(boolean expd, boolean actl)	{Eq__bool(expd, actl, null);}
+	public static void Eq__bool(boolean expd, boolean actl, String msg_fmt, Object... msg_args) {
+		if (expd == actl) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		bfr.Add_str_a7("expd: ").Add_bool(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_bool(actl).Add_byte_nl();
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}

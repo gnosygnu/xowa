@@ -25,9 +25,9 @@ public class Xoh_gly_itm_wtr_tst {
 		fxt.Test__write(String_.Concat_lines_nl_skip_last
 		( ""
 		, "<li id='xogly_li_0' class='gallerybox' style='width:155px;'>"
-		,   "<div id='xogly_div1_0' style='width:155px;'>"
-		,     "<div id='xogly_div2_0' class='thumb' style='width:150px;'>"
-		,       "<div id='xogly_div3_0' style='margin:5px auto;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img id='xoimg_0' data-xoimg='0|120|120|-1|-1|-1' width='0' height='0'></a></div>"
+		,   "<div id='xowa_gallery_div1_0' style='width:155px;'>"
+		,     "<div id='xowa_gallery_div2_0' class='thumb' style='width:150px;'>"
+		,       "<div id='xowa_gallery_div3_0' style='margin:5px auto;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img id='xoimg_0' data-xoimg='0|120|120|-1|-1|-1' width='0' height='0'></a></div>"
 		,     "</div>"
 		,     "<div class='gallerytext'>"
 		,       "<p>caption</p>"

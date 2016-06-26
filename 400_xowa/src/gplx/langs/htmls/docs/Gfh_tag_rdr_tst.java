@@ -28,7 +28,6 @@ public class Gfh_tag_rdr_tst {
 	}
 	@Test   public void Comment() {
 		fxt.Init("1<!--2-->3<!--4-->5<div id='1'>6</div>");
-		fxt.Test__move_fwd_head(Gfh_tag_.Id__comment	, "<!--2-->")		; fxt.Test__pos("3");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__any		, "<div id='1'>")	; fxt.Test__pos("6");
 	}
 	@Test   public void Meta() {
@@ -44,6 +43,10 @@ public class Gfh_tag_rdr_tst {
 		fxt.Init("1<div>2<a>3<img/>4</a>5</div>6");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__div	, "<div>")	; fxt.Test__pos("2");
 		fxt.Test__move_fwd_tail(Gfh_tag_.Id__div	, "</div>")	; fxt.Test__pos("6");
+	}
+	@Test   public void Inline() {
+		fxt.Init("1<br/>2");
+		fxt.Test__move_fwd_head(Gfh_tag_.Id__br		, "<br/>")	; fxt.Test__pos("2");
 	}
 }
 class Gfh_tag_rdr_fxt {

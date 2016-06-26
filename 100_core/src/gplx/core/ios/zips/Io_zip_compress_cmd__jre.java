@@ -24,6 +24,7 @@ public class Io_zip_compress_cmd__jre {
 	public Io_zip_compress_cmd__jre Make_new() {return new Io_zip_compress_cmd__jre();}
 	public byte Exec_hook(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url[] src_urls, Io_url trg_url, String resume_name, long resume_file, long resume_item) {
 				OutputStream trg_out_stream;
+		Io_mgr.Instance.CreateDirIfAbsent(trg_url.OwnerDir());
 		try {trg_out_stream = new FileOutputStream(trg_url.Xto_api());}
 		catch (Exception e) {throw Err_.new_exc(e, "io", "trg open failed", "url", trg_url.Raw());}
 		ZipOutputStream trg_stream = new ZipOutputStream(trg_out_stream);

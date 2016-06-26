@@ -31,7 +31,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Atr_caption()				{return atr_caption;} private byte[] atr_caption = Bry_.Empty;
 	public byte[] Atr_style()				{return atr_style;} private byte[] atr_style = Bry_.Empty;
 	public byte[] Atr_cls()					{return atr_cls;} private byte[] atr_cls = Bry_.Empty;
-	public List_adp Atrs_other()				{return atrs_other;} private List_adp atrs_other;
+	public List_adp Atrs_other()			{return atrs_other;} private List_adp atrs_other;
 	public int Itm_w_or_default()			{return itm_w == Null ? Default : itm_w;}
 	public int Itm_h_or_default()			{return itm_h == Null ? Default : itm_h;}
 	public int Itms_len()					{return itms.Count();} private List_adp itms = List_adp_.New();
