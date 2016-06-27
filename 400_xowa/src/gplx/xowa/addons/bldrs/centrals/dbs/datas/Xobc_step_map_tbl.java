@@ -70,7 +70,7 @@ public class Xobc_step_map_tbl implements Db_tbl {
 	}
 	public List_adp Select_all(int task_id) {
 		List_adp rv = List_adp_.New();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_task_id).Crt_int(fld_task_id, task_id).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, String_.Ary(fld_task_id), fld_step_seqn).Crt_int(fld_task_id, task_id).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				rv.Add(rdr.Read_int("step_id"));

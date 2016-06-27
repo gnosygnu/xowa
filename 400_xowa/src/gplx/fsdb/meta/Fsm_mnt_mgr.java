@@ -41,6 +41,12 @@ public class Fsm_mnt_mgr implements Gfo_invk {
 	public Fsm_mnt_itm	Mnts__get_insert()				{return mnt_ary[insert_idx];} public void Mnts__get_insert_idx_(int v) {insert_idx = v;} private int insert_idx = Mnt_idx_user;
 	public Fsm_bin_fil	Bins__at(int mnt_id, int bin_db_id) {return mnt_ary[mnt_id].Bin_mgr().Dbs__get_by_or_null(bin_db_id);}
 	public int			Patch_upright()					{return patch_upright_tid;} private int patch_upright_tid = Xof_patch_upright_tid_.Tid_all;
+	public void Rls() {
+		for (int i = 0; i < mnt_ary_len; ++i) {
+			Fsm_mnt_itm mnt = mnt_ary[i];
+			mnt.Rls();
+		}
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}	
 	public static final int Mnt_idx_main = 0, Mnt_idx_user = 1, Insert_to_bin_null = -1;
 	public static void Patch(Db_cfg_tbl cfg_tbl) {

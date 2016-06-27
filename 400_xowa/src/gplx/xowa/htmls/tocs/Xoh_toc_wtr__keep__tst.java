@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.core.tests.*;
-public class Xoh_toc_wtr_tst {		
+public class Xoh_toc_wtr__keep__tst {		
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wtr_fxt fxt = new Xoh_toc_wtr_fxt();
 	@Test   public void Basic() {
 		fxt.Test__convert("a b c", "a b c");
@@ -25,38 +25,14 @@ public class Xoh_toc_wtr_tst {
 	@Test   public void Ws() {
 		fxt.Test__convert(" a b ", "a b");
 	}
-	@Test   public void Comment() {
-		fxt.Test__convert("<!--a-->", "");
-	}
-	@Test   public void Comment__many() {
-		fxt.Test__convert("1<!--2-->3<!--4-->5", "135");
-	}
-	@Test   public void Comment__dangling() {
-		fxt.Test__convert("1<!--2-->3<!--4->5", "13<!--4->5");
-	}
-	@Test   public void Apos__italic() {
-		fxt.Test__convert("<i>a</i>", "<i>a</i>");
-	}
-	@Test   public void Lnki__caption() {
-		fxt.Test__convert("<a href=\"/wiki/A\">b</a>", "b");
-	}
-	@Test   public void Lnki__caption__nest() {
-		fxt.Test__convert("<a href=\"/wiki/A\">b<i>c</i>d</a>", "b<i>c</i>d");
-	}
-	@Test   public void Xnde__small() {
-		fxt.Test__convert("<small>a</small>", "a");
-	}
-	@Test   public void Xnde__sup() {
-		fxt.Test__convert("<sup>a</sup>", "a");
-	}
-	@Test   public void Xnde__nest__xnde() {	// <sup> removed but not <small>
-		fxt.Test__convert("a <sup>b<small>c</small>d</sup> e", "a b<small>c</small>d e");
-	}
-	@Test   public void Xnde__nest__lnki() {	// <small> and <a> removed
-		fxt.Test__convert("<small><a href=\"/wiki/A\">b</a></small>", "b");
-	}
 	@Test   public void Amp__ncr() {
 		fxt.Test__convert("&#91;a&#93;", "&#91;a&#93;");
+	}
+	@Test   public void Italic() {
+		fxt.Test__convert("<i>a</i>", "<i>a</i>");
+	}
+	@Test   public void Caption() {
+		fxt.Test__convert("<a href=\"/wiki/A\">b</a>", "b");
 	}
 	@Test   public void Ref() {	// PURPOSE: ref contents should not print in TOC; DATE:2013-07-23
 		fxt.Test__convert("a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>", "a");
@@ -68,12 +44,6 @@ public class Xoh_toc_wtr_tst {
 		fxt.Test__convert
 		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a> b"
 		, "b");
-	}
-	@Test   public void Xnde__nest__inline() {	// PURPOSE: do not render inline xndes; EX: Magnetic_resonance_imaging
-		fxt.Test__convert("a<span id='b'>b<br/></span>", "ab");
-	}
-	@Test   public void Translate_w_comment() {	// PURPOSE: <translate> is an xtn and parses its innerText separately; meanwhile, toc_mgr defaults to using the innerText to build toc; EX:Wikidata:Introduction; DATE:2013-07-16
-		fxt.Test__convert("<translate><!--b-->ac</translate>", "ac");
 	}
 }
 class Xoh_toc_wtr_fxt {

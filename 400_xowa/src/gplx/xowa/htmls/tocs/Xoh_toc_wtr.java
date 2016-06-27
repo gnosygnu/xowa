@@ -67,8 +67,18 @@ class Xoh_toc_wtr {
 			switch (tag_id) {
 				case Gfh_tag_.Id__eos:		// eos; return;
 					return;
-				case Gfh_tag_.Id__i:		// always print tag
-				case Gfh_tag_.Id__b:
+				case Gfh_tag_.Id__comment:	// never print tag
+				case Gfh_tag_.Id__img:		
+				case Gfh_tag_.Id__br: case Gfh_tag_.Id__hr:	// always ignore in TOC text; EX: en.wikipedia.org/wiki/Magnetic_resonance_imaging; ====''T''<span style="display:inline-block; margin-bottom:-0.3em; vertical-align:-0.4em; line-height:1.2em;  font-size:85%; text-align:left;">*<br />2</span>-weighted MRI====
+				case Gfh_tag_.Id__h1: case Gfh_tag_.Id__h2: case Gfh_tag_.Id__h3: case Gfh_tag_.Id__h4: case Gfh_tag_.Id__h5: case Gfh_tag_.Id__h6:
+				case Gfh_tag_.Id__ul: case Gfh_tag_.Id__ol: case Gfh_tag_.Id__dd: case Gfh_tag_.Id__dt: case Gfh_tag_.Id__li:
+				case Gfh_tag_.Id__table: case Gfh_tag_.Id__tr: case Gfh_tag_.Id__td: case Gfh_tag_.Id__th: case Gfh_tag_.Id__thead: case Gfh_tag_.Id__tbody: case Gfh_tag_.Id__caption:
+				// case Gfh_tag_.Id__ref:	// NOTE: don't bother printing references; NOTE: should never show up
+					print_tag = false;
+					recurse = false;
+					break;
+				case Gfh_tag_.Id__b:		// always print tag
+				case Gfh_tag_.Id__i:	
 					print_tag = true;
 					break;
 				case Gfh_tag_.Id__small:	// only print tag if not nested
@@ -79,13 +89,6 @@ class Xoh_toc_wtr {
 						print_tag = true;
 					break;
 				}
-				case Gfh_tag_.Id__comment:	// never print tag
-				case Gfh_tag_.Id__img:		
-				case Gfh_tag_.Id__br:
-				case Gfh_tag_.Id__hr:
-					print_tag = false;
-					recurse = false;
-					break;
 				case Gfh_tag_.Id__a:		// a never prints tag; also, also, do not recurse if ref
 					print_tag = false;						
 					byte[] href_val = lhs.Atrs__get_as_bry(Gfh_atr_.Bry__href);

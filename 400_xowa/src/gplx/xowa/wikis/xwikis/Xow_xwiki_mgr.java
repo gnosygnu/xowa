@@ -20,8 +20,8 @@ import gplx.core.net.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.langs.*;	
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 public class Xow_xwiki_mgr {
-	private final Ordered_hash list = Ordered_hash_.New_bry(); private final Hash_adp_bry hash = Hash_adp_bry.ci_a7();
-	private final Xow_wiki wiki;
+	private final    Ordered_hash list = Ordered_hash_.New_bry(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();
+	private final    Xow_wiki wiki;
 	public Xow_xwiki_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		this.xwiki_domain_tid = Xwiki_tid(wiki.Domain_tid());
@@ -88,5 +88,5 @@ public class Xow_xwiki_mgr {
 		return url.Segs__get_at_1st();
 	}
 	public static byte[] Bld_url_fmt(byte[] domain_bry) {return Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry, Bry__url_fmt_end);}
-	private static final byte[] Bry__url_fmt_end = Bry_.new_a7("/wiki/~{0}");
+	private static final    byte[] Bry__url_fmt_end = Bry_.new_a7("/wiki/~{0}");
 }

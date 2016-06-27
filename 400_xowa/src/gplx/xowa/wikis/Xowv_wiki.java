@@ -106,6 +106,10 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		data_mgr__core_mgr.Init_by_make(props, info_session);
 		html__hdump_mgr.Init_by_db(this);
 	}
+	public void Rls() {
+		data_mgr__core_mgr.Rls();
+		fsdb_mgr.Rls();
+	}
 	public void Pages_get(Xoh_page rv, Gfo_url url, Xoa_ttl ttl) {
 		if (init_needed) Init_by_wiki();
 		if (ttl.Ns().Id_is_special())

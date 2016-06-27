@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
-public class Gfh_tag_ {
+public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	public static final int 
 	  Id__comment	= -3
 	, Id__eos		= -2
 	, Id__any		= -1
 	, Id__unknown	=  0
+	, Id__h1		=  1
 	, Id__h2		=  2
 	, Id__h3		=  3
 	, Id__h4		=  4
@@ -32,16 +33,25 @@ public class Gfh_tag_ {
 	, Id__div		=  9
 	, Id__img		= 10
 	, Id__ul		= 11
-	, Id__li		= 12
-	, Id__p			= 13
-	, Id__br		= 14
-	, Id__hr		= 15
-	, Id__td		= 16
-	, Id__pre		= 17
-	, Id__small		= 18
-	, Id__i			= 19
-	, Id__b			= 20
-	, Id__sup		= 21
+	, Id__ol		= 12
+	, Id__li		= 13
+	, Id__dd		= 14
+	, Id__dt		= 15
+	, Id__p			= 16
+	, Id__br		= 17
+	, Id__hr		= 18
+	, Id__table		= 19
+	, Id__tr		= 20
+	, Id__td		= 21
+	, Id__th		= 22
+	, Id__thead		= 23
+	, Id__tbody		= 24
+	, Id__caption	= 25
+	, Id__pre		= 26
+	, Id__small		= 27
+	, Id__i			= 28
+	, Id__b			= 29
+	, Id__sup		= 30
 	;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -55,6 +65,7 @@ public class Gfh_tag_ {
 	;
 	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)
+	.Add_str_int("h1"			, Id__h1)
 	.Add_str_int("h2"			, Id__h2)
 	.Add_str_int("h3"			, Id__h3)
 	.Add_str_int("h4"			, Id__h4)
@@ -66,8 +77,17 @@ public class Gfh_tag_ {
 	.Add_str_int("br"			, Id__br)
 	.Add_str_int("hr"			, Id__hr)
 	.Add_str_int("ul"			, Id__ul)
+	.Add_str_int("ol"			, Id__ol)
 	.Add_str_int("li"			, Id__li)
+	.Add_str_int("dd"			, Id__dd)
+	.Add_str_int("dt"			, Id__dt)
+	.Add_str_int("table"		, Id__table)
+	.Add_str_int("tr"			, Id__tr)
 	.Add_str_int("td"			, Id__td)
+	.Add_str_int("th"			, Id__th)
+	.Add_str_int("thead"		, Id__thead)
+	.Add_str_int("tbody"		, Id__tbody)
+	.Add_str_int("caption"		, Id__caption)
 	.Add_str_int("p"			, Id__p)
 	.Add_str_int("pre"			, Id__pre)
 	.Add_str_int("small"		, Id__small)
@@ -81,6 +101,7 @@ public class Gfh_tag_ {
 			case Id__any:			return "any";
 			case Id__unknown:		return "unknown";
 			case Id__comment:		return "comment";
+			case Id__h1:			return "h1";
 			case Id__h2:			return "h2";
 			case Id__h3:			return "h2";
 			case Id__h4:			return "h2";
@@ -93,9 +114,18 @@ public class Gfh_tag_ {
 			case Id__p:				return "p";
 			case Id__br:			return "br";
 			case Id__hr:			return "hr";
-			case Id__td:			return "td";
 			case Id__ul:			return "ul";
+			case Id__ol:			return "ol";
 			case Id__li:			return "li";
+			case Id__dd:			return "dd";
+			case Id__dt:			return "dt";
+			case Id__table:			return "table";
+			case Id__tr:			return "tr";
+			case Id__td:			return "td";
+			case Id__th:			return "th";
+			case Id__thead:			return "thead";
+			case Id__tbody:			return "tbody";
+			case Id__caption:		return "caption";
 			case Id__pre:			return "pre";
 			case Id__small:			return "small";
 			case Id__i:				return "i";

@@ -28,6 +28,7 @@ public abstract class Xobc_task_regy__base {
 	public Xobc_task_itm			Get_at(int i)			{return (Xobc_task_itm)hash.Get_at(i);}
 	public Xobc_task_itm			Get_by(int i)			{return (Xobc_task_itm)hash.Get_by(i);}
 	public void						Del_by(int i)			{hash.Del(i);}
+	public void						Sort()					{hash.Sort();}
 
 	public void Save_to(Gfobj_ary ary) {
 		int len = hash.Len();

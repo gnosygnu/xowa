@@ -54,6 +54,9 @@ public class Xof_bin_mgr {
 		}
 		return null;
 	}
+	public void Rls() {
+		mnt_mgr.Rls();
+	}
 	public boolean Find_to_url_as_bool(int exec_tid, Xof_fsdb_itm fsdb) {return Find_as(Bool_.Y, rdr_wrapper, exec_tid, fsdb);}
 //		public boolean Find_to_url_as_bool3(int exec_tid, Xof_fsdb_itm fsdb) {return Find_to_url(exec_tid, fsdb) != Io_url_.Empty;}
 //		private Io_url Find_to_url(int exec_tid, Xof_fsdb_itm fsdb) {

@@ -23,4 +23,5 @@ public interface Xof_fsdb_mgr {
 	Fsm_mnt_mgr Mnt_mgr();
 	void Init_by_wiki(Xow_wiki wiki);
 	void Fsdb_search_by_list(List_adp itms, Xow_wiki wiki, Xoa_page page, Xog_js_wkr js_wkr);
+	void Rls();
 }

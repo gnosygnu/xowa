@@ -62,6 +62,10 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, Gfo_invk {
 			Xof_file_wkr.Show_img(fsdb, usr_dlg, wiki.File__bin_mgr(), wiki.File__mnt_mgr(), cache_mgr, wiki.File__repo_mgr(), js_wkr, img_size, url_bldr, page);
 		}
 	}
+	public void Rls() {
+		if (bin_mgr != null) bin_mgr.Rls();
+		init = false;
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_mnt_mgr))	return mnt_mgr;
 		else	return Gfo_invk_.Rv_unhandled;

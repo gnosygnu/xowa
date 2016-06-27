@@ -218,12 +218,16 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Site_cfg_mgr().Load(this);
 	}
 	public void Rls() {
-		if (rls_list == null) return;
-		int len = rls_list.Count();
-		for (int i = 0; i < len; i++) {
-			Rls_able rls = (Rls_able)rls_list.Get_at(i);
-			rls.Rls();
+		if (rls_list != null) {
+			int len = rls_list.Count();
+			for (int i = 0; i < len; i++) {
+				Rls_able rls = (Rls_able)rls_list.Get_at(i);
+				rls.Rls();
+			}
 		}
+		Xow_db_mgr core_db_mgr = this.Data__core_mgr();
+		if (core_db_mgr != null) core_db_mgr.Rls();
+		file_mgr.Rls();
 	}
 	public void Init_needed_y_() {this.init_needed = true;}
 	private void Copy_cfg(Xowe_wiki wiki) {html_mgr.Copy_cfg(wiki.Html_mgr());}

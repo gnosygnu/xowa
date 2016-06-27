@@ -53,6 +53,7 @@ public class Xobc_work_task_tbl implements Db_tbl {
 				task.Task_status_(cmd_id == Xobc_cmd__base.Seqn__0 ? gplx.core.progs.Gfo_prog_ui_.Status__init : gplx.core.progs.Gfo_prog_ui_.Status__working);
 				task_mgr.Step_mgr().Load(task, step_id, cmd_id);
 			}
+			work_regy.Sort();
 		} finally {rdr.Rls();}
 	}
 	public void Insert(int task_id, int task_seqn, int step_id, int cmd_id) {

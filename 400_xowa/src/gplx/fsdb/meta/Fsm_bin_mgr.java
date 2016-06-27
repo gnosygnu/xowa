@@ -62,4 +62,9 @@ public class Fsm_bin_mgr {
 		for (int i = 0; i < len; ++i)
 			this.Dbs__get_at(i).Conn().Txn_end();
 	}
+	public void Rls() {
+		int len = db_hash.Len();
+		for (int i = 0; i < len; ++i)
+			this.Dbs__get_at(i).Conn().Rls_conn();
+	}
 }

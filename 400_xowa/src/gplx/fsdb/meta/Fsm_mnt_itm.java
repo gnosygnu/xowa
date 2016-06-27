@@ -57,6 +57,10 @@ public class Fsm_mnt_itm {
 	}
 	public void Txn_bgn() {atr_mgr.Txn_bgn(); bin_mgr.Txn_bgn();}
 	public void Txn_end() {atr_mgr.Txn_end(); bin_mgr.Txn_end();}
+	public void Rls() {
+		atr_mgr.Db__core().Conn().Rls_conn();
+		bin_mgr.Rls();
+	}
 }
 class Fsm_mnt_itm_ {
 	public static void Patch_next_id(Fsm_mnt_itm abc_mgr, String name) {

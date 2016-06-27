@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
-public class Xobc_task_itm {
+public class Xobc_task_itm implements gplx.CompareAble {
 	public Xobc_task_itm(int task_id, int task_seqn, int step_count, String task_key, String task_name) {
 		this.task_id = task_id; this.task_seqn = task_seqn; 
 		this.step_count = step_count;
@@ -35,6 +35,7 @@ public class Xobc_task_itm {
 	public boolean				Step_is_last()	{return step.Step_seqn() == step_count - 1;}
 	public void				Task_status_(byte v) {task_status = v;}		// called when task moves from init -> working -> suspended -> done
 	public void				Task_seqn_(int v) {this.task_seqn = v;}		// called when task is init'd from db, or added to list
+	public int				compareTo(Object obj) {Xobc_task_itm comp = (Xobc_task_itm)obj; return Int_.Compare(task_seqn, comp.task_seqn);}
 
 	public Gfobj_nde Save_to(Gfobj_nde nde) {
 		nde.Add_int	("task_id"				, task_id);

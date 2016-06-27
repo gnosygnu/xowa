@@ -54,4 +54,5 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xow_url_parser				Utl__url_parser();
 	Xoax_addon_mgr				Addon_mgr();
 	void						Init_needed_y_();
+	void						Rls();
 }
