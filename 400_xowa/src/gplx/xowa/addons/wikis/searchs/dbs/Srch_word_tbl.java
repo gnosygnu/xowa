@@ -60,9 +60,15 @@ public class Srch_word_tbl implements Rls_able {
 	}
 	public Srch_word_row New_row(Db_rdr rdr) {
 		int page_count			= fld_link_count		== Dbmeta_fld_itm.Key_null ? 0 : rdr.Read_int(fld_link_count);
-		int link_count_score	= fld_link_count_score	== Dbmeta_fld_itm.Key_null ? 0 : rdr.Read_int(fld_link_count_score);
 		int link_score_min		= fld_link_score_min	== Dbmeta_fld_itm.Key_null ? page_count : rdr.Read_int(fld_link_score_min);
 		int link_score_max		= fld_link_score_max	== Dbmeta_fld_itm.Key_null ? page_count : rdr.Read_int(fld_link_score_max);
+		int link_count_score	= 0;
+		if (fld_link_count_score != Dbmeta_fld_itm.Key_null) {
+			try {link_count_score = rdr.Read_int(fld_link_count_score);}
+			catch (Exception e) {// handle 2016-05 and earlier wikis which stored value as double instead of int
+				link_count_score = (int)rdr.Read_double(fld_link_count_score);
+			}
+		}
 		return new Srch_word_row(rdr.Read_int(fld_id), rdr.Read_bry_by_str(fld_text), page_count, link_count_score, link_score_min, link_score_max);
 	}
 	public void Rls() {
