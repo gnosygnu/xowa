@@ -22,6 +22,7 @@ public class Bfr_arg__hatr_id implements Bfr_arg_clearable {
 	private final    byte[] bry; private int num;
 	public Bfr_arg__hatr_id(byte[] atr_key, byte[] bry)	{this.bry = bry; this.atr_bgn = Bfr_arg__hatr_.Bld_atr_bgn(atr_key);}
 	public Bfr_arg__hatr_id Set(int num)				{this.num = num; return this;}
+	public byte[] Get_id_val()							{return Bry_.Add(bry, Int_.To_bry(num));}
 	public void Bfr_arg__clear()						{num = -1;}
 	public boolean Bfr_arg__missing()						{return num == -1;}
 	public void Bfr_arg__add(Bry_bfr bfr) {

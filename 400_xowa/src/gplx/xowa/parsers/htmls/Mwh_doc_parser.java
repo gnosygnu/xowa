@@ -43,13 +43,14 @@ public class Mwh_doc_parser {
 					pos = Parse_nde(pos);
 					break;
 				case Byte_ascii.Amp:		// "&": check for entity; EX: &nbsp; in sr-ec -> sr-el
-					Xop_tkn_itm tkn = amp_mgr.Parse_as_tkn(tkn_mkr, src, src_end, pos, pos + 1);
-					if (tkn == null)
+					Xop_amp_mgr_rslt rv = amp_mgr.Parse_tkn(tkn_mkr, src, src_end, pos, pos + 1);
+					Xop_tkn_itm rv_tkn = rv.Tkn();
+					if (rv_tkn == null)
 						++pos;
 					else {
 						wkr.On_txt_end(this, src, cur_nde_tid, txt_bgn, pos);
-						wkr.On_entity_end(this, src, cur_nde_tid, tkn.Src_bgn(), tkn.Src_end());
-						pos = tkn.Src_end();
+						wkr.On_entity_end(this, src, cur_nde_tid, rv_tkn.Src_bgn(), rv_tkn.Src_end());
+						pos = rv_tkn.Src_end();
 						txt_bgn = pos;
 					}
 					break;

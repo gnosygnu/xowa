@@ -25,7 +25,7 @@ public class Xop_tkn_mkr {
 	public Xop_space_tkn Space_mutable(int bgn, int end)									{return new Xop_space_tkn(false, bgn, end);}
 	public Xop_apos_tkn Apos(int bgn, int end
 		, int aposLen, int typ, int cmd, int lit_apos)										{return new Xop_apos_tkn(bgn, end, aposLen, typ, cmd, lit_apos);}
-	public Xop_tkn_itm Amp_txt(int bgn, int end, Xop_amp_trie_itm itm)						{return new Xop_amp_tkn_txt(bgn, end, itm);}
+	public Xop_tkn_itm Amp_txt(int bgn, int end, Xop_amp_trie_itm itm)						{return new Xop_amp_tkn_ent(bgn, end, itm);}
 	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int, byte[] val_bry)				{return new Xop_amp_tkn_num(bgn, end, val_int, val_bry);}
 	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int)								{return new Xop_amp_tkn_num(bgn, end, val_int, gplx.core.intls.Utf16_.Encode_int_to_bry(val_int));}
 	public Xop_nl_tkn NewLine(int bgn, int end, byte nl_typ, int nl_len)					{return new Xop_nl_tkn(bgn, end, nl_typ, nl_len);}

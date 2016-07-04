@@ -24,7 +24,7 @@ public class Gfo_prog_ui_ {
 	, Status__done			=  4
 	, Status__fail			=  8
 	, Status__suspended		= 16
-	, Status__runnable		= Status__init | Status__suspended
+	, Status__runnable		= Status__init | Status__suspended | Status__fail
 	;
 }
 class Gfo_prog_ui__noop implements Gfo_prog_ui {

@@ -95,8 +95,6 @@ public class Xop_fxt {
 	public Xop_tkn_chkr_base tkn_pipe_(int bgn)						{return new Xop_tkn_chkr_base().TypeId_dynamic(Xop_tkn_itm_.Tid_pipe).Src_rng_(bgn, bgn + 1);}
 	public Xop_tkn_chkr_base tkn_tab_(int bgn)						{return new Xop_tkn_chkr_base().TypeId_dynamic(Xop_tkn_itm_.Tid_tab).Src_rng_(bgn, bgn + 1);}
 	public Xop_apos_tkn_chkr tkn_apos_(int cmd) 					{return new Xop_apos_tkn_chkr().Apos_cmd_(cmd);}
-	public Xop_tkn_chkr_base tkn_html_ref_(String v) 				{return new Xop_html_txt_tkn_chkr().Html_ref_key_(v);}
-	public Xop_tkn_chkr_base tkn_html_ncr_(int v) 					{return new Xop_html_num_tkn_chkr().Html_ncr_val_(v);}
 	public Xop_ignore_tkn_chkr tkn_comment_(int bgn, int end)		{return tkn_ignore_(bgn, end, Xop_ignore_tkn.Ignore_tid_comment);}
 	public Xop_ignore_tkn_chkr tkn_ignore_(int bgn, int end, byte t){return (Xop_ignore_tkn_chkr)new Xop_ignore_tkn_chkr().Ignore_tid_(t).Src_rng_(bgn, end);}
 	public Xop_tkn_chkr_hr   tkn_hr_(int bgn, int end)				{return new Xop_tkn_chkr_hr(bgn, end).Hr_len_(Xop_hr_lxr.Hr_len);}

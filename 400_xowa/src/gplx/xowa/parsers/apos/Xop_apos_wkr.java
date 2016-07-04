@@ -17,27 +17,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public class Xop_apos_wkr implements Xop_ctx_wkr {
-	public Xop_apos_dat Dat() {return dat;} private Xop_apos_dat dat = new Xop_apos_dat();
-	private List_adp stack = List_adp_.New(); private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
+	private final    List_adp stack = List_adp_.New();
+	private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
+	private Xop_apos_dat dat = new Xop_apos_dat();
 	public void Ctor_ctx(Xop_ctx ctx) {}
-	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
-		Reset();
-	}
+	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {Clear();}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {
-		this.EndFrame(ctx, root, src, src_len, false);
+		this.End_frame(ctx, root, src, src_len, false);
 	}
 	public void AutoClose(Xop_ctx ctx, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {}
-	public int Stack_len() {return stack.Count();}
+	public int Stack_len() {return stack.Len();}
+	private void Clear() {
+		bold_count = ital_count = 0;
+		dual_tkn = null;
+		stack.Clear();
+		dat.State_clear();
+	}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Apos);
 		int apos_len = cur_pos - bgn_pos;
 		dat.Ident(ctx, src, apos_len, cur_pos);
 		Xop_apos_tkn apos_tkn = tkn_mkr.Apos(bgn_pos, cur_pos, apos_len, dat.Typ(), dat.Cmd(), dat.Lit_apos());
 		ctx.Subs_add(root, apos_tkn);
-		ctx.Apos().RegTkn(apos_tkn, cur_pos);
+		ctx.Apos().Reg_tkn(apos_tkn, cur_pos);	// NOTE: register in root ctx (main document)
 		return cur_pos;
 	}
-	public void RegTkn(Xop_apos_tkn tkn, int cur_pos) { // REF.MW: Parser|doQuotes
+	private void Reg_tkn(Xop_apos_tkn tkn, int cur_pos) { // REF.MW: Parser|doQuotes
 		stack.Add(tkn);			
 		switch (tkn.Apos_tid()) {
 			case Xop_apos_tkn_.Len_ital: ital_count++; break; 
@@ -52,19 +57,18 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 			dual_tkn = null;
 		}
 	}
-	public void EndFrame(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int cur_pos, boolean skip_cancel_if_lnki_and_apos) {
+	public void End_frame(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int cur_pos, boolean skip_cancel_if_lnki_and_apos) {
 		int state = dat.State();
-		if (state == 0) {Reset(); return;}
-		if (bold_count % 2 == 1 && ital_count % 2 == 1) ConvertBoldToItal(ctx, src);
+		if (state == 0) {Clear(); return;}	// all apos close correctly; nothing dangling; return;
 
+		if (bold_count % 2 == 1 && ital_count % 2 == 1) Convert_bold_to_ital(ctx, src, stack, dat);
 		state = dat.State();
+		if (state == 0) {Clear(); return;}	// all apos close correctly after converting bold to italic; return;
+
 		int closeCmd = 0, closeTyp = 0;
-		if (state == 0) {Reset(); return;}	// all closed: return
 		byte cur_tkn_tid = ctx.Cur_tkn_tid();
-		Xop_apos_tkn prv = Previous_bgn(stack, closeTyp);
 		if (	skip_cancel_if_lnki_and_apos						// NOTE: if \n or tblw
 			&&	cur_tkn_tid	== Xop_tkn_itm_.Tid_lnki				// and cur scope is lnki
-//				&&	prv.Ctx_tkn_tid() != Xop_tkn_itm_.Tid_lnki			// but apos_bgn is not lnki; NOTE: disabled on 2013-11-10
 			)
 			return;													// don't end frame
 		switch (state) {
@@ -74,30 +78,29 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 			case Xop_apos_tkn_.State_ib:	closeTyp = Xop_apos_tkn_.Typ_dual; closeCmd = Xop_apos_tkn_.Cmd_bi_end; break;
 			case Xop_apos_tkn_.State_bi:	closeTyp = Xop_apos_tkn_.Typ_dual; closeCmd = Xop_apos_tkn_.Cmd_ib_end; break;
 		}
-		ctx.Msg_log().Add_itm_none(Xop_apos_log.Dangling_apos, src, prv.Src_bgn(), cur_pos);
 		ctx.Subs_add(root, ctx.Tkn_mkr().Apos(cur_pos, cur_pos, 0, closeTyp, closeCmd, 0));
-		Reset();
+		Clear();
 	}
-	private void ConvertBoldToItal(Xop_ctx ctx, byte[] src) {
+	private static void Convert_bold_to_ital(Xop_ctx ctx, byte[] src, List_adp stack, Xop_apos_dat dat) {
 		Xop_apos_tkn idxNeg1 = null, idxNeg2 = null, idxNone = null; // look at previous tkn for spaces; EX: "a '''" -> idxNeg1; " a'''" -> idxNeg2; "ab'''" -> idxNone
-	    int tknsLen = stack.Count(); 
-		for (int i = 0; i < tknsLen; i++) {
+	    int len = stack.Len(); 
+		for (int i = 0; i < len; ++i) {
 			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			if (apos.Apos_tid() != Xop_apos_tkn_.Typ_bold) continue;	// only look for bold
-			int tknBgn = apos.Src_bgn();
-			boolean idxNeg1Space = tknBgn > 0 && src[tknBgn - 1] == Byte_ascii.Space;
-			boolean idxNeg2Space = tknBgn > 1 && src[tknBgn - 2] == Byte_ascii.Space;
+			int tkn_bgn = apos.Src_bgn();
+			boolean idxNeg1Space = tkn_bgn > 0 && src[tkn_bgn - 1] == Byte_ascii.Space;
+			boolean idxNeg2Space = tkn_bgn > 1 && src[tkn_bgn - 2] == Byte_ascii.Space;
 			if		(idxNeg1 == null && idxNeg1Space)					{idxNeg1 = apos;}
 			else if (idxNeg2 == null && idxNeg2Space)					{idxNeg2 = apos;}
 			else if (idxNone == null && !idxNeg1Space && !idxNeg2Space)	{idxNone = apos;}
 		}
-		if		(idxNeg2 != null) ConvertBoldToItal(ctx, src, idxNeg2); // 1st single letter word
-		else if (idxNone != null) ConvertBoldToItal(ctx, src, idxNone); // 1st multi letter word
-		else if	(idxNeg1 != null) ConvertBoldToItal(ctx, src, idxNeg1); // everything else
+		if		(idxNeg2 != null) Convert_bold_to_ital(ctx, src, idxNeg2); // 1st single letter word
+		else if (idxNone != null) Convert_bold_to_ital(ctx, src, idxNone); // 1st multi letter word
+		else if	(idxNeg1 != null) Convert_bold_to_ital(ctx, src, idxNeg1); // everything else
 
 		// now recalc all cmds for stack
 		dat.State_clear();
-		for (int i = 0; i < tknsLen; i++) {
+		for (int i = 0; i < len; i++) {
 			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			dat.Ident(ctx, src, apos.Apos_tid(), apos.Src_end());	// NOTE: apos.Typ() must map to apos_len
 			int newCmd = dat.Cmd();
@@ -105,57 +108,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 			apos.Apos_cmd_(newCmd);
 		}
 	}
-	private void ConvertBoldToItal(Xop_ctx ctx, byte[] src, Xop_apos_tkn oldTkn) {
-		ctx.Msg_log().Add_itm_none(Xop_apos_log.Bold_converted_to_ital, src, oldTkn.Src_bgn(), oldTkn.Src_end());
+	private static void Convert_bold_to_ital(Xop_ctx ctx, byte[] src, Xop_apos_tkn oldTkn) {
 		oldTkn.Apos_tid_(Xop_apos_tkn_.Typ_ital).Apos_cmd_(Xop_apos_tkn_.Cmd_i_bgn).Apos_lit_(oldTkn.Apos_lit() + 1);// NOTE: Cmd_i_bgn may be overridden later
-	}
-	private void Reset() {
-		bold_count = ital_count = 0;
-		dual_tkn = null;
-		stack.Clear();
-		dat.State_clear();
-	}
-	private static Xop_apos_tkn Previous_bgn(List_adp stack, int typ) {
-		int stack_len = stack.Count();
-		for (int i = stack_len - 1; i > -1; --i) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
-			int cmd = apos.Apos_cmd();
-			switch (typ) {
-				case Xop_apos_tkn_.Typ_ital:
-					switch (cmd) {
-						case Xop_apos_tkn_.Cmd_i_bgn:
-						case Xop_apos_tkn_.Cmd_ib_bgn:
-						case Xop_apos_tkn_.Cmd_bi_bgn:
-						case Xop_apos_tkn_.Cmd_ib_end__i_bgn:
-						case Xop_apos_tkn_.Cmd_b_end__i_bgn:
-							return apos;
-					}
-					break;
-				case Xop_apos_tkn_.Typ_bold:
-					switch (cmd) {
-						case Xop_apos_tkn_.Cmd_b_bgn:
-						case Xop_apos_tkn_.Cmd_ib_bgn:
-						case Xop_apos_tkn_.Cmd_bi_bgn:
-						case Xop_apos_tkn_.Cmd_bi_end__b_bgn:
-						case Xop_apos_tkn_.Cmd_i_end__b_bgn:
-							return apos;
-					}
-					break;
-				default:	// NOTE: this is approximate; will not be exact in most dual situations; EX: <b>a<i>b will return <i>; should return <b> and <i>
-					switch (cmd) {
-						case Xop_apos_tkn_.Cmd_b_bgn:
-						case Xop_apos_tkn_.Cmd_i_bgn:
-						case Xop_apos_tkn_.Cmd_ib_bgn:
-						case Xop_apos_tkn_.Cmd_bi_bgn:
-						case Xop_apos_tkn_.Cmd_bi_end__b_bgn:
-						case Xop_apos_tkn_.Cmd_i_end__b_bgn:
-						case Xop_apos_tkn_.Cmd_ib_end__i_bgn:
-						case Xop_apos_tkn_.Cmd_b_end__i_bgn:
-							return apos;
-					}
-					break;
-			}
-		}
-		return null;
 	}
 }

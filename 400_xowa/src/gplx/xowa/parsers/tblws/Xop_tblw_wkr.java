@@ -47,7 +47,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (ctx.Apos().Stack_len() > 0)							// open apos; note that apos keeps its own stack, as they are not "structural" (not sure about this)
-			ctx.Apos().EndFrame(ctx, root, src, cur_pos, true);	// close it
+			ctx.Apos().End_frame(ctx, root, src, cur_pos, true);// close it
 		Xop_tblw_tkn prv_tkn = ctx.Stack_get_tbl();
 		if (	prv_tkn == null									// prv_tkn not found; i.e.: no earlier "{|" or "<table>"
 			|| (	ctx.Stack_get_tblw_tb() == null				// no {| on stack; DATE:2014-05-05

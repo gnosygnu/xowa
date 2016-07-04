@@ -39,7 +39,9 @@ public class Xoh_hdr_data implements Xoh_data_itm {
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag hdr_head, Gfh_tag span_head) {
 		this.Clear();
 		this.src_bgn = hdr_head.Src_bgn(); this.hdr_level = hdr_head.Name_id();
-		Gfh_atr anch_atr = span_head.Atrs__get_by_or_fail(Gfh_atr_.Bry__id);
+		if (hdr_head.Atrs__len() > 0) return false;								// skip manual <h2> with atrs; PAGE:fr.w:Wikipédia:LiveRC/ToDo; DATE:2016-07-02
+		Gfh_atr anch_atr = span_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__id);
+		if (anch_atr.Val_dat_missing()) return false;							// skip manual <h2> without id; PAGE:fr.w:Portail:Nord-Amérindiens/Image_sélectionnée; DATE:2016-07-01
 		this.anch_bgn = anch_atr.Val_bgn(); this.anch_end = anch_atr.Val_end();
 		this.capt_bgn = span_head.Src_end();
 		Gfh_tag hdr_tail = tag_rdr.Tag__move_fwd_tail(hdr_level);				// find </h2> not </span> since <span> can be nested, but <h2> cannot
@@ -59,7 +61,7 @@ public class Xoh_hdr_data implements Xoh_data_itm {
 		this.anch_bgn = anch_bgn; this.anch_end = anch_end; this.capt_bgn = capt_bgn; this.capt_end = capt_end;
 		this.capt_rhs_bgn = capt_rhs_bgn; this.capt_rhs_end = capt_rhs_end;
 	}
-	public static final byte[] Bry__class__mw_headline	= Bry_.new_a7("mw-headline");
+	public static final    byte[] Bry__class__mw_headline	= Bry_.new_a7("mw-headline");
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_hdr_data rv = new Xoh_hdr_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 }

@@ -79,6 +79,7 @@ public class Srch_search_mgr {
 		}
 	}
 	private void Clear() {
+		Gfo_usr_dlg_.Instance.Log_many("", "", "search.clear");
 		search_count = 0;
 		cache__page.Clear();
 		cache__word_counts.Clear();

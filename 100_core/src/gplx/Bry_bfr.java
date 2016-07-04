@@ -542,6 +542,11 @@ public class Bry_bfr {
 		if (reset > 0) Reset_if_gt(reset);
 		return rv;
 	}
+	public byte[] To_bry_and_clear_and_rls() {
+		byte[] rv = To_bry_and_clear();
+		this.Mkr_rls();
+		return rv;
+	}
 	public String To_str()								{return String_.new_u8(To_bry());}
 	public String To_str_by_pos(int bgn, int end)		{return String_.new_u8(To_bry(), bgn, end);}
 	public String To_str_and_clear()					{return String_.new_u8(To_bry_and_clear());}

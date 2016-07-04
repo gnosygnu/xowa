@@ -25,7 +25,7 @@ public class Xoapi_font implements Gfo_invk {
 	public void Increase() {Adj(1);}
 	public void Decrease() {Adj(-1);}
 	public void Reset() {Set(false, Xoh_page_mgr.Font_size_default, Xocfg_win.Font_size_default);}
-	private void Adj(int adj) {
+	public void Adj(int adj) {
 		float html_font_size = app.Html_mgr().Page_mgr().Font_size() + adj;
 		float gui_font_size = app.Gui_mgr().Win_cfg().Font().Size() + adj; // (html_font_size * .75f) - 4;	// .75f b/c 16px = 12 pt; -4 b/c gui font is currently 4 pt smaller 
 		if (html_font_size < 1 || gui_font_size < 1) return;

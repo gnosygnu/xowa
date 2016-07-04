@@ -33,8 +33,6 @@ public class Xop_apos_dat {
 			default:
 				lit_apos = apos_len - Xop_apos_tkn_.Len_dual;
 				Ident_props(Xop_apos_tkn_.Len_dual);
-				if (lit_apos > 1)
-					ctx.Msg_log().Add_itm_none(Xop_apos_log.Multiple_apos, src, cur_pos - apos_len, cur_pos);
 				break;
 		}
 	}

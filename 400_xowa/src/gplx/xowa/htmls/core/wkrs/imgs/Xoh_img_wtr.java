@@ -59,6 +59,13 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		this.Bfr_arg__add(bfr);
 	}
 	private static final    byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
+	public void Init_html(int html_w, int html_h, byte[] src_bry) {
+		img_w.Set_by_int(html_w);
+		img_h.Set_by_int(html_h);
+		if (gplx.core.envs.Op_sys.Cur().Tid_is_drd())
+			src_bry = Bry_.Replace(src_bry, Byte_ascii.Question_bry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
+		img_src.Set_by_bry(src_bry);
+	}
 	public boolean Init_by_decode(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm) {
 		Xoh_img_data data = (Xoh_img_data)data_itm;
 		this.Clear();
@@ -72,17 +79,13 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), lnki_ttl, gplx.xowa.parsers.lnkis.Xop_lnki_type.To_flag(img_xowa_image.Lnki_type()), img_xowa_image.Lnki_upright(), img_xowa_image.Lnki_w(), img_xowa_image.Lnki_h(), img_xowa_image.Lnki_time(), img_xowa_image.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
 			hctx.File__mgr().Find(hpg.Wiki(), hpg.Url_bry_safe(), fsdb_itm);
 			this.img_xowa_image.Set_by_arg(img_xowa_image.Clone());	// NOTE: must clone b/c img_xowa_image is member of Xoh_img_data which is poolable (and cleared); PAGE:en.w:Almagest; DATE:2016-01-05
-			img_w.Set_by_int(fsdb_itm.Html_w());
-			img_h.Set_by_int(fsdb_itm.Html_h());
-			byte[] src_bry = fsdb_itm.Html_view_url().To_http_file_bry();
-			if (gplx.core.envs.Op_sys.Cur().Tid_is_drd()) src_bry = Bry_.Replace(src_bry, Byte_ascii.Question_bry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
-			this.img_src.Set_by_bry(src_bry);
+			this.Init_html(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_view_url().To_http_file_bry());
 		}
 		else if (data.Img_w() != -1) {
 			img_w.Set_by_int(data.Img_w());
 			img_h.Set_by_int(data.Img_h());
 			this.img_src.Set_by_arg(data.Img_src());
-		}			
+		}
 		if (data.Anch_rel_nofollow_exists()) anch_rel.Set_by_bry(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_dict_.Html__rel__nofollow);
 		if (!hctx.Mode_is_diff()) {
 			this.Img_id_(fsdb_itm.Html_uid());

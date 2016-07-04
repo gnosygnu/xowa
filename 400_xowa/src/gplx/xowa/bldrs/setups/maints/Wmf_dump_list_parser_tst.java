@@ -41,7 +41,7 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// MAINT:QUARTERLY:2016-03-17; must run C:\xowa\ and update dump status
+//		@Test  public void Update() {	// MAINT:QUARTERLY:2016-07-03; must run C:\xowa\ and update dump status
 //			Hash_adp_bry excluded_domains = Hash_adp_bry.cs().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"

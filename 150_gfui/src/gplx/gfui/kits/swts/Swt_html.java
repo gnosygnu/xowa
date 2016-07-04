@@ -26,6 +26,7 @@ import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.gxws.Gxw_html;
 import gplx.gfui.controls.gxws.Gxw_html_load_tid_;
 import gplx.gfui.controls.standards.Gfui_html;
+import gplx.gfui.controls.standards.Gfui_tab_mgr;
 import gplx.gfui.ipts.*;
 import gplx.gfui.kits.core.Swt_kit;
 
@@ -45,7 +46,7 @@ import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 
-public class Swt_html implements Gxw_html, Swt_control, FocusListener {
+public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_mgr_owner {
 	private Swt_html_lnr_location lnr_location; private Swt_html_lnr_status lnr_status;
 	public Swt_html(Swt_kit kit, Swt_control owner_control, Keyval_hash ctorArgs) {
 		this.kit = kit;
@@ -62,10 +63,12 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		browser.addStatusTextListener(lnr_status);
 		browser.addFocusListener(this);
 		browser.addTitleListener(new Swt_html_lnr_title(this));
+		browser.addMouseWheelListener(new Swt_html_lnr_wheel(this));
 		// browser.addOpenWindowListener(new Swt_open_window_listener(this));	// handle target='blank'
 		// browser.addTraverseListener(new Swt_html_lnr_Traverse(this));
 	}
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr; 	public void Evt_mgr_(Gfo_evt_mgr v) {ev_mgr = v;}
 	@Override public Control Under_control() {return browser;} private Browser browser;
 	@Override public Composite Under_composite() {return null;}
 	@Override public Control Under_menu_control() {return browser;}
@@ -266,6 +269,17 @@ class Swt_html_lnr_mouse implements MouseListener {
 		}
 		return IptEvtDataMouse.new_(btn, IptMouseWheel_.None, ev.x, ev.y);		
 	}
+}
+class Swt_html_lnr_wheel implements MouseWheelListener {
+	private final Swt_html html_box;
+	public Swt_html_lnr_wheel(Swt_html html_box) {
+		this.html_box = html_box;
+	}
+	@Override public void mouseScrolled(MouseEvent evt) {
+		if (evt.stateMask == SWT.CTRL) {	// ctrl held;
+			Gfo_evt_mgr_.Pub_obj(html_box, Gfui_html.Evt_zoom_changed, "clicks_is_positive", evt.count > 0);
+		}
+	}	
 }
 //class Swt_open_window_listener implements OpenWindowListener {
 //	private final Swt_html html_box;

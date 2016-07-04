@@ -42,6 +42,16 @@ public class Int_ implements Gfo_invk {
 		for (int i = 0; i < src_len; ++i)
 			trg[i] = src[i];
 	}
+	public static String Ary_concat(String spr, int... ary) {
+		Bry_bfr bfr = Bry_bfr_.New();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			if (i != 0) bfr.Add_str_u8(spr);
+			int itm = ary[i];
+			bfr.Add_int_variable(itm);
+		}
+		return bfr.To_str_and_clear();
+	}
 	public static int[] AryRng(int bgn, int end) {
 		int len = end - bgn + 1;
 		int[] rv = new int[len];

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
 import gplx.core.threads.*;
 import gplx.xowa.drds.pages.*;
-import gplx.xowa.files.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.*;
 public class Xod_file_mgr {
 	private final    Gfo_thread_pool thread_pool = new Gfo_thread_pool();

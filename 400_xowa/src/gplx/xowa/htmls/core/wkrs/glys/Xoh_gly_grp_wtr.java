@@ -20,21 +20,26 @@ import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 class Xoh_gly_grp_wtr implements Bfr_arg {
 	private final    Bfr_arg_clearable[] arg_ary;
-	private final    Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_li_");
-	private final    Bfr_arg__hatr_gly_style ul_style = new Bfr_arg__hatr_gly_style(Gfh_atr_.Bry__style);
+	private final    Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_ul_");
+	private final    Bfr_arg__hatr__style ul_style = new Bfr_arg__hatr__style(Gfh_atr_.Bry__style);
+	private final    Bfr_arg__hatr__xogly ul_xogly = new Bfr_arg__hatr__xogly();
+	private final    Bfr_arg__elem__capt li_capt = new Bfr_arg__elem__capt();
 	private byte[] ul_cls, xtra_cls, xtra_atr_bry, ul_nl;
 	private final    Xoh_gly_itm_list_wtr itm_list_wtr = new Xoh_gly_itm_list_wtr();
 	public Xoh_gly_grp_wtr() {
-		arg_ary = new Bfr_arg_clearable[] {ul_id};
+		arg_ary = new Bfr_arg_clearable[] {ul_id, ul_xogly, li_capt};
 	}
-	public void Init(boolean mode_is_diff, int id, byte[] cls, int ul_style_max_w, int ul_style_w, byte[] xtra_cls, byte[] xtra_style_bry, byte[] xtra_atr_bry, Xoh_gly_itm_wtr[] ary) {
+	public void Init(boolean mode_is_diff, int id, int xnde_w, int xnde_h, int xnde_per_row, byte[] cls, int ul_style_max_w, int ul_style_w
+		, byte[] xtra_cls, byte[] xtra_style_bry, byte[] xtra_atr_bry, byte[] capt, Xoh_gly_itm_wtr[] ary) {
 		this.Clear();
 		if (!mode_is_diff)
 			ul_id.Set(id); 
+		ul_xogly.Set_args(xnde_w, xnde_h, xnde_per_row);
 		this.ul_cls = cls;
 		this.xtra_cls = xtra_cls == null ? Bry_.Empty : Bry_.Add(Byte_ascii.Space_bry, xtra_cls);
 		this.xtra_atr_bry = xtra_atr_bry;
 		this.ul_nl = ary.length == 0 ? Bry_.Empty : Byte_ascii.Nl_bry;	// TIDY: <ul></ul> should be on same line if 0 items
+		li_capt.Capt_(capt);
 		itm_list_wtr.Init(ary);
 		ul_style.Set_args(ul_style_max_w, ul_style_w, xtra_style_bry);			
 	}
@@ -48,11 +53,11 @@ class Xoh_gly_grp_wtr implements Bfr_arg {
 	public void Bfr_arg__clear() {this.Clear();}
 	public boolean Bfr_arg__missing() {return false;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		fmtr.Bld_bfr_many(bfr, ul_id, ul_cls, xtra_cls, ul_style, xtra_atr_bry, itm_list_wtr, ul_nl);
+		fmtr.Bld_bfr_many(bfr, ul_id, ul_xogly, ul_cls, xtra_cls, ul_style, xtra_atr_bry, li_capt, itm_list_wtr, ul_nl);
 	}
 	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<ul~{id} class=\"gallery mw-gallery-~{cls}~{xtra_cls}\"~{style}~{xtra_atr}>~{itms}~{ul_nl}</ul>"
-	), "id", "cls", "xtra_cls", "style", "xtra_atr", "itms", "ul_nl");
+	( "<ul~{id}~{xogly} class=\"gallery mw-gallery-~{cls}~{xtra_cls}\"~{style}~{xtra_atr}>~{capt}~{itms}~{ul_nl}</ul>"
+	), "id", "xogly", "cls", "xtra_cls", "style", "xtra_atr", "capt", "itms", "ul_nl");
 }
 class Xoh_gly_itm_list_wtr implements Bfr_arg {
 	private Xoh_gly_itm_wtr[] ary; private int ary_len;
@@ -71,41 +76,4 @@ class Xoh_gly_itm_list_wtr implements Bfr_arg {
 			itm.Bfr_arg__add(bfr);
 		}
 	}
-}
-class Bfr_arg__hatr_gly_style implements Bfr_arg {
-	private final    byte[] atr_bgn;
-	private int max_w, w;
-	private byte[] xtra_cls;
-	public Bfr_arg__hatr_gly_style(byte[] key) {
-		this.atr_bgn = Bfr_arg__hatr_.Bld_atr_bgn(key);
-		this.Clear();
-	}
-	public void Set_args(int max_w, int w, byte[] xtra_cls) {this.max_w = max_w; this.w = w; this.xtra_cls = xtra_cls;}
-	public void Clear() {max_w = 0; w = 0; xtra_cls = null;}
-	public void Bfr_arg__clear() {this.Clear();}
-	public boolean Bfr_arg__missing() {return max_w == 0 && xtra_cls == null;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (Bfr_arg__missing()) return;
-		bfr.Add(atr_bgn);
-		if (max_w > 0) {
-			bfr.Add(Style__frag_1);
-			bfr.Add_int_variable(max_w);
-			bfr.Add(Style__frag_3);
-		}
-		if (w > 0) {
-			bfr.Add_byte_space();
-			bfr.Add(Style__frag_2);
-			bfr.Add_int_variable(w);
-			bfr.Add(Style__frag_3);
-		}
-		if (xtra_cls != null) {
-			bfr.Add(xtra_cls);
-		}
-		bfr.Add_byte_quote();
-	}
-	private static final    byte[]
-	  Style__frag_1 = Bry_.new_a7("max-width:")
-	, Style__frag_2 = Bry_.new_a7("_width:")
-	, Style__frag_3 = Bry_.new_a7("px;")
-	;
 }

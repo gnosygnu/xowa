@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.core.threads.*;
-import gplx.xowa.files.gui.*; import gplx.xowa.guis.views.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.addons.wikis.searchs.specials.htmls.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_lnr {
 	private final    Srch_special_searcher mgr; private final    Srch_search_qry qry;

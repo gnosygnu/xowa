@@ -41,13 +41,22 @@ public class Io_zip_compress_cmd__jre {
 			while (true) {	// loop over bytes
 				int read_in_raw = -1;
 				try {read_in_raw = src_stream.read(buffer);}
-				catch (Exception e) {throw Err_.new_exc(e, "io", "src read failed", "url", src_url.Raw());}
+				catch (Exception e) {
+					try {src_stream.close();}
+					catch (IOException e1) {}
+					throw Err_.new_exc(e, "io", "src read failed", "url", src_url.Raw());
+				}
 				if (read_in_raw < 1) break;
 				try {trg_stream.write(buffer, 0, read_in_raw);}
-				catch (Exception e) {throw Err_.new_exc(e, "io", "trg write failed", "url", trg_url.Raw());}
+				catch (Exception e) {
+					try {src_stream.close();}
+					catch (IOException e1) {}
+					throw Err_.new_exc(e, "io", "trg write failed", "url", trg_url.Raw());
+				}
 			}
 			try {
 				trg_stream.closeEntry();
+				trg_stream.close();
 				src_stream.close();
 			}
 			catch (Exception e) {throw Err_.new_exc(e, "io", "trg close entry failed", "url", src_url.Raw());}

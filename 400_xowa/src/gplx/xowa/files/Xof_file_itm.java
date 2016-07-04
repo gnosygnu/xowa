@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.gui.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
 public interface Xof_file_itm {
 	int					Lnki_exec_tid();
 	byte[]				Lnki_wiki_abrv();

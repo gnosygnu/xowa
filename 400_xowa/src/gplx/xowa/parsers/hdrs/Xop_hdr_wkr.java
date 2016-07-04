@@ -32,7 +32,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	}
 	public int Make_tkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) bgn_pos = 0;	// do not allow -1 pos
-		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);
+		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);
 		Close_open_itms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
 		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos, Xop_xnde_tag_.Tag__h2);	// pass h2; should pass h# where # is correct #, but for purpose of Para_wkr, <h2> tag does not matter
 		int new_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
@@ -50,7 +50,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	public int Make_tkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int stackPos, int end_hdr_len) {// REF.MW: Parser|doHeadings
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_tmpl_curly_bgn) return ctx.Lxr_make_txt_(cur_pos);
 		Xop_hdr_tkn hdr = (Xop_hdr_tkn)ctx.Stack_pop_til(root, src, stackPos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_hdr);
-		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);	// end any apos; EX: ==''a==
+		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);	// end any apos; EX: ==''a==
 		int hdr_len = hdr.Hdr_level(), bgn_manual = 0, end_manual = 0;
 		boolean dirty = false;
 		if		(end_hdr_len < hdr_len) {	// mismatch: end has more; adjust hdr

@@ -48,4 +48,16 @@ public class Gfo_log__file extends Gfo_log__base {
 		Io_mgr.Instance.AppendFilByt(url, bry);
 		itms.Clear();
 	}
+	public static void Delete_old_files(Io_url dir, Gfo_log log) {
+		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(dir);
+		int fils_len = fils.length;
+		if (fils_len < 9) return;	// exit if less than 8 files
+		int cutoff = fils_len - 8;	
+		Array_.Sort(fils);			// sort by path
+		for (int i = 0; i < cutoff; ++i) {
+			Io_url fil = fils[i];
+			log.Info("deleting old log file", "file", fil.Raw());
+			Io_mgr.Instance.DeleteFil(fil);
+		}
+	}
 }

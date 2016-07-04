@@ -62,14 +62,15 @@ public class Xoh_html_wtr_escaper {
 									i = match_pos - 1;
 									break;
 								case Xop_amp_trie_itm.Tid_num_dec:
-								case Xop_amp_trie_itm.Tid_num_hex:			// ncr: dec/hex
-									boolean pass = amp_mgr.Parse_as_int(itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, i, match_pos);
-									int end_pos = amp_mgr.Rslt_pos();
-									if (pass) {								// parse worked; embed entire ncr
+								case Xop_amp_trie_itm.Tid_num_hex:			// ncr: dec/hex; escape if invalid
+									Xop_amp_mgr_rslt rslt = new Xop_amp_mgr_rslt();
+									boolean pass = amp_mgr.Parse_ncr(rslt, itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, i, match_pos);
+									if (pass) {								// parse worked; embed entire ncr; EX: "&#123;"
+										int end_pos = rslt.Pos();
 										bfr.Add_mid(src, i, end_pos);
 										i = end_pos - 1;
 									}
-									else									// parse failed; escape and continue
+									else									// parse failed; escape and continue; EX: "&#a!b;"
 										bfr.Add(Gfh_entity_.Amp_bry);
 									break;
 								default: throw Err_.new_unhandled(itm_tid);

@@ -81,12 +81,13 @@ public class Xop_sanitizer {
 									break;
 								case Xop_amp_trie_itm.Tid_num_dec:
 								case Xop_amp_trie_itm.Tid_num_hex:
-									boolean pass = amp_mgr.Parse_as_int(itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
-									if (pass)
-										bfr.Add_u8_int(amp_mgr.Rslt_val());
+									Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
+									amp_mgr.Parse_ncr(rv, itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
+									if (rv.Pass())
+										bfr.Add_u8_int(rv.Val());
 									else
 										bfr.Add_byte(Byte_ascii.Amp);
-									pos = amp_mgr.Rslt_pos();
+									pos = rv.Pos();
 									break;
 							}
 						}

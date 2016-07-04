@@ -113,11 +113,12 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 			step.Cmd_idx_next_();
 		}
 
+		// release wake_lock; will be acquired when task is run_next; DATE:2016-06-29
+		Xod_power_mgr_.Instance.Wake_lock__rls("task_mgr");
+
 		// task_regy.done
 		if (task_is_done) {
-			if (this.Len() == 0)
-				Xod_power_mgr_.Instance.Wake_lock__rls("task_mgr");
-			else
+			if (this.Len() > 0)
 				this.Run_next();
 		}
 		// task_regy.work
@@ -132,8 +133,8 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 		task.Task_status_(Gfo_prog_ui_.Status__suspended);
 		task_mgr.Send_json("xo.bldr.work.stop_cur__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()));
 	}
-	public void On_fail(Xobc_cmd_itm task, String msg) {
+	public void On_fail(Xobc_cmd_itm task, boolean resume, String msg) {
 		Xod_power_mgr_.Instance.Wake_lock__rls("task_mgr");
-		task_mgr.Send_json("xo.bldr.work.prog__fail__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()).Add_str("err", msg));
+		task_mgr.Send_json("xo.bldr.work.prog__fail__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()).Add_str("err", msg).Add_bool("resume", resume));
 	}
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hdr_hzip_tst {
-	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
+	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test   public void Same() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"'A~"
@@ -90,5 +90,17 @@ public class Xoh_hdr_hzip_tst {
 		, "<p>abc</p>"
 		, "</div>"
 		));
+	}
+	@Test   public void Manual__no_id() {// PURPOSE: ignore manual "<h2>" with no id; PAGE:fr.w:Portail:Nord-Am�rindiens/Image_s�lectionn�e; DATE:2016-07-01
+		fxt.Test__bicode
+		( "<h6><span class=\"mw-headline\">A</span></h6>"
+		, "<h6><span class='mw-headline'>A</span></h6>"
+		);
+	}
+	@Test   public void Manual__h_has_atrs() {// PURPOSE: ignore manual "<h2>" with atrs; PAGE:fr.w:Wikip�dia:LiveRC/ToDo; DATE:2016-07-02
+		fxt.Test__bicode
+		( "<h6 style=\"color:red\"><span class=\"mw-headline\" id=\"A\">B</span></h6>"
+		, "<h6 style=\"color:red\"><span class=\"mw-headline\" id=\"A\">B</span></h6>"
+		);
 	}
 }

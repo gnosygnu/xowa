@@ -147,7 +147,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xob_import_cfg		Import_cfg() {return import_cfg;} private Xob_import_cfg import_cfg;
 	public Xotdb_fsys_mgr		Tdb_fsys_mgr() {return tdb_fsys_mgr;} private final    Xotdb_fsys_mgr tdb_fsys_mgr;
 	public Xou_history_cfg		Cfg_history() {return cfg_history;} private Xou_history_cfg cfg_history = new Xou_history_cfg();
-	public Xoh_cfg_gallery		Cfg_gallery() {return cfg_gallery;} private Xoh_cfg_gallery cfg_gallery = new Xoh_cfg_gallery();
 	public Xoh_file_page_wtr	Cfg_file_page() {return cfg_file_page;} private Xoh_file_page_wtr cfg_file_page = new Xoh_file_page_wtr();
 	public Xow_sys_cfg			Sys_cfg() {return sys_cfg;} private Xow_sys_cfg sys_cfg;
 	public Xowc_parser			Cfg_parser() {return cfg_parser;} private Xowc_parser cfg_parser;
@@ -235,7 +234,6 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		if		(ctx.Match(k, Invk_files))				return file_mgr;
 		else if	(ctx.Match(k, Invk_stats))				return stats;
 		else if	(ctx.Match(k, Invk_props))				return props;
-		else if	(ctx.Match(k, Invk_cfg_gallery_))		return cfg_gallery;
 		else if	(ctx.Match(k, Invk_commons_wiki_))		commons_wiki_key = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_lang))				return lang;
 		else if	(ctx.Match(k, Invk_lang_))				throw Err_.new_deprecated("wiki.lang_");
@@ -263,7 +261,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		return this;
 	}
 	public static final String
-	  Invk_files = "files", Invk_cfg_gallery_ = "cfg_gallery_", Invk_commons_wiki_ = "commons_wiki_", Invk_stats = "stats"
+	  Invk_files = "files", Invk_commons_wiki_ = "commons_wiki_", Invk_stats = "stats"
 	, Invk_lang = "lang", Invk_html = "html", Invk_gui = "gui", Invk_cfg_history = "cfg_history", Invk_user = "user", Invk_data_mgr = "data_mgr", Invk_sys_cfg = "sys_cfg", Invk_ns_mgr = "ns_mgr"
 	, Invk_special = "special"
 	, Invk_props = "props", Invk_parser = "parser"

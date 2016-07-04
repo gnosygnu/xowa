@@ -52,6 +52,8 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__i			= 28
 	, Id__b			= 29
 	, Id__sup		= 30
+	, Id__sub		= 31
+	, Id__bdi		= 32
 	;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -94,6 +96,8 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("i"			, Id__i)
 	.Add_str_int("b"			, Id__b)
 	.Add_str_int("sup"			, Id__sup)
+	.Add_str_int("sub"			, Id__sub)
+	.Add_str_int("bdi"			, Id__bdi)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -131,6 +135,8 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__i:				return "i";
 			case Id__b:				return "b";
 			case Id__sup:			return "sup";
+			case Id__sub:			return "sub";
+			case Id__bdi:			return "bdi";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}
@@ -145,17 +151,16 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Pre_lhs					= Bry_.new_a7("<pre>")			, Pre_rhs					= Bry_.new_a7("</pre>")
 	, Div_lhs					= Bry_.new_a7("<div>")			, Div_rhs					= Bry_.new_a7("</div>")
 	, Html_rhs					= Bry_.new_a7("</html>")
-	, Head_lhs_bgn				= Bry_.new_a7("<head")
-	, Head_rhs					= Bry_.new_a7("</head>")
+	, Head_lhs_bgn				= Bry_.new_a7("<head")			, Head_rhs					= Bry_.new_a7("</head>")
 	, Style_lhs_w_type			= Bry_.new_a7("<style type=\"text/css\">")
 	, Style_rhs					= Bry_.new_a7("</style>")
-	, Script_lhs				= Bry_.new_a7("<script>")
+	, Script_lhs				= Bry_.new_a7("<script>")		, Script_rhs				= Bry_.new_a7("</script>")
 	, Script_lhs_w_type			= Bry_.new_a7("<script type='text/javascript'>")
-	, Script_rhs				= Bry_.new_a7("</script>")
-	, Span_lhs					= Bry_.new_a7("<span")
-	, Span_rhs					= Bry_.new_a7("</span>")
-	, Strong_lhs				= Bry_.new_a7("<strong>")
-	, Strong_rhs				= Bry_.new_a7("</strong>")
+	, Span_lhs					= Bry_.new_a7("<span")			, Span_rhs					= Bry_.new_a7("</span>")
+	, Strong_lhs				= Bry_.new_a7("<strong>")		, Strong_rhs				= Bry_.new_a7("</strong>")
+	, Ul_lhs					= Bry_.new_a7("<ul>")			, Ul_rhs					= Bry_.new_a7("</ul>")
+	, Li_lhs					= Bry_.new_a7("<li>")			, Li_rhs					= Bry_.new_a7("</li>")
+	, Li_lhs_bgn				= Bry_.new_a7("<li")
 	;
 	public static final String 
 	  Comm_bgn_str				= "<!--"

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.files.gui.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
+import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_rslt_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Srch_rslt_cbk_fxt fxt = new Srch_rslt_cbk_fxt();
 	@Test   public void Basic() {			

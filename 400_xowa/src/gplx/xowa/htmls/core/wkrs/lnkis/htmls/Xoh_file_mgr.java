@@ -23,11 +23,11 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_file_mgr {
-	private final Xowe_wiki wiki;
+	private final    Xowe_wiki wiki;
 	public Xoh_file_mgr(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki; this.file_wtr = new Xoh_file_wtr__basic(wiki, html_mgr, html_wtr);
 	}
-	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final Xoh_file_wtr__basic file_wtr;
+	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final    Xoh_file_wtr__basic file_wtr;
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Arg_alt_text(ctx, src, lnki));}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {

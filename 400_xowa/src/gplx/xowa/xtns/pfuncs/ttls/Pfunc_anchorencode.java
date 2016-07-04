@@ -57,7 +57,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 			case Xop_tkn_itm_.Tid_apos: break; // noop
 			case Xop_tkn_itm_.Tid_xnde: Xnde(src, (Xop_xnde_tkn)sub, tmp_bfr); break;
 			case Xop_tkn_itm_.Tid_html_ncr: tmp_bfr.Add_u8_int(((Xop_amp_tkn_num)sub).Val()); break;
-			case Xop_tkn_itm_.Tid_html_ref: tmp_bfr.Add_u8_int(((Xop_amp_tkn_txt)sub).Char_int()); break;
+			case Xop_tkn_itm_.Tid_html_ref: tmp_bfr.Add_u8_int(((Xop_amp_tkn_ent)sub).Char_int()); break;
 			case Xop_tkn_itm_.Tid_tmpl_invk:
 				Xot_invk_tkn invk_tkn = (Xot_invk_tkn)sub;
 				Arg_itm_tkn name_tkn = invk_tkn.Name_tkn().Key_tkn();

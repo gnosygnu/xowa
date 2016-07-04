@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 	private Xoae_app app; private final    Object thread_lock = new Object();
@@ -33,12 +33,12 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 		cmd_async = kit.New_cmd_async(this);
 		ev_mgr = new Gfo_evt_mgr(this);
 	}
-	public Gfo_evt_mgr			Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
+	public Gfo_evt_mgr		Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xog_tab_itm		Owner_tab() {return owner_tab;} private Xog_tab_itm owner_tab;
 	public Gfui_html		Html_box() {return html_box;} private Gfui_html html_box;
 	public Xoh_js_cbk		Js_cbk() {return js_cbk;} private Xoh_js_cbk js_cbk;
-	public Gfo_invk		Cmd_sync() {return cmd_sync;} private Gfo_invk cmd_sync;
-	public Gfo_invk		Cmd_async() {return cmd_async;} private Gfo_invk cmd_async; 
+	public Gfo_invk			Cmd_sync() {return cmd_sync;} private Gfo_invk cmd_sync;
+	public Gfo_invk			Cmd_async() {return cmd_async;} private Gfo_invk cmd_async; 
 	public void Switch_mem(Xog_html_itm comp) {
 		Xog_tab_itm temp_owner_tab = owner_tab;		// NOTE: reparent owner_tab, since owner_tab will be switching its html_itm
 		this.owner_tab = comp.owner_tab;
@@ -47,6 +47,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 	public void Html_box_(Gfui_html html_box) {
 		this.html_box = html_box;
 		html_box.Html_js_cbks_add("xowa_exec", js_cbk);
+		Gfo_evt_mgr_.Sub_same(html_box, Gfui_html.Evt_zoom_changed, this);
 	}
 	public String Html_selected_get_src_or_empty()			{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_src_or_empty);}
 	public String Html_selected_get_href_or_text()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_href_or_text));}
@@ -188,6 +189,9 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 			popup_mnu = popup_mnu_mgr.Html_link();
 		kit.Set_mnu_popup(html_box, popup_mnu.Under_mnu());
 	}
+	private void When_zoom_changed(boolean clicks_is_positive) {
+		app.Api_root().Gui().Font().Adj(clicks_is_positive ? 1 : -1);
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_img_update))					html_box.Html_js_eval_proc_as_bool	(Xog_js_procs.Doc__elem_img_update		, m.ReadStr("elem_id"), m.ReadStr("elem_src"), m.ReadInt("elem_width"), m.ReadInt("elem_height"));
 		else if	(ctx.Match(k, Invk_html_elem_atr_set))					html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Doc__atr_set				, m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
@@ -201,6 +205,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm {
 		else if (ctx.Match(k, Invk_scroll_page_by_id))					Scroll_page_by_id(m.ReadStr("v"));
 		else if (ctx.Match(k, Invk_html_elem_focus))					html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, m.ReadStr("v"));
 		else if (ctx.Match(k, GfuiElemKeys.Evt_menu_detected))			When_menu_detected();
+		else if	(ctx.Match(k, Gfui_html.Evt_zoom_changed))				When_zoom_changed(m.ReadBool("clicks_is_positive"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

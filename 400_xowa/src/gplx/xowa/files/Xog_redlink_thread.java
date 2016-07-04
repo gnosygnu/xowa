@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.threads.*; import gplx.xowa.files.gui.*;
+import gplx.core.threads.*; import gplx.xowa.guis.cbks.js.*;
 public class Xog_redlink_thread implements Gfo_thread_wkr {
 	private final    int[] redlink_ary; private final    Xog_js_wkr js_wkr;
 	public Xog_redlink_thread(int[] redlink_ary, Xog_js_wkr js_wkr) {this.redlink_ary = redlink_ary; this.js_wkr = js_wkr;}

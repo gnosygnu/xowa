@@ -77,7 +77,7 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} Io_url url;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} Bry_bfr trg_bfr; java.io.ByteArrayOutputStream mem_stream;
 	public byte[] To_ary_and_clear() {return trg_bfr.To_bry_and_clear();}
-	@SuppressWarnings("resource") public Io_stream_wtr Open() {
+	public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream = null;
 		if (trg_bfr == null) {
 			if (!Io_mgr.Instance.ExistsFil(url)) Io_mgr.Instance.SaveFilStr(url, "");			
@@ -130,7 +130,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 	@Override public byte Tid() {return Io_stream_.Tid_zip;}
 	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} private Io_url url = Io_url_.Empty;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} private Bry_bfr trg_bfr; private java.io.ByteArrayOutputStream mem_stream;
-	@SuppressWarnings("resource") // rely on zip_stream to close bry_stream 
+	// rely on zip_stream to close bry_stream 
 	public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream;
 		if (trg_bfr == null) {

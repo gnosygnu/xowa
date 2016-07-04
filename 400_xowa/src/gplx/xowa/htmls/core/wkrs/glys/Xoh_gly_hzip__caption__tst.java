@@ -21,7 +21,7 @@ public class Xoh_gly_hzip__caption__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Test   public void Capt_is_empty() {		// PURPOSE: handle empty caption
 		fxt.Test__bicode("~'!!#{\"g{\"b0#~!1A.png~9\"D\"D{\"g{\"b0#!1A.png9\"D\"D<p>abc</p>", String_.Concat_lines_nl_skip_last
-		( "<ul class='gallery mw-gallery-traditional'>"
+		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
 		,     "<div style='width:155px;'>"
 		,       "<div class='thumb' style='width:150px;'>"
@@ -44,7 +44,7 @@ public class Xoh_gly_hzip__caption__tst {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~'!!\"{\"g{\"b0\"<b><i>A1</i></b>"
 		, "~!1A.png~9\"D\"D"), String_.Concat_lines_nl_skip_last
-		( "<ul class='gallery mw-gallery-traditional'>"
+		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
 		,     "<div style='width:155px;'>"
 		,       "<div class='thumb' style='width:150px;'>"
@@ -63,7 +63,7 @@ public class Xoh_gly_hzip__caption__tst {
 		, "b</p>"
 		, "<p><br>"
 		, "~!1A.png~9\"D\"D"), String_.Concat_lines_nl_skip_last
-		( "<ul class='gallery mw-gallery-traditional'>"
+		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		, "<li class='gallerybox' style='width:155px;'>"
 		, "<div style='width:155px;'>"
 		, "<div class='thumb' style='width:150px;'>"
@@ -84,7 +84,7 @@ public class Xoh_gly_hzip__caption__tst {
 		( "~'!!\"{\"g{\"b>\"<div class=\"center\"><a href=\"/wiki/B.png\" class=\"image\" xowa_title=\"B.png\"><img data-xowa-title=\"A.png\" data-xoimg=\"0|120|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"\"></a></div>"
 		, "abc~\"\\A.png~#9\"D\"D"
 		), String_.Concat_lines_nl_skip_last
-		( "<ul class='gallery mw-gallery-traditional'>"
+		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		, "<li class='gallerybox' style='width:155px;'>"
 		, "<div style='width:155px;'>"
 		, "<div class='thumb' style='width:150px;'>"
@@ -105,7 +105,7 @@ public class Xoh_gly_hzip__caption__tst {
 		, "b"
 		, "~\"\\A.png~#9\"D\"D")
 		, String_.Concat_lines_nl_skip_last
-		( "<ul class='gallery mw-gallery-traditional'>"
+		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		, "<li class='gallerybox' style='width:155px;'>"
 		, "<div style='width:155px;'>"
 		, "<div class='thumb' style='width:150px;'>"

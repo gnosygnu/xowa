@@ -63,7 +63,7 @@ class Srch_word_count_wkr extends Percentile_select_base {
 		return rows_read > 0 || score_too_low;
 	}
 	@Override protected void Rdr__done(boolean rslts_are_enough, boolean rslts_are_done) {
-		// if (rslts_are_enough) gplx.core.consoles.Console_adp__sys.Instance.Write_str(rng_log.To_str_and_clear());
+		if (rslts_are_enough) Gfo_usr_dlg_.Instance.Log_many("", "", "search.word_count; rng=~{0}", rng_log.To_str_and_clear());
 	}
 	private static Bry_fmt
 	  Fmt__main = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last

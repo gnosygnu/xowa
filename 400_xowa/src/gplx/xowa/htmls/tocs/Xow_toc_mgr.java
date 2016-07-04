@@ -180,7 +180,7 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 					break;
 				case Xop_tkn_itm_.Tid_apos:				html_wtr.Apos		(ctx, html_wtr_opts, bfr, src, (Xop_apos_tkn)sub); break;
 				case Xop_tkn_itm_.Tid_html_ncr:			html_wtr.Html_ncr	(ctx, html_wtr_opts, bfr, src, (Xop_amp_tkn_num)sub); break;
-				case Xop_tkn_itm_.Tid_html_ref:			html_wtr.Html_ref	(ctx, html_wtr_opts, bfr, src, (Xop_amp_tkn_txt)sub); break;
+				case Xop_tkn_itm_.Tid_html_ref:			html_wtr.Html_ref	(ctx, html_wtr_opts, bfr, src, (Xop_amp_tkn_ent)sub); break;
 				default:
 					if (sub.Subs_len() == 0)	// NOTE: never call html_wtr directly unless leaf elem; DATE:2014-06-22
 						html_wtr.Write_tkn(bfr, ctx, html_wtr_opts, src, tkn, Xoh_html_wtr.Sub_idx_null, sub);
@@ -190,7 +190,7 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 			}
 		}
 	}
-	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr, boolean write_toc_cls) {
+	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr, boolean write_toc_cls) {	// write_toc_cls needed for Page_banner
 		if (!page.Hdr_mgr().Toc_enabled()) return;	// REF.MW: Parser.php|formatHeadings
 		if (hctx.Mode_is_hdump()) return;
 		this.page = page;

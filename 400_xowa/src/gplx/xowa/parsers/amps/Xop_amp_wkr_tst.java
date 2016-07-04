@@ -18,11 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_amp_wkr_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Name()					{fxt.Test_parse_page_wiki("&amp;"			, fxt.tkn_html_ref_("&amp;"));}			// check for html_ref 
-	@Test  public void Name_fail()				{fxt.Test_parse_page_wiki("&nil;"			, fxt.tkn_txt_(0, 5));}					// check for text
-	@Test  public void Hex()					{fxt.Test_parse_page_wiki("&#x3A3;"			, fxt.tkn_html_ncr_(931));}				// check for html_ncr; Σ: http://en.wikipedia.org/wiki/Numeric_character_reference
-	@Test  public void Num_fail_incomplete()	{fxt.Test_parse_page_wiki("&#"				, fxt.tkn_txt_());}
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Convert_to_named()		{fxt.Test_parse_page_wiki_str("&amp;"		, "&amp;");}	// note that &amp; is printed, not &
 	@Test  public void Convert_to_named_amp()	{fxt.Test_parse_page_wiki_str("&"			, "&amp;");}	// PURPOSE: html_wtr was not handling & only
 	@Test  public void Convert_to_numeric()		{fxt.Test_parse_page_wiki_str("&aacute;"	, "&#225;");}	// testing that &#225; is outputted, not á

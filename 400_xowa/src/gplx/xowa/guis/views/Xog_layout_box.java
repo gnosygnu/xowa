@@ -32,6 +32,7 @@ public class Xog_layout_box implements Gfo_invk {
 	public float Font_size() {return font_size;} public Xog_layout_box Font_size_(float v) {font_size = v; return this;} float font_size = Float_.NaN;
 	public FontStyleAdp Font_style() {return font_style;} public Xog_layout_box Font_style_(FontStyleAdp v) {font_style = v; return this;} FontStyleAdp font_style;
 	public byte Mode() {return mode;} public Xog_layout_box Mode_(byte v) {mode = v; return this;} private byte mode = Mode_rel;
+	public FontAdp To_font() {return Font_make(font_name, font_size, font_style);}
 	public void Adj_size(Rect_ref rect) {
 		if (w_abs > -1) rect.W_(w_abs);	if (w_rel != Int_.Min_value) rect.W_(w_rel + rect.W());
 		if (h_abs > -1) rect.H_(h_abs);	if (h_rel != Int_.Min_value) rect.H_(h_rel + rect.H());
@@ -74,7 +75,7 @@ public class Xog_layout_box implements Gfo_invk {
 		, Invk_size_abs_ = "size_abs_", Invk_pos_abs_ = "pos_abs_", Invk_rect_abs_ = "rect_abs_", Invk_size_rel_ = "size_rel_", Invk_pos_rel_ = "pos_rel_", Invk_rect_rel_ = "rect_rel_"
 		, Invk_text_ = "text_"
 		, Invk_font_name_ = "font_name_", Invk_font_size_ = "font_size_", Invk_font_style_ = "font_style_", Invk_mode_ = "mode_", Invk_owner = "owner";
-	FontAdp Font_make(String font_name, float font_size, FontStyleAdp font_style) {
+	private static FontAdp Font_make(String font_name, float font_size, FontStyleAdp font_style) {
 		String new_font_name = font_name == null ? "Arial" : font_name;
 		float new_font_size = Float_.IsNaN(font_size) ? 8 : font_size;
 		FontStyleAdp new_font_style = font_style == null ? FontStyleAdp_.Plain : font_style;

@@ -25,6 +25,7 @@ public class Srch_page_tbl_wkr {
 	public void Search(Srch_search_ctx ctx, Srch_rslt_cbk cbk) {
 		byte[] search_raw = To_bry_or_null(tmp_bfr, ctx.Scanner_syms.Wild(), ctx.Crt_mgr);	// build up search String but handle escapes "\+" -> "+"
 		if (search_raw == null) return;	// search-term has not or symbols; EX: "earth -history"; "(earth & history)"
+		Gfo_usr_dlg_.Instance.Log_many("", "", "search.search by page_tbl; search=~{0}", search_raw);
 		Xoa_ttl ttl = ctx.Wiki.Ttl_parse(search_raw); if (ttl == null) return;
 		Xowd_page_tbl page_tbl = ctx.Tbl__page;
 		if (ctx.Cxl.Canceled()) return;

@@ -179,6 +179,7 @@ public class Swt_kit implements Gfui_kit {
 		swt_html.Under_control().addMenuDetectListener(new Swt_lnr__menu_detect(this, gfui_html));
 		gfui_html.Owner_(owner);
 		swt_html.Delete_elems_(owner, gfui_html);
+		swt_html.Evt_mgr_(gfui_html.Evt_mgr());
 		return gfui_html;
 	}
 	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, Keyval... args) {

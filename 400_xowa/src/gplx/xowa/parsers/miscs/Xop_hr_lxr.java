@@ -30,7 +30,7 @@ public class Xop_hr_lxr implements Xop_lxr {
 			bgn_pos = 0;	// do not allow -1 pos
 			nl_adj = 0;		// no nl at bgn, so nl_adj = 0
 		}
-		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);
+		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);
 		ctx.CloseOpenItms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);		// close open items
 		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Hook_byt);	// gobble consecutive dashes
 		if (!bos)

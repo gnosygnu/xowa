@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.core.ios.*; import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;	
-import gplx.xowa.files.gui.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*;
 public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, Gfo_invk {	// read images from file-system dir
 	private Xowe_wiki wiki; private Fs_root_wkr_fsdb fsdb_wkr;
 	public Fs_root_fsdb_mgr(Xowe_wiki wiki) {this.Init_by_wiki(wiki); fsdb_wkr = new Fs_root_wkr_fsdb(wiki);}		

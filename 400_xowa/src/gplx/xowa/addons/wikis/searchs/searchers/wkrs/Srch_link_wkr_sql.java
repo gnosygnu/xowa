@@ -39,11 +39,11 @@ public class Srch_link_wkr_sql {
 	public String Write(Srch_search_ctx ctx, Db_attach_mgr attach_mgr) {
 		String sql = stmt_mgr.Bfr().To_str_and_clear();
 		try {
-			// gplx.core.consoles.Console_adp__sys.Instance.Write_str_w_nl("attaching: " + String_.new_u8(ctx.Qry.Phrase.Lcase_wild) + " " + Int_.To_str(ctx.Score_rng.Score_bgn()) + " " + Int_.To_str(ctx.Score_rng.Score_end()) + " " + attach_mgr.List__to_str());
+			Gfo_usr_dlg_.Instance.Log_many("", "", "search.resolving; phrase=~{0} score_bgn=~{1} score_end=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end());
 			sql = attach_mgr.Resolve_sql(sql);
 		}
 		catch (Exception e) {
-			gplx.core.consoles.Console_adp__sys.Instance.Write_str_w_nl("attaching err: " + String_.new_u8(ctx.Qry.Phrase.Orig) + " " + Int_.To_str(ctx.Score_rng.Score_bgn()) + " " + Int_.To_str(ctx.Score_rng.Score_end())  + Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "search.resolving err; phrase=~{0} score_bgn=~{1} score_end=~{2} err=~{3}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end(), Err_.Message_gplx_log(e));
 		}
 		return sql;
 	}
@@ -53,7 +53,6 @@ public class Srch_link_wkr_sql {
 		return cur_link_conn.Stmt_sql(sql);
 	}
 	public void Fill(Db_stmt stmt) {
-		// gplx.core.consoles.Console_adp__sys.Instance.Write_str_w_nl(String_.new_u8(ctx.Qry.Phrase.Orig) + " " + Int_.To_str(ctx.Score_rng.Score_bgn()) + " " + Int_.To_str(ctx.Score_rng.Score_end()));
 		stmt_mgr.Fill_stmt_and_clear(stmt);
 	}
 	private void Bld_where(Srch_search_ctx ctx, Srch_crt_itm node) {

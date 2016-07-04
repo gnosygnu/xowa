@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.htmls.core.hzips.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_itm_wtr_tst {
 	private final    Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
 	@Test   public void Basic() {
-		fxt.Init__gly(0, 155, 150, 5, "caption");
+		fxt.Init__gly(Gallery_mgr_base_.Tid__traditional, -1, -1, -1, 0, 155, 150, 5, "caption");
 		fxt.Init__img("/wiki/File:A.png", "A.png", "0|120|120|-1|-1|-1");
 		fxt.Test__write(String_.Concat_lines_nl_skip_last
 		( ""
@@ -40,8 +40,8 @@ public class Xoh_gly_itm_wtr_tst {
 class Xoh_gly_itm_wtr_fxt {
 	private final    Xoh_gly_itm_wtr wtr = new Xoh_gly_itm_wtr();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public void Init__gly(int id, int itm_w, int file_div_w, int file_div_margin, String caption) {
-		wtr.Init(Bool_.N, id, itm_w, file_div_w, file_div_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
+	public void Init__gly(byte mode, int xnde_w, int xnde_h, int xnde_per_row, int id, int itm_w, int div_1_w, int div_3_margin, String caption) {
+		wtr.Init(Bool_.N, mode, xnde_w, xnde_h, xnde_per_row, id, 0, 0, itm_w, div_1_w, div_3_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
 	}
 	public void Init__img(String href, String xowa_title, String xoimg) {
 		wtr.Img_wtr().Init_by_gly(gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(href)), Bry_.new_u8(xowa_title), gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(xoimg)));

@@ -16,11 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.threads.poolables.*;
 public class Btrie_slim_mgr implements Btrie_mgr {
+	private static Gfo_poolable_mgr pool_rv = Gfo_poolable_mgr.New_rlsable(new Btrie_rv(), Object_.Ary_empty, 0, 1024);
 	Btrie_slim_mgr(boolean case_match) {root = new Btrie_slim_itm(Byte_.Zero, null, !case_match);}	private Btrie_slim_itm root;
 	public int Count() {return count;} private int count;
 	public int Match_pos() {return match_pos;} private int match_pos;
+
+	public Btrie_rv Match_at(byte[] src, int bgn, int end) {return bgn < end  ? Match_at_w_b0(src[bgn], src, bgn, end) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
+	public Btrie_rv Match_at_w_b0(byte b, byte[] src, int bgn_pos, int src_end) {
+		Object rv_obj = null; 
+		int rv_pos = bgn_pos;
+		int cur_pos = bgn_pos;
+		Btrie_slim_itm cur = root;
+		while (true) {
+			Btrie_slim_itm nxt = cur.Ary_find(b);
+			if (nxt == null) 
+				return ((Btrie_rv)pool_rv.Get_safe()).Init(cur_pos, rv_obj);			// nxt does not hav b; return rv_obj;
+			++cur_pos;
+			if (nxt.Ary_is_empty()) {
+				return ((Btrie_rv)pool_rv.Get_safe()).Init(cur_pos, nxt.Val());			// nxt is leaf; return nxt.Val() (which should be non-null)
+			}
+			Object nxt_val = nxt.Val();
+			if (nxt_val != null) {rv_pos = cur_pos; rv_obj = nxt_val;}					// nxt is node; cache rv_obj (in case of false match)
+			if (cur_pos == src_end)
+				return ((Btrie_rv)pool_rv.Get_safe()).Init(rv_pos, rv_obj);				// increment cur_pos and exit if src_end
+			b = src[cur_pos];
+			cur = nxt;
+		}
+	}
 	public Object Match_exact(byte[] src) {return src == null ? null : Match_exact(src, 0, src.length);}
 	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
 		if (bgn_pos == end_pos) return null;	// NOTE:handle empty String; DATE:2016-04-21

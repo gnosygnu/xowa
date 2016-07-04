@@ -30,6 +30,7 @@ public class Gfo_log_ {
 	}
 	public static Gfo_log New_file(Io_url dir) {
 		Io_url url = dir.GenSubFil(DateAdp_.Now().XtoStr_fmt(File__fmt) + File__ext);
+		Gfo_log__file.Delete_old_files(dir, Gfo_log_.Instance);
 		return new Gfo_log__file(url, new Gfo_log_itm_wtr__csv());
 	}
 }

@@ -23,7 +23,7 @@ public class Xoh_make_trie_ {
 	, Tid__hiero_dir = 7, Tid__gallery_box_max = 8, Tid__gallery_box_w = 9, Tid__gallery_img_w = 10, Tid__gallery_img_pad = 11
 	, Tid__toc = 12, Tid__hdr = 13
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Bry__dir						= Bry_.new_a7("~{xowa_dir}")
 	, Bry__img						= Bry_.new_a7("xowa_img=\"")
 	, Bry__img_style				= Bry_.new_a7("xowa_img_style=\"")
@@ -37,7 +37,7 @@ public class Xoh_make_trie_ {
 //		, Bry__gallery_img_pad			= Bry_.new_a7("xowa_gly_img_pad='")
 	, Bry__toc						= Bry_.new_a7("~{xowa_toc}")
 	;
-	public static final byte[]
+	public static final    byte[]
 	  A_href_bgn				= Bry_.new_a7("/wiki/File:")
 	, Bry_img_style_bgn			= Bry_.new_a7("style='width:")
 	, Bry_img_style_end			= Bry_.new_a7("px;'")

@@ -38,7 +38,11 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         InputStream src_stream = null;
         URL src_url_itm = null;
         try     {src_url_itm = new URL(src_url);}
-        catch   (MalformedURLException e) {throw Err_.new_("download_file", "bad url", "src", src_url, "err" + e.toString());}
+        catch   (MalformedURLException e) {
+			try {trg_stream.close();}
+			catch (IOException e1) {}
+        	throw Err_.new_("download_file", "bad url", "src", src_url, "err" + e.toString());
+        }
         HttpURLConnection src_conn = null;
         try {
         	// open connection
@@ -50,12 +54,18 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
             // check response code
             int response_code = src_conn.getResponseCode();
             if (prog_resumed) {
-	            if (response_code != HttpURLConnection.HTTP_PARTIAL)
+	            if (response_code != HttpURLConnection.HTTP_PARTIAL) {
+	    			try {trg_stream.close();}
+	    			catch (IOException e1) {}
 	                throw Err_.new_("download_file", "server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+	            }
             }
             else {
-	            if (response_code != HttpURLConnection.HTTP_OK)
+	            if (response_code != HttpURLConnection.HTTP_OK) {
+	    			try {trg_stream.close();}
+	    			catch (IOException e1) {}
 	                throw Err_.new_("download_file", "server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+	            }
             }
             src_stream = src_conn.getInputStream();
         } catch (Exception e) {

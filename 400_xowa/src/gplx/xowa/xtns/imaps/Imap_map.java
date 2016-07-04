@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.xtns.imaps.itms.*; import gplx.xowa.xtns.imaps.htmls.*;
 public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
@@ -51,7 +51,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	}
 	public void Js_wkr__update_hdoc(Xoa_page page, Xog_js_wkr js_wkr, int html_uid
 		, int html_w, int html_h, Io_url html_view_url
-		, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
+		, int orig_w, int orig_h, Xof_ext orig_ext, Io_url html_orig_url, byte[] lnki_ttl) {
 		Bry_bfr tmp_bfr = Bry_bfr_.Get();
 		try {
 			Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h, lnki_ttl);

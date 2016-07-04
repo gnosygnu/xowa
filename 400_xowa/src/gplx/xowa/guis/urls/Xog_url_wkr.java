@@ -75,7 +75,7 @@ public class Xog_url_wkr {
 		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
 		if (!Io_mgr.Instance.ExistsFil(href_url)) {
 //				if (!Xof_orig_file_downloader.Get_to_url(fsdb, href_url, wiki, lnki_ttl, url_bldr))
-			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.files.gui.Xog_js_wkr_.Noop, img_size, url_bldr, page))
+			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.guis.cbks.js.Xog_js_wkr_.Noop, img_size, url_bldr, page))
 				return Rslt_handled;
 		}
 		gplx.core.ios.IoItmFil fil = Io_mgr.Instance.QueryFil(href_url);

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.files.gui.*;
+import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
 	private final    List_adp xfer_list = List_adp_.New(); private final    Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();

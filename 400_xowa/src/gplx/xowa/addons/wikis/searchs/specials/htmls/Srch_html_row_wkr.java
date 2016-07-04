@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import gplx.langs.htmls.*; import gplx.xowa.files.gui.*;
+import gplx.langs.htmls.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_row_wkr {
 	private final    Srch_html_row_bldr html_row_bldr; private final    Xog_js_wkr js_wkr;

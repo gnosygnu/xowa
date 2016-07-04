@@ -72,7 +72,7 @@ public class Xoh_html_wtr {
 				break;
 			case Xop_tkn_itm_.Tid_ignore:			break;
 			case Xop_tkn_itm_.Tid_html_ncr:			Html_ncr(ctx, hctx, bfr, src, (Xop_amp_tkn_num)tkn); break;
-			case Xop_tkn_itm_.Tid_html_ref:			Html_ref(ctx, hctx, bfr, src, (Xop_amp_tkn_txt)tkn); break;
+			case Xop_tkn_itm_.Tid_html_ref:			Html_ref(ctx, hctx, bfr, src, (Xop_amp_tkn_ent)tkn); break;
 			case Xop_tkn_itm_.Tid_hr:				Hr(ctx, hctx, bfr, src, (Xop_hr_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_apos:				Apos(ctx, hctx, bfr, src, (Xop_apos_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_lnki:				lnki_wtr.Write_lnki(bfr, hctx, src, (Xop_lnki_tkn)tkn); break;
@@ -101,7 +101,7 @@ public class Xoh_html_wtr {
 	public void Html_ncr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_num tkn)	{
 		bfr.Add_byte(Byte_ascii.Amp).Add_byte(Byte_ascii.Hash).Add_int_variable(tkn.Val()).Add_byte(Byte_ascii.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
 	}
-	public void Html_ref(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_txt tkn) {
+	public void Html_ref(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_ent tkn) {
 		if (tkn.Itm_is_custom())	// used by <nowiki>; EX:<nowiki>&#60;</nowiki> -> &xowa_lt; DATE:2014-11-07
 			tkn.Print_literal(bfr);
 		else

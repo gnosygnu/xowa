@@ -59,7 +59,14 @@ public class Gfui_html extends GfuiElemBase {
 			rv.Add(Int_.To_str(i), args[i]);	// NOTE: args[i] can be either String or String[]
 		return rv;
 	}
+
 	public static final String Atr_href = "href", Atr_title = "title", Atr_value = "value", Atr_innerHTML = "innerHTML", Atr_src = "src";
 	public static final String Elem_id_body = "body";
-	public static final String Evt_location_changed = "location_changed", Evt_location_changing = "location_changing", Evt_link_hover = "link_hover", Evt_win_resized = "win_resized";
+	public static final String
+	  Evt_location_changed	= "location_changed"
+	, Evt_location_changing = "location_changing"
+	, Evt_link_hover		= "link_hover"
+	, Evt_win_resized		= "win_resized"
+	, Evt_zoom_changed		= "zoom_changed"
+	;
 }

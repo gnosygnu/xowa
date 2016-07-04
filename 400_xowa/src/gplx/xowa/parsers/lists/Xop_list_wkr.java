@@ -40,7 +40,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		if (acsPos != -1) ctx.Stack_pop_til(root, src, acsPos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_list);
 
 		// close apos
-		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);
+		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);
 		byte symByt = src[cur_pos - 1];  // -1 b/c symByt is byte before curByt; EX: \n*a; cur_pos is at a; want to get *
 		int prvSymLen = curSymLen;
 		cur_pos = SymAry_fill(src, cur_pos, src_len, symByt);

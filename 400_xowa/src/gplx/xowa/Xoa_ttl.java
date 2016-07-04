@@ -258,12 +258,13 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 								}
 							}
 							else {
-								boolean pass = amp_mgr.Parse_as_int(amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex, src, end, cur2, match_pos);
-								if (pass) {
-									b_ary = gplx.core.intls.Utf16_.Encode_int_to_bry(amp_mgr.Rslt_val());
+								Xop_amp_mgr_rslt amp_rv = new Xop_amp_mgr_rslt();
+								amp_mgr.Parse_ncr(amp_rv, amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex, src, end, cur2, match_pos);
+								if (amp_rv.Pass()) {
+									b_ary = gplx.core.intls.Utf16_.Encode_int_to_bry(amp_rv.Val());
 									if (b_ary.length == 1 && b_ary[0] == Byte_ascii.Hash)	// NOTE: A&#x23;B should be interpreted as A#b; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
 										anch_bgn = (txt_bb_len) + 1; 
-									match_pos = amp_mgr.Rslt_pos();
+									match_pos = amp_rv.Pos();
 								}
 							}
 						}

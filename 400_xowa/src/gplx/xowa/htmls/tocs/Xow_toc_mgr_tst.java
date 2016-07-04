@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.htmls.core.htmls.*;
-public class Xow_toc_mgr_tst {		
+public class Xow_toc_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final    Xow_toc_mgr_fxt fxt = new Xow_toc_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
@@ -173,7 +173,7 @@ public class Xow_toc_mgr_tst {
 		, "  </ul>"
 		));
 	}
-	@Test   public void Encode() {
+	@Test   public void Id__encode() {
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==a+b=="
@@ -215,7 +215,7 @@ public class Xow_toc_mgr_tst {
 		, ""
 		));
 	}
-	@Test   public void Xnde_italic() {
+	@Test   public void Xnde__italic() {
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==<i>a</i>=="
@@ -230,7 +230,7 @@ public class Xow_toc_mgr_tst {
 		, "<h2><span class='mw-headline' id='a'><i>a</i></span></h2>"
 		));
 	}
-	@Test   public void Xnde_small() {
+	@Test   public void Xnde__small() {
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==<small>a</small>=="
@@ -245,7 +245,61 @@ public class Xow_toc_mgr_tst {
 		, "<h2><span class='mw-headline' id='a'><small>a</small></span></h2>"
 		));
 	}
-	@Test   public void Xnde_dangling() {	// PURPOSE: do not render dangling xndes; EX: Casualties_of_the_Iraq_War; ===<small>Iraqi Health Ministry<small>===
+	@Test   public void Xnde__li() {
+		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
+		( "__FORCETOC__"
+		, "==a<ul><li>b</li></ul>c=="
+		)
+		, String_.Concat_lines_nl
+		( fxt.toc_tbl_nl_n
+		( "  <ul>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#abc\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">ac</span></a>"	// NOTE: toctext should be "abc", not "ab"
+		, "    </li>"
+		, "  </ul>"
+		)
+		, "<h2><span class='mw-headline' id='abc'>a<ul>"
+		, "<li>b</li></ul>c</span></h2>"
+		));
+	}
+	@Test   public void Xnde__table() {
+		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
+		( "__FORCETOC__"
+		, "==a<table><tr><td>b</td></tr></table>c=="
+		)
+		, String_.Concat_lines_nl
+		( fxt.toc_tbl_nl_n
+		( "  <ul>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#a.3Ctable.3E.3Ctr.3E.3Ctd.3Eb.3C.2Ftd.3E.3C.2Ftr.3E.3C.2Ftable.3Ec\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">abc</span></a>"	// NOTE: toc id should be "abc"
+		, "    </li>"
+		, "  </ul>"
+		)
+		, "<h2><span class='mw-headline' id='a.3Ctable.3E.3Ctr.3E.3Ctd.3Eb.3C.2Ftd.3E.3C.2Ftr.3E.3C.2Ftable.3Ec'>a"
+		, "<table>"
+		, "  <tr>"
+		, "    <td>b"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, "c</span></h2>"
+		));
+	}
+	// TOMBSTONE: on MW, shows up as 'href="#ab"; <span class="toctext">ab</span>; '; TIDY doing strange things; ignore for now; DATE:2016-06-28
+	//@Test   public void Xnde__h2() {
+	//	fxt.Test_html_all(String_.Concat_lines_nl_skip_last
+	//	( "__FORCETOC__"
+	//	, "==a<h2>b</h2>c=="
+	//	)
+	//	, String_.Concat_lines_nl
+	//	( fxt.toc_tbl_nl_n
+	//	( "  <ul>"
+	//	, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#abc\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">ac</span></a>"
+	//	, "    </li>"
+	//	, "  </ul>"
+	//	)
+	//	, "<h2><span class='mw-headline' id='abc'>a<h2>b</h2>c</span></h2>"
+	//	));
+	//}
+	@Test   public void Xnde__dangling() {	// PURPOSE: do not render dangling xndes; EX: Casualties_of_the_Iraq_War; ===<small>Iraqi Health Ministry<small>===
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==<small>a<small>=="
@@ -260,7 +314,7 @@ public class Xow_toc_mgr_tst {
 		, "<h2><span class='mw-headline' id='a'><small>a<small></small></small></span></h2>"
 		));
 	}
-	@Test   public void Xnde_nest_xnde() {
+	@Test   public void Nest__xnde__small() {
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==a <sup>b<small>c</small>d</sup> e=="
@@ -275,7 +329,7 @@ public class Xow_toc_mgr_tst {
 		, "<h2><span class='mw-headline' id='a_bcd_e'>a <sup>b<small>c</small>d</sup> e</span></h2>"
 		));
 	}
-	@Test   public void Xnde_nest_lnki() {
+	@Test   public void Nest__lnki() {
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==<small>[[a|b]]</small>=="
@@ -290,7 +344,7 @@ public class Xow_toc_mgr_tst {
 		, "<h2><span class='mw-headline' id='b'><small><a href=\"/wiki/A\">b</a></small></span></h2>"
 		));
 	}
-	@Test   public void Xnde_nest_inline() {	// PURPOSE: do not render inline xndes; EX: Magnetic_resonance_imaging
+	@Test   public void Nest__br() {	// PURPOSE: do not render inline xndes; EX: Magnetic_resonance_imaging
 		fxt.Test_html_all(String_.Concat_lines_nl_skip_last
 		( "__FORCETOC__"
 		, "==a<span id=\"b\">b<br/></span>=="

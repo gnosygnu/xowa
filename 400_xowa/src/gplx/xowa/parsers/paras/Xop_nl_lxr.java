@@ -51,7 +51,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 			}
 		}
 
-		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, true);	// NOTE: frame should at end at bgn_pos (before \n) not after; else, will create tkn at (5,5), while tkn_mkr.Space creates one at (4,5); DATE:2013-10-31
+		ctx.Apos().End_frame(ctx, root, src, bgn_pos, true);	// NOTE: frame should at end at bgn_pos (before \n) not after; else, will create tkn at (5,5), while tkn_mkr.Space creates one at (4,5); DATE:2013-10-31
 		ctx.Tblw().Cell_pipe_seen_(false);	// flip off "|" in tblw seq; EX: "| a\n||" needs to flip off "|" else "||" will be seen as style dlm"; NOTE: not covered by test?
 
 		Xop_para_wkr para_wkr = ctx.Para();
@@ -113,5 +113,5 @@ public class Xop_nl_lxr implements Xop_lxr {
 		}
 		return Bry_find_.Not_found;
 	}
-	public static final Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
+	public static final    Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
 }

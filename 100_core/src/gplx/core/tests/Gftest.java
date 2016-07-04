@@ -19,8 +19,9 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
 	private static final    Bry_bfr bfr = Bry_bfr_.New();
-	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args) {Eq__array(Type_adp_.Tid__long, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary__lines(String expd, String actl, String msg_fmt, Object... msg_args) {Eq__array(Type_adp_.Tid__bry, Bry_split_.Split_lines(Bry_.new_u8(expd)), Bry_split_.Split_lines(Bry_.new_u8(actl)), msg_fmt, msg_args);}
+	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_adp_.Tid__int, expd, actl, msg_fmt, msg_args);}
+	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_adp_.Tid__long, expd, actl, msg_fmt, msg_args);}
+	public static void Eq__ary__lines(String expd, String actl, String msg_fmt, Object... msg_args)	{Eq__array(Type_adp_.Tid__bry, Bry_split_.Split_lines(Bry_.new_u8(expd)), Bry_split_.Split_lines(Bry_.new_u8(actl)), msg_fmt, msg_args);}
 	public static void Eq__ary(String[] expd, String[] actl)												{Eq__array(Type_adp_.Tid__bry, Bry_.Ary(expd), Bry_.Ary(actl), "no_msg");}
 	public static void Eq__ary(String[] expd, String[] actl, String msg_fmt, Object... msg_args)		{Eq__array(Type_adp_.Tid__bry, Bry_.Ary(expd), Bry_.Ary(actl), msg_fmt, msg_args);}
 	public static void Eq__ary(String[] expd, byte[][] actl, String msg_fmt, Object... msg_args)		{Eq__array(Type_adp_.Tid__bry, Bry_.Ary(expd), actl, msg_fmt, msg_args);}
@@ -37,6 +38,20 @@ public class Gftest {
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}
+	public static void Eq__null(boolean expd, Object actl) {Eq__null(expd, actl, null);}
+	public static void Eq__null(boolean expd, Object actl, String msg_fmt, Object... msg_args) {
+		if (	expd	&& actl == null
+			||	!expd	&& actl != null
+			) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		String expd_str = expd ? "null" : "not null";
+		String actl_str = actl == null ? "null" : "not null";
+		bfr.Add_str_a7("expd: ").Add_str_a7(expd_str).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_str_a7(actl_str).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	public static void Eq__str(String expd, byte[] actl, String msg_fmt, Object... msg_args) {Eq__str(expd, String_.new_u8(actl), msg_fmt, msg_args);}
 	public static void Eq__str(String expd, byte[] actl) {Eq__str(expd, String_.new_u8(actl), null);}
 	public static void Eq__str(String expd, String actl) {Eq__str(expd, actl, null);}
 	public static void Eq__str(String expd, String actl, String msg_fmt, Object... msg_args) {
@@ -62,6 +77,24 @@ public class Gftest {
 		Write_fail_head(bfr, msg_fmt, msg_args);
 		bfr.Add_str_a7("expd: ").Add_long_variable(expd).Add_byte_nl();
 		bfr.Add_str_a7("actl: ").Add_long_variable(actl).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	public static void Eq__byte(byte expd, byte actl) {Eq__byte(expd, actl, null);}
+	public static void Eq__byte(byte expd, byte actl, String msg_fmt, Object... msg_args) {
+		if (expd == actl) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		bfr.Add_str_a7("expd: ").Add_byte_as_a7(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_byte_as_a7(actl).Add_byte_nl();
+		bfr.Add(Bry__line_end);
+		throw Err_.new_wo_type(bfr.To_str_and_clear());
+	}
+	public static void Eq__int(int expd, int actl) {Eq__int(expd, actl, null);}
+	public static void Eq__int(int expd, int actl, String msg_fmt, Object... msg_args) {
+		if (expd == actl) return;
+		Write_fail_head(bfr, msg_fmt, msg_args);
+		bfr.Add_str_a7("expd: ").Add_int_variable(expd).Add_byte_nl();
+		bfr.Add_str_a7("actl: ").Add_int_variable(actl).Add_byte_nl();
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}
@@ -112,6 +145,7 @@ public class Gftest {
 			switch (type_id) {
 				case Type_adp_.Tid__bry: bfr.Add((byte[])Array_.Get_at(ary, idx)); break;
 				case Type_adp_.Tid__long: bfr.Add_long_variable(Long_.cast(Array_.Get_at(ary, idx))); break;
+				case Type_adp_.Tid__int: bfr.Add_int_variable(Int_.cast(Array_.Get_at(ary, idx))); break;
 				default: throw Err_.new_unhandled_default(type_id);
 			}
 		}
@@ -134,6 +168,7 @@ public class Gftest {
 				switch (tid) {
 					case Type_adp_.Tid__bry:		eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
 					case Type_adp_.Tid__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
+					case Type_adp_.Tid__int:		eq = Int_.cast(expd_obj) == Int_.cast(actl_obj); break;
 				}
 			}
 			if (!eq) {

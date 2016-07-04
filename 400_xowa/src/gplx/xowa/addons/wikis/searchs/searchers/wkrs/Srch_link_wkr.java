@@ -32,6 +32,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 	private Srch_crt_itm sql_root;
 	public void Search(Srch_rslt_list rslts_list, Srch_rslt_cbk rslt_cbk, Srch_search_ctx ctx) {
 		// init
+		Gfo_usr_dlg_.Instance.Log_many("", "", "search.search by link_tbl; search=~{0}", ctx.Qry.Phrase.Orig);
 		super.cxl = ctx.Cxl;
 		super.rng = ctx.Score_rng;
 		super.rng_log = new Percentile_rng_log(ctx.Addon.Db_mgr().Cfg().Link_score_max());
@@ -54,15 +55,15 @@ public class Srch_link_wkr extends Percentile_select_base {
 			sql_root = Srch_link_wkr_.Find_sql_root(ctx);
 			attach_mgr.Conn_others_(new Db_attach_itm("page_db", ctx.Db__core.Conn()), new Db_attach_itm("word_db", ctx.Tbl__word.conn));
 			super.Select();
-		} 
+		}
 		finally {
 			try {
-				// gplx.core.consoles.Console_adp__sys.Instance.Write_str_w_nl("detaching: " + String_.new_u8(ctx.Qry.Phrase.Lcase_wild) + " " + Int_.To_str(ctx.Score_rng.Score_bgn()) + " " + Int_.To_str(ctx.Score_rng.Score_end()) + " " + attach_mgr.List__to_str());
+				Gfo_usr_dlg_.Instance.Log_many("", "", "search.detaching; phrase=~{0} score_bgn=~{1} score_end=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end());
 				attach_mgr.Detach();
 				stmt = Db_stmt_.Rls(stmt);
 			}
 			catch (Exception e) {
-				gplx.core.consoles.Console_adp__sys.Instance.Write_str_w_nl("detaching err: " + String_.new_u8(ctx.Qry.Phrase.Orig) + " " + Int_.To_str(ctx.Score_rng.Score_bgn()) + Err_.Message_lang(e));
+				Gfo_usr_dlg_.Instance.Log_many("", "", "search.detaching fail; phrase=~{0} score_bgn=~{1} err=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), Err_.Message_gplx_log(e));
 			}
 		}
 	}	
@@ -115,7 +116,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 		rslt_cbk.On_rslts_found(ctx.Qry, rslts_list, rslts_bgn, rslts_end);
 		rslts_list.Rslts_are_first = false;
 		rslts_bgn = rslts_end;
-		// gplx.core.consoles.Console_adp__sys.Instance.Write_str(rng_log.To_str_and_clear());
+		// Gfo_usr_dlg_.Instance.Log_many("", "", "search.search rslts; rslts=~{0}", rng_log.To_str_and_clear());
 	}
 	@Override protected boolean Row__read(Db_rdr rdr) {
 		if (!rdr.Move_next()) return false;

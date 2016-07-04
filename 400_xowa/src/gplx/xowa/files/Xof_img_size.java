@@ -90,13 +90,6 @@ public class Xof_img_size {
 			}
 		}
 	}
-//		private static boolean Calc_limit_size(int exec_tid, int lnki_type, int lnki_ext) {
-//			if (lnki_type != Xop_lnki_type.Id_thumb) return false;  // only limit to size for thumb; EX:[[File:A.png|thumb|999x999px]] does not get limited but [[File:A.png|999x999px]] does  
-//			if (lnki_ext == Xof_ext_.Id_svg)						// if svg...
-//				return exec_tid == Xof_exec_tid.Tid_wiki_file;		// ... only limit to size if [[File]] page
-//			else													// not svg and thumb; always limit to size
-//				return true;
-//		}
 	public static int Calc_w(int file_w, int file_h, int lnki_h) {		// REF.MW:media/MediaHandler.php|fitBoxWidth
 		double ideal_w = (double)file_w * (double)lnki_h / (double)file_h;
 		double ideal_w_ceil = Math_.Ceil(ideal_w);
@@ -142,7 +135,7 @@ public class Xof_img_size {
 	}
 	public static final int Null = -1;
 	public static final int Thumb_width_img = 220, Thumb_width_ogv = 220;
-	public static final double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
+	public static final    double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
 	public static final int Size__neg1 = -1, Size_null = 0;	// Size_null = 0, b/c either imageMagick / inkscape fails when -1 is passed
 	public static final int Size__same_as_orig = -1;
 	private static final int Svg_max_width = 2048;

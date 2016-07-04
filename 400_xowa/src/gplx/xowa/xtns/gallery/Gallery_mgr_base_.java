@@ -16,59 +16,60 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
 public class Gallery_mgr_base_ {
-	public static byte Get_or_traditional(byte[] bry) {
-		Byte_obj_val rv = (Byte_obj_val)Hash.Get_by(bry);
-		return rv == null ? Traditional_tid : rv.Val();
+	public static final byte
+	  Tid__traditional		= 0
+	, Tid__nolines			= 1
+	, Tid__packed			= 2
+	, Tid__packed__hover	= 3
+	, Tid__packed__overlay	= 4
+	;
+	private static final    byte[]
+	  Bry__traditional		= Bry_.new_a7("traditional")
+	, Bry__nolines			= Bry_.new_a7("nolines")
+	, Bry__packed			= Bry_.new_a7("packed")
+	, Bry__packed__hover	= Bry_.new_a7("packed-hover")
+	, Bry__packed__overlay	= Bry_.new_a7("packed-overlay")
+	;
+	private static final    Hash_adp_bry bry_hash = Hash_adp_bry.ci_a7()
+	.Add_bry_byte(Bry__traditional		, Tid__traditional)
+	.Add_bry_byte(Bry__nolines			, Tid__nolines)
+	.Add_bry_byte(Bry__packed			, Tid__packed)
+	.Add_bry_byte(Bry__packed__hover	, Tid__packed__hover)
+	.Add_bry_byte(Bry__packed__overlay	, Tid__packed__overlay)
+	;
+	public static byte To_tid_or_traditional(byte[] bry) {
+		return bry_hash.Get_as_byte_or(bry, Tid__traditional);
 	}
-	public static byte[] Get_bry_by_tid(byte mode) {
-		switch (mode) {
-			case Traditional_tid:		return Traditional_bry;
-			case Nolines_tid:			return Nolines_bry;
-			case Packed_tid:			return Packed_bry;
-			case Packed_hover_tid:		return Packed_hover_bry;
-			case Packed_overlay_tid:	return Packed_overlay_bry;
-			default:					throw Err_.new_unhandled(mode);
+	public static byte To_tid_or(byte[] src, int bgn, int end, byte or) {
+		return bry_hash.Get_as_byte_or(src, bgn, end, or);
+	}
+	public static byte[] To_bry(byte tid) {
+		switch (tid) {
+			case Tid__traditional:		return Bry__traditional;
+			case Tid__nolines:			return Bry__nolines;
+			case Tid__packed:			return Bry__packed;
+			case Tid__packed__hover:	return Bry__packed__hover;
+			case Tid__packed__overlay:	return Bry__packed__overlay;
+			default:					throw Err_.new_unhandled(tid);
 		}
 	}
-	public static Gallery_mgr_base New_by_mode(byte mode) {
+	public static Gallery_mgr_base New(byte mode) {
 		switch (mode) {
 			default:
-			case Traditional_tid:		return new Gallery_mgr_traditional();
-			case Nolines_tid:			return new Gallery_mgr_nolines();
-			case Packed_tid:			return new Gallery_mgr_packed_base();
-			case Packed_hover_tid:		return new Gallery_mgr_packed_hover();
-			case Packed_overlay_tid:	return new Gallery_mgr_packed_overlay();
+			case Tid__traditional:		return new Gallery_mgr_traditional();
+			case Tid__nolines:			return new Gallery_mgr_nolines();
+			case Tid__packed:			return new Gallery_mgr_packed_base();
+			case Tid__packed__hover:	return new Gallery_mgr_packed_hover();
+			case Tid__packed__overlay:	return new Gallery_mgr_packed_overlay();
 		}
 	}
-	public static boolean Mode_is_packed(byte v) {
-		switch (v) {
-			case Packed_tid:
-			case Packed_hover_tid:
-			case Packed_overlay_tid:	return true;
+	public static boolean Mode_is_packed(byte tid) {
+		switch (tid) {
+			case Tid__packed:
+			case Tid__packed__hover:
+			case Tid__packed__overlay:	return true;
 			default:					return false;
 		}
 	}
-	public static final byte
-	  Traditional_tid		= 0
-	, Nolines_tid			= 1
-	, Packed_tid			= 2
-	, Packed_hover_tid		= 3
-	, Packed_overlay_tid	= 4
-	;
-	public static final byte[]
-	  Traditional_bry		= Bry_.new_a7("traditional")
-	, Nolines_bry			= Bry_.new_a7("nolines")
-	, Packed_bry			= Bry_.new_a7("packed")
-	, Packed_hover_bry		= Bry_.new_a7("packed-hover")
-	, Packed_overlay_bry	= Bry_.new_a7("packed-overlay")
-	;
-	public static final Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
-	.Add_bry_byte(Traditional_bry		, Traditional_tid)
-	.Add_bry_byte(Nolines_bry			, Nolines_tid)
-	.Add_bry_byte(Packed_bry			, Packed_tid)
-	.Add_bry_byte(Packed_hover_bry		, Packed_hover_tid)
-	.Add_bry_byte(Packed_overlay_bry	, Packed_overlay_tid)
-	;
 }

@@ -121,7 +121,7 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_save_as							, Xog_bnd_box_.Tid_browser				, "");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_print							, Xog_bnd_box_.Tid_browser				, "");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_print							, Xog_bnd_box_.Tid_browser				, "mod.c+key.p");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_select_all					, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_copy						, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_selection_save_file_as				, Xog_bnd_box_.Tid_browser				, "");

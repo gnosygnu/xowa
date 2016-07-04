@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.drds.pages.*; import gplx.xowa.drds.files.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;

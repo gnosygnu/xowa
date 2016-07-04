@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.core.makes.imgs.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final    Xof_orig_mgr orig_mgr; private final    Xof_bin_mgr bin_mgr; private final    Fsm_mnt_mgr mnt_mgr; private final    Xou_cache_mgr cache_mgr;

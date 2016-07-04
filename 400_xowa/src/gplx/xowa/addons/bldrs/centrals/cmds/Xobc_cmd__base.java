@@ -44,7 +44,9 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	@gplx.Virtual public String	Cmd_fallback()	{return this.Cmd_type();}
 	@gplx.Virtual public void		Cmd_clear()		{// called when restarting failed task
 		this.status = Gfo_prog_ui_.Status__init;
-		this.cmd_exec_err = null;
+		this.cmd_exec_err = null;	// reset error
+		this.data_cur = 0;			// reset progress else bad progress updates; DATE:2016-06-29
+		this.Cmd_cleanup();			// do any cleanup, such as deleting bad downloads
 	}	
 
 	public void Cmd_exec(Xobc_cmd_ctx ctx) {
@@ -57,20 +59,23 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 			Gfo_log_.Instance.Info("xobc_cmd task end", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
 			switch (status) {
 				case Gfo_prog_ui_.Status__suspended:	task_mgr.Work_mgr().On_suspended(this); break;
-				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, cmd_exec_err); break;
+				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, Bool_.N, cmd_exec_err); break;
 				case Gfo_prog_ui_.Status__working:
 					this.Prog_notify_and_chk_if_suspended(data_end, data_end);	// fire one more time for 100%; note that 100% may not fire due to timer logic below
 					task_mgr.Work_mgr().On_done(this); 
 					break;
 			}
 		} catch (Exception e) {
+			this.status = Gfo_prog_ui_.Status__fail;
 			Gfo_log_.Instance.Warn("xobc_cmd task fail", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", Err_.Message_gplx_log(e));
+			task_mgr.Work_mgr().On_fail(this, this.Cmd_fail_resumes(), Err_.Message_lang(e));
 		}
 		finally {
 			Gfo_log_.Instance.Flush();
 		}
 	}
 	protected abstract void Cmd_exec_hook(Xobc_cmd_ctx ctx);
+	@gplx.Virtual protected boolean Cmd_fail_resumes() {return false;}
 	protected void Cmd_exec_err_(String v) {
 		Gfo_log_.Instance.Warn("xobc_cmd task err", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", v);
 		this.status = Gfo_prog_ui_.Status__fail;

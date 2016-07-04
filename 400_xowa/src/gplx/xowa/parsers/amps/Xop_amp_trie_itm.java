@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
-public class Xop_amp_trie_itm {
+public class Xop_amp_trie_itm {	// TS
 	public Xop_amp_trie_itm(byte tid, int char_int, byte[] xml_name_bry) {
 		this.tid = tid;
 		this.char_int = char_int;
@@ -25,11 +25,12 @@ public class Xop_amp_trie_itm {
 		this.xml_name_bry = xml_name_bry; 
 		this.key_name_len = xml_name_bry.length - 2;	// 2 for & and ;
 	}
-	public byte		Tid()			{return tid;}			private final byte tid;
-	public int		Char_int()		{return char_int;}		private final int char_int;			// val; EX: 160
-	public byte[]	U8_bry()		{return u8_bry;}		private final byte[] u8_bry;			// EX: new byte[] {192, 160}; (C2, A0)
-	public byte[]	Xml_name_bry()	{return xml_name_bry;}	private final byte[] xml_name_bry;	// EX: "&nbsp;"
-	public int		Key_name_len()	{return key_name_len;}	private final int key_name_len;		// EX: "nbsp".Len
+	public byte		Tid()			{return tid;}			private final    byte tid;
+	public int		Char_int()		{return char_int;}		private final    int char_int;			// val; EX: 160
+	public byte[]	U8_bry()		{return u8_bry;}		private final    byte[] u8_bry;			// EX: new byte[] {192, 160}; (C2, A0)
+	public byte[]	Xml_name_bry()	{return xml_name_bry;}	private final    byte[] xml_name_bry;	// EX: "&nbsp;"
+	public int		Key_name_len()	{return key_name_len;}	private final    int key_name_len;		// EX: "nbsp".Len
+
 	public void Print_ncr(Bry_bfr bfr) {
 		switch (char_int) {
 			case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Quote: case Byte_ascii.Amp:
@@ -48,9 +49,7 @@ public class Xop_amp_trie_itm {
 			case Byte_ascii.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
 			case Byte_ascii.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
 			case Byte_ascii.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
-			default:
-				bfr.Add(u8_bry);		// write literal; EX: "[" not "&#91;"
-				break;
+			default:					bfr.Add(u8_bry); break;				// write literal; EX: "[" not "&#91;"
 		}			
 	}
 	public static final byte Tid_name_std = 1, Tid_name_xowa = 2, Tid_num_hex = 3, Tid_num_dec = 4;

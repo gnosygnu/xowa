@@ -32,6 +32,10 @@ public class Xoa_lang_mgr implements Gfo_invk {
 	public Xol_lang_itm				Get_at(int i)				{return (Xol_lang_itm)hash.Get_at(i);}
 	public Xol_lang_itm				Get_by(byte[] key)			{return (Xol_lang_itm)hash.Get_by(key);}
 	public Xol_lang_itm				Get_by_or_load(byte[] key)	{return Get_by_or_new(key).Init_by_load_assert();}
+	public Xol_lang_itm				Get_by_or_en(byte[] key) {	// called by Xowv_wiki for its .Lang()
+		Xol_lang_itm rv = Get_by(key);
+		return rv == null ? lang_en : rv;
+	}
 	public Xol_lang_itm				Get_by_or_new(byte[] key) {
 		Xol_lang_itm rv = Get_by(key);
 		if (rv == null) {

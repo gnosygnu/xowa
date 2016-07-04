@@ -79,6 +79,7 @@ public class Xog_layout implements Gfo_invk {
 		find_bwd_btn.Adj_text(win.Find_bwd_btn());
 		prog_box.Adj_text(win.Prog_box());
 		note_box.Adj_text(win.Info_box());
+		win.Tab_mgr().Tab_mgr().TextMgr().Font_(win.Url_box().TextMgr().Font());
 		Visible_(false, win.Find_box(), win.Find_bwd_btn(), win.Find_fwd_btn(), win.Find_close_btn());
 	}	private Xog_win_itm win;
 	public int Box_height_calc(Gfui_kit kit, GfuiElem url_box) {

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.ios.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.guis.cbks.js.*;
 public class Xou_file_itm_finder {
-	private final Xou_cache_mgr cache_mgr; private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final    Xou_cache_mgr cache_mgr; private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xou_file_itm_finder(Xou_cache_mgr cache_mgr) {this.cache_mgr = cache_mgr;}
 	public boolean Find(Xowe_wiki wiki, int exec_tid, Xof_file_itm xfer, byte[] page_url) {
 		byte[] lnki_ttl = xfer.Lnki_ttl();

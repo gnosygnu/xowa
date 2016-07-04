@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.ios.*;
-import gplx.xowa.files.gui.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xof_fsdb_itm implements Xof_file_itm {
 	private int lnki_upright_patch;

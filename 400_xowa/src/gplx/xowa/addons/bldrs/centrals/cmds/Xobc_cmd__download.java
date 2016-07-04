@@ -38,6 +38,8 @@ public class Xobc_cmd__download extends Xobc_cmd__base {
 	@Override public void Cmd_cleanup() {
 		wkr.Exec_cleanup();
 	}
+	@Override protected boolean Cmd_fail_resumes() {return true;}
+
 	@Override protected long Load_checkpoint_hook() {
 		return wkr.Checkpoint__load_by_trg_fil(trg_url);
 	}

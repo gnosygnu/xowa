@@ -40,7 +40,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.domain_tid = domain_itm.Domain_type_id();
 		this.domain_abrv = Xow_abrv_wm_.To_abrv(Xow_domain_itm_.parse(domain_bry));
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
-		this.lang = app.Lang_mgr().Get_by(domain_itm.Lang_actl_key());
+		this.lang = app.Lang_mgr().Get_by_or_en(domain_itm.Lang_actl_key());	// NOTE: must not be null, or causes null ref exception on redlinks in drd; DATE:2016-06-28
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));

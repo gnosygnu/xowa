@@ -19,7 +19,8 @@ package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gp
 import gplx.core.btries.*;
 import gplx.xowa.parsers.amps.*;
 public class Gfo_url_encoder_ {
-	public static final Gfo_url_encoder
+	public static Gfo_url_encoder New__id() {return Gfo_url_encoder_.New__html_id().Make();}
+	public static final    Gfo_url_encoder
 	  Id				= Gfo_url_encoder_.New__html_id().Make()
 	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
 	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()

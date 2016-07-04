@@ -98,7 +98,7 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		return Load_from_stream_as_str(stream, url_str);
 	}
-	@SuppressWarnings("resource") public static String Load_from_stream_as_str(InputStream stream, String url_str) {
+	public static String Load_from_stream_as_str(InputStream stream, String url_str) {
 		InputStreamReader reader = null;
 		try 	{reader = new InputStreamReader(stream, IoEngineArgs.Instance.LoadFilStr_Encoding);}
 		catch 	(UnsupportedEncodingException e) {
@@ -131,7 +131,7 @@ public class IoEngine_system extends IoEngine_base {
 	    Closeable_close(reader, url_str, false);
 		return sw.toString();
 	}
-	@SuppressWarnings("resource") public static byte[] Load_from_stream_as_bry(InputStream stream, String url_str) {
+	public static byte[] Load_from_stream_as_bry(InputStream stream, String url_str) {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		byte[] data = new byte[4096];
 		int read = 0;
@@ -239,7 +239,6 @@ public class IoEngine_system extends IoEngine_base {
 		if (!ExistsFil_api(url)) SaveFilText_api(IoEngine_xrg_saveFilStr.new_(url, ""));
 		return IoStream_base.new_(url, args.Mode());
 	}
-	@SuppressWarnings("resource")
 	@Override public void CopyFil(IoEngine_xrg_xferFil args) {
 		// TODO:JAVA6 hidden property ignored; 1.6 does not allow OS-independent way of setting isHidden (wnt only possible through jni)
 		boolean overwrite = args.Overwrite();
