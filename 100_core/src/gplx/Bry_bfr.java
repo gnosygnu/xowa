@@ -32,10 +32,8 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Mkr_rls() {
 		if (mkr_mgr != null) {
-			synchronized (mkr_mgr) {
-				mkr_mgr.Rls(mkr_idx);
-			}
 			synchronized (this) {
+				mkr_mgr.Rls(mkr_idx);
 				this.mkr_mgr = null;
 				this.mkr_idx = -1;
 			}
@@ -53,11 +51,11 @@ public class Bry_bfr {
 			rv = To_bry();
 			this.Clear();
 			if (reset > 0) Reset_if_gt(reset);
-			synchronized (mkr_mgr) {	// SAME: Mkr_rls()
+			synchronized (this) {	// SAME: Mkr_rls()
 				mkr_mgr.Rls(mkr_idx);
+				mkr_idx = -1;	// TS: DATE:2016-07-06
+				mkr_mgr = null;
 			}
-			mkr_mgr = null;
-			mkr_idx = -1;
 		}
 		return rv;
 	}

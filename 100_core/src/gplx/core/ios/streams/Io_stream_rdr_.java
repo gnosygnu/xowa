@@ -232,6 +232,7 @@ class Io_stream_rdr_zip implements Io_stream_rdr {
 class Io_stream_rdr_gzip extends Io_stream_rdr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_gzip;}
 	@Override public int Read(byte[] bry, int bgn, int len) {
+		synchronized (this) {
 		try {
 			int total_read = 0;
 			while (true) {  // NOTE: the gz stream reads partially; (request 100; only get back 10); keep reading until entire bfr is full or -1
@@ -246,6 +247,7 @@ class Io_stream_rdr_gzip extends Io_stream_rdr_base {
 		}
 		catch (Exception e) {
 			throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);
+		}
 		}
 	}
 	@Override public java.io.InputStream Wrap_stream(java.io.InputStream stream) {

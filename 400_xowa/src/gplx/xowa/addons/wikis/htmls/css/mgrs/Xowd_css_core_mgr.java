@@ -41,7 +41,7 @@ public class Xowd_css_core_mgr {
 			}
 			conn.Txn_end();
 		}
-		catch (Exception e) {conn.Txn_cxl(); throw e;}
+		catch (Exception e) {conn.Txn_cxl(); throw Err_.new_exc(e, "css", "Xowd_css_core_mgr.Set failed", "key", key, "err", Err_.Message_gplx_log(e));}
 	}
 	public static boolean Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
 		String dbg = "enter";

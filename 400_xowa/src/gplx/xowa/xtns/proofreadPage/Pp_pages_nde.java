@@ -92,7 +92,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (cfg_pages.Init_needed()) cfg_pages.Init(wiki.Ns_mgr());
 		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == Int_.Min_value) return Fail_msg("wiki does not have an Index ns");
 		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == Int_.Min_value) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
-		index_ttl = Xoa_ttl.parse(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
+		index_ttl = Xoa_ttl.Parse(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
 		ns_page = wiki.Ns_mgr().Ids_get_or_null(ns_page_id);
 		if (onlysection != null)
 			bgn_sect_bry = end_sect_bry = null;
@@ -269,7 +269,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)rslt.Get_at(i);
-			Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
+			Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
 			int page_leaf_val = Bry_.To_int_or(page_ttl_leaf, Int_.Min_value);			if (page_leaf_val == Int_.Min_value) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
@@ -307,7 +307,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
 				.Add_byte(Byte_ascii.Slash)				// EX: '/'
 				.Add_int_variable(page.Val());			// EX: '123'
-			rv[rv_idx++] = Xoa_ttl.parse(wiki, ttl_bfr.To_bry_and_clear());
+			rv[rv_idx++] = Xoa_ttl.Parse(wiki, ttl_bfr.To_bry_and_clear());
 		}
 		ttl_bfr.Mkr_rls(); 
 		return rv;

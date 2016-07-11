@@ -23,7 +23,7 @@ public class Rndm_root_special implements Xow_special_page {
 		Xow_ns ns = wiki.Ns_mgr().Names_get_or_main(ttl.Rest_txt());
 		// Rndm_addon.Get(wiki).Mgr().Regy().Get_rndm_page_by_ns(ns);
 		byte[] random_ttl_bry = wiki.Db_mgr().Load_mgr().Find_random_ttl(ns);
-		byte[] root_bry = Xoa_ttl.parse(wiki, random_ttl_bry).Root_txt();
+		byte[] root_bry = Xoa_ttl.Parse(wiki, random_ttl_bry).Root_txt();
 		wiki.Data_mgr().Redirect(page, ns.Gen_ttl(root_bry));
 	}
 

@@ -19,11 +19,11 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.btries.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.wkrs.escapes.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
-import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
+import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.htmls.core.wkrs.addons.timelines.*; import gplx.xowa.htmls.core.wkrs.addons.gallerys.*;
 public class Xoh_pool_mgr__hzip {
 	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private Gfo_poolable_mgr mkr__escape, mkr__xnde, mkr__lnke, mkr__lnki, mkr__hdr, mkr__img, mkr__thm, mkr__gly, mkr__img_bare, mkr__gallery, mkr__timeline;
+	private Gfo_poolable_mgr mkr__escape, mkr__xnde, mkr__lnke, mkr__lnki, mkr__hdr, mkr__img, mkr__thm, mkr__gly, mkr__img_bare, mkr__gallery, mkr__timeline, mkr__toc;
 	public Xoh_escape_hzip		Mw__escape()		{return (Xoh_escape_hzip)		mkr__escape.Get_fast();}
 	public Xoh_xnde_hzip		Mw__xnde()			{return (Xoh_xnde_hzip)			mkr__xnde.Get_fast();}
 	public Xoh_hdr_hzip			Mw__hdr()			{return (Xoh_hdr_hzip)			mkr__hdr.Get_fast();}
@@ -33,6 +33,7 @@ public class Xoh_pool_mgr__hzip {
 	public Xoh_img_bare_hzip	Mw__img_bare()		{return (Xoh_img_bare_hzip)		mkr__img_bare.Get_fast();}
 	public Xoh_thm_hzip			Mw__thm()			{return (Xoh_thm_hzip)			mkr__thm.Get_fast();}
 	public Xoh_gly_hzip			Mw__gly()			{return (Xoh_gly_hzip)			mkr__gly.Get_fast();}
+	public Xoh_toc_hzip			Mw__toc()			{return (Xoh_toc_hzip)			mkr__toc.Get_fast();}
 	public Xoh_gallery_hzip		Mw__gallery()		{return (Xoh_gallery_hzip)		mkr__gallery.Get_fast();}
 	public Xoh_timeline_hzip	Mw__timeline()		{return (Xoh_timeline_hzip)		mkr__timeline.Get_fast();}
 	public void Init() {
@@ -53,6 +54,7 @@ public class Xoh_pool_mgr__hzip {
 		mkr__thm		= Reg(New_hook_len2(mode_is_b256, hook__mw	,  5)	, new Xoh_thm_hzip());
 		mkr__gly		= Reg(New_hook_len2(mode_is_b256, hook__mw	,  6)	, new Xoh_gly_hzip());
 		mkr__img_bare	= Reg(New_hook_len2(mode_is_b256, hook__mw	,  7)	, new Xoh_img_bare_hzip());
+		mkr__toc		= Reg(New_hook_len2(mode_is_b256, hook__mw	,  8)	, new Xoh_toc_hzip());
 		mkr__gallery	= Reg(Xoh_gallery_data.Hook_bry						, new Xoh_gallery_hzip());
 		mkr__timeline	= Reg(Xoh_timeline_data.Hook_bry					, new Xoh_timeline_hzip());
 	}

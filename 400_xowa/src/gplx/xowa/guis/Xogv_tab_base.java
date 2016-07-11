@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
 import gplx.core.net.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.guis.history.*;
+import gplx.xowa.htmls.*; import gplx.xowa.guis.history.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.*; import gplx.xowa.apps.urls.*;
 import gplx.core.threads.*;
 public abstract class Xogv_tab_base {
@@ -34,7 +34,7 @@ public abstract class Xogv_tab_base {
 		Xog_history_itm old_itm = this.Cur_itm();
 		Xog_history_itm new_itm = new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);
 		Xoh_page rv = Fetch_page_and_show(old_itm, new_itm);
-		if (rv.Exists())
+		if (rv.Db().Page().Exists())
 			history_stack.Add(new_itm);
 		return rv;
 	}
@@ -47,7 +47,7 @@ public abstract class Xogv_tab_base {
 		return Fetch_page_and_show(old_itm, new_itm);
 	}
 	private Xoh_page Fetch_page_and_show(Xog_history_itm old_itm, Xog_history_itm new_itm) {
-		if (new_itm == Xog_history_itm.Null) return new Xoh_page().Exists_n_();
+		if (new_itm == Xog_history_itm.Null) return Xoh_page.New_missing();
 		Fetch_page__bgn(new_itm.Wiki(), new_itm.Page(), new_itm.Qarg());
 		Xoh_page new_hpg = new Xoh_page();
 		// Thread_adp_.Start_by_key(Xogv_page_load_wkr.Thread_name, new Xogv_page_load_wkr(wiki_mgr, url_parser, this, old_itm, new_itm), Xogv_page_load_wkr.Invk_exec);

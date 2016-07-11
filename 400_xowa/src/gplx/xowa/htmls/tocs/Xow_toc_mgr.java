@@ -190,12 +190,15 @@ public class Xow_toc_mgr implements gplx.core.brys.Bfr_arg {
 			}
 		}
 	}
-	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr, boolean write_toc_cls) {	// write_toc_cls needed for Page_banner
+	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, Bry_bfr bfr, boolean pgbnr_mode) {	// write_toc_cls needed for Page_banner
 		if (!page.Hdr_mgr().Toc_enabled()) return;	// REF.MW: Parser.php|formatHeadings
-		if (hctx.Mode_is_hdump()) return;
+		if (hctx.Mode_is_hdump()) {
+			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_tag(bfr, pgbnr_mode);
+			return;
+		}
 		this.page = page;
 		byte[] bry_contents = page.Wikie().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
-		bfmtr_main.Bld_bfr_many(bfr, write_toc_cls ? Bry_toc_cls : Bry_.Empty, Bfr_arg_.New_bry(bry_contents), this);
+		bfmtr_main.Bld_bfr_many(bfr, pgbnr_mode ? Bry_.Empty : Bry_toc_cls, Bfr_arg_.New_bry(bry_contents), this);
 	}
 	private static final    byte[]
 	  Bry_list_bgn = Bry_.new_a7("  <ul>\n")

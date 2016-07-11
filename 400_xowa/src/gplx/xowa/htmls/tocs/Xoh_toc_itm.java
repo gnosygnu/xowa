@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-class Xoh_toc_itm {// EX: <li class="toclevel-3 tocsection-3"><a href="#aaa"><span class="tocnumber">1.1.1</span> <span class="toctext">aaa</span></a></li>
+public class Xoh_toc_itm {// EX: <li class="toclevel-3 tocsection-3"><a href="#aaa"><span class="tocnumber">1.1.1</span> <span class="toctext">aaa</span></a></li>
 	public int		Uid() {return uid;} private int uid;		// uid of itm; HTML: "tocsection-3"
 	public int		Lvl() {return lvl;} private int lvl;		// indent level; HTML: "toclevel-3"
 	public int[]	Path() {return path;} private int[] path;	// path of itm; HTML: "1.1.1"

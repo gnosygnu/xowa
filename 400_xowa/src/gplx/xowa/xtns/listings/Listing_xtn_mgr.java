@@ -26,16 +26,16 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	@Override public Xox_mgr Xtn_clone_new() {return new Listing_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!Enabled()) return;
-		this.Reset(wiki);
+		this.Reset(wiki, wiki.Parser_mgr().Ctx());
 	}
 	@gplx.Internal protected Gfh_wtr Hwtr() {return hwtr;} private Gfh_wtr hwtr;
 	public void Clear() {
 		listings_template = phone_symbol = tollfree_symbol = fax_symbol = email_symbol = null;
 		checkin_msg = checkout_msg = position_template = position_text = null;
 	}
-	private void Reset(Xowe_wiki wiki) {
+	private void Reset(Xowe_wiki wiki, Xop_ctx ctx) {
 		hwtr = new Gfh_wtr();
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
+		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
 		listings_template		= Load_txt(wiki, sub_ctx, "listings-template");
 		phone_symbol			= Load_txt(wiki, sub_ctx, "listings-phone-symbol", "listings-phone");
 		tollfree_symbol			= Load_txt(wiki, sub_ctx, "listings-tollfree-symbol", "listings-tollfree");

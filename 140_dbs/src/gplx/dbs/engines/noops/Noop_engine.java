@@ -22,7 +22,7 @@ public class Noop_engine implements Db_engine {
 	public Db_conn_info			Conn_info() {return Db_conn_info_.Null;}
 	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
 	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
-	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
+	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
 	public void					Conn_open() {}
 	public void					Conn_term() {}
 	public Db_engine			New_clone(Db_conn_info url) {return this;}

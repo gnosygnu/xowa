@@ -24,7 +24,7 @@ class Pp_index_parser {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);
 		if (src == null) return Pp_index_page.Null;
 		Xop_parser sub_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
+		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
 		Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 		Xop_root_tkn index_root = tkn_mkr.Root(src);
 		byte[] mid_text = sub_parser.Parse_text_to_wtxt(index_root, sub_ctx, tkn_mkr, src);
@@ -112,7 +112,7 @@ class Pp_index_page {
 		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
 		return (Xoa_ttl[])rv.To_ary(Xoa_ttl.class);
 	}
-	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse(wiki, ns_page_id, bry);}
+	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.Parse(wiki, ns_page_id, bry);}
 	public static final    Pp_index_page Null = new Pp_index_page();
 }
 class Pp_index_arg {

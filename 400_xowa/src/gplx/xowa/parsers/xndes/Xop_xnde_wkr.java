@@ -32,6 +32,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (closing_tkn_tid == Xop_tkn_itm_.Tid_lnki_end) Xop_xnde_wkr_.AutoClose_handle_dangling_nde_in_caption(root, tkn);	// PAGE:sr.w:Сићевачка_клисура; DATE:2014-07-03
 		ctx.Msg_log().Add_itm_none(Xop_xnde_log.Dangling_xnde, src, xnde.Src_bgn(), xnde.Name_end());	// NOTE: xnde.Src_bgn to start at <; xnde.Name_end b/c xnde.Src_end is -1
 	}
+	private static final    Btrie_rv trv = new Btrie_rv();
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) bgn_pos = 0;			// do not allow -1 pos
 		if (cur_pos == src_len) return ctx.Lxr_make_txt_(src_len);		// "<" is EOS; don't raise error;
@@ -58,8 +59,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		// get node_name
 		Btrie_slim_mgr tag_trie = ctx.Xnde_tag_regy().Get_trie(ctx.Xnde_names_tid());
-		Object tag_obj = tag_trie.Match_bgn_w_byte(cur_byt, src, cur_pos, src_len);	// NOTE:tag_obj can be null in wiki_tmpl mode; EX: "<ul" is not a valid tag in wiki_tmpl, but is valid in wiki_main
-		int atrs_bgn_pos = tag_trie.Match_pos();
+		Object tag_obj; int atrs_bgn_pos;
+		synchronized (trv) {
+			tag_trie.Match_at_w_b0(trv, cur_byt, src, cur_pos, src_len);	// NOTE:tag_obj can be null in wiki_tmpl mode; EX: "<ul" is not a valid tag in wiki_tmpl, but is valid in wiki_main
+			tag_obj = trv.Obj();
+			atrs_bgn_pos = trv.Pos();
+		}
+
 		int name_bgn = cur_pos, name_end = atrs_bgn_pos;
 		int tag_end_pos = atrs_bgn_pos - 1;
 		if (tag_obj != null) {

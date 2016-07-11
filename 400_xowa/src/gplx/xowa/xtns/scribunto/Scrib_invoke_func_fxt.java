@@ -25,7 +25,7 @@ public class Scrib_invoke_func_fxt {
 	public Scrib_core Core() {return core;}
 	public void Clear_for_invoke() {
 		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
-		core_fxt = new Scrib_core_fxt();
+		core_fxt = new Scrib_core_fxt(fxt);
 		core_fxt.Clear();
 		core_fxt.Init_lib_mw();
 		core = core_fxt.Core();

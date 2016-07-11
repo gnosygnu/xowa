@@ -50,7 +50,7 @@ public class Srch_special_searcher {
 		}
 
 		// generate html; note if async, this will just generate the page header
-		page.Data_raw_(html_page_bldr.Bld_page(tmp_bfr.To_bry_and_clear()));
+		page.Db().Text().Text_bry_(html_page_bldr.Bld_page(tmp_bfr.To_bry_and_clear()));
 	}
 	public void Search__done(Srch_special_cmd cmd) {
 		cancel_hash.Del(cmd.key);

@@ -61,7 +61,7 @@ public class Sql_schema_wtr_tst {
 	}
 }
 class Sql_schema_wtr_fxt {
-	private Sql_schema_wtr sqlbldr = Sql_qry_wtr_.Sqlite.Schema_wtr();
+	private Sql_schema_wtr sqlbldr = Sql_qry_wtr_.New__sqlite().Schema_wtr();
 	public void Test_create_idx(Dbmeta_idx_itm idx, String expd) {Tfds.Eq(expd, sqlbldr.Bld_create_idx(idx));}
 	public void Test_create_tbl(Dbmeta_tbl_itm tbl, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_create_tbl(tbl));}
 	public void Test_alter_tbl_add(String tbl, Dbmeta_fld_itm fld, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_alter_tbl_add(tbl, fld));}

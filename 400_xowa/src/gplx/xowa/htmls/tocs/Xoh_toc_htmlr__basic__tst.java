@@ -165,11 +165,11 @@ class Xoh_toc_htmlr__basic__fxt {
 	private final    Xoh_toc_wtr wtr = new Xoh_toc_wtr();
 	public void Clear() {wtr.Clear();}
 	public void Init__add(int hdr_num, String hdr_txt) {wtr.Add(hdr_num, Bry_.new_u8(hdr_txt));}
-	public void Init__init_page(String toc_title, boolean page_banner) {wtr.Init(Bry_.new_u8(toc_title), page_banner);}
+	public void Init__init_page(String toc_title, boolean page_banner) {wtr.Init(Bry_.new_u8(toc_title), Bry_.Empty);}
 	public void Test__html_itms(String... expd_ary) {
 		Gftest.Eq__ary(expd_ary, String_.Ary(Bry_split_.Split_lines(wtr.Test__to_html())));
 	}
 	public void Test__html_div(String... expd_ary) {
-		Gftest.Eq__ary(expd_ary, String_.Ary(Bry_split_.Split_lines(wtr.To_html())));
+		Gftest.Eq__ary(expd_ary, String_.Ary(Bry_split_.Split_lines(wtr.To_html(false))));
 	}
 }

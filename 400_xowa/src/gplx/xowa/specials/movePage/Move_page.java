@@ -30,34 +30,33 @@ public class Move_page implements Xow_special_page {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		args.Parse(url);
 		byte[] src_ttl_bry = args.Src_ttl();
-		src_ttl = Xoa_ttl.parse(wiki, src_ttl_bry);
+		src_ttl = Xoa_ttl.Parse(wiki, src_ttl_bry);
 		if (args.Submitted()) {
 			Exec_rename(wiki, page);
 			return;
 		}
 		byte[] html = Bld_html(page);
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
-		page.Data_raw_(html);
+		page.Db().Text().Text_bry_(html);
 	}
 	private void Exec_rename(Xowe_wiki wiki, Xoae_page page) {
 		gplx.xowa.wikis.dbs.Xodb_save_mgr save_mgr = wiki.Db_mgr().Save_mgr();
 		int trg_ns_id = args.Trg_ns();
 		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_wo_type("unknown ns", "ns", trg_ns_id);
 		byte[] trg_ttl_bry = args.Trg_ttl();
-		Xoa_ttl trg_ttl = Xoa_ttl.parse(wiki, trg_ns_id, trg_ttl_bry);
+		Xoa_ttl trg_ttl = Xoa_ttl.Parse(wiki, trg_ns_id, trg_ttl_bry);
 		Xowd_page_itm src_page = new Xowd_page_itm();
 		wiki.Db_mgr().Load_mgr().Load_by_ttl(src_page, src_ttl.Ns(), src_ttl.Page_db());
-		page.Revision_data().Id_(src_page.Id());
-		page.Revision_data().Modified_on_(src_page.Modified_on());
-		page.Data_raw_(src_page.Text());
+		page.Db().Page().Id_(src_page.Id()).Modified_on_(src_page.Modified_on());
+		page.Db().Text().Text_bry_(src_page.Text());
 		if (args.Create_redirect()) {	// NOTE: not tested; DATE:2014-02-27
 			save_mgr.Data_update(page, Xop_redirect_mgr.Make_redirect_text(trg_ttl.Full_db()));
 			Xowd_page_itm trg_page = new Xowd_page_itm();
 			boolean trg_page_exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(trg_page, trg_ns, trg_ttl_bry);
 			if (trg_page_exists)
-				save_mgr.Data_update(page, page.Data_raw());
+				save_mgr.Data_update(page, page.Db().Text().Text_bry());
 			else
-				save_mgr.Data_create(trg_ttl, page.Data_raw());
+				save_mgr.Data_create(trg_ttl, page.Db().Text().Text_bry());
 		}
 		else
 			save_mgr.Data_rename(page, trg_ns_id, trg_ttl_bry);

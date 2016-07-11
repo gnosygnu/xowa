@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Xop_under_lxr_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@After public void term() {fxt.Init_para_n_();}
 	@Test   public void Toc_basic() {
@@ -98,7 +98,7 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("__DISAMBIG__", "");
 	}
 	@Test  public void Nocontentconvert() {	 // simple test; test for flag only; DATE:2014-02-06
-		gplx.xowa.wikis.pages.Xopg_html_data html_data = fxt.Page().Html_data();
+		gplx.xowa.wikis.pages.htmls.Xopg_html_data html_data = fxt.Page().Html_data();
 		Tfds.Eq(html_data.Lang_convert_content(), true);
 		Tfds.Eq(html_data.Lang_convert_title(), true);
 		fxt.Test_parse_page_all_str("__NOCONTENTCONVERT__ __NOTITLECONVERT__", " ");

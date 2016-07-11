@@ -57,7 +57,7 @@ class Xow_ttl_fxt {
 		fxt.Log_clear();
 	}
 	public void Test() {
-		Xoa_ttl actl = Xoa_ttl.parse(fxt.Wiki(), Bry_.new_u8(test_raw));
+		Xoa_ttl actl = Xoa_ttl.Parse(fxt.Wiki(), Bry_.new_u8(test_raw));
 		if (expd_err == null) {
 			if (expd_ns_id != Int_.Min_value) Tfds.Eq(expd_ns_id, actl.Ns().Id(), "ns");
 			if (expd_xwik_txt != null) Tfds.Eq(expd_xwik_txt, String_.new_u8(actl.Wik_txt()), "Wiki");

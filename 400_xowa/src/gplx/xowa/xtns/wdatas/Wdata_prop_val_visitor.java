@@ -24,8 +24,12 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
 	private Wdata_hwtr_msgs msgs;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
-	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {this.bfr = bfr; ; this.msgs = msgs; this.lang_key = lang_key;}
-	public void Visit_str(Wdata_claim_itm_str itm)							{bfr.Add(itm.Val_str());}
+	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {
+		this.bfr = bfr; this.msgs = msgs; this.lang_key = lang_key;
+	}
+	public void Visit_str(Wdata_claim_itm_str itm) {
+		bfr.Add(itm.Val_str());
+	}
 	public void Visit_time(Wdata_claim_itm_time itm) {
 		itm.Write_to_bfr(bfr, tmp_time_bfr, tmp_time_fmtr, msgs, Bry_.Empty);	// for now, don't bother passing ttl; only used for error msg; DATE:2015-08-03
 	}

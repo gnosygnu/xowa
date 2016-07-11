@@ -42,13 +42,13 @@ class Rndm_root_special_fxt {
 	public void Test_open(String special_url, String expd) {
 		Xoae_page page = Test_special_open(wiki, special_page, special_url);
 		Tfds.Eq(expd, String_.new_a7(page.Url().Page_bry()));
-		Tfds.Eq(expd, String_.new_a7(page.Data_raw()));
+		Tfds.Eq(expd, String_.new_a7(page.Db().Text().Text_bry()));
 	}
 	public static Xoae_page Test_special_open(Xowe_wiki wiki, Xow_special_page special_page, String special_url) {
 		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		Xoa_url url = wiki.Utl__url_parser().Parse(Bry_.new_u8(special_url));
 		page.Url_(url);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_a7(special_url));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7(special_url));
 		page.Ttl_(ttl);
 		special_page.Special__gen(wiki, page, url, ttl);
 		return page;

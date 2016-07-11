@@ -50,16 +50,18 @@ public class Gfo_url_encoder implements Url_encoder_interface {
 	public byte[]	Decode(byte[] bry, int bgn, int end)					{return Decode(Bool_.N, bry, bgn, end);}
 	private byte[]	Decode(boolean fail, byte[] bry, int bgn, int end)			{Bry_bfr bfr = Bry_bfr_.Get(); Decode(bfr, fail, bry, bgn, end); return bfr.To_bry_and_rls();}
 	public Bry_bfr	Decode(Bry_bfr bfr, boolean fail, byte[] bry, int bgn, int end) {
-		for (int i = bgn; i < end; ++i) {
-			byte b = bry[i];
-			if (anchor_encoder != null && b == Byte_ascii.Hash) {
-				bfr.Add_byte(Byte_ascii.Hash);
-				anchor_encoder.Decode(bfr, Bool_.N, bry, i + 1, end);
-				break;
+//			synchronized (this) {	// LOCK:DELETE; DATE:2016-07-06
+			for (int i = bgn; i < end; ++i) {
+				byte b = bry[i];
+				if (anchor_encoder != null && b == Byte_ascii.Hash) {
+					bfr.Add_byte(Byte_ascii.Hash);
+					anchor_encoder.Decode(bfr, Bool_.N, bry, i + 1, end);
+					break;
+				}
+				Gfo_url_encoder_itm itm = decode_ary[b & 0xff];// PATCH.JAVA:need to convert to unsigned byte
+				i += itm.Decode(bfr, bry, end, i, b, fail);
 			}
-			Gfo_url_encoder_itm itm = decode_ary[b & 0xff];// PATCH.JAVA:need to convert to unsigned byte
-			i += itm.Decode(bfr, bry, end, i, b, fail);
-		}
-		return bfr;
+			return bfr;
+//			}
 	}
 }

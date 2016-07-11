@@ -30,7 +30,7 @@ public class Pfunc_filepath extends Pf_func_base {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = wiki.Ttl_parse(Xow_ns_.Tid__file, val_ary); if (ttl == null) return; // text is not valid ttl; exit;
-		Xoae_page page = Load_page(wiki, ttl); if (page.Missing()) return; // page not found in wiki or commons; exit;
+		Xoae_page page = Load_page(wiki, ttl); if (page.Db().Page().Exists_n()) return; // page not found in wiki or commons; exit;
 		byte[] ttl_bry = page.Ttl().Page_url();
 
 //			Xof_orig_itm orig_itm = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(ttl_bry);
@@ -50,11 +50,13 @@ public class Pfunc_filepath extends Pf_func_base {
 	private static final    Xof_url_bldr url_bldr = new Xof_url_bldr();
 	private static Xoae_page Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
-		if (page.Missing()) {				// file not found in current wiki; try commons; 
+		if (page.Db().Page().Exists_n()) {				// file not found in current wiki; try commons; 
 			Xowe_wiki commons_wiki = (Xowe_wiki)wiki.Appe().Wiki_mgr().Get_by_or_null(wiki.Commons_wiki_key());
 			if (commons_wiki != null) {		// commons_wiki not installed; exit; DATE:2013-06-08
-				if (!Env_.Mode_testing()) commons_wiki.Init_assert();// must assert load else page_zip never detected; DATE:2013-03-10
-				page = commons_wiki.Data_mgr().Load_page_by_ttl(ttl);
+				synchronized (commons_wiki) {	// LOCK:app-level; wiki.commons; DATE:2016-07-06
+					if (!Env_.Mode_testing()) commons_wiki.Init_assert();// must assert load else page_zip never detected; DATE:2013-03-10
+					page = commons_wiki.Data_mgr().Load_page_by_ttl(ttl);
+				}
 			}
 		}
 		return page;

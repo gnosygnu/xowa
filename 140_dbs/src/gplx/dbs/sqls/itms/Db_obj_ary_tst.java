@@ -33,7 +33,7 @@ class Db_obj_ary_fxt {
 	public Db_obj_ary_fxt Init_fld(String name, int tid) {flds_list.Add(new Db_obj_ary_fld(name, tid)); return this;} private List_adp flds_list = List_adp_.New();
 	public Db_obj_ary_fxt Init_vals(Object... ary) {vals_list.Add(ary); return this;} private List_adp vals_list = List_adp_.New();
 	public Db_obj_ary_fxt Test_sql(String expd) {
-		Sql_core_wtr cmd_wtr = (Sql_core_wtr)Sql_qry_wtr_.Basic;
+		Sql_core_wtr cmd_wtr = (Sql_core_wtr)Sql_qry_wtr_.New__basic();
 		crt.Flds_((Db_obj_ary_fld[])flds_list.To_ary_and_clear(Db_obj_ary_fld.class));
 		crt.Vals_((Object[][])vals_list.To_ary_and_clear(Object[].class));
 		Bry_bfr bfr = Bry_bfr_.New();

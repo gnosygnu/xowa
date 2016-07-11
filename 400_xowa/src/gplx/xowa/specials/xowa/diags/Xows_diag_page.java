@@ -34,7 +34,7 @@ public class Xows_diag_page implements Xow_special_page {
 			case Type_sql_dump:		Xows_cmd__sql_dump.Instance.Exec(bfr, wiki.App(), url, arg_hash); break;
 		}
 		bfr.Add_str_a7("</pre>\n");
-		page.Data_raw_(bfr.To_bry_and_clear());
+		page.Db().Text().Text_bry_(bfr.To_bry_and_clear());
 	}
 	private static final    byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_file_check = 1, Type_fs_check = 2, Type_sql_dump = 3;

@@ -86,7 +86,7 @@ class Split_tbl__html implements Split_tbl {
 	public boolean					Layout_is_lot() {return Bool_.Y;}
 	public String[]				Fld_pkeys()		{return String_.Ary("page_id");}
 	public String				Fld_blob()		{return "body";}
-	public Dbmeta_fld_list		Flds()			{if (flds == null) flds = new gplx.xowa.htmls.core.dbs.Xoh_page_tbl(Db_conn_.Noop).Flds(); return flds;} private Dbmeta_fld_list flds;
+	public Dbmeta_fld_list		Flds()			{if (flds == null) flds = new gplx.xowa.htmls.core.dbs.Xowd_html_tbl(Db_conn_.Noop).Flds(); return flds;} private Dbmeta_fld_list flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{
 		if (db_id == -1)	// HACK: return core_conn just so that bin_tbl below can be created
 			return wiki.Data__core_mgr().Db__core().Conn();

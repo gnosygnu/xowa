@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte tag_pos = Xo_custom_html_pos_.Tid__head_end, tag_type = Xo_custom_html_type_.Tid__css_code;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {

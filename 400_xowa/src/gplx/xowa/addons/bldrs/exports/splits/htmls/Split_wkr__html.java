@@ -21,15 +21,15 @@ import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bl
 import gplx.xowa.htmls.core.dbs.*;
 public class Split_wkr__html implements Split_wkr {
 	private Xoh_src_tbl_mgr src_tbl_mgr;
-	private Xoh_page_tbl tbl; private Db_stmt stmt;
-	private final    Xoh_page_row trg_itm = new Xoh_page_row();
+	private Xowd_html_tbl tbl; private Db_stmt stmt;
+	private final    Xowd_html_row trg_itm = new Xowd_html_row();
 	private final    Split_rslt_wkr__html rslt_wkr = new Split_rslt_wkr__html();
 	public void Split__init(Split_ctx ctx, Xow_wiki wiki, Db_conn wkr_conn) {
 		this.src_tbl_mgr = new Xoh_src_tbl_mgr(wiki);
 		ctx.Rslt_mgr().Reg_wkr(rslt_wkr);
 	}
 	public void Split__trg__nth__new(Split_ctx ctx, Db_conn trg_conn) {
-		this.tbl = new Xoh_page_tbl(trg_conn);
+		this.tbl = new Xowd_html_tbl(trg_conn);
 		Dbmeta_fld_list trg_flds = Make_flds_for_split(tbl.Flds());
 		trg_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl.Tbl_name(), trg_flds));
 		this.stmt = trg_conn.Stmt_insert(tbl.Tbl_name(), trg_flds);
@@ -52,7 +52,7 @@ public class Split_wkr__html implements Split_wkr {
 		byte[] sidebar_div = trg_itm.Sidebar_div();
 
 		// calc db_idx based on db_size
-		int db_row_size = Xoh_page_row.Db_row_size_fixed + display_ttl.length + content_sub.length + sidebar_div.length  + body_len;
+		int db_row_size = Xowd_html_row.Db_row_size_fixed + display_ttl.length + content_sub.length + sidebar_div.length  + body_len;
 		int trg_db_id = ctx.Html_size_calc().Size_cur_add_(db_row_size);
 
 		// do insert

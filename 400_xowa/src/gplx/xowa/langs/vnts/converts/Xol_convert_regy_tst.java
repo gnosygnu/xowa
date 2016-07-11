@@ -27,7 +27,7 @@ public class Xol_convert_regy_tst {
 		fxt.Init_page("Template:Test_x1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{Test_x0}}", "{{test}}", "val");
 	}
-	@Test  public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.parse(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	@Test  public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.Parse(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 		fxt.Init_page("Template:X1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{x0}}", "{{test}}", "val");
 	}

@@ -19,7 +19,7 @@ package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sq
 import org.junit.*;
 import gplx.core.criterias.*; import gplx.dbs.sqls.*;
 public class Sql_qry_wtr__ansi__tst {
-	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.Basic;
+	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.New__basic();
 	@Test  public void Insert() {
 		tst_XtoSql
 			(	Db_qry_.insert_("people").Val_int("id", 1).Val_str("name", "me")

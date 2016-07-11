@@ -99,7 +99,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				view_grp = rv.Grp_by_tid(cur_tid);
 				prv_tid = cur_tid; 
 			}
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
 			Xoctg_view_itm view_itm = new Xoctg_view_itm();
 			view_itm.Set__page(cur_tid, db_page.Id());
 			view_itm.Set__ttl__sortkey(ttl, db_ctg.Sortkey());
@@ -167,7 +167,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
 			Xoctg_view_itm ctg_itm = new Xoctg_view_itm();
 			ctg_itm.Set__page(ctg_tid, page.Id());
-			ctg_itm.Set__ttl__sortkey(Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
+			ctg_itm.Set__ttl__sortkey(Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
 			ctg_grp.Itms_add(ctg_itm);
 			rv = true;
 		}

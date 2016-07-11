@@ -42,5 +42,5 @@ class Xot_prm_wkr implements Xop_arg_wkr {
 		}
 		return true;
 	}
-	public static final Xot_prm_wkr Instance = new Xot_prm_wkr(); Xot_prm_wkr() {}
+	public static final    Xot_prm_wkr Instance = new Xot_prm_wkr(); Xot_prm_wkr() {}
 }

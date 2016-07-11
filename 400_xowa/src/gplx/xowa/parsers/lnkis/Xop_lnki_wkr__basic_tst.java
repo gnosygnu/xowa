@@ -143,9 +143,9 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_wiki("[[a|]]", fxt.tkn_lnki_().Trg_tkn_(fxt.tkn_arg_val_txt_(2, 3)));
 	}
 	@Test  public void Exc_empty() {
-		fxt.Init_log_(Xop_ttl_log.Len_0, Xop_lnki_log.Invalid_ttl);
+		fxt.Init_log_(Xop_lnki_log.Invalid_ttl);
 		fxt.Test_parse_page_wiki("[[]]", fxt.tkn_txt_(0, 2), fxt.tkn_txt_(2, 4));
-		fxt.Init_log_(Xop_ttl_log.Len_0, Xop_lnki_log.Invalid_ttl);
+		fxt.Init_log_(Xop_lnki_log.Invalid_ttl);
 		fxt.Test_parse_page_wiki("[[ ]]", fxt.tkn_txt_(0, 2), fxt.tkn_space_(2, 3), fxt.tkn_txt_(3, 5));
 	}
 	@Test  public void Exc_invalid_u8() {	// PURPOSE: "%DO" is an invalid UTF-8 sequence (requires 2 bytes, not just %D0); DATE:2013-11-11
@@ -306,10 +306,10 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test  public void Visited() { // PURPOSE: show redirected titles as visited; EX:fr.w:Alpes_Pennines; DATE:2014-02-28
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_a7("Src"));		// simulate requrest for "Src" page
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7("Src"));								// simulate requrest for "Src" page
 		Xoae_page previous_page = Xoae_page.New_test(wiki, ttl);
-		previous_page.Redirected_ttls().Add(Bry_.new_a7("Src"));		// simulate redirect from "Src"
-		fxt.App().Usere().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call
+		previous_page.Redirect().Itms__add__article(previous_page.Url(), ttl, null);		// simulate redirect from "Src"
+		fxt.App().Usere().History_mgr().Add(previous_page);									// simulate "Src" already being clicked once; this is the key call
 		fxt.Wtr_cfg().Lnki_visited_y_();
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited

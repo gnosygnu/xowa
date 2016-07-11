@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Pft_func_time__basic__tst {
-	@Before	public void init()					{fxt.Reset(); Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private final Xop_fxt fxt = new Xop_fxt();
+	@Before	public void init()					{fxt.Reset(); Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term()				{Tfds.Now_enabled_n_();}
 	@Test   public void Utc_date()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2012-01-02 03:04:05}}"				, "2012-01-02");}
 	@Test   public void Utc_time()				{fxt.Test_parse_tmpl_str("{{#time:h:i:s A|2012-01-02 03:04:05}}"			, "03:04:05 AM");}

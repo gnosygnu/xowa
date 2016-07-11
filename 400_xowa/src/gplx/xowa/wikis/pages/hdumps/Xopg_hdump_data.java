@@ -15,9 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.htmls.core.makes.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.makes.*;
-import gplx.xowa.files.*;
-public class Xohd_img_itm__img extends Xohd_img_itm__base {
-	@Override public int Img_tid() {return Xohd_img_itm__base.Tid_basic;}
-	@Override public byte Html_elem_tid() {return Xof_html_elem.Tid_img;}
+package gplx.xowa.wikis.pages.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.htmls.tocs.*;
+public class Xopg_hdump_data {
+	public List_adp					Imgs()		{return imgs;}		private final    List_adp imgs = List_adp_.New();
+	public Xoh_toc_wtr				Toc_wtr()	{return toc_wtr;}	private final    Xoh_toc_wtr toc_wtr = new Xoh_toc_wtr(); 
+	public void Clear() {
+		imgs.Clear();
+		toc_wtr.Clear();
+	}
 }

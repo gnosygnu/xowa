@@ -29,10 +29,12 @@ public class Io_stream_zip_mgr {
 		return wtr.To_ary_and_clear();
 	}
 	public byte[] Unzip(byte type, byte[] val) {
-		if (type == Io_stream_.Tid_raw) return val;
-		Io_stream_rdr rdr = Rdr(type);
-		rdr.Open_mem(val);
-		return Io_stream_rdr_.Load_all_as_bry(bfr, rdr);
+		synchronized (this) {	// LOCK:static-obj;rdr_*;necessary; DATE:2016-07-06
+			if (type == Io_stream_.Tid_raw) return val;
+			Io_stream_rdr rdr = Rdr(type);
+			rdr.Open_mem(val);
+			return Io_stream_rdr_.Load_all_as_bry(bfr, rdr);
+		}
 	}
 	private Io_stream_wtr Wtr(byte type) {
 		switch (type) {

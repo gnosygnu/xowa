@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import org.junit.*;
+import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_qry_sql_tst {
 	@Before public void init() {fxt.Clear();} private Db_qry_sql_fxt fxt = new Db_qry_sql_fxt();
 	@Test  public void Insert() {
@@ -42,6 +42,7 @@ public class Db_qry_sql_tst {
 	}
 }
 class Db_qry_sql_fxt {
+	private final    Sql_qry_wtr qry_wtr = Sql_qry_wtr_.New__sqlite();
 	public void Clear() {}
-	public void Test_qry(Db_qry qry, Object[] vals, String expd) {Tfds.Eq(expd, Db_qry_sql.Gen_sql(qry, vals));}
+	public void Test_qry(Db_qry qry, Object[] vals, String expd) {Tfds.Eq(expd, Db_qry_sql.Gen_sql(qry_wtr, qry, vals));}
 }

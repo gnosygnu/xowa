@@ -88,7 +88,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		DateAdp modified_on = tmp_page.Modified_on();
 		if (update_modified_on_enabled) {
 			modified_on = DateAdp_.Now();
-			page.Revision_data().Modified_on_(modified_on);
+			page.Db().Page().Modified_on_(modified_on);
 		}
 		Xotdb_page_itm_.Txt_page_save(tmp_bfr, db_page.Id(), modified_on, ttl_bry, text, true);
 		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.To_bry_and_clear());

@@ -31,11 +31,6 @@ public class Xoh_toc_wkr__txt__basic__tst {
 	@Test   public void Encode() {
 		fxt.Test__both("a+b", "a.2Bb", "a+b");
 	}
-	@Test   public void Dupe() {
-		fxt.Test__both("a", "a", "a");
-		fxt.Test__both("a", "a_2", "a");
-		fxt.Test__both("A", "A_3", "A");
-	}
 	@Test   public void Comment() {
 		fxt.Test__text("a<!--b-->c", "ac");
 	}
@@ -54,11 +49,11 @@ class Xoh_toc_wkr__txt__fxt {
 	private final    Xoh_toc_itm itm = new Xoh_toc_itm();
 	private final    Bry_bfr tmp = Bry_bfr_.New();
 	public void Clear() {wkr.Clear();}
-	public void Test__id  (String html, String expd_id)		{Test__both(html, expd_id, null);}
+	public void Test__anch(String html, String expd_anch)	{Test__both(html, expd_anch, null);}
 	public void Test__text(String html, String expd_text)	{Test__both(html, null, expd_text);}
 	public void Test__both(String html, String expd)		{Test__both(html, expd, expd);}
 	public void Test__both(String html, String expd_anch, String expd_text) {
-		wkr.Calc_anch_text(itm, Bry_.new_u8(html));
+		wkr.Calc_anch_text(itm, Bry_.Empty, Bry_.new_u8(html));
 		if (expd_anch != null)	Gftest.Eq__str(expd_anch, itm.Anch(), "anch");
 		if (expd_text != null)	Gftest.Eq__str(expd_text, itm.Text(), "text");
 	}

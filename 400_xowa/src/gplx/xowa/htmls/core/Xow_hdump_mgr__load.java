@@ -19,20 +19,20 @@ package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.ios.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xow_hdump_mgr__load {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
-		this.make_mgr = new Xoh_make_mgr(wiki.App().Usr_dlg(), wiki.App().Fsys_mgr(), gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx, wiki.Domain_bry());			
+		this.make_mgr = new Xoh_make_mgr();
 	}
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
 	public void Load_by_edit(Xoae_page wpg) {
-		tmp_hpg.Init(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Revision_data().Id());
+		tmp_hpg.Init(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
 		Load(tmp_hpg, wpg.Ttl());
-		wpg.Hdump_data().Body_(tmp_hpg.Body());
+		wpg.Db().Html().Html_bry_(tmp_hpg.Db().Html().Html_bry());
 		wpg.Root_(new gplx.xowa.parsers.Xop_root_tkn());	// HACK: set root, else load page will fail
 		Fill_page(wpg, tmp_hpg);
 	}
@@ -48,13 +48,13 @@ public class Xow_hdump_mgr__load {
 			if (!loaded) {		// nothing in "page" table
 				byte[] page_override = override_mgr__page.Get_or_same(ttl.Page_db(), null);
 				if (page_override == null) return Load__fail(hpg);
-				hpg.Body_(page_override);
+				hpg.Db().Html().Html_bry_(page_override);
 				return true;
 			}
 			Xow_db_file html_db = wiki.Data__core_mgr().Dbs__get_by_id_or_fail(tmp_dbpg.Html_db_id());
 			if (!html_db.Tbl__html().Select_by_page(hpg)) return Load__fail(hpg);			// nothing in "html" table
-			byte[] src = Parse(hpg, hpg.Body_zip_tid(), hpg.Body_hzip_tid(), hpg.Body());
-			hpg.Body_(src);
+			byte[] src = Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
+			hpg.Db().Html().Html_bry_(src);
 			return true;
 		}
 	}
@@ -85,25 +85,27 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__hiero().Enabled_			(hpg_head.Hiero_exists());
 		wpg_head.Itm__timeline().Enabled_		(hpg.Xtn__timeline_exists());
 		wpg_head.Itm__gallery_styles().Enabled_	(hpg.Xtn__gallery_exists());
+		wpg_head.Itm__toc().Enabled_(hpg.Hdump_mgr().Toc_wtr().Exists());
+		wpg_head.Itm__pgbnr().Enabled_(hpg.Html_data().Head_mgr().Itm__pgbnr().Enabled());
 
 		// transfer images from Xoh_page to Xoae_page 
 		Xoh_img_mgr src_imgs = hpg.Img_mgr();
 		int len = src_imgs.Len();
 		for (int i = 0; i < len; ++i) {
 			gplx.xowa.files.Xof_fsdb_itm itm = src_imgs.Get_at(i);
-			wpg.Hdump_data().Imgs().Add(itm);
+			wpg.Hdump_mgr().Imgs().Add(itm);
 			wpg.File_queue().Add(itm);	// add to file_queue for http_server
 		}
 
 		// transfer redlinks
-		Xopg_lnki_list src_list = hpg.Redlink_list();
-		Xopg_lnki_list trg_list = wpg.Redlink_list();
+		Xopg_lnki_list src_list = hpg.Html_data().Redlink_list();
+		Xopg_lnki_list trg_list = wpg.Html_data().Redlink_list();
 		len = src_list.Len();
 		for (int i = 0; i < len; ++i) {
 			trg_list.Add_direct(src_list.Get_at(i));
 		}
 	}
-	private static boolean Load__fail(Xoh_page hpg) {hpg.Exists_n_(); return false;}
+	private static boolean Load__fail(Xoh_page hpg) {hpg.Db().Page().Exists_n_(); return false;}
 	private static boolean Load__dbpg(Xow_wiki wiki, Xowd_page_itm dbpg, Xoh_page hpg, Xoa_ttl ttl) {
 		wiki.Data__core_mgr().Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());
 		if (dbpg.Redirect_id() != -1) Load__dbpg__redirects(wiki, dbpg);

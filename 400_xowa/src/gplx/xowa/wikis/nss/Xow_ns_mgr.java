@@ -21,9 +21,10 @@ import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	private Ordered_hash id_hash = Ordered_hash_.New();		// hash for retrieval by id
-	private Hash_adp_bry name_hash;								// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
-	private Hash_adp_bry tmpl_hash;								// hash for retrieval by name; PERF for templates
+	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
+	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
 	private Ordered_hash aliases = Ordered_hash_.New();		// hash to store aliases; used to populate name_hash;
+	private final    Int_obj_ref id_hash_ref = Int_obj_ref.New_zero();
 	public Xow_ns_mgr(Xol_case_mgr case_mgr) {
 		name_hash = Hash_adp_bry.ci_u8(case_mgr);
 		tmpl_hash = Hash_adp_bry.ci_u8(case_mgr);
@@ -55,7 +56,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	public Xow_ns		Ords_get_at(int ord)	{return ords[ord];}
 	public int			Ids_len()				{return id_hash.Count();}
 	public Xow_ns		Ids_get_at(int idx)		{return (Xow_ns)id_hash.Get_at(idx);}
-	public Xow_ns		Ids_get_or_null(int id) {return (Xow_ns)id_hash.Get_by(ns_hash_lkp.Val_(id));} private Int_obj_ref ns_hash_lkp = Int_obj_ref.New_zero();
+	public Xow_ns		Ids_get_or_null(int id) {synchronized (id_hash_ref) {return (Xow_ns)id_hash.Get_by(id_hash_ref.Val_(id));}}	// LOCK:hash-key; DATE:2016-07-06
 	private Xow_ns		Ids_get_or_empty(int id) {
 		Xow_ns rv = Ids_get_or_null(id);
 		return rv == null ? Ns__empty : rv;
@@ -161,8 +162,10 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 				break;
 		}
 		++ns_count;
-		if (!id_hash.Has(ns_hash_lkp.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
+		synchronized (id_hash_ref) {	// LOCK:hash-key; DATE:2016-07-06
+		if (!id_hash.Has(id_hash_ref.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
 			id_hash.Add(Int_obj_ref.New(ns.Id()), ns);
+		}
 		name_hash.Add_if_dupe_use_nth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns.Name_db(), ns));
 		return this;
 	}

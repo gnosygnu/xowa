@@ -42,7 +42,7 @@ class Dpl_itm {
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
 	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
-		sub_ctx = Xop_ctx.new_sub_(wiki);
+		sub_ctx = Xop_ctx.new_sub_(ctx);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
 		sub_root = sub_tkn_mkr.Root(Bry_.Empty);
 		int content_bgn = xnde.Tag_open_end(), content_end = xnde.Tag_close_bgn();

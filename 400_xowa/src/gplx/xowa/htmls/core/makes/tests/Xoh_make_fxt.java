@@ -27,8 +27,8 @@ public class Xoh_make_fxt {
 		parser_fxt.Reset();
 		page_chkr.Clear();
 	}
-	public Xoh_page_chkr Page_chkr() {return page_chkr;} private final Xoh_page_chkr page_chkr = new Xoh_page_chkr();
-	public Xop_fxt Parser_fxt() {return parser_fxt;} private final Xop_fxt parser_fxt = new Xop_fxt();
+	public Xoh_page_chkr Page_chkr() {return page_chkr;} private final    Xoh_page_chkr page_chkr = new Xoh_page_chkr();
+	public Xop_fxt Parser_fxt() {return parser_fxt;} private final    Xop_fxt parser_fxt = new Xop_fxt();
 	public void Init_img_cache
 		( String wiki_abrv, String lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page
 		, boolean repo_is_commons, String html_ttl, int html_w, int html_h, double html_time, int html_page
@@ -47,7 +47,7 @@ public class Xoh_make_fxt {
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
 		Xoh_make_mgr make_mgr = parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr();			
 		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), actl, parser_fxt.Wiki());
-		actl.Body_(actl_body);
+		actl.Db().Html().Html_bry_(actl_body);
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 		chkr.Check(actl);
 	}

@@ -27,8 +27,11 @@ public class Xol_specials_mgr implements Gfo_invk {
 	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.Get_by(alias);}
 	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.Get_by(special);}
 	public void Add(byte[] special, byte[][] alias_ary) {
-		Xol_specials_itm itm = new Xol_specials_itm(special, alias_ary);
-		hash_by_special.Add(special, itm);
+		Xol_specials_itm itm = (Xol_specials_itm)hash_by_special.Get_by(special);
+		if (itm == null) {	// NOTE: most items will be null, but MessagesCs.php has two entries for PasswordReset; DATE:2016-07-08
+			itm = new Xol_specials_itm(special, alias_ary);
+			hash_by_special.Add(special, itm);
+		}
 		int len = alias_ary.length;
 		for (int i = 0; i < len; i++) {
 			byte[] alias = alias_ary[i];

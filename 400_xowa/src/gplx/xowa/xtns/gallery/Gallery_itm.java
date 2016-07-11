@@ -61,21 +61,4 @@ public class Gallery_itm implements Js_img_wkr {
 			bfr.Mkr_rls(); tmp_bfr.Mkr_rls();
 		}
 	}
-//		public static void Js_wkr__update_hdoc2(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Io_url html_orig_url, byte[] lnki_ttl) {
-//			Xow_wiki wiki = null;			
-//			Gallery_mgr_base gallery_mgr = null;
-//			Bry_bfr bfr = null, tmp_bfr = null;
-//			Xof_file_itm xfer_itm = null;
-//			try {
-//				xfer_itm.Init_at_gallery_end(html_w, html_h, html_view_url, html_orig_url);
-////				Gallery_mgr_wtr.Write_itm(bfr, tmp_bfr, wiki.Appe(), wiki, ctx.Page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, gallery_mgr, xnde, gallery_itm_idx, xfer_itm);
-////				String itm_html = bfr.To_str_and_clear();
-////				js_wkr.Html_elem_replace_html(String_.new_u8(gallery_li_id_bry), itm_html);
-////				if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
-////					page.Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
-//			}
-//			finally {
-//				bfr.Mkr_rls(); tmp_bfr.Mkr_rls();
-//			}
-//		}
 }

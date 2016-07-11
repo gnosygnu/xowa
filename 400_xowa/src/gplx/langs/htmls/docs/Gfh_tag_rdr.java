@@ -112,6 +112,133 @@ public class Gfh_tag_rdr {
 				return false;
 		}
 	}
+	public Gfh_tag Tag__move_fwd_tail(byte[] find_tag_bry)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, find_tag_bry);}
+	private Gfh_tag Tag__find(boolean move, boolean bwd, boolean tail, int rng_bgn, int rng_end, byte[] find_tag_bry) {
+		int tmp = rng_bgn;
+		int stop_pos = rng_end; int adj = 1;
+		if (bwd) {
+			stop_pos = -1;
+			adj = -1;
+			--tmp;	// subtract 1 from tmp; needed when pos is at src_len, else array error below
+		}
+		tmp_depth.Val_zero_();
+		Gfh_tag rv = null;
+		while (tmp != stop_pos) {
+			if (src[tmp] == Byte_ascii.Angle_bgn) {
+				rv = Tag__extract(move, tail, find_tag_bry, tmp);
+				if (Bry_.Eq(rv.Name_bry(), Gfh_tag_.Bry__xowa_comment)) {	// ignore comments DATE:2016-06-25
+					tmp = rv.Src_end();
+					rv = null;	// null rv, else rv will still be comment and may get returned to caller
+					continue;
+				}
+				if (Tag__match(move, bwd, tail, find_tag_bry, tmp_depth, rv))
+					break;
+				else {
+					tmp = bwd ? rv.Src_bgn() - 1 : rv.Src_end();
+					rv = null;
+				}
+			}
+			else
+				tmp += adj;
+		}
+		if (rv == null) {
+			if (move && tail && !bwd)
+				err_wkr.Fail("move tag fwd failed", "tag_name", find_tag_bry);
+			else
+				return Tag__eos(rng_bgn);
+		}
+		if (move) pos = rv.Src_end();
+		return rv;
+	}
+	private boolean Tag__match(boolean move, boolean bwd, boolean tail, byte[] find_tag_bry, Int_obj_ref depth_obj, Gfh_tag tag) {
+		byte[] cur_tag_bry = tag.Name_bry();
+		if (	!Bry_.Eq(cur_tag_bry, find_tag_bry)				// tag doesn't match requested
+			&&	find_tag_bry != Gfh_tag_.Bry__xowa_any			// requested is not wildcard
+			)	return false;
+		if (cur_tag_bry == Gfh_tag_.Bry__xowa_comment) return true;	// ignore comments
+		int depth = depth_obj.Val();
+		boolean tag_is_tail = tag.Tag_is_tail();
+		if (tail == tag_is_tail) {
+			if (depth == 0)
+				return true;
+			else {
+				if (Bry_.Eq(cur_tag_bry, find_tag_bry))
+					depth_obj.Val_add(-1);
+				return false;
+			}
+		}
+		else {
+			if (!bwd && tail && !tag_is_tail && !tag.Tag_is_inline()) {
+				if (Bry_.Eq(cur_tag_bry, find_tag_bry))
+					depth_obj.Val_add(1);
+				return false;
+			}
+			else
+				return false;
+		}
+	}
+	public Gfh_tag Tag__extract(boolean move, boolean tail, byte[] find_tag_bry, int tag_bgn) {
+		int name_bgn = tag_bgn + 1; if (name_bgn == src_end) return Tag__eos(tag_bgn);		// EX: "<EOS"
+		byte name_0 = src[name_bgn];
+		boolean cur_is_tail = false;
+		switch (name_0) {
+			case Byte_ascii.Bang: 
+				if (Bry_.Match(src, name_bgn + 1, name_bgn + 3, Bry__comment__mid))			// skip comment; EX: "<!"
+					return Tag__comment(tag_bgn);
+				break;
+			case Byte_ascii.Slash:
+				++name_bgn; if (name_bgn == src_end) return Tag__eos(tag_bgn);				// EX: "</EOS"
+				name_0 = src[name_bgn];
+				cur_is_tail = true;
+				break;				
+		}
+		int name_end = -1, atrs_end = -1, tag_end = -1, name_pos = name_bgn;
+		byte name_byte = name_0; boolean inline = false;
+		boolean loop = true;
+		while (true) {
+			switch (name_byte) {
+				case Byte_ascii.Angle_end:													// EX: "<a>"
+					name_end = atrs_end = name_pos;
+					tag_end = name_end + 1;
+					loop = false;
+					break;
+				case Byte_ascii.Slash:														// EX: "<a/>"
+					name_end = name_pos;
+					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
+					if (src[tag_end] == Byte_ascii.Angle_end) {
+						atrs_end = name_end;
+						inline = true;
+						loop = false;
+						++tag_end;	// move tag_end after >
+					}
+					else {
+						name_end = tag_end = -1;
+					}
+					break;
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+					name_end = name_pos;
+					loop = false;
+					break;
+			}
+			if (!loop) break;
+			++name_pos; if (name_pos == src_end) return Tag__eos(tag_bgn);					// EX: "<abEOS"
+			name_byte = src[name_pos];
+		}
+		if (tag_end == -1) {
+			tag_end = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, name_end, src_end);
+			if (tag_end == Bry_find_.Not_found) return Tag__eos(tag_bgn);
+			int prv_pos = tag_end - 1;
+			if (src[prv_pos] == Byte_ascii.Slash) {
+				atrs_end = prv_pos;
+				inline = true;
+			}
+			else
+				atrs_end = tag_end;
+			++tag_end;	// position after ">"
+		}
+		Gfh_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
+		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, Gfh_tag_.Id__unknown, Bry_.Mid(src, name_bgn, name_end));
+	}
 	public Gfh_tag Tag__extract(boolean move, boolean tail, int match_name_id, int tag_bgn) {
 		int name_bgn = tag_bgn + 1; if (name_bgn == src_end) return Tag__eos(tag_bgn);		// EX: "<EOS"
 		byte name_0 = src[name_bgn];
@@ -172,7 +299,9 @@ public class Gfh_tag_rdr {
 			++tag_end;	// position after ">"
 		}
 		Gfh_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
-		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, name_hash.Get_as_int_or(src, name_bgn, name_end, -1), Bry_.Mid(src, name_bgn, name_end));
+		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end
+			, name_hash.Get_as_int_or(src, name_bgn, name_end, -1)	// TODO: change from -1 to Unknown
+			, Bry_.Mid(src, name_bgn, name_end));
 	}
 	public boolean Read_and_move(byte match) {
 		byte b = src[pos];

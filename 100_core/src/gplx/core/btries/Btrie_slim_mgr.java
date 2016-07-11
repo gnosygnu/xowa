@@ -18,29 +18,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.btries; import gplx.*; import gplx.core.*;
 import gplx.core.primitives.*; import gplx.core.threads.poolables.*;
 public class Btrie_slim_mgr implements Btrie_mgr {
-	private static Gfo_poolable_mgr pool_rv = Gfo_poolable_mgr.New_rlsable(new Btrie_rv(), Object_.Ary_empty, 0, 1024);
 	Btrie_slim_mgr(boolean case_match) {root = new Btrie_slim_itm(Byte_.Zero, null, !case_match);}	private Btrie_slim_itm root;
 	public int Count() {return count;} private int count;
 	public int Match_pos() {return match_pos;} private int match_pos;
 
-	public Btrie_rv Match_at(byte[] src, int bgn, int end) {return bgn < end  ? Match_at_w_b0(src[bgn], src, bgn, end) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
-	public Btrie_rv Match_at_w_b0(byte b, byte[] src, int bgn_pos, int src_end) {
+	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos ? Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
+	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int src_end) {
 		Object rv_obj = null; 
 		int rv_pos = bgn_pos;
 		int cur_pos = bgn_pos;
 		Btrie_slim_itm cur = root;
 		while (true) {
 			Btrie_slim_itm nxt = cur.Ary_find(b);
-			if (nxt == null) 
-				return ((Btrie_rv)pool_rv.Get_safe()).Init(cur_pos, rv_obj);			// nxt does not hav b; return rv_obj;
+			if (nxt == null) {
+				rv.Init(cur_pos, rv_obj);			// nxt does not hav b; return rv_obj;
+				return rv_obj;
+			}
 			++cur_pos;
 			if (nxt.Ary_is_empty()) {
-				return ((Btrie_rv)pool_rv.Get_safe()).Init(cur_pos, nxt.Val());			// nxt is leaf; return nxt.Val() (which should be non-null)
+				rv_obj = nxt.Val();
+				rv.Init(cur_pos, rv_obj);			// nxt is leaf; return nxt.Val() (which should be non-null)
+				return rv_obj;
 			}
 			Object nxt_val = nxt.Val();
-			if (nxt_val != null) {rv_pos = cur_pos; rv_obj = nxt_val;}					// nxt is node; cache rv_obj (in case of false match)
-			if (cur_pos == src_end)
-				return ((Btrie_rv)pool_rv.Get_safe()).Init(rv_pos, rv_obj);				// increment cur_pos and exit if src_end
+			if (nxt_val != null) {rv_pos = cur_pos; rv_obj = nxt_val;}							// nxt is node; cache rv_obj (in case of false match)
+			if (cur_pos == src_end) {					
+				rv.Init(rv_pos, rv_obj);			// increment cur_pos and exit if src_end
+				return rv_obj;
+			}
 			b = src[cur_pos];
 			cur = nxt;
 		}
@@ -51,7 +56,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		Object rv = Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
-	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos  ? Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
+	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return bgn_pos < end_pos ? Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos) : null;} // handle out of bounds gracefully; EX: Match_bgn("abc", 3, 3) should return null not fail
 	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_end) {
 		Object rv = null; int cur_pos = match_pos = bgn_pos;
 		Btrie_slim_itm cur = root;

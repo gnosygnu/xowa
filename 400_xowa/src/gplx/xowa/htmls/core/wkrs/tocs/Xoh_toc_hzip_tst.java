@@ -15,12 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.htmls.core.makes.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.makes.*;
-public class Xohd_img_tid {	// SERIALIZED
-	public static final int 
-	  Tid_img		= 1
-	, Tid_redlink	= 2
-	, Tid_gallery	= 3
-	, Tid_imap		= 4
-	;
+package gplx.xowa.htmls.core.wkrs.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.makes.tests.*;
+public class Xoh_toc_hzip_tst {
+	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	@Test   public void Basic() {				// EX: <div class='xo-toc'/>
+		fxt.Test__bicode("~)!", "<div class=\"xo-toc\"></div>");
+	}
 }

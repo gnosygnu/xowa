@@ -25,6 +25,7 @@ class Pxd_parser {
 	public int Data_ary_len() {return data_ary_len;} private int data_ary_len;
 	public int Colon_count;
 	public int[] Seg_idxs() {return seg_idxs;} private int[] seg_idxs = new int[DateAdp_.SegIdx__max];	// temp ary for storing current state
+	public byte[] Src() {return src;}
 	public boolean Seg_idxs_chk(int... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)
@@ -43,8 +44,10 @@ class Pxd_parser {
 		fmtr.Bld_bfr(error_bfr, args);
 	}	private Bry_bfr error_bfr = Bry_bfr_.New_w_size(32);
 	public DateAdp Parse(byte[] src, Bry_bfr error_bfr) {
-		Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
-		return Evaluate(src, error_bfr);
+//			synchronized (this) {	// LOCK:static-obj; DATE:2016-07-06
+			Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
+			return Evaluate(src, error_bfr);
+//			}
 	}
 	private boolean Tokenize(byte[] src) { 
 		this.src = src; src_len = src.length;
@@ -134,7 +137,10 @@ class Pxd_parser {
 		Pxd_itm[] eval_ary = Pxd_itm_sorter.XtoAryAndSort(tkns, tkns_len);
 		MakeDataAry();
 		for (int i = 0; i < tkns_len; i++) {
-			eval_ary[i].Eval(this);
+			if (!eval_ary[i].Eval(this)) {
+				error.Add_bfr_and_clear(error_bfr);
+				return DateAdp_.MinValue;
+			}
 			if (error_bfr.Len() != 0) {
 				error.Add_bfr_and_clear(error_bfr);
 				return DateAdp_.MinValue;			
@@ -144,7 +150,10 @@ class Pxd_parser {
 		DateAdpBldr bldr = new DateAdpBldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = (Pxd_itm)tkns[i];
-			itm.Time_ini(bldr);
+			if (!itm.Time_ini(bldr)) {
+				error.Add_str_a7("Invalid time");
+				return null;
+			}
 		}
 		return bldr.Bld();
 	}

@@ -177,9 +177,9 @@ public class Scrib_core {
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
 			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
 			bfr.Add_str_u8(rslt);
-//				byte[] rslt_bry = Bry_.new_u8(rslt);	// CHART
-//				gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
-//				bfr.Add(rslt_bry);
+			//byte[] rslt_bry = Bry_.new_u8(rslt);	// CHART
+			//gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
+			//bfr.Add(rslt_bry);
 			if (!Env_.Mode_testing())
 				engine.CleanupChunks(Keyval_.Ary(Keyval_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
 		}
@@ -200,12 +200,6 @@ public class Scrib_core {
 		}
 		return rv;
 	}
-	public static Scrib_core Core() {return core;}
-	public static Scrib_core Core_new_(Xoae_app app, Xop_ctx ctx) {
-		core = new Scrib_core(app, ctx);
-		core_invalidate_when_page_changes = false;
-		return core;
-	}	private static Scrib_core core;
 	public void Handle_error(String err, String traceback) {
 		String excerpt = "";
 		try {
@@ -215,20 +209,6 @@ public class Scrib_core {
 		} catch (Exception e) {Err_.Noop(e);}
 		throw Err_.new_wo_type(err, "ttl", page.Ttl().Page_db_as_str(), "excerpt", excerpt, "traceback", traceback);
 	}
-	public static void Core_invalidate_when_page_changes() {core_invalidate_when_page_changes = true;} private static boolean core_invalidate_when_page_changes;
-	public static void Core_page_changed(Xoae_page page) {
-		if (	core != null						// core explicitly invalidated
-			||	core_invalidate_when_page_changes	// core marked invalidated b/c of error in {{#invoke}} but won't be regen'd until page changes; invalidate now; PAGE:th.d:all; DATE:2014-10-03
-			) {
-			core_invalidate_when_page_changes = false;
-			if (	core != null										// null check
-				&&	Bry_.Eq(page.Wiki().Domain_bry(), core.Cur_wiki()))	// current page is in same wiki as last page
-				core.When_page_changed(page);
-			else														// current page is in different wiki
-				Core_invalidate();										// invalidate scrib engine; note that lua will cache chunks by Module name and two modules in two different wikis can have the same name, but different data: EX:Module:Citation/CS1/Configuration and enwiki / zhwiki; DATE:2014-03-21
-		}
-	}
-	public static void Core_invalidate() {if (core != null) core.Term(); core = null;}
 	public static final String Frame_key_module = "current", Frame_key_template = "parent";
 	public static final int Base_1 = 1;
 	public static final String Key_mw_interface = "mw_interface";

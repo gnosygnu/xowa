@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.langs.jsons.*;
 class Scrib_lib_text__json_util {
-	private final Json_wtr wtr = new Json_wtr();
+	private final    Json_wtr wtr = new Json_wtr();
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, Keyval[] kv_ary, boolean is_encoding) {
 		int next = 0;
 		if (is_encoding) {
@@ -112,10 +112,10 @@ class Scrib_lib_text__json_util {
 	}
 	private Object Decode_ary(Json_ary ary) {
 		int len = ary.Len();
-		Object rv = Array_.Create(Object.class, len);
+		Object[] rv = new Object[len];
 		for (int i = 0; i < len; ++i) {
 			Json_itm itm = ary.Get_at(i);
-			Array_.Set_at(rv, i, Decode_obj(itm));
+			rv[i] = Decode_obj(itm);
 		}
 		return rv;
 	}
@@ -200,7 +200,7 @@ class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 		int rhs_int = Int_.parse_or(rhs_itm.Key(), Int_.Min_value);
 		return CompareAble_.Compare(lhs_int, rhs_int);
 	}
-	public static final KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
+	public static final    KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
 }
 class Scrib_lib_text__reindex_data {
 	public boolean				Rv_is_kvy() {return rv_is_kvy;} private boolean rv_is_kvy;

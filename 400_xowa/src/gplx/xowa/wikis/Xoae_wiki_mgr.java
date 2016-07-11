@@ -30,9 +30,11 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	public Xow_script_mgr Scripts() {return scripts;} private final    Xow_script_mgr scripts = new Xow_script_mgr();
 	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} private final    Wdata_wiki_mgr wdata_mgr;
 	public Xowe_wiki Wiki_commons() {
-		Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(Xow_domain_itm_.Bry__commons);
-		if (rv != null) rv.Init_assert();
-		return rv;
+		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
+			Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(Xow_domain_itm_.Bry__commons);
+			if (rv != null) rv.Init_assert();
+			return rv;
+		}
 	}
 	public void Init_by_app() {wdata_mgr.Init_by_app();}
 	public int			Count()							{return list.Count();}
@@ -41,9 +43,11 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	public Xowe_wiki	Get_at_or_null(int i)			{return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.Get_at(i) : null;}
 	public Xow_wiki		Get_by_or_null(byte[] key)		{return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.Get_by(key);}
 	public Xow_wiki		Get_by_or_make_init_y(byte[] key) {
-		Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(key); if (rv == null) rv = Make_and_add(key);
-		rv.Init_assert();
-		return rv;
+		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
+			Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(key); if (rv == null) rv = Make_and_add(key);
+			rv.Init_assert();
+			return rv;
+		}
 	}
 	public Xow_wiki		Get_by_or_make_init_n(byte[] key) {return Get_by_or_make(key);}
 	public Xowe_wiki	Get_by_or_make(byte[] key) {

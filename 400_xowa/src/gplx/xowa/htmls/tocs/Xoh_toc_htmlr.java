@@ -25,9 +25,9 @@ class Xoh_toc_htmlr implements gplx.core.brys.Bfr_arg {
 	public void Clear() {
 		prv_lvl = 0;
 	}
-	public byte[] To_html(Ordered_hash itms, byte[] toc_title, boolean page_banner) {
+	public byte[] To_html(Ordered_hash itms, byte[] toc_title, boolean toc_mode_is_pgbnr) {
 		this.itms = itms;
-		fmtr_div.Bld_many(bfr, page_banner ? Bry_.Empty : Bry_toc_cls, toc_title, this);
+		fmtr_div.Bld_many(bfr, toc_mode_is_pgbnr ? Bry_.Empty : Bry_toc_cls, toc_title, this);
 		return bfr.To_bry_and_clear();
 	}
 	public byte[] Test__to_html(Ordered_hash itms) {

@@ -57,7 +57,6 @@ public class Pfunc_filepath_tst {
 		fxt.Test_parse_tmpl_str_test("{{filepath:B.png}}", "{{test}}", "");
 	}
 	@Test  public void Invalid() {	// PURPOSE: handle invalid ttls; EX:w:Germicidin
-		fxt.Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_parse_tmpl_str_test("{{filepath:{{{ImageFile}}}}}", "{{test}}", "");
 	}
 //		private static void Init_orig_mgr(Xow_wiki wiki) {

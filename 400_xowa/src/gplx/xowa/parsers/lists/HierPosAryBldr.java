@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.strings.*;
 public class HierPosAryBldr {
+	int[] ary; int aryIdx = -1; int root = -1;
+	public HierPosAryBldr(int ary_max)	{ary = new int[ary_max]; this.Init();}
 	public void Init() {
 		int ary_max = ary.length;
 		for (int i = 0; i < ary_max; i++)
@@ -56,6 +58,4 @@ public class HierPosAryBldr {
 			sb.Add_spr_unless_first(Int_.To_str(ary[i]), " ", i);
 		return sb.To_str();
 	}
-	int[] ary; int aryIdx = -1; int root = -1;
-	public HierPosAryBldr(int ary_max)	{ary = new int[ary_max]; this.Init();}
 }

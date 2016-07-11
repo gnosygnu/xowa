@@ -22,13 +22,15 @@ public class Scrib_core_fxt {
 	public Scrib_core_fxt(Xop_fxt fxt) {
 		app = fxt.App();
 		wiki = fxt.Wiki();
-		core = Scrib_core.Core_new_(app, wiki.Parser_mgr().Ctx());
+		core = wiki.Parser_mgr().Scrib().Core_make(wiki.Parser_mgr().Ctx());
+		server = new Process_server_mock();
+		core.Interpreter().Server_(server);
 	}
 	public Scrib_core_fxt Clear() {
 		if (core == null) {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
-			core = Scrib_core.Core_new_(app, wiki.Parser_mgr().Ctx());
+			core = wiki.Parser_mgr().Scrib().Core_make(wiki.Parser_mgr().Ctx());
 			server = new Process_server_mock();
 			core.Interpreter().Server_(server);
 		}

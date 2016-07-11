@@ -69,7 +69,7 @@ class Xof_file_fxt {
 		itm.Init_at_lnki(arg.Exec_tid(), wiki.Domain_itm().Abrv_xo(), ttl_bry, arg.Lnki_type(), arg.Lnki_upright(), arg.Lnki_w(), arg.Lnki_h(), arg.Lnki_time(), Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
 		List_adp itms_list = List_adp_.New(); itms_list.Add(itm);
 		orig_mgr.Find_by_list(Ordered_hash_.New_bry(), itms_list, Xof_exec_tid.Tid_wiki_page);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Xow_ns_.Tid__main, ttl_bry);
 		Xoae_page page = Xoae_page.New(wiki, ttl);
 		fsdb_mgr.Fsdb_search_by_list(itms_list, wiki, page, Xog_js_wkr_.Noop);
 		if (arg.Rslt_orig_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_orig_exists()  == Bool_.Y_byte, itm.Orig_exists(), "orig_exists");

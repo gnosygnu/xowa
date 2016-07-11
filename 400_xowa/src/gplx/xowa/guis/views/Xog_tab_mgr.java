@@ -78,7 +78,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Xow_special_meta_.Itm__default_tab.Ttl_bry());
+		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, Xow_special_meta_.Itm__default_tab.Ttl_bry());
 		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar_or_null(ttl.Full_db_as_str()); if (url == null) throw Err_.new_("url", "invalid url", "url", url);
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.New(cur_wiki, ttl));
 		rv.Page_update_ui();

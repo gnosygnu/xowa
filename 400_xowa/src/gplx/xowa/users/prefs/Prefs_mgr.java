@@ -55,7 +55,7 @@ public class Prefs_mgr implements Gfo_invk {
 	}	private Bry_fmtr props_get_fmtr; 
 	private void Props_set_and_reload() {
 		Xoae_page page = app.Gui_mgr().Browser_win().Active_page();
-		Props_set(page.Data_raw());
+		Props_set(page.Db().Text().Text_bry());
 		page.Wikie().Parser_mgr().Parse(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
 		// app.Api_root().Gui().Page().View().Reload();	// force reload to update page; needed for language; DATE:2014-05-26; NOTE: deactivate on 2015-08-13; refreshing page causes options to not show
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab != null) tab.Exec_notify(Bool_.Y, "options saved");

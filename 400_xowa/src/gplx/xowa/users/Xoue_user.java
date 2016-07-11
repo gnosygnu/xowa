@@ -77,9 +77,9 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
 		byte[] new_entry = tmp_bfr.To_bry_and_rls();
-		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse(wiki, Bry_data_bookmarks);
+		Xoa_ttl bookmarks_ttl = Xoa_ttl.Parse(wiki, Bry_data_bookmarks);
 		Xoae_page bookmarks_page = wiki.Data_mgr().Load_page_by_ttl(bookmarks_ttl);
-		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);
+		byte[] new_data = Bry_.Add(bookmarks_page.Db().Text().Text_bry(), new_entry);
 		wiki.Db_mgr().Save_mgr().Data_update(bookmarks_page, new_data);
 	}	private Bry_fmtr bookmarks_add_fmtr = Bry_fmtr.new_("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = Bry_.new_a7("Data:Bookmarks");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {			

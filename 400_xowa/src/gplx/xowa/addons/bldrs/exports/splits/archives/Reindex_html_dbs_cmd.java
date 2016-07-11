@@ -87,7 +87,7 @@ class Reindex_html_dbs_cmd {
 		Db_stmt stmt_update = core_conn.Stmt_update(tbl_page, String_.Ary(fld_page_id), fld_page_html_db_id);
 		Xoh_page_tbl_itm trg_html_tbl = null; 
 		try {
-			Xoh_page_row src_html_row = new Xoh_page_row();
+			Xowd_html_row src_html_row = new Xowd_html_row();
 			long trg_db_size = 0;
 			int ns_cur = -1, part_id = 0;
 			int trg_db = -1;

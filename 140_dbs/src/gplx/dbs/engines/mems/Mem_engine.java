@@ -28,7 +28,7 @@ public class Mem_engine implements Db_engine {
 	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
 	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
 	public Mem_exec_select		Qry_runner() {return qry_runner;} private Mem_exec_select qry_runner;
-	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
+	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
 	public Db_engine			New_clone(Db_conn_info conn_info) {return new Mem_engine(conn_info);}
 	public Db_stmt				Stmt_by_qry(Db_qry qry) {return new Mem_stmt(this, qry);}
 	public Mem_tbl				Tbls__get(String name)	{return (Mem_tbl)tbl_hash.Get_by(name);}

@@ -53,7 +53,6 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b")						, ttl_fast(10, "Template", "A", "b"));
 		fxt.Parser_fxt().Wiki().Xwiki_mgr().Add_by_atrs("fr", "fr.wikipedia.org");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b", "fr")					, ttl_fast(0, "", "Template:A", "b", "fr"));
-		fxt.Parser_fxt().Init_log_(gplx.xowa.wikis.ttls.Xop_ttl_log.Invalid_char);
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "a[b"), Scrib_invoke_func_fxt.Null_rslt_ary);	// PURPOSE: handle bad MakeTitle cmds; PAGE:en.w:Disney; DATE:2013-10-15
 	}
 	@Test   public void GetExpensiveData_absent() {

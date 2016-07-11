@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
+import gplx.xowa.xtns.scribunto.*;
 public class Xow_parser_mgr {
 	private final    Xowe_wiki wiki; private final    Xop_tkn_mkr tkn_mkr;
 	private Xop_parser anchor_encode_parser;
@@ -27,6 +28,7 @@ public class Xow_parser_mgr {
 	}
 	public Xop_ctx Ctx() {return ctx;} private final    Xop_ctx ctx;
 	public Xop_parser Main() {return main;} private final    Xop_parser main;
+	public Scrib_core_mgr Scrib() {return scrib;} private final    Scrib_core_mgr scrib = new Scrib_core_mgr();
 	public Xop_parser Anchor_encoder() {
 		if (anchor_encode_parser == null) {
 			anchor_encode_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), Xop_lxr_mgr.new_anchor_encoder());
@@ -37,20 +39,16 @@ public class Xow_parser_mgr {
 	}
 	public void Parse(Xoae_page page, boolean clear) {
 		if (!Env_.Mode_testing()) wiki.Init_assert();
-		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(page);		// notify scribunto about page changed
+		page.Wikie().Parser_mgr().Scrib().Core_page_changed(page);	// notify scribunto about page changed
 		ctx.Page_(page);
-		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Data_raw());
+		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Db().Text().Text_bry());
 		if (clear) {page.Clear_all();}
 		Xoa_ttl ttl = page.Ttl();
 		if (	Xow_page_tid.Identify(wiki.Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext) {	// only parse page if wikitext; skip .js, .css, Module; DATE:2013-11-10
-			byte[] data_raw = page.Data_raw();
-//				if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__home) {
-//					data_raw = Bry_.Add(Temp__page_title, data_raw);
-//				}
+			byte[] data_raw = page.Db().Text().Text_bry();
 			main.Parse_text_to_wdom(root, ctx, tkn_mkr, data_raw , Xop_parser_.Doc_bgn_bos);
 		}
 		page.Root_(root);
 		root.Data_htm_(root.Root_src());
 	}
-//		private static final    byte[] Temp__page_title = Bry_.new_a7("{{PageTitle}}");
 }

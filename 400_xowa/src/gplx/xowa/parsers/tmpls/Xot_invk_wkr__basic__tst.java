@@ -167,7 +167,7 @@ public class Xot_invk_wkr__basic__tst {
 		fxt.Test_parse_tmpl_str_test("{{{1}}}{{{2}}}"									, "{{test|[[b=c|d}}"			, "{{test|[[b=c|d}}");
 	}
 	@Test  public void Err_tmp_empty() {	// PURPOSE: {{{{R from misspelling}} }}
-		fxt.Init_log_(Xop_ttl_log.Invalid_char).Test_parse_tmpl_str_test("{{{1}}}"										, "{{ {{a}} }}"					, "{{[[:Template:a]]}}");
+		fxt.Test_parse_tmpl_str_test("{{{1}}}"										, "{{ {{a}} }}"					, "{{[[:Template:a]]}}");
 	}
 	@Test  public void Mismatch_bgn() {	// PURPOSE: handle {{{ }}; WP:Paris Commune; Infobox Former Country
 		fxt.Init_defn_clear();

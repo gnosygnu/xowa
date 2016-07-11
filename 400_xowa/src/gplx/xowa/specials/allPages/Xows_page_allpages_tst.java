@@ -192,7 +192,7 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
 		allpages.Build_html(wiki.Parser_mgr().Ctx().Page());
-		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Parser_mgr().Ctx().Page().Data_raw()));
+		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Parser_mgr().Ctx().Page().Db().Text().Text_bry()));
 		return this;
 	}
 	private void Exec_build() {
@@ -202,5 +202,5 @@ class Xows_page_allpages_fxt {
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);
 	}
-	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse(wiki, Bry_.new_u8(Xow_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
+	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.Parse(wiki, Bry_.new_u8(Xow_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
 }

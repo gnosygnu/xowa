@@ -20,6 +20,7 @@ import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements Rls_able {
+	private final    Object thread_lock = new Object();
 	private final    String tbl_name = "page";
 	public final    boolean schema_is_1;
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id;
@@ -107,15 +108,17 @@ public class Xowd_page_tbl implements Rls_able {
 	}
 	public boolean Select_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
 		if (stmt_select_all_by_ttl == null) stmt_select_all_by_ttl = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_ns, fld_title));
-		Db_rdr rdr = stmt_select_all_by_ttl.Clear().Crt_int(fld_ns, ns.Id()).Crt_bry_as_str(fld_title, ttl).Exec_select__rls_manual();
-		try {
-			if (rdr.Move_next()) {
-				Read_page__all(rv, rdr);
-				return true;
+		synchronized (thread_lock) { // LOCK:stmt-rls; DATE:2016-07-06
+			Db_rdr rdr = stmt_select_all_by_ttl.Clear().Crt_int(fld_ns, ns.Id()).Crt_bry_as_str(fld_title, ttl).Exec_select__rls_manual();
+			try {
+				if (rdr.Move_next()) {
+					Read_page__all(rv, rdr);
+					return true;
+				}
 			}
+			finally {rdr.Rls();}
+			return false;
 		}
-		finally {rdr.Rls();}
-		return false;
 	}
 	public boolean Select_by_id(Xowd_page_itm rv, int page_id) {
 		if (stmt_select_all_by_id == null) stmt_select_all_by_id = conn.Stmt_select(tbl_name, flds_select_all, fld_id);
@@ -344,10 +347,12 @@ public class Xowd_page_tbl implements Rls_able {
 		return fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
 	}
 	public void Rls() {
-		stmt_select_all_by_ttl = Db_stmt_.Rls(stmt_select_all_by_ttl);
-		stmt_select_all_by_id = Db_stmt_.Rls(stmt_select_all_by_id);
-		stmt_select_id_by_ttl = Db_stmt_.Rls(stmt_select_id_by_ttl);
-		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		synchronized (thread_lock) {// LOCK:stmt-rls; DATE:2016-07-06
+			stmt_select_all_by_ttl = Db_stmt_.Rls(stmt_select_all_by_ttl);
+			stmt_select_all_by_id = Db_stmt_.Rls(stmt_select_all_by_id);
+			stmt_select_id_by_ttl = Db_stmt_.Rls(stmt_select_id_by_ttl);
+			stmt_insert = Db_stmt_.Rls(stmt_insert);
+		}
 	}
 	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
 }

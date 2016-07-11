@@ -130,7 +130,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					try {
 						Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));
 						Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);
-						hpg.Redlink_list().Add(lnki_itm);
+						hpg.Html_data().Redlink_list().Add(lnki_itm);
 						html_uid = lnki_itm.Html_uid();
 					}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}
 				}

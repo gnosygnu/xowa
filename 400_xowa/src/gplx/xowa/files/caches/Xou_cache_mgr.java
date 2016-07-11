@@ -108,7 +108,7 @@ public class Xou_cache_mgr {
 				}
 				conn.Txn_end();
 			}
-			catch (Exception e) {conn.Txn_cxl(); throw e;}
+			catch (Exception e) {conn.Txn_cxl(); throw Err_.new_exc(e, "cache", "unknown error while saving cache; err=~{0}", Err_.Message_gplx_log(e));}
 		}
 	}
 	public void Reduce(long reduce_to) {

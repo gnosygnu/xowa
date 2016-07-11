@@ -22,6 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xow_url_parser {
+	private final    Object thread_lock = new Object();
 	private final    Gfo_url_encoder encoder;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url gfo_url = new Gfo_url();
@@ -65,52 +66,54 @@ public class Xow_url_parser {
 	public Xoa_url Parse(byte[] src, int bgn, int end) {Xoa_url rv = Xoa_url.blank(); Parse(rv, src, bgn, end); return rv;}
 	public boolean Parse(Xoa_url rv, byte[] src) {return Parse(rv, src, 0, src.length);}
 	public boolean Parse(Xoa_url rv, byte[] src, int bgn, int end) {
-		if (end - bgn == 0) {Init_tmp_vars(Gfo_url.Empty); Make(rv); return false;}
-		src = encoder.Decode(src, bgn, end);					// NOTE: must decode any url-encoded parameters
-		int src_len = src.length;
-		url_parser.Parse(gfo_url, src, 0, src_len);	// parse to plain gfo_url
-		Init_tmp_vars(gfo_url);
-		if (src[0] == Byte_ascii.Hash)				// src is anch; EX: #A
-			Bld_anch();
-		else {
-			switch (tmp_protocol_tid) {
-				case Gfo_protocol_itm.Tid_file:
-					if (src_len > 5 && src[5] != Byte_ascii.Slash)			// src is ttl in [[File]] ns; EX: "File:A.png"
-						Bld_page_by_file_ns();
-					else													// src is file:///; EX: EX: "file:///C:/A.png"
-						tmp_tid = Xoa_url_.Tid_file;
-					break;
-				case Gfo_protocol_itm.Tid_xowa:
-					Bld_xowa();
-					break;
-				case Gfo_protocol_itm.Tid_http:
-				case Gfo_protocol_itm.Tid_https:
-				case Gfo_protocol_itm.Tid_relative_1:
-					if (tmp_protocol_tid == Gfo_protocol_itm.Tid_relative_1)	// interpret relative protocol links to match wiki's protocol; EX: [//a.org] -> https://a.org for all WMF wikis; DATE:2015-07-27
-						tmp_protocol_tid = wiki.Props().Protocol_tid();
-					if (app.User().Wikii().Xwiki_mgr().Get_by_key(tmp_wiki) != null)// src is offline wiki; EX: http://fr.wikipedia.org/wiki/A
+		synchronized (thread_lock) {
+			if (end - bgn == 0) {Init_tmp_vars(Gfo_url.Empty); Make(rv); return false;}
+			src = encoder.Decode(src, bgn, end);					// NOTE: must decode any url-encoded parameters
+			int src_len = src.length;
+			url_parser.Parse(gfo_url, src, 0, src_len);	// parse to plain gfo_url
+			Init_tmp_vars(gfo_url);
+			if (src[0] == Byte_ascii.Hash)				// src is anch; EX: #A
+				Bld_anch();
+			else {
+				switch (tmp_protocol_tid) {
+					case Gfo_protocol_itm.Tid_file:
+						if (src_len > 5 && src[5] != Byte_ascii.Slash)			// src is ttl in [[File]] ns; EX: "File:A.png"
+							Bld_page_by_file_ns();
+						else													// src is file:///; EX: EX: "file:///C:/A.png"
+							tmp_tid = Xoa_url_.Tid_file;
+						break;
+					case Gfo_protocol_itm.Tid_xowa:
+						Bld_xowa();
+						break;
+					case Gfo_protocol_itm.Tid_http:
+					case Gfo_protocol_itm.Tid_https:
+					case Gfo_protocol_itm.Tid_relative_1:
+						if (tmp_protocol_tid == Gfo_protocol_itm.Tid_relative_1)	// interpret relative protocol links to match wiki's protocol; EX: [//a.org] -> https://a.org for all WMF wikis; DATE:2015-07-27
+							tmp_protocol_tid = wiki.Props().Protocol_tid();
+						if (app.User().Wikii().Xwiki_mgr().Get_by_key(tmp_wiki) != null)// src is offline wiki; EX: http://fr.wikipedia.org/wiki/A
+							Bld_page(0);
+						else if (Bry_.Eq(tmp_wiki, Bry_upload_wikimedia_org))			// src is upload.wikimedia.org; EX: "http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg"
+							Bld_page_from_upload_wikimedia_org();
+						else															// src is unknown site: EX: "http://a.org"
+							tmp_tid = Xoa_url_.Tid_inet;
+						break;
+					case Gfo_protocol_itm.Tid_unknown:
 						Bld_page(0);
-					else if (Bry_.Eq(tmp_wiki, Bry_upload_wikimedia_org))			// src is upload.wikimedia.org; EX: "http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg"
-						Bld_page_from_upload_wikimedia_org();
-					else															// src is unknown site: EX: "http://a.org"
+						break;
+					default:
 						tmp_tid = Xoa_url_.Tid_inet;
-					break;
-				case Gfo_protocol_itm.Tid_unknown:
-					Bld_page(0);
-					break;
-				default:
-					tmp_tid = Xoa_url_.Tid_inet;
-					break;
-			} 
+						break;
+				} 
+			}
+			Bld_qargs();
+			if (tmp_page_is_main) tmp_page = Xoa_page_.Main_page_bry_empty;
+			if (tmp_anch != null) {
+				byte[] anchor_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(tmp_anch);	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
+				tmp_anch = anchor_bry;
+			}
+			Make(rv);
+			return true;
 		}
-		Bld_qargs();
-		if (tmp_page_is_main) tmp_page = Xoa_page_.Main_page_bry_empty;
-		if (tmp_anch != null) {
-			byte[] anchor_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(tmp_anch);	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
-			tmp_anch = anchor_bry;
-		}
-		Make(rv);
-		return true;
 	}
 	private void Init_tmp_vars(Gfo_url gfo_url) {
 		tmp_tid = Xoa_url_.Tid_unknown;

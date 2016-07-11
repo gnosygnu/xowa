@@ -66,6 +66,7 @@ public class Srch_word_tbl implements Rls_able {
 		if (fld_link_count_score != Dbmeta_fld_itm.Key_null) {
 			try {link_count_score = rdr.Read_int(fld_link_count_score);}
 			catch (Exception e) {// handle 2016-05 and earlier wikis which stored value as double instead of int
+				Err_.Noop(e);
 				link_count_score = (int)rdr.Read_double(fld_link_count_score);
 			}
 		}

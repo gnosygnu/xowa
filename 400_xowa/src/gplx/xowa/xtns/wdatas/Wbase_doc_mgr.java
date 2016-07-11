@@ -44,9 +44,9 @@ public class Wbase_doc_mgr {
 	}
 	private byte[] Load_or_null(byte[] full_db) {
 		if (!enabled) return null;
-		Xoa_ttl page_ttl = Xoa_ttl.parse(wbase_mgr.Wdata_wiki(), full_db); if (page_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", full_db); return null;}
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wbase_mgr.Wdata_wiki(), full_db); if (page_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", full_db); return null;}
 		Xoae_page page_itm = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(page_ttl);
-		return page_itm.Missing() ? null : page_itm.Data_raw();
+		return page_itm.Db().Page().Exists_n() ? null : page_itm.Db().Text().Text_bry();
 	}
 
 	private static byte[] Prepend_property_if_needed(byte[] bry) {

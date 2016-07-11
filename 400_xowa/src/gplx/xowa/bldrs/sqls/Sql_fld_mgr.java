@@ -28,7 +28,12 @@ class Sql_fld_mgr {
 		int bgn = Bry_find_.Find_fwd(raw, Tkn_create_table); if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'CREATE TABLE'");
 		bgn = Bry_find_.Find_fwd(raw, Byte_ascii.Nl, bgn); if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
 		bgn += Int_.Const_position_after_char;
-		int end = Bry_find_.Find_fwd(raw, Tkn_unique_index); if (end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'UNIQUE KEY'");
+		int end = Bry_find_.Find_fwd(raw, Tkn_unique_index);
+		if (end == Bry_find_.Not_found) {	// as of 2016-07, en.w:categorylinks no longer has UNIQUE KEY; try PRIMARY KEY; DATE:2016-07-08
+			end = Bry_find_.Find_fwd(raw, Tkn_primary_key);
+			if (end == Bry_find_.Not_found)
+				throw Err_.new_wo_type("could not find 'UNIQUE KEY' or 'PRIMARY KEY'");
+		}
 		end = Bry_find_.Find_bwd(raw, Byte_ascii.Nl, end); if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line before 'UNIQUE KEY'");
 		Parse_lines(Bry_.Mid(raw, bgn, end));
 		return this;
@@ -47,9 +52,10 @@ class Sql_fld_mgr {
 			hash.Add(fld.Key(), fld);
 		}
 	}
-	private static final byte[] 
-		Tkn_create_table = Bry_.new_a7("CREATE TABLE")
-	,	Tkn_unique_index = Bry_.new_a7("UNIQUE KEY")
+	private static final    byte[] 
+		Tkn_create_table	= Bry_.new_a7("CREATE TABLE")
+	,	Tkn_unique_index	= Bry_.new_a7("UNIQUE KEY")
+	,	Tkn_primary_key		= Bry_.new_a7("PRIMARY KEY")
 	;
 	public static final int Not_found = -1;
 }

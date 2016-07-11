@@ -69,7 +69,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).To_bry_and_rls();
 		}
-		Xoa_ttl ttl = Xoa_ttl.parse(core.Wiki(), ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(core.Wiki(), ttl_bry);
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit; matches MW logic
 		return rslt.Init_obj(GetInexpensiveTitleData(ttl));
 	}
@@ -83,7 +83,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		byte url_func_tid = ((Byte_obj_val)url_func_obj).Val();
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		//if (url_func_tid == Pfunc_urlfunc.Tid_full) {
 		//	if (proto == null) proto = Proto_relative;
@@ -124,13 +124,13 @@ public class Scrib_lib_title implements Scrib_lib {
 			tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon);
 		tmp_bfr.Add_str_u8(ttl_str);
 		if (anchor_str != null) tmp_bfr.Add_byte(Byte_ascii.Hash).Add_str_u8(anchor_str);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, tmp_bfr.To_bry_and_rls());
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, tmp_bfr.To_bry_and_rls());
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit;
 		return rslt.Init_obj(GetInexpensiveTitleData(ttl));
 	}
 	public boolean GetExpensiveData(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
-		Xoa_ttl ttl = Xoa_ttl.parse(core.Wiki(), ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(core.Wiki(), ttl_bry);
 		if (ttl == Xoa_ttl.Null) return rslt.Init_null();
 		// TODO_OLD: MW does extra logic here to cache ttl in ttl cache to avoid extra title lookups
 		boolean ttl_exists = false, ttl_redirect = false; int ttl_id = 0;
@@ -151,11 +151,11 @@ public class Scrib_lib_title implements Scrib_lib {
 	public boolean GetFileInfo(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 		if (	ttl == null
 			|| !ttl.Ns().Id_is_file_or_media()
 			) return rslt.Init_obj(GetFileInfo_absent);
-		if (ttl.Ns().Id_is_media()) ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
+		if (ttl.Ns().Id_is_media()) ttl = Xoa_ttl.Parse(wiki, Xow_ns_.Tid__file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
 		// Xoae_page file_page = Pfunc_filepath.Load_page(wiki, ttl);	// EXPENSIVE
 		// boolean exists = !file_page.Missing();
 		// if (!exists) return rslt.Init_obj(Keyval_.Ary(Keyval_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
@@ -175,7 +175,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
 		byte[] rv = null;
 		if (page_itm != null) {
@@ -195,13 +195,13 @@ public class Scrib_lib_title implements Scrib_lib {
 	public boolean ProtectionLevels(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// byte[] ttl_bry = args.Pull_bry(0);
 		// Xowe_wiki wiki = core.Wiki();
-		// Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		// Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_many_objs("");	// NOTE: always return no protection; protectionLevels are stored in different table which is currently not mirrored; DATE:2014-04-09
 	}
 	public boolean CascadingProtection(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_obj(CascadingProtection_rv);
 	}
 	public static final    Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Bool_.N), Keyval_.new_("restrictions", Keyval_.Ary_empty));

@@ -19,14 +19,14 @@ package gplx;
 import gplx.core.primitives.*;
 import gplx.core.intls.*;
 public class Hash_adp_bry extends gplx.core.lists.Hash_adp_base implements Hash_adp {
-	private final Hash_adp_bry_itm_base proto, key_ref;
+	private final    Hash_adp_bry_itm_base proto, key_ref;
 	Hash_adp_bry(Hash_adp_bry_itm_base proto) {
 		this.proto = proto;
 		this.key_ref = proto.New();
 	}
-	@Override protected Object Fetch_base(Object key)				{return super.Fetch_base(key_ref.Init((byte[])key));}
-	@Override protected void Del_base(Object key)					{super.Del_base(key_ref.Init((byte[])key));}
-	@Override protected boolean Has_base(Object key)					{return super.Has_base(key_ref.Init((byte[])key));}
+	@Override protected Object Fetch_base(Object key)				{synchronized (key_ref) {return super.Fetch_base(key_ref.Init((byte[])key));}}	// TS: DATE:2016-07-06
+	@Override protected void Del_base(Object key)					{synchronized (key_ref) {super.Del_base(key_ref.Init((byte[])key));}}// TS: DATE:2016-07-06
+	@Override protected boolean Has_base(Object key)					{synchronized (key_ref) {return super.Has_base(key_ref.Init((byte[])key));}}// TS: DATE:2016-07-06
 	public int Get_as_int(byte[] key) {return Get_as_int(key, 0, key.length);}
 	public int Get_as_int(byte[] key, int bgn, int end) {
 		int rv = Get_as_int_or(key, bgn, end, Int_.Min_value); if (rv == Int_.Min_value) throw Err_.new_("core", "unknown key", "key", key);
@@ -42,8 +42,8 @@ public class Hash_adp_bry extends gplx.core.lists.Hash_adp_base implements Hash_
 		Object o = Get_by_mid(key, bgn, end); 
 		return o == null ? or : ((Byte_obj_val)o).Val();
 	}
-	public Object Get_by_bry(byte[] src)							{return super.Fetch_base(key_ref.Init(src));}
-	public Object Get_by_mid(byte[] src, int bgn, int end)			{return super.Fetch_base(key_ref.Init(src, bgn, end));}
+	public Object Get_by_bry(byte[] src)							{synchronized (key_ref) {return super.Fetch_base(key_ref.Init(src));}}	// TS: DATE:2016-07-06
+	public Object Get_by_mid(byte[] src, int bgn, int end)			{synchronized (key_ref) {return super.Fetch_base(key_ref.Init(src, bgn, end));}}// TS: DATE:2016-07-06
 	public Hash_adp_bry Add_byte_int(byte key, int val)				{this.Add_base(new byte[]{key}, Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_byte(byte[] key, byte val)			{this.Add_base(key, Byte_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_int(byte[] key, int val)			{this.Add_base(key, Int_obj_val.new_(val)); return this;}
@@ -108,7 +108,7 @@ class Hash_adp_bry_itm_cs extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final Hash_adp_bry_itm_cs Instance = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
+        public static final    Hash_adp_bry_itm_cs Instance = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
 }
 class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 	private byte[] src; int src_bgn, src_end;
@@ -141,10 +141,10 @@ class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final Hash_adp_bry_itm_ci_a7 Instance = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
+        public static final    Hash_adp_bry_itm_ci_a7 Instance = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
 }
 class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
-	private final Gfo_case_mgr case_mgr;
+	private final    Gfo_case_mgr case_mgr;
 	Hash_adp_bry_itm_ci_u8(Gfo_case_mgr case_mgr) {this.case_mgr = case_mgr;}
 	private byte[] src; int src_bgn, src_end;
 	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_u8(case_mgr);}

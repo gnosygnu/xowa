@@ -110,17 +110,19 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
 	}
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
-		try {
-			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_claims)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_generic;
-			List_adp temp_list = List_adp_.New();
-			byte[] src = doc.Src();
-			int len = list_nde.Len();
-			for (int i = 0; i < len; i++) {
-				Json_kv claim_nde			= Json_kv.cast(list_nde.Get_at(i));
-				claims_parser.Make_claim_itms(qid, temp_list, src, claim_nde);
-			}
-			return Wdata_doc_parser_v1.Claims_list_to_hash(temp_list);
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
+		synchronized (this) {// TS; DATE:2016-07-06
+ 				try {
+				Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_claims)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_generic;
+				List_adp temp_list = List_adp_.New();
+				byte[] src = doc.Src();
+				int len = list_nde.Len();
+				for (int i = 0; i < len; i++) {
+					Json_kv claim_nde			= Json_kv.cast(list_nde.Get_at(i));
+					claims_parser.Make_claim_itms(qid, temp_list, src, claim_nde);
+				}
+				return Wdata_doc_parser_v1.Claims_list_to_hash(temp_list);
+			} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
+		}
 	}
 	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {return claims_parser.Parse_datavalue(qid, pid, snak_tid, nde);}
 	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde) {return claims_parser.Parse_qualifiers(qid, nde);}

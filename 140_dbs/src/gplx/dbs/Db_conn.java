@@ -126,7 +126,7 @@ public class Db_conn {
 			Rls_able itm = (Rls_able)rls_list.Get_at(i);
 			itm.Rls();
 		}
-		rls_list.Clear();
+		// rls_list.Clear(); // TOMBSTONE: do not clear rls_list, else tables which self-registered won't get called again; DATE:2016-07-06
 		engine.Conn_term();
 		Db_conn_pool.Instance.Del(engine.Conn_info());
 	}

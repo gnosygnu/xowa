@@ -35,7 +35,7 @@ public class Xopg_lnki_list {
 		if (	ns.Id_is_file_or_media()						// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
 			||	(ns.Id_is_ctg() && !ttl.ForceLiteralLink())		// ignore ctgs which have their own html builder, unless it is literal; EX: [[:Category:A]]; DATE:2014-02-24
 			||	ns.Id_is_special()								// ignore special, especially Search; EX: Special:Search/Earth
-			||	ttl.Anch_bgn() == Xoa_ttl.Anch_bgn_anchor_only	// anchor only link; EX: [[#anchor]]
+			||	ttl.Anch_bgn() == Anch_bgn_anchor_only			// anchor only link; EX: [[#anchor]]
 			||	ttl.Wik_itm() != null							// xwiki lnki; EX: simplewiki links in homewiki; [[simplewiki:Earth]]
 			)
 			return;				
@@ -47,4 +47,5 @@ public class Xopg_lnki_list {
 	}
 
 	public static final String Lnki_id_prefix = "xolnki_";
+	private static final int Anch_bgn_anchor_only = 1;	// signifies lnki which is only anchor; EX: [[#anchor]]
 }

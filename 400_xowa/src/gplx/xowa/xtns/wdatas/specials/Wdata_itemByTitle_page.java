@@ -53,17 +53,17 @@ public class Wdata_itemByTitle_page implements Xow_special_page {
 			if (Navigate(usr_dlg, app, app.Wiki_mgr().Wdata_mgr(), page, site_bry, page_bry)) return;
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		html_fmtr.Bld_bfr_many(tmp_bfr, "Search for items by site and title", "Site", site_bry, "Page", page_bry, "Search");
-		page.Data_raw_(tmp_bfr.To_bry_and_rls());
+		page.Db().Text().Text_bry_(tmp_bfr.To_bry_and_rls());
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoae_app app, Wdata_wiki_mgr wdata_mgr, Xoae_page page, byte[] site_bry, byte[] page_bry) {
 		page_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(page_bry);		// NOTE: space is converted to + on postback to url; decode
 		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 	if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(wiki_domain);	if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
-		Xoa_ttl wdata_ttl = Xoa_ttl.parse(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
+		Xoa_ttl wdata_ttl = Xoa_ttl.Parse(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
 		Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();
-		wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
+		wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (page.Db().Page().Exists_n()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
 		return true;
 	}
 	private static Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl

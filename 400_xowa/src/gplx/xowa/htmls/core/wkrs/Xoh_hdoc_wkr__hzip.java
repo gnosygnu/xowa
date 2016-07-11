@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
-	private final Xoh_stat_itm stat_itm = new Xoh_stat_itm();
+	private final    Xoh_stat_itm stat_itm = new Xoh_stat_itm();
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
 	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
@@ -39,6 +39,7 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 			case Xoh_hzip_dict_.Tid__lnke:		wkr = hctx.Pool_mgr__hzip().Mw__lnke(); break;
 			case Xoh_hzip_dict_.Tid__img:		wkr = hctx.Pool_mgr__hzip().Mw__img(); break;
 			case Xoh_hzip_dict_.Tid__img_bare:	wkr = hctx.Pool_mgr__hzip().Mw__img_bare(); break;
+			case Xoh_hzip_dict_.Tid__toc:		wkr = hctx.Pool_mgr__hzip().Mw__toc(); break;
 			default:							throw Err_.new_unhandled(data.Tid());
 		}
 		wkr.Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();

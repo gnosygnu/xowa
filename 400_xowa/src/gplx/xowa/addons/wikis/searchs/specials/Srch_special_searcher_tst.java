@@ -188,7 +188,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		public void Test_html_by_url(String ttl_str, String args_str, String expd_html) {
 //			wiki.Init_needed_(false);
 //			byte[] ttl_bry = Bry_.new_a7(ttl_str);
-//			Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+//			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 //			Xoae_page page = Xoae_page.New_test(wiki, ttl);
 //			byte[] url_bry = Bry_.new_a7("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
 //			Xoa_url url = wiki.Appe().Url_parser().Parse(url_bry);
@@ -200,7 +200,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			Xow_url_parser_old url_parser = new Xow_url_parser_old();			
 //			byte[] url_raw = Bry_.new_a7("Special:Search/" + ttl_str + ((match_tid == Srch_special_page.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Srch_rslt_row_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 //			Xoa_url url = url_parser.Parse(url_raw);
-//			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url_raw);
+//			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url_raw);
 //			Xoae_page page = wiki.Ctx().Page();
 //			search_mgr.Special__gen(url, page, wiki, ttl);
 //			Xosrh_rslt_grp cur_grp = search_mgr.Cur_grp();

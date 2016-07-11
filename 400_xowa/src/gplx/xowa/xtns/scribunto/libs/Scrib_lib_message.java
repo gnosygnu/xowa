@@ -99,11 +99,11 @@ class Scrib_lib_message_data {
 			if (data_ttl == null)
 				ttl = ctx.Page().Ttl();
 			else
-				ttl = Xoa_ttl.parse(wiki, data_ttl);
+				ttl = Xoa_ttl.Parse(wiki, data_ttl);
 		}
 		if (raw_msg_key != null) {
 			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
-			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = Bry_bfr_.New(); // wiki.Utl__bfr_mkr().Get_b512();
 			byte[] raw_msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, raw_msg_key);
 			Xol_msg_itm_.update_val_(raw_msg_itm, raw_msg_val);
 			byte[] raw_msg_rv = wiki.Msg_mgr().Val_by_itm(tmp_bfr, raw_msg_itm, args);

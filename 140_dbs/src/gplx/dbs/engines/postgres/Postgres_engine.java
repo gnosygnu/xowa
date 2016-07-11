@@ -20,7 +20,7 @@ import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*; im
 import java.sql.*; 
 public class Postgres_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Postgres_conn_info.Tid_const;}
-	@Override public Sql_qry_wtr	Sql_wtr() {return Sql_qry_wtr_.Mysql;}
+	@Override public Sql_qry_wtr	Sql_wtr() {return Sql_qry_wtr_.New__mysql();}
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Postgres_engine rv = new Postgres_engine();
 		rv.Ctor(connectInfo);

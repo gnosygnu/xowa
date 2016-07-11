@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.hzips.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_stat_tbl implements Rls_able {
 	private static final String tbl_name = "hdump_stats"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
@@ -48,7 +48,7 @@ public class Xoh_stat_tbl implements Rls_able {
 			.Val_int(fld_wtxt_len				, wtxt_len)
 			.Val_int(fld_row_orig_len			, row_orig_len)
 			.Val_int(fld_row_zip_len			, row_zip_len)
-			.Val_int(fld_body_len				, Len_or_0(hpg.Body()))
+			.Val_int(fld_body_len				, Len_or_0(hpg.Db().Html().Html_bry()))
 			.Val_int(fld_display_ttl_len		, Len_or_0(hpg.Display_ttl()))
 			.Val_int(fld_content_sub_len		, Len_or_0(hpg.Content_sub()))
 			.Val_int(fld_sidebar_div_len		, Len_or_0(hpg.Sidebar_div()))

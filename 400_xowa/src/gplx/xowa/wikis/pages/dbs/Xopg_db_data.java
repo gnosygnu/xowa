@@ -15,17 +15,16 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-public class Xoh_arg_img_core__hdump implements gplx.core.brys.Bfr_arg, Xoh_arg_img_core {
-	private int uid;
-	public Xoh_arg_img_core Init(int uid, byte[] img_src, int img_w, int img_h) {
-		this.uid = uid;
-		return this;
-	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
-		bfr.Add_byte_space();
-		bfr.Add(gplx.xowa.htmls.core.makes.Xoh_make_trie_.Bry__img);
-		bfr.Add_int_variable(uid);
-		bfr.Add_byte_quote();
+package gplx.xowa.wikis.pages.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+public class Xopg_db_data {
+	public Xopg_db_page			Page()			{return page;}			private final    Xopg_db_page page = new Xopg_db_page();
+	public Xopg_db_text			Text()			{return text;}			private final    Xopg_db_text text = new Xopg_db_text();
+	public Xopg_db_html			Html()			{return html;}			private final    Xopg_db_html html = new Xopg_db_html();
+	public Xopg_db_protection	Protection()	{return protection;}	private final    Xopg_db_protection protection = new Xopg_db_protection();
+	public void Clear() {
+		page.Clear();
+		html.Clear();
+		// text.Clear();
+		// protection.Clear();
 	}
 }

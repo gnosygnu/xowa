@@ -312,7 +312,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			byte itm_tid = Load_ctg_v1_tid(itm.Ns_id());
 			Xoctg_view_itm sub = new Xoctg_view_itm();
 			sub.Set__page(itm_tid, itm.Id());
-			sub.Set__ttl__sortkey(Xoa_ttl.parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
+			sub.Set__ttl__sortkey(Xoa_ttl.Parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
 			view_ctg.Grp_by_tid(itm_tid).Itms_add(sub);				
 		}
 		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {

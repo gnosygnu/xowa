@@ -22,7 +22,7 @@ import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_hdr_html {
 	public void Write_html(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src, Xop_hdr_tkn hdr) {
 		if (hdr.Hdr_html_first() && cfg.Toc__show() && !page.Hdr_mgr().Toc_manual())	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
-			wiki.Html_mgr().Toc_mgr().Html(ctx.Page(), hctx, src, bfr, true);
+			wiki.Html_mgr().Toc_mgr().Html(ctx.Page(), hctx, bfr, page.Html_data().Xtn_pgbnr() != null);
 
 		int hdr_len = hdr.Hdr_level();
 		if (hdr_len > 0) {													// NOTE: need to check hdr_len b/c it could be dangling
@@ -47,7 +47,7 @@ public class Xoh_hdr_html {
 			bfr.Add(Bry__hdr_rhs_end);										// '>\n'
 		}
 	}
-	private static final byte[] Bry__hdr_lhs_bgn = Bry_.new_a7("<h"), Bry__hdr_rhs_bgn = Bry_.new_a7("</h"), Bry__hdr_rhs_end = Bry_.new_a7(">\n")
+	private static final    byte[] Bry__hdr_lhs_bgn = Bry_.new_a7("<h"), Bry__hdr_rhs_bgn = Bry_.new_a7("</h"), Bry__hdr_rhs_end = Bry_.new_a7(">\n")
 	, Bry__span_lhs_bgn = Bry_.new_a7("<span class=\"mw-headline\" id=\""), Bry__span_lhs_end = Bry_.new_a7("\">")
 	;
 }

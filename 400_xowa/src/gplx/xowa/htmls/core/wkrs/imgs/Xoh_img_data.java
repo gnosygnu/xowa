@@ -66,16 +66,17 @@ public class Xoh_img_data implements Xoh_data_itm {
 				tag_rdr.Tag__move_fwd_head();				// next <div>
 				anch_head = tag_rdr.Tag__move_fwd_head();	// next <div>
 			}
-			this.src_bgn = anch_head.Src_bgn();																// <a
-			if (!anch_href.Parse(err_wkr, hctx, src, anch_head)) return false;								// href='/wiki/File:A.png'
-			if (!anch_cls.Parse(err_wkr, src, anch_head)) return false;										// class='image'
-			Gfh_atr anch_title = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);						// title='abc'
+			this.src_bgn = anch_head.Src_bgn();															// <a
+			if (!anch_href.Parse(err_wkr, hctx, src, anch_head)) return false;							// href='/wiki/File:A.png'
+			if (!anch_cls.Parse(err_wkr, src, anch_head)) return false;									// class='image'
+			Gfh_atr anch_title = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);					// title='abc'
 			anch_title_bgn = anch_title.Val_bgn(); anch_title_end = anch_title.Val_end();
-			Gfh_atr xowa_title = anch_head.Atrs__get_by_or_empty(Bry__atr__xowa_title);						// xowa_title='A.png'
+			Gfh_atr xowa_title = anch_head.Atrs__get_by_or_empty(Bry__atr__xowa_title);					// xowa_title='A.png'
 			if (xowa_title.Val_dat_exists()) anch_page.Val_(xowa_title.Val());
 			img_tag = tag_rdr.Tag__move_fwd_head();
 		}
 		img_tag.Chk_name_or_fail(Gfh_tag_.Id__img);														// <img
+//			if (img_tag.Atrs__cls_has(gplx.xowa.xtns.pagebanners.Pgbnr_xtn_mgr.Bry__cls__wpb_banner_image)) return false;	// ignore pagebanner; EX: <img class="wpb-banner-image">
 		img_xoimg.Parse(err_wkr, src, img_tag);															// data-xoimg='...'
 		this.img_w = img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__width, Xof_img_size.Size__neg1);			// width='220'
 		this.img_h = img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__height, Xof_img_size.Size__neg1);		// height='110'

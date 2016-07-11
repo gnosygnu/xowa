@@ -74,7 +74,7 @@ public class Xow_popup_parser {
 			data.Wrdx_bfr().Add(app.Wiki_mgr().Wdata_mgr().Popup_text(page));
 		}
 		else {
-			byte[] tmpl_src = page.Data_raw(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
+			byte[] tmpl_src = page.Db().Text().Text_bry(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
 			int tmpl_bgn_orig = Xow_popup_parser_.Tmpl_bgn_get_(app, popup_itm, page.Ttl(), hdr_finder, tmpl_src, tmpl_len);
 			int tmpl_bgn = tmpl_bgn_orig;
 			int tmpl_read_len_cur = cfg.Tmpl_read_len();

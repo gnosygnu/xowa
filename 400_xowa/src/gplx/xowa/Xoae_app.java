@@ -144,7 +144,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;
-	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
+	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private final    Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
 
 	private Xoa_fmtr_mgr fmtr_mgr;
 	public Number_parser Utl_num_parser() {return utl_num_parser;} private Number_parser utl_num_parser = new Number_parser();
@@ -186,13 +186,13 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
 		log_wtr.Log_term(); usr_dlg.Log_many("", "", "term:log_wtr");
 		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
-		if (Scrib_core.Core() != null) {Scrib_core.Core().Term(); usr_dlg.Log_many("", "", "term:scrib");}
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
 		wiki_mgr.Rls(); usr_dlg.Log_many("", "", "term:wiki_mgr");
 		return true;
 	}
 	public void Reset_all() {
 		this.Free_mem(true);
-		gplx.xowa.xtns.scribunto.Scrib_core.Core_invalidate();
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
 		Env_.GarbageCollect();
 	}
 	public void Free_mem(boolean clear_ctx) {

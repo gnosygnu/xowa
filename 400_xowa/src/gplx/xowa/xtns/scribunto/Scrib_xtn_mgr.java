@@ -26,7 +26,7 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 	public byte Engine_type() {return engine_type;} private byte engine_type = Scrib_engine_type.Type_luaj;
 	public void Engine_type_(byte cmd) {
 		engine_type = cmd;
-		Scrib_core.Core_invalidate();
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
 	}
 	public int Lua_timeout() {return lua_timeout;} private int lua_timeout = 4000;
 	public int Lua_timeout_polling() {return lua_timeout_polling;} private int lua_timeout_polling = 1;
@@ -36,7 +36,7 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 	public boolean Luaj_debug_enabled() {return luaj_debug_enabled;} private boolean luaj_debug_enabled;
 	public void Luaj_debug_enabled_(boolean v) {
 		this.luaj_debug_enabled = v;
-		Scrib_core.Core_invalidate();	// restart server in case luaj caches any debug data
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();// restart server in case luaj caches any debug data
 	}
 	public Xop_log_invoke_wkr Invoke_wkr() {return invoke_wkr;} private Xop_log_invoke_wkr invoke_wkr;
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

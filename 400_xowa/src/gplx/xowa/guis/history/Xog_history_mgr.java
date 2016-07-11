@@ -59,7 +59,7 @@ public class Xog_history_mgr {
 		byte[] page_key = Build_page_key(itm.Wiki(), itm.Page(), itm.Qarg());
 		Xoae_page rv = (Xoae_page)hash.Get_by(page_key);
 		if (rv != null) return rv;
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, itm.Page());
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, itm.Page());
 		return wiki.Data_mgr().Load_page_by_ttl(ttl);
 	}
 	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Qargs_mgr().To_bry());}

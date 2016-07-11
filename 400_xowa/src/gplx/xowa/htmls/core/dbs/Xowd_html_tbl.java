@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*; import gplx.core.brys.*;
-public class Xoh_page_tbl implements Rls_able {
+public class Xowd_html_tbl implements Db_tbl {
 	private final    String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	private final    Int_flag_bldr body_flag_bldr = new Int_flag_bldr().Pow_ary_bld_(3, 2);	// 8 different zip types; 4 different hzip types
-	public Xoh_page_tbl(Db_conn conn) {
+	public Xowd_html_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_page_id			= flds.Add_int_pkey("page_id");
 		this.fld_head_flag			= flds.Add_int("head_flag");
@@ -75,7 +75,7 @@ public class Xoh_page_tbl implements Rls_able {
 		}
 		finally {rdr.Rls();}
 	}
-	public boolean Select_as_row(Xoh_page_row rv, int page_id) {
+	public boolean Select_as_row(Xowd_html_row rv, int page_id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_manual();
 		try {

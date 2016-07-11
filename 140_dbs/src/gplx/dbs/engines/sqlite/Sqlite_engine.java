@@ -27,7 +27,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		this.schema_mgr = new Sqlite_schema_mgr(this);
 	}
 	@Override public String Tid() {return Sqlite_conn_info.Key_const;}
-	@Override public gplx.dbs.sqls.Sql_qry_wtr Sql_wtr() {return Sql_qry_wtr_.Sqlite;}
+	@Override public gplx.dbs.sqls.Sql_qry_wtr Sql_wtr() {return Sql_qry_wtr_.New__sqlite();}
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
 		rv.Ctor(connectInfo);

@@ -21,6 +21,49 @@ public class Btrie_fast_mgr {
 	private ByteTrieItm_fast root;
 	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}
 	public int Match_pos() {return match_pos;} private int match_pos;
+
+//		Btrie_rv Match_at_w_b0_and_rls(byte[] src, int bgn, int end) {return Match_at_w_b0_and_rls(src[bgn], src, bgn, end);}
+//		Btrie_rv Match_at_w_b0_and_rls(byte b, byte[] src, int bgn_pos, int src_end) {
+//			Btrie_rv rv = ((Btrie_rv)Btrie_rv.Pool__mgr.Get_safe());
+//			Match_at_w_b0(rv, b, src, bgn_pos, src_end);
+//			return rv;
+//		}
+	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int src_end) {
+		Object rv_obj = null; 
+		int rv_pos = bgn_pos;
+		ByteTrieItm_fast nxt = root.Ary_find(b);
+		if (nxt == null) {				// nxt does not have b; return rv;
+			rv.Init(rv_pos, rv_obj);
+			return rv_obj;
+		}
+		int cur_pos = bgn_pos + 1;
+		ByteTrieItm_fast cur = root;
+		while (true) {
+			if (nxt.Ary_is_empty()) {		// nxt is leaf; return nxt.Val() (which should be non-null)
+				rv_obj = nxt.Val();
+				rv.Init(cur_pos, rv_obj);
+				return rv_obj;
+			}
+			Object nxt_val = nxt.Val();
+			if (nxt_val != null) {		// nxt is node; cache rv (in case of false match)
+				rv_pos = cur_pos;
+				rv_obj = nxt_val;
+			}
+			if (cur_pos == src_end) {	// eos; exit
+				rv.Init(rv_pos, rv_obj);
+				return rv_obj;
+			}
+			b = src[cur_pos];
+			cur = nxt;
+			nxt = cur.Ary_find(b);
+			if (nxt == null) {
+				rv.Init(rv_pos, rv_obj);
+				return rv_obj;
+			}
+			++cur_pos;
+		}
+	}
+
 	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
 		Object rv = Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;

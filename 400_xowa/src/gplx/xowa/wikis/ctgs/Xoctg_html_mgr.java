@@ -63,11 +63,11 @@ public class Xoctg_html_mgr implements Gfo_invk {
 			boolean id_exists = wiki.Db_mgr().Load_mgr().Load_by_id(dbo_page, itm.Page_id());
 			Xoa_ttl itm_ttl = null;
 			if (id_exists)
-				itm_ttl = Xoa_ttl.parse(wiki, dbo_page.Ns_id(), dbo_page.Ttl_page_db());
+				itm_ttl = Xoa_ttl.Parse(wiki, dbo_page.Ns_id(), dbo_page.Ttl_page_db());
 			else {
-				itm_ttl = Xoa_ttl.parse(wiki, itm.Sort_key());
+				itm_ttl = Xoa_ttl.Parse(wiki, itm.Sort_key());
 				if (itm_ttl == null)
-					itm_ttl = Xoa_ttl.parse(wiki, Bry_missing);
+					itm_ttl = Xoa_ttl.Parse(wiki, Bry_missing);
 				itm.Missing_y_();
 			}
 			itm.Set__ttl__sortkey(itm_ttl, itm.Sort_key());
@@ -95,7 +95,7 @@ public class Xoctg_html_mgr implements Gfo_invk {
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
 		byte[] all_label = msg_mgr.Val_by_id_args(fmtr_all.Msg_id_label(), view_ctg.Name());
 		byte[] all_stats = msg_mgr.Val_by_id_args(fmtr_all.Msg_id_stats(), view_grp.Len(), view_grp.Total());
-		Xoa_ttl ctg_ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__category, view_ctg.Name());
+		Xoa_ttl ctg_ttl = Xoa_ttl.Parse(wiki, Xow_ns_.Tid__category, view_ctg.Name());
 		byte[] all_navs = fmtr_all.Bld_bwd_fwd(wiki, ctg_ttl, view_grp);
 		Array_.Sort(view_grp.Itms(), Xoctg_view_itm_sorter_sortkey.Instance);
 		fmtr_grp.Init_from_all(wiki, lang, hctx, view_ctg, fmtr_all, view_grp);	// NOTE: must assert sorted for v1; PAGE:s.w:Category:Computer_science; DATE:2015-11-22

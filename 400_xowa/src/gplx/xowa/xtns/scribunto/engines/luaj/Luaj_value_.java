@@ -99,7 +99,7 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, Long_.Cls_ref_type))			return LuaValue.valueOf((Long)o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());
 		else if	(Object_.Eq(c, Float_.Cls_ref_type))		return LuaValue.valueOf((Float)o);
-		else if	(Object_.Eq(c, Char_.Cls_ref_type))			return LuaValue.valueOf((char)o);
+		else if	(Object_.Eq(c, Char_.Cls_ref_type))			return LuaValue.valueOf((Character)o);
 		else if	(Object_.Eq(c, Short_.Cls_ref_type))		return LuaValue.valueOf((Short)o);
 		else return LuaValue.NIL; 
 	}

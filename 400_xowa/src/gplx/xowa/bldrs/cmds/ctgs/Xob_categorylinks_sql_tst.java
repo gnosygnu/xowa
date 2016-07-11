@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.core.stores.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.core.stores.*;
+import gplx.dbs.*; import gplx.dbs.sqls.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.nss.*;
 public class Xob_categorylinks_sql_tst {
 	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Ctor_fsys();} Db_mgr_fxt fxt = new Db_mgr_fxt();
 	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();} 
@@ -84,6 +85,7 @@ class Db_tst_row {
 	}
 }
 class Db_tst_qry {
+	private final    Sql_qry_wtr qry_wtr = Sql_qry_wtr_.New__sqlite();
 	public Db_qry Qry() {return qry;} Db_qry qry;
 	public String[] Cols() {return cols;} public Db_tst_qry Cols_(String... v) {this.cols = v; return this;} private String[] cols;
 	public List_adp Rows() {return rows;} List_adp rows = List_adp_.New();
@@ -127,7 +129,7 @@ class Db_tst_qry {
 		}
 		if (!pass) {
 			bfr.Add(Lbl_row_hdr).Add_int_variable(expd_row_idx).Add_byte_nl();
-			bfr.Add_str_u8(qry.To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr_.Sqlite)).Add_byte(Byte_ascii.Semic);
+			bfr.Add_str_u8(qry.To_sql__exec(qry_wtr)).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
 	}	static final    byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");

@@ -22,7 +22,7 @@ public class Xop_parser_ {
 	public static final int Doc_bgn_bos = -1, Doc_bgn_char_0 = 0;
 	public static byte[] Parse_text_to_html(Xowe_wiki wiki, Xoae_page page, Xoa_ttl ttl, byte[] src, boolean para_enabled) {	// NOTE: must pass in same page instance; do not do Xoa_page_.new_(), else img_idx will get reset to 0; DATE:2015-02-08
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
+		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, wiki.Parser_mgr().Ctx(), page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
 		Xop_parser parser = wiki.Parser_mgr().Main();

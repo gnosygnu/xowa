@@ -34,7 +34,7 @@ class Xogv_page_load_wkr implements Gfo_thread_wkr, Gfo_invk {
 	}
 	private Xoh_page Fetch_page(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {
 		Xowv_wiki wiki = (Xowv_wiki)wiki_mgr.Get_by_or_null(wiki_domain);
-		if (wiki == null) return new Xoh_page().Exists_n_();	// wiki does not exist; happens with xwiki; PAGE:s.w:Photon; EX:[[wikt:transmit]]; DATE:2015-04-27
+		if (wiki == null) return Xoh_page.New_missing();	// wiki does not exist; happens with xwiki; PAGE:s.w:Photon; EX:[[wikt:transmit]]; DATE:2015-04-27
 		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
 		Gfo_url url = url_parser.Parse(Bry_.Add(wiki_domain, Byte_ascii.Slash_bry, page_bry, qarg_bry));
 		Xoh_page rv = new Xoh_page();

@@ -155,7 +155,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public void Page__mode_(byte new_mode_tid) {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki();
 		if (	new_mode_tid == Xopg_page_.Tid_read	// used to be && cur_view_tid == Edit; removed clause else redlinks wouldn't show when going form html to read (or clicking read multiple times) DATE: 2013-11-26;
-			&& !page.Missing()							// if new page, don't try to reload
+			&&	page.Db().Page().Exists()			// if new page, don't try to reload
 			) {
 			// NOTE: if moving from "Edit" to "Read", reload page (else Preview changes will still show); NOTE: do not call Exec_page_reload / Exec_page_refresh, which will fire redlinks code
 			page = tab_mgr.Active_tab().History_mgr().Cur_page(wiki);	// NOTE: must set to CurPage() else changes will be lost when going Bwd,Fwd
@@ -166,7 +166,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 				url = tab.Wiki().Utl__url_parser().Parse(url.To_bry_full_wo_qargs());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
 		}
 		tab.View_mode_(new_mode_tid);
-		if (page.Missing()) return;
+		if (page.Db().Page().Exists_n()) return;
 		Xog_tab_itm_read_mgr.Show_page(tab, page, false);
 		// Exec_page_refresh(); // commented out; causes lnke to show as [2] instead of [1] when saving page; EX: [http://a.org b] DATE:2014-04-24
 	}
@@ -186,7 +186,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		if (tab == Xog_tab_itm_.Null) return;
 		Xoae_page cur_page = tab.Page(); Xowe_wiki cur_wiki = tab.Wiki();
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
-		if (new_page.Missing()) return;
+		if (new_page.Db().Page().Exists_n()) return;
 		if (new_page.Ttl().Ns().Id_is_special())		// if Special, reload page; needed for Special:Search (DATE:2015-04-19; async loading) and Special:XowaBookmarks DATE:2015-10-05
 			new_page = new_page.Wikie().Data_mgr().Load_page_and_parse(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
@@ -213,7 +213,6 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public void Page__async__bgn(Xog_tab_itm tab) {
 		page__async__thread = Thread_adp_.Start_by_val(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, Invk_page_async_exec, tab);
-		page__async__thread.Thread__start();
 	}	private Thread_adp page__async__thread = Thread_adp.Noop;
 	public boolean Page__async__working(Xoa_url url) {
 		if (page__async__thread.Thread__is_alive()) {				// cancel pending image downloads
@@ -257,16 +256,16 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			Xowe_wiki home_wiki = app.Usere().Wiki();
 			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
 			Xoae_page new_page = wiki.Data_mgr().Load_page_and_parse(url, ttl);
-			if (new_page.Missing()) {return Bry_.Empty;}
+			if (new_page.Db().Page().Exists_n()) {return Bry_.Empty;}
 			gplx.xowa.apps.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
 			Xog_tab_itm tab = tab_mgr.Active_tab();
 			tab.Page_(new_page);
 			tab.History_mgr().Add(new_page);			
 			byte[] rv = output_html
 				? wiki.Html_mgr().Page_wtr_mgr().Gen(new_page, tab.View_mode())
-				: new_page.Data_raw();
+				: new_page.Db().Text().Text_bry();
 			if (app.Shell().Fetch_page_exec_async())
 				app.Gui_mgr().Browser_win().Page__async__bgn(tab);
 			return rv;

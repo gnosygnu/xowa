@@ -79,6 +79,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xog_cbk_mgr				Gui__cbk_mgr()				{return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
 	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final    Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
+	public Xop_amp_mgr				Parser_amp_mgr()			{return parser_amp_mgr;} private final    Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
 
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.makes.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.xtns.imaps.itms.*; import gplx.xowa.xtns.imaps.htmls.*;
 public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	private byte img_cls_tid; private Imap_xtn_mgr xtn_mgr;
@@ -45,7 +45,6 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 		if (hctx.Mode_is_hdump()) {
 			img_w = xfer_itm.Lnki_w();	// NOTE: hdump must dump lnki_w, not img_w; GUI will either (a) write -1 and update later thru js_wkr; (b) get correct img_w from cache; hdump can do neither (a) nor (b); DATE:2016-06-17
 			img_h = xfer_itm.Lnki_h();
-			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__img(), xfer_itm, Xohd_img_itm__gallery_itm.Tid_basic);	// DELETE: no need to add img to global collection during hdump; was here presumably to write entries to "imgs" table; DATE:2016-06-17
 		}
 		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h(), a_xowa_title);
 	}

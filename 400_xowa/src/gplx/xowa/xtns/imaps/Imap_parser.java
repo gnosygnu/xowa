@@ -33,7 +33,7 @@ public class Imap_parser {
 	public void Init(Xowe_wiki wiki, Xoae_page page, Gfo_usr_dlg usr_dlg) {// SCOPE.PAGE
 		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page.Url(); this.usr_dlg = usr_dlg;
 		this.wiki_ctx = wiki.Parser_mgr().Ctx();
-		imap_ctx = Xop_ctx.new_(wiki, page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
+		imap_ctx = Xop_ctx.new_(wiki, wiki.Parser_mgr(), page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
 		imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
 	}
 	public void Clear() {

@@ -79,7 +79,7 @@ public class Xol_mw_lang_parser {
 				String text = Io_mgr.Instance.LoadFilStr(url);
 				Xol_lang_itm lang = lang_mgr.Get_by_or_new(Bry_.new_u8(lang_key));
 				this.Parse_core(text, lang, bfr, lang_transform);
-			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
+			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_log(exc));}
 		}
 	}
 	private void Parse_file_xtns_php(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
@@ -92,7 +92,7 @@ public class Xol_mw_lang_parser {
 			String text = Io_mgr.Instance.LoadFilStr(url);
 			boolean prepend_hash = String_.Eq("ParserFunctions.i18n.magic", url.NameOnly());
 			this.Parse_xtn(text, url, lang_mgr, bfr, prepend_hash, lang_transform);
-			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
+			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_log(exc));}
 		}
 	}
 	private void Parse_file_json(Xoa_lang_mgr lang_mgr, Bry_bfr bfr, Xol_lang_transform lang_transform, Io_url root_dir) {
@@ -107,7 +107,7 @@ public class Xol_mw_lang_parser {
 				try {
 					Xol_lang_itm lang = lang_mgr.Get_by_or_new(Bry_.new_u8(fil.NameOnly()));
 					Xob_i18n_parser.Load_msgs(true, lang, fil);
-				}	catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_full(exc)));}
+				}	catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_log(exc)));}
 			}
 		}
 	}
@@ -201,7 +201,7 @@ public class Xol_mw_lang_parser {
 								Parse_magicwords(line, lang.Key_bry(), lang.Kwd_mgr(), prepend_hash, lang_transform); 
 							break;
 					}
-				} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
+				} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_log(exc));}
 			}
 		}
 	}

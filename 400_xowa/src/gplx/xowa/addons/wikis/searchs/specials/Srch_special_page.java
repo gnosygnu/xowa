@@ -60,14 +60,14 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 
 		// get page directly from url
 		boolean fulltext_invoked = url.Qargs_mgr().Match(Qarg__fulltext, Qarg__fulltext__y);
-		Xoa_ttl search_ttl = Xoa_ttl.parse(wiki, search_raw); 
+		Xoa_ttl search_ttl = Xoa_ttl.Parse(wiki, search_raw); 
 		Xoae_page search_page = page;
 		if (	!fulltext_invoked
 			&&	!Bry_.Eq(search_raw, Xow_special_meta_.Itm__search.Ttl_bry()))	// do not lookup self else stack overflow; happens when going directly to Special:Search (from history)
 			search_page = wiki.Data_mgr().Load_page_by_ttl(search_ttl);					// try to find page; EX:Special:Search?search=Earth -> en.w:Earth; needed for search suggest
 
 		// page not found, or explicit_search invoked
-		if (search_page.Missing() || fulltext_invoked) {
+		if (search_page.Db().Page().Exists_n() || fulltext_invoked) {
 			if (qargs_mgr.Cancel() != null) {	// cancel any existing searches
 				search_mgr.Search__cancel(qargs_mgr.Cancel());
 				page.Tab_data().Cancel_show_y_();
@@ -81,10 +81,12 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 		// page found; return it;
 		else {
 			wiki.Parser_mgr().Parse(search_page, true);
-			page.Data_raw_(search_page.Data_raw());
+			page.Db().Text().Text_bry_(search_page.Db().Text().Text_bry());
 			if (page.Root() != null) // NOTE: null when going from w:Earth -> q:Earth; DATE:2013-03-20
 				page.Root().Data_htm_(search_page.Root().Data_htm());
-			page.Ttl_(search_ttl).Url_(Xoa_url.new_(wiki.Domain_bry(), search_ttl.Full_txt_w_ttl_case())).Redirected_(true);
+			Xoa_url redirect_url = Xoa_url.New(wiki, search_ttl);
+			page.Ttl_(search_ttl).Url_(redirect_url);
+			page.Redirect().Itms__add__special(redirect_url, search_ttl);
 		}
 	}
 	private void Multi_wikis_changed() {

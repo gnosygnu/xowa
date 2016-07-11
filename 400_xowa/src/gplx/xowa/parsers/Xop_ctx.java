@@ -24,14 +24,15 @@ import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xo
 import gplx.xowa.parsers.logs.*; import gplx.xowa.htmls.modules.popups.keeplists.*;
 public class Xop_ctx {
 	private Xop_ctx_wkr[] wkrs = new Xop_ctx_wkr[] {};
-	Xop_ctx(Xowe_wiki wiki, Xoae_page page) {
+	Xop_ctx(Xowe_wiki wiki, Xow_parser_mgr parser_mgr, Xoae_page page) {
 		this.app = wiki.Appe(); this.msg_log = app.Msg_log(); this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
 		this.wiki = wiki; this.cur_page = page; this.lang = wiki.Lang();
+		this.parser_mgr = parser_mgr;
 		this.wkrs = new Xop_ctx_wkr[] {para, apos, xnde, list, lnki, hdr, amp, lnke, tblw, invk};
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Ctor_ctx(this);
 		this.xnde_tag_regy = wiki.Mw_parser_mgr().Xnde_tag_regy();
 	}
-//		public boolean Scribunto; // CHART
+	// public boolean Scribunto; // CHART
 	public Xoae_app				App()				{return app;} private final    Xoae_app app;
 	public Xowe_wiki			Wiki()				{return wiki;} private final    Xowe_wiki wiki;
 	public Xol_lang_itm			Lang()				{return lang;} private final    Xol_lang_itm lang;
@@ -51,6 +52,7 @@ public class Xop_ctx {
 	public Xot_invk_wkr			Invk()				{return invk;}	private final    Xot_invk_wkr invk = new Xot_invk_wkr();
 	public Xop_curly_wkr		Curly() 			{return curly;} private final    Xop_curly_wkr curly = new Xop_curly_wkr();
 	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final    Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
+	public Xow_parser_mgr		Parser_mgr()		{return parser_mgr;} private Xow_parser_mgr parser_mgr;
 
 	public boolean					Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
 	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.Max_value;
@@ -304,23 +306,24 @@ public class Xop_ctx {
 		if (stack_pos == -1) return;
 		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
-	public static Xop_ctx new_main_page(Xowe_wiki wiki)			{return new_(wiki, Xoa_page_.Main_page_bry);}	// HACK: use "Main_Page" to put in valid page title
-	public static Xop_ctx new_(Xowe_wiki wiki, byte[] ttl_bry)	{return new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ttl_bry)));}
-	public static Xop_ctx new_sub_(Xowe_wiki wiki)				{return new_sub_(wiki, wiki.Parser_mgr().Ctx().cur_page);}
-	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO_OLD: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
-		Xop_ctx rv = new Xop_ctx(wiki, page);
-		new_copy(wiki.Parser_mgr().Ctx(), rv);
+	public static Xop_ctx new_main_page(Xowe_wiki wiki)					{return new_(wiki, wiki.Parser_mgr(), Xoa_page_.Main_page_bry);}	// HACK: use "Main_Page" to put in valid page title
+	public static Xop_ctx new_(Xowe_wiki wiki, Xow_parser_mgr parser_mgr, byte[] ttl_bry)	{return new Xop_ctx(wiki, parser_mgr, Xoae_page.New(wiki, wiki.Ttl_parse(ttl_bry)));}
+	public static Xop_ctx new_sub_(Xop_ctx ctx)							{return new_sub_(ctx.wiki, ctx, ctx.cur_page);}
+	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xop_ctx ctx)			{return new_sub_(wiki, ctx, ctx.cur_page);}
+	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xop_ctx ctx, Xoae_page page) {	// TODO_OLD: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
+		Xop_ctx rv = new Xop_ctx(wiki, ctx.parser_mgr, page);
+		new_copy(ctx, rv);
 		return rv;
 	}
 	public static Xop_ctx new_sub_page_(Xowe_wiki wiki, Xop_ctx ctx, Hash_adp_bry lst_page_regy) {
-		Xop_ctx rv = new Xop_ctx(wiki, ctx.cur_page);
+		Xop_ctx rv = new Xop_ctx(wiki, ctx.parser_mgr, ctx.cur_page);
 		new_copy(ctx, rv);
 		rv.lst_page_regy = lst_page_regy;				// NOTE: must share ref for lst only (do not share for sub_(), else stack overflow)
 		return rv;
 	}
 	public static Xop_ctx New_sub_by_ctx(Xop_ctx ctx) {
 		Xowe_wiki wiki = ctx.Wiki();
-		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.New(wiki, wiki.Ttl_parse(ctx.Page().Ttl().Full_db())));
+		Xop_ctx rv = new Xop_ctx(wiki, ctx.parser_mgr, Xoae_page.New(wiki, wiki.Ttl_parse(ctx.Page().Ttl().Full_db())));
 		new_copy(ctx, rv);
 		return rv;
 	}

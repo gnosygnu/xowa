@@ -60,7 +60,7 @@ class Articles_itm_fmtr implements gplx.core.brys.Bfr_arg {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Articles_itm itm = (Articles_itm)itms.Get_at(i);
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, itm.Ttl()); if (ttl == null) continue;
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, itm.Ttl()); if (ttl == null) continue;
 			fmtr.Bld_bfr(bfr, ttl.Full_db(), itm.Text());
 		}
 	}

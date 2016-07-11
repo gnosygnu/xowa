@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.htmls.core.makes.imgs.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*;
 import gplx.xowa.files.*;
 public class Gallery_mgr_wtr {
 	private static final    Gallery_img_pad_fmtr_arg div_3_fmtr_arg = new Gallery_img_pad_fmtr_arg();
@@ -37,7 +37,6 @@ public class Gallery_mgr_wtr {
 		if (itms_per_row > 0) {	// "perrow" specified; add "_maxwidth" to div1 style
 			int max_width = itms_per_row * (itm_default_w + mgr.Get_all_padding());
 			ul_style = Fmt_and_add(tmp_bfr, Gallery_mgr_wtr_.Fmtr__ul__style, ul_style, max_width);
-			page.Hdump_data().Imgs_add(new Xohd_img_itm__gallery_mgr(ul_uid, max_width));
 		}
 		byte[] ul_cls = Fmt_and_add(tmp_bfr, Gallery_mgr_wtr_.Fmtr__ul__cls, xnde.Atr_cls(), Gallery_mgr_base_.To_bry(mgr.Tid()));
 		Write_ul_lhs(bfr, tmp_bfr, hctx_is_hdump, wiki.Appe().Html_mgr().Whitelist_mgr(), src, xnde, ul_id, ul_cls, ul_style, xnde.Atrs_other());
@@ -110,7 +109,7 @@ public class Gallery_mgr_wtr {
 			// get href_ttl
 			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_find_.Not_found
 				? itm_ttl
-				: Xoa_ttl.parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
+				: Xoa_ttl.Parse(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
 			if (href_ttl == null) href_ttl = itm_ttl;	// occurs when link is invalid; EX: A.png|link=<invalid>
 
 			// get w, h
@@ -153,9 +152,6 @@ public class Gallery_mgr_wtr {
 		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).To_bry_and_clear();
 		mgr.Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
-
-		if (hctx_is_hdump)
-			page.Hdump_data().Imgs_add_img(new Xohd_img_itm__gallery_itm().Data_init_gallery(div_1_w, div_2_w, div_3_margin), xfer_itm, Xohd_img_itm__gallery_itm.Tid_gallery);
 	}
 
 	public static byte File_found_mode = Bool_.__byte;

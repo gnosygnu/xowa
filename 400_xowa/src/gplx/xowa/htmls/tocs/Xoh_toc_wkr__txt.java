@@ -24,13 +24,14 @@ class Xoh_toc_wkr__txt {
 	private final    Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__id();
 	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	private final    Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
-	private byte[] page_name = Bry_.Empty;
+	private byte[] page_name;
 	public void Clear() {
 		anch_bfr.Clear();
 		text_bfr.Clear();
 		anch_hash.Clear();
 	}
-	public void Calc_anch_text(Xoh_toc_itm rv, byte[] src) {	// text within hdr; EX: <h2>Abc</h2> -> Abc
+	public void Calc_anch_text(Xoh_toc_itm rv, byte[] page_name, byte[] src) {	// text within hdr; EX: <h2>Abc</h2> -> Abc
+		this.page_name = page_name;
 		int end = src.length;
 		src = Remove_comment(text_bfr, src, 0, end);
 		end = src.length;
@@ -38,15 +39,17 @@ class Xoh_toc_wkr__txt {
 		Calc_anch_text_recurse(src, 0, end);
 
 		byte[] anch_bry = anch_bfr.To_bry_and_clear_and_trim(Bool_.Y, Bool_.Y, id_trim_ary);
-		Int_obj_ref anch_idx_ref = (Int_obj_ref)anch_hash.Get_by(anch_bry);
-		if (anch_idx_ref == null) {
-			anch_hash.Add(anch_bry, Int_obj_ref.New(2));
+		if (anch_hash.Has(anch_bry)) {
+			int anch_idx = 2;
+			while (true) {	// NOTE: this is not big-O performant, but it mirrors MW; DATE:2016-07-09
+				byte[] anch_tmp = Bry_.Add(anch_bry, Byte_ascii.Underline_bry, Int_.To_bry(anch_idx++));
+				if (!anch_hash.Has(anch_tmp)) {
+					anch_bry = anch_tmp;
+					break;
+				}
+			}
 		}
-		else {
-			int anch_idx = anch_idx_ref.Val();
-			anch_bry = Bry_.Add(anch_bry, Byte_ascii.Underline_bry, Int_.To_bry(anch_idx));
-			anch_idx_ref.Val_(anch_idx + 1);
-		}
+		anch_hash.Add_as_key_and_val(anch_bry);
 		rv.Set__txt
 		( anch_bry
 		, text_bfr.To_bry_and_clear_and_trim());	// NOTE: both id and text trim ends
@@ -97,12 +100,30 @@ class Xoh_toc_wkr__txt {
 			// get lhs / rhs vars
 			byte[] lhs_bry = lhs.Name_bry();
 			int lhs_end = lhs.Src_end();
-			boolean lhs_is_pair = !lhs.Tag_is_inline();
+
+			// ignore tags which are not closed by tidy as default; EX: <br> not <br>a</br> or <br/>
+			boolean lhs_is_dangling = false;
+			switch (tag_id) {
+				case Gfh_tag_.Id__img: 
+				case Gfh_tag_.Id__br: 
+				case Gfh_tag_.Id__hr:
+					lhs_is_dangling = true;
+					break;
+			}
+			boolean lhs_is_pair = !lhs.Tag_is_inline() && !lhs_is_dangling;
 			int rhs_bgn = -1, rhs_end = -1, new_pos = lhs_end;
-			if (lhs_is_pair) {	// get rhs unless inline
-				Gfh_tag rhs = tag_rdr.Tag__move_fwd_tail(tag_id);
-				rhs_bgn = rhs.Src_bgn(); rhs_end = rhs.Src_end();
-				new_pos = rhs_end;
+			if (lhs_is_pair) {			// get rhs unless inline
+				if (tag_id == Gfh_tag_.Id__any) {
+                        Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown tag: page=~{0} tag=~{1}", page_name, lhs_bry);
+					Gfh_tag rhs = tag_rdr.Tag__move_fwd_tail(lhs_bry);
+					rhs_bgn = rhs.Src_bgn(); rhs_end = rhs.Src_end();
+					new_pos = rhs_end;
+				}
+				else {
+					Gfh_tag rhs = tag_rdr.Tag__move_fwd_tail(tag_id);
+					rhs_bgn = rhs.Src_bgn(); rhs_end = rhs.Src_end();
+					new_pos = rhs_end;
+				}
 			}
 
 			// print "<tag></tag>"; also, recurse

@@ -223,7 +223,7 @@ public class Xoh_html_wtr {
 		if (hctx.Mode_is_alt()) return;
 		switch (under.Under_tid()) {
 			case Xol_kwd_grp_.Id_toc:
-				wiki.Html_mgr().Toc_mgr().Html(page, hctx, src, bfr, true);
+				wiki.Html_mgr().Toc_mgr().Html(page, hctx, bfr, false);
 				break;
 			case Xol_kwd_grp_.Id_notoc:	case Xol_kwd_grp_.Id_forcetoc:	// NOTE: skip output; changes flag on page only
 				break;

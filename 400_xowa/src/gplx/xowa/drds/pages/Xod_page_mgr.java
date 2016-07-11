@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
+import gplx.core.net.*; import gplx.xowa.addons.wikis.imports.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
-import gplx.core.net.*; import gplx.xowa.addons.wikis.imports.*;
+import gplx.xowa.wikis.pages.redirects.*;
 public class Xod_page_mgr {
 	public Xod_page_itm Get_page(Xow_wiki wiki, Xoa_url page_url) {
 		Xod_page_itm rv = new Xod_page_itm();
@@ -35,7 +36,7 @@ public class Xod_page_mgr {
 
 		// load page data
 		Xoh_page hpg = new Xoh_page();
-		hpg.Init(wiki, Xoa_url.new_(wiki.Domain_bry(), ttl.Page_db()), ttl, 1);
+		hpg.Init(wiki, Xoa_url.New(wiki, ttl), ttl, 1);
 		rv.Init_by_hpg(hpg);
 		wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
 		Load_sections(rv, hpg);
@@ -56,17 +57,14 @@ public class Xod_page_mgr {
 
 		// generate special
 		Xoh_page page = new Xoh_page();
-		page.Init(wiki, Xoa_url.new_(wiki.Domain_bry(), ttl.Page_db()), ttl, 1);	// NOTE: init page to set url, ttl; DATE:2016-06-23
+		page.Init(wiki, Xoa_url.New(wiki, ttl), ttl, 1);	// NOTE: init page to set url, ttl; DATE:2016-06-23
 		try {proto.Special__clone().Special__gen(wiki, page, url, ttl);}
 		catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e)); return rv;}
 
 		// handle redirects; EX: Special:XowaWikiInfo
-		byte[] redirect_to_ttl = page.Redirect_to_ttl();
-		if (redirect_to_ttl != null) {
-			ttl = wiki.Ttl_parse(redirect_to_ttl);
-			url = Xoa_url.new_(wiki.Domain_bry(), redirect_to_ttl);
-			return Get_page(wiki, url);
-		}
+		Xopg_redirect_itm redirect_itm = page.Redirect().Itms__get_at_nth_or_null();
+		if (redirect_itm != null)
+			return Get_page(wiki, redirect_itm.Url());
 
 		rv.Init(-1, -1, String_.new_u8(ttl.Page_txt()), String_.new_u8(ttl.Page_db()), null, null, DateAdp_.Now().XtoStr_fmt_iso_8561(), false, false, false, 0, "", "", "");
 		rv.Init_by_hpg(page);

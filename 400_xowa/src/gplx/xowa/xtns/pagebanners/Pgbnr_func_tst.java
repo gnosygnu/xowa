@@ -17,19 +17,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.pages.skins.*;
+import gplx.xowa.htmls.core.htmls.*;
 public class Pgbnr_func_tst {
 	private final    Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
 	@Test  public void Basic() {			
-		fxt.Test__parse__eq("{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(Bool_.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
 		, "	<div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
-		, "		<a class='image' title='Test page' href=''><img id='xoimg_0' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' srcset='' class='wpb-banner-image ' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' class='wpb-banner-image ' alt='' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
 		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
 		, "		</div>"
 		, "	</div>"
-		, "	<div class='wpb-topbanner-toc '><div class='wpb-banner-toc'></div></div>"
+		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'></div></div>"
+		, "</div>"
+		));
+	}
+	@Test  public void Hdump() {			
+		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
+		, "	<div class='wpb-topbanner'>"
+		, "		<h1 class='wpb-name'>Test page</h1>"
+		, "		<a href='/wiki/File:A.png' class='image' title='Test page' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" class='wpb-banner-image ' alt='' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<div class='wpb-iconbox'>"
+		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
+		, "		</div>"
+		, "	</div>"
+		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'><div class=\"xo-toc\" data-toc-mode=\"1\"></div></div></div>"
 		, "</div>"
 		));
 	}
@@ -41,9 +56,10 @@ class Pgbnr_func_fxt {
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikivoyage.org");
 		fxt = new Xop_fxt(app, wiki);
 	}
-	public void Test__parse__eq(String raw, String expd) {
+	public void Test__parse(boolean hdump, String raw, String expd) {
 		fxt.Exec_parse_page_all_as_str(raw);
-		Bfr_arg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Ctx(), fxt.Page(), null, null);
+		Xoh_wtr_ctx hctx = hdump ? Xoh_wtr_ctx.Hdump : Xoh_wtr_ctx.Basic;
+		Bfr_arg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Page(), fxt.Ctx(), hctx);
 		Bry_bfr bfr = Bry_bfr_.New();
 		arg.Bfr_arg__add(bfr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());

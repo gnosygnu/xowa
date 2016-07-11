@@ -32,12 +32,12 @@ public class Lst_pfunc_wkr {
 	
 	public void Exec(Bry_bfr bfr, Xop_ctx ctx) {
 		Xowe_wiki wiki = ctx.Wiki();
-		Xoa_ttl src_ttl = Xoa_ttl.parse(wiki, src_ttl_bry); if (src_ttl == null) return;						// {{#lst:<>}} -> ""
+		Xoa_ttl src_ttl = Xoa_ttl.Parse(wiki, src_ttl_bry); if (src_ttl == null) return;						// {{#lst:<>}} -> ""
 		Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Lst_cache().Get_by_key(src_ttl_bry);
 		Xop_ctx sub_ctx = null;
 		byte[] src = null;
 		if (defn_tmpl == null) {	// cache transclusions to prevent multiple parsings; DATE:2014-02-22
-			sub_ctx = Xop_ctx.new_sub_(wiki).Ref_ignore_(true);
+			sub_ctx = Xop_ctx.new_sub_(ctx).Ref_ignore_(true);
 			byte[] src_page_bry = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(src_ttl);
 			if (src_page_bry == null) return; // {{#lst:missing}} -> ""
 			Xoae_page page = ctx.Page();
@@ -137,5 +137,5 @@ public class Lst_pfunc_wkr {
 		}
 		bfr.Add_mid(src, bgn_pos, src.length);
 	}
-	public static final byte[] Null_arg = null;
+	public static final    byte[] Null_arg = null;
 }

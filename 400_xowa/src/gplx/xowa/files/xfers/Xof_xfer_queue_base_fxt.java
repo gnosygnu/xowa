@@ -69,7 +69,7 @@ public class Xof_xfer_queue_base_fxt {
 	public void ini_page_create_en_wiki(String ttl)								{Init_page_create(en_wiki, ttl, "");}
 	public void ini_page_create_en_wiki_redirect(String ttl, String redirect)	{Init_page_create(en_wiki, ttl, "#REDIRECT [[" + redirect + "]]");}
 	public void Init_page_create(Xowe_wiki wiki, String ttl, String txt) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl));
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl));
 		byte[] page_raw = Bry_.new_u8(txt);
 		wiki.Db_mgr().Save_mgr().Data_create(page_ttl, page_raw);
 	}

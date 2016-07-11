@@ -22,10 +22,10 @@ public class Xoh_page_tbl_itm {
 	public Xoh_page_tbl_itm(boolean trg, int db_id, Db_conn conn) {
 		this.trg = trg;
 		this.db_id = db_id;
-		this.html_tbl = new Xoh_page_tbl(conn);
+		this.html_tbl = new Xowd_html_tbl(conn);
 	}
 	public int Db_id() {return db_id;} private final    int db_id;
-	public Xoh_page_tbl Html_tbl() {return html_tbl;} private final    Xoh_page_tbl html_tbl;
+	public Xowd_html_tbl Html_tbl() {return html_tbl;} private final    Xowd_html_tbl html_tbl;
 	public void Rls() {
 		html_tbl.Conn().Rls_conn();
 		if (trg) html_tbl.Conn().Env_vacuum();

@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
-import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_tag_parser implements Gfh_doc_wkr {
 	private final    Xoh_hdoc_wkr hdoc_wkr;
@@ -77,6 +77,8 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 					}
 					else if (cur.Atrs__cls_has(Xoh_thm_data.Atr__id__xowa_media_div))
 						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__img);
+					else if (cur.Atrs__cls_has(Xoh_toc_wtr.Atr__class__toc))
+						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__toc);
 					break;
 				case Gfh_tag_.Id__ul:
 					if		(cur.Atrs__cls_has(Xoh_gly_grp_data.Atr__cls__gallery)) {

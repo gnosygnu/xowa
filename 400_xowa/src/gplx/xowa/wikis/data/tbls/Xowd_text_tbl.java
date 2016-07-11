@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xowd_text_tbl implements Rls_able {
+	private final    Object thread_lock = new Object();
 	private final    String tbl_name = "text"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_page_id, fld_text_data;
 	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
@@ -43,21 +44,25 @@ public class Xowd_text_tbl implements Rls_able {
 		stmt.Clear().Val_bry(fld_text_data, text).Crt_int(fld_page_id, page_id).Exec_update();
 	}
 	public byte[] Select(int page_id) {
-		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
-		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_manual();
-		try {
-			byte[] rv = Bry_.Empty;
-			if (rdr.Move_next()) {
-				rv = rdr.Read_bry(fld_text_data);
-				if (rv == null) rv = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert null to empty String; DATE:2015-11-08
-				rv = zip_mgr.Unzip(zip_tid, rv);
-			}
-			return rv;
-		}	finally {rdr.Rls();}
+		synchronized (thread_lock) {	// LOCK:stmt-rls; DATE:2016-07-06
+			if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_page_id);
+			Db_rdr rdr = stmt_select.Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_manual();
+			try {
+				byte[] rv = Bry_.Empty;
+				if (rdr.Move_next()) {
+					rv = rdr.Read_bry(fld_text_data);
+					if (rv == null) rv = Bry_.Empty;	// NOTE: defect wherein blank page inserts null not ""; for now always convert null to empty String; DATE:2015-11-08
+					rv = zip_mgr.Unzip(zip_tid, rv);
+				}
+				return rv;
+			}	finally {rdr.Rls();}
+		}
 	}
 	public byte[] Zip(byte[] data) {return zip_mgr.Zip(zip_tid, data);}
 	public void Rls() {
-		stmt_select = Db_stmt_.Rls(stmt_select);
-		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		synchronized (thread_lock) {	// LOCK:stmt-rls; DATE:2016-07-06
+			stmt_select = Db_stmt_.Rls(stmt_select);
+			stmt_insert = Db_stmt_.Rls(stmt_insert);
+		}
 	}
 }

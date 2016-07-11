@@ -27,7 +27,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 		if (anchor_ctx != null) return;// NOTE: called by Scrib_uri
 		encode_trie.Add(Byte_ascii.Colon, Bfr_arg_.New_byte(Byte_ascii.Colon));
 		encode_trie.Add(Byte_ascii.Space, Bfr_arg_.New_byte(Byte_ascii.Underline));
-		anchor_ctx = Xop_ctx.new_sub_(ctx.Wiki());
+		anchor_ctx = Xop_ctx.new_sub_(ctx);
 		anchor_ctx.Para().Enabled_n_();
 		anchor_tkn_mkr = anchor_ctx.Tkn_mkr();
 		anchor_parser = ctx.Wiki().Parser_mgr().Anchor_encoder();

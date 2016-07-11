@@ -52,6 +52,7 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			invk.Args_add(ctx, nde);
 		return true;
 	}
+	private static final    Xol_func_itm finder = new Xol_func_itm();
 	private static void AddNameArg(Xop_ctx ctx, byte[] src, Xot_invk_tkn invk, Arg_nde_tkn nde) {
 		// make valTkn into a keyTkn; note that argBldr will only generate a valTkn
 		Arg_itm_tkn key_tkn = nde.Val_tkn(), val_tkn = nde.Key_tkn();
@@ -60,18 +61,26 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 
 		if (key_tkn.Itm_static() != Bool_.Y_byte) return;	// dynamic tkn; can't identify func/name
 		int colon_pos = -1, txt_bgn = key_tkn.Dat_bgn(), txt_end = key_tkn.Dat_end();
-		Xol_func_itm finder = ctx.Wiki().Lang().Func_regy().Find_defn(src, txt_bgn, txt_end);
-		Xot_defn finder_func = finder.Func();
-		byte finder_typeId = finder.Tid();
-		switch (finder_typeId) {
+
+		Xot_defn finder_func; byte finder_tid; int finder_colon_pos, finder_subst_bgn, finder_subst_end;;
+		synchronized (finder) {
+			ctx.Wiki().Lang().Func_regy().Find_defn(finder, src, txt_bgn, txt_end);
+			finder_func = finder.Func();
+			finder_tid = finder.Tid();
+			finder_colon_pos = finder.Colon_pos();
+			finder_subst_bgn = finder.Subst_bgn();
+			finder_subst_end = finder.Subst_end();
+		}
+
+		switch (finder_tid) {
 			case Xot_defn_.Tid_func:				// func
-				colon_pos = finder.Colon_pos();
+				colon_pos = finder_colon_pos;
 				break;
 			case Xot_defn_.Tid_subst:			// subst/safesubst; mark invk_tkn
 			case Xot_defn_.Tid_safesubst:
-				int subst_bgn = finder.Subst_bgn(), subst_end = finder.Subst_end();
-				invk.Tmpl_subst_props_(finder_typeId, subst_bgn, subst_end);
-				if ((ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl && finder_typeId == Xot_defn_.Tid_subst)	// NOTE: if subst, but in tmpl stage, do not actually subst; PAGE:en.w:Unreferenced; DATE:2013-01-31
+				int subst_bgn = finder_subst_bgn, subst_end = finder_subst_end;
+				invk.Tmpl_subst_props_(finder_tid, subst_bgn, subst_end);
+				if ((ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl && finder_tid == Xot_defn_.Tid_subst)	// NOTE: if subst, but in tmpl stage, do not actually subst; PAGE:en.w:Unreferenced; DATE:2013-01-31
 					|| ctx.Page().Ttl().Ns().Id_is_tmpl()) {												// also, if on tmpl page, never evaluate (questionable, but seems to be needed)
 				}	
 				else {
@@ -79,7 +88,7 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					key_tkn.Dat_ary_had_subst_y_();
 				}
 				if (finder_func != Xot_defn_.Null) {
-					colon_pos = finder.Colon_pos();
+					colon_pos = finder_colon_pos;
 					txt_bgn = subst_end;
 				}
 				break;

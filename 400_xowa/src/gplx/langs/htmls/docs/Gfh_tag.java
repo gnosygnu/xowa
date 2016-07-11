@@ -34,6 +34,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		return rv;
 	}
 	public int Name_id() {return name_id;} private int name_id;
+	public boolean Tid_is_comment() {return name_id == Gfh_tag_.Id__comment;}
 	public byte[] Name_bry() {return name_bry;} private byte[] name_bry;
 	public Gfh_tag Chk_name_or_fail(int chk) {
 		if (!Chk_name(chk)) tag_rdr.Err_wkr().Fail("name_id chk failed", "expecting", Gfh_tag_.To_str(chk));

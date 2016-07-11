@@ -39,7 +39,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		long total_size = 0;
 		Bry_bfr tmp_size_bfr = Bry_bfr_.New();
 		for (int i = 0; i < len; ++i) {
-			int step_id = (int)list.Get_at(i);
+			int step_id = Int_.cast(list.Get_at(i));
 			Xobc_import_step_itm step_itm = data_db.Tbl__import_step().Select_one(step_id);
 			if (i == 0) {
 				wiki_domain = Xow_abrv_xo_.To_itm(step_itm.Wiki_abrv());	// ASSUME: 1st step's wiki is same for all steps

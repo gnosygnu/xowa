@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 import gplx.core.log_msgs.*;
 /*
-NOTE: naive implementation of PHP evaluator. intended only for parsing Messages**.php files in MediaWiki. Specifically, it assumes the following:
+NOTE: naive implementation of PHP parser; intended only for parsing Messages**.php files in MediaWiki. Specifically, it assumes the following:
 - all lines are assignment lines: EX: $a = b;
 - only the assignment operator is allowed (=); EX: $a = 5 + 7; fails b/c of + operator;
 - no functions are supported: EX: strlen('a') fails
@@ -46,7 +46,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 				return;
 		}
 		switch (mode) {
-			case Mode_expect: // handles sequences like "array("
+			case Mode_expect: // handles sequences like "array(" which hook in to "array" but need to skip "("
 				if (tkn_tid == next_tid)
 					mode = next_mode;
 				else {
@@ -112,7 +112,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 						line_val = new Php_itm_quote(tkn_quote.Quote_text(src));
 						break;
 					case Php_tkn_.Tid_ary:
-						Expect(Php_tkn_.Tid_paren_bgn, Mode_ary_subs);
+					case Php_tkn_.Tid_brack_bgn:
 						Php_itm_ary ary = new Php_itm_ary();
 						if (cur_ary == null)
 							line_val = ary;
@@ -122,6 +122,10 @@ public class Php_evaluator implements Php_tkn_wkr {
 							cur_kv_key = null;
 						}
 						this.cur_ary = ary;
+						if (tkn_tid == Php_tkn_.Tid_ary)
+							Expect(Php_tkn_.Tid_paren_bgn, Mode_ary_subs);
+						else
+							mode = Mode_ary_subs;
 						break;
 					case Php_tkn_.Tid_txt:
 					case Php_tkn_.Tid_var:
@@ -132,6 +136,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 					case Php_tkn_.Tid_comma:
 					case Php_tkn_.Tid_paren_bgn:
 					case Php_tkn_.Tid_paren_end:
+					case Php_tkn_.Tid_brack_end:
 					case Php_tkn_.Tid_num:
 						break;
 				}
@@ -159,7 +164,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 						Ary_add_itm(new Php_itm_var(Bry_.Mid(src, tkn_txt.Src_bgn(), tkn_txt.Src_end())));
 						break;
 					case Php_tkn_.Tid_ary:
-						Expect(Php_tkn_.Tid_paren_bgn, Mode_ary_subs);
+					case Php_tkn_.Tid_brack_bgn:
 						Php_itm_ary ary = new Php_itm_ary();
 						if (cur_ary == null)
 							line_val = ary;
@@ -174,8 +179,13 @@ public class Php_evaluator implements Php_tkn_wkr {
 							}
 						}
 						this.cur_ary = ary;
+						if (tkn_tid == Php_tkn_.Tid_ary)
+							Expect(Php_tkn_.Tid_paren_bgn, Mode_ary_subs);
+						else
+							mode = Mode_ary_subs;
 						break;
 					case Php_tkn_.Tid_paren_end:
+					case Php_tkn_.Tid_brack_end:
 						mode = Mode_ary_term;						
 						if (frame_stack.Count() == 0)
 							cur_ary = null;
@@ -201,6 +211,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 						mode = Mode_ary_subs;
 						break;
 					case Php_tkn_.Tid_paren_end:
+					case Php_tkn_.Tid_brack_end:
 						mode = Mode_ary_term;						
 						if (frame_stack.Count() == 0)
 							cur_ary = null;
@@ -221,6 +232,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 				switch (tkn_tid) {
 					case Php_tkn_.Tid_comma:
 					case Php_tkn_.Tid_paren_end:	// NOTE: paren_end occurs in multiple nests; EX: array(array())
+					case Php_tkn_.Tid_brack_end:
 						mode = Mode_ary_subs;
 						break;
 					case Php_tkn_.Tid_semic:

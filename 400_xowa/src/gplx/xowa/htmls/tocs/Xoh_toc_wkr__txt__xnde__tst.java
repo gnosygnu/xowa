@@ -33,7 +33,10 @@ public class Xoh_toc_wkr__txt__xnde__tst {
 	@Test   public void A()				{fxt.Test__both("<a href=\"/wiki/A\">b</a>"				, "b");}
 	@Test   public void A__nest()		{fxt.Test__both("<a href=\"/wiki/A\">b<i>c</i>d</a>"	, "bcd", "b<i>c</i>d");}
 	@Test   public void Br()			{fxt.Test__both("a<br/>b"								, "ab");}
+	@Test   public void Br__dangling()	{fxt.Test__both("a<br>b"								, "ab");}
 	@Test   public void H2()			{fxt.Test__both("a<h2>b</h2>c"							, "abc");}	// NOTE: not a valid test; MW actually generates "ab" b/c of tidy; see corresponding edit test; DATE:2016-06-28
 	@Test   public void Li()			{fxt.Test__text("a<ul><li>b</li></ul>c"					, "abc");}
 	@Test   public void Table()			{fxt.Test__text("a<table><tr><td>b</td></tr></table>c"	, "abc");}
+	@Test   public void Unknown__i()	{fxt.Test__both("a<unknown>b<i>c</i>d</unknown>e"		, "abcde", "ab<i>c</i>de");}	// PURPOSE: unknown tags should not fail; DATE:2016-07-09
+	@Test   public void Unknown__a()	{fxt.Test__both("a<unknown>b<a>c</a>d</unknown>e"		, "abcde");}	// PURPOSE: unknown tags should not fail; DATE:2016-07-09
 }

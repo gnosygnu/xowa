@@ -28,7 +28,7 @@ public class Xop_statistics_page implements Xow_special_page {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		byte[] html = Build_html(wiki);
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
-		page.Data_raw_(html);
+		page.Db().Text().Text_bry_(html);
 	}
 	public byte[] Build_html(Xowe_wiki wiki) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();

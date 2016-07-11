@@ -38,8 +38,8 @@ public class Db_qry_sql implements Db_qry {
 	}
 	public static Db_qry_sql as_(Object obj) {return obj instanceof Db_qry_sql ? (Db_qry_sql)obj : null;}
 	public static Db_qry_sql cast(Object obj) {try {return (Db_qry_sql)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Db_qry_sql.class, obj);}}
-	public static String Gen_sql(Db_qry qry, Object... args) {
-		byte[] src = Bry_.new_u8(Sql_qry_wtr_.Gen_placeholder_parameters(qry));
+	public static String Gen_sql(Sql_qry_wtr qry_wtr, Db_qry qry, Object... args) {
+		byte[] src = Bry_.new_u8(qry_wtr.To_sql_str(qry, true));
 		int src_len = src.length;
 		int args_idx = 0, args_len = args.length, pos = 0;
 		Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);

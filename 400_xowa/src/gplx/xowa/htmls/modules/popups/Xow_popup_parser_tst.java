@@ -21,7 +21,7 @@ import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.guis.views.*;
 public class Xow_popup_parser_tst {
-	@Before public void init() {fxt.Clear();} private Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();
+	@Before public void init() {fxt.Clear();} private final    Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();
 	@Test   public void Text_chars_one() {
 		fxt.Test_parse
 		( "a b c d", String_.Concat_lines_nl_skip_last
@@ -505,8 +505,8 @@ class Xop_popup_parser_fxt {
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
 	public void Test_parse(String raw, String ttl, String expd)	{
-		Xoae_page page = Xoae_page.New_edit(wiki, Xoa_ttl.parse(wiki, Bry_.new_a7(ttl)));
-		page.Data_raw_(Bry_.new_u8(raw));
+		Xoae_page page = Xoae_page.New_edit(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7(ttl)));
+		page.Db().Text().Text_bry_(Bry_.new_u8(raw));
 		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_u8(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());
 		byte[] actl = parser.Parse(wiki, page, null, itm);

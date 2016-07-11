@@ -55,7 +55,7 @@ public class Gfo_poolable_mgr implements Gfo_memory_itm {
 		}
 		return rv;
 	}
-	public void Rls_safe(int idx) {synchronized (thread_lock) {Rls_safe(idx);}}
+	public void Rls_safe(int idx) {synchronized (thread_lock) {Rls_fast(idx);}}
 	public void Rls_fast(int idx) {
 		if (idx == -1) throw Err_.new_wo_type("rls called on poolable that was not created by pool_mgr");
 		int pool_idx = pool_nxt - 1;

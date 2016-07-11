@@ -45,21 +45,18 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			case Listing_xatrs.Tid_long:		xatr_long = xatr.Val_as_int_or(Xatr_meridian_null); break;
 		}
 	}
-	private void Init_args() {
+	private void Init_args(Xop_ctx ctx) {
 		if (xatr_name == null) {
 			xatr_name = msg_mgr.Itm_by_key_or_new(Bry_.new_a7("listings-unknown")).Val();
 		}
-		xatr_alt = Parse_wikitext(xatr_alt);
-		xatr_address = Parse_wikitext(xatr_address);
-		xatr_directions = Parse_wikitext(xatr_directions);
+		xatr_alt			= Parse_wikitext(ctx, xatr_alt);
+		xatr_address		= Parse_wikitext(ctx, xatr_address);
+		xatr_directions		= Parse_wikitext(ctx, xatr_directions);
 	}		
 	private Xowe_wiki wiki; private Xop_parser parser; private Xop_ctx sub_ctx; private Xol_msg_mgr msg_mgr;
-	private void Init_sub_ctx() {
-		sub_ctx = Xop_ctx.new_sub_(wiki);
-	}
-	private byte[] Parse_wikitext(byte[] v) {
+	private byte[] Parse_wikitext(Xop_ctx ctx, byte[] v) {
 		if (Bry_.Len_eq_0(v)) return v;	// ignore null, ""
-		if (sub_ctx == null) Init_sub_ctx();
+		if (sub_ctx == null) sub_ctx = Xop_ctx.new_sub_(ctx);
 		return parser.Parse_text_to_html(sub_ctx, v);
 	}
 	private Listing_xtn_mgr xtn_mgr;
@@ -69,10 +66,10 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		xtn_mgr = (Listing_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Listing_xtn_mgr.Xtn_key_static);
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) return;
 		Mwh_atr_itm[] atrs = Xox_xnde_.Xatr__set(wiki, this, Listing_xatrs.Key_hash, src, xnde);
-		Init_args();
+		Init_args(ctx);
 		Gfh_wtr hwtr = xtn_mgr.Hwtr();
-		if (!Bld_by_template(xnde, atrs, src)) {
-			Bld_by_args(xtn_mgr, hwtr, xnde, src);
+		if (!Bld_by_template(ctx, xnde, atrs, src)) {
+			Bld_by_args(xtn_mgr, ctx, hwtr, xnde, src);
 			html_output = hwtr.To_bry_and_clear();
 		}
 	}
@@ -82,7 +79,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		else
 			bfr.Add(html_output);
 	}
-	private boolean Bld_by_template(Xop_xnde_tkn xnde, Mwh_atr_itm[] atrs, byte[] src) {
+	private boolean Bld_by_template(Xop_ctx ctx, Xop_xnde_tkn xnde, Mwh_atr_itm[] atrs, byte[] src) {
 		byte[] listings_template = xtn_mgr.Listings_template();
 		if (listings_template == null) return false;
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -102,11 +99,11 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		}
 		bfr.Add(Bry__invk_end);					// "}}"
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
+		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
 		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
 		return true;
 	}
-	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Gfh_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
+	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Xop_ctx ctx, Gfh_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
 		wtr.Nde_full(Tag_strong, xatr_name);							// <strong>name</strong>
 		if (xatr_url != null)
 			wtr.Nde_full_atrs(Tag_a, wtr.To_bry_and_clear(), false
@@ -120,7 +117,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			wtr.Nde_full_atrs(Tag_em, xatr_alt, false);					// alt
 			wtr.Txt_byte(Byte_ascii.Paren_end);							// ")"
 		}
-		byte[] position = Bld_position();
+		byte[] position = Bld_position(ctx);
 		if (xatr_address != null || xatr_directions != null || position != null) {
 			if (xatr_address != null)
 				wtr.Txt(Txt_comma_space).Txt(xatr_address);				// , address
@@ -193,7 +190,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
 			wtr.Txt(Bry_.Trim(Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
 	}
-	private byte[] Bld_position() {
+	private byte[] Bld_position(Xop_ctx ctx) {
 		if (xatr_lat >= Xatr_meridian_null || xatr_long >= Xatr_meridian_null) return null;		// check that lat and long are valid
 		Xol_msg_itm position_template = xtn_mgr.Position_template();
 		if (position_template == null) return null;
@@ -202,7 +199,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		tmp_bfr.Add(Bry__invk_bgn);					// "{{"
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
 		tmp_bfr.Add(Bry__invk_end);					// "}}"
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
+		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
 		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
 		Xol_msg_itm position_text = xtn_mgr.Position_text();
 		if (Bry_.Len_eq_0(position_text.Val())) return rv;

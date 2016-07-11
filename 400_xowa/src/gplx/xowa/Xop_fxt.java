@@ -79,7 +79,7 @@ public class Xop_fxt {
 		return this;
 	}
 	public Xoa_ttl Page_ttl_(String txt) {
-		Xoa_ttl rv = Xoa_ttl.parse(wiki, Bry_.new_u8(txt));
+		Xoa_ttl rv = Xoa_ttl.Parse(wiki, Bry_.new_u8(txt));
 		ctx.Page().Ttl_(rv);
 		return rv;
 	}
@@ -177,7 +177,7 @@ public class Xop_fxt {
 	public Xop_fxt	Init_page_create(String ttl, String txt) {return Init_page_create(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_create(Xowe_wiki wiki, String ttl, String txt) {Init_page_create_static(wiki, ttl, txt);return this;}
 	public static void Init_page_create_static(Xowe_wiki wiki, String ttl_str, String text_str) {
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl_str));
 		byte[] text = Bry_.new_u8(text_str);
 		wiki.Db_mgr().Save_mgr().Data_create(ttl, text);
 	}
@@ -186,7 +186,7 @@ public class Xop_fxt {
 	}
 	public Xop_fxt	Init_page_update(String ttl, String txt) {return Init_page_update(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_update(Xowe_wiki wiki, String ttl, String txt) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl));
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl));
 		byte[] page_raw = Bry_.new_u8(txt);
 		Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(page_ttl);
 		wiki.Db_mgr().Save_mgr().Data_update(page, page_raw);
@@ -221,7 +221,7 @@ public class Xop_fxt {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		ctx.Page().Root_(root);
-		ctx.Page().Data_raw_(raw_bry);
+		ctx.Page().Db().Text().Text_bry_(raw_bry);
 		return parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
 	}
 	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), name, raw);}
@@ -349,9 +349,9 @@ public class Xop_fxt {
 	}
 	public static byte[] Load_page(Xowe_wiki wiki, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_url page_url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
-		return wiki.Data_mgr().Load_page_and_parse(page_url, ttl).Data_raw();
+		Xoa_url page_url = Xoa_url.New(wiki.Domain_bry(), ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
+		return wiki.Data_mgr().Load_page_and_parse(page_url, ttl).Db().Text().Text_bry();
 	}
 	public static void Reg_xwiki_alias(Xowe_wiki wiki, String alias, String domain) {
 		byte[] domain_bry = Bry_.new_a7(domain);
@@ -436,7 +436,7 @@ public class Xop_fxt {
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
-		ctx.Page().Redlink_list().Clear();
+		ctx.Page().Html_data().Redlink_list().Clear();
 		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();

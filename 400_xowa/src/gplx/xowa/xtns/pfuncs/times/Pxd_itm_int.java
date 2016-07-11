@@ -43,16 +43,16 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public boolean Val_is_adj() {return val_is_adj;} public void Val_is_adj_(boolean v) {val_is_adj = v;} private boolean val_is_adj;
 	public int Xto_int_or(int or) {return val;}
 	public int Digits() {return digits;} private int digits;
-	@Override public void Time_ini(DateAdpBldr bldr) {
+	@Override public boolean Time_ini(DateAdpBldr bldr) {
 		int seg_idx = this.Seg_idx();
-		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return;
+		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return true;
 		if (val_is_adj) {
-			if (val == 0) return;	// no adjustment to make
+			if (val == 0) return true;	// no adjustment to make
 			DateAdp date = bldr.Date();
 			switch (seg_idx) {
 				case DateAdp_.SegIdx_hour:			date = date.Add_hour(val); break;
 				case DateAdp_.SegIdx_minute:		date = date.Add_minute(val); break;
-				default:							return;
+				default:							return true;
 			}
 			bldr.Date_(date);
 		}
@@ -62,22 +62,25 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				switch (seg_idx) {
 					case DateAdp_.SegIdx_month:			date = DateAdp_.seg_(new int[] {date.Year(), 1, date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_month(-1); bldr.Date_(date); break;
 					case DateAdp_.SegIdx_day:			date = DateAdp_.seg_(new int[] {date.Year(), date.Month(), 1, date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_day(-1); bldr.Date_(date); break;
-					default:							return;
+					default:							return true;
 				}
 			}
-			else
+			else {
+				if (seg_idx == -1) return false; // PAGE:New_York_City EX: March 14, 2,013; DATE:2016-07-06
 				bldr.Seg_set(seg_idx, val);
+			}
 		}
+		return true;
 	}		
-	@Override public void Eval(Pxd_parser tctx) {
+	@Override public boolean Eval(Pxd_parser tctx) {
 		int data_idx = this.Data_idx();
-		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return;						// has seg_idx; already eval'd by something else
+		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return true;			// has seg_idx; already eval'd by something else
 		switch (digits) {
 			case 5:																		// 5 digits
 				switch (data_idx) {
 					case 0: Pxd_eval_year.Eval_at_pos_0(tctx, this); break;				// year at pos 0; EX: 01234-02-03
-					case 1: tctx.Err_set(Pft_func_time_log.Invalid_date); return;		// year at pos 1; invalid; EX: 01-01234-02
-					case 2: tctx.Err_set(Pft_func_time_log.Invalid_date); break;		// year at pos 2; invalid; EX: 01-02-01234
+					case 1: tctx.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_bry(tctx.Src())); return false;		// year at pos 1; invalid; EX: 01-01234-02
+					case 2: tctx.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_bry(tctx.Src())); break;				// year at pos 2; invalid; EX: 01-02-01234
 				}
 				val = 2000 + (val % 10);												// NOTE: emulate PHP's incorrect behavior with 5 digit years; EX:ca.w:Nicolau_de_Mira; DATE:2014-04-18
 				tctx.Seg_idxs_(this, DateAdp_.SegIdx_year);
@@ -85,7 +88,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 			case 4:																		// 4 digits; assume year
 				switch (data_idx) {
 					case 0:		Pxd_eval_year.Eval_at_pos_0(tctx, this); break;			// year at pos 0; EX: 2001-02-03
-					case 1:		tctx.Err_set(Pft_func_time_log.Invalid_year_mid); return;// year at pos 1; invalid; EX: 02-2003-03
+					case 1:		tctx.Err_set(Pft_func_time_log.Invalid_year_mid); return false;// year at pos 1; invalid; EX: 02-2003-03
 					case 2:		Pxd_eval_year.Eval_at_pos_2(tctx, this); break;			// year at pos 2; EX: 02-03-2001
 					default:	Pxd_eval_year.Eval_at_pos_n(tctx, this); break;			// year at pos n; EX: 04:05 02-03-2001
 				}
@@ -101,7 +104,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 					&&	rhs_itm != null && rhs_itm.Seg_idx() == DateAdp_.SegIdx_year	// itm on right is year
 					&&	tctx.Seg_idxs()[DateAdp_.SegIdx_day] == -1						// day not yet set; needed for {{#time:Y|July 28 - August 1, 1975}}
 					)
-					if (!Pxd_eval_seg.Eval_as_d(tctx, cur_itm)) return;					// cur int should be day; EX:January 1, 2010; PAGE:en.w:Wikipedia:WikiProject_Maine/members; DATE:2014-06-25
+					if (!Pxd_eval_seg.Eval_as_d(tctx, cur_itm)) return true;			// cur int should be day; EX:January 1, 2010; PAGE:en.w:Wikipedia:WikiProject_Maine/members; DATE:2014-06-25
 				if (val > Month_max) {									// value is not a month; assume day; DATE:2013-03-15
 					switch (data_idx) {
 						case 0:															// > 12 in slot 0
@@ -131,6 +134,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				}
 				break;
 		}
+		return true;
 	}
 	public static final int Month_max = 12;		
 	private void Eval_unknown_at_pos_3(Pxd_parser tctx) {	// int at pos 4
@@ -148,7 +152,8 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 		int sym_idx = this.Ary_idx() + (fwd ? 1 : -1);
 		Pxd_itm[] sym_tkns = tctx.Tkns();
 		if (sym_idx < 0 || sym_idx > sym_tkns.length) return false;	// NOTE: was Data_ary_len; DATE:2013-06-19
-		return sym_tkns[sym_idx].Tkn_tid() == sym_tid;
+		Pxd_itm sym_tkn = sym_tkns[sym_idx];
+		return sym_tkn == null ? false : sym_tkn.Tkn_tid() == sym_tid; // PAGE:s.w:Byzantine_Empire EX:285 DATE:2016-07-06
 	}
 	private void Eval_month_at_pos_0(Pxd_parser tctx) {
 		Pxd_itm[] data_ary = tctx.Data_ary();
@@ -249,6 +254,7 @@ class Pxd_itm_int_ {
 		}
 		for (int i = tkn_idx + adj; i != end; i += adj) {
 			Pxd_itm itm = tkns[i];
+			if (itm == null) return null; // PAGE:s.w:Leonid_Hurwicz EX:"1944, 2004, [[7 August]] [[2007]]"; DATE:2016-07-06
 			if (itm.Tkn_tid() == Pxd_itm_.Tid_int) {
 				Pxd_itm_int itm_int = (Pxd_itm_int)itm;
 				return itm_int.Seg_idx() == -1 ? itm_int : null;

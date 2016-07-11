@@ -22,13 +22,13 @@ public class Xot_invk_wkr__missing__tst {
 	@Test  public void Missing() {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_template", "{{[[Template:{{{1}}}|{{{1}}}]]}}");
-		fxt.Init_log_(Xop_ttl_log.Invalid_char).Test_parse_tmpl_str("{{test_template|a}}", "{{[[Template:a|a]]}}");
+		fxt.Test_parse_tmpl_str("{{test_template|a}}", "{{[[Template:a|a]]}}");
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Missing__name_and_args() {	// PURPOSE: missing title should return name + args; used to only return name; PAGE:en.w:Flag_of_Greenland; DATE:2016-06-21
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_template", "{{ {{{1}}} | a | b }}");
-		fxt.Init_log_(Xop_ttl_log.Invalid_char).Test_parse_tmpl_str("{{test_template}}", "{{{{{1}}}| a | b }}");	// NOTE: this should include spaces (" {{{1}}} "), but for now, ignore
+		fxt.Test_parse_tmpl_str("{{test_template}}", "{{{{{1}}}| a | b }}");	// NOTE: this should include spaces (" {{{1}}} "), but for now, ignore
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Missing_foreign() {

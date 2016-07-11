@@ -38,7 +38,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
 		int last = end - 1;
-		if (end - bgn > Xoa_ttl.Max_len) return false;	// NOTE: some tmpls have long #if statements; quicker to fail here than wait for invalid char below
+		if (end - bgn > Ttl_max) return false;	// NOTE: some tmpls have long #if statements; quicker to fail here than wait for invalid char below
 		boolean rv = false;
 		for (int i = bgn; i < end; ++i) {
 			switch (ttl[i]) {
@@ -165,7 +165,8 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		}
 		return tmp_bfr.To_bry_and_clear();
 	}
-	private static int[] seg_ary = new int[Xoa_ttl.Max_len];
+	public static final int Ttl_max = 2048;	// ASSUME: max len of 256 * 8 bytes
+	private static int[] seg_ary = new int[Ttl_max];
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_rel2abs;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_rel2abs().Name_(name);}
 	public static final int Id_null = 0, Id_slash = 1, Id_dot = 2, Id_dot_slash = 3, Id_dot_dot = 4, Id_dot_dot_slash = 5;

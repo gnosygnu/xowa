@@ -37,8 +37,7 @@ public class Xow_hdump_mgr {
 			Xowd_core_db_props props = wiki.Data__core_mgr().Props();
 			dflt_zip_tid = props.Zip_tid_html();
 			dflt_hzip_enable = props.Hzip_enabled();
-//				dflt_hzip_enable = props.Hzip_enabled();
-//				mode_is_b256 = true;
+			// mode_is_b256 = true;
 		}
 		Init_by_db(dflt_zip_tid, dflt_hzip_enable, mode_is_b256);
 	}

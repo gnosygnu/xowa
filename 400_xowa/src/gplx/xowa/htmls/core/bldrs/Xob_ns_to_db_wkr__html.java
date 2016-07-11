@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.htmls.core.dbs.*;
-class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
+public class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
 	private final    Xow_db_file page_db;
 	public Xob_ns_to_db_wkr__html(Xow_db_file page_db) {this.page_db = page_db;}
 	public byte Db_tid() {return Xow_db_file_.Tid__html_data;}
 	public void Tbl_init(Xow_db_file db) {			
-		Xoh_page_tbl tbl = db.Tbl__html();
+		Xowd_html_tbl tbl = db.Tbl__html();
 		tbl.Create_tbl();
 		tbl.Insert_bgn(); 
 	}

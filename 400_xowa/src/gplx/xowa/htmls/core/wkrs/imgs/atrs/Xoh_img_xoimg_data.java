@@ -89,7 +89,8 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 		bfr.Add_int_variable(lnki_page);
 	}
 	public static final    byte[]
-	  Bry__data_xowa_image	= Bry_.new_a7("data-xoimg")
-	, Bry__data_xowa_title	= Bry_.new_a7("data-xowa-title")
+	  Bry__data_xowa_image			= Bry_.new_a7("data-xoimg")
+	, Bry__data_xowa_title			= Bry_.new_a7("data-xowa-title")
+	, Bry__data_xowa_image__full	= Bry_.new_a7("0|-1|-1|-1|-1|-1")	// for pagebanner
 	;
 }

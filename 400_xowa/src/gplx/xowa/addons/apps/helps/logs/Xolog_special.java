@@ -42,10 +42,11 @@ public class Xolog_special implements Xow_special_page {
 		}
 
 		if (redirect) {
-			String redirect_ttl = special__meta.Ttl_str() + "?cmd=view";
+			String redirect_ttl_str = special__meta.Ttl_str() + "?cmd=view";
 			if (redirect_to_same_file && file != null)
-				redirect_ttl += "&file=" + file;
-			page.Redirect_to_ttl_(Bry_.new_u8(redirect_ttl));
+				redirect_ttl_str += "&file=" + file;
+			Xoa_ttl redirect_ttl = wiki.Ttl_parse(Bry_.new_u8(redirect_ttl_str));
+			page.Redirect().Itms__add__special(Xoa_url.New(wiki, redirect_ttl), redirect_ttl);
 			return;
 		}
 		else

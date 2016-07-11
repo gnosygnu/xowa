@@ -23,8 +23,8 @@ interface Pxd_itm {
 	int Seg_idx();
 	int Eval_idx();
 	int Data_idx(); void Data_idx_(int v);
-	void Eval(Pxd_parser state);
-	void Time_ini(DateAdpBldr bldr);
+	boolean Eval(Pxd_parser state);
+	boolean Time_ini(DateAdpBldr bldr);
 }
 class Pxd_itm_ {
 	public static final int
@@ -60,6 +60,7 @@ class Pxd_itm_ {
 		int len = tkns.length;
 		for (int i = bgn; i < len; i++) {
 			Pxd_itm itm = tkns[i];
+			if (itm == null) return null; // PAGE:s.w:Synesthesia EX:"March 2006 [last update]"; DATE:2016-07-06
 			if (tid == itm.Tkn_tid()) return itm;
 		}
 		return null;
@@ -73,8 +74,8 @@ abstract class Pxd_itm_base implements Pxd_itm {
 	public void Seg_idx_(int v) {seg_idx = v;}
 	public int Data_idx() {return data_idx;} public void Data_idx_(int v) {data_idx = v;} private int data_idx;
 	public abstract int Eval_idx();
-	@gplx.Virtual public void Eval(Pxd_parser state) {}
-	@gplx.Virtual public void Time_ini(DateAdpBldr bldr) {}
+	@gplx.Virtual public boolean Eval(Pxd_parser state) {return true;}
+	@gplx.Virtual public boolean Time_ini(DateAdpBldr bldr) {return true;}
 	public void Ctor(int ary_idx) {this.ary_idx = ary_idx;}
 	public static final int Seg_idx_null = -1, Seg_idx_skip = -2;
 }
@@ -91,7 +92,7 @@ class DateAdpBldr {
 			return DateAdp_.Now();	// not dirtied; default to now;
 	}
 	public DateAdpBldr Date_(DateAdp v) {date = v; return this;} DateAdp date = null;
-	public DateAdpBldr Seg_set(int idx, int val) {
+	public void Seg_set(int idx, int val) {
 		if (date == null) seg_ary[idx] = val;
 		else {
 			seg_ary = date.XtoSegAry();
@@ -99,7 +100,6 @@ class DateAdpBldr {
 			date = DateAdp_.seg_(seg_ary);
 		}
 		dirty = true;
-		return this;
 	}
 	public DateAdp Bld() {
 		return date == null ? DateAdp_.seg_(seg_ary) : date;
@@ -108,8 +108,8 @@ class DateAdpBldr {
 	int[] seg_ary = new int[DateAdp_.SegIdx__max]; boolean dirty = false;
 }
 class Pft_func_time_log {
-	private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "time_parser");
-	public static final Gfo_msg_itm
+	private static final    Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "time_parser");
+	public static final    Gfo_msg_itm
 		  Invalid_day					= Gfo_msg_itm_.new_warn_(owner, "Invalid day: ~{0}")
 		, Invalid_month					= Gfo_msg_itm_.new_warn_(owner, "Invalid month: ~{0}")
 		, Invalid_year					= Gfo_msg_itm_.new_warn_(owner, "Invalid year: ~{0}")

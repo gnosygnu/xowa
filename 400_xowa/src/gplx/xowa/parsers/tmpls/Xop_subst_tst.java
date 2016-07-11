@@ -56,13 +56,11 @@ public class Xop_subst_tst {
 	@Test  public void Urlencode_invalid_ttl() {	// PURPOSE: handle invalid ttl inside does-template-exist; EX: en.d:peace; DATE:2014-03-31
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test", "{{safesubst:urlencode:{{safesubst:Template:{{{1}}}}}}}");
-		fxt.Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_parse_page_tmpl_str("{{test|[xyz]}}", "%7B%7Bsafesubst%3ATemplate%3A%5Bxyz%5D%7D%7D");	// url-encoded version of {{safesubst:Template:xyz}}
 	}
 	@Test  public void Urlencode_template_ttl() {	// PURPOSE: handle template ttl inside does-template-exist; based on above; DATE:2014-03-31
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test", "{{safesubst:urlencode:{{Template:{{{1}}}}}}}");
-		fxt.Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_parse_page_tmpl_str("{{test|Template:[xyz]}}", "%7B%7BTemplate%3ATemplate%3A%5Bxyz%5D%7D%7D");	// url-encoded version of {{safesubst:Template:xyz}}
 	}
 	@Test   public void Nowiki() {	// PURPOSE: stack overflow; PAGE:Близкие_друзья_(Сезон_2) DATE:2014-10-21

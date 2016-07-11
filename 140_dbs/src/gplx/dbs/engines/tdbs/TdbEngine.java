@@ -22,7 +22,7 @@ public class TdbEngine implements Db_engine {
 	public Db_conn_info			Conn_info() {return conn_info;} private Db_conn_info conn_info;
 	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
 	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
-	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.Basic;
+	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
 	public TdbDatabase Db() {return db;} TdbDatabase db;
 	public void Conn_open() {
 		Tdb_conn_info tdb_url = (Tdb_conn_info)conn_info;
@@ -44,7 +44,7 @@ public class TdbEngine implements Db_engine {
 		Db_qryWkr wkr = (Db_qryWkr)wkrs.Get_by_or_fail(qry.Tid());
 		return wkr.Exec(this, qry);
 	}
-	public Db_stmt	Stmt_by_qry(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.Basic.To_sql_str(qry, true));}
+	public Db_stmt	Stmt_by_qry(Db_qry qry) {return new Db_stmt_sql().Parse(qry, sql_wtr.To_sql_str(qry, true));}
 	public Object	Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
 	public Db_rdr	Exec_as_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public Db_rdr	Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}

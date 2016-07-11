@@ -28,7 +28,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	}
 	public static void UrlString(Xop_ctx ctx, byte tid, boolean encode, byte[] src, Bry_bfr trg, byte[] qry_arg) {
 		Xowe_wiki wiki = ctx.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.new_(wiki, ctx.Msg_log(), src, 0, src.length);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, src, 0, src.length);
 		if (ttl == null) return; // NOTE: guard against null ttl; EX: {{fullurl:{{transclude|{{{1}}}}}|action=edit}} ->  {{fullurl:Template:{{{1}}}|action=edit}} -> Template:{{{1}}} will be a null ttl
 		byte[] ttl_ary = ttl.Full_url();// NOTE: Full_url does encoding; don't encode again
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();

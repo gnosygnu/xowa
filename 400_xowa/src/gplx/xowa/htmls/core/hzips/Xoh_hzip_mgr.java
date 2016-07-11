@@ -23,6 +23,7 @@ public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
 	private final    Xoh_hdoc_wkr hdoc_wkr = new Xoh_hdoc_wkr__hzip();
 	private final    Xoh_hdoc_parser hdoc_parser;
 	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
+	private final    Xoh_bfr_mgr bfr_mgr = new Xoh_bfr_mgr();
 	public Xoh_hzip_mgr() {this.hdoc_parser = new Xoh_hdoc_parser(hdoc_wkr);}
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
 	public String Key() {return "root";}
@@ -40,8 +41,10 @@ public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
 		rdr.Init_by_page(hpg.Url_bry_safe(), src, src.length);
 		Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, 0, src.length, null);
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(Bry_bfr html_bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int pos = src_bgn, txt_bgn = -1;
+		boolean toc_enabled = !gplx.core.envs.Op_sys.Cur().Tid_is_drd() && !hctx.Mode_is_diff();
+		Bry_bfr bfr = toc_enabled ? bfr_mgr.Init(hpg, html_bfr) : html_bfr;
 		while (true) {
 			if (pos == src_end) break;			
 			byte b = src[pos];
@@ -57,6 +60,11 @@ public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
 				try {
 					rdr.Init_by_sect(wkr.Key(), pos, pos + hook_len);
 					Xoh_data_itm data = hctx.Pool_mgr__data().Get_by_tid(wkr.Tid());
+					if (	data != null
+						&&	toc_enabled 
+						&&	data.Tid() == Xoh_hzip_dict_.Tid__toc) {
+						bfr = bfr_mgr.Split_by_toc(data);
+					}
 					wkr.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, pos, src_end, data);
 					Xoh_wtr_itm wtr = hctx.Pool_mgr__wtr().Get_by_tid(wkr.Tid());
 					if (data != null && wtr != null) {
@@ -74,6 +82,7 @@ public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
 			}
 		}
 		if (txt_bgn != -1) bfr.Add_mid(src, txt_bgn, src_end);
+		if (toc_enabled) bfr_mgr.Commit();
 	}		
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_hzip_mgr rv = new Xoh_hzip_mgr(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}

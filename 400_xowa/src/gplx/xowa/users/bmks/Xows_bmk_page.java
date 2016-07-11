@@ -28,7 +28,7 @@ public class Xows_bmk_page implements Xow_special_page {
 		page.Html_data().Head_mgr().Itm__dbui().Init(app).Enabled_y_();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001();
 		ui_tbl.Select(bfr, Xoud_bmk_mgr.Owner_root);
-		page.Hdump_data().Body_(bfr.To_bry_and_rls());
+		page.Db().Html().Html_bry_(bfr.To_bry_and_rls());
 	}
 
 	public Xow_special_page Special__clone() {return this;}

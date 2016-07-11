@@ -20,8 +20,8 @@ import gplx.core.btries.*; import gplx.core.intls.*; import gplx.core.envs.*; im
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.kwds.*;
 public class Xol_func_regy {
+	private final    Object thread_lock = new Object();
 	private final    Xoa_lang_mgr lang_mgr; private final    Xol_lang_itm lang;
-	private final    Xol_func_itm finder = new Xol_func_itm();
 	private final    Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs(), ci_trie = Btrie_slim_mgr.ci_u8();
 	public Xol_func_regy(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang) {this.lang_mgr = lang_mgr; this.lang = lang;}
 	public void Evt_lang_changed(Xol_lang_itm lang) {
@@ -51,48 +51,50 @@ public class Xol_func_regy {
 		}
 	}
 	private void Add(byte[] ary, boolean case_match, Xot_defn func) {
-		if (case_match)
-			cs_trie.Add_obj(ary, func);
-		else {
-			byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
-			ci_trie.Add_obj(lower_ary, func);
-		}
+//			synchronized (thread_lock) {	// LOCK:DELETE; DATE:2016-07-06
+			if (case_match)
+				cs_trie.Add_obj(ary, func);
+			else {
+				byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
+				ci_trie.Add_obj(lower_ary, func);
+			}
+//			}
 	}
-	public Xol_func_itm Find_defn(byte[] src, int txt_bgn, int txt_end) {
-		finder.Clear();
+	public void Find_defn(Xol_func_itm rv, byte[] src, int txt_bgn, int txt_end) {
+		rv.Clear();
 		for (int i = 0; i < 2; i++) {
-			if (txt_bgn == txt_end) return finder;	// NOTE: true when tmpl_name is either not loaded, or doesn't exist
+			if (txt_bgn == txt_end) return;	// NOTE: true when tmpl_name is either not loaded, or doesn't exist
 			Xot_defn func = Match_bgn(src, txt_bgn, txt_end);
-			if (func == null) return finder;		// NOTE: null when tmpl_name is either not loaded, or doesn't exist
+			if (func == null) return;		// NOTE: null when tmpl_name is either not loaded, or doesn't exist
 			byte[] func_name = func.Name();
 			int match_pos = func_name.length + txt_bgn;
 			byte defn_tid = func.Defn_tid();
 			switch (defn_tid) {
 				case Xot_defn_.Tid_func:
 					if		(match_pos == txt_end)						// next char is ws (b/c match_pos == txt_end)
-						finder.Func_set(func, -1);
+						rv.Func_set(func, -1);
 					else if (src[match_pos] == Pf_func_.Name_dlm)		// next char is :
-						finder.Func_set(func, match_pos);
+						rv.Func_set(func, match_pos);
 					else {												// func is close, but not quite: ex: #ifx: or padlefts:
-						return finder;
+						return;
 					}
 					break;
 				case Xot_defn_.Tid_safesubst:
 				case Xot_defn_.Tid_subst:
-					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
+					rv.Subst_set_(defn_tid, txt_bgn, match_pos);
 					if (match_pos < txt_end) txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos, txt_end);
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 				case Xot_defn_.Tid_msgnw:
-					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
+					rv.Subst_set_(defn_tid, txt_bgn, match_pos);
 					if (match_pos + 1 < txt_end)	// +1 to include ":" (keyword id "raw", not "raw:")
 						txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
 					break;
-				default: return finder;
+				default: return;
 			}
 		}
-		return finder;
+		return;
 	}
 	private Xot_defn Match_bgn(byte[] src, int bgn, int end) {
 		Object cs_obj = cs_trie.Match_bgn(src, bgn, end);
@@ -111,9 +113,11 @@ public class Xol_func_regy {
 			: rv_alt;	// else return rv_alt
 	}
 	private void LowerAry(byte[] src, int bgn, int end) {
-		int len = end - bgn;
-		if (len > lower_ary_len) {lower_ary = new byte[len]; lower_ary_len = len;}
-		lower_ary_len = len;
-		Array_.Copy_to(src, bgn, lower_ary, 0, len);
+		synchronized (thread_lock) {
+			int len = end - bgn;
+			if (len > lower_ary_len) {lower_ary = new byte[len]; lower_ary_len = len;}
+			lower_ary_len = len;
+			Array_.Copy_to(src, bgn, lower_ary, 0, len);
+		}
 	}	byte[] lower_ary = new byte[255]; int lower_ary_len = 255;
 }

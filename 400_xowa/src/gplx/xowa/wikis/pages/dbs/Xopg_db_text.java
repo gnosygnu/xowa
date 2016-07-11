@@ -15,15 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-public class Xowd_html_row {
-	public Xowd_html_row(int page_id, int tid, byte[] data) {this.page_id = page_id; this.tid = tid; this.data = data;}
-	public int		Page_id()	{return page_id;}	private final int page_id;
-	public int		Tid()		{return tid;}		private final int tid;
-	public byte[]	Data()		{return data;}		private final byte[] data;
-	public static final int // SERIALIZED
-	  Tid__html		= 0
-	, Tid__img		= 1
-	, Tid__redlink	= 2
-	;
+package gplx.xowa.wikis.pages.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+public class Xopg_db_text {
+	public byte[]		Text_bry()	{return text_bry;}	private byte[] text_bry = Bry_.Empty;	// NOTE: if null, will cause NullPointer exception on Special pages like Special:XowaDownloadCentral; DATE:2016-07-05
+	public void			Text_bry_(byte[] v) {this.text_bry = v;}
 }

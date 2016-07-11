@@ -26,13 +26,13 @@ class Xof_wiki_finder {	// UNUSED
 	}
 	public Xoae_page Get_page(int ns, byte[] ttl_bry) {
 		Xoae_page rv = Get_page__by_wiki(wiki_0, ns, ttl_bry);
-		if (rv.Missing())
+		if (rv.Db().Page().Exists_n())
 			rv = Get_page__by_wiki(wiki_1, ns, ttl_bry);
 		return rv;
 	}
 	private Xoae_page Get_page__by_wiki(Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ns_id, ttl_bry) ;
-		Xoa_url url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ns_id, ttl_bry) ;
+		Xoa_url url = Xoa_url.New(wiki, ttl);
 		return wiki.Data_mgr().Load_page_and_parse(url, ttl);
 	}
 	private int qry_count, qry_count_max = 1000;
@@ -53,7 +53,7 @@ class Xof_wiki_finder {	// UNUSED
 		itm.Orig_ttl_(ttl_bry);
 		if (db_page.Redirected()) {
 			Xoae_page page = Get_page__by_wiki(wiki, ns_id, ttl_bry);
-			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect_loop(page.Data_raw());		
+			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect_loop(page.Db().Text().Text_bry());		
 			itm.Orig_redirect_(redirect_ttl);			
 			++qry_count;
 			if (qry_count >= qry_count_max) {

@@ -58,7 +58,7 @@ public class Xol_msg_mgr_ {
 			msg_val = tmp_bfr.To_bry_and_clear();
 		}
 		if (has_tmpl) {
-			Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
+			Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki.Parser_mgr().Ctx()); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 			Xop_root_tkn sub_root = tkn_mkr.Root(msg_val);
 			msg_val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, tkn_mkr, msg_val);
 		}
@@ -83,7 +83,7 @@ public class Xol_msg_mgr_ {
 		msg_in_wiki = wiki.Msg_mgr().Get_or_make(msg_key);
 		Xoae_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
 		byte[] msg_val = Bry_.Empty;
-		if (msg_page.Missing()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
+		if (msg_page.Db().Page().Exists_n()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
 				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
@@ -94,8 +94,8 @@ public class Xol_msg_mgr_ {
 				msg_in_wiki.Src_(Xol_msg_itm.Src_lang);
 			}
 		}
-		else {																	// page found; dump entire contents
-			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Data_raw());			// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
+		else {																				// page found; dump entire contents
+			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Db().Text().Text_bry());	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
 			msg_in_wiki.Src_(Xol_msg_itm.Src_wiki);
 		}
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);
@@ -105,14 +105,14 @@ public class Xol_msg_mgr_ {
 		byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
 		Xoae_page rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-		if (rv.Missing()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
+		if (rv.Db().Page().Exists_n()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
 			byte[][] fallback_ary = lang.Fallback_bry_ary();
 			int fallback_ary_len = fallback_ary.length;
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
 				ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
 				rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-				if (!rv.Missing()) break;
+				if (rv.Db().Page().Exists()) break;
 			}
 		}
 		return rv;

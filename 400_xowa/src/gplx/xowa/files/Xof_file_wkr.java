@@ -19,7 +19,6 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.xowa.htmls.core.makes.imgs.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final    Xof_orig_mgr orig_mgr; private final    Xof_bin_mgr bin_mgr; private final    Fsm_mnt_mgr mnt_mgr; private final    Xou_cache_mgr cache_mgr;
 	private final    Gfo_usr_dlg usr_dlg; private final    Xow_repo_mgr repo_mgr; private final    Xog_js_wkr js_wkr;
@@ -83,7 +82,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 				fsdb.File_size_(file.Size());
 			}
 			Js_img_mgr.Update_img(page, js_wkr, fsdb);
-			cache_mgr.Update(fsdb);
+			if (cache_mgr != null) cache_mgr.Update(fsdb);	// cache_mgr null during tests;
 			return true;
 		} catch (Exception e) {
 			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", Err_.Message_gplx_full(e));

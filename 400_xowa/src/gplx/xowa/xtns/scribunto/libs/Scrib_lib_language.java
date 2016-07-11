@@ -93,7 +93,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean IsValidCode(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// REF.MW: Language.php!isValidCode
 		byte[] lang_code = args.Pull_bry(0);
-		boolean valid = Xoa_ttl.parse(core.Wiki(), lang_code) != null;	// NOTE: MW calls Title::getTitleInvalidRegex()
+		boolean valid = Xoa_ttl.Parse(core.Wiki(), lang_code) != null;	// NOTE: MW calls Title::getTitleInvalidRegex()
 		if (valid) {
 			int len = lang_code.length;
 			for (int i = 0; i < len; i++) {

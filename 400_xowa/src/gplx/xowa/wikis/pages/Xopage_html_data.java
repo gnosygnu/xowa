@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.wikis.pages.tags.*;
+import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xopage_html_data {
 	public Xopage_html_data(byte[] display_ttl, byte[] body) {
 		this.display_ttl = display_ttl;

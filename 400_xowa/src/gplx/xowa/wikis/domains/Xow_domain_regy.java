@@ -844,6 +844,7 @@ public class Xow_domain_regy {
 , "lrc.wikipedia.org"
 , "azb.wikipedia.org"
 , "ady.wikipedia.org"
+, "jam.wikipedia.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

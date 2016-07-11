@@ -95,7 +95,7 @@ class Xoh_ns_file_page_mgr_fxt {
 	}
 	public void tst(String expd) {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 		file.Init_at_gallery_end(html_w, html_h, Io_url_.mem_fil_(html_src), Io_url_.mem_fil_(html_orig_src));
 //			file.Orig_ttl_and_redirect_(ttl_bry, Bry_.Empty);
 		file.Init_at_orig(Byte_.Zero, wiki.Domain_bry(), ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry), 0, 0, Bry_.Empty);

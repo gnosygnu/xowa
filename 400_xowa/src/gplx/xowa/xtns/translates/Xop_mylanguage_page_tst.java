@@ -49,10 +49,10 @@ class Xop_mylanguage_page_fxt {
 		Xoae_page page = parser_fxt.Ctx().Page();
 		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(link));
 		page.Url_(url);
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_a7(link));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7(link));
 		page.Ttl_(ttl);
 		special_page.Special__gen(wiki, page, url, ttl);
 		Tfds.Eq(expd, String_.new_a7(page.Url().Page_bry()));
-		Tfds.Eq(expd, String_.new_a7(page.Data_raw()));
+		Tfds.Eq(expd, String_.new_a7(page.Db().Text().Text_bry()));
 	}
 }

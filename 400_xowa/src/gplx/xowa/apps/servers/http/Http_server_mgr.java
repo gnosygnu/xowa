@@ -99,28 +99,36 @@ public class Http_server_mgr implements Gfo_invk {
 			// get the url / ttl
 			if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = wiki.Props().Main_page();
 			Xoa_url url = wiki.Utl__url_parser().Parse(ttl_bry);
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 
 			// get the page
 			gplx.xowa.guis.views.Xog_tab_itm tab = Gxw_html_server.Assert_tab2(app, wiki);	// HACK: assert tab exists
 			Xoae_page page = wiki.Page_mgr().Load_page(url, ttl, tab);
 			app.Gui_mgr().Browser_win().Active_page_(page);	// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
-			if (page.Missing()) { // if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
-				page.Data_raw_(Bry_.new_a7("'''Page not found.'''"));
+			if (page.Db().Page().Exists_n()) { // if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
+				page.Db().Text().Text_bry_(Bry_.new_a7("'''Page not found.'''"));
 				wiki.Parser_mgr().Parse(page, false);			
 			}
 			page.Html_data().Head_mgr().Itm__server().Init_by_http(data__client).Enabled_y_();
 
 			// generate html
+			String rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read)); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
+			boolean rebuild_html = false;
 			switch (retrieve_mode) {
-				case File_retrieve_mode.Mode_skip:				break;	// noop
-				case File_retrieve_mode.Mode_async_server:		app.Gui_mgr().Browser_win().Page__async__bgn(tab); break;
+				case File_retrieve_mode.Mode_skip:	// noop
+					break;
+				case File_retrieve_mode.Mode_async_server:	
+					rebuild_html = true;
+					app.Gui_mgr().Browser_win().Page__async__bgn(tab);
+					break;
 				case File_retrieve_mode.Mode_wait:						
+					rebuild_html = true;
 					gplx.xowa.guis.views.Xog_async_wkr.Async(page, tab.Html_itm());
 					page = wiki.Page_mgr().Load_page(url, ttl, tab);	// HACK: fetch page again so that HTML will now include img data
 					break;
 			}
-			return String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read));
+			if (rebuild_html) rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read));
+			return rv;
 		}
 	}
 	private void Note(String s) {

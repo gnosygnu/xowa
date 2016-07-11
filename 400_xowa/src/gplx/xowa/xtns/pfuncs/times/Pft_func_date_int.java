@@ -28,7 +28,7 @@ public class Pft_func_date_int extends Pf_func_base {
 	    switch (date_tid) {
 	        case Date_tid_lcl: date = DateAdp_.Now(); break;
 	        case Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;
-	        case Date_tid_rev: date = ctx.Page().Revision_data().Modified_on(); break;
+	        case Date_tid_rev: date = ctx.Page().Db().Page().Modified_on(); break;
 			default: throw Err_.new_unhandled(date_tid);
 	    }
 		switch (id) {
@@ -87,7 +87,7 @@ public class Pft_func_date_int extends Pf_func_base {
 		}
 	}
 	public static final int Date_tid_utc = 0, Date_tid_lcl = 1, Date_tid_rev = 2;
-	public static final Pft_func_date_int
+	public static final    Pft_func_date_int
 	  Utc = new Pft_func_date_int(-1, Date_tid_utc)
 	, Lcl = new Pft_func_date_int(-1, Date_tid_lcl)
 	, Rev = new Pft_func_date_int(-1, Date_tid_rev);

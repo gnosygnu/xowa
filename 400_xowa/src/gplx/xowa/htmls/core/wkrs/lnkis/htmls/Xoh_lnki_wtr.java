@@ -38,7 +38,7 @@ public class Xoh_lnki_wtr {
 	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {
 		this.ctx = ctx; this.page = page;			// NOTE: must set ctx for file.v2; DATE:2014-06-22
 		this.wiki = ctx.Wiki();
-		redlinks_mgr = page.Redlink_list();			// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
+		redlinks_mgr = page.Html_data().Redlink_list();	// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
 		file_wtr.Init_by_page(hctx, page);
 		this.history_mgr = app.Usere().History_mgr();
 		if (hctx.Mode_is_hdump()) cfg.Lnki__id_(false);

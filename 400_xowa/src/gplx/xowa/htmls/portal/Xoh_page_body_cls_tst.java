@@ -48,7 +48,7 @@ class Xoh_page_body_cls_fxt {
 			tmp_bfr = Bry_bfr_.Reset(255);
 			wiki.Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, Wdata_wiki_mgr.Ns_property_name);
 		}
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl_str));
 		Tfds.Eq(expd, String_.new_u8(Xoh_page_body_cls.Calc(tmp_bfr, ttl, page_tid)));
 	}
 }

@@ -39,7 +39,7 @@ public class Wdata_dict_val_tid {
 	, Str_monolingualtext						= "monolingualtext"
 	, Str_unknown								= "unknown"
 	;
-	public static final byte[]
+	public static final    byte[]
 	  Bry_bad									= Bry_.new_a7(Str_bad)
 	, Bry_string								= Bry_.new_a7(Str_string)
 	, Bry_entity								= Bry_.new_a7(Str_entity)
@@ -49,7 +49,7 @@ public class Wdata_dict_val_tid {
 	, Bry_monolingualtext						= Bry_.new_a7(Str_monolingualtext)
 	, Bry_unknown								= Bry_.new_a7(Str_unknown)
 	;
-	private static final Hash_adp_bry Dict = Hash_adp_bry.cs()
+	private static final    Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_string					, Tid_string)
 	.Add_bry_byte(Bry_entity					, Tid_entity)
 	.Add_bry_byte(Bry_time						, Tid_time)
@@ -73,7 +73,7 @@ public class Wdata_dict_val_tid {
 	public static String To_str__srl(byte tid) {	// for scrib.wbase
 		switch (tid) {
 			case Tid_string						: return Str_string;
-			case Tid_entity						: return Str_entity;
+			case Tid_entity						: return "wikibase-item";		// changed from "wikibase-entityid"; PAGE:ht.w:Srilanka DATE:2016-07-08
 			case Tid_time						: return Str_time;
 			case Tid_globecoordinate			: return "globe-coordinate";
 			case Tid_quantity					: return Str_quantity;

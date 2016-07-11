@@ -81,14 +81,16 @@ public class Xog_error_win extends JFrame implements Gfo_invk {
 				String subject = url_encoder.Encode_str("XOWA boot error: " + error_data.Err_msg());
 				String body = url_encoder.Encode_str(error_data.Err_details());
 				Desktop.getDesktop().mail(new URI("mailto:gnosygnu+xowa_error_boot@gmail.com?subject=" + subject + "&body=" + body));
-			} catch (URISyntaxException | IOException ex) {
-			}			
+			} 
+			catch (URISyntaxException ex) {}
+			catch (IOException ex) {}			
 		}
 		else if	(ctx.Match(k, Invk_open_site)) {
 			try {
 				Desktop.getDesktop().browse(new URI("https://github.com/gnosygnu/xowa/issues"));
-			} catch (URISyntaxException | IOException ex) {
-			}			
+			}
+			catch (URISyntaxException ex) {}
+			catch (IOException ex) {}			
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;

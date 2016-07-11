@@ -24,7 +24,7 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 	public Xopg_redlink_mgr(Xoa_page page, Xog_js_wkr js_wkr) {this.page = page; this.js_wkr = js_wkr;	}
 	private void Redlink() {
 		// init; exit if redlink disabled (on Module pages)
-		Xopg_lnki_list lnki_list = page.Redlink_list(); if (lnki_list.Disabled()) return;
+		Xopg_lnki_list lnki_list = page.Html_data().Redlink_list(); if (lnki_list.Disabled()) return;
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 		Xow_wiki wiki = page.Wiki();
 		Ordered_hash lnki_hash = Ordered_hash_.New_bry();

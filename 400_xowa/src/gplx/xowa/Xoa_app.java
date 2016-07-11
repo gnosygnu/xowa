@@ -30,6 +30,7 @@ import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.users.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
+import gplx.xowa.parsers.amps.*;
 public interface Xoa_app extends Gfo_invk {
 	boolean					Tid_is_edit();
 	Xoa_app_mode			Mode();
@@ -64,4 +65,5 @@ public interface Xoa_app extends Gfo_invk {
 	Xob_bldr				Bldr();
 	Xoa_special_regy		Special_regy();
 	Gfo_thread_mgr			Thread_mgr();
+	Xop_amp_mgr				Parser_amp_mgr();
 }	

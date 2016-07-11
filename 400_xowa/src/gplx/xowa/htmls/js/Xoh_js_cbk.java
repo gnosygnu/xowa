@@ -64,9 +64,9 @@ public class Xoh_js_cbk implements Gfo_invk {
 	private String Get_page(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, m.Args_getAt(0).Val_to_bry());
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, m.Args_getAt(0).Val_to_bry());
 			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
-			return String_.new_u8(page.Data_raw());
+			return String_.new_u8(page.Db().Text().Text_bry());
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Popups_get_async_bgn(GfoMsg m) {
@@ -87,7 +87,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 	private String[] Get_title_meta(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (tmp_page) {
 			tmp_page.Clear();
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
 		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.To_str(tmp_page.Id()), Int_.To_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.To_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.To_str(tmp_page.Text_len()));

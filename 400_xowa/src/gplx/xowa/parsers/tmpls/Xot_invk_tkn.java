@@ -48,6 +48,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				val.Subs_get(j).Tmpl_compile(ctx, src, prep_data);
 		}
 	}
+	private static final    Xol_func_itm finder = new Xol_func_itm();
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		boolean rv = false;
 		Xot_defn defn = tmpl_defn; Xowe_wiki wiki = ctx.Wiki(); Xol_lang_itm lang = wiki.Lang();
@@ -100,10 +101,17 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (ns_eval != null && !template_prefix_found)									// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
 				return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 
-			Xol_func_itm finder = lang.Func_regy().Find_defn(name_ary, name_bgn, name_ary_len);
-			defn = finder.Func();
+			int finder_tid, finder_colon_pos, finder_subst_end;
+			synchronized (finder) {
+				lang.Func_regy().Find_defn(finder, name_ary, name_bgn, name_ary_len);
+				defn = finder.Func();
+				finder_tid = finder.Tid();
+				finder_colon_pos = finder.Colon_pos();
+				finder_subst_end = finder.Subst_end();
+			}
+
 			int colon_pos = -1;
-			switch (finder.Tid()) {
+			switch (finder_tid) {
 				case Xot_defn_.Tid_subst:	// subst is added verbatim; EX: {{subst:!}} -> {{subst:!}}; logic below is to handle printing of arg which could be standardized if src[] was available for tmpl
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
 					for (int i = 0; i < args_len; i++) {
@@ -115,10 +123,10 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					bfr.Add(Xop_curly_end_lxr.Hook);
 					return true;				// NOTE: nothing else to do; return
 				case Xot_defn_.Tid_safesubst:
-					name_ary = Bry_.Mid(name_ary, finder.Subst_end(), name_ary_len);				// chop off "safesubst:"
+					name_ary = Bry_.Mid(name_ary, finder_subst_end, name_ary_len);			// chop off "safesubst:"
 					name_ary_len = name_ary.length;
 					if (defn != Xot_defn_.Null) {	// func found
-						if (finder.Colon_pos() != -1) colon_pos = finder.Func().Name().length;		// set colon_pos; SEE NOTE_1
+						if (finder_colon_pos != -1) colon_pos = defn.Name().length;			// set colon_pos; SEE NOTE_1
 					}
 					subst_found = true;
 					break;
@@ -129,7 +137,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 							defn = Xot_defn_.Null;
 					}						
 					else {
-						colon_pos = finder.Colon_pos();
+						colon_pos = finder_colon_pos;
 					}
 					break;
 				case Xot_defn_.Tid_raw:
@@ -137,7 +145,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
 					if (raw_colon_pos == Bry_find_.Not_found) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
-						name_ary = Bry_.Mid(name_ary, finder.Subst_end() + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
+						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;
 						Object ns_eval2 = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 						if (ns_eval2 != null) {
@@ -147,7 +155,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 								return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 						}
 					}
-					switch (finder.Tid()) {
+					switch (finder_tid) {
 						case Xot_defn_.Tid_msg:
 							defn = Xot_defn_.Null;	// null out defn to force template load below; DATE:2014-07-10
 							break;
@@ -174,7 +182,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null) {
 					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; PAGE:en.w:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
-						Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+						Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 						if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 							if (subst_found || template_prefix_found) {	// if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
 								bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary_orig).Add(Xop_curly_end_lxr.Hook);
@@ -207,7 +215,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			Xowd_page_itm page = lang.Vnt_mgr().Convert_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
 			if (page != Xowd_page_itm.Null) {
 				name_ary = page.Ttl_page_db();
-				Xoa_ttl ttl = Xoa_ttl.parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 				if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary).Add(Xop_curly_end_lxr.Hook);
 					return false;
@@ -344,7 +352,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		}
 	}
 	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, boolean template_prefix_found, byte[] name_ary, Xot_invk caller, byte[] src) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
 		if (page_ttl.Ns().Id_is_tmpl()) {							// ttl is template; check tmpl_regy first before going to data_mgr
 			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
@@ -407,7 +415,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		bfr.Add(name_ary).Add(Xop_tkn_.Lnki_end);
 	}
 	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
-		Xoa_ttl page_ttl = Xoa_ttl.parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {
 			case Xow_ns_.Tid__template:	// ttl is template not in cache, or some other ns; do load

@@ -21,10 +21,12 @@ public class Gfo_msg_log {
 	public int Ary_len() {return ary_idx;}
 	public Gfo_msg_data Ary_get(int i) {return ary[i];}
 	public Gfo_msg_log Clear() {
-		for (int i = 0; i < ary_idx; i++)
-			ary[i].Clear();
-		ary_idx = 0;
-		return this;
+		synchronized (this) {	// TS: DATE:2016-07-06
+			for (int i = 0; i < ary_idx; i++)
+				ary[i].Clear();
+			ary_idx = 0;
+			return this;
+		}
 	}
 	public Gfo_msg_log Add_str_warn_key_none(String grp, String itm, byte[] src, int pos)								{return Add_str(Gfo_msg_itm_.Cmd_warn, grp, itm, null, src, pos, pos + 1, null);}
 	public Gfo_msg_log Add_str_warn_key_none(String grp, String itm, byte[] src, int bgn, int end)						{return Add_str(Gfo_msg_itm_.Cmd_warn, grp, itm, null, src, bgn, end, null);}
@@ -33,16 +35,20 @@ public class Gfo_msg_log {
 	public Gfo_msg_log Add_str_warn_fmt_none(String grp, String itm, String fmt, byte[] src, int bgn, int end)			{return Add_str(Gfo_msg_itm_.Cmd_warn, grp, itm, fmt , src, bgn, end, null);}
 	public Gfo_msg_log Add_str_warn_fmt_many(String grp, String itm, String fmt, Object... vals)					{return Add_str(Gfo_msg_itm_.Cmd_warn, grp, itm, fmt , Bry_.Empty, -1, -1, vals);}
 	Gfo_msg_log Add_str(byte cmd, String owner_key, String itm, String fmt, byte[] src, int bgn, int end, Object[] vals) {
-		if (ary_idx >= ary_max) ary_expand();
-		ary[ary_idx++] = root.Data_new_many(cmd, src, bgn, end, owner_key, itm, fmt, vals);
-		return this;
+		synchronized (this) {	// TS: DATE:2016-07-06
+			if (ary_idx >= ary_max) ary_expand();
+			ary[ary_idx++] = root.Data_new_many(cmd, src, bgn, end, owner_key, itm, fmt, vals);
+			return this;
+		}
 	}
 	public Gfo_msg_log Add_itm_none(Gfo_msg_itm itm, byte[] src, int bgn, int end)										{return Add_itm(itm, src, bgn, end, null);}
 	public Gfo_msg_log Add_itm_many(Gfo_msg_itm itm, byte[] src, int bgn, int end, Object... val_ary)			{return Add_itm(itm, src, bgn, end, val_ary);}
 	Gfo_msg_log Add_itm(Gfo_msg_itm itm, byte[] src, int bgn, int end, Object[] vals) {
-		if (ary_idx >= ary_max) ary_expand();
-		ary[ary_idx++] = root.Data_new_many(itm, src, bgn, end, vals);
-		return this;
+		synchronized (this) {	// TS: DATE:2016-07-06
+			if (ary_idx >= ary_max) ary_expand();
+			ary[ary_idx++] = root.Data_new_many(itm, src, bgn, end, vals);
+			return this;
+		}
 	}
 	void ary_expand() {
 		int new_max = ary_max == 0 ? 2 : ary_max * 2;  

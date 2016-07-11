@@ -70,13 +70,11 @@ public class Scrib_lib_site implements Scrib_lib {
 		}
 		else {
 			int rv_count = 0;
-			switch (ctg_type) {
-				case "all":			rv_count = ctg_itm.All; break;
-				case "pages":		rv_count = ctg_itm.Pages; break;
-				case "subcats":		rv_count = ctg_itm.Subcs; break;
-				case "files":		rv_count = ctg_itm.Files; break;
-				default:			throw Scrib_err.Make__err__arg(Invk_pagesInCategory, 2, ctg_type, "one of '*', 'all', 'pages', 'subcats', or 'files'");
-			}
+			if		(String_.Eq(ctg_type, "all"))		rv_count = ctg_itm.All;
+			else if (String_.Eq(ctg_type, "pages"))		rv_count = ctg_itm.Pages;
+			else if (String_.Eq(ctg_type, "subcats"))	rv_count = ctg_itm.Subcs;
+			else if (String_.Eq(ctg_type, "files"))		rv_count = ctg_itm.Files;
+			else										throw Scrib_err.Make__err__arg(Invk_pagesInCategory, 2, ctg_type, "one of '*', 'all', 'pages', 'subcats', or 'files'");
 			return rslt.Init_obj(rv_count);
 		}
 	}

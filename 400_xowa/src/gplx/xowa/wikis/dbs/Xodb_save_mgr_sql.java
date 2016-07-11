@@ -61,19 +61,19 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text_raw) {
 		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
-		DateAdp modified = update_modified_on_enabled ? DateAdp_.Now() : page.Revision_data().Modified_on();
-		int page_id = page.Revision_data().Id();
+		DateAdp modified = update_modified_on_enabled ? DateAdp_.Now() : page.Db().Page().Modified_on();
+		int page_id = page.Db().Page().Id();
 		db_mgr.Core_data_mgr().Tbl__page().Update__redirect__modified(page_id, redirect, modified);
 		Xowd_page_itm db_page = new Xowd_page_itm();
-		db_mgr.Load_mgr().Load_by_id(db_page, page.Revision_data().Id());
+		db_mgr.Load_mgr().Load_by_id(db_page, page_id);
 		Xowd_text_tbl text_tbl = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(db_page.Text_db_id()).Tbl__text();
-		text_tbl.Update(page.Revision_data().Id(), text_raw);
+		text_tbl.Update(page_id, text_raw);
 //			int html_db_id = db_page.Html_db_id();
 //			if (html_db_id != -1)
 //				db_mgr.Core_data_mgr().Tbl__page().Update__html_db_id(page_id, -1);	// zap html_db_id so that next load will repopulate it
 	}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl) {
-		db_mgr.Core_data_mgr().Tbl__page().Update__ns__ttl(page.Revision_data().Id(), trg_ns, trg_ttl);
+		db_mgr.Core_data_mgr().Tbl__page().Update__ns__ttl(page.Db().Page().Id(), trg_ns, trg_ttl);
 	}
 	public void Clear() {}
 }

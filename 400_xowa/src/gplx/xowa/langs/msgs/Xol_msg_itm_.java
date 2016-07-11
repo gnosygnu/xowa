@@ -262,10 +262,12 @@ public static final int
 	private static final    Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);
 	private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public static void update_val_(Xol_msg_itm itm, byte[] val) {
-		boolean has_fmt_arg = tmp_fmtr.Fmt_(val).Compile().Fmt_args_exist();
-		boolean has_tmpl_txt = Bry_find_.Find_fwd(val, Xop_curly_bgn_lxr.Hook, 0) != -1;
-		val = trie_space.Replace(tmp_bfr, val, 0, val.length);
-		itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
+		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
+			boolean has_fmt_arg = tmp_fmtr.Fmt_(val).Compile().Fmt_args_exist();
+			boolean has_tmpl_txt = Bry_find_.Find_fwd(val, Xop_curly_bgn_lxr.Hook, 0) != -1;
+			val = trie_space.Replace(tmp_bfr, val, 0, val.length);
+			itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
+		}
 	}
 	public static final    byte[] Bry_nbsp = Byte_.Ary_by_ints(194, 160);
 	private static final    Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
@@ -511,8 +513,10 @@ case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xo
 		}
 	}
 	public static byte[] eval_(Bry_bfr bfr, Xol_msg_itm tmp_msg_itm, byte[] val, Object... args) {
-		val = gplx.xowa.apps.gfs.Xoa_gfs_php_mgr.Xto_gfs(bfr, val);
-		update_val_(tmp_msg_itm, val);
-		return tmp_fmtr.Bld_bry_many(bfr, args);
+		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
+			val = gplx.xowa.apps.gfs.Xoa_gfs_php_mgr.Xto_gfs(bfr, val);
+			update_val_(tmp_msg_itm, val);
+			return tmp_fmtr.Bld_bry_many(bfr, args);
+		}
 	}
 }

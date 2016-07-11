@@ -26,7 +26,7 @@ public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xow_special_pag
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);
-		page.Data_raw_(bfr.To_bry_and_rls());
+		page.Db().Text().Text_bry_(bfr.To_bry_and_rls());
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		int len = mgr.Len();

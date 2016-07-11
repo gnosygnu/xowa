@@ -43,7 +43,7 @@ class Xoh_subpages_bldr_fxt {
 		wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__help).Subpages_enabled_(true);
 	}
 	public void Test_bld(String ttl_str, String expd) {
-		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse(wiki, Bry_.new_u8(ttl_str)));
+		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl_str)));
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

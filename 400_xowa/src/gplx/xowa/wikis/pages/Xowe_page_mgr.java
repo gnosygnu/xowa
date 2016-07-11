@@ -27,7 +27,7 @@ public class Xowe_page_mgr {
 
 		// load page meta; wait_for_popups
 		Xoae_page page = wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, false);
-		boolean hdump_exists = page.Revision_data().Html_db_id() != -1 && wiki.Appe().Api_root().Wiki().Hdump().Read_preferred();
+		boolean hdump_exists = page.Db().Page().Html_db_id() != -1 && wiki.Appe().Api_root().Wiki().Hdump().Read_preferred();
 		page.Html_data().Hdump_exists_(hdump_exists);
 		Wait_for_popups(wiki.App());
 
@@ -35,7 +35,7 @@ public class Xowe_page_mgr {
 		boolean parse = true;
 		if (hdump_exists) {
 			wiki.Html__hdump_mgr().Load_mgr().Load_by_edit(page);
-			parse = Bry_.Len_eq_0(page.Hdump_data().Body());		// NOTE: need to check if actually empty for archive.org wikis which included html_db_id without html_dbs; DATE:2016-06-22
+			parse = Bry_.Len_eq_0(page.Db().Html().Html_bry());		// NOTE: need to check if actually empty for archive.org wikis which included html_db_id without html_dbs; DATE:2016-06-22
 		}
 		if (parse)
 			wiki.Parser_mgr().Parse(page, false);

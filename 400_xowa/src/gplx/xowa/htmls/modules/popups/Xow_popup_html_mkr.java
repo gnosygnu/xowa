@@ -46,8 +46,8 @@ public class Xow_popup_html_mkr {
 		, String_.new_u8(page.Ttl().Full_txt_w_ttl_case())
 		, popup_itm.Popup_id()
 		, Xow_popup_html_bldr_.Bld_fmtr_wiki(fmtr_wiki, wrdx_bfr, cur_wiki.Domain_bry(), page.Wiki().Domain_bry()) // NOTE: use cur_wiki, not page_wiki; DATE:2014-06-28
-		, gplx.core.ios.Io_size_.To_str(page.Data_raw().length)
-		, page.Revision_data().Modified_on().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss()
+		, gplx.core.ios.Io_size_.To_str(page.Db().Text().Text_bry().length)
+		, page.Db().Page().Modified_on().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss()
 		, Xow_popup_html_bldr_.Bld_fmtr_viewed(fmtr_viewed, app, wiki, wrdx_bfr, page.Ttl())
 		, app.Fsys_mgr().Root_dir().To_http_file_bry()
 		);

@@ -118,12 +118,8 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 			html__hdump_mgr.Load_mgr().Load(rv, ttl);
 	}
 	public Xoa_ttl	Ttl_parse(byte[] ttl)								{return Ttl_parse(ttl, 0, ttl.length);}
-	public Xoa_ttl	Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.parse(app.Utl__bfr_mkr(), app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, app.Utl_msg_log(), src, src_bgn, src_end);}
-	public Xoa_ttl	Ttl_parse(int ns_id, byte[] ttl) {
-		Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);
-		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
-		return Xoa_ttl.parse(app.Utl__bfr_mkr(), app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, app.Utl_msg_log(), raw, 0, raw.length);
-	}
+	public Xoa_ttl	Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, src, src_bgn, src_end);}
+	public Xoa_ttl	Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
 	public void Init_needed_y_() {this.init_needed = true;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw Err_.new_unimplemented_w_msg("implemented for Xoa_cfg_mgr");}
 }

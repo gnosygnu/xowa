@@ -79,9 +79,9 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
-	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.parse(this, ttl);}
-	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.new_(this, app.Msg_log(), src, src_bgn, src_end);}
-	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.parse(this, ns_id, ttl);}
+	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.Parse(this, ttl);}
+	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(this, src, src_bgn, src_end);}
+	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
 	public boolean						Type_is_edit() {return Bool_.Y;}
 	public Xoa_app					App() {return app;}
 	public Xol_lang_itm				Lang() {return lang;} private final    Xol_lang_itm lang;

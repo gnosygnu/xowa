@@ -74,20 +74,20 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		Mustache_tkn_parser parser = new Mustache_tkn_parser();
 		template_root = parser.Parse(template_data, 0, template_data.length);
 	}
-	public Bfr_arg Write_html(Xop_ctx pctx, Xoae_page page, Xoh_wtr_ctx hctx, byte[] src) {
-		this.pctx = pctx; this.page = page; this.hctx = hctx; this.src = src;
+	public Bfr_arg Write_html(Xoae_page wpg, Xop_ctx pctx, Xoh_wtr_ctx hctx) {
+		this.wpg = wpg; this.pctx = pctx; this.hctx = hctx;
 		return this;
-	}	private Xop_ctx pctx; private Xoae_page page; private Xoh_wtr_ctx hctx; private byte[] src;
+	}	private Xoae_page wpg; private Xop_ctx pctx; private Xoh_wtr_ctx hctx;
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		Pgbnr_itm itm = page.Html_data().Xtn_pgbnr();
-		if (itm == null) return;
-		Pgbnr_func.Add_banner(bfr, pctx, hctx, src);
+		Pgbnr_itm itm = wpg.Html_data().Xtn_pgbnr(); if (itm == null) return;
+		Pgbnr_func.Add_banner(bfr, wpg, pctx, hctx, itm);
 	}
+	public static final    byte[] Bry__cls__wpb_banner_image = Bry_.new_a7("wpb-banner-image");
 	private static final    byte[] Template_dflt = Bry_.New_u8_nl_apos
 	( "<div class='ext-wpb-pagebanner noprint pre-content'>"
 	, "	<div class='wpb-topbanner'>"
 	, "		{{#isHeadingOverrideEnabled}}<h1 class='wpb-name'>{{title}}</h1>{{/isHeadingOverrideEnabled}}"
-	, "		<a class='image' title='{{tooltip}}' href='{{bannerfile}}'><img id='{{html_uid}}' src='{{banner}}' srcset='{{srcset}}' class='wpb-banner-image {{originx}}' data-pos-x='{{data-pos-x}}' data-pos-y='{{data-pos-y}}' style='max-width:{{maxWidth}}px'></a>"
+	, "		<a href='{{bannerfile}}' class='image' title='{{tooltip}}' xowa_title='{{file_ttl}}'><img{{{img_id_atr}}}{{{img_xottl}}}{{{img_xoimg}}} class='wpb-banner-image {{originx}}' alt='' src='{{banner}}' srcset='{{srcset}}' data-pos-x='{{data-pos-x}}' data-pos-y='{{data-pos-y}}' style='max-width:{{maxWidth}}px'></a>"
 	, "		{{#hasIcons}}"
 	, "		<div class='wpb-iconbox'>"
 	, "			{{#icons}}"
@@ -96,7 +96,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	, "		</div>"
 	, "		{{/hasIcons}}"
 	, "	</div>"
-	, "	<div class='wpb-topbanner-toc {{#bottomtoc}}wpb-bottomtoc{{/bottomtoc}}'><div class='wpb-banner-toc'>{{{toc}}}</div></div>"
+	, "	<div class='wpb-topbanner-toc{{#bottomtoc}} wpb-bottomtoc{{/bottomtoc}}'><div class='wpb-banner-toc'>{{{toc}}}</div></div>"
 	, "</div>"
 	);
 }

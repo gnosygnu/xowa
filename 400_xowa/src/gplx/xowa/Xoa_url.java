@@ -108,7 +108,8 @@ public class Xoa_url {
 	}
 	public static final    Xoa_url Null = null;
 	public static Xoa_url blank() {return new Xoa_url();}
-	public static Xoa_url new_(byte[] wiki, byte[] page) {
+	public static Xoa_url New(Xow_wiki wiki, Xoa_ttl ttl) {return New(wiki.Domain_bry(), ttl.Full_txt_w_ttl_case());}
+	public static Xoa_url New(byte[] wiki, byte[] page) {
 		Xoa_url rv = new Xoa_url();
 		rv.Wiki_bry_(wiki);
 		rv.Page_bry_(page);

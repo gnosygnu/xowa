@@ -20,21 +20,26 @@ import gplx.core.envs.*;
 import org.luaj.vm2.*; import org.luaj.vm2.lib.*; import org.luaj.vm2.lib.jse.*;
 import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Luaj_server implements Scrib_server {
+	private final Luaj_server_func_recv func_recv;
+	private final Luaj_server_func_dbg func_dbg;
 	private LuaTable server;
-	public Luaj_server(Scrib_core core, boolean debug_enabled) {}
-	public static Globals Globals_singleton;
+	public Luaj_server(Luaj_server_func_recv func_recv, Luaj_server_func_dbg func_dbg) {
+		this.func_recv = func_recv;
+		this.func_dbg = func_dbg;
+	}
+	private Globals luaj_globals;
 	public void Init(String... init_args) {
-		Globals_singleton = JsePlatform.standardGlobals();
-		Globals_singleton.load(new DebugLib());
-		Globals_singleton.load(new MWClient());
-		Globals_singleton.set("dbg", Luaj_server_func_dbg.Instance);
+		luaj_globals = JsePlatform.standardGlobals();
+		luaj_globals.load(new DebugLib());
+		luaj_globals.load(new MWClient(luaj_globals, func_recv));
+		luaj_globals.set("dbg", func_dbg);
 		String root_str = init_args[2];
 		if (Op_sys.Cur().Tid_is_wnt())
 			root_str = String_.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());
 		LuaValue main_fil_val = LuaValue.valueOf(root_str + "engines/Luaj/mw_main.lua");
-		LuaValue package_val = Globals_singleton.get("package");
+		LuaValue package_val = luaj_globals.get("package");
 		package_val.rawset("path", LuaValue.valueOf(root_str + "engines/Luaj/?.lua;" + root_str + "engines/LuaCommon/lualib/?.lua"));
-		server = (LuaTable)Globals_singleton.get("dofile").call(main_fil_val);
+		server = (LuaTable)luaj_globals.get("dofile").call(main_fil_val);
 	}
 	public LuaTable Dispatch(LuaTable msg) {
 		return (LuaTable)server.method(Val_server_recv, msg);
@@ -72,10 +77,16 @@ public class Luaj_server implements Scrib_server {
 		 * @return Value that will be returned in the require() call.  In this case, 
 		 * it is the library itself.
 		 */
+		private final Globals luaj_globals;
+		private final Luaj_server_func_recv func_recv;
+		public MWClient(Globals luaj_globals, Luaj_server_func_recv func_recv) {
+			this.luaj_globals = luaj_globals;
+			this.func_recv = func_recv;
+		}
 		public LuaValue call(LuaValue libname) {
 			LuaValue library = tableOf();
-			library.set("client_recv", Luaj_server_func_recv.Instance);
-			LuaValue env = gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server.Globals_singleton; 
+			library.set("client_recv", func_recv);
+			LuaValue env = luaj_globals; 
 			env.set( "MWClient", library );
 			return library;
 		}

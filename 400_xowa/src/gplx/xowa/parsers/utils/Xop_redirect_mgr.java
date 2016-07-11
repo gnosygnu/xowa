@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.wikis.pages.redirects.*;
 public class Xop_redirect_mgr {
-	private final Xowe_wiki wiki; private final Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
+	private final    Xowe_wiki wiki; private final    Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
 	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl;}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
@@ -54,13 +55,13 @@ public class Xop_redirect_mgr {
 			ttl_end = pipe_pos;					// end ttl at pipe
 		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
-		return Xoa_ttl.parse(wiki, redirect_bry);
+		return Xoa_ttl.Parse(wiki, redirect_bry);
 	}
-	public static final Xoa_ttl Extract_redirect_is_null = null;
+	public static final    Xoa_ttl Extract_redirect_is_null = null;
 	public static final int Redirect_max_allowed = 4;
-	public static final Xoa_ttl	Redirect_null_ttl = null;
-	public static final byte[]	Redirect_null_bry = Bry_.Empty;
-	private static final byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
+	public static final    Xoa_ttl	Redirect_null_ttl = null;
+	public static final    byte[]	Redirect_null_bry = Bry_.Empty;
+	private static final    byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
 	public static byte[] Make_redirect_text(byte[] redirect_to_ttl) {
 		return Bry_.Add
 			(	Redirect_bry				// "#REDIRECT "
@@ -69,13 +70,16 @@ public class Xop_redirect_mgr {
 			,	Xop_tkn_.Lnki_end			// "]]"
 			);
 	}
-	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, List_adp list) {
-		int list_len = list.Count();
-		if (list_len == 0) return Bry_.Empty;
+	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xopg_redirect_data redirect_mgr) {
+		int len = redirect_mgr.Itms__len(); if (len == 0) return Bry_.Empty;
 		Bry_bfr redirect_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
-		for (int i = 0; i < list_len; i++) {
+		boolean dirty = false;
+		for (int i = 0; i < len; i++) {
+			Xopg_redirect_itm redirect_itm = redirect_mgr.Itms__get_at(i);
+			if (!redirect_itm.By_wikitext()) continue;	// ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
+			dirty = true;
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
-			byte[] ttl_unders = (byte[])list.Get_at(i);
+			byte[] ttl_unders = redirect_itm.Ttl().Full_db();
 			byte[] ttl_spaces = Xoa_ttl.Replace_unders(ttl_unders);
 			redirect_bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href)	// '<a href="'
 				.Add(Xoh_href_.Bry__wiki)					// '/wiki/'
@@ -87,6 +91,7 @@ public class Xop_redirect_mgr {
 				.Add(ttl_spaces)							// 'PageA'
 				.Add(Gfh_bldr_.Bry__a_rhs);					// </a>
 		}
+		if (!dirty) return Bry_.Empty; // ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(Xol_msg_itm_.Id_redirectedfrom);
 		Bry_bfr fmt_bfr = app.Utl__bfr_mkr().Get_b512();
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);

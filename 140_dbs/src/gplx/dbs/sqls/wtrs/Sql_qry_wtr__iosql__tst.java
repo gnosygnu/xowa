@@ -53,7 +53,7 @@ public class Sql_qry_wtr__iosql__tst {
 	String fld;
 	private final    Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
 	void tst_Write(String expd, Criteria crt) {
-		Sql_where_wtr where_wtr = ((Sql_core_wtr)Sql_qry_wtr_.Basic).Where_wtr();
+		Sql_where_wtr where_wtr = ((Sql_core_wtr)Sql_qry_wtr_.New__basic()).Where_wtr();
 		Bry_bfr bfr = Bry_bfr_.New();
 		where_wtr.Bld_where_elem(bfr, ctx, crt);
 		Tfds.Eq(expd, bfr.To_str_and_clear());

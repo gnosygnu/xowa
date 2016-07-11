@@ -52,7 +52,7 @@ public class Dpl_xnde implements Xox_xnde {
 			bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
 			for (int i = itms_bgn; i < itms_len; i++) {
 				Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
-				Xoa_ttl ttl = Xoa_ttl.parse(wiki, page.Ns_id(), page.Ttl_page_db());
+				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db());
 				byte[] ttl_page_txt = show_ns ? ttl.Full_txt_w_ttl_case() : ttl.Page_txt();
 				if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
 				switch (html_mode.Tid()) {

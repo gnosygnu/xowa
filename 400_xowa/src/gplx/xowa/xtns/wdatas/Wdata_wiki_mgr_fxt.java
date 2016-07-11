@@ -114,7 +114,7 @@ public class Wdata_wiki_mgr_fxt {
 				external_lang_links.Langs_add(Bry_.new_a7(lang));
 		}
 	}
-	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse(wiki, Xow_ns_.Tid__main, Bry_.new_u8(ttl_str)), expd);}
+	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.Parse(wiki, Xow_ns_.Tid__main, Bry_.new_u8(ttl_str)), expd);}
 	public void Test_link(Xoa_ttl ttl, String expd) {
 		byte[] qid_ttl = wdata_mgr.Qid_mgr.Get_or_null(wiki, ttl);
 		Tfds.Eq(expd, String_.new_u8(qid_ttl));
@@ -152,7 +152,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
-		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links());
+		Wdata_xwiki_link_wtr.Write_wdata_links(tmp_langs, wiki, Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl)), wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links());
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
 	}	List_adp tmp_langs = List_adp_.New();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {

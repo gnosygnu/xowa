@@ -173,7 +173,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
 			byte[] xwiki_page = xo_url_parser_url.Page_bry();
 			byte[] ttl_bry = xo_url_parser_url.Page_bry();
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 			if (ttl != null && ttl.Wik_itm() != null) {
 				xwiki_wiki = ttl.Wik_itm().Domain_bry();
 				xwiki_page = ttl.Page_url();

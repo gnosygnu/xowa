@@ -35,6 +35,22 @@ Sql_fld_mgr_fxt fxt = new Sql_fld_mgr_fxt();
 		fxt.Exec_get("fld_2",  0);
 		fxt.Exec_get("fld_3", -1);
 	}
+	@Test  public void Primary_key() {
+		fxt.Exec_parse(String_.Concat_lines_nl
+		(	"ignore"
+		,	"CREATE TABLE tbl_0 ("	
+		,	"  `fld_2` int,"
+		,	"  `fld_1` int,"
+		,	"  `fld_0` int,"
+		,	"  PRIMARY KEY idx_0 (fld_2)"
+		,	");"
+		));
+		fxt.Test_count(3);
+		fxt.Exec_get("fld_0",  2);
+		fxt.Exec_get("fld_1",  1);
+		fxt.Exec_get("fld_2",  0);
+		fxt.Exec_get("fld_3", -1);
+	}
 }
 class Sql_fld_mgr_fxt {
 	Sql_fld_mgr fld_mgr = new Sql_fld_mgr();

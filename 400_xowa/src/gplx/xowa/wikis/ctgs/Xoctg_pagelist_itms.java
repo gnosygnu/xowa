@@ -34,7 +34,7 @@ public class Xoctg_pagelist_itms implements gplx.core.brys.Bfr_arg {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm page = (Xowd_page_itm)itms.Get_at(i);
-			Xoa_ttl ttl = Xoa_ttl.parse(wiki, Xow_ns_.Tid__category, page.Ttl_page_db());
+			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Xow_ns_.Tid__category, page.Ttl_page_db());
 			byte[] lnki_cls = hctx.Mode_is_hdump() ? Bry_.Empty : Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			byte[] lnki_href = href_wtr.Build_to_bry(wiki, ttl);
 			byte[] lnki_ttl = ttl.Full_txt_w_ttl_case();

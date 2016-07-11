@@ -95,12 +95,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String mod_code = fsys_mgr.Get_or_null(mod_name);	// check if mod_name a file in /lualib/ directoryScribunto .lua file (in /lualib/)
 		if (mod_code != null)
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
-		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
+		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
 		if (ttl == null) return rslt.Init_ary_empty();
 		Xoae_page page = cur_wiki.Data_mgr().Load_page_by_ttl(ttl);
-		if (page.Missing()) return rslt.Init_ary_empty();
+		if (page.Db().Page().Exists_n()) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
-		return rslt.Init_obj(mod.LoadString(String_.new_u8(page.Data_raw())));
+		return rslt.Init_obj(mod.LoadString(String_.new_u8(page.Db().Text().Text_bry())));
 	}
 	public boolean LoadPHPLibrary(Scrib_proc_args args, Scrib_proc_rslt rslt) { // NOTE: noop; Scribunto uses this to load the Scribunto_*Library classses (EX: Scribunto_TitleLibrary); DATE:2015-01-21
 		return rslt.Init_obj(null);
@@ -224,7 +224,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String text_str = args.Pull_str(1);
 		byte[] text_bry = Bry_.new_u8(text_str);
 		Xop_root_tkn tmp_root = ctx.Tkn_mkr().Root(text_bry);
-		Xop_ctx tmp_ctx = Xop_ctx.new_sub_(cur_wiki);
+		Xop_ctx tmp_ctx = Xop_ctx.new_sub_(core.Ctx());
 		int args_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - args_adj;
 		Keyval[] kv_args = new Keyval[args_len];
@@ -244,6 +244,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
 		return rslt.Init_obj(tmp_bfr.To_str_and_rls());
 	}
+	private static final    Xol_func_itm finder = new Xol_func_itm();
 	public boolean CallParserFunction(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		int frame_tid = Scrib_frame_.Get_frame_tid(frame_id);
@@ -254,11 +255,17 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Bry_obj_ref fnc_name_ref = Bry_obj_ref.New(fnc_name);
 		Keyval[] parser_func_args = CallParserFunction_parse_args(cur_wiki.Appe().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
 		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
-		Xol_func_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);
-		Xot_defn defn = finder.Func();
+
+
+		Xot_defn defn;
+		synchronized (finder) {
+			cur_wiki.Lang().Func_regy().Find_defn(finder, fnc_name, 0, fnc_name_len);
+			defn = finder.Func();
+		}
+
 		if (defn == Xot_defn_.Null) throw Err_.new_wo_type("callParserFunction: function was not found", "function", String_.new_u8(fnc_name));
 		Bry_bfr bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
-		Xop_ctx fnc_ctx = Xop_ctx.new_sub_(cur_wiki);
+		Xop_ctx fnc_ctx = Xop_ctx.new_sub_(core.Ctx());
 		fnc_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		Xot_invk_tkn.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
 		bfr.Mkr_rls();
@@ -302,10 +309,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
-		Xoa_ttl ttl = Xoa_ttl.parse(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
+		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
 		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
-			ttl = Xoa_ttl.parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
+			ttl = Xoa_ttl.Parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		Keyval[] args_ary = args.Pull_kv_ary_safe(2);
 		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
 		byte[] sub_src = null;
@@ -351,10 +358,10 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xoa_ttl ttl = null;
 		if (Type_adp_.ClassOf_obj(ttl_obj) != String.class) {	 // title = false
 			byte[] ttl_bry = frame.Frame_ttl();
-			ttl = Xoa_ttl.parse(core.Wiki(), ttl_bry);
+			ttl = Xoa_ttl.Parse(core.Wiki(), ttl_bry);
 		}
 		else {
-			ttl = Xoa_ttl.parse(cur_wiki, Bry_.new_u8((String)ttl_obj));
+			ttl = Xoa_ttl.Parse(cur_wiki, Bry_.new_u8((String)ttl_obj));
 			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
 		Keyval[] args_ary = args.Pull_kv_ary_safe(2);

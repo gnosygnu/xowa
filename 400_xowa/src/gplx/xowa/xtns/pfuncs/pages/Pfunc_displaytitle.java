@@ -25,7 +25,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser_mgr().Main();
-		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(wiki);
+		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(ctx);
 		Xop_root_tkn display_ttl_root = parser.Parse_text_to_wdom(display_ttl_ctx, val_dat_ary, false);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		boolean restrict = wiki.Cfg_parser().Display_title_restrict();

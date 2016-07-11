@@ -18,16 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_amp_mgr {	// TS
+	private static final    Btrie_rv trv = new Btrie_rv();
 	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final    Btrie_slim_mgr amp_trie = Xop_amp_trie.Instance;
 	public Xop_amp_mgr_rslt Parse_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int bgn) {
 		int fail_pos = amp_pos + 1;	// default to fail pos which is after &
 
 		// check amp_trie; EX: 'lt'
 		Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
-		Btrie_rv match = amp_trie.Match_at(src, bgn, src_len);
-		Xop_amp_trie_itm itm = (Xop_amp_trie_itm)match.Obj();
-		int cur = match.Pos();
-		match.Pool__rls();
+		Xop_amp_trie_itm itm; int cur;
+		synchronized (trv) {
+			itm = (Xop_amp_trie_itm)amp_trie.Match_at(trv, src, bgn, src_len);
+			cur = trv.Pos();
+		}
+
 		if (itm == null) {
 			rv.Pass_n_(fail_pos);
 			return rv;
@@ -94,6 +97,7 @@ public class Xop_amp_mgr {	// TS
 		int pos = 0;
 		Xop_amp_mgr_rslt amp_rv = null;
 		Bry_bfr bfr = null;
+		Btrie_rv trv = null;
 
 		// scan for &
 		while (pos < end) {
@@ -103,10 +107,10 @@ public class Xop_amp_mgr {	// TS
 				if (nxt_pos < end) {	// check & is not eos
 					byte nxt_b = src[nxt_pos];
 
-					Btrie_rv trie_rv = amp_trie.Match_at_w_b0(nxt_b, src, nxt_pos, end);
-					Object amp_obj = trie_rv.Obj();
-					int amp_pos = trie_rv.Pos();
-					trie_rv.Pool__rls();
+					if (trv == null) trv = new Btrie_rv();						
+					Object amp_obj = amp_trie.Match_at_w_b0(trv, nxt_b, src, nxt_pos, end);
+					int amp_pos = trv.Pos();
+
 					if (amp_obj != null) {
 						if (!dirty) {	// 1st amp found; add preceding String to bfr
 							if (bfr == null) {

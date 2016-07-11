@@ -15,11 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.indicators.*;
-import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.wikis.pages.tags.*;
+package gplx.xowa.wikis.pages.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.lnkis.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*;
+import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.xtns.indicators.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
+	public Xopg_lnki_list		Redlink_list()		{return redlink_list;} private final    Xopg_lnki_list redlink_list = new Xopg_lnki_list();
+
 	public boolean				Html_restricted() {return html_restricted;} private boolean html_restricted = true;
 	public void					Html_restricted_(boolean v) {html_restricted = v;} public void Html_restricted_n_() {Html_restricted_(Bool_.N);}  public void Html_restricted_y_() {Html_restricted_(Bool_.Y);}
 	public byte[]				Display_ttl() {
@@ -64,6 +67,8 @@ public class Xopg_html_data {
 	public byte[]				Custom_body() {return custom_body;} public Xopg_html_data Custom_body_(byte[] v) {custom_body = v; return this;} private byte[] custom_body;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;
 	public void Clear() {
+		redlink_list.Clear();
+
 		html_restricted = true;
 		display_ttl = content_sub = display_ttl_vnt = null;
 		lang_convert_content = lang_convert_title = true;
@@ -88,5 +93,8 @@ public class Xopg_html_data {
 		byte[] ttl_bry = ttl.Page_txt();
 		if (ctg_hash.Has(ttl_bry)) return;
 		ctg_hash.Add(ttl_bry, ttl_bry);
+	}
+	public void Init_by_page(Xoa_ttl ttl) {
+		redlink_list.Disabled_(ttl.Ns().Id_is_module());
 	}
 }

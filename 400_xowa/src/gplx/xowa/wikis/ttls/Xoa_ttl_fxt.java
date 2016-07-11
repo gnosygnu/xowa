@@ -15,11 +15,21 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.htmls.core.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-class Xoh_make_trie_itm {
-	public Xoh_make_trie_itm(byte tid, boolean elem_is_xnde, byte subst_end_byte, byte[] key) {this.tid = tid; this.key = key; this.elem_is_xnde = elem_is_xnde; this.subst_end_byte = subst_end_byte;}
-	public byte Tid() {return tid;} private final byte tid;
-	public byte[] Key() {return key;} private final byte[] key;
-	public boolean Elem_is_xnde() {return elem_is_xnde;} private final boolean elem_is_xnde;
-	public byte Subst_end_byte() {return subst_end_byte;} private final byte subst_end_byte;
+package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.tests.*;
+public class Xoa_ttl_fxt {
+	private Xowe_wiki wiki;
+	private String raw;
+	private Xoa_ttl ttl;
+	public void Clear() {
+		Xoae_app app = Xoa_app_fxt.Make__app__edit();
+		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
+	}
+	public Xoa_ttl_fxt Parse(String raw) {
+		this.raw = raw;
+		this.ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(raw));
+		return this;
+	}
+	public void Test__null()					{Gftest.Eq__bool_y(ttl == null, "ttl is not null", "raw", raw);}
+	public void Test__page_txt(String expd)		{Gftest.Eq__str(expd, String_.new_u8(ttl.Page_txt()), "page_txt", "raw", raw);}
 }

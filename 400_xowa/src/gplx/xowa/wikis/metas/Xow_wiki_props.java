@@ -20,7 +20,7 @@ import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
 public class Xow_wiki_props implements Gfo_invk {
-	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse() which will not work with ""; DATE:2014-02-16
+	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.Parse() which will not work with ""; DATE:2014-02-16
 	public Xow_wiki_props Main_page_(byte[] v) {main_page = v; return this;}
 	public void Main_page_update(Xowe_wiki wiki) {
 		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake

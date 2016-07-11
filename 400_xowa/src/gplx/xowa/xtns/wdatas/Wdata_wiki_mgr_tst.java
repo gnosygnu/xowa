@@ -35,7 +35,7 @@ public class Wdata_wiki_mgr_tst {
 		Xowe_wiki wiki = fxt.Wiki();
 		wiki.Ns_mgr().Add_new(124, "Test_ns");
 		fxt.Init_links_add("enwiki", "000", "Test_ns:Test_page", "pass");	// NOTE: wdata will save to "000" ns, b/c "124" ns is not canonical
-		Xoa_ttl ttl = Xoa_ttl.parse(fxt.Wiki(), 124, Bry_.new_a7("Test_page"));
+		Xoa_ttl ttl = Xoa_ttl.Parse(fxt.Wiki(), 124, Bry_.new_a7("Test_page"));
 		fxt.Test_link(ttl, "pass");
 	}
 	@Test   public void Write_json_as_html() {

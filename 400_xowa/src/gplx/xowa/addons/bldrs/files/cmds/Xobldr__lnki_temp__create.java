@@ -46,7 +46,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		Xob_db_file make_db = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn make_conn = make_db.Conn();
 		this.tbl = new Xob_lnki_temp_tbl(make_conn); tbl.Create_tbl();
-		this.gen_hdump = hdump_bldr.Init(wiki, make_conn);
+		this.gen_hdump = hdump_bldr.Init(wiki, make_conn, new Xob_hdump_tbl_retriever__ns_to_db(wiki));
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) {
 			this.converter_lang = vnt_mgr.Convert_lang();
@@ -58,8 +58,10 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);							// NOTE: must call after wiki.init
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Ctgs_enabled_(false);			// disable categories else progress messages written (also for PERF)
 		if (wiki.File__bin_mgr() != null)
-			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// remove wmf wkr, else will try to download images during parsing
+			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);		// remove wmf wkr, else will try to download images during parsing
 		commons_wiki = app.Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons);
+
+		// init log_mgr / property_wkr
 		Xop_log_mgr log_mgr = ctx.App().Log_mgr();
 		log_mgr.Log_dir_(wiki.Fsys_mgr().Root_dir());	// put log in wiki dir, instead of user.temp
 		invoke_wkr = this.Invoke_wkr();					// set member reference
@@ -68,20 +70,25 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		property_wkr = log_mgr.Make_wkr_property();
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Enabled_(wdata_enabled);
 		if (!xtn_ref_enabled) gplx.xowa.xtns.cites.References_nde.Enabled = false;
+
+		// init log wkrs
 		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);
 		gplx.xowa.xtns.imaps.Imap_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.parsers.xndes.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.math.Math_nde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
+
+		// init fsdb
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File__fsdb_mode().Tid_v2_bld_y_();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
-		wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
+		wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);		// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
 		wiki.File__orig_mgr().Wkrs_del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
+
 		trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(fsdb_core);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);
 		Fsm_mnt_mgr.Patch(trg_mnt_mgr.Mnts__get_main().Cfg_mgr().Tbl()); // NOTE: see fsdb_make; DATE:2014-04-26
@@ -89,21 +96,23 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		log_mgr.Txn_bgn();
 	}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm db_page, byte[] page_src) {
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ns.Gen_ttl(db_page.Ttl_page_db()));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ns.Gen_ttl(db_page.Ttl_page_db()));
 		byte[] ttl_bry = ttl.Page_db();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
 		Xoae_page page = ctx.Page();
 		page.Clear_all();
 		page.Bldr__ns_ord_(ns_ord);
-		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
-		page.Redlink_list().Clear();
-		page.Url_(Xoa_url.new_(wiki.Domain_bry(), ttl.Full_db()));
+		page.Ttl_(ttl);
+		page.Db().Page().Id_(db_page.Id());
+		page.Html_data().Redlink_list().Clear();
+		page.Url_(Xoa_url.New(wiki, ttl));
 		if (ns.Id_is_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
-			if (gen_html && !page.Redirected())
+			if (	gen_html 
+				&&	page.Redirect().Itms__len() == 0)	// don't generate html for redirected pages
 				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_page_.Tid_read);
 			if (gen_hdump)
 				hdump_bldr.Insert(page.Root_(root));
@@ -119,9 +128,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	}
 	@Override public void Exec_end_hook() {
 //			if (converter_lang != null) converter_lang.Log__rls();
-		if (gen_hdump) {
-			hdump_bldr.Bld_term();
-		}
+		if (gen_hdump) hdump_bldr.Term();
 		String err_filter_mgr = invoke_wkr.Err_filter_mgr().Print();
 		if (String_.Len_gt_0(err_filter_mgr)) usr_dlg.Warn_many("", "", err_filter_mgr);
 		wiki.Appe().Log_mgr().Txn_end();
@@ -139,7 +146,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Tid__media)
 			caller_tid = Xop_file_logger_.Tid__media;
-		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), caller_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), caller_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");
@@ -172,7 +179,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	}
 	public static byte[] Xto_commons(boolean ns_file_is_case_match_all, Xowe_wiki commons_wiki, byte[] ttl_bry) {
 		if (!ns_file_is_case_match_all) return null;	// return "" if wiki matches common
-		Xoa_ttl ttl = Xoa_ttl.parse(commons_wiki, Xow_ns_.Tid__file, ttl_bry);
+		Xoa_ttl ttl = Xoa_ttl.Parse(commons_wiki, Xow_ns_.Tid__file, ttl_bry);
 		byte[] rv = ttl.Page_db();
 		return Bry_.Eq(rv, ttl_bry) ? null : rv;
 	}

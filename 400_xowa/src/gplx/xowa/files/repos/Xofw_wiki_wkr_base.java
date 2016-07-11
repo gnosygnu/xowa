@@ -29,7 +29,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 			byte[] wiki_key = repo_pair.Src().Wiki_domain();
 			if (repo_pair.Src().Wmf_api()) continue;
 			Xowe_wiki repo_wiki = (Xowe_wiki)wiki_mgr.Get_by_or_null(wiki_key); if (repo_wiki == null) {continue;}
-			Xoa_ttl ttl = Xoa_ttl.parse(repo_wiki, ttl_bry);
+			Xoa_ttl ttl = Xoa_ttl.Parse(repo_wiki, ttl_bry);
 			Xow_ns file_ns = repo_wiki.Ns_mgr().Ns_file();
 			boolean found = repo_wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, file_ns, ttl.Page_db());
 			if (!found) {continue;}
@@ -41,7 +41,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		file.Orig_repo_id_(-1);
 	}
 	public boolean Locate(Xofw_file_finder_rslt rv, List_adp repo_pairs, byte[] ttl_bry) {
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, ttl_bry);	// NOTE: parse(ttl_bry) should be the same across all wikis; i.e.: there should be no aliases/namespaces
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);	// NOTE: parse(ttl_bry) should be the same across all wikis; i.e.: there should be no aliases/namespaces
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();		// NOTE: file_ns should also be the same across all wikis; being used for data_mgr.Parse below
 		byte[] ttl_db_key = ttl.Page_db();
 		rv.Init(ttl_db_key);

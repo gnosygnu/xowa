@@ -36,7 +36,7 @@ public class Xoh_page_chkr {
 		return this;
 	}
 	public void Check(Xoh_page actl) {
-		if (expd_body != null) Tfds.Eq_str_lines(expd_body, String_.new_u8(actl.Body()));
+		if (expd_body != null) Tfds.Eq_str_lines(expd_body, String_.new_u8(actl.Db().Html().Html_bry()));
 		if (expd_section_mgr.Len() > 0)
 			Tfds.Eq_str_lines(To_str__section_mgr(expd_section_mgr), To_str__section_mgr(actl.Section_mgr()));
 		if (expd_img_mgr.Len() > 0)

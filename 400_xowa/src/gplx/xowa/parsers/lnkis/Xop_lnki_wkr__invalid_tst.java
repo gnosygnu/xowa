@@ -30,7 +30,7 @@ public class Xop_lnki_wkr__invalid_tst {
 		fxt.Test_parse_page_all_str("[[''[a]'']]"		, "[[<i>[a]</i>]]");
 	}
 	@Test  public void Pipe_only() {
-		fxt.Init_log_(Xop_ttl_log.Len_0, Xop_lnki_log.Invalid_ttl);
+		fxt.Init_log_(Xop_lnki_log.Invalid_ttl);
 		fxt.Test_parse_page_wiki("[[|]]", fxt.tkn_txt_(0, 2), fxt.tkn_pipe_(2), fxt.tkn_txt_(3, 5));
 	}
 	@Test  public void Xnde_should_force_ttl_parse() {	// PURPOSE: reparse should be forced at xnde not at pipe; EX: [[a<b>c</b>|d]] reparse should start at <b>; DATE:2014-03-30

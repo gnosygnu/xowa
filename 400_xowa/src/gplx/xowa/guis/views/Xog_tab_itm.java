@@ -120,7 +120,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
 		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
-		Xoa_ttl ttl = Xoa_ttl.parse(wiki, url.Page_bry());
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
 		Tab_name_(String_.new_u8(ttl.Full_txt_w_ttl_case()));
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
@@ -143,7 +143,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		try {
 			if (page.Tab_data().Cancel_show()) return;	// Special:Search canceled show; NOTE: must be inside try b/c finally handles thread
 			wiki.Parser_mgr().Ctx().Page_(page);
-			if (page.Missing()) {
+			if (page.Db().Page().Exists_n()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
 					page = Xoae_page.New_edit(wiki, ttl);
 					view_mode = Xopg_page_.Tid_edit;
@@ -152,8 +152,8 @@ public class Xog_tab_itm implements Gfo_invk {
 				}
 				else {
 					wkr.Page().Tab_data().Tab().Page_(page);	// NOTE: must set tab's page to current page, so that switching to it will update url bar; EX:pt.b:A"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR""" DATE:2015-09-17
-					if (page.Redirected_ttls().Count() > 0)
-						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), String_.new_u8((byte[])page.Redirected_ttls().Get_at(0)));
+					if (page.Redirect().Itms__len() > 0)
+						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect().Itms__get_at(0).Ttl().Full_db());
 					else {
 						if (ttl.Ns().Id_is_file())
 							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", String_.new_u8(url.Raw()));// HOME
@@ -164,7 +164,7 @@ public class Xog_tab_itm implements Gfo_invk {
 				app.Log_wtr().Queue_enabled_(false);
 				return;
 			}
-			if (!page.Redirected()) page.Url_(url);	// NOTE: handle redirect from commons
+			// if (!page.Redirected()) page.Url_(url);	// NOTE: handle redirect from commons; COMMENTED: part of redirect rewrite; DATE:2016-07-05
 			if (page.Ttl().Anch_bgn() != Bry_find_.Not_found) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
@@ -179,9 +179,9 @@ public class Xog_tab_itm implements Gfo_invk {
 			if (page.Html_data().Hdump_exists()) {
 //					wiki.File_mgr().Init_file_mgr_by_load(wiki);
 //					Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-//					async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
+//					async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_mgr().Imgs());
 				async_wkr = new Load_files_wkr(this);
-				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
+				if (wiki.Html__hdump_enabled() && page.Db().Page().Html_db_id() == -1) {
 					wiki.Html__hdump_mgr().Save_mgr().Save(page);
 				}
 			}

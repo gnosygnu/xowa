@@ -48,7 +48,7 @@ class Xoa_sitelink_div_wtr_fxt {
 	Xoae_app app;
 	public void tst(String raw, String expd) {
 		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
-		ctx.Page().Ttl_(Xoa_ttl.parse(wiki, Bry_.new_a7("test_page")));
+		ctx.Page().Ttl_(Xoa_ttl.Parse(wiki, Bry_.new_a7("test_page")));
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Bry_bfr bfr = Bry_bfr_.New();
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(raw_bry);

@@ -98,7 +98,7 @@ public class Xow_special_mgr {
 		Xow_special_page special = (Xow_special_page)hash.Get_by_bry(special_name);
 		if (special != null) {	// special found; generate it;
 			special = special.Special__clone();
-			page.Revision_data().Modified_on_(DateAdp_.Now());
+			page.Db().Page().Modified_on_(DateAdp_.Now());
 			try {special.Special__gen(wiki, page, url, ttl);}
 			catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e));}
 		}

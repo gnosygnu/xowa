@@ -32,7 +32,7 @@ public class Nearby_mgr implements Xow_special_page {
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__nearby;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
-		page.Data_raw_(Bld_html(wiki));
+		page.Db().Text().Text_bry_(Bld_html(wiki));
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 //			wiki.Parser_mgr().Parse(page, false);	// do not clear else previous Search_text will be lost		
 	}
@@ -71,8 +71,8 @@ public class Nearby_mgr implements Xow_special_page {
 	Ordered_hash src_pool = Ordered_hash_.New_bry();
 	public List_adp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
 		this.wiki = wiki; this.excluded = excluded;
-		Xoa_ttl src_ttl = Xoa_ttl.parse(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
-		trg_ttl = Xoa_ttl.parse(wiki, trg_bry); if (trg_ttl == null) return List_adp_.Noop;
+		Xoa_ttl src_ttl = Xoa_ttl.Parse(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
+		trg_ttl = Xoa_ttl.Parse(wiki, trg_bry); if (trg_ttl == null) return List_adp_.Noop;
 		trg = trg_ttl.Page_db();
 		trail.Clear();
 		results.Clear();
@@ -95,7 +95,7 @@ public class Nearby_mgr implements Xow_special_page {
 			if (visited.Has(ttl_bry)) continue;
 			visited.Add_bry_bry(ttl_bry);
 			Xoae_page page = wiki.Data_mgr().Load_page_by_ttl(ttl);
-			if (page.Missing()) continue;
+			if (page.Db().Page().Exists_n()) continue;
 			wiki.Parser_mgr().Parse(page, true);
 			Ordered_hash lnkis = Ordered_hash_.New_bry();
 			Collect_lnkis(lnkis, page.Root());

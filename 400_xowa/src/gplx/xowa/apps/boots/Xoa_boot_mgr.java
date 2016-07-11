@@ -108,7 +108,7 @@ public class Xoa_boot_mgr {
 				if (app_type_is_gui)
 					app.Gui_mgr().Run(splash_win);
 				else	// teardown app, else lua will keep process running
-					if (gplx.xowa.xtns.scribunto.Scrib_core.Core() != null) gplx.xowa.xtns.scribunto.Scrib_core.Core().Term();
+					gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
 			}
 		}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0}", Err_.Message_gplx_full(e));}

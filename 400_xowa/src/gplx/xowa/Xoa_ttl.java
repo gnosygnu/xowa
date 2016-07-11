@@ -16,11 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.core.log_msgs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.apps.urls.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*; 
+import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*;
+import gplx.xowa.apps.urls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.cases.*;	
 public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
+	private int wik_bgn = -1, ns_bgn = -1, page_bgn = 0, leaf_bgn = -1, anch_bgn = -1, root_bgn = -1;
+	private byte[] tors_txt;
+	private Xoa_ttl() {}
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public boolean ForceLiteralLink() {return forceLiteralLink;} private boolean forceLiteralLink;
 	// NOTE: in procs below, all -1 are used to skip previous delimiters; they will only occur for end_pos arguments
@@ -98,37 +101,33 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		int ques_pos = Bry_find_.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_find_.Not_found ? full_txt_len : ques_pos);
 	}
-	public static Xoa_ttl parse(Xowe_wiki wiki, int ns_id, byte[] ttl) {
-		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
-		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
-		return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);
-	}
-	public static Xoa_ttl parse(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
-	private static final    Object thread_lock = new Object();
-	// $dbkey = preg_replace( '/\xE2\x80[\x8E\x8F\xAA-\xAE]/S', '', $dbkey );
-	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
+
+	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C		
+	public static final    Xoa_ttl Null = null;
+
 	private static final int Char__bidi = 1, Char__ws = 2;
 	private static final    Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
 	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
-	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
-	;
-	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
-		Xoae_app app = wiki.Appe();
-		Bry_bfr_mkr bry_mkr = app.Utl__bfr_mkr();
-		return parse(bry_mkr, app.Parser_amp_mgr(), wiki.Lang().Case_mgr(), wiki.Xwiki_mgr(), wiki.Ns_mgr(), msg_log, src, bgn, end);
-	}	private Xoa_ttl() {}
-	public static Xoa_ttl parse(Bry_bfr_mkr bry_mkr, Xop_amp_mgr amp_mgr, Xol_case_mgr case_mgr, Xow_xwiki_mgr xwiki_mgr, Xow_ns_mgr ns_mgr, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
-		synchronized (thread_lock) {
-			Xoa_ttl rv = new Xoa_ttl();
-			Bry_bfr bfr = bry_mkr.Get_b512();
-			try {
-				boolean pass = rv.Parse(bfr, bry_mkr, amp_mgr, case_mgr, xwiki_mgr, ns_mgr, msg_log, src, bgn, end);
-				return pass ? rv : null;
-			}
-			finally {bfr.Mkr_rls();}
-		}
+	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000");
+
+	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
+	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}
+	public static byte[] Replace_unders(byte[] raw, int bgn, int end) {return Bry_.Replace(raw, bgn, end, Byte_ascii.Underline, Byte_ascii.Space);}
+
+	public static Xoa_ttl Parse(Xow_wiki wiki, byte[] raw)					{return Parse(wiki, raw, 0, raw.length);}
+	public static Xoa_ttl Parse(Xow_wiki wiki, int ns_id, byte[] ttl)		{
+		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
+		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
+		return Parse(wiki, raw, 0, raw.length);
 	}
-	private boolean Parse(Bry_bfr bfr, Bry_bfr_mkr bry_mkr, Xop_amp_mgr amp_mgr, Xol_case_mgr case_mgr, Xow_xwiki_mgr xwiki_mgr, Xow_ns_mgr ns_mgr, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
+	public static Xoa_ttl Parse(Xow_wiki wiki, byte[] src, int bgn, int end){return Parse(wiki.App().Parser_amp_mgr(), wiki.Lang().Case_mgr(), wiki.Xwiki_mgr(), wiki.Ns_mgr(), src, bgn, end);}
+	public static Xoa_ttl Parse(Xop_amp_mgr amp_mgr, Xol_case_mgr case_mgr, Xow_xwiki_mgr xwiki_mgr, Xow_ns_mgr ns_mgr, byte[] src, int bgn, int end) {
+		Xoa_ttl rv = new Xoa_ttl();
+		Bry_bfr bfr = Bry_bfr_.Get();	// changed from bry_mkr.Get_b512(); DATE:2016-07-06
+		try		{return rv.Parse(bfr, amp_mgr, case_mgr, xwiki_mgr, ns_mgr, src, bgn, end) ? rv : null;}
+		finally {bfr.Mkr_rls();}
+	}
+	private boolean Parse(Bry_bfr bfr, Xop_amp_mgr amp_mgr, Xol_case_mgr case_mgr, Xow_xwiki_mgr xwiki_mgr, Xow_ns_mgr ns_mgr, byte[] src, int bgn, int end) {
 		/* This proc will
 		- identify all parts: Wiki, Namespace, Base/Leaf, Anchor; it will also identify Subject/Talk ns 
 		- trim whitespace around part delimiters; EX: "Help : Test" --> "Help:Test"; note that it will trim only if the ns part is real; EX: "Helpx : Test" is unchanged
@@ -146,12 +145,12 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		Gfo_url_encoder anchor_encoder = null;
 		Bry_bfr anchor_encoder_bfr = null;
 		bfr.Clear();
-		if (end - bgn == 0) {msg_log.Add_itm_none(Xop_ttl_log.Len_0, src, bgn, bgn); return false;}
+		if (end - bgn == 0) return false;
 		this.raw = src;
 		ns = ns_mgr.Ns_main();
 		boolean add_ws = false, ltr_bgn_reset = false;
-		int ltr_bgn = -1, txt_bb_len = 0, colon_count = 0; bfr.Clear();
-		Btrie_slim_mgr amp_trie = amp_mgr.Amp_trie();			
+		int ltr_bgn = -1, txt_bb_len = 0, colon_count = 0;
+		Btrie_slim_mgr amp_trie = amp_mgr.Amp_trie(); Btrie_rv trv = null;		
 		byte[] b_ary = null;
 		int cur = bgn;
 		int match_pos = -1;
@@ -226,10 +225,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					int cur2 = cur + 1;//cur = ttlTrie.Match_pos();
 					if (cur2 == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c Match_bgn does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
 					else {
-						Object html_ent_obj = amp_trie.Match_bgn(src, cur2, end);
+						if (trv == null) trv = new Btrie_rv();
+						Object html_ent_obj = amp_trie.Match_at(trv, src, cur2, end);
 						if (html_ent_obj != null) {									
 							Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)html_ent_obj;
-							match_pos = amp_trie.Match_pos();
+							match_pos = trv.Pos();
 							if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name_std) {
 								switch (amp_itm.Char_int()) {
 									case 160:	// NOTE: &nbsp must convert to space; EX:w:United States [[Image:Dust Bowl&nbsp;- Dallas, South Dakota 1936.jpg|220px|alt=]]
@@ -282,10 +282,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 								cur = find + Xop_comm_lxr.End_ary.length;
 								continue;
 							}
-							else {
-								msg_log.Add_itm_none(Xop_ttl_log.Comment_eos, src, bgn, end);
+							else
 								return false;
-							}
 						}
 					}
 					if (anch_bgn != -1) {
@@ -310,22 +308,20 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						b_ary = anchor_encoder_bfr.To_bry_and_clear();
 						match_pos = cur + 1;
 					}
-					else {
-						msg_log.Add_itm_none(Xop_ttl_log.Invalid_char, src, bgn, end);
+					else
 						return false;
-					}
 					break;
 				default:
 					if ((b & 0xff) > 127) {// PATCH.JAVA:need to convert to unsigned byte
-						Object char_obj = char_trie.Match_bgn_w_byte(b, src, cur, end);
+						if (trv == null) trv = new Btrie_rv();
+						Object char_obj = char_trie.Match_at_w_b0(trv, b, src, cur, end);
 						if (char_obj != null) {
 							int tid = ((Int_obj_val)(char_obj)).Val();
+							cur = trv.Pos();
 							switch (tid) {
 								case Char__bidi:	// ignore bidi
-									cur = char_trie.Match_pos();
 									continue;
 								case Char__ws:		// treat extended_ws as space; PAGE:ja.w:Template:Location_map_USA New_York; DATE:2015-07-28
-									cur = char_trie.Match_pos();
 									if (ltr_bgn != -1) add_ws = true;
 									continue;
 							}								
@@ -346,11 +342,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 				ltr_bgn = -1;
 			}
 		}
-		if (txt_bb_len == 0) {msg_log.Add_itm_none(Xop_ttl_log.Len_0, src, bgn, end); return false;}
-		if (wik_bgn == -1 && page_bgn == txt_bb_len) {	// if no wiki, but page_bgn is at end, then ttl is ns only; EX: "Help:"; NOTE: "fr:", "fr:Help" is allowed 
-			msg_log.Add_itm_none(Xop_ttl_log.Ttl_is_ns_only, src, bgn, end);
-			return false;
-		}
+		if (txt_bb_len == 0) return false;
+		if (wik_bgn == -1 && page_bgn == txt_bb_len) return false;	// if no wiki, but page_bgn is at end, then ttl is ns only; EX: "Help:"; NOTE: "fr:", "fr:Help" is allowed 
 		full_txt = bfr.To_bry_and_clear();
 		if (	ns.Case_match() == Xow_ns_case_.Tid__1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
@@ -362,7 +355,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 				if (page_end > full_txt_len)	// ttl is too too short for 1st multi-byte char; EX: [[%D0]] is 208 but in utf8, 208 requires at least another char; DATE:2013-11-11
 					return false;				// ttl is invalid
 				else {							// ttl is long enough for 1st mult-byte char; need to use platform uppercasing; Xol_case_mgr_.Utf_8 is not sufficient
-					Bry_bfr upper_1st = bry_mkr.Get_b512();
+					Bry_bfr upper_1st = Bry_bfr_.Get();
 					byte[] page_txt = case_mgr.Case_build_1st_upper(upper_1st, full_txt, page_bgn, full_txt_len);	// always build; never reuse; (multi-byte character will expand array)
 					if (page_bgn == 0)			// page only; EX: A
 						full_txt = page_txt;
@@ -379,17 +372,6 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		// tors_txt = tors_ns == null ? Bry_.Empty : tors_ns.Name_ui_w_colon();
 		return true;
 	}		
-	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
-	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}
-	public static byte[] Replace_unders(byte[] raw, int bgn, int end) {return Bry_.Replace(raw, bgn, end, Byte_ascii.Underline, Byte_ascii.Space);}
-	private int wik_bgn = -1, ns_bgn = -1, page_bgn = 0, leaf_bgn = -1, anch_bgn = -1, root_bgn = -1;
-	private byte[] tors_txt;
-	public static final int Wik_bgn_int = -1;
-	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C
-	public static final int Anch_bgn_anchor_only = 1;	// signifies lnki which is only anchor; EX: [[#anchor]]
-	public static final int Max_len = 2048;	// ASSUME: max len of 256 * 8 bytes
-	public static final int Null_wik_bgn = -1;
-	public static final    Xoa_ttl Null = null;
 }
 class Xoa_ttl_trie {
 	public static Btrie_fast_mgr new_() {

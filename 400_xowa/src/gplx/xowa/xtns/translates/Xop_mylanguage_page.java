@@ -30,7 +30,7 @@ public class Xop_mylanguage_page implements Xow_special_page {
 		if (!lang_is_english)
 			trg_bry = Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, page_bry, lang_key);
 		wiki.Data_mgr().Redirect(page, trg_bry);
-		if (page.Missing() && !lang_is_english)	// foreign lang does not exist; default to english
+		if (page.Db().Page().Exists_n() && !lang_is_english)	// foreign lang does not exist; default to english
 			wiki.Data_mgr().Redirect(page, page_bry);
 	}
 

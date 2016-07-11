@@ -33,7 +33,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		int slash_pos = Bry_find_.Find_bwd(page_bry, Xoa_ttl.Subpage_spr);
 		if (slash_pos == Bry_find_.Not_found) return ttl;
 		byte[] root_bry = Bry_.Mid(page_bry, 0, slash_pos);
-		return Xoa_ttl.parse(wiki, ttl.Ns().Id(), root_bry);
+		return Xoa_ttl.Parse(wiki, ttl.Ns().Id(), root_bry);
 	}
 	private List_adp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
 		this.root_ttl = Root_ttl_of(wiki, ctx.Page().Ttl());
@@ -112,13 +112,13 @@ class Xop_languages_fmtr implements gplx.core.brys.Bfr_arg {
 		int len = langs.Count();
 		Xoh_href_wtr href_wtr = wiki.Appe().Html__href_wtr();
 		int ns_id = root_ttl.Ns().Id();
-		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.parse below
+		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.Parse below
 		for (int i = 0; i < len; i++) {
 			Xol_lang_stub lang = (Xol_lang_stub)langs.Get_at(i);
 			byte[] lang_key = lang.Key();
 			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_itm_.Key_en);
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
-			Xoa_ttl lang_ttl = Xoa_ttl.parse(wiki, ns_id, lang_ttl_bry);
+			Xoa_ttl lang_ttl = Xoa_ttl.Parse(wiki, ns_id, lang_ttl_bry);
 			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
 			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt_w_ttl_case());
 			Bry_fmtr fmtr = null;

@@ -34,7 +34,11 @@ public class Io_zip_compress_cmd__jre {
 			Io_url src_url = src_urls[i];
 			java.util.zip.ZipEntry trg_entry = new java.util.zip.ZipEntry(src_url.NameAndExt());
 			try {trg_stream.putNextEntry(trg_entry);}
-			catch (Exception e) {throw Err_.new_exc(e, "io", "zip entry failed", "url", src_url.Raw());}
+			catch (Exception e) {
+				try {trg_stream.close();}
+				catch (IOException e1) {}
+				throw Err_.new_exc(e, "io", "zip entry failed", "url", src_url.Raw());
+			}
 			FileInputStream src_stream = null;
 			try {src_stream = new FileInputStream(new File(src_url.Raw()));}
 			catch (Exception e) {throw Err_.new_exc(e, "io", "src open failed", "url", src_url.Raw());}
@@ -55,8 +59,7 @@ public class Io_zip_compress_cmd__jre {
 				}
 			}
 			try {
-				trg_stream.closeEntry();
-				trg_stream.close();
+				trg_stream.closeEntry();				
 				src_stream.close();
 			}
 			catch (Exception e) {throw Err_.new_exc(e, "io", "trg close entry failed", "url", src_url.Raw());}

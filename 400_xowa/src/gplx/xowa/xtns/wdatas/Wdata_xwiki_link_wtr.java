@@ -55,7 +55,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);
 				tmp_bfr.Add(slink.Name());
-				Xoa_ttl slink_ttl = Xoa_ttl.parse(wiki, tmp_bfr.To_bry_and_clear());
+				Xoa_ttl slink_ttl = Xoa_ttl.Parse(wiki, tmp_bfr.To_bry_and_clear());
 				if (slink_ttl == null) continue;								// invalid ttl
 				Xow_xwiki_itm xwiki_itm = slink_ttl.Wik_itm();
 				if (	xwiki_itm == null									// not a known xwiki; EX: [[zzz:abc]]

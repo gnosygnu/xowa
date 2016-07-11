@@ -96,19 +96,20 @@ public class Pgbnr_func extends Pf_func_base {
 		itm.Init_from_wtxt(banner_ttl, banner_file_itm, tooltip, title, bottomtoc, toc, data_pos_x, data_pos_y, origin_x, icons_list == null ? Pgbnr_icon.Ary_empty : (Pgbnr_icon[])icons_list.To_ary_and_clear(Pgbnr_icon.class));
 		page.Html_data().Xtn_pgbnr_(itm);
 		page.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();	// register css / js during parse stage
+		page.Hdr_mgr().Toc_manual_();	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
 	}
-	public static void Add_banner(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src) {
+	public static void Add_banner(Bry_bfr bfr, Xoae_page wpg, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_itm itm) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_app app = wiki.Appe();
 		Pgbnr_cfg cfg = wiki.Xtn_mgr().Xtn_pgbnr().Cfg(); if (!cfg.enabled) return;
-		Xoae_page page = ctx.Page(); Xoa_ttl ttl = page.Ttl();
-		Pgbnr_itm itm = page.Html_data().Xtn_pgbnr();
+		Xoa_ttl ttl = wpg.Ttl();
 		Xoa_ttl banner_ttl = null; byte[] banner_html = null;
 		if (itm != null) {							// {{PAGEBANNER}} exists in wikitext
+			itm.Init_hdump(hctx.Mode_is_hdump());
 			banner_ttl = itm.banner_ttl;
-			banner_html = Get_banner_html(wiki, ctx, src, cfg, banner_ttl, itm);
+			banner_html = Get_banner_html(wiki, ctx, hctx, cfg, banner_ttl, itm);
 			if (banner_html == null) {	// no banner; try again using title from wikidata; note that this should only happen if no banner_ttl or banner_ttl is invalid; EX:{{PAGEBANNER:|toc=yes}}
 				banner_ttl = Get_wikidata_banner(app, wiki, cfg, ttl);
-				banner_html = Get_banner_html(wiki, ctx, src, cfg, banner_ttl, itm);
+				banner_html = Get_banner_html(wiki, ctx, hctx, cfg, banner_ttl, itm);
 			}
 		}
 		else if (	ttl.Ns().Id_is_main()			// {{PAGEBANNER}} missing, but wiki is marked as enable_default_banner
@@ -121,12 +122,13 @@ public class Pgbnr_func extends Pf_func_base {
 			Xof_file_itm banner_file_itm = File__make_tkn(ctx, Xop_file_logger_.Tid__pgbnr_main, banner_ttl, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null);
 			itm = new Pgbnr_itm();
 			itm.Init_from_wtxt(banner_ttl, banner_file_itm, Bry_.Empty, Bry_.Empty, false, Bry_.Empty, 0, 0, Bry_.Empty, Pgbnr_icon.Ary_empty);
-			banner_html = Get_banner_html(wiki, ctx, src, cfg, banner_ttl, itm);
+			itm.Init_hdump(hctx.Mode_is_hdump());
+			banner_html = Get_banner_html(wiki, ctx, hctx, cfg, banner_ttl, itm);
 		}
 		if (banner_html != null)
 			bfr.Add(banner_html);
 	}
-	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {
+	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {
 		byte[][] urls = Get_standard_size_urls(wiki, cfg, banner_ttl); if (urls == null) return null;
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		int urls_len = urls.length;
@@ -141,8 +143,16 @@ public class Pgbnr_func extends Pf_func_base {
 		int max_width = itm.banner_file_itm.Orig_w();  // $file = wfFindFile( banner_file ); $options['max_width'] = $file->getWidth();
 		byte[] banner_file = null;   // $bannerfile->getLocalUrl();
 
-		wiki.Html_mgr().Toc_mgr().Html(ctx.Page(), gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic, src, tmp_bfr, false);
-		byte[] toc_html = tmp_bfr.To_bry_and_clear();
+		byte[] toc_html = null;
+		if (hctx.Mode_is_hdump()) {
+			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_tag(tmp_bfr, true);
+			toc_html = tmp_bfr.To_bry_and_clear();
+			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, Byte_ascii.Colon_bry, banner_ttl.Full_db());
+		}
+		else {
+			wiki.Html_mgr().Toc_mgr().Html(ctx.Page(), gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic, tmp_bfr, true);
+			toc_html = tmp_bfr.To_bry_and_clear();
+		}
 		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html);
 
 		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm);
