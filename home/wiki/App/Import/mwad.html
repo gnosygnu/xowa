@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Import/mwad - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Import/mwad</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      <a href="https://github.com/Mattze96/mwad" rel="nofollow" class="external text">mwad</a> is a python script / executable by <a href="https://github.com/Mattze96" rel="nofollow" class="external text">Mattze96</a> to generate XML dumps using the MediaWiki API
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Overview:_XML_Dumps"><span class="tocnumber">1</span> <span class="toctext">Overview: XML Dumps</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Usage"><span class="tocnumber">2</span> <span class="toctext">Usage</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#Generating_the_dump"><span class="tocnumber">2.1</span> <span class="toctext">Generating the dump</span></a> 
+              <ul>
+                <li class="toclevel-3 tocsection-4">
+                  <a href="#Executable"><span class="tocnumber">2.1.1</span> <span class="toctext">Executable</span></a>
+                </li>
+                <li class="toclevel-3 tocsection-5">
+                  <a href="#Python_script"><span class="tocnumber">2.1.2</span> <span class="toctext">Python script</span></a>
+                </li>
+              </ul>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#Importing_the_dump"><span class="tocnumber">2.2</span> <span class="toctext">Importing the dump</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-7">
+          <a href="#Other_notes"><span class="tocnumber">3</span> <span class="toctext">Other notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#mwad_usage_notes"><span class="tocnumber">4</span> <span class="toctext">mwad usage notes</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#References"><span class="tocnumber">5</span> <span class="toctext">References</span></a>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Overview:_XML_Dumps">Overview: XML Dumps</span>
+    </h2>
+    <p>
+      XOWA is an offline wiki application for online wikis. It works by converting a MediaWiki XML dump into an .xowa sqlite3 database.
+    </p>
+    <p>
+      XML dumps can be obtained in the following locations:
+    </p>
+    <ul>
+      <li>
+        Wikimedia wikis: <a href="https://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external free">https://dumps.wikimedia.org/backup-index.html</a>
+      </li>
+      <li>
+        Wikia wikis: On the Special:Statistics for a given wiki. For example, for the freespeech wikia wiki, one can go to <a href="http://freespeech.wikia.com/wiki/Special:Statistics" rel="nofollow" class="external free">http://freespeech.wikia.com/wiki/Special:Statistics</a>
+      </li>
+      <li>
+        Other wikis: Varies and depends on wiki setup.
+      </li>
+    </ul>
+    <p>
+      For non-Wikimedia wikis (Wikia wikis and other wikis), the dumps may not be available or out-of-date. For example, the freespech wikia has a dump date of 2013-12-26, which is over 2 and a half years old.
+    </p>
+    <p>
+      For Wikia wikis, one can request an XML dump by doing the following:
+    </p>
+    <ul>
+      <li>
+        Logging in with a user account
+      </li>
+      <li>
+        Requesting a dump through the Special:Statistics page
+      </li>
+      <li>
+        Waiting for the dump to be generated
+      </li>
+    </ul>
+    <p>
+      Other wikis may require emails to the wiki's admins.
+    </p>
+    <p>
+      An alternative to this process is to use Mattze96's mwad: the Media Wiki Api dump
+    </p>
+    <h2>
+      <span class="mw-headline" id="Usage">Usage</span>
+    </h2>
+    <p>
+      Currently mwad is available as a command-line executable and a python script.
+    </p>
+    <ul>
+      <li>
+        For up-to-date info, see <a href="https://github.com/Mattze96/mwad" rel="nofollow" class="external free">https://github.com/Mattze96/mwad</a>
+      </li>
+      <li>
+        For info as of 2016-07-10, see <a href="#mwad_usage_notes" id="xolnki_2">mwad usage notes below</a>
+      </li>
+      <li>
+        For a walk-through synopsis, see the following:
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Generating_the_dump">Generating the dump</span>
+    </h3>
+    <h4>
+      <span class="mw-headline" id="Executable">Executable</span>
+    </h4>
+    <ul>
+      <li>
+        Open up a command prompt
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>cmd</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Change to the mwad directory
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>cd C:\xowa\bin\windows\python\mwad</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Run mwad with the following options
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        mediawiki_api_dump.win32.exe <a href="http://freespeech.wikia.com" rel="nofollow" class="external free">http://freespeech.wikia.com</a>
+      </dd>
+    </dl>
+    <h4>
+      <span class="mw-headline" id="Python_script">Python script</span>
+    </h4>
+    <ul>
+      <li>
+        Make sure you have Python 3 installed on your system
+      </li>
+      <li>
+        Open up a command prompt
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>cmd</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Change to the mwad directory
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <code>cd C:\xowa\bin\any\python\mwad</code>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Run mwad with the following options
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        python mediawiki_api_dump.py <a href="http://freespeech.wikia.com" rel="nofollow" class="external free">http://freespeech.wikia.com</a>
+      </dd>
+    </dl>
+    <p>
+      Both cases will generate an xml file called <code>freespeech.wikia.com-20160710-pages-articles.xml</code>
+    </p>
+    <h3>
+      <span class="mw-headline" id="Importing_the_dump">Importing the dump</span>
+    </h3>
+    <ul>
+      <li>
+        Create a folder called C:\xowa\wiki\freespeech.wikia.com
+      </li>
+      <li>
+        Move the xml file to C:\xowa\wiki\freespeech.wikia.com
+      </li>
+      <li>
+        Rename the file to freespeech.wikia.com.xml
+      </li>
+      <li>
+        Choose "Main Menu" -&gt; "Tools" -&gt; "Import Offline"
+      </li>
+      <li>
+        Change "Wiki" to "Other wiki"
+      </li>
+      <li>
+        Change "Where to get the dump" to "read from file"
+      </li>
+      <li>
+        Select the XML file by clicking "..."
+      </li>
+      <li>
+        Press "Import Now"
+      </li>
+    </ul>
+    <p>
+      Depending on the wiki, the Main_Page may not be available. You can use the XOWA search bar to look for pages in the wiki.
+    </p>
+    <h2>
+      <span class="mw-headline" id="Other_notes">Other notes</span>
+    </h2>
+    <ul>
+      <li>
+        <b>Do not run this on Wikimedia wikis</b>. Wikimedia has strict web-crawling policies. If you run this on a Wikimedia wiki, such as en.wikipedia.org, your IP address will probably be banned and you will be unable to access Wikipedia.
+      </li>
+      <li>
+        <b>Pay attention to the licenses for the wiki</b>. All Wikia wikis are under a Creative Commons license for article text<sup id="cite_ref-wikia_licensing_0-0" class="reference"><a href="#cite_note-wikia_licensing-0">[1]</a></sup>. Other wikis may follow similiarly permissive licensing but it is your responsibility to check. If a wiki has a strict copyright license, please do not run mwad on it.
+      </li>
+      <li>
+        <b>Web-scraping policies may get your IP banned</b>. Different wikis may have different limits on number of articles downloaded, even through their API. If you're downloading a large wiki, you should consult first with the wiki's admins. Otherwise, your IP address may be flagged as an unauthorized web-crawler and you will be banned.
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
+    <h2>
+      <span class="mw-headline" id="mwad_usage_notes">mwad usage notes</span>
+    </h2>
+<pre>
+usage: mediawiki_api_dump.py [-h] [-v] [-n NAME] [-l LOG] [-c] [-x] url
+
+Create a wiki xml-dump via api.php
+
+positional arguments:
+  url                   download url
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         verbose level... repeat up to three times
+  -n NAME, --name NAME  name of the wiki for filename etc.
+  -l LOG, --log LOG     specify log-file.
+  -c, --compress        compress output file with bz2
+  -x, --xowa            special XOWA mode: xml to stdout, progress to stderr
+
+Example:
+
+./mediawiki_api_dump.py http://wiki.archlinux.org
+</pre>
+    <h2>
+      <span class="mw-headline" id="References">References</span>
+    </h2>
+    <ol class="references">
+      <li id="cite_note-wikia_licensing-0">
+        <span class="mw-cite-backlink"><a href="#cite_ref-wikia_licensing_0-0">^</a></span> <span class="reference-text">See <a href="http://www.wikia.com/Licensing" rel="nofollow" class="external autonumber">[1]</a></span>
+      </li>
+    </ol>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
