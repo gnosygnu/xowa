@@ -50,6 +50,7 @@ public class Gfh_atr_ {
 	, Bry__align				= Bry_.new_a7("align")			// HTML.v4
 	, Bry__bgcolor				= Bry_.new_a7("bgcolor")		// HTML.v4
 	, Bry__abbr					= Bry_.new_a7("abbr")			// HTML.ua
+	, Bry__srcset				= Bry_.new_a7("srcset")
 	;
 	public static byte[] Make(Bry_bfr bfr, byte[] key, byte[] val) {
 		return bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote().Add(val).Add_byte_quote().To_bry_and_clear();
@@ -64,6 +65,11 @@ public class Gfh_atr_ {
 	public static void Add(Bry_bfr bfr, byte[] key, int val) {
 		bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote();
 		bfr.Add_int_variable(val);
+		bfr.Add_byte_quote();
+	}
+	public static void Add_double(Bry_bfr bfr, byte[] key, double val) {
+		bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote();
+		bfr.Add_double(val);
 		bfr.Add_byte_quote();
 	}
 }

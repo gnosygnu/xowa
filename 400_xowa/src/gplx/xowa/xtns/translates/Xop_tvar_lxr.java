@@ -28,9 +28,9 @@ public class Xop_tvar_lxr implements Xop_lxr {
 		int rhs_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, cur_pos); if (rhs_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		int lhs_bgn = Bry_find_.Find_fwd(src, Close_nde    , rhs_end); if (lhs_bgn == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		byte[] body = Bry_.Mid(src, rhs_end + Int_.Const_position_after_char, lhs_bgn);
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		Xop_root_tkn sub_root = tkn_mkr.Root(body);
-		body = ctx.Wiki().Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, tkn_mkr, body);	// NOTE: must parse inner text for templates; EX:<tvar|a>{{B}}</>; PAGE:mw:Download; DATE:2014-04-27
+		body = ctx.Wiki().Parser_mgr().Main().Expand_tmpl(sub_root, sub_ctx, tkn_mkr, body);	// NOTE: must parse inner text for templates; EX:<tvar|a>{{B}}</>; PAGE:mw:Download; DATE:2014-04-27
 		int end_pos = lhs_bgn + Close_nde.length;
 		ctx.Subs_add(root, tkn_mkr.Tvar(bgn_pos, end_pos, cur_pos, rhs_end, rhs_end + Int_.Const_position_after_char, lhs_bgn, body));
 		return end_pos;

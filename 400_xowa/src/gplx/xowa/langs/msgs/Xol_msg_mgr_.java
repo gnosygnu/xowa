@@ -58,9 +58,9 @@ public class Xol_msg_mgr_ {
 			msg_val = tmp_bfr.To_bry_and_clear();
 		}
 		if (has_tmpl) {
-			Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki.Parser_mgr().Ctx()); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
+			Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(wiki.Parser_mgr().Ctx()); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 			Xop_root_tkn sub_root = tkn_mkr.Root(msg_val);
-			msg_val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, tkn_mkr, msg_val);
+			msg_val = wiki.Parser_mgr().Main().Expand_tmpl(sub_root, sub_ctx, tkn_mkr, msg_val);
 		}
 		return msg_val;
 	}

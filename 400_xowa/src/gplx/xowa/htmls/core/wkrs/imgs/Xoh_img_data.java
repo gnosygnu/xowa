@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
-import gplx.xowa.xtns.imaps.*;
+import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.pagebanners.*;
 public class Xoh_img_data implements Xoh_data_itm {
 	public int						Tid() {return Xoh_hzip_dict_.Tid__img;}
 	public int						Src_bgn() {return src_bgn;} private int src_bgn;
@@ -33,7 +33,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public Bry_obj_ref				Anch_page() {return anch_page;} private Bry_obj_ref anch_page = Bry_obj_ref.New_empty();
 	public Xoh_img_src_data			Img_src() {return img_src;} private final    Xoh_img_src_data img_src = new Xoh_img_src_data();
 	public Xoh_img_cls_data			Img_cls() {return img_cls;} private final    Xoh_img_cls_data img_cls = new Xoh_img_cls_data();
-	public Xoh_img_xoimg_data		Img_xoimg() {return img_xoimg;} private Xoh_img_xoimg_data img_xoimg = new Xoh_img_xoimg_data();
+	public Xoh_img_xoimg_data		Img_xoimg() {return img_xoimg;} private final    Xoh_img_xoimg_data img_xoimg = new Xoh_img_xoimg_data();
 	public int						Img_alt_bgn() {return img_alt_bgn;} private int img_alt_bgn;
 	public int						Img_alt_end() {return img_alt_end;} private int img_alt_end;
 	public boolean					Img_alt__diff__anch_title() {return img_alt__diff_anch_title;} private boolean img_alt__diff_anch_title;
@@ -44,12 +44,13 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public boolean						Img_wo_anch() {return img_wo_anch;} private boolean img_wo_anch;
 	public int						Img_imap_idx() {return img_imap_idx;} private int img_imap_idx;
 	public boolean						Img_is_gallery() {return img_is_gallery;} private boolean img_is_gallery; public void Img_is_gallery_(boolean v) {this.img_is_gallery = v;}
+	public Pgbnr_itm				Img_pgbnr() {return img_pgbnr;} private final    Pgbnr_itm img_pgbnr = new Pgbnr_itm();
 	public void Clear() {
 		this.img_alt__diff_anch_title = anch_rel_is_nofollow = img_is_vid = img_wo_anch = img_is_gallery = false;
 		this.src_bgn = src_end = anch_title_bgn = anch_title_end = img_w = img_h = img_alt_bgn = img_alt_end = -1;
 		this.img_imap_idx = -1;
 		anch_href.Clear(); anch_cls.Clear();
-		img_src.Clear(); img_cls.Clear(); img_xoimg.Clear();
+		img_src.Clear(); img_cls.Clear(); img_xoimg.Clear(); img_pgbnr.Clear_by_hdump();
 	}
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag anch_head, Gfh_tag unused) {
 		Gfh_tag img_tag = anch_head;
@@ -76,7 +77,9 @@ public class Xoh_img_data implements Xoh_data_itm {
 			img_tag = tag_rdr.Tag__move_fwd_head();
 		}
 		img_tag.Chk_name_or_fail(Gfh_tag_.Id__img);														// <img
-//			if (img_tag.Atrs__cls_has(gplx.xowa.xtns.pagebanners.Pgbnr_xtn_mgr.Bry__cls__wpb_banner_image)) return false;	// ignore pagebanner; EX: <img class="wpb-banner-image">
+		if (img_tag.Atrs__cls_has(gplx.xowa.xtns.pagebanners.Pgbnr_xtn_mgr.Bry__cls__wpb_banner_image)) {	// handle pagebanner; EX: <img class="wpb-banner-image">
+			img_pgbnr.Init_by_parse(img_tag);
+		}
 		img_xoimg.Parse(err_wkr, src, img_tag);															// data-xoimg='...'
 		this.img_w = img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__width, Xof_img_size.Size__neg1);			// width='220'
 		this.img_h = img_tag.Atrs__get_as_int_or(Gfh_atr_.Bry__height, Xof_img_size.Size__neg1);		// height='110'

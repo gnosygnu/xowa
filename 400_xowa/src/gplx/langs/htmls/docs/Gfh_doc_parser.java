@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 public class Gfh_doc_parser {
-	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final Gfh_txt_wkr txt_wkr;
+	private final    Btrie_rv trv = new Btrie_rv();
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Gfh_txt_wkr txt_wkr;
 	public Gfh_doc_parser(Gfh_txt_wkr txt_wkr, Gfh_doc_wkr... wkr_ary) {
 		this.txt_wkr = txt_wkr;
 		for (Gfh_doc_wkr wkr : wkr_ary)
@@ -29,7 +30,7 @@ public class Gfh_doc_parser {
 		int txt_bgn = -1;
 		int pos = src_bgn;
 		while (pos < src_end) {
-			Object o = trie.Match_bgn(src, pos, src_end);
+			Object o = trie.Match_at(trv, src, pos, src_end);
 			if (o == null) {									// not a known hook; add to txt
 				if (txt_bgn == -1) txt_bgn = pos;
 				++pos;
@@ -44,7 +45,7 @@ public class Gfh_doc_parser {
 				catch (Exception e) {
 					Gfh_utl.Log(e, "html parse failed", page_url, src, pos);
 					txt_bgn = pos;								// set txt_bgn to hook_bgn which is "pos"; i.e.: txt resumes from start of failed hook
-					pos = trie.Match_pos();						// set pos to hook_end
+					pos = trv.Pos();							// set pos to hook_end
 				}
 			}	
 		}

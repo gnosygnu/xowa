@@ -22,6 +22,7 @@ public class Xop_lnki_arg_parser {
 	private final    Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
 	private final    Bry_bfr int_bfr = Bry_bfr_.Reset(16);
 	private final    Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final    Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
+	private final    Btrie_rv key_trie_rv = new Btrie_rv(), px_trie_rv = new Btrie_rv(), size_trie_rv = new Btrie_rv();
 	private int lnki_w, lnki_h;
 	public void Evt_lang_changed(Xol_lang_itm lang) {
 		Bry_bfr tmp_bfr = int_bfr;
@@ -62,38 +63,38 @@ public class Xop_lnki_arg_parser {
 	}
 	public byte Identify_tid(byte[] src, int bgn, int end) {
 		int len = end - bgn;
-		Byte_obj_val val = (Byte_obj_val)key_trie.Match_bgn(src, bgn, end);
-		if (val != null && len == key_trie.Match_pos() - bgn)	// check for false matches; EX: alternate= should not match alt=
+		Byte_obj_val val = (Byte_obj_val)key_trie.Match_at(key_trie_rv, src, bgn, end);
+		if (val != null && len == key_trie_rv.Pos() - bgn)		// check for false matches; EX: alternate= should not match alt=
 			return val.Val();									// match; return val;
-		Object bwd_obj = px_trie.Match_bgn(src, end - 1, bgn - 1);
+		Object bwd_obj = px_trie.Match_at(px_trie_rv, src, end - 1, bgn - 1);
 		if (bwd_obj != null && ((Byte_obj_val)bwd_obj).Val() == Tid_dim) { // ends with "px"; try to parse size
 			int_bfr.Clear();
-			int match_len = end -1 - px_trie.Match_pos();
+			int match_len = end -1 - px_trie_rv.Pos();
 			boolean mode_width = true;
 			int itm_end = bgn + (len - match_len);	// remove trailing px
 			for (int i = bgn; i < itm_end; i++) {
 				byte b = src[i];
-				Object o = size_trie.Match_bgn_w_byte(b, src, i, itm_end);
+				Object o = size_trie.Match_at_w_b0(size_trie_rv, b, src, i, itm_end);
 				if (o == null) {
 					this.lnki_w = Xop_lnki_tkn.Width_null;	// NOTE: must null out width; EX: "123xTextpx"; PAGE:es.b:Alimentación_infantil; DATE:2015-07-10; NOTE: must be -1, not 0; DATE:2015-08-05
 					return Tid_caption;						// letter or other invalid character; return caption
 				}
 				Byte_obj_val v = (Byte_obj_val)o;
 				switch (v.Val()) {	// NOTE: d0 - d9 handle non-english numbers; EX:fa.w and ۲۰۰px; DATE:2015-07-18
-					case Key_dim_d0:	int_bfr.Add_byte(Byte_ascii.Num_0); i += (size_trie.Match_pos() - i) - 1; break;	// -1 b/c loop will ++i
-					case Key_dim_d1:	int_bfr.Add_byte(Byte_ascii.Num_1); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d2:	int_bfr.Add_byte(Byte_ascii.Num_2); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d3:	int_bfr.Add_byte(Byte_ascii.Num_3); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d4:	int_bfr.Add_byte(Byte_ascii.Num_4); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d5:	int_bfr.Add_byte(Byte_ascii.Num_5); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d6:	int_bfr.Add_byte(Byte_ascii.Num_6); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d7:	int_bfr.Add_byte(Byte_ascii.Num_7); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d8:	int_bfr.Add_byte(Byte_ascii.Num_8); i += (size_trie.Match_pos() - i) - 1; break;
-					case Key_dim_d9:	int_bfr.Add_byte(Byte_ascii.Num_9); i += (size_trie.Match_pos() - i) - 1; break;
+					case Key_dim_d0:	int_bfr.Add_byte(Byte_ascii.Num_0); i += (size_trie_rv.Pos() - i) - 1; break;	// -1 b/c loop will ++i
+					case Key_dim_d1:	int_bfr.Add_byte(Byte_ascii.Num_1); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d2:	int_bfr.Add_byte(Byte_ascii.Num_2); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d3:	int_bfr.Add_byte(Byte_ascii.Num_3); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d4:	int_bfr.Add_byte(Byte_ascii.Num_4); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d5:	int_bfr.Add_byte(Byte_ascii.Num_5); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d6:	int_bfr.Add_byte(Byte_ascii.Num_6); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d7:	int_bfr.Add_byte(Byte_ascii.Num_7); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d8:	int_bfr.Add_byte(Byte_ascii.Num_8); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d9:	int_bfr.Add_byte(Byte_ascii.Num_9); i += (size_trie_rv.Pos() - i) - 1; break;
 					case Key_dim_num:	int_bfr.Add_byte(b); break;
 					case Key_space:		break;	// ignore space; EX: "100 px"
 					case Key_dim_px:	{		// 2nd px found; EX: "40pxpx"; "40px px"
-						int tmp_pos = size_trie.Match_pos();
+						int tmp_pos = size_trie_rv.Pos();
 						tmp_pos = Bry_find_.Find_fwd_while_space_or_tab(src, tmp_pos, itm_end);	// look for next ws pos; 
 						if (tmp_pos == itm_end)	// no non-ws found; tmp_pos == itm_end; allow itm; EX: "40pxpx"; "40px px"; DATE:2014-03-01
 							i = itm_end;

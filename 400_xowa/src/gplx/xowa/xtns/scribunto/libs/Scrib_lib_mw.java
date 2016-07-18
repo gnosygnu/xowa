@@ -224,7 +224,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String text_str = args.Pull_str(1);
 		byte[] text_bry = Bry_.new_u8(text_str);
 		Xop_root_tkn tmp_root = ctx.Tkn_mkr().Root(text_bry);
-		Xop_ctx tmp_ctx = Xop_ctx.new_sub_(core.Ctx());
+		Xop_ctx tmp_ctx = Xop_ctx.New__sub__reuse_page(core.Ctx());
 		int args_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - args_adj;
 		Keyval[] kv_args = new Keyval[args_len];
@@ -239,12 +239,11 @@ public class Scrib_lib_mw implements Scrib_lib {
 			kv_args[i] = Keyval_.new_(key, val);
 		}
 		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_u8(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
-		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
-		cur_wiki.Parser_mgr().Main().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
+		tmp_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
+		cur_wiki.Parser_mgr().Main().Expand_tmpl(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
 		return rslt.Init_obj(tmp_bfr.To_str_and_rls());
 	}
-	private static final    Xol_func_itm finder = new Xol_func_itm();
 	public boolean CallParserFunction(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		int frame_tid = Scrib_frame_.Get_frame_tid(frame_id);
@@ -256,17 +255,14 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Keyval[] parser_func_args = CallParserFunction_parse_args(cur_wiki.Appe().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
 		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
 
-
-		Xot_defn defn;
-		synchronized (finder) {
-			cur_wiki.Lang().Func_regy().Find_defn(finder, fnc_name, 0, fnc_name_len);
-			defn = finder.Func();
-		}
+		Xol_func_itm finder = new Xol_func_itm();	// TS.MEM: DATE:2016-07-12
+		cur_wiki.Lang().Func_regy().Find_defn(finder, fnc_name, 0, fnc_name_len);
+		Xot_defn defn = finder.Func();
 
 		if (defn == Xot_defn_.Null) throw Err_.new_wo_type("callParserFunction: function was not found", "function", String_.new_u8(fnc_name));
 		Bry_bfr bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
-		Xop_ctx fnc_ctx = Xop_ctx.new_sub_(core.Ctx());
-		fnc_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
+		Xop_ctx fnc_ctx = Xop_ctx.New__sub__reuse_page(core.Ctx());
+		fnc_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		Xot_invk_tkn.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
 		bfr.Mkr_rls();
 		return rslt.Init_obj(bfr.To_str_and_clear());

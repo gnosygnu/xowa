@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys; import gplx.*; import gplx.core.*;
 public class Bry_bfr_mkr_mgr {
 	private final    Object thread_lock = new Object();
+	private final    byte mgr_id; private final    int reset;
 	private Bry_bfr[] used = Bry_bfr_.Ary_empty; private int used_len = 0, used_max = 0;
-	private int[] free; private int free_len; private int reset;
+	private int[] free; private int free_len;
 	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
 		this.mgr_id = mgr_id;
 		this.reset = reset;
 		this.free = Int_.Ary_empty;
 		this.free_len = 0;
 	}
-	public byte Mgr_id() {return mgr_id;} private byte mgr_id; 
 	public Bry_bfr Get() {
 		synchronized (thread_lock) {
 			Bry_bfr rv = null; int rv_idx = -1;
@@ -62,7 +62,7 @@ public class Bry_bfr_mkr_mgr {
 			for (int i = 0; i < used_max; i++) {
 				Bry_bfr itm = used[i];
 				if (itm != null) {
-					if (!itm.Mkr_idx_is_null()) throw Err_.new_wo_type("failed to clear bfr", "idx", Int_.To_str(i));
+					if (!itm.Mkr_idx_is_null()) throw Err_.new_wo_type("failed to clear bfr", "mgr_id", mgr_id, "idx", Int_.To_str(i));
 					itm.Clear();
 				}
 				used[i] = null;

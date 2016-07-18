@@ -20,7 +20,8 @@ import gplx.core.btries.*; import gplx.core.log_msgs.*;
 public class Php_parser {
 	Php_lxr[] lxrs; int lxrs_len;
 	int txt_bgn; Php_tkn_txt txt_tkn;
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
+	private final    Btrie_rv trv = new Btrie_rv();
 	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
 	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
 	public Php_parser() {
@@ -71,7 +72,7 @@ public class Php_parser {
 		txt_tkn = null; txt_bgn = 0;
 		boolean loop_raw = true, loop_txt = true;
 		while (loop_raw) {
-			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null) {		// char does not hook into a lxr
 				loop_txt = true;
 				while (loop_txt) {	// keep looping until end of String or parser_interrupt 
@@ -90,7 +91,7 @@ public class Php_parser {
 				if (txt_bgn != pos)	// txt_bgn is set; make text tkn
 					Make_txt(txt_bgn, pos);
 				Php_lxr lxr = (Php_lxr)o;
-				int match_pos = trie.Match_pos();
+				int match_pos = trv.Pos();
 				int make_pos = lxr.Lxr_make(ctx, pos, match_pos);
 				if (make_pos == Php_parser.NotFound) {
 					Make_txt(txt_bgn, pos);

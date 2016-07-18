@@ -65,7 +65,7 @@ public class Xol_msg_mgr implements Gfo_invk {
 		Xol_msg_itm itm = Itm_by_id_or_null(id);
 		if (itm == null) return null;
 		byte[] rv = itm.Val();
-		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Parse_text_to_wtxt(rv);
+		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Expand_tmpl(rv);
 		return rv;
 	}
 	public byte[] Val_by_str_or_empty(String str) {return Val_by_bry_or(Bry_.new_u8(str), Bry_.Empty);}

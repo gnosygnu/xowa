@@ -43,7 +43,7 @@ public class Xoh_make_fxt {
 	public void Test__make(String html, Xoh_page_chkr chkr) {
 		html = String_.Replace(html, "'", "\"");
 		Xoh_page actl = new Xoh_page();
-		actl.Init(parser_fxt.Wiki(), Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
+		actl.Ctor_by_hview(parser_fxt.Wiki(), Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
 		Xoh_make_mgr make_mgr = parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr();			
 		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), actl, parser_fxt.Wiki());

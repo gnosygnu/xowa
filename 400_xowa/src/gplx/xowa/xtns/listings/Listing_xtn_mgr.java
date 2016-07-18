@@ -35,7 +35,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	}
 	private void Reset(Xowe_wiki wiki, Xop_ctx ctx) {
 		hwtr = new Gfh_wtr();
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		listings_template		= Load_txt(wiki, sub_ctx, "listings-template");
 		phone_symbol			= Load_txt(wiki, sub_ctx, "listings-phone-symbol", "listings-phone");
 		tollfree_symbol			= Load_txt(wiki, sub_ctx, "listings-tollfree-symbol", "listings-tollfree");

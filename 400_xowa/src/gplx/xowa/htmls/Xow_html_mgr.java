@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.kits.core.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.wikis.ctgs.*; import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.htmls.portal.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.wikis.modules.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.wikis.ctgs.*; import gplx.xowa.xtns.gallery.*;	
+import gplx.xowa.parsers.xndes.*;
+import gplx.xowa.htmls.portal.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.wikis.modules.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.htmls.tidy.*; import gplx.xowa.htmls.js.*;
 public class Xow_html_mgr implements Gfo_invk {
 	public Xow_html_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -34,20 +35,24 @@ public class Xow_html_mgr implements Gfo_invk {
 		portal_mgr = new Xow_portal_mgr(wiki);
 		imgs_mgr = new Xoh_imgs_mgr(this);
 		module_mgr = new Xow_module_mgr(wiki);
+		this.js_cleaner = new Xoh_js_cleaner(app);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		html_wtr.Init_by_wiki(wiki);
 		module_mgr.Init_by_wiki(wiki);
+		tidy_mgr.Init_by_app(wiki.Appe());
 	}
 	public void Init_by_lang(Xol_lang_itm lang) {
 		portal_mgr.Init_by_lang(lang);
 	}
-	public Xowe_wiki			Wiki() {return wiki;} private Xowe_wiki wiki;
-	public Xoh_html_wtr			Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
-	public Xoh_page_wtr_mgr		Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
-	public Xow_portal_mgr		Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
-	public Xow_toc_mgr			Toc_mgr() {return toc_mgr;} private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
-	public Xow_module_mgr		Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
+	public Xowe_wiki				Wiki() {return wiki;} private Xowe_wiki wiki;
+	public Xoh_html_wtr				Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
+	public Xoh_page_wtr_mgr			Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
+	public Xow_tidy_mgr				Tidy_mgr()	{return tidy_mgr;} private final    Xow_tidy_mgr tidy_mgr = new Xow_tidy_mgr();
+	public Xoh_js_cleaner			Js_cleaner() {return js_cleaner;} private final    Xoh_js_cleaner js_cleaner;
+	public Xop_xatr_whitelist_mgr	Whitelist_mgr() {return whitelist_mgr;} private final    Xop_xatr_whitelist_mgr whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
+	public Xow_portal_mgr			Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
+	public Xow_module_mgr			Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
 	public boolean Importing_ctgs() {return importing_ctgs;} public void Importing_ctgs_(boolean v) {importing_ctgs = v;} private boolean importing_ctgs;
 	public int Img_thumb_width() {return img_thumb_width;} private int img_thumb_width = 220;
 	public byte[] Img_media_play_btn() {return img_media_play_btn;} private byte[] img_media_play_btn;

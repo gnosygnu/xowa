@@ -215,14 +215,14 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					break;	// flag last leaf_bgn
 				case Byte_ascii.Nl:	// NOTE: for now, treat nl just like space; not sure if it should accept "a\nb" or "\nab"; need to handle trailing \n for "Argentina\n\n" in {{Infobox settlement|pushpin_map=Argentina|pushpin_label_position=|pushpin_map_alt=|pushpin_map_caption=Location of Salta in Argentina}};
 				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Cr:	// added \t, \r; DATE:2013-03-27
-				case Byte_ascii.Underline:if (ltr_bgn != -1) add_ws = true; ++cur;//cur = ttlTrie.Match_pos(); 
+				case Byte_ascii.Underline: if (ltr_bgn != -1) add_ws = true; ++cur;
 					continue;	// only mark add_ws if ltr_seen; this ignores ws at bgn; also, note "continue"
 				case Byte_ascii.Question:
 					if (txt_bb_len + 1 < end)	// guard against trailing ? (which shouldn't happen)
 						qarg_bgn = txt_bb_len + 1;
 					break;
 				case Byte_ascii.Amp:
-					int cur2 = cur + 1;//cur = ttlTrie.Match_pos();
+					int cur2 = cur + 1;
 					if (cur2 == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c Match_bgn does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
 					else {
 						if (trv == null) trv = new Btrie_rv();
@@ -276,7 +276,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							&&	src[cur + 2] == Byte_ascii.Dash
 							&&	src[cur + 3] == Byte_ascii.Dash
 							) {
-							int cur3 = cur + 3;//cur = ttlTrie.Match_pos();
+							int cur3 = cur + 3;
 							int find = Bry_find_.Find_fwd(src, Xop_comm_lxr.End_ary, cur3, end);
 							if (find != -1) {
 								cur = find + Xop_comm_lxr.End_ary.length;

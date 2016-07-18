@@ -25,6 +25,7 @@ public class Gfo_url_encoder_ {
 	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
 	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()
 	, Href_quotes		= Gfo_url_encoder_.New__html_href_quotes().Make()
+	, Href_quotes_v2	= Gfo_url_encoder_.New__html_href_quotes_v2().Make()
 	, Href_qarg			= Gfo_url_encoder_.New__html_href_qarg().Make()
 	, Xourl				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Underline).Make()
 	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
@@ -39,7 +40,7 @@ public class Gfo_url_encoder_ {
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			.Init__html_ent(Byte_ascii.Amp, Xop_amp_trie.Instance);
 	}
-	private static Gfo_url_encoder_mkr New__html_href_mw(boolean use_anchor_encoder) {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"; REF.MW: ";:@$!*(),/"
+	public static Gfo_url_encoder_mkr New__html_href_mw(boolean use_anchor_encoder) {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"; REF.MW: ";:@$!*(),/"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			.Init__same__many
@@ -59,6 +60,16 @@ public class Gfo_url_encoder_ {
 			( Byte_ascii.Semic, Byte_ascii.Colon, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
 			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash
 			, Byte_ascii.Question, Byte_ascii.Eq, Byte_ascii.Hash, Byte_ascii.Plus// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
+			);
+	}
+	private static Gfo_url_encoder_mkr New__html_href_quotes_v2() {// same as href encoder, but do not encode ?, =, #, +; also, don't encode "%" vals
+		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
+			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
+			.Init__same__many
+			( Byte_ascii.Semic, Byte_ascii.Colon, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
+			, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash
+			, Byte_ascii.Question, Byte_ascii.Eq, Byte_ascii.Hash, Byte_ascii.Plus// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
+			, Byte_ascii.Percent	// DATE:2016-07-12
 			);
 	}
 	public static Gfo_url_encoder_mkr New__http_url() {

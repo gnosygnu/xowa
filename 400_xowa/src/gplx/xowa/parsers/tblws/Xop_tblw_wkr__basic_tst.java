@@ -526,15 +526,6 @@ public class Xop_tblw_wkr__basic_tst {
 		, "</table>"
 		, ""
 		));
-		fxt.Test_parse_page_wiki("{|\n==b==\n|}"
-		, fxt.tkn_tblw_tb_(0, 8).Subs_
-		( fxt.tkn_hdr_(2, 8, 2).Subs_
-		( fxt.tkn_txt_(5, 6)
-		)
-		, fxt.tkn_para_blank_(9)
-		, fxt.tkn_tblw_tr_(8,  8).Subs_
-		( 	fxt.tkn_tblw_td_( 8,  8))
-		));
 	}
 	@Test  public void Auto_create_table() {// PURPOSE: <td> should create table; EX:w:Hatfield-McCoy_feud; DATE:20121226
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last

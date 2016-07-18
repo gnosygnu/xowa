@@ -23,13 +23,14 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.d
 import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 public class Xoh_page_wtr_wkr {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
 	private final    Xoh_page_wtr_mgr mgr; private final    byte page_mode;
 	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
-	public byte[] Write_page(Xoae_page page, Xop_ctx ctx, Bry_bfr bfr) {
+	public void Write_page(Bry_bfr rv, Xoae_page page, Xop_ctx ctx) {
 		synchronized (thread_lock_1) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			ctx.Page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
@@ -44,26 +45,25 @@ public class Xoh_page_wtr_wkr {
 						// ctx.Page().Redlink_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately); NOTE: probably put in to handle reusable redlink lists; redlink lists are now instantiated per page, so clear is not useful
 						break;
 				}
-				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page bfr to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
+				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
 				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Wiki().Hdump().Html_mode().Tid_is_hdump_save()) {
 					hctx = Xoh_wtr_ctx.Hdump;
 					Write_body(page_bfr, ctx, hctx, page);
-					Write_page_by_tid(ctx, hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
+					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(page_bfr.To_bry_and_clear()));
 				}
 				else {
 					hctx = Xoh_wtr_ctx.Basic;
 					Write_body(page_bfr, ctx, hctx, page);
-					Write_page_by_tid(ctx, hctx, view_mode, bfr, fmtr, page_bfr.To_bry_and_rls());
+					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
 					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
-						Write_page_by_tid(ctx, hctx, page_mode, bfr, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(bfr.To_bry_and_clear()));
+						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
 			}
 			else
-				Write_body(bfr, ctx, Xoh_wtr_ctx.Basic, page);
+				Write_body(rv, ctx, Xoh_wtr_ctx.Basic, page);
 			this.page = null;
-			return bfr.To_bry_and_clear();
 		}
 	}
 	private void Write_page_by_tid(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
@@ -93,7 +93,7 @@ public class Xoh_page_wtr_wkr {
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
-		, page.Db().Page().Id()
+		, page.Db().Page().Id(), page.Ttl().Full_db()
 		, page_name, page.Html_data().Page_heading().Init(page.Html_data(), page_display_title)
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
@@ -104,7 +104,7 @@ public class Xoh_page_wtr_wkr {
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
 		);
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, tmp_bfr, page);	// add after </head>
-		Xoh_page_wtr_wkr_.Bld_html_end(bfr, tmp_bfr, page);	// add after </html>
+		Xoh_page_wtr_wkr_.Bld_html_end(bfr, tmp_bfr, page);	// add after </html>			
 	}
 	public void Write_hdump(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page wpg) {
 		if (wpg.Html_data().Xtn_pgbnr() != null) {
@@ -133,7 +133,7 @@ public class Xoh_page_wtr_wkr {
 			}
 			if (	wiki.Domain_tid() != Xow_domain_tid_.Int__home	// allow home wiki to use javascript
 				&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
-				app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
+				wiki.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 			}
 		}
 	}
@@ -158,15 +158,19 @@ public class Xoh_page_wtr_wkr {
 			tidy_bfr.Add(page.Html_data().Custom_body());
 		}
 		else {
-			if (page.Root() != null)	// NOTE: will be null if blank; occurs for one test: Logo_has_correct_main_page; DATE:2015-09-29
-				wiki.Html_mgr().Html_wtr().Write_all(tidy_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page.Root().Data_mid(), page.Root());
+			if (page.Root() != null) {	// NOTE: will be null if blank; occurs for one test: Logo_has_correct_main_page; DATE:2015-09-29
+				page.Html_data().Toc_mgr().Clear();	// NOTE: always clear tocs before writing html; toc_itms added when writing html_hdr; DATE:2016-07-17
+				wiki.Html_mgr().Html_wtr().Write_doc(tidy_bfr, ctx, hctx, page.Root().Data_mid(), page.Root());
+				if (wiki.Html_mgr().Html_wtr().Cfg().Toc__show())
+					gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_toc(tidy_bfr, page, hctx);
+			}
 		}
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
 		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, hctx, tidy_bfr);
+
 		// tidy html
-		gplx.xowa.htmls.core.htmls.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
-		if (tidy_mgr.Enabled()) tidy_mgr.Run_tidy_html(page, tidy_bfr, !hctx.Mode_is_hdump());
+		wiki.Html_mgr().Tidy_mgr().Run_tidy_html(page, tidy_bfr, !hctx.Mode_is_hdump());
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);

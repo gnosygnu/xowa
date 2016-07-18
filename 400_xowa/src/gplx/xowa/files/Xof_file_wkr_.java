@@ -20,10 +20,16 @@ import gplx.core.consoles.*; import gplx.langs.htmls.encoders.*;
 public class Xof_file_wkr_ {
 	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
 	public static final    Gfo_url_encoder Md5_decoder = Gfo_url_encoder_.New__http_url().Init__same__many(Byte_ascii.Plus).Make();
-	public static byte[] Md5_fast(byte[] v) {return md5_hash.Hash_bry_as_bry(v);}
+	public static byte[] Md5_fast(byte[] v) {
+		synchronized (md5_hash) {
+			return md5_hash.Hash_bry_as_bry(v);
+		}
+	}
 	public static byte[] Md5(byte[] ttl) {
-		ttl = Md5_decoder.Decode(Ttl_standardize(ttl));
-		return Xof_file_wkr_.Md5_fast(ttl);					// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
+		synchronized (md5_hash) {
+			ttl = Md5_decoder.Decode(Ttl_standardize(ttl));
+			return Xof_file_wkr_.Md5_fast(ttl);					// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
+		}
 	}
 	public static byte[] Ttl_standardize(byte[] src) {
 		int len = src.length; if (len == 0) return src;

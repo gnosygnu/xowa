@@ -44,7 +44,7 @@ class Wdata_pf_property_data_fxt {
 		Xop_tkn_mkr tkn_mkr = app.Parser_mgr().Tkn_mkr();
 		Wdata_pf_property pfunc = new Wdata_pf_property();
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		wiki.Parser_mgr().Main().Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		wiki.Parser_mgr().Main().Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 		Xot_invk tkn = (Xot_invk)root.Subs_get(0);
 		this.actl = Wdata_pf_property_data.Parse(ctx, raw_bry, Xot_invk_mock.Null, tkn, pfunc);
 		return this;

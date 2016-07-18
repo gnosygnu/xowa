@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
 import gplx.core.btries.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*; import gplx.xowa.htmls.modules.popups.keeplists.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.apps.apis.xowa.html.modules.*; import gplx.xowa.htmls.modules.popups.keeplists.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.hdrs.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*;	
 public class Xow_popup_parser {
@@ -27,6 +27,7 @@ public class Xow_popup_parser {
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Popup;
 	private Xow_popup_anchor_finder hdr_finder = new Xow_popup_anchor_finder();
+	private final    Bry_bfr hdr_html_bfr = Bry_bfr_.New();
 	public Xow_popup_cfg Cfg() {return cfg;} private Xow_popup_cfg cfg = new Xow_popup_cfg();
 	public Xow_popup_wrdx_mkr Wrdx_mkr() {return wrdx_mkr;} private Xow_popup_wrdx_mkr wrdx_mkr = new Xow_popup_wrdx_mkr();
 	public Xow_popup_html_mkr Html_mkr() {return html_mkr;} private Xow_popup_html_mkr html_mkr = new Xow_popup_html_mkr();
@@ -40,12 +41,12 @@ public class Xow_popup_parser {
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe(); this.parser = wiki.Parser_mgr().Main(); this.tkn_mkr = app.Parser_mgr().Tkn_mkr();
-		this.tmpl_ctx = Xop_ctx.new_main_page(wiki); this.wtxt_ctx = Xop_ctx.new_main_page(wiki);
+		this.tmpl_ctx = Xop_ctx.New__top(wiki); this.wtxt_ctx = Xop_ctx.New__top(wiki);
 		Xop_lxr_mgr tmpl_lxr_mgr = Xop_lxr_mgr.Popup_lxr_mgr;
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		this.tmpl_trie = tmpl_lxr_mgr.Trie(); this.wtxt_trie = parser.Wtxt_lxr_mgr().Trie();
-		tmpl_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl); wtxt_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_wiki);
-		tmpl_ctx.Xnde_names_tid_(Xop_parser_.Parse_tid_page_wiki);
+		tmpl_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl); wtxt_ctx.Parse_tid_(Xop_parser_tid_.Tid__wtxt);
+		tmpl_ctx.Xnde_names_tid_(Xop_parser_tid_.Tid__wtxt);
 		tmpl_ctx.Tid_is_popup_(true); wtxt_ctx.Tid_is_popup_(true);
 		tmpl_root = tkn_mkr.Root(Bry_.Empty); wtxt_root = tkn_mkr.Root(Bry_.Empty);
 		html_mkr.Ctor(app, wiki);
@@ -126,7 +127,7 @@ public class Xow_popup_parser {
 		Wtxt_ctx_init(false, wrdx_bry);
 		parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wrdx_bry, wtxt_trie, Xop_parser_.Doc_bgn_bos, wrdx_bry.length);
 		wtxt_ctx.Parser__page_term(wtxt_root, wrdx_bry, wrdx_bry.length);
-		wiki.Html_mgr().Html_wtr().Write_all(wrdx_bfr, wtxt_ctx, hctx, wrdx_bry, wtxt_root);
+		wiki.Html_mgr().Html_wtr().Write_doc(wrdx_bfr, wtxt_ctx, hctx, wrdx_bry, wtxt_root);
 	}
 	private void Adjust_wrdx_end(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
 		popup_itm.Words_found_(data.Words_found());
@@ -185,7 +186,20 @@ public class Xow_popup_parser {
 		}
 		if (last_hdr_tkn != null) {
 			wrdx_bfr.Trim_end(Byte_ascii.Nl);
-			byte[] last_hdr_bry = ((Xop_hdr_tkn)last_hdr_tkn.Tkn()).Hdr_toc_text();
+
+			// reparse hdr b/c existing hdr_tkn has Src_bgn / Src_end, but no src;
+			byte[] hdr_src = Bry_.Mid(wrdx_bfr.Bfr(), last_hdr_tkn.Bfr_bgn(), last_hdr_tkn.Bfr_end());
+			Xop_root_tkn hdr_root = wtxt_ctx.Tkn_mkr().Root(hdr_src);
+			wiki.Parser_mgr().Main().Parse_wtxt_to_wdom(hdr_root, wtxt_ctx, wtxt_ctx.Tkn_mkr(), hdr_src, 0);
+			byte[] last_hdr_bry = Bry_.Empty;
+			for (int i = 0; i < hdr_root.Subs_len(); ++i) {
+				Xop_tkn_itm sub = hdr_root.Subs_get(i);
+				if (sub.Tkn_tid() == Xop_tkn_itm_.Tid_hdr) {
+					last_hdr_bry = Xoh_hdr_html.Bld_hdr_html(hdr_html_bfr, wiki.Html_mgr().Html_wtr(), wtxt_ctx.Page(), wtxt_ctx, hctx, hdr_src, (Xop_hdr_tkn)sub);
+					break;
+				}
+			}
+//				byte[] last_hdr_bry = ((Xop_hdr_tkn)last_hdr_tkn.Tkn()).Hdr_html_text();
 			html_mkr.Fmtr_next_sect().Bld_bfr_one(wrdx_bfr, last_hdr_bry);
 		}
 		else {

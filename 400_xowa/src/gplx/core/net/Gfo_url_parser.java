@@ -22,6 +22,7 @@ public class Gfo_url_parser {
 	private final    Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	private final    Bry_ary segs_ary = new Bry_ary(4), qargs = new Bry_ary(4);
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
+	private final    Btrie_rv trv = new Btrie_rv();
 	public byte[] Relative_url_protocol_bry() {return Gfo_protocol_itm.Itm_https.Key_w_colon_bry();}	// NOTE: https b/c any WMF wiki will now default to WMF; DATE:2015-07-26
 	public Gfo_url_parser() {
 		Init_protocols(Gfo_protocol_itm.Ary());
@@ -76,8 +77,8 @@ public class Gfo_url_parser {
 		path_bgn = qarg_key_bgn = qarg_val_bgn = anch_bgn = anch_nth_bgn = -1;
 		segs_ary.Clear(); qargs.Clear();
 		int pos = src_bgn;
-		Object protocol_obj = protocols.Match_bgn(src, src_bgn, src_end);
-		pos = protocols.Match_pos();
+		Object protocol_obj = protocols.Match_at(trv, src, src_bgn, src_end);
+		pos = trv.Pos();
 		pos = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Slash);
 		if (protocol_obj == null) {
 			this.protocol_tid = Gfo_protocol_itm.Tid_unknown;

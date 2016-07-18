@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.vnts.*;
-import gplx.xowa.guis.views.*;	import gplx.xowa.parsers.utils.*;	
-import gplx.xowa.wikis.pages.redirects.*;
+import gplx.xowa.guis.views.*;	import gplx.xowa.parsers.utils.*;
+import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*;
 public class Xow_page_mgr implements Gfo_invk {
 	private final    Xowe_wiki wiki;
 	public Xow_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
@@ -69,12 +69,21 @@ public class Xow_page_mgr implements Gfo_invk {
 			if (wiki.App().Mode().Tid_is_gui())	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
 				wiki.Appe().Usr_dlg().Prog_many("", "", "loading page for ~{0}", ttl.Raw());
 
+			// load page_info
+			rv.Db().Page().Id_(page_row.Id()).Modified_on_(page_row.Modified_on()).Html_db_id_(page_row.Html_db_id());
+
 			// load from text table
 			wiki.Db_mgr().Load_mgr().Load_page(page_row, ns);
 			byte[] wtxt = page_row.Text();
 			rv.Db().Text().Text_bry_(wtxt);
-			rv.Db().Page().Id_(page_row.Id()).Modified_on_(page_row.Modified_on()).Html_db_id_(page_row.Html_db_id());
-			if (redirect_force) return;			// redirect_force passed; return page now, even if page is a redirect elsewhere
+			if (redirect_force) return;			// redirect_force passed; return page now, even if page is a redirect elsewhere; NOTE: only applies to WTXT, not HTML
+
+			// handle redirects for html_dbs
+			if (	page_row.Redirect_id() > 0		// redirect exists
+				&&	Bry_.Len_eq_0(wtxt)) {			// wikitext is not found
+				Redirect_to_html_page(rv, wiki, page_row);
+				return;
+			}
 
 			// handle redirects
 			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(wtxt);
@@ -88,6 +97,20 @@ public class Xow_page_mgr implements Gfo_invk {
 			ns = redirect_ttl.Ns();
 			ttl = redirect_ttl;
 		}
+	}
+	private void Redirect_to_html_page(Xoae_page rv, Xowe_wiki wiki, Xowd_page_itm page_row) {	// handle redirects for HtmlDbs; PAGE:fr.b:Wikibooks DATE:2016-07-14
+		// load redirect
+		Xowd_page_itm redirect_row = new Xowd_page_itm();
+		wiki.Db_mgr().Load_mgr().Load_by_id(redirect_row, page_row.Redirect_id());
+		if (rv.Db().Page().Exists_n()) {
+			return;
+		}
+
+		// set redirect data
+		rv.Db().Page().Id_(redirect_row.Id()).Modified_on_(redirect_row.Modified_on()).Html_db_id_(redirect_row.Html_db_id());
+		Xoa_ttl redirect_ttl = wiki.Ttl_parse(redirect_row.Ns_id(), redirect_row.Ttl_page_db());
+		rv.Ttl_(redirect_ttl);
+		rv.Redirect().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, Bry_.Empty);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
 	}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl) {return Load_page_and_parse(url, ttl, wiki.Lang(), wiki.Appe().Gui_mgr().Browser_win().Active_tab(), true);}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl, Xol_lang_itm lang, Xog_tab_itm tab, boolean parse_page) {

@@ -39,6 +39,7 @@ public class Db_conn {
 	public void					Env_vacuum()																	{Exec_sql_plog_ntx("vacuuming: url=" + this.Conn_info().Db_api(), "VACUUM;");}
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_create(meta); engine.Meta_idx_create(Gfo_usr_dlg_.Noop, meta.Idxs().To_ary());}
 	public void					Meta_tbl_delete(String tbl)														{engine.Meta_tbl_delete(tbl);}
+	public void					Meta_tbl_remake(Db_tbl tbl)														{engine.Meta_tbl_delete(tbl.Tbl_name()); tbl.Create_tbl();}
 	public void					Meta_tbl_remake(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_delete(meta.Name()); engine.Meta_tbl_create(meta);}
 	public void					Meta_idx_assert(String tbl, String suffix, String... flds)				{if (engine.Meta_idx_exists(tbl + "__" + suffix)) return; this.Meta_idx_create(tbl, suffix, flds);}
 	public void					Meta_idx_assert(String tbl, String suffix, Dbmeta_idx_fld... flds)		{if (engine.Meta_idx_exists(tbl + "__" + suffix)) return; this.Meta_idx_create(tbl, suffix, flds);}

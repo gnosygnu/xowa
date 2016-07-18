@@ -22,7 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_lnke_html {
 	private static final    byte[] Disabled_button = Bry_.new_a7("&#x2297;");
-	public void Write_html(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
+	public void Write_html(Bry_bfr bfr, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int href_bgn = lnke.Lnke_href_bgn(), href_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		byte lnke_type = Calc_type(lnke);
 		if (proto_is_xowa && hctx.Mode() == Xoh_wtr_ctx.Mode_file_dump) {	// if protocol and file-dump, then don't write link; DATE:2016-04-12
@@ -41,7 +41,7 @@ public class Xoh_lnke_html {
 		Write_caption(bfr, html_wtr, hctx, ctx, src, lnke, href_bgn, href_end, proto_is_xowa);
 		if (!hctx.Mode_is_alt()) {
 			if (proto_is_xowa)	// add <img />
-				bfr.Add(Xoh_consts.Img_bgn).Add(html_wtr.Html_mgr().Img_xowa_protocol()).Add(Xoh_consts.__inline_quote);
+				bfr.Add(Xoh_consts.Img_bgn).Add(html_mgr.Img_xowa_protocol()).Add(Xoh_consts.__inline_quote);
 			bfr.Add(Gfh_bldr_.Bry__a_rhs);
 		}
 	}
@@ -86,7 +86,7 @@ public class Xoh_lnke_html {
 		}
 		else {																							// EX: '[http://a.org a]' -> 'a'
 			for (int i = 0; i < subs_len; i++)
-				html_wtr.Write_tkn(bfr, ctx, hctx, src, lnke, i, lnke.Subs_get(i));
+				html_wtr.Write_tkn_to_html(bfr, ctx, hctx, src, lnke, i, lnke.Subs_get(i));
 		}
 	}
 	private static byte Calc_type(Xop_lnke_tkn lnke) {

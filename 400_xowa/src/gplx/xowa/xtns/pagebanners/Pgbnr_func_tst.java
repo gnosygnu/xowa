@@ -25,21 +25,40 @@ public class Pgbnr_func_tst {
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
 		, "	<div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
-		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' class='wpb-banner-image ' alt='' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
 		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
 		, "		</div>"
 		, "	</div>"
-		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'></div></div>"
+		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'><div>"
+		, "  <div id=\"toctitle\">"
+		, "    <h2>Contents</h2>"
+		, "  </div>"
+		, "</div>"
+		, "</div></div>"
 		, "</div>"
 		));
 	}
-	@Test  public void Hdump() {			
+	@Test  public void Hdump__basic() {
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
 		, "	<div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
-		, "		<a href='/wiki/File:A.png' class='image' title='Test page' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" class='wpb-banner-image ' alt='' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<a href='/wiki/File:A.png' class='image' title='Test page' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='file:///mem/wiki/repo/trg/orig/7/0/A.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<div class='wpb-iconbox'>"
+		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
+		, "		</div>"
+		, "	</div>"
+		, "	<div class='wpb-topbanner-toc'><div class='wpb-banner-toc'><div class=\"xo-toc\" data-toc-mode=\"1\"></div></div></div>"
+		, "</div>"
+		));
+	}
+	@Test  public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
+		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
+		, "	<div class='wpb-topbanner'>"
+		, "		<h1 class='wpb-name'>Test page</h1>"
+		, "		<a href='/wiki/File:A%22b.png' class='image' title='Test page' xowa_title='A%22b.png'><img data-xowa-title=\"A%22b.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='file:///mem/wiki/repo/trg/orig/d/4/A%22b.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
 		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
 		, "		</div>"

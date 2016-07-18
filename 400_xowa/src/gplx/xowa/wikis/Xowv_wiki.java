@@ -23,7 +23,7 @@ import gplx.xowa.guis.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; 
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.addons.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
@@ -65,6 +65,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_bin_mgr					File__bin_mgr() {return fsdb_mgr.Bin_mgr();}
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
+	public Xoh_href_wtr					Html__href_wtr()			{return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public boolean							Html__hdump_enabled() {return Bool_.Y;}
 	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;

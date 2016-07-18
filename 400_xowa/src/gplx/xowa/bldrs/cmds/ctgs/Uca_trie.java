@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.btries.*;
 class Uca_trie {
-	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Btrie_rv trv = new Btrie_rv();
 	public void Init() {
 Init_itm(1, Bry_.New_by_ints(1,1));
 Init_itm(2, Bry_.New_by_ints(1,1));
@@ -1049,12 +1050,12 @@ Init_itm(1024, Bry_.New_by_ints(92,52,1,134,143,1,143,5));
 	public void Decode(Bry_bfr tmp, byte[] src, int bgn, int end) {
 		int i = bgn;
 		while (i < end) {
-			Object o = trie.Match_bgn(src, i, end);
+			Object o = trie.Match_at(trv, src, i, end);
 			if (src[i] < 4) return;
 			if (o == null) return; //throw Err_.new_fmt_("unknown error: {0}", i);
 			byte[] utf8_char = (byte[])o;
 			tmp.Add(utf8_char);
-			i = trie.Match_pos();
+			i = trv.Pos();
 		}
 	}
 	public void Init_itm(int charAsInt, byte[] uca) {

@@ -50,7 +50,7 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner2 {
 		Xopg_tag_itm tag_itm = Bry_.Eq(name, Gfh_tag_.Bry__style) ? Xopg_tag_itm.New_css_code(raw) : Xopg_tag_itm.New_js_code(raw);
 		tag_mgr.Add(tag_itm);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {}
 
 	public Xop_root_tkn Xtn_root()	{throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_root should not be called");}
 	public byte[] Xtn_html()		{throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_html should not be called");}

@@ -28,6 +28,7 @@ public class Xou_cache_mgr {
 		this.cfg_tbl = db_file.Tbl__cfg();
 		this.cache_tbl = db_file.Tbl__cache();
 	}
+	public boolean Enabled() {return enabled;} private boolean enabled = true; public void Enabled_n_() {enabled = false;}
 	public int Fsys_count_cur() {return hash.Count();}
 	public long Fsys_size_cur() {return fsys_size_cur;} private long fsys_size_cur = 0;
 	public long Fsys_size_min() {return fsys_size_min;} public void Fsys_size_min_(long v) {fsys_size_min = v;} private long fsys_size_min = Io_mgr.Len_mb * 75;
@@ -50,6 +51,7 @@ public class Xou_cache_mgr {
 	}
 	public Xou_cache_itm Get_or_null(Xof_fsdb_itm fsdb) {return Get_or_null(fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w());}
 	public Xou_cache_itm Get_or_null(byte[] wiki, byte[] ttl, int type, double upright, int w, int h, double time, int page, int user_thumb_w) {
+		if (!enabled) return null;
 		synchronized (thread_lock) {
 			this.Page_bgn();
 			byte[] key = Xou_cache_itm.Key_gen(key_bfr, wiki, ttl, type, upright, w, h, time, page, user_thumb_w);

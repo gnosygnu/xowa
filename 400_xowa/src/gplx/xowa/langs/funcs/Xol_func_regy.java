@@ -72,22 +72,22 @@ public class Xol_func_regy {
 			switch (defn_tid) {
 				case Xot_defn_.Tid_func:
 					if		(match_pos == txt_end)						// next char is ws (b/c match_pos == txt_end)
-						rv.Func_set(func, -1);
+						rv.Func_(func, -1);
 					else if (src[match_pos] == Pf_func_.Name_dlm)		// next char is :
-						rv.Func_set(func, match_pos);
+						rv.Func_(func, match_pos);
 					else {												// func is close, but not quite: ex: #ifx: or padlefts:
 						return;
 					}
 					break;
 				case Xot_defn_.Tid_safesubst:
 				case Xot_defn_.Tid_subst:
-					rv.Subst_set_(defn_tid, txt_bgn, match_pos);
+					rv.Init_by_subst(defn_tid, txt_bgn, match_pos);
 					if (match_pos < txt_end) txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos, txt_end);
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 				case Xot_defn_.Tid_msgnw:
-					rv.Subst_set_(defn_tid, txt_bgn, match_pos);
+					rv.Init_by_subst(defn_tid, txt_bgn, match_pos);
 					if (match_pos + 1 < txt_end)	// +1 to include ":" (keyword id "raw", not "raw:")
 						txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
 					break;

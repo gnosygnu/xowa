@@ -101,7 +101,7 @@ public class Xoh_lnki_wtr {
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
 			bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);					// '<a href="'
-			app.Html__href_wtr().Build_to_bfr(bfr, app, hctx, wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
+			wiki.Html__href_wtr().Build_to_bfr(bfr, app, hctx, wiki.Domain_bry(), lnki_ttl);	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
@@ -201,6 +201,6 @@ class Xop_lnki_caption_wtr_tkn implements Xop_lnki_caption_wtr {
 		this.html_wtr = html_wtr;
 	}
 	public void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
-		html_wtr.Write_tkn(bfr, ctx, hctx, src, grp, sub_idx, tkn);
+		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, src, grp, sub_idx, tkn);
 	}
 }

@@ -21,7 +21,7 @@ import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.langs.msgs.*;
 class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 	@Override public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
-		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
+		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		int sub_ctgs = 0;	// itm.Subs_ctgs();
 		int sub_pages = 0;	// itm.Subs_pages();
 		int sub_files = 0;	// itm.Subs_files();
@@ -43,6 +43,5 @@ class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 		if (val == 0) return;
 		if (bfr.Len() > 1) bfr.Add(Bld_contains_text_itm_dlm);	// NOTE: 1 b/c Paren_bgn is always added
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
-	}	static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 
-	public static final    Xoctg_fmtr_itm_subc Instance = new Xoctg_fmtr_itm_subc(); Xoctg_fmtr_itm_subc() {}
+	}	static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 		
 }

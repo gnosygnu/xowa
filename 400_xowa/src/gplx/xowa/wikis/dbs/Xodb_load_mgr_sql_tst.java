@@ -100,7 +100,7 @@ class Xodb_load_mgr_sql_fxt {
 	public Xodb_load_mgr_sql_fxt Init_limit_(int v) {limit = v; return this;} private int limit = 3;
 	public void Test_select(Xoctg_url ctg_url, Xoctg_mok_ctg expd) {
 		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg();
-		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v2a(view_ctg, ctg_url, expd.Ttl(), limit);
+		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v2a(view_ctg, ctg_url, expd.Ttl(), limit, false);
 		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
 			Xoctg_view_grp view_grp = view_ctg.Grp_by_tid(i);
 			Xoctg_mok_grp mok_grp = expd.Grps_get_or_new(i);

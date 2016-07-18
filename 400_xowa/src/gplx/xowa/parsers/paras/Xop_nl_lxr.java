@@ -78,7 +78,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 				Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
 				break;
 		}
-		if (	ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki			// parse_mode is wiki
+		if (	ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt			// parse_mode is wiki
 			&&	para_wkr.Enabled()											// check that para is enabled
 			)
 			para_wkr.Process_nl(ctx, root, src, bgn_pos, cur_pos);
@@ -89,6 +89,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 		return cur_pos;
 	}
 	public static int Scan_fwd_for_ctg(Xop_ctx ctx, byte[] src, int cur_pos, int src_len) {
+		Btrie_rv trv = new Btrie_rv();
 		for (int i = cur_pos; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
@@ -99,9 +100,9 @@ public class Xop_nl_lxr implements Xop_lxr {
 						&&	i + 2 < src_len) {	
 						int ttl_bgn = Bry_find_.Find_fwd_while(src, i + 2, src_len, Byte_ascii.Space);
 						Btrie_slim_mgr ctg_trie = ctx.Wiki().Ns_mgr().Category_trie();
-						Object ctg_ns = ctg_trie.Match_bgn(src, ttl_bgn, src_len);
+						Object ctg_ns = ctg_trie.Match_at(trv, src, ttl_bgn, src_len);
 						if (ctg_ns != null	// "[[Category" found
-							&& Bry_.Has_at(src, src_len, ctg_trie.Match_pos(), Byte_ascii.Colon)) {	// check that next char is :
+							&& Bry_.Has_at(src, src_len, trv.Pos(), Byte_ascii.Colon)) {	// check that next char is :
 							return i;// return pos of 1st [
 						}
 						return Bry_find_.Not_found;

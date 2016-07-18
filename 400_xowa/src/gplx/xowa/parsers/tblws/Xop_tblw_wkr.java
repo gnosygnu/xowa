@@ -303,7 +303,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add_and_stack_tblw(root, prv_tkn, new_tkn);
 		if (atrs_bgn > Xop_tblw_wkr.Atrs_ignore_check) {
 			new_tkn.Atrs_rng_set(atrs_bgn, atrs_end);
-			if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki) {
+			if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {
 				Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs_for_tblw(src, atrs_bgn, atrs_end);
 				new_tkn.Atrs_ary_as_tblw_(atrs);
 			}
@@ -488,7 +488,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		if (prv_tblw.Tkn_tid() == Xop_tkn_itm_.Tid_tblw_tr)	// NOTE: if "|-" gobble all trailing dashes; REF: Parser.php!doTableStuff; $line = preg_replace( '#^\|-+#', '', $line ); DATE:2013-06-21
 			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, Byte_ascii.Dash);
 		prv_tblw.Atrs_rng_set(atrs_bgn, atrs_end);
-		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki && atrs_bgn != -1) {
+		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt && atrs_bgn != -1) {
 			Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs_for_tblw(src, atrs_bgn, atrs_end);
 			prv_tblw.Atrs_ary_as_tblw_(atrs);
 		}

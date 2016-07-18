@@ -37,7 +37,7 @@ public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		xnde.Atrs_ary_(atrs);
 		ctx.Lst_section_mgr().Add(this);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
 	public static final byte Xatr_name = 0, Xatr_bgn = 1, Xatr_end = 2;
 	public static Hash_adp_bry new_xatrs_(Xol_lang_itm lang) {
 		Hash_adp_bry rv = Hash_adp_bry.ci_u8(lang.Case_mgr());	// UTF8:see xatrs below

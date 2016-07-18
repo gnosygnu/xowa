@@ -26,13 +26,13 @@ public class Graph_xnde implements Xox_xnde {
 		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_graph, src, xnde);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		bfr.Add(Html__div_bgn);
 		bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		bfr.Add(Html__div_end);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	private static final byte[]
+	private static final    byte[]
 	  Html__div_bgn = Bry_.new_a7("<div class='mw-wiki-graph'>\n")
 	, Html__div_end = Bry_.new_a7("</div>\n")
 	;

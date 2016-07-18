@@ -29,7 +29,7 @@ public class Xob_xml_parser_ {
 		trie_add(rv, Bry_tab, Id_tab, Bry_tab_ent); trie_add(rv, Bry_cr_nl, Id_cr_nl, Byte_ascii.Nl); trie_add(rv, Bry_cr, Id_cr, Byte_ascii.Nl);
 		return rv;
 	}
-	public static final byte[]
+	public static final    byte[]
 		  Bry_page_bgn = Bry_.new_a7("<page>"), Bry_page_bgn_frag = Bry_.new_a7("<page"), Bry_page_end = Bry_.new_a7("</page>")
 		, Bry_title_bgn = Bry_.new_a7("<title>"), Bry_title_bgn_frag = Bry_.new_a7("<title"), Bry_title_end = Bry_.new_a7("</title>")
 		, Bry_id_bgn = Bry_.new_a7("<id>"), Bry_id_bgn_frag = Bry_.new_a7("<id"), Bry_id_end = Bry_.new_a7("</id>")

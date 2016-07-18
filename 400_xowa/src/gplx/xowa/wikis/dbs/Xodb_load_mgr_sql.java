@@ -56,21 +56,21 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		rv.Text_(text_bry);
 	}
 	public boolean Load_by_id	(Xowd_page_itm rv, int id) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_id(rv, id);}
-	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, rv, bgn, end);}
+	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, true, rv, bgn, end);}
 	public boolean Load_ctg_v1(Xoctg_view_ctg rv, byte[] ctg_bry) {
 		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_bry); if (cat_page_id == Xowd_page_itm.Id_null) return false;			
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
 		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
 	}
 	public boolean Load_ctg_v2(Xoctg_data_ctg rv, byte[] ctg_bry) {throw Err_.new_unimplemented();}
-	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url ctg_url, byte[] ctg_ttl, int load_max) {
+	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url ctg_url, byte[] ctg_ttl, int load_max, boolean app_is_cmd) {
 		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return;
 		List_adp list = List_adp_.New();
-		Load_ctg_v2a_db_retrieve(rv, ctg_url, cat_page_id, load_max, ctg.File_idx(), list);
+		Load_ctg_v2a_db_retrieve(rv, ctg_url, cat_page_id, load_max, ctg.File_idx(), list, app_is_cmd);
 		Load_ctg_v2a_ui_sift(rv, ctg, list);
 	}
-	private void Load_ctg_v2a_db_retrieve(Xoctg_view_ctg rv, Xoctg_url ctg_url, int cat_page_id, int load_max, int cat_link_db_idx, List_adp list) {
+	private void Load_ctg_v2a_db_retrieve(Xoctg_view_ctg rv, Xoctg_url ctg_url, int cat_page_id, int load_max, int cat_link_db_idx, List_adp list, boolean app_is_cmd) {
 		int len = Xoa_ctg_mgr.Tid__max;
 		for (byte i = Xoa_ctg_mgr.Tid_subc; i < len; i++) {
 			boolean arg_is_from = ctg_url.Grp_fwds()[i] == Bool_.N_byte;
@@ -83,7 +83,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				rv.Grp_by_tid(i).Itms_last_sortkey_(last_ctg.Sortkey());
 			}
 		}
-		db_mgr.Core_data_mgr().Tbl__page().Select_in__id(Cancelable_.Never, list);
+		db_mgr.Core_data_mgr().Tbl__page().Select_in__id(Cancelable_.Never, !app_is_cmd, list);
 	}
 	private void Load_ctg_v2a_ui_sift(Xoctg_view_ctg rv, Xowd_category_itm ctg, List_adp list) {
 		int len = list.Count();
@@ -157,7 +157,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		core_data_mgr.Dbs__get_by_id_or_fail(link_db_id).Tbl__cat_link().Select_in(link_list, ctg.Id());
 		int link_list_len = link_list.Count();
 		link_list.Sort_by(Xowd_page_itm_sorter.IdAsc);
-		core_data_mgr.Tbl__page().Select_in__id(Cancelable_.Never, false, link_list, 0, link_list_len);
+		core_data_mgr.Tbl__page().Select_in__id(Cancelable_.Never, false, true, link_list, 0, link_list_len);
 		link_list.Sort_by(Xowd_page_itm_sorter.Ns_id_TtlAsc);
 		boolean rv = false;
 		for (int i = 0; i < link_list.Count(); i++) {

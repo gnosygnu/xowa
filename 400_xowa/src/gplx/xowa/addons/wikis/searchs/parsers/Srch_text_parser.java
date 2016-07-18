@@ -19,6 +19,7 @@ package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.
 import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 public class Srch_text_parser {
 	private Btrie_slim_mgr parser_trie = Btrie_slim_mgr.cs(); public Btrie_slim_mgr word_end_trie = Btrie_slim_mgr.cs(); private Btrie_slim_mgr word_bgn_trie = Btrie_slim_mgr.cs();
+	private final    Btrie_rv trv = new Btrie_rv();
 	private Xol_case_mgr case_mgr;
 	public final    Bry_bfr Tmp_bfr = Bry_bfr_.New_w_size(32);
 	private byte[] src; private int end;
@@ -87,14 +88,14 @@ public class Srch_text_parser {
 				break;
 			}
 			byte b = src[pos];
-			Object o = parser_trie.Match_bgn_w_byte(b, src, pos, end);
+			Object o = parser_trie.Match_at_w_b0(trv, b, src, pos, end);
 			if (o == null) {						// unknown sequence; word-char
 				if (cur_bgn == -1) cur_bgn = pos;	// set 1st char for word
 				++pos;
 			}
 			else {
 				Srch_sym_parser parser = (Srch_sym_parser)o;
-				pos = parser.Parse(this, src, end, pos, parser_trie.Match_pos());
+				pos = parser.Parse(this, src, end, pos, trv.Pos());
 			}
 		}
 	}
@@ -133,9 +134,9 @@ public class Srch_text_parser {
 		int pos = 0; int len = bry.length;
 		while (pos < len) {
 			byte b = bry[pos];
-			if (word_bgn_trie.Match_bgn_w_byte(b, bry, pos, len) != null) {	// b is symbol;
+			if (word_bgn_trie.Match_at_w_b0(trv, b, bry, pos, len) != null) {	// b is symbol;
 				dirty = true;
-				pos = word_bgn_trie.Match_pos();
+				pos = trv.Pos();
 			}
 			else {
 				break;

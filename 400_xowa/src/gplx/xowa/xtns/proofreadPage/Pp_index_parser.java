@@ -24,10 +24,10 @@ class Pp_index_parser {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);
 		if (src == null) return Pp_index_page.Null;
 		Xop_parser sub_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
 		Xop_root_tkn index_root = tkn_mkr.Root(src);
-		byte[] mid_text = sub_parser.Parse_text_to_wtxt(index_root, sub_ctx, tkn_mkr, src);
+		byte[] mid_text = sub_parser.Expand_tmpl(index_root, sub_ctx, tkn_mkr, src);
 		Pp_index_page rv = new Pp_index_page();
 		Inspect_tmpl(rv, src, index_root, index_root.Subs_len(), ns_page_id, 1);
 		sub_parser.Parse_wtxt_to_wdom(index_root, sub_ctx, tkn_mkr, mid_text, Xop_parser_.Doc_bgn_bos);

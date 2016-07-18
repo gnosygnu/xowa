@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.tocs.*;
+import org.junit.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.addons.htmls.tocs.*;
 public class Xoh_hdr_hzip_tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
-	@Before public void init() {Xoh_toc_wtr.Enabled = false;}
-	@After public void term() {Xoh_toc_wtr.Enabled = true;}
+	@Before public void init()		{Xoh_toc_mgr.Enabled = false;}
+	@After public void term()	{Xoh_toc_mgr.Enabled = true;}
 	@Test   public void Same() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"'A~"

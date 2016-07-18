@@ -25,16 +25,16 @@ public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
 		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser_mgr().Main();
-		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx display_ttl_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		Xop_root_tkn display_ttl_root = parser.Parse_text_to_wdom(display_ttl_ctx, val_dat_ary, false);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		boolean restrict = wiki.Cfg_parser().Display_title_restrict();
 		Xoh_wtr_ctx hctx = restrict ? Xoh_wtr_ctx.Display_title : Xoh_wtr_ctx.Basic;	// restrict removes certain HTML (display:none)
-		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
+		wiki.Html_mgr().Html_wtr().Write_tkn_to_html(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 		byte[] val_html = tmp_bfr.To_bry_and_clear();
 		if (restrict) {	// restrict only allows displayTitles which have text similar to the pageTitle; PAGE:de.b:Kochbuch/_Druckversion; DATE:2014-08-18
 			Xoae_page page = ctx.Page();
-			wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
+			wiki.Html_mgr().Html_wtr().Write_tkn_to_html(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 			byte[] val_html_lc = tmp_bfr.To_bry_and_clear();
 			Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
 			val_html_lc = Standardize_displaytitle_text(case_mgr, val_html_lc);

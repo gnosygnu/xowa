@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
@@ -45,7 +45,8 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean					img__alt_diff_from_anch_title = data.Img_alt__diff__anch_title();
 		boolean					file__src_exists = !img_xoimg.Val_dat_exists();
 		boolean					anch_href_diff_file = !img_wo_anch && !Bry_.Match(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end(), anch_href.Ttl_page_db());
-		boolean	img__imap_exists = flag_bldr.Set_as_bool(Flag__img__imap_exists				, data.Img_imap_idx() != -1);
+		boolean					img__is_imap	= flag_bldr.Set_as_bool(Flag__img__is_imap			, data.Img_imap_idx() != -1);
+		boolean					img__is_pgbnr	= flag_bldr.Set_as_bool(Flag__img__is_pgbnr			, data.Img_pgbnr().Exists());
 		flag_bldr.Set(Flag__img__wo_anch					, img_wo_anch);
 		flag_bldr.Set(Flag__img__is_vid						, data.Img_is_vid());
 		flag_bldr.Set(Flag__file__w_diff_from_html			, file__src_exists && data.Img_w__diff__file_w());
@@ -109,13 +110,22 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (anch_title_exists)					bfr.Add_hzip_mid(src, data.Anch_title_bgn(), data.Anch_title_end());
 		if (img__alt_diff_from_anch_title)		bfr.Add_hzip_mid(src, data.Img_alt_bgn(), data.Img_alt_end());
 		if (img_cls.Other_exists())				bfr.Add_hzip_mid(src, img_cls.Other_bgn(), img_cls.Other_end());
-		if (img__imap_exists)					bfr.Add_hzip_int(1, data.Img_imap_idx());
+		if (img__is_imap)						bfr.Add_hzip_int(1, data.Img_imap_idx());
+		if (img__is_pgbnr) {
+			Pgbnr_itm pgbnr = data.Img_pgbnr();
+			bfr.Add_hzip_double(pgbnr.Data_pos_x());
+			bfr.Add_hzip_double(pgbnr.Data_pos_y());
+			bfr.Add_hzip_bry(pgbnr.Srcset());
+			bfr.Add_hzip_bry(pgbnr.Style_if_not_dflt());
+		}
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		// decode flags
 		Xoh_img_data data = (Xoh_img_data)data_itm; data.Clear();
 		int flag = rdr.Read_hzip_int(2); flag_bldr.Decode(flag);
-		boolean	img_imap_exists					= flag_bldr.Get_as_bool(Flag__img__imap_exists);
+		boolean	img__is_pgbnr					= flag_bldr.Get_as_bool(Flag__img__is_pgbnr);
+		boolean img__is_imap					= flag_bldr.Get_as_bool(Flag__img__is_imap);
 		boolean	img_wo_anch						= flag_bldr.Get_as_bool(Flag__img__wo_anch);
 		boolean	file__is_orig					= flag_bldr.Get_as_bool(Flag__file__is_orig);
 		boolean	file__repo_is_local				= flag_bldr.Get_as_bool(Flag__file__repo_is_local);
@@ -130,6 +140,8 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean	img_is_vid						= flag_bldr.Get_as_bool(Flag__img__is_vid);
 		int		img_cls							= flag_bldr.Get_as_int(Flag__img__cls_tid);
 		int		anch__href_tid					= flag_bldr.Get_as_int(Flag__anch__href_tid);
+
+		// get page, file, etc.
 		byte[] page_db = rdr.Read_bry_to();
 		byte[] site_bry = null;
             switch (anch__href_tid) {
@@ -176,7 +188,20 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			img_cls_other_bgn = rdr.Pos();
 			img_cls_other_end = rdr.Find_fwd_lr();
 		}
-		int img_imap_idx = img_imap_exists ? rdr.Read_hzip_int(1) : -1;
+
+		// handle imap idx
+		int img_imap_idx = img__is_imap ? rdr.Read_hzip_int(1) : -1;
+
+		// handle pgbnr
+		if (img__is_pgbnr) {
+			double data_pos_x = rdr.Read_double_to();
+			double data_pos_y = rdr.Read_double_to();
+			byte[] srcset = rdr.Read_bry_to();
+			byte[] style = rdr.Read_bry_to();
+			
+			data.Img_pgbnr().Init_by_decode(data_pos_x, data_pos_y, srcset, style);
+		}
+
 		// transform values
 		boolean anch_rel_is_nofollow = false;
 		if (anch__href_tid == Xoh_anch_href_data.Tid__inet) {// external links should get rel=nofollow
@@ -234,25 +259,26 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_hzip rv = new Xoh_img_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}
 	public static int Md5_depth = 2;
-	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1,  1, 1, 1, 1		, 1	, 1, 1, 1	, 1 , 2, 1, 1	, 1, 1, 2, 2);	
+	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1, 1, 1,  1, 1, 1, 1		, 1	, 1, 1, 1	, 1 , 2, 1, 1	, 1, 1, 2, 2);	
 	private static final int // SERIALIZED
-	  Flag__img__imap_exists				=  0
-	, Flag__img__wo_anch					=  1
-	, Flag__img__is_vid						=  2
-	, Flag__file__w_diff_from_html			=  3
-	, Flag__file__time_exists				=  4
-	, Flag__file__page_exists				=  5
-	, Flag__file__is_orig					=  6
-	, Flag__file__repo_is_local				=  7
-	, Flag__file__src_exists				=  8
-	, Flag__img__cls_other_exists			=  9
-	, Flag__anch__ns_is_custom				= 10
-	, Flag__anch__cls_tid					= 11	// none, image
-	, Flag__anch__ns_id_needs_saving		= 12
-	, Flag__img__alt_diff_from_anch_title	= 13
-	, Flag__anch__href_diff_file			= 14
-	, Flag__anch__title_missing				= 15
-	, Flag__img__cls_tid					= 16	// none, thumbimage, thumbborder
-	, Flag__anch__href_tid					= 17	// wiki, site, anch, inet
+	  Flag__img__is_pgbnr					=  0
+	, Flag__img__is_imap					=  1
+	, Flag__img__wo_anch					=  2
+	, Flag__img__is_vid						=  3
+	, Flag__file__w_diff_from_html			=  4
+	, Flag__file__time_exists				=  5
+	, Flag__file__page_exists				=  6
+	, Flag__file__is_orig					=  7
+	, Flag__file__repo_is_local				=  8
+	, Flag__file__src_exists				=  9
+	, Flag__img__cls_other_exists			= 10
+	, Flag__anch__ns_is_custom				= 11
+	, Flag__anch__cls_tid					= 12	// none, image
+	, Flag__anch__ns_id_needs_saving		= 13
+	, Flag__img__alt_diff_from_anch_title	= 14
+	, Flag__anch__href_diff_file			= 15
+	, Flag__anch__title_missing				= 16
+	, Flag__img__cls_tid					= 17	// none, thumbimage, thumbborder
+	, Flag__anch__href_tid					= 18	// wiki, site, anch, inet
 	;
 }

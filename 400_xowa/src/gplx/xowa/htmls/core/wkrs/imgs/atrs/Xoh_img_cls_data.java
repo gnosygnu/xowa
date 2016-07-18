@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
-import gplx.core.brys.*;
+import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_img_cls_data implements Bfr_arg_clearable {
+	private final    Btrie_rv trv = new Btrie_rv();
 	private byte[] src;
 	public byte Cls_tid() {return cls_tid;} private byte cls_tid;
 	public int Other_bgn() {return other_bgn;} private int other_bgn;
@@ -41,8 +42,8 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 			return;	
 		}
 		int src_end = atr.Val_end();
-		this.cls_tid = Xoh_img_cls_.Trie.Match_byte_or(src, src_bgn, src_end, Xoh_img_cls_.Tid__manual);
-		int pos = Xoh_img_cls_.Trie.Match_pos();
+		this.cls_tid = Xoh_img_cls_.Trie.Match_byte_or(trv, src, src_bgn, src_end, Xoh_img_cls_.Tid__manual);
+		int pos = trv.Pos();
 		if (pos < src_end && src[pos] == Byte_ascii.Space)
 			++pos;
 		if (cls_tid == Xoh_img_cls_.Tid__manual || pos < src_end) {

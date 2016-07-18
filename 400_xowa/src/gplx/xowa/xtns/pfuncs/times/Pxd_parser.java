@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
 class Pxd_parser {
+	private final    Btrie_rv trv = new Btrie_rv();
 	byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
 	public int Tkns_len() {return tkns_len;} private int tkns_len;
@@ -80,11 +81,11 @@ class Pxd_parser {
 				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				case Byte_ascii.At:
 					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);			// first, make prv tkn
-					Object o = trie.Match_bgn_w_byte(b, src, cur_pos, src_len);	// now match String against tkn
+					Object o = trie.Match_at_w_b0(trv, b, src, cur_pos, src_len);	// now match String against tkn
 					if (o == null) return false;	// unknown letter / word; exit now;
 					tkns[tkns_len] = ((Pxd_itm_prototype)o).MakeNew(tkns_len); 
 					++tkns_len;
-					cur_pos = trie.Match_pos() - 1; // -1 b/c trie matches to next char, and ++ below
+					cur_pos = trv.Pos() - 1; // -1 b/c trie matches to next char, and ++ below
 					break;
 				case Byte_ascii.Comma: case Byte_ascii.Plus:
 					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);					

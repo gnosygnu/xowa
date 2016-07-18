@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
+import gplx.xowa.wikis.pages.wtxts.*;
 class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
 	private final    List_adp itms = List_adp_.New(); private final     Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
 	private byte[] tbl_hdr; 
@@ -26,7 +27,7 @@ class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
 	public void Add(Wdata_toc_data toc_data)		{itms.Add(toc_data);}
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		int itms_len = itms.Count();
-		if (itms_len <= gplx.xowa.htmls.tocs.Xow_hdr_mgr.Toc_min) return;
+		if (itms_len <= Xopg_toc_mgr.Hdrs_min) return;
 		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.To_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}

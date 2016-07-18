@@ -37,7 +37,7 @@ public class Lst_pfunc_wkr {
 		Xop_ctx sub_ctx = null;
 		byte[] src = null;
 		if (defn_tmpl == null) {	// cache transclusions to prevent multiple parsings; DATE:2014-02-22
-			sub_ctx = Xop_ctx.new_sub_(ctx).Ref_ignore_(true);
+			sub_ctx = Xop_ctx.New__sub__reuse_page(ctx).Ref_ignore_(true);
 			byte[] src_page_bry = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(src_ttl);
 			if (src_page_bry == null) return; // {{#lst:missing}} -> ""
 			Xoae_page page = ctx.Page();

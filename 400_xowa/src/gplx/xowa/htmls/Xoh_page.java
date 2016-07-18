@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.redirects.*;
 import gplx.xowa.files.*;
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.tocs.*;
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.addons.htmls.tocs.*;
 import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xoh_page implements Xoa_page {
 	// core
@@ -48,23 +48,17 @@ public class Xoh_page implements Xoa_page {
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
 	public byte[]					Url_bry_safe()		{return page_url == null ? Bry_.Empty : page_url.To_bry(Bool_.Y, Bool_.Y);}
-	public void Init(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
+	public void Ctor_by_hview(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
-		hdump.Toc_wtr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
+		html.Toc_mgr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
 	}
-	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {
-		head_mgr.Flag_(head_flag);
-		this.display_ttl = display_ttl; this.content_sub = content_sub; this.sidebar_div = sidebar_div;
-		db.Html().Html_bry_(body);
-		db.Html().Zip_tids_(zip_tid, hzip_tid);
-	}
-	public Xoh_page Ctor_by_page(Bry_bfr tmp_bfr, Xoae_page page) {
-		this.page_id = page.Db().Page().Id();
-		this.wiki = page.Wiki();
+	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page) {
+		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
+
 		db.Html().Html_bry_(page.Db().Html().Html_bry());
-		this.page_url = page.Url();
+
 		Xopg_html_data html = page.Html_data();
 		html.Init_by_page(page.Ttl());
 		Xoh_head_mgr mod_mgr = html.Head_mgr();	
@@ -72,12 +66,21 @@ public class Xoh_page implements Xoa_page {
 		this.display_ttl = html.Display_ttl();
 		this.content_sub = html.Content_sub();
 		this.sidebar_div = Xoh_page_.Save_sidebars(tmp_bfr, page, html);
+
+		html.Toc_mgr().Init(Bry_.Empty, page_url.Page_bry());
 		return this;
+	}
+	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {
+		head_mgr.Flag_(head_flag);
+		this.display_ttl = display_ttl; this.content_sub = content_sub; this.sidebar_div = sidebar_div;
+		db.Html().Html_bry_(body);
+		db.Html().Zip_tids_(zip_tid, hzip_tid);
 	}
 	public void Clear() {
 		redirect.Clear();
 		html.Clear();
 		hdump.Clear();
+		db.Clear();
 
 		display_ttl = content_sub = sidebar_div = Bry_.Empty;
 		head_mgr.Clear(); commons_mgr.Clear();

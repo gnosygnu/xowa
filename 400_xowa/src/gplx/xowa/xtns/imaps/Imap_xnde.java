@@ -35,8 +35,8 @@ public class Imap_xnde implements Xox_xnde {
 		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_imageMap, src, xnde);
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
 
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (imap_data.Invalid()) return;
-		html_wtr.Write_tkn(bfr, ctx, hctx, imap_data.Img_src(), xnde, Xoh_html_wtr.Sub_idx_null, imap_data.Img().Img_link());
+		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, imap_data.Img_src(), xnde, Xoh_html_wtr.Sub_idx_null, imap_data.Img().Img_link());
 	}
 }

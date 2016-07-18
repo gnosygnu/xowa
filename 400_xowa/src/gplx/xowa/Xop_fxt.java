@@ -103,7 +103,6 @@ public class Xop_fxt {
 	public Xop_tblw_td_tkn_chkr tkn_tblw_td_(int bgn, int end) 		{return (Xop_tblw_td_tkn_chkr)new Xop_tblw_td_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
-	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_level_(hdr_len).Src_rng_(bgn, end);}
 	public Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid__br);}
 	public Xop_xnde_tkn_chkr tkn_xnde_()							{return tkn_xnde_(String_.Pos_neg1, String_.Pos_neg1);}
 	public Xop_xnde_tkn_chkr tkn_xnde_(int bgn, int end)			{return (Xop_xnde_tkn_chkr)new Xop_xnde_tkn_chkr().Src_rng_(bgn, end);}
@@ -222,7 +221,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		ctx.Page().Root_(root);
 		ctx.Page().Db().Text().Text_bry_(raw_bry);
-		return parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		return parser.Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 	}
 	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), name, raw);}
 	public void Test_parse_tmpl(String raw, Tst_chkr... expd) {
@@ -233,20 +232,20 @@ public class Xop_fxt {
 	public void Test_parse_page_tmpl_str(String raw, String expd) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		byte[] actl = parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		byte[] actl = parser.Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 		Tfds.Eq(expd, String_.new_u8(actl));
 		tst_Log_check();
 	}
 	public Xop_root_tkn Test_parse_page_tmpl_tkn(String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		parser.Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 		return root;
 	}
 	public void Test_parse_page_tmpl(String raw, Tst_chkr... expd_ary) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		parser.Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
 		Parse_chk(raw_bry, root, expd_ary);
 	}
 	public void Test_parse_page_wiki(String raw, Tst_chkr... expd_ary) {
@@ -284,7 +283,7 @@ public class Xop_fxt {
 	public String Exec_parse_page_all_as_str(String raw) {
 		Xop_root_tkn root = Exec_parse_page_all_as_root(Bry_.new_u8(raw));
 		Bry_bfr actl_bfr = Bry_bfr_.New();
-		hdom_wtr.Write_all(actl_bfr, ctx, hctx, root.Root_src(), root);
+		hdom_wtr.Write_doc(actl_bfr, ctx, hctx, root.Root_src(), root);
 		return actl_bfr.To_str_and_clear();
 	}
 	public void Hctx_(Xoh_wtr_ctx v) {hctx = v;} private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
@@ -293,7 +292,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
 		parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, raw_bry, Xop_parser_.Doc_bgn_bos);
 		Bry_bfr actl_bfr = Bry_bfr_.New();
-		hdom_wtr.Write_all(actl_bfr, ctx, hctx, raw_bry, root);
+		hdom_wtr.Write_doc(actl_bfr, ctx, hctx, raw_bry, root);
 		return actl_bfr.To_str_and_clear();
 	}
 	private void Parse_chk(byte[] raw_bry, Xop_root_tkn root, Tst_chkr[] expd_ary) {
@@ -375,7 +374,7 @@ public class Xop_fxt {
 	}
 
 	public void Test_str_full(String raw, String expd, String actl) {Tfds.Eq_str_lines(expd, actl, raw);}
-	private void Test_str_part_y(String actl, String... expd_parts) {
+	public void Test_str_part_y(String actl, String... expd_parts) {
 		int expd_parts_len = expd_parts.length;
 		for (int i = 0; i < expd_parts_len; i++) {
 			String expd_part = expd_parts[i];
@@ -437,7 +436,7 @@ public class Xop_fxt {
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
 		ctx.Page().Html_data().Redlink_list().Clear();
-		html_wtr.Write_all(tmp_bfr, ctx, hctx, src_bry, root);
+		html_wtr.Write_doc(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());
 		return tmp_bfr.To_str_and_clear();
 	}

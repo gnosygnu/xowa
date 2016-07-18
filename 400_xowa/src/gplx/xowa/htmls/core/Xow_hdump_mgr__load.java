@@ -30,7 +30,7 @@ public class Xow_hdump_mgr__load {
 	}
 	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
 	public void Load_by_edit(Xoae_page wpg) {
-		tmp_hpg.Init(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
+		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
 		Load(tmp_hpg, wpg.Ttl());
 		wpg.Db().Html().Html_bry_(tmp_hpg.Db().Html().Html_bry());
 		wpg.Root_(new gplx.xowa.parsers.Xop_root_tkn());	// HACK: set root, else load page will fail
@@ -44,7 +44,7 @@ public class Xow_hdump_mgr__load {
 				this.override_mgr__html = new Xow_override_mgr(override_root_url.GenSubDir_nest("html"));
 			}
 			boolean loaded = Load__dbpg(wiki, tmp_dbpg.Clear(), hpg, ttl);
-			hpg.Init(hpg.Wiki(), hpg.Url(), ttl, tmp_dbpg.Id());
+			hpg.Ctor_by_hview(hpg.Wiki(), hpg.Url(), ttl, tmp_dbpg.Id());
 			if (!loaded) {		// nothing in "page" table
 				byte[] page_override = override_mgr__page.Get_or_same(ttl.Page_db(), null);
 				if (page_override == null) return Load__fail(hpg);
@@ -85,7 +85,7 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__hiero().Enabled_			(hpg_head.Hiero_exists());
 		wpg_head.Itm__timeline().Enabled_		(hpg.Xtn__timeline_exists());
 		wpg_head.Itm__gallery_styles().Enabled_	(hpg.Xtn__gallery_exists());
-		wpg_head.Itm__toc().Enabled_(hpg.Hdump_mgr().Toc_wtr().Exists());
+		wpg_head.Itm__toc().Enabled_(hpg.Html_data().Toc_mgr().Exists());
 		wpg_head.Itm__pgbnr().Enabled_(hpg.Html_data().Head_mgr().Itm__pgbnr().Enabled());
 
 		// transfer images from Xoh_page to Xoae_page 

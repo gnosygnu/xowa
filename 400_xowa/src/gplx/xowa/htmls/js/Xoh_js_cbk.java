@@ -54,7 +54,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 			ctx.Para().Enabled_(para_enabled);
 			wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), raw, 0);
 			byte[] data = root.Data_mid();
-			wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, data, root);
+			wiki.Html_mgr().Html_wtr().Write_doc(bfr, ctx, data, root);
 			return bfr.To_str_and_clear();
 		}
 		finally {

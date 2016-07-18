@@ -19,6 +19,7 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import gplx.core.errs.*; import gplx.core.btries.*;
 public class Bry_rdr {
 	private final    gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
+	private final    Btrie_rv trv = new Btrie_rv();
 	public byte[] Src() {return src;} protected byte[] src;
 	public int Src_end() {return src_end;} protected int src_end; 
 	public int Pos() {return pos;} protected int pos;
@@ -150,8 +151,8 @@ public class Bry_rdr {
 		byte rv = Chk_or(trie, Byte_.Max_value_127);
 		if (rv == Byte_.Max_value_127) err_wkr.Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16)));
 	}
-	public Object Chk_trie_as_obj(Btrie_slim_mgr trie) {
-		Object rv = trie.Match_bgn(src, pos, src_end); if (rv == null) err_wkr.Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16)));
+	public Object Chk_trie_as_obj(Btrie_rv trv, Btrie_slim_mgr trie) {
+		Object rv = trie.Match_at(trv, src, pos, src_end); if (rv == null) err_wkr.Fail("failed trie check", "mid", String_.new_u8(Bry_.Mid_by_len_safe(src, pos, 16)));
 		return rv;
 	}
 	public byte Chk_or(Btrie_slim_mgr trie, byte or)	{return Chk_or(trie, pos, src_end, or);}
@@ -161,9 +162,9 @@ public class Bry_rdr {
 		return rv;
 	}
 	public byte Chk_or(Btrie_slim_mgr trie, int itm_bgn, int itm_end, byte or) {
-		Object rv_obj = trie.Match_bgn(src, itm_bgn, itm_end);
+		Object rv_obj = trie.Match_at(trv, src, itm_bgn, itm_end);
 		if (rv_obj == null) return or;
-		pos = trie.Match_pos();
+		pos = trv.Pos();
 		return ((gplx.core.primitives.Byte_obj_val)rv_obj).Val();
 	}
 	@gplx.Virtual public Bry_rdr Skip_ws() {

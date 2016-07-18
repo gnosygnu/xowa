@@ -23,6 +23,37 @@ public class Btrie_bwd_mgr {
 		Object rv = Match(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
+
+	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {return Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos);}
+	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int end_pos) {
+		// NOTE: bgn, end follows same semantics as fwd where bgn >= & end < except reversed: bgn <= & end >; EX: "abcde" should pass 5, -1
+		Object rv_obj = null;
+		int rv_pos = bgn_pos;
+		int cur_pos = bgn_pos;
+		Btrie_slim_itm cur = root;
+		while (true) {
+			Btrie_slim_itm nxt = cur.Ary_find(b);
+			if (nxt == null) {				// nxt does not have b; return rv_obj;
+				rv.Init(rv_pos, rv_obj);
+				return rv_obj;
+			}
+			--cur_pos;
+			if (nxt.Ary_is_empty()) {		// nxt is leaf; return nxt.Val() (which should be non-null)
+				rv_obj = nxt.Val();
+				rv.Init(cur_pos, rv_obj);
+				return rv_obj;
+			}
+			Object nxt_val = nxt.Val();
+			if (nxt_val != null) {rv_pos = cur_pos; rv_obj = nxt_val;}			// nxt is node; cache rv_obj (in case of false match)
+			if (cur_pos == end_pos) {		// increment cur_pos and exit if end_pos	
+				rv.Init(rv_pos, rv_obj);			
+				return rv_obj;
+			}
+			b = src[cur_pos];
+			cur = nxt;
+		}
+	}
+
 	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match(src[bgn_pos], src, bgn_pos, end_pos);}
 	public Object Match(byte b, byte[] src, int bgn_pos, int end_pos) {
 		// NOTE: bgn, end follows same semantics as fwd where bgn >= & end < except reversed: bgn <= & end >; EX: "abcde" should pass 5, -1

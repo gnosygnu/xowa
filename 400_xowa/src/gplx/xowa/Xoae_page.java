@@ -20,14 +20,14 @@ import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
 import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;
-import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;
+import gplx.xowa.wikis.pages.wtxts.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
-		hdr_mgr = new Xow_hdr_mgr(this);
 		html.Init_by_page(ttl);
+		html.Toc_mgr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), ttl.Page_db());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Empty
 	public Xow_wiki					Wiki()				{return wiki;}
@@ -50,10 +50,11 @@ public class Xoae_page implements Xoa_page {
 	public byte						Edit_mode() {return edit_mode;} private byte edit_mode; public void	Edit_mode_update_() {edit_mode = Xoa_page_.Edit_mode_update;}
 	public Xop_root_tkn				Root() {return root;} public Xoae_page Root_(Xop_root_tkn v) {root = v; return this;} private Xop_root_tkn root;
 
+	public Xopg_wtxt_data			Wtxt() {return wtxt;} private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
+
 	public Xoh_cmd_mgr				Html_cmd_mgr() {return html_cmd_mgr;} private Xoh_cmd_mgr html_cmd_mgr = new Xoh_cmd_mgr();
 	public Xof_xfer_queue			File_queue() {return file_queue;} private Xof_xfer_queue file_queue = new Xof_xfer_queue();
 	public List_adp					File_math() {return file_math;} private List_adp file_math = List_adp_.New();
-	public Xow_hdr_mgr				Hdr_mgr() {return hdr_mgr;} private Xow_hdr_mgr hdr_mgr;
 	public List_adp					Lnki_list() {return lnki_list;} public void Lnki_list_(List_adp v) {this.lnki_list = v;} private List_adp lnki_list = List_adp_.New();
 	public Ref_itm_mgr				Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr(); public void Ref_mgr_(Ref_itm_mgr v) {this.ref_mgr = v;}
 	public Xopg_popup_mgr			Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
@@ -78,13 +79,13 @@ public class Xoae_page implements Xoa_page {
 		return true;
 	}	private byte[][] tmpl_stack_ary = Bry_.Ary_empty; private int tmpl_stack_ary_len = 0, tmpl_stack_ary_max = 0;
 	public void Clear_all() {Clear(true);}
-	public void Clear(boolean clear_scrib) { // NOTE: this is called post-fetch but pre-parse; do not clear items set by post-fetch, such as id, ttl, redirected_ttls, data_raw
+	public void Clear(boolean clear_scrib) { // NOTE: this is called post-fetch but pre-wtxt; do not clear items set by post-fetch, such as id, ttl, redirected_ttls, data_raw
 		db.Clear();
 		redirect.Clear();
 		html.Clear();
 		hdump.Clear();
+		wtxt.Clear();
 
-		hdr_mgr.Clear();
 		lnki_list.Clear();
 		file_math.Clear();
 		file_queue.Clear();

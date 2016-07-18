@@ -37,23 +37,37 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl_lxr_mgr.Init_by_lang(lang);
 		wtxt_lxr_mgr.Init_by_lang(lang);
 	}
+	public byte[] Expand_tmpl(byte[] src) {	// expands {{A}} -> some wikitext; called by tmpl_invk, lang_msgs, sidebar
+		Xop_ctx ctx = Xop_ctx.New__sub__reuse_page(wiki.Parser_mgr().Ctx());	// PERF: reuse root ctx
+		return Expand_tmpl(ctx, ctx.Tkn_mkr(), src);
+	}
+	private byte[] Expand_tmpl(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {return Expand_tmpl(tkn_mkr.Root(src), ctx, tkn_mkr, src);}
+	public byte[] Expand_tmpl(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
+		Parse(root, ctx, tkn_mkr, src, Xop_parser_tid_.Tid__tmpl, tmpl_trie, Xop_parser_.Doc_bgn_bos);
+		int len = root.Subs_len();
+		for (int i = 0; i < len; ++i)
+			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
+		return Xot_tmpl_wtr.Instance.Write_all(ctx, root, src);
+	}
+
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
 		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
-		Parse_text_to_html(bfr, ctx.Page(), false, src);
+		Parse_text_to_html(bfr, ctx, ctx.Page(), false, src);
 		return bfr.To_bry_and_rls();
 	}
-	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
-	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, Xoh_wtr_ctx hctx, boolean para_enabled, byte[] src) {
-		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, wiki.Parser_mgr().Ctx(), page);
+	public void Parse_text_to_html(Bry_bfr trg, Xop_ctx pctx, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, pctx, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
+	public void Parse_text_to_html(Bry_bfr trg, Xop_ctx pctx, Xoae_page page, Xoh_wtr_ctx hctx, boolean para_enabled, byte[] src) {
+		Xop_ctx ctx = Xop_ctx.New__sub(wiki, pctx, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
 		Xop_parser parser = wiki.Parser_mgr().Main();
-		byte[] wtxt = parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
+		byte[] wtxt = parser.Expand_tmpl(root, ctx, tkn_mkr, src);
 		root.Reset();
 		ctx.Para().Enabled_(para_enabled);
 		parser.Parse_wtxt_to_wdom(root, ctx, ctx.Tkn_mkr(), wtxt, Xop_parser_.Doc_bgn_bos);
-		wiki.Html_mgr().Html_wtr().Write_all(trg, ctx, hctx, wtxt, root);
+		wiki.Html_mgr().Html_wtr().Write_doc(trg, ctx, hctx, wtxt, root);
 	}
+
 	public Xot_defn_tmpl Parse_text_to_defn_obj(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xow_ns ns, byte[] name, byte[] src) {
 		Xot_defn_tmpl rv = new Xot_defn_tmpl();
 		Parse_text_to_defn(rv, ctx, tkn_mkr, ns, name, src); 
@@ -61,7 +75,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 	public void Parse_text_to_defn(Xot_defn_tmpl tmpl, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xow_ns ns, byte[] name, byte[] src) {
 		Xop_root_tkn root = tkn_mkr.Root(src);
-		Parse(root, ctx, tkn_mkr, src, Xop_parser_.Parse_tid_tmpl, tmpl_trie, Xop_parser_.Doc_bgn_bos);
+		Parse(root, ctx, tkn_mkr, src, Xop_parser_tid_.Tid__defn, tmpl_trie, Xop_parser_.Doc_bgn_bos);
 		tmpl_props.OnlyInclude_exists = false; int subs_len = root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
@@ -73,7 +87,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		ctx.Page().Clear_all(); ctx.App().Msg_log().Clear();
 		Parse_text_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);
 	}
-	public Xop_root_tkn Parse_text_to_wdom_old_ctx(Xop_ctx old_ctx, byte[] src, boolean doc_bgn_pos) {return Parse_text_to_wdom(Xop_ctx.new_sub_(old_ctx), src, doc_bgn_pos);}
+	public Xop_root_tkn Parse_text_to_wdom_old_ctx(Xop_ctx old_ctx, byte[] src, boolean doc_bgn_pos) {return Parse_text_to_wdom(Xop_ctx.New__sub__reuse_page(old_ctx), src, doc_bgn_pos);}
 	public Xop_root_tkn Parse_text_to_wdom(Xop_ctx new_ctx, byte[] src, boolean doc_bgn_pos) {
 		new_ctx.Para().Enabled_n_();
 		Xop_tkn_mkr tkn_mkr = new_ctx.Tkn_mkr();
@@ -83,30 +97,17 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 	public void Parse_text_to_wdom(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int doc_bgn_pos) {
 		byte parse_tid_old = ctx.Parse_tid();// NOTE: must store parse_tid b/c ctx can be reused by other classes
-		ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);
+		ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl);
 		root.Reset();
-		byte[] mid_bry = Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
+		byte[] mid_bry = Expand_tmpl(root, ctx, tkn_mkr, src);
 		root.Data_mid_(mid_bry);
 		root.Reset();
 		Parse_wtxt_to_wdom(root, ctx, tkn_mkr, mid_bry, doc_bgn_pos);
 		ctx.Parse_tid_(parse_tid_old);
 	}
-	public byte[] Parse_text_to_wtxt(byte[] src) {
-		Xop_ctx ctx = Xop_ctx.new_sub_(wiki.Parser_mgr().Ctx());
-		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
-		Xop_root_tkn root = tkn_mkr.Root(src);
-		return wiki.Parser_mgr().Main().Parse_text_to_wtxt(root, ctx, tkn_mkr, src);
-	}
-	public byte[] Parse_text_to_wtxt(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src) {
-		Parse(root, ctx, tkn_mkr, src, Xop_parser_.Parse_tid_page_tmpl, tmpl_trie, Xop_parser_.Doc_bgn_bos);
-		int subs_len = root.Subs_len();
-		for (int i = 0; i < subs_len; i++)
-			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		return Xot_tmpl_wtr.Instance.Write_all(ctx, root, src);	// NOTE: generate new src since most callers will use it;
-	}
 	public void Parse_wtxt_to_wdom(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] wtxt, int doc_bgn_pos) {
 		root.Root_src_(wtxt);	// always set latest src; needed for Parse_all wherein src will first be raw and then parsed tmpl
-		Parse(root, ctx, tkn_mkr, wtxt, Xop_parser_.Parse_tid_page_wiki, wtxt_trie, doc_bgn_pos);
+		Parse(root, ctx, tkn_mkr, wtxt, Xop_parser_tid_.Tid__wtxt, wtxt_trie, doc_bgn_pos);
 	}
 	private void Parse(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, byte parse_type, Btrie_fast_mgr trie, int doc_bgn_pos) {
 		int len = src.length; if (len == 0) return;	// nothing to parse;

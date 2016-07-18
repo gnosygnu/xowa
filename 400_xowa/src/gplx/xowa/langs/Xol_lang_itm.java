@@ -54,6 +54,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	public Xol_specials_mgr		Specials_mgr() {return specials_mgr;} private final    Xol_specials_mgr specials_mgr;
 	public Xol_case_mgr			Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr;
 	public void					Case_mgr_u8_() {case_mgr = Xol_case_mgr_.U8();}		// TEST:
+	public Xol_lang_itm			Case_mgr_(Xol_case_mgr v) {this.case_mgr = v; return this;}		// TEST:
 	public Xol_font_info		Gui_font() {return gui_font;} private final    Xol_font_info gui_font = new Xol_font_info(null, 0, FontStyleAdp_.Plain);
 	public byte[]				Fallback_bry() {return fallback_bry;}
 	public Xol_lang_itm			Fallback_bry_(byte[] v) {

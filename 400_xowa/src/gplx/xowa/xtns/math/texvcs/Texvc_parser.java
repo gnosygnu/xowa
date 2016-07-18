@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import gplx.core.btries.*;
 import gplx.xowa.xtns.math.texvcs.lxrs.*; import gplx.xowa.xtns.math.texvcs.tkns.*;
-class Texvc_parser {		
+class Texvc_parser {
+	private final    Btrie_rv trv = new Btrie_rv();
 	public void Parse(Texvc_ctx ctx, Texvc_root root, byte[] src) {
 		int src_len = src.length;
 		ctx.Clear();
@@ -30,13 +31,13 @@ class Texvc_parser {
 		int txt_bgn = pos, txt_uid = -1;
 		byte b = src[pos];
 		while (true) {
-			Object o = lxr_trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = lxr_trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null)				// no lxr found; char is txt; increment pos
 				pos++;
 			else {						// lxr found
 				Texvc_lxr lxr = (Texvc_lxr)o;
 				if (txt_bgn != pos)	txt_uid = Txt_calc(ctx, root, src, src_len, pos, txt_bgn, txt_uid);// chars exist between pos and txt_bgn; make txt_tkn;						
-				pos = lxr.Make_tkn(ctx, root, src, src_len, pos, lxr_trie.Match_pos());
+				pos = lxr.Make_tkn(ctx, root, src, src_len, pos, trv.Pos());
 				if (pos > 0) {txt_bgn = pos; txt_uid = -1;}	// reset txt_tkn
 			}
 			if (pos == end_pos) break;

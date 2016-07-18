@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xatr_whitelist_mgr {
+	private final    Hash_adp_bry grp_hash = Hash_adp_bry.cs();
+	private final    Btrie_rv trv = new Btrie_rv();
 	public boolean Chk(int tag_id, byte[] src, Mwh_atr_itm xatr) {
 		byte[] key_bry = xatr.Key_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
@@ -32,13 +34,13 @@ public class Xop_xatr_whitelist_mgr {
 			chk_bgn = 0;
 			chk_end = key_bry.length;
 		}
-		Object o = key_trie.Match_bgn(chk_bry, chk_bgn, chk_end);
+		Object o = key_trie.Match_at(trv, chk_bry, chk_bgn, chk_end);
 		if (o == null) return false;// unknown atr_key; EX: <b unknown=1/>
 		Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)o;
 		byte itm_key_tid = itm.Key_tid();
 		xatr.Key_tid_(itm_key_tid);
 		boolean rv	=	itm.Tags()[tag_id] == 1									// is atr allowed for tag
-				&& (itm.Exact() ? key_trie.Match_pos() == chk_end : true)	// if exact, check for exact; else always true
+				&& (itm.Exact() ? trv.Pos() == chk_end : true)	// if exact, check for exact; else always true
 			;
 		switch (itm_key_tid) {
 			case Mwh_atr_itm_.Key_tid__style:
@@ -52,79 +54,78 @@ public class Xop_xatr_whitelist_mgr {
 		return rv;
 	}
 	public Xop_xatr_whitelist_mgr Ini() {	// REF.MW:Sanitizer.php|setupAttributeWhitelist
-		Ini_grp("common"		, null		, "id", "class", "lang", "dir", "title", "style", "role");
-		Ini_grp("block" 		, "common"	, "align");
-		Ini_grp("tablealign"	, null		, "align", "char", "charoff", "valign");
-		Ini_grp("tablecell"		, null		, "abbr", "axis", "headers", "scope", "rowspan", "colspan", "nowrap", "width", "height", "bgcolor");		
+		Ini_grp("common"		, null			, "id", "class", "lang", "dir", "title", "style", "role");
+		Ini_grp("block" 		, "common"		, "align");
+		Ini_grp("tablealign"	, null			, "align", "char", "charoff", "valign");
+		Ini_grp("tablecell"		, null			, "abbr", "axis", "headers", "scope", "rowspan", "colspan", "nowrap", "width", "height", "bgcolor");		
 
-		Ini_nde(Xop_xnde_tag_.Tid__div        , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__center     , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__span       , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h1         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h2         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h3         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h4         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h5         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__h6         , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__em         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__strong     , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__cite       , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__dfn        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__code       , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__samp       , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__kbd        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__var        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__abbr       , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__blockquote , "common", "cite");
-		Ini_nde(Xop_xnde_tag_.Tid__sub        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__sup        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__p          , "block");
-		Ini_nde(Xop_xnde_tag_.Tid__br         , "id", "class", "title", "style", "clear");
-		Ini_nde(Xop_xnde_tag_.Tid__pre        , "common", "width");
-		Ini_nde(Xop_xnde_tag_.Tid__ins        , "common", "cite", "datetime");
-		Ini_nde(Xop_xnde_tag_.Tid__del        , "common", "cite", "datetime");
-		Ini_nde(Xop_xnde_tag_.Tid__ul         , "common", "type");
-		Ini_nde(Xop_xnde_tag_.Tid__ol         , "common", "type", "start");
-		Ini_nde(Xop_xnde_tag_.Tid__li         , "common", "type", "value");
-		Ini_nde(Xop_xnde_tag_.Tid__dl         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__dd         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__dt         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__table      , "common", "summary", "width", "border", "frame", "rules", "cellspacing", "cellpadding", "align", "bgcolor");
-		Ini_nde(Xop_xnde_tag_.Tid__caption    , "common", "align");
-		Ini_nde(Xop_xnde_tag_.Tid__thead      , "common", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__tfoot      , "common", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__tbody      , "common", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__colgroup   , "common", "span", "width", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__col        , "common", "span", "width", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__tr         , "common", "bgcolor", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__td         , "common", "tablecell", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__th         , "common", "tablecell", "tablealign");
-		Ini_nde(Xop_xnde_tag_.Tid__a          , "common", "href", "rel", "rev"); 
-		Ini_nde(Xop_xnde_tag_.Tid__img        , "common", "alt", "src", "width", "height");
-		Ini_nde(Xop_xnde_tag_.Tid__tt         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__b          , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__i          , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__big        , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__small      , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__strike     , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__s          , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__u          , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__font       , "common", "size", "color", "face");
-		Ini_nde(Xop_xnde_tag_.Tid__hr         , "common", "noshade", "size", "width");
-		Ini_nde(Xop_xnde_tag_.Tid__ruby       , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__rb         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__rt         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__rp         , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__math       , "class", "style", "id", "title");
-		Ini_nde(Xop_xnde_tag_.Tid__time		 , "class", "datetime");
-		Ini_nde(Xop_xnde_tag_.Tid__bdi		 , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__data		 , "common", "value");
-		Ini_nde(Xop_xnde_tag_.Tid__mark		 , "common");
-		Ini_nde(Xop_xnde_tag_.Tid__q			 , "common");
+		Ini_nde(Xop_xnde_tag_.Tid__div			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__center		, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__span			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h1			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h2			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h3			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h4			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h5			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__h6			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__em			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__strong		, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__cite			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__dfn			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__code			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__samp			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__kbd			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__var			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__abbr			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__blockquote	, "common", "cite");
+		Ini_nde(Xop_xnde_tag_.Tid__sub			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__sup			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__p			, "block");
+		Ini_nde(Xop_xnde_tag_.Tid__br			, "id", "class", "title", "style", "clear");
+		Ini_nde(Xop_xnde_tag_.Tid__pre			, "common", "width");
+		Ini_nde(Xop_xnde_tag_.Tid__ins			, "common", "cite", "datetime");
+		Ini_nde(Xop_xnde_tag_.Tid__del			, "common", "cite", "datetime");
+		Ini_nde(Xop_xnde_tag_.Tid__ul			, "common", "type");
+		Ini_nde(Xop_xnde_tag_.Tid__ol			, "common", "type", "start");
+		Ini_nde(Xop_xnde_tag_.Tid__li			, "common", "type", "value");
+		Ini_nde(Xop_xnde_tag_.Tid__dl			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__dd			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__dt			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__table		, "common", "summary", "width", "border", "frame", "rules", "cellspacing", "cellpadding", "align", "bgcolor");
+		Ini_nde(Xop_xnde_tag_.Tid__caption		, "common", "align");
+		Ini_nde(Xop_xnde_tag_.Tid__thead		, "common", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__tfoot		, "common", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__tbody		, "common", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__colgroup		, "common", "span", "width", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__col			, "common", "span", "width", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__tr			, "common", "bgcolor", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__td			, "common", "tablecell", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__th			, "common", "tablecell", "tablealign");
+		Ini_nde(Xop_xnde_tag_.Tid__a			, "common", "href", "rel", "rev"); 
+		Ini_nde(Xop_xnde_tag_.Tid__img			, "common", "alt", "src", "width", "height");
+		Ini_nde(Xop_xnde_tag_.Tid__tt			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__b			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__i			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__big			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__small		, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__strike		, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__s			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__u			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__font			, "common", "size", "color", "face");
+		Ini_nde(Xop_xnde_tag_.Tid__hr			, "common", "noshade", "size", "width");
+		Ini_nde(Xop_xnde_tag_.Tid__ruby			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__rb			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__rt			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__rp			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__math			, "class", "style", "id", "title");
+		Ini_nde(Xop_xnde_tag_.Tid__time			, "class", "datetime");
+		Ini_nde(Xop_xnde_tag_.Tid__bdi			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__data			, "common", "value");
+		Ini_nde(Xop_xnde_tag_.Tid__mark			, "common");
+		Ini_nde(Xop_xnde_tag_.Tid__q			, "common");
 		Ini_all_loose("data");
 		return this;
 	}
-	private Hash_adp_bry grp_hash = Hash_adp_bry.cs();
 	private void Ini_grp(String key_str, String base_grp, String... cur_itms) {
 		byte[][] itms = Bry_.Ary(cur_itms);
 		if (base_grp != null)
@@ -196,11 +197,11 @@ public class Xop_xatr_whitelist_mgr {
 		}
 		int pos = chk_bgn;
 		while (pos < chk_end) {
-			Object o = style_trie.Match_bgn(chk_bry, pos, chk_end);
+			Object o = style_trie.Match_at(trv, chk_bry, pos, chk_end);
 			if (o == null)
 				++pos;
 			else {
-				pos = style_trie.Match_pos();
+				pos = trv.Pos();
 				byte style_tid = ((Byte_obj_val)o).Val();
 				switch (style_tid) {
 					case Style_expression:
@@ -243,7 +244,7 @@ public class Xop_xatr_whitelist_mgr {
 		return Byte_ascii.Null; 
 	}
 	static final byte Style_expression = 0, Style_filter = 1, Style_accelerator = 2, Style_url = 3, Style_urls = 4, Style_comment = 5, Style_image = 6, Style_image_set = 7;
-	private static Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript
+	private static final    Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript
 	.Add_str_byte("expression"	, Style_expression)
 	.Add_str_byte("filter"		, Style_filter)
 	.Add_str_byte("accelerator"	, Style_accelerator)

@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.langs.mustaches.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.files.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*;
 public class Pgbnr_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_pagebanner;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pgbnr_func().Name_(name);}
@@ -85,18 +86,24 @@ public class Pgbnr_func extends Pf_func_base {
 					}
 				}
 			}
-			if (tid == -1) Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown arg type; page=~{0} key=~{1} val=~{2}", page.Url_bry_safe(), key, val);
+			if (tid == -1) Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown arg type; page=~{0} key=~{1} val=~{2}", page.Ttl().Full_db(), key, val);
 		}
 
 		byte[] banner_name = Eval_argx(ctx, src, caller, self);
 		Xoa_ttl banner_ttl = wiki.Ttl_parse(banner_name); // NOTE: MW also creates title to auto-register page and image in imagelinks
+		if (banner_ttl == null)		// if ttl is invalid, get it from wikidata; PAGE:en.v:Diving_the_Cape_Peninsula_and_False_Bay/Whale_Rock; DATE:2016-07-12
+			banner_ttl = Get_wikidata_banner(wiki.Appe(), wiki, wiki.Xtn_mgr().Xtn_pgbnr().Cfg(), page.Ttl());
+		if (banner_ttl == null) {	// if ttl is still invalid, exit now else will fail with nullref below; PAGE:en.v:Peterborough (New Hampshire); DATE:2016-07-12
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "banner file is invalid; page=~{0} banner=~{1}", page.Url_bry_safe(), banner_name);
+			return;
+		}
 		Xof_file_itm banner_file_itm = File__make_tkn(ctx, Xop_file_logger_.Tid__pgbnr_main, banner_ttl, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null);
 
 		Pgbnr_itm itm = new Pgbnr_itm();
 		itm.Init_from_wtxt(banner_ttl, banner_file_itm, tooltip, title, bottomtoc, toc, data_pos_x, data_pos_y, origin_x, icons_list == null ? Pgbnr_icon.Ary_empty : (Pgbnr_icon[])icons_list.To_ary_and_clear(Pgbnr_icon.class));
 		page.Html_data().Xtn_pgbnr_(itm);
 		page.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();	// register css / js during parse stage
-		page.Hdr_mgr().Toc_manual_();	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
+		page.Wtxt().Toc().Flag__toc_y_();	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
 	}
 	public static void Add_banner(Bry_bfr bfr, Xoae_page wpg, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_itm itm) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_app app = wiki.Appe();
@@ -147,10 +154,11 @@ public class Pgbnr_func extends Pf_func_base {
 		if (hctx.Mode_is_hdump()) {
 			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_tag(tmp_bfr, true);
 			toc_html = tmp_bfr.To_bry_and_clear();
-			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, Byte_ascii.Colon_bry, banner_ttl.Full_db());
+			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, Byte_ascii.Colon_bry
+				, Gfo_url_encoder_.Href.Encode(banner_ttl.Full_db()));	// NOTE: must encode so "'" becomes "%27", not "&#39;"; PAGE:en.v:'s-Hertogenbosch; DATE:2016-07-12
 		}
 		else {
-			wiki.Html_mgr().Toc_mgr().Html(ctx.Page(), gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic, tmp_bfr, true);
+			ctx.Page().Html_data().Toc_mgr().To_html(tmp_bfr, Xoh_wtr_ctx.Basic, true);
 			toc_html = tmp_bfr.To_bry_and_clear();
 		}
 		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html);

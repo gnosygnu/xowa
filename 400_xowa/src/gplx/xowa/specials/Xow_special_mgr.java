@@ -57,12 +57,12 @@ public class Xow_special_mgr {
 		hash.Add_bry_obj(Xou_history_mgr.Ttl_name						, page_history);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__page_history			, page_history2);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__nearby					, page_nearby);
-		hash.Add_str_obj(Xow_special_meta_.Ttl__my_language			, page_mylanguage);
+		hash.Add_str_obj(Xow_special_meta_.Ttl__my_language				, page_mylanguage);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__item_by_title			, page_itemByTitle);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__statistics				, page_statistics);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__move_page				, page_movePage);
-		hash.Add_str_obj(Xow_special_meta_.Ttl__system_data			, page_system_data);
-		hash.Add_str_obj(Xow_special_meta_.Ttl__default_tab			, page_default_tab);
+		hash.Add_str_obj(Xow_special_meta_.Ttl__system_data				, page_system_data);
+		hash.Add_str_obj(Xow_special_meta_.Ttl__default_tab				, page_default_tab);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__popup_history			, page_popup_history);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__bookmarks				, page_bmk);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__diag					, page_diag);

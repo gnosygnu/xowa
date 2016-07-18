@@ -111,11 +111,11 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
-			if (	gen_html 
+			if (	gen_html
 				&&	page.Redirect().Itms__len() == 0)	// don't generate html for redirected pages
 				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_page_.Tid_read);
 			if (gen_hdump)
-				hdump_bldr.Insert(page.Root_(root));
+				hdump_bldr.Insert(ctx, page.Root_(root));
 			root.Clear();
 		}
 	}

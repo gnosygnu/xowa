@@ -19,6 +19,7 @@ package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*;
 class Gfs_parser_ctx {
 	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
+	public Btrie_rv Trie_rv() {return trie_rv;} private final    Btrie_rv trie_rv = new Btrie_rv();
 	public Gfs_nde Root() {return root;} Gfs_nde root = new Gfs_nde();
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} private int src_len;

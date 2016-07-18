@@ -105,7 +105,7 @@ public class Prefs_mgr implements Gfo_invk {
 	private byte[] Parse_wikitext_to_html(byte[] src) {
 		Xowe_wiki wiki = app.Usere().Wiki();		// NOTE: this limits prefs to home_wiki only
 		Xop_root_tkn root = new Xop_root_tkn();
-		Xop_ctx ctx = Xop_ctx.new_main_page(wiki);	// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
+		Xop_ctx ctx = Xop_ctx.New__top(wiki);	// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
 		wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), src, 0);
 		return root.Data_mid();			
 	}

@@ -72,12 +72,12 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		full_bfr.Mkr_rls();
 		page.Html_data().Indicators().Enabled_(Bool_.Y);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_literal)
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else {
 			if (xtn_root == null) return;	// xtn_root is null when Xtn_parse exits early; occurs for recursion; DATE:2014-05-21
-			html_wtr.Write_tkn(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);
+			html_wtr.Write_tkn_to_html(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);
 		}
 	}
 	private boolean Init_vars(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xop_xnde_tkn xnde) {
@@ -140,7 +140,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] rv = Bry_.Empty;
 		try {
-			wiki.Html_mgr().Html_wtr().Write_tkn(full_bfr, ctx, Xoh_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
+			wiki.Html_mgr().Html_wtr().Write_tkn_to_html(full_bfr, ctx, Xoh_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
 			rv = full_bfr.To_bry_and_clear();
 		}
 		catch (Exception e) {
@@ -363,10 +363,10 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return full_bfr.To_bry_and_clear();
 	}
 	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
-		Xop_ctx tmp_ctx = Xop_ctx.new_sub_page_(wiki, ctx, lst_page_regy);
+		Xop_ctx tmp_ctx = Xop_ctx.New__sub__reuse_lst(wiki, ctx, lst_page_regy);
 		tmp_ctx.Page().Ttl_(ctx.Page().Ttl());					// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
 		tmp_ctx.Lnki().File_logger_(Xop_file_logger_.Noop);	// NOTE: set file_wkr to null, else items will be double-counted
-		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_tmpl);
+		tmp_ctx.Parse_tid_(Xop_parser_tid_.Tid__defn);
 		Xop_parser tmp_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
 		Xop_root_tkn rv = tmp_ctx.Tkn_mkr().Root(wikitext);
 		tmp_parser.Parse_text_to_wdom(rv, tmp_ctx, tmp_ctx.Tkn_mkr(), wikitext, Xop_parser_.Doc_bgn_bos);

@@ -46,7 +46,7 @@ public class Tabber_xnde implements Xox_xnde {
 			else {
 				tab_head = Bry_.Mid(tab_itm, 0, eq_pos);
 				tab_body = Bry_.Mid(tab_itm, eq_pos + 1, tab_itm_len);
-				tab_body = Xop_parser_.Parse_text_to_html(wiki, ctx.Page(), ctx.Page().Ttl(), tab_body, false);
+				tab_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), tab_body, false);
 			}
 			tab_itms_list.Add(new Tabber_tab_itm(Bool_.N, tab_head, tab_body));
 		}
@@ -55,7 +55,7 @@ public class Tabber_xnde implements Xox_xnde {
 		ctx.Page().Html_data().Head_mgr().Itm__tabber().Enabled_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (tab_itms_ary != null) Tabber_tab_itm.Write(bfr, id, tab_itms_ary);
 	}
 

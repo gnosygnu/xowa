@@ -39,7 +39,7 @@ public class Xop_comm_lxr implements Xop_lxr {
 	}
 	private static int Trim_ws_if_entire_line_is_commment(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, int lhs_end, int rhs_bgn) {// REF.MW:Preprocessor_DOM.php|preprocessToXml|handle comments; DATE:2014-02-24
 		if (	ctx.Tid_is_popup()
-			&&	ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki		// note that only popup parse can generate <!-- --> that makes it to wtxt
+			&&	ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt		// note that only popup parse can generate <!-- --> that makes it to wtxt
 			&&	Bry_.Match(src, lhs_end, rhs_bgn, Xowa_skip_text_bry)	// <!--XOWA_SKIP-->
 			)
 			return cur_pos;	// in popup mode only do not gobble trailing \n; PAGE:en.w:Gwynedd; DATE:2014-07-01
@@ -89,10 +89,10 @@ public class Xop_comm_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.NewLine(nl_rhs - 1, nl_rhs, Xop_nl_tkn.Tid_char, 1).Ignore_y_()); // add tkn for nl_rhs, but mark as ignore; needed for multiple comment nls; EX: "<!-- -->\n<!-- -->\n;"; DATE:2014-02-24
 		return nl_rhs;
 	}
-	public static final byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
-	private static final int End_len = End_ary.length;
-	public static final Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
-	private static final String Xowa_skip_text_str = "XOWA_SKIP";
-	private static final byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
-	public static final byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
+	public static final    byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
+	private static final    int End_len = End_ary.length;
+	public static final    Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
+	private static final    String Xowa_skip_text_str = "XOWA_SKIP";
+	private static final    byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
+	public static final    byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
 }

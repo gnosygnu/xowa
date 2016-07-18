@@ -56,7 +56,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			ctx.Page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_ref(hctx, bfr, src, xnde);
 	}
 	private static final    Ref_nde[] Ary_empty = new Ref_nde[0];

@@ -19,9 +19,9 @@ package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.intls.*;
 public class Xol_case_mgr_ {
         @gplx.Internal protected static Xol_case_mgr new_() {return new Xol_case_mgr(Gfo_case_mgr_.Tid_custom);}
-	public static Xol_case_mgr A7()	{if (mgr_a7 == null) mgr_a7 = new_mgr_a7_(); return mgr_a7;} private static Xol_case_mgr mgr_a7;
-	public static Xol_case_mgr U8()	{if (mgr_u8 == null) mgr_u8 = new_mgr_u8_(); return mgr_u8;} private static Xol_case_mgr mgr_u8;
-	private static Xol_case_mgr new_mgr_a7_() {
+	public static Xol_case_mgr A7()	{if (mgr_a7 == null) mgr_a7 = New__a7(); return mgr_a7;} private static Xol_case_mgr mgr_a7;
+	public static Xol_case_mgr U8()	{if (mgr_u8 == null) mgr_u8 = New__u8(); return mgr_u8;} private static Xol_case_mgr mgr_u8;
+	private static Xol_case_mgr New__a7() {
 		Xol_case_mgr rv = new Xol_case_mgr(Gfo_case_mgr_.Tid_a7);
 		Xol_case_itm[] itms = new Xol_case_itm[]
 { Xol_case_itm_.new_(0, "a", "A")
@@ -54,7 +54,7 @@ public class Xol_case_mgr_ {
 		rv.Add_bulk(itms);
 		return rv;
 	}
-	private static Xol_case_mgr new_mgr_u8_() {
+	private static Xol_case_mgr New__u8() {
 		Xol_case_mgr rv = new Xol_case_mgr(Gfo_case_mgr_.Tid_u8);
 		Xol_case_itm[] itms = new Xol_case_itm[]
 { Xol_case_itm_.new_(Xol_case_itm_.Tid_both, Bry_.New_by_ints(97), Bry_.New_by_ints(65)) // a -> A -- LATIN CAPITAL LETTER A

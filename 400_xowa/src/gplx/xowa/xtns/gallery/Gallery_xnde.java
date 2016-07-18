@@ -70,7 +70,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);			// cancel pre for <gallery>; DATE:2014-03-11
 		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_gallery, src, xnde);
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		try		{Gallery_mgr_wtr.Write_mgr(bfr, gallery_mgr, ctx.Wiki(), ctx.Page(), ctx, hctx, src, this);}
 		catch	(Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_log(e));}
 	}

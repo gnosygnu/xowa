@@ -36,7 +36,7 @@ public class Xod_page_mgr {
 
 		// load page data
 		Xoh_page hpg = new Xoh_page();
-		hpg.Init(wiki, Xoa_url.New(wiki, ttl), ttl, 1);
+		hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, 1);
 		rv.Init_by_hpg(hpg);
 		wiki.Html__hdump_mgr().Load_mgr().Load(hpg, ttl);
 		Load_sections(rv, hpg);
@@ -57,7 +57,7 @@ public class Xod_page_mgr {
 
 		// generate special
 		Xoh_page page = new Xoh_page();
-		page.Init(wiki, Xoa_url.New(wiki, ttl), ttl, 1);	// NOTE: init page to set url, ttl; DATE:2016-06-23
+		page.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, 1);	// NOTE: init page to set url, ttl; DATE:2016-06-23
 		try {proto.Special__clone().Special__gen(wiki, page, url, ttl);}
 		catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e)); return rv;}
 

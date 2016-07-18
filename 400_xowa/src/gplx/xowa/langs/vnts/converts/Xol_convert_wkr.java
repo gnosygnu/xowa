@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.core.btries.*; import gplx.core.intls.*;
 public class Xol_convert_wkr {
-	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs(); private final    Btrie_rv trv = new Btrie_rv();
 	public Xol_convert_wkr(byte[] key) {this.key = key;}
-	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Key() {return key;} private final    byte[] key;
 	public void Add(byte[] src, byte[] trg) {trie.Add_obj(src, trg);}	// called by -{H}-
 	public void Del(byte[] src)				{trie.Del(src);}			// called by -{-}-
 	public boolean Convert_text(Bry_bfr bfr, byte[] src) {return Convert_text(bfr, src, 0, src.length);}
@@ -29,7 +29,7 @@ public class Xol_convert_wkr {
 		boolean matched = false;
 		while (pos < end) {
 			byte b = src[pos];
-			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
+			Object o = trie.Match_at_w_b0(trv, b, src, pos, end);
 			if (o == null) {										// no match; skip to next char
 				int char_len = Utf8_.Len_of_char_by_1st_byte(b);	// NOTE: must increment by char_len, not +1
 				if (matched) {
@@ -46,7 +46,7 @@ public class Xol_convert_wkr {
 					matched = true;
 				}
 				bfr.Add((byte[])o);
-				pos = trie.Match_pos();
+				pos = trv.Pos();
 			}
 		}
 		if (!matched) bfr.Add_mid(src, bgn, end);	// no convert; make sure to add back src, else bfr will be blank

@@ -30,7 +30,7 @@ public class Xoh_hzip_fxt {
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
 		wiki.Html__hdump_mgr().Init_by_db(parser_fxt.Wiki());
 		this.hzip_mgr = parser_fxt.Wiki().Html__hdump_mgr().Hzip_mgr();
-		hpg.Init(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
+		hpg.Ctor_by_hview(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 	}
 	public Xow_wiki Wiki() {return wiki;}
 	public Xoa_page Page() {return hpg;}

@@ -22,7 +22,7 @@ public class Http_request_parser {
 	private int type, content_length;
 	private byte[] url, protocol, host, user_agent, accept, accept_language, accept_encoding, x_requested_with, cookie, referer, content_type, content_type_boundary, connection, pragma, cache_control, origin;
 	private Http_post_data_hash post_data_hash;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255); private final    Btrie_rv trv = new Btrie_rv();
 	private final    Http_server_wtr server_wtr; private final    boolean log;
 	public Http_request_parser(Http_server_wtr server_wtr, boolean log) {this.server_wtr = server_wtr; this.log = log;}
 	public void Clear() {
@@ -59,12 +59,12 @@ public class Http_request_parser {
 					}
 					break;	// assume form_data sends POST request
 				}
-				Object o = trie.Match_bgn(line, 0, line_len);
+				Object o = trie.Match_at(trv, line, 0, line_len);
 				if (o == null) {
 					server_wtr.Write_str_w_nl(String_.Format("http.request.parser; unknown line; line={0} request={1}", line_str, To_str()));
 					continue;
 				}
-				int val_bgn = Bry_find_.Find_fwd_while_ws(line, trie.Match_pos(), line_len);	// skip ws after key; EX: "Host: "
+				int val_bgn = Bry_find_.Find_fwd_while_ws(line, trv.Pos(), line_len);	// skip ws after key; EX: "Host: "
 				int tid = ((Int_obj_val)o).Val();
 				switch (tid) {
 					case Tid_get:

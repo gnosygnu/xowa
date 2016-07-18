@@ -36,9 +36,9 @@ class Xoctg_fmtr_all {
 	private void Ctor(byte tid) {
 		this.tid = tid;
 		switch (tid) {
-			case Xoa_ctg_mgr.Tid_subc: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_subc_label ; msg_id_stats = Xol_msg_itm_.Id_ctg_subc_count; div_id = Div_id_subc; url_arg_bgn = Url_arg_subc_bgn; url_arg_end = Url_arg_subc_end; this.fmtr_itm = Xoctg_fmtr_itm_subc.Instance; break;
-			case Xoa_ctg_mgr.Tid_page: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_page_header; msg_id_stats = Xol_msg_itm_.Id_ctg_page_count; div_id = Div_id_page; url_arg_bgn = Url_arg_page_bgn; url_arg_end = Url_arg_page_end; this.fmtr_itm = Xoctg_fmtr_itm_page.Instance; break;
-			case Xoa_ctg_mgr.Tid_file: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_file_header; msg_id_stats = Xol_msg_itm_.Id_ctg_file_count; div_id = Div_id_file; url_arg_bgn = Url_arg_file_bgn; url_arg_end = Url_arg_file_end; this.fmtr_itm = Xoctg_fmtr_itm_file.Instance; break;
+			case Xoa_ctg_mgr.Tid_subc: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_subc_label ; msg_id_stats = Xol_msg_itm_.Id_ctg_subc_count; div_id = Div_id_subc; url_arg_bgn = Url_arg_subc_bgn; url_arg_end = Url_arg_subc_end; this.fmtr_itm = new Xoctg_fmtr_itm_subc(); break;
+			case Xoa_ctg_mgr.Tid_page: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_page_header; msg_id_stats = Xol_msg_itm_.Id_ctg_page_count; div_id = Div_id_page; url_arg_bgn = Url_arg_page_bgn; url_arg_end = Url_arg_page_end; this.fmtr_itm = new Xoctg_fmtr_itm_page(); break;
+			case Xoa_ctg_mgr.Tid_file: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_file_header; msg_id_stats = Xol_msg_itm_.Id_ctg_file_count; div_id = Div_id_file; url_arg_bgn = Url_arg_file_bgn; url_arg_end = Url_arg_file_end; this.fmtr_itm = new Xoctg_fmtr_itm_file(); break;
 			default: throw Err_.new_unhandled(tid);
 		}
 		html_all.Fmt_(String_.Concat_lines_nl_skip_last
@@ -118,7 +118,7 @@ class Xoctg_fmtr_all {
 	private void Html_nav_bry(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp, boolean fill_at_bgn) {
 		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xoae_app app = wiki.Appe();
-		app.Html__href_wtr().Build_to_bfr(href_bfr, app, Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
+		wiki.Html__href_wtr().Build_to_bfr(href_bfr, app, Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
 		byte[] arg_idx_lbl = null; byte[] arg_sortkey = null;
 		if (fill_at_bgn) {
 			arg_idx_lbl = url_arg_bgn;

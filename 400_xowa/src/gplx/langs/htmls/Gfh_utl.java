@@ -119,9 +119,10 @@ public class Gfh_utl {
 		if (bry == null) return null;
 		boolean dirty = write_to_bfr ? true : false;	// if write_to_bfr, then mark true, else bfr.Add_mid(bry, 0, i); will write whole bry again
 		int pos = bgn;
+		Btrie_rv trv = new Btrie_rv();
 		while (pos < end) {
 			byte b = bry[pos];
-			Object o = unescape_trie.Match_bgn_w_byte(b, bry, pos, end);
+			Object o = unescape_trie.Match_at_w_b0(trv, b, bry, pos, end);
 			if (o == null) {
 				if (dirty || write_to_bfr)
 					bfr.Add_byte(b);
@@ -149,7 +150,7 @@ public class Gfh_utl {
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);
 				}
-				pos = unescape_trie.Match_pos();
+				pos = trv.Pos();
 			}
 		}
 		if (write_to_bfr)

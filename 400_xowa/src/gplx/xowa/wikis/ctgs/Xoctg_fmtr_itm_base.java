@@ -61,7 +61,7 @@ abstract class Xoctg_fmtr_itm_base implements gplx.core.brys.Bfr_arg, Xoctg_fmtr
 		grp_end_at_col = true;
 	}
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xowe_wiki wiki, Xoh_wtr_ctx hctx, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
-		byte[] itm_href = wiki.App().Html__href_wtr().Build_to_bry(wiki, ttl);
+		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		byte[] itm_full_ttl = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(ttl.Full_txt_w_ttl_case());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 		byte[] itm_atr_cls = hctx.Mode_is_hdump() ? Bry_.Empty : Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Bry_fmtr fmtr = itm.Missing() ? html_itm_missing : html_itm;

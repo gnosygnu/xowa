@@ -19,9 +19,10 @@ package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.langs.vnts.*;
 public class Xoh_href_parser {
+	private final    Btrie_rv trv = new Btrie_rv();
 	public void Parse_as_url(Xoa_url rv, byte[] raw, Xowe_wiki wiki, byte[] cur_page) {
 		int bgn = 0;
-		Object seg_obj = btrie.Match_bgn(raw, bgn, raw.length);		// match /wiki/ or /site/ or /xcmd/
+		Object seg_obj = btrie.Match_at(trv, raw, bgn, raw.length);		// match /wiki/ or /site/ or /xcmd/
 		if (seg_obj == null) {
 			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 			if (vnt_mgr.Enabled() && raw[0] == Byte_ascii.Slash) {
@@ -34,13 +35,13 @@ public class Xoh_href_parser {
 		else {										// something matched
 			switch (((Byte_obj_val)seg_obj).Val()) {
 				case Seg_xcmd_tid:									// convert "/xcmd/a" to "xowa-cmd:a"
-					raw = Bry_.Add(Gfo_protocol_itm.Bry_xcmd, Bry_.Mid(raw, btrie.Match_pos()));
+					raw = Bry_.Add(Gfo_protocol_itm.Bry_xcmd, Bry_.Mid(raw, trv.Pos()));
 					break;
 				case Seg_wiki_tid:	// add domain_bry; NOTE: needed for url-like pages; EX:"/wiki/http://A"; PAGE:esolangs.org/wiki/Language_list; DATE:2015-11-14
 					raw = Bry_.Add(wiki.Domain_bry(), raw);
 					break;
 				case Seg_site_tid:	// skip "/site"
-					bgn = btrie.Match_pos();
+					bgn = trv.Pos();
 					break;
 				default:
 					break;

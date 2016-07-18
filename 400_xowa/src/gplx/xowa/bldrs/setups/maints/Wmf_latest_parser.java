@@ -19,6 +19,7 @@ package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import
 import gplx.core.btries.*; import gplx.core.ios.*;
 public class Wmf_latest_parser {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
+	private final    Btrie_rv trv = new Btrie_rv();
 	public int Count() {return hash.Count();}
 	public Wmf_latest_itm Get_at(int i)		{return (Wmf_latest_itm)hash.Get_at(i);}
 	public Wmf_latest_itm Get_by(byte[] k)	{return (Wmf_latest_itm)hash.Get_by(k);}
@@ -47,7 +48,7 @@ public class Wmf_latest_parser {
 			date_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, date_bgn, src_len); if (date_bgn == Bry_find_.Not_found) {Gfo_usr_dlg_.Instance.Warn_many("", "", "date_bgn not found"); break;}
 			int date_end = Bry_find_.Find_fwd(src, date_end_bry, date_bgn, src_len);
 			byte[] date_bry = Bry_.Mid(src, date_bgn, date_end);
-			DateAdp date = DateAdp_.parse_fmt(String_.new_a7(Replace_or(tmp_bfr, date_trie, date_bry, 3, date_or)), "dd-MM-yyyy HH:mm");
+			DateAdp date = DateAdp_.parse_fmt(String_.new_a7(Replace_or(tmp_bfr, date_trie, trv, date_bry, 3, date_or)), "dd-MM-yyyy HH:mm");
 			int size_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_find_.Not_found) {Gfo_usr_dlg_.Instance.Warn_many("", "", "size_bgn not found"); break;}
 			size_end = Bry_find_.Find_fwd(src, Byte_ascii.Cr, size_bgn, src_len);
 			byte[] size_bry = Bry_.Mid(src, size_bgn, size_end);
@@ -56,12 +57,12 @@ public class Wmf_latest_parser {
 			hash.Add(name, itm);
 		}
 	}
-	private static byte[] Replace_or(Bry_bfr tmp_bfr, Btrie_slim_mgr trie, byte[] src, int pos, byte[] or) {
+	private static byte[] Replace_or(Bry_bfr tmp_bfr, Btrie_slim_mgr trie, Btrie_rv trv, byte[] src, int pos, byte[] or) {
 		int src_len = src.length;
-		Object o = trie.Match_bgn(src, pos, src_len); if (o == null) return or;
+		Object o = trie.Match_at(trv, src, pos, src_len); if (o == null) return or;
 		tmp_bfr.Add_mid(src, 0, pos);
 		tmp_bfr.Add((byte[])o);
-		tmp_bfr.Add_mid(src, trie.Match_pos(), src_len);
+		tmp_bfr.Add_mid(src, trv.Pos(), src_len);
 		return tmp_bfr.To_bry_and_clear();
 	}
 }

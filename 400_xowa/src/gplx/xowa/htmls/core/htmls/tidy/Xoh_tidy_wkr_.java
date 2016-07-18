@@ -19,7 +19,7 @@ package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; impo
 public class Xoh_tidy_wkr_ {
 	public static final byte Tid_null = 0, Tid_tidy = 1, Tid_jtidy = 2;
 	public static final String Key_null = "null", Key_tidy = "tidy", Key_jtidy = "jtidy";
-	public static final Xoh_tidy_wkr Wkr_null = new Xoh_tidy_wkr_null();
+	public static final    Xoh_tidy_wkr Wkr_null = new Xoh_tidy_wkr_null();
 	public static String Xto_key(byte v) {
 		switch (v) {
 			case Tid_null:							return Key_null;
@@ -39,5 +39,6 @@ public class Xoh_tidy_wkr_ {
 class Xoh_tidy_wkr_null implements Xoh_tidy_wkr {
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_null;}
 	public void Indent_(boolean v) {}
+	public void Init_by_app(Xoae_app app) {}
 	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {}
 }

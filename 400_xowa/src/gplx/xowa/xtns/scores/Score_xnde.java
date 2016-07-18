@@ -57,7 +57,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		bfr.Add(Xoh_consts.Pre_end);
 	}
 	private static final    gplx.core.security.Hash_algo sha1_hash = gplx.core.security.Hash_algo_.New__sha1();
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}

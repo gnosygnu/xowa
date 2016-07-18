@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
-	Btrie_fast_mgr trie = expression_();
+	private Btrie_fast_mgr trie = expression_(); private final    Btrie_rv trv = new Btrie_rv();
 	Val_stack val_stack = new Val_stack();
 	Func_tkn_stack prc_stack = new Func_tkn_stack();
 	public static final    Decimal_adp Null_rslt = null;
@@ -46,7 +46,7 @@ public class Pfunc_expr_shunter {
 			while (true) {
 				// can't think of a way for this to happen; note that operators will automatically push values/operators off stack that are lower; can't get up to 100 
 				// if (val_stack.Len() > 100 || prc_stack.Len() > 100) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_err__stack_exhausted);
-				Object o = trie.Match_bgn_w_byte(cur_byt, src, cur_pos, src_len);
+				Object o = trie.Match_at_w_b0(trv, cur_byt, src, cur_pos, src_len);
 				int bgn_pos = cur_pos;
 				if (o == null) {	// letter or unknown symbol
 					while (cur_pos < src_len) {
@@ -60,7 +60,7 @@ public class Pfunc_expr_shunter {
 				}
 				else {
 					Expr_tkn t = (Expr_tkn)o;
-					cur_pos = trie.Match_pos();
+					cur_pos = trv.Pos();
 					switch (t.Tid()) {
 						case Expr_tkn_.Tid_space: break;
 						case Expr_tkn_.Tid_number:

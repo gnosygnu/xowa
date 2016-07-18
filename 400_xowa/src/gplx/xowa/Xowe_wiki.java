@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.users.*; import gplx.xowa.htmls.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.wikis.dbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.exts.*;		
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.ctgs.*;
@@ -101,6 +101,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
 	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
+	public Xoh_href_wtr				Html__href_wtr() {return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
 	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
@@ -129,7 +130,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private Xow_msg_mgr msg_mgr;
 	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
 	public Bfmtr_eval_wiki			Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
-	public Bry_bfr_mkr				Utl__bfr_mkr() {return app.Utl__bfr_mkr();}
+	public Bry_bfr_mkr				Utl__bfr_mkr() {return utl__bry_bfr_mkr;} private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public byte[]					Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
 	public void						Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
 	public byte[]					Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private int wdata_wiki_tid;

@@ -25,7 +25,7 @@ public class Xoh_toc_data implements Xoh_data_itm {
 	public byte		Toc_mode()			{return toc_mode;} private byte toc_mode;
 	public void Clear() {
 		this.src_bgn = this.src_end = -1;
-		this.toc_mode = Toc_mode__basic;
+		this.toc_mode = Toc_mode__none;
 	}
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag toc_lhs, Gfh_tag unused) {
 		this.Clear();
@@ -42,5 +42,5 @@ public class Xoh_toc_data implements Xoh_data_itm {
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_toc_data rv = new Xoh_toc_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 
-	public static final byte Toc_mode__basic = 0, Toc_mode__pgbnr = 1;
+	public static final byte Toc_mode__basic = 0, Toc_mode__pgbnr = 1, Toc_mode__none = 2;	// SERIALIZED
 }

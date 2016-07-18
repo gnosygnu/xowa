@@ -19,6 +19,7 @@ package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.btries.*;
 public class Xol_grammar_ru implements Xol_grammar {
 	static final byte Genitive_null = 0, Genitive_bnkn = 1, Genitive_Bnkn = 26, Genitive_b = 3, Genitive_nr = 4, Genitive_ka = 5, Genitive_tn = 6, Genitive_abl = 7, Genitive_hnk = 8;
+	private final    Btrie_rv trv = new Btrie_rv();
 	private static Btrie_bwd_mgr Genitive_trie;
 	private static Btrie_bwd_mgr genitive_trie_() {
 		Btrie_bwd_mgr rv = new Btrie_bwd_mgr(false);
@@ -44,11 +45,11 @@ public class Xol_grammar_ru implements Xol_grammar {
 		switch (tid) {
 			case Xol_grammar_.Tid_genitive:		{
 				if (Genitive_trie == null) Genitive_trie = genitive_trie_(); 
-				Object o = Genitive_trie.Match_bgn(word, word.length - 1, -1);
+				Object o = Genitive_trie.Match_at(trv, word, word.length - 1, -1);
 				if (o != null) {
 					Xol_grammar_ru_genitive_itm itm = (Xol_grammar_ru_genitive_itm)o;
 					if (!itm.Repl_is_noop()) {
-						bfr.Add_mid(word, 0, Genitive_trie.Match_pos() + 1);
+						bfr.Add_mid(word, 0, trv.Pos() + 1);
 						bfr.Add(itm.Repl());
 						return true;
 					}

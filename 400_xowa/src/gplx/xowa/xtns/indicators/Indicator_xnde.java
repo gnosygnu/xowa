@@ -31,11 +31,11 @@ public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
-		this.html = Xop_parser_.Parse_text_to_html(wiki, ctx.Page(), ctx.Page().Ttl(), Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
+		this.html = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		Indicator_html_bldr html_bldr = ctx.Page().Html_data().Indicators();
 		if (this.name != null) html_bldr.Add(this);	// NOTE: must do null-check b/c Add will use Name as key for hashtable
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (this.name == null) bfr.Add_str_a7("Error: Page status indicators' name attribute must not be empty.");	
 	}
 	private static final byte Xatr_name = 0;

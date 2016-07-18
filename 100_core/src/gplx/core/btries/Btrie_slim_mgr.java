@@ -31,7 +31,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		while (true) {
 			Btrie_slim_itm nxt = cur.Ary_find(b);
 			if (nxt == null) {
-				rv.Init(cur_pos, rv_obj);			// nxt does not hav b; return rv_obj;
+				rv.Init(rv_pos, rv_obj);			// nxt does not have b; return rv_obj;
 				return rv_obj;
 			}
 			++cur_pos;
@@ -77,6 +77,14 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	}
 	public byte Match_byte_or(byte[] src, int bgn, int end, byte or) {
 		Object rv_obj = Match_bgn(src, bgn, end);
+		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
+	}
+	public byte Match_byte_or(Btrie_rv trv, byte b, byte[] src, int bgn, int end, byte or) {
+		Object rv_obj = Match_at_w_b0(trv, b, src, bgn, end);
+		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
+	}
+	public byte Match_byte_or(Btrie_rv trv, byte[] src, int bgn, int end, byte or) {
+		Object rv_obj = Match_at(trv, src, bgn, end);
 		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
 	}
 	public Btrie_slim_mgr Add_bry_tid(byte[] bry, byte tid)			{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(tid));}

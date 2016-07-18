@@ -108,7 +108,7 @@ class Xoa_site_cfg_mgr_fxt {
 	public void Test_extensiontags_y(String... ary) {Test_extensiontags(Bool_.Y, ary);}
 	public void Test_extensiontags_n(String... ary) {Test_extensiontags(Bool_.N, ary);}
 	public void Test_extensiontags(boolean expd_exists, String... ary) {
-		Btrie_slim_mgr trie = wiki.Mw_parser_mgr().Xnde_tag_regy().Get_trie(Xop_parser_.Parse_tid_tmpl);
+		Btrie_slim_mgr trie = wiki.Mw_parser_mgr().Xnde_tag_regy().Get_trie(Xop_parser_tid_.Tid__defn);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String str = ary[i];

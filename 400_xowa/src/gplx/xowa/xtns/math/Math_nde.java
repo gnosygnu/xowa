@@ -27,7 +27,7 @@ public class Math_nde implements Xox_xnde {
 		if (math_mgr.Enabled() && math_mgr.Renderer_is_mathjax())
 			ctx.Page().Html_data().Head_mgr().Itm__mathjax().Enabled_y_();
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		app.File_mgr().Math_mgr().Html_wtr().Write(html_wtr, ctx, hctx, bfr, src, xnde);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;

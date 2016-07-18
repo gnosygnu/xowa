@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_list_wkr_basic_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void List_1() {
 		fxt.Test_parse_page_wiki("\n*a"
@@ -211,27 +211,29 @@ public class Xop_list_wkr_basic_tst {
 			);
 	}
 	@Test  public void Mix_1ul_1hdr() {
-		fxt.Test_parse_page_wiki("*a\n==a==\n"
-			,	fxt.tkn_list_bgn_(0, 1, Xop_list_tkn_.List_itmTyp_ul).List_path_(0).List_uid_(0)
-			,		fxt.tkn_txt_(1, 2)
-			,	fxt.tkn_list_end_(2).List_path_(0).List_uid_(0)
-			,	fxt.tkn_hdr_(2, 9, 2).Hdr_ws_trailing_(1).Subs_
-			(		fxt.tkn_txt_(5, 6)
-			)
-			);	
+		fxt.Test_parse_page_wiki_str("*a\n==a==\n", String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>a"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		, "<h2>a</h2>"
+		));
 	}
 	@Test  public void Mix_1ul_1hdr_1ul() {
-		fxt.Test_parse_page_wiki("*a\n==a==\n*b"
-			,	fxt.tkn_list_bgn_(0, 1, Xop_list_tkn_.List_itmTyp_ul).List_path_(0).List_uid_(0)
-			,		fxt.tkn_txt_(1, 2)
-			,	fxt.tkn_list_end_(2).List_path_(0).List_uid_(0)
-			,	fxt.tkn_hdr_(2, 8, 2).Subs_
-			(	fxt.tkn_txt_(5, 6)
-			)
-			,	fxt.tkn_list_bgn_(8, 10, Xop_list_tkn_.List_itmTyp_ul).List_path_(0).List_uid_(1)
-			,		fxt.tkn_txt_(10, 11)
-			,	fxt.tkn_list_end_(11).List_path_(0)
-			);			
+		fxt.Test_parse_page_wiki_str("*a\n==a==\n*b", String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>a"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		, "<h2>a</h2>"
+		, ""
+		, "<ul>"
+		, "  <li>b"
+		, "  </li>"
+		, "</ul>"
+		));
 	}
 	@Test  public void Mix_1ol_1hr_1ol() {
 		fxt.Test_parse_page_wiki("#a\n----\n#b"

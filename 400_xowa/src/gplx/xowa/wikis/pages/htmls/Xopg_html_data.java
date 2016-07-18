@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.pages.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.addons.htmls.tocs.*;
 import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.xtns.indicators.*;
 public class Xopg_html_data {
 	private Ordered_hash ctg_hash;
@@ -48,6 +48,9 @@ public class Xopg_html_data {
 	public boolean					Cbk_enabled() {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
 	public boolean				Hdump_exists() {return hdump_exists;} private boolean hdump_exists; public void Hdump_exists_(boolean v) {this.hdump_exists = v;}
 
+	public boolean				Writing_hdr_for_toc() {return writing_hdr_for_toc;} private boolean writing_hdr_for_toc; public void Writing_hdr_for_toc_y_() {writing_hdr_for_toc = Bool_.Y;} public void Writing_hdr_for_toc_n_() {writing_hdr_for_toc = Bool_.N;}
+	public Xoh_toc_mgr			Toc_mgr()	{return toc_mgr;}	private final    Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr(); 
+
 	public boolean				Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
 	public boolean				Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
 	public Xopg_xtn_skin_mgr	Xtn_skin_mgr() {return xtn_skin_mgr;} private Xopg_xtn_skin_mgr xtn_skin_mgr = new Xopg_xtn_skin_mgr();
@@ -68,6 +71,7 @@ public class Xopg_html_data {
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;
 	public void Clear() {
 		redlink_list.Clear();
+		toc_mgr.Clear();
 
 		html_restricted = true;
 		display_ttl = content_sub = display_ttl_vnt = null;

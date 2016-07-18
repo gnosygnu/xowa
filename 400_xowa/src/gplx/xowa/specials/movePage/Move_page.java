@@ -67,7 +67,7 @@ public class Move_page implements Xow_special_page {
 		if (src_ttl == null) return Bry_.Empty;
 		ns_list_fmtr.Init_by_page(wiki, page, src_ttl);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, true, msg_mgr.Val_by_key_obj("movepagetext"));
+		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, wiki.Parser_mgr().Ctx(), page, true, msg_mgr.Val_by_key_obj("movepagetext"));
 		fmtr_all.Bld_bfr_many(tmp_bfr
 		, msg_mgr.Val_by_key_obj("move-page-legend")
 		, Bry_.Add(Xoh_href_.Bry__wiki, src_ttl.Full_db())

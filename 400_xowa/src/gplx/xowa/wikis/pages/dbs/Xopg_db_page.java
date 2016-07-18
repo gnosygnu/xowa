@@ -18,16 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.pages.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
 public class Xopg_db_page {
+	public Xopg_db_page() {this.Clear();}
 	// from page table
-	public boolean		Exists()			{return exists;}			private boolean exists = true;
+	public boolean		Exists()			{return exists;}			private boolean exists;
 	public boolean		Exists_n()			{return !exists;}
 	public int			Id()				{return id;}				private int id;
 	public int			Ns_id()				{return ns_id;}				private int ns_id;
 	public byte[]		Ttl_bry()			{return ttl_bry;}			private byte[] ttl_bry;
-	public DateAdp		Modified_on()		{return modified_on;}		private DateAdp modified_on = DateAdp_.MinValue;	// NOTE: must set to MinValue else some tests will fail
+	public DateAdp		Modified_on()		{return modified_on;}		private DateAdp modified_on;
 	public int			Text_len()			{return text_len;}			private int text_len;
 	public int			Text_db_id()		{return text_db_id;}		private int text_db_id;
-	public int			Html_db_id()		{return html_db_id;}		private int html_db_id;
+	public int			Html_db_id()		{return html_db_id;}		private int html_db_id;	
 	public int			Redirect_to_id()	{return redirect_to_id;}	private int redirect_to_id;
 	public int			Score()				{return score;}				private int score;
 
@@ -55,6 +56,8 @@ public class Xopg_db_page {
 		return this;
 	}
 	public void Clear() {
-		exists = true;
+		this.exists = true;
+		this.modified_on = DateAdp_.MinValue;	// NOTE: must set to MinValue else some tests will fail
+		this.html_db_id = -1;	// NOTE: must set to -1 b/c code checks for -1 to indicate no html; DATE:2016-07-14
 	}
 }

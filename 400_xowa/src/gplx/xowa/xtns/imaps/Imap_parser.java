@@ -29,11 +29,12 @@ public class Imap_parser {
 	private byte[] src;
 	private int itm_idx; private int itm_bgn, itm_end;
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
+	private final    Btrie_rv trv = new Btrie_rv();
 	public Imap_parser(Imap_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	public void Init(Xowe_wiki wiki, Xoae_page page, Gfo_usr_dlg usr_dlg) {// SCOPE.PAGE
 		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page.Url(); this.usr_dlg = usr_dlg;
 		this.wiki_ctx = wiki.Parser_mgr().Ctx();
-		imap_ctx = Xop_ctx.new_(wiki, wiki.Parser_mgr(), page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
+		imap_ctx = Xop_ctx.New__top(wiki, page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
 		imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
 	}
 	public void Clear() {
@@ -68,9 +69,9 @@ public class Imap_parser {
 				if (itm_idx == 0)
 					itm_end = Parse_img(rv, itm_bgn, itm_end, src_end);
 				else {
-					Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, itm_bgn, itm_end);
+					Object tid_obj = tid_trie.Match_at_w_b0(trv, b, src, itm_bgn, itm_end);
 					byte tid_val = tid_obj == null ? Imap_part_.Tid_invalid : ((Byte_obj_val)tid_obj).Val();
-					int tid_end_pos = tid_trie.Match_pos();
+					int tid_end_pos = trv.Pos();
 					switch (tid_val) {
 						case Imap_part_.Tid_desc:			Parse_desc(tid_end_pos, itm_end); break;
 						case Imap_part_.Tid_dflt:			Parse_dflt(tid_end_pos, itm_end); break;

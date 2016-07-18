@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_parser {
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final    Btrie_rv trv = new Btrie_rv();
 	private List_adp blocks = List_adp_.New();
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr_.Reset(16);
@@ -30,14 +31,14 @@ class Hiero_parser {
 		while (true) {
 			if (pos == end) break;
 			byte b = src[pos];
-			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
+			Object o = trie.Match_at_w_b0(trv, b, src, pos, end);
 			if (o == null) {
 				New_char(b);
 				++pos;
 			}
 			else {
 				Hiero_parser_itm itm = (Hiero_parser_itm)o;
-				int new_pos = trie.Match_pos();
+				int new_pos = trv.Pos();
 				switch (itm.Tid()) {
 					case Hiero_parser_itm.Tid_comment:
 						int end_comm = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, new_pos, end);

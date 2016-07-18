@@ -23,11 +23,13 @@ import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements gplx.core.brys.Bfr_arg {
 	private Xoh_href_wtr href_wtr; private Xou_history_mgr history_mgr; private Bry_fmtr fmtr_itm;
 	public void Init_app(Xoae_app app, Bry_fmtr fmtr_itm) {
-		this.href_wtr = app.Html__href_wtr();
 		this.history_mgr = app.Usere().History_mgr();
 		this.fmtr_itm = fmtr_itm;
 	} 
-	public void Init_wiki(Xowe_wiki wiki, Xoh_wtr_ctx hctx) {this.wiki = wiki; this.hctx = hctx;} private Xowe_wiki wiki; private Xoh_wtr_ctx hctx;
+	public void Init_wiki(Xowe_wiki wiki, Xoh_wtr_ctx hctx) {
+		this.wiki = wiki; this.hctx = hctx;
+		this.href_wtr = wiki.Html__href_wtr();
+	}	private Xowe_wiki wiki; private Xoh_wtr_ctx hctx;
 	public void Itms_clear() 				{itms.Clear();} private List_adp itms = List_adp_.New();	
 	public void Itms_add(Xowd_page_itm page) 	{itms.Add(page);}	
 	public void Bfr_arg__add(Bry_bfr bfr) {

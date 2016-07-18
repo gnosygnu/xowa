@@ -117,7 +117,7 @@ public class Xowh_sidebar_mgr implements Gfo_invk {
 	private byte[] Resolve_key(byte[] key) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj(key);
 		if (Bry_.Len_eq_0(val)) val = key;	// if key is not found, default to val
-		return wiki.Parser_mgr().Main().Parse_text_to_wtxt(val);
+		return wiki.Parser_mgr().Main().Expand_tmpl(val);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_grp_fmt_))		html_grp_fmtr.Fmt_(m.ReadBry("v"));

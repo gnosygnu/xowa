@@ -29,7 +29,7 @@ public interface Xodb_load_mgr {
 	int Load_ctg_count				(byte[] ttl);
 	boolean Load_ctg_v1				(Xoctg_view_ctg rv, byte[] ttl);
 	boolean Load_ctg_v2				(Xoctg_data_ctg rv, byte[] ttl);
-	void Load_ctg_v2a				(Xoctg_view_ctg rv, Xoctg_url url_ctg, byte[] ttl_bry, int limit);
+	void Load_ctg_v2a				(Xoctg_view_ctg rv, Xoctg_url url_ctg, byte[] ttl_bry, int limit, boolean app_is_cmd);
 	Xowd_page_itm[] Load_ctg_list	(byte[][] ctg_ttls);
 	void Load_ttls_for_all_pages	(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item);
 	void Load_ttls_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item);

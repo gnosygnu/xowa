@@ -21,6 +21,7 @@ class Xob_css_parser {
 	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
 	private final    Xob_mirror_mgr mgr;
 	private final    Xob_css_parser__url url_parser; private final    Xob_css_parser__import import_parser;
+	private final    Btrie_rv trv = new Btrie_rv();
 	public Xob_css_parser(Xob_mirror_mgr mgr) {
 		this.mgr = mgr;
 		this.url_parser = new Xob_css_parser__url(mgr.Site_url());
@@ -30,14 +31,14 @@ class Xob_css_parser {
 		int src_len = src.length; int pos = 0;
 		while (pos < src_len) {
 			byte b = src[pos];
-			Object o = tkns_trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = tkns_trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null) {
 				bfr.Add_byte(b);
 				++pos;
 			}
 			else {
 				byte tkn_tid = ((Byte_obj_val)o).Val();
-				int match_pos = tkns_trie.Match_pos();
+				int match_pos = trv.Pos();
 				Xob_css_tkn__base tkn = null;
 				switch (tkn_tid) {
 					case Tkn_url:		tkn = url_parser.Parse(src, src_len, pos, match_pos); break;

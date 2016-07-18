@@ -32,7 +32,8 @@ public class Xoctg_html_mgr implements Gfo_invk {
 				Bld_html_v2(wiki, page, hctx, tmp_bfr);
 			else
 				Bld_html_v1(wiki, page, hctx, tmp_bfr);
-			bfr.Add_bfr_and_preserve(tmp_bfr.Mkr_rls());
+			bfr.Add_bfr_and_preserve(tmp_bfr);
+			tmp_bfr.Mkr_rls();
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
 			tmp_bfr.Mkr_rls();
@@ -43,7 +44,7 @@ public class Xoctg_html_mgr implements Gfo_invk {
 		byte[] ttl_bry = page.Ttl().Page_db();
 		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg().Name_(page.Ttl().Page_txt());
 		url_ctg.Parse(wiki.Appe().Usr_dlg(), page.Url());
-		wiki.Db_mgr().Load_mgr().Load_ctg_v2a(view_ctg, url_ctg, ttl_bry, Grp_max_default);
+		wiki.Db_mgr().Load_mgr().Load_ctg_v2a(view_ctg, url_ctg, ttl_bry, Grp_max_default, wiki.App().Mode().Tid_is_cmd());
 		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_subc);
 		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_page);
 		Bld_all(bfr, wiki, page.Lang(), hctx, view_ctg, Xoa_ctg_mgr.Tid_file);

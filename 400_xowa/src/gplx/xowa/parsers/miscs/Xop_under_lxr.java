@@ -18,10 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.htmls.tocs.*;
+import gplx.xowa.addons.htmls.tocs.*;
+import gplx.xowa.wikis.pages.wtxts.*;
 public class Xop_under_lxr implements Xop_lxr {
 	private final    Object thread_lock = new Object();
-	private Btrie_mgr words_trie_ci, words_trie_cs;
+	private Btrie_mgr words_trie_ci, words_trie_cs; private final    Btrie_rv trv_cs = new Btrie_rv(), trv_ci = new Btrie_rv();
 	public int Lxr_tid() {return Xop_lxr_.Tid_under;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {
@@ -81,33 +82,33 @@ public class Xop_under_lxr implements Xop_lxr {
 	.Add(Xop_under_hook.Key_alt, Xop_under_hook.Itm_alt)
 	;
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		if (cur_pos == src_len) return ctx.Lxr_make_txt_(cur_pos);				// eos
+		if (cur_pos == src_len) return ctx.Lxr_make_txt_(cur_pos);					// eos
 		int rv = cur_pos;
-		Object word_obj = words_trie_cs.Match_bgn(src, cur_pos, src_len);		// check cs
+		Object word_obj = words_trie_cs.Match_at(trv_cs, src, cur_pos, src_len);	// check cs
 		if (word_obj == null) {
-			word_obj = words_trie_ci.Match_bgn(src, cur_pos, src_len);			// check ci
+			word_obj = words_trie_ci.Match_at(trv_ci, src, cur_pos, src_len);		// check ci
 			if (word_obj == null)
-				return ctx.Lxr_make_txt_(cur_pos);								// kwd not found; EX: "TOCA__"
+				return ctx.Lxr_make_txt_(cur_pos);									// kwd not found; EX: "TOCA__"
 			else
-				rv = words_trie_ci.Match_pos();
+				rv = trv_ci.Pos();
 		}
 		else
-			rv = words_trie_cs.Match_pos();
+			rv = trv_cs.Pos();
 		Xop_under_word word_itm = (Xop_under_word)word_obj;
 		Xop_under_lxr.Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, rv, word_itm.Kwd_id());
 		return rv;
 	}
 	public static void Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int kwd_id) {
 		Xoae_page page = ctx.Page();
-		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();
+		Xopg_toc_mgr hdr_mgr = page.Wtxt().Toc();
 		switch (kwd_id) {
 			case Xol_kwd_grp_.Id_toc:
-				hdr_mgr.Toc_manual_();
+				hdr_mgr.Flag__toc_y_();
 				ctx.Para().Process_block_lnki_div();							// NOTE: __TOC__ will manually place <div toc> here; simulate div in order to close any pres; EX:\n\s__TOC__; PAGE:de.w:  DATE:2014-07-05
 				ctx.Subs_add(root, tkn_mkr.Under(bgn_pos, cur_pos, kwd_id));	// NOTE: only save under_tkn for TOC (b/c its position is needed for insertion); DATE:2013-07-01
 				break;	
-			case Xol_kwd_grp_.Id_forcetoc:			hdr_mgr.Toc_force_(); break;
-			case Xol_kwd_grp_.Id_notoc:				hdr_mgr.Toc_hide_(); break;
+			case Xol_kwd_grp_.Id_forcetoc:			hdr_mgr.Flag__forcetoc_y_(); break;
+			case Xol_kwd_grp_.Id_notoc:				hdr_mgr.Flag__notoc_y_(); break;
 			case Xol_kwd_grp_.Id_noeditsection:		break;	// ignore; not handling edit sections
 			case Xol_kwd_grp_.Id_nocontentconvert:	page.Html_data().Lang_convert_content_(false); break;
 			case Xol_kwd_grp_.Id_notitleconvert:	page.Html_data().Lang_convert_title_(false); break;

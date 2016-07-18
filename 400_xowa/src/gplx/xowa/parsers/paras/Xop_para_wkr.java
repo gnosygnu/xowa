@@ -24,12 +24,13 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	private int para_stack;
 	private boolean in_block, block_is_bgn_xnde, block_is_end_xnde, in_blockquote, block_is_bgn_blockquote, block_is_end_blockquote;
 	private int prv_nl_pos; private Xop_para_tkn prv_para; private int prv_ws_bgn;
+	private final    Btrie_rv trv = new Btrie_rv();
 	public boolean Enabled() {return enabled;} public Xop_para_wkr Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public Xop_para_wkr Enabled_y_() {enabled = true; return this;} public Xop_para_wkr Enabled_n_() {enabled = false; return this;}				
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
 		this.Clear();
-		para_enabled = enabled && ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki;	// only enable for wikitext (not for template)
+		para_enabled = enabled && ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt;	// only enable for wikitext (not for template)
 		if (para_enabled)
 			Prv_para_new(ctx, root, -1, 0);	// create <para> at bos
 	}
@@ -159,7 +160,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	public int Process_pre(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int txt_pos) {
 		Dd_clear(ctx);
 		Btrie_slim_mgr tblw_ws_trie = ctx.App().Utl_trie_tblw_ws();
-		Object o = tblw_ws_trie.Match_bgn(src, txt_pos, src_len);
+		Object o = tblw_ws_trie.Match_at(trv, src, txt_pos, src_len);
 		if (o != null) {	// tblw_ws found
 			Xop_tblw_ws_itm ws_itm = (Xop_tblw_ws_itm)o;
 			byte tblw_type = ws_itm.Tblw_type();
@@ -172,7 +173,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					}
 					break;
 				case Xop_tblw_ws_itm.Type_xnde:
-					int nxt_pos = tblw_ws_trie.Match_pos();
+					int nxt_pos = trv.Pos();
 					if (nxt_pos < src_len) {	// bounds check
 						switch (src[nxt_pos]) {	// check that next char is "end" of xnde name; guard against false matches like "<trk" PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
 							case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:		// whitespace

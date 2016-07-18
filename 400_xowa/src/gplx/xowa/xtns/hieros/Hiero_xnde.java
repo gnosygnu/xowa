@@ -39,7 +39,7 @@ public class Hiero_xnde implements Xox_xnde {
 		}
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		xtn_mgr.Html_wtr().Render_blocks(bfr, hctx, blocks, Hiero_html_mgr.scale, false);
 	}
 }

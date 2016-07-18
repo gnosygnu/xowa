@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.parsers.lists.*;
 public class Xop_para_wkr_basic_tst {
-	private final Xop_fxt fxt = new Xop_fxt(); String raw;
+	private final    Xop_fxt fxt = new Xop_fxt(); String raw;
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();}
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test  public void Nl_0() {
@@ -569,14 +569,6 @@ public class Xop_para_wkr_basic_tst {
 			, "<h2>b</h2>"
 			, ""
 			));
-		fxt.Test_parse_page_wiki(raw
-			,	fxt.tkn_para_bgn_para_(0)							//    x0: <bos> -> <p>			1=blank
-			,	fxt.tkn_txt_(0, 1), fxt.tkn_para_end_para_(2)		// t2/x1: a\n   -> a\n</p>		1=bgn    2=blank
-			,	fxt.tkn_hdr_(1, 7, 2).Subs_
-			( fxt.tkn_txt_(4, 5)
-			)
-			,	fxt.tkn_para_blank_(7)	// NOTE: this is redundant, but will not output to html; DATE:2013-02-03
-			);
 	}
 	@Test  public void Hdr_2() {
 		raw = String_.Concat_lines_nl_skip_last
@@ -591,15 +583,6 @@ public class Xop_para_wkr_basic_tst {
 			, "<h2>b</h2>"
 			, ""
 			));
-		fxt.Test_parse_page_wiki(raw
-			,	fxt.tkn_para_bgn_para_(0)													//    x0: <bos> -> <p>			1=blank
-			,	fxt.tkn_txt_(0, 1), fxt.tkn_para_blank_(2)
-			,	fxt.tkn_para_end_para_(3)
-			,	fxt.tkn_hdr_(2, 8, 2).Subs_
-			( fxt.tkn_txt_(5, 6)
-			)	
-			,	fxt.tkn_para_blank_(8)
-			);
 	}
 	@Test  public void Hdr_list() {
 		raw = String_.Concat_lines_nl_skip_last
@@ -614,17 +597,6 @@ public class Xop_para_wkr_basic_tst {
 			, "  </li>"
 			, "</ul>"
 			));
-		fxt.Test_parse_page_wiki(raw
-			,	fxt.tkn_para_blank_(0),	fxt.tkn_para_blank_(1)
-			,	fxt.tkn_hdr_(0, 5, 2).Subs_
-			( fxt.tkn_txt_(2, 3)
-			)
-			,	fxt.tkn_para_blank_(6)
-			,	fxt.tkn_list_bgn_(5, 7, Xop_list_tkn_.List_itmTyp_ul)
-			,	fxt.tkn_txt_(7, 8)
-			,	fxt.tkn_list_end_(8)
-			,	fxt.tkn_para_blank_(8)
-			);
 	}
 	@Test  public void Hdr_list_multi() {
 		raw = String_.Concat_lines_nl_skip_last
@@ -644,19 +616,6 @@ public class Xop_para_wkr_basic_tst {
 			, "  </li>"
 			, "</ul>"
 			));
-		fxt.Test_parse_page_wiki(raw
-			,	fxt.tkn_para_blank_(0), fxt.tkn_para_blank_(1)
-			,	fxt.tkn_hdr_(0, 7, 2).Subs_
-			( 	fxt.tkn_txt_(2, 3)
-			)
-			,	fxt.tkn_para_blank_(8)
-			,	fxt.tkn_list_bgn_(7, 9, Xop_list_tkn_.List_itmTyp_ul)
-			,	fxt.tkn_txt_(9, 10), fxt.tkn_para_blank_(11)
-			,	fxt.tkn_list_end_(10)
-			,	fxt.tkn_list_bgn_(10, 12, Xop_list_tkn_.List_itmTyp_ul)
-			,	fxt.tkn_txt_(12, 13)
-			,	fxt.tkn_list_end_(13), fxt.tkn_para_blank_(13)
-			);
 	}
 	@Test  public void Para_hdr() {
 		raw = String_.Concat_lines_nl_skip_last

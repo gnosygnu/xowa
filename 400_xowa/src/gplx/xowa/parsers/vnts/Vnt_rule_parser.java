@@ -19,7 +19,8 @@ package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*;
 import gplx.xowa.langs.vnts.*;
 class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
-	private final Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
+	private final    Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
+	private final    Btrie_rv trv = new Btrie_rv();
 	private Vnt_rule_undi_mgr undis; private Vnt_rule_bidi_mgr bidis;
 	private int src_end; private byte[] rule_raw;
 	public byte[] Raw() {return rule_raw;}
@@ -66,10 +67,10 @@ class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 			lang_bgn = Bry_find_.Find_fwd_while_ws(src, undi_end + 2, itm_end);		// set lang_bgn after => and gobble up ws
 			undi_end = Bry_find_.Find_bwd__skip_ws(src, undi_end, undi_bgn);		// trim ws from end of bd;
 		}
-		Object vnt_obj = vnt_trie.Match_bgn(src, lang_bgn, itm_end);
+		Object vnt_obj = vnt_trie.Match_at(trv, src, lang_bgn, itm_end);
 		if (vnt_obj == null)
 			return (itm_bgn == 0) ? Bry_split_.Rv__cancel : Bry_split_.Rv__extend;	// if 1st item; cancel rest; otherwise, extend
-		int lang_end = vnt_trie.Match_pos();
+		int lang_end = trv.Pos();
 		int text_bgn = Bry_find_.Find_fwd_while_ws(src, lang_end, itm_end); if (src[text_bgn] != Byte_ascii.Colon) return Bry_split_.Rv__extend;
 		++text_bgn;
 		Xol_vnt_itm vnt_itm = (Xol_vnt_itm)vnt_obj;
@@ -93,5 +94,5 @@ class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 		if (bfr.Len_gt_0()) bfr.Add_byte_nl();
 		bidis.To_bry__dbg(bfr);
 	}
-	private static final byte[] Bry__bidi_dlm = Bry_.new_a7("=>");
+	private static final    byte[] Bry__bidi_dlm = Bry_.new_a7("=>");
 }

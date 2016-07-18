@@ -18,18 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.xwikis.sitelinks.*;
 public class Xow_cache_mgr {
-	private Xowe_wiki wiki;
+	private final    Xowe_wiki wiki;
 	public Xow_cache_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		page_cache = new Xow_page_cache(wiki);
-		defn_cache = new Xow_defn_cache(wiki.Lang());
-		lst_cache = new Xow_defn_cache(wiki.Lang());
+		this.page_cache = new Xow_page_cache(wiki);
+		this.defn_cache = new Xow_defn_cache(wiki.Lang());
+		this.lst_cache = new Xow_defn_cache(wiki.Lang());
 	}
-	public Hash_adp Tmpl_result_cache() {return tmpl_result_cache;} private Hash_adp tmpl_result_cache = Hash_adp_bry.cs();
-	public Xow_page_cache Page_cache() {return page_cache;} private Xow_page_cache page_cache;
-	public Xow_defn_cache Defn_cache() {return defn_cache;} private Xow_defn_cache defn_cache;
-	public Xow_defn_cache Lst_cache() {return lst_cache;} private Xow_defn_cache lst_cache;
-	public Hash_adp Misc_cache() {return misc_cache;} private final    Hash_adp misc_cache = Hash_adp_.New();
+	public Hash_adp			Tmpl_result_cache() {return tmpl_result_cache;} private final    Hash_adp tmpl_result_cache = Hash_adp_bry.cs();
+	public Xow_page_cache	Page_cache()		{return page_cache;}		private Xow_page_cache page_cache;
+	public Xow_defn_cache	Defn_cache()		{return defn_cache;}		private final    Xow_defn_cache defn_cache;
+	public Xow_defn_cache	Lst_cache()			{return lst_cache;}			private final    Xow_defn_cache lst_cache;
+	public Hash_adp			Misc_cache()		{return misc_cache;}		private final    Hash_adp misc_cache = Hash_adp_.New();
+	public void Page_cache_(Xow_page_cache v) {this.page_cache = v;}
 	public Keyval[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
 			List_adp list = List_adp_.New();
@@ -44,10 +45,11 @@ public class Xow_cache_mgr {
 		}
 		return scrib_lang_names;
 	}
-	public void Free_mem_all() {
+	public void Free_mem_all() {this.Free_mem_all(Bool_.Y);}
+	public void Free_mem_all(boolean free_page_cache) {
+		if (free_page_cache) page_cache.Free_mem_all();
 		tmpl_result_cache.Clear();
 		defn_cache.Free_mem_all();
-		page_cache.Free_mem_all();
 		misc_cache.Clear();
 		lst_cache.Free_mem_all();
 		scrib_lang_names = null;

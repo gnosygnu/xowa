@@ -108,7 +108,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				break;
 		}
 		if (tag_obj == null) {	// not a known xml tag; EX: "<abcd>"; "if 5 < 7 then"
-			if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki) {
+			if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {
 				if (ctx_cur_tid_is_tblw_atr_owner)			// unknown_tag is occurring inside tblw element (EX: {| style='margin:1em<f'); just add to txt tkn
 					return ctx.Lxr_make_txt_(cur_pos);
 				else {										// unknown_tag is occurring anywhere else; escape < to &lt; and resume from character just after it;
@@ -150,7 +150,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						}
 						else {											// is a <nowiki> skip to </nowiki>
 							if (	i == end_name_pos
-								&&	ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl
+								&&	ctx.Parse_tid() == Xop_parser_tid_.Tid__defn
 								&&	Bry_.Eq(atr_parser.Bry_obj().Val(), Xop_xnde_tag_.Tag__includeonly.Name_bry())
 								) {
 								pre2_hack = true;
@@ -175,7 +175,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		boolean force_xtn_for_nowiki = false;
 		int end_pos = gt_pos + 1;
 		switch (ctx.Parse_tid()) {					// NOTE: special logic to handle <include>; SEE: NOTE_1 below
-			case Xop_parser_.Parse_tid_page_wiki:	// NOTE: ignore if (a) wiki and (b) <noinclude> or <onlyinclude>
+			case Xop_parser_tid_.Tid__wtxt:	// NOTE: ignore if (a) wiki and (b) <noinclude> or <onlyinclude>
 				switch (tag.Id()) {
 					case Xop_xnde_tag_.Tid__noinclude:
 					case Xop_xnde_tag_.Tid__onlyinclude:
@@ -187,7 +187,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						break;
 				}
 				break;
-			case Xop_parser_.Parse_tid_tmpl:			// NOTE: ignore if (a) tmpl and (b) <includeonly>
+			case Xop_parser_tid_.Tid__defn:			// NOTE: ignore if (a) tmpl and (b) <includeonly>
 				switch (tag.Id()) {
 					case Xop_xnde_tag_.Tid__includeonly:
 						ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, end_pos, Xop_ignore_tkn.Ignore_tid_include_tmpl));
@@ -203,7 +203,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						break;
 				}
 				break;
-			case Xop_parser_.Parse_tid_page_tmpl:		// NOTE: added late; SEE:comment test for "a <!-<noinclude></noinclude>- b -->c"
+			case Xop_parser_tid_.Tid__tmpl:		// NOTE: added late; SEE:comment test for "a <!-<noinclude></noinclude>- b -->c"
 				switch (tag.Id()) {
 					case Xop_xnde_tag_.Tid__noinclude:
 						ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, end_pos, Xop_ignore_tkn.Ignore_tid_include_tmpl));
@@ -301,11 +301,11 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				break;
 		}
 		Mwh_atr_itm[] atrs = null;
-		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki) {
+		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {
 			atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(src, atrs_bgn, atrs_end);
 		}
 		if ((	(	tag.Xtn() 
-				&&	(	ctx.Parse_tid() != Xop_parser_.Parse_tid_tmpl	// do not gobble up rest if in tmpl; handle <poem>{{{1}}}</poem>; DATE:2014-03-03
+				&&	(	ctx.Parse_tid() != Xop_parser_tid_.Tid__defn	// do not gobble up rest if in tmpl; handle <poem>{{{1}}}</poem>; DATE:2014-03-03
 					||	tag.Xtn_skips_template_args()					// ignore above if tag specifically skips template args; EX: <pre>; DATE:2014-04-10
 					)
 				)
@@ -595,7 +595,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				xnde.Subs_add(tkn_mkr.Txt(open_end, close_bgn));
 		}
 		switch (ctx.Parse_tid()) {
-			case Xop_parser_.Parse_tid_page_tmpl: {
+			case Xop_parser_tid_.Tid__tmpl: {
 				Xox_xnde xnde_xtn = null;
 				switch (tag.Id()) {
 					case Xop_xnde_tag_.Tid__xowa_cmd:				xnde_xtn = tkn_mkr.Xnde__xowa_cmd(); break;
@@ -606,7 +606,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				}
 				break;
 			}
-			case Xop_parser_.Parse_tid_page_wiki: {
+			case Xop_parser_tid_.Tid__wtxt: {
 				Xox_xnde xnde_xtn = null;
 				int tag_id = tag.Id();
 				boolean escaped = false;

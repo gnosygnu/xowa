@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.addons.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
@@ -44,6 +44,7 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	boolean						Html__hdump_enabled();
 	Xow_hdump_mgr				Html__hdump_mgr();
 	Xoh_page_wtr_mgr			Html__wtr_mgr();
+	Xoh_href_wtr				Html__href_wtr();
 	boolean						Html__css_installing(); void Html__css_installing_(boolean v);
 	Xow_mw_parser_mgr			Mw_parser_mgr();
 	Xow_xwiki_mgr				Xwiki_mgr();

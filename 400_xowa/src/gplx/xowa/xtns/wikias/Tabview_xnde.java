@@ -52,7 +52,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		ctx.Page().Html_data().Head_mgr().Itm__tabber().Enabled_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (tab_itms_ary != null) Tabber_tab_itm.Write(bfr, id, tab_itms_ary);
 		// write html
 		//Bry_bfr bfr = Bry_bfr_.New();
@@ -125,7 +125,7 @@ class Tabview_tab_itm {
 					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 					if (page_itm == null) return null;
 					page_body = page_itm.Wtxt__redirect_or_direct();
-					page_body = Xop_parser_.Parse_text_to_html(wiki, ctx.Page(), ctx.Page().Ttl(), page_body, false);
+					page_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), ctx.Page().Ttl(), page_body, false);
 					break;
 				case 1:
 					tab_name = args_itm;

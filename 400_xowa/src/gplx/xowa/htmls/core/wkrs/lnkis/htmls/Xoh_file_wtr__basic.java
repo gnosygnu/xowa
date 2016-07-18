@@ -25,18 +25,21 @@ public class Xoh_file_wtr__basic {
 	private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xoh_html_wtr html_wtr; private final    Bry_bfr_mkr bfr_mkr; private final    Bry_bfr scratch_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
 	private final    Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;
 	private final    Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank(); private final    Xoh_lnki_title_fmtr anchor_title_wkr = new Xoh_lnki_title_fmtr();
-	private Xoh_file_html_fmtr__base html_fmtr = Xoh_file_html_fmtr__base.Base;
 	private Xoae_page page; private boolean cfg_alt_defaults_to_caption;
+	private Xoh_file_html_fmtr__base html_fmtr;
+	private final    Xoh_file_html_fmtr__hdump fmtr__hdump = new Xoh_file_html_fmtr__hdump();
+	private final    Xoh_file_html_fmtr__base fmtr__base = new Xoh_file_html_fmtr__base();
 	public Xoh_file_wtr__basic(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki; this.html_mgr = html_mgr; this.html_wtr = html_wtr; this.bfr_mkr = wiki.Utl__bfr_mkr();
 		this.media_alt_fmtr = new Xoh_lnki_text_fmtr(bfr_mkr, html_wtr);
 		this.caption_fmtr	= new Xoh_lnki_text_fmtr(bfr_mkr, html_wtr);
+		this.html_fmtr = fmtr__base;
 	}
 	public Xoh_file_html_fmtr__base Html_fmtr() {return html_fmtr;}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {
 		this.page = page;
 		this.cfg_alt_defaults_to_caption = wiki.Appe().Usere().Wiki().Html_mgr().Imgs_mgr().Alt_defaults_to_caption().Val();
-		html_fmtr = hctx.Mode_is_hdump() ? Xoh_file_html_fmtr__hdump.Hdump : Xoh_file_html_fmtr__hdump.Base;
+		html_fmtr = hctx.Mode_is_hdump() ? fmtr__hdump : fmtr__base;
 	}
 	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, byte[] img_alt) {
 		int uid = xfer_itm.Html_uid();
@@ -49,7 +52,7 @@ public class Xoh_file_wtr__basic {
 		if (lnki_halign == Xop_lnki_align_h_.Null)
 			lnki_halign = wiki.Lang().Img_thumb_halign_default();	// if halign is not supplied, then default to align for language
 		byte[] lnki_halign_bry = Xop_lnki_align_h_.Html_names[lnki_halign];
-		byte[] lnki_href = wiki.Appe().Html__href_wtr().Build_to_bry(wiki, lnki.Ttl());
+		byte[] lnki_href = wiki.Html__href_wtr().Build_to_bry(wiki, lnki.Ttl());
 		byte[] img_view_src = xfer_itm.Html_view_url().To_http_file_bry();
 		byte[] img_orig_src = xfer_itm.Html_orig_url().To_http_file_bry();
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
@@ -146,7 +149,7 @@ public class Xoh_file_wtr__basic {
 				byte[] xowa_title_bry = tmp_link_parser.Html_xowa_ttl();			// NOTE: xowa_title_bry will be link arg; [[File:A.png|link=file:///A.ogg]] -> A.ogg x> A.png
 				boolean a_href_is_file = true;
 				if (xowa_title_bry == null) {xowa_title_bry = lnki_ttl; a_href_is_file = false;}
-				link_arg = link_arg_html == null ? lnki_href: link_arg_html;		// if parse fails, then assign to lnki_href; EX:link={{{1}}}
+				link_arg = link_arg_html == null ? lnki_href : link_arg_html;		// if parse fails, then assign to lnki_href; EX:link={{{1}}}
 				link_arg = Gfo_url_encoder_.Href_qarg.Encode(link_arg);				// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 				// if (Bry_.Len_gt_0(tmp_link_parser.Html_xowa_ttl())) lnki_ttl = tmp_link_parser.Html_xowa_ttl(); // DELETE: not sure why this is here; breaks test; DATE:2015-11-28
 				lnki_file_wkr.Html_full_img(bfr, hctx, page, src, xfer_itm, uid, link_arg, a_href_is_file, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Xoh_file_html_fmtr__base.Escape_xowa_title(xowa_title_bry), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);

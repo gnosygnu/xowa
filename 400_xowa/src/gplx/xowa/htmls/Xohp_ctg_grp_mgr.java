@@ -19,7 +19,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xohp_ctg_grp_mgr {
-	final Bry_fmtr grp_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	final    Bry_fmtr grp_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"catlinks\" class=\"catlinks\">"
 	,   "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
 	,     "~{grp_lbl}"
@@ -29,7 +29,7 @@ public class Xohp_ctg_grp_mgr {
 	, "</div>"
 	),	"grp_lbl", "grp_itms")
 	;
-	final Bry_fmtr itm_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	final    Bry_fmtr itm_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	,       "<li>"
 	,         "<a href=\"~{itm_href}\" class=\"internal\" title=\"~{itm_title}\">~{itm_text}</a>"	
@@ -55,7 +55,7 @@ class Xoh_ctg_itm_fmtr implements gplx.core.brys.Bfr_arg {
 		for (int i = 0; i < ctgs_len; i++) {
 			byte[] page_name = page.Category_list()[i];
 			tmp_bfr.Add(ctg_prefix).Add(page_name);
-			page.Wikie().Appe().Html__href_wtr().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.To_bry_and_clear()));
+			page.Wikie().Html__href_wtr().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.To_bry_and_clear()));
 			itm_fmtr.Bld_bfr(bfr, tmp_href.To_bry_and_clear(), page_name, page_name);
 		}
 		tmp_bfr.Mkr_rls();

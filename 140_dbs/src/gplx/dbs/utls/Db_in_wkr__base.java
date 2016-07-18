@@ -25,7 +25,7 @@ public abstract class Db_in_wkr__base {
 	public void Select_in(Cancelable cancelable, Db_conn conn, int full_bgn, int full_end) {
 		int part_len = Interval();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
-		boolean show_progress = this.Show_progress();
+		boolean show_progress = this.Show_progress();;
 		for (int part_bgn = full_bgn; part_bgn < full_end; part_bgn += part_len) {
 			int part_end = part_bgn + part_len;
 			if (part_end > full_end) part_end = full_end;

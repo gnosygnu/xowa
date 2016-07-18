@@ -54,7 +54,7 @@ public class Xot_tmpl_wtr {
 				int xnde_tag_id = xnde.Tag().Id();
 				switch (xnde_tag_id) {
 					case Xop_xnde_tag_.Tid__onlyinclude: {
-						// NOTE: originally "if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_tmpl) {" but if not needed; Xot_tmpl_wtr should not be called for tmpls and <oi> should not make it to page_wiki
+						// NOTE: originally "if (ctx.Parse_tid() == Xop_parser_tid_.Tid__tmpl) {" but if not needed; Xot_tmpl_wtr should not be called for tmpls and <oi> should not make it to page_wiki
 						Bry_bfr tmp_bfr = Bry_bfr_.New();
 						ctx.Only_include_evaluate_(true);
 						xnde.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller, tmp_bfr);

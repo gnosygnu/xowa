@@ -37,7 +37,7 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
-			Xop_ctx references_ctx = Xop_ctx.new_sub_page_(wiki, ctx, ctx.Lst_page_regy()).References_group_(group);	// changed from following: "Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);"; DATE:2015-05-16;
+			Xop_ctx references_ctx = Xop_ctx.New__sub__reuse_lst(wiki, ctx, ctx.Lst_page_regy()).References_group_(group);	// changed from following: "Xop_ctx references_ctx = Xop_ctx.New__sub(wiki).References_group_(group);"; DATE:2015-05-16;
 			references_ctx.Para().Enabled_n_();	// disable para during <references> parsing
 			byte[] references_src = Bry_.Mid(src, itm_bgn, itm_end);
 			Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
@@ -49,8 +49,8 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		}
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
-		html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, bfr, src, xnde);
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+		html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, wpg, bfr, src, xnde);
 	}
 	private static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;

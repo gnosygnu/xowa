@@ -24,10 +24,9 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	public void AutoClose(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {
 		// bgn never closed; mark inert; EX: "==a"
 		Xop_hdr_tkn bgn = (Xop_hdr_tkn)tkn;
-		int bgn_hdr_len = bgn.Hdr_level();
-		bgn.Hdr_bgn_manual_(bgn_hdr_len);
-		bgn.Hdr_level_(0);
-		if (bgn_hdr_len > 1 && ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki)	// NOTE: \n= is not uncommon for templates; ignore them;
+		int bgn_hdr_len = bgn.Num();
+		bgn.Init_by_parse(0, bgn_hdr_len, 0);
+		if (bgn_hdr_len > 1 && ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt)	// NOTE: \n= is not uncommon for templates; ignore them;
 			ctx.Msg_log().Add_itm_none(Xop_hdr_log.Dangling_hdr, src, bgn.Src_bgn(), bgn_pos);	
 	}
 	public int Make_tkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
@@ -51,7 +50,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_tmpl_curly_bgn) return ctx.Lxr_make_txt_(cur_pos);
 		Xop_hdr_tkn hdr = (Xop_hdr_tkn)ctx.Stack_pop_til(root, src, stackPos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_hdr);
 		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);	// end any apos; EX: ==''a==
-		int hdr_len = hdr.Hdr_level(), bgn_manual = 0, end_manual = 0;
+		int hdr_len = hdr.Num(), bgn_manual = 0, end_manual = 0;
 		boolean dirty = false;
 		if		(end_hdr_len < hdr_len) {	// mismatch: end has more; adjust hdr
 			bgn_manual = hdr_len - end_hdr_len;
@@ -65,19 +64,20 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 			ctx.Msg_log().Add_itm_none(Xop_hdr_log.Mismatched, src, bgn_pos, cur_pos);
 			dirty = true;
 		}
-		if (hdr_len > 6) {					// <h7>+; limit to 6; NOTE: both bgn/end are equal length; EX: bgn=8,end=7 -> bgn=7,end=7;bgn_manual=1
+		if (hdr_len > 6) {					// <h7>+; limit to 6; NOTE: make both bgn/end are equal length; EX: bgn=8,end=7 -> bgn=7,end=7;bgn_manual=1
 			bgn_manual = end_manual = hdr_len - 6;
 			hdr_len = 6;
 			dirty = true;
 		}
 		if (dirty)
-			hdr.Hdr_bgn_manual_(bgn_manual).Hdr_end_manual_(end_manual).Hdr_level_(hdr_len);			
+			hdr.Init_by_parse(hdr_len, bgn_manual, end_manual);
 		cur_pos = Find_fwd_while_ws_hdr_version(src, cur_pos, src_len); // NOTE: hdr gobbles up trailing ws; EX: "==a== \n\t \n \nb" gobbles up all 3 "\n"s; otherwise para_wkr will process <br/> 
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__h2);
 		hdr.Subs_move(root);
 		hdr.Src_end_(cur_pos);
-		if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki)
-			ctx.Page().Hdr_mgr().Add(ctx, hdr, src);
+		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {	// do not add if defn / tmpl mode
+			ctx.Page().Wtxt().Toc().Add(hdr);
+		}
 		return cur_pos;
 	}
 	private void Close_open_itms(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {

@@ -19,7 +19,7 @@ package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*;
 import gplx.xowa.parsers.lists.*;
 public class Xop_apos_wkr_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_wiki("''a''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn)	, fxt.tkn_txt_(2, 3), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 		fxt.Test_parse_page_wiki("'''a'''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn)	, fxt.tkn_txt_(3, 4), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));
@@ -114,13 +114,7 @@ public class Xop_apos_wkr_tst {
 			);
 	}
 	@Test  public void Mix_hdr_autoClose() {
-		fxt.Test_parse_page_wiki("''a\n==b=="
-			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn).Src_rng_(0, 2)
-			, fxt.tkn_txt_(2, 3)
-			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end).Src_rng_(3, 3)
-			, fxt.tkn_hdr_(3, 9, 2).Subs_
-			(	fxt.tkn_txt_(6, 7)
-			));
+		fxt.Test_parse_page_wiki_str("''a\n==b==", "<i>a</i>\n\n<h2>b</h2>");
 	}
 	@Test  public void Apos_broken_by_tblw_th() {	// DATE:2013-04-24
 		fxt.Test_parse_page_all_str("A ''[[b!!]]'' c", "A <i><a href=\"/wiki/B!!\">b!!</a></i> c");

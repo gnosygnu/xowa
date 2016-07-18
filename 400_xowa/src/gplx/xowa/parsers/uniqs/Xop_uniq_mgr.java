@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
-	private final    Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs();
+	private final    Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs(); private final    Btrie_rv trv = new Btrie_rv();
 	private final    Bry_bfr key_bfr = Bry_bfr_.New_w_size(32);
 	private int idx = -1;
 	public void Clear() {idx = -1; general_trie.Clear();}
@@ -40,12 +40,12 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		while (true) {
 			boolean is_last = pos == src_len;				
 			byte b = is_last ? Byte_ascii.Null : src[pos];
-			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null)
 				++pos;
 			else {
 				byte[] val = (byte[])o;
-				int new_pos = trie.Match_pos();	// NOTE: since trie is reused, must capture pos here
+				int new_pos = trv.Pos();	// NOTE: since trie is reused, must capture pos here
 				val = Parse(Bry_bfr_.New(), trie, val);
 //					val = gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx.Wiki().Parser_mgr().Main().Parse_text_to_html(gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx, val);	// CHART
 				bfr.Add_mid(src, mark_bgn, pos);

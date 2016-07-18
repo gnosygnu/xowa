@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.core.brys.*;
 public class Xowd_html_tbl implements Db_tbl {
 	private final    String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
-	private final    Int_flag_bldr body_flag_bldr = new Int_flag_bldr().Pow_ary_bld_(3, 2);	// 8 different zip types; 4 different hzip types
+	private final    Int_flag_bldr body_flag_bldr = Make_body_flag_bldr();
 	public Xowd_html_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_page_id			= flds.Add_int_pkey("page_id");
@@ -105,4 +105,5 @@ public class Xowd_html_tbl implements Db_tbl {
 		stmt.Val_int(fld_head_flag, head_flag).Val_int(fld_body_flag, body_flag)
 			.Val_bry_as_str(fld_display_ttl, Bry_.Coalesce_to_empty(display_ttl)).Val_bry_as_str(fld_content_sub, Bry_.Coalesce_to_empty(content_sub)).Val_bry_as_str(fld_sidebar_div, Bry_.Coalesce_to_empty(sidebar_div)).Val_bry(fld_body, body);
 	}
+	public static Int_flag_bldr Make_body_flag_bldr() {return new Int_flag_bldr().Pow_ary_bld_(3, 2);}	// 8 different zip types; 4 different hzip types
 }

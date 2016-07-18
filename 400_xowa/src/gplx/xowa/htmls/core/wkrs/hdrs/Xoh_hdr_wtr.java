@@ -36,7 +36,7 @@ public class Xoh_hdr_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 		else
 			hdr_id = Bry_.Replace(hdr_content, Byte_ascii.Space, Byte_ascii.Underline);
 		hdr_capt_rhs  = data.Capt_rhs_exists() ? Bry_.Mid(src, data.Capt_rhs_bgn(), data.Capt_rhs_end()) : Bry_.Empty;
-		hpg.Hdump_mgr().Toc_wtr().Add(hdr_num, hdr_content);
+		hpg.Html_data().Toc_mgr().Add(hdr_num, hdr_content);
 		return true;
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {

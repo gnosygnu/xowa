@@ -26,10 +26,10 @@ public class Xop_xnde_tag_regy {
 	public Btrie_slim_mgr Get_trie(int i) {
 		if (init_needed) Init_by_hash(null);		// TEST:
 		switch (i) {
-			case Xop_parser_.Parse_tid_tmpl:			return trie_tmpl;
-			case Xop_parser_.Parse_tid_page_tmpl:		return trie_wtxt_tmpl;
-			case Xop_parser_.Parse_tid_page_wiki:		return trie_wtxt_main;
-			case Xop_parser_.Parse_tid_null: default: 	return trie_wtxt_tmpl; // TODO_OLD: should throw Err_.new_unhandled(i);
+			case Xop_parser_tid_.Tid__defn:			return trie_tmpl;
+			case Xop_parser_tid_.Tid__tmpl:		return trie_wtxt_tmpl;
+			case Xop_parser_tid_.Tid__wtxt:		return trie_wtxt_main;
+			case Xop_parser_tid_.Tid__null: default: 	return trie_wtxt_tmpl; // TODO_OLD: should throw Err_.new_unhandled(i);
 		}
 	}
 	public void Init_by_meta(Hash_adp_bry xtn_hash) {Init_by_hash(xtn_hash);}

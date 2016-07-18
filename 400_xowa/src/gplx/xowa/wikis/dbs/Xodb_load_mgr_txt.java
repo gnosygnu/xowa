@@ -522,7 +522,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		rdr.Find(tmp_xdat_itm, ttl, 0, Byte_ascii.Pipe, true);
 		return tmp_xdat_itm.Found_exact() ? tmp_xdat_itm : null;
 	}
-	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url url_ctg, byte[] ttl_bry, int limit) {
+	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url url_ctg, byte[] ttl_bry, int limit, boolean app_is_cmd) {
 		Xoctg_html_mgr ctg_mgr = wiki.Html_mgr().Ns_ctg();
 		Xoctg_data_cache data_cache = ctg_mgr.Data_cache();
 		Xoctg_data_ctg data_ctg = data_cache.Get_or_null(ttl_bry);

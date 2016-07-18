@@ -61,8 +61,10 @@ public class Xop_under_lxr_tst {
 		fxt.Init_para_n_();
 	}
 	@Test   public void Toc_works() {	// PURPOSE: make sure "suppressed" pre does not somehow suppress TOC
+		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str("a\n__TOC__\n==b==\n", String_.Concat_lines_nl
+		Bry_bfr tmp = Bry_bfr_.New();
+		String expd = String_.Concat_lines_nl
 		( "<p>a"
 		, "</p>"
 		, "<div id=\"toc\" class=\"toc\">"
@@ -75,9 +77,12 @@ public class Xop_under_lxr_tst {
 		, "  </ul>"
 		, "</div>"
 		, ""
-		, "<h2>b</h2>"
-		));
+		, "<h2><span class=\"mw-headline\" id=\"b\">b</span></h2>"
+		);
+		String actl = gplx.xowa.addons.htmls.tocs.Xowe_hdr_bldr_fxt.Bld_page_with_toc(tmp, fxt, "a\n__TOC__\n==b==\n");
+		Tfds.Eq_str_lines(expd, actl);
 		fxt.Init_para_n_();
+		fxt.Wtr_cfg().Toc__show_(Bool_.N);
 	}		
 	@Test  public void Ignore_pre_after() {	// PURPOSE: "__TOC__\s\n" must be trimmed at end, else false pre; assertion only (no code exists to handle this test);  DATE:2013-07-08
 		fxt.Init_para_y_();

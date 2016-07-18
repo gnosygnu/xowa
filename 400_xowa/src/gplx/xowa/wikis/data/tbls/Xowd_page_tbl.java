@@ -156,9 +156,8 @@ public class Xowd_page_tbl implements Rls_able {
 		wkr.Init(this, ns_mgr, rv);
 		wkr.Select_in(cancelable, conn, bgn, end);
 	}
-	public boolean Select_in__id(Cancelable cancelable, List_adp rv)						{return Select_in__id(cancelable, false, rv, 0, rv.Count());}
-	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, List_adp rv)	{return Select_in__id(cancelable, skip_table_read, rv, 0, rv.Count());}
-	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, List_adp rv, int bgn, int end) {
+	public boolean Select_in__id(Cancelable cancelable, boolean show_progress, List_adp rv)	{return Select_in__id(cancelable, false, show_progress, rv, 0, rv.Count());}
+	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, boolean show_progress, List_adp rv, int bgn, int end) {
 		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.To_ary(Xowd_page_itm.class);
 		int len = page_ary.length; if (len == 0) return false;
 		Ordered_hash hash = Ordered_hash_.New();
@@ -169,13 +168,9 @@ public class Xowd_page_tbl implements Rls_able {
 				hash.Add(p.Id_val(), p);
 		}
 		hash.Sort_by(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
-		conn.Txn_bgn("schema__page__select_in");
-		try {
-			Xowd_page_tbl__id wkr = new Xowd_page_tbl__id();
-			wkr.Ctor(this, tbl_name, fld_id);
-			wkr.Init(rv, hash);
-			wkr.Select_in(cancelable, conn, bgn, end);
-		} finally {conn.Txn_end();}
+		Xowd_page_tbl__id wkr = new Xowd_page_tbl__id(rv, hash, show_progress);
+		wkr.Ctor(this, tbl_name, fld_id);
+		wkr.Select_in(cancelable, conn, bgn, end);
 		return true;		
 	}
 	public byte[] Select_random(Xow_ns ns) {// ns should be ns_main

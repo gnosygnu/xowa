@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*;
 public class Gfs_parser {
-	Btrie_fast_mgr trie = Gfs_parser_.trie_();
-	Gfs_parser_ctx ctx = new Gfs_parser_ctx();
+	private final    Btrie_fast_mgr trie = Gfs_parser_.trie_();
+	private final    Gfs_parser_ctx ctx = new Gfs_parser_ctx();
 	public Gfs_nde Parse(byte[] src) {
 		ctx.Root().Subs_clear();
 		int src_len = src.length; if (src_len == 0) return ctx.Root();
@@ -27,13 +27,13 @@ public class Gfs_parser {
 		int pos = 0;
 		while (pos < src_len) {
 			byte b = src[pos];
-			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = trie.Match_at_w_b0(ctx.Trie_rv(), b, src, pos, src_len);
 			if (o == null)
 				ctx.Err_mgr().Fail_unknown_char(ctx, pos, b); 
 			else {
 				Gfs_lxr lxr = (Gfs_lxr)o;
 				while (lxr != null) {
-					int rslt = lxr.Process(ctx, pos, trie.Match_pos());
+					int rslt = lxr.Process(ctx, pos, ctx.Trie_rv().Pos());
 					switch (lxr.Lxr_tid()) {
 						case Gfs_lxr_.Tid_whitespace: break; 
 						case Gfs_lxr_.Tid_comment: break; 

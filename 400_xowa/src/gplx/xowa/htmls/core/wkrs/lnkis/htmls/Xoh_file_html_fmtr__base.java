@@ -153,8 +153,10 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	,       "<div><a~{id} href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\" class=\"xowa_media_play\" style=\"width:~{a_width}px;max-width:~{a_max_width}px;\" alt=\"Play sound\"></a></div>"
 	), "id", "a_width", "a_max_width", "a_href", "a_xowa_title");
 
-	public static final    Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
 	public static byte[] Escape_xowa_title(byte[] lnki_ttl) {
 		return Xoa_ttl.Replace_spaces(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes.Encode(lnki_ttl)); // must encode xowa_title, particularly quotes; EX: xowa_title="A"b.png"; PAGE:en.w:Earth DATE:2015-11-27
+	}
+	public static byte[] Escape_xowa_title_v2(byte[] lnki_ttl) {
+		return Xoa_ttl.Replace_spaces(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes_v2.Encode(lnki_ttl)); // must encode xowa_title, particularly quotes; EX: xowa_title="A"b.png"; PAGE:en.w:Earth DATE:2015-11-27
 	}
 }

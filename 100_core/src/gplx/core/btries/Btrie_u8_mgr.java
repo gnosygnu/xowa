@@ -24,6 +24,37 @@ public class Btrie_u8_mgr implements Btrie_mgr {
 		this.root = new Btrie_u8_itm(Bry_.Empty, null);
 	}
 	public int Count() {return count;} private int count;
+	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {return Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos);}
+	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int end_pos) {
+		Object rv_obj = null;
+		int rv_pos = bgn_pos;
+		int cur_pos = bgn_pos;
+		Btrie_u8_itm cur = root;
+		while (true) {
+			int c_len = Utf8_.Len_of_char_by_1st_byte(b);
+			int c_end = cur_pos + c_len;
+			Btrie_u8_itm nxt = cur.Nxts_find(src, cur_pos, c_end, true);
+			if (nxt == null) {
+				rv.Init(rv_pos, rv_obj);			// nxts does not have key; return rv_obj;
+				return rv_obj;
+			}
+			cur_pos = c_end;
+			if (nxt.Nxts_is_empty()) {	// nxt is leaf; return nxt.Val() (which should be non-null)
+				rv_obj = nxt.Val();
+				rv.Init(cur_pos, rv_obj);
+				return rv_obj;
+			}
+			Object nxt_val = nxt.Val();
+			if (nxt_val != null) {rv_pos = cur_pos; rv_obj = nxt_val;}			// nxt is node; cache rv_obj (in case of false match)
+			if (cur_pos == end_pos) {			// increment cur_pos and exit if end
+				rv.Init(rv_pos, rv_obj);			
+				return rv_obj;
+			}
+			b = src[cur_pos];
+			cur = nxt;
+		}
+	}
+
 	public int Match_pos() {return match_pos;} private int match_pos;
 	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);}
 	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int end_pos) {

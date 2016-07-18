@@ -20,6 +20,7 @@ import gplx.core.brys.*; import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.*;	
+import gplx.xowa.parsers.*;
 public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
 	private Xowe_wiki wiki; private Xow_hdump_mgr hdump_mgr; private Xob_hdump_tbl_retriever html_tbl_retriever;
@@ -27,6 +28,9 @@ public class Xob_hdump_bldr implements Gfo_invk {
 	private int prv_row_len = 0;
 	private final    Xoh_page tmp_hpg = new Xoh_page(); private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private boolean op_sys_is_wnt;
+	public Xob_hdump_bldr Enabled_(boolean v) {this.enabled = v; return this;}
+	public Xob_hdump_bldr Hzip_enabled_(boolean v) {this.hzip_enabled = v; return this;}
+	public Xob_hdump_bldr Hzip_diff_(boolean v) {this.hzip_diff = v; return this;}
 	public boolean Init(Xowe_wiki wiki, Db_conn make_conn, Xob_hdump_tbl_retriever html_tbl_retriever) {
 		if (!enabled) return false;
 		this.op_sys_is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();
@@ -38,19 +42,19 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}
-	public void Insert(Xoae_page wpg) {
+	public void Insert(Xop_ctx ctx, Xoae_page wpg) {
 		// clear
 		tmp_hpg.Clear();			// NOTE: must clear tmp_hpg or else will leak memory during mass build; DATE:2016-01-09
 		wpg.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 
 		// write to html
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, wiki.Parser_mgr().Ctx(), Xoh_wtr_ctx.Hdump, wpg);
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, ctx, Xoh_wtr_ctx.Hdump, wpg);
 		byte[] orig_bry = tmp_bfr.To_bry_and_clear();
 		wpg.Db().Html().Html_bry_(orig_bry);
 
 		// save to db
 		Xowd_html_tbl html_tbl = html_tbl_retriever.Get_html_tbl(wpg.Ttl().Ns(), prv_row_len);	// get html_tbl
-		this.prv_row_len = hdump_mgr.Save_mgr().Save(tmp_hpg.Ctor_by_page(tmp_bfr, wpg), html_tbl, true);	// save to db
+		this.prv_row_len = hdump_mgr.Save_mgr().Save(tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg), html_tbl, true);	// save to db
 		stat_tbl.Insert(tmp_hpg, stat_itm, wpg.Root().Root_src().length, tmp_hpg.Db().Html().Html_bry().length, prv_row_len); // save stats
 
 		// run hzip diff if enabled

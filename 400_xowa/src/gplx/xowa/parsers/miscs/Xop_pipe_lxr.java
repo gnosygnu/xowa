@@ -28,11 +28,11 @@ public class Xop_pipe_lxr implements Xop_lxr {
 		switch (cur_stack_tid) {
 			case Xop_tkn_itm_.Tid_brack_bgn:					// used for tmpl mode where full lnki_wkr is too heavyweight; matches "[ |"
 				switch (ctx.Parse_tid()) {
-					case Xop_parser_.Parse_tid_tmpl:
-					case Xop_parser_.Parse_tid_page_tmpl:
+					case Xop_parser_tid_.Tid__defn:
+					case Xop_parser_tid_.Tid__tmpl:
 						ctx.Subs_add(root, tkn_mkr.Txt(bgn_pos, cur_pos));
 						break;
-					case Xop_parser_.Parse_tid_page_wiki:		// should never happen?
+					case Xop_parser_tid_.Tid__wtxt:		// should never happen?
 						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 						break;
 					default: throw Err_.new_unhandled(ctx.Parse_tid());
@@ -88,5 +88,5 @@ public class Xop_pipe_lxr implements Xop_lxr {
 				return cur_pos;
 		}
 	}
-	public static final Xop_pipe_lxr Instance = new Xop_pipe_lxr();
+	public static final    Xop_pipe_lxr Instance = new Xop_pipe_lxr();
 }

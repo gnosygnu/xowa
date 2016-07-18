@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_img_make__dump__tst {
-	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
 	@Test   public void Html_exists__n() {
 		String

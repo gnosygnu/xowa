@@ -20,8 +20,8 @@ import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.wikis.searchs.parsers.*;
 class Srch_crt_scanner {
 	private final    List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
-	private final    Srch_crt_scanner_syms trie_bldr; private final    Btrie_slim_mgr trie;
-	private final    Bry_bfr word_bfr = Bry_bfr_.New(); private boolean word_is_dirty;
+	private final    Srch_crt_scanner_syms trie_bldr; private final    Btrie_slim_mgr trie; private final    Btrie_rv trv = new Btrie_rv();
+	private final    Bry_bfr word_bfr = Bry_bfr_.New(); private boolean word_is_dirty;		
 	public Srch_crt_scanner(Srch_crt_scanner_syms trie_bldr) {
 		this.trie_bldr = trie_bldr;
 		this.trie = trie_bldr.Trie();
@@ -31,14 +31,14 @@ class Srch_crt_scanner {
 		tkns.Clear(); pos = 0; txt_bgn = -1; 
 		while (pos < src_len) {
 			byte cur_b = src[pos];
-			byte cur_tid = trie.Match_byte_or(cur_b, src, pos, src_len, Byte_.Max_value_127);
+			byte cur_tid = trie.Match_byte_or(trv, cur_b, src, pos, src_len, Byte_.Max_value_127);
 			if (cur_tid == Byte_.Max_value_127) {					// text character
 				if (txt_bgn == -1) txt_bgn = pos;					// 1st character not set; set it
 				if (word_is_dirty) word_bfr.Add_byte(cur_b);
 				++pos;
 			}	
 			else {													// \ \s " - & | ( )
-				int pos_end = trie.Match_pos();
+				int pos_end = trv.Pos();
 				if (	cur_tid == Srch_crt_tkn.Tid__not			// if "-"
 					&&	txt_bgn != -1) {							// && "word has started"
 						++pos;

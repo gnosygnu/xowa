@@ -48,7 +48,6 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				val.Subs_get(j).Tmpl_compile(ctx, src, prep_data);
 		}
 	}
-	private static final    Xol_func_itm finder = new Xol_func_itm();
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		boolean rv = false;
 		Xot_defn defn = tmpl_defn; Xowe_wiki wiki = ctx.Wiki(); Xol_lang_itm lang = wiki.Lang();
@@ -101,14 +100,12 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (ns_eval != null && !template_prefix_found)									// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
 				return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 
-			int finder_tid, finder_colon_pos, finder_subst_end;
-			synchronized (finder) {
-				lang.Func_regy().Find_defn(finder, name_ary, name_bgn, name_ary_len);
-				defn = finder.Func();
-				finder_tid = finder.Tid();
-				finder_colon_pos = finder.Colon_pos();
-				finder_subst_end = finder.Subst_end();
-			}
+			Xol_func_itm finder = new Xol_func_itm();	// TS.MEM: DATE:2016-07-12
+			lang.Func_regy().Find_defn(finder, name_ary, name_bgn, name_ary_len);
+			defn = finder.Func();
+			int finder_tid = finder.Tid();
+			int finder_colon_pos = finder.Colon_pos();
+			int finder_subst_end = finder.Subst_end();
 
 			int colon_pos = -1;
 			switch (finder_tid) {
@@ -283,7 +280,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
 							byte[] tmp_src = rslt_bfr.To_bry_and_clear();
-							rslt_bfr.Add(wiki.Parser_mgr().Main().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
+							rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
 						}
 						if (Cache_enabled) {
 							byte[] rslt_val = rslt_bfr.To_bry_and_clear();

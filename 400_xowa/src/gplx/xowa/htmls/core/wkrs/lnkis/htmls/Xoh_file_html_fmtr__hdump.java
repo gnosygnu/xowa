@@ -65,5 +65,4 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bfr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
-	public static final    Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

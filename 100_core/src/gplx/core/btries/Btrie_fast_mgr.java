@@ -22,12 +22,7 @@ public class Btrie_fast_mgr {
 	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}
 	public int Match_pos() {return match_pos;} private int match_pos;
 
-//		Btrie_rv Match_at_w_b0_and_rls(byte[] src, int bgn, int end) {return Match_at_w_b0_and_rls(src[bgn], src, bgn, end);}
-//		Btrie_rv Match_at_w_b0_and_rls(byte b, byte[] src, int bgn_pos, int src_end) {
-//			Btrie_rv rv = ((Btrie_rv)Btrie_rv.Pool__mgr.Get_safe());
-//			Match_at_w_b0(rv, b, src, bgn_pos, src_end);
-//			return rv;
-//		}
+	public Object Match_at(Btrie_rv rv, byte[] src, int bgn_pos, int end_pos) {return Match_at_w_b0(rv, src[bgn_pos], src, bgn_pos, end_pos);}
 	public Object Match_at_w_b0(Btrie_rv rv, byte b, byte[] src, int bgn_pos, int src_end) {
 		Object rv_obj = null; 
 		int rv_pos = bgn_pos;

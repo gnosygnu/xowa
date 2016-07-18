@@ -30,7 +30,7 @@ class Xoh_js_cleaner_fxt {
 		if (mgr == null) {
 			app = Xoa_app_fxt.Make__app__edit();
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
-			mgr = app.Html_mgr().Js_cleaner();
+			mgr = wiki.Html_mgr().Js_cleaner();
 		}
 	}	private Xoae_app app; Xowe_wiki wiki; Xoh_js_cleaner mgr;
 	public void Test_clean(String raw_str, String expd) {

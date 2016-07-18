@@ -39,7 +39,7 @@ public class Gallery_mgr_wtr {
 			ul_style = Fmt_and_add(tmp_bfr, Gallery_mgr_wtr_.Fmtr__ul__style, ul_style, max_width);
 		}
 		byte[] ul_cls = Fmt_and_add(tmp_bfr, Gallery_mgr_wtr_.Fmtr__ul__cls, xnde.Atr_cls(), Gallery_mgr_base_.To_bry(mgr.Tid()));
-		Write_ul_lhs(bfr, tmp_bfr, hctx_is_hdump, wiki.Appe().Html_mgr().Whitelist_mgr(), src, xnde, ul_id, ul_cls, ul_style, xnde.Atrs_other());
+		Write_ul_lhs(bfr, tmp_bfr, hctx_is_hdump, wiki.Html_mgr().Whitelist_mgr(), src, xnde, ul_id, ul_cls, ul_style, xnde.Atrs_other());
 
 		// write gallery_caption; EX: <li class='gallerycaption'>caption</li>
 		byte[] mgr_caption = xnde.Mgr_caption();
@@ -147,7 +147,7 @@ public class Gallery_mgr_wtr {
 		}
 
 		// write caption
-		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, page, hctx, true, itm_caption);
+		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, ctx, page, hctx, true, itm_caption);
 		itm_caption = tmp_bfr.To_bry_and_clear();
 		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).To_bry_and_clear();
 		mgr.Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);

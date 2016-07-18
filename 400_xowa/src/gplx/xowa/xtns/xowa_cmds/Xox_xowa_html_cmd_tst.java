@@ -50,8 +50,8 @@ class Xox_xowa_html_cmd_fxt {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		fxt.Page().Root_(root);
-		html_mgr.Html_wtr().Write_all(bfr, fxt.Ctx(), raw_bry, root);
-		byte[] actl = html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(fxt.Page(), fxt.Ctx(), bfr);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		html_mgr.Html_wtr().Write_doc(bfr, fxt.Ctx(), raw_bry, root);
+		html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(bfr, fxt.Page(), fxt.Ctx());
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

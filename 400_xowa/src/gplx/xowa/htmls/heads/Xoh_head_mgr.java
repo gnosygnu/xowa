@@ -60,7 +60,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		return this;
 	}
 	public Xoh_head_mgr Init_dflts() {
-		if (page.Hdr_mgr().Toc_enabled())									itm__toc.Enabled_y_();
+		if (page.Wtxt().Toc().Enabled())									itm__toc.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__top_icon().Enabled_y())			itm__top_icon.Enabled_y_();
 		if (wiki.Html_mgr().Head_mgr().Itm__title_rewrite().Enabled_y())	itm__title_rewrite.Enabled_y_();
 		if (app.Gui_mgr().Search_cfg().Enabled())							itm__search_suggest.Enabled_y_();

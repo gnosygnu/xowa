@@ -24,7 +24,7 @@ public class Xopg_db_data {
 	public void Clear() {
 		page.Clear();
 		html.Clear();
-		// text.Clear();
-		// protection.Clear();
+		text.Clear();
+		protection.Clear();
 	}
 }

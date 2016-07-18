@@ -28,7 +28,7 @@ public class Imap_link_owner_ {
 			switch (tkn_tid) {
 				case Xop_tkn_itm_.Tid_lnki: {
 					Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
-					link_owner.Link_href_(app.Html__href_wtr().Build_to_bry(wiki, lnki_tkn.Ttl()));
+					link_owner.Link_href_(wiki.Html__href_wtr().Build_to_bry(wiki, lnki_tkn.Ttl()));
 					wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, Xoh_wtr_ctx.Alt, src, lnki_tkn, lnki_tkn.Ttl());
 					link_owner.Link_text_(bfr.To_bry_and_clear());
 					break;
@@ -54,7 +54,7 @@ public class Imap_link_owner_ {
 			switch (link_owner.Link_tid()) {
 				case Xop_tkn_itm_.Tid_lnki: {
 					Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)link_owner.Link_tkn();
-					link_owner.Link_href_(app.Html__href_wtr().Build_to_bry(wiki, lnki_tkn.Ttl()));
+					link_owner.Link_href_(wiki.Html__href_wtr().Build_to_bry(wiki, lnki_tkn.Ttl()));
 					wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, hctx, src, lnki_tkn, lnki_tkn.Ttl());
 					link_owner.Link_text_(bfr.To_bry_and_clear());
 					break;

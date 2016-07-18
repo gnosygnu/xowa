@@ -43,15 +43,16 @@ public class Pfunc_iferror extends Pf_func_base {
 		byte state = State_null;
 		int pos = 0;
 		boolean valid = false;
+		Btrie_rv trv = new Btrie_rv();
 		while (true) {
 			if (pos == src_len) break;
 			byte b = src[pos];
-			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null) 
 				++pos;
 			else {
 				Byte_obj_val bv = (Byte_obj_val)o;
-				int pos_nxt = trie.Match_pos();
+				int pos_nxt = trv.Pos();
 				if (pos_nxt == src_len) return false; // each of the three states requires at least one character afterwards
 				switch (bv.Val()) {
 					case State_close:	// >: reset state
@@ -108,7 +109,7 @@ public class Pfunc_iferror extends Pf_func_base {
 		}
 		return false;
 	}
-	private static final Btrie_slim_mgr trie = trie_();
+	private static final    Btrie_slim_mgr trie = trie_();
 	static final byte State_null = 0, State_nde = 1, State_class = 2, State_error = 3, State_close = 4;
 	private static Btrie_slim_mgr trie_() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en

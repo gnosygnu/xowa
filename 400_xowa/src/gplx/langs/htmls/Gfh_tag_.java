@@ -65,6 +65,14 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__del		= 41
 	, Id__strike	= 42
 	, Id__tt		= 43
+	, Id__code		= 44
+	, Id__wbr		= 45
+	, Id__center	= 46	// en.v:Vandalism_in_progress
+	, Id__dfn		= 47
+	, Id__kbd		= 48
+	, Id__samp		= 49
+	, Id__ins		= 50
+	, Id__em		= 51
 	;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
@@ -122,6 +130,14 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("del"			, Id__del)
 	.Add_str_int("strike"		, Id__strike)
 	.Add_str_int("tt"			, Id__tt)
+	.Add_str_int("code"			, Id__code)
+	.Add_str_int("wbr"			, Id__wbr)
+	.Add_str_int("center"		, Id__center)
+	.Add_str_int("dfn"			, Id__dfn)
+	.Add_str_int("kbd"			, Id__kbd)
+	.Add_str_int("samp"			, Id__samp)
+	.Add_str_int("ins"			, Id__ins)
+	.Add_str_int("em"			, Id__em)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -172,6 +188,14 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__del:			return "del";
 			case Id__strike:		return "strike";
 			case Id__tt:			return "tt";
+			case Id__code:			return "code";
+			case Id__wbr:			return "wbr";
+			case Id__center:		return "center";
+			case Id__dfn:			return "dfn";
+			case Id__kbd:			return "kbd";
+			case Id__samp:			return "samp";
+			case Id__ins:			return "ins";
+			case Id__em:			return "em";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}
@@ -184,8 +208,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, I_lhs						= Bry_.new_a7("<i>")			, I_rhs						= Bry_.new_a7("</i>")
 	, P_lhs						= Bry_.new_a7("<p>")			, P_rhs						= Bry_.new_a7("</p>")
 	, Pre_lhs					= Bry_.new_a7("<pre>")			, Pre_rhs					= Bry_.new_a7("</pre>")
-	, Div_lhs					= Bry_.new_a7("<div>")			, Div_rhs					= Bry_.new_a7("</div>")
-	, Div_lhs_bgn				= Bry_.new_a7("<div")
+	, Div_lhs					= Bry_.new_a7("<div>")			, Div_rhs					= Bry_.new_a7("</div>")		, Div_lhs_bgn				= Bry_.new_a7("<div")
 	, Html_rhs					= Bry_.new_a7("</html>")
 	, Head_lhs_bgn				= Bry_.new_a7("<head")			, Head_rhs					= Bry_.new_a7("</head>")
 	, Style_lhs_w_type			= Bry_.new_a7("<style type=\"text/css\">")
@@ -195,8 +218,16 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Span_lhs					= Bry_.new_a7("<span")			, Span_rhs					= Bry_.new_a7("</span>")
 	, Strong_lhs				= Bry_.new_a7("<strong>")		, Strong_rhs				= Bry_.new_a7("</strong>")
 	, Ul_lhs					= Bry_.new_a7("<ul>")			, Ul_rhs					= Bry_.new_a7("</ul>")
-	, Li_lhs					= Bry_.new_a7("<li>")			, Li_rhs					= Bry_.new_a7("</li>")
-	, Li_lhs_bgn				= Bry_.new_a7("<li")
+	, Ol_lhs					= Bry_.new_a7("<ol>")			, Ol_rhs					= Bry_.new_a7("</ol>")
+	, Dt_lhs					= Bry_.new_a7("<dt>")			, Dt_rhs					= Bry_.new_a7("</dt>")
+	, Dd_lhs					= Bry_.new_a7("<dd>")			, Dd_rhs					= Bry_.new_a7("</dd>")
+	, Dl_lhs					= Bry_.new_a7("<dl>")			, Dl_rhs					= Bry_.new_a7("</dl>")
+	, Li_lhs					= Bry_.new_a7("<li>")			, Li_rhs					= Bry_.new_a7("</li>")		, Li_lhs_bgn				= Bry_.new_a7("<li")
+	, Table_lhs					= Bry_.new_a7("<table>")		, Table_rhs					= Bry_.new_a7("</table>")	, Table_lhs_bgn				= Bry_.new_a7("<table")
+	, Tr_lhs					= Bry_.new_a7("<tr>")			, Tr_rhs					= Bry_.new_a7("</tr>")		, Tr_lhs_bgn				= Bry_.new_a7("<tr")
+	, Td_lhs					= Bry_.new_a7("<td>")			, Td_rhs					= Bry_.new_a7("</td>")		, Td_lhs_bgn				= Bry_.new_a7("<td")
+	, Th_lhs					= Bry_.new_a7("<th>")			, Th_rhs					= Bry_.new_a7("</th>")		, Th_lhs_bgn				= Bry_.new_a7("<th")		
+	, Caption_lhs				= Bry_.new_a7("<caption>")		, Caption_rhs				= Bry_.new_a7("</caption>")	, Caption_lhs_bgn			= Bry_.new_a7("<caption")
 	;
 	public static final String 
 	  Comm_bgn_str				= "<!--"
@@ -210,6 +241,8 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
 	;
-	public static void Lhs_end_nde(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Gt);}
-	public static void Lhs_end_inl(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);}
+	private static final    byte[] Rhs_bgn = Bry_.new_a7("</");
+	public static void Bld_lhs_end_nde(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Gt);}
+	public static void Bld_lhs_end_inl(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);}
+	public static void Bld_rhs(Bry_bfr bfr, byte[] name) {bfr.Add(Rhs_bgn).Add(name).Add_byte(Byte_ascii.Angle_end);}	// EX:"</tag_name>"
 }

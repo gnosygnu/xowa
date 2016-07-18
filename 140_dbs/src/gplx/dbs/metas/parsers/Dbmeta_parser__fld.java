@@ -19,6 +19,7 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.dbs.engines.sqlite.*;
 public class Dbmeta_parser__fld {
+	private final    Btrie_rv trv = new Btrie_rv();
 	public Dbmeta_fld_itm Parse_fld(Sql_bry_rdr rdr) {	// starts after "(" or ","; EX: "(fld1 int", ", fld2 int"; ends at ")"
 		byte[] name = rdr.Read_sql_identifier();
 		Dbmeta_fld_tid type = this.Parse_type(rdr);
@@ -41,12 +42,12 @@ public class Dbmeta_parser__fld {
 					}
 					return fld;
 			}
-			Dbmeta_fld_wkr__base type_wkr = (Dbmeta_fld_wkr__base)rdr.Chk_trie_as_obj(fld_trie);
+			Dbmeta_fld_wkr__base type_wkr = (Dbmeta_fld_wkr__base)rdr.Chk_trie_as_obj(trv, fld_trie);
 			switch (type_wkr.Tid()) {
 				case Dbmeta_fld_wkr__base.Tid_end_comma:
 				case Dbmeta_fld_wkr__base.Tid_end_paren:	return fld;
 				default:
-					rdr.Move_to(fld_trie.Match_pos());
+					rdr.Move_to(trv.Pos());
 					type_wkr.Match(rdr, fld);
 					break;
 			}
@@ -54,7 +55,7 @@ public class Dbmeta_parser__fld {
 	}
 	@gplx.Internal protected Dbmeta_fld_tid Parse_type(Bry_rdr rdr) {
 		rdr.Skip_ws();
-		Dbmeta_parser__fld_itm type_itm = (Dbmeta_parser__fld_itm)rdr.Chk_trie_as_obj(type_trie);
+		Dbmeta_parser__fld_itm type_itm = (Dbmeta_parser__fld_itm)rdr.Chk_trie_as_obj(trv, type_trie);
 		rdr.Move_by(type_itm.Word().length);
 		int paren_itms_count = type_itm.Paren_itms_count();
 		int len_1 = Int_.Min_value, len_2 = Int_.Min_value;

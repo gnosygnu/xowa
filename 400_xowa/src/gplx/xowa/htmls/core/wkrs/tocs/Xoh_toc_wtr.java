@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*; import gplx.core.brys.args.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
-import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_toc_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	private byte toc_mode;
 	public void Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_toc_data data) {
@@ -39,13 +39,26 @@ public class Xoh_toc_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	public static final    byte[] 
 	  Atr__class__toc				= Bry_.new_a7("xo-toc")
 	, Atr__data__toc__mode			= Bry_.new_a7("data-toc-mode")
+//		, Bry__placeholder				= Bry_.new_a7("<!--XOWA:TOC-->\n")	// NOTE: need to put \n b/c html_wtr always adds \n before each <h2> and TOC usually goes before <h2>; DATE:2016-07-16
 	;
 	public static void Write_tag(Bry_bfr bfr, boolean pgbnr_enabled) {
 		bfr.Add(Gfh_tag_.Div_lhs_bgn);
 		Gfh_atr_.Add(bfr, Gfh_atr_.Bry__class, Atr__class__toc);
 		if (pgbnr_enabled)
 			Gfh_atr_.Add(bfr, Atr__data__toc__mode, Xoh_toc_data.Toc_mode__pgbnr);
-		Gfh_tag_.Lhs_end_nde(bfr);
+		Gfh_tag_.Bld_lhs_end_nde(bfr);
 		bfr.Add(Gfh_tag_.Div_rhs);
+	}
+	public static void Write_placeholder(Xoa_page pg, Bry_bfr bfr) {
+		pg.Html_data().Toc_mgr().Toc_bgn_(bfr.Len());
+	}
+	public static void Write_toc(Bry_bfr rv, Xoa_page pg, Xoh_wtr_ctx hctx) {
+		int toc_bgn = pg.Html_data().Toc_mgr().Toc_bgn(); if (toc_bgn == Bry_find_.Not_found) return; // no TOC
+
+		// build body
+		byte[] bry = rv.To_bry_and_clear();	// NOTE: create bry to free bfr
+		rv.Add_mid(bry, 0, toc_bgn);
+		pg.Html_data().Toc_mgr().To_html(rv, hctx, pg.Html_data().Xtn_pgbnr() != null);
+		rv.Add_mid(bry, toc_bgn, bry.length);
 	}
 }

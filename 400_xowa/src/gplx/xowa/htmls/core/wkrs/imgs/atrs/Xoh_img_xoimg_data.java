@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Pipe);
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
@@ -91,6 +92,11 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 	public static final    byte[]
 	  Bry__data_xowa_image			= Bry_.new_a7("data-xoimg")
 	, Bry__data_xowa_title			= Bry_.new_a7("data-xowa-title")
-	, Bry__data_xowa_image__full	= Bry_.new_a7("0|-1|-1|-1|-1|-1")	// for pagebanner
+	, Bry__data_xowa_image__full	= Bry_.new_a7("1|-1|-1|-1|-1|-1")	// for pagebanner
 	;
+	public static Xoh_img_xoimg_data New__pgbnr() {
+		Xoh_img_xoimg_data rv = new Xoh_img_xoimg_data();
+		rv.Set(Xop_lnki_type.Id_none, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
+		return rv;
+	}
 }

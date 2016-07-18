@@ -71,7 +71,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 	public byte[] Val_by_itm(Bry_bfr tmp_bfr, Xol_msg_itm itm, Object[] args) {
 		byte[] rv = itm.Val();
 		if (args != null) rv = itm.Fmt_tmp(tmp_bfr, rv, args);
-		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Parse_text_to_wtxt(rv);
+		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Expand_tmpl(rv);
 		return rv;
 	}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {

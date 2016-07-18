@@ -92,15 +92,20 @@ public class Xou_history_mgr implements Gfo_invk {
 		Io_mgr.Instance.SaveFilBry(app.Usere().Fsys_mgr().App_data_history_fil(), ary);
 	}
 	public Ordered_hash Archive(Xoae_app app) {
+		// sort all itms; other init
 		itms.Sort_by(sorter);
-		int itms_len = itms.Count();
 		Ordered_hash current_itms = Ordered_hash_.New_bry();
 		Ordered_hash archive_itms = Ordered_hash_.New_bry();
+
+		// iterate over all itms
+		int itms_len = itms.Count();
 		for (int i = 0; i < itms_len; i++) {
-			Xou_history_itm  itm = (Xou_history_itm)itms.Get_at(i);
-			Ordered_hash itms_hash = (i < current_itms_reset) ? current_itms : archive_itms;
-			itms_hash.Add(itm.Key(), itm);
+			Xou_history_itm itm = (Xou_history_itm)itms.Get_at(i);
+			Ordered_hash itms_hash = (i < current_itms_reset) ? current_itms : archive_itms;	// if < cutoff, add to current file; else add to archive
+			itms_hash.Add_if_dupe_use_nth(itm.Key(), itm);	// NOTE: dupes should not exist, but if they do, ignore it; else app won't close on first time; DATE:2016-07-14
 		}
+
+		// save archive
 		byte[] ary = Xou_history_itm_srl.Save(archive_itms);
 		Io_url url = app.Usere().Fsys_mgr().App_data_history_fil().GenNewNameOnly(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 		Io_mgr.Instance.SaveFilBry(url, ary);

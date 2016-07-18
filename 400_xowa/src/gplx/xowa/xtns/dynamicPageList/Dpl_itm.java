@@ -42,7 +42,7 @@ class Dpl_itm {
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
 	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
-		sub_ctx = Xop_ctx.new_sub_(ctx);
+		sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
 		sub_root = sub_tkn_mkr.Root(Bry_.Empty);
 		int content_bgn = xnde.Tag_open_end(), content_end = xnde.Tag_close_bgn();
@@ -101,7 +101,7 @@ class Dpl_itm {
 	}
 	public void Parse_cmd(Xowe_wiki wiki, byte key_id, byte[] val) {
 		sub_root.Clear();
-		val = wiki.Parser_mgr().Main().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
+		val = wiki.Parser_mgr().Main().Expand_tmpl(sub_root, sub_ctx, sub_tkn_mkr, val);
 		switch (key_id) {
 			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = List_adp_.New(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
 			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = List_adp_.New(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;

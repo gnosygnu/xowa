@@ -56,7 +56,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private Xowe_wiki wiki; private Xop_parser parser; private Xop_ctx sub_ctx; private Xol_msg_mgr msg_mgr;
 	private byte[] Parse_wikitext(Xop_ctx ctx, byte[] v) {
 		if (Bry_.Len_eq_0(v)) return v;	// ignore null, ""
-		if (sub_ctx == null) sub_ctx = Xop_ctx.new_sub_(ctx);
+		if (sub_ctx == null) sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		return parser.Parse_text_to_html(sub_ctx, v);
 	}
 	private Listing_xtn_mgr xtn_mgr;
@@ -73,7 +73,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			html_output = hwtr.To_bry_and_clear();
 		}
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) 
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else
@@ -99,7 +99,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		}
 		bfr.Add(Bry__invk_end);					// "}}"
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
 		return true;
 	}
@@ -199,7 +199,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		tmp_bfr.Add(Bry__invk_bgn);					// "{{"
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
 		tmp_bfr.Add(Bry__invk_end);					// "}}"
-		Xop_ctx sub_ctx = Xop_ctx.new_sub_(ctx);
+		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
 		Xol_msg_itm position_text = xtn_mgr.Position_text();
 		if (Bry_.Len_eq_0(position_text.Val())) return rv;

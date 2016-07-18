@@ -30,12 +30,12 @@ public class Poem_nde implements Xox_xnde {
 		Poem_xtn_mgr xtn_mgr = (Poem_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Poem_xtn_mgr.XTN_KEY);
 		byte[] poem_bry = Parse_lines(wiki.Utl__bfr_mkr(), src, itm_bgn, itm_end);
 		// xtn_root = xtn_mgr.Parser().Parse_text_to_wdom_old_ctx(ctx, poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
-		xtn_root = xtn_mgr.Parser().Parse_text_to_wdom(Xop_ctx.New_sub_by_ctx(ctx), poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
+		xtn_root = xtn_mgr.Parser().Parse_text_to_wdom(Xop_ctx.New__sub_and_page(wiki, ctx), poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_root == null) return;	// inline poem; write nothing; EX: <poem/>
 		bfr.Add(Div_poem_bgn);
-		html_wtr.Write_tkn(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);
+		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);
 		bfr.Add(Div_poem_end);			
 	}
 	private static byte[] Parse_lines(Bry_bfr_mkr bfr_mkr, byte[] src, int src_bgn, int src_end) {

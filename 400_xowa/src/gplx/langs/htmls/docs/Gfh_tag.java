@@ -104,6 +104,11 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key); if (rv == null) return or;
 		return Bry_.To_int_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
+	public double Atrs__get_as_double_or(byte[] key, double or) {
+		if (atrs_null) Atrs__make();
+		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key); if (rv == null) return or;
+		return Bry_.To_double_or(src, rv.Val_bgn(), rv.Val_end(), or);
+	}
 	public Gfh_atr Atrs__get_at(int i)					{return (Gfh_atr)atrs_hash.Get_at(i);}
 	public Gfh_atr Atrs__get_by_or_fail(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.Y);}
 	public Gfh_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.N);}

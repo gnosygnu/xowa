@@ -24,15 +24,17 @@ public interface Gfo_url_encoder_itm {
 class Gfo_url_encoder_itm_same implements Gfo_url_encoder_itm {
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {bfr.Add_byte(b); return 0;}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {bfr.Add_byte(b); return 0;}
-	public static final Gfo_url_encoder_itm Instance = new Gfo_url_encoder_itm_same();
+	public static final    Gfo_url_encoder_itm Instance = new Gfo_url_encoder_itm_same();
 } 
 class Gfo_url_encoder_itm_diff implements Gfo_url_encoder_itm {
-	public Gfo_url_encoder_itm_diff(byte orig, byte repl) {this.orig = orig; this.repl = repl;} private byte orig, repl;
+	private final    byte orig, repl;
+	public Gfo_url_encoder_itm_diff(byte orig, byte repl) {this.orig = orig; this.repl = repl;}
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {bfr.Add_byte(repl); return 0;}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {bfr.Add_byte(orig); return 0;}
 } 
 class Gfo_url_encoder_itm_hex implements Gfo_url_encoder_itm {
-	public Gfo_url_encoder_itm_hex(byte encode_marker) {this.encode_marker = encode_marker;} private byte encode_marker;
+	private final    byte encode_marker;
+	public Gfo_url_encoder_itm_hex(byte encode_marker) {this.encode_marker = encode_marker;}
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {Encode_byte(b, bfr, encode_marker); return 0;}
 	public static void Encode_byte(byte b, Bry_bfr bfr, byte encode_marker) {
 		int b_int = b & 0xFF;// PATCH.JAVA:need to convert to unsigned byte
@@ -68,13 +70,14 @@ class Gfo_url_encoder_itm_hex implements Gfo_url_encoder_itm {
 			return 0;
 		}
 	}
-	public static final byte[] HexBytes = new byte[] 
+	public static final    byte[] HexBytes = new byte[] 
 	{	Byte_ascii.Num_0, Byte_ascii.Num_1, Byte_ascii.Num_2, Byte_ascii.Num_3, Byte_ascii.Num_4, Byte_ascii.Num_5, Byte_ascii.Num_6, Byte_ascii.Num_7
 	,	Byte_ascii.Num_8, Byte_ascii.Num_9, Byte_ascii.Ltr_A, Byte_ascii.Ltr_B, Byte_ascii.Ltr_C, Byte_ascii.Ltr_D, Byte_ascii.Ltr_E, Byte_ascii.Ltr_F
 	};
 } 
 class Gfo_url_encoder_itm_html_ent implements Gfo_url_encoder_itm {
-	public Gfo_url_encoder_itm_html_ent(Btrie_slim_mgr amp_trie) {this.amp_trie = amp_trie;} Btrie_slim_mgr amp_trie;
+	private final    Btrie_slim_mgr amp_trie;
+	public Gfo_url_encoder_itm_html_ent(Btrie_slim_mgr amp_trie) {this.amp_trie = amp_trie;}
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {
 		++idx;					// b is &; get next character afterwards
 		if (idx == end) {		// & is last char; return

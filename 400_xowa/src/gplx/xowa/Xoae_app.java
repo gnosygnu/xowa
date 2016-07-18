@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.apps.cfg
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
+import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
@@ -31,6 +31,7 @@ import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
 public class Xoae_app implements Xoa_app, Gfo_invk {
+	private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
 		this.mode = mode;
@@ -76,7 +77,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xof_img_mgr				File__img_mgr()				{return file_mgr.Img_mgr();}
 	public Io_download_fmt			File__download_fmt()		{return wmf_mgr.Download_wkr().Download_xrg().Download_fmt();}
 	public Xoh_href_parser			Html__href_parser()			{return html__href_parser;} private final    Xoh_href_parser html__href_parser = new Xoh_href_parser();
-	public Xoh_href_wtr				Html__href_wtr()			{return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final    Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
