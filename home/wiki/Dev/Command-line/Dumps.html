@@ -105,7 +105,10 @@
           </ul>
         </li>
         <li class="toclevel-1 tocsection-14">
-          <a href="#Script"><span class="tocnumber">5</span> <span class="toctext">Script</span></a>
+          <a href="#Script:_Simple_Wikipedia_example_with_documentation"><span class="tocnumber">5</span> <span class="toctext">Script: Simple Wikipedia example with documentation</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-15">
+          <a href="#Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29"><span class="tocnumber">6</span> <span class="toctext">Script: gnosygnu's actual English Wikipedia script (dirty; provided for reference only)</span></a>
         </li>
       </ul>
     </div>
@@ -293,7 +296,7 @@
       <br>
     </p>
     <h2>
-      <span class="mw-headline" id="Script">Script</span>
+      <span class="mw-headline" id="Script:_Simple_Wikipedia_example_with_documentation">Script: Simple Wikipedia example with documentation</span>
     </h2>
 <pre class='code'>
 app.bldr.pause_at_end_('n');
@@ -455,6 +458,125 @@ app.bldr.cmds {
   
   // drop page_dump tables
   add     ('simple.wikipedia.org' , 'wiki.page_dump.drop');
+}
+app.bldr.run;
+</pre>
+    <h2>
+      <span class="mw-headline" id="Script:_gnosygnu.27s_actual_English_Wikipedia_script_.28dirty.3B_provided_for_reference_only.29">Script: gnosygnu's actual English Wikipedia script (dirty; provided for reference only)</span>
+    </h2>
+<pre class='code'>
+app.bldr.pause_at_end_('n');
+app.scripts.run_file_by_type('xowa_cfg_app');
+app.cfgs.get('app.user.cfg.security.web_access_enabled', 'app').val = 'n';
+app.bldr.cmds {
+/*
+  add     ('www.wikidata.org' , 'util.cleanup')          {delete_all = 'y';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('www.wikidata.org' , 'util.download')         {dump_type = 'image';}
+  add     ('www.wikidata.org' , 'text.init');
+  add     ('www.wikidata.org' , 'text.page');
+  add     ('www.wikidata.org' , 'text.cat.core');
+  add     ('www.wikidata.org' , 'text.cat.link');
+  add     ('www.wikidata.org' , 'text.cat.hidden');
+  add     ('www.wikidata.org' , 'text.term');
+  add     ('www.wikidata.org' , 'text.css');
+  add     ('www.wikidata.org' , 'wiki.image');
+  add     ('www.wikidata.org' , 'file.page_regy')        {build_commons = 'y'}
+  add     ('www.wikidata.org' , 'wiki.page_dump.make');
+  add     ('www.wikidata.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
+  add     ('www.wikidata.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
+  add     ('commons.wikimedia.org' , 'util.cleanup')          {delete_all = 'y';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'image';}
+  add     ('commons.wikimedia.org' , 'text.init');
+  add     ('commons.wikimedia.org' , 'text.page');
+  add     ('commons.wikimedia.org' , 'text.cat.core');
+  add     ('commons.wikimedia.org' , 'text.cat.link');
+  add     ('commons.wikimedia.org' , 'text.cat.hidden');
+  add     ('commons.wikimedia.org' , 'text.term');
+  add     ('commons.wikimedia.org' , 'text.css');
+  add     ('commons.wikimedia.org' , 'wiki.image');
+  add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
+  add     ('commons.wikimedia.org' , 'wiki.page_dump.make');
+  add     ('commons.wikimedia.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
+*/
+/*
+  // en.wikipedia.org
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'pages-articles';}
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'categorylinks';}
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'image';}
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
+*/
+/*
+  add     ('en.wikipedia.org' , 'text.init');
+  add     ('en.wikipedia.org' , 'text.page')             {redirect_id_enabled = 'y';}
+  add     ('en.wikipedia.org' , 'text.search');
+  add     ('en.wikipedia.org' , 'text.css');
+  add     ('en.wikipedia.org' , 'text.cat.core');
+  add     ('en.wikipedia.org' , 'text.cat.link');
+  add     ('en.wikipedia.org' , 'text.cat.hidden');
+  add     ('en.wikipedia.org' , 'text.term');
+//  add     ('en.wikipedia.org' , 'wiki.redirect')         {commit_interval = 1000; progress_interval = 100; cleanup_interval = 100;}
+  add     ('en.wikipedia.org' , 'wiki.image');
+  add     ('en.wikipedia.org' , 'wiki.page_dump.make');
+  add     ('en.wikipedia.org' , 'wiki.page_link');
+  add     ('en.wikipedia.org' , 'search.page__page_score') {iteration_max = 100;}
+  add     ('en.wikipedia.org' , 'search.link__link_score') {page_rank_enabled = 'y';
+    score_adjustment_mgr {
+      match_mgr {
+        get(0) {
+          add('bgn', 'mult', '.999', 'List_of_', 'National_Register_of_Historic_Places_listings_');
+          add('end', 'mult', '.999', '_United_States_Census');
+          add('all', 'mult', '.999', 'Copyright_infringement', 'Time_zone', 'Daylight_saving_time');
+          add('all', 'add' , '0'   , 'Animal');
+        }
+      }
+    }
+  }
+  add     ('en.wikipedia.org' , 'search.word__link_count')
+/*
+  // SELECT * FROM xowa_cfg WHERE cfg_key = 'props.modified_latest';
+  add     ('en.wikipedia.org' , 'file.lnki_temp') {
+    commit_interval = 10000; progress_interval = 50; cleanup_interval = 50; select_size = 25;
+    ns_ids = '0|4|14|100';
+    hdump_bldr {enabled = 'y'; hzip_enabled = 'y'; hzip_diff = 'y';}
+  }  
+  add     ('en.wikipedia.org' , 'file.lnki_regy');
+  add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
+  add     ('en.wikipedia.org'      , 'file.page_regy')        {build_commons = 'n';}
+  add     ('en.wikipedia.org' , 'wiki.image');
+  add     ('en.wikipedia.org' , 'file.orig_regy');
+  // SELECT * FROM orig_regy WHERE lnki_ttl = 'BSicon_CONTr.svg';
+  // SELECT * FROM page_regy WHERE src_ttl = 'BSicon_CONTr.svg';
+  add     ('en.wikipedia.org' , 'file.xfer_temp.thumb');
+  // SELECT Count(*) FROM xfer_regy WHERE xfer_status = 0;
+  // SELECT * FROM xfer_regy WHERE xfer_status = 0 AND lnki_page_id = 372692; --en.w:Featured_picture_candidates
+  add     ('en.wikipedia.org' , 'file.xfer_regy');
+*/
+/*
+  add     ('en.wikipedia.org' , 'file.xfer_regy_update');
+  add     ('en.wikipedia.org' , 'file.fsdb_make') {
+    commit_interval = 1000; progress_interval = 200; select_interval = 10000;
+    ns_ids = '0|4|14|100';
+//    // specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
+//    // src_bin_mgr__fsdb_version = 'v2';
+
+//   trg_bin_mgr__fsdb_version = 'v1';
+
+    // always redownload certain files
+    src_bin_mgr__fsdb_skip_wkrs = 'page_gt_1|small_size';
+    
+    // allow downloads from wikimedia
+    src_bin_mgr__wmf_enabled = 'y';
+  }
+  add     ('en.wikipedia.org' , 'file.orig_reg');
+  add     ('en.wikipedia.org' , 'wiki.page_dump.drop');
+*/
 }
 app.bldr.run;
 </pre>
