@@ -80,7 +80,7 @@ public class Wdata_wiki_mgr_fxt {
 		}
 	}
 	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
-		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		wdata_mgr.Qid_mgr.Add(tmp_bfr, Bry_.new_a7(lang_key), wiki_tid, Bry_.new_a7("000"), Bry_.new_a7(ttl), Bry_.new_a7(qid));
 		tmp_bfr.Mkr_rls();
 	}
@@ -145,7 +145,7 @@ public class Wdata_wiki_mgr_fxt {
 
 		parser_fxt.Page_ttl_("Q1_en");
 		parser_fxt.Exec_parse_page_all_as_str(raw);
-		Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		
 		wdata_lang_wtr.Page_(page).Bfr_arg__add(tmp_bfr);
 	    Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_rls());
@@ -168,7 +168,7 @@ public class Wdata_wiki_mgr_fxt {
 	public void Test_write_json_as_html(String raw_str, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw_str);
 		raw_bry = gplx.langs.jsons.Json_parser_tst.Replace_apos(raw_bry);
-		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());
 	}

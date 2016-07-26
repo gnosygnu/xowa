@@ -162,18 +162,19 @@ public class Gfh_utl {
 	public static byte[] Del_comments(Bry_bfr bfr, byte[] src, int pos, int end) {
 		while (true) {
 			if (pos >= end) break;
-			int comm_bgn = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_bgn, pos);											// look for <!--
-			if (comm_bgn == Bry_find_.Not_found) {																		// not found; consume rest
-				bfr.Add_mid(src, pos, end);
-				break;
+			int comm_bgn = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_bgn, pos);				// look for <!--
+			if (comm_bgn == Bry_find_.Not_found) {										// <!-- not found; 
+				bfr.Add_mid(src, pos, end);												// add everything between pos and <!--
+				break;																	// stop checking
 			}
-			int comm_end = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, comm_bgn + Gfh_tag_.Comm_bgn_len);			// look for -->
-			if (comm_end == Bry_find_.Not_found) {																		// not found; consume rest
-				bfr.Add_mid(src, pos, end);
-				break;
+			int comm_bgn_rhs = comm_bgn + Gfh_tag_.Comm_bgn_len;
+			int comm_end = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, comm_bgn_rhs);	// look for -->
+			if (comm_end == Bry_find_.Not_found) {										// --> not found
+				bfr.Add_mid(src, pos, comm_bgn);										// add everything between pos and comm_bgn; EX: "a<!--b->" must add "a"
+				break;																	// stop checking
 			}
-			bfr.Add_mid(src, pos, comm_bgn);																					// add everything between pos and comm_bgn
-			pos = comm_end + Gfh_tag_.Comm_end_len;																			// reposition pos after comm_end
+			bfr.Add_mid(src, pos, comm_bgn);											// add everything between pos and comm_bgn
+			pos = comm_end + Gfh_tag_.Comm_end_len;										// reposition pos after comm_end
 		}
 		return bfr.To_bry_and_clear();
 	}

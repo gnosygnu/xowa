@@ -24,7 +24,7 @@ public class Pfunc_ifeq extends Pf_func_base {
 		int self_args_len = self.Args_len(); if (self_args_len < 2) return; // no equal/not_equal clauses defined; return; EX: {{#if:a}} {{#if:a|b}}
 		byte[] lhs = Eval_argx(ctx, src, caller, self);
 		byte[] rhs = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
-		if (Pf_func_.Eq_(lhs, rhs))
+		if (Pf_func_.Eq(ctx, lhs, rhs))
 			bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 1));
 		else
 			bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 2));

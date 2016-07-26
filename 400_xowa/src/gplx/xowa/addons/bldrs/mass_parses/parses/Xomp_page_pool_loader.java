@@ -21,7 +21,7 @@ class Xomp_page_pool_loader {
 	private final    Xow_wiki wiki;
 	private final    int num_pages_per_load;
 	private final    Db_attach_mgr attach_mgr;
-	private int prv_page_id = -1;
+	private int prv_uid = -1;
 	public Xomp_page_pool_loader(Xow_wiki wiki, Db_conn make_conn, int num_pages_per_load) {
 		this.wiki = wiki;
 		this.make_conn = make_conn;
@@ -49,16 +49,17 @@ class Xomp_page_pool_loader {
 	private void Load_from_db(List_adp list) {
 		// prepare for page_tbl
 		String sql = String_.Format(String_.Concat_lines_nl_skip_last	// ANSI.Y
-		( "SELECT  mp.page_id"
+		( "SELECT  mp.xomp_uid"
+		, ",       pp.page_id"
 		, ",       pp.page_namespace"
 		, ",       pp.page_title"
 		, ",       pp.page_text_db_id"
 		, "FROM    xomp_page mp"
 		, "        JOIN <page_db>page pp ON mp.page_id = pp.page_id"
-		, "WHERE   mp.page_id > {0}"
+		, "WHERE   mp.xomp_uid > {0}"
 		, "AND     mp.page_status = 0"
 		, "LIMIT   {1}"
-		), prv_page_id, num_pages_per_load);
+		), prv_uid, num_pages_per_load);
 		this.attach_mgr.Conn_others_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
 		sql = attach_mgr.Resolve_sql(sql);
 
@@ -68,9 +69,9 @@ class Xomp_page_pool_loader {
 		Db_rdr rdr = make_conn.Stmt_sql(sql).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
-				prv_page_id = rdr.Read_int("page_id");
+				prv_uid = rdr.Read_int("xomp_uid");
 				int text_db_id = rdr.Read_int("page_text_db_id");
-				Xomp_page_itm ppg = new Xomp_page_itm(prv_page_id);
+				Xomp_page_itm ppg = new Xomp_page_itm(rdr.Read_int("page_id"));
 				ppg.Init_by_page
 				( rdr.Read_int("page_namespace")
 				, rdr.Read_bry_by_str("page_title")

@@ -25,6 +25,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public Scrib_lua_mod Mod() {return mod;} public void Mod_(Scrib_lua_mod v) {this.mod = v;} private Scrib_lua_mod mod;
 	public boolean Allow_env_funcs() {return allow_env_funcs;} private boolean allow_env_funcs = true;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_mw(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		core.RegisterInterface(this, script_dir.GenSubFil("mwInit.lua"));	// DATE:2014-07-12

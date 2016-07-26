@@ -31,8 +31,7 @@ public class Xow_info_special implements Xow_special_page {
 					delete_wiki.Data__core_mgr().Rls();		// release connection if open
 				Delete_wiki_files(delete_wiki.Fsys_mgr().Root_dir());
 			}
-			Xoa_ttl redirect_ttl = wiki.Ttl_parse(gplx.xowa.addons.wikis.registrys.lists.Xow_list_special.Prototype.Special__meta().Ttl_bry());
-			page.Redirect().Itms__add__special(Xoa_url.New(wiki, redirect_ttl), redirect_ttl);
+			page.Redirect().Itms__add__special(wiki,  gplx.xowa.addons.wikis.registrys.lists.Xow_list_special.Prototype.Special__meta());
 			return;
 		}
 

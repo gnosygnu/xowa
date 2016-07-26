@@ -62,35 +62,33 @@ public class Xot_defn_tmpl implements Xot_defn {
 	}
 	public void Parse_tmpl(Xop_ctx ctx) {ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn(this, ctx, ctx.Tkn_mkr(), ns, name, data_raw);}	boolean onlyinclude_parsed = false;
 	public boolean Tmpl_evaluate(Xop_ctx ctx, Xot_invk caller, Bry_bfr bfr) {
-//			synchronized (this) {	// LOCK:DELETE; DATE:2016-07-06
-			if (root == null) Parse_tmpl(ctx);
-			Xoae_page page = ctx.Page();
-			if (!page.Tmpl_stack_add(full_name)) {
-				bfr.Add_str_a7("<!-- template loop detected:" + gplx.langs.htmls.Gfh_utl.Escape_html_as_str(String_.new_u8(name)) + " -->");
-				Xoa_app_.Usr_dlg().Log_many("", "", "template loop detected: url=~{0} name=~{1}", ctx.Page().Url().To_str(), name);
-				return false;
+		if (root == null) Parse_tmpl(ctx);
+		Xoae_page page = ctx.Page();
+		if (!page.Tmpl_stack_add(full_name)) {
+			bfr.Add_str_a7("<!-- template loop detected:" + gplx.langs.htmls.Gfh_utl.Escape_html_as_str(String_.new_u8(name)) + " -->");
+			Xoa_app_.Usr_dlg().Log_many("", "", "template loop detected: url=~{0} name=~{1}", ctx.Page().Url().To_str(), name);
+			return false;
+		}
+		boolean rv = true;
+		if (onlyInclude_exists) {
+			Xowe_wiki wiki = ctx.Wiki();
+			if (!onlyinclude_parsed) {
+				onlyinclude_parsed = true;
+				byte[] new_data = Extract_onlyinclude(data_raw, wiki.Utl__bfr_mkr());
+				Xop_ctx new_ctx = Xop_ctx.New__sub(wiki, ctx, page);	// COMMENT:changed from ctx.Page() to page; DATE:2016-07-11
+				Xot_defn_tmpl tmpl = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(new_ctx, new_ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), Bry_.Empty, new_data);
+				tmpl.Root().Tmpl_compile(new_ctx, new_data, Xot_compile_data.Null);
+				data_raw = new_data;
+				root = tmpl.Root();
 			}
-			boolean rv = true;
-			if (onlyInclude_exists) {
-				Xowe_wiki wiki = ctx.Wiki();
-				if (!onlyinclude_parsed) {
-					onlyinclude_parsed = true;
-					byte[] new_data = Extract_onlyinclude(data_raw, wiki.Utl__bfr_mkr());
-					Xop_ctx new_ctx = Xop_ctx.New__sub(wiki, ctx, page);	// COMMENT:changed from ctx.Page() to page; DATE:2016-07-11
-					Xot_defn_tmpl tmpl = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(new_ctx, new_ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), Bry_.Empty, new_data);
-					tmpl.Root().Tmpl_compile(new_ctx, new_data, Xot_compile_data.Null);
-					data_raw = new_data;
-					root = tmpl.Root();
-				}
-			}
-			int subs_len = root.Subs_len();
-			for (int i = 0; i < subs_len; i++) {
-				boolean result = root.Subs_get(i).Tmpl_evaluate(ctx, data_raw, caller, bfr);
-				if (!result) rv = false;
-			}
-			page.Tmpl_stack_del();
-			return rv;
-//			}
+		}
+		int subs_len = root.Subs_len();
+		for (int i = 0; i < subs_len; i++) {
+			boolean result = root.Subs_get(i).Tmpl_evaluate(ctx, data_raw, caller, bfr);
+			if (!result) rv = false;
+		}
+		page.Tmpl_stack_del();
+		return rv;
 	}
 	public Xot_defn Clone(int id, byte[] name) {throw Err_.new_unimplemented();}
 	boolean onlyInclude_exists;

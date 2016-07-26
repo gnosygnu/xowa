@@ -27,7 +27,7 @@ public class Mock_scrib_fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)));
 		parser_fxt = new Xop_fxt(app, wiki); // NOTE: always new(); don't try to cache; causes errors in Language_lib
-		core = wiki.Parser_mgr().Scrib().Core_make(wiki.Parser_mgr().Ctx());
+		core = wiki.Parser_mgr().Scrib().Core_init(wiki.Parser_mgr().Ctx());
 		core.Engine_(engine); engine.Clear();
 		core.Interpreter().Server_(server);
 		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 

@@ -24,7 +24,7 @@ public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xow_special_pag
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
 		mgr.Sort();
-		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);
 		page.Db().Text().Text_bry_(bfr.To_bry_and_rls());
 	}

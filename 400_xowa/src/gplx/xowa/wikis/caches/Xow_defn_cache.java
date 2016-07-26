@@ -27,7 +27,6 @@ public class Xow_defn_cache {	// stores compiled Xot_defn
 	public Xow_defn_cache(Xol_lang_itm lang) {this.lang = lang;}
 	public Xot_defn Get_by_key(byte[] name) {return (Xot_defn)cache.Get_by_key(name);}
 	public void Free_mem_all()	{cache.Clear();}
-	public void Free_mem_some() {cache.Reduce_recent();}
 	public void Add(Xot_defn defn, byte case_match) {
 		byte[] name = defn.Name();
 		int cache_size = defn.Cache_size();			// OBSOLETE: * 2 b/c it has src and root; 

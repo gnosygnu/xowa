@@ -107,10 +107,19 @@ public class Xog_tab_itm implements Gfo_invk {
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
+
+		// get new_tab_name
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
+		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
+		String new_tab_name = String_.new_u8(ttl.Full_txt_w_ttl_case());
+
+		// if clicking on anchor, just scroll; do not load page
 		if (	url.Anch_str() != null							// url has anchor
 			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
-			&&	url.Qargs_ary().length == 0) {					// url has no args; needed for Category:A?from=b#mw-pages
-			html_itm.Scroll_page_by_id_gui(url.Anch_str());		// skip page_load and jump to anchor
+			&&	url.Qargs_ary().length == 0						// url has no args; needed for Category:A?from=b#mw-pages
+			&&	String_.Eq(new_tab_name, tab_data.Name())		// NOTE: name will be null / empty when starting app and last session had page with #anchor; EX:Main_Page#Links; DATE:2016-07-21
+			) {
+			html_itm.Scroll_page_by_id_gui(url.Anch_str());	
 			return;
 		}
 		if (win.Page__async__working(url)) return;
@@ -120,9 +129,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
 		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
-		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
-		Tab_name_(String_.new_u8(ttl.Full_txt_w_ttl_case()));
+		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09

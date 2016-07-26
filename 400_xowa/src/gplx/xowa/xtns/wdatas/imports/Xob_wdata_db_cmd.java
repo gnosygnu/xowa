@@ -406,7 +406,7 @@ class Wdata_qual_tbl extends Wdata_tbl_base {
 	private static final    String Fld_qual_id = "qual_id", Fld_page_id = "page_id", Fld_val_text = "val_text";
 }
 class Xob_wdata_db_visitor implements Wdata_claim_visitor {
-	private final     Wdata_wiki_mgr wdata_mgr; private byte[] lang_key;
+	private final    Wdata_wiki_mgr wdata_mgr; private byte[] lang_key;
 	public Xob_wdata_db_visitor(Wdata_wiki_mgr wdata_mgr) {this.wdata_mgr = wdata_mgr;}
 	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
 	public byte[] Rv() {return rv;} private byte[] rv;

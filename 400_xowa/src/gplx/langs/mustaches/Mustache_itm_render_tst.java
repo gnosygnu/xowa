@@ -111,6 +111,18 @@ public class Mustache_itm_render_tst {
 		, "abc11dc12def2g"
 		);
 	}
+	@Test  public void Section_owner() {
+		fxt.Init__root
+		(	fxt.Make_mock(0).Add_subs("subs1"
+		,		fxt.Make_mock(1).Add_prop("prop1", "a").Add_subs("subs2"
+		,			fxt.Make_mock(11).Add_prop("prop2", "1")
+		)
+		));
+		fxt.Test__parse
+		( "{{#subs1}}{{#subs2}}{{prop1}}{{prop2}}{{/subs2}}{{/subs1}}"	// prop1 is cited in subs2, but value belongs to subs1
+		, "a1"
+		);
+	}
 }
 class Mustache_itm_render_fxt {
 	private final    Mustache_tkn_parser parser = new Mustache_tkn_parser();

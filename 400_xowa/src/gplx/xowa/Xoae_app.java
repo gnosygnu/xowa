@@ -186,13 +186,13 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
 		log_wtr.Log_term(); usr_dlg.Log_many("", "", "term:log_wtr");
 		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
-		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(this);
 		wiki_mgr.Rls(); usr_dlg.Log_many("", "", "term:wiki_mgr");
 		return true;
 	}
 	public void Reset_all() {
 		this.Free_mem(true);
-		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all();
+		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(this);
 		Env_.GarbageCollect();
 	}
 	public void Free_mem(boolean clear_ctx) {

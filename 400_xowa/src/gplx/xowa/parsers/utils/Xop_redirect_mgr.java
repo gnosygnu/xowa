@@ -70,7 +70,7 @@ public class Xop_redirect_mgr {
 			,	Xop_tkn_.Lnki_end			// "]]"
 			);
 	}
-	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xopg_redirect_data redirect_mgr) {
+	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xopg_redirect_mgr redirect_mgr) {
 		int len = redirect_mgr.Itms__len(); if (len == 0) return Bry_.Empty;
 		Bry_bfr redirect_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		boolean dirty = false;
@@ -93,7 +93,7 @@ public class Xop_redirect_mgr {
 		}
 		if (!dirty) return Bry_.Empty; // ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(Xol_msg_itm_.Id_redirectedfrom);
-		Bry_bfr fmt_bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr fmt_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
 		return fmt_bfr.To_bry_and_clear();

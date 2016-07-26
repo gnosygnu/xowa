@@ -22,6 +22,7 @@ import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Scrib_core {
 	private Hash_adp_bry mods = Hash_adp_bry.cs();
+	private int expensive_function_count;
 	public Scrib_core(Xoae_app app, Xop_ctx ctx) {// NOTE: ctx needed for language reg
 		this.app = app; this.ctx = ctx;
 		this.wiki = ctx.Wiki(); this.page = ctx.Page();	// NOTE: wiki / page needed for title reg; DATE:2014-02-05
@@ -114,7 +115,7 @@ public class Scrib_core {
 	public void Increment_expensive_function_count() {
 		++expensive_function_count;
 		if (expensive_function_count > 255) {}
-	}	private int expensive_function_count;
+	}
 	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, Keyval... args) {
 		this.RegisterLibrary(lib.Procs());
 		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.Instance.LoadFilStr(url));

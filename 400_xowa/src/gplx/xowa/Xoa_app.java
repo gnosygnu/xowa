@@ -55,7 +55,6 @@ public interface Xoa_app extends Gfo_invk {
 	Xow_xwiki_itm_parser	Xwiki_mgr__itm_parser();
 	boolean					Bldr__running(); void Bldr__running_(boolean v);
 	Gfo_usr_dlg				Usr_dlg();
-	Bry_bfr_mkr				Utl__bfr_mkr();
 	Json_parser				Utl__json_parser();
 	Gfo_inet_conn			Utl__inet_conn();
 	Xoa_meta_mgr			Dbmeta_mgr();

@@ -52,6 +52,7 @@ public class Xop_ctx {
 	public Xot_invk_wkr			Invk()				{return invk;}	private final    Xot_invk_wkr invk = new Xot_invk_wkr();
 	public Xop_curly_wkr		Curly() 			{return curly;} private final    Xop_curly_wkr curly = new Xop_curly_wkr();
 	public Xop_xnde_tag_regy	Xnde_tag_regy()		{return xnde_tag_regy;} private final    Xop_xnde_tag_regy xnde_tag_regy;	// PERF:demeter
+	public Xop_tmp_mgr			Tmp_mgr()			{return tmp_mgr;} private final    Xop_tmp_mgr tmp_mgr = new Xop_tmp_mgr();
 
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_tid_.Tid__null;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_tid_.Tid__null;
@@ -84,7 +85,6 @@ public class Xop_ctx {
 		cur_page.Clear(clear_scrib);
 		stack = Xop_tkn_itm_.Ary_empty;
 		stack_len = stack_max = 0;
-		app.Wiki_mgr().Wdata_mgr().Clear();
 		if (lst_section_mgr != null) lst_section_mgr.Clear();
 		if (lst_page_regy != null) lst_page_regy.Clear();
 		tmpl_output = null;

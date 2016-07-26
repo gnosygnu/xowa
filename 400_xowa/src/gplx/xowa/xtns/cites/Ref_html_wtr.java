@@ -21,6 +21,7 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
 	private final    Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
+	private final    Bfr_arg__bry_fmtr grp_key_fmtr = Bfr_arg_.New_bry_fmtr__null(), itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null(), grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
 	public Ref_html_wtr(Xowe_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();
 	}
@@ -37,7 +38,7 @@ public class Ref_html_wtr {
 			? itm.Idx_major() + 1
 			: (Object)grp_key_fmtr.Set(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
 			);
-	}	private Bfr_arg__bry_fmtr grp_key_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	}
 	public Ref_html_wtr_cfg Cfg() {return cfg;} private Ref_html_wtr_cfg cfg;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Init_by_wiki(wiki);
@@ -51,12 +52,12 @@ public class Ref_html_wtr {
 			else
 				return itm_id_fmtr.Set(cfg.Itm_id_key_many(), itm.Name(), itm.Idx_major());
 		}
-	}	private Bfr_arg__bry_fmtr itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	}
 	private Bfr_arg Grp_id(Ref_nde itm) {
 		return itm.Name() == Bry_.Empty	// name is blank >>> uid 
 			? grp_id_fmtr.Set(cfg.Grp_id_uid(), itm.Uid())
 			: grp_id_fmtr.Set(cfg.Grp_id_key(), itm.Name(), itm.Idx_major());
-	}	private Bfr_arg__bry_fmtr grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	}
 	private int List_len(Ref_nde itm) {
 		int len = itm.Related_len();
 		int rv = len;

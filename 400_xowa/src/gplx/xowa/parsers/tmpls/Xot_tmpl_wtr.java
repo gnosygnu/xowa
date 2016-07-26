@@ -21,7 +21,7 @@ import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
 	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
 //			synchronized (this) {	// THREAD:added synchronized after "failed to write tkn" DATE:2015-04-29
-			Bry_bfr rslt_bfr = ctx.App().Utl__bfr_mkr().Get_m001();
+			Bry_bfr rslt_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001();
 			ctx.Tmpl_output_(rslt_bfr);
 			rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
 			Write_tkn(ctx, src, src.length, rslt_bfr, root);
@@ -68,7 +68,7 @@ public class Xot_tmpl_wtr {
 						if (xnde.Tag_close_bgn() == Int_.Min_value)
 							rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end());	// write src from bgn/end
 						else {												// NOTE: if nowiki then "deactivate" all xndes by swapping out < for &lt; nowiki_xnde_frag; DATE:2013-01-27
-							Bry_bfr tmp_bfr = ctx.Wiki().Appe().Utl__bfr_mkr().Get_k004();
+							Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_k004();
 							int nowiki_content_bgn = xnde.Tag_open_end(), nowiki_content_end = xnde.Tag_close_bgn();
 							boolean escaped = gplx.xowa.parsers.tmpls.Nowiki_escape_itm.Escape(tmp_bfr, src, nowiki_content_bgn, nowiki_content_end);
 							rslt_bfr.Add_bfr_or_mid(escaped, tmp_bfr, src, nowiki_content_bgn, nowiki_content_end);

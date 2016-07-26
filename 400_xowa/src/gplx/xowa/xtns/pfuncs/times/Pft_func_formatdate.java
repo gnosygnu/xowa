@@ -35,13 +35,12 @@ public class Pft_func_formatdate extends Pf_func_base {
 			bfr.Add(date_bry);
 			return;
 		}
-		DateAdp date = Pft_func_time.ParseDate(date_bry, false, ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls());
+		DateAdp date = Pft_func_time.ParseDate(date_bry, false, ctx.Wiki().Utl__bfr_mkr().Get_b512().Mkr_rls());
 		if (date == null) {bfr.Add(date_bry); return;}	// date not parseable; return self; DATE:2014-04-13
-		date_bldr.Format(bfr, ctx.Wiki(), ctx.Lang(), date, (Pft_fmt_itm[])o);
+		ctx.Wiki().Parser_mgr().Date_fmt_bldr().Format(bfr, ctx.Wiki(), ctx.Lang(), date, (Pft_fmt_itm[])o);
 	}
-	public static Pft_func_formatdate_bldr Date_bldr() {return date_bldr;} private static Pft_func_formatdate_bldr date_bldr = new Pft_func_formatdate_bldr();		
-	private static final Pft_fmt_itm[] Fmt_itms_default = new Pft_fmt_itm[0];
-	private static final Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
+	private static final    Pft_fmt_itm[] Fmt_itms_default = new Pft_fmt_itm[0];
+	private static final    Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
 		.Add("dmy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("mdy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_comma, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("ymd"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Year_len4, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int})

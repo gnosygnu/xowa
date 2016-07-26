@@ -43,8 +43,7 @@ public class Pf_func_ {
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
 		return bfr.To_bry_and_clear_and_trim();
 	}
-	private static final    Number_parser lhs_parser = new Number_parser().Hex_enabled_(true), rhs_parser = new Number_parser().Hex_enabled_(true);
-	public static boolean Eq_(byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
+	public static boolean Eq(Xop_ctx ctx, byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
 		int lhs_len = lhs.length, rhs_len = rhs.length;
 		boolean rv = true;
 		if (lhs_len == rhs_len) {
@@ -58,13 +57,13 @@ public class Pf_func_ {
 		}
 		else if (lhs_len == 0 || rhs_len == 0)	// one side is empty String and the other side is String; return false;
 			return false;
-		synchronized (lhs_parser) {	// LOCK:static-obj; DATE:2016-07-06
-			lhs_parser.Parse(lhs, 0, lhs_len);
-			if (lhs_parser.Has_err()) return false;
-			rhs_parser.Parse(rhs, 0, rhs_len);
-			if (rhs_parser.Has_err()) return false;
-			return lhs_parser.Has_frac() || rhs_parser.Has_frac() ? lhs_parser.Rv_as_dec().Eq(rhs_parser.Rv_as_dec()) : lhs_parser.Rv_as_int() == rhs_parser.Rv_as_int();
-		}
+		Number_parser lhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_0();
+		Number_parser rhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_1();
+		lhs_parser.Parse(lhs, 0, lhs_len);
+		if (lhs_parser.Has_err()) return false;
+		rhs_parser.Parse(rhs, 0, rhs_len);
+		if (rhs_parser.Has_err()) return false;
+		return lhs_parser.Has_frac() || rhs_parser.Has_frac() ? lhs_parser.Rv_as_dec().Eq(rhs_parser.Rv_as_dec()) : lhs_parser.Rv_as_int() == rhs_parser.Rv_as_int();
 	}
 	public static void Reg(Xow_domain_itm domain_itm, gplx.xowa.langs.funcs.Xol_func_regy func_regy, Xol_lang_itm lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();

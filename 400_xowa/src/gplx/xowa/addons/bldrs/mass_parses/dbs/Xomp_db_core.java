@@ -25,6 +25,7 @@ public class Xomp_db_core {
 		Io_url mgr_url = root_dir.GenSubFil("xomp.sqlite3");
 		this.mgr_db = new Xomp_mgr_db(mgr_url);
 	}
+	public Db_conn Conn() {return mgr_db.Conn();}
 	public Xomp_mgr_db Mgr_db() {return mgr_db;} private Xomp_mgr_db mgr_db;
 	public Xomp_wkr_db Wkr_db(boolean delete, int idx) {
 		Io_url wkr_url = root_dir.GenSubFil_nest("xomp_" + Int_.To_str_fmt(idx, "000"), "xomp_wkr.sqlite3");

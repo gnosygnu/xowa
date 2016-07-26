@@ -16,30 +16,32 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.envs.*;
+import gplx.core.envs.*; import gplx.core.caches.*;
 import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 public class Pfunc_ifexist_mgr {
-	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-	private Hash_adp regy = Hash_adp_bry.cs();
-	public void Clear() {regy.Clear();}
+	private final    Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		if (Bry_.Len_eq_0(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, raw_bry); if (ttl == null) return false;
-		byte[] ttl_bry = ttl.Page_db();	// NOTE: must use Page_db; EX: {{#ifexist:File:Peter & Paul fortress in SPB 03.jpg|y|n}}
-		Object exists_obj = regy.Get_by(ttl_bry);
-		if (exists_obj != null) return ((Pfunc_ifexist_itm)exists_obj).Exists();
-		Pfunc_ifexist_itm exists_itm = new Pfunc_ifexist_itm(ttl_bry);
-		regy.Add(ttl_bry, exists_itm);
+		byte[] ttl_bry = ttl.Page_db();				// NOTE: must use Page_db; EX: {{#ifexist:File:Peter & Paul fortress in SPB 03.jpg|y|n}}
+
+		// try to get from cache
+		Gfo_cache_mgr cache_mgr = wiki.Cache_mgr().Ifexist_cache();
+		Pfunc_ifexist_itm cache_itm = (Pfunc_ifexist_itm)cache_mgr.Get_by_key(ttl_bry);
+		if (cache_itm != null) return cache_itm.Exists();
+
+		cache_itm = new Pfunc_ifexist_itm(ttl_bry);
+		cache_mgr.Add(ttl_bry, cache_itm, 1);
 		db_page.Clear();
 		Xow_ns ttl_ns = ttl.Ns();
 		boolean rv = false;
 		switch (ttl_ns.Id()) {
 			case Xow_ns_.Tid__special:	rv = true; break; // NOTE: some pages call for [[Special]]; always return true for now; DATE:2014-07-17
-			case Xow_ns_.Tid__media:	rv = Find_ttl_for_media_ns(exists_itm, wiki, ttl_ns, ttl_bry); break;
-			default:					rv = Find_ttl_in_db(exists_itm, wiki, ttl_ns, ttl_bry); break;
+			case Xow_ns_.Tid__media:	rv = Find_ttl_for_media_ns(cache_itm, wiki, ttl_ns, ttl_bry); break;
+			default:					rv = Find_ttl_in_db(cache_itm, wiki, ttl_ns, ttl_bry); break;
 		}
-		exists_itm.Exists_(rv);
+		cache_itm.Exists_(rv);
 		return rv;
 	}
 	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
@@ -73,8 +75,9 @@ public class Pfunc_ifexist_mgr {
 		}
 	}
  	}
-class Pfunc_ifexist_itm {
+class Pfunc_ifexist_itm implements Rls_able {
 	public Pfunc_ifexist_itm(byte[] ttl) {this.ttl = ttl;}
 	public byte[] Ttl() {return ttl;} private byte[] ttl;
 	public boolean Exists() {return exists;} public void Exists_(boolean v) {exists = v;} private boolean exists;
+	public void Rls() {}
 }

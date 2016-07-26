@@ -22,6 +22,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public Scrib_lib_language(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_language(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.language.lua"));
@@ -150,7 +151,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
-		Bry_bfr bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b128().Mkr_rls();
+		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b128().Mkr_rls();
 		return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
 	}
 	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.N);}
@@ -181,7 +182,8 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] fmt_bry = args.Pull_bry(1);
 		byte[] date_bry = args.Cast_bry_or_empty(2);	// NOTE: optional empty is required b/c date is sometimes null; use Bry_.Empty b/c this is what Pft_func_time.ParseDate takes; DATE:2013-04-05
 		boolean utc = args.Cast_bool_or_n(3);
-		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
+		Xowe_wiki wiki = core.Wiki();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
 		DateAdp date = null;
 		if (Bry_.Len_eq_0(date_bry))
@@ -198,7 +200,8 @@ public class Scrib_lib_language implements Scrib_lib {
 			date = Pft_func_time.ParseDate(date_bry, utc, tmp_bfr);	// NOTE: not using java's datetime parse b/c it is more strict; not reconstructing PHP's datetime parse b/c it is very complicated (state machine); re-using MW's parser b/c it is inbetween; DATE:2015-07-29
 		}
 		if (date == null || tmp_bfr.Len() > 0) {tmp_bfr.Mkr_rls(); return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");}
-		Pft_func_formatdate.Date_bldr().Format(tmp_bfr, core.Wiki(), lang, date, fmt_ary);
+		
+		wiki.Parser_mgr().Date_fmt_bldr().Format(tmp_bfr, wiki, lang, date, fmt_ary);
 		byte[] rv = tmp_bfr.To_bry_and_rls();
 		return rslt.Init_obj(rv);
 	}

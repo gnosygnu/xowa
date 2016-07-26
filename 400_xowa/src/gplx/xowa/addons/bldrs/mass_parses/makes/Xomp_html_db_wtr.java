@@ -33,24 +33,33 @@ class Xomp_html_db_wtr {
 	public int Cur_db_id() {return html_db.Id();}
 	public Xowd_html_tbl Tbls__get_or_new(int ns_id, long html_len) {
 		long len_new = len_cur + html_len;
-		if (html_tbl == null || len_new > len_max) {
-			Commit();
-			this.html_db = wiki.Data__core_mgr().Dbs__get_by_tid_or_null(Xow_db_file_.Tid__html_data);
-			if (html_db == null) {
-				html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data);
-				html_db.Conn().Txn_bgn("xomp.html_db_wtr");
-				this.html_tbl = new Xowd_html_tbl(html_db.Conn());
-				html_tbl.Create_tbl();
+		boolean not_inited = html_tbl == null, out_of_space = len_new > len_max;
+		if (not_inited || out_of_space) {
+			if (out_of_space)
+				Commit();
+			if (	db_mgr.Props().Layout_html().Tid_is_all_or_few()	// is not "lot"
+				&&	not_inited											// not_inited; set html_db
+				) {
+				this.html_db = wiki.Data__core_mgr().Dbs__get_by_tid_or_null(Xow_db_file_.Tid__html_data);
+				if (html_db == null)
+					this.html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data);
 			}
+			else
+				this.html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data);
+
+			this.html_tbl = new Xowd_html_tbl(html_db.Conn());
+			html_tbl.Create_tbl();
+			html_db.Conn().Txn_bgn("xomp.html_db_wtr");
+			len_cur = html_len;	// NOTE: this effectively resets len_new to 0 + html_len;
 		}
-		len_cur = len_new;
+		else // initied and still has space; just update len
+			len_cur = len_new;
 		return html_tbl;
 	}
 	public void Rls() {
 		this.Commit();
 	}
 	private void Commit() {
-		if (html_tbl == null) return;
 		html_tbl.Conn().Txn_end();
 		html_tbl.Conn().Rls_conn();
 

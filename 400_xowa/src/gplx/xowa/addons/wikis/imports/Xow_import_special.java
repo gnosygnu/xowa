@@ -29,7 +29,29 @@ public class Xow_import_special implements Xow_special_page {
 			return;
 		}
 
-		new Xow_import_html(Io_url_.new_dir_(owner_str)).Bld_page_by_mustache(wiki.App(), page, this);
+		// check if dir_cmd is available
+		byte[] dir_cmd = url_args.Read_bry_or_null("dir_cmd");
+
+		// check selected
+		int selected = url_args.Read_int_or("selected", -1);
+		if (	selected == 1
+			&&	dir_cmd != null) {
+			Xow_import_addon addon = Xow_import_addon.Addon__get(wiki);
+			Xow_import_dir_cbk import_cbk = addon.Dir_selected_cbks__get_by(String_.new_u8(dir_cmd));
+			import_cbk.Cbk__dir_selected(wiki, page, owner_str);
+		}
+
+		new Xow_import_html(Io_url_.new_dir_(owner_str), dir_cmd).Bld_page_by_mustache(wiki.App(), page, this);
+	}
+
+	public static byte[] Get_root_url() {
+		byte tid = gplx.core.envs.Op_sys.Cur().Tid();
+		byte[] rv = Bry_.new_a7("/");
+		switch (tid) {
+			case gplx.core.envs.Op_sys.Tid_wnt	: rv = Bry_.new_a7("C:\\"); break;
+		}
+		rv = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(rv);
+		return rv;
 	}
 
 	Xow_import_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}

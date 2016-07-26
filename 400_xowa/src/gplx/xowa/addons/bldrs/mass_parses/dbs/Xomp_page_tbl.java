@@ -23,7 +23,8 @@ public class Xomp_page_tbl implements Db_tbl {
 	public Xomp_page_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "xomp_page";
-		flds.Add_int_pkey("page_id");
+		flds.Add_int_pkey("xomp_uid");
+		flds.Add_int("page_id");
 		flds.Add_int("page_ns");
 		flds.Add_byte("page_status");			// 0=wait; 1=done; 2=fail
 		flds.Add_int_dflt("html_len", -1);
@@ -33,7 +34,11 @@ public class Xomp_page_tbl implements Db_tbl {
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
 	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Create_tbl() {
-		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
+		conn.Meta_tbl_create
+		( Dbmeta_tbl_itm.New(tbl_name, flds
+		, Dbmeta_idx_itm.new_normal_by_tbl("xomp_page", "xomp_uid__page_status"	, "xomp_uid", "page_status")// for parse
+		, Dbmeta_idx_itm.new_normal_by_tbl("xomp_page", "page_ns__page_id"		, "page_ns", "page_id")		// for make
+		));
 	}
 	public void Rls() {}
 }

@@ -42,11 +42,11 @@ public class Xolog_special implements Xow_special_page {
 		}
 
 		if (redirect) {
-			String redirect_ttl_str = special__meta.Ttl_str() + "?cmd=view";
+			Xoa_url_args_bldr args_bldr = new Xoa_url_args_bldr();
+			args_bldr.Add("cmd", "view");
 			if (redirect_to_same_file && file != null)
-				redirect_ttl_str += "&file=" + file;
-			Xoa_ttl redirect_ttl = wiki.Ttl_parse(Bry_.new_u8(redirect_ttl_str));
-			page.Redirect().Itms__add__special(Xoa_url.New(wiki, redirect_ttl), redirect_ttl);
+				args_bldr.Add("file", file);
+			page.Redirect().Itms__add__special(wiki, Prototype.Special__meta(), args_bldr.To_ary());
 			return;
 		}
 		else
@@ -65,6 +65,14 @@ public class Xolog_special implements Xow_special_page {
 	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
 	public static final    Xow_special_page Prototype = new Xolog_special(Xow_special_meta.New_xo("XowaLog", "Logs"));
+}
+class Xoa_url_args_bldr {
+	private final    List_adp list = List_adp_.New();
+	public Xoa_url_args_bldr Add(String key, Object val) {
+		list.Add(Keyval_.new_(key, val));
+		return this;
+	}
+	public Keyval[] To_ary() {return (Keyval[])list.To_ary_and_clear(Keyval.class);}
 }
 class Xolog_file_utl {// yyyyMMdd_HHmmss.log
 	private static final String Gui__date_fmt = "yyyy-MM-dd HH:mm:ss";

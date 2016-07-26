@@ -163,56 +163,56 @@ public class Pft_fmt_itm_ {
 	.Add("xmY"					, Pft_fmt_itm_.Hijiri_year_idx)
 	// TODO_OLD: space; "
 	;
+
 	public static Pft_fmt_itm[] Parse(Xop_ctx ctx, byte[] fmt) {
-		synchronized (fmt_itms) {	// LOCK:static-obj; DATE:2016-07-06
-			Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;
-			Btrie_rv trv = new Btrie_rv();
-			int i = 0, fmt_len = fmt.length;
-			fmt_itms.Clear(); int raw_bgn = String_.Pos_neg1; byte raw_byt = Byte_.Zero;
-			while (i < fmt_len) {
-				byte b = fmt[i];
-				Object o = trie.Match_at_w_b0(trv, b, fmt, i, fmt_len);
-				if (o != null) {
-					if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
-					fmt_itms.Add((Pft_fmt_itm)o);
-					i = trv.Pos();
-				}
-				else {
-					switch (b) {
-						case Byte_ascii.Backslash:
-							if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
-							++i; // peek next char
-							if (i == fmt_len)	// trailing backslash; add one; EX: "b\" -> "b\" not "b"
-								fmt_itms.Add(new Pft_fmt_itm_raw_byt(Byte_ascii.Backslash));
-							else
-								fmt_itms.Add(new Pft_fmt_itm_raw_byt(fmt[i]));
-							++i;
-							break;
-						case Byte_ascii.Quote:
-							if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
-							++i; // skip quote_bgn
-							raw_bgn = i;
-							while (i < fmt_len) {
-								b = fmt[i];
-								if (b == Byte_ascii.Quote) {
-									break;
-								}
-								else
-									++i;
+		List_adp fmt_itms = ctx.Wiki().Parser_mgr().Time_parser_itms();
+		Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;
+		Btrie_rv trv = new Btrie_rv();
+		int i = 0, fmt_len = fmt.length;
+		fmt_itms.Clear(); int raw_bgn = String_.Pos_neg1; byte raw_byt = Byte_.Zero;
+		while (i < fmt_len) {
+			byte b = fmt[i];
+			Object o = trie.Match_at_w_b0(trv, b, fmt, i, fmt_len);
+			if (o != null) {
+				if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+				fmt_itms.Add((Pft_fmt_itm)o);
+				i = trv.Pos();
+			}
+			else {
+				switch (b) {
+					case Byte_ascii.Backslash:
+						if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+						++i; // peek next char
+						if (i == fmt_len)	// trailing backslash; add one; EX: "b\" -> "b\" not "b"
+							fmt_itms.Add(new Pft_fmt_itm_raw_byt(Byte_ascii.Backslash));
+						else
+							fmt_itms.Add(new Pft_fmt_itm_raw_byt(fmt[i]));
+						++i;
+						break;
+					case Byte_ascii.Quote:
+						if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+						++i; // skip quote_bgn
+						raw_bgn = i;
+						while (i < fmt_len) {
+							b = fmt[i];
+							if (b == Byte_ascii.Quote) {
+								break;
 							}
-							fmt_itms.Add(i - raw_bgn == 0 ? new Pft_fmt_itm_raw_byt(Byte_ascii.Quote) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i));
-							raw_bgn = String_.Pos_neg1;
-							++i; // skip quote_end
-							break;
-						default:
-							if (raw_bgn == String_.Pos_neg1) {raw_bgn = i; raw_byt = b;}
-							i += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-							break;
-					}
+							else
+								++i;
+						}
+						fmt_itms.Add(i - raw_bgn == 0 ? new Pft_fmt_itm_raw_byt(Byte_ascii.Quote) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i));
+						raw_bgn = String_.Pos_neg1;
+						++i; // skip quote_end
+						break;
+					default:
+						if (raw_bgn == String_.Pos_neg1) {raw_bgn = i; raw_byt = b;}
+						i += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+						break;
 				}
 			}
-			if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = String_.Pos_neg1;}
-			return (Pft_fmt_itm[])fmt_itms.To_ary(Pft_fmt_itm.class);
 		}
-	}	private static List_adp fmt_itms = List_adp_.New();
+		if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = String_.Pos_neg1;}
+		return (Pft_fmt_itm[])fmt_itms.To_ary(Pft_fmt_itm.class);
+	}
 }

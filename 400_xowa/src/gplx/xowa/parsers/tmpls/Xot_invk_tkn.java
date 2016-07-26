@@ -233,7 +233,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				}
 				if (ignore_hash.Get_by_bry(name_ary) == null) {
 					if (Pfunc_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
-						Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();
+						Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Page().Ttl().Raw());
 						tmp_bfr.Mkr_rls();
 						return SubEval(ctx, wiki, bfr, name_ary, caller, src);				

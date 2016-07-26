@@ -19,18 +19,19 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.core.bits.*;
 import gplx.xowa.langs.msgs.*;
 public class Scrib_lib_text implements Scrib_lib {
-	private final Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
-	private final Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
+	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
+	private final    Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 	public Scrib_lib_text(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_text(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.text.lua"));
 		notify_wiki_changed_fnc = mod.Fncs_get_by_key("notify_wiki_changed");
 		return mod;
 	}	private Scrib_lua_proc notify_wiki_changed_fnc;
-	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_unstrip:							return Unstrip(args, rslt);
@@ -46,7 +47,7 @@ public class Scrib_lib_text implements Scrib_lib {
 	private static final int Proc_unstrip = 0, Proc_unstripNoWiki = 1, Proc_killMarkers = 2, Proc_getEntityTable = 3, Proc_init_text_for_wiki = 4, Proc_jsonEncode = 5, Proc_jsonDecode = 6;
 	public static final String Invk_unstrip = "unstrip", Invk_unstripNoWiki = "unstripNoWiki", Invk_killMarkers = "killMarkers", Invk_getEntityTable = "getEntityTable"
 	, Invk_init_text_for_wiki = "init_text_for_wiki", Invk_jsonEncode = "jsonEncode", Invk_jsonDecode = "jsonDecode";
-	private static final String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
+	private static final    String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
 	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt)			{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean KillMarkers(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20

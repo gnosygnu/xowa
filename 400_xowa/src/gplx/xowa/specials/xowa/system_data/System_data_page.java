@@ -28,9 +28,18 @@ public class System_data_page implements Xow_special_page {
 		byte[] file_type = arg_hash.Get_val_bry_or(Arg_type, null); if (file_type == null) return;
 		Byte_obj_val type_val = (Byte_obj_val)type_hash.Get_by_bry(file_type); if (type_val == null) return; 
 		Io_url file_url = Path_from_type(wiki, type_val.Val()); if (file_url == null) return;
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+
+		// get log text
 		byte[] file_txt = Io_mgr.Instance.LoadFilBry(file_url);
 		file_txt = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(file_txt, true, false, false, false, false);	// escape < or "</pre>" in messages will cause pre to break
+		if (file_txt.length > Io_mgr.Len_mb) {
+			int file_txt_len = file_txt.length;
+			file_txt = Bry_.Add
+			( Bry_.new_a7("*** truncated to 1 MB due to large file size: " + Int_.To_str(file_txt_len) + " ***\n\n")
+			, Bry_.Mid(file_txt, file_txt_len - Io_mgr.Len_mb, file_txt_len));
+		}
+
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		fmtr_all.Bld_bfr_many(tmp_bfr, file_url.Raw(), file_txt);
 		page.Db().Text().Text_bry_(tmp_bfr.To_bry_and_rls());
 	}

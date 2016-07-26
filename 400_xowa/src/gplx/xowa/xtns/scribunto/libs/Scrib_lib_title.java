@@ -25,6 +25,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_title(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.title.lua")
@@ -84,7 +85,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
-		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		//if (url_func_tid == Pfunc_urlfunc.Tid_full) {
 		//	if (proto == null) proto = Proto_relative;
 		//	Object proto_obj = proto_hash.Get_by(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
@@ -134,12 +135,11 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (ttl == Xoa_ttl.Null) return rslt.Init_null();
 		// TODO_OLD: MW does extra logic here to cache ttl in ttl cache to avoid extra title lookups
 		boolean ttl_exists = false, ttl_redirect = false; int ttl_id = 0;
-		synchronized (tmp_db_page) {
-			ttl_exists = core.Wiki().Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, ttl.Ns(), ttl.Page_db());
-		}
+		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
+		ttl_exists = core.Wiki().Db_mgr().Load_mgr().Load_by_ttl(db_page, ttl.Ns(), ttl.Page_db());
 		if (ttl_exists) {
-			ttl_redirect = tmp_db_page.Redirected();
-			ttl_id = tmp_db_page.Id();
+			ttl_redirect = db_page.Redirected();
+			ttl_id = db_page.Id();
 		}
 		Keyval[] rv = new Keyval[4];
 		rv[ 0] = Keyval_.new_("isRedirect"			, ttl_redirect);						// title.isRedirect
@@ -226,6 +226,6 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (!ns_file_or_media)
 			rv[rv_idx++] = Keyval_.new_("file"		, false);										// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
-	}	private static final    Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
+	}
 	public static final String Key_wikitext = "wikitext";
 }

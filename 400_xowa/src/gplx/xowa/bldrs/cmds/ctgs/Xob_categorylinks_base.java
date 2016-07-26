@@ -69,6 +69,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 	@Override public void Cmd_end() {
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter.Instance, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
+		gplx.xowa.bldrs.wkrs.Xob_io_utl_.Delete_sql_files(wiki.Fsys_mgr().Root_dir(), this.Sql_file_name());
 	}		
 	private static final    byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
 	private static final    byte[] Collation_uca = Bry_.new_a7("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};

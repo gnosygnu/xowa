@@ -16,49 +16,39 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.*;
 public class Scrib_core_mgr {
-	private static final    List_adp cores = List_adp_.New();
 	public Scrib_core Core() {return core;} private Scrib_core core;
-	public Scrib_core Core_make(Xop_ctx ctx) {
+	public void Terminate_when_page_changes_y_() {terminate_when_page_changes = true;}	private boolean terminate_when_page_changes;
+	public Scrib_core Core_init(Xop_ctx ctx) {
 		core = new Scrib_core(ctx.App(), ctx);
-		core_invalidate_when_page_changes = false;
-		synchronized (cores) {
-			cores.Add(core);
-		}
+		terminate_when_page_changes = false;
 		return core;
 	}
 	public void Core_term() {
-		if (core != null) core.Term();
-		synchronized (cores) {
-			cores.Del(core);
+		if (core != null) {
+			core.Term();
+			core = null;
 		}
-		core = null;
 	}
-	public void Core_invalidate_when_page_changes() {core_invalidate_when_page_changes = true;}	private boolean core_invalidate_when_page_changes;
-	public void Core_page_changed(Xoae_page page) {
-		if (	core != null						// core explicitly invalidated
-			||	core_invalidate_when_page_changes	// core marked invalidated b/c of error in {{#invoke}} but won't be regen'd until page changes; invalidate now; PAGE:th.d:all; DATE:2014-10-03
-			) {
-			if (	core != null										// null check
-				&&	Bry_.Eq(page.Wiki().Domain_bry(), core.Cur_wiki())	// current page is in same wiki as last page
-				&&	!core_invalidate_when_page_changes					// if core_invalidate_when_page_changes, then must call Core_term
-				)
-				core.When_page_changed(page);
-			else														// current page is in different wiki
-				Core_term();											// invalidate scrib engine; note that lua will cache chunks by Module name and two modules in two different wikis can have the same name, but different data: EX:Module:Citation/CS1/Configuration and enwiki / zhwiki; DATE:2014-03-21
-			core_invalidate_when_page_changes = false;
+	public void When_page_changed(Xoae_page page) {
+		if (terminate_when_page_changes) {	// true when error in {{#invoke}}; PAGE:th.d:all; DATE:2014-10-03
+			Core_term();					// terminate core; note that next call to {{#invoke}} will check for null and rebuild if null; 
+			terminate_when_page_changes = false;
+		}
+		else {					// no error on previous page; notify core that page changed; note that lua will cache chunks by Module name and two modules in two different wikis can have the same name, but different data: EX:Module:Citation/CS1/Configuration and enwiki / zhwiki; DATE:2014-03-21
+			if (core != null)	// null-check needed when engine first created
+				core.When_page_changed(page);	// NOTE: must call When_page_changed on core to update page; else, current ttl is not updated, and scrib_wikibase will return wrong document; DATE:2016-07-22
 		}
 	}
 
-	public static void Term_all() {
-		synchronized (cores) {
-			int cores_len = cores.Len();
-			for (int i = 0; i < cores_len; ++i) {
-				Scrib_core core = (Scrib_core)cores.Get_at(i);
-				core.Term();
-			}
-			cores.Clear();
+	public static void Term_all(Xoae_app app) {	// NOLOCK.app_level
+		Xoae_wiki_mgr wiki_mgr = app.Wiki_mgr();
+		int len = wiki_mgr.Count();
+		for (int i = 0; i < len; ++i) {
+			Xowe_wiki wiki = (Xowe_wiki)wiki_mgr.Get_at(i);
+			wiki.Parser_mgr().Scrib().Core_term();
 		}
 	}
 }

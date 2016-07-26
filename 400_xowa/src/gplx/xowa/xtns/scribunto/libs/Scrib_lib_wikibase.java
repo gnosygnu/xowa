@@ -22,6 +22,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.wikibase.lua"));
@@ -93,7 +94,8 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
 	private Wdata_doc Get_wdoc(byte[] xid_bry) {
-		Wdata_doc wdoc = core.Wiki().Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+		Xowe_wiki wiki = core.Wiki();
+		Wdata_doc wdoc = wiki.Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
 		if (wdoc == null) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), xid_bry);
 		return wdoc;
 	}

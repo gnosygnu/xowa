@@ -33,7 +33,7 @@ class Xoh_toc_wkr__txt {
 	public void Init(byte[] page_name) {this.page_name = page_name;}
 	public void Calc_anch_text(Xoh_toc_itm rv, byte[] src) {	// text within hdr; EX: <h2>Abc</h2> -> Abc
 		int end = src.length;
-		src = Remove_comment(text_bfr, src, 0, end);
+		src = Gfh_utl.Del_comments(text_bfr, src, 0, end);
 		end = src.length;
 		tag_rdr.Init(page_name, src, 0, end);
 		try {
@@ -115,6 +115,7 @@ class Xoh_toc_wkr__txt {
 				case Gfh_tag_.Id__img: 
 				case Gfh_tag_.Id__br: 
 				case Gfh_tag_.Id__hr:
+				case Gfh_tag_.Id__wbr:
 					lhs_is_dangling = true;
 					break;
 			}
@@ -151,31 +152,5 @@ class Xoh_toc_wkr__txt {
 		}
 	}
 
-	public static byte[] Remove_comment(Bry_bfr tmp, byte[] src, int bgn, int end) {
-		boolean dirty = false, append_to_eos = true;
-		int pos = bgn;
-		while (true) {
-			int comm_bgn = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_bgn, pos, end);
-			if (comm_bgn != -1) {	// comment found
-				int tmp_pos = comm_bgn + Gfh_tag_.Comm_bgn_len;
-				int comm_end = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, tmp_pos, end);
-				if (comm_end == -1) {	// dangling
-					tmp.Add_mid(src, pos, comm_bgn);
-					append_to_eos = false;
-				}
-				else {
-					dirty = true;
-					tmp.Add_mid(src, pos, comm_bgn);
-					pos = comm_end + Gfh_tag_.Comm_end_len;
-					continue;
-				}
-			}
-			break;
-		}
-		if (dirty && append_to_eos) {
-			tmp.Add_mid(src, pos, end);
-		}
-		return dirty ? tmp.To_bry_and_clear() : src;
-	}
 	private static final    byte[] id_trim_ary = Bry_.mask_(256, Byte_ascii.Underline_bry);
 }

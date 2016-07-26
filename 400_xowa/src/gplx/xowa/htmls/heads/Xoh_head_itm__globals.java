@@ -53,7 +53,7 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_ascending);
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_descending);
 		Xol_lang_itm lang = wiki.Lang(); Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
-		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		tmp_wtr.Init(tmp_bfr);
 		byte[] months_long = Html_js_table_months(tmp_wtr, msg_mgr, Xol_msg_itm_.Id_dte_month_name_january, Xol_msg_itm_.Id_dte_month_name_december);
 		byte[] months_short = Html_js_table_months(tmp_wtr, msg_mgr, Xol_msg_itm_.Id_dte_month_abrv_jan, Xol_msg_itm_.Id_dte_month_abrv_dec);

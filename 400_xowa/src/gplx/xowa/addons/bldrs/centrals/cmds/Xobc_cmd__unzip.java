@@ -29,6 +29,7 @@ public class Xobc_cmd__unzip extends Xobc_cmd__base {
 	@Override public String		Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.core.ios.zips.zip_unzip";
 	@Override public String		Cmd_name() {return "unzip";}
 	@Override public boolean		Cmd_suspendable() {return true;}
+	@Override public String Cmd_fallback() {return Xobc_cmd__verify_fil.CMD_TYPE;}	// if unzip fails, backtrack to verify; if verify fails, it'll backtrack to download; DATE:2016-07-25
 
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {
 		if (wkr.Exec(this, src_fil, trg_dir, trg_fils) == Gfo_prog_ui_.Status__fail)

@@ -164,7 +164,7 @@ public class Xow_page_mgr implements Gfo_invk {
 		Xoa_ttl trg_ttl = Xoa_ttl.Parse(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.New(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url);
-		page.Redirect().Itms__add__special(trg_url, trg_ttl);
+		page.Redirect().Itms__add__article(trg_url, trg_ttl, null);
 		wiki.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
 

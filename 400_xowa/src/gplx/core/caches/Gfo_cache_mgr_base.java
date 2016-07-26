@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 public class Gfo_cache_mgr_base {
-	private Ordered_hash hash = Ordered_hash_.New_bry();
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Compress_max() {return compress_max;} public void Compress_max_(int v) {compress_max = v;} private int compress_max = 16;
 	public int Compress_to() {return compress_to;} public void Compress_to_(int v) {compress_to = v;} private int compress_to = 8;
 	protected Object Base_get_or_null(byte[] key) {

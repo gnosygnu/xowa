@@ -41,7 +41,7 @@ public class Wdata_external_lang_links_data {
 		if (Bry_.Eq(argx, Key_sort)) {sort = true; return;}	// {{noexternallanglinks:*}}; assume it cannot be combined with other langs_hash: EX: {{noexternallanglinks:*|en|fr}}
 		int args_len = self.Args_len();
 		Langs_add(argx);
-		Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = self.Args_get_by_idx(i);
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);	// NOTE: changed from self to caller; DATE:2016-03-16

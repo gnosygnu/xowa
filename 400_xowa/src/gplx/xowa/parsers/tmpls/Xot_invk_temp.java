@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
 	private List_adp			list = List_adp_.New();
-	private Hash_adp_bry	arg_key_hash;
+	private Hash_adp_bry		arg_key_hash;
 	private Hash_adp			arg_idx_hash; private Int_obj_ref arg_idx_ref;
 	Xot_invk_temp() {}
 	public Xot_invk_temp(boolean root_frame) {this.root_frame = root_frame;}

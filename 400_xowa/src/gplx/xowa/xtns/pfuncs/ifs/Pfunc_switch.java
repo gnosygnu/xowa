@@ -38,7 +38,7 @@ public class Pfunc_switch extends Pf_func_base {
 					last_keyless_arg = null;							// set last_keyless_arg to null
 					byte[] case_key = Get_or_eval(ctx, src, caller, self, bfr, arg.Key_tkn(), tmp);
 					if		(	fall_thru_found							// fall-thru found earlier; take cur value; EX: {{#switch:a|a|b=1|c=2}} -> 1
-							||	Pf_func_.Eq_(case_key, argx)			// case_key matches argx; EX: {{#switch:a|a=1}}
+							||	Pf_func_.Eq(ctx, case_key, argx)		// case_key matches argx; EX: {{#switch:a|a=1}}
 						) {
 						match = Get_or_eval(ctx, src, caller, self, bfr, arg.Val_tkn(), tmp);
 						break;											// stop iterating; explicit match found;
@@ -52,7 +52,7 @@ public class Pfunc_switch extends Pf_func_base {
 				else {													// = missing; EX: "|a|", "|#default|"
 					last_keyless_arg = arg;
 					byte[] case_val = Get_or_eval(ctx, src, caller, self, bfr, arg.Val_tkn(), tmp);						
-					if		(Pf_func_.Eq_(case_val, argx))				// argx matches case_val; EX: case_val="|a|" and argx="a"
+					if		(Pf_func_.Eq(ctx, case_val, argx))			// argx matches case_val; EX: case_val="|a|" and argx="a"
 						fall_thru_found = true;							// set as fall-thru; note that fall-thrus will have "val" in next keyed arg, so need to continue iterating; EX: {{#switch:a|a|b=1|c=2}} "a" is fall-thru, but "b" is next keyed arg with a val
 					else if (kwd_mgr.Kwd_default_match(case_val)) {		// case_val starts with #default; EX: "|#default|" or "|#defaultabc|"
 						last_keyless_arg = null;						// unflag last keyless arg else |#defaultabc| will be treated as last_keyless_arg and generate "#defaultabc"; DATE:2014-05-29

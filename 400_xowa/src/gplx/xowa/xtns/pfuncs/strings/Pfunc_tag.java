@@ -24,7 +24,7 @@ public class Pfunc_tag extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		// make <xnde> based on {{#tag}}; EX: {{#tag:ref|a|name=1}} -> <ref name='1'>a</ref>
-		Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();			
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();			
 		try {
 			// get tag_idx, tag_data, and tag_is_ref
 			int tag_idx = -1;

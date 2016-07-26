@@ -22,9 +22,7 @@ public class Scrib_proc_mgr {
 	public Scrib_proc Get_by_key(String key) {synchronized (hash) {return (Scrib_proc)hash.Get_by(key);}}
 	public Scrib_proc Get_at(int i) {synchronized (hash) {return (Scrib_proc)hash.Get_at(i);}}
 	public void Set(String key, Scrib_proc proc) {
-//			synchronized (hash) {	// LOCK:DELETE; DATE:2016-07-06
-			hash.Add_if_dupe_use_nth(key, proc);		// WORKAROUND: Add_if_dupe_use_nth b/c some libraries reuse proc name; EX: getGlobalSiteId is used by mw.wikibase.lua and mw.wikibase.entity.lua
-//			}
+		hash.Add_if_dupe_use_nth(key, proc);		// WORKAROUND: Add_if_dupe_use_nth b/c some libraries reuse proc name; EX: getGlobalSiteId is used by mw.wikibase.lua and mw.wikibase.entity.lua
 	}
 	public Scrib_proc Set(Scrib_lib lib, String proc_name, int proc_id) {
 		Scrib_proc proc = new Scrib_proc(lib, proc_name, proc_id);

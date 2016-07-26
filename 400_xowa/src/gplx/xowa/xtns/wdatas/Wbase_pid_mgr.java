@@ -21,8 +21,17 @@ public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
 	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Wbase_pid_mgr(Wdata_wiki_mgr wbase_mgr) {this.wbase_mgr = wbase_mgr;}
 	public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled;
-	public void Clear() {hash.Clear();}
-	public void Add(byte[] pid_key, int pid_id) {hash.Add_bry_int(pid_key, pid_id);}
+	public void Clear() {
+		synchronized (hash) { // LOCK:app-level
+			hash.Clear();
+		}
+	}
+	public void Add(byte[] pid_key, int pid_id) {
+		synchronized (hash) { // LOCK:app-level
+			if (!hash.Has(pid_key))
+				hash.Add_bry_int(pid_key, pid_id);
+		}
+	}
 	public int Get_or_null(byte[] lang_key, byte[] pid_name) {
 		if (!enabled) return Wdata_wiki_mgr.Pid_null;
 		byte[] pid_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);		// EX: "en|road_map"

@@ -20,29 +20,29 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.vnts.*;
 public class Xof_math_html_wtr {
-	private Xof_math_itm tmp_math_itm = new Xof_math_itm();
-	private Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
-	private Bry_fmtr math_fmtr_mathjax	= Bry_fmtr.new_("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
+	private final    Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
+	private final    Bry_fmtr math_fmtr_mathjax		= Bry_fmtr.new_("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
 	public void Write(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Xoae_app app = ctx.App(); Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		boolean renderer_is_latex = !app.File_mgr().Math_mgr().Renderer_is_mathjax();
 		byte[] math_bry = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512().Mkr_rls();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512().Mkr_rls();
 		math_bry = Escape_tex(tmp_bfr, !renderer_is_latex, math_bry);
 		byte[] math_bry_clean = wiki.Html_mgr().Js_cleaner().Clean(wiki, math_bry, 0, math_bry.length);	// check for js; 
 		if (math_bry_clean != null) math_bry = math_bry_clean;	// js found; use clean version; DATE:2013-08-26
 		boolean enabled = app.File_mgr().Math_mgr().Enabled();
-		if (renderer_is_latex && app.File_mgr().Math_mgr().Find_itm(tmp_math_itm, page.Wiki().Domain_str(), math_bry)) {
+		Xof_math_itm math_itm = ctx.Tmp_mgr().Math_itm();
+		if (renderer_is_latex && app.File_mgr().Math_mgr().Find_itm(math_itm, page.Wiki().Domain_str(), math_bry)) {
 			bfr.Add(Xoh_consts.Img_bgn);
-			bfr.Add_str_u8(tmp_math_itm.Png_url().To_http_file_str());
+			bfr.Add_str_u8(math_itm.Png_url().To_http_file_str());
 			bfr.Add(Xoh_consts.__inline_quote);
 		}
 		else
-			Write_for_mathjax(bfr, page, enabled, renderer_is_latex, math_bry, tmp_bfr);
+			Write_for_mathjax(bfr, page, enabled, renderer_is_latex, math_bry, tmp_bfr, math_itm);
 	}
-	private void Write_for_mathjax(Bry_bfr bfr, Xoae_page page, boolean enabled, boolean renderer_is_latex, byte[] math_bry, Bry_bfr tmp_bfr) {
+	private void Write_for_mathjax(Bry_bfr bfr, Xoae_page page, boolean enabled, boolean renderer_is_latex, byte[] math_bry, Bry_bfr tmp_bfr, Xof_math_itm math_itm) {
 		int id = page.File_math().Count();
-		Xof_math_itm new_math_itm = tmp_math_itm.Clone().Id_(id);
+		Xof_math_itm new_math_itm = math_itm.Clone().Id_(id);
 		Bry_fmtr math_fmtr = renderer_is_latex ? math_fmtr_latex : math_fmtr_mathjax;
 		boolean armor_math = page.Lang().Vnt_mgr().Enabled() && !renderer_is_latex;	// REF.MW:LangConverter.php|armourMath
 		if (armor_math) bfr.Add(Vnt_convert_lang.Bry__armor_bgn);

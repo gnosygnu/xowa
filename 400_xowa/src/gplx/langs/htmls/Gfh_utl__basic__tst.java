@@ -17,12 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
-public class Gfh_utl_tst {
+public class Gfh_utl__basic__tst {
 	@Before public void init() {fxt.Clear();} private Gfh_class_fxt fxt = new Gfh_class_fxt();
-	@Test   public void Basic() 		{fxt.Test_del_comments("a<!-- b -->c"				, "ac");}
-	@Test   public void Bgn_missing() 	{fxt.Test_del_comments("a b c"						, "a b c");}
-	@Test   public void End_missing() 	{fxt.Test_del_comments("a<!-- b c"					, "a<!-- b c");}
-	@Test   public void Multiple()	 	{fxt.Test_del_comments("a<!--b-->c<!--d-->e"		, "ace");}
 	@Test   public void Escape()	 	{
 		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a<b"			, "a&lt;b");	// basic
 		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.N, Bool_.Y, Bool_.Y, "a<&b"		, "a&lt;&b");	// fix: & not escaped when <> present

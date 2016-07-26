@@ -23,13 +23,14 @@ public class Flagged_revs_lib implements Scrib_lib {
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Core_(Scrib_core v) {this.core = v; return this;} // TEST:
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Flagged_revs_lib();}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		this.core = core;
 		Init();
 		mod = core.RegisterInterface(this, core.App().Fsys_mgr().Bin_xtns_dir().GenSubFil_nest("FlaggedRevs", "scribunto", "mw.ext.FlaggedRevs.lua"));
 		return mod;
 	}
-	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_getStabilitySettings:									return GetStabilitySettings(args, rslt);
@@ -38,7 +39,7 @@ public class Flagged_revs_lib implements Scrib_lib {
 	}
 	private static final int Proc_getStabilitySettings = 0;
 	public static final String Invk_getStabilitySettings = "getStabilitySettings";
-	private static final String[] Proc_names = String_.Ary(Invk_getStabilitySettings);
+	private static final    String[] Proc_names = String_.Ary(Invk_getStabilitySettings);
 	public boolean GetStabilitySettings(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] page_name = args.Cast_bry_or_null(0);
 		Xoa_ttl page_ttl = null;

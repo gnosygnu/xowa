@@ -76,7 +76,7 @@ class Xop_redirect_mgr_fxt {
 		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
 	}
 	public void Test__redirected_html(String page_str, String expd_str) {
-		gplx.xowa.wikis.pages.redirects.Xopg_redirect_data redirect_mgr = new gplx.xowa.wikis.pages.redirects.Xopg_redirect_data();
+		gplx.xowa.wikis.pages.redirects.Xopg_redirect_mgr redirect_mgr = new gplx.xowa.wikis.pages.redirects.Xopg_redirect_mgr();
 		Xoa_ttl ttl = fxt.Wiki().Ttl_parse(Bry_.new_u8(page_str));
 		Xoa_url url = Xoa_url.New(fxt.Wiki(), ttl);
 		redirect_mgr.Itms__add__article(url, ttl, Bry_.Empty);

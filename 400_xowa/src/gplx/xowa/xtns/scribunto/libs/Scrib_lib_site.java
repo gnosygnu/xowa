@@ -23,6 +23,7 @@ public class Scrib_lib_site implements Scrib_lib {
 	public Scrib_lib_site(Scrib_core core) {this.core = core;} private final    Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_site(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.site.lua"));// NOTE: info not passed by default; rely on Init_for_wiki

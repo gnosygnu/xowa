@@ -23,6 +23,7 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public void Core_(Scrib_core v) {this.core = v;} // TEST:
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Pfunc_scrib_lib();}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		this.core = core;
 		Init();

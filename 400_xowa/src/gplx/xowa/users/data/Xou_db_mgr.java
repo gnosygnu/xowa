@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.metas.updates.*; import gplx.dbs.metas.*;
 import gplx.xowa.files.caches.*;
-import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
+import gplx.xowa.users.cfgs.*; import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_mgr {
 	private final    Xoa_app app;
 	private final    Xoud_id_mgr id_mgr;		
@@ -35,6 +35,7 @@ public class Xou_db_mgr {
 	public Xoud_bmk_mgr			Bmk_mgr() {return bmk_mgr;} private final    Xoud_bmk_mgr bmk_mgr = new Xoud_bmk_mgr();
 	public Xou_cache_mgr		Cache_mgr() {return cache_mgr;} private Xou_cache_mgr cache_mgr;
 	public Xou_file_itm_finder	File__xfer_itm_finder() {return xfer_itm_finder;} private Xou_file_itm_finder xfer_itm_finder;
+	public Xou_cfg_mgr			Cfg() {return cfg;} private final    Xou_cfg_mgr cfg = new Xou_cfg_mgr();
 	public void Init_by_app(boolean drd, Io_url db_url) {
 		Db_conn_bldr_data db_conn_bldr = Db_conn_bldr.Instance.Get_or_new(db_url);
 		this.conn = db_conn_bldr.Conn(); boolean created = db_conn_bldr.Created();
@@ -42,6 +43,7 @@ public class Xou_db_mgr {
 		this.cache_mgr = new Xou_cache_mgr(app.Wiki_mgri(), app.Fsys_mgr().File_dir(), db_file);
 		this.xfer_itm_finder = new Xou_file_itm_finder(cache_mgr);
 		this.bmk_mgr.Conn_(conn, created);
+		cfg.Init_by_app(conn);
 		// this.history_mgr.Conn_(conn, created);
 		if (drd) {
 			this.Init_site_mgr();

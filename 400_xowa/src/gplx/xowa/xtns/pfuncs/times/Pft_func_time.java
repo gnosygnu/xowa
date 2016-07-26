@@ -30,6 +30,7 @@ public class Pft_func_time extends Pf_func_base {
 		byte[] arg_lang = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 1);
 		Bry_bfr error_bfr = Bry_bfr_.New();
 		DateAdp date = ParseDate(arg_date, utc, error_bfr);
+		Xowe_wiki wiki = ctx.Wiki();
 		if (date == null || error_bfr.Len() > 0)
 			bfr.Add_str_a7("<strong class=\"error\">").Add_bfr_and_clear(error_bfr).Add_str_a7("</strong>");
 		else {
@@ -37,11 +38,11 @@ public class Pft_func_time extends Pf_func_base {
 			if (Bry_.Len_gt_0(arg_lang)) {
 				Xol_lang_stub specified_lang_itm = Xol_lang_stub_.Get_by_key_or_null(arg_lang);
 				if (specified_lang_itm != null) {	// NOTE: if lang_code is bad, then ignore (EX:bad_code)
-					Xol_lang_itm specified_lang = ctx.Wiki().Appe().Lang_mgr().Get_by_or_new(arg_lang);
+					Xol_lang_itm specified_lang = wiki.Appe().Lang_mgr().Get_by_or_new(arg_lang);
 					lang = specified_lang;	
 				}
 			}
-			Pft_func_formatdate.Date_bldr().Format(bfr, ctx.Wiki(), lang, date, fmt_ary);
+			wiki.Parser_mgr().Date_fmt_bldr().Format(bfr, wiki, lang, date, fmt_ary);
 		}
 	}
 	public static DateAdp ParseDate(byte[] date, boolean utc, Bry_bfr error_bfr) {

@@ -26,18 +26,29 @@ public class Wbase_doc_mgr {
 		this.hash = app.Cache_mgr().Doc_cache();
 	}
 	public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled;
-	public void Clear() {hash.Clear();}
-	public void Add(byte[] full_db, Wdata_doc page) {hash.Add(full_db, page);}	// TEST:
+	public void Clear() {
+		synchronized (hash) {	// LOCK:app-level
+			hash.Clear();
+		}
+	}
+	public void Add(byte[] full_db, Wdata_doc page) {	// TEST:
+		synchronized (hash) {	// LOCK:app-level
+			if (hash.Get_or_null(full_db) == null)
+				hash.Add(full_db, page);
+		}
+	}	
 	public Wdata_doc Get_by_ttl_or_null(Xowe_wiki wiki, Xoa_ttl ttl) {
 		byte[] qid_bry = qid_mgr.Get_or_null(wiki, ttl);	// EX: "enwiki","Earth" -> "Q2"
 		return qid_bry == null ? null : this.Get_by_bry_or_null(qid_bry);
 	}
 	public Wdata_doc Get_by_xid_or_null(byte[] xid) {return Get_by_bry_or_null(Prepend_property_if_needed(xid));}// scribunto passes either p1 or q1; convert p1 to "Property:P1"
-	public Wdata_doc Get_by_bry_or_null(byte[] full_db) {	// must be format like "Q2" or "Property:P1"
+	public Wdata_doc Get_by_bry_or_null(byte[] full_db) {	// must be correct format; EX:"Q2" or "Property:P1"
 		Wdata_doc rv = hash.Get_or_null(full_db);
 		if (rv == null) {
 			byte[] page_src = Load_or_null(full_db); if (page_src == null) return null;	// page not found
-			rv = new Wdata_doc(full_db, wbase_mgr, wbase_mgr.Jdoc_parser().Parse(page_src));
+			synchronized (hash) {	// LOCK:app-level; both hash and jdoc_parser
+				rv = new Wdata_doc(full_db, wbase_mgr, wbase_mgr.Jdoc_parser().Parse(page_src));
+			}
 			Add(full_db, rv);
 		}
 		return rv;
@@ -46,7 +57,7 @@ public class Wbase_doc_mgr {
 		if (!enabled) return null;
 		Xoa_ttl page_ttl = Xoa_ttl.Parse(wbase_mgr.Wdata_wiki(), full_db); if (page_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", full_db); return null;}
 		Xoae_page page_itm = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(page_ttl);
-		return page_itm.Db().Page().Exists_n() ? null : page_itm.Db().Text().Text_bry();
+		return page_itm.Db().Page().Exists() ? page_itm.Db().Text().Text_bry() : null;
 	}
 
 	private static byte[] Prepend_property_if_needed(byte[] bry) {

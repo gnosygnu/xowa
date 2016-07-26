@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.envs.*;
 import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
+import gplx.xowa.bldrs.wkrs.*;
 public class Xob_import_cfg {
 	public Xob_import_cfg(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki; private boolean src_fil_is_bz2 = true;
 	public byte Category_version() {return category_version;} public Xob_import_cfg Category_version_(byte v) {category_version = v; return this;} private byte category_version = Xoa_ctg_mgr.Version_1;
@@ -34,7 +35,8 @@ public class Xob_import_cfg {
 	}
 	public Io_stream_rdr Src_rdr() {
 		if (src_fil_xml == null && src_fil_bz2 == null) {	// will usually be null; non-null when user specifies src through command-line
-			Io_url url = Xotdb_fsys_mgr.Find_file_or_fail(wiki.Fsys_mgr().Root_dir(), "*", ".xml", ".bz2");
+			Io_url url = Xob_io_utl_.Find_nth_by_wildcard_or_null(wiki.Fsys_mgr().Root_dir(), Xob_io_utl_.Pattern__wilcard, ".xml", ".bz2");
+			if (url == null) throw Err_.new_wo_type("could not find any .xml or .bz2 file", "dir", wiki.Fsys_mgr().Root_dir().Raw());
 			if (String_.Eq(url.Ext(), ".xml"))	Src_fil_xml_(url);
 			else								Src_fil_bz2_(url);
 		}

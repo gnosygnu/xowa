@@ -39,7 +39,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 			Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, ttl); if (doc == null) return Qid_null;	// no links
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			Ordered_hash links = doc.Slink_list();
-			Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_k004();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {
 				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)links.Get_at(i);

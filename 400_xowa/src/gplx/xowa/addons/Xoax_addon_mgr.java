@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons; import gplx.*; import gplx.xowa.*;
 public class Xoax_addon_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	// THREAD: must synchronized else two search tabs will fail on startup
+	private final    Ordered_hash hash = Ordered_hash_.New(); // LOCK: must synchronized else two search tabs will fail on startup
 	public Xoax_addon_itm	Itms__get_or_null(String key) {synchronized (hash) {return (Xoax_addon_itm)hash.Get_by(key);}}
 	public void				Itms__add_many(Xoax_addon_itm... ary) {
 		for (Xoax_addon_itm itm : ary)
@@ -49,6 +48,7 @@ public class Xoax_addon_mgr {
 		// specials
 		, new gplx.xowa.addons.wikis.registrys			.Wiki_registry_addon()
 		, new gplx.xowa.addons.wikis.imports			.Xow_import_addon()
+		, new gplx.xowa.addons.bldrs.xodirs				.Xobc_xodir_addon()
 		, new gplx.xowa.addons.bldrs.centrals			.Xobc_task_addon()
 		, new gplx.xowa.addons.apps.helps.logs			.Xolog_addon()
 
@@ -63,6 +63,14 @@ public class Xoax_addon_mgr {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoax_addon_itm addon = (Xoax_addon_itm)hash.Get_at(i);
+
+			// init
+			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__init.class)) {
+				Xoax_addon_itm__init addon_init = (Xoax_addon_itm__init)addon;
+				addon_init.Init_addon_by_app(app);
+				init_list.Add(addon_init);
+			}
+
 			// add bldr cmds
 			if (Type_adp_.Implements_intf_obj(addon, Xoax_addon_itm__bldr.class)) {
 				Xoax_addon_itm__bldr addon_bldr = (Xoax_addon_itm__bldr)addon;
@@ -86,4 +94,12 @@ public class Xoax_addon_mgr {
 			}
 		}
 	}
+	public void Load_by_wiki(Xow_wiki wiki) {
+		int len = init_list.Len();
+		for (int i = 0; i < len; ++i) {
+			Xoax_addon_itm__init itm = (Xoax_addon_itm__init)init_list.Get_at(i);
+			itm.Init_addon_by_wiki(wiki);
+		}
+	}
+	private final    List_adp init_list = List_adp_.New();
 }

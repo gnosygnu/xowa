@@ -26,7 +26,7 @@ public class Xoh_page implements Xoa_page {
 	public Xoa_url					Url()				{return page_url;}		private Xoa_url page_url;
 	public Xoa_ttl					Ttl()				{return page_ttl;}		private Xoa_ttl page_ttl;
 	public Xopg_db_data				Db()				{return db;}			private final    Xopg_db_data db = new Xopg_db_data();
-	public Xopg_redirect_data		Redirect()			{return redirect;}		private final    Xopg_redirect_data redirect = new Xopg_redirect_data();
+	public Xopg_redirect_mgr		Redirect()			{return redirect;}		private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
 	public Xopg_html_data			Html_data()			{return html;}			private final    Xopg_html_data html = new Xopg_html_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}			private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 

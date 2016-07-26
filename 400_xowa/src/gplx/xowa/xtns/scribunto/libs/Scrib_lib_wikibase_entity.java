@@ -22,6 +22,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase_entity(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.wikibase.entity.lua"));
@@ -52,7 +53,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		if (pid_int == Wdata_wiki_mgr.Pid_null) pid_int = wdata_mgr.Pid_mgr.Get_or_null(lang, pid);		// parse as name; EX: name > 123
 		if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
 		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
-		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
 		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}

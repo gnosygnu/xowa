@@ -38,6 +38,6 @@ class Xobldr__lnki_temp__create__fxt {
 		return this;
 	}
 	public void Test__to_commons(String ttl, String expd) {
-		Tfds.Eq(expd, String_.new_u8(Xobldr__lnki_temp__create.Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_u8(ttl))));
+		Tfds.Eq(expd, String_.new_u8(gplx.xowa.addons.bldrs.mass_parses.parses.Xomp_file_logger.To_commons_ttl(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_u8(ttl))));
 	}
 }

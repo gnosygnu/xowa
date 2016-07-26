@@ -21,7 +21,7 @@ public class Pfunc_ifexist_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
 		fxt.Reset();
-		fxt.Wiki().Parser_mgr().Ifexist_mgr().Clear();
+		fxt.Wiki().Cache_mgr().Ifexist_cache().Clear();
 	}
 	@Test  public void Basic_pass()				{fxt.Test_parse_tmpl_str_test("{{#ifexist: Abc | exists | doesn't exist }}"		, "{{test}}"	, "doesn't exist");}
 	@Test  public void Empty()					{fxt.Test_parse_tmpl_str_test("{{#ifexist:|y|n}}"								, "{{test}}"	, "n");}	// NOTE: {{autolink}} can pass in ""

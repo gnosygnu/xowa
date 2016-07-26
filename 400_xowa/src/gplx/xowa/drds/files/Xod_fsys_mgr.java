@@ -24,7 +24,7 @@ public class Xod_fsys_mgr {
 		this.app_root_dir = usr_data_dir.GenSubDir_nest("files", "xowa");
 		String sdcard_rw = activity.Fsys__sdcard_rw_or_null();
 		if (sdcard_rw != null) {
-			app_root_dir = Io_url_.lnx_dir_(sdcard_rw + "/files/xowa/");
+			app_root_dir = Io_url_.lnx_dir_(sdcard_rw + "files/xowa/");
 		}
 		log.Info("fsys_mgr:root_dir", "root", app_root_dir.Xto_api());
 	}

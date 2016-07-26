@@ -45,10 +45,8 @@ class Pxd_parser {
 		fmtr.Bld_bfr(error_bfr, args);
 	}	private Bry_bfr error_bfr = Bry_bfr_.New_w_size(32);
 	public DateAdp Parse(byte[] src, Bry_bfr error_bfr) {
-//			synchronized (this) {	// LOCK:static-obj; DATE:2016-07-06
-			Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
-			return Evaluate(src, error_bfr);
-//			}
+		Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
+		return Evaluate(src, error_bfr);
 	}
 	private boolean Tokenize(byte[] src) { 
 		this.src = src; src_len = src.length;

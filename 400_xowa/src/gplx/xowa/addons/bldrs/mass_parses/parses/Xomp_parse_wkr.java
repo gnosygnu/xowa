@@ -23,23 +23,42 @@ class Xomp_parse_wkr implements Gfo_invk {
 	private final    Xomp_parse_mgr mgr;		
 	private final    Xomp_page_pool page_pool;
 	private final    int idx;
-	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;
-	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
+	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
 	private int done_count; private long done_time;
-	private Xomp_wkr_db wkr_db;
-	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xowe_wiki wiki, Xomp_page_pool page_pool, int idx) {
+	private Xomp_wkr_db wkr_db; private int cleanup_interval, commit_interval;
+	private boolean log_file_lnkis;
+	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xowe_wiki wiki, Xomp_page_pool page_pool, int idx, int cleanup_interval, int commit_interval, boolean log_file_lnkis) {
 		this.mgr = mgr; this.wiki = wiki;
 		this.page_pool = page_pool;
 		this.idx = idx;
 		this.wkr_db = mgr.Db_core().Wkr_db(Bool_.Y, idx);	// NOTE: must go in ctor, or else thread issues
+		this.cleanup_interval = cleanup_interval;
+		this.commit_interval = commit_interval;
+		this.log_file_lnkis = log_file_lnkis;
 	}
 	public Xowe_wiki Wiki() {return wiki;} private final    Xowe_wiki wiki;
+	public Xob_hdump_bldr Hdump_bldr() {return hdump_bldr;} private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
 	public void Exec() {
 		// init
 		Xow_parser_mgr parser_mgr = new Xow_parser_mgr(wiki);
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(false);		// disable categories else progress messages written (also for PERF)
-		if (wiki.File__bin_mgr() != null)
-			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);		// remove wmf wkr, else will try to download images during parsing
+
+		// disable file download
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);											// must happen after fsdb.make
+		wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);			// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
+		wiki.File__orig_mgr().Wkrs_del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
+
+		// disable categories else progress messages written (also for PERF)
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(false);
+
+		// enable lnki_temp
+		Xomp_file_logger logger = null;
+		if (log_file_lnkis) {
+			logger = new Xomp_file_logger(wiki, wkr_db.Conn());
+			parser_mgr.Ctx().Lnki().File_logger_(logger);
+			logger.Bgn();
+		}
+
+		// enable hdump
 		hdump_bldr.Enabled_(true).Hzip_enabled_(true).Hzip_diff_(true).Init(wiki, wkr_db.Conn(), new Xob_hdump_tbl_retriever__xomp(wkr_db.Html_tbl()));
 		wkr_db.Conn().Txn_bgn("xomp");
 
@@ -76,14 +95,22 @@ class Xomp_parse_wkr implements Gfo_invk {
 				// ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
 				if (wiki.Cache_mgr().Tmpl_result_cache().Count() > 50000) 
 					wiki.Cache_mgr().Tmpl_result_cache().Clear();
-				if (done_count % 50 == 0) {
+				if (done_count % cleanup_interval == 0) {
 					wiki.Cache_mgr().Free_mem_all(Bool_.N);
 					wiki.Parser_mgr().Scrib().Core_term();
+					wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
 				}
+				if (done_count % commit_interval == 0)
+					wkr_db.Conn().Txn_sav();
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail:ns=~{0} ttl=~{1} err=~{2}", ppg.Ns_id(), ppg.Ttl_bry(), Err_.Message_gplx_log(e));
 			}
 		}
+
+		if (logger != null)
+			logger.End();
+
+		// cleanup
 		wkr_db.Conn().Txn_end();	// NOTE: must end txn before running update wkr_id
 		mgr.Db_core().Update_wkr_id(idx, wkr_db.Conn());
 		mgr.Wkrs_done_add_1();

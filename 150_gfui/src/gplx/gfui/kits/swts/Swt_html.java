@@ -91,7 +91,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	public void 		Html_js_cbks_add(String func_name, Gfo_invk invk) 				{new Swt_html_func(browser, func_name, invk);}
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
 	public Object		Html_js_eval_script_as_obj(String script) 						{return Eval_script(script);}
-	public boolean 	Html_js_eval_proc_as_bool(String proc, Object... args) {return Bool_.cast(Html_js_eval_proc_as_obj(proc, args));}
+	public boolean 		Html_js_eval_proc_as_bool(String proc, Object... args) 			{return Bool_.cast(Html_js_eval_proc_as_obj(proc, args));}
 	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
 	public String Html_js_send_json(String name, String data) {
 		String script = String_.Format("return {0}('{1}');", name, String_.Replace(data, "\n", "") );

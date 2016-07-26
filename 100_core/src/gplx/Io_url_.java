@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.ios.*; /*IoUrlInfo_*/ import gplx.core.stores.*; import gplx.core.envs.*;
 public class Io_url_ {
-	public static final Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
-	public static final Io_url NullPtr = null;
-	public static final Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
+	public static final    Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
+	public static final    Io_url NullPtr = null;
+	public static final    Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
 	public static Io_url as_(Object obj) {return obj instanceof Io_url ? (Io_url)obj : null;}
 	public static Io_url cast(Object obj) {try {return (Io_url)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Io_url.class, obj);}}
 	public static Io_url Usr() {
@@ -92,5 +92,12 @@ public class Io_url_ {
 					||	(String_.CharAt(s, 1) == '\\' && String_.CharAt(s, 2) == '\\')
 					)
 				);
+	}
+	public static Io_url[] Ary(String... ary) {
+		int len = ary.length;
+		Io_url[] rv = new Io_url[len];
+		for (int i = 0; i < len; ++i)
+			rv[i] = Io_url_.new_any_(ary[i]);
+		return rv;
 	}
 }

@@ -49,7 +49,15 @@ public class Xowd_wbase_pid_tbl implements Rls_able {
 			if (!rdr.Move_next()) return Wdata_wiki_mgr.Pid_null;	// occurs when pid exists, but does not have entry for language; see hu.w:Marco Polo argali; DATE: 2014-02-01
 			byte[] pid_bry = rdr.Read_bry_by_str(fld_trg_ttl);
 			return pid_bry == null ?  Wdata_wiki_mgr.Pid_null : Bry_.To_int_or(pid_bry, 1, pid_bry.length, Wdata_wiki_mgr.Pid_null);
-		} finally {rdr.Rls();}
+		}
+		catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids:failed to select pid; lang=~{0} src_ttl=~{1} err=~{2}", src_lang, src_ttl, Err_.Message_gplx_log(e));
+			try {stmt_select.Rls();}
+			catch (Exception e2) {Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids: failed to rls stmt; err=~{0}", Err_.Message_gplx_log(e2));}
+			stmt_select = null;
+			return Wdata_wiki_mgr.Pid_null;
+		}
+		finally {rdr.Rls();}
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

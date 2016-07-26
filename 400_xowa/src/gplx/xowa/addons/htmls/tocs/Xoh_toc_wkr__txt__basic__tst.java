@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-import org.junit.*; import gplx.core.tests.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.langs.htmls.*;
 public class Xoh_toc_wkr__txt__basic__tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
 	@Test   public void Basic() {
@@ -62,6 +62,6 @@ class Xoh_toc_wkr__txt__fxt {
 	}
 	public void Test__remove_comment(String html, String expd) {
 		byte[] html_bry = Bry_.new_u8(html);
-		Gftest.Eq__str(expd, Xoh_toc_wkr__txt.Remove_comment(tmp, html_bry, 0, html_bry.length));
+		Gftest.Eq__str(expd, Gfh_utl.Del_comments(tmp, html_bry, 0, html_bry.length));
 	}
 }

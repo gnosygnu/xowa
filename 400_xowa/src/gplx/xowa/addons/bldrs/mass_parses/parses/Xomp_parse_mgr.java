@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.core.threads.*; import gplx.core.threads.utils.*;
+import gplx.core.threads.*; import gplx.core.threads.utils.*; import gplx.core.caches.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.wikis.caches.*;
@@ -32,9 +32,11 @@ class Xomp_parse_mgr {
 		this.db_core = Xomp_db_core.New__load(wiki);
 		Xomp_page_pool_loader pool_loader = new Xomp_page_pool_loader(wiki, db_core.Mgr_db().Conn(), cfg.Num_pages_in_pool());
 		Xomp_page_pool page_pool = new Xomp_page_pool(pool_loader, cfg.Num_pages_per_wkr());
-		prog_mgr.Init(pool_loader.Get_pending_count());
-		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, true);
+		prog_mgr.Init(pool_loader.Get_pending_count(), cfg.Progress_interval());
 		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of cache
+		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, true);
+		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
+		Gfo_cache_mgr ifexist_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
 
 		// load_wkr: init and start
 		// Xomp_load_wkr load_wkr = new Xomp_load_wkr(wiki, db_core.Mgr_db().Conn(), cfg.Num_pages_in_pool(), cfg.Num_wkrs());
@@ -45,8 +47,13 @@ class Xomp_parse_mgr {
 		latch = new Gfo_countdown_latch(wkr_len);
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
 		for (int i = 0; i < wkr_len; ++i) {
-			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, Clone_wiki(wiki), page_pool, i);
-			wkr.Wiki().Cache_mgr().Page_cache_(page_cache);
+			Xowe_wiki wkr_wiki = Clone_wiki(wiki);
+			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, wkr_wiki, page_pool, i, cfg.Cleanup_interval(), cfg.Progress_interval(), cfg.Log_file_lnkis());
+			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);
+			// remove wmf wkr, else will try to download images during parsing
+			if (wkr_wiki.File__bin_mgr() != null)
+				wkr_wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	
+			wkr.Hdump_bldr().Enabled_(cfg.Hdump_enabled()).Hzip_enabled_(cfg.Hzip_enabled()).Hzip_diff_(cfg.Hdiff_enabled());
 			wkrs[i] = wkr;
 		}
 

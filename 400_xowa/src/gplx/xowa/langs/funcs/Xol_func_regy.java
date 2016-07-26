@@ -51,14 +51,12 @@ public class Xol_func_regy {
 		}
 	}
 	private void Add(byte[] ary, boolean case_match, Xot_defn func) {
-//			synchronized (thread_lock) {	// LOCK:DELETE; DATE:2016-07-06
-			if (case_match)
-				cs_trie.Add_obj(ary, func);
-			else {
-				byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
-				ci_trie.Add_obj(lower_ary, func);
-			}
-//			}
+		if (case_match)
+			cs_trie.Add_obj(ary, func);
+		else {
+			byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
+			ci_trie.Add_obj(lower_ary, func);
+		}
 	}
 	public void Find_defn(Xol_func_itm rv, byte[] src, int txt_bgn, int txt_end) {
 		rv.Clear();

@@ -33,21 +33,12 @@ class Xow_list_html extends Xow_special_wtr__base {
 			if (String_.Eq(site_itm.Domain(), gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home)) continue;
 			list.Add(new Xow_list_doc_wiki(Bry_.new_u8(site_itm.Domain()), site_itm.Date()));
 		}
-		return new Xow_list_doc(Get_root_url(), (Xow_list_doc_wiki[])list.To_ary_and_clear(Xow_list_doc_wiki.class));
+		return new Xow_list_doc(gplx.xowa.addons.wikis.imports.Xow_import_special.Get_root_url(), (Xow_list_doc_wiki[])list.To_ary_and_clear(Xow_list_doc_wiki.class));
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
 		Xopg_tag_wtr_.Add__xocss	(head_tags, app.Fsys_mgr().Http_root());
 		Xopg_tag_wtr_.Add__xohelp	(head_tags, app.Fsys_mgr().Http_root());
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xow_list.css")));
-	}
-	private static byte[] Get_root_url() {
-		byte tid = gplx.core.envs.Op_sys.Cur().Tid();
-		byte[] rv = Bry_.new_a7("/");
-		switch (tid) {
-			case gplx.core.envs.Op_sys.Tid_wnt	: rv = Bry_.new_a7("C:\\"); break;
-		}
-		rv = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(rv);
-		return rv;
 	}
 }

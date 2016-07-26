@@ -25,6 +25,7 @@ public class Pfunc_expr extends Pf_func_base {
 		Evaluate(bfr, ctx, val_dat_ary);
 	}
 	public static boolean Evaluate(Bry_bfr bfr, Xop_ctx ctx, byte[] expr) {
+		Pfunc_expr_shunter shunter = ctx.Tmp_mgr().Expr_shunter();
 		Decimal_adp rslt = shunter.Evaluate(ctx, expr);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
 		if (rslt == Pfunc_expr_shunter.Null_rslt) {
 			bfr.Add_bfr_and_preserve(shunter.Err());
@@ -36,11 +37,10 @@ public class Pfunc_expr extends Pf_func_base {
 			return true;
 		}
 	}
-	private static Pfunc_expr_shunter shunter = Pfunc_expr_shunter.Instance;
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_expr;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_expr().Name_(name);}
 }
 class Pfunc_expr_msg {
-	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.new_(Xoa_app_.Nde, "expr");
-	public static final Gfo_msg_itm Unknown = Gfo_msg_itm_.new_warn_(Nde, "unknown", "unknown");
+	public static final    Gfo_msg_grp Nde = Gfo_msg_grp_.new_(Xoa_app_.Nde, "expr");
+	public static final    Gfo_msg_itm Unknown = Gfo_msg_itm_.new_warn_(Nde, "unknown", "unknown");
 }

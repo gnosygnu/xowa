@@ -107,7 +107,7 @@ public class Xog_tab_itm_edit_mgr {
 		byte[] data = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		new_page.Db().Text().Text_bry_(data);
 		wiki.Parser_mgr().Parse(new_page, true);
-		Bry_bfr bfr = win.App().Utl__bfr_mkr().Get_m001();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001();
 		bfr.Add(new_page.Root().Root_src());
 		wiki.Parser_mgr().Ctx().Defn_trace().Print(data, bfr);
 		new_page.Db().Text().Text_bry_(bfr.To_bry_and_rls());

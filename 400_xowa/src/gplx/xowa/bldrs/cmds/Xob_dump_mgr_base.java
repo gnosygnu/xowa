@@ -145,7 +145,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			byte[] page_src = page.Text();
 			if (page_src != null)	// some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
 				Exec_pg_itm_hook(ns_ord, ns, page, page_src);
-			ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
+			ctx.Wiki().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
 			if (ctx.Wiki().Cache_mgr().Tmpl_result_cache().Count() > 50000) 
 				ctx.Wiki().Cache_mgr().Tmpl_result_cache().Clear();
 			++exec_count;
@@ -159,7 +159,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		}
 		catch (Exception exc) {
 			bldr.Usr_dlg().Warn_many("", "", "parse failed: wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_str(), page.Ttl_full_db(), Err_.Message_gplx_log(exc));
-			ctx.App().Utl__bfr_mkr().Clear();
+			ctx.Wiki().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
 	}

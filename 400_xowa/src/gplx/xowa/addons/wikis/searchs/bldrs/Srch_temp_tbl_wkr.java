@@ -82,7 +82,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr();
 
 		// dump everything into a temp table in order to index it
-		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("page", "page_ns__page_id", "page_namespace", "page_id"));
+		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl("page", "page_ns__page_id", "page_namespace", "page_id"));
 		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
 		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("page_id"), Dbmeta_fld_itm.new_int("page_namespace")));
 		attach_mgr.Conn_main_(word_conn).Conn_others_(new Db_attach_itm("page_db", page_conn));
@@ -98,7 +98,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		));
 		word_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("search_link_temp", "main", "page_namespace", "word_id", "page_id"));
 		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
-		page_conn.Meta_idx_delete("page__page_ns__page_id");
+		page_conn.Meta_idx_delete("page", "page_ns__page_id");
 
 		int len = search_db_mgr.Tbl__link__len();
 		for (int i = 0; i < len; ++i) {

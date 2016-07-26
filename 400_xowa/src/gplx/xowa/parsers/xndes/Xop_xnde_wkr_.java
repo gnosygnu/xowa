@@ -22,7 +22,6 @@ class Xop_xnde_wkr_ {
 	private static final    Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
 	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1, Find_xtn_end__tid__xtag = 2;
 	private static final    Int_obj_ref Find_xtn_end__key__bgn = Int_obj_ref.New(Find_xtn_end__tid__bgn), Find_xtn_end__key__end = Int_obj_ref.New(Find_xtn_end__tid__end), Find_xtn_end__key__xtag = Int_obj_ref.New(Find_xtn_end__tid__xtag);
-	private static final    Bry_bfr Find_xtag_end__bfr = Bry_bfr_.New_w_size(32);
 	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
 		int subs_bgn = -1, subs_len = owner.Subs_len();
 		for (int i = 0; i < subs_len; i++) {
@@ -73,8 +72,10 @@ class Xop_xnde_wkr_ {
 	public static int Find_xtag_end(Xop_ctx ctx, byte[] src, int pos, int src_end) {
 		int xtag_bgn = pos + Pfunc_tag.Xtag_bgn_lhs.length;
 		int tag_id = Bry_.To_int_or(src, xtag_bgn, xtag_bgn + Pfunc_tag.Id_len, -1); if (tag_id == -1) {Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not extract id from xtag_bgn: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
-		Find_xtag_end__bfr.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, Pfunc_tag.Id_len, tag_id).Add(Pfunc_tag.Xtag_rhs);
-		byte[] tag_end = Find_xtag_end__bfr.To_bry_and_clear();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
+		tmp_bfr.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, Pfunc_tag.Id_len, tag_id).Add(Pfunc_tag.Xtag_rhs);
+		byte[] tag_end = tmp_bfr.To_bry_and_clear();
+		tmp_bfr.Mkr_rls();
 		int rv = Bry_find_.Find_fwd(src, tag_end, pos + Pfunc_tag.Xtag_rhs.length); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find xtag end: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
 		rv = Bry_find_.Find_bwd(src, Byte_ascii.Lt, rv - 1); if (rv == Bry_find_.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Page().Url().To_str()); return Bry_find_.Not_found;}
 		return rv;

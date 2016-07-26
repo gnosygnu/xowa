@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.pfuncs.times.*;
 public class Pft_func_date_int extends Pf_func_base {
 	public Pft_func_date_int(int id, int date_tid) {this.id = id; this.date_tid = date_tid;} private int date_tid;
 	@Override public int Id() {return id;} private int id;
@@ -25,6 +25,7 @@ public class Pft_func_date_int extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		DateAdp date = DateAdp_.MinValue;
 		Xowe_wiki wiki = ctx.Wiki(); Xol_lang_itm lang = ctx.Lang();
+		Pft_func_formatdate_bldr date_fmt_bldr = wiki.Parser_mgr().Date_fmt_bldr();
 	    switch (date_tid) {
 	        case Date_tid_lcl: date = DateAdp_.Now(); break;
 	        case Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;
@@ -35,39 +36,39 @@ public class Pft_func_date_int extends Pf_func_base {
 			case Xol_kwd_grp_.Id_utc_year:
 			case Xol_kwd_grp_.Id_lcl_year:
 			case Xol_kwd_grp_.Id_rev_year:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Year_len4);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Year_len4);
 				break;
 			case Xol_kwd_grp_.Id_utc_month_int_len2:
 			case Xol_kwd_grp_.Id_lcl_month_int_len2:
 			case Xol_kwd_grp_.Id_rev_month_int_len2:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Month_int_len2);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Month_int_len2);
 				break;
 			case Xol_kwd_grp_.Id_utc_month_int:
 			case Xol_kwd_grp_.Id_lcl_month_int:
 			case Xol_kwd_grp_.Id_rev_month_int:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Month_int);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Month_int);
 				break;
 			case Xol_kwd_grp_.Id_utc_day_int_len2:
 			case Xol_kwd_grp_.Id_lcl_day_int_len2:
 			case Xol_kwd_grp_.Id_rev_day_int_len2:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Day_int_len2);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Day_int_len2);
 				break;
 			case Xol_kwd_grp_.Id_utc_day_int:
 			case Xol_kwd_grp_.Id_lcl_day_int:
 			case Xol_kwd_grp_.Id_rev_day_int:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Day_int);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Day_int);
 				break;
 			case Xol_kwd_grp_.Id_lcl_hour:
 			case Xol_kwd_grp_.Id_utc_hour:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Hour_base24_len2);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Hour_base24_len2);
 				break;
 			case Xol_kwd_grp_.Id_lcl_dow:
 			case Xol_kwd_grp_.Id_utc_dow:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.Dow_base1_int);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.Dow_base1_int);
 				break;
 			case Xol_kwd_grp_.Id_lcl_week:
 			case Xol_kwd_grp_.Id_utc_week:
-				Pft_func_formatdate.Date_bldr().Format(bfr, wiki, lang, date, Pft_fmt_itm_.WeekOfYear_int);
+				date_fmt_bldr.Format(bfr, wiki, lang, date, Pft_fmt_itm_.WeekOfYear_int);
 				break;
 			case Xol_kwd_grp_.Id_lcl_time:
 			case Xol_kwd_grp_.Id_utc_time:		// 17:29

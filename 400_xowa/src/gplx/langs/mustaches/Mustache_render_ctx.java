@@ -28,11 +28,21 @@ public class Mustache_render_ctx {
 	}
 	public boolean Render_variable(Mustache_bfr bfr, String key) {
 		boolean rv = false;
+		int stack_pos = stack.Len();
 		Mustache_doc_itm itm = cur;
 		while (itm != Mustache_doc_itm_.Null_itm) {
-			boolean resolved = cur.Mustache__write(key, bfr);
-			if (resolved) {rv = true; break;}
-			else break; // TODO_OLD: itm = itm.Get_owner();
+			boolean resolved = itm.Mustache__write(key, bfr);
+			if (resolved) {
+				rv = true;
+				break;
+			}
+			else {
+				--stack_pos;
+				if (stack_pos == -1)	// nothing else in stack
+					break;
+				else
+					itm = ((Mustache_stack_itm)stack.Get_at(stack_pos)).cur;
+			}
 		}
 		return rv;
 	}

@@ -35,7 +35,7 @@ public class Xoae_page implements Xoa_page {
 	public Xoa_url					Url()				{return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank();
 	public byte[]					Url_bry_safe()		{return url == null ? Bry_.Empty : url.Raw();}
 	public Xopg_db_data				Db()				{return db;}			private final    Xopg_db_data db = new Xopg_db_data();
-	public Xopg_redirect_data		Redirect()			{return redirect;}		private final    Xopg_redirect_data redirect = new Xopg_redirect_data();
+	public Xopg_redirect_mgr		Redirect()			{return redirect;}		private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
 	public Xopg_html_data			Html_data()			{return html;}			private final    Xopg_html_data html = new Xopg_html_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}			private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 
@@ -92,7 +92,7 @@ public class Xoae_page implements Xoa_page {
 		ref_mgr.Grps_clear();
 		html_cmd_mgr.Clear();
 		wdata_external_lang_links.Reset();
-		if (clear_scrib) wiki.Parser_mgr().Scrib().Core_page_changed(this);
+		if (clear_scrib) wiki.Parser_mgr().Scrib().When_page_changed(this);
 		slink_list.Clear();
 		tab_data.Clear();
 		pages_recursed = false;

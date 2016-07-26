@@ -41,14 +41,13 @@ public class Xop_lnki_wkr_ {
 		return Parse_ttl(ctx, src, lnki, ttl_bgn, ttl_end);
 	}
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int ttl_bgn, int ttl_end) {
-		Xoae_app app = ctx.App();
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl.Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
 		Xoa_ttl page_ttl = ctx.Page().Ttl();
 		if (page_ttl.Ns().Subpages_enabled()
 			&& Pfunc_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
-			Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid.Val_zero_());
 			lnki.Subpage_tid_(rel2abs_tid.Val());
 			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == Byte_ascii.Slash);

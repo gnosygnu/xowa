@@ -62,7 +62,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xoae_page page = ctx.Page();
 		if (page.Pages_recursed()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
 		page.Pages_recursed_(true);
-		Bry_bfr full_bfr = app.Utl__bfr_mkr().Get_m001();
+		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
 		page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 		byte[] page_bry = Bld_wikitext(full_bfr, lst_page_regy);
@@ -300,7 +300,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		int list_len = list.Count(); if (list_len == 0) return Ttls_null; 
 		Xoa_ttl[] rv = new Xoa_ttl[(list_len / step_int) + ((list_len % step_int == 0) ? 0 : 1)];
 		int rv_idx = 0;
-		Bry_bfr ttl_bfr = app.Utl__bfr_mkr().Get_b512();
+		Bry_bfr ttl_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < list_len; i += step_int) {
 			Int_obj_val page = (Int_obj_val)list.Get_at(i);
 			ttl_bfr.Add(ns_page.Name_db_w_colon())		// EX: 'Page:'
@@ -329,7 +329,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xoa_ttl bgn_page_ttl = bgn_page_bry == null ? null : ary[0];
 		Xoa_ttl end_page_ttl = end_page_bry == null ? null : ary[ary_len - 1];
 		
-		Bry_bfr page_bfr = app.Utl__bfr_mkr().Get_m001();
+		Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		ctx.Tmpl_output_(page_bfr);
 		Lst_pfunc_wkr lst_pfunc_wkr = new Lst_pfunc_wkr();
 		for (int i = 0; i < ary_len; i++) {

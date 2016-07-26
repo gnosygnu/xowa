@@ -28,6 +28,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Wdata_prop_val_visitor prop_val_visitor;
 	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
 	private Wdata_hwtr_mgr hwtr_mgr;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.evt_mgr = new Gfo_evt_mgr(this);
@@ -60,9 +61,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public Xop_log_property_wkr Property_wkr() {return property_wkr;} private Xop_log_property_wkr property_wkr;
 	public void Clear() {
-		Qid_mgr.Clear();
-		Pid_mgr.Clear();
-		Doc_mgr.Clear();
+		synchronized (wdoc_parser_v2) {	// LOCK:app-level
+			Qid_mgr.Clear();
+			Pid_mgr.Clear();
+			Doc_mgr.Clear();
+		}
 	}
 	public byte[] Get_claim_or(Xow_domain_itm domain, Xoa_ttl page_ttl, int pid, byte[] or) {
 		byte[] qid = this.Qid_mgr.Get_or_null(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
@@ -74,7 +77,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 			claim_itm.Welcome(prop_val_visitor);
 			return tmp_bfr.To_bry_and_clear();
 		}
-	}	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
 		synchronized (this) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			Hwtr_mgr_assert();
@@ -121,13 +124,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	private void Hwtr_msgs_make() {
 		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_itm_.Bry__wikidata)) return;
-//			synchronized (this) { // LOCK:DELETE; DATE:2016-07-06
-			Xol_lang_itm new_lang = app.Usere().Lang();
-			Xowe_wiki cur_wiki = this.Wdata_wiki();			
-			cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
-			Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
-			hwtr_mgr.Init_by_lang(hwtr_msgs);
-//			}
+		Xol_lang_itm new_lang = app.Usere().Lang();
+		Xowe_wiki cur_wiki = this.Wdata_wiki();			
+		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
+		Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
+		hwtr_mgr.Init_by_lang(hwtr_msgs);
 	}
 	public static void Write_json_as_html(Json_parser jdoc_parser, Bry_bfr bfr, byte[] data_raw) {
 		bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Id_atr).Add(Html_json_id).Add(Xoh_consts.__end_quote);	// <span id="xowa-wikidata-json">

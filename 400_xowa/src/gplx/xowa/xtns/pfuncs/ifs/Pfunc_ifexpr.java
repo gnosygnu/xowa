@@ -26,6 +26,7 @@ public class Pfunc_ifexpr extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {			
 		int self_args_len = self.Args_len();
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == null) return;
+		Pfunc_expr_shunter shunter = ctx.Tmp_mgr().Expr_shunter();
 		Decimal_adp result = shunter.Evaluate(ctx, argx);
 		boolean is_nan = result == Pfunc_expr_shunter.Null_rslt;
 		if (is_nan && shunter.Err().Len() > 0) {
@@ -39,5 +40,4 @@ public class Pfunc_ifexpr extends Pf_func_base {
 				bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0));
 		}
 	}
-	private final Pfunc_expr_shunter shunter = Pfunc_expr_shunter.Instance;
 }	

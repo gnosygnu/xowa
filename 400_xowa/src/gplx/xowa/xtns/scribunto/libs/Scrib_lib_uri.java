@@ -23,6 +23,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 	public Scrib_lib_uri(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_uri(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.uri.lua"));	// NOTE: defaultUrl handled by Init_lib_url
@@ -46,8 +47,8 @@ public class Scrib_lib_uri implements Scrib_lib {
 	private static final    String[] Proc_names = String_.Ary(Invk_anchorEncode, Invk_localUrl, Invk_fullUrl, Invk_canonicalUrl, Invk_init_uri_for_page);
 	public boolean AnchorEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] raw_bry = args.Pull_bry(0);
-		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
-		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
 		Pfunc_anchorencode.Func_init(core.Ctx());
 		Pfunc_anchorencode.Anchor_encode(raw_bry, bfr, tmp_bfr);
 		tmp_bfr.Clear_and_rls();
@@ -59,7 +60,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		byte[] qry_bry = args.Extract_qry_args(wiki, 1);
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 		if (ttl == null) return rslt.Init_null();
-		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		if (ttl.Ns().Id() == Xow_ns_.Tid__media) {	// change "Media:" -> "File:"
 			bfr.Add(wiki.Ns_mgr().Ns_file().Name_db_w_colon());
 			bfr.Add(ttl.Page_db());

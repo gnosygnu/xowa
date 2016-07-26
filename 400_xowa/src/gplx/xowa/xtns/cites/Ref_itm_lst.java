@@ -17,8 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_lst {
-	public Ref_itm_lst(byte[] grp_name) {this.grp_name = grp_name;}
-	byte[] grp_name; int idx_major_last = 0;
+	private final    Hash_adp hash = Hash_adp_bry.cs(); 
+	private final    List_adp list = List_adp_.New();
+	private int idx_major_last = 0;
+	// private byte[] grp_name; 
+	public Ref_itm_lst(byte[] grp_name) {} //this.grp_name = grp_name;
 	public int Itms_len() {return list.Count();}
 	public Ref_nde Itms_get_at(int i) {return (Ref_nde)list.Get_at(i);}
 	public void Itms_add(byte[] itm_name, byte[] follow, Ref_nde itm) {
@@ -59,5 +62,4 @@ public class Ref_itm_lst {
 		list.Clear();
 		idx_major_last = 0;
 	}
-	Hash_adp hash = Hash_adp_bry.cs(); List_adp list = List_adp_.New();
 }
