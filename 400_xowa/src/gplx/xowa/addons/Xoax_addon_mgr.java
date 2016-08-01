@@ -44,6 +44,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.bldrs.htmls				.Html__dump_to_fsys__addon()
 		, new gplx.xowa.addons.bldrs.exports			.Export_addon()
 		, new gplx.xowa.addons.wikis.pages.randoms		.Rndm_addon()
+		, new gplx.xowa.addons.bldrs.hdumps.diffs		.Dumpdiff_addon()
 
 		// specials
 		, new gplx.xowa.addons.wikis.registrys			.Wiki_registry_addon()

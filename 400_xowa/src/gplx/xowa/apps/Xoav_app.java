@@ -35,7 +35,8 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Xog_tab_mgr tab_mgr, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir, Io_url http_root) {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
 		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir, root_dir.GenSubDir("wiki"), file_dir, css_dir, http_root);
-		this.lang_mgr = new Xoa_lang_mgr(this);
+		Xoa_gfs_mgr gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, null);
+		this.lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
 		this.meta_mgr = new Xoa_meta_mgr(this);
 		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, null);
 		this.file__cache_mgr = new Xof_cache_mgr(usr_dlg, null, null);
@@ -83,7 +84,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
-	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
+	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final    Json_parser utl__json_parser = new Json_parser();
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = Xop_amp_mgr.Instance;

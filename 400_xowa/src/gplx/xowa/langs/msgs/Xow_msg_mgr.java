@@ -16,9 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.sidebar.*;
 public class Xow_msg_mgr implements Gfo_invk {
 	private final    Xowe_wiki wiki; private Xol_lang_itm lang; private final    Xol_msg_mgr msg_mgr;
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
@@ -35,7 +37,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(id);
 		if (itm == null)
 			itm = lang.Msg_mgr().Itm_by_id_or_null(id);
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		byte[] rv = Val_by_itm(tmp_bfr, itm, args);
 		tmp_bfr.Mkr_rls();
 		return rv;
@@ -45,7 +47,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 	public Xol_msg_itm Find_or_null(byte[] key) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
 		if (itm == null) {
-			Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 			if (itm.Src_is_missing()) itm = null;
 			tmp_bfr.Mkr_rls();
@@ -57,7 +59,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 	public byte[] Val_by_key_obj(byte[] key) {return Val_by_key(key, null);}
 	private byte[] Val_by_key(byte[] key, Object[] args) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		if (itm == null)
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 		if (itm.Src_is_missing()) {
@@ -70,12 +72,12 @@ public class Xow_msg_mgr implements Gfo_invk {
 	}
 	public byte[] Val_by_itm(Bry_bfr tmp_bfr, Xol_msg_itm itm, Object[] args) {
 		byte[] rv = itm.Val();
-		if (args != null) rv = itm.Fmt_tmp(tmp_bfr, rv, args);
+		if (args != null) rv = itm.Fmt_tmp(tmp_bfr, tmp_fmtr, rv, args);
 		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Expand_tmpl(rv);
 		return rv;
 	}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		byte[] rv = Val_html_accesskey_and_title(id, bfr, null);
 		bfr.Mkr_rls();
 		return rv;

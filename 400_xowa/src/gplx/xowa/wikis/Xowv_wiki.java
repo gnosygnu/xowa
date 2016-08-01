@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.brys.*; import gplx.core.ios.*;
 import gplx.dbs.*;
 import gplx.xowa.apps.*;	
 import gplx.xowa.guis.*;
@@ -75,7 +75,9 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xol_lang_itm					Lang() {return lang;} private final    Xol_lang_itm lang;
 	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
 	public Xow_site_stats_mgr			Stats() {return stats;} private final    Xow_site_stats_mgr stats;
-	public Xow_url_parser				Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
+	public Bry_bfr_mkr					Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public Io_stream_zip_mgr			Utl__zip_mgr()		{return utl__zip_mgr;}		private final    Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
+	public Xow_url_parser				Utl__url_parser()	{return url__parser;}		private final    Xow_url_parser url__parser;
 	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xosp_special_mgr				Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
 	public Xow_xwiki_mgr				Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;

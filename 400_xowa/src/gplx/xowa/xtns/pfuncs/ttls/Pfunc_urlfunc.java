@@ -38,19 +38,21 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 			else
 				trg.Add(gplx.core.net.Gfo_protocol_itm.Bry_relative);			//	"//"
 			trg.Add(xwiki.Domain_bry())											//  "commons.wikimedia.org"
-				.Add(Xoh_href_.Bry__wiki)								//	"/wiki/"
+				.Add(Xoh_href_.Bry__wiki)										//	"/wiki/"
 				.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
 		}
 		else {
-			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512().Mkr_rls();
-			switch (tid) {
-				case Tid_local:		tmp_bfr.Add(ctx.Wiki().Props().ArticlePath());break;
-				case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().Server_name()).Add(ctx.Wiki().Props().ArticlePath()); break;
-				case Tid_canonical:	tmp_bfr.Add(ctx.Wiki().Props().Server()).Add(ctx.Wiki().Props().ArticlePath()); break;
-				default:			throw Err_.new_unhandled(tid);
-			}
-			tmp_bfr.Add(ttl_ary);
-			trg.Add_bfr_and_clear(tmp_bfr);
+			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+			try {
+				switch (tid) {
+					case Tid_local:		tmp_bfr.Add(ctx.Wiki().Props().ArticlePath());break;
+					case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().Server_name()).Add(ctx.Wiki().Props().ArticlePath()); break;
+					case Tid_canonical:	tmp_bfr.Add(ctx.Wiki().Props().Server()).Add(ctx.Wiki().Props().ArticlePath()); break;
+					default:			throw Err_.new_unhandled(tid);
+				}
+				tmp_bfr.Add(ttl_ary);
+				trg.Add_bfr_and_clear(tmp_bfr);
+			} finally {tmp_bfr.Mkr_rls();}
 		}
 		if (qry_arg != Bry_.Empty) trg.Add_byte(Byte_ascii.Question).Add(qry_arg);
 	}

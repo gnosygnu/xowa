@@ -30,7 +30,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		Xoa_app app = bldr.App();
 		if (wikis == null)			wikis = Xow_domain_regy.All;
 		if (db_url == null)			db_url = app.Fsys_mgr().Cfg_site_meta_fil();
-		if (cutoff_time == null)	cutoff_time = DateAdp_.Now().Add_day(-1);
+		if (cutoff_time == null)	cutoff_time = Datetime_now.Get().Add_day(-1);
 		Load_all(app, db_url, wikis, cutoff_time);
 	}
 	private void Load_all(Xoa_app app, Io_url db_url, String[] reqd_ary, DateAdp cutoff) {
@@ -53,7 +53,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		reqd_len = reqd_hash.Count();
 		for (int i = 0; i < reqd_len; ++i) {
 			String domain_str = (String)reqd_hash.Get_at(i);
-			DateAdp json_date = DateAdp_.Now();
+			DateAdp json_date = Datetime_now.Get();
 			byte[] json_text = null;
 			for (int j = 0; j < 5; ++j) {
 				json_text = gplx.xowa.bldrs.wms.Xowm_api_mgr.Call_by_qarg(usr_dlg, inet_conn, domain_str, Xoa_site_cfg_loader__inet.Qarg__all);

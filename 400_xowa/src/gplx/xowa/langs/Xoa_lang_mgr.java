@@ -16,15 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.apps.fsys.*;
-import gplx.xowa.langs.bldrs.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.gfs.*;
+import gplx.xowa.langs.bldrs.*;	
 public class Xoa_lang_mgr implements Gfo_invk {		
 	private final    Ordered_hash hash = Ordered_hash_.New_bry();
 	private final    Xobc_utl_make_lang mw_converter;
-	public Xoa_lang_mgr(Xoa_app app) {
+	public Xoa_lang_mgr(Xoa_app app, Xoa_gfs_mgr gfs_mgr) {
 		this.mw_converter = new Xobc_utl_make_lang(this, app.Fsys_mgr(), app.Tid_is_edit() ? ((Xoae_app)app).Msg_log() : null);
 		this.lang_en = Xol_lang_itm_.Lang_en_make(this); this.Add(lang_en);
+		this.gfs_mgr = gfs_mgr;
 	}
+	public Xoa_gfs_mgr				Gfs_mgr() {return gfs_mgr;} private final    Xoa_gfs_mgr gfs_mgr;
 	public Xol_lang_itm				Lang_en() {return lang_en;} private final    Xol_lang_itm lang_en; 
 	public void						Clear() {hash.Clear();}
 	public int						Len() {return hash.Count();}

@@ -27,7 +27,7 @@ public class Xowd_css_core_mgr {
 		try {
 			conn.Txn_bgn("schema__css_core__set");
 			int css_id = core_tbl.Select_id_by_key(key);
-			DateAdp updated_on = DateAdp_.Now().XtoUtc();
+			DateAdp updated_on = Datetime_now.Get().XtoUtc();
 			if (css_id == -1)
 				css_id = core_tbl.Insert(key, updated_on);
 			else {

@@ -35,7 +35,7 @@ class Gfo_cache_itm_comparer implements gplx.core.lists.ComparerAble {
 		Gfo_cache_itm rhs = (Gfo_cache_itm)rhsObj;
 		return Long_.Compare(lhs.Touched(), rhs.Touched());
 	}
-	public static final    Gfo_cache_itm_comparer Touched_asc = new Gfo_cache_itm_comparer(); 
+	public static final    Gfo_cache_itm_comparer Touched_asc = new Gfo_cache_itm_comparer(); // TS.static
 }
 class Io_url_exists_mgr {
 	private gplx.core.caches.Gfo_cache_mgr_bry cache_mgr = new gplx.core.caches.Gfo_cache_mgr_bry();

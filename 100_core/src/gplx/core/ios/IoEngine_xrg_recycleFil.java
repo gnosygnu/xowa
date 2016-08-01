@@ -48,7 +48,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	}
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;
-		time = DateAdp_.Now();
+		time = Datetime_now.Get();
 		uuid = Guid_adp_.New();
 		rootDirNames = List_adp_.New(); rootDirNames.Add("z_trash");
 	}

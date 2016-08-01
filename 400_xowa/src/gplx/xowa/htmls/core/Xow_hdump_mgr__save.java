@@ -32,7 +32,7 @@ public class Xow_hdump_mgr__save {
 	public int Save(Xoae_page page) {
 		synchronized (tmp_hpg) {
 			Bld_hdump(page);
-			tmp_hpg.Ctor_by_hdiff(tmp_bfr, page);
+			tmp_hpg.Ctor_by_hdiff(tmp_bfr, page, page.Wikie().Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc));
 			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_());
 			return Save(tmp_hpg, html_db.Tbl__html(), html_db_is_new.Val());
 		}

@@ -19,8 +19,8 @@ package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*; import gplx.xowa.*; 
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_cells_fmtr implements gplx.core.brys.Bfr_arg {
-	private final Dbui_cell_fmtr cell_fmtr = new Dbui_cell_fmtr();
-	private final Dbui_btn_fmtr btn_fmtr = new Dbui_btn_fmtr();
+	private final    Dbui_cell_fmtr cell_fmtr = new Dbui_cell_fmtr();
+	private final    Dbui_btn_fmtr btn_fmtr = new Dbui_btn_fmtr();
 	private Dbui_btn_itm[] btns;
 	private byte[] row_key; private Dbui_row_itm row_itm;
 	public void Ctor(Dbui_val_fmtr val_fmtr, Dbui_btn_itm[] btns) {
@@ -33,7 +33,7 @@ public class Dbui_cells_fmtr implements gplx.core.brys.Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr.Bld_bfr_many(bfr, cell_fmtr.Init(row_key, row_itm), btn_fmtr.Init(row_key, btns));
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <div class='xo_drag_handle xo_cell'></div>~{vals}"
 	, "    <div class='xo_cell'>~{btns}"
@@ -53,7 +53,7 @@ class Dbui_cell_fmtr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, row_key, i, val_fmtr.Init(cols[i], row_key, val));
 		}
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <div class='xo_cell'>~{html}</div>"
 	), "row_key", "val_idx", "html");
@@ -71,7 +71,7 @@ class Dbui_btn_fmtr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, row_key, btn.Cmd(), img_dir.GenSubFil(btn.Img()).To_http_file_bry(), btn.Text());
 		}
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <span><a href='javascript:~{btn_cmd}(\"~{row_key}\");'><img src='~{btn_img}' title='~{btn_text}'/></a></span>"
 	), "row_key", "btn_cmd", "btn_img", "btn_text");

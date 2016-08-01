@@ -21,7 +21,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
 import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*;
-import gplx.xowa.xtns.wdatas.specials.*;
+import gplx.xowa.xtns.wbases.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
 public class Xow_special_mgr {
@@ -98,7 +98,7 @@ public class Xow_special_mgr {
 		Xow_special_page special = (Xow_special_page)hash.Get_by_bry(special_name);
 		if (special != null) {	// special found; generate it;
 			special = special.Special__clone();
-			page.Db().Page().Modified_on_(DateAdp_.Now());
+			page.Db().Page().Modified_on_(Datetime_now.Get());
 			try {special.Special__gen(wiki, page, url, ttl);}
 			catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e));}
 		}

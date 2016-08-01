@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	private final    Xoae_app app;

@@ -47,8 +47,8 @@ public class Xou_history_mgr implements Gfo_invk {
 		Xoa_url url = page.Url();
 		Xoa_ttl ttl = page.Ttl();
 		byte[] page_ttl = null;
-		if (page.Redirect().Itms__len() > 0)		// page was redirected; add src ttl to history, not trg; EX: UK -> United Kingdom; add "UK"; DATE:2014-02-28
-			page_ttl = page.Redirect().Itms__get_at(0).Ttl().Full_db();
+		if (page.Redirect_trail().Itms__len() > 0)		// page was redirected; add src ttl to history, not trg; EX: UK -> United Kingdom; add "UK"; DATE:2014-02-28
+			page_ttl = page.Redirect_trail().Itms__get_at_0th_or_null().Ttl().Page_db();
 		else {
 			page_ttl = Bry_.Add(ttl.Ns().Name_db_w_colon(), ttl.Page_txt());  // use ttl.Page_txt() b/c it normalizes space/casing (url.Page_txt does not)
 			if (url.Qargs_ary().length > 0)
@@ -107,7 +107,7 @@ public class Xou_history_mgr implements Gfo_invk {
 
 		// save archive
 		byte[] ary = Xou_history_itm_srl.Save(archive_itms);
-		Io_url url = app.Usere().Fsys_mgr().App_data_history_fil().GenNewNameOnly(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
+		Io_url url = app.Usere().Fsys_mgr().App_data_history_fil().GenNewNameOnly(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 		Io_mgr.Instance.SaveFilBry(url, ary);
 		return current_itms;
 	}	private int current_itms_max = 512, current_itms_reset = 256;

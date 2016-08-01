@@ -109,7 +109,8 @@ public class Xog_tab_itm implements Gfo_invk {
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 
 		// get new_tab_name
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
+		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());	// NOTE: must go before ttl.Make; DATE:2016-07-31
+		Xoa_ttl ttl = wiki.Ttl_parse(url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
 		String new_tab_name = String_.new_u8(ttl.Full_txt_w_ttl_case());
 
@@ -127,7 +128,6 @@ public class Xog_tab_itm implements Gfo_invk {
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();
 		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
-		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
 		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
@@ -159,8 +159,8 @@ public class Xog_tab_itm implements Gfo_invk {
 				}
 				else {
 					wkr.Page().Tab_data().Tab().Page_(page);	// NOTE: must set tab's page to current page, so that switching to it will update url bar; EX:pt.b:A"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR""" DATE:2015-09-17
-					if (page.Redirect().Itms__len() > 0)
-						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect().Itms__get_at(0).Ttl().Full_db());
+					if (page.Redirect_trail().Itms__len() > 0)
+						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect_trail().Itms__get_at_0th_or_null());
 					else {
 						if (ttl.Ns().Id_is_file())
 							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", String_.new_u8(url.Raw()));// HOME

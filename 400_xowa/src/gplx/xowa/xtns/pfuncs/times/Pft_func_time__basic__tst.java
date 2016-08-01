@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Pft_func_time__basic__tst {
-	@Before	public void init()					{fxt.Reset(); Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private final    Xop_fxt fxt = new Xop_fxt();
-	@After public void term()				{Tfds.Now_enabled_n_();}
+	@Before	public void init()					{fxt.Reset(); Datetime_now.Manual_(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private final    Xop_fxt fxt = new Xop_fxt();
+	@After public void term()				{Datetime_now.Manual_n_();}
 	@Test   public void Utc_date()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|2012-01-02 03:04:05}}"				, "2012-01-02");}
 	@Test   public void Utc_time()				{fxt.Test_parse_tmpl_str("{{#time:h:i:s A|2012-01-02 03:04:05}}"			, "03:04:05 AM");}
 	@Test   public void Utc_dayOfYear()			{fxt.Test_parse_tmpl_str("{{#time:z|2012-01-01 03:04:05}}"					, "0");}
@@ -68,7 +68,7 @@ public class Pft_func_time__basic__tst {
 	@Test   public void Unit_rel_year_last()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|last year}}"						, "2011-01-02");}
 	@Test   public void Unit_rel_year_previous(){fxt.Test_parse_tmpl_str("{{#time:Y-m-d|previous year}}"					, "2011-01-02");}
 	@Test   public void Unit_rel_year_this()	{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|this year}}"						, "2012-01-02");}
-	@Test   public void Time_rel_now()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|now}}"						, "2012-01-02 03:05:05 AM");}	// NOTE: minute is 5, not 4, b/c each call to DateAdp_.Now() automatically increments by 1 minute; DATE:2014-04-13
+	@Test   public void Time_rel_now()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|now}}"						, "2012-01-02 03:05:05 AM");}	// NOTE: minute is 5, not 4, b/c each call to Datetime_now.Get() automatically increments by 1 minute; DATE:2014-04-13
 	@Test   public void Empty_is_today()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|}}"									, "2012-01-02");}	// tested on MW
 	@Test   public void Day_name_today()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Monday}}"							, "2012-01-02");}	// 2012-01-02 is Monday, so return Monday; DATE:2014-05-02
 	@Test   public void Day_name_future_1()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d|Saturday}}"							, "2012-01-07");}	// return next Sunday; DATE:2014-05-02

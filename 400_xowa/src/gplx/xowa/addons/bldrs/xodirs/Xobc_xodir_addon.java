@@ -40,7 +40,7 @@ class Xow_import_dir_cbk__xodir implements Xow_import_dir_cbk {
 		wiki.App().User().User_db_mgr().Cfg().Set_app_str("xowa.xodir.custom_dir", path);
 
 		// redirect to import_dir
-		page.Redirect().Itms__add__special(wiki, Xobc_xodir_special.Prototype.Special__meta());
+		page.Redirect_trail().Itms__add__special(wiki, Xobc_xodir_special.Prototype.Special__meta());
 	}
         public static Xow_import_dir_cbk__xodir Instance = new Xow_import_dir_cbk__xodir(); Xow_import_dir_cbk__xodir() {}
 }

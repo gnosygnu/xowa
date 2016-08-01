@@ -151,8 +151,10 @@ public class Scrib_lib_language implements Scrib_lib {
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
-		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b128().Mkr_rls();
-		return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
+		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b128();
+		try {
+			return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
+		} finally {bfr.Mkr_rls();}
 	}
 	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.N);}
 	public boolean Uc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.Y);}
@@ -187,7 +189,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
 		DateAdp date = null;
 		if (Bry_.Len_eq_0(date_bry))
-			date = DateAdp_.Now();
+			date = Datetime_now.Get();
 		else {				
 			if (date_bry[0] == Byte_ascii.Plus) {				// detect wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29
 				int date_bry_len = date_bry.length;

@@ -41,7 +41,7 @@ class Split_meta_wkr__link extends Split_meta_wkr_base {
 	}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
 		int trg_db_id = srch_db_mgr.Tbl__link__get_idx(ns_id);
-		attach_mgr.Conn_others_(new Db_attach_itm("link_db", srch_db_mgr.Tbl__link__get_at(trg_db_id).conn));
+		attach_mgr.Conn_links_(new Db_attach_itm("link_db", srch_db_mgr.Tbl__link__get_at(trg_db_id).conn));
 		return String_.Concat_lines_nl
 		( "SELECT  sl.word_id, sl.page_id, sl.link_score, sw.page_id, " + trg_db_id + " AS trg_db_id"
 		, "FROM    <link_db>search_link sl"

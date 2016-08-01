@@ -27,10 +27,12 @@ public class Luaj_server implements Scrib_server {
 		this.func_recv = func_recv;
 		this.func_dbg = func_dbg;
 	}
-	private Globals luaj_globals;
+	public Globals Luaj_globals() {return luaj_globals;} private Globals luaj_globals;
+	public DebugLib Luaj_dbg() {return luaj_dbg;} private DebugLib luaj_dbg;
 	public void Init(String... init_args) {
+		luaj_dbg = new DebugLib();	// NOTE: needed for getfenv
 		luaj_globals = JsePlatform.standardGlobals();
-		luaj_globals.load(new DebugLib());
+		luaj_globals.load(luaj_dbg);
 		luaj_globals.load(new MWClient(luaj_globals, func_recv));
 		luaj_globals.set("dbg", func_dbg);
 		String root_str = init_args[2];

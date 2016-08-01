@@ -22,9 +22,10 @@ import gplx.xowa.wikis.data.tbls.*;
 class Xomp_text_db_loader {
 	private final    Xow_wiki wiki;
 	private final    Ordered_hash text_db_hash = Ordered_hash_.New();
-	private final    Io_stream_zip_mgr zip_mgr = Xoa_app_.Utl__zip_mgr();
+	private final    Io_stream_zip_mgr zip_mgr;
 	public Xomp_text_db_loader(Xow_wiki wiki) {
 		this.wiki = wiki;
+		this.zip_mgr = wiki.Utl__zip_mgr();
 	}
 	public void Add(int text_db_id, Xowd_text_bry_owner ppg) {
 		Xomp_text_db_itm itm = (Xomp_text_db_itm)text_db_hash.Get_by(text_db_id);

@@ -19,7 +19,8 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.regxs.*;
 public class Scrib_regx_converter {
-	private List_adp capt_list = List_adp_.New(), grps_parens = List_adp_.New(); private List_adp grps_open = List_adp_.New();
+	private final    List_adp capt_list = List_adp_.New(), grps_parens = List_adp_.New(); private final    List_adp grps_open = List_adp_.New();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Scrib_regx_converter() {Init();}
 	public String Regx() {return regx;} private String regx;
 	public List_adp Capt_list() {return capt_list;}
@@ -100,9 +101,8 @@ public class Scrib_regx_converter {
 								++i;
 								if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
 								// %f always followed by bracketed term; convert lua bracketed term to regex
-								Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 								i = bracketedCharSetToRegex(tmp_bfr, src, i, len);
-								byte[] bracketed_regx = tmp_bfr.To_bry_and_rls();
+								byte[] bracketed_regx = tmp_bfr.To_bry_and_clear();
 								
 								// scrib has following comment: 'Because %f considers the beginning and end of the String to be \0, determine if $re2 matches that and take it into account with "^" and "$".'
 								// if the bracketed_regx is a negative class it will match \0; so, \W means anything not a word char, which will match \0; \w means word char which will not match \0

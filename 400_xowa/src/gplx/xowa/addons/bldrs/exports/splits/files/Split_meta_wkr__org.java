@@ -35,7 +35,7 @@ class Split_meta_wkr__org extends Split_meta_wkr_base {
 	}
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
-		attach_mgr.Conn_others_(new Db_attach_itm("atr_db", atr_conn));
+		attach_mgr.Conn_links_(new Db_attach_itm("atr_db", atr_conn));
 		return String_.Concat_lines_nl
 		( "SELECT  o.orig_ttl, o.orig_repo, o.orig_status, o.orig_ext, o.orig_w, o.orig_h, o.orig_redirect, fir.page_id"
 		, "FROM    <atr_db>orig_reg o"

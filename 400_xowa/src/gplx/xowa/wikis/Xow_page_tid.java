@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.xtns.wbases.*;
 public class Xow_page_tid {
 	public static byte Identify(int wiki_tid, int ns_id, byte[] ttl) {
 		switch (ns_id) {
@@ -37,6 +37,6 @@ public class Xow_page_tid {
 		else if (Bry_.Has_at_end(ttl, Ext_js))	return Tid_js;
 		else									return Tid_wikitext;
 	}
-	private static final byte[] Ext_js = Bry_.new_a7(".js"), Ext_css = Bry_.new_a7(".css"), Ext_doc= Bry_.new_a7("/doc");
+	private static final    byte[] Ext_js = Bry_.new_a7(".js"), Ext_css = Bry_.new_a7(".css"), Ext_doc= Bry_.new_a7("/doc");
 	public static final byte Tid_wikitext = 1, Tid_json = 2, Tid_js = 3, Tid_css = 4, Tid_lua = 5;
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*; import gplx.xowa.xtns.pagebanners.*;
 public class Xow_xtn_mgr implements Gfo_invk {
 	private Ordered_hash regy = Ordered_hash_.New_bry();

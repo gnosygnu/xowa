@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
-import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.xtns.wbases.*;
 public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 	public Xoapi_wikibase() {
 		evt_mgr = new Gfo_evt_mgr(this);

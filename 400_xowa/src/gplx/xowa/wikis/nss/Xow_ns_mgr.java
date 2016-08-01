@@ -84,7 +84,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	}
 	public void			Aliases_clear() {aliases.Clear();}		
 	public Xow_ns_mgr	Aliases_add(int ns_id, String name) {
-		Keyval kv = Keyval_.new_(name, Int_obj_val.new_(ns_id));
+		Keyval kv = Keyval_.new_(name, new Int_obj_val(ns_id));
 		aliases.Add_if_dupe_use_nth(name, kv);
 		return this;
 	}

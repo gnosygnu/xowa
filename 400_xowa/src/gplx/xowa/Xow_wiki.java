@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.ios.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.addons.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
@@ -52,6 +52,8 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xow_site_stats_mgr			Stats();
 	void						Init_by_wiki();
 	void						Init_by_wiki__force();	// HACK: force init for drd wiki
+	Bry_bfr_mkr					Utl__bfr_mkr();
+	Io_stream_zip_mgr			Utl__zip_mgr();
 	Xow_url_parser				Utl__url_parser();
 	Xoax_addon_mgr				Addon_mgr();
 	void						Init_needed_y_();

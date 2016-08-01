@@ -47,7 +47,7 @@ public class Xosp_special_mgr {
 		}
 		if (o != null) {
 			// Xow_special_page special = (Xow_special_page)o;
-			// page.Revision_data().Modified_on_(DateAdp_.Now());
+			// page.Revision_data().Modified_on_(Datetime_now.Get());
 			// special.Special__gen(wiki, page, url, ttl);
 		}
 	}

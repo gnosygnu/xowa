@@ -39,7 +39,7 @@ public class Db_mgr_fxt {
 	public void Init_page_insert(Int_obj_ref page_id_next, int ns_id, String[] ttls) {
 		Xowe_wiki wiki = this.Wiki();
 		int len = ttls.length;
-		DateAdp modified_on = Tfds.Now_time0_add_min(0);
+		DateAdp modified_on = Datetime_now.Dflt_add_min_(0);
 		Xowd_page_tbl tbl_page = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
 		tbl_page.Insert_bgn();
 		for (int i = 0; i < len; i++) {

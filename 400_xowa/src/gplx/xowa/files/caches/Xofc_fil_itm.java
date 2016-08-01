@@ -25,14 +25,14 @@ public class Xofc_fil_itm implements CompareAble {
 	}
 	public String Key;
 	public int		Uid() {return uid;} public void Uid_(int v) {uid = v;} private int uid;
-	public int		Dir_id() {return dir_id;} private final int dir_id;
-	public byte[]	Name() {return name;} private final byte[] name;
-	public boolean		Is_orig() {return is_orig;} private final boolean is_orig;
-	public int		W() {return w;} private final int w;
-	public int		H() {return h;} private final int h;
-	public double	Time() {return time;} private final double time;
-	public int		Page() {return page;} private final int page;
-	public Xof_ext	Ext() {return ext;} private final Xof_ext ext;
+	public int		Dir_id() {return dir_id;} private final    int dir_id;
+	public byte[]	Name() {return name;} private final    byte[] name;
+	public boolean		Is_orig() {return is_orig;} private final    boolean is_orig;
+	public int		W() {return w;} private final    int w;
+	public int		H() {return h;} private final    int h;
+	public double	Time() {return time;} private final    double time;
+	public int		Page() {return page;} private final    int page;
+	public Xof_ext	Ext() {return ext;} private final    Xof_ext ext;
 	public long		Size() {return size;} private long size;
 	public void		Size_(long v) {
 		this.size = v;
@@ -40,7 +40,7 @@ public class Xofc_fil_itm implements CompareAble {
 	}
 	public long		Cache_time() {return cache_time;} private long cache_time;
 	public Xofc_fil_itm Cache_time_now_() {
-		this.cache_time = DateAdp_.Now().XtoUtc().Timestamp_unix();
+		this.cache_time = Datetime_now.Get().XtoUtc().Timestamp_unix();
 		cmd_mode = Db_cmd_mode.To_update(cmd_mode);
 		return this;
 	}
@@ -69,5 +69,5 @@ public class Xofc_fil_itm implements CompareAble {
 		return bfr.To_bry_and_clear();
 	}
 	public int compareTo(Object obj) {Xofc_fil_itm comp = (Xofc_fil_itm)obj; return -Long_.Compare(cache_time, comp.cache_time);}	// - for DESC sort
-	public static final Xofc_fil_itm Null = null;
+	public static final    Xofc_fil_itm Null = null;
 }

@@ -85,7 +85,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl("page", "page_ns__page_id", "page_namespace", "page_id"));
 		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
 		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("page_id"), Dbmeta_fld_itm.new_int("page_namespace")));
-		attach_mgr.Conn_main_(word_conn).Conn_others_(new Db_attach_itm("page_db", page_conn));
+		attach_mgr.Conn_main_(word_conn).Conn_links_(new Db_attach_itm("page_db", page_conn));
 		attach_mgr.Exec_sql_w_msg
 		( "filling search_link_temp (please wait)", String_.Concat_lines_nl_skip_last
 		( "INSERT INTO search_link_temp (word_id, page_id, page_namespace)"
@@ -105,7 +105,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 			Xoa_app_.Usr_dlg().Plog_many("", "", "creating search_link_temp: ~{0}", i);
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[i];
 			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, Bool_.Y);
-			attach_mgr.Conn_main_(link_tbl.conn).Conn_others_(new Db_attach_itm("word_db", word_conn));
+			attach_mgr.Conn_main_(link_tbl.conn).Conn_links_(new Db_attach_itm("word_db", word_conn));
 			attach_mgr.Exec_sql_w_msg
 			( Bry_fmt.Make_str("filling search_link: ~{idx} of ~{len}", i, len), String_.Concat_lines_nl_skip_last
 			( "INSERT INTO search_link (word_id, page_id)"

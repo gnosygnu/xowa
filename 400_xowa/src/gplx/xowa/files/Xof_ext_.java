@@ -24,7 +24,7 @@ public class Xof_ext_ {
 	, Id_mid = 10, Id_ogg = 11, Id_oga = 12, Id_ogv = 13, Id_webm = 14
 	, Id_flac = 15, Id_bmp = 16, Id_xcf = 17, Id_wav = 18;
 	public static final int Id__max = 19;
-	public static final byte[] 
+	public static final    byte[] 
 	  Bry_png = Bry_.new_a7("png"), Bry_jpg = Bry_.new_a7("jpg"), Bry_jpeg = Bry_.new_a7("jpeg")
 	, Bry_gif = Bry_.new_a7("gif"), Bry_tif = Bry_.new_a7("tif"), Bry_tiff = Bry_.new_a7("tiff")
 	, Bry_svg = Bry_.new_a7("svg"), Bry_djvu = Bry_.new_a7("djvu"), Bry_pdf = Bry_.new_a7("pdf")
@@ -32,7 +32,7 @@ public class Xof_ext_ {
 	, Bry_ogv = Bry_.new_a7("ogv"), Bry_webm = Bry_.new_a7("webm"), Bry_flac = Bry_.new_a7("flac")
 	, Bry_bmp = Bry_.new_a7("bmp"), Bry_xcf = Bry_.new_a7("xcf"), Bry_wav = Bry_.new_a7("wav")
 	;
-	public static final byte[][] Bry__ary = new byte[][]
+	public static final    byte[][] Bry__ary = new byte[][]
 	{ Bry_.Empty, Bry_png, Bry_jpg, Bry_jpeg
 	, Bry_gif, Bry_tif, Bry_tiff
 	, Bry_svg, Bry_djvu, Bry_pdf
@@ -40,7 +40,7 @@ public class Xof_ext_ {
 	, Bry_ogv, Bry_webm, Bry_flac
 	, Bry_bmp, Bry_xcf, Bry_wav
 	};
-	public static final byte[][] Mime_type__ary = new byte[][] 
+	public static final    byte[][] Mime_type__ary = new byte[][] 
 	{ Bry_.new_a7("application/octet-stream"), Bry_.new_a7("image/png"), Bry_.new_a7("image/jpg"), Bry_.new_a7("image/jpeg")
 	, Bry_.new_a7("image/gif"), Bry_.new_a7("image/tiff"), Bry_.new_a7("image/tiff")
 	, Bry_.new_a7("image/svg+xml"), Bry_.new_a7("image/x.djvu"), Bry_.new_a7("application/pdf")
@@ -48,7 +48,7 @@ public class Xof_ext_ {
 	, Bry_.new_a7("video/ogg"), Bry_.new_a7("video/webm"), Bry_.new_a7("audio/flac")
 	, Bry_.new_a7("image/bmp"), Bry_.new_a7("image/xcf"), Bry_.new_a7("audio/x-wav")
 	};
-	private static final Hash_adp id_hash = id_hash_new_();
+	private static final    Hash_adp id_hash = id_hash_new_();
 	private static Hash_adp id_hash_new_() {
 		Hash_adp rv = Hash_adp_bry.cs();
 		id_hash_new_(rv, Bry_png, Id_png);		id_hash_new_(rv, Bry_jpg, Id_jpg);		id_hash_new_(rv, Bry_jpeg, Id_jpeg);
@@ -59,9 +59,9 @@ public class Xof_ext_ {
 		id_hash_new_(rv, Bry_bmp, Id_bmp);		id_hash_new_(rv, Bry_xcf, Id_xcf);		id_hash_new_(rv, Bry_wav, Id_wav);
 		return rv;
 	}
-	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
+	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new Int_obj_val(val));}
 
-	private static final Hash_adp_bry ext_hash = Hash_adp_bry.ci_a7()
+	private static final    Hash_adp_bry ext_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Bry_png).Add_bry_bry(Bry_jpg).Add_bry_bry(Bry_jpeg)
 	.Add_bry_bry(Bry_gif).Add_bry_bry(Bry_tif).Add_bry_bry(Bry_tiff)
 	.Add_bry_bry(Bry_svg).Add_bry_bry(Bry_djvu).Add_bry_bry(Bry_pdf)
@@ -69,7 +69,7 @@ public class Xof_ext_ {
 	.Add_bry_bry(Bry_ogv).Add_bry_bry(Bry_webm).Add_bry_bry(Bry_flac)
 	.Add_bry_bry(Bry_bmp).Add_bry_bry(Bry_xcf).Add_bry_bry(Bry_wav)
 	;
-	private static final Xof_ext[] Ary = new Xof_ext[Id__max];
+	private static final    Xof_ext[] Ary = new Xof_ext[Id__max];
 
 	public static byte[] Get_ext_by_id_(int id) {
 		if (id < 0 || id >= Id__max) throw Err_.new_wo_type("index out of bounds", "id", id);

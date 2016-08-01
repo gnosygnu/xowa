@@ -35,7 +35,9 @@ public class Xow_ns implements Gfo_invk {
 		}
 		this.num_str = Int_.To_str_pad_bgn_zero(id, 3);
 		this.num_bry = Bry_.new_a7(num_str);
-		this.name_enc = Xoa_url_encoder.Instance.Encode(name_db);
+		synchronized (url_encoder) {	// LOCK:static-obj
+			this.name_enc = url_encoder.Encode(name_db);
+		}
 		this.name_ui = Bry_.Replace(name_enc, Byte_ascii.Underline, Byte_ascii.Space);
 		this.name_ui_w_colon = Bry_.Replace(name_db_w_colon, Byte_ascii.Underline, Byte_ascii.Space);
 	}
@@ -102,4 +104,6 @@ public class Xow_ns implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_subpages_enabled_ = "subpages_enabled_", Invk_id = "id", Invk_name_txt = "name_txt", Invk_name_ui = "name_ui";
+
+	private static final    Xoa_url_encoder url_encoder = new Xoa_url_encoder();
 }

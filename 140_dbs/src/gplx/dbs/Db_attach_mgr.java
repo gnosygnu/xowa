@@ -19,23 +19,24 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
 public class Db_attach_mgr {
 	private Db_conn main_conn; private Io_url main_conn_url;
-	private final    Ordered_hash others_hash = Ordered_hash_.New();
+	private final    Ordered_hash links_hash = Ordered_hash_.New();
 	private final    List_adp attach_list = List_adp_.New();
 	public Db_attach_mgr() {}
-	public Db_attach_mgr(Db_conn main_conn, Db_attach_itm... others_ary) {
+	public Db_attach_mgr(Db_conn main_conn, Db_attach_itm... links_ary) {
 		this.Conn_main_(main_conn);
-		this.Conn_others_(others_ary);
+		this.Conn_links_(links_ary);
 	}
+	public Db_conn Conn_main() {return main_conn;}
 	public Db_attach_mgr Conn_main_(Db_conn conn) {
 		this.main_conn = conn; this.main_conn_url = Db_conn_info_.To_url(conn.Conn_info());
 		return this;
 	}
-	public Db_attach_mgr Conn_others_(Db_attach_itm... itms_ary) {
-		others_hash.Clear();
+	public Db_attach_mgr Conn_links_(Db_attach_itm... itms_ary) {
+		links_hash.Clear();
 		int len = itms_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Db_attach_itm itm = itms_ary[i];
-			others_hash.Add(itm.Key, itm);
+			links_hash.Add(itm.Key, itm);
 		}
 		return this;
 	}
@@ -56,9 +57,9 @@ public class Db_attach_mgr {
 	}
 	public String Resolve_sql(String sql) {
 		attach_list.Clear();
-		int hash_len = others_hash.Count();
+		int hash_len = links_hash.Count();
 		for (int i = 0; i < hash_len; ++i) {
-			Db_attach_itm attach_itm = (Db_attach_itm)others_hash.Get_at(i);
+			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.Get_at(i);
 			String tkn = "<" + attach_itm.Key + ">";
 			if (String_.Has(sql, tkn)) {
 				Io_url attach_url = attach_itm.Url;
@@ -104,7 +105,7 @@ public class Db_attach_mgr {
 			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.Get_at(i);
 			String from_tbl_db = from_tbl.Db;
 			if (String_.Eq(Sql_tbl_itm.Db__null, from_tbl_db)) continue;	// tbl does not have db defined; only "tbl" not "db.tbl"; skip
-			Db_attach_itm attach_itm = (Db_attach_itm)others_hash.Get_by(from_tbl_db); if (attach_itm == null) throw Err_.new_("dbs", "qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.To_sql__exec(sql_wtr)); 
+			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.Get_by(from_tbl_db); if (attach_itm == null) throw Err_.new_("dbs", "qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.To_sql__exec(sql_wtr)); 
 			if (attach_itm.Url.Eq(main_conn_url)) // attach_db same as conn; blank db, so "tbl", not "db.tbl"
 				from_tbl.Db_enabled = false;
 			else

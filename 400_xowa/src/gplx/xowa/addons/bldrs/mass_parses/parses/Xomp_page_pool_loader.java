@@ -60,7 +60,7 @@ class Xomp_page_pool_loader {
 		, "AND     mp.page_status = 0"
 		, "LIMIT   {1}"
 		), prv_uid, num_pages_per_load);
-		this.attach_mgr.Conn_others_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
+		this.attach_mgr.Conn_links_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
 		sql = attach_mgr.Resolve_sql(sql);
 
 		// run page_tbl

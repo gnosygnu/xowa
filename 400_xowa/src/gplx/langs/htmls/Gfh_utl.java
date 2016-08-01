@@ -18,11 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 public class Gfh_utl {
-	private static final    Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id; private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private static final    Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id;
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
-		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
-		return encoder_id.Encode(escaped);
+		Bry_bfr tmp_bfr = Bry_bfr_.Get();
+		try {
+			byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
+			return encoder_id.Encode(escaped);
+		} finally {tmp_bfr.Mkr_rls();}
 	}
 	public static String Escape_for_atr_val_as_str(Bry_bfr bfr, byte quote_byte, String s) {return String_.new_u8(Escape_for_atr_val_as_bry(bfr, quote_byte, s));}
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, String s) {
@@ -58,9 +61,16 @@ public class Gfh_utl {
 	}
 	public static String Escape_html_as_str(String v)						{return String_.new_u8(Escape_html_as_bry(Bry_.new_u8(v)));}
 	public static byte[] Escape_html_as_bry(Bry_bfr tmp, byte[] bry)		{return Escape_html(false, tmp, bry, 0, bry.length, true, true, true, true, true);}
-	public static byte[] Escape_html_as_bry(byte[] bry)						{return Escape_html(false, tmp_bfr, bry, 0, bry.length, true, true, true, true, true);}
-	public static byte[] Escape_html_as_bry(byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos)
-																			{return Escape_html(false, tmp_bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);}
+	public static byte[] Escape_html_as_bry(byte[] bry)						{
+		Bry_bfr tmp_bfr = Bry_bfr_.Get();
+		try {return Escape_html(false, tmp_bfr, bry, 0, bry.length, true, true, true, true, true);}
+		finally {tmp_bfr.Mkr_rls();}
+	}
+	public static byte[] Escape_html_as_bry(byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos) {
+		Bry_bfr tmp_bfr = Bry_bfr_.Get();
+		try {return Escape_html(false, tmp_bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);}
+		finally {tmp_bfr.Mkr_rls();}
+	}
 	public static byte[] Escape_html_as_bry(Bry_bfr bfr, byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos)
 																			{return Escape_html(false, bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);}
 	public static void Escape_html_to_bfr(Bry_bfr bfr, byte[] bry, int bgn, int end, boolean escape_lt, boolean escape_gt, boolean escape_amp, boolean escape_quote, boolean escape_apos) {

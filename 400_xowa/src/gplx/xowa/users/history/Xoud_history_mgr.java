@@ -30,7 +30,7 @@ public class Xoud_history_mgr implements Gfo_invk {
 	}
 	private void Update(String wiki, String page, String qarg) {
 //			Xoud_history_row row = history_tbl.Select_by_page(wiki, page, qarg);
-//			DateAdp time = DateAdp_.Now();
+//			DateAdp time = Datetime_now.Get();
 //			if (row == null)
 //				history_tbl.Insert(wiki, page, qarg, time, 1);
 //			else

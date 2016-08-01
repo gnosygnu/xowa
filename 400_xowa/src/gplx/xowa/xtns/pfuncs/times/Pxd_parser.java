@@ -145,7 +145,7 @@ class Pxd_parser {
 				return DateAdp_.MinValue;			
 			}
 		}
-		DateAdp now = DateAdp_.Now();
+		DateAdp now = Datetime_now.Get();
 		DateAdpBldr bldr = new DateAdpBldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = (Pxd_itm)tkns[i];

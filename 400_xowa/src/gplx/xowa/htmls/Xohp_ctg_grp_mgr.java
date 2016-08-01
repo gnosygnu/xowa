@@ -47,15 +47,15 @@ class Xoh_ctg_itm_fmtr implements gplx.core.brys.Bfr_arg {
 	public void Set(Xoae_page page, Bry_fmtr itm_fmtr) {this.page = page; this.itm_fmtr = itm_fmtr;} private Xoae_page page; Bry_fmtr itm_fmtr;
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		int ctgs_len = page.Category_list().length;
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
-		Bry_bfr tmp_href = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		Xowe_wiki wiki = page.Wikie();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+		Bry_bfr tmp_href = wiki.Utl__bfr_mkr().Get_b128();
 		Xoae_app app = wiki.Appe();
 		byte[] ctg_prefix = wiki.Ns_mgr().Ns_category().Name_db_w_colon();
 		for (int i = 0; i < ctgs_len; i++) {
 			byte[] page_name = page.Category_list()[i];
 			tmp_bfr.Add(ctg_prefix).Add(page_name);
-			page.Wikie().Html__href_wtr().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.To_bry_and_clear()));
+			wiki.Html__href_wtr().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.To_bry_and_clear()));
 			itm_fmtr.Bld_bfr(bfr, tmp_href.To_bry_and_clear(), page_name, page_name);
 		}
 		tmp_bfr.Mkr_rls();

@@ -19,9 +19,9 @@ package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.apis.xowa.html.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.xtns.wbases.core.*;
 public class Xoa_sitelink_div_wtr {
-	private final Xoa_sitelink_grp_wtr grp_wtr = new Xoa_sitelink_grp_wtr();
+	private final    Xoa_sitelink_grp_wtr grp_wtr = new Xoa_sitelink_grp_wtr();
 	public void Write(Bry_bfr bfr, Xowe_wiki wiki, Xoa_sitelink_mgr mgr, List_adp slink_list, byte[] qid) {
 		Xoa_sitelink_grp_mgr grp_mgr = mgr.Grp_mgr(); Xoa_sitelink_itm_mgr itm_mgr = mgr.Itm_mgr();
 		// reset grps
@@ -52,12 +52,14 @@ public class Xoa_sitelink_div_wtr {
 		// write html
 		Xoapi_toggle_itm toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("wikidata-langs");
 		toggle_itm.Init(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header));
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
-		byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : wbase_fmtr.Bld_bry_many(tmp_bfr, qid);
-		div_fmtr.Bld_bfr_many(bfr, slink_len, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), grp_wtr.Fmt__init(grp_mgr));
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+		try {
+			byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : wbase_fmtr.Bld_bry_many(tmp_bfr, qid);
+			div_fmtr.Bld_bfr_many(bfr, slink_len, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), grp_wtr.Fmt__init(grp_mgr));
+		} finally {tmp_bfr.Mkr_rls();}
 	}
-	private static final Bry_fmtr wbase_fmtr = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
-	private static final Bry_fmtr div_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr wbase_fmtr = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
+	private static final    Bry_fmtr div_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"xowa-lang\">"
 	, "  <h5>~{toggle_btn} (links: ~{len}) ~{wikidata_link}</h5>"
 	, "  <div~{toggle_hdr}>~{grps}"

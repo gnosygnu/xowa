@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.flds; import gplx.*; import gplx.core.*;
 import gplx.core.encoders.*;
 public class Gfo_fld_rdr extends Gfo_fld_base {
-	private Bry_bfr bfr = Bry_bfr_.New(); private static final    byte[] Bry_nil = Bry_.new_a7("\\0");
+	private Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;
 	public int Pos() {return pos;} public Gfo_fld_rdr Pos_(int v) {pos = v; return this;} private int pos;
 	public int Fld_bgn() {return fld_bgn;} public Gfo_fld_rdr Fld_bgn_(int v) {fld_bgn = v; return this;} private int fld_bgn;
@@ -122,4 +122,5 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public Gfo_fld_rdr Ctor_sql()  {return (Gfo_fld_rdr)super.Ctor_sql_base();}
 	public static Gfo_fld_rdr xowa_()	{return new Gfo_fld_rdr().Ctor_xdat();}
 	public static Gfo_fld_rdr sql_()	{return new Gfo_fld_rdr().Ctor_sql();}
+	private static final    byte[] Bry_nil = Bry_.new_a7("\\0");
 }

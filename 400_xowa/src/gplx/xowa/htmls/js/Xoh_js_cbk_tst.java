@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import org.junit.*; import gplx.xowa.xtns.wdatas.*;
+import org.junit.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.guis.views.*;
 public class Xoh_js_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_js_cbk_fxt fxt = new Xoh_js_cbk_fxt();

@@ -308,7 +308,7 @@ public class Xop_lnki_wkr__basic_tst {
 		Xowe_wiki wiki = fxt.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7("Src"));								// simulate requrest for "Src" page
 		Xoae_page previous_page = Xoae_page.New_test(wiki, ttl);
-		previous_page.Redirect().Itms__add__article(previous_page.Url(), ttl, null);		// simulate redirect from "Src"
+		previous_page.Redirect_trail().Itms__add__article(previous_page.Url(), ttl, null);	// simulate redirect from "Src"
 		fxt.App().Usere().History_mgr().Add(previous_page);									// simulate "Src" already being clicked once; this is the key call
 		fxt.Wtr_cfg().Lnki_visited_y_();
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history

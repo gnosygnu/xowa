@@ -57,8 +57,8 @@ public class Pf_func_ {
 		}
 		else if (lhs_len == 0 || rhs_len == 0)	// one side is empty String and the other side is String; return false;
 			return false;
-		Number_parser lhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_0();
-		Number_parser rhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_1();
+		Gfo_number_parser lhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_0();
+		Gfo_number_parser rhs_parser = ctx.Tmp_mgr().Pfunc_num_parser_1();
 		lhs_parser.Parse(lhs, 0, lhs_len);
 		if (lhs_parser.Has_err()) return false;
 		rhs_parser.Parse(rhs, 0, rhs_len);
@@ -396,9 +396,9 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_pagebanner:					return new gplx.xowa.xtns.pagebanners.Pgbnr_func();
 			case Xol_kwd_grp_.Id_new_window_link:				return new gplx.xowa.xtns.new_window_links.New_window_link_func();
 
-			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_property();
-			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_noExternalLangLinks();
-			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_wbreponame();
+			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_property();
+			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_noExternalLangLinks();
+			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wbases.pfuncs.Wdata_pf_wbreponame();
 
 			case Xol_kwd_grp_.Id_mapSources_deg2dd:				return gplx.xowa.xtns.mapSources.Map_deg2dd_func.Instance;
 			case Xol_kwd_grp_.Id_mapSources_dd2dms:				return gplx.xowa.xtns.mapSources.Map_dd2dms_func.Instance;

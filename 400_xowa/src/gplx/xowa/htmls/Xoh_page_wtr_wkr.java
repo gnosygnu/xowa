@@ -19,7 +19,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; 
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
 public class Xoh_page_wtr_wkr {
@@ -45,7 +45,7 @@ public class Xoh_page_wtr_wkr {
 						// ctx.Page().Redlink_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately); NOTE: probably put in to handle reusable redlink lists; redlink lists are now instantiated per page, so clear is not useful
 						break;
 				}
-				Bry_bfr page_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
+				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				Xoh_wtr_ctx hctx = null;
 				if (page_mode == Xopg_page_.Tid_html && wiki.App().Api_root().Wiki().Hdump().Html_mode().Tid_is_hdump_save()) {
 					hctx = Xoh_wtr_ctx.Hdump;

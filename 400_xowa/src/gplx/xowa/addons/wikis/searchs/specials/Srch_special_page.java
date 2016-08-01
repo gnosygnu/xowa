@@ -86,7 +86,7 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 				page.Root().Data_htm_(search_page.Root().Data_htm());
 			Xoa_url redirect_url = Xoa_url.New(wiki, search_ttl);
 			page.Ttl_(search_ttl).Url_(redirect_url);
-			page.Redirect().Itms__add__article(redirect_url, search_ttl, null);
+			page.Redirect_trail().Itms__add__article(redirect_url, search_ttl, null);
 		}
 	}
 	private void Multi_wikis_changed() {

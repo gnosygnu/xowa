@@ -50,7 +50,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		page_core_tbl.Insert_bgn();
 		page_text_tbl.Insert_bgn();
 		try {
-			db_mgr.Core_data_mgr().Create_page(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, DateAdp_.Now(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
+			db_mgr.Core_data_mgr().Create_page(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, Datetime_now.Get(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
 			db_file.Tbl__ns().Update_ns_count(ns_id, ns_count);
 			db_file.Tbl__cfg().Update_int("db", "page.id_next", page_id + 1);
 		} finally {
@@ -61,7 +61,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text_raw) {
 		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
-		DateAdp modified = update_modified_on_enabled ? DateAdp_.Now() : page.Db().Page().Modified_on();
+		DateAdp modified = update_modified_on_enabled ? Datetime_now.Get() : page.Db().Page().Modified_on();
 		int page_id = page.Db().Page().Id();
 		db_mgr.Core_data_mgr().Tbl__page().Update__redirect__modified(page_id, redirect, modified);
 		Xowd_page_itm db_page = new Xowd_page_itm();

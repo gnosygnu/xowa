@@ -41,7 +41,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		int page_id = page_id_next++;
 		int fil_idx = 0;
 		int ns_id = ttl.Ns().Id();
-		Xotdb_page_itm_.Txt_page_save(tmp, page_id, DateAdp_.Now(), ttl_bry, text, true);
+		Xotdb_page_itm_.Txt_page_save(tmp, page_id, Datetime_now.Get(), ttl_bry, text, true);
 		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, fil_idx);
 		byte[] page_rdr_bry = gplx.core.ios.streams.Io_stream_rdr_.Load_all(page_rdr_url);
 		Xob_xdat_file page_rdr = new Xob_xdat_file();
@@ -87,7 +87,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		int text_len = text.length;
 		DateAdp modified_on = tmp_page.Modified_on();
 		if (update_modified_on_enabled) {
-			modified_on = DateAdp_.Now();
+			modified_on = Datetime_now.Get();
 			page.Db().Page().Modified_on_(modified_on);
 		}
 		Xotdb_page_itm_.Txt_page_save(tmp_bfr, db_page.Id(), modified_on, ttl_bry, text, true);

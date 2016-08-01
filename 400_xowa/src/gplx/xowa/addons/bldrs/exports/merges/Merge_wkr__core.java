@@ -81,7 +81,7 @@ class Merge_wkr__core {
 	}
 	private void Merge_cfg(Db_conn src_conn, Db_conn trg_conn, String src_tbl_name) {
 		if (trg_conn.Meta_tbl_exists("xowa_cfg")) {
-			attach_mgr.Conn_main_(trg_conn).Conn_others_(new Db_attach_itm("src_db", src_conn));
+			attach_mgr.Conn_main_(trg_conn).Conn_links_(new Db_attach_itm("src_db", src_conn));
 			attach_mgr.Exec_sql(String_.Concat_lines_nl
 			( "INSERT  INTO xowa_cfg"
 			, "SELECT  s.cfg_grp, s.cfg_key, s.cfg_val"

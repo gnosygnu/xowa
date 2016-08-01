@@ -53,7 +53,7 @@ public class Gfo_url_encoder_ {
 	private static Gfo_url_encoder_mkr New__html_href_qarg() {	// same as regular href encoder, but also do not encode qarg characters "?" and "="
 		return New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Question, Byte_ascii.Eq);
 	}
-	private static Gfo_url_encoder_mkr New__html_href_quotes() {// same as href encoder, but do not encode ?, =, #, +; also, don't encode "%" vals
+	public static Gfo_url_encoder_mkr New__html_href_quotes() {// same as href encoder, but do not encode ?, =, #, +; also, don't encode "%" vals
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			.Init__same__many

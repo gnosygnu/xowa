@@ -39,13 +39,13 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 		if (dump_trg_bin == null && unzip)
 			dump_trg_bin = dump_trg_zip.GenNewNameAndExt(dump_trg_zip.NameOnly());	// convert a.sql.gz -> a.sql
 		// download
-		usr_dlg.Note_many("", "", "downloading file: now=~{0} src=~{1} trg=~{2}", DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_src, dump_trg_zip.OwnerDir());
+		usr_dlg.Note_many("", "", "downloading file: now=~{0} src=~{1} trg=~{2}", Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_src, dump_trg_zip.OwnerDir());
 		IoEngine_xrg_downloadFil download_wkr = app.Wmf_mgr().Download_wkr().Download_xrg();
 		download_wkr.Src_last_modified_query_(false).Init(dump_src, dump_trg_zip);
 		if (!download_wkr.Exec())
 			usr_dlg.Warn_many("", "", "download failed: src=~{0} trg=~{1} err=~{2}", dump_src, dump_trg_zip.Raw(), Err_.Message_gplx_full(download_wkr.Rslt_err()));
 		if (unzip) {	// parsing unzipped file is faster, but takes up more storage space
-			usr_dlg.Note_many("", "", "unzipping file: now=~{0} trg=~{1}", DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_trg_bin.Raw());
+			usr_dlg.Note_many("", "", "unzipping file: now=~{0} trg=~{1}", Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_trg_bin.Raw());
 			Xob_unzip_wkr unzip_wkr = new Xob_unzip_wkr().Init(app).Process_run_mode_(Process_adp.Run_mode_sync_block);
 			unzip_wkr.Decompress(dump_trg_zip, dump_trg_bin);
 		}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.gfo_regys.*;
 public class Gfs_msg_bldr implements GfoMsgParser {
-	private final Gfs_parser parser = new Gfs_parser();
+	private final    Gfs_parser parser = new Gfs_parser();
 	public GfoMsg ParseToMsg(String s) {return Bld(s);}
 	public GfoMsg Bld(String src) {return Bld(Bry_.new_u8(src));}
 	public GfoMsg Bld(byte[] src) {
@@ -45,6 +45,6 @@ public class Gfs_msg_bldr implements GfoMsgParser {
 		}			
 		return rv;
 	}
-	public static final Gfs_msg_bldr Instance = new Gfs_msg_bldr(); Gfs_msg_bldr() {}
+	public static final    Gfs_msg_bldr Instance = new Gfs_msg_bldr(); Gfs_msg_bldr() {}	// TS.static
 	public static final String Tkn_mutator = "_";
 }

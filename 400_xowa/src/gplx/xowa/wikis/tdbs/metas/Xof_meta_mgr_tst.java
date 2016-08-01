@@ -81,8 +81,9 @@ class Xof_file_regy_fxt {
 	Xof_meta_thumb[] To_ary(String[] ary) {
 		int len = ary.length;
 		Xof_meta_thumb[] rv = new Xof_meta_thumb[len];
+		Int_ary_parser parser = new Int_ary_parser();
 		for (int i = 0; i < len; i++) {
-			int[] size = Int_ary_parser.Instance.Parse_ary(ary[i], Byte_ascii.Comma);
+			int[] size = parser.Parse_ary(ary[i], Byte_ascii.Comma);
 			rv[i] = new Xof_meta_thumb().Width_(size[0]).Height_(size[1]).Exists_y_();
 		}
 		return rv;

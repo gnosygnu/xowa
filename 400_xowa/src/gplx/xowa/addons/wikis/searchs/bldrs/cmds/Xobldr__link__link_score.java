@@ -33,8 +33,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		wiki.Init_assert();
 		Db_conn plink_conn = Db_conn_bldr.Instance.Get_or_autocreate(false, wiki.Fsys_mgr().Root_dir().GenSubFil(Xob_db_file.Name__page_link));
 		String page_rank_tbl = Xobldr__page__page_score.Pagerank__tbl_name;
-		String log_module = "search.page.score";
-		Xoa_app_.Plog_none(log_module, "adding fields to page_rank_temp");
+		Gfo_usr_dlg_.Instance.Prog_none("", "", "search.page.score:adding fields to page_rank_temp");
 		plink_conn.Meta_fld_assert(page_rank_tbl, "page_len_score"	, Dbmeta_fld_tid.Itm__int, 0);
 		plink_conn.Meta_fld_assert(page_rank_tbl, "page_rank_score"	, Dbmeta_fld_tid.Itm__double, 0);
 		plink_conn.Meta_fld_assert(page_rank_tbl, "page_score"		, Dbmeta_fld_tid.Itm__int, 0);
@@ -54,7 +53,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		// calc page_score
 		if (page_rank_enabled) {
 			// get min / max
-			Xoa_app_.Plog_none(log_module, "calculating page_rank range");
+			Gfo_usr_dlg_.Instance.Prog_none("", "", "search.page.score:calculating page_rank range");
 			double page_rank_min = plink_conn.Exec_select_as_double("SELECT Min(page_rank) FROM " + page_rank_tbl, Double_.MinValue); if (page_rank_min == Double_.MinValue) throw Err_.new_("bldr", "failed to get min; tbl=~{0}", page_rank_tbl);
 			double page_rank_max = plink_conn.Exec_select_as_double("SELECT Max(page_rank) FROM " + page_rank_tbl, Double_.MinValue); if (page_rank_max == Double_.MinValue) throw Err_.new_("bldr", "failed to get max; tbl=~{0}", page_rank_tbl);
 			double page_rank_rng = page_rank_max - page_rank_min;

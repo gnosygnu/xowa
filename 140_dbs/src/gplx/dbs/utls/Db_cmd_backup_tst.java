@@ -19,7 +19,7 @@ package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Db_cmd_backup_tst {
 	@Test  public void Basic() {
-		Tfds.Now_enabled_y_();
+		Datetime_now.Manual_y_();
 		Db_cmd_backup bkpWkr = Db_cmd_backup.new_()
 			.ExeUrl_(Io_url_.new_any_("C:\\mysql\\mysqldump.exe"))
 			.BkpDir_(Io_url_.new_any_("C:\\bkp\\"))

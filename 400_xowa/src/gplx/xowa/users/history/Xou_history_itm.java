@@ -23,7 +23,7 @@ public class Xou_history_itm {
 		this.wiki = wiki;
 		this.page = page;
 		this.key = key_(wiki, page);
-		this.view_bgn = DateAdp_.Now();
+		this.view_bgn = Datetime_now.Get();
 	}
 	public byte[] Key() {return key;} private byte[] key;
 	public byte[] Wiki() {return wiki;} private byte[] wiki;
@@ -43,7 +43,7 @@ public class Xou_history_itm {
 		}
 	}
 	public void Tally() {
-		view_end = view_count == 0 ? view_bgn : DateAdp_.Now();
+		view_end = view_count == 0 ? view_bgn : Datetime_now.Get();
 		view_count++;
 	}
 	public void Merge(Xou_history_itm merge) {
@@ -68,6 +68,6 @@ public class Xou_history_itm {
 			.Add(wiki)						.Add_byte(Bry_.Dlm_fld)
 			.Add(page)						.Add_byte(Bry_.Dlm_row);
 	}
-	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final byte[] Key_dlm = Byte_ascii.Pipe_bry;
+	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final    byte[] Key_dlm = Byte_ascii.Pipe_bry;
 	public static final byte Fld_key = 0, Fld_wiki = 1, Fld_page = 2, Fld_view_count = 3, Fld_view_bgn = 4, Fld_view_end = 5;
 }

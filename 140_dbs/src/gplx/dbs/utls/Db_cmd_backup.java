@@ -57,7 +57,7 @@ public class Db_cmd_backup implements Gfo_invk {
 		return this;
 	}
 	@gplx.Internal protected Db_cmd_backup InitVars() {
-		String dteStr = DateAdp_.Now().XtoStr_fmt(dteFmt);
+		String dteStr = Datetime_now.Get().XtoStr_fmt(dteFmt);
 		bkpFilName = String_.Format(bkpFilNameFmt, dbName, dteStr);
 		bkpFil = bkpDir.GenSubFil(bkpFilName);
 		cmdText = String_.Format("\"{0}\" -u {1} -p{2} {3} > {4}", exeUrl.Xto_api(), usr, pwd, dbName, bkpFil.Xto_api());

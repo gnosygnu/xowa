@@ -46,7 +46,7 @@ public class Pft_func_time extends Pf_func_base {
 		}
 	}
 	public static DateAdp ParseDate(byte[] date, boolean utc, Bry_bfr error_bfr) {
-		if (date == Bry_.Empty) return utc ? DateAdp_.Now().XtoUtc() : DateAdp_.Now();
+		if (date == Bry_.Empty) return utc ? Datetime_now.Get().XtoUtc() : Datetime_now.Get();
 		try {
 			DateAdp rv = new Pxd_parser().Parse(date, error_bfr);
 			return rv;

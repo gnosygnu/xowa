@@ -22,7 +22,7 @@ public class Xowd_text_tbl implements Rls_able {
 	private final    String tbl_name = "text"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_page_id, fld_text_data;
 	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
-	private final    Io_stream_zip_mgr zip_mgr = Xoa_app_.Utl__zip_mgr(); private final    byte zip_tid;
+	private final    Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr(); private final    byte zip_tid;
 	public String Fld_text_data() {return fld_text_data;}
 	public Xowd_text_tbl(Db_conn conn, boolean schema_is_1, byte zip_tid) {
 		this.conn = conn; this.zip_tid = zip_tid;

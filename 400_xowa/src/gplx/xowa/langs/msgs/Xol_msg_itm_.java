@@ -259,7 +259,7 @@ public static final int
 		update_val_(rv, val);
 		return rv;
 	}
-	private static final    Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);
+	private static final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Fail_when_invalid_escapes_(false);
 	private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public static void update_val_(Xol_msg_itm itm, byte[] val) {
 		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07

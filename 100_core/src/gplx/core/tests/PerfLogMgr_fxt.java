@@ -21,7 +21,7 @@ public class PerfLogMgr_fxt {
 	public void Init(Io_url url, String text) {
 		this.url = url;
 		entries.Resize_bounds(1000);
-		entries.Add(new PerfLogItm(0, text + "|" + DateAdp_.Now().XtoStr_gplx()));
+		entries.Add(new PerfLogItm(0, text + "|" + Datetime_now.Get().XtoStr_gplx()));
 		tmr.Bgn();
 	}
 	public void Write(String text) {

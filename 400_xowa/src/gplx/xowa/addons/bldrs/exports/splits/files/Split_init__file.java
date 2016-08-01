@@ -55,7 +55,7 @@ class Split_init__file {
 		// update bin_db_id
 		wkr_conn.Meta_idx_create("fsdb_img_regy", "img", "img_type", "fil_id", "thm_id");
 		Gfo_log_.Instance.Prog("updating bin_db_id");
-		attach_mgr.Conn_others_(new Db_attach_itm("fsdb_db", atr_conn));
+		attach_mgr.Conn_links_(new Db_attach_itm("fsdb_db", atr_conn));
 
 		// update bin_db_id.fil
 		attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y

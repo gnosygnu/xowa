@@ -88,9 +88,9 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		return rv_obj == null ? or : ((Byte_obj_val)rv_obj).Val();
 	}
 	public Btrie_slim_mgr Add_bry_tid(byte[] bry, byte tid)			{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(tid));}
-	public Btrie_slim_mgr Add_bry_int(byte[] key, int val)			{return (Btrie_slim_mgr)Add_obj(key, Int_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_bry_int(byte[] key, int val)			{return (Btrie_slim_mgr)Add_obj(key, new Int_obj_val(val));}
 	public Btrie_slim_mgr Add_str_byte(String key, byte val)		{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Byte_obj_val.new_(val));}
-	public Btrie_slim_mgr Add_str_int(String key, int val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Int_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_str_int(String key, int val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), new Int_obj_val(val));}
 	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Bry_.new_u8(val));}
 	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_slim_mgr Add_bry(byte[] v)							{return (Btrie_slim_mgr)Add_obj(v, v);}
@@ -108,7 +108,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public Btrie_slim_mgr Add_many_int(int val, String... ary) {return Add_many_int(val, Bry_.Ary(ary));}
 	public Btrie_slim_mgr Add_many_int(int val, byte[]... ary) {
 		int len = ary.length;
-		Int_obj_val obj = Int_obj_val.new_(val);
+		Int_obj_val obj = new Int_obj_val(val);
 		for (int i = 0; i < len; i++)
 			Add_obj(ary[i], obj);
 		return this;

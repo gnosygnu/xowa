@@ -29,7 +29,7 @@ public abstract class Json_parser__itm__base {
 		this.keys = keys;
 		this.keys_len = keys.length;
 		for (int i = 0; i < keys_len; ++i)
-			hash.Add(Bry_.new_u8(keys[i]), Int_obj_val.new_(i));
+			hash.Add(Bry_.new_u8(keys[i]), new Int_obj_val(i));
 		this.atrs = new Json_kv[keys_len];
 	}
 	public int Kv__int(Json_kv[] ary, int i)			{return Bry_.To_int(ary[i].Val_as_bry());}

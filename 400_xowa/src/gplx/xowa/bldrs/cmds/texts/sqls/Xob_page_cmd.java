@@ -35,7 +35,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		this.redirect_mgr = wiki.Redirect_mgr(); 
 		this.db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		this.page_core_tbl = db_mgr.Tbl__page();
-		this.text_zip_mgr = Xoa_app_.Utl__zip_mgr(); text_zip_tid = import_cfg.Zip_tid_text();
+		this.text_zip_mgr = wiki.Utl__zip_mgr(); text_zip_tid = import_cfg.Zip_tid_text();
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
 		this.dg_match_mgr = app.Api_root().Bldr().Wiki().Filter().Dansguardian().New_mgr(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir());
 		if (dg_match_mgr != null) redirect_id_enabled = true; // always enable redirect_id if dg_match_mgr enabled; DATE:2016-01-04

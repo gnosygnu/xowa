@@ -344,24 +344,24 @@ public class Xol_mw_lang_parser {
 	public static int Id_by_mw_name(byte[] src) {
 		if (mw_names == null) {
 			mw_names = Btrie_slim_mgr.cs();
-			mw_names.Add_obj("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Tid__media));
-			mw_names.Add_obj("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Tid__special));
-			mw_names.Add_obj("NS_MAIN", Int_obj_val.new_(Xow_ns_.Tid__main));
-			mw_names.Add_obj("NS_TALK", Int_obj_val.new_(Xow_ns_.Tid__talk));
-			mw_names.Add_obj("NS_USER", Int_obj_val.new_(Xow_ns_.Tid__user));
-			mw_names.Add_obj("NS_USER_TALK", Int_obj_val.new_(Xow_ns_.Tid__user_talk));
-			mw_names.Add_obj("NS_PROJECT", Int_obj_val.new_(Xow_ns_.Tid__project));
-			mw_names.Add_obj("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Tid__project_talk));
-			mw_names.Add_obj("NS_FILE", Int_obj_val.new_(Xow_ns_.Tid__file));
-			mw_names.Add_obj("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Tid__file_talk));
-			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Tid__mediawiki));
-			mw_names.Add_obj("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Tid__mediawiki_talk));
-			mw_names.Add_obj("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Tid__template));
-			mw_names.Add_obj("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Tid__template_talk));
-			mw_names.Add_obj("NS_HELP", Int_obj_val.new_(Xow_ns_.Tid__help));
-			mw_names.Add_obj("NS_HELP_TALK", Int_obj_val.new_(Xow_ns_.Tid__help_talk));
-			mw_names.Add_obj("NS_CATEGORY", Int_obj_val.new_(Xow_ns_.Tid__category));
-			mw_names.Add_obj("NS_CATEGORY_TALK", Int_obj_val.new_(Xow_ns_.Tid__category_talk));
+			mw_names.Add_obj("NS_MEDIA", new Int_obj_val(Xow_ns_.Tid__media));
+			mw_names.Add_obj("NS_SPECIAL", new Int_obj_val(Xow_ns_.Tid__special));
+			mw_names.Add_obj("NS_MAIN", new Int_obj_val(Xow_ns_.Tid__main));
+			mw_names.Add_obj("NS_TALK", new Int_obj_val(Xow_ns_.Tid__talk));
+			mw_names.Add_obj("NS_USER", new Int_obj_val(Xow_ns_.Tid__user));
+			mw_names.Add_obj("NS_USER_TALK", new Int_obj_val(Xow_ns_.Tid__user_talk));
+			mw_names.Add_obj("NS_PROJECT", new Int_obj_val(Xow_ns_.Tid__project));
+			mw_names.Add_obj("NS_PROJECT_TALK", new Int_obj_val(Xow_ns_.Tid__project_talk));
+			mw_names.Add_obj("NS_FILE", new Int_obj_val(Xow_ns_.Tid__file));
+			mw_names.Add_obj("NS_FILE_TALK", new Int_obj_val(Xow_ns_.Tid__file_talk));
+			mw_names.Add_obj("NS_MEDIAWIKI", new Int_obj_val(Xow_ns_.Tid__mediawiki));
+			mw_names.Add_obj("NS_MEDIAWIKI_TALK", new Int_obj_val(Xow_ns_.Tid__mediawiki_talk));
+			mw_names.Add_obj("NS_TEMPLATE", new Int_obj_val(Xow_ns_.Tid__template));
+			mw_names.Add_obj("NS_TEMPLATE_TALK", new Int_obj_val(Xow_ns_.Tid__template_talk));
+			mw_names.Add_obj("NS_HELP", new Int_obj_val(Xow_ns_.Tid__help));
+			mw_names.Add_obj("NS_HELP_TALK", new Int_obj_val(Xow_ns_.Tid__help_talk));
+			mw_names.Add_obj("NS_CATEGORY", new Int_obj_val(Xow_ns_.Tid__category));
+			mw_names.Add_obj("NS_CATEGORY_TALK", new Int_obj_val(Xow_ns_.Tid__category_talk));
 		}
 		Object o = mw_names.Match_exact(src, 0, src.length);
 		return o == null ? Xow_ns_.Tid__null : ((Int_obj_val)o).Val();

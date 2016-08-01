@@ -28,7 +28,7 @@ public class Xobc_xodir_special implements Xow_special_page {
 			Xobc_xodir_cfg.Set_app_str__selected(wiki.App(), path);
 			// On_path_selected.Invk(null, -1, "", null);
 			// page.Redirect().Itms__add__special(wiki, Xobc_task_special.Prototype.Special__meta());
-			page.Redirect().Itms__add__special(wiki, Prototype.Special__meta());
+			page.Redirect_trail().Itms__add__special(wiki, Prototype.Special__meta());
 			return;
 		}
 		

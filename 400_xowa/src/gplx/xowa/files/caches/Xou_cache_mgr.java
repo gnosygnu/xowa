@@ -72,7 +72,7 @@ public class Xou_cache_mgr {
 					, fsdb.Orig_repo_id(), fsdb.Orig_ttl(), fsdb.Orig_ext().Id(), fsdb.Orig_w(), fsdb.Orig_h()
 					, fsdb.Html_w(), fsdb.Html_h(), fsdb.Lnki_time(), fsdb.Lnki_page()
 					, fsdb.File_is_orig(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.File_size()
-					, 1, DateAdp_.Now().Timestamp_unix())
+					, 1, Datetime_now.Get().Timestamp_unix())
 					;
 				hash.Add(itm.Lnki_key(), itm);
 				fsys_size_cur += itm.File_size();

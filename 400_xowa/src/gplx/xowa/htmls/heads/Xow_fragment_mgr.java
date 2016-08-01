@@ -45,7 +45,7 @@ public class Xow_fragment_mgr implements Gfo_invk {
 	}
 	public static final String Invk_html_js_edit_toolbar_fmt_ = "html_js_edit_toolbar_fmt_", Invk_html_js_edit_toolbar = "html_js_edit_toolbar";
 	public void Evt_lang_changed(Xol_lang_itm lang) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xow_msg_mgr msg_mgr = wiki.Appe().Usere().Msg_mgr();
 		html_js_edit_toolbar = html_js_edit_toolbar_fmtr.Bld_bry_many(bfr
 			, msg_mgr.Val_by_id(Xol_msg_itm_.Id_edit_toolbar_bold_tip)

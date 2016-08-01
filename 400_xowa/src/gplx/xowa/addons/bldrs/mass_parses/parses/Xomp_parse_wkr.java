@@ -24,14 +24,16 @@ class Xomp_parse_wkr implements Gfo_invk {
 	private final    Xomp_page_pool page_pool;
 	private final    int idx;
 	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
+	private final    Xomp_parse_mgr_cfg cfg;
 	private int done_count; private long done_time;
 	private Xomp_wkr_db wkr_db; private int cleanup_interval, commit_interval;
 	private boolean log_file_lnkis;
-	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xowe_wiki wiki, Xomp_page_pool page_pool, int idx, int cleanup_interval, int commit_interval, boolean log_file_lnkis) {
+	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xowe_wiki wiki, Xomp_page_pool page_pool, int idx, Xomp_parse_mgr_cfg cfg, int cleanup_interval, int commit_interval, boolean log_file_lnkis) {
 		this.mgr = mgr; this.wiki = wiki;
 		this.page_pool = page_pool;
 		this.idx = idx;
 		this.wkr_db = mgr.Db_core().Wkr_db(Bool_.Y, idx);	// NOTE: must go in ctor, or else thread issues
+		this.cfg = cfg;
 		this.cleanup_interval = cleanup_interval;
 		this.commit_interval = commit_interval;
 		this.log_file_lnkis = log_file_lnkis;
@@ -40,7 +42,7 @@ class Xomp_parse_wkr implements Gfo_invk {
 	public Xob_hdump_bldr Hdump_bldr() {return hdump_bldr;} private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
 	public void Exec() {
 		// init
-		Xow_parser_mgr parser_mgr = new Xow_parser_mgr(wiki);
+		Xow_parser_mgr parser_mgr = wiki.Parser_mgr();
 
 		// disable file download
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);											// must happen after fsdb.make
@@ -58,8 +60,8 @@ class Xomp_parse_wkr implements Gfo_invk {
 			logger.Bgn();
 		}
 
-		// enable hdump
-		hdump_bldr.Enabled_(true).Hzip_enabled_(true).Hzip_diff_(true).Init(wiki, wkr_db.Conn(), new Xob_hdump_tbl_retriever__xomp(wkr_db.Html_tbl()));
+		// enable hdump			
+		hdump_bldr.Enabled_(cfg.Hdump_enabled()).Hzip_enabled_(cfg.Hzip_enabled()).Hzip_diff_(cfg.Hzip_enabled()).Zip_tid_(cfg.Zip_tid()).Init(wiki, wkr_db.Conn(), new Xob_hdump_tbl_retriever__xomp(wkr_db.Html_tbl()));
 		wkr_db.Conn().Txn_bgn("xomp");
 
 		while (true) {

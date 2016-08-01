@@ -44,7 +44,8 @@ class Xomp_make_lnki {
 				Xomp_wkr_db wkr_db = xomp_db.Wkr_db(Bool_.N, i);
 				count += Load_rows(rows, xomp_db, wkr_db, uid_bgn, uid_bgn + uid_count);
 			}
-			if (count == 0) break;
+			if (count < 0) break;
+			uid_bgn += count;
 			Save_rows(rows, lnki_temp_tbl);
 		}
 
@@ -56,7 +57,7 @@ class Xomp_make_lnki {
 	private int Load_rows(List_adp rows, Xomp_db_core xomp_db, Xomp_wkr_db wkr_db, int uid_bgn, int uid_end) {
 		// build sql
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(xomp_db.Conn());
-		attach_mgr.Conn_others_(new Db_attach_itm("wkr_db", wkr_db.Conn()));
+		attach_mgr.Conn_links_(new Db_attach_itm("wkr_db", wkr_db.Conn()));
 		String sql = String_.Format(String_.Concat_lines_nl_skip_last
 		( "SELECT  mgr.xomp_uid"
 		, ",       wkr.*"
@@ -77,6 +78,7 @@ class Xomp_make_lnki {
 				rv = rdr.Read_int("xomp_uid");
 				Xob_lnki_temp_row row = new Xob_lnki_temp_row();
 				row.Load(rdr, rv);
+				rows.Add(row);
 			}
 		} finally {rdr.Rls();}
 		attach_mgr.Detach();

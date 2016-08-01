@@ -33,7 +33,7 @@ public class Xobc_version_regy_tbl implements Db_tbl {
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Stmt_insert(tbl_name, flds)
-			.Val_int(fld_version_id, 1).Val_str(fld_version_date, DateAdp_.Now().XtoStr_fmt_yyyy_MM_dd_HH_mm()).Val_str(fld_version_note, "initial")
+			.Val_int(fld_version_id, 1).Val_str(fld_version_date, Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm()).Val_str(fld_version_note, "initial")
 			.Exec_insert();
 	}
 	public Xobc_version_regy_itm Select_latest() {

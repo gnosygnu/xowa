@@ -55,7 +55,7 @@ class Xou_user_ {
 		rv = rv.Add_new(-2, "Media").Add_new(-1, "Special").Add_new(0, "").Add_new(1, "Talk").Add_new(2, "User").Add_new(3, "User talk").Add_new(4, "Wikipedia").Add_new(5, "Wikipedia talk")
 			.Add_new(6, "File").Add_new(7, "File talk").Add_new(8, "MediaWiki").Add_new(9, "MediaWiki talk").Add_new(10, "Template").Add_new(11, "Template talk")
 			.Add_new(12, "Help").Add_new(13, "Help talk").Add_new(14, "Category").Add_new(15, "Category talk").Add_new(100, "Portal").Add_new(101, "Portal talk")
-			.Add_new(gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property, gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property_name)
+			.Add_new(gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Ns_property, gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Ns_property_name)
 			.Add_new(730, "Data").Add_new(731, "Data talk")
 			.Add_new(Xow_ns_.Tid__module, Xow_ns_.Key__module).Add_new(Xow_ns_.Tid__module_talk, Xow_ns_.Key__module_talk)
 			.Add_defaults()

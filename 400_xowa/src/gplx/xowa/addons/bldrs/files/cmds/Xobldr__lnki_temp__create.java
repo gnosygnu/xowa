@@ -21,7 +21,7 @@ import gplx.xowa.files.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.*;
 import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.parsers.vnts.*;
 import gplx.xowa.parsers.lnkis.files.*;
@@ -112,7 +112,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		else {
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
 			if (	gen_html
-				&&	page.Redirect().Itms__len() == 0)	// don't generate html for redirected pages
+				&&	page.Redirect_trail().Itms__len() == 0)	// don't generate html for redirected pages
 				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_page_.Tid_read);
 			if (gen_hdump)
 				hdump_bldr.Insert(ctx, page.Root_(root));

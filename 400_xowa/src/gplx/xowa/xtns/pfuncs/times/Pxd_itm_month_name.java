@@ -188,7 +188,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 	@Override public boolean Time_ini(DateAdpBldr bldr) {
 		DateAdp cur = bldr.Date();
-		if (cur == null) cur = DateAdp_.Now();
+		if (cur == null) cur = Datetime_now.Get();
 		int val = seg_val * seg_multiple;
 		switch (this.Seg_idx()) {
 			case DateAdp_.SegIdx_second: cur = cur.Add_second(val); break;
@@ -256,7 +256,7 @@ class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_day_relative(adj, ary_idx);}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(DateAdpBldr bldr) {
-		DateAdp date = DateAdp_.Now();
+		DateAdp date = Datetime_now.Get();
 		if (adj != 0) date = date.Add_day(adj);			
 		bldr.Seg_set(DateAdp_.SegIdx_year		, date.Year());
 		bldr.Seg_set(DateAdp_.SegIdx_month		, date.Month());
@@ -278,7 +278,7 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_time_relative(ary_idx);}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(DateAdpBldr bldr) {
-		DateAdp date = DateAdp_.Now();
+		DateAdp date = Datetime_now.Get();
 		bldr.Seg_set(DateAdp_.SegIdx_year		, date.Year());
 		bldr.Seg_set(DateAdp_.SegIdx_month		, date.Month());
 		bldr.Seg_set(DateAdp_.SegIdx_day		, date.Day());
@@ -347,7 +347,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_dow_name(ary_idx, dow_name, dow_idx);}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(DateAdpBldr bldr) {
-		DateAdp now = DateAdp_.Now();
+		DateAdp now = Datetime_now.Get();
 		int adj = dow_idx - now.DayOfWeek();	// adj = requested_dow - current_dow; EX: requesting Friday, and today is Wednesday; adj = 2 (4 - 2); DATE:2014-05-02
 		if (adj < 0) adj += 7;					// requested_down is before current_dow; add 7 to get the next day
 		bldr.Date_(bldr.Date().Add_day(adj));

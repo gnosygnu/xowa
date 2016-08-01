@@ -34,7 +34,7 @@ class Xomp_parse_mgr {
 		Xomp_page_pool page_pool = new Xomp_page_pool(pool_loader, cfg.Num_pages_per_wkr());
 		prog_mgr.Init(pool_loader.Get_pending_count(), cfg.Progress_interval());
 		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of cache
-		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, true);
+		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates());
 		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
 		Gfo_cache_mgr ifexist_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
 
@@ -47,8 +47,8 @@ class Xomp_parse_mgr {
 		latch = new Gfo_countdown_latch(wkr_len);
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
 		for (int i = 0; i < wkr_len; ++i) {
-			Xowe_wiki wkr_wiki = Clone_wiki(wiki);
-			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, wkr_wiki, page_pool, i, cfg.Cleanup_interval(), cfg.Progress_interval(), cfg.Log_file_lnkis());
+			Xowe_wiki wkr_wiki = Xow_wiki_utl_.Clone_wiki(wiki, wiki.Fsys_mgr().Root_dir());
+			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, wkr_wiki, page_pool, i, cfg, cfg.Cleanup_interval(), cfg.Progress_interval(), cfg.Log_file_lnkis());
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);
 			// remove wmf wkr, else will try to download images during parsing
 			if (wkr_wiki.File__bin_mgr() != null)
@@ -73,12 +73,5 @@ class Xomp_parse_mgr {
 			wkrs[i].Bld_stats(bfr);
 		}
 		Gfo_usr_dlg_.Instance.Note_many("", "", bfr.To_str_and_clear());
-	}
-	private static Xowe_wiki Clone_wiki(Xowe_wiki wiki) {
-		Xol_lang_itm lang = new Xol_lang_itm(wiki.App().Lang_mgr(), wiki.Lang().Key_bry());
-		Xol_lang_itm_.Lang_init(lang);
-		Xowe_wiki rv = new Xowe_wiki(wiki.Appe(), lang, gplx.xowa.wikis.nss.Xow_ns_mgr_.default_(lang.Case_mgr()), wiki.Domain_itm(), wiki.Fsys_mgr().Root_dir());
-		rv.Init_by_wiki();
-		return rv;
 	}
 }

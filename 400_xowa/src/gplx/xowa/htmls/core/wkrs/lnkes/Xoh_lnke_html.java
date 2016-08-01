@@ -22,6 +22,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_lnke_html {
 	private static final    byte[] Disabled_button = Bry_.new_a7("&#x2297;");
+	private final    Gfo_url_encoder href_encoder = Gfo_url_encoder_.New__html_href_quotes().Make();
 	public void Write_html(Bry_bfr bfr, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int href_bgn = lnke.Lnke_href_bgn(), href_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		byte lnke_type = Calc_type(lnke);
@@ -68,9 +69,9 @@ public class Xoh_lnke_html {
 			}
 		}
 		else {	// xwiki
-			Gfo_url_encoder href_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href_quotes;
+			byte[] xwiki_page_enc = href_encoder.Encode(lnke.Lnke_xwiki_page());
 			bfr.Add(Xoh_href_.Bry__site).Add(lnke_xwiki_wiki).Add(Xoh_href_.Bry__wiki)
-				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));					// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
+				.Add(xwiki_page_enc);					// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)
 				Gfo_qarg_mgr_old.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
 			return ctx.Wiki().App().Xwiki_mgr__missing(lnke_xwiki_wiki);	// write "external" if hdump or xwiki is missing

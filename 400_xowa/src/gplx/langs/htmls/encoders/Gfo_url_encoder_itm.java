@@ -24,7 +24,7 @@ public interface Gfo_url_encoder_itm {
 class Gfo_url_encoder_itm_same implements Gfo_url_encoder_itm {
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {bfr.Add_byte(b); return 0;}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {bfr.Add_byte(b); return 0;}
-	public static final    Gfo_url_encoder_itm Instance = new Gfo_url_encoder_itm_same();
+	public static final    Gfo_url_encoder_itm Instance = new Gfo_url_encoder_itm_same();	// TS.static
 } 
 class Gfo_url_encoder_itm_diff implements Gfo_url_encoder_itm {
 	private final    byte orig, repl;

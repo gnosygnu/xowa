@@ -53,7 +53,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		return rv;
 	}
 	public String Page_db_as_str()		{return String_.new_u8(Page_db());}
-	public byte[] Page_url_w_anch()		{return Gfo_url_encoder_.Href.Encode(Bry_.Mid(full_txt, page_bgn, qarg_bgn == -1 ? full_txt.length : qarg_bgn - 1));}
+	public byte[] Page_url_w_anch()		{
+		synchronized (href_encoder) { // LOCK:static-obj
+			return href_encoder.Encode(Bry_.Mid(full_txt, page_bgn, qarg_bgn == -1 ? full_txt.length : qarg_bgn - 1));
+		}
+	}
 	public int Leaf_bgn() {return leaf_bgn;}
 	public byte[] Base_txt() {return leaf_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, page_bgn, leaf_bgn - 1);}
 	public byte[] Leaf_txt() {return leaf_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, leaf_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
@@ -62,17 +66,41 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Anch_txt() {return anch_bgn == -1	? Bry_.Empty : Bry_.Mid(full_txt, anch_bgn, full_txt.length);}
 	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
-	public byte[] Full_url() {return Gfo_url_encoder_.Href.Encode(full_txt);}
+	public byte[] Full_url() {
+		synchronized (href_encoder) {	// LOCK:static-obj
+			return Gfo_url_encoder_.Href.Encode(full_txt);
+		}
+	}
 	public String Full_db_as_str()	{return String_.new_u8(Full_db());}
 	public byte[] Full_db()			{return ns.Gen_ttl(this.Page_db());}
 	public byte[] Full_db_w_anch()  {return Replace_spaces(full_txt);}
-	public byte[] Page_url() {return Xoa_url_encoder.Instance.Encode(this.Page_txt());}
-	public byte[] Leaf_url() {return Xoa_url_encoder.Instance.Encode(this.Leaf_txt());}
-	public byte[] Base_url() {return Xoa_url_encoder.Instance.Encode(this.Base_txt());}
+	public byte[] Page_url() {
+		synchronized (url_encoder) {	// LOCK:static-obj
+			return url_encoder.Encode(this.Page_txt());
+		}
+	}
+	public byte[] Leaf_url() {
+		synchronized (url_encoder) {	// LOCK:static-obj
+			return url_encoder.Encode(this.Leaf_txt());
+		}
+	}
+	public byte[] Base_url() {
+		synchronized (url_encoder) {	// LOCK:static-obj
+			return url_encoder.Encode(this.Base_txt());
+		}
+	}
 	public byte[] Root_txt() {return root_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, page_bgn, root_bgn - 1);}
 	public byte[] Rest_txt() {return root_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, root_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
-	public byte[] Talk_url() {return Xoa_url_encoder.Instance.Encode(this.Talk_txt());}
-	public byte[] Subj_url() {return Xoa_url_encoder.Instance.Encode(this.Subj_txt());}
+	public byte[] Talk_url() {
+		synchronized (url_encoder) {	// LOCK:static-obj
+			return url_encoder.Encode(this.Talk_txt());
+		}
+	}
+	public byte[] Subj_url() {
+		synchronized (url_encoder) {	// LOCK:static-obj
+			return url_encoder.Encode(this.Subj_txt());
+		}
+	}
 	public int Qarg_bgn() {return qarg_bgn;} private int qarg_bgn = -1;
 	public byte[] Qarg_txt() {return this.Qarg_bgn() == -1 ? null : Bry_.Mid(full_txt, this.Qarg_bgn(), full_txt.length);}
 	public byte[] Base_txt_wo_qarg() {
@@ -109,6 +137,9 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	private static final    Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
 	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000");
+
+	private final    static Gfo_url_encoder href_encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final    static Xoa_url_encoder url_encoder = new Xoa_url_encoder();
 
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
 	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}

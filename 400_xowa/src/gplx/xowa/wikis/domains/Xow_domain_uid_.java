@@ -96,10 +96,7 @@ public class Xow_domain_uid_ {
 			default:							throw Err_.new_unhandled(type_id);
 		}
 		Xol_lang_stub lang = Xol_lang_stub_.Get_by_id(lang_id);
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
-		bfr.Add(lang.Key()).Add_byte_dot().Add(tid_bry).Add_byte_dot().Add(Xow_domain_itm_.Seg__org);
-		byte[] domain_bry = bfr.To_bry_and_clear();
-		bfr.Mkr_rls();
+		byte[] domain_bry = Bry_.Add(lang.Key(), Byte_ascii.Dot_bry, tid_bry, Byte_ascii.Dot_bry, Xow_domain_itm_.Seg__org);
 		return Xow_domain_itm.new_(domain_bry, tid_int, lang, lang.Key());
 	}
 }

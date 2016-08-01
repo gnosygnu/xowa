@@ -71,11 +71,26 @@ class Xomp_tmpl_cache_bldr {
 		for (int i = 0; i < redirect_len; ++i) {
 			Xow_page_cache_itm src_itm = (Xow_page_cache_itm)redirect_list.Get_at(i);
 			Xow_page_cache_itm trg_itm = (Xow_page_cache_itm)page_regy.Get_by(src_itm.Redirect_id());
-			if (trg_itm == null) {
-				Gfo_usr_dlg_.Instance.Prog_many("", "", "missing redirect for tmpl: ~{0}", src_itm.Ttl().Full_db());
-				continue;
+			byte[] trg_itm_wtxt = null;
+			Xoa_ttl trg_ttl = null;
+			if (trg_itm == null) {	// template can redirect to non-template pages
+				Xoa_ttl src_ttl = src_itm.Ttl();
+				Xoae_page wpg = Xoae_page.New(wiki, src_ttl);
+				wiki.Data_mgr().Load_from_db(wpg, src_ttl.Ns(), src_ttl, false);
+				if (wpg.Db().Page().Exists()) {
+					trg_itm_wtxt = wpg.Db().Text().Text_bry();
+					trg_ttl = wpg.Ttl();
+				}
+				else {
+					Gfo_usr_dlg_.Instance.Prog_many("", "", "missing redirect for tmpl: ~{0}", src_itm.Ttl().Full_db());
+					continue;
+				}
 			}
-			src_itm.Set_redirect_bry(trg_itm.Wtxt__direct());
+			else {
+				trg_itm_wtxt = trg_itm.Wtxt__direct();
+				trg_ttl = trg_itm.Ttl();
+			}
+			src_itm.Set_redirect(trg_ttl, trg_itm_wtxt);	// NOTE: itm must have title of redirect, not original item; EX:Template:Ifempty -> Template:If_empty; DATE:2016-07-26
 		}
 	}
 }

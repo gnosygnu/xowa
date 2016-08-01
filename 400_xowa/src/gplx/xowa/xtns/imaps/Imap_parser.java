@@ -108,7 +108,7 @@ public class Imap_parser {
 		boolean shape_is_poly = shape_tid == Imap_part_.Tid_shape_poly;
 		int pos = Bry_find_.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
 		int grp_end = Bry_find_.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
-		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap_No valid link was found");}
+		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap.parse:No valid link was found");}
 		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
 			boolean last = pos == grp_end;

@@ -22,7 +22,7 @@ import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xo
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr.Instance;
-	private Number_parser number_parser = new Number_parser();
+	private Gfo_number_parser number_parser = new Gfo_number_parser();
 	private Sites_regy_mgr sites_regy_mgr;
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {

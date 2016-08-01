@@ -71,8 +71,9 @@ public class Xop_redirect_mgr {
 			);
 	}
 	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xopg_redirect_mgr redirect_mgr) {
+		// NOTE: this assumes that redirect_mgr only has redirect_src, not redirect_trg; note that #REDIRECT [[A]] only adds redirect_src, whereas special redirects add redirect_trg; DATE:2016-07-31
 		int len = redirect_mgr.Itms__len(); if (len == 0) return Bry_.Empty;
-		Bry_bfr redirect_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr redirect_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		boolean dirty = false;
 		for (int i = 0; i < len; i++) {
 			Xopg_redirect_itm redirect_itm = redirect_mgr.Itms__get_at(i);

@@ -110,7 +110,7 @@ public class GfuiWin extends GfuiElemBase {
 		else if	(ctx.Match(k, Evt_Opened))								Opened_cbk();
 		else if	(ctx.Match(k, StopAppByAltF4_evt))						StopAppByAltF4(IptEventData.ctx_(ctx, m));
 		else if	(ctx.Match(k, Invk_ShowFocusOwner))						GfuiEnv_.ShowMsg(GfuiFocusMgr.Instance.FocusedElem().Key_of_GfuiElem());
-		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_.Instance.Note(UsrMsg.new_(DateAdp_.Now().toString())); return this;}
+		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_.Instance.Note(UsrMsg.new_(Datetime_now.Get().toString())); return this;}
 		else if	(ctx.MatchIn(k, Invk_Close, GfuiQuitMode.Destroy_cmd))	Close();
 		else if	(ctx.MatchIn(k, Invk_Hide, GfuiQuitMode.Suspend_cmd))	Hide();
 		else {

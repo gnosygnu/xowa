@@ -35,7 +35,7 @@ public class Xobc_data_db_upgrader {
 		//int next_check_interval = cfg_mgr.Select_int_or("", Cfg__next_check_interval, 24 * 7);
 		//DateAdp last_check = DateAdp_.parse_fmt_or(last_check_str, Date_fmt, null);
 		//if (last_check != null) {						// check if last_check_str exists
-		//	Time_span span = DateAdp_.Now().Diff(last_check);
+		//	Time_span span = Datetime_now.Get().Diff(last_check);
 		//	if (span.Total_hours().To_double() < next_check_interval) {	// check if enough time passed
 		//		Gfo_log_.Instance.Info("xobc_db update not needed", "last_check", last_check_str, "next_check_interval", next_check_interval);
 		//		return;
@@ -47,7 +47,7 @@ public class Xobc_data_db_upgrader {
 		//	Gfo_log_.Instance.Info("xobc_db update needed b/c of missing or invalid last_check_str", "last_check", last_check_str);
 
 		// update needed; first, update cfg_key, then get host
-		cfg_mgr.Upsert_str("", Cfg__last_check_date, DateAdp_.Now().XtoStr_fmt(Date_fmt));
+		cfg_mgr.Upsert_str("", Cfg__last_check_date, Datetime_now.Get().XtoStr_fmt(Date_fmt));
 		Xobc_data_db bc_db = task_mgr.Data_db();
 		Xobc_host_regy_itm host_itm = bc_db.Tbl__host_regy().Select(Xobc_host_regy_tbl.Host_id__archive_org);
 

@@ -64,7 +64,7 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
 			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
-				Io_mgr.Instance.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
+				Io_mgr.Instance.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(e));
 		}
 	}

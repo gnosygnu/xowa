@@ -36,9 +36,9 @@ public class Xow_page_mgr implements Gfo_invk {
 		switch (ns.Id()) {
 			case Xow_ns_.Tid__special:		// Special pages are built (not loaded from db)
 				wiki.Special_mgr().Special__gen(wiki.App(), wiki, rv, url, ttl);
-				Xopg_redirect_itm redirect_itm = rv.Redirect().Itms__get_at_nth_or_null();
+				Xopg_redirect_itm redirect_itm = rv.Redirect_trail().Itms__get_at_nth_or_null();
 				if (redirect_itm != null) {
-					rv.Redirect().Clear();	// clear needed; EX: Special:Random -> [[Redirected_page]] -> {must clear here} -> [[Page]]
+					rv.Redirect_trail().Clear();	// clear needed; EX: Special:Random -> [[Redirected_page]] -> {must clear here} -> [[Page]]
 					Load_by_ns(rv, redirect_itm.Url(), redirect_itm.Ttl(), called_from_msg);
 				}
 				return;
@@ -92,7 +92,8 @@ public class Xow_page_mgr implements Gfo_invk {
 				return;
 
 			// redirect; do some bookkeeping and reset ns / ttl
-			rv.Redirect().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, wtxt);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
+			// NOTE: this adds the target ttl to redirect_mgr (#REDIRECT [[A]]); note that special redirects will add source ttl; DATE:2016-07-31
+			rv.Redirect_trail().Itms__add__article(Xoa_url.New(wiki, rv.Ttl()), rv.Ttl(), wtxt);// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
 			rv.Ttl_(redirect_ttl);
 			ns = redirect_ttl.Ns();
 			ttl = redirect_ttl;
@@ -110,7 +111,7 @@ public class Xow_page_mgr implements Gfo_invk {
 		rv.Db().Page().Id_(redirect_row.Id()).Modified_on_(redirect_row.Modified_on()).Html_db_id_(redirect_row.Html_db_id());
 		Xoa_ttl redirect_ttl = wiki.Ttl_parse(redirect_row.Ns_id(), redirect_row.Ttl_page_db());
 		rv.Ttl_(redirect_ttl);
-		rv.Redirect().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, Bry_.Empty);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
+		rv.Redirect_trail().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, Bry_.Empty);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
 	}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl) {return Load_page_and_parse(url, ttl, wiki.Lang(), wiki.Appe().Gui_mgr().Browser_win().Active_tab(), true);}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl, Xol_lang_itm lang, Xog_tab_itm tab, boolean parse_page) {
@@ -164,7 +165,7 @@ public class Xow_page_mgr implements Gfo_invk {
 		Xoa_ttl trg_ttl = Xoa_ttl.Parse(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.New(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url);
-		page.Redirect().Itms__add__article(trg_url, trg_ttl, null);
+		page.Redirect_trail().Itms__add__article(trg_url, trg_ttl, null);
 		wiki.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
 

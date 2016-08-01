@@ -20,7 +20,7 @@ import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; i
 public class GfuiStatusBoxBnd implements Gfo_invk {
 	public GfuiStatusBox Box() {return statusBox;} GfuiStatusBox statusBox = GfuiStatusBox_.new_("statusBox");
 	void ShowTime() {
-		statusBox.ExecUsrMsg(UsrMsgWkr_.Type_Note, UsrMsg.new_(DateAdp_.Now().XtoStr_gplx_long()));
+		statusBox.ExecUsrMsg(UsrMsgWkr_.Type_Note, UsrMsg.new_(Datetime_now.Get().XtoStr_gplx_long()));
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_ShowTime))			ShowTime();

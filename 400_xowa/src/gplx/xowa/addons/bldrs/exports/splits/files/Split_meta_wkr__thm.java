@@ -35,7 +35,7 @@ class Split_meta_wkr__thm extends Split_meta_wkr_base {
 	}
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
-		attach_mgr.Conn_others_(new Db_attach_itm("atr_db", atr_conn));
+		attach_mgr.Conn_links_(new Db_attach_itm("atr_db", atr_conn));
 		return String_.Concat_lines_nl
 		( "SELECT  t.thm_id, t.thm_owner_id, t.thm_w, t.thm_h, t.thm_time, t.thm_page, t.thm_bin_db_id, t.thm_size, t.thm_modified, t.thm_hash, fir.page_id"
 		, "FROM    <atr_db>fsdb_thm t"

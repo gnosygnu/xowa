@@ -24,8 +24,8 @@ public class Pft_func_date_name extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		DateAdp date = DateAdp_.MinValue;
 	    switch (date_tid) {
-	        case Pft_func_date_int.Date_tid_lcl: date = DateAdp_.Now(); break;
-	        case Pft_func_date_int.Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;
+	        case Pft_func_date_int.Date_tid_lcl: date = Datetime_now.Get(); break;
+	        case Pft_func_date_int.Date_tid_utc: date = Datetime_now.Get().XtoUtc(); break;
 	        case Pft_func_date_int.Date_tid_rev: date = ctx.Page().Db().Page().Modified_on(); break;
 			default: throw Err_.new_unhandled(date_tid);
 	    }

@@ -21,7 +21,7 @@ public class Gfs_Date_tst {
 	@Before public void setup() {
 		fx = new GfsCoreFxt();
 		fx.AddObj(DateAdp_.Gfs, "Date_");
-		Tfds.Now_enabled_y_();
+		Datetime_now.Manual_y_();
 	}	GfsCoreFxt fx;
 	@Test  public void Now() {
 		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now")), DateAdp_.parse_gplx("2001-01-01 00:00:00.000"));

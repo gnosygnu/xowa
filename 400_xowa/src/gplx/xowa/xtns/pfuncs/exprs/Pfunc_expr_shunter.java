@@ -23,7 +23,7 @@ public class Pfunc_expr_shunter {
 	private final    Btrie_fast_mgr trie = expression_(); private final    Btrie_rv trv = new Btrie_rv();
 	private final    Val_stack val_stack = new Val_stack();
 	private final    Func_tkn_stack prc_stack = new Func_tkn_stack();
-	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Bry_bfr Err() {return err_bfr;} private final    Bry_bfr err_bfr = Bry_bfr_.New();
 	public Decimal_adp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
 	public Decimal_adp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {

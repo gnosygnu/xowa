@@ -50,7 +50,7 @@ public class Int_pool {
 				return;
 			}
 			if (available_len == uid_max) {
-				available_list.Add(Int_obj_val.new_(v));
+				available_list.Add(new Int_obj_val(v));
 				available_list.Sort();
 				for (int i = 0; i < available_len; ++i) {
 					Int_obj_val itm = (Int_obj_val)available_list.Get_at(i);
@@ -62,7 +62,7 @@ public class Int_pool {
 			}
 			else {
 				// dbg_bfr.Add_str("-:a:").Add_int_variable(v).Add_byte_nl();
-				available_list.Add(Int_obj_val.new_(v));
+				available_list.Add(new Int_obj_val(v));
 				++available_len;
 			}
 		}

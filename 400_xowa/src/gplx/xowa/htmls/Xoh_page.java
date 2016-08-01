@@ -22,13 +22,13 @@ import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.x
 import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xoh_page implements Xoa_page {
 	// core
-	public Xow_wiki					Wiki()				{return wiki;}			private Xow_wiki wiki;
-	public Xoa_url					Url()				{return page_url;}		private Xoa_url page_url;
-	public Xoa_ttl					Ttl()				{return page_ttl;}		private Xoa_ttl page_ttl;
-	public Xopg_db_data				Db()				{return db;}			private final    Xopg_db_data db = new Xopg_db_data();
-	public Xopg_redirect_mgr		Redirect()			{return redirect;}		private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
-	public Xopg_html_data			Html_data()			{return html;}			private final    Xopg_html_data html = new Xopg_html_data();
-	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}			private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
+	public Xow_wiki					Wiki()				{return wiki;}				private Xow_wiki wiki;
+	public Xoa_url					Url()				{return page_url;}			private Xoa_url page_url;
+	public Xoa_ttl					Ttl()				{return page_ttl;}			private Xoa_ttl page_ttl;
+	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
+	public Xopg_redirect_mgr		Redirect_trail()	{return redirect;}			private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
+	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
+	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 
 	public void						Xtn_gallery_packed_exists_y_() {}
 	public boolean					Xtn__timeline_exists() {return xtn__timeline_exists;} private boolean xtn__timeline_exists; public void Xtn__timeline_exists_y_() {xtn__timeline_exists = true;}
@@ -54,7 +54,7 @@ public class Xoh_page implements Xoa_page {
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		html.Toc_mgr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
 	}
-	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page) {
+	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page, byte[] toc_label) {
 		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
 
 		db.Html().Html_bry_(page.Db().Html().Html_bry());
@@ -67,7 +67,7 @@ public class Xoh_page implements Xoa_page {
 		this.content_sub = html.Content_sub();
 		this.sidebar_div = Xoh_page_.Save_sidebars(tmp_bfr, page, html);
 
-		html.Toc_mgr().Init(Bry_.Empty, page_url.Page_bry());
+		html.Toc_mgr().Init(toc_label, page_url.Page_bry());
 		return this;
 	}
 	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {

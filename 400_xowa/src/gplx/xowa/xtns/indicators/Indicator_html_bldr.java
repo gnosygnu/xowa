@@ -36,7 +36,7 @@ public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 		bldr_itm.Init(list);
 		fmtr_grp.Bld_bfr_many(bfr, bldr_itm);
 	}
-	private static final Bry_fmtr
+	private static final    Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div class='mw-indicators'>~{itms}"
@@ -54,7 +54,7 @@ class Indicator_html_bldr_itm implements gplx.core.brys.Bfr_arg {
 			fmtr_itm.Bld_bfr_many(bfr, xnde.Name(), xnde.Html());
 		}
 	}
-	private static final Bry_fmtr
+	private static final    Bry_fmtr
 	 fmtr_itm = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <div id='mw-indicator-~{name}' class='mw-indicator'>~{html}</div>"

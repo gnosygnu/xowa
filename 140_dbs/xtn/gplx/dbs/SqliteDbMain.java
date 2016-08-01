@@ -163,7 +163,7 @@ public class SqliteDbMain {
 		);
 		stat.executeUpdate(sql);
 	
-		Console_adp__sys.Instance.Write_str_w_nl(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
+		Console_adp__sys.Instance.Write_str_w_nl(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 //		stat.executeUpdate("BEGIN TRANSACTION");
 		stat.executeUpdate("PRAGMA synchronous=OFF");
 		stat.executeUpdate("PRAGMA count_changes=OFF");

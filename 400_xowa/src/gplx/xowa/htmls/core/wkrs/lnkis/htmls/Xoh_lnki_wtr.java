@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.langs.htmls.*; import gplx.xowa.files.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wbases.core.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.wikis.pages.lnkis.*;
 public class Xoh_lnki_wtr {

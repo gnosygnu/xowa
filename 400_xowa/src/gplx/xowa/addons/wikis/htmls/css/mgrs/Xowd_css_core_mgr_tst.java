@@ -64,7 +64,7 @@ class Xowd_css_core_mgr_fxt {
 	private final    Bry_bfr bfr = Bry_bfr_.Reset(32);
 	private Xowd_css_core_tbl core_tbl; private Xowd_css_file_tbl file_tbl;
 	public void Clear() {
-		Tfds.Now_enabled_y_();
+		Datetime_now.Manual_y_();
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.Instance.New(Io_url_.mem_fil_("mem/db/css.sqlite3"));

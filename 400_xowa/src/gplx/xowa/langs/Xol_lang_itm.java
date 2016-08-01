@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.gfui.draws.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*;
+import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.commas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*; import gplx.core.intls.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.guis.langs.*;
 public class Xol_lang_itm implements Gfo_invk {
@@ -55,6 +55,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	public Xol_case_mgr			Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr;
 	public void					Case_mgr_u8_() {case_mgr = Xol_case_mgr_.U8();}		// TEST:
 	public Xol_lang_itm			Case_mgr_(Xol_case_mgr v) {this.case_mgr = v; return this;}		// TEST:
+	public Xol_comma_wkr		Comma_wkr() {return comma_wkr;} private final    Xol_comma_wkr comma_wkr = new Xol_comma_wkr__add();
 	public Xol_font_info		Gui_font() {return gui_font;} private final    Xol_font_info gui_font = new Xol_font_info(null, 0, FontStyleAdp_.Plain);
 	public byte[]				Fallback_bry() {return fallback_bry;}
 	public Xol_lang_itm			Fallback_bry_(byte[] v) {
@@ -83,6 +84,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	public void Evt_lang_changed() {
 		lnki_arg_parser.Evt_lang_changed(this);
 		func_regy.Evt_lang_changed(this);
+		comma_wkr.Evt_lang_changed(this);
 	}
 	private byte[]				X_axis_end() {return dir_ltr ? X_axis_end_right : X_axis_end_left;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -102,7 +104,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_link_trail))				return lnki_trail_mgr;
 		else if	(ctx.Match(k, Invk_x_axis_end))				return String_.new_u8(X_axis_end());
 		else if	(ctx.Match(k, Invk_this))					return this;
-		else if	(ctx.Match(k, Xoae_app.Invk_app))			return Xoa_app_.Gfs_mgr().Root_invk();
+		else if	(ctx.Match(k, Xoae_app.Invk_app))			return lang_mgr.Gfs_mgr().Root_invk();
 		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -137,7 +139,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		fallback_dupes_regy.Del(fallback_lang);
 	}
 	private void Load_lang(byte[] v) {
-		Xoa_gfs_mgr gfs_mgr = Xoa_app_.Gfs_mgr(); Xoa_fsys_mgr app_fsys_mgr = gfs_mgr.App_fsys_mgr();
+		Xoa_gfs_mgr gfs_mgr = lang_mgr.Gfs_mgr(); Xoa_fsys_mgr app_fsys_mgr = gfs_mgr.App_fsys_mgr();
 		gfs_mgr.Run_url_for(this, Xol_lang_itm_.xo_lang_fil_(app_fsys_mgr, String_.new_a7(v)));
 		gfs_mgr.Run_url_for(gfs_mgr.Root_invk(), Xol_convert_regy.Bld_url(app_fsys_mgr, key_str));
 	}

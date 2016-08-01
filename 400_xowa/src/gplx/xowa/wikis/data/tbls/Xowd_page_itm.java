@@ -21,7 +21,7 @@ import gplx.xowa.wikis.nss.*;
 public class Xowd_page_itm {
 	public Xowd_page_itm() {this.Clear();}
 	public int			Id() {return id;} public Xowd_page_itm Id_(int v) {id = v; id_val = null; return this;} private int id;
-	public Int_obj_val	Id_val() {if (id_val == null) id_val = Int_obj_val.new_(id); return id_val;} private Int_obj_val id_val;
+	public Int_obj_val	Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} private Int_obj_val id_val;
 	public int			Ns_id() {return ns_id;} public Xowd_page_itm Ns_id_(int v) {ns_id = v; return this;} private int ns_id;
 	public byte[]		Ttl_page_db() {return ttl_page_db;} public Xowd_page_itm Ttl_page_db_(byte[] v) {ttl_page_db = v; return this;} private byte[] ttl_page_db;	// EX: Category1
 	public byte[]		Ttl_full_db() {return ttl_full_db;} private byte[] ttl_full_db;	// EX: Category:Category1

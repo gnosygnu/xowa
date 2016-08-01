@@ -58,7 +58,7 @@ public class Split_wkr__rndm implements Split_wkr {
 		Rndm_seq_tbl seq_tbl = new Rndm_seq_tbl(trg_conn); seq_tbl.Create_tbl();
 		Split_tbl_.Bld_insert_by_select(tmp_bfr, seq_tbl.Tbl_name(), seq_tbl.Flds());
 		tmp_bfr.Add_str_u8_fmt("WHERE {0} = {1} AND {2} = {3}", seq_tbl.Fld__qry_idx(), bldr.Qry_idx(), seq_tbl.Fld__rng_idx(), bldr.Rng_idx());
-		attach_mgr.Conn_main_(trg_conn).Conn_others_(new Db_attach_itm("src_db", bldr.Conn()));
+		attach_mgr.Conn_main_(trg_conn).Conn_links_(new Db_attach_itm("src_db", bldr.Conn()));
 		attach_mgr.Exec_sql(tmp_bfr.To_str_and_clear());
 //			bldr.Conn().Txn_bgn("rndm");
 	}

@@ -44,7 +44,7 @@ public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 		int len = bnd_mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_bnd_itm bnd = (Xog_bnd_itm)bnd_mgr.Get_at(i);
-			uids.Add(Int_obj_val.new_(bnd.Uid()), bnd);
+			uids.Add(new Int_obj_val(bnd.Uid()), bnd);
 		}
 		bnd_parser = bnd_mgr.Bnd_parser();
 	}	private Ordered_hash uids; private Gfui_bnd_parser bnd_parser;
@@ -53,7 +53,7 @@ public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 		if (box_bry	== null)	throw parser.Err_row_bgn("bnd missing box", pos);
 		if (ipt_bry	== null)	throw parser.Err_row_bgn("bnd missing ipt", pos);
 		if (uids == null) Init();
-		Xog_bnd_itm bnd = (Xog_bnd_itm)uids.Get_by(Int_obj_val.new_(uid));
+		Xog_bnd_itm bnd = (Xog_bnd_itm)uids.Get_by(new Int_obj_val(uid));
 		int box = Xog_bnd_box_.Xby_gui_str(String_.new_u8(box_bry));
 		IptArg ipt = IptArg_.parse_or_none_(bnd_parser.Xto_gfui(String_.new_u8(ipt_bry)));
 		bnd_mgr.Del(bnd, ipt);

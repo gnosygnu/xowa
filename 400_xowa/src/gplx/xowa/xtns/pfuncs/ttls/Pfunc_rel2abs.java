@@ -34,7 +34,9 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
 		if (orig.length == 0) orig = ctx.Page().Ttl().Full_txt_w_ttl_case();
-		bfr.Add(Rel2abs(ctx.Wiki().Utl__bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+		try {bfr.Add(Rel2abs(tmp_bfr, qry, orig));}
+		finally {tmp_bfr.Mkr_rls();}
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
 		int last = end - 1;

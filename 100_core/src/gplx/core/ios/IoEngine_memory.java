@@ -68,7 +68,7 @@ public class IoEngine_memory extends IoEngine_base {
 		return FetchFil(args.Url()).Text();
 	}
 	void SaveFilStr(Io_url url, String text) {
-		DateAdp time = DateAdp_.Now();
+		DateAdp time = Datetime_now.Get();
 		IoItmFil_mem fil = IoItmFil_mem.new_(url, String_.Len(text), time, text);
 		AddFilToDir(url.OwnerDir(), fil);
 	}		
@@ -76,7 +76,7 @@ public class IoEngine_memory extends IoEngine_base {
 		Io_url url = args.Url(); String text = args.Text();
 		if (ExistsFil_api(url)) {
 			IoItmFil_mem fil = FetchFil(url);
-			fil.ModifiedTime_(DateAdp_.Now());
+			fil.ModifiedTime_(Datetime_now.Get());
 			fil.Text_set(fil.Text() + text);
 		}
 		else

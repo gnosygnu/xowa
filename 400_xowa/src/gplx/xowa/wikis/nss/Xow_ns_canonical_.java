@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*;
 public class Xow_ns_canonical_ {
-	public static final Xow_ns[] Ary = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
+	public static final    Xow_ns[] Ary = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
 	{ New_itm(Xow_ns_.Tid__media					, Xow_ns_.Key__media)
 	, New_itm(Xow_ns_.Tid__special					, Xow_ns_.Key__special)
 	, New_itm(Xow_ns_.Tid__talk						, Xow_ns_.Key__talk)
@@ -47,7 +47,7 @@ public class Xow_ns_canonical_ {
 			int len = Ary.length;
 			for (int i = 0; i < len; ++i) {
 				Xow_ns ns = Ary[i];
-				id_hash.Add(ns.Name_db(), Int_obj_val.new_(ns.Id()));
+				id_hash.Add(ns.Name_db(), new Int_obj_val(ns.Id()));
 			}
 		}
 		Object rv_obj = id_hash.Get_by(key);

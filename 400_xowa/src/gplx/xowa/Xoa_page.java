@@ -22,11 +22,9 @@ public interface Xoa_page {
 	Xoa_url					Url(); byte[] Url_bry_safe();
 	Xoa_ttl					Ttl();
 	Xopg_db_data			Db();
-	Xopg_redirect_mgr		Redirect();
+	Xopg_redirect_mgr		Redirect_trail();
 	Xopg_html_data			Html_data();
 	Xopg_hdump_data			Hdump_mgr();
-
-	// Xopg_lnki_list			Redlink_list();
 
 	Xoa_page__commons_mgr	Commons_mgr();
 	void					Xtn_gallery_packed_exists_y_();

@@ -131,7 +131,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 	private String[] Wikidata_get_label(GfoMsg m) {
 		try {
 			Thread_adp_.Sleep(10);	// slow down calls to prevent random crashing in XulRunner; DATE:2014-04-23
-			gplx.xowa.xtns.wdatas.Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
+			gplx.xowa.xtns.wbases.Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 			wdata_mgr.Wdata_wiki().Init_assert();	// NOTE: must assert else ns_mgr won't load Property
 			int len = m.Args_count();
 			if (len < 1) return null;
@@ -141,7 +141,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 			for (int i = 1; i < len; i++) {
 				try {
 					byte[] ttl_bry = m.Args_getAt(i).Val_to_bry();
-					gplx.xowa.xtns.wdatas.Wdata_doc page = wdata_mgr.Doc_mgr.Get_by_xid_or_null(ttl_bry); if (page == null) continue;
+					gplx.xowa.xtns.wbases.Wdata_doc page = wdata_mgr.Doc_mgr.Get_by_xid_or_null(ttl_bry); if (page == null) continue;
 					for (int j = 0; j < langs_len; j++) {
 						byte[] lang_key = langs[j];
 						if		(Bry_.Eq(lang_key, Wikidata_get_label_xowa_ui_lang))

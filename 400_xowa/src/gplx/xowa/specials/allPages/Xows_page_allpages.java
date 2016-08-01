@@ -122,22 +122,26 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, Gfo_invk, Xow
 	public Xow_ns Init_ns() {return init_ns;} private Xow_ns init_ns;
 	public void Build_html(Xoae_page page) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		byte[] anchor_prv = Build_html_end(tmp_bfr, rslt_prv, false);
-		byte[] anchor_nxt = Build_html_end(tmp_bfr, rslt_nxt, true);
+		Bry_fmtr fmtr = Bry_fmtr.New__tmp();
+
+		byte[] anchor_prv = Build_html_end(tmp_bfr, fmtr, rslt_prv, false);
+		byte[] anchor_nxt = Build_html_end(tmp_bfr, fmtr, rslt_nxt, true);
 		html_all.Bld_bfr_many(tmp_bfr, this, anchor_prv, anchor_nxt);
 		page.Db().Text().Text_bry_(tmp_bfr.To_bry_and_clear());
 		tmp_bfr.Mkr_rls();
 		page.Html_data().Html_restricted_n_();
 	}
-	byte[] Build_html_end(Bry_bfr bfr, Xowd_page_itm itm, boolean fwd) {
+	byte[] Build_html_end(Bry_bfr bfr, Bry_fmtr fmtr, Xowd_page_itm itm, boolean fwd) {
 		Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, itm); if (ttl == null) return Bry_.Empty;	// occurs when range is empty; EX: Module:A in simplewikibooks
 		int msg_id = fwd ? Xol_msg_itm_.Id_sp_allpages_fwd : Xol_msg_itm_.Id_sp_allpages_bwd;
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(msg_id);
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512().Mkr_rls();
-		byte[] lbl_text = msg_itm.Fmt(tmp_bfr, ttl.Full_txt_w_ttl_case());
-		byte[] args__rest = arg_hash.Concat(tmp_bfr, Bry_arg_ns, Bry_arg_hideredirects);
-		byte[] arg_from = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(ttl.Page_txt_wo_qargs());
-		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		try {
+			byte[] lbl_text = msg_itm.Fmt(tmp_bfr, fmtr, ttl.Full_txt_w_ttl_case());
+			byte[] args__rest = arg_hash.Concat(tmp_bfr, Bry_arg_ns, Bry_arg_hideredirects);
+			byte[] arg_from = gplx.langs.htmls.encoders.Gfo_url_encoder_.Id.Encode(ttl.Page_txt_wo_qargs());
+			return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
+		} finally {tmp_bfr.Mkr_rls();}
 	}
 	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xowd_page_itm itm) {
 		byte[] ttl_bry = itm.Ttl_page_db();

@@ -76,5 +76,5 @@ class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;
 		return -Long_.Compare(lhs.Seconds(), rhs.Seconds());	// - to sort from largest to smallest
 	}
-	public static final    Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}
+	public static final    Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}// TS.static
 }

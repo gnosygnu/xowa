@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;	
+import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*;	
 public class Scrib_lib_wikibase_srl_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_lib_wikibase_srl_fxt fxt = new Scrib_lib_wikibase_srl_fxt();
 	@Test   public void Label() {
@@ -126,7 +126,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Claims_str() {
-		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_str(2, "Moon"));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_string(2, "Moon"));
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"
@@ -327,7 +327,7 @@ public class Scrib_lib_wikibase_srl_tst {
 	}
 	@Test   public void Qualifiers() {
 		Wdata_wiki_mgr_fxt wdata_fxt = fxt.Wdata_fxt();
-		fxt.Init_prop(wdata_fxt.Make_claim_str(2, "Earth").Qualifiers_(wdata_fxt.Make_qualifiers(wdata_fxt.Make_qualifiers_grp(3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06")))));
+		fxt.Init_prop(wdata_fxt.Make_claim_string(2, "Earth").Qualifiers_(wdata_fxt.Make_qualifiers(wdata_fxt.Make_qualifiers_grp(3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06")))));
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"
@@ -388,7 +388,7 @@ class Scrib_lib_wikibase_srl_fxt {
 		wdoc_bldr.Add_alias(lang, ary);
 		return this;
 	}
-	public Scrib_lib_wikibase_srl_fxt Init_prop(Wdata_claim_itm_core prop) {wdoc_bldr.Add_claims(prop); return this;}
+	public Scrib_lib_wikibase_srl_fxt Init_prop(Wbase_claim_base prop) {wdoc_bldr.Add_claims(prop); return this;}
 	public Scrib_lib_wikibase_srl_fxt Test(String... expd) {return Test(false, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, String... expd) {
 		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(wdoc_bldr.Xto_wdoc(), header_enabled, base0);

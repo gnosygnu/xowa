@@ -38,7 +38,7 @@ class Xoa_site_cfg_loader__db implements Xoa_site_cfg_loader {
 		cfg_tbl.Upsert_bry(Grp__xowa_wm_api, db_key, data);
 	}
 	public static String Bld_meta(int loader_tid) {
-		return String_.Format("//#xowa|{0}|{1}|{2}", Xoa_app_.Version, Xoa_site_cfg_loader_.Get_key(loader_tid), DateAdp_.Now().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss());
+		return String_.Format("//#xowa|{0}|{1}|{2}", Xoa_app_.Version, Xoa_site_cfg_loader_.Get_key(loader_tid), Datetime_now.Get().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss());
 	}
 	public static final String Grp__xowa_wm_api = "xowa.site_cfg";
 }

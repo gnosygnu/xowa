@@ -33,7 +33,8 @@ public class Xow_page_cache_itm implements Xowd_text_bry_owner {
 	public int Redirect_id() {return redirect_id;} private int redirect_id;
 	public void Set_text_bry_by_db(byte[] v) {this.wtxt__direct = v;}
 	public void Set_page_ids(int page_id, int redirect_id) {this.page_id = page_id; this.redirect_id = redirect_id;}
-	public void Set_redirect_bry(byte[] trg_wtxt) {
+	public void Set_redirect(Xoa_ttl ttl, byte[] trg_wtxt) {
+		this.ttl = ttl;
 		this.wtxt__redirect = wtxt__direct;
 		this.wtxt__direct = trg_wtxt;
 	}

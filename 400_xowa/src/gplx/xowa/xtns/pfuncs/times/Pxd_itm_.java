@@ -89,7 +89,7 @@ class DateAdpBldr {
 			return date;
 		}
 		else
-			return DateAdp_.Now();	// not dirtied; default to now;
+			return Datetime_now.Get();	// not dirtied; default to now;
 	}
 	public DateAdpBldr Date_(DateAdp v) {date = v; return this;} DateAdp date = null;
 	public void Seg_set(int idx, int val) {

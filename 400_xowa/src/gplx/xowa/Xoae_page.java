@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
-import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.pfuncs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;
 import gplx.xowa.wikis.pages.wtxts.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xoae_page implements Xoa_page {
@@ -34,10 +34,10 @@ public class Xoae_page implements Xoa_page {
 	public Xoa_ttl					Ttl()				{return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url					Url()				{return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank();
 	public byte[]					Url_bry_safe()		{return url == null ? Bry_.Empty : url.Raw();}
-	public Xopg_db_data				Db()				{return db;}			private final    Xopg_db_data db = new Xopg_db_data();
-	public Xopg_redirect_mgr		Redirect()			{return redirect;}		private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
-	public Xopg_html_data			Html_data()			{return html;}			private final    Xopg_html_data html = new Xopg_html_data();
-	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}			private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
+	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
+	public Xopg_redirect_mgr		Redirect_trail()	{return redirect_trail;}	private final    Xopg_redirect_mgr redirect_trail = new Xopg_redirect_mgr();
+	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
+	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 
 	public Xoa_page__commons_mgr	Commons_mgr() {return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public void						Xtn_gallery_packed_exists_y_() {html.Xtn_gallery_packed_exists_y_();}
@@ -81,7 +81,7 @@ public class Xoae_page implements Xoa_page {
 	public void Clear_all() {Clear(true);}
 	public void Clear(boolean clear_scrib) { // NOTE: this is called post-fetch but pre-wtxt; do not clear items set by post-fetch, such as id, ttl, redirected_ttls, data_raw
 		db.Clear();
-		redirect.Clear();
+		redirect_trail.Clear();
 		html.Clear();
 		hdump.Clear();
 		wtxt.Clear();

@@ -19,7 +19,7 @@ package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.vnts.*;
 public class Vnt_mnu_grp_fmtr implements gplx.core.brys.Bfr_arg {
-	private final Xolg_vnt_itm_fmtr itm_fmtr = new Xolg_vnt_itm_fmtr();
+	private final    Xolg_vnt_itm_fmtr itm_fmtr = new Xolg_vnt_itm_fmtr();
 	private Xol_vnt_regy mgr; private byte[] page_vnt;
 	public void Init(Xol_vnt_regy mgr, byte[] wiki_domain, byte[] page_href, byte[] page_vnt) {
 		this.mgr = mgr; this.page_vnt = page_vnt;
@@ -29,7 +29,7 @@ public class Vnt_mnu_grp_fmtr implements gplx.core.brys.Bfr_arg {
 		Xol_vnt_itm mnu_itm = mgr.Get_by(page_vnt);
 		fmtr.Bld_bfr_many(bfr, mnu_itm == null ? Bry_.Empty : mnu_itm.Name(), itm_fmtr);
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <div id='p-variants' role='navigation' class='vectorMenu' aria-labelledby='p-variants-label'>"
 	, "      <h3 id='p-variants-label'><span>~{grp_text}</span><a href='#'></a></h3>"
@@ -53,8 +53,8 @@ class Xolg_vnt_itm_fmtr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, i, itm_cls_selected, wiki_domain, itm.Key(), itm.Name(), page_href);
 		}
 	}
-	private static final byte[] Itm_cls_selected_y = Bry_.new_a7(" class='selected'");
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// NOTE: using "/site/zh.w/zh-hans/A" instead of "/zh-hans/A" b/c it is easier for href_parser; if /site/ ever needs to truly mean "not-this-site", then change this to "/lang/"; DATE:2015-07-30
+	private static final    byte[] Itm_cls_selected_y = Bry_.new_a7(" class='selected'");
+	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// NOTE: using "/site/zh.w/zh-hans/A" instead of "/zh-hans/A" b/c it is easier for href_parser; if /site/ ever needs to truly mean "not-this-site", then change this to "/lang/"; DATE:2015-07-30
 	( ""
 	, "          <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/site/~{wiki_domain}/~{itm_lang}/~{itm_href}' lang='~{itm_lang}' hreflang='~{itm_lang}' class='xowa-hover-off'>~{itm_text}</a></li>"
 	), "itm_idx", "itm_cls_selected", "wiki_domain", "itm_lang", "itm_text", "itm_href"

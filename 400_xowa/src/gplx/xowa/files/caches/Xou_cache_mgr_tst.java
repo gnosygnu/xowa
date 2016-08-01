@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.dbs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xou_cache_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final    Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
 	@Test   public void Update() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1);
@@ -60,7 +60,7 @@ public class Xou_cache_mgr_tst {
 class Xou_cache_mgr_fxt {
 	private Xou_cache_mgr mgr;
 	public void Clear() {
-		Tfds.Now_set(DateAdp_.new_(1970, 1, 1, 0, 0, 0, 0));
+		Datetime_now.Manual_(DateAdp_.new_(1970, 1, 1, 0, 0, 0, 0));
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();			

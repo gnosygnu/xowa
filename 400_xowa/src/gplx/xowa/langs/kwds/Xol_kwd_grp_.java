@@ -466,7 +466,7 @@ default: throw Err_.new_unhandled(id);
 			int len = Bry__.length;
 			for (int i = 0; i < len; i++) {
 				byte[] bry = Bry__[i];
-				hash.Add(bry, Int_obj_val.new_(i));
+				hash.Add(bry, new Int_obj_val(i));
 			}
 		}
 		Object o = hash.Get_by_bry(find);

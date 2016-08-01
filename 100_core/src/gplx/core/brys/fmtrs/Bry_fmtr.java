@@ -27,7 +27,7 @@ public class Bry_fmtr {
 		else				keys.Clear();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)
-			keys.Add(Bry_obj_ref.New(Bry_.new_u8(ary[i])), Int_obj_val.new_(i));
+			keys.Add(Bry_obj_ref.New(Bry_.new_u8(ary[i])), new Int_obj_val(i));
 		dirty = true;
 		return this;
 	}	Hash_adp keys = null;
@@ -232,7 +232,7 @@ public class Bry_fmtr {
 	int baseInt = 0;
 	public static final    byte char_escape = Byte_ascii.Tilde, char_arg_bgn = Byte_ascii.Curly_bgn, char_arg_end = Byte_ascii.Curly_end, char_escape_nl = Byte_ascii.Ltr_n, char_escape_tab = Byte_ascii.Ltr_t, char_eval_bgn = Byte_ascii.Lt, char_eval_end = Byte_ascii.Gt;
 	public static final    Bry_fmtr Null = new Bry_fmtr().Fmt_("");
-	public static Bry_fmtr tmp_() {return new Bry_fmtr().Fmt_("").Keys_();}
+	public static Bry_fmtr New__tmp() {return new Bry_fmtr().Fmt_("").Keys_();}
 	public static Bry_fmtr new_(String fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
 	public static Bry_fmtr new_(byte[] fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
 	public static Bry_fmtr new_() {return new Bry_fmtr();}

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.primitives.*;
 public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
-	Number_parser num_parser = new Number_parser(); 
-	Int_ary_parser int_ary_parser = new Int_ary_parser();
+	private final    Gfo_number_parser number_parser = new Gfo_number_parser(); 
+	private final    Int_ary_parser int_ary_parser = new Int_ary_parser();
 	public Xof_meta_thumb[] Ary() {return ary;} private Xof_meta_thumb[] ary = new Xof_meta_thumb[Ary_max]; static final int Ary_max = 16;
 	public int Len() {return ary_idx;} private int ary_idx;
 	public void Parse_ary(byte[] bry, int bgn, int end) {super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Null);}
@@ -50,11 +50,11 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 			byte b = bry[pos];
 			switch (b) {
 				case Dlm_width:	// "," found; assume width; note that seek commas will be handled by seek
-					itm.Width_(num_parser.Parse(bry, num_bgn, pos).Rv_as_int());
+					itm.Width_(number_parser.Parse(bry, num_bgn, pos).Rv_as_int());
 					num_bgn = pos + Int_.Const_dlm_len;
 					break;
 				case Dlm_seek:
-					itm.Height_(num_parser.Parse(bry, num_bgn, pos).Rv_as_int());
+					itm.Height_(number_parser.Parse(bry, num_bgn, pos).Rv_as_int());
 					num_bgn = pos + Int_.Const_dlm_len;
 					height_found = true;
 					itm.Seeks_(int_ary_parser.Parse_ary(bry, num_bgn, end, Byte_ascii.Comma));
@@ -64,7 +64,7 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 			++pos;
 		}
 		if (!height_found)	// handle '1:2,3' as opposed to '1:2,3@4'
-			itm.Height_(num_parser.Parse(bry, num_bgn, end).Rv_as_int());
+			itm.Height_(number_parser.Parse(bry, num_bgn, end).Rv_as_int());
 		ary[ary_idx++] = itm;
 	}
 	static final String GRP_KEY = "xowa.meta.itm.file";

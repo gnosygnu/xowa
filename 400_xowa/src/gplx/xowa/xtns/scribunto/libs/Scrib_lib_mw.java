@@ -268,7 +268,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		bfr.Mkr_rls();
 		return rslt.Init_obj(bfr.To_str_and_clear());
 	}
-	private Keyval[] CallParserFunction_parse_args(Number_parser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, Keyval[] args) {
+	private Keyval[] CallParserFunction_parse_args(Gfo_number_parser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, Keyval[] args) {
 		List_adp rv = List_adp_.New();
 		// flatten args
 		int args_len = args.length;

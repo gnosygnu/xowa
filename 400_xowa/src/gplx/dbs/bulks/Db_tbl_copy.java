@@ -29,7 +29,7 @@ public class Db_tbl_copy {
 		trg_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New(trg_tbl, tbl.Flds().To_ary(), tbl.Idxs().To_ary()));
 
 		// do copy
-		attach_mgr.Conn_main_(trg_conn).Conn_others_(new Db_attach_itm("src_db", src_conn));
+		attach_mgr.Conn_main_(trg_conn).Conn_links_(new Db_attach_itm("src_db", src_conn));
 		attach_mgr.Exec_sql(Bld_sql(tbl, src_tbl, trg_tbl));
 	}
 	public String Bld_sql(Dbmeta_tbl_itm tbl, String src_tbl, String trg_tbl) {

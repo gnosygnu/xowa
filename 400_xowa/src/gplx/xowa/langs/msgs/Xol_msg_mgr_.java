@@ -40,7 +40,7 @@ public class Xol_msg_mgr_ {
 		return msg_itm == null ? null : String_.new_u8(msg_itm.Val());
 	}
 	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[][] fmt_args) {
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();
@@ -52,7 +52,7 @@ public class Xol_msg_mgr_ {
 		if (!has_fmt && !has_tmpl)		// no fmt or tmpl; just add val
 			return msg_val;
 		if (has_fmt) {					// fmt exists; fmt first (before tmpl text); EX: Expression error: Unrecognised word "~{0}"
-			Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Missing_bgn_(Missing_bry).Missing_end_(Bry_.Empty).Missing_adj_(1);
+			Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Missing_bgn_(Missing_bry).Missing_end_(Bry_.Empty).Missing_adj_(1);
 			tmp_fmtr.Fmt_(msg_val);
 			tmp_fmtr.Bld_bfr(tmp_bfr, fmt_args);
 			msg_val = tmp_bfr.To_bry_and_clear();

@@ -118,7 +118,7 @@ public class Xog_tab_itm_edit_mgr {
 		tab.View_mode_(old);
 	}
 	private static void Invalidate(Xowe_wiki wiki) {// invalidate everything on updates; especially needed for page transclusion; {{/my_subpage}} DATE:2014-04-10
-		wiki.Parser_mgr().Scrib().Core().Term();
+		wiki.Parser_mgr().Scrib().Core_term();
 		wiki.Cache_mgr().Free_mem_all();
 	}
 	private static byte[] Get_new_text(Xog_tab_itm tab) {

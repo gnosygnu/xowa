@@ -62,11 +62,11 @@ public class Xod_page_mgr {
 		catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e)); return rv;}
 
 		// handle redirects; EX: Special:XowaWikiInfo
-		Xopg_redirect_itm redirect_itm = page.Redirect().Itms__get_at_nth_or_null();
+		Xopg_redirect_itm redirect_itm = page.Redirect_trail().Itms__get_at_nth_or_null();
 		if (redirect_itm != null)
 			return Get_page(wiki, redirect_itm.Url());
 
-		rv.Init(-1, -1, String_.new_u8(ttl.Page_txt()), String_.new_u8(ttl.Page_db()), null, null, DateAdp_.Now().XtoStr_fmt_iso_8561(), false, false, false, 0, "", "", "");
+		rv.Init(-1, -1, String_.new_u8(ttl.Page_txt()), String_.new_u8(ttl.Page_db()), null, null, Datetime_now.Get().XtoStr_fmt_iso_8561(), false, false, false, 0, "", "", "");
 		rv.Init_by_hpg(page);
 		Xoh_section_itm section = new Xoh_section_itm(1, 1, Bry_.Empty, Bry_.Empty);
 		section.Content_(page.Html_data().Custom_body());

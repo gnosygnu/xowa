@@ -42,7 +42,7 @@ class Split_srch_init {
 		int len = srch_db_mgr.Tbl__link__len();
 		for (int i = 0; i < len; ++i) {
 			Db_conn link_conn = srch_db_mgr.Tbl__link__get_at(i).conn;
-			attach_mgr.Conn_others_(new Db_attach_itm("word_db", word_conn), new Db_attach_itm("link_db", link_conn));
+			attach_mgr.Conn_links_(new Db_attach_itm("word_db", word_conn), new Db_attach_itm("link_db", link_conn));
 			attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
 			( "INSERT INTO split_search_word (word_id, word_text, link_count, link_count_score, link_score_min, link_score_max, page_uid, page_ns, page_id, page_score)"
 			, "SELECT  sw.word_id, sw.word_text, sw.link_count, sw.link_count_score, sw.link_score_min, sw.link_score_max, Min(pr.page_uid), -1, -1, -1"

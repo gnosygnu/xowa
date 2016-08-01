@@ -66,8 +66,9 @@ class Xoa_site_cfg_mgr_fxt {
 	private final    Xoa_site_cfg_mgr site_cfg_mgr;
 	private final    Db_cfg_tbl cfg_tbl;
 	private final    Json_printer printer = new Json_printer();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoa_site_cfg_mgr_fxt() {
-		// Xoa_app_.Usr_dlg_(Xoa_app_.usr_dlg_console_());
+		// Xoa_app_.Usr_dlg_(Xoa_app_.New__usr_dlg__console());
 		Xoa_test_.Inet__init();
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
@@ -76,14 +77,14 @@ class Xoa_site_cfg_mgr_fxt {
 		this.site_cfg_mgr = app.Site_cfg_mgr();
 	}
 	public void Init() {
-		Tfds.Now_enabled_y_(); Tfds.Now_freeze_y_();
+		Datetime_now.Manual_y_(); Datetime_now.Autoincrement_n_();
 		Io_mgr.Instance.InitEngine_mem();
 		cfg_tbl.Delete_grp(Xoa_site_cfg_loader__db.Grp__xowa_wm_api);
 		site_cfg_mgr.Init_loader_bgn(wiki);
 		app.Utl__inet_conn().Clear();
 	}
 	public void Term() {
-		Tfds.Now_enabled_n_();
+		Datetime_now.Manual_n_();
 	}
 	public void Init_db(String key, String data) {
 		cfg_tbl.Assert_bry(Xoa_site_cfg_loader__db.Grp__xowa_wm_api, key, Bry_.new_u8(data));
@@ -93,7 +94,7 @@ class Xoa_site_cfg_mgr_fxt {
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Init_inet(String data) {
-		String url = Xoa_site_cfg_loader__inet.Bld_url(wiki.Domain_str(), site_cfg_mgr.Data_hash(), site_cfg_mgr.Itm_ary());
+		String url = Xoa_site_cfg_loader__inet.Bld_url(tmp_bfr, wiki.Domain_str(), site_cfg_mgr.Data_hash(), site_cfg_mgr.Itm_ary());
 		app.Utl__inet_conn().Upload_by_bytes(url, Bry_.new_u8(data));
 	}
 	public void Init_fsys(String key, String data) {
@@ -123,7 +124,7 @@ class Xoa_site_cfg_mgr_fxt {
 		Tfds.Eq(expd, String_.Mid(api_url, String_.FindBwd(api_url, "=") + 1));
 	}
 	public String Make_api(byte[]... sections) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		bfr.Add_str_a7("{'query':");
 		int len = sections.length;
 		bfr.Add_str_a7("{");
@@ -136,7 +137,7 @@ class Xoa_site_cfg_mgr_fxt {
 		return printer.Print_by_bry(Bry_.new_u8(Json_doc.Make_str_by_apos(bfr.To_str_and_rls()))).To_str();
 	}
 	public byte[] Make_api_interwikimap(String... ary) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		bfr.Add_str_a7("'interwikimap':");
 		int len = ary.length;
 		bfr.Add_str_a7("[");
@@ -150,7 +151,7 @@ class Xoa_site_cfg_mgr_fxt {
 		return bfr.To_bry_and_clear();
 	}
 	public byte[] Make_api_extensiontags(String... ary) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		bfr.Add_str_a7("'extensiontags':");
 		int len = ary.length;
 		bfr.Add_str_a7("[");
@@ -162,7 +163,7 @@ class Xoa_site_cfg_mgr_fxt {
 		return bfr.To_bry_and_clear();
 	}
 	public String Make_data(int loader_tid, int flds, String... ary) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		if (loader_tid != Xoa_site_cfg_loader_.Tid__null)	// null when constructing data for fsys
 			bfr.Add_str_u8(Xoa_site_cfg_loader__db.Bld_meta(loader_tid)).Add_byte_nl();
 		int len = ary.length;

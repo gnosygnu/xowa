@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-// using gplx.langs.jsons;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
-import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.times.*;
+import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.wbases.hwtrs.*;
 public class Xow_parser_mgr {
 	private final    Xowe_wiki wiki; private final    Xop_tkn_mkr tkn_mkr;
 	private Xop_parser anchor_encode_parser;
@@ -35,7 +35,14 @@ public class Xow_parser_mgr {
 	public Xof_url_bldr				Url_bldr()			{return url_bldr;} private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public List_adp					Time_parser_itms()	{return time_parser_itms;} private final    List_adp time_parser_itms = List_adp_.New();
 	public Pft_func_formatdate_bldr Date_fmt_bldr()		{return date_fmt_bldr;} private final    Pft_func_formatdate_bldr date_fmt_bldr = new Pft_func_formatdate_bldr();
-	// public Json_parser			Wbase_jdoc_parser() {return wbase_jdoc_parser;} private final    Json_parser wbase_jdoc_parser = new Json_parser();
+	public Gfo_number_parser		Pp_num_parser()		{return pp_num_parser;} private final    Gfo_number_parser pp_num_parser = new Gfo_number_parser().Ignore_space_at_end_y_();
+	public Bry_bfr					Wbase__time__bfr()  {return wbase__time__bfr;} private final    Bry_bfr wbase__time__bfr = Bry_bfr_.New();
+	public Bry_fmtr					Wbase__time__fmtr() {return wbase__time__fmtr;} private final    Bry_fmtr wbase__time__fmtr = Bry_fmtr.new_();
+	public Wdata_hwtr_msgs			Wbase__time__msgs() {
+		if (wbase__time__msgs == null)
+			wbase__time__msgs = Wdata_hwtr_msgs.new_(wiki.Msg_mgr());
+		return wbase__time__msgs;
+	}	private Wdata_hwtr_msgs wbase__time__msgs;
 	public Xop_parser Anchor_encoder() {
 		if (anchor_encode_parser == null) {
 			anchor_encode_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), Xop_lxr_mgr.new_anchor_encoder());

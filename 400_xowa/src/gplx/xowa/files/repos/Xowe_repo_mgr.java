@@ -21,6 +21,7 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
+	private Xofw_file_finder_rslt tmp_rslt = new Xofw_file_finder_rslt();
 	private Xowe_wiki wiki; private final    List_adp repos = List_adp_.New();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -183,7 +184,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 			meta_itm.Vrtl_repo_(Xof_meta_itm.Repo_unknown);
 		}
 		return new_tid;
-	}	private Xofw_file_finder_rslt tmp_rslt = new Xofw_file_finder_rslt();
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add))			return Add_repo(m.ReadBry("src"), m.ReadBry("trg"));
 		else if	(ctx.Match(k, Invk_clear))			{repos.Clear(); repos_ary = null;}	// reset repos_ary variable

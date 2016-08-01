@@ -141,19 +141,6 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	static final    String EmptyStr = TfdsMsgBldr.EmptyStr;
 	static TfdsMsgBldr msgBldr = TfdsMsgBldr.new_();
 	public static final    Io_url RscDir		= Io_url_.Usr().GenSubDir_nest("000", "200_dev", "190_tst");
-	public static DateAdp Now_time0_add_min(int minutes) {return time0.Add_minute(minutes);}
-	@gplx.Internal protected static boolean Now_enabled() {return now_enabled;} private static boolean now_enabled; private static boolean now_freeze;
-	public static void Now_enabled_n_() {now_enabled = false; now_freeze = false;}
-	public static void Now_set(DateAdp date) {now_enabled = true; nowTime = date;}
-	public static void Now_enabled_y_() {now_enabled = true; nowTime = time0;}
-	public static void Now_freeze_y_() {now_freeze = true;}
-	@gplx.Internal protected static DateAdp Now() {
-		DateAdp rv = nowTime;
-		if (!now_freeze) nowTime = rv.Add_minute(1);
-		return rv;
-	}
-	private static final    DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
-	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
 	public static void WriteText(String text) {Console_adp__sys.Instance.Write_str(text);}
 	public static void Write(byte[] s, int b, int e) {Write(Bry_.Mid(s, b, e));}
 	public static void Write() {Write("tmp");}
@@ -163,7 +150,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		int aryLen = Array_.Len(ary);
 		for (int i = 0; i < aryLen; i++)
 			sb.Add_many("'", Object_.Xto_str_strict_or_null_mark(ary[i]), "'", " ");
-		WriteText(sb.To_str() + String_.CrLf);
+		WriteText(sb.To_str() + String_.Lf);
 	}
 }
 class TfdsEqListItmStr_cls_default implements TfdsEqListItmStr {

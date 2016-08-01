@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.langs.msgs.*;
 public class Xol_duration_mgr {
 	private Xol_msg_itm[] interval_msgs = null;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Xol_duration_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
-	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Xol_interval_itm[] Get_duration_intervals(long seconds, Xol_duration_itm[] intervals) {
 		if (intervals == null) intervals = Xol_duration_itm_.Ary_default;
 		Array_.Sort(intervals, Xol_duration_itm_sorter.Instance);
@@ -49,7 +51,7 @@ public class Xol_duration_mgr {
 		for (int i = 0; i < intervals_len; i++) {
 			Xol_interval_itm interval = intervals[i];
 			Xol_msg_itm msg_itm = interval_msgs[interval.Duration_itm().Tid()];
-			byte[] msg_bry = msg_itm.Fmt(tmp_bfr, interval.Val());
+			byte[] msg_bry = msg_itm.Fmt(tmp_bfr, tmp_fmtr, interval.Val());
 			msg_bry = ctx.Wiki().Parser_mgr().Main().Parse_text_to_html(ctx, msg_bry);
 			msgs_ary[i] = msg_bry;
 		}

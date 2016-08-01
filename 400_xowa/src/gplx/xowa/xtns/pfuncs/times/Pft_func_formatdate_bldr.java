@@ -35,12 +35,15 @@ public class Pft_func_formatdate_bldr {
 				chained_fmt = fmt_itm;
 			else {
 				if (chained_fmt != null) {
-					Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
-					synchronized (tmp_bfr) {
+					Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+					try {
 						fmt_itm.Fmt(tmp_bfr, wiki, lang, date, this);
 						chained_fmt.Fmt(tmp_bfr, wiki, lang, date, this);
-						bfr.Add(tmp_bfr.To_bry_and_rls());
+						bfr.Add(tmp_bfr.To_bry_and_clear());
 						chained_fmt = null;
+					}
+					finally {
+						tmp_bfr.Mkr_rls();
 					}
 				}
 				else

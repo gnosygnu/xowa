@@ -21,13 +21,14 @@ import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
 	private final    Gfo_inet_conn inet_conn; private final    Json_parser json_parser;
-	private String api_url; private boolean call_api = true; private Json_doc jdoc;		
+	private String api_url; private boolean call_api = true; private Json_doc jdoc;
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoa_site_cfg_loader__inet(Gfo_inet_conn inet_conn, Json_parser json_parser) {this.inet_conn = inet_conn; this.json_parser = json_parser;}
 	public int Tid() {return Xoa_site_cfg_loader_.Tid__inet;}
 	public void Load_csv__bgn(Xoa_site_cfg_mgr mgr, Xow_wiki wiki) {
 		this.call_api = true;
 		this.jdoc = null;
-		this.api_url = Bld_url(wiki.Domain_str(), mgr.Data_hash(), mgr.Itm_ary());
+		this.api_url = Bld_url(tmp_bfr, wiki.Domain_str(), mgr.Data_hash(), mgr.Itm_ary());
 	}
 	public String Api_url() {return api_url;}
 	public byte[] Load_csv(Xoa_site_cfg_mgr mgr, Xow_wiki wiki, Xoa_site_cfg_itm__base itm) {
@@ -41,8 +42,7 @@ public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
 		Json_itm js_itm = jdoc.Get_grp_many(Bry__query, itm.Key_bry()); if (js_itm == null) return null;
 		return itm.Parse_json(wiki, js_itm);
 	}
-	public static String Bld_url(String domain_str, Hash_adp_bry db_hash, Xoa_site_cfg_itm__base[] itm_ary) {
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+	public static String Bld_url(Bry_bfr tmp_bfr, String domain_str, Hash_adp_bry db_hash, Xoa_site_cfg_itm__base[] itm_ary) {
 		boolean first = true;
 		int len = itm_ary.length;
 		for (int i = 0; i < len; ++i) {
@@ -51,10 +51,10 @@ public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
 			if (first)
 				first = false;
 			else
-				bfr.Add_byte_pipe();
-			bfr.Add(itm.Key_bry());
+				tmp_bfr.Add_byte_pipe();
+			tmp_bfr.Add(itm.Key_bry());
 		}			
-		return first ? null : Xowm_api_mgr.Bld_api_url(domain_str, Qarg__bgn + bfr.To_str_and_rls());
+		return first ? null : Xowm_api_mgr.Bld_api_url(domain_str, Qarg__bgn + tmp_bfr.To_str_and_clear());
 	}
 	private static final    byte[] Bry__query = Bry_.new_a7("query");
 	public static final String

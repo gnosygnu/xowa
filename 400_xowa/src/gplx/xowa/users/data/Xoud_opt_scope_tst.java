@@ -32,7 +32,7 @@ public class Xoud_opt_scope_tst {
 class Xoud_opt_scope_fxt {
 	private final    Xoud_opt_scope_parser parser = new Xoud_opt_scope_parser();
 	public void Clear() {
-		// Gfo_usr_dlg_.I = Xoa_app_.usr_dlg_console_();
+		// Gfo_usr_dlg_.I = Xoa_app_.New__usr_dlg__console();
 	}
 	public Xoud_opt_scope Make(int lang_id, int type_id) {return new Xoud_opt_scope(lang_id, type_id);}
 	public void Test_parse(String raw, Xoud_opt_scope... expd) {

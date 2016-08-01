@@ -61,7 +61,7 @@ public class Xob_css_status {
 		}
 		if (rv.Fs_exists()) {
 			DateAdp fs_timestamp = Timestamp_load(css_dir);
-			DateAdp db_timestamp = DateAdp_.Now();
+			DateAdp db_timestamp = Datetime_now.Get();
 			if (db_timestamp.compareTo(fs_timestamp) == CompareAble_.More)
 				rv.Update_tid_db_y_();		// v2_db and later_version; update from db
 			else

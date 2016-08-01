@@ -19,7 +19,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.primitives.*; import gplx.xowa.wikis.ctgs.*;
 public class Xowd_category_itm {
 	public int Id() {return id;} private int id;
-	public Int_obj_val Id_val() {if (id_val == null) id_val = Int_obj_val.new_(id); return id_val;} Int_obj_val id_val;
+	public Int_obj_val Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} Int_obj_val id_val;
 	public int File_idx() {return file_idx;} private int file_idx;
 	public boolean Hidden() {return hidden;} private boolean hidden;
 	public int Count_all()		{return count_subcs + count_files + count_pages;}
@@ -40,5 +40,5 @@ public class Xowd_category_itm {
 		rv.count_subcs = count_subcs;  rv.count_files = count_files; rv.count_pages = count_pages;
 		return rv;
 	}
-	public static final Xowd_category_itm Null = new Xowd_category_itm(); Xowd_category_itm() {}
+	public static final    Xowd_category_itm Null = new Xowd_category_itm(); Xowd_category_itm() {}
 }

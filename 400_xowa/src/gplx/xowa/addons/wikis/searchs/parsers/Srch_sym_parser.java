@@ -59,7 +59,7 @@ class Srch_sym_parser__split implements Srch_sym_parser {
 		int hooks_len = hooks_ary.length;
 		for (int i = 0; i < hooks_len; ++i) {
 			byte[] hook = hooks_ary[i];
-			trie.Add_obj(hook, Int_obj_val.new_(hook.length));
+			trie.Add_obj(hook, new Int_obj_val(hook.length));
 		}
 	}
 	public int Tid() {return Srch_sym_parser_.Tid__split;}

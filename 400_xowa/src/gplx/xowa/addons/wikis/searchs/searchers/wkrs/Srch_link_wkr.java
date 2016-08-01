@@ -53,7 +53,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 			this.link_tbl_idx = 0;
 			this.link_tbl_nth = ctx.Tbl__link__ary.length - 1;
 			sql_root = Srch_link_wkr_.Find_sql_root(ctx);
-			attach_mgr.Conn_others_(new Db_attach_itm("page_db", ctx.Db__core.Conn()), new Db_attach_itm("word_db", ctx.Tbl__word.conn));
+			attach_mgr.Conn_links_(new Db_attach_itm("page_db", ctx.Db__core.Conn()), new Db_attach_itm("word_db", ctx.Tbl__word.conn));
 			super.Select();
 		}
 		finally {

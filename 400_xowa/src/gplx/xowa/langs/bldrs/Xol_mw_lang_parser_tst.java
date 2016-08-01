@@ -42,11 +42,11 @@ public class Xol_mw_lang_parser_tst {
 			;
 	}
 	@Test  public void Core_keywords_func_currentmonth() {
-		Tfds.Now_enabled_y_();
+		Datetime_now.Manual_y_();
 		fxt.Parse_core("$magicWords = array('currentmonth' => array(0, 'MOISACTUEL'));")
 			.Tst_parse("{{MOISACTUEL}}", "01")
 			;
-		Tfds.Now_enabled_n_();
+		Datetime_now.Manual_n_();
 	}
 	@Test  public void Core_keywords_func_ns() {
 		fxt.Parse_core("$magicWords = array('ns' => array(0, 'ESPACEN'));")

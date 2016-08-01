@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xol_convert_mgr {
-	private final    Ordered_hash tmp_page_list = Ordered_hash_.New_bry();		
+	private final    Ordered_hash tmp_page_list = Ordered_hash_.New_bry();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xol_convert_regy			Converter_regy() {return converter_regy;} private final    Xol_convert_regy converter_regy = new Xol_convert_regy();
 	public Xol_convert_wkr[]		Converter_ary() {return wkr_ary;} private Xol_convert_wkr[] wkr_ary;  private int wkr_ary_len;
 	public void Init(Xol_vnt_regy regy) {
@@ -32,18 +33,12 @@ public class Xol_convert_mgr {
 		}
 	}
 	public byte[] Convert_text(int vnt_idx, byte[] src, int bgn, int end) {
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();
 		Xol_convert_wkr converter = wkr_ary[vnt_idx];
 		converter.Convert_text(tmp_bfr, src, bgn, end);
-		return tmp_bfr.To_bry_and_rls();
+		return tmp_bfr.To_bry_and_clear();
 	}
-	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
-	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
-		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
-		Xowd_page_itm rv = Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);
-		tmp_bfr.Mkr_rls();
-		return rv;
-	}
+	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl)				{return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	public Xowd_page_itm Convert_ttl(Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry)	{return Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);}
 	private Xowd_page_itm Convert_ttl(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
 		synchronized (tmp_page_list) {	// THREAD:
 			int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt

@@ -22,7 +22,7 @@ public class Xoa_cfg_db_txt implements Xoa_cfg_db {
 	private Bry_fmtr fmtr = Bry_fmtr.new_("app.cfgs.get('~{msg}', '~{wiki}').val = '~{val}';\n", "msg", "wiki", "val");
 	public void Cfg_reset_all(Xoa_cfg_mgr cfg_mgr) {
 		Io_url src_url = this.Cfg_url(cfg_mgr);
-		Io_url trg_url = src_url.GenNewNameAndExt("xowa_user_cfg." + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss() + ".gfs");
+		Io_url trg_url = src_url.GenNewNameAndExt("xowa_user_cfg." + Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss() + ".gfs");
 		Io_mgr.Instance.MoveFil_args(src_url, trg_url, true).Exec();
 		if (cfg_mgr.App().Tid_is_edit())
 			((Xoae_app)cfg_mgr.App()).Gui_mgr().Kit().Ask_ok("", "", "Options cleared. Please restart XOWA.");

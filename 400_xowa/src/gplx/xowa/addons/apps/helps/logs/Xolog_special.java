@@ -46,7 +46,7 @@ public class Xolog_special implements Xow_special_page {
 			args_bldr.Add("cmd", "view");
 			if (redirect_to_same_file && file != null)
 				args_bldr.Add("file", file);
-			page.Redirect().Itms__add__special(wiki, Prototype.Special__meta(), args_bldr.To_ary());
+			page.Redirect_trail().Itms__add__special(wiki, Prototype.Special__meta(), args_bldr.To_ary());
 			return;
 		}
 		else

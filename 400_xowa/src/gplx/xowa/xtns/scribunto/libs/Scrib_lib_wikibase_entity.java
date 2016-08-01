@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wdatas.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.xtns.wbases.*;
+import gplx.langs.jsons.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
 public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -42,7 +43,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
-	public boolean FormatPropertyValues(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
+	public boolean FormatPropertyValues(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] qid = args.Pull_bry(0);
 		byte[] pid = args.Pull_bry(1);
 		Xoae_app app = core.App(); Xowe_wiki wiki = core.Wiki();
@@ -52,7 +53,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		int pid_int = Wbase_pid_mgr.To_int_or_null(pid);										// parse as num; EX: p123 -> 123; PAGE:hr.w:Hepatitis DATE:2015-11-08
 		if (pid_int == Wdata_wiki_mgr.Pid_null) pid_int = wdata_mgr.Pid_mgr.Get_or_null(lang, pid);		// parse as name; EX: name > 123
 		if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
-		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
+		Wbase_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
 		return rslt.Init_obj(bfr.To_bry_and_rls());

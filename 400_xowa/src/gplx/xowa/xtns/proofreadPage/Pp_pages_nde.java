@@ -65,7 +65,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
 		page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
-		byte[] page_bry = Bld_wikitext(full_bfr, lst_page_regy);
+		byte[] page_bry = Bld_wikitext(full_bfr, wiki.Parser_mgr().Pp_num_parser(), lst_page_regy);
 		if (page_bry != null)
 			xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
 		page.Pages_recursed_(false);
@@ -98,7 +98,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			bgn_sect_bry = end_sect_bry = null;
 		return true;
 	}
-	private byte[] Bld_wikitext(Bry_bfr full_bfr, Hash_adp_bry lst_page_regy) {
+	private byte[] Bld_wikitext(Bry_bfr full_bfr, Gfo_number_parser num_parser, Hash_adp_bry lst_page_regy) {
 		Pp_index_page index_page = Pp_index_parser.Parse(wiki, ctx, index_ttl, ns_page_id);
 		int index_page_ttls_len = index_page.Page_ttls().Count();
 		byte[] rv = Bry_.Empty;
@@ -107,7 +107,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			if (	index_page.Pagelist_xndes().Count() > 0		// pagelist exists; don't get from args
 				||	index_page_ttls_len == 0					// no [[Page:]] in [[Index:]]
 				)												// NOTE: this simulates MW's if (empty($links)); REF.MW:ProofreadPageRenderer.php|renderPages
-				ttls = Get_ttls_from_xnde_args();
+				ttls = Get_ttls_from_xnde_args(num_parser);
 			else {
 				Int_obj_ref bgn_page_ref = Int_obj_ref.New_neg1(), end_page_ref = Int_obj_ref.New_neg1();
 				ttls = index_page.Get_ttls_rng(wiki, ns_page_id, bgn_page_bry, end_page_bry, bgn_page_ref, end_page_ref);
@@ -149,15 +149,6 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		}
 		return rv;
 	}
-	private static final    byte[] 
-	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
-	, Bry_value			= Bry_.new_a7("|value=")
-	, Bry_toc_cur		= Bry_.new_a7("|current=")
-	, Bry_toc_prv		= Bry_.new_a7("|prev=")
-	, Bry_toc_nxt		= Bry_.new_a7("|next=")
-	, Bry_page_bgn		= Bry_.new_a7("|from=")
-	, Bry_page_end		= Bry_.new_a7("|to=")
-	;
 	private byte[] Bld_wikitext_for_header(Bry_bfr full_bfr, Pp_index_page index_page, byte[] rv) {
 		List_adp main_lnkis = index_page.Main_lnkis();
 		int main_lnkis_len = main_lnkis.Count();
@@ -210,12 +201,12 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		full_bfr.Add(rv);
 		return full_bfr.To_bry_and_clear();
 	}
-	private Xoa_ttl[] Get_ttls_from_xnde_args() {
+	private Xoa_ttl[] Get_ttls_from_xnde_args(Gfo_number_parser num_parser) {
 		if (!Chk_step()) return Ttls_null;
 		List_adp list = List_adp_.New();
-		list = Get_ttls_from_xnde_args__include(list);	if (list == null) return Ttls_null;
-		list = Get_ttls_from_xnde_args__rng(list);		if (list == null) return Ttls_null;
-		list = Get_ttls_from_xnde_args__exclude(list);	if (list == null) return Ttls_null;
+		list = Get_ttls_from_xnde_args__include(list);			if (list == null) return Ttls_null;
+		list = Get_ttls_from_xnde_args__rng(num_parser, list);	if (list == null) return Ttls_null;
+		list = Get_ttls_from_xnde_args__exclude(list);			if (list == null) return Ttls_null;
 		if (include != null || exclude != null)	// sort if include / exclude specified; will skip sort if only range specified
 			list.Sort();
 		return Get_ttls_from_xnde_args__ttls(list);
@@ -226,10 +217,10 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (include_pages == null) return list;	// ignore invalid include; DATE:2014-02-22
 		int include_pages_len = include_pages.length;
 		for (int i = 0; i < include_pages_len; i++)
-			list.Add(Int_obj_val.new_(include_pages[i]));
+			list.Add(new Int_obj_val(include_pages[i]));
 		return list;
 	}
-	private List_adp Get_ttls_from_xnde_args__rng(List_adp list) {
+	private List_adp Get_ttls_from_xnde_args__rng(Gfo_number_parser num_parser, List_adp list) {
 		if (Bry_.Len_eq_0(bgn_page_bry) && Bry_.Len_eq_0(end_page_bry)) return list;	// from and to are blank; exit early
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
 		if (Bry_.Len_gt_0(bgn_page_bry)) {
@@ -258,7 +249,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			return null;
 		}
 		for (int i = bgn_page_int; i <= end_page_int; i++)
-			list.Add(Int_obj_val.new_(i));
+			list.Add(new Int_obj_val(i));
 		return list;
 	}
 	private int Get_max_page_idx(Xowe_wiki wiki, Xoa_ttl index_ttl) {
@@ -283,7 +274,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Hash_adp exclude_pages_hash = Hash_adp_.New();
 		int exclude_pages_len = exclude_pages.length;
 		for (int i = 0; i < exclude_pages_len; i++) {
-			Int_obj_val exclude_page = Int_obj_val.new_(exclude_pages[i]);
+			Int_obj_val exclude_page = new Int_obj_val(exclude_pages[i]);
 			if (!exclude_pages_hash.Has(exclude_page))
 				exclude_pages_hash.Add(exclude_page, exclude_page);
 		}
@@ -372,6 +363,23 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		tmp_parser.Parse_text_to_wdom(rv, tmp_ctx, tmp_ctx.Tkn_mkr(), wikitext, Xop_parser_.Doc_bgn_bos);
 		return rv;
 	}
+	private String Fail_msg_suffix() {
+		String excerpt = Bry_fmtr.Escape_tilde(String_.new_u8(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
+		return String_.Format(" ttl={0} src={1}", String_.new_u8(cur_page_ttl.Full_db()), excerpt);
+	}
+	private String Fail_msg_basic(String msg) {return msg + ";" + Fail_msg_suffix();}
+	private String Fail_msg_custom(String fmt, Object... args) {return String_.Format(fmt, args) + Fail_msg_suffix();}
+	private boolean Fail_msg(String msg) {
+		xtn_literal = true;
+		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_basic(msg), "\n", ""));
+		return false;
+	}
+	private boolean Fail_args(String fmt, Object... args) {
+		xtn_literal = true;
+		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_custom(fmt, args), "\n", ""));
+		return false;
+	}
+
 	private static Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
 	.Add_str_obj("index"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_index_ttl))
 	.Add_str_obj("from"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_bgn_page))
@@ -402,24 +410,16 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	, Xatr_toc_prv		= 11
 	, Xatr_toc_nxt		= 12
 	;
+	private static final    byte[] 
+	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
+	, Bry_value			= Bry_.new_a7("|value=")
+	, Bry_toc_cur		= Bry_.new_a7("|current=")
+	, Bry_toc_prv		= Bry_.new_a7("|prev=")
+	, Bry_toc_nxt		= Bry_.new_a7("|next=")
+	, Bry_page_bgn		= Bry_.new_a7("|from=")
+	, Bry_page_end		= Bry_.new_a7("|to=")
+	;
 	public static final    Xoa_ttl[] Ttls_null = null;
-	private static final    Number_parser num_parser = new Number_parser().Ignore_space_at_end_y_();	// ignore space at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
-	private String Fail_msg_suffix() {
-		String excerpt = Bry_fmtr.Escape_tilde(String_.new_u8(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
-		return String_.Format(" ttl={0} src={1}", String_.new_u8(cur_page_ttl.Full_db()), excerpt);
-	}
-	private String Fail_msg_basic(String msg) {return msg + ";" + Fail_msg_suffix();}
-	private String Fail_msg_custom(String fmt, Object... args) {return String_.Format(fmt, args) + Fail_msg_suffix();}
-	private boolean Fail_msg(String msg) {
-		xtn_literal = true;
-		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_basic(msg), "\n", ""));
-		return false;
-	}
-	private boolean Fail_args(String fmt, Object... args) {
-		xtn_literal = true;
-		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_custom(fmt, args), "\n", ""));
-		return false;
-	}
 }	
 /*
 NOTE:page_regy

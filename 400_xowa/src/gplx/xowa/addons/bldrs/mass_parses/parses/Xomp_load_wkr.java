@@ -64,7 +64,7 @@ class Xomp_load_wkr implements Gfo_invk {
 		, "AND     mp.page_status = 0"
 		, "LIMIT   {1}"
 		), prv_page_id, queue.Capacity());
-		this.attach_mgr.Conn_others_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
+		this.attach_mgr.Conn_links_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
 		sql = attach_mgr.Resolve_sql(sql);
 
 		// page_tbl.load_sql

@@ -62,7 +62,7 @@ class Xodb_load_mgr_sql_fxt {
 		int len = ary.length;
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
 		Xowd_cat_core_tbl cat_core_tbl = db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Create_tbl();
-		DateAdp modified = DateAdp_.Now();
+		DateAdp modified = Datetime_now.Get();
 		Xowd_page_tbl tbl_page = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
 		tbl_page.Insert_bgn();
 		cat_core_tbl.Insert_bgn();

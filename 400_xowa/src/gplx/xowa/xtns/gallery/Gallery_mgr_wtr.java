@@ -21,8 +21,6 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.p
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*;
 import gplx.xowa.files.*;
 public class Gallery_mgr_wtr {
-	private static final    Gallery_img_pad_fmtr_arg div_3_fmtr_arg = new Gallery_img_pad_fmtr_arg();
-	private static final    Gallery_box_w_fmtr_arg li_fmtr_arg = new Gallery_box_w_fmtr_arg();
 	public static void Write_mgr(Bry_bfr bfr, Gallery_mgr_base mgr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde) {
 		// init
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();			
@@ -124,7 +122,7 @@ public class Gallery_mgr_wtr {
 
 			// write div_3
 			div_3_margin = mgr.Get_vpad(mgr.Itm_default_h(), html_h_expand);
-			Gallery_mgr_wtr_.Fmtr__div1__vpad.Bld_bfr_many(tmp_bfr, div_3_fmtr_arg.Init(img_uid, div_3_margin));	// <div style="margin:~{vpad}px auto;">
+			Gallery_mgr_wtr_.Fmtr__div1__vpad.Bld_bfr_many(tmp_bfr, new Gallery_img_pad_fmtr_arg(div_3_margin));	// <div style="margin:~{vpad}px auto;">
 
 			// write <img>
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, hctx, src, lnki, xfer_itm, alt);
@@ -134,7 +132,7 @@ public class Gallery_mgr_wtr {
 
 		// write <li>
 		int div_1_w = mgr.Get_gb_width(html_w_expand, html_h_expand);
-		Gallery_mgr_wtr_.Fmtr__li__lhs.Bld_bfr_many(bfr, li_id_atr, li_fmtr_arg.Init(img_uid, div_1_w));
+		Gallery_mgr_wtr_.Fmtr__li__lhs.Bld_bfr_many(bfr, li_id_atr, new Gallery_box_w_fmtr_arg(div_1_w));
 		bfr.Add(itm_html);
 
 		// get show_filenames_link

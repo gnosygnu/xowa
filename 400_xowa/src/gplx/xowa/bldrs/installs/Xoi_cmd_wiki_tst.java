@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.core.brys.args.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.core.brys.args.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wbases.imports.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {

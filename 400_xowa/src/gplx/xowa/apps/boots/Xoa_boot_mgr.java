@@ -38,7 +38,7 @@ public class Xoa_boot_mgr {
 		}
 	}
 	private void Init_env(String[] args) {
-		Gfo_usr_dlg_.Instance = usr_dlg = Xoa_app_.usr_dlg_console_();
+		Gfo_usr_dlg_.Instance = usr_dlg = Xoa_app_.New__usr_dlg__console();
 		Gfo_log_.Instance__set(new gplx.xowa.apps.shells.Gfo_log__console());
 		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 

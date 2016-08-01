@@ -21,7 +21,7 @@ public class Xou_history_mgr_tst {
 	private Xou_history_mgr_fxt fxt = new Xou_history_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Archive() {
-		Tfds.Now_enabled_y_();	// NOTE: each DateTime_.Now() advances clock by 1 min; adding a new DateAdp_.Now() anywhere will throw off times on this test; DATE:2014-04-01
+		Datetime_now.Manual_y_();	// NOTE: each DateTime_.Now() advances clock by 1 min; adding a new Datetime_now.Get() anywhere will throw off times on this test; DATE:2014-04-01
 		fxt.Invk(Xou_history_mgr.Invk_current_itms_max_, 4).Invk(Xou_history_mgr.Invk_current_itms_reset_, 2);
 		fxt.Add_many("A", "B", "C", "D", "E");
 		fxt.Save();
@@ -67,7 +67,7 @@ class Xou_history_mgr_fxt {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.New_test(wiki, ttl);
-		page.Db().Page().Modified_on_(DateAdp_.Now());
+		page.Db().Page().Modified_on_(Datetime_now.Get());
 		byte[] url_bry = ttl_bry;
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));
 		Xoa_url url = wiki.Utl__url_parser().Parse(url_bry);

@@ -163,11 +163,16 @@ public class Scrib_core {
 		this.frame_parent = parent_frame; this.frame_current = current_frame;
 	}
 	public void Invoke(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, Bry_bfr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
+		// save current values for restoring later
+		Xot_invk old_frame_parent = this.frame_parent; Xot_invk old_frame_current = this.frame_current;
+		byte[] old_src = cur_src;
+
+		// init
 		this.wiki = wiki; this.ctx = ctx; this.cur_src = src;
 		lib_mw.Invoke_bgn(wiki, ctx, src);
-		Xot_invk old_frame_parent = this.frame_parent; Xot_invk old_frame_current = this.frame_current;
 		this.frame_parent = parent_frame; this.frame_current = current_frame;
 		parent_frame.Frame_tid_(Scrib_frame_.Tid_parent); current_frame.Frame_tid_(Scrib_frame_.Tid_current);
+
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
 			Keyval[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_u8(fnc_name));
@@ -188,6 +193,7 @@ public class Scrib_core {
 			lib_mw.Invoke_end();
 			parent_frame.Frame_tid_(Scrib_frame_.Tid_null); current_frame.Frame_tid_(Scrib_frame_.Tid_null);
 			this.frame_parent = old_frame_parent; this.frame_current = old_frame_current;	// NOTE: reset template frame; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
+			this.cur_src = old_src;
 			frame_created_list.Clear();
 		}
 	}

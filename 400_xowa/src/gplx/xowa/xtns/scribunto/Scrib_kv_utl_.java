@@ -61,4 +61,12 @@ public class Scrib_kv_utl_ {
 		try {return (Keyval[])ary[idx].Val();}
 		catch (Exception e) {throw Err_.new_exc(e, "scrib", "cast as Keyval[] failed", "ary", Keyval_.Ary_to_str(ary));}
 	}
+	public static Object Get_sub_by_key_or_null(Keyval[] ary, String key) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Keyval sub = ary[i];
+			if (String_.Eq(key, sub.Key())) return sub.Val();
+		}
+		return null;
+	}
 }

@@ -17,26 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_url_encoder {
+	private final    Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Encode(byte[] src) {
 		int src_len = src.length;
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space:		bb.Add(Bry_underline); break;
-				case Byte_ascii.Amp:		bb.Add(Bry_amp); break;
-				case Byte_ascii.Apos:		bb.Add(Bry_apos); break;
-				case Byte_ascii.Eq:			bb.Add(Bry_eq); break;
-				case Byte_ascii.Plus:		bb.Add(Bry_plus); break;
-				default:					bb.Add_byte(b); break;
-				// FUTURE: html_entities, etc:
+				case Byte_ascii.Space:		bfr.Add(Bry__underline); break;
+				case Byte_ascii.Amp:		bfr.Add(Bry__amp); break;
+				case Byte_ascii.Apos:		bfr.Add(Bry__apos); break;
+				case Byte_ascii.Eq:			bfr.Add(Bry__eq); break;
+				case Byte_ascii.Plus:		bfr.Add(Bry__plus); break;
+				default:					bfr.Add_byte(b); break;
 			}
 		}
-		return bb.To_bry_and_clear();
+		return bfr.To_bry_and_clear();
 	}
-	private static final    byte[] Bry_amp = Bry_.new_a7("%26"), Bry_eq = Bry_.new_a7("%3D")
-		, Bry_plus = Bry_.new_a7("%2B"), Bry_apos = Bry_.new_a7("%27")
-		, Bry_underline = new byte[] {Byte_ascii.Underline}
-		;
-	Bry_bfr bb = Bry_bfr_.New();
-	public static final    Xoa_url_encoder Instance = new Xoa_url_encoder(); Xoa_url_encoder() {}
+	private static final    byte[] Bry__amp = Bry_.new_a7("%26"), Bry__eq = Bry_.new_a7("%3D")
+	, Bry__plus = Bry_.new_a7("%2B"), Bry__apos = Bry_.new_a7("%27")
+	, Bry__underline = new byte[] {Byte_ascii.Underline}
+	;
 }

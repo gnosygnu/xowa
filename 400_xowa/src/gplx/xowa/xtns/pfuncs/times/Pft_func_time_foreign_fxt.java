@@ -21,10 +21,10 @@ class Pft_func_time_foreign_fxt {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
-		Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));
+		Datetime_now.Manual_(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));
 	}
 	public void Term() {
-		Tfds.Now_enabled_n_();
+		Datetime_now.Manual_n_();
 	}
 	public Pft_func_time_foreign_fxt Init_msg(String key, String val) {
 		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_u8(key));

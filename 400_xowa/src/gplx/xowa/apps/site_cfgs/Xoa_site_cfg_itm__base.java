@@ -26,7 +26,7 @@ public abstract class Xoa_site_cfg_itm__base {
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public byte[] Parse_json(Xow_wiki wiki, Json_itm js_itm) {
 		Json_ary ary = Json_ary.cast(js_itm);
-		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		int len = ary.Len();
 		for (int i = 0; i < len; ++i)
 			Parse_json_ary_itm(bfr, wiki, i, ary.Get_at(i));

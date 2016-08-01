@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
+	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
 	private int xatr_lat = Xatr_meridian_null, xatr_long = Xatr_meridian_null;
@@ -171,14 +172,14 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xatr_checkin != null || xatr_checkout != null) {
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 			if (xatr_checkin != null) {
-				byte[] checkin_val = xtn_mgr.Checkin_msg().Fmt(tmp_bfr, xatr_checkin);
+				byte[] checkin_val = xtn_mgr.Checkin_msg().Fmt(tmp_bfr, tmp_fmtr, xatr_checkin);
 				wtr.Txt_raw(checkin_val);
 				if (xatr_checkout != null)
 					wtr.Txt(Txt_comma_space);
 				
 			}
 			if (xatr_checkout != null) {
-				byte[] checkout_val = xtn_mgr.Checkout_msg().Fmt(tmp_bfr, xatr_checkout);
+				byte[] checkout_val = xtn_mgr.Checkout_msg().Fmt(tmp_bfr, tmp_fmtr, xatr_checkout);
 				wtr.Txt_raw(checkout_val);
 			}
 			wtr.Txt(Txt_dot_space);
@@ -194,16 +195,18 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xatr_lat >= Xatr_meridian_null || xatr_long >= Xatr_meridian_null) return null;		// check that lat and long are valid
 		Xol_msg_itm position_template = xtn_mgr.Position_template();
 		if (position_template == null) return null;
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
-		byte[] rv = position_template.Fmt(tmp_bfr, xatr_lat, xatr_long);
-		tmp_bfr.Add(Bry__invk_bgn);					// "{{"
-		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
-		tmp_bfr.Add(Bry__invk_end);					// "}}"
-		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
-		rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
-		Xol_msg_itm position_text = xtn_mgr.Position_text();
-		if (Bry_.Len_eq_0(position_text.Val())) return rv;
-		return position_text.Fmt(tmp_bfr, rv);
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+		try {
+			byte[] rv = position_template.Fmt(tmp_bfr, tmp_fmtr, xatr_lat, xatr_long);
+			tmp_bfr.Add(Bry__invk_bgn);					// "{{"
+			tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
+			tmp_bfr.Add(Bry__invk_end);					// "}}"
+			Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
+			rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
+			Xol_msg_itm position_text = xtn_mgr.Position_text();
+			if (Bry_.Len_eq_0(position_text.Val())) return rv;
+			return position_text.Fmt(tmp_bfr, tmp_fmtr, rv);
+		} finally {tmp_bfr.Mkr_rls();}
 	}
 	private static final int Xatr_meridian_null = 361;
 	public static final    byte[]

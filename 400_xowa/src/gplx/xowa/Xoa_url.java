@@ -98,10 +98,12 @@ public class Xoa_url {
 		, anch_spr, anch												// add anch			EX: "#", "B"
 		);
 		if (show_qargs || qargs_ary.length > 0) {
-			Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
-			bfr.Add(rv);
-			Gfo_qarg_mgr_old.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
-			return bfr.To_bry_and_rls();
+			Bry_bfr bfr = Bry_bfr_.New();
+			try {
+				bfr.Add(rv);
+				Gfo_qarg_mgr_old.Concat_bfr(bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, qargs_ary);
+				return bfr.To_bry_and_clear();
+			} finally {bfr.Mkr_rls();}
 		}
 		else
 			return rv;

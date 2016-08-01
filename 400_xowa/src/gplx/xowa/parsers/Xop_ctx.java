@@ -19,7 +19,7 @@ package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.guis.*;
-import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.lst.*;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.lst.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.htmls.modules.popups.keeplists.*;
 public class Xop_ctx {

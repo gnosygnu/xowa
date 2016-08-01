@@ -34,7 +34,7 @@ public class Dg_parser_tst {
 	@Test   public void Invalid_score()		{fxt.Test_parse_line("<a><1a>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
 //		@Test   public void Parse_dir() {
 //			Dg_parser parser = new Dg_parser();
-//			Gfo_usr_dlg_.I = Xoa_app_.usr_dlg_console_();
+//			Gfo_usr_dlg_.I = Xoa_app_.New__usr_dlg__console();
 //			parser.Parse_dir(Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\bldr\\filters\simple.wikipedia.org\\Dansguardian\\\\"));
 //		}
 }

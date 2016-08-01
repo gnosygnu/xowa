@@ -45,7 +45,8 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		url_cmd_eval = new Xoa_fsys_eval(fsys_mgr, user.Fsys_mgr());			
 		fsys_mgr.Init_by_app(prog_mgr);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
-		lang_mgr = new Xoa_lang_mgr(this);
+		this.gfs_mgr = new Xoa_gfs_mgr(this, fsys_mgr, user.Fsys_mgr());
+		lang_mgr = new Xoa_lang_mgr(this, gfs_mgr);
 		wiki_mgr = new Xoae_wiki_mgr(this);
 		gui_mgr = new Xoa_gui_mgr(this);
 		this.gui__tab_mgr = new Xog_tab_mgr__swt(gui_mgr);
@@ -57,7 +58,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		cur_redirect = new Xoa_cur(this);
 		shell = new Xoa_shell(this);
 		setup_mgr = new Xoi_setup_mgr(this);
-		Xoa_app_.Gfs_mgr_(new Xoa_gfs_mgr(this, fsys_mgr, user.Fsys_mgr()));
 		xtn_mgr = new Xow_xtn_mgr().Ctor_by_app(this);
 		hive_mgr = new Xoa_hive_mgr(this);
 		tcp_server.App_ctor(this);
@@ -81,7 +81,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
-	public Bry_bfr_mkr				Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
+	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;} private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final    Json_parser utl__json_parser = new Json_parser();
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final    Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final    Xoa_meta_mgr meta_mgr;
@@ -112,7 +112,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoapi_root			Api_root() {return api_root;} private Xoapi_root api_root;
 	public Gfo_usr_dlg			Usr_dlg() {return Xoa_app_.Usr_dlg();}
 	public Gfo_usr_dlg__log		Log_wtr() {return log_wtr;} private Gfo_usr_dlg__log log_wtr;
-	public Xoa_gfs_mgr			Gfs_mgr() {return Xoa_app_.Gfs_mgr();}
+	public Xoa_gfs_mgr			Gfs_mgr() {return gfs_mgr;} private final    Xoa_gfs_mgr gfs_mgr;
 	public Xoa_special_mgr		Special_mgr() {return special_mgr;} private Xoa_special_mgr special_mgr = new gplx.xowa.specials.Xoa_special_mgr();
 	public Xoh_html_mgr			Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
 	public Xop_log_mgr			Log_mgr() {return log_mgr;} private Xop_log_mgr log_mgr;
@@ -147,7 +147,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private final    Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
 
 	private Xoa_fmtr_mgr fmtr_mgr;
-	public Number_parser Utl_num_parser() {return utl_num_parser;} private Number_parser utl_num_parser = new Number_parser();
+	public Gfo_number_parser Utl_num_parser() {return utl_num_parser;} private Gfo_number_parser utl_num_parser = new Gfo_number_parser();
 	public void Init_by_app() {
 		stage = Xoa_stage_.Tid_init;
 		user.Init_by_app(this);
@@ -216,7 +216,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		else if	(ctx.Match(k, Invk_shell))					return shell;
 		else if	(ctx.Match(k, Invk_log))					return log_wtr;
 		else if	(ctx.Match(k, Invk_setup))					return setup_mgr;
-		else if	(ctx.Match(k, Invk_scripts))				return Xoa_app_.Gfs_mgr();
+		else if	(ctx.Match(k, Invk_scripts))				return gfs_mgr;
 		else if	(ctx.MatchPriv(k, Invk_term_cbk))			return this.Term_cbk();
 		else if	(ctx.Match(k, Invk_xtns))					return xtn_mgr;
 		else if	(ctx.Match(k, Invk_ctg_mgr))				return ctg_mgr;

@@ -16,13 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Int_ary_parser_tst {
-	@Test  public void Many()		{tst_ints("1,2,3,4,5"		, 0, 9, Int_.Ary(1, 2, 3, 4, 5));}
-	@Test  public void One()		{tst_ints("1"				, 0, 1, Int_.Ary(1));}
-	@Test  public void None()		{tst_ints(""				, 0, 0, Int_.Ary());}
-	private void tst_ints(String raw, int bgn, int end, int[] expd) {
-		int[] actl = Int_ary_parser.Instance.Parse_ary(Bry_.new_a7(raw), bgn, end, Byte_ascii.Comma);
-		Tfds.Eq_ary(expd, actl);
+	private final    Int_ary_parser_fxt fxt = new Int_ary_parser_fxt();
+	@Test  public void Many()		{fxt.Test__Parse_ary("1,2,3,4,5"		, 0, 9, Int_.Ary(1, 2, 3, 4, 5));}
+	@Test  public void One()		{fxt.Test__Parse_ary("1"				, 0, 1, Int_.Ary(1));}
+	@Test  public void None()		{fxt.Test__Parse_ary(""					, 0, 0, Int_.Ary());}
+}
+class Int_ary_parser_fxt {
+	public void Test__Parse_ary(String raw, int bgn, int end, int[] expd) {
+		Gftest.Eq__ary(expd, new Int_ary_parser().Parse_ary(Bry_.new_a7(raw), bgn, end, Byte_ascii.Comma), "parse_ary failed");
 	}
 }

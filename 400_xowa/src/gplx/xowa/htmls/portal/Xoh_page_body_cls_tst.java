@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*;
+import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.*;
 public class Xoh_page_body_cls_tst {
 	@Before public void init() {} private Xoh_page_body_cls_fxt fxt = new Xoh_page_body_cls_fxt();
 	@Test   public void Escape_cls() {

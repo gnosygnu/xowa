@@ -204,6 +204,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		else if	(ctx.Match(k, Invk_exec_count_max_))		exec_count_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_exit_now_))				exit_now = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_exit_after_commit_))		exit_after_commit = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__manual_now_))			Datetime_now.Manual_and_freeze_(m.ReadDate("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -218,6 +219,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	, Invk_load_tmpls_ = "load_tmpls_"
 	, Invk_poll_mgr = "poll_mgr", Invk_reset_db_ = "reset_db_"
 	, Invk_exec_count_max_ = "exec_count_max_", Invk_exit_now_ = "exit_now_", Invk_exit_after_commit_ = "exit_after_commit_"
+	, Invk__manual_now_ = "manual_now_"
 	;
 }
 class Xob_dump_mgr_base_ {

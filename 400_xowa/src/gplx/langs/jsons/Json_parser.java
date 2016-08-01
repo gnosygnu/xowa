@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*;
 public class Json_parser {
-	private byte[] src; private int src_len, pos; private final    Number_parser num_parser = new Number_parser();
+	private byte[] src; private int src_len, pos; private final    Gfo_number_parser num_parser = new Gfo_number_parser();
 	public Json_factory Factory() {return factory;} private final    Json_factory factory = new Json_factory();
 	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(String_.Concat_lines_nl(ary));}
 	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), Byte_ascii.Apos, Byte_ascii.Quote));}

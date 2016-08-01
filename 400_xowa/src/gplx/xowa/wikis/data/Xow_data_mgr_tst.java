@@ -20,8 +20,8 @@ import org.junit.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xow_data_mgr_tst {
 	Xow_data_mgr_fxt fxt = new Xow_data_mgr_fxt();
-	@Before public void init() {fxt.Clear(); Tfds.Now_enabled_y_();}
-	@After public void term() {Tfds.Now_enabled_n_();}
+	@Before public void init() {fxt.Clear(); Datetime_now.Manual_y_();}
+	@After public void term() {Datetime_now.Manual_n_();}
 	@Test  public void Create() {
 		fxt	.Create("A1", "A1 data")
 			.Create("B12", "B12 data")
