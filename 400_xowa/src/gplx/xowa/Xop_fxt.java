@@ -306,7 +306,8 @@ public class Xop_fxt {
 	}
 	public Xop_fxt Test_parse_page_wiki_str__esc(String raw, String expd) {return Test_parse_page_wiki_str(raw, Xoh_consts.Escape_apos(expd));}
 	public Xop_fxt Test_parse_page_wiki_str(String raw, String expd) {
-		Tfds.Eq_str_lines(expd, Exec_parse_page_wiki_as_str(raw), raw);
+		String actl = Exec_parse_page_wiki_as_str(raw);
+		Tfds.Eq_str_lines(expd, actl, raw);
 		return this;
 	}
 	public void Log_clear() {ctx.App().Msg_log().Clear();}

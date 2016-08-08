@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.vnts.*;
 public class Xof_math_html_wtr {
 	private final    Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
@@ -62,8 +62,8 @@ public class Xof_math_html_wtr {
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Lt_bry; break;
-				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Gt_bry; break;
+				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.langs.htmls.entitys.Gfh_entity_.Lt_bry; break;
+				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.langs.htmls.entitys.Gfh_entity_.Gt_bry; break;
 				// case Byte_ascii.Amp:	escaped = Const_amp; break;	// TOMBSTONE:never escape ampersand; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				// case Byte_ascii.Quote:	if (mathjax) escaped = gplx.langs.htmls.Gfh_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				default:

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import org.junit.*;
 public class Xoh_file_wtr__image__tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Img__full() {	// PURPOSE: full with title was outputting invalid html; DATE:2013-12-31
 		fxt.Wtr_cfg().Lnki__title_(true);
@@ -38,6 +38,22 @@ public class Xoh_file_wtr__image__tst {
 	}
 	@Test  public void Img__embed() {
 		fxt.Test_parse_page_wiki_str("[[File:A.png|9x8px|alt=abc]]", Xop_fxt.html_img_none("File:A.png", "abc", "file:///mem/wiki/repo/trg/thumb/7/0/A.png/9px.png", "A.png"));
+	}
+	@Test   public void Embed_audio() {
+		fxt.Test_parse_page_wiki_str("[[File:A.jpg|thumb|b[[File:C.ogg|right|140x140px]]d]]", String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.jpg\" class=\"image\" xowa_title=\"A.jpg\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/6/7/A.jpg/220px.jpg\" width=\"0\" height=\"0\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		, "<div class=\"magnify\"><a href=\"/wiki/File:A.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>b    <div class=\"xowa_media_div\">"
+		, "      <div><a href=\"/wiki/File:C.ogg\" class=\"image\" title=\"C.ogg\" xowa_title=\"C.ogg\"><img id=\"xoimg_1\" alt=\"\" src=\"\" width=\"140\" height=\"140\" /></a>"
+		, "      </div>"
+		, "<div><a id=\"xowa_file_play_1\" href=\"file:///mem/wiki/repo/trg/orig/d/3/C.ogg\" xowa_title=\"C.ogg\" class=\"xowa_media_play\" style=\"width:138px;max-width:140px;\" alt=\"Play sound\"></a></div>"
+		, "    </div>d"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		));
 	}
 	@Test  public void Img__none() {	// NOTE: floatnone is WP behavior; MW omits div tag
 		fxt.Test_parse_page_wiki_str

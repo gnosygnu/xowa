@@ -40,6 +40,7 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 			case Xoh_hzip_dict_.Tid__img:		wkr = hctx.Pool_mgr__hzip().Mw__img(); break;
 			case Xoh_hzip_dict_.Tid__img_bare:	wkr = hctx.Pool_mgr__hzip().Mw__img_bare(); break;
 			case Xoh_hzip_dict_.Tid__toc:		wkr = hctx.Pool_mgr__hzip().Mw__toc(); break;
+			case Xoh_hzip_dict_.Tid__media:		wkr = hctx.Pool_mgr__hzip().Mw__media(); break;
 			default:							throw Err_.new_unhandled(data.Tid());
 		}
 		wkr.Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();

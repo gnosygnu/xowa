@@ -40,10 +40,10 @@ public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
 		if (hctx.Mode_is_hdump()) {				
 			Bry_bfr tmp_bfr = Bry_bfr_.Get();
 			try {
-				byte[] data_xowa_image = Xoh_file_html_fmtr__hdump.Bld_xowa_image_data(tmp_bfr, Xop_lnki_type.Id_none, img_w, img_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
+				byte[] data_xowa_image = Xoh_file_fmtr__hdump.Bld_xowa_image_data(tmp_bfr, Xop_lnki_type.Id_none, img_w, img_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
 				byte[] data_xowa_title = Gfh_atr_.Make(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_title, lnki_ttl);
 				byte[] usemap = tmp_bfr.Add(Imap_xtn_mgr.Bry__usemap__html).Add_int_variable(map.Id()).Add_byte_quote().To_bry_and_clear();
-				Xoh_file_html_fmtr__hdump.Bld_anch_n(tmp_bfr, data_xowa_title, data_xowa_image, Xoh_img_cls_.Tid__thumbimage, Bry_.Empty, Bry_.Empty, usemap);
+				Xoh_file_fmtr__hdump.Add_anch_n(tmp_bfr, data_xowa_title, data_xowa_image, Xoh_img_cls_.Tid__thumbimage, Bry_.Empty, Bry_.Empty, usemap);
 				bfr.Add_byte_nl().Add_byte_repeat(Byte_ascii.Space, 6);
 				bfr.Add_bfr_and_clear(tmp_bfr);
 			} finally {tmp_bfr.Mkr_rls();}

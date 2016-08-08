@@ -101,6 +101,7 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, Float_.Cls_ref_type))		return LuaValue.valueOf((Float)o);
 		else if	(Object_.Eq(c, Char_.Cls_ref_type))			return LuaValue.valueOf((Character)o);
 		else if	(Object_.Eq(c, Short_.Cls_ref_type))		return LuaValue.valueOf((Short)o);
+		else if	(Object_.Eq(c, Decimal_adp.class))			return LuaValue.valueOf(((Decimal_adp)o).To_double());	// DATE:2016-08-01
 		else return LuaValue.NIL; 
 	}
 	private static LuaTable Kv_ary_to_lua_tbl(Luaj_server server, Keyval... ary) {

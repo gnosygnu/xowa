@@ -22,7 +22,6 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.parsers.tmpls.*; import gplx.xowa.wikis.pages.lnkis.*;
 public class Xop_lnki_wkr_ {
-	private static final    Int_obj_ref rel2abs_tid = Int_obj_ref.New_zero();
 	public static final int Invalidate_lnki_len = 128;
 	public static int Invalidate_lnki(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_lnki_tkn lnki, int cur_pos) {
 		lnki.Tkn_tid_to_txt();						// convert initial "[[" to text; note that this lnki has no pipes as pipe_lxr does similar check; EX: [[<invalid>]]; DATE:2014-03-26
@@ -48,7 +47,8 @@ public class Xop_lnki_wkr_ {
 		if (page_ttl.Ns().Subpages_enabled()
 			&& Pfunc_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
 			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
-			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid.Val_zero_());
+			Int_obj_ref rel2abs_tid = ctx.Tmp_mgr().Pfunc_rel2abs().Val_zero_();
+			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid);
 			lnki.Subpage_tid_(rel2abs_tid.Val());
 			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == Byte_ascii.Slash);
 			ttl_bry = new_bry;

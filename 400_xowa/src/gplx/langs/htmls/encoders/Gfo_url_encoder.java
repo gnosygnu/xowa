@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 public class Gfo_url_encoder implements Url_encoder_interface {
 	private final    Gfo_url_encoder_itm[] encode_ary, decode_ary; private final    Gfo_url_encoder anchor_encoder;

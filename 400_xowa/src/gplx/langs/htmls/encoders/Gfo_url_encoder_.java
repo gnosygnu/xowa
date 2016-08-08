@@ -17,28 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
-import gplx.xowa.parsers.amps.*;
+import gplx.langs.htmls.entitys.*;
 public class Gfo_url_encoder_ {
 	public static Gfo_url_encoder New__id() {return Gfo_url_encoder_.New__html_id().Make();}
-	public static final    Gfo_url_encoder
-	  Id				= Gfo_url_encoder_.New__html_id().Make()
-	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
-	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()
-	, Href_quotes		= Gfo_url_encoder_.New__html_href_quotes().Make()
-	, Href_quotes_v2	= Gfo_url_encoder_.New__html_href_quotes_v2().Make()
-	, Href_qarg			= Gfo_url_encoder_.New__html_href_qarg().Make()
-	, Xourl				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Underline).Make()
-	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
-	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
-	, Fsys_lnx			= Gfo_url_encoder_.New__fsys_lnx().Make()
-	, Fsys_wnt			= Gfo_url_encoder_.New__fsys_wnt().Make()
-	, Gfs				= Gfo_url_encoder_.New__gfs().Make()
-	;
-	private static Gfo_url_encoder_mkr New__html_id() {			// EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
+	public static Gfo_url_encoder_mkr New__html_id() {			// EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Dot).Init_common(Bool_.Y)
 			.Init__decode_mark(Byte_ascii.Dot)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
-			.Init__html_ent(Byte_ascii.Amp, Xop_amp_trie.Instance);
+			.Init__html_ent(Byte_ascii.Amp, Gfh_entity_trie.Instance);
 	}
 	public static Gfo_url_encoder_mkr New__html_href_mw(boolean use_anchor_encoder) {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"; REF.MW: ";:@$!*(),/"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
@@ -79,12 +65,12 @@ public class Gfo_url_encoder_ {
 	private static Gfo_url_encoder_mkr New__http_url_ttl() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y);
 	}
-	private static Gfo_url_encoder_mkr New__fsys_lnx() {
+	public static Gfo_url_encoder_mkr New__fsys_lnx() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__same__many(Byte_ascii.Slash)
 			.Init__diff__one(Byte_ascii.Backslash, Byte_ascii.Slash);
 	}
-	private static Gfo_url_encoder_mkr New__fsys_wnt() {
+	public static Gfo_url_encoder_mkr New__fsys_wnt() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent)
 			.Init__same__rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
 			.Init__same__rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
@@ -95,8 +81,19 @@ public class Gfo_url_encoder_ {
 			, Byte_ascii.Dot, Byte_ascii.Comma
 			, Byte_ascii.Tick, Byte_ascii.Tilde, Byte_ascii.Brack_bgn, Byte_ascii.Brack_end, Byte_ascii.Curly_bgn, Byte_ascii.Curly_end);
 	}
-	private static Gfo_url_encoder_mkr New__gfs() {
+	public static Gfo_url_encoder_mkr New__gfs() {
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
 			.Init__same__many(Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Apos, Byte_ascii.Semic);
 	}
+	public static final    Gfo_url_encoder
+	  Id				= Gfo_url_encoder_.New__html_id().Make()
+	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
+	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()
+	, Href_quotes		= Gfo_url_encoder_.New__html_href_quotes().Make()
+	, Href_quotes_v2	= Gfo_url_encoder_.New__html_href_quotes_v2().Make()
+	, Href_qarg			= Gfo_url_encoder_.New__html_href_qarg().Make()
+	, Xourl				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Init__same__many(Byte_ascii.Underline).Make()
+	, Http_url			= Gfo_url_encoder_.New__http_url().Make()
+	, Http_url_ttl		= Gfo_url_encoder_.New__http_url_ttl().Make()
+	;
 }

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.brys.*; import gplx.core.brys.fmts.*;	
 public class Bry_fmt {
+	private final    Object thread_lock = new Object();
 	private byte[] src;
 	private Bry_fmt_itm[] itms; private int itms_len;
 	private Bfr_fmt_arg[] args = Bfr_fmt_arg.Ary_empty;
@@ -43,6 +44,10 @@ public class Bry_fmt {
 		Bld_many(bfr, vals_ary);
 		return bfr.To_str_and_clear();
 	}
+	public byte[] Bld_many_to_bry(Bry_bfr bfr, Object... vals_ary) {
+		Bld_many(bfr, vals_ary);
+		return bfr.To_bry_and_clear();
+	}
 	public void Bld_many(Bry_bfr bfr, Object... vals_ary) {
 		if (dirty) Compile();
 		int vals_len = vals_ary.length;
@@ -64,15 +69,18 @@ public class Bry_fmt {
 	}
 	public String To_str() {return Bld_many_to_str_auto_bfr(vals);}
 	private void Compile() {
-		dirty = false;
-		this.itms = Bry_fmt_parser_.Parse(Byte_ascii.Tilde, Byte_ascii.Curly_bgn, Byte_ascii.Curly_end, args, keys, src);
-		this.itms_len = itms.length;
+		synchronized (thread_lock) {
+			dirty = false;
+			this.itms = Bry_fmt_parser_.Parse(Byte_ascii.Tilde, Byte_ascii.Curly_bgn, Byte_ascii.Curly_end, args, keys, src);
+			this.itms_len = itms.length;
+		}
 	}
 	public static Bry_fmt New(String fmt, String... keys) {return new Bry_fmt(Bry_.new_u8(fmt), Bry_.Ary(keys), Bfr_fmt_arg.Ary_empty);}
 	public static Bry_fmt New(byte[] fmt, String... keys) {return new Bry_fmt(fmt				, Bry_.Ary(keys), Bfr_fmt_arg.Ary_empty);}
 	public static String Make_str(String fmt_str, Object... vals) {return Auto(fmt_str).Vals_(vals).To_str();}
-	public static Bry_fmt Auto(String fmt_str) {
-		byte[] fmt_bry = Bry_.new_u8(fmt_str);
+	public static Bry_fmt Auto_nl_apos(String... lines) {return Auto(Bry_.New_u8_nl_apos(lines));}
+	public static Bry_fmt Auto(String fmt_str) {return Auto(Bry_.new_u8(fmt_str));}
+	public static Bry_fmt Auto(byte[] fmt_bry) {
 		byte[][] keys_bry = Bry_fmt_parser_.Parse_keys(fmt_bry);
 		return new Bry_fmt(fmt_bry, keys_bry, Bfr_fmt_arg.Ary_empty);
 	}

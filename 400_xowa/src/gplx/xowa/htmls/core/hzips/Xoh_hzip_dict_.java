@@ -35,6 +35,7 @@ public class Xoh_hzip_dict_ {
 	, Tid__img_bare			=  9
 	, Tid__toc				= 10
 	, Tid__pgbnr			= 11
+	, Tid__media			= 12
 	;
 	public static final    String
 	  Key__timeline				= "timeline"
@@ -50,6 +51,7 @@ public class Xoh_hzip_dict_ {
 	, Key__img_bare				= "img_bare"
 	, Key__toc					= "toc"
 	, Key__pgbnr				= "pgbnr"
+	, Key__media				= "media"
 	;
 	public static final int Hzip__none = 0, Hzip__v1 = 1;
 }

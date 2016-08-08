@@ -37,7 +37,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	public Xobldr__fsdb_db__create_data(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);
 		if (bldr != null) {
 			this.poll_mgr = new Xobu_poll_mgr(bldr.App());
-			wiki.File__fsdb_mode().Tid_v2_bld_y_();
+			wiki.File__fsdb_mode().Tid__v2__bld__y_();
 			this.src_bin_mgr = new Xof_bin_mgr(new Fsm_mnt_mgr(), wiki.File__repo_mgr(), app.File__img_mgr().Wkr_resize_img(), app.Wmf_mgr().Download_wkr().Download_xrg().Download_fmt());
 		}
 	}

@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.commons.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.bldrs.wms.apis.*;
+import gplx.xowa.apps.wms.apis.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -149,6 +149,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean GetFileInfo(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// init; get ttl
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
@@ -156,22 +157,20 @@ public class Scrib_lib_title implements Scrib_lib {
 			|| !ttl.Ns().Id_is_file_or_media()
 			) return rslt.Init_obj(GetFileInfo_absent);
 		if (ttl.Ns().Id_is_media()) ttl = Xoa_ttl.Parse(wiki, Xow_ns_.Tid__file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
-		// Xoae_page file_page = Pfunc_filepath.Load_page(wiki, ttl);	// EXPENSIVE
-		// boolean exists = !file_page.Missing();
-		// if (!exists) return rslt.Init_obj(Keyval_.Ary(Keyval_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
-		// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
+
+		// get file info from db / wmf
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
-		Xof_orig_itm itm = wiki.File__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
-		if (itm == Xof_orig_itm.Null) return rslt.Init_obj(GetFileInfo_absent);
-		Keyval[] rv = Keyval_.Ary
-		( Keyval_.new_("exists"		, true)
-		, Keyval_.new_("width"		, itm.W())
-		, Keyval_.new_("height"		, itm.H())
-		, Keyval_.new_("pages"		, null)	// TODO_OLD: get pages info
-		);
+		Xof_orig_itm itm = wiki.File__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());	// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
+		Keyval[] rv = itm == Xof_orig_itm.Null
+			? GetFileInfo_absent
+			: Keyval_.Ary
+			( Keyval_.new_("exists"		, true)
+			, Keyval_.new_("width"		, itm.W())
+			, Keyval_.new_("height"		, itm.H())
+			, Keyval_.new_("pages"		, null)	// TODO_OLD: get pages info
+			);
 		return rslt.Init_obj(rv);
-	}
-	private static final    Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false));
+	}	private static final    Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false), Keyval_.new_("width", 0), Keyval_.new_("height", 0));	// NOTE: must supply non-null values for w / h, else Modules will fail with nil errors; PAGE:pl.w:Andrespol DATE:2016-08-01
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();

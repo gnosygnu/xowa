@@ -35,7 +35,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
 		this.mode = mode;
-		Io_url.Http_file_str_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx;
+		Io_url.Http_file_str_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir, root_dir);
 		log_wtr = usr_dlg.Log_wkr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
@@ -52,7 +52,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		this.gui__tab_mgr = new Xog_tab_mgr__swt(gui_mgr);
 		bldr = new Xob_bldr(this);
 		file_mgr.Ctor_by_app(this);
-		sanitizer = new Xop_sanitizer(parser_amp_mgr, msg_log);
 		user_mgr = new Xou_user_mgr(this, user);
 		sys_cfg = new Xoa_sys_cfg(this);
 		cur_redirect = new Xoa_cur(this);
@@ -119,7 +118,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public Xoa_thread_mgr		Thread_mgr_old() {return thread_mgr_old;} private Xoa_thread_mgr thread_mgr_old = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
-	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final    Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
 	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();

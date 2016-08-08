@@ -37,7 +37,8 @@ public class Xoax_addon_mgr {
 		app.Addon_mgr().Itms__add_many
 		// bldrs
 		( new gplx.xowa.addons.bldrs.files				.Xoax_builds_files_addon()
-		, new gplx.xowa.addons.bldrs.pagelinks			.Xoax_builds_pagelinks_addon()
+		, new gplx.xowa.addons.bldrs.wmdumps.pagelinks	.Xoax_builds_pagelinks_addon()
+		, new gplx.xowa.addons.bldrs.wmdumps.imglinks	.Imglnk_addon()
 		, new gplx.xowa.addons.bldrs.utils_rankings		.Xoax_builds_utils_rankings_addon()
 		, new gplx.xowa.addons.wikis.searchs			.Xoax_builds_search_addon()
 		, new gplx.xowa.addons.bldrs.updates.files		.Xoax_updates_files_addon()

@@ -17,8 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.xowa.wikis.pages.*;
+import gplx.langs.htmls.encoders.*;
 public class Xoapi_view implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
+	private final    Gfo_url_encoder fsys_encoder = Gfo_url_encoder_.New__fsys_wnt().Make();
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app; this.win = app.Gui_mgr().Browser_win();
 	}
@@ -36,7 +38,7 @@ public class Xoapi_view implements Gfo_invk {
 	public void Save_as() {
 		if (this.Active_tab_is_null()) return;
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab();
-		String file_name = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_wnt.Encode_str(String_.new_u8(tab.Page().Ttl().Full_url())) + ".html";
+		String file_name = fsys_encoder.Encode_str(String_.new_u8(tab.Page().Ttl().Full_url())) + ".html";
 		String file_url = app.Gui_mgr().Kit().New_dlg_file(Gfui_kit_.File_dlg_type_save, "Select file to save to:").Init_file_(file_name).Ask();
 		if (String_.Len_eq_0(file_url)) return;
 		Io_mgr.Instance.SaveFilStr(file_url, tab.Html_box().Text());

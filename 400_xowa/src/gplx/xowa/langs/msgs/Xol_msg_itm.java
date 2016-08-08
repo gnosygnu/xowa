@@ -22,13 +22,13 @@ public class Xol_msg_itm {
 	public int		Id()				{return id;} private final    int id;
 	public byte[]	Key()				{return key;} private final    byte[] key;
 	public byte[]	Val()				{return val;} private byte[] val;
-	public int		Src()				{return src;} private int src;
-	public boolean	Src_is_missing()	{return src == Src_missing;}
+	public int		Defined_in()		{return defined_in;} private int defined_in;
+	public boolean	Defined_in_none()	{return defined_in == Defined_in__none;}
 	public boolean	Has_fmt_arg()		{return has_fmt_arg;} private boolean has_fmt_arg;
 	public boolean		Has_tmpl_txt()		{return has_tmpl_txt;} private boolean has_tmpl_txt;
 	public boolean		Dirty()				{return dirty;} private boolean dirty;	// BLDR:
 	
-	public Xol_msg_itm Src_(int v) {src = v; return this;}
+	public Xol_msg_itm Defined_in_(int v) {defined_in = v; return this;}
 	public Xol_msg_itm Dirty_(boolean v) {dirty = v; return this;}
 
 	public void Atrs_set(byte[] val, boolean has_fmt_arg, boolean has_tmpl_txt) {
@@ -44,5 +44,5 @@ public class Xol_msg_itm {
 		fmtr.Bld_bfr_many(bfr, args);
 		return bfr.To_bry_and_clear();
 	}
-	public static final    int Src_null = 0, Src_lang = 1, Src_wiki = 2, Src_missing = 3;
+	public static final    int Defined_in__unknown = 0, Defined_in__lang = 1, Defined_in__wiki = 2, Defined_in__none = 3;	// NOTE: unknown not manually used, but is different than none (which means missing?)
 }

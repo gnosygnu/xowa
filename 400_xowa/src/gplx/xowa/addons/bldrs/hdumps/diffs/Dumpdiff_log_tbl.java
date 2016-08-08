@@ -45,7 +45,9 @@ class Dumpdiff_log_tbl implements Db_tbl {
 		conn.Txn_end();
 		stmt__insert.Rls();
 	}
-	public void Rls() {}
+	public void Rls() {
+		stmt__insert = Db_stmt_.Rls(stmt__insert);
+	}
 
 	public static Dumpdiff_log_tbl New(Xowe_wiki wiki) {
 		Db_conn conn = Db_conn_bldr.Instance.Get_or_autocreate(true, wiki.Fsys_mgr().Root_dir().GenSubFil("xowa.diff.sqlite3"));

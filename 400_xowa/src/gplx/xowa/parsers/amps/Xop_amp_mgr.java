@@ -17,17 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
+import gplx.langs.htmls.entitys.*;
 public class Xop_amp_mgr {	// TS
 	private static final    Btrie_rv trv = new Btrie_rv();
-	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final    Btrie_slim_mgr amp_trie = Xop_amp_trie.Instance;
+	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final    Btrie_slim_mgr amp_trie = Gfh_entity_trie.Instance;
 	public Xop_amp_mgr_rslt Parse_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int bgn) {
 		int fail_pos = amp_pos + 1;	// default to fail pos which is after &
 
 		// check amp_trie; EX: 'lt'
 		Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
-		Xop_amp_trie_itm itm; int cur;
+		Gfh_entity_itm itm; int cur;
 		synchronized (trv) {
-			itm = (Xop_amp_trie_itm)amp_trie.Match_at(trv, src, bgn, src_len);
+			itm = (Gfh_entity_itm)amp_trie.Match_at(trv, src, bgn, src_len);
 			cur = trv.Pos();
 		}
 
@@ -39,15 +40,15 @@ public class Xop_amp_mgr {	// TS
 		// check itm
 		switch (itm.Tid()) {
 			// letters; EX: '&lt;'
-			case Xop_amp_trie_itm.Tid_name_std:
-			case Xop_amp_trie_itm.Tid_name_xowa:
+			case Gfh_entity_itm.Tid_name_std:
+			case Gfh_entity_itm.Tid_name_xowa:
 				rv.Pos_(cur);
 				rv.Tkn_(tkn_mkr.Amp_txt(amp_pos, cur, itm));
 				return rv;
 			// numbers; EX: '&#123;' '&#x123'
-			case Xop_amp_trie_itm.Tid_num_hex:
-			case Xop_amp_trie_itm.Tid_num_dec:
-				boolean ncr_is_hex = itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
+			case Gfh_entity_itm.Tid_num_hex:
+			case Gfh_entity_itm.Tid_num_dec:
+				boolean ncr_is_hex = itm.Tid() == Gfh_entity_itm.Tid_num_hex;
 				boolean pass = Parse_ncr(rv, ncr_is_hex, src, src_len, amp_pos, cur);
 				if (pass) {	// NOTE: do not set rv.Pos_(); will be set by Parse_ncr
 					rv.Tkn_(tkn_mkr.Amp_num(amp_pos, rv.Pos(), rv.Val()));
@@ -119,16 +120,16 @@ public class Xop_amp_mgr {	// TS
 							}
 							bfr.Add_mid(src, 0, pos);
 						}
-						Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)amp_obj;
+						Gfh_entity_itm amp_itm = (Gfh_entity_itm)amp_obj;
 						switch (amp_itm.Tid()) {
-							case Xop_amp_trie_itm.Tid_name_std:
-							case Xop_amp_trie_itm.Tid_name_xowa:
+							case Gfh_entity_itm.Tid_name_std:
+							case Gfh_entity_itm.Tid_name_xowa:
 								bfr.Add(amp_itm.U8_bry());
 								pos = amp_pos;
 								break;
-							case Xop_amp_trie_itm.Tid_num_hex:
-							case Xop_amp_trie_itm.Tid_num_dec:
-								boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
+							case Gfh_entity_itm.Tid_num_hex:
+							case Gfh_entity_itm.Tid_num_dec:
+								boolean ncr_is_hex = amp_itm.Tid() == Gfh_entity_itm.Tid_num_hex;
 								int int_bgn = amp_pos;
 								if (amp_rv == null)
 									amp_rv = new Xop_amp_mgr_rslt();

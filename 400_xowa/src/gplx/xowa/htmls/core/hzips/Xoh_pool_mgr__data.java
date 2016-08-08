@@ -20,9 +20,9 @@ import gplx.core.btries.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.wkrs.escapes.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
-import gplx.xowa.htmls.core.wkrs.addons.timelines.*; import gplx.xowa.htmls.core.wkrs.addons.gallerys.*;
+import gplx.xowa.htmls.core.wkrs.addons.timelines.*; import gplx.xowa.htmls.core.wkrs.addons.gallerys.*; import gplx.xowa.htmls.core.wkrs.addons.medias.*;
 public class Xoh_pool_mgr__data {
-	private final    Gfo_poolable_mgr pool__hdr, pool__lnke, pool__img, pool__img_bare, pool__toc, pool__timeline, pool__gallery;
+	private final    Gfo_poolable_mgr pool__hdr, pool__lnke, pool__img, pool__img_bare, pool__toc, pool__timeline, pool__gallery, pool__media;
 	public Xoh_pool_mgr__data() {
 		pool__hdr		= New_pool(new Xoh_hdr_data());
 		pool__lnke		= New_pool(new Xoh_lnke_data());
@@ -31,6 +31,7 @@ public class Xoh_pool_mgr__data {
 		pool__toc		= New_pool(new Xoh_toc_data());
 		pool__timeline	= New_pool(new Xoh_timeline_data());
 		pool__gallery	= New_pool(new Xoh_gallery_data());
+		pool__media		= New_pool(new Xoh_media_data());
 	}
 	public Xoh_data_itm Get_by_tid(int tid) {
 		Gfo_poolable_mgr pool = null;
@@ -42,6 +43,7 @@ public class Xoh_pool_mgr__data {
 			case Xoh_hzip_dict_.Tid__toc:		pool = pool__toc; break;
 			case Xoh_hzip_dict_.Tid__timeline:	pool = pool__timeline; break;
 			case Xoh_hzip_dict_.Tid__gallery:	pool = pool__gallery; break;
+			case Xoh_hzip_dict_.Tid__media:		pool = pool__media; break;
 			default:							return null;
 		}
 		return (Xoh_data_itm)pool.Get_fast();

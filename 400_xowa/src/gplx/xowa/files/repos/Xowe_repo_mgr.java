@@ -41,6 +41,13 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		}
 		return null;
 	}
+	public void Clone(Xowe_repo_mgr src) {
+		int len = src.Repos_len();
+		for (int i = 0; i < len; ++i) {
+			Xof_repo_pair repo_pair = src.Repos_get_at(i);
+			this.Add_repo(repo_pair.Src().Key(), repo_pair.Trg().Key());
+		}
+	}
 	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.Get_at(i);}
 	private Xof_repo_pair Repos_get_by_id(int id) {
 		int len = repos.Count();

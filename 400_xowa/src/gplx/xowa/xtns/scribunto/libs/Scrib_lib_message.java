@@ -136,7 +136,7 @@ class Scrib_lib_message_data {
 			&&	raw_msg_key == null		// ignore if raw_msg; note that raw_msg can generate empty String; EX:raw_msg={{empty}} -> ""; PAGE:it.w:L'Internazionale DATE:2015-02-25
 			) {	
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			bfr.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.Gfh_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
+			bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.entitys.Gfh_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
 			return bfr.To_bry_and_rls();
 		}
 		switch (fmt_tid) {

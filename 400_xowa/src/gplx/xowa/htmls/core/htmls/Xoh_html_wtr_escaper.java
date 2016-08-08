@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.btries.*; import gplx.langs.htmls.*;
+import gplx.core.btries.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, byte[] src) {
@@ -53,19 +54,19 @@ public class Xoh_html_wtr_escaper {
 						if (o == null)										// invalid; EX: "a&b"; "&bad;"; "&#letters;"; 
 							bfr.Add(Gfh_entity_.Amp_bry);					// escape & and continue
 						else {												// is either (1) a name or (2) an ncr (hex/dec)
-							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
+							Gfh_entity_itm itm = (Gfh_entity_itm)o;
 							int match_pos = trv.Pos();
 							int itm_tid = itm.Tid();
 							switch (itm_tid) {
-								case Xop_amp_trie_itm.Tid_name_std:
-								case Xop_amp_trie_itm.Tid_name_xowa:		// name
+								case Gfh_entity_itm.Tid_name_std:
+								case Gfh_entity_itm.Tid_name_xowa:		// name
 									bfr.Add_mid(src, i, match_pos);			// embed entire name
 									i = match_pos - 1;
 									break;
-								case Xop_amp_trie_itm.Tid_num_dec:
-								case Xop_amp_trie_itm.Tid_num_hex:			// ncr: dec/hex; escape if invalid
+								case Gfh_entity_itm.Tid_num_dec:
+								case Gfh_entity_itm.Tid_num_hex:			// ncr: dec/hex; escape if invalid
 									Xop_amp_mgr_rslt rslt = new Xop_amp_mgr_rslt();
-									boolean pass = amp_mgr.Parse_ncr(rslt, itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, i, match_pos);
+									boolean pass = amp_mgr.Parse_ncr(rslt, itm_tid == Gfh_entity_itm.Tid_num_hex, src, end, i, match_pos);
 									if (pass) {								// parse worked; embed entire ncr; EX: "&#123;"
 										int end_pos = rslt.Pos();
 										bfr.Add_mid(src, i, end_pos);

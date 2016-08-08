@@ -24,12 +24,11 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final    Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xow_repo_mgr repo_mgr;
-	private Xof_file_itm xfer_itm; private byte[] file_size_bry; private byte[] play_btn_icon;		
+	private Xof_file_itm xfer_itm; private byte[] file_size_bry;
 	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public void Bld_html(Xowe_wiki cur_wiki, Xop_ctx ctx, Xoae_page page, Bry_bfr bfr, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, Xof_xfer_queue queue) {
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
-		this.play_btn_icon = wiki.Html_mgr().Img_media_play_btn();
 		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_file, ctx, ctx.Page(), queue, ttl.Page_txt()
 		, Xop_lnki_type.Id_thumb, Xop_lnki_tkn.Upright_null, html_wtr.Main_img_w(), html_wtr.Main_img_h(), Xof_lnki_time.Null, Xof_lnki_page.Null, Bool_.N);
 		Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer_itm.Lnki_ttl());
@@ -50,9 +49,8 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, commons_notice);
 	}
 
-	public void Bld_html(Xowe_wiki wiki, Bry_bfr bfr, Xof_file_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, byte[] file_size_bry, byte[] play_btn_icon) {	// TEST:
+	public void Bld_html(Xowe_wiki wiki, Bry_bfr bfr, Xof_file_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, byte[] file_size_bry) {	// TEST:
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
-		this.play_btn_icon = play_btn_icon;
 		this.xfer_itm = xfer_itm;  this.file_size_bry = file_size_bry;
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, "");
 	}
@@ -67,9 +65,9 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 				, alt_bry, xowa_title, alt_wtr);
 		else if (orig_ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
 			html_wtr.Html_main_vid().Bld_bfr_many(bfr, xfer_itm.Html_uid(), xfer_itm.Html_view_url().To_http_file_bry(), Atr_class_image, xowa_title
-				, xfer_itm.Html_view_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
+				, xfer_itm.Html_view_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_w());
 		else if (orig_ext.Id_is_audio())
-			html_wtr.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_url().To_http_file_bry(), xowa_title, xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
+			html_wtr.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_url().To_http_file_bry(), xowa_title, xfer_itm.Html_w(), xfer_itm.Html_w());
 	}
 	private static final    byte[] Atr_class_image = Bry_.new_a7("image");
 	private static final    String Str_commons_notice = String_.Concat_lines_nl_skip_last

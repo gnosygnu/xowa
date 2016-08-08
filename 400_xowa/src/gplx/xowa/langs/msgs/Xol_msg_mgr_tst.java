@@ -16,10 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*; import gplx.xowa.langs.msgs.*;
-public class Xol_msg_mgr_tst {
-	Xol_msg_mgr_fxt fxt = new Xol_msg_mgr_fxt();
-	@Before public void init() {fxt.Clear();}
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.langs.msgs.*;
+public class Xol_msg_mgr_tst {		
+	@Before public void init() {fxt.Clear();} private final    Xol_msg_mgr_fxt fxt = new Xol_msg_mgr_fxt();
 	@Test  public void Template_msg() {fxt.Test_val_by_key("About {{SITENAME}}", "About Wikipedia");}	// PURPOSE.fix: {{Template}} not working inside label tags; EX:de.wikisource.org; DATE:2013-02-10
 	@Test  public void Template_mediawiki() {	// PURPOSE.fix: {{Template}} not working inside MediaWiki template
 		fxt.Test_mediaWiki_msg("About {{SITENAME}}", "About Wikipedia");
@@ -29,6 +28,10 @@ public class Xol_msg_mgr_tst {
 		fxt.Clear().Test_val_html_accesskey_and_title("test_title"	, null	, " title=\"test_title\"");		// accesskey is missing
 		fxt.Clear().Test_val_html_accesskey_and_title("test_title"	, ""	, " title=\"test_title\"");		// accesskey is ""
 		fxt.Clear().Test_val_html_accesskey_and_title(null			, "a"	, " title=\"\"");				// no title; leave blank
+	}
+	@Test   public void Missing() {
+		fxt.Test__get_msg_val("missing", "<missing>");	// check that key is enclosed in <>
+		fxt.Test__get_msg_val("Missing", "<Missing>");	// check that val matches key; used to match 1st case-insensitive variant; EX: "<missing>" b/c "<missing>" was returned above; DATE:2016-08-01
 	}
 }
 class Xol_msg_mgr_fxt {
@@ -56,6 +59,9 @@ class Xol_msg_mgr_fxt {
 		if (init_title		!= null) new_msg_itm_("tooltip-test"	, init_title);
 		if (init_accesskey	!= null) new_msg_itm_("accesskey-test"	, init_accesskey);
 		Tfds.Eq(expd, String_.new_a7(wiki.Msg_mgr().Val_html_accesskey_and_title(Bry_.new_a7("test"))));
+	}
+	public void Test__get_msg_val(String key, String expd) {
+		Gftest.Eq__str(expd, Xol_msg_mgr_.Get_msg_val(wiki, wiki.Lang(), Bry_.new_a7(key), Bry_.Ary_empty));
 	}
 	private void new_msg_itm_(String key, String val) {
 		Xol_msg_itm itm = wiki.Lang().Msg_mgr().Itm_by_key_or_new(Bry_.new_a7(key));

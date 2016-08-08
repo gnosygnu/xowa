@@ -81,7 +81,7 @@ public class Xoh_file_page_wtr {
 	, "  <div><a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_media_play\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\" alt=\"Play sound\"></a></div>"
 	, "</div>"
 	, ""
-	), "lnki_url", "xowa_title", "play_width", "play_max_width", "play_icon");
+	), "lnki_url", "xowa_title", "play_width", "play_max_width");
 	public Bry_fmtr	Html_main_vid() {return html_main_vid;} private final    Bry_fmtr html_main_vid = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div class=\"fullImageLink\" id=\"file\">"
 	, "  <div>" 
@@ -92,7 +92,7 @@ public class Xoh_file_page_wtr {
 	, "  <div><a href=\"~{lnki_url}\" xowa_title=\"~{xowa_title}\" class=\"xowa_media_play\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\" alt=\"Play sound\"></a></div>"
 	, "</div>"
 	, ""
-	), "elem_id", "lnki_href", "lnki_class", "xowa_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt", "lnki_url", "play_width", "play_max_width", "play_icon");
+	), "elem_id", "lnki_href", "lnki_class", "xowa_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt", "lnki_url", "play_width", "play_max_width");
 	public Bry_fmtr	Html_alts() {return html_alts;} private final    Bry_fmtr html_alts = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "      <a href=\"~{thumb_href}\" class=\"mw-thumbnail-link\" xowa_title=\"~{xowa_title}\">"
 	, "        ~{thumb_width} × ~{thumb_height}"

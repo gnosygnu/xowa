@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.core.envs.*; import gplx.xowa.apps.progs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.langs.htmls.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*;
+import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -97,6 +98,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case Byte_ascii.Percent: // EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
 					tag_obj = null;	
 					break;
 			}
@@ -319,7 +321,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Int__home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -479,7 +481,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {                
 			if (pre2_pending) {
 				pre2_pending = false;

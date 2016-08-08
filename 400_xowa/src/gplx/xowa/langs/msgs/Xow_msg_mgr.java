@@ -49,7 +49,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		if (itm == null) {
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
-			if (itm.Src_is_missing()) itm = null;
+			if (itm.Defined_in_none()) itm = null;
 			tmp_bfr.Mkr_rls();
 		}
 		return itm;
@@ -62,7 +62,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		if (itm == null)
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
-		if (itm.Src_is_missing()) {
+		if (itm.Defined_in_none()) {
 			tmp_bfr.Mkr_rls();
 			return Bry_.Empty;
 		}

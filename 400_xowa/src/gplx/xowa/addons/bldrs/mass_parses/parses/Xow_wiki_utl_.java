@@ -23,6 +23,8 @@ public class Xow_wiki_utl_ {
 		Xol_lang_itm_.Lang_init(lang);
 		Xowe_wiki rv = new Xowe_wiki(wiki.Appe(), lang, gplx.xowa.wikis.nss.Xow_ns_mgr_.default_(lang.Case_mgr()), wiki.Domain_itm(), wiki_dir);
 		rv.Init_by_wiki();
+		rv.File_mgr().Repo_mgr().Clone(wiki.File_mgr().Repo_mgr());
+		rv.File__fsdb_mode().Tid__v2__bld__y_();
 		return rv;
 	}
 }

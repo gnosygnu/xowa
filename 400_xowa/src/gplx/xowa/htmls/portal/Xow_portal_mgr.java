@@ -21,12 +21,13 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.guis.*; import gplx.xowa.htmls.sidebar.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; 
-import gplx.xowa.htmls.hrefs.*;
+import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.apps.apis.xowa.html.skins.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.portal.vnts.*;
 public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
 	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
+	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xowh_sidebar_mgr(wiki);
@@ -53,7 +54,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		byte[] wiki_user_name = wiki.User().Name();
 		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user), Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user_talk));
 		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_.Bry__site).Add(wiki.Domain_bry()).Add(Xoh_href_.Bry__wiki).To_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
-		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_lnx.Encode_to_file_protocol(wiki.Appe().Usere().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
+		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(wiki.Appe().Usere().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();

@@ -86,7 +86,7 @@ public class Bry_fmt_parser_ {
 			if (rhs_pos - lhs_pos == 0) throw Err_.new_("bry_fmt", "{} will result in empty key", "src", src);
 			byte[] key = Bry_.Mid(src, lhs_pos, rhs_pos);
 			if (!list.Has(key)) list.Add(key, key);
-			pos = rhs_pos + 1;
+			pos = rhs_pos;	// NOTE: auto-increment done at top of loop
 		}
 		return (byte[][])list.To_ary(byte[].class);
 	}	private static final    byte[] Bry_arg_lhs = Bry_.new_a7("~{");

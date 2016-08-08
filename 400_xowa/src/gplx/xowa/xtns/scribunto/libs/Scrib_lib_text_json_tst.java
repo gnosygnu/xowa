@@ -25,15 +25,6 @@ public class Scrib_lib_text_json_tst {
 		lib = fxt.Core().Lib_text();
 		lib.Init();
 	}
-	@Test  public void Nde__empty() {	// NOTE: based on MW
-		json_fxt.Test_json_roundtrip(fxt, lib
-		, Json_doc.Make_str_by_apos
-		( "{"
-		, "}"
-		)
-		, Keyval_.Ary_empty
-		);
-	}
 	@Test  public void Nde__key_obj__primitives() {	// NOTE: based on MW
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
@@ -135,27 +126,36 @@ public class Scrib_lib_text_json_tst {
 		json_fxt.Test_json_decode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__preserve_keys
 		, Json_doc.Make_str_by_apos
-		( "[ 1"
-		, ", 'abc'"
-		, ", true"
-		, ", false"
-		, "]"
+		( "{ '1':1"
+		, ", '2':'abc'"
+		, ", '3':true"
+		, ", '4':false"
+		, "}"
 		)
-		, new Object[]
+		, Kv_ary_utl.new_(Bool_.Y, new Object[]
 		{ 1
 		, "abc"
 		, true
 		, false
 		}
-		);
+		));
 	}
+//		@Test  public void Nde__empty() {	// NOTE: based on MW
+//			json_fxt.Test_json_roundtrip(fxt, lib
+//			, Json_doc.Make_str_by_apos
+//			( "{"
+//			, "}"
+//			)
+//			, Keyval_.Ary_empty
+//			);
+//		}
 	@Test  public void Ary__empty() {	// NOTE: based on MW
-		json_fxt.Test_json_roundtrip(fxt, lib
+		json_fxt.Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none
+		, Kv_ary_utl.new_(Bool_.Y, new Object[] {})
 		, Json_doc.Make_str_by_apos
 		( "["
 		, "]"
 		)
-		, Object_.Ary_empty
 		);
 	}
 	@Test  public void Ary__obj() {	// NOTE: based on MW
@@ -187,7 +187,7 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "]"
 		)
-		, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}}
+		, Kv_ary_utl.new_(Bool_.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
 		);
 	}
 	@Test   public void Nde__smoke() {
@@ -237,7 +237,7 @@ public class Scrib_lib_text_json_tst {
 	}
 }
 class Scrib_lib_json_fxt {
-	private final Json_wtr wtr = new Json_wtr();
+	private final    Json_wtr wtr = new Json_wtr();
 	public void Test_json_roundtrip(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, String json, Object obj) {
 		Test_json_decode(fxt, lib, Scrib_lib_text__json_util.Flag__none, json, obj);
 		Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none, obj, json);

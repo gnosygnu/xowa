@@ -79,12 +79,12 @@ class Scrib_lib_text__json_util {
 		}
 	}
 	public Keyval[] Decode_rslt_as_nde() {return decode_rslt_as_nde;} private Keyval[] decode_rslt_as_nde;
-	public Object	Decode_rslt_as_ary() {return decode_rslt_as_ary;} private Object   decode_rslt_as_ary;
+	public Keyval[] Decode_rslt_as_ary() {return decode_rslt_as_ary;} private Keyval[] decode_rslt_as_ary;
 	public byte Decode(Json_parser parser, byte[] src, int flag) {
 		synchronized (wtr) {
 			Json_doc jdoc = parser.Parse(src);
 			if (jdoc.Root_grp().Tid() == Json_itm_.Tid__ary) {
-				this.decode_rslt_as_ary = Decode_ary(jdoc.Root_ary());
+				this.decode_rslt_as_ary = Decode_ary_top(jdoc.Root_ary());
 				return Bool_.N_byte;
 			}
 			else {
@@ -105,12 +105,21 @@ class Scrib_lib_text__json_util {
 	private Object Decode_obj(Json_itm itm) {
 		int itm_tid = itm.Tid();
 		switch (itm_tid) {
-			case Json_itm_.Tid__ary:	return Decode_ary(Json_ary.cast(itm));
+			case Json_itm_.Tid__ary:	return Decode_ary_sub(Json_ary.cast(itm));
 			case Json_itm_.Tid__nde:	return Decode_nde(Json_nde.cast(itm));
 			default:					return itm.Data();
 		}
 	}
-	private Object Decode_ary(Json_ary ary) {
+	private Keyval[] Decode_ary_top(Json_ary ary) {	// NOTE: top-level arrays must be returned as numbered nodes; EX: [{1:a}, {2:b}, {3:c}] not [a, b, c]; DATE:2016-08-01
+		int len = ary.Len();
+		Keyval[] rv = new Keyval[len];
+		for (int i = 0; i < len; ++i) {
+			Json_itm itm = ary.Get_at(i);
+			rv[i] = Keyval_.int_(i + List_adp_.Base1, Decode_obj(itm));
+		}
+		return rv;
+	}
+	private Object Decode_ary_sub(Json_ary ary) {
 		int len = ary.Len();
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; ++i) {

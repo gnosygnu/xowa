@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_thm_html_tst {
-	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Test   public void Image() {
 		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
@@ -36,7 +36,7 @@ public class Xoh_thm_html_tst {
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:11px;\">"
 		, "    <div class=\"xowa_media_div\">"
-		,       "<div><a href=\"\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
+		,       "<div><a href=\"\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:9px;max-width:11px;\" alt=\"Play sound\"></a></div>"
 		,       "<div><a href=\"/wiki/File:A.oga\" class=\"xowa_media_info\" title=\"About this file\"></a></div>"
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">"

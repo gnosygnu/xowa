@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 class Hiero_html_wtr {
 	private Hiero_phoneme_mgr phoneme_mgr;
 	private Bry_bfr temp_bfr = Bry_bfr_.Reset(255);		

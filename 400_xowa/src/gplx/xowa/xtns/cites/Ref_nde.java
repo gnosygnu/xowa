@@ -36,7 +36,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xatr_id_obj == null) return;
 		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
 		switch (xatr_id.Val()) {
-			case Xatr_id_name:		name = wiki.Appe().Sanitizer().Escape_id(xatr.Val_as_bry()); break;
+			case Xatr_id_name:		name = wiki.Sanitizer().Escape_id(xatr.Val_as_bry()); break;
 			case Xatr_id_follow:	follow = xatr.Val_as_bry(); break;
 			case Xatr_id_group:		group = xatr.Val_as_bry(); break;
 		}

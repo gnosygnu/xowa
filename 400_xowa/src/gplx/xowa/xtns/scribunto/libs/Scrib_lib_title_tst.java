@@ -22,7 +22,7 @@ public class Scrib_lib_title_tst {
 	@Before public void init() {
 		gplx.dbs.Db_conn_bldr.Instance.Reg_default_mem();
 		fxt.Clear();
-		fxt.Core().Wiki().File__fsdb_mode().Tid_v2_bld_y_();
+		fxt.Core().Wiki().File__fsdb_mode().Tid__v2__bld__y_();
 		lib = fxt.Core().Lib_title().Init();
 	}
 	@Test  public void NewTitle() {
@@ -145,6 +145,8 @@ public class Scrib_lib_title_tst {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  exists=false"
+		, "  width=0"
+		, "  height=0"
 		);
 	}
 	private static String file_info_exists(String ttl, int w, int h) {

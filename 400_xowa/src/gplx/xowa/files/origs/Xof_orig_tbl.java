@@ -77,7 +77,7 @@ public class Xof_orig_tbl implements Rls_able {
 	}
 	public Xof_orig_itm Load_by_rdr(Db_rdr rdr) {
 		byte repo = rdr.Read_byte(fld_repo);
-		Xof_orig_itm rv = new Xof_orig_itm().Init
+		Xof_orig_itm rv = new Xof_orig_itm
 		( repo
 		, rdr.Read_bry_by_str(fld_ttl)
 		, rdr.Read_int(fld_ext)

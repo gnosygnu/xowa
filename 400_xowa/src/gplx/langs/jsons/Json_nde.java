@@ -36,6 +36,10 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		Json_itm rv = Get_as_itm_or_null(key); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
 		return Json_ary.cast(rv);
 	}
+	public byte[] Get_as_bry(String key) {
+		byte[] rv = Get_as_bry_or(Bry_.new_u8(key), null); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
+		return rv;
+	}
 	public byte[] Get_as_bry_or(byte[] key, byte[] or) {
 		Json_itm rv = Get_as_itm_or_null(key);
 		return rv == null ? or : rv.Data_bry();
@@ -71,6 +75,10 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public boolean Get_as_bool_or(byte[] key, boolean or) {
 		byte[] rv = Get_as_bry_or(key, null);
 		return rv == null ? or : Bry_.Eq(rv, Bool_.True_bry);
+	}
+	public DateAdp Get_as_date_by_utc(String key) {
+		byte[] rv = Get_as_bry_or(Bry_.new_u8(key), null); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
+		return DateAdp_.parse_gplx(String_.new_u8(rv));
 	}
 
 	// to convert

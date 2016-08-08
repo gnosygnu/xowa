@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
-	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xow_repo_mgr repo_mgr; private final byte[] wiki_domain;
-	private final Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		
+	private final    Xoapi_orig_base orig_api; private final    Xof_download_wkr download_wkr; private final    Xow_repo_mgr repo_mgr; private final    byte[] wiki_domain;
+	private final    Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		
 	public Xof_orig_wkr__wmf_api(Xoapi_orig_base orig_api, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] wiki_domain) {
 		this.orig_api = orig_api; this.download_wkr = download_wkr; this.repo_mgr = repo_mgr; this.wiki_domain = wiki_domain;
 	}
@@ -35,8 +36,7 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		int api_w = api_rv.Orig_w(), api_h = api_rv.Orig_h();
 		Xof_ext api_ext = Xof_ext_.new_by_ttl_(api_page); api_ext = Ext__handle_ogg(api_ext, api_w, api_h);
 		byte[] api_redirect = Bry_.Eq(api_page, ttl) ? Bry_.Empty : api_page;	// ttl is different; must be redirect
-		Xof_orig_itm rv = new Xof_orig_itm();
-		rv.Init(api_repo, api_page, api_ext.Id(), api_w, api_h, api_redirect);
+		Xof_orig_itm rv = new Xof_orig_itm(api_repo, api_page, api_ext.Id(), api_w, api_h, api_redirect);
 		rv.Insert_new_y_();
 		return rv;
 	}

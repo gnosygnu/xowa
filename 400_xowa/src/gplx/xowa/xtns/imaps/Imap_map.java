@@ -19,7 +19,7 @@ package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.xtns.imaps.itms.*; import gplx.xowa.xtns.imaps.htmls.*;
-public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
+public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 	private byte img_cls_tid; private Imap_xtn_mgr xtn_mgr;
 	private byte[] a_href, img_alt, img_cls_other;
 	public Imap_map(int id) {this.id = id;}
@@ -35,7 +35,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 	public Imap_err[]			Errs()			{return errs;}			private Imap_err[] errs;
 	public boolean					Invalid()		{return img == null;}	// invalid if missing image; PAGE:en.w:Wikipedia:WikiProject_Games/Advert EX: <imagemap>|thumb;</imagemap>; DATE:2014-08-12
 
-	public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
+	public void Add_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 		, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 		) {

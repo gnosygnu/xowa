@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.langs.htmls.entitys.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*; 
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*;
 import gplx.xowa.apps.urls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.cases.*;	
@@ -68,7 +69,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Full_url() {
 		synchronized (href_encoder) {	// LOCK:static-obj
-			return Gfo_url_encoder_.Href.Encode(full_txt);
+			return href_encoder.Encode(full_txt);
 		}
 	}
 	public String Full_db_as_str()	{return String_.new_u8(Full_db());}
@@ -259,9 +260,9 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						if (trv == null) trv = new Btrie_rv();
 						Object html_ent_obj = amp_trie.Match_at(trv, src, cur2, end);
 						if (html_ent_obj != null) {									
-							Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)html_ent_obj;
+							Gfh_entity_itm amp_itm = (Gfh_entity_itm)html_ent_obj;
 							match_pos = trv.Pos();
-							if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name_std) {
+							if (amp_itm.Tid() == Gfh_entity_itm.Tid_name_std) {
 								switch (amp_itm.Char_int()) {
 									case 160:	// NOTE: &nbsp must convert to space; EX:w:United States [[Image:Dust Bowl&nbsp;- Dallas, South Dakota 1936.jpg|220px|alt=]]
 										if (ltr_bgn != -1) add_ws = true;	// apply same ws rules as Space, NewLine; needed for converting multiple ws into one; EX:" &nbsp; " -> " " x> "   "; PAGEen.w:Greek_government-debt_crisis; DATE:2014-09-25
@@ -275,7 +276,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 									case Byte_ascii.Gt:
 										b_ary = amp_itm.Xml_name_bry();
 										break;
-									case Xop_amp_trie_itm.Char_int_null:	// &#xx;
+									case Gfh_entity_itm.Char_int_null:	// &#xx;
 										int end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, match_pos, end);
 										if (end_pos == Bry_find_.Not_found) {} // &# but no terminating ";" noop: defaults to current_byte which will be added below;
 										else {
@@ -290,7 +291,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							}
 							else {
 								Xop_amp_mgr_rslt amp_rv = new Xop_amp_mgr_rslt();
-								amp_mgr.Parse_ncr(amp_rv, amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex, src, end, cur2, match_pos);
+								amp_mgr.Parse_ncr(amp_rv, amp_itm.Tid() == Gfh_entity_itm.Tid_num_hex, src, end, cur2, match_pos);
 								if (amp_rv.Pass()) {
 									b_ary = gplx.core.intls.Utf16_.Encode_int_to_bry(amp_rv.Val());
 									if (b_ary.length == 1 && b_ary[0] == Byte_ascii.Hash)	// NOTE: A&#x23;B should be interpreted as A#b; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07

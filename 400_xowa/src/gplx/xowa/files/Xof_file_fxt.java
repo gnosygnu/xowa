@@ -19,7 +19,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Xof_file_fxt {
-	private final Xowe_wiki wiki;
+	private final    Xowe_wiki wiki;
 	Xof_file_fxt(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		Io_mgr.Instance.InitEngine_mem();
@@ -40,7 +40,7 @@ public class Xof_file_fxt {
 		Db_conn conn = Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/xowa/wiki/" + wiki.Domain_str() + "/orig.xowa")).Conn();
 		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(conn, Bool_.Y);
 		orig_tbl.Create_tbl();
-		wiki.File_mgr().Orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.new_v2_gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
+		wiki.File_mgr().Orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.New__v2__gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
 		return this;
 	}
 	public void Exec_orig_add(boolean repo_is_commons, String orig_ttl, int orig_ext_id, int orig_w, int orig_h, String orig_redirect) {

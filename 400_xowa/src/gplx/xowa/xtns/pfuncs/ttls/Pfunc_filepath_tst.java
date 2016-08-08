@@ -61,6 +61,6 @@ public class Pfunc_filepath_tst {
 	}
 //		private static void Init_orig_mgr(Xow_wiki wiki) {
 //			Xof_orig_tbl orig_tbl = null;
-//			wiki.File__orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.new_v2_gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
+//			wiki.File__orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.New__v2__gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
 //		}
 }

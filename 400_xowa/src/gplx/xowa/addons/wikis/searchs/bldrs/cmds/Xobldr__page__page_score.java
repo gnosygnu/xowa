@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.bldrs.pagelinks.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {	// create page_rank in page_db; drop and vaccuum later; avoid cross db for now
 	private double damping_factor = .85;

@@ -35,7 +35,9 @@ class Xomp_html_db_rdr {
 		src_tbl.Select_as_row(rv, page_id);
 	}
 	public void Rls() {
-		for (Xowd_html_tbl src_tbl : src_tbls)
+		for (Xowd_html_tbl src_tbl : src_tbls) {
+			if (src_tbl == null) continue;	// can be null if fsys has dirs, but db does not have any wkr_ids
 			src_tbl.Conn().Rls_conn();
+		}
 	}
 }

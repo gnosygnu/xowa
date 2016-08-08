@@ -52,60 +52,78 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean KillMarkers(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		if (Gfh_entity_ == null) Gfh_entity_ = Scrib_lib_text_html_entities.new_();
-		return rslt.Init_obj(Gfh_entity_);
-	}	private static Keyval[] Gfh_entity_;
+		if (html_entities == null) html_entities = Scrib_lib_text_html_entities.new_();
+		return rslt.Init_obj(html_entities);
+	}	private static Keyval[] html_entities;
 	public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Object itm = args.Pull_obj(0);
-		Class<?> itm_type = itm.getClass();
-		Keyval[] itm_as_kvy = null;
+
+		// try to determine if node or array; EX: {a:1, b:2} vs [a:1, b:2]
+		Keyval[] itm_as_nde = null;
 		Object itm_as_ary = null;	
-		if		(Type_adp_.Eq(itm_type, Keyval[].class))	itm_as_kvy = (Keyval[])itm;
-		else if	(Type_adp_.Is_array(itm_type))				itm_as_ary = Array_.cast(itm);
-		int flags = args.Cast_int_or(1, 0);
-		synchronized (reindex_data) {
-			if (	itm_as_kvy != null 
-				&&	itm_as_kvy.length > 0
-				&&	!Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
-				) {
-				json_util.Reindex_arrays(reindex_data, itm_as_kvy, true);
-				if (reindex_data.Rv_is_kvy()) {
-					itm_as_kvy = reindex_data.Rv_as_kvy();
-					itm_as_ary = null;
-				}
-				else {
-					itm_as_ary = reindex_data.Rv_as_ary();
-					itm_as_kvy = null;
-				}
-			}
-			byte[] rv = null;
-			if (itm_as_kvy != null)
-				rv = json_util.Encode_as_nde(itm_as_kvy, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
-			else
-				rv = json_util.Encode_as_ary(itm_as_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all);
-			if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
-			return rslt.Init_obj(rv);
+		Class<?> itm_type = itm.getClass();
+		boolean itm_is_nde = Type_adp_.Eq(itm_type, Keyval[].class);
+
+		// additional logic to classify "[]" as ary, not nde; note that this is done by checking len of itm_as_nde
+		if (itm_is_nde) {
+			itm_as_nde = (Keyval[])itm;
+			int itm_as_nde_len = itm_as_nde.length;
+			if (itm_as_nde_len == 0) {	// Keyval[0] could be either "[]" or "{}"; for now, classify as "[]" per TextLibraryTests.lua; 'json encode, empty table (could be either [] or {}, but change should be announced)'; DATE:2016-08-01
+				itm_as_nde = null;
+				itm_is_nde = false;
+			}					
 		}
+		if	(!itm_is_nde)
+			itm_as_ary = Array_.cast(itm);
+
+		// reindex ndes unless preserve_keys
+		int flags = args.Cast_int_or(1, 0);
+		if (	itm_is_nde
+			&&	!Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys)
+			) {
+			json_util.Reindex_arrays(reindex_data, itm_as_nde, true);
+			if (reindex_data.Rv_is_kvy()) {
+				itm_as_nde = reindex_data.Rv_as_kvy();
+				itm_as_ary = null;
+			}
+			else {
+				itm_as_ary = reindex_data.Rv_as_ary();
+				itm_as_nde = null;
+				itm_is_nde = false;
+			}
+		}
+
+		// encode and return 
+		byte[] rv = itm_is_nde
+			? json_util.Encode_as_nde(itm_as_nde, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all)
+			: json_util.Encode_as_ary(itm_as_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all)
+			;
+		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
+		return rslt.Init_obj(rv);
 	}
 	public boolean JsonDecode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// init
 		byte[] json = args.Pull_bry(0);
 		int flags = args.Cast_int_or(1, 0);
 		int opts = Scrib_lib_text__json_util.Opt__force_assoc;
 		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
 			opts = Bitmask_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
-		synchronized (procs) {
-			byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
-			if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
-			if (rv_tid == Bool_.Y_byte && !(Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
-				Keyval[] rv_as_kvy = (Keyval[])json_util.Decode_rslt_as_nde();
-				synchronized (reindex_data) {
-					json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
-					return rslt.Init_obj(reindex_data.Rv_is_kvy() ? reindex_data.Rv_as_kvy() : reindex_data.Rv_as_ary());
-				}
-			}
-			else
-				return rslt.Init_obj(json_util.Decode_rslt_as_ary());
+
+		// decode json to Object; note that Bool_.Y means ary and Bool_.N means ary
+		byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
+		if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
+		if (rv_tid == Bool_.Y_byte) {
+			Keyval[] rv_as_kvy = (Keyval[])json_util.Decode_rslt_as_nde();
+
+			// reindex unless preserve_keys passed
+			if (!(Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
+				json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
+				rv_as_kvy = reindex_data.Rv_is_kvy() ? (Keyval[])reindex_data.Rv_as_kvy() : (Keyval[])reindex_data.Rv_as_ary();
+			}					
+			return rslt.Init_obj(rv_as_kvy);
 		}
+		else
+			return rslt.Init_obj(json_util.Decode_rslt_as_ary());
 	}
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {

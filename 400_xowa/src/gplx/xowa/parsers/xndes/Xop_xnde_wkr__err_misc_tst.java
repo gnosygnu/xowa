@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_xnde_wkr__err_misc_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Error_br_removed() {
 		fxt.Init_para_y_();
@@ -186,5 +186,8 @@ public class Xop_xnde_wkr__err_misc_tst {
 	}
 	@Test   public void Img_should_not_be_xtn() {	// PURPOSE:<img> marked as .xtn; unclosed <img> was escaping rest of text; PAGE:de.w:Wikipedia:Technik/Archiv/2014 DATE:2014-11-06
 		fxt.Test_parse_page_all_str("<img>''a''", "&lt;img><i>a</i>");
+	}
+	@Test   public void Invalid__percent() {	// PURPOSE: invalidate xml tags with %; EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
+		fxt.Test_parse_page_all_str("<b%>a</b>", "&lt;b%&gt;a</b>");	// NOTE: should be literally printed as <b%>, not transformed to <b>
 	}
 }

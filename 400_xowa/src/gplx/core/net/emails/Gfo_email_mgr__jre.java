@@ -24,7 +24,7 @@ import java.net.URLEncoder;
 class Gfo_email_mgr__jre implements Gfo_email_mgr {
 	public void Send(String to, String subject, String body) {
 		try {
-			Gfo_url_encoder url_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_wnt;
+			Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__fsys_wnt().Make();
 			subject = url_encoder.Encode_str(subject);
 			body = url_encoder.Encode_str(body);
 			body = String_.Replace(body, "`", "%60");

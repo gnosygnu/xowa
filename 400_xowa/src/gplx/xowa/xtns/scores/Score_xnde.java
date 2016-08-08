@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
+import gplx.xowa.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
 public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
@@ -80,7 +80,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		html_id_img = hcmd_id + "_img";
 		html_id_a	= hcmd_id + "_a";
 		html_a_href = ""; html_img_src = "";
-		html_img_alt = String_.new_u8(Bry_.Replace(code, Byte_ascii.Nl_bry, gplx.langs.htmls.Gfh_entity_.Nl_bry));
+		html_img_alt = String_.new_u8(Bry_.Replace(code, Byte_ascii.Nl_bry, gplx.langs.htmls.entitys.Gfh_entity_.Nl_bry));
 		String html_img_alt_tmp = "", html_img_src_tmp = "", html_a_href_tmp = "";
 		html_img_src = png_file.To_http_file_str();			
 		html_a_href = aud_file.To_http_file_str();

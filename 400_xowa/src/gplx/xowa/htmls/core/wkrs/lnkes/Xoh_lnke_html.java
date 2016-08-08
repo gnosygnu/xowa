@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.btries.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.urls.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*;	
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_lnke_html {
 	private static final    byte[] Disabled_button = Bry_.new_a7("&#x2297;");
 	private final    Gfo_url_encoder href_encoder = Gfo_url_encoder_.New__html_href_quotes().Make();
+	private final    Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
 	public void Write_html(Bry_bfr bfr, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int href_bgn = lnke.Lnke_href_bgn(), href_end = lnke.Lnke_href_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		byte lnke_type = Calc_type(lnke);
@@ -59,7 +60,7 @@ public class Xoh_lnke_html {
 			else {							// xowa or regular; EX: http://a.org
 				if (proto_is_xowa) {
 					bfr.Add(Xop_lnke_wkr.Bry_xowa_protocol);
-					gplx.langs.htmls.encoders.Gfo_url_encoder_.Gfs.Encode(bfr, src, href_bgn, href_end);
+					gfs_encoder.Encode(bfr, src, href_bgn, href_end);
 					return false;
 				}
 				else {						// regular; add href

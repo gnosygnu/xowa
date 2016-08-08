@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.btries.*;
+import gplx.langs.htmls.entitys.*;
 public class Xoh_js_cleaner {
 	private Xoae_app app; private boolean ctor = true;
 	public Xoh_js_cleaner(Xoae_app app) {this.app = app;}
@@ -49,7 +50,7 @@ public class Xoh_js_cleaner {
 					int frag_len = frag.length;
 					if (frag[0] == Byte_ascii.Lt) {	// jscript node; EX: <script
 						if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
-						bfr.Add(gplx.langs.htmls.Gfh_entity_.Lt_bry);
+						bfr.Add(Gfh_entity_.Lt_bry);
 						bfr.Add_mid(frag, 1, frag.length);
 						pos += frag_len; 
 					}
@@ -60,7 +61,7 @@ public class Xoh_js_cleaner {
 						else {
 							if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
 							bfr.Add(frag);
-							bfr.Add(gplx.langs.htmls.Gfh_entity_.Eq_bry);
+							bfr.Add(Gfh_entity_.Eq_bry);
 							pos = atr_pos;
 						}
 					}

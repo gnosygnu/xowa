@@ -27,8 +27,8 @@ public class Srch_bldr_mgr_ {
 		int page_rank_iterations = app.Api_root().Bldr().Wiki().Import().Page_rank().Iteration_max();
 		boolean page_rank_enabled = page_rank_iterations > 0;
 		if (page_rank_enabled) {
-			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.bldrs.pagelinks.bldrs.Pglnk_bldr_cmd.Dump_type_key));
-			bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.bldrs.pagelinks.bldrs.Pglnk_bldr_cmd.BLDR_CMD_KEY);
+			bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_download_cmd(bldr, wiki).Dump_type_(gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs.Pglnk_bldr_cmd.Dump_type_key));
+			bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs.Pglnk_bldr_cmd.BLDR_CMD_KEY);
 		}
 		bldr.Cmd_mgr().Add(new Xobldr__page__page_score(bldr, wiki).Iteration_max_(page_rank_iterations));
 		bldr.Cmd_mgr().Add(new Xobldr__link__link_score(bldr, wiki).Page_rank_enabled_(page_rank_enabled).Delete_plink_db_(Bool_.Y));

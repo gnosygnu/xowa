@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.fsdb.*;
 public class Xof_orig_wkr_ {
-	public static final Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
+	public static final    Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
 	public static void Find_by_list(Xof_orig_wkr wkr, Ordered_hash rv, List_adp itms) {
 		int len = itms.Count();
 		for (int i = 0; i < len; ++i) {
@@ -34,5 +34,6 @@ public class Xof_orig_wkr_ {
 	  Tid_xowa_db			= 1
 	, Tid_wmf_api			= 2
 	, Tid_xowa_meta			= 3
+	, Tid_xowa_img_links	= 4
 	;
 }

@@ -24,7 +24,7 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 	public Xobldr__fsdb_db__create_orig(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_bgn(Xob_bldr bldr) {
 		Xof_fsdb_mode fsdb_mode = wiki.File__fsdb_mode();
-		fsdb_mode.Tid_v2_bld_y_();
+		fsdb_mode.Tid__v2__bld__y_();
 		wiki.Init_assert();
 		Fsdb_db_mgr db_core_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		this.schema_1 = db_core_mgr.File__schema_is_1();

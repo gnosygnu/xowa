@@ -42,6 +42,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.html_mgr = new Xow_html_mgr(this);
 		this.page_mgr = new Xowe_page_mgr(this);
+		this.sanitizer = new Xop_sanitizer(app.Parser_amp_mgr(), app.Msg_log());
 
 		tdb_fsys_mgr = new Xotdb_fsys_mgr(wiki_dir, ns_mgr);
 		redirect_mgr = new Xop_redirect_mgr(this);
@@ -112,6 +113,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final    Xowe_page_mgr page_mgr;
+	public Xop_sanitizer			Sanitizer() {return sanitizer;} private final    Xop_sanitizer sanitizer;
+
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;

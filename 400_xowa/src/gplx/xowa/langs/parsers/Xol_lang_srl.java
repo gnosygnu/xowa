@@ -113,7 +113,7 @@ public class Xol_lang_srl {
 					break;
 				case Byte_ascii.Nl:
 					byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
-					Xol_msg_itm itm = msg_mgr.Itm_by_key_or_new(cur_key).Src_(Xol_msg_itm.Src_lang);	// NOTE: this proc should only be called when loading lang.gfs
+					Xol_msg_itm itm = msg_mgr.Itm_by_key_or_new(cur_key).Defined_in_(Xol_msg_itm.Defined_in__lang);	// NOTE: this proc should only be called when loading lang.gfs
 					Xol_msg_itm_.update_val_(itm, cur_val);
 					itm.Dirty_(true);
 					fld_bgn = pos + 1;

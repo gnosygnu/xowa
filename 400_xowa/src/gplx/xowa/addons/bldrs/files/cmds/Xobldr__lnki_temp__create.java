@@ -81,13 +81,13 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 
 		// init fsdb
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
-		wiki.File__fsdb_mode().Tid_v2_bld_y_();
+		wiki.File__fsdb_mode().Tid__v2__bld__y_();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
 		wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);		// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
-		wiki.File__orig_mgr().Wkrs_del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
+		wiki.File__orig_mgr().Wkrs__del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
 
 		trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(fsdb_core);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);

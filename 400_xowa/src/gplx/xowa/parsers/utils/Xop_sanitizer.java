@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.parsers.amps.*; import gplx.core.log_msgs.*;
+import gplx.langs.htmls.entitys.*;
 public class Xop_sanitizer {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs(), amp_trie;
 	private Xop_amp_mgr amp_mgr;
@@ -71,18 +72,18 @@ public class Xop_sanitizer {
 							++pos;
 						}
 						else {
-							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)amp_obj;
+							Gfh_entity_itm itm = (Gfh_entity_itm)amp_obj;
 							byte itm_tid = itm.Tid();
 							switch (itm_tid) {
-								case Xop_amp_trie_itm.Tid_name_std:
-								case Xop_amp_trie_itm.Tid_name_xowa:
+								case Gfh_entity_itm.Tid_name_std:
+								case Gfh_entity_itm.Tid_name_xowa:
 									bfr.Add(itm.U8_bry());
 									pos += itm.Key_name_len() + 1;	// 1 for trailing ";"; EX: for "&nbsp; ", (a) pos is at "&", (b) "nbsp" is Key_name_len, (c) ";" needs + 1 
 									break;
-								case Xop_amp_trie_itm.Tid_num_dec:
-								case Xop_amp_trie_itm.Tid_num_hex:
+								case Gfh_entity_itm.Tid_num_dec:
+								case Gfh_entity_itm.Tid_num_hex:
 									Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
-									amp_mgr.Parse_ncr(rv, itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
+									amp_mgr.Parse_ncr(rv, itm_tid == Gfh_entity_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
 									if (rv.Pass())
 										bfr.Add_u8_int(rv.Val());
 									else

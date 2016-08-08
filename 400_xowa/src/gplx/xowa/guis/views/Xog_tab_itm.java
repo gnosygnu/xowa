@@ -109,7 +109,8 @@ public class Xog_tab_itm implements Gfo_invk {
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 
 		// get new_tab_name
-		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());	// NOTE: must go before ttl.Make; DATE:2016-07-31
+		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must go before wiki.Props().Main_page(); DATE:2016-08-02; NOTE: must load wiki; DATE:2015-07-22
+		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());				// NOTE: must go before ttl.Make; DATE:2016-07-31
 		Xoa_ttl ttl = wiki.Ttl_parse(url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
 		String new_tab_name = String_.new_u8(ttl.Full_txt_w_ttl_case());
@@ -127,7 +128,6 @@ public class Xog_tab_itm implements Gfo_invk {
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();
-		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
 		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
 		Tab_name_(new_tab_name);
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));

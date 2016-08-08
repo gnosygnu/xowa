@@ -34,4 +34,5 @@ public class Bfr_arg__hatr_id implements Bfr_arg_clearable {
 	}
 	public static Bfr_arg__hatr_id New_id(String v) {return new Bfr_arg__hatr_id(gplx.langs.htmls.Gfh_atr_.Bry__id, Bry_.new_u8(v));}
 	public static Bfr_arg__hatr_id New_id(byte[] v) {return new Bfr_arg__hatr_id(gplx.langs.htmls.Gfh_atr_.Bry__id, v);}
+	public static final int Id__ignore = -1;
 }

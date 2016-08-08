@@ -42,11 +42,11 @@ public class Xow_file_mgr implements Gfo_invk {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
 			if (!Io_mgr.Instance.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
 				version = Version_1;
-				fsdb_mode = Xof_fsdb_mode.new_v0();
+				fsdb_mode = Xof_fsdb_mode.New__v0();
 			}
 			else {
 				version = Version_2;
-				fsdb_mode = Xof_fsdb_mode.new_v2_gui();
+				fsdb_mode = Xof_fsdb_mode.New__v2__gui();
 			}
 		}
 		return version;
@@ -54,7 +54,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	public boolean Version_1_y() {return this.Version() == Version_1;}
 	public boolean Version_2_y() {return this.Version() == Version_2;}
 	public void Version_1_y_() {version = Version_1;}	// TEST:
-	public void Version_2_y_() {version = Version_2;}	// TEST:
+	public void Version_2_y_() {version = Version_2; fsdb_mode = Xof_fsdb_mode.New__v2__gui();}	// TEST:
 	public void Fsdb_mgr_(Xof_fsdb_mgr fsdb_mgr) {
 		this.fsdb_mgr = fsdb_mgr;			
 		version = Version_2;
@@ -127,7 +127,7 @@ public class Xow_file_mgr implements Gfo_invk {
 			)
 			db_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, false);	// make it
 		this.version = Version_2;
-		this.fsdb_mode = Xof_fsdb_mode.new_v2_gui();
+		this.fsdb_mode = Xof_fsdb_mode.New__v2__gui();
 		orig_mgr.Init_by_wiki(wiki, fsdb_mode, db_core.File__orig_tbl_ary(), Xof_url_bldr.new_v2());
 		fsdb_mgr.Init_by_wiki(wiki);
 	}

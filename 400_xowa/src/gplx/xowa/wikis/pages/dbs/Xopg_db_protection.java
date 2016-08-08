@@ -28,5 +28,5 @@ public class Xopg_db_protection {
 		this.protection_expiry = Bry__protection_expiry__infinite;
 	}
 
-	public static final    byte[] Bry__protection_expiry__infinite = Bry_.new_a7("infinite");
+	public static final    byte[] Bry__protection_expiry__infinite = Bry_.new_a7("infinity");// NOTE: per en.w:Module:Effective_protection_expiry DATE:2016-08-05
 }

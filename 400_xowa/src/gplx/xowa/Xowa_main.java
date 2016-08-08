@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xowa_main {
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		gplx.xowa.Xoa_app_.Run(args);
 	}
 }

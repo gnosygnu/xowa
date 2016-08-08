@@ -26,6 +26,7 @@ public class Xow_url_parser {
 	private final    Gfo_url_encoder encoder;
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Gfo_url_parser url_parser = new Gfo_url_parser(); private final    Gfo_url gfo_url = new Gfo_url();
+	private final    Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
 	private final    Xoa_app app; private final    Xow_wiki wiki; private final    byte[] domain_bry;
 	private byte tmp_protocol_tid;
 	private int tmp_tid;
@@ -146,7 +147,7 @@ public class Xow_url_parser {
 	private void Bld_xowa() {
 		tmp_tid = Xoa_url_.Tid_xcmd;
 		tmp_page = Bry_.Mid(tmp_raw, Gfo_protocol_itm.Len_xcmd);		// NOTE: just get String after protocol; anchor (#) or query params (?) must not be parsed
-		tmp_page = gplx.langs.htmls.encoders.Gfo_url_encoder_.Gfs.Decode(tmp_page);	// NOTE: should be decoded; EX: %20 -> " "
+		tmp_page = gfs_encoder.Decode(tmp_page);	// NOTE: should be decoded; EX: %20 -> " "
 	}
 	private void Bld_page_by_file_ns() {
 		tmp_tid = Xoa_url_.Tid_page;

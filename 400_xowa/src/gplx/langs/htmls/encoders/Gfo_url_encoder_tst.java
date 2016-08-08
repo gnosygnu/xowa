@@ -54,7 +54,7 @@ class Gfo_url_encoder_fxt {
 	public Gfo_url_encoder_fxt Encoder_id()			{encoder = Gfo_url_encoder_.Id; return this;}
 	public Gfo_url_encoder_fxt Encoder_href()		{encoder = Gfo_url_encoder_.Href; return this;}
 	public Gfo_url_encoder_fxt Encoder_url()		{encoder = Gfo_url_encoder_.Http_url; return this;}
-	public Gfo_url_encoder_fxt Encoder_fsys_safe()	{encoder = Gfo_url_encoder_.Fsys_wnt; return this;}
+	public Gfo_url_encoder_fxt Encoder_fsys_safe()	{encoder = Gfo_url_encoder_.New__fsys_wnt().Make(); return this;}
 	public void Test__bicode(String raw, String encoded) {
 		Test__encode(raw, encoded);
 		Test__decode(encoded, raw);

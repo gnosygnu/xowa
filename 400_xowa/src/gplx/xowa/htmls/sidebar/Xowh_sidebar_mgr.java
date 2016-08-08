@@ -28,8 +28,8 @@ public class Xowh_sidebar_mgr implements Gfo_invk {
 		try {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
-			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
-				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
+			if (	sidebar_msg.Defined_in() == Xol_msg_itm.Defined_in__none
+				||	(	sidebar_msg.Defined_in() == Xol_msg_itm.Defined_in__lang
 					&&	wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__home
 				)) {
 				html_bry = Bry_.Empty;

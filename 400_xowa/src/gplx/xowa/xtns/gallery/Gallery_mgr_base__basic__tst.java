@@ -164,7 +164,7 @@ public class Gallery_mgr_base__basic__tst {
 	}
 	@Test   public void Hdump__div_1_w() {// PURPOSE: handle hdump and div_1_width == 115 instead of 15; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-19
 		fxt.Fxt().Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
-		fxt.Fxt().Wiki().File__fsdb_mode().Tid_v2_bld_y_();	// NOTE: must set to v2 mode; dflt will call old v1 img code which "guesses" at html_h;
+		fxt.Fxt().Wiki().File__fsdb_mode().Tid__v2__bld__y_();	// NOTE: must set to v2 mode; dflt will call old v1 img code which "guesses" at html_h;
 		fxt.Test_html_frag("<gallery widths=200px heights=200px perrow=5>File:A.png|a</gallery>", "<div style=\"margin:15px auto;\">");
 	}
 }

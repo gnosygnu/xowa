@@ -42,7 +42,7 @@ public class Pfunc_filepath extends Pf_func_base {
 		byte[] url = wiki.Parser_mgr().Url_bldr().Init_for_trg_html(Xof_repo_itm_.Mode_orig, trg_repo, ttl_bry, xfer_itm.Orig_ttl_md5(), xfer_itm.Orig_ext(), Xof_img_size.Size__neg1, Xof_lnki_time.Null, Xof_lnki_page.Null).Xto_bry();
 		bfr.Add(url);
 	}
-	private static Pfunc_filepath_itm Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {
+	public static Pfunc_filepath_itm Load_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		// try to get from cache
 		Gfo_cache_mgr cache_mgr = wiki.Cache_mgr().Commons_cache();
 		byte[] cache_key = ttl.Page_url();
@@ -68,10 +68,4 @@ public class Pfunc_filepath extends Pf_func_base {
 		cache_mgr.Add(cache_key, cache_itm, 1);
 		return cache_itm;
 	}
-}
-class Pfunc_filepath_itm implements Rls_able {
-	public Pfunc_filepath_itm(boolean exists, byte[] page_url) {this.exists = exists; this.page_url = page_url;}
-	public boolean Exists() {return exists;} private final    boolean exists;
-	public byte[] Page_url() {return page_url;} private final    byte[] page_url;
-	public void Rls() {}
 }

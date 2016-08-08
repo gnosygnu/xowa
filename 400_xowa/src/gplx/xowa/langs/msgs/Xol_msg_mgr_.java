@@ -42,7 +42,9 @@ public class Xol_msg_mgr_ {
 	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[][] fmt_args) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
-		byte[] rv = Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
+		byte[] rv = (msg_itm.Defined_in_none())
+			? tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear()	// NOTE: do not use key from msg_itm; msg_itms are case-insensitive, and val should match key exactly; EX: missing should return <missing> not <Missing> DATE:2016-08-01
+			: Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}	private static final    byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
@@ -87,16 +89,16 @@ public class Xol_msg_mgr_ {
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
 				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
-				msg_in_wiki.Src_(Xol_msg_itm.Src_missing);
+				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__none);
 			}
 			else {
 				msg_val = msg_in_lang.Val();
-				msg_in_wiki.Src_(Xol_msg_itm.Src_lang);
+				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__lang);
 			}
 		}
 		else {																				// page found; dump entire contents
 			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Db().Text().Text_bry());	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
-			msg_in_wiki.Src_(Xol_msg_itm.Src_wiki);
+			msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__wiki);
 		}
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);
 		return msg_in_wiki;

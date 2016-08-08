@@ -38,8 +38,7 @@ public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
 		Xof_meta_fil meta_fil = new Xof_meta_fil(null, md5);	// NOTE: need to register file before loading it; defect wherein 2 files with same hash prefix would skip one b/c Loaded file was not registered; EX.WS: en.wikiquote.org/The Hitchhiker's Guide to the Galaxy; NMMP_dolphin_with_locator.jpeg, da6f95736ed249f371f30bf5f1205fbd; Hoags_object.jpg, daed4a54e48e4266bd2f2763b7c4018c
 		meta_fil.Load(meta_rdr, parser);
 		Xof_meta_itm meta_itm = meta_fil.Get_or_null(ttl); if (meta_itm == null) return Xof_orig_itm.Null;
-		Xof_orig_itm rv = new Xof_orig_itm();
-		rv.Init((byte)meta_itm.Vrtl_repo(), ttl, Xof_ext_.new_by_ttl_(ttl).Id(), meta_itm.Orig_w(), meta_itm.Orig_h(), meta_itm.Ptr_ttl());
+		Xof_orig_itm rv = new Xof_orig_itm((byte)meta_itm.Vrtl_repo(), ttl, Xof_ext_.new_by_ttl_(ttl).Id(), meta_itm.Orig_w(), meta_itm.Orig_h(), meta_itm.Ptr_ttl());
 		rv.Insert_new_y_();
 		return rv;
 	}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.core.primitives.*;
-import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.parsers.lnkis.*; 
+import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; 
 import gplx.xowa.wikis.tdbs.metas.*;
@@ -29,7 +29,7 @@ public class Xoh_file_mgr {
 	}
 	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final    Xoh_file_wtr__basic file_wtr;
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
-	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Arg_alt_text(ctx, src, lnki));}
+	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(Bool_.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {
 		file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);
 	}
@@ -49,8 +49,19 @@ public class Xoh_file_mgr {
 		return xfer;
 	}
 	private boolean Find_file(Xop_ctx ctx, Xowe_wiki source_wiki, Xof_xfer_itm xfer) {
+		if (source_wiki.File__fsdb_mode().Tid__v2__mp()) {
+			Xof_orig_itm itm = source_wiki.File__orig_mgr().Find_by_ttl_or_null(xfer.Lnki_ttl());
+			if (itm == null)
+				return false;
+			else {
+				byte repo_id = itm.Repo();
+				byte[] repo_name = source_wiki.File_mgr().Repo_mgr().Repos_get_at(repo_id).Wiki_domain();
+				xfer.Init_at_orig(itm.Repo(), repo_name, itm.Ttl(), itm.Ext(), itm.W(), itm.H(), itm.Redirect());
+				return true;
+			}
+		}
 		if (	source_wiki.File__fsdb_mode() == null				// ignore if null; occurs during some tests; also null-ref check for next
-			||	source_wiki.File__fsdb_mode().Tid_v2_bld()			// ignore builds
+			||	source_wiki.File__fsdb_mode().Tid__v2__bld()		// ignore builds
 			)
 			return false;	
 		if (source_wiki.File_mgr().Version() == Xow_file_mgr.Version_2)

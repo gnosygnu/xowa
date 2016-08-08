@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wms; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.wikis.*;	
+import gplx.xowa.apps.wms.apis.*; import gplx.xowa.wikis.*;	
 public class Xoa_wmf_mgr implements Gfo_invk {
 	private final    Xoae_wiki_mgr wiki_mgr;
 	public Xoa_wmf_mgr(Gfo_usr_dlg usr_dlg, Xoae_wiki_mgr wiki_mgr) {

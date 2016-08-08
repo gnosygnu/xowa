@@ -40,7 +40,7 @@ class Xof_orig_tbl_fxt {
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {
 		byte[] ttl_bry = Bry_.new_u8(ttl);
-		Xof_orig_itm rv = new Xof_orig_itm().Init(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		Xof_orig_itm rv = new Xof_orig_itm(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 		tbl.Insert(rv.Repo(), rv.Ttl(), rv.Ext_id(), rv.W(), rv.H(), rv.Redirect());
 		return rv;
 	}

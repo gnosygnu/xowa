@@ -18,11 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.brys.fmts; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bry_keys_parser_tst {
-	private final Bry_keys_parser_fxt fxt = new Bry_keys_parser_fxt();
+	private final    Bry_keys_parser_fxt fxt = new Bry_keys_parser_fxt();
 	@Test  public void None()			{fxt.Test("a");}
 	@Test  public void One()			{fxt.Test("~{a}"				, "a");}
 	@Test  public void Many()			{fxt.Test("~{a}b~{c}d~{e}"		, "a", "c", "e");}
 	@Test  public void Dupe()			{fxt.Test("~{a}b~{a}"			, "a");}
+	@Test  public void Bug__space()		{fxt.Test("~{a}~{b} ~{c}"		, "a", "b", "c");}	// DATE:2016-08-02
 }
 class Bry_keys_parser_fxt {
 	public void Test(String fmt, String... expd) {

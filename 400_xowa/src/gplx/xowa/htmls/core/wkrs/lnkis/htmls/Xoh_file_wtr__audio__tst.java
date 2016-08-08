@@ -23,7 +23,7 @@ public class Xoh_file_wtr__audio__tst {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.oga|noicon]]", String_.Concat_lines_nl_skip_last
 		( "    <div class=\"xowa_media_div\">"
-		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:1024px;\" alt=\"Play sound\"></a></div>"
+		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">"
 		, "    </div>"
@@ -50,7 +50,7 @@ public class Xoh_file_wtr__audio__tst {
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <div class=\"xowa_media_div\">"
-		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:1024px;\" alt=\"Play sound\"></a></div>"
+		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		,       "<div><a href=\"/wiki/File:A.oga\" class=\"xowa_media_info\" title=\"About this file\"></a></div>"
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">"
@@ -74,7 +74,7 @@ public class Xoh_file_wtr__audio__tst {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.oga|thumb|noicon|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		( "    <div class=\"xowa_media_div\">"
-		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:1024px;\" alt=\"Play sound\"></a></div>"
+		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">a"
 		, "    </div>"

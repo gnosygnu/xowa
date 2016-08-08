@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.vnts.*; import gplx.xowa.xtns.cites.*; 
 public class Xop_tkn_mkr {
@@ -25,7 +26,7 @@ public class Xop_tkn_mkr {
 	public Xop_space_tkn Space_mutable(int bgn, int end)									{return new Xop_space_tkn(false, bgn, end);}
 	public Xop_apos_tkn Apos(int bgn, int end
 		, int aposLen, int typ, int cmd, int lit_apos)										{return new Xop_apos_tkn(bgn, end, aposLen, typ, cmd, lit_apos);}
-	public Xop_tkn_itm Amp_txt(int bgn, int end, Xop_amp_trie_itm itm)						{return new Xop_amp_tkn_ent(bgn, end, itm);}
+	public Xop_tkn_itm Amp_txt(int bgn, int end, Gfh_entity_itm itm)						{return new Xop_amp_tkn_ent(bgn, end, itm);}
 	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int, byte[] val_bry)				{return new Xop_amp_tkn_num(bgn, end, val_int, val_bry);}
 	public Xop_tkn_itm Amp_num(int bgn, int end, int val_int)								{return new Xop_amp_tkn_num(bgn, end, val_int, gplx.core.intls.Utf16_.Encode_int_to_bry(val_int));}
 	public Xop_nl_tkn NewLine(int bgn, int end, byte nl_typ, int nl_len)					{return new Xop_nl_tkn(bgn, end, nl_typ, nl_len);}

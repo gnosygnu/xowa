@@ -76,6 +76,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 						if (wkr__thm.Parse1(hdoc_wkr, hctx, src, tag_rdr, cur)) return wkr__thm.Src_end();
 					}
 					else if (cur.Atrs__cls_has(Xoh_thm_data.Atr__id__xowa_media_div))
+						// rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__media);
 						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__img);
 					else if (cur.Atrs__cls_has(Xoh_toc_wtr.Atr__class__toc))
 						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__toc);

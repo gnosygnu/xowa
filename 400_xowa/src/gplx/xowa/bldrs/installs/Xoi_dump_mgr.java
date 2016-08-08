@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_dump_mgr implements Gfo_invk {
-	public String[] Server_urls() {return server_urls;} private String[] server_urls = String_.Ary(Xowm_dump_file_.Server_wmf_https, Xowm_dump_file_.Server_your_org, Xowm_dump_file_.Server_c3sl, Xowm_dump_file_.Server_masaryk);
+	public String[] Server_urls() {return server_urls;} private String[] server_urls = String_.Ary(Xowm_dump_file_.Server_your_org, Xowm_dump_file_.Server_wmf_https, Xowm_dump_file_.Server_c3sl, Xowm_dump_file_.Server_masaryk);	// promote your.org to primary url; DATE:2016-08-07
 	public String[] Custom_cmds() {return custom_cmds;} private String[] custom_cmds = String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
 	public byte Data_storage_format()	{return data_storage_format;} public Xoi_dump_mgr Data_storage_format_(byte v) {data_storage_format = v; return this;} private byte data_storage_format = gplx.core.ios.streams.Io_stream_.Tid_gzip;
 	public long Db_text_max()			{return db_text_max;}			private long db_text_max			= (long)3000 * Io_mgr.Len_mb;

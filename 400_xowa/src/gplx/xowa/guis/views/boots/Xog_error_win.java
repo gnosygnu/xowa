@@ -77,7 +77,7 @@ public class Xog_error_win extends JFrame implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_send_mail)) {
 			try {
-				Gfo_url_encoder url_encoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Fsys_wnt;
+				Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__fsys_wnt().Make();
 				String subject = url_encoder.Encode_str("XOWA boot error: " + error_data.Err_msg());
 				String body = url_encoder.Encode_str(error_data.Err_details());
 				Desktop.getDesktop().mail(new URI("mailto:gnosygnu+xowa_error_boot@gmail.com?subject=" + subject + "&body=" + body));

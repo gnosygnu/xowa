@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.bldrs.wms.apis.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.downloads.*;
+import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;
 	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final    Xof_img_size img_size = new Xof_img_size();
@@ -28,16 +29,16 @@ public class Xof_orig_mgr {
 			int orig_tbls_len = orig_tbls.length;
 			for (int i = 0; i < orig_tbls_len; ++i) {
 				Xof_orig_tbl orig_tbl = orig_tbls[i];
-				this.Wkrs__add_many(new Xof_orig_wkr__orig_db(orig_tbl, i == orig_tbls_len - 1));
+				this.Wkrs__add(new Xof_orig_wkr__orig_db(orig_tbl, i == orig_tbls_len - 1));
 			}
 //			}
-		if (!fsdb_mode.Tid_v2_bld()) {	// add if gui, but not if bld
+		if (!fsdb_mode.Tid__v2__bld()) {	// add if gui, but not if bld
 			Io_url wiki_meta_dir = wiki.App().Fsys_mgr().File_dir().GenSubDir_nest("#meta", wiki.Domain_str());
 			if (Io_mgr.Instance.ExistsDir(wiki_meta_dir)) {
 				Xof_orig_wkr__xo_meta xo_meta = new Xof_orig_wkr__xo_meta(wiki_meta_dir);
-				this.Wkrs__add_many(xo_meta);
+				this.Wkrs__add(xo_meta);
 			}
-			this.Wkrs__add_many(new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), wiki.App().Wmf_mgr().Download_wkr(), repo_mgr, wiki.Domain_bry()));
+			this.Wkrs__add(new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), wiki.App().Wmf_mgr().Download_wkr(), repo_mgr, wiki.Domain_bry()));
 		}
 	}
 	public Xof_orig_itm Find_by_ttl_or_null(byte[] ttl) {return Find_by_ttl_or_null(ttl, 0, 1);}
@@ -77,11 +78,15 @@ public class Xof_orig_mgr {
 		}			
 	}
 	private void		Wkrs__clear() {wkrs = Xof_orig_wkr_.Ary_empty; wkrs_len = 0;}
-	private void		Wkrs__add_many(Xof_orig_wkr... v) {
+	public void			Wkrs__add(Xof_orig_wkr... v) {
 		wkrs = (Xof_orig_wkr[])Array_.Resize_add(wkrs, v);
 		wkrs_len += v.length;
 	}
-	public void			Wkrs_del(byte tid) {
+	public void			Wkrs__set(Xof_orig_wkr... v) {
+		wkrs = v;
+		wkrs_len = v.length;
+	}
+	public void			Wkrs__del(byte tid) {
 		List_adp list = List_adp_.New();
 		for (int i = 0; i < wkrs_len; ++i) {
 			Xof_orig_wkr wkr = wkrs[i];

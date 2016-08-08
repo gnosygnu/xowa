@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.cfgs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
@@ -347,7 +347,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
 			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
-			full_bfr.Add(gplx.langs.htmls.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
+			full_bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
 		page_bfr.Mkr_rls();
 		ctx.Tmpl_output_(null);

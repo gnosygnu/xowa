@@ -20,6 +20,7 @@ import gplx.core.threads.*; import gplx.core.threads.utils.*; import gplx.core.c
 import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.wikis.caches.*;
+import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
 class Xomp_parse_mgr {
 	private Gfo_countdown_latch latch;
 	public Xomp_parse_mgr_cfg Cfg() {return cfg;} private final    Xomp_parse_mgr_cfg cfg = new Xomp_parse_mgr_cfg();		
@@ -37,6 +38,7 @@ class Xomp_parse_mgr {
 		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates());
 		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
 		Gfo_cache_mgr ifexist_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
+		Xof_orig_wkr__img_links orig_wkr = Xof_orig_wkr__img_links_.Load_all(wiki);
 
 		// load_wkr: init and start
 		// Xomp_load_wkr load_wkr = new Xomp_load_wkr(wiki, db_core.Mgr_db().Conn(), cfg.Num_pages_in_pool(), cfg.Num_wkrs());
@@ -48,7 +50,7 @@ class Xomp_parse_mgr {
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
 		for (int i = 0; i < wkr_len; ++i) {
 			Xowe_wiki wkr_wiki = Xow_wiki_utl_.Clone_wiki(wiki, wiki.Fsys_mgr().Root_dir());
-			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, wkr_wiki, page_pool, i, cfg, cfg.Cleanup_interval(), cfg.Progress_interval(), cfg.Log_file_lnkis());
+			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, wkr_wiki, orig_wkr, page_pool, i, cfg, cfg.Cleanup_interval(), cfg.Progress_interval(), cfg.Log_file_lnkis());
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);
 			// remove wmf wkr, else will try to download images during parsing
 			if (wkr_wiki.File__bin_mgr() != null)

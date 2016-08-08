@@ -25,7 +25,7 @@ public class Xou_file_itm_finder {
 		byte[] lnki_ttl = xfer.Lnki_ttl();
 		Xof_url_bldr url_bldr = wiki.Parser_mgr().Url_bldr();
 		try {
-			if (wiki.File__fsdb_mode().Tid_v2_bld()) return false;	// disable during build
+			if (wiki.File__fsdb_mode().Tid__bld()) return false;	// disable during build
 			Xou_cache_itm cache_itm = cache_mgr.Get_or_null(wiki.Domain_itm().Abrv_xo(), lnki_ttl, xfer.Lnki_type(), xfer.Lnki_upright(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_time(), xfer.Lnki_page(), Xof_img_size.Thumb_width_img);
 			Xof_repo_itm repo = null;
 			if (cache_itm == null) {// itm not in cache;

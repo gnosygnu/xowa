@@ -21,9 +21,9 @@ import gplx.xowa.wikis.data.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.pag
 public class Xoapi_import implements Gfo_invk {
 	public Xoapi_page_rank Page_rank() {return page_rank;} private final    Xoapi_page_rank page_rank = new Xoapi_page_rank();
 	public long		Layout_all_max()		{return layout_all_max;}		private long layout_all_max			= 0;									// disable by default; may set to 200 MB in future
-	public long		Layout_text_max()		{return layout_text_max;}		private long layout_text_max		= Io_size_.To_long_by_int_mb(1500);		// 1.5 GB
-	public long		Layout_html_max()		{return layout_html_max;}		private long layout_html_max		= Io_size_.To_long_by_int_mb(1500);		// 1.5 GB
-	public long		Layout_file_max()		{return layout_file_max;}		private long layout_file_max		= Io_size_.To_long_by_int_mb(1500);		// 1.5 GB
+	public long		Layout_text_max()		{return layout_text_max;}		private long layout_text_max		= Io_size_.To_long_by_int_mb(1500);		// 1.0 GB
+	public long		Layout_html_max()		{return layout_html_max;}		private long layout_html_max		= Io_size_.To_long_by_int_mb(1500);		// 1.0 GB
+	public long		Layout_file_max()		{return layout_file_max;}		private long layout_file_max		= Io_size_.To_long_by_int_mb(1500);		// 1.0 GB
 	public long		Cat_link_db_max()		{return cat_link_db_max;}		private long cat_link_db_max		= Io_size_.To_long_by_int_mb(1500);		// 3.6 GB; v1
 	public long		Text_db_max()			{return text_db_max;}			private long text_db_max			= Io_size_.To_long_by_int_mb(1500);		// 3.0 GB; v1
 	public long		Html_db_max()			{return html_db_max;}			private long html_db_max			= Io_size_.To_long_by_int_mb(1500);		// 3.0 GB; v2; use same as text

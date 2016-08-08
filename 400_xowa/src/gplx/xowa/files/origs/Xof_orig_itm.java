@@ -18,26 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.wikis.*; import gplx.xowa.files.*;
 public class Xof_orig_itm {
-	public byte			Repo() {return repo;} private byte repo;
-	public byte[]		Ttl() {return ttl;} private byte[] ttl;	// without file ns; EX: "A.png" not "File:A.png"
-	public int			Ext_id() {return ext_id;} private int ext_id;
-	public Xof_ext		Ext() {if (ext == null) ext = Xof_ext_.new_by_id_(ext_id); return ext;} private Xof_ext ext;
-	public int			W() {return w;} private int w;
-	public int			H() {return h;} private int h;
-	public byte[]		Redirect() {return redirect;} private byte[] redirect;	// redirect trg; EX: A.png is redirected to B.jpg; record will have A.png|jpg|220|200|B.jpg where jpg|220|200 are the attributes of B.jpg
-	public boolean			Insert_new() {return insert_new;} public void Insert_new_y_() {insert_new = Bool_.Y;} private boolean insert_new;
-	public void Clear() {
-		this.repo = Repo_null;
-		this.ttl = this.redirect = null;
-		this.ext_id = Xof_ext_.Id_unknown;
-		this.w = this.h = Xof_img_size.Null;
-		this.ext = null;
-	}
-	public Xof_orig_itm Init(byte repo, byte[] ttl, int ext_id, int w, int h, byte[] redirect) {
+	public Xof_orig_itm(byte repo, byte[] ttl, int ext_id, int w, int h, byte[] redirect) {
 		this.repo = repo; this.ttl = ttl; this.ext_id = ext_id;
 		this.w = w; this.h = h;  this.redirect = redirect;
-		return this;
 	}
+	public byte			Repo() {return repo;} private final    byte repo;
+	public byte[]		Ttl() {return ttl;} private final    byte[] ttl;	// without file ns; EX: "A.png" not "File:A.png"
+	public int			Ext_id() {return ext_id;} private final    int ext_id;
+	public Xof_ext		Ext() {if (ext == null) ext = Xof_ext_.new_by_id_(ext_id); return ext;} private Xof_ext ext;
+	public int			W() {return w;} private final    int w;
+	public int			H() {return h;} private final    int h;
+	public byte[]		Redirect() {return redirect;} private final    byte[] redirect;	// redirect trg; EX: A.png is redirected to B.jpg; record will have A.png|jpg|220|200|B.jpg where jpg|220|200 are the attributes of B.jpg
+	public boolean			Insert_new() {return insert_new;} public void Insert_new_y_() {insert_new = Bool_.Y;} private boolean insert_new;
 
 	public int Db_row_size() {return Db_row_size_fixed + redirect.length + ttl.length;}
 	private static final int Db_row_size_fixed = (5 * 4);	// 3 ints; 2 bytes

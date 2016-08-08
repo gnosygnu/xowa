@@ -95,15 +95,6 @@ public class Xoh_img_hzip__dump__basic__tst {
 		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='cls1' alt='abc'></a>"
 		);
 	}
-	@Test   public void Video() {	// [[File:A.ogv]]
-		fxt.Test__bicode
-		( "%|E9eA.ogv~!A.ogv~~", String_.Concat_lines_nl_skip_last
-		( "<div class='xowa_media_div'>"
-		, "<div><a href='/wiki/File:A.ogv' class='image' title='A.ogv' xowa_title='A.ogv'><img data-xowa-title='A.ogv' data-xoimg='0|-1|-1|-1|-1|-1' src='' width='0' height='0' alt=''></a></div>"
-		, "<div><a href='' xowa_title='A.ogv' class='xowa_media_play' style='width:218px;max-width:220px;' alt='Play sound'></a></div>"
-		, "</div>"
-		));
-	}
 	@Test   public void Imap() {
 		fxt.Test__bicode
 		( "~%}#Pa$A.png~#:#S#+\""

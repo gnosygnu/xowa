@@ -26,6 +26,12 @@ public class Xoh_img_mgr {
 	}
 	public int Len() {return list.Count();}
 	public Xof_fsdb_itm Get_at(int i) {return (Xof_fsdb_itm)list.Get_at(i);}
+	public Xof_fsdb_itm Make_aud() {
+		Xof_fsdb_itm itm = new Xof_fsdb_itm();
+		itm.Init_at_hdoc(++uid_nxt, Xof_html_elem.Tid_aud);
+		list.Add(itm);
+		return itm;
+	}
 	public Xof_fsdb_itm Make_img(boolean img_is_gallery) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Init_at_hdoc(++uid_nxt, img_is_gallery ? Xof_html_elem.Tid_gallery : Xof_html_elem.Tid_img);
