@@ -431,6 +431,22 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               <input xowa_prop="xowa.api.bldr.wiki.import.layout_text_max" class="options_textbox" style="width: 400px;" id='xowa_prop_10' value='1500'>
             </td>
           </tr>
+          <tr>
+            <td class='options_row_label'>
+              Max file size for single file database: <sup id="cite_ref-layout_text_max_9-1" class="reference"><a href="#cite_note-layout_text_max-9">[10]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="xowa.api.bldr.wiki.import.layout_file_max" class="options_textbox" style="width: 400px;" id='xowa_prop_11' value='1500'>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Max file size for single html database: <sup id="cite_ref-layout_text_max_9-2" class="reference"><a href="#cite_note-layout_text_max-9">[10]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="xowa.api.bldr.wiki.import.layout_html_max" class="options_textbox" style="width: 400px;" id='xowa_prop_12' value='1500'>
+            </td>
+          </tr>
         </table>
         <h2>
           <span class="mw-headline" id="Decompression_apps">Decompression apps</span>
@@ -440,21 +456,7 @@ http://ftp.fi.muni.cz/pub/wikimedia/
             <td class='options_row_label'>
               Decompress bz2 file 
               <p>
-                <sup id="cite_ref-10" class="reference"><a href="#cite_note-10">[11]</a></sup>
-              </p>
-            </td>
-            <td>
-              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_11' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_11_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_11", "Please select a file.");'>...</button> 
-              <p>
-                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_12' value='x -y -r "~{src}" -o"~{trg_dir}"'>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Decompress zip file 
-              <p>
-                <sup id="cite_ref-11" class="reference"><a href="#cite_note-11">[12]</a></sup>
+                <sup id="cite_ref-12" class="reference"><a href="#cite_note-12">[11]</a></sup>
               </p>
             </td>
             <td>
@@ -466,15 +468,29 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </tr>
           <tr>
             <td class='options_row_label'>
-              Decompress gz file 
+              Decompress zip file 
               <p>
-                <sup id="cite_ref-12" class="reference"><a href="#cite_note-12">[13]</a></sup>
+                <sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[12]</a></sup>
               </p>
             </td>
             <td>
-              <input xowa_prop="app.fsys.apps.decompress_gz.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_15' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_15_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_15", "Please select a file.");'>...</button> 
+              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_15' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_15_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_15", "Please select a file.");'>...</button> 
               <p>
-                <input xowa_prop="app.fsys.apps.decompress_gz.args" class="options_textbox" style="width: 380px;" id='xowa_prop_16' value='x -y -r "~{src}" -o"~{trg_dir}"'>
+                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_16' value='x -y -r "~{src}" -o"~{trg_dir}"'>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class='options_row_label'>
+              Decompress gz file 
+              <p>
+                <sup id="cite_ref-14" class="reference"><a href="#cite_note-14">[13]</a></sup>
+              </p>
+            </td>
+            <td>
+              <input xowa_prop="app.fsys.apps.decompress_gz.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_17' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_17_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_17", "Please select a file.");'>...</button> 
+              <p>
+                <input xowa_prop="app.fsys.apps.decompress_gz.args" class="options_textbox" style="width: 380px;" id='xowa_prop_18' value='x -y -r "~{src}" -o"~{trg_dir}"'>
               </p>
             </td>
           </tr>
@@ -666,27 +682,50 @@ http://ftp.fi.muni.cz/pub/wikimedia/
             </ul>
           </li>
           <li id="cite_note-layout_text_max-9">
-            <span class="mw-cite-backlink"><a href="#cite_ref-layout_text_max_9-0">^</a></span> <span class="reference-text">Enter a number in MB to represent the cutoff for multi-file wikis and single-file wikis (default is <code>1500</code>)</span>
+            <span class="mw-cite-backlink">^ <sup><a href="#cite_ref-layout_text_max_9-0">a</a></sup> <sup><a href="#cite_ref-layout_text_max_9-1">b</a></sup> <sup><a href="#cite_ref-layout_text_max_9-2">c</a></sup></span> <span class="reference-text">Enter a number in MB to represent the cutoff for generating sets of page databases as one file or many files (default is <code>1500</code>)<br>
+             XOWA generates three types of page databases:</span>
             <ul>
               <li>
-                <span class="reference-text">For example, 1500 means that a wiki with a dump file size of 1.5 GB or less will generate a single-file wiki (for example, Simple Wikipedia). Any wiki with a dump file size larger than 1.5 GB will generate a multiple-file wiki. (for example, English Wikipedia).</span>
+                <span class="reference-text"><b>text</b>: These are Wikitext databases and have entries like ''italics''. They have <code>-text-</code> in their file name.</span>
               </li>
               <li>
-                <span class="reference-text">If you always want to generate a single-file wiki, set the value to a large number like 999,999 (999 GB)</span>
+                <span class="reference-text"><b>html</b>: These the html-dump databases and have entries like &lt;i&gt;italics&lt;/i&gt;. They have <code>-html-</code> in their file name</span>
               </li>
               <li>
-                <span class="reference-text">If you always want to generate a multi-file wiki, set the value to 0.</span>
+                <span class="reference-text"><b>file</b>: These are image databases which have the raw binary images. They have <code>-file-</code> in their file name</span>
+              </li>
+            </ul><span class="reference-text"><br>
+            Different wikis will have different numbers of databases for a given set.</span>
+            <ul>
+              <li>
+                <span class="reference-text">For small wikis, XOWA generates one database for the entire wiki. For example, Simple Wikipedia will just have "simple.wikipedia.org-text.xowa". This way is preferred as it is simpler.</span>
+              </li>
+              <li>
+                <span class="reference-text">For large wikis, XOWA generates many databases for the entire wiki. For example, English Wikipedia will have "en.wikipedia.org-text-ns.000.xowa", "en.wikipedia.org-text-ns.000-db.002.xowa", etc. This way is necessary, because some file-systems don't support large databases. For example, creating an "en.wikipedia.org-text.xowa" file will generate a 20 GB file. This 20 GB file will generally fail on flash drives (FAT32), as well as Android (SQLite library allows 2 GB max)</span>
+              </li>
+            </ul><span class="reference-text"><br>
+            These options can force XOWA to generate a wiki using either one database (Simple Wikipedia style) or many databases (English Wikipedia style). It does this by using a cutoff for the XML database dump<br>
+             For example, 1500 means that a wiki with a dump file size of 1.5 GB or less will generate a single file. Any wiki with a dump file size larger than 1.5 GB will generate multiple files.</span>
+            <ul>
+              <li>
+                <span class="reference-text">If you always want to generate a set with only one file, set the value to a large number like 999,999 (999 GB)</span>
+              </li>
+              <li>
+                <span class="reference-text">If you always want to generate a set with multiple files, set the value to 0.</span>
+              </li>
+              <li>
+                <span class="reference-text">Otherwise, set the value to a cutoff. Wikis below that cutoff will be "single file"; wikis above it will be "multiple files"</span>
               </li>
             </ul>
           </li>
-          <li id="cite_note-10">
-            <span class="mw-cite-backlink"><a href="#cite_ref-10">^</a></span> <span class="reference-text">Decompress bz2 file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
-          </li>
-          <li id="cite_note-11">
-            <span class="mw-cite-backlink"><a href="#cite_ref-11">^</a></span> <span class="reference-text">Decompress zip file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
-          </li>
           <li id="cite_note-12">
-            <span class="mw-cite-backlink"><a href="#cite_ref-12">^</a></span> <span class="reference-text">Decompress gz file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+            <span class="mw-cite-backlink"><a href="#cite_ref-12">^</a></span> <span class="reference-text">Decompress bz2 file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+          </li>
+          <li id="cite_note-13">
+            <span class="mw-cite-backlink"><a href="#cite_ref-13">^</a></span> <span class="reference-text">Decompress zip file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+          </li>
+          <li id="cite_note-14">
+            <span class="mw-cite-backlink"><a href="#cite_ref-14">^</a></span> <span class="reference-text">Decompress gz file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
           </li>
         </ol>
       </div>
