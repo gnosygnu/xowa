@@ -55,7 +55,7 @@ public class Gallery_itm implements Js_img_wkr {
 			String itm_html = bfr.To_str_and_clear();
 			js_wkr.Html_elem_replace_html(String_.new_u8(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
-				page.Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
+				page.Html_data().Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 		}
 		finally {
 			bfr.Mkr_rls(); tmp_bfr.Mkr_rls();

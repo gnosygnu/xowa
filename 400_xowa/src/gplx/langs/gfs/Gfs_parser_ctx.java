@@ -122,5 +122,6 @@ class Gfs_err_mgr {
 				default:						bfr.Add_byte(b); break;
 			}
 		}
-	}	static final    byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
+	}
+	private static final    byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
 }

@@ -113,6 +113,7 @@ public class Gfh_tag_rdr {
 		}
 	}
 	public Gfh_tag Tag__move_fwd_tail(byte[] find_tag_bry)	{return Tag__find(Bool_.Y, Bool_.N, Bool_.Y, pos, src_end, find_tag_bry);}
+	public Gfh_tag Tag__peek_fwd_tail(byte[] find_tag_bry)	{return Tag__find(Bool_.N, Bool_.N, Bool_.Y, pos, src_end, find_tag_bry);}
 	private Gfh_tag Tag__find(boolean move, boolean bwd, boolean tail, int rng_bgn, int rng_end, byte[] find_tag_bry) {
 		int tmp = rng_bgn;
 		int stop_pos = rng_end; int adj = 1;

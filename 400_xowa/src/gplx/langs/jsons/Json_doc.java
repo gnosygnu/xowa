@@ -50,6 +50,7 @@ public class Json_doc {
 		Json_itm rv = Find_nde(root_nde, tmp_qry_bry, 0, 0); if (rv == null) return null;
 		return (Json_grp)rv;
 	}
+	public Json_grp Get_grp_many(String... qry_ary) {return Get_grp_many(Bry_.Ary(qry_ary));}
 	public Json_grp Get_grp_many(byte[]... qry_bry) {
 		Json_itm rv = Find_nde(root_nde, qry_bry, qry_bry.length - 1, 0); if (rv == null) return null;
 		return (Json_grp)rv;

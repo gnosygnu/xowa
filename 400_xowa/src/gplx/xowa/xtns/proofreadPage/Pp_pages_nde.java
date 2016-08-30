@@ -59,17 +59,22 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 //			if (!wiki.Xtn_mgr().Xtn_proofread().Enabled()) return;
 		if (!Init_vars(wiki, ctx, src, xnde)) return;
+
+		// set recursing flag
 		Xoae_page page = ctx.Page();
-		if (page.Pages_recursed()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
-		page.Pages_recursed_(true);
 		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
-		page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
-		byte[] page_bry = Bld_wikitext(full_bfr, wiki.Parser_mgr().Pp_num_parser(), lst_page_regy);
-		if (page_bry != null)
-			xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
-		page.Pages_recursed_(false);
-		full_bfr.Mkr_rls();
+		if (wiki.Parser_mgr().Lst__recursing()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
+		try {
+			wiki.Parser_mgr().Lst__recursing_(true);
+			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
+			page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
+			byte[] page_bry = Bld_wikitext(full_bfr, wiki.Parser_mgr().Pp_num_parser(), lst_page_regy);
+			if (page_bry != null)
+				xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
+		} finally {
+			wiki.Parser_mgr().Lst__recursing_(false);
+			full_bfr.Mkr_rls();
+		}
 		page.Html_data().Indicators().Enabled_(Bool_.Y);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
@@ -321,8 +326,6 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xoa_ttl end_page_ttl = end_page_bry == null ? null : ary[ary_len - 1];
 		
 		Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		ctx.Tmpl_output_(page_bfr);
-		Lst_pfunc_wkr lst_pfunc_wkr = new Lst_pfunc_wkr();
 		for (int i = 0; i < ary_len; i++) {
 			Xoa_ttl ttl = ary[i];
 			byte[] ttl_page_db = ttl.Page_db();
@@ -330,7 +333,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				lst_page_regy.Add(ttl_page_db, ttl_page_db);
 			else
 				continue;
-			byte[] cur_sect_bgn = Lst_pfunc_wkr.Null_arg, cur_sect_end = Lst_pfunc_wkr.Null_arg;
+			byte[] cur_sect_bgn = Lst_pfunc_itm.Null_arg, cur_sect_end = Lst_pfunc_itm.Null_arg;
 			if		(ttl.Eq_page_db(bgn_page_ttl)) {
 				if		(bgn_sect_bry != null)
 					cur_sect_bgn = bgn_sect_bry;
@@ -344,13 +347,13 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 					cur_sect_end = end_sect_bry;
 			}
 			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(full_bfr);
-			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
+			Lst_pfunc_itm lst_itm = Lst_pfunc_itm.New_sect_or_null(ctx, ttl.Full_db());
+			if (lst_itm != null) Lst_pfunc_lst_.Sect_include(page_bfr, lst_itm.Sec_mgr(), lst_itm.Itm_src(), cur_sect_bgn, cur_sect_end);
 			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
 			full_bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
 		page_bfr.Mkr_rls();
-		ctx.Tmpl_output_(null);
 		return full_bfr.To_bry_and_clear();
 	}
 	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {

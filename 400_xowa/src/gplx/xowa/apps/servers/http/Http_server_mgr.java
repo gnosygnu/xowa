@@ -94,7 +94,7 @@ public class Http_server_mgr implements Gfo_invk {
 
 			// get the wiki
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(wiki_domain);			// assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
-			if (Env_.System_memory_total() > Io_mgr.Len_gb)	Xowe_wiki_.Rls_mem(wiki, true);			// release memory at 1 GB; DATE:2015-09-11
+			if (Runtime_.Memory_total() > Io_mgr.Len_gb)	Xowe_wiki_.Rls_mem(wiki, true);			// release memory at 1 GB; DATE:2015-09-11
 
 			// get the url / ttl
 			if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = wiki.Props().Main_page();

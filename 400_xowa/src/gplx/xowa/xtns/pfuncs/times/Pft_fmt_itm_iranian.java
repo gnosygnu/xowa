@@ -17,14 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pft_fmt_itm_iranian {
-	private static final int[] Md__greg	= new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	private static final int[] Md__iran	= new int[] { 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 };
-	private static final int[] tmp_rslt = new int[3];
+	private static final    int[] Md__greg	= new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	private static final    int[] Md__iran	= new int[] { 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 };
 	public static int[] Calc_date(DateAdp date) {
-		synchronized (Md__iran) {
-			Calc_date(tmp_rslt, date.Year(), date.Month(), date.Day());
-			return tmp_rslt;
-		}
+		int[] rv = new int[3]; // MEM:cache
+		Calc_date(rv, date.Year(), date.Month(), date.Day());
+		return rv;
 	}
 	public static boolean Calc_date(int[] rv, int greg_y, int greg_m, int greg_d) {	// REF.MW:Language.php|tsToIranian
 		greg_y -= 1600;
@@ -81,13 +79,13 @@ class Pft_fmt_itm_iranian {
 		byte[] msg_key = Month_names[m];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
-	private static final byte[][] Month_names = new byte[][] 
+	private static final    byte[][] Month_names = new byte[][] 
 	{ Bry_.new_a7("iranian-calendar-m1"), Bry_.new_a7("iranian-calendar-m2"), Bry_.new_a7("iranian-calendar-m3")
 	, Bry_.new_a7("iranian-calendar-m4"), Bry_.new_a7("iranian-calendar-m5"), Bry_.new_a7("iranian-calendar-m6")
 	, Bry_.new_a7("iranian-calendar-m7"), Bry_.new_a7("iranian-calendar-m8"), Bry_.new_a7("iranian-calendar-m9")
 	, Bry_.new_a7("iranian-calendar-m10"), Bry_.new_a7("iranian-calendar-m11"), Bry_.new_a7("iranian-calendar-m12")
 	};
-	public static final int
+	public static final    int
 	  Rslt__year			= 0
 	, Rslt__month			= 1
 	, Rslt__day				= 2

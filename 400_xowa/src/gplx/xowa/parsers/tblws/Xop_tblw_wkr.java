@@ -170,8 +170,11 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						if (!tbl_is_xml)
 							ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; 2012-12-08
 						int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr);
-						if (stack_pos != Xop_ctx.Stack_not_found)							// don't pop <tr> if none found; PAGE:en.w:Turks_in_Denmark DATE:2014-03-02
+						if	(	stack_pos != Xop_ctx.Stack_not_found	// don't pop <tr> if none found; PAGE:en.w:Turks_in_Denmark DATE:2014-03-02
+							&&	!tbl_is_xml								// cur is "|-", not <tr>; PAGE:en.w:Aargau; DATE:2016-08-14
+							) {
 							ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
+						}
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr><tr>           -> <tr>							
 						if (prv_tkn.Tblw_subs_len() == 0) {	// NOTE: set prv_row to ignore, but do not pop; see Tr_dupe_xnde and [[Jupiter]]; only invoke if same type; EX: <tr><tr> but not |-<tr>; DATE:2013-12-09

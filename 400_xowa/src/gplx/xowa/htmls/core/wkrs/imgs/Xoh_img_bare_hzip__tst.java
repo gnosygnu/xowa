@@ -34,4 +34,16 @@ public class Xoh_img_bare_hzip__tst {
 		, "<img style='margin: 1px; height: 11px;' src='file:///android_asset/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_X1.png' title='X1 [t]' alt='t'>"
 		);
 	}
+	@Test   public void Imap_btn() {
+		fxt.Test__bicode
+		( "~(\"<img alt=\"About this image\" src=\"~desc-20.png\" style=\"border: none;\">~"
+		, "<img alt=\"About this image\" src=\"file:///android_asset/xowa/bin/any/xowa/xtns/ImageMap/imgs/desc-20.png\" style=\"border: none;\">"
+		);
+	}
+	@Test   public void Imap_map() {
+		fxt.Test__bicode
+		( "~%}*BhtA.png~#$m#T\"A.png~"
+		, "<img src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/330px.png\" width=\"330\" height=\"220\" class=\"thumbimage\" alt=\"\" usemap=\"#imagemap_1_1\">"
+		);
+	}
 }

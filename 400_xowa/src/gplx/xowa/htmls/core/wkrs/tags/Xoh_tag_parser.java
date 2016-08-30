@@ -68,8 +68,11 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 				case Gfh_tag_.Id__img:
 					if		(cur.Atrs__has(gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_xoimg_data.Bry__data_xowa_image))
 						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__img);
-					else
+					else {
 						rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__img_bare);
+						if (rv == -1)	// NOTE: handle link-less images which don't have an <a>; EX: <img src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png" width="128" height="64" alt="abc">; DATE:2016-08-21
+							rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__img);
+					}
 					break;
 				case Gfh_tag_.Id__div:
 					if		(cur.Atrs__cls_has(Xoh_thm_data.Atr__class__thumb)) {
@@ -96,7 +99,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 		}
 		return cur_end;
 	}
-	private int Parse_by_data(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag cur, Gfh_tag nxt, int tid) {
+	public int Parse_by_data(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag cur, Gfh_tag nxt, int tid) {
 		Xoh_data_itm data = hctx.Pool_mgr__data().Get_by_tid(tid);
 		data.Clear();
 		if (!data.Init_by_parse(hdoc_wkr, hctx, tag_rdr, src, cur, nxt)) {data.Pool__rls(); return -1;}

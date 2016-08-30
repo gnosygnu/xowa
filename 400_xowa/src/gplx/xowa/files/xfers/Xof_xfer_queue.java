@@ -80,6 +80,8 @@ public class Xof_xfer_queue {
 			fsdb.Html_gallery_mgr_h_(xfer.Html_gallery_mgr_h());
 			fsdb.Html_img_wkr_(xfer.Html_img_wkr());
 			fsdb.File_exists_(xfer.File_exists());
+			if (xfer.Lnki_type() == gplx.xowa.parsers.lnkis.Xop_lnki_type.Tid_orig_known)
+				fsdb.Init_at_gallery_bgn(xfer.Html_w(), xfer.Html_h(), xfer.File_w());
 			rv.Add(fsdb);
 		}
 		this.Clear();

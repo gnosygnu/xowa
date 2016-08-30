@@ -167,11 +167,11 @@ public class Process_adp implements Gfo_invk, Rls_able {
 	        notify_fmtr.Fmt_(prog_fmt);
 	        while (thread.isAlive()) {
 	        	thread_run = true;
-	        	long prv = Env_.TickCount();
+	        	long prv = System_.Ticks();
 	        	Thread_adp_.Sleep(thread_interval);
 //	        	try {thread.join(thread_interval);}
 //	        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at join");}
-	        	long cur = Env_.TickCount();
+	        	long cur = System_.Ticks();
 	        	int dif = (int)(cur - prv); 
 	        	elapsed += dif;
 	        	if (prog_dlg != null) {

@@ -21,7 +21,6 @@ public class Xof_fsdb_mode {
 	Xof_fsdb_mode(int tid) {this.tid = tid;}
 	public boolean Tid__v2__bld()		{return tid == TID__v2__bld;}
 	public void Tid__v2__bld__y_()	{tid = TID__v2__bld;}
-	public boolean Tid__v2__mp()		{return tid == TID__v2__mp;}
 	public void Tid__v2__mp__y_()	{tid = TID__v2__mp;}
 	public boolean Tid__bld()			{return tid > TID__v2__gui;}
 	private static final int

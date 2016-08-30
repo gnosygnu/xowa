@@ -26,7 +26,7 @@ public class Srch_html_page_bldr {
 	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr(); private Srch_html_row_bldr html_row_bldr;
 	public void Init_by_wiki(Xow_wiki wiki, Xol_num_mgr num_mgr, Srch_search_qry qry) {
 		this.wiki = wiki; this.num_mgr = num_mgr; this.qry = qry;
-		this.lnki_bldr = wiki.App().Html__lnki_bldr();
+		this.lnki_bldr = wiki.Html__lnki_bldr();
 		int slab_len = qry.Slab_end - qry.Slab_bgn;
 		this.slab_idx = qry.Slab_bgn / slab_len;
 		this.html_row_bldr = new Srch_html_row_bldr(lnki_bldr);

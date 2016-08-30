@@ -31,7 +31,7 @@ public class Wdata_pf_property extends Pf_func_base {
 			Xop_log_property_wkr property_wkr = ctx.Xtn__wikidata__property_wkr();
 			long log_time_bgn = 0;
 			if (property_wkr != null) {
-				log_time_bgn = Env_.TickCount();
+				log_time_bgn = System_.Ticks();
 				if (!property_wkr.Eval_bgn(ctx.Page(), pid_ttl)) return;
 			}
 			Xoae_app app = ctx.App();

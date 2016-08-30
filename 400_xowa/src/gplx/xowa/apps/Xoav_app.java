@@ -43,7 +43,6 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 		this.file__img_mgr = new Xof_img_mgr();
 		this.wiki_mgr = new Xoav_wiki_mgr(this, utl_case_mgr);
 		this.utl_msg_log = Gfo_msg_log.Test();
-		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.gui__tab_mgr = tab_mgr;
 		this.user = new Xouv_user("anonymous");
@@ -65,7 +64,6 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Io_download_fmt			File__download_fmt()		{return file__download_fmt;} private final    Io_download_fmt file__download_fmt = new Io_download_fmt();
 	public Xoh_href_parser			Html__href_parser()			{return href_parser;} private final    Xoh_href_parser href_parser = new Xoh_href_parser();
 	public Xoh_href_wtr				Html__href_wtr()			{return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
-	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final    Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
 	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final    Xoa_meta_mgr meta_mgr;

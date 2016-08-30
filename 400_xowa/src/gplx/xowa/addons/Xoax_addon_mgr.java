@@ -53,6 +53,7 @@ public class Xoax_addon_mgr {
 		, new gplx.xowa.addons.bldrs.xodirs				.Xobc_xodir_addon()
 		, new gplx.xowa.addons.bldrs.centrals			.Xobc_task_addon()
 		, new gplx.xowa.addons.apps.helps.logs			.Xolog_addon()
+		, new gplx.xowa.addons.wikis.pages.syncs		.Sync_addon()
 
 		// jsons
 		);

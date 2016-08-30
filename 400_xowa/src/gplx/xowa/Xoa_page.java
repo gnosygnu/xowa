@@ -27,7 +27,6 @@ public interface Xoa_page {
 	Xopg_hdump_data			Hdump_mgr();
 
 	Xoa_page__commons_mgr	Commons_mgr();
-	void					Xtn_gallery_packed_exists_y_();
 	boolean					Xtn__timeline_exists();
 	boolean					Xtn__gallery_exists();
 }

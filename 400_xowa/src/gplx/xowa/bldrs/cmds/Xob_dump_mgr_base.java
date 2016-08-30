@@ -74,7 +74,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private void Exec_ns_ary() {
 		if (pg_bgn == Int_.Max_value) return;
 		if (load_tmpls) Xob_dump_mgr_base_.Load_all_tmpls(usr_dlg, wiki, page_src);
-		time_bgn = Env_.TickCount();
+		time_bgn = System_.Ticks();
 		Xob_dump_bmk dump_bmk = new Xob_dump_bmk();
 		rate_mgr.Init();
 		int ns_ary_len = ns_ary.length;
@@ -140,7 +140,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if ((exec_count % progress_interval) == 0)
 				usr_dlg.Prog_many("", "", "parsing: ns=~{0} db=~{1} pg=~{2} count=~{3} time=~{4} rate=~{5} ttl=~{6}"
 					, ns.Id(), db_id, page.Id(), exec_count
-					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_u8(page.Ttl_page_db()));
+					, System_.Ticks__elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_u8(page.Ttl_page_db()));
 			ctx.Clear_all();
 			byte[] page_src = page.Text();
 			if (page_src != null)	// some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
@@ -180,7 +180,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		Exec_commit(-1, -1, -1, Bry_.Empty);
 		Exec_end_hook();
 		Free();
-		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
+		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, System_.Ticks__elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 	}
 	private void Free() {
 		Xowe_wiki_.Rls_mem(wiki, true);
@@ -288,11 +288,11 @@ class Xob_rate_mgr {
 	private Bry_bfr save_bfr = Bry_bfr_.Reset(255);
 	public int Reset_interval() {return reset_interval;} public Xob_rate_mgr Reset_interval_(int v) {reset_interval = v; return this;} private int reset_interval = 10000;
 	public Io_url Log_file_url() {return log_file;} public Xob_rate_mgr Log_file_(Io_url v) {log_file = v; return this;} private Io_url log_file;
-	public void Init() {time_bgn = Env_.TickCount();}
+	public void Init() {time_bgn = System_.Ticks();}
 	public void Increment() {
 		++item_len;
 		if (item_len % reset_interval == 0) {
-			long time_end = Env_.TickCount();
+			long time_end = System_.Ticks();
 			Save(item_len, time_bgn, time_end);
 			time_bgn = time_end;
 			item_len = 0;
@@ -310,7 +310,7 @@ class Xob_rate_mgr {
 	}
 	public String Rate_as_str() {return Int_.To_str(Rate());}
 	public int Rate() {
-		int elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
+		int elapsed = System_.Ticks__elapsed_in_sec(time_bgn);
 		return Math_.Div_safe_as_int(item_len, elapsed);
 	}
 }

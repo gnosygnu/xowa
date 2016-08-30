@@ -17,12 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rates.*;
+import gplx.xowa.apps.apis.*;
 public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	private final    Xobc_task_mgr task_mgr; 		
 	private final    Gfo_rate_list rate_list; private final    long notify_delay = 1000; 
 	private final    double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
 	private long time_prv;
 	private double rate_cur;
+	private boolean log_verbose;
 	public Xobc_cmd__base(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_id) {
 		this.task_mgr = task_mgr; this.task_id = task_id; this.step_id = step_id; this.cmd_id = cmd_id;
 		this.cmd_uid = String_.Concat_with_str(":", Int_.To_str(task_id), Int_.To_str(step_id), Int_.To_str(cmd_id));
@@ -51,9 +53,12 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 
 	public void Cmd_exec(Xobc_cmd_ctx ctx) {
 		// rate_list.Clear(); this.rate_cur = 0;	// TOMBSTONE: do not reset rate else pause and resume will show different numbers
+		Xoapi_root api_root = task_mgr.App().Api_root();
+		if (api_root != null)
+			this.log_verbose = api_root.Addon().Bldr().Central().Log_verbose();
 		try {
 			Gfo_log_.Instance.Info("xobc_cmd task bgn", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
-			this.time_prv = gplx.core.envs.Env_.TickCount();
+			this.time_prv = gplx.core.envs.System_.Ticks();
 			this.status = Gfo_prog_ui_.Status__working;
 			this.Cmd_exec_hook(ctx);
 			Gfo_log_.Instance.Info("xobc_cmd task end", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
@@ -106,7 +111,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 
 	public boolean Prog_notify_and_chk_if_suspended(long new_data_cur, long new_data_end) {
 		if (status == Gfo_prog_ui_.Status__suspended) return true;	// task paused by ui; exit now;
-		long time_cur = gplx.core.envs.Env_.TickCount();
+		long time_cur = gplx.core.envs.System_.Ticks();
 		if (time_cur < time_prv + notify_delay) return false;		// message came too soon. ignore it
 
 		// update rate
@@ -130,6 +135,8 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 
 		task_mgr.Send_json("xo.bldr.work.prog__update__recv", Gfobj_nde.New()
 			.Add_int ("task_id", task_id).Add_long("prog_data_cur", data_cur).Add_long("prog_data_end", data_end).Add_int("prog_rate", (int)rate_cur));
+		if (log_verbose)
+			Gfo_usr_dlg_.Instance.Note_many("", "", "xobc:notify: task_id=~{0} cmd_id=~{1} prog_data_cur=~{2} prog_data_end=~{3} rate_cur=~{4}", task_id, cmd_id, data_cur, data_end, rate_cur);
 		return false;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

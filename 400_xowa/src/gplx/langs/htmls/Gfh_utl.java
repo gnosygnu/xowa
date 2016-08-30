@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 import gplx.langs.htmls.entitys.*;
-public class Gfh_utl {
+public class Gfh_utl {// TS:Gfo_url_encoder is TS
 	private static final    Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id;
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {

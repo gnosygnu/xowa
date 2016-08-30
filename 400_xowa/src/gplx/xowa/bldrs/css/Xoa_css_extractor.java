@@ -150,7 +150,7 @@ public class Xoa_css_extractor {
 		Css_wiki_section_hdr.Bld_bfr_many(bfr, ttl);			// add "/*XOWA:MediaWiki:Common.css*/\n"
 		bfr.Add(page);											// add page
 		return true;
-	}	static final    Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
+	}	private static final    Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
 	public void Logo_setup() {
 		boolean logo_missing = true;
 		Io_url logo_url = wiki_html_dir.GenSubFil("logo.png");

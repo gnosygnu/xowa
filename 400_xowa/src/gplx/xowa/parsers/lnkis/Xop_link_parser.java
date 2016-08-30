@@ -76,19 +76,32 @@ public class Xop_link_parser {
 		return raw;
 	}
 	private static boolean Parse__ttl(Bry_bfr tmp_bfr, Xowe_wiki wiki, byte[] wiki_bry, byte[] page_bry) {
+		// handle colon-only aliases; EX:"link:" PAGE:en.w:Wikipedia:Main_Page_alternative_(CSS_Update) DATE:2016-08-18
 		Xoa_ttl page_ttl = wiki.Ttl_parse(page_bry);
+		Xow_xwiki_itm xwiki_itm = page_ttl == null ? null : page_ttl.Wik_itm();
+		if (	xwiki_itm != null					// ttl is xwiki; EX:[[File:A.png|link=wikt:A]]
+			&&	page_ttl.Page_db().length == 0) {	// ttl is empty; EX:[[File:A.png|link=wikt:]]
+			Xow_wiki xwiki_wiki = wiki.App().Wiki_mgri().Get_by_or_make_init_n(page_ttl.Wik_itm().Domain_bry());
+			page_bry = Bry_.Add(page_bry, xwiki_wiki.Props().Main_page());	// append Main_Page to ttl; EX:"wikt:" + "Wikipedia:Main_Page" -> "wikt:Wikipedia:Main_Page"
+			page_ttl = wiki.Ttl_parse(page_bry);
+			xwiki_itm = page_ttl.Wik_itm();	// should still be the same, but re-set it for good form
+		}
+
+		// identify wiki / page
 		boolean page_ttl_is_valid = page_ttl != null;
-		if (page_ttl_is_valid) {
-			Xow_xwiki_itm xwiki_itm = page_ttl.Wik_itm();
+		if (page_ttl_is_valid) {						// xwiki; need to define wiki / page
 			if (xwiki_itm != null) {					// is alias; set wiki, page
 				wiki_bry = xwiki_itm.Domain_bry();
-				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key_bry().length + 1, page_bry.length);	// +1 for ":"
+				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key_bry().length + 1, page_bry.length);	// +1 to skip ":"
 			}
-			else										// is regular page; use ttl.Full_db() to normalize; EX: &nbsp; -> _
+			else										// basic; just define page; use ttl.Full_db() to normalize; EX: &nbsp; -> _
 				page_bry = page_ttl.Full_db_w_anch();	// add anch; PAGE:en.w:History_of_Nauru; DATE:2015-12-27
 		}
+
+		// build either "/wiki/Page" or "/site/domain/wiki/Page"
 		if (Bry_.Eq(wiki_bry, wiki.Domain_bry())) {		// NOTE: check against wiki.Key_bry() again; EX: in en_wiki, and http://commons.wikimedia.org/wiki/w:A
-			if (page_ttl_is_valid) {	// same wiki; parse in same ns to title-case; EX:link=w:Help:a -> Help:A; NOTE: must check for page_ttl_is_valid; DATE:2016-01-11
+			// title-case by ns; needed to handle "link=w:Help:a" which needs to generate "w:Help:A"
+			if (page_ttl_is_valid) {					// valid_ttl; parse in same ns to title-case; EX:link=w:Help:a -> Help:A; DATE:2016-01-11
 				page_ttl = wiki.Ttl_parse(page_ttl.Full_db_wo_xwiki());
 				page_bry = page_ttl.Full_db_w_anch();
 			}

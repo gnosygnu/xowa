@@ -37,13 +37,13 @@ public class Io_sort {
 				usr_dlg.Prog_one(GRP_KEY, "write", "writing chunk: ~{0}", trg_url.Raw());
 				Split_flush(trg_url, row_list, memory_max, bfr, rv);
 				row_list.Resize_bounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
-				size_new = size_row; Env_.GarbageCollect();
+				size_new = size_row; System_.Garbage_collect();
 				if (!reading) break;
 			}
 			row_list.Add(new Io_sort_split_itm(rdr));
 			size_cur = size_new;
 		}
-		rdr.Rls(); bfr.Rls(); Env_.GarbageCollect();
+		rdr.Rls(); bfr.Rls(); System_.Garbage_collect();
 		return (Io_url[])rv.To_ary(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {

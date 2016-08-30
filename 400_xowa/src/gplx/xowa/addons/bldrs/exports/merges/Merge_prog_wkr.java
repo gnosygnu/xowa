@@ -45,7 +45,7 @@ public class Merge_prog_wkr implements Db_bulk_prog {
 		this.cur_fil = fil;
 		this.cur_wkr_tid = wkr_tid;
 		this.Checkpoint__save();
-		time_nxt = gplx.core.envs.Env_.TickCount() + time_gap;
+		time_nxt = gplx.core.envs.System_.Ticks() + time_gap;
 		return false;
 	}
 	public void Checkpoint__save() {
@@ -54,7 +54,7 @@ public class Merge_prog_wkr implements Db_bulk_prog {
 	}
 	public boolean Prog__insert_and_stop_if_suspended(int row_size) {
 		++prog_count_cur;
-		long time_cur = gplx.core.envs.Env_.TickCount();
+		long time_cur = gplx.core.envs.System_.Ticks();
 		if (time_cur < time_nxt) return false;
 		// gplx.core.threads.Thread_adp_.Sleep(10);
 		time_nxt = time_cur + time_gap;

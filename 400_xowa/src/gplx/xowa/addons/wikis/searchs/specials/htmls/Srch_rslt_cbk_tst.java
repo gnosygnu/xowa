@@ -39,7 +39,7 @@ class Srch_rslt_cbk_fxt {
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app, "w");
-		html_row = new Srch_html_row_bldr(wiki.App().Html__lnki_bldr());
+		html_row = new Srch_html_row_bldr(wiki.Html__lnki_bldr());
 		html_row.Fmtr().Fmt_("~{page_key}");
 		async = new Srch_html_row_wkr(html_row, js_wkr, 5, Bry_enwiki);
 		page_id = 0;

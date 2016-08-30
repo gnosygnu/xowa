@@ -43,5 +43,5 @@ class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 		if (val == 0) return;
 		if (bfr.Len() > 1) bfr.Add(Bld_contains_text_itm_dlm);	// NOTE: 1 b/c Paren_bgn is always added
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
-	}	static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 		
+	}	private static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 		
 }

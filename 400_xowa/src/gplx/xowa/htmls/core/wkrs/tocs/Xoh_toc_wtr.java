@@ -39,7 +39,6 @@ public class Xoh_toc_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	public static final    byte[] 
 	  Atr__class__toc				= Bry_.new_a7("xo-toc")
 	, Atr__data__toc__mode			= Bry_.new_a7("data-toc-mode")
-//		, Bry__placeholder				= Bry_.new_a7("<!--XOWA:TOC-->\n")	// NOTE: need to put \n b/c html_wtr always adds \n before each <h2> and TOC usually goes before <h2>; DATE:2016-07-16
 	;
 	public static void Write_tag(Bry_bfr bfr, boolean pgbnr_enabled) {
 		bfr.Add(Gfh_tag_.Div_lhs_bgn);
@@ -58,7 +57,10 @@ public class Xoh_toc_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 		// build body
 		byte[] bry = rv.To_bry_and_clear();	// NOTE: create bry to free bfr
 		rv.Add_mid(bry, 0, toc_bgn);
-		pg.Html_data().Toc_mgr().To_html(rv, hctx, pg.Html_data().Xtn_pgbnr() != null);
+		if (hctx.Mode_is_hdump())	// NOTE: only write TOC tag in hdump; DATE:2016-08-20
+			Xoh_toc_wtr.Write_tag(rv, false);
+		else
+			pg.Html_data().Toc_mgr().To_html(rv, hctx, pg.Html_data().Xtn_pgbnr() != null);
 		rv.Add_mid(bry, toc_bgn, bry.length);
 	}
 }

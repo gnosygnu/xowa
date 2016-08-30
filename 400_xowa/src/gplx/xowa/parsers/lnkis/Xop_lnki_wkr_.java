@@ -44,17 +44,17 @@ public class Xop_lnki_wkr_ {
 		ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl.Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
 		Xoa_ttl page_ttl = ctx.Page().Ttl();
+		Xowe_wiki wiki = ctx.Wiki();
 		if (page_ttl.Ns().Subpages_enabled()
 			&& Pfunc_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
 			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 			Int_obj_ref rel2abs_tid = ctx.Tmp_mgr().Pfunc_rel2abs().Val_zero_();
-			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid);
+			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, wiki.Parser_mgr().Rel2abs_ary(), ttl_bry, page_ttl.Raw(), rel2abs_tid);
 			lnki.Subpage_tid_(rel2abs_tid.Val());
 			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == Byte_ascii.Slash);
 			ttl_bry = new_bry;
 			tmp_bfr.Mkr_rls();
 		}
-		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);		
 		if (ttl == null) return false;
 		if	(	wiki.Cfg_parser_lnki_xwiki_repos_enabled()			// wiki has lnki.xwiki_repos

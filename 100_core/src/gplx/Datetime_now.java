@@ -48,6 +48,9 @@ public class Datetime_now {
 		if (autoincrement) manual = rv.Add_minute(1);		// simulate passage of manual by increasing manual by 1 minute with each call
 		return rv;
 	}
+	public static DateAdp Get_force() {	// ignore manual and force get of real time
+		return new DateAdp(new GregorianCalendar());
+	}
 //		private static final    DateAdp manual_time_dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 //		private static DateAdp manual_time;
 //		static boolean Now_enabled() {return now_enabled;} private static boolean now_enabled;

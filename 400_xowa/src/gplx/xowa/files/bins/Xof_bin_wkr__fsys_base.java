@@ -56,13 +56,13 @@ class Xof_bin_wkr__fsys_wmf extends Xof_bin_wkr__fsys_wmf_base {
 	@Override public byte Tid() {return Xof_bin_wkr_.Tid_fsys_wmf;}
 	@Override public String Key() {return Xof_bin_wkr_.Key_fsys_wmf;}
 	@Override public void Init_by_root() {
-		this.Url_bldr().Init_by_root(Bry_.Empty, Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.Y, Bool_.Y, Xof_repo_itm_.Dir_depth_wmf);
+		this.Url_bldr().Init_by_root(Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.Y, Bool_.Y, Xof_repo_itm_.Dir_depth_wmf);
 	}
 }
 class Xof_bin_wkr__fsys_xowa extends Xof_bin_wkr__fsys_wmf_base {
 	@Override public byte Tid() {return Xof_bin_wkr_.Tid_fsys_xowa;}
 	@Override public String Key() {return Xof_bin_wkr_.Key_fsys_xowa;}
 	@Override public void Init_by_root() {
-		this.Url_bldr().Init_by_root(Bry_.Empty, Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.N, Bool_.N, Xof_repo_itm_.Dir_depth_xowa);
+		this.Url_bldr().Init_by_root(Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.N, Bool_.N, Xof_repo_itm_.Dir_depth_xowa);
 	}
 }

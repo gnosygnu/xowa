@@ -178,7 +178,7 @@ class Pxd_parser_ {
 			Init();
 		}
 		return trie;
-	}	static Btrie_slim_mgr trie;
+	}	private static Btrie_slim_mgr trie;
 	private static final       String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
 	private static final       String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 	private static final       String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};

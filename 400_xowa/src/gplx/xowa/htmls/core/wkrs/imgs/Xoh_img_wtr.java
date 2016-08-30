@@ -72,7 +72,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	private void Init_xoimg(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] lnki_ttl, Xoh_img_xoimg_data img_xowa_image) {
 		fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hpg.Wiki().Domain_itm().Abrv_xo(), lnki_ttl, Xop_lnki_type.To_flag(img_xowa_image.Lnki_type()), img_xowa_image.Lnki_upright(), img_xowa_image.Lnki_w(), img_xowa_image.Lnki_h(), img_xowa_image.Lnki_time(), img_xowa_image.Lnki_page(), Xof_patch_upright_tid_.Tid_all);
-		hctx.File__mgr().Find(hpg.Wiki(), hpg.Url_bry_safe(), fsdb_itm);
+		hctx.Cache_mgr().Find(hpg.Wiki(), hpg.Url_bry_safe(), fsdb_itm);
 		this.img_xowa_image.Set_by_arg(img_xowa_image.Clone());	// NOTE: must clone b/c img_xowa_image is member of Xoh_img_data which is poolable (and cleared); PAGE:en.w:Almagest; DATE:2016-01-05
 		this.Init_html(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_view_url().To_http_file_bry());
 		this.div_w = fsdb_itm.Lnki_w();
@@ -83,8 +83,11 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		this.img_is_vid = data.Img_is_vid();
 		this.img_wo_anch = data.Img_wo_anch();
 		this.fsdb_itm = hpg.Img_mgr().Make_img(data.Img_is_gallery());
-		byte[] file_ttl_bry = data.Img_src().File_ttl_bry();
-		byte[] lnki_ttl = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(file_ttl_bry));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
+
+		byte[] file_ttl_bry = data.Anch_xo_ttl().Val();
+		byte[] lnki_ttl = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(data.Img_src().File_ttl_bry()));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
+
+		boolean write_xowa_file_title = true;
 		if		(data.Img_pgbnr().Exists()) {
 			img_pgbnr_atrs.Set(data.Img_pgbnr());
 			hpg.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();
@@ -94,10 +97,21 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 			Xoh_img_xoimg_data img_xowa_image = data.Img_xoimg();
 			this.Init_xoimg(hpg, hctx, lnki_ttl, img_xowa_image);
 		}
-		else if (data.Img_w() != -1) {
-			img_w.Set_by_int(data.Img_w());
-			img_h.Set_by_int(data.Img_h());
-			this.img_src.Set_by_arg(data.Img_src());
+		else if (data.Img_w() != -1) {	// orig exists or some hard-coded image (hiero)
+			Xoh_img_src_data img_src_data = data.Img_src();
+			
+			this.Init_html(data.Img_w(), data.Img_h(), img_src_data.Src_bry());
+			int file_w = data.Img_src().File_w();
+			// NOTE: init lnki with "64|file_w|-1|-1|-1|-1"; DATE:2016-08-10
+			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, hctx.Cache__wiki_abrv(img_src_data.Repo_is_commons()), lnki_ttl, Xop_lnki_type.Tid_orig_known, Xop_lnki_tkn.Upright_null, file_w, Xof_img_size.Null, data.Img_src().File_time(), data.Img_src().File_page(), Xof_patch_upright_tid_.Tid_all);
+			fsdb_itm.Init_at_gallery_bgn(data.Img_w(), data.Img_h(), file_w);
+			fsdb_itm.Html_view_url_(Io_url_.New__http_or_fail(img_src_data.Src_bry()));
+			fsdb_itm.File_is_orig_(data.Img_src().File_is_orig());
+
+			// ASSUME: if file_w != img_w, then page has packed gallery; PAGE:en.w:Mexico; DATE:2016-08-14
+			if (file_w != data.Img_w())
+				hpg.Html_data().Xtn_gallery_packed_exists_y_();
+			write_xowa_file_title = false;
 		}
 		if (data.Anch_rel_nofollow_exists()) anch_rel.Set_by_bry(gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_dict_.Html__rel__nofollow);
 		if (!hctx.Mode_is_diff()) {
@@ -110,7 +124,9 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		if (	data.Img_wo_anch() 					// anchor-less image
 			||	Bry_.Len_gt_0(file_ttl_bry))		// regular anch with image
 			anch_xowa_title.Set_by_bry(file_ttl_bry);			
-		img_xowa_title.Set_by_bry(file_ttl_bry);
+
+		if (write_xowa_file_title)
+			img_xowa_title.Set_by_bry(file_ttl_bry);
 		img_alt.Set_by_mid_or_empty(src, data.Img_alt_bgn(), data.Img_alt_end());
 		img_cls.Set_by_arg(data.Img_cls());
 		if (data.Img_imap_idx() != -1) img_imap_usemap.Set(data.Img_imap_idx());

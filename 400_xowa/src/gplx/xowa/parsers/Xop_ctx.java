@@ -63,7 +63,6 @@ public class Xop_ctx {
 	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.Max_value;
 	public Xop_keeplist_wiki	Tmpl_keeplist()		{return tmpl_keeplist;} public void Tmpl_keeplist_(Xop_keeplist_wiki v) {this.tmpl_keeplist = v;} private Xop_keeplist_wiki tmpl_keeplist;
 	public boolean				Tmpl_args_parsing() {return tmpl_args_parsing;} public Xop_ctx Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v; return this;} private boolean tmpl_args_parsing;
-	public Bry_bfr				Tmpl_output()		{return tmpl_output;} public Xop_ctx Tmpl_output_(Bry_bfr v) {tmpl_output = v; return this;} private Bry_bfr tmpl_output;	// OBSOLETE: after tmpl_prepend_nl rewrite; DATE:2014-08-21
 	public Xot_defn_trace		Defn_trace()		{return defn_trace;} public Xop_ctx Defn_trace_(Xot_defn_trace v) {defn_trace = v; return this;} private Xot_defn_trace defn_trace = Xot_defn_trace_null.Instance;
 	public boolean				Only_include_evaluate() {return only_include_evaluate;} public Xop_ctx Only_include_evaluate_(boolean v) {only_include_evaluate = v; return this;} private boolean only_include_evaluate;
 
@@ -87,7 +86,6 @@ public class Xop_ctx {
 		stack_len = stack_max = 0;
 		if (lst_section_mgr != null) lst_section_mgr.Clear();
 		if (lst_page_regy != null) lst_page_regy.Clear();
-		tmpl_output = null;
 		tmpl_args_parsing = false;
 		return this;
 	}
@@ -335,8 +333,8 @@ public class Xop_ctx {
 	}
 
 	private static void Share_ctx_vars(Xop_ctx src, Xop_ctx trg) {
+		trg.Page().Db().Page().Id_(src.Page().Db().Page().Id());
 		trg.Lnki().File_logger_(src.Lnki().File_logger());	// always share lnki_logger between sub contexts
-		trg.tmpl_output = src.tmpl_output;					// share bfr for optimization purposes
 		trg.ref_ignore = src.ref_ignore;					// copy ref_ignore; needed for refs inside poem else duplicate refs; it.s:La_Secchia_rapita/Canto_primo; DATE:2015-12-03
 		trg.references_group = src.references_group;
 		trg.cur_page.Ref_mgr_(src.cur_page.Ref_mgr());

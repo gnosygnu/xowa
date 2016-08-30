@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.threads.poolables.*;
+import gplx.core.btries.*; import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 public class Xoh_img_bare_data implements Xoh_data_itm {
@@ -30,27 +30,38 @@ public class Xoh_img_bare_data implements Xoh_data_itm {
 		this.src_bgn = src_end = img_tid = dir_bgn = dir_end = -1;
 	}
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag img_head, Gfh_tag unused) {
+		// get src attribute
 		this.src_bgn = img_head.Src_bgn(); this.src_end = img_head.Src_end();
 		Gfh_atr img_src_atr = img_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__src); if (img_src_atr.Val_dat_missing()) return false;
-		byte[] root_dir_bry = hctx.Fsys__res();	// NOTE: Fsys_res == Fsys_root on all machines except drd;
+
+		// check if it begins with the xowa root dir; EX: src='file:///C:/xowa/...'
+		byte[] root_dir_bry = hctx.Fsys__res();	// NOTE: Fsys_res == Fsys_root on all machines except drd; note that hdump builds are not done on drd
 		int root_dir_bgn = img_src_atr.Val_bgn();
 		int root_dir_end = root_dir_bgn + root_dir_bry.length;
-		if (Bry_.Match(src, root_dir_bgn, root_dir_end, root_dir_bry)) {
-			int hiero_dir_end = root_dir_end + Url__hiero.length;
-			if (Bry_.Match(src, root_dir_end, hiero_dir_end, Url__hiero)) {
-				img_tid = Img_tid__hiero;
-				dir_bgn = root_dir_bgn;
-				dir_end = hiero_dir_end;
-                    return true;
-			}
+		if (Bry_.Match(src, root_dir_bgn, root_dir_end, root_dir_bry)) {	// begins with XOWA root dir
+			byte trie_tid = trie.Match_byte_or(trv, src, root_dir_end, src_end, Byte_.Max_value_127);
+			if (trie_tid == Byte_.Max_value_127) return false;
+			img_tid = trie_tid;
+			dir_bgn = root_dir_bgn;
+			dir_end = trv.Pos();
+			return true;
 		}
 		return false;
 	}
-	public void Init_by_decode__hiero(int src_bgn, int src_end, int dir_bgn, int dir_end) {
-		this.img_tid = Img_tid__hiero; this.src_bgn = src_bgn; this.src_end = src_end; this.dir_bgn = dir_bgn; this.dir_end = dir_end;
+	public void Init_by_decode(int img_tid, int src_bgn, int src_end, int dir_bgn, int dir_end) {
+		this.img_tid = img_tid; this.src_bgn = src_bgn; this.src_end = src_end; this.dir_bgn = dir_bgn; this.dir_end = dir_end;
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_bare_data rv = new Xoh_img_bare_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	public static final byte[] Url__hiero = Bry_.new_a7("bin/any/xowa/xtns/Wikihiero/img/hiero_");
-	public static final int Img_tid__hiero = 0;
+
+	public static final byte Img_tid__hiero = 0, Img_tid__imap_btn = 1;
+	public static final    byte[] 
+	  Url__hiero = Bry_.new_a7("bin/any/xowa/xtns/Wikihiero/img/hiero_")
+	, Url__imap  = Bry_.new_a7("bin/any/xowa/xtns/ImageMap/imgs/")
+	;
+	private final    Btrie_rv trv = new Btrie_rv();
+	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
+	.Add_bry_byte(Url__hiero, Img_tid__hiero)
+	.Add_bry_byte(Url__imap	, Img_tid__imap_btn)
+	;
 }

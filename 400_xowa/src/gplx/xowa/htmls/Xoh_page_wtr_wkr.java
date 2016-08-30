@@ -99,8 +99,15 @@ public class Xoh_page_wtr_wkr {
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), wiki.Xtn_mgr().Xtn_pgbnr().Write_html(page, ctx, hctx), page_body_class, html_content_editable
 		, page_data, wdata_lang_wtr
-		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
-		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
+
+		// sidebar divs
+		, portal_mgr.Div_personal_bry()
+		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
+		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
+		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
+		, portal_mgr.Div_admin_bry(tmp_bfr, wiki, page)
+		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
+		, portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
 		);
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, tmp_bfr, page);	// add after </head>
@@ -170,7 +177,7 @@ public class Xoh_page_wtr_wkr {
 		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, hctx, tidy_bfr);
 
 		// tidy html
-		wiki.Html_mgr().Tidy_mgr().Run_tidy_html(page, tidy_bfr, !hctx.Mode_is_hdump());
+		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);

@@ -36,6 +36,7 @@ public class Xowd_html_tbl implements Db_tbl {
 	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "html";
 	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
+
 	public void Insert_bgn() {conn.Txn_bgn("html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] body) {Insert(hpg.Page_id(), hpg.Head_mgr().Flag(), zip_tid, hzip_tid, hpg.Display_ttl(), hpg.Content_sub(), hpg.Sidebar_div(), body);}
@@ -56,6 +57,15 @@ public class Xowd_html_tbl implements Db_tbl {
 		stmt_update.Clear();
 		Fill_stmt(stmt_update, head_flag, body_flag, display_ttl, content_sub, sidebar_div, body);
 		stmt_update.Crt_int(fld_page_id, page_id).Exec_update();
+	}
+	public void Upsert(int page_id, int head_flag, int zip_tid, int hzip_tid, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, byte[] body) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_page_id).Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_auto();
+		boolean exists = rdr.Move_next();
+		rdr.Rls();
+		if (exists)
+			Update(page_id, head_flag, zip_tid, hzip_tid, display_ttl, content_sub, sidebar_div, body);
+		else
+			Insert(page_id, head_flag, zip_tid, hzip_tid, display_ttl, content_sub, sidebar_div, body);
 	}
 	public void Delete(int page_id) {
 		if (stmt_delete == null) stmt_delete = conn.Stmt_delete(tbl_name, fld_page_id);

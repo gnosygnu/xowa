@@ -132,7 +132,7 @@ class Db_tst_qry {
 			bfr.Add_str_u8(qry.To_sql__exec(qry_wtr)).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_wo_type(bfr.To_str_and_clear());
 		}
-	}	static final    byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
+	}	private static final    byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
 	public static Db_tst_qry tbl_(String tbl_name, String order_by) {return new_(Db_qry_.select_tbl_(tbl_name).Order_asc_(order_by));}
 	public static Db_tst_qry new_(Db_qry qry) {
 		Db_tst_qry rv = new Db_tst_qry();

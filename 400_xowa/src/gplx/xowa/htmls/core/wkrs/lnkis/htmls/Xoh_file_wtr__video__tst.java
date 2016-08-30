@@ -45,6 +45,24 @@ public class Xoh_file_wtr__video__tst {
 		, "    </div>"
 		));		
 	}
+	@Test  public void Video__full__ogv__time() {
+		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
+		file_fxt.Exec_orig_add(Bool_.Y, "A.ogv", Xof_ext_.Id_ogv, 220, 300, "");
+		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
+		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
+
+		fxt.Test_parse_page_wiki_str
+		( "[[File:A.ogv|thumbtime=4]]", String_.Concat_lines_nl_skip_last
+		( "    <div class=\"xowa_media_div\">"
+		, "      <div>"
+		+	        "<a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\" xowa_title=\"A.ogv\">"
+		+	          "<img src=\"file:///mem/wiki/repo/trg/thumb/d/0/A.ogv/220px-4.jpg\" width=\"220\" height=\"300\" alt=\"\"/>"	// NOTE: src should probably be empty;
+		+	        "</a>"
+		, "      </div>"
+		,       "<div><a href=\"\" xowa_title=\"A.ogv\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
+		, "    </div>"
+		));		
+	}
 	@Test  public void Video__full_ogg() {// PURPOSE: ogg w/ width should default to video; otherwise dynamic-update won't be able to convert audio-button to thumb; DATE:2016-08-05
 		// NOTE: simulates app w/ fsdb
 		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
@@ -58,38 +76,6 @@ public class Xoh_file_wtr__video__tst {
 		, "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\" class=\"xowa_media_play\" style=\"width:318px;max-width:320px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"
 		));		
-	}
-	@Test  public void Video__thumb_ogg() {	// PURPOSE: w/ width should default to video; DATE:2016-08-05
-		// NOTE: simulates hdump w/ no fsdb
-		fxt.Wiki().File_mgr().Version_2_y_();
-		fxt.Wiki().File__fsdb_mode().Tid__v2__bld__y_();
-		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
-
-		fxt.Test_parse_page_wiki_str
-		( "[[File:A.ogg|thumb|320px|a|alt=b]]", String_.Concat_lines_nl_skip_last
-		( "<div class=\"thumb tright\">"
-		, "  <div class=\"thumbinner\" style=\"width:320px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div class=\"xowa_media_div\">"
-		, "      <div>"
-		+	        "<a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"A.ogg\" xowa_title=\"A.ogg\">"
-		+	          "<img data-xowa-title=\"A.ogg\" data-xoimg=\"4|320|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"b\"/>"
-		+	        "</a>"
-		, "      </div>"
-		,       "<div><a href=\"\" xowa_title=\"A.ogg\" class=\"xowa_media_play\" style=\"width:318px;max-width:320px;\" alt=\"Play sound\"></a></div>"
-		, "    </div>"
-		, "    <div class=\"thumbcaption\">"
-		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.ogg\" class=\"internal\" title=\"Enlarge\"></a></div>a"
-		, "    </div>"
-		, "    <hr/>"
-		, "    <div class=\"thumbcaption\">b"
-		, "    </div>"
-		, "  </div>"
-		, "</div>"
-		, ""
-		));		
-
-		fxt.Wiki().File_mgr().Version_1_y_();
-		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic);
 	}
 	@Test  public void Video__thumb() {
 		fxt.Test_parse_page_wiki_str

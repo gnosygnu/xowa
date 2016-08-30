@@ -38,9 +38,12 @@ public class Wdata_pf_property_data {
 			int key_bgn = nde_key.Src_bgn(), key_end = nde_key.Src_end();
 			if (key_bgn == key_end && key_bgn == -1) continue;	// null arg; ignore, else will throw warning below; EX: {{#property:p1|}}; DATE:2013-11-15
 			byte key_tid = atrs_hash.Get_as_byte_or(src, key_bgn, key_end, Byte_.Max_value_127);
-			if (key_tid == Byte_.Max_value_127) {
-				ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Page().Ttl().Full_txt_w_ttl_case()), String_.new_u8(src, self.Src_bgn(), self.Src_end())); 
-				continue;
+			switch (key_tid) {
+				case Byte_.Max_value_127:
+					ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Page().Ttl().Full_txt_w_ttl_case()), String_.new_u8(src, self.Src_bgn(), self.Src_end())); 
+					continue;
+				case Tid__id:	// same as "not-found", but don't warn; 
+					continue;
 			}
 
 			// get val
@@ -56,10 +59,11 @@ public class Wdata_pf_property_data {
 		tmp_bfr.Mkr_rls();	
 		return new Wdata_pf_property_data(of, q, from);
 	}
-	private static final byte Tid__of = 0, Tid__q = 1, Tid__from = 2;
+	private static final byte Tid__of = 0, Tid__q = 1, Tid__from = 2, Tid__id = 3;
 	private static final    Hash_adp_bry atrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("of"		, Tid__of)
 	.Add_str_byte("q"		, Tid__q)
 	.Add_str_byte("from"	, Tid__from)	// "from" is alias as "q" except it seems to handle properties; EX: {{#property:p1|from=Q2}} == {{#property:p1|q=Q2}}; EX: {{#property:p1|from=p2}}
+	.Add_str_byte("id"		, Tid__id)		// "id" has no effect, but appears in articles; ignore and don't warn; EX:{{#property:P277|id=Q1322933}} PAGE:en.w:Symfony; DATE:2016-08-13
 	;
 } 

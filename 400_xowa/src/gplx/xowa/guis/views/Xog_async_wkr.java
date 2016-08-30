@@ -49,14 +49,18 @@ public class Xog_async_wkr {
 	}
 	private static void Async_imgs(Gfo_usr_dlg usr_dlg, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_js_wkr js_wkr) {
 		// get images
-		int len = page.File_queue().Count(); if (len == 0) return;
-		usr_dlg.Prog_one("", "", "downloading images: ~{0}", len);
-		try {page.File_queue().Exec(wiki, page);}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+		int len = page.File_queue().Count(); 
+		if (len > 0) {
+			usr_dlg.Prog_one("", "", "downloading images: ~{0}", len);
+			try {page.File_queue().Exec(wiki, page);}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+		}
 
-		// handle packed_gallery and imap
+		// if gallery.packed exists, call pack; NOTE:must fire even when there are 0 items in queue b/c hdump will restore images without placing in queue; PAGE:en.w:Mexico DATE:2016-08-14
 		if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 			js_wkr.Html_gallery_packed_exec();
+
+		// call imap
 		if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
 			&&	page.Html_data().Head_mgr().Itm__popups().Enabled()
 			)

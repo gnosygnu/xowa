@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_file_wtr__image__tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -317,6 +317,52 @@ public class Xoh_file_wtr__image__tst {
 		+ "<img id=\"xoimg_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/11px.png\" width=\"11\" height=\"0\" />"
 		+ "</a>"));
 		fxt.Init_xwiki_clear();
+	}
+	@Test  public void Redirect() {// PURPOSE: redirect should use trg_lnki, not src_lnki; DATE:2016-08-10
+		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
+		file_fxt.Exec_orig_add(Bool_.Y, "A.png", Xof_ext_.Id_png, 320, 300, "B.png");
+		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
+
+		fxt.Test_parse_page_wiki_str
+		( "[[File:A.png|320px|bcd|alt=efg]]"
+		, "<a href=\"/wiki/File:B.png\" class=\"image\" xowa_title=\"B.png\"><img id=\"xoimg_0\" alt=\"efg\" src=\"file:///mem/wiki/repo/trg/orig/5/7/B.png\" width=\"320\" height=\"300\" /></a>"
+		);
+
+		fxt.Wiki().File__fsdb_mode().Tid__v2__bld__y_();
+	}
+	@Test  public void Imap() {
+		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
+		file_fxt.Exec_orig_add(Bool_.Y, "A.png", Xof_ext_.Id_png, 320, 300, "");
+		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
+		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
+
+		fxt.Test_parse_page_wiki_str
+		( String_.Concat_lines_nl_skip_last
+		( "<imagemap>"
+		, "File:A.png|thumb|320px|a1"
+		, "circle 0 0 5 [[B|b1]]"
+		, "rect 0 0 4 8 [[C|c1]]"
+		, "desc none"
+		, "</imagemap>"
+		)
+		, String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div class=\"thumbinner\" style=\"width:320px;\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
+		, "      <map name=\"imageMap_1_1\">"
+		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
+		, "        <area href=\"/wiki/C\" shape=\"rect\" coords=\"0,0,4,8\" alt=\"c1\" title=\"c1\"/>"
+		, "      </map>"
+		, "      <img src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"320\" height=\"300\" alt=\"\" usemap=\"#imagemap_1_1\"/>"
+		, "    </div>"
+		, "    <div class=\"thumbcaption\">"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>a1"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		));
+
+		fxt.Wiki().File__fsdb_mode().Tid__v2__bld__y_();
 	}
 	private void Tst_img_title(String raw, String expd_ttl) {
 		String actl = fxt.Exec_parse_page_wiki_as_str(raw);

@@ -132,7 +132,7 @@ public class Prefs_mgr implements Gfo_invk {
 			else 												return Elem_tid_null;
 		}
 		else													return Elem_tid_null;
-	}	static final    byte[] Input_type = Bry_.new_a7("type"), Nde_input = Bry_.new_a7("input"), Nde_textarea = Bry_.new_a7("textarea"), Nde_select = Bry_.new_a7("select"), Type_text = Bry_.new_a7("text"), Type_checkbox = Bry_.new_a7("checkbox"), Type_combo = Bry_.new_a7("xowa_combo"), Type_xowa_io = Bry_.new_a7("xowa_io");
+	}	private static final    byte[] Input_type = Bry_.new_a7("type"), Nde_input = Bry_.new_a7("input"), Nde_textarea = Bry_.new_a7("textarea"), Nde_select = Bry_.new_a7("select"), Type_text = Bry_.new_a7("text"), Type_checkbox = Bry_.new_a7("checkbox"), Type_combo = Bry_.new_a7("xowa_combo"), Type_xowa_io = Bry_.new_a7("xowa_io");
 	public static String Scrub_tidy_trailing_nl_in_textarea(boolean tidy_enabled, byte elem_tid, String val) {
 		return	// if tidy_enabled and text_area and ends with \n, then remove \n; DATE:2014-06-21
 			(	tidy_enabled

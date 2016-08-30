@@ -42,7 +42,7 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 			stmt.Crt_bry_as_str(page_tbl.Fld_page_title(), page.Ttl_page_db());
 		}
 	}
-	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {
+	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {
 		Xow_ns ns = ns_mgr.Ids_get_or_null(rdr_page.Ns_id());
 		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
 		byte[] ttl_wo_ns = rdr_page.Ttl_page_db();

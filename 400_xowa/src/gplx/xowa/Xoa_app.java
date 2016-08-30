@@ -43,7 +43,6 @@ public interface Xoa_app extends Gfo_invk {
 	Xof_img_mgr				File__img_mgr();
 	Io_download_fmt			File__download_fmt();
 	Xoh_href_parser			Html__href_parser();
-	Xoh_lnki_bldr			Html__lnki_bldr();
 	Xoa_css_extractor		Html__css_installer();
 	Xoh_bridge_mgr			Html__bridge_mgr();
 	Xog_cbk_mgr				Gui__cbk_mgr();

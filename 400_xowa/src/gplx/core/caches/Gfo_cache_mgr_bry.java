@@ -27,7 +27,7 @@ class Gfo_cache_itm {
 	public Object Key() {return key;} private Object key;
 	public Object Val() {return val;} private Object val;
 	public long Touched() {return touched;} private long touched;
-	public Gfo_cache_itm Touched_update() {touched = Env_.TickCount(); return this;}
+	public Gfo_cache_itm Touched_update() {touched = System_.Ticks(); return this;}
 }
 class Gfo_cache_itm_comparer implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

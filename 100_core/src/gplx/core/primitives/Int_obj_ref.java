@@ -21,6 +21,7 @@ public class Int_obj_ref {
 	public int Val() {return val;} public Int_obj_ref Val_(int v) {val = v; return this;} int val;
 	public int Val_add() {val++; return val;}
 	public int Val_add_post() {return val++;}
+	public int Val_add_pre() {return ++val;}
 	public int Val_add(int v) {val += v; return val;}		
 	public Int_obj_ref Val_zero_() {val = 0; return this;}
 	public Int_obj_ref Val_neg1_() {val = -1; return this;}

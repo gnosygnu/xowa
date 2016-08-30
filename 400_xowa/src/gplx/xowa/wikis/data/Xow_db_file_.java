@@ -25,6 +25,7 @@ public class Xow_db_file_ {
 	, Tid__html_solo	= 10, Tid__html_data = 11
 	, Tid__file_solo	= 12, Tid__file_core = 13, Tid__file_data = 14, Tid__file_user = 15
 	, Tid__search_link	= 16, Tid__random = 17, Tid__css = 18
+	, Tid__html_user	= 19
 	;
 	private static final String
 	  Key__core = "core", Key__text = "text", Key__cat = "xtn.category", Key__search_core = "xtn.search.core", Key__wbase = "core.wbase"
@@ -33,6 +34,7 @@ public class Xow_db_file_ {
 	, Key__html_solo = "html.solo", Key__html_data = "html"
 	, Key__file_solo = "file.solo", Key__file_core = "file.core", Key__file_data = "file.data", Key__file_user = "file.user"
 	, Key__search_link = "xtn.search.link", Key__random = "xtn.random", Key__css = "xtn.css"
+	, Key__html_user = "html.user"
 	;
 	public static String To_key(byte v) {
 		switch (v) {
@@ -54,6 +56,7 @@ public class Xow_db_file_ {
 			case Tid__search_link:	return Key__search_link;
 			case Tid__random:		return Key__random;
 			case Tid__css:			return Key__css;
+			case Tid__html_user:	return Key__html_user;
 			default:				throw Err_.new_unhandled(v);
 		}
 	}

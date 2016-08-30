@@ -33,7 +33,7 @@ public class Xowd_page_itm {
 	public int			Html_db_id() {return html_db_id;} private int html_db_id;
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;
 	public DateAdp		Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on;
-	public boolean			Exists() {return exists;} public Xowd_page_itm Exists_(boolean v) {exists = v; return this;} private boolean exists;
+	public boolean			Exists() {return exists;} private boolean exists;
 	public int			Score() {return score;} private int score;
 	public Xow_ns		Ns() {return ns;} private Xow_ns ns;
 	public Object		Xtn() {return xtn;} public Xowd_page_itm Xtn_(Object v) {this.xtn = v; return this;} private Object xtn;
@@ -45,27 +45,43 @@ public class Xowd_page_itm {
 		id_val = null;
 		return this;
 	}
-	public void	Init_by_sql(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score) {
-		this.id = id;
-		this.ns_id = ns_id;
-		this.ttl_page_db = ttl_page_db;
-		this.modified_on = modified_on;
-		this.redirected = redirected;
-		this.text_len = text_len;
-		this.random_int = random_int;
-		this.text_db_id = text_db_id;
-		this.html_db_id = html_db_id;
-		this.redirect_id = redirect_id;
-		this.score = score;
+	public void Init_by_load__idx(int id, int ns_id, byte[] ttl_page_db, int text_len) {
+		this.exists			= true;	// COMMENT: DATE:2016-08-28
+		this.id				= id;
+		this.ns_id			= ns_id;
+		this.ttl_page_db	= ttl_page_db;
+		this.text_len		= text_len;
+	}
+	public void	Init_by_load__all(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score) {
+		// same as Init_by_load__idx; COMMENT: DATE:2016-08-28
+		this.exists			= true;
+		this.id				= id;
+		this.ns_id			= ns_id;
+		this.ttl_page_db	= ttl_page_db;
+		this.text_len		= text_len;
+
+		// other props
+		this.redirected		= redirected;
+		this.text_db_id		= text_db_id;
+		this.modified_on	= modified_on;
+		this.random_int		= random_int;
+		this.html_db_id		= html_db_id;
+		this.redirect_id	= redirect_id;
+		this.score			= score;
 	}
 	public void	Init_by_tdb(int id, int text_db_id, int tdb_row_idx, boolean redirected, int text_len, int ns_id, byte[] ttl_page_db) {
-		this.id = id;
-		this.text_db_id = text_db_id;
-		this.tdb_row_idx = tdb_row_idx;
-		this.redirected = redirected;
-		this.text_len = text_len;
-		this.ns_id = ns_id;
-		this.ttl_page_db = ttl_page_db;
+		// same as Init_by_load__idx; COMMENT: DATE:2016-08-28
+		this.exists			= true;
+		this.id				= id;
+		this.ns_id			= ns_id;
+		this.ttl_page_db	= ttl_page_db;
+		this.text_len		= text_len;
+
+		// other props
+		this.redirected		= redirected;
+		this.text_db_id		= text_db_id;
+
+		this.tdb_row_idx	= tdb_row_idx;
 	}
 	public Xowd_page_itm Ttl_(Xow_ns ns, byte[] ttl_page_db) {
 		this.ns = ns;

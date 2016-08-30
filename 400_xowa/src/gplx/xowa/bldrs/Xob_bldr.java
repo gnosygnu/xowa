@@ -40,7 +40,7 @@ public class Xob_bldr implements Gfo_invk {
 	public Xob_wiki_cfg_bldr	Wiki_cfg_bldr() {return wiki_cfg_bldr;} private Xob_wiki_cfg_bldr wiki_cfg_bldr;
 	public void					Pause_at_end_(boolean v) {this.pause_at_end = v;}
 	public void					Print_prog_msg(long cur, long end, int pct_idx, String fmt, Object... ary) {
-		long now = Env_.TickCount(); if (now - prv_prog_time < 100) return;
+		long now = System_.Ticks(); if (now - prv_prog_time < 100) return;
 		this.prv_prog_time = now;
 		if (pct_idx > -1) ary[pct_idx] = Decimal_adp_.CalcPctStr(cur, end, "00.00");
 		app.Usr_dlg().Prog_many("", "", fmt, ary);
@@ -89,7 +89,7 @@ public class Xob_bldr implements Gfo_invk {
 		try {
 			app.Bldr__running_(true);
 			app.Launch();	// HACK: bldr will be called by a gfs file which embeds "bldr.run" inside it; need to call Launch though before Run; DATE:2013-03-23
-			long time_bgn = Env_.TickCount();
+			long time_bgn = System_.Ticks();
 			int cmd_mgr_len = cmd_mgr.Len();
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
@@ -99,7 +99,7 @@ public class Xob_bldr implements Gfo_invk {
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
 				app.Usr_dlg().Note_many("", "", "cmd bgn: ~{0}", cmd.Cmd_key());
-				long time_cur = Env_.TickCount();
+				long time_cur = System_.Ticks();
 				try {
 					cmd.Cmd_bgn(this);
 					cmd.Cmd_run();
@@ -107,7 +107,7 @@ public class Xob_bldr implements Gfo_invk {
 				} catch (Exception e) {
 					throw Err_.new_exc(e, "bldr", "unknown error", "key", cmd.Cmd_key());
 				}
-				Env_.GarbageCollect();
+				System_.Garbage_collect();
 				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), Time_span_.from_(time_cur).XtoStrUiAbbrv());
 			}
 			for (int i = 0; i < cmd_mgr_len; i++) {

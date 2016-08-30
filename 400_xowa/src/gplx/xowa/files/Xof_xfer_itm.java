@@ -21,6 +21,7 @@ import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 import gplx.xowa.parsers.utils.*;
 public class Xof_xfer_itm implements Xof_file_itm {
+	private Xof_url_bldr tmp_url_bldr = dflt_url_bldr;
 	public Xof_xfer_itm() {
 		lnki_type = orig_repo_id = Byte_.Max_value_127;
 		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = html_gallery_mgr_h = Int_.Neg1;
@@ -42,6 +43,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int					Lnki_h()					{return lnki_h;} private int lnki_h;
 	public double				Lnki_time()					{return lnki_time;} private double lnki_time;
 	public int					Lnki_page()					{return lnki_page;} private int lnki_page;
+	public boolean					Orig_exists()				{return orig_exists;} private boolean orig_exists;
 	public byte					Orig_repo_id()				{return orig_repo_id;} private byte orig_repo_id;
 	public byte[]				Orig_repo_name()			{return orig_repo_name;} private byte[] orig_repo_name;
 	public byte[]				Orig_ttl()					{return orig_ttl;} private byte[] orig_ttl;
@@ -91,6 +93,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		else
 			this.Orig_ttl_(orig_ttl);
 		this.orig_ext = orig_ext;							// overwrite ext with whatever's in file_orig; needed for ogg -> oga / ogv
+		this.orig_exists = true;
 	}
 	public void Init_at_gallery_bgn(int html_w, int html_h, int file_w) {
 		this.html_w = html_w; this.html_h = html_h; 
@@ -127,8 +130,6 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		trg_repo_root = trg_repo_itm == null ? Bry_.Empty : trg_repo_itm.Root_http();
 	} private Xof_repo_itm trg_repo_itm;
 	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
-	public Xof_url_bldr Url_bldr(){ return url_bldr;}
-	public void Url_bldr_(Xof_url_bldr v) {url_bldr = v;} private Xof_url_bldr url_bldr = Xof_url_bldr.Temp;
 	public void			Ctor_for_html(int exec_tid, int lnki_upright_patch, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, lnki_upright_patch, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
@@ -179,8 +180,8 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			file_is_orig = img_size.File_is_orig();
 		}
 	}
-	private Io_url		Trg_view_url(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
-	public Io_url		Trg_orig_url(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
+	private Io_url		Trg_view_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
+	public Io_url		Trg_orig_url(byte mode_id, int width)	{return tmp_url_bldr.Init_for_trg_file(mode_id, trg_repo_itm, lnki_ttl, orig_ttl_md5, orig_ext, width, lnki_time, lnki_page).Xto_url();}
 	public boolean			Calc_by_meta() {return Calc_by_meta(false);}
 	public boolean			Calc_by_meta(boolean caller_is_file_page) {
 		file_exists = false;
@@ -285,6 +286,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		file_exists = true;
 		return true;
 	}
+	private static final    Xof_url_bldr dflt_url_bldr = new Xof_url_bldr();	// NOTE: only used by v1
 }
 /*
 NOTE_1:Lnki_thumbable

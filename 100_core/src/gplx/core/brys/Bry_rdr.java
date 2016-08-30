@@ -39,19 +39,37 @@ public class Bry_rdr {
 	public int Move_to(int v)			{this.pos = v; return pos;}
 	public int Move_by_one()			{return Move_by(1);}
 	public int Move_by(int v)			{this.pos += v; return pos;}
-	public int Find_fwd_lr()			{return Find_fwd(dflt_dlm	, Bool_.Y, Bool_.N);}
-	public int Find_fwd_lr(byte find)	{return Find_fwd(find		, Bool_.Y, Bool_.N);}
-	public int Find_fwd_lr(byte[] find) {return Find_fwd(find		, Bool_.Y, Bool_.N);}
-	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, Bool_.N, Bool_.N);}
-	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N);}
-	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N);}
-	private int Find_fwd(byte find, boolean ret_lhs, boolean pos_lhs) {
-		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {err_wkr.Fail("find failed", "find", Byte_ascii.To_str(find)); return Bry_find_.Not_found;}
+	public int Find_fwd_lr()			{return Find_fwd(dflt_dlm	, Bool_.Y, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_lr(byte find)	{return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_lr_or(byte find, int or)
+										{return Find_fwd(find		, Bool_.Y, Bool_.N, or);}
+	public int Find_fwd_lr(byte[] find) {return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, Bool_.N, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
+	private int Find_fwd(byte find, boolean ret_lhs, boolean pos_lhs, int or) {
+		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end);
+		if (find_pos == Bry_find_.Not_found) {
+			if (or == Fail_if_missing) {	
+				err_wkr.Fail("find failed", "find", Byte_ascii.To_str(find));
+				return Bry_find_.Not_found;
+			}
+			else
+				return or;
+		}
 		pos = find_pos + (pos_lhs ? 0 : 1);
 		return ret_lhs ? find_pos : pos;
 	}
-	private int Find_fwd(byte[] find, boolean ret_lhs, boolean pos_lhs) {
-		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end); if (find_pos == Bry_find_.Not_found) {err_wkr.Fail("find failed", "find", String_.new_u8(find)); return Bry_find_.Not_found;}
+	private int Find_fwd(byte[] find, boolean ret_lhs, boolean pos_lhs, int or) {
+		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end);
+		if (find_pos == Bry_find_.Not_found) {
+			if (or == Fail_if_missing) {
+				err_wkr.Fail("find failed", "find", String_.new_u8(find));
+				return Bry_find_.Not_found;
+			}
+			else
+				return or;
+		}
 		pos = find_pos + (pos_lhs ? 0 : find.length);
 		return ret_lhs ? find_pos : pos;
 	}
@@ -203,4 +221,5 @@ public class Bry_rdr {
 		}
 		return this;
 	}
+	private static final int Fail_if_missing = Int_.Min_value;
 }

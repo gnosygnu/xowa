@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Pp_pages_nde_recursion_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {fxt.Init_xtn_pages();}
 	@After public void term() {
 		fxt.Wiki().Cache_mgr().Free_mem_all();

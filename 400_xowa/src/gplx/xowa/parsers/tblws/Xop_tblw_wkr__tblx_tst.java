@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tblw_wkr__tblx_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Ignore_td() {	// PURPOSE: do not parse pipe as td if in <table>; EX:ru.w:Сочи; DATE:2014-02-22
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
@@ -128,5 +128,27 @@ public class Xop_tblw_wkr__tblx_tst {
 		,	""
 		)
 		);
+	}
+	@Test  public void Ignore_tr_in_lnki() {	// PURPOSE: <tr> fragment within lnki should be ignored; PAGE:en.w:Aargau DATE:2016-08-14
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "<tr>"
+		, "<td>[[A|B<tr><td>t_1</td></tr>]]"
+		, "</td>"
+		, "</tr>"
+		, "</table>"
+		) ,	String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td><a href=\"/wiki/A\">B"
+		, "      <tr>"
+		, "        <td>t_1"
+		, "        </td>"
+		, "      </tr>"
+		, "</a>"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		));
 	}
 }

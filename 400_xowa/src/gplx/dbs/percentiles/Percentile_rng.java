@@ -35,7 +35,7 @@ public class Percentile_rng {
 	public void Select_init(int total_needed, int prv_score_bgn, int prv_score_len, int score_len_adj) {
 		this.total_needed = total_needed;
 		this.found_all = 0;
-		this.prv_time = gplx.core.envs.Env_.TickCount();
+		this.prv_time = gplx.core.envs.System_.Ticks();
 		int score_unit = Calc_score_unit(total_needed, total_max, score_max);
 		if (prv_score_bgn == Score_null) {
 			score_len = score_unit + (score_unit * score_len_adj);
@@ -69,7 +69,7 @@ public class Percentile_rng {
 		Rng_len_(Bool_.N);
 
 		// update times
-		long new_time = gplx.core.envs.Env_.TickCount();
+		long new_time = gplx.core.envs.System_.Ticks();
 		this.elapsed = Int_.Subtract_long(new_time, prv_time);
 		prv_time = new_time;
 	}

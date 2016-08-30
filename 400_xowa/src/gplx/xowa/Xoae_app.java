@@ -31,7 +31,6 @@ import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
 public class Xoae_app implements Xoa_app, Gfo_invk {
-	private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
 		this.mode = mode;
@@ -65,7 +64,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		http_server = new Http_server_mgr(this);
 		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
-		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
 		this.html__bridge_mgr = new Xoh_bridge_mgr(utl__json_parser);
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
 	}
@@ -76,7 +74,6 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xof_img_mgr				File__img_mgr()				{return file_mgr.Img_mgr();}
 	public Io_download_fmt			File__download_fmt()		{return wmf_mgr.Download_wkr().Download_xrg().Download_fmt();}
 	public Xoh_href_parser			Html__href_parser()			{return html__href_parser;} private final    Xoh_href_parser html__href_parser = new Xoh_href_parser();
-	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final    Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
@@ -191,7 +188,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public void Reset_all() {
 		this.Free_mem(true);
 		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(this);
-		Env_.GarbageCollect();
+		System_.Garbage_collect();
 	}
 	public void Free_mem(boolean clear_ctx) {
 		this.Utl__bfr_mkr().Clear();

@@ -91,7 +91,7 @@ public class z901_perf_tst {
 //			tmr.End_and_print("type");
 //		}
 	interface ClassType {int Type();}
-	class ClassType_ {public static final int Type_1 = 1, Type_2 = 2, Type_3 = 3;}
+	class ClassType_ {public static final    int Type_1 = 1, Type_2 = 2, Type_3 = 3;}
 	class ClassType1 implements ClassType {public int Type() {return ClassType_.Type_1;}}
 	class ClassType2 implements ClassType {public int Type() {return ClassType_.Type_2;}}
 	class ClassType3 implements ClassType {public int Type() {return ClassType_.Type_3;}}
@@ -102,8 +102,8 @@ class PerfFieldVsProc {
 	public int Val_proc() {return 1;}
 }
 class TimerWatch {
-	public void Bgn() {bgnTime = Env_.TickCount();} long bgnTime;
-	public void End() {duration = Env_.TickCount() - bgnTime;} long duration;
+	public void Bgn() {bgnTime = System_.Ticks();} long bgnTime;
+	public void End() {duration = System_.Ticks() - bgnTime;} long duration;
 	public void End_and_print(String text) {
 		this.End();
 		Tfds.Write(XtoStr_ms() + " " + text);

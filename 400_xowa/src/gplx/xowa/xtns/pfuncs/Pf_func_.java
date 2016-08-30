@@ -221,6 +221,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_url_canonicalurle
 	, Xol_kwd_grp_.Id_lst
 	, Xol_kwd_grp_.Id_lstx
+	, Xol_kwd_grp_.Id_lsth
 	, Xol_kwd_grp_.Id_invoke
 	, Xol_kwd_grp_.Id_property
 	, Xol_kwd_grp_.Id_noexternallanglinks
@@ -390,8 +391,11 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_xowa_dbg:						return new Xop_xowa_dbg();
 			case Xol_kwd_grp_.Id_xowa:							return new gplx.xowa.xtns.xowa_cmds.Xop_xowa_func();
 			case Xol_kwd_grp_.Id_xtn_geodata_coordinates:		return gplx.xowa.xtns.geodata.Geo_coordinates_func.Instance;
-			case Xol_kwd_grp_.Id_lst:							return gplx.xowa.xtns.lst.Lst_pfunc_lst.Instance;
-			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx.Instance;
+
+			case Xol_kwd_grp_.Id_lst:							return gplx.xowa.xtns.lst.Lst_pfunc_lst.Prime;
+			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx.Prime;
+			case Xol_kwd_grp_.Id_lsth:							return gplx.xowa.xtns.lst.Lst_pfunc_lsth.Prime;
+
 			case Xol_kwd_grp_.Id_invoke:						return new gplx.xowa.xtns.scribunto.Scrib_invoke_func();
 			case Xol_kwd_grp_.Id_pagebanner:					return new gplx.xowa.xtns.pagebanners.Pgbnr_func();
 			case Xol_kwd_grp_.Id_new_window_link:				return new gplx.xowa.xtns.new_window_links.New_window_link_func();

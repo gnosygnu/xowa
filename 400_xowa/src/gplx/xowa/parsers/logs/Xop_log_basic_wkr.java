@@ -37,7 +37,7 @@ public class Xop_log_basic_wkr implements Gfo_invk {
 		log_tbl.Insert
 			( log_tid
 			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : String_.new_u8(log_msg)
-			, save_log_time ?  Env_.TickCount_elapsed_in_frac(log_bgn) : Xop_log_basic_wkr.Null_log_time
+			, save_log_time ?  System_.Ticks__elapsed_in_frac(log_bgn) : Xop_log_basic_wkr.Null_log_time
 			, page.Db().Page().Id()
 			, save_page_ttl ? String_.new_u8(page.Ttl().Full_db()) : Xop_log_basic_wkr.Null_page_ttl
 			, save_args_len ? args_len : Xop_log_basic_wkr.Null_args_len

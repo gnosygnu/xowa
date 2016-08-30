@@ -166,7 +166,7 @@ class Xoh_toc_htmlr__basic__fxt {
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {wtr.Clear();}
 	public void Init__add(int hdr_num, String hdr_txt) {wtr.Add(hdr_num, Bry_.new_u8(hdr_txt));}
-	public void Init__init_page(String toc_title, boolean page_banner) {wtr.Init(Bry_.new_u8(toc_title), Bry_.Empty);}
+	public void Init__init_page(String toc_title, boolean page_banner) {wtr.Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, Bry_.new_u8(toc_title), Bry_.Empty);}
 	public void Test__html_itms(String... expd_ary) {
 		Gftest.Eq__ary(expd_ary, String_.Ary(Bry_split_.Split_lines(wtr.Test__to_html())));
 	}

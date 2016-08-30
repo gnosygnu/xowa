@@ -27,12 +27,12 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		private Tidy tidy;
 	private ByteArrayOutputStream wtr; 
 	public void tidy_init() {
-		long bgn = Env_.TickCount();
+		long bgn = System_.Ticks();
 		wtr = new ByteArrayOutputStream();
 		System.setProperty("line.separator", "\n");
 		tidy = new Tidy(); // obtain a new Tidy instance
-		tidy.setInputEncoding("UTF-8");			// -utf8
-		tidy.setOutputEncoding("UTF-8");		// -utf8
+		tidy.setInputEncoding("utf-8");			// -utf8
+		tidy.setOutputEncoding("utf-8");		// -utf8
 		tidy.setDocType("\"\"");				// --doctype \"\"; set to empty else some wikis will show paragraph text with little vertical gap; PAGE:tr.b:
 		tidy.setForceOutput(true);				// --force-output y 
 		tidy.setQuiet(true);					// --quiet y
@@ -49,7 +49,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		tidy.setTrimEmptyElements(true);		// NOTE: tidy always trims (not even an option)
 		tidy.setShowWarnings(false);			// NOTE: otherwise warnings printed to output window
 		tidy.setShowErrors(0);					// NOTE: otherwise errors printed to output window; EX: Error: <time> is not recognized!
-		app.Usr_dlg().Log_many("", "", "jtidy.init; elapsed=~{0}", Env_.TickCount_elapsed_in_frac(bgn));
+		app.Usr_dlg().Log_many("", "", "jtidy.init; elapsed=~{0}", System_.Ticks__elapsed_in_frac(bgn));
 	}
 		private Xoae_app app;
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_jtidy;}
@@ -60,7 +60,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 		tidy.setIndentContent(v);
 			}
-	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
+	public void Exec_tidy(Bry_bfr bfr, byte[] page_url) {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 //		int bfr_len = bfr.Len();
 //		long bgn = Env_.TickCount();
@@ -72,7 +72,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		}
 		catch (Exception exc) {
 			bfr.Add(orig);	// jtidy failed; restore original
-			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page.Ttl().Full_db_as_str(), Err_.Message_gplx_full(exc));
+			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page_url, Err_.Message_gplx_full(exc));
 		}
 		finally {
 			wtr.reset();

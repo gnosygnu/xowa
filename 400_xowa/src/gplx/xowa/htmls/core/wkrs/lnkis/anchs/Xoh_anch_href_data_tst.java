@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.ttls.*;
 public class Xoh_anch_href_data_tst {
-	private final Xoh_anch_href_data_fxt fxt = new Xoh_anch_href_data_fxt();
+	private final    Xoh_anch_href_data_fxt fxt = new Xoh_anch_href_data_fxt();
+	@Before public void init() {fxt.Clear();}
 	@Test   public void Site() {
 		fxt.Test__parse("/site/A/wiki/B", "A", "B");
 	}
@@ -44,7 +45,11 @@ public class Xoh_anch_href_data_tst {
 		fxt.Test__parse__fail("/site/A/B/C", "failed check: chk='wiki/' page='Main_Page' sect='href' text=/site/A/B/C");
 	}
 }
-class Xoh_anch_href_data_fxt extends Xoh_itm_parser_fxt { 	private final Xoh_anch_href_data parser = new Xoh_anch_href_data();
+class Xoh_anch_href_data_fxt extends Xoh_itm_parser_fxt { 	private final    Xoh_anch_href_data parser = new Xoh_anch_href_data();
+	public void Clear() {
+		Xoa_app_fxt.repo2_(app, wiki);
+		hctx.Init_by_page(wiki, new Xoh_page());
+	}
 	@Override public Xoh_itm_parser Parser_get() {return parser;}
 	public void Test__parse(String src_str, String expd_site, String expd_page) {
 		Exec_parse(src_str);

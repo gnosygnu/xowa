@@ -42,6 +42,11 @@ public class Byte_ {
 			if (v == itm) return true;
 		return false;
 	}
+	public static boolean Eq_many(byte v, byte... ary) {
+		for (byte itm : ary)
+			if (v != itm) return false;
+		return true;
+	}
 	public static int Compare(byte lhs, byte rhs) {
 		if		(lhs == rhs) 	return CompareAble_.Same;
 		else if (lhs < rhs)		return CompareAble_.Less;

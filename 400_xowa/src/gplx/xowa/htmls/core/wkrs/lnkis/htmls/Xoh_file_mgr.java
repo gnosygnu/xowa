@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import gplx.core.primitives.*;
-import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; 
 import gplx.xowa.wikis.tdbs.metas.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_file_mgr {
 	private final    Xowe_wiki wiki;
+	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xoh_file_mgr(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki; this.file_wtr = new Xoh_file_wtr__basic(wiki, html_mgr, html_wtr);
 	}
@@ -49,14 +50,15 @@ public class Xoh_file_mgr {
 		return xfer;
 	}
 	private boolean Find_file(Xop_ctx ctx, Xowe_wiki source_wiki, Xof_xfer_itm xfer) {
-		if (source_wiki.File__fsdb_mode().Tid__v2__mp()) {
-			Xof_orig_itm itm = source_wiki.File__orig_mgr().Find_by_ttl_or_null(xfer.Lnki_ttl());
-			if (itm == null)
+		if (source_wiki.File__fsdb_mode().Tid__bld()) {
+			Xof_orig_itm orig = source_wiki.File__orig_mgr().Find_by_ttl_or_null(xfer.Lnki_ttl());
+			if (orig == null)
 				return false;
 			else {
-				byte repo_id = itm.Repo();
-				byte[] repo_name = source_wiki.File_mgr().Repo_mgr().Repos_get_at(repo_id).Wiki_domain();
-				xfer.Init_at_orig(itm.Repo(), repo_name, itm.Ttl(), itm.Ext(), itm.W(), itm.H(), itm.Redirect());
+				byte repo_id = orig.Repo();
+				Xof_repo_itm repo = source_wiki.File_mgr().Repo_mgr().Repos_get_at(repo_id).Trg();
+				xfer.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				xfer.Init_at_html(Xof_exec_tid.Tid_wiki_page, wiki.Parser_mgr().Img_size(), repo, url_bldr);
 				return true;
 			}
 		}

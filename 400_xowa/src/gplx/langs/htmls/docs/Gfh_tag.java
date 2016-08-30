@@ -20,6 +20,7 @@ import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.styles.*; import gplx.
 public class Gfh_tag implements Mwh_atr_wkr {
 	private Gfh_tag_rdr tag_rdr;
 	private Ordered_hash atrs_hash; private boolean atrs_null; private int atrs_bgn, atrs_end;
+	private final    Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
 	public Gfh_tag Init(Gfh_tag_rdr tag_rdr, byte[] src, boolean tag_is_tail, boolean tag_is_inline, int src_bgn, int src_end, int atrs_bgn, int atrs_end, int name_id, byte[] name_bry) {
 		this.tag_rdr = tag_rdr; this.src = src; this.atrs_null = true;
 		this.tag_is_tail = tag_is_tail; this.tag_is_inline = tag_is_inline;
@@ -79,7 +80,6 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		byte rv = Gfh_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) return or;
 		return rv;
 	}
-	private static final    Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
 	public int Atrs__style_get_as_int(byte[] key) {
 		if (atrs_null) Atrs__make();
 		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__style); if (rv == null) return -1;

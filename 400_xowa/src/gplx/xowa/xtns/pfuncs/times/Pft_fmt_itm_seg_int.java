@@ -90,7 +90,7 @@ class Pft_fmt_itm_am_pm implements Pft_fmt_itm {
 		else if (!am &&  lower) val = Ary_pm_lower;
 		else if (!am && !lower) val = Ary_pm_upper;
 		bfr.Add(val);
-	}	static final    byte[] Ary_am_upper = Bry_.new_a7("AM"), Ary_pm_upper = Bry_.new_a7("PM"), Ary_am_lower = Bry_.new_a7("am"), Ary_pm_lower = Bry_.new_a7("pm");
+	}	private static final    byte[] Ary_am_upper = Bry_.new_a7("AM"), Ary_pm_upper = Bry_.new_a7("PM"), Ary_am_lower = Bry_.new_a7("am"), Ary_pm_lower = Bry_.new_a7("pm");
 	public Pft_fmt_itm_am_pm(boolean lower) {this.lower = lower;} private boolean lower;
 }
 class Pft_fmt_itm_dow_base0 implements Pft_fmt_itm {
@@ -120,7 +120,7 @@ class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
 		bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
 		bfr.Add_str_a7(date.XtoStr_fmt("dd MMM yyyy HH:mm:ss"));	// NOTE: always UTC time 
 		bfr.Add(CONST_timezone);									// NOTE: always UTC time zone
-	}	static final    byte[] CONST_timezone = Bry_.new_a7(" +0000"); 
+	}	private static final    byte[] CONST_timezone = Bry_.new_a7(" +0000"); 
 }
 class Pft_fmt_itm_timezone_offset implements Pft_fmt_itm {
 	public Pft_fmt_itm_timezone_offset() {}

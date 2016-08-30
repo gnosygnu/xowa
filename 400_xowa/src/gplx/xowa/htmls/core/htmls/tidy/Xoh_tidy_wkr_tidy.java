@@ -28,15 +28,15 @@ public class Xoh_tidy_wkr_tidy extends Process_adp implements Xoh_tidy_wkr { 	pr
 		return super.Tmp_dir_(v);
 	}
 	public void Indent_(boolean v) {Indent_val = v ? "y" : "n";}
-	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
+	public void Exec_tidy(Bry_bfr bfr, byte[] page_url) {
 		int bfr_len = bfr.Len();
-		long bgn = Env_.TickCount();
+		long bgn = System_.Ticks();
 		Io_mgr.Instance.SaveFilBfr(tidy_source, bfr);			// saves bfr to source; clears bfr
 		this.Run(tidy_source.Raw(), tidy_target.Raw());			// converts source to target
 		Io_mgr.Instance.LoadFilBryByBfr(tidy_target, bfr);		// loads bfr by target
 		if (bfr.Len_eq_0())										// something went wrong; load from source
 			Io_mgr.Instance.LoadFilBryByBfr(tidy_source, bfr);	// loads bfr by target
-		app.Usr_dlg().Log_many("", "", "tidy exec; elapsed=~{0} len=~{1}", Env_.TickCount_elapsed_in_frac(bgn), bfr_len);
+		app.Usr_dlg().Log_many("", "", "tidy exec; elapsed=~{0} len=~{1}", System_.Ticks__elapsed_in_frac(bgn), bfr_len);
 	}
 	private static String Indent_val = "y";
 	public static String Args_fmt = String_.Concat	// see https://meta.wikimedia.org/wiki/Data_dumps; missing numeric-entities:yes; enclose-text: yes

@@ -97,8 +97,8 @@ public class Xoh_img_hzip__dump__basic__tst {
 	}
 	@Test   public void Imap() {
 		fxt.Test__bicode
-		( "~%}#Pa$A.png~#:#S#+\""
-		, "<img data-xowa-title='A.png' data-xoimg='1|220|180|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='' usemap='#imagemap_1_1'>"
+		( "~%}#P`uA.png~#:#S#+\""
+		, "<img data-xowa-title='A.png' data-xoimg='1|220|180|-1|-1|-1' src='' width='0' height='0' alt='' usemap='#imagemap_1_1'>"
 		);
 	}
 }

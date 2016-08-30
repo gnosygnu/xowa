@@ -35,7 +35,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		Xop_log_invoke_wkr invoke_wkr = ctx.Xtn__scribunto__invoke_wkr();
 		long log_time_bgn = 0;
 		if (invoke_wkr != null) {
-			log_time_bgn = Env_.TickCount();
+			log_time_bgn = System_.Ticks();
 			if (!invoke_wkr.Eval_bgn(ctx.Page(), mod_name, fnc_name)) return;
 		}
 		Scrib_core core = wiki.Parser_mgr().Scrib().Core();
@@ -70,7 +70,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
 				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
 				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
-				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Page().Ttl().Raw(), Bry_.Replace(Bry_.Mid(src, self.Src_bgn(), self.Src_end()), Byte_ascii.Nl, Byte_ascii.Tab), err.To_str__log());
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Page().Ttl().Raw(), Bry_.Replace_nl_w_tab(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
 			wiki.Parser_mgr().Scrib().Terminate_when_page_changes_y_();	// NOTE: terminate core when page changes; not terminating now, else page with many errors will be very slow due to multiple remakes of core; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}

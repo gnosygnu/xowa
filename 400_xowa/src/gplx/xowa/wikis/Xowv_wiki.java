@@ -48,6 +48,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.url__parser = new Xow_url_parser(this);
 		this.xwiki_mgr = new Xow_xwiki_mgr(this);
 		this.stats = new Xow_site_stats_mgr(this);
+		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
@@ -65,7 +66,8 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_bin_mgr					File__bin_mgr() {return fsdb_mgr.Bin_mgr();}
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
-	public Xoh_href_wtr					Html__href_wtr()			{return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
+	public Xoh_lnki_bldr				Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
+	public Xoh_href_wtr					Html__href_wtr()  {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
 	public boolean							Html__hdump_enabled() {return Bool_.Y;}
 	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;

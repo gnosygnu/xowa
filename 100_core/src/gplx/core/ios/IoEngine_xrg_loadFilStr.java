@@ -33,7 +33,7 @@ public class IoEngine_xrg_loadFilStr {
 	public String[] ExecAsStrAryLnx()	{
 		String raw = Exec();
 		if (String_.Len(raw) == 0) return String_.Ary_empty;
-		return String_.Split(raw, Op_sys.Dir_spr_char_lnx, false);
+		return String_.Split(raw, Op_sys.Nl_char_lnx, false);
 	}
 	int Bom_Utf8 = 65279; // U+FEFF; see http://en.wikipedia.org/wiki/Byte_order_mark
 	public static IoEngine_xrg_loadFilStr new_(Io_url url) {

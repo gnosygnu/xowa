@@ -39,7 +39,7 @@ public class Xowe_hdr_bldr_fxt {
 		expd = Xoh_consts.Escape_apos(expd);
 		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		String actl = Bld_page_with_toc(tmp, fxt, raw);
-		Tfds.Eq(expd, actl);
+		Tfds.Eq_str_lines(expd, actl);
 		fxt.Wtr_cfg().Toc__show_(Bool_.N);
 	}
 	public void Test_html_frag(String raw, String frag) {

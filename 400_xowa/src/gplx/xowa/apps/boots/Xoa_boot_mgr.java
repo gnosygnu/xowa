@@ -118,7 +118,7 @@ public class Xoa_boot_mgr {
 		}
 	}
 	private static byte[] System_lang() {
-		String lang_code = Env_.Env_prop__user_language();
+		String lang_code = System_.Prop__user_language();
 		byte[] lang_code_bry = Bry_.new_a7(lang_code);
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code_bry);
 		return lang_itm == null ? Xol_lang_itm_.Key_en : lang_itm.Key();

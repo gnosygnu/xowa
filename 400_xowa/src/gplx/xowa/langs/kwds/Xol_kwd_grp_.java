@@ -233,8 +233,9 @@ public static final int
 , Id_rev_protectionexpiry = 211
 , Id_new_window_link = 212
 , Id_categorytree = 213
+, Id_lsth = 214
 ;
-public static final int Id__max = 214;
+public static final int Id__max = 215;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -416,6 +417,7 @@ case Xol_kwd_grp_.Id_url_canonicalurl: return Bry_.new_a7("canonicalurl");
 case Xol_kwd_grp_.Id_url_canonicalurle: return Bry_.new_a7("canonicalurle");
 case Xol_kwd_grp_.Id_lst: return Bry_.new_a7("lst");
 case Xol_kwd_grp_.Id_lstx: return Bry_.new_a7("lstx");
+case Xol_kwd_grp_.Id_lsth: return Bry_.new_u8("lsth");
 case Xol_kwd_grp_.Id_invoke: return Bry_.new_a7("invoke");
 case Xol_kwd_grp_.Id_property: return Bry_.new_a7("property");
 case Xol_kwd_grp_.Id_noexternallanglinks: return Bry_.new_a7("noexternallanglinks");
@@ -458,7 +460,7 @@ default: throw Err_.new_unhandled(id);
 	public static byte[] Bry_by_id(int id) {
 		if (Bry__ == null) Bry_init();
 		return Bry__[id];
-	}	static byte[][] Bry__;
+	}	private static byte[][] Bry__;
 	public static int Id_by_bry(byte[] find) {
 		if (hash == null) {
 			hash = Hash_adp_bry.ci_a7();	// ASCII: all MW kwds appear to be ASCII; EX: "redirect", "toc", "currentmont", etc.
@@ -471,7 +473,7 @@ default: throw Err_.new_unhandled(id);
 		}
 		Object o = hash.Get_by_bry(find);
 		return o == null? Int_.Neg1 : ((Int_obj_val)o).Val();
-	}	static Hash_adp_bry hash;
+	}	private static Hash_adp_bry hash;
 	private static void Bry_init() {
 		Bry__ = new byte[Id__max][];
 		for (int i = 0; i < Id__max; i++)

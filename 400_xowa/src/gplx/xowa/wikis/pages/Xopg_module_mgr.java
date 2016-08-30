@@ -52,4 +52,5 @@ public class Xopg_module_mgr {
 	, Tid_packed	= 4
 	, Tid_hiero		= 8
 	;
+	public static final int Tid_null = 0;
 }

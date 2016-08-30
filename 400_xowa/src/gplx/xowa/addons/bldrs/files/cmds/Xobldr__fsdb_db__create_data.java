@@ -88,7 +88,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	}
 	@Override public void Cmd_run() {
 		Init_bldr_bmks();
-		this.time_bgn = Env_.TickCount();
+		this.time_bgn = System_.Ticks();
 		int total_pending = Xob_xfer_regy_tbl.Select_total_pending(bldr_conn);
 		// if (total_pending > 250000 && src_bin_mgr__fsdb_version == null) 
 		usr_dlg.Note_many("", "", "total pending: ~{0}", total_pending);
@@ -277,7 +277,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		if (exit_after_commit) exit_now = true;
 	}
 	@Override public void Cmd_end() {
-		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
+		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, System_.Ticks__elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 		if (src_fsdb_wkr != null) {
 			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
 		}
@@ -295,7 +295,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		bldr_conn.Rls_conn();
 	}
 	private void Print_progress(Xodb_tbl_oimg_xfer_itm itm) {
-		int time_elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
+		int time_elapsed = System_.Ticks__elapsed_in_sec(time_bgn);
 		usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed, Math_.Div_safe_as_int(exec_count, time_elapsed), page_id_val, lnki_id_val, itm.Orig_ttl());
 	}
 	private void Delete_files() {}// TODO_OLD: purge /xowa/file/ dir to free up hard disk space

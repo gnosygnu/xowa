@@ -64,6 +64,10 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 			Gallery_parser parser = xtn_mgr.Parser();
 			if (parser.Parse_in_progress()) parser = new Gallery_parser().Init_by_wiki(wiki);	// handle nested galleries; EX: <gallery><ref><gallery>; PAGE:es.w:Arquitectura_medieval DATE:2015-07-10
 			parser.Parse_all(itms, gallery_mgr, this, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+
+			// if packed, enable flag; needed for reload in Xog_async_wkr; PAGE:en.w:Mexico; DATE:2016-08-14
+			if (Gallery_mgr_base_.Mode_is_packed(this.mode))
+				ctx.Page().Xtn_gallery_packed_exists_y_();
 		} catch (Exception exc) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_full(exc));
 		}

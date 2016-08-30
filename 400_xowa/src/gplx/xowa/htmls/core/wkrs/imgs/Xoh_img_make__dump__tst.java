@@ -32,7 +32,7 @@ public class Xoh_img_make__dump__tst {
 	@Test   public void Utf8() {
 		String
 		  orig = "<a href='/wiki/File:A%C3%A9_b.png' class='image' title='abc' xowa_title='Aé_b.png'><img data-xowa-title='Aé_b.png' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A%C3%A9_b.png/220px.png' width='220' height='110' alt='abc'></a>"
-		, expd = "<a href='/wiki/File:A%C3%A9_b.png' class='image' title='abc' xowa_title='A%C3%A9_b.png'><img id='xoimg_0' data-xowa-title='A%C3%A9_b.png' data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		, expd = "<a href='/wiki/File:A%C3%A9_b.png' class='image' title='abc' xowa_title='Aé_b.png'><img id='xoimg_0' data-xowa-title='Aé_b.png' data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'></a>"
 		;
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd)
 			.Imgs__add("en.w", "A.png", Xop_lnki_type.Id_null, 0.5, 220, 110, -1, -1)

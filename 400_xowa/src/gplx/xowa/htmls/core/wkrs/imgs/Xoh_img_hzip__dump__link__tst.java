@@ -38,6 +38,12 @@ public class Xoh_img_hzip__dump__link__tst {
 		, "<a href='http://a.org' rel='nofollow' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
 		);
 	}
+	@Test   public void Link__wm__n__encoded() {	// PURPOSE: do not double-encode A%C3%A9b.org; [[File:A.png|link=http://Aéb.org|abc]]
+		fxt.Test__bicode
+		( "~%!Dhttp://A%C3%A9b.org~A.png~)#Sabc~"
+		, "<a href='http://A%C3%A9b.org' rel='nofollow' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></a>"
+		);
+	}
 	@Test   public void Link__wm__y() {	// [[File:A.png|link=http://en.wikitionary.org/wiki/Special:Search/A|abc]]
 		fxt.Test__bicode
 		( "~%\"men.wiktionary.org|Search/A~A.png~\")#Sabc~"

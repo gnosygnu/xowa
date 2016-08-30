@@ -37,13 +37,14 @@ class Xobc_info_doc implements Mustache_doc_itm {
 	}
 }
 class Xobc_info_url implements Mustache_doc_itm {
-	private final    String url; private final    byte[] size;
-	public Xobc_info_url(String url, byte[] size) {
-		this.url = url; this.size = size;
+	private final    String url, md5; private final    byte[] size;
+	public Xobc_info_url(String url, byte[] size, String md5) {
+		this.url = url; this.size = size; this.md5 = md5;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "url"))			bfr.Add_str_u8(url);
 		else if	(String_.Eq(key, "size"))			bfr.Add_bry(size);
+		else if	(String_.Eq(key, "md5"))			bfr.Add_str_u8(md5);
 		else										return false;
 		return true;
 	}

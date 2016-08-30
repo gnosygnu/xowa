@@ -25,6 +25,9 @@ public class Xoh_toc_wkr__txt__basic__tst {
 	@Test   public void Ws() {
 		fxt.Test__both(" a b ", "a_b", "a b");
 	}
+	@Test   public void Nl() {
+		fxt.Test__both("\na b\n", "a_b", "a b");
+	}
 	@Test   public void Empty() {	// PAGE:s.w:Colac,_Victoria DATE:2016-07-17
 		fxt.Test__both("", "", "");
 	}
@@ -51,7 +54,13 @@ class Xoh_toc_wkr__txt__fxt {
 	private final    Xoh_toc_wkr__txt wkr = new Xoh_toc_wkr__txt();
 	private final    Xoh_toc_itm itm = new Xoh_toc_itm();
 	private final    Bry_bfr tmp = Bry_bfr_.New();
-	public void Clear() {wkr.Clear();}
+	private final    Xow_tidy_mgr_interface__test tidy_mgr = new Xow_tidy_mgr_interface__test();
+	public void Clear() {
+		wkr.Clear();
+		tidy_mgr.Clear();
+		wkr.Init(tidy_mgr, Xoa_page_.Main_page_bry);
+	}
+	public void Init__tidy(String html, String tidy)		{tidy_mgr.Add(Bry_.new_u8(html), Bry_.new_u8(tidy));}
 	public void Test__anch(String html, String expd_anch)	{Test__both(html, expd_anch, null);}
 	public void Test__text(String html, String expd_text)	{Test__both(html, null, expd_text);}
 	public void Test__both(String html, String expd)		{Test__both(html, expd, expd);}
@@ -63,5 +72,15 @@ class Xoh_toc_wkr__txt__fxt {
 	public void Test__remove_comment(String html, String expd) {
 		byte[] html_bry = Bry_.new_u8(html);
 		Gftest.Eq__str(expd, Gfh_utl.Del_comments(tmp, html_bry, 0, html_bry.length));
+	}
+}
+class Xow_tidy_mgr_interface__test implements gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface {
+	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	public void Clear() {hash.Clear();}
+	public void Add(byte[] html, byte[] tidy) {hash.Add(html, tidy);}
+	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {
+		byte[] html = bfr.To_bry_and_clear();
+		byte[] actl = (byte[])hash.Get_by_or_fail(html);
+		bfr.Add(actl);
 	}
 }

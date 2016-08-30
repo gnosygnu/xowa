@@ -60,5 +60,5 @@ public class Xop_tblw_ws_itm {
 		int tag_name_len = tag_name.length;
 		trie.Add_obj(Bry_.Add(Bry_xnde_bgn, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len));
 		trie.Add_obj(Bry_.Add(Bry_xnde_end, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len + 1));
-	}	static byte[] Bry_xnde_bgn = new byte[] {Byte_ascii.Lt, Byte_ascii.Slash}, Bry_xnde_end = new byte[] {Byte_ascii.Lt};
+	}	private static byte[] Bry_xnde_bgn = new byte[] {Byte_ascii.Lt, Byte_ascii.Slash}, Bry_xnde_end = new byte[] {Byte_ascii.Lt};
 }

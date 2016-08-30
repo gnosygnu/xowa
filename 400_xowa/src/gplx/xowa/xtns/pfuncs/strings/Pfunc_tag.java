@@ -27,8 +27,7 @@ public class Pfunc_tag extends Pf_func_base {
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();			
 		try {
 			// get tag_idx, tag_data, and tag_is_ref
-			int tag_idx = -1;
-			synchronized (next_id_lock) {tag_idx = ++next_id_val;}
+			int tag_idx = ctx.Wiki().Parser_mgr().Tag__next_idx();
 			byte[] tag_name = Eval_argx(ctx, src, caller, self); if (tag_name.length == 0) return;
 			Xop_xnde_tag tag = (Xop_xnde_tag)ctx.Xnde_tag_regy().Get_trie(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);
 			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid__ref;
@@ -74,6 +73,4 @@ public class Pfunc_tag extends Pf_func_base {
 	, Xtag_bgn = 14 // <xtag_bgn id='
 	, Id_len = 10
 	;
-	private static final    Object next_id_lock = new Object();
-	private static int next_id_val = 0;// NOTE:must be app-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
 }

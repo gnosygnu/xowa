@@ -30,7 +30,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public int						Anch_title_bgn() {return anch_title_bgn;} private int anch_title_bgn;
 	public int						Anch_title_end() {return anch_title_end;} private int anch_title_end;
 	public boolean					Anch_title_exists() {return anch_title_end != -1;}
-	public Bry_obj_ref				Anch_page() {return anch_page;} private Bry_obj_ref anch_page = Bry_obj_ref.New_empty();
+	public Bry_obj_ref				Anch_xo_ttl() {return anch_xo_ttl;} private Bry_obj_ref anch_xo_ttl = Bry_obj_ref.New_empty();
 	public Xoh_img_src_data			Img_src() {return img_src;} private final    Xoh_img_src_data img_src = new Xoh_img_src_data();
 	public Xoh_img_cls_data			Img_cls() {return img_cls;} private final    Xoh_img_cls_data img_cls = new Xoh_img_cls_data();
 	public Xoh_img_xoimg_data		Img_xoimg() {return img_xoimg;} private final    Xoh_img_xoimg_data img_xoimg = new Xoh_img_xoimg_data();
@@ -39,11 +39,11 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public boolean					Img_alt__diff__anch_title() {return img_alt__diff_anch_title;} private boolean img_alt__diff_anch_title;
 	public int						Img_w() {return img_w;} private int img_w;
 	public int						Img_h() {return img_h;} private int img_h;
-	public boolean					Img_w__diff__file_w() {return img_w != img_src.File_w();}
+	public boolean					Img_w__diff__file_w() {return !img_src.File_is_orig() && img_w != img_src.File_w();}
 	public boolean					Img_is_vid() {return img_is_vid;} private boolean img_is_vid;
-	public boolean						Img_wo_anch() {return img_wo_anch;} private boolean img_wo_anch;
+	public boolean					Img_wo_anch() {return img_wo_anch;} private boolean img_wo_anch;
 	public int						Img_imap_idx() {return img_imap_idx;} private int img_imap_idx;
-	public boolean						Img_is_gallery() {return img_is_gallery;} private boolean img_is_gallery; public void Img_is_gallery_(boolean v) {this.img_is_gallery = v;}
+	public boolean					Img_is_gallery() {return img_is_gallery;} private boolean img_is_gallery; public void Img_is_gallery_(boolean v) {this.img_is_gallery = v;}
 	public Pgbnr_itm				Img_pgbnr() {return img_pgbnr;} private final    Pgbnr_itm img_pgbnr = new Pgbnr_itm();
 	public void Clear() {
 		this.img_alt__diff_anch_title = anch_rel_is_nofollow = img_is_vid = img_wo_anch = img_is_gallery = false;
@@ -58,7 +58,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 		this.img_wo_anch = anch_head.Name_id() == Gfh_tag_.Id__img;
 		if (img_wo_anch) {
 			Gfh_atr xowa_title = anch_head.Atrs__get_by_or_empty(Xoh_img_xoimg_data.Bry__data_xowa_title);	// data-xowa-title='A.png'
-			anch_page.Val_(xowa_title.Val());
+			anch_xo_ttl.Val_(xowa_title.Val());
 		}
 		else {
 			if (anch_head.Name_id() == Gfh_tag_.Id__div) {	// video / audio
@@ -73,7 +73,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 			Gfh_atr anch_title = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);					// title='abc'
 			anch_title_bgn = anch_title.Val_bgn(); anch_title_end = anch_title.Val_end();
 			Gfh_atr xowa_title = anch_head.Atrs__get_by_or_empty(Bry__atr__xowa_title);					// xowa_title='A.png'
-			if (xowa_title.Val_dat_exists()) anch_page.Val_(xowa_title.Val());
+			if (xowa_title.Val_dat_exists()) anch_xo_ttl.Val_(xowa_title.Val());
 			img_tag = tag_rdr.Tag__move_fwd_head();
 		}
 		img_tag.Chk_name_or_fail(Gfh_tag_.Id__img);														// <img
@@ -88,10 +88,10 @@ public class Xoh_img_data implements Xoh_data_itm {
 		img_cls.Init_by_parse(err_wkr, src, img_tag);													// class='thumbborder'
 		img_alt__diff_anch_title = !Bry_.Match(src, img_alt_bgn, img_alt_end, src, anch_title_bgn, anch_title_end);
 		if (!img_src.Parse(err_wkr, hctx, hctx.Wiki__domain_bry(), img_tag)) return false;				// src='...'
-		if (anch_page.Val_is_empty()) {
-			anch_page.Val_(img_src.File_ttl_bry());
-			if (anch_page.Val_is_empty())
-				anch_page.Val_(anch_href.Ttl_page_db());
+		if (anch_xo_ttl.Val_is_empty()) {
+			anch_xo_ttl.Val_(img_src.File_ttl_bry());
+			if (anch_xo_ttl.Val_is_empty())
+				anch_xo_ttl.Val_(anch_href.Ttl_page_db());
 		}
 		this.img_imap_idx = Get_imap_idx(tag_rdr.Err_wkr(), img_tag);
 		if (img_wo_anch) {

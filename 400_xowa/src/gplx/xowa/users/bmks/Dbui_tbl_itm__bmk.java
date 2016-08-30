@@ -38,7 +38,8 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	}
 	public void Select(Bry_bfr bfr, int owner) {
 		Xoud_bmk_itm_row[] db_rows = tbl.Select_grp(owner);
-		byte[] option_link = app.Html__lnki_bldr().Href_(Bry_.new_a7("home"), app.User().Wikii().Ttl_parse(Bry_.new_a7("Options/Bookmarks"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();// HOME
+		Xow_wiki usr_wiki = app.User().Wikii();
+		byte[] option_link = usr_wiki.Html__lnki_bldr().Href_(Bry_.new_a7("home"), usr_wiki.Ttl_parse(Bry_.new_a7("Options/Bookmarks"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();// HOME
 		byte[] delete_confirm_msg = app.Api_root().Usr().Bookmarks().Delete_confirm() ? Msg__delete_confirm : Bry_.Empty;
 		tbl_fmtr.Write(bfr, this, option_link, delete_confirm_msg, To_ui_rows(db_rows));
 	}	private static final    byte[] Msg__delete_confirm = Bry_.new_a7(" data-dbui-delete_confirm_msg='Are you sure you want to delete this bookmark?'");

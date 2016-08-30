@@ -22,10 +22,8 @@ public class Xot_tmpl_wtr {
 	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
 //			synchronized (this) {	// THREAD:added synchronized after "failed to write tkn" DATE:2015-04-29
 			Bry_bfr rslt_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001();
-			ctx.Tmpl_output_(rslt_bfr);
 			rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
 			Write_tkn(ctx, src, src.length, rslt_bfr, root);
-			ctx.Tmpl_output_(null);
 			return rslt_bfr.To_bry_and_rls();
 //			}
 	}

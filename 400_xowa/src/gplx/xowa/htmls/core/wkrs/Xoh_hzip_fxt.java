@@ -40,11 +40,11 @@ public class Xoh_hzip_fxt {
 	public void Init_wiki_installed(String domain) {parser_fxt.Init_xwiki_add_user_(domain);}
 	public Xou_cache_finder_mem Init_file_mgr__mem() {
 		Xou_cache_finder_mem rv = Xou_cache_finder_.New_mem();
-		hzip_mgr.Hctx().Test__file__mgr_(rv);
+		hzip_mgr.Hctx().Test__cache__mgr_(rv);
 		return rv;
 	}
 	public void Init_file_mgr__noop() {
-		hzip_mgr.Hctx().Test__file__mgr_(Xou_cache_finder_.Noop);
+		hzip_mgr.Hctx().Test__cache__mgr_(Xou_cache_finder_.Noop);
 	}
 	public Xowe_wiki Init_wiki_alias(String alias, String domain) {
 		Xowe_wiki rv = Xoa_app_fxt.Make__wiki__edit(parser_fxt.App(), domain);

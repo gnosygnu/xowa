@@ -16,6 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.langs.jsons.*;
+import gplx.xowa.wikis.pages.*;
 public class Wbase_doc_mgr {
 	private final    Xoae_app app;
 	private final    Wdata_wiki_mgr wbase_mgr;
@@ -42,23 +44,58 @@ public class Wbase_doc_mgr {
 		return qid_bry == null ? null : this.Get_by_bry_or_null(qid_bry);
 	}
 	public Wdata_doc Get_by_xid_or_null(byte[] xid) {return Get_by_bry_or_null(Prepend_property_if_needed(xid));}// scribunto passes either p1 or q1; convert p1 to "Property:P1"
-	public Wdata_doc Get_by_bry_or_null(byte[] full_db) {	// must be correct format; EX:"Q2" or "Property:P1"
-		Wdata_doc rv = hash.Get_or_null(full_db);
+	public Wdata_doc Get_by_bry_or_null(byte[] ttl_bry) {// must be correct format; EX:"Q2" or "Property:P1"
+		Wdata_doc rv = hash.Get_or_null(ttl_bry);
 		if (rv == null) {
-			byte[] page_src = Load_or_null(full_db); if (page_src == null) return null;	// page not found
-			synchronized (hash) {	// LOCK:app-level; both hash and jdoc_parser
-				rv = new Wdata_doc(full_db, wbase_mgr, wbase_mgr.Jdoc_parser().Parse(page_src));
+			rv = Load_wdoc_or_null(ttl_bry); if (rv == null) return null;	// page not found
+			synchronized (hash) {	// LOCK:app-level; hash;
+				Add(ttl_bry, rv);// NOTE: use ttl_bry, not rv.Qid; allows subsequent lookups to skip this redirect cycle
 			}
-			Add(full_db, rv);
 		}
 		return rv;
 	}
-	private byte[] Load_or_null(byte[] full_db) {
+	public Wdata_doc Load_wdoc_or_null(byte[] src_ttl_bry) {
 		if (!enabled) return null;
-		Xoa_ttl page_ttl = Xoa_ttl.Parse(wbase_mgr.Wdata_wiki(), full_db); if (page_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", full_db); return null;}
-		Xoae_page page_itm = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(page_ttl);
-		return page_itm.Db().Page().Exists() ? page_itm.Db().Text().Text_bry() : null;
+		byte[] cur_ttl_bry = src_ttl_bry;
+		int load_count = -1;
+		while (load_count < 2) {	// limit to 2 tries (i.e.: 1 redirect)
+			// parse ttl
+			Xoa_ttl cur_ttl = wbase_mgr.Wdata_wiki().Ttl_parse(cur_ttl_bry);
+			if (cur_ttl == null) {
+				app.Usr_dlg().Warn_many("", "", "invalid wbase ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
+				return null;
+			}
+
+			// get page
+			Xoae_page page = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(cur_ttl);
+			if (!page.Db().Page().Exists()) return null;
+
+			// parse jdoc
+			byte[] jdoc_bry = page.Db().Text().Text_bry();
+			Json_doc jdoc = null;
+			synchronized (hash) {	// LOCK:app-level; jdoc_parser
+				jdoc = wbase_mgr.Jdoc_parser().Parse(jdoc_bry);
+			}
+			if (jdoc == null) {
+				app.Usr_dlg().Warn_many("", "", "invalid jdoc for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
+				return null;
+			}
+
+			// check for redirect; EX: {"entity":"Q22350516","redirect":"Q21006972"}; PAGE:fr.w:Tour_du_Táchira_2016; DATE:2016-08-13
+			Json_nde jdoc_root = jdoc.Root_nde();
+			byte[] redirect_ttl = jdoc_root.Get_as_bry_or(Bry__redirect, null);
+			if (redirect_ttl != null) {
+				cur_ttl_bry = redirect_ttl;
+				continue;
+			}
+
+			// is json doc, and not a redirect; return
+			return new Wdata_doc(cur_ttl_bry, wbase_mgr, jdoc);
+		}
+		app.Usr_dlg().Warn_many("", "", "too many redirects for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
+		return null;
 	}
+	private static final    byte[] Bry__redirect = Bry_.new_a7("redirect");
 
 	private static byte[] Prepend_property_if_needed(byte[] bry) {
 		int len = bry == null ? 0 : bry.length;

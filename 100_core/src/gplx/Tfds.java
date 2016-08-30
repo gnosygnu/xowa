@@ -24,6 +24,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_byte	(byte expd	, byte   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 	public static void Eq_int	(int  expd	, int    actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
 	public static void Eq_int	(int  expd	, int    actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
+	public static void Eq_double(double expd, double actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
 	public static void Eq_str	(byte[] expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), String_.new_u8(actl), fmt, args);}
 	public static void Eq_str	(byte[] expd, String actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), actl, fmt, args);}
 	public static void Eq_str	(String expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(expd, String_.new_u8(actl), fmt, args);}

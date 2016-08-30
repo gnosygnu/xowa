@@ -29,13 +29,13 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		qry_bgns_with.Add(Ary_dot_slash, Int_obj_ref.New(Id_dot_slash));
 		qry_bgns_with.Add(Ary_dot_dot, Int_obj_ref.New(Id_dot_dot));
 		qry_bgns_with.Add(Ary_dot_dot_slash, Int_obj_ref.New(Id_dot_dot_slash));
-	}	static Btrie_fast_mgr qry_bgns_with;
+	}	private static Btrie_fast_mgr qry_bgns_with;
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
 		if (orig.length == 0) orig = ctx.Page().Ttl().Full_txt_w_ttl_case();
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
-		try {bfr.Add(Rel2abs(tmp_bfr, qry, orig));}
+		try {bfr.Add(Rel2abs(tmp_bfr, ctx.Wiki().Parser_mgr().Rel2abs_ary(), qry, orig));}
 		finally {tmp_bfr.Mkr_rls();}
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
@@ -59,9 +59,9 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		}
 		return rv;
 	}
-	private static final    Int_obj_ref ignore_rel2abs_tid = Int_obj_ref.New_zero();
-	public static byte[] Rel2abs(Bry_bfr tmp_bfr, byte[] qry, byte[] src) {return Rel2abs(tmp_bfr, qry, src, ignore_rel2abs_tid);}
-	public static byte[] Rel2abs(Bry_bfr tmp_bfr, byte[] qry, byte[] src, Int_obj_ref rel2abs_tid) {
+	private static final    Int_obj_ref ignore_rel2abs_tid = Int_obj_ref.New_zero();	// TS:return value not used
+	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src) {return Rel2abs(tmp_bfr, seg_ary, qry, src, ignore_rel2abs_tid);}
+	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src, Int_obj_ref rel2abs_tid) {
 		if (qry_bgns_with == null) qry_bgns_with_init();
 		int qry_len = qry.length, src_len = src.length;
 		
@@ -97,6 +97,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 			tmp_len = qry_len;
 			tmp_is_1st = false;
 		}
+
 		// create segs; see NOTE_1 for approach
 		byte b = Byte_.Zero;
 		boolean loop = true, dot_mode = true;
@@ -169,7 +170,6 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public static final int Ttl_max = 2048;	// ASSUME: max len of 256 * 8 bytes
-	private static int[] seg_ary = new int[Ttl_max];
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_rel2abs;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_rel2abs().Name_(name);}
 	public static final int Id_null = 0, Id_slash = 1, Id_dot = 2, Id_dot_slash = 3, Id_dot_dot = 4, Id_dot_dot_slash = 5;

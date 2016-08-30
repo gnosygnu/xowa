@@ -30,7 +30,7 @@ public class Imap_html__hview__tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
 		, "        <area href=\"/wiki/C\" shape=\"rect\" coords=\"0,0,4,8\" alt=\"c1\" title=\"c1\"/>"
@@ -56,7 +56,7 @@ public class Imap_html__hview__tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
 		, "      <a href=\"/wiki/B\" title=\"b1\">"
@@ -77,7 +77,7 @@ public class Imap_html__hview__tst {
 		, "desc top-left"
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
-		( "<div id='imap_div_0' class=\"noresize\" style=\"height:0px; width: 123px;\">"
+		( "<div id=\"imap_div_0\" class=\"noresize\" style=\"height:0px; width: 123px;\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
 		, "      <img id=\"xoimg_0\" alt=\"a1\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"
@@ -99,7 +99,7 @@ public class Imap_html__hview__tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"http://b.org\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
 		, "      </map>"
@@ -138,7 +138,7 @@ public class Imap_html__hview__tst {
 		( "<table>"
 		, "  <tr>"
 		, "    <td> z"
-		, "<div id='imap_div_0' class=\"noresize\">"
+		, "<div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
 		, "      <img id=\"xoimg_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"	// NOTE: width must be 123, not 0
@@ -165,7 +165,7 @@ public class Imap_html__hview__tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
 		, "      </map>"
@@ -198,7 +198,7 @@ class Imap_xnde_html_fxt {
 	public void Test_html_full_frag(String raw, String expd) {fxt.Test_html_full_frag(raw, expd);}
 	public String Frag_html_full() {
 		return String_.Concat_lines_nl_skip_last
-		( "<div id='imap_div_0' class=\"noresize\">"
+		( "<div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
 		, "      <img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" usemap=\"#imageMap_1_1\"/>"

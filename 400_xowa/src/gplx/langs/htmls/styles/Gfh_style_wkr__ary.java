@@ -28,5 +28,4 @@ public class Gfh_style_wkr__ary implements Gfh_style_wkr {
 		Gfh_style_parser_.Parse(src, src_bgn, src_end, this);
 		return (Gfh_style_itm[])list.To_ary_and_clear(Gfh_style_itm.class);
 	}
-        public static final    Gfh_style_wkr__ary Instance = new Gfh_style_wkr__ary(); Gfh_style_wkr__ary() {}
 }

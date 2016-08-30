@@ -62,14 +62,21 @@ public class Xow_hdump_mgr__load {
 	private byte[] Parse(Xoh_page hpg, int zip_tid, int hzip_tid, byte[] src) {
 		if (zip_tid > gplx.core.ios.streams.Io_stream_.Tid_raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
-		if (hzip_tid == Xoh_hzip_dict_.Hzip__v1) {
-			src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
-			hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
-			src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, Bool_.N);
-			hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
+		switch (hzip_tid) {
+			case Xoh_hzip_dict_.Hzip__none:
+				src = make_mgr.Parse(src, hpg, hpg.Wiki());
+				break;
+			case Xoh_hzip_dict_.Hzip__v1:
+				src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
+				hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
+				src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, Bool_.N);
+				hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
+				break;
+			case Xoh_hzip_dict_.Hzip__plain:
+				gplx.xowa.apps.wms.apis.parses.Wm_page_loader page_loader = new gplx.xowa.apps.wms.apis.parses.Wm_page_loader();
+				src = page_loader.Parse(wiki, hpg, src);
+				break;
 		}
-		else
-			src = make_mgr.Parse(src, hpg, hpg.Wiki());
 		return src;
 	}
 	private void Fill_page(Xoae_page wpg, Xoh_page hpg) {
@@ -88,13 +95,18 @@ public class Xow_hdump_mgr__load {
 		wpg_head.Itm__toc().Enabled_(hpg.Html_data().Toc_mgr().Exists());
 		wpg_head.Itm__pgbnr().Enabled_(hpg.Html_data().Head_mgr().Itm__pgbnr().Enabled());
 
+		// transfer Xtn_gallery_packed_exists; needed for hdump; PAGE:en.w:Mexico; DATE:2016-08-14
+		if (hpg.Html_data().Xtn_gallery_packed_exists())
+			wpg.Html_data().Xtn_gallery_packed_exists_y_();
+
 		// transfer images from Xoh_page to Xoae_page 
 		Xoh_img_mgr src_imgs = hpg.Img_mgr();
 		int len = src_imgs.Len();
 		for (int i = 0; i < len; ++i) {
 			gplx.xowa.files.Xof_fsdb_itm itm = src_imgs.Get_at(i);
 			wpg.Hdump_mgr().Imgs().Add(itm);
-			wpg.File_queue().Add(itm);	// add to file_queue for http_server
+			if (!Io_mgr.Instance.ExistsFil(itm.Html_view_url()))	// if exists, don't add to file_queue; needed for packed; PAGE:en.w:Mexico; DATE:2016-08-14
+				wpg.File_queue().Add(itm);	// add to file_queue for http_server
 		}
 
 		// transfer redlinks

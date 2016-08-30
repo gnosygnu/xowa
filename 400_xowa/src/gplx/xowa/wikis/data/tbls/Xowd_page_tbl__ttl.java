@@ -37,5 +37,5 @@ class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
 	}
-	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_page_db());}
+	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_page_db());}
 }

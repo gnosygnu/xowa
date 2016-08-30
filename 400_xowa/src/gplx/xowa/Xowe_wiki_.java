@@ -27,7 +27,7 @@ public class Xowe_wiki_ {
 	}
 	public static void Rls_mem_if_needed(Xowe_wiki wiki) {
 		Xoae_app app = wiki.Appe();
-		if (gplx.core.envs.Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
+		if (gplx.core.envs.Runtime_.Memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
 			Xowe_wiki_.Rls_mem(wiki, false);	// clear caches (which will clear bry_bfr_mkr)
 		else									// not low in memory
 			wiki.Utl__bfr_mkr().Clear();		// clear bry_bfr_mkr only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30

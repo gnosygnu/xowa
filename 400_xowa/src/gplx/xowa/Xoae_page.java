@@ -27,7 +27,7 @@ public class Xoae_page implements Xoa_page {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
 		html.Init_by_page(ttl);
-		html.Toc_mgr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), ttl.Page_db());
+		html.Toc_mgr().Init(wiki.Html_mgr().Tidy_mgr(), wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), ttl.Page_db());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Empty
 	public Xow_wiki					Wiki()				{return wiki;}
@@ -61,23 +61,8 @@ public class Xoae_page implements Xoa_page {
 	public byte[][]					Category_list() {return category_list;} public Xoae_page Category_list_(byte[][] v) {category_list = v; return this;} private byte[][] category_list = new byte[0][];
 	public List_adp					Slink_list() {return slink_list;} private List_adp slink_list = List_adp_.New();
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
-	public boolean						Pages_recursed() {return pages_recursed;} public void Pages_recursed_(boolean v) {pages_recursed = v; } private boolean pages_recursed;
 	public int						Bldr__ns_ord() {return bldr__ns_ord;} public void Bldr__ns_ord_(int v) {bldr__ns_ord = v;} private int bldr__ns_ord;
 	public Xopg_tmpl_prepend_mgr	Tmpl_prepend_mgr() {return tmpl_prepend_mgr;} private Xopg_tmpl_prepend_mgr tmpl_prepend_mgr = new Xopg_tmpl_prepend_mgr();
-	public void						Tmpl_stack_del() {--tmpl_stack_ary_len;}
-	public boolean						Tmpl_stack_add(byte[] key) {
-		for (int i = 0; i < tmpl_stack_ary_len; i++) {
-			if (Bry_.Match(key, tmpl_stack_ary[i])) return false;
-		}
-		int new_len = tmpl_stack_ary_len + 1;
-		if (new_len > tmpl_stack_ary_max) {
-			tmpl_stack_ary_max = new_len * 2;
-			tmpl_stack_ary = (byte[][])Array_.Resize(tmpl_stack_ary, tmpl_stack_ary_max);
-		}
-		tmpl_stack_ary[tmpl_stack_ary_len] = key;
-		tmpl_stack_ary_len = new_len;
-		return true;
-	}	private byte[][] tmpl_stack_ary = Bry_.Ary_empty; private int tmpl_stack_ary_len = 0, tmpl_stack_ary_max = 0;
 	public void Clear_all() {Clear(true);}
 	public void Clear(boolean clear_scrib) { // NOTE: this is called post-fetch but pre-wtxt; do not clear items set by post-fetch, such as id, ttl, redirected_ttls, data_raw
 		db.Clear();
@@ -95,9 +80,6 @@ public class Xoae_page implements Xoa_page {
 		if (clear_scrib) wiki.Parser_mgr().Scrib().When_page_changed(this);
 		slink_list.Clear();
 		tab_data.Clear();
-		pages_recursed = false;
-		tmpl_stack_ary = Bry_.Ary_empty;
-		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		popup_mgr.Clear();
 		tmpl_prepend_mgr.Clear();
 		commons_mgr.Clear();

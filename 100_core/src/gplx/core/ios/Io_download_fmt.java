@@ -59,11 +59,11 @@ public class Io_download_fmt {
 		prog_pct = 0;
 		prog_rate = 0;
 		prog_left = 0;
-		time_bgn = time_prv = Env_.TickCount();
+		time_bgn = time_prv = System_.Ticks();
 		time_checkpoint = 0;
 	}
 	public void Prog(int prog_read) {
-		time_now = Env_.TickCount();
+		time_now = System_.Ticks();
 		time_dif = time_now - time_bgn; if (time_dif == 0) time_dif = 1;	// avoid div by zero error below
 		prog_done += prog_read;
 		time_checkpoint += time_now - time_prv;
@@ -84,7 +84,7 @@ public class Io_download_fmt {
 			usr_dlg.Prog_none("", "prog", prog_msg);
 	}
 	public void Term() {
-		time_end = Env_.TickCount();
+		time_end = System_.Ticks();
 //			prog_rate = (prog_done * 1000) / (time_dif);
 //			prog_pct = (prog_done * 10000) / src_len;	// 100 00 to get 2 decimal places; EX: .1234  -> 1234 -> 12.34% 
 //			prog_left = (1000 * (src_len - prog_done)) / prog_rate;

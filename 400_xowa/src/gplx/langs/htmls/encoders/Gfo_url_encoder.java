@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
-public class Gfo_url_encoder implements Url_encoder_interface {
+public class Gfo_url_encoder implements Url_encoder_interface {	// TS; Gfo_url_encoder_itm[] are read-only; anchor_encoder is effectively read-only
 	private final    Gfo_url_encoder_itm[] encode_ary, decode_ary; private final    Gfo_url_encoder anchor_encoder;
 	public Gfo_url_encoder(Gfo_url_encoder_itm[] encode_ary, Gfo_url_encoder_itm[] decode_ary, Gfo_url_encoder anchor_encoder) {
 		this.encode_ary = encode_ary; this.decode_ary = decode_ary; this.anchor_encoder = anchor_encoder;

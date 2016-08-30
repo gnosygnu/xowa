@@ -19,17 +19,15 @@ package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.xwikis.*;
-public class Xoh_href_wtr {
-	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
+public class Xoh_href_wtr {	// TS:do not move to app-level
 	private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
 	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
-		synchronized (tmp_bfr) {
-			Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
-			return tmp_bfr.To_bry_and_clear();
-		}
+		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
+		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl) {Build_to_bfr(bfr, app, Xoh_wtr_ctx.Basic, domain_bry, ttl);}
-	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) {
+	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) { // given ttl, write href; EX: A -> '/wiki/A' 
 		int hctx_mode = hctx.Mode();
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();

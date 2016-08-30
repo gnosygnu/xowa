@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr {
-	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr key_bfr = Bry_bfr_.Reset(512);
+	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
 	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Object thread_lock = new Object();
 	private final    Io_url cache_dir; private boolean db_load_needed = true;
 	public Xou_cache_mgr(Xoa_wiki_mgr wiki_mgr, Io_url cache_dir, Xou_db_file db_file) {
@@ -54,7 +54,7 @@ public class Xou_cache_mgr {
 		if (!enabled) return null;
 		synchronized (thread_lock) {
 			this.Page_bgn();
-			byte[] key = Xou_cache_itm.Key_gen(key_bfr, wiki, ttl, type, upright, w, h, time, page, user_thumb_w);
+			byte[] key = Xou_cache_itm.Key_gen(tmp_bfr, wiki, ttl, type, upright, w, h, time, page, user_thumb_w);
 			Xou_cache_itm rv = (Xou_cache_itm)hash.Get_by(key);
 			if (rv == Xou_cache_itm.Null) {
 				rv = cache_tbl.Select_one(wiki, ttl, type, upright, w, h, time, page, user_thumb_w);
@@ -68,7 +68,7 @@ public class Xou_cache_mgr {
 		synchronized (thread_lock) {
 			Xou_cache_itm itm = Get_or_null(fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w());
 			if (itm == Xou_cache_itm.Null) {
-				itm = new Xou_cache_itm(key_bfr, Db_cmd_mode.Tid_create, fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w()
+				itm = new Xou_cache_itm(tmp_bfr, Db_cmd_mode.Tid_create, fsdb.Lnki_wiki_abrv(), fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.User_thumb_w()
 					, fsdb.Orig_repo_id(), fsdb.Orig_ttl(), fsdb.Orig_ext().Id(), fsdb.Orig_w(), fsdb.Orig_h()
 					, fsdb.Html_w(), fsdb.Html_h(), fsdb.Lnki_time(), fsdb.Lnki_page()
 					, fsdb.File_is_orig(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.File_size()
@@ -85,7 +85,7 @@ public class Xou_cache_mgr {
 		if (db_load_needed) {
 			db_load_needed = false;
 			fsys_size_cur = cfg_tbl.Assert_long("user.file_cache", "size_sum", 0);
-			cache_tbl.Select_all(key_bfr, hash);
+			cache_tbl.Select_all(tmp_bfr, hash);
 		}
 	}
 	public void Page_end(Xoa_wiki_mgr wiki_mgr) {	// threaded
@@ -117,7 +117,7 @@ public class Xou_cache_mgr {
 		Xoa_app_.Usr_dlg().Note_many("", "", "cache compress started");
 		synchronized (thread_lock) {
 			try {
-				this.Db_save(); cache_tbl.Select_all(key_bfr, hash);			// save and load
+				this.Db_save(); cache_tbl.Select_all(tmp_bfr, hash);		// save and load
 				Ordered_hash grp_hash = Ordered_hash_.New();				// aggregate by file path; needed when same commons file used by two wikis
 				int len = hash.Count();
 				for (int i = 0; i < len; ++i) {
@@ -168,7 +168,7 @@ public class Xou_cache_mgr {
 		byte[] orig_ttl = cache.Orig_ttl();
 		byte[] orig_md5 = cache.Orig_ttl_md5();
 		Xof_ext orig_ext = cache.Orig_ext_itm();
-		orig_ttl = trg_repo.Gen_name_trg(orig_ttl, orig_md5, orig_ext);
+		orig_ttl = trg_repo.Gen_name_trg(tmp_bfr, orig_ttl, orig_md5, orig_ext);
 		byte mode_id = cache.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
 		return url_bldr.Init_for_trg_file(mode_id, trg_repo, orig_ttl, orig_md5, orig_ext, cache.File_w()
 			, Xof_lnki_time.Convert_to_xowa_thumbtime	(orig_ext.Id(), cache.File_time())

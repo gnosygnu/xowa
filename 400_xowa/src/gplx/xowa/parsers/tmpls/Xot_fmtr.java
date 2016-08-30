@@ -43,7 +43,7 @@ class Xot_fmtr_prm implements Xot_fmtr {
 		}
 		else					// invk mode
 			self.Tmpl_evaluate(ctx, src, caller, trg);
-	}	static final    byte[] Bry_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Bry_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
+	}	private static final    byte[] Bry_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Bry_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
 	public void Reg_tmpl(Xop_ctx ctx, byte[] src, Xop_tkn_itm name_tkn, int args_len, Arg_nde_tkn[] args) {
 		trg.Add(Xop_curly_bgn_lxr.Hook);
 		++depth;

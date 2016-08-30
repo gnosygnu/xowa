@@ -192,7 +192,7 @@ public class Imap_parser {
 		if (	tkn_itm == null									// no lnki or lnke
 			||	tkn_itm.Tkn_tid() != Xop_tkn_itm_.Tid_lnki		// no lnki; occurs with badly constructed maps; PAGE:en.w:Demography_of_the_United_Kingdom DATE:2015-01-22
 			)
-			Xoa_app_.Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
+			Xoa_app_.Usr_dlg().Note_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
 		else {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_part_img(lnki_tkn);

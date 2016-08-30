@@ -42,6 +42,7 @@ public class Xob_lnki_temp_tbl implements Db_tbl {
 	public String Tbl_name()	{return tbl_name;}
 	public void Create_tbl()	{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn()	{conn.Txn_bgn("bldr__lnki_temp"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_stmt_make() {stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int tier_id, int page_id, byte[] ttl, byte[] ttl_commons, byte ext_id, byte img_type, byte lnki_src_tid, int w, int h, double upright, double time, int page) {

@@ -30,7 +30,6 @@ public class Xoh_page implements Xoa_page {
 	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
 
-	public void						Xtn_gallery_packed_exists_y_() {}
 	public boolean					Xtn__timeline_exists() {return xtn__timeline_exists;} private boolean xtn__timeline_exists; public void Xtn__timeline_exists_y_() {xtn__timeline_exists = true;}
 	public boolean					Xtn__gallery_exists() {return xtn__gallery_exists;} private boolean xtn__gallery_exists; public void Xtn__gallery_exists_y_() {xtn__gallery_exists = true;}
 
@@ -52,7 +51,7 @@ public class Xoh_page implements Xoa_page {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
 		this.Clear();
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
-		html.Toc_mgr().Init(wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
+		html.Toc_mgr().Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
 	}
 	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page, byte[] toc_label) {
 		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
@@ -67,7 +66,7 @@ public class Xoh_page implements Xoa_page {
 		this.content_sub = html.Content_sub();
 		this.sidebar_div = Xoh_page_.Save_sidebars(tmp_bfr, page, html);
 
-		html.Toc_mgr().Init(toc_label, page_url.Page_bry());
+		html.Toc_mgr().Init(page.Wikie().Html_mgr().Tidy_mgr(), toc_label, page_url.Page_bry());	// NOTE: do not pass in noop tidy_mgr, else broken TOC html will never get corrected during hdump; DATE:2016-08-14
 		return this;
 	}
 	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {

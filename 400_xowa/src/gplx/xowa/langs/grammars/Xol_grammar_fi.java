@@ -74,9 +74,9 @@ public class Xol_grammar_fi implements Xol_grammar {
 			case Xol_grammar_.Tid_illative:		bfr.Add_byte(word[word_len - 1]).Add_byte(Byte_ascii.Ltr_n); break;// # Double the last letter and add 'n'
 		}
 		return true;
-	}	static Xol_grammar_manual_regy manual_regy;
-	private static final byte[] Bry_sta_y = Bry_.new_a7("sta"), Bry_sta_n = Bry_.new_u8("stä"), Bry_a_y = Bry_.new_a7("a"), Bry_a_n = Bry_.new_u8("ä"), Bry_ssa_y = Bry_.new_a7("ssa"), Bry_ssa_n = Bry_.new_u8("ssä");
+	}	private static Xol_grammar_manual_regy manual_regy;
+	private static final    byte[] Bry_sta_y = Bry_.new_a7("sta"), Bry_sta_n = Bry_.new_u8("stä"), Bry_a_y = Bry_.new_a7("a"), Bry_a_n = Bry_.new_u8("ä"), Bry_ssa_y = Bry_.new_a7("ssa"), Bry_ssa_n = Bry_.new_u8("ssä");
 	static final byte Trie_vh_back = 0, Trie_vh_front = 1;
 	private static Btrie_slim_mgr trie_vh = Btrie_slim_mgr.cs().Add_str_byte__many(Trie_vh_back, "a", "o", "u").Add_str_byte__many(Trie_vh_front, "ä", "ö", "y");
-	private static final byte[] Bry_wiki = Bry_.new_a7("wiki");
+	private static final    byte[] Bry_wiki = Bry_.new_a7("wiki");
 }

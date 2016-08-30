@@ -125,7 +125,7 @@ public class Xof_bin_mgr {
 			fsdb.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
-				boolean found = Get_bin(Bool_.N, fsdb.Html_w(), trg, save_to_fsys, rdr_wrapper, fsdb, wkr);
+				boolean found = Get_bin(Bool_.N, fsdb.File_w(), trg, save_to_fsys, rdr_wrapper, fsdb, wkr);	// NOTE: must use File_w, not Html_w; else missing images in packed gallery in hdump; PAGE:en.w:France; DATE:2016-08-22
 				if (found)														// orig found; return it;
 					return Set_found(save_to_fsys, fsdb, trg, rdr_wrapper);
 			}
@@ -135,7 +135,7 @@ public class Xof_bin_mgr {
 			fsdb.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
-				boolean found = Get_bin(Bool_.Y, fsdb.Html_w(), trg, save_to_fsys, rdr_wrapper, fsdb, wkr);
+				boolean found = Get_bin(Bool_.Y, fsdb.File_w(), trg, save_to_fsys, rdr_wrapper, fsdb, wkr);	// NOTE: must use File_w, not Html_w; else missing images in packed gallery in hdump; PAGE:en.w:France; DATE:2016-08-22
 				if (found)														// thumb found; return it;
 					return Set_found(save_to_fsys, fsdb, trg, rdr_wrapper);
 				if (fsdb.Orig_ext().Id_is_video()) continue;					// item is video; don't download orig as imageMagick can't thumbnail it; DATE:2015-06-16

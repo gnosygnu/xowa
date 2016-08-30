@@ -19,7 +19,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.bits.*;
 public class Xop_lnki_type {
 	public static final byte Id_null = 0, Id_none = 1, Id_frameless = 2, Id_frame = 4, Id_thumb = 8;
-	public static final byte Tid_null = 0, Tid_none = 1, Tid_frameless = 2, Tid_frame = 3, Tid_thumb = 4;	// SERIALIZED
+	public static final byte Tid_null = 0, Tid_none = 1, Tid_frameless = 2, Tid_frame = 3, Tid_thumb = 4, Tid_orig_known = 64;	// SERIALIZED
 	public static byte To_tid(byte flag) {
 		switch (flag) {
 			case Xop_lnki_type.Id_null:				return Xop_lnki_type.Tid_null;
@@ -62,6 +62,7 @@ public class Xop_lnki_type {
 		if		(	Bitmask_.Has_int(id, Id_thumb)		// [[File:A.png|600px|thumb]]      -> 400,200
 				||	Bitmask_.Has_int(id, Id_frameless)	// [[File:A.png|600px|frameless]]  -> 400,200
 				||	Bitmask_.Has_int(id, Id_frame)		// [[File:A.png|600px|frame]]      -> 400,200 (frame is always default size)
+				||	id == Tid_orig_known				// for hdump
 				)
 			return true;
 		else if (	id == Id_null						// [[File:A.png|600px]]            -> 600,400; uses orig file of 400,200, but <img> tag src_width / src_height set to 600,400

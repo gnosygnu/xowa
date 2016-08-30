@@ -20,7 +20,7 @@ import gplx.core.consoles.*; import gplx.core.envs.*;
 import gplx.xowa.apps.*;
 public class Xoa_cmd_arg_mgr {
 	Xoa_cmd_arg_mgr(Gfo_cmd_arg_mgr arg_mgr) {this.arg_mgr = arg_mgr;}
-	public Gfo_cmd_arg_mgr Arg_mgr() {return arg_mgr;} private final Gfo_cmd_arg_mgr arg_mgr;
+	public Gfo_cmd_arg_mgr Arg_mgr() {return arg_mgr;} private final    Gfo_cmd_arg_mgr arg_mgr;
 	public Xoa_app_mode App_type() {return app_type;} private Xoa_app_mode app_type;
 	public Io_url Fsys__root_dir() {return fsys__root_dir;} private Io_url fsys__root_dir;
 	public String Fsys__bin_dir() {return fsys__bin_dir;} private String fsys__bin_dir;
@@ -56,7 +56,7 @@ public class Xoa_cmd_arg_mgr {
 	}
 	private boolean Print(Gfo_usr_dlg usr_dlg) {
 		String header = String_.Concat_lines_nl_skip_last
-		(	Env_.GenHdr(false, "XOWA", "XOWA: the XOWA Offline Wiki Application\n", "")
+		(	Xoa_cmd_arg_mgr_.GenHdr(false, "XOWA", "XOWA: the XOWA Offline Wiki Application\n", "")
 		,	String_.Repeat("-", 80) 
 		,	""
 		,	"version: " + Xoa_app_.Version + "; build date: " + Xoa_app_.Build_date
@@ -86,7 +86,7 @@ public class Xoa_cmd_arg_mgr {
 		);
 		return new Xoa_cmd_arg_mgr(arg_mgr);
 	}
-	private static final String User_name_default = gplx.xowa.users.Xoue_user.Key_xowa_user;
+	private static final    String User_name_default = gplx.xowa.users.Xoue_user.Key_xowa_user;
 	private static String Bin_dir_name() {
 		String rv = "";
 		Op_sys op_sys = Op_sys.Cur();

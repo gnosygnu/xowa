@@ -43,12 +43,12 @@ class Io_download_fmt_fxt {
 		if (fmt == null) {
 			fmt = new Io_download_fmt();
 		}
-		Env_.TickCount_Test = 0;
+		System_.Ticks__test_set(0);
 		prog_done = prog_rate = prog_pct = prog_left = -1;
 		prog_msg = null;
 		return this;
 	}	Io_download_fmt fmt;
-	public Io_download_fmt_fxt Now_add_f(int v) {Env_.TickCount_Test += v; return this;}
+	public Io_download_fmt_fxt Now_add_f(int v) {System_.Ticks__test_add(v); return this;}
 	public Io_download_fmt_fxt Prog_done_(int v) {prog_done = v; return this;} long prog_done = -1;
 	public Io_download_fmt_fxt Prog_pct_ (int v) {prog_pct  = v; return this;} long prog_pct = -1;
 	public Io_download_fmt_fxt Prog_rate_(int v) {prog_rate = v; return this;} long prog_rate = -1;

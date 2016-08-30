@@ -77,6 +77,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		maint_mgr = new Xow_maint_mgr(this);
 		cache_mgr = new Xow_cache_mgr(this);
 		/*if (Bry_.Eq(domain_bry, Xow_domain_itm_.Bry__home))*/ xwiki_mgr.Add_by_atrs(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[home:Help/Contents]]
+		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
 	}
 	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
@@ -102,7 +103,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
 	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
-	public Xoh_href_wtr				Html__href_wtr() {return html__href_wtr;} private final    Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
+	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
+	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
 	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();

@@ -36,5 +36,5 @@ class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 			stmt.Val_int(page.Id());		
 		}
 	}
-	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Id_val());}
+	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Id_val());}
 }

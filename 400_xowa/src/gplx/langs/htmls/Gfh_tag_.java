@@ -18,62 +18,66 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	public static final int 
-	  Id__comment	= -3
-	, Id__eos		= -2
-	, Id__any		= -1
-	, Id__unknown	=  0
-	, Id__h1		=  1
-	, Id__h2		=  2
-	, Id__h3		=  3
-	, Id__h4		=  4
-	, Id__h5		=  5
-	, Id__h6		=  6
-	, Id__a			=  7
-	, Id__span		=  8
-	, Id__div		=  9
-	, Id__img		= 10
-	, Id__ul		= 11
-	, Id__ol		= 12
-	, Id__li		= 13
-	, Id__dd		= 14
-	, Id__dt		= 15
-	, Id__p			= 16
-	, Id__br		= 17
-	, Id__hr		= 18
-	, Id__table		= 19
-	, Id__tr		= 20
-	, Id__td		= 21
-	, Id__th		= 22
-	, Id__thead		= 23
-	, Id__tbody		= 24
-	, Id__caption	= 25
-	, Id__pre		= 26
-	, Id__small		= 27
-	, Id__i			= 28
-	, Id__b			= 29
-	, Id__sup		= 30
-	, Id__sub		= 31
-	, Id__bdi		= 32
-	, Id__font		= 33
-	, Id__strong	= 34
-	, Id__s			= 35
-	, Id__abbr		= 36
-	, Id__cite		= 37
-	, Id__var		= 38
-	, Id__u			= 39
-	, Id__big		= 40
-	, Id__del		= 41
-	, Id__strike	= 42
-	, Id__tt		= 43
-	, Id__code		= 44
-	, Id__wbr		= 45
-	, Id__center	= 46	// en.v:Vandalism_in_progress
-	, Id__dfn		= 47
-	, Id__kbd		= 48
-	, Id__samp		= 49
-	, Id__ins		= 50
-	, Id__em		= 51
+	  Id__comment		= -3
+	, Id__eos			= -2
+	, Id__any			= -1
+	, Id__unknown		=  0
+	, Id__h1			=  1
+	, Id__h2			=  2
+	, Id__h3			=  3
+	, Id__h4			=  4
+	, Id__h5			=  5
+	, Id__h6			=  6
+	, Id__a				=  7
+	, Id__span			=  8
+	, Id__div			=  9
+	, Id__img			= 10
+	, Id__ul			= 11
+	, Id__ol			= 12
+	, Id__li			= 13
+	, Id__dd			= 14
+	, Id__dt			= 15
+	, Id__p				= 16
+	, Id__br			= 17
+	, Id__hr			= 18
+	, Id__table			= 19
+	, Id__tr			= 20
+	, Id__td			= 21
+	, Id__th			= 22
+	, Id__thead			= 23
+	, Id__tbody			= 24
+	, Id__caption		= 25
+	, Id__pre			= 26
+	, Id__small			= 27
+	, Id__i				= 28
+	, Id__b				= 29
+	, Id__sup			= 30
+	, Id__sub			= 31
+	, Id__bdi			= 32
+	, Id__font			= 33
+	, Id__strong		= 34
+	, Id__s				= 35
+	, Id__abbr			= 36
+	, Id__cite			= 37
+	, Id__var			= 38
+	, Id__u				= 39
+	, Id__big			= 40
+	, Id__del			= 41
+	, Id__strike		= 42
+	, Id__tt			= 43
+	, Id__code			= 44
+	, Id__wbr			= 45
+	, Id__center		= 46	// not HTML5, but used by en.v:Vandalism_in_progress
+	, Id__dfn			= 47
+	, Id__kbd			= 48
+	, Id__samp			= 49
+	, Id__ins			= 50
+	, Id__em			= 51
+	, Id__blockquote	= 52
+	, Id__map			= 53
+	, Id__bdo			= 54
 	;
+//		private static final int Id__ary_max = 54;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
 	, Bry__ul			= Bry_.new_a7("ul")
@@ -85,7 +89,18 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Bry__script		= Bry_.new_a7("script")
 	, Bry__xowa_any		= Bry_.new_a7("xowa_any")
 	, Bry__xowa_comment	= Bry_.new_a7("xowa_comment")
+	, Bry__img			= Bry_.new_a7("img")
 	;
+
+//		private static final    Gfh_tag_meta[] Ary = new Gfh_tag_meta[Id__ary_max];
+//		private static final    Hash_adp_bry tags_by_bry = Hash_adp_bry.ci_a7();
+//		public static Gfh_tag_meta New_tag(int id, String key_str) {
+//			Gfh_tag_meta rv = new Gfh_tag_meta(id, key_str);
+//			Ary[id] = rv;
+//			tags_by_bry.Add_bry_int(rv.Key_bry(), id);
+//			return rv;
+//		}
+
 	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)
 	.Add_str_int("h1"			, Id__h1)
@@ -138,6 +153,9 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("samp"			, Id__samp)
 	.Add_str_int("ins"			, Id__ins)
 	.Add_str_int("em"			, Id__em)
+	.Add_str_int("blockquote"	, Id__blockquote)
+	.Add_str_int("map"			, Id__map)
+	.Add_str_int("bdo"			, Id__bdo)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -196,6 +214,9 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__samp:			return "samp";
 			case Id__ins:			return "ins";
 			case Id__em:			return "em";
+			case Id__blockquote:	return "blockquote";
+			case Id__map:			return "map";
+			case Id__bdo:			return "bdo";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

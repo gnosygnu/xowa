@@ -142,7 +142,7 @@ public class Php_srl_parser {
 			default: throw err_(raw, pos, "unexpected type: {0}", Char_.To_str(b));
 		}
 		return rv;
-	}	static final byte[] CONST_funct_bgn = Bry_.new_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:"), CONST_funct_end = Bry_.new_a7(";}");
+	}
 	int Parse_int_val(int bgn) {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);

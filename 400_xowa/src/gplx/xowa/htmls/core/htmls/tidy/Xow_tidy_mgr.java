@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.langs.htmls.*;
-public class Xow_tidy_mgr implements Gfo_evt_itm {
+public class Xow_tidy_mgr implements Gfo_evt_itm, Xow_tidy_mgr_interface {
 	private Xoae_app app; private Xoa_tidy_mgr tidy_mgr;
 	private boolean enabled = true; private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	public Xow_tidy_mgr() {this.evt_mgr = new Gfo_evt_mgr(this);}
@@ -38,12 +38,12 @@ public class Xow_tidy_mgr implements Gfo_evt_itm {
 		this.enabled = tidy_mgr.Enabled();
 		this.Wkr_(tidy_mgr.Wkr_tid());
 	}		
-	public void Run_tidy_html(Xoae_page page, Bry_bfr bfr, boolean indent) {
+	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {
 		if (!enabled) return;
 		if (bfr.Len_eq_0()) return;	// document is empty; do not exec b/c tidy will never generate files for 0 len files, and previous file will remain; DATE:2014-06-04
 		Tidy_wrap(bfr);
 		wkr.Indent_(indent);
-		wkr.Exec_tidy(page, bfr);
+		wkr.Exec_tidy(bfr, page_url);
 		Tidy_unwrap(bfr);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

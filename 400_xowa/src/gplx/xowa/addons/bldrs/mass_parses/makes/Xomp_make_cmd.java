@@ -21,8 +21,8 @@ public class Xomp_make_cmd extends Xob_cmd__base {
 	public Xomp_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
-		new Xomp_make_wkr(wiki).Exec();
-		new Xomp_make_lnki().Exec(wiki, 1000);			
+		new Xomp_make_html().Exec(wiki);
+		new Xomp_make_lnki().Exec(wiki, 10000);
 	}
 
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}  private static final String BLDR_CMD_KEY = "wiki.mass_parse.make";

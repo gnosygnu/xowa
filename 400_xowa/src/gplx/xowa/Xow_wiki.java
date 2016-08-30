@@ -45,6 +45,7 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xow_hdump_mgr				Html__hdump_mgr();
 	Xoh_page_wtr_mgr			Html__wtr_mgr();
 	Xoh_href_wtr				Html__href_wtr();
+	Xoh_lnki_bldr				Html__lnki_bldr();
 	boolean						Html__css_installing(); void Html__css_installing_(boolean v);
 	Xow_mw_parser_mgr			Mw_parser_mgr();
 	Xow_xwiki_mgr				Xwiki_mgr();

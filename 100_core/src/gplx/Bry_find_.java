@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Bry_find_ {
-	public static final int Not_found = -1;
+	public static final    int Not_found = -1;
 	public static int Find_fwd(byte[] src, byte lkp)								{return Find_fwd(src, lkp, 0, src.length);}
 	public static int Find_fwd(byte[] src, byte lkp, int cur)						{return Find_fwd(src, lkp, cur, src.length);}
 	public static int Find_fwd(byte[] src, byte lkp, int cur, int end) {

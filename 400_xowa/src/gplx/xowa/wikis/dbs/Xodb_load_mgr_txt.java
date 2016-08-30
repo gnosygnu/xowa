@@ -45,7 +45,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (!Env_.Mode_testing() && wiki.Init_needed()) wiki.Init_assert();	// NOTE: need to call assert as wiki_finder (and possibly elsewhere) may call load on commons_wiki without ever asserting; DATE:2013-03-19
 		if (!Load_xdat_itm(tmp_xdat_itm, ns, Xotdb_dir_info_.Tid_ttl, ttl, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, true)) return false;
 		Xotdb_page_itm_.Txt_ttl_load(rv, tmp_xdat_itm.Itm_bry());
-		rv.Exists_(true);
 		return Bry_.Eq(rv.Ttl_page_db(), ttl);
 	}
 	public void Load_by_ttls(Cancelable cancelable, Ordered_hash rv, boolean fill_idx_fields_only, int bgn, int end) {// NOTE: Load_by_ttls just a wrapper around Load_by_ttl; for xdat, Load_by_ttl is fast enough

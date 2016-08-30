@@ -107,6 +107,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.lnki_w = lnki_w; this.lnki_h = lnki_h; this.lnki_time = lnki_time; this.lnki_page = lnki_page;
 		this.orig_repo_id = orig_repo_id; this.orig_w = orig_w; this.orig_h = orig_h;
 		this.file_is_orig = file_is_orig;
+		this.file_w = lnki_w;	// must set file_w, else fsdb_make will always download origs; DATE:2016-08-25
 		this.html_w = lnki_w; this.html_h = lnki_h;	// set html_size as file_size (may try to optimize later by removing similar thumbs (EX: 220,221 -> 220))
 		this.Orig_ttl_(orig_ttl);
 		this.orig_ext = Xof_ext_.new_by_id_(orig_ext_id);	// NOTE: data in fsdb_make may override lnki_ext; EX: ttl=A.png; but ext=".jpg"
@@ -120,6 +121,21 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public void Init_at_cache(boolean file_exists_in_cache, int w, int h, Io_url view_url) {
 		this.file_exists_in_cache = file_exists_in_cache;
 		this.html_w = w; this.html_h = h; this.html_view_url = view_url;
+	}
+	public void Init_by_wm_parse(byte[] lnki_wiki_abrv, boolean repo_is_commons, boolean file_is_orig, byte[] file_ttl_bry, int file_w, double file_time, int file_page) {
+		// set lnki props that all fsdb_consumers expect
+		this.lnki_ttl = file_ttl_bry;
+		this.lnki_w = file_w;
+		this.lnki_h = -1;
+		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb;
+		this.lnki_wiki_abrv = lnki_wiki_abrv;
+
+		this.orig_repo_id = repo_is_commons ? Xof_repo_itm_.Repo_remote : Xof_repo_itm_.Repo_local;
+		this.file_is_orig = file_is_orig;
+		this.Orig_ttl_(file_ttl_bry);
+		this.file_w = file_w;
+		this.lnki_time = file_time;
+		this.lnki_page = file_page;
 	}
 	public void Change_repo(byte orig_repo_id, byte[] orig_repo_name) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
@@ -147,7 +163,9 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 			file_is_orig = Bool_.Y;
 		else {
 			img_size.Html_size_calc(exec_tid, lnki_w, lnki_h, lnki_type, lnki_upright_patch, lnki_upright, orig_ext.Id(), orig_w, orig_h, Xof_img_size.Thumb_width_img);
-			html_w = img_size.Html_w(); html_h = img_size.Html_h();
+			if (lnki_type != Xop_lnki_type.Tid_orig_known) {	// NOTE: hdump sets html_w / html_h; don't override; needed for packed-gallery; PAGE:en.w:Mexico; DATE:2016-08-10
+				html_w = img_size.Html_w(); html_h = img_size.Html_h();
+			}
 			file_w = img_size.File_w();
 			file_is_orig = img_size.File_is_orig();
 		}

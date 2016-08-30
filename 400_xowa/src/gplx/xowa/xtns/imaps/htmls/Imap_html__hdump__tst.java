@@ -31,12 +31,12 @@ public class Imap_html__hdump__tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:100px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "    <div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
 		, "        <area href=\"/wiki/C\" shape=\"rect\" coords=\"0,0,4,8\" alt=\"c1\" title=\"c1\"/>"
 		, "      </map>"
-		, "      <img data-xowa-title=\"A.png\" data-xoimg=\"1|100|200|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" class=\"thumbimage\" alt=\"\" usemap=\"#imagemap_1_1\"/>"
+		, "      <img data-xowa-title=\"A.png\" data-xoimg=\"1|100|200|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"\" usemap=\"#imagemap_1_1\"/>"
 		, "    </div>"
 		, "    <div class=\"thumbcaption\">"
 		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>a1"

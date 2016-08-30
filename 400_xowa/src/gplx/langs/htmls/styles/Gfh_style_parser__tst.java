@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.langs.htmls.styles; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import org.junit.*;
 public class Gfh_style_parser__tst {
-	private final Gfh_style_parser__fxt fxt = new Gfh_style_parser__fxt();
+	private final    Gfh_style_parser__fxt fxt = new Gfh_style_parser__fxt();
 	@Test   public void Basic() {
 		fxt.Test__parse("k_0:v_0"					, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse("k_0:v_0;"					, fxt.Make("k_0", "v_0"));
@@ -41,7 +41,7 @@ public class Gfh_style_parser__tst {
 	}
 }
 class Gfh_style_parser__fxt {
-	private final Gfh_style_wkr__ary wkr = Gfh_style_wkr__ary.Instance;
+	private final    Gfh_style_wkr__ary wkr = new Gfh_style_wkr__ary();
 	public Gfh_style_itm Make(String k, String v) {return new Gfh_style_itm(-1, Bry_.new_u8(k), Bry_.new_u8(v));}
 	public void Test__parse(String src_str, Gfh_style_itm... expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

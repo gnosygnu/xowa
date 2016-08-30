@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xoh_toc_mgr {
 	private final    Ordered_hash itms = Ordered_hash_.New_bry();
 	private final    Xoh_toc_wkr__lvl lvl_wkr = new Xoh_toc_wkr__lvl();
@@ -34,10 +34,10 @@ public class Xoh_toc_mgr {
 		htmlr.Clear();
 		toc_bgn = -1;
 	}
-	public void Init(byte[] toc_title, byte[] page_name) {
+	public void Init(Xow_tidy_mgr_interface tidy_mgr, byte[] toc_title, byte[] page_name) {
 		this.Clear();
 		htmlr.Init(toc_title);
-		txt_wkr.Init(page_name);
+		txt_wkr.Init(tidy_mgr, page_name);
 	}
 	public Xoh_toc_itm Add(int hdr_num, byte[] hdr_txt) {
 		Xoh_toc_itm itm = new Xoh_toc_itm();

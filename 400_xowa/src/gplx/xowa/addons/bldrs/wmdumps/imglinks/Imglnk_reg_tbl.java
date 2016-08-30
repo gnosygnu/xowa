@@ -32,9 +32,15 @@ public class Imglnk_reg_tbl implements Db_tbl {
 	}
 	public Db_conn Conn() {return conn;}
 	public String Tbl_name() {return tbl_name;}
+	public String Fld__img_src() {return fld__img_src;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx__src_ttl() {conn.Meta_idx_create(tbl_name, fld__img_src, fld__img_src, fld__img_repo);}
 	public void Create_idx__trg_ttl() {conn.Meta_idx_create(tbl_name, fld__img_trg, fld__img_trg, fld__img_repo);}
+	public Db_stmt Select_by_ttl_stmt() {
+		if (select_by_ttl_stmt == null)
+			select_by_ttl_stmt = conn.Stmt_select(tbl_name, flds, fld__img_src);
+		return select_by_ttl_stmt;
+	}	private Db_stmt select_by_ttl_stmt;
 	public void Insert(Db_conn conn, byte repo_id, Xowe_wiki wiki) {
 		String repo_id_str = Byte_.To_str(repo_id);
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(conn);
@@ -53,17 +59,20 @@ public class Imglnk_reg_tbl implements Db_tbl {
 		);
 		attach_mgr.Exec_sql_w_msg("imglnk_reg.insert.redirect: repo=" + repo_id_str, sql);
 
-		attach_mgr.Conn_links_(new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Tbl__page().Conn()));
+		Xob_db_file image_db = Xob_db_file.New__wiki_image(wiki.Fsys_mgr().Root_dir());
+		attach_mgr.Conn_links_(new Db_attach_itm("image_db", image_db.Conn()));
 		sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
 		( "INSERT INTO imglnk_reg (img_src, img_trg, img_repo, img_count)"
 		, "SELECT  ilt.img_name, ilt.img_name, " + repo_id_str + ", Count(ilt.img_name)"
 		, "FROM    imglnk_tmp ilt"
-		, "        JOIN <page_db>page p ON p.page_namespace = 6 AND p.page_title = ilt.img_name"
+		, "        JOIN <image_db>image i ON i.img_name = ilt.img_name"
 		, "        LEFT JOIN imglnk_reg il ON il.img_src = ilt.img_name"
 		, "WHERE   il.img_src IS NULL"
 		, "GROUP BY ilt.img_name"
 		);
 		attach_mgr.Exec_sql_w_msg("imglnk_reg.insert.direct: repo=" + repo_id_str, sql);
 	}
-	public void Rls() {}
+	public void Rls() {
+		select_by_ttl_stmt = Db_stmt_.Rls(select_by_ttl_stmt);
+	}
 }

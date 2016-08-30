@@ -53,7 +53,7 @@ public class Process_send_wtr {
 		bfr.Add_int_variable(prc.Id());
 		bfr.Add_byte(Byte_ascii.Brack_end);
 		return true;		
-	}	static final    byte[] Prc_bgn = Bry_.new_a7("chunks[");
+	}	private static final    byte[] Prc_bgn = Bry_.new_a7("chunks[");
 	private boolean Encode_ary(Bry_bfr bfr, Keyval[] ary) {
 		int len = ary.length;
 		bfr.Add_byte(Byte_ascii.Curly_bgn);

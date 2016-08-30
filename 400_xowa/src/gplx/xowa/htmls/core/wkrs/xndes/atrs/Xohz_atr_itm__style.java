@@ -20,10 +20,11 @@ import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
 class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 	private int flag_idx;
-	private Ordered_hash zatr_hash = Ordered_hash_.New_bry();
+	private final    Ordered_hash zatr_hash;
+	private final    Gfh_style_wkr__ary style_wkr = new Gfh_style_wkr__ary();
 	public Xohz_atr_itm__style(int uid, byte[] key, Ordered_hash zatr_hash) {this.uid = uid; this.key = key; this.zatr_hash = zatr_hash;}
-	public int Uid() {return uid;} private final int uid;
-	public byte[] Key() {return key;} private final byte[] key;
+	public int Uid() {return uid;} private final    int uid;
+	public byte[] Key() {return key;} private final    byte[] key;
 	public void Ini_flag(int flag_idx, List_adp flag_bldr_list) {
 		this.flag_idx = flag_idx;
 		flag_bldr_list.Add(1);
@@ -32,7 +33,7 @@ class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 		flag_bldr.Set_as_bool(flag_idx, hatr.Val_dat_exists());
 	}
 	public void Enc_data	(Xoh_hdoc_ctx hctx, byte[] src, Gfh_atr hatr, Xoh_hzip_bfr bfr) {
-		Gfh_style_itm[] itms = Gfh_style_wkr__ary.Instance.Parse(src, hatr.Val_bgn(), hatr.Val_end());
+		Gfh_style_itm[] itms = style_wkr.Parse(src, hatr.Val_bgn(), hatr.Val_end());
 		int len = itms.length;
 		bfr.Add_hzip_int(1, len);
 		for (int i = 0; i < len; ++i) {

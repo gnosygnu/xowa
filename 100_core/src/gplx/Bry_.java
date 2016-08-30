@@ -1054,4 +1054,7 @@ public class Bry_ {
 		for (int i = 0; i < len; ++i)
 			bry[i] = Byte_.Zero;
 	}
+	public static byte[] Replace_nl_w_tab(byte[] src, int bgn, int end) {
+		return Bry_.Replace(Bry_.Mid(src, bgn, end), Byte_ascii.Nl, Byte_ascii.Tab);
+	}
 }

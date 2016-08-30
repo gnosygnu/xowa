@@ -37,10 +37,10 @@ public class Xosrv_server implements Gfo_invk {
 		Gxw_html_server.Init_gui_for_server(app, wtr);
 		Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_http_server_main, rdr, Xosrv_socket_rdr.Invk_start);
 		app.Usr_dlg().Note_many("", "", "server started: listening on ~{0}. Press Ctrl+C to exit", rdr_port);
-		last_cmd = Env_.TickCount();
+		last_cmd = System_.Ticks();
 		Running_(true);
 		while (running) {
-			if (shutdown_interval != -1 && Env_.TickCount() - last_cmd > shutdown_interval) break;
+			if (shutdown_interval != -1 && System_.Ticks() - last_cmd > shutdown_interval) break;
 			Thread_adp_.Sleep(1000);
 		}
 		rdr.Rls();
@@ -51,7 +51,7 @@ public class Xosrv_server implements Gfo_invk {
 		try {
 			byte[] cmd_name = msg.Cmd_name();
 			byte[] rsp_name = Bry_.Empty;
-			long time_bgn = Env_.TickCount();
+			long time_bgn = System_.Ticks();
 			last_cmd = time_bgn;
 			byte[] msg_bry = msg.Msg_text();
 			String msg_str = String_.new_u8(msg_bry);
@@ -62,7 +62,7 @@ public class Xosrv_server implements Gfo_invk {
 			Xosrv_msg rsp_msg = Xosrv_msg.new_(rsp_name, msg.Msg_id(), msg.Recipient(), msg.Sender(), msg.Msg_date(), Bry_.new_u8(rsp_str));
 			app.Usr_dlg().Note_many("", "", "sending rsp: bytes=~{0}", String_.Len(rsp_str));
 			wtr.Write(rsp_msg);		
-			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", Time_span_.fracs_(Env_.TickCount() - time_bgn).XtoStrUiAbbrv());
+			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", Time_span_.fracs_(System_.Ticks() - time_bgn).XtoStrUiAbbrv());
 		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "server error: ~{0}", Err_.Message_gplx_full(e));}
 	}
 	private String Exec_cmd(String msg_text) {

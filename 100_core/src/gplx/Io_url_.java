@@ -27,9 +27,9 @@ public class Io_url_ {
 		if (usr_dir == null) {
 			switch (Op_sys.Cur().Tid()) {
 				case Op_sys.Tid_wnt: usr_dir = Io_url_.new_inf_("C:\\", IoUrlInfo_.Wnt); break;
-				case Op_sys.Tid_lnx: usr_dir = Io_url_.new_inf_(String_.Format("/home/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
-				case Op_sys.Tid_osx: usr_dir = Io_url_.new_inf_(String_.Format("/Users/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
-				case Op_sys.Tid_drd: usr_dir = Io_url_.new_inf_(String_.Format("/mnt/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
+				case Op_sys.Tid_lnx: usr_dir = Io_url_.new_inf_(String_.Format("/home/{0}/", System_.Prop__user_name()), IoUrlInfo_.Lnx); break;
+				case Op_sys.Tid_osx: usr_dir = Io_url_.new_inf_(String_.Format("/Users/{0}/", System_.Prop__user_name()), IoUrlInfo_.Lnx); break;
+				case Op_sys.Tid_drd: usr_dir = Io_url_.new_inf_(String_.Format("/mnt/{0}/", System_.Prop__user_name()), IoUrlInfo_.Lnx); break;
 				default: throw Err_.new_unhandled(Op_sys.Cur().Tid());
 			}
 		}
@@ -49,22 +49,31 @@ public class Io_url_ {
 	public static Io_url new_dir_(String raw) {return new_any_(raw);}	// NOTE: for now, same as new_fil; stack overflow when doing new_dir
 	public static Io_url new_any_(String raw) {return new_inf_(raw, IoUrlInfoRegy.Instance.Match(raw));}
 	public static Io_url new_inf_(String raw, IoUrlInfo info) {return String_.Eq(raw, "") ? Io_url_.Empty : new Io_url(raw, info);}
-	public static Io_url http_any_(String src, boolean wnt) {
-		return new_any_(parse_http_file(src, wnt));
+	public static Io_url New__http_or_fail(String raw) {return New__http_or_fail(Bry_.new_u8(raw));}
+	public static Io_url New__http_or_fail(byte[] raw) {
+		Io_url rv = New__http_or_null(raw);
+		if (rv == null) throw Err_.new_wo_type("url:invalid http_file raw", "raw", raw);
+		return rv;
 	}
-	private static String parse_http_file(String v, boolean wnt) {
-		byte[] v_bry = Bry_.new_u8(v);
-		int v_len = v_bry.length;
-		if (Bry_.Has_at_bgn(v_bry, Io_url.Http_file_bry, 0, v_len)) {
-			byte[] rv = new byte[v_len - Io_url.Http_file_len];
-			for (int i = 0; i < rv.length; i++) {
-				byte b = v_bry[i + Io_url.Http_file_len];
-				if (wnt && b == Byte_ascii.Slash) b = Byte_ascii.Backslash;
+	public static Io_url New__http_or_null(String raw) {return New__http_or_null(Bry_.new_u8(raw));}
+	public static Io_url New__http_or_null(byte[] raw) {
+		int len = raw.length;
+		if (!Bry_.Has_at_bgn(raw, Io_url.Http_file_bry, 0, len)) return null;	// doesn't start with "file:///"; return null;
+
+		// bld rv; note that wnt has to convert / to \
+		byte[] rv = null;
+		if (Op_sys.Cur().Tid_is_wnt()) {
+			int rv_len = len - Io_url.Http_file_len;
+			rv = new byte[rv_len];
+			for (int i = 0; i < rv_len; ++i) {
+				byte b = raw[i + Io_url.Http_file_len];
+				if (b == Op_sys.Dir_spr__lnx) b = Op_sys.Dir_spr__wnt;
 				rv[i] = b;
 			}
-			return String_.new_u8(rv);
 		}
-		return v;
+		else
+			rv = Bry_.Mid(raw, Io_url.Http_file_len);
+		return rv == null ? null : new_any_(String_.new_u8(rv));
 	}
 
 	public static Io_url store_orFail_(SrlMgr mgr, String key, Io_url v) {

@@ -54,7 +54,7 @@ class Dumpdiff_mgr {
 				if (diff != null) {
 					log_tbl.Insert_by_batch(page_id, diff[0], diff[1]);
 					++diff_count;
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "hdump diff: pages=~{0} diffs=~{1} page_id=~{2} cur=~{3} prv=~{4}", page_count, diff_count, page_id, diff[0], diff[1]);
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "hdump diff: pages=~{0} diffs=~{1} page_id=~{2} lhs=~{3} rhs=~{4}", page_count, diff_count, page_id, diff[0], diff[1]);
 				}
 			}
 			list.Clear();

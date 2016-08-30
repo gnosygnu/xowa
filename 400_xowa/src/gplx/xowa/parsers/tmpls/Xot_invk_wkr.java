@@ -26,16 +26,19 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	public int Make_tkn(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int lxr_cur_pos, int lxr_end_pos, Xop_curly_bgn_tkn bgn_tkn, int keep_curly_bgn) {
 		Xot_invk_tkn invk = tkn_mkr.Tmpl_invk(bgn_tkn.Src_bgn(), lxr_end_pos);
 		int loop_bgn = bgn_tkn.Tkn_sub_idx() + 1, loop_end = root.Subs_len();
-		if (loop_bgn == loop_end) {			// empty template; EX: "{{}}"
-			root.Subs_del_after(bgn_tkn.Tkn_sub_idx()); // del invk_bgn_tkn
-			root.Subs_add(tkn_mkr.Txt(bgn_tkn.Src_bgn(), lxr_end_pos));
-			ctx.Msg_log().Add_itm_none(Xop_tmpl_log.Tmpl_is_empty, src, bgn_tkn.Src_bgn(), lxr_end_pos);
+
+		// handle empty template; EX: "{{}}"
+		if (loop_bgn == loop_end) {
+			root.Subs_del_after(bgn_tkn.Tkn_sub_idx());						// del invk_bgn_tkn
+			root.Subs_add(tkn_mkr.Txt(bgn_tkn.Src_bgn(), lxr_end_pos));		// add txt tkn
 			return lxr_cur_pos;
 		}
+
+		// make arguments
 		boolean made = arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_tmpl, root, invk, lxr_cur_pos, lxr_end_pos, loop_bgn, loop_end, src);
 		Arg_itm_tkn key_tkn = invk.Name_tkn().Key_tkn();
-		if (!made
-			|| (key_tkn.Dat_bgn() == key_tkn.Dat_end() && key_tkn.Dat_bgn() != -1)) {	// key_tkn is entirely whitespace; EX: {{\n}}
+		if (	!made	// invalid args;
+			||	(key_tkn.Dat_bgn() == key_tkn.Dat_end() && key_tkn.Dat_bgn() != -1)) {	// key_tkn is entirely whitespace; EX: {{\n}}
 			invk.Tkn_tid_to_txt();
 			ctx.Subs_add(root, tkn_mkr.Txt(lxr_cur_pos, lxr_end_pos));
 			return lxr_cur_pos;
@@ -60,7 +63,6 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 
 		if (key_tkn.Itm_static() != Bool_.Y_byte) return;	// dynamic tkn; can't identify func/name
 		int colon_pos = -1, txt_bgn = key_tkn.Dat_bgn(), txt_end = key_tkn.Dat_end();
-
 
 		Xol_func_itm finder = new Xol_func_itm();	// TS.MEM: DATE:2016-07-12
 		ctx.Wiki().Lang().Func_regy().Find_defn(finder, src, txt_bgn, txt_end);

@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
 import gplx.dbs.*;
 class Xob_lnki_temp_row implements CompareAble {
-	public int Xomp_uid() {return xomp_uid;} private int xomp_uid;
 	public int Lnki_id() {return lnki_id;} private int lnki_id;
 	public int Lnki_tier_id() {return lnki_tier_id;} private int lnki_tier_id;
 	public int Lnki_page_id() {return lnki_page_id;} private int lnki_page_id;
@@ -32,9 +31,8 @@ class Xob_lnki_temp_row implements CompareAble {
 	public double Lnki_upright() {return lnki_upright;} private double lnki_upright;
 	public double Lnki_time() {return lnki_time;} private double lnki_time;
 	public int Lnki_page() {return lnki_page;} private int lnki_page;
-	public void Load(Db_rdr rdr, int xomp_uid) {
-		this.xomp_uid = xomp_uid;
-		this.lnki_id = rdr.Read_int("lnki_id");
+	public void Load(Db_rdr rdr, int lnki_id) {
+		this.lnki_id = lnki_id;
 		this.lnki_tier_id = rdr.Read_int("lnki_tier_id");
 		this.lnki_page_id = rdr.Read_int("lnki_page_id");
 		this.lnki_ttl = rdr.Read_bry_by_str("lnki_ttl");
@@ -50,8 +48,6 @@ class Xob_lnki_temp_row implements CompareAble {
 	}
 	public int compareTo(Object obj) {
 		Xob_lnki_temp_row comp = (Xob_lnki_temp_row)obj;
-		int rv = Int_.Compare(xomp_uid, comp.xomp_uid);
-		if (rv != CompareAble_.Same) return rv;
 		return Int_.Compare(lnki_id, comp.lnki_id);
 	}
 }

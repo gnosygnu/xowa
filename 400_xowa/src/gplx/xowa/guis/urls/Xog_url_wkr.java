@@ -62,7 +62,7 @@ public class Xog_url_wkr {
 	}
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
-		Io_url href_url = Io_url_.http_any_(String_.new_u8(Gfo_url_encoder_.Http_url.Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
+		Io_url href_url = Io_url_.New__http_or_fail(String_.new_u8(Gfo_url_encoder_.Http_url.Decode(href_bry)));
 		Gfui_html html_box = win.Active_html_box();
 		byte[] href_bry_encoded = fsys_lnx_encoder.Encode(href_bry);	// encode to href_bry; note must encode to same href_bry as Xof_url_bldr, which uses Gfo_url_encoder_.Fsys_lnx; PAGE:en.w:File:Volc�n_Chimborazo,_"El_Taita_Chimborazo".jpg DATE:2015-12-06
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()

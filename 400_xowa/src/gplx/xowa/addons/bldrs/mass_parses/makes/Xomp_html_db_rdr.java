@@ -20,17 +20,17 @@ import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_html_db_rdr {
 	private final    Xowd_html_tbl[] src_tbls;
-	private final    Xomp_db_core db;
+	private final    Xomp_mgr_db mgr_db;
 	public Xomp_html_db_rdr(Xowe_wiki wiki) {
-		this.db = Xomp_db_core.New__load(wiki);
-		this.src_tbls = new Xowd_html_tbl[db.Wkr_count()];
+		this.mgr_db = Xomp_mgr_db.New__load(wiki);
+		this.src_tbls = new Xowd_html_tbl[mgr_db.Wkr_tbl().Select_count()];
 	}
-	public void Rows__get(Xowd_html_row rv, int wkr_id, int page_id) {
-		Xowd_html_tbl src_tbl = src_tbls[wkr_id];
+	public void Rows__get(Xowd_html_row rv, int wkr_uid, int page_id) {
+		Xowd_html_tbl src_tbl = src_tbls[wkr_uid];
 		if (src_tbl == null) {
-			Db_conn wkr_conn = db.Wkr_db(Bool_.N, wkr_id).Conn();
+			Db_conn wkr_conn = Xomp_wkr_db.New(mgr_db.Dir(), wkr_uid).Conn();
 			src_tbl = new Xowd_html_tbl(wkr_conn);
-			src_tbls[wkr_id] = src_tbl;
+			src_tbls[wkr_uid] = src_tbl;
 		}
 		src_tbl.Select_as_row(rv, page_id);
 	}

@@ -39,6 +39,7 @@ public class Db_conn {
 	public void					Env_vacuum()																	{Exec_sql_plog_ntx("vacuuming: url=" + this.Conn_info().Db_api(), "VACUUM;");}
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_create(meta); engine.Meta_idx_create(Gfo_usr_dlg_.Noop, meta.Idxs().To_ary());}
 	public void					Meta_tbl_delete(String tbl)														{engine.Meta_tbl_delete(tbl);}
+	public void					Meta_tbl_remake_many(Db_tbl... tbls)										{for (Db_tbl tbl : tbls) Meta_tbl_remake(tbl);}
 	public void					Meta_tbl_remake(Db_tbl tbl)														{engine.Meta_tbl_delete(tbl.Tbl_name()); tbl.Create_tbl();}
 	public void					Meta_tbl_remake(Dbmeta_tbl_itm meta)											{engine.Meta_tbl_delete(meta.Name()); engine.Meta_tbl_create(meta);}
 	public void					Meta_idx_assert(String tbl, String suffix, String... flds)				{if (engine.Meta_idx_exists(tbl + "__" + suffix)) return; this.Meta_idx_create(tbl, suffix, flds);}
@@ -109,6 +110,14 @@ public class Db_conn {
 		if (txn) this.Txn_end();
 		Gfo_usr_dlg_.Instance.Plog_many("", "", "done:" + msg);
 		return rv;
+	}
+	public int					Exec_select_max_as_int	(String tbl_name, String fld_name, int or) {
+		Object rv = Exec_select_as_obj(String_.Format("SELECT Max({0}) FROM {1}", fld_name, tbl_name));
+		return rv == null ? or : Int_.cast(rv);
+	}
+	public int					Exec_select_count_as_int(String tbl_name, int or) {
+		Object rv = Exec_select_as_obj(String_.Format("SELECT Count(*) FROM {0}", tbl_name));
+		return rv == null ? or : Int_.cast(rv);
 	}
 	public int					Exec_select_as_int		(String sql, int    or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Int_.cast(rv);}
 	public double				Exec_select_as_double	(String sql, double or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Double_.cast(rv);}

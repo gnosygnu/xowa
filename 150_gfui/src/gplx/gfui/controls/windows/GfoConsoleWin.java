@@ -216,7 +216,7 @@ class GfuiTextBoxLogger implements Gfo_invk {
 		if (!owner.Enabled()) return;
 		if (!win.Visible()) win.Visible_set(true);
 		textToShow += tbox.Text() + String_.as_(s)+ String_.CrLf;
-		long curTick = Env_.TickCount();
+		long curTick = System_.Ticks();
 //			if (curTick - lastTick > 500) {
 			WriteText(textToShow);
 			textToShow = "";

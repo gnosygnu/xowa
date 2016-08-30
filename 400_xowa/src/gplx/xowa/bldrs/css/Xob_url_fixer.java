@@ -38,6 +38,7 @@ class Xob_url_fixer {
 		}
 		int pos = bgn, end = src_len; boolean no_slashes = true;
 		Btrie_slim_mgr mid_trie = Xob_url_fixer_tkn.Mid_trie();
+		int[] seg_ary = new int[gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs.Ttl_max];
 		while (pos < src_len) {
 			byte b = src[pos];
 			o = mid_trie.Match_bgn_w_byte(b, src, pos, src_len);
@@ -51,7 +52,7 @@ class Xob_url_fixer {
 						Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(src_len);
 						byte[] to_rel_root = Bry_.Mid(src, bgn, pos);
 						byte[] to_rel_qry  = Bry_.Mid(src, pos, src_len);
-						src = gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs.Rel2abs(tmp_bfr, to_rel_qry, to_rel_root, Int_obj_ref.New_neg1());
+						src = gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs.Rel2abs(tmp_bfr, seg_ary, to_rel_qry, to_rel_root, Int_obj_ref.New_neg1());
 						bgn = pos = 0;
 						end = src_len = src.length;
 						no_slashes = true;

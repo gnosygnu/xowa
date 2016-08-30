@@ -264,7 +264,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Bry_bfr bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 		Xop_ctx fnc_ctx = Xop_ctx.New__sub__reuse_page(core.Ctx());
 		fnc_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
-		Xot_invk_tkn.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
+		Xot_invk_tkn_.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
 		bfr.Mkr_rls();
 		return rslt.Init_obj(bfr.To_str_and_clear());
 	}

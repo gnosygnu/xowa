@@ -67,7 +67,7 @@ class Srch_html_page_bldr_fxt {
 	}
 	public void Test_rows(Srch_rslt_row[] rows, String expd) {
 		Srch_rslt_list rslts = new Srch_rslt_list();
-		Srch_html_row_bldr row_bldr = new Srch_html_row_bldr(wiki.App().Html__lnki_bldr());
+		Srch_html_row_bldr row_bldr = new Srch_html_row_bldr(wiki.Html__lnki_bldr());
 		row_bldr.Init(rslts, 0, rows.length);
 		for (int i = 0; i < rows.length; ++i)
 			rslts.Add(rows[i]);

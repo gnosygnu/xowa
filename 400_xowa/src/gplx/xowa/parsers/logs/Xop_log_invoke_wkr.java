@@ -37,7 +37,7 @@ public class Xop_log_invoke_wkr implements Gfo_invk {
 	public boolean Eval_bgn(Xoae_page page, byte[] mod_name, byte[] fnc_name) {return !exclude_mod_names.Has(mod_name);}
 	public void Eval_end(Xoae_page page, byte[] mod_name, byte[] fnc_name, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {
-			int eval_time = (int)(Env_.TickCount() - invoke_time_bgn);
+			int eval_time = (int)(System_.Ticks() - invoke_time_bgn);
 			Xop_log_invoke_tbl.Insert(stmt, page.Ttl().Rest_txt(), mod_name, fnc_name, eval_time);
 			log_mgr.Commit_chk();
 		}

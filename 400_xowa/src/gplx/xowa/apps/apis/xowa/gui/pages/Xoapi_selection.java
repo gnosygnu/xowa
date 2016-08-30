@@ -31,7 +31,7 @@ public class Xoapi_selection implements Gfo_invk {
 		Xog_html_itm html_itm = win.Tab_mgr().Active_tab().Html_itm();
 		String src = html_itm.Html_selected_get_src_or_empty();
 		if (String_.Len_eq_0(src)) {app.Usr_dlg().Prog_many("", "", "no file selected: tab=~{0}", html_itm.Owner_tab().Page().Url().To_str()); return;}
-		Io_url src_url = Io_url_.http_any_(src, Op_sys.Cur().Tid_is_wnt());
+		Io_url src_url = Io_url_.New__http_or_fail(src);
 		String trg_name = src_url.NameAndExt();
 		if (String_.Has(src, "/thumb/")) trg_name = src_url.OwnerDir().NameOnly();
 		String trg = app.Gui_mgr().Kit().New_dlg_file(Gfui_kit_.File_dlg_type_save, "Select file to save to:").Init_file_(trg_name).Ask();

@@ -20,7 +20,7 @@ import gplx.core.brys.fmtrs.*;
 public class Imap_html_fmtrs {
 	public static final    Bry_fmtr
 	  All = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<div id='imap_div_~{imap_id}' class=\"noresize\"~{desc_style}>~{map}~{img}"
+	( "<div id=\"imap_div_~{imap_id}\" class=\"noresize\"~{desc_style}>~{map}~{img}"
 	, "    </div>"
 	), "imap_id", "desc_style", "map", "img"
 	)

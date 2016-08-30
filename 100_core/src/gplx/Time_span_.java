@@ -33,7 +33,7 @@ public class Time_span_ {
 		long fracs = Merge_long(units, Time_span_.Divisors);
 		return Time_span_.fracs_(fracs);
 	}
-	public static Time_span from_(long bgn) {return Time_span_.fracs_(Env_.TickCount() - bgn);}
+	public static Time_span from_(long bgn) {return Time_span_.fracs_(System_.Ticks() - bgn);}
 	public static final long parse_null = Long_.Min_value;
 	public static Time_span parse(String raw) {
 		byte[] bry = Bry_.new_u8(raw);

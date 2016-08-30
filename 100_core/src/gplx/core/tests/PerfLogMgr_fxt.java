@@ -60,7 +60,7 @@ public class PerfLogMgr_fxt {
 
 }
 class PerfLogTmr {
-	public void Bgn() {bgn = Env_.TickCount();} long bgn;
-	public long ElapsedMilliseconds() {return Env_.TickCount() - bgn;	}		
+	public void Bgn() {bgn = System_.Ticks();} long bgn;
+	public long ElapsedMilliseconds() {return System_.Ticks() - bgn;	}		
 	public static PerfLogTmr new_() {return new PerfLogTmr();} PerfLogTmr() {}
 }

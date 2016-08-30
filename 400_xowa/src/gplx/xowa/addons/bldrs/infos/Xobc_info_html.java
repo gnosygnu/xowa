@@ -48,7 +48,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 			String src_fil = host_eval.Eval_src_fil(data_db, host_id, wiki_domain, step_itm.Import_name);
 			Io_size_.To_bfr_new(tmp_size_bfr, step_itm.Import_size_zip, 2);
 			total_size += step_itm.Import_size_raw;
-			Xobc_info_url step_url = new Xobc_info_url(src_fil, tmp_size_bfr.To_bry_and_clear());
+			Xobc_info_url step_url = new Xobc_info_url(src_fil, tmp_size_bfr.To_bry_and_clear(), step_itm.Import_md5);
 			step_urls[i] = step_url;
 		}
 
@@ -66,7 +66,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 			String src_dir = host_eval.Eval_src_dir(data_db, host_id, wiki_domain);
 			String[] ary = String_.Split(key, "|");
 			ary[0] = String_.new_u8(wiki_domain.Abrv_wm());
-			torrent_fil = String_.Format("{0}/Xowa_{1}_{2}_{3}.torrent", src_dir, ary[0], ary[1], ary[2]);	// EX: http://archive.org/download/Xowa_enwiki_latest/Xowa_enwiktionary_2016-06_core.zip
+			torrent_fil = String_.Format("{0}Xowa_{1}_latest_archive.torrent", src_dir, wiki_domain.Abrv_wm(), ary[1]); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 		}
 		
 		return new Xobc_info_doc

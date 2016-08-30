@@ -191,10 +191,7 @@ public class Xowd_page_tbl implements Rls_able {
 			while (rdr.Move_next()) {
 				if (cancelable.Canceled()) return;
 				Xowd_page_itm page = new Xowd_page_itm();
-				page.Id_			(rdr.Read_int(fld_id));
-				page.Ns_id_			(rdr.Read_int(fld_ns));
-				page.Ttl_page_db_	(rdr.Read_bry_by_str(fld_title));
-				page.Text_len_		(rdr.Read_int(fld_len));
+				this.Read_page__idx(page, rdr);
 				rv.Add(page);
 			}
 		}	finally {rdr.Rls();}
@@ -279,19 +276,19 @@ public class Xowd_page_tbl implements Rls_able {
 		rslt_count.Val_(rslt_idx);
 	}
 	public void Read_page__idx(Xowd_page_itm page, Db_rdr rdr) {
-		page.Id_			(rdr.Read_int(fld_id));
-		page.Ns_id_			(rdr.Read_int(fld_ns));
-		page.Ttl_page_db_	(rdr.Read_bry_by_str(fld_title));
-		page.Text_len_		(rdr.Read_int(fld_len));
+		page.Init_by_load__idx
+		( rdr.Read_int(fld_id)
+		, rdr.Read_int(fld_ns)
+		, rdr.Read_bry_by_str(fld_title)
+		, rdr.Read_int(fld_len)
+		);
 	}
 	public void Read_page__all(Xowd_page_itm page, Db_rdr rdr) {
-		int html_db_id = rdr.Read_int(fld_html_db_id);
-		int redirected_id = rdr.Read_int(fld_redirect_id);
+		// handle page_score defaulting to page_len
 		int page_len = rdr.Read_int(fld_len);
-		int page_score = page_len;
-		if (fld_score != Dbmeta_fld_itm.Key_null)
-			page_score = rdr.Read_int(fld_score);
-		page.Init_by_sql
+		int page_score = fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
+
+		page.Init_by_load__all
 		( rdr.Read_int(fld_id)
 		, rdr.Read_int(fld_ns)
 		, rdr.Read_bry_by_str(fld_title)
@@ -300,8 +297,8 @@ public class Xowd_page_tbl implements Rls_able {
 		, page_len
 		, rdr.Read_int(fld_random_int)
 		, rdr.Read_int(fld_text_db_id)
-		, html_db_id
-		, redirected_id
+		, rdr.Read_int(fld_html_db_id)
+		, rdr.Read_int(fld_redirect_id)
 		, page_score
 		);
 	}

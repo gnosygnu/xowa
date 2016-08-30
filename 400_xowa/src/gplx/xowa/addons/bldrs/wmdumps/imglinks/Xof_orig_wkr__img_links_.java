@@ -20,16 +20,46 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 public class Xof_orig_wkr__img_links_ {
-	public static Xof_orig_wkr__img_links Load_all(Xowe_wiki wiki) {
-		Xof_orig_wkr__img_links rv = new Xof_orig_wkr__img_links();
-
+	public static void Load_all(Xof_orig_wkr__img_links wkr) {
+		Xowe_wiki wiki = wkr.Wiki();
 		Db_conn conn = Xob_db_file.New__img_link(wiki).Conn();
-		Load_by_wiki(rv, conn, Xof_repo_itm_.Repo_local , wiki);
-		Load_by_wiki(rv, conn, Xof_repo_itm_.Repo_remote, wiki.Appe().Wiki_mgr().Wiki_commons());
-		
-		return rv;
+		Load_all_by_wiki(wkr, conn, Xof_repo_itm_.Repo_local , wiki);
+		Load_all_by_wiki(wkr, conn, Xof_repo_itm_.Repo_remote, wiki.Appe().Wiki_mgr().Wiki_commons());
 	}
-	private static void Load_by_wiki(Xof_orig_wkr__img_links rv, Db_conn conn, byte repo_id, Xowe_wiki wiki) {
+	public static Xof_orig_itm Load_itm(Xof_orig_wkr__img_links wkr, Db_conn conn, Xowe_wiki wiki, byte[] ttl) {
+		Imglnk_reg_tbl imglnk_reg_tbl = wkr.Tbl__imglnk_reg();
+		Db_rdr rdr = imglnk_reg_tbl.Select_by_ttl_stmt().Clear().Crt_bry_as_str("img_src", ttl).Exec_select__rls_manual();
+		byte img_repo = Byte_.Max_value_127;
+		byte[] img_trg = null;
+		try {
+			if (rdr.Move_next()) {
+				img_repo = rdr.Read_byte("img_repo");
+				img_trg = rdr.Read_bry_by_str("img_trg");
+			}
+			else	// ttl missing; EX:</*_File:Chehov_v_serpuhove11.JPG; DATE:2016-08-10
+				return Xof_orig_itm.Null;
+		} finally {rdr.Rls();}
+		Xowe_wiki image_wiki = img_repo == Xof_repo_itm_.Repo_local ? wiki : wiki.Appe().Wiki_mgr().Wiki_commons();
+		return Load_itm_by_wiki(wkr, conn, image_wiki, img_repo, ttl, img_trg);
+	}
+	private static Xof_orig_itm Load_itm_by_wiki(Xof_orig_wkr__img_links wkr, Db_conn conn, Xowe_wiki wiki, byte repo_id, byte[] img_src, byte[] img_trg) {
+		Db_stmt stmt = wkr.Stmt__image__select(repo_id, wiki);
+		Db_rdr rdr = stmt.Clear().Crt_bry_as_str("img_name", img_trg).Exec_select__rls_manual();
+		try {
+			return rdr.Move_next()
+				? new Xof_orig_itm
+				( repo_id
+				, img_trg
+				, rdr.Read_int("img_ext_id")
+				, rdr.Read_int("img_width")
+				, rdr.Read_int("img_height")
+				, img_src
+				)
+				: Xof_orig_itm.Null;
+		} finally {rdr.Rls();}
+	}
+
+	private static void Load_all_by_wiki(Xof_orig_wkr__img_links rv, Db_conn conn, byte repo_id, Xowe_wiki wiki) {
 		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
 		( "SELECT  ilr.img_repo, ilr.img_src, i.img_media_type, i.img_minor_mime, i.img_size, i.img_width, i.img_height, i.img_bits, i.img_ext_id, i.img_timestamp, ilr.img_trg AS img_redirect"
 		, "FROM    imglnk_reg ilr"

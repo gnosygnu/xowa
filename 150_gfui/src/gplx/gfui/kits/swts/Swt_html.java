@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.core.envs.Env_;
+import gplx.core.envs.System_;
 import gplx.core.primitives.*;
 import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.elems.GfuiElem;
@@ -132,7 +132,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	public void Html_dispose() {
 		browser.dispose();
 		delete_owner.SubElems().DelOrFail(delete_cur);	// NOTE: must delete cur from owner, else new tab will fail after closing one; DATE:2014-07-09
-		Env_.GarbageCollect();
+		System_.Garbage_collect();
 	}
 	private GfuiElem delete_owner, delete_cur;
 	public void Delete_elems_(GfuiElem delete_owner, GfuiElem delete_cur) {this.delete_owner = delete_owner; this.delete_cur = delete_cur;}	// HACK: set owner / cur so delete can work;

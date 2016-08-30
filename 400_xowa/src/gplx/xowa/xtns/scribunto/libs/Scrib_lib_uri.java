@@ -48,10 +48,10 @@ public class Scrib_lib_uri implements Scrib_lib {
 	public boolean AnchorEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] raw_bry = args.Pull_bry(0);
 		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
-		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
-		Pfunc_anchorencode.Func_init(core.Ctx());
-		Pfunc_anchorencode.Anchor_encode(raw_bry, bfr, tmp_bfr);
-		tmp_bfr.Clear_and_rls();
+//			Pfunc_anchorencode.Func_init(core.Ctx());
+		Pfunc_anchorencode.Anchor_encode(bfr, core.Ctx(), raw_bry);
+//			Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
+//			tmp_bfr.Clear_and_rls();
 		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
 	public boolean Url_func(Scrib_proc_args args, Scrib_proc_rslt rslt, byte url_tid) {

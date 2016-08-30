@@ -30,4 +30,9 @@ public class Xomp_wkr_db {
 	public Io_url Url() {return url;}  private Io_url url;
 	public Db_conn Conn() {return conn;} private Db_conn conn;
 	public Xowd_html_tbl Html_tbl() {return html_tbl;} private final    Xowd_html_tbl html_tbl;
+
+	public static Xomp_wkr_db New(Io_url root_dir, int uid) {
+		Io_url url = root_dir.GenSubFil_nest("xomp_" + Int_.To_str_fmt(uid, "000"), "xomp_wkr.sqlite3");
+		return new Xomp_wkr_db(uid, url);
+	}
 }

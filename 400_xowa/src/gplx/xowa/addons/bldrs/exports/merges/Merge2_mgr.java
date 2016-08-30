@@ -43,7 +43,7 @@ public class Merge2_mgr {
 		// fails b/c no Main_Page; Gfo_invk_.Invk_by_msg(wiki.App().Gui__tab_mgr(), gplx.xowa.guis.tabs.Xog_tab_mgr_.Invk__new_tab, GfoMsg_.new_cast_("").Add("focus", true).Add("site", wiki.Domain_str()).Add("page", String_.new_u8(wiki.Props().Main_page())));
 	}
 	public void Merge_data(Xow_wiki wiki, Io_url src_url, int idx_cur) {
-		long all_time_bgn = gplx.core.envs.Env_.TickCount();
+		long all_time_bgn = gplx.core.envs.System_.Ticks();
 		wiki.Init_by_wiki();
 		Db_conn src_conn = Db_conn_bldr.Instance.Get_or_autocreate(false, src_url);
 		ctx.Init(wiki, src_conn);
@@ -54,12 +54,12 @@ public class Merge2_mgr {
 			if (prog_wkr.Canceled()) break;
 			Merge2_wkr wkr = (Merge2_wkr)wkr_hash.Get_at(i);
 			// if (prog_wkr.Checkpoint__skip_wkr(src_url, wkr.Tbl_name())) continue;
-			long wkr_time_bgn = gplx.core.envs.Env_.TickCount();
+			long wkr_time_bgn = gplx.core.envs.System_.Ticks();
 			wkr.Merge_data(ctx, prog_wkr);
-			Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|" + wkr.Tbl().Tbl_name() + "|" + gplx.core.envs.Env_.TickCount_elapsed_in_frac(wkr_time_bgn));
+			Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|" + wkr.Tbl().Tbl_name() + "|" + gplx.core.envs.System_.Ticks__elapsed_in_frac(wkr_time_bgn));
 		}
 		if (ctx.Heap__copy_to_wiki()) ctx.Heap__increment_nxt();
-		Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|-1|" + gplx.core.envs.Env_.TickCount_elapsed_in_frac(all_time_bgn));
+		Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|-1|" + gplx.core.envs.System_.Ticks__elapsed_in_frac(all_time_bgn));
 		src_conn.Rls_conn();	// NOTE: must close conn else pack_conn will stay open
 	}
 	private static Ordered_hash Make_wkrs(Merge2_wkr... wkrs) {

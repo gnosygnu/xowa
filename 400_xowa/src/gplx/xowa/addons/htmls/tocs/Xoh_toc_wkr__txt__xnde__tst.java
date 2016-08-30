@@ -40,4 +40,9 @@ public class Xoh_toc_wkr__txt__xnde__tst {
 	@Test   public void Table()			{fxt.Test__text("a<table><tr><td>b</td></tr></table>c"	, "abc");}
 	@Test   public void Unknown__i()	{fxt.Test__both("a<unknown>b<i>c</i>d</unknown>e"		, "abcde", "a<unknown>b<i>c</i>d</unknown>e");}	// NOTE: technically, anch should be href_encoded a<unknown>b<i>c</i>d</unknown>e b/c <unknown> is not a valid tag; compare with known tags like <li> / <table> which are just stripped
 	@Test   public void Unknown__a()	{fxt.Test__both("a<unknown>b<a>c</a>d</unknown>e"		, "abcde", "a<unknown>bcd</unknown>e");}
+	@Test   public void Fail() {
+		String html = "<i><a href='b'>c</i></a>";
+		fxt.Init__tidy(html, "<i><a href='b'>c</a></i>");
+		fxt.Test__both(html, "c", "<i>c</i>");
+	}
 }

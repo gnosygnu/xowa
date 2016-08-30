@@ -91,6 +91,13 @@ public class Xow_db_mgr {
 		}
 		return null;
 	}
+	public Xow_db_file				Dbs__assert_by_tid(byte tid) {
+		Xow_db_file rv = Dbs__get_by_tid_or_null(tid);
+		if (rv == null) {
+			rv = Dbs__make_by_tid(tid);
+		}
+		return rv;
+	}
 	public Ordered_hash				Dbs__get_hash_by_tid(int tid) {return hash_by_tids.Get_by_tid_or_null((byte)tid);}
 	public Xow_db_file				Dbs__make_by_tid(byte tid) {
 		int tid_idx = Get_tid_idx(hash_by_tids, tid);
@@ -132,10 +139,10 @@ public class Xow_db_mgr {
 			case Xow_db_file_.Tid__text_solo:
 			case Xow_db_file_.Tid__core					: {db__core = db; if (props.Layout_text().Tid_is_all_or_few()) db__cat_core = db__text = db; break;}
 			case Xow_db_file_.Tid__text					: {db__text = db; break;}
-			case Xow_db_file_.Tid__html_data				: {db__html = db; break;}
-			case Xow_db_file_.Tid__wbase					: {if (db__wbase == null)		db__wbase = db; break;}
+			case Xow_db_file_.Tid__html_data			: {db__html = db; break;}
+			case Xow_db_file_.Tid__wbase				: {if (db__wbase == null)		db__wbase = db; break;}
 			case Xow_db_file_.Tid__cat_core				:
-			case Xow_db_file_.Tid__cat						: {if (db__cat_core == null)	db__cat_core = db; break;}
+			case Xow_db_file_.Tid__cat					: {if (db__cat_core == null)	db__cat_core = db; break;}
 		}
 	}
 	private void Dbs__add(Xow_db_file db_file) {

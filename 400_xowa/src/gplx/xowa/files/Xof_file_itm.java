@@ -27,6 +27,7 @@ public interface Xof_file_itm {
 	int					Lnki_h();
 	double				Lnki_time();
 	int					Lnki_page();
+	boolean				Orig_exists();
 	byte				Orig_repo_id();
 	byte[]				Orig_repo_name();
 	byte[]				Orig_ttl();

@@ -35,7 +35,7 @@ public class Xoi_mirror_parser {
 			rv.Add(String_.new_u8(date));
 		}
 		return rv.To_str_ary();
-	}	static final    byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
+	}	private static final    byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
 	public static String Find_last_lte(String[] ary, String comp) {	// assuming sorted ary, find last entry that is lte comp
 		int len = ary.length;
 		for (int i = len - 1; i > -1; i--) {

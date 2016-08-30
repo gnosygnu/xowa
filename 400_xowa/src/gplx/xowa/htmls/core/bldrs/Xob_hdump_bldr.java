@@ -23,7 +23,7 @@ import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.parsers.*;
 public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
-	private Xowe_wiki wiki; private Xow_hdump_mgr hdump_mgr; private Xob_hdump_tbl_retriever html_tbl_retriever;
+	private Xowe_wiki wiki; private Xob_hdump_tbl_retriever html_tbl_retriever;
 	private Xoh_stat_tbl stat_tbl; private Xoh_stat_itm stat_itm;
 	private int prv_row_len = 0;
 	private final    Xoh_page tmp_hpg = new Xoh_page(); private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -33,6 +33,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 	public Xob_hdump_bldr Hzip_enabled_(boolean v) {this.hzip_enabled = v; return this;}
 	public Xob_hdump_bldr Hzip_diff_(boolean v) {this.hzip_diff = v; return this;}
 	public Xob_hdump_bldr Zip_tid_(byte v) {this.zip_tid = v; return this;}
+	public Xow_hdump_mgr Hdump_mgr() {return hdump_mgr;} private Xow_hdump_mgr hdump_mgr; 
 	public boolean Init(Xowe_wiki wiki, Db_conn make_conn, Xob_hdump_tbl_retriever html_tbl_retriever) {
 		if (!enabled) return false;
 		this.op_sys_is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();

@@ -235,6 +235,7 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_url_canonicalurl, "canonicalurl");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_url_canonicalurle, "canonicalurle");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_lst, "#lst", "#section");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_lstx, "#lstx", "#section-x");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_lsth, "#lsth", "#section-h");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_invoke, "#invoke");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_property, "#property");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_noexternallanglinks, "noexternallanglinks");

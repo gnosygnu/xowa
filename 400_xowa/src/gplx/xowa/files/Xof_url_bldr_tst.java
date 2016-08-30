@@ -55,7 +55,7 @@ class Xof_url_bldr_fxt {
 	public Xof_url_bldr_fxt Seek_(int v) {seek = v; return this;} private double seek = Xof_lnki_time.Null;
 	public Xof_url_bldr_fxt Expd_src_(String v) {expd_src = v; return this;} private String expd_src;
 	public Xof_url_bldr_fxt Test() {
-		url_bldr.Init_by_root(Bry_.new_u8(root), dir_spr, Bool_.Y, Bool_.N, 2);
+		url_bldr.Init_by_root(Bry_.new_u8(root), Bool_.N, dir_spr, Bool_.Y, Bool_.N, 2);
 		url_bldr.Init_by_itm (Xof_repo_itm_.Mode_thumb, Bry_.new_u8(ttl), Bry_.new_u8(md5), ext, w, seek, page);
 		Tfds.Eq(expd_src, url_bldr.Xto_str());
 		return this;

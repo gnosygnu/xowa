@@ -44,9 +44,14 @@ public class Xoh_file_wtr__basic {
 	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, byte[] img_alt) {
 		// init
 		int uid = xfer_itm.Html_uid();
-		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
-		byte[] lnki_href = wiki.Html__href_wtr().Build_to_bry(wiki, lnki.Ttl());
+
+		// lnki_ttl; note if orig exists and orig_ttl is different, use it; PAGE:en.w:Switzerland; EX:[[File:Wappen_Schwyz_matt.svg]] which has redirect of Wappen_des_Kantons_Schwyz.svg; DATE:2016-08-11
+		Xoa_ttl lnki_ttl = lnki.Ttl();
+		if (xfer_itm.Orig_exists() && !Bry_.Eq(xfer_itm.Orig_ttl(), xfer_itm.Lnki_ttl()))
+			lnki_ttl = wiki.Ttl_parse(Xow_ns_.Tid__file, xfer_itm.Orig_ttl());
+		byte[] lnki_ttl_bry = lnki_ttl.Page_txt();
+		byte[] lnki_href = wiki.Html__href_wtr().Build_to_bry(wiki, lnki_ttl);
 		
 		// get div_width
 		int div_width = xfer_itm.Html_w();
@@ -80,38 +85,28 @@ public class Xoh_file_wtr__basic {
 
 		// main html build
 		if		(lnki.Ns_id() == Xow_ns_.Tid__media)				// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
-			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl, Bld_caption(ctx, Xoh_wtr_ctx.Basic, src, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
+			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl_bry, Bld_caption(ctx, Xoh_wtr_ctx.Basic, src, lnki));	// NOTE: use orig_src not view_src; DATE:2014-01-19
 		else {
-			// identify if video; note that this is complicated b/c .ogg is used for both audio and video files
+			// orig_is_video 
 			boolean orig_is_video = Xof_ext_.Id_is_video_strict(orig_ext.Id());
-			if (orig_ext.Id_is_ogg()) {
-				if		(	wiki.File_mgr().Version_1_y()			// version is v1 (v2 always marks ogg as aud if from fsdb); DATE:2014-02-01
-						&&	(	xfer_itm.File_exists()				// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
-							||	xfer_itm.Dbmeta_is_new()			// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
-							)
-					)
+			if (orig_ext.Id_is_ogg()) {	// note that this is complicated b/c .ogg usually means audio, but can sometimes mean video
+				if	(wiki.File_mgr().Version_1_y()) {		// v1
+					if (	xfer_itm.File_exists()			// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
+						||	xfer_itm.Dbmeta_is_new()		// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
+						)						
 					orig_is_video = true;
-				else if (	wiki.File_mgr().Version_2_y()			// version is v2
-						&&	(	lnki.Lnki_type() != Xop_lnki_type.Id_null	// any one of w, h, time, upright, type is present
-							||	lnki.W() > 0						
-							||	lnki.H() > 0
-							||	lnki.Time() != Xof_lnki_time.Null
-							||	lnki.Upright() != Xop_lnki_tkn.Upright_null
-						 )) {
-					orig_is_video = true;							// ASSUME: .ogg is video b/c of supplied values; DATE:2016-08-05
 				}
+				else										// v2; note that v2 always marks .ogg video as ext=.oga, so .ogg is always audio; 
+					orig_is_video = false;
 			}
-			if	(orig_is_video) {	
-				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
-				int vid_lnki_w = lnki.W(); if (vid_lnki_w == -1) vid_lnki_w = 0; if (vid_lnki_w == 0 && xfer_itm.Html_w() != 0) vid_lnki_w = xfer_itm.Html_w();
-				int vid_lnki_h = lnki.H(); if (vid_lnki_h == -1) vid_lnki_h = 0; if (vid_lnki_h == 0 && xfer_itm.Html_h() != 0) vid_lnki_h = xfer_itm.Html_h();
-				xfer_itm.Init_at_gallery_bgn(vid_lnki_w, vid_lnki_h, vid_lnki_w);	// HACK: force html_w to be lnki_w; needed b/c play_btn uses html_w; DATE:2016-08-05
-				this.Write_file_video(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl, img_view_src, xfer_itm);
+			if (orig_is_video) {	
+				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);		// mark as vid for js_mgr
+				this.Write_file_video(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry, img_view_src, xfer_itm);
 			}
 			else if  (orig_ext.Id_is_audio())						// audio
-				this.Write_file_audio(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl);
+				this.Write_file_audio(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry);
 			else													// image
-				this.Write_file_image(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl, img_view_src, xfer_itm, lnki_is_thumbable, lnki_halign, orig_ext);
+				this.Write_file_image(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry, img_view_src, xfer_itm, lnki_is_thumbable, lnki_halign, orig_ext);
 		}
 	}
 	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl) {
@@ -267,7 +262,6 @@ public class Xoh_file_wtr__basic {
 	}
 	private int Get_play_btn_width(int w) {return w > 0 ? w : html_mgr.Img_thumb_width();}	// if no width set width to default img width
 
-	// private static final int Play_btn_max_width = 1024;
 	private static final    byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")
 	, Div_float_none			= Bry_.new_a7("<div class=\"floatnone\">")
