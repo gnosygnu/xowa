@@ -343,6 +343,7 @@ app.bldr.cmds {
   add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
   add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'image';}
   add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
+  add     ('simple.wikipedia.org' , 'util.download')         {dump_type = 'imagelinks';}
   add     ('simple.wikipedia.org' , 'text.init');
   add     ('simple.wikipedia.org' , 'text.page') {
     // calculate redirect_id for #REDIRECT pages. needed for html databases
@@ -370,6 +371,9 @@ app.bldr.cmds {
   // create an "image" table to get the metadata for all files in the current wiki
   add     ('simple.wikipedia.org' , 'wiki.image');
 
+  // create an "imagelinks" table to find out which images are used for the wiki (performance optimization)
+  add     ('simple.wikipedia.org' , 'wiki.imagelinks');
+
   // parse all page-to-page links
   add     ('simple.wikipedia.org' , 'wiki.page_link');
 
@@ -384,7 +388,8 @@ app.bldr.cmds {
 
   // cleanup all downloaded files as well as temporary files
   add     ('simple.wikipedia.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
-  
+
+  // v1 html generator
   // parse every page in the listed namespace and gather data on their lnkis.
   // this step will take the longest amount of time.
   add     ('simple.wikipedia.org' , 'file.lnki_temp') {
@@ -419,6 +424,24 @@ app.bldr.cmds {
       hzip_diff = 'y';
     }
   }
+
+  // v2 html generator; allows for multi-threaded / multi-machine builds
+  /*
+  add     ('simple.wikipedia.org' , 'wiki.mass_parse.init') {cfg {ns_ids = '0|4|14';}}
+  add     ('simple.wikipedia.org' , 'wiki.mass_parse.exec') {
+    cfg {
+      num_wkrs = 8; load_all_templates = 'y'; cleanup_interval = 50; hzip_enabled = 'y'; hdiff_enabled ='y'; manual_now = '2016-08-01 01:02:03';
+      
+      // uncomment the following 3 lines if using the build script as a "worker" helping a "server"
+      // num_pages_in_pool = 32000; 
+      // mgr_url = '\\server_machine_name\xowa\wiki\en.wikipedia.org\tmp\xomp\'; 
+      // wkr_machine_name = 'worker_machine_1'
+    }
+  }
+
+  // note that if multi-machine mode is enabled, all worker directories must be manually copied to the server directory (a build command will be added later)
+  add     ('simple.wikipedia.org' , 'wiki.mass_parse.make');
+  */
   
   // aggregate the lnkis
   add     ('simple.wikipedia.org' , 'file.lnki_regy');
@@ -511,6 +534,7 @@ app.bldr.cmds {
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'page_props';}
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'image';}
   add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'pagelinks';}
+  add     ('en.wikipedia.org' , 'util.download')         {dump_type = 'imagelinks';}
 */
 /*
   add     ('en.wikipedia.org' , 'text.init');
@@ -525,6 +549,7 @@ app.bldr.cmds {
   add     ('en.wikipedia.org' , 'wiki.image');
   add     ('en.wikipedia.org' , 'wiki.page_dump.make');
   add     ('en.wikipedia.org' , 'wiki.page_link');
+  add     ('en.wikipedia.org' , 'wiki.imagelinks');
   add     ('en.wikipedia.org' , 'search.page__page_score') {iteration_max = 100;}
   add     ('en.wikipedia.org' , 'search.link__link_score') {page_rank_enabled = 'y';
     score_adjustment_mgr {
