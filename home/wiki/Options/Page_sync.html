@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Options/Import Dansguardian - XOWA</title>
+  <title>Options/Page sync - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   <style data-source="xowa" type="text/css">
@@ -217,7 +217,7 @@ li.active a, li.active a:hover
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Options/Import Dansguardian</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Options/Page sync</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
@@ -265,13 +265,13 @@ li.active a, li.active a:hover
           <li class=''>
             <a href='/wiki/Options/HTML_databases'>HTML databases</a>
           </li>
-          <li class=''>
+          <li class='active'>
             <a href='/wiki/Options/Page_sync'>Page sync</a>
           </li>
           <li class=''>
             <a href='/wiki/Options/Category'>Category</a>
           </li>
-          <li class='active'>
+          <li class=''>
             <a href='/wiki/Options/Import_Dansguardian'>Import Dansguardian</a>
           </li>
         </ul>
@@ -285,10 +285,13 @@ li.active a, li.active a:hover
           </div>
           <ul>
             <li class="toclevel-1 tocsection-1">
-              <a href="#Basic"><span class="tocnumber">1</span> <span class="toctext">Basic</span></a>
+              <a href="#Manual"><span class="tocnumber">1</span> <span class="toctext">Manual</span></a>
             </li>
             <li class="toclevel-1 tocsection-2">
-              <a href="#Notes"><span class="tocnumber">2</span> <span class="toctext">Notes</span></a>
+              <a href="#Automatic"><span class="tocnumber">2</span> <span class="toctext">Automatic</span></a>
+            </li>
+            <li class="toclevel-1 tocsection-3">
+              <a href="#Notes"><span class="tocnumber">3</span> <span class="toctext">Notes</span></a>
             </li>
           </ul>
         </div>
@@ -299,58 +302,49 @@ li.active a, li.active a:hover
         </div><br>
          
         <p>
-          For more information, see <a href="http://xowa.org/home/wiki/App/Xtn/Import/Dansguardian.html" id="xolnki_2" title="App/Xtn/Import/Dansguardian" class="xowa-visited">App/Xtn/Import/Dansguardian</a>
+          For more information, see <a href="http://xowa.org/home/wiki/App/Xtn/Page_sync.html" id="xolnki_2" title="App/Xtn/Page sync" class="xowa-visited">the page sync help page</a>
         </p>
         <h2>
-          <span class="mw-headline" id="Basic">Basic</span>
+          <span class="mw-headline" id="Manual">Manual</span>
         </h2>
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              Enabled: <sup id="cite_ref-enabled_0-0" class="reference"><a href="#cite_note-enabled-0">[1]</a></sup>
+              Enable manual syncs: <sup id="cite_ref-manual_enabled_0-0" class="reference"><a href="#cite_note-manual_enabled-0">[1]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.enabled" type="checkbox" class="options_checkbox" id='xowa_prop_0'>
+              <input xowa_prop="xowa.api.addon.bldr.sync.manual_enabled" type="checkbox" class="options_checkbox" accesskey='d' id='xowa_prop_0' checked='checked'>
+            </td>
+          </tr>
+        </table>
+        <h2>
+          <span class="mw-headline" id="Automatic">Automatic</span>
+        </h2>
+        <table class='options_table'>
+          <tr>
+            <td class='options_row_label'>
+              Enable automatic syncs: <sup id="cite_ref-auto_enabled_1-0" class="reference"><a href="#cite_note-auto_enabled-1">[2]</a></sup>
+            </td>
+            <td>
+              <input xowa_prop="xowa.api.addon.bldr.sync.auto_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_1'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Root directory: <sup id="cite_ref-root_dir_1-0" class="reference"><a href="#cite_note-root_dir-1">[2]</a></sup>
+              Time to wait before sync: <sup id="cite_ref-auto_interval_2-0" class="reference"><a href="#cite_note-auto_interval-2">[3]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.root_dir" class="options_textbox" style="width: 400px;" id='xowa_prop_1' value='C:\xowa\bin\any\xowa\cfg\bldr\filter\'>
+              <input xowa_prop="xowa.api.addon.bldr.sync.auto_interval" class="options_textbox" style="width: 400px;" id='xowa_prop_2' value='1440'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Initial page score: <sup id="cite_ref-score_init_2-0" class="reference"><a href="#cite_note-score_init-2">[3]</a></sup>
+              Pages to sync: <sup id="cite_ref-auto_scope_3-0" class="reference"><a href="#cite_note-auto_scope-3">[4]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.score_init" class="options_textbox" style="width: 100px;" id='xowa_prop_2' value='0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Filtered page score: <sup id="cite_ref-score_fail_3-0" class="reference"><a href="#cite_note-score_fail-3">[4]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.score_fail" class="options_textbox" style="width: 100px;" id='xowa_prop_3' value='0'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Case sensitive: <sup id="cite_ref-case_match_4-0" class="reference"><a href="#cite_note-case_match-4">[5]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.case_match" type="checkbox" class="options_checkbox" id='xowa_prop_4'>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Log enabled: <sup id="cite_ref-log_enabled_5-0" class="reference"><a href="#cite_note-log_enabled-5">[6]</a></sup>
-            </td>
-            <td>
-              <input xowa_prop="xowa.api.bldr.wiki.filter.dansguardian.log_enabled" type="checkbox" class="options_checkbox" id='xowa_prop_5' checked='checked'>
+<textarea xowa_prop="xowa.api.addon.bldr.sync.auto_scope" class="options_textarea" style="width: 400px; height:72px;" id='xowa_prop_3'>
+Main_Page
+</textarea>
             </td>
           </tr>
         </table>
@@ -361,60 +355,66 @@ li.active a, li.active a:hover
           <span class="mw-headline" id="Notes">Notes</span>
         </h2>
         <ol class="references">
-          <li id="cite_note-enabled-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-enabled_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
+          <li id="cite_note-manual_enabled-0">
+            <span class="mw-cite-backlink"><a href="#cite_ref-manual_enabled_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
             <ul>
               <li>
-                <span class="reference-text"><b>checked</b>: import filter system is enabled</span>
+                <span class="reference-text"><b>checked</b>: Show "Sync" in sidebar</span>
               </li>
               <li>
-                <span class="reference-text"><b>unchecked</b>: (default) import filter system is disabled</span>
+                <span class="reference-text"><b>unchecked</b>: (default) Do not show "Sync" in sidebar</span>
+              </li>
+            </ul><span class="reference-text">Other notes:</span>
+            <ul>
+              <li>
+                <span class="reference-text">Clicking "Sync" will manually synchronize current page</span>
+              </li>
+              <li>
+                <span class="reference-text">"Sync" will never show in the home wiki</span>
               </li>
             </ul>
           </li>
-          <li id="cite_note-root_dir-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-root_dir_1-0">^</a></span> <span class="reference-text">Enter the root directory where the filters are located. Note that dansguardian files must be placed within a folder named after wiki. For example, on a Windows system, a phraselist file for simple.wikipedia.org can be placed at <code>C:\xowa\bin\any\xowa\cfg\bldr\filter\simple.wikipedia.org\dansguardian\phraselist1.txt</code></span>
-          </li>
-          <li id="cite_note-score_init-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-score_init_2-0">^</a></span> <span class="reference-text">Enter the initial score of a page. (default is <code>0</code>)</span>
+          <li id="cite_note-auto_enabled-1">
+            <span class="mw-cite-backlink"><a href="#cite_ref-auto_enabled_1-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>unchecked</code>)</span>
             <ul>
               <li>
-                <span class="reference-text">For building a wiki where pages matching the filter are removed, choose a score of 0.</span>
+                <span class="reference-text"><b>checked</b>: Automatically synchronize page when viewing it</span>
               </li>
               <li>
-                <span class="reference-text">For building a wiki where pages matching the filter are kept, choose a positive score like 100.</span>
+                <span class="reference-text"><b>unchecked</b>: (default) Do not automatically synchronize page</span>
+              </li>
+            </ul><span class="reference-text">Other notes:</span>
+            <ul>
+              <li>
+                <span class="reference-text">Pages are automatically synchronized based on options for time and scope. The default behavior is to synchronize when first visiting the page, and then every 24 hours afterwards</span>
+              </li>
+              <li>
+                <span class="reference-text">Automatic synchronization will never occur in the home wiki</span>
               </li>
             </ul>
           </li>
-          <li id="cite_note-score_fail-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-score_fail_3-0">^</a></span> <span class="reference-text">Enter the score which causes the page to be removed from the database. (default is <code>0</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text">Any page which has a score higher than the fail score will be removed from the database.</span>
-              </li>
-            </ul>
+          <li id="cite_note-auto_interval-2">
+            <span class="mw-cite-backlink"><a href="#cite_ref-auto_interval_2-0">^</a></span> <span class="reference-text">Enter the number of minutes to wait before checking for a new update: (default is <code>1440</code>) <sup id="cite_ref-auto_scope_3-1" class="reference"><a href="#cite_note-auto_scope-3">[4]</a></sup></span>
           </li>
-          <li id="cite_note-case_match-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-case_match_4-0">^</a></span> <span class="reference-text">Choose if case sensitivity is enabled. (default is <code>unchecked</code>)</span>
+          <li id="cite_note-auto_scope-3">
+            <span class="mw-cite-backlink"><a href="#cite_ref-auto_scope_3-0">^</a></span> <span class="reference-text">Specify specific page titles to sync: (default is <code>Main_Page</code>)</span>
             <ul>
               <li>
-                <span class="reference-text">If checked, words are matched by case-sensitivity. For example, "&lt; earth &gt;" will match "earth", but not "Earth".</span>
+                <span class="reference-text"><b>Main_Page</b> means sync all Main_Pages in all wikis</span>
               </li>
               <li>
-                <span class="reference-text">If unchecked, words are matched regardless of case. For example, "&lt; earth &gt;" will match "earth" and "Earth". Note that this will slow the import process down by 5% - 10%</span>
-              </li>
-            </ul>
-          </li>
-          <li id="cite_note-log_enabled-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-log_enabled_5-0">^</a></span> <span class="reference-text">Choose if a log is enabled. (default is <code>checked</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text">If checked, a database called dansguardian_log.sqlite3 will be created at <code>/xowa/wiki/wiki_name/</code></span>
+                <span class="reference-text"><b>*</b> is a wildcard and means sync all pages in all wikis</span>
               </li>
               <li>
-                <span class="reference-text">If unchecked, no database will be created</span>
+                <span class="reference-text">Individual pages can be specified on each line.</span>
               </li>
-            </ul>
+            </ul><span class="reference-text">For example, the following would only auto-synchronize two pages: the Main_Page and Earth in English Wikipedia:</span>
+<pre>
+<span class="reference-text">en.w:Main_Page
+en.w:Earth
+</span>
+</pre>
+            <span class="reference-text">Note that all lines must be separated by a UNIX line ending (ASCII 10) not a Windows line ending (ASCII 13 + ASCII 10)</span>
           </li>
         </ol>
       </div>

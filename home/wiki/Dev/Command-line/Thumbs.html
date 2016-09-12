@@ -310,11 +310,11 @@ app.bldr.cmds {
   add     ('commons.wikimedia.org' , 'util.download')         {dump_type = 'image';}
   add     ('commons.wikimedia.org' , 'text.init');
   add     ('commons.wikimedia.org' , 'text.page');
-  add     ('commons.wikimedia.org' , 'text.cat.core');
-  add     ('commons.wikimedia.org' , 'text.cat.link');
-  add     ('commons.wikimedia.org' , 'text.cat.hidden');
   add     ('commons.wikimedia.org' , 'text.term');
   add     ('commons.wikimedia.org' , 'text.css');
+  add     ('commons.wikimedia.org' , 'wiki.page_props');
+  add     ('commons.wikimedia.org' , 'wiki.categorylinks');
+  add     ('commons.wikimedia.org' , 'text.cat.hidden');
   add     ('commons.wikimedia.org' , 'wiki.image');
   add     ('commons.wikimedia.org' , 'file.page_regy')        {build_commons = 'y'}
   add     ('commons.wikimedia.org' , 'wiki.page_dump.make');
@@ -329,11 +329,10 @@ app.bldr.cmds {
   add     ('www.wikidata.org' , 'util.download')         {dump_type = 'image';}
   add     ('www.wikidata.org' , 'text.init');
   add     ('www.wikidata.org' , 'text.page');
-  add     ('www.wikidata.org' , 'text.cat.core');
-  add     ('www.wikidata.org' , 'text.cat.link');
-  add     ('www.wikidata.org' , 'text.cat.hidden');
   add     ('www.wikidata.org' , 'text.term');
   add     ('www.wikidata.org' , 'text.css');
+  add     ('www.wikidata.org' , 'wiki.page_props');
+  add     ('www.wikidata.org' , 'wiki.categorylinks');
   add     ('www.wikidata.org' , 'util.cleanup')          {delete_tmp = 'y'; delete_by_match('*.xml|*.sql|*.bz2|*.gz');}
 
   // build simple.wikipedia.org
@@ -357,11 +356,11 @@ app.bldr.cmds {
   // upload mobile css
   add     ('simple.wikipedia.org' , 'text.css') {css_key = 'xowa.mobile'; /* css_dir = 'C:\xowa\user\anonymous\wiki\simple.wikipedia.org-mobile\html\'; */}
 
-  add     ('simple.wikipedia.org' , 'text.cat.core');
-  add     ('simple.wikipedia.org' , 'text.cat.link');
-  add     ('simple.wikipedia.org' , 'text.cat.hidden');
   add     ('simple.wikipedia.org' , 'text.term');
   
+  add     ('simple.wikipedia.org' , 'wiki.page_props');
+  add     ('simple.wikipedia.org' , 'wiki.categorylinks');
+
   // create local "page" tables in each "text" database for "lnki_temp"
   add     ('simple.wikipedia.org' , 'wiki.page_dump.make');
   
@@ -605,13 +604,7 @@ app.bldr.cmds {
 }
 app.bldr.run;
 </pre>
-  <div id="catlinks" class="catlinks">
-<div id="mw-normal-catlinks" class="mw-normal-catlinks">
-Categories
-<ul>
-</ul>
-</div>
-</div>
+  
     </div>
   </div>
 </div>

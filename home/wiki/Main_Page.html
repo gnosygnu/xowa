@@ -82,20 +82,26 @@
       <span class="mw-headline" id="Release_notes">Release notes</span>
     </h2>
     <p>
-      v3.8.5.1 features the following:
+      v3.9.2.1 features the following:
     </p>
     <ul>
       <li>
-        (Wiki) Publish 2016-08 English Wikipedia and German Wikipedia
+        (PC) Fix for Category pages not working
       </li>
       <li>
-        (PC / Android) Better html database support for packed galleries, video thumbnails, and image maps
+        (PC) New Category system to handle HTML dumps
       </li>
       <li>
-        (PC) Support the lsth parser function
+        (PC) Basic page synchronization feature to get latest from online wiki
       </li>
       <li>
-        (PC) Add torrent link / MD5 info to the Download Central Info page
+        (PC / Android) Download Central changes for dropped connections / Mac OS X
+      </li>
+      <li>
+        (PC) Various parser changes including Protectiong Banner, stack overflow, and invalid UTF-8
+      </li>
+      <li>
+        (PC) Other minor changes including read-only support, torrent-file links and docs for HTML dump.
       </li>
     </ul>
     <p>
@@ -182,14 +188,17 @@
       <span class="mw-headline" id="Upgrade_users">Upgrade users</span>
     </h2>
     <p>
-      If you are upgrading from any version before v3.8.1, you should download a xowa_app_v3.8.1+ file.
+      If you are upgrading from any version before v3.9.1, you should download a xowa_app_v3.9.1+ file.
     </p>
     <ul>
       <li>
-        v3.6.3 features a Download page. See <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_13" title="Special:XowaDownloadCentral" class="xowa-visited">Download Central</a>
+        v3.9.2 features a new Category system. See <a href="http://xowa.org/home/wiki/App/Category.html" id="xolnki_13" title="App/Category" class="xowa-visited">Category Overview</a>
       </li>
       <li>
-        v3.3.4 features an auto-complete address bar. It also has a faster Search system. See <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_14" title="App/Search">App/Search</a>
+        v3.6.3 features a Download page. See <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_14" title="Special:XowaDownloadCentral" class="xowa-visited">Download Central</a>
+      </li>
+      <li>
+        v3.3.4 features an auto-complete address bar. It also has a faster Search system. See <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_15" title="App/Search">App/Search</a>
       </li>
     </ul>
     <dl>
@@ -205,13 +214,13 @@
         v2.8.1 has a language converter dropdown for the Chinese wikis.
       </li>
       <li>
-        v2.7.3 introduces a new Bookmarks page. See <a href="http://xowa.org/home/wiki/Special:XowaBookmarks.html" id="xolnki_15" title="Special:XowaBookmarks">Special:XowaBookmarks</a>
+        v2.7.3 introduces a new Bookmarks page. See <a href="http://xowa.org/home/wiki/Special:XowaBookmarks.html" id="xolnki_16" title="Special:XowaBookmarks">Special:XowaBookmarks</a>
       </li>
       <li>
-        v2.6.5 uses SWT v4.5 and XULRunner v24. See <a href="http://xowa.org/home/wiki/Dev/SWT.html" id="xolnki_16" title="Dev/SWT">Dev/SWT</a> and <a href="http://xowa.org/home/wiki/App/UI/HTML_Browser.html" id="xolnki_17" title="App/UI/HTML Browser">HTML Browser</a>
+        v2.6.5 uses SWT v4.5 and XULRunner v24. See <a href="http://xowa.org/home/wiki/Dev/SWT.html" id="xolnki_17" title="Dev/SWT">Dev/SWT</a> and <a href="http://xowa.org/home/wiki/App/UI/HTML_Browser.html" id="xolnki_18" title="App/UI/HTML Browser">HTML Browser</a>
       </li>
       <li>
-        v2.6.3 uses WebKit for MacOSX. For more info, see <a href="http://xowa.org/home/wiki/Blog.html" id="xolnki_18" title="Blog">Blog</a><br>
+        v2.6.3 uses WebKit for MacOSX. For more info, see <a href="http://xowa.org/home/wiki/Blog.html" id="xolnki_19" title="Blog">Blog</a><br>
       </li>
     </ul>
     <dl>
@@ -221,13 +230,13 @@
     </dl>
     <ul>
       <li>
-        v2.5.4 has changed online file downloads. Among other things, ImageMagick and Inkscape are no longer required. For more info, see <a href="http://xowa.org/home/wiki/App/Basics/Files.html" id="xolnki_19" title="App/Basics/Files">Files</a>
+        v2.5.4 has changed online file downloads. Among other things, ImageMagick and Inkscape are no longer required. For more info, see <a href="http://xowa.org/home/wiki/App/Basics/Files.html" id="xolnki_20" title="App/Basics/Files">Files</a>
       </li>
       <li>
-        v2.4.2 has improved Search performance and v2.4.4 has added multi-wiki Search. For more info, see <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_20" title="App/Search">App/Search</a>
+        v2.4.2 has improved Search performance and v2.4.4 has added multi-wiki Search. For more info, see <a href="http://xowa.org/home/wiki/App/Search.html" id="xolnki_21" title="App/Search">App/Search</a>
       </li>
       <li>
-        v2.4.1 has introduced major database layout changes. For more info, see <a href="http://xowa.org/home/wiki/Dev/Design/Database.html" id="xolnki_21" title="Dev/Design/Database">Database</a>
+        v2.4.1 has introduced major database layout changes. For more info, see <a href="http://xowa.org/home/wiki/Dev/Design/Database.html" id="xolnki_22" title="Dev/Design/Database">Database</a>
       </li>
     </ul>
     <h2>
@@ -247,15 +256,15 @@
             If the font size is too small, right-click and choose Font Increase
           </li>
           <li>
-            If you need more control over the font, customize it on the <a href="http://xowa.org/home/wiki/Options/Window.html" id="xolnki_22" title="Options/Window" class="xowa-visited">Options/Window</a> and <a href="http://xowa.org/home/wiki/Options/HTML.html" id="xolnki_23" title="Options/HTML" class="xowa-visited">Options/HTML</a>
+            If you need more control over the font, customize it on the <a href="http://xowa.org/home/wiki/Options/Window.html" id="xolnki_23" title="Options/Window" class="xowa-visited">Options/Window</a> and <a href="http://xowa.org/home/wiki/Options/HTML.html" id="xolnki_24" title="Options/HTML" class="xowa-visited">Options/HTML</a>
           </li>
         </ul>
       </li>
       <li>
-        <b>Find box</b>: Press Ctrl+F on your keyboard. This will show the Find box (in the lower left-hand corner). Type "tips". Notice that the word "Tips" is highlighted above. Note that Alt+P (Previous) and Alt+N (Next) will change search direction. See <a href="http://xowa.org/home/wiki/App/UI/Find_box.html" id="xolnki_24" title="App/UI/Find box">Find Box</a> for more info.
+        <b>Find box</b>: Press Ctrl+F on your keyboard. This will show the Find box (in the lower left-hand corner). Type "tips". Notice that the word "Tips" is highlighted above. Note that Alt+P (Previous) and Alt+N (Next) will change search direction. See <a href="http://xowa.org/home/wiki/App/UI/Find_box.html" id="xolnki_25" title="App/UI/Find box">Find Box</a> for more info.
       </li>
       <li>
-        <b>Address bar</b>: Press Alt+D or Ctrl+L on your keyboard. This will take you to the Address bar at the top of the screen. Type "s.w:Earth" (no quotes) and press Enter. This will open the Simple Wikipedia page for Earth. See <a href="http://xowa.org/home/wiki/App/UI/Address_bar/Shortcuts.html#Default_shortcuts" id="xolnki_25" title="App/UI/Address bar/Shortcuts">Address bar/Shortcuts</a> for more shortcuts.
+        <b>Address bar</b>: Press Alt+D or Ctrl+L on your keyboard. This will take you to the Address bar at the top of the screen. Type "s.w:Earth" (no quotes) and press Enter. This will open the Simple Wikipedia page for Earth. See <a href="http://xowa.org/home/wiki/App/UI/Address_bar/Shortcuts.html#Default_shortcuts" id="xolnki_26" title="App/UI/Address bar/Shortcuts">Address bar/Shortcuts</a> for more shortcuts.
       </li>
       <li>
         <b>Middle-click in address bar</b>: Copy and paste urls directly into the address bar with the middle mouse button to open the page. For example: 
@@ -276,14 +285,14 @@
       <dd>
         <dl>
           <dd>
-            Now you can copy and paste any Wikipedia url directly into XOWA and its page will open (and all its images will download.) See <a href="http://xowa.org/home/wiki/App/UI/Address_bar/URLs.html" id="xolnki_26" title="App/UI/Address bar/URLs">Address_bar/URLs</a> for more info
+            Now you can copy and paste any Wikipedia url directly into XOWA and its page will open (and all its images will download.) See <a href="http://xowa.org/home/wiki/App/UI/Address_bar/URLs.html" id="xolnki_27" title="App/UI/Address bar/URLs">Address_bar/URLs</a> for more info
           </dd>
         </dl>
       </dd>
     </dl>
     <ul>
       <li>
-        <b>Middle-click on link</b>: Open a tab in a new link by middle-clicking on it. Try middle-clicking the following: <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_27" title="Options" class="xowa-visited">Options</a>
+        <b>Middle-click on link</b>: Open a tab in a new link by middle-clicking on it. Try middle-clicking the following: <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_28" title="Options" class="xowa-visited">Options</a>
       </li>
       <li>
         <b>Right-click</b>: Right click on an image and click save as file
@@ -294,7 +303,7 @@
     </h2>
     <ul>
       <li>
-        <b>Wikidata</b>: If you're seeing {{#property}} in your wikis you should also set up Wikidata. See <a href="http://xowa.org/home/wiki/App/Wiki_types/Wikidata.html" id="xolnki_28" title="App/Wiki types/Wikidata">App/Wiki_types/Wikidata</a>
+        <b>Wikidata</b>: If you're seeing {{#property}} in your wikis you should also set up Wikidata. See <a href="http://xowa.org/home/wiki/App/Wiki_types/Wikidata.html" id="xolnki_29" title="App/Wiki types/Wikidata">App/Wiki_types/Wikidata</a>
       </li>
     </ul>
     <h2>
@@ -303,7 +312,7 @@
     <table class="wikitable">
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_29" title="Special:XowaDownloadCentral" class="xowa-visited">Download Central</a>
+          <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_30" title="Special:XowaDownloadCentral" class="xowa-visited">Download Central</a>
         </td>
         <td>
           Download an Android-ready wiki with images from archive.org
@@ -311,7 +320,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_30" title="Dashboard/Import/Online" class="xowa-visited">Import Online</a>
+          <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_31" title="Dashboard/Import/Online" class="xowa-visited">Import Online</a>
         </td>
         <td>
           Import a wiki from a list of 826 known Wikimedia Foundation wikis
@@ -319,7 +328,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_31" title="Dashboard/Import/Offline" class="xowa-visited">Import Offline</a>
+          <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline.html" id="xolnki_32" title="Dashboard/Import/Offline" class="xowa-visited">Import Offline</a>
         </td>
         <td>
           Import a wiki through a dump; import also through script; also upgrade category to version 2
@@ -327,7 +336,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" id="xolnki_32" title="Dashboard/Image databases">Image databases</a>
+          <a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" id="xolnki_33" title="Dashboard/Image databases">Image databases</a>
         </td>
         <td>
           Download image databases for your wiki
@@ -335,7 +344,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Dashboard/Wiki_maintenance.html" id="xolnki_33" title="Dashboard/Wiki maintenance">Wiki Maintenance</a>
+          <a href="http://xowa.org/home/wiki/Dashboard/Wiki_maintenance.html" id="xolnki_34" title="Dashboard/Wiki maintenance">Wiki Maintenance</a>
         </td>
         <td>
           Update your wikis if they are outdated
@@ -343,7 +352,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Help/FAQs.html" id="xolnki_34" title="Help/FAQs">FAQs</a>
+          <a href="http://xowa.org/home/wiki/Help/FAQs.html" id="xolnki_35" title="Help/FAQs">FAQs</a>
         </td>
         <td>
           View questions asked by other users
@@ -351,7 +360,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Help/Contents.html" id="xolnki_35" title="Help/Contents" class="xowa-visited">Contents</a>
+          <a href="http://xowa.org/home/wiki/Help/Contents.html" id="xolnki_36" title="Help/Contents" class="xowa-visited">Contents</a>
         </td>
         <td>
           View all help topics
@@ -359,7 +368,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_36" title="Options" class="xowa-visited">Options</a>
+          <a href="http://xowa.org/home/wiki/Options.html" id="xolnki_37" title="Options" class="xowa-visited">Options</a>
         </td>
         <td>
           Configure XOWA options
@@ -367,7 +376,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Change_log.html" id="xolnki_37" title="Change log" class="xowa-visited">Change log</a>
+          <a href="http://xowa.org/home/wiki/Change_log.html" id="xolnki_38" title="Change log" class="xowa-visited">Change log</a>
         </td>
         <td>
           View changes for each XOWA release
@@ -375,7 +384,7 @@
       </tr>
       <tr>
         <td>
-          <a href="http://xowa.org/home/wiki/Diagnostics.html" id="xolnki_38" title="Diagnostics">Diagnostics</a>
+          <a href="http://xowa.org/home/wiki/Diagnostics.html" id="xolnki_39" title="Diagnostics" class="xowa-visited">Diagnostics</a>
         </td>
         <td>
           Run test pages to make sure that XOWA works on your system.
@@ -390,13 +399,7 @@
         </td>
       </tr>
     </table>
-  <div id="catlinks" class="catlinks">
-<div id="mw-normal-catlinks" class="mw-normal-catlinks">
-Categories
-<ul>
-</ul>
-</div>
-</div>
+  
     </div>
   </div>
 </div>

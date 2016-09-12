@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>App/Xtn/Page sync - XOWA</title>
+  <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
+  <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
+  <style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+<style data-source="xowa" type="text/css">
+.console   {font-family: monospace; color: #EEEEEE ; background-color: black    ; border: medium solid black;}
+  .code
+  ,.path
+  ,.url      {font-family: monospace; color: black   ; background-color: #f9f9f9  ; border: medium solid #f9f9f9;}
+  .bold      {font-weight: 900;}
+</style>
+
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>App/Xtn/Page sync</span></h1>
+  <div id="bodyContent" class="mw-body-content">
+    <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+    
+    <p>
+      XOWA can synchronize the latest pages from the online version to the offline version
+    </p>
+    <table class="metadata plainlinks ambox ambox-delete" style="">
+      <tr>
+        <td class="mbox-empty-cell">
+        </td>
+        <td class="mbox-text" style="">
+          <p>
+            <span class="mbox-text-span">Please note that this feature is still a work in progress. For the latest updates / usage notes, please check <a href="https://github.com/gnosygnu/xowa/issues/72" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/72</a></span>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <br>
+    </p>
+    <div id="toc" class="toc">
+      <div id="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#Options"><span class="tocnumber">1</span> <span class="toctext">Options</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-2">
+          <a href="#Background"><span class="tocnumber">2</span> <span class="toctext">Background</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#Issues"><span class="tocnumber">3</span> <span class="toctext">Issues</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Math.2C_Helper_Buttons_.28enlarge_.2F_more_info.29.2C_Musical_scores.2C_and_other_images_don.27t_work"><span class="tocnumber">3.1</span> <span class="toctext">Math, Helper Buttons (enlarge / more info), Musical scores, and other images don't work</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#No_rollback_option"><span class="tocnumber">3.2</span> <span class="toctext">No rollback option</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#No_synchronization_for_new_pages"><span class="tocnumber">3.3</span> <span class="toctext">No synchronization for new pages</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Other_issues"><span class="tocnumber">3.4</span> <span class="toctext">Other issues</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Usage_notes"><span class="tocnumber">4</span> <span class="toctext">Usage notes</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#Manual_sync"><span class="tocnumber">4.1</span> <span class="toctext">Manual sync</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#Auto_sync"><span class="tocnumber">4.2</span> <span class="toctext">Auto sync</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#Technical_details"><span class="tocnumber">5</span> <span class="toctext">Technical details</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#Manual_sync_2"><span class="tocnumber">5.1</span> <span class="toctext">Manual sync</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#Automatic_sync"><span class="tocnumber">5.2</span> <span class="toctext">Automatic sync</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="Options">Options</span>
+    </h2>
+    <p>
+      The options page is at <a href="http://xowa.org/home/wiki/Options/Page_sync.html" id="xolnki_2" title="Options/Page sync" class="xowa-visited">Options/Page_sync</a>
+    </p>
+    <h2>
+      <span class="mw-headline" id="Background">Background</span>
+    </h2>
+    <p>
+      In general, offline dumps are generated on a semi-frequent basis:
+    </p>
+    <ul>
+      <li>
+        Wikimedia generates offline Wikitext dumps twice per month. See <a href="https://dumps.wikimedia.org/backup-index.html" rel="nofollow" class="external free">https://dumps.wikimedia.org/backup-index.html</a>
+      </li>
+      <li>
+        XOWA generates HTML dumps once per month. See <a href="http://xowa.org/home/wiki/Special:XowaDownloadCentral.html" id="xolnki_3" title="Special:XowaDownloadCentral" class="xowa-visited">Special:XowaDownloadCentral</a>
+      </li>
+    </ul>
+    <p>
+      Sometimes though you may only want to update one page without:
+    </p>
+    <ul>
+      <li>
+        Waiting for the dump to occur
+      </li>
+      <li>
+        Downloading and importing a whole new wiki
+      </li>
+    </ul>
+    <p>
+      The Page sync feature allows you to update selected pages
+    </p>
+    <h2>
+      <span class="mw-headline" id="Issues">Issues</span>
+    </h2>
+    <p>
+      The Page sync feature is still a work in progress. The following are known issues:
+    </p>
+    <h3>
+      <span class="mw-headline" id="Math.2C_Helper_Buttons_.28enlarge_.2F_more_info.29.2C_Musical_scores.2C_and_other_images_don.27t_work">Math, Helper Buttons (enlarge / more info), Musical scores, and other images don't work</span>
+    </h3>
+    <p>
+      Wikipedia stores some images in a separate location. XOWA still needs code to detect this location, copy it offline, and show it correctly. This should be done in the next few releases, but in the meantime it's heavily recommended that you don't use Automatic sync for all pages. In particular, math pages will lose all equations after a sync. For example, <a href="https://en.wikipedia.org/wiki/Pythagorean_theorem" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Pythagorean_theorem</a>
+    </p>
+    <h3>
+      <span class="mw-headline" id="No_rollback_option">No rollback option</span>
+    </h3>
+    <p>
+      XOWA stores only the latest version of a page. Previous versions of the page will not be available after synchronization. This feature will be added in a future version
+    </p>
+    <p>
+      If you synchronize and want to rollback, you will need to do it <b>manually</b> for <b>all updates</b>. For example, here's a scenario for English Wikipedia:
+    </p>
+    <ul>
+      <li>
+        Backup en.wikipedia.org-core.xowa.
+      </li>
+      <li>
+        Backup en.wikipedia.org-html.user.xowa and en.wikipedia.org-sync.xowa if they exist.
+      </li>
+      <li>
+        Synchronize <a href="https://en.wikipedia.org/wiki/Pythagorean_theorem" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Pythagorean_theorem</a>
+      </li>
+      <li>
+        Realize that the synchronization is bad and start the rollback.
+      </li>
+      <li>
+        Exit XOWA
+      </li>
+      <li>
+        Restore en.wikipedia.org-core.xowa
+      </li>
+      <li>
+        If backups exist, restore en.wikipedia.org-html.user.xowa and en.wikipedia.org-sync.xowa
+      </li>
+      <li>
+        If backups don't exist, delete en.wikipedia.org-html.user.xowa and en.wikipedia.org-sync.xowa
+      </li>
+      <li>
+        Run XOWA and go to <a href="https://en.wikipedia.org/wiki/Pythagorean_theorem" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Pythagorean_theorem</a>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="No_synchronization_for_new_pages">No synchronization for new pages</span>
+    </h3>
+    <p>
+      A page must exist in the offline wiki in order to be synchronized. New pages cannot be synchronized. Navigating to a new page will just result in a "Page not found" error.
+    </p>
+    <p>
+      This feature will also be added in a future version
+    </p>
+    <h3>
+      <span class="mw-headline" id="Other_issues">Other issues</span>
+    </h3>
+    <p>
+      Other issues may be present. Please check <a href="https://github.com/gnosygnu/xowa/issues/72" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/72</a> for updates. Once the issue is closed, then the Page Sync feature will no longer be marked "Work in progress" and should be fully operational
+    </p>
+    <h2>
+      <span class="mw-headline" id="Usage_notes">Usage notes</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Manual_sync">Manual sync</span>
+    </h3>
+    <p>
+      Manual sync works by doing the following:
+    </p>
+    <ul>
+      <li>
+        Enable "manual sync" in the options page
+      </li>
+      <li>
+        Click the "Sync" link in the left-hand sidebar.
+      </li>
+    </ul>
+    <p>
+      Note the following details:
+    </p>
+    <ul>
+      <li>
+        <b>online mode required</b>: You must have "Web access enabled" in <a href="http://xowa.org/home/wiki/Options/Security.html" id="xolnki_4" title="Options/Security" class="xowa-visited">Options/Security</a>
+      </li>
+      <li>
+        <b>exclusions</b>: Page sync does not work for the following pages: 
+        <ul>
+          <li>
+            <b>home wiki pages</b>: For example, this page. The home wiki is updated offline with every release. The latest version can also be viewed online at <a href="http://xowa.org" rel="nofollow" class="external free">http://xowa.org</a>
+          </li>
+          <li>
+            <b>Special pages</b>: Nearly all special pages have dynamic content and cannot be "mirrored" offline
+          </li>
+          <li>
+            <b>Wikia / non-Wikimedia pages</b>: Wikia wikis and non-Wikimedia wikis cannot be synchronized. This may be an option for a future release, but there are currently no plans.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Auto_sync">Auto sync</span>
+    </h3>
+    <p>
+      Automatic sync works by doing the following:
+    </p>
+    <ul>
+      <li>
+        Enable "manual sync" in the options page
+      </li>
+      <li>
+        Visit the Main_Page for a wiki. The page will automatically sync
+      </li>
+    </ul>
+    <p>
+      Note the following details:
+    </p>
+    <ul>
+      <li>
+        <b>default page is Main_Page</b>: Due to the issues above, it's recommended that auto-sync only be enabled for the Main Page. Other pages can be added under custom scope
+      </li>
+      <li>
+        <b>default interval is 1440 minutes (24 hours)</b>: By default, XOWA will only synchronize a page if the last synchronization check is at least 24 hours old. This interval can also be adjusted
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Technical_details">Technical details</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Manual_sync_2">Manual sync</span>
+    </h3>
+    <p>
+      This is an overview of what occurs when the Sync link is pressed
+    </p>
+    <ul>
+      <li>
+        XOWA calls the Wikipedia api to get the HTML version of the page. For example: 
+<pre>
+https://en.wikipedia.org/w/api.php?action=parse&amp;format=json&amp;redirects=1&amp;page=Wikipedia:Main%20Page
+</pre>
+      </li>
+      <li>
+        XOWA parses the HTML and... 
+        <ul>
+          <li>
+            Removes the Edit links (These aren't implemented in XOWA. They can be but I personally find them distracting and not applicable offline.)
+          </li>
+          <li>
+            Identifies images to download.
+          </li>
+        </ul>
+      </li>
+      <li>
+        XOWA saves the HTML to "en.wikipedia.org-html.user.xowa"
+      </li>
+      <li>
+        XOWA updates the core database (en.wikipedia.org-core.xowa) to point to this HTML
+      </li>
+      <li>
+        XOWA then downloads the images separately
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id="Automatic_sync">Automatic sync</span>
+    </h3>
+    <p>
+      Automatic sync uses the same process as Manual Sync. The main process is as follows:
+    </p>
+    <ul>
+      <li>
+        XOWA opens a page
+      </li>
+      <li>
+        XOWA checks if auto sync is enabled
+      </li>
+      <li>
+        If auto-sync is enabled, then it checks the sync time in "en.wikipedia.org-sync.xowa"
+      </li>
+      <li>
+        If the sync time doesn't exist, or is greater than the specified interval (24 hours by default), then it kicks off the manual sync
+      </li>
+      <li>
+        XOWA updates the sync time for the page
+      </li>
+    </ul>
+  
+    </div>
+  </div>
+</div>
+
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(https://gnosygnu.github.io/xowa/xowa_logo.png);" href="http://xowa.org/" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/index.html" title='Visit the main page'>Main page</a></li>
+        <li><a href="http://xowa.org/screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="https://www.youtube.com/watch?v=q0qbXYXEH6M" title="See a video of XOWA Desktop in action">Video</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Download_XOWA.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="http://xowa.org/home/wiki/Dashboard/Image_databases.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-started'>
+    <h3>Getting started</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/System_requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Setup/Installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Simple_Wikipedia.html" title='Learn how to set up Simple Wikipedia'>Simple Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/English_Wikipedia.html" title='Learn how to set up English Wikipedia'>English Wikipedia</a></li>
+        <li><a href="http://xowa.org/home/wiki/App/Import/Other_wikis.html" title='Learn how to set up other Wikipedias'>Other Wikipedias</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-android'>
+    <h3>Android</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Android/Setup.html" title='Setup XOWA on your Android device'>Setup</a></li>
+        <li><a href="https://www.youtube.com/watch?v=jsMTBxGweUw" title="See a video of XOWA Android in action">Video</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Help/About.html" title='Get more information about XOWA'>About</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Contents.html" title='View a list of help topics'>Contents</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Media.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="http://xowa.org/home/wiki/Help/Feedback.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-blog'>
+    <h3>Blog</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.org/home/wiki/Blog.html" title='Follow XOWA''s development process'>Current</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

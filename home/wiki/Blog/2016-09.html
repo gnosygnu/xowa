@@ -64,13 +64,146 @@
       </div>
       <ul>
         <li class="toclevel-1 tocsection-1">
-          <a href="#Wikis:_Czech_Wikis_.282016-09.29_.282016-09-05_23:00_Mon.29"><span class="tocnumber">1</span> <span class="toctext">Wikis: Czech Wikis (2016-09) (2016-09-05 23:00 Mon)</span></a>
+          <a href="#Release:_v3.9.2.1_.282016-09-11_19:00_Sun.29"><span class="tocnumber">1</span> <span class="toctext">Release: v3.9.2.1 (2016-09-11 19:00 Sun)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#.28PC.29_Fix_for_Category_pages_not_working"><span class="tocnumber">1.1</span> <span class="toctext">(PC) Fix for Category pages not working</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-3">
+              <a href="#.28PC.29_New_Category_system_to_handle_HTML_dumps"><span class="tocnumber">1.2</span> <span class="toctext">(PC) New Category system to handle HTML dumps</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#.28PC.29_Basic_page_synchronization_feature_to_get_latest_from_online"><span class="tocnumber">1.3</span> <span class="toctext">(PC) Basic page synchronization feature to get latest from online</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#.28PC_.2F_Android.29_Download_Central_changes_for_dropped_connections_.2F_Mac_OS_X"><span class="tocnumber">1.4</span> <span class="toctext">(PC / Android) Download Central changes for dropped connections / Mac OS X</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-6">
+              <a href="#.28PC.29_Various_parser_changes_including_Protectiong_Banner.2C_stack_overflow.2C_and_invalid_UTF-8"><span class="tocnumber">1.5</span> <span class="toctext">(PC) Various parser changes including Protectiong Banner, stack overflow, and invalid UTF-8</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#.28PC.29_Other_minor_changes_including_read-only_support.2C_torrent-file_links_and_docs_for_HTML_dump"><span class="tocnumber">1.6</span> <span class="toctext">(PC) Other minor changes including read-only support, torrent-file links and docs for HTML dump</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-8">
+              <a href="#Next_release:_v3.9.3"><span class="tocnumber">1.7</span> <span class="toctext">Next release: v3.9.3</span></a>
+            </li>
+          </ul>
         </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#Release:_NONE_.282016-09-04_22:00_Sun.29"><span class="tocnumber">2</span> <span class="toctext">Release: NONE (2016-09-04 22:00 Sun)</span></a>
+        <li class="toclevel-1 tocsection-9">
+          <a href="#Wikis:_Czech_Wikis_.282016-09.29_.282016-09-05_23:00_Mon.29"><span class="tocnumber">2</span> <span class="toctext">Wikis: Czech Wikis (2016-09) (2016-09-05 23:00 Mon)</span></a>
+        </li>
+        <li class="toclevel-1 tocsection-10">
+          <a href="#Release:_NONE_.282016-09-04_22:00_Sun.29"><span class="tocnumber">3</span> <span class="toctext">Release: NONE (2016-09-04 22:00 Sun)</span></a>
         </li>
       </ul>
     </div>
+    <h2>
+      <span class="mw-headline" id="Release:_v3.9.2.1_.282016-09-11_19:00_Sun.29">Release: v3.9.2.1 (2016-09-11 19:00 Sun)</span>
+    </h2>
+    <p>
+      The PC version is a major release. It has a fix for broken Category pages, a new Category system, a new page sync feature, and other changes.
+    </p>
+    <p>
+      The Android version is a minor release. It has a fix for dropped connections in Download Central.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28PC.29_Fix_for_Category_pages_not_working">(PC) Fix for Category pages not working</span>
+    </h3>
+    <p>
+      v3.8.5.1 had a bug that broke Category pages. For example, <a href="https://simple.wikipedia.org/wiki/Category:Earth" rel="nofollow" class="external free">https://simple.wikipedia.org/wiki/Category:Earth</a> . This would only retrieve one random category. v3.9.2.1 fixes the issue.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28PC.29_New_Category_system_to_handle_HTML_dumps">(PC) New Category system to handle HTML dumps</span>
+    </h3>
+    <p>
+      As per <a href="https://github.com/gnosygnu/xowa/issues/81" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/81</a> Category pages were not showing for HTML dumps. I rewrote the Category system to handle this. Here are the high-level points:
+    </p>
+    <ul>
+      <li>
+        <b>Works for future HTML dumps</b>: I will be uploading new versions of 2016-09 English, German and French Wikipedia this week that will use the Category system. Unfortunately, existing HTML dumps won't work with them.
+      </li>
+      <li>
+        <b>Smaller size</b>: The new Category system makes some database changes to reduce file size. For English Wikipedia, that means a difference between 10 GB and 8 GB. 8 GB may sound like a lot for Categories, but keep in mind there are over 100 million page to category links.
+      </li>
+      <li>
+        <b>Backward compatible</b>: The existing Category system will work with the new code-base.
+      </li>
+      <li>
+        <b>Does not work for text database dumps</b>: XOWA originally started off storing files in text files instead of sqlite files. I switched over to SQLite three years ago and phased out text databases two years ago. It's possible that some users with old wikis (3 years old) may still have these text databases. If so, then the new Category system won't work.
+      </li>
+    </ul>
+    <p>
+      In short, the changes should be transparent to most, except HTML dump users will soon get Categories.
+    </p>
+    <p>
+      There's a little more info at <a href="http://xowa.org/home/wiki/App/Category.html" id="xolnki_12" title="App/Category" class="xowa-visited">Category Overview</a> for those interested.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28PC.29_Basic_page_synchronization_feature_to_get_latest_from_online">(PC) Basic page synchronization feature to get latest from online</span>
+    </h3>
+    <p>
+      As per <a href="https://github.com/gnosygnu/xowa/issues/72" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/72</a> XOWA will now be able to sync pages directly from the online version. This feature is still a work-in-progress, and probably should only be done for selective pages. Certain pages won't sync correctly for a few more releases -- namely, pages with Math. See <a href="http://xowa.org/home/wiki/App/Xtn/Page_sync.html" id="xolnki_13" title="App/Xtn/Page sync" class="xowa-visited">App/Xtn/Page_sync</a> for more info.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28PC_.2F_Android.29_Download_Central_changes_for_dropped_connections_.2F_Mac_OS_X">(PC / Android) Download Central changes for dropped connections / Mac OS X</span>
+    </h3>
+    <p>
+      As per <a href="https://github.com/gnosygnu/xowa/issues/80" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/80</a> dropped connections in Download Central would appear to hang on Mac OS X. This release should now force Mac OS X to report dropped connections. In addition, it also will try to reconnect for a minute once a connection is dropped, before giving up.
+    </p>
+    <h3>
+      <span class="mw-headline" id=".28PC.29_Various_parser_changes_including_Protectiong_Banner.2C_stack_overflow.2C_and_invalid_UTF-8">(PC) Various parser changes including Protectiong Banner, stack overflow, and invalid UTF-8</span>
+    </h3>
+    <p>
+      This release has a bunch of parser changes. The <a href="http://xowa.org/home/wiki/Change_log/v3.9.2.1.html" id="xolnki_14" title="Change log/v3.9.2.1">Change log</a> has a complete list. The most relevant items are the following:
+    </p>
+    <ul>
+      <li>
+        <b>Protection banners now appear</b>: Previously, they didn't show due to a bug in returning Protection data. Currently, they will show whenever the pages says they are protected. Note that no page is ever protected from editing in XOWA: you can always click on the Edit button.
+      </li>
+      <li>
+        <b>Stack overflow error</b>: A handful of pages would crash the program with stack overflow. These will now just show with omitted content
+      </li>
+      <li>
+        <b>Xowa/Luaj issue with foreign characters</b>: There was a multi-threading issue with foreign characters. These are random and very low frequency. They will be fixed for future dumps.
+      </li>
+    </ul>
+    <h3>
+      <span class="mw-headline" id=".28PC.29_Other_minor_changes_including_read-only_support.2C_torrent-file_links_and_docs_for_HTML_dump">(PC) Other minor changes including read-only support, torrent-file links and docs for HTML dump</span>
+    </h3>
+    <p>
+      Thanks to multiple users, this build also resolves some minor issues:
+    </p>
+    <ul>
+      <li>
+        <b>Read-only Sqlite files are slow (thanks to Ope30)</b>: Previously, a sqlite file marked as read-only would be much slower. This build now handles read-only files correctly.
+      </li>
+      <li>
+        <b>Torrent links for non-Wikipedia wikis were wrong (thanks to malakov1)</b>: Download Central was reporting the wrong torrent links for non-Wikipedia wikis. For example, English Wiktionary was being listed as <a href="http://archive.org/Xowa_enwiktionary_latest" rel="nofollow" class="external free">http://archive.org/Xowa_enwiktionary_latest</a> . This build corrects the issue.
+      </li>
+      <li>
+        <b>Wrong documentation for HTML dumps (thanks to Rüdiger Gleim)</b>: The command-line script for generating HTML dumps have changed over the past few releases. I forgot to update the documentation page at <a href="http://xowa.org/home/wiki/Dev/Command-line/Thumbs.html" id="xolnki_15" title="Dev/Command-line/Thumbs">Dev/Command-line/Thumbs</a>.
+      </li>
+    </ul>
+    <p>
+      Also, at risk of omission, additional thanks to markusmaresch for reporting the Mac OS X issue, and MDE186 for testing the page sync feature.
+    </p>
+    <h3>
+      <span class="mw-headline" id="Next_release:_v3.9.3">Next release: v3.9.3</span>
+    </h3>
+    <ul>
+      <li>
+        <b>Wikis</b>: This is going to be a busy week. I'm going to generate 2016-09 versions of English, German, and French Wikipedia with the new Category System and Random.
+      </li>
+      <li>
+        <b>Dynamic update of wiki pages</b>: I still have more work to do on this feature. In particular, I'd like to get Math and other images showing correctly.
+      </li>
+      <li>
+        <b>Image shrink</b>: I'm going to try to shrink the English Wikipedia images on a quarterly basis. I'm hoping to get this integrated directly into Download Central, so Android users can get it to work
+      </li>
+    </ul>
+    <p>
+      <br>
+    </p>
     <h2>
       <span class="mw-headline" id="Wikis:_Czech_Wikis_.282016-09.29_.282016-09-05_23:00_Mon.29">Wikis: Czech Wikis (2016-09) (2016-09-05 23:00 Mon)</span>
     </h2>
@@ -100,13 +233,7 @@
     <p>
       For wikis, I'm going to try to update 2016-09 English Wikipedia, but I want to work on adding Categories as well as a few other items.
     </p>
-  <div id="catlinks" class="catlinks">
-<div id="mw-normal-catlinks" class="mw-normal-catlinks">
-Categories
-<ul>
-</ul>
-</div>
-</div>
+  
     </div>
   </div>
 </div>

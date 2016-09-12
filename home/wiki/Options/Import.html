@@ -266,6 +266,9 @@ li.active a, li.active a:hover
             <a href='/wiki/Options/HTML_databases'>HTML databases</a>
           </li>
           <li class=''>
+            <a href='/wiki/Options/Page_sync'>Page sync</a>
+          </li>
+          <li class=''>
             <a href='/wiki/Options/Category'>Category</a>
           </li>
           <li class=''>
@@ -313,25 +316,10 @@ li.active a, li.active a:hover
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              Search version: <sup id="cite_ref-search_version_0-0" class="reference"><a href="#cite_note-search_version-0">[1]</a></sup>
+              Page storage format: <sup id="cite_ref-data_storage_format_0-0" class="reference"><a href="#cite_note-data_storage_format-0">[1]</a></sup>
             </td>
             <td>
-              <select xowa_prop="app.setup.dumps.search_version" xowa_prop_list="app.setup.dumps.search_version_list" class="options_textbox" size='2' id='xowa_prop_0'>
-                <option value='1'>
-                  1
-                </option>
-                <option value='2' selected='selected'>
-                  2
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td class='options_row_label'>
-              Page storage format: <sup id="cite_ref-data_storage_format_1-0" class="reference"><a href="#cite_note-data_storage_format-1">[2]</a></sup>
-            </td>
-            <td>
-              <select xowa_prop="xowa.api.bldr.wiki.import.zip_tid_text" xowa_prop_list="xowa.api.bldr.wiki.import.zip_tid_list" class="options_textbox" size='3' id='xowa_prop_1'>
+              <select xowa_prop="xowa.api.bldr.wiki.import.zip_tid_text" xowa_prop_list="xowa.api.bldr.wiki.import.zip_tid_list" class="options_textbox" size='3' id='xowa_prop_0'>
                 <option value='raw'>
                   text
                 </option>
@@ -351,10 +339,10 @@ li.active a, li.active a:hover
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              Dump servers: <sup id="cite_ref-dump_server_urls_2-0" class="reference"><a href="#cite_note-dump_server_urls-2">[3]</a></sup>
+              Dump servers: <sup id="cite_ref-dump_server_urls_1-0" class="reference"><a href="#cite_note-dump_server_urls-1">[2]</a></sup>
             </td>
             <td>
-<textarea xowa_prop="app.setup.dumps.server_urls" class="options_textarea" style="width: 400px; height:72px;" id='xowa_prop_2'>
+<textarea xowa_prop="app.setup.dumps.server_urls" class="options_textarea" style="width: 400px; height:72px;" id='xowa_prop_1'>
 https://dumps.wikimedia.org/,
 http://dumps.wikimedia.your.org/,
 http://wikipedia.c3sl.ufpr.br/,
@@ -364,45 +352,45 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           </tr>
           <tr>
             <td class='options_row_label'>
-              Import bz2 by stdout: <sup id="cite_ref-import_bz2_by_stdout_3-0" class="reference"><a href="#cite_note-import_bz2_by_stdout-3">[4]</a></sup>
+              Import bz2 by stdout: <sup id="cite_ref-import_bz2_by_stdout_2-0" class="reference"><a href="#cite_note-import_bz2_by_stdout-2">[3]</a></sup>
             </td>
             <td>
-              <input xowa_prop="app.setup.dumps.import_bz2_by_stdout" type="checkbox" class="options_checkbox" id='xowa_prop_3' checked='checked'>
+              <input xowa_prop="app.setup.dumps.import_bz2_by_stdout" type="checkbox" class="options_checkbox" id='xowa_prop_2' checked='checked'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Import bz2 by stdout process:<sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[5]</a></sup>
+              Import bz2 by stdout process:<sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[4]</a></sup>
             </td>
             <td>
-              <input xowa_prop="app.fsys.apps.decompress_bz2_by_stdout.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_4' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_4_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_4", "Please select a file.");'>...</button> 
+              <input xowa_prop="app.fsys.apps.decompress_bz2_by_stdout.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_3' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_3_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_3", "Please select a file.");'>...</button> 
               <p>
-                <input xowa_prop="app.fsys.apps.decompress_bz2_by_stdout.args" class="options_textbox" style="width: 380px;" id='xowa_prop_5' value='x -so "~{src}"'>
+                <input xowa_prop="app.fsys.apps.decompress_bz2_by_stdout.args" class="options_textbox" style="width: 380px;" id='xowa_prop_4' value='x -so "~{src}"'>
               </p>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Custom wiki commands: <sup id="cite_ref-custom_cmds_5-0" class="reference"><a href="#cite_note-custom_cmds-5">[6]</a></sup>
+              Custom wiki commands: <sup id="cite_ref-custom_cmds_4-0" class="reference"><a href="#cite_note-custom_cmds-4">[5]</a></sup>
             </td>
             <td>
-              <input xowa_prop="app.setup.dumps.custom_cmds" class="options_textbox" style="width: 400px;" id='xowa_prop_6' value='wiki.download,wiki.import'>
+              <input xowa_prop="app.setup.dumps.custom_cmds" class="options_textbox" style="width: 400px;" id='xowa_prop_5' value='wiki.download,wiki.import'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Download xowa_common.css: <sup id="cite_ref-download_xowa_common_css_6-0" class="reference"><a href="#cite_note-download_xowa_common_css-6">[7]</a></sup>
+              Download xowa_common.css: <sup id="cite_ref-download_xowa_common_css_5-0" class="reference"><a href="#cite_note-download_xowa_common_css-5">[6]</a></sup>
             </td>
             <td>
-              <input xowa_prop="app.setup.dumps.css_commons_download" type="checkbox" class="options_checkbox" id='xowa_prop_7' checked='checked'>
+              <input xowa_prop="app.setup.dumps.css_commons_download" type="checkbox" class="options_checkbox" id='xowa_prop_6' checked='checked'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Delete xml file after import: <sup id="cite_ref-delete_xml_file_7-0" class="reference"><a href="#cite_note-delete_xml_file-7">[8]</a></sup>
+              Delete xml file after import: <sup id="cite_ref-delete_xml_file_6-0" class="reference"><a href="#cite_note-delete_xml_file-6">[7]</a></sup>
             </td>
             <td>
-              <input xowa_prop="app.setup.dumps.delete_xml_file" type="checkbox" class="options_checkbox" id='xowa_prop_8' checked='checked'>
+              <input xowa_prop="app.setup.dumps.delete_xml_file" type="checkbox" class="options_checkbox" id='xowa_prop_7' checked='checked'>
             </td>
           </tr>
         </table>
@@ -412,10 +400,10 @@ http://ftp.fi.muni.cz/pub/wikimedia/
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              PageRank iteration max: <sup id="cite_ref-page_rank-iteration_max_8-0" class="reference"><a href="#cite_note-page_rank-iteration_max-8">[9]</a></sup>
+              PageRank iteration max: <sup id="cite_ref-page_rank-iteration_max_7-0" class="reference"><a href="#cite_note-page_rank-iteration_max-7">[8]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.import.page_rank.iteration_max" class="options_textbox" style="width: 400px;" id='xowa_prop_9' value='0'>
+              <input xowa_prop="xowa.api.bldr.wiki.import.page_rank.iteration_max" class="options_textbox" style="width: 400px;" id='xowa_prop_8' value='0'>
             </td>
           </tr>
         </table>
@@ -425,26 +413,26 @@ http://ftp.fi.muni.cz/pub/wikimedia/
         <table class='options_table'>
           <tr>
             <td class='options_row_label'>
-              Max file size for single text database: <sup id="cite_ref-layout_text_max_9-0" class="reference"><a href="#cite_note-layout_text_max-9">[10]</a></sup>
+              Max file size for single text database: <sup id="cite_ref-layout_text_max_8-0" class="reference"><a href="#cite_note-layout_text_max-8">[9]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.import.layout_text_max" class="options_textbox" style="width: 400px;" id='xowa_prop_10' value='1500'>
+              <input xowa_prop="xowa.api.bldr.wiki.import.layout_text_max" class="options_textbox" style="width: 400px;" id='xowa_prop_9' value='1500'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Max file size for single file database: <sup id="cite_ref-layout_text_max_9-1" class="reference"><a href="#cite_note-layout_text_max-9">[10]</a></sup>
+              Max file size for single file database: <sup id="cite_ref-layout_text_max_8-1" class="reference"><a href="#cite_note-layout_text_max-8">[9]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.import.layout_file_max" class="options_textbox" style="width: 400px;" id='xowa_prop_11' value='1500'>
+              <input xowa_prop="xowa.api.bldr.wiki.import.layout_file_max" class="options_textbox" style="width: 400px;" id='xowa_prop_10' value='1500'>
             </td>
           </tr>
           <tr>
             <td class='options_row_label'>
-              Max file size for single html database: <sup id="cite_ref-layout_text_max_9-2" class="reference"><a href="#cite_note-layout_text_max-9">[10]</a></sup>
+              Max file size for single html database: <sup id="cite_ref-layout_text_max_8-2" class="reference"><a href="#cite_note-layout_text_max-8">[9]</a></sup>
             </td>
             <td>
-              <input xowa_prop="xowa.api.bldr.wiki.import.layout_html_max" class="options_textbox" style="width: 400px;" id='xowa_prop_12' value='1500'>
+              <input xowa_prop="xowa.api.bldr.wiki.import.layout_html_max" class="options_textbox" style="width: 400px;" id='xowa_prop_11' value='1500'>
             </td>
           </tr>
         </table>
@@ -456,13 +444,13 @@ http://ftp.fi.muni.cz/pub/wikimedia/
             <td class='options_row_label'>
               Decompress bz2 file 
               <p>
-                <sup id="cite_ref-12" class="reference"><a href="#cite_note-12">[11]</a></sup>
+                <sup id="cite_ref-11" class="reference"><a href="#cite_note-11">[10]</a></sup>
               </p>
             </td>
             <td>
-              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_13' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_13_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_13", "Please select a file.");'>...</button> 
+              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_12' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_12_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_12", "Please select a file.");'>...</button> 
               <p>
-                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_14' value='x -y -r "~{src}" -o"~{trg_dir}"'>
+                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_13' value='x -y -r "~{src}" -o"~{trg_dir}"'>
               </p>
             </td>
           </tr>
@@ -470,13 +458,13 @@ http://ftp.fi.muni.cz/pub/wikimedia/
             <td class='options_row_label'>
               Decompress zip file 
               <p>
-                <sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[12]</a></sup>
+                <sup id="cite_ref-12" class="reference"><a href="#cite_note-12">[11]</a></sup>
               </p>
             </td>
             <td>
-              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_15' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_15_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_15", "Please select a file.");'>...</button> 
+              <input xowa_prop="app.fsys.apps.decompress_bz2.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_14' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_14_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_14", "Please select a file.");'>...</button> 
               <p>
-                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_16' value='x -y -r "~{src}" -o"~{trg_dir}"'>
+                <input xowa_prop="app.fsys.apps.decompress_bz2.args" class="options_textbox" style="width: 380px;" id='xowa_prop_15' value='x -y -r "~{src}" -o"~{trg_dir}"'>
               </p>
             </td>
           </tr>
@@ -484,13 +472,13 @@ http://ftp.fi.muni.cz/pub/wikimedia/
             <td class='options_row_label'>
               Decompress gz file 
               <p>
-                <sup id="cite_ref-14" class="reference"><a href="#cite_note-14">[13]</a></sup>
+                <sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[12]</a></sup>
               </p>
             </td>
             <td>
-              <input xowa_prop="app.fsys.apps.decompress_gz.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_17' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_17_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_17", "Please select a file.");'>...</button> 
+              <input xowa_prop="app.fsys.apps.decompress_gz.cmd" class="options_textbox" style="width: 380px; margin-bottom:2px;" type="xowa_io" id='xowa_prop_16' value='C:\xowa\bin\windows_64\7-zip\7za'><button id='xowa_prop_16_io' class='options_button' onclick='xowa_io_select("file", "xowa_prop_16", "Please select a file.");'>...</button> 
               <p>
-                <input xowa_prop="app.fsys.apps.decompress_gz.args" class="options_textbox" style="width: 380px;" id='xowa_prop_18' value='x -y -r "~{src}" -o"~{trg_dir}"'>
+                <input xowa_prop="app.fsys.apps.decompress_gz.args" class="options_textbox" style="width: 380px;" id='xowa_prop_17' value='x -y -r "~{src}" -o"~{trg_dir}"'>
               </p>
             </td>
           </tr>
@@ -499,19 +487,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
           <span class="mw-headline" id="Notes">Notes</span>
         </h2>
         <ol class="references">
-          <li id="cite_note-search_version-0">
-            <span class="mw-cite-backlink"><a href="#cite_ref-search_version_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>2</code>)</span>
-            <ul>
-              <li>
-                <span class="reference-text"><b>1</b> : search uses page title data. searches are less accurate, but less space is used</span>
-              </li>
-              <li>
-                <span class="reference-text"><b>2</b> : (default) search uses title word data. searches are more accurate, but more space is used and setup is longer. For English Wikipedia, another 1.8 GB and 38 min of time are needed.</span>
-              </li>
-            </ul>
-          </li>
-          <li id="cite_note-data_storage_format-1">
-            <span class="mw-cite-backlink"><a href="#cite_ref-data_storage_format_1-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>.gz</code>)</span>
+          <li id="cite_note-data_storage_format-0">
+            <span class="mw-cite-backlink"><a href="#cite_ref-data_storage_format_0-0">^</a></span> <span class="reference-text">Choose one of the following: (default is <code>.gz</code>)</span>
             <ul>
               <li>
                 <span class="reference-text"><b>text</b>: fastest for reading but has no compression. Simple Wikipedia will be 300 MB</span>
@@ -524,8 +501,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-dump_server_urls-2">
-            <span class="mw-cite-backlink"><a href="#cite_ref-dump_server_urls_2-0">^</a></span> <span class="reference-text">Enter a list of server urls separated by a comma and newline.</span>
+          <li id="cite_note-dump_server_urls-1">
+            <span class="mw-cite-backlink"><a href="#cite_ref-dump_server_urls_1-0">^</a></span> <span class="reference-text">Enter a list of server urls separated by a comma and newline.</span>
             <ul>
               <li>
                 <span class="reference-text">The default value is:</span>
@@ -547,8 +524,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-import_bz2_by_stdout-3">
-            <span class="mw-cite-backlink"><a href="#cite_ref-import_bz2_by_stdout_3-0">^</a></span> <span class="reference-text"><b>NOTE 1: this option only applies if the "Custom wiki commands" option is <code>wiki.download,wiki.import</code> (wiki.unzip must be removed)</b><br>
+          <li id="cite_note-import_bz2_by_stdout-2">
+            <span class="mw-cite-backlink"><a href="#cite_ref-import_bz2_by_stdout_2-0">^</a></span> <span class="reference-text"><b>NOTE 1: this option only applies if the "Custom wiki commands" option is <code>wiki.download,wiki.import</code> (wiki.unzip must be removed)</b><br>
             Select the method for importing a wiki dump bz2 file. (default is <code>checked</code>)</span>
             <ul>
               <li>
@@ -580,11 +557,11 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-4">
-            <span class="mw-cite-backlink"><a href="#cite_ref-4">^</a></span> <span class="reference-text">Process used to decompress bz2 by stdout. Recommended: Operating System default</span>
+          <li id="cite_note-3">
+            <span class="mw-cite-backlink"><a href="#cite_ref-3">^</a></span> <span class="reference-text">Process used to decompress bz2 by stdout. Recommended: Operating System default</span>
           </li>
-          <li id="cite_note-custom_cmds-5">
-            <span class="mw-cite-backlink"><a href="#cite_ref-custom_cmds_5-0">^</a></span> <span class="reference-text">Select custom commands: (default is <code>wiki.download,wiki.unzip,wiki.import</code>)<br>
+          <li id="cite_note-custom_cmds-4">
+            <span class="mw-cite-backlink"><a href="#cite_ref-custom_cmds_4-0">^</a></span> <span class="reference-text">Select custom commands: (default is <code>wiki.download,wiki.unzip,wiki.import</code>)<br>
              <b>Short version:</b></span>
             <ul>
               <li>
@@ -648,8 +625,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </dd>
             </dl>
           </li>
-          <li id="cite_note-download_xowa_common_css-6">
-            <span class="mw-cite-backlink"><a href="#cite_ref-download_xowa_common_css_6-0">^</a></span> <span class="reference-text">Affects the xowa_common.css in /xowa/user/anonymous/wiki/wiki_name/html/. Occurs when importing a wiki. (default is <code>checked</code>)</span>
+          <li id="cite_note-download_xowa_common_css-5">
+            <span class="mw-cite-backlink"><a href="#cite_ref-download_xowa_common_css_5-0">^</a></span> <span class="reference-text">Affects the xowa_common.css in /xowa/user/anonymous/wiki/wiki_name/html/. Occurs when importing a wiki. (default is <code>checked</code>)</span>
             <ul>
               <li>
                 <span class="reference-text"><b>checked</b> : downloads xowa_common.css from the Wikimedia servers. Note that this stylesheet will be the latest copy but it may cause unexpected formatting in XOWA.</span>
@@ -659,8 +636,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-delete_xml_file-7">
-            <span class="mw-cite-backlink"><a href="#cite_ref-delete_xml_file_7-0">^</a></span> <span class="reference-text">(Only relevant for wiki.unzip) Choose one of the following: (default is <code>checked</code>)</span>
+          <li id="cite_note-delete_xml_file-6">
+            <span class="mw-cite-backlink"><a href="#cite_ref-delete_xml_file_6-0">^</a></span> <span class="reference-text">(Only relevant for wiki.unzip) Choose one of the following: (default is <code>checked</code>)</span>
             <ul>
               <li>
                 <span class="reference-text"><b>checked</b> : (default) the .xml file is automatically deleted once the import process completes</span>
@@ -670,8 +647,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-page_rank-iteration_max-8">
-            <span class="mw-cite-backlink"><a href="#cite_ref-page_rank-iteration_max_8-0">^</a></span> <span class="reference-text">Specify one of the following: (default is <code>0</code>)</span>
+          <li id="cite_note-page_rank-iteration_max-7">
+            <span class="mw-cite-backlink"><a href="#cite_ref-page_rank-iteration_max_7-0">^</a></span> <span class="reference-text">Specify one of the following: (default is <code>0</code>)</span>
             <ul>
               <li>
                 <span class="reference-text"><b>0</b> : (default) page rank is disabled</span>
@@ -681,8 +658,8 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
-          <li id="cite_note-layout_text_max-9">
-            <span class="mw-cite-backlink">^ <sup><a href="#cite_ref-layout_text_max_9-0">a</a></sup> <sup><a href="#cite_ref-layout_text_max_9-1">b</a></sup> <sup><a href="#cite_ref-layout_text_max_9-2">c</a></sup></span> <span class="reference-text">Enter a number in MB to represent the cutoff for generating sets of page databases as one file or many files (default is <code>1500</code>)<br>
+          <li id="cite_note-layout_text_max-8">
+            <span class="mw-cite-backlink">^ <sup><a href="#cite_ref-layout_text_max_8-0">a</a></sup> <sup><a href="#cite_ref-layout_text_max_8-1">b</a></sup> <sup><a href="#cite_ref-layout_text_max_8-2">c</a></sup></span> <span class="reference-text">Enter a number in MB to represent the cutoff for generating sets of page databases as one file or many files (default is <code>1500</code>)<br>
              XOWA generates three types of page databases:</span>
             <ul>
               <li>
@@ -718,25 +695,19 @@ http://ftp.fi.muni.cz/pub/wikimedia/
               </li>
             </ul>
           </li>
+          <li id="cite_note-11">
+            <span class="mw-cite-backlink"><a href="#cite_ref-11">^</a></span> <span class="reference-text">Decompress bz2 file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+          </li>
           <li id="cite_note-12">
-            <span class="mw-cite-backlink"><a href="#cite_ref-12">^</a></span> <span class="reference-text">Decompress bz2 file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+            <span class="mw-cite-backlink"><a href="#cite_ref-12">^</a></span> <span class="reference-text">Decompress zip file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
           </li>
           <li id="cite_note-13">
-            <span class="mw-cite-backlink"><a href="#cite_ref-13">^</a></span> <span class="reference-text">Decompress zip file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
-          </li>
-          <li id="cite_note-14">
-            <span class="mw-cite-backlink"><a href="#cite_ref-14">^</a></span> <span class="reference-text">Decompress gz file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
+            <span class="mw-cite-backlink"><a href="#cite_ref-13">^</a></span> <span class="reference-text">Decompress gz file(needed for importing dumps) . Recommended: <a href="http://7-zip.org/" rel="nofollow" class="external text">7-zip</a></span>
           </li>
         </ol>
       </div>
     </div>
-  <div id="catlinks" class="catlinks">
-<div id="mw-normal-catlinks" class="mw-normal-catlinks">
-Categories
-<ul>
-</ul>
-</div>
-</div>
+  
     </div>
   </div>
 </div>

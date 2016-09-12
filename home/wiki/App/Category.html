@@ -18,17 +18,46 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
     <p>
-      XOWA currently has two category systems. This page will explain the rationale / details behind both.
+      As of v3.9.2.1 XOWA has one Category system: v3.
     </p>
+    <ul>
+      <li>
+        The first part of this page will discuss v3.
+      </li>
+      <li>
+        The second part of the page is an archived copy of the earlier v1 and v2 explanation
+      </li>
+    </ul>
+    <h2>
+      <span class="mw-headline" id="Version_3">Version 3</span>
+    </h2>
     <p>
-      An overview follows below.
+      Version 3 was introduced to handle Categories for HTML dumps on PC and Android. The high-level details are as follows:
     </p>
-    <p>
-      For more information about V2 setup see <a href="http://xowa.org/home/wiki/App/Category/Building.html" id="xolnki_2" title="App/Category/Building">App/Category/Building</a>
-    </p>
-    <p>
-      For more information about V2 internals see <a href="http://xowa.org/home/wiki/App/Category/Internals.html" id="xolnki_3" title="App/Category/Internals">App/Category/Internals</a>
-    </p>
+    <ul>
+      <li>
+        <b>Uses the Wikimedia categorylinks and page_props dumps</b>: Like v2, v3 downloads separate MediaWiki dumps for categorylinks.sql and page_props.sql . Both files are needed to generate accurate renditions of the Wikipedia Category system.
+      </li>
+      <li>
+        <b>Generates "*-xtn.category.*.xowa" files</b>: v3 stores all the category info in "*-xtn.category.*.xowa" files. For smaller wikis, the data is stored instead in the "-core.xowa" file
+      </li>
+      <li>
+        <b>Works with both Wikitext databases and HTML databases</b>: v3 will work with wikis imported by "Import/Online" (Wikitext) as well as "Download Central" (HTML)
+      </li>
+      <li>
+        <b>Is backwards compatible with v1 and v2</b>: v3.9.2.1 will work with v1, v2, and v3 category systems
+      </li>
+      <li>
+        <b>Is generated automatically with import</b>: v3 is now generated automatically when importing a wiki. Previously, v2 would require a separate post-processing step under Import/Offline.
+      </li>
+      <li>
+        <b>Smaller size</b>: v3 makes some database changes to reduce file size. For English Wikipedia, that means a difference between 10 GB and 8 GB. 8 GB may sound like a lot for Categories, but keep in mind there are over 100 million page to category links.
+      </li>
+      <li>
+        <b>Does not work for text database dumps</b>: XOWA originally started off storing files in text files instead of sqlite files. I switched over to SQLite three years ago and phased out text databases two years ago. It's possible that some users with old wikis (3 years old) may still have these text databases. If so, then the new Category system won't work.
+      </li>
+    </ul>
+    <hr>
     <h2>
       <span class="mw-headline" id="Version_1">Version 1</span>
     </h2>
@@ -119,13 +148,13 @@
     <p>
       V2 is the official category system and should generate Category pages just like Wikipedia.
     </p>
-  <div id="catlinks" class="catlinks">
-<div id="mw-normal-catlinks" class="mw-normal-catlinks">
-Categories
-<ul>
-</ul>
-</div>
-</div>
+    <p>
+      For more information about V2 setup see <a href="http://xowa.org/home/wiki/App/Category/Building.html" id="xolnki_2" title="App/Category/Building">App/Category/Building</a>
+    </p>
+    <p>
+      For more information about V2 internals see <a href="http://xowa.org/home/wiki/App/Category/Internals.html" id="xolnki_3" title="App/Category/Internals">App/Category/Internals</a>
+    </p>
+  
     </div>
   </div>
 </div>
