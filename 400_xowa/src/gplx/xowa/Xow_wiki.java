@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.ios.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.addons.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
@@ -30,7 +30,7 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xol_case_mgr				Case_mgr();
 	byte[]						Domain_bry();			// EX: en.wikipedia.org
 	String						Domain_str();
-	int							Domain_tid();			// Xow_domain_tid_.Int__wikipedia
+	int							Domain_tid();			// Xow_domain_tid_.Tid__wikipedia
 	byte[]						Domain_abrv();			// enwiki
 	Xow_domain_itm				Domain_itm();
 	Xow_fsys_mgr				Fsys_mgr();
@@ -46,7 +46,10 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xoh_page_wtr_mgr			Html__wtr_mgr();
 	Xoh_href_wtr				Html__href_wtr();
 	Xoh_lnki_bldr				Html__lnki_bldr();
+	Xoctg_pagebox_wtr			Html__ctg_pagebox_wtr();
 	boolean						Html__css_installing(); void Html__css_installing_(boolean v);
+	Xow_msg_mgr					Msg_mgr();
+	byte[]						Wtxt__expand_tmpl(byte[] src);
 	Xow_mw_parser_mgr			Mw_parser_mgr();
 	Xow_xwiki_mgr				Xwiki_mgr();
 	Xow_wiki_props				Props();

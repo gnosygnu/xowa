@@ -62,15 +62,15 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 		hash.Add(itm.Ttl(), itm);
 	}
 	private Xof_orig_itm Load_from_db(byte[] ttl) {
-		if (imglnk_conn == null)
-			imglnk_conn = Xob_db_file.New__img_link(wiki).Conn();
-		Xof_orig_itm rv = Xof_orig_wkr__img_links_.Load_itm(this, imglnk_conn, wiki, ttl);
-		if (rv == Xof_orig_itm.Null)
-			rv = Missing;
-		synchronized (hash) {	// LOCK:used by multiple threads in xomp
+		synchronized (hash) {	// LOCK:orig_wkr is shared by multiple threads; NullPointerException on statement sometimes when concurrent; DATE:2016-09-03
+			if (imglnk_conn == null)
+				imglnk_conn = Xob_db_file.New__img_link(wiki).Conn();
+			Xof_orig_itm rv = Xof_orig_wkr__img_links_.Load_itm(this, imglnk_conn, wiki, ttl);
+			if (rv == Xof_orig_itm.Null)
+				rv = Missing;
 			hash.Add(ttl, rv);
+			return rv;
 		}
-		return rv;
 	}
 	private static final    Xof_orig_itm Missing = new Xof_orig_itm(Byte_.Max_value_127, Bry_.Empty, -1, -1, -1, Bry_.Empty);
 }

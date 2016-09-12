@@ -31,7 +31,6 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_sitelinks)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
-			Hash_adp_bry dict = Wdata_dict_sitelink.Dict;
 			for (int i = 0; i < list_len; ++i) {
 				Json_kv data_kv		= Json_kv.cast(list_nde.Get_at(i));
 				Json_nde data_nde	= Json_nde.cast(data_kv.Val());
@@ -39,11 +38,11 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				Json_kv site_kv = null, name_kv = null; Json_ary badges_ary = null;
 				for (int j = 0; j < data_nde_len; ++j) {
 					Json_kv sub = Json_kv.cast(data_nde.Get_at(j));
-					byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+					byte tid = Wdata_dict_sitelink.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 					switch (tid) {
-						case Wdata_dict_sitelink.Tid_site:			site_kv	= Json_kv.cast(sub); break;
-						case Wdata_dict_sitelink.Tid_title:			name_kv	= Json_kv.cast(sub); break;
-						case Wdata_dict_sitelink.Tid_badges:		badges_ary = Json_ary.cast_or_null(Json_kv.cast(sub).Val()); break;
+						case Wdata_dict_sitelink.Tid__site:			site_kv	= Json_kv.cast(sub); break;
+						case Wdata_dict_sitelink.Tid__title:		name_kv	= Json_kv.cast(sub); break;
+						case Wdata_dict_sitelink.Tid__badges:		badges_ary = Json_ary.cast_or_null(Json_kv.cast(sub).Val()); break;
 					}
 				}
 				byte[] site_bry			= site_kv.Val().Data_bry();
@@ -59,7 +58,6 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
-			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {
 				Json_kv data_kv		= Json_kv.cast(list_nde.Get_at(i));
 				Json_nde data_nde	= Json_nde.cast(data_kv.Val());
@@ -67,10 +65,10 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				int data_nde_len = data_nde.Len();
 				for (int j = 0; j < data_nde_len; ++j) {
 					Json_kv sub = Json_kv.cast(data_nde.Get_at(j));
-					byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+					byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 					switch (tid) {
-						case Wdata_dict_langtext.Tid_language:		break;
-						case Wdata_dict_langtext.Tid_value:			text_kv	= Json_kv.cast(sub); break;
+						case Wdata_dict_langtext.Tid__language:		break;
+						case Wdata_dict_langtext.Tid__value:		text_kv	= Json_kv.cast(sub); break;
 					}
 				}
 				byte[] lang_bry			= data_kv.Key().Data_bry();
@@ -85,7 +83,6 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 			Json_nde list_nde = Json_nde.cast(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.New_bry();
 			int list_len = list_nde.Len();
-			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {
 				Json_kv data_kv		= Json_kv.cast(list_nde.Get_at(i));
 				Json_ary vals_ary	= Json_ary.cast_or_null(data_kv.Val());
@@ -96,10 +93,10 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 					int k_len = lang_nde.Len();
 					for (int k = 0; k < k_len; ++k) {
 						Json_kv sub = Json_kv.cast(lang_nde.Get_at(k));
-						byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+						byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 						switch (tid) {
-							case Wdata_dict_langtext.Tid_language:		break;
-							case Wdata_dict_langtext.Tid_value:			vals[j] = sub.Val().Data_bry(); break;
+							case Wdata_dict_langtext.Tid__language:		break;
+							case Wdata_dict_langtext.Tid__value:		vals[j] = sub.Val().Data_bry(); break;
 						}
 					}
 				}

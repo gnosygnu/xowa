@@ -48,6 +48,7 @@ public interface Xof_file_itm {
 	Io_url				Html_orig_url();
 	int					Html_gallery_mgr_h();
 	Js_img_wkr			Html_img_wkr();
+	int					Hdump_mode();
 
 	void				File_exists_(boolean v);
 	void				Html_img_wkr_(Js_img_wkr v);

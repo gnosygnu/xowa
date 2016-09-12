@@ -31,8 +31,8 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 	public static byte[] Write_wdata_links(List_adp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
 		try {
 			switch (wiki.Domain_tid()) {
-				case Xow_domain_tid_.Int__home:		// home will never be in wikidata
-				case Xow_domain_tid_.Int__wikidata:	// wikidata will never be in wikidata
+				case Xow_domain_tid_.Tid__home:		// home will never be in wikidata
+				case Xow_domain_tid_.Tid__wikidata:	// wikidata will never be in wikidata
 					return Qid_null;
 			}
 			Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();

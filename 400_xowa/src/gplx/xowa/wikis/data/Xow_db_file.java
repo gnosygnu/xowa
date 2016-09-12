@@ -61,7 +61,7 @@ public class Xow_db_file {
 	public Xowd_site_ns_tbl				Tbl__ns()			{return tbl__ns;}			private final    Xowd_site_ns_tbl tbl__ns;
 	public Xowd_page_tbl				Tbl__page()			{return tbl__page;}			private Xowd_page_tbl tbl__page;
 	public Xowd_text_tbl				Tbl__text()			{return tbl__text;}			private final    Xowd_text_tbl tbl__text;
-	public Xowd_html_tbl					Tbl__html()			{return tbl__html;}			private final    Xowd_html_tbl tbl__html;
+	public Xowd_html_tbl				Tbl__html()			{return tbl__html;}			private final    Xowd_html_tbl tbl__html;
 	public Xowd_css_core_tbl			Tbl__css_core()		{return tbl__css_core;}		private final    Xowd_css_core_tbl tbl__css_core;
 	public Xowd_css_file_tbl			Tbl__css_file()		{return tbl__css_file;}		private final    Xowd_css_file_tbl tbl__css_file;
 	public Xowd_cat_core_tbl			Tbl__cat_core()		{return tbl__cat_core;}		private final    Xowd_cat_core_tbl tbl__cat_core;

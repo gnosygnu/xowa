@@ -98,7 +98,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 				int bgn = arg.Val_tkn().Dat_bgn(), end = arg.Val_tkn().Dat_end();
 				if (arg.KeyTkn_exists()) {bgn = arg.Key_tkn().Dat_bgn(); end = arg.Key_tkn().Dat_end();}
 				arg_tid = ctx.Wiki().Lang().Lnki_arg_parser().Identify_tid(src, bgn, end, lnki);
-				if (arg_tid == Xop_lnki_arg_parser.Tid_caption && ctx.Wiki().Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__other) {
+				if (arg_tid == Xop_lnki_arg_parser.Tid_caption && ctx.Wiki().Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
 					if (end > bgn && Bry_.Eq(src, bgn, end, Xop_lnki_arg_parser.Bry_target))
 						arg_tid = Xop_lnki_arg_parser.Tid_target;
 				}

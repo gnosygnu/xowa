@@ -30,15 +30,11 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public boolean Async_prog_enabled()	{return false;}
 	public void Async_prog_run(int async_sleep_sum) {}
 	public byte Async_init() {return Gfo_thread_cmd_.Init_ok;}
-	public boolean Async_term() {
-//			install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.end", "import.end ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		return true;
-	}
+	public boolean Async_term() {return true;}
 	public Gfo_invk Owner() {return owner;} public Xoi_cmd_base Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public void Async_run() {
 		running = true;
-//			install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
 		Thread_adp_.Start_by_key(this.Async_key(), this, Invk_process_async);
 	}
 	public boolean Async_running() {return running;} private boolean running;
@@ -82,16 +78,12 @@ class Xoi_cmd_category2_build extends Xoi_cmd_base {
 	public Xoi_cmd_category2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key); this.app = install_mgr.App(); this.wiki_key = wiki_key;} private Xoae_app app; private String wiki_key;
 	@Override public void Cmd_ctor() {
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
-		wiki.Import_cfg().Category_version_(gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Version_2);
+		wiki.Import_cfg().Category_version_(gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr.Version_2);
 	}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.category2.build";
-	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
-		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
-			wiki.Db_mgr_as_sql().Category_version_update(false);				
-			bldr.Cmd_mgr().Add_many(wiki, Xob_cmd_keys.Key_text_cat_core, Xob_cmd_keys.Key_text_cat_link, Xob_cmd_keys.Key_text_cat_hidden);
-		}
-		else
-			bldr.Cmd_mgr().Add_many(wiki, Xob_cmd_keys.Key_tdb_cat_hidden_sql, Xob_cmd_keys.Key_tdb_cat_hidden_ttl, Xob_cmd_keys.Key_text_cat_link, Xob_cmd_keys.Key_tdb_ctg_link_idx);
+	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {			
+		wiki.Db_mgr_as_sql().Category_version_update(false);				
+		bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_pageprop_cmd.BLDR_CMD_KEY, gplx.xowa.addons.wikis.ctgs.bldrs.Xob_catlink_cmd.BLDR_CMD_KEY);			
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		app.Usr_dlg().Prog_many("", "", "category2 setup done");

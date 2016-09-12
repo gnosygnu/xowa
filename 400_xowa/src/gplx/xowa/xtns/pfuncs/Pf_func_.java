@@ -75,7 +75,7 @@ public class Pf_func_ {
 		}
 	}
 	public static int[] Ary_get(Xow_domain_itm domain_itm, boolean wmf) {
-		if (wmf && domain_itm != null && domain_itm.Domain_type().Tid() != Xow_domain_tid_.Int__home) return Ary_wmf;
+		if (wmf && domain_itm != null && domain_itm.Domain_type().Tid() != Xow_domain_tid_.Tid__home) return Ary_wmf;
 		if (Ary_nonwmf == null) {
 			List_adp list = List_adp_.New();
 			int len = Ary_wmf.length;

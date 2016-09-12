@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.langs.gfs.*;
 public class IoItmFil extends IoItm_base {
-	@Override public int TypeId() {return IoItmFil.Type_Fil;} @Override public boolean Type_dir() {return false;} @Override public boolean Type_fil() {return true;} public static final int Type_Fil = 2;
+	@Override public int TypeId() {return IoItmFil.Type_Fil;} @Override public boolean Type_dir() {return false;} @Override public boolean Type_fil() {return true;} public static final    int Type_Fil = 2;
 	public boolean Exists() {return size != Size_invalid;}	// NOTE: questionable logic, but preserved for historical reasons; requires that length be set to -1 if !.exists
 	public DateAdp ModifiedTime() {return modifiedTime;}
 	public IoItmFil ModifiedTime_(DateAdp val) {modifiedTime = val; return this;} DateAdp modifiedTime;

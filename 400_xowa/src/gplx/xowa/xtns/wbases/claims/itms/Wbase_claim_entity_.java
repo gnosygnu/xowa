@@ -19,18 +19,14 @@ package gplx.xowa.xtns.wbases.claims.itms; import gplx.*; import gplx.xowa.*; im
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Wbase_claim_entity_ {
 	public static final byte
-	  Tid__entity_type							= 0
-	, Tid__numeric_id							= 1
+	  Tid__entity_type							= 0	// EX: "entity-type":"item"
+	, Tid__numeric_id							= 1	// EX: "numeric-id":121410
+	, Tid__id									= 2	// EX: "id":"Q121410"
 	;
-	private static final    Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
-	public static final    Wbase_claim_enum
-	  Itm__entity_type				= New(Tid__entity_type		, "entity-type")
-	, Itm__numeric_id				= New(Tid__numeric_id		, "numeric-id")
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.entity", 3);
+	public static final    Wbase_enum_itm
+	  Itm__entity_type				= Reg.Add(Tid__entity_type		, "entity-type")
+	, Itm__numeric_id				= Reg.Add(Tid__numeric_id		, "numeric-id")
+	, Itm__id						= Reg.Add(Tid__id				, "id")
 	;
-	private static Wbase_claim_enum New(byte tid, String key) {
-		Wbase_claim_enum rv = new Wbase_claim_enum(tid, key);
-		hash_by_bry.Add(rv.Key_bry(), rv);
-		return rv;
-	}
-	public static byte To_tid_or_invalid(byte[] page_url, byte[] key) {return Wbase_claim_enum_.To_tid_or_invalid(hash_by_bry, page_url, key);}
 }

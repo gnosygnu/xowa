@@ -164,11 +164,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public static final    byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
-			case Xow_domain_tid_.Int__wikidata:
+			case Xow_domain_tid_.Tid__wikidata:
 				if (ns_id == Xow_ns_.Tid__main || ns_id == gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
-			case Xow_domain_tid_.Int__home:
+			case Xow_domain_tid_.Tid__home:
 				if (ns_id == gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;

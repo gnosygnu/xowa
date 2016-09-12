@@ -207,14 +207,14 @@ public class Scrib_core {
 		}
 		return rv;
 	}
-	public void Handle_error(String err, String traceback) {
+	public void Handle_error(String err) {
 		String excerpt = "";
 		try {
 			Xot_invk src_frame = frame_current;
 			if (src_frame != null)
 				excerpt = String_.new_u8(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
 		} catch (Exception e) {Err_.Noop(e);}
-		throw Err_.new_wo_type(err, "ttl", page.Ttl().Page_db_as_str(), "excerpt", excerpt, "traceback", traceback);
+		throw Err_.new_wo_type(err, "ttl", page.Ttl().Page_db_as_str(), "excerpt", excerpt);
 	}
 	public static final String Frame_key_module = "current", Frame_key_template = "parent";
 	public static final int Base_1 = 1;

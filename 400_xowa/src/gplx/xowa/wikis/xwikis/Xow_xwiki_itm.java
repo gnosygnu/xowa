@@ -51,7 +51,7 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 		int key_len = key_bry.length;
 		boolean key_matches_domain_bgn = Bry_.Match(domain_bry, 0, key_len, key_bry) && key_len + 1 < domain_bry.length && domain_bry[key_len] == Byte_ascii.Dot;	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
 		return	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
-			&&	domain_tid != Xow_domain_tid_.Int__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+			&&	domain_tid != Xow_domain_tid_.Tid__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
 			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
 			&&	key_matches_domain_bgn
 			;

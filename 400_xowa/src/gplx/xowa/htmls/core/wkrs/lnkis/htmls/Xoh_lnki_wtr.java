@@ -66,7 +66,7 @@ public class Xoh_lnki_wtr {
 		switch (lnki.Ns_id()) {
 			case Xow_ns_.Tid__media:	if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
 			case Xow_ns_.Tid__file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
-			case Xow_ns_.Tid__category:	if (!literal_link) {page.Html_data().Ctgs_add(lnki.Ttl()); return;} break;
+			case Xow_ns_.Tid__category:	if (!literal_link) {page.Wtxt().Ctgs__add(lnki.Ttl()); return;} break;
 		}
 		Write_plain_by_tkn(bfr, hctx, src, lnki, lnki_ttl);
 	}
@@ -116,7 +116,7 @@ public class Xoh_lnki_wtr {
 					Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
 				}
 			}
-			if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Int__other) {
+			if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
 				if (lnki.Target != null) {
 					bfr.Add_str_a7("\" target=\"");
 					bfr.Add(lnki.Target);

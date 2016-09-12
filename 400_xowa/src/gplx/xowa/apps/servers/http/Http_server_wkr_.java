@@ -28,7 +28,7 @@ class Http_server_wkr_ {
 		if (req_array.length < 3) return req; // shouldn't happen; EX: "localhost:8080wiki"
 		byte[] wiki_domain = Bry_.new_u8(req_array[1]);
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(wiki_domain);
-		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Int__other && domain_itm.Lang_actl_itm().Id() == Xol_lang_stub_.Id__intl) return req;
+		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Tid__other && domain_itm.Lang_actl_itm().Id() == Xol_lang_stub_.Id__intl) return req;
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(wiki_domain);
 		wiki.Init_assert();
 		String main_page = String_.new_u8(wiki.Props().Main_page());

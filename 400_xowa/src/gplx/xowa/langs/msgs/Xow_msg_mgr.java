@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.xowa.htmls.sidebar.*;
+import gplx.xowa.addons.htmls.sidebars.*;
 public class Xow_msg_mgr implements Gfo_invk {
-	private final    Xowe_wiki wiki; private Xol_lang_itm lang; private final    Xol_msg_mgr msg_mgr;
+	private final    Xow_wiki wiki; private Xol_lang_itm lang; private final    Xol_msg_mgr msg_mgr;
 	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
-	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
+	public Xow_msg_mgr(Xow_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
 		this.msg_mgr = new Xol_msg_mgr(wiki, false);
@@ -73,7 +73,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 	public byte[] Val_by_itm(Bry_bfr tmp_bfr, Xol_msg_itm itm, Object[] args) {
 		byte[] rv = itm.Val();
 		if (args != null) rv = itm.Fmt_tmp(tmp_bfr, tmp_fmtr, rv, args);
-		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Expand_tmpl(rv);
+		if (itm.Has_tmpl_txt()) rv = wiki.Wtxt__expand_tmpl(rv);
 		return rv;
 	}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
@@ -82,7 +82,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		bfr.Mkr_rls();
 		return rv;
 	}
-	public byte[] Val_html_accesskey_and_title(byte[] id, Bry_bfr bfr, Xowh_sidebar_itm itm) {
+	public byte[] Val_html_accesskey_and_title(byte[] id, Bry_bfr bfr, Xoh_sidebar_itm itm) {
 		byte[] tooltip_key = Bry_.Add(CONST_prefix_tooltip, id);
 		byte[] tooltip_val = Val_by_key_obj(tooltip_key);
 		boolean tooltip_found = Bry_.Len_gt_0(tooltip_val);
@@ -103,7 +103,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		if (itm == null)
 			return rv;
 		else {
-			itm.Accesskey_(accesskey_val).Title_(tooltip_val).Atr_accesskey_and_title_(rv);
+			itm.Init_by_title_and_accesskey(tooltip_val, accesskey_val, rv);
 			return null;
 		}
 	}	private static final    byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");

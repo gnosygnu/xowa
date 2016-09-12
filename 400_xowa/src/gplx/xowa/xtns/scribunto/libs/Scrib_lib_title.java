@@ -192,18 +192,16 @@ public class Scrib_lib_title implements Scrib_lib {
 		return rslt.Init_obj(GetInexpensiveTitleData(core.Page().Ttl()));
 	}
 	public boolean ProtectionLevels(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		// byte[] ttl_bry = args.Pull_bry(0);
-		// Xowe_wiki wiki = core.Wiki();
-		// Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
-		return rslt.Init_many_objs("");	// NOTE: always return no protection; protectionLevels are stored in different table which is currently not mirrored; DATE:2014-04-09
+		return rslt.Init_obj(protectionLevels_dflt);
 	}
+	private static final    Keyval[] protectionLevels_dflt = Keyval_.Ary(Keyval_.new_("move", Keyval_.int_(1, "sysop")), Keyval_.new_("edit", Keyval_.int_(1, "sysop")));	// protectionLevels are stored in different table which is currently not mirrored; per en.w:Module:Effective_protection_level; DATE:2014-04-09; 2016-09-07
 	public boolean CascadingProtection(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_obj(CascadingProtection_rv);
 	}
-	public static final    Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Bool_.N), Keyval_.new_("restrictions", Keyval_.Ary_empty));
+	public static final    Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Keyval_.Ary_empty), Keyval_.new_("restrictions", Keyval_.Ary_empty));	// changed sources from "false" to "{}"; DATE:2016-09-09
 	private Keyval[] GetInexpensiveTitleData(Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		boolean ns_file_or_media = ns.Id_is_file_or_media(), ns_special = ns.Id_is_special();

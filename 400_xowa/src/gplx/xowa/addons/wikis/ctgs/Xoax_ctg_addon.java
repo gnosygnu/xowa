@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.addons.wikis.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
 import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xoax_ctg_addon implements Xoax_addon_itm {	// TODO_OLD:mem_mgr
 	private final    Xow_wiki wiki;
 	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
@@ -25,7 +26,7 @@ public class Xoax_ctg_addon implements Xoax_addon_itm {	// TODO_OLD:mem_mgr
 	public Xoctg_ctg_itm Itms__load(byte[] key) {
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
 		wiki.Data__core_mgr().Tbl__page().Select_by_ttl(tmp_page, wiki.Ns_mgr().Ns_category(), key);
-		gplx.xowa.wikis.data.tbls.Xowd_category_itm itm = wiki.Data__core_mgr().Db__cat_core().Tbl__cat_core().Select(tmp_page.Id());
+		gplx.xowa.wikis.data.tbls.Xowd_category_itm itm = Xodb_cat_db_.Get_cat_core_or_fail(wiki.Data__core_mgr()).Select(tmp_page.Id());
 		return Itms__add(key, itm.Count_pages(), itm.Count_subcs(), itm.Count_files());
 	}
 	public Xoctg_ctg_itm Itms__add(byte[] key, int pages, int subcs, int files) {	// TEST:

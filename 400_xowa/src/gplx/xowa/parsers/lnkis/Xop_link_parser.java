@@ -48,7 +48,7 @@ public class Xop_link_parser {
 				raw = tmp_bfr.To_bry_and_clear();
 				html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_none;
 				Xow_domain_itm domain_itm = Xow_domain_itm_.parse(wiki_bry);
-				html_anchor_rel = domain_itm.Domain_type().Tid() == Xow_domain_tid_.Int__other ? Xoh_lnki_consts.Tid_a_rel_nofollow : Xoh_lnki_consts.Tid_a_rel_none;	// rel=nofollow if not WM wiki; DATE:2015-11-19
+				html_anchor_rel = domain_itm.Domain_type().Tid() == Xow_domain_tid_.Tid__other ? Xoh_lnki_consts.Tid_a_rel_nofollow : Xoh_lnki_consts.Tid_a_rel_none;	// rel=nofollow if not WM wiki; DATE:2015-11-19
 				break;
 			case Gfo_protocol_itm.Tid_file:		// "file:///" or "File:A.png"
 				int proto_len = Gfo_protocol_itm.Bry_file.length;							// "file:"

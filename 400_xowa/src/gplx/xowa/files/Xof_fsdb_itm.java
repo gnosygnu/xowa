@@ -56,6 +56,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public boolean 				File_exists_in_cache()		{return file_exists_in_cache;} private boolean file_exists_in_cache;
 	public boolean				File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
 	public boolean				Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
+	public int					Hdump_mode()				{return hdump_mode;} private int hdump_mode = Hdump_mode__null;
 	public int					Xfer_idx()					{return xfer_idx;} private int xfer_idx;
 	public int					Xfer_len()					{return xfer_len;} private int xfer_len;
 	public void	Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int lnki_upright_patch) {
@@ -123,19 +124,25 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.html_w = w; this.html_h = h; this.html_view_url = view_url;
 	}
 	public void Init_by_wm_parse(byte[] lnki_wiki_abrv, boolean repo_is_commons, boolean file_is_orig, byte[] file_ttl_bry, int file_w, double file_time, int file_page) {
-		// set lnki props that all fsdb_consumers expect
+		this.hdump_mode = Hdump_mode__v2;
+
+		// lnki
 		this.lnki_ttl = file_ttl_bry;
 		this.lnki_w = file_w;
 		this.lnki_h = -1;
 		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb;
 		this.lnki_wiki_abrv = lnki_wiki_abrv;
+		this.lnki_time = file_time;
+		this.lnki_page = file_page;
 
+		// orig
 		this.orig_repo_id = repo_is_commons ? Xof_repo_itm_.Repo_remote : Xof_repo_itm_.Repo_local;
 		this.file_is_orig = file_is_orig;
 		this.Orig_ttl_(file_ttl_bry);
-		this.file_w = file_w;
-		this.lnki_time = file_time;
-		this.lnki_page = file_page;
+		this.orig_ext = Xof_ext_.new_by_ttl_(file_ttl_bry);
+
+		// html
+		this.file_w = this.html_w = file_w;
 	}
 	public void Change_repo(byte orig_repo_id, byte[] orig_repo_name) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
@@ -183,4 +190,5 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		bfr.Add_byte_pipe().Add_int_variable(lnki_page);
 		bfr.Add_byte_nl();
 	}
+	public static final int Hdump_mode__null = 0, Hdump_mode__v2 = 2;
 }

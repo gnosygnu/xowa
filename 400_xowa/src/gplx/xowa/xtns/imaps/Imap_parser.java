@@ -214,7 +214,7 @@ public class Imap_parser {
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
-					Xoa_app_.Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
+					Xoa_app_.Usr_dlg().Log_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
 					int next_line = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
 					if (next_line == Bry_find_.Not_found) next_line = src_end;
 					rv = next_line;

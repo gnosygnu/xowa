@@ -27,7 +27,7 @@ public class Imglnk_bldr_cmd extends Xob_sql_dump_base implements Sql_file_parse
 	@Override public String Sql_file_name() {return "imagelinks";}
 
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
-		parser.Fld_cmd_(this).Flds_req_idx_(3, 0, 1);
+		parser.Save_csv_n_().Fld_cmd_(this).Flds_req_idx_(3, 0, 1);
 		mgr = new Imglnk_bldr_mgr(wiki);
 	}
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {

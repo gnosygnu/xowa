@@ -31,6 +31,10 @@ public class Xowe_page_mgr {
 		page.Html_data().Hdump_exists_(hdump_exists);
 		Wait_for_popups(wiki.App());
 
+		// auto-update
+		gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr read_mgr = new gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr();
+		read_mgr.Auto_update(wiki, page, ttl);
+
 		// load page text
 		boolean parse = true;
 		if (hdump_exists) {

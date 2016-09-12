@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
-public class Xowd_cat_core_tbl implements Rls_able {
+public class Xowd_cat_core_tbl implements Db_tbl {
 	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_id, fld_pages, fld_subcats, fld_files, fld_hidden, fld_link_db_id;
 	private final    Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
@@ -37,7 +37,8 @@ public class Xowd_cat_core_tbl implements Rls_able {
 		in_wkr.Ctor(this, tbl_name, flds, fld_id);
 		conn.Rls_reg(this);
 	}
-	public Xowd_cat_core_tbl Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds)); return this;}
+	public String Tbl_name() {return tbl_name;}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__cat_core__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int id, int pages, int subcats, int files, byte hidden, int link_db_id) {
@@ -60,6 +61,20 @@ public class Xowd_cat_core_tbl implements Rls_able {
 	public void Select_by_cat_id_in(Cancelable cancelable, Ordered_hash rv, int bgn, int end) {
 		in_wkr.Init(rv);
 		in_wkr.Select_in(cancelable, conn, bgn, end);
+	}
+	public void Select_by_cat_id_many(Select_in_cbk cbk) {
+		int pos = 0;
+		Bry_bfr bfr = Bry_bfr_.New();
+		Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, String_.Ary(fld_id, fld_pages, fld_subcats, fld_files, fld_hidden), fld_id);
+		while (true) {
+			pos = wkr.Make_sql_or_null(bfr, cbk, pos);
+			if (pos == -1) break;
+			Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
+			try {
+				while (rdr.Move_next())
+					cbk.Read_data(rdr);
+			} finally {rdr.Rls();}
+		}
 	}
 	public Xowd_category_itm new_itm(Db_rdr rdr) {
 		return Xowd_category_itm.load_

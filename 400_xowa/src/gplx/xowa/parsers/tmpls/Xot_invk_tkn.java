@@ -88,8 +88,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (	name_ary_len == 0			// name is blank; can occur with failed inner tmpl; EX: {{ {{does not exist}} }}
 				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le cœur sur la main| }}
 				) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "parser.tmpl:dynamic is blank; page~{0}", ctx.Page().Url_bry_safe());
-				bfr.Add_str_a7("(? [[dynamic is blank]] ?)");
+				Gfo_usr_dlg_.Instance.Log_many("", "", "parser.tmpl:dynamic is blank; page=~{0}", ctx.Page().Url_bry_safe()); // downgraded from warning to note; PAGE:de.d:país DATE:2016-09-07
 				return false;
 			}
 			if 		(name_ary[name_bgn] == Byte_ascii.Colon) {							// check 1st letter for transclusion

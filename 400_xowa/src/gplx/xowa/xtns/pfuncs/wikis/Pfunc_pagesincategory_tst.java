@@ -46,7 +46,7 @@ class Pfunc_pagesincategory_tstr {
 		this.parser_tstr = new Xop_fxt(app, wiki);
 		this.core_data_mgr = wiki.Data__core_mgr();
 		this.page_tbl = core_data_mgr.Tbl__page();
-		this.cat_core_tbl = core_data_mgr.Db__cat_core().Tbl__cat_core();
+		this.cat_core_tbl = gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_db_.Get_cat_core_or_fail(core_data_mgr);
 	}
 	public void Init() {
 		parser_tstr.Reset();

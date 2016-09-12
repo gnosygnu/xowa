@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.apps.gfs.*; import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.searchs.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private Xodb_mgr_sql db_mgr; Xow_db_mgr fsys_mgr;
 	public Xodb_load_mgr_sql(Xow_wiki wiki, Xodb_mgr_sql db_mgr, Xow_db_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;}
@@ -57,20 +58,19 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public boolean Load_by_id	(Xowd_page_itm rv, int id) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, true, rv, bgn, end);}
-	public boolean Load_ctg_v1(Xoctg_view_ctg rv, byte[] ctg_bry) {
+	public boolean Load_ctg_v1(Xoctg_catpage_ctg rv, byte[] ctg_bry) {
 		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_bry); if (cat_page_id == Xowd_page_itm.Id_null) return false;			
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
 		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
 	}
-	public boolean Load_ctg_v2(Xoctg_data_ctg rv, byte[] ctg_bry) {throw Err_.new_unimplemented();}
-	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url ctg_url, byte[] ctg_ttl, int load_max, boolean app_is_cmd) {
+	public void Load_ctg_v2a(Xoctg_catpage_ctg rv, Xoctg_catpage_url ctg_url, byte[] ctg_ttl, int load_max, boolean app_is_cmd) {
 		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Tid__category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return;
 		List_adp list = List_adp_.New();
 		Load_ctg_v2a_db_retrieve(rv, ctg_url, cat_page_id, load_max, ctg.File_idx(), list, app_is_cmd);
 		Load_ctg_v2a_ui_sift(rv, ctg, list);
 	}
-	private void Load_ctg_v2a_db_retrieve(Xoctg_view_ctg rv, Xoctg_url ctg_url, int cat_page_id, int load_max, int cat_link_db_idx, List_adp list, boolean app_is_cmd) {
+	private void Load_ctg_v2a_db_retrieve(Xoctg_catpage_ctg rv, Xoctg_catpage_url ctg_url, int cat_page_id, int load_max, int cat_link_db_idx, List_adp list, boolean app_is_cmd) {
 		int len = Xoa_ctg_mgr.Tid__max;
 		for (byte i = Xoa_ctg_mgr.Tid_subc; i < len; i++) {
 			boolean arg_is_from = ctg_url.Grp_fwds()[i] == Bool_.N_byte;
@@ -80,16 +80,16 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 			if (found > 0 && found == load_max + 1) {
 				Xowd_page_itm last_page = (Xowd_page_itm)List_adp_.Pop(list);
 				Xoctg_page_xtn last_ctg = (Xoctg_page_xtn)last_page.Xtn();
-				rv.Grp_by_tid(i).Itms_last_sortkey_(last_ctg.Sortkey());
+				rv.Grp_by_tid(i).Itms__nth_sortkey_(last_ctg.Sortkey());
 			}
 		}
 		db_mgr.Core_data_mgr().Tbl__page().Select_in__id(Cancelable_.Never, !app_is_cmd, list);
 	}
-	private void Load_ctg_v2a_ui_sift(Xoctg_view_ctg rv, Xowd_category_itm ctg, List_adp list) {
+	private void Load_ctg_v2a_ui_sift(Xoctg_catpage_ctg rv, Xowd_category_itm ctg, List_adp list) {
 		int len = list.Count();
 		Xowe_wiki wiki = this.db_mgr.Wiki();
 		byte prv_tid = Byte_.Max_value_127;
-		Xoctg_view_grp view_grp = null;
+		Xoctg_catpage_grp view_grp = null;
 		for (int i = 0; i < len; i++) {
 			Xowd_page_itm db_page = (Xowd_page_itm)list.Get_at(i);
 			if (db_page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
@@ -100,17 +100,10 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				prv_tid = cur_tid; 
 			}
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
-			Xoctg_view_itm view_itm = new Xoctg_view_itm();
-			view_itm.Set__page(cur_tid, db_page.Id());
-			view_itm.Set__ttl__sortkey(ttl, db_ctg.Sortkey());
-			view_grp.Itms_add(view_itm);
+			Xoctg_catpage_itm view_itm = new Xoctg_catpage_itm(db_page.Id(), ttl, db_ctg.Sortkey());
+			view_grp.Itms__add(view_itm);
 		}
-		len = Xoa_ctg_mgr.Tid__max;
-		for (byte i = Xoa_ctg_mgr.Tid_subc; i < len; i++) {
-			view_grp = rv.Grp_by_tid(i);
-			view_grp.Itms_make();
-			view_grp.Total_(ctg.Count_by_tid(i));
-		}
+		rv.Make_itms();
 	}
 	public void Load_ttls_for_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_special_all_pages(cancelable, rslt_list, rslt_nxt, rslt_prv, rslt_count, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
@@ -152,7 +145,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Select_by_cat_id_in(Cancelable_.Never, hash2, 0, len);
 		return (Xowd_page_itm[])hash.To_ary(Xowd_page_itm.class);
 	}
-	private static boolean Ctg_select_v1(Xowe_wiki wiki, Xow_db_mgr core_data_mgr, Xoctg_view_ctg view_ctg, int link_db_id, Xowd_category_itm ctg) {
+	private static boolean Ctg_select_v1(Xowe_wiki wiki, Xow_db_mgr core_data_mgr, Xoctg_catpage_ctg view_ctg, int link_db_id, Xowd_category_itm ctg) {
 		List_adp link_list = List_adp_.New();
 		core_data_mgr.Dbs__get_by_id_or_fail(link_db_id).Tbl__cat_link().Select_in(link_list, ctg.Id());
 		int link_list_len = link_list.Count();
@@ -163,19 +156,20 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		for (int i = 0; i < link_list.Count(); i++) {
 			Xowd_page_itm page = (Xowd_page_itm)link_list.Get_at(i);
 			if (page.Ns_id() == Int_.Min_value) continue;	// HACK: page not found; ignore
-			byte ctg_tid = Xodb_load_mgr_txt.Load_ctg_v1_tid(page.Ns_id());
-			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
-			Xoctg_view_itm ctg_itm = new Xoctg_view_itm();
-			ctg_itm.Set__page(ctg_tid, page.Id());
-			ctg_itm.Set__ttl__sortkey(Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
-			ctg_grp.Itms_add(ctg_itm);
+			byte ctg_tid = Load_ctg_v1_tid(page.Ns_id());
+			Xoctg_catpage_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
+			Xoctg_catpage_itm ctg_itm = new Xoctg_catpage_itm(page.Id(), Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db()), page.Ttl_page_db());
+			ctg_grp.Itms__add(ctg_itm);
 			rv = true;
 		}
-		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
-			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(i);
-			ctg_grp.Itms_make();
-			ctg_grp.Total_(ctg_grp.Itms().length);
-		}
+		view_ctg.Make_itms();
 		return rv;
+	}
+	public static byte Load_ctg_v1_tid(int ns_id) {
+		switch (ns_id) {
+			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid_subc;
+			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid_file;
+			default: 					return Xoa_ctg_mgr.Tid_page;
+		}		
 	}
 }

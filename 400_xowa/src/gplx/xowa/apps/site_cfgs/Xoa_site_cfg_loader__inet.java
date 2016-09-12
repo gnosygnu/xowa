@@ -32,7 +32,7 @@ public class Xoa_site_cfg_loader__inet implements Xoa_site_cfg_loader {
 	}
 	public String Api_url() {return api_url;}
 	public byte[] Load_csv(Xoa_site_cfg_mgr mgr, Xow_wiki wiki, Xoa_site_cfg_itm__base itm) {
-		if (Int_.In(wiki.Domain_tid(), Xow_domain_tid_.Int__home, Xow_domain_tid_.Int__other)) return null;	// do not call api if "home", "other"; for "wikia" and other non-wm wikis
+		if (Int_.In(wiki.Domain_tid(), Xow_domain_tid_.Tid__home, Xow_domain_tid_.Tid__other)) return null;	// do not call api if "home", "other"; for "wikia" and other non-wm wikis
 		if (call_api) {
 			call_api = false;
 			byte[] json_bry = Xowm_api_mgr.Call_by_url(Xoa_app_.Usr_dlg(), inet_conn, wiki.Domain_str(), api_url);

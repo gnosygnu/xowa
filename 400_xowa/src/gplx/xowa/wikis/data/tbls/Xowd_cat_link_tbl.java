@@ -16,12 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.ctgs.*; 
-public class Xowd_cat_link_tbl implements Rls_able {
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
+public class Xowd_cat_link_tbl implements Db_tbl {		
+	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_from, fld_to_id, fld_sortkey, fld_timestamp, fld_type_id;
-	private final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_in;
-	public Db_conn Conn() {return conn;}
+	private Db_stmt stmt_insert, stmt_select_in;
 	public Xowd_cat_link_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "categorylinks" : "cat_link";
@@ -32,7 +31,9 @@ public class Xowd_cat_link_tbl implements Rls_able {
 		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
 		conn.Rls_reg(this);
 	}
-	public Xowd_cat_link_tbl Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds)); return this;}
+	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
+	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx() {
 		conn.Meta_idx_create(Xoa_app_.Usr_dlg()
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "main", fld_to_id, fld_type_id, fld_sortkey, fld_from)
@@ -51,6 +52,7 @@ public class Xowd_cat_link_tbl implements Rls_able {
 			.Exec_insert();
 	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 

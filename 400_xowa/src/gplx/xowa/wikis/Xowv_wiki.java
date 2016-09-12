@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.brys.*; 
 import gplx.dbs.*;
 import gplx.xowa.apps.*;	
 import gplx.xowa.guis.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; 
+import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*; 
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.addons.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
@@ -29,7 +29,7 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	private final    Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
@@ -41,6 +41,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.domain_abrv = Xow_abrv_wm_.To_abrv(Xow_domain_itm_.parse(domain_bry));
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.lang = app.Lang_mgr().Get_by_or_en(domain_itm.Lang_actl_key());	// NOTE: must not be null, or causes null ref exception on redlinks in drd; DATE:2016-06-28
+		this.msg_mgr = new Xow_msg_mgr(this, lang);
 		this.html__hdump_mgr = new Xow_hdump_mgr(this);
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
@@ -72,6 +73,9 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final    Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
+	public Xoctg_pagebox_wtr			Html__ctg_pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xow_msg_mgr					Msg_mgr() {return msg_mgr;} private final    Xow_msg_mgr msg_mgr;
+	public byte[]						Wtxt__expand_tmpl(byte[] src) {return src;}
 	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
 	public Xow_wiki_props				Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
 	public Xol_lang_itm					Lang() {return lang;} private final    Xol_lang_itm lang;
@@ -105,6 +109,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		data_mgr__core_mgr.Db__core().Tbl__site_stats().Select(stats);
 		html__hdump_mgr.Init_by_db(this);
 		app.Addon_mgr().Load_by_wiki(this);
+		ctg_pagebox_wtr.Init_by_wiki(this);
 	}
 	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
 	public void Init_by_make(Xowd_core_db_props props, gplx.xowa.bldrs.infos.Xob_info_session info_session) {

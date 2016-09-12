@@ -61,14 +61,6 @@ public class Xob_fxt {
 		rv.Modified_on_(DateAdp_.seg_(modified_on));
 		return rv;
 	}
-	public Xob_fxt Run_ctg() {
-		Xobd_parser parser = new Xobd_parser(bldr);
-		gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_base ctg_wkr = new gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_txt().Ctor(bldr, wiki);
-		byte[] bry = Bry_.new_a7("[[Category:");
-		ctg_wkr.Wkr_hooks().Add(bry, bry);
-		parser.Wkr_add(ctg_wkr);
-		return Run(parser);
-	}
 	public Xob_fxt Run_id() {
 		Xob_make_id_wkr wkr = new Xob_make_id_wkr(bldr, wiki);
 		Run(wkr);

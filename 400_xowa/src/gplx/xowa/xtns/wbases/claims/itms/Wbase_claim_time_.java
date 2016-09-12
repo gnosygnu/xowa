@@ -26,31 +26,15 @@ public class Wbase_claim_time_ {
 	, Tid__precision							= 4
 	, Tid__calendarmodel						= 5
 	;
-	private static final int Ary__len = 6;
-	private static final    Wbase_claim_enum[] Ary = new Wbase_claim_enum[Ary__len];
-	private static final    Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
-	private static final    Hash_adp hash_by_str = Hash_adp_.New();
-	public static final    Wbase_claim_enum
-	  Itm__time						= New(Tid__time				, "time")
-	, Itm__timezone					= New(Tid__timezone			, "timezone")
-	, Itm__before					= New(Tid__before			, "before")
-	, Itm__after					= New(Tid__after			, "after")
-	, Itm__precision				= New(Tid__precision		, "precision")
-	, Itm__calendarmodel			= New(Tid__calendarmodel	, "calendarmodel")
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.time", 6);
+	public static final    Wbase_enum_itm
+	  Itm__time						= Reg.Add(Tid__time				, "time")
+	, Itm__timezone					= Reg.Add(Tid__timezone			, "timezone")
+	, Itm__before					= Reg.Add(Tid__before			, "before")
+	, Itm__after					= Reg.Add(Tid__after			, "after")
+	, Itm__precision				= Reg.Add(Tid__precision		, "precision")
+	, Itm__calendarmodel			= Reg.Add(Tid__calendarmodel	, "calendarmodel")
 	;
-	private static Wbase_claim_enum New(byte tid, String key) {
-		Wbase_claim_enum rv = new Wbase_claim_enum(tid, key);
-		hash_by_bry.Add(rv.Key_bry(), rv);
-		hash_by_str.Add(rv.Key_str(), rv);
-		Ary[tid] = rv;
-		return rv;
-	}
-
-	public static String To_str_or_invalid(byte tid) {return Ary[tid].Key_str();}
-	public static byte[] To_bry_or_fail(byte tid) {return Ary[tid].Key_bry();}
-	public static byte To_tid_or_invalid(byte[] page_url, String key) {return Wbase_claim_enum_.To_tid_or_invalid(hash_by_str, page_url, key);}
-	public static byte To_tid_or_invalid(byte[] page_url, byte[] key) {return Wbase_claim_enum_.To_tid_or_invalid(hash_by_bry, page_url, key);}
-
 	public static final    Wbase_data_itm 
 	  Dflt__precision		= Wbase_data_itm.New_int(11)
 	, Dflt__before			= Wbase_data_itm.New_int(0)

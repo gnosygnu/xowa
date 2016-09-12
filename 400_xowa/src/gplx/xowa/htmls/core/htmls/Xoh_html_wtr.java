@@ -26,6 +26,7 @@ public class Xoh_html_wtr {
 	private final    Xoae_app app; private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xop_xatr_whitelist_mgr whitelist_mgr;
 	private Xoae_page page;
 	private int indent_level;
+	private int stack_counter;
 	public Xoh_html_wtr(Xowe_wiki wiki, Xow_html_mgr html_mgr) {
 		this.wiki = wiki; this.app = wiki.Appe(); 
 		this.html_mgr = html_mgr; this.whitelist_mgr = html_mgr.Whitelist_mgr();			
@@ -37,6 +38,7 @@ public class Xoh_html_wtr {
 	public Xoh_hdr_html			Wkr__hdr()	{return wkr__hdr;}	private final    Xoh_hdr_html wkr__hdr = new Xoh_hdr_html();
 	public Xoh_lnki_wtr			Lnki_wtr() {return lnki_wtr;} private final    Xoh_lnki_wtr lnki_wtr;
 	public Ref_html_wtr			Ref_wtr() {return ref_wtr;} private final    Ref_html_wtr ref_wtr;
+
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki_visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 		ref_wtr.Init_by_wiki(wiki);
@@ -48,25 +50,25 @@ public class Xoh_html_wtr {
 
 	public void Write_doc(Bry_bfr rv, Xop_ctx ctx, byte[] src, Xop_root_tkn root) {Write_doc(rv, ctx, Xoh_wtr_ctx.Basic, src, root);}
 	public void Write_doc(Bry_bfr rv, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_root_tkn root) {			
-		try {
-			// init
-			this.indent_level = 0;
-			this.page = ctx.Page();
-			page.Slink_list().Clear();	// HACK: always clear langs; necessary for reload
-			lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Page());
-			
-			// write document starting from root
-			Write_tkn(rv, ctx, hctx, src, null, -1, root);
-		}
-		finally {
-			page.Category_list_(page.Html_data().Ctgs_to_ary());
-		}
+		// init
+		this.indent_level = 0;
+		this.stack_counter = 0;
+		this.page = ctx.Page();
+		page.Slink_list().Clear();	// HACK: always clear langs; necessary for reload
+		lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Page());
+		
+		// write document starting from root
+		Write_tkn(rv, ctx, hctx, src, null, -1, root);
 	}
 	public void Write_tkn_to_html(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
 		this.Write_tkn(bfr, ctx, hctx, src, grp, sub_idx, tkn);
 	}
 	private void Write_tkn(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
 		if (tkn.Ignore()) return;
+		if (++stack_counter > 1500) {	// NOTE:some deeply nested pages can go to 1500; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01; PAGE:en.w:Wikipedia:People_by_year/Reports/Stats; DATE:2016-09-11
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "stack overflow while generating html; wiki=~{0} page=~{1}", ctx.Wiki().Domain_bry(), ctx.Page().Ttl().Full_db());
+			return;
+		}
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_arg_itm:
 			case Xop_tkn_itm_.Tid_root:
@@ -101,6 +103,7 @@ public class Xoh_html_wtr {
 				Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, tkn.Src_bgn(), tkn.Src_end(), true, false);	// NOTE: always escape text including (a) lnki_alt text; and (b) any other text, especially failed xndes; DATE:2013-06-18
 				break;
 		}
+		--stack_counter;
 	}
 	private void Html_ncr(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_amp_tkn_num tkn)	{
 		bfr.Add_byte(Byte_ascii.Amp).Add_byte(Byte_ascii.Hash).Add_int_variable(tkn.Val()).Add_byte(Byte_ascii.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
@@ -358,7 +361,7 @@ public class Xoh_html_wtr {
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
 					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
-						||	page.Wiki().Domain_tid() == Xow_domain_tid_.Int__home) {		// page is in home wiki
+						||	page.Wiki().Domain_tid() == Xow_domain_tid_.Tid__home) {		// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;
 					}
@@ -536,7 +539,7 @@ public class Xoh_html_wtr {
 }
 /*
 NOTE_1:inline always written as <tag></tag>, not <tag/>
-see WP:Permian�Triassic extinction event
+see WP:Permian–Triassic extinction event
 this will cause firefox to swallow up rest of text
 <div id="ScaleBar" style="width:1px; float:left; height:38em; padding:0; background-color:#242020" />
 this will not

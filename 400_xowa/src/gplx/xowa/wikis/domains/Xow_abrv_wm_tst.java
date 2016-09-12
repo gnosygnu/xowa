@@ -20,28 +20,28 @@ import org.junit.*; import gplx.xowa.langs.*;
 public class Xow_abrv_wm_tst {
 	private Xow_abrv_wm_fxt fxt = new Xow_abrv_wm_fxt();
 	@Test  public void Parse() {
-		fxt.Test_parse("foundationwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__wmfblog);
-		fxt.Test_parse("wikidatawiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__wikidata);
-		fxt.Test_parse("mediawikiwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__mediawiki);
-		fxt.Test_parse("commonswiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__commons);
-		fxt.Test_parse("specieswiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__species);
-		fxt.Test_parse("metawiki"				, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__meta);
-		fxt.Test_parse("incubatorwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Int__incubator);
-		fxt.Test_parse("enwiki"					, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikipedia);
-		fxt.Test_parse("enwiktionary"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wiktionary);
-		fxt.Test_parse("enwikisource"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikisource);
-		fxt.Test_parse("enwikibooks"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikibooks);
-		fxt.Test_parse("enwikiversity"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikiversity);
-		fxt.Test_parse("enwikiquote"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikiquote);
-		fxt.Test_parse("enwikinews"				, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikinews);
-		fxt.Test_parse("enwikivoyage"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Int__wikivoyage);
-		fxt.Test_parse("frwiki"					, Xol_lang_stub_.Id_fr		, Xow_domain_tid_.Int__wikipedia);
+		fxt.Test_parse("foundationwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__wmfblog);
+		fxt.Test_parse("wikidatawiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__wikidata);
+		fxt.Test_parse("mediawikiwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__mediawiki);
+		fxt.Test_parse("commonswiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__commons);
+		fxt.Test_parse("specieswiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__species);
+		fxt.Test_parse("metawiki"				, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__meta);
+		fxt.Test_parse("incubatorwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__incubator);
+		fxt.Test_parse("enwiki"					, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikipedia);
+		fxt.Test_parse("enwiktionary"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wiktionary);
+		fxt.Test_parse("enwikisource"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikisource);
+		fxt.Test_parse("enwikibooks"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikibooks);
+		fxt.Test_parse("enwikiversity"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikiversity);
+		fxt.Test_parse("enwikiquote"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikiquote);
+		fxt.Test_parse("enwikinews"				, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikinews);
+		fxt.Test_parse("enwikivoyage"			, Xol_lang_stub_.Id_en		, Xow_domain_tid_.Tid__wikivoyage);
+		fxt.Test_parse("frwiki"					, Xol_lang_stub_.Id_fr		, Xow_domain_tid_.Tid__wikipedia);
 		fxt.Test_parse_null("unknown");
-		fxt.Test_parse("plwikimedia"			, Xol_lang_stub_.Id_pl		, Xow_domain_tid_.Int__wikimedia);
+		fxt.Test_parse("plwikimedia"			, Xol_lang_stub_.Id_pl		, Xow_domain_tid_.Tid__wikimedia);
 	}
 	@Test  public void Parse_override() {
-		fxt.Test_parse("arwikimedia"			, Xol_lang_stub_.Id_es		, Xow_domain_tid_.Int__wikimedia);
-		fxt.Test_parse("ukwikimedia"			, Xol_lang_stub_.Id_uk		, Xow_domain_tid_.Int__wikimedia);
+		fxt.Test_parse("arwikimedia"			, Xol_lang_stub_.Id_es		, Xow_domain_tid_.Tid__wikimedia);
+		fxt.Test_parse("ukwikimedia"			, Xol_lang_stub_.Id_uk		, Xow_domain_tid_.Tid__wikimedia);
 	}
 	@Test   public void To_domain_itm() {
 		fxt.Test_to_domain_itm("enwiki"		, "en"		, "en.wikipedia.org");
@@ -59,7 +59,7 @@ public class Xow_abrv_wm_tst {
 		fxt.Test_to_abrv("commons.wikimedia.org"	, "commonswiki");
 	}
 	@Test  public void To_abrv_by_lang() {
-		fxt.Test_to_abrv_by_lang("en", Xow_domain_tid_.Int__wikipedia, "enwiki");
+		fxt.Test_to_abrv_by_lang("en", Xow_domain_tid_.Tid__wikipedia, "enwiki");
 	}
 }
 class Xow_abrv_wm_fxt {

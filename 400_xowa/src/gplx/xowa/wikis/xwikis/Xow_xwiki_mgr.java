@@ -77,9 +77,9 @@ public class Xow_xwiki_mgr {
 	}
 	private static int Xwiki_tid(int tid) {
 		switch (tid) {
-			case Xow_domain_tid_.Int__commons: case Xow_domain_tid_.Int__species: case Xow_domain_tid_.Int__incubator:
-			case Xow_domain_tid_.Int__mediawiki: case Xow_domain_tid_.Int__wmfblog: case Xow_domain_tid_.Int__home:	
-						return Xow_domain_tid_.Int__wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
+			case Xow_domain_tid_.Tid__commons: case Xow_domain_tid_.Tid__species: case Xow_domain_tid_.Tid__incubator:
+			case Xow_domain_tid_.Tid__mediawiki: case Xow_domain_tid_.Tid__wmfblog: case Xow_domain_tid_.Tid__home:	
+						return Xow_domain_tid_.Tid__wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
 			default:	return tid;
 		}
 	}

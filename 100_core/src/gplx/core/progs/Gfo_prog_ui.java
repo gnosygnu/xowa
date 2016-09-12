@@ -22,4 +22,5 @@ public interface Gfo_prog_ui extends Cancelable {
 	long			Prog_data_cur();
 	long			Prog_data_end();
 	boolean			Prog_notify_and_chk_if_suspended(long cur, long max);
+	void			Prog_notify_by_msg(String msg);
 }

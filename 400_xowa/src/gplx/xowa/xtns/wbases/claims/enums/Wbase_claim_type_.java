@@ -28,11 +28,8 @@ public class Wbase_claim_type_ {
 	, Tid__monolingualtext						=  6
 	, Tid__entity								=  7
 	;
-	private static final int Ary__len = 13;
-	private static final    Wbase_claim_type[] Ary = new Wbase_claim_type[Ary__len];
-	private static final    Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
-	private static final    Hash_adp hash_by_str = Hash_adp_.New();
-	public static final    Wbase_claim_type 
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.data_type", 8);
+	public static final    Wbase_enum_itm
 	  Itm__unknown					= New(Tid__unknown			, "unknown")
 	, Itm__bad						= New(Tid__bad				, "bad")				// NOTE: wikidata identifies several entries as "bad"; Q1615351|'s-Graveland, Q107538|Baco; DATE:2013-10-20
 	, Itm__string					= New(Tid__string			, "string")			// EX:wd:Property:P1030
@@ -42,23 +39,10 @@ public class Wbase_claim_type_ {
 	, Itm__monolingualtext			= New(Tid__monolingualtext	, "monolingualtext")
 	, Itm__entity					= New(Tid__entity			, "wikibase-entityid"	, "wikibase-item")
 	;
-	private static Wbase_claim_type New(byte tid, String key)					{return New(tid, key, key);}
-	private static Wbase_claim_type New(byte tid, String key, String scrib)	{
-		Wbase_claim_type rv = new Wbase_claim_type(tid, key, scrib);
-		hash_by_bry.Add(rv.Key_bry(), rv);
-		hash_by_str.Add(rv.Key_str(), rv);
-		Ary[tid] = rv;
-		return rv;
-	}
-	public static String To_key_or_unknown(byte tid)	{return tid < Ary__len ? Ary[tid].Key_str()			: Itm__unknown.Key_str();}
-	public static String To_scrib_or_unknown(byte tid)	{return tid < Ary__len ? Ary[tid].Key_for_scrib()	: Itm__unknown.Key_str();}
-	public static byte To_tid_or_unknown(byte[] src) {return To_tid_or_unknown(src, 0, src.length);}
-	public static byte To_tid_or_unknown(byte[] src, int bgn, int end) {
-		Object obj = hash_by_bry.Get_by_mid(src, bgn, end);
-		return obj == null ? Tid__unknown : ((Wbase_claim_type)obj).Tid();
-	}
-	public static byte To_tid_or_unknown(String src) {
-		Object obj = hash_by_str.Get_by(src);
-		return obj == null ? Tid__unknown : ((Wbase_claim_type)obj).Tid();
-	}
+	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
+	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}
+	public static String Get_scrib_or_unknown(byte tid)	{return ((Wbase_claim_type)Reg.Get_itm_or(tid, Itm__unknown)).Key_for_scrib();}
+	public static byte Get_tid_or_unknown(String key)					{return Get_tid_or_unknown(Bry_.new_u8(key));}
+	public static byte Get_tid_or_unknown(byte[] key)					{return Get_tid_or_unknown(key, 0, key.length);}
+	public static byte Get_tid_or_unknown(byte[] key, int bgn, int end) {return Reg.Get_tid_or(key, bgn, end, Tid__unknown);}
 }

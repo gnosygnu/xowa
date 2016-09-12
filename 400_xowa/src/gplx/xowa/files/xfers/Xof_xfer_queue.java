@@ -74,15 +74,19 @@ public class Xof_xfer_queue {
 		int list_len = xfer_list.Count();
 		for (int i = 0; i < list_len; i++) {
 			Xof_file_itm xfer = (Xof_file_itm)xfer_list.Get_at(i);
-			Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
-			fsdb.Init_at_lnki(xfer.Lnki_exec_tid(), xfer.Lnki_wiki_abrv(), xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_upright(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_time(), xfer.Lnki_page(), upright_patch);
-			fsdb.Init_at_hdoc(xfer.Html_uid(), xfer.Html_elem_tid());
-			fsdb.Html_gallery_mgr_h_(xfer.Html_gallery_mgr_h());
-			fsdb.Html_img_wkr_(xfer.Html_img_wkr());
-			fsdb.File_exists_(xfer.File_exists());
-			if (xfer.Lnki_type() == gplx.xowa.parsers.lnkis.Xop_lnki_type.Tid_orig_known)
-				fsdb.Init_at_gallery_bgn(xfer.Html_w(), xfer.Html_h(), xfer.File_w());
-			rv.Add(fsdb);
+			if (xfer.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null) {
+				Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
+				fsdb.Init_at_lnki(xfer.Lnki_exec_tid(), xfer.Lnki_wiki_abrv(), xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_upright(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_time(), xfer.Lnki_page(), upright_patch);
+				fsdb.Init_at_hdoc(xfer.Html_uid(), xfer.Html_elem_tid());
+				fsdb.Html_gallery_mgr_h_(xfer.Html_gallery_mgr_h());
+				fsdb.Html_img_wkr_(xfer.Html_img_wkr());
+				fsdb.File_exists_(xfer.File_exists());
+				if (xfer.Lnki_type() == gplx.xowa.parsers.lnkis.Xop_lnki_type.Tid_orig_known)
+					fsdb.Init_at_gallery_bgn(xfer.Html_w(), xfer.Html_h(), xfer.File_w());
+				rv.Add(fsdb);
+			}
+			else
+				rv.Add(xfer);
 		}
 		this.Clear();
 		return rv;

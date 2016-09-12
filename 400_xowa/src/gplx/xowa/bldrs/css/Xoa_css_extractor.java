@@ -53,7 +53,7 @@ public class Xoa_css_extractor {
 			Io_url css_comm_fil = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
 			wiki.Html__wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
-			if (wiki.Domain_tid() == Xow_domain_tid_.Int__home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
+			if (wiki.Domain_tid() == Xow_domain_tid_.Tid__home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
 			if (Io_mgr.Instance.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
 			if (wiki.Html__css_installing()) return;
 			wiki.Html__css_installing_(true);

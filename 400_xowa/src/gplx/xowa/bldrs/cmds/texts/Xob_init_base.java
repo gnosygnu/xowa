@@ -29,7 +29,7 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
 	@gplx.Virtual public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
 		bldr.Import_marker().Bgn(wiki);
-		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Int__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
+		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Tid__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
 		if (wbase_enabled == Bool_.Y_byte)		// if wbase_enabled, auto-add wdata_wkrs bldr
 			this.Cmd_ini_wdata(bldr, wiki);
 	}

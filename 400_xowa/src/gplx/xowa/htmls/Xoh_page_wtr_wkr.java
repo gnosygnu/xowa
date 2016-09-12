@@ -22,6 +22,7 @@ import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xoh_page_wtr_wkr {
 	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
@@ -105,7 +106,7 @@ public class Xoh_page_wtr_wkr {
 		, portal_mgr.Div_ns_bry(wiki.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr())
 		, portal_mgr.Div_view_bry(wiki.Utl__bfr_mkr(), html_gen_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar)
-		, portal_mgr.Div_admin_bry(tmp_bfr, wiki, page)
+		, portal_mgr.Div_sync_bry(tmp_bfr, wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
 		, portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
@@ -138,7 +139,7 @@ public class Xoh_page_wtr_wkr {
 					case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, ctx, hctx, page, page_tid, page_ns_id); break;
 				}
 			}
-			if (	wiki.Domain_tid() != Xow_domain_tid_.Int__home	// allow home wiki to use javascript
+			if (	wiki.Domain_tid() != Xow_domain_tid_.Tid__home	// allow home wiki to use javascript
 				&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
 				wiki.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 			}
@@ -174,7 +175,7 @@ public class Xoh_page_wtr_wkr {
 		}
 		
 		// if [[Category]], render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, hctx, tidy_bfr);
+		if (ns_id == Xow_ns_.Tid__category) wiki.Html_mgr().Ns_ctg().Write_catpage(tidy_bfr, wiki, page, hctx);
 
 		// tidy html
 		wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
@@ -182,18 +183,18 @@ public class Xoh_page_wtr_wkr {
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);
 		tidy_bfr.Mkr_rls();
+
 		// handle Categories at bottom of page; note that html is XOWA-generated so does not need to be tidied
-		int ctgs_len = page.Category_list().length;
+		int ctgs_len = page.Wtxt().Ctgs__len();
 		if (	ctgs_enabled
-			&&	ctgs_len > 0
+			&&	ctgs_len > 0						// skip if no categories found while parsing wikitext
 			&&	!wiki.Html_mgr().Importing_ctgs()	// do not show categories if importing categories, page will wait for category import to be done; DATE:2014-10-15
 			) {
-			app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
-			if (app.Ctg_mgr().Pagecats_grouping_enabled())
-				app.Ctg_mgr().Pagectgs_wtr().Write(bfr, wiki, page, hctx);
-			else
-				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
+			if (app.Mode().Tid_is_gui()) app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
+			Xoctg_pagebox_itm[] pagebox_itms = wiki.Html__ctg_pagebox_wtr().Get_catlinks_by_page(wiki, page);
+			wiki.Html__ctg_pagebox_wtr().Write_pagebox(app.Ctg_mgr().Pagecats_grouping_enabled(), bfr, wiki, page, pagebox_itms);
 		}
+
 		// translate if variants are enabled
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) bfr.Add(vnt_mgr.Convert_lang().Parse_page(vnt_mgr.Cur_itm(), page.Db().Page().Id(), bfr.To_bry_and_clear()));

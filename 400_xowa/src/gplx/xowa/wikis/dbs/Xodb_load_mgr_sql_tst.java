@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.ctgs.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xodb_load_mgr_sql_tst {
 	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xodb_load_mgr_sql_fxt fxt = new Xodb_load_mgr_sql_fxt();
 	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();}
@@ -31,9 +32,9 @@ public class Xodb_load_mgr_sql_tst {
 		fxt.Test_load_ctg_list(ctgs);	
 	}
 }
-class Xoctg_url_mok extends Xoctg_url {	public Xoctg_url_mok Page_bgn_(String v) {return Grp(Xoa_ctg_mgr.Tid_page, Bool_.Y, v);}
-	public Xoctg_url_mok Page_end_(String v) {return Grp(Xoa_ctg_mgr.Tid_page, Bool_.N, v);}
-	Xoctg_url_mok Grp(byte tid, boolean v, String bmk) {
+class Xoctg_catpage_url_mok extends Xoctg_catpage_url {	public Xoctg_catpage_url_mok Page_bgn_(String v) {return Grp(Xoa_ctg_mgr.Tid_page, Bool_.Y, v);}
+	public Xoctg_catpage_url_mok Page_end_(String v) {return Grp(Xoa_ctg_mgr.Tid_page, Bool_.N, v);}
+	Xoctg_catpage_url_mok Grp(byte tid, boolean v, String bmk) {
 		this.Grp_fwds()[tid] = v ? Bool_.Y_byte : Bool_.N_byte;
 		this.Grp_idxs()[tid] = Bry_.new_a7(bmk);
 		return this;
@@ -61,7 +62,8 @@ class Xodb_load_mgr_sql_fxt {
 	public void Init_save_ctgs(Xowd_page_itm[] ary) {
 		int len = ary.length;
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Xowd_cat_core_tbl cat_core_tbl = db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Create_tbl();
+		Xowd_cat_core_tbl cat_core_tbl = Xodb_cat_db_.Get_cat_core_or_fail(db_mgr.Core_data_mgr());
+		cat_core_tbl.Create_tbl();
 		DateAdp modified = Datetime_now.Get();
 		Xowd_page_tbl tbl_page = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
 		tbl_page.Insert_bgn();
@@ -96,25 +98,25 @@ class Xodb_load_mgr_sql_fxt {
 		}
 		return bfr.To_str_and_clear();
 	}
-	public Xoctg_url_mok ctg_url_() {return new Xoctg_url_mok();}
+	public Xoctg_catpage_url_mok ctg_url_() {return new Xoctg_catpage_url_mok();}
 	public Xodb_load_mgr_sql_fxt Init_limit_(int v) {limit = v; return this;} private int limit = 3;
-	public void Test_select(Xoctg_url ctg_url, Xoctg_mok_ctg expd) {
-		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg();
+	public void Test_select(Xoctg_catpage_url ctg_url, Xoctg_mok_ctg expd) {
+		Xoctg_catpage_ctg view_ctg = new Xoctg_catpage_ctg(expd.Ttl());
 		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v2a(view_ctg, ctg_url, expd.Ttl(), limit, false);
 		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
-			Xoctg_view_grp view_grp = view_ctg.Grp_by_tid(i);
+			Xoctg_catpage_grp view_grp = view_ctg.Grp_by_tid(i);
 			Xoctg_mok_grp mok_grp = expd.Grps_get_or_new(i);
 			Tfds.Eq_ary_str(Xto_str(mok_grp), Xto_str(view_grp));
-			Tfds.Eq(String_.new_a7(mok_grp.Last_plus_one_sortkey()), String_.new_a7(view_grp.Itms_last_sortkey()));
+			Tfds.Eq(String_.new_a7(mok_grp.Last_plus_one_sortkey()), String_.new_a7(view_grp.Itms__nth_sortkey()));
 		}
 	}
-	String[] Xto_str(Xoctg_view_grp grp) {
-		Xoctg_view_itm[] ary = grp.Itms();
+	String[] Xto_str(Xoctg_catpage_grp grp) {
+		Xoctg_catpage_itm[] ary = grp.Itms();
 		int len = ary.length;
 		String[] rv = new String[len];
 		for (int i = 0; i< len; i++) {
-			Xoctg_view_itm itm = ary[i];
-			rv[i] = itm.Ttl().Page_db_as_str();
+			Xoctg_catpage_itm itm = ary[i];
+			rv[i] = itm.Page_ttl().Page_db_as_str();
 		}
 		return rv;
 	}

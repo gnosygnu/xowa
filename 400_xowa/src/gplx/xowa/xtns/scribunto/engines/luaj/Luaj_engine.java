@@ -78,7 +78,7 @@ public class Luaj_engine implements Scrib_engine {
 				msg = Server_recv_call(rsp);
 			else if (String_.Eq(op, "error")) {
 				String err = Luaj_value_.Get_val_as_str(rsp, "value");
-				core.Handle_error(err, "");
+				core.Handle_error(err);
 				return Keyval_.Ary_empty;
 			}
 			else

@@ -19,7 +19,7 @@ package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.wikis.*;
 public class Xou_fsys_mgr implements Gfo_invk {
 	private Io_url app_root_dir; private Io_url wiki_root_dir; private Io_url cur_root;
-	public Xou_fsys_mgr(Xoae_app app, Xoue_user usr, Io_url user_dir) {
+	public Xou_fsys_mgr(Io_url user_dir) {
 		this.cur_root = user_dir;
 		app_root_dir = cur_root.GenSubDir("app");
 		app_temp_dir = app_root_dir.GenSubDir("tmp");

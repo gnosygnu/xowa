@@ -26,6 +26,6 @@ public class Wbase_claim_string extends Wbase_claim_base {
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_str(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.To_str_or_fail(this.Snak_tid()), Wbase_claim_type_.To_key_or_unknown(this.Val_tid()), String_.new_u8(val));
+		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(val));
 	}
 }

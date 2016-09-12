@@ -23,15 +23,20 @@ public class Xowd_page_tbl implements Rls_able {
 	private final    Object thread_lock = new Object();
 	private final    String tbl_name = "page";
 	public final    boolean schema_is_1;
-	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id;
+	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_cat_db_id;
 	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert;
 	private final    String[] flds_select_all, flds_select_idx;
 	public Xowd_page_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
 		String fld_text_db_id_name = "";
+		String fld_cat_db_id_name = Dbmeta_fld_itm.Key_null;
 		if (schema_is_1)	{fld_text_db_id_name = "page_file_idx";}
-		else				{fld_text_db_id_name = "page_text_db_id";}
+		else				{
+			fld_text_db_id_name = "page_text_db_id";
+			if (conn.Meta_fld_exists(tbl_name, "page_cat_db_id"))
+				fld_cat_db_id_name = "page_cat_db_id";
+		}
 		fld_id				= flds.Add_int_pkey("page_id");					// int(10); unsigned -- MW:same
 		fld_ns				= flds.Add_int("page_namespace");			// int(11);          -- MW:same
 		fld_title			= flds.Add_str("page_title", 255);				// varbinary(255);   -- MW:blob
@@ -43,7 +48,9 @@ public class Xowd_page_tbl implements Rls_able {
 		fld_html_db_id		= flds.Add_int_dflt("page_html_db_id", -1);		// MW:XOWA
 		fld_redirect_id		= flds.Add_int_dflt("page_redirect_id", -1);	// MW:XOWA
 		fld_score			= flds.Add_int_dflt(Fld__page_score__key, -1);	// MW:XOWA
-		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score);
+		if (fld_cat_db_id_name != Dbmeta_fld_itm.Key_null)
+			fld_cat_db_id		= flds.Add_int_dflt(fld_cat_db_id_name, -1);// MW:XOWA
+		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score, fld_cat_db_id);
 		flds_select_idx	= String_.Ary_wo_null(fld_ns, fld_title, fld_id, fld_len, fld_score);
 		conn.Rls_reg(this);
 	}
@@ -89,6 +96,7 @@ public class Xowd_page_tbl implements Rls_able {
 		.Val_int(fld_html_db_id, html_db_id)
 		.Val_int(fld_redirect_id, -1)
 		.Val_int(fld_score, -1)
+		.Val_int(fld_cat_db_id, -1)
 		.Exec_insert();
 	}
 	public void Insert_by_itm(Db_stmt stmt, Xowd_page_itm itm, int html_db_id) {
@@ -104,8 +112,14 @@ public class Xowd_page_tbl implements Rls_able {
 		.Val_int			(fld_html_db_id		, html_db_id)
 		.Val_int			(fld_redirect_id	, itm.Redirect_id())
 		.Val_int			(fld_score			, itm.Score())
+		.Val_int			(fld_cat_db_id		, -1)
 		.Exec_insert();
 	}
+	public Xowd_page_itm Select_by_ttl_as_itm_or_null(Xoa_ttl ttl) {
+		Xowd_page_itm rv = new Xowd_page_itm();
+		return Select_by_ttl(rv, ttl) ? rv : null;
+	}
+	public boolean Select_by_ttl(Xowd_page_itm rv, Xoa_ttl ttl) {return Select_by_ttl(rv, ttl.Ns(), ttl.Page_db());}
 	public boolean Select_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
 		if (stmt_select_all_by_ttl == null) stmt_select_all_by_ttl = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_ns, fld_title));
 		synchronized (thread_lock) { // LOCK:stmt-rls; DATE:2016-07-06
@@ -287,6 +301,7 @@ public class Xowd_page_tbl implements Rls_able {
 		// handle page_score defaulting to page_len
 		int page_len = rdr.Read_int(fld_len);
 		int page_score = fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
+		int cat_db_id = fld_cat_db_id == Dbmeta_fld_itm.Key_null ? -1 : rdr.Read_int(fld_cat_db_id);
 
 		page.Init_by_load__all
 		( rdr.Read_int(fld_id)
@@ -300,6 +315,7 @@ public class Xowd_page_tbl implements Rls_able {
 		, rdr.Read_int(fld_html_db_id)
 		, rdr.Read_int(fld_redirect_id)
 		, page_score
+		, cat_db_id
 		);
 	}
 	public void Update__html_db_id(int page_id, int html_db_id) {

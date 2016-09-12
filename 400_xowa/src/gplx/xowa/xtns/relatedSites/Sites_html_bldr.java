@@ -57,7 +57,7 @@ public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(tmp_bfr, ttl_page_db);
 		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.To_bry_and_clear());			
-		if (xwiki_itm.Domain_tid() != Xow_domain_tid_.Int__other)
+		if (xwiki_itm.Domain_tid() != Xow_domain_tid_.Tid__other)
 			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}

@@ -262,7 +262,7 @@ public class Xot_invk_wkr__basic__tst {
 	@Test  public void Ws_arg() { // PURPOSE: whitespace arg should not throw array index out of bounds; EX.WIKT: wear one's heart on one's sleeve
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{{{{1}}}}}");
-		fxt.Test_parse_tmpl_str("{{test_1| }}", "(? [[dynamic is blank]] ?)");
+		fxt.Test_parse_tmpl_str("{{test_1| }}", "");
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Xnde_xtn_ref_not_arg() {	// PURPOSE: <ref name= should not be interpreted as arg; EX: {{tmp|a<ref name="b"/>}}; arg1 is a<ref name="b"/> not "b"; PAGE:en.w:WWI

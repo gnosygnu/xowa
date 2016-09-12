@@ -19,6 +19,8 @@ package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.phps.*; import gplx.xowa.parsers.*;
 import gplx.xowa.apps.gfs.*;
+import gplx.xowa.htmls.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.dbs.*;	
 public class Xol_msg_mgr_ {
 //		public static String Get_msg_val_gui_or_null(Xol_lang_itm lang, byte[] pre, byte[] key, byte[] suf) {
 //			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
@@ -39,7 +41,7 @@ public class Xol_msg_mgr_ {
 			msg_itm = lang_mgr.Lang_en().Msg_mgr().Itm_by_key_or_null(msg_key);			
 		return msg_itm == null ? null : String_.new_u8(msg_itm.Val());
 	}
-	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[][] fmt_args) {
+	public static byte[] Get_msg_val(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[][] fmt_args) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = (msg_itm.Defined_in_none())
@@ -48,7 +50,7 @@ public class Xol_msg_mgr_ {
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}	private static final    byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
-	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
+	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
 		byte[] msg_val = msg_itm.Val();
 		boolean has_fmt = msg_itm.Has_fmt_arg(), has_tmpl = msg_itm.Has_tmpl_txt();
 		if (!has_fmt && !has_tmpl)		// no fmt or tmpl; just add val
@@ -60,13 +62,16 @@ public class Xol_msg_mgr_ {
 			msg_val = tmp_bfr.To_bry_and_clear();
 		}
 		if (has_tmpl) {
-			Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(wiki.Parser_mgr().Ctx()); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
-			Xop_root_tkn sub_root = tkn_mkr.Root(msg_val);
-			msg_val = wiki.Parser_mgr().Main().Expand_tmpl(sub_root, sub_ctx, tkn_mkr, msg_val);
+			if (wiki.Type_is_edit()) {
+				Xowe_wiki wikie = (Xowe_wiki)wiki;
+				Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(wikie.Parser_mgr().Ctx()); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
+				Xop_root_tkn sub_root = tkn_mkr.Root(msg_val);
+				msg_val = wikie.Parser_mgr().Main().Expand_tmpl(sub_root, sub_ctx, tkn_mkr, msg_val);
+			}
 		}
 		return msg_val;
 	}
-	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
+	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
 		int slash_pos = Bry_find_.Find_bwd(msg_key, Byte_ascii.Slash);
 		if (slash_pos != Bry_find_.Not_found) {	// key is of format "key/lang"; EX: "January/en"
@@ -83,9 +88,9 @@ public class Xol_msg_mgr_ {
 		Xol_msg_itm msg_in_wiki = wiki.Msg_mgr().Get_or_null(msg_key);						// check wiki; used to be check lang, but Search_mediawiki should never be toggled on lang; DATE:2014-05-13
 		if (msg_in_wiki != null) return msg_in_wiki;										// NOTE: all new msgs will Search_mediawiki once; EX: de.w:{{int:Autosumm-replace}}; DATE:2013-01-25
 		msg_in_wiki = wiki.Msg_mgr().Get_or_make(msg_key);
-		Xoae_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
+		byte[] msg_db = Get_msg_from_db_or_null(wiki, lang, msg_key, msg_key_sub_root);
 		byte[] msg_val = Bry_.Empty;
-		if (msg_page.Db().Page().Exists_n()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
+		if (msg_db == null) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
 				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
@@ -97,29 +102,78 @@ public class Xol_msg_mgr_ {
 			}
 		}
 		else {																				// page found; dump entire contents
-			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Db().Text().Text_bry());	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
+			msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_db);	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
 			msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__wiki);
 		}
+//			Xoa_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
+//			byte[] msg_val = Bry_.Empty;
+//			if (msg_page.Db().Page().Exists_n()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
+//				Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
+//				if (msg_in_lang == null) {
+//					msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
+//					msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__none);
+//				}
+//				else {
+//					msg_val = msg_in_lang.Val();
+//					msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__lang);
+//				}
+//			}
+//			else {																				// page found; dump entire contents
+//				msg_val = Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, msg_page.Db().Text().Text_bry());	// note that MediaWiki msg's use php arg format ($1); xowa.gfs msgs are already converted
+//				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__wiki);
+//			}
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);
 		return msg_in_wiki;
 	}
-	private static Xoae_page Get_msg_itm_from_db(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
+//		private static Xoa_page Get_msg_itm_from_db(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
+//			byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
+//			Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
+//			Xoae_page rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
+//			if (rv.Db().Page().Exists_n()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
+//				byte[][] fallback_ary = lang.Fallback_bry_ary();
+//				int fallback_ary_len = fallback_ary.length;
+//				for (int i = 0; i < fallback_ary_len; i++) {
+//					byte[] fallback = fallback_ary[i];
+//					ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
+//					rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
+//					if (rv.Db().Page().Exists()) break;
+//				}
+//			}
+//			return rv;
+//		}
+	private static byte[] Get_msg_from_db_or_null(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
 		byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
-		Xoae_page rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-		if (rv.Db().Page().Exists_n()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
+		byte[] rv = null;
+		if (ttl != null)
+			rv = Load_msg_from_db_or_null(wiki, ttl);
+		if (rv == null) {// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
 			byte[][] fallback_ary = lang.Fallback_bry_ary();
 			int fallback_ary_len = fallback_ary.length;
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
 				ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
-				rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Load_page_by_ttl_for_msg(ttl);
-				if (rv.Db().Page().Exists()) break;
+				if (ttl != null)
+					rv = Load_msg_from_db_or_null(wiki, ttl);
+				if (rv != null) break;
 			}
 		}
 		return rv;
 	}
-	private static Xol_msg_itm Get_msg_itm_from_gfs(Xowe_wiki wiki, Xol_lang_itm lang, byte[] msg_key_sub_root) {
+	private static byte[] Load_msg_from_db_or_null(Xow_wiki wiki, Xoa_ttl ttl) {
+		Xoa_page pg = null;
+		if (wiki.Type_is_edit()) {
+			pg = ((Xowe_wiki)wiki).Data_mgr().Load_page_by_ttl_for_msg(ttl);
+		}
+		else {
+			Xoh_page hpg = new Xoh_page();
+			pg = hpg;				
+			hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, -1);
+			((Xowv_wiki)wiki).Pages_get(hpg, gplx.core.net.Gfo_url.Empty, ttl);	// NOTE: url is only for "Special:" pages
+		}
+		return pg.Db().Page().Exists() ? pg.Db().Text().Text_bry() : null;
+	}
+	private static Xol_msg_itm Get_msg_itm_from_gfs(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key_sub_root) {
 		Xol_msg_itm rv = lang.Msg_mgr().Itm_by_key_or_null(msg_key_sub_root);	// NOTE: should always be msg_key_sub_root; EX: "msg/lang" will never be in lang.gfs
 		if (rv == null) {														// msg not found; check fallbacks; note that this is different from MW b/c when MW constructs a lang, it automatically adds all fallback msgs to the current lang
 			byte[][] fallback_ary = lang.Fallback_bry_ary();

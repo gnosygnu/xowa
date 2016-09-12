@@ -52,7 +52,8 @@ class Xomp_make_lnki {
 				if (wkr_uid_max > tmp_xomp_uid_max)
 					tmp_xomp_uid_max = wkr_uid_max;
 			}
-			if (tmp_xomp_uid_max >= max_xomp_uid || tmp_xomp_uid_max == -1) break;	// if max_xomp_uid seen, break; note that ">" necessary because max_xomp_uid may not be in set of wkrs;
+			// NOTE: not ">=" else small wikis will fail with 0 images; EX:cs.q; DATE:2016-09-04
+			if (tmp_xomp_uid_max > max_xomp_uid || tmp_xomp_uid_max == -1) break;	// if max_xomp_uid seen, break; note that ">" necessary because max_xomp_uid may not be in set of wkrs;
 			cur_xomp_uid += uid_count;	// note that this sequentially counts up by uid_count (1000), so inevitable that cur_xomp_uid will exceed wkr_uid_max
 			Gfo_usr_dlg_.Instance.Prog_many("", "", "building lnki_temp; cur_xomp_uid=~{0}", cur_xomp_uid);
 			Save_rows(rows, lnki_temp_tbl);

@@ -57,4 +57,10 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 		return this;
 	}
 	public static final String Invk_src_fil_ = "src_fil_";
+	public void Cmd_cleanup_sql() {
+		// get dump files to delete; EX: "*-categorylinks.sql*" matches "simplewiki-latest-categorylinks.sql" and "simplewiki-latest-categorylinks.sql.gz"
+		Io_url[] dump_files = Io_mgr.Instance.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*-" + this.Sql_file_name() + ".sql*").ExecAsUrlAry();
+		for (Io_url dump_file : dump_files)
+			Io_mgr.Instance.DeleteFil(dump_file);
+	}
 }

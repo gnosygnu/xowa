@@ -32,11 +32,11 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		int[] standard_sizes = new int[] {640, 1280, 2560};
 		int dflt_img_wdata_prop = 948; byte[] dflt_img_title = Bry_.new_a7("Pagebanner_default.jpg");	// www.wikidata.org/wiki/Property:P948
 		switch (wiki.Domain_tid()) {
-			case Xow_domain_tid_.Int__home:
+			case Xow_domain_tid_.Tid__home:
 				enabled = true;
 				ns_ary = Int_.Ary(Xow_ns_.Tid__main);
 				break;
-			case Xow_domain_tid_.Int__wikivoyage:
+			case Xow_domain_tid_.Tid__wikivoyage:
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_en:
 					case Xol_lang_stub_.Id_fr:
@@ -53,7 +53,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 						break;
 				}
 				break;
-			case Xow_domain_tid_.Int__wikipedia:
+			case Xow_domain_tid_.Tid__wikipedia:
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_ca:
 						// enabled = enable_default_banner = true;

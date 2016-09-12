@@ -45,7 +45,7 @@ public class Xow_parser_mgr {
 			wbase__time__msgs = Wdata_hwtr_msgs.new_(wiki.Msg_mgr());
 		return wbase__time__msgs;
 	}	private Wdata_hwtr_msgs wbase__time__msgs;
-	public int Tag__next_idx() {return ++tag_idx;} private int tag_idx; // NOTE:must be wiki-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
+	public int						Tag__next_idx() {return ++tag_idx;} private int tag_idx; // NOTE:must be wiki-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
 	public void						Tmpl_stack_del() {--tmpl_stack_ary_len;}
 	public boolean						Tmpl_stack_add(byte[] key) {
 		for (int i = 0; i < tmpl_stack_ary_len; i++) {

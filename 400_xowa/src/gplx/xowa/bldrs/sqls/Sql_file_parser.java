@@ -18,14 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.flds.*; import gplx.core.ios.*;
 public class Sql_file_parser {
-	public Io_url Src_fil() {return src_fil;} public Sql_file_parser Src_fil_(Io_url v) {src_fil = v; return this;} Io_url src_fil;
-	public int Src_len() {return src_len;} public Sql_file_parser Src_len_(int v) {src_len = v; return this;} private int src_len = 8 * Io_mgr.Len_mb;
-	public Io_url_gen Trg_fil_gen() {return trg_fil_gen;} public Sql_file_parser Trg_fil_gen_(Io_url_gen v) {trg_fil_gen = v; return this;} Io_url_gen trg_fil_gen;
-	public int Trg_len() {return trg_len;} public Sql_file_parser Trg_len_(int v) {trg_len = v; return this;} private int trg_len = 4 * Io_mgr.Len_mb;
+	private final    Gfo_fld_rdr sql_parser = Gfo_fld_rdr.sql_(); private final    Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	private Sql_fld_itm[] flds_all; private int flds_all_len;
-	Gfo_fld_rdr sql_parser = Gfo_fld_rdr.sql_(); Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
-	static final byte Mode_sql_bgn = 0, Mode_row_bgn = 1, Mode_row_end = 2, Mode_fld = 3, Mode_quote = 4, Mode_escape = 5;
-	public Sql_file_parser Fld_cmd_(Sql_file_parser_cmd v) {this.fld_cmd = v; return this;} Sql_file_parser_cmd fld_cmd;
+	public boolean Save_csv() {return save_csv;} private boolean save_csv = true; public Sql_file_parser Save_csv_n_() {save_csv = false; return this;}
+	public Sql_file_parser Fld_cmd_(Sql_file_parser_cmd v) {this.fld_cmd = v; return this;} private Sql_file_parser_cmd fld_cmd;
 	public Sql_file_parser Flds_req_(byte[]... v) {flds_req = v; return this;} private byte[][] flds_req;
 	public Sql_file_parser Flds_req_idx_(int flds_all_len, int... idxs) {
 		new_flds_all(flds_all_len);
@@ -132,7 +128,10 @@ public class Sql_file_parser {
 					default:								throw Err_.new_unhandled(mode);
 				}
 			}
-			Io_mgr.Instance.AppendFilByt(trg_fil_gen.Nxt_url(), fil_bfr.To_bry_and_clear());
+			if (save_csv)
+				Io_mgr.Instance.AppendFilByt(trg_fil_gen.Nxt_url(), fil_bfr.To_bry_and_clear());
+			else
+				fil_bfr.Clear();
 		}
 		finally {rdr.Rls();}
 	}
@@ -140,8 +139,11 @@ public class Sql_file_parser {
 		fil_bfr.Add_byte(Byte_ascii.Nl);
 		if (fil_bfr.Len() > trg_len) {
 			Io_url trg_fil = trg_fil_gen.Nxt_url();				
-			usr_dlg.Prog_one(GRP_KEY, "make", "making ~{0}", trg_fil.NameAndExt());
-			Io_mgr.Instance.AppendFilByt(trg_fil, fil_bfr.To_bry_and_clear());
+			usr_dlg.Prog_one("", "", "making ~{0}", trg_fil.NameAndExt());
+			if (save_csv)
+				Io_mgr.Instance.AppendFilByt(trg_fil, fil_bfr.To_bry_and_clear());
+			else
+				fil_bfr.Clear();
 		}
 	}
 	private void Commit_fld(int fld_idx, Bry_bfr val_bfr, Bry_bfr fil_bfr, Sql_file_parser_data data) {
@@ -157,6 +159,15 @@ public class Sql_file_parser {
 		}
 		val_bfr.Clear();
 	}
+
+	private Io_url_gen trg_fil_gen; private int trg_len = 4 * Io_mgr.Len_mb;
+	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;
+	public int Src_len() {return src_len;} private int src_len = 8 * Io_mgr.Len_mb;
+	public Sql_file_parser Src_fil_(Io_url v) {src_fil = v; return this;}
+	public Sql_file_parser Src_len_(int v) {src_len = v; return this;}
+	public Sql_file_parser Trg_fil_gen_(Io_url_gen v) {trg_fil_gen = v; return this;}
+	public Sql_file_parser Trg_len_(int v) {trg_len = v; return this;}
+
 	private static final    byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
-	private static final    String GRP_KEY = "xowa.bldr.sql";
+	private static final byte Mode_sql_bgn = 0, Mode_row_bgn = 1, Mode_row_end = 2, Mode_fld = 3, Mode_quote = 4, Mode_escape = 5;
 }

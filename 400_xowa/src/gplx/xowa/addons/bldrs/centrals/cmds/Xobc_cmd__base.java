@@ -33,6 +33,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	public long				Prog_data_cur()	{return data_cur;}		private long data_cur;								public void Prog_data_cur_(long v) {this.data_cur = v;}
 	public long				Prog_data_end()	{return data_end;}		private long data_end;								public void Prog_data_end_(long v) {this.data_end = v;}
 	public byte				Prog_status()	{return status;}		private byte status = Gfo_prog_ui_.Status__init;	public void Prog_status_(byte v) {status = v;}
+	public void				Prog_notify_by_msg(String msg) {task_mgr.Work_mgr().On_stat(task_id, msg);}
 	public boolean			Canceled()		{return status == Gfo_prog_ui_.Status__suspended;}
 	public void				Cancel()		{status = Gfo_prog_ui_.Status__suspended;}
 
@@ -64,7 +65,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 			Gfo_log_.Instance.Info("xobc_cmd task end", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
 			switch (status) {
 				case Gfo_prog_ui_.Status__suspended:	task_mgr.Work_mgr().On_suspended(this); break;
-				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, Bool_.N, cmd_exec_err); break;
+				case Gfo_prog_ui_.Status__fail:			task_mgr.Work_mgr().On_fail(this, this.Cmd_fail_resumes(), cmd_exec_err); break;
 				case Gfo_prog_ui_.Status__working:
 					this.Prog_notify_and_chk_if_suspended(data_end, data_end);	// fire one more time for 100%; note that 100% may not fire due to timer logic below
 					task_mgr.Work_mgr().On_done(this); 

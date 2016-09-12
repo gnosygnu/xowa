@@ -70,7 +70,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		byte[] lang_key = domain_itm.Lang_actl_key();
 		if (lang_key == Xol_lang_stub_.Key__unknown) lang_key = Xol_lang_itm_.Key_en;	// unknown langs default to english; note that this makes nonwmf english by default
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(lang_key);			
-		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Int__other) {
+		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Tid__other) {
 			lang = new Xol_lang_itm(app.Lang_mgr(), Xol_lang_itm_.Key_en).Kwd_mgr__strx_(true);	// create a new english lang, but enable strx functions; DATE:2015-08-23
 			Xol_lang_itm_.Lang_init(lang);
 		}

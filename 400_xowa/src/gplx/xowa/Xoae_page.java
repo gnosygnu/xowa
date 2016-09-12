@@ -33,11 +33,12 @@ public class Xoae_page implements Xoa_page {
 	public Xow_wiki					Wiki()				{return wiki;}
 	public Xoa_ttl					Ttl()				{return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url					Url()				{return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank();
-	public byte[]					Url_bry_safe()		{return url == null ? Bry_.Empty : url.Raw();}
+	public byte[]					Url_bry_safe()		{return Xoa_page_.Url_bry_safe(url, wiki, ttl);}
 	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
 	public Xopg_redirect_mgr		Redirect_trail()	{return redirect_trail;}	private final    Xopg_redirect_mgr redirect_trail = new Xopg_redirect_mgr();
 	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
+	public Xopg_wtxt_data			Wtxt() {return wtxt;} private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
 
 	public Xoa_page__commons_mgr	Commons_mgr() {return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public void						Xtn_gallery_packed_exists_y_() {html.Xtn_gallery_packed_exists_y_();}
@@ -50,15 +51,13 @@ public class Xoae_page implements Xoa_page {
 	public byte						Edit_mode() {return edit_mode;} private byte edit_mode; public void	Edit_mode_update_() {edit_mode = Xoa_page_.Edit_mode_update;}
 	public Xop_root_tkn				Root() {return root;} public Xoae_page Root_(Xop_root_tkn v) {root = v; return this;} private Xop_root_tkn root;
 
-	public Xopg_wtxt_data			Wtxt() {return wtxt;} private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
-
 	public Xoh_cmd_mgr				Html_cmd_mgr() {return html_cmd_mgr;} private Xoh_cmd_mgr html_cmd_mgr = new Xoh_cmd_mgr();
 	public Xof_xfer_queue			File_queue() {return file_queue;} private Xof_xfer_queue file_queue = new Xof_xfer_queue();
 	public List_adp					File_math() {return file_math;} private List_adp file_math = List_adp_.New();
 	public List_adp					Lnki_list() {return lnki_list;} public void Lnki_list_(List_adp v) {this.lnki_list = v;} private List_adp lnki_list = List_adp_.New();
 	public Ref_itm_mgr				Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr(); public void Ref_mgr_(Ref_itm_mgr v) {this.ref_mgr = v;}
 	public Xopg_popup_mgr			Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
-	public byte[][]					Category_list() {return category_list;} public Xoae_page Category_list_(byte[][] v) {category_list = v; return this;} private byte[][] category_list = new byte[0][];
+
 	public List_adp					Slink_list() {return slink_list;} private List_adp slink_list = List_adp_.New();
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
 	public int						Bldr__ns_ord() {return bldr__ns_ord;} public void Bldr__ns_ord_(int v) {bldr__ns_ord = v;} private int bldr__ns_ord;

@@ -301,7 +301,7 @@ public class Gfh_tag_rdr {
 		}
 		Gfh_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
 		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end
-			, name_hash.Get_as_int_or(src, name_bgn, name_end, -1)	// TODO: change from -1 to Unknown
+			, name_hash.Get_as_int_or(src, name_bgn, name_end, -1)	// TODO_OLD: change from -1 to Unknown
 			, Bry_.Mid(src, name_bgn, name_end));
 	}
 	public boolean Read_and_move(byte match) {

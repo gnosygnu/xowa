@@ -90,7 +90,7 @@ public class Wdata_doc_wtr {
 			wtr.Nde_bgn();
 			wtr.Key(false, Wdata_dict_claim_v1.Bry_m);
 			wtr.Ary_bgn();
-			wtr.Val(Bool_.N, Wbase_claim_value_type_.To_bry_or_fail(prop.Snak_tid()));
+			wtr.Val(Bool_.N, Wbase_claim_value_type_.Reg.Get_bry_or_fail(prop.Snak_tid()));
 			wtr.Val(Bool_.Y, prop.Pid());
 			if (prop.Snak_tid() == Wbase_claim_value_type_.Tid__value) {
 				switch (prop.Val_tid()) {

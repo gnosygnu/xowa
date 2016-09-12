@@ -18,25 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_tst {
-	private final Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
+	private final    Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
 	@Test   public void Show_in_sitelangs__basic() {		// PURPOSE: basic test for show in "In other languages"; DATE:2015-11-06
-		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("en", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
+		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("en", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
 	}
 	@Test   public void Show_in_sitelangs__lang_like() {	// PURPOSE: only consider xwikis with key similar to domain; EX: [[w:A]] in simplewiki; PAGE:Main_Page; DATE:2015-11-06
-		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("w", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
+		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("w", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
 	}
 	@Test   public void Show_in_sitelangs__same() {			// PURPOSE: same wiki should not appear in "In other languages"; DATE:2015-11-06
-		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("en", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia, "en.wikipedia.org", "enwiki"), "en");
+		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("en", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikipedia, "en.wikipedia.org", "enwiki"), "en");
 	}
 	@Test   public void Show_in_sitelangs__no_url_fmt() {	// PURPOSE: xwikis with no format should not appear in "In other languages"; DATE:2015-11-06
-		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("en", "", Xol_lang_stub_.Id_en, Xow_domain_tid_.Int__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
+		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("en", "", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
 	}
 	@Test   public void Show_in_sitelangs__commons() {		// PURPOSE: commons should not appear in "In other languages"; DATE:2015-11-06
-		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("c", "commons.wikimedia.org/wiki/{0}", Xol_lang_stub_.Id__intl, Xow_domain_tid_.Int__commons, "commons.wikimedia.org", "commonswiki"), "en");
+		fxt.Test__type_is_xwiki_lang(Bool_.N, fxt.Make__xwiki("c", "commons.wikimedia.org/wiki/{0}", Xol_lang_stub_.Id__intl, Xow_domain_tid_.Tid__commons, "commons.wikimedia.org", "commonswiki"), "en");
 	}
 	@Test   public void Show_in_sitelangs__nb() {			// PURPOSE: handle special wikis like nb, lzh, simple; EX: [[nb:]] -> no.w; PAGE:nn.w:; DATE:2015-12-04
-		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("nb", "no.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_no, Xow_domain_tid_.Int__wikipedia, "no.wikipedia.org", "nbwiki"), "nn");
-		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("lzh", "zh-classical.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_zh, Xow_domain_tid_.Int__wikipedia, "zh-classical.wikipedia.org", "lzwwiki"), "zh");
+		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("nb", "no.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_no, Xow_domain_tid_.Tid__wikipedia, "no.wikipedia.org", "nbwiki"), "nn");
+		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("lzh", "zh-classical.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_zh, Xow_domain_tid_.Tid__wikipedia, "zh-classical.wikipedia.org", "lzwwiki"), "zh");
 	}
 }
 class Xow_xwiki_itm_fxt {

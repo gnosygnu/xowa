@@ -25,7 +25,7 @@ public class Time_span__basic_tst {
 	}
 	@Test  public void TotalSecs() {
 		Time_span val = Time_span_.fracs_(1987);
-		Tfds.Eq_decimal(Decimal_adp_.parts_(1, 987), val.TotalSecs());
+		Tfds.Eq_decimal(Decimal_adp_.parts_(1, 987), val.Total_secs());
 	}
 	@Test  public void Units() {
 		tst_Units("01:02:03.987", 1, 2, 3, 987);

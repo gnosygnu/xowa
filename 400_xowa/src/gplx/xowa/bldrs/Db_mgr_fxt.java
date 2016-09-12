@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.infos.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 
 	public Db_mgr_fxt Ctor_mem()	{bldr_fxt = new Xob_fxt().Ctor_mem(); return this;} private Xob_fxt bldr_fxt;
@@ -78,46 +79,26 @@ public class Db_mgr_fxt {
 	public void Test_category_v1(String ctg_name_str, int... expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
 		byte[] ctg_name_bry = Bry_.new_a7(ctg_name_str);
-		Xoctg_view_ctg ctg = new Xoctg_view_ctg();
+		Xoctg_catpage_ctg ctg = new Xoctg_catpage_ctg(ctg_name_bry);
 		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v1(ctg, ctg_name_bry);
 		Tfds.Eq_ary(expd, Xto_int_ary(ctg));
 	}
-	int[] Xto_int_ary(Xoctg_view_ctg ctg) {
+	int[] Xto_int_ary(Xoctg_catpage_ctg ctg) {
 		List_adp list = List_adp_.New();
 		byte tid_max = Xoa_ctg_mgr.Tid__max;
 		for (byte tid = 0; tid < tid_max; tid++) {
-			Xoctg_view_grp grp = ctg.Grp_by_tid(tid); if (grp == null) continue;
+			Xoctg_catpage_grp grp = ctg.Grp_by_tid(tid); if (grp == null) continue;
 			int len = grp.Itms_list().Count();
 			for (int i = 0; i < len; i++) {
-				Xoctg_view_itm itm = (Xoctg_view_itm)grp.Itms_list().Get_at(i);
+				Xoctg_catpage_itm itm = (Xoctg_catpage_itm)grp.Itms_list().Get_at(i);
 				list.Add(itm.Page_id());
 			}
 		}
 		return (int[])list.To_ary_and_clear(int.class);
 	}
-	public void Test_category_v2(String ctg_name_str, int... expd) {
-		Xowe_wiki wiki = bldr_fxt.Wiki();
-		byte[] ctg_name_bry = Bry_.new_a7(ctg_name_str);
-		Xoctg_data_ctg ctg = new Xoctg_data_ctg(ctg_name_bry);
-		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v2(ctg, ctg_name_bry);
-		Tfds.Eq_ary(expd, Xto_int_ary(ctg));
-	}
 	public void Test_file(String url, String expd) {
 		String actl = Io_mgr.Instance.LoadFilStr(url);
 		Tfds.Eq_str_lines(expd, actl);
-	}
-	int[] Xto_int_ary(Xoctg_data_ctg ctg) {
-		List_adp list = List_adp_.New();
-		byte tid_max = Xoa_ctg_mgr.Tid__max;
-		for (byte tid = 0; tid < tid_max; tid++) {
-			Xoctg_idx_mgr grp = ctg.Grp_by_tid(tid); if (grp == null) continue;
-			int len = grp.Itms_len();
-			for (int i = 0; i < len; i++) {
-				Xoctg_idx_itm itm = grp.Itms_get_at(i);
-				list.Add(itm.Id());
-			}
-		}
-		return (int[])list.To_ary_and_clear(int.class);
 	}
 	public void Init_db_sqlite() {
 		Xowe_wiki wiki = this.Wiki();

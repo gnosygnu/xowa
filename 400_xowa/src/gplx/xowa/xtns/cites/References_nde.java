@@ -32,7 +32,10 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
 		Ref_itm_mgr ref_mgr = ctx.Page().Ref_mgr();
-		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
+		if (ref_mgr.References__recursing()) {
+			xnde.Tag_visible_(false);	// NOTE:do not print empty <references/> tag; especially necessary for recursing references; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
+			return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
+		}
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
@@ -50,7 +53,8 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
-		html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, wpg, bfr, src, xnde);
+		if (xnde.Tag_visible())
+			html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, wpg, bfr, src, xnde);
 	}
 	private static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;

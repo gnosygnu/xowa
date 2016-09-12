@@ -33,20 +33,19 @@ class Wdata_claims_parser_v2 {
 	}
 	private Wbase_claim_base Parse_claim_itm(byte[] qid, Json_nde nde, int pid) {
 		int len = nde.Len();
-		Hash_adp_bry dict = Wdata_dict_claim.Dict;
 		byte rank_tid = Wbase_claim_rank_.Tid__unknown;
 		Wbase_claim_base claim_itm = null; Wbase_claim_grp_list qualifiers = null; int[] qualifiers_order = null; Wbase_references_grp[] snaks_grp = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wdata_dict_claim.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_claim.Tid_mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.cast(sub.Val()), pid); break;
-				case Wdata_dict_claim.Tid_rank:				rank_tid = Wbase_claim_rank_.To_tid_or_unknown(sub.Val().Data_bry()); break;
-				case Wdata_dict_claim.Tid_references:		snaks_grp = Parse_references(qid, Json_ary.cast_or_null(sub.Val())); break;
-				case Wdata_dict_claim.Tid_qualifiers:		qualifiers = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
-				case Wdata_dict_claim.Tid_qualifiers_order:	qualifiers_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
-				case Wdata_dict_claim.Tid_type:				break;		// ignore: "statement"
-				case Wdata_dict_claim.Tid_id:				break;		// ignore: "Q2$F909BD1C-D34D-423F-9ED2-3493663321AF"
+				case Wdata_dict_claim.Tid__mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.cast(sub.Val()), pid); break;
+				case Wdata_dict_claim.Tid__rank:				rank_tid = Wbase_claim_rank_.Reg.Get_tid_or(sub.Val().Data_bry(), Wbase_claim_rank_.Tid__unknown); break;
+				case Wdata_dict_claim.Tid__references:			snaks_grp = Parse_references(qid, Json_ary.cast_or_null(sub.Val())); break;
+				case Wdata_dict_claim.Tid__qualifiers:			qualifiers = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
+				case Wdata_dict_claim.Tid__qualifiers_order:	qualifiers_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
+				case Wdata_dict_claim.Tid__type:				break;		// ignore: "statement"
+				case Wdata_dict_claim.Tid__id:					break;		// ignore: "Q2$F909BD1C-D34D-423F-9ED2-3493663321AF"
 			}
 		}
 		if (claim_itm != null) {
@@ -68,15 +67,14 @@ class Wdata_claims_parser_v2 {
 	}
 	private Wbase_references_grp Parse_references_grp(byte[] qid, Json_nde owner) {
 		int len = owner.Len();
-		Hash_adp_bry dict = Wdata_dict_reference.Dict;
 		Wbase_claim_grp_list snaks = null; int[] snaks_order = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(owner.Get_at(i));
-			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wdata_dict_reference.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_reference.Tid_hash:	break;	// ignore: "b923b0d68beb300866b87ead39f61e63ec30d8af"
-				case Wdata_dict_reference.Tid_snaks:			snaks = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
-				case Wdata_dict_reference.Tid_snaks_order:		snaks_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
+				case Wdata_dict_reference.Tid__hash:	break;	// ignore: "b923b0d68beb300866b87ead39f61e63ec30d8af"
+				case Wdata_dict_reference.Tid__snaks:			snaks = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
+				case Wdata_dict_reference.Tid__snaks_order:		snaks_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 			}
 		}
 		return new Wbase_references_grp(snaks, snaks_order);
@@ -114,32 +112,30 @@ class Wdata_claims_parser_v2 {
 	}
 	public Wbase_claim_base Parse_mainsnak(byte[] qid, Json_nde nde, int pid) {
 		int len = nde.Len();
-		Hash_adp_bry dict = Wdata_dict_mainsnak.Dict;
 		byte snak_tid = Byte_.Max_value_127;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wdata_dict_mainsnak.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_mainsnak.Tid_snaktype:		snak_tid = Wbase_claim_value_type_.To_tid_or_fail(sub.Val().Data_bry()); break;
-				case Wdata_dict_mainsnak.Tid_datavalue:		return Parse_datavalue(qid, pid, snak_tid, Json_nde.cast(sub.Val()));
-				case Wdata_dict_mainsnak.Tid_datatype:		break;		// ignore: has values like "wikibase-property"; EX: www.wikidata.org/wiki/Property:P397; DATE:2015-06-12
-				case Wdata_dict_mainsnak.Tid_property:		break;		// ignore: pid already available above
-				case Wdata_dict_mainsnak.Tid_hash:			break;		// ignore: "84487fc3f93b4f74ab1cc5a47d78f596f0b49390"
+				case Wdata_dict_mainsnak.Tid__snaktype:		snak_tid = Wbase_claim_value_type_.Reg.Get_tid_or_fail(sub.Val().Data_bry()); break;
+				case Wdata_dict_mainsnak.Tid__datavalue:	return Parse_datavalue(qid, pid, snak_tid, Json_nde.cast(sub.Val()));
+				case Wdata_dict_mainsnak.Tid__datatype:		break;		// ignore: has values like "wikibase-property"; EX: www.wikidata.org/wiki/Property:P397; DATE:2015-06-12
+				case Wdata_dict_mainsnak.Tid__property:		break;		// ignore: pid already available above
+				case Wdata_dict_mainsnak.Tid__hash:			break;		// ignore: "84487fc3f93b4f74ab1cc5a47d78f596f0b49390"
 			}
 		}
 		return new Wbase_claim_value(pid, Wbase_claim_type_.Tid__unknown, snak_tid); // NOTE: mainsnak can be null, especially for qualifiers; PAGE:Q2!P576; DATE:2014-09-20
 	}
 	public Wbase_claim_base Parse_datavalue(byte[] qid, int pid, byte snak_tid, Json_nde nde) {
 		int len = nde.Len();
-		Hash_adp_bry dict = Wdata_dict_datavalue.Dict;
 		Json_itm value_itm = null; byte value_tid = Wbase_claim_type_.Tid__unknown;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wdata_dict_datavalue.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_datavalue.Tid_type:			value_tid = Wbase_claim_type_.To_tid_or_unknown(sub.Val().Data_bry()); break;
-				case Wdata_dict_datavalue.Tid_value:		value_itm = sub.Val(); break;
-				case Wdata_dict_datavalue.Tid_error:		break;	// ignore: "Can only construct GlobeCoordinateValue with a String globe parameter"
+				case Wdata_dict_datavalue.Tid__type:		value_tid = Wbase_claim_type_.Get_tid_or_unknown(sub.Val().Data_bry()); break;
+				case Wdata_dict_datavalue.Tid__value:		value_itm = sub.Val(); break;
+				case Wdata_dict_datavalue.Tid__error:		break;	// ignore: "Can only construct GlobeCoordinateValue with a String globe parameter"
 			}
 		}
 		return factory.Parse(qid, pid, snak_tid, nde, value_tid, value_itm);

@@ -319,7 +319,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag.Restricted()) {
 			Xoae_page page = ctx.Page();
 			if (	page.Html_data().Html_restricted() 
-				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Int__home) {
+				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Tid__home) {
 				int end_pos = gtPos + 1;
 				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;

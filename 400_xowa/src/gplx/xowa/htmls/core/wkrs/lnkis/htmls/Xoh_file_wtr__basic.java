@@ -57,7 +57,7 @@ public class Xoh_file_wtr__basic {
 		int div_width = xfer_itm.Html_w();
 		if (div_width < 1 && wiki.File_mgr().Version_2_y()) // NOTE: html_w is -1 for v2 and missing files; use lnki_w if available; primarily affects audio files with specified width; [[File:A.oga|30px]]; DATE:2014-05-03
 			div_width = xfer_itm.Lnki_w();	
-		if (div_width < 1)	// && hctx.Mode_is_hdump()	// TODO: should manually insert?
+		if (div_width < 1)	// && hctx.Mode_is_hdump()	// TODO_OLD: should manually insert?
 			div_width = wiki.Html_mgr().Img_thumb_width();
 		boolean lnki_is_thumbable = Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type());
 		if (	lnki_is_thumbable 

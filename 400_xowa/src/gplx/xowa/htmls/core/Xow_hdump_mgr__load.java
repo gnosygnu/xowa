@@ -20,6 +20,7 @@ import gplx.core.ios.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.htmls.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xow_hdump_mgr__load {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
@@ -44,7 +45,7 @@ public class Xow_hdump_mgr__load {
 				this.override_mgr__html = new Xow_override_mgr(override_root_url.GenSubDir_nest("html"));
 			}
 			boolean loaded = Load__dbpg(wiki, tmp_dbpg.Clear(), hpg, ttl);
-			hpg.Ctor_by_hview(hpg.Wiki(), hpg.Url(), ttl, tmp_dbpg.Id());
+			hpg.Ctor_by_hview(wiki, hpg.Url(), ttl, tmp_dbpg.Id());
 			if (!loaded) {		// nothing in "page" table
 				byte[] page_override = override_mgr__page.Get_or_same(ttl.Page_db(), null);
 				if (page_override == null) return Load__fail(hpg);
@@ -54,6 +55,15 @@ public class Xow_hdump_mgr__load {
 			Xow_db_file html_db = wiki.Data__core_mgr().Dbs__get_by_id_or_fail(tmp_dbpg.Html_db_id());
 			if (!html_db.Tbl__html().Select_by_page(hpg)) return Load__fail(hpg);			// nothing in "html" table
 			byte[] src = Parse(hpg, hpg.Db().Html().Zip_tid(), hpg.Db().Html().Hzip_tid(), hpg.Db().Html().Html_bry());
+
+			// write ctgs
+			Xoctg_pagebox_itm[] pagebox_itms = wiki.Html__ctg_pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
+			if (pagebox_itms.length > 0) {
+				tmp_bfr.Add(src);
+				wiki.Html__ctg_pagebox_wtr().Write_pagebox(Bool_.Y, tmp_bfr, wiki, hpg, pagebox_itms);
+				src = tmp_bfr.To_bry_and_clear();
+			}
+
 			hpg.Db().Html().Html_bry_(src);
 			return true;
 		}
@@ -73,7 +83,7 @@ public class Xow_hdump_mgr__load {
 				hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
 				break;
 			case Xoh_hzip_dict_.Hzip__plain:
-				gplx.xowa.apps.wms.apis.parses.Wm_page_loader page_loader = new gplx.xowa.apps.wms.apis.parses.Wm_page_loader();
+				gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader page_loader = new gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader();
 				src = page_loader.Parse(wiki, hpg, src);
 				break;
 		}

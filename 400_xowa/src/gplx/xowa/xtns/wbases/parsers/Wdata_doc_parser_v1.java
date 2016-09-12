@@ -177,14 +177,14 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return rv;
 	}
 	private Wbase_claim_base New_prop_by_m(byte[] src, Json_ary ary) {
-		byte snak_tid = Wbase_claim_value_type_.To_tid_or_fail(ary.Get_at(0).Data_bry());
+		byte snak_tid = Wbase_claim_value_type_.Reg.Get_tid_or_fail(ary.Get_at(0).Data_bry());
 		int pid = Json_itm_int.cast(ary.Get_at(1)).Data_as_int();
 		switch (snak_tid) {
 			case Wbase_claim_value_type_.Tid__novalue		: return Wbase_claim_value.New_novalue(pid);
 			case Wbase_claim_value_type_.Tid__somevalue		: return Wbase_claim_value.New_somevalue(pid);
 		}
 		Json_itm val_tid_itm = ary.Get_at(2);
-		byte val_tid = Wbase_claim_type_.To_tid_or_unknown(src, val_tid_itm.Src_bgn(), val_tid_itm.Src_end());
+		byte val_tid = Wbase_claim_type_.Get_tid_or_unknown(src, val_tid_itm.Src_bgn(), val_tid_itm.Src_end());
 		return Make_itm(pid, snak_tid, val_tid, ary);
 	}
 	private Wbase_claim_base Make_itm(int pid, byte snak_tid, byte val_tid, Json_ary ary) {

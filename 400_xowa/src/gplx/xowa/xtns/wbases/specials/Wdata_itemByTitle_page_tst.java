@@ -57,7 +57,7 @@ class Wdata_itemByTitle_page_fxt {
 		parser_fxt.Init_page_create(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), qid_ttl, text);
 	}
 	public void Init_wdata_label(String wmf_key_str, String wdata_label, String qid) {
-		wdata_fxt.Init_qids_add("en", Xow_domain_tid_.Int__wikipedia, wdata_label, qid);		
+		wdata_fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, wdata_label, qid);		
 	}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = wiki.Parser_mgr().Ctx().Page();

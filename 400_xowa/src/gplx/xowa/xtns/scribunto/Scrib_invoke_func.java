@@ -65,7 +65,6 @@ public class Scrib_invoke_func extends Pf_func_base {
 		catch (Throwable e) {
 			Err err = Err_.cast_or_make(e);
 			Error(bfr, wiki.Msg_mgr(), err);
-			bfr.Add(Gfh_tag_.Comm_bgn).Add_str_u8(err.To_str__full()).Add(Gfh_tag_.Comm_end);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
 				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
@@ -76,8 +75,15 @@ public class Scrib_invoke_func extends Pf_func_base {
 	}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Err err) {Error(bfr, msg_mgr, Err_.cast_or_make(err).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {
+		// for Luaj, msg combines both err; split out traceback else error message will be very long; note that Warn_many will still log traceback; DATE:2016-09-09
+		String error_visible = error;
+		int traceback_pos = String_.FindFwd(error, "\nstack traceback:\n");	// NOTE: produced by LuaError.getMessage()
+		if (traceback_pos != String_.Find_none)
+			error_visible = String_.Mid(error_visible, 0, traceback_pos);
+
+		// write "Script error: some error"
 		byte[] script_error_msg = msg_mgr.Val_by_id(Xol_msg_itm_.Id_scribunto_parser_error);
-		error_fmtr.Bld_bfr_many(bfr, script_error_msg, error);
+		error_fmtr.Bld_bfr_many(bfr, script_error_msg, error_visible);
 	}
 	private static final    Bry_fmtr error_fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0}: ~{1}</span></strong>");	// NOTE: must be "error" not 'error'; iferror checks for quote not apos; DATE:2015-09-17
 	public static final String Err_mod_missing = "No such module";

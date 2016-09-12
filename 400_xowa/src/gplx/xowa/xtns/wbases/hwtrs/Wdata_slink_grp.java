@@ -39,14 +39,14 @@ class Wdata_slink_grp {
 	}
 	public static int Idx_by_tid(int tid) {
 		switch (tid) {
-			case Xow_domain_tid_.Int__wikipedia:			return Idx_w;
-			case Xow_domain_tid_.Int__wiktionary:		return Idx_d;
-			case Xow_domain_tid_.Int__wikisource:		return Idx_s;
-			case Xow_domain_tid_.Int__wikivoyage:		return Idx_v;
-			case Xow_domain_tid_.Int__wikiquote:			return Idx_q;
-			case Xow_domain_tid_.Int__wikibooks:			return Idx_b;
-			case Xow_domain_tid_.Int__wikiversity:		return Idx_u;
-			case Xow_domain_tid_.Int__wikinews:			return Idx_n;
+			case Xow_domain_tid_.Tid__wikipedia:			return Idx_w;
+			case Xow_domain_tid_.Tid__wiktionary:		return Idx_d;
+			case Xow_domain_tid_.Tid__wikisource:		return Idx_s;
+			case Xow_domain_tid_.Tid__wikivoyage:		return Idx_v;
+			case Xow_domain_tid_.Tid__wikiquote:			return Idx_q;
+			case Xow_domain_tid_.Tid__wikibooks:			return Idx_b;
+			case Xow_domain_tid_.Tid__wikiversity:		return Idx_u;
+			case Xow_domain_tid_.Tid__wikinews:			return Idx_n;
 			default:									return Idx_x;
 		}
 	}

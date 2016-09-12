@@ -21,7 +21,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 	public Keyval[] Rv() {return rv;} Keyval[] rv;
 	public void Visit_str(Wbase_claim_string itm) {
 		rv = new Keyval[2];
-		rv[0] = Keyval_.new_(Scrib_lib_wikibase_srl.Key_type, Wbase_claim_type_.To_key_or_unknown(itm.Val_tid()));
+		rv[0] = Keyval_.new_(Scrib_lib_wikibase_srl.Key_type, Wbase_claim_type_.Reg.Get_str_or(itm.Val_tid(), Wbase_claim_type_.Itm__unknown.Key_str()));
 		rv[1] = Keyval_.new_(Scrib_lib_wikibase_srl.Key_value, String_.new_u8(itm.Val_str()));
 	}
 	public void Visit_entity(Wbase_claim_entity itm) {

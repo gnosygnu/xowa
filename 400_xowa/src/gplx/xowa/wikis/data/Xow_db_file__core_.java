@@ -70,7 +70,7 @@ public class Xow_db_file__core_ {
 
 	public static boolean Is_core_fil_name(String domain_name, String fil_name) {
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(Bry_.new_u8(domain_name));
-		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Int__other) {
+		if (domain_itm.Domain_type_id() == Xow_domain_tid_.Tid__other) {
 			return String_.Has_at_end(fil_name, ".xowa");
 		}
 		String domain_str = domain_itm.Domain_str();

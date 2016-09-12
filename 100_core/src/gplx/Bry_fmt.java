@@ -79,6 +79,7 @@ public class Bry_fmt {
 	public static Bry_fmt New(byte[] fmt, String... keys) {return new Bry_fmt(fmt				, Bry_.Ary(keys), Bfr_fmt_arg.Ary_empty);}
 	public static String Make_str(String fmt_str, Object... vals) {return Auto(fmt_str).Vals_(vals).To_str();}
 	public static Bry_fmt Auto_nl_apos(String... lines) {return Auto(Bry_.New_u8_nl_apos(lines));}
+	public static Bry_fmt Auto_nl_skip_last(String... lines) {return Auto(Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));}
 	public static Bry_fmt Auto(String fmt_str) {return Auto(Bry_.new_u8(fmt_str));}
 	public static Bry_fmt Auto(byte[] fmt_bry) {
 		byte[][] keys_bry = Bry_fmt_parser_.Parse_keys(fmt_bry);

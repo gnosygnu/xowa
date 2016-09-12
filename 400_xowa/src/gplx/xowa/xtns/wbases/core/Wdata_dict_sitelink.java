@@ -16,25 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Wdata_dict_sitelink {
 	public static final byte
-	  Tid_site									= 0
-	, Tid_title									= 1
-	, Tid_badges								= 2
+	  Tid__site									= 0
+	, Tid__title								= 1
+	, Tid__badges								= 2
 	;
-	public static final String
-	  Str_site									= "site"
-	, Str_title									= "title"
-	, Str_badges								= "badges"
-	;
-	public static byte[] 
-	  Bry_site									= Bry_.new_a7(Str_site)
-	, Bry_title									= Bry_.new_a7(Str_title)
-	, Bry_badges								= Bry_.new_a7(Str_badges)
-	;
-	public static final    Hash_adp_bry Dict = Hash_adp_bry.cs()
-	.Add_bry_byte(Bry_site						, Tid_site)
-	.Add_bry_byte(Bry_title						, Tid_title)
-	.Add_bry_byte(Bry_badges					, Tid_badges)
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.sitelink", 3);
+	public static final    Wbase_enum_itm
+	  Itm__site									= Reg.Add(Tid__site			, "site")
+	, Itm__title								= Reg.Add(Tid__title		, "title")
+	, Itm__badges								= Reg.Add(Tid__badges		, "badges")
 	;
 }

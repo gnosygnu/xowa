@@ -101,7 +101,7 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "#REDIRECT [[B]]");	// fails with null
 	}
 	@Test   public void ProtectionLevels() {
-		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_protectionLevels, Object_.Ary("A")									, "");
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_protectionLevels, Object_.Ary("A")									, String_.Concat_lines_nl_skip_last("1=", "  move=1=sysop", "  edit=1=sysop"));
 	}
 	@Test   public void CascadingProtection() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")								, Scrib_lib_title.CascadingProtection_rv);

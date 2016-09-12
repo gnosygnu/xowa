@@ -36,7 +36,7 @@ public class Db_stmt_arg_list {
 		}
 		list.Clear();
 	}
-	private static void Fill_crt(Db_stmt stmt, int tid, String key, Object val) {
+	public static void Fill_crt(Db_stmt stmt, int tid, String key, Object val) {
 		switch (tid) {
 			case Dbmeta_fld_tid.Tid__bool:			stmt.Crt_bool_as_byte	(key, Bool_.cast(val)); break;
 			case Dbmeta_fld_tid.Tid__byte:			stmt.Crt_byte			(key, Byte_.cast(val)); break;

@@ -32,7 +32,7 @@ public class Xoa_cfg_grp_tid {
 			else if	(Bry_.Eq(key, Key_app_bry)) rv.tid = Tid_app;
 			else {
 				Xow_domain_itm wiki_type = Xow_domain_itm_.parse(key);
-				if (wiki_type.Domain_type_id() == Xow_domain_tid_.Int__other)
+				if (wiki_type.Domain_type_id() == Xow_domain_tid_.Tid__other)
 					rv.tid = Tid_wiki;
 				else {
 					rv.tid = Tid_type;

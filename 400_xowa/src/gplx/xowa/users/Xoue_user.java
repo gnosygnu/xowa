@@ -26,14 +26,14 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xoue_user(Xoae_app app, Io_url user_dir) {
 		this.app = app; this.key = user_dir.NameOnly();
 		this.ev_mgr = new Gfo_evt_mgr(this);
-		this.fsys_mgr = new Xou_fsys_mgr(app, this, user_dir);
+		this.fsys_mgr = new Xou_fsys_mgr(user_dir);
 		this.user_db_mgr = new Xou_db_mgr(app);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		this.prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
 		this.cfg_mgr = new Xou_cfg(this);
 		this.session_mgr = new Xou_session(this);
 	}
-	public Gfo_evt_mgr					Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
+	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
 	public String					Key() {return key;} private String key;
 	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final    Xou_db_mgr user_db_mgr;
 	public Xow_wiki					Wikii() {return this.Wiki();}

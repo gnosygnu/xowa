@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.htmls.core.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
+import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.htmls.core.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.pages.*;
 public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_mgr_txt(Xowe_wiki wiki, Xow_page_mgr data_mgr) {

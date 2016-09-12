@@ -116,7 +116,7 @@ public class Srch_special_page implements Xow_special_page, Gfo_invk, Gfo_evt_it
 		for (int i = 0; i < len; ++i) {
 			gplx.xowa.wikis.xwikis.Xow_xwiki_itm xwiki = xwiki_mgr.Get_at(i);
 			if (	!xwiki.Offline()									// note that filters are broad (*.wiktionary); skip offline wikis which won't be available on system
-				&&	xwiki.Domain_tid() != Xow_domain_tid_.Int__home)	// note that home is marked "offline" so it won't show up in wikis sidebar
+				&&	xwiki.Domain_tid() != Xow_domain_tid_.Tid__home)	// note that home is marked "offline" so it won't show up in wikis sidebar
 				continue;
 			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(xwiki.Domain_bry());
 			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);

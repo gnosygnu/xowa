@@ -47,8 +47,8 @@ public class Wbase_doc_mgr {
 	public Wdata_doc Get_by_bry_or_null(byte[] ttl_bry) {// must be correct format; EX:"Q2" or "Property:P1"
 		Wdata_doc rv = hash.Get_or_null(ttl_bry);
 		if (rv == null) {
-			rv = Load_wdoc_or_null(ttl_bry); if (rv == null) return null;	// page not found
 			synchronized (hash) {	// LOCK:app-level; hash;
+				rv = Load_wdoc_or_null(ttl_bry); if (rv == null) return null;	// page not found
 				Add(ttl_bry, rv);// NOTE: use ttl_bry, not rv.Qid; allows subsequent lookups to skip this redirect cycle
 			}
 		}
@@ -56,43 +56,43 @@ public class Wbase_doc_mgr {
 	}
 	public Wdata_doc Load_wdoc_or_null(byte[] src_ttl_bry) {
 		if (!enabled) return null;
-		byte[] cur_ttl_bry = src_ttl_bry;
-		int load_count = -1;
-		while (load_count < 2) {	// limit to 2 tries (i.e.: 1 redirect)
-			// parse ttl
-			Xoa_ttl cur_ttl = wbase_mgr.Wdata_wiki().Ttl_parse(cur_ttl_bry);
-			if (cur_ttl == null) {
-				app.Usr_dlg().Warn_many("", "", "invalid wbase ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
-				return null;
-			}
+		synchronized (hash) {	// LOCK:app-level; jdoc_parser; moved synchronized higher up; DATE:2016-09-03
+			byte[] cur_ttl_bry = src_ttl_bry;
+			int load_count = -1;
+			while (load_count < 2) {	// limit to 2 tries (i.e.: 1 redirect)
+				// parse ttl
+				Xoa_ttl cur_ttl = wbase_mgr.Wdata_wiki().Ttl_parse(cur_ttl_bry);
+				if (cur_ttl == null) {
+					app.Usr_dlg().Warn_many("", "", "invalid wbase ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
+					return null;
+				}
 
-			// get page
-			Xoae_page page = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(cur_ttl);
-			if (!page.Db().Page().Exists()) return null;
+				// get page
+				Xoae_page page = wbase_mgr.Wdata_wiki().Data_mgr().Load_page_by_ttl(cur_ttl);
+				if (!page.Db().Page().Exists()) return null;
 
-			// parse jdoc
-			byte[] jdoc_bry = page.Db().Text().Text_bry();
-			Json_doc jdoc = null;
-			synchronized (hash) {	// LOCK:app-level; jdoc_parser
+				// parse jdoc
+				byte[] jdoc_bry = page.Db().Text().Text_bry();
+				Json_doc jdoc = null;
 				jdoc = wbase_mgr.Jdoc_parser().Parse(jdoc_bry);
-			}
-			if (jdoc == null) {
-				app.Usr_dlg().Warn_many("", "", "invalid jdoc for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
-				return null;
-			}
+				if (jdoc == null) {
+					app.Usr_dlg().Warn_many("", "", "invalid jdoc for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
+					return null;
+				}
 
-			// check for redirect; EX: {"entity":"Q22350516","redirect":"Q21006972"}; PAGE:fr.w:Tour_du_Táchira_2016; DATE:2016-08-13
-			Json_nde jdoc_root = jdoc.Root_nde();
-			byte[] redirect_ttl = jdoc_root.Get_as_bry_or(Bry__redirect, null);
-			if (redirect_ttl != null) {
-				cur_ttl_bry = redirect_ttl;
-				continue;
-			}
+				// check for redirect; EX: {"entity":"Q22350516","redirect":"Q21006972"}; PAGE:fr.w:Tour_du_Táchira_2016; DATE:2016-08-13
+				Json_nde jdoc_root = jdoc.Root_nde();
+				byte[] redirect_ttl = jdoc_root.Get_as_bry_or(Bry__redirect, null);
+				if (redirect_ttl != null) {
+					cur_ttl_bry = redirect_ttl;
+					continue;
+				}
 
-			// is json doc, and not a redirect; return
-			return new Wdata_doc(cur_ttl_bry, wbase_mgr, jdoc);
+				// is json doc, and not a redirect; return
+				return new Wdata_doc(cur_ttl_bry, wbase_mgr, jdoc);
+			}
+			app.Usr_dlg().Warn_many("", "", "too many redirects for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
 		}
-		app.Usr_dlg().Warn_many("", "", "too many redirects for ttl: orig=~{0} cur=~{1}", src_ttl_bry, cur_ttl_bry);
 		return null;
 	}
 	private static final    byte[] Bry__redirect = Bry_.new_a7("redirect");

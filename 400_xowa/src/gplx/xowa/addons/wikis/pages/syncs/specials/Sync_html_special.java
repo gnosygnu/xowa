@@ -19,6 +19,7 @@ package gplx.xowa.addons.wikis.pages.syncs.specials; import gplx.*; import gplx.
 import gplx.core.net.qargs.*;
 import gplx.xowa.specials.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.htmls.*;
+import gplx.xowa.addons.wikis.pages.syncs.core.*;
 public class Sync_html_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
@@ -29,7 +30,7 @@ public class Sync_html_special implements Xow_special_page {
 		// Xoa_url redirect_url = wiki.Utl__url_parser().Parse(redirect_bry);
 
 		// update
-		gplx.xowa.apps.wms.apis.parses.Wm_page_updater updater = new gplx.xowa.apps.wms.apis.parses.Wm_page_updater();
+		Xosync_update_mgr updater = new Xosync_update_mgr();
 		updater.Init_by_app(wiki.App());
 		Xoh_page hpg = new Xoh_page();
 		updater.Init_by_page(wiki, hpg);

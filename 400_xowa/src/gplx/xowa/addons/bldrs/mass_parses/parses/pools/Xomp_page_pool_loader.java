@@ -22,11 +22,13 @@ public class Xomp_page_pool_loader {
 	private final    Xow_wiki wiki;
 	private final    int num_pages_per_load;
 	private final    Db_attach_mgr attach_mgr;
-	public Xomp_page_pool_loader(Xow_wiki wiki, Db_conn make_conn, int num_pages_per_load) {
+	private final    boolean show_msg__fetched_pool;
+	public Xomp_page_pool_loader(Xow_wiki wiki, Db_conn make_conn, int num_pages_per_load, boolean show_msg__fetched_pool) {
 		this.wiki = wiki;
 		this.make_conn = make_conn;
 		this.attach_mgr = new Db_attach_mgr(make_conn);
 		this.num_pages_per_load  = num_pages_per_load;
+		this.show_msg__fetched_pool = show_msg__fetched_pool;
 	}
 	public Db_conn Conn() {return make_conn;} private final    Db_conn make_conn;
 	public int Get_pending_count() {
@@ -50,7 +52,8 @@ public class Xomp_page_pool_loader {
 		int uid_new = 0;
 		try {uid_new = this.Load_from_db(rv, uid_db);}
 		finally {lock_mgr.Uid_prv__rls(machine_name, uid_new);}
-		Gfo_usr_dlg_.Instance.Note_many("", "", "fetched new pool: old=~{0} new=~{1}", uid_db, uid_new);
+		if (show_msg__fetched_pool)
+			Gfo_usr_dlg_.Instance.Note_many("", "", "fetched new pool: old=~{0} new=~{1}", uid_db, uid_new);
 		return rv;
 	}
 	private int Load_from_db(List_adp list, int uid_prv) {

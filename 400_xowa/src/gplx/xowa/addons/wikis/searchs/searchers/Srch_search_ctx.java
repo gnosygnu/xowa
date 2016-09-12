@@ -54,7 +54,7 @@ public class Srch_search_ctx {
 	public final    Xol_case_mgr				Case_mgr;
 	public final    Srch_rslt_list				Cache__page;
 	public final    Hash_adp_bry				Cache__word_counts;
-	public final    Xow_db_file				Db__core;
+	public final    Xow_db_file					Db__core;
 	public final    Xowd_page_tbl				Tbl__page;
 	public final    Srch_word_tbl				Tbl__word;
 	public final    Srch_link_tbl[]				Tbl__link__ary;

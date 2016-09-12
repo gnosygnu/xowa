@@ -111,42 +111,6 @@ public class Xob_tst {
 		.Run_id()
 		;
 	}
-	@Test  public void Category() {
-		fxt.doc_ary_
-		(	fxt.doc_wo_date_(2, "A",  "[[Category:Y]] [[Category:Z]]")
-		,	fxt.doc_wo_date_(3, "B",  "[[Category:Y]]")
-		)
-		.Fil_expd(fxt.fil_site_ctg(0)
-		,	"!!!!/|!!!!)|"
-		,	"Y|!!!!#|!!!!$"
-		,	"Z|!!!!#"
-		,	""
-		)
-		.Fil_expd(fxt.fil_reg(Xotdb_dir_info_.Tid_category)
-		,	"0|Y|Z|2"
-		,	""
-		)
-		.Run_ctg()
-		;
-	}
-	@Test  public void Category2() {
-		fxt.doc_ary_
-		(	fxt.doc_wo_date_(2, "A",  "[[Category:X]] [[Category:Y]]")
-		,	fxt.doc_wo_date_(3, "B",  "[[Category:Y]]")
-		)
-		.Fil_expd(fxt.fil_site_ctg(0)
-		,	"!!!!)|!!!!/|"
-		,	"X|!!!!#"
-		,	"Y|!!!!#|!!!!$"
-		,	""
-		)
-		.Fil_expd(fxt.fil_reg(Xotdb_dir_info_.Tid_category)
-		,	"0|X|Y|2"
-		,	""
-		)
-		.Run_ctg()
-		;
-	}
 	@Test  public void Tmpl_dump() {
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(2, "Template:A",  "a")

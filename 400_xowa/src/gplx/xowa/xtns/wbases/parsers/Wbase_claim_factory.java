@@ -36,10 +36,11 @@ public class Wbase_claim_factory {
 		byte[] entity_id_bry = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wbase_claim_entity_.To_tid_or_invalid(qid, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wbase_claim_entity_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wbase_claim_entity_.Tid__entity_type:		entity_tid = Wbase_claim_entity_type_.To_tid_or_fail(sub.Val().Data_bry()); break;
+				case Wbase_claim_entity_.Tid__entity_type:		entity_tid = Wbase_claim_entity_type_.Reg.Get_tid_or_fail(sub.Val().Data_bry()); break;
 				case Wbase_claim_entity_.Tid__numeric_id:		entity_id_bry = sub.Val().Data_bry(); break;
+				case Wbase_claim_entity_.Tid__id:				break;	// ignore
 			}
 		}
 		if (entity_id_bry == null) throw Err_.new_wo_type("pid is invalid entity", "pid", pid);
@@ -50,7 +51,7 @@ public class Wbase_claim_factory {
 		byte[] lang = null, text = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wbase_claim_monolingualtext_.To_tid_or_invalid(qid, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wbase_claim_monolingualtext_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
 				case Wbase_claim_monolingualtext_.Tid__text:			text = sub_val_bry; break;
@@ -65,7 +66,7 @@ public class Wbase_claim_factory {
 		byte[] lat = null, lng = null, alt = null, prc = null, glb = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wbase_claim_globecoordinate_.To_tid_or_invalid(qid, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wbase_claim_globecoordinate_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
 				case Wbase_claim_globecoordinate_.Tid__latitude:		lat = sub_val_bry; break;
@@ -83,7 +84,7 @@ public class Wbase_claim_factory {
 		byte[] amount = null, unit = null, ubound = null, lbound = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wbase_claim_quantity_.To_tid_or_invalid(qid, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wbase_claim_quantity_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
 				case Wbase_claim_quantity_.Tid__amount:			amount = sub_val_bry; break;
@@ -100,7 +101,7 @@ public class Wbase_claim_factory {
 		byte[] time = null, timezone = null, before = null, after = null, precision = null, calendarmodel = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
-			byte tid = Wbase_claim_time_.To_tid_or_invalid(qid, sub.Key().Data_bry()); if (tid == Wbase_claim_enum_.Tid__invalid) continue;
+			byte tid = Wbase_claim_time_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
 				case Wbase_claim_time_.Tid__time:			time = sub_val_bry; break;

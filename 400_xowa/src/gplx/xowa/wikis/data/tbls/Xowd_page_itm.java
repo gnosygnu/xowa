@@ -28,9 +28,10 @@ public class Xowd_page_itm {
 	public boolean			Redirected() {return redirected;} public Xowd_page_itm Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
 	public int			Text_len() {return text_len;} public Xowd_page_itm Text_len_(int v) {text_len = v; return this;} private int text_len;
 	public int			Text_db_id() {return text_db_id;} public Xowd_page_itm Text_db_id_(int v) {text_db_id = v; return this;} private int text_db_id;
+	public int			Html_db_id() {return html_db_id;} private int html_db_id;
+	public int			Cat_db_id()  {return cat_db_id;} private int cat_db_id;
 	public byte[]		Text() {return text;} public Xowd_page_itm Text_(byte[] v) {text = v; if (v != null) text_len = v.length; return this;} private byte[] text;
 	public int			Random_int() {return random_int;} private int random_int;
-	public int			Html_db_id() {return html_db_id;} private int html_db_id;
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;
 	public DateAdp		Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on;
 	public boolean			Exists() {return exists;} private boolean exists;
@@ -48,14 +49,16 @@ public class Xowd_page_itm {
 	public void Init_by_load__idx(int id, int ns_id, byte[] ttl_page_db, int text_len) {
 		this.exists			= true;	// COMMENT: DATE:2016-08-28
 		this.id				= id;
+		this.id_val			= null;
 		this.ns_id			= ns_id;
 		this.ttl_page_db	= ttl_page_db;
 		this.text_len		= text_len;
 	}
-	public void	Init_by_load__all(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score) {
+	public void	Init_by_load__all(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score, int cat_db_id) {
 		// same as Init_by_load__idx; COMMENT: DATE:2016-08-28
 		this.exists			= true;
 		this.id				= id;
+		this.id_val			= null;
 		this.ns_id			= ns_id;
 		this.ttl_page_db	= ttl_page_db;
 		this.text_len		= text_len;
@@ -68,11 +71,13 @@ public class Xowd_page_itm {
 		this.html_db_id		= html_db_id;
 		this.redirect_id	= redirect_id;
 		this.score			= score;
+		this.cat_db_id		= cat_db_id;
 	}
 	public void	Init_by_tdb(int id, int text_db_id, int tdb_row_idx, boolean redirected, int text_len, int ns_id, byte[] ttl_page_db) {
 		// same as Init_by_load__idx; COMMENT: DATE:2016-08-28
 		this.exists			= true;
 		this.id				= id;
+		this.id_val			= null;
 		this.ns_id			= ns_id;
 		this.ttl_page_db	= ttl_page_db;
 		this.text_len		= text_len;
@@ -120,7 +125,7 @@ public class Xowd_page_itm {
 		redirected = exists = false;
 		modified_on = DateAdp_.MinValue;
 		id_val = null;
-		html_db_id = -1;
+		html_db_id = cat_db_id = -1;
 		redirect_id = -1;
 		return this;
 	}
@@ -139,6 +144,7 @@ public class Xowd_page_itm {
 		this.modified_on = orig.modified_on;
 		this.id_val = null;
 		this.html_db_id = orig.html_db_id;
+		this.cat_db_id = orig.cat_db_id;
 	}
 	public void Srl_save(Bry_bfr bfr) {gplx.xowa.wikis.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
 	public static final int Id_null = -1, Modified_on_null_int = 0, Redirect_id_null = -1;

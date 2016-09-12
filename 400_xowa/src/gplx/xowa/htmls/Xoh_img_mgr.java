@@ -36,7 +36,7 @@ public class Xoh_img_mgr {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Init_at_hdoc(++uid_nxt, img_is_gallery ? Xof_html_elem.Tid_gallery : Xof_html_elem.Tid_img);
 		if (img_is_gallery)
-			itm.Html_gallery_mgr_h_(gplx.xowa.xtns.gallery.Gallery_xnde.Default);	// TODO:set to <gallery heights=val>; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-25
+			itm.Html_gallery_mgr_h_(gplx.xowa.xtns.gallery.Gallery_xnde.Default);	// TODO_OLD:set to <gallery heights=val>; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-25
 		list.Add(itm);
 		return itm;
 	}

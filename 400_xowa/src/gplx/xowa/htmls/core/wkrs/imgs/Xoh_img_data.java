@@ -102,7 +102,7 @@ public class Xoh_img_data implements Xoh_data_itm {
 		this.src_end = anch_tail.Src_end();
 		if (anch_href.Site_exists()) {
 			Xow_domain_itm itm = Xow_domain_itm_.parse(Bry_.Mid(src, anch_href.Site_bgn(), anch_href.Site_end()));
-			anch_rel_is_nofollow = itm.Domain_type_id() == Xow_domain_tid_.Int__other;
+			anch_rel_is_nofollow = itm.Domain_type_id() == Xow_domain_tid_.Tid__other;
 		}
 		if (img_is_vid) {
 			tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);

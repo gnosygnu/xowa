@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_pagesincategory extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_site_pagesincategory;}
@@ -30,7 +30,7 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 		Xow_db_mgr core_data_mgr = wiki.Data__core_mgr();
 		int ctg_id = core_data_mgr.Tbl__page().Select_id(Xow_ns_.Tid__category, Xoa_ttl.Replace_spaces(ctg_ttl_bry));
 		if (ctg_id == Xowd_page_itm.Id_null) {bfr.Add_int_digits(1, 0); return;}	// category doesn't exist; EX: "{{PAGESINCATEGORY:Unknown_category}}"
-		Xowd_category_itm ctg_itm = core_data_mgr.Db__cat_core().Tbl__cat_core().Select(ctg_id);
+		Xowd_category_itm ctg_itm = Xodb_cat_db_.Get_cat_core_or_fail(core_data_mgr).Select(ctg_id);
 		if (ctg_itm == null) {bfr.Add_int_digits(1, 0); return;}					// category counts don't exist; shouldn't happen
 		Xol_lang_itm lang = wiki.Lang();
 		Btrie_slim_mgr num_format_trie = Xol_kwd_mgr.trie_(lang.Kwd_mgr(), Xol_kwd_grp_.Id_str_rawsuffix);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.core.primitives.*; import gplx.xowa.wikis.ctgs.*;
+import gplx.core.primitives.*; import gplx.xowa.addons.wikis.ctgs.*;
 public class Xowd_category_itm {
 	public int Id() {return id;} private int id;
 	public Int_obj_val Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} Int_obj_val id_val;

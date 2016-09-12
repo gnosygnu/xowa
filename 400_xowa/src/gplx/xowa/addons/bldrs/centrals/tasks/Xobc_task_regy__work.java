@@ -137,4 +137,7 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 		Xod_power_mgr_.Instance.Wake_lock__rls("task_mgr");
 		task_mgr.Send_json("xo.bldr.work.prog__fail__recv", Gfobj_nde.New().Add_int("task_id", task.Task_id()).Add_str("err", msg).Add_bool("resume", resume));
 	}
+	public void On_stat(int task_id, String msg) {
+		task_mgr.Send_json("xo.bldr.work.prog__stat__recv", Gfobj_nde.New().Add_int("task_id", task_id).Add_str("msg", msg));
+	}
 }

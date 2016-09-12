@@ -20,7 +20,6 @@ import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.tags.*; impor
 import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.addons.htmls.tocs.*;
 import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.xtns.indicators.*;
 public class Xopg_html_data {
-	private Ordered_hash ctg_hash;
 	public Xopg_lnki_list		Redlink_list()		{return redlink_list;} private final    Xopg_lnki_list redlink_list = new Xopg_lnki_list();
 
 	public boolean				Html_restricted() {return html_restricted;} private boolean html_restricted = true;
@@ -87,16 +86,8 @@ public class Xopg_html_data {
 		xtn_pgbnr = null;
 		module_mgr.Clear();
 		custom_html = custom_tab_name = null;
-		if (ctg_hash != null) ctg_hash.Clear();
 		indicators.Clear();
 		this.mode_wtxt_shown = false;
-	}
-	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.To_ary(byte[].class);}
-	public void Ctgs_add(Xoa_ttl ttl) {
-		if (ctg_hash == null) ctg_hash = Ordered_hash_.New_bry();
-		byte[] ttl_bry = ttl.Page_txt();
-		if (ctg_hash.Has(ttl_bry)) return;
-		ctg_hash.Add(ttl_bry, ttl_bry);
 	}
 	public void Init_by_page(Xoa_ttl ttl) {
 		redlink_list.Disabled_(ttl.Ns().Id_is_module());

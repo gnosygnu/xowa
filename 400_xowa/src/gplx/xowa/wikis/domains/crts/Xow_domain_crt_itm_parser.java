@@ -71,7 +71,7 @@ class Xow_domain_crt_itm_parser {
 		int raw_len = raw.length;
 		if		(Bry_.Has_at_bgn(raw, Wild_lang)) {		// EX: *.wikipedia
 			int wiki_tid = Xow_domain_tid_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
-			return wiki_tid == Xow_domain_tid_.Int__null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
+			return wiki_tid == Xow_domain_tid_.Tid__null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
 		}
 		else if	(Bry_.Has_at_end(raw, Wild_type)) {		// EX: en.*
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(raw, 0, raw_len - Wild_type.length);

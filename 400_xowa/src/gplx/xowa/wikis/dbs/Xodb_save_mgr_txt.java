@@ -63,7 +63,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text)		{Data_update_under(page, text, null);}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl)	{
-		if (wiki.Domain_tid() != Xow_domain_tid_.Int__home) {
+		if (wiki.Domain_tid() != Xow_domain_tid_.Tid__home) {
 			wiki.Appe().Usr_dlg().Warn_many("", "", "Only pages in the home wiki can be renamed");
 			return;
 		}

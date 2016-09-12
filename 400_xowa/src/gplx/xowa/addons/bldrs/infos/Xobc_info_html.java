@@ -66,7 +66,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 			String src_dir = host_eval.Eval_src_dir(data_db, host_id, wiki_domain);
 			String[] ary = String_.Split(key, "|");
 			ary[0] = String_.new_u8(wiki_domain.Abrv_wm());
-			torrent_fil = String_.Format("{0}Xowa_{1}_latest_archive.torrent", src_dir, wiki_domain.Abrv_wm(), ary[1]); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
+			torrent_fil = String_.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, wiki_domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 		}
 		
 		return new Xobc_info_doc
@@ -76,6 +76,9 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		, torrent_fil
 		, step_urls
 		);
+	}
+	public static String Make_torrent_fil(String src_dir, Xow_domain_itm domain) {
+		return String_.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();

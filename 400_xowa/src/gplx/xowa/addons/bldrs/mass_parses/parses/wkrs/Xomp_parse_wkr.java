@@ -67,8 +67,8 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		wiki.File__orig_mgr().Wkrs__set(file_orig_wkr);
 		wiki.File_mgr().Fsdb_mode().Tid__v2__mp__y_();
 
-		// disable categories else progress messages written (also for PERF)
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(false);
+		// disable categories b/c categories will be retrieved at run-time
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(cfg.Hdump_catboxs());
 
 		// enable lnki_temp
 		Xomp_lnki_temp_wkr logger = null;

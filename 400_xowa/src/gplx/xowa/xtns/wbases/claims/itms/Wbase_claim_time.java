@@ -101,7 +101,7 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	}
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_time(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.To_str_or_fail(this.Snak_tid()), Wbase_claim_type_.To_key_or_unknown(this.Val_tid()), String_.new_u8(time), String_.new_u8(before), String_.new_u8(after), String_.new_u8(precision), String_.new_u8(calendar));
+		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(time), String_.new_u8(before), String_.new_u8(after), String_.new_u8(precision), String_.new_u8(calendar));
 	}
 	public static final    byte[] Calendar_julian = Bry_.new_a7("http://www.wikidata.org/entity/Q1985786");
 }

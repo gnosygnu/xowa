@@ -60,7 +60,7 @@ public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 			default:		throw Err_.new_unhandled(cur_tid);
 		}			
 		byte[] abrv_wm = null;
-		int lang_id = Xol_lang_stub_.Id__unknown, domain_tid = Xow_domain_tid_.Int__other;
+		int lang_id = Xol_lang_stub_.Id__unknown, domain_tid = Xow_domain_tid_.Tid__other;
 		if (xwiki_is_mw) {
 			url_fmt = Xow_xwiki_mgr.Bld_url_fmt(domain_bry);
 			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);

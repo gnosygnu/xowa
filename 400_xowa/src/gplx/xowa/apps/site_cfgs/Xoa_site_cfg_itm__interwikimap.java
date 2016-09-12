@@ -50,23 +50,23 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 		int domain_tid = wiki.Domain_tid();
 		xwiki_mgr.Add_by_csv(Csv__manual);	// adds manual xwikis that should exist in all wikis; EX: 'commons', 'wikidata', 'oldwikisource', 'wmf'
 		switch (domain_tid) {
-			case Xow_domain_tid_.Int__wikipedia: case Xow_domain_tid_.Int__wiktionary:	case Xow_domain_tid_.Int__wikisource:	case Xow_domain_tid_.Int__wikivoyage:
-			case Xow_domain_tid_.Int__wikiquote: case Xow_domain_tid_.Int__wikibooks:	case Xow_domain_tid_.Int__wikiversity:	case Xow_domain_tid_.Int__wikinews:
+			case Xow_domain_tid_.Tid__wikipedia: case Xow_domain_tid_.Tid__wiktionary:	case Xow_domain_tid_.Tid__wikisource:	case Xow_domain_tid_.Tid__wikivoyage:
+			case Xow_domain_tid_.Tid__wikiquote: case Xow_domain_tid_.Tid__wikibooks:	case Xow_domain_tid_.Tid__wikiversity:	case Xow_domain_tid_.Tid__wikinews:
 				xwiki_mgr.Add_by_sitelink_mgr();									// lang: EX: [[fr:]]  -> fr.wikipedia.org
 				xwiki_mgr.Add_by_csv(Csv__peers__lang);								// peer: EX: [[wikt]] -> en.wiktionary.org
 				break;
-			case Xow_domain_tid_.Int__commons:		case Xow_domain_tid_.Int__wikidata:
-			case Xow_domain_tid_.Int__wikimedia:	case Xow_domain_tid_.Int__species:	case Xow_domain_tid_.Int__meta: case Xow_domain_tid_.Int__incubator:
-			case Xow_domain_tid_.Int__mediawiki:	case Xow_domain_tid_.Int__wmfblog:
-			case Xow_domain_tid_.Int__home:			case Xow_domain_tid_.Int__other:
-				xwiki_mgr.Add_by_sitelink_mgr(Xow_domain_tid_.Int__wikipedia);		// lang: hardcode to wikipedia; EX: "[[en:]] -> "en.wikipedia.org"
+			case Xow_domain_tid_.Tid__commons:		case Xow_domain_tid_.Tid__wikidata:
+			case Xow_domain_tid_.Tid__wikimedia:	case Xow_domain_tid_.Tid__species:	case Xow_domain_tid_.Tid__meta: case Xow_domain_tid_.Tid__incubator:
+			case Xow_domain_tid_.Tid__mediawiki:	case Xow_domain_tid_.Tid__wmfblog:
+			case Xow_domain_tid_.Tid__home:			case Xow_domain_tid_.Tid__other:
+				xwiki_mgr.Add_by_sitelink_mgr(Xow_domain_tid_.Tid__wikipedia);		// lang: hardcode to wikipedia; EX: "[[en:]] -> "en.wikipedia.org"
 				xwiki_mgr.Add_by_csv(Csv__peers__english);							// peer: hardcode to english
 				break;
 		}
 
 		// wikivoyage
 		switch (domain_tid) {
-			case Xow_domain_tid_.Int__wikivoyage: case Xow_domain_tid_.Int__home:	// NOTE: home needed for diagnostic; DATE:2015-10-13
+			case Xow_domain_tid_.Tid__wikivoyage: case Xow_domain_tid_.Tid__home:	// NOTE: home needed for diagnostic; DATE:2015-10-13
 				xwiki_mgr.Add_by_csv(Csv__wikivoyage);
 				break;
 		}

@@ -112,7 +112,7 @@ class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
 			byte[] val = tmp_bfr.To_bry_and_clear();
 			fmtr_qual.Init_by_claim(ttl, itm);
 			fmtr_ref.Init_by_claim(ttl, itm);
-			row_fmtr.Bld_bfr_many(bfr, Wbase_claim_rank_.To_str_or_fail(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
+			row_fmtr.Bld_bfr_many(bfr, Wbase_claim_rank_.Reg.Get_str_or_fail(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
 		}
 	}
 	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

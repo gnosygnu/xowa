@@ -127,4 +127,13 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		try {return DriverManager.getConnection(url, uid, pwd);}
 		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Raw());}
 	}
+	protected Connection Conn__new_by_url_and_props(String url, Keyval... props) {
+		try {
+			java.util.Properties properties = new java.util.Properties();
+			for (Keyval prop : props)
+				properties.setProperty(prop.Key(), prop.Val_to_str_or_empty());
+			return DriverManager.getConnection(url, properties);
+		}
+		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Raw());}
+	}
 	}

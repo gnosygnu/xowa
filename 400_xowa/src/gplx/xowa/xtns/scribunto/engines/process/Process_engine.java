@@ -60,7 +60,7 @@ public class Process_engine implements Scrib_engine {
 				return rsp.Values();
 			}
 			else if	(String_.Eq(op, "error")) {
-				core.Handle_error(rsp.Rslt_ary()[0].Val_to_str_or_empty(), "");
+				core.Handle_error(rsp.Rslt_ary()[0].Val_to_str_or_empty());
 				return Keyval_.Ary_empty;
 			}
 			else if (String_.Eq(op, "call")) {

@@ -30,7 +30,7 @@ public class Xomp_parse_mgr {
 		Xomp_mgr_db mgr_db = Xomp_mgr_db.New__load(cfg.Mgr_url());
 
 		// init page_pool
-		Xomp_page_pool_loader page_pool_loader = new Xomp_page_pool_loader(wiki, mgr_db.Conn(), cfg.Num_pages_in_pool());
+		Xomp_page_pool_loader page_pool_loader = new Xomp_page_pool_loader(wiki, mgr_db.Conn(), cfg.Num_pages_in_pool(), cfg.Show_msg__fetched_pool());
 		Xomp_page_pool page_pool = new Xomp_page_pool(page_pool_loader, cfg.Num_pages_per_wkr());
 		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
 		prog_mgr.Init(page_pool_loader.Get_pending_count(), cfg.Progress_interval());

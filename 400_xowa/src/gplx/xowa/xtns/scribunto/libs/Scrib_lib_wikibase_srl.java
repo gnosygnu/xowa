@@ -26,9 +26,9 @@ class Scrib_lib_wikibase_srl {
 			rv.Add(Keyval_.new_("type", Wbase_claim_entity_type_.Itm__item.Key_str()));
 			rv.Add(Keyval_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
 		}
-		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Label_list()));
-		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Descr_list()));
-		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Slink_list(), base_adj));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Itm__language.Key_str(), Wdata_dict_langtext.Itm__value.Key_str(), wdoc.Label_list()));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Itm__language.Key_str(), Wdata_dict_langtext.Itm__value.Key_str(), wdoc.Descr_list()));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Itm__site.Key_str()	, Wdata_dict_sitelink.Itm__title.Key_str(), wdoc.Slink_list(), base_adj));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_aliases		, Srl_aliases	(base_adj, wdoc.Alias_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_claims			, Srl_claims	(base_adj, legacy_style, wdoc.Claim_list()));
 		return (Keyval[])rv.To_ary(Keyval.class);
@@ -84,7 +84,7 @@ class Scrib_lib_wikibase_srl {
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			byte[] itm = ary[i];
-			rv[i] = Keyval_.int_(i + base_adj, Keyval_.Ary(Keyval_.new_(Wdata_dict_langtext.Str_language, lang), Keyval_.new_(Wdata_dict_langtext.Str_value, String_.new_u8(itm))));	// NOTE: using same base_adj logic as claims
+			rv[i] = Keyval_.int_(i + base_adj, Keyval_.Ary(Keyval_.new_(Wdata_dict_langtext.Itm__language.Key_str(), lang), Keyval_.new_(Wdata_dict_langtext.Itm__value.Key_str(), String_.new_u8(itm))));	// NOTE: using same base_adj logic as claims
 		}
 		return rv;
 	}
@@ -116,9 +116,9 @@ class Scrib_lib_wikibase_srl {
 		List_adp list = List_adp_.New();
 		list.Add(Keyval_.new_("id", pid));
 		list.Add(Keyval_.new_("mainsnak", Srl_claims_prop_itm_core(visitor, pid, itm)));
-		list.Add(Keyval_.new_(Wdata_dict_claim_v1.Str_rank, Wbase_claim_rank_.To_str_or_fail(itm.Rank_tid())));
+		list.Add(Keyval_.new_(Wdata_dict_claim_v1.Str_rank, Wbase_claim_rank_.Reg.Get_str_or_fail(itm.Rank_tid())));
 		list.Add(Keyval_.new_("type", itm.Prop_type()));
-		Srl_root(list, Wdata_dict_claim.Str_qualifiers, Srl_qualifiers(visitor, itm.Qualifiers(), base_adj));
+		Srl_root(list, Wdata_dict_claim.Itm__qualifiers.Key_str(), Srl_qualifiers(visitor, itm.Qualifiers(), base_adj));
 		return (Keyval[])list.To_ary_and_clear(Keyval.class);
 	}
 	private static Keyval[] Srl_qualifiers(Scrib_lib_wikibase_srl_visitor visitor, Wbase_claim_grp_list list, int base_adj) {
@@ -146,8 +146,8 @@ class Scrib_lib_wikibase_srl {
 		if (snak_is_valued)	// NOTE: novalue must not return slot (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16; ALSO: sv.w:Joseph_Jaquet; DATE:2015-07-31
 			rv[0] = Keyval_.new_("datavalue", Srl_claims_prop_itm_core_val(visitor, itm));
 		rv[0 + snak_is_valued_adj] = Keyval_.new_("property", pid);
-		rv[1 + snak_is_valued_adj] = Keyval_.new_("snaktype", Wbase_claim_value_type_.To_str_or_fail(itm.Snak_tid()));
-		rv[2 + snak_is_valued_adj] = Keyval_.new_("datatype", Wbase_claim_type_.To_scrib_or_unknown(itm.Val_tid()));	// NOTE: datatype needed for Modules; PAGE:eo.w:WikidataKoord; DATE:2015-11-08
+		rv[1 + snak_is_valued_adj] = Keyval_.new_("snaktype", Wbase_claim_value_type_.Reg.Get_str_or_fail(itm.Snak_tid()));
+		rv[2 + snak_is_valued_adj] = Keyval_.new_("datatype", Wbase_claim_type_.Get_scrib_or_unknown(itm.Val_tid()));	// NOTE: datatype needed for Modules; PAGE:eo.w:WikidataKoord; DATE:2015-11-08
 		return rv;
 	}
 	private static Keyval[] Srl_claims_prop_itm_core_val(Scrib_lib_wikibase_srl_visitor visitor, Wbase_claim_base itm) {

@@ -32,7 +32,7 @@ public class Xoh_anch_cls_ {
 	  Bry__media_play		= Bry_.new_a7("xowa_media_play")
 	, Bry__media_info		= Bry_.new_a7("xowa_media_info")
 	, Bry__ctg_main			= Bry_.new_a7("internal")
-	, Bry__ctg_tree			= gplx.xowa.wikis.ctgs.Xoa_ctg_mgr.Html__cls__bry
+	, Bry__ctg_tree			= gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr.Html__cls__bry
 	, Bry__ctg_xnav			= Bry_.new_a7("xowa_nav")
 	, Bry__voyage_email		= Bry_.new_a7("email")
 	;

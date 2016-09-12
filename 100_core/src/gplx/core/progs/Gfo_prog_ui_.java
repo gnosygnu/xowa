@@ -35,6 +35,7 @@ class Gfo_prog_ui__noop implements Gfo_prog_ui {
 	public long		Prog_data_cur() {return 0;}
 	public long		Prog_data_end() {return 0;}
 	public boolean		Prog_notify_and_chk_if_suspended(long cur, long max) {return false;}
+	public void		Prog_notify_by_msg(String msg) {}
 }
 class Gfo_prog_ui__always implements Gfo_prog_ui {
 	public boolean		Canceled() {return false;}
@@ -44,4 +45,5 @@ class Gfo_prog_ui__always implements Gfo_prog_ui {
 	public long		Prog_data_cur() {return 0;}
 	public long		Prog_data_end() {return 0;}
 	public boolean		Prog_notify_and_chk_if_suspended(long cur, long max) {return false;}
+	public void		Prog_notify_by_msg(String msg) {}
 }

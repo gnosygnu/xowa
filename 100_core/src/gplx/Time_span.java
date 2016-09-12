@@ -19,15 +19,10 @@ package gplx;
 import gplx.core.strings.*;
 public class Time_span implements CompareAble {	// NOTE: gplx.Time_span b/c System.TimeSpan
 	public long Fracs() {return fracs;} long fracs; public int FracsAsInt() {return (int)fracs;}
-	public Decimal_adp TotalSecs() {
-		return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Sec]);
-	}
-	public Decimal_adp Total_days() {
-		return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]  * 24);
-	}
-	public Decimal_adp Total_hours() {
-		return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]);
-	}
+	public Decimal_adp Total_days()		{return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]  * 24);}
+	public Decimal_adp Total_hours()	{return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]);}
+	public Decimal_adp Total_mins()		{return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Min]);}
+	public Decimal_adp Total_secs()		{return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Sec]);}
 	public int[] Units() {return Time_span_.Split_long(fracs, Time_span_.Divisors);}
 	public int Units_fracs() {
 		int[] ary = Time_span_.Split_long(fracs, Time_span_.Divisors);

@@ -31,7 +31,7 @@ public class Xow_xwiki_mgr_tst {
 	}
 	@Test   public void Add_bulk_langs_grp_commons() {
 		fxt.Init_langs();
-		fxt.Wiki().Xwiki_mgr().Add_by_sitelink_mgr(Xow_domain_tid_.Int__wikipedia);
+		fxt.Wiki().Xwiki_mgr().Add_by_sitelink_mgr(Xow_domain_tid_.Tid__wikipedia);
 		fxt.Tst_itms(fxt.xwiki_("de", "de.wikipedia.org", "https://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "https://fr.wikipedia.org/wiki/~{0}"));
 	}
 	@Test   public void Add_bulk_peers() {
@@ -75,7 +75,7 @@ class Xow_xwiki_mgr_fxt {
 		lang_mgr.Clear();
 	}
 	public Xowe_wiki Wiki() {return wiki;}
-	public Xow_xwiki_itm xwiki_null_(String key) {return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.Empty, Xol_lang_stub_.Id__unknown, Xow_domain_tid_.Int__other, Bry_.Empty, Bry_.Empty);}
+	public Xow_xwiki_itm xwiki_null_(String key) {return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.Empty, Xol_lang_stub_.Id__unknown, Xow_domain_tid_.Tid__other, Bry_.Empty, Bry_.Empty);}
 	public Xow_xwiki_itm xwiki_(String key, String domain_str, String url_fmt) {
 		Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_u8(domain_str));
 		return Xow_xwiki_itm.new_(Bry_.new_u8(key), Bry_.new_u8(url_fmt), domain.Lang_actl_itm().Id(), domain.Domain_type_id(), domain.Domain_bry(), domain.Abrv_wm());

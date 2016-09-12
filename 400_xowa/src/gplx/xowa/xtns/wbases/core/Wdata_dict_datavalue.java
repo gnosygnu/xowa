@@ -16,25 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Wdata_dict_datavalue {
 	public static final byte
-	  Tid_value									= 0
-	, Tid_type									= 1
-	, Tid_error									= 2
+	  Tid__value								= 0
+	, Tid__type									= 1
+	, Tid__error								= 2
 	;
-	public static final String
-	  Str_value									= "value"
-	, Str_type									= "type"
-	, Str_error									= "error"
-	;
-	public static byte[] 
-	  Bry_value									= Bry_.new_a7(Str_value)
-	, Bry_type									= Bry_.new_a7(Str_type)
-	, Bry_error									= Bry_.new_a7(Str_error)
-	;
-	public static final    Hash_adp_bry Dict = Hash_adp_bry.cs()
-	.Add_bry_byte(Bry_value						, Tid_value)
-	.Add_bry_byte(Bry_type						, Tid_type)
-	.Add_bry_byte(Bry_error						, Tid_error)
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.datavalue", 3);
+	public static final    Wbase_enum_itm
+	  Itm__value								= Reg.Add(Tid__value		, "value")
+	, Itm__type									= Reg.Add(Tid__type			, "type")
+	, Itm__error								= Reg.Add(Tid__error		, "error")
 	;
 }

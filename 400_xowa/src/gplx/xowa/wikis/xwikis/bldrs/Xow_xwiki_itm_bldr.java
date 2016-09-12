@@ -32,8 +32,8 @@ public class Xow_xwiki_itm_bldr {
 		if (domain_name == null) {															// no hard-coded name; currently dmoz or commons
 			domain_name = (byte[])domain_name_hash.Get_by_bry(domain_bry);					// NOTE: domain_name is needed for "Related Sites" in wikivoyage
 			if (domain_name == null) {
-				if	(	cur_domain.Domain_type_id() != Xow_domain_tid_.Int__wikipedia		// cur_domain is not wikipedia
-					&&	domain_itm.Domain_type_id() == Xow_domain_tid_.Int__wikipedia		// domain_itm is wikipedia
+				if	(	cur_domain.Domain_type_id() != Xow_domain_tid_.Tid__wikipedia		// cur_domain is not wikipedia
+					&&	domain_itm.Domain_type_id() == Xow_domain_tid_.Tid__wikipedia		// domain_itm is wikipedia
 					&&	cur_domain.Lang_actl_uid() == domain_itm.Lang_actl_uid()			// cur_domain lang matches domain_lang
 					) {				
 					domain_name = Bry__domain_name__wikipedia;								// EX: in "en.wikivoyage.org", "en.wikipedia.org" should have name of "Wikipedia" (not "en.wikipedia.org")

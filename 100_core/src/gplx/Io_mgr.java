@@ -64,6 +64,8 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	public void							DeleteDirDeep(Io_url url) {IoEngine_xrg_deleteDir.new_(url).Recur_().Exec();}
 	public void							DeleteDirDeep_ary(Io_url... urls) {for (Io_url url : urls) IoEngine_xrg_deleteDir.new_(url).Recur_().Exec();}
 	public int							Delete_dir_empty(Io_url url) {return Io_mgr_.Delete_dir_empty(url);}
+	public void							Delete_sub_by_wildcard() {
+	}
 	public boolean						Truncate_fil(Io_url url, long size) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).Truncate_fil(url, size);}
 	public void							MoveDirDeep(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.move_(src, trg).Recur_().Exec();}
 	public IoEngine_xrg_xferDir			CopyDir_cmd(Io_url src, Io_url trg) {return IoEngine_xrg_xferDir.copy_(src, trg);}

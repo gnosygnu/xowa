@@ -52,11 +52,13 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, Gfo_invk {
 		for (int i = 0; i < len; i++) {
 			if (usr_dlg.Canceled()) return;
 			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);
-			Xof_orig_itm orig = wiki.File__orig_mgr().Find_by_ttl_or_null(fsdb.Lnki_ttl(), i, len);
-			if (orig != Xof_orig_itm.Null) { // orig exists;
-				gplx.xowa.files.repos.Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), fsdb.Lnki_ttl(), Bry_.Empty);
-				if (repo == null) continue;
-				fsdb.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+			if (fsdb.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null) {
+				Xof_orig_itm orig = wiki.File__orig_mgr().Find_by_ttl_or_null(fsdb.Lnki_ttl(), i, len);
+				if (orig != Xof_orig_itm.Null) { // orig exists;
+					gplx.xowa.files.repos.Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), fsdb.Lnki_ttl(), Bry_.Empty);
+					if (repo == null) continue;
+					fsdb.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				}
 			}
 			fsdb.Init_at_xfer(i, len);
 			Xof_file_wkr.Show_img(fsdb, usr_dlg, wiki.File__bin_mgr(), wiki.File__mnt_mgr(), cache_mgr, wiki.File__repo_mgr(), js_wkr, img_size, url_bldr, page);

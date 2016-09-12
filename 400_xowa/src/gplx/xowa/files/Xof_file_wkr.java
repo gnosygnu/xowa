@@ -57,7 +57,8 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			}
 			Xof_repo_itm repo = repo_mgr.Get_trg_by_id_or_null(fsdb.Orig_repo_id(), fsdb.Orig_ttl(), page.Url_bry_safe());
 			if (repo == null) return false;
-			fsdb.Init_at_html(fsdb.Lnki_exec_tid(), img_size, repo, url_bldr);
+			if (fsdb.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null)
+				fsdb.Init_at_html(fsdb.Lnki_exec_tid(), img_size, repo, url_bldr);
 			if (fsdb.Orig_ext().Is_not_viewable(fsdb.Lnki_exec_tid())) return false;	// file not viewable; exit; EX: exec_tid = page and fsdb is audio
 			IoItmFil file = Io_mgr.Instance.QueryFil(fsdb.Html_view_url());
 			if (!file.Exists()) {

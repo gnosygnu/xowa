@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.redirects.*;
 import gplx.xowa.files.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.addons.htmls.tocs.*;
-import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
+import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*; import gplx.xowa.wikis.pages.wtxts.*;
 public class Xoh_page implements Xoa_page {
 	// core
 	public Xow_wiki					Wiki()				{return wiki;}				private Xow_wiki wiki;
@@ -28,7 +29,9 @@ public class Xoh_page implements Xoa_page {
 	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
 	public Xopg_redirect_mgr		Redirect_trail()	{return redirect;}			private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
 	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
+	public Xopg_wtxt_data			Wtxt()				{return wtxt;}				private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
+	public Xol_lang_itm				Lang()				{return lang;}				private Xol_lang_itm lang;
 
 	public boolean					Xtn__timeline_exists() {return xtn__timeline_exists;} private boolean xtn__timeline_exists; public void Xtn__timeline_exists_y_() {xtn__timeline_exists = true;}
 	public boolean					Xtn__gallery_exists() {return xtn__gallery_exists;} private boolean xtn__gallery_exists; public void Xtn__gallery_exists_y_() {xtn__gallery_exists = true;}
@@ -46,15 +49,17 @@ public class Xoh_page implements Xoa_page {
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
-	public byte[]					Url_bry_safe()		{return page_url == null ? Bry_.Empty : page_url.To_bry(Bool_.Y, Bool_.Y);}
+	public byte[]					Url_bry_safe()		{return Xoa_page_.Url_bry_safe(page_url, wiki, page_ttl);}
 	public void Ctor_by_hview(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
+		this.lang = wiki.Lang();
 		this.Clear();
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		html.Toc_mgr().Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
 	}
 	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page, byte[] toc_label) {
 		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
+		this.lang = wiki.Lang();
 
 		db.Html().Html_bry_(page.Db().Html().Html_bry());
 
@@ -78,6 +83,7 @@ public class Xoh_page implements Xoa_page {
 	public void Clear() {
 		redirect.Clear();
 		html.Clear();
+		wtxt.Clear();
 		hdump.Clear();
 		db.Clear();
 

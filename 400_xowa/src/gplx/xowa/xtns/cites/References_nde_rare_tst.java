@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class References_nde_rare_tst {		
-	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
 		fxt.Init_page_create("Template:Recursive", "<ref>{{Recursive}}</ref>");
@@ -87,6 +87,21 @@ public class References_nde_rare_tst {
 		( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
 		, "<ol class=\"references\">"
 		, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">a</span></li>"
+		, "</ol>"
+		, ""
+		));
+	}
+	@Test  public void Dangling_ref_and_stack_overflow() { // PURPOSE: handle dangling <ref> with nested <references/>; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "a<ref name='ref_0'/>b"
+		, "<references><ref name='ref_0'>c"
+		, "<references/>"		// must be ignored, else it will be same as outer <references>
+		, "</references>"
+		), String_.Concat_lines_nl_skip_last
+		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>b"
+		, "<ol class=\"references\">"
+		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">c"
+		, "</span></li>"
 		, "</ol>"
 		, ""
 		));

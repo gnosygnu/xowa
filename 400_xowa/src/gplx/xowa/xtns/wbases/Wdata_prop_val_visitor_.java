@@ -45,7 +45,7 @@ public class Wdata_prop_val_visitor_ {
 		return rv;
 	}
 	private static void Render_snak(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, byte[] page_url, Keyval[] props, int sub_idx, int sub_len) {
-		Keyval[] datavalue_ary = (Keyval[])Scrib_kv_utl_.Get_sub_by_key_or_null(props, Wdata_dict_mainsnak.Str_datavalue);
+		Keyval[] datavalue_ary = (Keyval[])Scrib_kv_utl_.Get_sub_by_key_or_null(props, Wdata_dict_mainsnak.Itm__datavalue.Key_str());
 
 		// loop datavalue_ary to get tid, val_obj
 		byte tid = Byte_.Max_value_127;
@@ -53,9 +53,9 @@ public class Wdata_prop_val_visitor_ {
 		int len = datavalue_ary.length;
 		for (int i = 0; i < len; ++i) {
 			String key = datavalue_ary[i].Key();
-			if		(String_.Eq(key, Wdata_dict_datavalue.Str_type))
-				tid = Wbase_claim_type_.To_tid_or_unknown((String)datavalue_ary[i].Val());
-			else if (String_.Eq(key, Wdata_dict_datavalue.Str_value))
+			if		(String_.Eq(key, Wdata_dict_datavalue.Itm__type.Key_str()))
+				tid = Wbase_claim_type_.Get_tid_or_unknown((String)datavalue_ary[i].Val());
+			else if (String_.Eq(key, Wdata_dict_datavalue.Itm__value.Key_str()))
 				val_obj = datavalue_ary[i].Val();
 		}
 
@@ -78,7 +78,7 @@ public class Wdata_prop_val_visitor_ {
 		int len = kvs.length;
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = kvs[i];
-			byte val_tid = Wbase_claim_time_.To_tid_or_invalid(page_url, kv.Key());
+			byte val_tid = Wbase_claim_time_.Reg.Get_tid_or_max_and_log(page_url, kv.Key()); if (val_tid == Byte_.Max_value_127) continue;
 			switch (val_tid) {
 				case Wbase_claim_time_.Tid__time:			time				= Bry_.new_u8((String)kv.Val()); break;
 				case Wbase_claim_time_.Tid__before:			before_int			= Int_.cast(kv.Val()); break;
@@ -99,7 +99,7 @@ public class Wdata_prop_val_visitor_ {
 		int len = kvs.length;
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = kvs[i];
-			byte val_tid = Wbase_claim_quantity_.To_tid_or_invalid(page_url, kv.Key());
+			byte val_tid = Wbase_claim_quantity_.Reg.Get_tid_or_max_and_log(page_url, kv.Key()); if (val_tid == Byte_.Max_value_127) continue;
 			byte[] val_bry = Bry_.new_u8((String)kv.Val());
 			switch (val_tid) {
 				case Wbase_claim_quantity_.Tid__amount:		amount_bry	= val_bry; break;
@@ -125,11 +125,10 @@ public class Wdata_prop_val_visitor_ {
 		int len = kvs.length;
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = kvs[i];
-			byte val_tid = Wbase_claim_globecoordinate_.To_tid_or_invalid(page_url, kv.Key());
+			byte val_tid = Wbase_claim_globecoordinate_.Reg.Get_tid_or_max_and_log(page_url, kv.Key()); if (val_tid == Byte_.Max_value_127) continue;
 			switch (val_tid) {
 				case Wbase_claim_globecoordinate_.Tid__latitude:		lat = Double_.cast(kv.Val()); break;
 				case Wbase_claim_globecoordinate_.Tid__longitude:		lng = Double_.cast(kv.Val()); break;
-				default: break;	// ignore others
 			}
 		}
 		Render__geo(bfr, lat, lng);

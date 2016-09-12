@@ -25,7 +25,7 @@ public class Wbase_claim_value extends Wbase_claim_base {
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_system(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.To_str_or_fail(this.Snak_tid()), Wbase_claim_type_.To_key_or_unknown(this.Val_tid()));
+		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()));
 	}
 
 	public static Wbase_claim_value New_novalue(int pid)		{return new Wbase_claim_value(pid, Wbase_claim_type_.Tid__unknown	, Wbase_claim_value_type_.Tid__novalue);}

@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.dbs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.amps.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.New();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
@@ -116,14 +117,14 @@ class Dpl_page_finder {
 		}
 	}
 	private static void Find_pages_in_ctg(Ordered_hash list, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
-		Xoctg_view_ctg ctg = new Xoctg_view_ctg().Name_(ctg_ttl);
+		Xoctg_catpage_ctg ctg = new Xoctg_catpage_ctg(ctg_ttl);
 		load_mgr.Load_ctg_v1(ctg, ctg_ttl);
 
 		for (byte ctg_tid = 0; ctg_tid < Xoa_ctg_mgr.Tid__max; ctg_tid++) {
-			Xoctg_view_grp ctg_mgr = ctg.Grp_by_tid(ctg_tid); if (ctg_mgr == null) continue;
+			Xoctg_catpage_grp ctg_mgr = ctg.Grp_by_tid(ctg_tid); if (ctg_mgr == null) continue;
 			int itms_len = ctg_mgr.Total();
 			for (int i = 0; i < itms_len; i++) {
-				Xoctg_view_itm ctg_itm = ctg_mgr.Itms()[i];					
+				Xoctg_catpage_itm ctg_itm = ctg_mgr.Itms()[i];					
 				int ctg_itm_id = ctg_itm.Page_id();
 				if (list.Has(tmp_id.Val_(ctg_itm_id))) continue;
 				list.Add(Int_obj_ref.New(ctg_itm_id), ctg_itm);
@@ -151,8 +152,8 @@ class Dpl_page_finder {
 	private static void Add_cur_pages_also_in_old(int i, Int_obj_ref tmp_id, Ordered_hash old_regy, Ordered_hash cur_regy, Ordered_hash new_regy, Ordered_hash exclude_pages, int ns_filter) {
 		int found_len = cur_regy.Count();
 		for (int j = 0; j < found_len; j++) {			// if new_page is in cur, add it
-			Xoctg_view_itm cur_itm = (Xoctg_view_itm)cur_regy.Get_at(j);
-			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_itm.Ttl().Ns().Id()) continue;
+			Xoctg_catpage_itm cur_itm = (Xoctg_catpage_itm)cur_regy.Get_at(j);
+			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_itm.Page_ttl().Ns().Id()) continue;
 			tmp_id.Val_(cur_itm.Page_id());				// set tmp_id, since it will be used at least once
 			if (exclude_pages.Has(tmp_id)) continue;	// ignore excluded pages
 			if (i != 0) {								// skip logic for first ctg (which doesn't have a predecessor)

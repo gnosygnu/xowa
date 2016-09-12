@@ -16,21 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wbases.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Wdata_dict_langtext {
 	public static final byte
-	  Tid_language								= 0
-	, Tid_value									= 1
+	  Tid__language								= 0
+	, Tid__value								= 1
 	;
-	public static final String
-	  Str_language								= "language"
-	, Str_value									= "value"
-	;
-	public static byte[] 
-	  Bry_language								= Bry_.new_a7(Str_language)
-	, Bry_value									= Bry_.new_a7(Str_value)
-	;
-	public static final    Hash_adp_bry Dict = Hash_adp_bry.cs()
-	.Add_bry_byte(Bry_language					, Tid_language)
-	.Add_bry_byte(Bry_value						, Tid_value)
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.langtext", 2);
+	public static final    Wbase_enum_itm
+	  Itm__language								= Reg.Add(Tid__language		, "language")
+	, Itm__value								= Reg.Add(Tid__value		, "value")
 	;
 }

@@ -29,7 +29,7 @@ import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.
 import gplx.xowa.addons.bldrs.files.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
 import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
 public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx.xowa.parsers.lnkis.files.Xop_file_logger {
-	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
+	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump, load_all_imglinks;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
 	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
@@ -65,7 +65,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		// create imglinks
 		Xof_orig_wkr__img_links orig_wkr = new Xof_orig_wkr__img_links(wiki);
 		wiki.File__orig_mgr().Wkrs__set(orig_wkr);
-		Xof_orig_wkr__img_links_.Load_all(orig_wkr);
+		if (load_all_imglinks) Xof_orig_wkr__img_links_.Load_all(orig_wkr);
 
 		Xow_wiki_utl_.Clone_repos(wiki);
 
@@ -162,6 +162,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_ns_ids_by_aliases))			ns_ids = Xobldr__lnki_temp__create_.Ns_ids_by_aliases(wiki, m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_gen_html_))					gen_html = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk__load_all_imglinks_))		load_all_imglinks = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_hdump_bldr))					return hdump_bldr;
 		else if	(ctx.Match(k, Invk_property_wkr))				return this.Property_wkr();
 		else if	(ctx.Match(k, Invk_invoke_wkr))					return this.Invoke_wkr();
@@ -171,6 +172,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	private static final String Invk_wdata_enabled_ = "wdata_enabled_", Invk_xtn_ref_enabled_ = "xtn_ref_enabled_", Invk_gen_html_ = "gen_html_"
 	, Invk_ns_ids_ = "ns_ids_", Invk_ns_ids_by_aliases = "ns_ids_by_aliases"
 	, Invk_invoke_wkr = "invoke_wkr", Invk_property_wkr = "property_wkr", Invk_hdump_bldr = "hdump_bldr"
+	, Invk__load_all_imglinks_ = "load_all_imglinks_"
 	;
 	public static final String BLDR_CMD_KEY = "file.lnki_temp";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.dbs.qrys.*;
 public class Db_stmt_ {
-	public static final Db_stmt Null = new Db_stmt_sql();
+	public static final    Db_stmt Null = new Db_stmt_sql();
 	public static Db_stmt new_insert_(Db_conn conn, String tbl, String... flds) {
 		Db_qry qry = Db_qry_insert.new_(tbl, flds);
 		return conn.Stmt_new(qry);

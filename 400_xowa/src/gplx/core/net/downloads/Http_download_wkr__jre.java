@@ -39,7 +39,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         URL src_url_itm = null;
         try     {src_url_itm = new URL(src_url);}
         catch   (MalformedURLException e) {
-			try {trg_stream.close();}
+			try {if (trg_stream != null) trg_stream.close();}
 			catch (IOException e1) {}
         	throw Err_.new_("download_file", "bad url", "src", src_url, "err" + e.toString());
         }
@@ -49,26 +49,29 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
             src_conn = (HttpURLConnection)src_url_itm.openConnection();
             if (prog_resumed)
             	src_conn.addRequestProperty("Range", "bytes=" + Long_.To_str(prog_data_cur) + "-");
+            src_conn.setReadTimeout(10000);	// explicitly set timeout; NOTE:needed on Mac OS X, else error never thrown; DATE:2016-09-03
             src_conn.connect();
             
             // check response code
             int response_code = src_conn.getResponseCode();
             if (prog_resumed) {
 	            if (response_code != HttpURLConnection.HTTP_PARTIAL) {
-	    			try {trg_stream.close();}
+	    			try {if (trg_stream != null) trg_stream.close();}
 	    			catch (IOException e1) {}
 	                throw Err_.new_("download_file", "server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             else {
 	            if (response_code != HttpURLConnection.HTTP_OK) {
-	    			try {trg_stream.close();}
+	    			try {if (trg_stream != null) trg_stream.close();}
 	    			catch (IOException e1) {}
 	                throw Err_.new_("download_file", "server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             src_stream = src_conn.getInputStream();
         } catch (Exception e) {
+			try {if (trg_stream != null) trg_stream.close();}
+			catch (IOException e1) {}
             throw Err_.new_("download_file", "src connection failed", "src", src_url, "err",e.toString());
         }
 
@@ -77,8 +80,9 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
             long prog_data_end = prog_ui.Prog_data_end();
             if (prog_data_end == -1) prog_data_end = src_conn.getContentLength(); // NOTE: may be -1 if server does not report the length            
             byte data[] = new byte[4096];
-            int read = 0;
-            while ((read = src_stream.read(data)) != -1) {
+            while (true) {
+            	int read = src_stream.read(data);
+            	if (read == -1) break;	// no more data            	
                 prog_data_cur += read;
                 trg_stream.write(data, 0, read);
                 this.Checkpoint__save(prog_data_cur);

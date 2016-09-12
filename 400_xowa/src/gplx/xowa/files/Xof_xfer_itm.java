@@ -70,6 +70,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void					Html_size_(int w, int h)	{this.html_w = w; this.html_h = h;}
 	public void					Html_gallery_mgr_h_(int v)	{html_gallery_mgr_h = v;} 
 	public void					Html_img_wkr_(Js_img_wkr v)	{html_img_wkr = v;}
+	public int					Hdump_mode()				{return hdump_mode;} private int hdump_mode = Xof_fsdb_itm.Hdump_mode__null;
 
 	public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;}
 	public void Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] ttl, byte lnki_type, double upright, int w, int h, double time, int page, int lnki_upright_patch) {

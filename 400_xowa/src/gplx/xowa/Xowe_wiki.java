@@ -25,11 +25,11 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
-import gplx.xowa.wikis.ctgs.*;
+import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.views.*;
 import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.pfuncs.*; 
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
-import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	private boolean init_in_process = false;
 	public Xowe_wiki(Xoae_app app, Xol_lang_itm lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
@@ -64,8 +64,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		eval_mgr = new Bfmtr_eval_wiki(this);
 		fragment_mgr = new Xow_fragment_mgr(this);
 		xtn_mgr = new Xow_xtn_mgr().Ctor_by_wiki(this);
-		if (domain_tid == Xow_domain_tid_.Int__home) {
-			wdata_wiki_tid	= Xow_domain_tid_.Int__wikipedia;
+		if (domain_tid == Xow_domain_tid_.Tid__home) {
+			wdata_wiki_tid	= Xow_domain_tid_.Tid__wikipedia;
 			wdata_wiki_lang = Xol_lang_itm_.Key_en;
 		}
 		else {
@@ -105,6 +105,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
 	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
+	public Xoctg_pagebox_wtr		Html__ctg_pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
 	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
@@ -116,6 +117,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
 	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final    Xowe_page_mgr page_mgr;
 	public Xop_sanitizer			Sanitizer() {return sanitizer;} private final    Xop_sanitizer sanitizer;
+	public byte[]					Wtxt__expand_tmpl(byte[] src) {return parser_mgr.Main().Expand_tmpl(src);}
 
 
 	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
@@ -132,7 +134,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 
 	public byte[]					Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_itm_.Bry__commons;
 	public Xob_hive_mgr				Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
-	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private Xow_msg_mgr msg_mgr;
+	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private final    Xow_msg_mgr msg_mgr;
 	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
 	public Bfmtr_eval_wiki			Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
 	public Bry_bfr_mkr				Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
@@ -198,7 +200,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		gplx.xowa.bldrs.setups.upgrades.Xoa_upgrade_mgr.Check(this);
 		// init ns_mgr
 		if (lang.Init_by_load()) {
-			if (domain_tid == Xow_domain_tid_.Int__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
+			if (domain_tid == Xow_domain_tid_.Tid__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
 				ns_mgr.Aliases_add(Xow_ns_.Tid__project, Xow_ns_.Alias__wikipedia);
 			special_mgr.Evt_lang_changed(lang);
 		}
@@ -223,6 +225,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		app.Api_root().Wikis().Get(domain_bry).Subscribe(this);
 		app.Site_cfg_mgr().Load(this);
 		app.Addon_mgr().Load_by_wiki(this);
+		ctg_pagebox_wtr.Init_by_wiki(this);
 	}
 	public void Rls() {
 		if (rls_list != null) {

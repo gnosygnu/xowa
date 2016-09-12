@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.core.envs.*;
-import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.wikis.ctgs.*; import gplx.core.encoders.*;
+import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.guis.views.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final    Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final    Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
 	private final    Xowd_page_itm tmp_page = new Xowd_page_itm();
@@ -127,57 +128,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			rv.Add(Xowd_page_itm.new_srch(page_id, page_len));
 			pos += 6;	// 5 + 1 for pipe
 //				if (match.Itms_len() == max_results) break;
-		}
-	}
-	public boolean Load_ctg_v2(Xoctg_data_ctg ctg, byte[] name) {
-		boolean rv = Load_xdat_itm(tmp_xdat_itm, Xotdb_dir_info_.Tid_category2_link, name, true); if (!rv) return false;
-		byte[] src = tmp_xdat_itm.Itm_bry();
-		Load_ctg_v2_data(wiki.Appe().Usr_dlg(), wiki.Appe().Utl_fld_rdr(), ctg, name, src, tmp_ctg_grp_lens);
-		Load_ctg_v2_main(ctg, name);
-		return true;
-	}	int[] tmp_ctg_grp_lens = new int[3];
-	private void Load_ctg_v2_data(Gfo_usr_dlg usr_dlg, Gfo_fld_rdr fld_rdr, Xoctg_data_ctg ctg, byte[] ctg_name, byte[] src, int[] tmp_grp_lens) {	// Name|subc_len|file_len|page_len|subc_bfr|file_bfr|page_bfr
-		fld_rdr.Data_(src); fld_rdr.Read_bry_escape(); // 1st field is name; skip;
-		Load_ctg_v2_data_lens(fld_rdr, tmp_grp_lens);
-		Load_ctg_v2_data_mgrs(usr_dlg, ctg_name, src, fld_rdr.Pos(), tmp_grp_lens, ctg.Grp_mgrs());
-	}
-	private void Load_ctg_v2_data_lens(Gfo_fld_rdr fld_rdr, int[] grp_lens) {
-		for (int i = 0; i < 3; i++)
-			grp_lens[i] = fld_rdr.Read_int_base85_len5();
-	}
-	private void Load_ctg_v2_data_mgrs(Gfo_usr_dlg usr_dlg, byte[] ctg_name, byte[] src, int bgn, int[] grp_lens, Xoctg_idx_mgr[] grp_mgrs) {
-		for (int i = 0; i < 3; i++) {
-			int grp_len = grp_lens[i]; if (grp_len == 0) continue;
-			int end = bgn + grp_len;
-			Xoctg_idx_mgr grp_mgr = new Xoctg_idx_mgr();
-			byte[] grp_src = Bry_.Mid(src, bgn, end);
-			grp_mgr.Src_(grp_src);
-			grp_mgr.Index(usr_dlg, ctg_name, grp_src);
-			grp_mgrs[i] = grp_mgr;
-			bgn = end;
-		}
-	}
-	private void Load_ctg_v2_main(Xoctg_data_ctg rv, byte[] name) {
-		if (!Load_xdat_itm(tmp_xdat_itm, Xotdb_dir_info_.Tid_category2_main, name, true)) return;
-		if (tmp_xdat_itm.Missing()) return;
-		byte[] bry = tmp_xdat_itm.Itm_bry();
-		int bgn = name.length + 1;
-		boolean hidden			= bry[bgn] == Byte_ascii.Ltr_y;
-		int count_subcs		= Base85_.To_int_by_bry(bry, bgn +  2, bgn +  6);
-		int count_files		= Base85_.To_int_by_bry(bry, bgn +  8, bgn + 12);
-		int count_pages		= Base85_.To_int_by_bry(bry, bgn + 14, bgn + 18);
-		rv.Hidden_(hidden);
-		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
-			Xoctg_idx_mgr idx_mgr = rv.Grp_by_tid(i);
-			if (idx_mgr == null) continue;
-			int count = 0;
-			switch (i) {
-				case Xoa_ctg_mgr.Tid_subc:	count = count_subcs; break;
-				case Xoa_ctg_mgr.Tid_file:	count = count_files; break;
-				case Xoa_ctg_mgr.Tid_page:	count = count_pages; break;
-				default:						throw Err_.new_unhandled(i);
-			}
-			idx_mgr.Total_(count);
 		}
 	}
 	public boolean Load_by_id(Xowd_page_itm page, int id)			{Base85_.Set_bry(id, tmp_id_bry, 0, 5); return Load_by_id(page, tmp_id_bry);} private byte[] tmp_id_bry = new byte[5];
@@ -286,8 +236,8 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		count.Val_(tmp_count);
 		return rv;
 	}
-	public boolean Load_ctg_v1(Xoctg_view_ctg view_ctg, byte[] ctg_ttl) {return Load_ctg_v1_wkr(view_ctg, ctg_ttl, null);}
-	private boolean Load_ctg_v1_wkr(Xoctg_view_ctg view_ctg, byte[] ctg_ttl, Int_obj_ref count_only) {
+	public boolean Load_ctg_v1(Xoctg_catpage_ctg view_ctg, byte[] ctg_ttl) {return Load_ctg_v1_wkr(view_ctg, ctg_ttl, null);}
+	private boolean Load_ctg_v1_wkr(Xoctg_catpage_ctg view_ctg, byte[] ctg_ttl, Int_obj_ref count_only) {
 		Xowd_regy_mgr ctg_regy = Get_regy_by_site(Xotdb_dir_info_.Tid_category);
 		int fil_idx = ctg_regy.Files_find(ctg_ttl);
 		if (fil_idx == Xowd_regy_mgr.Regy_null) return false;	// NOTE: must check for -1, not 0; else defect in which entries in file 0 are ignored; DATE:2013-04-11
@@ -308,17 +258,11 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		}
 		for (int i = 0; i < ctgs_len; i++) {
 			Xowd_page_itm itm = (Xowd_page_itm)ctgs.Get_at(i);
-			byte itm_tid = Load_ctg_v1_tid(itm.Ns_id());
-			Xoctg_view_itm sub = new Xoctg_view_itm();
-			sub.Set__page(itm_tid, itm.Id());
-			sub.Set__ttl__sortkey(Xoa_ttl.Parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
-			view_ctg.Grp_by_tid(itm_tid).Itms_add(sub);				
+			byte itm_tid = Xodb_load_mgr_sql.Load_ctg_v1_tid(itm.Ns_id());
+			Xoctg_catpage_itm sub = new Xoctg_catpage_itm(itm.Id(), Xoa_ttl.Parse(wiki, itm.Ns_id(), itm.Ttl_page_db()), itm.Ttl_page_db());
+			view_ctg.Grp_by_tid(itm_tid).Itms__add(sub);				
 		}
-		for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
-			Xoctg_view_grp grp = view_ctg.Grp_by_tid(i);
-			grp.Itms_make();
-			grp.Total_(grp.Itms().length);
-		}
+		view_ctg.Make_itms();
 		return true;
 	}
 	private static void Load_ctg_v1_parse(List_adp rv, Gfo_usr_dlg usr_dlg, byte[] ary) {
@@ -344,13 +288,6 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 				continue;	// NOTE: must break b/c rest of ids are garbage
 			}
 		}
-	}
-	public static byte Load_ctg_v1_tid(int ns_id) {
-		switch (ns_id) {
-			case Xow_ns_.Tid__category: return Xoa_ctg_mgr.Tid_subc;
-			case Xow_ns_.Tid__file:		return Xoa_ctg_mgr.Tid_file;
-			default: 					return Xoa_ctg_mgr.Tid_page;
-		}		
 	}
 	public static boolean Load_page_or_false(Xowd_page_itm page, Xob_xdat_itm xdat, int ns_id) {
 		byte[] src = xdat.Src(); int itm_end = xdat.Itm_end();
@@ -502,18 +439,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xob_xdat_itm pid_itm = Load_xdat_itm_by_dir(pids_root.GenSubDir(String_.new_u8(lang_key)), pid_name); if (pid_itm == null) return gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null;
 		return Bry_.To_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wbases.Wdata_wiki_mgr.Pid_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
 	}	Io_url pids_root;
-	public int Load_ctg_count(byte[] ttl) {return wiki.Db_mgr().Category_version() == Xoa_ctg_mgr.Version_1 ? Load_ctg_count_v1(ttl) : Load_ctg_count_v2(ttl);}
-	int Load_ctg_count_v1(byte[] ttl) {
-		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg();
-		Int_obj_ref count = Int_obj_ref.New_zero();
-		Load_ctg_v1_wkr(view_ctg, ttl, count);
-		return count.Val();
-	}
-	int Load_ctg_count_v2(byte[] ttl) {
-		Xoctg_data_ctg data_ctg = new Xoctg_data_ctg(ttl);
-		Load_ctg_v2(data_ctg, ttl);
-		return data_ctg.Total_count();
-	}
+	public int Load_ctg_count(byte[] ttl) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
 	Xob_xdat_itm Load_xdat_itm_by_dir(Io_url dir, byte[] ttl) {
 		Xoa_hive_mgr hive_mgr = wiki.Appe().Hive_mgr();
 		int fil_idx = hive_mgr.Find_fil(dir, ttl); if (fil_idx == Xowd_regy_mgr.Regy_null) return null; // sub_dir not found; EX: commonswiki if qid; fr if pid;
@@ -521,36 +447,8 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		rdr.Find(tmp_xdat_itm, ttl, 0, Byte_ascii.Pipe, true);
 		return tmp_xdat_itm.Found_exact() ? tmp_xdat_itm : null;
 	}
-	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url url_ctg, byte[] ttl_bry, int limit, boolean app_is_cmd) {
-		Xoctg_html_mgr ctg_mgr = wiki.Html_mgr().Ns_ctg();
-		Xoctg_data_cache data_cache = ctg_mgr.Data_cache();
-		Xoctg_data_ctg data_ctg = data_cache.Get_or_null(ttl_bry);
-		if (data_ctg == null) {
-			data_ctg = data_cache.Load_or_null(wiki, ttl_bry);
-			if (data_ctg == null) return;
-		}
-		rv.Fill(url_ctg, data_ctg);
-		ctg_mgr.Get_titles(wiki.Appe().Usr_dlg(), wiki, rv);
-		rv.Num_(data_ctg);
-	}
-	public Xowd_page_itm[] Load_ctg_list(byte[][] ttls) {
-		int len = ttls.length;
-		Xowd_page_itm[] rv = new Xowd_page_itm[len];
-		Xow_ns ns = wiki.Ns_mgr().Ns_category();
-		
-		Xoctg_data_ctg ctg_temp = new Xoctg_data_ctg(Bry_.Empty);
-		for (int i = 0; i < len; i++) {
-			byte[] ttl = Xoa_ttl.Replace_spaces(ttls[i]);	// NOTE: ctg_ttls has spaces since v1 rendered it literally;
-			Xowd_page_itm page = new Xowd_page_itm();
-			this.Load_by_ttl(page, ns, ttl);
-
-			Load_ctg_v2_main(ctg_temp, page.Ttl_page_db());
-			Xowd_category_itm ctg_itm = Xowd_category_itm.load_(page.Id(), page.Text_db_id(), ctg_temp.Hidden(), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_subc), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_file), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_page)); 
-			page.Xtn_(ctg_itm);
-			rv[i] = page;
-		}
-		return rv;
-	}
+	public void Load_ctg_v2a(Xoctg_catpage_ctg rv, Xoctg_catpage_url url_ctg, byte[] ttl_bry, int limit, boolean app_is_cmd) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
+	public Xowd_page_itm[] Load_ctg_list(byte[][] ttls) {throw Err_.new_deprecated("XOWA no longer supports categories for text databases");}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__tdb(wiki);}
 	static final String GRP_KEY = "xowa.wiki.db.load";
 }

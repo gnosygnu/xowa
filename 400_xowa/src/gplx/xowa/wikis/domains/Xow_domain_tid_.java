@@ -18,26 +18,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_domain_tid_ {
 	public static final int
-	  Int__null					=  0
-	, Int__wikipedia			=  1
-	, Int__wiktionary			=  2
-	, Int__wikisource			=  3
-	, Int__wikivoyage			=  4
-	, Int__wikiquote			=  5
-	, Int__wikibooks			=  6
-	, Int__wikiversity			=  7
-	, Int__wikinews				=  8
-	, Int__wikimedia			=  9
-	, Int__species				= 10
-	, Int__commons				= 11
-	, Int__wikidata				= 12
-	, Int__mediawiki			= 13
-	, Int__meta					= 14
-	, Int__incubator			= 15
-	, Int__wmfblog				= 16
-	, Int__home					= 17
-	, Int__other				= 18
-	, Int___len					= 19
+	  Tid__null					=  0
+	, Tid__wikipedia			=  1
+	, Tid__wiktionary			=  2
+	, Tid__wikisource			=  3
+	, Tid__wikivoyage			=  4
+	, Tid__wikiquote			=  5
+	, Tid__wikibooks			=  6
+	, Tid__wikiversity			=  7
+	, Tid__wikinews				=  8
+	, Tid__wikimedia			=  9
+	, Tid__species				= 10
+	, Tid__commons				= 11
+	, Tid__wikidata				= 12
+	, Tid__mediawiki			= 13
+	, Tid__meta					= 14
+	, Tid__incubator			= 15
+	, Tid__wmfblog				= 16
+	, Tid__home					= 17
+	, Tid__other				= 18
+	, Tid___len					= 19
 	;
 	public static final    String	// SERIALIZED:xowa.gfs
 	  Str__wikipedia			= "wikipedia"
@@ -79,28 +79,28 @@ public class Xow_domain_tid_ {
 	, Bry__home					= Bry_.new_a7(Str__home)
 	, Bry__other				= Bry_.new_a7(Str__other)
 	;
-	private static final    Xow_domain_tid[] ary = new Xow_domain_tid[Int___len];
+	private static final    Xow_domain_tid[] ary = new Xow_domain_tid[Tid___len];
 	private static final    Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
 	private static final    Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
 	public static final    Xow_domain_tid 
-	  Itm__wikipedia			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikipedia		, Bry__wikipedia		, "w"			, ".wikipedia.org")
-	, Itm__wiktionary			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wiktionary		, Bry__wiktionary		, "d"			, ".wiktionary.org")
-	, Itm__wikisource			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikisource		, Bry__wikisource		, "s"			, ".wikisource.org")
-	, Itm__wikivoyage			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikivoyage		, Bry__wikivoyage		, "v"			, ".wikivoyage.org")
-	, Itm__wikiquote			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikiquote		, Bry__wikiquote		, "q"			, ".wikiquote.org")
-	, Itm__wikibooks			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikibooks		, Bry__wikibooks		, "b"			, ".wikibooks.org")
-	, Itm__wikiversity			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikiversity		, Bry__wikiversity		, "u"			, ".wikiversity.org")
-	, Itm__wikinews				= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikinews			, Bry__wikinews			, "n"			, ".wikinews.org")
-	, Itm__wikimedia			= new_(Bool_.Y	, Xow_domain_type_src_.Int__wmf	, Int__wikimedia		, Bry__wikimedia		, "m"			, ".wikimedia.org")
-	, Itm__species				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__species			, Bry__species			, "species"		, Xow_domain_itm_.Str__species)
-	, Itm__commons				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__commons			, Bry__commons			, "c"			, Xow_domain_itm_.Str__commons)
-	, Itm__wikidata				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__wikidata			, Bry__wikidata			, "wd"			, Xow_domain_itm_.Str__wikidata)
-	, Itm__mediawiki			= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__mediawiki		, Bry__mediawiki		, "mw"			, Xow_domain_itm_.Str__mediawiki)
-	, Itm__meta					= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__meta				, Bry__meta				, "meta"		, Xow_domain_itm_.Str__meta)
-	, Itm__incubator			= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__incubator		, Bry__incubator		, "qb"			, Xow_domain_itm_.Str__incubator)
-	, Itm__wmforg				= new_(Bool_.N	, Xow_domain_type_src_.Int__wmf	, Int__wmfblog			, Bry__wmforg			, "wmf"			, Xow_domain_itm_.Str__wmforg)
-	, Itm__home					= new_(Bool_.N	, Xow_domain_type_src_.Int__xowa, Int__home				, Bry__home				, "home"		, Xow_domain_itm_.Str__home)
-	, Itm__other				= new_(Bool_.N	, Xow_domain_type_src_.Int__mw	, Int__other			, Bry__other			, ""			, "")
+	  Itm__wikipedia			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikipedia		, Bry__wikipedia		, "w"			, ".wikipedia.org")
+	, Itm__wiktionary			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wiktionary		, Bry__wiktionary		, "d"			, ".wiktionary.org")
+	, Itm__wikisource			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikisource		, Bry__wikisource		, "s"			, ".wikisource.org")
+	, Itm__wikivoyage			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikivoyage		, Bry__wikivoyage		, "v"			, ".wikivoyage.org")
+	, Itm__wikiquote			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikiquote		, Bry__wikiquote		, "q"			, ".wikiquote.org")
+	, Itm__wikibooks			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikibooks		, Bry__wikibooks		, "b"			, ".wikibooks.org")
+	, Itm__wikiversity			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikiversity		, Bry__wikiversity		, "u"			, ".wikiversity.org")
+	, Itm__wikinews				= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikinews			, Bry__wikinews			, "n"			, ".wikinews.org")
+	, Itm__wikimedia			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikimedia		, Bry__wikimedia		, "m"			, ".wikimedia.org")
+	, Itm__species				= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__species			, Bry__species			, "species"		, Xow_domain_itm_.Str__species)
+	, Itm__commons				= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__commons			, Bry__commons			, "c"			, Xow_domain_itm_.Str__commons)
+	, Itm__wikidata				= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__wikidata			, Bry__wikidata			, "wd"			, Xow_domain_itm_.Str__wikidata)
+	, Itm__mediawiki			= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__mediawiki		, Bry__mediawiki		, "mw"			, Xow_domain_itm_.Str__mediawiki)
+	, Itm__meta					= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__meta				, Bry__meta				, "meta"		, Xow_domain_itm_.Str__meta)
+	, Itm__incubator			= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__incubator		, Bry__incubator		, "qb"			, Xow_domain_itm_.Str__incubator)
+	, Itm__wmforg				= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__wmfblog			, Bry__wmforg			, "wmf"			, Xow_domain_itm_.Str__wmforg)
+	, Itm__home					= new_(Bool_.N	, Xow_domain_tid.Src__xowa, Tid__home				, Bry__home				, "home"		, Xow_domain_itm_.Str__home)
+	, Itm__other				= new_(Bool_.N	, Xow_domain_tid.Src__mw	, Tid__other			, Bry__other			, ""			, "")
 	;
 	private static Xow_domain_tid new_(boolean multi_lang, int src, int tid, byte[] key_bry, String abrv_xo_str, String domain_bry) {
 		byte[] abrv_xo_bry = Bry_.new_u8(abrv_xo_str);
@@ -116,6 +116,6 @@ public class Xow_domain_tid_ {
 	public static int Get_type_as_tid(byte[] src) {return Get_type_as_tid(src, 0, src.length);}
 	public static int Get_type_as_tid(byte[] src, int bgn, int end) {
 		Object o = type_regy.Get_by_mid(src, bgn, end);
-		return o == null ? Xow_domain_tid_.Int__null : ((Xow_domain_tid)o).Tid();
+		return o == null ? Xow_domain_tid_.Tid__null : ((Xow_domain_tid)o).Tid();
 	}
 }

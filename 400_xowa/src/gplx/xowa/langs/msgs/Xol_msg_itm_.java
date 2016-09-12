@@ -144,7 +144,7 @@ public static final int
 , Id_ns_blankns = 122
 , Id_ctg_page_label = 123
 , Id_ctg_page_header = 124
-, Id_ctg_subc_label = 125
+, Id_ctg_subc_header = 125
 , Id_ctg_file_header = 126
 , Id_ctg_empty = 127
 , Id_ctg_subc_count = 128
@@ -402,7 +402,7 @@ case Xol_msg_itm_.Id_scribunto_parser_error: return new_(Xol_msg_itm_.Id_scribun
 case Xol_msg_itm_.Id_ns_blankns: return new_(Xol_msg_itm_.Id_ns_blankns, "blanknamespace", "(Main)");
 case Xol_msg_itm_.Id_ctg_page_label: return new_(Xol_msg_itm_.Id_ctg_page_label, "pagecategories", "{{PLURAL:~{0}|Category|Categories}}");
 case Xol_msg_itm_.Id_ctg_page_header: return new_(Xol_msg_itm_.Id_ctg_page_header, "category_header", "Pages in category \"~{0}\"");
-case Xol_msg_itm_.Id_ctg_subc_label: return new_(Xol_msg_itm_.Id_ctg_subc_label, "subcategories", "Subcategories");
+case Xol_msg_itm_.Id_ctg_subc_header: return new_(Xol_msg_itm_.Id_ctg_subc_header, "subcategories", "Subcategories");
 case Xol_msg_itm_.Id_ctg_file_header: return new_(Xol_msg_itm_.Id_ctg_file_header, "category-media-header", "Media in category \"~{0}\"");
 case Xol_msg_itm_.Id_ctg_empty: return new_(Xol_msg_itm_.Id_ctg_empty, "category-empty", "''This category currently contains no pages or media.''");
 case Xol_msg_itm_.Id_ctg_subc_count: return new_(Xol_msg_itm_.Id_ctg_subc_count, "category-subcat-count", "{{PLURAL:~{1}|This category has only the following subcategory.|This category has the following {{PLURAL:~{0}|subcategory|~{0} subcategories}}, out of ~{1} total.}}");

@@ -22,7 +22,7 @@ public class Xoa_upgrade_mgr {
 		Upgrade_history(app);
 	}
 	public static void Check(Xowe_wiki wiki) {
-		if (wiki.Domain_tid() == Xow_domain_tid_.Int__home) return;	// home wiki never needs to be migrated
+		if (wiki.Domain_tid() == Xow_domain_tid_.Tid__home) return;	// home wiki never needs to be migrated
 		try {
 			if (Bry_.Eq(wiki.Props().Bldr_version(), Bry_.Empty)) {	// version is ""; wiki must be created prior to v0.2.1; create wiki_core.gfs
 				Upgrader_v00_02_01 mgr = new Upgrader_v00_02_01();
